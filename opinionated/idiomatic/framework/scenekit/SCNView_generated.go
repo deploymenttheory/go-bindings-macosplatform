@@ -33,6 +33,8 @@ func ViewFromID(id objc.ID) *View {
 	return &View{inner: raw.SCNViewFromID(id)}
 }
 
+// @method initWithFrame:options: @abstract Initializes and returns a newly allocated SCNView object with a specified frame rectangle. @param frame The frame rectangle for the created view object. @param options An optional dictionary. See "View initialization options" above.
+//
 // NewViewWithFrameOptions creates a new [View].
 func NewViewWithFrameOptions(frame corefoundation.CGRect, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *View {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNView")), objc.RegisterName("alloc"))
@@ -40,68 +42,92 @@ func NewViewWithFrameOptions(frame corefoundation.CGRect, options *foundation.NS
 	return &View{inner: raw.SCNViewFromID(_id)}
 }
 
+// @property scene @abstract Specifies the scene of the receiver
+//
 // WithScene sets the scene property and returns the receiver for chaining.
 func (x *View) WithScene(scene *Scene) *View {
 	x.inner.SetScene(scene.Unwrap())
 	return x
 }
 
+// @property rendersContinuously @abstract When set to YES, the view continously redraw at the display link frame rate. When set to NO the view will only redraw when something change or animates in the receiver's scene. Defaults to NO.
+//
 // WithRendersContinuously sets the rendersContinuously property and returns the receiver for chaining.
 func (x *View) WithRendersContinuously(rendersContinuously bool) *View {
 	x.inner.SetRendersContinuously(rendersContinuously)
 	return x
 }
 
+// @property backgroundColor @abstract Specifies the background color of the receiver. Defaults to opaque white.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *View) WithBackgroundColor(backgroundColor *appkit.NSColor) *View {
 	x.inner.SetBackgroundColor(backgroundColor)
 	return x
 }
 
+// @property allowsCameraControl @abstract A Boolean value that determines whether the user can manipulate the point of view used to render the scene. @discussion  When set to YES, the user can manipulate the current point of view with the mouse or the trackpad. The scene graph and existing cameras won't be modified by this action. The default value of this property is NO. Note that the primary purpose of this property is to aid in debugging your application. You may want to implement your own camera controller suitable for your application. The built-in camera controller let you: - drag the mouse to rotate the camera around the scene - drag+cmd to rotate the camera in local space - drag+shift to rotate using sticky axis - use the scroll wheel or alt+drag the mouse to translate the camera on its local X,Y plan - alt+scroll wheel to move the camera forward/backward - rotate gesture (trackpad only) to roll the camera (rotation around the Z axis) - pinch gesture (trackpad only) move the camera forward/backward - alt + pinch gesture (trackpad only) to zoom-in / zoom-out (change the field of view of the camera)
+//
 // WithAllowsCameraControl sets the allowsCameraControl property and returns the receiver for chaining.
 func (x *View) WithAllowsCameraControl(allowsCameraControl bool) *View {
 	x.inner.SetAllowsCameraControl(allowsCameraControl)
 	return x
 }
 
+// @property preferredFramesPerSecond @abstract The rate you want the view to redraw its contents. @discussion When your application sets its preferred frame rate, the view chooses a frame rate as close to that as possible based on the capabilities of the screen the view is displayed on. The actual frame rate chosen is usually a factor of the maximum refresh rate of the screen to provide a consistent frame rate. For example, if the maximum refresh rate of the screen is 60 frames per second, that is also the highest frame rate the view sets as the actual frame rate. However, if you ask for a lower frame rate, it might choose 30, 20, 15 or some other factor to be the actual frame rate. Your application should choose a frame rate that it can consistently maintain. The default value is 0 which means the display link will fire at the native cadence of the display hardware.
+//
 // WithPreferredFramesPerSecond sets the preferredFramesPerSecond property and returns the receiver for chaining.
 func (x *View) WithPreferredFramesPerSecond(preferredFramesPerSecond int) *View {
 	x.inner.SetPreferredFramesPerSecond(preferredFramesPerSecond)
 	return x
 }
 
+// @property drawableResizesAsynchronously @abstract Specifies whether the drawable is resized asynchonously during a live resize operation. Defaults to YES. @discussion If set to YES, the actual viewport size during a live resize can be retrieved using currentViewport (see SCNSceneRenderer.h)
+//
 // WithDrawableResizesAsynchronously sets the drawableResizesAsynchronously property and returns the receiver for chaining.
 func (x *View) WithDrawableResizesAsynchronously(drawableResizesAsynchronously bool) *View {
 	x.inner.SetDrawableResizesAsynchronously(drawableResizesAsynchronously)
 	return x
 }
 
+// @property antialiasingMode @abstract Defaults to SCNAntialiasingModeMultisampling4X on macOS and SCNAntialiasingModeNone on iOS.
+//
 // WithAntialiasingMode sets the antialiasingMode property and returns the receiver for chaining.
 func (x *View) WithAntialiasingMode(antialiasingMode SCNAntialiasingMode) *View {
 	x.inner.SetAntialiasingMode(raw.SCNAntialiasingMode(antialiasingMode))
 	return x
 }
 
+// @property snapshot @abstract Draws the contents of the view and returns them as a new image object @discussion This method is thread-safe and may be called at any time.
+//
 // Snapshot calls the underlying Snapshot.
 func (x *View) Snapshot() *appkit.NSImage {
 	return x.inner.Snapshot()
 }
 
+// @method play: @abstract This action method begins playing the scene at its current location. @param sender The object (such as a button or menu item) sending the message to play the scene. @discussion This method does not do anything if the scene is already playing.
+//
 // Play calls the underlying Play.
 func (x *View) Play(sender objc.ID) {
 	x.inner.Play(sender)
 }
 
+// @method pause: @abstract This action method pauses the scene playback. @param sender The object (such as a button or menu item) sending the message to pause the scene. @discussion This method does not do anything if the scene is already paused.
+//
 // Pause calls the underlying Pause.
 func (x *View) Pause(sender objc.ID) {
 	x.inner.Pause(sender)
 }
 
+// @method stop: @abstract This action method stops the scene playback and resets the current time to the start time of the scene. @param sender The object (such as a button or menu item) sending the message to stop playing the scene.
+//
 // Stop calls the underlying Stop.
 func (x *View) Stop(sender objc.ID) {
 	x.inner.Stop(sender)
 }
 
+// @property scene @abstract Specifies the scene of the receiver
+//
 // Scene calls the underlying Scene.
 func (x *View) Scene() *Scene {
 	_r := x.inner.Scene()
@@ -116,6 +142,8 @@ func (x *View) SetScene(scene *raw.SCNScene) {
 	x.inner.SetScene(scene)
 }
 
+// @property rendersContinuously @abstract When set to YES, the view continously redraw at the display link frame rate. When set to NO the view will only redraw when something change or animates in the receiver's scene. Defaults to NO.
+//
 // RendersContinuously calls the underlying RendersContinuously.
 func (x *View) RendersContinuously() bool {
 	return x.inner.RendersContinuously()
@@ -126,6 +154,8 @@ func (x *View) SetRendersContinuously(rendersContinuously bool) {
 	x.inner.SetRendersContinuously(rendersContinuously)
 }
 
+// @property backgroundColor @abstract Specifies the background color of the receiver. Defaults to opaque white.
+//
 // BackgroundColor calls the underlying BackgroundColor.
 func (x *View) BackgroundColor() *appkit.NSColor {
 	return x.inner.BackgroundColor()
@@ -136,6 +166,8 @@ func (x *View) SetBackgroundColor(backgroundColor *appkit.NSColor) {
 	x.inner.SetBackgroundColor(backgroundColor)
 }
 
+// @property allowsCameraControl @abstract A Boolean value that determines whether the user can manipulate the point of view used to render the scene. @discussion  When set to YES, the user can manipulate the current point of view with the mouse or the trackpad. The scene graph and existing cameras won't be modified by this action. The default value of this property is NO. Note that the primary purpose of this property is to aid in debugging your application. You may want to implement your own camera controller suitable for your application. The built-in camera controller let you: - drag the mouse to rotate the camera around the scene - drag+cmd to rotate the camera in local space - drag+shift to rotate using sticky axis - use the scroll wheel or alt+drag the mouse to translate the camera on its local X,Y plan - alt+scroll wheel to move the camera forward/backward - rotate gesture (trackpad only) to roll the camera (rotation around the Z axis) - pinch gesture (trackpad only) move the camera forward/backward - alt + pinch gesture (trackpad only) to zoom-in / zoom-out (change the field of view of the camera)
+//
 // AllowsCameraControl calls the underlying AllowsCameraControl.
 func (x *View) AllowsCameraControl() bool {
 	return x.inner.AllowsCameraControl()
@@ -146,11 +178,15 @@ func (x *View) SetAllowsCameraControl(allowsCameraControl bool) {
 	x.inner.SetAllowsCameraControl(allowsCameraControl)
 }
 
+// @property cameraControlConfiguration @abstract An object describing the current configuration of the event handler which pilot the default camera controller. @discussion This object will be used to configure the event handler when allowCameraControl is set to YES.
+//
 // CameraControlConfiguration calls the underlying CameraControlConfiguration.
 func (x *View) CameraControlConfiguration() raw.SCNCameraControlConfiguration {
 	return x.inner.CameraControlConfiguration()
 }
 
+// @property defaultCameraController @abstract Returns the default SCNCameraController used to drive the current point of view when allowCameraController is set to YES.
+//
 // DefaultCameraController calls the underlying DefaultCameraController.
 func (x *View) DefaultCameraController() *CameraController {
 	_r := x.inner.DefaultCameraController()
@@ -160,6 +196,8 @@ func (x *View) DefaultCameraController() *CameraController {
 	return &CameraController{inner: _r}
 }
 
+// @property preferredFramesPerSecond @abstract The rate you want the view to redraw its contents. @discussion When your application sets its preferred frame rate, the view chooses a frame rate as close to that as possible based on the capabilities of the screen the view is displayed on. The actual frame rate chosen is usually a factor of the maximum refresh rate of the screen to provide a consistent frame rate. For example, if the maximum refresh rate of the screen is 60 frames per second, that is also the highest frame rate the view sets as the actual frame rate. However, if you ask for a lower frame rate, it might choose 30, 20, 15 or some other factor to be the actual frame rate. Your application should choose a frame rate that it can consistently maintain. The default value is 0 which means the display link will fire at the native cadence of the display hardware.
+//
 // PreferredFramesPerSecond calls the underlying PreferredFramesPerSecond.
 func (x *View) PreferredFramesPerSecond() int {
 	return x.inner.PreferredFramesPerSecond()
@@ -170,6 +208,8 @@ func (x *View) SetPreferredFramesPerSecond(preferredFramesPerSecond int) {
 	x.inner.SetPreferredFramesPerSecond(preferredFramesPerSecond)
 }
 
+// @property drawableResizesAsynchronously @abstract Specifies whether the drawable is resized asynchonously during a live resize operation. Defaults to YES. @discussion If set to YES, the actual viewport size during a live resize can be retrieved using currentViewport (see SCNSceneRenderer.h)
+//
 // DrawableResizesAsynchronously calls the underlying DrawableResizesAsynchronously.
 func (x *View) DrawableResizesAsynchronously() bool {
 	return x.inner.DrawableResizesAsynchronously()
@@ -180,6 +220,8 @@ func (x *View) SetDrawableResizesAsynchronously(drawableResizesAsynchronously bo
 	x.inner.SetDrawableResizesAsynchronously(drawableResizesAsynchronously)
 }
 
+// @property openGLContext @abstract Specifies the OpenGL context associated with the receiver. @discussion This property returns nil and has no effect if the current API is Metal.
+//
 // OpenGLContext calls the underlying OpenGLContext.
 func (x *View) OpenGLContext() unsafe.Pointer {
 	return x.inner.OpenGLContext()
@@ -190,6 +232,8 @@ func (x *View) SetOpenGLContext(openGLContext unsafe.Pointer) {
 	x.inner.SetOpenGLContext(openGLContext)
 }
 
+// @property antialiasingMode @abstract Defaults to SCNAntialiasingModeMultisampling4X on macOS and SCNAntialiasingModeNone on iOS.
+//
 // AntialiasingMode calls the underlying AntialiasingMode.
 func (x *View) AntialiasingMode() SCNAntialiasingMode {
 	return SCNAntialiasingMode(x.inner.AntialiasingMode())
@@ -200,6 +244,8 @@ func (x *View) SetAntialiasingMode(antialiasingMode SCNAntialiasingMode) {
 	x.inner.SetAntialiasingMode(raw.SCNAntialiasingMode(antialiasingMode))
 }
 
+// @property pixelFormat @abstract Specifies the pixel format of the receiver. @discussion This property returns nil and has no effect if the current API is Metal.
+//
 // PixelFormat calls the underlying PixelFormat.
 func (x *View) PixelFormat() unsafe.Pointer {
 	return x.inner.PixelFormat()

@@ -30,6 +30,8 @@ func SampleLocationFromID(id objc.ID) *SampleLocation {
 	return &SampleLocation{inner: raw.MESampleLocationFromID(id)}
 }
 
+// @property		initWithByteSource @abstract		The initializer for the MESampleLocation class. @param			byteSource The MEByteSource to be used to read the data for the sample. @param			sampleLocation The starting file offset and size in bytes of the sample.
+//
 // NewSampleLocationWithByteSourceSampleLocation creates a new [SampleLocation].
 func NewSampleLocationWithByteSourceSampleLocation(byteSource *raw.MEByteSource, sampleLocation avfoundation.AVSampleCursorStorageRange) *SampleLocation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MESampleLocation")), objc.RegisterName("alloc"))
@@ -37,11 +39,15 @@ func NewSampleLocationWithByteSourceSampleLocation(byteSource *raw.MEByteSource,
 	return &SampleLocation{inner: raw.MESampleLocationFromID(_id)}
 }
 
+// @property		sampleLocation @abstract		The starting file offset and size in bytes of the sample.
+//
 // SampleLocation calls the underlying SampleLocation.
 func (x *SampleLocation) SampleLocation() avfoundation.AVSampleCursorStorageRange {
 	return x.inner.SampleLocation()
 }
 
+// @property		byteSource @abstract		The MEByteSource to be used to read the data for the sample.
+//
 // ByteSource calls the underlying ByteSource.
 func (x *SampleLocation) ByteSource() *ByteSource {
 	_r := x.inner.ByteSource()

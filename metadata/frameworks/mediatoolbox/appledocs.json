@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "framework": "MediaToolbox",
+  "source": "developer.apple.com DocC render API",
+  "structs": {
+    "MTAudioProcessingTapCallbacks": {
+      "doc": "A structure that defines life cycle callbacks for an audio processing tap object.",
+      "url": "https://developer.apple.com/documentation/mediatoolbox/mtaudioprocessingtapcallbacks"
+    }
+  }
+}

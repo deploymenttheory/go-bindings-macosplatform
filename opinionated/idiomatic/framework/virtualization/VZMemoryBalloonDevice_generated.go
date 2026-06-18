@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The common behavior for memory devices.
+//
 // MemoryBalloonDevice wraps [raw.VZMemoryBalloonDevice] with a fluent Go API.
 type MemoryBalloonDevice struct {
 	inner *raw.VZMemoryBalloonDevice

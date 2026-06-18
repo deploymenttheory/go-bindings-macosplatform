@@ -39,6 +39,8 @@ func NewPrivateKey() *PrivateKey {
 	return &PrivateKey{inner: raw.LAPrivateKeyFromID(_id)}
 }
 
+// @brief Generates a digital signature for the given data. @param data The data to be signed, typically the digest of the actual data. @param algorithm A  @c SecKeyAlgorithm suitable for generating signatures with this key – e.g: @c kSecKeyAlgorithmECDSASignatureMessageX962SHA256 @param handler Completion handler with the signature of given data or an error on failure.
+//
 // SignDataSecKeyAlgorithmCompletion blocks until the operation completes or ctx is cancelled.
 func (x *PrivateKey) SignDataSecKeyAlgorithmCompletion(ctx context.Context, data *foundation.NSData, algorithm unsafe.Pointer) (*foundation.NSData, error) {
 	type _result struct {
@@ -63,11 +65,15 @@ func (x *PrivateKey) SignDataSecKeyAlgorithmCompletion(ctx context.Context, data
 	}
 }
 
+// @brief Checks if the the provided algorithm can be used for signing data @param algorithm Cryptographic algorithm @return @c YES in case the key supports the provided algorithm with the specified operation.
+//
 // CanSignUsingSecKeyAlgorithm calls the underlying CanSignUsingSecKeyAlgorithm.
 func (x *PrivateKey) CanSignUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {
 	return x.inner.CanSignUsingSecKeyAlgorithm(algorithm)
 }
 
+// @brief Decrypts the given ciphertext @param data The data to decrypt. The length and format of the data must conform to chosen algorithm, typically be less or equal to the value returned by SecKeyGetBlockSize(). @param algorithm A @c SecKeyAlgorithm suitable for decrypting data with this key –e.g: @c kSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA256AESGCM @param handler Completion handler with plaintext or an error on failure.
+//
 // DecryptDataSecKeyAlgorithmCompletion blocks until the operation completes or ctx is cancelled.
 func (x *PrivateKey) DecryptDataSecKeyAlgorithmCompletion(ctx context.Context, data *foundation.NSData, algorithm unsafe.Pointer) (*foundation.NSData, error) {
 	type _result struct {
@@ -92,11 +98,15 @@ func (x *PrivateKey) DecryptDataSecKeyAlgorithmCompletion(ctx context.Context, d
 	}
 }
 
+// @brief Checks if the the provided algorithm can be used for decryption @param algorithm Cryptographic algorithm @return @c YES in case the key supports the provided algorithm with the specified operation.
+//
 // CanDecryptUsingSecKeyAlgorithm calls the underlying CanDecryptUsingSecKeyAlgorithm.
 func (x *PrivateKey) CanDecryptUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {
 	return x.inner.CanDecryptUsingSecKeyAlgorithm(algorithm)
 }
 
+// @brief Performs a Diffie-Hellman style key exchange operation @param publicKey Remote party's public key. @param algorithm A @c SecKeyAlgorithm suitable for performing a key exchange with this key –e.g: @c kSecKeyAlgorithmECDHKeyExchangeCofactorX963SHA256 @param parameters Dictionary with parameters, see @c SecKeyKeyExchangeParameter constants.  Used algorithm determines the set of required and optional parameters to be used. @param handler Completion handler with the result of the key exchange or an error on failure.
+//
 // ExchangeKeysWithPublicKeySecKeyAlgorithmSecKeyParametersCompletion blocks until the operation completes or ctx is cancelled.
 func (x *PrivateKey) ExchangeKeysWithPublicKeySecKeyAlgorithmSecKeyParametersCompletion(ctx context.Context, publicKey *foundation.NSData, algorithm unsafe.Pointer, parameters *foundation.NSDictionary[objc.ID, objc.ID]) (*foundation.NSData, error) {
 	type _result struct {
@@ -121,11 +131,15 @@ func (x *PrivateKey) ExchangeKeysWithPublicKeySecKeyAlgorithmSecKeyParametersCom
 	}
 }
 
+// @brief Checks if the the provided algorithm can be used for performing key exchanges @param algorithm Cryptographic algorithm @return @c YES in case the key supports the provided algorithm with the specified operation.
+//
 // CanExchangeKeysUsingSecKeyAlgorithm calls the underlying CanExchangeKeysUsingSecKeyAlgorithm.
 func (x *PrivateKey) CanExchangeKeysUsingSecKeyAlgorithm(algorithm unsafe.Pointer) bool {
 	return x.inner.CanExchangeKeysUsingSecKeyAlgorithm(algorithm)
 }
 
+// @brief Offers the public key counterpart of a @c LAPrivateKey instance
+//
 // PublicKey calls the underlying PublicKey.
 func (x *PrivateKey) PublicKey() *PublicKey {
 	_r := x.inner.PublicKey()

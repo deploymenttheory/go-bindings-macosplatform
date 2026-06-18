@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Billow noise is similar to Perlin noise, with more rounded shapes and clearly-defined transitions beween values.
+//
 // BillowNoiseSource wraps [raw.GKBillowNoiseSource] with a fluent Go API.
 type BillowNoiseSource struct {
 	inner *raw.GKBillowNoiseSource

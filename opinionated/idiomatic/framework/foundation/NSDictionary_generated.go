@@ -88,9 +88,18 @@ func NewDictionaryWithDictionaryCopyItems(otherDictionary *raw.NSDictionary[objc
 }
 
 // NewDictionaryWithObjectsForKeys creates a new [Dictionary].
-func NewDictionaryWithObjectsForKeys(objects *raw.NSArray[objc.ID], keys *raw.NSArray[raw.NSCopying]) *Dictionary {
+func NewDictionaryWithObjectsForKeys(objects *raw.NSArray[objc.ID], keys ...purego.IDer) *Dictionary {
+	_ptrs := make([]objc.ID, len(keys))
+	for _i, _v := range keys {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg1 *raw.NSArray[raw.NSCopying]
+	if len(_ptrs) > 0 {
+		_arg1 = raw.NSArrayFromID[raw.NSCopying](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDictionary")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjects:forKeys:"), objects.Ptr(), keys.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjects:forKeys:"), objects.Ptr(), _arg1.Ptr())
 	return &Dictionary{inner: raw.NSDictionaryFromID[objc.ID, objc.ID](_id)}
 }
 
@@ -233,6 +242,8 @@ func (x *Dictionary) DescriptionInStringsFileFormat() *String {
 	return &String{inner: _r}
 }
 
+// This method is unsafe because it could potentially cause buffer overruns. You should use -getObjects:andKeys:count:
+//
 // GetObjectsAndKeys calls the underlying GetObjectsAndKeys.
 func (x *Dictionary) GetObjectsAndKeys(objects unsafe.Pointer, keys unsafe.Pointer) {
 	x.inner.GetObjectsAndKeys(objects, keys)

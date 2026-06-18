@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "framework": "FileProviderUI",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "FPUIActionExtensionContext": {
+      "doc": "An extension context provided to File Provider UI extensions.",
+      "url": "https://developer.apple.com/documentation/fileproviderui/fpuiactionextensioncontext"
+    },
+    "FPUIActionExtensionViewController": {
+      "doc": "The custom user interface used to perform a selected action.",
+      "url": "https://developer.apple.com/documentation/fileproviderui/fpuiactionextensionviewcontroller"
+    }
+  },
+  "enums": {
+    "FPUIExtensionErrorCode": {
+      "doc": "The error codes for errors raised by the File Provider UI extension.",
+      "url": "https://developer.apple.com/documentation/fileproviderui/fpuiextensionerrorcode",
+      "members": {
+        "FPUIExtensionErrorCodeFailed": {
+          "doc": "An error indicating that the action has failed.",
+          "url": "https://developer.apple.com/documentation/fileproviderui/fpuiextensionerrorcode/failed"
+        },
+        "FPUIExtensionErrorCodeUserCancelled": {
+          "doc": "An error indicating that the action was canceled by the user.",
+          "url": "https://developer.apple.com/documentation/fileproviderui/fpuiextensionerrorcode/usercancelled"
+        }
+      }
+    }
+  },
+  "methods": {
+    "FPUIActionExtensionContext": {
+      "-cancelRequestWithError:": {
+        "doc": "Cancels the action and returns the provided error.",
+        "url": "https://developer.apple.com/documentation/fileproviderui/fpuiactionextensioncontext/cancelrequest(witherror:)"
+      },
+      "-completeRequest": {
+        "doc": "Marks the action as complete.",
+        "url": "https://developer.apple.com/documentation/fileproviderui/fpuiactionextensioncontext/completerequest()"
+      }
+    },
+    "FPUIActionExtensionViewController": {
+      "-prepareForActionWithIdentifier:itemIdentifiers:": {
+        "doc": "Performs any necessary setup or configuration for the specified action.",
+        "url": "https://developer.apple.com/documentation/fileproviderui/fpuiactionextensionviewcontroller/prepare(foraction:itemidentifiers:)"
+      },
+      "-prepareForError:": {
+        "doc": "Performs any necessary setup or configuration when an authentication error occurs.",
+        "url": "https://developer.apple.com/documentation/fileproviderui/fpuiactionextensionviewcontroller/prepare(forerror:)"
+      }
+    }
+  },
+  "properties": {
+    "FPUIActionExtensionContext": {
+      "domainIdentifier": {
+        "doc": "The identifier for the domain managed by the current file provider.",
+        "url": "https://developer.apple.com/documentation/fileproviderui/fpuiactionextensioncontext/domainidentifier"
+      }
+    },
+    "FPUIActionExtensionViewController": {
+      "extensionContext": {
+        "doc": "The extension context provided by the host app.",
+        "url": "https://developer.apple.com/documentation/fileproviderui/fpuiactionextensionviewcontroller/extensioncontext"
+      }
+    }
+  }
+}

@@ -38,18 +38,24 @@ func NewCoreMLModel() *CoreMLModel {
 	return &CoreMLModel{inner: raw.VNCoreMLModelFromID(_id)}
 }
 
+// @brief The name of the MLFeatureValue that Vision will set from the VNRequestHandler. Vision will use the first input it finds by default but it can be set to another featureName instead.
+//
 // WithInputImageFeatureName sets the inputImageFeatureName property and returns the receiver for chaining.
 func (x *CoreMLModel) WithInputImageFeatureName(inputImageFeatureName string) *CoreMLModel {
 	x.inner.SetInputImageFeatureName(foundation.NSStringStringWithUTF8String(inputImageFeatureName))
 	return x
 }
 
+// @brief An optional object conforming to the MLFeatureProvider protocol that is used by the model during the predict call to support inputs that are not supplied by Vision. Vision will provide the image for the inputImageFeatureName from the the VNRequestHandler. A feature provider is necessary for models that have more than one input and require those parameters to be set. Models that only have one image input will not use the feature provider as that input will be set by Vision.
+//
 // WithFeatureProvider sets the featureProvider property and returns the receiver for chaining.
 func (x *CoreMLModel) WithFeatureProvider(featureProvider coreml.MLFeatureProvider) *CoreMLModel {
 	x.inner.SetFeatureProvider(featureProvider)
 	return x
 }
 
+// @brief The name of the MLFeatureValue that Vision will set from the VNRequestHandler. Vision will use the first input it finds by default but it can be set to another featureName instead.
+//
 // InputImageFeatureName calls the underlying InputImageFeatureName.
 func (x *CoreMLModel) InputImageFeatureName() string {
 	_r := x.inner.InputImageFeatureName()
@@ -64,6 +70,8 @@ func (x *CoreMLModel) SetInputImageFeatureName(inputImageFeatureName string) {
 	x.inner.SetInputImageFeatureName(foundation.NSStringStringWithUTF8String(inputImageFeatureName))
 }
 
+// @brief An optional object conforming to the MLFeatureProvider protocol that is used by the model during the predict call to support inputs that are not supplied by Vision. Vision will provide the image for the inputImageFeatureName from the the VNRequestHandler. A feature provider is necessary for models that have more than one input and require those parameters to be set. Models that only have one image input will not use the feature provider as that input will be set by Vision.
+//
 // FeatureProvider calls the underlying FeatureProvider.
 func (x *CoreMLModel) FeatureProvider() coreml.MLFeatureProvider {
 	return x.inner.FeatureProvider()

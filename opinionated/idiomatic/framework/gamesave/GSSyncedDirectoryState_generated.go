@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// Represents the state and its associated properties of the directory Use the “state“ property to determine the validity of the other properties
+//
 // SyncedDirectoryState wraps [raw.GSSyncedDirectoryState] with a fluent Go API.
 type SyncedDirectoryState struct {
 	inner *raw.GSSyncedDirectoryState
@@ -38,16 +40,22 @@ func NewSyncedDirectoryState() *SyncedDirectoryState {
 	return &SyncedDirectoryState{inner: raw.GSSyncedDirectoryStateFromID(_id)}
 }
 
+// Specifies the current state of the directory
+//
 // State calls the underlying State.
 func (x *SyncedDirectoryState) State() GSSyncState {
 	return GSSyncState(x.inner.State())
 }
 
+// The URL of a directory to read and write game-save data in. This property's value is `nil` unless the state is `GSSyncStateReady`, `GSSyncStateOffline`, or `GSSyncStateLocal`.
+//
 // Url calls the underlying Url.
 func (x *SyncedDirectoryState) Url() *foundation.NSURL {
 	return x.inner.Url()
 }
 
+// The conflicting versions. If you're implementing your own conflict resolution, read all of the conflicting versions, and modify one of them to incorporate the state and changes from the others. Then call “GSSyncedDirectory/resolveConflictsWithVersion:“, passing that version. This property's value is `nil` unless the state is `GSSyncStateConflicted`.
+//
 // ConflictedVersions returns the collection as a Go slice.
 func (x *SyncedDirectoryState) ConflictedVersions() []*SyncedDirectoryVersion {
 	arr := x.inner.ConflictedVersions()
@@ -59,6 +67,8 @@ func (x *SyncedDirectoryState) ConflictedVersions() []*SyncedDirectoryVersion {
 	})
 }
 
+// The error preventing you from using the directory. This property's value is `nil` unless the state is `GSSyncStateError`.
+//
 // Error calls the underlying Error.
 func (x *SyncedDirectoryState) Error() unsafe.Pointer {
 	return x.inner.Error()

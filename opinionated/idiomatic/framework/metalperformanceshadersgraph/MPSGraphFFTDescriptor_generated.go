@@ -35,24 +35,32 @@ func NewGraphFFTDescriptor() *GraphFFTDescriptor {
 	return &GraphFFTDescriptor{inner: raw.MPSGraphFFTDescriptorFromID(_id)}
 }
 
+// A Boolean-valued parameter that defines the phase factor sign for Fourier transforms. When set to `YES` graph uses the positive phase factor: `exp(+i 2Pi mu nu / n)`, when computing the (inverse) Fourier transform. Otherwise MPSGraph uses the negative phase factor: `exp(-i 2Pi mu nu / n)`, when computing the Fourier transform. Default value: `NO`.
+//
 // WithInverse sets the inverse property and returns the receiver for chaining.
 func (x *GraphFFTDescriptor) WithInverse(inverse bool) *GraphFFTDescriptor {
 	x.inner.SetInverse(inverse)
 	return x
 }
 
+// The scaling mode of the fast fourier transform (FFT) operation. Note that the scaling mode is independent from the phase factor. Default value: `MPSGraphFFTScalingModeNone`.
+//
 // WithScalingMode sets the scalingMode property and returns the receiver for chaining.
 func (x *GraphFFTDescriptor) WithScalingMode(scalingMode MPSGraphFFTScalingMode) *GraphFFTDescriptor {
 	x.inner.SetScalingMode(raw.MPSGraphFFTScalingMode(scalingMode))
 	return x
 }
 
+// A parameter which controls how graph rounds the output tensor size for a Hermitean-to-real Fourier transform. If set to `YES` then MPSGraph rounds the last output dimension of the result tensor in “MPSGraph/HermiteanToRealFFTWithTensor:axesTensor:descriptor:name:“ to an odd value. Has no effect in the other Fourier transform operations. Default value: `NO`.
+//
 // WithRoundToOddHermitean sets the roundToOddHermitean property and returns the receiver for chaining.
 func (x *GraphFFTDescriptor) WithRoundToOddHermitean(roundToOddHermitean bool) *GraphFFTDescriptor {
 	x.inner.SetRoundToOddHermitean(roundToOddHermitean)
 	return x
 }
 
+// A Boolean-valued parameter that defines the phase factor sign for Fourier transforms. When set to `YES` graph uses the positive phase factor: `exp(+i 2Pi mu nu / n)`, when computing the (inverse) Fourier transform. Otherwise MPSGraph uses the negative phase factor: `exp(-i 2Pi mu nu / n)`, when computing the Fourier transform. Default value: `NO`.
+//
 // Inverse calls the underlying Inverse.
 func (x *GraphFFTDescriptor) Inverse() bool {
 	return x.inner.Inverse()
@@ -63,6 +71,8 @@ func (x *GraphFFTDescriptor) SetInverse(inverse bool) {
 	x.inner.SetInverse(inverse)
 }
 
+// The scaling mode of the fast fourier transform (FFT) operation. Note that the scaling mode is independent from the phase factor. Default value: `MPSGraphFFTScalingModeNone`.
+//
 // ScalingMode calls the underlying ScalingMode.
 func (x *GraphFFTDescriptor) ScalingMode() MPSGraphFFTScalingMode {
 	return MPSGraphFFTScalingMode(x.inner.ScalingMode())
@@ -73,6 +83,8 @@ func (x *GraphFFTDescriptor) SetScalingMode(scalingMode MPSGraphFFTScalingMode) 
 	x.inner.SetScalingMode(raw.MPSGraphFFTScalingMode(scalingMode))
 }
 
+// A parameter which controls how graph rounds the output tensor size for a Hermitean-to-real Fourier transform. If set to `YES` then MPSGraph rounds the last output dimension of the result tensor in “MPSGraph/HermiteanToRealFFTWithTensor:axesTensor:descriptor:name:“ to an odd value. Has no effect in the other Fourier transform operations. Default value: `NO`.
+//
 // RoundToOddHermitean calls the underlying RoundToOddHermitean.
 func (x *GraphFFTDescriptor) RoundToOddHermitean() bool {
 	return x.inner.RoundToOddHermitean()

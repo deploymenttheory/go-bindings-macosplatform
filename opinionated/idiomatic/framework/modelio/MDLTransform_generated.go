@@ -50,6 +50,8 @@ func NewTransformWithTransformComponentResetsTransform(component raw.MDLTransfor
 	return &Transform{inner: raw.MDLTransformFromID(_id)}
 }
 
+// Initialization with a matrix assumes the matrix is an invertible, homogeneous affine transform matrix. Retrieving transform components after initialization with a non-affine matrix will yield those of the identity transform.
+//
 // NewTransformWithMatrix creates a new [Transform].
 func NewTransformWithMatrix(matrix unsafe.Pointer) *Transform {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLTransform")), objc.RegisterName("alloc"))
@@ -64,6 +66,8 @@ func NewTransformWithMatrixResetsTransform(matrix unsafe.Pointer, resetsTransfor
 	return &Transform{inner: raw.MDLTransformFromID(_id)}
 }
 
+// Set all transform components to identity
+//
 // SetIdentity calls the underlying SetIdentity.
 func (x *Transform) SetIdentity() {
 	x.inner.SetIdentity()
@@ -114,11 +118,15 @@ func (x *Transform) SetScaleForTime(scale unsafe.Pointer, time_ float64) {
 	x.inner.SetScaleForTime(scale, time_)
 }
 
+// Construct a right handed rotation matrix at the specified time
+//
 // RotationMatrixAtTime calls the underlying RotationMatrixAtTime.
 func (x *Transform) RotationMatrixAtTime(time_ float64) unsafe.Pointer {
 	return x.inner.RotationMatrixAtTime(time_)
 }
 
+// If these properties are read and animation data exists the earliest value is returned. Otherwise, if there is no animation data, the value of the property is the same at all times and that value is returned. If written, timing information for said property is removed. To retain or add timing information, use the set:forTime selectors instead.
+//
 // Translation calls the underlying Translation.
 func (x *Transform) Translation() unsafe.Pointer {
 	return x.inner.Translation()

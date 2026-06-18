@@ -56,6 +56,8 @@ func (x *GamepadSnapshot) WithValueChangedHandler(valueChangedHandler func(*raw.
 	return x
 }
 
+// Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called for each element that changed. @param profile this profile that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons. @param element the element that has been modified.
+//
 // WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
 func (x *GamepadSnapshot) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *GamepadSnapshot {
 	x.inner.GCGamepad.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)

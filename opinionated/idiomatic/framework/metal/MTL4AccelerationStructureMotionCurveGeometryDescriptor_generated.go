@@ -38,132 +38,176 @@ func NewMTL4AccelerationStructureMotionCurveGeometryDescriptor() *MTL4Accelerati
 	return &MTL4AccelerationStructureMotionCurveGeometryDescriptor{inner: raw.MTL4AccelerationStructureMotionCurveGeometryDescriptorFromID(_id)}
 }
 
+// Assigns a reference to a buffer where each entry contains a reference to a buffer of control points. This property references a buffer that conceptually represents an array with one entry for each keyframe in the motion animation. Each one of these entries consists of a “MTL4BufferRange“ that, in turn, references a buffer containing the control points corresponding to the keyframe. You are responsible for ensuring the buffer address is not zero for the top-level buffer, as well as for all the vertex buffers it references.
+//
 // WithControlPointBuffers sets the controlPointBuffers property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithControlPointBuffers(controlPointBuffers raw.MTL4BufferRange) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.SetControlPointBuffers(controlPointBuffers)
 	return x
 }
 
+// Specifies the number of control points in the buffers the control point buffers reference. All keyframes have the same number of control points.
+//
 // WithControlPointCount sets the controlPointCount property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithControlPointCount(controlPointCount uint) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.SetControlPointCount(controlPointCount)
 	return x
 }
 
+// Sets the stride, in bytes, between control points in the control point buffer. All keyframes share the same control point stride. You are responsible for ensuring this stride is a multiple of the control point format's element size, and at a minimum exactly the control point format's size. This property defaults to `0`, indicating that the control points are tightly-packed.
+//
 // WithControlPointStride sets the controlPointStride property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithControlPointStride(controlPointStride uint) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.SetControlPointStride(controlPointStride)
 	return x
 }
 
+// Declares the format of the control points in the buffers that the control point buffers reference. All keyframes share the same control point format. Defaults to `MTLAttributeFormatFloat3`, representing 3 floating point values tightly packed.
+//
 // WithControlPointFormat sets the controlPointFormat property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithControlPointFormat(controlPointFormat MTLAttributeFormat) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.SetControlPointFormat(raw.MTLAttributeFormat(controlPointFormat))
 	return x
 }
 
+// Assigns a reference to a buffer containing, in turn, references to curve radii buffers. This property references a buffer that conceptually represents an array with one entry for each keyframe in the motion animation. Each one of these entries consists of a “MTL4BufferRange“ that, in turn, references a buffer containing the radii corresponding to the keyframe. Metal interpolates curve radii according to the basis function you specify via “curveBasis“. You are responsible for ensuring the type of each radius matches the type property “radiusFormat“ specifies, that each radius is at least zero, and that the buffer address of the top-level buffer, as well as of buffer it references, is not zero.
+//
 // WithRadiusBuffers sets the radiusBuffers property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithRadiusBuffers(radiusBuffers raw.MTL4BufferRange) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.SetRadiusBuffers(radiusBuffers)
 	return x
 }
 
+// Sets the format of the radii in the radius buffer. Defaults to  `MTLAttributeFormatFloat`. All keyframes share the same radius format.
+//
 // WithRadiusFormat sets the radiusFormat property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithRadiusFormat(radiusFormat MTLAttributeFormat) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.SetRadiusFormat(raw.MTLAttributeFormat(radiusFormat))
 	return x
 }
 
+// Sets the stride, in bytes, between radii in the radius buffer. You are responsible for ensuring this property is set to a multiple of the size corresponding to the “radiusFormat“. All keyframes share the same radius stride. This property defaults to `0` bytes, indicating that the radii are tightly packed.
+//
 // WithRadiusStride sets the radiusStride property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithRadiusStride(radiusStride uint) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.SetRadiusStride(radiusStride)
 	return x
 }
 
+// Assigns an optional index buffer containing references to control points in the control point buffers. All keyframes share the same index buffer, with each index representing the first control point of a curve segment. You are responsible for ensuring the buffer address of the range is not zero.
+//
 // WithIndexBuffer sets the indexBuffer property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithIndexBuffer(indexBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.SetIndexBuffer(indexBuffer)
 	return x
 }
 
+// Configures the size of the indices the `indexBuffer` contains, which is typically either 16 or 32-bits for each index.
+//
 // WithIndexType sets the indexType property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithIndexType(indexType MTLIndexType) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.SetIndexType(raw.MTLIndexType(indexType))
 	return x
 }
 
+// Declares the number of curve segments. All keyframes have the same number of curve segments.
+//
 // WithSegmentCount sets the segmentCount property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithSegmentCount(segmentCount uint) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.SetSegmentCount(segmentCount)
 	return x
 }
 
+// Controls the number of control points per curve segment. Valid values for this property are `2`, `3`, or `4`. All keyframes have the same number of control points per curve segment.
+//
 // WithSegmentControlPointCount sets the segmentControlPointCount property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithSegmentControlPointCount(segmentControlPointCount uint) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.SetSegmentControlPointCount(segmentControlPointCount)
 	return x
 }
 
+// Controls the curve type. Defaults to `MTLCurveTypeRound`. All keyframes share the same curve type.
+//
 // WithCurveType sets the curveType property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithCurveType(curveType MTLCurveType) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.SetCurveType(raw.MTLCurveType(curveType))
 	return x
 }
 
+// Sets the curve basis function, determining how Metal interpolates the control points. Defaults to `MTLCurveBasisBSpline`. All keyframes share the same curve basis function.
+//
 // WithCurveBasis sets the curveBasis property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithCurveBasis(curveBasis MTLCurveBasis) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.SetCurveBasis(raw.MTLCurveBasis(curveBasis))
 	return x
 }
 
+// Configures the type of curve end caps. Defaults to `MTLCurveEndCapsNone`. All keyframes share the same end cap type.
+//
 // WithCurveEndCaps sets the curveEndCaps property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithCurveEndCaps(curveEndCaps MTLCurveEndCaps) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.SetCurveEndCaps(raw.MTLCurveEndCaps(curveEndCaps))
 	return x
 }
 
+// Sets the offset that this geometry contributes to determining the intersection function to invoke when a ray intersects it. When you perform a ray tracing operation in the Metal Shading Language, and provide the ray intersector object with an instance of “MTLIntersectionFunctionTable“, Metal adds this offset to the instance offset from structs such as: - “MTLAccelerationStructureInstanceDescriptor“ - “MTLAccelerationStructureUserIDInstanceDescriptor“ - “MTLAccelerationStructureMotionInstanceDescriptor“ - “MTLIndirectAccelerationStructureInstanceDescriptor“ - “MTLIndirectAccelerationStructureMotionInstanceDescriptor“ The sum of these offsets provides an index into the intersection function table that the ray tracing system uses to retrieve and invoke the function at this index, allowing you to customize the intersection evaluation process.
+//
 // WithIntersectionFunctionTableOffset sets the intersectionFunctionTableOffset property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset)
 	return x
 }
 
+// Provides a hint to Metal that this geometry is opaque, potentially accelerating the ray/primitive intersection process.
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithOpaque(opaque bool) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetOpaque(opaque)
 	return x
 }
 
+// A boolean value that indicates whether the ray-tracing system in Metal allows the invocation of intersection functions more than once per ray-primitive intersection. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+//
 // WithAllowDuplicateIntersectionFunctionInvocation sets the allowDuplicateIntersectionFunctionInvocation property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation)
 	return x
 }
 
+// Assigns an optional label you can assign to this geometry for debugging purposes.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithLabel(label string) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// Assigns optional buffer containing data to associate with each primitive in this geometry. You can use zero as the buffer address in this buffer range.
+//
 // WithPrimitiveDataBuffer sets the primitiveDataBuffer property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetPrimitiveDataBuffer(primitiveDataBuffer)
 	return x
 }
 
+// Defines the stride, in bytes, between each primitive's data in the primitive data buffer “primitiveDataBuffer“ references. You are responsible for ensuring the stride is at least “primitiveDataElementSize“ in size and a multiple of 4 bytes. This property defaults to `0` bytes,  which indicates the stride is equal to “primitiveDataElementSize“.
+//
 // WithPrimitiveDataStride sets the primitiveDataStride property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride uint) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetPrimitiveDataStride(primitiveDataStride)
 	return x
 }
 
+// Sets the size, in bytes, of the data for each primitive in the primitive data buffer “primitiveDataBuffer“ references. This size needs to be at most “primitiveDataStride“ in size and a multiple of 4 bytes. This property defaults to 0 bytes.
+//
 // WithPrimitiveDataElementSize sets the primitiveDataElementSize property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize uint) *MTL4AccelerationStructureMotionCurveGeometryDescriptor {
 	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetPrimitiveDataElementSize(primitiveDataElementSize)
 	return x
 }
 
+// Assigns a reference to a buffer where each entry contains a reference to a buffer of control points. This property references a buffer that conceptually represents an array with one entry for each keyframe in the motion animation. Each one of these entries consists of a “MTL4BufferRange“ that, in turn, references a buffer containing the control points corresponding to the keyframe. You are responsible for ensuring the buffer address is not zero for the top-level buffer, as well as for all the vertex buffers it references.
+//
 // ControlPointBuffers calls the underlying ControlPointBuffers.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) ControlPointBuffers() raw.MTL4BufferRange {
 	return x.inner.ControlPointBuffers()
@@ -174,6 +218,8 @@ func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) SetControlPoint
 	x.inner.SetControlPointBuffers(controlPointBuffers)
 }
 
+// Specifies the number of control points in the buffers the control point buffers reference. All keyframes have the same number of control points.
+//
 // ControlPointCount calls the underlying ControlPointCount.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) ControlPointCount() uint {
 	return x.inner.ControlPointCount()
@@ -184,6 +230,8 @@ func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) SetControlPoint
 	x.inner.SetControlPointCount(controlPointCount)
 }
 
+// Sets the stride, in bytes, between control points in the control point buffer. All keyframes share the same control point stride. You are responsible for ensuring this stride is a multiple of the control point format's element size, and at a minimum exactly the control point format's size. This property defaults to `0`, indicating that the control points are tightly-packed.
+//
 // ControlPointStride calls the underlying ControlPointStride.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) ControlPointStride() uint {
 	return x.inner.ControlPointStride()
@@ -194,6 +242,8 @@ func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) SetControlPoint
 	x.inner.SetControlPointStride(controlPointStride)
 }
 
+// Declares the format of the control points in the buffers that the control point buffers reference. All keyframes share the same control point format. Defaults to `MTLAttributeFormatFloat3`, representing 3 floating point values tightly packed.
+//
 // ControlPointFormat calls the underlying ControlPointFormat.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) ControlPointFormat() MTLAttributeFormat {
 	return MTLAttributeFormat(x.inner.ControlPointFormat())
@@ -204,6 +254,8 @@ func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) SetControlPoint
 	x.inner.SetControlPointFormat(raw.MTLAttributeFormat(controlPointFormat))
 }
 
+// Assigns a reference to a buffer containing, in turn, references to curve radii buffers. This property references a buffer that conceptually represents an array with one entry for each keyframe in the motion animation. Each one of these entries consists of a “MTL4BufferRange“ that, in turn, references a buffer containing the radii corresponding to the keyframe. Metal interpolates curve radii according to the basis function you specify via “curveBasis“. You are responsible for ensuring the type of each radius matches the type property “radiusFormat“ specifies, that each radius is at least zero, and that the buffer address of the top-level buffer, as well as of buffer it references, is not zero.
+//
 // RadiusBuffers calls the underlying RadiusBuffers.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) RadiusBuffers() raw.MTL4BufferRange {
 	return x.inner.RadiusBuffers()
@@ -214,6 +266,8 @@ func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) SetRadiusBuffer
 	x.inner.SetRadiusBuffers(radiusBuffers)
 }
 
+// Sets the format of the radii in the radius buffer. Defaults to  `MTLAttributeFormatFloat`. All keyframes share the same radius format.
+//
 // RadiusFormat calls the underlying RadiusFormat.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) RadiusFormat() MTLAttributeFormat {
 	return MTLAttributeFormat(x.inner.RadiusFormat())
@@ -224,6 +278,8 @@ func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) SetRadiusFormat
 	x.inner.SetRadiusFormat(raw.MTLAttributeFormat(radiusFormat))
 }
 
+// Sets the stride, in bytes, between radii in the radius buffer. You are responsible for ensuring this property is set to a multiple of the size corresponding to the “radiusFormat“. All keyframes share the same radius stride. This property defaults to `0` bytes, indicating that the radii are tightly packed.
+//
 // RadiusStride calls the underlying RadiusStride.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) RadiusStride() uint {
 	return x.inner.RadiusStride()
@@ -234,6 +290,8 @@ func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) SetRadiusStride
 	x.inner.SetRadiusStride(radiusStride)
 }
 
+// Assigns an optional index buffer containing references to control points in the control point buffers. All keyframes share the same index buffer, with each index representing the first control point of a curve segment. You are responsible for ensuring the buffer address of the range is not zero.
+//
 // IndexBuffer calls the underlying IndexBuffer.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) IndexBuffer() raw.MTL4BufferRange {
 	return x.inner.IndexBuffer()
@@ -244,6 +302,8 @@ func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) SetIndexBuffer(
 	x.inner.SetIndexBuffer(indexBuffer)
 }
 
+// Configures the size of the indices the `indexBuffer` contains, which is typically either 16 or 32-bits for each index.
+//
 // IndexType calls the underlying IndexType.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) IndexType() MTLIndexType {
 	return MTLIndexType(x.inner.IndexType())
@@ -254,6 +314,8 @@ func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) SetIndexType(in
 	x.inner.SetIndexType(raw.MTLIndexType(indexType))
 }
 
+// Declares the number of curve segments. All keyframes have the same number of curve segments.
+//
 // SegmentCount calls the underlying SegmentCount.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) SegmentCount() uint {
 	return x.inner.SegmentCount()
@@ -264,6 +326,8 @@ func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) SetSegmentCount
 	x.inner.SetSegmentCount(segmentCount)
 }
 
+// Controls the number of control points per curve segment. Valid values for this property are `2`, `3`, or `4`. All keyframes have the same number of control points per curve segment.
+//
 // SegmentControlPointCount calls the underlying SegmentControlPointCount.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) SegmentControlPointCount() uint {
 	return x.inner.SegmentControlPointCount()
@@ -274,6 +338,8 @@ func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) SetSegmentContr
 	x.inner.SetSegmentControlPointCount(segmentControlPointCount)
 }
 
+// Controls the curve type. Defaults to `MTLCurveTypeRound`. All keyframes share the same curve type.
+//
 // CurveType calls the underlying CurveType.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) CurveType() MTLCurveType {
 	return MTLCurveType(x.inner.CurveType())
@@ -284,6 +350,8 @@ func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) SetCurveType(cu
 	x.inner.SetCurveType(raw.MTLCurveType(curveType))
 }
 
+// Sets the curve basis function, determining how Metal interpolates the control points. Defaults to `MTLCurveBasisBSpline`. All keyframes share the same curve basis function.
+//
 // CurveBasis calls the underlying CurveBasis.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) CurveBasis() MTLCurveBasis {
 	return MTLCurveBasis(x.inner.CurveBasis())
@@ -294,6 +362,8 @@ func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) SetCurveBasis(c
 	x.inner.SetCurveBasis(raw.MTLCurveBasis(curveBasis))
 }
 
+// Configures the type of curve end caps. Defaults to `MTLCurveEndCapsNone`. All keyframes share the same end cap type.
+//
 // CurveEndCaps calls the underlying CurveEndCaps.
 func (x *MTL4AccelerationStructureMotionCurveGeometryDescriptor) CurveEndCaps() MTLCurveEndCaps {
 	return MTLCurveEndCaps(x.inner.CurveEndCaps())

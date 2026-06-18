@@ -61,6 +61,8 @@ func (x *DepthStencilDescriptor) WithBackFaceStencil(backFaceStencil *StencilDes
 	return x
 }
 
+// @property label @abstract A string to help identify the created object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *DepthStencilDescriptor) WithLabel(label string) *DepthStencilDescriptor {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
@@ -115,6 +117,8 @@ func (x *DepthStencilDescriptor) SetBackFaceStencil(backFaceStencil *raw.MTLSten
 	x.inner.SetBackFaceStencil(backFaceStencil)
 }
 
+// @property label @abstract A string to help identify the created object.
+//
 // Label calls the underlying Label.
 func (x *DepthStencilDescriptor) Label() string {
 	_r := x.inner.Label()

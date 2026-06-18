@@ -37,6 +37,8 @@ func NewNEAppProxyProviderManager() *NEAppProxyProviderManager {
 	return &NEAppProxyProviderManager{inner: raw.NEAppProxyProviderManagerFromID(_id)}
 }
 
+// @property safariDomains @discussion An array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled and the user navigates in Safari to a web site within one of these domains, the web site network traffic is routed through the per-app VPN.
+//
 // WithSafariDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEAppProxyProviderManager) WithSafariDomains(items ...*foundation.NSString) *NEAppProxyProviderManager {
 	if len(items) == 0 {
@@ -55,6 +57,8 @@ func (x *NEAppProxyProviderManager) WithSafariDomains(items ...*foundation.NSStr
 	return x
 }
 
+// @property mailDomains @discussion An array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled, connections from the Mail app to mail servers within one of these domains are routed through the per-app VPN.
+//
 // WithMailDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEAppProxyProviderManager) WithMailDomains(items ...*foundation.NSString) *NEAppProxyProviderManager {
 	if len(items) == 0 {
@@ -73,6 +77,8 @@ func (x *NEAppProxyProviderManager) WithMailDomains(items ...*foundation.NSStrin
 	return x
 }
 
+// @property calendarDomains @discussion An array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled, connections from the Calendar app to calendar servers within one of these domains are routed through the per-app VPN.
+//
 // WithCalendarDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEAppProxyProviderManager) WithCalendarDomains(items ...*foundation.NSString) *NEAppProxyProviderManager {
 	if len(items) == 0 {
@@ -91,6 +97,8 @@ func (x *NEAppProxyProviderManager) WithCalendarDomains(items ...*foundation.NSS
 	return x
 }
 
+// @property contactsDomains @discussion An array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled, connections from the Contacts app to contacts servers within one of these domains are routed through the per-app VPN.
+//
 // WithContactsDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEAppProxyProviderManager) WithContactsDomains(items ...*foundation.NSString) *NEAppProxyProviderManager {
 	if len(items) == 0 {
@@ -109,6 +117,8 @@ func (x *NEAppProxyProviderManager) WithContactsDomains(items ...*foundation.NSS
 	return x
 }
 
+// @property appRules @property An array of NEAppRule objects. Only applies to per-app VPN configurations. Network traffic originating from apps matching one of these rules is routed through the per-app VPN.
+//
 // WithAppRules sets the collection, converting the Go slice to an NSArray.
 func (x *NEAppProxyProviderManager) WithAppRules(items ...*raw.NEAppRule) *NEAppProxyProviderManager {
 	if len(items) == 0 {
@@ -127,6 +137,8 @@ func (x *NEAppProxyProviderManager) WithAppRules(items ...*raw.NEAppRule) *NEApp
 	return x
 }
 
+// @property excludedDomains @property An array of domain strings. Only applies to per-app VPN configurations. When the per-app VPN is enabled, connections to servers within one of these domains are excluded from the per-app VPN.
+//
 // WithExcludedDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEAppProxyProviderManager) WithExcludedDomains(items ...*foundation.NSString) *NEAppProxyProviderManager {
 	if len(items) == 0 {
@@ -145,6 +157,8 @@ func (x *NEAppProxyProviderManager) WithExcludedDomains(items ...*foundation.NSS
 	return x
 }
 
+// @property associatedDomains @property An array of domain strings. Only applies to per-app VPN configurations. HTTP requests to download the Apple App Site Association files for domains in this list are routed through the per-app VPN.
+//
 // WithAssociatedDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEAppProxyProviderManager) WithAssociatedDomains(items ...*foundation.NSString) *NEAppProxyProviderManager {
 	if len(items) == 0 {
@@ -163,6 +177,8 @@ func (x *NEAppProxyProviderManager) WithAssociatedDomains(items ...*foundation.N
 	return x
 }
 
+// @property onDemandRules @discussion An array of NEOnDemandRule objects.
+//
 // WithOnDemandRules sets the collection, converting the Go slice to an NSArray.
 func (x *NEAppProxyProviderManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NEAppProxyProviderManager {
 	if len(items) == 0 {
@@ -181,30 +197,40 @@ func (x *NEAppProxyProviderManager) WithOnDemandRules(items ...NEOnDemandRulePro
 	return x
 }
 
+// @property onDemandEnabled @discussion Toggles VPN On Demand.
+//
 // WithOnDemandEnabled sets the onDemandEnabled property and returns the receiver for chaining.
 func (x *NEAppProxyProviderManager) WithOnDemandEnabled(onDemandEnabled bool) *NEAppProxyProviderManager {
 	x.inner.NETunnelProviderManager.NEVPNManager.SetOnDemandEnabled(onDemandEnabled)
 	return x
 }
 
+// @property localizedDescription @discussion A string containing a description of the VPN.
+//
 // WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
 func (x *NEAppProxyProviderManager) WithLocalizedDescription(localizedDescription string) *NEAppProxyProviderManager {
 	x.inner.NETunnelProviderManager.NEVPNManager.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
 	return x
 }
 
+// @property protocol @discussion An NEVPNProtocol object containing the protocol-specific portion of the VPN configuration.
+//
 // WithProtocol sets the protocol property and returns the receiver for chaining.
 func (x *NEAppProxyProviderManager) WithProtocol(protocol NEVPNProtocolProvider) *NEAppProxyProviderManager {
 	x.inner.NETunnelProviderManager.NEVPNManager.SetProtocol(protocol.asNEVPNProtocol())
 	return x
 }
 
+// @property protocolConfiguration @discussion An NEVPNProtocol object containing the protocol-specific portion of the VPN configuration.
+//
 // WithProtocolConfiguration sets the protocolConfiguration property and returns the receiver for chaining.
 func (x *NEAppProxyProviderManager) WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NEAppProxyProviderManager {
 	x.inner.NETunnelProviderManager.NEVPNManager.SetProtocolConfiguration(protocolConfiguration.asNEVPNProtocol())
 	return x
 }
 
+// @property enabled @discussion Toggles the enabled status of the VPN. Setting this property will disable VPN configurations of other apps. This property will be set to NO  when other VPN configurations are enabled.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *NEAppProxyProviderManager) WithEnabled(enabled bool) *NEAppProxyProviderManager {
 	x.inner.NETunnelProviderManager.NEVPNManager.SetEnabled(enabled)

@@ -92,8 +92,17 @@ func (x *AnimationGroup) Animations() []*Animation {
 }
 
 // SetAnimations calls the underlying SetAnimations.
-func (x *AnimationGroup) SetAnimations(animations *foundation.NSArray[*raw.CAAnimation]) {
-	x.inner.SetAnimations(animations)
+func (x *AnimationGroup) SetAnimations(animations ...AnimationProvider) {
+	_ptrs := make([]objc.ID, len(animations))
+	for _i, _v := range animations {
+		_ptrs[_i] = _v.asAnimation().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.CAAnimation]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.CAAnimation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetAnimations(_arg0)
 }
 
 func (x *AnimationGroup) asAnimation() *raw.CAAnimation { return &x.inner.CAAnimation }
@@ -107,7 +116,7 @@ type AnimationGroupable interface {
 	WithRemovedOnCompletion(removedOnCompletion bool) *AnimationGroup
 	WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *AnimationGroup
 	Animations() []*Animation
-	SetAnimations(animations *foundation.NSArray[*raw.CAAnimation])
+	SetAnimations(animations ...AnimationProvider)
 }
 
 var _ AnimationGroupable = (*AnimationGroup)(nil)

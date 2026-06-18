@@ -39,6 +39,8 @@ func NewCaptureMetadataOutput() *CaptureMetadataOutput {
 	return &CaptureMetadataOutput{inner: raw.AVCaptureMetadataOutputFromID(_id)}
 }
 
+// @property metadataObjectTypes @abstract Specifies the types of metadata objects that the receiver should present to the client. @discussion AVCaptureMetadataOutput may detect and emit multiple metadata object types. For apps linked before iOS 7.0, the receiver defaults to capturing face metadata objects if supported (see -availableMetadataObjectTypes). For apps linked on or after iOS 7.0, the receiver captures no metadata objects by default. -setMetadataObjectTypes: throws an NSInvalidArgumentException if any elements in the array are not present in the -availableMetadataObjectTypes array. If you've set your AVCaptureMetadataOutput's connected input's `cinematicVideoCaptureEnabled` property to YES, you must set your `metadataObjectTypes` property to `requiredMetadataObjectTypesForCinematicVideoCapture` or an NSInvalidArgumentException is thrown.
+//
 // WithMetadataObjectTypes sets the collection, converting the Go slice to an NSArray.
 func (x *CaptureMetadataOutput) WithMetadataObjectTypes(items ...*foundation.NSString) *CaptureMetadataOutput {
 	if len(items) == 0 {
@@ -57,33 +59,45 @@ func (x *CaptureMetadataOutput) WithMetadataObjectTypes(items ...*foundation.NSS
 	return x
 }
 
+// @property rectOfInterest @abstract Specifies a rectangle of interest for limiting the search area for visual metadata. @discussion The value of this property is a CGRect that determines the receiver's rectangle of interest for each frame of video. The rectangle's origin is top left and is relative to the coordinate space of the device providing the metadata. Specifying a rectOfInterest may improve detection performance for certain types of metadata. The default value of this property is the value CGRectMake(0, 0, 1, 1). Metadata objects whose bounds do not intersect with the rectOfInterest will not be returned. As of iOS 13, this property can be set without requiring a lengthy rebuild of the session in which video preview is disrupted.
+//
 // WithRectOfInterest sets the rectOfInterest property and returns the receiver for chaining.
 func (x *CaptureMetadataOutput) WithRectOfInterest(rectOfInterest corefoundation.CGRect) *CaptureMetadataOutput {
 	x.inner.SetRectOfInterest(rectOfInterest)
 	return x
 }
 
+// A `BOOL` value that indicates whether to defer starting this capture output. When this value is `true`, the session does not prepare the output's resources until some time after “AVCaptureSession/startRunning“ returns. You can start the visual parts of your user interface (e.g. preview) prior to other parts (e.g. photo/movie capture, metadata output, etc..) to improve startup performance. Set this value to `false` for outputs that your app needs for startup, and `true` for the ones it does not need to start immediately. For example, an “AVCaptureVideoDataOutput“ that you intend to use for displaying preview should set this value to `false`, so that the frames are available as soon as possible. By default, for apps that are linked on or after iOS 26, this property value is `true` for “AVCapturePhotoOutput“ and “AVCaptureFileOutput“ subclasses if supported, and `false` otherwise. When set to `true` for “AVCapturePhotoOutput“, if you want to support multiple capture requests before running deferred start, set “AVCapturePhotoOutput/responsiveCaptureEnabled“ to `true` on that output. If “deferredStartSupported“ is `false`, setting this property value to `true` results in the system throwing an `NSInvalidArgumentException`. - Note: Set this value before calling “AVCaptureSession/commitConfiguration“ as it requires a lengthy reconfiguration of the capture render pipeline.
+//
 // WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
 func (x *CaptureMetadataOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureMetadataOutput {
 	x.inner.AVCaptureOutput.SetDeferredStartEnabled(deferredStartEnabled)
 	return x
 }
 
+// @method setMetadataObjectsDelegate:queue: @abstract Sets the receiver's delegate that will accept metadata objects and dispatch queue on which the delegate will be called. @param objectsDelegate An object conforming to the AVCaptureMetadataOutputObjectsDelegate protocol that will receive metadata objects after they are captured. @param objectsCallbackQueue A dispatch queue on which all delegate methods will be called. @discussion When new metadata objects are captured in the receiver's connection, they will be vended to the delegate using the captureOutput:didOutputMetadataObjects:fromConnection: delegate method. All delegate methods will be called on the specified dispatch queue. Clients that need to minimize the chances of metadata being dropped should specify a queue on which a sufficiently small amount of processing is performed along with receiving metadata objects. A serial dispatch queue must be used to guarantee that metadata objects will be delivered in order. The objectsCallbackQueue parameter may not be NULL, except when setting the objectsDelegate to nil otherwise -setMetadataObjectsDelegate:queue: throws an NSInvalidArgumentException.
+//
 // SetMetadataObjectsDelegateQueue calls the underlying SetMetadataObjectsDelegateQueue.
 func (x *CaptureMetadataOutput) SetMetadataObjectsDelegateQueue(objectsDelegate raw.AVCaptureMetadataOutputObjectsDelegate, objectsCallbackQueue *foundation.NSObject) {
 	x.inner.SetMetadataObjectsDelegateQueue(objectsDelegate, objectsCallbackQueue)
 }
 
+// @property metadataObjectsDelegate @abstract The receiver's delegate. @discussion The value of this property is an object conforming to the AVCaptureMetadataOutputObjectsDelegate protocol that will receive metadata objects after they are captured. The delegate is set using the setMetadataObjectsDelegate:queue: method.
+//
 // MetadataObjectsDelegate calls the underlying MetadataObjectsDelegate.
 func (x *CaptureMetadataOutput) MetadataObjectsDelegate() raw.AVCaptureMetadataOutputObjectsDelegate {
 	return x.inner.MetadataObjectsDelegate()
 }
 
+// @property metadataObjectsCallbackQueue @abstract The dispatch queue on which all metadata object delegate methods will be called. @discussion The value of this property is a dispatch_queue_t. The queue is set using the setMetadataObjectsDelegate:queue: method.
+//
 // MetadataObjectsCallbackQueue calls the underlying MetadataObjectsCallbackQueue.
 func (x *CaptureMetadataOutput) MetadataObjectsCallbackQueue() *foundation.NSObject {
 	return x.inner.MetadataObjectsCallbackQueue()
 }
 
+// @property availableMetadataObjectTypes @abstract Indicates the receiver's supported metadata object types. @discussion The value of this property is an NSArray of NSStrings corresponding to AVMetadataObjectType strings defined in AVMetadataObject.h -- one for each metadata object type supported by the receiver. Available metadata object types are dependent on the capabilities of the AVCaptureInputPort to which this receiver's AVCaptureConnection is connected. Clients may specify the types of objects they would like to process by calling setMetadataObjectTypes:. This property is key-value observable.
+//
 // AvailableMetadataObjectTypes returns the collection as a Go slice.
 func (x *CaptureMetadataOutput) AvailableMetadataObjectTypes() []*foundation.NSString {
 	arr := x.inner.AvailableMetadataObjectTypes()
@@ -95,6 +109,8 @@ func (x *CaptureMetadataOutput) AvailableMetadataObjectTypes() []*foundation.NSS
 	})
 }
 
+// @property metadataObjectTypes @abstract Specifies the types of metadata objects that the receiver should present to the client. @discussion AVCaptureMetadataOutput may detect and emit multiple metadata object types. For apps linked before iOS 7.0, the receiver defaults to capturing face metadata objects if supported (see -availableMetadataObjectTypes). For apps linked on or after iOS 7.0, the receiver captures no metadata objects by default. -setMetadataObjectTypes: throws an NSInvalidArgumentException if any elements in the array are not present in the -availableMetadataObjectTypes array. If you've set your AVCaptureMetadataOutput's connected input's `cinematicVideoCaptureEnabled` property to YES, you must set your `metadataObjectTypes` property to `requiredMetadataObjectTypesForCinematicVideoCapture` or an NSInvalidArgumentException is thrown.
+//
 // MetadataObjectTypes returns the collection as a Go slice.
 func (x *CaptureMetadataOutput) MetadataObjectTypes() []*foundation.NSString {
 	arr := x.inner.MetadataObjectTypes()
@@ -111,6 +127,8 @@ func (x *CaptureMetadataOutput) SetMetadataObjectTypes(metadataObjectTypes *foun
 	x.inner.SetMetadataObjectTypes(metadataObjectTypes)
 }
 
+// @property rectOfInterest @abstract Specifies a rectangle of interest for limiting the search area for visual metadata. @discussion The value of this property is a CGRect that determines the receiver's rectangle of interest for each frame of video. The rectangle's origin is top left and is relative to the coordinate space of the device providing the metadata. Specifying a rectOfInterest may improve detection performance for certain types of metadata. The default value of this property is the value CGRectMake(0, 0, 1, 1). Metadata objects whose bounds do not intersect with the rectOfInterest will not be returned. As of iOS 13, this property can be set without requiring a lengthy rebuild of the session in which video preview is disrupted.
+//
 // RectOfInterest calls the underlying RectOfInterest.
 func (x *CaptureMetadataOutput) RectOfInterest() corefoundation.CGRect {
 	return x.inner.RectOfInterest()
@@ -121,6 +139,8 @@ func (x *CaptureMetadataOutput) SetRectOfInterest(rectOfInterest corefoundation.
 	x.inner.SetRectOfInterest(rectOfInterest)
 }
 
+// The required metadata object types when Cinematic Video capture is enabled. Since the Cinematic Video algorithm requires a particular set of metadata objects to function optimally, you must set your “metadataObjectTypes“ property to this property's returned value if you've set “AVCaptureDeviceInput/cinematicVideoCaptureEnabled“ to `true` on the connected device input, otherwise an `NSInvalidArgumentException` is thrown.
+//
 // RequiredMetadataObjectTypesForCinematicVideoCapture returns the collection as a Go slice.
 func (x *CaptureMetadataOutput) RequiredMetadataObjectTypesForCinematicVideoCapture() []*foundation.NSString {
 	arr := x.inner.RequiredMetadataObjectTypesForCinematicVideoCapture()

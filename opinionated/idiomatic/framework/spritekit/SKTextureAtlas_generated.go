@@ -47,6 +47,8 @@ func (x *TextureAtlas) TextureNamed(name string) *Texture {
 	return &Texture{inner: _r}
 }
 
+// Request that this texture atlas be loaded into vram on the next render update, with a callback handler.
+//
 // Preload blocks until the operation completes or ctx is cancelled.
 func (x *TextureAtlas) Preload(ctx context.Context) error {
 	_ch := make(chan error, 1)

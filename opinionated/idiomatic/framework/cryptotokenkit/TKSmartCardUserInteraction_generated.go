@@ -36,34 +36,46 @@ func NewSmartCardUserInteraction() *SmartCardUserInteraction {
 	return &SmartCardUserInteraction{inner: raw.TKSmartCardUserInteractionFromID(_id)}
 }
 
+// Delegate for state observing of the interaction.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *SmartCardUserInteraction) WithDelegate(delegate raw.TKSmartCardUserInteractionDelegate) *SmartCardUserInteraction {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Initial interaction timeout. If set to 0, the reader-defined default timeout is used. @note Default value: 0
+//
 // WithInitialTimeout sets the initialTimeout property and returns the receiver for chaining.
 func (x *SmartCardUserInteraction) WithInitialTimeout(initialTimeout float64) *SmartCardUserInteraction {
 	x.inner.SetInitialTimeout(initialTimeout)
 	return x
 }
 
+// Timeout after the first key stroke. If set to 0, the reader-defined default timeout is used. @note Default value: 0
+//
 // WithInteractionTimeout sets the interactionTimeout property and returns the receiver for chaining.
 func (x *SmartCardUserInteraction) WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteraction {
 	x.inner.SetInteractionTimeout(interactionTimeout)
 	return x
 }
 
+// Runs the interaction.
+//
 // RunWithReply calls the underlying RunWithReply.
 func (x *SmartCardUserInteraction) RunWithReply(reply func(bool, unsafe.Pointer)) {
 	x.inner.RunWithReply(reply)
 }
 
+// Attempts to cancel a running interaction. Note that for some interactions, this functionality might not be available. @return Returns NO if the operation is not running, or cancelling is not supported.
+//
 // Cancel calls the underlying Cancel.
 func (x *SmartCardUserInteraction) Cancel() bool {
 	return x.inner.Cancel()
 }
 
+// Delegate for state observing of the interaction.
+//
 // Delegate calls the underlying Delegate.
 func (x *SmartCardUserInteraction) Delegate() raw.TKSmartCardUserInteractionDelegate {
 	return x.inner.Delegate()
@@ -79,6 +91,8 @@ func (x *SmartCardUserInteraction) SetInitialTimeout(initialTimeout float64) {
 	x.inner.SetInitialTimeout(initialTimeout)
 }
 
+// Timeout after the first key stroke. If set to 0, the reader-defined default timeout is used. @note Default value: 0
+//
 // InteractionTimeout calls the underlying InteractionTimeout.
 func (x *SmartCardUserInteraction) InteractionTimeout() float64 {
 	return x.inner.InteractionTimeout()

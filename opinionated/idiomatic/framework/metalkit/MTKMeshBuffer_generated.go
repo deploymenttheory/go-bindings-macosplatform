@@ -37,11 +37,15 @@ func NewMeshBuffer() *MeshBuffer {
 	return &MeshBuffer{inner: raw.MTKMeshBufferFromID(_id)}
 }
 
+// @method length @abstract Size in bytes of the buffer allocation.
+//
 // Length calls the underlying Length.
 func (x *MeshBuffer) Length() uint {
 	return x.inner.Length()
 }
 
+// @property allocator @abstract Allocator object used to create this buffer. @discussion This allcoator is stored so that it can be used by Model I/O for copy and relayout operations (such as when a new vertex descriptor is applied to a vertex buffer).
+//
 // Allocator calls the underlying Allocator.
 func (x *MeshBuffer) Allocator() *MeshBufferAllocator {
 	_r := x.inner.Allocator()
@@ -51,21 +55,29 @@ func (x *MeshBuffer) Allocator() *MeshBufferAllocator {
 	return &MeshBufferAllocator{inner: _r}
 }
 
+// @property zone @abstract Zone from which this buffer was created (if it was created from a zone). @discussion A single MetalBuffer is allocated for each zone.  Each zone could have many MTKMeshBuffers, each with it's own offset.  If a MTKMeshBufferAllocator is used, Model I/O will attempt to load all vertex and index data of a single mesh into a single zone.  This allows the GPU to achieve a higher cache hit rate when drawing the mesh.  So although there maybe many MTKMeshBuffers for a model they will be backed with the same contigous MetalBuffer.
+//
 // Zone calls the underlying Zone.
 func (x *MeshBuffer) Zone() modelio.MDLMeshBufferZone {
 	return x.inner.Zone()
 }
 
+// @property buffer @abstract Metal Buffer backing vertex/index data. @discussion Many MTKMeshBuffers may reference the same buffer, but each with it's own offset.  (i.e. Many MTKMeshBuffers may be suballocated from a single buffer)
+//
 // Buffer calls the underlying Buffer.
 func (x *MeshBuffer) Buffer() metal.MTLBuffer {
 	return x.inner.Buffer()
 }
 
+// @property offset @abstract Byte offset of the data within the metal buffer.
+//
 // Offset calls the underlying Offset.
 func (x *MeshBuffer) Offset() uint {
 	return x.inner.Offset()
 }
 
+// @property type @abstract the intended type of the buffer
+//
 // Type calls the underlying Type.
 func (x *MeshBuffer) Type() modelio.MDLMeshBufferType {
 	return x.inner.Type()

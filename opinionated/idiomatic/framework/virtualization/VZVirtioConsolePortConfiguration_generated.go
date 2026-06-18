@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents the configuration options you can set on a Virtio console port.
+//
 // VirtioConsolePortConfiguration wraps [raw.VZVirtioConsolePortConfiguration] with a fluent Go API.
 type VirtioConsolePortConfiguration struct {
 	inner *raw.VZVirtioConsolePortConfiguration
@@ -39,24 +41,32 @@ func NewVirtioConsolePortConfiguration() *VirtioConsolePortConfiguration {
 	return &VirtioConsolePortConfiguration{inner: raw.VZVirtioConsolePortConfigurationFromID(_id)}
 }
 
+// The name of the port.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *VirtioConsolePortConfiguration) WithName(name string) *VirtioConsolePortConfiguration {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// A Boolean value that indicates whether this port is a console.
+//
 // WithIsConsole sets the isConsole property and returns the receiver for chaining.
 func (x *VirtioConsolePortConfiguration) WithIsConsole(isConsole bool) *VirtioConsolePortConfiguration {
 	x.inner.SetIsConsole(isConsole)
 	return x
 }
 
+// The serial port attachment.
+//
 // WithAttachment sets the attachment property and returns the receiver for chaining.
 func (x *VirtioConsolePortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsolePortConfiguration {
 	x.inner.VZConsolePortConfiguration.SetAttachment(attachment.asSerialPortAttachment())
 	return x
 }
 
+// @abstract The console port's name. The default behavior is to not use a name unless set.
+//
 // Name calls the underlying Name.
 func (x *VirtioConsolePortConfiguration) Name() string {
 	_r := x.inner.Name()
@@ -71,6 +81,8 @@ func (x *VirtioConsolePortConfiguration) SetName(name string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 }
 
+// @abstract The console port may be marked for use as the system console. The default is false.
+//
 // IsConsole calls the underlying IsConsole.
 func (x *VirtioConsolePortConfiguration) IsConsole() bool {
 	return x.inner.IsConsole()

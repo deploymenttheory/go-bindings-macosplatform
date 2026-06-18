@@ -35,6 +35,8 @@ func MTRBaseClusterTemperatureControlFromID(id objc.ID) *MTRBaseClusterTemperatu
 	return &MTRBaseClusterTemperatureControl{inner: raw.MTRBaseClusterTemperatureControlFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterTemperatureControlWithDeviceEndpointIDQueue creates a new [MTRBaseClusterTemperatureControl].
 func NewMTRBaseClusterTemperatureControlWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterTemperatureControl {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterTemperatureControl")), objc.RegisterName("alloc"))
@@ -42,6 +44,8 @@ func NewMTRBaseClusterTemperatureControlWithDeviceEndpointIDQueue(device *raw.MT
 	return &MTRBaseClusterTemperatureControl{inner: raw.MTRBaseClusterTemperatureControlFromID(_id)}
 }
 
+// Command SetTemperature The SetTemperature command SHALL have the following data fields:
+//
 // SetTemperatureWithParamsCompletion calls the underlying SetTemperatureWithParamsCompletion.
 func (x *MTRBaseClusterTemperatureControl) SetTemperatureWithParamsCompletion(params *raw.MTRTemperatureControlClusterSetTemperatureParams, completion func(unsafe.Pointer)) {
 	x.inner.SetTemperatureWithParamsCompletion(params, completion)

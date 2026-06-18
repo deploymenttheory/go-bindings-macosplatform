@@ -35,18 +35,24 @@ func NewMTL4PipelineOptions() *MTL4PipelineOptions {
 	return &MTL4PipelineOptions{inner: raw.MTL4PipelineOptionsFromID(_id)}
 }
 
+// Controls whether to enable or disable Metal Shader Validation for the pipeline.
+//
 // WithShaderValidation sets the shaderValidation property and returns the receiver for chaining.
 func (x *MTL4PipelineOptions) WithShaderValidation(shaderValidation MTLShaderValidation) *MTL4PipelineOptions {
 	x.inner.SetShaderValidation(raw.MTLShaderValidation(shaderValidation))
 	return x
 }
 
+// Controls whether to include Metal shader reflection in this pipeline.
+//
 // WithShaderReflection sets the shaderReflection property and returns the receiver for chaining.
 func (x *MTL4PipelineOptions) WithShaderReflection(shaderReflection MTL4ShaderReflection) *MTL4PipelineOptions {
 	x.inner.SetShaderReflection(raw.MTL4ShaderReflection(shaderReflection))
 	return x
 }
 
+// Controls whether to enable or disable Metal Shader Validation for the pipeline.
+//
 // ShaderValidation calls the underlying ShaderValidation.
 func (x *MTL4PipelineOptions) ShaderValidation() MTLShaderValidation {
 	return MTLShaderValidation(x.inner.ShaderValidation())
@@ -57,6 +63,8 @@ func (x *MTL4PipelineOptions) SetShaderValidation(shaderValidation MTLShaderVali
 	x.inner.SetShaderValidation(raw.MTLShaderValidation(shaderValidation))
 }
 
+// Controls whether to include Metal shader reflection in this pipeline.
+//
 // ShaderReflection calls the underlying ShaderReflection.
 func (x *MTL4PipelineOptions) ShaderReflection() MTL4ShaderReflection {
 	return MTL4ShaderReflection(x.inner.ShaderReflection())

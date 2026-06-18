@@ -36,26 +36,36 @@ func NewMTRDistinguishedNameInfo() *MTRDistinguishedNameInfo {
 	return &MTRDistinguishedNameInfo{inner: raw.MTRDistinguishedNameInfoFromID(_id)}
 }
 
+// The Node ID contained in the DN, if any.  Will be non-nil for the subject of a valid node operational certificate.
+//
 // NodeID calls the underlying NodeID.
 func (x *MTRDistinguishedNameInfo) NodeID() *foundation.NSNumber {
 	return x.inner.NodeID()
 }
 
+// The Fabric ID contained in the DN, if any.  Will be non-nil for the subject of a valid node operational certificate, and may be non-nil for the subject of a valid intermediate or root certificate.
+//
 // FabricID calls the underlying FabricID.
 func (x *MTRDistinguishedNameInfo) FabricID() *foundation.NSNumber {
 	return x.inner.FabricID()
 }
 
+// The `RCAC` ID contained in the DN, if any.  Will be non-nil for the subject of a valid root certificate.
+//
 // RootCACertificateID calls the underlying RootCACertificateID.
 func (x *MTRDistinguishedNameInfo) RootCACertificateID() *foundation.NSNumber {
 	return x.inner.RootCACertificateID()
 }
 
+// The `ICAC` ID contained in the DN, if any.  Will be non-nil for the subject of a valid intermediate certificate.
+//
 // IntermediateCACertificateID calls the underlying IntermediateCACertificateID.
 func (x *MTRDistinguishedNameInfo) IntermediateCACertificateID() *foundation.NSNumber {
 	return x.inner.IntermediateCACertificateID()
 }
 
+// The set of CASE Authenticated Tags contained in the DN.  Maybe be non-empty for the subject of a valid node operational certificate.
+//
 // CaseAuthenticatedTags calls the underlying CaseAuthenticatedTags.
 func (x *MTRDistinguishedNameInfo) CaseAuthenticatedTags() *foundation.NSSet[*foundation.NSNumber] {
 	return x.inner.CaseAuthenticatedTags()

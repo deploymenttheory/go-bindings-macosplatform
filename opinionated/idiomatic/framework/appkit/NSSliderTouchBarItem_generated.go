@@ -37,18 +37,24 @@ func NewSliderTouchBarItem() *SliderTouchBarItem {
 	return &SliderTouchBarItem{inner: raw.NSSliderTouchBarItemFromID(_id)}
 }
 
+// The slider displayed by the bar item. It is automatically created, but can be set to a custom subclass. doubleValue, minValue, maxValue, etc can all be read and set through the slider.
+//
 // WithSlider sets the slider property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithSlider(slider *Slider) *SliderTouchBarItem {
 	x.inner.SetSlider(slider.Unwrap())
 	return x
 }
 
+// The double value of the control
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithDoubleValue(doubleValue float64) *SliderTouchBarItem {
 	x.inner.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The width boundaries of the slider track of this item. The system defines the default minimum. The maximum defaults to MAXFLOAT
+//
 // WithMinimumSliderWidth sets the minimumSliderWidth property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithMinimumSliderWidth(minimumSliderWidth float64) *SliderTouchBarItem {
 	x.inner.SetMinimumSliderWidth(minimumSliderWidth)
@@ -61,42 +67,56 @@ func (x *SliderTouchBarItem) WithMaximumSliderWidth(maximumSliderWidth float64) 
 	return x
 }
 
+// The text label displayed along with the slider. If set to nil, the label will not have space reserved in the item.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithLabel(label string) *SliderTouchBarItem {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// The accessory that appears on the end of the slider with the minimum value
+//
 // WithMinimumValueAccessory sets the minimumValueAccessory property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithMinimumValueAccessory(minimumValueAccessory *SliderAccessory) *SliderTouchBarItem {
 	x.inner.SetMinimumValueAccessory(minimumValueAccessory.Unwrap())
 	return x
 }
 
+// The accessory that appears on the end of the slider with the maximum value
+//
 // WithMaximumValueAccessory sets the maximumValueAccessory property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithMaximumValueAccessory(maximumValueAccessory *SliderAccessory) *SliderTouchBarItem {
 	x.inner.SetMaximumValueAccessory(maximumValueAccessory.Unwrap())
 	return x
 }
 
+// The width of the value accessories. Defaults to `.default`, but can be set to `.wide` or a custom value.
+//
 // WithValueAccessoryWidth sets the valueAccessoryWidth property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithValueAccessoryWidth(valueAccessoryWidth float64) *SliderTouchBarItem {
 	x.inner.SetValueAccessoryWidth(valueAccessoryWidth)
 	return x
 }
 
+// The target of the item, notified when the slider or accessories receive user interaction.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithTarget(target objc.ID) *SliderTouchBarItem {
 	x.inner.SetTarget(target)
 	return x
 }
 
+// The action of the item, called when the slider or accessories receive user interaction.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithAction(action objc.SEL) *SliderTouchBarItem {
 	x.inner.SetAction(action)
 	return x
 }
 
+// The localized string labeling this item during user customization. The default value is empty string.
+//
 // WithCustomizationLabel sets the customizationLabel property and returns the receiver for chaining.
 func (x *SliderTouchBarItem) WithCustomizationLabel(customizationLabel string) *SliderTouchBarItem {
 	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
@@ -109,6 +129,8 @@ func (x *SliderTouchBarItem) WithVisibilityPriority(visibilityPriority float32) 
 	return x
 }
 
+// The slider displayed by the bar item. It is automatically created, but can be set to a custom subclass. doubleValue, minValue, maxValue, etc can all be read and set through the slider.
+//
 // Slider calls the underlying Slider.
 func (x *SliderTouchBarItem) Slider() *Slider {
 	_r := x.inner.Slider()
@@ -123,6 +145,8 @@ func (x *SliderTouchBarItem) SetSlider(slider *raw.NSSlider) {
 	x.inner.SetSlider(slider)
 }
 
+// The double value of the control
+//
 // DoubleValue calls the underlying DoubleValue.
 func (x *SliderTouchBarItem) DoubleValue() float64 {
 	return x.inner.DoubleValue()
@@ -133,6 +157,8 @@ func (x *SliderTouchBarItem) SetDoubleValue(doubleValue float64) {
 	x.inner.SetDoubleValue(doubleValue)
 }
 
+// The width boundaries of the slider track of this item. The system defines the default minimum. The maximum defaults to MAXFLOAT
+//
 // MinimumSliderWidth calls the underlying MinimumSliderWidth.
 func (x *SliderTouchBarItem) MinimumSliderWidth() float64 {
 	return x.inner.MinimumSliderWidth()
@@ -153,6 +179,8 @@ func (x *SliderTouchBarItem) SetMaximumSliderWidth(maximumSliderWidth float64) {
 	x.inner.SetMaximumSliderWidth(maximumSliderWidth)
 }
 
+// The text label displayed along with the slider. If set to nil, the label will not have space reserved in the item.
+//
 // Label calls the underlying Label.
 func (x *SliderTouchBarItem) Label() string {
 	_r := x.inner.Label()
@@ -167,6 +195,8 @@ func (x *SliderTouchBarItem) SetLabel(label string) {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 }
 
+// The accessory that appears on the end of the slider with the minimum value
+//
 // MinimumValueAccessory calls the underlying MinimumValueAccessory.
 func (x *SliderTouchBarItem) MinimumValueAccessory() *SliderAccessory {
 	_r := x.inner.MinimumValueAccessory()
@@ -181,6 +211,8 @@ func (x *SliderTouchBarItem) SetMinimumValueAccessory(minimumValueAccessory *raw
 	x.inner.SetMinimumValueAccessory(minimumValueAccessory)
 }
 
+// The accessory that appears on the end of the slider with the maximum value
+//
 // MaximumValueAccessory calls the underlying MaximumValueAccessory.
 func (x *SliderTouchBarItem) MaximumValueAccessory() *SliderAccessory {
 	_r := x.inner.MaximumValueAccessory()
@@ -195,6 +227,8 @@ func (x *SliderTouchBarItem) SetMaximumValueAccessory(maximumValueAccessory *raw
 	x.inner.SetMaximumValueAccessory(maximumValueAccessory)
 }
 
+// The width of the value accessories. Defaults to `.default`, but can be set to `.wide` or a custom value.
+//
 // ValueAccessoryWidth calls the underlying ValueAccessoryWidth.
 func (x *SliderTouchBarItem) ValueAccessoryWidth() float64 {
 	return x.inner.ValueAccessoryWidth()
@@ -205,6 +239,8 @@ func (x *SliderTouchBarItem) SetValueAccessoryWidth(valueAccessoryWidth float64)
 	x.inner.SetValueAccessoryWidth(valueAccessoryWidth)
 }
 
+// The target of the item, notified when the slider or accessories receive user interaction.
+//
 // Target calls the underlying Target.
 func (x *SliderTouchBarItem) Target() objc.ID {
 	return x.inner.Target()
@@ -215,6 +251,8 @@ func (x *SliderTouchBarItem) SetTarget(target objc.ID) {
 	x.inner.SetTarget(target)
 }
 
+// The action of the item, called when the slider or accessories receive user interaction.
+//
 // Action calls the underlying Action.
 func (x *SliderTouchBarItem) Action() objc.SEL {
 	return x.inner.Action()

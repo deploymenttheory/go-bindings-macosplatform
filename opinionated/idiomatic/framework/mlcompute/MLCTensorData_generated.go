@@ -36,11 +36,15 @@ func NewTensorData() *TensorData {
 	return &TensorData{inner: raw.MLCTensorDataFromID(_id)}
 }
 
+// @property   bytes @abstract   Pointer to memory that contains or will be used for tensor data
+//
 // Bytes calls the underlying Bytes.
 func (x *TensorData) Bytes() unsafe.Pointer {
 	return x.inner.Bytes()
 }
 
+// @property   length @abstract   The size in bytes of the tensor data
+//
 // Length calls the underlying Length.
 func (x *TensorData) Length() uint {
 	return x.inner.Length()

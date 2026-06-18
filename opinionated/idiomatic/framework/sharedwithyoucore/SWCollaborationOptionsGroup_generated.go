@@ -32,6 +32,8 @@ func CollaborationOptionsGroupFromID(id objc.ID) *CollaborationOptionsGroup {
 	return &CollaborationOptionsGroup{inner: raw.SWCollaborationOptionsGroupFromID(id)}
 }
 
+// @abstract Initializes a new option group @param identifier unique identifier for the group @param options SWCollaborationOptions to display in the section
+//
 // NewCollaborationOptionsGroupWithIdentifierOptions creates a new [CollaborationOptionsGroup].
 func NewCollaborationOptionsGroupWithIdentifierOptions(identifier string, options *foundation.NSArray[*raw.SWCollaborationOption]) *CollaborationOptionsGroup {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWCollaborationOptionsGroup")), objc.RegisterName("alloc"))
@@ -39,18 +41,24 @@ func NewCollaborationOptionsGroupWithIdentifierOptions(identifier string, option
 	return &CollaborationOptionsGroup{inner: raw.SWCollaborationOptionsGroupFromID(_id)}
 }
 
+// @abstract Localized string used to title the section
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *CollaborationOptionsGroup) WithTitle(title string) *CollaborationOptionsGroup {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// @abstract Localized string to describe or provide additional information about the group of options
+//
 // WithFooter sets the footer property and returns the receiver for chaining.
 func (x *CollaborationOptionsGroup) WithFooter(footer string) *CollaborationOptionsGroup {
 	x.inner.SetFooter(foundation.NSStringStringWithUTF8String(footer))
 	return x
 }
 
+// @abstract SWCollaborationOptions to be displayed in the group
+//
 // WithOptions sets the collection, converting the Go slice to an NSArray.
 func (x *CollaborationOptionsGroup) WithOptions(items ...*raw.SWCollaborationOption) *CollaborationOptionsGroup {
 	if len(items) == 0 {
@@ -69,6 +77,8 @@ func (x *CollaborationOptionsGroup) WithOptions(items ...*raw.SWCollaborationOpt
 	return x
 }
 
+// @abstract Localized string used to title the section
+//
 // Title calls the underlying Title.
 func (x *CollaborationOptionsGroup) Title() string {
 	_r := x.inner.Title()
@@ -83,6 +93,8 @@ func (x *CollaborationOptionsGroup) SetTitle(title string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
+// @abstract A unique identifier
+//
 // Identifier calls the underlying Identifier.
 func (x *CollaborationOptionsGroup) Identifier() string {
 	_r := x.inner.Identifier()
@@ -92,6 +104,8 @@ func (x *CollaborationOptionsGroup) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Localized string to describe or provide additional information about the group of options
+//
 // Footer calls the underlying Footer.
 func (x *CollaborationOptionsGroup) Footer() string {
 	_r := x.inner.Footer()
@@ -106,6 +120,8 @@ func (x *CollaborationOptionsGroup) SetFooter(footer string) {
 	x.inner.SetFooter(foundation.NSStringStringWithUTF8String(footer))
 }
 
+// @abstract SWCollaborationOptions to be displayed in the group
+//
 // Options returns the collection as a Go slice.
 func (x *CollaborationOptionsGroup) Options() []*CollaborationOption {
 	arr := x.inner.Options()

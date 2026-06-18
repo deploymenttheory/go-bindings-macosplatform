@@ -36,11 +36,15 @@ func NewStateResourceList() *StateResourceList {
 	return &StateResourceList{inner: raw.MPSStateResourceListFromID(_id)}
 }
 
+// @abstract append a texture to the resource list
+//
 // AppendTexture calls the underlying AppendTexture.
 func (x *StateResourceList) AppendTexture(descriptor *metal.MTLTextureDescriptor) {
 	x.inner.AppendTexture(descriptor)
 }
 
+// @abstract append a buffer to the resource list
+//
 // AppendBuffer calls the underlying AppendBuffer.
 func (x *StateResourceList) AppendBuffer(size uint) {
 	x.inner.AppendBuffer(size)

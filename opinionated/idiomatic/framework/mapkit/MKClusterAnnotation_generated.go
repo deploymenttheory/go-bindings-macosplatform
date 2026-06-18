@@ -9,6 +9,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ClusterAnnotation wraps [raw.MKClusterAnnotation] with a fluent Go API.
@@ -32,9 +33,18 @@ func ClusterAnnotationFromID(id objc.ID) *ClusterAnnotation {
 }
 
 // NewClusterAnnotationWithMemberAnnotations creates a new [ClusterAnnotation].
-func NewClusterAnnotationWithMemberAnnotations(memberAnnotations *foundation.NSArray[raw.MKAnnotation]) *ClusterAnnotation {
+func NewClusterAnnotationWithMemberAnnotations(memberAnnotations ...purego.IDer) *ClusterAnnotation {
+	_ptrs := make([]objc.ID, len(memberAnnotations))
+	for _i, _v := range memberAnnotations {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MKAnnotation]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MKAnnotation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKClusterAnnotation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMemberAnnotations:"), memberAnnotations.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMemberAnnotations:"), _arg0.Ptr())
 	return &ClusterAnnotation{inner: raw.MKClusterAnnotationFromID(_id)}
 }
 

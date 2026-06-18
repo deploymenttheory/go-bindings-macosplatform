@@ -41,6 +41,8 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialDescriptorWithCredentialIDTra
 	return &AuthorizationSecurityKeyPublicKeyCredentialDescriptor{inner: raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(_id)}
 }
 
+// @abstract An array indicating transports for the credential indicated by credentialID.
+//
 // WithTransports sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) WithTransports(items ...*foundation.NSString) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
 	if len(items) == 0 {
@@ -59,6 +61,8 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) WithTransports(i
 	return x
 }
 
+// @abstract An array indicating transports for the credential indicated by credentialID.
+//
 // Transports returns the collection as a Go slice.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) Transports() []*foundation.NSString {
 	arr := x.inner.Transports()

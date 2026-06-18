@@ -1,0 +1,1459 @@
+{
+  "schema_version": 1,
+  "framework": "CoreML",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "MLArrayBatchProvider": {
+      "doc": "A convenience wrapper for batches of feature providers.",
+      "url": "https://developer.apple.com/documentation/coreml/mlarraybatchprovider"
+    },
+    "MLCPUComputeDevice": {
+      "doc": "An object that represents a CPU compute device.",
+      "url": "https://developer.apple.com/documentation/coreml/mlcpucomputedevice"
+    },
+    "MLComputePlan": {
+      "doc": "A class representing the compute plan of a model.",
+      "url": "https://developer.apple.com/documentation/coreml/mlcomputeplan"
+    },
+    "MLComputePlanCost": {
+      "doc": "A class that represents the estimated cost of executing a layer or operation.",
+      "url": "https://developer.apple.com/documentation/coreml/mlcomputeplancost"
+    },
+    "MLComputePlanDeviceUsage": {
+      "doc": "The anticipated compute devices to use for executing a layer or operation.",
+      "url": "https://developer.apple.com/documentation/coreml/mlcomputeplandeviceusage"
+    },
+    "MLDictionaryConstraint": {
+      "doc": "The constraint on the keys for a dictionary feature.",
+      "url": "https://developer.apple.com/documentation/coreml/mldictionaryconstraint"
+    },
+    "MLDictionaryFeatureProvider": {
+      "doc": "A convenience wrapper for the given dictionary of data.",
+      "url": "https://developer.apple.com/documentation/coreml/mldictionaryfeatureprovider"
+    },
+    "MLFeatureDescription": {
+      "doc": "The name, type, and constraints of an input or output feature.",
+      "url": "https://developer.apple.com/documentation/coreml/mlfeaturedescription"
+    },
+    "MLFeatureValue": {
+      "doc": "A generic wrapper around an underlying value and the value’s type.",
+      "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue"
+    },
+    "MLGPUComputeDevice": {
+      "doc": "An object that represents a GPU compute device.",
+      "url": "https://developer.apple.com/documentation/coreml/mlgpucomputedevice"
+    },
+    "MLImageConstraint": {
+      "doc": "The width, height, and pixel format constraints of an image feature.",
+      "url": "https://developer.apple.com/documentation/coreml/mlimageconstraint"
+    },
+    "MLImageSize": {
+      "doc": "The width and height of an image feature size.",
+      "url": "https://developer.apple.com/documentation/coreml/mlimagesize"
+    },
+    "MLImageSizeConstraint": {
+      "doc": "A list or range of sizes that augment an image constraint’s default size.",
+      "url": "https://developer.apple.com/documentation/coreml/mlimagesizeconstraint"
+    },
+    "MLKey": {
+      "doc": "An abstract base class for machine learning key types.",
+      "url": "https://developer.apple.com/documentation/coreml/mlkey"
+    },
+    "MLMetricKey": {
+      "doc": "A key for the metrics dictionary in an update context.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmetrickey"
+    },
+    "MLModel": {
+      "doc": "An encapsulation of all the details of your machine learning model.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmodel"
+    },
+    "MLModelAsset": {
+      "doc": "An abstraction of a compiled Core ML model asset.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmodelasset"
+    },
+    "MLModelCollection": {
+      "doc": "A set of Core ML models from a model deployment.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmodelcollection"
+    },
+    "MLModelCollectionEntry": {
+      "doc": "A model and its identifier within a model collection.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmodelcollectionentry"
+    },
+    "MLModelConfiguration": {
+      "doc": "The settings for creating or updating a machine learning model.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmodelconfiguration"
+    },
+    "MLModelDescription": {
+      "doc": "Information about a model, primarily the input and output format for each feature the model expects, and optional metadata.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmodeldescription"
+    },
+    "MLModelStructure": {
+      "doc": "An enum representing the structure of a model.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmodelstructure"
+    },
+    "MLModelStructureNeuralNetwork": {
+      "doc": "A class representing the structure of a NeuralNetwork model.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureneuralnetwork"
+    },
+    "MLModelStructureNeuralNetworkLayer": {
+      "doc": "A class representing a layer in a NeuralNetwork.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureneuralnetworklayer"
+    },
+    "MLModelStructurePipeline": {
+      "doc": "A class representing the structure of a Pipeline model.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmodelstructurepipeline"
+    },
+    "MLModelStructureProgram": {
+      "doc": "A class representing the structure of an ML Program model.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogram"
+    },
+    "MLModelStructureProgramArgument": {
+      "doc": "A class representing an argument in the Program.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogramargument"
+    },
+    "MLModelStructureProgramBinding": {
+      "doc": "A class representing a binding in the Program",
+      "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogrambinding"
+    },
+    "MLModelStructureProgramBlock": {
+      "doc": "A class representing a block in the Program.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogramblock"
+    },
+    "MLModelStructureProgramFunction": {
+      "doc": "A class representing a function in the Program.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogramfunction"
+    },
+    "MLModelStructureProgramNamedValueType": {
+      "doc": "A class representing a named value type in a Program.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogramnamedvaluetype"
+    },
+    "MLModelStructureProgramOperation": {
+      "doc": "A class representing an Operation in a Program.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogramoperation"
+    },
+    "MLModelStructureProgramValue": {
+      "doc": "A class representing a constant value in the Program.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogramvalue"
+    },
+    "MLModelStructureProgramValueType": {
+      "doc": "A class representing the type of a value or a variable in the Program.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogramvaluetype"
+    },
+    "MLMultiArray": {
+      "doc": "A machine learning collection type that stores numeric values in an array with multiple dimensions.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmultiarray"
+    },
+    "MLMultiArrayConstraint": {
+      "doc": "The shape and data type constraints for a multidimensional array feature.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmultiarrayconstraint"
+    },
+    "MLMultiArrayShapeConstraint": {
+      "doc": "The lists of shapes or ranges of shapes that constrain a multiarray feature.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmultiarrayshapeconstraint"
+    },
+    "MLNeuralEngineComputeDevice": {
+      "doc": "An object that represents a Neural Engine compute device.",
+      "url": "https://developer.apple.com/documentation/coreml/mlneuralenginecomputedevice"
+    },
+    "MLNumericConstraint": {
+      "doc": "The value limitations of a number.",
+      "url": "https://developer.apple.com/documentation/coreml/mlnumericconstraint"
+    },
+    "MLOptimizationHints": {
+      "url": "https://developer.apple.com/documentation/coreml/mloptimizationhints"
+    },
+    "MLParameterDescription": {
+      "doc": "A description of a model parameter that includes a default value and a constraint, if applicable.",
+      "url": "https://developer.apple.com/documentation/coreml/mlparameterdescription"
+    },
+    "MLParameterKey": {
+      "doc": "The keys for the parameter dictionary in a model configuration or a model update context.",
+      "url": "https://developer.apple.com/documentation/coreml/mlparameterkey"
+    },
+    "MLPredictionOptions": {
+      "doc": "The options available when making a prediction.",
+      "url": "https://developer.apple.com/documentation/coreml/mlpredictionoptions"
+    },
+    "MLSequence": {
+      "doc": "A machine learning collection type that stores a series of strings or integers.",
+      "url": "https://developer.apple.com/documentation/coreml/mlsequence"
+    },
+    "MLSequenceConstraint": {
+      "doc": "The constraints for a sequence feature.",
+      "url": "https://developer.apple.com/documentation/coreml/mlsequenceconstraint"
+    },
+    "MLState": {
+      "doc": "Handle to the state buffers.",
+      "url": "https://developer.apple.com/documentation/coreml/mlstate"
+    },
+    "MLStateConstraint": {
+      "doc": "Constraint of a state feature value.",
+      "url": "https://developer.apple.com/documentation/coreml/mlstateconstraint"
+    },
+    "MLTask": {
+      "doc": "An abstract base class for machine learning tasks.",
+      "url": "https://developer.apple.com/documentation/coreml/mltask"
+    },
+    "MLUpdateContext": {
+      "doc": "The context an update task provides to your app’s completion and update progress handlers.",
+      "url": "https://developer.apple.com/documentation/coreml/mlupdatecontext"
+    },
+    "MLUpdateProgressHandlers": {
+      "doc": "A collection of closures an update task uses to notify your app of its progress.",
+      "url": "https://developer.apple.com/documentation/coreml/mlupdateprogresshandlers"
+    },
+    "MLUpdateTask": {
+      "doc": "A task that updates a model with additional training data.",
+      "url": "https://developer.apple.com/documentation/coreml/mlupdatetask"
+    }
+  },
+  "protocols": {
+    "MLBatchProvider": {
+      "doc": "An interface that represents a collection of feature providers.",
+      "url": "https://developer.apple.com/documentation/coreml/mlbatchprovider"
+    },
+    "MLComputeDeviceProtocol": {
+      "doc": "An interface that represents a compute device type.",
+      "url": "https://developer.apple.com/documentation/coreml/mlcomputedeviceprotocol"
+    },
+    "MLCustomLayer": {
+      "doc": "An interface that defines the behavior of a custom layer in your neural network model.",
+      "url": "https://developer.apple.com/documentation/coreml/mlcustomlayer"
+    },
+    "MLCustomModel": {
+      "doc": "An interface that defines the behavior of a custom model.",
+      "url": "https://developer.apple.com/documentation/coreml/mlcustommodel"
+    },
+    "MLFeatureProvider": {
+      "doc": "An interface that represents a collection of values for either a model’s input or its output.",
+      "url": "https://developer.apple.com/documentation/coreml/mlfeatureprovider"
+    },
+    "MLWritable": {
+      "doc": "A set of methods that saves a machine learning type to the file system.",
+      "url": "https://developer.apple.com/documentation/coreml/mlwritable"
+    }
+  },
+  "enums": {
+    "MLComputeUnits": {
+      "doc": "The set of processing-unit configurations the model can use to make predictions.",
+      "url": "https://developer.apple.com/documentation/coreml/mlcomputeunits",
+      "members": {
+        "MLComputeUnitsAll": {
+          "doc": "The option you choose to allow the model to use all compute units available, including the neural engine.",
+          "url": "https://developer.apple.com/documentation/coreml/mlcomputeunits/all"
+        },
+        "MLComputeUnitsCPUAndGPU": {
+          "doc": "The option you choose to allow the model to use both the CPU and GPU, but not the neural engine.",
+          "url": "https://developer.apple.com/documentation/coreml/mlcomputeunits/cpuandgpu"
+        },
+        "MLComputeUnitsCPUAndNeuralEngine": {
+          "doc": "The option you choose to allow the model to use both the CPU and neural engine, but not the GPU.",
+          "url": "https://developer.apple.com/documentation/coreml/mlcomputeunits/cpuandneuralengine"
+        },
+        "MLComputeUnitsCPUOnly": {
+          "doc": "The option you choose to limit the model to only use the CPU.",
+          "url": "https://developer.apple.com/documentation/coreml/mlcomputeunits/cpuonly"
+        }
+      }
+    },
+    "MLFeatureType": {
+      "doc": "The possible types for feature values, input features, and output features.",
+      "url": "https://developer.apple.com/documentation/coreml/mlfeaturetype",
+      "members": {
+        "MLFeatureTypeDictionary": {
+          "doc": "The type for dictionary features and feature values.",
+          "url": "https://developer.apple.com/documentation/coreml/mlfeaturetype/dictionary"
+        },
+        "MLFeatureTypeDouble": {
+          "doc": "The type for double features and feature values.",
+          "url": "https://developer.apple.com/documentation/coreml/mlfeaturetype/double"
+        },
+        "MLFeatureTypeImage": {
+          "doc": "The type for image features and feature values.",
+          "url": "https://developer.apple.com/documentation/coreml/mlfeaturetype/image"
+        },
+        "MLFeatureTypeInt64": {
+          "doc": "The type for integer features and feature values.",
+          "url": "https://developer.apple.com/documentation/coreml/mlfeaturetype/int64"
+        },
+        "MLFeatureTypeInvalid": {
+          "doc": "The type for invalid feature values.",
+          "url": "https://developer.apple.com/documentation/coreml/mlfeaturetype/invalid"
+        },
+        "MLFeatureTypeMultiArray": {
+          "doc": "The type for multidimensional array features and feature values.",
+          "url": "https://developer.apple.com/documentation/coreml/mlfeaturetype/multiarray"
+        },
+        "MLFeatureTypeSequence": {
+          "doc": "The type for sequence features and feature values.",
+          "url": "https://developer.apple.com/documentation/coreml/mlfeaturetype/sequence"
+        },
+        "MLFeatureTypeState": {
+          "doc": "MLState. Represents a model state that may be updated in each inference.",
+          "url": "https://developer.apple.com/documentation/coreml/mlfeaturetype/state"
+        },
+        "MLFeatureTypeString": {
+          "doc": "The type for string features and feature values.",
+          "url": "https://developer.apple.com/documentation/coreml/mlfeaturetype/string"
+        }
+      }
+    },
+    "MLImageSizeConstraintType": {
+      "doc": "The modes that determine how the model defines a feature’s image size constraint.",
+      "url": "https://developer.apple.com/documentation/coreml/mlimagesizeconstrainttype",
+      "members": {
+        "MLImageSizeConstraintTypeEnumerated": {
+          "doc": "The image feature accepts image sizes listed in an array.",
+          "url": "https://developer.apple.com/documentation/coreml/mlimagesizeconstrainttype/enumerated"
+        },
+        "MLImageSizeConstraintTypeRange": {
+          "doc": "The image feature accepts image sizes defined by a range of widths and a range of heights.",
+          "url": "https://developer.apple.com/documentation/coreml/mlimagesizeconstrainttype/range"
+        },
+        "MLImageSizeConstraintTypeUnspecified": {
+          "doc": "The image size constraint is not configured and should be ignored.",
+          "url": "https://developer.apple.com/documentation/coreml/mlimagesizeconstrainttype/unspecified"
+        }
+      }
+    },
+    "MLModelError": {
+      "doc": "Information about a Core ML model error.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmodelerror"
+    },
+    "MLMultiArrayDataType": {
+      "doc": "Constants that define the underlying element types a multiarray can store.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmultiarraydatatype",
+      "members": {
+        "MLMultiArrayDataTypeDouble": {
+          "doc": "Designates the multiarray’s elements as doubles.",
+          "url": "https://developer.apple.com/documentation/coreml/mlmultiarraydatatype/double"
+        },
+        "MLMultiArrayDataTypeFloat": {
+          "doc": "Designates the multiarray’s elements as floats.",
+          "url": "https://developer.apple.com/documentation/coreml/mlmultiarraydatatype/float"
+        },
+        "MLMultiArrayDataTypeFloat16": {
+          "doc": "Designates the multiarray’s elements as 16-bit floats.",
+          "url": "https://developer.apple.com/documentation/coreml/mlmultiarraydatatype/float16"
+        },
+        "MLMultiArrayDataTypeFloat32": {
+          "doc": "Designates the multiarray’s elements as 32-bit floats.",
+          "url": "https://developer.apple.com/documentation/coreml/mlmultiarraydatatype/float32"
+        },
+        "MLMultiArrayDataTypeFloat64": {
+          "doc": "Designates the multiarray’s elements as 64-bit floats.",
+          "url": "https://developer.apple.com/documentation/coreml/mlmultiarraydatatype/float64"
+        },
+        "MLMultiArrayDataTypeInt32": {
+          "doc": "Designates the multiarray’s elements as 32-bit integers.",
+          "url": "https://developer.apple.com/documentation/coreml/mlmultiarraydatatype/int32"
+        }
+      }
+    },
+    "MLMultiArrayShapeConstraintType": {
+      "doc": "The possible types of shape constraints.",
+      "url": "https://developer.apple.com/documentation/coreml/mlmultiarrayshapeconstrainttype",
+      "members": {
+        "MLMultiArrayShapeConstraintTypeEnumerated": {
+          "doc": "The constraint is an array of allowed shapes.",
+          "url": "https://developer.apple.com/documentation/coreml/mlmultiarrayshapeconstrainttype/enumerated"
+        },
+        "MLMultiArrayShapeConstraintTypeRange": {
+          "doc": "The constraint is a set of ranges allowed for the array shape.",
+          "url": "https://developer.apple.com/documentation/coreml/mlmultiarrayshapeconstrainttype/range"
+        },
+        "MLMultiArrayShapeConstraintTypeUnspecified": {
+          "doc": "The constraint type is undefined.",
+          "url": "https://developer.apple.com/documentation/coreml/mlmultiarrayshapeconstrainttype/unspecified"
+        }
+      }
+    },
+    "MLReshapeFrequencyHint": {
+      "url": "https://developer.apple.com/documentation/coreml/mlreshapefrequencyhint",
+      "members": {
+        "MLReshapeFrequencyHintFrequent": {
+          "doc": "The input shape is expected to change frequently on each prediction sent to this loaded model instance. Core ML will try to minimize the latency associated with shape changes and avoid expensive shape-specific optimizations prior to prediction computation. While prediction computation may be slower for each specific shape, switching between shapes should be faster. This is the default.",
+          "url": "https://developer.apple.com/documentation/coreml/mlreshapefrequencyhint/mlreshapefrequencyhintfrequent"
+        },
+        "MLReshapeFrequencyHintInfrequent": {
+          "doc": "The input shape is expected to be stable and many/all predictions sent to this loaded model instance would use the same input shapes repeatedly. On the shape change, Core ML re-optimizes the internal engine for the new shape if possible. The re-optimization takes some time, but the subsequent predictions for the shape should run faster.",
+          "url": "https://developer.apple.com/documentation/coreml/mlreshapefrequencyhint/mlreshapefrequencyhintinfrequent"
+        }
+      }
+    },
+    "MLSpecializationStrategy": {
+      "doc": "The optimization strategy for the model specialization.",
+      "url": "https://developer.apple.com/documentation/coreml/mlspecializationstrategy",
+      "members": {
+        "MLSpecializationStrategyDefault": {
+          "doc": "The strategy that works well for most applications.",
+          "url": "https://developer.apple.com/documentation/coreml/mlspecializationstrategy/mlspecializationstrategydefault"
+        },
+        "MLSpecializationStrategyFastPrediction": {
+          "doc": "Prefer the prediction latency at the potential cost of specialization time, memory footprint, and the disk space usage of specialized artifacts.",
+          "url": "https://developer.apple.com/documentation/coreml/mlspecializationstrategy/mlspecializationstrategyfastprediction"
+        }
+      }
+    },
+    "MLTaskState": {
+      "doc": "The state of a machine learning task.",
+      "url": "https://developer.apple.com/documentation/coreml/mltaskstate",
+      "members": {
+        "MLTaskStateCancelling": {
+          "doc": "The state of a machine learning task that’s in mid-termination, before it could finish successfully.",
+          "url": "https://developer.apple.com/documentation/coreml/mltaskstate/cancelling"
+        },
+        "MLTaskStateCompleted": {
+          "doc": "The state of a machine learning task that has finished successfully.",
+          "url": "https://developer.apple.com/documentation/coreml/mltaskstate/completed"
+        },
+        "MLTaskStateFailed": {
+          "doc": "The state of a machine learning task that has terminated due to an error.",
+          "url": "https://developer.apple.com/documentation/coreml/mltaskstate/failed"
+        },
+        "MLTaskStateRunning": {
+          "doc": "The state of a machine learning task that’s executing.",
+          "url": "https://developer.apple.com/documentation/coreml/mltaskstate/running"
+        },
+        "MLTaskStateSuspended": {
+          "doc": "The state of a machine learning task that’s paused.",
+          "url": "https://developer.apple.com/documentation/coreml/mltaskstate/suspended"
+        }
+      }
+    },
+    "MLUpdateProgressEvent": {
+      "doc": "A type of event during a model update task.",
+      "url": "https://developer.apple.com/documentation/coreml/mlupdateprogressevent",
+      "members": {
+        "MLUpdateProgressEventEpochEnd": {
+          "doc": "An event that represents the end of training epoch.",
+          "url": "https://developer.apple.com/documentation/coreml/mlupdateprogressevent/epochend"
+        },
+        "MLUpdateProgressEventMiniBatchEnd": {
+          "doc": "An event that represents the end of a mini-batch within a training epoch.",
+          "url": "https://developer.apple.com/documentation/coreml/mlupdateprogressevent/minibatchend"
+        },
+        "MLUpdateProgressEventTrainingBegin": {
+          "doc": "An event that represents the start of training.",
+          "url": "https://developer.apple.com/documentation/coreml/mlupdateprogressevent/trainingbegin"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a progress event for the given integer.",
+          "url": "https://developer.apple.com/documentation/coreml/mlupdateprogressevent/init(rawvalue:)"
+        }
+      }
+    }
+  },
+  "methods": {
+    "MLArrayBatchProvider": {
+      "-initWithDictionary:error:": {
+        "doc": "Creates a batch provider based on feature names and their associated arrays of data.",
+        "url": "https://developer.apple.com/documentation/coreml/mlarraybatchprovider/init(dictionary:)"
+      },
+      "-initWithFeatureProviderArray:": {
+        "doc": "Creates the batch provider based on the array of feature providers.",
+        "url": "https://developer.apple.com/documentation/coreml/mlarraybatchprovider/init(array:)"
+      }
+    },
+    "MLDictionaryFeatureProvider": {
+      "-initWithDictionary:error:": {
+        "doc": "Creates the feature provider based on a dictionary.",
+        "url": "https://developer.apple.com/documentation/coreml/mldictionaryfeatureprovider/init(dictionary:)"
+      },
+      "-objectForKeyedSubscript:": {
+        "doc": "Subscript interface for the feature provider to pass through to the dictionary.",
+        "url": "https://developer.apple.com/documentation/coreml/mldictionaryfeatureprovider/subscript(_:)"
+      }
+    },
+    "MLFeatureDescription": {
+      "-isAllowedValue:": {
+        "doc": "Checks whether the model will accept an input feature value.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturedescription/isallowedvalue(_:)"
+      }
+    },
+    "MLFeatureValue": {
+      "+featureValueWithCGImage:constraint:options:error:": {
+        "doc": "Construct image feature value from CGImage, using the size and type information required by feature description (orientation is assumed to be kCGImagePropertyOrientationUp)",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(cgimage:constraint:options:)-30mu4"
+      },
+      "+featureValueWithCGImage:orientation:constraint:options:error:": {
+        "doc": "Construct image feature value from CGImage w/ specified orientation, using the size and type information required by feature description",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(cgimage:orientation:constraint:options:)-1djlw"
+      },
+      "+featureValueWithCGImage:orientation:pixelsWide:pixelsHigh:pixelFormatType:options:error:": {
+        "doc": "Construct image feature value from CGImage w/ specified orientation",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(cgimage:orientation:pixelswide:pixelshigh:pixelformattype:options:)-8i6j0"
+      },
+      "+featureValueWithCGImage:pixelsWide:pixelsHigh:pixelFormatType:options:error:": {
+        "doc": "Construct image feature value from CGImage (orientation is assumed to be kCGImagePropertyOrientationUp)",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(cgimage:pixelswide:pixelshigh:pixelformattype:options:)-1pdp4"
+      },
+      "+featureValueWithDictionary:error:": {
+        "doc": "Creates a feature value that contains a dictionary of numbers.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(dictionary:)"
+      },
+      "+featureValueWithDouble:": {
+        "doc": "Creates a feature value that contains a double.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(double:)"
+      },
+      "+featureValueWithImageAtURL:constraint:options:error:": {
+        "doc": "Construct image feature value from an image on disk, using a model specified image constraint. Orientation is read from Exif if avaiable",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(imageat:constraint:options:)"
+      },
+      "+featureValueWithImageAtURL:orientation:constraint:options:error:": {
+        "doc": "Construct image feature value from an image on disk using a model specified image constraint. The passed in orientation supersedes any in the file",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(imageat:orientation:constraint:options:)"
+      },
+      "+featureValueWithImageAtURL:orientation:pixelsWide:pixelsHigh:pixelFormatType:options:error:": {
+        "doc": "Construct image feature value from an image on disk. The passed in orientation supersedes any in the file",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(imageat:orientation:pixelswide:pixelshigh:pixelformattype:options:)"
+      },
+      "+featureValueWithImageAtURL:pixelsWide:pixelsHigh:pixelFormatType:options:error:": {
+        "doc": "Construct image feature value from an image on disk. Orientation is read from Exif if avaiable",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(imageat:pixelswide:pixelshigh:pixelformattype:options:)"
+      },
+      "+featureValueWithInt64:": {
+        "doc": "Creates a feature value that contains an integer.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(int64:)"
+      },
+      "+featureValueWithMultiArray:": {
+        "doc": "Creates a feature value that contains a multidimensional array.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(multiarray:)"
+      },
+      "+featureValueWithPixelBuffer:": {
+        "doc": "Creates a feature value that contains an image from a pixel buffer.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(pixelbuffer:)"
+      },
+      "+featureValueWithSequence:": {
+        "doc": "Creates a feature value that contains a sequence.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(sequence:)"
+      },
+      "+featureValueWithString:": {
+        "doc": "Creates a feature value that contains a string.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(string:)"
+      },
+      "+undefinedFeatureValueWithType:": {
+        "doc": "Creates a feature value with a type that represents an undefined or missing value.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(undefined:)"
+      },
+      "-isEqualToFeatureValue:": {
+        "doc": "Returns a Boolean value that indicates whether a feature value is equal to another.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/isequal(to:)"
+      }
+    },
+    "MLModel": {
+      "+loadContentsOfURL:configuration:completionHandler:": {
+        "doc": "Creates a Core ML model instance asynchronously from a compiled model file, a custom configuration, and a completion handler.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/loadcontentsofurl:configuration:completionhandler:"
+      },
+      "+loadModelAsset:configuration:completionHandler:": {
+        "doc": "Construct a model asynchronously from a compiled model asset.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/load(_:configuration:completionhandler:)"
+      },
+      "+modelWithContentsOfURL:configuration:error:": {
+        "doc": "Creates a Core ML model instance from a compiled model file and a custom configuration.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/init(contentsof:configuration:)"
+      },
+      "+modelWithContentsOfURL:error:": {
+        "doc": "Creates a Core ML model instance from a compiled model file.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/init(contentsof:)"
+      },
+      "-newState": {
+        "doc": "Creates a new state object.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/newstate"
+      },
+      "-parameterValueForKey:error:": {
+        "doc": "Returns a model parameter value for a key.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/parametervalue(for:)"
+      },
+      "-predictionFromFeatures:completionHandler:": {
+        "doc": "Generates a prediction asynchronously from the feature values within the input feature provider.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/predictionfromfeatures:completionhandler:"
+      },
+      "-predictionFromFeatures:error:": {
+        "doc": "Generates a prediction from the feature values within the input feature provider.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/prediction(from:)-9y2aa"
+      },
+      "-predictionFromFeatures:options:completionHandler:": {
+        "doc": "Generates a prediction asynchronously from the feature values within the input feature provider using the prediction options.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/predictionfromfeatures:options:completionhandler:"
+      },
+      "-predictionFromFeatures:options:error:": {
+        "doc": "Generates a prediction from the feature values within the input feature provider using the prediction options.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/prediction(from:options:)-81mr6"
+      },
+      "-predictionFromFeatures:usingState:options:completionHandler:": {
+        "doc": "Run a stateful prediction asynchronously.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/predictionfromfeatures:usingstate:options:completionhandler:"
+      },
+      "-predictionsFromBatch:error:": {
+        "doc": "Generates predictions for each input feature provider within the batch provider.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/predictions(frombatch:)"
+      },
+      "-predictionsFromBatch:options:error:": {
+        "doc": "Generates a prediction for each input feature provider within the batch provider using the prediction options.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/predictions(from:options:)"
+      }
+    },
+    "MLModelAsset": {
+      "+modelAssetWithSpecificationData:blobMapping:error:": {
+        "doc": "Construct a model asset from an ML Program specification by replacing blob file references with corresponding in-memory blobs.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelasset/init(specification:blobmapping:)"
+      },
+      "+modelAssetWithSpecificationData:error:": {
+        "doc": "Creates a model asset from an in-memory model specification.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelasset/init(specification:)"
+      },
+      "+modelAssetWithURL:error:": {
+        "doc": "Constructs a ModelAsset from a compiled model URL.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelasset/init(url:)-43988"
+      },
+      "-functionNamesWithCompletionHandler:": {
+        "doc": "The list of function names in the model asset.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelasset/functionnames(completionhandler:)"
+      },
+      "-modelDescriptionOfFunctionNamed:completionHandler:": {
+        "doc": "The model descripton for a specified function.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelasset/modeldescription(offunctionnamed:completionhandler:)"
+      },
+      "-modelDescriptionWithCompletionHandler:": {
+        "doc": "The default model descripton.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelasset/modeldescription(completionhandler:)"
+      }
+    },
+    "MLModelCollection": {
+      "+beginAccessingModelCollectionWithIdentifier:completionHandler:": {
+        "doc": "Requests access to a model collection.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelcollection/beginaccessingmodelcollectionwithidentifier:completionhandler:"
+      },
+      "+endAccessingModelCollectionWithIdentifier:completionHandler:": {
+        "doc": "Terminates access to a model collection.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelcollection/endaccessing(identifier:)"
+      }
+    },
+    "MLMultiArray": {
+      "+multiArrayByConcatenatingMultiArrays:alongAxis:dataType:": {
+        "doc": "Concatenate MLMultiArrays to form a new MLMultiArray.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/init(concatenating:axis:datatype:)"
+      },
+      "-getBytesWithHandler:": {
+        "doc": "Get the underlying buffer pointer to read.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/getbyteswithhandler:"
+      },
+      "-getMutableBytesWithHandler:": {
+        "doc": "Get the underlying buffer pointer to mutate.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/getmutablebyteswithhandler:"
+      },
+      "-initWithDataPointer:shape:dataType:strides:deallocator:error:": {
+        "doc": "Creates a multiarray from a data pointer.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/init(datapointer:shape:datatype:strides:deallocator:)"
+      },
+      "-initWithPixelBuffer:shape:": {
+        "doc": "Creates a multiarray sharing the surface of a pixel buffer.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/init(pixelbuffer:shape:)"
+      },
+      "-initWithShape:dataType:error:": {
+        "doc": "Creates a multidimensional array with a shape and type.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/init(shape:datatype:)"
+      },
+      "-initWithShape:dataType:strides:": {
+        "doc": "Creates the object with specified strides.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/initwithshape:datatype:strides:"
+      },
+      "-setObject:atIndexedSubscript:": {
+        "doc": "Assigns a number to the multiarray’s element at the location that the linear offset defines.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/setobject:atindexedsubscript:"
+      },
+      "-setObject:forKeyedSubscript:": {
+        "doc": "Assigns a number to the multiarray’s element at the location that the number array defines.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/setobject:forkeyedsubscript:"
+      },
+      "-transferToMultiArray:": {
+        "doc": "Transfer the contents to the destination multi-array.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/transfer(to:)"
+      }
+    },
+    "MLParameterKey": {
+      "-scopedTo:": {
+        "doc": "Creates a copy of a parameter key and adds the scope to it.",
+        "url": "https://developer.apple.com/documentation/coreml/mlparameterkey/scoped(to:)"
+      }
+    },
+    "MLSequence": {
+      "+emptySequenceWithType:": {
+        "doc": "Creates an empty sequence of strings or integers.",
+        "url": "https://developer.apple.com/documentation/coreml/mlsequence/init(empty:)"
+      },
+      "+sequenceWithInt64Array:": {
+        "doc": "Creates a sequence of integers from an array of numbers.",
+        "url": "https://developer.apple.com/documentation/coreml/mlsequence/init(int64s:)"
+      },
+      "+sequenceWithStringArray:": {
+        "doc": "Creates a sequence of strings from a string array.",
+        "url": "https://developer.apple.com/documentation/coreml/mlsequence/init(strings:)"
+      }
+    },
+    "MLState": {
+      "-getMultiArrayForStateNamed:handler:": {
+        "doc": "Gets a mutable view into a state buffer.",
+        "url": "https://developer.apple.com/documentation/coreml/mlstate/getmultiarrayforstatenamed:handler:"
+      }
+    },
+    "MLTask": {
+      "-cancel": {
+        "doc": "Cancels a machine learning task before it completes.",
+        "url": "https://developer.apple.com/documentation/coreml/mltask/cancel()"
+      },
+      "-resume": {
+        "doc": "Begins or resumes a machine learning task.",
+        "url": "https://developer.apple.com/documentation/coreml/mltask/resume()"
+      }
+    },
+    "MLUpdateProgressHandlers": {
+      "-initForEvents:progressHandler:completionHandler:": {
+        "doc": "Creates the collection of closures an update task uses to notify your app of its progress.",
+        "url": "https://developer.apple.com/documentation/coreml/mlupdateprogresshandlers/init(forevents:progresshandler:completionhandler:)"
+      }
+    },
+    "MLUpdateTask": {
+      "+updateTaskForModelAtURL:trainingData:completionHandler:error:": {
+        "doc": "Creates a task that updates the model at the URL with the training data, and calls the completion handler when the update completes.",
+        "url": "https://developer.apple.com/documentation/coreml/mlupdatetask/init(formodelat:trainingdata:completionhandler:)"
+      },
+      "+updateTaskForModelAtURL:trainingData:configuration:completionHandler:error:": {
+        "doc": "Creates a task that updates the model at the URL with the training data and configuration, and calls the completion handler when the update completes.",
+        "url": "https://developer.apple.com/documentation/coreml/mlupdatetask/init(formodelat:trainingdata:configuration:completionhandler:)"
+      },
+      "+updateTaskForModelAtURL:trainingData:configuration:progressHandlers:error:": {
+        "doc": "Creates a task that updates the model at the URL with the training data and configuration, and calls the progress handlers during and after the update.",
+        "url": "https://developer.apple.com/documentation/coreml/mlupdatetask/init(formodelat:trainingdata:configuration:progresshandlers:)"
+      },
+      "+updateTaskForModelAtURL:trainingData:progressHandlers:error:": {
+        "doc": "Creates a task that updates the model at the URL with the training data, and calls the progress handlers during and after the update.",
+        "url": "https://developer.apple.com/documentation/coreml/mlupdatetask/init(formodelat:trainingdata:progresshandlers:)"
+      },
+      "-resumeWithParameters:": {
+        "doc": "Resumes a model update with updated parameter values.",
+        "url": "https://developer.apple.com/documentation/coreml/mlupdatetask/resume(withparameters:)"
+      }
+    }
+  },
+  "properties": {
+    "MLArrayBatchProvider": {
+      "array": {
+        "doc": "The array of feature providers.",
+        "url": "https://developer.apple.com/documentation/coreml/mlarraybatchprovider/array"
+      }
+    },
+    "MLComputePlanCost": {
+      "weight": {
+        "doc": "The estimated workload of executing the operation over the total model execution. The value is between [0.0, 1.0].",
+        "url": "https://developer.apple.com/documentation/coreml/mlcomputeplancost/weight"
+      }
+    },
+    "MLComputePlanDeviceUsage": {
+      "preferredComputeDevice": {
+        "doc": "The compute device that the framework prefers to execute the layer/operation.",
+        "url": "https://developer.apple.com/documentation/coreml/mlcomputeplandeviceusage/preferredcomputedevice"
+      },
+      "supportedComputeDevices": {
+        "doc": "The compute devices that can execute the layer/operation.",
+        "url": "https://developer.apple.com/documentation/coreml/mlcomputeplandeviceusage/supportedcomputedevices"
+      }
+    },
+    "MLDictionaryConstraint": {
+      "keyType": {
+        "doc": "The key type for the dictionary.",
+        "url": "https://developer.apple.com/documentation/coreml/mldictionaryconstraint/keytype"
+      }
+    },
+    "MLDictionaryFeatureProvider": {
+      "dictionary": {
+        "doc": "The backing dictionary.",
+        "url": "https://developer.apple.com/documentation/coreml/mldictionaryfeatureprovider/dictionary"
+      }
+    },
+    "MLFeatureDescription": {
+      "dictionaryConstraint": {
+        "doc": "The constraint for a dictionary feature.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturedescription/dictionaryconstraint"
+      },
+      "imageConstraint": {
+        "doc": "The size and format constraints for an image feature.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturedescription/imageconstraint"
+      },
+      "multiArrayConstraint": {
+        "doc": "The constraints on a multidimensional array feature.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturedescription/multiarrayconstraint"
+      },
+      "name": {
+        "doc": "The name of this feature.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturedescription/name"
+      },
+      "optional": {
+        "doc": "A Boolean value that indicates whether this feature is optional.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturedescription/isoptional"
+      },
+      "sequenceConstraint": {
+        "doc": "The constraints for a sequence feature.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturedescription/sequenceconstraint"
+      },
+      "stateConstraint": {
+        "doc": "The state feature value constraint.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturedescription/stateconstraint"
+      },
+      "type": {
+        "doc": "The type of this feature.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturedescription/type"
+      }
+    },
+    "MLFeatureValue": {
+      "MLFeatureValueImageOption": {
+        "doc": "The initializer options you use to crop and scale an image when creating an image feature value.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/imageoption"
+      },
+      "dictionaryValue": {
+        "doc": "The underlying dictionary of the feature value.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/dictionaryvalue"
+      },
+      "doubleValue": {
+        "doc": "The underlying double of the feature value.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/doublevalue"
+      },
+      "imageBufferValue": {
+        "doc": "The underlying image of the feature value as a pixel buffer.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/imagebuffervalue"
+      },
+      "init(CGImage:constraint:options:)": {
+        "doc": "Creates a feature value that contains an image defined by a core graphics image and a constraint.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(cgimage:constraint:options:)-1j00l"
+      },
+      "init(CGImage:orientation:constraint:options:)": {
+        "doc": "Creates a feature value that contains an image defined by a core graphics image, an orientation, and a constraint.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(cgimage:orientation:constraint:options:)-87vk0"
+      },
+      "init(CGImage:orientation:pixelsWide:pixelsHigh:pixelFormatType:options:)": {
+        "doc": "Creates a feature value that contains an image defined by a core graphics image and its orientation, size, and pixel format.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(cgimage:orientation:pixelswide:pixelshigh:pixelformattype:options:)-4nme0"
+      },
+      "init(CGImage:pixelsWide:pixelsHigh:pixelFormatType:options:)": {
+        "doc": "Creates a feature value that contains an image defined by a core graphics image and its size and pixel format.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(cgimage:pixelswide:pixelshigh:pixelformattype:options:)-2zg43"
+      },
+      "init(_:)": {
+        "doc": "Creates a feature value from a sendable feature value.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(_:)"
+      },
+      "init(imageAtURL:constraint:options:)": {
+        "doc": "Creates a feature value that contains an image defined by an image URL and a constraint.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(imageaturl:constraint:options:)"
+      },
+      "init(imageAtURL:orientation:constraint:options:)": {
+        "doc": "Creates a feature value that contains an image defined by an image URL, an orientation, and a constraint.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(imageaturl:orientation:constraint:options:)"
+      },
+      "init(imageAtURL:orientation:pixelsWide:pixelsHigh:pixelFormatType:options:)": {
+        "doc": "Creates a feature value that contains an image defined by an image URL and the image’s orientation, size, and pixel format.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(imageaturl:orientation:pixelswide:pixelshigh:pixelformattype:options:)"
+      },
+      "init(imageAtURL:pixelsWide:pixelsHigh:pixelFormatType:options:)": {
+        "doc": "Creates a feature value that contains an image defined by an image URL and the image’s size and pixel format.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(imageaturl:pixelswide:pixelshigh:pixelformattype:options:)"
+      },
+      "init(shapedArray:)": {
+        "doc": "Creates a feature value that contains a shaped array.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/init(shapedarray:)"
+      },
+      "int64Value": {
+        "doc": "The underlying integer of the feature value.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/int64value"
+      },
+      "multiArrayValue": {
+        "doc": "The underlying multiarray of the feature value.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/multiarrayvalue"
+      },
+      "sequenceValue": {
+        "doc": "The underlying sequence of the feature value.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/sequencevalue"
+      },
+      "shapedArrayValue(of:)": {
+        "doc": "Returns the underlying shaped array of the feature value.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/shapedarrayvalue(of:)"
+      },
+      "stringValue": {
+        "doc": "The underlying string of the feature value.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/stringvalue"
+      },
+      "type": {
+        "doc": "The type of the feature value.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/type"
+      },
+      "undefined": {
+        "doc": "A Boolean value that indicates whether the feature value is undefined or missing.",
+        "url": "https://developer.apple.com/documentation/coreml/mlfeaturevalue/isundefined"
+      }
+    },
+    "MLGPUComputeDevice": {
+      "metalDevice": {
+        "doc": "The device that represents the underlying metal device.",
+        "url": "https://developer.apple.com/documentation/coreml/mlgpucomputedevice/metaldevice"
+      }
+    },
+    "MLImageConstraint": {
+      "pixelFormatType": {
+        "doc": "The model’s pixel format for an image feature.",
+        "url": "https://developer.apple.com/documentation/coreml/mlimageconstraint/pixelformattype"
+      },
+      "pixelsHigh": {
+        "doc": "The model’s default height for an image feature.",
+        "url": "https://developer.apple.com/documentation/coreml/mlimageconstraint/pixelshigh"
+      },
+      "pixelsWide": {
+        "doc": "The model’s default width for an image feature.",
+        "url": "https://developer.apple.com/documentation/coreml/mlimageconstraint/pixelswide"
+      },
+      "sizeConstraint": {
+        "doc": "Additional sizes this image feature supports.",
+        "url": "https://developer.apple.com/documentation/coreml/mlimageconstraint/sizeconstraint"
+      }
+    },
+    "MLImageSize": {
+      "pixelsHigh": {
+        "doc": "The height of an image feature in pixels.",
+        "url": "https://developer.apple.com/documentation/coreml/mlimagesize/pixelshigh"
+      },
+      "pixelsWide": {
+        "doc": "The width of an image feature in pixels.",
+        "url": "https://developer.apple.com/documentation/coreml/mlimagesize/pixelswide"
+      }
+    },
+    "MLImageSizeConstraint": {
+      "enumeratedImageSizes": {
+        "doc": "An array of image sizes a model’s image feature accepts as input or produces as output.",
+        "url": "https://developer.apple.com/documentation/coreml/mlimagesizeconstraint/enumeratedimagesizes"
+      },
+      "pixelsHighRange": {
+        "doc": "The range of heights a model’s image feature accepts as input or produces as output.",
+        "url": "https://developer.apple.com/documentation/coreml/mlimagesizeconstraint/pixelshighrange"
+      },
+      "pixelsWideRange": {
+        "doc": "The range of widths a model’s image feature accepts as input or produces as output.",
+        "url": "https://developer.apple.com/documentation/coreml/mlimagesizeconstraint/pixelswiderange"
+      },
+      "type": {
+        "doc": "Indicator of which properties to inspect for this image size constraint.",
+        "url": "https://developer.apple.com/documentation/coreml/mlimagesizeconstraint/type"
+      }
+    },
+    "MLKey": {
+      "name": {
+        "doc": "The name of the machine learning key.",
+        "url": "https://developer.apple.com/documentation/coreml/mlkey/name"
+      },
+      "scope": {
+        "doc": "The applicable scope of the machine learning key.",
+        "url": "https://developer.apple.com/documentation/coreml/mlkey/scope"
+      }
+    },
+    "MLMetricKey": {
+      "epochIndex": {
+        "doc": "The key you use to access the epoch index (an Int64 value).",
+        "url": "https://developer.apple.com/documentation/coreml/mlmetrickey/epochindex"
+      },
+      "lossValue": {
+        "doc": "The key you use to access the current loss (a float value).",
+        "url": "https://developer.apple.com/documentation/coreml/mlmetrickey/lossvalue"
+      },
+      "miniBatchIndex": {
+        "doc": "The key you use to access the mini-batch index (an Int64 value) within an epoch.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmetrickey/minibatchindex"
+      }
+    },
+    "MLModel": {
+      "availableComputeDevices": {
+        "doc": "The list of available compute devices that the model’s prediction methods use.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/availablecomputedevices-6klyt"
+      },
+      "compileModel(at:completionHandler:)": {
+        "doc": "Compile a model for a device.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/compilemodel(at:completionhandler:)"
+      },
+      "configuration": {
+        "doc": "The configuration of the model set during initialization.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/configuration"
+      },
+      "load(contentsOf:configuration:)": {
+        "doc": "Construct a model asynchronously from a compiled model asset.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/load(contentsof:configuration:)"
+      },
+      "load(contentsOf:configuration:completionHandler:)": {
+        "doc": "Creates a Core ML model instance asynchronously from a compiled model file, a custom configuration, and a completion handler.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/load(contentsof:configuration:completionhandler:)"
+      },
+      "makeState()": {
+        "doc": "Creates a new state object.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/makestate()"
+      },
+      "modelDescription": {
+        "doc": "Model information you use at runtime during development, which Xcode also displays in its Core ML model editor view.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodel/modeldescription"
+      }
+    },
+    "MLModelCollection": {
+      "MLModelCollectionDidChangeNotification": {
+        "doc": "The notification the framework sends when it receives an update to a model collection.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelcollection/didchangenotification"
+      },
+      "MLModelCollectionEntry": {
+        "doc": "A model and its identifier within a model collection.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelcollection/entry"
+      },
+      "deploymentID": {
+        "doc": "The unique identifier of the model collection’s deployment.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelcollection/deploymentid"
+      },
+      "entries": {
+        "doc": "A dictionary of model entries keyed to the models’ identifiers.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelcollection/entries"
+      },
+      "identifier": {
+        "doc": "The name of the model collection, unique to the development team.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelcollection/identifier"
+      }
+    },
+    "MLModelConfiguration": {
+      "allowLowPrecisionAccumulationOnGPU": {
+        "doc": "A Boolean value that determines whether to allow low-precision accumulation on a GPU.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelconfiguration/allowlowprecisionaccumulationongpu"
+      },
+      "computeUnits": {
+        "doc": "The processing unit or units the model uses to make predictions.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelconfiguration/computeunits"
+      },
+      "functionName": {
+        "doc": "Function name that MLModel will use.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelconfiguration/functionname"
+      },
+      "modelDisplayName": {
+        "doc": "A human readable name of a model for display purposes.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelconfiguration/modeldisplayname"
+      },
+      "optimizationHints": {
+        "doc": "A group of hints for CoreML to optimize",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelconfiguration/optimizationhints-1oq0g"
+      },
+      "parameters": {
+        "doc": "A dictionary of configuration settings your app can override when loading a model.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelconfiguration/parameters"
+      },
+      "preferredMetalDevice": {
+        "doc": "The metal device you prefer this model use to make predictions (inference) and update the model.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelconfiguration/preferredmetaldevice"
+      }
+    },
+    "MLModelDescription": {
+      "classLabels": {
+        "doc": "An array of labels, which can be either strings or a numbers, for classifier models.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodeldescription/classlabels"
+      },
+      "inputDescriptionsByName": {
+        "doc": "A dictionary of input feature descriptions, which the model keys by the input’s name.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodeldescription/inputdescriptionsbyname"
+      },
+      "isUpdatable": {
+        "doc": "A Boolean value that indicates whether you can update the model with additional training.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodeldescription/isupdatable"
+      },
+      "metadata": {
+        "doc": "A dictionary of the model’s creation information, such as its description, author, version, and license.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodeldescription/metadata"
+      },
+      "outputDescriptionsByName": {
+        "doc": "A dictionary of output feature descriptions, which the model keys by the output’s name.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodeldescription/outputdescriptionsbyname"
+      },
+      "parameterDescriptionsByKey": {
+        "doc": "A dictionary of the descriptions for the model’s parameters.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodeldescription/parameterdescriptionsbykey"
+      },
+      "predictedFeatureName": {
+        "doc": "The name of the primary prediction feature output description.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodeldescription/predictedfeaturename"
+      },
+      "predictedProbabilitiesName": {
+        "doc": "The name of the feature output description for all probabilities of a prediction.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodeldescription/predictedprobabilitiesname"
+      },
+      "stateDescriptionsByName": {
+        "doc": "Description of the state features.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodeldescription/statedescriptionsbyname"
+      },
+      "trainingInputDescriptionsByName": {
+        "doc": "A dictionary of the training input feature descriptions, which the model keys by the input’s name.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodeldescription/traininginputdescriptionsbyname"
+      }
+    },
+    "MLModelStructureNeuralNetwork": {
+      "layers": {
+        "doc": "The topologically sorted layers in the NeuralNetwork.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureneuralnetwork/layers"
+      }
+    },
+    "MLModelStructureNeuralNetworkLayer": {
+      "inputNames": {
+        "doc": "The input names.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureneuralnetworklayer/inputnames"
+      },
+      "name": {
+        "doc": "The layer name.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureneuralnetworklayer/name"
+      },
+      "outputNames": {
+        "doc": "The output names.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureneuralnetworklayer/outputnames"
+      },
+      "type": {
+        "doc": "The type of the layer, e,g, “elementwise”, “pooling”, etc.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureneuralnetworklayer/type"
+      }
+    },
+    "MLModelStructurePipeline": {
+      "subModelNames": {
+        "doc": "The names of the sub models in the pipeline.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructurepipeline/submodelnames"
+      },
+      "subModels": {
+        "doc": "The structure of the sub models in the pipeline.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructurepipeline/submodels"
+      }
+    },
+    "MLModelStructureProgram": {
+      "functions": {
+        "doc": "The functions in the program.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogram/functions"
+      }
+    },
+    "MLModelStructureProgramArgument": {
+      "bindings": {
+        "doc": "The array of bindings.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogramargument/bindings"
+      }
+    },
+    "MLModelStructureProgramBinding": {
+      "name": {
+        "doc": "The name of the variable in the Program.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogrambinding/name"
+      },
+      "value": {
+        "doc": "The compile time constant value in the Program.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogrambinding/value"
+      }
+    },
+    "MLModelStructureProgramBlock": {
+      "inputs": {
+        "doc": "The named inputs to the block.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogramblock/inputs"
+      },
+      "operations": {
+        "doc": "The list of topologically sorted operations in the block.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogramblock/operations"
+      },
+      "outputNames": {
+        "doc": "The output names.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogramblock/outputnames"
+      }
+    },
+    "MLModelStructureProgramFunction": {
+      "block": {
+        "doc": "The active block in the function.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogramfunction/block"
+      },
+      "inputs": {
+        "doc": "The named inputs to the function.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogramfunction/inputs"
+      }
+    },
+    "MLModelStructureProgramNamedValueType": {
+      "name": {
+        "doc": "The name of the parameter.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogramnamedvaluetype/name"
+      },
+      "type": {
+        "doc": "The type of the parameter.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogramnamedvaluetype/type"
+      }
+    },
+    "MLModelStructureProgramOperation": {
+      "blocks": {
+        "doc": "Nested blocks for loops and conditionals, e.g., a conditional block will have two entries here.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogramoperation/blocks"
+      },
+      "inputs": {
+        "doc": "The arguments to the Operation.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogramoperation/inputs"
+      },
+      "operatorName": {
+        "doc": "The name of the operator, e.g., “conv”, “pool”, “softmax”, etc.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogramoperation/operatorname"
+      },
+      "outputs": {
+        "doc": "The outputs of the Operation.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmodelstructureprogramoperation/outputs"
+      }
+    },
+    "MLMultiArray": {
+      "count": {
+        "doc": "The total number of elements in the multiarray.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/count"
+      },
+      "dataPointer": {
+        "doc": "A pointer to the multiarray’s underlying memory.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/datapointer"
+      },
+      "dataType": {
+        "doc": "The underlying type of the multiarray.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/datatype"
+      },
+      "init(_:)": {
+        "doc": "An MLMultiArray constructed with the FixedWidthInteger elements of the collection converted to Int32.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/init(_:)"
+      },
+      "init(byConcatenatingMultiArrays:alongAxis:dataType:)": {
+        "doc": "Merges an array of multiarrays into one multiarray along an axis.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/init(byconcatenatingmultiarrays:alongaxis:datatype:)"
+      },
+      "init(shape:dataType:strides:)": {
+        "doc": "Creates the object with specified strides.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/init(shape:datatype:strides:)"
+      },
+      "pixelBuffer": {
+        "doc": "A reference to the multiarray’s underlying pixel buffer.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/pixelbuffer"
+      },
+      "shape": {
+        "doc": "The multiarray’s multidimensional shape as a number array in which each element’s value is the size of the corresponding dimension.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/shape"
+      },
+      "strides": {
+        "doc": "A number array in which each element is the number of memory locations that span the length of the corresponding dimension.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/strides"
+      },
+      "withUnsafeBufferPointer(ofType:_:)": {
+        "doc": "Calls a given closure with a raw pointer to the multiarray’s storage.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/withunsafebufferpointer(oftype:_:)"
+      },
+      "withUnsafeBytes(_:)": {
+        "doc": "Calls a given closure with a raw pointer to the multiarray’s storage.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/withunsafebytes(_:)"
+      },
+      "withUnsafeMutableBufferPointer(ofType:_:)": {
+        "doc": "Calls a given closure with a raw pointer to the multiarray’s mutable storage.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/withunsafemutablebufferpointer(oftype:_:)"
+      },
+      "withUnsafeMutableBytes(_:)": {
+        "doc": "Calls a given closure with a raw pointer to the multiarray’s mutable storage.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarray/withunsafemutablebytes(_:)"
+      }
+    },
+    "MLMultiArrayConstraint": {
+      "dataType": {
+        "doc": "The type for the multi array.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarrayconstraint/datatype"
+      },
+      "shape": {
+        "doc": "The shape of the multi array.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarrayconstraint/shape"
+      },
+      "shapeConstraint": {
+        "doc": "The constraint on the shape of the multiarray.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarrayconstraint/shapeconstraint"
+      }
+    },
+    "MLMultiArrayShapeConstraint": {
+      "enumeratedShapes": {
+        "doc": "Array of allowed shapes for a multiarray feature.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarrayshapeconstraint/enumeratedshapes"
+      },
+      "sizeRangeForDimension": {
+        "doc": "The allowable range for a dimention of the multiarray.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarrayshapeconstraint/sizerangefordimension"
+      },
+      "type": {
+        "doc": "The type of the shape constraint.",
+        "url": "https://developer.apple.com/documentation/coreml/mlmultiarrayshapeconstraint/type"
+      }
+    },
+    "MLNeuralEngineComputeDevice": {
+      "totalCoreCount": {
+        "doc": "The total number of cores in the Neural Engine.",
+        "url": "https://developer.apple.com/documentation/coreml/mlneuralenginecomputedevice/totalcorecount"
+      }
+    },
+    "MLNumericConstraint": {
+      "enumeratedNumbers": {
+        "doc": "A set of the numbers allowed in this constraint.",
+        "url": "https://developer.apple.com/documentation/coreml/mlnumericconstraint/enumeratednumbers"
+      },
+      "maxNumber": {
+        "doc": "The largest numerical value allowed by this constraint.",
+        "url": "https://developer.apple.com/documentation/coreml/mlnumericconstraint/maxnumber"
+      },
+      "minNumber": {
+        "doc": "The smallest numerical value allowed by this constraint.",
+        "url": "https://developer.apple.com/documentation/coreml/mlnumericconstraint/minnumber"
+      }
+    },
+    "MLParameterDescription": {
+      "defaultValue": {
+        "doc": "The default value for the parameter.",
+        "url": "https://developer.apple.com/documentation/coreml/mlparameterdescription/defaultvalue"
+      },
+      "key": {
+        "doc": "The key for this parameter description value.",
+        "url": "https://developer.apple.com/documentation/coreml/mlparameterdescription/key"
+      },
+      "numericConstraint": {
+        "doc": "The constraints of this paramter description value, if and only if the value is numerical.",
+        "url": "https://developer.apple.com/documentation/coreml/mlparameterdescription/numericconstraint"
+      }
+    },
+    "MLParameterKey": {
+      "beta1": {
+        "doc": "The key you use to access the Adam optimizer’s first beta parameter.",
+        "url": "https://developer.apple.com/documentation/coreml/mlparameterkey/beta1"
+      },
+      "beta2": {
+        "doc": "The key you use to access the Adam optimizer’s second beta parameter.",
+        "url": "https://developer.apple.com/documentation/coreml/mlparameterkey/beta2"
+      },
+      "biases": {
+        "doc": "The key you use to access the biases of a layer in a neural network model.",
+        "url": "https://developer.apple.com/documentation/coreml/mlparameterkey/biases"
+      },
+      "epochs": {
+        "doc": "The key you use to access the optimizer’s epochs parameter.",
+        "url": "https://developer.apple.com/documentation/coreml/mlparameterkey/epochs"
+      },
+      "eps": {
+        "doc": "The key you use to access the Adam optimizer’s epsilon parameter.",
+        "url": "https://developer.apple.com/documentation/coreml/mlparameterkey/eps"
+      },
+      "learningRate": {
+        "doc": "The key you use to access the optimizer’s learning rate parameter.",
+        "url": "https://developer.apple.com/documentation/coreml/mlparameterkey/learningrate"
+      },
+      "linkedModelFileName": {
+        "doc": "The key you use to access the linked model’s filename.",
+        "url": "https://developer.apple.com/documentation/coreml/mlparameterkey/linkedmodelfilename"
+      },
+      "linkedModelSearchPath": {
+        "doc": "The key you use to access the linked model’s search path.",
+        "url": "https://developer.apple.com/documentation/coreml/mlparameterkey/linkedmodelsearchpath"
+      },
+      "miniBatchSize": {
+        "doc": "The key you use to access the optimizer’s mini batch-size parameter.",
+        "url": "https://developer.apple.com/documentation/coreml/mlparameterkey/minibatchsize"
+      },
+      "momentum": {
+        "doc": "The key you use to access the stochastic gradient descent (SGD) optimizer’s momentum parameter.",
+        "url": "https://developer.apple.com/documentation/coreml/mlparameterkey/momentum"
+      },
+      "numberOfNeighbors": {
+        "doc": "The key you use to access the number of neighbors that adjusts the affinity of a k-nearest-neighbor model.",
+        "url": "https://developer.apple.com/documentation/coreml/mlparameterkey/numberofneighbors"
+      },
+      "seed": {
+        "doc": "The key you use to access the seed parameter that initializes the random number generator for the shuffle option.",
+        "url": "https://developer.apple.com/documentation/coreml/mlparameterkey/seed"
+      },
+      "shuffle": {
+        "doc": "The key you use to access the shuffle parameter, a Boolean value that determines whether the model randomizes the data between epochs.",
+        "url": "https://developer.apple.com/documentation/coreml/mlparameterkey/shuffle"
+      },
+      "weights": {
+        "doc": "The key you use to access the weights of a layer in a neural network model.",
+        "url": "https://developer.apple.com/documentation/coreml/mlparameterkey/weights"
+      }
+    },
+    "MLPredictionOptions": {
+      "outputBackings": {
+        "doc": "A dictionary of feature names and client-allocated buffers.",
+        "url": "https://developer.apple.com/documentation/coreml/mlpredictionoptions/outputbackings"
+      },
+      "usesCPUOnly": {
+        "doc": "A Boolean value that indicates whether a prediction is computed using only the CPU.",
+        "url": "https://developer.apple.com/documentation/coreml/mlpredictionoptions/usescpuonly"
+      }
+    },
+    "MLSequence": {
+      "int64Values": {
+        "doc": "An array of 64-bit integers in the sequence.",
+        "url": "https://developer.apple.com/documentation/coreml/mlsequence/int64values"
+      },
+      "stringValues": {
+        "doc": "An array of strings in the sequence.",
+        "url": "https://developer.apple.com/documentation/coreml/mlsequence/stringvalues"
+      },
+      "type": {
+        "doc": "The underlying type of the sequence’s elements.",
+        "url": "https://developer.apple.com/documentation/coreml/mlsequence/type"
+      }
+    },
+    "MLSequenceConstraint": {
+      "countRange": {
+        "doc": "The range of values allowed for the sequence’s length.",
+        "url": "https://developer.apple.com/documentation/coreml/mlsequenceconstraint/countrange"
+      },
+      "valueDescription": {
+        "doc": "The description that all sequence elements must match.",
+        "url": "https://developer.apple.com/documentation/coreml/mlsequenceconstraint/valuedescription"
+      }
+    },
+    "MLStateConstraint": {
+      "bufferShape": {
+        "doc": "The shape of the state buffer.",
+        "url": "https://developer.apple.com/documentation/coreml/mlstateconstraint/buffershape-4zb3w"
+      },
+      "dataType": {
+        "doc": "The data type of scalars in the state buffer.",
+        "url": "https://developer.apple.com/documentation/coreml/mlstateconstraint/datatype"
+      }
+    },
+    "MLTask": {
+      "error": {
+        "doc": "The underlying error if the task is in a failed state.",
+        "url": "https://developer.apple.com/documentation/coreml/mltask/error"
+      },
+      "state": {
+        "doc": "The current state of the machine learning task.",
+        "url": "https://developer.apple.com/documentation/coreml/mltask/state"
+      },
+      "taskIdentifier": {
+        "doc": "A unique name of the task to distinguish it from all other tasks at runtime.",
+        "url": "https://developer.apple.com/documentation/coreml/mltask/taskidentifier"
+      }
+    },
+    "MLUpdateContext": {
+      "event": {
+        "doc": "The event type that triggered an update task to notify your app’s completion and update progress handlers.",
+        "url": "https://developer.apple.com/documentation/coreml/mlupdatecontext/event"
+      },
+      "metrics": {
+        "doc": "The training metrics of the model for the update task, contained in a dictionary.",
+        "url": "https://developer.apple.com/documentation/coreml/mlupdatecontext/metrics"
+      },
+      "model": {
+        "doc": "The underlying Core ML model stored in memory.",
+        "url": "https://developer.apple.com/documentation/coreml/mlupdatecontext/model"
+      },
+      "parameters": {
+        "doc": "The parameters for the update task.",
+        "url": "https://developer.apple.com/documentation/coreml/mlupdatecontext/parameters"
+      },
+      "task": {
+        "doc": "The update task that generated the update context.",
+        "url": "https://developer.apple.com/documentation/coreml/mlupdatecontext/task"
+      }
+    }
+  }
+}

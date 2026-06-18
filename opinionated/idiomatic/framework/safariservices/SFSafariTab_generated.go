@@ -37,6 +37,8 @@ func NewSafariTab() *SafariTab {
 	return &SafariTab{inner: raw.SFSafariTabFromID(_id)}
 }
 
+// This calls the completion handler passing the active page in the tab.
+//
 // GetActivePage blocks until the operation completes or ctx is cancelled.
 func (x *SafariTab) GetActivePage(ctx context.Context) (*SafariPage, error) {
 	type _result struct {
@@ -60,6 +62,8 @@ func (x *SafariTab) GetActivePage(ctx context.Context) (*SafariPage, error) {
 	}
 }
 
+// This calls the completion handler passing all the pages in the tab. This includes the active page and any pages being preloaded by Safari.
+//
 // GetPages blocks until the operation completes or ctx is cancelled.
 func (x *SafariTab) GetPages(ctx context.Context) (*foundation.NSArray[*raw.SFSafariPage], error) {
 	type _result struct {
@@ -81,6 +85,8 @@ func (x *SafariTab) GetPages(ctx context.Context) (*foundation.NSArray[*raw.SFSa
 	}
 }
 
+// This calls completion handler with the window containing this tab. If the tab is pinned, the window is nil.
+//
 // GetContainingWindow blocks until the operation completes or ctx is cancelled.
 func (x *SafariTab) GetContainingWindow(ctx context.Context) (*SafariWindow, error) {
 	type _result struct {
@@ -104,6 +110,8 @@ func (x *SafariTab) GetContainingWindow(ctx context.Context) (*SafariWindow, err
 	}
 }
 
+// Activates this tab in the window it belongs to.
+//
 // Activate blocks until the operation completes or ctx is cancelled.
 func (x *SafariTab) Activate(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -118,11 +126,15 @@ func (x *SafariTab) Activate(ctx context.Context) error {
 	}
 }
 
+// Navigates this tab to the given URL. The extension doesn't need permission to access the URL to navigate to it.
+//
 // NavigateToURL calls the underlying NavigateToURL.
 func (x *SafariTab) NavigateToURL(url string) {
 	x.inner.NavigateToURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 }
 
+// Closes this tab. If this is the last tab in its window, the window is also closed.
+//
 // Close calls the underlying Close.
 func (x *SafariTab) Close() {
 	x.inner.Close()

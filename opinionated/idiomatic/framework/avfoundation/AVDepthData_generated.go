@@ -39,6 +39,8 @@ func NewDepthData() *DepthData {
 	return &DepthData{inner: raw.AVDepthDataFromID(_id)}
 }
 
+// @method depthDataByConvertingToDepthDataType: @abstract Returns a converted, derivative AVDepthData instance in the specified depthDataType. @param depthDataType The OSType of depthData object to which you'd like to convert. Must be present in availableDepthDataTypes. @result An AVDepthData instance. @discussion This method throws an NSInvalidArgumentException if you pass an unrecognized depthDataType. See
+//
 // DepthDataByConvertingToDepthDataType calls the underlying DepthDataByConvertingToDepthDataType.
 func (x *DepthData) DepthDataByConvertingToDepthDataType(depthDataType uint) *DepthData {
 	_r := x.inner.DepthDataByConvertingToDepthDataType(depthDataType)
@@ -48,6 +50,8 @@ func (x *DepthData) DepthDataByConvertingToDepthDataType(depthDataType uint) *De
 	return &DepthData{inner: _r}
 }
 
+// @method depthDataByApplyingExifOrientation: @abstract Returns a derivative AVDepthData instance in which the specified Exif orientation has been applied. @param exifOrientation One of the 8 standard Exif orientation tags expressing how the depth data should be rotated / mirrored. @result An AVDepthData instance. @discussion When applying simple 90 degree rotation or mirroring edits to media containing depth data, you may use this initializer to create a derivative copy of the depth in which the specified orientation is applied to both the underlying pixel map data and the camera calibration data. This method throws an NSInvalidArgumentException if you pass an unrecognized exifOrientation.
+//
 // DepthDataByApplyingExifOrientation calls the underlying DepthDataByApplyingExifOrientation.
 func (x *DepthData) DepthDataByApplyingExifOrientation(exifOrientation imageio.CGImagePropertyOrientation) *DepthData {
 	_r := x.inner.DepthDataByApplyingExifOrientation(exifOrientation)
@@ -57,6 +61,8 @@ func (x *DepthData) DepthDataByApplyingExifOrientation(exifOrientation imageio.C
 	return &DepthData{inner: _r}
 }
 
+// @method depthDataByReplacingDepthDataMapWithPixelBuffer:error: @abstract Returns an AVDepthData instance wrapping the replacement depth data map pixel buffer. @param pixelBuffer A pixel buffer containing depth data information in one of the 4 supported disparity / depth pixel formats. @param outError On return, if the depth data cannot be created, points to an NSError describing the problem. @result An AVDepthData instance, or nil if the pixel buffer is malformed. @discussion When applying complex edits to media containing depth data, you may create a derivative map with arbitrary transforms applied to it, then use this initializer to create a new AVDepthData. Note that this new depth data object has no camera calibration data, so its cameraCalibrationData property always returns nil.
+//
 // DepthDataByReplacingDepthDataMapWithPixelBufferError calls the underlying DepthDataByReplacingDepthDataMapWithPixelBufferError.
 func (x *DepthData) DepthDataByReplacingDepthDataMapWithPixelBufferError(pixelBuffer unsafe.Pointer) (*DepthData, error) {
 	_r, _err := x.inner.DepthDataByReplacingDepthDataMapWithPixelBufferError(pixelBuffer)
@@ -69,11 +75,15 @@ func (x *DepthData) DepthDataByReplacingDepthDataMapWithPixelBufferError(pixelBu
 	return &DepthData{inner: _r}, nil
 }
 
+// @method dictionaryRepresentationForAuxiliaryDataType: @abstract Returns a dictionary of primitive map information to be used when writing an image file with depth data. @param outAuxDataType On output, either kCGImageAuxiliaryDataTypeDisparity or kCGImageAuxiliaryDataTypeDepth, depending on the depth data's file. @result A dictionary of CGImageDestination compatible depth information, or nil if the auxDataType is unsupported. @discussion When using ImageIO framework's CGImageDestination API to write depth data to a HEIF or JPEG file, you may use this method to generate a dictionary of primitive map information consumed by CGImageDestinationAddAuxiliaryDataInfo.
+//
 // DictionaryRepresentationForAuxiliaryDataType calls the underlying DictionaryRepresentationForAuxiliaryDataType.
 func (x *DepthData) DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.DictionaryRepresentationForAuxiliaryDataType(foundation.NSStringStringWithUTF8String(outAuxDataType))
 }
 
+// @property availableDepthDataTypes @abstract Specifies which depth data pixel formats may be used with depthDataByConvertingToDepthDataType:. @discussion This property presents the available pixel format types as an array of NSNumbers, each wrapping an OSType (CV pixel format type).
+//
 // AvailableDepthDataTypes returns the collection as a Go slice.
 func (x *DepthData) AvailableDepthDataTypes() []*foundation.NSNumber {
 	arr := x.inner.AvailableDepthDataTypes()
@@ -85,31 +95,43 @@ func (x *DepthData) AvailableDepthDataTypes() []*foundation.NSNumber {
 	})
 }
 
+// @property depthDataType @abstract Specifies the pixel format type of this depth data object's internal map. @discussion One of kCVPixelFormatType_DisparityFloat16, kCVPixelFormatType_DisparityFloat32, kCVPixelFormatType_DepthFloat16, or kCVPixelFormatType_DepthFloat32.
+//
 // DepthDataType calls the underlying DepthDataType.
 func (x *DepthData) DepthDataType() uint {
 	return x.inner.DepthDataType()
 }
 
+// @property depthDataMap @abstract Provides access to the depth data object's internal map. @discussion The depth data map's pixel format can be queried using the depthDataType property.
+//
 // DepthDataMap calls the underlying DepthDataMap.
 func (x *DepthData) DepthDataMap() unsafe.Pointer {
 	return x.inner.DepthDataMap()
 }
 
+// @property depthDataQuality @abstract Specifies the overall quality of the depth data map's values. @discussion See AVDepthDataQuality documentation for more information.
+//
 // DepthDataQuality calls the underlying DepthDataQuality.
 func (x *DepthData) DepthDataQuality() AVDepthDataQuality {
 	return AVDepthDataQuality(x.inner.DepthDataQuality())
 }
 
+// @property depthDataFiltered @abstract Specifies whether the depth data pixel buffer map contains filtered (hole-filled) data. @discussion By setting either AVCaptureDepthDataOutput's filteringEnabled property or AVCapturePhotoSettings' depthDataFiltered property to YES, the resulting depth data are filtered to remove invalid pixel values that may be present due to a variety of factors including low light and lens occlusion. If you've requested depth data filtering, all depth data holes are filled. Note that filtering the depth data makes it more usable for applying effects, but alters the data such that it may no longer be suitable for computer vision tasks. Unfiltered depth maps present missing data as NaN.
+//
 // IsDepthDataFiltered calls the underlying IsDepthDataFiltered.
 func (x *DepthData) IsDepthDataFiltered() bool {
 	return x.inner.IsDepthDataFiltered()
 }
 
+// @property depthDataAccuracy @abstract Specifies the accuracy of the units in the depth data map's values. @discussion See AVDepthDataAccuracy documentation for more information.
+//
 // DepthDataAccuracy calls the underlying DepthDataAccuracy.
 func (x *DepthData) DepthDataAccuracy() AVDepthDataAccuracy {
 	return AVDepthDataAccuracy(x.inner.DepthDataAccuracy())
 }
 
+// @property cameraCalibrationData @abstract The calibration data of the camera with which AVDepthData map's values are aligned. @discussion See AVCameraCalibrationData for more information. This property may return nil if no camera calibration data is available for the depth data.
+//
 // CameraCalibrationData calls the underlying CameraCalibrationData.
 func (x *DepthData) CameraCalibrationData() *CameraCalibrationData {
 	_r := x.inner.CameraCalibrationData()

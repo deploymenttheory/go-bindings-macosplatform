@@ -39,24 +39,32 @@ func NewCalendar() *Calendar {
 	return &Calendar{inner: raw.EKCalendarFromID(_id)}
 }
 
+// @property   source @abstract   The source representing the 'account' this calendar belongs to. This is only settable when initially creating a calendar and then effectively read-only after that. That is, you can create a calendar, but you cannot move it to another source. @discussion This will be nil for new calendars until you set it.
+//
 // WithSource sets the source property and returns the receiver for chaining.
 func (x *Calendar) WithSource(source *Source) *Calendar {
 	x.inner.SetSource(source.Unwrap())
 	return x
 }
 
+// @property   title @abstract   The title of the calendar.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *Calendar) WithTitle(title string) *Calendar {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// @property   color @abstract   Returns the calendar color as a NSColor. @discussion This will be nil for new calendars until you set it.
+//
 // WithColor sets the color property and returns the receiver for chaining.
 func (x *Calendar) WithColor(color *appkit.NSColor) *Calendar {
 	x.inner.SetColor(color)
 	return x
 }
 
+// @property   source @abstract   The source representing the 'account' this calendar belongs to. This is only settable when initially creating a calendar and then effectively read-only after that. That is, you can create a calendar, but you cannot move it to another source. @discussion This will be nil for new calendars until you set it.
+//
 // Source calls the underlying Source.
 func (x *Calendar) Source() *Source {
 	_r := x.inner.Source()
@@ -71,6 +79,8 @@ func (x *Calendar) SetSource(source *raw.EKSource) {
 	x.inner.SetSource(source)
 }
 
+// @property   calendarIdentifier @abstract   A unique identifier for the calendar. It is not sync-proof in that a full sync will lose this identifier, so you should always have a back up plan for dealing with a calendar that is no longer fetchable by this property, e.g. by title, type, color, etc. Use [EKEventStore calendarWithIdentifier:] to look up the calendar by this value.
+//
 // CalendarIdentifier calls the underlying CalendarIdentifier.
 func (x *Calendar) CalendarIdentifier() string {
 	_r := x.inner.CalendarIdentifier()
@@ -80,6 +90,8 @@ func (x *Calendar) CalendarIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property   title @abstract   The title of the calendar.
+//
 // Title calls the underlying Title.
 func (x *Calendar) Title() string {
 	_r := x.inner.Title()
@@ -94,26 +106,36 @@ func (x *Calendar) SetTitle(title string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
+// @property   type @abstract   The type of the calendar as a EKCalendarType. This is actually based on what source the calendar is in, as well as whether it is a subscribed calendar. @discussion CalDAV subscribed calendars have type EKCalendarTypeCalDAV with isSubscribed = YES.
+//
 // Type calls the underlying Type.
 func (x *Calendar) Type() EKCalendarType {
 	return EKCalendarType(x.inner.Type())
 }
 
+// @property   allowsContentModifications @abstract   Represents whether you can this add, remove, or modify items in this calendar.
+//
 // AllowsContentModifications calls the underlying AllowsContentModifications.
 func (x *Calendar) AllowsContentModifications() bool {
 	return x.inner.AllowsContentModifications()
 }
 
+// @property   subscribed @abstract   YES if this calendar is a subscribed calendar.
+//
 // IsSubscribed calls the underlying IsSubscribed.
 func (x *Calendar) IsSubscribed() bool {
 	return x.inner.IsSubscribed()
 }
 
+// @property   immutable @abstract   If this is set to YES, it means you cannot modify any attributes of the calendar or delete it. It does NOT imply that you cannot add events or reminders to the calendar.
+//
 // IsImmutable calls the underlying IsImmutable.
 func (x *Calendar) IsImmutable() bool {
 	return x.inner.IsImmutable()
 }
 
+// @property   color @abstract   Returns the calendar color as a CGColorRef. @discussion This will be nil for new calendars until you set it.
+//
 // CGColor calls the underlying CGColor.
 func (x *Calendar) CGColor() unsafe.Pointer {
 	return x.inner.CGColor()
@@ -124,6 +146,8 @@ func (x *Calendar) SetCGColor(cGColor unsafe.Pointer) {
 	x.inner.SetCGColor(cGColor)
 }
 
+// @property   color @abstract   Returns the calendar color as a NSColor. @discussion This will be nil for new calendars until you set it.
+//
 // Color calls the underlying Color.
 func (x *Calendar) Color() *appkit.NSColor {
 	return x.inner.Color()
@@ -134,6 +158,8 @@ func (x *Calendar) SetColor(color *appkit.NSColor) {
 	x.inner.SetColor(color)
 }
 
+// @property   supportedEventAvailabilities @discussion Returns a bitfield of supported event availabilities, or EKCalendarEventAvailabilityNone if this calendar does not support setting availability on an event.
+//
 // SupportedEventAvailabilities calls the underlying SupportedEventAvailabilities.
 func (x *Calendar) SupportedEventAvailabilities() EKCalendarEventAvailabilityMask {
 	return EKCalendarEventAvailabilityMask(x.inner.SupportedEventAvailabilities())

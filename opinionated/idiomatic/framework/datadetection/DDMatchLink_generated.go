@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains a web link that the data detection system matches. The DataDetection framework returns a link match in a `DDMatchLink` object, which contains a <doc://com.apple.documentation/documentation/foundation/url> (Swift) or <doc://com.apple.documentation/documentation/foundation/nsurl> (Objective-C).
+//
 // MatchLink wraps [raw.DDMatchLink] with a fluent Go API.
 type MatchLink struct {
 	inner *raw.DDMatchLink

@@ -31,6 +31,8 @@ func BrailleTableFromID(id objc.ID) *BrailleTable {
 	return &BrailleTable{inner: raw.AXBrailleTableFromID(id)}
 }
 
+// Returns nil if there is no table with the given identifier.
+//
 // NewBrailleTableWithIdentifier creates a new [BrailleTable].
 func NewBrailleTableWithIdentifier(identifier string) *BrailleTable {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXBrailleTable")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewBrailleTableWithIdentifier(identifier string) *BrailleTable {
 	return &BrailleTable{inner: raw.AXBrailleTableFromID(_id)}
 }
 
+// A unique string that identifies this table.
+//
 // Identifier calls the underlying Identifier.
 func (x *BrailleTable) Identifier() string {
 	_r := x.inner.Identifier()
@@ -47,6 +51,8 @@ func (x *BrailleTable) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The localized name of this table for user display.
+//
 // LocalizedName calls the underlying LocalizedName.
 func (x *BrailleTable) LocalizedName() string {
 	_r := x.inner.LocalizedName()
@@ -56,6 +62,8 @@ func (x *BrailleTable) LocalizedName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The identifier of the provider of this table.
+//
 // ProviderIdentifier calls the underlying ProviderIdentifier.
 func (x *BrailleTable) ProviderIdentifier() string {
 	_r := x.inner.ProviderIdentifier()
@@ -65,6 +73,8 @@ func (x *BrailleTable) ProviderIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The localized name of the provider of this table for user display.
+//
 // LocalizedProviderName calls the underlying LocalizedProviderName.
 func (x *BrailleTable) LocalizedProviderName() string {
 	_r := x.inner.LocalizedProviderName()
@@ -74,6 +84,8 @@ func (x *BrailleTable) LocalizedProviderName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The 3-character code from ISO 639-2 for the language this Braille table pertains to.
+//
 // Language calls the underlying Language.
 func (x *BrailleTable) Language() string {
 	_r := x.inner.Language()
@@ -83,11 +95,15 @@ func (x *BrailleTable) Language() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// All locales this table supports.
+//
 // Locales calls the underlying Locales.
 func (x *BrailleTable) Locales() *foundation.NSSet[*foundation.NSLocale] {
 	return x.inner.Locales()
 }
 
+// Returns true if this table makes use of eight dots as opposed to six dots.
+//
 // IsEightDot calls the underlying IsEightDot.
 func (x *BrailleTable) IsEightDot() bool {
 	return x.inner.IsEightDot()

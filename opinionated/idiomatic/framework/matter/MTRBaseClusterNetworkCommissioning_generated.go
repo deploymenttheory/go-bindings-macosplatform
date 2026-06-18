@@ -35,6 +35,8 @@ func MTRBaseClusterNetworkCommissioningFromID(id objc.ID) *MTRBaseClusterNetwork
 	return &MTRBaseClusterNetworkCommissioning{inner: raw.MTRBaseClusterNetworkCommissioningFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterNetworkCommissioningWithDeviceEndpointIDQueue creates a new [MTRBaseClusterNetworkCommissioning].
 func NewMTRBaseClusterNetworkCommissioningWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterNetworkCommissioning {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterNetworkCommissioning")), objc.RegisterName("alloc"))
@@ -49,6 +51,8 @@ func NewMTRBaseClusterNetworkCommissioningWithDeviceEndpointQueue(device *raw.MT
 	return &MTRBaseClusterNetworkCommissioning{inner: raw.MTRBaseClusterNetworkCommissioningFromID(_id)}
 }
 
+// Command ScanNetworks Detemine the set of networks the device sees as available.
+//
 // ScanNetworksWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterNetworkCommissioning) ScanNetworksWithParamsCompletion(ctx context.Context, params *raw.MTRNetworkCommissioningClusterScanNetworksParams) (*MTRNetworkCommissioningClusterScanNetworksResponseParams, error) {
 	type _result struct {
@@ -101,6 +105,8 @@ func (x *MTRBaseClusterNetworkCommissioning) ScanNetworksWithCompletion(ctx cont
 	}
 }
 
+// Command AddOrUpdateWiFiNetwork Add or update the credentials for a given Wi-Fi network.
+//
 // AddOrUpdateWiFiNetworkWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParamsCompletion(ctx context.Context, params *raw.MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) (*MTRNetworkCommissioningClusterNetworkConfigResponseParams, error) {
 	type _result struct {
@@ -127,6 +133,8 @@ func (x *MTRBaseClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParamsCom
 	}
 }
 
+// Command AddOrUpdateThreadNetwork Add or update the credentials for a given Thread network.
+//
 // AddOrUpdateThreadNetworkWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithParamsCompletion(ctx context.Context, params *raw.MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) (*MTRNetworkCommissioningClusterNetworkConfigResponseParams, error) {
 	type _result struct {
@@ -153,6 +161,8 @@ func (x *MTRBaseClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithParamsC
 	}
 }
 
+// Command RemoveNetwork Remove the definition of a given network (including its credentials).
+//
 // RemoveNetworkWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterNetworkCommissioning) RemoveNetworkWithParamsCompletion(ctx context.Context, params *raw.MTRNetworkCommissioningClusterRemoveNetworkParams) (*MTRNetworkCommissioningClusterNetworkConfigResponseParams, error) {
 	type _result struct {
@@ -179,6 +189,8 @@ func (x *MTRBaseClusterNetworkCommissioning) RemoveNetworkWithParamsCompletion(c
 	}
 }
 
+// Command ConnectNetwork Connect to the specified network, using previously-defined credentials.
+//
 // ConnectNetworkWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterNetworkCommissioning) ConnectNetworkWithParamsCompletion(ctx context.Context, params *raw.MTRNetworkCommissioningClusterConnectNetworkParams) (*MTRNetworkCommissioningClusterConnectNetworkResponseParams, error) {
 	type _result struct {
@@ -205,6 +217,8 @@ func (x *MTRBaseClusterNetworkCommissioning) ConnectNetworkWithParamsCompletion(
 	}
 }
 
+// Command ReorderNetwork Modify the order in which networks will be presented in the Networks attribute.
+//
 // ReorderNetworkWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterNetworkCommissioning) ReorderNetworkWithParamsCompletion(ctx context.Context, params *raw.MTRNetworkCommissioningClusterReorderNetworkParams) (*MTRNetworkCommissioningClusterNetworkConfigResponseParams, error) {
 	type _result struct {

@@ -36,12 +36,16 @@ func NewVolumeIdentifier() *VolumeIdentifier {
 	return &VolumeIdentifier{inner: raw.FSVolumeIdentifierFromID(_id)}
 }
 
+// A UUID to uniquely identify this entity.
+//
 // WithUuid sets the uuid property and returns the receiver for chaining.
 func (x *VolumeIdentifier) WithUuid(uuid *foundation.NSUUID) *VolumeIdentifier {
 	x.inner.FSEntityIdentifier.SetUuid(uuid)
 	return x
 }
 
+// An optional piece of data to distinguish entities that otherwise share the same UUID.
+//
 // WithQualifier sets the qualifier property and returns the receiver for chaining.
 func (x *VolumeIdentifier) WithQualifier(qualifier *foundation.NSData) *VolumeIdentifier {
 	x.inner.FSEntityIdentifier.SetQualifier(qualifier)

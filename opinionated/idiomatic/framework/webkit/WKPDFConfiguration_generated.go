@@ -36,18 +36,24 @@ func NewWKPDFConfiguration() *WKPDFConfiguration {
 	return &WKPDFConfiguration{inner: raw.WKPDFConfigurationFromID(_id)}
 }
 
+// @abstract The rect to capture in web page coordinates @discussion If the rect is set to the null rect, the bounds of the currently displayed web page will be used. The initial value is the null rect.
+//
 // WithRect sets the rect property and returns the receiver for chaining.
 func (x *WKPDFConfiguration) WithRect(rect corefoundation.CGRect) *WKPDFConfiguration {
 	x.inner.SetRect(rect)
 	return x
 }
 
+// @abstract A Boolean value indicating whether the PDF should allow transparent backgrounds. @discussion The default value is `NO`.
+//
 // WithAllowTransparentBackground sets the allowTransparentBackground property and returns the receiver for chaining.
 func (x *WKPDFConfiguration) WithAllowTransparentBackground(allowTransparentBackground bool) *WKPDFConfiguration {
 	x.inner.SetAllowTransparentBackground(allowTransparentBackground)
 	return x
 }
 
+// @abstract The rect to capture in web page coordinates @discussion If the rect is set to the null rect, the bounds of the currently displayed web page will be used. The initial value is the null rect.
+//
 // Rect calls the underlying Rect.
 func (x *WKPDFConfiguration) Rect() corefoundation.CGRect {
 	return x.inner.Rect()
@@ -58,6 +64,8 @@ func (x *WKPDFConfiguration) SetRect(rect corefoundation.CGRect) {
 	x.inner.SetRect(rect)
 }
 
+// @abstract A Boolean value indicating whether the PDF should allow transparent backgrounds. @discussion The default value is `NO`.
+//
 // AllowTransparentBackground calls the underlying AllowTransparentBackground.
 func (x *WKPDFConfiguration) AllowTransparentBackground() bool {
 	return x.inner.AllowTransparentBackground()

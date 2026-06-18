@@ -39,6 +39,8 @@ func NewModifySubscriptionsOperation() *ModifySubscriptionsOperation {
 	return &ModifySubscriptionsOperation{inner: raw.CKModifySubscriptionsOperationFromID(_id)}
 }
 
+// Creates an operation for saving and deleting the specified subscriptions. - Parameters: - subscriptionsToSave: The subscriptions to save or update. You can specify `nil` for this parameter. - subscriptionIDsToDelete: The IDs of the subscriptions to delete. You can specify `nil` for this parameter. The subscriptions that you want to save or delete must reside in the same container. CloudKit creates a subscription if you save one that doesn't already exist. CloudKit returns an error if you try to delete a subscription that doesn't exist.
+//
 // NewModifySubscriptionsOperationWithSubscriptionsToSaveSubscriptionIDsToDelete creates a new [ModifySubscriptionsOperation].
 func NewModifySubscriptionsOperationWithSubscriptionsToSaveSubscriptionIDsToDelete(subscriptionsToSave *foundation.NSArray[*raw.CKSubscription], subscriptionIDsToDelete *foundation.NSArray[*foundation.NSString]) *ModifySubscriptionsOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKModifySubscriptionsOperation")), objc.RegisterName("alloc"))
@@ -46,6 +48,8 @@ func NewModifySubscriptionsOperationWithSubscriptionsToSaveSubscriptionIDsToDele
 	return &ModifySubscriptionsOperation{inner: raw.CKModifySubscriptionsOperationFromID(_id)}
 }
 
+// The subscriptions to save to the database. This property contains the subscriptions that you want to save. Its initial value is the array that you pass to the “CKModifySubscriptionsOperation/init(subscriptionsToSave:subscriptionIDsToDelete:)“ method. Modify this property as necessary before you execute the operation or submit it to a queue. After CloudKit saves the subscriptions, it begins generating push notifications according to their criteria.
+//
 // WithSubscriptionsToSave sets the collection, converting the Go slice to an NSArray.
 func (x *ModifySubscriptionsOperation) WithSubscriptionsToSave(items ...SubscriptionProvider) *ModifySubscriptionsOperation {
 	if len(items) == 0 {
@@ -64,6 +68,8 @@ func (x *ModifySubscriptionsOperation) WithSubscriptionsToSave(items ...Subscrip
 	return x
 }
 
+// The IDs of the subscriptions that you want to delete. This property contains the IDs of the subscriptions that you want to delete. Its initial value is the array that you pass to the “CKModifySubscriptionsOperation/init(subscriptionsToSave:subscriptionIDsToDelete:)“ method. Modify this property as necessary before you execute the operation or submit it to a queue.
+//
 // WithSubscriptionIDsToDelete sets the collection, converting the Go slice to an NSArray.
 func (x *ModifySubscriptionsOperation) WithSubscriptionIDsToDelete(items ...*foundation.NSString) *ModifySubscriptionsOperation {
 	if len(items) == 0 {
@@ -82,78 +88,104 @@ func (x *ModifySubscriptionsOperation) WithSubscriptionIDsToDelete(items ...*fou
 	return x
 }
 
+// The closure to execute when CloudKit saves a subscription. This property is a closure that returns no value and has the following parameters: - The ID of the subscription that CloudKit saves. - The subscription that CloudKit saves, or `nil` if CloudKit can't save the subscription. - If CloudKit can't save the subscription, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each subscription in the “CKModifySubscriptionsOperation/subscriptionsToSave“ property. Each time the closure executes, it executes serially with respect to the other subscription completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+//
 // WithPerSubscriptionSaveBlock sets the perSubscriptionSaveBlock property and returns the receiver for chaining.
 func (x *ModifySubscriptionsOperation) WithPerSubscriptionSaveBlock(perSubscriptionSaveBlock func(*foundation.NSString, *raw.CKSubscription, unsafe.Pointer)) *ModifySubscriptionsOperation {
 	x.inner.SetPerSubscriptionSaveBlock(perSubscriptionSaveBlock)
 	return x
 }
 
+// The closure to execute when CloudKit deletes a subscription. This property is a closure that returns no value and has the following parameters: - The ID of the subscription that CloudKit deletes. - If CloudKit can't delete the subscription, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each subscription in the “CKModifySubscriptionsOperation/subscriptionIDsToDelete-14x82“ property. Each time the closure executes, it executes serially with respect to the other subscription completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+//
 // WithPerSubscriptionDeleteBlock sets the perSubscriptionDeleteBlock property and returns the receiver for chaining.
 func (x *ModifySubscriptionsOperation) WithPerSubscriptionDeleteBlock(perSubscriptionDeleteBlock func(*foundation.NSString, unsafe.Pointer)) *ModifySubscriptionsOperation {
 	x.inner.SetPerSubscriptionDeleteBlock(perSubscriptionDeleteBlock)
 	return x
 }
 
+// The block to execute after the operation modifies the subscriptions. The block returns no value and takes the following parameters: - term `savedSubscriptions`: The subscriptions to save. - term `deletedSubscriptionIDs`: The IDs of the subscriptions to delete. - term `operationError`: An error that contains information about a problem, or `nil` if CloudKit successfully modifies the subscriptions. The operation executes this block only once, and it's your only opportunity to process the results. The block executes on a background queue, so any tasks that require access to the main queue must dispatch accordingly. The block reports an error of type “CKError/Code/partialFailure“ when it can't modify some of the subscriptions. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are the IDs of the subscriptions that CloudKit can't modify, and the corresponding values are errors that contain information about the failures. Set this property's value before you execute the operation or submit it to a queue.
+//
 // WithModifySubscriptionsCompletionBlock sets the modifySubscriptionsCompletionBlock property and returns the receiver for chaining.
 func (x *ModifySubscriptionsOperation) WithModifySubscriptionsCompletionBlock(modifySubscriptionsCompletionBlock objc.Block) *ModifySubscriptionsOperation {
 	x.inner.SetModifySubscriptionsCompletionBlock(modifySubscriptionsCompletionBlock)
 	return x
 }
 
+// The database that the operation uses. For operations that you execute in a custom queue, use this property to specify the target database. Setting the database also sets the corresponding container, which it inherits from “CKOperation“. If this property's value is `nil`, the operation targets the user's private database. The default value is `nil`.
+//
 // WithDatabase sets the database property and returns the receiver for chaining.
 func (x *ModifySubscriptionsOperation) WithDatabase(database *Database) *ModifySubscriptionsOperation {
 	x.inner.CKDatabaseOperation.SetDatabase(database.Unwrap())
 	return x
 }
 
+// The operation's configuration.
+//
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *ModifySubscriptionsOperation) WithConfiguration(configuration *OperationConfiguration) *ModifySubscriptionsOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
+// The operation's group.
+//
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *ModifySubscriptionsOperation) WithGroup(group *OperationGroup) *ModifySubscriptionsOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
+// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+//
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *ModifySubscriptionsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifySubscriptionsOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
 	return x
 }
 
+// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
+//
 // WithContainer sets the container property and returns the receiver for chaining.
 func (x *ModifySubscriptionsOperation) WithContainer(container *Container) *ModifySubscriptionsOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
+//
 // WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
 func (x *ModifySubscriptionsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *ModifySubscriptionsOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
 	return x
 }
 
+// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+//
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *ModifySubscriptionsOperation) WithLongLived(longLived bool) *ModifySubscriptionsOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetLongLived(longLived)
 	return x
 }
 
+// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
+//
 // WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
 func (x *ModifySubscriptionsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifySubscriptionsOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
 	return x
 }
 
+// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
+//
 // WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
 func (x *ModifySubscriptionsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifySubscriptionsOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
 	return x
 }
 
+// The subscriptions to save to the database. This property contains the subscriptions that you want to save. Its initial value is the array that you pass to the “CKModifySubscriptionsOperation/init(subscriptionsToSave:subscriptionIDsToDelete:)“ method. Modify this property as necessary before you execute the operation or submit it to a queue. After CloudKit saves the subscriptions, it begins generating push notifications according to their criteria.
+//
 // SubscriptionsToSave returns the collection as a Go slice.
 func (x *ModifySubscriptionsOperation) SubscriptionsToSave() []*Subscription {
 	arr := x.inner.SubscriptionsToSave()
@@ -166,10 +198,21 @@ func (x *ModifySubscriptionsOperation) SubscriptionsToSave() []*Subscription {
 }
 
 // SetSubscriptionsToSave calls the underlying SetSubscriptionsToSave.
-func (x *ModifySubscriptionsOperation) SetSubscriptionsToSave(subscriptionsToSave *foundation.NSArray[*raw.CKSubscription]) {
-	x.inner.SetSubscriptionsToSave(subscriptionsToSave)
+func (x *ModifySubscriptionsOperation) SetSubscriptionsToSave(subscriptionsToSave ...SubscriptionProvider) {
+	_ptrs := make([]objc.ID, len(subscriptionsToSave))
+	for _i, _v := range subscriptionsToSave {
+		_ptrs[_i] = _v.asSubscription().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.CKSubscription]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.CKSubscription](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetSubscriptionsToSave(_arg0)
 }
 
+// The IDs of the subscriptions that you want to delete. This property contains the IDs of the subscriptions that you want to delete. Its initial value is the array that you pass to the “CKModifySubscriptionsOperation/init(subscriptionsToSave:subscriptionIDsToDelete:)“ method. Modify this property as necessary before you execute the operation or submit it to a queue.
+//
 // SubscriptionIDsToDelete returns the collection as a Go slice.
 func (x *ModifySubscriptionsOperation) SubscriptionIDsToDelete() []*foundation.NSString {
 	arr := x.inner.SubscriptionIDsToDelete()
@@ -186,6 +229,8 @@ func (x *ModifySubscriptionsOperation) SetSubscriptionIDsToDelete(subscriptionID
 	x.inner.SetSubscriptionIDsToDelete(subscriptionIDsToDelete)
 }
 
+// The closure to execute when CloudKit saves a subscription. This property is a closure that returns no value and has the following parameters: - The ID of the subscription that CloudKit saves. - The subscription that CloudKit saves, or `nil` if CloudKit can't save the subscription. - If CloudKit can't save the subscription, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each subscription in the “CKModifySubscriptionsOperation/subscriptionsToSave“ property. Each time the closure executes, it executes serially with respect to the other subscription completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+//
 // PerSubscriptionSaveBlock calls the underlying PerSubscriptionSaveBlock.
 func (x *ModifySubscriptionsOperation) PerSubscriptionSaveBlock() objc.Block {
 	return x.inner.PerSubscriptionSaveBlock()
@@ -196,6 +241,8 @@ func (x *ModifySubscriptionsOperation) SetPerSubscriptionSaveBlock(perSubscripti
 	x.inner.SetPerSubscriptionSaveBlock(perSubscriptionSaveBlock)
 }
 
+// The closure to execute when CloudKit deletes a subscription. This property is a closure that returns no value and has the following parameters: - The ID of the subscription that CloudKit deletes. - If CloudKit can't delete the subscription, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each subscription in the “CKModifySubscriptionsOperation/subscriptionIDsToDelete-14x82“ property. Each time the closure executes, it executes serially with respect to the other subscription completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+//
 // PerSubscriptionDeleteBlock calls the underlying PerSubscriptionDeleteBlock.
 func (x *ModifySubscriptionsOperation) PerSubscriptionDeleteBlock() objc.Block {
 	return x.inner.PerSubscriptionDeleteBlock()
@@ -227,6 +274,8 @@ func (x *ModifySubscriptionsOperation) SetPerSubscriptionDeleteBlock(ctx context
 	}
 }
 
+// The block to execute after the operation modifies the subscriptions. The block returns no value and takes the following parameters: - term `savedSubscriptions`: The subscriptions to save. - term `deletedSubscriptionIDs`: The IDs of the subscriptions to delete. - term `operationError`: An error that contains information about a problem, or `nil` if CloudKit successfully modifies the subscriptions. The operation executes this block only once, and it's your only opportunity to process the results. The block executes on a background queue, so any tasks that require access to the main queue must dispatch accordingly. The block reports an error of type “CKError/Code/partialFailure“ when it can't modify some of the subscriptions. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are the IDs of the subscriptions that CloudKit can't modify, and the corresponding values are errors that contain information about the failures. Set this property's value before you execute the operation or submit it to a queue.
+//
 // ModifySubscriptionsCompletionBlock calls the underlying ModifySubscriptionsCompletionBlock.
 func (x *ModifySubscriptionsOperation) ModifySubscriptionsCompletionBlock() objc.Block {
 	return x.inner.ModifySubscriptionsCompletionBlock()
@@ -263,7 +312,7 @@ type ModifySubscriptionsOperationable interface {
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifySubscriptionsOperation
 	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifySubscriptionsOperation
 	SubscriptionsToSave() []*Subscription
-	SetSubscriptionsToSave(subscriptionsToSave *foundation.NSArray[*raw.CKSubscription])
+	SetSubscriptionsToSave(subscriptionsToSave ...SubscriptionProvider)
 	SubscriptionIDsToDelete() []*foundation.NSString
 	SetSubscriptionIDsToDelete(subscriptionIDsToDelete *foundation.NSArray[*foundation.NSString])
 	PerSubscriptionSaveBlock() objc.Block

@@ -36,12 +36,16 @@ func NewEmbeddingLayer() *EmbeddingLayer {
 	return &EmbeddingLayer{inner: raw.MLCEmbeddingLayerFromID(_id)}
 }
 
+// @property   label @abstract   A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *EmbeddingLayer) WithLabel(label string) *EmbeddingLayer {
 	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   isDebuggingEnabled @abstract   A flag to identify if we want to debug this layer when executing a graph that includes this layer @discussion If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
+//
 // WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
 func (x *EmbeddingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *EmbeddingLayer {
 	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
@@ -57,6 +61,8 @@ func (x *EmbeddingLayer) Descriptor() *EmbeddingDescriptor {
 	return &EmbeddingDescriptor{inner: _r}
 }
 
+// @property   weights @abstract   The array of word embeddings
+//
 // Weights calls the underlying Weights.
 func (x *EmbeddingLayer) Weights() *Tensor {
 	_r := x.inner.Weights()
@@ -66,6 +72,8 @@ func (x *EmbeddingLayer) Weights() *Tensor {
 	return &Tensor{inner: _r}
 }
 
+// @property   weightsParameter @abstract   The weights tensor parameter used for optimizer update
+//
 // WeightsParameter calls the underlying WeightsParameter.
 func (x *EmbeddingLayer) WeightsParameter() *TensorParameter {
 	_r := x.inner.WeightsParameter()

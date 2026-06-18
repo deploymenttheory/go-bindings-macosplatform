@@ -33,6 +33,8 @@ func MTRBaseClusterColorControlFromID(id objc.ID) *MTRBaseClusterColorControl {
 	return &MTRBaseClusterColorControl{inner: raw.MTRBaseClusterColorControlFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterColorControlWithDeviceEndpointIDQueue creates a new [MTRBaseClusterColorControl].
 func NewMTRBaseClusterColorControlWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterColorControl {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterColorControl")), objc.RegisterName("alloc"))
@@ -47,96 +49,134 @@ func NewMTRBaseClusterColorControlWithDeviceEndpointQueue(device *raw.MTRBaseDev
 	return &MTRBaseClusterColorControl{inner: raw.MTRBaseClusterColorControlFromID(_id)}
 }
 
+// Command MoveToHue Move to specified hue.
+//
 // MoveToHueWithParamsCompletion calls the underlying MoveToHueWithParamsCompletion.
 func (x *MTRBaseClusterColorControl) MoveToHueWithParamsCompletion(params *raw.MTRColorControlClusterMoveToHueParams, completion func(unsafe.Pointer)) {
 	x.inner.MoveToHueWithParamsCompletion(params, completion)
 }
 
+// Command MoveHue Move hue up or down at specified rate.
+//
 // MoveHueWithParamsCompletion calls the underlying MoveHueWithParamsCompletion.
 func (x *MTRBaseClusterColorControl) MoveHueWithParamsCompletion(params *raw.MTRColorControlClusterMoveHueParams, completion func(unsafe.Pointer)) {
 	x.inner.MoveHueWithParamsCompletion(params, completion)
 }
 
+// Command StepHue Step hue up or down by specified size at specified rate.
+//
 // StepHueWithParamsCompletion calls the underlying StepHueWithParamsCompletion.
 func (x *MTRBaseClusterColorControl) StepHueWithParamsCompletion(params *raw.MTRColorControlClusterStepHueParams, completion func(unsafe.Pointer)) {
 	x.inner.StepHueWithParamsCompletion(params, completion)
 }
 
+// Command MoveToSaturation Move to specified saturation.
+//
 // MoveToSaturationWithParamsCompletion calls the underlying MoveToSaturationWithParamsCompletion.
 func (x *MTRBaseClusterColorControl) MoveToSaturationWithParamsCompletion(params *raw.MTRColorControlClusterMoveToSaturationParams, completion func(unsafe.Pointer)) {
 	x.inner.MoveToSaturationWithParamsCompletion(params, completion)
 }
 
+// Command MoveSaturation Move saturation up or down at specified rate.
+//
 // MoveSaturationWithParamsCompletion calls the underlying MoveSaturationWithParamsCompletion.
 func (x *MTRBaseClusterColorControl) MoveSaturationWithParamsCompletion(params *raw.MTRColorControlClusterMoveSaturationParams, completion func(unsafe.Pointer)) {
 	x.inner.MoveSaturationWithParamsCompletion(params, completion)
 }
 
+// Command StepSaturation Step saturation up or down by specified size at specified rate.
+//
 // StepSaturationWithParamsCompletion calls the underlying StepSaturationWithParamsCompletion.
 func (x *MTRBaseClusterColorControl) StepSaturationWithParamsCompletion(params *raw.MTRColorControlClusterStepSaturationParams, completion func(unsafe.Pointer)) {
 	x.inner.StepSaturationWithParamsCompletion(params, completion)
 }
 
+// Command MoveToHueAndSaturation Move to hue and saturation.
+//
 // MoveToHueAndSaturationWithParamsCompletion calls the underlying MoveToHueAndSaturationWithParamsCompletion.
 func (x *MTRBaseClusterColorControl) MoveToHueAndSaturationWithParamsCompletion(params *raw.MTRColorControlClusterMoveToHueAndSaturationParams, completion func(unsafe.Pointer)) {
 	x.inner.MoveToHueAndSaturationWithParamsCompletion(params, completion)
 }
 
+// Command MoveToColor Move to specified color.
+//
 // MoveToColorWithParamsCompletion calls the underlying MoveToColorWithParamsCompletion.
 func (x *MTRBaseClusterColorControl) MoveToColorWithParamsCompletion(params *raw.MTRColorControlClusterMoveToColorParams, completion func(unsafe.Pointer)) {
 	x.inner.MoveToColorWithParamsCompletion(params, completion)
 }
 
+// Command MoveColor Moves the color.
+//
 // MoveColorWithParamsCompletion calls the underlying MoveColorWithParamsCompletion.
 func (x *MTRBaseClusterColorControl) MoveColorWithParamsCompletion(params *raw.MTRColorControlClusterMoveColorParams, completion func(unsafe.Pointer)) {
 	x.inner.MoveColorWithParamsCompletion(params, completion)
 }
 
+// Command StepColor Steps the lighting to a specific color.
+//
 // StepColorWithParamsCompletion calls the underlying StepColorWithParamsCompletion.
 func (x *MTRBaseClusterColorControl) StepColorWithParamsCompletion(params *raw.MTRColorControlClusterStepColorParams, completion func(unsafe.Pointer)) {
 	x.inner.StepColorWithParamsCompletion(params, completion)
 }
 
+// Command MoveToColorTemperature Move to a specific color temperature.
+//
 // MoveToColorTemperatureWithParamsCompletion calls the underlying MoveToColorTemperatureWithParamsCompletion.
 func (x *MTRBaseClusterColorControl) MoveToColorTemperatureWithParamsCompletion(params *raw.MTRColorControlClusterMoveToColorTemperatureParams, completion func(unsafe.Pointer)) {
 	x.inner.MoveToColorTemperatureWithParamsCompletion(params, completion)
 }
 
+// Command EnhancedMoveToHue Command description for EnhancedMoveToHue
+//
 // EnhancedMoveToHueWithParamsCompletion calls the underlying EnhancedMoveToHueWithParamsCompletion.
 func (x *MTRBaseClusterColorControl) EnhancedMoveToHueWithParamsCompletion(params *raw.MTRColorControlClusterEnhancedMoveToHueParams, completion func(unsafe.Pointer)) {
 	x.inner.EnhancedMoveToHueWithParamsCompletion(params, completion)
 }
 
+// Command EnhancedMoveHue Command description for EnhancedMoveHue
+//
 // EnhancedMoveHueWithParamsCompletion calls the underlying EnhancedMoveHueWithParamsCompletion.
 func (x *MTRBaseClusterColorControl) EnhancedMoveHueWithParamsCompletion(params *raw.MTRColorControlClusterEnhancedMoveHueParams, completion func(unsafe.Pointer)) {
 	x.inner.EnhancedMoveHueWithParamsCompletion(params, completion)
 }
 
+// Command EnhancedStepHue Command description for EnhancedStepHue
+//
 // EnhancedStepHueWithParamsCompletion calls the underlying EnhancedStepHueWithParamsCompletion.
 func (x *MTRBaseClusterColorControl) EnhancedStepHueWithParamsCompletion(params *raw.MTRColorControlClusterEnhancedStepHueParams, completion func(unsafe.Pointer)) {
 	x.inner.EnhancedStepHueWithParamsCompletion(params, completion)
 }
 
+// Command EnhancedMoveToHueAndSaturation Command description for EnhancedMoveToHueAndSaturation
+//
 // EnhancedMoveToHueAndSaturationWithParamsCompletion calls the underlying EnhancedMoveToHueAndSaturationWithParamsCompletion.
 func (x *MTRBaseClusterColorControl) EnhancedMoveToHueAndSaturationWithParamsCompletion(params *raw.MTRColorControlClusterEnhancedMoveToHueAndSaturationParams, completion func(unsafe.Pointer)) {
 	x.inner.EnhancedMoveToHueAndSaturationWithParamsCompletion(params, completion)
 }
 
+// Command ColorLoopSet Command description for ColorLoopSet
+//
 // ColorLoopSetWithParamsCompletion calls the underlying ColorLoopSetWithParamsCompletion.
 func (x *MTRBaseClusterColorControl) ColorLoopSetWithParamsCompletion(params *raw.MTRColorControlClusterColorLoopSetParams, completion func(unsafe.Pointer)) {
 	x.inner.ColorLoopSetWithParamsCompletion(params, completion)
 }
 
+// Command StopMoveStep Command description for StopMoveStep
+//
 // StopMoveStepWithParamsCompletion calls the underlying StopMoveStepWithParamsCompletion.
 func (x *MTRBaseClusterColorControl) StopMoveStepWithParamsCompletion(params *raw.MTRColorControlClusterStopMoveStepParams, completion func(unsafe.Pointer)) {
 	x.inner.StopMoveStepWithParamsCompletion(params, completion)
 }
 
+// Command MoveColorTemperature Command description for MoveColorTemperature
+//
 // MoveColorTemperatureWithParamsCompletion calls the underlying MoveColorTemperatureWithParamsCompletion.
 func (x *MTRBaseClusterColorControl) MoveColorTemperatureWithParamsCompletion(params *raw.MTRColorControlClusterMoveColorTemperatureParams, completion func(unsafe.Pointer)) {
 	x.inner.MoveColorTemperatureWithParamsCompletion(params, completion)
 }
 
+// Command StepColorTemperature Command description for StepColorTemperature
+//
 // StepColorTemperatureWithParamsCompletion calls the underlying StepColorTemperatureWithParamsCompletion.
 func (x *MTRBaseClusterColorControl) StepColorTemperatureWithParamsCompletion(params *raw.MTRColorControlClusterStepColorTemperatureParams, completion func(unsafe.Pointer)) {
 	x.inner.StepColorTemperatureWithParamsCompletion(params, completion)

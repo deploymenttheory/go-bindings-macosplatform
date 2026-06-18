@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that contains information the boot loader needs for booting macOS as a guest operating system.
+//
 // MacAuxiliaryStorage wraps [raw.VZMacAuxiliaryStorage] with a fluent Go API.
 type MacAuxiliaryStorage struct {
 	inner *raw.VZMacAuxiliaryStorage
@@ -32,6 +34,8 @@ func MacAuxiliaryStorageFromID(id objc.ID) *MacAuxiliaryStorage {
 	return &MacAuxiliaryStorage{inner: raw.VZMacAuxiliaryStorageFromID(id)}
 }
 
+// Initializes an auxiliary storage object with data from the location at the URL you provide.
+//
 // NewMacAuxiliaryStorageWithURL creates a new [MacAuxiliaryStorage].
 func NewMacAuxiliaryStorageWithURL(uRL string) *MacAuxiliaryStorage {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacAuxiliaryStorage")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewMacAuxiliaryStorageWithURL(uRL string) *MacAuxiliaryStorage {
 	return &MacAuxiliaryStorage{inner: raw.VZMacAuxiliaryStorageFromID(_id)}
 }
 
+// Creates an initialized Mac auxiliary storage instance that describes a specific hardware model at a URL you specify.
+//
 // NewMacAuxiliaryStorageCreatingStorageAtURLHardwareModelOptionsError creates a new [MacAuxiliaryStorage].
 func NewMacAuxiliaryStorageCreatingStorageAtURLHardwareModelOptionsError(uRL string, hardwareModel *raw.VZMacHardwareModel, options VZMacAuxiliaryStorageInitializationOptions) (*MacAuxiliaryStorage, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacAuxiliaryStorage")), objc.RegisterName("alloc"))

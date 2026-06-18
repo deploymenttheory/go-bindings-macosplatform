@@ -32,6 +32,8 @@ func PictureInPictureControllerContentSourceFromID(id objc.ID) *PictureInPicture
 	return &PictureInPictureControllerContentSource{inner: raw.AVPictureInPictureControllerContentSourceFromID(id)}
 }
 
+// @method     initWithPlayerLayer: @param      playerLayer The player layer to be shown in Picture in Picture. @abstract   Use this initializer for a content source with a player layer.
+//
 // NewPictureInPictureControllerContentSourceWithPlayerLayer creates a new [PictureInPictureControllerContentSource].
 func NewPictureInPictureControllerContentSourceWithPlayerLayer(playerLayer *avfoundation.AVPlayerLayer) *PictureInPictureControllerContentSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPictureInPictureControllerContentSource")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewPictureInPictureControllerContentSourceWithPlayerLayer(playerLayer *avfo
 	return &PictureInPictureControllerContentSource{inner: raw.AVPictureInPictureControllerContentSourceFromID(_id)}
 }
 
+// @method		initWithSampleBufferDisplayLayer: @param		sampleBufferDisplayLayer The sample buffer display layer to be shown in Picture in Picture. @param		playbackDelegate The playback delegate for controlling sample buffer display layer's playback in Picture in Picture. @abstract	Use this initializer for a content source with a sample buffer display layer and playback delegate.
+//
 // NewPictureInPictureControllerContentSourceWithSampleBufferDisplayLayerPlaybackDelegate creates a new [PictureInPictureControllerContentSource].
 func NewPictureInPictureControllerContentSourceWithSampleBufferDisplayLayerPlaybackDelegate(sampleBufferDisplayLayer *avfoundation.AVSampleBufferDisplayLayer, playbackDelegate raw.AVPictureInPictureSampleBufferPlaybackDelegate) *PictureInPictureControllerContentSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPictureInPictureControllerContentSource")), objc.RegisterName("alloc"))
@@ -51,11 +55,15 @@ func (x *PictureInPictureControllerContentSource) PlayerLayer() *avfoundation.AV
 	return x.inner.PlayerLayer()
 }
 
+// @property	sampleBufferDisplayLayer @abstract	The receiver's sample buffer display layer.
+//
 // SampleBufferDisplayLayer calls the underlying SampleBufferDisplayLayer.
 func (x *PictureInPictureControllerContentSource) SampleBufferDisplayLayer() *avfoundation.AVSampleBufferDisplayLayer {
 	return x.inner.SampleBufferDisplayLayer()
 }
 
+// @property	sampleBufferPlaybackDelegate @abstract	The receiver's sample buffer playback delegate.
+//
 // SampleBufferPlaybackDelegate calls the underlying SampleBufferPlaybackDelegate.
 func (x *PictureInPictureControllerContentSource) SampleBufferPlaybackDelegate() raw.AVPictureInPictureSampleBufferPlaybackDelegate {
 	return x.inner.SampleBufferPlaybackDelegate()

@@ -35,6 +35,8 @@ func NewRemoteCommandEvent() *RemoteCommandEvent {
 	return &RemoteCommandEvent{inner: raw.MPRemoteCommandEventFromID(_id)}
 }
 
+// The command that sent the event.
+//
 // Command calls the underlying Command.
 func (x *RemoteCommandEvent) Command() *RemoteCommand {
 	_r := x.inner.Command()
@@ -44,6 +46,8 @@ func (x *RemoteCommandEvent) Command() *RemoteCommand {
 	return &RemoteCommand{inner: _r}
 }
 
+// The time when the event occurred.
+//
 // Timestamp calls the underlying Timestamp.
 func (x *RemoteCommandEvent) Timestamp() float64 {
 	return x.inner.Timestamp()

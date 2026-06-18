@@ -37,36 +37,50 @@ func NewAssetSpatialAudioInfo() *AssetSpatialAudioInfo {
 	return &AssetSpatialAudioInfo{inner: raw.CNAssetSpatialAudioInfoFromID(_id)}
 }
 
+// @property		defaulSpatialAudioTrack @abstract		default `AVAssetTrack` containing Spatial Audio
+//
 // DefaultSpatialAudioTrack calls the underlying DefaultSpatialAudioTrack.
 func (x *AssetSpatialAudioInfo) DefaultSpatialAudioTrack() *avfoundation.AVAssetTrack {
 	return x.inner.DefaultSpatialAudioTrack()
 }
 
+// @property		defaultEffectIntensity @abstract		default effect intensity value as provided by the system. Supported range is [0.0-1.0]
+//
 // DefaultEffectIntensity calls the underlying DefaultEffectIntensity.
 func (x *AssetSpatialAudioInfo) DefaultEffectIntensity() float32 {
 	return x.inner.DefaultEffectIntensity()
 }
 
+// @method		defaultRenderingStyle @abstract		default rendering style as provided by the system
+//
 // DefaultRenderingStyle calls the underlying DefaultRenderingStyle.
 func (x *AssetSpatialAudioInfo) DefaultRenderingStyle() CNSpatialAudioRenderingStyle {
 	return CNSpatialAudioRenderingStyle(x.inner.DefaultRenderingStyle())
 }
 
+// @method		spatialAudioMixMetadata @abstract		The result of audio analysis during recording which contains metadata necessary to properly configure the Audio Mix feature during playback or editing.. Can be used with `AUAudioUnit` instances that support AudioUnitPropertyID `kProperty_SpatialAudioMixMetadata`
+//
 // SpatialAudioMixMetadata calls the underlying SpatialAudioMixMetadata.
 func (x *AssetSpatialAudioInfo) SpatialAudioMixMetadata() *foundation.NSData {
 	return x.inner.SpatialAudioMixMetadata()
 }
 
+// @method		audioMixWithEffectIntensity:renderingStyle: @abstract		returns an instance of `AVAudioMix` encapsulating all spatial audio related data with specified effect intensity and rendering style. @discussion    Returns an `AVAudioMix` containing all the necessary state to operate on the asset with Spatial Audio effects enabled
+//
 // AudioMixWithEffectIntensityRenderingStyle calls the underlying AudioMixWithEffectIntensityRenderingStyle.
 func (x *AssetSpatialAudioInfo) AudioMixWithEffectIntensityRenderingStyle(effectIntensity float32, renderingStyle CNSpatialAudioRenderingStyle) *avfoundation.AVAudioMix {
 	return x.inner.AudioMixWithEffectIntensityRenderingStyle(effectIntensity, raw.CNSpatialAudioRenderingStyle(renderingStyle))
 }
 
+// @method		assetReaderOutputSettingsForContentType @abstract		Returns a dictionary of settings and the source track that should be used to fetch LPCM samples from this track with the effect applied @discussion    Use the returned NSDictionary with the `defaulSpatialAudioTrack` to initialize an instance of `AVAssetReaderAudioMixOutput`
+//
 // AssetReaderOutputSettingsForContentType calls the underlying AssetReaderOutputSettingsForContentType.
 func (x *AssetSpatialAudioInfo) AssetReaderOutputSettingsForContentType(contentType CNSpatialAudioContentType) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.AssetReaderOutputSettingsForContentType(raw.CNSpatialAudioContentType(contentType))
 }
 
+// @method		assetWriterInputSettingsForContentType @abstract		Returns a dictionary of settings that should be used to encode LPCM samples using `AVAssetWriterInput`
+//
 // AssetWriterInputSettingsForContentType calls the underlying AssetWriterInputSettingsForContentType.
 func (x *AssetSpatialAudioInfo) AssetWriterInputSettingsForContentType(contentType CNSpatialAudioContentType) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.AssetWriterInputSettingsForContentType(raw.CNSpatialAudioContentType(contentType))

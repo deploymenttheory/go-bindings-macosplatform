@@ -35,6 +35,8 @@ func NewProcessCapability() *ProcessCapability {
 	return &ProcessCapability{inner: raw.BEProcessCapabilityFromID(_id)}
 }
 
+// Requests the capability to be granted to the current process. Returns the granted capability or nil and an error if it can not be granted
+//
 // RequestWithError calls the underlying RequestWithError.
 func (x *ProcessCapability) RequestWithError() (raw.BEProcessCapabilityGrant, error) {
 	return x.inner.RequestWithError()

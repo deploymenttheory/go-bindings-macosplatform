@@ -36,26 +36,36 @@ func NewNEFilterFlow() *NEFilterFlow {
 	return &NEFilterFlow{inner: raw.NEFilterFlowFromID(_id)}
 }
 
+// @property URL @discussion The flow's HTTP request URL. Will be nil if the flow did not originate from WebKit.
+//
 // URL calls the underlying URL.
 func (x *NEFilterFlow) URL() *foundation.NSURL {
 	return x.inner.URL()
 }
 
+// @property direction @discussion Initial direction of the flow (outgoing or incoming flow)
+//
 // Direction calls the underlying Direction.
 func (x *NEFilterFlow) Direction() NETrafficDirection {
 	return NETrafficDirection(x.inner.Direction())
 }
 
+// @property sourceAppAuditToken @discussion Audit token of the source application of the flow.
+//
 // SourceAppAuditToken calls the underlying SourceAppAuditToken.
 func (x *NEFilterFlow) SourceAppAuditToken() *foundation.NSData {
 	return x.inner.SourceAppAuditToken()
 }
 
+// @property sourceProcessAuditToken @discussion The audit token of the process that created the flow. In cases where the connection was created by a system process on behalf of the source application, sourceProcessAuditToken will be different from sourceAppAuditToken and will contain the audit token of the system process. In cases where the source application directly created the connection sourceAppAuditToken and sourceProcessAuditToken will be identical.
+//
 // SourceProcessAuditToken calls the underlying SourceProcessAuditToken.
 func (x *NEFilterFlow) SourceProcessAuditToken() *foundation.NSData {
 	return x.inner.SourceProcessAuditToken()
 }
 
+// @property identifier @discussion The unique identifier of the flow.
+//
 // Identifier calls the underlying Identifier.
 func (x *NEFilterFlow) Identifier() *foundation.NSUUID {
 	return x.inner.Identifier()

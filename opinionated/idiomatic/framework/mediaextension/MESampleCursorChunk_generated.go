@@ -30,6 +30,8 @@ func SampleCursorChunkFromID(id objc.ID) *SampleCursorChunk {
 	return &SampleCursorChunk{inner: raw.MESampleCursorChunkFromID(id)}
 }
 
+// @property		initWithByteSource @abstract		The initializer for the MESampleCursorChunk class. @param			byteSource The MEByteSource to be used to read the data for the sample. @param			chunkStorageRange The offset location and length of the sample's chunk within the MEByteSource. @param			chunkInfo A completed AVSampleCursorChunkInfo with details about the chunk in the media. @param			sampleIndexWithinChunk The offset of the sample within the chunk, in samples.
+//
 // NewSampleCursorChunkWithByteSourceChunkStorageRangeChunkInfoSampleIndexWithinChunk creates a new [SampleCursorChunk].
 func NewSampleCursorChunkWithByteSourceChunkStorageRangeChunkInfoSampleIndexWithinChunk(byteSource *raw.MEByteSource, chunkStorageRange avfoundation.AVSampleCursorStorageRange, chunkInfo avfoundation.AVSampleCursorChunkInfo, sampleIndexWithinChunk int) *SampleCursorChunk {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MESampleCursorChunk")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewSampleCursorChunkWithByteSourceChunkStorageRangeChunkInfoSampleIndexWith
 	return &SampleCursorChunk{inner: raw.MESampleCursorChunkFromID(_id)}
 }
 
+// @property		byteSource @abstract		The MEByteSource to be used to read the data for the sample.
+//
 // ByteSource calls the underlying ByteSource.
 func (x *SampleCursorChunk) ByteSource() *ByteSource {
 	_r := x.inner.ByteSource()
@@ -46,16 +50,22 @@ func (x *SampleCursorChunk) ByteSource() *ByteSource {
 	return &ByteSource{inner: _r}
 }
 
+// @property		chunkStorageRange @abstract		The offset location and length of the sample's chunk, in bytes, within the MEByteSource. @discussion		The length should be set to 0 if there is no chunk associated with the sample.
+//
 // ChunkStorageRange calls the underlying ChunkStorageRange.
 func (x *SampleCursorChunk) ChunkStorageRange() avfoundation.AVSampleCursorStorageRange {
 	return x.inner.ChunkStorageRange()
 }
 
+// @property		chunkInfo @abstract		Provides information about the chunk of media samples.
+//
 // ChunkInfo calls the underlying ChunkInfo.
 func (x *SampleCursorChunk) ChunkInfo() avfoundation.AVSampleCursorChunkInfo {
 	return x.inner.ChunkInfo()
 }
 
+// @property		sampleIndexWithinChunk @abstract		The offset of the sample within the chunk, in samples. @discussion		Index value 0 corresponds to the start of the chunk. You would step back this many samples to position the cursor at the start of the chunk. Subtract from the chunkInfo.chunkSampleCount field to obtain the number of samples to the end of the chunk.
+//
 // SampleIndexWithinChunk calls the underlying SampleIndexWithinChunk.
 func (x *SampleCursorChunk) SampleIndexWithinChunk() int {
 	return x.inner.SampleIndexWithinChunk()

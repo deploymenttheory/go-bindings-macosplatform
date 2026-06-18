@@ -38,6 +38,8 @@ func NewModelStructureNeuralNetworkLayer() *ModelStructureNeuralNetworkLayer {
 	return &ModelStructureNeuralNetworkLayer{inner: raw.MLModelStructureNeuralNetworkLayerFromID(_id)}
 }
 
+// The layer name.
+//
 // Name calls the underlying Name.
 func (x *ModelStructureNeuralNetworkLayer) Name() string {
 	_r := x.inner.Name()
@@ -47,6 +49,8 @@ func (x *ModelStructureNeuralNetworkLayer) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The type of the layer, e,g, "elementwise", "pooling", etc.
+//
 // Type calls the underlying Type.
 func (x *ModelStructureNeuralNetworkLayer) Type() string {
 	_r := x.inner.Type()
@@ -56,6 +60,8 @@ func (x *ModelStructureNeuralNetworkLayer) Type() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The input names.
+//
 // InputNames returns the collection as a Go slice.
 func (x *ModelStructureNeuralNetworkLayer) InputNames() []string {
 	arr := x.inner.InputNames()
@@ -67,6 +73,8 @@ func (x *ModelStructureNeuralNetworkLayer) InputNames() []string {
 	})
 }
 
+// The output names.
+//
 // OutputNames returns the collection as a Go slice.
 func (x *ModelStructureNeuralNetworkLayer) OutputNames() []string {
 	arr := x.inner.OutputNames()

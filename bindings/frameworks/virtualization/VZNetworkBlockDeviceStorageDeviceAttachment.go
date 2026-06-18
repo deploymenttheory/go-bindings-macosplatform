@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A storage device attachment backed by a Network Block Device (NBD) client.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vznetworkblockdevicestoragedeviceattachment
 type VZNetworkBlockDeviceStorageDeviceAttachment struct {
 	VZStorageDeviceAttachment
@@ -40,7 +42,7 @@ func VZNetworkBlockDeviceStorageDeviceAttachmentFromID(id objc.ID) *VZNetworkBlo
 	return o
 }
 
-// @abstract Initialize the attachment from an NBD Uniform Resource Indicator (URI) represented as an URL. @param URL The URL referring to the NBD server to which the NBD client is to be connected. @param timeout The timeout value in seconds for the connection between the client and server. When the timeout expires, an attempt to reconnect with the server will take place. @param forcedReadOnly If YES, the disk attachment is forced to be read-only, regardless of whether or not the NBD server supports write requests. @param error If not nil, assigned with the error if the initialization failed. @return An initialized `VZNetworkBlockDeviceStorageDeviceAttachment` or nil if there was an error. @discussion The `forcedReadOnly` parameter affects how the NBD client is exposed to the guest operating system by the storage controller. As part of the NBD protocol, whether or not the disk exposed by the NBD client is read-only is advertised by the NBD server during the handshake phase of the protocol. Setting `forcedReadOnly` to YES will force the NBD client to show up as read-only to the guest regardless of whether or not the NBD server advertises itself as read-only.
+// Creates a new network block device storage attachment from an NBD Uniform Resource Indicator (URI) represented as a URL, timeout value, and read-only and synchronization modes that you provide.
 func (o *VZNetworkBlockDeviceStorageDeviceAttachment) InitWithURLTimeoutForcedReadOnlySynchronizationModeError(uRL *foundation.NSURL, timeout float64, forcedReadOnly bool, synchronizationMode VZDiskSynchronizationMode) (*VZNetworkBlockDeviceStorageDeviceAttachment, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZNetworkBlockDeviceStorageDeviceAttachmentSelInitWithURLTimeoutForcedReadOnlySynchronizationModeError, uRL.Ptr(), timeout, forcedReadOnly, synchronizationMode, unsafe.Pointer(&_nsErr))
@@ -53,7 +55,7 @@ func (o *VZNetworkBlockDeviceStorageDeviceAttachment) InitWithURLTimeoutForcedRe
 	return VZNetworkBlockDeviceStorageDeviceAttachmentFromID(_ret), nil
 }
 
-// @abstract Convenience initializer to create the attachment from an NBD URL. @param URL The URL referring to the NBD server to which the NBD client is to be connected. @param error If not nil, assigned with the error if the initialization failed. @return An initialized `VZNetworkBlockDeviceStorageDeviceAttachment` or nil if there was an error. @discussion This initializer automatically assigns optimized default values for the `timeout`, `forcedReadOnly`, and `synchronizationMode` properties.
+// Creates a new network block device (NBD) storage attachment from an NDB Uniform Resource Indicator (URI) represented as a URL that you provide.
 func (o *VZNetworkBlockDeviceStorageDeviceAttachment) InitWithURLError(uRL *foundation.NSURL) (*VZNetworkBlockDeviceStorageDeviceAttachment, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZNetworkBlockDeviceStorageDeviceAttachmentSelInitWithURLError, uRL.Ptr(), unsafe.Pointer(&_nsErr))
@@ -66,7 +68,7 @@ func (o *VZNetworkBlockDeviceStorageDeviceAttachment) InitWithURLError(uRL *foun
 	return VZNetworkBlockDeviceStorageDeviceAttachmentFromID(_ret), nil
 }
 
-// @abstract Check if URL is a valid NBD URL. @param URL The NBD URL to validate. @param error If not nil, assigned with an error describing why the URL is not valid. @discussion See https://github.com/NetworkBlockDevice/nbd/blob/master/doc/uri.md for more detailed descriptions of valid URIs. This method checks that the URL is well-formed, it does not attempt to access the URL.
+// Checks if the URL is a valid network block device URL.
 func VZNetworkBlockDeviceStorageDeviceAttachmentValidateURLError(uRL *foundation.NSURL) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsVZNetworkBlockDeviceStorageDeviceAttachment), _vZNetworkBlockDeviceStorageDeviceAttachmentSelValidateURLError, uRL.Ptr(), unsafe.Pointer(&_nsErr))

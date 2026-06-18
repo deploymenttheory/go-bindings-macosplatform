@@ -37,11 +37,15 @@ func NewAssetSegmentTrackReport() *AssetSegmentTrackReport {
 	return &AssetSegmentTrackReport{inner: raw.AVAssetSegmentTrackReportFromID(_id)}
 }
 
+// @property	trackID @abstract	Indicates the persistent unique identifier for this track.
+//
 // TrackID calls the underlying TrackID.
 func (x *AssetSegmentTrackReport) TrackID() int32 {
 	return x.inner.TrackID()
 }
 
+// @property	mediaType @abstract	Indicates the media type for this track. Media types are declared in AVMediaFormat.h.
+//
 // MediaType calls the underlying MediaType.
 func (x *AssetSegmentTrackReport) MediaType() string {
 	_r := x.inner.MediaType()
@@ -51,16 +55,22 @@ func (x *AssetSegmentTrackReport) MediaType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property	earliestPresentationTimeStamp @abstract	Indicates the earliest presentation timestamp (PTS) for this track. The value is kCMTimeInvalid if there is no information available.
+//
 // EarliestPresentationTimeStamp calls the underlying EarliestPresentationTimeStamp.
 func (x *AssetSegmentTrackReport) EarliestPresentationTimeStamp() coremedia.CMTime {
 	return x.inner.EarliestPresentationTimeStamp()
 }
 
+// @property	duration @abstract	Indicates the duration for this track. The value is kCMTimeInvalid if there is no information available.
+//
 // Duration calls the underlying Duration.
 func (x *AssetSegmentTrackReport) Duration() coremedia.CMTime {
 	return x.inner.Duration()
 }
 
+// @property	firstVideoSampleInformation @abstract	Provides information on the first video sample in this track. The value is nil if this track is not video track or no information available.
+//
 // FirstVideoSampleInformation calls the underlying FirstVideoSampleInformation.
 func (x *AssetSegmentTrackReport) FirstVideoSampleInformation() *AssetSegmentReportSampleInformation {
 	_r := x.inner.FirstVideoSampleInformation()

@@ -44,16 +44,22 @@ func NewScrubberLayoutWithCoder(coder *foundation.NSCoder) *ScrubberLayout {
 	return &ScrubberLayout{inner: raw.NSScrubberLayoutFromID(_id)}
 }
 
+// Signals that layout has been invalidated and the NSScrubber should run a fresh layout pass. Subclasses may define more granular invalidation methods suitable for their own data structures, but those methods should always call up to -invalidateLayout.
+//
 // InvalidateLayout calls the underlying InvalidateLayout.
 func (x *ScrubberLayout) InvalidateLayout() {
 	x.inner.InvalidateLayout()
 }
 
+// Following any invalidation in layout, @c NSScrubber will call @c prepareLayout on its layout object prior to requesting any other layout information. Subclasses should use this method to perform upfront calculations and caching. The base implementation of this method does nothing.
+//
 // PrepareLayout calls the underlying PrepareLayout.
 func (x *ScrubberLayout) PrepareLayout() {
 	x.inner.PrepareLayout()
 }
 
+// Returns the layout attributes for a single item within the scrubber. The base implementation returns @c nil.
+//
 // LayoutAttributesForItemAtIndex calls the underlying LayoutAttributesForItemAtIndex.
 func (x *ScrubberLayout) LayoutAttributesForItemAtIndex(index int) *ScrubberLayoutAttributes {
 	_r := x.inner.LayoutAttributesForItemAtIndex(index)
@@ -63,16 +69,22 @@ func (x *ScrubberLayout) LayoutAttributesForItemAtIndex(index int) *ScrubberLayo
 	return &ScrubberLayoutAttributes{inner: _r}
 }
 
+// Returns the set of layout attributes for all items within the provided rectangle. The base implementation returns an empty set.
+//
 // LayoutAttributesForItemsInRect calls the underlying LayoutAttributesForItemsInRect.
 func (x *ScrubberLayout) LayoutAttributesForItemsInRect(rect corefoundation.CGRect) *foundation.NSSet[*raw.NSScrubberLayoutAttributes] {
 	return x.inner.LayoutAttributesForItemsInRect(rect)
 }
 
+// If @c YES, the scrubber will invalidate its layout in response to a change in the visible region. The default value is @c NO. Subclasses which rely on the size or origin of the visible region should return @c YES.
+//
 // ShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect calls the underlying ShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect.
 func (x *ScrubberLayout) ShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect(fromVisibleRect corefoundation.CGRect, toVisibleRect corefoundation.CGRect) bool {
 	return x.inner.ShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect(fromVisibleRect, toVisibleRect)
 }
 
+// The NSScrubber control that this layout is assigned to, or @c nil if the receiver is not assigned to a scrubber.
+//
 // Scrubber calls the underlying Scrubber.
 func (x *ScrubberLayout) Scrubber() *Scrubber {
 	_r := x.inner.Scrubber()
@@ -82,26 +94,36 @@ func (x *ScrubberLayout) Scrubber() *Scrubber {
 	return &Scrubber{inner: _r}
 }
 
+// The currently visible rectangle, in the coordinate space of the scrubber content. Returns @c NSZeroRect if the receiver is not assigned to a scrubber.
+//
 // VisibleRect calls the underlying VisibleRect.
 func (x *ScrubberLayout) VisibleRect() corefoundation.CGRect {
 	return x.inner.VisibleRect()
 }
 
+// Returns the content size for all elements within the scrubber. The base implementation returns @c NSZeroSize.
+//
 // ScrubberContentSize calls the underlying ScrubberContentSize.
 func (x *ScrubberLayout) ScrubberContentSize() corefoundation.CGSize {
 	return x.inner.ScrubberContentSize()
 }
 
+// If @c YES, the scrubber will invalidate its layout when the selection changes. The default value is @c NO. Subclasses should return @c YES if the selection index affects the item layout.
+//
 // ShouldInvalidateLayoutForSelectionChange calls the underlying ShouldInvalidateLayoutForSelectionChange.
 func (x *ScrubberLayout) ShouldInvalidateLayoutForSelectionChange() bool {
 	return x.inner.ShouldInvalidateLayoutForSelectionChange()
 }
 
+// If @c YES, the scrubber will invalidate its layout when an item is highlighted. The default value is @c NO. Subclasses should return @c YES if the highlight state affects the item layout.
+//
 // ShouldInvalidateLayoutForHighlightChange calls the underlying ShouldInvalidateLayoutForHighlightChange.
 func (x *ScrubberLayout) ShouldInvalidateLayoutForHighlightChange() bool {
 	return x.inner.ShouldInvalidateLayoutForHighlightChange()
 }
 
+// If @c YES, the layout object will automatically have its inputs and outputs mirrored in right-to-left interfaces. The default value is @c YES. Subclasses that wish to handle RTL layout manually should return @c NO.
+//
 // AutomaticallyMirrorsInRightToLeftLayout calls the underlying AutomaticallyMirrorsInRightToLeftLayout.
 func (x *ScrubberLayout) AutomaticallyMirrorsInRightToLeftLayout() bool {
 	return x.inner.AutomaticallyMirrorsInRightToLeftLayout()

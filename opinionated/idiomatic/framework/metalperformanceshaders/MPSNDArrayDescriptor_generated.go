@@ -39,54 +39,74 @@ func NewNDArrayDescriptor() *NDArrayDescriptor {
 	return &NDArrayDescriptor{inner: raw.MPSNDArrayDescriptorFromID(_id)}
 }
 
+// @abstract  Data Type of the MPSNDArray elements
+//
 // WithDataType sets the dataType property and returns the receiver for chaining.
 func (x *NDArrayDescriptor) WithDataType(dataType mpscore.MPSDataType) *NDArrayDescriptor {
 	x.inner.SetDataType(dataType)
 	return x
 }
 
+// @abstract   The number of dimensions in the NDArray. @discussion May not exceed 16. A 0-diumension MPSNDArray is a single scalar value. Undefined dimensions are implicitly length 1.
+//
 // WithNumberOfDimensions sets the numberOfDimensions property and returns the receiver for chaining.
 func (x *NDArrayDescriptor) WithNumberOfDimensions(numberOfDimensions uint) *NDArrayDescriptor {
 	x.inner.SetNumberOfDimensions(numberOfDimensions)
 	return x
 }
 
+// @property   preferPackedRows @abstract   If YES, then new NDArrays created with this descriptor will pack the rows. Default: NO.
+//
 // WithPreferPackedRows sets the preferPackedRows property and returns the receiver for chaining.
 func (x *NDArrayDescriptor) WithPreferPackedRows(preferPackedRows bool) *NDArrayDescriptor {
 	x.inner.SetPreferPackedRows(preferPackedRows)
 	return x
 }
 
+// @abstract   The number of elements of type dataType in the indicated dimension. @discussion If dimensionIndex >= numberOfDimensions, 1 will be returned. @param      dimensionIndex  dimension the MPSNDArray for which to return the length @return     The number of elements in that dimension.
+//
 // LengthOfDimension calls the underlying LengthOfDimension.
 func (x *NDArrayDescriptor) LengthOfDimension(dimensionIndex uint) uint {
 	return x.inner.LengthOfDimension(dimensionIndex)
 }
 
+// @abstract      The slice dimensions for each dimension @discusion     A slice is a subregion of a dimension. It is used to calve off a fraction of a larger NDArray. @param         dimensionIndex           The index of the dimension @return        Returns the slice range for the index. If the dimensionIndex >= numberOfDimensions, {0,1} is returned.
+//
 // SliceRangeForDimension calls the underlying SliceRangeForDimension.
 func (x *NDArrayDescriptor) SliceRangeForDimension(dimensionIndex uint) mpscore.MPSDimensionSlice {
 	return x.inner.SliceRangeForDimension(dimensionIndex)
 }
 
+// @abstract      The slice dimensions for each dimension @discusion     A slice is a subregion of a dimension. It is used to calve off a fraction of a larger NDArray. Default:  NSRange(0, lengthOfDimension(i)) @param         subRange                 The region of the slice, start value is wrt dimensionLength of the NDArray. @param         dimensionIndex           The index of the dimension. Must be < numberOfDimensions
+//
 // SliceDimensionWithSubrange calls the underlying SliceDimensionWithSubrange.
 func (x *NDArrayDescriptor) SliceDimensionWithSubrange(dimensionIndex uint, subRange mpscore.MPSDimensionSlice) {
 	x.inner.SliceDimensionWithSubrange(dimensionIndex, subRange)
 }
 
+// @abstract    transpose two dimensions @discusion   If the intention is to insert a length 1 dimension, increment the numberOfDimensions first. @param       dimensionIndex  The first dimension. Must be < numberOfDimensions @param       dimensionIndex2 The second dimension.  Must be < number of Dimensions.
+//
 // TransposeDimensionWithDimension calls the underlying TransposeDimensionWithDimension.
 func (x *NDArrayDescriptor) TransposeDimensionWithDimension(dimensionIndex uint, dimensionIndex2 uint) {
 	x.inner.TransposeDimensionWithDimension(dimensionIndex, dimensionIndex2)
 }
 
+// @abstract   Permutes the dimensions of the current descriptor @param      dimensionOrder      A permutation of the dimensions of the NDArray. dimensionOrder[i] must contain the new postion of dimenson i. Size of the array must be equal to the original number of dimensions in the descriptor. Must have all the indices in [0, numberOfDimensions) present uniquely. @discussion This permutation is applied on top of whatever transpostions/permutations that may have been performed on the descriptor before.
+//
 // PermuteWithDimensionOrder calls the underlying PermuteWithDimensionOrder.
 func (x *NDArrayDescriptor) PermuteWithDimensionOrder(dimensionOrder *uint) {
 	x.inner.PermuteWithDimensionOrder(dimensionOrder)
 }
 
+// @abstract    The new ordering of dimensions @discussion  If a transpose is applied, it will change the order of dimensions in the MPSNDArray. The default ordering is {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}.  After a transpose of dimensions 0 and 1, it will be: {1,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15}
+//
 // DimensionOrder calls the underlying DimensionOrder.
 func (x *NDArrayDescriptor) DimensionOrder() unsafe.Pointer {
 	return x.inner.DimensionOrder()
 }
 
+// @abstract    Returns the shape of the NDArray as MPSShape @discussion  The length of the array is the number of dimensions and the size of the fastest running dimension is the last element in the array.
+//
 // GetShape returns the collection as a Go slice.
 func (x *NDArrayDescriptor) GetShape() []*foundation.NSNumber {
 	arr := x.inner.GetShape()
@@ -98,16 +118,22 @@ func (x *NDArrayDescriptor) GetShape() []*foundation.NSNumber {
 	})
 }
 
+// @abstract   Changes dimension sizes and number of dimensions on the current descriptor @param      numberOfDimensions Number of dimensions in the NDArray. May not exceed 16. @param      dimensionSizes     An array of NSUIntegers where dimension lengths provided by the user goes from fastest moving to slowest moving dimension. The product of all dimension lengths must be less than 2**31. Additional system memory limits may apply
+//
 // ReshapeWithDimensionCountDimensionSizes calls the underlying ReshapeWithDimensionCountDimensionSizes.
 func (x *NDArrayDescriptor) ReshapeWithDimensionCountDimensionSizes(numberOfDimensions uint, dimensionSizes *uint) {
 	x.inner.ReshapeWithDimensionCountDimensionSizes(numberOfDimensions, dimensionSizes)
 }
 
+// @abstract   Changes dimension sizes and number of dimensions on the current descriptor @param      shape              An array of NSUIntegers where dimension lengths provided by the user goes from slowest moving to fastest moving dimension. This is same order as MLMultiArray in coreML and most frameworks in Python The product of all dimension lengths must be less than 2**31. Additional system memory limits may apply
+//
 // ReshapeWithShape calls the underlying ReshapeWithShape.
 func (x *NDArrayDescriptor) ReshapeWithShape(shape *foundation.NSArray[*foundation.NSNumber]) {
 	x.inner.ReshapeWithShape(shape)
 }
 
+// @abstract  Data Type of the MPSNDArray elements
+//
 // DataType calls the underlying DataType.
 func (x *NDArrayDescriptor) DataType() mpscore.MPSDataType {
 	return x.inner.DataType()
@@ -118,6 +144,8 @@ func (x *NDArrayDescriptor) SetDataType(dataType mpscore.MPSDataType) {
 	x.inner.SetDataType(dataType)
 }
 
+// @abstract   The number of dimensions in the NDArray. @discussion May not exceed 16. A 0-diumension MPSNDArray is a single scalar value. Undefined dimensions are implicitly length 1.
+//
 // NumberOfDimensions calls the underlying NumberOfDimensions.
 func (x *NDArrayDescriptor) NumberOfDimensions() uint {
 	return x.inner.NumberOfDimensions()
@@ -128,11 +156,15 @@ func (x *NDArrayDescriptor) SetNumberOfDimensions(numberOfDimensions uint) {
 	x.inner.SetNumberOfDimensions(numberOfDimensions)
 }
 
+// @property   preferPackedRows @abstract   If YES, then new NDArrays created with this descriptor will pack the rows. Default: NO.
+//
 // PreferPackedRows calls the underlying PreferPackedRows.
 func (x *NDArrayDescriptor) PreferPackedRows() bool {
 	return x.inner.PreferPackedRows()
 }
 
+// @property   preferPackedRows @abstract   If YES, then new NDArrays created with this descriptor will pack the rows. Default: NO.
+//
 // SetPreferPackedRows calls the underlying SetPreferPackedRows.
 func (x *NDArrayDescriptor) SetPreferPackedRows(preferPackedRows bool) {
 	x.inner.SetPreferPackedRows(preferPackedRows)

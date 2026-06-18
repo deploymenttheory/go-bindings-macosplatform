@@ -32,6 +32,8 @@ func AssetPackManifestFromID(id objc.ID) *AssetPackManifest {
 	return &AssetPackManifest{inner: raw.BAAssetPackManifestFromID(id)}
 }
 
+// Initializes a representation of a manifest in memory given a URL to the manifest’s representation as a JSON file on disk. - Parameters: - URL: A URL to a local JSON file. - applicationGroupIdentifier: The identifier of the application group in which to store unmanaged asset packs that are downloaded from the manifest. - error: A pointer to an error that will be set if an error occurs.
+//
 // NewAssetPackManifestWithContentsOfURLApplicationGroupIdentifierError creates a new [AssetPackManifest].
 func NewAssetPackManifestWithContentsOfURLApplicationGroupIdentifierError(uRL string, applicationGroupIdentifier string) (*AssetPackManifest, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("BAAssetPackManifest")), objc.RegisterName("alloc"))
@@ -43,6 +45,8 @@ func NewAssetPackManifestWithContentsOfURLApplicationGroupIdentifierError(uRL st
 	return &AssetPackManifest{inner: raw.BAAssetPackManifestFromID(_id)}, nil
 }
 
+// Initializes a representation of a manifest in memory from JSON-encoded data. - Parameters: - data: JSON-encoded data. - applicationGroupIdentifier: The identifier of the application group in which to store unmanaged asset packs that are downloaded from the manifest. - error: A pointer to an error that will be set if an error occurs.
+//
 // NewAssetPackManifestFromDataApplicationGroupIdentifierError creates a new [AssetPackManifest].
 func NewAssetPackManifestFromDataApplicationGroupIdentifierError(data *foundation.NSData, applicationGroupIdentifier string) (*AssetPackManifest, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("BAAssetPackManifest")), objc.RegisterName("alloc"))
@@ -54,16 +58,22 @@ func NewAssetPackManifestFromDataApplicationGroupIdentifierError(data *foundatio
 	return &AssetPackManifest{inner: raw.BAAssetPackManifestFromID(_id)}, nil
 }
 
+// Creates download objects for every asset pack in this manifest. The returned download objects can be scheduled with the download manager. - Returns: A collection of download objects. - Remark: Use this method in your main application; use “allDownloadsForContentRequest:“ in your downloader extension.
+//
 // AllDownloads calls the underlying AllDownloads.
 func (x *AssetPackManifest) AllDownloads() *foundation.NSSet[*raw.BADownload] {
 	return x.inner.AllDownloads()
 }
 
+// Creates download objects for every asset pack in this manifest. The returned download objects can be scheduled with the download manager. - Parameter contentRequest: The content request for the current extension invocation. - Returns: A collection of download objects. - Remark: Use this method in your downloader extension; use “allDownloads“ instead in your main application.
+//
 // AllDownloadsForContentRequest calls the underlying AllDownloadsForContentRequest.
 func (x *AssetPackManifest) AllDownloadsForContentRequest(contentRequest BAContentRequest) *foundation.NSSet[*raw.BADownload] {
 	return x.inner.AllDownloadsForContentRequest(raw.BAContentRequest(contentRequest))
 }
 
+// The asset packs that are available to download.
+//
 // AssetPacks calls the underlying AssetPacks.
 func (x *AssetPackManifest) AssetPacks() *foundation.NSSet[*raw.BAAssetPack] {
 	return x.inner.AssetPacks()

@@ -35,6 +35,8 @@ func NNOptimizerStochasticGradientDescentFromID(id objc.ID) *NNOptimizerStochast
 	return &NNOptimizerStochasticGradientDescent{inner: raw.MPSNNOptimizerStochasticGradientDescentFromID(id)}
 }
 
+// @abstract   Convenience initialization for the momentum update @param      device                     The device on which the kernel will execute. @param      learningRate               The learningRate which will be applied @return     A valid MPSNNOptimizerStochasticGradientDescent object or nil, if failure.
+//
 // NewNNOptimizerStochasticGradientDescentWithDeviceLearningRate creates a new [NNOptimizerStochasticGradientDescent].
 func NewNNOptimizerStochasticGradientDescentWithDeviceLearningRate(device metal.MTLDevice, learningRate float32) *NNOptimizerStochasticGradientDescent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNOptimizerStochasticGradientDescent")), objc.RegisterName("alloc"))
@@ -42,6 +44,8 @@ func NewNNOptimizerStochasticGradientDescentWithDeviceLearningRate(device metal.
 	return &NNOptimizerStochasticGradientDescent{inner: raw.MPSNNOptimizerStochasticGradientDescentFromID(_id)}
 }
 
+// @abstract   Full initialization for the momentum update @param      device                     The device on which the kernel will execute. @param      momentumScale              The momentumScale to update momentum for values array @param      useNesterovMomentum         Use the Nesterov style momentum update @param      optimizerDescriptor        The optimizerDescriptor which will have a bunch of properties to be applied @return     A valid MPSNNOptimizerMomentum object or nil, if failure.
+//
 // NewNNOptimizerStochasticGradientDescentWithDeviceMomentumScaleUseNesterovMomentumOptimizerDescriptor creates a new [NNOptimizerStochasticGradientDescent].
 func NewNNOptimizerStochasticGradientDescentWithDeviceMomentumScaleUseNesterovMomentumOptimizerDescriptor(device metal.MTLDevice, momentumScale float32, useNesterovMomentum bool, optimizerDescriptor *mpsneuralnetwork.MPSNNOptimizerDescriptor) *NNOptimizerStochasticGradientDescent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNOptimizerStochasticGradientDescent")), objc.RegisterName("alloc"))
@@ -56,30 +60,40 @@ func NewNNOptimizerStochasticGradientDescentWithDeviceMomentumScaleUseNestrovMom
 	return &NNOptimizerStochasticGradientDescent{inner: raw.MPSNNOptimizerStochasticGradientDescentFromID(_id)}
 }
 
+// @property   learningRate @abstract   The learningRate at which we update values @discussion The default value is 1e-3
+//
 // WithLearningRate sets the learningRate property and returns the receiver for chaining.
 func (x *NNOptimizerStochasticGradientDescent) WithLearningRate(learningRate float32) *NNOptimizerStochasticGradientDescent {
 	x.inner.MPSNNOptimizer.SetLearningRate(learningRate)
 	return x
 }
 
+// @property   applyGradientClipping @abstract   A bool which decides if gradient will be clipped @discussion The default value is NO
+//
 // WithApplyGradientClipping sets the applyGradientClipping property and returns the receiver for chaining.
 func (x *NNOptimizerStochasticGradientDescent) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerStochasticGradientDescent {
 	x.inner.MPSNNOptimizer.SetApplyGradientClipping(applyGradientClipping)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *NNOptimizerStochasticGradientDescent) WithOptions(options mpscore.MPSKernelOptions) *NNOptimizerStochasticGradientDescent {
 	x.inner.MPSNNOptimizer.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NNOptimizerStochasticGradientDescent) WithLabel(label string) *NNOptimizerStochasticGradientDescent {
 	x.inner.MPSNNOptimizer.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @abstract   Encode an MPSNNOptimizerStochasticGradientDescent object to a command buffer to perform out of place update @param      commandBuffer              A valid MTLCommandBuffer to receive the encoded kernel. @param      inputGradientVector        A valid MPSVector object which specifies the input vector of gradients for this update. @param      inputValuesVector          A valid MPSVector object which specifies the input vector of values to be updated. @param      inputMomentumVector        A valid MPSVector object which specifies the gradient momentum vector which will be updated and overwritten. @param      resultValuesVector         A valid MPSVector object which specifies the resultValues vector which will be updated and overwritten. @discussion The following operations would be applied useNesterov == NO: m[t]     = momentumScale * m[t-1] + learningRate * g variable = variable - m[t] useNesterov == YES: m[t]     = momentumScale * m[t-1] + g variable = variable - (learningRate * (g + m[t] * momentumScale)) inputMomentumVector == nil variable = variable - (learningRate * g) where, g    is gradient of error wrt variable m[t] is momentum of gradients it is a state we keep updating every update iteration
+//
 // EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorResultValuesVector calls the underlying EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorResultValuesVector.
 func (x *NNOptimizerStochasticGradientDescent) EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputMomentumVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector) {
 	x.inner.EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorResultValuesVector(commandBuffer, inputGradientVector, inputValuesVector, inputMomentumVector, resultValuesVector)
@@ -90,26 +104,36 @@ func (x *NNOptimizerStochasticGradientDescent) EncodeToCommandBufferInputGradien
 	x.inner.EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixResultValuesMatrix(commandBuffer, inputGradientMatrix, inputValuesMatrix, inputMomentumMatrix, resultValuesMatrix)
 }
 
+// @abstract   Encode an MPSNNOptimizerStochasticGradientDescent object to a command buffer to perform out of place update @param      commandBuffer              A valid MTLCommandBuffer to receive the encoded kernel. @param      convolutionGradientState   A valid MPSCNNConvolutionGradientState object which specifies the input state with gradients for this update. @param      convolutionSourceState     A valid MPSCNNConvolutionWeightsAndBiasesState object which specifies the input state with values to be updated. @param      inputMomentumVectors       An array MPSVector object which specifies the gradient momentum vectors which will be updated and overwritten. The index 0 corresponds to weights, index 1 corresponds to biases, array can be of size 1 in which case biases won't be updated @param      resultState                A valid MPSCNNConvolutionWeightsAndBiasesState object which specifies the resultValues state which will be updated and overwritten. @discussion The following operations would be applied useNesterov == NO: m[t]     = momentumScale * m[t-1] + learningRate * g variable = variable - m[t] useNesterov == YES: m[t]     = momentumScale * m[t-1] + g variable = variable - (learningRate * (g + m[t] * momentumScale)) inputMomentumVector == nil variable = variable - (learningRate * g) where, g    is gradient of error wrt variable m[t] is momentum of gradients it is a state we keep updating every update iteration
+//
 // EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsResultState calls the underlying EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsResultState.
 func (x *NNOptimizerStochasticGradientDescent) EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsResultState(commandBuffer metal.MTLCommandBuffer, convolutionGradientState *mpsneuralnetwork.MPSCNNConvolutionGradientState, convolutionSourceState *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState) {
 	x.inner.EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsResultState(commandBuffer, convolutionGradientState, convolutionSourceState, inputMomentumVectors, resultState)
 }
 
+// @abstract   Encode an MPSNNOptimizerStochasticGradientDescent object to a command buffer to perform out of place update @param      commandBuffer                              A valid MTLCommandBuffer to receive the encoded kernel. @param      batchNormalizationState                    A valid MPSCNNBatchNormalizationState object which specifies the input state with gradients and original gamma/beta for this update. @param      inputMomentumVectors                       An array MPSVector object which specifies the gradient momentum vectors which will be updated and overwritten. The index 0 corresponds to gamma, index 1 corresponds to beta, array can be of size 1 in which case beta won't be updated @param      resultState                                A valid MPSCNNNormalizationGammaAndBetaState object which specifies the resultValues state which will be updated and overwritten. @discussion The following operations would be applied useNesterov == NO: m[t]     = momentumScale * m[t-1] + learningRate * g variable = variable - m[t] useNesterov == YES: m[t]     = momentumScale * m[t-1] + g variable = variable - (learningRate * (g + m[t] * momentumScale)) inputMomentumVector == nil variable = variable - (learningRate * g) where, g    is gradient of error wrt variable m[t] is momentum of gradients it is a state we keep updating every update iteration
+//
 // EncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsResultState calls the underlying EncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsResultState.
 func (x *NNOptimizerStochasticGradientDescent) EncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState) {
 	x.inner.EncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsResultState(commandBuffer, batchNormalizationState, inputMomentumVectors, resultState)
 }
 
+// @abstract   Encode an MPSNNOptimizerStochasticGradientDescent object to a command buffer to perform out of place update @param      commandBuffer                              A valid MTLCommandBuffer to receive the encoded kernel. @param      batchNormalizationGradientState            A valid MPSCNNBatchNormalizationState object which specifies the input state with gradients for this update. @param      batchNormalizationSourceState              A valid MPSCNNBatchNormalizationState object which specifies the input state with original gamma/beta for this update. @param      inputMomentumVectors                       An array MPSVector object which specifies the gradient momentum vectors which will be updated and overwritten. The index 0 corresponds to gamma, index 1 corresponds to beta, array can be of size 1 in which case beta won't be updated @param      resultState                                A valid MPSCNNNormalizationGammaAndBetaState object which specifies the resultValues state which will be updated and overwritten. @discussion The following operations would be applied useNesterov == NO: m[t]     = momentumScale * m[t-1] + learningRate * g variable = variable - m[t] useNesterov == YES: m[t]     = momentumScale * m[t-1] + g variable = variable - (learningRate * (g + m[t] * momentumScale)) inputMomentumVector == nil variable = variable - (learningRate * g) where, g    is gradient of error wrt variable m[t] is momentum of gradients it is a state we keep updating every update iteration
+//
 // EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsResultState calls the underlying EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsResultState.
 func (x *NNOptimizerStochasticGradientDescent) EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationGradientState *mpsneuralnetwork.MPSCNNBatchNormalizationState, batchNormalizationSourceState *mpsneuralnetwork.MPSCNNBatchNormalizationState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState) {
 	x.inner.EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsResultState(commandBuffer, batchNormalizationGradientState, batchNormalizationSourceState, inputMomentumVectors, resultState)
 }
 
+// @property   momentumScale @abstract   The momentumScale at which we update momentum for values array @discussion Default value is 0.0
+//
 // MomentumScale calls the underlying MomentumScale.
 func (x *NNOptimizerStochasticGradientDescent) MomentumScale() float32 {
 	return x.inner.MomentumScale()
 }
 
+// @property   useNesterovMomentum @abstract   Nesterov momentum is considered an improvement on the usual momentum update @discussion Default value is NO @note       Maps to old useNestrovMomentum property
+//
 // UseNesterovMomentum calls the underlying UseNesterovMomentum.
 func (x *NNOptimizerStochasticGradientDescent) UseNesterovMomentum() bool {
 	return x.inner.UseNesterovMomentum()

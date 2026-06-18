@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A device that defines the configuration for a Mac keyboard.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzmackeyboardconfiguration
 type VZMacKeyboardConfiguration struct {
 	VZKeyboardConfiguration
@@ -29,6 +31,7 @@ func VZMacKeyboardConfigurationFromID(id objc.ID) *VZMacKeyboardConfiguration {
 	return o
 }
 
+// Creates a new Mac keyboard configuration.
 func (o *VZMacKeyboardConfiguration) Init() *VZMacKeyboardConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacKeyboardConfigurationSelInit)
 	if _ret != 0 {

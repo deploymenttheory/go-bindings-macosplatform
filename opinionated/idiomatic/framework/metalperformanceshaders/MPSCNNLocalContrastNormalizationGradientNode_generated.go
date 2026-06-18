@@ -40,54 +40,72 @@ func NewCNNLocalContrastNormalizationGradientNodeWithSourceGradientSourceImageGr
 	return &CNNLocalContrastNormalizationGradientNode{inner: raw.MPSCNNLocalContrastNormalizationGradientNodeFromID(_id)}
 }
 
+// @property   alpha @abstract   The value of alpha.  Default is 0.0 @discussion The default value 0.0 is not recommended and is preserved for backwards compatibility. With alpha 0, it performs a local mean subtraction. The MPSCNNLocalContrastNormalizationNode used with the MPSNNGraph uses 1.0 as a default.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalizationGradientNode) WithAlpha(alpha float32) *CNNLocalContrastNormalizationGradientNode {
 	x.inner.SetAlpha(alpha)
 	return x
 }
 
+// @property   beta @abstract   The value of beta.  Default is 0.5
+//
 // WithBeta sets the beta property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalizationGradientNode) WithBeta(beta float32) *CNNLocalContrastNormalizationGradientNode {
 	x.inner.SetBeta(beta)
 	return x
 }
 
+// @property   delta @abstract   The value of delta.  Default is 1/1024
+//
 // WithDelta sets the delta property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalizationGradientNode) WithDelta(delta float32) *CNNLocalContrastNormalizationGradientNode {
 	x.inner.SetDelta(delta)
 	return x
 }
 
+// @property   p0 @abstract   The value of p0.  Default is 1.0
+//
 // WithP0 sets the p0 property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalizationGradientNode) WithP0(p0 float32) *CNNLocalContrastNormalizationGradientNode {
 	x.inner.SetP0(p0)
 	return x
 }
 
+// @property   pm @abstract   The value of pm.  Default is 0.0
+//
 // WithPm sets the pm property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalizationGradientNode) WithPm(pm float32) *CNNLocalContrastNormalizationGradientNode {
 	x.inner.SetPm(pm)
 	return x
 }
 
+// @property   ps @abstract   The value of ps.  Default is 1.0
+//
 // WithPs sets the ps property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalizationGradientNode) WithPs(ps float32) *CNNLocalContrastNormalizationGradientNode {
 	x.inner.SetPs(ps)
 	return x
 }
 
+// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
+//
 // WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalizationGradientNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNLocalContrastNormalizationGradientNode {
 	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalizationGradientNode) WithLabel(label string) *CNNLocalContrastNormalizationGradientNode {
 	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   alpha @abstract   The value of alpha.  Default is 0.0 @discussion The default value 0.0 is not recommended and is preserved for backwards compatibility. With alpha 0, it performs a local mean subtraction. The MPSCNNLocalContrastNormalizationNode used with the MPSNNGraph uses 1.0 as a default.
+//
 // Alpha calls the underlying Alpha.
 func (x *CNNLocalContrastNormalizationGradientNode) Alpha() float32 {
 	return x.inner.Alpha()
@@ -98,6 +116,8 @@ func (x *CNNLocalContrastNormalizationGradientNode) SetAlpha(alpha float32) {
 	x.inner.SetAlpha(alpha)
 }
 
+// @property   beta @abstract   The value of beta.  Default is 0.5
+//
 // Beta calls the underlying Beta.
 func (x *CNNLocalContrastNormalizationGradientNode) Beta() float32 {
 	return x.inner.Beta()
@@ -108,6 +128,8 @@ func (x *CNNLocalContrastNormalizationGradientNode) SetBeta(beta float32) {
 	x.inner.SetBeta(beta)
 }
 
+// @property   delta @abstract   The value of delta.  Default is 1/1024
+//
 // Delta calls the underlying Delta.
 func (x *CNNLocalContrastNormalizationGradientNode) Delta() float32 {
 	return x.inner.Delta()
@@ -118,6 +140,8 @@ func (x *CNNLocalContrastNormalizationGradientNode) SetDelta(delta float32) {
 	x.inner.SetDelta(delta)
 }
 
+// @property   p0 @abstract   The value of p0.  Default is 1.0
+//
 // P0 calls the underlying P0.
 func (x *CNNLocalContrastNormalizationGradientNode) P0() float32 {
 	return x.inner.P0()
@@ -128,6 +152,8 @@ func (x *CNNLocalContrastNormalizationGradientNode) SetP0(p0 float32) {
 	x.inner.SetP0(p0)
 }
 
+// @property   pm @abstract   The value of pm.  Default is 0.0
+//
 // Pm calls the underlying Pm.
 func (x *CNNLocalContrastNormalizationGradientNode) Pm() float32 {
 	return x.inner.Pm()
@@ -138,6 +164,8 @@ func (x *CNNLocalContrastNormalizationGradientNode) SetPm(pm float32) {
 	x.inner.SetPm(pm)
 }
 
+// @property   ps @abstract   The value of ps.  Default is 1.0
+//
 // Ps calls the underlying Ps.
 func (x *CNNLocalContrastNormalizationGradientNode) Ps() float32 {
 	return x.inner.Ps()

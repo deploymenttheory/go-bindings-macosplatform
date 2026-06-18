@@ -35,6 +35,8 @@ func MTRBaseClusterPumpConfigurationAndControlFromID(id objc.ID) *MTRBaseCluster
 	return &MTRBaseClusterPumpConfigurationAndControl{inner: raw.MTRBaseClusterPumpConfigurationAndControlFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterPumpConfigurationAndControlWithDeviceEndpointIDQueue creates a new [MTRBaseClusterPumpConfigurationAndControl].
 func NewMTRBaseClusterPumpConfigurationAndControlWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterPumpConfigurationAndControl {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterPumpConfigurationAndControl")), objc.RegisterName("alloc"))

@@ -32,6 +32,8 @@ func SharingServiceFromID(id objc.ID) *SharingService {
 	return &SharingService{inner: raw.NSSharingServiceFromID(id)}
 }
 
+// Creates a custom NSSharingService object. Custom sharing services can be added to the NSSharingServicePicker with the sharingServicePicker:sharingServicesForItems:proposedSharingServices: delegate method.
+//
 // NewSharingServiceWithTitleImageAlternateImageHandler creates a new [SharingService].
 func NewSharingServiceWithTitleImageAlternateImageHandler(title string, image *raw.NSImage, alternateImage *raw.NSImage, block func()) *SharingService {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSharingService")), objc.RegisterName("alloc"))
@@ -45,12 +47,16 @@ func (x *SharingService) WithDelegate(delegate raw.NSSharingServiceDelegate) *Sh
 	return x
 }
 
+// Title of the service in the Share menu. Can be modified.
+//
 // WithMenuItemTitle sets the menuItemTitle property and returns the receiver for chaining.
 func (x *SharingService) WithMenuItemTitle(menuItemTitle string) *SharingService {
 	x.inner.SetMenuItemTitle(foundation.NSStringStringWithUTF8String(menuItemTitle))
 	return x
 }
 
+// NSArray of NSString objects representing handles (example: email adresses)
+//
 // WithRecipients sets the collection, converting the Go slice to an NSArray.
 func (x *SharingService) WithRecipients(items ...*foundation.NSString) *SharingService {
 	if len(items) == 0 {
@@ -75,11 +81,15 @@ func (x *SharingService) WithSubject(subject string) *SharingService {
 	return x
 }
 
+// Returns whether a service can do something with all the provided items. This can be used to validate a custom UI such as a dedicated Twitter button. If items is nil, the method will return YES when the service is configured. Therefore you could call it once at launch time with nil items to check whether to display the button or not, and then with real items to enable and disable the button depending on the context or selection. The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider or an NSDocument. (e.g. NSString, NSImage, NSURL, etc.)
+//
 // CanPerformWithItems calls the underlying CanPerformWithItems.
 func (x *SharingService) CanPerformWithItems(items *foundation.NSArray[objc.ID]) bool {
 	return x.inner.CanPerformWithItems(items)
 }
 
+// Manually performs the service on the provided items. In most cases this will display a sharing window. The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider or an NSDocument. (e.g. NSString, NSImage, NSURL, etc.)
+//
 // PerformWithItems calls the underlying PerformWithItems.
 func (x *SharingService) PerformWithItems(items *foundation.NSArray[objc.ID]) {
 	x.inner.PerformWithItems(items)
@@ -122,6 +132,8 @@ func (x *SharingService) AlternateImage() *Image {
 	return &Image{inner: _r}
 }
 
+// Title of the service in the Share menu. Can be modified.
+//
 // MenuItemTitle calls the underlying MenuItemTitle.
 func (x *SharingService) MenuItemTitle() string {
 	_r := x.inner.MenuItemTitle()
@@ -131,11 +143,15 @@ func (x *SharingService) MenuItemTitle() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Title of the service in the Share menu. Can be modified.
+//
 // SetMenuItemTitle calls the underlying SetMenuItemTitle.
 func (x *SharingService) SetMenuItemTitle(menuItemTitle string) {
 	x.inner.SetMenuItemTitle(foundation.NSStringStringWithUTF8String(menuItemTitle))
 }
 
+// NSArray of NSString objects representing handles (example: email adresses)
+//
 // Recipients returns the collection as a Go slice.
 func (x *SharingService) Recipients() []string {
 	arr := x.inner.Recipients()
@@ -147,6 +163,8 @@ func (x *SharingService) Recipients() []string {
 	})
 }
 
+// NSArray of NSString objects representing handles (example: email adresses)
+//
 // SetRecipients calls the underlying SetRecipients.
 func (x *SharingService) SetRecipients(recipients *foundation.NSArray[*foundation.NSString]) {
 	x.inner.SetRecipients(recipients)
@@ -166,6 +184,8 @@ func (x *SharingService) SetSubject(subject string) {
 	x.inner.SetSubject(foundation.NSStringStringWithUTF8String(subject))
 }
 
+// Message body as string
+//
 // MessageBody calls the underlying MessageBody.
 func (x *SharingService) MessageBody() string {
 	_r := x.inner.MessageBody()
@@ -175,11 +195,15 @@ func (x *SharingService) MessageBody() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// URL to access the post on Facebook, Twitter, Sina Weibo, etc. (also known as permalink)
+//
 // PermanentLink calls the underlying PermanentLink.
 func (x *SharingService) PermanentLink() *foundation.NSURL {
 	return x.inner.PermanentLink()
 }
 
+// Account name used for sending on Twitter or Sina Weibo
+//
 // AccountName calls the underlying AccountName.
 func (x *SharingService) AccountName() string {
 	_r := x.inner.AccountName()
@@ -189,6 +213,8 @@ func (x *SharingService) AccountName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// NSArray of NSURL objects representing the files that were shared
+//
 // AttachmentFileURLs returns the collection as a Go slice.
 func (x *SharingService) AttachmentFileURLs() []*foundation.NSURL {
 	arr := x.inner.AttachmentFileURLs()

@@ -33,6 +33,8 @@ func MTRBaseClusterKeypadInputFromID(id objc.ID) *MTRBaseClusterKeypadInput {
 	return &MTRBaseClusterKeypadInput{inner: raw.MTRBaseClusterKeypadInputFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterKeypadInputWithDeviceEndpointIDQueue creates a new [MTRBaseClusterKeypadInput].
 func NewMTRBaseClusterKeypadInputWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterKeypadInput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterKeypadInput")), objc.RegisterName("alloc"))
@@ -47,6 +49,8 @@ func NewMTRBaseClusterKeypadInputWithDeviceEndpointQueue(device *raw.MTRBaseDevi
 	return &MTRBaseClusterKeypadInput{inner: raw.MTRBaseClusterKeypadInputFromID(_id)}
 }
 
+// Command SendKey Upon receipt, this SHALL process a keycode as input to the media endpoint.
+//
 // SendKeyWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterKeypadInput) SendKeyWithParamsCompletion(ctx context.Context, params *raw.MTRKeypadInputClusterSendKeyParams) (*MTRKeypadInputClusterSendKeyResponseParams, error) {
 	type _result struct {

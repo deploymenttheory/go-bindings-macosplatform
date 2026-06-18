@@ -32,6 +32,8 @@ func CaptionGroupFromID(id objc.ID) *CaptionGroup {
 	return &CaptionGroup{inner: raw.AVCaptionGroupFromID(id)}
 }
 
+// @method initWithCaptions:timeRange: @abstract Initializes a caption group with the given set of captions and the time range. @discussion Every caption in the array must be equal or sub range of the time range, otherwise an exception is raised. @param captions The captions that will be included in the group. The array is coped. @result A newly-initialized caption group.
+//
 // NewCaptionGroupWithCaptionsTimeRange creates a new [CaptionGroup].
 func NewCaptionGroupWithCaptionsTimeRange(captions *foundation.NSArray[*raw.AVCaption], timeRange coremedia.CMTimeRange) *CaptionGroup {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionGroup")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewCaptionGroupWithCaptionsTimeRange(captions *foundation.NSArray[*raw.AVCa
 	return &CaptionGroup{inner: raw.AVCaptionGroupFromID(_id)}
 }
 
+// @method initWithTimeRange: @abstract Initializes an empty caption group with the given time range. @discussion This is a convenient initializer to create an empty caption group time range. @param timeRange The time range for which there are no captions. @result A newly-initialized empty caption group.
+//
 // NewCaptionGroupWithTimeRange creates a new [CaptionGroup].
 func NewCaptionGroupWithTimeRange(timeRange coremedia.CMTimeRange) *CaptionGroup {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionGroup")), objc.RegisterName("alloc"))
@@ -46,11 +50,15 @@ func NewCaptionGroupWithTimeRange(timeRange coremedia.CMTimeRange) *CaptionGroup
 	return &CaptionGroup{inner: raw.AVCaptionGroupFromID(_id)}
 }
 
+// @property timeRange @abstract The time range represented by the caption group. @discussion If there are no captions in the group (i.e. the value of the captions property is an empty array), then the value of this property represents the time range of a sequence where no captions are present.
+//
 // TimeRange calls the underlying TimeRange.
 func (x *CaptionGroup) TimeRange() coremedia.CMTimeRange {
 	return x.inner.TimeRange()
 }
 
+// @property captions @abstract An array of AVCaption objects. @discussion If the value is an empty array, the caption group represents a region of the timeline in which there are no captions.
+//
 // Captions returns the collection as a Go slice.
 func (x *CaptionGroup) Captions() []*Caption {
 	arr := x.inner.Captions()

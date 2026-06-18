@@ -33,6 +33,8 @@ func TextPreviewFromID(id objc.ID) *TextPreview {
 	return &TextPreview{inner: raw.NSTextPreviewFromID(id)}
 }
 
+// Creates a text preview using the specified image and rectangles that indicate the portions of text to highlight. - Parameters: - snapshotImage: An image that contains the requested text from your view. Create the image using a transparent background and the current rendering attributes for your text. - presentationFrame: A rectangle in the coordinate space of your text view. The system uses this rectangle to place your image precisely over your view’s actual text. Set its size to the size of your snapshot image, and set its origin to the point that allows the system to place your image directly over the text. - candidateRects: An array of <doc://com.apple.documentation/documentation/foundation/nsvalue> objects, each of which contains an <doc://com.apple.documentation/documentation/foundation/nsrect> in the coordinate space of your text view. Each rectangle contains a bounding rectangle for text that is part of the preview. When applying visual effects, the system adds highlights only to the text in the specified rectangles.
+//
 // NewTextPreviewWithSnapshotImagePresentationFrameCandidateRects creates a new [TextPreview].
 func NewTextPreviewWithSnapshotImagePresentationFrameCandidateRects(snapshotImage unsafe.Pointer, presentationFrame corefoundation.CGRect, candidateRects *foundation.NSArray[*foundation.NSValue]) *TextPreview {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextPreview")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewTextPreviewWithSnapshotImagePresentationFrameCandidateRects(snapshotImag
 	return &TextPreview{inner: raw.NSTextPreviewFromID(_id)}
 }
 
+// Creates a text preview using the specified image. - Parameters: - snapshotImage: An image that contains the requested text from your view. Create the image using a transparent background and the current rendering attributes for your text. - presentationFrame: A rectangle in your frame’s coordinate space. The system uses this rectangle to place your image precisely over your view’s actual text. Set its size to the size of your snapshot image, and set its origin to the point that allows the system to place your image directly over the text.
+//
 // NewTextPreviewWithSnapshotImagePresentationFrame creates a new [TextPreview].
 func NewTextPreviewWithSnapshotImagePresentationFrame(snapshotImage unsafe.Pointer, presentationFrame corefoundation.CGRect) *TextPreview {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextPreview")), objc.RegisterName("alloc"))
@@ -47,16 +51,22 @@ func NewTextPreviewWithSnapshotImagePresentationFrame(snapshotImage unsafe.Point
 	return &TextPreview{inner: raw.NSTextPreviewFromID(_id)}
 }
 
+// The image that contains the requested text from your view. You specify this image at initialization time. The system uses it to implement any visual effects involving your view’s text. Create the image with your text on a transparent background.
+//
 // PreviewImage calls the underlying PreviewImage.
 func (x *TextPreview) PreviewImage() unsafe.Pointer {
 	return x.inner.PreviewImage()
 }
 
+// The frame rectangle that places the preview image directly over the matching text. You specify this value at initialization time. The system uses it to position the preview image over the text in your view. Make sure the frame rectangle is in your view's coordinate space.
+//
 // PresentationFrame calls the underlying PresentationFrame.
 func (x *TextPreview) PresentationFrame() corefoundation.CGRect {
 	return x.inner.PresentationFrame()
 }
 
+// Rectangles that define the specific portions of text to highlight. At initialization time, you set this property to an array of <doc://com.apple.documentation/documentation/foundation/nsvalue> objects, each of which contains an <doc://com.apple.documentation/documentation/foundation/nsrect> in the coordinate space of the target view. Each rectangle contains a bounding rectangle for text that is part of the preview. When applying visual effects, the system adds highlights only to the text in the specified rectangles.
+//
 // CandidateRects returns the collection as a Go slice.
 func (x *TextPreview) CandidateRects() []*foundation.NSValue {
 	arr := x.inner.CandidateRects()

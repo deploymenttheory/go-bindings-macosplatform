@@ -38,6 +38,8 @@ func NewFileProviderStringSearchRequest() *FileProviderStringSearchRequest {
 	return &FileProviderStringSearchRequest{inner: raw.NSFileProviderStringSearchRequestFromID(_id)}
 }
 
+// A plaintext string, representing the query the user entered into the system search UI.
+//
 // Query calls the underlying Query.
 func (x *FileProviderStringSearchRequest) Query() string {
 	_r := x.inner.Query()
@@ -47,6 +49,8 @@ func (x *FileProviderStringSearchRequest) Query() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// How many results the system is requesting. This is a hint to the extension, to help avoid unnecessary work. The extension may return more results than this.
+//
 // DesiredNumberOfResults calls the underlying DesiredNumberOfResults.
 func (x *FileProviderStringSearchRequest) DesiredNumberOfResults() int {
 	return x.inner.DesiredNumberOfResults()

@@ -29,6 +29,8 @@ func ExtensionPropertyStateFromID(id objc.ID) *ExtensionPropertyState {
 	return &ExtensionPropertyState{inner: raw.CMIOExtensionPropertyStateFromID[objc.ID](id)}
 }
 
+// @method initWithValue: @abstract Initialize a property state instance. @param value The value associated with a property state. @result A CMIOExtensionPropertyState instance. @discussion A nil property attributes defaults to a read/write property that doesn't have a minValue/maxValue/validValues. The supported value types are NSDictionary/NSArray/NSString/NSData/NSNumber.
+//
 // NewExtensionPropertyStateWithValue creates a new [ExtensionPropertyState].
 func NewExtensionPropertyStateWithValue(value objc.ID) *ExtensionPropertyState {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionPropertyState")), objc.RegisterName("alloc"))
@@ -36,6 +38,8 @@ func NewExtensionPropertyStateWithValue(value objc.ID) *ExtensionPropertyState {
 	return &ExtensionPropertyState{inner: raw.CMIOExtensionPropertyStateFromID[objc.ID](_id)}
 }
 
+// @method initWithValue:attributes: @abstract Initialize a property state instance. @param value The value associated with a property state. @param attributes The property attributes associated with a property state. @result A CMIOExtensionPropertyState instance. @discussion A nil property attributes defaults to a read/write property that doesn't have a minValue/maxValue/validValues. The supported value types are NSDictionary/NSArray/NSString/NSData/NSNumber.
+//
 // NewExtensionPropertyStateWithValueAttributes creates a new [ExtensionPropertyState].
 func NewExtensionPropertyStateWithValueAttributes(value objc.ID, attributes *raw.CMIOExtensionPropertyAttributes[objc.ID]) *ExtensionPropertyState {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionPropertyState")), objc.RegisterName("alloc"))
@@ -43,11 +47,15 @@ func NewExtensionPropertyStateWithValueAttributes(value objc.ID, attributes *raw
 	return &ExtensionPropertyState{inner: raw.CMIOExtensionPropertyStateFromID[objc.ID](_id)}
 }
 
+// @property value @abstract The value of the property.
+//
 // Value calls the underlying Value.
 func (x *ExtensionPropertyState) Value() objc.ID {
 	return x.inner.Value()
 }
 
+// @property attributes @abstract The property attributes of the property.
+//
 // Attributes calls the underlying Attributes.
 func (x *ExtensionPropertyState) Attributes() *raw.CMIOExtensionPropertyAttributes[objc.ID] {
 	return x.inner.Attributes()

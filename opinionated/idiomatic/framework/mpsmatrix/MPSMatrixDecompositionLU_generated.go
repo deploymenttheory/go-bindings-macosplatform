@@ -31,6 +31,8 @@ func MatrixDecompositionLUFromID(id objc.ID) *MatrixDecompositionLU {
 	return &MatrixDecompositionLU{inner: raw.MPSMatrixDecompositionLUFromID(id)}
 }
 
+// @abstract   Initialize an MPSMatrixDecompositionLU object on a device @param      device          The device on which the kernel will execute. @param      rows            The number of rows in the source matrix. @param      columns         The number of columns in the source matrix. @return     A valid MPSMatrixDecompositionLU object or nil, if failure.
+//
 // NewMatrixDecompositionLUWithDeviceRowsColumns creates a new [MatrixDecompositionLU].
 func NewMatrixDecompositionLUWithDeviceRowsColumns(device metal.MTLDevice, rows uint, columns uint) *MatrixDecompositionLU {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixDecompositionLU")), objc.RegisterName("alloc"))
@@ -38,30 +40,40 @@ func NewMatrixDecompositionLUWithDeviceRowsColumns(device metal.MTLDevice, rows 
 	return &MatrixDecompositionLU{inner: raw.MPSMatrixDecompositionLUFromID(_id)}
 }
 
+// @property   sourceMatrixOrigin @discussion The origin, relative to [0, 0] in the source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithSourceMatrixOrigin sets the sourceMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixDecompositionLU) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixDecompositionLU {
 	x.inner.MPSMatrixUnaryKernel.SetSourceMatrixOrigin(sourceMatrixOrigin)
 	return x
 }
 
+// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixDecompositionLU) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixDecompositionLU {
 	x.inner.MPSMatrixUnaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
 	return x
 }
 
+// @property   batchStart @discussion The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+//
 // WithBatchStart sets the batchStart property and returns the receiver for chaining.
 func (x *MatrixDecompositionLU) WithBatchStart(batchStart uint) *MatrixDecompositionLU {
 	x.inner.MPSMatrixUnaryKernel.SetBatchStart(batchStart)
 	return x
 }
 
+// @property   batchSize @discussion The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+//
 // WithBatchSize sets the batchSize property and returns the receiver for chaining.
 func (x *MatrixDecompositionLU) WithBatchSize(batchSize uint) *MatrixDecompositionLU {
 	x.inner.MPSMatrixUnaryKernel.SetBatchSize(batchSize)
 	return x
 }
 
+// @abstract   Encode a MPSMatrixDecompositionLU kernel into a command Buffer. @param      commandBuffer           A valid MTLCommandBuffer to receive the encoded filter @param      sourceMatrix            A valid MPSMatrix containing the source data.  Must have enough space to hold a rows x columns matrix. @param      resultMatrix            A valid MPSMatrix to contain the result.  Must have enough space to hold a rows x columns matrix. @param      pivotIndices            A valid MPSMatrix to contain the pivot indices. Must have enough space to hold an array of size 1xmin(rows, columns) values. Element type must be MPSDataTypeUInt32. @param      status                  A MTLBuffer which indicates the resulting MPSMatrixDecompositionStatus value. @discussion This function encodes the MPSMatrixDecompositionLU object to a valid command buffer. Upon completion the array pivotIndices contains, for each index i, the row interchanged with row i. If during the computation U[k, k], for some k, is determined to be exactly zero MPSMatrixDecompositionStatusSingular will be returned in the provided status buffer.  The data referenced by the MTLBuffer is not valid until the command buffer has completed execution.  If the matrix return status is not desired NULL may be provided. Upon successful factorization, resultMatrix contains the resulting lower triangular factor (without the unit diagonal elements) in its strictly lower triangular region and the upper triangular factor in its upper triangular region. This kernel functions either in-place, if the result matrix completely aliases the source matrix, or out-of-place.  If there is any partial overlap between input and output data the results are undefined.
+//
 // EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus calls the underlying EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus.
 func (x *MatrixDecompositionLU) EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix, pivotIndices *mpscore.MPSMatrix, status metal.MTLBuffer) {
 	x.inner.EncodeToCommandBufferSourceMatrixResultMatrixPivotIndicesStatus(commandBuffer, sourceMatrix, resultMatrix, pivotIndices, status)

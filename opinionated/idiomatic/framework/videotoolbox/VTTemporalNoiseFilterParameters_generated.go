@@ -31,6 +31,8 @@ func TemporalNoiseFilterParametersFromID(id objc.ID) *TemporalNoiseFilterParamet
 	return &TemporalNoiseFilterParameters{inner: raw.VTTemporalNoiseFilterParametersFromID(id)}
 }
 
+// Creates a new `VTTemporalNoiseFilterParameters` object. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - nextFrames: Future reference frames in presentation time order to use for processing the source frame. The number of frames can vary from 0 to the number specified by “VTTemporalNoiseFilterConfiguration/nextFrameCount“ property. - previousFrames: Past reference frames in presentation time order to use for processing the source frame. The number of frames can vary from 0 to the number specified by “VTTemporalNoiseFilterConfiguration/previousFrameCount“ property. - destinationFrame: User-allocated pixel buffer that receives the output frame. The pixel format of `destinationFrame` must match with that of the `sourceFrame`. - filterStrength: Strength of the noise-filtering to use. The value can range from the minimum strength of 0.0 to the maximum strength of 1.0. Change in filter strength causes the processor to flush all frames in the queue prior to processing the source frame. - hasDiscontinuity: Marks sequence discontinuity, forcing the processor to reset prior to processing the source frame.
+//
 // NewTemporalNoiseFilterParametersWithSourceFrameNextFramesPreviousFramesDestinationFrameFilterStrengthHasDiscontinuity creates a new [TemporalNoiseFilterParameters].
 func NewTemporalNoiseFilterParametersWithSourceFrameNextFramesPreviousFramesDestinationFrameFilterStrengthHasDiscontinuity(sourceFrame *raw.VTFrameProcessorFrame, nextFrames *foundation.NSArray[*raw.VTFrameProcessorFrame], previousFrames *foundation.NSArray[*raw.VTFrameProcessorFrame], destinationFrame *raw.VTFrameProcessorFrame, filterStrength float32, hasDiscontinuity uint8) *TemporalNoiseFilterParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTTemporalNoiseFilterParameters")), objc.RegisterName("alloc"))
@@ -38,18 +40,24 @@ func NewTemporalNoiseFilterParametersWithSourceFrameNextFramesPreviousFramesDest
 	return &TemporalNoiseFilterParameters{inner: raw.VTTemporalNoiseFilterParametersFromID(_id)}
 }
 
+// A parameter to control the strength of noise-filtering. The value can range from the minimum strength of 0.0 to the maximum strength of 1.0. Change in filter strength causes the processor to flush all frames in the queue prior to processing the source frame.
+//
 // WithFilterStrength sets the filterStrength property and returns the receiver for chaining.
 func (x *TemporalNoiseFilterParameters) WithFilterStrength(filterStrength float32) *TemporalNoiseFilterParameters {
 	x.inner.SetFilterStrength(filterStrength)
 	return x
 }
 
+// A Boolean that indicates sequence discontinuity, forcing the processor to reset prior to processing the source frame.
+//
 // WithHasDiscontinuity sets the hasDiscontinuity property and returns the receiver for chaining.
 func (x *TemporalNoiseFilterParameters) WithHasDiscontinuity(hasDiscontinuity bool) *TemporalNoiseFilterParameters {
 	x.inner.SetHasDiscontinuity(hasDiscontinuity)
 	return x
 }
 
+// Current source frame; must be non `nil`.
+//
 // SourceFrame calls the underlying SourceFrame.
 func (x *TemporalNoiseFilterParameters) SourceFrame() *FrameProcessorFrame {
 	_r := x.inner.SourceFrame()
@@ -59,6 +67,8 @@ func (x *TemporalNoiseFilterParameters) SourceFrame() *FrameProcessorFrame {
 	return &FrameProcessorFrame{inner: _r}
 }
 
+// Future reference frames in presentation time order that you use to process the source frame. The number of frames can vary from 0 to the number specified by the `nextFrameCount` property in `VTTemporalNoiseFilterConfiguration`.
+//
 // NextFrames returns the collection as a Go slice.
 func (x *TemporalNoiseFilterParameters) NextFrames() []*FrameProcessorFrame {
 	arr := x.inner.NextFrames()
@@ -70,6 +80,8 @@ func (x *TemporalNoiseFilterParameters) NextFrames() []*FrameProcessorFrame {
 	})
 }
 
+// Past reference frames in presentation time order that you use to process the source frame. The number of frames can vary from 0 to the number specified by the `previousFrameCount` property in `VTTemporalNoiseFilterConfiguration`.
+//
 // PreviousFrames returns the collection as a Go slice.
 func (x *TemporalNoiseFilterParameters) PreviousFrames() []*FrameProcessorFrame {
 	arr := x.inner.PreviousFrames()
@@ -81,6 +93,8 @@ func (x *TemporalNoiseFilterParameters) PreviousFrames() []*FrameProcessorFrame 
 	})
 }
 
+// A parameter to control the strength of noise-filtering. The value can range from the minimum strength of 0.0 to the maximum strength of 1.0. Change in filter strength causes the processor to flush all frames in the queue prior to processing the source frame.
+//
 // FilterStrength calls the underlying FilterStrength.
 func (x *TemporalNoiseFilterParameters) FilterStrength() float32 {
 	return x.inner.FilterStrength()
@@ -91,6 +105,8 @@ func (x *TemporalNoiseFilterParameters) SetFilterStrength(filterStrength float32
 	x.inner.SetFilterStrength(filterStrength)
 }
 
+// A Boolean that indicates sequence discontinuity, forcing the processor to reset prior to processing the source frame.
+//
 // HasDiscontinuity calls the underlying HasDiscontinuity.
 func (x *TemporalNoiseFilterParameters) HasDiscontinuity() bool {
 	return x.inner.HasDiscontinuity()
@@ -101,6 +117,8 @@ func (x *TemporalNoiseFilterParameters) SetHasDiscontinuity(hasDiscontinuity boo
 	x.inner.SetHasDiscontinuity(hasDiscontinuity)
 }
 
+// Destination frame that contains a user-allocated pixel buffer that receives the output frame.
+//
 // DestinationFrame calls the underlying DestinationFrame.
 func (x *TemporalNoiseFilterParameters) DestinationFrame() *FrameProcessorFrame {
 	_r := x.inner.DestinationFrame()

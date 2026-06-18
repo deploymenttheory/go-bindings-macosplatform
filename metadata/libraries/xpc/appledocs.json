@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "framework": "xpc",
+  "source": "developer.apple.com DocC render API",
+  "protocols": {
+    "OS_xpc_listener": {
+      "url": "https://developer.apple.com/documentation/xpc/os_xpc_listener"
+    },
+    "OS_xpc_object": {
+      "doc": "The interface for an XPC object.",
+      "url": "https://developer.apple.com/documentation/xpc/os_xpc_object"
+    },
+    "OS_xpc_peer_requirement": {
+      "url": "https://developer.apple.com/documentation/xpc/os_xpc_peer_requirement"
+    },
+    "OS_xpc_session": {
+      "url": "https://developer.apple.com/documentation/xpc/os_xpc_session"
+    }
+  },
+  "enums": {
+    "launch_data_type_t": {
+      "doc": "A type that represents possible types of launch data.",
+      "url": "https://developer.apple.com/documentation/xpc/launch_data_type_t"
+    },
+    "xpc_listener_create_flags_t": {
+      "doc": "Options that control the listener’s configuration.",
+      "url": "https://developer.apple.com/documentation/xpc/xpc_listener_create_flags_t",
+      "members": {
+        "XPC_LISTENER_CREATE_INACTIVE": {
+          "doc": "Prevents the system from automatically activating the listener after creation.",
+          "url": "https://developer.apple.com/documentation/xpc/xpc_listener_create_flags_t/xpc_listener_create_inactive"
+        },
+        "XPC_LISTENER_CREATE_NONE": {
+          "doc": "Configures the listener in a default state.",
+          "url": "https://developer.apple.com/documentation/xpc/xpc_listener_create_flags_t/xpc_listener_create_none"
+        }
+      }
+    },
+    "xpc_session_create_flags_t": {
+      "url": "https://developer.apple.com/documentation/xpc/xpc_session_create_flags_t"
+    }
+  }
+}

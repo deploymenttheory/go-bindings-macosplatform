@@ -40,51 +40,71 @@ func NewAuthorizationProviderExtensionAuthorizationRequest() *AuthorizationProvi
 	return &AuthorizationProviderExtensionAuthorizationRequest{inner: raw.ASAuthorizationProviderExtensionAuthorizationRequestFromID(_id)}
 }
 
+// @abstract Call when authorization was not handled.
+//
 // DoNotHandle calls the underlying DoNotHandle.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) DoNotHandle() {
 	x.inner.DoNotHandle()
 }
 
+// @abstract Call when authorization needs to be canceled from some reason (for example user pressed Cancel button).
+//
 // Cancel calls the underlying Cancel.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) Cancel() {
 	x.inner.Cancel()
 }
 
+// @abstract Call when authorization succeeded without any output.
+//
 // Complete calls the underlying Complete.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) Complete() {
 	x.inner.Complete()
 }
 
+// @abstract Call when authorization succeeded with an authorization tokens stored in HTTP headers.
+//
 // CompleteWithHTTPAuthorizationHeaders calls the underlying CompleteWithHTTPAuthorizationHeaders.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithHTTPAuthorizationHeaders(httpAuthorizationHeaders *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
 	x.inner.CompleteWithHTTPAuthorizationHeaders(httpAuthorizationHeaders)
 }
 
+// @abstract Call when authorization succeeded with a HTTP response.
+//
 // CompleteWithHTTPResponseHttpBody calls the underlying CompleteWithHTTPResponseHttpBody.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithHTTPResponseHttpBody(httpResponse *foundation.NSHTTPURLResponse, httpBody *foundation.NSData) {
 	x.inner.CompleteWithHTTPResponseHttpBody(httpResponse, httpBody)
 }
 
+// @abstract Call when authorization succeeded with @see ASAuthorizationProviderExtensionAuthorizationResult.
+//
 // CompleteWithAuthorizationResult calls the underlying CompleteWithAuthorizationResult.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithAuthorizationResult(authorizationResult *raw.ASAuthorizationProviderExtensionAuthorizationResult) {
 	x.inner.CompleteWithAuthorizationResult(authorizationResult)
 }
 
+// @abstract Call when authorization failed with an error.
+//
 // CompleteWithError calls the underlying CompleteWithError.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithError(error_ unsafe.Pointer) {
 	x.inner.CompleteWithError(error_)
 }
 
+// @abstract Asks authorization service to show extension view controller. If the controller cannot be shown an error is returned.
+//
 // PresentAuthorizationViewControllerWithCompletion calls the underlying PresentAuthorizationViewControllerWithCompletion.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) PresentAuthorizationViewControllerWithCompletion(completion func(bool, unsafe.Pointer)) {
 	x.inner.PresentAuthorizationViewControllerWithCompletion(completion)
 }
 
+// @abstract Request URL with all components.
+//
 // Url calls the underlying Url.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) Url() *foundation.NSURL {
 	return x.inner.Url()
 }
 
+// @abstract Operation to be executed by the extension.
+//
 // RequestedOperation calls the underlying RequestedOperation.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) RequestedOperation() string {
 	_r := x.inner.RequestedOperation()
@@ -94,16 +114,22 @@ func (x *AuthorizationProviderExtensionAuthorizationRequest) RequestedOperation(
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Request HTTP headers.
+//
 // HttpHeaders calls the underlying HttpHeaders.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) HttpHeaders() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
 	return x.inner.HttpHeaders()
 }
 
+// @abstract Request body.
+//
 // HttpBody calls the underlying HttpBody.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) HttpBody() *foundation.NSData {
 	return x.inner.HttpBody()
 }
 
+// @abstract Realm.
+//
 // Realm calls the underlying Realm.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) Realm() string {
 	_r := x.inner.Realm()
@@ -113,11 +139,15 @@ func (x *AuthorizationProviderExtensionAuthorizationRequest) Realm() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Extension data from extension configuration provided by MDM stored as a property-list.
+//
 // ExtensionData calls the underlying ExtensionData.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) ExtensionData() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.ExtensionData()
 }
 
+// @abstract Identification of the calling application.
+//
 // CallerBundleIdentifier calls the underlying CallerBundleIdentifier.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) CallerBundleIdentifier() string {
 	_r := x.inner.CallerBundleIdentifier()
@@ -127,16 +157,22 @@ func (x *AuthorizationProviderExtensionAuthorizationRequest) CallerBundleIdentif
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Authorization options.
+//
 // AuthorizationOptions calls the underlying AuthorizationOptions.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) AuthorizationOptions() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.AuthorizationOptions()
 }
 
+// @abstract Indicates whether the calling application is managed.
+//
 // IsCallerManaged calls the underlying IsCallerManaged.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) IsCallerManaged() bool {
 	return x.inner.IsCallerManaged()
 }
 
+// @abstract Team identifier of the calling application.
+//
 // CallerTeamIdentifier calls the underlying CallerTeamIdentifier.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) CallerTeamIdentifier() string {
 	_r := x.inner.CallerTeamIdentifier()
@@ -146,6 +182,8 @@ func (x *AuthorizationProviderExtensionAuthorizationRequest) CallerTeamIdentifie
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Localized display name of the calling application.
+//
 // LocalizedCallerDisplayName calls the underlying LocalizedCallerDisplayName.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) LocalizedCallerDisplayName() string {
 	_r := x.inner.LocalizedCallerDisplayName()
@@ -155,16 +193,22 @@ func (x *AuthorizationProviderExtensionAuthorizationRequest) LocalizedCallerDisp
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Audit token of the calling application.
+//
 // CallerAuditToken calls the underlying CallerAuditToken.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) CallerAuditToken() *foundation.NSData {
 	return x.inner.CallerAuditToken()
 }
 
+// @abstract Indicates whether the authorization user interface is enabled. @discussion If user interface is not enabled, then the authorization will fail with @see ASAuthorizationErrorNotInteractive if it attempts to display the authorization user interface via @see presentAuthorizationViewControllerWithCompletion.
+//
 // IsUserInterfaceEnabled calls the underlying IsUserInterfaceEnabled.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) IsUserInterfaceEnabled() bool {
 	return x.inner.IsUserInterfaceEnabled()
 }
 
+// @abstract The login manager to interface with the Platform SSO configuration.
+//
 // LoginManager calls the underlying LoginManager.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) LoginManager() *AuthorizationProviderExtensionLoginManager {
 	_r := x.inner.LoginManager()

@@ -1,0 +1,537 @@
+{
+  "schema_version": 1,
+  "framework": "Accelerate",
+  "source": "developer.apple.com DocC render API",
+  "enums": {
+    "BNNSActivationFunction": {
+      "doc": "Constants that describe activation functions.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction",
+      "members": {
+        "BNNSActivationFunctionAbs": {
+          "doc": "An activation function that returns the absolute value of its input.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/bnnsactivationfunctionabs"
+        },
+        "BNNSActivationFunctionClamp": {
+          "doc": "An activation function that returns its input clamped to the specified range.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/bnnsactivationfunctionclamp"
+        },
+        "BNNSActivationFunctionIdentity": {
+          "doc": "An activation function that returns its input.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/bnnsactivationfunctionidentity"
+        },
+        "BNNSActivationFunctionIntegerLinearSaturate": {
+          "doc": "An activation function that returns an arithmetic shift, preserving sign.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/bnnsactivationfunctionintegerlinearsaturate"
+        },
+        "BNNSActivationFunctionIntegerLinearSaturatePerChannel": {
+          "doc": "An activation function that returns an arithmetic shift, preserving sign for each channel.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/bnnsactivationfunctionintegerlinearsaturateperchannel"
+        },
+        "BNNSActivationFunctionLeakyRectifiedLinear": {
+          "doc": "An activation function that returns its input when that is greater than or equal to zero, otherwise it returns its input multiplied by a specified value.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/bnnsactivationfunctionleakyrectifiedlinear"
+        },
+        "BNNSActivationFunctionLinear": {
+          "doc": "An activation function that returns its input multiplied by a specified value.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/bnnsactivationfunctionlinear"
+        },
+        "BNNSActivationFunctionRectifiedLinear": {
+          "doc": "An activation function that returns its input when that is greater than or equal to zero, otherwise it returns zero.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/bnnsactivationfunctionrectifiedlinear"
+        },
+        "BNNSActivationFunctionScaledTanh": {
+          "doc": "An activation function that returns the scaled hyperbolic tangent of its input.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/bnnsactivationfunctionscaledtanh"
+        },
+        "BNNSActivationFunctionSigmoid": {
+          "doc": "An activation function that returns the sigmoid function of its input.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/bnnsactivationfunctionsigmoid"
+        },
+        "BNNSActivationFunctionSoftmax": {
+          "doc": "An activation function that returns the softmax function of its input.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/bnnsactivationfunctionsoftmax"
+        },
+        "BNNSActivationFunctionTanh": {
+          "doc": "An activation function that returns the hyperbolic tangent of its input.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/bnnsactivationfunctiontanh"
+        },
+        "abs": {
+          "doc": "An activation function that returns the absolute value of its input.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/abs"
+        },
+        "clamp": {
+          "doc": "An activation function that returns its input clamped to a specified range.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/clamp"
+        },
+        "identity": {
+          "doc": "An activation function that returns its input.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/identity"
+        },
+        "integerLinearSaturate": {
+          "doc": "An activation function that returns an arithmetic shift, preserving sign.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/integerlinearsaturate"
+        },
+        "integerLinearSaturatePerChannel": {
+          "doc": "An activation function that returns an arithmetic shift, preserving sign for each channel.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/integerlinearsaturateperchannel"
+        },
+        "leakyRectifiedLinear": {
+          "doc": "An activation function that returns its input when that is greater than or equal to zero, otherwise it returns its input multiplied by a specified value.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/leakyrectifiedlinear"
+        },
+        "linear": {
+          "doc": "An activation function that returns its input multiplied by a specified value.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/linear"
+        },
+        "rectifiedLinear": {
+          "doc": "An activation function that returns its input when that is greater than or equal to zero, otherwise it returns zero.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/rectifiedlinear"
+        },
+        "scaledTanh": {
+          "doc": "An activation function that returns the scaled hyperbolic tangent of its input.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/scaledtanh"
+        },
+        "sigmoid": {
+          "doc": "An activation function that returns the sigmoid function of its input.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/sigmoid"
+        },
+        "softmax": {
+          "doc": "An activation function that returns the softmax function of its input.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/softmax"
+        },
+        "tanh": {
+          "doc": "An activation function that returns the hyperbolic tangent of its input.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsactivationfunction/tanh"
+        }
+      }
+    },
+    "BNNSArithmeticFunction": {
+      "doc": "Constants that define arithmetic operations.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsarithmeticfunction"
+    },
+    "BNNSBoxCoordinateMode": {
+      "doc": "Constants that define the convention to specify the four bounding box coordinates for crop-resize operations.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsboxcoordinatemode"
+    },
+    "BNNSDataLayout": {
+      "doc": "Constants that describe the data type of an n-dimensional array.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsdatalayout"
+    },
+    "BNNSDataType": {
+      "doc": "BNNS Data Types.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsdatatype"
+    },
+    "BNNSDescriptorType": {
+      "doc": "Constants that describe the input and output types of an arithmetic operation.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsdescriptortype"
+    },
+    "BNNSEmbeddingFlags": {
+      "doc": "Flags that control behavior of embedding layers.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsembeddingflags",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new instance with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsembeddingflags/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new instance with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsembeddingflags/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The corresponding value of the raw type.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsembeddingflags/rawvalue"
+        }
+      }
+    },
+    "BNNSFilterType": {
+      "doc": "Constants that define the component filters of a fused layer.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsfiltertype"
+    },
+    "BNNSFlags": {
+      "doc": "Options that control the behavior of a filter parameter.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsflags",
+      "members": {
+        "BNNSFlagsUseClientPtr": {
+          "doc": "A flag that instructs the filter to use pointers to data you provide at creation time.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsflags/bnnsflagsuseclientptr"
+        },
+        "useClientPointer": {
+          "doc": "A flag that instructs the filter to use pointers to data you provide at creation time.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsflags/useclientpointer"
+        }
+      }
+    },
+    "BNNSGraphArgumentIntent": {
+      "doc": "Constants that describe argument intents.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsgraphargumentintent",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new instance.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsgraphargumentintent/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new instance with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsgraphargumentintent/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The corresponding value of the raw type.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsgraphargumentintent/rawvalue"
+        }
+      }
+    },
+    "BNNSGraphArgumentType": {
+      "doc": "Constants that specify the argument type for a graph context.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsgraphargumenttype",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new instance.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsgraphargumenttype/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new instance with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsgraphargumenttype/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The corresponding value of the raw type.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsgraphargumenttype/rawvalue"
+        }
+      }
+    },
+    "BNNSGraphMessageLevel": {
+      "doc": "Constants that specify the mask for compile-time messages.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsgraphmessagelevel",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new instance.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsgraphmessagelevel/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new instance with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsgraphmessagelevel/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The corresponding value of the raw type.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsgraphmessagelevel/rawvalue"
+        }
+      }
+    },
+    "BNNSGraphOptimizationPreference": {
+      "doc": "Constants that describe the compilation optimization preference.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsgraphoptimizationpreference",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new instance.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsgraphoptimizationpreference/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new instance with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsgraphoptimizationpreference/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The corresponding value of the raw type.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsgraphoptimizationpreference/rawvalue"
+        }
+      }
+    },
+    "BNNSInterpolationMethod": {
+      "doc": "Constants that describe interpolation methods.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsinterpolationmethod"
+    },
+    "BNNSLayerFlags": {
+      "doc": "Options that control the behavior of a long short-term memory (LSTM) layer.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnslayerflags"
+    },
+    "BNNSLinearSamplingMode": {
+      "doc": "Constants that specify how a crop-resize layer samples a grid.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnslinearsamplingmode"
+    },
+    "BNNSLossFunction": {
+      "doc": "Constants that describe loss functions.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnslossfunction"
+    },
+    "BNNSLossReductionFunction": {
+      "doc": "Constants that describe reduction functions used by a loss layer.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnslossreductionfunction"
+    },
+    "BNNSNDArrayFlags": {
+      "doc": "Options that control the behavior of an n-dimensional array.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsndarrayflags"
+    },
+    "BNNSNormType": {
+      "doc": "Constants that describe norm types.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsnormtype",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new instance with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsnormtype/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new instance with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsnormtype/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The corresponding value of the raw type.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsnormtype/rawvalue"
+        }
+      }
+    },
+    "BNNSOptimizerClippingFunction": {
+      "doc": "Constants that describe clipping functions.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsoptimizerclippingfunction",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new instance with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsoptimizerclippingfunction/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new instance with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsoptimizerclippingfunction/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The corresponding value of the raw type.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsoptimizerclippingfunction/rawvalue"
+        }
+      }
+    },
+    "BNNSOptimizerFunction": {
+      "doc": "A structure that contains optimizer functions.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsoptimizerfunction"
+    },
+    "BNNSOptimizerRegularizationFunction": {
+      "doc": "A structure that contains optimizer regularization functions.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsoptimizerregularizationfunction"
+    },
+    "BNNSOptimizerSGDMomentumVariant": {
+      "doc": "Constants that define SGD momentum variants.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsoptimizersgdmomentumvariant"
+    },
+    "BNNSPaddingMode": {
+      "doc": "Constants that define padding modes.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnspaddingmode"
+    },
+    "BNNSPointerSpecifier": {
+      "doc": "Constants that specify which pointer the BNNS get filter function returns.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnspointerspecifier"
+    },
+    "BNNSPoolingFunction": {
+      "doc": "Constants that describe pooling functions.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnspoolingfunction",
+      "members": {
+        "BNNSPoolingFunctionAverage": {
+          "doc": "A function for pooling that computes the average of each element in the pooling kernel.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnspoolingfunction/bnnspoolingfunctionaverage"
+        },
+        "BNNSPoolingFunctionMax": {
+          "doc": "A function for pooling that computes the maximum of each element in the pooling kernel.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnspoolingfunction/bnnspoolingfunctionmax"
+        },
+        "average": {
+          "doc": "A function for pooling that computes the average of each element in the pooling kernel.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnspoolingfunction/average"
+        },
+        "max": {
+          "doc": "A function for pooling that computes the maximum of each element in the pooling kernel.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnspoolingfunction/max"
+        }
+      }
+    },
+    "BNNSQuantizerFunction": {
+      "doc": "Constants that describe quantization functions.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsquantizerfunction",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new instance with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsquantizerfunction/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new instance with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsquantizerfunction/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The corresponding value of the raw type.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsquantizerfunction/rawvalue"
+        }
+      }
+    },
+    "BNNSRandomGeneratorMethod": {
+      "doc": "Constants that describe random number generation methods.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsrandomgeneratormethod",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new instance with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsrandomgeneratormethod/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new instance with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsrandomgeneratormethod/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The corresponding value of the raw type.",
+          "url": "https://developer.apple.com/documentation/accelerate/bnnsrandomgeneratormethod/rawvalue"
+        }
+      }
+    },
+    "BNNSReduceFunction": {
+      "doc": "Constants that describe reduction functions.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsreducefunction"
+    },
+    "BNNSRelationalOperator": {
+      "doc": "Constants that describe relational operations.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsrelationaloperator"
+    },
+    "BNNSShuffleType": {
+      "doc": "Constants that specify a shuffle type.",
+      "url": "https://developer.apple.com/documentation/accelerate/bnnsshuffletype"
+    },
+    "BNNSSparsityType": {
+      "url": "https://developer.apple.com/documentation/accelerate/bnnssparsitytype"
+    },
+    "BNNSTargetSystem": {
+      "url": "https://developer.apple.com/documentation/accelerate/bnnstargetsystem"
+    },
+    "SparseControl_t": {
+      "doc": "Options that control the computation.",
+      "url": "https://developer.apple.com/documentation/accelerate/sparsecontrol_t"
+    },
+    "SparseFactorization_t": {
+      "doc": "Constants that define the factorization type.",
+      "url": "https://developer.apple.com/documentation/accelerate/sparsefactorization_t"
+    },
+    "SparseGMRESVariant_t": {
+      "doc": "Defines the exact variant of GMRES to implement",
+      "url": "https://developer.apple.com/documentation/accelerate/sparsegmresvariant_t"
+    },
+    "SparseIterativeStatus_t": {
+      "doc": "Constants that define the status of the iterative solve.",
+      "url": "https://developer.apple.com/documentation/accelerate/sparseiterativestatus_t"
+    },
+    "SparseKind_t": {
+      "doc": "A structure that defines whether the matrix is ordinary, symmetric, or triangular.",
+      "url": "https://developer.apple.com/documentation/accelerate/sparsekind_t"
+    },
+    "SparseLSMRConvergenceTest_t": {
+      "doc": "Constants that specify the type of convergence test.",
+      "url": "https://developer.apple.com/documentation/accelerate/sparselsmrconvergencetest_t"
+    },
+    "SparseOrder_t": {
+      "doc": "Options that define which ordering algorithm to use.",
+      "url": "https://developer.apple.com/documentation/accelerate/sparseorder_t"
+    },
+    "SparsePreconditioner_t": {
+      "doc": "Constants that define the preconditioner type.",
+      "url": "https://developer.apple.com/documentation/accelerate/sparsepreconditioner_t"
+    },
+    "SparseScaling_t": {
+      "doc": "Options that define which scaling algorithm to use.",
+      "url": "https://developer.apple.com/documentation/accelerate/sparsescaling_t"
+    },
+    "SparseStatus_t": {
+      "doc": "Constants that describe the status of a factorization.",
+      "url": "https://developer.apple.com/documentation/accelerate/sparsestatus_t"
+    },
+    "SparseSubfactor_t": {
+      "doc": "Constants that define the subfactor of a factorization.",
+      "url": "https://developer.apple.com/documentation/accelerate/sparsesubfactor_t"
+    },
+    "SparseTriangle_t": {
+      "doc": "A structure that defines which triangle a symmetric matrix stores, or whether a triangular matrix is upper or lower.",
+      "url": "https://developer.apple.com/documentation/accelerate/sparsetriangle_t"
+    },
+    "SparseUpdate_t": {
+      "doc": "Low-rank update algorithm selector",
+      "url": "https://developer.apple.com/documentation/accelerate/sparseupdate_t"
+    },
+    "quadrature_integrator": {
+      "doc": "Constants that specify integration algorithms.",
+      "url": "https://developer.apple.com/documentation/accelerate/quadrature_integrator"
+    },
+    "quadrature_status": {
+      "doc": "Constants that indicate the status of a quadrature operation.",
+      "url": "https://developer.apple.com/documentation/accelerate/quadrature_status"
+    },
+    "sparse_matrix_property": {
+      "doc": "The matrix property type.",
+      "url": "https://developer.apple.com/documentation/accelerate/sparse_matrix_property"
+    },
+    "sparse_norm": {
+      "doc": "The norm specifier.",
+      "url": "https://developer.apple.com/documentation/accelerate/sparse_norm"
+    },
+    "sparse_status": {
+      "doc": "The type reflecting the status of an operations.",
+      "url": "https://developer.apple.com/documentation/accelerate/sparse_status"
+    },
+    "vImageARGBType": {
+      "doc": "Constants that describe the encoding of an ARGB image for conversions between RGB and YpCbCr.",
+      "url": "https://developer.apple.com/documentation/accelerate/vimageargbtype",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new ARGB type.",
+          "url": "https://developer.apple.com/documentation/accelerate/vimageargbtype/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new ARGB type with an unsigned integer value.",
+          "url": "https://developer.apple.com/documentation/accelerate/vimageargbtype/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The unsigned integer raw value.",
+          "url": "https://developer.apple.com/documentation/accelerate/vimageargbtype/rawvalue"
+        }
+      }
+    },
+    "vImageMDTableUsageHint": {
+      "doc": "Constants that indicate the use for a multidimensional lookup table.",
+      "url": "https://developer.apple.com/documentation/accelerate/vimagemdtableusagehint",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a table usage hint with an unsigned-integer value.",
+          "url": "https://developer.apple.com/documentation/accelerate/vimagemdtableusagehint/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a table usage hint with an unsigned-integer value.",
+          "url": "https://developer.apple.com/documentation/accelerate/vimagemdtableusagehint/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The raw value that represents the table usage hint.",
+          "url": "https://developer.apple.com/documentation/accelerate/vimagemdtableusagehint/rawvalue"
+        }
+      }
+    },
+    "vImageYpCbCrType": {
+      "doc": "Constants that describe the encoding of a YpCbCr image for conversions between RGB and YpCbCr.",
+      "url": "https://developer.apple.com/documentation/accelerate/vimageypcbcrtype",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates a new YpCbCr type.",
+          "url": "https://developer.apple.com/documentation/accelerate/vimageypcbcrtype/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a new YpCbCr type with an unsigned integer value.",
+          "url": "https://developer.apple.com/documentation/accelerate/vimageypcbcrtype/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The unsigned integer raw value.",
+          "url": "https://developer.apple.com/documentation/accelerate/vimageypcbcrtype/rawvalue"
+        }
+      }
+    },
+    "vImage_InterpolationMethod": {
+      "doc": "Constants that represent different interpolation methods.",
+      "url": "https://developer.apple.com/documentation/accelerate/vimage_interpolationmethod",
+      "members": {
+        "init(_:)": {
+          "doc": "Creates an interpolation method constant with an unsigned-integer value.",
+          "url": "https://developer.apple.com/documentation/accelerate/vimage_interpolationmethod/init(_:)"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates an interpolation method constant with an unsigned-integer value.",
+          "url": "https://developer.apple.com/documentation/accelerate/vimage_interpolationmethod/init(rawvalue:)"
+        },
+        "rawValue": {
+          "doc": "The raw value that represents the interpolation method constant.",
+          "url": "https://developer.apple.com/documentation/accelerate/vimage_interpolationmethod/rawvalue"
+        }
+      }
+    }
+  }
+}

@@ -46,6 +46,8 @@ func NewMessageSecurityInformationWithSignersIsEncryptedSigningErrorEncryptionEr
 	return &MessageSecurityInformation{inner: raw.MEMessageSecurityInformationFromID(_id)}
 }
 
+// @brief The signers of the message
+//
 // Signers returns the collection as a Go slice.
 func (x *MessageSecurityInformation) Signers() []*MessageSigner {
 	arr := x.inner.Signers()
@@ -57,26 +59,36 @@ func (x *MessageSecurityInformation) Signers() []*MessageSigner {
 	})
 }
 
+// @brief Whether or not the message was encrypted.
+//
 // IsEncrypted calls the underlying IsEncrypted.
 func (x *MessageSecurityInformation) IsEncrypted() bool {
 	return x.inner.IsEncrypted()
 }
 
+// @brief Any signing error that occured when decoding the message.
+//
 // SigningError calls the underlying SigningError.
 func (x *MessageSecurityInformation) SigningError() unsafe.Pointer {
 	return x.inner.SigningError()
 }
 
+// @brief Any encryption error that occured when decoding the message.
+//
 // EncryptionError calls the underlying EncryptionError.
 func (x *MessageSecurityInformation) EncryptionError() unsafe.Pointer {
 	return x.inner.EncryptionError()
 }
 
+// @brief Whether or not Mail should block loading remote content for the message by default. The user will have the option to load remote content manually.
+//
 // ShouldBlockRemoteContent calls the underlying ShouldBlockRemoteContent.
 func (x *MessageSecurityInformation) ShouldBlockRemoteContent() bool {
 	return x.inner.ShouldBlockRemoteContent()
 }
 
+// @brief A localized string containing the reason for blocking remote content.
+//
 // LocalizedRemoteContentBlockingReason calls the underlying LocalizedRemoteContentBlockingReason.
 func (x *MessageSecurityInformation) LocalizedRemoteContentBlockingReason() string {
 	_r := x.inner.LocalizedRemoteContentBlockingReason()

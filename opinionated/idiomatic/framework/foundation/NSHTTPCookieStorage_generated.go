@@ -38,6 +38,8 @@ func NewHTTPCookieStorage() *HTTPCookieStorage {
 	return &HTTPCookieStorage{inner: raw.NSHTTPCookieStorageFromID(_id)}
 }
 
+// @abstract The cookie accept policy preference of the receiver.
+//
 // WithCookieAcceptPolicy sets the cookieAcceptPolicy property and returns the receiver for chaining.
 func (x *HTTPCookieStorage) WithCookieAcceptPolicy(cookieAcceptPolicy NSHTTPCookieAcceptPolicy) *HTTPCookieStorage {
 	x.inner.SetCookieAcceptPolicy(raw.NSHTTPCookieAcceptPolicy(cookieAcceptPolicy))
@@ -50,36 +52,50 @@ func (x *HTTPCookieStorage) WithScriptingProperties(scriptingProperties *raw.NSD
 	return x
 }
 
+// @method setCookie: @abstract Set a cookie @discussion The cookie will override an existing cookie with the same name, domain and path, if any.
+//
 // SetCookie calls the underlying SetCookie.
 func (x *HTTPCookieStorage) SetCookie(cookie *raw.NSHTTPCookie) {
 	x.inner.SetCookie(cookie)
 }
 
+// @method deleteCookie: @abstract Delete the specified cookie
+//
 // DeleteCookie calls the underlying DeleteCookie.
 func (x *HTTPCookieStorage) DeleteCookie(cookie *raw.NSHTTPCookie) {
 	x.inner.DeleteCookie(cookie)
 }
 
+// @method removeCookiesSince: @abstract Delete all cookies from the cookie storage since the provided date.
+//
 // RemoveCookiesSinceDate calls the underlying RemoveCookiesSinceDate.
 func (x *HTTPCookieStorage) RemoveCookiesSinceDate(date *raw.NSDate) {
 	x.inner.RemoveCookiesSinceDate(date)
 }
 
+// @method cookiesForURL: @abstract Returns an array of cookies to send to the given URL. @param URL The URL for which to get cookies. @result an NSArray of NSHTTPCookie objects. @discussion The cookie manager examines the cookies it stores and includes those which should be sent to the given URL. You can use <tt>+[NSCookie requestHeaderFieldsWithCookies:]</tt> to turn this array into a set of header fields to add to a request.
+//
 // CookiesForURL calls the underlying CookiesForURL.
 func (x *HTTPCookieStorage) CookiesForURL(uRL string) *raw.NSArray[*raw.NSHTTPCookie] {
 	return x.inner.CookiesForURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 }
 
+// @method setCookies:forURL:mainDocumentURL: @abstract Adds an array cookies to the cookie store, following the cookie accept policy. @param cookies The cookies to set. @param URL The URL from which the cookies were sent. @param mainDocumentURL The main document URL to be used as a base for the "same domain as main document" policy. @discussion For mainDocumentURL, the caller should pass the URL for an appropriate main document, if known. For example, when loading a web page, the URL of the main html document for the top-level frame should be passed. To save cookies based on a set of response headers, you can use <tt>+[NSCookie cookiesWithResponseHeaderFields:forURL:]</tt> on a header field dictionary and then use this method to store the resulting cookies in accordance with policy settings.
+//
 // SetCookiesForURLMainDocumentURL calls the underlying SetCookiesForURLMainDocumentURL.
 func (x *HTTPCookieStorage) SetCookiesForURLMainDocumentURL(cookies *raw.NSArray[*raw.NSHTTPCookie], uRL string, mainDocumentURL string) {
 	x.inner.SetCookiesForURLMainDocumentURL(cookies, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(mainDocumentURL)))
 }
 
+// @method sortedCookiesUsingDescriptors: @abstract Returns an array of all cookies in the store, sorted according to the key value and sorting direction of the NSSortDescriptors specified in the parameter. @param sortOrder an array of NSSortDescriptors which represent the preferred sort order of the resulting array. @discussion proper sorting of cookies may require extensive string conversion, which can be avoided by allowing the system to perform the sorting.  This API is to be preferred over the more generic -[NSHTTPCookieStorage cookies] API, if sorting is going to be performed.
+//
 // SortedCookiesUsingDescriptors calls the underlying SortedCookiesUsingDescriptors.
 func (x *HTTPCookieStorage) SortedCookiesUsingDescriptors(sortOrder *raw.NSArray[*raw.NSSortDescriptor]) *raw.NSArray[*raw.NSHTTPCookie] {
 	return x.inner.SortedCookiesUsingDescriptors(sortOrder)
 }
 
+// @abstract Get all the cookies @result An NSArray of NSHTTPCookies
+//
 // Cookies returns the collection as a Go slice.
 func (x *HTTPCookieStorage) Cookies() []*HTTPCookie {
 	arr := x.inner.Cookies()
@@ -91,6 +107,8 @@ func (x *HTTPCookieStorage) Cookies() []*HTTPCookie {
 	})
 }
 
+// @abstract The cookie accept policy preference of the receiver.
+//
 // CookieAcceptPolicy calls the underlying CookieAcceptPolicy.
 func (x *HTTPCookieStorage) CookieAcceptPolicy() NSHTTPCookieAcceptPolicy {
 	return NSHTTPCookieAcceptPolicy(x.inner.CookieAcceptPolicy())

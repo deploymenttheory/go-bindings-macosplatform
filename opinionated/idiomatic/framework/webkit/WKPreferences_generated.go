@@ -35,54 +35,72 @@ func NewWKPreferences() *WKPreferences {
 	return &WKPreferences{inner: raw.WKPreferencesFromID(_id)}
 }
 
+// @abstract The minimum font size in points. @discussion The default value is 0.
+//
 // WithMinimumFontSize sets the minimumFontSize property and returns the receiver for chaining.
 func (x *WKPreferences) WithMinimumFontSize(minimumFontSize float64) *WKPreferences {
 	x.inner.SetMinimumFontSize(minimumFontSize)
 	return x
 }
 
+// @abstract A Boolean value indicating whether JavaScript can open windows without user interaction. @discussion The default value is NO in iOS and YES in OS X.
+//
 // WithJavaScriptCanOpenWindowsAutomatically sets the javaScriptCanOpenWindowsAutomatically property and returns the receiver for chaining.
 func (x *WKPreferences) WithJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically bool) *WKPreferences {
 	x.inner.SetJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically)
 	return x
 }
 
+// @abstract A Boolean value indicating whether warnings should be shown for suspected fraudulent content such as phishing or malware. @discussion The default value is YES.
+//
 // WithFraudulentWebsiteWarningEnabled sets the fraudulentWebsiteWarningEnabled property and returns the receiver for chaining.
 func (x *WKPreferences) WithFraudulentWebsiteWarningEnabled(fraudulentWebsiteWarningEnabled bool) *WKPreferences {
 	x.inner.SetFraudulentWebsiteWarningEnabled(fraudulentWebsiteWarningEnabled)
 	return x
 }
 
+// @abstract A Boolean value indicating whether the web view should include backgrounds when printing. @discussion The default value is `NO`.
+//
 // WithShouldPrintBackgrounds sets the shouldPrintBackgrounds property and returns the receiver for chaining.
 func (x *WKPreferences) WithShouldPrintBackgrounds(shouldPrintBackgrounds bool) *WKPreferences {
 	x.inner.SetShouldPrintBackgrounds(shouldPrintBackgrounds)
 	return x
 }
 
+// @property tabFocusesLinks @abstract If tabFocusesLinks is YES, the tab key will focus links and form controls. The Option key temporarily reverses this preference.
+//
 // WithTabFocusesLinks sets the tabFocusesLinks property and returns the receiver for chaining.
 func (x *WKPreferences) WithTabFocusesLinks(tabFocusesLinks bool) *WKPreferences {
 	x.inner.SetTabFocusesLinks(tabFocusesLinks)
 	return x
 }
 
+// @abstract A Boolean value indicating whether text interaction is disabled.
+//
 // WithTextInteractionEnabled sets the textInteractionEnabled property and returns the receiver for chaining.
 func (x *WKPreferences) WithTextInteractionEnabled(textInteractionEnabled bool) *WKPreferences {
 	x.inner.SetTextInteractionEnabled(textInteractionEnabled)
 	return x
 }
 
+// @abstract A Boolean value indicating whether WebKit will apply built-in workarounds (quirks) to improve compatibility with certain known websites. You can disable site-specific quirks to help test your website without these workarounds. Enabled by default.
+//
 // WithSiteSpecificQuirksModeEnabled sets the siteSpecificQuirksModeEnabled property and returns the receiver for chaining.
 func (x *WKPreferences) WithSiteSpecificQuirksModeEnabled(siteSpecificQuirksModeEnabled bool) *WKPreferences {
 	x.inner.SetSiteSpecificQuirksModeEnabled(siteSpecificQuirksModeEnabled)
 	return x
 }
 
+// @abstract A Boolean value indicating whether Fullscreen API is enabled. @discussion The default value is NO. We can set it to YES to enable support for the fullscreen API.
+//
 // WithElementFullscreenEnabled sets the elementFullscreenEnabled property and returns the receiver for chaining.
 func (x *WKPreferences) WithElementFullscreenEnabled(elementFullscreenEnabled bool) *WKPreferences {
 	x.inner.SetElementFullscreenEnabled(elementFullscreenEnabled)
 	return x
 }
 
+// @abstract Specify the scheduling policy for the web view when it is inactive and detached from the view hierarchy. Web views are not considered idle when playing media or loading web pages. A suspended web view will pause JavaScript execution and page layout.
+//
 // WithInactiveSchedulingPolicy sets the inactiveSchedulingPolicy property and returns the receiver for chaining.
 func (x *WKPreferences) WithInactiveSchedulingPolicy(inactiveSchedulingPolicy WKInactiveSchedulingPolicy) *WKPreferences {
 	x.inner.SetInactiveSchedulingPolicy(raw.WKInactiveSchedulingPolicy(inactiveSchedulingPolicy))
@@ -107,6 +125,8 @@ func (x *WKPreferences) WithJavaScriptEnabled(javaScriptEnabled bool) *WKPrefere
 	return x
 }
 
+// @abstract The minimum font size in points. @discussion The default value is 0.
+//
 // MinimumFontSize calls the underlying MinimumFontSize.
 func (x *WKPreferences) MinimumFontSize() float64 {
 	return x.inner.MinimumFontSize()
@@ -117,6 +137,8 @@ func (x *WKPreferences) SetMinimumFontSize(minimumFontSize float64) {
 	x.inner.SetMinimumFontSize(minimumFontSize)
 }
 
+// @abstract A Boolean value indicating whether JavaScript can open windows without user interaction. @discussion The default value is NO in iOS and YES in OS X.
+//
 // JavaScriptCanOpenWindowsAutomatically calls the underlying JavaScriptCanOpenWindowsAutomatically.
 func (x *WKPreferences) JavaScriptCanOpenWindowsAutomatically() bool {
 	return x.inner.JavaScriptCanOpenWindowsAutomatically()
@@ -127,6 +149,8 @@ func (x *WKPreferences) SetJavaScriptCanOpenWindowsAutomatically(javaScriptCanOp
 	x.inner.SetJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically)
 }
 
+// @abstract A Boolean value indicating whether warnings should be shown for suspected fraudulent content such as phishing or malware. @discussion The default value is YES.
+//
 // IsFraudulentWebsiteWarningEnabled calls the underlying IsFraudulentWebsiteWarningEnabled.
 func (x *WKPreferences) IsFraudulentWebsiteWarningEnabled() bool {
 	return x.inner.IsFraudulentWebsiteWarningEnabled()
@@ -137,6 +161,8 @@ func (x *WKPreferences) SetFraudulentWebsiteWarningEnabled(fraudulentWebsiteWarn
 	x.inner.SetFraudulentWebsiteWarningEnabled(fraudulentWebsiteWarningEnabled)
 }
 
+// @abstract A Boolean value indicating whether the web view should include backgrounds when printing. @discussion The default value is `NO`.
+//
 // ShouldPrintBackgrounds calls the underlying ShouldPrintBackgrounds.
 func (x *WKPreferences) ShouldPrintBackgrounds() bool {
 	return x.inner.ShouldPrintBackgrounds()
@@ -147,6 +173,8 @@ func (x *WKPreferences) SetShouldPrintBackgrounds(shouldPrintBackgrounds bool) {
 	x.inner.SetShouldPrintBackgrounds(shouldPrintBackgrounds)
 }
 
+// @property tabFocusesLinks @abstract If tabFocusesLinks is YES, the tab key will focus links and form controls. The Option key temporarily reverses this preference.
+//
 // TabFocusesLinks calls the underlying TabFocusesLinks.
 func (x *WKPreferences) TabFocusesLinks() bool {
 	return x.inner.TabFocusesLinks()
@@ -157,6 +185,8 @@ func (x *WKPreferences) SetTabFocusesLinks(tabFocusesLinks bool) {
 	x.inner.SetTabFocusesLinks(tabFocusesLinks)
 }
 
+// @abstract A Boolean value indicating whether text interaction is disabled.
+//
 // IsTextInteractionEnabled calls the underlying IsTextInteractionEnabled.
 func (x *WKPreferences) IsTextInteractionEnabled() bool {
 	return x.inner.IsTextInteractionEnabled()
@@ -167,6 +197,8 @@ func (x *WKPreferences) SetTextInteractionEnabled(textInteractionEnabled bool) {
 	x.inner.SetTextInteractionEnabled(textInteractionEnabled)
 }
 
+// @abstract A Boolean value indicating whether WebKit will apply built-in workarounds (quirks) to improve compatibility with certain known websites. You can disable site-specific quirks to help test your website without these workarounds. Enabled by default.
+//
 // IsSiteSpecificQuirksModeEnabled calls the underlying IsSiteSpecificQuirksModeEnabled.
 func (x *WKPreferences) IsSiteSpecificQuirksModeEnabled() bool {
 	return x.inner.IsSiteSpecificQuirksModeEnabled()
@@ -177,6 +209,8 @@ func (x *WKPreferences) SetSiteSpecificQuirksModeEnabled(siteSpecificQuirksModeE
 	x.inner.SetSiteSpecificQuirksModeEnabled(siteSpecificQuirksModeEnabled)
 }
 
+// @abstract A Boolean value indicating whether Fullscreen API is enabled. @discussion The default value is NO. We can set it to YES to enable support for the fullscreen API.
+//
 // IsElementFullscreenEnabled calls the underlying IsElementFullscreenEnabled.
 func (x *WKPreferences) IsElementFullscreenEnabled() bool {
 	return x.inner.IsElementFullscreenEnabled()
@@ -187,6 +221,8 @@ func (x *WKPreferences) SetElementFullscreenEnabled(elementFullscreenEnabled boo
 	x.inner.SetElementFullscreenEnabled(elementFullscreenEnabled)
 }
 
+// @abstract Specify the scheduling policy for the web view when it is inactive and detached from the view hierarchy. Web views are not considered idle when playing media or loading web pages. A suspended web view will pause JavaScript execution and page layout.
+//
 // InactiveSchedulingPolicy calls the underlying InactiveSchedulingPolicy.
 func (x *WKPreferences) InactiveSchedulingPolicy() WKInactiveSchedulingPolicy {
 	return WKInactiveSchedulingPolicy(x.inner.InactiveSchedulingPolicy())

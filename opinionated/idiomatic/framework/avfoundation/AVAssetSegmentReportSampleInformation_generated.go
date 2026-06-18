@@ -38,21 +38,29 @@ func NewAssetSegmentReportSampleInformation() *AssetSegmentReportSampleInformati
 	return &AssetSegmentReportSampleInformation{inner: raw.AVAssetSegmentReportSampleInformationFromID(_id)}
 }
 
+// @property	presentationTimeStamp @abstract	The presentation timestamp (PTS) of the sample. @discussion	This timestamp may be different from the earliestPresentationTimeStamp if the video is encoded using frame reordering.
+//
 // PresentationTimeStamp calls the underlying PresentationTimeStamp.
 func (x *AssetSegmentReportSampleInformation) PresentationTimeStamp() coremedia.CMTime {
 	return x.inner.PresentationTimeStamp()
 }
 
+// @property	offset @abstract	The offset of the sample in the segment.
+//
 // Offset calls the underlying Offset.
 func (x *AssetSegmentReportSampleInformation) Offset() int {
 	return x.inner.Offset()
 }
 
+// @property	length @abstract	The length of the sample.
+//
 // Length calls the underlying Length.
 func (x *AssetSegmentReportSampleInformation) Length() int {
 	return x.inner.Length()
 }
 
+// @property	isSyncSample @abstract	Indicates whether the sample is a sync sample.
+//
 // IsSyncSample calls the underlying IsSyncSample.
 func (x *AssetSegmentReportSampleInformation) IsSyncSample() bool {
 	return x.inner.IsSyncSample()

@@ -39,6 +39,8 @@ func NewMatrixNeuronGradientWithDevice(device metal.MTLDevice) *MatrixNeuronGrad
 	return &MatrixNeuronGradient{inner: raw.MPSMatrixNeuronGradientFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSMatrixNeuronGradient @param      device      The MTLDevice on which to make the MPSMatrixNeuronGradient object. @return     A new MPSMatrixNeuronGradient object, or nil if failure.
+//
 // NewMatrixNeuronGradientWithCoderDevice creates a new [MatrixNeuronGradient].
 func NewMatrixNeuronGradientWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MatrixNeuronGradient {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixNeuronGradient")), objc.RegisterName("alloc"))
@@ -46,59 +48,81 @@ func NewMatrixNeuronGradientWithCoderDevice(aDecoder *foundation.NSCoder, device
 	return &MatrixNeuronGradient{inner: raw.MPSMatrixNeuronGradientFromID(_id)}
 }
 
+// @property   sourceNumberOfFeatureVectors @discussion The number of input vectors which make up the input array.
+//
 // WithSourceNumberOfFeatureVectors sets the sourceNumberOfFeatureVectors property and returns the receiver for chaining.
 func (x *MatrixNeuronGradient) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) *MatrixNeuronGradient {
 	x.inner.SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors)
 	return x
 }
 
+// @property   sourceInputFeatureChannels @discussion The number of feature channels in the input vectors.
+//
 // WithSourceInputFeatureChannels sets the sourceInputFeatureChannels property and returns the receiver for chaining.
 func (x *MatrixNeuronGradient) WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixNeuronGradient {
 	x.inner.SetSourceInputFeatureChannels(sourceInputFeatureChannels)
 	return x
 }
 
+// @property   alpha @discussion The scale factor to apply to the input.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *MatrixNeuronGradient) WithAlpha(alpha float64) *MatrixNeuronGradient {
 	x.inner.SetAlpha(alpha)
 	return x
 }
 
+// @abstract   Specifies a neuron activation function to be used. @discussion This method can be used to add a neuron activation funtion of given type with associated scalar parameters A, B, and C that are shared across all output values. Note that this method can only be used to specify neurons which are specified by three (or fewer) parameters shared across all output values (or channels, in CNN nomenclature). It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. For those kind of neuron activation functions, use appropriate setter functions.  An MPSMatrixNeuron kernel is initialized with a default neuron function of MPSCNNNeuronTypeNone. @param      neuronType      Type of neuron activation function. For full list see MPSCNNNeuronType.h @param      parameterA      parameterA of neuron activation that is shared across all output values. @param      parameterB      parameterB of neuron activation that is shared across all output values. @param      parameterC      parameterC of neuron activation that is shared across all output values.
+//
 // SetNeuronTypeParameterAParameterBParameterC calls the underlying SetNeuronTypeParameterAParameterBParameterC.
 func (x *MatrixNeuronGradient) SetNeuronTypeParameterAParameterBParameterC(neuronType MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
 	x.inner.SetNeuronTypeParameterAParameterBParameterC(raw.MPSCNNNeuronType(neuronType), parameterA, parameterB, parameterC)
 }
 
+// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+//
 // NeuronType calls the underlying NeuronType.
 func (x *MatrixNeuronGradient) NeuronType() MPSCNNNeuronType {
 	return MPSCNNNeuronType(x.inner.NeuronType())
 }
 
+// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+//
 // NeuronParameterA calls the underlying NeuronParameterA.
 func (x *MatrixNeuronGradient) NeuronParameterA() float32 {
 	return x.inner.NeuronParameterA()
 }
 
+// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+//
 // NeuronParameterB calls the underlying NeuronParameterB.
 func (x *MatrixNeuronGradient) NeuronParameterB() float32 {
 	return x.inner.NeuronParameterB()
 }
 
+// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+//
 // NeuronParameterC calls the underlying NeuronParameterC.
 func (x *MatrixNeuronGradient) NeuronParameterC() float32 {
 	return x.inner.NeuronParameterC()
 }
 
+// @abstract   Add per output value neuron parameters A for PReLu neuron activation functions. @discussion This method sets the neuron to PReLU, zeros parameters A and B and sets the per output value neuron parameters A to an array containing a unique value of A for each output value. If the neuron function is f(v,a,b), it will apply resultMatrix(i, j) = f( input(i, j), A[j], B[j] ) where j in [0, sourceInputFeatureChannels] See https://arxiv.org/pdf/1502.01852.pdf for details. All other neuron types, where parameter A and parameter B are shared across output values must be set using -setNeuronType:parameterA:parameterB: @param      A       An array containing float values for neuron parameter A. Number of entries must be equal to MIN(inputMatrix.columns - sourceMatrixOrigin.y, sourceInputFeatureChannels)
+//
 // SetNeuronToPReLUWithParametersA calls the underlying SetNeuronToPReLUWithParametersA.
 func (x *MatrixNeuronGradient) SetNeuronToPReLUWithParametersA(a *foundation.NSData) {
 	x.inner.SetNeuronToPReLUWithParametersA(a)
 }
 
+// @abstract   Encode a MPSMatrixNeuronGradient object to a command buffer and compute its gradient with respect to its input data. @param      commandBuffer               The commandBuffer on which to encode the operation. @param      gradientMatrix              A matrix whose values represent the gradient of a loss function with respect to the results of a forward MPSMatrixNeuron operation. @param      inputMatrix                 A matrix containing the inputs to a forward MPSMatrixNeuron operation for which the gradient values are to be computed. @param      biasVector                  A vector containing the bias terms. @param      resultGradientForDataMatrix The matrix containing the resulting gradient values. @param      resultGradientForBiasVector If non-NULL the vector containing gradients for the bias terms.
+//
 // EncodeToCommandBufferGradientMatrixInputMatrixBiasVectorResultGradientForDataMatrixResultGradientForBiasVector calls the underlying EncodeToCommandBufferGradientMatrixInputMatrixBiasVectorResultGradientForDataMatrixResultGradientForBiasVector.
 func (x *MatrixNeuronGradient) EncodeToCommandBufferGradientMatrixInputMatrixBiasVectorResultGradientForDataMatrixResultGradientForBiasVector(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, inputMatrix *mpscore.MPSMatrix, biasVector *mpscore.MPSVector, resultGradientForDataMatrix *mpscore.MPSMatrix, resultGradientForBiasVector *mpscore.MPSVector) {
 	x.inner.EncodeToCommandBufferGradientMatrixInputMatrixBiasVectorResultGradientForDataMatrixResultGradientForBiasVector(commandBuffer, gradientMatrix, inputMatrix, biasVector, resultGradientForDataMatrix, resultGradientForBiasVector)
 }
 
+// @property   sourceNumberOfFeatureVectors @discussion The number of input vectors which make up the input array.
+//
 // SourceNumberOfFeatureVectors calls the underlying SourceNumberOfFeatureVectors.
 func (x *MatrixNeuronGradient) SourceNumberOfFeatureVectors() uint {
 	return x.inner.SourceNumberOfFeatureVectors()
@@ -109,6 +133,8 @@ func (x *MatrixNeuronGradient) SetSourceNumberOfFeatureVectors(sourceNumberOfFea
 	x.inner.SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors)
 }
 
+// @property   sourceInputFeatureChannels @discussion The number of feature channels in the input vectors.
+//
 // SourceInputFeatureChannels calls the underlying SourceInputFeatureChannels.
 func (x *MatrixNeuronGradient) SourceInputFeatureChannels() uint {
 	return x.inner.SourceInputFeatureChannels()
@@ -119,6 +145,8 @@ func (x *MatrixNeuronGradient) SetSourceInputFeatureChannels(sourceInputFeatureC
 	x.inner.SetSourceInputFeatureChannels(sourceInputFeatureChannels)
 }
 
+// @property   alpha @discussion The scale factor to apply to the input.
+//
 // Alpha calls the underlying Alpha.
 func (x *MatrixNeuronGradient) Alpha() float64 {
 	return x.inner.Alpha()

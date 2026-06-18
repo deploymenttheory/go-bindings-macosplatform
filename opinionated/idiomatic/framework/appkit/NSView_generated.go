@@ -313,6 +313,8 @@ func (x *View) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.
 	return x
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *View) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *View {
 	x.inner.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
@@ -816,11 +818,15 @@ func (x *View) MenuForEvent(event *raw.NSEvent) *Menu {
 	return &Menu{inner: _r}
 }
 
+// A contextual menu is being opened from the receiving view. The view should update any visual state in response — such as making a selection. \param menu The contextual menu that is being opened on the view \param event The event that caused the menu to open.
+//
 // WillOpenMenuWithEvent calls the underlying WillOpenMenuWithEvent.
 func (x *View) WillOpenMenuWithEvent(menu *raw.NSMenu, event *raw.NSEvent) {
 	x.inner.WillOpenMenuWithEvent(menu, event)
 }
 
+// A contextual menu shown from the receiving view has been closed. This is only called if the menu had been opened and the view previously received \c -willOpenMenu:withEvent:. The view should update any visual state in response — such as removing a temporary selection. \param menu The contextual menu that was open on the view \param event The event that caused the menu to close. This may be nil if there is no specific event that triggered the closing.
+//
 // DidCloseMenuWithEvent calls the underlying DidCloseMenuWithEvent.
 func (x *View) DidCloseMenuWithEvent(menu *raw.NSMenu, event *raw.NSEvent) {
 	x.inner.DidCloseMenuWithEvent(menu, event)
@@ -871,6 +877,8 @@ func (x *View) PrepareContentInRect(rect corefoundation.CGRect) {
 	x.inner.PrepareContentInRect(rect)
 }
 
+// Override point for reacting to the effective appearance of the receiver changing. At this point `effectiveAppearance` property reflects the new appearance.
+//
 // ViewDidChangeEffectiveAppearance calls the underlying ViewDidChangeEffectiveAppearance.
 func (x *View) ViewDidChangeEffectiveAppearance() {
 	x.inner.ViewDidChangeEffectiveAppearance()
@@ -906,8 +914,17 @@ func (x *View) Subviews() []*View {
 }
 
 // SetSubviews calls the underlying SetSubviews.
-func (x *View) SetSubviews(subviews *foundation.NSArray[*raw.NSView]) {
-	x.inner.SetSubviews(subviews)
+func (x *View) SetSubviews(subviews ...ViewProvider) {
+	_ptrs := make([]objc.ID, len(subviews))
+	for _i, _v := range subviews {
+		_ptrs[_i] = _v.asView().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.NSView]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetSubviews(_arg0)
 }
 
 // OpaqueAncestor calls the underlying OpaqueAncestor.
@@ -1064,6 +1081,8 @@ func (x *View) SetNeedsDisplay(needsDisplay bool) {
 	x.inner.SetNeedsDisplay(needsDisplay)
 }
 
+// The portion of the view that isn’t clipped by its superviews. @discussion Visibility, as reflected by this property, doesn’t account for whether other view or window objects overlap the current view or whether the current view is installed in a window at all. This value of this property is `NSZeroRect` if the current view is effectively hidden. @discussion During a printing operation, the visible rectangle is further clipped to the page being imaged.
+//
 // VisibleRect calls the underlying VisibleRect.
 func (x *View) VisibleRect() corefoundation.CGRect {
 	return x.inner.VisibleRect()
@@ -1265,6 +1284,8 @@ func (x *View) SetPostsBoundsChangedNotifications(postsBoundsChangedNotification
 	x.inner.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
 }
 
+// The nearest ancestor scroll view that contains the current view as part of its document view. - Note: If the current view is not embedded inside a scroll view, the value of this property is `nil`. This property does not contain the current view if the current view is itself a scroll view. It always contains an ancestor scroll view.
+//
 // EnclosingScrollView calls the underlying EnclosingScrollView.
 func (x *View) EnclosingScrollView() *ScrollView {
 	_r := x.inner.EnclosingScrollView()
@@ -1468,6 +1489,8 @@ func (x *View) DrawPageBorderWithSize(borderSize corefoundation.CGSize) {
 	x.inner.DrawPageBorderWithSize(borderSize)
 }
 
+// * This method is obsolete.  It will never be invoked from within AppKit, and NSView's implementation of it does nothing. **
+//
 // DrawSheetBorderWithSize calls the underlying DrawSheetBorderWithSize.
 func (x *View) DrawSheetBorderWithSize(borderSize corefoundation.CGSize) {
 	x.inner.DrawSheetBorderWithSize(borderSize)
@@ -1604,8 +1627,17 @@ func (x *View) GestureRecognizers() []*GestureRecognizer {
 }
 
 // SetGestureRecognizers calls the underlying SetGestureRecognizers.
-func (x *View) SetGestureRecognizers(gestureRecognizers *foundation.NSArray[*raw.NSGestureRecognizer]) {
-	x.inner.SetGestureRecognizers(gestureRecognizers)
+func (x *View) SetGestureRecognizers(gestureRecognizers ...GestureRecognizerProvider) {
+	_ptrs := make([]objc.ID, len(gestureRecognizers))
+	for _i, _v := range gestureRecognizers {
+		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.NSGestureRecognizer]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.NSGestureRecognizer](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetGestureRecognizers(_arg0)
 }
 
 // AllowedTouchTypes calls the underlying AllowedTouchTypes.
@@ -1656,11 +1688,15 @@ func (x *View) LayoutMarginsGuide() *LayoutGuide {
 	return &LayoutGuide{inner: _r}
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // PrefersCompactControlSizeMetrics calls the underlying PrefersCompactControlSizeMetrics.
 func (x *View) PrefersCompactControlSizeMetrics() bool {
 	return x.inner.PrefersCompactControlSizeMetrics()
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // SetPrefersCompactControlSizeMetrics calls the underlying SetPrefersCompactControlSizeMetrics.
 func (x *View) SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) {
 	x.inner.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
@@ -1722,6 +1758,8 @@ func (x *View) TrackingAreas() []*TrackingArea {
 	})
 }
 
+// Returns a new display link whose callback will be invoked in-sync with the display the view is on. If the view is hidden, or not on any display, the callback will not be invoked.
+//
 // DisplayLinkWithTargetSelector calls the underlying DisplayLinkWithTargetSelector.
 func (x *View) DisplayLinkWithTargetSelector(target objc.ID, selector objc.SEL) *quartzcore.CADisplayLink {
 	return x.inner.DisplayLinkWithTargetSelector(target, selector)
@@ -2395,7 +2433,7 @@ type Viewable interface {
 	Window() *Window
 	Superview() *View
 	Subviews() []*View
-	SetSubviews(subviews *foundation.NSArray[*raw.NSView])
+	SetSubviews(subviews ...ViewProvider)
 	OpaqueAncestor() *View
 	IsHidden() bool
 	SetHidden(hidden bool)
@@ -2521,7 +2559,7 @@ type Viewable interface {
 	AddGestureRecognizer(gestureRecognizer *raw.NSGestureRecognizer)
 	RemoveGestureRecognizer(gestureRecognizer *raw.NSGestureRecognizer)
 	GestureRecognizers() []*GestureRecognizer
-	SetGestureRecognizers(gestureRecognizers *foundation.NSArray[*raw.NSGestureRecognizer])
+	SetGestureRecognizers(gestureRecognizers ...GestureRecognizerProvider)
 	AllowedTouchTypes() NSTouchTypeMask
 	SetAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask)
 	SafeAreaInsets() foundation.NSEdgeInsets

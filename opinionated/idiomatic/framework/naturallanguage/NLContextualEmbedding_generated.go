@@ -38,17 +38,23 @@ func NewContextualEmbedding() *ContextualEmbedding {
 	return &ContextualEmbedding{inner: raw.NLContextualEmbeddingFromID(_id)}
 }
 
+// The instance method that loads the embedding model. - Returns: A Boolean value that indicates whether the load succeeds. When you create a contextual embedding, the framework doesn't load the model until you need it. Use “NLContextualEmbedding/load()“ and “NLContextualEmbedding/unload()“ to control when to load and unload the model. The first time load can be expensive, make sure you load the model before you need to use it. The method fails if the necessary assets aren't on device for the model you specify. Use “NLContextualEmbedding/hasAvailableAssets“ and “NLContextualEmbedding/requestAssets(completionHandler:)“ to manage the assets.
+//
 // Load returns any validation error.
 func (x *ContextualEmbedding) Load() error {
 	_, err := x.inner.LoadWithError()
 	return err
 }
 
+// The instance method that unloads the embedding model.
+//
 // Unload calls the underlying Unload.
 func (x *ContextualEmbedding) Unload() {
 	x.inner.Unload()
 }
 
+// Applies an embedding to a string and obtains the resulting embedding vectors. - Parameters: - string: The string to apply an embedding to. - language: The language of the string. - error: On output, a pointer to an error object that describes why the method failed, or nil if no error occurred. If you are not interested in the error information, pass nil for this parameter. - Returns: An embedding result. On failure, this method returns nil.
+//
 // EmbeddingResultForStringLanguageError calls the underlying EmbeddingResultForStringLanguageError.
 func (x *ContextualEmbedding) EmbeddingResultForStringLanguageError(string_ string, language *foundation.NSString) (*ContextualEmbeddingResult, error) {
 	_r, _err := x.inner.EmbeddingResultForStringLanguageError(foundation.NSStringStringWithUTF8String(string_), language)
@@ -61,6 +67,8 @@ func (x *ContextualEmbedding) EmbeddingResultForStringLanguageError(string_ stri
 	return &ContextualEmbeddingResult{inner: _r}, nil
 }
 
+// Requests embedding model assets and downloads them if available. - Parameter completionHandler: A closure that notifies your app when the asset request completes. ## Asynchronous alternative You can call this method from synchronous code using a completion handler, as shown on this page, or you can call it as an asynchronous method that has the following declaration: ```swift func requestAssets() async throws -> NLContextualEmbedding.AssetsResult ``` For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>. ## Discussion You use a contextual embedding after loading the necessary assets onto the device. Use “NLContextualEmbedding/hasAvailableAssets“ to determine whether assets are available. This method returns immediately if the framework knows the state of the assets or if an error occurs.
+//
 // RequestEmbeddingAssetsWithCompletionHandler calls the underlying RequestEmbeddingAssetsWithCompletionHandler.
 func (x *ContextualEmbedding) RequestEmbeddingAssetsWithCompletionHandler(completionHandler func(NLContextualEmbeddingAssetsResult, unsafe.Pointer)) {
 	x.inner.RequestEmbeddingAssetsWithCompletionHandler(func(_a0 raw.NLContextualEmbeddingAssetsResult, _a1 unsafe.Pointer) {
@@ -68,6 +76,8 @@ func (x *ContextualEmbedding) RequestEmbeddingAssetsWithCompletionHandler(comple
 	})
 }
 
+// A string that uniquely identifies the embedding model. Use the same model identifier that you developed and tested your app with to maintain consistent results.
+//
 // ModelIdentifier calls the underlying ModelIdentifier.
 func (x *ContextualEmbedding) ModelIdentifier() string {
 	_r := x.inner.ModelIdentifier()
@@ -77,6 +87,8 @@ func (x *ContextualEmbedding) ModelIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The languages that the contextual embedding supports. Starting in iOS 17 and macOS 14, the framework supports 27 languages across three models: - Latin — including Croatian, Czech, Danish, Dutch, English, Finnish, French, German, Hungarian, Indonesian, Italian, Norwegian, Polish, Portuguese, Romanian, Slovak, Swedish, Spanish, Turkish, and Vietnamese - Cyrillic — including Bulgarian, Kazakh, Russian, and Ukrainian - Chinese, Japanese, and Korean In iOS 18 and macOS 15, the framework expands language support to include three additional models: - Arabic - Indic — including Bangla, Gujarati, Hindi, Kannada, Malayalam, Marathi, Punjabi, Tamil, Telugu, and Urdu - Thai
+//
 // Languages returns the collection as a Go slice.
 func (x *ContextualEmbedding) Languages() []*foundation.NSString {
 	arr := x.inner.Languages()
@@ -88,6 +100,8 @@ func (x *ContextualEmbedding) Languages() []*foundation.NSString {
 	})
 }
 
+// The writing systems that the language uses. The current scripts that are supported by `NLContextualEmbedding` include: - Arabic - Cyrillic - Chinese, Japanese, and Korean - Indic - Latin - Thai For the specific languages that each script supports, refer to “languages“.
+//
 // Scripts returns the collection as a Go slice.
 func (x *ContextualEmbedding) Scripts() []*foundation.NSString {
 	arr := x.inner.Scripts()
@@ -99,21 +113,29 @@ func (x *ContextualEmbedding) Scripts() []*foundation.NSString {
 	})
 }
 
+// The version number the contextual embedding uses. Ensure your app uses the same model revision you used during development and testing to maintain consistent results.
+//
 // Revision calls the underlying Revision.
 func (x *ContextualEmbedding) Revision() uint {
 	return x.inner.Revision()
 }
 
+// The dimensionality of the embedding vectors generated by the model.
+//
 // Dimension calls the underlying Dimension.
 func (x *ContextualEmbedding) Dimension() uint {
 	return x.inner.Dimension()
 }
 
+// The maximum number of tokens in sequence for which the embedding generates vectors. > Note: The model operates on subword tokens rather than whole words. Each token may represent a single character, part of a word, or (less commonly) an entire word. Most words are split into multiple tokens, especially rare or complex terms. As a result, the number of tokens in a sequence is often greater than the number of words. Inputs longer than the token limit will be truncated, and only the first `maximumSequenceLength` tokens will be processed to generate embeddings. `NLContextualEmbedding` works best with text snippets at the sentence or paragraph level. The model truncates text that exceeds this maximum length and only processes the truncated portion of the input.
+//
 // MaximumSequenceLength calls the underlying MaximumSequenceLength.
 func (x *ContextualEmbedding) MaximumSequenceLength() uint {
 	return x.inner.MaximumSequenceLength()
 }
 
+// A Boolean value that indicates whether assets are available on-device.
+//
 // HasAvailableAssets calls the underlying HasAvailableAssets.
 func (x *ContextualEmbedding) HasAvailableAssets() bool {
 	return x.inner.HasAvailableAssets()

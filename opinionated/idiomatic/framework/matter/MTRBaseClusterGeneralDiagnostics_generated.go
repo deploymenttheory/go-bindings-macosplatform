@@ -35,6 +35,8 @@ func MTRBaseClusterGeneralDiagnosticsFromID(id objc.ID) *MTRBaseClusterGeneralDi
 	return &MTRBaseClusterGeneralDiagnostics{inner: raw.MTRBaseClusterGeneralDiagnosticsFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterGeneralDiagnosticsWithDeviceEndpointIDQueue creates a new [MTRBaseClusterGeneralDiagnostics].
 func NewMTRBaseClusterGeneralDiagnosticsWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterGeneralDiagnostics {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterGeneralDiagnostics")), objc.RegisterName("alloc"))
@@ -49,11 +51,15 @@ func NewMTRBaseClusterGeneralDiagnosticsWithDeviceEndpointQueue(device *raw.MTRB
 	return &MTRBaseClusterGeneralDiagnostics{inner: raw.MTRBaseClusterGeneralDiagnosticsFromID(_id)}
 }
 
+// Command TestEventTrigger Provide a means for certification tests to trigger some test-plan-specific events
+//
 // TestEventTriggerWithParamsCompletion calls the underlying TestEventTriggerWithParamsCompletion.
 func (x *MTRBaseClusterGeneralDiagnostics) TestEventTriggerWithParamsCompletion(params *raw.MTRGeneralDiagnosticsClusterTestEventTriggerParams, completion func(unsafe.Pointer)) {
 	x.inner.TestEventTriggerWithParamsCompletion(params, completion)
 }
 
+// Command TimeSnapshot Take a snapshot of system time and epoch time.
+//
 // TimeSnapshotWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterGeneralDiagnostics) TimeSnapshotWithParamsCompletion(ctx context.Context, params *raw.MTRGeneralDiagnosticsClusterTimeSnapshotParams) (*MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams, error) {
 	type _result struct {
@@ -106,6 +112,8 @@ func (x *MTRBaseClusterGeneralDiagnostics) TimeSnapshotWithCompletion(ctx contex
 	}
 }
 
+// Command PayloadTestRequest Request a variable length payload response.
+//
 // PayloadTestRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterGeneralDiagnostics) PayloadTestRequestWithParamsCompletion(ctx context.Context, params *raw.MTRGeneralDiagnosticsClusterPayloadTestRequestParams) (*MTRGeneralDiagnosticsClusterPayloadTestResponseParams, error) {
 	type _result struct {

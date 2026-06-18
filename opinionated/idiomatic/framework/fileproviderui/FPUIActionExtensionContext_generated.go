@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An extension context provided to File Provider UI extensions.
+//
 // ActionExtensionContext wraps [raw.FPUIActionExtensionContext] with a fluent Go API.
 type ActionExtensionContext struct {
 	inner *raw.FPUIActionExtensionContext
@@ -36,11 +38,15 @@ func NewActionExtensionContext() *ActionExtensionContext {
 	return &ActionExtensionContext{inner: raw.FPUIActionExtensionContextFromID(_id)}
 }
 
+// Marks the action as complete. Call this method when the action completes successfully.
+//
 // CompleteRequest calls the underlying CompleteRequest.
 func (x *ActionExtensionContext) CompleteRequest() {
 	x.inner.CompleteRequest()
 }
 
+// The identifier for the domain managed by the current file provider.
+//
 // DomainIdentifier calls the underlying DomainIdentifier.
 func (x *ActionExtensionContext) DomainIdentifier() string {
 	_r := x.inner.DomainIdentifier()

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @class CHHapticParameterCurve @abstract A CHHapticParameterCurve is a set of CHHapticParameterCurveControlPoints which describe the control (inflection) points for the parameter values to be applied to the associated pattern. @discussion The CHHapticParameterCurve generates an interpolated value output which passed through each control point at its associated relative time.  These times will all be relative to the start time of the CHHapticParameterCurve within the playing pattern.
+//
 // HapticParameterCurve wraps [raw.CHHapticParameterCurve] with a fluent Go API.
 type HapticParameterCurve struct {
 	inner *raw.CHHapticParameterCurve
@@ -31,6 +33,8 @@ func HapticParameterCurveFromID(id objc.ID) *HapticParameterCurve {
 	return &HapticParameterCurve{inner: raw.CHHapticParameterCurveFromID(id)}
 }
 
+// @method initWithParameterID:controlPoints:relativeTime @abstract Initialize a CHHapticParameterCurve with a parameter ID, time, and an array of CHHapticParameterCurveControlPoint. @param parameterID The CHHapticDynamicParameterID for the desired parameter. @param controlPoints An array of CHHapticParameterCurveControlPoints. @param relativeTime The time at which this parameter curve should start, relative to the start time of the CHHapticPattern to which this parameter curve belongs.
+//
 // NewHapticParameterCurveWithParameterIDControlPointsRelativeTime creates a new [HapticParameterCurve].
 func NewHapticParameterCurveWithParameterIDControlPointsRelativeTime(parameterID *foundation.NSString, controlPoints *foundation.NSArray[*raw.CHHapticParameterCurveControlPoint], relativeTime float64) *HapticParameterCurve {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CHHapticParameterCurve")), objc.RegisterName("alloc"))

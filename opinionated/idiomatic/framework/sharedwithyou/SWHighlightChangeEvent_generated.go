@@ -30,6 +30,8 @@ func HighlightChangeEventFromID(id objc.ID) *HighlightChangeEvent {
 	return &HighlightChangeEvent{inner: raw.SWHighlightChangeEventFromID(id)}
 }
 
+// Initializes a highlight change event object to represent changes to a highlight. @param highlight The object on which the event occurred. @param trigger The trigger change event for the highlight.
+//
 // NewHighlightChangeEventWithHighlightTrigger creates a new [HighlightChangeEvent].
 func NewHighlightChangeEventWithHighlightTrigger(highlight *raw.SWHighlight, trigger SWHighlightChangeEventTrigger) *HighlightChangeEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWHighlightChangeEvent")), objc.RegisterName("alloc"))

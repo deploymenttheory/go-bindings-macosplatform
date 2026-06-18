@@ -33,6 +33,8 @@ func MTRBaseClusterUnitTestingFromID(id objc.ID) *MTRBaseClusterUnitTesting {
 	return &MTRBaseClusterUnitTesting{inner: raw.MTRBaseClusterUnitTestingFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterUnitTestingWithDeviceEndpointIDQueue creates a new [MTRBaseClusterUnitTesting].
 func NewMTRBaseClusterUnitTestingWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterUnitTesting {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterUnitTesting")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewMTRBaseClusterUnitTestingWithDeviceEndpointIDQueue(device *raw.MTRBaseDe
 	return &MTRBaseClusterUnitTesting{inner: raw.MTRBaseClusterUnitTestingFromID(_id)}
 }
 
+// Command Test Simple command without any parameters and without a specific response. To aid in unit testing, this command will re-initialize attribute storage to defaults.
+//
 // TestWithParamsCompletion calls the underlying TestWithParamsCompletion.
 func (x *MTRBaseClusterUnitTesting) TestWithParamsCompletion(params *raw.MTRUnitTestingClusterTestParams, completion func(unsafe.Pointer)) {
 	x.inner.TestWithParamsCompletion(params, completion)
@@ -50,6 +54,8 @@ func (x *MTRBaseClusterUnitTesting) TestWithCompletion(completion func(unsafe.Po
 	x.inner.TestWithCompletion(completion)
 }
 
+// Command TestNotHandled Simple command without any parameters and without a specific response not handled by the server
+//
 // TestNotHandledWithParamsCompletion calls the underlying TestNotHandledWithParamsCompletion.
 func (x *MTRBaseClusterUnitTesting) TestNotHandledWithParamsCompletion(params *raw.MTRUnitTestingClusterTestNotHandledParams, completion func(unsafe.Pointer)) {
 	x.inner.TestNotHandledWithParamsCompletion(params, completion)
@@ -60,6 +66,8 @@ func (x *MTRBaseClusterUnitTesting) TestNotHandledWithCompletion(completion func
 	x.inner.TestNotHandledWithCompletion(completion)
 }
 
+// Command TestSpecific Simple command without any parameters and with a specific response
+//
 // TestSpecificWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterUnitTesting) TestSpecificWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestSpecificParams) (*MTRUnitTestingClusterTestSpecificResponseParams, error) {
 	type _result struct {
@@ -112,6 +120,8 @@ func (x *MTRBaseClusterUnitTesting) TestSpecificWithCompletion(ctx context.Conte
 	}
 }
 
+// Command TestUnknownCommand Simple command that should not be added to the server.
+//
 // TestUnknownCommandWithParamsCompletion calls the underlying TestUnknownCommandWithParamsCompletion.
 func (x *MTRBaseClusterUnitTesting) TestUnknownCommandWithParamsCompletion(params *raw.MTRUnitTestingClusterTestUnknownCommandParams, completion func(unsafe.Pointer)) {
 	x.inner.TestUnknownCommandWithParamsCompletion(params, completion)
@@ -122,6 +132,8 @@ func (x *MTRBaseClusterUnitTesting) TestUnknownCommandWithCompletion(completion 
 	x.inner.TestUnknownCommandWithCompletion(completion)
 }
 
+// Command TestAddArguments Command that takes two arguments and returns their sum.
+//
 // TestAddArgumentsWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterUnitTesting) TestAddArgumentsWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestAddArgumentsParams) (*MTRUnitTestingClusterTestAddArgumentsResponseParams, error) {
 	type _result struct {
@@ -148,6 +160,8 @@ func (x *MTRBaseClusterUnitTesting) TestAddArgumentsWithParamsCompletion(ctx con
 	}
 }
 
+// Command TestSimpleArgumentRequest Command that takes an argument which is bool
+//
 // TestSimpleArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterUnitTesting) TestSimpleArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestSimpleArgumentRequestParams) (*MTRUnitTestingClusterTestSimpleArgumentResponseParams, error) {
 	type _result struct {
@@ -174,6 +188,8 @@ func (x *MTRBaseClusterUnitTesting) TestSimpleArgumentRequestWithParamsCompletio
 	}
 }
 
+// Command TestStructArrayArgumentRequest Command that takes various arguments that are arrays, including an array of structs which have a list member.
+//
 // TestStructArrayArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterUnitTesting) TestStructArrayArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestStructArrayArgumentRequestParams) (*MTRUnitTestingClusterTestStructArrayArgumentResponseParams, error) {
 	type _result struct {
@@ -200,6 +216,8 @@ func (x *MTRBaseClusterUnitTesting) TestStructArrayArgumentRequestWithParamsComp
 	}
 }
 
+// Command TestStructArgumentRequest Command that takes an argument which is struct.  The response echoes the 'b' field of the single arg.
+//
 // TestStructArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterUnitTesting) TestStructArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestStructArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error) {
 	type _result struct {
@@ -226,6 +244,8 @@ func (x *MTRBaseClusterUnitTesting) TestStructArgumentRequestWithParamsCompletio
 	}
 }
 
+// Command TestNestedStructArgumentRequest Command that takes an argument which is nested struct.  The response echoes the 'b' field of ar1.c.
+//
 // TestNestedStructArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterUnitTesting) TestNestedStructArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestNestedStructArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error) {
 	type _result struct {
@@ -252,6 +272,8 @@ func (x *MTRBaseClusterUnitTesting) TestNestedStructArgumentRequestWithParamsCom
 	}
 }
 
+// Command TestListStructArgumentRequest Command that takes an argument which is a list of structs.  The response returns false if there is some struct in the list whose 'b' field is false, and true otherwise (including if the list is empty).
+//
 // TestListStructArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterUnitTesting) TestListStructArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestListStructArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error) {
 	type _result struct {
@@ -278,6 +300,8 @@ func (x *MTRBaseClusterUnitTesting) TestListStructArgumentRequestWithParamsCompl
 	}
 }
 
+// Command TestListInt8UArgumentRequest Command that takes an argument which is a list of INT8U.  The response returns false if the list contains a 0 in it, true otherwise (including if the list is empty).
+//
 // TestListInt8UArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterUnitTesting) TestListInt8UArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestListInt8UArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error) {
 	type _result struct {
@@ -304,6 +328,8 @@ func (x *MTRBaseClusterUnitTesting) TestListInt8UArgumentRequestWithParamsComple
 	}
 }
 
+// Command TestNestedStructListArgumentRequest Command that takes an argument which is a Nested Struct List.  The response returns false if there is some struct in arg1 (either directly in arg1.c or in the arg1.d list) whose 'b' field is false, and true otherwise.
+//
 // TestNestedStructListArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterUnitTesting) TestNestedStructListArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error) {
 	type _result struct {
@@ -330,6 +356,8 @@ func (x *MTRBaseClusterUnitTesting) TestNestedStructListArgumentRequestWithParam
 	}
 }
 
+// Command TestListNestedStructListArgumentRequest Command that takes an argument which is a list of Nested Struct List. The response returns false if there is some struct in arg1 (either directly in as the 'c' field of an entry 'd' list of an entry) whose 'b' field is false, and true otherwise (including if the list is empty).
+//
 // TestListNestedStructListArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterUnitTesting) TestListNestedStructListArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error) {
 	type _result struct {
@@ -356,6 +384,8 @@ func (x *MTRBaseClusterUnitTesting) TestListNestedStructListArgumentRequestWithP
 	}
 }
 
+// Command TestListInt8UReverseRequest Command that takes an argument which is a list of INT8U and expects a response that reverses the list.
+//
 // TestListInt8UReverseRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterUnitTesting) TestListInt8UReverseRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestListInt8UReverseRequestParams) (*MTRUnitTestingClusterTestListInt8UReverseResponseParams, error) {
 	type _result struct {
@@ -382,6 +412,8 @@ func (x *MTRBaseClusterUnitTesting) TestListInt8UReverseRequestWithParamsComplet
 	}
 }
 
+// Command TestEnumsRequest Command that sends a vendor id and an enum.  The server is expected to echo them back.
+//
 // TestEnumsRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterUnitTesting) TestEnumsRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestEnumsRequestParams) (*MTRUnitTestingClusterTestEnumsResponseParams, error) {
 	type _result struct {
@@ -408,6 +440,8 @@ func (x *MTRBaseClusterUnitTesting) TestEnumsRequestWithParamsCompletion(ctx con
 	}
 }
 
+// Command TestNullableOptionalRequest Command that takes an argument which is nullable and optional.  The response returns a boolean indicating whether the argument was present, if that's true a boolean indicating whether the argument was null, and if that' false the argument it received.
+//
 // TestNullableOptionalRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterUnitTesting) TestNullableOptionalRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestNullableOptionalRequestParams) (*MTRUnitTestingClusterTestNullableOptionalResponseParams, error) {
 	type _result struct {
@@ -460,6 +494,8 @@ func (x *MTRBaseClusterUnitTesting) TestNullableOptionalRequestWithCompletion(ct
 	}
 }
 
+// Command TestComplexNullableOptionalRequest Command that takes various arguments which can be nullable and/or optional.  The response returns information about which things were received and what their state was.
+//
 // TestComplexNullableOptionalRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterUnitTesting) TestComplexNullableOptionalRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) (*MTRUnitTestingClusterTestComplexNullableOptionalResponseParams, error) {
 	type _result struct {
@@ -486,6 +522,8 @@ func (x *MTRBaseClusterUnitTesting) TestComplexNullableOptionalRequestWithParams
 	}
 }
 
+// Command SimpleStructEchoRequest Command that takes an argument which is a struct.  The response echoes the struct back.
+//
 // SimpleStructEchoRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterUnitTesting) SimpleStructEchoRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterSimpleStructEchoRequestParams) (*MTRUnitTestingClusterSimpleStructResponseParams, error) {
 	type _result struct {
@@ -512,6 +550,8 @@ func (x *MTRBaseClusterUnitTesting) SimpleStructEchoRequestWithParamsCompletion(
 	}
 }
 
+// Command TimedInvokeRequest Command that just responds with a success status if the timed invoke conditions are met.
+//
 // TimedInvokeRequestWithParamsCompletion calls the underlying TimedInvokeRequestWithParamsCompletion.
 func (x *MTRBaseClusterUnitTesting) TimedInvokeRequestWithParamsCompletion(params *raw.MTRUnitTestingClusterTimedInvokeRequestParams, completion func(unsafe.Pointer)) {
 	x.inner.TimedInvokeRequestWithParamsCompletion(params, completion)
@@ -522,6 +562,8 @@ func (x *MTRBaseClusterUnitTesting) TimedInvokeRequestWithCompletion(completion 
 	x.inner.TimedInvokeRequestWithCompletion(completion)
 }
 
+// Command TestSimpleOptionalArgumentRequest Command that takes an optional argument which is bool. It responds with a success value if the optional is set to any value.
+//
 // TestSimpleOptionalArgumentRequestWithParamsCompletion calls the underlying TestSimpleOptionalArgumentRequestWithParamsCompletion.
 func (x *MTRBaseClusterUnitTesting) TestSimpleOptionalArgumentRequestWithParamsCompletion(params *raw.MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams, completion func(unsafe.Pointer)) {
 	x.inner.TestSimpleOptionalArgumentRequestWithParamsCompletion(params, completion)
@@ -532,6 +574,8 @@ func (x *MTRBaseClusterUnitTesting) TestSimpleOptionalArgumentRequestWithComplet
 	x.inner.TestSimpleOptionalArgumentRequestWithCompletion(completion)
 }
 
+// Command TestEmitTestEventRequest Command that takes identical arguments to the fields of the TestEvent and logs the TestEvent to the buffer.  Command returns an event ID as the response.
+//
 // TestEmitTestEventRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterUnitTesting) TestEmitTestEventRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestEmitTestEventRequestParams) (*MTRUnitTestingClusterTestEmitTestEventResponseParams, error) {
 	type _result struct {
@@ -558,6 +602,8 @@ func (x *MTRBaseClusterUnitTesting) TestEmitTestEventRequestWithParamsCompletion
 	}
 }
 
+// Command TestEmitTestFabricScopedEventRequest Command that takes identical arguments to the fields of the TestFabricScopedEvent and logs the TestFabricScopedEvent to the buffer.  Command returns an event ID as the response.
+//
 // TestEmitTestFabricScopedEventRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterUnitTesting) TestEmitTestFabricScopedEventRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) (*MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams, error) {
 	type _result struct {

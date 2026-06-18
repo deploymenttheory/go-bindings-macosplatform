@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents a storage device in a VM.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzstoragedevice
 type VZStorageDevice struct {
 	foundation.NSObject

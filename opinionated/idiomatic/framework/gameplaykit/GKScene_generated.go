@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A scene stores and handles loading of data related to a particular scene.
+//
 // Scene wraps [raw.GKScene] with a fluent Go API.
 type Scene struct {
 	inner *raw.GKScene
@@ -37,32 +39,44 @@ func NewScene() *Scene {
 	return &Scene{inner: raw.GKSceneFromID(_id)}
 }
 
+// The root node for the scene. @see GKSceneRootNodeType
+//
 // WithRootNode sets the rootNode property and returns the receiver for chaining.
 func (x *Scene) WithRootNode(rootNode raw.GKSceneRootNodeType) *Scene {
 	x.inner.SetRootNode(rootNode)
 	return x
 }
 
+// Adds an entity to the scene's list of entities. @param entity the entity to add.
+//
 // AddEntity calls the underlying AddEntity.
 func (x *Scene) AddEntity(entity *raw.GKEntity) {
 	x.inner.AddEntity(entity)
 }
 
+// Removes an entity from the scene's list of entities. @param entity the entity to remove.
+//
 // RemoveEntity calls the underlying RemoveEntity.
 func (x *Scene) RemoveEntity(entity *raw.GKEntity) {
 	x.inner.RemoveEntity(entity)
 }
 
+// Adds a graph to the scene's list of graphs. @param graph the graph to add.
+//
 // AddGraphName calls the underlying AddGraphName.
 func (x *Scene) AddGraphName(graph *raw.GKGraph, name string) {
 	x.inner.AddGraphName(graph, foundation.NSStringStringWithUTF8String(name))
 }
 
+// Removes a graph from the scene's list of graphs. @param name the name of the corresponding graph as added via addGraph:
+//
 // RemoveGraph calls the underlying RemoveGraph.
 func (x *Scene) RemoveGraph(name string) {
 	x.inner.RemoveGraph(foundation.NSStringStringWithUTF8String(name))
 }
 
+// The entities of this scene.
+//
 // Entities returns the collection as a Go slice.
 func (x *Scene) Entities() []*Entity {
 	arr := x.inner.Entities()
@@ -74,6 +88,8 @@ func (x *Scene) Entities() []*Entity {
 	})
 }
 
+// The root node for the scene. @see GKSceneRootNodeType
+//
 // RootNode calls the underlying RootNode.
 func (x *Scene) RootNode() raw.GKSceneRootNodeType {
 	return x.inner.RootNode()
@@ -84,6 +100,8 @@ func (x *Scene) SetRootNode(rootNode raw.GKSceneRootNodeType) {
 	x.inner.SetRootNode(rootNode)
 }
 
+// The navigational graphs of this scene.
+//
 // Graphs calls the underlying Graphs.
 func (x *Scene) Graphs() *foundation.NSDictionary[*foundation.NSString, *raw.GKGraph] {
 	return x.inner.Graphs()

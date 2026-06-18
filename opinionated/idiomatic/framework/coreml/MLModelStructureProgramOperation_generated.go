@@ -39,6 +39,8 @@ func NewModelStructureProgramOperation() *ModelStructureProgramOperation {
 	return &ModelStructureProgramOperation{inner: raw.MLModelStructureProgramOperationFromID(_id)}
 }
 
+// The name of the operator, e.g., "conv", "pool", "softmax", etc.
+//
 // OperatorName calls the underlying OperatorName.
 func (x *ModelStructureProgramOperation) OperatorName() string {
 	_r := x.inner.OperatorName()
@@ -48,11 +50,15 @@ func (x *ModelStructureProgramOperation) OperatorName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The arguments to the Operation.
+//
 // Inputs calls the underlying Inputs.
 func (x *ModelStructureProgramOperation) Inputs() *foundation.NSDictionary[*foundation.NSString, *raw.MLModelStructureProgramArgument] {
 	return x.inner.Inputs()
 }
 
+// The outputs of the Operation.
+//
 // Outputs returns the collection as a Go slice.
 func (x *ModelStructureProgramOperation) Outputs() []*ModelStructureProgramNamedValueType {
 	arr := x.inner.Outputs()
@@ -64,6 +70,8 @@ func (x *ModelStructureProgramOperation) Outputs() []*ModelStructureProgramNamed
 	})
 }
 
+// Nested blocks for loops and conditionals, e.g., a conditional block will have two entries here.
+//
 // Blocks returns the collection as a Go slice.
 func (x *ModelStructureProgramOperation) Blocks() []*ModelStructureProgramBlock {
 	arr := x.inner.Blocks()

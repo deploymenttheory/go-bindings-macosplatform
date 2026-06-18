@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Node representing a MPSCNNUpsamplingNearest kernel
+//
 // CNNUpsamplingNearestGradientNode wraps [raw.MPSCNNUpsamplingNearestGradientNode] with a fluent Go API.
 type CNNUpsamplingNearestGradientNode struct {
 	inner *raw.MPSCNNUpsamplingNearestGradientNode
@@ -33,6 +35,8 @@ func CNNUpsamplingNearestGradientNodeFromID(id objc.ID) *CNNUpsamplingNearestGra
 	return &CNNUpsamplingNearestGradientNode{inner: raw.MPSCNNUpsamplingNearestGradientNodeFromID(id)}
 }
 
+// @abstract   A node to represent the gradient calculation for nearest upsampling training. @discussion [forwardFilter gradientFilterWithSources:] is a more convient way to do this. @param sourceGradient   The input gradient from the 'downstream' gradient filter. @param sourceImage      The input image from the forward filter node @param gradientState    The gradient state from the forward filter @param scaleFactorX     The X scale factor from the forward pass @param scaleFactorY     The Y scale factor from the forward pass @return  A MPSCNNUpsamplingNearestGradientNode
+//
 // NewCNNUpsamplingNearestGradientNodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY creates a new [CNNUpsamplingNearestGradientNode].
 func NewCNNUpsamplingNearestGradientNodeWithSourceGradientSourceImageGradientStateScaleFactorXScaleFactorY(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode, scaleFactorX float64, scaleFactorY float64) *CNNUpsamplingNearestGradientNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNUpsamplingNearestGradientNode")), objc.RegisterName("alloc"))
@@ -40,12 +44,16 @@ func NewCNNUpsamplingNearestGradientNodeWithSourceGradientSourceImageGradientSta
 	return &CNNUpsamplingNearestGradientNode{inner: raw.MPSCNNUpsamplingNearestGradientNodeFromID(_id)}
 }
 
+// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
+//
 // WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
 func (x *CNNUpsamplingNearestGradientNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNUpsamplingNearestGradientNode {
 	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNUpsamplingNearestGradientNode) WithLabel(label string) *CNNUpsamplingNearestGradientNode {
 	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))

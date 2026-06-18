@@ -38,6 +38,8 @@ func NewMTRDeviceControllerParameters() *MTRDeviceControllerParameters {
 	return &MTRDeviceControllerParameters{inner: raw.MTRDeviceControllerParametersFromID(_id)}
 }
 
+// The Product Attestation Authority certificates that are trusted to sign device attestation information (and in particular to sign Product Attestation Intermediate certificates, which then sign Device Attestation Certificates). Defaults to nil.
+//
 // WithProductAttestationAuthorityCertificates sets the collection, converting the Go slice to an NSArray.
 func (x *MTRDeviceControllerParameters) WithProductAttestationAuthorityCertificates(items ...*foundation.NSData) *MTRDeviceControllerParameters {
 	if len(items) == 0 {
@@ -56,6 +58,8 @@ func (x *MTRDeviceControllerParameters) WithProductAttestationAuthorityCertifica
 	return x
 }
 
+// The Certification Declaration certificates whose public keys correspond to private keys that are trusted to sign certification declarations.  Defaults to nil. These certificates are used in addition to, not replacing, the default set of well-known certification declaration signing keys.
+//
 // WithCertificationDeclarationCertificates sets the collection, converting the Go slice to an NSArray.
 func (x *MTRDeviceControllerParameters) WithCertificationDeclarationCertificates(items ...*foundation.NSData) *MTRDeviceControllerParameters {
 	if len(items) == 0 {
@@ -74,40 +78,54 @@ func (x *MTRDeviceControllerParameters) WithCertificationDeclarationCertificates
 	return x
 }
 
+// Whether the controller should advertise its operational identity.  Defaults to NO.
+//
 // WithShouldAdvertiseOperational sets the shouldAdvertiseOperational property and returns the receiver for chaining.
 func (x *MTRDeviceControllerParameters) WithShouldAdvertiseOperational(shouldAdvertiseOperational bool) *MTRDeviceControllerParameters {
 	x.inner.SetShouldAdvertiseOperational(shouldAdvertiseOperational)
 	return x
 }
 
+// Sets the maximum simultaneous subscription establishments that can be happening at one time for devices on Thread. This defaults to a large number. If this value is 0, the maximum subscription establishments allowed at a time will be set to 1.
+//
 // WithConcurrentSubscriptionEstablishmentsAllowedOnThread sets the concurrentSubscriptionEstablishmentsAllowedOnThread property and returns the receiver for chaining.
 func (x *MTRDeviceControllerParameters) WithConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread uint) *MTRDeviceControllerParameters {
 	x.inner.SetConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread)
 	return x
 }
 
+// Sets the storage behavior configuration - see MTRDeviceStorageBehaviorConfiguration.h for details If this value is nil, a default storage behavior configuration will be used.
+//
 // WithStorageBehaviorConfiguration sets the storageBehaviorConfiguration property and returns the receiver for chaining.
 func (x *MTRDeviceControllerParameters) WithStorageBehaviorConfiguration(storageBehaviorConfiguration *MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerParameters {
 	x.inner.SetStorageBehaviorConfiguration(storageBehaviorConfiguration.Unwrap())
 	return x
 }
 
+// Whether the controller should start out suspended. Defaults to NO.
+//
 // WithStartSuspended sets the startSuspended property and returns the receiver for chaining.
 func (x *MTRDeviceControllerParameters) WithStartSuspended(startSuspended bool) *MTRDeviceControllerParameters {
 	x.inner.MTRDeviceControllerAbstractParameters.SetStartSuspended(startSuspended)
 	return x
 }
 
+// Set an MTROperationalCertificateIssuer to call (on the provided queue) when operational certificates need to be provided during commissioning.
+//
 // SetOperationalCertificateIssuerQueue calls the underlying SetOperationalCertificateIssuerQueue.
 func (x *MTRDeviceControllerParameters) SetOperationalCertificateIssuerQueue(operationalCertificateIssuer raw.MTROperationalCertificateIssuer, queue *foundation.NSObject) {
 	x.inner.SetOperationalCertificateIssuerQueue(operationalCertificateIssuer, queue)
 }
 
+// Set an MTROTAProviderDelegate to call (on the provided queue).  Only needs to be called if this controller should be able to handle OTA for devices.
+//
 // SetOTAProviderDelegateQueue calls the underlying SetOTAProviderDelegateQueue.
 func (x *MTRDeviceControllerParameters) SetOTAProviderDelegateQueue(otaProviderDelegate raw.MTROTAProviderDelegate, queue *foundation.NSObject) {
 	x.inner.SetOTAProviderDelegateQueue(otaProviderDelegate, queue)
 }
 
+// The Product Attestation Authority certificates that are trusted to sign device attestation information (and in particular to sign Product Attestation Intermediate certificates, which then sign Device Attestation Certificates). Defaults to nil.
+//
 // ProductAttestationAuthorityCertificates returns the collection as a Go slice.
 func (x *MTRDeviceControllerParameters) ProductAttestationAuthorityCertificates() []*foundation.NSData {
 	arr := x.inner.ProductAttestationAuthorityCertificates()
@@ -124,6 +142,8 @@ func (x *MTRDeviceControllerParameters) SetProductAttestationAuthorityCertificat
 	x.inner.SetProductAttestationAuthorityCertificates(productAttestationAuthorityCertificates)
 }
 
+// The Certification Declaration certificates whose public keys correspond to private keys that are trusted to sign certification declarations.  Defaults to nil. These certificates are used in addition to, not replacing, the default set of well-known certification declaration signing keys.
+//
 // CertificationDeclarationCertificates returns the collection as a Go slice.
 func (x *MTRDeviceControllerParameters) CertificationDeclarationCertificates() []*foundation.NSData {
 	arr := x.inner.CertificationDeclarationCertificates()
@@ -140,6 +160,8 @@ func (x *MTRDeviceControllerParameters) SetCertificationDeclarationCertificates(
 	x.inner.SetCertificationDeclarationCertificates(certificationDeclarationCertificates)
 }
 
+// Whether the controller should advertise its operational identity.  Defaults to NO.
+//
 // ShouldAdvertiseOperational calls the underlying ShouldAdvertiseOperational.
 func (x *MTRDeviceControllerParameters) ShouldAdvertiseOperational() bool {
 	return x.inner.ShouldAdvertiseOperational()
@@ -150,6 +172,8 @@ func (x *MTRDeviceControllerParameters) SetShouldAdvertiseOperational(shouldAdve
 	x.inner.SetShouldAdvertiseOperational(shouldAdvertiseOperational)
 }
 
+// Sets the maximum simultaneous subscription establishments that can be happening at one time for devices on Thread. This defaults to a large number. If this value is 0, the maximum subscription establishments allowed at a time will be set to 1.
+//
 // ConcurrentSubscriptionEstablishmentsAllowedOnThread calls the underlying ConcurrentSubscriptionEstablishmentsAllowedOnThread.
 func (x *MTRDeviceControllerParameters) ConcurrentSubscriptionEstablishmentsAllowedOnThread() uint {
 	return x.inner.ConcurrentSubscriptionEstablishmentsAllowedOnThread()
@@ -160,6 +184,8 @@ func (x *MTRDeviceControllerParameters) SetConcurrentSubscriptionEstablishmentsA
 	x.inner.SetConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread)
 }
 
+// Sets the storage behavior configuration - see MTRDeviceStorageBehaviorConfiguration.h for details If this value is nil, a default storage behavior configuration will be used.
+//
 // StorageBehaviorConfiguration calls the underlying StorageBehaviorConfiguration.
 func (x *MTRDeviceControllerParameters) StorageBehaviorConfiguration() *MTRDeviceStorageBehaviorConfiguration {
 	_r := x.inner.StorageBehaviorConfiguration()

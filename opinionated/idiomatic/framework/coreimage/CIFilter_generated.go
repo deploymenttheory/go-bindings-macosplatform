@@ -63,11 +63,15 @@ func (x *Filter) SetName(aString string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(aString))
 }
 
+// Sets all inputs to their default values (where default values are defined, other inputs are left as-is).
+//
 // SetDefaults calls the underlying SetDefaults.
 func (x *Filter) SetDefaults() {
 	x.inner.SetDefaults()
 }
 
+// Used by CIFilter subclasses to apply the array of argument values 'args' to the kernel function 'k'. The supplied arguments must be type-compatible with the function signature of the kernel. The key-value pairs defined by 'dict' (if non-nil) are used to control exactly how the kernel is evaluated. Valid keys include: kCIApplyOptionExtent: the size of the produced image. Value is a four element NSArray [X Y WIDTH HEIGHT]. kCIApplyOptionDefinition: the Domain of Definition of the produced image. Value is either a CIFilterShape object, or a four element NSArray defining a rectangle. @param  k         CIKernel of the filter @param  args      Array of arguments that are applied to the kernel @param  dict      Array of additional options
+//
 // ApplyArgumentsOptions calls the underlying ApplyArgumentsOptions.
 func (x *Filter) ApplyArgumentsOptions(k *raw.CIKernel, args *foundation.NSArray[objc.ID], dict *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Image {
 	_r := x.inner.ApplyArgumentsOptions(k, args, dict)
@@ -96,6 +100,8 @@ func (x *Filter) SetEnabled(enabled bool) {
 	x.inner.SetEnabled(enabled)
 }
 
+// Returns an array containing the names of all inputs in the filter.
+//
 // InputKeys returns the collection as a Go slice.
 func (x *Filter) InputKeys() []string {
 	arr := x.inner.InputKeys()
@@ -107,6 +113,8 @@ func (x *Filter) InputKeys() []string {
 	})
 }
 
+// Returns an array containing the names of all outputs in the filter.
+//
 // OutputKeys returns the collection as a Go slice.
 func (x *Filter) OutputKeys() []string {
 	arr := x.inner.OutputKeys()
@@ -118,6 +126,8 @@ func (x *Filter) OutputKeys() []string {
 	})
 }
 
+// Returns a dictionary containing key/value pairs describing the filter. (see description of keys below)
+//
 // Attributes calls the underlying Attributes.
 func (x *Filter) Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.Attributes()

@@ -44,16 +44,22 @@ func NewGridGraphFromGridStartingAtWidthHeightDiagonalsAllowedNodeClass(position
 	return &GridGraph{inner: raw.GKGridGraphFromID[objc.ID](_id)}
 }
 
+// Returns the GKGridGraphNode at the indicated X and Y coordinate Returns nil if it is outside the bounds of minCoordinates and maxCoordinates @param position starting position in the grid
+//
 // NodeAtGridPosition calls the underlying NodeAtGridPosition.
 func (x *GridGraph) NodeAtGridPosition(position unsafe.Pointer) objc.ID {
 	return x.inner.NodeAtGridPosition(position)
 }
 
+// Connects the given GKGridGraphNode to this graph by connecting it to it's adjacent nodes on the grid Input node must have coordinates within the rectangle specified by minCoordinates and maxCoordinates @param node the node to be connected
+//
 // ConnectNodeToAdjacentNodes calls the underlying ConnectNodeToAdjacentNodes.
 func (x *GridGraph) ConnectNodeToAdjacentNodes(node *raw.GKGridGraphNode) {
 	x.inner.ConnectNodeToAdjacentNodes(node)
 }
 
+// Returns the class of the specified generic index
+//
 // ClassForGenericArgumentAtIndex calls the underlying ClassForGenericArgumentAtIndex.
 func (x *GridGraph) ClassForGenericArgumentAtIndex(index uint) objc.Class {
 	return x.inner.ClassForGenericArgumentAtIndex(index)

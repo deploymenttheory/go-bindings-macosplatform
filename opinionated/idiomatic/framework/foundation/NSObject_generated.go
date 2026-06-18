@@ -124,8 +124,17 @@ func (x *Object) AttemptRecoveryFromErrorOptionIndex(error_ unsafe.Pointer, reco
 }
 
 // PerformSelectorWithObjectAfterDelayInModes calls the underlying PerformSelectorWithObjectAfterDelayInModes.
-func (x *Object) PerformSelectorWithObjectAfterDelayInModes(aSelector objc.SEL, anArgument objc.ID, delay float64, modes *raw.NSArray[*raw.NSString]) {
-	x.inner.PerformSelectorWithObjectAfterDelayInModes(aSelector, anArgument, delay, modes)
+func (x *Object) PerformSelectorWithObjectAfterDelayInModes(aSelector objc.SEL, anArgument objc.ID, delay float64, modes ...StringProvider) {
+	_ptrs := make([]objc.ID, len(modes))
+	for _i, _v := range modes {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg3 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg3 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.PerformSelectorWithObjectAfterDelayInModes(aSelector, anArgument, delay, _arg3)
 }
 
 // PerformSelectorWithObjectAfterDelay calls the underlying PerformSelectorWithObjectAfterDelay.
@@ -239,8 +248,17 @@ func (x *Object) SetNilValueForKey(key string) {
 }
 
 // DictionaryWithValuesForKeys calls the underlying DictionaryWithValuesForKeys.
-func (x *Object) DictionaryWithValuesForKeys(keys *raw.NSArray[*raw.NSString]) *raw.NSDictionary[*raw.NSString, objc.ID] {
-	return x.inner.DictionaryWithValuesForKeys(keys)
+func (x *Object) DictionaryWithValuesForKeys(keys ...StringProvider) *raw.NSDictionary[*raw.NSString, objc.ID] {
+	_ptrs := make([]objc.ID, len(keys))
+	for _i, _v := range keys {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	return x.inner.DictionaryWithValuesForKeys(_arg0)
 }
 
 // SetValuesForKeysWithDictionary calls the underlying SetValuesForKeysWithDictionary.
@@ -353,6 +371,8 @@ func (x *Object) SetObservationInfo(observationInfo unsafe.Pointer) {
 	x.inner.SetObservationInfo(observationInfo)
 }
 
+// Register shared observations. A shared observation collection might be shared between multiple observables to minimise registration work. Shared observers remain registered throughout the object's lifetime and do not need to be removed using `removeObserver:`. An observable may only have one set of shared observations. Subsequent calls to this method will replace existing shared observations. - Parameter sharedObservers: shared observer collection that was initialized with the class of this object - Invariant: `sharedObserers` was initialized with the class of this object - Throws: Exception if the class of the receiving observable object does not match the class with which `sharedObserers` was initialized.
+//
 // SetSharedObservers calls the underlying SetSharedObservers.
 func (x *Object) SetSharedObservers(sharedObservers *raw.NSKeyValueSharedObserversSnapshot) {
 	x.inner.SetSharedObservers(sharedObservers)
@@ -369,8 +389,17 @@ func (x *Object) ClassForKeyedArchiver() objc.Class {
 }
 
 // PerformSelectorOnMainThreadWithObjectWaitUntilDoneModes calls the underlying PerformSelectorOnMainThreadWithObjectWaitUntilDoneModes.
-func (x *Object) PerformSelectorOnMainThreadWithObjectWaitUntilDoneModes(aSelector objc.SEL, arg objc.ID, wait bool, array *raw.NSArray[*raw.NSString]) {
-	x.inner.PerformSelectorOnMainThreadWithObjectWaitUntilDoneModes(aSelector, arg, wait, array)
+func (x *Object) PerformSelectorOnMainThreadWithObjectWaitUntilDoneModes(aSelector objc.SEL, arg objc.ID, wait bool, array ...StringProvider) {
+	_ptrs := make([]objc.ID, len(array))
+	for _i, _v := range array {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg3 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg3 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.PerformSelectorOnMainThreadWithObjectWaitUntilDoneModes(aSelector, arg, wait, _arg3)
 }
 
 // PerformSelectorOnMainThreadWithObjectWaitUntilDone calls the underlying PerformSelectorOnMainThreadWithObjectWaitUntilDone.
@@ -379,8 +408,17 @@ func (x *Object) PerformSelectorOnMainThreadWithObjectWaitUntilDone(aSelector ob
 }
 
 // PerformSelectorOnThreadWithObjectWaitUntilDoneModes calls the underlying PerformSelectorOnThreadWithObjectWaitUntilDoneModes.
-func (x *Object) PerformSelectorOnThreadWithObjectWaitUntilDoneModes(aSelector objc.SEL, thr *raw.NSThread, arg objc.ID, wait bool, array *raw.NSArray[*raw.NSString]) {
-	x.inner.PerformSelectorOnThreadWithObjectWaitUntilDoneModes(aSelector, thr, arg, wait, array)
+func (x *Object) PerformSelectorOnThreadWithObjectWaitUntilDoneModes(aSelector objc.SEL, thr *raw.NSThread, arg objc.ID, wait bool, array ...StringProvider) {
+	_ptrs := make([]objc.ID, len(array))
+	for _i, _v := range array {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg4 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg4 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.PerformSelectorOnThreadWithObjectWaitUntilDoneModes(aSelector, thr, arg, wait, _arg4)
 }
 
 // PerformSelectorOnThreadWithObjectWaitUntilDone calls the underlying PerformSelectorOnThreadWithObjectWaitUntilDone.
@@ -663,7 +701,7 @@ type Objectable interface {
 	AutoContentAccessingProxy() objc.ID
 	AttemptRecoveryFromErrorOptionIndexDelegateDidRecoverSelectorContextInfo(error_ unsafe.Pointer, recoveryOptionIndex uint, delegate objc.ID, didRecoverSelector objc.SEL, contextInfo unsafe.Pointer)
 	AttemptRecoveryFromErrorOptionIndex(error_ unsafe.Pointer, recoveryOptionIndex uint) bool
-	PerformSelectorWithObjectAfterDelayInModes(aSelector objc.SEL, anArgument objc.ID, delay float64, modes *raw.NSArray[*raw.NSString])
+	PerformSelectorWithObjectAfterDelayInModes(aSelector objc.SEL, anArgument objc.ID, delay float64, modes ...StringProvider)
 	PerformSelectorWithObjectAfterDelay(aSelector objc.SEL, anArgument objc.ID, delay float64)
 	URLResourceDataDidBecomeAvailable(sender string, newBytes *raw.NSData)
 	URLResourceDidFinishLoading(sender string)
@@ -686,7 +724,7 @@ type Objectable interface {
 	ValueForUndefinedKey(key string) objc.ID
 	SetValueForUndefinedKey(value objc.ID, key string)
 	SetNilValueForKey(key string)
-	DictionaryWithValuesForKeys(keys *raw.NSArray[*raw.NSString]) *raw.NSDictionary[*raw.NSString, objc.ID]
+	DictionaryWithValuesForKeys(keys ...StringProvider) *raw.NSDictionary[*raw.NSString, objc.ID]
 	SetValuesForKeysWithDictionary(keyedValues *raw.NSDictionary[*raw.NSString, objc.ID])
 	StoredValueForKey(key string) objc.ID
 	TakeStoredValueForKey(value objc.ID, key string)
@@ -712,9 +750,9 @@ type Objectable interface {
 	SetSharedObservers(sharedObservers *raw.NSKeyValueSharedObserversSnapshot)
 	ReplacementObjectForKeyedArchiver(archiver *raw.NSKeyedArchiver) objc.ID
 	ClassForKeyedArchiver() objc.Class
-	PerformSelectorOnMainThreadWithObjectWaitUntilDoneModes(aSelector objc.SEL, arg objc.ID, wait bool, array *raw.NSArray[*raw.NSString])
+	PerformSelectorOnMainThreadWithObjectWaitUntilDoneModes(aSelector objc.SEL, arg objc.ID, wait bool, array ...StringProvider)
 	PerformSelectorOnMainThreadWithObjectWaitUntilDone(aSelector objc.SEL, arg objc.ID, wait bool)
-	PerformSelectorOnThreadWithObjectWaitUntilDoneModes(aSelector objc.SEL, thr *raw.NSThread, arg objc.ID, wait bool, array *raw.NSArray[*raw.NSString])
+	PerformSelectorOnThreadWithObjectWaitUntilDoneModes(aSelector objc.SEL, thr *raw.NSThread, arg objc.ID, wait bool, array ...StringProvider)
 	PerformSelectorOnThreadWithObjectWaitUntilDone(aSelector objc.SEL, thr *raw.NSThread, arg objc.ID, wait bool)
 	PerformSelectorInBackgroundWithObject(aSelector objc.SEL, arg objc.ID)
 	ReplacementObjectForArchiver(archiver *raw.NSArchiver) objc.ID

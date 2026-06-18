@@ -38,72 +38,98 @@ func NewContext() *Context {
 	return &Context{inner: raw.LAContextFromID(_id)}
 }
 
+// Fallback button title. @discussion Allows fallback button title customization. If set to empty string, the button will be hidden. A default title "Use Password…" is used when this property is left nil.
+//
 // WithLocalizedFallbackTitle sets the localizedFallbackTitle property and returns the receiver for chaining.
 func (x *Context) WithLocalizedFallbackTitle(localizedFallbackTitle string) *Context {
 	x.inner.SetLocalizedFallbackTitle(foundation.NSStringStringWithUTF8String(localizedFallbackTitle))
 	return x
 }
 
+// This property is deprecated and setting it has no effect.
+//
 // WithMaxBiometryFailures sets the maxBiometryFailures property and returns the receiver for chaining.
 func (x *Context) WithMaxBiometryFailures(maxBiometryFailures *foundation.NSNumber) *Context {
 	x.inner.SetMaxBiometryFailures(maxBiometryFailures)
 	return x
 }
 
+// Cancel button title. @discussion Allows cancel button title customization. A default title "Cancel" is used when this property is left nil or is set to empty string.
+//
 // WithLocalizedCancelTitle sets the localizedCancelTitle property and returns the receiver for chaining.
 func (x *Context) WithLocalizedCancelTitle(localizedCancelTitle string) *Context {
 	x.inner.SetLocalizedCancelTitle(foundation.NSStringStringWithUTF8String(localizedCancelTitle))
 	return x
 }
 
+// Time interval for accepting a successful Touch ID or Face ID device unlock (on the lock screen) from the past. @discussion This property can be set with a time interval in seconds. If the device was successfully unlocked by biometry within this time interval, then biometric authentication on this context will succeed automatically and the reply block will be called without prompting user for Touch ID or Face ID. The default value is 0, meaning that no previous biometric unlock can be reused. This property is meant only for reusing biometric matches from the device lock screen. It does not allow reusing previous biometric matches in application or between applications. The maximum supported interval is 5 minutes and setting the value beyond 5 minutes does not increase the accepted interval. @see LATouchIDAuthenticationMaximumAllowableReuseDuration
+//
 // WithTouchIDAuthenticationAllowableReuseDuration sets the touchIDAuthenticationAllowableReuseDuration property and returns the receiver for chaining.
 func (x *Context) WithTouchIDAuthenticationAllowableReuseDuration(touchIDAuthenticationAllowableReuseDuration float64) *Context {
 	x.inner.SetTouchIDAuthenticationAllowableReuseDuration(touchIDAuthenticationAllowableReuseDuration)
 	return x
 }
 
+// Allows setting the default localized authentication reason on context. @discussion A localized string from this property is displayed in the authentication UI if the caller didn't specify its own authentication reason (e.g. a keychain operation with kSecUseAuthenticationContext). This property is ignored if the authentication reason was provided by caller.
+//
 // WithLocalizedReason sets the localizedReason property and returns the receiver for chaining.
 func (x *Context) WithLocalizedReason(localizedReason string) *Context {
 	x.inner.SetLocalizedReason(foundation.NSStringStringWithUTF8String(localizedReason))
 	return x
 }
 
+// Allows running authentication in non-interactive mode. @discussion If the context is used in a keychain query by the means of kSecUseAuthenticationContext, then setting this property to YES has the same effect as passing kSecUseNoAuthenticationUI in the query, i.e. the keychain call will eventually fail with errSecInteractionNotAllowed instead of displaying the authentication UI. If this property is used with a LocalAuthentication evaluation, it will eventually fail with LAErrorNotInteractive instead of displaying the authentication UI.
+//
 // WithInteractionNotAllowed sets the interactionNotAllowed property and returns the receiver for chaining.
 func (x *Context) WithInteractionNotAllowed(interactionNotAllowed bool) *Context {
 	x.inner.SetInteractionNotAllowed(interactionNotAllowed)
 	return x
 }
 
+// Determines if a particular policy can be evaluated. @discussion Policies can have certain requirements which, when not satisfied, would always cause the policy evaluation to fail - e.g. a passcode set, a fingerprint enrolled with Touch ID or a face set up with Face ID. This method allows easy checking for such conditions. Applications should consume the returned value immediately and avoid relying on it for an extensive period of time. At least, it is guaranteed to stay valid until the application enters background. @warning    Do not call this method in the reply block of evaluatePolicy:reply: because it could lead to a deadlock. @param policy Policy for which the preflight check should be run. @param error Optional output parameter which is set to nil if the policy can be evaluated, or it contains error information if policy evaluation is not possible. @return YES if the policy can be evaluated, NO otherwise.
+//
 // CanEvaluatePolicyError calls the underlying CanEvaluatePolicyError.
 func (x *Context) CanEvaluatePolicyError(policy LAPolicy) (bool, error) {
 	return x.inner.CanEvaluatePolicyError(raw.LAPolicy(policy))
 }
 
+// Evaluates the specified policy. @discussion Policy evaluation may involve prompting user for various kinds of interaction or authentication. Actual behavior is dependent on evaluated policy, device type, and can be affected by installed configuration profiles. Be sure to keep a strong reference to the context while the evaluation is in progress. Otherwise, an evaluation would be canceled when the context is being deallocated. The method does not block. Instead, the caller must provide a reply block to be called asynchronously when evaluation finishes. The block is executed on a private queue internal to the framework in an unspecified threading context. Other than that, no guarantee is made about which queue, thread, or run-loop the block is executed on. Implications of successful policy evaluation are policy specific. In general, this operation is not idempotent. Policy evaluation may fail for various reasons, including user cancel, system cancel and others, see LAError codes. @param policy Policy to be evaluated. @param reply Reply block that is executed when policy evaluation finishes. success Reply parameter that is YES if the policy has been evaluated successfully or NO if the evaluation failed. error Reply parameter that is nil if the policy has been evaluated successfully, or it contains error information about the evaluation failure. @param localizedReason Application reason for authentication. This string must be provided in correct localization and should be short and clear. It will be eventually displayed in the authentication dialog as a part of the following string: "<appname>" is trying to <localized reason>. For example, if the app name is "TestApp" and localizedReason is passed "access the hidden records", then the authentication prompt will read: "TestApp" is trying to access the hidden records. @warning localizedReason parameter is mandatory and the call will throw NSInvalidArgumentException if nil or empty string is specified. @see LAError Typical error codes returned by this call are: @li          LAErrorUserFallback if user tapped the fallback button @li          LAErrorUserCancel if user has tapped the Cancel button @li          LAErrorSystemCancel if some system event interrupted the evaluation (e.g. Home button pressed).
+//
 // EvaluatePolicyLocalizedReasonReply calls the underlying EvaluatePolicyLocalizedReasonReply.
 func (x *Context) EvaluatePolicyLocalizedReasonReply(policy LAPolicy, localizedReason string, reply func(bool, unsafe.Pointer)) {
 	x.inner.EvaluatePolicyLocalizedReasonReply(raw.LAPolicy(policy), foundation.NSStringStringWithUTF8String(localizedReason), reply)
 }
 
+// Invalidates the context. @discussion The context is invalidated automatically when it is (auto)released. This method allows invalidating it manually while it is still in scope. Invalidation terminates any existing policy evaluation and the respective call will fail with LAErrorAppCancel. After the context has been invalidated, it can not be used for policy evaluation and an attempt to do so will fail with LAErrorInvalidContext. Invalidating a context that has been already invalidated has no effect.
+//
 // Invalidate calls the underlying Invalidate.
 func (x *Context) Invalidate() {
 	x.inner.Invalidate()
 }
 
+// Sets a credential to this context. @discussion Some policies allow to bind application-provided credential with them. This method allows credential to be passed to the right context. @param credential Credential to be used with subsequent calls. Setting this parameter to nil will remove any existing credential of the specified type. @param type Type of the provided credential. @return YES if the credential was set successfully, NO otherwise.
+//
 // SetCredentialType calls the underlying SetCredentialType.
 func (x *Context) SetCredentialType(credential *foundation.NSData, type_ LACredentialType) bool {
 	return x.inner.SetCredentialType(credential, raw.LACredentialType(type_))
 }
 
+// Reveals if credential was set with this context. @param type Type of credential we are asking for. @return YES on success, NO otherwise.
+//
 // IsCredentialSet calls the underlying IsCredentialSet.
 func (x *Context) IsCredentialSet(type_ LACredentialType) bool {
 	return x.inner.IsCredentialSet(raw.LACredentialType(type_))
 }
 
+// Evaluates access control object for the specified operation. @discussion Access control evaluation may involve prompting user for various kinds of interaction or authentication. Actual behavior is dependent on evaluated access control, device type, and can be affected by installed configuration profiles. Be sure to keep a strong reference to the context while the evaluation is in progress. Otherwise, an evaluation would be canceled when the context is being deallocated. The method does not block. Instead, the caller must provide a reply block to be called asynchronously when evaluation finishes. The block is executed on a private queue internal to the framework in an unspecified threading context. Other than that, no guarantee is made about which queue, thread, or run-loop the block is executed on. After successful access control evaluation, the LAContext can be used with keychain operations, so that they do not require user to authenticate. Access control evaluation may fail for various reasons, including user cancel, system cancel and others, see LAError codes. @param accessControl Access control object that is typically created by SecAccessControlCreateWithFlags. @param operation Type of operation the access control will be used with. @param localizedReason Application reason for authentication. This string must be provided in correct localization and should be short and clear. It will be eventually displayed in the authentication dialog as a part of the following string: "<appname>" is trying to <localized reason>. For example, if the app name is "TestApp" and localizedReason is passed "access the hidden records", then the authentication prompt will read: "TestApp" is trying to access the hidden records. @param reply Reply block that is executed when access control evaluation finishes. success Reply parameter that is YES if the access control has been evaluated successfully or NO if the evaluation failed. error Reply parameter that is nil if the access control has been evaluated successfully, or it contains error information about the evaluation failure. @warning localizedReason parameter is mandatory and the call will throw NSInvalidArgumentException if nil or empty string is specified.
+//
 // EvaluateAccessControlOperationLocalizedReasonReply calls the underlying EvaluateAccessControlOperationLocalizedReasonReply.
 func (x *Context) EvaluateAccessControlOperationLocalizedReasonReply(accessControl unsafe.Pointer, operation LAAccessControlOperation, localizedReason string, reply func(bool, unsafe.Pointer)) {
 	x.inner.EvaluateAccessControlOperationLocalizedReasonReply(accessControl, raw.LAAccessControlOperation(operation), foundation.NSStringStringWithUTF8String(localizedReason), reply)
 }
 
+// Fallback button title. @discussion Allows fallback button title customization. If set to empty string, the button will be hidden. A default title "Use Password…" is used when this property is left nil.
+//
 // LocalizedFallbackTitle calls the underlying LocalizedFallbackTitle.
 func (x *Context) LocalizedFallbackTitle() string {
 	_r := x.inner.LocalizedFallbackTitle()
@@ -118,6 +144,8 @@ func (x *Context) SetLocalizedFallbackTitle(localizedFallbackTitle string) {
 	x.inner.SetLocalizedFallbackTitle(foundation.NSStringStringWithUTF8String(localizedFallbackTitle))
 }
 
+// This property is deprecated and setting it has no effect.
+//
 // MaxBiometryFailures calls the underlying MaxBiometryFailures.
 func (x *Context) MaxBiometryFailures() *foundation.NSNumber {
 	return x.inner.MaxBiometryFailures()
@@ -128,6 +156,8 @@ func (x *Context) SetMaxBiometryFailures(maxBiometryFailures *foundation.NSNumbe
 	x.inner.SetMaxBiometryFailures(maxBiometryFailures)
 }
 
+// Cancel button title. @discussion Allows cancel button title customization. A default title "Cancel" is used when this property is left nil or is set to empty string.
+//
 // LocalizedCancelTitle calls the underlying LocalizedCancelTitle.
 func (x *Context) LocalizedCancelTitle() string {
 	_r := x.inner.LocalizedCancelTitle()
@@ -142,6 +172,8 @@ func (x *Context) SetLocalizedCancelTitle(localizedCancelTitle string) {
 	x.inner.SetLocalizedCancelTitle(foundation.NSStringStringWithUTF8String(localizedCancelTitle))
 }
 
+// Time interval for accepting a successful Touch ID or Face ID device unlock (on the lock screen) from the past. @discussion This property can be set with a time interval in seconds. If the device was successfully unlocked by biometry within this time interval, then biometric authentication on this context will succeed automatically and the reply block will be called without prompting user for Touch ID or Face ID. The default value is 0, meaning that no previous biometric unlock can be reused. This property is meant only for reusing biometric matches from the device lock screen. It does not allow reusing previous biometric matches in application or between applications. The maximum supported interval is 5 minutes and setting the value beyond 5 minutes does not increase the accepted interval. @see LATouchIDAuthenticationMaximumAllowableReuseDuration
+//
 // TouchIDAuthenticationAllowableReuseDuration calls the underlying TouchIDAuthenticationAllowableReuseDuration.
 func (x *Context) TouchIDAuthenticationAllowableReuseDuration() float64 {
 	return x.inner.TouchIDAuthenticationAllowableReuseDuration()
@@ -152,6 +184,8 @@ func (x *Context) SetTouchIDAuthenticationAllowableReuseDuration(touchIDAuthenti
 	x.inner.SetTouchIDAuthenticationAllowableReuseDuration(touchIDAuthenticationAllowableReuseDuration)
 }
 
+// Allows setting the default localized authentication reason on context. @discussion A localized string from this property is displayed in the authentication UI if the caller didn't specify its own authentication reason (e.g. a keychain operation with kSecUseAuthenticationContext). This property is ignored if the authentication reason was provided by caller.
+//
 // LocalizedReason calls the underlying LocalizedReason.
 func (x *Context) LocalizedReason() string {
 	_r := x.inner.LocalizedReason()
@@ -166,6 +200,8 @@ func (x *Context) SetLocalizedReason(localizedReason string) {
 	x.inner.SetLocalizedReason(foundation.NSStringStringWithUTF8String(localizedReason))
 }
 
+// Allows running authentication in non-interactive mode. @discussion If the context is used in a keychain query by the means of kSecUseAuthenticationContext, then setting this property to YES has the same effect as passing kSecUseNoAuthenticationUI in the query, i.e. the keychain call will eventually fail with errSecInteractionNotAllowed instead of displaying the authentication UI. If this property is used with a LocalAuthentication evaluation, it will eventually fail with LAErrorNotInteractive instead of displaying the authentication UI.
+//
 // InteractionNotAllowed calls the underlying InteractionNotAllowed.
 func (x *Context) InteractionNotAllowed() bool {
 	return x.inner.InteractionNotAllowed()
@@ -176,16 +212,22 @@ func (x *Context) SetInteractionNotAllowed(interactionNotAllowed bool) {
 	x.inner.SetInteractionNotAllowed(interactionNotAllowed)
 }
 
+// Indicates the type of the biometry supported by the device.
+//
 // BiometryType calls the underlying BiometryType.
 func (x *Context) BiometryType() LABiometryType {
 	return LABiometryType(x.inner.BiometryType())
 }
 
+// Contains policy domain state. @discussion  This property is set only when evaluatePolicy is called and succesful Touch ID or Face ID authentication was performed, or when canEvaluatePolicy succeeds for a biometric policy. It stays nil for all other cases. If biometric database was modified (fingers or faces were removed or added), evaluatedPolicyDomainState data will change. Nature of such database changes cannot be determined but comparing data of evaluatedPolicyDomainState after different evaluatePolicy will reveal the fact database was changed between calls. @warning Please note that the value returned by this property can change exceptionally between major OS versions even if the state of biometry has not changed.
+//
 // EvaluatedPolicyDomainState calls the underlying EvaluatedPolicyDomainState.
 func (x *Context) EvaluatedPolicyDomainState() *foundation.NSData {
 	return x.inner.EvaluatedPolicyDomainState()
 }
 
+// Contains authentication domain state.
+//
 // DomainState calls the underlying DomainState.
 func (x *Context) DomainState() *DomainState {
 	_r := x.inner.DomainState()

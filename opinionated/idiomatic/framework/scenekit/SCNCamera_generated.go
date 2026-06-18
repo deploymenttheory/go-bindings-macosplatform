@@ -39,324 +39,432 @@ func NewCamera() *Camera {
 	return &Camera{inner: raw.SCNCameraFromID(_id)}
 }
 
+// @property name @abstract Determines the name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Camera) WithName(name string) *Camera {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property fieldOfView @abstract Determines the receiver's field of view (in degree). Defaults to 60°. Animatable. @discussion The fieldOfView is automatically updated when the sensorHeight or focalLength are set. Setting the fieldOfView will update the focalLength according to the new fieldOfView and the current sensorHeight.
+//
 // WithFieldOfView sets the fieldOfView property and returns the receiver for chaining.
 func (x *Camera) WithFieldOfView(fieldOfView float64) *Camera {
 	x.inner.SetFieldOfView(fieldOfView)
 	return x
 }
 
+// @property projectionDirection @abstract Determines whether the fieldOfView (or orthographicScale) is vertical or horizontal. Defaults to vertical.
+//
 // WithProjectionDirection sets the projectionDirection property and returns the receiver for chaining.
 func (x *Camera) WithProjectionDirection(projectionDirection SCNCameraProjectionDirection) *Camera {
 	x.inner.SetProjectionDirection(raw.SCNCameraProjectionDirection(projectionDirection))
 	return x
 }
 
+// @property focalLength @abstract Determines the receiver's focal length in millimeter. Defaults to 50mm. Animatable. @discussion The focalLength is automatically updated when the sensorHeight or fieldOfView are set. Setting the focalLength will update the fieldOfView according to the new focalLength and the current sensorHeight.
+//
 // WithFocalLength sets the focalLength property and returns the receiver for chaining.
 func (x *Camera) WithFocalLength(focalLength float64) *Camera {
 	x.inner.SetFocalLength(focalLength)
 	return x
 }
 
+// @property sensorHeight @abstract Determines the vertical size of the sensor in millimeter. Defaults to 24mm. Animatable. @discussion Setting the sensorHeight will automatically update the fieldOfView according to the new sensorHeight and the current focalLength.
+//
 // WithSensorHeight sets the sensorHeight property and returns the receiver for chaining.
 func (x *Camera) WithSensorHeight(sensorHeight float64) *Camera {
 	x.inner.SetSensorHeight(sensorHeight)
 	return x
 }
 
+// @property zNear @abstract Determines the receiver's near value. Animatable. @discussion The near value determines the minimal distance between the camera and a visible surface. If a surface is closer to the camera than this minimal distance, then the surface is clipped. The near value must be different than zero. Defaults to 1.
+//
 // WithZNear sets the zNear property and returns the receiver for chaining.
 func (x *Camera) WithZNear(zNear float64) *Camera {
 	x.inner.SetZNear(zNear)
 	return x
 }
 
+// @property zFar @abstract Determines the receiver's far value. Animatable. @discussion The far value determines the maximal distance between the camera and a visible surface. If a surface is further from the camera than this maximal distance, then the surface is clipped. Defaults to 100.
+//
 // WithZFar sets the zFar property and returns the receiver for chaining.
 func (x *Camera) WithZFar(zFar float64) *Camera {
 	x.inner.SetZFar(zFar)
 	return x
 }
 
+// @property automaticallyAdjustsZRange @abstract Determines whether the receiver automatically adjusts the zFar value. Defaults to NO. @discussion When set to YES, the near and far planes are automatically set to fit the bounding box of the entire scene at render time.
+//
 // WithAutomaticallyAdjustsZRange sets the automaticallyAdjustsZRange property and returns the receiver for chaining.
 func (x *Camera) WithAutomaticallyAdjustsZRange(automaticallyAdjustsZRange bool) *Camera {
 	x.inner.SetAutomaticallyAdjustsZRange(automaticallyAdjustsZRange)
 	return x
 }
 
+// @property usesOrthographicProjection @abstract Determines whether the receiver uses an orthographic projection or not. Defaults to NO.
+//
 // WithUsesOrthographicProjection sets the usesOrthographicProjection property and returns the receiver for chaining.
 func (x *Camera) WithUsesOrthographicProjection(usesOrthographicProjection bool) *Camera {
 	x.inner.SetUsesOrthographicProjection(usesOrthographicProjection)
 	return x
 }
 
+// @property orthographicScale @abstract Determines the receiver's orthographic scale value. Animatable. Defaults to 1. @discussion This setting determines the size of the camera's visible area. This is only enabled when usesOrthographicProjection is set to YES.
+//
 // WithOrthographicScale sets the orthographicScale property and returns the receiver for chaining.
 func (x *Camera) WithOrthographicScale(orthographicScale float64) *Camera {
 	x.inner.SetOrthographicScale(orthographicScale)
 	return x
 }
 
+// @property projectionTransform @abstract Determines the projection transform used by the camera to project the world onscreen.
+//
 // WithProjectionTransform sets the projectionTransform property and returns the receiver for chaining.
 func (x *Camera) WithProjectionTransform(projectionTransform quartzcore.CATransform3D) *Camera {
 	x.inner.SetProjectionTransform(projectionTransform)
 	return x
 }
 
+// @property wantsDepthOfField @abstract Determines if the receiver has depth of field. Defaults to NO.
+//
 // WithWantsDepthOfField sets the wantsDepthOfField property and returns the receiver for chaining.
 func (x *Camera) WithWantsDepthOfField(wantsDepthOfField bool) *Camera {
 	x.inner.SetWantsDepthOfField(wantsDepthOfField)
 	return x
 }
 
+// @property focusDistance @abstract Determines the receiver's focus distance. Animatable. @discussion Defaults to 2.5
+//
 // WithFocusDistance sets the focusDistance property and returns the receiver for chaining.
 func (x *Camera) WithFocusDistance(focusDistance float64) *Camera {
 	x.inner.SetFocusDistance(focusDistance)
 	return x
 }
 
+// @property focalBlurSampleCount @abstract Determines the receiver's sample count for depth of field effect. @discussion Defaults to 25.
+//
 // WithFocalBlurSampleCount sets the focalBlurSampleCount property and returns the receiver for chaining.
 func (x *Camera) WithFocalBlurSampleCount(focalBlurSampleCount int) *Camera {
 	x.inner.SetFocalBlurSampleCount(focalBlurSampleCount)
 	return x
 }
 
+// @property fStop @abstract Determines the receiver's fstop. Animatable. @discussion Defaults to 5.6.
+//
 // WithFStop sets the fStop property and returns the receiver for chaining.
 func (x *Camera) WithFStop(fStop float64) *Camera {
 	x.inner.SetFStop(fStop)
 	return x
 }
 
+// @property apertureBladeCount @abstract Determines the receiver's blade count of the aperture. @discussion Defaults to 6.
+//
 // WithApertureBladeCount sets the apertureBladeCount property and returns the receiver for chaining.
 func (x *Camera) WithApertureBladeCount(apertureBladeCount int) *Camera {
 	x.inner.SetApertureBladeCount(apertureBladeCount)
 	return x
 }
 
+// @property motionBlurIntensity @abstract Determines the intensity of the motion blur. Animatable. Defaults to 0. @discussion An intensity of zero means no motion blur. The intensity should not exceeed 1.
+//
 // WithMotionBlurIntensity sets the motionBlurIntensity property and returns the receiver for chaining.
 func (x *Camera) WithMotionBlurIntensity(motionBlurIntensity float64) *Camera {
 	x.inner.SetMotionBlurIntensity(motionBlurIntensity)
 	return x
 }
 
+// @property screenSpaceAmbientOcclusionIntensity @abstract Determines the intensity of the screen space ambient occlusion. Animatable. @discussion defaults to 0.
+//
 // WithScreenSpaceAmbientOcclusionIntensity sets the screenSpaceAmbientOcclusionIntensity property and returns the receiver for chaining.
 func (x *Camera) WithScreenSpaceAmbientOcclusionIntensity(screenSpaceAmbientOcclusionIntensity float64) *Camera {
 	x.inner.SetScreenSpaceAmbientOcclusionIntensity(screenSpaceAmbientOcclusionIntensity)
 	return x
 }
 
+// @property screenSpaceAmbientOcclusionRadius @abstract Determines the screen space ambient occlusion radius in scene unit. Animatable. @discussion defaults to 5.
+//
 // WithScreenSpaceAmbientOcclusionRadius sets the screenSpaceAmbientOcclusionRadius property and returns the receiver for chaining.
 func (x *Camera) WithScreenSpaceAmbientOcclusionRadius(screenSpaceAmbientOcclusionRadius float64) *Camera {
 	x.inner.SetScreenSpaceAmbientOcclusionRadius(screenSpaceAmbientOcclusionRadius)
 	return x
 }
 
+// @property screenSpaceAmbientOcclusionBias @abstract Determines self occlusion bias in scene unit. @discussion defaults to 0.03.
+//
 // WithScreenSpaceAmbientOcclusionBias sets the screenSpaceAmbientOcclusionBias property and returns the receiver for chaining.
 func (x *Camera) WithScreenSpaceAmbientOcclusionBias(screenSpaceAmbientOcclusionBias float64) *Camera {
 	x.inner.SetScreenSpaceAmbientOcclusionBias(screenSpaceAmbientOcclusionBias)
 	return x
 }
 
+// @property screenSpaceAmbientOcclusionDepthThreshold @abstract Determines the depth blur threshold in scene unit. @discussion defaults to 0.2.
+//
 // WithScreenSpaceAmbientOcclusionDepthThreshold sets the screenSpaceAmbientOcclusionDepthThreshold property and returns the receiver for chaining.
 func (x *Camera) WithScreenSpaceAmbientOcclusionDepthThreshold(screenSpaceAmbientOcclusionDepthThreshold float64) *Camera {
 	x.inner.SetScreenSpaceAmbientOcclusionDepthThreshold(screenSpaceAmbientOcclusionDepthThreshold)
 	return x
 }
 
+// @property screenSpaceAmbientOcclusionNormalThreshold @abstract Determines the normal blur threshold. @discussion defaults to 0.3.
+//
 // WithScreenSpaceAmbientOcclusionNormalThreshold sets the screenSpaceAmbientOcclusionNormalThreshold property and returns the receiver for chaining.
 func (x *Camera) WithScreenSpaceAmbientOcclusionNormalThreshold(screenSpaceAmbientOcclusionNormalThreshold float64) *Camera {
 	x.inner.SetScreenSpaceAmbientOcclusionNormalThreshold(screenSpaceAmbientOcclusionNormalThreshold)
 	return x
 }
 
+// @property wantsHDR @abstract Determines if the receiver has a high dynamic range. Defaults to NO.
+//
 // WithWantsHDR sets the wantsHDR property and returns the receiver for chaining.
 func (x *Camera) WithWantsHDR(wantsHDR bool) *Camera {
 	x.inner.SetWantsHDR(wantsHDR)
 	return x
 }
 
+// @property exposureOffset @abstract Determines the logarithmic exposure biasing, in EV. Defaults to 0.
+//
 // WithExposureOffset sets the exposureOffset property and returns the receiver for chaining.
 func (x *Camera) WithExposureOffset(exposureOffset float64) *Camera {
 	x.inner.SetExposureOffset(exposureOffset)
 	return x
 }
 
+// @property averageGray @abstract Determines the average gray level desired in the final image. Defaults to 0.18.
+//
 // WithAverageGray sets the averageGray property and returns the receiver for chaining.
 func (x *Camera) WithAverageGray(averageGray float64) *Camera {
 	x.inner.SetAverageGray(averageGray)
 	return x
 }
 
+// @property whitePoint @abstract Determines the smallest luminance level that will be mapped to white in the final image. Defaults to 1.
+//
 // WithWhitePoint sets the whitePoint property and returns the receiver for chaining.
 func (x *Camera) WithWhitePoint(whitePoint float64) *Camera {
 	x.inner.SetWhitePoint(whitePoint)
 	return x
 }
 
+// @property wantsExposureAdaptation @abstract Determines if the receiver should simulate an eye and continuously adjust to luminance. Defaults to YES.
+//
 // WithWantsExposureAdaptation sets the wantsExposureAdaptation property and returns the receiver for chaining.
 func (x *Camera) WithWantsExposureAdaptation(wantsExposureAdaptation bool) *Camera {
 	x.inner.SetWantsExposureAdaptation(wantsExposureAdaptation)
 	return x
 }
 
+// @property exposureAdaptationBrighteningSpeedFactor @abstract Determines the exposure adaptation speed when going from bright areas to dark areas. Defaults to 0.4.
+//
 // WithExposureAdaptationBrighteningSpeedFactor sets the exposureAdaptationBrighteningSpeedFactor property and returns the receiver for chaining.
 func (x *Camera) WithExposureAdaptationBrighteningSpeedFactor(exposureAdaptationBrighteningSpeedFactor float64) *Camera {
 	x.inner.SetExposureAdaptationBrighteningSpeedFactor(exposureAdaptationBrighteningSpeedFactor)
 	return x
 }
 
+// @property exposureAdaptationDarkeningSpeedFactor @abstract Determines the exposure adaptation speed when going from dark areas to bright areas. Defaults to 0.6.
+//
 // WithExposureAdaptationDarkeningSpeedFactor sets the exposureAdaptationDarkeningSpeedFactor property and returns the receiver for chaining.
 func (x *Camera) WithExposureAdaptationDarkeningSpeedFactor(exposureAdaptationDarkeningSpeedFactor float64) *Camera {
 	x.inner.SetExposureAdaptationDarkeningSpeedFactor(exposureAdaptationDarkeningSpeedFactor)
 	return x
 }
 
+// @property minimumExposure @abstract Determines the minimum exposure offset of the adaptation, in EV. Defaults to -15.
+//
 // WithMinimumExposure sets the minimumExposure property and returns the receiver for chaining.
 func (x *Camera) WithMinimumExposure(minimumExposure float64) *Camera {
 	x.inner.SetMinimumExposure(minimumExposure)
 	return x
 }
 
+// @property maximumExposure @abstract Determines the maximum exposure offset of the adaptation, in EV. Defaults to -15.
+//
 // WithMaximumExposure sets the maximumExposure property and returns the receiver for chaining.
 func (x *Camera) WithMaximumExposure(maximumExposure float64) *Camera {
 	x.inner.SetMaximumExposure(maximumExposure)
 	return x
 }
 
+// @property bloomThreshold @abstract Determines the luminance threshold for the bloom effect. Animatable. Defaults to 1.
+//
 // WithBloomThreshold sets the bloomThreshold property and returns the receiver for chaining.
 func (x *Camera) WithBloomThreshold(bloomThreshold float64) *Camera {
 	x.inner.SetBloomThreshold(bloomThreshold)
 	return x
 }
 
+// @property bloomIteration @abstract Determines the number of blur iterations. Defaults to 1.
+//
 // WithBloomIterationCount sets the bloomIterationCount property and returns the receiver for chaining.
 func (x *Camera) WithBloomIterationCount(bloomIterationCount int) *Camera {
 	x.inner.SetBloomIterationCount(bloomIterationCount)
 	return x
 }
 
+// @property bloomIterationSpread @abstract Determines how the bloom iterations are spread. Defaults to 0.
+//
 // WithBloomIterationSpread sets the bloomIterationSpread property and returns the receiver for chaining.
 func (x *Camera) WithBloomIterationSpread(bloomIterationSpread float64) *Camera {
 	x.inner.SetBloomIterationSpread(bloomIterationSpread)
 	return x
 }
 
+// @property bloomIntensity @abstract Determines the intensity of the bloom effect. Animatable. Defaults to 0 (no effect).
+//
 // WithBloomIntensity sets the bloomIntensity property and returns the receiver for chaining.
 func (x *Camera) WithBloomIntensity(bloomIntensity float64) *Camera {
 	x.inner.SetBloomIntensity(bloomIntensity)
 	return x
 }
 
+// @property bloomBlurRadius @abstract Determines the radius of the bloom effect in points. Animatable. Defaults to 4.
+//
 // WithBloomBlurRadius sets the bloomBlurRadius property and returns the receiver for chaining.
 func (x *Camera) WithBloomBlurRadius(bloomBlurRadius float64) *Camera {
 	x.inner.SetBloomBlurRadius(bloomBlurRadius)
 	return x
 }
 
+// @property vignettingPower @abstract Controls the shape of the vignetting effect. Defaults to 0 (no effect).
+//
 // WithVignettingPower sets the vignettingPower property and returns the receiver for chaining.
 func (x *Camera) WithVignettingPower(vignettingPower float64) *Camera {
 	x.inner.SetVignettingPower(vignettingPower)
 	return x
 }
 
+// @property vignettingIntensity @abstract Controls the intensity of the vignetting effect. Defaults to 0 (no effect).
+//
 // WithVignettingIntensity sets the vignettingIntensity property and returns the receiver for chaining.
 func (x *Camera) WithVignettingIntensity(vignettingIntensity float64) *Camera {
 	x.inner.SetVignettingIntensity(vignettingIntensity)
 	return x
 }
 
+// @property colorFringeStrength @abstract Controls the strength of the color shift effect. Defaults to 0 (no effect).
+//
 // WithColorFringeStrength sets the colorFringeStrength property and returns the receiver for chaining.
 func (x *Camera) WithColorFringeStrength(colorFringeStrength float64) *Camera {
 	x.inner.SetColorFringeStrength(colorFringeStrength)
 	return x
 }
 
+// @property colorFringeIntensity @abstract Controls the intensity of the color shift effect. Defaults to 1.
+//
 // WithColorFringeIntensity sets the colorFringeIntensity property and returns the receiver for chaining.
 func (x *Camera) WithColorFringeIntensity(colorFringeIntensity float64) *Camera {
 	x.inner.SetColorFringeIntensity(colorFringeIntensity)
 	return x
 }
 
+// @property saturation @abstract Controls the overall saturation of the scene. Defaults to 1 (no effect).
+//
 // WithSaturation sets the saturation property and returns the receiver for chaining.
 func (x *Camera) WithSaturation(saturation float64) *Camera {
 	x.inner.SetSaturation(saturation)
 	return x
 }
 
+// @property contrast @abstract Controls the overall contrast of the scene. Defaults to 0 (no effect).
+//
 // WithContrast sets the contrast property and returns the receiver for chaining.
 func (x *Camera) WithContrast(contrast float64) *Camera {
 	x.inner.SetContrast(contrast)
 	return x
 }
 
+// @property grainIntensity @abstract Controls the intensity of the grain. Defaults to 0 (no effect).
+//
 // WithGrainIntensity sets the grainIntensity property and returns the receiver for chaining.
 func (x *Camera) WithGrainIntensity(grainIntensity float64) *Camera {
 	x.inner.SetGrainIntensity(grainIntensity)
 	return x
 }
 
+// @property grainScale @abstract Controls the scale of the grain. Defaults to 1.
+//
 // WithGrainScale sets the grainScale property and returns the receiver for chaining.
 func (x *Camera) WithGrainScale(grainScale float64) *Camera {
 	x.inner.SetGrainScale(grainScale)
 	return x
 }
 
+// @property grainIsColored @abstract Determines if the grain is colored or not. Defaults to NO.
+//
 // WithGrainIsColored sets the grainIsColored property and returns the receiver for chaining.
 func (x *Camera) WithGrainIsColored(grainIsColored bool) *Camera {
 	x.inner.SetGrainIsColored(grainIsColored)
 	return x
 }
 
+// @property whiteBalanceTemperature @abstract Controls the overall white balance temperature of the scene. Defaults to 0 (no effect).
+//
 // WithWhiteBalanceTemperature sets the whiteBalanceTemperature property and returns the receiver for chaining.
 func (x *Camera) WithWhiteBalanceTemperature(whiteBalanceTemperature float64) *Camera {
 	x.inner.SetWhiteBalanceTemperature(whiteBalanceTemperature)
 	return x
 }
 
+// @property whiteBalanceTint @abstract Controls the overall white balance tint of the scene. Defaults to 0 (no effect).
+//
 // WithWhiteBalanceTint sets the whiteBalanceTint property and returns the receiver for chaining.
 func (x *Camera) WithWhiteBalanceTint(whiteBalanceTint float64) *Camera {
 	x.inner.SetWhiteBalanceTint(whiteBalanceTint)
 	return x
 }
 
+// @property categoryBitMask @abstract Determines the node categories that are visible from the receiver. Defaults to all bits set.
+//
 // WithCategoryBitMask sets the categoryBitMask property and returns the receiver for chaining.
 func (x *Camera) WithCategoryBitMask(categoryBitMask uint) *Camera {
 	x.inner.SetCategoryBitMask(categoryBitMask)
 	return x
 }
 
+// @property focalBlurRadius @abstract Determines the receiver's focal radius. Animatable. @discussion Determines the maximum amount of blur for objects out of focus. Defaults to 0.
+//
 // WithFocalBlurRadius sets the focalBlurRadius property and returns the receiver for chaining.
 func (x *Camera) WithFocalBlurRadius(focalBlurRadius float64) *Camera {
 	x.inner.SetFocalBlurRadius(focalBlurRadius)
 	return x
 }
 
+// @property xFov @abstract Determines the receiver's field of view on the X axis (in degree). Animatable. @discussion When both xFov and yFov are null an yFov of 60° is used. When both are set, the one that best fits the renderer's aspect ratio is used. When only one is set, it is used. Defaults to 0.
+//
 // WithXFov sets the xFov property and returns the receiver for chaining.
 func (x *Camera) WithXFov(xFov float64) *Camera {
 	x.inner.SetXFov(xFov)
 	return x
 }
 
+// @property yFov @abstract Determines the receiver's field of view on the Y axis (in degree). Animatable. @discussion When both xFov and yFov are null an yFov of 60° is used. When both are set, the one that best fits the renderer's aspect ratio is used. When only one is set, it is used. Defaults to 0.
+//
 // WithYFov sets the yFov property and returns the receiver for chaining.
 func (x *Camera) WithYFov(yFov float64) *Camera {
 	x.inner.SetYFov(yFov)
 	return x
 }
 
+// @property aperture @abstract Determines the receiver's aperture. Animatable. @discussion Defaults to 1/8.0.
+//
 // WithAperture sets the aperture property and returns the receiver for chaining.
 func (x *Camera) WithAperture(aperture float64) *Camera {
 	x.inner.SetAperture(aperture)
 	return x
 }
 
+// @property focalSize @abstract Determines the receiver's focal size. Animatable. @discussion Determines the size of the area around focalDistance where the objects are in focus. Defaults to 0.
+//
 // WithFocalSize sets the focalSize property and returns the receiver for chaining.
 func (x *Camera) WithFocalSize(focalSize float64) *Camera {
 	x.inner.SetFocalSize(focalSize)
 	return x
 }
 
+// @property focalDistance @abstract Determines the receiver's focal distance. Animatable. @discussion When non zero, the focal distance determines how the camera focuses the objects in the 3d scene. Defaults to 10.0 prior to macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to 2.5 otherwise.
+//
 // WithFocalDistance sets the focalDistance property and returns the receiver for chaining.
 func (x *Camera) WithFocalDistance(focalDistance float64) *Camera {
 	x.inner.SetFocalDistance(focalDistance)
@@ -378,6 +486,8 @@ func (x *Camera) ProjectionTransformWithViewportSize(viewportSize corefoundation
 	return x.inner.ProjectionTransformWithViewportSize(viewportSize)
 }
 
+// @property name @abstract Determines the name of the receiver.
+//
 // Name calls the underlying Name.
 func (x *Camera) Name() string {
 	_r := x.inner.Name()
@@ -392,6 +502,8 @@ func (x *Camera) SetName(name string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 }
 
+// @property fieldOfView @abstract Determines the receiver's field of view (in degree). Defaults to 60°. Animatable. @discussion The fieldOfView is automatically updated when the sensorHeight or focalLength are set. Setting the fieldOfView will update the focalLength according to the new fieldOfView and the current sensorHeight.
+//
 // FieldOfView calls the underlying FieldOfView.
 func (x *Camera) FieldOfView() float64 {
 	return x.inner.FieldOfView()
@@ -402,6 +514,8 @@ func (x *Camera) SetFieldOfView(fieldOfView float64) {
 	x.inner.SetFieldOfView(fieldOfView)
 }
 
+// @property projectionDirection @abstract Determines whether the fieldOfView (or orthographicScale) is vertical or horizontal. Defaults to vertical.
+//
 // ProjectionDirection calls the underlying ProjectionDirection.
 func (x *Camera) ProjectionDirection() SCNCameraProjectionDirection {
 	return SCNCameraProjectionDirection(x.inner.ProjectionDirection())
@@ -412,6 +526,8 @@ func (x *Camera) SetProjectionDirection(projectionDirection SCNCameraProjectionD
 	x.inner.SetProjectionDirection(raw.SCNCameraProjectionDirection(projectionDirection))
 }
 
+// @property focalLength @abstract Determines the receiver's focal length in millimeter. Defaults to 50mm. Animatable. @discussion The focalLength is automatically updated when the sensorHeight or fieldOfView are set. Setting the focalLength will update the fieldOfView according to the new focalLength and the current sensorHeight.
+//
 // FocalLength calls the underlying FocalLength.
 func (x *Camera) FocalLength() float64 {
 	return x.inner.FocalLength()
@@ -422,6 +538,8 @@ func (x *Camera) SetFocalLength(focalLength float64) {
 	x.inner.SetFocalLength(focalLength)
 }
 
+// @property sensorHeight @abstract Determines the vertical size of the sensor in millimeter. Defaults to 24mm. Animatable. @discussion Setting the sensorHeight will automatically update the fieldOfView according to the new sensorHeight and the current focalLength.
+//
 // SensorHeight calls the underlying SensorHeight.
 func (x *Camera) SensorHeight() float64 {
 	return x.inner.SensorHeight()
@@ -432,6 +550,8 @@ func (x *Camera) SetSensorHeight(sensorHeight float64) {
 	x.inner.SetSensorHeight(sensorHeight)
 }
 
+// @property zNear @abstract Determines the receiver's near value. Animatable. @discussion The near value determines the minimal distance between the camera and a visible surface. If a surface is closer to the camera than this minimal distance, then the surface is clipped. The near value must be different than zero. Defaults to 1.
+//
 // ZNear calls the underlying ZNear.
 func (x *Camera) ZNear() float64 {
 	return x.inner.ZNear()
@@ -442,6 +562,8 @@ func (x *Camera) SetZNear(zNear float64) {
 	x.inner.SetZNear(zNear)
 }
 
+// @property zFar @abstract Determines the receiver's far value. Animatable. @discussion The far value determines the maximal distance between the camera and a visible surface. If a surface is further from the camera than this maximal distance, then the surface is clipped. Defaults to 100.
+//
 // ZFar calls the underlying ZFar.
 func (x *Camera) ZFar() float64 {
 	return x.inner.ZFar()
@@ -452,6 +574,8 @@ func (x *Camera) SetZFar(zFar float64) {
 	x.inner.SetZFar(zFar)
 }
 
+// @property automaticallyAdjustsZRange @abstract Determines whether the receiver automatically adjusts the zFar value. Defaults to NO. @discussion When set to YES, the near and far planes are automatically set to fit the bounding box of the entire scene at render time.
+//
 // AutomaticallyAdjustsZRange calls the underlying AutomaticallyAdjustsZRange.
 func (x *Camera) AutomaticallyAdjustsZRange() bool {
 	return x.inner.AutomaticallyAdjustsZRange()
@@ -462,6 +586,8 @@ func (x *Camera) SetAutomaticallyAdjustsZRange(automaticallyAdjustsZRange bool) 
 	x.inner.SetAutomaticallyAdjustsZRange(automaticallyAdjustsZRange)
 }
 
+// @property usesOrthographicProjection @abstract Determines whether the receiver uses an orthographic projection or not. Defaults to NO.
+//
 // UsesOrthographicProjection calls the underlying UsesOrthographicProjection.
 func (x *Camera) UsesOrthographicProjection() bool {
 	return x.inner.UsesOrthographicProjection()
@@ -472,6 +598,8 @@ func (x *Camera) SetUsesOrthographicProjection(usesOrthographicProjection bool) 
 	x.inner.SetUsesOrthographicProjection(usesOrthographicProjection)
 }
 
+// @property orthographicScale @abstract Determines the receiver's orthographic scale value. Animatable. Defaults to 1. @discussion This setting determines the size of the camera's visible area. This is only enabled when usesOrthographicProjection is set to YES.
+//
 // OrthographicScale calls the underlying OrthographicScale.
 func (x *Camera) OrthographicScale() float64 {
 	return x.inner.OrthographicScale()
@@ -482,6 +610,8 @@ func (x *Camera) SetOrthographicScale(orthographicScale float64) {
 	x.inner.SetOrthographicScale(orthographicScale)
 }
 
+// @property wantsDepthOfField @abstract Determines if the receiver has depth of field. Defaults to NO.
+//
 // WantsDepthOfField calls the underlying WantsDepthOfField.
 func (x *Camera) WantsDepthOfField() bool {
 	return x.inner.WantsDepthOfField()
@@ -492,6 +622,8 @@ func (x *Camera) SetWantsDepthOfField(wantsDepthOfField bool) {
 	x.inner.SetWantsDepthOfField(wantsDepthOfField)
 }
 
+// @property focusDistance @abstract Determines the receiver's focus distance. Animatable. @discussion Defaults to 2.5
+//
 // FocusDistance calls the underlying FocusDistance.
 func (x *Camera) FocusDistance() float64 {
 	return x.inner.FocusDistance()
@@ -502,6 +634,8 @@ func (x *Camera) SetFocusDistance(focusDistance float64) {
 	x.inner.SetFocusDistance(focusDistance)
 }
 
+// @property focalBlurSampleCount @abstract Determines the receiver's sample count for depth of field effect. @discussion Defaults to 25.
+//
 // FocalBlurSampleCount calls the underlying FocalBlurSampleCount.
 func (x *Camera) FocalBlurSampleCount() int {
 	return x.inner.FocalBlurSampleCount()
@@ -512,6 +646,8 @@ func (x *Camera) SetFocalBlurSampleCount(focalBlurSampleCount int) {
 	x.inner.SetFocalBlurSampleCount(focalBlurSampleCount)
 }
 
+// @property fStop @abstract Determines the receiver's fstop. Animatable. @discussion Defaults to 5.6.
+//
 // FStop calls the underlying FStop.
 func (x *Camera) FStop() float64 {
 	return x.inner.FStop()
@@ -522,6 +658,8 @@ func (x *Camera) SetFStop(fStop float64) {
 	x.inner.SetFStop(fStop)
 }
 
+// @property apertureBladeCount @abstract Determines the receiver's blade count of the aperture. @discussion Defaults to 6.
+//
 // ApertureBladeCount calls the underlying ApertureBladeCount.
 func (x *Camera) ApertureBladeCount() int {
 	return x.inner.ApertureBladeCount()
@@ -532,6 +670,8 @@ func (x *Camera) SetApertureBladeCount(apertureBladeCount int) {
 	x.inner.SetApertureBladeCount(apertureBladeCount)
 }
 
+// @property motionBlurIntensity @abstract Determines the intensity of the motion blur. Animatable. Defaults to 0. @discussion An intensity of zero means no motion blur. The intensity should not exceeed 1.
+//
 // MotionBlurIntensity calls the underlying MotionBlurIntensity.
 func (x *Camera) MotionBlurIntensity() float64 {
 	return x.inner.MotionBlurIntensity()
@@ -542,6 +682,8 @@ func (x *Camera) SetMotionBlurIntensity(motionBlurIntensity float64) {
 	x.inner.SetMotionBlurIntensity(motionBlurIntensity)
 }
 
+// @property screenSpaceAmbientOcclusionIntensity @abstract Determines the intensity of the screen space ambient occlusion. Animatable. @discussion defaults to 0.
+//
 // ScreenSpaceAmbientOcclusionIntensity calls the underlying ScreenSpaceAmbientOcclusionIntensity.
 func (x *Camera) ScreenSpaceAmbientOcclusionIntensity() float64 {
 	return x.inner.ScreenSpaceAmbientOcclusionIntensity()
@@ -552,6 +694,8 @@ func (x *Camera) SetScreenSpaceAmbientOcclusionIntensity(screenSpaceAmbientOcclu
 	x.inner.SetScreenSpaceAmbientOcclusionIntensity(screenSpaceAmbientOcclusionIntensity)
 }
 
+// @property screenSpaceAmbientOcclusionRadius @abstract Determines the screen space ambient occlusion radius in scene unit. Animatable. @discussion defaults to 5.
+//
 // ScreenSpaceAmbientOcclusionRadius calls the underlying ScreenSpaceAmbientOcclusionRadius.
 func (x *Camera) ScreenSpaceAmbientOcclusionRadius() float64 {
 	return x.inner.ScreenSpaceAmbientOcclusionRadius()
@@ -562,6 +706,8 @@ func (x *Camera) SetScreenSpaceAmbientOcclusionRadius(screenSpaceAmbientOcclusio
 	x.inner.SetScreenSpaceAmbientOcclusionRadius(screenSpaceAmbientOcclusionRadius)
 }
 
+// @property screenSpaceAmbientOcclusionBias @abstract Determines self occlusion bias in scene unit. @discussion defaults to 0.03.
+//
 // ScreenSpaceAmbientOcclusionBias calls the underlying ScreenSpaceAmbientOcclusionBias.
 func (x *Camera) ScreenSpaceAmbientOcclusionBias() float64 {
 	return x.inner.ScreenSpaceAmbientOcclusionBias()
@@ -572,6 +718,8 @@ func (x *Camera) SetScreenSpaceAmbientOcclusionBias(screenSpaceAmbientOcclusionB
 	x.inner.SetScreenSpaceAmbientOcclusionBias(screenSpaceAmbientOcclusionBias)
 }
 
+// @property screenSpaceAmbientOcclusionDepthThreshold @abstract Determines the depth blur threshold in scene unit. @discussion defaults to 0.2.
+//
 // ScreenSpaceAmbientOcclusionDepthThreshold calls the underlying ScreenSpaceAmbientOcclusionDepthThreshold.
 func (x *Camera) ScreenSpaceAmbientOcclusionDepthThreshold() float64 {
 	return x.inner.ScreenSpaceAmbientOcclusionDepthThreshold()
@@ -582,6 +730,8 @@ func (x *Camera) SetScreenSpaceAmbientOcclusionDepthThreshold(screenSpaceAmbient
 	x.inner.SetScreenSpaceAmbientOcclusionDepthThreshold(screenSpaceAmbientOcclusionDepthThreshold)
 }
 
+// @property screenSpaceAmbientOcclusionNormalThreshold @abstract Determines the normal blur threshold. @discussion defaults to 0.3.
+//
 // ScreenSpaceAmbientOcclusionNormalThreshold calls the underlying ScreenSpaceAmbientOcclusionNormalThreshold.
 func (x *Camera) ScreenSpaceAmbientOcclusionNormalThreshold() float64 {
 	return x.inner.ScreenSpaceAmbientOcclusionNormalThreshold()
@@ -592,6 +742,8 @@ func (x *Camera) SetScreenSpaceAmbientOcclusionNormalThreshold(screenSpaceAmbien
 	x.inner.SetScreenSpaceAmbientOcclusionNormalThreshold(screenSpaceAmbientOcclusionNormalThreshold)
 }
 
+// @property wantsHDR @abstract Determines if the receiver has a high dynamic range. Defaults to NO.
+//
 // WantsHDR calls the underlying WantsHDR.
 func (x *Camera) WantsHDR() bool {
 	return x.inner.WantsHDR()
@@ -602,6 +754,8 @@ func (x *Camera) SetWantsHDR(wantsHDR bool) {
 	x.inner.SetWantsHDR(wantsHDR)
 }
 
+// @property exposureOffset @abstract Determines the logarithmic exposure biasing, in EV. Defaults to 0.
+//
 // ExposureOffset calls the underlying ExposureOffset.
 func (x *Camera) ExposureOffset() float64 {
 	return x.inner.ExposureOffset()
@@ -612,6 +766,8 @@ func (x *Camera) SetExposureOffset(exposureOffset float64) {
 	x.inner.SetExposureOffset(exposureOffset)
 }
 
+// @property averageGray @abstract Determines the average gray level desired in the final image. Defaults to 0.18.
+//
 // AverageGray calls the underlying AverageGray.
 func (x *Camera) AverageGray() float64 {
 	return x.inner.AverageGray()
@@ -622,6 +778,8 @@ func (x *Camera) SetAverageGray(averageGray float64) {
 	x.inner.SetAverageGray(averageGray)
 }
 
+// @property whitePoint @abstract Determines the smallest luminance level that will be mapped to white in the final image. Defaults to 1.
+//
 // WhitePoint calls the underlying WhitePoint.
 func (x *Camera) WhitePoint() float64 {
 	return x.inner.WhitePoint()
@@ -632,6 +790,8 @@ func (x *Camera) SetWhitePoint(whitePoint float64) {
 	x.inner.SetWhitePoint(whitePoint)
 }
 
+// @property wantsExposureAdaptation @abstract Determines if the receiver should simulate an eye and continuously adjust to luminance. Defaults to YES.
+//
 // WantsExposureAdaptation calls the underlying WantsExposureAdaptation.
 func (x *Camera) WantsExposureAdaptation() bool {
 	return x.inner.WantsExposureAdaptation()
@@ -642,6 +802,8 @@ func (x *Camera) SetWantsExposureAdaptation(wantsExposureAdaptation bool) {
 	x.inner.SetWantsExposureAdaptation(wantsExposureAdaptation)
 }
 
+// @property exposureAdaptationBrighteningSpeedFactor @abstract Determines the exposure adaptation speed when going from bright areas to dark areas. Defaults to 0.4.
+//
 // ExposureAdaptationBrighteningSpeedFactor calls the underlying ExposureAdaptationBrighteningSpeedFactor.
 func (x *Camera) ExposureAdaptationBrighteningSpeedFactor() float64 {
 	return x.inner.ExposureAdaptationBrighteningSpeedFactor()
@@ -652,6 +814,8 @@ func (x *Camera) SetExposureAdaptationBrighteningSpeedFactor(exposureAdaptationB
 	x.inner.SetExposureAdaptationBrighteningSpeedFactor(exposureAdaptationBrighteningSpeedFactor)
 }
 
+// @property exposureAdaptationDarkeningSpeedFactor @abstract Determines the exposure adaptation speed when going from dark areas to bright areas. Defaults to 0.6.
+//
 // ExposureAdaptationDarkeningSpeedFactor calls the underlying ExposureAdaptationDarkeningSpeedFactor.
 func (x *Camera) ExposureAdaptationDarkeningSpeedFactor() float64 {
 	return x.inner.ExposureAdaptationDarkeningSpeedFactor()
@@ -662,6 +826,8 @@ func (x *Camera) SetExposureAdaptationDarkeningSpeedFactor(exposureAdaptationDar
 	x.inner.SetExposureAdaptationDarkeningSpeedFactor(exposureAdaptationDarkeningSpeedFactor)
 }
 
+// @property minimumExposure @abstract Determines the minimum exposure offset of the adaptation, in EV. Defaults to -15.
+//
 // MinimumExposure calls the underlying MinimumExposure.
 func (x *Camera) MinimumExposure() float64 {
 	return x.inner.MinimumExposure()
@@ -672,6 +838,8 @@ func (x *Camera) SetMinimumExposure(minimumExposure float64) {
 	x.inner.SetMinimumExposure(minimumExposure)
 }
 
+// @property maximumExposure @abstract Determines the maximum exposure offset of the adaptation, in EV. Defaults to -15.
+//
 // MaximumExposure calls the underlying MaximumExposure.
 func (x *Camera) MaximumExposure() float64 {
 	return x.inner.MaximumExposure()
@@ -682,6 +850,8 @@ func (x *Camera) SetMaximumExposure(maximumExposure float64) {
 	x.inner.SetMaximumExposure(maximumExposure)
 }
 
+// @property bloomThreshold @abstract Determines the luminance threshold for the bloom effect. Animatable. Defaults to 1.
+//
 // BloomThreshold calls the underlying BloomThreshold.
 func (x *Camera) BloomThreshold() float64 {
 	return x.inner.BloomThreshold()
@@ -692,6 +862,8 @@ func (x *Camera) SetBloomThreshold(bloomThreshold float64) {
 	x.inner.SetBloomThreshold(bloomThreshold)
 }
 
+// @property bloomIteration @abstract Determines the number of blur iterations. Defaults to 1.
+//
 // BloomIterationCount calls the underlying BloomIterationCount.
 func (x *Camera) BloomIterationCount() int {
 	return x.inner.BloomIterationCount()
@@ -702,6 +874,8 @@ func (x *Camera) SetBloomIterationCount(bloomIterationCount int) {
 	x.inner.SetBloomIterationCount(bloomIterationCount)
 }
 
+// @property bloomIterationSpread @abstract Determines how the bloom iterations are spread. Defaults to 0.
+//
 // BloomIterationSpread calls the underlying BloomIterationSpread.
 func (x *Camera) BloomIterationSpread() float64 {
 	return x.inner.BloomIterationSpread()
@@ -712,6 +886,8 @@ func (x *Camera) SetBloomIterationSpread(bloomIterationSpread float64) {
 	x.inner.SetBloomIterationSpread(bloomIterationSpread)
 }
 
+// @property bloomIntensity @abstract Determines the intensity of the bloom effect. Animatable. Defaults to 0 (no effect).
+//
 // BloomIntensity calls the underlying BloomIntensity.
 func (x *Camera) BloomIntensity() float64 {
 	return x.inner.BloomIntensity()
@@ -722,6 +898,8 @@ func (x *Camera) SetBloomIntensity(bloomIntensity float64) {
 	x.inner.SetBloomIntensity(bloomIntensity)
 }
 
+// @property bloomBlurRadius @abstract Determines the radius of the bloom effect in points. Animatable. Defaults to 4.
+//
 // BloomBlurRadius calls the underlying BloomBlurRadius.
 func (x *Camera) BloomBlurRadius() float64 {
 	return x.inner.BloomBlurRadius()
@@ -732,6 +910,8 @@ func (x *Camera) SetBloomBlurRadius(bloomBlurRadius float64) {
 	x.inner.SetBloomBlurRadius(bloomBlurRadius)
 }
 
+// @property vignettingPower @abstract Controls the shape of the vignetting effect. Defaults to 0 (no effect).
+//
 // VignettingPower calls the underlying VignettingPower.
 func (x *Camera) VignettingPower() float64 {
 	return x.inner.VignettingPower()
@@ -742,6 +922,8 @@ func (x *Camera) SetVignettingPower(vignettingPower float64) {
 	x.inner.SetVignettingPower(vignettingPower)
 }
 
+// @property vignettingIntensity @abstract Controls the intensity of the vignetting effect. Defaults to 0 (no effect).
+//
 // VignettingIntensity calls the underlying VignettingIntensity.
 func (x *Camera) VignettingIntensity() float64 {
 	return x.inner.VignettingIntensity()
@@ -752,6 +934,8 @@ func (x *Camera) SetVignettingIntensity(vignettingIntensity float64) {
 	x.inner.SetVignettingIntensity(vignettingIntensity)
 }
 
+// @property colorFringeStrength @abstract Controls the strength of the color shift effect. Defaults to 0 (no effect).
+//
 // ColorFringeStrength calls the underlying ColorFringeStrength.
 func (x *Camera) ColorFringeStrength() float64 {
 	return x.inner.ColorFringeStrength()
@@ -762,6 +946,8 @@ func (x *Camera) SetColorFringeStrength(colorFringeStrength float64) {
 	x.inner.SetColorFringeStrength(colorFringeStrength)
 }
 
+// @property colorFringeIntensity @abstract Controls the intensity of the color shift effect. Defaults to 1.
+//
 // ColorFringeIntensity calls the underlying ColorFringeIntensity.
 func (x *Camera) ColorFringeIntensity() float64 {
 	return x.inner.ColorFringeIntensity()
@@ -772,6 +958,8 @@ func (x *Camera) SetColorFringeIntensity(colorFringeIntensity float64) {
 	x.inner.SetColorFringeIntensity(colorFringeIntensity)
 }
 
+// @property saturation @abstract Controls the overall saturation of the scene. Defaults to 1 (no effect).
+//
 // Saturation calls the underlying Saturation.
 func (x *Camera) Saturation() float64 {
 	return x.inner.Saturation()
@@ -782,6 +970,8 @@ func (x *Camera) SetSaturation(saturation float64) {
 	x.inner.SetSaturation(saturation)
 }
 
+// @property contrast @abstract Controls the overall contrast of the scene. Defaults to 0 (no effect).
+//
 // Contrast calls the underlying Contrast.
 func (x *Camera) Contrast() float64 {
 	return x.inner.Contrast()
@@ -792,6 +982,8 @@ func (x *Camera) SetContrast(contrast float64) {
 	x.inner.SetContrast(contrast)
 }
 
+// @property grainIntensity @abstract Controls the intensity of the grain. Defaults to 0 (no effect).
+//
 // GrainIntensity calls the underlying GrainIntensity.
 func (x *Camera) GrainIntensity() float64 {
 	return x.inner.GrainIntensity()
@@ -802,6 +994,8 @@ func (x *Camera) SetGrainIntensity(grainIntensity float64) {
 	x.inner.SetGrainIntensity(grainIntensity)
 }
 
+// @property grainScale @abstract Controls the scale of the grain. Defaults to 1.
+//
 // GrainScale calls the underlying GrainScale.
 func (x *Camera) GrainScale() float64 {
 	return x.inner.GrainScale()
@@ -812,6 +1006,8 @@ func (x *Camera) SetGrainScale(grainScale float64) {
 	x.inner.SetGrainScale(grainScale)
 }
 
+// @property grainIsColored @abstract Determines if the grain is colored or not. Defaults to NO.
+//
 // GrainIsColored calls the underlying GrainIsColored.
 func (x *Camera) GrainIsColored() bool {
 	return x.inner.GrainIsColored()
@@ -822,6 +1018,8 @@ func (x *Camera) SetGrainIsColored(grainIsColored bool) {
 	x.inner.SetGrainIsColored(grainIsColored)
 }
 
+// @property whiteBalanceTemperature @abstract Controls the overall white balance temperature of the scene. Defaults to 0 (no effect).
+//
 // WhiteBalanceTemperature calls the underlying WhiteBalanceTemperature.
 func (x *Camera) WhiteBalanceTemperature() float64 {
 	return x.inner.WhiteBalanceTemperature()
@@ -832,6 +1030,8 @@ func (x *Camera) SetWhiteBalanceTemperature(whiteBalanceTemperature float64) {
 	x.inner.SetWhiteBalanceTemperature(whiteBalanceTemperature)
 }
 
+// @property whiteBalanceTint @abstract Controls the overall white balance tint of the scene. Defaults to 0 (no effect).
+//
 // WhiteBalanceTint calls the underlying WhiteBalanceTint.
 func (x *Camera) WhiteBalanceTint() float64 {
 	return x.inner.WhiteBalanceTint()
@@ -842,6 +1042,8 @@ func (x *Camera) SetWhiteBalanceTint(whiteBalanceTint float64) {
 	x.inner.SetWhiteBalanceTint(whiteBalanceTint)
 }
 
+// @property colorGrading @abstract Specifies a lookup texture to apply color grading. The contents must a 2D image representing `n` slices of a unit color cube texture, arranged in an horizontal row of `n` images. For instance, a color cube of dimension 16x16x16 should be provided as an image of size 256x16.
+//
 // ColorGrading calls the underlying ColorGrading.
 func (x *Camera) ColorGrading() *MaterialProperty {
 	_r := x.inner.ColorGrading()
@@ -851,6 +1053,8 @@ func (x *Camera) ColorGrading() *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// @property categoryBitMask @abstract Determines the node categories that are visible from the receiver. Defaults to all bits set.
+//
 // CategoryBitMask calls the underlying CategoryBitMask.
 func (x *Camera) CategoryBitMask() uint {
 	return x.inner.CategoryBitMask()
@@ -861,6 +1065,8 @@ func (x *Camera) SetCategoryBitMask(categoryBitMask uint) {
 	x.inner.SetCategoryBitMask(categoryBitMask)
 }
 
+// @property focalBlurRadius @abstract Determines the receiver's focal radius. Animatable. @discussion Determines the maximum amount of blur for objects out of focus. Defaults to 0.
+//
 // FocalBlurRadius calls the underlying FocalBlurRadius.
 func (x *Camera) FocalBlurRadius() float64 {
 	return x.inner.FocalBlurRadius()
@@ -871,6 +1077,8 @@ func (x *Camera) SetFocalBlurRadius(focalBlurRadius float64) {
 	x.inner.SetFocalBlurRadius(focalBlurRadius)
 }
 
+// @property xFov @abstract Determines the receiver's field of view on the X axis (in degree). Animatable. @discussion When both xFov and yFov are null an yFov of 60° is used. When both are set, the one that best fits the renderer's aspect ratio is used. When only one is set, it is used. Defaults to 0.
+//
 // XFov calls the underlying XFov.
 func (x *Camera) XFov() float64 {
 	return x.inner.XFov()
@@ -881,6 +1089,8 @@ func (x *Camera) SetXFov(xFov float64) {
 	x.inner.SetXFov(xFov)
 }
 
+// @property yFov @abstract Determines the receiver's field of view on the Y axis (in degree). Animatable. @discussion When both xFov and yFov are null an yFov of 60° is used. When both are set, the one that best fits the renderer's aspect ratio is used. When only one is set, it is used. Defaults to 0.
+//
 // YFov calls the underlying YFov.
 func (x *Camera) YFov() float64 {
 	return x.inner.YFov()
@@ -891,6 +1101,8 @@ func (x *Camera) SetYFov(yFov float64) {
 	x.inner.SetYFov(yFov)
 }
 
+// @property aperture @abstract Determines the receiver's aperture. Animatable. @discussion Defaults to 1/8.0.
+//
 // Aperture calls the underlying Aperture.
 func (x *Camera) Aperture() float64 {
 	return x.inner.Aperture()
@@ -901,6 +1113,8 @@ func (x *Camera) SetAperture(aperture float64) {
 	x.inner.SetAperture(aperture)
 }
 
+// @property focalSize @abstract Determines the receiver's focal size. Animatable. @discussion Determines the size of the area around focalDistance where the objects are in focus. Defaults to 0.
+//
 // FocalSize calls the underlying FocalSize.
 func (x *Camera) FocalSize() float64 {
 	return x.inner.FocalSize()
@@ -911,6 +1125,8 @@ func (x *Camera) SetFocalSize(focalSize float64) {
 	x.inner.SetFocalSize(focalSize)
 }
 
+// @property focalDistance @abstract Determines the receiver's focal distance. Animatable. @discussion When non zero, the focal distance determines how the camera focuses the objects in the 3d scene. Defaults to 10.0 prior to macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to 2.5 otherwise.
+//
 // FocalDistance calls the underlying FocalDistance.
 func (x *Camera) FocalDistance() float64 {
 	return x.inner.FocalDistance()

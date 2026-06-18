@@ -31,6 +31,8 @@ func PlaybackSpeedFromID(id objc.ID) *PlaybackSpeed {
 	return &PlaybackSpeed{inner: raw.AVPlaybackSpeedFromID(id)}
 }
 
+// @method         initWithRate:localizedName: @param         rate The rate to be used when this playback speed is selected. @param         localizedName A localized name to be displayed representing this playback speed in a UI. @abstract      Initializes an AVPlaybackSpeed.
+//
 // NewPlaybackSpeedWithRateLocalizedName creates a new [PlaybackSpeed].
 func NewPlaybackSpeedWithRateLocalizedName(rate float32, localizedName string) *PlaybackSpeed {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlaybackSpeed")), objc.RegisterName("alloc"))
@@ -38,11 +40,15 @@ func NewPlaybackSpeedWithRateLocalizedName(rate float32, localizedName string) *
 	return &PlaybackSpeed{inner: raw.AVPlaybackSpeedFromID(_id)}
 }
 
+// @property      rate @abstract      The rate associated with this object. When this playback speed is selected this rate will be set in response to the play button being pressed.
+//
 // Rate calls the underlying Rate.
 func (x *PlaybackSpeed) Rate() float32 {
 	return x.inner.Rate()
 }
 
+// @property      localizedName @abstract      A localized name for this playback speed. @discussion    This name will be used to represent this playback speed in playback UIs where more space is available.
+//
 // LocalizedName calls the underlying LocalizedName.
 func (x *PlaybackSpeed) LocalizedName() string {
 	_r := x.inner.LocalizedName()
@@ -52,6 +58,8 @@ func (x *PlaybackSpeed) LocalizedName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      localizedNumericName @abstract      A localized name for this playback speed used when space is limited. @discussion    This name will be used to represent this playback speed in playback UIs where limited space is available.
+//
 // LocalizedNumericName calls the underlying LocalizedNumericName.
 func (x *PlaybackSpeed) LocalizedNumericName() string {
 	_r := x.inner.LocalizedNumericName()

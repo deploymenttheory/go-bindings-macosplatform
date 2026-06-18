@@ -31,6 +31,8 @@ func FrameProcessorFrameFromID(id objc.ID) *FrameProcessorFrame {
 	return &FrameProcessorFrame{inner: raw.VTFrameProcessorFrameFromID(id)}
 }
 
+// Creates a new instance of frame with a pixel buffer and presentation timestamp. The `CVPixelBuffer` is retained in this object. Returns `nil` if the “CVPixelBuffer“ you provided is NULL or the “CVPixelBuffer“ is not backed by “IOSurface“. - Parameters: - buffer: The “CVPixelBuffer“ that this frame wraps; it must not be `nil` and must be “IOSurface“ backed. - presentationTimeStamp: The presentation timestamp of the buffer.
+//
 // NewFrameProcessorFrameWithBufferPresentationTimeStamp creates a new [FrameProcessorFrame].
 func NewFrameProcessorFrameWithBufferPresentationTimeStamp(buffer unsafe.Pointer, presentationTimeStamp coremedia.CMTime) *FrameProcessorFrame {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTFrameProcessorFrame")), objc.RegisterName("alloc"))
@@ -38,11 +40,15 @@ func NewFrameProcessorFrameWithBufferPresentationTimeStamp(buffer unsafe.Pointer
 	return &FrameProcessorFrame{inner: raw.VTFrameProcessorFrameFromID(_id)}
 }
 
+// Pixel buffer that you provided when you initialized the object.
+//
 // Buffer calls the underlying Buffer.
 func (x *FrameProcessorFrame) Buffer() unsafe.Pointer {
 	return x.inner.Buffer()
 }
 
+// Presentation timestamp that you provided when you initialized the object.
+//
 // PresentationTimeStamp calls the underlying PresentationTimeStamp.
 func (x *FrameProcessorFrame) PresentationTimeStamp() coremedia.CMTime {
 	return x.inner.PresentationTimeStamp()

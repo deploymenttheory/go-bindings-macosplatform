@@ -32,6 +32,8 @@ func LibraryFromID(id objc.ID) *Library {
 	return &Library{inner: raw.ITLibraryFromID(id)}
 }
 
+// @abstract Initializes an instance of ITLibrary which can be used to retrieve media entities. @discussion Upon initialization of the ITLibrary class, the default iTunes database for the current user will be read and parsed. At this point all media entities will be cached in memory until the time the object is deallocated. @param requestedAPIVersion The version of the iTunesLibrary API that the application is requesting, provide "1.0" if unknown. @param error A pointer to a variable that will receive an NSError if this method fails. May be nil if caller does not care about error. @return An ITLibrary instance, or nil if this method fails.
+//
 // NewLibraryWithAPIVersionError creates a new [Library].
 func NewLibraryWithAPIVersionError(requestedAPIVersion string) (*Library, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ITLibrary")), objc.RegisterName("alloc"))
@@ -43,6 +45,8 @@ func NewLibraryWithAPIVersionError(requestedAPIVersion string) (*Library, error)
 	return &Library{inner: raw.ITLibraryFromID(_id)}, nil
 }
 
+// @abstract Initializes an instance of ITLibrary which can be used to retrieve media entities. @discussion Unless the ITLibInitOptionLazyLoadData option is specified, the default iTunes database for the current user will be read and parsed upon initialization of the ITLibrary class, and all media entities will be cached in memory. @param requestedAPIVersion The version of the iTunesLibrary API that the application is requesting, provide "1.0" if unknown. @param options Options that change the initialization behavior. @param error A pointer to a variable that will receive an NSError if this method fails. May be nil if caller does not care about error. @return An ITLibrary instance, or nil if this method fails.
+//
 // NewLibraryWithAPIVersionOptionsError creates a new [Library].
 func NewLibraryWithAPIVersionOptionsError(requestedAPIVersion string, options ITLibInitOptions) (*Library, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ITLibrary")), objc.RegisterName("alloc"))
@@ -54,6 +58,8 @@ func NewLibraryWithAPIVersionOptionsError(requestedAPIVersion string, options IT
 	return &Library{inner: raw.ITLibraryFromID(_id)}, nil
 }
 
+// @abstract Retrieves the artwork from a media file. @param mediaFileURL The URL of the media file whose artwork should be extracted. @return A ITLibArtwork instance represeting the media file artwork, or nil if the artwork was not found or could not be extracted.
+//
 // ArtworkForMediaFile calls the underlying ArtworkForMediaFile.
 func (x *Library) ArtworkForMediaFile(mediaFileURL string) *LibArtwork {
 	_r := x.inner.ArtworkForMediaFile(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(mediaFileURL)))
@@ -63,16 +69,22 @@ func (x *Library) ArtworkForMediaFile(mediaFileURL string) *LibArtwork {
 	return &LibArtwork{inner: _r}
 }
 
+// @abstract Refreshes the data used by the framework. @return YES if the data was reloaded, false if an error occurred.
+//
 // ReloadData calls the underlying ReloadData.
 func (x *Library) ReloadData() bool {
 	return x.inner.ReloadData()
 }
 
+// @abstract Unloads the data used by the framework.
+//
 // UnloadData calls the underlying UnloadData.
 func (x *Library) UnloadData() {
 	x.inner.UnloadData()
 }
 
+// @abstract The version of iTunes being accessed.
+//
 // ApplicationVersion calls the underlying ApplicationVersion.
 func (x *Library) ApplicationVersion() string {
 	_r := x.inner.ApplicationVersion()
@@ -82,36 +94,50 @@ func (x *Library) ApplicationVersion() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract A bitwise OR combination of the features of this library.
+//
 // Features calls the underlying Features.
 func (x *Library) Features() ITLibExportFeature {
 	return ITLibExportFeature(x.inner.Features())
 }
 
+// @abstract The major version number of this API.
+//
 // ApiMajorVersion calls the underlying ApiMajorVersion.
 func (x *Library) ApiMajorVersion() uint {
 	return x.inner.ApiMajorVersion()
 }
 
+// @abstract The minor version number of this API.
+//
 // ApiMinorVersion calls the underlying ApiMinorVersion.
 func (x *Library) ApiMinorVersion() uint {
 	return x.inner.ApiMinorVersion()
 }
 
+// @abstract The location of the iTunes music folder.
+//
 // MediaFolderLocation calls the underlying MediaFolderLocation.
 func (x *Library) MediaFolderLocation() unsafe.Pointer {
 	return x.inner.MediaFolderLocation()
 }
 
+// @abstract The location of the iTunes music folder. Replaced by mediaFolderLocation.
+//
 // MusicFolderLocation calls the underlying MusicFolderLocation.
 func (x *Library) MusicFolderLocation() *foundation.NSURL {
 	return x.inner.MusicFolderLocation()
 }
 
+// @abstract Whether to show content rating labels.
+//
 // ShouldShowContentRating calls the underlying ShouldShowContentRating.
 func (x *Library) ShouldShowContentRating() bool {
 	return x.inner.ShouldShowContentRating()
 }
 
+// @abstract All media items in the library.
+//
 // AllMediaItems returns the collection as a Go slice.
 func (x *Library) AllMediaItems() []*LibMediaItem {
 	arr := x.inner.AllMediaItems()
@@ -123,6 +149,8 @@ func (x *Library) AllMediaItems() []*LibMediaItem {
 	})
 }
 
+// @abstract All playlists in the library.
+//
 // AllPlaylists returns the collection as a Go slice.
 func (x *Library) AllPlaylists() []*LibPlaylist {
 	arr := x.inner.AllPlaylists()

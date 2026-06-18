@@ -36,6 +36,8 @@ func NewMutablePostalAddress() *MutablePostalAddress {
 	return &MutablePostalAddress{inner: raw.CNMutablePostalAddressFromID(_id)}
 }
 
+// multi-street address is delimited with carriage returns “\n”
+//
 // WithStreet sets the street property and returns the receiver for chaining.
 func (x *MutablePostalAddress) WithStreet(street string) *MutablePostalAddress {
 	x.inner.SetStreet(foundation.NSStringStringWithUTF8String(street))

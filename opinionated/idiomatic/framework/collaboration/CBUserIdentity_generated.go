@@ -37,21 +37,29 @@ func NewUserIdentity() *UserIdentity {
 	return &UserIdentity{inner: raw.CBUserIdentityFromID(_id)}
 }
 
+// Returns a Boolean value indicating whether the given password is correct for the identity. - Parameters: - password: The password to test for the identity. - Returns: `TRUE` if the password is correct; otherwise, `FALSE`.
+//
 // AuthenticateWithPassword calls the underlying AuthenticateWithPassword.
 func (x *UserIdentity) AuthenticateWithPassword(password string) bool {
 	return x.inner.AuthenticateWithPassword(foundation.NSStringStringWithUTF8String(password))
 }
 
+// Returns the POSIX UID of the identity. The POSIX UID is a integer that can identify a user within an identity authority. UIDs are not guaranteed to be unique within an identity authority. - Returns: The POSIX UID of the identity.
+//
 // PosixUID calls the underlying PosixUID.
 func (x *UserIdentity) PosixUID() uint {
 	return x.inner.PosixUID()
 }
 
+// Returns the public authentication certificate associated with a user identity. The Collaboration framework supports certificate-based authentication in addition to passwords. If a certificate is stored for a user identity, it will be the default method of authentication. When a .Mac account is associated with a user identity, the authentication certificate is automatically downloaded from the .Mac servers. - Returns: The public authentication certificate, or `nil` if none exists.
+//
 // Certificate calls the underlying Certificate.
 func (x *UserIdentity) Certificate() unsafe.Pointer {
 	return x.inner.Certificate()
 }
 
+// Returns a Boolean value indicating whether the identity is allowed to authenticate. If the identity does not have authentication credentials (a password or certificate), it is not able to log in. However, an identity with authentication credentials does not ensure that it is enabled. Any identity can be disabled. - Returns: `TRUE` if the identity can authenticate; otherwise, `FALSE`.
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *UserIdentity) IsEnabled() bool {
 	return x.inner.IsEnabled()

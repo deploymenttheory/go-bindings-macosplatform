@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class for a configuring a keyboard.
+//
 // KeyboardConfiguration wraps [raw.VZKeyboardConfiguration] with a fluent Go API.
 type KeyboardConfiguration struct {
 	inner *raw.VZKeyboardConfiguration

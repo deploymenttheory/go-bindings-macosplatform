@@ -36,6 +36,8 @@ func NewTokenWatcherTokenInfo() *TokenWatcherTokenInfo {
 	return &TokenWatcherTokenInfo{inner: raw.TKTokenWatcherTokenInfoFromID(_id)}
 }
 
+// TokenID
+//
 // TokenID calls the underlying TokenID.
 func (x *TokenWatcherTokenInfo) TokenID() string {
 	_r := x.inner.TokenID()
@@ -45,6 +47,8 @@ func (x *TokenWatcherTokenInfo) TokenID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The slot name (if available)
+//
 // SlotName calls the underlying SlotName.
 func (x *TokenWatcherTokenInfo) SlotName() string {
 	_r := x.inner.SlotName()
@@ -54,6 +58,8 @@ func (x *TokenWatcherTokenInfo) SlotName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Localized driver name (if available)
+//
 // DriverName calls the underlying DriverName.
 func (x *TokenWatcherTokenInfo) DriverName() string {
 	_r := x.inner.DriverName()

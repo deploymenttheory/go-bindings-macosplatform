@@ -37,6 +37,8 @@ func NewSyncEnginePendingDatabaseChange() *SyncEnginePendingDatabaseChange {
 	return &SyncEnginePendingDatabaseChange{inner: raw.CKSyncEnginePendingDatabaseChangeFromID(_id)}
 }
 
+// The identifier of the record zone to change.
+//
 // ZoneID calls the underlying ZoneID.
 func (x *SyncEnginePendingDatabaseChange) ZoneID() *RecordZoneID {
 	_r := x.inner.ZoneID()
@@ -46,6 +48,8 @@ func (x *SyncEnginePendingDatabaseChange) ZoneID() *RecordZoneID {
 	return &RecordZoneID{inner: _r}
 }
 
+// The type of database change.
+//
 // Type calls the underlying Type.
 func (x *SyncEnginePendingDatabaseChange) Type() CKSyncEnginePendingDatabaseChangeType {
 	return CKSyncEnginePendingDatabaseChangeType(x.inner.Type())

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A SpriteKit node that applies frame buffer effects to the rendered results of its child nodes. This is done continuously on live content and is not a simple snapshot of the rendered result at one instant of time.
+//
 // EffectNode wraps [raw.SKEffectNode] with a fluent Go API.
 type EffectNode struct {
 	inner *raw.SKEffectNode
@@ -39,6 +41,8 @@ func NewEffectNode() *EffectNode {
 	return &EffectNode{inner: raw.SKEffectNodeFromID(_id)}
 }
 
+// A CIFilter to be used as an effect Any CIFilter that requires only a single "inputImage" and produces an "outputImage" is allowed. The filter is applied to all children of the SKEffectNode. If the filter is nil, the children of this node is flattened before being drawn as long as the SKEffectNode is enabled.
+//
 // WithFilter sets the filter property and returns the receiver for chaining.
 func (x *EffectNode) WithFilter(filter *coreimage.CIFilter) *EffectNode {
 	x.inner.SetFilter(filter)
@@ -51,18 +55,24 @@ func (x *EffectNode) WithShouldCenterFilter(shouldCenterFilter bool) *EffectNode
 	return x
 }
 
+// Enable the SKEffectNode. The SKEffectNode has no effect when appliesEffects is not enabled, this is useful for setting up an effect to use later on. Defaults to YES.
+//
 // WithShouldEnableEffects sets the shouldEnableEffects property and returns the receiver for chaining.
 func (x *EffectNode) WithShouldEnableEffects(shouldEnableEffects bool) *EffectNode {
 	x.inner.SetShouldEnableEffects(shouldEnableEffects)
 	return x
 }
 
+// Enable the rasterization on the SKEffectNode. The SKEffectNode's output is rasterized and cached internally. This cache is reused when rendering. When the SKEffectNode's children change, the cache is updated, but changing properties on the CIFilter does *not* cause an update (you must disable rasterization and then re-enable it for the changes to apply). This is more expensive than not rasterizing if the node's children change frequently, only enable this option if you know the children is largely static.
+//
 // WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
 func (x *EffectNode) WithShouldRasterize(shouldRasterize bool) *EffectNode {
 	x.inner.SetShouldRasterize(shouldRasterize)
 	return x
 }
 
+// Sets the blend mode to use when composing the effect with the final framebuffer. @see SKNode.SKBlendMode
+//
 // WithBlendMode sets the blendMode property and returns the receiver for chaining.
 func (x *EffectNode) WithBlendMode(blendMode SKBlendMode) *EffectNode {
 	x.inner.SetBlendMode(raw.SKBlendMode(blendMode))
@@ -75,90 +85,120 @@ func (x *EffectNode) WithShader(shader *Shader) *EffectNode {
 	return x
 }
 
+// The position of the node in the parent's coordinate system
+//
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *EffectNode) WithPosition(position corefoundation.CGPoint) *EffectNode {
 	x.inner.SKNode.SetPosition(position)
 	return x
 }
 
+// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+//
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *EffectNode) WithZPosition(zPosition float64) *EffectNode {
 	x.inner.SKNode.SetZPosition(zPosition)
 	return x
 }
 
+// The Euler rotation about the z axis (in radians)
+//
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *EffectNode) WithZRotation(zRotation float64) *EffectNode {
 	x.inner.SKNode.SetZRotation(zRotation)
 	return x
 }
 
+// The scaling in the X axis
+//
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *EffectNode) WithXScale(xScale float64) *EffectNode {
 	x.inner.SKNode.SetXScale(xScale)
 	return x
 }
 
+// The scaling in the Y axis
+//
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *EffectNode) WithYScale(yScale float64) *EffectNode {
 	x.inner.SKNode.SetYScale(yScale)
 	return x
 }
 
+// The speed multiplier applied to all actions run on this node. Inherited by its children.
+//
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *EffectNode) WithSpeed(speed float64) *EffectNode {
 	x.inner.SKNode.SetSpeed(speed)
 	return x
 }
 
+// Alpha of this node (multiplied by the output color to give the final result)
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *EffectNode) WithAlpha(alpha float64) *EffectNode {
 	x.inner.SKNode.SetAlpha(alpha)
 	return x
 }
 
+// Controls whether or not the node's actions is updated or paused.
+//
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *EffectNode) WithPaused(paused bool) *EffectNode {
 	x.inner.SKNode.SetPaused(paused)
 	return x
 }
 
+// Controls whether or not the node and its children are rendered.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *EffectNode) WithHidden(hidden bool) *EffectNode {
 	x.inner.SKNode.SetHidden(hidden)
 	return x
 }
 
+// Controls whether or not the node receives touch events
+//
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *EffectNode) WithUserInteractionEnabled(userInteractionEnabled bool) *EffectNode {
 	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
 	return x
 }
 
+// The client assignable name. In general, this should be unique among peers in the scene graph.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *EffectNode) WithName(name string) *EffectNode {
 	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// Physics body attached to the node, with synchronized scale, rotation, and position
+//
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *EffectNode) WithPhysicsBody(physicsBody *PhysicsBody) *EffectNode {
 	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
+// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+//
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *EffectNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *EffectNode {
 	x.inner.SKNode.SetUserData(userData)
 	return x
 }
 
+// Kinematic constraints, used in IK solving
+//
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *EffectNode) WithReachConstraints(reachConstraints *ReachConstraints) *EffectNode {
 	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
+// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+//
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *EffectNode) WithConstraints(items ...*raw.SKConstraint) *EffectNode {
 	if len(items) == 0 {
@@ -177,6 +217,8 @@ func (x *EffectNode) WithConstraints(items ...*raw.SKConstraint) *EffectNode {
 	return x
 }
 
+// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+//
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *EffectNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *EffectNode {
 	x.inner.SKNode.SetAttributeValues(attributeValues)
@@ -237,6 +279,8 @@ func (x *EffectNode) WithAccessibilityEnabled(accessibilityEnabled bool) *Effect
 	return x
 }
 
+// A CIFilter to be used as an effect Any CIFilter that requires only a single "inputImage" and produces an "outputImage" is allowed. The filter is applied to all children of the SKEffectNode. If the filter is nil, the children of this node is flattened before being drawn as long as the SKEffectNode is enabled.
+//
 // Filter calls the underlying Filter.
 func (x *EffectNode) Filter() *coreimage.CIFilter {
 	return x.inner.Filter()
@@ -257,6 +301,8 @@ func (x *EffectNode) SetShouldCenterFilter(shouldCenterFilter bool) {
 	x.inner.SetShouldCenterFilter(shouldCenterFilter)
 }
 
+// Enable the SKEffectNode. The SKEffectNode has no effect when appliesEffects is not enabled, this is useful for setting up an effect to use later on. Defaults to YES.
+//
 // ShouldEnableEffects calls the underlying ShouldEnableEffects.
 func (x *EffectNode) ShouldEnableEffects() bool {
 	return x.inner.ShouldEnableEffects()
@@ -267,6 +313,8 @@ func (x *EffectNode) SetShouldEnableEffects(shouldEnableEffects bool) {
 	x.inner.SetShouldEnableEffects(shouldEnableEffects)
 }
 
+// Enable the rasterization on the SKEffectNode. The SKEffectNode's output is rasterized and cached internally. This cache is reused when rendering. When the SKEffectNode's children change, the cache is updated, but changing properties on the CIFilter does *not* cause an update (you must disable rasterization and then re-enable it for the changes to apply). This is more expensive than not rasterizing if the node's children change frequently, only enable this option if you know the children is largely static.
+//
 // ShouldRasterize calls the underlying ShouldRasterize.
 func (x *EffectNode) ShouldRasterize() bool {
 	return x.inner.ShouldRasterize()
@@ -277,6 +325,8 @@ func (x *EffectNode) SetShouldRasterize(shouldRasterize bool) {
 	x.inner.SetShouldRasterize(shouldRasterize)
 }
 
+// Sets the blend mode to use when composing the effect with the final framebuffer. @see SKNode.SKBlendMode
+//
 // BlendMode calls the underlying BlendMode.
 func (x *EffectNode) BlendMode() SKBlendMode {
 	return SKBlendMode(x.inner.BlendMode())

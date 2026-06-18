@@ -93,16 +93,22 @@ func (x *PhotoLibrary) CurrentChangeToken() *PersistentChangeToken {
 	return &PersistentChangeToken{inner: _r}
 }
 
+// @abstract Returns a dictionary that maps each cloud identifier from the provided array to a PLLocalIdentifierMapping result containing the local identifier found for that cloud identifier. @discussion This method can be very expensive so they should be used sparingly for batch lookup of all needed identifiers. Clients should work in terms of local identifiers and call these methods only once after loading from and before saving to persistent storage.  If the attempt to lookup a local identifier for a given cloud identifier fails, the error parameter will indicate the reason. @param cloudIdentifiers The array of \c PHCloudIdentifier instances whose local identifiers are to being requested.
+//
 // LocalIdentifierMappingsForCloudIdentifiers calls the underlying LocalIdentifierMappingsForCloudIdentifiers.
 func (x *PhotoLibrary) LocalIdentifierMappingsForCloudIdentifiers(cloudIdentifiers *foundation.NSArray[*raw.PHCloudIdentifier]) *foundation.NSDictionary[*raw.PHCloudIdentifier, *raw.PHLocalIdentifierMapping] {
 	return x.inner.LocalIdentifierMappingsForCloudIdentifiers(cloudIdentifiers)
 }
 
+// @abstract Returns a dictionary that maps each local identifier from the provided array to a PLCloudIdentifierMapping result containing the cloud identifier found for that local identifier @discussion This method can be very expensive so they should be used sparingly for batch lookup of all needed identifiers. Clients should work in terms of local identifiers and call these methods only once after loading from and before saving to persistent storage.  If the attempt to lookup a cloud identifier for a given local identifier fails, the error parameter will indicate the reason. @param localIdentifiers The array of \c NSString instances whose cloud identifiers are to being requested.
+//
 // CloudIdentifierMappingsForLocalIdentifiers calls the underlying CloudIdentifierMappingsForLocalIdentifiers.
 func (x *PhotoLibrary) CloudIdentifierMappingsForLocalIdentifiers(localIdentifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSDictionary[*foundation.NSString, *raw.PHCloudIdentifierMapping] {
 	return x.inner.CloudIdentifierMappingsForLocalIdentifiers(localIdentifiers)
 }
 
+// DEPRECATED: These two methods can be very expensive so they should be used sparingly for batch lookup of all needed identifiers. Clients should work in terms of local identifiers and call these methods only once after loading from and before saving to persistent storage.
+//
 // LocalIdentifiersForCloudIdentifiers calls the underlying LocalIdentifiersForCloudIdentifiers.
 func (x *PhotoLibrary) LocalIdentifiersForCloudIdentifiers(cloudIdentifiers *foundation.NSArray[*raw.PHCloudIdentifier]) *foundation.NSArray[*foundation.NSString] {
 	return x.inner.LocalIdentifiersForCloudIdentifiers(cloudIdentifiers)

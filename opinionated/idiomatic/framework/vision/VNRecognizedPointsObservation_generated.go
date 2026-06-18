@@ -38,6 +38,8 @@ func NewRecognizedPointsObservation() *RecognizedPointsObservation {
 	return &RecognizedPointsObservation{inner: raw.VNRecognizedPointsObservationFromID(_id)}
 }
 
+// @brief Obtains a specific normalized recognized point. @param pointKey The key specifying the desired recognized point. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return the recognized point, or nil if the specific point is not defined.
+//
 // RecognizedPointForKeyError calls the underlying RecognizedPointForKeyError.
 func (x *RecognizedPointsObservation) RecognizedPointForKeyError(pointKey *foundation.NSString) (*RecognizedPoint, error) {
 	_r, _err := x.inner.RecognizedPointForKeyError(pointKey)
@@ -50,16 +52,22 @@ func (x *RecognizedPointsObservation) RecognizedPointForKeyError(pointKey *found
 	return &RecognizedPoint{inner: _r}, nil
 }
 
+// @brief Obtains the collection of points associated with an identified grouping. @discussion The obtained collection is a dictionary that provides the mapping of a recognized point's key to the recognized point. @param groupKey The key representing a specific grouping of points. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return the dictionary of recognized points in the group, or nil if an error was encountered.
+//
 // RecognizedPointsForGroupKeyError calls the underlying RecognizedPointsForGroupKeyError.
 func (x *RecognizedPointsObservation) RecognizedPointsForGroupKeyError(groupKey *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNRecognizedPoint], error) {
 	return x.inner.RecognizedPointsForGroupKeyError(groupKey)
 }
 
+// @brief    Returns the recognized points packaged into an MLMultiArray. @discussion The MLMultiArray will contain the raw data output of (x coordinate, y coordinate, confidence) for specific points in the format expected by CreateML action recognition models. The datatype of the elements in the array is double and the dimensions are [1, 3, # of possible points].  If an expected point key is not available in the obeservation, that entry in the MLMultiArray will be populated with 0s. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return the MLMultiArray representation of the points, or nil if an error was encountered.
+//
 // KeypointsMultiArrayAndReturnError calls the underlying KeypointsMultiArrayAndReturnError.
 func (x *RecognizedPointsObservation) KeypointsMultiArrayAndReturnError() (*coreml.MLMultiArray, error) {
 	return x.inner.KeypointsMultiArrayAndReturnError()
 }
 
+// @brief Returns all of the point group keys available in the observation.
+//
 // AvailableKeys returns the collection as a Go slice.
 func (x *RecognizedPointsObservation) AvailableKeys() []*foundation.NSString {
 	arr := x.inner.AvailableKeys()
@@ -71,6 +79,8 @@ func (x *RecognizedPointsObservation) AvailableKeys() []*foundation.NSString {
 	})
 }
 
+// @brief The availableGroupKeys property returns all of the point group labels usable with the observation.
+//
 // AvailableGroupKeys returns the collection as a Go slice.
 func (x *RecognizedPointsObservation) AvailableGroupKeys() []*foundation.NSString {
 	arr := x.inner.AvailableGroupKeys()

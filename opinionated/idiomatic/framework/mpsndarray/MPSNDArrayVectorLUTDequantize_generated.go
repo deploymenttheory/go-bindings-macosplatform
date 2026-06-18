@@ -31,6 +31,8 @@ func ArrayVectorLUTDequantizeFromID(id objc.ID) *ArrayVectorLUTDequantize {
 	return &ArrayVectorLUTDequantize{inner: raw.MPSNDArrayVectorLUTDequantizeFromID(id)}
 }
 
+// @abstract   Initializes a kernel for vector-based LUT dequantization. @param      device    The Metal device to be used with this kernel. @param      axis        The vector axis in the output. @result     A new vector LUT dequantization kernel.
+//
 // NewArrayVectorLUTDequantizeWithDeviceAxis creates a new [ArrayVectorLUTDequantize].
 func NewArrayVectorLUTDequantizeWithDeviceAxis(device metal.MTLDevice, axis uint) *ArrayVectorLUTDequantize {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayVectorLUTDequantize")), objc.RegisterName("alloc"))
@@ -38,18 +40,24 @@ func NewArrayVectorLUTDequantizeWithDeviceAxis(device metal.MTLDevice, axis uint
 	return &ArrayVectorLUTDequantize{inner: raw.MPSNDArrayVectorLUTDequantizeFromID(_id)}
 }
 
+// @property  vectorAxis @abstract  Which axis in the destination will receive the vector component, must be less than 4.
+//
 // WithVectorAxis sets the vectorAxis property and returns the receiver for chaining.
 func (x *ArrayVectorLUTDequantize) WithVectorAxis(vectorAxis uint) *ArrayVectorLUTDequantize {
 	x.inner.SetVectorAxis(vectorAxis)
 	return x
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
 func (x *ArrayVectorLUTDequantize) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayVectorLUTDequantize {
 	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
 	return x
 }
 
+// @property  vectorAxis @abstract  Which axis in the destination will receive the vector component, must be less than 4.
+//
 // VectorAxis calls the underlying VectorAxis.
 func (x *ArrayVectorLUTDequantize) VectorAxis() uint {
 	return x.inner.VectorAxis()

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class for a console port configuration.
+//
 // ConsolePortConfiguration wraps [raw.VZConsolePortConfiguration] with a fluent Go API.
 type ConsolePortConfiguration struct {
 	inner *raw.VZConsolePortConfiguration
@@ -35,6 +37,8 @@ func NewConsolePortConfiguration() *ConsolePortConfiguration {
 	return &ConsolePortConfiguration{inner: raw.VZConsolePortConfigurationFromID(_id)}
 }
 
+// The serial port attachment.
+//
 // WithAttachment sets the attachment property and returns the receiver for chaining.
 func (x *ConsolePortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *ConsolePortConfiguration {
 	x.inner.SetAttachment(attachment.asSerialPortAttachment())

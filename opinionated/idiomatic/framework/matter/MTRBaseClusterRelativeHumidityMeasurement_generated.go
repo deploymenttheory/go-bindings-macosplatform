@@ -35,6 +35,8 @@ func MTRBaseClusterRelativeHumidityMeasurementFromID(id objc.ID) *MTRBaseCluster
 	return &MTRBaseClusterRelativeHumidityMeasurement{inner: raw.MTRBaseClusterRelativeHumidityMeasurementFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterRelativeHumidityMeasurementWithDeviceEndpointIDQueue creates a new [MTRBaseClusterRelativeHumidityMeasurement].
 func NewMTRBaseClusterRelativeHumidityMeasurementWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterRelativeHumidityMeasurement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterRelativeHumidityMeasurement")), objc.RegisterName("alloc"))

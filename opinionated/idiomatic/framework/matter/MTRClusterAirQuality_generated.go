@@ -30,6 +30,8 @@ func MTRClusterAirQualityFromID(id objc.ID) *MTRClusterAirQuality {
 	return &MTRClusterAirQuality{inner: raw.MTRClusterAirQualityFromID(id)}
 }
 
+// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+//
 // NewMTRClusterAirQualityWithDeviceEndpointIDQueue creates a new [MTRClusterAirQuality].
 func NewMTRClusterAirQualityWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterAirQuality {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterAirQuality")), objc.RegisterName("alloc"))

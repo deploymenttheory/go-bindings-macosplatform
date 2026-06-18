@@ -36,17 +36,23 @@ func NewImageEditPanel() *ImageEditPanel {
 	return &ImageEditPanel{inner: raw.IKImageEditPanelFromID(_id)}
 }
 
+// @property dataSource @abstract Data source associated with an image editing panel
+//
 // WithDataSource sets the dataSource property and returns the receiver for chaining.
 func (x *ImageEditPanel) WithDataSource(dataSource raw.IKImageEditPanelDataSource) *ImageEditPanel {
 	x.inner.SetDataSource(dataSource)
 	return x
 }
 
+// @method reloadData @abstract Reloads the data from the data associated with an image editing panel.
+//
 // ReloadData calls the underlying ReloadData.
 func (x *ImageEditPanel) ReloadData() {
 	x.inner.ReloadData()
 }
 
+// @property dataSource @abstract Data source associated with an image editing panel
+//
 // DataSource calls the underlying DataSource.
 func (x *ImageEditPanel) DataSource() raw.IKImageEditPanelDataSource {
 	return x.inner.DataSource()
@@ -57,6 +63,8 @@ func (x *ImageEditPanel) SetDataSource(dataSource raw.IKImageEditPanelDataSource
 	x.inner.SetDataSource(dataSource)
 }
 
+// @property filterArray @abstract Array of filters reflecting the current user adjustments in the adjust or effects tab.
+//
 // FilterArray calls the underlying FilterArray.
 func (x *ImageEditPanel) FilterArray() *foundation.NSArray[objc.ID] {
 	return x.inner.FilterArray()

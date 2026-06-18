@@ -36,138 +36,184 @@ func NewLSTMDescriptor() *LSTMDescriptor {
 	return &LSTMDescriptor{inner: raw.MPSLSTMDescriptorFromID(_id)}
 }
 
+// @property   memoryWeightsAreDiagonal @abstract   If YES, then the 'peephole' weight matrices will be diagonal matrices represented as vectors of length the number of features in memory cells, that will be multiplied pointwise with the peephole matrix or image in order to achieve the diagonal (nonmixing) update. Defaults to NO.
+//
 // WithMemoryWeightsAreDiagonal sets the memoryWeightsAreDiagonal property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithMemoryWeightsAreDiagonal(memoryWeightsAreDiagonal bool) *LSTMDescriptor {
 	x.inner.SetMemoryWeightsAreDiagonal(memoryWeightsAreDiagonal)
 	return x
 }
 
+// @property   inputGateInputWeights @abstract   Contains weights 'Wi_ij', bias 'bi_i' and neuron 'gi' from the LSTM formula. If nil then assumed zero weights, bias and no neuron (identity mapping). Defaults to nil.
+//
 // WithInputGateInputWeights sets the inputGateInputWeights property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithInputGateInputWeights(inputGateInputWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *LSTMDescriptor {
 	x.inner.SetInputGateInputWeights(inputGateInputWeights)
 	return x
 }
 
+// @property   inputGateRecurrentWeights @abstract   Contains weights 'Ui_ij' from the LSTM formula. If nil then assumed zero weights. Defaults to nil.
+//
 // WithInputGateRecurrentWeights sets the inputGateRecurrentWeights property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithInputGateRecurrentWeights(inputGateRecurrentWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *LSTMDescriptor {
 	x.inner.SetInputGateRecurrentWeights(inputGateRecurrentWeights)
 	return x
 }
 
+// @property   inputGateMemoryWeights @abstract   Contains weights 'Vi_ij' - the 'peephole' weights - from the LSTM formula. if YES == memoryWeightsAreDiagonal, then the number of weights used is the number of features in the memory cell image/matrix. If nil then assumed zero weights. Defaults to nil.
+//
 // WithInputGateMemoryWeights sets the inputGateMemoryWeights property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithInputGateMemoryWeights(inputGateMemoryWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *LSTMDescriptor {
 	x.inner.SetInputGateMemoryWeights(inputGateMemoryWeights)
 	return x
 }
 
+// @property   forgetGateInputWeights @abstract   Contains weights 'Wf_ij', bias 'bf_i' and neuron 'gf' from the LSTM formula. If nil then assumed zero weights, bias and no neuron (identity mapping).Defaults to nil.
+//
 // WithForgetGateInputWeights sets the forgetGateInputWeights property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithForgetGateInputWeights(forgetGateInputWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *LSTMDescriptor {
 	x.inner.SetForgetGateInputWeights(forgetGateInputWeights)
 	return x
 }
 
+// @property   forgetGateRecurrentWeights @abstract   Contains weights 'Uf_ij' from the LSTM formula. If nil then assumed zero weights. Defaults to nil.
+//
 // WithForgetGateRecurrentWeights sets the forgetGateRecurrentWeights property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithForgetGateRecurrentWeights(forgetGateRecurrentWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *LSTMDescriptor {
 	x.inner.SetForgetGateRecurrentWeights(forgetGateRecurrentWeights)
 	return x
 }
 
+// @property   forgetGateMemoryWeights @abstract   Contains weights 'Vf_ij' - the 'peephole' weights - from the LSTM formula. if YES == memoryWeightsAreDiagonal, then the number of weights used is the number of features in the memory cell image/matrix. If nil then assumed zero weights. Defaults to nil.
+//
 // WithForgetGateMemoryWeights sets the forgetGateMemoryWeights property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithForgetGateMemoryWeights(forgetGateMemoryWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *LSTMDescriptor {
 	x.inner.SetForgetGateMemoryWeights(forgetGateMemoryWeights)
 	return x
 }
 
+// @property   outputGateInputWeights @abstract   Contains weights 'Wo_ij', bias 'bo_i' and neuron 'go' from the LSTM formula. If nil then assumed zero weights, bias and no neuron (identity mapping). Defaults to nil.
+//
 // WithOutputGateInputWeights sets the outputGateInputWeights property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithOutputGateInputWeights(outputGateInputWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *LSTMDescriptor {
 	x.inner.SetOutputGateInputWeights(outputGateInputWeights)
 	return x
 }
 
+// @property   outputGateRecurrentWeights @abstract   Contains weights 'Uo_ij' from the LSTM formula. If nil then assumed zero weights. Defaults to nil.
+//
 // WithOutputGateRecurrentWeights sets the outputGateRecurrentWeights property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithOutputGateRecurrentWeights(outputGateRecurrentWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *LSTMDescriptor {
 	x.inner.SetOutputGateRecurrentWeights(outputGateRecurrentWeights)
 	return x
 }
 
+// @property   outputGateMemoryWeights @abstract   Contains weights 'Vo_ij' - the 'peephole' weights - from the LSTM. if YES == memoryWeightsAreDiagonal, then the number of weights used is the number of features in the memory cell image/matrix. If nil then assumed zero weights. Defaults to nil.
+//
 // WithOutputGateMemoryWeights sets the outputGateMemoryWeights property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithOutputGateMemoryWeights(outputGateMemoryWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *LSTMDescriptor {
 	x.inner.SetOutputGateMemoryWeights(outputGateMemoryWeights)
 	return x
 }
 
+// @property   cellGateInputWeights @abstract   Contains weights 'Wc_ij', bias 'bc_i' and neuron 'gc' from the LSTM formula. If nil then assumed zero weights, bias and no neuron (identity mapping). Defaults to nil.
+//
 // WithCellGateInputWeights sets the cellGateInputWeights property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithCellGateInputWeights(cellGateInputWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *LSTMDescriptor {
 	x.inner.SetCellGateInputWeights(cellGateInputWeights)
 	return x
 }
 
+// @property   cellGateRecurrentWeights @abstract   Contains weights 'Uc_ij' from the LSTM formula. If nil then assumed zero weights. Defaults to nil.
+//
 // WithCellGateRecurrentWeights sets the cellGateRecurrentWeights property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithCellGateRecurrentWeights(cellGateRecurrentWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *LSTMDescriptor {
 	x.inner.SetCellGateRecurrentWeights(cellGateRecurrentWeights)
 	return x
 }
 
+// @property   cellGateMemoryWeights @abstract   Contains weights 'Vc_ij' - the 'peephole' weights - from the LSTM formula. if YES == memoryWeightsAreDiagonal, then the number of weights used is the number of features in the memory cell image/matrix. If nil then assumed zero weights. Defaults to nil.
+//
 // WithCellGateMemoryWeights sets the cellGateMemoryWeights property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithCellGateMemoryWeights(cellGateMemoryWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *LSTMDescriptor {
 	x.inner.SetCellGateMemoryWeights(cellGateMemoryWeights)
 	return x
 }
 
+// @property   cellToOutputNeuronType @abstract   Neuron type definition for 'gh', see @ref MPSCNNNeuronType. Defaults to MPSCNNNeuronTypeTanH.
+//
 // WithCellToOutputNeuronType sets the cellToOutputNeuronType property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithCellToOutputNeuronType(cellToOutputNeuronType mpsneuralnetwork.MPSCNNNeuronType) *LSTMDescriptor {
 	x.inner.SetCellToOutputNeuronType(cellToOutputNeuronType)
 	return x
 }
 
+// @property   cellToOutputNeuronParamA @abstract   Neuron parameter A for 'gh'. Defaults to 1.0f.
+//
 // WithCellToOutputNeuronParamA sets the cellToOutputNeuronParamA property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithCellToOutputNeuronParamA(cellToOutputNeuronParamA float32) *LSTMDescriptor {
 	x.inner.SetCellToOutputNeuronParamA(cellToOutputNeuronParamA)
 	return x
 }
 
+// @property   cellToOutputNeuronParamB @abstract   Neuron parameter B for 'gh'. Defaults to 1.0f.
+//
 // WithCellToOutputNeuronParamB sets the cellToOutputNeuronParamB property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithCellToOutputNeuronParamB(cellToOutputNeuronParamB float32) *LSTMDescriptor {
 	x.inner.SetCellToOutputNeuronParamB(cellToOutputNeuronParamB)
 	return x
 }
 
+// @property   cellToOutputNeuronParamC @abstract   Neuron parameter C for 'gh'. Defaults to 1.0f.
+//
 // WithCellToOutputNeuronParamC sets the cellToOutputNeuronParamC property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithCellToOutputNeuronParamC(cellToOutputNeuronParamC float32) *LSTMDescriptor {
 	x.inner.SetCellToOutputNeuronParamC(cellToOutputNeuronParamC)
 	return x
 }
 
+// @property   inputFeatureChannels @abstract   The number of feature channels per pixel in the input image or number of rows in the input matrix.
+//
 // WithInputFeatureChannels sets the inputFeatureChannels property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithInputFeatureChannels(inputFeatureChannels uint) *LSTMDescriptor {
 	x.inner.MPSRNNDescriptor.SetInputFeatureChannels(inputFeatureChannels)
 	return x
 }
 
+// @property   outputFeatureChannels @abstract   The number of feature channels per pixel in the destination image or number of rows in the destination matrix.
+//
 // WithOutputFeatureChannels sets the outputFeatureChannels property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithOutputFeatureChannels(outputFeatureChannels uint) *LSTMDescriptor {
 	x.inner.MPSRNNDescriptor.SetOutputFeatureChannels(outputFeatureChannels)
 	return x
 }
 
+// @property   useLayerInputUnitTransformMode @abstract   if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in @ref MPSRNNSingleGateDescriptor. Defaults to NO.
+//
 // WithUseLayerInputUnitTransformMode sets the useLayerInputUnitTransformMode property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *LSTMDescriptor {
 	x.inner.MPSRNNDescriptor.SetUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode)
 	return x
 }
 
+// @property   useFloat32Weights @abstract   If YES, then @ref MPSRNNMatrixInferenceLayer uses 32-bit floating point numbers internally for weights when computing matrix transformations. If NO, then 16-bit, half precision floating point numbers are used. Currently @ref MPSRNNImageInferenceLayer ignores this property and the convolution operations always convert FP32 weights into FP16 for better performance. Defaults to NO.
+//
 // WithUseFloat32Weights sets the useFloat32Weights property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *LSTMDescriptor {
 	x.inner.MPSRNNDescriptor.SetUseFloat32Weights(useFloat32Weights)
 	return x
 }
 
+// @property   layerSequenceDirection @abstract   When the layer specified with this descriptor is used to process a sequence of inputs by calling @see encodeBidirectionalSequenceToCommandBuffer then this parameter defines in which direction the sequence is processed. The operation of the layer is: (yt, ht, ct) = f(xt,ht-1,ct-1) for MPSRNNSequenceDirectionForward and (yt, ht, ct) = f(xt,ht+1,ct+1) for MPSRNNSequenceDirectionBackward, where xt is the output of the previous layer that encodes in the same direction as this layer, (or the input image or matrix if this is the first layer in stack with this direction). @see MPSRNNImageInferenceLayer and @see MPSRNNMatrixInferenceLayer.
+//
 // WithLayerSequenceDirection sets the layerSequenceDirection property and returns the receiver for chaining.
 func (x *LSTMDescriptor) WithLayerSequenceDirection(layerSequenceDirection mpsneuralnetwork.MPSRNNSequenceDirection) *LSTMDescriptor {
 	x.inner.MPSRNNDescriptor.SetLayerSequenceDirection(layerSequenceDirection)
 	return x
 }
 
+// @property   memoryWeightsAreDiagonal @abstract   If YES, then the 'peephole' weight matrices will be diagonal matrices represented as vectors of length the number of features in memory cells, that will be multiplied pointwise with the peephole matrix or image in order to achieve the diagonal (nonmixing) update. Defaults to NO.
+//
 // MemoryWeightsAreDiagonal calls the underlying MemoryWeightsAreDiagonal.
 func (x *LSTMDescriptor) MemoryWeightsAreDiagonal() bool {
 	return x.inner.MemoryWeightsAreDiagonal()
@@ -178,6 +224,8 @@ func (x *LSTMDescriptor) SetMemoryWeightsAreDiagonal(memoryWeightsAreDiagonal bo
 	x.inner.SetMemoryWeightsAreDiagonal(memoryWeightsAreDiagonal)
 }
 
+// @property   inputGateInputWeights @abstract   Contains weights 'Wi_ij', bias 'bi_i' and neuron 'gi' from the LSTM formula. If nil then assumed zero weights, bias and no neuron (identity mapping). Defaults to nil.
+//
 // InputGateInputWeights calls the underlying InputGateInputWeights.
 func (x *LSTMDescriptor) InputGateInputWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
 	return x.inner.InputGateInputWeights()
@@ -188,6 +236,8 @@ func (x *LSTMDescriptor) SetInputGateInputWeights(inputGateInputWeights mpsneura
 	x.inner.SetInputGateInputWeights(inputGateInputWeights)
 }
 
+// @property   inputGateRecurrentWeights @abstract   Contains weights 'Ui_ij' from the LSTM formula. If nil then assumed zero weights. Defaults to nil.
+//
 // InputGateRecurrentWeights calls the underlying InputGateRecurrentWeights.
 func (x *LSTMDescriptor) InputGateRecurrentWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
 	return x.inner.InputGateRecurrentWeights()
@@ -198,6 +248,8 @@ func (x *LSTMDescriptor) SetInputGateRecurrentWeights(inputGateRecurrentWeights 
 	x.inner.SetInputGateRecurrentWeights(inputGateRecurrentWeights)
 }
 
+// @property   inputGateMemoryWeights @abstract   Contains weights 'Vi_ij' - the 'peephole' weights - from the LSTM formula. if YES == memoryWeightsAreDiagonal, then the number of weights used is the number of features in the memory cell image/matrix. If nil then assumed zero weights. Defaults to nil.
+//
 // InputGateMemoryWeights calls the underlying InputGateMemoryWeights.
 func (x *LSTMDescriptor) InputGateMemoryWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
 	return x.inner.InputGateMemoryWeights()
@@ -208,6 +260,8 @@ func (x *LSTMDescriptor) SetInputGateMemoryWeights(inputGateMemoryWeights mpsneu
 	x.inner.SetInputGateMemoryWeights(inputGateMemoryWeights)
 }
 
+// @property   forgetGateInputWeights @abstract   Contains weights 'Wf_ij', bias 'bf_i' and neuron 'gf' from the LSTM formula. If nil then assumed zero weights, bias and no neuron (identity mapping).Defaults to nil.
+//
 // ForgetGateInputWeights calls the underlying ForgetGateInputWeights.
 func (x *LSTMDescriptor) ForgetGateInputWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
 	return x.inner.ForgetGateInputWeights()
@@ -218,6 +272,8 @@ func (x *LSTMDescriptor) SetForgetGateInputWeights(forgetGateInputWeights mpsneu
 	x.inner.SetForgetGateInputWeights(forgetGateInputWeights)
 }
 
+// @property   forgetGateRecurrentWeights @abstract   Contains weights 'Uf_ij' from the LSTM formula. If nil then assumed zero weights. Defaults to nil.
+//
 // ForgetGateRecurrentWeights calls the underlying ForgetGateRecurrentWeights.
 func (x *LSTMDescriptor) ForgetGateRecurrentWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
 	return x.inner.ForgetGateRecurrentWeights()
@@ -228,6 +284,8 @@ func (x *LSTMDescriptor) SetForgetGateRecurrentWeights(forgetGateRecurrentWeight
 	x.inner.SetForgetGateRecurrentWeights(forgetGateRecurrentWeights)
 }
 
+// @property   forgetGateMemoryWeights @abstract   Contains weights 'Vf_ij' - the 'peephole' weights - from the LSTM formula. if YES == memoryWeightsAreDiagonal, then the number of weights used is the number of features in the memory cell image/matrix. If nil then assumed zero weights. Defaults to nil.
+//
 // ForgetGateMemoryWeights calls the underlying ForgetGateMemoryWeights.
 func (x *LSTMDescriptor) ForgetGateMemoryWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
 	return x.inner.ForgetGateMemoryWeights()
@@ -238,6 +296,8 @@ func (x *LSTMDescriptor) SetForgetGateMemoryWeights(forgetGateMemoryWeights mpsn
 	x.inner.SetForgetGateMemoryWeights(forgetGateMemoryWeights)
 }
 
+// @property   outputGateInputWeights @abstract   Contains weights 'Wo_ij', bias 'bo_i' and neuron 'go' from the LSTM formula. If nil then assumed zero weights, bias and no neuron (identity mapping). Defaults to nil.
+//
 // OutputGateInputWeights calls the underlying OutputGateInputWeights.
 func (x *LSTMDescriptor) OutputGateInputWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
 	return x.inner.OutputGateInputWeights()
@@ -248,6 +308,8 @@ func (x *LSTMDescriptor) SetOutputGateInputWeights(outputGateInputWeights mpsneu
 	x.inner.SetOutputGateInputWeights(outputGateInputWeights)
 }
 
+// @property   outputGateRecurrentWeights @abstract   Contains weights 'Uo_ij' from the LSTM formula. If nil then assumed zero weights. Defaults to nil.
+//
 // OutputGateRecurrentWeights calls the underlying OutputGateRecurrentWeights.
 func (x *LSTMDescriptor) OutputGateRecurrentWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
 	return x.inner.OutputGateRecurrentWeights()
@@ -258,6 +320,8 @@ func (x *LSTMDescriptor) SetOutputGateRecurrentWeights(outputGateRecurrentWeight
 	x.inner.SetOutputGateRecurrentWeights(outputGateRecurrentWeights)
 }
 
+// @property   outputGateMemoryWeights @abstract   Contains weights 'Vo_ij' - the 'peephole' weights - from the LSTM. if YES == memoryWeightsAreDiagonal, then the number of weights used is the number of features in the memory cell image/matrix. If nil then assumed zero weights. Defaults to nil.
+//
 // OutputGateMemoryWeights calls the underlying OutputGateMemoryWeights.
 func (x *LSTMDescriptor) OutputGateMemoryWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
 	return x.inner.OutputGateMemoryWeights()
@@ -268,6 +332,8 @@ func (x *LSTMDescriptor) SetOutputGateMemoryWeights(outputGateMemoryWeights mpsn
 	x.inner.SetOutputGateMemoryWeights(outputGateMemoryWeights)
 }
 
+// @property   cellGateInputWeights @abstract   Contains weights 'Wc_ij', bias 'bc_i' and neuron 'gc' from the LSTM formula. If nil then assumed zero weights, bias and no neuron (identity mapping). Defaults to nil.
+//
 // CellGateInputWeights calls the underlying CellGateInputWeights.
 func (x *LSTMDescriptor) CellGateInputWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
 	return x.inner.CellGateInputWeights()
@@ -278,6 +344,8 @@ func (x *LSTMDescriptor) SetCellGateInputWeights(cellGateInputWeights mpsneuraln
 	x.inner.SetCellGateInputWeights(cellGateInputWeights)
 }
 
+// @property   cellGateRecurrentWeights @abstract   Contains weights 'Uc_ij' from the LSTM formula. If nil then assumed zero weights. Defaults to nil.
+//
 // CellGateRecurrentWeights calls the underlying CellGateRecurrentWeights.
 func (x *LSTMDescriptor) CellGateRecurrentWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
 	return x.inner.CellGateRecurrentWeights()
@@ -288,6 +356,8 @@ func (x *LSTMDescriptor) SetCellGateRecurrentWeights(cellGateRecurrentWeights mp
 	x.inner.SetCellGateRecurrentWeights(cellGateRecurrentWeights)
 }
 
+// @property   cellGateMemoryWeights @abstract   Contains weights 'Vc_ij' - the 'peephole' weights - from the LSTM formula. if YES == memoryWeightsAreDiagonal, then the number of weights used is the number of features in the memory cell image/matrix. If nil then assumed zero weights. Defaults to nil.
+//
 // CellGateMemoryWeights calls the underlying CellGateMemoryWeights.
 func (x *LSTMDescriptor) CellGateMemoryWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
 	return x.inner.CellGateMemoryWeights()
@@ -298,6 +368,8 @@ func (x *LSTMDescriptor) SetCellGateMemoryWeights(cellGateMemoryWeights mpsneura
 	x.inner.SetCellGateMemoryWeights(cellGateMemoryWeights)
 }
 
+// @property   cellToOutputNeuronType @abstract   Neuron type definition for 'gh', see @ref MPSCNNNeuronType. Defaults to MPSCNNNeuronTypeTanH.
+//
 // CellToOutputNeuronType calls the underlying CellToOutputNeuronType.
 func (x *LSTMDescriptor) CellToOutputNeuronType() mpsneuralnetwork.MPSCNNNeuronType {
 	return x.inner.CellToOutputNeuronType()
@@ -308,6 +380,8 @@ func (x *LSTMDescriptor) SetCellToOutputNeuronType(cellToOutputNeuronType mpsneu
 	x.inner.SetCellToOutputNeuronType(cellToOutputNeuronType)
 }
 
+// @property   cellToOutputNeuronParamA @abstract   Neuron parameter A for 'gh'. Defaults to 1.0f.
+//
 // CellToOutputNeuronParamA calls the underlying CellToOutputNeuronParamA.
 func (x *LSTMDescriptor) CellToOutputNeuronParamA() float32 {
 	return x.inner.CellToOutputNeuronParamA()
@@ -318,6 +392,8 @@ func (x *LSTMDescriptor) SetCellToOutputNeuronParamA(cellToOutputNeuronParamA fl
 	x.inner.SetCellToOutputNeuronParamA(cellToOutputNeuronParamA)
 }
 
+// @property   cellToOutputNeuronParamB @abstract   Neuron parameter B for 'gh'. Defaults to 1.0f.
+//
 // CellToOutputNeuronParamB calls the underlying CellToOutputNeuronParamB.
 func (x *LSTMDescriptor) CellToOutputNeuronParamB() float32 {
 	return x.inner.CellToOutputNeuronParamB()
@@ -328,6 +404,8 @@ func (x *LSTMDescriptor) SetCellToOutputNeuronParamB(cellToOutputNeuronParamB fl
 	x.inner.SetCellToOutputNeuronParamB(cellToOutputNeuronParamB)
 }
 
+// @property   cellToOutputNeuronParamC @abstract   Neuron parameter C for 'gh'. Defaults to 1.0f.
+//
 // CellToOutputNeuronParamC calls the underlying CellToOutputNeuronParamC.
 func (x *LSTMDescriptor) CellToOutputNeuronParamC() float32 {
 	return x.inner.CellToOutputNeuronParamC()

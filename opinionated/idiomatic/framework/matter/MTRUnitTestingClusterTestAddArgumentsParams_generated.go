@@ -50,12 +50,16 @@ func (x *MTRUnitTestingClusterTestAddArgumentsParams) WithArg2(arg2 *foundation.
 	return x
 }
 
+// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+//
 // WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
 func (x *MTRUnitTestingClusterTestAddArgumentsParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestAddArgumentsParams {
 	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
 	return x
 }
 
+// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+//
 // WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
 func (x *MTRUnitTestingClusterTestAddArgumentsParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRUnitTestingClusterTestAddArgumentsParams {
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
@@ -82,6 +86,8 @@ func (x *MTRUnitTestingClusterTestAddArgumentsParams) SetArg2(arg2 *foundation.N
 	x.inner.SetArg2(arg2)
 }
 
+// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+//
 // TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
 func (x *MTRUnitTestingClusterTestAddArgumentsParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	return x.inner.TimedInvokeTimeoutMs()
@@ -92,6 +98,8 @@ func (x *MTRUnitTestingClusterTestAddArgumentsParams) SetTimedInvokeTimeoutMs(ti
 	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
 }
 
+// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+//
 // ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
 func (x *MTRUnitTestingClusterTestAddArgumentsParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	return x.inner.ServerSideProcessingTimeout()

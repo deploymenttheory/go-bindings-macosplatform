@@ -37,36 +37,48 @@ func NewRenderPassSampleBufferAttachmentDescriptor() *RenderPassSampleBufferAtta
 	return &RenderPassSampleBufferAttachmentDescriptor{inner: raw.MTLRenderPassSampleBufferAttachmentDescriptorFromID(_id)}
 }
 
+// @property sampleBuffer @abstract The sample buffer to store samples for the render-pass defined samples. If sampleBuffer is non-nil, the sample indices will be used to store samples into the sample buffer.  If no sample buffer is provided, no samples will be taken. If any of the sample indices are specified as MTLCounterDontSample, no sample will be taken for that action.
+//
 // WithSampleBuffer sets the sampleBuffer property and returns the receiver for chaining.
 func (x *RenderPassSampleBufferAttachmentDescriptor) WithSampleBuffer(sampleBuffer raw.MTLCounterSampleBuffer) *RenderPassSampleBufferAttachmentDescriptor {
 	x.inner.SetSampleBuffer(sampleBuffer)
 	return x
 }
 
+// @property startOfVertexSampleIndex @abstract The sample index to use to store the sample taken at the start of vertex processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
+//
 // WithStartOfVertexSampleIndex sets the startOfVertexSampleIndex property and returns the receiver for chaining.
 func (x *RenderPassSampleBufferAttachmentDescriptor) WithStartOfVertexSampleIndex(startOfVertexSampleIndex uint) *RenderPassSampleBufferAttachmentDescriptor {
 	x.inner.SetStartOfVertexSampleIndex(startOfVertexSampleIndex)
 	return x
 }
 
+// @property endOfVertexSampleIndex @abstract The sample index to use to store the sample taken at the end of vertex processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
+//
 // WithEndOfVertexSampleIndex sets the endOfVertexSampleIndex property and returns the receiver for chaining.
 func (x *RenderPassSampleBufferAttachmentDescriptor) WithEndOfVertexSampleIndex(endOfVertexSampleIndex uint) *RenderPassSampleBufferAttachmentDescriptor {
 	x.inner.SetEndOfVertexSampleIndex(endOfVertexSampleIndex)
 	return x
 }
 
+// @property startOfFragmentSampleIndex @abstract The sample index to use to store the sample taken at the start of fragment processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
+//
 // WithStartOfFragmentSampleIndex sets the startOfFragmentSampleIndex property and returns the receiver for chaining.
 func (x *RenderPassSampleBufferAttachmentDescriptor) WithStartOfFragmentSampleIndex(startOfFragmentSampleIndex uint) *RenderPassSampleBufferAttachmentDescriptor {
 	x.inner.SetStartOfFragmentSampleIndex(startOfFragmentSampleIndex)
 	return x
 }
 
+// @property endOfFragmentSampleIndex @abstract The sample index to use to store the sample taken at the end of fragment processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
+//
 // WithEndOfFragmentSampleIndex sets the endOfFragmentSampleIndex property and returns the receiver for chaining.
 func (x *RenderPassSampleBufferAttachmentDescriptor) WithEndOfFragmentSampleIndex(endOfFragmentSampleIndex uint) *RenderPassSampleBufferAttachmentDescriptor {
 	x.inner.SetEndOfFragmentSampleIndex(endOfFragmentSampleIndex)
 	return x
 }
 
+// @property sampleBuffer @abstract The sample buffer to store samples for the render-pass defined samples. If sampleBuffer is non-nil, the sample indices will be used to store samples into the sample buffer.  If no sample buffer is provided, no samples will be taken. If any of the sample indices are specified as MTLCounterDontSample, no sample will be taken for that action.
+//
 // SampleBuffer calls the underlying SampleBuffer.
 func (x *RenderPassSampleBufferAttachmentDescriptor) SampleBuffer() raw.MTLCounterSampleBuffer {
 	return x.inner.SampleBuffer()
@@ -77,6 +89,8 @@ func (x *RenderPassSampleBufferAttachmentDescriptor) SetSampleBuffer(sampleBuffe
 	x.inner.SetSampleBuffer(sampleBuffer)
 }
 
+// @property startOfVertexSampleIndex @abstract The sample index to use to store the sample taken at the start of vertex processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
+//
 // StartOfVertexSampleIndex calls the underlying StartOfVertexSampleIndex.
 func (x *RenderPassSampleBufferAttachmentDescriptor) StartOfVertexSampleIndex() uint {
 	return x.inner.StartOfVertexSampleIndex()
@@ -87,6 +101,8 @@ func (x *RenderPassSampleBufferAttachmentDescriptor) SetStartOfVertexSampleIndex
 	x.inner.SetStartOfVertexSampleIndex(startOfVertexSampleIndex)
 }
 
+// @property endOfVertexSampleIndex @abstract The sample index to use to store the sample taken at the end of vertex processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
+//
 // EndOfVertexSampleIndex calls the underlying EndOfVertexSampleIndex.
 func (x *RenderPassSampleBufferAttachmentDescriptor) EndOfVertexSampleIndex() uint {
 	return x.inner.EndOfVertexSampleIndex()
@@ -97,6 +113,8 @@ func (x *RenderPassSampleBufferAttachmentDescriptor) SetEndOfVertexSampleIndex(e
 	x.inner.SetEndOfVertexSampleIndex(endOfVertexSampleIndex)
 }
 
+// @property startOfFragmentSampleIndex @abstract The sample index to use to store the sample taken at the start of fragment processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
+//
 // StartOfFragmentSampleIndex calls the underlying StartOfFragmentSampleIndex.
 func (x *RenderPassSampleBufferAttachmentDescriptor) StartOfFragmentSampleIndex() uint {
 	return x.inner.StartOfFragmentSampleIndex()
@@ -107,6 +125,8 @@ func (x *RenderPassSampleBufferAttachmentDescriptor) SetStartOfFragmentSampleInd
 	x.inner.SetStartOfFragmentSampleIndex(startOfFragmentSampleIndex)
 }
 
+// @property endOfFragmentSampleIndex @abstract The sample index to use to store the sample taken at the end of fragment processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a render pass will fail.
+//
 // EndOfFragmentSampleIndex calls the underlying EndOfFragmentSampleIndex.
 func (x *RenderPassSampleBufferAttachmentDescriptor) EndOfFragmentSampleIndex() uint {
 	return x.inner.EndOfFragmentSampleIndex()

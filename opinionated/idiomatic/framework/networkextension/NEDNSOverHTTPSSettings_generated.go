@@ -37,18 +37,24 @@ func NewNEDNSOverHTTPSSettings() *NEDNSOverHTTPSSettings {
 	return &NEDNSOverHTTPSSettings{inner: raw.NEDNSOverHTTPSSettingsFromID(_id)}
 }
 
+// @property serverURL @discussion The URL to which to make DNS-over-HTTPS requests. The format should be an HTTPS URL with the path indicating the location of the DNS-over-HTTPS server, such as: "https://dnsserver.example.net/dns-query".
+//
 // WithServerURL sets the serverURL property and returns the receiver for chaining.
 func (x *NEDNSOverHTTPSSettings) WithServerURL(serverURL string) *NEDNSOverHTTPSSettings {
 	x.inner.SetServerURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(serverURL)))
 	return x
 }
 
+// @property identityReference @discussion The optional certificate identity keychain reference to use as a TLS client certificate.
+//
 // WithIdentityReference sets the identityReference property and returns the receiver for chaining.
 func (x *NEDNSOverHTTPSSettings) WithIdentityReference(identityReference *foundation.NSData) *NEDNSOverHTTPSSettings {
 	x.inner.SetIdentityReference(identityReference)
 	return x
 }
 
+// @property searchDomains @discussion An array of DNS server search domain strings.
+//
 // WithSearchDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEDNSOverHTTPSSettings) WithSearchDomains(items ...*foundation.NSString) *NEDNSOverHTTPSSettings {
 	if len(items) == 0 {
@@ -67,12 +73,16 @@ func (x *NEDNSOverHTTPSSettings) WithSearchDomains(items ...*foundation.NSString
 	return x
 }
 
+// @property domainName @discussion A string containing the DNS domain.
+//
 // WithDomainName sets the domainName property and returns the receiver for chaining.
 func (x *NEDNSOverHTTPSSettings) WithDomainName(domainName string) *NEDNSOverHTTPSSettings {
 	x.inner.NEDNSSettings.SetDomainName(foundation.NSStringStringWithUTF8String(domainName))
 	return x
 }
 
+// @property matchDomains @discussion An array of strings containing domain strings. If this property is non-nil, the DNS settings will only be used to resolve host names within the specified domains.
+//
 // WithMatchDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEDNSOverHTTPSSettings) WithMatchDomains(items ...*foundation.NSString) *NEDNSOverHTTPSSettings {
 	if len(items) == 0 {
@@ -91,18 +101,24 @@ func (x *NEDNSOverHTTPSSettings) WithMatchDomains(items ...*foundation.NSString)
 	return x
 }
 
+// @property matchDomainsNoSearch @discussion A boolean indicating if the match domains should be appended to the search domain list.  Default is NO (match domains will be appended to the search domain list).
+//
 // WithMatchDomainsNoSearch sets the matchDomainsNoSearch property and returns the receiver for chaining.
 func (x *NEDNSOverHTTPSSettings) WithMatchDomainsNoSearch(matchDomainsNoSearch bool) *NEDNSOverHTTPSSettings {
 	x.inner.NEDNSSettings.SetMatchDomainsNoSearch(matchDomainsNoSearch)
 	return x
 }
 
+// @property allowFailover @discussion A boolean indicating if failover to the default system resolver is permitted on resolution failure.
+//
 // WithAllowFailover sets the allowFailover property and returns the receiver for chaining.
 func (x *NEDNSOverHTTPSSettings) WithAllowFailover(allowFailover bool) *NEDNSOverHTTPSSettings {
 	x.inner.NEDNSSettings.SetAllowFailover(allowFailover)
 	return x
 }
 
+// @property serverURL @discussion The URL to which to make DNS-over-HTTPS requests. The format should be an HTTPS URL with the path indicating the location of the DNS-over-HTTPS server, such as: "https://dnsserver.example.net/dns-query".
+//
 // ServerURL calls the underlying ServerURL.
 func (x *NEDNSOverHTTPSSettings) ServerURL() *foundation.NSURL {
 	return x.inner.ServerURL()
@@ -113,6 +129,8 @@ func (x *NEDNSOverHTTPSSettings) SetServerURL(serverURL string) {
 	x.inner.SetServerURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(serverURL)))
 }
 
+// @property identityReference @discussion The optional certificate identity keychain reference to use as a TLS client certificate.
+//
 // IdentityReference calls the underlying IdentityReference.
 func (x *NEDNSOverHTTPSSettings) IdentityReference() *foundation.NSData {
 	return x.inner.IdentityReference()

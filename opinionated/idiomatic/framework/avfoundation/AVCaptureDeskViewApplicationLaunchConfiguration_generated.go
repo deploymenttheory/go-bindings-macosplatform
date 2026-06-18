@@ -38,18 +38,24 @@ func NewCaptureDeskViewApplicationLaunchConfiguration() *CaptureDeskViewApplicat
 	return &CaptureDeskViewApplicationLaunchConfiguration{inner: raw.AVCaptureDeskViewApplicationLaunchConfigurationFromID(_id)}
 }
 
+// @property mainWindowFrame @abstract Specifies the desired frame of the Desk View application's main window when launched. @discussion Default value is CGRectZero. The app will use a default value in this case (the user's previously selected position). mainWindowFrame is specified in global screen coordinates. When launching the Desk View application from a Mac Catalyst app, window origin is top left. When launched from a native macOS app, window origin is bottom left.
+//
 // WithMainWindowFrame sets the mainWindowFrame property and returns the receiver for chaining.
 func (x *CaptureDeskViewApplicationLaunchConfiguration) WithMainWindowFrame(mainWindowFrame corefoundation.CGRect) *CaptureDeskViewApplicationLaunchConfiguration {
 	x.inner.SetMainWindowFrame(mainWindowFrame)
 	return x
 }
 
+// @property requiresSetUpModeCompletion @abstract Specifies whether presentWithLaunchConfiguration:completionHandler:'s completionHandler fires immediately after the application is launched, or only after the user has completed set up. @discussion The Desk View application launches in set up mode, showing the full field of view of an Ultra Wide camera with a superimposed trapezoid indicating the desk region crop that will be shown once set up is complete. By default, your presentWithLaunchConfiguration:completionHandler:'s completionHandler fires after the Desk View application is launched and visible to the user. By setting this property to YES, your completionHandler only fires when the user has completed set up mode and transitioned to the cropped Desk View mode.
+//
 // WithRequiresSetUpModeCompletion sets the requiresSetUpModeCompletion property and returns the receiver for chaining.
 func (x *CaptureDeskViewApplicationLaunchConfiguration) WithRequiresSetUpModeCompletion(requiresSetUpModeCompletion bool) *CaptureDeskViewApplicationLaunchConfiguration {
 	x.inner.SetRequiresSetUpModeCompletion(requiresSetUpModeCompletion)
 	return x
 }
 
+// @property mainWindowFrame @abstract Specifies the desired frame of the Desk View application's main window when launched. @discussion Default value is CGRectZero. The app will use a default value in this case (the user's previously selected position). mainWindowFrame is specified in global screen coordinates. When launching the Desk View application from a Mac Catalyst app, window origin is top left. When launched from a native macOS app, window origin is bottom left.
+//
 // MainWindowFrame calls the underlying MainWindowFrame.
 func (x *CaptureDeskViewApplicationLaunchConfiguration) MainWindowFrame() corefoundation.CGRect {
 	return x.inner.MainWindowFrame()
@@ -60,6 +66,8 @@ func (x *CaptureDeskViewApplicationLaunchConfiguration) SetMainWindowFrame(mainW
 	x.inner.SetMainWindowFrame(mainWindowFrame)
 }
 
+// @property requiresSetUpModeCompletion @abstract Specifies whether presentWithLaunchConfiguration:completionHandler:'s completionHandler fires immediately after the application is launched, or only after the user has completed set up. @discussion The Desk View application launches in set up mode, showing the full field of view of an Ultra Wide camera with a superimposed trapezoid indicating the desk region crop that will be shown once set up is complete. By default, your presentWithLaunchConfiguration:completionHandler:'s completionHandler fires after the Desk View application is launched and visible to the user. By setting this property to YES, your completionHandler only fires when the user has completed set up mode and transitioned to the cropped Desk View mode.
+//
 // RequiresSetUpModeCompletion calls the underlying RequiresSetUpModeCompletion.
 func (x *CaptureDeskViewApplicationLaunchConfiguration) RequiresSetUpModeCompletion() bool {
 	return x.inner.RequiresSetUpModeCompletion()

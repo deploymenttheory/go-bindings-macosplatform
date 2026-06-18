@@ -1,0 +1,708 @@
+{
+  "schema_version": 1,
+  "framework": "CoreWLAN",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "CWChannel": {
+      "doc": "Encapsulates an IEEE 802.11 channel.",
+      "url": "https://developer.apple.com/documentation/corewlan/cwchannel"
+    },
+    "CWConfiguration": {
+      "doc": "Encapsulates an immutable configuration for an AirPort WLAN interface.",
+      "url": "https://developer.apple.com/documentation/corewlan/cwconfiguration"
+    },
+    "CWInterface": {
+      "doc": "Encapsulates an IEEE 802.11 interface.",
+      "url": "https://developer.apple.com/documentation/corewlan/cwinterface"
+    },
+    "CWMutableConfiguration": {
+      "doc": "Encapsulates a mutable configuration for an AirPort WLAN interface.",
+      "url": "https://developer.apple.com/documentation/corewlan/cwmutableconfiguration"
+    },
+    "CWMutableNetworkProfile": {
+      "doc": "Encapsulates a mutable network profile entry.",
+      "url": "https://developer.apple.com/documentation/corewlan/cwmutablenetworkprofile"
+    },
+    "CWNetwork": {
+      "doc": "Encapsulates an IEEE 802.11 network, providing read-only accessors to various properties of the network.",
+      "url": "https://developer.apple.com/documentation/corewlan/cwnetwork"
+    },
+    "CWNetworkProfile": {
+      "doc": "Encapsulates an immutable network profile entry.",
+      "url": "https://developer.apple.com/documentation/corewlan/cwnetworkprofile"
+    },
+    "CWWiFiClient": {
+      "doc": "A wrapper around the entire Wi-Fi subsystem that you use to access interfaces and set up event notifications.",
+      "url": "https://developer.apple.com/documentation/corewlan/cwwificlient"
+    }
+  },
+  "protocols": {
+    "CWEventDelegate": {
+      "doc": "The interface a Wi-Fi client object uses to notify its delegate about Wi-Fi events.",
+      "url": "https://developer.apple.com/documentation/corewlan/cweventdelegate"
+    }
+  },
+  "enums": {
+    "CWChannelBand": {
+      "doc": "CoreWLAN channel bands.",
+      "url": "https://developer.apple.com/documentation/corewlan/cwchannelband",
+      "members": {
+        "kCWChannelBand2GHz": {
+          "doc": "2.4GHz channel band.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwchannelband/band2ghz"
+        },
+        "kCWChannelBand5GHz": {
+          "doc": "5GHz channel band.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwchannelband/band5ghz"
+        },
+        "kCWChannelBandUnknown": {
+          "doc": "Unknown channel band.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwchannelband/bandunknown"
+        }
+      }
+    },
+    "CWChannelWidth": {
+      "doc": "CoreWLAN channel widths.",
+      "url": "https://developer.apple.com/documentation/corewlan/cwchannelwidth",
+      "members": {
+        "kCWChannelWidth160MHz": {
+          "doc": "160MHz channel width.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwchannelwidth/width160mhz"
+        },
+        "kCWChannelWidth20MHz": {
+          "doc": "20MHz channel width.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwchannelwidth/width20mhz"
+        },
+        "kCWChannelWidth40MHz": {
+          "doc": "40MHz channel width.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwchannelwidth/width40mhz"
+        },
+        "kCWChannelWidth80MHz": {
+          "doc": "80MHz channel width.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwchannelwidth/width80mhz"
+        },
+        "kCWChannelWidthUnknown": {
+          "doc": "Unknown channel width.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwchannelwidth/widthunknown"
+        }
+      }
+    },
+    "CWCipherKeyFlags": {
+      "doc": "Cipher key flags.",
+      "url": "https://developer.apple.com/documentation/corewlan/cwcipherkeyflags",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Creates a cipher key flags structure with the specified raw value.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwcipherkeyflags/init(rawvalue:)"
+        },
+        "kCWCipherKeyFlagsMulticast": {
+          "doc": "A flag that indicates to use the cipher key for multicast packets.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwcipherkeyflags/multicast"
+        },
+        "kCWCipherKeyFlagsNone": {
+          "doc": "Open System authentication.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwcipherkeyflags/kcwcipherkeyflagsnone"
+        },
+        "kCWCipherKeyFlagsRx": {
+          "doc": "A flag that indicates to use the cipher key for packets received by the interface.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwcipherkeyflags/rx"
+        },
+        "kCWCipherKeyFlagsTx": {
+          "doc": "A flag that indicates to use the cipher key for packets sent from the interface.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwcipherkeyflags/tx"
+        },
+        "kCWCipherKeyFlagsUnicast": {
+          "doc": "A flag that indicates to use the cipher key for unicast packets.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwcipherkeyflags/unicast"
+        }
+      }
+    },
+    "CWErr": {
+      "url": "https://developer.apple.com/documentation/corewlan/cwerr"
+    },
+    "CWEventType": {
+      "doc": "Wi-Fi event types.",
+      "url": "https://developer.apple.com/documentation/corewlan/cweventtype",
+      "members": {
+        "CWEventTypeBSSIDDidChange": {
+          "doc": "Posts when the current BSSID of any Wi-Fi interface changes.",
+          "url": "https://developer.apple.com/documentation/corewlan/cweventtype/bssiddidchange"
+        },
+        "CWEventTypeCountryCodeDidChange": {
+          "doc": "Posts when the adopted country code of any Wi-Fi interface changes.",
+          "url": "https://developer.apple.com/documentation/corewlan/cweventtype/countrycodedidchange"
+        },
+        "CWEventTypeLinkDidChange": {
+          "doc": "Posts when the link state for any Wi-Fi interface changes.",
+          "url": "https://developer.apple.com/documentation/corewlan/cweventtype/linkdidchange"
+        },
+        "CWEventTypeLinkQualityDidChange": {
+          "doc": "Posts when the RSSI or transmit rate for any Wi-Fi interface changes.",
+          "url": "https://developer.apple.com/documentation/corewlan/cweventtype/linkqualitydidchange"
+        },
+        "CWEventTypeModeDidChange": {
+          "doc": "Posts when the operating mode of any Wi-Fi interface changes.",
+          "url": "https://developer.apple.com/documentation/corewlan/cweventtype/modedidchange"
+        },
+        "CWEventTypeNone": {
+          "doc": "No specified event type.",
+          "url": "https://developer.apple.com/documentation/corewlan/cweventtype/none"
+        },
+        "CWEventTypePowerDidChange": {
+          "doc": "Posts when the power state of any Wi-Fi interface changes.",
+          "url": "https://developer.apple.com/documentation/corewlan/cweventtype/powerdidchange"
+        },
+        "CWEventTypeSSIDDidChange": {
+          "doc": "Posts when the current SSID of any Wi-Fi interface changes.",
+          "url": "https://developer.apple.com/documentation/corewlan/cweventtype/ssiddidchange"
+        },
+        "CWEventTypeScanCacheUpdated": {
+          "doc": "Posts when the scan cache of any Wi-Fi interface is updated with new scan results.",
+          "url": "https://developer.apple.com/documentation/corewlan/cweventtype/scancacheupdated"
+        },
+        "CWEventTypeUnknown": {
+          "doc": "Unknown event type.",
+          "url": "https://developer.apple.com/documentation/corewlan/cweventtype/unknown"
+        }
+      }
+    },
+    "CWIBSSModeSecurity": {
+      "doc": "IBSS mode security types.",
+      "url": "https://developer.apple.com/documentation/corewlan/cwibssmodesecurity",
+      "members": {
+        "kCWIBSSModeSecurityNone": {
+          "doc": "Open System authentication.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwibssmodesecurity/none"
+        },
+        "kCWIBSSModeSecurityWEP104": {
+          "doc": "WPA Personal authentication.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwibssmodesecurity/wep104"
+        },
+        "kCWIBSSModeSecurityWEP40": {
+          "doc": "WEP security.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwibssmodesecurity/wep40"
+        }
+      }
+    },
+    "CWInterfaceMode": {
+      "doc": "Wi-Fi interface operating modes.",
+      "url": "https://developer.apple.com/documentation/corewlan/cwinterfacemode",
+      "members": {
+        "kCWInterfaceModeHostAP": {
+          "doc": "Interface is participating in an infrastructure network as an access point.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwinterfacemode/hostap"
+        },
+        "kCWInterfaceModeIBSS": {
+          "doc": "Interface is participating in an IBSS network.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwinterfacemode/ibss"
+        },
+        "kCWInterfaceModeNone": {
+          "doc": "Interface is not in any mode.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwinterfacemode/none"
+        },
+        "kCWInterfaceModeStation": {
+          "doc": "Interface is participating in an infrastructure network as a non-AP station.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwinterfacemode/station"
+        }
+      }
+    },
+    "CWKeychainDomain": {
+      "doc": "Keychain domain types that CoreWLAN keychain methods use.",
+      "url": "https://developer.apple.com/documentation/corewlan/cwkeychaindomain",
+      "members": {
+        "kCWKeychainDomainNone": {
+          "doc": "No keychain domain specified.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwkeychaindomain/none"
+        },
+        "kCWKeychainDomainSystem": {
+          "doc": "The system keychain domain.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwkeychaindomain/system"
+        },
+        "kCWKeychainDomainUser": {
+          "doc": "The user keychain domain.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwkeychaindomain/user"
+        }
+      }
+    },
+    "CWPHYMode": {
+      "doc": "CoreWLAN physical layer modes.",
+      "url": "https://developer.apple.com/documentation/corewlan/cwphymode",
+      "members": {
+        "kCWPHYMode11a": {
+          "doc": "IEEE 802.11a PHY.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwphymode/mode11a"
+        },
+        "kCWPHYMode11ac": {
+          "doc": "IEEE 802.11ac PHY.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwphymode/mode11ac"
+        },
+        "kCWPHYMode11b": {
+          "doc": "IEEE 802.11b PHY.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwphymode/mode11b"
+        },
+        "kCWPHYMode11g": {
+          "doc": "IEEE 802.11g PHY.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwphymode/mode11g"
+        },
+        "kCWPHYMode11n": {
+          "doc": "IEEE 802.11n PHY.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwphymode/mode11n"
+        },
+        "kCWPHYModeNone": {
+          "doc": "No specified mode.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwphymode/modenone"
+        }
+      }
+    },
+    "CWSecurity": {
+      "doc": "CoreWLAN security types.",
+      "url": "https://developer.apple.com/documentation/corewlan/cwsecurity",
+      "members": {
+        "kCWSecurityDynamicWEP": {
+          "doc": "Dynamic WEP security.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwsecurity/dynamicwep"
+        },
+        "kCWSecurityEnterprise": {
+          "doc": "Enterprise authentication.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwsecurity/enterprise"
+        },
+        "kCWSecurityNone": {
+          "doc": "Open System authentication.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwsecurity/none"
+        },
+        "kCWSecurityPersonal": {
+          "doc": "Personal authentication.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwsecurity/personal"
+        },
+        "kCWSecurityUnknown": {
+          "doc": "Unknown security type.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwsecurity/unknown"
+        },
+        "kCWSecurityWEP": {
+          "doc": "WEP security.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwsecurity/wep"
+        },
+        "kCWSecurityWPA2Enterprise": {
+          "doc": "WPA2 Enterprise authentication.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwsecurity/wpa2enterprise"
+        },
+        "kCWSecurityWPA2Personal": {
+          "doc": "WPA2 Personal authentication.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwsecurity/wpa2personal"
+        },
+        "kCWSecurityWPA3Enterprise": {
+          "doc": "WPA3 Enterprise authentication.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwsecurity/wpa3enterprise"
+        },
+        "kCWSecurityWPA3Personal": {
+          "doc": "WPA3 Personal authentication.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwsecurity/wpa3personal"
+        },
+        "kCWSecurityWPA3Transition": {
+          "doc": "WPA3 Transition (WPA3/WPA2 Personal) authentication.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwsecurity/wpa3transition"
+        },
+        "kCWSecurityWPAEnterprise": {
+          "doc": "WPA Enterprise authentication.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwsecurity/wpaenterprise"
+        },
+        "kCWSecurityWPAEnterpriseMixed": {
+          "doc": "WPA/WPA2 Enterprise authentication.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwsecurity/wpaenterprisemixed"
+        },
+        "kCWSecurityWPAPersonal": {
+          "doc": "WPA Personal authentication.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwsecurity/wpapersonal"
+        },
+        "kCWSecurityWPAPersonalMixed": {
+          "doc": "WPA/WPA2 Personal authentication.",
+          "url": "https://developer.apple.com/documentation/corewlan/cwsecurity/wpapersonalmixed"
+        }
+      }
+    }
+  },
+  "methods": {
+    "CWChannel": {
+      "-isEqualToChannel:": {
+        "doc": "Determine CWChannel object equality.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwchannel/isequal(to:)"
+      }
+    },
+    "CWConfiguration": {
+      "+configuration": {
+        "doc": "Convenience method for getting an empty CWConfiguration object.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwconfiguration/configuration"
+      },
+      "+configurationWithConfiguration:": {
+        "doc": "Convenience method for getting a CWConfiguration object initialized with the given CWConfiguration object.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwconfiguration/configurationwithconfiguration:"
+      },
+      "-init": {
+        "doc": "Creates an empty CWConfiguration object.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwconfiguration/init()"
+      },
+      "-initWithConfiguration:": {
+        "doc": "Creates and returns a CWConfiguration object initialized with the given CWConfiguration object.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwconfiguration/init(configuration:)"
+      },
+      "-isEqualToConfiguration:": {
+        "doc": "Determine CWConfiguration object equality.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwconfiguration/isequal(to:)"
+      }
+    },
+    "CWInterface": {
+      "+interface": {
+        "doc": "Convenience method for getting an CWInterface object for the default WLAN interface.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/interface"
+      },
+      "+interfaceNames": {
+        "doc": "Returns the list of BSD names for WLAN interfaces available on the current system.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/interfacenames()"
+      },
+      "+interfaceWithName:": {
+        "doc": "An instance method for obtaining an CWInterface object.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/init(name:)"
+      },
+      "-activePHYMode": {
+        "doc": "The current active PHY modes for the interface.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/activephymode()"
+      },
+      "-associateToEnterpriseNetwork:identity:username:password:error:": {
+        "doc": "Connects to the given enterprise network.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/associate(toenterprisenetwork:identity:username:password:)"
+      },
+      "-associateToNetwork:password:error:": {
+        "doc": "Associates to a given network using the given network passphrase.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/associate(to:password:)"
+      },
+      "-bssid": {
+        "doc": "The current basic service set identifier (BSSID) for the interface, returned as a UTF-8 string.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/bssid()"
+      },
+      "-cachedScanResults": {
+        "doc": "The networks currently in the scan cache for the WLAN interface.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/cachedscanresults()"
+      },
+      "-commitConfiguration:authorization:error:": {
+        "doc": "Commit a configuration for the given WLAN interface.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/commitconfiguration(_:authorization:)"
+      },
+      "-configuration": {
+        "doc": "The current configuration for the given WLAN interface.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/configuration()"
+      },
+      "-countryCode": {
+        "doc": "The current country code (ISO/IEC 3166-1:1997) for the interface.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/countrycode()"
+      },
+      "-disassociate": {
+        "doc": "Disassociates from the current network.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/disassociate()"
+      },
+      "-hardwareAddress": {
+        "doc": "The hardware media access control (MAC) address for the interface, returned as a UTF-8 string.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/hardwareaddress()"
+      },
+      "-initWithInterfaceName:": {
+        "doc": "Convenience method for getting an CWInterface object with the specified name.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/init(interfacename:)"
+      },
+      "-interfaceMode": {
+        "doc": "The current mode for the interface.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/interfacemode()"
+      },
+      "-noiseMeasurement": {
+        "doc": "The current aggregate noise measurement (dBm) for the interface.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/noisemeasurement()"
+      },
+      "-powerOn": {
+        "doc": "The interface power state is set to “ON”.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/poweron()"
+      },
+      "-rssiValue": {
+        "doc": "The current aggregate received signal strength indication (RSSI) measurement (dBm) for the interface.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/rssivalue()"
+      },
+      "-scanForNetworksWithName:error:": {
+        "doc": "Scans for networks.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/scanfornetworks(withname:)"
+      },
+      "-scanForNetworksWithName:includeHidden:error:": {
+        "doc": "Scans for networks with the name you specify, optionally including hidden networks.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/scanfornetworks(withname:includehidden:)"
+      },
+      "-scanForNetworksWithSSID:error:": {
+        "doc": "Scans for networks.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/scanfornetworks(withssid:)"
+      },
+      "-scanForNetworksWithSSID:includeHidden:error:": {
+        "doc": "Scans for networks with the SSID you specify, optionally including hidden networks.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/scanfornetworks(withssid:includehidden:)"
+      },
+      "-security": {
+        "doc": "The current security mode for the interface.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/security()"
+      },
+      "-serviceActive": {
+        "doc": "The interface has its corresponding network service enabled.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/serviceactive()"
+      },
+      "-setPairwiseMasterKey:error:": {
+        "doc": "Sets the interface pairwise primary key (PMK).",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/setpairwisemasterkey(_:)"
+      },
+      "-setPower:error:": {
+        "doc": "Sets the interface power state.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/setpower(_:)"
+      },
+      "-setWEPKey:flags:index:error:": {
+        "doc": "Sets the interface WEP key.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/setwepkey(_:flags:index:)"
+      },
+      "-setWLANChannel:error:": {
+        "doc": "Sets the interface channel.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/setwlanchannel(_:)"
+      },
+      "-ssid": {
+        "doc": "The current service set identifier (SSID) for the interface, encoded as a string.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/ssid()"
+      },
+      "-ssidData": {
+        "doc": "The current service set identifier (SSID) for the interface, returned as data.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/ssiddata()"
+      },
+      "-startIBSSModeWithSSID:security:channel:password:error:": {
+        "doc": "Creates a computer-to-computer (ad-hoc) network with the given network name, security type, and password on the specified channel.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/startibssmode(withssid:security:channel:password:)"
+      },
+      "-supportedWLANChannels": {
+        "doc": "An array of channels supported by the interface for the active country code.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/supportedwlanchannels()"
+      },
+      "-transmitPower": {
+        "doc": "The current transmit power (mW) for the interface.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/transmitpower()"
+      },
+      "-transmitRate": {
+        "doc": "The current transmit rate (Mbps) for the interface.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/transmitrate()"
+      },
+      "-wlanChannel": {
+        "doc": "The current channel for the interface.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/wlanchannel()"
+      }
+    },
+    "CWNetwork": {
+      "-isEqualToNetwork:": {
+        "doc": "Method for determining CWNetwork object equality.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwnetwork/isequal(to:)"
+      },
+      "-supportsPHYMode:": {
+        "doc": "Method for determining which PHY modes a network supports.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwnetwork/supportsphymode(_:)"
+      },
+      "-supportsSecurity:": {
+        "doc": "Method for determining which security types a network supports.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwnetwork/supportssecurity(_:)"
+      }
+    },
+    "CWNetworkProfile": {
+      "+networkProfile": {
+        "doc": "Convenience method for getting a CWNetworkProfile object.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwnetworkprofile/networkprofile"
+      },
+      "+networkProfileWithNetworkProfile:": {
+        "doc": "Convenience method for getting a CWNetworkProfile object initialized with the given CWNetworkProfile object.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwnetworkprofile/networkprofilewithnetworkprofile:"
+      },
+      "-init": {
+        "doc": "Creates and returns a CWNetworkProfile object.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwnetworkprofile/init()"
+      },
+      "-initWithNetworkProfile:": {
+        "doc": "Creates and returns a CWNetworkProfile object initialized with the given CWNetworkProfile object.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwnetworkprofile/init(networkprofile:)"
+      },
+      "-isEqualToNetworkProfile:": {
+        "doc": "Determine CWNetworkProfile object equality.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwnetworkprofile/isequal(to:)"
+      }
+    },
+    "CWWiFiClient": {
+      "+interfaceNames": {
+        "doc": "Returns the list of the names of available Wi-Fi interfaces.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwwificlient/interfacenames()-swift.type.method"
+      },
+      "+sharedWiFiClient": {
+        "doc": "The shared Wi-Fi client object.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwwificlient/shared()"
+      },
+      "-init": {
+        "doc": "Initializes a Wi-Fi client object.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwwificlient/init()"
+      },
+      "-interface": {
+        "doc": "Returns the default Wi-Fi interface.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwwificlient/interface()"
+      },
+      "-interfaceWithName:": {
+        "doc": "Returns the Wi-Fi interface with the given name.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwwificlient/interface(withname:)"
+      },
+      "-interfaces": {
+        "doc": "Returns all available Wi-Fi interfaces.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwwificlient/interfaces()"
+      },
+      "-startMonitoringEventWithType:error:": {
+        "doc": "Register for specific Wi-Fi event notifications.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwwificlient/startmonitoringevent(with:)"
+      },
+      "-stopMonitoringAllEventsAndReturnError:": {
+        "doc": "Unregister for all Wi-Fi event notifications.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwwificlient/stopmonitoringallevents()"
+      },
+      "-stopMonitoringEventWithType:error:": {
+        "doc": "Unregister for specific Wi-Fi event notifications.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwwificlient/stopmonitoringevent(with:)"
+      }
+    }
+  },
+  "properties": {
+    "CWChannel": {
+      "channelBand": {
+        "doc": "The channel band.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwchannel/channelband"
+      },
+      "channelNumber": {
+        "doc": "The channel number.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwchannel/channelnumber"
+      },
+      "channelWidth": {
+        "doc": "The channel width.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwchannel/channelwidth"
+      }
+    },
+    "CWConfiguration": {
+      "networkProfiles": {
+        "doc": "An array of remembered CWNetworkProfile objects.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwconfiguration/networkprofiles"
+      },
+      "rememberJoinedNetworks": {
+        "doc": "AirPort client will remember all joined networks.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwconfiguration/rememberjoinednetworks"
+      },
+      "requireAdministratorForAssociation": {
+        "doc": "Require an administrator password to change networks.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwconfiguration/requireadministratorforassociation"
+      },
+      "requireAdministratorForIBSSMode": {
+        "doc": "Require an administrator password to create a computer-to-computer network.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwconfiguration/requireadministratorforibssmode"
+      },
+      "requireAdministratorForPower": {
+        "doc": "Require an administrator password to change the interface power state.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwconfiguration/requireadministratorforpower"
+      }
+    },
+    "CWInterface": {
+      "interfaceName": {
+        "doc": "The BSD name of the interface.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwinterface/interfacename"
+      }
+    },
+    "CWMutableConfiguration": {
+      "networkProfiles": {
+        "doc": "The preferred networks list.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwmutableconfiguration/networkprofiles"
+      },
+      "rememberJoinedNetworks": {
+        "doc": "A Boolean value that determines whether to remember all joined Wi-Fi networks unless the user specifies otherwise when joining a particular Wi-Fi network.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwmutableconfiguration/rememberjoinednetworks"
+      },
+      "requireAdministratorForAssociation": {
+        "doc": "A Boolean value that determines whether to require an administrator password to change networks.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwmutableconfiguration/requireadministratorforassociation"
+      },
+      "requireAdministratorForIBSSMode": {
+        "doc": "A Boolean value that determines whether to require an administrator password to create a computer-to-computer network.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwmutableconfiguration/requireadministratorforibssmode"
+      },
+      "requireAdministratorForPower": {
+        "doc": "A Boolean value that determines whether to require an administrator password to change the interface power state.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwmutableconfiguration/requireadministratorforpower"
+      }
+    },
+    "CWMutableNetworkProfile": {
+      "security": {
+        "doc": "The security type.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwmutablenetworkprofile/security"
+      },
+      "ssidData": {
+        "doc": "The service set identifier (SSID).",
+        "url": "https://developer.apple.com/documentation/corewlan/cwmutablenetworkprofile/ssiddata"
+      }
+    },
+    "CWNetwork": {
+      "beaconInterval": {
+        "doc": "The beacon interval (ms) for the network.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwnetwork/beaconinterval"
+      },
+      "bssid": {
+        "doc": "The basic service set identifier (BSSID) for the network, returned as UTF-8 string.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwnetwork/bssid"
+      },
+      "countryCode": {
+        "doc": "The country code (ISO/IEC 3166-1:1997) for the network.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwnetwork/countrycode"
+      },
+      "ibss": {
+        "doc": "The network is an IBSS network.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwnetwork/ibss"
+      },
+      "informationElementData": {
+        "doc": "Information element data included in beacon or probe response frames.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwnetwork/informationelementdata"
+      },
+      "noiseMeasurement": {
+        "doc": "The aggregate noise measurement (dBm) for the network.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwnetwork/noisemeasurement"
+      },
+      "rssiValue": {
+        "doc": "The aggregate received signal strength indication (RSSI) measurement (dBm) for the network.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwnetwork/rssivalue"
+      },
+      "ssid": {
+        "doc": "The service set identifier (SSID) for the network, encoded as a string.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwnetwork/ssid"
+      },
+      "ssidData": {
+        "doc": "The service set identifier (SSID) for the network, returned as data.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwnetwork/ssiddata"
+      },
+      "wlanChannel": {
+        "doc": "The channel for the network.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwnetwork/wlanchannel"
+      }
+    },
+    "CWNetworkProfile": {
+      "security": {
+        "doc": "The security mode for the network profile.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwnetworkprofile/security"
+      },
+      "ssid": {
+        "doc": "The service set identifier (SSID) for the network profile, encoded as a string.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwnetworkprofile/ssid"
+      },
+      "ssidData": {
+        "doc": "The service set identifier (SSID) for the network profile, returned as data.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwnetworkprofile/ssiddata"
+      }
+    },
+    "CWWiFiClient": {
+      "delegate": {
+        "doc": "An object that provides Wi-Fi event handling.",
+        "url": "https://developer.apple.com/documentation/corewlan/cwwificlient/delegate"
+      }
+    }
+  }
+}

@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The host audio input stream source that provides audio from the host system’s default input device.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzhostaudioinputstreamsource
 type VZHostAudioInputStreamSource struct {
 	VZAudioInputStreamSource
@@ -29,6 +31,7 @@ func VZHostAudioInputStreamSourceFromID(id objc.ID) *VZHostAudioInputStreamSourc
 	return o
 }
 
+// Creates a new audio input stream source.
 func (o *VZHostAudioInputStreamSource) Init() *VZHostAudioInputStreamSource {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZHostAudioInputStreamSourceSelInit)
 	if _ret != 0 {

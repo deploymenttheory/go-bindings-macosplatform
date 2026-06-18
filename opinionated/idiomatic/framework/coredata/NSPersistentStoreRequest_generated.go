@@ -68,8 +68,17 @@ func (x *PersistentStoreRequest) AffectedStores() []*PersistentStore {
 }
 
 // SetAffectedStores calls the underlying SetAffectedStores.
-func (x *PersistentStoreRequest) SetAffectedStores(affectedStores *foundation.NSArray[*raw.NSPersistentStore]) {
-	x.inner.SetAffectedStores(affectedStores)
+func (x *PersistentStoreRequest) SetAffectedStores(affectedStores ...PersistentStoreProvider) {
+	_ptrs := make([]objc.ID, len(affectedStores))
+	for _i, _v := range affectedStores {
+		_ptrs[_i] = _v.asPersistentStore().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.NSPersistentStore]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.NSPersistentStore](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetAffectedStores(_arg0)
 }
 
 // RequestType calls the underlying RequestType.
@@ -86,7 +95,7 @@ type PersistentStoreRequestable interface {
 	Unwrap() *raw.NSPersistentStoreRequest
 	WithAffectedStores(items ...PersistentStoreProvider) *PersistentStoreRequest
 	AffectedStores() []*PersistentStore
-	SetAffectedStores(affectedStores *foundation.NSArray[*raw.NSPersistentStore])
+	SetAffectedStores(affectedStores ...PersistentStoreProvider)
 	RequestType() NSPersistentStoreRequestType
 }
 

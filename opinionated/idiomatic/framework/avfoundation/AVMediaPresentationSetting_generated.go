@@ -37,6 +37,8 @@ func NewMediaPresentationSetting() *MediaPresentationSetting {
 	return &MediaPresentationSetting{inner: raw.AVMediaPresentationSettingFromID(_id)}
 }
 
+// Returns the display name for the selectable setting that best matches the specified locale identifier.
+//
 // DisplayNameForLocaleIdentifier calls the underlying DisplayNameForLocaleIdentifier.
 func (x *MediaPresentationSetting) DisplayNameForLocaleIdentifier(localeIdentifier string) string {
 	_r := x.inner.DisplayNameForLocaleIdentifier(foundation.NSStringStringWithUTF8String(localeIdentifier))
@@ -46,6 +48,8 @@ func (x *MediaPresentationSetting) DisplayNameForLocaleIdentifier(localeIdentifi
 	return purego.GoString(_r.Ptr())
 }
 
+// Provides the media characteristic that corresponds to the selectable setting.
+//
 // MediaCharacteristic calls the underlying MediaCharacteristic.
 func (x *MediaPresentationSetting) MediaCharacteristic() string {
 	_r := x.inner.MediaCharacteristic()

@@ -31,6 +31,8 @@ func SamplerNodeDefinitionFromID(id objc.ID) *SamplerNodeDefinition {
 	return &SamplerNodeDefinition{inner: raw.PHASESamplerNodeDefinitionFromID(id)}
 }
 
+// @method initWithSoundAssetIdentifier:mixerDefinition:identifier @abstract Create a sampler node definition @param soundAssetIdentifier The identifier of the registered sound asset this sampler will play @param mixerDefinition The mixer definition this sampler will be assigned to @param identifier An optional custom identifier to give to this object @return A new PHASESamplerNodeDefinition object
+//
 // NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinitionIdentifier creates a new [SamplerNodeDefinition].
 func NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinitionIdentifier(soundAssetIdentifier string, mixerDefinition *raw.PHASEMixerDefinition, identifier string) *SamplerNodeDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASESamplerNodeDefinition")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinitionIdentifier(s
 	return &SamplerNodeDefinition{inner: raw.PHASESamplerNodeDefinitionFromID(_id)}
 }
 
+// @method initWithSoundAssetIdentifier:mixerDefinition @abstract Create a sampler node definition @param soundAssetIdentifier The identifier of the registered sound asset this sampler will play @param mixerDefinition The mixer definition this sampler will be assigned to @return A new PHASESamplerNodeDefinition object
+//
 // NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinition creates a new [SamplerNodeDefinition].
 func NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinition(soundAssetIdentifier string, mixerDefinition *raw.PHASEMixerDefinition) *SamplerNodeDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASESamplerNodeDefinition")), objc.RegisterName("alloc"))
@@ -45,42 +49,56 @@ func NewSamplerNodeDefinitionWithSoundAssetIdentifierMixerDefinition(soundAssetI
 	return &SamplerNodeDefinition{inner: raw.PHASESamplerNodeDefinitionFromID(_id)}
 }
 
+// @property cullOption @abstract The cull option for the sampler. @discussion The default value is PHASECullOptionTerminate.
+//
 // WithCullOption sets the cullOption property and returns the receiver for chaining.
 func (x *SamplerNodeDefinition) WithCullOption(cullOption PHASECullOption) *SamplerNodeDefinition {
 	x.inner.SetCullOption(raw.PHASECullOption(cullOption))
 	return x
 }
 
+// @property playbackMode @abstract The playback mode for the sampler. @discussion If the playback mode is set to PHASEPlaybackModeOneShot, you need to make sure the the audio data in the registered sound asset associated with this sampler begins and ends at zero crossings. Otherwise, you'll hear a click when beginning playback and / or ending playback. If the playback mode is set to PHASEPlaybackModeLooping, you need to make sure the audio data in the registered sound asset associated with this sampler loops smoothly from the end sample to the start sample. Please verify this during authoring. Failing to do so will result in audible clicks at loop boundaries. The default value is PHASEPlaybackModeOneShot.
+//
 // WithPlaybackMode sets the playbackMode property and returns the receiver for chaining.
 func (x *SamplerNodeDefinition) WithPlaybackMode(playbackMode PHASEPlaybackMode) *SamplerNodeDefinition {
 	x.inner.SetPlaybackMode(raw.PHASEPlaybackMode(playbackMode))
 	return x
 }
 
+// @property rate @abstract Linear rate scalar. @note Values are clamped to the range [0.25, 4]. Default value is 1.
+//
 // WithRate sets the rate property and returns the receiver for chaining.
 func (x *SamplerNodeDefinition) WithRate(rate float64) *SamplerNodeDefinition {
 	x.inner.PHASEGeneratorNodeDefinition.SetRate(rate)
 	return x
 }
 
+// @property group @abstract The PHASEGroup object this generator should be associated with for gain and rate control.
+//
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *SamplerNodeDefinition) WithGroup(group *Group) *SamplerNodeDefinition {
 	x.inner.PHASEGeneratorNodeDefinition.SetGroup(group.Unwrap())
 	return x
 }
 
+// @property gainMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable dynamic control of the gain during playback.
+//
 // WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
 func (x *SamplerNodeDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SamplerNodeDefinition {
 	x.inner.PHASEGeneratorNodeDefinition.SetGainMetaParameterDefinition(gainMetaParameterDefinition.asNumberMetaParameterDefinition())
 	return x
 }
 
+// @property rateMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable dynamic control of the rate during playback.
+//
 // WithRateMetaParameterDefinition sets the rateMetaParameterDefinition property and returns the receiver for chaining.
 func (x *SamplerNodeDefinition) WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SamplerNodeDefinition {
 	x.inner.PHASEGeneratorNodeDefinition.SetRateMetaParameterDefinition(rateMetaParameterDefinition.asNumberMetaParameterDefinition())
 	return x
 }
 
+// @property assetIdentifier @abstract The identifier that uniquely represents the registered sound asset this sampler will play.
+//
 // AssetIdentifier calls the underlying AssetIdentifier.
 func (x *SamplerNodeDefinition) AssetIdentifier() string {
 	_r := x.inner.AssetIdentifier()
@@ -90,6 +108,8 @@ func (x *SamplerNodeDefinition) AssetIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property cullOption @abstract The cull option for the sampler. @discussion The default value is PHASECullOptionTerminate.
+//
 // CullOption calls the underlying CullOption.
 func (x *SamplerNodeDefinition) CullOption() PHASECullOption {
 	return PHASECullOption(x.inner.CullOption())
@@ -100,6 +120,8 @@ func (x *SamplerNodeDefinition) SetCullOption(cullOption PHASECullOption) {
 	x.inner.SetCullOption(raw.PHASECullOption(cullOption))
 }
 
+// @property playbackMode @abstract The playback mode for the sampler. @discussion If the playback mode is set to PHASEPlaybackModeOneShot, you need to make sure the the audio data in the registered sound asset associated with this sampler begins and ends at zero crossings. Otherwise, you'll hear a click when beginning playback and / or ending playback. If the playback mode is set to PHASEPlaybackModeLooping, you need to make sure the audio data in the registered sound asset associated with this sampler loops smoothly from the end sample to the start sample. Please verify this during authoring. Failing to do so will result in audible clicks at loop boundaries. The default value is PHASEPlaybackModeOneShot.
+//
 // PlaybackMode calls the underlying PlaybackMode.
 func (x *SamplerNodeDefinition) PlaybackMode() PHASEPlaybackMode {
 	return PHASEPlaybackMode(x.inner.PlaybackMode())

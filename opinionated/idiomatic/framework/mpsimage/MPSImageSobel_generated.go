@@ -32,6 +32,8 @@ func ImageSobelFromID(id objc.ID) *ImageSobel {
 	return &ImageSobel{inner: raw.MPSImageSobelFromID(id)}
 }
 
+// @abstract   Initialize a Sobel filter on a given device using the default color transform. Default: BT.601/JPEG {0.299f, 0.587f, 0.114f} For non-default conversion matrices, use -initWithDevice:linearGrayColorTransform: @param      device  The device the filter will run on @return     A valid object or nil, if failure.
+//
 // NewImageSobelWithDevice creates a new [ImageSobel].
 func NewImageSobelWithDevice(device metal.MTLDevice) *ImageSobel {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageSobel")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewImageSobelWithDevice(device metal.MTLDevice) *ImageSobel {
 	return &ImageSobel{inner: raw.MPSImageSobelFromID(_id)}
 }
 
+// @abstract   Initialize a Sobel filter on a given device with a non-default color transform @param      device          The device the filter will run on @param      transform       Array of three floats describing the rgb to gray scale color transform. @code Luminance = transform[0] * pixel.x + transform[1] * pixel.y + transform[2] * pixel.z; @endcode @return     A valid object or nil, if failure.
+//
 // NewImageSobelWithDeviceLinearGrayColorTransform creates a new [ImageSobel].
 func NewImageSobelWithDeviceLinearGrayColorTransform(device metal.MTLDevice, transform *float32) *ImageSobel {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageSobel")), objc.RegisterName("alloc"))
@@ -46,6 +50,8 @@ func NewImageSobelWithDeviceLinearGrayColorTransform(device metal.MTLDevice, tra
 	return &ImageSobel{inner: raw.MPSImageSobelFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+//
 // NewImageSobelWithCoderDevice creates a new [ImageSobel].
 func NewImageSobelWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageSobel {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageSobel")), objc.RegisterName("alloc"))
@@ -53,24 +59,32 @@ func NewImageSobelWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTL
 	return &ImageSobel{inner: raw.MPSImageSobelFromID(_id)}
 }
 
+// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+//
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *ImageSobel) WithOffset(offset mpscore.MPSOffset) *ImageSobel {
 	x.inner.MPSUnaryImageKernel.SetOffset(offset)
 	return x
 }
 
+// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+//
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *ImageSobel) WithClipRect(clipRect metal.MTLRegion) *ImageSobel {
 	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
 	return x
 }
 
+// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
+//
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *ImageSobel) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageSobel {
 	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
 	return x
 }
 
+// @property    colorTransform @discussion  Returns a pointer to the array of three floats used to convert RGBA, RGB or RG images to the destination format when the destination is monochrome.
+//
 // ColorTransform calls the underlying ColorTransform.
 func (x *ImageSobel) ColorTransform() *float32 {
 	return x.inner.ColorTransform()

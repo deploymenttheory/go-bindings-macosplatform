@@ -29,6 +29,8 @@ func OpticalFlowParametersFromID(id objc.ID) *OpticalFlowParameters {
 	return &OpticalFlowParameters{inner: raw.VTOpticalFlowParametersFromID(id)}
 }
 
+// Creates a new optical flow parameters object. Returns `nil` if `sourceFrame` or `nextFrame` is `nil`, or if `sourceFrame` and `nextFrame` have different pixel formats. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - nextFrame: Next source frame in presentation time order. - submissionMode: Provides a hint to let the processor know whether you are submitting frames in presentation sequence. For more information about supported modes see “VTOpticalFlowParametersSubmissionMode“. - destinationOpticalFlow: User allocated `VTFrameProcessorOpticalFlow` that receives the results.
+//
 // NewOpticalFlowParametersWithSourceFrameNextFrameSubmissionModeDestinationOpticalFlow creates a new [OpticalFlowParameters].
 func NewOpticalFlowParametersWithSourceFrameNextFrameSubmissionModeDestinationOpticalFlow(sourceFrame *raw.VTFrameProcessorFrame, nextFrame *raw.VTFrameProcessorFrame, submissionMode VTOpticalFlowParametersSubmissionMode, destinationOpticalFlow *raw.VTFrameProcessorOpticalFlow) *OpticalFlowParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTOpticalFlowParameters")), objc.RegisterName("alloc"))
@@ -36,6 +38,8 @@ func NewOpticalFlowParametersWithSourceFrameNextFrameSubmissionModeDestinationOp
 	return &OpticalFlowParameters{inner: raw.VTOpticalFlowParametersFromID(_id)}
 }
 
+// Current source frame, which must be non `nil`.
+//
 // SourceFrame calls the underlying SourceFrame.
 func (x *OpticalFlowParameters) SourceFrame() *FrameProcessorFrame {
 	_r := x.inner.SourceFrame()
@@ -45,6 +49,8 @@ func (x *OpticalFlowParameters) SourceFrame() *FrameProcessorFrame {
 	return &FrameProcessorFrame{inner: _r}
 }
 
+// The next source frame in presentation time order.
+//
 // NextFrame calls the underlying NextFrame.
 func (x *OpticalFlowParameters) NextFrame() *FrameProcessorFrame {
 	_r := x.inner.NextFrame()
@@ -54,11 +60,15 @@ func (x *OpticalFlowParameters) NextFrame() *FrameProcessorFrame {
 	return &FrameProcessorFrame{inner: _r}
 }
 
+// Ordering of the input frames in this submission relative to the previous submission.
+//
 // SubmissionMode calls the underlying SubmissionMode.
 func (x *OpticalFlowParameters) SubmissionMode() VTOpticalFlowParametersSubmissionMode {
 	return VTOpticalFlowParametersSubmissionMode(x.inner.SubmissionMode())
 }
 
+// Output optical flow calculated by the processor.
+//
 // DestinationOpticalFlow calls the underlying DestinationOpticalFlow.
 func (x *OpticalFlowParameters) DestinationOpticalFlow() *FrameProcessorOpticalFlow {
 	_r := x.inner.DestinationOpticalFlow()

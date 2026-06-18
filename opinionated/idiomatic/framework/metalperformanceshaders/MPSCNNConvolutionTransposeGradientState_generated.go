@@ -46,12 +46,16 @@ func (x *CNNConvolutionTransposeGradientState) WithReadCount(readCount uint) *CN
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNConvolutionTransposeGradientState) WithLabel(label string) *CNNConvolutionTransposeGradientState {
 	x.inner.MPSCNNConvolutionGradientState.MPSNNGradientState.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   convolutionTranspose @abstract   The convolutionTranspose filter that produced the state.
+//
 // ConvolutionTranspose calls the underlying ConvolutionTranspose.
 func (x *CNNConvolutionTransposeGradientState) ConvolutionTranspose() *mpsneuralnetwork.MPSCNNConvolutionTranspose {
 	return x.inner.ConvolutionTranspose()

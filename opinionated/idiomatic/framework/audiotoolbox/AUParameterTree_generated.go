@@ -35,36 +35,48 @@ func NewParameterTree() *ParameterTree {
 	return &ParameterTree{inner: raw.AUParameterTreeFromID(_id)}
 }
 
+// @brief		Called when a parameter changes value. @discussion This block, used only in an audio unit implementation, receives all externally-generated changes to parameter values. It should store the new value in its audio signal processing state (assuming that that state is separate from the AUParameter object).
+//
 // WithImplementorValueObserver sets the implementorValueObserver property and returns the receiver for chaining.
 func (x *ParameterTree) WithImplementorValueObserver(implementorValueObserver func(*raw.AUParameter, float32)) *ParameterTree {
 	x.inner.AUParameterGroup.AUParameterNode.SetImplementorValueObserver(implementorValueObserver)
 	return x
 }
 
+// @brief		Called when a value of a parameter in the tree is known to have a stale value needing to be refreshed. @discussion The audio unit should return the current value for this parameter; the AUParameterNode will store the value.
+//
 // WithImplementorValueProvider sets the implementorValueProvider property and returns the receiver for chaining.
 func (x *ParameterTree) WithImplementorValueProvider(implementorValueProvider objc.Block) *ParameterTree {
 	x.inner.AUParameterGroup.AUParameterNode.SetImplementorValueProvider(implementorValueProvider)
 	return x
 }
 
+// Called to provide string representations of parameter values. If value is nil, the callback uses the current value of the parameter.
+//
 // WithImplementorStringFromValueCallback sets the implementorStringFromValueCallback property and returns the receiver for chaining.
 func (x *ParameterTree) WithImplementorStringFromValueCallback(implementorStringFromValueCallback objc.Block) *ParameterTree {
 	x.inner.AUParameterGroup.AUParameterNode.SetImplementorStringFromValueCallback(implementorStringFromValueCallback)
 	return x
 }
 
+// Called to convert string to numeric representations of parameter values.
+//
 // WithImplementorValueFromStringCallback sets the implementorValueFromStringCallback property and returns the receiver for chaining.
 func (x *ParameterTree) WithImplementorValueFromStringCallback(implementorValueFromStringCallback objc.Block) *ParameterTree {
 	x.inner.AUParameterGroup.AUParameterNode.SetImplementorValueFromStringCallback(implementorValueFromStringCallback)
 	return x
 }
 
+// Called to obtain an abbreviated version of a parameter or group name.
+//
 // WithImplementorDisplayNameWithLengthCallback sets the implementorDisplayNameWithLengthCallback property and returns the receiver for chaining.
 func (x *ParameterTree) WithImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) *ParameterTree {
 	x.inner.AUParameterGroup.AUParameterNode.SetImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback)
 	return x
 }
 
+// @method	parameterWithAddress: @brief	Search a tree for a parameter with a specific address. @return The parameter corresponding to the supplied address, or nil if no such parameter exists.
+//
 // ParameterWithAddress calls the underlying ParameterWithAddress.
 func (x *ParameterTree) ParameterWithAddress(address uint64) *Parameter {
 	_r := x.inner.ParameterWithAddress(address)
@@ -74,6 +86,8 @@ func (x *ParameterTree) ParameterWithAddress(address uint64) *Parameter {
 	return &Parameter{inner: _r}
 }
 
+// @method	parameterWithID:scope:element: @brief	Search a tree for a specific v2 audio unit parameter. @discussion V2 audio units publish parameters identified by a parameter ID, scope, and element. A host that knows that it is dealing with a v2 unit can locate parameters using this method, for example, for the Apple-supplied system audio units. @return The parameter corresponding to the supplied ID/scope/element, or nil if no such parameter exists, or if the audio unit is not a v2 unit.
+//
 // ParameterWithIDScopeElement calls the underlying ParameterWithIDScopeElement.
 func (x *ParameterTree) ParameterWithIDScopeElement(paramID uint, scope uint, element uint) *Parameter {
 	_r := x.inner.ParameterWithIDScopeElement(paramID, scope, element)

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// NSUserDefaults is a hierarchical persistent interprocess (optionally distributed) key-value store, optimized for storing user settings. Hierarchical: NSUserDefaults has a list of places to look for data called the "search list". A search list is referred to by an arbitrary string called the "suite identifier" or "domain identifier". When queried, NSUserDefaults checks each entry of its search list until it finds one that contains the key in question, or has searched the whole list. The list is (note: "current host + current user" preferences are unimplemented on iOS, watchOS, and tvOS, and "any user" preferences are not generally useful for applications on those operating systems): - Managed ("forced") preferences, set by a configuration profile or via mcx from a network administrator - Commandline arguments - Preferences for the current domain, in the cloud - Preferences for the current domain, the current user, in the current host - Preferences for the current domain, the current user, in any host - Preferences added via -addSuiteNamed: - Preferences global to all apps for the current user, in the current host - Preferences global to all apps for the current user, in any host - Preferences for the current domain, for all users, in the current host - Preferences global to all apps for all users, in the current host - Preferences registered with -registerDefaults: Persistent: Preferences stored in NSUserDefaults persist across reboots and relaunches of apps unless otherwise specified. Interprocess: Preferences may be accessible to and modified from multiple processes simultaneously (for example between an application and an extension). Optionally distributed (Currently only supported in Shared iPad for Students mode):  Data stored in user defaults can be made "ubiqitous", i.e. synchronized between devices via the cloud.  Ubiquitous user defaults are automatically propagated to all devices logged into the same iCloud account. When reading defaults (via -*ForKey: methods on NSUserDefaults), ubiquitous defaults are searched before local defaults. All operations on ubiquitous defaults are asynchronous, so registered defaults may be returned in place of ubiquitous defaults if downloading from iCloud hasn't finished. Ubiquitous defaults are specified in the Defaults Configuration File for an application. Key-Value Store: NSUserDefaults stores Property List objects (NSString, NSData, NSNumber, NSDate, NSArray, and NSDictionary) identified by NSString keys, similar to an NSMutableDictionary. Optimized for storing user settings: NSUserDefaults is intended for relatively small amounts of data, queried very frequently, and modified occasionally. Using it in other ways may be slow or use more memory than solutions more suited to those uses. The 'App' CFPreferences functions in CoreFoundation act on the same search lists that NSUserDefaults does. NSUserDefaults can be observed using Key-Value Observing for any key stored in it. Using NSKeyValueObservingOptionPrior to observe changes from other processes or devices will behave as though NSKeyValueObservingOptionPrior was not specified.
+//
 // UserDefaults wraps [raw.NSUserDefaults] with a fluent Go API.
 type UserDefaults struct {
 	inner *raw.NSUserDefaults
@@ -37,6 +39,8 @@ func NewUserDefaults() *UserDefaults {
 	return &UserDefaults{inner: raw.NSUserDefaultsFromID(_id)}
 }
 
+// -initWithSuiteName: initializes an instance of NSUserDefaults that searches the shared preferences search list for the domain 'suitename'. For example, using the identifier of an application group will cause the receiver to search the preferences for that group. Passing the current application's bundle identifier, NSGlobalDomain, or the corresponding CFPreferences constants is an error. Passing nil will search the default search list.
+//
 // NewUserDefaultsWithSuiteName creates a new [UserDefaults].
 func NewUserDefaultsWithSuiteName(suitename string) *UserDefaults {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUserDefaults")), objc.RegisterName("alloc"))
@@ -44,6 +48,8 @@ func NewUserDefaultsWithSuiteName(suitename string) *UserDefaults {
 	return &UserDefaults{inner: raw.NSUserDefaultsFromID(_id)}
 }
 
+// -initWithUser: is equivalent to -init
+//
 // NewUserDefaultsWithUser creates a new [UserDefaults].
 func NewUserDefaultsWithUser(username string) *UserDefaults {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUserDefaults")), objc.RegisterName("alloc"))
@@ -57,21 +63,29 @@ func (x *UserDefaults) WithScriptingProperties(scriptingProperties *raw.NSDictio
 	return x
 }
 
+// -objectForKey: will search the receiver's search list for a default with the key 'defaultName' and return it. If another process has changed defaults in the search list, NSUserDefaults will automatically update to the latest values. If the key in question has been marked as ubiquitous via a Defaults Configuration File, the latest value may not be immediately available, and the registered value will be returned instead.
+//
 // ObjectForKey calls the underlying ObjectForKey.
 func (x *UserDefaults) ObjectForKey(defaultName string) objc.ID {
 	return x.inner.ObjectForKey(foundation.NSStringStringWithUTF8String(defaultName))
 }
 
+// -setObject:forKey: immediately stores a value (or removes the value if nil is passed as the value) for the provided key in the search list entry for the receiver's suite name in the current user and any host, then asynchronously stores the value persistently, where it is made available to other processes.
+//
 // SetObjectForKey calls the underlying SetObjectForKey.
 func (x *UserDefaults) SetObjectForKey(value objc.ID, defaultName string) {
 	x.inner.SetObjectForKey(value, foundation.NSStringStringWithUTF8String(defaultName))
 }
 
+// -removeObjectForKey: is equivalent to -[... setObject:nil forKey:defaultName]
+//
 // RemoveObjectForKey calls the underlying RemoveObjectForKey.
 func (x *UserDefaults) RemoveObjectForKey(defaultName string) {
 	x.inner.RemoveObjectForKey(foundation.NSStringStringWithUTF8String(defaultName))
 }
 
+// -stringForKey: is equivalent to -objectForKey:, except that it will convert NSNumber values to their NSString representation. If a non-string non-number value is found, nil will be returned.
+//
 // StringForKey calls the underlying StringForKey.
 func (x *UserDefaults) StringForKey(defaultName string) *String {
 	_r := x.inner.StringForKey(foundation.NSStringStringWithUTF8String(defaultName))
@@ -81,16 +95,22 @@ func (x *UserDefaults) StringForKey(defaultName string) *String {
 	return &String{inner: _r}
 }
 
+// -arrayForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSArray.
+//
 // ArrayForKey calls the underlying ArrayForKey.
 func (x *UserDefaults) ArrayForKey(defaultName string) *raw.NSArray[objc.ID] {
 	return x.inner.ArrayForKey(foundation.NSStringStringWithUTF8String(defaultName))
 }
 
+// -dictionaryForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSDictionary.
+//
 // DictionaryForKey calls the underlying DictionaryForKey.
 func (x *UserDefaults) DictionaryForKey(defaultName string) *raw.NSDictionary[*raw.NSString, objc.ID] {
 	return x.inner.DictionaryForKey(foundation.NSStringStringWithUTF8String(defaultName))
 }
 
+// -dataForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSData.
+//
 // DataForKey calls the underlying DataForKey.
 func (x *UserDefaults) DataForKey(defaultName string) *Data {
 	_r := x.inner.DataForKey(foundation.NSStringStringWithUTF8String(defaultName))
@@ -100,31 +120,43 @@ func (x *UserDefaults) DataForKey(defaultName string) *Data {
 	return &Data{inner: _r}
 }
 
+// -stringForKey: is equivalent to -objectForKey:, except that it will return nil if the value is not an NSArray<NSString *>. Note that unlike -stringForKey:, NSNumbers are not converted to NSStrings.
+//
 // StringArrayForKey calls the underlying StringArrayForKey.
 func (x *UserDefaults) StringArrayForKey(defaultName string) *raw.NSArray[*raw.NSString] {
 	return x.inner.StringArrayForKey(foundation.NSStringStringWithUTF8String(defaultName))
 }
 
+// -integerForKey: is equivalent to -objectForKey:, except that it converts the returned value to an NSInteger. If the value is an NSNumber, the result of -integerValue will be returned. If the value is an NSString, it will be converted to NSInteger if possible. If the value is a boolean, it will be converted to either 1 for YES or 0 for NO. If the value is absent or can't be converted to an integer, 0 will be returned.
+//
 // IntegerForKey calls the underlying IntegerForKey.
 func (x *UserDefaults) IntegerForKey(defaultName string) int {
 	return x.inner.IntegerForKey(foundation.NSStringStringWithUTF8String(defaultName))
 }
 
+// -floatForKey: is similar to -integerForKey:, except that it returns a float, and boolean values will not be converted.
+//
 // FloatForKey calls the underlying FloatForKey.
 func (x *UserDefaults) FloatForKey(defaultName string) float32 {
 	return x.inner.FloatForKey(foundation.NSStringStringWithUTF8String(defaultName))
 }
 
+// -doubleForKey: is similar to -integerForKey:, except that it returns a double, and boolean values will not be converted.
+//
 // DoubleForKey calls the underlying DoubleForKey.
 func (x *UserDefaults) DoubleForKey(defaultName string) float64 {
 	return x.inner.DoubleForKey(foundation.NSStringStringWithUTF8String(defaultName))
 }
 
+// -boolForKey: is equivalent to -objectForKey:, except that it converts the returned value to a BOOL. If the value is an NSNumber, NO will be returned if the value is 0, YES otherwise. If the value is an NSString, values of "YES" or "1" will return YES, and values of "NO", "0", or any other string will return NO. If the value is absent or can't be converted to a BOOL, NO will be returned.
+//
 // BoolForKey calls the underlying BoolForKey.
 func (x *UserDefaults) BoolForKey(defaultName string) bool {
 	return x.inner.BoolForKey(foundation.NSStringStringWithUTF8String(defaultName))
 }
 
+// -URLForKey: is equivalent to -objectForKey: except that it converts the returned value to an NSURL. If the value is an NSString path, then it will construct a file URL to that path. If the value is an archived URL from -setURL:forKey: it will be unarchived. If the value is absent or can't be converted to an NSURL, nil will be returned.
+//
 // URLForKey calls the underlying URLForKey.
 func (x *UserDefaults) URLForKey(defaultName string) *URL {
 	_r := x.inner.URLForKey(foundation.NSStringStringWithUTF8String(defaultName))
@@ -134,46 +166,64 @@ func (x *UserDefaults) URLForKey(defaultName string) *URL {
 	return &URL{inner: _r}
 }
 
+// -setInteger:forKey: is equivalent to -setObject:forKey: except that the value is converted from an NSInteger to an NSNumber.
+//
 // SetIntegerForKey calls the underlying SetIntegerForKey.
 func (x *UserDefaults) SetIntegerForKey(value int, defaultName string) {
 	x.inner.SetIntegerForKey(value, foundation.NSStringStringWithUTF8String(defaultName))
 }
 
+// -setFloat:forKey: is equivalent to -setObject:forKey: except that the value is converted from a float to an NSNumber.
+//
 // SetFloatForKey calls the underlying SetFloatForKey.
 func (x *UserDefaults) SetFloatForKey(value float32, defaultName string) {
 	x.inner.SetFloatForKey(value, foundation.NSStringStringWithUTF8String(defaultName))
 }
 
+// -setDouble:forKey: is equivalent to -setObject:forKey: except that the value is converted from a double to an NSNumber.
+//
 // SetDoubleForKey calls the underlying SetDoubleForKey.
 func (x *UserDefaults) SetDoubleForKey(value float64, defaultName string) {
 	x.inner.SetDoubleForKey(value, foundation.NSStringStringWithUTF8String(defaultName))
 }
 
+// -setBool:forKey: is equivalent to -setObject:forKey: except that the value is converted from a BOOL to an NSNumber.
+//
 // SetBoolForKey calls the underlying SetBoolForKey.
 func (x *UserDefaults) SetBoolForKey(value bool, defaultName string) {
 	x.inner.SetBoolForKey(value, foundation.NSStringStringWithUTF8String(defaultName))
 }
 
+// -setURL:forKey is equivalent to -setObject:forKey: except that the value is archived to an NSData. Use -URLForKey: to retrieve values set this way.
+//
 // SetURLForKey calls the underlying SetURLForKey.
 func (x *UserDefaults) SetURLForKey(url string, defaultName string) {
 	x.inner.SetURLForKey(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(defaultName))
 }
 
+// -registerDefaults: adds the registrationDictionary to the last item in every search list. This means that after NSUserDefaults has looked for a value in every other valid location, it will look in registered defaults, making them useful as a "fallback" value. Registered defaults are never stored between runs of an application, and are visible only to the application that registers them. Default values from Defaults Configuration Files will automatically be registered.
+//
 // RegisterDefaults calls the underlying RegisterDefaults.
 func (x *UserDefaults) RegisterDefaults(registrationDictionary *raw.NSDictionary[*raw.NSString, objc.ID]) {
 	x.inner.RegisterDefaults(registrationDictionary)
 }
 
+// -addSuiteNamed: adds the full search list for 'suiteName' as a sub-search-list of the receiver's. The additional search lists are searched after the current domain, but before global defaults. Passing NSGlobalDomain or the current application's bundle identifier is unsupported.
+//
 // AddSuiteNamed calls the underlying AddSuiteNamed.
 func (x *UserDefaults) AddSuiteNamed(suiteName string) {
 	x.inner.AddSuiteNamed(foundation.NSStringStringWithUTF8String(suiteName))
 }
 
+// -removeSuiteNamed: removes a sub-searchlist added via -addSuiteNamed:.
+//
 // RemoveSuiteNamed calls the underlying RemoveSuiteNamed.
 func (x *UserDefaults) RemoveSuiteNamed(suiteName string) {
 	x.inner.RemoveSuiteNamed(foundation.NSStringStringWithUTF8String(suiteName))
 }
 
+// -dictionaryRepresentation returns a composite snapshot of the values in the receiver's search list, such that [[receiver dictionaryRepresentation] objectForKey:x] will return the same thing as [receiver objectForKey:x].
+//
 // DictionaryRepresentation calls the underlying DictionaryRepresentation.
 func (x *UserDefaults) DictionaryRepresentation() *raw.NSDictionary[*raw.NSString, objc.ID] {
 	return x.inner.DictionaryRepresentation()
@@ -194,26 +244,36 @@ func (x *UserDefaults) RemoveVolatileDomainForName(domainName string) {
 	x.inner.RemoveVolatileDomainForName(foundation.NSStringStringWithUTF8String(domainName))
 }
 
+// -persistentDomainNames returns an incomplete list of domains that have preferences stored in them.
+//
 // PersistentDomainNames calls the underlying PersistentDomainNames.
 func (x *UserDefaults) PersistentDomainNames() *raw.NSArray[objc.ID] {
 	return x.inner.PersistentDomainNames()
 }
 
+// -persistentDomainForName: returns a dictionary representation of the search list entry specified by 'domainName', the current user, and any host.
+//
 // PersistentDomainForName calls the underlying PersistentDomainForName.
 func (x *UserDefaults) PersistentDomainForName(domainName string) *raw.NSDictionary[*raw.NSString, objc.ID] {
 	return x.inner.PersistentDomainForName(foundation.NSStringStringWithUTF8String(domainName))
 }
 
+// -setPersistentDomain:forName: replaces all values in the search list entry specified by 'domainName', the current user, and any host, with the values in 'domain'. The change will be persisted.
+//
 // SetPersistentDomainForName calls the underlying SetPersistentDomainForName.
 func (x *UserDefaults) SetPersistentDomainForName(domain *raw.NSDictionary[*raw.NSString, objc.ID], domainName string) {
 	x.inner.SetPersistentDomainForName(domain, foundation.NSStringStringWithUTF8String(domainName))
 }
 
+// -removePersistentDomainForName: removes all values from the search list entry specified by 'domainName', the current user, and any host. The change is persistent.
+//
 // RemovePersistentDomainForName calls the underlying RemovePersistentDomainForName.
 func (x *UserDefaults) RemovePersistentDomainForName(domainName string) {
 	x.inner.RemovePersistentDomainForName(foundation.NSStringStringWithUTF8String(domainName))
 }
 
+// -synchronize is deprecated and will be marked with the API_DEPRECATED macro in a future release. -synchronize blocks the calling thread until all in-progress set operations have completed. This is no longer necessary. Replacements for previous uses of -synchronize depend on what the intent of calling synchronize was. If you synchronized... - ...before reading in order to fetch updated values: remove the synchronize call - ...after writing in order to notify another program to read: the other program can use KVO to observe the default without needing to notify - ...before exiting in a non-app (command line tool, agent, or daemon) process: call CFPreferencesAppSynchronize(kCFPreferencesCurrentApplication) - ...for any other reason: remove the synchronize call
+//
 // Synchronize calls the underlying Synchronize.
 func (x *UserDefaults) Synchronize() bool {
 	return x.inner.Synchronize()

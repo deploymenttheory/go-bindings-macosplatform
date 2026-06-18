@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A storage device attachment that uses a disk to store data.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzdiskblockdevicestoragedeviceattachment
 type VZDiskBlockDeviceStorageDeviceAttachment struct {
 	VZStorageDeviceAttachment
@@ -35,7 +37,7 @@ func VZDiskBlockDeviceStorageDeviceAttachmentFromID(id objc.ID) *VZDiskBlockDevi
 	return o
 }
 
-// @abstract Initialize the disk attachment from a file handle. @param fileHandle File handle to a block device. @param readOnly If YES, the disk attachment is read only, otherwise, if the file handle allows writes, the device can write data into it. @param synchronizationMode Defines how the disk synchronizes with the underlying storage when the guest operating system flushes data. @param error If not nil, assigned with the error if the initialization failed. @return An initialized `VZDiskBlockDeviceStorageDeviceAttachment` or nil if there was an error. @discussion The file handle is retained by the disk attachment. The handle must be open when the virtual machine starts. The `readOnly` parameter affects how the disk is exposed to the guest operating system by the storage controller. If the disk is intended to be used read-only, it is also recommended to open the file handle as read-only.
+// Creates a new block storage device attachment from a file handle and with the specified access mode, synchronization mode, and error object that you provide.
 func (o *VZDiskBlockDeviceStorageDeviceAttachment) InitWithFileHandleReadOnlySynchronizationModeError(fileHandle *foundation.NSFileHandle, readOnly bool, synchronizationMode VZDiskSynchronizationMode) (*VZDiskBlockDeviceStorageDeviceAttachment, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZDiskBlockDeviceStorageDeviceAttachmentSelInitWithFileHandleReadOnlySynchronizationModeError, fileHandle.Ptr(), readOnly, synchronizationMode, unsafe.Pointer(&_nsErr))

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The platform configuration for booting macOS on Apple silicon.
+//
 // MacPlatformConfiguration wraps [raw.VZMacPlatformConfiguration] with a fluent Go API.
 type MacPlatformConfiguration struct {
 	inner *raw.VZMacPlatformConfiguration
@@ -35,24 +37,32 @@ func NewMacPlatformConfiguration() *MacPlatformConfiguration {
 	return &MacPlatformConfiguration{inner: raw.VZMacPlatformConfigurationFromID(_id)}
 }
 
+// The Mac hardware model.
+//
 // WithHardwareModel sets the hardwareModel property and returns the receiver for chaining.
 func (x *MacPlatformConfiguration) WithHardwareModel(hardwareModel *MacHardwareModel) *MacPlatformConfiguration {
 	x.inner.SetHardwareModel(hardwareModel.Unwrap())
 	return x
 }
 
+// The Mac machine identifier.
+//
 // WithMachineIdentifier sets the machineIdentifier property and returns the receiver for chaining.
 func (x *MacPlatformConfiguration) WithMachineIdentifier(machineIdentifier *MacMachineIdentifier) *MacPlatformConfiguration {
 	x.inner.SetMachineIdentifier(machineIdentifier.Unwrap())
 	return x
 }
 
+// The Mac auxiliary storage.
+//
 // WithAuxiliaryStorage sets the auxiliaryStorage property and returns the receiver for chaining.
 func (x *MacPlatformConfiguration) WithAuxiliaryStorage(auxiliaryStorage *MacAuxiliaryStorage) *MacPlatformConfiguration {
 	x.inner.SetAuxiliaryStorage(auxiliaryStorage.Unwrap())
 	return x
 }
 
+// @abstract The Mac hardware model.
+//
 // HardwareModel calls the underlying HardwareModel.
 func (x *MacPlatformConfiguration) HardwareModel() *MacHardwareModel {
 	_r := x.inner.HardwareModel()
@@ -67,6 +77,8 @@ func (x *MacPlatformConfiguration) SetHardwareModel(hardwareModel *raw.VZMacHard
 	x.inner.SetHardwareModel(hardwareModel)
 }
 
+// @abstract The unique Mac machine identifier. @discussion Running two virtual machines concurrently with the same identifier results in undefined behavior in the guest operating system.
+//
 // MachineIdentifier calls the underlying MachineIdentifier.
 func (x *MacPlatformConfiguration) MachineIdentifier() *MacMachineIdentifier {
 	_r := x.inner.MachineIdentifier()
@@ -81,6 +93,8 @@ func (x *MacPlatformConfiguration) SetMachineIdentifier(machineIdentifier *raw.V
 	x.inner.SetMachineIdentifier(machineIdentifier)
 }
 
+// @abstract The Mac auxiliary storage. @discussion When creating a virtual machine from scratch, the hardware model of the `auxiliaryStorage` must match the hardware model of the `hardwareModel` property.
+//
 // AuxiliaryStorage calls the underlying AuxiliaryStorage.
 func (x *MacPlatformConfiguration) AuxiliaryStorage() *MacAuxiliaryStorage {
 	_r := x.inner.AuxiliaryStorage()

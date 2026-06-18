@@ -29,6 +29,8 @@ func RangeFromID(id objc.ID) *Range {
 	return &Range{inner: raw.SHRangeFromID(id)}
 }
 
+// Creates a range with the bounds you specify. - Parameters: - lowerBound: The lower bound of the range. - upperBound: The upper bound of the range.
+//
 // NewRangeWithLowerBoundUpperBound creates a new [Range].
 func NewRangeWithLowerBoundUpperBound(lowerBound float64, upperBound float64) *Range {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SHRange")), objc.RegisterName("alloc"))
@@ -36,11 +38,15 @@ func NewRangeWithLowerBoundUpperBound(lowerBound float64, upperBound float64) *R
 	return &Range{inner: raw.SHRangeFromID(_id)}
 }
 
+// The lowerBound of this time range
+//
 // LowerBound calls the underlying LowerBound.
 func (x *Range) LowerBound() float64 {
 	return x.inner.LowerBound()
 }
 
+// The range's upper bound.
+//
 // UpperBound calls the underlying UpperBound.
 func (x *Range) UpperBound() float64 {
 	return x.inner.UpperBound()

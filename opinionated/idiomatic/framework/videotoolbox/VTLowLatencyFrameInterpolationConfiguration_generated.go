@@ -33,6 +33,8 @@ func LowLatencyFrameInterpolationConfigurationFromID(id objc.ID) *LowLatencyFram
 	return &LowLatencyFrameInterpolationConfiguration{inner: raw.VTLowLatencyFrameInterpolationConfigurationFromID(id)}
 }
 
+// Creates a new low-latency frame interpolation configuration for frame-rate conversion. The available interpolation points are the equal to the value of (2^x - 1), where x is equal to `numberOfInterpolatedFrames`. For example, - If you request 1 interpolated frame, 1 interpolation point at 0.5 is available. - If you request 2 interpolated frames, 3 interpolation points at 0.25, 0.5 and 0.75 are available. You don't need to use all available interpolation points. Setting a higher `numberOfInterpolatedFrames` increases the resolution of interpolation in some cases, but also increases latency. - Parameters: - frameWidth: Width of source frame in pixels. - frameHeight: Height of source frame in pixels. - numberOfInterpolatedFrames: The number of uniformly spaced frames that you want to be used for interpolation.
+//
 // NewLowLatencyFrameInterpolationConfigurationWithFrameWidthFrameHeightNumberOfInterpolatedFrames creates a new [LowLatencyFrameInterpolationConfiguration].
 func NewLowLatencyFrameInterpolationConfigurationWithFrameWidthFrameHeightNumberOfInterpolatedFrames(frameWidth int, frameHeight int, numberOfInterpolatedFrames int) *LowLatencyFrameInterpolationConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTLowLatencyFrameInterpolationConfiguration")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewLowLatencyFrameInterpolationConfigurationWithFrameWidthFrameHeightNumber
 	return &LowLatencyFrameInterpolationConfiguration{inner: raw.VTLowLatencyFrameInterpolationConfigurationFromID(_id)}
 }
 
+// Creates a new low-latency frame interpolation configuration for spatial scaling and temporal scaling. When you configure the processor for spatial scaling, the low-latency frame interpolation processor only supports 2x spatial upscaling and a single frame of temporal interpolation at a 0.5 interpolation phase. - Parameters: - frameWidth: Width of source frame in pixels. - frameHeight: Height of source frame in pixels. - spatialScaleFactor: The requested spatial scale factor as an integer. Currently, the processor supports only 2x spatial scaling.
+//
 // NewLowLatencyFrameInterpolationConfigurationWithFrameWidthFrameHeightSpatialScaleFactor creates a new [LowLatencyFrameInterpolationConfiguration].
 func NewLowLatencyFrameInterpolationConfigurationWithFrameWidthFrameHeightSpatialScaleFactor(frameWidth int, frameHeight int, spatialScaleFactor int) *LowLatencyFrameInterpolationConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTLowLatencyFrameInterpolationConfiguration")), objc.RegisterName("alloc"))
@@ -47,26 +51,36 @@ func NewLowLatencyFrameInterpolationConfigurationWithFrameWidthFrameHeightSpatia
 	return &LowLatencyFrameInterpolationConfiguration{inner: raw.VTLowLatencyFrameInterpolationConfigurationFromID(_id)}
 }
 
+// Width of source frames in pixels.
+//
 // FrameWidth calls the underlying FrameWidth.
 func (x *LowLatencyFrameInterpolationConfiguration) FrameWidth() int {
 	return x.inner.FrameWidth()
 }
 
+// Height of source frames in pixels.
+//
 // FrameHeight calls the underlying FrameHeight.
 func (x *LowLatencyFrameInterpolationConfiguration) FrameHeight() int {
 	return x.inner.FrameHeight()
 }
 
+// Configured spatial scale factor as an integer.
+//
 // SpatialScaleFactor calls the underlying SpatialScaleFactor.
 func (x *LowLatencyFrameInterpolationConfiguration) SpatialScaleFactor() int {
 	return x.inner.SpatialScaleFactor()
 }
 
+// Number of uniformly spaced frames for which you configured the processor.
+//
 // NumberOfInterpolatedFrames calls the underlying NumberOfInterpolatedFrames.
 func (x *LowLatencyFrameInterpolationConfiguration) NumberOfInterpolatedFrames() int {
 	return x.inner.NumberOfInterpolatedFrames()
 }
 
+// Available supported pixel formats for current configuration.
+//
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (x *LowLatencyFrameInterpolationConfiguration) FrameSupportedPixelFormats() []*foundation.NSNumber {
 	arr := x.inner.FrameSupportedPixelFormats()
@@ -78,11 +92,15 @@ func (x *LowLatencyFrameInterpolationConfiguration) FrameSupportedPixelFormats()
 	})
 }
 
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+//
 // SourcePixelBufferAttributes calls the underlying SourcePixelBufferAttributes.
 func (x *LowLatencyFrameInterpolationConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.SourcePixelBufferAttributes()
 }
 
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+//
 // DestinationPixelBufferAttributes calls the underlying DestinationPixelBufferAttributes.
 func (x *LowLatencyFrameInterpolationConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.DestinationPixelBufferAttributes()

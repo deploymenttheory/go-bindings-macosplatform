@@ -31,6 +31,8 @@ func SmartCardATRFromID(id objc.ID) *SmartCardATR {
 	return &SmartCardATR{inner: raw.TKSmartCardATRFromID(id)}
 }
 
+// Parses ATR from binary data block @param bytes Data containing full valid ATR @return Parsed ATR instance, or nil when #bytes do not contain valid ATR.
+//
 // NewSmartCardATRWithBytes creates a new [SmartCardATR].
 func NewSmartCardATRWithBytes(bytes_ *foundation.NSData) *SmartCardATR {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKSmartCardATR")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewSmartCardATRWithBytes(bytes_ *foundation.NSData) *SmartCardATR {
 	return &SmartCardATR{inner: raw.TKSmartCardATRFromID(_id)}
 }
 
+// Parses ATR from stream. @param source Provides one byte of ATR from the stream or -1 in case of an error @return Parsed ATR instance, or nil when #source method failed or an invalid ATR is detected
+//
 // NewSmartCardATRWithSource creates a new [SmartCardATR].
 func NewSmartCardATRWithSource(source func() int) *SmartCardATR {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKSmartCardATR")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewSmartCardATRWithSource(source func() int) *SmartCardATR {
 	return &SmartCardATR{inner: raw.TKSmartCardATRFromID(_id)}
 }
 
+// Retrieves interface group with specified index. @param index Index of the requested interface group.  Indexing conforms to ISO7816-3, i.e. starts from 1. @return Interface group with given index, or nil of no such group was present.
+//
 // InterfaceGroupAtIndex calls the underlying InterfaceGroupAtIndex.
 func (x *SmartCardATR) InterfaceGroupAtIndex(index int) *SmartCardATRInterfaceGroup {
 	_r := x.inner.InterfaceGroupAtIndex(index)
@@ -54,6 +60,8 @@ func (x *SmartCardATR) InterfaceGroupAtIndex(index int) *SmartCardATRInterfaceGr
 	return &SmartCardATRInterfaceGroup{inner: _r}
 }
 
+// @param protocol Protocol number for which the interface group is requested.
+//
 // InterfaceGroupForProtocol calls the underlying InterfaceGroupForProtocol.
 func (x *SmartCardATR) InterfaceGroupForProtocol(protocol TKSmartCardProtocol) *SmartCardATRInterfaceGroup {
 	_r := x.inner.InterfaceGroupForProtocol(raw.TKSmartCardProtocol(protocol))
@@ -63,11 +71,15 @@ func (x *SmartCardATR) InterfaceGroupForProtocol(protocol TKSmartCardProtocol) *
 	return &SmartCardATRInterfaceGroup{inner: _r}
 }
 
+// Full ATR as string of bytes
+//
 // Bytes calls the underlying Bytes.
 func (x *SmartCardATR) Bytes() *foundation.NSData {
 	return x.inner.Bytes()
 }
 
+// Array of NSNumber of protocols indicated in ATR, in the correct order (i.e. the default protocol comes first), duplicates sorted out.
+//
 // Protocols returns the collection as a Go slice.
 func (x *SmartCardATR) Protocols() []*foundation.NSNumber {
 	arr := x.inner.Protocols()
@@ -79,11 +91,15 @@ func (x *SmartCardATR) Protocols() []*foundation.NSNumber {
 	})
 }
 
+// Just historical bytes of ATR, without Tck and interface bytes.
+//
 // HistoricalBytes calls the underlying HistoricalBytes.
 func (x *SmartCardATR) HistoricalBytes() *foundation.NSData {
 	return x.inner.HistoricalBytes()
 }
 
+// An array of TKCompactTLVRecord instances with TLV records parsed from historical bytes.  If historical bytes are not structured using Compact TLV encoding, nil is returned. @note In case that ATR historical bytes begin with 0x00, the last three bytes (status indicator) are automatically appended into the returned records as if historical bytes would begin with 0x80 and 0x8 record is present in historical bytes.
+//
 // HistoricalRecords returns the collection as a Go slice.
 func (x *SmartCardATR) HistoricalRecords() []*CompactTLVRecord {
 	arr := x.inner.HistoricalRecords()

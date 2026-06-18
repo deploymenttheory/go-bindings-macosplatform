@@ -274,8 +274,17 @@ func (x *EntityDescription) Properties() []*PropertyDescription {
 }
 
 // SetProperties calls the underlying SetProperties.
-func (x *EntityDescription) SetProperties(properties *foundation.NSArray[*raw.NSPropertyDescription]) {
-	x.inner.SetProperties(properties)
+func (x *EntityDescription) SetProperties(properties ...PropertyDescriptionProvider) {
+	_ptrs := make([]objc.ID, len(properties))
+	for _i, _v := range properties {
+		_ptrs[_i] = _v.asPropertyDescription().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.NSPropertyDescription]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.NSPropertyDescription](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetProperties(_arg0)
 }
 
 // UserInfo calls the underlying UserInfo.
@@ -407,7 +416,7 @@ type EntityDescriptionable interface {
 	Superentity() *EntityDescription
 	PropertiesByName() *foundation.NSDictionary[*foundation.NSString, *raw.NSPropertyDescription]
 	Properties() []*PropertyDescription
-	SetProperties(properties *foundation.NSArray[*raw.NSPropertyDescription])
+	SetProperties(properties ...PropertyDescriptionProvider)
 	UserInfo() *foundation.NSDictionary[objc.ID, objc.ID]
 	SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID])
 	AttributesByName() *foundation.NSDictionary[*foundation.NSString, *raw.NSAttributeDescription]

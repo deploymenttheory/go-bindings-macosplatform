@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A device that manages port-based connections between the guest system and the host computer.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtiosocketdevice
 type VZVirtioSocketDevice struct {
 	VZSocketDevice
@@ -33,17 +35,17 @@ func VZVirtioSocketDeviceFromID(id objc.ID) *VZVirtioSocketDevice {
 	return o
 }
 
-// @abstract Sets a listener at a specified port. @discussion There is only one listener per port, any existing listener will be removed, and the specified listener here will be set instead. The same listener can be registered on multiple ports. The listener's delegate will be called whenever the guest connects to that port. @param listener The VZVirtioSocketListener object to be set. @param port The port number to set the listener at.
+// Configures an object to monitor the specified port for new connections.
 func (o *VZVirtioSocketDevice) SetSocketListenerForPort(listener *VZVirtioSocketListener, port uint32) {
 	o.Ptr().Send(_vZVirtioSocketDeviceSelSetSocketListenerForPort, listener.Ptr(), port)
 }
 
-// @abstract Removes the listener at a specified port. @discussion Does nothing if the port had no listener. @param port The port number at which the listener is to be removed.
+// Removes the listener object from the specfied port.
 func (o *VZVirtioSocketDevice) RemoveSocketListenerForPort(port uint32) {
 	o.Ptr().Send(_vZVirtioSocketDeviceSelRemoveSocketListenerForPort, port)
 }
 
-// @abstract Connects to a specified port. @discussion Does nothing if the guest does not listen on that port. @param port The port number to connect to. @param completionHandler Block called after the connection has been successfully established or on error. The error parameter passed to the block is nil if the connection was successful.
+// Initiates a connection to the specified port of the guest operating system.
 func (o *VZVirtioSocketDevice) ConnectToPortCompletionHandler(port uint32, completionHandler func(*VZVirtioSocketConnection, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

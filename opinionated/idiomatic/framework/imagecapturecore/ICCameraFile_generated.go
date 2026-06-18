@@ -39,12 +39,16 @@ func NewCameraFile() *CameraFile {
 	return &CameraFile{inner: raw.ICCameraFileFromID(_id)}
 }
 
+// @property orientation @abstract ￼Desired orientation of image to use when it is downloaded. @discussion This property is set to ICEXIFOrientation1 initially. If the format of this file supports EXIF orientation tag, then this property will be updated to match the value of that tag, when the thumbnail or metadata for this file is received.
+//
 // WithOrientation sets the orientation property and returns the receiver for chaining.
 func (x *CameraFile) WithOrientation(orientation ICEXIFOrientationType) *CameraFile {
 	x.inner.SetOrientation(raw.ICEXIFOrientationType(orientation))
 	return x
 }
 
+// @method requestThumbnailDataWithOptions:completion @abstract ￼Perform a thumbnail request and execute the block callback in place of the delegate. @param options Options dictionary - 'kCGImageSourceThumbnailMaxPixelSize' - Request a width different from the embedded EXIF thumbnail @param completion Completion block called with an NSData* object representing the JPG, and an NSError* for status. @note The completion block will execute on an any available queue, often this will not be the main queue.
+//
 // RequestThumbnailDataWithOptionsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *CameraFile) RequestThumbnailDataWithOptionsCompletion(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
 	type _result struct {
@@ -69,16 +73,22 @@ func (x *CameraFile) RequestThumbnailDataWithOptionsCompletion(ctx context.Conte
 	}
 }
 
+// @method requestMetadataDictionaryWithOptions:completion @abstract ￼Perform a metadata request and execute the block callback in place of the delegate. @param options Options dictionary @param completion Completion block called with an NSDictionary* object containing the metadata, and an NSError* for status. @note The completion block will execute on an any available queue, often this will not be the main queue.
+//
 // RequestMetadataDictionaryWithOptionsCompletion calls the underlying RequestMetadataDictionaryWithOptionsCompletion.
 func (x *CameraFile) RequestMetadataDictionaryWithOptionsCompletion(options *foundation.NSDictionary[*foundation.NSString, objc.ID], completion objc.Block) {
 	x.inner.RequestMetadataDictionaryWithOptionsCompletion(options, completion)
 }
 
+// @method requestDownloadWithOptions:progressDelegate:completion @abstract ￼Perform a download request and execute the block callback in place of the delegate. @param options Dictionary Keys: - `ICDownloadsDirectoryURL` - `ICSaveAsFilename` - `ICOverwriteExistingFile` - `ICDeleteAfterDownload` - `ICAdjustCreationDate` @param completion Completion block to executed after request has returned, @note The completion block will execute on an any available queue, often this will not be the main queue.
+//
 // RequestDownloadWithOptionsCompletion calls the underlying RequestDownloadWithOptionsCompletion.
 func (x *CameraFile) RequestDownloadWithOptionsCompletion(options *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(*foundation.NSString, unsafe.Pointer)) *foundation.NSProgress {
 	return x.inner.RequestDownloadWithOptionsCompletion(options, completion)
 }
 
+// @method requestReadDataAtOffset:length:completion @abstract This method asynchronously reads data of a specified length from a specified offset. @param offset The offset into the file to start reading from @param length The length of data to be read. @param completion Completion block called with an NSData* object representing the data, and an NSError* for status. @note The completion block will execute on an any available queue, often this will not be the main queue.
+//
 // RequestReadDataAtOffsetLengthCompletion blocks until the operation completes or ctx is cancelled.
 func (x *CameraFile) RequestReadDataAtOffsetLengthCompletion(ctx context.Context, offset int64, length int64) (*foundation.NSData, error) {
 	type _result struct {
@@ -103,6 +113,8 @@ func (x *CameraFile) RequestReadDataAtOffsetLengthCompletion(ctx context.Context
 	}
 }
 
+// @method requestSecurityScopedURLWithCompletion @abstract ￼Requests a security scoped NSURL* for a media file on a mass storage volume. The returned NSURL* requires the use of startAccessingSecurityScopedResource, and stopAccessingSecurityScopedResource for access. @param completion Completion block called with an NSURL*, and an NSError* for status. @note The completion block will execute on an any available queue, often this will not be the main queue.
+//
 // RequestSecurityScopedURLWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *CameraFile) RequestSecurityScopedURLWithCompletion(ctx context.Context) (*foundation.NSURL, error) {
 	type _result struct {
@@ -127,6 +139,8 @@ func (x *CameraFile) RequestSecurityScopedURLWithCompletion(ctx context.Context)
 	}
 }
 
+// @method requestFingerprintWithCompletion @abstract ￼Requests a fingerprint be generated for camera file. @param completion Completion block called with an NSString*, and an NSError* for status. @note The completion block will execute on an any available queue, often this will not be the main queue.
+//
 // RequestFingerprintWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *CameraFile) RequestFingerprintWithCompletion(ctx context.Context) (string, error) {
 	type _result struct {
@@ -153,16 +167,22 @@ func (x *CameraFile) RequestFingerprintWithCompletion(ctx context.Context) (stri
 	}
 }
 
+// @property width @abstract Width of an image or movie frame.
+//
 // Width calls the underlying Width.
 func (x *CameraFile) Width() int {
 	return x.inner.Width()
 }
 
+// @property height @abstract Height of an image or movie frame.
+//
 // Height calls the underlying Height.
 func (x *CameraFile) Height() int {
 	return x.inner.Height()
 }
 
+// @property originalFilename @abstract Original filename on disk
+//
 // OriginalFilename calls the underlying OriginalFilename.
 func (x *CameraFile) OriginalFilename() string {
 	_r := x.inner.OriginalFilename()
@@ -172,6 +192,8 @@ func (x *CameraFile) OriginalFilename() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property createdFilename @abstract Created filename
+//
 // CreatedFilename calls the underlying CreatedFilename.
 func (x *CameraFile) CreatedFilename() string {
 	_r := x.inner.CreatedFilename()
@@ -181,11 +203,15 @@ func (x *CameraFile) CreatedFilename() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property fileSize @abstract ￼Size of file in bytes.
+//
 // FileSize calls the underlying FileSize.
 func (x *CameraFile) FileSize() int64 {
 	return x.inner.FileSize()
 }
 
+// @property orientation @abstract ￼Desired orientation of image to use when it is downloaded. @discussion This property is set to ICEXIFOrientation1 initially. If the format of this file supports EXIF orientation tag, then this property will be updated to match the value of that tag, when the thumbnail or metadata for this file is received.
+//
 // Orientation calls the underlying Orientation.
 func (x *CameraFile) Orientation() ICEXIFOrientationType {
 	return ICEXIFOrientationType(x.inner.Orientation())
@@ -196,26 +222,36 @@ func (x *CameraFile) SetOrientation(orientation ICEXIFOrientationType) {
 	x.inner.SetOrientation(raw.ICEXIFOrientationType(orientation))
 }
 
+// @property duration @abstract ￼Duration of audio/video file in seconds.
+//
 // Duration calls the underlying Duration.
 func (x *CameraFile) Duration() float64 {
 	return x.inner.Duration()
 }
 
+// @property highFramerate @abstract True if file is a slo-mo or high framerate video file, nil otherwise.
+//
 // HighFramerate calls the underlying HighFramerate.
 func (x *CameraFile) HighFramerate() bool {
 	return x.inner.HighFramerate()
 }
 
+// @property timeLapse @abstract True if file is a time-lapse video file, nil otherwise.
+//
 // TimeLapse calls the underlying TimeLapse.
 func (x *CameraFile) TimeLapse() bool {
 	return x.inner.TimeLapse()
 }
 
+// @property firstPicked @abstract True if file is a firstPicked nil otherwise.
+//
 // FirstPicked calls the underlying FirstPicked.
 func (x *CameraFile) FirstPicked() bool {
 	return x.inner.FirstPicked()
 }
 
+// @property originatingAssetID @abstract originatingAssetID of file if present, nil if not a HEIF or HVEC.
+//
 // OriginatingAssetID calls the underlying OriginatingAssetID.
 func (x *CameraFile) OriginatingAssetID() string {
 	_r := x.inner.OriginatingAssetID()
@@ -225,6 +261,8 @@ func (x *CameraFile) OriginatingAssetID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property groupUUID @abstract groupUUID of file if present, nil if file has no groupUUID.
+//
 // GroupUUID calls the underlying GroupUUID.
 func (x *CameraFile) GroupUUID() string {
 	_r := x.inner.GroupUUID()
@@ -234,6 +272,8 @@ func (x *CameraFile) GroupUUID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property gpsString @abstract GPS String in standard format.
+//
 // GpsString calls the underlying GpsString.
 func (x *CameraFile) GpsString() string {
 	_r := x.inner.GpsString()
@@ -243,6 +283,8 @@ func (x *CameraFile) GpsString() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property relatedUUID @abstract Internal related UUID for dbg/aae/etc.
+//
 // RelatedUUID calls the underlying RelatedUUID.
 func (x *CameraFile) RelatedUUID() string {
 	_r := x.inner.RelatedUUID()
@@ -252,6 +294,8 @@ func (x *CameraFile) RelatedUUID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property burstUUID @abstract burstUUID of file if present, nil if not in a burst.
+//
 // BurstUUID calls the underlying BurstUUID.
 func (x *CameraFile) BurstUUID() string {
 	_r := x.inner.BurstUUID()
@@ -261,16 +305,22 @@ func (x *CameraFile) BurstUUID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property burstFavorite @abstract True if burst favorite, ignored if not in a burst or not a burst favorite.
+//
 // BurstFavorite calls the underlying BurstFavorite.
 func (x *CameraFile) BurstFavorite() bool {
 	return x.inner.BurstFavorite()
 }
 
+// @property burstPicked @abstract True if burst user picked, ignored if not in a burst or not a burst user picked.
+//
 // BurstPicked calls the underlying BurstPicked.
 func (x *CameraFile) BurstPicked() bool {
 	return x.inner.BurstPicked()
 }
 
+// @property sidecarFiles @abstract This property is NULL if there are no sidecar files associated with this file. Otherwise it is an array of ICCameraFile instances of sidecar files associated with this file. An example of a sidecar file is a file with the same base name as this file and having an extension XMP.
+//
 // SidecarFiles returns the collection as a Go slice.
 func (x *CameraFile) SidecarFiles() []*CameraItem {
 	arr := x.inner.SidecarFiles()
@@ -282,6 +332,8 @@ func (x *CameraFile) SidecarFiles() []*CameraItem {
 	})
 }
 
+// @property pairedRawImage @abstract A single item subset of the sidecarFiles array, which contains the logical RAW compliment of a JPG or other format image.
+//
 // PairedRawImage calls the underlying PairedRawImage.
 func (x *CameraFile) PairedRawImage() *CameraFile {
 	_r := x.inner.PairedRawImage()
@@ -291,26 +343,36 @@ func (x *CameraFile) PairedRawImage() *CameraFile {
 	return &CameraFile{inner: _r}
 }
 
+// @property fileCreationDate @abstract Properties will either represent the actual file creation date, or nil.
+//
 // FileCreationDate calls the underlying FileCreationDate.
 func (x *CameraFile) FileCreationDate() *foundation.NSDate {
 	return x.inner.FileCreationDate()
 }
 
+// @property fileModificationDate @abstract Properties will either represent the actual file modification date, or nil.
+//
 // FileModificationDate calls the underlying FileModificationDate.
 func (x *CameraFile) FileModificationDate() *foundation.NSDate {
 	return x.inner.FileModificationDate()
 }
 
+// @property exifCreationDate @abstract Properties will either represent the exif creation date, or nil.
+//
 // ExifCreationDate calls the underlying ExifCreationDate.
 func (x *CameraFile) ExifCreationDate() *foundation.NSDate {
 	return x.inner.ExifCreationDate()
 }
 
+// @property exifModificationDate @abstract Properties will either represent the exif modification date, or nil.
+//
 // ExifModificationDate calls the underlying ExifModificationDate.
 func (x *CameraFile) ExifModificationDate() *foundation.NSDate {
 	return x.inner.ExifModificationDate()
 }
 
+// @property fingerprint @abstract A fingerprint generated from the camera file data date, or nil.
+//
 // Fingerprint calls the underlying Fingerprint.
 func (x *CameraFile) Fingerprint() string {
 	_r := x.inner.Fingerprint()

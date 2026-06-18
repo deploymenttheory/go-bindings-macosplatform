@@ -37,21 +37,29 @@ func NewPlayerItemAccessLogEvent() *PlayerItemAccessLogEvent {
 	return &PlayerItemAccessLogEvent{inner: raw.AVPlayerItemAccessLogEventFromID(_id)}
 }
 
+// A count of media segments downloaded. Value is negative if unknown. A count of media segments downloaded from the server to this client. Corresponds to "sc-count". This property is not observable. This property is deprecated. Use numberOfMediaRequests instead.
+//
 // NumberOfSegmentsDownloaded calls the underlying NumberOfSegmentsDownloaded.
 func (x *PlayerItemAccessLogEvent) NumberOfSegmentsDownloaded() int {
 	return x.inner.NumberOfSegmentsDownloaded()
 }
 
+// A count of media read requests. Value is negative if unknown. A count of media read requests from the server to this client. Corresponds to "sc-count". For HTTP live Streaming, a count of media segments downloaded from the server to this client. For progressive-style HTTP media downloads, a count of HTTP GET (byte-range) requests for the resource. This property is not observable.
+//
 // NumberOfMediaRequests calls the underlying NumberOfMediaRequests.
 func (x *PlayerItemAccessLogEvent) NumberOfMediaRequests() int {
 	return x.inner.NumberOfMediaRequests()
 }
 
+// The date/time at which playback began for this event. Can be nil. If nil is returned the date is unknown. Corresponds to "date". This property is not observable.
+//
 // PlaybackStartDate calls the underlying PlaybackStartDate.
 func (x *PlayerItemAccessLogEvent) PlaybackStartDate() *foundation.NSDate {
 	return x.inner.PlaybackStartDate()
 }
 
+// The URI of the playback item. Can be nil. If nil is returned the URI is unknown. Corresponds to "uri". This property is not observable.
+//
 // URI calls the underlying URI.
 func (x *PlayerItemAccessLogEvent) URI() string {
 	_r := x.inner.URI()
@@ -61,6 +69,8 @@ func (x *PlayerItemAccessLogEvent) URI() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The IP address of the server that was the source of the last delivered media segment. Can be nil. If nil is returned the address is unknown. Can be either an IPv4 or IPv6 address. Corresponds to "s-ip". This property is not observable.
+//
 // ServerAddress calls the underlying ServerAddress.
 func (x *PlayerItemAccessLogEvent) ServerAddress() string {
 	_r := x.inner.ServerAddress()
@@ -70,11 +80,15 @@ func (x *PlayerItemAccessLogEvent) ServerAddress() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A count of changes to the property serverAddress, see above, over the last uninterrupted period of playback. Value is negative if unknown. Corresponds to "s-ip-changes". This property is not observable.
+//
 // NumberOfServerAddressChanges calls the underlying NumberOfServerAddressChanges.
 func (x *PlayerItemAccessLogEvent) NumberOfServerAddressChanges() int {
 	return x.inner.NumberOfServerAddressChanges()
 }
 
+// A GUID that identifies the playback session. This value is used in HTTP requests. Can be nil. If nil is returned the GUID is unknown. Corresponds to "cs-guid". This property is not observable.
+//
 // PlaybackSessionID calls the underlying PlaybackSessionID.
 func (x *PlayerItemAccessLogEvent) PlaybackSessionID() string {
 	_r := x.inner.PlaybackSessionID()
@@ -84,91 +98,127 @@ func (x *PlayerItemAccessLogEvent) PlaybackSessionID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// An offset into the playlist where the last uninterrupted period of playback began. Measured in seconds. Value is negative if unknown. Corresponds to "c-start-time". This property is not observable.
+//
 // PlaybackStartOffset calls the underlying PlaybackStartOffset.
 func (x *PlayerItemAccessLogEvent) PlaybackStartOffset() float64 {
 	return x.inner.PlaybackStartOffset()
 }
 
+// The accumulated duration of the media downloaded. Measured in seconds. Value is negative if unknown. Corresponds to "c-duration-downloaded". This property is not observable.
+//
 // SegmentsDownloadedDuration calls the underlying SegmentsDownloadedDuration.
 func (x *PlayerItemAccessLogEvent) SegmentsDownloadedDuration() float64 {
 	return x.inner.SegmentsDownloadedDuration()
 }
 
+// The accumulated duration of the media played. Measured in seconds. Value is negative if unknown. Corresponds to "c-duration-watched". This property is not observable.
+//
 // DurationWatched calls the underlying DurationWatched.
 func (x *PlayerItemAccessLogEvent) DurationWatched() float64 {
 	return x.inner.DurationWatched()
 }
 
+// The total number of playback stalls encountered. Value is negative if unknown. Corresponds to "c-stalls". This property is not observable.
+//
 // NumberOfStalls calls the underlying NumberOfStalls.
 func (x *PlayerItemAccessLogEvent) NumberOfStalls() int {
 	return x.inner.NumberOfStalls()
 }
 
+// The accumulated number of bytes transferred. Value is negative if unknown. Corresponds to "bytes". This property is not observable.
+//
 // NumberOfBytesTransferred calls the underlying NumberOfBytesTransferred.
 func (x *PlayerItemAccessLogEvent) NumberOfBytesTransferred() int64 {
 	return x.inner.NumberOfBytesTransferred()
 }
 
+// The accumulated duration of active network transfer of bytes. Measured in seconds. Value is negative if unknown. Corresponds to "c-transfer-duration". This property is not observable.
+//
 // TransferDuration calls the underlying TransferDuration.
 func (x *PlayerItemAccessLogEvent) TransferDuration() float64 {
 	return x.inner.TransferDuration()
 }
 
+// The empirical throughput across all media downloaded. Measured in bits per second. Value is negative if unknown. Corresponds to "c-observed-bitrate". This property is not observable.
+//
 // ObservedBitrate calls the underlying ObservedBitrate.
 func (x *PlayerItemAccessLogEvent) ObservedBitrate() float64 {
 	return x.inner.ObservedBitrate()
 }
 
+// The throughput required to play the stream, as advertised by the server. Measured in bits per second. Value is negative if unknown. Corresponds to "sc-indicated-bitrate". This property is not observable.
+//
 // IndicatedBitrate calls the underlying IndicatedBitrate.
 func (x *PlayerItemAccessLogEvent) IndicatedBitrate() float64 {
 	return x.inner.IndicatedBitrate()
 }
 
+// Average throughput required to play the stream, as advertised by the server. Measured in bits per second. Value is negative if unknown. Corresponds to "sc-indicated-avg-bitrate". This property is not observable.
+//
 // IndicatedAverageBitrate calls the underlying IndicatedAverageBitrate.
 func (x *PlayerItemAccessLogEvent) IndicatedAverageBitrate() float64 {
 	return x.inner.IndicatedAverageBitrate()
 }
 
+// The average bitrate of video track if it is unmuxed. Average bitrate of combined content if muxed. Measured in bits per second. Value is negative if unknown. Corresponds to "c-avg-video-bitrate". This property is not observable.
+//
 // AverageVideoBitrate calls the underlying AverageVideoBitrate.
 func (x *PlayerItemAccessLogEvent) AverageVideoBitrate() float64 {
 	return x.inner.AverageVideoBitrate()
 }
 
+// The average bitrate of audio track. This is not available if audio is muxed with video. Measured in bits per second. Value is negative if unknown. Corresponds to "c-avg-audio-bitrate". This property is not observable.
+//
 // AverageAudioBitrate calls the underlying AverageAudioBitrate.
 func (x *PlayerItemAccessLogEvent) AverageAudioBitrate() float64 {
 	return x.inner.AverageAudioBitrate()
 }
 
+// The total number of dropped video frames. Value is negative if unknown. Corresponds to "c-frames-dropped". This property is not observable.
+//
 // NumberOfDroppedVideoFrames calls the underlying NumberOfDroppedVideoFrames.
 func (x *PlayerItemAccessLogEvent) NumberOfDroppedVideoFrames() int {
 	return x.inner.NumberOfDroppedVideoFrames()
 }
 
+// The accumulated duration until player item is ready to play. Measured in seconds. Value is negative if unknown. Corresponds to "c-startup-time". This property is not observable.
+//
 // StartupTime calls the underlying StartupTime.
 func (x *PlayerItemAccessLogEvent) StartupTime() float64 {
 	return x.inner.StartupTime()
 }
 
+// The total number of times the download of the segments took too long. Value is negative if unknown. Corresponds to "c-overdue". This property is not observable.
+//
 // DownloadOverdue calls the underlying DownloadOverdue.
 func (x *PlayerItemAccessLogEvent) DownloadOverdue() int {
 	return x.inner.DownloadOverdue()
 }
 
+// Maximum observed segment download bit rate. Value is negative if unknown. Corresponds to "c-observed-max-bitrate". This property is not observable.
+//
 // ObservedMaxBitrate calls the underlying ObservedMaxBitrate.
 func (x *PlayerItemAccessLogEvent) ObservedMaxBitrate() float64 {
 	return x.inner.ObservedMaxBitrate()
 }
 
+// Minimum observed segment download bit rate. Value is negative if unknown. Corresponds to "c-observed-min-bitrate". This property is not observable.
+//
 // ObservedMinBitrate calls the underlying ObservedMinBitrate.
 func (x *PlayerItemAccessLogEvent) ObservedMinBitrate() float64 {
 	return x.inner.ObservedMinBitrate()
 }
 
+// Standard deviation of observed segment download bit rates. Value is negative if unknown. Corresponds to "c-observed-bitrate-sd". This property is not observable.
+//
 // ObservedBitrateStandardDeviation calls the underlying ObservedBitrateStandardDeviation.
 func (x *PlayerItemAccessLogEvent) ObservedBitrateStandardDeviation() float64 {
 	return x.inner.ObservedBitrateStandardDeviation()
 }
 
+// Playback type (LIVE, VOD, FILE). If nil is returned the playback type is unknown. Corresponds to "s-playback-type". This property is not observable.
+//
 // PlaybackType calls the underlying PlaybackType.
 func (x *PlayerItemAccessLogEvent) PlaybackType() string {
 	_r := x.inner.PlaybackType()
@@ -178,11 +228,15 @@ func (x *PlayerItemAccessLogEvent) PlaybackType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Number of network read requests over WWAN. Value is negative if unknown. Corresponds to "sc-wwan-count". This property is not observable.
+//
 // MediaRequestsWWAN calls the underlying MediaRequestsWWAN.
 func (x *PlayerItemAccessLogEvent) MediaRequestsWWAN() int {
 	return x.inner.MediaRequestsWWAN()
 }
 
+// Bandwidth that caused us to switch (up or down). Value is negative if unknown. Corresponds to "c-switch-bitrate". This property is not observable.
+//
 // SwitchBitrate calls the underlying SwitchBitrate.
 func (x *PlayerItemAccessLogEvent) SwitchBitrate() float64 {
 	return x.inner.SwitchBitrate()

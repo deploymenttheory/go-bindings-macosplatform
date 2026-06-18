@@ -35,6 +35,8 @@ func MTRBaseClusterLocalizationConfigurationFromID(id objc.ID) *MTRBaseClusterLo
 	return &MTRBaseClusterLocalizationConfiguration{inner: raw.MTRBaseClusterLocalizationConfigurationFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterLocalizationConfigurationWithDeviceEndpointIDQueue creates a new [MTRBaseClusterLocalizationConfiguration].
 func NewMTRBaseClusterLocalizationConfigurationWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterLocalizationConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterLocalizationConfiguration")), objc.RegisterName("alloc"))

@@ -35,89 +35,119 @@ func NewItemSetAttributesRequest() *ItemSetAttributesRequest {
 	return &ItemSetAttributesRequest{inner: raw.FSItemSetAttributesRequestFromID(_id)}
 }
 
+// The attributes successfully used by the file system. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
+//
 // WithConsumedAttributes sets the consumedAttributes property and returns the receiver for chaining.
 func (x *ItemSetAttributesRequest) WithConsumedAttributes(consumedAttributes FSItemAttribute) *ItemSetAttributesRequest {
 	x.inner.SetConsumedAttributes(raw.FSItemAttribute(consumedAttributes))
 	return x
 }
 
+// The user identifier.
+//
 // WithUid sets the uid property and returns the receiver for chaining.
 func (x *ItemSetAttributesRequest) WithUid(uid uint32) *ItemSetAttributesRequest {
 	x.inner.FSItemAttributes.SetUid(uid)
 	return x
 }
 
+// The group identifier.
+//
 // WithGid sets the gid property and returns the receiver for chaining.
 func (x *ItemSetAttributesRequest) WithGid(gid uint32) *ItemSetAttributesRequest {
 	x.inner.FSItemAttributes.SetGid(gid)
 	return x
 }
 
+// The mode of the item. The mode is often used for `setuid`, `setgid`, and `sticky` bits.
+//
 // WithMode sets the mode property and returns the receiver for chaining.
 func (x *ItemSetAttributesRequest) WithMode(mode uint32) *ItemSetAttributesRequest {
 	x.inner.FSItemAttributes.SetMode(mode)
 	return x
 }
 
+// The item type, such as a regular file, directory, or symbolic link.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *ItemSetAttributesRequest) WithType(type_ FSItemType) *ItemSetAttributesRequest {
 	x.inner.FSItemAttributes.SetType(raw.FSItemType(type_))
 	return x
 }
 
+// The number of hard links to the item.
+//
 // WithLinkCount sets the linkCount property and returns the receiver for chaining.
 func (x *ItemSetAttributesRequest) WithLinkCount(linkCount uint32) *ItemSetAttributesRequest {
 	x.inner.FSItemAttributes.SetLinkCount(linkCount)
 	return x
 }
 
+// The item's behavior flags. See `st_flags` in `stat.h` for flag definitions.
+//
 // WithFlags sets the flags property and returns the receiver for chaining.
 func (x *ItemSetAttributesRequest) WithFlags(flags uint32) *ItemSetAttributesRequest {
 	x.inner.FSItemAttributes.SetFlags(flags)
 	return x
 }
 
+// The item's size.
+//
 // WithSize sets the size property and returns the receiver for chaining.
 func (x *ItemSetAttributesRequest) WithSize(size uint64) *ItemSetAttributesRequest {
 	x.inner.FSItemAttributes.SetSize(size)
 	return x
 }
 
+// The item's allocated size.
+//
 // WithAllocSize sets the allocSize property and returns the receiver for chaining.
 func (x *ItemSetAttributesRequest) WithAllocSize(allocSize uint64) *ItemSetAttributesRequest {
 	x.inner.FSItemAttributes.SetAllocSize(allocSize)
 	return x
 }
 
+// The item's file identifier.
+//
 // WithFileID sets the fileID property and returns the receiver for chaining.
 func (x *ItemSetAttributesRequest) WithFileID(fileID FSItemID) *ItemSetAttributesRequest {
 	x.inner.FSItemAttributes.SetFileID(raw.FSItemID(fileID))
 	return x
 }
 
+// The identifier of the item's parent.
+//
 // WithParentID sets the parentID property and returns the receiver for chaining.
 func (x *ItemSetAttributesRequest) WithParentID(parentID FSItemID) *ItemSetAttributesRequest {
 	x.inner.FSItemAttributes.SetParentID(raw.FSItemID(parentID))
 	return x
 }
 
+// A Boolean value that indicates whether the item supports a limited set of extended attributes.
+//
 // WithSupportsLimitedXAttrs sets the supportsLimitedXAttrs property and returns the receiver for chaining.
 func (x *ItemSetAttributesRequest) WithSupportsLimitedXAttrs(supportsLimitedXAttrs bool) *ItemSetAttributesRequest {
 	x.inner.FSItemAttributes.SetSupportsLimitedXAttrs(supportsLimitedXAttrs)
 	return x
 }
 
+// A Boolean value that indicates whether the file system overrides the per-volume settings for kernel offloaded I/O for a specific file. This property has no meaning if the volume doesn't conform to “FSVolumeKernelOffloadedIOOperations“.
+//
 // WithInhibitKernelOffloadedIO sets the inhibitKernelOffloadedIO property and returns the receiver for chaining.
 func (x *ItemSetAttributesRequest) WithInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool) *ItemSetAttributesRequest {
 	x.inner.FSItemAttributes.SetInhibitKernelOffloadedIO(inhibitKernelOffloadedIO)
 	return x
 }
 
+// A method that indicates whether the file system used the given attribute. - Parameter attribute: The “FSItemAttribute“ to check.
+//
 // WasAttributeConsumed calls the underlying WasAttributeConsumed.
 func (x *ItemSetAttributesRequest) WasAttributeConsumed(attribute FSItemAttribute) bool {
 	return x.inner.WasAttributeConsumed(raw.FSItemAttribute(attribute))
 }
 
+// The attributes successfully used by the file system. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
+//
 // ConsumedAttributes calls the underlying ConsumedAttributes.
 func (x *ItemSetAttributesRequest) ConsumedAttributes() FSItemAttribute {
 	return FSItemAttribute(x.inner.ConsumedAttributes())

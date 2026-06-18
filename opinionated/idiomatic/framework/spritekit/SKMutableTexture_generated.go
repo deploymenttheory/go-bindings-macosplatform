@@ -31,6 +31,8 @@ func MutableTextureFromID(id objc.ID) *MutableTexture {
 	return &MutableTexture{inner: raw.SKMutableTextureFromID(id)}
 }
 
+// Create a mutable texture with a specfic size. @param size the dimension to use when creating the given texture.
+//
 // NewMutableTextureWithSize creates a new [MutableTexture].
 func NewMutableTextureWithSize(size corefoundation.CGSize) *MutableTexture {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKMutableTexture")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewMutableTextureWithSize(size corefoundation.CGSize) *MutableTexture {
 	return &MutableTexture{inner: raw.SKMutableTextureFromID(_id)}
 }
 
+// Create a mutable texture with a specfic size and type. @param size the dimension to use when creating the given texture. @param format the CoreVideo format type.  supported types include 'RGBA', 'RGhA', and 'RGfA' for byte, half-float, and float components.
+//
 // NewMutableTextureWithSizePixelFormat creates a new [MutableTexture].
 func NewMutableTextureWithSizePixelFormat(size corefoundation.CGSize, format int) *MutableTexture {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKMutableTexture")), objc.RegisterName("alloc"))
@@ -45,18 +49,24 @@ func NewMutableTextureWithSizePixelFormat(size corefoundation.CGSize, format int
 	return &MutableTexture{inner: raw.SKMutableTextureFromID(_id)}
 }
 
+// The filtering mode the texture should use when not drawn at native size. Defaults to SKTextureFilteringLinear.
+//
 // WithFilteringMode sets the filteringMode property and returns the receiver for chaining.
 func (x *MutableTexture) WithFilteringMode(filteringMode SKTextureFilteringMode) *MutableTexture {
 	x.inner.SKTexture.SetFilteringMode(raw.SKTextureFilteringMode(filteringMode))
 	return x
 }
 
+// Request that the texture have mipmaps generated if possible. Only supported for power of 2 texture sizes.
+//
 // WithUsesMipmaps sets the usesMipmaps property and returns the receiver for chaining.
 func (x *MutableTexture) WithUsesMipmaps(usesMipmaps bool) *MutableTexture {
 	x.inner.SKTexture.SetUsesMipmaps(usesMipmaps)
 	return x
 }
 
+// Modify the created mutable texture.
+//
 // ModifyPixelDataWith calls the underlying ModifyPixelDataWith.
 func (x *MutableTexture) ModifyPixelDataWith(block func(unsafe.Pointer, uint)) {
 	x.inner.ModifyPixelDataWith(block)

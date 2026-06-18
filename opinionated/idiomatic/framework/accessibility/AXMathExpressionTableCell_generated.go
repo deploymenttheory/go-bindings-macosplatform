@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MathExpressionTableCell wraps [raw.AXMathExpressionTableCell] with a fluent Go API.
@@ -32,9 +33,18 @@ func MathExpressionTableCellFromID(id objc.ID) *MathExpressionTableCell {
 }
 
 // NewMathExpressionTableCellWithExpressions creates a new [MathExpressionTableCell].
-func NewMathExpressionTableCellWithExpressions(expressions *foundation.NSArray[*raw.AXMathExpression]) *MathExpressionTableCell {
+func NewMathExpressionTableCellWithExpressions(expressions ...MathExpressionProvider) *MathExpressionTableCell {
+	_ptrs := make([]objc.ID, len(expressions))
+	for _i, _v := range expressions {
+		_ptrs[_i] = _v.asMathExpression().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.AXMathExpression]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.AXMathExpression](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXMathExpressionTableCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExpressions:"), expressions.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExpressions:"), _arg0.Ptr())
 	return &MathExpressionTableCell{inner: raw.AXMathExpressionTableCellFromID(_id)}
 }
 

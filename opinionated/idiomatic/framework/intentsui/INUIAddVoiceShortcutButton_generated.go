@@ -55,6 +55,8 @@ func (x *AddVoiceShortcutButton) WithShortcut(shortcut *intents.INShortcut) *Add
 	return x
 }
 
+// @abstract A custom corner radius for the @c INUIAddVoiceShortcutButton. @discussion If the provided corner radius is greater than half of the button’s height, it will be capped at half of the button’s height.
+//
 // WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
 func (x *AddVoiceShortcutButton) WithCornerRadius(cornerRadius float64) *AddVoiceShortcutButton {
 	x.inner.SetCornerRadius(cornerRadius)
@@ -91,6 +93,8 @@ func (x *AddVoiceShortcutButton) SetShortcut(shortcut *intents.INShortcut) {
 	x.inner.SetShortcut(shortcut)
 }
 
+// @abstract A custom corner radius for the @c INUIAddVoiceShortcutButton. @discussion If the provided corner radius is greater than half of the button’s height, it will be capped at half of the button’s height.
+//
 // CornerRadius calls the underlying CornerRadius.
 func (x *AddVoiceShortcutButton) CornerRadius() float64 {
 	return x.inner.CornerRadius()

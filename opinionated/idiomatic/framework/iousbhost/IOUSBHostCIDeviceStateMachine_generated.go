@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// @class   IOUSBHostCIDeviceStateMachine @brief   The object representing the state of a user-mode USB host controller device @details This class assists with tracking internal state transitions of a user-mode USB host controller device, and parses IOUSBHostCIMessage command structures to update state and generate properly formatted command responses.  Clients should create an IOUSBHostCIDeviceStateMachine in response to an IOUSBHostCIMessageTypeDeviceCreate command, and then use the provided interfaces to identify and process commands for the device.  The IOUSBHostCIDeviceStateMachine should be destroyed in response to an IOUSBHostCIMessageTypeDeviceDestroy command. IOUSBHostCIDeviceStateMachine does not provide any concurrency protection, the client is responsible for necessary serialization.
+//
 // HostCIDeviceStateMachine wraps [raw.IOUSBHostCIDeviceStateMachine] with a fluent Go API.
 type HostCIDeviceStateMachine struct {
 	inner *raw.IOUSBHostCIDeviceStateMachine
@@ -31,6 +33,8 @@ func HostCIDeviceStateMachineFromID(id objc.ID) *HostCIDeviceStateMachine {
 	return &HostCIDeviceStateMachine{inner: raw.IOUSBHostCIDeviceStateMachineFromID(id)}
 }
 
+// @brief       Initializes an IOUSBHostCIDeviceStateMachine object @discussion  The IOUSBHostCIDeviceStateMachine defaults to the IOUSBHostCIDeviceStateActive state. @param       interface IOUSBHostControllerInterface which will be used to send command responses. @param       command IOUSBHostCIMessage with type IOUSBHostCIMessageTypeDeviceCreate @return      IOUSBHostCIDeviceStateMachine instance, to be released by the caller.
+//
 // NewHostCIDeviceStateMachineWithInterfaceCommandError creates a new [HostCIDeviceStateMachine].
 func NewHostCIDeviceStateMachineWithInterfaceCommandError(interface_ *raw.IOUSBHostControllerInterface, command *raw.IOUSBHostCIMessage) (*HostCIDeviceStateMachine, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOUSBHostCIDeviceStateMachine")), objc.RegisterName("alloc"))
@@ -42,11 +46,15 @@ func NewHostCIDeviceStateMachineWithInterfaceCommandError(interface_ *raw.IOUSBH
 	return &HostCIDeviceStateMachine{inner: raw.IOUSBHostCIDeviceStateMachineFromID(_id)}, nil
 }
 
+// @brief       Inspect an IOUSBHostCIMessage command @discussion  The IOUSBHostCIMessage command is inspected to determine if it is handled by the state machine, and is appropriate for the current state. @param       command IOUSBHostCIMessage command structure received from the kernel driver. @return      BOOL YES if the command is targeting a controller, and can be handled in the current state BOOL NO if the command does not target a controller, or cannot be handled in the current state
+//
 // InspectCommandError calls the underlying InspectCommandError.
 func (x *HostCIDeviceStateMachine) InspectCommandError(command *raw.IOUSBHostCIMessage) (bool, error) {
 	return x.inner.InspectCommandError(command)
 }
 
+// @brief       Advance the state machine and respond to an IOUSBHostCIMessage command @discussion  If the command passes inspectCommand and the client indicates the command was processed successfully, the state machine is advanced, and a properly formatted command response message is sent to the kernel driver.  If the client indicates the command was not processed successfully, the state machine is not advanced but a properly formatted command response message is sent to the kernel driver. @param       command IOUSBHostCIMessage command structure received from the kernel driver. @param       status IOUSBHostCIMessageStatus reported by the user-mode USB host controller implementation for the command response. @return      BOOL YES if the command response was sent to the kernel driver BOOL NO if the command response was not sent to the kernel driver
+//
 // RespondToCommandStatusError calls the underlying RespondToCommandStatusError.
 func (x *HostCIDeviceStateMachine) RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus) (bool, error) {
 	return x.inner.RespondToCommandStatusError(command, raw.IOUSBHostCIMessageStatus(status))

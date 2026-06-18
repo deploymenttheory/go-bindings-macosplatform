@@ -61,6 +61,8 @@ func (x *Mappings) WithFunction(function string) *Mappings {
 	return x
 }
 
+// @method recordType: @abstract Returns an ODRecordMap associated with the provided recordtype. @discussion Returns an ODRecordMap associated with the provided recordtype.
+//
 // RecordMapForStandardRecordType calls the underlying RecordMapForStandardRecordType.
 func (x *Mappings) RecordMapForStandardRecordType(stdType string) *RecordMap {
 	_r := x.inner.RecordMapForStandardRecordType(foundation.NSStringStringWithUTF8String(stdType))
@@ -70,6 +72,8 @@ func (x *Mappings) RecordMapForStandardRecordType(stdType string) *RecordMap {
 	return &RecordMap{inner: _r}
 }
 
+// @method setRecordMap:forRecordType: @abstract Sets a particular ODRecordMap for a given standard record type. @discussion Sets a particular ODRecordMap for a given standard record type.
+//
 // SetRecordMapForStandardRecordType calls the underlying SetRecordMapForStandardRecordType.
 func (x *Mappings) SetRecordMapForStandardRecordType(map_ *raw.ODRecordMap, stdType string) {
 	x.inner.SetRecordMapForStandardRecordType(map_, foundation.NSStringStringWithUTF8String(stdType))

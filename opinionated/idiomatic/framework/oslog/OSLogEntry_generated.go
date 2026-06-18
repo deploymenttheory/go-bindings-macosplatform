@@ -37,6 +37,8 @@ func NewLogEntry() *LogEntry {
 	return &LogEntry{inner: raw.OSLogEntryFromID(_id)}
 }
 
+// @property composedMessage @abstract The fully formatted message for the entry.
+//
 // ComposedMessage calls the underlying ComposedMessage.
 func (x *LogEntry) ComposedMessage() string {
 	_r := x.inner.ComposedMessage()
@@ -46,11 +48,15 @@ func (x *LogEntry) ComposedMessage() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property date @abstract The timestamp of the entry.
+//
 // Date calls the underlying Date.
 func (x *LogEntry) Date() *foundation.NSDate {
 	return x.inner.Date()
 }
 
+// @property storeCategory @abstract This entry's storage tag. See OSLogEntryStoreCategory.
+//
 // StoreCategory calls the underlying StoreCategory.
 func (x *LogEntry) StoreCategory() OSLogEntryStoreCategory {
 	return OSLogEntryStoreCategory(x.inner.StoreCategory())

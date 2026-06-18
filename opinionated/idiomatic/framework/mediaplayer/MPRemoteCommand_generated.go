@@ -35,6 +35,8 @@ func NewRemoteCommand() *RemoteCommand {
 	return &RemoteCommand{inner: raw.MPRemoteCommandFromID(_id)}
 }
 
+// Whether a button (for example) should be enabled and tappable for this particular command.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *RemoteCommand) WithEnabled(enabled bool) *RemoteCommand {
 	x.inner.SetEnabled(enabled)
@@ -56,6 +58,8 @@ func (x *RemoteCommand) RemoveTarget(target objc.ID) {
 	x.inner.RemoveTarget(target)
 }
 
+// Returns an opaque object to act as the target.
+//
 // AddTargetWithHandler calls the underlying AddTargetWithHandler.
 func (x *RemoteCommand) AddTargetWithHandler(handler func(*raw.MPRemoteCommandEvent) MPRemoteCommandHandlerStatus) objc.ID {
 	return x.inner.AddTargetWithHandler(func(_a0 *raw.MPRemoteCommandEvent) raw.MPRemoteCommandHandlerStatus {
@@ -63,6 +67,8 @@ func (x *RemoteCommand) AddTargetWithHandler(handler func(*raw.MPRemoteCommandEv
 	})
 }
 
+// Whether a button (for example) should be enabled and tappable for this particular command.
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *RemoteCommand) IsEnabled() bool {
 	return x.inner.IsEnabled()

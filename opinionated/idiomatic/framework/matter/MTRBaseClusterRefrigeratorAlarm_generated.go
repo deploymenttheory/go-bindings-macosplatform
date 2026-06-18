@@ -35,6 +35,8 @@ func MTRBaseClusterRefrigeratorAlarmFromID(id objc.ID) *MTRBaseClusterRefrigerat
 	return &MTRBaseClusterRefrigeratorAlarm{inner: raw.MTRBaseClusterRefrigeratorAlarmFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterRefrigeratorAlarmWithDeviceEndpointIDQueue creates a new [MTRBaseClusterRefrigeratorAlarm].
 func NewMTRBaseClusterRefrigeratorAlarmWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterRefrigeratorAlarm {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterRefrigeratorAlarm")), objc.RegisterName("alloc"))

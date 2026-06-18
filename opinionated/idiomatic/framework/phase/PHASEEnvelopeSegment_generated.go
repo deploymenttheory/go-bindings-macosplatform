@@ -30,6 +30,8 @@ func EnvelopeSegmentFromID(id objc.ID) *EnvelopeSegment {
 	return &EnvelopeSegment{inner: raw.PHASEEnvelopeSegmentFromID(id)}
 }
 
+// @method initWithEndPoint:curveType @abstract Initialize an envelope segment with an endPoint and a curveType. @param endPoint The end point of the segment. @param curveType The curve type. @return A new envelope.
+//
 // NewEnvelopeSegmentWithEndPointCurveType creates a new [EnvelopeSegment].
 func NewEnvelopeSegmentWithEndPointCurveType(endPoint unsafe.Pointer, curveType PHASECurveType) *EnvelopeSegment {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEEnvelopeSegment")), objc.RegisterName("alloc"))
@@ -37,12 +39,16 @@ func NewEnvelopeSegmentWithEndPointCurveType(endPoint unsafe.Pointer, curveType 
 	return &EnvelopeSegment{inner: raw.PHASEEnvelopeSegmentFromID(_id)}
 }
 
+// @property curveType @abstract The curve type of the envelope segment. @discussion The default value is PHASECurveTypeLinear.
+//
 // WithCurveType sets the curveType property and returns the receiver for chaining.
 func (x *EnvelopeSegment) WithCurveType(curveType PHASECurveType) *EnvelopeSegment {
 	x.inner.SetCurveType(raw.PHASECurveType(curveType))
 	return x
 }
 
+// @property endPoint @abstract The end point of the envelope segment. @discussion The default value is [0.0, 0.0].
+//
 // EndPoint calls the underlying EndPoint.
 func (x *EnvelopeSegment) EndPoint() unsafe.Pointer {
 	return x.inner.EndPoint()
@@ -53,6 +59,8 @@ func (x *EnvelopeSegment) SetEndPoint(endPoint unsafe.Pointer) {
 	x.inner.SetEndPoint(endPoint)
 }
 
+// @property curveType @abstract The curve type of the envelope segment. @discussion The default value is PHASECurveTypeLinear.
+//
 // CurveType calls the underlying CurveType.
 func (x *EnvelopeSegment) CurveType() PHASECurveType {
 	return PHASECurveType(x.inner.CurveType())

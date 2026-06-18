@@ -32,6 +32,8 @@ func CollaborationShareOptionsFromID(id objc.ID) *CollaborationShareOptions {
 	return &CollaborationShareOptions{inner: raw.SWCollaborationShareOptionsFromID(id)}
 }
 
+// @abstract Initializes a shareOptions object to represent the available collaboration options for the document and a summary of the selected options @param optionsGroups SWCollaborationOptionsGroups to customize how the collaboration will be shared @param summary localized string to summarize the selected collaboration options
+//
 // NewCollaborationShareOptionsWithOptionsGroupsSummary creates a new [CollaborationShareOptions].
 func NewCollaborationShareOptionsWithOptionsGroupsSummary(optionsGroups *foundation.NSArray[*raw.SWCollaborationOptionsGroup], summary string) *CollaborationShareOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWCollaborationShareOptions")), objc.RegisterName("alloc"))
@@ -39,10 +41,21 @@ func NewCollaborationShareOptionsWithOptionsGroupsSummary(optionsGroups *foundat
 	return &CollaborationShareOptions{inner: raw.SWCollaborationShareOptionsFromID(_id)}
 }
 
+// @abstract Initializes a shareOptions object to represent the available collaboration options for the document and the default summary string "Share Options" @param optionsGroups SWCollaborationOptionsGroups to customize how the collaboration will be shared
+//
 // NewCollaborationShareOptionsWithOptionsGroups creates a new [CollaborationShareOptions].
-func NewCollaborationShareOptionsWithOptionsGroups(optionsGroups *foundation.NSArray[*raw.SWCollaborationOptionsGroup]) *CollaborationShareOptions {
+func NewCollaborationShareOptionsWithOptionsGroups(optionsGroups ...CollaborationOptionsGroupProvider) *CollaborationShareOptions {
+	_ptrs := make([]objc.ID, len(optionsGroups))
+	for _i, _v := range optionsGroups {
+		_ptrs[_i] = _v.asCollaborationOptionsGroup().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.SWCollaborationOptionsGroup]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.SWCollaborationOptionsGroup](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWCollaborationShareOptions")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptionsGroups:"), optionsGroups.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptionsGroups:"), _arg0.Ptr())
 	return &CollaborationShareOptions{inner: raw.SWCollaborationShareOptionsFromID(_id)}
 }
 
@@ -53,6 +66,8 @@ func NewCollaborationShareOptionsWithCoder(coder *foundation.NSCoder) *Collabora
 	return &CollaborationShareOptions{inner: raw.SWCollaborationShareOptionsFromID(_id)}
 }
 
+// @abstract SWCollaborationOptionsGroups to customize how the collaboration will be shared
+//
 // WithOptionsGroups sets the collection, converting the Go slice to an NSArray.
 func (x *CollaborationShareOptions) WithOptionsGroups(items ...CollaborationOptionsGroupProvider) *CollaborationShareOptions {
 	if len(items) == 0 {
@@ -71,12 +86,16 @@ func (x *CollaborationShareOptions) WithOptionsGroups(items ...CollaborationOpti
 	return x
 }
 
+// @abstract Localized string to summarize the selected collaboration options. If nil, "Share Options" will be displayed by default.
+//
 // WithSummary sets the summary property and returns the receiver for chaining.
 func (x *CollaborationShareOptions) WithSummary(summary string) *CollaborationShareOptions {
 	x.inner.SetSummary(foundation.NSStringStringWithUTF8String(summary))
 	return x
 }
 
+// @abstract SWCollaborationOptionsGroups to customize how the collaboration will be shared
+//
 // OptionsGroups returns the collection as a Go slice.
 func (x *CollaborationShareOptions) OptionsGroups() []*CollaborationOptionsGroup {
 	arr := x.inner.OptionsGroups()
@@ -89,10 +108,21 @@ func (x *CollaborationShareOptions) OptionsGroups() []*CollaborationOptionsGroup
 }
 
 // SetOptionsGroups calls the underlying SetOptionsGroups.
-func (x *CollaborationShareOptions) SetOptionsGroups(optionsGroups *foundation.NSArray[*raw.SWCollaborationOptionsGroup]) {
-	x.inner.SetOptionsGroups(optionsGroups)
+func (x *CollaborationShareOptions) SetOptionsGroups(optionsGroups ...CollaborationOptionsGroupProvider) {
+	_ptrs := make([]objc.ID, len(optionsGroups))
+	for _i, _v := range optionsGroups {
+		_ptrs[_i] = _v.asCollaborationOptionsGroup().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.SWCollaborationOptionsGroup]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.SWCollaborationOptionsGroup](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetOptionsGroups(_arg0)
 }
 
+// @abstract Localized string to summarize the selected collaboration options. If nil, "Share Options" will be displayed by default.
+//
 // Summary calls the underlying Summary.
 func (x *CollaborationShareOptions) Summary() string {
 	_r := x.inner.Summary()
@@ -113,7 +143,7 @@ type CollaborationShareOptionsable interface {
 	WithOptionsGroups(items ...CollaborationOptionsGroupProvider) *CollaborationShareOptions
 	WithSummary(summary string) *CollaborationShareOptions
 	OptionsGroups() []*CollaborationOptionsGroup
-	SetOptionsGroups(optionsGroups *foundation.NSArray[*raw.SWCollaborationOptionsGroup])
+	SetOptionsGroups(optionsGroups ...CollaborationOptionsGroupProvider)
 	Summary() string
 	SetSummary(summary string)
 }

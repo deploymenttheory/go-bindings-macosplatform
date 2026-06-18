@@ -40,12 +40,16 @@ func NewHighlightCenter() *HighlightCenter {
 	return &HighlightCenter{inner: raw.SWHighlightCenterFromID(_id)}
 }
 
+// @abstract The highlight center's delegate
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *HighlightCenter) WithDelegate(delegate raw.SWHighlightCenterDelegate) *HighlightCenter {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @abstract A convenience method to get a SWHighlight for a given URL @param URL The URL used to find the SWHighlight @param completionHandler an SWHighlight if it  was fetched. The completion handler will always be invoked on the main queue
+//
 // GetHighlightForURL blocks until the operation completes or ctx is cancelled.
 func (x *HighlightCenter) GetHighlightForURL(ctx context.Context, uRL string) (*Highlight, error) {
 	type _result struct {
@@ -84,6 +88,8 @@ func (x *HighlightCenter) CollaborationHighlightForIdentifierError(collaboration
 	return &CollaborationHighlight{inner: _r}, nil
 }
 
+// @abstract A convenience method to get an SWCollaborationHighlight for a given URL @param URL The URL used to find the SWCollaborationHighlight @param completionHandler  an SWCollaborationHighlight if it was fetched. The completion handler will always be invoked on the main queue
+//
 // GetCollaborationHighlightForURL blocks until the operation completes or ctx is cancelled.
 func (x *HighlightCenter) GetCollaborationHighlightForURL(ctx context.Context, uRL string) (*CollaborationHighlight, error) {
 	type _result struct {
@@ -110,16 +116,22 @@ func (x *HighlightCenter) GetCollaborationHighlightForURL(ctx context.Context, u
 	}
 }
 
+// @abstract Post a given event to the highlight center for display in Messages. @param event The event to add for a specific highlight
+//
 // PostNoticeForHighlightEvent calls the underlying PostNoticeForHighlightEvent.
 func (x *HighlightCenter) PostNoticeForHighlightEvent(event raw.SWHighlightEvent) {
 	x.inner.PostNoticeForHighlightEvent(event)
 }
 
+// @abstract Clear notices for a given collaboration highlight in Messages. @param highlight The highlight to clear notices from.
+//
 // ClearNoticesForHighlight calls the underlying ClearNoticesForHighlight.
 func (x *HighlightCenter) ClearNoticesForHighlight(highlight *raw.SWCollaborationHighlight) {
 	x.inner.ClearNoticesForHighlight(highlight)
 }
 
+// @abstract Method to sign passed in data with local device's private key @param data NSData that needs to be signed @param collaborationHighlight The corresponding collaboration highlight. @param completionHandler Signed data along with proof of inclusion for merkle if signing succeeded, otherwise an error. The completion handler will always be invoked on main queue
+//
 // GetSignedIdentityProofForCollaborationHighlightUsingData blocks until the operation completes or ctx is cancelled.
 func (x *HighlightCenter) GetSignedIdentityProofForCollaborationHighlightUsingData(ctx context.Context, collaborationHighlight *raw.SWCollaborationHighlight, data *foundation.NSData) (*sharedwithyoucore.SWSignedPersonIdentityProof, error) {
 	type _result struct {
@@ -144,6 +156,8 @@ func (x *HighlightCenter) GetSignedIdentityProofForCollaborationHighlightUsingDa
 	}
 }
 
+// @abstract The highlight center's delegate
+//
 // Delegate calls the underlying Delegate.
 func (x *HighlightCenter) Delegate() raw.SWHighlightCenterDelegate {
 	return x.inner.Delegate()

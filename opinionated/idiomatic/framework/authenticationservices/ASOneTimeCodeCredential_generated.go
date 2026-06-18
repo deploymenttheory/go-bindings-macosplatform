@@ -31,6 +31,8 @@ func OneTimeCodeCredentialFromID(id objc.ID) *OneTimeCodeCredential {
 	return &OneTimeCodeCredential{inner: raw.ASOneTimeCodeCredentialFromID(id)}
 }
 
+// @abstract Initializes an ASOneTimeCodeCredential object. @param code the one time code.
+//
 // NewOneTimeCodeCredentialWithCode creates a new [OneTimeCodeCredential].
 func NewOneTimeCodeCredentialWithCode(code string) *OneTimeCodeCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASOneTimeCodeCredential")), objc.RegisterName("alloc"))

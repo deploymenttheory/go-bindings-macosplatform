@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration object that provides a way to reclaim memory from the guest system.
+//
 // VirtioTraditionalMemoryBalloonDeviceConfiguration wraps [raw.VZVirtioTraditionalMemoryBalloonDeviceConfiguration] with a fluent Go API.
 type VirtioTraditionalMemoryBalloonDeviceConfiguration struct {
 	inner *raw.VZVirtioTraditionalMemoryBalloonDeviceConfiguration

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Ridged noise is similar to Perlin noise, with sharply-defined, relatively thin peaks.
+//
 // RidgedNoiseSource wraps [raw.GKRidgedNoiseSource] with a fluent Go API.
 type RidgedNoiseSource struct {
 	inner *raw.GKRidgedNoiseSource

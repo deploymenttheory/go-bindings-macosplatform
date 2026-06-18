@@ -29,6 +29,8 @@ func RecurrenceDayOfWeekFromID(id objc.ID) *RecurrenceDayOfWeek {
 	return &RecurrenceDayOfWeek{inner: raw.EKRecurrenceDayOfWeekFromID(id)}
 }
 
+// @method     initWithDayOfTheWeek:weekNumber: @abstract   Creates an day-of-week object with a specific day of week and week number.
+//
 // NewRecurrenceDayOfWeekWithDayOfTheWeekWeekNumber creates a new [RecurrenceDayOfWeek].
 func NewRecurrenceDayOfWeekWithDayOfTheWeekWeekNumber(dayOfTheWeek EKWeekday, weekNumber int) *RecurrenceDayOfWeek {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("EKRecurrenceDayOfWeek")), objc.RegisterName("alloc"))
@@ -36,11 +38,15 @@ func NewRecurrenceDayOfWeekWithDayOfTheWeekWeekNumber(dayOfTheWeek EKWeekday, we
 	return &RecurrenceDayOfWeek{inner: raw.EKRecurrenceDayOfWeekFromID(_id)}
 }
 
+// @property   dayOfTheWeek @abstract   The day of the week.
+//
 // DayOfTheWeek calls the underlying DayOfTheWeek.
 func (x *RecurrenceDayOfWeek) DayOfTheWeek() EKWeekday {
 	return EKWeekday(x.inner.DayOfTheWeek())
 }
 
+// @property   weekNumber @abstract   The week number.
+//
 // WeekNumber calls the underlying WeekNumber.
 func (x *RecurrenceDayOfWeek) WeekNumber() int {
 	return x.inner.WeekNumber()

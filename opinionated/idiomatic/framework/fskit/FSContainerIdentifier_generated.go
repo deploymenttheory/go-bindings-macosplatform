@@ -36,12 +36,16 @@ func NewContainerIdentifier() *ContainerIdentifier {
 	return &ContainerIdentifier{inner: raw.FSContainerIdentifierFromID(_id)}
 }
 
+// A UUID to uniquely identify this entity.
+//
 // WithUuid sets the uuid property and returns the receiver for chaining.
 func (x *ContainerIdentifier) WithUuid(uuid *foundation.NSUUID) *ContainerIdentifier {
 	x.inner.FSEntityIdentifier.SetUuid(uuid)
 	return x
 }
 
+// An optional piece of data to distinguish entities that otherwise share the same UUID.
+//
 // WithQualifier sets the qualifier property and returns the receiver for chaining.
 func (x *ContainerIdentifier) WithQualifier(qualifier *foundation.NSData) *ContainerIdentifier {
 	x.inner.FSEntityIdentifier.SetQualifier(qualifier)

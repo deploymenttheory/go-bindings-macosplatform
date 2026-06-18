@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents a console device in a VM.
+//
 // ConsoleDevice wraps [raw.VZConsoleDevice] with a fluent Go API.
 type ConsoleDevice struct {
 	inner *raw.VZConsoleDevice

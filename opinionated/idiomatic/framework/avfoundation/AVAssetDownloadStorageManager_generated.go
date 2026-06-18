@@ -36,11 +36,15 @@ func NewAssetDownloadStorageManager() *AssetDownloadStorageManager {
 	return &AssetDownloadStorageManager{inner: raw.AVAssetDownloadStorageManagerFromID(_id)}
 }
 
+// Sets the policy for asset with disk backing at downloadStorageURL. - Parameter downloadStorageURL: The location of downloaded asset.
+//
 // SetStorageManagementPolicyForURL calls the underlying SetStorageManagementPolicyForURL.
 func (x *AssetDownloadStorageManager) SetStorageManagementPolicyForURL(storageManagementPolicy *raw.AVAssetDownloadStorageManagementPolicy, downloadStorageURL string) {
 	x.inner.SetStorageManagementPolicyForURL(storageManagementPolicy, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(downloadStorageURL)))
 }
 
+// Returns the storage management policy for asset downloaded at downloadStorageURL. This may be nil if a storageManagementPolicy was never set on the downloaded asset. - Parameter downloadStorageURL: The location of downloaded asset.
+//
 // StorageManagementPolicyForURL calls the underlying StorageManagementPolicyForURL.
 func (x *AssetDownloadStorageManager) StorageManagementPolicyForURL(downloadStorageURL string) *AssetDownloadStorageManagementPolicy {
 	_r := x.inner.StorageManagementPolicyForURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(downloadStorageURL)))

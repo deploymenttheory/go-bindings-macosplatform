@@ -36,6 +36,8 @@ func NewSyncEngineFailedZoneSave() *SyncEngineFailedZoneSave {
 	return &SyncEngineFailedZoneSave{inner: raw.CKSyncEngineFailedZoneSaveFromID(_id)}
 }
 
+// The record zone that CloudKit is unable to modify.
+//
 // RecordZone calls the underlying RecordZone.
 func (x *SyncEngineFailedZoneSave) RecordZone() *RecordZone {
 	_r := x.inner.RecordZone()
@@ -45,6 +47,8 @@ func (x *SyncEngineFailedZoneSave) RecordZone() *RecordZone {
 	return &RecordZone{inner: _r}
 }
 
+// A error that describes the reason for the unsuccessful attempt to modify the associated record zone.
+//
 // Error calls the underlying Error.
 func (x *SyncEngineFailedZoneSave) Error() unsafe.Pointer {
 	return x.inner.Error()

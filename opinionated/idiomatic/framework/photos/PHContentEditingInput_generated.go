@@ -61,6 +61,8 @@ func (x *ContentEditingInput) Location() unsafe.Pointer {
 	return x.inner.Location()
 }
 
+// The type of data provided as the asset's content editing input image or video.
+//
 // ContentType calls the underlying ContentType.
 func (x *ContentEditingInput) ContentType() *uniformtypeidentifiers.UTType {
 	return x.inner.ContentType()

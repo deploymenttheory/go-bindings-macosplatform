@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A Virtio graphics device.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtiographicsdevice
 type VZVirtioGraphicsDevice struct {
 	VZGraphicsDevice

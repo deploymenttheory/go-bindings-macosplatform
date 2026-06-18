@@ -1,24 +1,29 @@
-# Warden (Go port)
+# Warden
 
-A port of [Objective-See's **Warden**](https://github.com/objective-see/Warden) macOS
-firewall to Go, built on this SDK. It demonstrates the three capabilities added
-for this example:
+A declarative macOS firewall, built on this SDK as an example. The firewall
+policy is a JSON/YAML document applied authoritatively — the document is the
+complete, enforced state of the firewall.
+
+Its architecture is modeled on [Objective-See's **LuLu**](https://github.com/objective-see/LuLu)
+(the NEFilterDataProvider filtering, rule engine, XPC control channel, and process
+attribution map onto LuLu's targets), but Warden is configuration-driven rather
+than interactive. It demonstrates three capabilities of this SDK:
 
 - **NEFilterDataProvider subclassing in Go** (`bindings/runtime/purego` `NewDelegate`/`RegisterClass`),
 - **NSXPCConnection from Go** (`bindings/runtime/purego` `XPCProtocol`/`XPCConn`/`XPCListener`),
 - **idiomatic CGo libraries** (`opinionated/idiomatic/libraries/libproc` for process attribution).
 
-It mirrors Warden's target layout:
+Component layout (left: the LuLu target it's modeled on; right: this Go example):
 
-| Warden (ObjC)            | This port (Go)                                  |
+| LuLu (ObjC original)   | Warden (this Go example)                        |
 |------------------------|-------------------------------------------------|
-| `Shared/` (Rule, protos, consts) | `shared/`                              |
+| `Shared/` (Rule, protos, consts) | `shared/`                             |
 | `Extension/Rules`      | `rules/`                                        |
 | `Extension/FilterDataProvider` | `extension/provider.go`                 |
 | `Extension/XPCListener`/`XPCDaemon` | `extension/daemon.go`              |
 | `Extension/Process`/`Binary` | `extension/process.go` (via libproc)      |
-| `Extension/main.m`     | `extension/run.go` + `cmd/wardend`           |
-| `App/`                 | `app/` + `cmd/warden`                             |
+| `Extension/main.m`     | `extension/run.go` + `cmd/wardend`              |
+| `App/`                 | `app/` + `cmd/warden`                           |
 
 ## Data flow
 
@@ -29,9 +34,10 @@ new outbound flow
       → rules.Engine.Find(processKey, remoteAddr, port)
           allow → NEFilterNewFlowVerdict allowVerdict
           block → NEFilterNewFlowVerdict dropVerdict
-          none  → default verdict (Warden prompts the user over XPC)
+          none  → DefaultAllow verdict (Warden is policy-driven; where LuLu would
+                  prompt the user, Warden applies the configured default)
 app ──XPC──► daemon (XPCDaemonProtocol): get/add/delete/toggle rules
-daemon ──XPC──► app (XPCUserProtocol): rulesChanged / showAlert
+            (mutations rejected in config-managed mode)
 ```
 
 ## Build

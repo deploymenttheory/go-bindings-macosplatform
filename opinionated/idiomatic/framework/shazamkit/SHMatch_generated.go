@@ -36,6 +36,8 @@ func NewMatch() *Match {
 	return &Match{inner: raw.SHMatchFromID(_id)}
 }
 
+// An array of the media items in the catalog that match the query signature, in order of the quality of the match.
+//
 // MediaItems returns the collection as a Go slice.
 func (x *Match) MediaItems() []*MatchedMediaItem {
 	arr := x.inner.MediaItems()
@@ -47,6 +49,8 @@ func (x *Match) MediaItems() []*MatchedMediaItem {
 	})
 }
 
+// The query signature for the match.
+//
 // QuerySignature calls the underlying QuerySignature.
 func (x *Match) QuerySignature() *Signature {
 	_r := x.inner.QuerySignature()

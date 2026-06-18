@@ -36,6 +36,8 @@ func NewWorkoutEvent() *WorkoutEvent {
 	return &WorkoutEvent{inner: raw.HKWorkoutEventFromID(_id)}
 }
 
+// @property      workoutEventType @abstract      Represents the type of event that occurred during a workout.
+//
 // Type calls the underlying Type.
 func (x *WorkoutEvent) Type() HKWorkoutEventType {
 	return HKWorkoutEventType(x.inner.Type())
@@ -46,11 +48,15 @@ func (x *WorkoutEvent) Date() *foundation.NSDate {
 	return x.inner.Date()
 }
 
+// @property      dateInterval @abstract      Date interval representing the time period for which the event is valid. @discussion    Most event types only support date intervals with zero duration. Events of type HKWorkoutEventTypeLap and HKWorkoutEventTypeSegment are currently the only events that support a nonzero duration.
+//
 // DateInterval calls the underlying DateInterval.
 func (x *WorkoutEvent) DateInterval() *foundation.NSDateInterval {
 	return x.inner.DateInterval()
 }
 
+// @property      metadata @abstract      Extra information describing properties of the receiver. @discussion    Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
+//
 // Metadata calls the underlying Metadata.
 func (x *WorkoutEvent) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.Metadata()

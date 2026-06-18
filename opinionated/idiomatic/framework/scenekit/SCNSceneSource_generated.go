@@ -31,6 +31,8 @@ func SceneSourceFromID(id objc.ID) *SceneSource {
 	return &SceneSource{inner: raw.SCNSceneSourceFromID(id)}
 }
 
+// @method initWithURL:options: @abstract Initialize a SCNSceneSource instance from a URL. @param url The URL to read scenes from. @param options An optional dictionary for future extensions.
+//
 // NewSceneSourceWithURLOptions creates a new [SceneSource].
 func NewSceneSourceWithURLOptions(url string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SceneSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNSceneSource")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewSceneSourceWithURLOptions(url string, options *foundation.NSDictionary[*
 	return &SceneSource{inner: raw.SCNSceneSourceFromID(_id)}
 }
 
+// @method initWithData:options: @abstract Initialize a SCNSceneSource instance from a NSData object. @param data The data to read scenes from. @param options An optional dictionary for future extensions.
+//
 // NewSceneSourceWithDataOptions creates a new [SceneSource].
 func NewSceneSourceWithDataOptions(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SceneSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNSceneSource")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewSceneSourceWithDataOptions(data *foundation.NSData, options *foundation.
 	return &SceneSource{inner: raw.SCNSceneSourceFromID(_id)}
 }
 
+// @method sceneWithOptions:statusHandler: @abstract Creates and initializes the scene described in the 3D file with the specified options and lets you monitor the progress. @param options A dictionary of options. The valid keys are described in the "Scene loading options" section. @param statusHandler This block will be called repeatedly while the scene is being loaded. - The first argument, overallProgress, is a floating-point number between 0 and 1. 0 means the loading process has just started and 1 that it is complete. - The second argument, status, tells you what the source is currently doing. It takes one of the values in the SCNSceneSourceStatus enum. New values might be added to this enum in the future. - If status == SCNSceneStatusError, then error will contain more information about the failure, and the method will return nil after having called the block. Otherwise error will be nil. - Set *stop to YES if you want the source to abort the loading operation.
+//
 // SceneWithOptionsStatusHandler calls the underlying SceneWithOptionsStatusHandler.
 func (x *SceneSource) SceneWithOptionsStatusHandler(options *foundation.NSDictionary[*foundation.NSString, objc.ID], statusHandler func(float32, SCNSceneSourceStatus, unsafe.Pointer, *bool)) *Scene {
 	_r := x.inner.SceneWithOptionsStatusHandler(options, func(_a0 float32, _a1 raw.SCNSceneSourceStatus, _a2 unsafe.Pointer, _a3 *bool) {
@@ -56,6 +62,8 @@ func (x *SceneSource) SceneWithOptionsStatusHandler(options *foundation.NSDictio
 	return &Scene{inner: _r}
 }
 
+// @method sceneWithOptions:error: @abstract Creates and initializes the scene described in the 3D file with the specified options. @param options A dictionary of options. The valid keys are described in the "Scene loading options" section. @param error If this method returns nil, an error providing more information is returned by reference. @discussion This simpler version is equivalent to providing a block to sceneWithOptions:statusHandler: and checking the "error" parameter of the block if the status is SCNSceneStatusError.
+//
 // SceneWithOptionsError calls the underlying SceneWithOptionsError.
 func (x *SceneSource) SceneWithOptionsError(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*Scene, error) {
 	_r, _err := x.inner.SceneWithOptionsError(options)
@@ -68,31 +76,43 @@ func (x *SceneSource) SceneWithOptionsError(options *foundation.NSDictionary[*fo
 	return &Scene{inner: _r}, nil
 }
 
+// @method propertyForKey: @param key The key for which to return the corresponding property. @abstract Returns the property as defined in the 3D file for the given key. See keys above.
+//
 // PropertyForKey calls the underlying PropertyForKey.
 func (x *SceneSource) PropertyForKey(key string) objc.ID {
 	return x.inner.PropertyForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// @method entryWithIdentifier:classType: @abstract Returns the instance of "entryClass" found in the receiver's library with the id "uid". @param uid The id of the entry to find as specified in the source file @param entryClass Specifies the type of the object to be returned. It can be one of the following classes: SCNMaterial, SCNGeometry, SCNScene, SCNNode, CAAnimation, SCNLight, SCNCamera, SCNSkinner, SCNMorpher, NSImage @discussion Returns NULL if the receiver's library doesn't contains such an uid for the specified type.
+//
 // EntryWithIdentifierWithClass calls the underlying EntryWithIdentifierWithClass.
 func (x *SceneSource) EntryWithIdentifierWithClass(uid string, entryClass objc.Class) objc.ID {
 	return x.inner.EntryWithIdentifierWithClass(foundation.NSStringStringWithUTF8String(uid), entryClass)
 }
 
+// @method identifiersOfEntriesWithClass: @abstract Returns the IDs found in the receiver's library for the class "entryClass". @param entryClass Specifies the type of the object referenced by the returned IDs. It can be one of the following classes: SCNMaterial, SCNScene, SCNGeometry, SCNNode, CAAnimation, SCNLight, SCNCamera, SCNSkinner, SCNMorpher, NSImage
+//
 // IdentifiersOfEntriesWithClass calls the underlying IdentifiersOfEntriesWithClass.
 func (x *SceneSource) IdentifiersOfEntriesWithClass(entryClass objc.Class) *foundation.NSArray[*foundation.NSString] {
 	return x.inner.IdentifiersOfEntriesWithClass(entryClass)
 }
 
+// @method entriesPassingTest: @abstract Returns the entries in the receiver's library that pass a test in a given Block. @param predicate The block to apply to entries in the library. The block takes three arguments: "entry" is an entry in the library, "identifier" is the ID of this entry and "stop" is a reference to a Boolean value. The block can set the value to YES to stop further processing of the library. The stop argument is an out-only argument. You should only ever set this Boolean to YES within the Block. The Block returns a Boolean value that indicates whether "entry" passed the test. @discussion The entry is an instance of one of following classes: SCNMaterial, SCNScene, SCNGeometry, SCNNode, CAAnimation, SCNLight, SCNCamera, SCNSkinner, SCNMorpher, NSImage.
+//
 // EntriesPassingTest calls the underlying EntriesPassingTest.
 func (x *SceneSource) EntriesPassingTest(predicate func(objc.ID, *foundation.NSString, *bool) bool) *foundation.NSArray[objc.ID] {
 	return x.inner.EntriesPassingTest(predicate)
 }
 
+// @property url @abstract The receiver's URL (if any).
+//
 // Url calls the underlying Url.
 func (x *SceneSource) Url() *foundation.NSURL {
 	return x.inner.Url()
 }
 
+// @property data @abstract The receiver's data (if any).
+//
 // Data calls the underlying Data.
 func (x *SceneSource) Data() *foundation.NSData {
 	return x.inner.Data()

@@ -1,0 +1,852 @@
+{
+  "schema_version": 1,
+  "framework": "UserNotifications",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "UNCalendarNotificationTrigger": {
+      "doc": "A trigger condition that causes a notification the system delivers at a specific date and time.",
+      "url": "https://developer.apple.com/documentation/usernotifications/uncalendarnotificationtrigger"
+    },
+    "UNLocationNotificationTrigger": {
+      "doc": "A trigger condition that causes the system to deliver a notification when the user’s device enters or exits a geographic region you specify.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unlocationnotificationtrigger"
+    },
+    "UNMutableNotificationContent": {
+      "doc": "The editable content for a notification.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent"
+    },
+    "UNNotification": {
+      "doc": "The data for a local or remote notification the system delivers to your app.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unnotification"
+    },
+    "UNNotificationAction": {
+      "doc": "A task your app performs in response to a notification that the system delivers.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unnotificationaction"
+    },
+    "UNNotificationActionIcon": {
+      "doc": "An icon associated with an action.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unnotificationactionicon"
+    },
+    "UNNotificationAttachment": {
+      "doc": "A media file associated with a notification.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unnotificationattachment"
+    },
+    "UNNotificationAttributedMessageContext": {
+      "url": "https://developer.apple.com/documentation/usernotifications/unnotificationattributedmessagecontext"
+    },
+    "UNNotificationCategory": {
+      "doc": "A type of notification your app supports and the custom actions that the system displays.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcategory"
+    },
+    "UNNotificationContent": {
+      "doc": "The uneditable content of a notification.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcontent"
+    },
+    "UNNotificationRequest": {
+      "doc": "A request to schedule a local notification, which includes the content of the notification and the trigger conditions for delivery.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unnotificationrequest"
+    },
+    "UNNotificationResponse": {
+      "doc": "The user’s response to an actionable notification.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unnotificationresponse"
+    },
+    "UNNotificationServiceExtension": {
+      "doc": "An object that modifies the content of a remote notification before it’s delivered to the user.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension"
+    },
+    "UNNotificationSettings": {
+      "doc": "The object for managing notification-related settings and the authorization status of your app.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsettings"
+    },
+    "UNNotificationSound": {
+      "doc": "The sound played upon delivery of a notification.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsound"
+    },
+    "UNNotificationTrigger": {
+      "doc": "The common behavior for subclasses that trigger the delivery of a local or remote notification.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unnotificationtrigger"
+    },
+    "UNPushNotificationTrigger": {
+      "doc": "A trigger condition that indicates Apple Push Notification Service (APNs) has sent the notification.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unpushnotificationtrigger"
+    },
+    "UNTextInputNotificationAction": {
+      "doc": "An action that accepts user-typed text.",
+      "url": "https://developer.apple.com/documentation/usernotifications/untextinputnotificationaction"
+    },
+    "UNTextInputNotificationResponse": {
+      "doc": "The user’s response to an actionable notification, including any custom text that the user typed or dictated.",
+      "url": "https://developer.apple.com/documentation/usernotifications/untextinputnotificationresponse"
+    },
+    "UNTimeIntervalNotificationTrigger": {
+      "doc": "A trigger condition that causes the system to deliver a notification after the amount of time you specify elapses.",
+      "url": "https://developer.apple.com/documentation/usernotifications/untimeintervalnotificationtrigger"
+    },
+    "UNUserNotificationCenter": {
+      "doc": "The central object for managing notification-related activities for your app or app extension.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unusernotificationcenter"
+    }
+  },
+  "protocols": {
+    "UNNotificationContentProviding": {
+      "doc": "A protocol the system uses to provide context relevant to user notifications.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcontentproviding"
+    },
+    "UNUserNotificationCenterDelegate": {
+      "doc": "An interface for processing incoming notifications and responding to notification actions.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unusernotificationcenterdelegate"
+    }
+  },
+  "enums": {
+    "UNAlertStyle": {
+      "doc": "Constants indicating the presentation styles for alerts.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unalertstyle",
+      "members": {
+        "UNAlertStyleAlert": {
+          "doc": "Modal alerts.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unalertstyle/alert"
+        },
+        "UNAlertStyleBanner": {
+          "doc": "Banner alerts.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unalertstyle/banner"
+        },
+        "UNAlertStyleNone": {
+          "doc": "No alert.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unalertstyle/none"
+        }
+      }
+    },
+    "UNAuthorizationOptions": {
+      "doc": "Options that determine the authorized features of local and remote notifications.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unauthorizationoptions",
+      "members": {
+        "UNAuthorizationOptionAlert": {
+          "doc": "The ability to display alerts.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unauthorizationoptions/alert"
+        },
+        "UNAuthorizationOptionAnnouncement": {
+          "doc": "The ability for Siri to automatically read out messages over AirPods.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unauthorizationoptions/announcement"
+        },
+        "UNAuthorizationOptionBadge": {
+          "doc": "The ability to update the app’s badge.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unauthorizationoptions/badge"
+        },
+        "UNAuthorizationOptionCarPlay": {
+          "doc": "The ability to display notifications in a CarPlay environment.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unauthorizationoptions/carplay"
+        },
+        "UNAuthorizationOptionCriticalAlert": {
+          "doc": "The ability to play sounds for critical alerts.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unauthorizationoptions/criticalalert"
+        },
+        "UNAuthorizationOptionProvidesAppNotificationSettings": {
+          "doc": "An option indicating the system should display a button for in-app notification settings.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unauthorizationoptions/providesappnotificationsettings"
+        },
+        "UNAuthorizationOptionProvisional": {
+          "doc": "The ability to post noninterrupting notifications provisionally to the Notification Center.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unauthorizationoptions/provisional"
+        },
+        "UNAuthorizationOptionSound": {
+          "doc": "The ability to play sounds.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unauthorizationoptions/sound"
+        },
+        "init(rawValue:)": {
+          "doc": "Initializes an authorization options constant using the specified raw value.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unauthorizationoptions/init(rawvalue:)"
+        }
+      }
+    },
+    "UNAuthorizationStatus": {
+      "doc": "Constants indicating whether the app is allowed to schedule notifications.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unauthorizationstatus",
+      "members": {
+        "UNAuthorizationStatusAuthorized": {
+          "doc": "The app is authorized to schedule or receive notifications.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unauthorizationstatus/authorized"
+        },
+        "UNAuthorizationStatusDenied": {
+          "doc": "The app isn’t authorized to schedule or receive notifications.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unauthorizationstatus/denied"
+        },
+        "UNAuthorizationStatusEphemeral": {
+          "doc": "The app is authorized to schedule or receive notifications for a limited amount of time.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unauthorizationstatus/ephemeral"
+        },
+        "UNAuthorizationStatusNotDetermined": {
+          "doc": "The user hasn’t yet made a choice about whether the app is allowed to schedule notifications.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unauthorizationstatus/notdetermined"
+        },
+        "UNAuthorizationStatusProvisional": {
+          "doc": "The application is provisionally authorized to post noninterruptive user notifications.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unauthorizationstatus/provisional"
+        }
+      }
+    },
+    "UNErrorCode": {
+      "doc": "Constants that identify notification errors.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unerrorcode"
+    },
+    "UNNotificationActionOptions": {
+      "doc": "The behaviors you can apply to an action.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unnotificationactionoptions",
+      "members": {
+        "UNNotificationActionOptionAuthenticationRequired": {
+          "doc": "The action can be performed only on an unlocked device.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationactionoptions/authenticationrequired"
+        },
+        "UNNotificationActionOptionDestructive": {
+          "doc": "The action performs a destructive task.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationactionoptions/destructive"
+        },
+        "UNNotificationActionOptionForeground": {
+          "doc": "The action causes the app to launch in the foreground.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationactionoptions/foreground"
+        },
+        "init(rawValue:)": {
+          "doc": "Initializes an action options object using the specified raw value.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationactionoptions/init(rawvalue:)"
+        }
+      }
+    },
+    "UNNotificationCategoryOptions": {
+      "doc": "Constants indicating how to handle notifications associated with this category.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcategoryoptions",
+      "members": {
+        "UNNotificationCategoryOptionAllowAnnouncement": {
+          "doc": "An option that grants Siri permission to read incoming messages out loud when the user has a compatible audio output device connected.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcategoryoptions/allowannouncement"
+        },
+        "UNNotificationCategoryOptionAllowInCarPlay": {
+          "doc": "Allow CarPlay to display notifications of this type.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcategoryoptions/allowincarplay"
+        },
+        "UNNotificationCategoryOptionCustomDismissAction": {
+          "doc": "Send dismiss actions to the UNUserNotificationCenter object’s delegate for handling.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcategoryoptions/customdismissaction"
+        },
+        "UNNotificationCategoryOptionHiddenPreviewsShowSubtitle": {
+          "doc": "Show the notification’s subtitle, even if the user has disabled notification previews for the app.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcategoryoptions/hiddenpreviewsshowsubtitle"
+        },
+        "UNNotificationCategoryOptionHiddenPreviewsShowTitle": {
+          "doc": "Show the notification’s title, even if the user has disabled notification previews for the app.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcategoryoptions/hiddenpreviewsshowtitle"
+        },
+        "init(rawValue:)": {
+          "doc": "Initializes a notification category options object using the specified raw value.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcategoryoptions/init(rawvalue:)"
+        }
+      }
+    },
+    "UNNotificationInterruptionLevel": {
+      "doc": "Constants that indicate the importance and delivery timing of a notification.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unnotificationinterruptionlevel",
+      "members": {
+        "UNNotificationInterruptionLevelActive": {
+          "doc": "The system presents the notification immediately, lights up the screen, and can play a sound.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationinterruptionlevel/active"
+        },
+        "UNNotificationInterruptionLevelCritical": {
+          "doc": "The system presents the notification immediately, lights up the screen, and bypasses the mute switch to play a sound.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationinterruptionlevel/critical"
+        },
+        "UNNotificationInterruptionLevelPassive": {
+          "doc": "The system adds the notification to the notification list without lighting up the screen or playing a sound.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationinterruptionlevel/passive"
+        },
+        "UNNotificationInterruptionLevelTimeSensitive": {
+          "doc": "The system presents the notification immediately, lights up the screen, can play a sound, and breaks through system notification controls.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationinterruptionlevel/timesensitive"
+        }
+      }
+    },
+    "UNNotificationPresentationOptions": {
+      "doc": "Constants indicating how to present a notification in a foreground app.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unnotificationpresentationoptions",
+      "members": {
+        "UNNotificationPresentationOptionAlert": {
+          "doc": "Display the alert using the content provided by the notification.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationpresentationoptions/alert"
+        },
+        "UNNotificationPresentationOptionBadge": {
+          "doc": "Apply the notification’s badge value to the app’s icon.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationpresentationoptions/badge"
+        },
+        "UNNotificationPresentationOptionBanner": {
+          "doc": "Present the notification as a banner.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationpresentationoptions/banner"
+        },
+        "UNNotificationPresentationOptionList": {
+          "doc": "Show the notification in Notification Center.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationpresentationoptions/list"
+        },
+        "UNNotificationPresentationOptionSound": {
+          "doc": "Play the sound associated with the notification.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationpresentationoptions/sound"
+        },
+        "init(rawValue:)": {
+          "doc": "Initializes a notification presentation options object using the specified raw value.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationpresentationoptions/init(rawvalue:)"
+        }
+      }
+    },
+    "UNNotificationSetting": {
+      "doc": "Constants that indicate the current status of a notification setting.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsetting",
+      "members": {
+        "UNNotificationSettingDisabled": {
+          "doc": "The setting is disabled.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsetting/disabled"
+        },
+        "UNNotificationSettingEnabled": {
+          "doc": "The setting is enabled.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsetting/enabled"
+        },
+        "UNNotificationSettingNotSupported": {
+          "doc": "The setting is not available to your app.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsetting/notsupported"
+        }
+      }
+    },
+    "UNShowPreviewsSetting": {
+      "doc": "Constants indicating the style previewing a notification’s content.",
+      "url": "https://developer.apple.com/documentation/usernotifications/unshowpreviewssetting",
+      "members": {
+        "UNShowPreviewsSettingAlways": {
+          "doc": "The notification’s content is always shown, even when the device is locked.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unshowpreviewssetting/always"
+        },
+        "UNShowPreviewsSettingNever": {
+          "doc": "The notification’s content is never shown, even when the device is unlocked",
+          "url": "https://developer.apple.com/documentation/usernotifications/unshowpreviewssetting/never"
+        },
+        "UNShowPreviewsSettingWhenAuthenticated": {
+          "doc": "The notification’s content is shown only when the device is unlocked.",
+          "url": "https://developer.apple.com/documentation/usernotifications/unshowpreviewssetting/whenauthenticated"
+        }
+      }
+    }
+  },
+  "methods": {
+    "UNCalendarNotificationTrigger": {
+      "+triggerWithDateMatchingComponents:repeats:": {
+        "doc": "Creates a calendar trigger using the date components parameter.",
+        "url": "https://developer.apple.com/documentation/usernotifications/uncalendarnotificationtrigger/init(datematching:repeats:)"
+      },
+      "-nextTriggerDate": {
+        "doc": "The next date at which the trigger conditions are met.",
+        "url": "https://developer.apple.com/documentation/usernotifications/uncalendarnotificationtrigger/nexttriggerdate()"
+      }
+    },
+    "UNLocationNotificationTrigger": {
+      "+triggerWithRegion:repeats:": {
+        "doc": "Creates a location trigger using the region parameter.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unlocationnotificationtrigger/init(region:repeats:)"
+      }
+    },
+    "UNNotificationAction": {
+      "+actionWithIdentifier:title:options:": {
+        "doc": "Creates an action object by using the specified title and options.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationaction/init(identifier:title:options:)"
+      },
+      "+actionWithIdentifier:title:options:icon:": {
+        "doc": "Creates an action object by using the specified title, options, and icon.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationaction/init(identifier:title:options:icon:)"
+      }
+    },
+    "UNNotificationActionIcon": {
+      "+iconWithSystemImageName:": {
+        "doc": "Creates an action icon by using a system symbol image.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationactionicon/init(systemimagename:)"
+      },
+      "+iconWithTemplateImageName:": {
+        "doc": "Creates an action icon based on an image in your app’s bundle, preferably in an asset catalog.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationactionicon/init(templateimagename:)"
+      }
+    },
+    "UNNotificationAttachment": {
+      "+attachmentWithIdentifier:URL:options:error:": {
+        "doc": "Creates an attachment object from the specified file and options.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationattachment/init(identifier:url:options:)-83grx"
+      }
+    },
+    "UNNotificationCategory": {
+      "+categoryWithIdentifier:actions:intentIdentifiers:hiddenPreviewsBodyPlaceholder:categorySummaryFormat:options:": {
+        "doc": "Creates a category object containing the specified actions, options, placeholder text used when previews aren’t shown, and summary format string.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcategory/init(identifier:actions:intentidentifiers:hiddenpreviewsbodyplaceholder:categorysummaryformat:options:)"
+      },
+      "+categoryWithIdentifier:actions:intentIdentifiers:hiddenPreviewsBodyPlaceholder:options:": {
+        "doc": "Creates a category object containing the specified actions, options, and placeholder text used when previews aren’t shown.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcategory/init(identifier:actions:intentidentifiers:hiddenpreviewsbodyplaceholder:options:)"
+      },
+      "+categoryWithIdentifier:actions:intentIdentifiers:options:": {
+        "doc": "Creates a category object containing the specified actions and options.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcategory/init(identifier:actions:intentidentifiers:options:)"
+      }
+    },
+    "UNNotificationContent": {
+      "-contentByUpdatingWithProvider:error:": {
+        "doc": "Returns a copy of the notification that includes content from the specified provider.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcontent/updating(from:)"
+      }
+    },
+    "UNNotificationRequest": {
+      "+requestWithIdentifier:content:trigger:": {
+        "doc": "Creates a notification request object that you use to schedule a notification.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationrequest/init(identifier:content:trigger:)"
+      }
+    },
+    "UNNotificationServiceExtension": {
+      "-didReceiveNotificationRequest:withContentHandler:": {
+        "doc": "Asks you to make any needed changes to the notification and notify the system when you’re done.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension/didreceive(_:withcontenthandler:)"
+      },
+      "-serviceExtensionTimeWillExpire": {
+        "doc": "Tells you that the system is terminating your extension.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension/serviceextensiontimewillexpire()"
+      }
+    },
+    "UNNotificationSound": {
+      "+criticalSoundNamed:": {
+        "doc": "Creates a custom sound object for critical alerts.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsound/criticalsoundnamed(_:)"
+      },
+      "+criticalSoundNamed:withAudioVolume:": {
+        "doc": "Creates a custom sound object for critical alerts with the volume you specify.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsound/criticalsoundnamed(_:withaudiovolume:)"
+      },
+      "+defaultCriticalSoundWithAudioVolume:": {
+        "doc": "Creates a sound object that plays the default critical alert sound at the volume you specify.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsound/defaultcriticalsound(withaudiovolume:)"
+      },
+      "+soundNamed:": {
+        "doc": "Creates a sound object that represents a custom sound file.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsound/init(named:)"
+      }
+    },
+    "UNTextInputNotificationAction": {
+      "+actionWithIdentifier:title:options:icon:textInputButtonTitle:textInputPlaceholder:": {
+        "doc": "Creates an action object with an icon that accepts text input from the user.",
+        "url": "https://developer.apple.com/documentation/usernotifications/untextinputnotificationaction/init(identifier:title:options:icon:textinputbuttontitle:textinputplaceholder:)"
+      },
+      "+actionWithIdentifier:title:options:textInputButtonTitle:textInputPlaceholder:": {
+        "doc": "Creates an action object that accepts text input from the user.",
+        "url": "https://developer.apple.com/documentation/usernotifications/untextinputnotificationaction/init(identifier:title:options:textinputbuttontitle:textinputplaceholder:)"
+      }
+    },
+    "UNTimeIntervalNotificationTrigger": {
+      "+triggerWithTimeInterval:repeats:": {
+        "doc": "Creates a time interval trigger using the time value parameter.",
+        "url": "https://developer.apple.com/documentation/usernotifications/untimeintervalnotificationtrigger/init(timeinterval:repeats:)"
+      },
+      "-nextTriggerDate": {
+        "doc": "The next date at which the trigger conditions are met.",
+        "url": "https://developer.apple.com/documentation/usernotifications/untimeintervalnotificationtrigger/nexttriggerdate()"
+      }
+    },
+    "UNUserNotificationCenter": {
+      "+currentNotificationCenter": {
+        "doc": "Returns your app’s notification center.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/current()"
+      },
+      "-addNotificationRequest:withCompletionHandler:": {
+        "doc": "Schedules the delivery of a local notification.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/add(_:withcompletionhandler:)"
+      },
+      "-getDeliveredNotificationsWithCompletionHandler:": {
+        "doc": "Fetches all of your app’s delivered notifications that are still present in Notification Center.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/getdeliverednotifications(completionhandler:)"
+      },
+      "-getNotificationCategoriesWithCompletionHandler:": {
+        "doc": "Fetches your app’s registered notification categories.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/getnotificationcategories(completionhandler:)"
+      },
+      "-getNotificationSettingsWithCompletionHandler:": {
+        "doc": "Retrieves the authorization and feature-related settings for your app.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/getnotificationsettings(completionhandler:)"
+      },
+      "-getPendingNotificationRequestsWithCompletionHandler:": {
+        "doc": "Fetches all of your app’s local notifications that are pending delivery.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/getpendingnotificationrequests(completionhandler:)"
+      },
+      "-removeAllDeliveredNotifications": {
+        "doc": "Removes all of your app’s delivered notifications from Notification Center.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/removealldeliverednotifications()"
+      },
+      "-removeAllPendingNotificationRequests": {
+        "doc": "Removes all of your app’s pending local notifications.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/removeallpendingnotificationrequests()"
+      },
+      "-removeDeliveredNotificationsWithIdentifiers:": {
+        "doc": "Removes your app’s notifications from Notification Center that match the specified identifiers.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/removedeliverednotifications(withidentifiers:)"
+      },
+      "-removePendingNotificationRequestsWithIdentifiers:": {
+        "doc": "Removes your app’s local notifications that are pending and match the specified identifiers.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/removependingnotificationrequests(withidentifiers:)"
+      },
+      "-requestAuthorizationWithOptions:completionHandler:": {
+        "doc": "Requests a person’s authorization to allow local and remote notifications for your app.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/requestauthorization(options:completionhandler:)"
+      },
+      "-setBadgeCount:withCompletionHandler:": {
+        "doc": "Updates the badge count for your app’s icon.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/setbadgecount(_:withcompletionhandler:)"
+      },
+      "-setNotificationCategories:": {
+        "doc": "Registers the notification categories that your app supports.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/setnotificationcategories(_:)"
+      }
+    }
+  },
+  "properties": {
+    "UNCalendarNotificationTrigger": {
+      "dateComponents": {
+        "doc": "The date components to construct this object.",
+        "url": "https://developer.apple.com/documentation/usernotifications/uncalendarnotificationtrigger/datecomponents"
+      }
+    },
+    "UNLocationNotificationTrigger": {
+      "region": {
+        "doc": "The region used to determine when the system sends the notification.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unlocationnotificationtrigger/region"
+      }
+    },
+    "UNMutableNotificationContent": {
+      "attachments": {
+        "doc": "The visual and audio attachments to display alongside the notification’s main content.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent/attachments"
+      },
+      "badge": {
+        "doc": "The number that your app’s icon displays.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent/badge"
+      },
+      "body": {
+        "doc": "The localized text that provides the notification’s main content.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent/body"
+      },
+      "categoryIdentifier": {
+        "doc": "The identifier of the notification’s category.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent/categoryidentifier"
+      },
+      "filterCriteria": {
+        "doc": "The criteria the system evaluates to determine if it displays the notification in the current Focus.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent/filtercriteria"
+      },
+      "interruptionLevel": {
+        "doc": "The notification’s importance and required delivery timing.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent/interruptionlevel"
+      },
+      "launchImageName": {
+        "doc": "The name of the image or storyboard to use when your app launches because of the notification.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent/launchimagename"
+      },
+      "relevanceScore": {
+        "doc": "The score the system uses to determine if the notification is the summary’s featured notification.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent/relevancescore"
+      },
+      "sound": {
+        "doc": "The sound that plays when the system delivers the notification.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent/sound"
+      },
+      "subtitle": {
+        "doc": "The localized text that provides the notification’s secondary description.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent/subtitle"
+      },
+      "summaryArgument": {
+        "doc": "The text the system adds to the notification summary to provide additional context.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent/summaryargument"
+      },
+      "summaryArgumentCount": {
+        "doc": "The number the system adds to the notification summary when the notification represents multiple items.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent/summaryargumentcount"
+      },
+      "targetContentIdentifier": {
+        "doc": "The value your app uses to determine which scene to display to handle the notification.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent/targetcontentidentifier"
+      },
+      "threadIdentifier": {
+        "doc": "The identifier that groups related notifications.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent/threadidentifier"
+      },
+      "title": {
+        "doc": "The localized text that provides the notification’s primary description.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent/title"
+      },
+      "userInfo": {
+        "doc": "The custom data to associate with the notification.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unmutablenotificationcontent/userinfo"
+      }
+    },
+    "UNNotification": {
+      "date": {
+        "doc": "The delivery date of the notification.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotification/date"
+      },
+      "request": {
+        "doc": "The notification request containing the payload and trigger condition for the notification.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotification/request"
+      }
+    },
+    "UNNotificationAction": {
+      "icon": {
+        "doc": "The icon associated with the action.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationaction/icon"
+      },
+      "identifier": {
+        "doc": "The unique string that your app uses to identify the action.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationaction/identifier"
+      },
+      "options": {
+        "doc": "The behaviors associated with the action.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationaction/options"
+      },
+      "title": {
+        "doc": "The localized string to use as the title of the action.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationaction/title"
+      }
+    },
+    "UNNotificationAttachment": {
+      "URL": {
+        "doc": "The URL of the file for this attachment.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationattachment/url"
+      },
+      "identifier": {
+        "doc": "The unique identifier for the attachment.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationattachment/identifier"
+      },
+      "type": {
+        "doc": "The UTI type of the attachment.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationattachment/type"
+      }
+    },
+    "UNNotificationCategory": {
+      "actions": {
+        "doc": "The actions to display when the system delivers notifications of this type.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcategory/actions"
+      },
+      "categorySummaryFormat": {
+        "doc": "A format string for the summary description used when the system groups the category’s notifications.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcategory/categorysummaryformat"
+      },
+      "hiddenPreviewsBodyPlaceholder": {
+        "doc": "The placeholder text to display when the system disables notification previews for the app.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcategory/hiddenpreviewsbodyplaceholder"
+      },
+      "identifier": {
+        "doc": "The unique string assigned to the category.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcategory/identifier"
+      },
+      "intentIdentifiers": {
+        "doc": "The intents related to notifications of this category.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcategory/intentidentifiers"
+      },
+      "options": {
+        "doc": "Options for how to handle notifications of this type.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcategory/options"
+      }
+    },
+    "UNNotificationContent": {
+      "attachments": {
+        "doc": "The visual and audio attachments to display alongside the notification’s main content.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcontent/attachments"
+      },
+      "badge": {
+        "doc": "The number that your app’s icon displays.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcontent/badge"
+      },
+      "body": {
+        "doc": "The localized text that provides the notification’s main content.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcontent/body"
+      },
+      "categoryIdentifier": {
+        "doc": "The identifier of the notification’s category.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcontent/categoryidentifier"
+      },
+      "filterCriteria": {
+        "doc": "The criteria the system evaluates to determine if it displays the notification in the current Focus.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcontent/filtercriteria"
+      },
+      "interruptionLevel": {
+        "doc": "The notification’s importance and required delivery timing.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcontent/interruptionlevel"
+      },
+      "launchImageName": {
+        "doc": "The name of the image or storyboard to use when your app launches because of the notification.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcontent/launchimagename"
+      },
+      "relevanceScore": {
+        "doc": "The score the system uses to determine if the notification is the summary’s featured notification.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcontent/relevancescore"
+      },
+      "sound": {
+        "doc": "The sound that plays when the system delivers the notification.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcontent/sound"
+      },
+      "subtitle": {
+        "doc": "The localized text that provides the notification’s secondary description.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcontent/subtitle"
+      },
+      "summaryArgument": {
+        "doc": "The text the system adds to the notification summary to provide additional context.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcontent/summaryargument"
+      },
+      "summaryArgumentCount": {
+        "doc": "The number the system adds to the notification summary when the notification represents multiple items.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcontent/summaryargumentcount"
+      },
+      "targetContentIdentifier": {
+        "doc": "The value your app uses to determine which scene to display to handle the notification.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcontent/targetcontentidentifier"
+      },
+      "threadIdentifier": {
+        "doc": "The identifier that groups related notifications.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcontent/threadidentifier"
+      },
+      "title": {
+        "doc": "The localized text that provides the notification’s primary description.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcontent/title"
+      },
+      "userInfo": {
+        "doc": "The custom data to associate with the notification.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationcontent/userinfo"
+      }
+    },
+    "UNNotificationRequest": {
+      "content": {
+        "doc": "The content associated with the notification.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationrequest/content"
+      },
+      "identifier": {
+        "doc": "The unique identifier for this notification request.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationrequest/identifier"
+      },
+      "trigger": {
+        "doc": "The conditions that trigger the delivery of the notification.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationrequest/trigger"
+      }
+    },
+    "UNNotificationResponse": {
+      "actionIdentifier": {
+        "doc": "The identifier string of the action that the user selected.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationresponse/actionidentifier"
+      },
+      "notification": {
+        "doc": "The notification to which the user responded.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationresponse/notification"
+      },
+      "targetScene": {
+        "doc": "The scene where the system reflects the user’s response to a notification.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationresponse/targetscene"
+      }
+    },
+    "UNNotificationSettings": {
+      "alertSetting": {
+        "doc": "The authorization status for displaying alerts.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsettings/alertsetting"
+      },
+      "alertStyle": {
+        "doc": "The type of alert that the app may display when the device is unlocked.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsettings/alertstyle"
+      },
+      "announcementSetting": {
+        "doc": "The setting that indicates whether Siri can announce your app’s notifications.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsettings/announcementsetting"
+      },
+      "authorizationStatus": {
+        "doc": "The app’s ability to schedule and receive local and remote notifications.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsettings/authorizationstatus"
+      },
+      "badgeSetting": {
+        "doc": "The setting that indicates whether badges appear on your app’s icon.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsettings/badgesetting"
+      },
+      "carPlaySetting": {
+        "doc": "The setting that indicates whether your app’s notifications appear in CarPlay.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsettings/carplaysetting"
+      },
+      "criticalAlertSetting": {
+        "doc": "The authorization status for playing sounds for critical alerts.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsettings/criticalalertsetting"
+      },
+      "lockScreenSetting": {
+        "doc": "The setting that indicates whether your app’s notifications appear on a device’s Lock screen.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsettings/lockscreensetting"
+      },
+      "notificationCenterSetting": {
+        "doc": "The setting that indicates whether your app’s notifications appear in Notification Center.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsettings/notificationcentersetting"
+      },
+      "providesAppNotificationSettings": {
+        "doc": "A Boolean value indicating the system displays a button for in-app notification settings.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsettings/providesappnotificationsettings"
+      },
+      "scheduledDeliverySetting": {
+        "doc": "The setting that indicates the system schedules the notification.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsettings/scheduleddeliverysetting"
+      },
+      "showPreviewsSetting": {
+        "doc": "The setting that indicates whether the app shows a preview of the notification’s content.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsettings/showpreviewssetting"
+      },
+      "soundSetting": {
+        "doc": "The authorization status for playing sounds for incoming notifications.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsettings/soundsetting"
+      },
+      "timeSensitiveSetting": {
+        "doc": "The setting that indicates the system treats the notification as time-sensitive.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsettings/timesensitivesetting"
+      }
+    },
+    "UNNotificationSound": {
+      "defaultCriticalSound": {
+        "doc": "The default sound used for critical alerts.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsound/defaultcritical"
+      },
+      "defaultSound": {
+        "doc": "Returns an object representing the default sound for notifications.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationsound/default"
+      }
+    },
+    "UNNotificationTrigger": {
+      "repeats": {
+        "doc": "A Boolean value indicating whether the system reschedules the notification after it’s delivered.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unnotificationtrigger/repeats"
+      }
+    },
+    "UNTextInputNotificationAction": {
+      "textInputButtonTitle": {
+        "doc": "The localized title of the text input button that the system displays to the user.",
+        "url": "https://developer.apple.com/documentation/usernotifications/untextinputnotificationaction/textinputbuttontitle"
+      },
+      "textInputPlaceholder": {
+        "doc": "The placeholder text that the system localizes and displays in the text input field.",
+        "url": "https://developer.apple.com/documentation/usernotifications/untextinputnotificationaction/textinputplaceholder"
+      }
+    },
+    "UNTextInputNotificationResponse": {
+      "userText": {
+        "doc": "The text response provided by the user.",
+        "url": "https://developer.apple.com/documentation/usernotifications/untextinputnotificationresponse/usertext"
+      }
+    },
+    "UNTimeIntervalNotificationTrigger": {
+      "timeInterval": {
+        "doc": "The time interval to create the trigger.",
+        "url": "https://developer.apple.com/documentation/usernotifications/untimeintervalnotificationtrigger/timeinterval"
+      }
+    },
+    "UNUserNotificationCenter": {
+      "delegate": {
+        "doc": "The notification center’s delegate.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/delegate"
+      },
+      "supportsContentExtensions": {
+        "doc": "A Boolean value that indicates whether the device supports notification content extensions.",
+        "url": "https://developer.apple.com/documentation/usernotifications/unusernotificationcenter/supportscontentextensions"
+      }
+    }
+  }
+}

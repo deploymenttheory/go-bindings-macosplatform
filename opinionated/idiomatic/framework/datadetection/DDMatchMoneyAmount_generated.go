@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains an amount of money that the data detection system matches. The DataDetection framework returns a match for an amount of money in a `DDMatchMoneyAmount` object, which contains an amount of money and an ISO currency code.
+//
 // MatchMoneyAmount wraps [raw.DDMatchMoneyAmount] with a fluent Go API.
 type MatchMoneyAmount struct {
 	inner *raw.DDMatchMoneyAmount
@@ -36,6 +38,8 @@ func NewMatchMoneyAmount() *MatchMoneyAmount {
 	return &MatchMoneyAmount{inner: raw.DDMatchMoneyAmountFromID(_id)}
 }
 
+// A string that contains an ISO currency code, which the data detection system identifies from the matched string and user preferences.
+//
 // Currency calls the underlying Currency.
 func (x *MatchMoneyAmount) Currency() string {
 	_r := x.inner.Currency()
@@ -45,6 +49,8 @@ func (x *MatchMoneyAmount) Currency() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A number that represents an amount of money.
+//
 // Amount calls the underlying Amount.
 func (x *MatchMoneyAmount) Amount() float64 {
 	return x.inner.Amount()

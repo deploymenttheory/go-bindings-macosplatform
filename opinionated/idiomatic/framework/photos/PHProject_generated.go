@@ -41,6 +41,8 @@ func (x *Project) ProjectExtensionData() *foundation.NSData {
 	return x.inner.ProjectExtensionData()
 }
 
+// Property to determine if a project preview was previously set. Use -[PHProjectChangeRequest setProjectPreviewImage:] to set a project preview.
+//
 // HasProjectPreview calls the underlying HasProjectPreview.
 func (x *Project) HasProjectPreview() bool {
 	return x.inner.HasProjectPreview()

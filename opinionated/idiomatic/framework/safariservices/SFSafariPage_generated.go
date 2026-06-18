@@ -38,16 +38,22 @@ func NewSafariPage() *SafariPage {
 	return &SafariPage{inner: raw.SFSafariPageFromID(_id)}
 }
 
+// Dispatches a message to the content script injected in this page.
+//
 // DispatchMessageToScriptWithNameUserInfo calls the underlying DispatchMessageToScriptWithNameUserInfo.
 func (x *SafariPage) DispatchMessageToScriptWithNameUserInfo(messageName string, userInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	x.inner.DispatchMessageToScriptWithNameUserInfo(foundation.NSStringStringWithUTF8String(messageName), userInfo)
 }
 
+// Reloads the page.
+//
 // Reload calls the underlying Reload.
 func (x *SafariPage) Reload() {
 	x.inner.Reload()
 }
 
+// This calls the completion handler with the properties of the page.
+//
 // GetPageProperties blocks until the operation completes or ctx is cancelled.
 func (x *SafariPage) GetPageProperties(ctx context.Context) (*SafariPageProperties, error) {
 	type _result struct {
@@ -71,6 +77,8 @@ func (x *SafariPage) GetPageProperties(ctx context.Context) (*SafariPageProperti
 	}
 }
 
+// This calls the completion handler with the tab containing this page. This will return a non-nil tab for any pages being preloaded by Safari.
+//
 // GetContainingTab blocks until the operation completes or ctx is cancelled.
 func (x *SafariPage) GetContainingTab(ctx context.Context) (*SafariTab, error) {
 	type _result struct {
@@ -94,6 +102,8 @@ func (x *SafariPage) GetContainingTab(ctx context.Context) (*SafariTab, error) {
 	}
 }
 
+// Gets a screenshot of the currently visible area of the page.
+//
 // GetScreenshotOfVisibleArea blocks until the operation completes or ctx is cancelled.
 func (x *SafariPage) GetScreenshotOfVisibleArea(ctx context.Context) (*appkit.NSImage, error) {
 	type _result struct {

@@ -32,6 +32,8 @@ func EngineFromID(id objc.ID) *Engine {
 	return &Engine{inner: raw.PHASEEngineFromID(id)}
 }
 
+// @method initWithUpdateMode: @abstract Initialize a new engine with an update mode. @param updateMode Defines how the engine will be updated.
+//
 // NewEngineWithUpdateMode creates a new [Engine].
 func NewEngineWithUpdateMode(updateMode PHASEUpdateMode) *Engine {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEEngine")), objc.RegisterName("alloc"))
@@ -39,57 +41,77 @@ func NewEngineWithUpdateMode(updateMode PHASEUpdateMode) *Engine {
 	return &Engine{inner: raw.PHASEEngineFromID(_id)}
 }
 
+// @property outputSpatializationMode @discussion When set to a value other than PHASESpatializationModeAutomatic, overrides the default output spatializer and uses the specified one instead.
+//
 // WithOutputSpatializationMode sets the outputSpatializationMode property and returns the receiver for chaining.
 func (x *Engine) WithOutputSpatializationMode(outputSpatializationMode PHASESpatializationMode) *Engine {
 	x.inner.SetOutputSpatializationMode(raw.PHASESpatializationMode(outputSpatializationMode))
 	return x
 }
 
+// @property defaultMedium @abstract The default medium in the engine. @discussion The default value is PHASEMediumPresetAir.
+//
 // WithDefaultMedium sets the defaultMedium property and returns the receiver for chaining.
 func (x *Engine) WithDefaultMedium(defaultMedium *Medium) *Engine {
 	x.inner.SetDefaultMedium(defaultMedium.Unwrap())
 	return x
 }
 
+// @property defaultReverbPreset @abstract The default reverb preset in the engine. @discussion The default value is PHASEReverbPresetNone.
+//
 // WithDefaultReverbPreset sets the defaultReverbPreset property and returns the receiver for chaining.
 func (x *Engine) WithDefaultReverbPreset(defaultReverbPreset PHASEReverbPreset) *Engine {
 	x.inner.SetDefaultReverbPreset(raw.PHASEReverbPreset(defaultReverbPreset))
 	return x
 }
 
+// @property unitsPerSecond @abstract The number of units in a second. @discussion The unitsPerSecond is used internally to scale time/duration values passed to the API. This allows clients to pass time/duration values in their own native time scale. @note Values are clamped to the range (0, inf]. Default value is 1.
+//
 // WithUnitsPerSecond sets the unitsPerSecond property and returns the receiver for chaining.
 func (x *Engine) WithUnitsPerSecond(unitsPerSecond float64) *Engine {
 	x.inner.SetUnitsPerSecond(unitsPerSecond)
 	return x
 }
 
+// @property unitsPerMeter @abstract The number of units in a meter. @discussion The unitsPerMeter is used internally to scale metric values passed to the API. This allows clients to pass metric values in their own native spatial scale. @note Values are clamped to the range (0, inf]. Default value is 1.
+//
 // WithUnitsPerMeter sets the unitsPerMeter property and returns the receiver for chaining.
 func (x *Engine) WithUnitsPerMeter(unitsPerMeter float64) *Engine {
 	x.inner.SetUnitsPerMeter(unitsPerMeter)
 	return x
 }
 
+// @method startAndReturnError: @abstract Start or resume the engine. @return YES for success.
+//
 // StartAndReturnError returns any validation error.
 func (x *Engine) StartAndReturnError() error {
 	_, err := x.inner.StartAndReturnError()
 	return err
 }
 
+// @method pause @abstract Pause the engine.
+//
 // Pause calls the underlying Pause.
 func (x *Engine) Pause() {
 	x.inner.Pause()
 }
 
+// @method stop @abstract Stop the engine.
+//
 // Stop calls the underlying Stop.
 func (x *Engine) Stop() {
 	x.inner.Stop()
 }
 
+// @method update: @abstract Manually update the engine instance on the calling thread. @discussion This will kick off all of the API commands called since the last call to update, update any systems and objects that need to be kept current, and call any registered handlers. @note This function has no effect if the engine's update mode is PHASEUpdateModeAutomatic.
+//
 // Update calls the underlying Update.
 func (x *Engine) Update() {
 	x.inner.Update()
 }
 
+// @property outputSpatializationMode @discussion When set to a value other than PHASESpatializationModeAutomatic, overrides the default output spatializer and uses the specified one instead.
+//
 // OutputSpatializationMode calls the underlying OutputSpatializationMode.
 func (x *Engine) OutputSpatializationMode() PHASESpatializationMode {
 	return PHASESpatializationMode(x.inner.OutputSpatializationMode())
@@ -100,11 +122,15 @@ func (x *Engine) SetOutputSpatializationMode(outputSpatializationMode PHASESpati
 	x.inner.SetOutputSpatializationMode(raw.PHASESpatializationMode(outputSpatializationMode))
 }
 
+// @property renderingState @abstract The engine's current rendering state.
+//
 // RenderingState calls the underlying RenderingState.
 func (x *Engine) RenderingState() PHASERenderingState {
 	return PHASERenderingState(x.inner.RenderingState())
 }
 
+// @property rootObject @abstract The root object of the engine's scene graph. @discussion Attach objects to the engine's rootObject or one of its children to make them active within the engine's scene graph. This will ensure they take part in the simulation. @note The rootObject is created and owned by the engine. The rootObject may not be set as the child of another object. This will cause an error to be thrown. The rootObject's transform may not be changed. This will cause an error to be thrown. The rootObject may not be copied. This will cause an error to be thrown.
+//
 // RootObject calls the underlying RootObject.
 func (x *Engine) RootObject() *Object {
 	_r := x.inner.RootObject()
@@ -114,6 +140,8 @@ func (x *Engine) RootObject() *Object {
 	return &Object{inner: _r}
 }
 
+// @property defaultMedium @abstract The default medium in the engine. @discussion The default value is PHASEMediumPresetAir.
+//
 // DefaultMedium calls the underlying DefaultMedium.
 func (x *Engine) DefaultMedium() *Medium {
 	_r := x.inner.DefaultMedium()
@@ -128,6 +156,8 @@ func (x *Engine) SetDefaultMedium(defaultMedium *raw.PHASEMedium) {
 	x.inner.SetDefaultMedium(defaultMedium)
 }
 
+// @property defaultReverbPreset @abstract The default reverb preset in the engine. @discussion The default value is PHASEReverbPresetNone.
+//
 // DefaultReverbPreset calls the underlying DefaultReverbPreset.
 func (x *Engine) DefaultReverbPreset() PHASEReverbPreset {
 	return PHASEReverbPreset(x.inner.DefaultReverbPreset())
@@ -138,6 +168,8 @@ func (x *Engine) SetDefaultReverbPreset(defaultReverbPreset PHASEReverbPreset) {
 	x.inner.SetDefaultReverbPreset(raw.PHASEReverbPreset(defaultReverbPreset))
 }
 
+// @property unitsPerSecond @abstract The number of units in a second. @discussion The unitsPerSecond is used internally to scale time/duration values passed to the API. This allows clients to pass time/duration values in their own native time scale. @note Values are clamped to the range (0, inf]. Default value is 1.
+//
 // UnitsPerSecond calls the underlying UnitsPerSecond.
 func (x *Engine) UnitsPerSecond() float64 {
 	return x.inner.UnitsPerSecond()
@@ -148,6 +180,8 @@ func (x *Engine) SetUnitsPerSecond(unitsPerSecond float64) {
 	x.inner.SetUnitsPerSecond(unitsPerSecond)
 }
 
+// @property unitsPerMeter @abstract The number of units in a meter. @discussion The unitsPerMeter is used internally to scale metric values passed to the API. This allows clients to pass metric values in their own native spatial scale. @note Values are clamped to the range (0, inf]. Default value is 1.
+//
 // UnitsPerMeter calls the underlying UnitsPerMeter.
 func (x *Engine) UnitsPerMeter() float64 {
 	return x.inner.UnitsPerMeter()
@@ -158,6 +192,8 @@ func (x *Engine) SetUnitsPerMeter(unitsPerMeter float64) {
 	x.inner.SetUnitsPerMeter(unitsPerMeter)
 }
 
+// @property assetRegistry @abstract A registry for assets available to the engine
+//
 // AssetRegistry calls the underlying AssetRegistry.
 func (x *Engine) AssetRegistry() *AssetRegistry {
 	_r := x.inner.AssetRegistry()
@@ -167,6 +203,8 @@ func (x *Engine) AssetRegistry() *AssetRegistry {
 	return &AssetRegistry{inner: _r}
 }
 
+// @property soundEvents @abstract An array of the active sound event objects in the system @discussion Returns a dictionary of the sound events at the time it is retrieved. This includes all sound events that are registered with the engine, including those that are preparing, playing, paused or stopping.
+//
 // SoundEvents returns the collection as a Go slice.
 func (x *Engine) SoundEvents() []*SoundEvent {
 	arr := x.inner.SoundEvents()
@@ -178,11 +216,15 @@ func (x *Engine) SoundEvents() []*SoundEvent {
 	})
 }
 
+// @property groups @abstract A dictionary of the groups in the system @discussion Returns a dictionary of the groups at the time it is retrieved.
+//
 // Groups calls the underlying Groups.
 func (x *Engine) Groups() *foundation.NSDictionary[*foundation.NSString, *raw.PHASEGroup] {
 	return x.inner.Groups()
 }
 
+// @property duckers @abstract An array of the ducker objects in the system @discussion Returns a dictionary of the ducker objects at the time it is retrieved.
+//
 // Duckers returns the collection as a Go slice.
 func (x *Engine) Duckers() []*Ducker {
 	arr := x.inner.Duckers()
@@ -194,6 +236,8 @@ func (x *Engine) Duckers() []*Ducker {
 	})
 }
 
+// @property activeGroupPreset @abstract The active group mixer preset in the system @discussion Returns nil if there are no active group presets in the engine. Activate or Deactivate the preset via [PHASEGroupPreset activate] and [PHASEGroupPreset deactivate]
+//
 // ActiveGroupPreset calls the underlying ActiveGroupPreset.
 func (x *Engine) ActiveGroupPreset() *GroupPreset {
 	_r := x.inner.ActiveGroupPreset()
@@ -203,6 +247,8 @@ func (x *Engine) ActiveGroupPreset() *GroupPreset {
 	return &GroupPreset{inner: _r}
 }
 
+// @property lastRenderTime @abstract Obtain the time for which the engine most recently rendered. @discussion Will return nil if the engine is not running
+//
 // LastRenderTime calls the underlying LastRenderTime.
 func (x *Engine) LastRenderTime() *avfaudio.AVAudioTime {
 	return x.inner.LastRenderTime()

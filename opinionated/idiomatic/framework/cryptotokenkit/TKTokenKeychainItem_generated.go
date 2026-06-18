@@ -31,6 +31,8 @@ func TokenKeychainItemFromID(id objc.ID) *TokenKeychainItem {
 	return &TokenKeychainItem{inner: raw.TKTokenKeychainItemFromID(id)}
 }
 
+// @brief Initializes item with objectID.
+//
 // NewTokenKeychainItemWithObjectID creates a new [TokenKeychainItem].
 func NewTokenKeychainItemWithObjectID(objectID objc.ID) *TokenKeychainItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTokenKeychainItem")), objc.RegisterName("alloc"))
@@ -38,23 +40,31 @@ func NewTokenKeychainItemWithObjectID(objectID objc.ID) *TokenKeychainItem {
 	return &TokenKeychainItem{inner: raw.TKTokenKeychainItemFromID(_id)}
 }
 
+// @discussion Contains the user-visible label for this item.  This property is an equivalent of kSecAttrLabel in SecItem.h
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *TokenKeychainItem) WithLabel(label string) *TokenKeychainItem {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @discussion Contains access constraints for this object keyed by TKTOpenOperation wrapped in NSNumber.
+//
 // WithConstraints sets the constraints property and returns the receiver for chaining.
 func (x *TokenKeychainItem) WithConstraints(constraints *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *TokenKeychainItem {
 	x.inner.SetConstraints(constraints)
 	return x
 }
 
+// @brief object ID for item identification
+//
 // ObjectID calls the underlying ObjectID.
 func (x *TokenKeychainItem) ObjectID() objc.ID {
 	return x.inner.ObjectID()
 }
 
+// @discussion Contains the user-visible label for this item.  This property is an equivalent of kSecAttrLabel in SecItem.h
+//
 // Label calls the underlying Label.
 func (x *TokenKeychainItem) Label() string {
 	_r := x.inner.Label()
@@ -69,6 +79,8 @@ func (x *TokenKeychainItem) SetLabel(label string) {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 }
 
+// @discussion Contains access constraints for this object keyed by TKTOpenOperation wrapped in NSNumber.
+//
 // Constraints calls the underlying Constraints.
 func (x *TokenKeychainItem) Constraints() *foundation.NSDictionary[*foundation.NSNumber, objc.ID] {
 	return x.inner.Constraints()

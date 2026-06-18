@@ -36,12 +36,16 @@ func NewArrayStridedSlice() *ArrayStridedSlice {
 	return &ArrayStridedSlice{inner: raw.MPSNDArrayStridedSliceFromID(_id)}
 }
 
+// @property  strides @abstract  The strides to use when slicing the input array.
+//
 // WithStrides sets the strides property and returns the receiver for chaining.
 func (x *ArrayStridedSlice) WithStrides(strides raw.MPSNDArrayOffsets) *ArrayStridedSlice {
 	x.inner.SetStrides(strides)
 	return x
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
 func (x *ArrayStridedSlice) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayStridedSlice {
 	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)

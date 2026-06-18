@@ -30,6 +30,8 @@ func SpatialPipelineFromID(id objc.ID) *SpatialPipeline {
 	return &SpatialPipeline{inner: raw.PHASESpatialPipelineFromID(id)}
 }
 
+// @method initWithFlags @abstract Initialize a Spatial Pipeline with the provided flags. @discussion It's invalid to pass flags == 0 to this function. Doing so will return nil. @param flags Options for direct path transmission, early reflections, late reverb, etc.
+//
 // NewSpatialPipelineWithFlags creates a new [SpatialPipeline].
 func NewSpatialPipelineWithFlags(flags PHASESpatialPipelineFlags) *SpatialPipeline {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASESpatialPipeline")), objc.RegisterName("alloc"))
@@ -37,11 +39,15 @@ func NewSpatialPipelineWithFlags(flags PHASESpatialPipelineFlags) *SpatialPipeli
 	return &SpatialPipeline{inner: raw.PHASESpatialPipelineFromID(_id)}
 }
 
+// @property flags @abstract Spatial Pipeline Flags.
+//
 // Flags calls the underlying Flags.
 func (x *SpatialPipeline) Flags() PHASESpatialPipelineFlags {
 	return PHASESpatialPipelineFlags(x.inner.Flags())
 }
 
+// @property entries @abstract A dictionary of entries in the Spatial Pipeline. @discussion Upon initialization, an entry will be created for every flag in the PHASESpatialPipelineFlags passed to PHASESpatialPipeline:initWithFlags.
+//
 // Entries calls the underlying Entries.
 func (x *SpatialPipeline) Entries() *foundation.NSDictionary[*foundation.NSString, *raw.PHASESpatialPipelineEntry] {
 	return x.inner.Entries()

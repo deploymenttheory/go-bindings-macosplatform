@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Represents a snapshot of changes made to the cinematic script since recording. Can be used as a snapshot to quickly revert to previously saved edits via `-[CNScript reloadWithChanges:]`
+//
 // ScriptChanges wraps [raw.CNScriptChanges] with a fluent Go API.
 type ScriptChanges struct {
 	inner *raw.CNScriptChanges
@@ -31,6 +33,8 @@ func ScriptChangesFromID(id objc.ID) *ScriptChanges {
 	return &ScriptChanges{inner: raw.CNScriptChangesFromID(id)}
 }
 
+// Create from previously saved data representation
+//
 // NewScriptChangesWithDataRepresentation creates a new [ScriptChanges].
 func NewScriptChangesWithDataRepresentation(dataRepresentation *foundation.NSData) *ScriptChanges {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNScriptChanges")), objc.RegisterName("alloc"))
@@ -38,16 +42,22 @@ func NewScriptChangesWithDataRepresentation(dataRepresentation *foundation.NSDat
 	return &ScriptChanges{inner: raw.CNScriptChangesFromID(_id)}
 }
 
+// Get persistent data representation of these changes for later restoration. The changes can only be used with the original cinematic asset from which the CNScript was created.
+//
 // DataRepresentation calls the underlying DataRepresentation.
 func (x *ScriptChanges) DataRepresentation() *foundation.NSData {
 	return x.inner.DataRepresentation()
 }
 
+// The f/number to apply to the entire movie.
+//
 // FNumber calls the underlying FNumber.
 func (x *ScriptChanges) FNumber() float32 {
 	return x.inner.FNumber()
 }
 
+// All active user decisions, including those made at recording time, unless they have been removed.
+//
 // UserDecisions returns the collection as a Go slice.
 func (x *ScriptChanges) UserDecisions() []*Decision {
 	arr := x.inner.UserDecisions()
@@ -59,6 +69,8 @@ func (x *ScriptChanges) UserDecisions() []*Decision {
 	})
 }
 
+// All detection tracks that have been added. Does not include those created at recording time.
+//
 // AddedDetectionTracks returns the collection as a Go slice.
 func (x *ScriptChanges) AddedDetectionTracks() []*DetectionTrack {
 	arr := x.inner.AddedDetectionTracks()

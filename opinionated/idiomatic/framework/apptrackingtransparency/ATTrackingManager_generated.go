@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that provides a tracking authorization request and the tracking authorization status of the app.
+//
 // TrackingManager wraps [raw.ATTrackingManager] with a fluent Go API.
 type TrackingManager struct {
 	inner *raw.ATTrackingManager

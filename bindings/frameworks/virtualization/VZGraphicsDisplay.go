@@ -13,6 +13,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents a graphics display in a VM.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzgraphicsdisplay
 type VZGraphicsDisplay struct {
 	foundation.NSObject
@@ -37,7 +39,7 @@ func VZGraphicsDisplayFromID(id objc.ID) *VZGraphicsDisplay {
 	return o
 }
 
-// @abstract Resize this display. @param sizeInPixels New display width and height in pixels. @param error If not nil, assigned with an error describing why the new size is not valid. @return YES if the resize is successful, NO otherwise. @discussion If successful, the new size will be passed to the guest but the guest may or may not respond to the new size. The guest not using the size does not return an error. Reconfiguration triggers a display state change which can be tracked by VZGraphicsDisplayObservers.
+// Resize this display with the new dimensions you provide.
 func (o *VZGraphicsDisplay) ReconfigureWithSizeInPixelsError(sizeInPixels corefoundation.CGSize) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vZGraphicsDisplaySelReconfigureWithSizeInPixelsError, sizeInPixels, unsafe.Pointer(&_nsErr))
@@ -47,7 +49,7 @@ func (o *VZGraphicsDisplay) ReconfigureWithSizeInPixelsError(sizeInPixels corefo
 	return _ret, nil
 }
 
-// @abstract Reconfigure this display. @param configuration New display configuration. @param error If not nil, assigned with an error describing why the new configuration is not valid. @return YES if the reconfiguration is successful, NO otherwise. @discussion The type of the configuration must match the corresponding type that caused this display to be created. If successful, the new configuration will be passed to the guest but the guest may or may not respond to parts of the configuration. The guest not using the new configuration does not return an error. Reconfiguration triggers a display state change which can be tracked by VZGraphicsDisplayObservers.
+// Reconfigure this display with the new display configuration you provide.
 func (o *VZGraphicsDisplay) ReconfigureWithConfigurationError(configuration *VZGraphicsDisplayConfiguration) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vZGraphicsDisplaySelReconfigureWithConfigurationError, configuration.Ptr(), unsafe.Pointer(&_nsErr))
@@ -57,12 +59,12 @@ func (o *VZGraphicsDisplay) ReconfigureWithConfigurationError(configuration *VZG
 	return _ret, nil
 }
 
-// @abstract Add an observer. @param observer The new observer to be notified of display state changes.
+// Adds an observer to notify about display configuration changes.
 func (o *VZGraphicsDisplay) AddObserver(observer VZGraphicsDisplayObserver) {
 	o.Ptr().Send(_vZGraphicsDisplaySelAddObserver, observer)
 }
 
-// @abstract Remove an observer. @param observer The observer to be removed.
+// Removes a display configuration change observer.
 func (o *VZGraphicsDisplay) RemoveObserver(observer VZGraphicsDisplayObserver) {
 	o.Ptr().Send(_vZGraphicsDisplaySelRemoveObserver, observer)
 }

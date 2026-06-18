@@ -59,6 +59,8 @@ func (x *Slider) WithMaxValue(maxValue float64) *Slider {
 	return x
 }
 
+// The value this slider will be filled from. This slider will be filled from its `neutralValue` to its current value. If `neutralValue` has not been explicitly set before, access to `neutralValue` will return `minValue`.
+//
 // WithNeutralValue sets the neutralValue property and returns the receiver for chaining.
 func (x *Slider) WithNeutralValue(neutralValue float64) *Slider {
 	x.inner.SetNeutralValue(neutralValue)
@@ -89,6 +91,8 @@ func (x *Slider) WithTrackFillColor(trackFillColor *Color) *Slider {
 	return x
 }
 
+// The tint prominence of the slider. The automatic behavior for a regular slider tints its track fill, while a slider with tick marks is untinted. Setting the tint prominence will override this default behavior and choose an explicit track fill tint behavior. See “NSTintProminence“ for a list of possible values.
+//
 // WithTintProminence sets the tintProminence property and returns the receiver for chaining.
 func (x *Slider) WithTintProminence(tintProminence NSTintProminence) *Slider {
 	x.inner.SetTintProminence(raw.NSTintProminence(tintProminence))
@@ -521,6 +525,8 @@ func (x *Slider) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundatio
 	return x
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *Slider) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Slider {
 	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
@@ -629,11 +635,15 @@ func (x *Slider) SetMaxValue(maxValue float64) {
 	x.inner.SetMaxValue(maxValue)
 }
 
+// The value this slider will be filled from. This slider will be filled from its `neutralValue` to its current value. If `neutralValue` has not been explicitly set before, access to `neutralValue` will return `minValue`.
+//
 // NeutralValue calls the underlying NeutralValue.
 func (x *Slider) NeutralValue() float64 {
 	return x.inner.NeutralValue()
 }
 
+// The value this slider will be filled from. This slider will be filled from its `neutralValue` to its current value. If `neutralValue` has not been explicitly set before, access to `neutralValue` will return `minValue`.
+//
 // SetNeutralValue calls the underlying SetNeutralValue.
 func (x *Slider) SetNeutralValue(neutralValue float64) {
 	x.inner.SetNeutralValue(neutralValue)
@@ -678,11 +688,15 @@ func (x *Slider) SetTrackFillColor(trackFillColor *raw.NSColor) {
 	x.inner.SetTrackFillColor(trackFillColor)
 }
 
+// The tint prominence of the slider. The automatic behavior for a regular slider tints its track fill, while a slider with tick marks is untinted. Setting the tint prominence will override this default behavior and choose an explicit track fill tint behavior. See “NSTintProminence“ for a list of possible values.
+//
 // TintProminence calls the underlying TintProminence.
 func (x *Slider) TintProminence() NSTintProminence {
 	return NSTintProminence(x.inner.TintProminence())
 }
 
+// The tint prominence of the slider. The automatic behavior for a regular slider tints its track fill, while a slider with tick marks is untinted. Setting the tint prominence will override this default behavior and choose an explicit track fill tint behavior. See “NSTintProminence“ for a list of possible values.
+//
 // SetTintProminence calls the underlying SetTintProminence.
 func (x *Slider) SetTintProminence(tintProminence NSTintProminence) {
 	x.inner.SetTintProminence(raw.NSTintProminence(tintProminence))

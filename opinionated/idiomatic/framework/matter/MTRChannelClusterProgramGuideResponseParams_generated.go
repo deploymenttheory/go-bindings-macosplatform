@@ -34,6 +34,8 @@ func MTRChannelClusterProgramGuideResponseParamsFromID(id objc.ID) *MTRChannelCl
 	return &MTRChannelClusterProgramGuideResponseParams{inner: raw.MTRChannelClusterProgramGuideResponseParamsFromID(id)}
 }
 
+// Initialize an MTRChannelClusterProgramGuideResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+//
 // NewMTRChannelClusterProgramGuideResponseParamsWithResponseValueError creates a new [MTRChannelClusterProgramGuideResponseParams].
 func NewMTRChannelClusterProgramGuideResponseParamsWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRChannelClusterProgramGuideResponseParams, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRChannelClusterProgramGuideResponseParams")), objc.RegisterName("alloc"))

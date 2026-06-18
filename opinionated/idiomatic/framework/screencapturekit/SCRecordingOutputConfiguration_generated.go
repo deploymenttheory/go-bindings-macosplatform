@@ -37,24 +37,32 @@ func NewRecordingOutputConfiguration() *RecordingOutputConfiguration {
 	return &RecordingOutputConfiguration{inner: raw.SCRecordingOutputConfigurationFromID(_id)}
 }
 
+// @abstract Specifies output URL to save the recording.
+//
 // WithOutputURL sets the outputURL property and returns the receiver for chaining.
 func (x *RecordingOutputConfiguration) WithOutputURL(outputURL string) *RecordingOutputConfiguration {
 	x.inner.SetOutputURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputURL)))
 	return x
 }
 
+// @abstract Specifies video codec for the recording output, default is AVVideoCodecTypeH264, supported values can be obtained using availableVideoCodecTypes
+//
 // WithVideoCodecType sets the videoCodecType property and returns the receiver for chaining.
 func (x *RecordingOutputConfiguration) WithVideoCodecType(videoCodecType *foundation.NSString) *RecordingOutputConfiguration {
 	x.inner.SetVideoCodecType(videoCodecType)
 	return x
 }
 
+// @abstract Specifies file type for the recording output, default is AVFileTypeMPEG4, supported values can be obtained using availableOutputFileTypes
+//
 // WithOutputFileType sets the outputFileType property and returns the receiver for chaining.
 func (x *RecordingOutputConfiguration) WithOutputFileType(outputFileType *foundation.NSString) *RecordingOutputConfiguration {
 	x.inner.SetOutputFileType(outputFileType)
 	return x
 }
 
+// @abstract Specifies output URL to save the recording.
+//
 // OutputURL calls the underlying OutputURL.
 func (x *RecordingOutputConfiguration) OutputURL() *foundation.NSURL {
 	return x.inner.OutputURL()
@@ -65,6 +73,8 @@ func (x *RecordingOutputConfiguration) SetOutputURL(outputURL string) {
 	x.inner.SetOutputURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputURL)))
 }
 
+// @abstract Specifies video codec for the recording output, default is AVVideoCodecTypeH264, supported values can be obtained using availableVideoCodecTypes
+//
 // VideoCodecType calls the underlying VideoCodecType.
 func (x *RecordingOutputConfiguration) VideoCodecType() string {
 	_r := x.inner.VideoCodecType()
@@ -79,6 +89,8 @@ func (x *RecordingOutputConfiguration) SetVideoCodecType(videoCodecType *foundat
 	x.inner.SetVideoCodecType(videoCodecType)
 }
 
+// @abstract Specifies file type for the recording output, default is AVFileTypeMPEG4, supported values can be obtained using availableOutputFileTypes
+//
 // OutputFileType calls the underlying OutputFileType.
 func (x *RecordingOutputConfiguration) OutputFileType() string {
 	_r := x.inner.OutputFileType()
@@ -93,6 +105,8 @@ func (x *RecordingOutputConfiguration) SetOutputFileType(outputFileType *foundat
 	x.inner.SetOutputFileType(outputFileType)
 }
 
+// @abstract Returns an array of supported video codec formats that can be specified in SCRecordingOutputConfiguration for videoCodecType
+//
 // AvailableVideoCodecTypes returns the collection as a Go slice.
 func (x *RecordingOutputConfiguration) AvailableVideoCodecTypes() []*foundation.NSString {
 	arr := x.inner.AvailableVideoCodecTypes()
@@ -104,6 +118,8 @@ func (x *RecordingOutputConfiguration) AvailableVideoCodecTypes() []*foundation.
 	})
 }
 
+// @abstract Returns an array of supported file types that can be specified in SCRecordingOutputConfiguration for outputFileType Provides the file types AVCaptureAudioFileOutput can write.
+//
 // AvailableOutputFileTypes returns the collection as a Go slice.
 func (x *RecordingOutputConfiguration) AvailableOutputFileTypes() []*foundation.NSString {
 	arr := x.inner.AvailableOutputFileTypes()

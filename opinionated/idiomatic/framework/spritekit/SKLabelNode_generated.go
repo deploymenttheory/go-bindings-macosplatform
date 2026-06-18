@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A node that displays a text label with a given font.
+//
 // LabelNode wraps [raw.SKLabelNode] with a fluent Go API.
 type LabelNode struct {
 	inner *raw.SKLabelNode
@@ -53,18 +55,24 @@ func (x *LabelNode) WithHorizontalAlignmentMode(horizontalAlignmentMode SKLabelH
 	return x
 }
 
+// Determines the number of lines to draw. The default value is 1 (single line). A value of 0 means no limit. If the height of the text reaches the # of lines the text will be truncated using the line break mode.
+//
 // WithNumberOfLines sets the numberOfLines property and returns the receiver for chaining.
 func (x *LabelNode) WithNumberOfLines(numberOfLines int) *LabelNode {
 	x.inner.SetNumberOfLines(numberOfLines)
 	return x
 }
 
+// Determines the line break mode for multiple lines. Default is NSLineBreakByTruncatingTail
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *LabelNode) WithLineBreakMode(lineBreakMode appkit.NSLineBreakMode) *LabelNode {
 	x.inner.SetLineBreakMode(lineBreakMode)
 	return x
 }
 
+// If nonzero, this is used when determining layout width for multiline labels. Default is zero.
+//
 // WithPreferredMaxLayoutWidth sets the preferredMaxLayoutWidth property and returns the receiver for chaining.
 func (x *LabelNode) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *LabelNode {
 	x.inner.SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth)
@@ -95,114 +103,152 @@ func (x *LabelNode) WithFontSize(fontSize float64) *LabelNode {
 	return x
 }
 
+// Base color that the text is rendered with (if supported by the font)
+//
 // WithFontColor sets the fontColor property and returns the receiver for chaining.
 func (x *LabelNode) WithFontColor(fontColor *appkit.NSColor) *LabelNode {
 	x.inner.SetFontColor(fontColor)
 	return x
 }
 
+// Controls the blending between the rendered text and a color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
+//
 // WithColorBlendFactor sets the colorBlendFactor property and returns the receiver for chaining.
 func (x *LabelNode) WithColorBlendFactor(colorBlendFactor float64) *LabelNode {
 	x.inner.SetColorBlendFactor(colorBlendFactor)
 	return x
 }
 
+// Color to be blended with the text based on the colorBlendFactor
+//
 // WithColor sets the color property and returns the receiver for chaining.
 func (x *LabelNode) WithColor(color *appkit.NSColor) *LabelNode {
 	x.inner.SetColor(color)
 	return x
 }
 
+// Sets the blend mode to use when composing the sprite with the final framebuffer. @see SKNode.SKBlendMode
+//
 // WithBlendMode sets the blendMode property and returns the receiver for chaining.
 func (x *LabelNode) WithBlendMode(blendMode SKBlendMode) *LabelNode {
 	x.inner.SetBlendMode(raw.SKBlendMode(blendMode))
 	return x
 }
 
+// The position of the node in the parent's coordinate system
+//
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *LabelNode) WithPosition(position corefoundation.CGPoint) *LabelNode {
 	x.inner.SKNode.SetPosition(position)
 	return x
 }
 
+// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+//
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *LabelNode) WithZPosition(zPosition float64) *LabelNode {
 	x.inner.SKNode.SetZPosition(zPosition)
 	return x
 }
 
+// The Euler rotation about the z axis (in radians)
+//
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *LabelNode) WithZRotation(zRotation float64) *LabelNode {
 	x.inner.SKNode.SetZRotation(zRotation)
 	return x
 }
 
+// The scaling in the X axis
+//
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *LabelNode) WithXScale(xScale float64) *LabelNode {
 	x.inner.SKNode.SetXScale(xScale)
 	return x
 }
 
+// The scaling in the Y axis
+//
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *LabelNode) WithYScale(yScale float64) *LabelNode {
 	x.inner.SKNode.SetYScale(yScale)
 	return x
 }
 
+// The speed multiplier applied to all actions run on this node. Inherited by its children.
+//
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *LabelNode) WithSpeed(speed float64) *LabelNode {
 	x.inner.SKNode.SetSpeed(speed)
 	return x
 }
 
+// Alpha of this node (multiplied by the output color to give the final result)
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *LabelNode) WithAlpha(alpha float64) *LabelNode {
 	x.inner.SKNode.SetAlpha(alpha)
 	return x
 }
 
+// Controls whether or not the node's actions is updated or paused.
+//
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *LabelNode) WithPaused(paused bool) *LabelNode {
 	x.inner.SKNode.SetPaused(paused)
 	return x
 }
 
+// Controls whether or not the node and its children are rendered.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *LabelNode) WithHidden(hidden bool) *LabelNode {
 	x.inner.SKNode.SetHidden(hidden)
 	return x
 }
 
+// Controls whether or not the node receives touch events
+//
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *LabelNode) WithUserInteractionEnabled(userInteractionEnabled bool) *LabelNode {
 	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
 	return x
 }
 
+// The client assignable name. In general, this should be unique among peers in the scene graph.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *LabelNode) WithName(name string) *LabelNode {
 	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// Physics body attached to the node, with synchronized scale, rotation, and position
+//
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *LabelNode) WithPhysicsBody(physicsBody *PhysicsBody) *LabelNode {
 	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
+// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+//
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *LabelNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *LabelNode {
 	x.inner.SKNode.SetUserData(userData)
 	return x
 }
 
+// Kinematic constraints, used in IK solving
+//
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *LabelNode) WithReachConstraints(reachConstraints *ReachConstraints) *LabelNode {
 	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
+// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+//
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *LabelNode) WithConstraints(items ...*raw.SKConstraint) *LabelNode {
 	if len(items) == 0 {
@@ -221,6 +267,8 @@ func (x *LabelNode) WithConstraints(items ...*raw.SKConstraint) *LabelNode {
 	return x
 }
 
+// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+//
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *LabelNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *LabelNode {
 	x.inner.SKNode.SetAttributeValues(attributeValues)
@@ -301,6 +349,8 @@ func (x *LabelNode) SetHorizontalAlignmentMode(horizontalAlignmentMode SKLabelHo
 	x.inner.SetHorizontalAlignmentMode(raw.SKLabelHorizontalAlignmentMode(horizontalAlignmentMode))
 }
 
+// Determines the number of lines to draw. The default value is 1 (single line). A value of 0 means no limit. If the height of the text reaches the # of lines the text will be truncated using the line break mode.
+//
 // NumberOfLines calls the underlying NumberOfLines.
 func (x *LabelNode) NumberOfLines() int {
 	return x.inner.NumberOfLines()
@@ -311,6 +361,8 @@ func (x *LabelNode) SetNumberOfLines(numberOfLines int) {
 	x.inner.SetNumberOfLines(numberOfLines)
 }
 
+// Determines the line break mode for multiple lines. Default is NSLineBreakByTruncatingTail
+//
 // LineBreakMode calls the underlying LineBreakMode.
 func (x *LabelNode) LineBreakMode() appkit.NSLineBreakMode {
 	return x.inner.LineBreakMode()
@@ -321,6 +373,8 @@ func (x *LabelNode) SetLineBreakMode(lineBreakMode appkit.NSLineBreakMode) {
 	x.inner.SetLineBreakMode(lineBreakMode)
 }
 
+// If nonzero, this is used when determining layout width for multiline labels. Default is zero.
+//
 // PreferredMaxLayoutWidth calls the underlying PreferredMaxLayoutWidth.
 func (x *LabelNode) PreferredMaxLayoutWidth() float64 {
 	return x.inner.PreferredMaxLayoutWidth()
@@ -379,6 +433,8 @@ func (x *LabelNode) SetFontSize(fontSize float64) {
 	x.inner.SetFontSize(fontSize)
 }
 
+// Base color that the text is rendered with (if supported by the font)
+//
 // FontColor calls the underlying FontColor.
 func (x *LabelNode) FontColor() *appkit.NSColor {
 	return x.inner.FontColor()
@@ -389,6 +445,8 @@ func (x *LabelNode) SetFontColor(fontColor *appkit.NSColor) {
 	x.inner.SetFontColor(fontColor)
 }
 
+// Controls the blending between the rendered text and a color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
+//
 // ColorBlendFactor calls the underlying ColorBlendFactor.
 func (x *LabelNode) ColorBlendFactor() float64 {
 	return x.inner.ColorBlendFactor()
@@ -399,6 +457,8 @@ func (x *LabelNode) SetColorBlendFactor(colorBlendFactor float64) {
 	x.inner.SetColorBlendFactor(colorBlendFactor)
 }
 
+// Color to be blended with the text based on the colorBlendFactor
+//
 // Color calls the underlying Color.
 func (x *LabelNode) Color() *appkit.NSColor {
 	return x.inner.Color()
@@ -409,6 +469,8 @@ func (x *LabelNode) SetColor(color *appkit.NSColor) {
 	x.inner.SetColor(color)
 }
 
+// Sets the blend mode to use when composing the sprite with the final framebuffer. @see SKNode.SKBlendMode
+//
 // BlendMode calls the underlying BlendMode.
 func (x *LabelNode) BlendMode() SKBlendMode {
 	return SKBlendMode(x.inner.BlendMode())

@@ -36,6 +36,8 @@ func NewDownload() *Download {
 	return &Download{inner: raw.BADownloadFromID(_id)}
 }
 
+// @brief Copies an existing download ensuring that it has `isEssential == false`. @discussion This serves as a convenience method for constructing a non-essential representation of an existing download. It is important to note that essential downloads can only be enqueued by the app extension during a content request. If an essential download fails, `copyAsNonEssential` can be used to create a copy with `isEssential == false` that can be re-queued with `BADownloadManager`.
+//
 // CopyAsNonEssential calls the underlying CopyAsNonEssential.
 func (x *Download) CopyAsNonEssential() *Download {
 	_r := x.inner.CopyAsNonEssential()
@@ -45,11 +47,15 @@ func (x *Download) CopyAsNonEssential() *Download {
 	return &Download{inner: _r}
 }
 
+// @brief The current state of the respresented download.
+//
 // State calls the underlying State.
 func (x *Download) State() BADownloadState {
 	return BADownloadState(x.inner.State())
 }
 
+// @brief A client defined identifier that uniquely identifies this asset.
+//
 // Identifier calls the underlying Identifier.
 func (x *Download) Identifier() string {
 	_r := x.inner.Identifier()
@@ -59,6 +65,8 @@ func (x *Download) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @brief A UUID that uniquely identifies the download object.
+//
 // UniqueIdentifier calls the underlying UniqueIdentifier.
 func (x *Download) UniqueIdentifier() string {
 	_r := x.inner.UniqueIdentifier()
@@ -68,11 +76,15 @@ func (x *Download) UniqueIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @brief A client set priority to try to order downloads in order of importance
+//
 // Priority calls the underlying Priority.
 func (x *Download) Priority() int {
 	return x.inner.Priority()
 }
 
+// @brief Whether this download is essential. Essential downloads will occur while the app is being installed. Users cannot launch the app while these downloads are occurring. Essential downloads cannot be scheduled with `BADownloadManager`, they may only be scheduled from the extension with a `BAContentRequest` type of `Update` or `Install`. Essential downloads must have an accurate `fileSize` or they will fail.
+//
 // IsEssential calls the underlying IsEssential.
 func (x *Download) IsEssential() bool {
 	return x.inner.IsEssential()

@@ -38,66 +38,88 @@ func NewMTRCommissioningParameters() *MTRCommissioningParameters {
 	return &MTRCommissioningParameters{inner: raw.MTRCommissioningParametersFromID(_id)}
 }
 
+// The nonce to use when requesting a CSR for the node's operational certificate. If nil, a random nonce will be generated automatically. If not nil, must be 32 bytes of data.
+//
 // WithCsrNonce sets the csrNonce property and returns the receiver for chaining.
 func (x *MTRCommissioningParameters) WithCsrNonce(csrNonce *foundation.NSData) *MTRCommissioningParameters {
 	x.inner.SetCsrNonce(csrNonce)
 	return x
 }
 
+// The nonce to use when requesting attestation information from the device. If nil, a random nonce will be generated automatically. If not nil, must be 32 bytes of data.
+//
 // WithAttestationNonce sets the attestationNonce property and returns the receiver for chaining.
 func (x *MTRCommissioningParameters) WithAttestationNonce(attestationNonce *foundation.NSData) *MTRCommissioningParameters {
 	x.inner.SetAttestationNonce(attestationNonce)
 	return x
 }
 
+// The Wi-Fi SSID, if available.
+//
 // WithWifiSSID sets the wifiSSID property and returns the receiver for chaining.
 func (x *MTRCommissioningParameters) WithWifiSSID(wifiSSID *foundation.NSData) *MTRCommissioningParameters {
 	x.inner.SetWifiSSID(wifiSSID)
 	return x
 }
 
+// The Wi-Fi Credentials.  Allowed to be nil or 0-length data for an open network, as long as wifiSSID is not nil.
+//
 // WithWifiCredentials sets the wifiCredentials property and returns the receiver for chaining.
 func (x *MTRCommissioningParameters) WithWifiCredentials(wifiCredentials *foundation.NSData) *MTRCommissioningParameters {
 	x.inner.SetWifiCredentials(wifiCredentials)
 	return x
 }
 
+// The Thread operational dataset, if available.
+//
 // WithThreadOperationalDataset sets the threadOperationalDataset property and returns the receiver for chaining.
 func (x *MTRCommissioningParameters) WithThreadOperationalDataset(threadOperationalDataset *foundation.NSData) *MTRCommissioningParameters {
 	x.inner.SetThreadOperationalDataset(threadOperationalDataset)
 	return x
 }
 
+// An optional delegate that can be notified upon completion of device attestation.  See documentation for MTRDeviceAttestationDelegate for details. The delegate methods will be invoked on an arbitrary thread.
+//
 // WithDeviceAttestationDelegate sets the deviceAttestationDelegate property and returns the receiver for chaining.
 func (x *MTRCommissioningParameters) WithDeviceAttestationDelegate(deviceAttestationDelegate raw.MTRDeviceAttestationDelegate) *MTRCommissioningParameters {
 	x.inner.SetDeviceAttestationDelegate(deviceAttestationDelegate)
 	return x
 }
 
+// The timeout, in seconds, to set for the fail-safe when calling into the deviceAttestationDelegate and waiting for it to respond. If nil, the fail-safe will not be extended before calling into the deviceAttestationDelegate.
+//
 // WithFailSafeTimeout sets the failSafeTimeout property and returns the receiver for chaining.
 func (x *MTRCommissioningParameters) WithFailSafeTimeout(failSafeTimeout *foundation.NSNumber) *MTRCommissioningParameters {
 	x.inner.SetFailSafeTimeout(failSafeTimeout)
 	return x
 }
 
+// Only perform the PASE steps of commissioning. If set to YES, commissioning will be completed by another admin on the network. Defaults to NO.
+//
 // WithSkipCommissioningComplete sets the skipCommissioningComplete property and returns the receiver for chaining.
 func (x *MTRCommissioningParameters) WithSkipCommissioningComplete(skipCommissioningComplete bool) *MTRCommissioningParameters {
 	x.inner.SetSkipCommissioningComplete(skipCommissioningComplete)
 	return x
 }
 
+// The country code to provide to the device during commissioning. If not nil, this must be a 2-character ISO 3166-1 country code, which the device can use to decide on things like radio communications bands.
+//
 // WithCountryCode sets the countryCode property and returns the receiver for chaining.
 func (x *MTRCommissioningParameters) WithCountryCode(countryCode string) *MTRCommissioningParameters {
 	x.inner.SetCountryCode(foundation.NSStringStringWithUTF8String(countryCode))
 	return x
 }
 
+// Read device type information from all endpoints during commissioning. Defaults to NO.
+//
 // WithReadEndpointInformation sets the readEndpointInformation property and returns the receiver for chaining.
 func (x *MTRCommissioningParameters) WithReadEndpointInformation(readEndpointInformation bool) *MTRCommissioningParameters {
 	x.inner.SetReadEndpointInformation(readEndpointInformation)
 	return x
 }
 
+// List of attribute paths to read from the commissionee (in addition to whatever attributes are already read to handle readEndpointInformation being YES, or to handle other commissioning tasks). The FeatureMap attribute of all Network Commissioning clusters on the commissionee will always be read and does not need to be included in this list.
+//
 // WithExtraAttributesToRead sets the collection, converting the Go slice to an NSArray.
 func (x *MTRCommissioningParameters) WithExtraAttributesToRead(items ...*raw.MTRAttributeRequestPath) *MTRCommissioningParameters {
 	if len(items) == 0 {
@@ -116,12 +138,16 @@ func (x *MTRCommissioningParameters) WithExtraAttributesToRead(items ...*raw.MTR
 	return x
 }
 
+// Whether to force a network scan before requesting Wi-Fi credentials. The default is NO. Even if this value is NO a scan may still be performed. This value will be ignored if Wi-Fi credentials are provided or not needed. NOTE: Not all APIs that take MTRCommissioningParameters pay attention to this flag.
+//
 // WithForceWiFiScan sets the forceWiFiScan property and returns the receiver for chaining.
 func (x *MTRCommissioningParameters) WithForceWiFiScan(forceWiFiScan bool) *MTRCommissioningParameters {
 	x.inner.SetForceWiFiScan(forceWiFiScan)
 	return x
 }
 
+// Whether to force a network scan before requesting Thread credentials. The default is NO. Even if this value is NO a scan may still be performed. This value will be ignored if a Thread operational dataset is provided or not needed. NOTE: Not all APIs that take MTRCommissioningParameters pay attention to this flag.
+//
 // WithForceThreadScan sets the forceThreadScan property and returns the receiver for chaining.
 func (x *MTRCommissioningParameters) WithForceThreadScan(forceThreadScan bool) *MTRCommissioningParameters {
 	x.inner.SetForceThreadScan(forceThreadScan)
@@ -140,6 +166,8 @@ func (x *MTRCommissioningParameters) WithFailSafeExpiryTimeoutSecs(failSafeExpir
 	return x
 }
 
+// The nonce to use when requesting a CSR for the node's operational certificate. If nil, a random nonce will be generated automatically. If not nil, must be 32 bytes of data.
+//
 // CsrNonce calls the underlying CsrNonce.
 func (x *MTRCommissioningParameters) CsrNonce() *foundation.NSData {
 	return x.inner.CsrNonce()
@@ -150,6 +178,8 @@ func (x *MTRCommissioningParameters) SetCsrNonce(csrNonce *foundation.NSData) {
 	x.inner.SetCsrNonce(csrNonce)
 }
 
+// The nonce to use when requesting attestation information from the device. If nil, a random nonce will be generated automatically. If not nil, must be 32 bytes of data.
+//
 // AttestationNonce calls the underlying AttestationNonce.
 func (x *MTRCommissioningParameters) AttestationNonce() *foundation.NSData {
 	return x.inner.AttestationNonce()
@@ -160,6 +190,8 @@ func (x *MTRCommissioningParameters) SetAttestationNonce(attestationNonce *found
 	x.inner.SetAttestationNonce(attestationNonce)
 }
 
+// The Wi-Fi SSID, if available.
+//
 // WifiSSID calls the underlying WifiSSID.
 func (x *MTRCommissioningParameters) WifiSSID() *foundation.NSData {
 	return x.inner.WifiSSID()
@@ -170,6 +202,8 @@ func (x *MTRCommissioningParameters) SetWifiSSID(wifiSSID *foundation.NSData) {
 	x.inner.SetWifiSSID(wifiSSID)
 }
 
+// The Wi-Fi Credentials.  Allowed to be nil or 0-length data for an open network, as long as wifiSSID is not nil.
+//
 // WifiCredentials calls the underlying WifiCredentials.
 func (x *MTRCommissioningParameters) WifiCredentials() *foundation.NSData {
 	return x.inner.WifiCredentials()
@@ -180,6 +214,8 @@ func (x *MTRCommissioningParameters) SetWifiCredentials(wifiCredentials *foundat
 	x.inner.SetWifiCredentials(wifiCredentials)
 }
 
+// The Thread operational dataset, if available.
+//
 // ThreadOperationalDataset calls the underlying ThreadOperationalDataset.
 func (x *MTRCommissioningParameters) ThreadOperationalDataset() *foundation.NSData {
 	return x.inner.ThreadOperationalDataset()
@@ -190,6 +226,8 @@ func (x *MTRCommissioningParameters) SetThreadOperationalDataset(threadOperation
 	x.inner.SetThreadOperationalDataset(threadOperationalDataset)
 }
 
+// An optional delegate that can be notified upon completion of device attestation.  See documentation for MTRDeviceAttestationDelegate for details. The delegate methods will be invoked on an arbitrary thread.
+//
 // DeviceAttestationDelegate calls the underlying DeviceAttestationDelegate.
 func (x *MTRCommissioningParameters) DeviceAttestationDelegate() raw.MTRDeviceAttestationDelegate {
 	return x.inner.DeviceAttestationDelegate()
@@ -200,6 +238,8 @@ func (x *MTRCommissioningParameters) SetDeviceAttestationDelegate(deviceAttestat
 	x.inner.SetDeviceAttestationDelegate(deviceAttestationDelegate)
 }
 
+// The timeout, in seconds, to set for the fail-safe when calling into the deviceAttestationDelegate and waiting for it to respond. If nil, the fail-safe will not be extended before calling into the deviceAttestationDelegate.
+//
 // FailSafeTimeout calls the underlying FailSafeTimeout.
 func (x *MTRCommissioningParameters) FailSafeTimeout() *foundation.NSNumber {
 	return x.inner.FailSafeTimeout()
@@ -210,6 +250,8 @@ func (x *MTRCommissioningParameters) SetFailSafeTimeout(failSafeTimeout *foundat
 	x.inner.SetFailSafeTimeout(failSafeTimeout)
 }
 
+// Only perform the PASE steps of commissioning. If set to YES, commissioning will be completed by another admin on the network. Defaults to NO.
+//
 // SkipCommissioningComplete calls the underlying SkipCommissioningComplete.
 func (x *MTRCommissioningParameters) SkipCommissioningComplete() bool {
 	return x.inner.SkipCommissioningComplete()
@@ -220,6 +262,8 @@ func (x *MTRCommissioningParameters) SetSkipCommissioningComplete(skipCommission
 	x.inner.SetSkipCommissioningComplete(skipCommissioningComplete)
 }
 
+// The country code to provide to the device during commissioning. If not nil, this must be a 2-character ISO 3166-1 country code, which the device can use to decide on things like radio communications bands.
+//
 // CountryCode calls the underlying CountryCode.
 func (x *MTRCommissioningParameters) CountryCode() string {
 	_r := x.inner.CountryCode()
@@ -234,6 +278,8 @@ func (x *MTRCommissioningParameters) SetCountryCode(countryCode string) {
 	x.inner.SetCountryCode(foundation.NSStringStringWithUTF8String(countryCode))
 }
 
+// Read device type information from all endpoints during commissioning. Defaults to NO.
+//
 // ReadEndpointInformation calls the underlying ReadEndpointInformation.
 func (x *MTRCommissioningParameters) ReadEndpointInformation() bool {
 	return x.inner.ReadEndpointInformation()
@@ -244,6 +290,8 @@ func (x *MTRCommissioningParameters) SetReadEndpointInformation(readEndpointInfo
 	x.inner.SetReadEndpointInformation(readEndpointInformation)
 }
 
+// List of attribute paths to read from the commissionee (in addition to whatever attributes are already read to handle readEndpointInformation being YES, or to handle other commissioning tasks). The FeatureMap attribute of all Network Commissioning clusters on the commissionee will always be read and does not need to be included in this list.
+//
 // ExtraAttributesToRead returns the collection as a Go slice.
 func (x *MTRCommissioningParameters) ExtraAttributesToRead() []*MTRAttributeRequestPath {
 	arr := x.inner.ExtraAttributesToRead()
@@ -260,6 +308,8 @@ func (x *MTRCommissioningParameters) SetExtraAttributesToRead(extraAttributesToR
 	x.inner.SetExtraAttributesToRead(extraAttributesToRead)
 }
 
+// Whether to force a network scan before requesting Wi-Fi credentials. The default is NO. Even if this value is NO a scan may still be performed. This value will be ignored if Wi-Fi credentials are provided or not needed. NOTE: Not all APIs that take MTRCommissioningParameters pay attention to this flag.
+//
 // ForceWiFiScan calls the underlying ForceWiFiScan.
 func (x *MTRCommissioningParameters) ForceWiFiScan() bool {
 	return x.inner.ForceWiFiScan()
@@ -270,6 +320,8 @@ func (x *MTRCommissioningParameters) SetForceWiFiScan(forceWiFiScan bool) {
 	x.inner.SetForceWiFiScan(forceWiFiScan)
 }
 
+// Whether to force a network scan before requesting Thread credentials. The default is NO. Even if this value is NO a scan may still be performed. This value will be ignored if a Thread operational dataset is provided or not needed. NOTE: Not all APIs that take MTRCommissioningParameters pay attention to this flag.
+//
 // ForceThreadScan calls the underlying ForceThreadScan.
 func (x *MTRCommissioningParameters) ForceThreadScan() bool {
 	return x.inner.ForceThreadScan()

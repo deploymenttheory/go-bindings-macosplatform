@@ -29,6 +29,8 @@ func SyncEnginePendingZoneDeleteFromID(id objc.ID) *SyncEnginePendingZoneDelete 
 	return &SyncEnginePendingZoneDelete{inner: raw.CKSyncEnginePendingZoneDeleteFromID(id)}
 }
 
+// Creates a pending zone delete for the specified record zone identifier. - Parameters: - zoneID: The unique identifier of the record zone to delete. - Returns: An initialized pending zone delete.
+//
 // NewSyncEnginePendingZoneDeleteWithZoneID creates a new [SyncEnginePendingZoneDelete].
 func NewSyncEnginePendingZoneDeleteWithZoneID(zoneID *raw.CKRecordZoneID) *SyncEnginePendingZoneDelete {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEnginePendingZoneDelete")), objc.RegisterName("alloc"))

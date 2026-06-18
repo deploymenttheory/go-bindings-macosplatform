@@ -31,6 +31,8 @@ func MatrixSolveTriangularFromID(id objc.ID) *MatrixSolveTriangular {
 	return &MatrixSolveTriangular{inner: raw.MPSMatrixSolveTriangularFromID(id)}
 }
 
+// @abstract   Initialize an MPSMatrixSolveTriangular object on a device @param      device          The device on which the kernel will execute. @param      right           A boolean value which indicates if the coefficient matrix is multiplied on the left or right side of the solution.  NO indicates the multiplication is on the left. @param      upper           A boolean value which indicates if the source is lower or upper triangular.  NO indicates that the coefficient matrix is lower triangular. @param      transpose       A boolean value which indicates if the source matrix should be used in transposed form.  NO indicates that the coefficient matrix is to be used normally. @param      unit            A boolean value which indicates if the source matrix is unit triangular. @param      order           The order of the source matrix and, if right == NO, the number of rows in the solution and right hand side matrices.  If right == YES the number of columns in the solution and right hand side matrices. @param      numberOfRightHandSides  If right == NO, the number of columns in the solution and right hand side matrices.  The number of rows otherwise. @param      alpha           A double precision value used to scale the right hand sides. @discussion This function initializes a MPSMatrixSolveTriangular object.  It may allocate device side memory. @return     A valid MPSMatrixSolveTriangular object or nil, if failure.
+//
 // NewMatrixSolveTriangularWithDeviceRightUpperTransposeUnitOrderNumberOfRightHandSidesAlpha creates a new [MatrixSolveTriangular].
 func NewMatrixSolveTriangularWithDeviceRightUpperTransposeUnitOrderNumberOfRightHandSidesAlpha(device metal.MTLDevice, right bool, upper bool, transpose bool, unit bool, order uint, numberOfRightHandSides uint, alpha float64) *MatrixSolveTriangular {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixSolveTriangular")), objc.RegisterName("alloc"))
@@ -38,36 +40,48 @@ func NewMatrixSolveTriangularWithDeviceRightUpperTransposeUnitOrderNumberOfRight
 	return &MatrixSolveTriangular{inner: raw.MPSMatrixSolveTriangularFromID(_id)}
 }
 
+// @property   primarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithPrimarySourceMatrixOrigin sets the primarySourceMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixSolveTriangular) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular {
 	x.inner.MPSMatrixBinaryKernel.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
 	return x
 }
 
+// @property   secondarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithSecondarySourceMatrixOrigin sets the secondarySourceMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixSolveTriangular) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular {
 	x.inner.MPSMatrixBinaryKernel.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
 	return x
 }
 
+// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixSolveTriangular) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular {
 	x.inner.MPSMatrixBinaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
 	return x
 }
 
+// @property   batchStart @discussion The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+//
 // WithBatchStart sets the batchStart property and returns the receiver for chaining.
 func (x *MatrixSolveTriangular) WithBatchStart(batchStart uint) *MatrixSolveTriangular {
 	x.inner.MPSMatrixBinaryKernel.SetBatchStart(batchStart)
 	return x
 }
 
+// @property   batchSize @discussion The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+//
 // WithBatchSize sets the batchSize property and returns the receiver for chaining.
 func (x *MatrixSolveTriangular) WithBatchSize(batchSize uint) *MatrixSolveTriangular {
 	x.inner.MPSMatrixBinaryKernel.SetBatchSize(batchSize)
 	return x
 }
 
+// @abstract   Encode a MPSMatrixSolveTriangular kernel into a command Buffer. @param      commandBuffer       A valid MTLCommandBuffer to receive the encoded filter @param      sourceMatrix        A valid MPSMatrix containing the source matrix. @param      rightHandSideMatrix A valid MPSMatrix containing the right hand side values. @param      solutionMatrix      A valid MPSMatrix to contain the result. @discussion This function encodes the MPSMatrixSolveTriangular object to a valid command buffer. rightHandSideMatrix and solutionMatrix must be large enough to hold at least order * numberOfRightHandSides values starting at secondarySourceMatrixOrigin and resultMatrixOrigin respectively. sourceMatrix must be at least size order x order starting at primarySourceMatrixOrigin.
+//
 // EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix calls the underlying EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix.
 func (x *MatrixSolveTriangular) EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, rightHandSideMatrix *mpscore.MPSMatrix, solutionMatrix *mpscore.MPSMatrix) {
 	x.inner.EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer, sourceMatrix, rightHandSideMatrix, solutionMatrix)

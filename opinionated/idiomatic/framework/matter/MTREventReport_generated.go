@@ -32,6 +32,8 @@ func MTREventReportFromID(id objc.ID) *MTREventReport {
 	return &MTREventReport{inner: raw.MTREventReportFromID(id)}
 }
 
+// Initialize an MTREventReport with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not an event response. Will set the value property to nil and the error property to non-nil, even if the schema for the value is not known, if the response-value is an error, not data. Will return nil and hand out an error if the response-value is data in the following cases: * The response is for a cluster/event combination for which the schema is unknown and hence the type of the data is not known. * The data does not match the known schema.
+//
 // NewMTREventReportWithResponseValueError creates a new [MTREventReport].
 func NewMTREventReportWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTREventReport, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTREventReport")), objc.RegisterName("alloc"))
@@ -52,16 +54,22 @@ func (x *MTREventReport) Path() *MTREventPath {
 	return &MTREventPath{inner: _r}
 }
 
+// eventNumber will only have a useful value if "error" is nil.
+//
 // EventNumber calls the underlying EventNumber.
 func (x *MTREventReport) EventNumber() *foundation.NSNumber {
 	return x.inner.EventNumber()
 }
 
+// priority will only have a useful value if "error" is nil.
+//
 // Priority calls the underlying Priority.
 func (x *MTREventReport) Priority() *foundation.NSNumber {
 	return x.inner.Priority()
 }
 
+// Either systemUpTime or timestampDate will be valid depending on eventTimeType, if "error" is nil.  If "error" is not nil, none of eventTimeType, systemUpTime, timestampDate should be expected to have useful values.
+//
 // EventTimeType calls the underlying EventTimeType.
 func (x *MTREventReport) EventTimeType() MTREventTimeType {
 	return MTREventTimeType(x.inner.EventTimeType())
@@ -77,11 +85,15 @@ func (x *MTREventReport) TimestampDate() *foundation.NSDate {
 	return x.inner.TimestampDate()
 }
 
+// An instance of the event payload interface that corresponds to the report's path (e.g. MTRBasicInformationClusterStartUpEvent if the path's cluster 0x0028 "Basic Information" and the path's event is 0x00 "StartUp"), or nil if error is not nil (in which case there is no payload available).
+//
 // Value calls the underlying Value.
 func (x *MTREventReport) Value() objc.ID {
 	return x.inner.Value()
 }
 
+// If this specific path resulted in an error, the error (in the MTRInteractionErrorDomain or MTRErrorDomain) that corresponds to this path.
+//
 // Error calls the underlying Error.
 func (x *MTREventReport) Error() unsafe.Pointer {
 	return x.inner.Error()

@@ -33,6 +33,8 @@ func MTRBaseClusterEnergyEVSEModeFromID(id objc.ID) *MTRBaseClusterEnergyEVSEMod
 	return &MTRBaseClusterEnergyEVSEMode{inner: raw.MTRBaseClusterEnergyEVSEModeFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterEnergyEVSEModeWithDeviceEndpointIDQueue creates a new [MTRBaseClusterEnergyEVSEMode].
 func NewMTRBaseClusterEnergyEVSEModeWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterEnergyEVSEMode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterEnergyEVSEMode")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewMTRBaseClusterEnergyEVSEModeWithDeviceEndpointIDQueue(device *raw.MTRBas
 	return &MTRBaseClusterEnergyEVSEMode{inner: raw.MTRBaseClusterEnergyEVSEModeFromID(_id)}
 }
 
+// Command ChangeToMode This command is used to change device modes.
+//
 // ChangeToModeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterEnergyEVSEMode) ChangeToModeWithParamsCompletion(ctx context.Context, params *raw.MTREnergyEVSEModeClusterChangeToModeParams) (*MTREnergyEVSEModeClusterChangeToModeResponseParams, error) {
 	type _result struct {

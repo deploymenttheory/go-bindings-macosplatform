@@ -33,6 +33,8 @@ func JapanIndividualNumberCardMetadataFromID(id objc.ID) *JapanIndividualNumberC
 	return &JapanIndividualNumberCardMetadata{inner: raw.PKJapanIndividualNumberCardMetadataFromID(id)}
 }
 
+// Initialize with parameters configured by issuer's server to indicate the specific product instance to provision. - Properties: - provisioningCredentialIdentifier: Identifies this user's instance for provisioning. - sharingInstanceIdentifier: A short lived token to prevent replay-ability. - cardTemplateIdentifier: An identifier for a legacy product on our Apple Pay servers. - preview: Object containing information to represent the pass to provision in our UI.
+//
 // NewJapanIndividualNumberCardMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierPreview creates a new [JapanIndividualNumberCardMetadata].
 func NewJapanIndividualNumberCardMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierPreview(credentialIdentifier string, sharingInstanceIdentifier string, templateIdentifier string, preview *raw.PKAddPassMetadataPreview) *JapanIndividualNumberCardMetadata {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKJapanIndividualNumberCardMetadata")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewJapanIndividualNumberCardMetadataWithProvisioningCredentialIdentifierSha
 	return &JapanIndividualNumberCardMetadata{inner: raw.PKJapanIndividualNumberCardMetadataFromID(_id)}
 }
 
+// Initialize with parameters configured by issuer's server to indicate the specific product instance to provision. - Properties: - provisioningCredentialIdentifier: Identifies this user's instance for provisioning. - sharingInstanceIdentifier: A short lived token to prevent replay-ability. - cardConfigurationIdentifier: An identifier for a product on our Apple Pay servers. - preview: Object containing information to represent the pass to provision in our UI.
+//
 // NewJapanIndividualNumberCardMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardConfigurationIdentifierPreview creates a new [JapanIndividualNumberCardMetadata].
 func NewJapanIndividualNumberCardMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardConfigurationIdentifierPreview(credentialIdentifier string, sharingInstanceIdentifier string, cardConfigurationIdentifier string, preview *raw.PKAddPassMetadataPreview) *JapanIndividualNumberCardMetadata {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKJapanIndividualNumberCardMetadata")), objc.RegisterName("alloc"))
@@ -47,30 +51,40 @@ func NewJapanIndividualNumberCardMetadataWithProvisioningCredentialIdentifierSha
 	return &JapanIndividualNumberCardMetadata{inner: raw.PKJapanIndividualNumberCardMetadataFromID(_id)}
 }
 
+// Raw authentication password used to protect authentication functionality. If configured in the pass, this functionality allows users to present their identity credentials to external parties.
+//
 // WithAuthenticationPassword sets the authenticationPassword property and returns the receiver for chaining.
 func (x *JapanIndividualNumberCardMetadata) WithAuthenticationPassword(authenticationPassword string) *JapanIndividualNumberCardMetadata {
 	x.inner.SetAuthenticationPassword(foundation.NSStringStringWithUTF8String(authenticationPassword))
 	return x
 }
 
+// Raw signing password used to protect signing functionality. If configured in the pass, this functionality allows users to digitally sign with external parties or print officially signed documents.
+//
 // WithSigningPassword sets the signingPassword property and returns the receiver for chaining.
 func (x *JapanIndividualNumberCardMetadata) WithSigningPassword(signingPassword string) *JapanIndividualNumberCardMetadata {
 	x.inner.SetSigningPassword(foundation.NSStringStringWithUTF8String(signingPassword))
 	return x
 }
 
+// preview: A preview object containing the necessary information to represent the pass during provisioning.
+//
 // WithPreview sets the preview property and returns the receiver for chaining.
 func (x *JapanIndividualNumberCardMetadata) WithPreview(preview AddPassMetadataPreviewProvider) *JapanIndividualNumberCardMetadata {
 	x.inner.SetPreview(preview.asAddPassMetadataPreview())
 	return x
 }
 
+// serverEnvironmentIdentifier: Identifier referencing the target server environment Apple Pay servers should reach out to to provision this pass. If not present, the default Apply Pay server environment will be used and an empty string will be returned.
+//
 // WithServerEnvironmentIdentifier sets the serverEnvironmentIdentifier property and returns the receiver for chaining.
 func (x *JapanIndividualNumberCardMetadata) WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *JapanIndividualNumberCardMetadata {
 	x.inner.PKIdentityDocumentMetadata.SetServerEnvironmentIdentifier(foundation.NSStringStringWithUTF8String(serverEnvironmentIdentifier))
 	return x
 }
 
+// Raw authentication password used to protect authentication functionality. If configured in the pass, this functionality allows users to present their identity credentials to external parties.
+//
 // AuthenticationPassword calls the underlying AuthenticationPassword.
 func (x *JapanIndividualNumberCardMetadata) AuthenticationPassword() string {
 	_r := x.inner.AuthenticationPassword()
@@ -85,6 +99,8 @@ func (x *JapanIndividualNumberCardMetadata) SetAuthenticationPassword(authentica
 	x.inner.SetAuthenticationPassword(foundation.NSStringStringWithUTF8String(authenticationPassword))
 }
 
+// Raw signing password used to protect signing functionality. If configured in the pass, this functionality allows users to digitally sign with external parties or print officially signed documents.
+//
 // SigningPassword calls the underlying SigningPassword.
 func (x *JapanIndividualNumberCardMetadata) SigningPassword() string {
 	_r := x.inner.SigningPassword()
@@ -99,6 +115,8 @@ func (x *JapanIndividualNumberCardMetadata) SetSigningPassword(signingPassword s
 	x.inner.SetSigningPassword(foundation.NSStringStringWithUTF8String(signingPassword))
 }
 
+// preview: A preview object containing the necessary information to represent the pass during provisioning.
+//
 // Preview calls the underlying Preview.
 func (x *JapanIndividualNumberCardMetadata) Preview() *AddPassMetadataPreview {
 	_r := x.inner.Preview()

@@ -31,6 +31,8 @@ func MTRClusterWindowCoveringFromID(id objc.ID) *MTRClusterWindowCovering {
 	return &MTRClusterWindowCovering{inner: raw.MTRClusterWindowCoveringFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterWindowCoveringWithDeviceEndpointIDQueue creates a new [MTRClusterWindowCovering].
 func NewMTRClusterWindowCoveringWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterWindowCovering {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterWindowCovering")), objc.RegisterName("alloc"))

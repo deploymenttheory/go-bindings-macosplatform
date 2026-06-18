@@ -30,6 +30,8 @@ func MTRClusterLaundryDryerControlsFromID(id objc.ID) *MTRClusterLaundryDryerCon
 	return &MTRClusterLaundryDryerControls{inner: raw.MTRClusterLaundryDryerControlsFromID(id)}
 }
 
+// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+//
 // NewMTRClusterLaundryDryerControlsWithDeviceEndpointIDQueue creates a new [MTRClusterLaundryDryerControls].
 func NewMTRClusterLaundryDryerControlsWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterLaundryDryerControls {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterLaundryDryerControls")), objc.RegisterName("alloc"))

@@ -32,6 +32,8 @@ func ImageDilateFromID(id objc.ID) *ImageDilate {
 	return &ImageDilate{inner: raw.MPSImageDilateFromID(id)}
 }
 
+// @abstract   Init a object with kernel height, width and weight values. @discussion Each dilate shape probe defines a 3D surface of values. These are arranged in order left to right, then top to bottom in a 1D array. (values[kernelWidth*y+x] = probe[y][x]) Values should be generally be in the range [0,1] with the center pixel tending towards 0 and edges towards 1. However, any numerical value is allowed. Calculations are subject to the usual floating-point rounding error. @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel. Must be an odd number. @param      kernelHeight        The height of the kernel. Must be an odd number. @param      values              The set of values to use as the dilate probe. The values are copied into the filter. To avoid image ligthening or darkening, the center value should be 0.0f.
+//
 // NewImageDilateWithDeviceKernelWidthKernelHeightValues creates a new [ImageDilate].
 func NewImageDilateWithDeviceKernelWidthKernelHeightValues(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, values *float32) *ImageDilate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageDilate")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewImageDilateWithDeviceKernelWidthKernelHeightValues(device metal.MTLDevic
 	return &ImageDilate{inner: raw.MPSImageDilateFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+//
 // NewImageDilateWithCoderDevice creates a new [ImageDilate].
 func NewImageDilateWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageDilate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageDilate")), objc.RegisterName("alloc"))
@@ -46,29 +50,39 @@ func NewImageDilateWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MT
 	return &ImageDilate{inner: raw.MPSImageDilateFromID(_id)}
 }
 
+// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+//
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *ImageDilate) WithOffset(offset mpscore.MPSOffset) *ImageDilate {
 	x.inner.MPSUnaryImageKernel.SetOffset(offset)
 	return x
 }
 
+// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+//
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *ImageDilate) WithClipRect(clipRect metal.MTLRegion) *ImageDilate {
 	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
 	return x
 }
 
+// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
+//
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *ImageDilate) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageDilate {
 	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
 	return x
 }
 
+// @property kernelHeight @abstract  The height of the filter window. Must be an odd number.
+//
 // KernelHeight calls the underlying KernelHeight.
 func (x *ImageDilate) KernelHeight() uint {
 	return x.inner.KernelHeight()
 }
 
+// @property kernelWidth @abstract  The width of the filter window. Must be an odd number.
+//
 // KernelWidth calls the underlying KernelWidth.
 func (x *ImageDilate) KernelWidth() uint {
 	return x.inner.KernelWidth()

@@ -29,6 +29,8 @@ func MIDIChannelPressureEventFromID(id objc.ID) *MIDIChannelPressureEvent {
 	return &MIDIChannelPressureEvent{inner: raw.AVMIDIChannelPressureEventFromID(id)}
 }
 
+// @method initWithChannel:pressure: @abstract Initialize the event with a channel and a pressure value. @param channel The MIDI channel for the message.  Range: 0-15. @param pressure The MIDI channel pressure.  Range: 0-127.
+//
 // NewMIDIChannelPressureEventWithChannelPressure creates a new [MIDIChannelPressureEvent].
 func NewMIDIChannelPressureEventWithChannelPressure(channel uint, pressure uint) *MIDIChannelPressureEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMIDIChannelPressureEvent")), objc.RegisterName("alloc"))
@@ -36,12 +38,16 @@ func NewMIDIChannelPressureEventWithChannelPressure(channel uint, pressure uint)
 	return &MIDIChannelPressureEvent{inner: raw.AVMIDIChannelPressureEventFromID(_id)}
 }
 
+// @property pressure The MIDI channel pressure.
+//
 // WithPressure sets the pressure property and returns the receiver for chaining.
 func (x *MIDIChannelPressureEvent) WithPressure(pressure uint) *MIDIChannelPressureEvent {
 	x.inner.SetPressure(pressure)
 	return x
 }
 
+// @property channel The MIDI channel for the event.  Range: 0-15.
+//
 // WithChannel sets the channel property and returns the receiver for chaining.
 func (x *MIDIChannelPressureEvent) WithChannel(channel uint) *MIDIChannelPressureEvent {
 	x.inner.AVMIDIChannelEvent.SetChannel(channel)

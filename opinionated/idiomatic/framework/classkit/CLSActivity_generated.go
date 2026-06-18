@@ -36,28 +36,38 @@ func NewActivity() *Activity {
 	return &Activity{inner: raw.CLSActivityFromID(_id)}
 }
 
+// @abstract      Current progress as a decimal representation of a percentage. @discussion    Should be [0.0, 1.0].
+//
 // WithProgress sets the progress property and returns the receiver for chaining.
 func (x *Activity) WithProgress(progress float64) *Activity {
 	x.inner.SetProgress(progress)
 	return x
 }
 
+// @abstract      The primary activityItem to be reported on. @discussion    This can be nil indicating @c progress property is the primary data instead of any activityItems.
+//
 // WithPrimaryActivityItem sets the primaryActivityItem property and returns the receiver for chaining.
 func (x *Activity) WithPrimaryActivityItem(primaryActivityItem ActivityItemProvider) *Activity {
 	x.inner.SetPrimaryActivityItem(primaryActivityItem.asActivityItem())
 	return x
 }
 
+// @abstract      Adds progress to this activity. @discussion    The progress should be a decimal representation of the start and ending percentage [0.0, 1.0]. @param         start      Starting percentage. @param         end        Ending percentage.
+//
 // AddProgressRangeFromStartToEnd calls the underlying AddProgressRangeFromStartToEnd.
 func (x *Activity) AddProgressRangeFromStartToEnd(start float64, end float64) {
 	x.inner.AddProgressRangeFromStartToEnd(start, end)
 }
 
+// @abstract      Add an activity item to this CLSActivity.
+//
 // AddAdditionalActivityItem calls the underlying AddAdditionalActivityItem.
 func (x *Activity) AddAdditionalActivityItem(activityItem *raw.CLSActivityItem) {
 	x.inner.AddAdditionalActivityItem(activityItem)
 }
 
+// @abstract      Current progress as a decimal representation of a percentage. @discussion    Should be [0.0, 1.0].
+//
 // Progress calls the underlying Progress.
 func (x *Activity) Progress() float64 {
 	return x.inner.Progress()
@@ -68,11 +78,15 @@ func (x *Activity) SetProgress(progress float64) {
 	x.inner.SetProgress(progress)
 }
 
+// @abstract      Returns the total time tracked in this activity (excluding any previous activities). @discussion    The time between calling @c -start and @c -stop.
+//
 // Duration calls the underlying Duration.
 func (x *Activity) Duration() float64 {
 	return x.inner.Duration()
 }
 
+// @abstract      The primary activityItem to be reported on. @discussion    This can be nil indicating @c progress property is the primary data instead of any activityItems.
+//
 // PrimaryActivityItem calls the underlying PrimaryActivityItem.
 func (x *Activity) PrimaryActivityItem() *ActivityItem {
 	_r := x.inner.PrimaryActivityItem()
@@ -87,6 +101,8 @@ func (x *Activity) SetPrimaryActivityItem(primaryActivityItem *raw.CLSActivityIt
 	x.inner.SetPrimaryActivityItem(primaryActivityItem)
 }
 
+// @abstract      Array of all additional activity items on this CLSActivity.
+//
 // AdditionalActivityItems returns the collection as a Go slice.
 func (x *Activity) AdditionalActivityItems() []*ActivityItem {
 	arr := x.inner.AdditionalActivityItems()
@@ -98,21 +114,29 @@ func (x *Activity) AdditionalActivityItems() []*ActivityItem {
 	})
 }
 
+// @abstract      Start Activity. @discussion    Starts the activity (or resumes if previously stopped).
+//
 // Start calls the underlying Start.
 func (x *Activity) Start() {
 	x.inner.Start()
 }
 
+// @abstract      Stop Activity. @discussion    Stops or pauses the activity and ends the time being tracked on it.
+//
 // Stop calls the underlying Stop.
 func (x *Activity) Stop() {
 	x.inner.Stop()
 }
 
+// @abstract Deletes all activity items. @discussion Convenience method to delete all activity items associated with the current activity.
+//
 // RemoveAllActivityItems calls the underlying RemoveAllActivityItems.
 func (x *Activity) RemoveAllActivityItems() {
 	x.inner.RemoveAllActivityItems()
 }
 
+// @abstract      Returns whether this Activity has been started or not.
+//
 // IsStarted calls the underlying IsStarted.
 func (x *Activity) IsStarted() bool {
 	return x.inner.IsStarted()

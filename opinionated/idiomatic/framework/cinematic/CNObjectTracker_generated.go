@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Converts a normalized point or rectangle into a detection track that tracks an object over time.
+//
 // ObjectTracker wraps [raw.CNObjectTracker] with a fluent Go API.
 type ObjectTracker struct {
 	inner *raw.CNObjectTracker
@@ -33,6 +35,8 @@ func ObjectTrackerFromID(id objc.ID) *ObjectTracker {
 	return &ObjectTracker{inner: raw.CNObjectTrackerFromID(id)}
 }
 
+// Create a new detection track builder. - Parameters: - commandQueue: the command queue of a metal device to which commands should be submitted to perform work
+//
 // NewObjectTrackerWithCommandQueue creates a new [ObjectTracker].
 func NewObjectTrackerWithCommandQueue(commandQueue metal.MTLCommandQueue) *ObjectTracker {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNObjectTracker")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewObjectTrackerWithCommandQueue(commandQueue metal.MTLCommandQueue) *Objec
 	return &ObjectTracker{inner: raw.CNObjectTrackerFromID(_id)}
 }
 
+// Find the bounds of an object at the given point. Can be used to convert a normalized point in an image to a rectangle that can be used to start tracking. - Parameters: - point: location of object in image in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right - sourceImage: pixel buffer containing the image - Returns: A prediction, which includes bounds that can be used to start tracking, or `nil` if no discernible object is detected.
+//
 // FindObjectAtPointSourceImage calls the underlying FindObjectAtPointSourceImage.
 func (x *ObjectTracker) FindObjectAtPointSourceImage(point corefoundation.CGPoint, sourceImage unsafe.Pointer) *BoundsPrediction {
 	_r := x.inner.FindObjectAtPointSourceImage(point, sourceImage)
@@ -49,11 +55,15 @@ func (x *ObjectTracker) FindObjectAtPointSourceImage(point corefoundation.CGPoin
 	return &BoundsPrediction{inner: _r}
 }
 
+// Start creating a detection track to track an object within the given bounds. - Parameters: - time: the presentation time of the first frame in the detection track - normalizedBounds: the bounds of the object to track in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right - sourceImage: image buffer containing the image - sourceDisparity: disparity buffer containing depth information - Returns: whether the object can be tracked - Note: if the object can be tracked, a detection is added to the detection track being built
+//
 // StartTrackingAtWithinSourceImageSourceDisparity calls the underlying StartTrackingAtWithinSourceImageSourceDisparity.
 func (x *ObjectTracker) StartTrackingAtWithinSourceImageSourceDisparity(time_ coremedia.CMTime, normalizedBounds corefoundation.CGRect, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer) bool {
 	return x.inner.StartTrackingAtWithinSourceImageSourceDisparity(time_, normalizedBounds, sourceImage, sourceDisparity)
 }
 
+// Continue tracking an object for which tracking has started, and add a new detection to the detection track being built. - Parameters: - time: the presentation time of the frame to be added to the detection track - Returns: a prediction of where the object is in the source image
+//
 // ContinueTrackingAtSourceImageSourceDisparity calls the underlying ContinueTrackingAtSourceImageSourceDisparity.
 func (x *ObjectTracker) ContinueTrackingAtSourceImageSourceDisparity(time_ coremedia.CMTime, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer) *BoundsPrediction {
 	_r := x.inner.ContinueTrackingAtSourceImageSourceDisparity(time_, sourceImage, sourceDisparity)
@@ -63,6 +73,8 @@ func (x *ObjectTracker) ContinueTrackingAtSourceImageSourceDisparity(time_ corem
 	return &BoundsPrediction{inner: _r}
 }
 
+// Finish constructing the detection track and return it. - Returns: a detection track which tracks the object
+//
 // FinishDetectionTrack calls the underlying FinishDetectionTrack.
 func (x *ObjectTracker) FinishDetectionTrack() *DetectionTrack {
 	_r := x.inner.FinishDetectionTrack()
@@ -72,6 +84,8 @@ func (x *ObjectTracker) FinishDetectionTrack() *DetectionTrack {
 	return &DetectionTrack{inner: _r}
 }
 
+// Reset the builder to construct a new detection track.
+//
 // ResetDetectionTrack calls the underlying ResetDetectionTrack.
 func (x *ObjectTracker) ResetDetectionTrack() {
 	x.inner.ResetDetectionTrack()

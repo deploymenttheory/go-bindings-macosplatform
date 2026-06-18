@@ -38,6 +38,8 @@ func NewHapticEngine() *HapticEngine {
 	return &HapticEngine{inner: raw.CHHapticEngineFromID(_id)}
 }
 
+// @method initWithAudioSession:error @abstract Create an instance of an CHHapticEngine and associate it with an audio session.  If 'audioSession' is nil, the engine will create its own. @discussion More than one instance may exist within a process.  Each will function independently of the others, but all CHHapticEngines which share an audio session will have identical audio behavior with regard to interruptions, etc. CHHapticEngines created using this method will be associated with the device's internal haptics hardware system, if one exists.  For systems without internal haptics, this method will fail with the error `CHHapticErrorCodeNotSupported`. To access engine instances associated with external game controllers, see the GameController framework documentation for the `hapticEngines` property on the GCController class.
+//
 // NewHapticEngineWithAudioSessionError creates a new [HapticEngine].
 func NewHapticEngineWithAudioSessionError(audioSession objc.ID) (*HapticEngine, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CHHapticEngine")), objc.RegisterName("alloc"))
@@ -55,58 +57,78 @@ func (x *HapticEngine) WithStoppedHandler(stoppedHandler func(CHHapticEngineStop
 	return x
 }
 
+// @property resetHandler @abstract This block will called asynchronously if the haptic engine has to reset itself after a server failure. @discussion In response to this handler being called, the client must release all haptic pattern players and recreate them.  All CHHapticPattern objects and CHHapticEngine properties will have been preserved. In general, callbacks arrive on a non-main thread and it is the client's responsibility to handle it in a thread-safe manner.
+//
 // WithResetHandler sets the resetHandler property and returns the receiver for chaining.
 func (x *HapticEngine) WithResetHandler(resetHandler func()) *HapticEngine {
 	x.inner.SetResetHandler(resetHandler)
 	return x
 }
 
+// @property playsHapticsOnly If set to YES, the CHHapticEngine will ignore all events of type CHHapticEventTypeAudio and play only haptic events. @discussion This behavior change will only take effect after the engine is stopped and restarted. The default is NO.
+//
 // WithPlaysHapticsOnly sets the playsHapticsOnly property and returns the receiver for chaining.
 func (x *HapticEngine) WithPlaysHapticsOnly(playsHapticsOnly bool) *HapticEngine {
 	x.inner.SetPlaysHapticsOnly(playsHapticsOnly)
 	return x
 }
 
+// @property playsAudioOnly If set to YES, the CHHapticEngine will ignore all events of type CHHapticEventTypeHaptic and play only audio events. @discussion This behavior change will only take effect after the engine is stopped and restarted. The default is NO.
+//
 // WithPlaysAudioOnly sets the playsAudioOnly property and returns the receiver for chaining.
 func (x *HapticEngine) WithPlaysAudioOnly(playsAudioOnly bool) *HapticEngine {
 	x.inner.SetPlaysAudioOnly(playsAudioOnly)
 	return x
 }
 
+// @property isMutedForAudio When set to YES, the CHHapticEngine mutes audio playback from its players. @discussion Default is NO.
+//
 // WithIsMutedForAudio sets the isMutedForAudio property and returns the receiver for chaining.
 func (x *HapticEngine) WithIsMutedForAudio(isMutedForAudio bool) *HapticEngine {
 	x.inner.SetIsMutedForAudio(isMutedForAudio)
 	return x
 }
 
+// @property isMutedForHaptics When set to YES, the CHHapticEngine mutes haptic playback from its players. @discussion Default is NO.
+//
 // WithIsMutedForHaptics sets the isMutedForHaptics property and returns the receiver for chaining.
 func (x *HapticEngine) WithIsMutedForHaptics(isMutedForHaptics bool) *HapticEngine {
 	x.inner.SetIsMutedForHaptics(isMutedForHaptics)
 	return x
 }
 
+// @property autoShutdownEnabled @abstract When auto shutdown is enabled, the haptic engine can start and stop the hardware dynamically, to conserve power. @discussion To conserve power, it is advised that the client stop the haptic engine when not in use. But when auto shutdown is enabled, the haptic engine will stop the hardware if it was running idle for a certain duration, and restart it later when required. Note that, because this operation is dynamic, it may affect the start times of the pattern players (e.g. `CHHapticPatternplayer`), if the engine has to resume from its shutdown state. This feature is disabled by default, but the client can enable it if needed.
+//
 // WithAutoShutdownEnabled sets the autoShutdownEnabled property and returns the receiver for chaining.
 func (x *HapticEngine) WithAutoShutdownEnabled(autoShutdownEnabled bool) *HapticEngine {
 	x.inner.SetAutoShutdownEnabled(autoShutdownEnabled)
 	return x
 }
 
+// @method startWithCompletionHandler: @abstract Asynchronously start the engine. The handler will be called when the operation completes. @discussion The handler is guaranteed to be called on either success or failure.
+//
 // StartWithCompletionHandler calls the underlying StartWithCompletionHandler.
 func (x *HapticEngine) StartWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	x.inner.StartWithCompletionHandler(completionHandler)
 }
 
+// @method startAndReturnError: @abstract Start the engine and block until the engine has started. @discussion This method will return NO upon failure, and outError will be set to a valid NSError describing the error.
+//
 // StartAndReturnError returns any validation error.
 func (x *HapticEngine) StartAndReturnError() error {
 	_, err := x.inner.StartAndReturnError()
 	return err
 }
 
+// @method stopWithCompletionHandler: @abstract Asynchronously stop the engine.  The handler will be called when the operation completes. @discussion The handler is guaranteed to be called on either success or failure.
+//
 // StopWithCompletionHandler calls the underlying StopWithCompletionHandler.
 func (x *HapticEngine) StopWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
 	x.inner.StopWithCompletionHandler(completionHandler)
 }
 
+// @method notifyWhenPlayersFinished: @abstract Tell the engine to asynchronously call the passed-in handler when all active pattern players associated with this engine have stopped. @param finishedHandler The block that will be called asynchronously.  The return value of this block determines the action the engine will take when the block finishes (see `CHHapticEngineFinishedHandler`). @discussion If additional players are started after this call is made, they will delay the callback. If no players are active or the engine is stopped, the callback will happen immediately.
+//
 // NotifyWhenPlayersFinished calls the underlying NotifyWhenPlayersFinished.
 func (x *HapticEngine) NotifyWhenPlayersFinished(finishedHandler func(unsafe.Pointer) CHHapticEngineFinishedAction) {
 	x.inner.NotifyWhenPlayersFinished(func(_a0 unsafe.Pointer) raw.CHHapticEngineFinishedAction {
@@ -114,36 +136,50 @@ func (x *HapticEngine) NotifyWhenPlayersFinished(finishedHandler func(unsafe.Poi
 	})
 }
 
+// @method createPlayerWithPattern:error @abstract Factory method for creating a CHHapticPatternPlayer from a CHHapticPattern. @param pattern The pattern to be played.
+//
 // CreatePlayerWithPatternError calls the underlying CreatePlayerWithPatternError.
 func (x *HapticEngine) CreatePlayerWithPatternError(pattern *raw.CHHapticPattern) (raw.CHHapticPatternPlayer, error) {
 	return x.inner.CreatePlayerWithPatternError(pattern)
 }
 
+// @method createAdvancedPlayerWithPattern:error @abstract Factory method for creating a CHHapticAdvancedPatternPlayer from a CHHapticPattern. @param pattern The pattern to be played.
+//
 // CreateAdvancedPlayerWithPatternError calls the underlying CreateAdvancedPlayerWithPatternError.
 func (x *HapticEngine) CreateAdvancedPlayerWithPatternError(pattern *raw.CHHapticPattern) (raw.CHHapticAdvancedPatternPlayer, error) {
 	return x.inner.CreateAdvancedPlayerWithPatternError(pattern)
 }
 
+// @method registerAudioResource:options:error @abstract Register an external audio file for use as a custom waveform. @param resourceURL A URL referencing the location of the audio file to be registered. @param options A dictionary containing CHHapticAudioResourceKey/value pairs describing how this resource should be played. @param outError If register operation fails, this will be set to a valid NSError describing the error.
+//
 // RegisterAudioResourceOptionsError calls the underlying RegisterAudioResourceOptionsError.
 func (x *HapticEngine) RegisterAudioResourceOptionsError(resourceURL string, options *foundation.NSDictionary[objc.ID, objc.ID]) (uint, error) {
 	return x.inner.RegisterAudioResourceOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(resourceURL)), options)
 }
 
+// @method unregisterAudioResource:error @abstract Unregister and remove a previously-registered audio resource. @param resourceID The resource ID that was returned when the resource was registered. @param outError If the unregister operation fails, this will be set to a valid NSError describing the error.
+//
 // UnregisterAudioResourceError calls the underlying UnregisterAudioResourceError.
 func (x *HapticEngine) UnregisterAudioResourceError(resourceID uint) (bool, error) {
 	return x.inner.UnregisterAudioResourceError(resourceID)
 }
 
+// @method playPatternFromURL:error @abstract Simple one-shot call to play a pattern specified by a URL. @param fileURL The URL of the file containing a haptic/audio pattern dictionary. @param outError If the operation fails, this will be set to a valid NSError describing the error. @discussion The engine should be started prior to calling this method if low latency is desired. If this is not done, this method will start it, which can cause a significant delay.
+//
 // PlayPatternFromURLError calls the underlying PlayPatternFromURLError.
 func (x *HapticEngine) PlayPatternFromURLError(fileURL string) (bool, error) {
 	return x.inner.PlayPatternFromURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)))
 }
 
+// @method playPatternFromData:error @abstract Simple one-shot call to play a pattern specified by NSData. @param data The NSData containing a haptic/audio pattern dictionary. @param outError If the operation fails, this will be set to a valid NSError describing the error. @discussion The engine should be started prior to calling this method if low latency is desired. If this is not done, this method will start it, which can cause a significant delay.
+//
 // PlayPatternFromDataError calls the underlying PlayPatternFromDataError.
 func (x *HapticEngine) PlayPatternFromDataError(data *foundation.NSData) (bool, error) {
 	return x.inner.PlayPatternFromDataError(data)
 }
 
+// @property currentTime The absolute time from which all current and future event times may be calculated. The units are seconds.
+//
 // CurrentTime calls the underlying CurrentTime.
 func (x *HapticEngine) CurrentTime() float64 {
 	return x.inner.CurrentTime()
@@ -159,6 +195,8 @@ func (x *HapticEngine) SetStoppedHandler(stoppedHandler func(CHHapticEngineStopp
 	x.inner.SetStoppedHandler(func(_a0 raw.CHHapticEngineStoppedReason) { stoppedHandler(CHHapticEngineStoppedReason(_a0)) })
 }
 
+// @property resetHandler @abstract This block will called asynchronously if the haptic engine has to reset itself after a server failure. @discussion In response to this handler being called, the client must release all haptic pattern players and recreate them.  All CHHapticPattern objects and CHHapticEngine properties will have been preserved. In general, callbacks arrive on a non-main thread and it is the client's responsibility to handle it in a thread-safe manner.
+//
 // ResetHandler calls the underlying ResetHandler.
 func (x *HapticEngine) ResetHandler() objc.Block {
 	return x.inner.ResetHandler()
@@ -169,6 +207,8 @@ func (x *HapticEngine) SetResetHandler(resetHandler func()) {
 	x.inner.SetResetHandler(resetHandler)
 }
 
+// @property playsHapticsOnly If set to YES, the CHHapticEngine will ignore all events of type CHHapticEventTypeAudio and play only haptic events. @discussion This behavior change will only take effect after the engine is stopped and restarted. The default is NO.
+//
 // PlaysHapticsOnly calls the underlying PlaysHapticsOnly.
 func (x *HapticEngine) PlaysHapticsOnly() bool {
 	return x.inner.PlaysHapticsOnly()
@@ -179,6 +219,8 @@ func (x *HapticEngine) SetPlaysHapticsOnly(playsHapticsOnly bool) {
 	x.inner.SetPlaysHapticsOnly(playsHapticsOnly)
 }
 
+// @property playsAudioOnly If set to YES, the CHHapticEngine will ignore all events of type CHHapticEventTypeHaptic and play only audio events. @discussion This behavior change will only take effect after the engine is stopped and restarted. The default is NO.
+//
 // PlaysAudioOnly calls the underlying PlaysAudioOnly.
 func (x *HapticEngine) PlaysAudioOnly() bool {
 	return x.inner.PlaysAudioOnly()
@@ -189,6 +231,8 @@ func (x *HapticEngine) SetPlaysAudioOnly(playsAudioOnly bool) {
 	x.inner.SetPlaysAudioOnly(playsAudioOnly)
 }
 
+// @property isMutedForAudio When set to YES, the CHHapticEngine mutes audio playback from its players. @discussion Default is NO.
+//
 // IsMutedForAudio calls the underlying IsMutedForAudio.
 func (x *HapticEngine) IsMutedForAudio() bool {
 	return x.inner.IsMutedForAudio()
@@ -199,6 +243,8 @@ func (x *HapticEngine) SetIsMutedForAudio(isMutedForAudio bool) {
 	x.inner.SetIsMutedForAudio(isMutedForAudio)
 }
 
+// @property isMutedForHaptics When set to YES, the CHHapticEngine mutes haptic playback from its players. @discussion Default is NO.
+//
 // IsMutedForHaptics calls the underlying IsMutedForHaptics.
 func (x *HapticEngine) IsMutedForHaptics() bool {
 	return x.inner.IsMutedForHaptics()
@@ -209,6 +255,8 @@ func (x *HapticEngine) SetIsMutedForHaptics(isMutedForHaptics bool) {
 	x.inner.SetIsMutedForHaptics(isMutedForHaptics)
 }
 
+// @property autoShutdownEnabled @abstract When auto shutdown is enabled, the haptic engine can start and stop the hardware dynamically, to conserve power. @discussion To conserve power, it is advised that the client stop the haptic engine when not in use. But when auto shutdown is enabled, the haptic engine will stop the hardware if it was running idle for a certain duration, and restart it later when required. Note that, because this operation is dynamic, it may affect the start times of the pattern players (e.g. `CHHapticPatternplayer`), if the engine has to resume from its shutdown state. This feature is disabled by default, but the client can enable it if needed.
+//
 // IsAutoShutdownEnabled calls the underlying IsAutoShutdownEnabled.
 func (x *HapticEngine) IsAutoShutdownEnabled() bool {
 	return x.inner.IsAutoShutdownEnabled()

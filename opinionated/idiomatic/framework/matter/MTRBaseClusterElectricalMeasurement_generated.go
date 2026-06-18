@@ -35,6 +35,8 @@ func MTRBaseClusterElectricalMeasurementFromID(id objc.ID) *MTRBaseClusterElectr
 	return &MTRBaseClusterElectricalMeasurement{inner: raw.MTRBaseClusterElectricalMeasurementFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterElectricalMeasurementWithDeviceEndpointIDQueue creates a new [MTRBaseClusterElectricalMeasurement].
 func NewMTRBaseClusterElectricalMeasurementWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterElectricalMeasurement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterElectricalMeasurement")), objc.RegisterName("alloc"))
@@ -49,6 +51,8 @@ func NewMTRBaseClusterElectricalMeasurementWithDeviceEndpointQueue(device *raw.M
 	return &MTRBaseClusterElectricalMeasurement{inner: raw.MTRBaseClusterElectricalMeasurementFromID(_id)}
 }
 
+// Command GetProfileInfoCommand A function which retrieves the power profiling information from the electrical measurement server.
+//
 // GetProfileInfoCommandWithParamsCompletion calls the underlying GetProfileInfoCommandWithParamsCompletion.
 func (x *MTRBaseClusterElectricalMeasurement) GetProfileInfoCommandWithParamsCompletion(params *raw.MTRElectricalMeasurementClusterGetProfileInfoCommandParams, completion func(unsafe.Pointer)) {
 	x.inner.GetProfileInfoCommandWithParamsCompletion(params, completion)
@@ -59,6 +63,8 @@ func (x *MTRBaseClusterElectricalMeasurement) GetProfileInfoCommandWithCompletio
 	x.inner.GetProfileInfoCommandWithCompletion(completion)
 }
 
+// Command GetMeasurementProfileCommand A function which retrieves an electricity measurement profile from the electricity measurement server for a specific attribute Id requested.
+//
 // GetMeasurementProfileCommandWithParamsCompletion calls the underlying GetMeasurementProfileCommandWithParamsCompletion.
 func (x *MTRBaseClusterElectricalMeasurement) GetMeasurementProfileCommandWithParamsCompletion(params *raw.MTRElectricalMeasurementClusterGetMeasurementProfileCommandParams, completion func(unsafe.Pointer)) {
 	x.inner.GetMeasurementProfileCommandWithParamsCompletion(params, completion)

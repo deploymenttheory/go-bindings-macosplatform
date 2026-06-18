@@ -11,6 +11,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The configuration for a Mac graphics device.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzmacgraphicsdisplayconfiguration
 type VZMacGraphicsDisplayConfiguration struct {
 	VZGraphicsDisplayConfiguration
@@ -38,7 +40,7 @@ func VZMacGraphicsDisplayConfigurationFromID(id objc.ID) *VZMacGraphicsDisplayCo
 	return o
 }
 
-// @abstract Create a display configuration with the specified pixel dimensions and pixel density. @param widthInPixels The width of the display, in pixels. @param heightInPixels The height of the display, in pixels. @param pixelsPerInch The pixel density as a number of pixels per inch.
+// Create a display configuration with the specified pixel dimensions and pixel density.
 func (o *VZMacGraphicsDisplayConfiguration) InitWithWidthInPixelsHeightInPixelsPixelsPerInch(widthInPixels int, heightInPixels int, pixelsPerInch int) *VZMacGraphicsDisplayConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacGraphicsDisplayConfigurationSelInitWithWidthInPixelsHeightInPixelsPixelsPerInch, widthInPixels, heightInPixels, pixelsPerInch)
 	if _ret != 0 {
@@ -47,7 +49,7 @@ func (o *VZMacGraphicsDisplayConfiguration) InitWithWidthInPixelsHeightInPixelsP
 	return VZMacGraphicsDisplayConfigurationFromID(_ret)
 }
 
-// @abstract Create a display configuration suitable for showing on the specified screen. @param screen The screen on which you intend to present the VZVirtualMachineView for the display. @param sizeInPoints The intended logical size of the display. @discussion The pixel dimensions and pixel density will be initialized based on the specified screen and size. Note: an instance of macOS running in the virtual machine may not necessarily provide a display mode with a backing scale factor matching the specified screen.
+// Create a display configuration suitable for showing on the specified screen.
 func (o *VZMacGraphicsDisplayConfiguration) InitForScreenSizeInPoints(screen *appkit.NSScreen, sizeInPoints corefoundation.CGSize) *VZMacGraphicsDisplayConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacGraphicsDisplayConfigurationSelInitForScreenSizeInPoints, screen.Ptr(), sizeInPoints)
 	if _ret != 0 {

@@ -36,6 +36,8 @@ func NewNNDefaultPadding() *NNDefaultPadding {
 	return &NNDefaultPadding{inner: raw.MPSNNDefaultPaddingFromID(_id)}
 }
 
+// @abstract  Human readable description of what the padding policy does
+//
 // Label calls the underlying Label.
 func (x *NNDefaultPadding) Label() string {
 	_r := x.inner.Label()

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Abstract class representing a series of detections of the same subject over time.
+//
 // DetectionTrack wraps [raw.CNDetectionTrack] with a fluent Go API.
 type DetectionTrack struct {
 	inner *raw.CNDetectionTrack
@@ -55,31 +57,43 @@ func (x *DetectionTrack) DetectionNearestTime(time_ coremedia.CMTime) *Detection
 	return &Detection{inner: _r}
 }
 
+// Gets the array of detections in the detection track within the given time range. Makes sense for discrete detection tracks only.
+//
 // DetectionsInTimeRange calls the underlying DetectionsInTimeRange.
 func (x *DetectionTrack) DetectionsInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.CNDetection] {
 	return x.inner.DetectionsInTimeRange(timeRange)
 }
 
+// The type of subject detected by this detection track.
+//
 // DetectionType calls the underlying DetectionType.
 func (x *DetectionTrack) DetectionType() CNDetectionType {
 	return CNDetectionType(x.inner.DetectionType())
 }
 
+// The detectionID of the subject detected during this track; unique within a cinematic script.
+//
 // DetectionID calls the underlying DetectionID.
 func (x *DetectionTrack) DetectionID() int64 {
 	return x.inner.DetectionID()
 }
 
+// The detectionGroupID of the subject detected by the track. The detectionGroupID can be used to associate related detections such as the face and torso of the same person.
+//
 // DetectionGroupID calls the underlying DetectionGroupID.
 func (x *DetectionTrack) DetectionGroupID() int64 {
 	return x.inner.DetectionGroupID()
 }
 
+// Whether this detection track was created by the client.
+//
 // IsUserCreated calls the underlying IsUserCreated.
 func (x *DetectionTrack) IsUserCreated() bool {
 	return x.inner.IsUserCreated()
 }
 
+// Whether this detection track has discrete detections (otherwise continuous). A discrete detection track will return detections only at the specific times a detection occurs. A continuous detection track will return a detection for any requested time and an empty array for time ranges.
+//
 // IsDiscrete calls the underlying IsDiscrete.
 func (x *DetectionTrack) IsDiscrete() bool {
 	return x.inner.IsDiscrete()

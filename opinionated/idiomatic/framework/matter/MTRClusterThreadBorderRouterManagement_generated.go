@@ -35,6 +35,8 @@ func MTRClusterThreadBorderRouterManagementFromID(id objc.ID) *MTRClusterThreadB
 	return &MTRClusterThreadBorderRouterManagement{inner: raw.MTRClusterThreadBorderRouterManagementFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterThreadBorderRouterManagementWithDeviceEndpointIDQueue creates a new [MTRClusterThreadBorderRouterManagement].
 func NewMTRClusterThreadBorderRouterManagementWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterThreadBorderRouterManagement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterThreadBorderRouterManagement")), objc.RegisterName("alloc"))

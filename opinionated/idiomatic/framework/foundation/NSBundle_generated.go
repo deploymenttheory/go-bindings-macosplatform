@@ -9,6 +9,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Bundle wraps [raw.NSBundle] with a fluent Go API.
@@ -183,9 +184,20 @@ func (x *Bundle) LocalizedAttributedStringForKeyValueTable(key string, value str
 	return &AttributedString{inner: _r}
 }
 
+// Look up a localized string given a list of available localizations. - Parameters: - key: The key for the localized string to retrieve. - value: A default value to return if a localized string for “key“ cannot be found. - tableName: The name of the strings file to search. If `nil`, the method uses tables in `Localizable.strings`. - localizations: An array of BCP 47 language codes corresponding to available localizations. Bundle compares the array against its available localizations, and uses the best result to retrieve the localized string. If empty, we treat it as no localization is available, and may return a fallback. - Returns: A localized version of the string designated by “key“ in table “tableName“.
+//
 // LocalizedStringForKeyValueTableLocalizations calls the underlying LocalizedStringForKeyValueTableLocalizations.
-func (x *Bundle) LocalizedStringForKeyValueTableLocalizations(key string, value string, tableName string, localizations *raw.NSArray[*raw.NSString]) *String {
-	_r := x.inner.LocalizedStringForKeyValueTableLocalizations(foundation.NSStringStringWithUTF8String(key), foundation.NSStringStringWithUTF8String(value), foundation.NSStringStringWithUTF8String(tableName), localizations)
+func (x *Bundle) LocalizedStringForKeyValueTableLocalizations(key string, value string, tableName string, localizations ...StringProvider) *String {
+	_ptrs := make([]objc.ID, len(localizations))
+	for _i, _v := range localizations {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg3 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg3 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	_r := x.inner.LocalizedStringForKeyValueTableLocalizations(foundation.NSStringStringWithUTF8String(key), foundation.NSStringStringWithUTF8String(value), foundation.NSStringStringWithUTF8String(tableName), _arg3)
 	if _r == nil {
 		return nil
 	}
@@ -432,7 +444,7 @@ type Bundleable interface {
 	PathsForResourcesOfTypeInDirectoryForLocalization(ext string, subpath string, localizationName string) *raw.NSArray[*raw.NSString]
 	LocalizedStringForKeyValueTable(key string, value string, tableName string) *String
 	LocalizedAttributedStringForKeyValueTable(key string, value string, tableName string) *AttributedString
-	LocalizedStringForKeyValueTableLocalizations(key string, value string, tableName string, localizations *raw.NSArray[*raw.NSString]) *String
+	LocalizedStringForKeyValueTableLocalizations(key string, value string, tableName string, localizations ...StringProvider) *String
 	ObjectForInfoDictionaryKey(key string) objc.ID
 	ClassNamed(className string) objc.Class
 	IsLoaded() bool

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents the configuration options you can set on a Virtio console port.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtioconsoleportconfiguration
 type VZVirtioConsolePortConfiguration struct {
 	VZConsolePortConfiguration
@@ -34,6 +36,7 @@ func VZVirtioConsolePortConfigurationFromID(id objc.ID) *VZVirtioConsolePortConf
 	return o
 }
 
+// Creates a new Virtio console port configuration.
 func (o *VZVirtioConsolePortConfiguration) Init() *VZVirtioConsolePortConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioConsolePortConfigurationSelInit)
 	if _ret != 0 {

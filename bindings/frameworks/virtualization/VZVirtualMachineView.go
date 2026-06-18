@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A view that allows user interaction with a VM.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtualmachineview
 type VZVirtualMachineView struct {
 	appkit.NSView

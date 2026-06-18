@@ -179,6 +179,8 @@ func (x *TextField) WithPlaceholderAttributedStrings(items ...*foundation.NSAttr
 	return x
 }
 
+// Specifies the behavior for resolving “NSTextAlignment/natural“ to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `false`.
+//
 // WithResolvesNaturalAlignmentWithBaseWritingDirection sets the resolvesNaturalAlignmentWithBaseWritingDirection property and returns the receiver for chaining.
 func (x *TextField) WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *TextField {
 	x.inner.SetResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection)
@@ -617,6 +619,8 @@ func (x *TextField) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets founda
 	return x
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *TextField) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextField {
 	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
@@ -939,11 +943,15 @@ func (x *TextField) SetPlaceholderAttributedStrings(placeholderAttributedStrings
 	x.inner.SetPlaceholderAttributedStrings(placeholderAttributedStrings)
 }
 
+// Specifies the behavior for resolving “NSTextAlignment/natural“ to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `false`.
+//
 // ResolvesNaturalAlignmentWithBaseWritingDirection calls the underlying ResolvesNaturalAlignmentWithBaseWritingDirection.
 func (x *TextField) ResolvesNaturalAlignmentWithBaseWritingDirection() bool {
 	return x.inner.ResolvesNaturalAlignmentWithBaseWritingDirection()
 }
 
+// Specifies the behavior for resolving “NSTextAlignment/natural“ to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `false`.
+//
 // SetResolvesNaturalAlignmentWithBaseWritingDirection calls the underlying SetResolvesNaturalAlignmentWithBaseWritingDirection.
 func (x *TextField) SetResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) {
 	x.inner.SetResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection)

@@ -67,66 +67,88 @@ func (x *Scrubber) WithScrubberLayout(scrubberLayout ScrubberLayoutProvider) *Sc
 	return x
 }
 
+// The index of the selected item within the control. If there is no selected item, the value of this property is (-1). Setting this property through the animator proxy will animate the selection change. Programmatic selection changes do not trigger delegate callbacks.
+//
 // WithSelectedIndex sets the selectedIndex property and returns the receiver for chaining.
 func (x *Scrubber) WithSelectedIndex(selectedIndex int) *Scrubber {
 	x.inner.SetSelectedIndex(selectedIndex)
 	return x
 }
 
+// Describes the interaction mode for the scrubber control. See the @c NSScrubberMode enumeration for a list of possible values. The default value is @c NSScrubberModeFixed.
+//
 // WithMode sets the mode property and returns the receiver for chaining.
 func (x *Scrubber) WithMode(mode NSScrubberMode) *Scrubber {
 	x.inner.SetMode(raw.NSScrubberMode(mode))
 	return x
 }
 
+// If the value of @c itemAlignment is not @c NSScrubberAlignmentNone, the scrubber will ensure that some item rests at the preferred alignment within the control following a scrolling or paging interaction. The default value is @c NSScrubberAlignmentNone.
+//
 // WithItemAlignment sets the itemAlignment property and returns the receiver for chaining.
 func (x *Scrubber) WithItemAlignment(itemAlignment NSScrubberAlignment) *Scrubber {
 	x.inner.SetItemAlignment(raw.NSScrubberAlignment(itemAlignment))
 	return x
 }
 
+// When @c continuous is @c YES, panning over the control in @c NSScrubberModeFixed will immediately select the item under the user's finger, and scrolling in @c NSScrubberModeFree will continuously select items as they pass through the current @c itemAlignment. The default is @c NO.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *Scrubber) WithContinuous(continuous bool) *Scrubber {
 	x.inner.SetContinuous(continuous)
 	return x
 }
 
+// When @c floatsSelectionViews is @c YES, the selection decorations provided by @c selectionBackgroundStyle and @c selectionOverlayStyle will smoothly float between selected items, rather than animating their entrance/exit in-place. The default is @c NO.
+//
 // WithFloatsSelectionViews sets the floatsSelectionViews property and returns the receiver for chaining.
 func (x *Scrubber) WithFloatsSelectionViews(floatsSelectionViews bool) *Scrubber {
 	x.inner.SetFloatsSelectionViews(floatsSelectionViews)
 	return x
 }
 
+// Specifies a style of decoration to place behind items that are selected and/or highlighted. The default value is @c nil, indicating no built-in background decoration.
+//
 // WithSelectionBackgroundStyle sets the selectionBackgroundStyle property and returns the receiver for chaining.
 func (x *Scrubber) WithSelectionBackgroundStyle(selectionBackgroundStyle *ScrubberSelectionStyle) *Scrubber {
 	x.inner.SetSelectionBackgroundStyle(selectionBackgroundStyle.Unwrap())
 	return x
 }
 
+// Specifies a style of decoration to place above items that are selected and/or highlighted. The default value is @c nil, indicating no built-in overlay decoration.
+//
 // WithSelectionOverlayStyle sets the selectionOverlayStyle property and returns the receiver for chaining.
 func (x *Scrubber) WithSelectionOverlayStyle(selectionOverlayStyle *ScrubberSelectionStyle) *Scrubber {
 	x.inner.SetSelectionOverlayStyle(selectionOverlayStyle.Unwrap())
 	return x
 }
 
+// If @c showsArrowButtons is @c YES, the control provides leading and trailing arrow buttons. Tapping an arrow button moves the selection index by one element; pressing and holding repeatedly moves the selection. The default is @c NO.
+//
 // WithShowsArrowButtons sets the showsArrowButtons property and returns the receiver for chaining.
 func (x *Scrubber) WithShowsArrowButtons(showsArrowButtons bool) *Scrubber {
 	x.inner.SetShowsArrowButtons(showsArrowButtons)
 	return x
 }
 
+// If @c showsAdditionalContentIndicators is @c YES, the control will draw a fade effect to indicate that there is additional unscrolled content. The default is @c NO.
+//
 // WithShowsAdditionalContentIndicators sets the showsAdditionalContentIndicators property and returns the receiver for chaining.
 func (x *Scrubber) WithShowsAdditionalContentIndicators(showsAdditionalContentIndicators bool) *Scrubber {
 	x.inner.SetShowsAdditionalContentIndicators(showsAdditionalContentIndicators)
 	return x
 }
 
+// If set, @c backgroundColor is displayed behind the scrubber content. The background color is suppressed if the scrubber is assigned a non-nil @c backgroundView. The default value is @c nil.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *Scrubber) WithBackgroundColor(backgroundColor *Color) *Scrubber {
 	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// If non-nil, the @c backgroundView is displayed below the scrubber content. The view's layout is managed by @c NSScrubber to match the content area. If this property is non-nil, the @c backgroundColor property has no effect. The default value is @c nil.
+//
 // WithBackgroundView sets the backgroundView property and returns the receiver for chaining.
 func (x *Scrubber) WithBackgroundView(backgroundView ViewProvider) *Scrubber {
 	x.inner.SetBackgroundView(backgroundView.asView())
@@ -397,6 +419,8 @@ func (x *Scrubber) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundat
 	return x
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *Scrubber) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Scrubber {
 	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
@@ -475,11 +499,15 @@ func (x *Scrubber) WithTouchBar(touchBar *TouchBar) *Scrubber {
 	return x
 }
 
+// Invalidate all data within the scrubber control, triggering a reload of all content, and clearing the current selection.
+//
 // ReloadData calls the underlying ReloadData.
 func (x *Scrubber) ReloadData() {
 	x.inner.ReloadData()
 }
 
+// Updates inside the @c performSequentialBatchUpdates block are processed and displayed all at once, including insertion, removal, moving, reloading items, and changing the selected index. Changes are performed iteratively using the same semantics as @c NSMutableArray. NSScrubber expects its dataSource to reflect the changes made inside @c -performSequentialBatchUpdates: immediately after the @c updateBlock finishes executing.
+//
 // PerformSequentialBatchUpdates blocks until the operation completes or ctx is cancelled.
 func (x *Scrubber) PerformSequentialBatchUpdates(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -494,31 +522,43 @@ func (x *Scrubber) PerformSequentialBatchUpdates(ctx context.Context) error {
 	}
 }
 
+// Inserts new items at the specified indexes. NSScrubber will request views for each new index from the @c dataSource. This method uses the same semantics as @c NSMutableArray; each index in the set specifies the destination index after all previous insertions have occurred. Therefore, an NSIndexSet of [1,2,3] will result in three new contiguous items.
+//
 // InsertItemsAtIndexes calls the underlying InsertItemsAtIndexes.
 func (x *Scrubber) InsertItemsAtIndexes(indexes *foundation.NSIndexSet) {
 	x.inner.InsertItemsAtIndexes(indexes)
 }
 
+// Removes the items at the specified indexes. This method uses the same semantics as @c NSMutableArray.
+//
 // RemoveItemsAtIndexes calls the underlying RemoveItemsAtIndexes.
 func (x *Scrubber) RemoveItemsAtIndexes(indexes *foundation.NSIndexSet) {
 	x.inner.RemoveItemsAtIndexes(indexes)
 }
 
+// Reloads the items at the specified indexes. NSScrubber will request new views for each item and smoothly crossfade between them before discarding the original views.
+//
 // ReloadItemsAtIndexes calls the underlying ReloadItemsAtIndexes.
 func (x *Scrubber) ReloadItemsAtIndexes(indexes *foundation.NSIndexSet) {
 	x.inner.ReloadItemsAtIndexes(indexes)
 }
 
+// Moves an item from one index to another. @c oldIndex refers to the item's index prior to the movement, whereas @c newIndex refers to the item's final location.
+//
 // MoveItemAtIndexToIndex calls the underlying MoveItemAtIndexToIndex.
 func (x *Scrubber) MoveItemAtIndexToIndex(oldIndex int, newIndex int) {
 	x.inner.MoveItemAtIndexToIndex(oldIndex, newIndex)
 }
 
+// Scrolls an item to a given alignment within the control. If @c NSScrubberAlignmentNone is provided, then the control scrolls the minimum amount necessary to make the item visible. Scrolling is animated if called on the animator proxy.
+//
 // ScrollItemAtIndexToAlignment calls the underlying ScrollItemAtIndexToAlignment.
 func (x *Scrubber) ScrollItemAtIndexToAlignment(index int, alignment NSScrubberAlignment) {
 	x.inner.ScrollItemAtIndexToAlignment(index, raw.NSScrubberAlignment(alignment))
 }
 
+// Returns the @c NSScrubberItemView for the given index, if one currently exists; returns @c nil otherwise.
+//
 // ItemViewForItemAtIndex calls the underlying ItemViewForItemAtIndex.
 func (x *Scrubber) ItemViewForItemAtIndex(index int) *ScrubberItemView {
 	_r := x.inner.ItemViewForItemAtIndex(index)
@@ -528,16 +568,22 @@ func (x *Scrubber) ItemViewForItemAtIndex(index int) *ScrubberItemView {
 	return &ScrubberItemView{inner: _r}
 }
 
+// Registers a @c NSScrubberItemView class to be instantiated for the given @c itemIdentifier. Raises an exception if @c itemViewClass is not a subclass of @c NSScrubberItemView. Passing @c nil for @c itemViewClass removes a previous registration. Registrations made through this method do not persist through NSCoding.
+//
 // RegisterClassForItemIdentifier calls the underlying RegisterClassForItemIdentifier.
 func (x *Scrubber) RegisterClassForItemIdentifier(itemViewClass objc.Class, itemIdentifier *foundation.NSString) {
 	x.inner.RegisterClassForItemIdentifier(itemViewClass, itemIdentifier)
 }
 
+// Register a nib to be instantiated for the given @c itemIdentifier. The nib must contain a top-level object which is a subclass of NSScrubberItemView; otherwise, @c -makeItemWithIdentifier: may return @c nil for this identifier. Passing @c nil for @c nib removes a previous registration.
+//
 // RegisterNibForItemIdentifier calls the underlying RegisterNibForItemIdentifier.
 func (x *Scrubber) RegisterNibForItemIdentifier(nib *raw.NSNib, itemIdentifier *foundation.NSString) {
 	x.inner.RegisterNibForItemIdentifier(nib, itemIdentifier)
 }
 
+// Creates or reuses a @c NSScrubberItemView corresponding to the provided @c itemIdentifier. @c NSScrubber searches, in order: the reuse queue, the list of registered classes, and then the list of registered nibs. If the reuse queue is empty, and there is no Class or Interface Builder archive registered for the @c itemIdentifier, this method returns @c nil.
+//
 // MakeItemWithIdentifierOwner calls the underlying MakeItemWithIdentifierOwner.
 func (x *Scrubber) MakeItemWithIdentifierOwner(itemIdentifier *foundation.NSString, owner objc.ID) *ScrubberItemView {
 	_r := x.inner.MakeItemWithIdentifierOwner(itemIdentifier, owner)
@@ -581,66 +627,92 @@ func (x *Scrubber) SetScrubberLayout(scrubberLayout *raw.NSScrubberLayout) {
 	x.inner.SetScrubberLayout(scrubberLayout)
 }
 
+// Returns the number of items represented by the scrubber control.
+//
 // NumberOfItems calls the underlying NumberOfItems.
 func (x *Scrubber) NumberOfItems() int {
 	return x.inner.NumberOfItems()
 }
 
+// The index of the currently highlighted item within the control. If there is no highlighted item, the value of this property is (-1).
+//
 // HighlightedIndex calls the underlying HighlightedIndex.
 func (x *Scrubber) HighlightedIndex() int {
 	return x.inner.HighlightedIndex()
 }
 
+// The index of the selected item within the control. If there is no selected item, the value of this property is (-1). Setting this property through the animator proxy will animate the selection change. Programmatic selection changes do not trigger delegate callbacks.
+//
 // SelectedIndex calls the underlying SelectedIndex.
 func (x *Scrubber) SelectedIndex() int {
 	return x.inner.SelectedIndex()
 }
 
+// The index of the selected item within the control. If there is no selected item, the value of this property is (-1). Setting this property through the animator proxy will animate the selection change. Programmatic selection changes do not trigger delegate callbacks.
+//
 // SetSelectedIndex calls the underlying SetSelectedIndex.
 func (x *Scrubber) SetSelectedIndex(selectedIndex int) {
 	x.inner.SetSelectedIndex(selectedIndex)
 }
 
+// Describes the interaction mode for the scrubber control. See the @c NSScrubberMode enumeration for a list of possible values. The default value is @c NSScrubberModeFixed.
+//
 // Mode calls the underlying Mode.
 func (x *Scrubber) Mode() NSScrubberMode {
 	return NSScrubberMode(x.inner.Mode())
 }
 
+// Describes the interaction mode for the scrubber control. See the @c NSScrubberMode enumeration for a list of possible values. The default value is @c NSScrubberModeFixed.
+//
 // SetMode calls the underlying SetMode.
 func (x *Scrubber) SetMode(mode NSScrubberMode) {
 	x.inner.SetMode(raw.NSScrubberMode(mode))
 }
 
+// If the value of @c itemAlignment is not @c NSScrubberAlignmentNone, the scrubber will ensure that some item rests at the preferred alignment within the control following a scrolling or paging interaction. The default value is @c NSScrubberAlignmentNone.
+//
 // ItemAlignment calls the underlying ItemAlignment.
 func (x *Scrubber) ItemAlignment() NSScrubberAlignment {
 	return NSScrubberAlignment(x.inner.ItemAlignment())
 }
 
+// If the value of @c itemAlignment is not @c NSScrubberAlignmentNone, the scrubber will ensure that some item rests at the preferred alignment within the control following a scrolling or paging interaction. The default value is @c NSScrubberAlignmentNone.
+//
 // SetItemAlignment calls the underlying SetItemAlignment.
 func (x *Scrubber) SetItemAlignment(itemAlignment NSScrubberAlignment) {
 	x.inner.SetItemAlignment(raw.NSScrubberAlignment(itemAlignment))
 }
 
+// When @c continuous is @c YES, panning over the control in @c NSScrubberModeFixed will immediately select the item under the user's finger, and scrolling in @c NSScrubberModeFree will continuously select items as they pass through the current @c itemAlignment. The default is @c NO.
+//
 // IsContinuous calls the underlying IsContinuous.
 func (x *Scrubber) IsContinuous() bool {
 	return x.inner.IsContinuous()
 }
 
+// When @c continuous is @c YES, panning over the control in @c NSScrubberModeFixed will immediately select the item under the user's finger, and scrolling in @c NSScrubberModeFree will continuously select items as they pass through the current @c itemAlignment. The default is @c NO.
+//
 // SetContinuous calls the underlying SetContinuous.
 func (x *Scrubber) SetContinuous(continuous bool) {
 	x.inner.SetContinuous(continuous)
 }
 
+// When @c floatsSelectionViews is @c YES, the selection decorations provided by @c selectionBackgroundStyle and @c selectionOverlayStyle will smoothly float between selected items, rather than animating their entrance/exit in-place. The default is @c NO.
+//
 // FloatsSelectionViews calls the underlying FloatsSelectionViews.
 func (x *Scrubber) FloatsSelectionViews() bool {
 	return x.inner.FloatsSelectionViews()
 }
 
+// When @c floatsSelectionViews is @c YES, the selection decorations provided by @c selectionBackgroundStyle and @c selectionOverlayStyle will smoothly float between selected items, rather than animating their entrance/exit in-place. The default is @c NO.
+//
 // SetFloatsSelectionViews calls the underlying SetFloatsSelectionViews.
 func (x *Scrubber) SetFloatsSelectionViews(floatsSelectionViews bool) {
 	x.inner.SetFloatsSelectionViews(floatsSelectionViews)
 }
 
+// Specifies a style of decoration to place behind items that are selected and/or highlighted. The default value is @c nil, indicating no built-in background decoration.
+//
 // SelectionBackgroundStyle calls the underlying SelectionBackgroundStyle.
 func (x *Scrubber) SelectionBackgroundStyle() *ScrubberSelectionStyle {
 	_r := x.inner.SelectionBackgroundStyle()
@@ -650,11 +722,15 @@ func (x *Scrubber) SelectionBackgroundStyle() *ScrubberSelectionStyle {
 	return &ScrubberSelectionStyle{inner: _r}
 }
 
+// Specifies a style of decoration to place behind items that are selected and/or highlighted. The default value is @c nil, indicating no built-in background decoration.
+//
 // SetSelectionBackgroundStyle calls the underlying SetSelectionBackgroundStyle.
 func (x *Scrubber) SetSelectionBackgroundStyle(selectionBackgroundStyle *raw.NSScrubberSelectionStyle) {
 	x.inner.SetSelectionBackgroundStyle(selectionBackgroundStyle)
 }
 
+// Specifies a style of decoration to place above items that are selected and/or highlighted. The default value is @c nil, indicating no built-in overlay decoration.
+//
 // SelectionOverlayStyle calls the underlying SelectionOverlayStyle.
 func (x *Scrubber) SelectionOverlayStyle() *ScrubberSelectionStyle {
 	_r := x.inner.SelectionOverlayStyle()
@@ -664,31 +740,43 @@ func (x *Scrubber) SelectionOverlayStyle() *ScrubberSelectionStyle {
 	return &ScrubberSelectionStyle{inner: _r}
 }
 
+// Specifies a style of decoration to place above items that are selected and/or highlighted. The default value is @c nil, indicating no built-in overlay decoration.
+//
 // SetSelectionOverlayStyle calls the underlying SetSelectionOverlayStyle.
 func (x *Scrubber) SetSelectionOverlayStyle(selectionOverlayStyle *raw.NSScrubberSelectionStyle) {
 	x.inner.SetSelectionOverlayStyle(selectionOverlayStyle)
 }
 
+// If @c showsArrowButtons is @c YES, the control provides leading and trailing arrow buttons. Tapping an arrow button moves the selection index by one element; pressing and holding repeatedly moves the selection. The default is @c NO.
+//
 // ShowsArrowButtons calls the underlying ShowsArrowButtons.
 func (x *Scrubber) ShowsArrowButtons() bool {
 	return x.inner.ShowsArrowButtons()
 }
 
+// If @c showsArrowButtons is @c YES, the control provides leading and trailing arrow buttons. Tapping an arrow button moves the selection index by one element; pressing and holding repeatedly moves the selection. The default is @c NO.
+//
 // SetShowsArrowButtons calls the underlying SetShowsArrowButtons.
 func (x *Scrubber) SetShowsArrowButtons(showsArrowButtons bool) {
 	x.inner.SetShowsArrowButtons(showsArrowButtons)
 }
 
+// If @c showsAdditionalContentIndicators is @c YES, the control will draw a fade effect to indicate that there is additional unscrolled content. The default is @c NO.
+//
 // ShowsAdditionalContentIndicators calls the underlying ShowsAdditionalContentIndicators.
 func (x *Scrubber) ShowsAdditionalContentIndicators() bool {
 	return x.inner.ShowsAdditionalContentIndicators()
 }
 
+// If @c showsAdditionalContentIndicators is @c YES, the control will draw a fade effect to indicate that there is additional unscrolled content. The default is @c NO.
+//
 // SetShowsAdditionalContentIndicators calls the underlying SetShowsAdditionalContentIndicators.
 func (x *Scrubber) SetShowsAdditionalContentIndicators(showsAdditionalContentIndicators bool) {
 	x.inner.SetShowsAdditionalContentIndicators(showsAdditionalContentIndicators)
 }
 
+// If set, @c backgroundColor is displayed behind the scrubber content. The background color is suppressed if the scrubber is assigned a non-nil @c backgroundView. The default value is @c nil.
+//
 // BackgroundColor calls the underlying BackgroundColor.
 func (x *Scrubber) BackgroundColor() *Color {
 	_r := x.inner.BackgroundColor()
@@ -698,11 +786,15 @@ func (x *Scrubber) BackgroundColor() *Color {
 	return &Color{inner: _r}
 }
 
+// If set, @c backgroundColor is displayed behind the scrubber content. The background color is suppressed if the scrubber is assigned a non-nil @c backgroundView. The default value is @c nil.
+//
 // SetBackgroundColor calls the underlying SetBackgroundColor.
 func (x *Scrubber) SetBackgroundColor(backgroundColor *raw.NSColor) {
 	x.inner.SetBackgroundColor(backgroundColor)
 }
 
+// If non-nil, the @c backgroundView is displayed below the scrubber content. The view's layout is managed by @c NSScrubber to match the content area. If this property is non-nil, the @c backgroundColor property has no effect. The default value is @c nil.
+//
 // BackgroundView calls the underlying BackgroundView.
 func (x *Scrubber) BackgroundView() *View {
 	_r := x.inner.BackgroundView()
@@ -712,6 +804,8 @@ func (x *Scrubber) BackgroundView() *View {
 	return &View{inner: _r}
 }
 
+// If non-nil, the @c backgroundView is displayed below the scrubber content. The view's layout is managed by @c NSScrubber to match the content area. If this property is non-nil, the @c backgroundColor property has no effect. The default value is @c nil.
+//
 // SetBackgroundView calls the underlying SetBackgroundView.
 func (x *Scrubber) SetBackgroundView(backgroundView *raw.NSView) {
 	x.inner.SetBackgroundView(backgroundView)

@@ -29,6 +29,8 @@ func PasswordCredentialRequestFromID(id objc.ID) *PasswordCredentialRequest {
 	return &PasswordCredentialRequest{inner: raw.ASPasswordCredentialRequestFromID(id)}
 }
 
+// @abstract Initializes an instance of ASPasswordCredentialRequest. @param credentialIdentity the credential identity to use for this request.
+//
 // NewPasswordCredentialRequestWithCredentialIdentity creates a new [PasswordCredentialRequest].
 func NewPasswordCredentialRequestWithCredentialIdentity(credentialIdentity *raw.ASPasswordCredentialIdentity) *PasswordCredentialRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasswordCredentialRequest")), objc.RegisterName("alloc"))

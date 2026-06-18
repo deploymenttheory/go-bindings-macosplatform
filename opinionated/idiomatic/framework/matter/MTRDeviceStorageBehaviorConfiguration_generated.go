@@ -37,12 +37,16 @@ func NewMTRDeviceStorageBehaviorConfiguration() *MTRDeviceStorageBehaviorConfigu
 	return &MTRDeviceStorageBehaviorConfiguration{inner: raw.MTRDeviceStorageBehaviorConfigurationFromID(_id)}
 }
 
+// If disableStorageBehaviorOptimization is set to YES, then all the waiting mechanism as described above is disabled.
+//
 // WithDisableStorageBehaviorOptimization sets the disableStorageBehaviorOptimization property and returns the receiver for chaining.
 func (x *MTRDeviceStorageBehaviorConfiguration) WithDisableStorageBehaviorOptimization(disableStorageBehaviorOptimization bool) *MTRDeviceStorageBehaviorConfiguration {
 	x.inner.SetDisableStorageBehaviorOptimization(disableStorageBehaviorOptimization)
 	return x
 }
 
+// If any of these properties are set to be out of the documented limits, these default values will be used to replace all of them: reportToPersistenceDelayTimeDefault (15) reportToPersistenceDelayTimeMaxDefault (20 * 15) recentReportTimesMaxCountDefault (12) timeBetweenReportsTooShortThresholdDefault (15) timeBetweenReportsTooShortMinThresholdDefault (5) reportToPersistenceDelayMaxMultiplierDefault (10) deviceReportingExcessivelyIntervalThresholdDefault (5 * 60)
+//
 // WithReportToPersistenceDelayTime sets the reportToPersistenceDelayTime property and returns the receiver for chaining.
 func (x *MTRDeviceStorageBehaviorConfiguration) WithReportToPersistenceDelayTime(reportToPersistenceDelayTime float64) *MTRDeviceStorageBehaviorConfiguration {
 	x.inner.SetReportToPersistenceDelayTime(reportToPersistenceDelayTime)
@@ -85,6 +89,8 @@ func (x *MTRDeviceStorageBehaviorConfiguration) WithDeviceReportingExcessivelyIn
 	return x
 }
 
+// If disableStorageBehaviorOptimization is set to YES, then all the waiting mechanism as described above is disabled.
+//
 // DisableStorageBehaviorOptimization calls the underlying DisableStorageBehaviorOptimization.
 func (x *MTRDeviceStorageBehaviorConfiguration) DisableStorageBehaviorOptimization() bool {
 	return x.inner.DisableStorageBehaviorOptimization()
@@ -95,6 +101,8 @@ func (x *MTRDeviceStorageBehaviorConfiguration) SetDisableStorageBehaviorOptimiz
 	x.inner.SetDisableStorageBehaviorOptimization(disableStorageBehaviorOptimization)
 }
 
+// If any of these properties are set to be out of the documented limits, these default values will be used to replace all of them: reportToPersistenceDelayTimeDefault (15) reportToPersistenceDelayTimeMaxDefault (20 * 15) recentReportTimesMaxCountDefault (12) timeBetweenReportsTooShortThresholdDefault (15) timeBetweenReportsTooShortMinThresholdDefault (5) reportToPersistenceDelayMaxMultiplierDefault (10) deviceReportingExcessivelyIntervalThresholdDefault (5 * 60)
+//
 // ReportToPersistenceDelayTime calls the underlying ReportToPersistenceDelayTime.
 func (x *MTRDeviceStorageBehaviorConfiguration) ReportToPersistenceDelayTime() float64 {
 	return x.inner.ReportToPersistenceDelayTime()

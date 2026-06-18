@@ -39,30 +39,40 @@ func NewAccessPoint() *AccessPoint {
 	return &AccessPoint{inner: raw.GKAccessPointFromID(_id)}
 }
 
+// set this true to enable access point in your app.  Setting this will cause the access point to appear after the notification banner is presented.  If it already was presented it will appear immediately
+//
 // WithActive sets the active property and returns the receiver for chaining.
 func (x *AccessPoint) WithActive(active bool) *AccessPoint {
 	x.inner.SetActive(active)
 	return x
 }
 
+// Set this property to true if you wish to show the highlights for most recent achievement, current rank on default leaderboard, etc
+//
 // WithShowHighlights sets the showHighlights property and returns the receiver for chaining.
 func (x *AccessPoint) WithShowHighlights(showHighlights bool) *AccessPoint {
 	x.inner.SetShowHighlights(showHighlights)
 	return x
 }
 
+// These properties control the placement of the widget
+//
 // WithLocation sets the location property and returns the receiver for chaining.
 func (x *AccessPoint) WithLocation(location GKAccessPointLocation) *AccessPoint {
 	x.inner.SetLocation(raw.GKAccessPointLocation(location))
 	return x
 }
 
+// the following is a platform specific window that you wish to have the access point in.  If not set then a best attempt will be made to choose the main window of the app.
+//
 // WithParentWindow sets the parentWindow property and returns the receiver for chaining.
 func (x *AccessPoint) WithParentWindow(parentWindow *appkit.NSWindow) *AccessPoint {
 	x.inner.SetParentWindow(parentWindow)
 	return x
 }
 
+// this lets the developer trigger the access point as if the user had touched it.  This is useful for games that use controllers or the remote on AppleTV.  the argument lets you specify a specific state (default, profile, achievements, leaderboards) for GameCenterViewController
+//
 // TriggerAccessPointWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *AccessPoint) TriggerAccessPointWithHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -147,6 +157,8 @@ func (x *AccessPoint) TriggerAccessPointWithPlayerHandler(ctx context.Context, p
 	}
 }
 
+// Displays the view that allows players to engage each other with activities and challenges.
+//
 // TriggerAccessPointForPlayTogetherWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *AccessPoint) TriggerAccessPointForPlayTogetherWithHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -161,6 +173,8 @@ func (x *AccessPoint) TriggerAccessPointForPlayTogetherWithHandler(ctx context.C
 	}
 }
 
+// Displays the view that allows players to engage each other with challenges.
+//
 // TriggerAccessPointForChallengesWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *AccessPoint) TriggerAccessPointForChallengesWithHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -175,6 +189,8 @@ func (x *AccessPoint) TriggerAccessPointForChallengesWithHandler(ctx context.Con
 	}
 }
 
+// Displays the challenge creation view for the provided challenge definition ID.
+//
 // TriggerAccessPointWithChallengeDefinitionIDHandler blocks until the operation completes or ctx is cancelled.
 func (x *AccessPoint) TriggerAccessPointWithChallengeDefinitionIDHandler(ctx context.Context, challengeDefinitionID string) error {
 	_ch := make(chan error, 1)
@@ -189,6 +205,8 @@ func (x *AccessPoint) TriggerAccessPointWithChallengeDefinitionIDHandler(ctx con
 	}
 }
 
+// Displays the game activity creation view for the provided activity definition ID.
+//
 // TriggerAccessPointWithGameActivityDefinitionIDHandler blocks until the operation completes or ctx is cancelled.
 func (x *AccessPoint) TriggerAccessPointWithGameActivityDefinitionIDHandler(ctx context.Context, gameActivityDefinitionID string) error {
 	_ch := make(chan error, 1)
@@ -203,6 +221,8 @@ func (x *AccessPoint) TriggerAccessPointWithGameActivityDefinitionIDHandler(ctx 
 	}
 }
 
+// Displays the game activity view for the provided activity instance.
+//
 // TriggerAccessPointWithGameActivityHandler blocks until the operation completes or ctx is cancelled.
 func (x *AccessPoint) TriggerAccessPointWithGameActivityHandler(ctx context.Context, gameActivity *raw.GKGameActivity) error {
 	_ch := make(chan error, 1)
@@ -217,6 +237,8 @@ func (x *AccessPoint) TriggerAccessPointWithGameActivityHandler(ctx context.Cont
 	}
 }
 
+// Brings up the invite friends view.
+//
 // TriggerAccessPointForFriendingWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *AccessPoint) TriggerAccessPointForFriendingWithHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -231,6 +253,8 @@ func (x *AccessPoint) TriggerAccessPointForFriendingWithHandler(ctx context.Cont
 	}
 }
 
+// Brings up the Arcade dashboard.
+//
 // TriggerAccessPointForArcadeWithHandler blocks until the operation completes or ctx is cancelled.
 func (x *AccessPoint) TriggerAccessPointForArcadeWithHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -245,6 +269,8 @@ func (x *AccessPoint) TriggerAccessPointForArcadeWithHandler(ctx context.Context
 	}
 }
 
+// set this true to enable access point in your app.  Setting this will cause the access point to appear after the notification banner is presented.  If it already was presented it will appear immediately
+//
 // IsActive calls the underlying IsActive.
 func (x *AccessPoint) IsActive() bool {
 	return x.inner.IsActive()
@@ -255,6 +281,8 @@ func (x *AccessPoint) SetActive(active bool) {
 	x.inner.SetActive(active)
 }
 
+// Set this property to true if you wish to show the highlights for most recent achievement, current rank on default leaderboard, etc
+//
 // ShowHighlights calls the underlying ShowHighlights.
 func (x *AccessPoint) ShowHighlights() bool {
 	return x.inner.ShowHighlights()
@@ -265,6 +293,8 @@ func (x *AccessPoint) SetShowHighlights(showHighlights bool) {
 	x.inner.SetShowHighlights(showHighlights)
 }
 
+// These properties control the placement of the widget
+//
 // Location calls the underlying Location.
 func (x *AccessPoint) Location() GKAccessPointLocation {
 	return GKAccessPointLocation(x.inner.Location())
@@ -275,11 +305,15 @@ func (x *AccessPoint) SetLocation(location GKAccessPointLocation) {
 	x.inner.SetLocation(raw.GKAccessPointLocation(location))
 }
 
+// observable property that contains the current frame needed to display the widget
+//
 // FrameInScreenCoordinates calls the underlying FrameInScreenCoordinates.
 func (x *AccessPoint) FrameInScreenCoordinates() corefoundation.CGRect {
 	return x.inner.FrameInScreenCoordinates()
 }
 
+// the following is a platform specific window that you wish to have the access point in.  If not set then a best attempt will be made to choose the main window of the app.
+//
 // ParentWindow calls the underlying ParentWindow.
 func (x *AccessPoint) ParentWindow() *appkit.NSWindow {
 	return x.inner.ParentWindow()

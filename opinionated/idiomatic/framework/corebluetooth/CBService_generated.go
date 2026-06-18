@@ -36,6 +36,8 @@ func NewService() *Service {
 	return &Service{inner: raw.CBServiceFromID(_id)}
 }
 
+// @property peripheral @discussion A back-pointer to the peripheral this service belongs to.
+//
 // Peripheral calls the underlying Peripheral.
 func (x *Service) Peripheral() *Peripheral {
 	_r := x.inner.Peripheral()
@@ -45,11 +47,15 @@ func (x *Service) Peripheral() *Peripheral {
 	return &Peripheral{inner: _r}
 }
 
+// @property isPrimary @discussion The type of the service (primary or secondary).
+//
 // IsPrimary calls the underlying IsPrimary.
 func (x *Service) IsPrimary() bool {
 	return x.inner.IsPrimary()
 }
 
+// @property includedServices @discussion A list of included CBServices that have so far been discovered in this service.
+//
 // IncludedServices returns the collection as a Go slice.
 func (x *Service) IncludedServices() []*Service {
 	arr := x.inner.IncludedServices()
@@ -61,6 +67,8 @@ func (x *Service) IncludedServices() []*Service {
 	})
 }
 
+// @property characteristics @discussion A list of CBCharacteristics that have so far been discovered in this service.
+//
 // Characteristics returns the collection as a Go slice.
 func (x *Service) Characteristics() []*Characteristic {
 	arr := x.inner.Characteristics()

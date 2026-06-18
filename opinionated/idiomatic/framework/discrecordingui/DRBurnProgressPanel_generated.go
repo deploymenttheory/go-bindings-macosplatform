@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @class			DRBurnProgressPanel @abstract 		Manages a panel that displays progress while burning data to media. @discussion		A DRBurnProgressPanel object manages a panel that displays and updates burn progress. The burn panel is responsible for begining the burn. The burn is begun and a progress panel is displayed on screen by calling @link //apple_ref/occ/instm/DRBurnProgressPanel/beginProgressSheetForBurn:layout:modalForWindow: beginProgressSheetForBurn:layout:modalForWindow: @/link if a sheet interface is desired, or @link //apple_ref/occ/instm/DRBurnProgressPanel/beginProgressPanelForBurn:layout: beginProgressPanelForBurn:layout: @/link for a non-modal panel. A DRBurnProgressPanel sends a @link //apple_ref/occ/instm/NSObject/burnProgressPanel:burnDidFinish: burnProgressPanel:burnDidFinish: @/link message to it's delegate when the burn completes. This method allows the delegate to take over end-of-burn handling from the burn progress panel to customize error dialogs or user notification.
+//
 // BurnProgressPanel wraps [raw.DRBurnProgressPanel] with a fluent Go API.
 type BurnProgressPanel struct {
 	inner *raw.DRBurnProgressPanel
@@ -38,31 +40,43 @@ func NewBurnProgressPanel() *BurnProgressPanel {
 	return &BurnProgressPanel{inner: raw.DRBurnProgressPanelFromID(_id)}
 }
 
+// @method			beginProgressSheetForBurn:layout:modalForWindow: @abstract		Presents the progress panel as a sheet and begins the burn process. @discussion		This method returns control to the caller after it has displayed the progress sheet and begun the burn. Once the method has returned the caller can perform other operations while the burn continues. @param			burn		The object performing the burn. @param			layout		The data to be burned to disc. See the @link //apple_ref/occ/cl/DRBurn DRBurn @/link documentation for information on valid layouts. @param			docWindow	The window the sheet will be attached to. If docWindow is not nil, the panel slides down as a sheet running as a document modal window. If owner is nil, this is an error.
+//
 // BeginProgressSheetForBurnLayoutModalForWindow calls the underlying BeginProgressSheetForBurnLayoutModalForWindow.
 func (x *BurnProgressPanel) BeginProgressSheetForBurnLayoutModalForWindow(burn *discrecording.DRBurn, layout objc.ID, docWindow *appkit.NSWindow) {
 	x.inner.BeginProgressSheetForBurnLayoutModalForWindow(burn, layout, docWindow)
 }
 
+// @method			beginProgressPanelForBurn:layout: @abstract		Presents the progress panel on screen and begins the burn process. @discussion		This method returns control to the caller after it has displayed the progress sheet and begun the burn. Once the method has returned the caller can perform other operations while the burn continues. @param			burn		The object performing the burn. @param			layout		The data to be burned to disc. See the @link //apple_ref/occ/cl/DRBurn DRBurn @/link documentation for information on valid layouts.
+//
 // BeginProgressPanelForBurnLayout calls the underlying BeginProgressPanelForBurnLayout.
 func (x *BurnProgressPanel) BeginProgressPanelForBurnLayout(burn *discrecording.DRBurn, layout objc.ID) {
 	x.inner.BeginProgressPanelForBurnLayout(burn, layout)
 }
 
+// @method			setDescription: @abstract		Sets the panel text displayed to the user. @discussion		The panel's description is typically a short text string that gives an indication to the user what operation is being performed. If no description is explicitly set, the progress panel uses a standard text string suitable to the burn. @param			description	The text to display.
+//
 // SetDescription calls the underlying SetDescription.
 func (x *BurnProgressPanel) SetDescription(description string) {
 	x.inner.SetDescription(foundation.NSStringStringWithUTF8String(description))
 }
 
+// @method			setVerboseProgressStatus: @abstract		Sets the vebosity of the progress feedback. @discussion		If verbose is <i>YES</i>, the panel will update status for every change. If verbose is <i>NO</i>, the panel will filter some status messages and only update for major changes. The default for the panel is filter the status messages. @param			verbose	A BOOL value indicating how detailed the status panel feedback should be.
+//
 // SetVerboseProgressStatus calls the underlying SetVerboseProgressStatus.
 func (x *BurnProgressPanel) SetVerboseProgressStatus(verbose bool) {
 	x.inner.SetVerboseProgressStatus(verbose)
 }
 
+// @method			verboseProgressStatus @abstract		Returns the vebosity of the panel. @discussion		This method will return <i>YES</i> if the panel will update status for every change and <i>NO</i> if the panel will filter some status messages and only update for major changes. @result 		A BOOL value indicating how detailed the status panel feedback is.
+//
 // VerboseProgressStatus calls the underlying VerboseProgressStatus.
 func (x *BurnProgressPanel) VerboseProgressStatus() bool {
 	return x.inner.VerboseProgressStatus()
 }
 
+// @method			stopBurn: @abstract		Invoked when the user clicks the panel's stop button.
+//
 // StopBurn calls the underlying StopBurn.
 func (x *BurnProgressPanel) StopBurn(sender objc.ID) {
 	x.inner.StopBurn(sender)

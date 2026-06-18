@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A deterministic pseudo-random source that generates random numbers based on a mersenne twister algorithm. This is a deterministic random source suitable for creating reliable gameplay mechanics. It is slightly slower than an Arc4 source, but more random, in that it has a longer period until repeating sequences. While deterministic, this is not a cryptographic random source. It is however suitable for obfuscation of gameplay data.
+//
 // MersenneTwisterRandomSource wraps [raw.GKMersenneTwisterRandomSource] with a fluent Go API.
 type MersenneTwisterRandomSource struct {
 	inner *raw.GKMersenneTwisterRandomSource
@@ -35,6 +37,8 @@ func NewMersenneTwisterRandomSource() *MersenneTwisterRandomSource {
 	return &MersenneTwisterRandomSource{inner: raw.GKMersenneTwisterRandomSourceFromID(_id)}
 }
 
+// Initializes a linear congruential random source with bits the given 64 bit seed.
+//
 // NewMersenneTwisterRandomSourceWithSeed creates a new [MersenneTwisterRandomSource].
 func NewMersenneTwisterRandomSourceWithSeed(seed uint64) *MersenneTwisterRandomSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKMersenneTwisterRandomSource")), objc.RegisterName("alloc"))
@@ -42,12 +46,16 @@ func NewMersenneTwisterRandomSourceWithSeed(seed uint64) *MersenneTwisterRandomS
 	return &MersenneTwisterRandomSource{inner: raw.GKMersenneTwisterRandomSourceFromID(_id)}
 }
 
+// The seed used to stir the mersenne twister random source. The seed is not encoded through archiving, but the equivalent state buffers are encoded.
+//
 // WithSeed sets the seed property and returns the receiver for chaining.
 func (x *MersenneTwisterRandomSource) WithSeed(seed uint64) *MersenneTwisterRandomSource {
 	x.inner.SetSeed(seed)
 	return x
 }
 
+// The seed used to stir the mersenne twister random source. The seed is not encoded through archiving, but the equivalent state buffers are encoded.
+//
 // Seed calls the underlying Seed.
 func (x *MersenneTwisterRandomSource) Seed() uint64 {
 	return x.inner.Seed()

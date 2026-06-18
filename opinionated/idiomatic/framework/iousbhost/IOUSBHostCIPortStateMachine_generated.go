@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// @class   IOUSBHostCIPortStateMachine @brief   The object representing the state of a user-mode USB host controller root port @details This class assists with tracking internal state transitions of a user-mode USB host controller root port, and parses IOUSBHostCIMessage command structures to update state and generate properly formatted command responses. IOUSBHostCIPortStateMachine does not provide any concurrency protection, the client is responsible for necessary serialization.
+//
 // HostCIPortStateMachine wraps [raw.IOUSBHostCIPortStateMachine] with a fluent Go API.
 type HostCIPortStateMachine struct {
 	inner *raw.IOUSBHostCIPortStateMachine
@@ -31,6 +33,8 @@ func HostCIPortStateMachineFromID(id objc.ID) *HostCIPortStateMachine {
 	return &HostCIPortStateMachine{inner: raw.IOUSBHostCIPortStateMachineFromID(id)}
 }
 
+// @brief       Initializes an IOUSBHostCIPortStateMachine object @discussion  The IOUSBHostCIPortStateMachine defaults to the IOUSBHostCIPortStateOff state. @param       interface IOUSBHostControllerInterface which will be used to send command responses. @param       portNumber NSUInteger for the root port number tracked by this instance @return      IOUSBHostCIPortStateMachine instance, to be released by the caller.
+//
 // NewHostCIPortStateMachineWithInterfacePortNumberError creates a new [HostCIPortStateMachine].
 func NewHostCIPortStateMachineWithInterfacePortNumberError(interface_ *raw.IOUSBHostControllerInterface, portNumber uint) (*HostCIPortStateMachine, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOUSBHostCIPortStateMachine")), objc.RegisterName("alloc"))
@@ -42,29 +46,39 @@ func NewHostCIPortStateMachineWithInterfacePortNumberError(interface_ *raw.IOUSB
 	return &HostCIPortStateMachine{inner: raw.IOUSBHostCIPortStateMachineFromID(_id)}, nil
 }
 
+// @brief       Set the powered state of the port @discussion  Before a port can be used, it must be powered on via a IOUSBHostCIMessageTypePortPowerOn command.  As part of successfully processing this command the powered property must be set to YES.  Similarly, successful processing of the IOUSBHostCIMessageTypePortPowerOff command must set the powered property to NO.
+//
 // WithPowered sets the powered property and returns the receiver for chaining.
 func (x *HostCIPortStateMachine) WithPowered(powered bool) *HostCIPortStateMachine {
 	x.inner.SetPowered(powered)
 	return x
 }
 
+// @brief       Set the connection state of the port @discussion  The connected property cannot be set for an unpowered port, and will read back as NO, just at IOUSBHostCIPortStatusConnected in the port status will always read as 0.  For a powered port, writing to the connected property will set IOUSBHostCIPortStatusConnected to match the provided value, and if the new value is different from the previous value an IOUSBHostCIMessageTypePortEvent message will be sent to the kernel with IOUSBHostCIPortStatusConnectChange set.
+//
 // WithConnected sets the connected property and returns the receiver for chaining.
 func (x *HostCIPortStateMachine) WithConnected(connected bool) *HostCIPortStateMachine {
 	x.inner.SetConnected(connected)
 	return x
 }
 
+// @brief       Set the overcurrent state of the port @discussion  The overcurrent property cannot be set for an unpowered port, and will read back as NO, just as IOUSBHostCIPortStatusOvercurrent in the port status will always read as 0.  For a powered port, writing to the overcurrent property will set IOUSBHostCIPortStatusOvercurrent to match the provided value, and if the new value is different from the previous value an IOUSBHostCIMessageTypePortEvent message will be sent to the kernel with IOUSBHostCIPortStatusOvercurrentChange set.
+//
 // WithOvercurrent sets the overcurrent property and returns the receiver for chaining.
 func (x *HostCIPortStateMachine) WithOvercurrent(overcurrent bool) *HostCIPortStateMachine {
 	x.inner.SetOvercurrent(overcurrent)
 	return x
 }
 
+// @brief       Inspect an IOUSBHostCIMessage command @discussion  The IOUSBHostCIMessage command is inspected to determine if it is handled by the state machine, and is appropriate for the current state. @param       command IOUSBHostCIMessage command structure received from the kernel driver. @return      BOOL YES if the command is targeting a controller, and can be handled in the current state BOOL NO if the command does not target a controller, or cannot be handled in the current state
+//
 // InspectCommandError calls the underlying InspectCommandError.
 func (x *HostCIPortStateMachine) InspectCommandError(command *raw.IOUSBHostCIMessage) (bool, error) {
 	return x.inner.InspectCommandError(command)
 }
 
+// @brief       Advance the state machine and respond to an IOUSBHostCIMessage command @discussion  If the command passes inspectCommand and the client indicates the command was processed successfully, the state machine is advanced, and a properly formatted command response message is sent to the kernel driver.  If the client indicates the command was not processed successfully, the state machine is not advanced but a properly formatted command response message is sent to the kernel driver. @param       command IOUSBHostCIMessage command structure received from the kernel driver. @param       status IOUSBHostCIMessageStatus reported by the user-mode USB host controller implementation for the command response. @return      BOOL YES if the command response was sent to the kernel driver BOOL NO if the command response was not sent to the kernel driver
+//
 // RespondToCommandStatusError calls the underlying RespondToCommandStatusError.
 func (x *HostCIPortStateMachine) RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus) (bool, error) {
 	return x.inner.RespondToCommandStatusError(command, raw.IOUSBHostCIMessageStatus(status))
@@ -99,6 +113,8 @@ func (x *HostCIPortStateMachine) ControllerInterface() *HostControllerInterface 
 	return &HostControllerInterface{inner: _r}
 }
 
+// @brief       Set the powered state of the port @discussion  Before a port can be used, it must be powered on via a IOUSBHostCIMessageTypePortPowerOn command.  As part of successfully processing this command the powered property must be set to YES.  Similarly, successful processing of the IOUSBHostCIMessageTypePortPowerOff command must set the powered property to NO.
+//
 // Powered calls the underlying Powered.
 func (x *HostCIPortStateMachine) Powered() bool {
 	return x.inner.Powered()
@@ -109,6 +125,8 @@ func (x *HostCIPortStateMachine) SetPowered(powered bool) {
 	x.inner.SetPowered(powered)
 }
 
+// @brief       Set the connection state of the port @discussion  The connected property cannot be set for an unpowered port, and will read back as NO, just at IOUSBHostCIPortStatusConnected in the port status will always read as 0.  For a powered port, writing to the connected property will set IOUSBHostCIPortStatusConnected to match the provided value, and if the new value is different from the previous value an IOUSBHostCIMessageTypePortEvent message will be sent to the kernel with IOUSBHostCIPortStatusConnectChange set.
+//
 // Connected calls the underlying Connected.
 func (x *HostCIPortStateMachine) Connected() bool {
 	return x.inner.Connected()
@@ -119,6 +137,8 @@ func (x *HostCIPortStateMachine) SetConnected(connected bool) {
 	x.inner.SetConnected(connected)
 }
 
+// @brief       Set the overcurrent state of the port @discussion  The overcurrent property cannot be set for an unpowered port, and will read back as NO, just as IOUSBHostCIPortStatusOvercurrent in the port status will always read as 0.  For a powered port, writing to the overcurrent property will set IOUSBHostCIPortStatusOvercurrent to match the provided value, and if the new value is different from the previous value an IOUSBHostCIMessageTypePortEvent message will be sent to the kernel with IOUSBHostCIPortStatusOvercurrentChange set.
+//
 // Overcurrent calls the underlying Overcurrent.
 func (x *HostCIPortStateMachine) Overcurrent() bool {
 	return x.inner.Overcurrent()

@@ -33,6 +33,8 @@ func MTRBaseClusterActionsFromID(id objc.ID) *MTRBaseClusterActions {
 	return &MTRBaseClusterActions{inner: raw.MTRBaseClusterActionsFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterActionsWithDeviceEndpointIDQueue creates a new [MTRBaseClusterActions].
 func NewMTRBaseClusterActionsWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterActions {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterActions")), objc.RegisterName("alloc"))
@@ -47,61 +49,85 @@ func NewMTRBaseClusterActionsWithDeviceEndpointQueue(device *raw.MTRBaseDevice, 
 	return &MTRBaseClusterActions{inner: raw.MTRBaseClusterActionsFromID(_id)}
 }
 
+// Command InstantAction This command is used to trigger an instantaneous action.
+//
 // InstantActionWithParamsCompletion calls the underlying InstantActionWithParamsCompletion.
 func (x *MTRBaseClusterActions) InstantActionWithParamsCompletion(params *raw.MTRActionsClusterInstantActionParams, completion func(unsafe.Pointer)) {
 	x.inner.InstantActionWithParamsCompletion(params, completion)
 }
 
+// Command InstantActionWithTransition This command is used to trigger an instantaneous action with a transition over a given time.
+//
 // InstantActionWithTransitionWithParamsCompletion calls the underlying InstantActionWithTransitionWithParamsCompletion.
 func (x *MTRBaseClusterActions) InstantActionWithTransitionWithParamsCompletion(params *raw.MTRActionsClusterInstantActionWithTransitionParams, completion func(unsafe.Pointer)) {
 	x.inner.InstantActionWithTransitionWithParamsCompletion(params, completion)
 }
 
+// Command StartAction This command is used to trigger the commencement of an action.
+//
 // StartActionWithParamsCompletion calls the underlying StartActionWithParamsCompletion.
 func (x *MTRBaseClusterActions) StartActionWithParamsCompletion(params *raw.MTRActionsClusterStartActionParams, completion func(unsafe.Pointer)) {
 	x.inner.StartActionWithParamsCompletion(params, completion)
 }
 
+// Command StartActionWithDuration This command is used to trigger the commencement of an action with a duration.
+//
 // StartActionWithDurationWithParamsCompletion calls the underlying StartActionWithDurationWithParamsCompletion.
 func (x *MTRBaseClusterActions) StartActionWithDurationWithParamsCompletion(params *raw.MTRActionsClusterStartActionWithDurationParams, completion func(unsafe.Pointer)) {
 	x.inner.StartActionWithDurationWithParamsCompletion(params, completion)
 }
 
+// Command StopAction This command is used to stop an action.
+//
 // StopActionWithParamsCompletion calls the underlying StopActionWithParamsCompletion.
 func (x *MTRBaseClusterActions) StopActionWithParamsCompletion(params *raw.MTRActionsClusterStopActionParams, completion func(unsafe.Pointer)) {
 	x.inner.StopActionWithParamsCompletion(params, completion)
 }
 
+// Command PauseAction This command is used to pause an action.
+//
 // PauseActionWithParamsCompletion calls the underlying PauseActionWithParamsCompletion.
 func (x *MTRBaseClusterActions) PauseActionWithParamsCompletion(params *raw.MTRActionsClusterPauseActionParams, completion func(unsafe.Pointer)) {
 	x.inner.PauseActionWithParamsCompletion(params, completion)
 }
 
+// Command PauseActionWithDuration This command is used to pause an action with a duration.
+//
 // PauseActionWithDurationWithParamsCompletion calls the underlying PauseActionWithDurationWithParamsCompletion.
 func (x *MTRBaseClusterActions) PauseActionWithDurationWithParamsCompletion(params *raw.MTRActionsClusterPauseActionWithDurationParams, completion func(unsafe.Pointer)) {
 	x.inner.PauseActionWithDurationWithParamsCompletion(params, completion)
 }
 
+// Command ResumeAction This command is used to resume an action.
+//
 // ResumeActionWithParamsCompletion calls the underlying ResumeActionWithParamsCompletion.
 func (x *MTRBaseClusterActions) ResumeActionWithParamsCompletion(params *raw.MTRActionsClusterResumeActionParams, completion func(unsafe.Pointer)) {
 	x.inner.ResumeActionWithParamsCompletion(params, completion)
 }
 
+// Command EnableAction This command is used to enable an action.
+//
 // EnableActionWithParamsCompletion calls the underlying EnableActionWithParamsCompletion.
 func (x *MTRBaseClusterActions) EnableActionWithParamsCompletion(params *raw.MTRActionsClusterEnableActionParams, completion func(unsafe.Pointer)) {
 	x.inner.EnableActionWithParamsCompletion(params, completion)
 }
 
+// Command EnableActionWithDuration This command is used to enable an action with a duration.
+//
 // EnableActionWithDurationWithParamsCompletion calls the underlying EnableActionWithDurationWithParamsCompletion.
 func (x *MTRBaseClusterActions) EnableActionWithDurationWithParamsCompletion(params *raw.MTRActionsClusterEnableActionWithDurationParams, completion func(unsafe.Pointer)) {
 	x.inner.EnableActionWithDurationWithParamsCompletion(params, completion)
 }
 
+// Command DisableAction This command is used to disable an action.
+//
 // DisableActionWithParamsCompletion calls the underlying DisableActionWithParamsCompletion.
 func (x *MTRBaseClusterActions) DisableActionWithParamsCompletion(params *raw.MTRActionsClusterDisableActionParams, completion func(unsafe.Pointer)) {
 	x.inner.DisableActionWithParamsCompletion(params, completion)
 }
 
+// Command DisableActionWithDuration This command is used to disable an action with a duration.
+//
 // DisableActionWithDurationWithParamsCompletion calls the underlying DisableActionWithDurationWithParamsCompletion.
 func (x *MTRBaseClusterActions) DisableActionWithDurationWithParamsCompletion(params *raw.MTRActionsClusterDisableActionWithDurationParams, completion func(unsafe.Pointer)) {
 	x.inner.DisableActionWithDurationWithParamsCompletion(params, completion)

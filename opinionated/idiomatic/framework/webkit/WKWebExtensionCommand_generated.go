@@ -38,6 +38,8 @@ func NewWKWebExtensionCommand() *WKWebExtensionCommand {
 	return &WKWebExtensionCommand{inner: raw.WKWebExtensionCommandFromID(_id)}
 }
 
+// @abstract The primary key used to trigger the command, distinct from any modifier flags. @discussion This property can be customized within the app to avoid conflicts with existing shortcuts or to enable user personalization. It should accurately represent the activation key as used by the app, which the extension can use to display the complete shortcut in its interface. If no shortcut is desired for the command, the property should be set to `nil`. This value should be saved and restored as needed by the app.
+//
 // WithActivationKey sets the activationKey property and returns the receiver for chaining.
 func (x *WKWebExtensionCommand) WithActivationKey(activationKey string) *WKWebExtensionCommand {
 	x.inner.SetActivationKey(foundation.NSStringStringWithUTF8String(activationKey))
@@ -50,6 +52,8 @@ func (x *WKWebExtensionCommand) WithModifierFlags(modifierFlags appkit.NSEventMo
 	return x
 }
 
+// @abstract The web extension context associated with the command.
+//
 // WebExtensionContext calls the underlying WebExtensionContext.
 func (x *WKWebExtensionCommand) WebExtensionContext() *WKWebExtensionContext {
 	_r := x.inner.WebExtensionContext()
@@ -59,6 +63,8 @@ func (x *WKWebExtensionCommand) WebExtensionContext() *WKWebExtensionContext {
 	return &WKWebExtensionContext{inner: _r}
 }
 
+// @abstract A unique identifier for the command.
+//
 // Identifier calls the underlying Identifier.
 func (x *WKWebExtensionCommand) Identifier() string {
 	_r := x.inner.Identifier()
@@ -68,6 +74,8 @@ func (x *WKWebExtensionCommand) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Descriptive title for the command aiding discoverability. @discussion This title can be displayed in user interface elements such as keyboard shortcuts lists or menu items to help users understand its purpose.
+//
 // Title calls the underlying Title.
 func (x *WKWebExtensionCommand) Title() string {
 	_r := x.inner.Title()
@@ -77,6 +85,8 @@ func (x *WKWebExtensionCommand) Title() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The primary key used to trigger the command, distinct from any modifier flags. @discussion This property can be customized within the app to avoid conflicts with existing shortcuts or to enable user personalization. It should accurately represent the activation key as used by the app, which the extension can use to display the complete shortcut in its interface. If no shortcut is desired for the command, the property should be set to `nil`. This value should be saved and restored as needed by the app.
+//
 // ActivationKey calls the underlying ActivationKey.
 func (x *WKWebExtensionCommand) ActivationKey() string {
 	_r := x.inner.ActivationKey()

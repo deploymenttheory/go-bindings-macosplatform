@@ -36,41 +36,57 @@ func NewWKWindowFeatures() *WKWindowFeatures {
 	return &WKWindowFeatures{inner: raw.WKWindowFeaturesFromID(_id)}
 }
 
+// @abstract BOOL. Whether the menu bar should be visible. nil if menu bar visibility was not specified.
+//
 // MenuBarVisibility calls the underlying MenuBarVisibility.
 func (x *WKWindowFeatures) MenuBarVisibility() *foundation.NSNumber {
 	return x.inner.MenuBarVisibility()
 }
 
+// @abstract BOOL. Whether the status bar should be visible. nil if status bar visibility was not specified.
+//
 // StatusBarVisibility calls the underlying StatusBarVisibility.
 func (x *WKWindowFeatures) StatusBarVisibility() *foundation.NSNumber {
 	return x.inner.StatusBarVisibility()
 }
 
+// @abstract BOOL. Whether toolbars should be visible. nil if toolbar visibility was not specified.
+//
 // ToolbarsVisibility calls the underlying ToolbarsVisibility.
 func (x *WKWindowFeatures) ToolbarsVisibility() *foundation.NSNumber {
 	return x.inner.ToolbarsVisibility()
 }
 
+// @abstract BOOL. Whether the containing window should be resizable. nil if resizability was not specified.
+//
 // AllowsResizing calls the underlying AllowsResizing.
 func (x *WKWindowFeatures) AllowsResizing() *foundation.NSNumber {
 	return x.inner.AllowsResizing()
 }
 
+// @abstract CGFloat. The x coordinate of the containing window. nil if the x coordinate was not specified.
+//
 // X calls the underlying X.
 func (x *WKWindowFeatures) X() *foundation.NSNumber {
 	return x.inner.X()
 }
 
+// @abstract CGFloat. The y coordinate of the containing window. nil if the y coordinate was not specified.
+//
 // Y calls the underlying Y.
 func (x *WKWindowFeatures) Y() *foundation.NSNumber {
 	return x.inner.Y()
 }
 
+// @abstract CGFloat. The width coordinate of the containing window. nil if the width was not specified.
+//
 // Width calls the underlying Width.
 func (x *WKWindowFeatures) Width() *foundation.NSNumber {
 	return x.inner.Width()
 }
 
+// @abstract CGFloat. The height coordinate of the containing window. nil if the height was not specified.
+//
 // Height calls the underlying Height.
 func (x *WKWindowFeatures) Height() *foundation.NSNumber {
 	return x.inner.Height()

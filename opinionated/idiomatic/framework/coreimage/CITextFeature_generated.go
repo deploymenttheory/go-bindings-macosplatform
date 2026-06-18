@@ -37,26 +37,36 @@ func NewTextFeature() *TextFeature {
 	return &TextFeature{inner: raw.CITextFeatureFromID(_id)}
 }
 
+// The image coordinate of the upper-left corner of the detected text.
+//
 // TopLeft calls the underlying TopLeft.
 func (x *TextFeature) TopLeft() corefoundation.CGPoint {
 	return x.inner.TopLeft()
 }
 
+// The image coordinate of the upper-right corner of the detected text.
+//
 // TopRight calls the underlying TopRight.
 func (x *TextFeature) TopRight() corefoundation.CGPoint {
 	return x.inner.TopRight()
 }
 
+// The image coordinate of the lower-left corner of the detected text.
+//
 // BottomLeft calls the underlying BottomLeft.
 func (x *TextFeature) BottomLeft() corefoundation.CGPoint {
 	return x.inner.BottomLeft()
 }
 
+// The image coordinate of the lower-right corner of the detected text.
+//
 // BottomRight calls the underlying BottomRight.
 func (x *TextFeature) BottomRight() corefoundation.CGPoint {
 	return x.inner.BottomRight()
 }
 
+// An array containing additional features detected within the feature. A text detector can identify both a major region that is likely to contain text as well as the areas within that region that likely to contain individual text features. Such features might be single characters, groups of closely-packed characters, or entire words. To detect sub-features, “/CIDetector/featuresInImage:options:“ needs to be called with the “CIDetectorReturnSubFeatures“ option set to true.
+//
 // SubFeatures calls the underlying SubFeatures.
 func (x *TextFeature) SubFeatures() *foundation.NSArray[objc.ID] {
 	return x.inner.SubFeatures()

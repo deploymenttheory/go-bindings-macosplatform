@@ -36,58 +36,78 @@ func NewSpatialScalerDescriptor() *SpatialScalerDescriptor {
 	return &SpatialScalerDescriptor{inner: raw.MTLFXSpatialScalerDescriptorFromID(_id)}
 }
 
+// The pixel format of the input color texture for the spatial scaler you create with this descriptor.
+//
 // WithColorTextureFormat sets the colorTextureFormat property and returns the receiver for chaining.
 func (x *SpatialScalerDescriptor) WithColorTextureFormat(colorTextureFormat metal.MTLPixelFormat) *SpatialScalerDescriptor {
 	x.inner.SetColorTextureFormat(colorTextureFormat)
 	return x
 }
 
+// The pixel format of the output texture for the spatial scaler you create with this descriptor.
+//
 // WithOutputTextureFormat sets the outputTextureFormat property and returns the receiver for chaining.
 func (x *SpatialScalerDescriptor) WithOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) *SpatialScalerDescriptor {
 	x.inner.SetOutputTextureFormat(outputTextureFormat)
 	return x
 }
 
+// The width of the input color texture for the spatial scaler you create with this descriptor.
+//
 // WithInputWidth sets the inputWidth property and returns the receiver for chaining.
 func (x *SpatialScalerDescriptor) WithInputWidth(inputWidth uint) *SpatialScalerDescriptor {
 	x.inner.SetInputWidth(inputWidth)
 	return x
 }
 
+// The height of the input color texture for the spatial scaler you create with this descriptor.
+//
 // WithInputHeight sets the inputHeight property and returns the receiver for chaining.
 func (x *SpatialScalerDescriptor) WithInputHeight(inputHeight uint) *SpatialScalerDescriptor {
 	x.inner.SetInputHeight(inputHeight)
 	return x
 }
 
+// The width of the output color texture for the spatial scaler you create with this descriptor.
+//
 // WithOutputWidth sets the outputWidth property and returns the receiver for chaining.
 func (x *SpatialScalerDescriptor) WithOutputWidth(outputWidth uint) *SpatialScalerDescriptor {
 	x.inner.SetOutputWidth(outputWidth)
 	return x
 }
 
+// The height of the output color texture for the spatial scaler you create with this descriptor.
+//
 // WithOutputHeight sets the outputHeight property and returns the receiver for chaining.
 func (x *SpatialScalerDescriptor) WithOutputHeight(outputHeight uint) *SpatialScalerDescriptor {
 	x.inner.SetOutputHeight(outputHeight)
 	return x
 }
 
+// The color space of the input color texture for the spatial scaler you create with this descriptor. This property's default value is “MTLFXSpatialScalerColorProcessingMode/MTLFXSpatialScalerColorProcessingModePerceptual“.
+//
 // WithColorProcessingMode sets the colorProcessingMode property and returns the receiver for chaining.
 func (x *SpatialScalerDescriptor) WithColorProcessingMode(colorProcessingMode MTLFXSpatialScalerColorProcessingMode) *SpatialScalerDescriptor {
 	x.inner.SetColorProcessingMode(raw.MTLFXSpatialScalerColorProcessingMode(colorProcessingMode))
 	return x
 }
 
+// Creates a spatial scaler instance for a Metal device. - Parameters: - device: The Metal device that creates the spatial scaler. - Returns: A new spatial scaler instance upon success, or `nil` otherwise.
+//
 // NewSpatialScalerWithDevice calls the underlying NewSpatialScalerWithDevice.
 func (x *SpatialScalerDescriptor) NewSpatialScalerWithDevice(device metal.MTLDevice) raw.MTLFXSpatialScaler {
 	return x.inner.NewSpatialScalerWithDevice(device)
 }
 
+// Creates a spatial scaler instance for a Metal device. - Parameters: - device: The Metal device that creates the spatial scaler. - compiler: A compiler instance this method can use to build pipeline state objects. - Returns: A new spatial scaler instance upon success, or `nil` otherwise.
+//
 // NewSpatialScalerWithDeviceCompiler calls the underlying NewSpatialScalerWithDeviceCompiler.
 func (x *SpatialScalerDescriptor) NewSpatialScalerWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) raw.MTL4FXSpatialScaler {
 	return x.inner.NewSpatialScalerWithDeviceCompiler(device, compiler)
 }
 
+// The pixel format of the input color texture for the spatial scaler you create with this descriptor.
+//
 // ColorTextureFormat calls the underlying ColorTextureFormat.
 func (x *SpatialScalerDescriptor) ColorTextureFormat() metal.MTLPixelFormat {
 	return x.inner.ColorTextureFormat()
@@ -98,6 +118,8 @@ func (x *SpatialScalerDescriptor) SetColorTextureFormat(colorTextureFormat metal
 	x.inner.SetColorTextureFormat(colorTextureFormat)
 }
 
+// The pixel format of the output texture for the spatial scaler you create with this descriptor.
+//
 // OutputTextureFormat calls the underlying OutputTextureFormat.
 func (x *SpatialScalerDescriptor) OutputTextureFormat() metal.MTLPixelFormat {
 	return x.inner.OutputTextureFormat()
@@ -108,6 +130,8 @@ func (x *SpatialScalerDescriptor) SetOutputTextureFormat(outputTextureFormat met
 	x.inner.SetOutputTextureFormat(outputTextureFormat)
 }
 
+// The width of the input color texture for the spatial scaler you create with this descriptor.
+//
 // InputWidth calls the underlying InputWidth.
 func (x *SpatialScalerDescriptor) InputWidth() uint {
 	return x.inner.InputWidth()
@@ -118,6 +142,8 @@ func (x *SpatialScalerDescriptor) SetInputWidth(inputWidth uint) {
 	x.inner.SetInputWidth(inputWidth)
 }
 
+// The height of the input color texture for the spatial scaler you create with this descriptor.
+//
 // InputHeight calls the underlying InputHeight.
 func (x *SpatialScalerDescriptor) InputHeight() uint {
 	return x.inner.InputHeight()
@@ -128,6 +154,8 @@ func (x *SpatialScalerDescriptor) SetInputHeight(inputHeight uint) {
 	x.inner.SetInputHeight(inputHeight)
 }
 
+// The width of the output color texture for the spatial scaler you create with this descriptor.
+//
 // OutputWidth calls the underlying OutputWidth.
 func (x *SpatialScalerDescriptor) OutputWidth() uint {
 	return x.inner.OutputWidth()
@@ -138,6 +166,8 @@ func (x *SpatialScalerDescriptor) SetOutputWidth(outputWidth uint) {
 	x.inner.SetOutputWidth(outputWidth)
 }
 
+// The height of the output color texture for the spatial scaler you create with this descriptor.
+//
 // OutputHeight calls the underlying OutputHeight.
 func (x *SpatialScalerDescriptor) OutputHeight() uint {
 	return x.inner.OutputHeight()
@@ -148,6 +178,8 @@ func (x *SpatialScalerDescriptor) SetOutputHeight(outputHeight uint) {
 	x.inner.SetOutputHeight(outputHeight)
 }
 
+// The color space of the input color texture for the spatial scaler you create with this descriptor. This property's default value is “MTLFXSpatialScalerColorProcessingMode/MTLFXSpatialScalerColorProcessingModePerceptual“.
+//
 // ColorProcessingMode calls the underlying ColorProcessingMode.
 func (x *SpatialScalerDescriptor) ColorProcessingMode() MTLFXSpatialScalerColorProcessingMode {
 	return MTLFXSpatialScalerColorProcessingMode(x.inner.ColorProcessingMode())

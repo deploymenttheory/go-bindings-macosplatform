@@ -35,11 +35,15 @@ func NewWKOpenPanelParameters() *WKOpenPanelParameters {
 	return &WKOpenPanelParameters{inner: raw.WKOpenPanelParametersFromID(_id)}
 }
 
+// @abstract Whether the file upload control supports multiple files.
+//
 // AllowsMultipleSelection calls the underlying AllowsMultipleSelection.
 func (x *WKOpenPanelParameters) AllowsMultipleSelection() bool {
 	return x.inner.AllowsMultipleSelection()
 }
 
+// @abstract Whether the file upload control supports selecting directories.
+//
 // AllowsDirectories calls the underlying AllowsDirectories.
 func (x *WKOpenPanelParameters) AllowsDirectories() bool {
 	return x.inner.AllowsDirectories()

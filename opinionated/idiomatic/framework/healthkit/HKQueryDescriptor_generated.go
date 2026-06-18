@@ -30,6 +30,8 @@ func QueryDescriptorFromID(id objc.ID) *QueryDescriptor {
 	return &QueryDescriptor{inner: raw.HKQueryDescriptorFromID(id)}
 }
 
+// @method        initWithSampleType:predicate: @abstract      Returns a query descriptor that describes a data type and predicate to be used in an HKQuery. @param         sampleType      The type of sample to retrieve. @param         predicate       The predicate which samples should match.
+//
 // NewQueryDescriptorWithSampleTypePredicate creates a new [QueryDescriptor].
 func NewQueryDescriptorWithSampleTypePredicate(sampleType *raw.HKSampleType, predicate *foundation.NSPredicate) *QueryDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKQueryDescriptor")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewQueryDescriptorWithSampleTypePredicate(sampleType *raw.HKSampleType, pre
 	return &QueryDescriptor{inner: raw.HKQueryDescriptorFromID(_id)}
 }
 
+// @property      sampleType @abstract      The type of sample to retrieve in an HKQuery.
+//
 // SampleType calls the underlying SampleType.
 func (x *QueryDescriptor) SampleType() *SampleType {
 	_r := x.inner.SampleType()
@@ -46,6 +50,8 @@ func (x *QueryDescriptor) SampleType() *SampleType {
 	return &SampleType{inner: _r}
 }
 
+// @property      predicate @abstract      The predicate which samples should match.
+//
 // Predicate calls the underlying Predicate.
 func (x *QueryDescriptor) Predicate() *foundation.NSPredicate {
 	return x.inner.Predicate()

@@ -35,6 +35,8 @@ func NewLogEntryLog() *LogEntryLog {
 	return &LogEntryLog{inner: raw.OSLogEntryLogFromID(_id)}
 }
 
+// @property level @abstract The level of the entry, e.g., info, debug.
+//
 // Level calls the underlying Level.
 func (x *LogEntryLog) Level() OSLogEntryLogLevel {
 	return OSLogEntryLogLevel(x.inner.Level())

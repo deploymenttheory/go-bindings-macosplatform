@@ -31,6 +31,8 @@ func PlayerItemLegibleOutputFromID(id objc.ID) *PlayerItemLegibleOutput {
 	return &PlayerItemLegibleOutput{inner: raw.AVPlayerItemLegibleOutputFromID(id)}
 }
 
+// @method			initWithMediaSubtypesForNativeRepresentation: @abstract		Returns an instance of AVPlayerItemLegibleOutput with filtering enabled for AVPlayerItemLegibleOutputPushDelegate's legibleOutput:didOutputAttributedStrings:nativeSampleBuffers:forItemTime:. @param			subtypes NSArray of NSNumber FourCC codes, e.g. @[ [NSNumber numberWithUnsignedInt:'tx3g'] ] @result			An instance of AVPlayerItemLegibleOutput. @discussion Add media subtype FourCC number objects to the subtypes array to elect to receive that type as a CMSampleBuffer instead of an NSAttributedString.  Initializing an AVPlayerItemLegibleOutput using the -init method is equivalent to calling -initWithMediaSubtypesForNativeRepresentation: with an empty array, which means that all legible data, regardless of media subtype, will be delivered using NSAttributedString in a common format. If a media subtype for which there is no legible data in the current player item is included in the media subtypes array, no error will occur.  AVPlayerItemLegibleOutput will not vend closed caption data as CMSampleBuffers, so it is an error to include 'c608' in the media subtypes array. This method throws an exception if any media subtype is kCMClosedCaptionFormatType_CEA608 (native representation is not available for media subtype).
+//
 // NewPlayerItemLegibleOutputWithMediaSubtypesForNativeRepresentation creates a new [PlayerItemLegibleOutput].
 func NewPlayerItemLegibleOutputWithMediaSubtypesForNativeRepresentation(subtypes *foundation.NSArray[*foundation.NSNumber]) *PlayerItemLegibleOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItemLegibleOutput")), objc.RegisterName("alloc"))
@@ -38,39 +40,53 @@ func NewPlayerItemLegibleOutputWithMediaSubtypesForNativeRepresentation(subtypes
 	return &PlayerItemLegibleOutput{inner: raw.AVPlayerItemLegibleOutputFromID(_id)}
 }
 
+// @property		advanceIntervalForDelegateInvocation @abstract		Permits advance invocation of the associated delegate, if any. @discussion If it is possible, an AVPlayerItemLegibleOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemLegibleOutput is prepared to act on them, the delegate will be invoked as soon as possible.
+//
 // WithAdvanceIntervalForDelegateInvocation sets the advanceIntervalForDelegateInvocation property and returns the receiver for chaining.
 func (x *PlayerItemLegibleOutput) WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemLegibleOutput {
 	x.inner.SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation)
 	return x
 }
 
+// @property		textStylingResolution @abstract		A string identifier indicating the degree of text styling to be applied to attributed strings vended by the receiver @discussion Valid values are AVPlayerItemLegibleOutputTextStylingResolutionDefault and AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly.  An NSInvalidArgumentException is raised if this property is set to any other value.  The default value is AVPlayerItemLegibleOutputTextStylingResolutionDefault, which indicates that attributed strings vended by the receiver will include the same level of styling information that would be used if AVFoundation were rendering the text via AVPlayerLayer.
+//
 // WithTextStylingResolution sets the textStylingResolution property and returns the receiver for chaining.
 func (x *PlayerItemLegibleOutput) WithTextStylingResolution(textStylingResolution *foundation.NSString) *PlayerItemLegibleOutput {
 	x.inner.SetTextStylingResolution(textStylingResolution)
 	return x
 }
 
+// @property		suppressesPlayerRendering @abstract		Indicates whether the output, when added to an AVPlayerItem, will be used in addition to normal rendering of media data by the player or instead of normal rendering. @discussion The default value is NO, indicating that the output will be used in addition to normal rendering. If you want to render the media data provided by the output yourself instead of allowing it to be rendered as in normally would be by AVPlayer, set suppressesPlayerRendering to YES. Whenever any output is added to an AVPlayerItem that has suppressesPlayerRendering set to YES, the media data supplied to the output will not be rendered by AVPlayer. Other media data associated with the item but not provided to such an output is not affected. For example, if an output of class AVPlayerItemVideoOutput with a value of YES for suppressesPlayerRendering is added to an AVPlayerItem, video media for that item will not be rendered by the AVPlayer, while audio media, subtitle media, and other kinds of media, if present, will be rendered.
+//
 // WithSuppressesPlayerRendering sets the suppressesPlayerRendering property and returns the receiver for chaining.
 func (x *PlayerItemLegibleOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemLegibleOutput {
 	x.inner.AVPlayerItemOutput.SetSuppressesPlayerRendering(suppressesPlayerRendering)
 	return x
 }
 
+// @method			setDelegate:queue: @abstract		Sets the receiver's delegate and a dispatch queue on which the delegate will be called. @param			delegate An object conforming to AVPlayerItemLegibleOutputPushDelegate protocol. @param			delegateQueue A dispatch queue on which all delegate methods will be called. @discussion The delegate is held using a zeroing-weak reference, so it is safe to deallocate the delegate while the receiver still has a reference to it.
+//
 // SetDelegateQueue calls the underlying SetDelegateQueue.
 func (x *PlayerItemLegibleOutput) SetDelegateQueue(delegate raw.AVPlayerItemLegibleOutputPushDelegate, delegateQueue *foundation.NSObject) {
 	x.inner.SetDelegateQueue(delegate, delegateQueue)
 }
 
+// @property		delegate @abstract		The receiver's delegate. @discussion The delegate is held using a zeroing-weak reference, so this property will have a value of nil after a delegate that was previously set has been deallocated.  This property is not key-value observable.
+//
 // Delegate calls the underlying Delegate.
 func (x *PlayerItemLegibleOutput) Delegate() raw.AVPlayerItemLegibleOutputPushDelegate {
 	return x.inner.Delegate()
 }
 
+// @property		delegateQueue @abstract		The dispatch queue where the delegate is messaged. @discussion This property is not key-value observable.
+//
 // DelegateQueue calls the underlying DelegateQueue.
 func (x *PlayerItemLegibleOutput) DelegateQueue() *foundation.NSObject {
 	return x.inner.DelegateQueue()
 }
 
+// @property		advanceIntervalForDelegateInvocation @abstract		Permits advance invocation of the associated delegate, if any. @discussion If it is possible, an AVPlayerItemLegibleOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemLegibleOutput is prepared to act on them, the delegate will be invoked as soon as possible.
+//
 // AdvanceIntervalForDelegateInvocation calls the underlying AdvanceIntervalForDelegateInvocation.
 func (x *PlayerItemLegibleOutput) AdvanceIntervalForDelegateInvocation() float64 {
 	return x.inner.AdvanceIntervalForDelegateInvocation()

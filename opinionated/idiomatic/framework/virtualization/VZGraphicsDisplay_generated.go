@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents a graphics display in a VM.
+//
 // GraphicsDisplay wraps [raw.VZGraphicsDisplay] with a fluent Go API.
 type GraphicsDisplay struct {
 	inner *raw.VZGraphicsDisplay
@@ -36,26 +38,36 @@ func NewGraphicsDisplay() *GraphicsDisplay {
 	return &GraphicsDisplay{inner: raw.VZGraphicsDisplayFromID(_id)}
 }
 
+// Resize this display with the new dimensions you provide.
+//
 // ReconfigureWithSizeInPixelsError calls the underlying ReconfigureWithSizeInPixelsError.
 func (x *GraphicsDisplay) ReconfigureWithSizeInPixelsError(sizeInPixels corefoundation.CGSize) (bool, error) {
 	return x.inner.ReconfigureWithSizeInPixelsError(sizeInPixels)
 }
 
+// Reconfigure this display with the new display configuration you provide.
+//
 // ReconfigureWithConfigurationError calls the underlying ReconfigureWithConfigurationError.
 func (x *GraphicsDisplay) ReconfigureWithConfigurationError(configuration *raw.VZGraphicsDisplayConfiguration) (bool, error) {
 	return x.inner.ReconfigureWithConfigurationError(configuration)
 }
 
+// Adds an observer to notify about display configuration changes.
+//
 // AddObserver calls the underlying AddObserver.
 func (x *GraphicsDisplay) AddObserver(observer raw.VZGraphicsDisplayObserver) {
 	x.inner.AddObserver(observer)
 }
 
+// Removes a display configuration change observer.
+//
 // RemoveObserver calls the underlying RemoveObserver.
 func (x *GraphicsDisplay) RemoveObserver(observer raw.VZGraphicsDisplayObserver) {
 	x.inner.RemoveObserver(observer)
 }
 
+// @abstract The size of the display, in pixels.
+//
 // SizeInPixels calls the underlying SizeInPixels.
 func (x *GraphicsDisplay) SizeInPixels() corefoundation.CGSize {
 	return x.inner.SizeInPixels()

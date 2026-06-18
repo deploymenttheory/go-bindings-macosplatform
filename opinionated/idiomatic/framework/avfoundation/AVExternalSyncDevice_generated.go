@@ -38,22 +38,30 @@ func NewExternalSyncDevice() *ExternalSyncDevice {
 	return &ExternalSyncDevice{inner: raw.AVExternalSyncDeviceFromID(_id)}
 }
 
+// Delay to wait before starting the frame capture. An external sync is generally used to configure multiple devices in the real world. A display and a camera may receive a signal at the same time, but that does not mean the refresh of the display and camera are aligned in a way that does not cause tearing in the recording. The signal compensation delay can be used to offset the readout of a camera on an intra-frame scale. - Important: You should always set this property to a value less than the frame duration at which the camera is operating.
+//
 // WithSignalCompensationDelay sets the signalCompensationDelay property and returns the receiver for chaining.
 func (x *ExternalSyncDevice) WithSignalCompensationDelay(signalCompensationDelay coremedia.CMTime) *ExternalSyncDevice {
 	x.inner.SetSignalCompensationDelay(signalCompensationDelay)
 	return x
 }
 
+// The status of the externally connected device. Use this property to query the current connection status of the external sync device. This property is key-value observable.
+//
 // Status calls the underlying Status.
 func (x *ExternalSyncDevice) Status() AVExternalSyncDeviceStatus {
 	return AVExternalSyncDeviceStatus(x.inner.Status())
 }
 
+// A clock representing the source of time from the external sync device. This property returns `NULL` until the “status“ reaches “AVExternalSyncDeviceStatusActiveSync“.
+//
 // Clock calls the underlying Clock.
 func (x *ExternalSyncDevice) Clock() unsafe.Pointer {
 	return x.inner.Clock()
 }
 
+// Delay to wait before starting the frame capture. An external sync is generally used to configure multiple devices in the real world. A display and a camera may receive a signal at the same time, but that does not mean the refresh of the display and camera are aligned in a way that does not cause tearing in the recording. The signal compensation delay can be used to offset the readout of a camera on an intra-frame scale. - Important: You should always set this property to a value less than the frame duration at which the camera is operating.
+//
 // SignalCompensationDelay calls the underlying SignalCompensationDelay.
 func (x *ExternalSyncDevice) SignalCompensationDelay() coremedia.CMTime {
 	return x.inner.SignalCompensationDelay()
@@ -64,16 +72,22 @@ func (x *ExternalSyncDevice) SetSignalCompensationDelay(signalCompensationDelay 
 	x.inner.SetSignalCompensationDelay(signalCompensationDelay)
 }
 
+// A unique identifier for an external sync device. Use this property to select a specific external sync device.
+//
 // Uuid calls the underlying Uuid.
 func (x *ExternalSyncDevice) Uuid() *foundation.NSUUID {
 	return x.inner.Uuid()
 }
 
+// The USB vendor identifier associated with the external sync device. This `UInt32` value is provided by the hardware vendor, and returns 0 if not available.
+//
 // VendorID calls the underlying VendorID.
 func (x *ExternalSyncDevice) VendorID() uint {
 	return x.inner.VendorID()
 }
 
+// The USB product identifier associated with the external sync device. This `UInt32` value comes from the hardware vendor, and returns 0 if not available. Use this value in conjunction with the “vendorID“ to determine a specific product.
+//
 // ProductID calls the underlying ProductID.
 func (x *ExternalSyncDevice) ProductID() uint {
 	return x.inner.ProductID()

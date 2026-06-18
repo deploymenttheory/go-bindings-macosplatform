@@ -37,23 +37,31 @@ func NewLayer() *Layer {
 	return &Layer{inner: raw.MLCLayerFromID(_id)}
 }
 
+// @property   label @abstract   A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *Layer) WithLabel(label string) *Layer {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   isDebuggingEnabled @abstract   A flag to identify if we want to debug this layer when executing a graph that includes this layer @discussion If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
+//
 // WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
 func (x *Layer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Layer {
 	x.inner.SetIsDebuggingEnabled(isDebuggingEnabled)
 	return x
 }
 
+// @property   layerID @abstract   The layer ID @discussion A unique number to identify each layer.  Assigned when the layer is created.
+//
 // LayerID calls the underlying LayerID.
 func (x *Layer) LayerID() uint {
 	return x.inner.LayerID()
 }
 
+// @property   label @abstract   A string to help identify this object.
+//
 // Label calls the underlying Label.
 func (x *Layer) Label() string {
 	_r := x.inner.Label()
@@ -68,6 +76,8 @@ func (x *Layer) SetLabel(label string) {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 }
 
+// @property   isDebuggingEnabled @abstract   A flag to identify if we want to debug this layer when executing a graph that includes this layer @discussion If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
+//
 // IsDebuggingEnabled calls the underlying IsDebuggingEnabled.
 func (x *Layer) IsDebuggingEnabled() bool {
 	return x.inner.IsDebuggingEnabled()
@@ -78,6 +88,8 @@ func (x *Layer) SetIsDebuggingEnabled(isDebuggingEnabled bool) {
 	x.inner.SetIsDebuggingEnabled(isDebuggingEnabled)
 }
 
+// @property   deviceType @abstract   The device type where this layer will be executed @discussion Typically the MLCDevice passed to compileWithOptions will be the device used to execute layers in the graph. If MLCDeviceTypeANE is selected, it is possible that some of the layers of the graph may not be executed on the ANE but instead on the CPU or GPU.  This property can be used to determine which device type the layer will be executed on.
+//
 // DeviceType calls the underlying DeviceType.
 func (x *Layer) DeviceType() MLCDeviceType {
 	return MLCDeviceType(x.inner.DeviceType())

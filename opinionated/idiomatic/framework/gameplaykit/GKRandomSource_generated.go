@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A concrete random source that can generate random numbers. The implementation details are up to the system and if a particular algorithm is needed then use one of the provided subclasses. For certain specialized applications a shared system source may be needed and for those instances there is a wrapped interface over arc4random_*, accessible via +[GKRandomSource sharedRandom]. @see GKARC4RandomSource @see GKLinearCongruentialRandomSource @see GKMersenneTwisterRandomSource @see GKRandomSource.systemRandom
+//
 // RandomSource wraps [raw.GKRandomSource] with a fluent Go API.
 type RandomSource struct {
 	inner *raw.GKRandomSource
@@ -36,6 +38,8 @@ func NewRandomSource() *RandomSource {
 	return &RandomSource{inner: raw.GKRandomSourceFromID(_id)}
 }
 
+// Deserializes a random source from an NSCoder. All random sources support coding for serializing and deserializing the state of the random source. Each subclass has its own contract for what parts of the state is preserved when serialized but the general contract is that a serialized source must generate the same sequence of values as the original source would from the instant it was serialized. Note that the sharedRandom instance is an exception as it is explicitly seedless and a shared singleton instance. When serialized and deserialized it will return the current sharedRandom instance instead.
+//
 // NewRandomSourceWithCoder creates a new [RandomSource].
 func NewRandomSourceWithCoder(aDecoder *foundation.NSCoder) *RandomSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKRandomSource")), objc.RegisterName("alloc"))
@@ -43,6 +47,8 @@ func NewRandomSourceWithCoder(aDecoder *foundation.NSCoder) *RandomSource {
 	return &RandomSource{inner: raw.GKRandomSourceFromID(_id)}
 }
 
+// Returns a shuffled instance of the given array. The objects in the array are shuffled based on a Fisher-Yates shuffle. Any random, be it custom, source or a distribution, that can provide a number with an upper bound of at least the array.count is suitable for this shuffle.
+//
 // ArrayByShufflingObjectsInArray calls the underlying ArrayByShufflingObjectsInArray.
 func (x *RandomSource) ArrayByShufflingObjectsInArray(array *foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID] {
 	return x.inner.ArrayByShufflingObjectsInArray(array)

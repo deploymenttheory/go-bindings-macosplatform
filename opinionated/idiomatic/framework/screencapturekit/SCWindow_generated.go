@@ -37,16 +37,22 @@ func NewWindow() *Window {
 	return &Window{inner: raw.SCWindowFromID(_id)}
 }
 
+// @abstract windowID the CGWindowID for the SCWindow
+//
 // WindowID calls the underlying WindowID.
 func (x *Window) WindowID() uint32 {
 	return x.inner.WindowID()
 }
 
+// @abstract frame the CGRect for the SCWindow
+//
 // Frame calls the underlying Frame.
 func (x *Window) Frame() corefoundation.CGRect {
 	return x.inner.Frame()
 }
 
+// @abstract title the window title for the SCWindow
+//
 // Title calls the underlying Title.
 func (x *Window) Title() string {
 	_r := x.inner.Title()
@@ -56,11 +62,15 @@ func (x *Window) Title() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract windowLayer the window layer for the SCWindow
+//
 // WindowLayer calls the underlying WindowLayer.
 func (x *Window) WindowLayer() int {
 	return x.inner.WindowLayer()
 }
 
+// @abstract owningApplication is the SCRunningApplication that owns this SCWindow
+//
 // OwningApplication calls the underlying OwningApplication.
 func (x *Window) OwningApplication() *RunningApplication {
 	_r := x.inner.OwningApplication()
@@ -70,11 +80,15 @@ func (x *Window) OwningApplication() *RunningApplication {
 	return &RunningApplication{inner: _r}
 }
 
+// @abstract onScreen the bool property denoting of the SCWindow is on the screen
+//
 // IsOnScreen calls the underlying IsOnScreen.
 func (x *Window) IsOnScreen() bool {
 	return x.inner.IsOnScreen()
 }
 
+// @abstract active the bool property denoting of the SCWindow is active. with Stage Manager, SCWindow can be offScreen and active
+//
 // IsActive calls the underlying IsActive.
 func (x *Window) IsActive() bool {
 	return x.inner.IsActive()

@@ -1,0 +1,1937 @@
+{
+  "schema_version": 1,
+  "framework": "Virtualization",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "VZAudioDeviceConfiguration": {
+      "doc": "The base class for an audio device configuration.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzaudiodeviceconfiguration"
+    },
+    "VZAudioInputStreamSource": {
+      "doc": "The base class for an audio input stream source.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzaudioinputstreamsource"
+    },
+    "VZAudioOutputStreamSink": {
+      "doc": "The base class for an audio output stream sink.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzaudiooutputstreamsink"
+    },
+    "VZBootLoader": {
+      "doc": "The base class that defines the management of the initial process of the guest system.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzbootloader"
+    },
+    "VZBridgedNetworkDeviceAttachment": {
+      "doc": "A network device that interacts directly with a physical network interface on the host computer.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzbridgednetworkdeviceattachment"
+    },
+    "VZBridgedNetworkInterface": {
+      "doc": "An object that identifies the supported network interfaces of the host computer.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzbridgednetworkinterface"
+    },
+    "VZConsoleDevice": {
+      "doc": "A class that represents a console device in a VM.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzconsoledevice"
+    },
+    "VZConsoleDeviceConfiguration": {
+      "doc": "The base class for a console device configuration.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzconsoledeviceconfiguration"
+    },
+    "VZConsolePortConfiguration": {
+      "doc": "The base class for a console port configuration.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzconsoleportconfiguration"
+    },
+    "VZDirectoryShare": {
+      "doc": "The base class for a directory share.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzdirectoryshare"
+    },
+    "VZDirectorySharingDevice": {
+      "doc": "The base class that represents a directory sharing device in a VM.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzdirectorysharingdevice"
+    },
+    "VZDirectorySharingDeviceConfiguration": {
+      "doc": "The base class for a directory sharing device configuration.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzdirectorysharingdeviceconfiguration"
+    },
+    "VZDiskBlockDeviceStorageDeviceAttachment": {
+      "doc": "A storage device attachment that uses a disk to store data.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzdiskblockdevicestoragedeviceattachment"
+    },
+    "VZDiskImageStorageDeviceAttachment": {
+      "doc": "A device that stores content in a disk image.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzdiskimagestoragedeviceattachment"
+    },
+    "VZEFIBootLoader": {
+      "doc": "The boot loader configuration the system uses to boot guest-operating systems that expect an Extensible Firmware Interface (EFI) ROM.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzefibootloader"
+    },
+    "VZEFIVariableStore": {
+      "doc": "An object that represents the Extensible Firmware Interface (EFI) variable store that contains NVRAM variables the EFI exposes.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzefivariablestore"
+    },
+    "VZEntropyDeviceConfiguration": {
+      "doc": "The common configuration traits for entropy devices.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzentropydeviceconfiguration"
+    },
+    "VZFileHandleNetworkDeviceAttachment": {
+      "doc": "A network device that transmits raw network packets and frames using a datagram socket.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzfilehandlenetworkdeviceattachment"
+    },
+    "VZFileHandleSerialPortAttachment": {
+      "doc": "An attachment point that allows bidirectional communication using file handles.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzfilehandleserialportattachment"
+    },
+    "VZFileSerialPortAttachment": {
+      "doc": "An attachment point that writes data from the guest system to a file.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzfileserialportattachment"
+    },
+    "VZGenericMachineIdentifier": {
+      "doc": "An object that represents a unique identifier for a virtual machine.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzgenericmachineidentifier"
+    },
+    "VZGenericPlatformConfiguration": {
+      "doc": "The platform configuration for a generic Intel or ARM virtual machine.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzgenericplatformconfiguration"
+    },
+    "VZGraphicsDevice": {
+      "doc": "A class that represents a graphics device in a VM.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzgraphicsdevice"
+    },
+    "VZGraphicsDeviceConfiguration": {
+      "doc": "The base class for a graphics device configuration.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzgraphicsdeviceconfiguration"
+    },
+    "VZGraphicsDisplay": {
+      "doc": "A class that represents a graphics display in a VM.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzgraphicsdisplay"
+    },
+    "VZGraphicsDisplayConfiguration": {
+      "doc": "The base class for a graphics display configuration.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzgraphicsdisplayconfiguration"
+    },
+    "VZHostAudioInputStreamSource": {
+      "doc": "The host audio input stream source that provides audio from the host system’s default input device.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzhostaudioinputstreamsource"
+    },
+    "VZHostAudioOutputStreamSink": {
+      "doc": "Host audio output stream sink plays audio to the host system’s default output device.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzhostaudiooutputstreamsink"
+    },
+    "VZKeyboardConfiguration": {
+      "doc": "The base class for a configuring a keyboard.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzkeyboardconfiguration"
+    },
+    "VZLinuxBootLoader": {
+      "doc": "An object that loads and configures a Linux kernel as the guest system of your VM.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzlinuxbootloader"
+    },
+    "VZLinuxRosettaAbstractSocketCachingOptions": {
+      "doc": "Caching options for an abstract socket.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettaabstractsocketcachingoptions"
+    },
+    "VZLinuxRosettaCachingOptions": {
+      "doc": "An abstract class that defines UNIX socket-based caching options for Rosetta.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettacachingoptions"
+    },
+    "VZLinuxRosettaDirectoryShare": {
+      "doc": "The Linux directory share for Rosetta.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettadirectoryshare"
+    },
+    "VZLinuxRosettaUnixSocketCachingOptions": {
+      "doc": "An object that represents caching options for a UNIX domain socket.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettaunixsocketcachingoptions"
+    },
+    "VZMACAddress": {
+      "doc": "The media access control (MAC) address for a network interface in your virtual machine.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzmacaddress"
+    },
+    "VZMacAuxiliaryStorage": {
+      "doc": "An object that contains information the boot loader needs for booting macOS as a guest operating system.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzmacauxiliarystorage"
+    },
+    "VZMacGraphicsDevice": {
+      "doc": "An object that represents a Mac graphics device.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzmacgraphicsdevice"
+    },
+    "VZMacGraphicsDeviceConfiguration": {
+      "doc": "Configuration for a display attached to a Mac graphics device.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzmacgraphicsdeviceconfiguration"
+    },
+    "VZMacGraphicsDisplay": {
+      "doc": "An object that represents the graphics display on a Mac.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzmacgraphicsdisplay"
+    },
+    "VZMacGraphicsDisplayConfiguration": {
+      "doc": "The configuration for a Mac graphics device.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzmacgraphicsdisplayconfiguration"
+    },
+    "VZMacHardwareModel": {
+      "doc": "A specification for the hardware elements and configurations present in a particular Mac hardware model.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzmachardwaremodel"
+    },
+    "VZMacKeyboardConfiguration": {
+      "doc": "A device that defines the configuration for a Mac keyboard.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzmackeyboardconfiguration"
+    },
+    "VZMacMachineIdentifier": {
+      "doc": "A unique identifier for a VM.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzmacmachineidentifier"
+    },
+    "VZMacOSBootLoader": {
+      "doc": "An object that loads and configures a boot loader for running macOS on Apple silicon as a guest system of your VM.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzmacosbootloader"
+    },
+    "VZMacOSConfigurationRequirements": {
+      "doc": "An object that describes the parameter constraints required by a specific configuration of macOS.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzmacosconfigurationrequirements"
+    },
+    "VZMacOSInstaller": {
+      "doc": "An object you use to install macOS on the specified virtual machine.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzmacosinstaller"
+    },
+    "VZMacOSRestoreImage": {
+      "doc": "An object that describes a version of macOS to install on to a virtual machine.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzmacosrestoreimage"
+    },
+    "VZMacOSVirtualMachineStartOptions": {
+      "doc": "A class that describes start options for macOS VMs.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzmacosvirtualmachinestartoptions"
+    },
+    "VZMacPlatformConfiguration": {
+      "doc": "The platform configuration for booting macOS on Apple silicon.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzmacplatformconfiguration"
+    },
+    "VZMacTrackpadConfiguration": {
+      "doc": "The class that represents the configuration for a Mac trackpad.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzmactrackpadconfiguration"
+    },
+    "VZMemoryBalloonDevice": {
+      "doc": "The common behavior for memory devices.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzmemoryballoondevice"
+    },
+    "VZMemoryBalloonDeviceConfiguration": {
+      "doc": "The common configuration traits for memory balloon devices.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzmemoryballoondeviceconfiguration"
+    },
+    "VZMultipleDirectoryShare": {
+      "doc": "An object that describes a directory share for multiple directories.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzmultipledirectoryshare"
+    },
+    "VZNATNetworkDeviceAttachment": {
+      "doc": "A device that routes network requests through the host computer and performs network address translation on the resulting packets.",
+      "url": "https://developer.apple.com/documentation/virtualization/vznatnetworkdeviceattachment"
+    },
+    "VZNVMExpressControllerDeviceConfiguration": {
+      "doc": "The configuration object that represents an NVM Express Controller storage device.",
+      "url": "https://developer.apple.com/documentation/virtualization/vznvmexpresscontrollerdeviceconfiguration"
+    },
+    "VZNetworkBlockDeviceStorageDeviceAttachment": {
+      "doc": "A storage device attachment backed by a Network Block Device (NBD) client.",
+      "url": "https://developer.apple.com/documentation/virtualization/vznetworkblockdevicestoragedeviceattachment"
+    },
+    "VZNetworkDevice": {
+      "doc": "A base class that represents a network device in a virtual machine.",
+      "url": "https://developer.apple.com/documentation/virtualization/vznetworkdevice"
+    },
+    "VZNetworkDeviceAttachment": {
+      "doc": "The common behaviors for the network attachment points of your virtual machine.",
+      "url": "https://developer.apple.com/documentation/virtualization/vznetworkdeviceattachment"
+    },
+    "VZNetworkDeviceConfiguration": {
+      "doc": "The common configuration traits for network devices.",
+      "url": "https://developer.apple.com/documentation/virtualization/vznetworkdeviceconfiguration"
+    },
+    "VZPlatformConfiguration": {
+      "doc": "The base class for a platform configuration.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzplatformconfiguration"
+    },
+    "VZPointingDeviceConfiguration": {
+      "doc": "The base class for a pointing device configuration.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzpointingdeviceconfiguration"
+    },
+    "VZSerialPortAttachment": {
+      "doc": "The common behaviors for the serial attachment points of your virtual machine.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzserialportattachment"
+    },
+    "VZSerialPortConfiguration": {
+      "doc": "The common configuration traits for serial port requests.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzserialportconfiguration"
+    },
+    "VZSharedDirectory": {
+      "doc": "A directory on the host that you can expose to a guest.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzshareddirectory"
+    },
+    "VZSingleDirectoryShare": {
+      "doc": "An object that defines the directory share for a single directory.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzsingledirectoryshare"
+    },
+    "VZSocketDevice": {
+      "doc": "The common behavior of socket devices.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzsocketdevice"
+    },
+    "VZSocketDeviceConfiguration": {
+      "doc": "The common configuration traits for socket device requests.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzsocketdeviceconfiguration"
+    },
+    "VZSpiceAgentPortAttachment": {
+      "doc": "An attachment point that enables the Spice clipboard sharing capability.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzspiceagentportattachment"
+    },
+    "VZStorageDevice": {
+      "doc": "A class that represents a storage device in a VM.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzstoragedevice"
+    },
+    "VZStorageDeviceAttachment": {
+      "doc": "The common behaviors for storage devices in the guest system.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzstoragedeviceattachment"
+    },
+    "VZStorageDeviceConfiguration": {
+      "doc": "The common configuration traits for storage device requests.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzstoragedeviceconfiguration"
+    },
+    "VZUSBController": {
+      "doc": "A class that represents a USB controller in a VM.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzusbcontroller"
+    },
+    "VZUSBControllerConfiguration": {
+      "doc": "The base class for a USB controller configuration.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzusbcontrollerconfiguration"
+    },
+    "VZUSBKeyboardConfiguration": {
+      "doc": "A device that defines the configuration for a USB keyboard.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzusbkeyboardconfiguration"
+    },
+    "VZUSBMassStorageDevice": {
+      "doc": "A class that represents a hot-pluggable USB mass storage device.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzusbmassstoragedevice"
+    },
+    "VZUSBMassStorageDeviceConfiguration": {
+      "doc": "The configuration object that represents a USB Mass storage device.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzusbmassstoragedeviceconfiguration"
+    },
+    "VZUSBScreenCoordinatePointingDeviceConfiguration": {
+      "doc": "An object that defines the configuration for a USB pointing device that reports absolute coordinates.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzusbscreencoordinatepointingdeviceconfiguration"
+    },
+    "VZVirtioBlockDeviceConfiguration": {
+      "doc": "The configuration object that requests the creation of a virtual storage device in the guest system.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtioblockdeviceconfiguration"
+    },
+    "VZVirtioConsoleDevice": {
+      "doc": "A class that represents a Virtio console device in a virtual machine.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoledevice"
+    },
+    "VZVirtioConsoleDeviceConfiguration": {
+      "doc": "A console device that enables communication between the host and the guest using console ports through a Virtio interface.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoledeviceconfiguration"
+    },
+    "VZVirtioConsoleDeviceSerialPortConfiguration": {
+      "doc": "A configuration object that requests the creation of a console device to communicate with the guest system.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoledeviceserialportconfiguration"
+    },
+    "VZVirtioConsolePort": {
+      "doc": "A class that represents a Virtio console port in a VM.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoleport"
+    },
+    "VZVirtioConsolePortArray": {
+      "doc": "A class that represents a collection of Virtio console ports.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoleportarray"
+    },
+    "VZVirtioConsolePortConfiguration": {
+      "doc": "A class that represents the configuration options you can set on a Virtio console port.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoleportconfiguration"
+    },
+    "VZVirtioConsolePortConfigurationArray": {
+      "doc": "A class that represents a collection of Virtio console port configurations.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoleportconfigurationarray"
+    },
+    "VZVirtioEntropyDeviceConfiguration": {
+      "doc": "A source of entropy for the guest’s random number generator.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtioentropydeviceconfiguration"
+    },
+    "VZVirtioFileSystemDevice": {
+      "doc": "An object the defines a VIRTIO file system device.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtiofilesystemdevice"
+    },
+    "VZVirtioFileSystemDeviceConfiguration": {
+      "doc": "An object that represents the configuration of a Virtio file system device.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtiofilesystemdeviceconfiguration"
+    },
+    "VZVirtioGraphicsDevice": {
+      "doc": "A Virtio graphics device.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtiographicsdevice"
+    },
+    "VZVirtioGraphicsDeviceConfiguration": {
+      "doc": "Configuration that represents the configuration of a Virtio graphics device for a Linux VM.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtiographicsdeviceconfiguration"
+    },
+    "VZVirtioGraphicsScanout": {
+      "doc": "A Virtio graphics scanout that corresponds to a Virtio graphics scanout configuration.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtiographicsscanout"
+    },
+    "VZVirtioGraphicsScanoutConfiguration": {
+      "doc": "The configuration for a Virtio graphics device that configures the dimensions of the graphics device for a Linux VM.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtiographicsscanoutconfiguration"
+    },
+    "VZVirtioNetworkDeviceConfiguration": {
+      "doc": "A configuration object that requests the creation of a network device for the guest system.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtionetworkdeviceconfiguration"
+    },
+    "VZVirtioSocketConnection": {
+      "doc": "A port-based connection between the guest operating system and the host computer.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosocketconnection"
+    },
+    "VZVirtioSocketDevice": {
+      "doc": "A device that manages port-based connections between the guest system and the host computer.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosocketdevice"
+    },
+    "VZVirtioSocketDeviceConfiguration": {
+      "doc": "A configuration object that requests the creation of a socket device to communicate with the guest system.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosocketdeviceconfiguration"
+    },
+    "VZVirtioSocketListener": {
+      "doc": "An object that listens for port-based connection requests from the guest operating system.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosocketlistener"
+    },
+    "VZVirtioSoundDeviceConfiguration": {
+      "doc": "An object that defines a Virtio sound device configuration.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosounddeviceconfiguration"
+    },
+    "VZVirtioSoundDeviceInputStreamConfiguration": {
+      "doc": "A PCM stream of input audio data, such as from a microphone.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosounddeviceinputstreamconfiguration"
+    },
+    "VZVirtioSoundDeviceOutputStreamConfiguration": {
+      "doc": "An object that defines a Virtio sound device output stream configuration.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosounddeviceoutputstreamconfiguration"
+    },
+    "VZVirtioSoundDeviceStreamConfiguration": {
+      "doc": "An object that defines a Virtio sound device stream configuration.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosounddevicestreamconfiguration"
+    },
+    "VZVirtioTraditionalMemoryBalloonDevice": {
+      "doc": "The object you use to change the amount of memory allocated to the guest system.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtiotraditionalmemoryballoondevice"
+    },
+    "VZVirtioTraditionalMemoryBalloonDeviceConfiguration": {
+      "doc": "A configuration object that provides a way to reclaim memory from the guest system.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtiotraditionalmemoryballoondeviceconfiguration"
+    },
+    "VZVirtualMachine": {
+      "doc": "An object that manages the overall state and configuration of your VM.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine"
+    },
+    "VZVirtualMachineConfiguration": {
+      "doc": "The environment attributes and list of devices to use during the configuration of macOS or Linux VMs.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration"
+    },
+    "VZVirtualMachineStartOptions": {
+      "doc": "The abstract class for VM start options.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachinestartoptions"
+    },
+    "VZVirtualMachineView": {
+      "doc": "A view that allows user interaction with a VM.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineview"
+    },
+    "VZVmnetNetworkDeviceAttachment": {
+      "doc": "A network device attachment that allows a custom network topology.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvmnetnetworkdeviceattachment"
+    },
+    "VZXHCIController": {
+      "doc": "A class that represents a USB Extensible Host Controller Interface (XHCI) controller in a VM.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzxhcicontroller"
+    },
+    "VZXHCIControllerConfiguration": {
+      "doc": "The configuration object for the USB Extensible Host Controller Interface (XHCI) controller.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzxhcicontrollerconfiguration"
+    }
+  },
+  "protocols": {
+    "VZGraphicsDisplayObserver": {
+      "doc": "A protocol you implement to observe state changes in graphic displays.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzgraphicsdisplayobserver"
+    },
+    "VZNetworkBlockDeviceStorageDeviceAttachmentDelegate": {
+      "doc": "Methods you implement to respond to changes to a network block device attachment.",
+      "url": "https://developer.apple.com/documentation/virtualization/vznetworkblockdevicestoragedeviceattachmentdelegate"
+    },
+    "VZUSBDevice": {
+      "doc": "A protocol that represents a USB device in a VM.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzusbdevice"
+    },
+    "VZUSBDeviceConfiguration": {
+      "doc": "The protocol for configuring USB devices.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzusbdeviceconfiguration"
+    },
+    "VZVirtioConsoleDeviceDelegate": {
+      "doc": "Optional methods that you use to respond when a console port opens or closes in the virtual machine.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoledevicedelegate"
+    },
+    "VZVirtioSocketListenerDelegate": {
+      "doc": "An interface you use to manage connections between the guest operating system and host computer.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosocketlistenerdelegate"
+    },
+    "VZVirtualMachineDelegate": {
+      "doc": "The methods you use to respond to changes in the state of the VM.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachinedelegate"
+    }
+  },
+  "enums": {
+    "VZDiskImageCachingMode": {
+      "doc": "An integer that describes the disk image caching mode.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzdiskimagecachingmode",
+      "members": {
+        "VZDiskImageCachingModeAutomatic": {
+          "doc": "Allows the virtualization framework to automatically determine whether to enable data caching.",
+          "url": "https://developer.apple.com/documentation/virtualization/vzdiskimagecachingmode/automatic"
+        },
+        "VZDiskImageCachingModeCached": {
+          "doc": "Enables data caching.",
+          "url": "https://developer.apple.com/documentation/virtualization/vzdiskimagecachingmode/cached"
+        },
+        "VZDiskImageCachingModeUncached": {
+          "doc": "Disables data caching.",
+          "url": "https://developer.apple.com/documentation/virtualization/vzdiskimagecachingmode/uncached"
+        }
+      }
+    },
+    "VZDiskImageSynchronizationMode": {
+      "doc": "An integer that describes the disk image synchronization mode.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzdiskimagesynchronizationmode",
+      "members": {
+        "VZDiskImageSynchronizationModeFsync": {
+          "doc": "Synchronizes data to the drive using the system’s best-effort synchronization mode.",
+          "url": "https://developer.apple.com/documentation/virtualization/vzdiskimagesynchronizationmode/fsync"
+        },
+        "VZDiskImageSynchronizationModeFull": {
+          "doc": "Synchronizes data to the permanent storage holding the disk image.",
+          "url": "https://developer.apple.com/documentation/virtualization/vzdiskimagesynchronizationmode/full"
+        },
+        "VZDiskImageSynchronizationModeNone": {
+          "doc": "Disables data synchronization with the permanent storage.",
+          "url": "https://developer.apple.com/documentation/virtualization/vzdiskimagesynchronizationmode/none"
+        }
+      }
+    },
+    "VZDiskSynchronizationMode": {
+      "doc": "Values that describe the synchronization modes available to the guest OS.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzdisksynchronizationmode",
+      "members": {
+        "VZDiskSynchronizationModeFull": {
+          "doc": "Perform all synchronization operations as requested by the guest OS.",
+          "url": "https://developer.apple.com/documentation/virtualization/vzdisksynchronizationmode/full"
+        },
+        "VZDiskSynchronizationModeNone": {
+          "doc": "Don’t synchronize the data with the permanent storage.",
+          "url": "https://developer.apple.com/documentation/virtualization/vzdisksynchronizationmode/none"
+        }
+      }
+    },
+    "VZEFIVariableStoreInitializationOptions": {
+      "doc": "Constants that describe the options available when creating a new Extensible Firmware Interface (EFI) variable store.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzefivariablestoreinitializationoptions"
+    },
+    "VZErrorCode": {
+      "doc": "Errors you might encounter when configuring or using a virtual machine.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzerrorcode"
+    },
+    "VZLinuxRosettaAvailability": {
+      "doc": "Constants that describe the availability and installation status of Rosetta.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettaavailability",
+      "members": {
+        "VZLinuxRosettaAvailabilityInstalled": {
+          "doc": "Rosetta is available on the host system.",
+          "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettaavailability/installed"
+        },
+        "VZLinuxRosettaAvailabilityNotInstalled": {
+          "doc": "Rosetta isn’t installed.",
+          "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettaavailability/notinstalled"
+        },
+        "VZLinuxRosettaAvailabilityNotSupported": {
+          "doc": "The current hardware or software configuration doesn’t support Rosetta.",
+          "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettaavailability/notsupported"
+        }
+      }
+    },
+    "VZMacAuxiliaryStorageInitializationOptions": {
+      "doc": "Options you can set when creating new auxiliary storage.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzmacauxiliarystorageinitializationoptions"
+    },
+    "VZVirtualMachineState": {
+      "doc": "The execution states of the VM.",
+      "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachinestate"
+    }
+  },
+  "methods": {
+    "VZBridgedNetworkDeviceAttachment": {
+      "-initWithInterface:": {
+        "doc": "Creates the attachment from a bridged network interface object.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzbridgednetworkdeviceattachment/init(interface:)"
+      }
+    },
+    "VZDiskBlockDeviceStorageDeviceAttachment": {
+      "-initWithFileHandle:readOnly:synchronizationMode:error:": {
+        "doc": "Creates a new block storage device attachment from a file handle and with the specified access mode, synchronization mode, and error object that you provide.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzdiskblockdevicestoragedeviceattachment/init(filehandle:readonly:synchronizationmode:)"
+      }
+    },
+    "VZDiskImageStorageDeviceAttachment": {
+      "-initWithURL:readOnly:cachingMode:synchronizationMode:error:": {
+        "doc": "Initialize the attachment from a local file URL.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzdiskimagestoragedeviceattachment/init(url:readonly:cachingmode:synchronizationmode:)-36gc5"
+      },
+      "-initWithURL:readOnly:error:": {
+        "doc": "Creates the attachment object from the specified disk image.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzdiskimagestoragedeviceattachment/init(url:readonly:)-9qeco"
+      }
+    },
+    "VZEFIBootLoader": {
+      "-init": {
+        "doc": "Creates a new EFI boot loader.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefibootloader/init()"
+      }
+    },
+    "VZEFIVariableStore": {
+      "-disableSecureBootWithError:": {
+        "doc": "Disables Secure Boot while preserving the existing configuration.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefivariablestore/disablesecureboot()"
+      },
+      "-enableSecureBootUsingDefaultPlatformKeyWithError:": {
+        "doc": "Enables Secure Boot with an Apple-managed Platform Key.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefivariablestore/enablesecurebootusingdefaultplatformkey()"
+      },
+      "-enableSecureBootWithPlatformKey:error:": {
+        "doc": "Enables Secure Boot with a custom Platform Key.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefivariablestore/enablesecureboot(platformkey:)"
+      },
+      "-enrollDefaultSecureBootSignaturesWithError:": {
+        "doc": "Enrolls the default signatures to Secure Boot databases.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefivariablestore/enrolldefaultsecurebootsignatures()"
+      },
+      "-enrollSecureBootSignatures:error:": {
+        "doc": "Enrolls the given signatures to Secure Boot databases.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefivariablestore/enrollsecurebootsignatures(_:)"
+      },
+      "-getEnrolledSecureBootSignaturesWithError:": {
+        "doc": "Returns the currently enrolled Secure Boot signatures in the Key Exchange Key (KEK), allowed signature (db), and forbidden signature (dbx) databases.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefivariablestore/getenrolledsecurebootsignatureswitherror:"
+      },
+      "-getSecureBootEnabled:error:": {
+        "doc": "Returns a Boolean value that indicates whether Secure Boot is in an enabled state in the variable store.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefivariablestore/getsecurebootenabled:error:"
+      },
+      "-initCreatingVariableStoreAtURL:options:error:": {
+        "doc": "Creates a new EFI variable store at specified the URL on the filesystem, initialization options, and error-return variable.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefivariablestore/init(creatingvariablestoreat:options:)"
+      },
+      "-initWithURL:": {
+        "doc": "Initialize the variable store from the URL of an existing file.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefivariablestore/init(url:)-83pcn"
+      },
+      "-resetSecureBootWithError:": {
+        "doc": "Clears any previously applied Secure Boot configuration and disables Secure Boot.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefivariablestore/resetsecureboot()"
+      }
+    },
+    "VZFileHandleNetworkDeviceAttachment": {
+      "-initWithFileHandle:": {
+        "doc": "Creates the attachment from a file handle that contains a connected datagram socket.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzfilehandlenetworkdeviceattachment/init(filehandle:)"
+      }
+    },
+    "VZFileHandleSerialPortAttachment": {
+      "-initWithFileHandleForReading:fileHandleForWriting:": {
+        "doc": "Creates a serial port attachment object from the specified file handles.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzfilehandleserialportattachment/init(filehandleforreading:filehandleforwriting:)"
+      }
+    },
+    "VZFileSerialPortAttachment": {
+      "-initWithURL:append:error:": {
+        "doc": "Creates a file-based serial port attachment object.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzfileserialportattachment/init(url:append:)-37g72"
+      }
+    },
+    "VZGenericMachineIdentifier": {
+      "-init": {
+        "doc": "Creates a new unique identifier for a VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzgenericmachineidentifier/init()"
+      },
+      "-initWithDataRepresentation:": {
+        "doc": "Creates a new unique identifier for a VM with the provided data.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzgenericmachineidentifier/init(datarepresentation:)"
+      }
+    },
+    "VZGenericPlatformConfiguration": {
+      "-init": {
+        "doc": "Returns a new generic platform configuration.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzgenericplatformconfiguration/init()"
+      }
+    },
+    "VZGraphicsDisplay": {
+      "-addObserver:": {
+        "doc": "Adds an observer to notify about display configuration changes.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzgraphicsdisplay/addobserver(_:)"
+      },
+      "-reconfigureWithConfiguration:error:": {
+        "doc": "Reconfigure this display with the new display configuration you provide.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzgraphicsdisplay/reconfigure(configuration:)"
+      },
+      "-reconfigureWithSizeInPixels:error:": {
+        "doc": "Resize this display with the new dimensions you provide.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzgraphicsdisplay/reconfigure(sizeinpixels:)"
+      },
+      "-removeObserver:": {
+        "doc": "Removes a display configuration change observer.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzgraphicsdisplay/removeobserver(_:)"
+      }
+    },
+    "VZHostAudioInputStreamSource": {
+      "-init": {
+        "doc": "Creates a new audio input stream source.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzhostaudioinputstreamsource/init()"
+      }
+    },
+    "VZHostAudioOutputStreamSink": {
+      "-init": {
+        "doc": "Creates a new host audio output stream sink instance.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzhostaudiooutputstreamsink/init()"
+      }
+    },
+    "VZLinuxBootLoader": {
+      "-initWithKernelURL:": {
+        "doc": "Creates a boot loader that launches the Linux kernel at the specified URL.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzlinuxbootloader/init(kernelurl:)"
+      }
+    },
+    "VZLinuxRosettaAbstractSocketCachingOptions": {
+      "-initWithName:error:": {
+        "doc": "Initialize options to set on a Rosetta directory share.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettaabstractsocketcachingoptions/initwithname:error:"
+      }
+    },
+    "VZLinuxRosettaDirectoryShare": {
+      "+installRosettaWithCompletionHandler:": {
+        "doc": "Starts the installation of Rosetta.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettadirectoryshare/installrosetta(completionhandler:)"
+      },
+      "-initWithError:": {
+        "doc": "Creates a new Rosetta directory share, or returns an error if Rosetta isn’t installed.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettadirectoryshare/init()"
+      }
+    },
+    "VZLinuxRosettaUnixSocketCachingOptions": {
+      "-init": {
+        "doc": "Creates a new Rosetta caching options object for a UNIX domain socket.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettaunixsocketcachingoptions/init"
+      },
+      "-initWithPath:error:": {
+        "doc": "Creates a new Rosetta caching options object for a UNIX domain socket with the path you specify.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettaunixsocketcachingoptions/initwithpath:error:"
+      }
+    },
+    "VZMACAddress": {
+      "+randomLocallyAdministeredAddress": {
+        "doc": "Returns a valid, random, locally administered, unicast MAC address.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacaddress/randomlocallyadministered()"
+      },
+      "-initWithEthernetAddress:": {
+        "doc": "Creates a MAC address from the specified 48-bit Ethernet address.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacaddress/init(ethernetaddress:)"
+      },
+      "-initWithString:": {
+        "doc": "Creates a MAC address object from a specially formatted string.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacaddress/init(string:)"
+      }
+    },
+    "VZMacAuxiliaryStorage": {
+      "-initCreatingStorageAtURL:hardwareModel:options:error:": {
+        "doc": "Creates an initialized Mac auxiliary storage instance that describes a specific hardware model at a URL you specify.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacauxiliarystorage/init(creatingstorageat:hardwaremodel:options:)"
+      },
+      "-initWithURL:": {
+        "doc": "Initializes an auxiliary storage object with data from the location at the URL you provide.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacauxiliarystorage/init(url:)-68cz"
+      }
+    },
+    "VZMacGraphicsDeviceConfiguration": {
+      "-init": {
+        "doc": "Creates a new Mac graphics device configuration.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacgraphicsdeviceconfiguration/init()"
+      }
+    },
+    "VZMacGraphicsDisplayConfiguration": {
+      "-initForScreen:sizeInPoints:": {
+        "doc": "Create a display configuration suitable for showing on the specified screen.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacgraphicsdisplayconfiguration/init(for:sizeinpoints:)"
+      },
+      "-initWithWidthInPixels:heightInPixels:pixelsPerInch:": {
+        "doc": "Create a display configuration with the specified pixel dimensions and pixel density.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacgraphicsdisplayconfiguration/init(widthinpixels:heightinpixels:pixelsperinch:)"
+      }
+    },
+    "VZMacHardwareModel": {
+      "-initWithDataRepresentation:": {
+        "doc": "Creates an instance of the hardware model described by the specified data representation.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmachardwaremodel/init(datarepresentation:)"
+      }
+    },
+    "VZMacKeyboardConfiguration": {
+      "-init": {
+        "doc": "Creates a new Mac keyboard configuration.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmackeyboardconfiguration/init()"
+      }
+    },
+    "VZMacMachineIdentifier": {
+      "-init": {
+        "doc": "Creates a new unique machine identifier.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacmachineidentifier/init()"
+      },
+      "-initWithDataRepresentation:": {
+        "doc": "Create a machine identifier described by the specified data representation.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacmachineidentifier/init(datarepresentation:)"
+      }
+    },
+    "VZMacOSBootLoader": {
+      "-init": {
+        "doc": "Creates a macOS boot loader.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosbootloader/init()"
+      }
+    },
+    "VZMacOSInstaller": {
+      "-initWithVirtualMachine:restoreImageURL:": {
+        "doc": "Creates a macOS installer object.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosinstaller/init(virtualmachine:restoringfromimageat:)"
+      },
+      "-installWithCompletionHandler:": {
+        "doc": "Start installing macOS.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosinstaller/install()"
+      }
+    },
+    "VZMacOSRestoreImage": {
+      "+fetchLatestSupportedWithCompletionHandler:": {
+        "doc": "Fetches the latest restore image supported by this host from the network.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosrestoreimage/latestsupported"
+      },
+      "+loadFileURL:completionHandler:": {
+        "doc": "Load a restore image from a file on the local file system.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosrestoreimage/image(from:)"
+      }
+    },
+    "VZMacOSVirtualMachineStartOptions": {
+      "-setGuestProvisioningOptions:error:": {
+        "doc": "Sets guest provisioning options with validation.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosvirtualmachinestartoptions/setguestprovisioning(_:)"
+      }
+    },
+    "VZMacPlatformConfiguration": {
+      "-init": {
+        "doc": "Creates a new Mac platform configuration.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacplatformconfiguration/init()"
+      }
+    },
+    "VZMacTrackpadConfiguration": {
+      "-init": {
+        "doc": "Creates a new Mac trackpad configuration.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmactrackpadconfiguration/init()"
+      }
+    },
+    "VZMultipleDirectoryShare": {
+      "+canonicalizedNameFromName:": {
+        "doc": "Transforms a string to be a valid directory name.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmultipledirectoryshare/canonicalizedname(from:)"
+      },
+      "+validateName:error:": {
+        "doc": "Check if a name is a valid directory name.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmultipledirectoryshare/validatename(_:)"
+      },
+      "-init": {
+        "doc": "Initializes the directory share with an empty set of directories.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmultipledirectoryshare/init()"
+      },
+      "-initWithDirectories:": {
+        "doc": "Creates the directory share with a set of directories on the host.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmultipledirectoryshare/init(directories:)"
+      }
+    },
+    "VZNATNetworkDeviceAttachment": {
+      "-init": {
+        "doc": "Creates an attachment that performs network address translation on the guest system’s network packets.",
+        "url": "https://developer.apple.com/documentation/virtualization/vznatnetworkdeviceattachment/init()"
+      }
+    },
+    "VZNVMExpressControllerDeviceConfiguration": {
+      "-initWithAttachment:": {
+        "doc": "Creates a new NVM Express controller configuration with the storage device attachment you provide.",
+        "url": "https://developer.apple.com/documentation/virtualization/vznvmexpresscontrollerdeviceconfiguration/init(attachment:)"
+      }
+    },
+    "VZNetworkBlockDeviceStorageDeviceAttachment": {
+      "+validateURL:error:": {
+        "doc": "Checks if the URL is a valid network block device URL.",
+        "url": "https://developer.apple.com/documentation/virtualization/vznetworkblockdevicestoragedeviceattachment/validate(_:)"
+      },
+      "-initWithURL:error:": {
+        "doc": "Creates a new network block device (NBD) storage attachment from an NDB Uniform Resource Indicator (URI) represented as a URL that you provide.",
+        "url": "https://developer.apple.com/documentation/virtualization/vznetworkblockdevicestoragedeviceattachment/init(url:)-6q4m7"
+      },
+      "-initWithURL:timeout:forcedReadOnly:synchronizationMode:error:": {
+        "doc": "Creates a new network block device storage attachment from an NBD Uniform Resource Indicator (URI) represented as a URL, timeout value, and read-only and synchronization modes that you provide.",
+        "url": "https://developer.apple.com/documentation/virtualization/vznetworkblockdevicestoragedeviceattachment/init(url:timeout:isforcedreadonly:synchronizationmode:)"
+      }
+    },
+    "VZSharedDirectory": {
+      "-initWithURL:readOnly:": {
+        "doc": "Initialize with a host directory.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzshareddirectory/init(url:readonly:)-8j5z"
+      }
+    },
+    "VZSingleDirectoryShare": {
+      "-initWithDirectory:": {
+        "doc": "Creates a directory share with a directory that you specify on the host.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzsingledirectoryshare/init(directory:)"
+      }
+    },
+    "VZSpiceAgentPortAttachment": {
+      "-init": {
+        "doc": "Creates a new Spice agent port attachment.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzspiceagentportattachment/init()"
+      }
+    },
+    "VZUSBController": {
+      "-attachDevice:completionHandler:": {
+        "doc": "Attaches a USB device to the controller.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzusbcontroller/attach(device:completionhandler:)"
+      },
+      "-detachDevice:completionHandler:": {
+        "doc": "Detaches a USB device from the controller.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzusbcontroller/detach(device:completionhandler:)"
+      }
+    },
+    "VZUSBKeyboardConfiguration": {
+      "-init": {
+        "doc": "Creates a USB keyboard configuration.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzusbkeyboardconfiguration/init()"
+      }
+    },
+    "VZUSBMassStorageDevice": {
+      "-initWithConfiguration:": {
+        "doc": "Creates a USB mass storage device with the provided configuration.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzusbmassstoragedevice/init(configuration:)"
+      }
+    },
+    "VZUSBMassStorageDeviceConfiguration": {
+      "-initWithAttachment:": {
+        "doc": "Creates a new storage device configuration with the specified attachment.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzusbmassstoragedeviceconfiguration/init(attachment:)"
+      }
+    },
+    "VZUSBScreenCoordinatePointingDeviceConfiguration": {
+      "-init": {
+        "doc": "Creates a new pointing device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzusbscreencoordinatepointingdeviceconfiguration/init()"
+      }
+    },
+    "VZVirtioBlockDeviceConfiguration": {
+      "+validateBlockDeviceIdentifier:error:": {
+        "doc": "Checks the validity of a block device identifier.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioblockdeviceconfiguration/validateblockdeviceidentifier(_:)"
+      },
+      "-initWithAttachment:": {
+        "doc": "Creates a block device configuration object that uses the specified storage medium.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioblockdeviceconfiguration/init(attachment:)"
+      }
+    },
+    "VZVirtioConsoleDeviceConfiguration": {
+      "-init": {
+        "doc": "Creates a console port configuration object.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoledeviceconfiguration/init()"
+      }
+    },
+    "VZVirtioConsoleDeviceSerialPortConfiguration": {
+      "-init": {
+        "doc": "Creates a serial port configuration object.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoledeviceserialportconfiguration/init()"
+      }
+    },
+    "VZVirtioConsolePortArray": {
+      "-objectAtIndexedSubscript:": {
+        "doc": "Returns the Virtio console port at the specified index.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoleportarray/subscript(_:)"
+      }
+    },
+    "VZVirtioConsolePortConfiguration": {
+      "-init": {
+        "doc": "Creates a new Virtio console port configuration.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoleportconfiguration/init()"
+      }
+    },
+    "VZVirtioConsolePortConfigurationArray": {
+      "-objectAtIndexedSubscript:": {
+        "doc": "Returns the Virtio console port configuration as the specified index.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoleportconfigurationarray/subscript(_:)"
+      }
+    },
+    "VZVirtioEntropyDeviceConfiguration": {
+      "-init": {
+        "doc": "Creates an entropy device configuration object.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioentropydeviceconfiguration/init()"
+      }
+    },
+    "VZVirtioFileSystemDeviceConfiguration": {
+      "+validateTag:error:": {
+        "doc": "Checks to see whether a Virtio tag is valid.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiofilesystemdeviceconfiguration/validatetag(_:)"
+      },
+      "-initWithTag:": {
+        "doc": "Creates a configuration for a VIRTIO file system device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiofilesystemdeviceconfiguration/init(tag:)"
+      }
+    },
+    "VZVirtioGraphicsDeviceConfiguration": {
+      "-init": {
+        "doc": "Creates a new Virtio graphics device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiographicsdeviceconfiguration/init()"
+      }
+    },
+    "VZVirtioGraphicsScanoutConfiguration": {
+      "-initWithWidthInPixels:heightInPixels:": {
+        "doc": "Creates a Virtio graphics device with the specified dimensions.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiographicsscanoutconfiguration/init(widthinpixels:heightinpixels:)"
+      }
+    },
+    "VZVirtioNetworkDeviceConfiguration": {
+      "-init": {
+        "doc": "Creates a network device configuration object for you to configure.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtionetworkdeviceconfiguration/init()"
+      }
+    },
+    "VZVirtioSocketConnection": {
+      "-close": {
+        "doc": "Close the file descriptor associated with the socket.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosocketconnection/close()"
+      }
+    },
+    "VZVirtioSocketDevice": {
+      "-connectToPort:completionHandler:": {
+        "doc": "Initiates a connection to the specified port of the guest operating system.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosocketdevice/connect(toport:)"
+      },
+      "-removeSocketListenerForPort:": {
+        "doc": "Removes the listener object from the specfied port.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosocketdevice/removesocketlistener(forport:)"
+      },
+      "-setSocketListener:forPort:": {
+        "doc": "Configures an object to monitor the specified port for new connections.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosocketdevice/setsocketlistener(_:forport:)"
+      }
+    },
+    "VZVirtioSocketDeviceConfiguration": {
+      "-init": {
+        "doc": "Creates a socket device configuration object.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosocketdeviceconfiguration/init()"
+      }
+    },
+    "VZVirtioSoundDeviceConfiguration": {
+      "-init": {
+        "doc": "Creates a new sound device configuration.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosounddeviceconfiguration/init()"
+      }
+    },
+    "VZVirtioSoundDeviceInputStreamConfiguration": {
+      "-init": {
+        "doc": "Creates a new sound device input stream configuration.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosounddeviceinputstreamconfiguration/init()"
+      }
+    },
+    "VZVirtioSoundDeviceOutputStreamConfiguration": {
+      "-init": {
+        "doc": "Creates a new sounds device output stream configuration.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosounddeviceoutputstreamconfiguration/init()"
+      }
+    },
+    "VZVirtioTraditionalMemoryBalloonDeviceConfiguration": {
+      "-init": {
+        "doc": "Creates a memory ballon device configuration object to include with your virtual machine’s configuration data.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiotraditionalmemoryballoondeviceconfiguration/init()"
+      }
+    },
+    "VZVirtualMachine": {
+      "-initWithConfiguration:": {
+        "doc": "Creates the VM and configures it with the specified data.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/init(configuration:)"
+      },
+      "-initWithConfiguration:queue:": {
+        "doc": "Creates and configures the VM with the specified data and dispatch queue.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/init(configuration:queue:)"
+      },
+      "-pauseWithCompletionHandler:": {
+        "doc": "Pauses a running VM and notifies the specified completion handler of the results.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/pause()"
+      },
+      "-requestStopWithError:": {
+        "doc": "Asks the guest operating system to stop running.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/requeststop()"
+      },
+      "-restoreMachineStateFromURL:completionHandler:": {
+        "doc": "Restores a VM from a previously saved state.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/restoremachinestatefrom(url:completionhandler:)"
+      },
+      "-resumeWithCompletionHandler:": {
+        "doc": "Resumes a paused VM and notifies the specified completion handler of the results.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/resume()"
+      },
+      "-saveMachineStateToURL:completionHandler:": {
+        "doc": "Saves the state of a VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/savemachinestateto(url:completionhandler:)"
+      },
+      "-startWithCompletionHandler:": {
+        "doc": "Starts the VM and notifies the specified completion handler if startup was successful.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/start()"
+      },
+      "-startWithOptions:completionHandler:": {
+        "doc": "Starts the VM with the options and a completion handler you provide.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/start(options:completionhandler:)"
+      },
+      "-stopWithCompletionHandler:": {
+        "doc": "Stops a VM that’s in either a running or paused state.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/stop(completionhandler:)"
+      }
+    },
+    "VZVirtualMachineConfiguration": {
+      "-validateSaveRestoreSupportWithError:": {
+        "doc": "Determines whether the framework can save or restore the VM’s current configuration.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/validatesaverestoresupport()"
+      },
+      "-validateWithError:": {
+        "doc": "Validates the current configuration settings and reports any issues that might prevent the successful initialization of the VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/validate()"
+      }
+    },
+    "VZVmnetNetworkDeviceAttachment": {
+      "-initWithNetwork:": {
+        "doc": "Creates the attachment and configures it with the specified data.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvmnetnetworkdeviceattachment/init(network:)"
+      }
+    },
+    "VZXHCIControllerConfiguration": {
+      "-init": {
+        "doc": "Creates a USB Extensible Host Controller Interface (XHCI) configuration.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzxhcicontrollerconfiguration/init()"
+      }
+    }
+  },
+  "properties": {
+    "VZBridgedNetworkDeviceAttachment": {
+      "interface": {
+        "doc": "The network interface assigned to this attachment.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzbridgednetworkdeviceattachment/interface"
+      }
+    },
+    "VZBridgedNetworkInterface": {
+      "identifier": {
+        "doc": "The unique BSD name of this network interface.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzbridgednetworkinterface/identifier"
+      },
+      "localizedDisplayName": {
+        "doc": "A user-visible name for the network interface.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzbridgednetworkinterface/localizeddisplayname"
+      },
+      "networkInterfaces": {
+        "doc": "The bridged network interfaces that you may use in your virtual machine.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzbridgednetworkinterface/networkinterfaces"
+      }
+    },
+    "VZConsolePortConfiguration": {
+      "attachment": {
+        "doc": "The serial port attachment.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzconsoleportconfiguration/attachment"
+      }
+    },
+    "VZDiskBlockDeviceStorageDeviceAttachment": {
+      "fileHandle": {
+        "doc": "A file handle to a block device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzdiskblockdevicestoragedeviceattachment/filehandle"
+      },
+      "readOnly": {
+        "doc": "A Boolean value that indicates whether this disk attachment is read-only; otherwise, if the file handle allows writes, the device can write data into it.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzdiskblockdevicestoragedeviceattachment/isreadonly"
+      },
+      "synchronizationMode": {
+        "doc": "The value that defines how the disk synchronizes with the underlying storage when the guest operating system flushes data.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzdiskblockdevicestoragedeviceattachment/synchronizationmode"
+      }
+    },
+    "VZDiskImageStorageDeviceAttachment": {
+      "URL": {
+        "doc": "The URL of the underlying disk image.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzdiskimagestoragedeviceattachment/url"
+      },
+      "cachingMode": {
+        "doc": "The current cacheing mode for the virtual disk image.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzdiskimagestoragedeviceattachment/cachingmode"
+      },
+      "init(diskImage:cachingMode:synchronizationMode:)": {
+        "doc": "Initializes the attachment from a disk image.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzdiskimagestoragedeviceattachment/init(diskimage:cachingmode:synchronizationmode:)"
+      },
+      "readOnly": {
+        "doc": "A Boolean value that indicates whether the underlying disk image is read-only.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzdiskimagestoragedeviceattachment/isreadonly"
+      },
+      "synchronizationMode": {
+        "doc": "The mode in which the disk image synchronizes data with the underlying storage device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzdiskimagestoragedeviceattachment/synchronizationmode"
+      }
+    },
+    "VZEFIBootLoader": {
+      "variableStore": {
+        "doc": "The boot loader’s EFI variable store.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefibootloader/variablestore"
+      }
+    },
+    "VZEFIVariableStore": {
+      "URL": {
+        "doc": "The URL of the variable store on the local file system.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefivariablestore/url"
+      },
+      "VZEFIVariableStoreInitializationOptions": {
+        "doc": "Constants that describe the options available when creating a new Extensible Firmware Interface (EFI) variable store.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefivariablestore/initializationoptions"
+      },
+      "enrolledSecureBootSignatures": {
+        "doc": "The currently enrolled Key Exchange Key (KEK), allowed signature database (db), and forbidden signature database (dbx) signatures.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefivariablestore/enrolledsecurebootsignatures"
+      },
+      "isSecureBootEnabled": {
+        "doc": "A Boolean value that indicates whether Secure Boot is in an enabled state in the variable store.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzefivariablestore/issecurebootenabled"
+      }
+    },
+    "VZFileHandleNetworkDeviceAttachment": {
+      "fileHandle": {
+        "doc": "The file handle assigned to this attachment.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzfilehandlenetworkdeviceattachment/filehandle"
+      },
+      "maximumTransmissionUnit": {
+        "doc": "An integer value that indicates the maximum transmission unit (MTU) associated with this attachment.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzfilehandlenetworkdeviceattachment/maximumtransmissionunit"
+      }
+    },
+    "VZFileHandleSerialPortAttachment": {
+      "fileHandleForReading": {
+        "doc": "The file handle that the guest operating system uses to read data.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzfilehandleserialportattachment/filehandleforreading"
+      },
+      "fileHandleForWriting": {
+        "doc": "The file handle that the guest operating system uses to write data.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzfilehandleserialportattachment/filehandleforwriting"
+      }
+    },
+    "VZFileSerialPortAttachment": {
+      "URL": {
+        "doc": "The URL of a file on the local file system.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzfileserialportattachment/url"
+      },
+      "append": {
+        "doc": "A Boolean that indicates whether the virtual machine appends data to the file.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzfileserialportattachment/append"
+      }
+    },
+    "VZGenericMachineIdentifier": {
+      "dataRepresentation": {
+        "doc": "An opaque data representation of the VM’s identifier.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzgenericmachineidentifier/datarepresentation"
+      }
+    },
+    "VZGenericPlatformConfiguration": {
+      "machineIdentifier": {
+        "doc": "A value that represents a unique identifier for the virtual machine.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzgenericplatformconfiguration/machineidentifier"
+      },
+      "nestedVirtualizationEnabled": {
+        "doc": "A Boolean value that indicates whether nested virtualization is in an enabled state.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzgenericplatformconfiguration/isnestedvirtualizationenabled"
+      },
+      "nestedVirtualizationSupported": {
+        "doc": "A Boolean value that describes whether the platform configuration supports nested virtualization.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzgenericplatformconfiguration/isnestedvirtualizationsupported"
+      }
+    },
+    "VZGraphicsDevice": {
+      "displays": {
+        "doc": "The list of graphics displays configured for this graphics device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzgraphicsdevice/displays"
+      }
+    },
+    "VZGraphicsDisplay": {
+      "sizeInPixels": {
+        "doc": "Returns the size of the display, in pixels.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzgraphicsdisplay/sizeinpixels"
+      }
+    },
+    "VZLinuxBootLoader": {
+      "commandLine": {
+        "doc": "The command-line parameters to pass to the Linux kernel at boot time.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzlinuxbootloader/commandline"
+      },
+      "initialRamdiskURL": {
+        "doc": "The location of an optional RAM disk, which the boot loader maps into memory before it boots the Linux kernel.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzlinuxbootloader/initialramdiskurl"
+      },
+      "kernelURL": {
+        "doc": "The URL of the Linux kernel file.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzlinuxbootloader/kernelurl"
+      }
+    },
+    "VZLinuxRosettaAbstractSocketCachingOptions": {
+      "maximumNameLength": {
+        "doc": "The maximum length of name that the framework allows.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettaabstractsocketcachingoptions/maximumnamelength"
+      },
+      "name": {
+        "doc": "The name of the abstract socket that Rosetta uses.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettaabstractsocketcachingoptions/name"
+      }
+    },
+    "VZLinuxRosettaDirectoryShare": {
+      "VZLinuxRosettaDirectoryShare.CachingOptions": {
+        "doc": "Socket values you specify to configure Rosetta’s caching capabilities.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettadirectoryshare/cachingoptions-swift.enum"
+      },
+      "availability": {
+        "doc": "A value that indicates the current state of Rosetta’s availability.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettadirectoryshare/availability"
+      },
+      "cachingOptions": {
+        "doc": "The value that enables translation caching and configures the socket communication type for Rosetta.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettadirectoryshare/cachingoptions-swift.property"
+      },
+      "options": {
+        "doc": "The value that enables translation caching and configures the socket communication type for Rosetta.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettadirectoryshare/options"
+      },
+      "setCachingOptions(_:)": {
+        "doc": "Sets the Rosetta caching options using the options you specify.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettadirectoryshare/setcachingoptions(_:)"
+      }
+    },
+    "VZLinuxRosettaUnixSocketCachingOptions": {
+      "maximumPathLength": {
+        "doc": "The maximum allowed length of the path to the UNIX domain socket.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettaunixsocketcachingoptions/maximumpathlength"
+      },
+      "path": {
+        "doc": "The path to the UNIX domain socket that Rosetta uses.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzlinuxrosettaunixsocketcachingoptions/path"
+      }
+    },
+    "VZMACAddress": {
+      "ethernetAddress": {
+        "doc": "The MAC address as an Ethernet data structure.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacaddress/ethernetaddress"
+      },
+      "isBroadcastAddress": {
+        "doc": "A Boolean value that indicates whether the address is a broadcast address.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacaddress/isbroadcastaddress"
+      },
+      "isLocallyAdministeredAddress": {
+        "doc": "A Boolean value that indicates whether the address is a locally administered address (LAA).",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacaddress/islocallyadministeredaddress"
+      },
+      "isMulticastAddress": {
+        "doc": "A Boolean value that indicates whether the address is a multicast address.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacaddress/ismulticastaddress"
+      },
+      "isUnicastAddress": {
+        "doc": "A Boolean value that indicates whether the address is a unicast address.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacaddress/isunicastaddress"
+      },
+      "isUniversallyAdministeredAddress": {
+        "doc": "A Boolean value that indicates whether the address is a universally adminstered address (UAA).",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacaddress/isuniversallyadministeredaddress"
+      },
+      "string": {
+        "doc": "The MAC address as a formatted string.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacaddress/string"
+      }
+    },
+    "VZMacAuxiliaryStorage": {
+      "URL": {
+        "doc": "The URL of the auxiliary storage on the local file system.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacauxiliarystorage/url"
+      },
+      "VZMacAuxiliaryStorageInitializationOptions": {
+        "doc": "Options you can set when creating new auxiliary storage.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacauxiliarystorage/initializationoptions"
+      },
+      "init(contentsOfURL:)": {
+        "doc": "Initializes an auxiliary storage object with data from the location at the URL you provide.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacauxiliarystorage/init(contentsofurl:)"
+      }
+    },
+    "VZMacGraphicsDeviceConfiguration": {
+      "displays": {
+        "doc": "The displays associated with this graphics device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacgraphicsdeviceconfiguration/displays"
+      }
+    },
+    "VZMacGraphicsDisplay": {
+      "pixelsPerInch": {
+        "doc": "Returns the pixel density of the display in pixels per inch.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacgraphicsdisplay/pixelsperinch"
+      }
+    },
+    "VZMacGraphicsDisplayConfiguration": {
+      "heightInPixels": {
+        "doc": "The height of the display, in pixels.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacgraphicsdisplayconfiguration/heightinpixels"
+      },
+      "pixelsPerInch": {
+        "doc": "The pixel density in pixels per inch.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacgraphicsdisplayconfiguration/pixelsperinch"
+      },
+      "widthInPixels": {
+        "doc": "The width of the display, in pixels.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacgraphicsdisplayconfiguration/widthinpixels"
+      }
+    },
+    "VZMacHardwareModel": {
+      "dataRepresentation": {
+        "doc": "Returns the opaque data representation of the hardware model.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmachardwaremodel/datarepresentation"
+      },
+      "supported": {
+        "doc": "A Boolean value that indicates whether the host supports this hardware model.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmachardwaremodel/issupported"
+      }
+    },
+    "VZMacMachineIdentifier": {
+      "dataRepresentation": {
+        "doc": "Returns the opaque data representation of the machine identifier.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacmachineidentifier/datarepresentation"
+      }
+    },
+    "VZMacOSConfigurationRequirements": {
+      "hardwareModel": {
+        "doc": "The hardware model for this configuration.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosconfigurationrequirements/hardwaremodel"
+      },
+      "minimumSupportedCPUCount": {
+        "doc": "The minimum supported number of CPUs for this configuration.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosconfigurationrequirements/minimumsupportedcpucount"
+      },
+      "minimumSupportedMemorySize": {
+        "doc": "The minimum supported memory size for this configuration.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosconfigurationrequirements/minimumsupportedmemorysize"
+      }
+    },
+    "VZMacOSInstaller": {
+      "install(completionHandler:)": {
+        "doc": "Start installing macOS.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosinstaller/install(completionhandler:)"
+      },
+      "progress": {
+        "doc": "A progress object that you can use to observe or cancel an installation.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosinstaller/progress"
+      },
+      "restoreImageURL": {
+        "doc": "The restore image URL used to initialize this installer.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosinstaller/restoreimageurl"
+      },
+      "virtualMachine": {
+        "doc": "The virtual machine used to initialize this installer.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosinstaller/virtualmachine"
+      }
+    },
+    "VZMacOSRestoreImage": {
+      "URL": {
+        "doc": "The URL of this restore image.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosrestoreimage/url"
+      },
+      "buildVersion": {
+        "doc": "The build version this restore image contains.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosrestoreimage/buildversion"
+      },
+      "fetchLatestSupported(completionHandler:)": {
+        "doc": "Fetches the latest restore image supported by this host from the network.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosrestoreimage/fetchlatestsupported(completionhandler:)"
+      },
+      "load(from:completionHandler:)": {
+        "doc": "Load a restore image from a file on the local file system.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosrestoreimage/load(from:completionhandler:)"
+      },
+      "mostFeaturefulSupportedConfiguration": {
+        "doc": "This object represents the most fully featured configuration that’s supported by both the current host and by this restore image.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosrestoreimage/mostfeaturefulsupportedconfiguration"
+      },
+      "operatingSystemVersion": {
+        "doc": "The operating system version this restore image contains.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosrestoreimage/operatingsystemversion"
+      },
+      "supported": {
+        "doc": "A Boolean value that indicates whether the current host supports this restore image.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosrestoreimage/issupported"
+      }
+    },
+    "VZMacOSVirtualMachineStartOptions": {
+      "guestProvisioningOptions": {
+        "doc": "A value that controls provisioning a macOS guest.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosvirtualmachinestartoptions/guestprovisioningoptions"
+      },
+      "startUpFromMacOSRecovery": {
+        "doc": "A Boolean value that indicates whether the macOS guest should start in recovery mode.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacosvirtualmachinestartoptions/startupfrommacosrecovery"
+      }
+    },
+    "VZMacPlatformConfiguration": {
+      "auxiliaryStorage": {
+        "doc": "The Mac auxiliary storage.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacplatformconfiguration/auxiliarystorage"
+      },
+      "hardwareModel": {
+        "doc": "The Mac hardware model.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacplatformconfiguration/hardwaremodel"
+      },
+      "machineIdentifier": {
+        "doc": "The Mac machine identifier.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmacplatformconfiguration/machineidentifier"
+      }
+    },
+    "VZMultipleDirectoryShare": {
+      "directories": {
+        "doc": "The directories on the host to expose to the guest.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzmultipledirectoryshare/directories"
+      }
+    },
+    "VZNetworkBlockDeviceStorageDeviceAttachment": {
+      "URL": {
+        "doc": "The URL that refers to the NBD server to which the NBD client will connect.",
+        "url": "https://developer.apple.com/documentation/virtualization/vznetworkblockdevicestoragedeviceattachment/url"
+      },
+      "delegate": {
+        "doc": "The object that receives messages about changes to the network block device attachment.",
+        "url": "https://developer.apple.com/documentation/virtualization/vznetworkblockdevicestoragedeviceattachment/delegate"
+      },
+      "forcedReadOnly": {
+        "doc": "Returns a Boolean value that indicates whether the underlying disk attachment network is in a read-only state.",
+        "url": "https://developer.apple.com/documentation/virtualization/vznetworkblockdevicestoragedeviceattachment/isforcedreadonly"
+      },
+      "synchronizationMode": {
+        "doc": "The mode in which the NBD client synchronizes data with the NBD server.",
+        "url": "https://developer.apple.com/documentation/virtualization/vznetworkblockdevicestoragedeviceattachment/synchronizationmode"
+      },
+      "timeout": {
+        "doc": "The timeout value in seconds for the connection between the client and server.",
+        "url": "https://developer.apple.com/documentation/virtualization/vznetworkblockdevicestoragedeviceattachment/timeout"
+      }
+    },
+    "VZNetworkDevice": {
+      "attachment": {
+        "doc": "The network attachment that’s connected to this network device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vznetworkdevice/attachment"
+      }
+    },
+    "VZNetworkDeviceConfiguration": {
+      "MACAddress": {
+        "doc": "The media access control (MAC) address to assign to the network device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vznetworkdeviceconfiguration/macaddress"
+      },
+      "attachment": {
+        "doc": "The object that defines how the virtual network device communicates with the host system.",
+        "url": "https://developer.apple.com/documentation/virtualization/vznetworkdeviceconfiguration/attachment"
+      }
+    },
+    "VZSerialPortConfiguration": {
+      "attachment": {
+        "doc": "The object that defines how the configuration of the virtual machine’s serial port interfaces.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzserialportconfiguration/attachment"
+      }
+    },
+    "VZSharedDirectory": {
+      "URL": {
+        "doc": "A file URL to a directory on the host system to expose to the guest.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzshareddirectory/url"
+      },
+      "readOnly": {
+        "doc": "A Boolean value that indicates whether the directory is read-only to the guest.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzshareddirectory/isreadonly"
+      }
+    },
+    "VZSingleDirectoryShare": {
+      "directory": {
+        "doc": "The directory on the host to share with the guest VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzsingledirectoryshare/directory"
+      }
+    },
+    "VZSpiceAgentPortAttachment": {
+      "sharesClipboard": {
+        "doc": "A Boolean value that indicates whether the framework needs to share the clipboard between the host and the VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzspiceagentportattachment/sharesclipboard"
+      },
+      "spiceAgentPortName": {
+        "doc": "The name of the Virtio console port for the Spice guest agent.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzspiceagentportattachment/spiceagentportname"
+      }
+    },
+    "VZStorageDeviceConfiguration": {
+      "attachment": {
+        "doc": "The attachment object that provides the underlying storage for the device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzstoragedeviceconfiguration/attachment"
+      }
+    },
+    "VZUSBController": {
+      "usbDevices": {
+        "doc": "The list of attached USB devices for the controller.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzusbcontroller/usbdevices"
+      }
+    },
+    "VZUSBControllerConfiguration": {
+      "usbDevices": {
+        "doc": "The list of USB devices.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzusbcontrollerconfiguration/usbdevices"
+      }
+    },
+    "VZVirtioBlockDeviceConfiguration": {
+      "blockDeviceIdentifier": {
+        "doc": "The string that identifies the VIRTIO block device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioblockdeviceconfiguration/blockdeviceidentifier"
+      }
+    },
+    "VZVirtioConsoleDevice": {
+      "delegate": {
+        "doc": "The delegate object for the console device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoledevice/delegate"
+      },
+      "ports": {
+        "doc": "The array of console ports that a specific device uses.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoledevice/ports"
+      }
+    },
+    "VZVirtioConsoleDeviceConfiguration": {
+      "ports": {
+        "doc": "The list of Virtio port configurations.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoledeviceconfiguration/ports"
+      }
+    },
+    "VZVirtioConsolePort": {
+      "attachment": {
+        "doc": "An array of serial port attachments.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoleport/attachment"
+      },
+      "name": {
+        "doc": "The name of the port.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoleport/name"
+      }
+    },
+    "VZVirtioConsolePortArray": {
+      "maximumPortCount": {
+        "doc": "An unsigned integer that represents the maximum number of ports allocated by this device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoleportarray/maximumportcount"
+      }
+    },
+    "VZVirtioConsolePortConfiguration": {
+      "isConsole": {
+        "doc": "A Boolean value that indicates whether this port is a console.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoleportconfiguration/isconsole"
+      },
+      "name": {
+        "doc": "The name of the port.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoleportconfiguration/name"
+      }
+    },
+    "VZVirtioConsolePortConfigurationArray": {
+      "maximumPortCount": {
+        "doc": "An unsigned integer that represents the maximum number of ports allocated by this device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtioconsoleportconfigurationarray/maximumportcount"
+      }
+    },
+    "VZVirtioFileSystemDevice": {
+      "share": {
+        "doc": "A value that defines the directory share the host exposes to the guest VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiofilesystemdevice/share"
+      },
+      "tag": {
+        "doc": "A string that identifies the device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiofilesystemdevice/tag"
+      }
+    },
+    "VZVirtioFileSystemDeviceConfiguration": {
+      "macOSGuestAutomountTag": {
+        "doc": "A value that indicates that the guest needs to automount this file system device in the guest VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiofilesystemdeviceconfiguration/macosguestautomounttag"
+      },
+      "share": {
+        "doc": "A value that defines how the host exposes resources to the guest virtual machine.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiofilesystemdeviceconfiguration/share"
+      },
+      "tag": {
+        "doc": "A label that identifies this device in the guest VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiofilesystemdeviceconfiguration/tag"
+      }
+    },
+    "VZVirtioGraphicsDeviceConfiguration": {
+      "scanouts": {
+        "doc": "The array of output devices.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiographicsdeviceconfiguration/scanouts"
+      }
+    },
+    "VZVirtioGraphicsScanoutConfiguration": {
+      "heightInPixels": {
+        "doc": "An integer value that describes the height of the graphics device in pixels.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiographicsscanoutconfiguration/heightinpixels"
+      },
+      "widthInPixels": {
+        "doc": "An integer value that describes the width of the graphics device in pixels.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiographicsscanoutconfiguration/widthinpixels"
+      }
+    },
+    "VZVirtioSocketConnection": {
+      "destinationPort": {
+        "doc": "The destination port number of the connection.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosocketconnection/destinationport"
+      },
+      "fileDescriptor": {
+        "doc": "The file descriptor to use when sending data.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosocketconnection/filedescriptor"
+      },
+      "sourcePort": {
+        "doc": "The port number of the system that opened the connection.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosocketconnection/sourceport"
+      }
+    },
+    "VZVirtioSocketDevice": {
+      "connect(toPort:completionHandler:)": {
+        "doc": "Initiates a connection to the specified port of the guest operating system.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosocketdevice/connect(toport:completionhandler:)"
+      }
+    },
+    "VZVirtioSocketListener": {
+      "delegate": {
+        "doc": "The custom object you use to respond to port-based connection attempts.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosocketlistener/delegate"
+      }
+    },
+    "VZVirtioSoundDeviceConfiguration": {
+      "streams": {
+        "doc": "List of audio streams exposed by this device.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosounddeviceconfiguration/streams"
+      }
+    },
+    "VZVirtioSoundDeviceInputStreamConfiguration": {
+      "source": {
+        "doc": "An audio stream source that defines how the host supplies audio data for the guest.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosounddeviceinputstreamconfiguration/source"
+      }
+    },
+    "VZVirtioSoundDeviceOutputStreamConfiguration": {
+      "sink": {
+        "doc": "An audio stream sink that defines how the host handles audio data produced by the guest.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiosounddeviceoutputstreamconfiguration/sink"
+      }
+    },
+    "VZVirtioTraditionalMemoryBalloonDevice": {
+      "targetVirtualMachineMemorySize": {
+        "doc": "The target amount of memory, in bytes, to make available to the virtual machine.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtiotraditionalmemoryballoondevice/targetvirtualmachinememorysize"
+      }
+    },
+    "VZVirtualMachine": {
+      "VZVirtualMachineState": {
+        "doc": "The execution states of the VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/state-swift.enum"
+      },
+      "canPause": {
+        "doc": "A Boolean value that indicates whether you can pause the VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/canpause"
+      },
+      "canRequestStop": {
+        "doc": "A Boolean value that indicates whether you can ask the guest operating system to stop running.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/canrequeststop"
+      },
+      "canResume": {
+        "doc": "A Boolean value that indicates whether you can resume the VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/canresume"
+      },
+      "canStart": {
+        "doc": "A Boolean value that indicates whether you can start the VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/canstart"
+      },
+      "canStop": {
+        "doc": "A Boolean value that indicates whether you can stop the VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/canstop"
+      },
+      "consoleDevices": {
+        "doc": "The list of configured console devices on the VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/consoledevices"
+      },
+      "delegate": {
+        "doc": "A custom object you use to determine when the VM stops.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/delegate"
+      },
+      "directorySharingDevices": {
+        "doc": "The list of configured directory-sharing devices on the VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/directorysharingdevices"
+      },
+      "graphicsDevices": {
+        "doc": "The list of configured graphics devices on the virtual machine.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/graphicsdevices"
+      },
+      "memoryBalloonDevices": {
+        "doc": "The array of devices that you use to adjust the amount of memory available to the guest system.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/memoryballoondevices"
+      },
+      "networkDevices": {
+        "doc": "The list of configured network devices on the VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/networkdevices"
+      },
+      "pause(completionHandler:)": {
+        "doc": "Pauses a running VM and notifies the specified completion handler of the results.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/pause(completionhandler:)"
+      },
+      "queue": {
+        "doc": "The queue associated with this virtual machine.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/queue"
+      },
+      "resume(completionHandler:)": {
+        "doc": "Resumes a paused VM and notifies the specified completion handler of the results.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/resume(completionhandler:)"
+      },
+      "socketDevices": {
+        "doc": "The array of socket devices that the VM configures for use ports in the guest VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/socketdevices"
+      },
+      "start(completionHandler:)": {
+        "doc": "Starts the VM and notifies the specified completion handler if startup is successful.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/start(completionhandler:)"
+      },
+      "state": {
+        "doc": "The current execution state of the VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/state-swift.property"
+      },
+      "supported": {
+        "doc": "A Boolean value that indicates whether the system supports virtualization.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/issupported"
+      },
+      "usbControllers": {
+        "doc": "The list of runtime USB controller objects.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachine/usbcontrollers"
+      }
+    },
+    "VZVirtualMachineConfiguration": {
+      "CPUCount": {
+        "doc": "The number of CPUs you make available to the guest operating system.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/cpucount"
+      },
+      "audioDevices": {
+        "doc": "The list of audio devices.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/audiodevices"
+      },
+      "bootLoader": {
+        "doc": "The guest system to boot when the VM starts.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/bootloader"
+      },
+      "consoleDevices": {
+        "doc": "The array of console devices that you expose to the guest operating system.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/consoledevices"
+      },
+      "customVirtioDevices": {
+        "doc": "The array of custom virtio devices that you expose to the guest operating system.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/customvirtiodevices"
+      },
+      "directorySharingDevices": {
+        "doc": "The list of directory sharing devices.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/directorysharingdevices"
+      },
+      "entropyDevices": {
+        "doc": "The array of randomization devices that you expose to the guest operating system.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/entropydevices"
+      },
+      "graphicsDevices": {
+        "doc": "The list of graphics devices.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/graphicsdevices"
+      },
+      "keyboards": {
+        "doc": "The list of keyboards.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/keyboards"
+      },
+      "label": {
+        "doc": "An optional label for the virtual machine.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/label"
+      },
+      "maximumAllowedCPUCount": {
+        "doc": "The maximum number of CPUs you may configure for the VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/maximumallowedcpucount"
+      },
+      "maximumAllowedMemorySize": {
+        "doc": "The maximum amount of memory that you may configure for the VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/maximumallowedmemorysize"
+      },
+      "memoryBalloonDevices": {
+        "doc": "An array that you configure with a memory balloon device, used to update the memory in the VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/memoryballoondevices"
+      },
+      "memorySize": {
+        "doc": "The amount of physical memory the guest operating system recognizes.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/memorysize"
+      },
+      "minimumAllowedCPUCount": {
+        "doc": "The minimum number of CPUs you may configure for the VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/minimumallowedcpucount"
+      },
+      "minimumAllowedMemorySize": {
+        "doc": "The minimum amount of memory that you may configure for the VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/minimumallowedmemorysize"
+      },
+      "networkDevices": {
+        "doc": "The array of network devices that you expose to the guest operating system.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/networkdevices"
+      },
+      "platform": {
+        "doc": "The hardware platform to use.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/platform"
+      },
+      "pointingDevices": {
+        "doc": "The list of pointing devices.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/pointingdevices"
+      },
+      "serialPorts": {
+        "doc": "The array of serial ports that you expose to the guest operating system.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/serialports"
+      },
+      "socketDevices": {
+        "doc": "The socket device that you use to implement port-based communication with the guest operating system.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/socketdevices"
+      },
+      "storageDevices": {
+        "doc": "The array of storage devices that you expose to the guest operating system.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/storagedevices"
+      },
+      "usbControllers": {
+        "doc": "The list of configured USB controllers for the VM.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration/usbcontrollers"
+      }
+    },
+    "VZVirtualMachineView": {
+      "adaptor": {
+        "doc": "The virtual machine view adaptor.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineview/adaptor"
+      },
+      "automaticallyReconfiguresDisplay": {
+        "doc": "A Boolean value that indicates whether the graphics display associated with this view automatically reconfigures with respect to view changes.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineview/automaticallyreconfiguresdisplay"
+      },
+      "capturesSystemKeys": {
+        "doc": "A Boolean value that determines whether the system should send certain system keyboard shortcuts to the guest instead of the host.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineview/capturessystemkeys"
+      },
+      "virtualMachine": {
+        "doc": "The VM to display in the view.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvirtualmachineview/virtualmachine"
+      }
+    },
+    "VZVmnetNetworkDeviceAttachment": {
+      "network": {
+        "doc": "The network object that the you initialize the attachment with.",
+        "url": "https://developer.apple.com/documentation/virtualization/vzvmnetnetworkdeviceattachment/network"
+      }
+    }
+  }
+}

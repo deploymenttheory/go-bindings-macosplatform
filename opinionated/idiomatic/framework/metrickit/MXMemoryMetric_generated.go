@@ -36,11 +36,15 @@ func NewMemoryMetric() *MemoryMetric {
 	return &MemoryMetric{inner: raw.MXMemoryMetricFromID(_id)}
 }
 
+// @property      peakMemoryUsage @abstract      A single value representing the peak memory consumption of the application. @discussion    Dimensioned as NSUnitInformationStorage.
+//
 // PeakMemoryUsage calls the underlying PeakMemoryUsage.
 func (x *MemoryMetric) PeakMemoryUsage() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
 	return x.inner.PeakMemoryUsage()
 }
 
+// @property      averageSuspendedMemory @abstract      Average memory of the application upon suspend. @discussion    Dimensioned as NSUnitInformationStorage.
+//
 // AverageSuspendedMemory calls the underlying AverageSuspendedMemory.
 func (x *MemoryMetric) AverageSuspendedMemory() *raw.MXAverage[*foundation.NSUnitInformationStorage] {
 	return x.inner.AverageSuspendedMemory()

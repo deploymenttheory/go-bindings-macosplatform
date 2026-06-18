@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains a postal address that the data detection system matches. The DataDetection framework returns a postal address match in a `DDMatchPostalAddress` object, which optionally contains the matching parts of a postal address: street, city, state, postal code, and country.
+//
 // MatchPostalAddress wraps [raw.DDMatchPostalAddress] with a fluent Go API.
 type MatchPostalAddress struct {
 	inner *raw.DDMatchPostalAddress
@@ -36,6 +38,8 @@ func NewMatchPostalAddress() *MatchPostalAddress {
 	return &MatchPostalAddress{inner: raw.DDMatchPostalAddressFromID(_id)}
 }
 
+// The street name in a postal address.
+//
 // Street calls the underlying Street.
 func (x *MatchPostalAddress) Street() string {
 	_r := x.inner.Street()
@@ -45,6 +49,8 @@ func (x *MatchPostalAddress) Street() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The city name in a postal address.
+//
 // City calls the underlying City.
 func (x *MatchPostalAddress) City() string {
 	_r := x.inner.City()
@@ -54,6 +60,8 @@ func (x *MatchPostalAddress) City() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The state name in a postal address.
+//
 // State calls the underlying State.
 func (x *MatchPostalAddress) State() string {
 	_r := x.inner.State()
@@ -63,6 +71,8 @@ func (x *MatchPostalAddress) State() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The postal code in a postal address.
+//
 // PostalCode calls the underlying PostalCode.
 func (x *MatchPostalAddress) PostalCode() string {
 	_r := x.inner.PostalCode()
@@ -72,6 +82,8 @@ func (x *MatchPostalAddress) PostalCode() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The country or region name in a postal address.
+//
 // Country calls the underlying Country.
 func (x *MatchPostalAddress) Country() string {
 	_r := x.inner.Country()

@@ -76,12 +76,16 @@ func (x *CollaborationView) WithHeaderImage(headerImage *appkit.NSImage) *Collab
 	return x
 }
 
+// @abstract If you are using the built in manage share button, this delegate property will be forwarded along to the NSCloudSharingService that button presents. If you have your own and suppress the provided one via setShowManageButton, this does nothing.
+//
 // WithCloudSharingServiceDelegate sets the cloudSharingServiceDelegate property and returns the receiver for chaining.
 func (x *CollaborationView) WithCloudSharingServiceDelegate(cloudSharingServiceDelegate appkit.NSCloudSharingServiceDelegate) *CollaborationView {
 	x.inner.SetCloudSharingServiceDelegate(cloudSharingServiceDelegate)
 	return x
 }
 
+// @abstract sets the title of the manage participants button in the collaboration popover to the given string, defaults to "Manage Share"
+//
 // WithManageButtonTitle sets the manageButtonTitle property and returns the receiver for chaining.
 func (x *CollaborationView) WithManageButtonTitle(manageButtonTitle string) *CollaborationView {
 	x.inner.SetManageButtonTitle(foundation.NSStringStringWithUTF8String(manageButtonTitle))
@@ -93,6 +97,8 @@ func (x *CollaborationView) SetContentView(detailViewListContentView *appkit.NSV
 	x.inner.SetContentView(detailViewListContentView)
 }
 
+// @abstract Dismisses the popover, if presented. @param completion Called when the popover dismissal finishes.
+//
 // DismissPopover blocks until the operation completes or ctx is cancelled.
 func (x *CollaborationView) DismissPopover(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -107,6 +113,8 @@ func (x *CollaborationView) DismissPopover(ctx context.Context) error {
 	}
 }
 
+// @abstract whether the collaboration popover should show the default manage participants button in the popover, defaults to YES @param showManageButton whether the button should be hidden
+//
 // SetShowManageButton calls the underlying SetShowManageButton.
 func (x *CollaborationView) SetShowManageButton(showManageButton bool) {
 	x.inner.SetShowManageButton(showManageButton)
@@ -185,6 +193,8 @@ func (x *CollaborationView) MenuFormRepresentation() *appkit.NSMenuItem {
 	return x.inner.MenuFormRepresentation()
 }
 
+// @abstract If you are using the built in manage share button, this delegate property will be forwarded along to the NSCloudSharingService that button presents. If you have your own and suppress the provided one via setShowManageButton, this does nothing.
+//
 // CloudSharingServiceDelegate calls the underlying CloudSharingServiceDelegate.
 func (x *CollaborationView) CloudSharingServiceDelegate() appkit.NSCloudSharingServiceDelegate {
 	return x.inner.CloudSharingServiceDelegate()
@@ -195,6 +205,8 @@ func (x *CollaborationView) SetCloudSharingServiceDelegate(cloudSharingServiceDe
 	x.inner.SetCloudSharingServiceDelegate(cloudSharingServiceDelegate)
 }
 
+// @abstract sets the title of the manage participants button in the collaboration popover to the given string, defaults to "Manage Share"
+//
 // ManageButtonTitle calls the underlying ManageButtonTitle.
 func (x *CollaborationView) ManageButtonTitle() string {
 	_r := x.inner.ManageButtonTitle()

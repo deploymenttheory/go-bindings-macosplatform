@@ -36,6 +36,8 @@ func NewL2CAPChannel() *L2CAPChannel {
 	return &L2CAPChannel{inner: raw.CBL2CAPChannelFromID(_id)}
 }
 
+// @property peer @discussion The peer connected to the channel
+//
 // Peer calls the underlying Peer.
 func (x *L2CAPChannel) Peer() *Peer {
 	_r := x.inner.Peer()
@@ -45,16 +47,22 @@ func (x *L2CAPChannel) Peer() *Peer {
 	return &Peer{inner: _r}
 }
 
+// @property inputStream @discussion An NSStream used for reading data from the remote peer
+//
 // InputStream calls the underlying InputStream.
 func (x *L2CAPChannel) InputStream() *foundation.NSInputStream {
 	return x.inner.InputStream()
 }
 
+// @property outputStream @discussion An NSStream used for writing data to the peer
+//
 // OutputStream calls the underlying OutputStream.
 func (x *L2CAPChannel) OutputStream() *foundation.NSOutputStream {
 	return x.inner.OutputStream()
 }
 
+// @property PSM @discussion The PSM (Protocol/Service Multiplexer) of the channel
+//
 // PSM calls the underlying PSM.
 func (x *L2CAPChannel) PSM() uint16 {
 	return x.inner.PSM()

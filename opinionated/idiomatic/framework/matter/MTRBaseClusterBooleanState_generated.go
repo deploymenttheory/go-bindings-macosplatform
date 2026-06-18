@@ -33,6 +33,8 @@ func MTRBaseClusterBooleanStateFromID(id objc.ID) *MTRBaseClusterBooleanState {
 	return &MTRBaseClusterBooleanState{inner: raw.MTRBaseClusterBooleanStateFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterBooleanStateWithDeviceEndpointIDQueue creates a new [MTRBaseClusterBooleanState].
 func NewMTRBaseClusterBooleanStateWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterBooleanState {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterBooleanState")), objc.RegisterName("alloc"))

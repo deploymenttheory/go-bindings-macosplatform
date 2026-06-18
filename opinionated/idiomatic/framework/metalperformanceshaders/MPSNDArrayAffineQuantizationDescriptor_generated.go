@@ -39,6 +39,8 @@ func NewNDArrayAffineQuantizationDescriptor() *NDArrayAffineQuantizationDescript
 	return &NDArrayAffineQuantizationDescriptor{inner: raw.MPSNDArrayAffineQuantizationDescriptorFromID(_id)}
 }
 
+// @abstract   Initializes an affine quantization descriptor. @param      quantizationDataType    Which quantized datatype is used. @param      hasZeroPoint        A flag indicating that a zero-point input is expected. @param      hasMinValue        A flag indicating that a minimum value input is expected. @result     A new quantization descriptor.
+//
 // NewNDArrayAffineQuantizationDescriptorWithDataTypeHasZeroPointHasMinValue creates a new [NDArrayAffineQuantizationDescriptor].
 func NewNDArrayAffineQuantizationDescriptorWithDataTypeHasZeroPointHasMinValue(quantizationDataType mpscore.MPSDataType, hasZeroPoint bool, hasMinValue bool) *NDArrayAffineQuantizationDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayAffineQuantizationDescriptor")), objc.RegisterName("alloc"))
@@ -46,24 +48,32 @@ func NewNDArrayAffineQuantizationDescriptorWithDataTypeHasZeroPointHasMinValue(q
 	return &NDArrayAffineQuantizationDescriptor{inner: raw.MPSNDArrayAffineQuantizationDescriptorFromID(_id)}
 }
 
+// @property  hasZeroPoint @abstract  If yes then asymmetric quantization is used. See MPSNDArrayQuantizationScheme.
+//
 // WithHasZeroPoint sets the hasZeroPoint property and returns the receiver for chaining.
 func (x *NDArrayAffineQuantizationDescriptor) WithHasZeroPoint(hasZeroPoint bool) *NDArrayAffineQuantizationDescriptor {
 	x.inner.SetHasZeroPoint(hasZeroPoint)
 	return x
 }
 
+// @property  hasMinValue @abstract  If yes then offset is used. See MPSNDArrayQuantizationScheme.
+//
 // WithHasMinValue sets the hasMinValue property and returns the receiver for chaining.
 func (x *NDArrayAffineQuantizationDescriptor) WithHasMinValue(hasMinValue bool) *NDArrayAffineQuantizationDescriptor {
 	x.inner.SetHasMinValue(hasMinValue)
 	return x
 }
 
+// @property implicitZeroPoint @abstract If true and quantized values are signed, these are assumed to be stored with an implicit offset or zero-point of 2^(quantizationBitWidth-1) added to bring signed values into unsigned range. e.g. Int4 values are in range [-8,7]. If we add 8 to it values are in range [0,15] and can be encoded/stored as UInt4. Default is false. Its only currently applicable to Int4. Implementation will generate error for any other data type;
+//
 // WithImplicitZeroPoint sets the implicitZeroPoint property and returns the receiver for chaining.
 func (x *NDArrayAffineQuantizationDescriptor) WithImplicitZeroPoint(implicitZeroPoint bool) *NDArrayAffineQuantizationDescriptor {
 	x.inner.SetImplicitZeroPoint(implicitZeroPoint)
 	return x
 }
 
+// @property  hasZeroPoint @abstract  If yes then asymmetric quantization is used. See MPSNDArrayQuantizationScheme.
+//
 // HasZeroPoint calls the underlying HasZeroPoint.
 func (x *NDArrayAffineQuantizationDescriptor) HasZeroPoint() bool {
 	return x.inner.HasZeroPoint()
@@ -74,6 +84,8 @@ func (x *NDArrayAffineQuantizationDescriptor) SetHasZeroPoint(hasZeroPoint bool)
 	x.inner.SetHasZeroPoint(hasZeroPoint)
 }
 
+// @property  hasMinValue @abstract  If yes then offset is used. See MPSNDArrayQuantizationScheme.
+//
 // HasMinValue calls the underlying HasMinValue.
 func (x *NDArrayAffineQuantizationDescriptor) HasMinValue() bool {
 	return x.inner.HasMinValue()
@@ -84,6 +96,8 @@ func (x *NDArrayAffineQuantizationDescriptor) SetHasMinValue(hasMinValue bool) {
 	x.inner.SetHasMinValue(hasMinValue)
 }
 
+// @property implicitZeroPoint @abstract If true and quantized values are signed, these are assumed to be stored with an implicit offset or zero-point of 2^(quantizationBitWidth-1) added to bring signed values into unsigned range. e.g. Int4 values are in range [-8,7]. If we add 8 to it values are in range [0,15] and can be encoded/stored as UInt4. Default is false. Its only currently applicable to Int4. Implementation will generate error for any other data type;
+//
 // ImplicitZeroPoint calls the underlying ImplicitZeroPoint.
 func (x *NDArrayAffineQuantizationDescriptor) ImplicitZeroPoint() bool {
 	return x.inner.ImplicitZeroPoint()

@@ -44,6 +44,8 @@ func NewKeyframeSequenceWithCapacity(numItems uint) *KeyframeSequence {
 	return &KeyframeSequence{inner: raw.SKKeyframeSequenceFromID(_id)}
 }
 
+// Support coding and decoding via NSKeyedArchiver.
+//
 // NewKeyframeSequenceWithCoder creates a new [KeyframeSequence].
 func NewKeyframeSequenceWithCoder(aDecoder *foundation.NSCoder) *KeyframeSequence {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKKeyframeSequence")), objc.RegisterName("alloc"))

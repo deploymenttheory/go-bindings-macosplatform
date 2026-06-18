@@ -37,6 +37,8 @@ func NewMTRMetrics() *MTRMetrics {
 	return &MTRMetrics{inner: raw.MTRMetricsFromID(_id)}
 }
 
+// @brief Returns metric data corresponding to the metric identified by its key. @param [in] key Name of the metric @return An object containing the metric data, nil if key is invalid.
+//
 // MetricDataForKey calls the underlying MetricDataForKey.
 func (x *MTRMetrics) MetricDataForKey(key string) *MTRMetricData {
 	_r := x.inner.MetricDataForKey(foundation.NSStringStringWithUTF8String(key))
@@ -46,11 +48,15 @@ func (x *MTRMetrics) MetricDataForKey(key string) *MTRMetricData {
 	return &MTRMetricData{inner: _r}
 }
 
+// @brief Returns a unique identifier for the object
+//
 // UniqueIdentifier calls the underlying UniqueIdentifier.
 func (x *MTRMetrics) UniqueIdentifier() *foundation.NSUUID {
 	return x.inner.UniqueIdentifier()
 }
 
+// @brief Returns the names of all the metrics data items collected.
+//
 // AllKeys returns the collection as a Go slice.
 func (x *MTRMetrics) AllKeys() []string {
 	arr := x.inner.AllKeys()

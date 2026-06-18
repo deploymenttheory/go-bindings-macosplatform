@@ -35,6 +35,8 @@ func NewSymbolPulseEffect() *SymbolPulseEffect {
 	return &SymbolPulseEffect{inner: raw.NSSymbolPulseEffectFromID(_id)}
 }
 
+// Returns a copy of the effect that only animates annotated pulse layers.
+//
 // EffectWithByLayer calls the underlying EffectWithByLayer.
 func (x *SymbolPulseEffect) EffectWithByLayer() *SymbolPulseEffect {
 	_r := x.inner.EffectWithByLayer()
@@ -44,6 +46,8 @@ func (x *SymbolPulseEffect) EffectWithByLayer() *SymbolPulseEffect {
 	return &SymbolPulseEffect{inner: _r}
 }
 
+// Returns a copy of the effect that animates all layers of the symbol simultaneously.
+//
 // EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
 func (x *SymbolPulseEffect) EffectWithWholeSymbol() *SymbolPulseEffect {
 	_r := x.inner.EffectWithWholeSymbol()

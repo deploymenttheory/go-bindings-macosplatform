@@ -29,6 +29,8 @@ func CaptureSystemZoomSliderFromID(id objc.ID) *CaptureSystemZoomSlider {
 	return &CaptureSystemZoomSlider{inner: raw.AVCaptureSystemZoomSliderFromID(id)}
 }
 
+// @method initWithDevice: @abstract Initializes an `AVCaptureSystemZoomSlider` for controlling `device`. @param device The device to control. @discussion `AVCaptureSystemZoomSlider` may only be initialized with `AVCaptureDevice` instances that support setting `videoZoomFactor`, otherwise an `NSInvalidArgumentException` is thrown.
+//
 // NewCaptureSystemZoomSliderWithDevice creates a new [CaptureSystemZoomSlider].
 func NewCaptureSystemZoomSliderWithDevice(device *raw.AVCaptureDevice) *CaptureSystemZoomSlider {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureSystemZoomSlider")), objc.RegisterName("alloc"))
@@ -36,6 +38,8 @@ func NewCaptureSystemZoomSliderWithDevice(device *raw.AVCaptureDevice) *CaptureS
 	return &CaptureSystemZoomSlider{inner: raw.AVCaptureSystemZoomSliderFromID(_id)}
 }
 
+// @method initWithDevice:action @abstract Initializes an `AVCaptureSystemZoomSlider` for controlling `device` with a `@MainActor` `action` for handling `videoZoomFactor` changes. @param device The device to control. @param action An action called on `@MainActor` to handle `videoZoomFactor` changes by `AVCaptureSystemZoomSlider`. @discussion `action` is **only** called when `videoZoomFactor` is changed by this control. Clients should not change `videoZoomFactor` on the device when `action` is called. If you need to react to other sources of `videoZoomFactor` changes like `rampToVideoZoomFactor:withRate:` you will still need to use key-value observation. `AVCaptureSystemZoomSlider` may only be initialized with `AVCaptureDevice` instances that support setting `videoZoomFactor`, otherwise an `NSInvalidArgumentException` is thrown.
+//
 // NewCaptureSystemZoomSliderWithDeviceAction creates a new [CaptureSystemZoomSlider].
 func NewCaptureSystemZoomSliderWithDeviceAction(device *raw.AVCaptureDevice, action func(float64)) *CaptureSystemZoomSlider {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureSystemZoomSlider")), objc.RegisterName("alloc"))
@@ -43,6 +47,8 @@ func NewCaptureSystemZoomSliderWithDeviceAction(device *raw.AVCaptureDevice, act
 	return &CaptureSystemZoomSlider{inner: raw.AVCaptureSystemZoomSliderFromID(_id)}
 }
 
+// @property enabled @abstract Indicates whether the control should be enabled for user interaction. @discussion The value of this property is a `BOOL` that determines whether the control should be enabled for user interaction. Clients can set this property to keep a control added to an `AVCaptureSession` but prevent it from being interacted with by the user. A control's value may still be changed while it is disabled. The default value is `YES`.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *CaptureSystemZoomSlider) WithEnabled(enabled bool) *CaptureSystemZoomSlider {
 	x.inner.AVCaptureControl.SetEnabled(enabled)

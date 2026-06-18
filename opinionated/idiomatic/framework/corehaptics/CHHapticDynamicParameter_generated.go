@@ -31,6 +31,8 @@ func HapticDynamicParameterFromID(id objc.ID) *HapticDynamicParameter {
 	return &HapticDynamicParameter{inner: raw.CHHapticDynamicParameterFromID(id)}
 }
 
+// @method initWithParameterID:value:relativeTime @abstract Initialize a CHHapticDynamicParameter with a parameter ID, value, and relative time. @param parameterID The CHHapticDynamicParameterID for the desired parameter change. @param value The value for that parameter. @param time The time at which this parameter should be applied, relative to the start time of the pattern.
+//
 // NewHapticDynamicParameterWithParameterIDValueRelativeTime creates a new [HapticDynamicParameter].
 func NewHapticDynamicParameterWithParameterIDValueRelativeTime(parameterID *foundation.NSString, value float32, time_ float64) *HapticDynamicParameter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CHHapticDynamicParameter")), objc.RegisterName("alloc"))
@@ -38,18 +40,24 @@ func NewHapticDynamicParameterWithParameterIDValueRelativeTime(parameterID *foun
 	return &HapticDynamicParameter{inner: raw.CHHapticDynamicParameterFromID(_id)}
 }
 
+// @property value The value of the parameter.
+//
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *HapticDynamicParameter) WithValue(value float32) *HapticDynamicParameter {
 	x.inner.SetValue(value)
 	return x
 }
 
+// @property relativeTime The time at which the parameter should be applied, relative to the start time for the pattern.
+//
 // WithRelativeTime sets the relativeTime property and returns the receiver for chaining.
 func (x *HapticDynamicParameter) WithRelativeTime(relativeTime float64) *HapticDynamicParameter {
 	x.inner.SetRelativeTime(relativeTime)
 	return x
 }
 
+// @property parameterID The ID of the dynamic parameter to use.
+//
 // ParameterID calls the underlying ParameterID.
 func (x *HapticDynamicParameter) ParameterID() string {
 	_r := x.inner.ParameterID()
@@ -59,6 +67,8 @@ func (x *HapticDynamicParameter) ParameterID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property value The value of the parameter.
+//
 // Value calls the underlying Value.
 func (x *HapticDynamicParameter) Value() float32 {
 	return x.inner.Value()
@@ -69,6 +79,8 @@ func (x *HapticDynamicParameter) SetValue(value float32) {
 	x.inner.SetValue(value)
 }
 
+// @property relativeTime The time at which the parameter should be applied, relative to the start time for the pattern.
+//
 // RelativeTime calls the underlying RelativeTime.
 func (x *HapticDynamicParameter) RelativeTime() float64 {
 	return x.inner.RelativeTime()

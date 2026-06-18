@@ -35,6 +35,8 @@ func NewDistanceModelParameters() *DistanceModelParameters {
 	return &DistanceModelParameters{inner: raw.PHASEDistanceModelParametersFromID(_id)}
 }
 
+// @property fadeOutParameters @abstract Fade out parameters (optional).
+//
 // WithFadeOutParameters sets the fadeOutParameters property and returns the receiver for chaining.
 func (x *DistanceModelParameters) WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *DistanceModelParameters {
 	x.inner.SetFadeOutParameters(fadeOutParameters.Unwrap())

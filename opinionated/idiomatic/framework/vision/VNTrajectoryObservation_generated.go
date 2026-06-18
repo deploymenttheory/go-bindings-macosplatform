@@ -37,6 +37,8 @@ func NewTrajectoryObservation() *TrajectoryObservation {
 	return &TrajectoryObservation{inner: raw.VNTrajectoryObservationFromID(_id)}
 }
 
+// @brief The centroids of the contour being detected along the trajectory. @details These are the unprocessed centroid points of the detected contour that is tracked on the trajectory. The points may be slightly off the ideal trajectory as these are the measured points that fall within the allowed tolerance. The maximum number or past points is limited by the maximum trajectory length set in the request.
+//
 // DetectedPoints returns the collection as a Go slice.
 func (x *TrajectoryObservation) DetectedPoints() []*Point {
 	arr := x.inner.DetectedPoints()
@@ -48,6 +50,8 @@ func (x *TrajectoryObservation) DetectedPoints() []*Point {
 	})
 }
 
+// @brief The centroids of  the calculated trajectory from the detected points. @details These are the calculated centroid points along the ideal trajectory described by the parabolic equation. The equation and the projected points of the detected trajectory get refined over time. The maximum number of cached points is limited by the maximum points needed to describe the trajectory together with the parabolic equation.
+//
 // ProjectedPoints returns the collection as a Go slice.
 func (x *TrajectoryObservation) ProjectedPoints() []*Point {
 	arr := x.inner.ProjectedPoints()
@@ -59,11 +63,15 @@ func (x *TrajectoryObservation) ProjectedPoints() []*Point {
 	})
 }
 
+// @brief The coefficients of the parabolic equation y = a*x^2 + b*x + c. @details This equation describes the parabola on which the detected contour is traveling. The equation and the projected points get refined over time of the detected trajectory.
+//
 // EquationCoefficients calls the underlying EquationCoefficients.
 func (x *TrajectoryObservation) EquationCoefficients() unsafe.Pointer {
 	return x.inner.EquationCoefficients()
 }
 
+// @brief The moving average radius of the object being tracked. @details This is the radius of the object at each detected point (used to determine the trajectory) averaged.
+//
 // MovingAverageRadius calls the underlying MovingAverageRadius.
 func (x *TrajectoryObservation) MovingAverageRadius() float64 {
 	return x.inner.MovingAverageRadius()

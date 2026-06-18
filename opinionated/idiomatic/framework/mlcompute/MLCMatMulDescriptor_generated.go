@@ -35,16 +35,22 @@ func NewMatMulDescriptor() *MatMulDescriptor {
 	return &MatMulDescriptor{inner: raw.MLCMatMulDescriptorFromID(_id)}
 }
 
+// @brief a scalar to scale the result in C=alpha x X x Y. Default = 1.0
+//
 // Alpha calls the underlying Alpha.
 func (x *MatMulDescriptor) Alpha() float32 {
 	return x.inner.Alpha()
 }
 
+// @brief if true, transposes the last two dimensions of X. Default = False
+//
 // TransposesX calls the underlying TransposesX.
 func (x *MatMulDescriptor) TransposesX() bool {
 	return x.inner.TransposesX()
 }
 
+// @brief if true, transposes the last two dimensions of Y. Default = False
+//
 // TransposesY calls the underlying TransposesY.
 func (x *MatMulDescriptor) TransposesY() bool {
 	return x.inner.TransposesY()

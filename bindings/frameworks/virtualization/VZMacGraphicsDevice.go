@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a Mac graphics device.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzmacgraphicsdevice
 type VZMacGraphicsDevice struct {
 	VZGraphicsDevice

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class that defines the management of the initial process of the guest system.
+//
 // BootLoader wraps [raw.VZBootLoader] with a fluent Go API.
 type BootLoader struct {
 	inner *raw.VZBootLoader

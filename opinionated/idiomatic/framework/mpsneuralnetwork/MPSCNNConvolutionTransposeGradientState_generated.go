@@ -37,6 +37,8 @@ func NewCNNConvolutionTransposeGradientState() *CNNConvolutionTransposeGradientS
 	return &CNNConvolutionTransposeGradientState{inner: raw.MPSCNNConvolutionTransposeGradientStateFromID(_id)}
 }
 
+// @property   convolutionTranspose @abstract   The convolutionTranspose filter that produced the state.
+//
 // ConvolutionTranspose calls the underlying ConvolutionTranspose.
 func (x *CNNConvolutionTransposeGradientState) ConvolutionTranspose() *CNNConvolutionTranspose {
 	_r := x.inner.ConvolutionTranspose()

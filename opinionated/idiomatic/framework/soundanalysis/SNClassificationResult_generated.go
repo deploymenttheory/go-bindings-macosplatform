@@ -38,6 +38,8 @@ func NewClassificationResult() *ClassificationResult {
 	return &ClassificationResult{inner: raw.SNClassificationResultFromID(_id)}
 }
 
+// Retrieves the classification candidate with the specified identifier. - Parameter identifier: An identifier on which to query for a particular classification candidate. The query will match to any classification candidate whose `identifier` property (see `identifier` property of `SNClassification`) contains a value equal to the provided argument. - Returns: The classification candidate which has the specified identifier, if it exists. If no such candidate exists, `nil` will be returned.
+//
 // ClassificationForIdentifier calls the underlying ClassificationForIdentifier.
 func (x *ClassificationResult) ClassificationForIdentifier(identifier string) *Classification {
 	_r := x.inner.ClassificationForIdentifier(foundation.NSStringStringWithUTF8String(identifier))
@@ -47,6 +49,8 @@ func (x *ClassificationResult) ClassificationForIdentifier(identifier string) *C
 	return &Classification{inner: _r}
 }
 
+// All classification candidates, sorted with highest confidence first.
+//
 // Classifications returns the collection as a Go slice.
 func (x *ClassificationResult) Classifications() []*Classification {
 	arr := x.inner.Classifications()
@@ -58,6 +62,8 @@ func (x *ClassificationResult) Classifications() []*Classification {
 	})
 }
 
+// The time range in the client-provided audio stream to which this classification result corresponds Each CMTime contains of a value (audio frame count) and timescale (client sample rate). This enables the client to precisely identify the frame range in the original audio stream to which this result corresponds. Time ranges will often be in the past compared to the frame count of the most recent audio buffer provided to the analyzer, due to the inherent audio buffering operations required to deliver a full block of audio to an MLModel.
+//
 // TimeRange calls the underlying TimeRange.
 func (x *ClassificationResult) TimeRange() coremedia.CMTimeRange {
 	return x.inner.TimeRange()

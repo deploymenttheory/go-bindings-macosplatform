@@ -58,6 +58,8 @@ func NewKeyedUnarchiverForReadingWithDataDevice(data *foundation.NSData, device 
 	return &KeyedUnarchiver{inner: raw.MPSKeyedUnarchiverFromID(_id)}
 }
 
+// @abstract   Reports which device to use for unarchiving MPSKernels
+//
 // MpsMTLDevice calls the underlying MpsMTLDevice.
 func (x *KeyedUnarchiver) MpsMTLDevice() metal.MTLDevice {
 	return x.inner.MpsMTLDevice()

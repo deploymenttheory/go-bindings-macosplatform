@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A directory on the host that you can expose to a guest.
+//
 // SharedDirectory wraps [raw.VZSharedDirectory] with a fluent Go API.
 type SharedDirectory struct {
 	inner *raw.VZSharedDirectory
@@ -30,6 +32,8 @@ func SharedDirectoryFromID(id objc.ID) *SharedDirectory {
 	return &SharedDirectory{inner: raw.VZSharedDirectoryFromID(id)}
 }
 
+// Initialize with a host directory.
+//
 // NewSharedDirectoryWithURLReadOnly creates a new [SharedDirectory].
 func NewSharedDirectoryWithURLReadOnly(url string, readOnly bool) *SharedDirectory {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZSharedDirectory")), objc.RegisterName("alloc"))
@@ -37,11 +41,15 @@ func NewSharedDirectoryWithURLReadOnly(url string, readOnly bool) *SharedDirecto
 	return &SharedDirectory{inner: raw.VZSharedDirectoryFromID(_id)}
 }
 
+// @abstract File URL to a directory on the host to expose to the guest. @discussion The URL must point to an existing directory path in the host file system.
+//
 // URL calls the underlying URL.
 func (x *SharedDirectory) URL() *foundation.NSURL {
 	return x.inner.URL()
 }
 
+// @abstract Whether or not the directory will be exposed as read-only to the guest.
+//
 // IsReadOnly calls the underlying IsReadOnly.
 func (x *SharedDirectory) IsReadOnly() bool {
 	return x.inner.IsReadOnly()

@@ -35,6 +35,8 @@ func NewMIDIChannelEvent() *MIDIChannelEvent {
 	return &MIDIChannelEvent{inner: raw.AVMIDIChannelEventFromID(_id)}
 }
 
+// @property channel The MIDI channel for the event.  Range: 0-15.
+//
 // WithChannel sets the channel property and returns the receiver for chaining.
 func (x *MIDIChannelEvent) WithChannel(channel uint) *MIDIChannelEvent {
 	x.inner.SetChannel(channel)

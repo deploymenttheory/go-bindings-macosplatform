@@ -36,11 +36,15 @@ func NewLogEntrySignpost() *LogEntrySignpost {
 	return &LogEntrySignpost{inner: raw.OSLogEntrySignpostFromID(_id)}
 }
 
+// @property signpostIdentifier @abstract The signpost ID associated with this entry.
+//
 // SignpostIdentifier calls the underlying SignpostIdentifier.
 func (x *LogEntrySignpost) SignpostIdentifier() uint64 {
 	return x.inner.SignpostIdentifier()
 }
 
+// @property signpostName @abstract The signpost name associated with this entry.
+//
 // SignpostName calls the underlying SignpostName.
 func (x *LogEntrySignpost) SignpostName() string {
 	_r := x.inner.SignpostName()
@@ -50,6 +54,8 @@ func (x *LogEntrySignpost) SignpostName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property signpostType @abstract The signpost type associated with this entry.
+//
 // SignpostType calls the underlying SignpostType.
 func (x *LogEntrySignpost) SignpostType() OSLogEntrySignpostType {
 	return OSLogEntrySignpostType(x.inner.SignpostType())

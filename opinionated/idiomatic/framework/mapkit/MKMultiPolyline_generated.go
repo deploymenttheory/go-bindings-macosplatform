@@ -9,6 +9,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MultiPolyline wraps [raw.MKMultiPolyline] with a fluent Go API.
@@ -32,9 +33,18 @@ func MultiPolylineFromID(id objc.ID) *MultiPolyline {
 }
 
 // NewMultiPolylineWithPolylines creates a new [MultiPolyline].
-func NewMultiPolylineWithPolylines(polylines *foundation.NSArray[*raw.MKPolyline]) *MultiPolyline {
+func NewMultiPolylineWithPolylines(polylines ...PolylineProvider) *MultiPolyline {
+	_ptrs := make([]objc.ID, len(polylines))
+	for _i, _v := range polylines {
+		_ptrs[_i] = _v.asPolyline().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.MKPolyline]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.MKPolyline](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMultiPolyline")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPolylines:"), polylines.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPolylines:"), _arg0.Ptr())
 	return &MultiPolyline{inner: raw.MKMultiPolylineFromID(_id)}
 }
 

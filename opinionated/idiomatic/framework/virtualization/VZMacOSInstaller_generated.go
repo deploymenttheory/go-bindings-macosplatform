@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object you use to install macOS on the specified virtual machine.
+//
 // MacOSInstaller wraps [raw.VZMacOSInstaller] with a fluent Go API.
 type MacOSInstaller struct {
 	inner *raw.VZMacOSInstaller
@@ -33,6 +35,8 @@ func MacOSInstallerFromID(id objc.ID) *MacOSInstaller {
 	return &MacOSInstaller{inner: raw.VZMacOSInstallerFromID(id)}
 }
 
+// Creates a macOS installer object.
+//
 // NewMacOSInstallerWithVirtualMachineRestoreImageURL creates a new [MacOSInstaller].
 func NewMacOSInstallerWithVirtualMachineRestoreImageURL(virtualMachine *raw.VZVirtualMachine, restoreImageFileURL string) *MacOSInstaller {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacOSInstaller")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewMacOSInstallerWithVirtualMachineRestoreImageURL(virtualMachine *raw.VZVi
 	return &MacOSInstaller{inner: raw.VZMacOSInstallerFromID(_id)}
 }
 
+// Start installing macOS.
+//
 // Install blocks until the operation completes or ctx is cancelled.
 func (x *MacOSInstaller) Install(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -58,11 +64,15 @@ func (x *MacOSInstaller) Install(ctx context.Context) error {
 	}
 }
 
+// @abstract An NSProgress object that can be used to observe or cancel installation. @discussion If the progress object is cancelled before installation is started, an exception will be raised.
+//
 // Progress calls the underlying Progress.
 func (x *MacOSInstaller) Progress() *foundation.NSProgress {
 	return x.inner.Progress()
 }
 
+// @abstract The virtual machine that this installer was initialized with.
+//
 // VirtualMachine calls the underlying VirtualMachine.
 func (x *MacOSInstaller) VirtualMachine() *VirtualMachine {
 	_r := x.inner.VirtualMachine()
@@ -72,6 +82,8 @@ func (x *MacOSInstaller) VirtualMachine() *VirtualMachine {
 	return &VirtualMachine{inner: _r}
 }
 
+// @abstract The restore image URL that this installer was initialized with.
+//
 // RestoreImageURL calls the underlying RestoreImageURL.
 func (x *MacOSInstaller) RestoreImageURL() *foundation.NSURL {
 	return x.inner.RestoreImageURL()

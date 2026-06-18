@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that loads and configures a Linux kernel as the guest system of your VM.
+//
 // LinuxBootLoader wraps [raw.VZLinuxBootLoader] with a fluent Go API.
 type LinuxBootLoader struct {
 	inner *raw.VZLinuxBootLoader
@@ -37,6 +39,8 @@ func NewLinuxBootLoader() *LinuxBootLoader {
 	return &LinuxBootLoader{inner: raw.VZLinuxBootLoaderFromID(_id)}
 }
 
+// Creates a boot loader that launches the Linux kernel at the specified URL.
+//
 // NewLinuxBootLoaderWithKernelURL creates a new [LinuxBootLoader].
 func NewLinuxBootLoaderWithKernelURL(kernelURL string) *LinuxBootLoader {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZLinuxBootLoader")), objc.RegisterName("alloc"))
@@ -44,24 +48,32 @@ func NewLinuxBootLoaderWithKernelURL(kernelURL string) *LinuxBootLoader {
 	return &LinuxBootLoader{inner: raw.VZLinuxBootLoaderFromID(_id)}
 }
 
+// The URL of the Linux kernel file.
+//
 // WithKernelURL sets the kernelURL property and returns the receiver for chaining.
 func (x *LinuxBootLoader) WithKernelURL(kernelURL string) *LinuxBootLoader {
 	x.inner.SetKernelURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(kernelURL)))
 	return x
 }
 
+// The command-line parameters to pass to the Linux kernel at boot time.
+//
 // WithCommandLine sets the commandLine property and returns the receiver for chaining.
 func (x *LinuxBootLoader) WithCommandLine(commandLine string) *LinuxBootLoader {
 	x.inner.SetCommandLine(foundation.NSStringStringWithUTF8String(commandLine))
 	return x
 }
 
+// The location of an optional RAM disk, which the boot loader maps into memory before it boots the Linux kernel.
+//
 // WithInitialRamdiskURL sets the initialRamdiskURL property and returns the receiver for chaining.
 func (x *LinuxBootLoader) WithInitialRamdiskURL(initialRamdiskURL string) *LinuxBootLoader {
 	x.inner.SetInitialRamdiskURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(initialRamdiskURL)))
 	return x
 }
 
+// @abstract URL of the Linux kernel.
+//
 // KernelURL calls the underlying KernelURL.
 func (x *LinuxBootLoader) KernelURL() *foundation.NSURL {
 	return x.inner.KernelURL()
@@ -72,6 +84,8 @@ func (x *LinuxBootLoader) SetKernelURL(kernelURL string) {
 	x.inner.SetKernelURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(kernelURL)))
 }
 
+// @abstract Define the command-line parameters passed to the kernel on boot. @link https://www.kernel.org/doc/html/latest/admin-guide/kernel-parameters.html
+//
 // CommandLine calls the underlying CommandLine.
 func (x *LinuxBootLoader) CommandLine() string {
 	_r := x.inner.CommandLine()

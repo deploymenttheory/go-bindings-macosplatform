@@ -219,8 +219,17 @@ func (x *MetadataQuery) ValueListAttributes() []string {
 }
 
 // SetValueListAttributes calls the underlying SetValueListAttributes.
-func (x *MetadataQuery) SetValueListAttributes(valueListAttributes *raw.NSArray[*raw.NSString]) {
-	x.inner.SetValueListAttributes(valueListAttributes)
+func (x *MetadataQuery) SetValueListAttributes(valueListAttributes ...StringProvider) {
+	_ptrs := make([]objc.ID, len(valueListAttributes))
+	for _i, _v := range valueListAttributes {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetValueListAttributes(_arg0)
 }
 
 // GroupingAttributes returns the collection as a Go slice.
@@ -235,8 +244,17 @@ func (x *MetadataQuery) GroupingAttributes() []string {
 }
 
 // SetGroupingAttributes calls the underlying SetGroupingAttributes.
-func (x *MetadataQuery) SetGroupingAttributes(groupingAttributes *raw.NSArray[*raw.NSString]) {
-	x.inner.SetGroupingAttributes(groupingAttributes)
+func (x *MetadataQuery) SetGroupingAttributes(groupingAttributes ...StringProvider) {
+	_ptrs := make([]objc.ID, len(groupingAttributes))
+	for _i, _v := range groupingAttributes {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetGroupingAttributes(_arg0)
 }
 
 // NotificationBatchingInterval calls the underlying NotificationBatchingInterval.
@@ -353,9 +371,9 @@ type MetadataQueryable interface {
 	SortDescriptors() []*SortDescriptor
 	SetSortDescriptors(sortDescriptors *raw.NSArray[*raw.NSSortDescriptor])
 	ValueListAttributes() []string
-	SetValueListAttributes(valueListAttributes *raw.NSArray[*raw.NSString])
+	SetValueListAttributes(valueListAttributes ...StringProvider)
 	GroupingAttributes() []string
-	SetGroupingAttributes(groupingAttributes *raw.NSArray[*raw.NSString])
+	SetGroupingAttributes(groupingAttributes ...StringProvider)
 	NotificationBatchingInterval() float64
 	SetNotificationBatchingInterval(notificationBatchingInterval float64)
 	SearchScopes() *raw.NSArray[objc.ID]

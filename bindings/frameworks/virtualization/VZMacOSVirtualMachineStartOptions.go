@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that describes start options for macOS VMs.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzmacosvirtualmachinestartoptions
 type VZMacOSVirtualMachineStartOptions struct {
 	VZVirtualMachineStartOptions

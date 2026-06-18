@@ -36,6 +36,8 @@ func NewBinaryArchiveDescriptor() *BinaryArchiveDescriptor {
 	return &BinaryArchiveDescriptor{inner: raw.MTLBinaryArchiveDescriptorFromID(_id)}
 }
 
+// @property url @abstract The file URL from which to open a MTLBinaryArchive, or nil to create an empty MTLBinaryArchive.
+//
 // WithUrl sets the url property and returns the receiver for chaining.
 func (x *BinaryArchiveDescriptor) WithUrl(url string) *BinaryArchiveDescriptor {
 	x.inner.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))

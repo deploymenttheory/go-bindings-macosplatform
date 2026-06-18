@@ -38,22 +38,30 @@ func NewCapturePhotoOutputReadinessCoordinatorWithPhotoOutput(photoOutput *raw.A
 	return &CapturePhotoOutputReadinessCoordinator{inner: raw.AVCapturePhotoOutputReadinessCoordinatorFromID(_id)}
 }
 
+// @property delegate @abstract The receiver's delegate, called on the main queue. @discussion The value of this property is an object conforming to the AVCapturePhotoOutputReadinessCoordinatorDelegate protocol that will receive a callback when the captureReadiness property changes. Callbacks are delivered on the main queue, allowing UI updates to be done directly in the callback. A callback with the initial value of captureReadiness is delivered when delegate is set.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *CapturePhotoOutputReadinessCoordinator) WithDelegate(delegate raw.AVCapturePhotoOutputReadinessCoordinatorDelegate) *CapturePhotoOutputReadinessCoordinator {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @method startTrackingCaptureRequestUsingPhotoSettings: @abstract Track the capture request represented by the specified photo settings until it is enqueued to the photo output and update captureReadiness to include this request. @param settings The AVCapturePhotoSettings which will be passed to -[AVCapturePhotoOutput capturePhotoWithSettings:delegate] for this capture request. @discussion The captureReadiness property is updated to include the tracked request until the the photo output receives a settings object with the same or a newer uniqueID. It is recommended that the same photo settings be passed to -[AVCapturePhotoOutput capturePhotoWithSettings:delegate] to ensure the captureReadiness value is consistent once the capture begins. When called on the main queue the delegate callback is invoked synchronously before returning to ensure shutter availability is updated immediately and prevent queued touch events from initiating unwanted captures. The -startTrackingCaptureRequestUsingPhotoSettings: method can be called while in the SessionNotRunning state to allow the shutter button to be interactive while the session is being started on a background queue. An NSInvalidArgumentException is thrown if the photo settings are invalid.
+//
 // StartTrackingCaptureRequestUsingPhotoSettings calls the underlying StartTrackingCaptureRequestUsingPhotoSettings.
 func (x *CapturePhotoOutputReadinessCoordinator) StartTrackingCaptureRequestUsingPhotoSettings(settings *raw.AVCapturePhotoSettings) {
 	x.inner.StartTrackingCaptureRequestUsingPhotoSettings(settings)
 }
 
+// @method stopTrackingCaptureRequestUsingPhotoSettingsUniqueID: @abstract Stop tracking the capture request represented by the specified photo settings uniqueID and update captureReadiness to no longer include this request. @param settingsUniqueID The AVCapturePhotoSettings.uniqueID of the settings passed to -startTrackingCaptureRequestUsingPhotoSettings:. @discussion Tracking automatically stops when -[AVCapturePhotoOutput capturePhotoWithSettings:delegate] is called with a photo settings objects with the same or a newer uniqueID, but in cases where an error or other condition prevents calling -capturePhotoWithSettings:delegate tracking should be explicitly stopped to ensure the captureReadiness value is up to date. When called on the main queue the delegate callback is invoked synchronously before returning to ensure shutter availability is updated immediately.
+//
 // StopTrackingCaptureRequestUsingPhotoSettingsUniqueID calls the underlying StopTrackingCaptureRequestUsingPhotoSettingsUniqueID.
 func (x *CapturePhotoOutputReadinessCoordinator) StopTrackingCaptureRequestUsingPhotoSettingsUniqueID(settingsUniqueID int64) {
 	x.inner.StopTrackingCaptureRequestUsingPhotoSettingsUniqueID(settingsUniqueID)
 }
 
+// @property delegate @abstract The receiver's delegate, called on the main queue. @discussion The value of this property is an object conforming to the AVCapturePhotoOutputReadinessCoordinatorDelegate protocol that will receive a callback when the captureReadiness property changes. Callbacks are delivered on the main queue, allowing UI updates to be done directly in the callback. A callback with the initial value of captureReadiness is delivered when delegate is set.
+//
 // Delegate calls the underlying Delegate.
 func (x *CapturePhotoOutputReadinessCoordinator) Delegate() raw.AVCapturePhotoOutputReadinessCoordinatorDelegate {
 	return x.inner.Delegate()
@@ -64,6 +72,8 @@ func (x *CapturePhotoOutputReadinessCoordinator) SetDelegate(delegate raw.AVCapt
 	x.inner.SetDelegate(delegate)
 }
 
+// @property captureReadiness @abstract A value specifying whether the coordinator's photo output is ready to respond to new capture requests in a timely manner. @discussion The value incorporates the photo output's captureReadiness and any requests registered using -startTrackingCaptureRequestUsingPhotoSettings:. The value is updated before calling the -readinessCoordinator:captureReadinessDidChange: callback. See AVCapturePhotoOutput's captureReadiness documentation for a discussion of how to update shutter availability and appearance based on the captureReadiness value. This property is key-value observable and all change notifications are delivered on the main queue, allowing UI updates to be done directly in the callback.
+//
 // CaptureReadiness calls the underlying CaptureReadiness.
 func (x *CapturePhotoOutputReadinessCoordinator) CaptureReadiness() AVCapturePhotoOutputCaptureReadiness {
 	return AVCapturePhotoOutputCaptureReadiness(x.inner.CaptureReadiness())

@@ -30,6 +30,8 @@ func StrokePointFromID(id objc.ID) *StrokePoint {
 	return &StrokePoint{inner: raw.PKStrokePointFromID(id)}
 }
 
+// Create a new point with the provided properties.
+//
 // NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitude creates a new [StrokePoint].
 func NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitude(location corefoundation.CGPoint, timeOffset float64, size corefoundation.CGSize, opacity float64, force float64, azimuth float64, altitude float64) *StrokePoint {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKStrokePoint")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitude(locatio
 	return &StrokePoint{inner: raw.PKStrokePointFromID(_id)}
 }
 
+// Create a new point with the provided properties.
+//
 // NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScale creates a new [StrokePoint].
 func NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScale(location corefoundation.CGPoint, timeOffset float64, size corefoundation.CGSize, opacity float64, force float64, azimuth float64, altitude float64, secondaryScale float64) *StrokePoint {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKStrokePoint")), objc.RegisterName("alloc"))
@@ -44,6 +48,8 @@ func NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondar
 	return &StrokePoint{inner: raw.PKStrokePointFromID(_id)}
 }
 
+// Create a new point with the provided properties.
+//
 // NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScaleThreshold creates a new [StrokePoint].
 func NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScaleThreshold(location corefoundation.CGPoint, timeOffset float64, size corefoundation.CGSize, opacity float64, force float64, azimuth float64, altitude float64, secondaryScale float64, threshold float64) *StrokePoint {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKStrokePoint")), objc.RegisterName("alloc"))
@@ -51,46 +57,64 @@ func NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondar
 	return &StrokePoint{inner: raw.PKStrokePointFromID(_id)}
 }
 
+// Location of the point.
+//
 // Location calls the underlying Location.
 func (x *StrokePoint) Location() corefoundation.CGPoint {
 	return x.inner.Location()
 }
 
+// Time offset since the start of the stroke path in seconds.
+//
 // TimeOffset calls the underlying TimeOffset.
 func (x *StrokePoint) TimeOffset() float64 {
 	return x.inner.TimeOffset()
 }
 
+// Size of the point.
+//
 // Size calls the underlying Size.
 func (x *StrokePoint) Size() corefoundation.CGSize {
 	return x.inner.Size()
 }
 
+// Opacity of the point 0-2.
+//
 // Opacity calls the underlying Opacity.
 func (x *StrokePoint) Opacity() float64 {
 	return x.inner.Opacity()
 }
 
+// Azimuth of the point in radians, 0.0-2π radians
+//
 // Azimuth calls the underlying Azimuth.
 func (x *StrokePoint) Azimuth() float64 {
 	return x.inner.Azimuth()
 }
 
+// Force used to create this point.
+//
 // Force calls the underlying Force.
 func (x *StrokePoint) Force() float64 {
 	return x.inner.Force()
 }
 
+// Altitude used to create this point in radians, 0.0-π/2 radians
+//
 // Altitude calls the underlying Altitude.
 func (x *StrokePoint) Altitude() float64 {
 	return x.inner.Altitude()
 }
 
+// The scaling of the point for secondary effects. For example the scaling of the pigment in the watercolor ink.
+//
 // SecondaryScale calls the underlying SecondaryScale.
 func (x *StrokePoint) SecondaryScale() float64 {
 	return x.inner.SecondaryScale()
 }
 
+// The threshold for clipping the stroke rendering. When rendering only pixels with an alpha greater than the threshold are drawn. A threshold of 0 has no affect on rendering, a threshold of 1 does not draw anything. Thresholds are only used for some inks, eg. `PKInkIdentifierReed`.
+//
 // Threshold calls the underlying Threshold.
 func (x *StrokePoint) Threshold() float64 {
 	return x.inner.Threshold()

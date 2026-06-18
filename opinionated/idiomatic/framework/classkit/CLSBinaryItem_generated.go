@@ -30,6 +30,8 @@ func BinaryItemFromID(id objc.ID) *BinaryItem {
 	return &BinaryItem{inner: raw.CLSBinaryItemFromID(id)}
 }
 
+// @abstract      Create an item that represents a binary value @param         title           Title of the CLSBinaryItem. @param         identifier      An identifier that is unique within its owning activity. @param         valueType       The type of binary value. Ex. pass or fail.
+//
 // NewBinaryItemWithIdentifierTitleType creates a new [BinaryItem].
 func NewBinaryItemWithIdentifierTitleType(identifier string, title string, valueType CLSBinaryValueType) *BinaryItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLSBinaryItem")), objc.RegisterName("alloc"))
@@ -37,18 +39,24 @@ func NewBinaryItemWithIdentifierTitleType(identifier string, title string, value
 	return &BinaryItem{inner: raw.CLSBinaryItemFromID(_id)}
 }
 
+// @abstract      True or false value.
+//
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *BinaryItem) WithValue(value bool) *BinaryItem {
 	x.inner.SetValue(value)
 	return x
 }
 
+// @abstract      Title of what this ActivityItem represents. @discussion    This will be the title associated with the activity item in the generated progress report.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *BinaryItem) WithTitle(title string) *BinaryItem {
 	x.inner.CLSActivityItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// @abstract      True or false value.
+//
 // Value calls the underlying Value.
 func (x *BinaryItem) Value() bool {
 	return x.inner.Value()
@@ -59,6 +67,8 @@ func (x *BinaryItem) SetValue(value bool) {
 	x.inner.SetValue(value)
 }
 
+// @abstract      Value type of this CLSBinaryItem. @discussion    The type that best describes this CLSBinaryItem value.
+//
 // ValueType calls the underlying ValueType.
 func (x *BinaryItem) ValueType() CLSBinaryValueType {
 	return CLSBinaryValueType(x.inner.ValueType())

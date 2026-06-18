@@ -36,6 +36,8 @@ func NewRunningApplication() *RunningApplication {
 	return &RunningApplication{inner: raw.SCRunningApplicationFromID(_id)}
 }
 
+// @abstract bundleIdentifier the bundleIdentifier for the SCRunningApplication
+//
 // BundleIdentifier calls the underlying BundleIdentifier.
 func (x *RunningApplication) BundleIdentifier() string {
 	_r := x.inner.BundleIdentifier()
@@ -45,6 +47,8 @@ func (x *RunningApplication) BundleIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract applicationName the application name for the SCRunningApplication
+//
 // ApplicationName calls the underlying ApplicationName.
 func (x *RunningApplication) ApplicationName() string {
 	_r := x.inner.ApplicationName()
@@ -54,6 +58,8 @@ func (x *RunningApplication) ApplicationName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract processID the SCRunningApplication
+//
 // ProcessID calls the underlying ProcessID.
 func (x *RunningApplication) ProcessID() int {
 	return x.inner.ProcessID()

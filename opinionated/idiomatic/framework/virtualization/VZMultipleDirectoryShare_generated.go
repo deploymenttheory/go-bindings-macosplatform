@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes a directory share for multiple directories.
+//
 // MultipleDirectoryShare wraps [raw.VZMultipleDirectoryShare] with a fluent Go API.
 type MultipleDirectoryShare struct {
 	inner *raw.VZMultipleDirectoryShare
@@ -36,6 +38,8 @@ func NewMultipleDirectoryShare() *MultipleDirectoryShare {
 	return &MultipleDirectoryShare{inner: raw.VZMultipleDirectoryShareFromID(_id)}
 }
 
+// Creates the directory share with a set of directories on the host.
+//
 // NewMultipleDirectoryShareWithDirectories creates a new [MultipleDirectoryShare].
 func NewMultipleDirectoryShareWithDirectories(directories *foundation.NSDictionary[*foundation.NSString, *raw.VZSharedDirectory]) *MultipleDirectoryShare {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMultipleDirectoryShare")), objc.RegisterName("alloc"))
@@ -43,6 +47,8 @@ func NewMultipleDirectoryShareWithDirectories(directories *foundation.NSDictiona
 	return &MultipleDirectoryShare{inner: raw.VZMultipleDirectoryShareFromID(_id)}
 }
 
+// @abstract The directories on the host to expose to the guest. @discussion The dictionary string keys will be the name for the directory. The keys must be valid names or an exception will be raised. @see +[VZMultipleDirectoryShare validateName:error:]
+//
 // Directories calls the underlying Directories.
 func (x *MultipleDirectoryShare) Directories() *foundation.NSDictionary[*foundation.NSString, *raw.VZSharedDirectory] {
 	return x.inner.Directories()

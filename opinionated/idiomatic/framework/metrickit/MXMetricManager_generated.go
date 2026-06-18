@@ -36,16 +36,22 @@ func NewMetricManager() *MetricManager {
 	return &MetricManager{inner: raw.MXMetricManagerFromID(_id)}
 }
 
+// @method        addSubscriber:subscriber @abstract      Adds a subscriber to the metric manager. @param         subscriber An object that conforms to the MXMetricManagerSubscriber protocol. @discussion    Subscribers can receive metric payloads by conforming to the MXMetricManagerSubscriber protocol.
+//
 // AddSubscriber calls the underlying AddSubscriber.
 func (x *MetricManager) AddSubscriber(subscriber raw.MXMetricManagerSubscriber) {
 	x.inner.AddSubscriber(subscriber)
 }
 
+// @method        removeSubscriber:subscriber @abstract      Removes a subscriber from the metric manager. @param         subscriber An object that conforms to the MXMetricManagerSubscriber protocol. @discussion    The subscriber indicated, if previously registered, will no longer receive metric payloads.
+//
 // RemoveSubscriber calls the underlying RemoveSubscriber.
 func (x *MetricManager) RemoveSubscriber(subscriber raw.MXMetricManagerSubscriber) {
 	x.inner.RemoveSubscriber(subscriber)
 }
 
+// @property      pastPayloads @abstract      A list of past metric payloads received.
+//
 // PastPayloads returns the collection as a Go slice.
 func (x *MetricManager) PastPayloads() []*MetricPayload {
 	arr := x.inner.PastPayloads()
@@ -57,6 +63,8 @@ func (x *MetricManager) PastPayloads() []*MetricPayload {
 	})
 }
 
+// @property      pastDiagnosticPayloads @abstract      A list of past diagnostic payloads received.
+//
 // PastDiagnosticPayloads returns the collection as a Go slice.
 func (x *MetricManager) PastDiagnosticPayloads() []*DiagnosticPayload {
 	arr := x.inner.PastDiagnosticPayloads()

@@ -37,18 +37,24 @@ func NewResourceViewPoolDescriptor() *ResourceViewPoolDescriptor {
 	return &ResourceViewPoolDescriptor{inner: raw.MTLResourceViewPoolDescriptorFromID(_id)}
 }
 
+// Configures the number of resource views with which Metal creates the resource view pool.
+//
 // WithResourceViewCount sets the resourceViewCount property and returns the receiver for chaining.
 func (x *ResourceViewPoolDescriptor) WithResourceViewCount(resourceViewCount uint) *ResourceViewPoolDescriptor {
 	x.inner.SetResourceViewCount(resourceViewCount)
 	return x
 }
 
+// Assigns an optional label you to the resource view pool for debugging purposes.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ResourceViewPoolDescriptor) WithLabel(label string) *ResourceViewPoolDescriptor {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// Configures the number of resource views with which Metal creates the resource view pool.
+//
 // ResourceViewCount calls the underlying ResourceViewCount.
 func (x *ResourceViewPoolDescriptor) ResourceViewCount() uint {
 	return x.inner.ResourceViewCount()
@@ -59,6 +65,8 @@ func (x *ResourceViewPoolDescriptor) SetResourceViewCount(resourceViewCount uint
 	x.inner.SetResourceViewCount(resourceViewCount)
 }
 
+// Assigns an optional label you to the resource view pool for debugging purposes.
+//
 // Label calls the underlying Label.
 func (x *ResourceViewPoolDescriptor) Label() string {
 	_r := x.inner.Label()

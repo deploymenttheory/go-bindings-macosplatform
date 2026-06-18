@@ -36,24 +36,32 @@ func NewAVB17221AECPAddressAccessTLV() *AVB17221AECPAddressAccessTLV {
 	return &AVB17221AECPAddressAccessTLV{inner: raw.AVB17221AECPAddressAccessTLVFromID(_id)}
 }
 
+// @property	mode @abstract	The mode field of the Address Access TLV.
+//
 // WithMode sets the mode property and returns the receiver for chaining.
 func (x *AVB17221AECPAddressAccessTLV) WithMode(mode AVB17221AECPAddressAccessTLVMode) *AVB17221AECPAddressAccessTLV {
 	x.inner.SetMode(raw.AVB17221AECPAddressAccessTLVMode(mode))
 	return x
 }
 
+// @property	address @abstract	The address field of the Address Access TLV.
+//
 // WithAddress sets the address property and returns the receiver for chaining.
 func (x *AVB17221AECPAddressAccessTLV) WithAddress(address uint64) *AVB17221AECPAddressAccessTLV {
 	x.inner.SetAddress(address)
 	return x
 }
 
+// @property	memoryData @abstract	The memory_data field of the Address Access TLV.
+//
 // WithMemoryData sets the memoryData property and returns the receiver for chaining.
 func (x *AVB17221AECPAddressAccessTLV) WithMemoryData(memoryData *foundation.NSData) *AVB17221AECPAddressAccessTLV {
 	x.inner.SetMemoryData(memoryData)
 	return x
 }
 
+// @property	mode @abstract	The mode field of the Address Access TLV.
+//
 // Mode calls the underlying Mode.
 func (x *AVB17221AECPAddressAccessTLV) Mode() AVB17221AECPAddressAccessTLVMode {
 	return AVB17221AECPAddressAccessTLVMode(x.inner.Mode())
@@ -64,6 +72,8 @@ func (x *AVB17221AECPAddressAccessTLV) SetMode(mode AVB17221AECPAddressAccessTLV
 	x.inner.SetMode(raw.AVB17221AECPAddressAccessTLVMode(mode))
 }
 
+// @property	address @abstract	The address field of the Address Access TLV.
+//
 // Address calls the underlying Address.
 func (x *AVB17221AECPAddressAccessTLV) Address() uint64 {
 	return x.inner.Address()
@@ -74,6 +84,8 @@ func (x *AVB17221AECPAddressAccessTLV) SetAddress(address uint64) {
 	x.inner.SetAddress(address)
 }
 
+// @property	memoryData @abstract	The memory_data field of the Address Access TLV.
+//
 // MemoryData calls the underlying MemoryData.
 func (x *AVB17221AECPAddressAccessTLV) MemoryData() *foundation.NSData {
 	return x.inner.MemoryData()

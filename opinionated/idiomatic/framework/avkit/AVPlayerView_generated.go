@@ -41,36 +41,48 @@ func NewPlayerView() *PlayerView {
 	return &PlayerView{inner: raw.AVPlayerViewFromID(_id)}
 }
 
+// @property	player @abstract	The player from which to source the media content for the view.
+//
 // WithPlayer sets the player property and returns the receiver for chaining.
 func (x *PlayerView) WithPlayer(player *avfoundation.AVPlayer) *PlayerView {
 	x.inner.SetPlayer(player)
 	return x
 }
 
+// @property	controlsStyle @abstract	The style of the playback controls pane currently associated with the view. @discussion	After macOS 11, the floating style controls will always be used when presenting in fullscreen and AVPlayerViewControlsStyleNone is not specified.
+//
 // WithControlsStyle sets the controlsStyle property and returns the receiver for chaining.
 func (x *PlayerView) WithControlsStyle(controlsStyle AVPlayerViewControlsStyle) *PlayerView {
 	x.inner.SetControlsStyle(raw.AVPlayerViewControlsStyle(controlsStyle))
 	return x
 }
 
+// @property	videoGravity @abstract	A string defining how the video is displayed within an AVPlayerLayer bounds rect. @discussion	Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default.
+//
 // WithVideoGravity sets the videoGravity property and returns the receiver for chaining.
 func (x *PlayerView) WithVideoGravity(videoGravity *foundation.NSString) *PlayerView {
 	x.inner.SetVideoGravity(videoGravity)
 	return x
 }
 
+// @property	updatesNowPlayingInfoCenter @abstract	Whether or not the now playing info center should be updated. Default is YES.
+//
 // WithUpdatesNowPlayingInfoCenter sets the updatesNowPlayingInfoCenter property and returns the receiver for chaining.
 func (x *PlayerView) WithUpdatesNowPlayingInfoCenter(updatesNowPlayingInfoCenter bool) *PlayerView {
 	x.inner.SetUpdatesNowPlayingInfoCenter(updatesNowPlayingInfoCenter)
 	return x
 }
 
+// @property	delegate @abstract	The receiver's delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *PlayerView) WithDelegate(delegate raw.AVPlayerViewDelegate) *PlayerView {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @property		speeds @abstract		A list of user selectable playback speeds to be shown in the playback speed control. @discussion	By default this property will be set to the systemDefaultSpeeds class property. Setting this property to nil will hide the playback speed selection UI. To set the currently selected playback speed programmatically, either set the defaultRate on the AVPlayer associated with this view controller or use the selectSpeed method on AVPlayerView.
+//
 // WithSpeeds sets the collection, converting the Go slice to an NSArray.
 func (x *PlayerView) WithSpeeds(items ...*raw.AVPlaybackSpeed) *PlayerView {
 	if len(items) == 0 {
@@ -89,88 +101,118 @@ func (x *PlayerView) WithSpeeds(items ...*raw.AVPlaybackSpeed) *PlayerView {
 	return x
 }
 
+// @property	allowsVideoFrameAnalysis @abstract	When set to YES, the AVPlayerView will try to find objects, text and people while the media is paused. When an object is found, the user will be able to interact with it selecting and right clicking to present a context menu. Default is YES.
+//
 // WithAllowsVideoFrameAnalysis sets the allowsVideoFrameAnalysis property and returns the receiver for chaining.
 func (x *PlayerView) WithAllowsVideoFrameAnalysis(allowsVideoFrameAnalysis bool) *PlayerView {
 	x.inner.SetAllowsVideoFrameAnalysis(allowsVideoFrameAnalysis)
 	return x
 }
 
+// @property	videoFrameAnalysisTypes @abstract	The types of items AVPlayerView looks for in a paused video frame.
+//
 // WithVideoFrameAnalysisTypes sets the videoFrameAnalysisTypes property and returns the receiver for chaining.
 func (x *PlayerView) WithVideoFrameAnalysisTypes(videoFrameAnalysisTypes AVVideoFrameAnalysisType) *PlayerView {
 	x.inner.SetVideoFrameAnalysisTypes(raw.AVVideoFrameAnalysisType(videoFrameAnalysisTypes))
 	return x
 }
 
+// @property	allowsMagnification @abstract	Whether the magnify gesture will change the video's view magnification. @discussion	The default value is NO. This property only effects whether the magnify gesture triggers magnification. A client can still programmatically change magnification even when the value of this is NO. This behavior matches the behavior of NSScrollView.
+//
 // WithAllowsMagnification sets the allowsMagnification property and returns the receiver for chaining.
 func (x *PlayerView) WithAllowsMagnification(allowsMagnification bool) *PlayerView {
 	x.inner.SetAllowsMagnification(allowsMagnification)
 	return x
 }
 
+// @property	magnification @abstract	The factor by which the video's view is currently scaled. @discussion	The default value is 1.0. The value cannot be smaller than 1.0 or larger 64.0. Nearest neighbor interpolation will be used once the content has been zoomed past a certain factor.
+//
 // WithMagnification sets the magnification property and returns the receiver for chaining.
 func (x *PlayerView) WithMagnification(magnification float64) *PlayerView {
 	x.inner.SetMagnification(magnification)
 	return x
 }
 
+// Describes how High Dynamic Range (HDR) video content renders. Defaults to “AVDisplayDynamicRangeAutomatic“. - Note: This property will only have effect if the video content supports HDR.
+//
 // WithPreferredDisplayDynamicRange sets the preferredDisplayDynamicRange property and returns the receiver for chaining.
 func (x *PlayerView) WithPreferredDisplayDynamicRange(preferredDisplayDynamicRange AVDisplayDynamicRange) *PlayerView {
 	x.inner.SetPreferredDisplayDynamicRange(raw.AVDisplayDynamicRange(preferredDisplayDynamicRange))
 	return x
 }
 
+// @property	showsFrameSteppingButtons @abstract	Replace scanning controls in the playback UI with frame stepping buttons. Default is NO.
+//
 // WithShowsFrameSteppingButtons sets the showsFrameSteppingButtons property and returns the receiver for chaining.
 func (x *PlayerView) WithShowsFrameSteppingButtons(showsFrameSteppingButtons bool) *PlayerView {
 	x.inner.SetShowsFrameSteppingButtons(showsFrameSteppingButtons)
 	return x
 }
 
+// @property	showsSharingServiceButton @abstract	Whether or not the controls pane will show a sharing service button when the current player item can be shared. Default is NO.
+//
 // WithShowsSharingServiceButton sets the showsSharingServiceButton property and returns the receiver for chaining.
 func (x *PlayerView) WithShowsSharingServiceButton(showsSharingServiceButton bool) *PlayerView {
 	x.inner.SetShowsSharingServiceButton(showsSharingServiceButton)
 	return x
 }
 
+// @property	actionPopUpButtonMenu @abstract	Clients can set this property in order to show an action pop up button. Default is nil.
+//
 // WithActionPopUpButtonMenu sets the actionPopUpButtonMenu property and returns the receiver for chaining.
 func (x *PlayerView) WithActionPopUpButtonMenu(actionPopUpButtonMenu *appkit.NSMenu) *PlayerView {
 	x.inner.SetActionPopUpButtonMenu(actionPopUpButtonMenu)
 	return x
 }
 
+// @property	showsFullScreenToggleButton @abstract	Whether or not the controls pane will show a full screen toggle button. Default is NO.
+//
 // WithShowsFullScreenToggleButton sets the showsFullScreenToggleButton property and returns the receiver for chaining.
 func (x *PlayerView) WithShowsFullScreenToggleButton(showsFullScreenToggleButton bool) *PlayerView {
 	x.inner.SetShowsFullScreenToggleButton(showsFullScreenToggleButton)
 	return x
 }
 
+// @property    showsTimecodes @abstract    If timecodes are available, allow the AVPlayerView controls to enter timecode mode. Default is NO.
+//
 // WithShowsTimecodes sets the showsTimecodes property and returns the receiver for chaining.
 func (x *PlayerView) WithShowsTimecodes(showsTimecodes bool) *PlayerView {
 	x.inner.SetShowsTimecodes(showsTimecodes)
 	return x
 }
 
+// @property	allowsPictureInPicturePlayback @abstract	Whether or not the receiver allows Picture in Picture playback. Default is NO.
+//
 // WithAllowsPictureInPicturePlayback sets the allowsPictureInPicturePlayback property and returns the receiver for chaining.
 func (x *PlayerView) WithAllowsPictureInPicturePlayback(allowsPictureInPicturePlayback bool) *PlayerView {
 	x.inner.SetAllowsPictureInPicturePlayback(allowsPictureInPicturePlayback)
 	return x
 }
 
+// @property	pictureInPictureDelegate @abstract	A delegate for customizing Picture in Picture playback experience.
+//
 // WithPictureInPictureDelegate sets the pictureInPictureDelegate property and returns the receiver for chaining.
 func (x *PlayerView) WithPictureInPictureDelegate(pictureInPictureDelegate raw.AVPlayerViewPictureInPictureDelegate) *PlayerView {
 	x.inner.SetPictureInPictureDelegate(pictureInPictureDelegate)
 	return x
 }
 
+// @property		selectSpeed @param			speed The playback speed to select. @abstract		Sets the input AVPlaybackSpeed as the selected speed. @discussion	Calls to selectSpeed with AVPlaybackSpeeds not contained within the speeds property array will be ignored.
+//
 // SelectSpeed calls the underlying SelectSpeed.
 func (x *PlayerView) SelectSpeed(speed *raw.AVPlaybackSpeed) {
 	x.inner.SelectSpeed(speed)
 }
 
+// @method		setMagnification:centeredAtPoint: @abstract	Scales the video's view by a specified factor and centers the result on a specified point. @param		magnification The factor by which to scale the video's view. @param		point The point (in view space) on which to center magnification. @discussion	The magnification cannot be smaller than 1.0 or larger 64.0. Nearest neighbor interpolation will be used once the content has been zoomed past a certain factor.
+//
 // SetMagnificationCenteredAtPoint calls the underlying SetMagnificationCenteredAtPoint.
 func (x *PlayerView) SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint) {
 	x.inner.SetMagnificationCenteredAtPoint(magnification, point)
 }
 
+// @property	player @abstract	The player from which to source the media content for the view.
+//
 // Player calls the underlying Player.
 func (x *PlayerView) Player() *avfoundation.AVPlayer {
 	return x.inner.Player()
@@ -181,6 +223,8 @@ func (x *PlayerView) SetPlayer(player *avfoundation.AVPlayer) {
 	x.inner.SetPlayer(player)
 }
 
+// @property	controlsStyle @abstract	The style of the playback controls pane currently associated with the view. @discussion	After macOS 11, the floating style controls will always be used when presenting in fullscreen and AVPlayerViewControlsStyleNone is not specified.
+//
 // ControlsStyle calls the underlying ControlsStyle.
 func (x *PlayerView) ControlsStyle() AVPlayerViewControlsStyle {
 	return AVPlayerViewControlsStyle(x.inner.ControlsStyle())
@@ -191,6 +235,8 @@ func (x *PlayerView) SetControlsStyle(controlsStyle AVPlayerViewControlsStyle) {
 	x.inner.SetControlsStyle(raw.AVPlayerViewControlsStyle(controlsStyle))
 }
 
+// @property	videoGravity @abstract	A string defining how the video is displayed within an AVPlayerLayer bounds rect. @discussion	Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default.
+//
 // VideoGravity calls the underlying VideoGravity.
 func (x *PlayerView) VideoGravity() string {
 	_r := x.inner.VideoGravity()
@@ -205,21 +251,29 @@ func (x *PlayerView) SetVideoGravity(videoGravity *foundation.NSString) {
 	x.inner.SetVideoGravity(videoGravity)
 }
 
+// @property	readyForDisplay @abstract	Boolean indicating that the first video frame has been made ready for display for the current item of the associated AVPlayer.
+//
 // IsReadyForDisplay calls the underlying IsReadyForDisplay.
 func (x *PlayerView) IsReadyForDisplay() bool {
 	return x.inner.IsReadyForDisplay()
 }
 
+// @property	videoBounds @abstract	The current size and position of the video image as displayed within the receiver's view's bounds.
+//
 // VideoBounds calls the underlying VideoBounds.
 func (x *PlayerView) VideoBounds() corefoundation.CGRect {
 	return x.inner.VideoBounds()
 }
 
+// @property	contentOverlayView @abstract	Use the content overlay view to add additional custom views between the video content and the controls.
+//
 // ContentOverlayView calls the underlying ContentOverlayView.
 func (x *PlayerView) ContentOverlayView() *appkit.NSView {
 	return x.inner.ContentOverlayView()
 }
 
+// @property	updatesNowPlayingInfoCenter @abstract	Whether or not the now playing info center should be updated. Default is YES.
+//
 // UpdatesNowPlayingInfoCenter calls the underlying UpdatesNowPlayingInfoCenter.
 func (x *PlayerView) UpdatesNowPlayingInfoCenter() bool {
 	return x.inner.UpdatesNowPlayingInfoCenter()
@@ -230,6 +284,8 @@ func (x *PlayerView) SetUpdatesNowPlayingInfoCenter(updatesNowPlayingInfoCenter 
 	x.inner.SetUpdatesNowPlayingInfoCenter(updatesNowPlayingInfoCenter)
 }
 
+// @property	delegate @abstract	The receiver's delegate.
+//
 // Delegate calls the underlying Delegate.
 func (x *PlayerView) Delegate() raw.AVPlayerViewDelegate {
 	return x.inner.Delegate()
@@ -240,6 +296,8 @@ func (x *PlayerView) SetDelegate(delegate raw.AVPlayerViewDelegate) {
 	x.inner.SetDelegate(delegate)
 }
 
+// @property		speeds @abstract		A list of user selectable playback speeds to be shown in the playback speed control. @discussion	By default this property will be set to the systemDefaultSpeeds class property. Setting this property to nil will hide the playback speed selection UI. To set the currently selected playback speed programmatically, either set the defaultRate on the AVPlayer associated with this view controller or use the selectSpeed method on AVPlayerView.
+//
 // Speeds returns the collection as a Go slice.
 func (x *PlayerView) Speeds() []*PlaybackSpeed {
 	arr := x.inner.Speeds()
@@ -256,6 +314,8 @@ func (x *PlayerView) SetSpeeds(speeds *foundation.NSArray[*raw.AVPlaybackSpeed])
 	x.inner.SetSpeeds(speeds)
 }
 
+// @property		selectedSpeed @abstract		The currently selected playback speed. @discussion	Changes to the associated AVPlayer's defaultRate will be reflected in this property and vice versa. If the associated AVPlayer's defaultRate is set to a value that does not match a speed in the speeds list property, the selected speed will be nil.
+//
 // SelectedSpeed calls the underlying SelectedSpeed.
 func (x *PlayerView) SelectedSpeed() *PlaybackSpeed {
 	_r := x.inner.SelectedSpeed()
@@ -265,6 +325,8 @@ func (x *PlayerView) SelectedSpeed() *PlaybackSpeed {
 	return &PlaybackSpeed{inner: _r}
 }
 
+// @property	allowsVideoFrameAnalysis @abstract	When set to YES, the AVPlayerView will try to find objects, text and people while the media is paused. When an object is found, the user will be able to interact with it selecting and right clicking to present a context menu. Default is YES.
+//
 // AllowsVideoFrameAnalysis calls the underlying AllowsVideoFrameAnalysis.
 func (x *PlayerView) AllowsVideoFrameAnalysis() bool {
 	return x.inner.AllowsVideoFrameAnalysis()
@@ -275,6 +337,8 @@ func (x *PlayerView) SetAllowsVideoFrameAnalysis(allowsVideoFrameAnalysis bool) 
 	x.inner.SetAllowsVideoFrameAnalysis(allowsVideoFrameAnalysis)
 }
 
+// @property	videoFrameAnalysisTypes @abstract	The types of items AVPlayerView looks for in a paused video frame.
+//
 // VideoFrameAnalysisTypes calls the underlying VideoFrameAnalysisTypes.
 func (x *PlayerView) VideoFrameAnalysisTypes() AVVideoFrameAnalysisType {
 	return AVVideoFrameAnalysisType(x.inner.VideoFrameAnalysisTypes())
@@ -285,6 +349,8 @@ func (x *PlayerView) SetVideoFrameAnalysisTypes(videoFrameAnalysisTypes AVVideoF
 	x.inner.SetVideoFrameAnalysisTypes(raw.AVVideoFrameAnalysisType(videoFrameAnalysisTypes))
 }
 
+// @property	allowsMagnification @abstract	Whether the magnify gesture will change the video's view magnification. @discussion	The default value is NO. This property only effects whether the magnify gesture triggers magnification. A client can still programmatically change magnification even when the value of this is NO. This behavior matches the behavior of NSScrollView.
+//
 // AllowsMagnification calls the underlying AllowsMagnification.
 func (x *PlayerView) AllowsMagnification() bool {
 	return x.inner.AllowsMagnification()
@@ -295,6 +361,8 @@ func (x *PlayerView) SetAllowsMagnification(allowsMagnification bool) {
 	x.inner.SetAllowsMagnification(allowsMagnification)
 }
 
+// @property	magnification @abstract	The factor by which the video's view is currently scaled. @discussion	The default value is 1.0. The value cannot be smaller than 1.0 or larger 64.0. Nearest neighbor interpolation will be used once the content has been zoomed past a certain factor.
+//
 // Magnification calls the underlying Magnification.
 func (x *PlayerView) Magnification() float64 {
 	return x.inner.Magnification()
@@ -305,6 +373,8 @@ func (x *PlayerView) SetMagnification(magnification float64) {
 	x.inner.SetMagnification(magnification)
 }
 
+// Describes how High Dynamic Range (HDR) video content renders. Defaults to “AVDisplayDynamicRangeAutomatic“. - Note: This property will only have effect if the video content supports HDR.
+//
 // PreferredDisplayDynamicRange calls the underlying PreferredDisplayDynamicRange.
 func (x *PlayerView) PreferredDisplayDynamicRange() AVDisplayDynamicRange {
 	return AVDisplayDynamicRange(x.inner.PreferredDisplayDynamicRange())
@@ -315,6 +385,8 @@ func (x *PlayerView) SetPreferredDisplayDynamicRange(preferredDisplayDynamicRang
 	x.inner.SetPreferredDisplayDynamicRange(raw.AVDisplayDynamicRange(preferredDisplayDynamicRange))
 }
 
+// @property	showsFrameSteppingButtons @abstract	Replace scanning controls in the playback UI with frame stepping buttons. Default is NO.
+//
 // ShowsFrameSteppingButtons calls the underlying ShowsFrameSteppingButtons.
 func (x *PlayerView) ShowsFrameSteppingButtons() bool {
 	return x.inner.ShowsFrameSteppingButtons()
@@ -325,6 +397,8 @@ func (x *PlayerView) SetShowsFrameSteppingButtons(showsFrameSteppingButtons bool
 	x.inner.SetShowsFrameSteppingButtons(showsFrameSteppingButtons)
 }
 
+// @property	showsSharingServiceButton @abstract	Whether or not the controls pane will show a sharing service button when the current player item can be shared. Default is NO.
+//
 // ShowsSharingServiceButton calls the underlying ShowsSharingServiceButton.
 func (x *PlayerView) ShowsSharingServiceButton() bool {
 	return x.inner.ShowsSharingServiceButton()
@@ -335,6 +409,8 @@ func (x *PlayerView) SetShowsSharingServiceButton(showsSharingServiceButton bool
 	x.inner.SetShowsSharingServiceButton(showsSharingServiceButton)
 }
 
+// @property	actionPopUpButtonMenu @abstract	Clients can set this property in order to show an action pop up button. Default is nil.
+//
 // ActionPopUpButtonMenu calls the underlying ActionPopUpButtonMenu.
 func (x *PlayerView) ActionPopUpButtonMenu() *appkit.NSMenu {
 	return x.inner.ActionPopUpButtonMenu()
@@ -345,6 +421,8 @@ func (x *PlayerView) SetActionPopUpButtonMenu(actionPopUpButtonMenu *appkit.NSMe
 	x.inner.SetActionPopUpButtonMenu(actionPopUpButtonMenu)
 }
 
+// @property	showsFullScreenToggleButton @abstract	Whether or not the controls pane will show a full screen toggle button. Default is NO.
+//
 // ShowsFullScreenToggleButton calls the underlying ShowsFullScreenToggleButton.
 func (x *PlayerView) ShowsFullScreenToggleButton() bool {
 	return x.inner.ShowsFullScreenToggleButton()
@@ -355,6 +433,8 @@ func (x *PlayerView) SetShowsFullScreenToggleButton(showsFullScreenToggleButton 
 	x.inner.SetShowsFullScreenToggleButton(showsFullScreenToggleButton)
 }
 
+// @property    showsTimecodes @abstract    If timecodes are available, allow the AVPlayerView controls to enter timecode mode. Default is NO.
+//
 // ShowsTimecodes calls the underlying ShowsTimecodes.
 func (x *PlayerView) ShowsTimecodes() bool {
 	return x.inner.ShowsTimecodes()
@@ -365,21 +445,29 @@ func (x *PlayerView) SetShowsTimecodes(showsTimecodes bool) {
 	x.inner.SetShowsTimecodes(showsTimecodes)
 }
 
+// @method		beginTrimmingWithCompletionHandler: @param		handler A completion handler that is executed when the user selects either the Trim or Cancel button in the trimming UI. @abstract	Sets the controls panel into trimming mode and blocks until the user selects either the Trim or the Cancel button.
+//
 // BeginTrimmingWithCompletionHandler calls the underlying BeginTrimmingWithCompletionHandler.
 func (x *PlayerView) BeginTrimmingWithCompletionHandler(handler func(AVPlayerViewTrimResult)) {
 	x.inner.BeginTrimmingWithCompletionHandler(func(_a0 raw.AVPlayerViewTrimResult) { handler(AVPlayerViewTrimResult(_a0)) })
 }
 
+// @property	canBeginTrimming @abstract	Whether or not the current media can be trimmed.
+//
 // CanBeginTrimming calls the underlying CanBeginTrimming.
 func (x *PlayerView) CanBeginTrimming() bool {
 	return x.inner.CanBeginTrimming()
 }
 
+// @method		flashChapterNumber:chapterTitle: @param		chapterNumber The chapter number (required). @param		chapterTitle The chapter title (optional). @abstract	Display the provided chapter number and title momentarily.
+//
 // FlashChapterNumberChapterTitle calls the underlying FlashChapterNumberChapterTitle.
 func (x *PlayerView) FlashChapterNumberChapterTitle(chapterNumber uint, chapterTitle string) {
 	x.inner.FlashChapterNumberChapterTitle(chapterNumber, foundation.NSStringStringWithUTF8String(chapterTitle))
 }
 
+// @property	allowsPictureInPicturePlayback @abstract	Whether or not the receiver allows Picture in Picture playback. Default is NO.
+//
 // AllowsPictureInPicturePlayback calls the underlying AllowsPictureInPicturePlayback.
 func (x *PlayerView) AllowsPictureInPicturePlayback() bool {
 	return x.inner.AllowsPictureInPicturePlayback()
@@ -390,6 +478,8 @@ func (x *PlayerView) SetAllowsPictureInPicturePlayback(allowsPictureInPicturePla
 	x.inner.SetAllowsPictureInPicturePlayback(allowsPictureInPicturePlayback)
 }
 
+// @property	pictureInPictureDelegate @abstract	A delegate for customizing Picture in Picture playback experience.
+//
 // PictureInPictureDelegate calls the underlying PictureInPictureDelegate.
 func (x *PlayerView) PictureInPictureDelegate() raw.AVPlayerViewPictureInPictureDelegate {
 	return x.inner.PictureInPictureDelegate()

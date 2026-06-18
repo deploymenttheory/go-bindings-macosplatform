@@ -35,18 +35,24 @@ func NewMixerDefinition() *MixerDefinition {
 	return &MixerDefinition{inner: raw.PHASEMixerDefinitionFromID(_id)}
 }
 
+// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
+//
 // WithGain sets the gain property and returns the receiver for chaining.
 func (x *MixerDefinition) WithGain(gain float64) *MixerDefinition {
 	x.inner.SetGain(gain)
 	return x
 }
 
+// @property gainMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable real-time control of the gain during playback.
+//
 // WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
 func (x *MixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *MixerDefinition {
 	x.inner.SetGainMetaParameterDefinition(gainMetaParameterDefinition.asNumberMetaParameterDefinition())
 	return x
 }
 
+// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
+//
 // Gain calls the underlying Gain.
 func (x *MixerDefinition) Gain() float64 {
 	return x.inner.Gain()
@@ -57,6 +63,8 @@ func (x *MixerDefinition) SetGain(gain float64) {
 	x.inner.SetGain(gain)
 }
 
+// @property gainMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable real-time control of the gain during playback.
+//
 // GainMetaParameterDefinition calls the underlying GainMetaParameterDefinition.
 func (x *MixerDefinition) GainMetaParameterDefinition() *NumberMetaParameterDefinition {
 	_r := x.inner.GainMetaParameterDefinition()

@@ -33,6 +33,8 @@ func MTRClusterAccountLoginFromID(id objc.ID) *MTRClusterAccountLogin {
 	return &MTRClusterAccountLogin{inner: raw.MTRClusterAccountLoginFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterAccountLoginWithDeviceEndpointIDQueue creates a new [MTRClusterAccountLogin].
 func NewMTRClusterAccountLoginWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterAccountLogin {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterAccountLogin")), objc.RegisterName("alloc"))

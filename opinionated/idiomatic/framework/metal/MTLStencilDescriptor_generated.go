@@ -41,18 +41,24 @@ func (x *StencilDescriptor) WithStencilCompareFunction(stencilCompareFunction MT
 	return x
 }
 
+// Stencil is tested first.  stencilFailureOperation declares how the stencil buffer is updated when the stencil test fails.
+//
 // WithStencilFailureOperation sets the stencilFailureOperation property and returns the receiver for chaining.
 func (x *StencilDescriptor) WithStencilFailureOperation(stencilFailureOperation MTLStencilOperation) *StencilDescriptor {
 	x.inner.SetStencilFailureOperation(raw.MTLStencilOperation(stencilFailureOperation))
 	return x
 }
 
+// If stencil passes, depth is tested next.  Declare what happens when the depth test fails.
+//
 // WithDepthFailureOperation sets the depthFailureOperation property and returns the receiver for chaining.
 func (x *StencilDescriptor) WithDepthFailureOperation(depthFailureOperation MTLStencilOperation) *StencilDescriptor {
 	x.inner.SetDepthFailureOperation(raw.MTLStencilOperation(depthFailureOperation))
 	return x
 }
 
+// If both the stencil and depth tests pass, declare how the stencil buffer is updated.
+//
 // WithDepthStencilPassOperation sets the depthStencilPassOperation property and returns the receiver for chaining.
 func (x *StencilDescriptor) WithDepthStencilPassOperation(depthStencilPassOperation MTLStencilOperation) *StencilDescriptor {
 	x.inner.SetDepthStencilPassOperation(raw.MTLStencilOperation(depthStencilPassOperation))
@@ -81,6 +87,8 @@ func (x *StencilDescriptor) SetStencilCompareFunction(stencilCompareFunction MTL
 	x.inner.SetStencilCompareFunction(raw.MTLCompareFunction(stencilCompareFunction))
 }
 
+// Stencil is tested first.  stencilFailureOperation declares how the stencil buffer is updated when the stencil test fails.
+//
 // StencilFailureOperation calls the underlying StencilFailureOperation.
 func (x *StencilDescriptor) StencilFailureOperation() MTLStencilOperation {
 	return MTLStencilOperation(x.inner.StencilFailureOperation())
@@ -91,6 +99,8 @@ func (x *StencilDescriptor) SetStencilFailureOperation(stencilFailureOperation M
 	x.inner.SetStencilFailureOperation(raw.MTLStencilOperation(stencilFailureOperation))
 }
 
+// If stencil passes, depth is tested next.  Declare what happens when the depth test fails.
+//
 // DepthFailureOperation calls the underlying DepthFailureOperation.
 func (x *StencilDescriptor) DepthFailureOperation() MTLStencilOperation {
 	return MTLStencilOperation(x.inner.DepthFailureOperation())
@@ -101,6 +111,8 @@ func (x *StencilDescriptor) SetDepthFailureOperation(depthFailureOperation MTLSt
 	x.inner.SetDepthFailureOperation(raw.MTLStencilOperation(depthFailureOperation))
 }
 
+// If both the stencil and depth tests pass, declare how the stencil buffer is updated.
+//
 // DepthStencilPassOperation calls the underlying DepthStencilPassOperation.
 func (x *StencilDescriptor) DepthStencilPassOperation() MTLStencilOperation {
 	return MTLStencilOperation(x.inner.DepthStencilPassOperation())

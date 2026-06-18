@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A storage device attachment backed by a Network Block Device (NBD) client.
+//
 // NetworkBlockDeviceStorageDeviceAttachment wraps [raw.VZNetworkBlockDeviceStorageDeviceAttachment] with a fluent Go API.
 type NetworkBlockDeviceStorageDeviceAttachment struct {
 	inner *raw.VZNetworkBlockDeviceStorageDeviceAttachment
@@ -34,6 +36,8 @@ func NetworkBlockDeviceStorageDeviceAttachmentFromID(id objc.ID) *NetworkBlockDe
 	return &NetworkBlockDeviceStorageDeviceAttachment{inner: raw.VZNetworkBlockDeviceStorageDeviceAttachmentFromID(id)}
 }
 
+// Creates a new network block device storage attachment from an NBD Uniform Resource Indicator (URI) represented as a URL, timeout value, and read-only and synchronization modes that you provide.
+//
 // NewNetworkBlockDeviceStorageDeviceAttachmentWithURLTimeoutForcedReadOnlySynchronizationModeError creates a new [NetworkBlockDeviceStorageDeviceAttachment].
 func NewNetworkBlockDeviceStorageDeviceAttachmentWithURLTimeoutForcedReadOnlySynchronizationModeError(uRL string, timeout float64, forcedReadOnly bool, synchronizationMode VZDiskSynchronizationMode) (*NetworkBlockDeviceStorageDeviceAttachment, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZNetworkBlockDeviceStorageDeviceAttachment")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewNetworkBlockDeviceStorageDeviceAttachmentWithURLTimeoutForcedReadOnlySyn
 	return &NetworkBlockDeviceStorageDeviceAttachment{inner: raw.VZNetworkBlockDeviceStorageDeviceAttachmentFromID(_id)}, nil
 }
 
+// Creates a new network block device (NBD) storage attachment from an NDB Uniform Resource Indicator (URI) represented as a URL that you provide.
+//
 // NewNetworkBlockDeviceStorageDeviceAttachmentWithURLError creates a new [NetworkBlockDeviceStorageDeviceAttachment].
 func NewNetworkBlockDeviceStorageDeviceAttachmentWithURLError(uRL string) (*NetworkBlockDeviceStorageDeviceAttachment, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZNetworkBlockDeviceStorageDeviceAttachment")), objc.RegisterName("alloc"))
@@ -56,32 +62,44 @@ func NewNetworkBlockDeviceStorageDeviceAttachmentWithURLError(uRL string) (*Netw
 	return &NetworkBlockDeviceStorageDeviceAttachment{inner: raw.VZNetworkBlockDeviceStorageDeviceAttachmentFromID(_id)}, nil
 }
 
+// The object that receives messages about changes to the network block device attachment.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *NetworkBlockDeviceStorageDeviceAttachment) WithDelegate(delegate raw.VZNetworkBlockDeviceStorageDeviceAttachmentDelegate) *NetworkBlockDeviceStorageDeviceAttachment {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @abstract URL referring to the NBD server to which the NBD client is to be connected.
+//
 // URL calls the underlying URL.
 func (x *NetworkBlockDeviceStorageDeviceAttachment) URL() *foundation.NSURL {
 	return x.inner.URL()
 }
 
+// @abstract The timeout value in seconds for the connection between the client and server. When the timeout expires, an attempt to reconnect with the server will take place.
+//
 // Timeout calls the underlying Timeout.
 func (x *NetworkBlockDeviceStorageDeviceAttachment) Timeout() float64 {
 	return x.inner.Timeout()
 }
 
+// @abstract Whether the underlying disk attachment is forced to be read-only. @discussion The `forcedReadOnly` parameter affects how the NBD client is exposed to the guest operating system by the storage controller. As part of the NBD protocol, whether or not the disk exposed by the NBD client is read-only is advertised by the NBD server during the handshake phase of the protocol. Setting `forcedReadOnly` to YES will force the NBD client to show up as read-only to the guest regardless of whether or not the NBD server advertises itself as read-only.
+//
 // IsForcedReadOnly calls the underlying IsForcedReadOnly.
 func (x *NetworkBlockDeviceStorageDeviceAttachment) IsForcedReadOnly() bool {
 	return x.inner.IsForcedReadOnly()
 }
 
+// @abstract The mode in which the NBD client synchronizes data with the NBD server.
+//
 // SynchronizationMode calls the underlying SynchronizationMode.
 func (x *NetworkBlockDeviceStorageDeviceAttachment) SynchronizationMode() VZDiskSynchronizationMode {
 	return VZDiskSynchronizationMode(x.inner.SynchronizationMode())
 }
 
+// @abstract The attachment's delegate.
+//
 // Delegate calls the underlying Delegate.
 func (x *NetworkBlockDeviceStorageDeviceAttachment) Delegate() raw.VZNetworkBlockDeviceStorageDeviceAttachmentDelegate {
 	return x.inner.Delegate()

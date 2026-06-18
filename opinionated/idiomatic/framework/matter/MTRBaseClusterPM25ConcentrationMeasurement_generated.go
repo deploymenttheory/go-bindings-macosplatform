@@ -35,6 +35,8 @@ func MTRBaseClusterPM25ConcentrationMeasurementFromID(id objc.ID) *MTRBaseCluste
 	return &MTRBaseClusterPM25ConcentrationMeasurement{inner: raw.MTRBaseClusterPM25ConcentrationMeasurementFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterPM25ConcentrationMeasurementWithDeviceEndpointIDQueue creates a new [MTRBaseClusterPM25ConcentrationMeasurement].
 func NewMTRBaseClusterPM25ConcentrationMeasurementWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterPM25ConcentrationMeasurement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterPM25ConcentrationMeasurement")), objc.RegisterName("alloc"))

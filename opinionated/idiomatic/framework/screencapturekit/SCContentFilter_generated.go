@@ -32,6 +32,8 @@ func ContentFilterFromID(id objc.ID) *ContentFilter {
 	return &ContentFilter{inner: raw.SCContentFilterFromID(id)}
 }
 
+// @abstract initWithDesktopIndependentWindow: @param window the independent SCWindow you wish to capture @discussion this method will create a SCContentFilter that captures just the independent window passed in.
+//
 // NewContentFilterWithDesktopIndependentWindow creates a new [ContentFilter].
 func NewContentFilterWithDesktopIndependentWindow(window *raw.SCWindow) *ContentFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCContentFilter")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewContentFilterWithDesktopIndependentWindow(window *raw.SCWindow) *Content
 	return &ContentFilter{inner: raw.SCContentFilterFromID(_id)}
 }
 
+// @abstract initWithDisplay:excludingWindows @param display the SCDisplay you wish to capture @param excluded the SCWindow(s) you wish to exclude from the passed in SCDisplay @discussion This method will create a SCContentFilter that captures the SCDisplay, excluding the passed in excluded SCWindow(s). The desktop background and dock will be included with this content filter.
+//
 // NewContentFilterWithDisplayExcludingWindows creates a new [ContentFilter].
 func NewContentFilterWithDisplayExcludingWindows(display *raw.SCDisplay, excluded *foundation.NSArray[*raw.SCWindow]) *ContentFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCContentFilter")), objc.RegisterName("alloc"))
@@ -46,6 +50,8 @@ func NewContentFilterWithDisplayExcludingWindows(display *raw.SCDisplay, exclude
 	return &ContentFilter{inner: raw.SCContentFilterFromID(_id)}
 }
 
+// @abstract initWithDisplay:includingWindows @param display the SCDisplay you wish to capture @param includedWindows a set of SCWindows you wish to capture @discussion This method will create a SCContentFilter that captures a group of SCWindows. The desktop background and dock will be excluded with this content filter.
+//
 // NewContentFilterWithDisplayIncludingWindows creates a new [ContentFilter].
 func NewContentFilterWithDisplayIncludingWindows(display *raw.SCDisplay, includedWindows *foundation.NSArray[*raw.SCWindow]) *ContentFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCContentFilter")), objc.RegisterName("alloc"))
@@ -53,6 +59,8 @@ func NewContentFilterWithDisplayIncludingWindows(display *raw.SCDisplay, include
 	return &ContentFilter{inner: raw.SCContentFilterFromID(_id)}
 }
 
+// @abstract initWithDisplay:includingApplications:exceptingWindows @param display the SCDisplay you wish to capture @param applications the NSSet of SCRunningApplications that you wish to capture @param exceptingWindows the NSSet of SCWindows that you wish to be an exception to the filter @discussion This method creates a SCContentFilter that captures all windows owned by the passed in SCRunningApplications. Any windows that are an exception to the filter will not be shown if their owning application is in the provided list and will be shown otherwise. The desktop background and dock will be excluded with this content filter.
+//
 // NewContentFilterWithDisplayIncludingApplicationsExceptingWindows creates a new [ContentFilter].
 func NewContentFilterWithDisplayIncludingApplicationsExceptingWindows(display *raw.SCDisplay, applications *foundation.NSArray[*raw.SCRunningApplication], exceptingWindows *foundation.NSArray[*raw.SCWindow]) *ContentFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCContentFilter")), objc.RegisterName("alloc"))
@@ -60,6 +68,8 @@ func NewContentFilterWithDisplayIncludingApplicationsExceptingWindows(display *r
 	return &ContentFilter{inner: raw.SCContentFilterFromID(_id)}
 }
 
+// @abstract initWithDisplay:excludingApplications:exceptingWindows @param display the SCDisplay you wish to capture @param applications the NSSet of SCRunningApplications that you do not wish to capture @param exceptingWindows the NSSet of SCWindows that you wish to be an exception to the filter @discussion This method creates a SCContentFilter that captures all windows not owned by the passed in SCRunningApplications. Any windows that are an exception to the filter will be shown if their owning application is in the provided list and will not be shown otherwise. The desktop background and dock will be included with this content filter.
+//
 // NewContentFilterWithDisplayExcludingApplicationsExceptingWindows creates a new [ContentFilter].
 func NewContentFilterWithDisplayExcludingApplicationsExceptingWindows(display *raw.SCDisplay, applications *foundation.NSArray[*raw.SCRunningApplication], exceptingWindows *foundation.NSArray[*raw.SCWindow]) *ContentFilter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCContentFilter")), objc.RegisterName("alloc"))
@@ -67,32 +77,44 @@ func NewContentFilterWithDisplayExcludingApplicationsExceptingWindows(display *r
 	return &ContentFilter{inner: raw.SCContentFilterFromID(_id)}
 }
 
+// @abstract To include menu bar as part of the capture. This property has no effect for the desktop independent window filter. For content filters created with initWithDisplay:excluding, the default value is YES. Display excluding content filters contains the desktop and dock. For content filters created with initWithDisplay:including, the default value is NO. Display including content filters do not contain the desktop and dock
+//
 // WithIncludeMenuBar sets the includeMenuBar property and returns the receiver for chaining.
 func (x *ContentFilter) WithIncludeMenuBar(includeMenuBar bool) *ContentFilter {
 	x.inner.SetIncludeMenuBar(includeMenuBar)
 	return x
 }
 
+// @abstract streamType type of stream
+//
 // StreamType calls the underlying StreamType.
 func (x *ContentFilter) StreamType() SCStreamType {
 	return SCStreamType(x.inner.StreamType())
 }
 
+// @abstract style of stream
+//
 // Style calls the underlying Style.
 func (x *ContentFilter) Style() SCShareableContentStyle {
 	return SCShareableContentStyle(x.inner.Style())
 }
 
+// @abstract Pixel to points scaling factor
+//
 // PointPixelScale calls the underlying PointPixelScale.
 func (x *ContentFilter) PointPixelScale() float32 {
 	return x.inner.PointPixelScale()
 }
 
+// @abstract Size and location of content in points
+//
 // ContentRect calls the underlying ContentRect.
 func (x *ContentFilter) ContentRect() corefoundation.CGRect {
 	return x.inner.ContentRect()
 }
 
+// @abstract To include menu bar as part of the capture. This property has no effect for the desktop independent window filter. For content filters created with initWithDisplay:excluding, the default value is YES. Display excluding content filters contains the desktop and dock. For content filters created with initWithDisplay:including, the default value is NO. Display including content filters do not contain the desktop and dock
+//
 // IncludeMenuBar calls the underlying IncludeMenuBar.
 func (x *ContentFilter) IncludeMenuBar() bool {
 	return x.inner.IncludeMenuBar()
@@ -103,6 +125,8 @@ func (x *ContentFilter) SetIncludeMenuBar(includeMenuBar bool) {
 	x.inner.SetIncludeMenuBar(includeMenuBar)
 }
 
+// @abstract SCDisplays that are included in the content filter
+//
 // IncludedDisplays returns the collection as a Go slice.
 func (x *ContentFilter) IncludedDisplays() []*Display {
 	arr := x.inner.IncludedDisplays()
@@ -114,6 +138,8 @@ func (x *ContentFilter) IncludedDisplays() []*Display {
 	})
 }
 
+// @abstract Applications that are included in the content filter
+//
 // IncludedApplications returns the collection as a Go slice.
 func (x *ContentFilter) IncludedApplications() []*RunningApplication {
 	arr := x.inner.IncludedApplications()
@@ -125,6 +151,8 @@ func (x *ContentFilter) IncludedApplications() []*RunningApplication {
 	})
 }
 
+// @abstract Windows that are included in the content filter
+//
 // IncludedWindows returns the collection as a Go slice.
 func (x *ContentFilter) IncludedWindows() []*Window {
 	arr := x.inner.IncludedWindows()

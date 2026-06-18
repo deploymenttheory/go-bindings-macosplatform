@@ -35,66 +35,88 @@ func NewReplicatorConstraint() *ReplicatorConstraint {
 	return &ReplicatorConstraint{inner: raw.SCNReplicatorConstraintFromID(_id)}
 }
 
+// @property target @abstract Defines the target node to replicate
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *ReplicatorConstraint) WithTarget(target NodeProvider) *ReplicatorConstraint {
 	x.inner.SetTarget(target.asNode())
 	return x
 }
 
+// @property replicatesOrientation @abstract Defines whether or not the constraint should replicate the target orientation. Defaults to YES.
+//
 // WithReplicatesOrientation sets the replicatesOrientation property and returns the receiver for chaining.
 func (x *ReplicatorConstraint) WithReplicatesOrientation(replicatesOrientation bool) *ReplicatorConstraint {
 	x.inner.SetReplicatesOrientation(replicatesOrientation)
 	return x
 }
 
+// @property replicatesPosition @abstract Defines whether or not the constraint should replicate the target position. Defaults to YES.
+//
 // WithReplicatesPosition sets the replicatesPosition property and returns the receiver for chaining.
 func (x *ReplicatorConstraint) WithReplicatesPosition(replicatesPosition bool) *ReplicatorConstraint {
 	x.inner.SetReplicatesPosition(replicatesPosition)
 	return x
 }
 
+// @property replicatesScale @abstract Defines whether or not the constraint should replicate the target scale. Defaults to YES.
+//
 // WithReplicatesScale sets the replicatesScale property and returns the receiver for chaining.
 func (x *ReplicatorConstraint) WithReplicatesScale(replicatesScale bool) *ReplicatorConstraint {
 	x.inner.SetReplicatesScale(replicatesScale)
 	return x
 }
 
+// @property orientationOffset @abstract Defines an addition orientation offset. Defaults to no offset. Animatable.
+//
 // WithOrientationOffset sets the orientationOffset property and returns the receiver for chaining.
 func (x *ReplicatorConstraint) WithOrientationOffset(orientationOffset raw.SCNVector4) *ReplicatorConstraint {
 	x.inner.SetOrientationOffset(orientationOffset)
 	return x
 }
 
+// @property positionOffset @abstract Defines an addition orientation offset. Defaults to no offset. Animatable.
+//
 // WithPositionOffset sets the positionOffset property and returns the receiver for chaining.
 func (x *ReplicatorConstraint) WithPositionOffset(positionOffset raw.SCNVector3) *ReplicatorConstraint {
 	x.inner.SetPositionOffset(positionOffset)
 	return x
 }
 
+// @property scaleOffset @abstract Defines an addition scale offset. Defaults to no offset. Animatable.
+//
 // WithScaleOffset sets the scaleOffset property and returns the receiver for chaining.
 func (x *ReplicatorConstraint) WithScaleOffset(scaleOffset raw.SCNVector3) *ReplicatorConstraint {
 	x.inner.SetScaleOffset(scaleOffset)
 	return x
 }
 
+// @property enable @abstract Determines whether the constraint is enabled or not. Defaults to YES.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *ReplicatorConstraint) WithEnabled(enabled bool) *ReplicatorConstraint {
 	x.inner.SCNConstraint.SetEnabled(enabled)
 	return x
 }
 
+// @property influenceFactor @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
+//
 // WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
 func (x *ReplicatorConstraint) WithInfluenceFactor(influenceFactor float64) *ReplicatorConstraint {
 	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
 	return x
 }
 
+// @property incremental @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+//
 // WithIncremental sets the incremental property and returns the receiver for chaining.
 func (x *ReplicatorConstraint) WithIncremental(incremental bool) *ReplicatorConstraint {
 	x.inner.SCNConstraint.SetIncremental(incremental)
 	return x
 }
 
+// @property target @abstract Defines the target node to replicate
+//
 // Target calls the underlying Target.
 func (x *ReplicatorConstraint) Target() *Node {
 	_r := x.inner.Target()
@@ -109,6 +131,8 @@ func (x *ReplicatorConstraint) SetTarget(target *raw.SCNNode) {
 	x.inner.SetTarget(target)
 }
 
+// @property replicatesOrientation @abstract Defines whether or not the constraint should replicate the target orientation. Defaults to YES.
+//
 // ReplicatesOrientation calls the underlying ReplicatesOrientation.
 func (x *ReplicatorConstraint) ReplicatesOrientation() bool {
 	return x.inner.ReplicatesOrientation()
@@ -119,6 +143,8 @@ func (x *ReplicatorConstraint) SetReplicatesOrientation(replicatesOrientation bo
 	x.inner.SetReplicatesOrientation(replicatesOrientation)
 }
 
+// @property replicatesPosition @abstract Defines whether or not the constraint should replicate the target position. Defaults to YES.
+//
 // ReplicatesPosition calls the underlying ReplicatesPosition.
 func (x *ReplicatorConstraint) ReplicatesPosition() bool {
 	return x.inner.ReplicatesPosition()
@@ -129,6 +155,8 @@ func (x *ReplicatorConstraint) SetReplicatesPosition(replicatesPosition bool) {
 	x.inner.SetReplicatesPosition(replicatesPosition)
 }
 
+// @property replicatesScale @abstract Defines whether or not the constraint should replicate the target scale. Defaults to YES.
+//
 // ReplicatesScale calls the underlying ReplicatesScale.
 func (x *ReplicatorConstraint) ReplicatesScale() bool {
 	return x.inner.ReplicatesScale()
@@ -139,6 +167,8 @@ func (x *ReplicatorConstraint) SetReplicatesScale(replicatesScale bool) {
 	x.inner.SetReplicatesScale(replicatesScale)
 }
 
+// @property orientationOffset @abstract Defines an addition orientation offset. Defaults to no offset. Animatable.
+//
 // OrientationOffset calls the underlying OrientationOffset.
 func (x *ReplicatorConstraint) OrientationOffset() raw.SCNVector4 {
 	return x.inner.OrientationOffset()
@@ -149,6 +179,8 @@ func (x *ReplicatorConstraint) SetOrientationOffset(orientationOffset raw.SCNVec
 	x.inner.SetOrientationOffset(orientationOffset)
 }
 
+// @property positionOffset @abstract Defines an addition orientation offset. Defaults to no offset. Animatable.
+//
 // PositionOffset calls the underlying PositionOffset.
 func (x *ReplicatorConstraint) PositionOffset() raw.SCNVector3 {
 	return x.inner.PositionOffset()
@@ -159,6 +191,8 @@ func (x *ReplicatorConstraint) SetPositionOffset(positionOffset raw.SCNVector3) 
 	x.inner.SetPositionOffset(positionOffset)
 }
 
+// @property scaleOffset @abstract Defines an addition scale offset. Defaults to no offset. Animatable.
+//
 // ScaleOffset calls the underlying ScaleOffset.
 func (x *ReplicatorConstraint) ScaleOffset() raw.SCNVector3 {
 	return x.inner.ScaleOffset()

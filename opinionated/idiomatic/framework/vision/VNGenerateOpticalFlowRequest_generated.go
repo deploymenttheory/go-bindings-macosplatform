@@ -36,48 +36,64 @@ func NewGenerateOpticalFlowRequest() *GenerateOpticalFlowRequest {
 	return &GenerateOpticalFlowRequest{inner: raw.VNGenerateOpticalFlowRequestFromID(_id)}
 }
 
+// @brief The level of accuracy used to compute the optical flow. Default is VNGenerateOpticalFlowRequestComputationAccuracyMedium. @discussion The computational time typically trends with the accuracy level.  This parameter allows for selective tuning by the client application.
+//
 // WithComputationAccuracy sets the computationAccuracy property and returns the receiver for chaining.
 func (x *GenerateOpticalFlowRequest) WithComputationAccuracy(computationAccuracy VNGenerateOpticalFlowRequestComputationAccuracy) *GenerateOpticalFlowRequest {
 	x.inner.SetComputationAccuracy(raw.VNGenerateOpticalFlowRequestComputationAccuracy(computationAccuracy))
 	return x
 }
 
+// @brief Pixel format type of the output buffer. Valid values are kCVPixelFormatType_TwoComponent32Float and kCVPixelFormatType_TwoComponent16Half. Default is kCVPixelFormatType_TwoComponent32Float.
+//
 // WithOutputPixelFormat sets the outputPixelFormat property and returns the receiver for chaining.
 func (x *GenerateOpticalFlowRequest) WithOutputPixelFormat(outputPixelFormat uint) *GenerateOpticalFlowRequest {
 	x.inner.SetOutputPixelFormat(outputPixelFormat)
 	return x
 }
 
+// @brief Setting this to YES will keep the raw pixel buffer coming from the the ML network. The default is NO. @discussion When set to YES, the outputPixelFormat is ignored. Setting this for revision 1 is a no-op as it is not ML-based.
+//
 // WithKeepNetworkOutput sets the keepNetworkOutput property and returns the receiver for chaining.
 func (x *GenerateOpticalFlowRequest) WithKeepNetworkOutput(keepNetworkOutput bool) *GenerateOpticalFlowRequest {
 	x.inner.SetKeepNetworkOutput(keepNetworkOutput)
 	return x
 }
 
+// @brief The region of the image in which the request will be performed.  The rectangle is normalized to the dimensions of the image being processed and has its origin specified relative to the image's lower-left corner. @discussion The default value for this property is { { 0, 0 }, { 1, 1 } }.  Setting this property to a rectangle that is outside of the normalized coordinate space will be accepted but result in the request failing to be performed.
+//
 // WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
 func (x *GenerateOpticalFlowRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateOpticalFlowRequest {
 	x.inner.VNTargetedImageRequest.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
 	return x
 }
 
+// @abstract A hint used to minimize the resource burden of the request. Memory footprint, processing footprint and/or CPU/GPU contention will be reduced (depending on the request), at the potential cost of longer execution time. This can help, for example, with ensuring UI updates and rendering are not getting blocked by Vision processing.
+//
 // WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
 func (x *GenerateOpticalFlowRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateOpticalFlowRequest {
 	x.inner.VNTargetedImageRequest.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
 	return x
 }
 
+// @abstract This property, if set to YES, signifies that the request should be performed exclusively on the CPU and not on the GPU. The default value is NO, which signifies that the request is free to leverage the GPU to accelerate any work the request may require.
+//
 // WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
 func (x *GenerateOpticalFlowRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateOpticalFlowRequest {
 	x.inner.VNTargetedImageRequest.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
 	return x
 }
 
+// @abstract The specific algorithm or implementation revision that is to be used to perform the request.
+//
 // WithRevision sets the revision property and returns the receiver for chaining.
 func (x *GenerateOpticalFlowRequest) WithRevision(revision uint) *GenerateOpticalFlowRequest {
 	x.inner.VNTargetedImageRequest.VNImageBasedRequest.VNRequest.SetRevision(revision)
 	return x
 }
 
+// @brief The level of accuracy used to compute the optical flow. Default is VNGenerateOpticalFlowRequestComputationAccuracyMedium. @discussion The computational time typically trends with the accuracy level.  This parameter allows for selective tuning by the client application.
+//
 // ComputationAccuracy calls the underlying ComputationAccuracy.
 func (x *GenerateOpticalFlowRequest) ComputationAccuracy() VNGenerateOpticalFlowRequestComputationAccuracy {
 	return VNGenerateOpticalFlowRequestComputationAccuracy(x.inner.ComputationAccuracy())
@@ -88,6 +104,8 @@ func (x *GenerateOpticalFlowRequest) SetComputationAccuracy(computationAccuracy 
 	x.inner.SetComputationAccuracy(raw.VNGenerateOpticalFlowRequestComputationAccuracy(computationAccuracy))
 }
 
+// @brief Pixel format type of the output buffer. Valid values are kCVPixelFormatType_TwoComponent32Float and kCVPixelFormatType_TwoComponent16Half. Default is kCVPixelFormatType_TwoComponent32Float.
+//
 // OutputPixelFormat calls the underlying OutputPixelFormat.
 func (x *GenerateOpticalFlowRequest) OutputPixelFormat() uint {
 	return x.inner.OutputPixelFormat()
@@ -98,6 +116,8 @@ func (x *GenerateOpticalFlowRequest) SetOutputPixelFormat(outputPixelFormat uint
 	x.inner.SetOutputPixelFormat(outputPixelFormat)
 }
 
+// @brief Setting this to YES will keep the raw pixel buffer coming from the the ML network. The default is NO. @discussion When set to YES, the outputPixelFormat is ignored. Setting this for revision 1 is a no-op as it is not ML-based.
+//
 // KeepNetworkOutput calls the underlying KeepNetworkOutput.
 func (x *GenerateOpticalFlowRequest) KeepNetworkOutput() bool {
 	return x.inner.KeepNetworkOutput()

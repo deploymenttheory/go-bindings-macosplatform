@@ -37,18 +37,24 @@ func NewAudioUnitPreset() *AudioUnitPreset {
 	return &AudioUnitPreset{inner: raw.AUAudioUnitPresetFromID(_id)}
 }
 
+// @property	number @brief		The preset's unique numeric identifier.
+//
 // WithNumber sets the number property and returns the receiver for chaining.
 func (x *AudioUnitPreset) WithNumber(number int) *AudioUnitPreset {
 	x.inner.SetNumber(number)
 	return x
 }
 
+// @property	name @brief		The preset's name.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *AudioUnitPreset) WithName(name string) *AudioUnitPreset {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property	number @brief		The preset's unique numeric identifier.
+//
 // Number calls the underlying Number.
 func (x *AudioUnitPreset) Number() int {
 	return x.inner.Number()
@@ -59,6 +65,8 @@ func (x *AudioUnitPreset) SetNumber(number int) {
 	x.inner.SetNumber(number)
 }
 
+// @property	name @brief		The preset's name.
+//
 // Name calls the underlying Name.
 func (x *AudioUnitPreset) Name() string {
 	_r := x.inner.Name()

@@ -134,8 +134,17 @@ func BoundingCircleForContourError(contour *raw.VNContour) (*Circle, error) {
 }
 
 // BoundingCircleForPointsError calls the underlying VNGeometryUtilsBoundingCircleForPointsError.
-func BoundingCircleForPointsError(points *foundation.NSArray[*raw.VNPoint]) (*Circle, error) {
-	_r, _err := raw.VNGeometryUtilsBoundingCircleForPointsError(points)
+func BoundingCircleForPointsError(points ...PointProvider) (*Circle, error) {
+	_ptrs := make([]objc.ID, len(points))
+	for _i, _v := range points {
+		_ptrs[_i] = _v.asPoint().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.VNPoint]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.VNPoint](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	_r, _err := raw.VNGeometryUtilsBoundingCircleForPointsError(_arg0)
 	if _err != nil {
 		return nil, _err
 	}

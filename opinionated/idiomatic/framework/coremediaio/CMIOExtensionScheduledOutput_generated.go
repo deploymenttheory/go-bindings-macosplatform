@@ -29,6 +29,8 @@ func ExtensionScheduledOutputFromID(id objc.ID) *ExtensionScheduledOutput {
 	return &ExtensionScheduledOutput{inner: raw.CMIOExtensionScheduledOutputFromID(id)}
 }
 
+// @method initWithSequenceNumber:hostTimeInNanoseconds: @abstract Initialize a stream scheduled output instance. @param sequenceNumber The buffer sequence number that was output. @param hostTimeInNanoseconds The host time in nanoseconds when the buffer was output. @result A CMIOExtensionScheduledOutput instance that describes the state of the stream.
+//
 // NewExtensionScheduledOutputWithSequenceNumberHostTimeInNanoseconds creates a new [ExtensionScheduledOutput].
 func NewExtensionScheduledOutputWithSequenceNumberHostTimeInNanoseconds(sequenceNumber uint64, hostTimeInNanoseconds uint64) *ExtensionScheduledOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionScheduledOutput")), objc.RegisterName("alloc"))
@@ -36,11 +38,15 @@ func NewExtensionScheduledOutputWithSequenceNumberHostTimeInNanoseconds(sequence
 	return &ExtensionScheduledOutput{inner: raw.CMIOExtensionScheduledOutputFromID(_id)}
 }
 
+// @property sequenceNumber @abstract The buffer sequence number that was output.
+//
 // SequenceNumber calls the underlying SequenceNumber.
 func (x *ExtensionScheduledOutput) SequenceNumber() uint64 {
 	return x.inner.SequenceNumber()
 }
 
+// @property hostTimeInNanoseconds @abstract The host time in nanoseconds when the buffer was output.
+//
 // HostTimeInNanoseconds calls the underlying HostTimeInNanoseconds.
 func (x *ExtensionScheduledOutput) HostTimeInNanoseconds() uint64 {
 	return x.inner.HostTimeInNanoseconds()

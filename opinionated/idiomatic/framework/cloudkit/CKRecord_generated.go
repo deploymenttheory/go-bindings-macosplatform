@@ -31,6 +31,8 @@ func RecordFromID(id objc.ID) *Record {
 	return &Record{inner: raw.CKRecordFromID(id)}
 }
 
+// Creates a new record of the specified type. - Parameters: - recordType: A string that represents the type of record that you want to create. You can't change the record type after initialization. You define the record types that your app supports and use them to distinguish between records with different types of data. This parameter must not be `nil` or contain an empty string. A record type must consist of one or more alphanumeric characters and must start with a letter. CloudKit permits the use of underscores, but not spaces. - Returns: An initialized record object. Use this method to initialize a new record object in the default zone of the database. The newly created record contains no data in any of its fields and receives a unique ID. ```objc // Create a new record of type "employee". CKRecord* myRecord = [[CKRecord alloc] initWithRecordType:@"employee"]; ``` New records exist only in memory until you explicitly save them to iCloud. In addition, new records are sparse by default and have no values for the fields you define. Until you set the value of a key explicitly, getting the value of a key in a new record returns `nil`. Even though a record has an associated type, CloudKit ignores the type information until you save the record. Save the record using a “CKModifyRecordsOperation“ object or by using the “CKDatabase/save(_:completionHandler:)-3tatz“ method of “CKDatabase“ to transfer the record's contents to the server.
+//
 // NewRecordWithRecordType creates a new [Record].
 func NewRecordWithRecordType(recordType *foundation.NSString) *Record {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKRecord")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewRecordWithRecordType(recordType *foundation.NSString) *Record {
 	return &Record{inner: raw.CKRecordFromID(_id)}
 }
 
+// Creates a record using an ID that you provide. - Parameters: - recordType: A string that represents the type of record that you want to create. You can't change the record type after initialization. You define the record types that your app supports and use them to distinguish between records with different types of data. This parameter must not be `nil` or contain an empty string. A record type must consist of one or more alphanumeric characters and must start with a letter. CloudKit permits the use of underscores, but not spaces. - recordID: The ID to assign to the record. When creating the ID, you can specify the zone where you want to store the record. You should provide a value that is unique across all records and you may not provide `nil`. - Returns: An initialized record object. Use this method to initialize a new record object with the specified ID. The newly created record contains no data. Upon creation, record objects exist only in memory on the local device. Save the record using a “CKModifyRecordsOperation“ object or by using the “CKDatabase/save(_:completionHandler:)-3tatz“ method of “CKDatabase“ to transfer the record's contents to the server.
+//
 // NewRecordWithRecordTypeRecordID creates a new [Record].
 func NewRecordWithRecordTypeRecordID(recordType *foundation.NSString, recordID *raw.CKRecordID) *Record {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKRecord")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewRecordWithRecordTypeRecordID(recordType *foundation.NSString, recordID *
 	return &Record{inner: raw.CKRecordFromID(_id)}
 }
 
+// Creates a record in the specified zone. - Parameters: - recordType: A string that represents the type of record that you want to create. You can't change the record type after initialization. You define the record types that your app supports and use them to distinguish between records with different types of data. This parameter must not be `nil` or contain an empty string. A record type must consist of one or more alphanumeric characters and must start with a letter. CloudKit permits the use of underscores, but not spaces. - zoneID: The ID of the record zone where you want to store the record. - Returns: An initialized record object. Use this method to initialize a new record object in the specified record zone. Upon creation, the new record contains no data and exists only in memory on the local device. Save the record using a “CKModifyRecordsOperation“ object or by using the “CKDatabase/save(_:completionHandler:)-3tatz“ method of “CKDatabase“ to transfer the record's contents to the server.
+//
 // NewRecordWithRecordTypeZoneID creates a new [Record].
 func NewRecordWithRecordTypeZoneID(recordType *foundation.NSString, zoneID *raw.CKRecordZoneID) *Record {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKRecord")), objc.RegisterName("alloc"))
@@ -52,22 +58,30 @@ func NewRecordWithRecordTypeZoneID(recordType *foundation.NSString, zoneID *raw.
 	return &Record{inner: raw.CKRecordFromID(_id)}
 }
 
+// A reference to the record's parent record. Use parent references to inform CloudKit about the hierarchy of your records. CloudKit shares the hierarchy when a “CKShare“ includes a referenced record. Add relationships between records as you create them, even if you don't plan to share them. This allows you to manage the sharing of a hierarchy by only modifying the root record's “CKRecord/share“ reference. To indicate that a record belongs to its parent, set this property to a reference that points to the parent record. The reference must use the “CKRecord/ReferenceAction/none“ action or CloudKit throws an exception. The parent record must exist on the server when you save the child, or you must include the record in the same save operation. Otherwise, the operation fails.
+//
 // WithParent sets the parent property and returns the receiver for chaining.
 func (x *Record) WithParent(parent *Reference) *Record {
 	x.inner.SetParent(parent.Unwrap())
 	return x
 }
 
+// Returns the object that the record stores for the specified key. - Parameters: - key: The string that identifies a field in the record. A key must consist of one or more alphanumeric characters and must start with a letter. CloudKit permits the use of underscores, but not spaces. - Returns: The object for the specified key, or `nil` if no such key exists in the record. New records don't contain any keys or values. Values are always one of the data types in <doc:CKRecord#Supported-Data-Types>. You access the fields of a `CKRecord` object the same way you access key-value pairs in a dictionary. The `CKRecord` class defines the “CKRecord/objectForKey:“ and “CKRecord/setObject:forKey:“ methods for getting and setting values. It also supports dictionary index notation. The following example shows how to use both techniques to set a `firstName` field and retrieve a `lastName` field from a record: ```objc // Equivalent ways to get a value. id value = [myRecord objectForKey:@"hiredAt"]; value = myRecord[@"hiredAt"]; ```
+//
 // ObjectForKey calls the underlying ObjectForKey.
 func (x *Record) ObjectForKey(key *foundation.NSString) raw.CKRecordValue {
 	return x.inner.ObjectForKey(key)
 }
 
+// Stores an object in the record using the specified key. - Parameters: - object: The object to store using the specified key. The value you provide must be an instance of one the data types in <doc:CKRecord#Supported-Data-Types>. You receive an error if you use a data type that CloudKit doesn't support. If you specify `nil`, CloudKit removes any object that the record associates with the key. - key: The key to associate with `object`. Use this key to retrieve the value later. A key must consist of one or more alphanumeric characters and must start with a letter. CloudKit permits the use of underscores, but not spaces. Avoid using a key that matches the name of any property of `CKRecord`. If the specified key already exists in the record, CloudKit deletes its previous value and replaces it with the one in the `object` parameter. This change affects only the local copy of the record. You must save the record to the server again before the change becomes available to other clients. If the type of the `object` parameter differs from the type of the object that's on the server, you encounter an error when you attempt to save this record to the server. For example, if the current value is an <doc://com.apple.documentation/documentation/foundation/nsstring> object, you receive an error if you change the value to an <doc://com.apple.documentation/documentation/foundation/nsnumber> object and save the record. You access the fields of a `CKRecord` object the same way you access key-value pairs in a dictionary. The `CKRecord` class defines the “CKRecord/objectForKey:“ and “CKRecord/setObject:forKey:“ methods for getting and setting values. It also supports dictionary index notation. The following example shows how to use both techniques to set a `firstName` field and get a `lastName` field from a record: ```objc // Equivalent ways to set a value. [myRecord setObject:[NSDate date] forKey:@"hiredAt"]; myRecord[@"hiredAt"] = [NSDate date]; ```
+//
 // SetObjectForKey calls the underlying SetObjectForKey.
 func (x *Record) SetObjectForKey(object raw.CKRecordValue, key *foundation.NSString) {
 	x.inner.SetObjectForKey(object, key)
 }
 
+// Returns an array of the record's keys. - Returns: An array of keys, or an empty array if the record doesn't contain any keys. The array contains only those keys with values that aren't `nil`.
+//
 // AllKeys returns the collection as a Go slice.
 func (x *Record) AllKeys() []*foundation.NSString {
 	arr := x.inner.AllKeys()
@@ -79,6 +93,8 @@ func (x *Record) AllKeys() []*foundation.NSString {
 	})
 }
 
+// Returns an array of strings to use for full-text searches of the field's string-based values. - Returns: An array of strings that contains data from the record's string-based fields. When performing your own full-text searches, you can use this method to get a list of strings for your search. The method acts only on keys with string values. It breaks each value string apart at whitespace boundaries, creates new strings for each word, adds the new strings to an array, and returns the array. This tokenized version of the record's string values makes it easier to do string-based comparisons of individual words.
+//
 // AllTokens returns the collection as a Go slice.
 func (x *Record) AllTokens() []string {
 	arr := x.inner.AllTokens()
@@ -90,16 +106,22 @@ func (x *Record) AllTokens() []string {
 	})
 }
 
+// Returns the object that the record stores for the specified key. - Parameters: - key: The string that identifies a field in the record. A key must consist of one or more alphanumeric characters and must start with a letter. CloudKit permits the use of underscores, but not spaces. - Returns: The object for the specified key, or `nil` if no such key exists in the record. ## Discussion - Important: Don't call this method directly. The presence of this method is necessary to support subscripting syntax for record objects.
+//
 // ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
 func (x *Record) ObjectForKeyedSubscript(key *foundation.NSString) raw.CKRecordValue {
 	return x.inner.ObjectForKeyedSubscript(key)
 }
 
+// Stores an object in the record using the specified key. - Parameters: - object: The object to store using the specified key. It must be one of the data types in <doc:CKRecord#Supported-Data-Types>. You receive an error if you use a data type that CloudKit doesn't support. If you specify `nil`, CloudKit removes any object that the record associates with the key. - key: The key to associate with `object`. Use this key to retrieve the value later. A key must consist of one or more alphanumeric characters and must start with a letter. CloudKit permits the use of underscores, but not spaces. Avoid using a key that matches the name of any property of `CKRecord`. ## Discussion - Important: Don't call this method directly. The presence of this method is necessary to support subscripting syntax for record objects.
+//
 // SetObjectForKeyedSubscript calls the underlying SetObjectForKeyedSubscript.
 func (x *Record) SetObjectForKeyedSubscript(object raw.CKRecordValue, key *foundation.NSString) {
 	x.inner.SetObjectForKeyedSubscript(object, key)
 }
 
+// Returns an array of keys with recent changes to their values. - Returns: An array of keys with changed values since downloading or saving the record. If there aren't any changed keys, this method returns an empty array.
+//
 // ChangedKeys returns the collection as a Go slice.
 func (x *Record) ChangedKeys() []*foundation.NSString {
 	arr := x.inner.ChangedKeys()
@@ -111,21 +133,29 @@ func (x *Record) ChangedKeys() []*foundation.NSString {
 	})
 }
 
+// Encodes the record's system fields using the specified archiver. - Parameters: - coder: An archiver object. Use this method to encode the record's metadata that CloudKit provides. Every record has keys that the system defines that correspond to record metadata, such as the record ID, record type, creation date, and so on. This method encodes those keys in the specified archiver. This method doesn't include any keys you add to the record. It also doesn't encode the keys that the “CKRecord/changedKeys“ method returns. You might use this method when you want to store only the system metadata because you store the actual record data elsewhere.
+//
 // EncodeSystemFieldsWithCoder calls the underlying EncodeSystemFieldsWithCoder.
 func (x *Record) EncodeSystemFieldsWithCoder(coder *foundation.NSCoder) {
 	x.inner.EncodeSystemFieldsWithCoder(coder)
 }
 
+// Creates and sets a reference object for a parent from its record. - Parameters: - parentRecord: A record that you want to set as the parent to this record. This method creates and sets a “CKRecord/Reference“ object that points to the record you provide. The resulting `CKReference` has an action of “CKRecord/ReferenceAction/none“.
+//
 // SetParentReferenceFromRecord calls the underlying SetParentReferenceFromRecord.
 func (x *Record) SetParentReferenceFromRecord(parentRecord *raw.CKRecord) {
 	x.inner.SetParentReferenceFromRecord(parentRecord)
 }
 
+// Creates and sets a reference object for a parent from the parent's record ID. - Parameters: - parentRecordID: The “CKRecord/ID“ object for the record that you want to set as this record's parent. This method creates and sets a “CKRecord/Reference“ object that points to the record you provide. The resulting `CKReference` has an action of “CKRecord/ReferenceAction/none“.
+//
 // SetParentReferenceFromRecordID calls the underlying SetParentReferenceFromRecordID.
 func (x *Record) SetParentReferenceFromRecordID(parentRecordID *raw.CKRecordID) {
 	x.inner.SetParentReferenceFromRecordID(parentRecordID)
 }
 
+// The value that your app defines to identify the type of record. Use this value to differentiate between different record types in your app. The value is primarily for your benefit, so choose record types that represent the data in the corresponding records. CloudKit provides two system-defined record types: | Record Type | Description | |---|---| | “CKRecordTypeUserRecord-49k30“ | Identifies records that represent users. | | “CKRecordTypeShare-8b6yt“ | Identifies records that the user shares. |
+//
 // RecordType calls the underlying RecordType.
 func (x *Record) RecordType() string {
 	_r := x.inner.RecordType()
@@ -135,6 +165,8 @@ func (x *Record) RecordType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The unique ID of the record. The system sets the ID of a new record at initialization time. If you use the “CKRecord/init(recordType:recordID:)“ method to initialize the record, the ID derives from the “CKRecord/ID“ object you provide. In all other cases, the record generates a UUID and bases its ID on that value. The ID of a record never changes during its lifetime. When you save a new record object to the server, the server validates the uniqueness of the record, but returns an error only if the save policy calls for it. Specifically, it returns an error when the save policy is “CKModifyRecordsOperation/RecordSavePolicy/ifServerRecordUnchanged“, which is the default. For all other save policies, the server overwrites the contents of the existing record.
+//
 // RecordID calls the underlying RecordID.
 func (x *Record) RecordID() *RecordID {
 	_r := x.inner.RecordID()
@@ -144,6 +176,8 @@ func (x *Record) RecordID() *RecordID {
 	return &RecordID{inner: _r}
 }
 
+// The server change token for the record. When you fetch a record from the server, you get the current version of that record as it exists on the server. However, at any time after you fetch a record, other users might save a newer version of it to the server. Every time CloudKit saves a record, the server updates the record's change token to a new value. When you save your copy of the record, the server compares your record's token with the token on the server. If the two tokens match, the server interprets that you modified the latest version of the record and that it can apply your changes immediately. If the two tokens don't match, the server checks your app's save policy to determine how to proceed. In your own code, you can use change tokens to distinguish between two different versions of the same record. - Note: In some situations, setting a record as the parent of another record can cause the `recordChangeTag` to update on the parent record. This usually occurs when you save the child record.
+//
 // RecordChangeTag calls the underlying RecordChangeTag.
 func (x *Record) RecordChangeTag() string {
 	_r := x.inner.RecordChangeTag()
@@ -153,6 +187,8 @@ func (x *Record) RecordChangeTag() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The ID of the user who creates the record. Use this property's value to retrieve the user record for the user who creates this record. Every user of the app has a unique user record that is empty by default. Apps can add data to the user record on behalf of the user, but don't store sensitive data in it.
+//
 // CreatorUserRecordID calls the underlying CreatorUserRecordID.
 func (x *Record) CreatorUserRecordID() *RecordID {
 	_r := x.inner.CreatorUserRecordID()
@@ -162,11 +198,15 @@ func (x *Record) CreatorUserRecordID() *RecordID {
 	return &RecordID{inner: _r}
 }
 
+// The time when CloudKit first saves the record to the server. The creation date reflects the time when CloudKit creates a record on the server with the current record's ID. For new instances of this class, the value of this property is initially `nil`. When you save the record to the server, the value updates with the creation date for the record.
+//
 // CreationDate calls the underlying CreationDate.
 func (x *Record) CreationDate() *foundation.NSDate {
 	return x.inner.CreationDate()
 }
 
+// The ID of the user who most recently modified the record. Use this property's value to retrieve the user record of the user who most recently modified this record. Every user of the app has a unique user record that is empty by default. Apps can add data to the user record on behalf of the user, but don't store sensitive data in it.
+//
 // LastModifiedUserRecordID calls the underlying LastModifiedUserRecordID.
 func (x *Record) LastModifiedUserRecordID() *RecordID {
 	_r := x.inner.LastModifiedUserRecordID()
@@ -176,11 +216,15 @@ func (x *Record) LastModifiedUserRecordID() *RecordID {
 	return &RecordID{inner: _r}
 }
 
+// The most recent time that CloudKit saved the record to the server. The modification date reflects the most recent time that CloudKit saved a record with the current record's ID to the server. For new instances of this class, the value of this property is initially `nil`. When you save the record to the server, the value updates with the modification date for the record.
+//
 // ModificationDate calls the underlying ModificationDate.
 func (x *Record) ModificationDate() *foundation.NSDate {
 	return x.inner.ModificationDate()
 }
 
+// A reference to the share object that determines the share status of the record. CloudKit clears this property's value when it deletes the corresponding “CKShare“ object on the server. Send this record in the same batch operation as the share object you're deleting, and this property updates accordingly. CloudKit only supports sharing in zones with the `CKRecordZoneCapabilitySharing` capability. The default zone doesn't support sharing. If any records have a parent reference to this record, CloudKit implicitly shares them along with this record. - Note: Records in a hierarchy must only exist within one share. If a child record in a hierarchy already has a share reference, you get a `CKErrorAlreadyShared` error if you try to share any of that record's parents.
+//
 // Share calls the underlying Share.
 func (x *Record) Share() *Reference {
 	_r := x.inner.Share()
@@ -190,6 +234,8 @@ func (x *Record) Share() *Reference {
 	return &Reference{inner: _r}
 }
 
+// A reference to the record's parent record. Use parent references to inform CloudKit about the hierarchy of your records. CloudKit shares the hierarchy when a “CKShare“ includes a referenced record. Add relationships between records as you create them, even if you don't plan to share them. This allows you to manage the sharing of a hierarchy by only modifying the root record's “CKRecord/share“ reference. To indicate that a record belongs to its parent, set this property to a reference that points to the parent record. The reference must use the “CKRecord/ReferenceAction/none“ action or CloudKit throws an exception. The parent record must exist on the server when you save the child, or you must include the record in the same save operation. Otherwise, the operation fails.
+//
 // Parent calls the underlying Parent.
 func (x *Record) Parent() *Reference {
 	_r := x.inner.Parent()

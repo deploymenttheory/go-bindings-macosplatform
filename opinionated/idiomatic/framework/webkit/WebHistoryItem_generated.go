@@ -32,6 +32,8 @@ func WebHistoryItemFromID(id objc.ID) *WebHistoryItem {
 	return &WebHistoryItem{inner: raw.WebHistoryItemFromID(id)}
 }
 
+// @method initWithURLString:title:lastVisitedTimeInterval: @param URLString The URL string for the item. @param title The title to use for the item.  This is normally the <title> of a page. @param time The time used to indicate when the item was used. @abstract Initialize a new WebHistoryItem @discussion WebHistoryItems are normally created for you by the WebKit. You may use this method to prepopulate a WebBackForwardList, or create 'artificial' items to add to a WebBackForwardList.  When first initialized the URLString and originalURLString will be the same.
+//
 // NewWebHistoryItemWithURLStringTitleLastVisitedTimeInterval creates a new [WebHistoryItem].
 func NewWebHistoryItemWithURLStringTitleLastVisitedTimeInterval(uRLString string, title string, time_ float64) *WebHistoryItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WebHistoryItem")), objc.RegisterName("alloc"))
@@ -45,6 +47,8 @@ func (x *WebHistoryItem) WithAlternateTitle(alternateTitle string) *WebHistoryIt
 	return x
 }
 
+// @property originalURLString @abstract The string representation of the initial URL of this item. This value is normally set by the WebKit.
+//
 // OriginalURLString calls the underlying OriginalURLString.
 func (x *WebHistoryItem) OriginalURLString() string {
 	_r := x.inner.OriginalURLString()
@@ -54,6 +58,8 @@ func (x *WebHistoryItem) OriginalURLString() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property URLString @abstract The string representation of the URL represented by this item. @discussion The URLString may be different than the originalURLString if the page redirected to a new location.  This value is normally set by the WebKit.
+//
 // URLString calls the underlying URLString.
 func (x *WebHistoryItem) URLString() string {
 	_r := x.inner.URLString()
@@ -63,6 +69,8 @@ func (x *WebHistoryItem) URLString() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property title @abstract The title of the page represented by this item. @discussion This title cannot be changed by the client.  This value is normally set by the WebKit when a page title for the item is received.
+//
 // Title calls the underlying Title.
 func (x *WebHistoryItem) Title() string {
 	_r := x.inner.Title()
@@ -72,6 +80,8 @@ func (x *WebHistoryItem) Title() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property lastVisitedTimeInterval @abstract The last time the page represented by this item was visited. The interval is since the reference date as determined by NSDate.  This value is normally set by the WebKit.
+//
 // LastVisitedTimeInterval calls the underlying LastVisitedTimeInterval.
 func (x *WebHistoryItem) LastVisitedTimeInterval() float64 {
 	return x.inner.LastVisitedTimeInterval()
@@ -91,6 +101,8 @@ func (x *WebHistoryItem) SetAlternateTitle(alternateTitle string) {
 	x.inner.SetAlternateTitle(foundation.NSStringStringWithUTF8String(alternateTitle))
 }
 
+// @property icon @abstract The favorite icon of the page represented by this item. @discussion This icon returned will be determined by the WebKit.
+//
 // Icon calls the underlying Icon.
 func (x *WebHistoryItem) Icon() *appkit.NSImage {
 	return x.inner.Icon()

@@ -29,6 +29,8 @@ func TokenSessionFromID(id objc.ID) *TokenSession {
 	return &TokenSession{inner: raw.TKTokenSessionFromID(id)}
 }
 
+// @param token Token instance to which is this session instance bound.
+//
 // NewTokenSessionWithToken creates a new [TokenSession].
 func NewTokenSessionWithToken(token *raw.TKToken) *TokenSession {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTokenSession")), objc.RegisterName("alloc"))

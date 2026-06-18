@@ -44,6 +44,8 @@ func NewMatrixBatchNormalizationGradientWithDevice(device metal.MTLDevice) *Matr
 	return &MatrixBatchNormalizationGradient{inner: raw.MPSMatrixBatchNormalizationGradientFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSMatrixBatchNormalizationGradient @param      device      The MTLDevice on which to make the MPSMatrixBatchNormalizationGradient object. @return     A new MPSMatrixBatchNormalizationGradient object, or nil if failure.
+//
 // NewMatrixBatchNormalizationGradientWithCoderDevice creates a new [MatrixBatchNormalizationGradient].
 func NewMatrixBatchNormalizationGradientWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MatrixBatchNormalizationGradient {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixBatchNormalizationGradient")), objc.RegisterName("alloc"))
@@ -51,96 +53,130 @@ func NewMatrixBatchNormalizationGradientWithCoderDevice(aDecoder *foundation.NSC
 	return &MatrixBatchNormalizationGradient{inner: raw.MPSMatrixBatchNormalizationGradientFromID(_id)}
 }
 
+// @property   sourceNumberOfFeatureVectors @discussion The number of input vectors which make up the input array.
+//
 // WithSourceNumberOfFeatureVectors sets the sourceNumberOfFeatureVectors property and returns the receiver for chaining.
 func (x *MatrixBatchNormalizationGradient) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) *MatrixBatchNormalizationGradient {
 	x.inner.SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors)
 	return x
 }
 
+// @property   sourceInputFeatureChannels @discussion The number of feature channels in the input vectors.
+//
 // WithSourceInputFeatureChannels sets the sourceInputFeatureChannels property and returns the receiver for chaining.
 func (x *MatrixBatchNormalizationGradient) WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixBatchNormalizationGradient {
 	x.inner.SetSourceInputFeatureChannels(sourceInputFeatureChannels)
 	return x
 }
 
+// @property   epsilon @discussion A small term added to the variance when normalizing the input.
+//
 // WithEpsilon sets the epsilon property and returns the receiver for chaining.
 func (x *MatrixBatchNormalizationGradient) WithEpsilon(epsilon float32) *MatrixBatchNormalizationGradient {
 	x.inner.SetEpsilon(epsilon)
 	return x
 }
 
+// @property   primarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithPrimarySourceMatrixOrigin sets the primarySourceMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixBatchNormalizationGradient) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixBatchNormalizationGradient {
 	x.inner.MPSMatrixBinaryKernel.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
 	return x
 }
 
+// @property   secondarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithSecondarySourceMatrixOrigin sets the secondarySourceMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixBatchNormalizationGradient) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixBatchNormalizationGradient {
 	x.inner.MPSMatrixBinaryKernel.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
 	return x
 }
 
+// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixBatchNormalizationGradient) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixBatchNormalizationGradient {
 	x.inner.MPSMatrixBinaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
 	return x
 }
 
+// @property   batchStart @discussion The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+//
 // WithBatchStart sets the batchStart property and returns the receiver for chaining.
 func (x *MatrixBatchNormalizationGradient) WithBatchStart(batchStart uint) *MatrixBatchNormalizationGradient {
 	x.inner.MPSMatrixBinaryKernel.SetBatchStart(batchStart)
 	return x
 }
 
+// @property   batchSize @discussion The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+//
 // WithBatchSize sets the batchSize property and returns the receiver for chaining.
 func (x *MatrixBatchNormalizationGradient) WithBatchSize(batchSize uint) *MatrixBatchNormalizationGradient {
 	x.inner.MPSMatrixBinaryKernel.SetBatchSize(batchSize)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixBatchNormalizationGradient) WithOptions(options mpscore.MPSKernelOptions) *MatrixBatchNormalizationGradient {
 	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixBatchNormalizationGradient) WithLabel(label string) *MatrixBatchNormalizationGradient {
 	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @abstract   Specifies a neuron activation function to be used. @discussion This method can be used to add a neuron activation funtion of given type with associated scalar parameters A, B, and C that are shared across all output values. Note that this method can only be used to specify neurons which are specified by three (or fewer) parameters shared across all output values (or channels, in CNN nomenclature). It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. An MPSMatrixBatchNormalizationGradient kernel is initialized with a default neuron function of MPSCNNNeuronTypeNone. @param      neuronType      Type of neuron activation function. For full list see MPSCNNNeuronType.h @param      parameterA      parameterA of neuron activation that is shared across all output values. @param      parameterB      parameterB of neuron activation that is shared across all output values. @param      parameterC      parameterC of neuron activation that is shared across all output values.
+//
 // SetNeuronTypeParameterAParameterBParameterC calls the underlying SetNeuronTypeParameterAParameterBParameterC.
 func (x *MatrixBatchNormalizationGradient) SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
 	x.inner.SetNeuronTypeParameterAParameterBParameterC(neuronType, parameterA, parameterB, parameterC)
 }
 
+// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+//
 // NeuronType calls the underlying NeuronType.
 func (x *MatrixBatchNormalizationGradient) NeuronType() mpsneuralnetwork.MPSCNNNeuronType {
 	return x.inner.NeuronType()
 }
 
+// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+//
 // NeuronParameterA calls the underlying NeuronParameterA.
 func (x *MatrixBatchNormalizationGradient) NeuronParameterA() float32 {
 	return x.inner.NeuronParameterA()
 }
 
+// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+//
 // NeuronParameterB calls the underlying NeuronParameterB.
 func (x *MatrixBatchNormalizationGradient) NeuronParameterB() float32 {
 	return x.inner.NeuronParameterB()
 }
 
+// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+//
 // NeuronParameterC calls the underlying NeuronParameterC.
 func (x *MatrixBatchNormalizationGradient) NeuronParameterC() float32 {
 	return x.inner.NeuronParameterC()
 }
 
+// @abstract   Encode a MPSMatrixBatchNormalizationGradient object to a command buffer and compute its gradient with respect to its input data. @param      commandBuffer                   The commandBuffer on which to encode the operation. @param      gradientMatrix                  A matrix whose values represent the gradient of a loss function with respect to the results of a forward MPSMatrixBatchNormalization operation. @param      inputMatrix                     A matrix containing the inputs to a forward MPSMatrixBatchNormalization operation for which the gradient values are to be computed. @param      meanVector                      A vector containing the batch mean values.  Should contain either the specified values used to compute the forward result, or the computed values resulting from the forward kernel execution. @param      varianceVector                  A vector containing the batch variance values.  Should contain either the specified values used to compute the forward result, or the computed values resulting from the forward kernel execution. @param      gammaVector                     A vector containing the gamma terms.  Should be the same values as used when computing the forward result. @param      betaVector                      A vector containing the beta terms.  Should be the same values as used when computing the forward result. @param      resultGradientForDataMatrix     The matrix containing the resulting gradient values. @param      resultGradientForGammaVector    If non-NULL the vector containing gradients for the gamma terms. @param      resultGradientForBetaVector     If non-NULL the vector containing gradients for the beta terms.
+//
 // EncodeToCommandBufferGradientMatrixInputMatrixMeanVectorVarianceVectorGammaVectorBetaVectorResultGradientForDataMatrixResultGradientForGammaVectorResultGradientForBetaVector calls the underlying EncodeToCommandBufferGradientMatrixInputMatrixMeanVectorVarianceVectorGammaVectorBetaVectorResultGradientForDataMatrixResultGradientForGammaVectorResultGradientForBetaVector.
 func (x *MatrixBatchNormalizationGradient) EncodeToCommandBufferGradientMatrixInputMatrixMeanVectorVarianceVectorGammaVectorBetaVectorResultGradientForDataMatrixResultGradientForGammaVectorResultGradientForBetaVector(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, inputMatrix *mpscore.MPSMatrix, meanVector *mpscore.MPSVector, varianceVector *mpscore.MPSVector, gammaVector *mpscore.MPSVector, betaVector *mpscore.MPSVector, resultGradientForDataMatrix *mpscore.MPSMatrix, resultGradientForGammaVector *mpscore.MPSVector, resultGradientForBetaVector *mpscore.MPSVector) {
 	x.inner.EncodeToCommandBufferGradientMatrixInputMatrixMeanVectorVarianceVectorGammaVectorBetaVectorResultGradientForDataMatrixResultGradientForGammaVectorResultGradientForBetaVector(commandBuffer, gradientMatrix, inputMatrix, meanVector, varianceVector, gammaVector, betaVector, resultGradientForDataMatrix, resultGradientForGammaVector, resultGradientForBetaVector)
 }
 
+// @abstract   Make a copy of this kernel for a new device - @see MPSKernel @param      zone        The NSZone in which to allocate the object @param      device      The device for the new MPSKernel. If nil, then use self.device. @result     A pointer to a copy of this MPSKernel. This will fail, returning nil if the device is not supported. Devices must be MTLFeatureSet_iOS_GPUFamily2_v1 or later.
+//
 // CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
 func (x *MatrixBatchNormalizationGradient) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *MatrixBatchNormalizationGradient {
 	_r := x.inner.CopyWithZoneDevice(zone, device)
@@ -150,6 +186,8 @@ func (x *MatrixBatchNormalizationGradient) CopyWithZoneDevice(zone unsafe.Pointe
 	return &MatrixBatchNormalizationGradient{inner: _r}
 }
 
+// @property   sourceNumberOfFeatureVectors @discussion The number of input vectors which make up the input array.
+//
 // SourceNumberOfFeatureVectors calls the underlying SourceNumberOfFeatureVectors.
 func (x *MatrixBatchNormalizationGradient) SourceNumberOfFeatureVectors() uint {
 	return x.inner.SourceNumberOfFeatureVectors()
@@ -160,6 +198,8 @@ func (x *MatrixBatchNormalizationGradient) SetSourceNumberOfFeatureVectors(sourc
 	x.inner.SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors)
 }
 
+// @property   sourceInputFeatureChannels @discussion The number of feature channels in the input vectors.
+//
 // SourceInputFeatureChannels calls the underlying SourceInputFeatureChannels.
 func (x *MatrixBatchNormalizationGradient) SourceInputFeatureChannels() uint {
 	return x.inner.SourceInputFeatureChannels()
@@ -170,6 +210,8 @@ func (x *MatrixBatchNormalizationGradient) SetSourceInputFeatureChannels(sourceI
 	x.inner.SetSourceInputFeatureChannels(sourceInputFeatureChannels)
 }
 
+// @property   epsilon @discussion A small term added to the variance when normalizing the input.
+//
 // Epsilon calls the underlying Epsilon.
 func (x *MatrixBatchNormalizationGradient) Epsilon() float32 {
 	return x.inner.Epsilon()

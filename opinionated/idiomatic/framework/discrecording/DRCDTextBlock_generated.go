@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @class		DRCDTextBlock @abstract	Defines a CD-Text block, which holds the CD-Text strings for the entire disc in one language.
+//
 // CDTextBlock wraps [raw.DRCDTextBlock] with a fluent Go API.
 type CDTextBlock struct {
 	inner *raw.DRCDTextBlock
@@ -31,6 +33,8 @@ func CDTextBlockFromID(id objc.ID) *CDTextBlock {
 	return &CDTextBlock{inner: raw.DRCDTextBlockFromID(id)}
 }
 
+// @method		initWithLanguage:encoding: @abstract	Initializes an empty CD-Text block. @param		lang		ISO 639 language code describing the language which this block will hold. CD-Text allows the concept of an unknown language, which can be represented here by an empty string. @param		enc			Character encoding into which the strings in this block will be converted. @result		A DRCDTextBlock object.
+//
 // NewCDTextBlockWithLanguageEncoding creates a new [CDTextBlock].
 func NewCDTextBlockWithLanguageEncoding(lang string, enc uint) *CDTextBlock {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DRCDTextBlock")), objc.RegisterName("alloc"))
@@ -38,41 +42,57 @@ func NewCDTextBlockWithLanguageEncoding(lang string, enc uint) *CDTextBlock {
 	return &CDTextBlock{inner: raw.DRCDTextBlockFromID(_id)}
 }
 
+// @method 		properties @abstract		Returns the properties dictionary of the CD-Text block. @result  		An NSDictionary containing the properties of the block.
+//
 // Properties calls the underlying Properties.
 func (x *CDTextBlock) Properties() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.Properties()
 }
 
+// @method 		setProperties: @abstract		Sets the properties dictionary of the CD-Text block. @param 			properties	NSDictionary of the properties to set.
+//
 // SetProperties calls the underlying SetProperties.
 func (x *CDTextBlock) SetProperties(properties *foundation.NSDictionary[objc.ID, objc.ID]) {
 	x.inner.SetProperties(properties)
 }
 
+// @method		trackDictionaries @abstract	Returns a copy of the array of track dictionaries for the block. @result		An autoreleased NSArray of CFDictionaries of CFStrings, containing the CD-Text information. @discussion	Each item in the array is a dictionary, which in turn holds key-value encoded information about the track/disc.  Array index 0 holds information about the disc, index 1 holds information about track 1, index 2 holds information about track 2, etc.
+//
 // TrackDictionaries calls the underlying TrackDictionaries.
 func (x *CDTextBlock) TrackDictionaries() *foundation.NSArray[objc.ID] {
 	return x.inner.TrackDictionaries()
 }
 
+// @method		setTrackDictionaries: @abstract	Sets the array of track dictionaries for the block. @param		tracks		An NSArray of NSDictionaries of NSStrings, containing the CD-Text information. @discussion	Each item in the array is a dictionary, which in turn holds key-value encoded information about the track/disc.  Array index 0 holds information about the disc, index 1 holds information about track 1, index 2 holds information about track 2, etc. Any incoming strings are automatically modified to conform to the character set specified in the language block. Calling -trackDictionaries immediately after -setTrackDictionaries: will provide the modified values.  These may not be the same as the ones you passed in, but instead correspond to what will actually be used.
+//
 // SetTrackDictionaries calls the underlying SetTrackDictionaries.
 func (x *CDTextBlock) SetTrackDictionaries(tracks *foundation.NSArray[objc.ID]) {
 	x.inner.SetTrackDictionaries(tracks)
 }
 
+// @method		objectForKey:ofTrack: @abstract	Returns a single value from the block. @param		key			Key to get the value of. @param		trackIndex	One-based index of the track to query, or 0 to query the disc. @result		Autoreleased NSObject for the key, or nil if not present.
+//
 // ObjectForKeyOfTrack calls the underlying ObjectForKeyOfTrack.
 func (x *CDTextBlock) ObjectForKeyOfTrack(key string, trackIndex uint) objc.ID {
 	return x.inner.ObjectForKeyOfTrack(foundation.NSStringStringWithUTF8String(key), trackIndex)
 }
 
+// @method		setObject:forKey:ofTrack: @abstract	Changes a single string in the block. @param		value		Value - an NSString, NSData, or NSNumber as appropriate. @param		key			Key to assign. @param		trackIndex	One-based index of the track to modify, or 0 to modify the disc.
+//
 // SetObjectForKeyOfTrack calls the underlying SetObjectForKeyOfTrack.
 func (x *CDTextBlock) SetObjectForKeyOfTrack(value objc.ID, key string, trackIndex uint) {
 	x.inner.SetObjectForKeyOfTrack(value, foundation.NSStringStringWithUTF8String(key), trackIndex)
 }
 
+// @method		flatten @abstract	Flattens the CD-Text block to determine whether any information will be truncated. @discussion	When burning your CD-Text information to a CD, DiscRecording will automatically truncate some of the information you've specified if it does not fit. The size limit for CD-Text is approximately 3K of strings per block.  This limit is only approximate because some of this space is taken up as overhead, and duplicate strings can sometimes be combined.  The only way to tell for sure how big your CD-Text block is going to be is to ask DiscRecording to try flattening it.  You can use this function to determine whether truncation will be needed. Some clients will want to accept DiscRecording's truncation since it preserves the most important information and provides the simplest user experience.  If you do not wish to use DiscRecording's automatic truncation, it is your responsibility to make sure that you specify a CD-Text block that will fit. Following is a simple algorithm to avoid having your CD-Text data truncated: <ol> <li>Call -[myCDTextBlock flatten]. <li>If the result is 0, no truncation is necessary. Stop. <li>Otherwise, truncation will occur -- edit or remove some data. <li>Repeat. </ol> @result		The number of bytes that will be truncated from the CD-Text block.  If this method returns 0, no truncation will occur.
+//
 // Flatten calls the underlying Flatten.
 func (x *CDTextBlock) Flatten() uint {
 	return x.inner.Flatten()
 }
 
+// @method		language @abstract	Returns the ISO 639 language code describing the language associated with the CD-Text block.  CD-Text allows the concept of an unknown language, which is represented here by an empty string. @result		A DRCDTextLanguage.
+//
 // Language calls the underlying Language.
 func (x *CDTextBlock) Language() string {
 	_r := x.inner.Language()
@@ -82,6 +102,8 @@ func (x *CDTextBlock) Language() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @method		encoding @abstract	Returns the string encoding associated with the CD-Text block. @result		A NSStringEncoding.
+//
 // Encoding calls the underlying Encoding.
 func (x *CDTextBlock) Encoding() uint {
 	return x.inner.Encoding()

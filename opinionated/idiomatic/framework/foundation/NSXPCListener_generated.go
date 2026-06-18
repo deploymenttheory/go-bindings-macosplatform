@@ -69,6 +69,8 @@ func (x *XPCListener) Invalidate() {
 	x.inner.Invalidate()
 }
 
+// Sets the code signing requirement for new connections. If the requirement is malformed, an exception is thrown. If new peer connections do not match the requirement, the incoming connection is automatically rejected before consulting the delegate. This method will only work on `anonymousListener` or `initWithMachServiceName` listener instances. Use on other types of listeners will result in an assertion failure. See https://developer.apple.com/library/archive/documentation/Security/Conceptual/CodeSigningGuide/RequirementLang/RequirementLang.html for more information on the format.
+//
 // SetConnectionCodeSigningRequirement calls the underlying SetConnectionCodeSigningRequirement.
 func (x *XPCListener) SetConnectionCodeSigningRequirement(requirement string) {
 	x.inner.SetConnectionCodeSigningRequirement(foundation.NSStringStringWithUTF8String(requirement))

@@ -86,6 +86,8 @@ func (x *PersistentStoreDescription) WithShouldInferMappingModelAutomatically(sh
 	return x
 }
 
+// Use this property to apply customized instances of NSPersistentCloudKitContainerOptions to a store description you wish to use with CloudKit.
+//
 // WithCloudKitContainerOptions sets the cloudKitContainerOptions property and returns the receiver for chaining.
 func (x *PersistentStoreDescription) WithCloudKitContainerOptions(cloudKitContainerOptions *PersistentCloudKitContainerOptions) *PersistentStoreDescription {
 	x.inner.SetCloudKitContainerOptions(cloudKitContainerOptions.Unwrap())

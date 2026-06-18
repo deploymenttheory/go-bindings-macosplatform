@@ -31,6 +31,8 @@ func UserIdentityLookupInfoFromID(id objc.ID) *UserIdentityLookupInfo {
 	return &UserIdentityLookupInfo{inner: raw.CKUserIdentityLookupInfoFromID(id)}
 }
 
+// Creates a lookup info for the specified email address. - Parameters: - emailAddress: The email address for looking up the user identity. After you create a lookup info, use the “CKDiscoverUserIdentitiesOperation“ operation or the  “CKFetchShareParticipantsOperation“ operation to retrieve the corresponding user identity.
+//
 // NewUserIdentityLookupInfoWithEmailAddress creates a new [UserIdentityLookupInfo].
 func NewUserIdentityLookupInfoWithEmailAddress(emailAddress string) *UserIdentityLookupInfo {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKUserIdentityLookupInfo")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewUserIdentityLookupInfoWithEmailAddress(emailAddress string) *UserIdentit
 	return &UserIdentityLookupInfo{inner: raw.CKUserIdentityLookupInfoFromID(_id)}
 }
 
+// Creates a lookup info for the specified phone number. - Parameters: - phoneNumber: The phone number for looking up the user identity. After you create a lookup info, use the “CKDiscoverUserIdentitiesOperation“ operation or the  “CKFetchShareParticipantsOperation“ operation to retrieve the corresponding user identity.
+//
 // NewUserIdentityLookupInfoWithPhoneNumber creates a new [UserIdentityLookupInfo].
 func NewUserIdentityLookupInfoWithPhoneNumber(phoneNumber string) *UserIdentityLookupInfo {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKUserIdentityLookupInfo")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewUserIdentityLookupInfoWithPhoneNumber(phoneNumber string) *UserIdentityL
 	return &UserIdentityLookupInfo{inner: raw.CKUserIdentityLookupInfoFromID(_id)}
 }
 
+// Creates a lookup info for the specified user record ID. - Parameters: - userRecordID: The user record ID for looking up the user identity. After you create a lookup info, use the “CKDiscoverUserIdentitiesOperation“ operation or the  “CKFetchShareParticipantsOperation“ operation to retrieve the corresponding user identity.
+//
 // NewUserIdentityLookupInfoWithUserRecordID creates a new [UserIdentityLookupInfo].
 func NewUserIdentityLookupInfoWithUserRecordID(userRecordID *raw.CKRecordID) *UserIdentityLookupInfo {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKUserIdentityLookupInfo")), objc.RegisterName("alloc"))
@@ -52,6 +58,8 @@ func NewUserIdentityLookupInfoWithUserRecordID(userRecordID *raw.CKRecordID) *Us
 	return &UserIdentityLookupInfo{inner: raw.CKUserIdentityLookupInfoFromID(_id)}
 }
 
+// The user's email address.
+//
 // EmailAddress calls the underlying EmailAddress.
 func (x *UserIdentityLookupInfo) EmailAddress() string {
 	_r := x.inner.EmailAddress()
@@ -61,6 +69,8 @@ func (x *UserIdentityLookupInfo) EmailAddress() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The user's phone number.
+//
 // PhoneNumber calls the underlying PhoneNumber.
 func (x *UserIdentityLookupInfo) PhoneNumber() string {
 	_r := x.inner.PhoneNumber()
@@ -70,6 +80,8 @@ func (x *UserIdentityLookupInfo) PhoneNumber() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The ID of the user record. Use this value to retrieve the user record for the user identity. The user record doesn't contain any personal information about the user, by default. You can add data to the user record, but you shouldn't add anything sensitive.
+//
 // UserRecordID calls the underlying UserRecordID.
 func (x *UserIdentityLookupInfo) UserRecordID() *RecordID {
 	_r := x.inner.UserRecordID()

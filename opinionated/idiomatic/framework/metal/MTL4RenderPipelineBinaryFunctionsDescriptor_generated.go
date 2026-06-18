@@ -7,7 +7,9 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTL4RenderPipelineBinaryFunctionsDescriptor wraps [raw.MTL4RenderPipelineBinaryFunctionsDescriptor] with a fluent Go API.
@@ -38,59 +40,116 @@ func NewMTL4RenderPipelineBinaryFunctionsDescriptor() *MTL4RenderPipelineBinaryF
 	return &MTL4RenderPipelineBinaryFunctionsDescriptor{inner: raw.MTL4RenderPipelineBinaryFunctionsDescriptorFromID(_id)}
 }
 
+// Resets this descriptor to its default state.
+//
 // Reset calls the underlying Reset.
 func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) Reset() {
 	x.inner.Reset()
 }
 
+// Provides an array of binary functions representing additional binary vertex shader functions.
+//
 // VertexAdditionalBinaryFunctions calls the underlying VertexAdditionalBinaryFunctions.
 func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) VertexAdditionalBinaryFunctions() *foundation.NSArray[raw.MTL4BinaryFunction] {
 	return x.inner.VertexAdditionalBinaryFunctions()
 }
 
 // SetVertexAdditionalBinaryFunctions calls the underlying SetVertexAdditionalBinaryFunctions.
-func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetVertexAdditionalBinaryFunctions(vertexAdditionalBinaryFunctions *foundation.NSArray[raw.MTL4BinaryFunction]) {
-	x.inner.SetVertexAdditionalBinaryFunctions(vertexAdditionalBinaryFunctions)
+func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetVertexAdditionalBinaryFunctions(vertexAdditionalBinaryFunctions ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(vertexAdditionalBinaryFunctions))
+	for _i, _v := range vertexAdditionalBinaryFunctions {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTL4BinaryFunction]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTL4BinaryFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetVertexAdditionalBinaryFunctions(_arg0)
 }
 
+// Provides an array of binary functions representing additional binary fragment shader functions.
+//
 // FragmentAdditionalBinaryFunctions calls the underlying FragmentAdditionalBinaryFunctions.
 func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) FragmentAdditionalBinaryFunctions() *foundation.NSArray[raw.MTL4BinaryFunction] {
 	return x.inner.FragmentAdditionalBinaryFunctions()
 }
 
 // SetFragmentAdditionalBinaryFunctions calls the underlying SetFragmentAdditionalBinaryFunctions.
-func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetFragmentAdditionalBinaryFunctions(fragmentAdditionalBinaryFunctions *foundation.NSArray[raw.MTL4BinaryFunction]) {
-	x.inner.SetFragmentAdditionalBinaryFunctions(fragmentAdditionalBinaryFunctions)
+func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetFragmentAdditionalBinaryFunctions(fragmentAdditionalBinaryFunctions ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(fragmentAdditionalBinaryFunctions))
+	for _i, _v := range fragmentAdditionalBinaryFunctions {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTL4BinaryFunction]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTL4BinaryFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetFragmentAdditionalBinaryFunctions(_arg0)
 }
 
+// Provides an array of binary functions representing additional binary tile shader functions.
+//
 // TileAdditionalBinaryFunctions calls the underlying TileAdditionalBinaryFunctions.
 func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) TileAdditionalBinaryFunctions() *foundation.NSArray[raw.MTL4BinaryFunction] {
 	return x.inner.TileAdditionalBinaryFunctions()
 }
 
 // SetTileAdditionalBinaryFunctions calls the underlying SetTileAdditionalBinaryFunctions.
-func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetTileAdditionalBinaryFunctions(tileAdditionalBinaryFunctions *foundation.NSArray[raw.MTL4BinaryFunction]) {
-	x.inner.SetTileAdditionalBinaryFunctions(tileAdditionalBinaryFunctions)
+func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetTileAdditionalBinaryFunctions(tileAdditionalBinaryFunctions ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(tileAdditionalBinaryFunctions))
+	for _i, _v := range tileAdditionalBinaryFunctions {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTL4BinaryFunction]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTL4BinaryFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetTileAdditionalBinaryFunctions(_arg0)
 }
 
+// Provides an array of binary functions representing additional binary object shader functions.
+//
 // ObjectAdditionalBinaryFunctions calls the underlying ObjectAdditionalBinaryFunctions.
 func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) ObjectAdditionalBinaryFunctions() *foundation.NSArray[raw.MTL4BinaryFunction] {
 	return x.inner.ObjectAdditionalBinaryFunctions()
 }
 
 // SetObjectAdditionalBinaryFunctions calls the underlying SetObjectAdditionalBinaryFunctions.
-func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetObjectAdditionalBinaryFunctions(objectAdditionalBinaryFunctions *foundation.NSArray[raw.MTL4BinaryFunction]) {
-	x.inner.SetObjectAdditionalBinaryFunctions(objectAdditionalBinaryFunctions)
+func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetObjectAdditionalBinaryFunctions(objectAdditionalBinaryFunctions ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(objectAdditionalBinaryFunctions))
+	for _i, _v := range objectAdditionalBinaryFunctions {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTL4BinaryFunction]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTL4BinaryFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetObjectAdditionalBinaryFunctions(_arg0)
 }
 
+// Provides an array of binary functions representing additional binary mesh shader functions.
+//
 // MeshAdditionalBinaryFunctions calls the underlying MeshAdditionalBinaryFunctions.
 func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) MeshAdditionalBinaryFunctions() *foundation.NSArray[raw.MTL4BinaryFunction] {
 	return x.inner.MeshAdditionalBinaryFunctions()
 }
 
 // SetMeshAdditionalBinaryFunctions calls the underlying SetMeshAdditionalBinaryFunctions.
-func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetMeshAdditionalBinaryFunctions(meshAdditionalBinaryFunctions *foundation.NSArray[raw.MTL4BinaryFunction]) {
-	x.inner.SetMeshAdditionalBinaryFunctions(meshAdditionalBinaryFunctions)
+func (x *MTL4RenderPipelineBinaryFunctionsDescriptor) SetMeshAdditionalBinaryFunctions(meshAdditionalBinaryFunctions ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(meshAdditionalBinaryFunctions))
+	for _i, _v := range meshAdditionalBinaryFunctions {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTL4BinaryFunction]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTL4BinaryFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetMeshAdditionalBinaryFunctions(_arg0)
 }
 
 // MTL4RenderPipelineBinaryFunctionsDescriptorable is the interface implemented by [MTL4RenderPipelineBinaryFunctionsDescriptor], for mocking and DI.
@@ -98,15 +157,15 @@ type MTL4RenderPipelineBinaryFunctionsDescriptorable interface {
 	Unwrap() *raw.MTL4RenderPipelineBinaryFunctionsDescriptor
 	Reset()
 	VertexAdditionalBinaryFunctions() *foundation.NSArray[raw.MTL4BinaryFunction]
-	SetVertexAdditionalBinaryFunctions(vertexAdditionalBinaryFunctions *foundation.NSArray[raw.MTL4BinaryFunction])
+	SetVertexAdditionalBinaryFunctions(vertexAdditionalBinaryFunctions ...purego.IDer)
 	FragmentAdditionalBinaryFunctions() *foundation.NSArray[raw.MTL4BinaryFunction]
-	SetFragmentAdditionalBinaryFunctions(fragmentAdditionalBinaryFunctions *foundation.NSArray[raw.MTL4BinaryFunction])
+	SetFragmentAdditionalBinaryFunctions(fragmentAdditionalBinaryFunctions ...purego.IDer)
 	TileAdditionalBinaryFunctions() *foundation.NSArray[raw.MTL4BinaryFunction]
-	SetTileAdditionalBinaryFunctions(tileAdditionalBinaryFunctions *foundation.NSArray[raw.MTL4BinaryFunction])
+	SetTileAdditionalBinaryFunctions(tileAdditionalBinaryFunctions ...purego.IDer)
 	ObjectAdditionalBinaryFunctions() *foundation.NSArray[raw.MTL4BinaryFunction]
-	SetObjectAdditionalBinaryFunctions(objectAdditionalBinaryFunctions *foundation.NSArray[raw.MTL4BinaryFunction])
+	SetObjectAdditionalBinaryFunctions(objectAdditionalBinaryFunctions ...purego.IDer)
 	MeshAdditionalBinaryFunctions() *foundation.NSArray[raw.MTL4BinaryFunction]
-	SetMeshAdditionalBinaryFunctions(meshAdditionalBinaryFunctions *foundation.NSArray[raw.MTL4BinaryFunction])
+	SetMeshAdditionalBinaryFunctions(meshAdditionalBinaryFunctions ...purego.IDer)
 }
 
 var _ MTL4RenderPipelineBinaryFunctionsDescriptorable = (*MTL4RenderPipelineBinaryFunctionsDescriptor)(nil)

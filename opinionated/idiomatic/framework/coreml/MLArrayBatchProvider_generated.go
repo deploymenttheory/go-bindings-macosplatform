@@ -32,13 +32,26 @@ func ArrayBatchProviderFromID(id objc.ID) *ArrayBatchProvider {
 	return &ArrayBatchProvider{inner: raw.MLArrayBatchProviderFromID(id)}
 }
 
+// Initalize with an array of feature providers
+//
 // NewArrayBatchProviderWithFeatureProviderArray creates a new [ArrayBatchProvider].
-func NewArrayBatchProviderWithFeatureProviderArray(array *foundation.NSArray[raw.MLFeatureProvider]) *ArrayBatchProvider {
+func NewArrayBatchProviderWithFeatureProviderArray(array ...purego.IDer) *ArrayBatchProvider {
+	_ptrs := make([]objc.ID, len(array))
+	for _i, _v := range array {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MLFeatureProvider]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MLFeatureProvider](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MLArrayBatchProvider")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFeatureProviderArray:"), array.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFeatureProviderArray:"), _arg0.Ptr())
 	return &ArrayBatchProvider{inner: raw.MLArrayBatchProviderFromID(_id)}
 }
 
+// Initialize with a dictionary which maps feature names to an array of values [String : [Any]] Error is returned if all arrays do not have equal length or if array values for a specific feature name do not have the same type or not expressible as MLFeatureValue
+//
 // NewArrayBatchProviderWithDictionaryError creates a new [ArrayBatchProvider].
 func NewArrayBatchProviderWithDictionaryError(dictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*ArrayBatchProvider, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MLArrayBatchProvider")), objc.RegisterName("alloc"))

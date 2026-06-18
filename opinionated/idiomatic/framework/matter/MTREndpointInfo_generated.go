@@ -64,6 +64,8 @@ func (x *MTREndpointInfo) PartsList() []*foundation.NSNumber {
 	})
 }
 
+// The direct children of this endpoint. This excludes indirect descendants even if they are listed in the PartsList attribute of this endpoint due to the Full-Family Pattern being used. Refer to Endpoint Composition Patterns in the Matter specification for details.
+//
 // Children returns the collection as a Go slice.
 func (x *MTREndpointInfo) Children() []*MTREndpointInfo {
 	arr := x.inner.Children()

@@ -37,6 +37,8 @@ func NewLogMessageComponent() *LogMessageComponent {
 	return &LogMessageComponent{inner: raw.OSLogMessageComponentFromID(_id)}
 }
 
+// @property formatSubstring @abstract The text immediately preceding a placeholder. This can be an empty string if there is nothing between two placeholders, or between the placeholder and the bounds of the string.
+//
 // FormatSubstring calls the underlying FormatSubstring.
 func (x *LogMessageComponent) FormatSubstring() string {
 	_r := x.inner.FormatSubstring()
@@ -46,6 +48,8 @@ func (x *LogMessageComponent) FormatSubstring() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property placeholder @abstract The placeholder text. Is empty for is the last component.
+//
 // Placeholder calls the underlying Placeholder.
 func (x *LogMessageComponent) Placeholder() string {
 	_r := x.inner.Placeholder()
@@ -55,31 +59,43 @@ func (x *LogMessageComponent) Placeholder() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property argumentCategory @abstract The type of argument corresponding to the placeholder; see OSLogMessageComponentArgumentCategory.
+//
 // ArgumentCategory calls the underlying ArgumentCategory.
 func (x *LogMessageComponent) ArgumentCategory() OSLogMessageComponentArgumentCategory {
 	return OSLogMessageComponentArgumentCategory(x.inner.ArgumentCategory())
 }
 
+// @property argumentDataValue @abstract The argument as a sequence of bytes. Can be nil if the argument cannot be decoded (for example, it could be redacted), or if this is the last component.
+//
 // ArgumentDataValue calls the underlying ArgumentDataValue.
 func (x *LogMessageComponent) ArgumentDataValue() *foundation.NSData {
 	return x.inner.ArgumentDataValue()
 }
 
+// @property argumentDoubleValue @abstract The argument as a double-precision floating point number; the value is undefined if the argument cannot be decoded or if this is the last component.
+//
 // ArgumentDoubleValue calls the underlying ArgumentDoubleValue.
 func (x *LogMessageComponent) ArgumentDoubleValue() float64 {
 	return x.inner.ArgumentDoubleValue()
 }
 
+// @property argumentInt64Value @abstract The argument as a 64-bit signed integer; the value is undefined if it cannot be decoded or if this is the last component.
+//
 // ArgumentInt64Value calls the underlying ArgumentInt64Value.
 func (x *LogMessageComponent) ArgumentInt64Value() int64 {
 	return x.inner.ArgumentInt64Value()
 }
 
+// @property argumentNumberValue @abstract The argument as a number. Can be nil if the argument cannot be decoded (for example, it could be redacted), or if this is the last component.
+//
 // ArgumentNumberValue calls the underlying ArgumentNumberValue.
 func (x *LogMessageComponent) ArgumentNumberValue() *foundation.NSNumber {
 	return x.inner.ArgumentNumberValue()
 }
 
+// @property argumentStringValue @abstract The argument as a string. Can be nil if the argument cannot be decoded (for example, it could be redacted), or if this is the last component.
+//
 // ArgumentStringValue calls the underlying ArgumentStringValue.
 func (x *LogMessageComponent) ArgumentStringValue() string {
 	_r := x.inner.ArgumentStringValue()
@@ -89,6 +105,8 @@ func (x *LogMessageComponent) ArgumentStringValue() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property argumentUInt64Value @abstract The argument as a 64-bit unsigned integer; the value is undefined if the argument cannot be decoded or if this is the last component.
+//
 // ArgumentUInt64Value calls the underlying ArgumentUInt64Value.
 func (x *LogMessageComponent) ArgumentUInt64Value() uint64 {
 	return x.inner.ArgumentUInt64Value()

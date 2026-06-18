@@ -37,17 +37,23 @@ func NewEmergencyResponseManager() *EmergencyResponseManager {
 	return &EmergencyResponseManager{inner: raw.SAEmergencyResponseManagerFromID(_id)}
 }
 
+// delegate @discussion The delegate object to receive updates about requested emergency response action.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *EmergencyResponseManager) WithDelegate(delegate raw.SAEmergencyResponseDelegate) *EmergencyResponseManager {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @discussion Requests the system to dial a voice call on behalf of the user. Apps running in the background / foreground can request to dial a voice call without user confirmation. Emergency numbers are not allowed. Requests are accepted only if user has authorized the app to receive and handle emergency detection events and only for a limited time after an emergency event is detected. @sa SAEmergencyResponseDelegate @param phoneNumber Apps can request the system to dial a voice call by providing a phone number. Emergency numbers are not allowed. @param handler Completion handler invoked with the status of the voice call request. If requested is accepted, the handler is invoked with a nil error. Interpret the error returned using SAErrorDomain. Requests will fail with SAErrorNotAuthorized if user has not authorized the app to receive and handle any emergency events. Requests will fail with SAErrorNotAvailable if invoked outside of the limited time window after an emergency event is detected. Use the SAEmergencyResponseDelegate to monitor the progress of the voice call.
+//
 // DialVoiceCallToPhoneNumberCompletionHandler calls the underlying DialVoiceCallToPhoneNumberCompletionHandler.
 func (x *EmergencyResponseManager) DialVoiceCallToPhoneNumberCompletionHandler(phoneNumber string, handler func(bool, unsafe.Pointer)) {
 	x.inner.DialVoiceCallToPhoneNumberCompletionHandler(foundation.NSStringStringWithUTF8String(phoneNumber), handler)
 }
 
+// delegate @discussion The delegate object to receive updates about requested emergency response action.
+//
 // Delegate calls the underlying Delegate.
 func (x *EmergencyResponseManager) Delegate() raw.SAEmergencyResponseDelegate {
 	return x.inner.Delegate()

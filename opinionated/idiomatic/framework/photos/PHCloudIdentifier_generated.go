@@ -31,6 +31,8 @@ func CloudIdentifierFromID(id objc.ID) *CloudIdentifier {
 	return &CloudIdentifier{inner: raw.PHCloudIdentifierFromID(id)}
 }
 
+// Deserialization
+//
 // NewCloudIdentifierWithStringValue creates a new [CloudIdentifier].
 func NewCloudIdentifierWithStringValue(stringValue string) *CloudIdentifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHCloudIdentifier")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewCloudIdentifierWithStringValue(stringValue string) *CloudIdentifier {
 	return &CloudIdentifier{inner: raw.PHCloudIdentifierFromID(_id)}
 }
 
+// For use in serialization
+//
 // StringValue calls the underlying StringValue.
 func (x *CloudIdentifier) StringValue() string {
 	_r := x.inner.StringValue()

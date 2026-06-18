@@ -39,18 +39,24 @@ func NewRasterizationRateMapDescriptor() *RasterizationRateMapDescriptor {
 	return &RasterizationRateMapDescriptor{inner: raw.MTLRasterizationRateMapDescriptorFromID(_id)}
 }
 
+// @property screenSize @return The dimensions, in screen space pixels, of the region where variable rasterization is applied. @discussion The region always has its origin at [0, 0]. The depth component of MTLSize is ignored.
+//
 // WithScreenSize sets the screenSize property and returns the receiver for chaining.
 func (x *RasterizationRateMapDescriptor) WithScreenSize(screenSize raw.MTLSize) *RasterizationRateMapDescriptor {
 	x.inner.SetScreenSize(screenSize)
 	return x
 }
 
+// @property label @abstract A string to help identify this object. @discussion The default value is nil.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *RasterizationRateMapDescriptor) WithLabel(label string) *RasterizationRateMapDescriptor {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @method layerAtIndex: @return The MTLRasterizationRateLayerDescriptor instance for the given layerIndex, or nil if no instance hasn't been set for this index. @discussion Use setLayer:atIndex: to add or set the layer. Identical to "layers[layerIndex]".
+//
 // LayerAtIndex calls the underlying LayerAtIndex.
 func (x *RasterizationRateMapDescriptor) LayerAtIndex(layerIndex uint) *RasterizationRateLayerDescriptor {
 	_r := x.inner.LayerAtIndex(layerIndex)
@@ -60,11 +66,15 @@ func (x *RasterizationRateMapDescriptor) LayerAtIndex(layerIndex uint) *Rasteriz
 	return &RasterizationRateLayerDescriptor{inner: _r}
 }
 
+// @method setLayer:atIndex: @abstract Sets the MTLRasterizationRateLayerDescriptor instance for the given layerIndex. @discussion The previous instance at the index, if any, will be overwritten. Set nil to an index to remove the layer at that index from the descriptor. Identical to "layers[layerIndex] = layer".
+//
 // SetLayerAtIndex calls the underlying SetLayerAtIndex.
 func (x *RasterizationRateMapDescriptor) SetLayerAtIndex(layer *raw.MTLRasterizationRateLayerDescriptor, layerIndex uint) {
 	x.inner.SetLayerAtIndex(layer, layerIndex)
 }
 
+// @property layers @return A modifiable array of layers @discussion Accesses the layers currently stored in the descriptor. Syntactic sugar around "layerAtIndex:" and "setLayer:atIndex:"
+//
 // Layers calls the underlying Layers.
 func (x *RasterizationRateMapDescriptor) Layers() *RasterizationRateLayerArray {
 	_r := x.inner.Layers()
@@ -74,6 +84,8 @@ func (x *RasterizationRateMapDescriptor) Layers() *RasterizationRateLayerArray {
 	return &RasterizationRateLayerArray{inner: _r}
 }
 
+// @property screenSize @return The dimensions, in screen space pixels, of the region where variable rasterization is applied. @discussion The region always has its origin at [0, 0]. The depth component of MTLSize is ignored.
+//
 // ScreenSize calls the underlying ScreenSize.
 func (x *RasterizationRateMapDescriptor) ScreenSize() raw.MTLSize {
 	return x.inner.ScreenSize()
@@ -84,6 +96,8 @@ func (x *RasterizationRateMapDescriptor) SetScreenSize(screenSize raw.MTLSize) {
 	x.inner.SetScreenSize(screenSize)
 }
 
+// @property label @abstract A string to help identify this object. @discussion The default value is nil.
+//
 // Label calls the underlying Label.
 func (x *RasterizationRateMapDescriptor) Label() string {
 	_r := x.inner.Label()
@@ -98,6 +112,8 @@ func (x *RasterizationRateMapDescriptor) SetLabel(label string) {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 }
 
+// @property layerCount @return The number of subsequent non-nil layer instances stored in the descriptor, starting at index 0. @discussion This property is modified by setting new layer instances using setLayer:atIndex: or assigning to layers[X]
+//
 // LayerCount calls the underlying LayerCount.
 func (x *RasterizationRateMapDescriptor) LayerCount() uint {
 	return x.inner.LayerCount()

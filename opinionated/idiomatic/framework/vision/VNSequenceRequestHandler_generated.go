@@ -39,61 +39,85 @@ func NewSequenceRequestHandler() *SequenceRequestHandler {
 	return &SequenceRequestHandler{inner: raw.VNSequenceRequestHandlerFromID(_id)}
 }
 
+// @brief Perform requests on an image in a CVPixelBuffer. @param	requests		The VNRequests to be performed on the image. @param	pixelBuffer		The CVPixelBuffer containing the image to be processed. @param	error			On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify NULL for this parameter if you do not want the error information.
+//
 // PerformRequestsOnCVPixelBufferError calls the underlying PerformRequestsOnCVPixelBufferError.
 func (x *SequenceRequestHandler) PerformRequestsOnCVPixelBufferError(requests *foundation.NSArray[*raw.VNRequest], pixelBuffer unsafe.Pointer) (bool, error) {
 	return x.inner.PerformRequestsOnCVPixelBufferError(requests, pixelBuffer)
 }
 
+// @brief Perform requests on an image in a CVPixelBuffer. @param	requests		The VNRequests to be performed on the image. @param	pixelBuffer		The CVPixelBuffer containing the image to be processed. @param	orientation		The orientation of the image as it is captured in the pixel buffer. @param	error			On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify NULL for this parameter if you do not want the error information.
+//
 // PerformRequestsOnCVPixelBufferOrientationError calls the underlying PerformRequestsOnCVPixelBufferOrientationError.
 func (x *SequenceRequestHandler) PerformRequestsOnCVPixelBufferOrientationError(requests *foundation.NSArray[*raw.VNRequest], pixelBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation) (bool, error) {
 	return x.inner.PerformRequestsOnCVPixelBufferOrientationError(requests, pixelBuffer, orientation)
 }
 
+// @brief Perform requests on an image in a CGImageRef. @param	requests		The VNRequests to be performed on the image. @param	image			The CGImageRef containing the image to be processed. @param	error			On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify NULL for this parameter if you do not want the error information.
+//
 // PerformRequestsOnCGImageError calls the underlying PerformRequestsOnCGImageError.
 func (x *SequenceRequestHandler) PerformRequestsOnCGImageError(requests *foundation.NSArray[*raw.VNRequest], image unsafe.Pointer) (bool, error) {
 	return x.inner.PerformRequestsOnCGImageError(requests, image)
 }
 
+// @brief Perform requests on an image in a CGImageRef. @param	requests		The VNRequests to be performed on the image. @param	image			The CGImageRef containing the image to be processed. @param	orientation		The orientation of the image. @param	error			On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify NULL for this parameter if you do not want the error information.
+//
 // PerformRequestsOnCGImageOrientationError calls the underlying PerformRequestsOnCGImageOrientationError.
 func (x *SequenceRequestHandler) PerformRequestsOnCGImageOrientationError(requests *foundation.NSArray[*raw.VNRequest], image unsafe.Pointer, orientation imageio.CGImagePropertyOrientation) (bool, error) {
 	return x.inner.PerformRequestsOnCGImageOrientationError(requests, image, orientation)
 }
 
+// @brief Perform requests on an image in a CIImage. @param	requests		The VNRequests to be performed on the image. @param	image			The CIImage containing the image to be processed. @param	error			On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify NULL for this parameter if you do not want the error information.
+//
 // PerformRequestsOnCIImageError calls the underlying PerformRequestsOnCIImageError.
 func (x *SequenceRequestHandler) PerformRequestsOnCIImageError(requests *foundation.NSArray[*raw.VNRequest], image *coreimage.CIImage) (bool, error) {
 	return x.inner.PerformRequestsOnCIImageError(requests, image)
 }
 
+// @brief Perform requests on an image in a CIImage. @param	requests		The VNRequests to be performed on the image. @param	image			The CIImage containing the image to be processed. @param	orientation		The orientation of the image. @param	error			On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify NULL for this parameter if you do not want the error information.
+//
 // PerformRequestsOnCIImageOrientationError calls the underlying PerformRequestsOnCIImageOrientationError.
 func (x *SequenceRequestHandler) PerformRequestsOnCIImageOrientationError(requests *foundation.NSArray[*raw.VNRequest], image *coreimage.CIImage, orientation imageio.CGImagePropertyOrientation) (bool, error) {
 	return x.inner.PerformRequestsOnCIImageOrientationError(requests, image, orientation)
 }
 
+// @brief Perform requests on an image referenced by an URL. @param	requests		The VNRequests to be performed on the image. @param	imageURL		The URL of the image to be processed.  If this is not a file-based URL, the method will fail. @param	error			On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify NULL for this parameter if you do not want the error information.
+//
 // PerformRequestsOnImageURLError calls the underlying PerformRequestsOnImageURLError.
 func (x *SequenceRequestHandler) PerformRequestsOnImageURLError(requests *foundation.NSArray[*raw.VNRequest], imageURL string) (bool, error) {
 	return x.inner.PerformRequestsOnImageURLError(requests, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(imageURL)))
 }
 
+// @brief Perform requests on an image referenced by an URL. @param	requests		The VNRequests to be performed on the image. @param	imageURL		The URL of the image to be processed.  If this is not a file-based URL, the method will fail. @param	orientation		The orientation of the image. @param	error			On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify NULL for this parameter if you do not want the error information.
+//
 // PerformRequestsOnImageURLOrientationError calls the underlying PerformRequestsOnImageURLOrientationError.
 func (x *SequenceRequestHandler) PerformRequestsOnImageURLOrientationError(requests *foundation.NSArray[*raw.VNRequest], imageURL string, orientation imageio.CGImagePropertyOrientation) (bool, error) {
 	return x.inner.PerformRequestsOnImageURLOrientationError(requests, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(imageURL)), orientation)
 }
 
+// @brief Perform requests on an image with its source format in memory. @param	requests		The VNRequests to be performed on the image. @param	imageData		The data representing the source format of the image to be processed. @param	error			On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify NULL for this parameter if you do not want the error information.
+//
 // PerformRequestsOnImageDataError calls the underlying PerformRequestsOnImageDataError.
 func (x *SequenceRequestHandler) PerformRequestsOnImageDataError(requests *foundation.NSArray[*raw.VNRequest], imageData *foundation.NSData) (bool, error) {
 	return x.inner.PerformRequestsOnImageDataError(requests, imageData)
 }
 
+// @brief Perform requests on an image with its source format in memory. @param	requests		The VNRequests to be performed on the image. @param	imageData		The data representing the source format of the image to be processed. @param	orientation		The orientation of the image. @param	error			On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify NULL for this parameter if you do not want the error information.
+//
 // PerformRequestsOnImageDataOrientationError calls the underlying PerformRequestsOnImageDataOrientationError.
 func (x *SequenceRequestHandler) PerformRequestsOnImageDataOrientationError(requests *foundation.NSArray[*raw.VNRequest], imageData *foundation.NSData, orientation imageio.CGImagePropertyOrientation) (bool, error) {
 	return x.inner.PerformRequestsOnImageDataOrientationError(requests, imageData, orientation)
 }
 
+// @brief Perform requests on the image buffer contained in the CMSampleBufferRef. @param	requests		The VNRequests to be performed on the image. @param	sampleBuffer	A CMSampleBuffer containing an image that will be used for performing the requests. Not all types of sample buffers are supported. They need to contain a CVImageBuffer, be valid and ready. @param	error			On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify NULL for this parameter if you do not want the error information.
+//
 // PerformRequestsOnCMSampleBufferError calls the underlying PerformRequestsOnCMSampleBufferError.
 func (x *SequenceRequestHandler) PerformRequestsOnCMSampleBufferError(requests *foundation.NSArray[*raw.VNRequest], sampleBuffer unsafe.Pointer) (bool, error) {
 	return x.inner.PerformRequestsOnCMSampleBufferError(requests, sampleBuffer)
 }
 
+// @brief Perform requests on the image buffer contained in the CMSampleBufferRef. @param	requests		The VNRequests to be performed on the image. @param	sampleBuffer	A CMSampleBuffer containing an image that will be used for performing the requests. Not all types of sample buffers are supported. They need to contain a CVImageBuffer, be valid and ready. @param	orientation		The orientation of the image. @param	error			On input, a pointer to an error object. If an error occurs, this pointer is set to an actual error object containing the error information. You may specify NULL for this parameter if you do not want the error information.
+//
 // PerformRequestsOnCMSampleBufferOrientationError calls the underlying PerformRequestsOnCMSampleBufferOrientationError.
 func (x *SequenceRequestHandler) PerformRequestsOnCMSampleBufferOrientationError(requests *foundation.NSArray[*raw.VNRequest], sampleBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation) (bool, error) {
 	return x.inner.PerformRequestsOnCMSampleBufferOrientationError(requests, sampleBuffer, orientation)

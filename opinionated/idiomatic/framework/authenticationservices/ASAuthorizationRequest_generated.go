@@ -35,6 +35,8 @@ func NewAuthorizationRequest() *AuthorizationRequest {
 	return &AuthorizationRequest{inner: raw.ASAuthorizationRequestFromID(_id)}
 }
 
+// @abstract The provider object that is being used to service this request
+//
 // Provider calls the underlying Provider.
 func (x *AuthorizationRequest) Provider() raw.ASAuthorizationProvider {
 	return x.inner.Provider()

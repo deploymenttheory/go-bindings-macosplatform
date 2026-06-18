@@ -36,31 +36,43 @@ func NewLocationActivityMetric() *LocationActivityMetric {
 	return &LocationActivityMetric{inner: raw.MXLocationActivityMetricFromID(_id)}
 }
 
+// @property      cumulativeBestAccuracyTime @abstract      Cumulative time spent acquiring location at kCLLocationAccuracyBest. @discussion    Dimensioned as NSUnitDuration.
+//
 // CumulativeBestAccuracyTime calls the underlying CumulativeBestAccuracyTime.
 func (x *LocationActivityMetric) CumulativeBestAccuracyTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
 	return x.inner.CumulativeBestAccuracyTime()
 }
 
+// @property      cumulativeBestAccuracyForNavigationTime @abstract      Cumulative time spent acquiring location at kCLLocationAccuracyBestForNavigation. @discussion    Dimensioned as NSUnitDuration.
+//
 // CumulativeBestAccuracyForNavigationTime calls the underlying CumulativeBestAccuracyForNavigationTime.
 func (x *LocationActivityMetric) CumulativeBestAccuracyForNavigationTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
 	return x.inner.CumulativeBestAccuracyForNavigationTime()
 }
 
+// @property      cumulativeNearestTenMetersAccuracyTime @abstract      Cumulative time spent acquiring location at kCLLocationAccuracyNearestTenMeters. @discussion    Dimensioned as NSUnitDuration.
+//
 // CumulativeNearestTenMetersAccuracyTime calls the underlying CumulativeNearestTenMetersAccuracyTime.
 func (x *LocationActivityMetric) CumulativeNearestTenMetersAccuracyTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
 	return x.inner.CumulativeNearestTenMetersAccuracyTime()
 }
 
+// @property      cumulativeHundredMetersAccuracyTime @abstract      Cumulative time spent acquiring location at kCLLocationAccuracyHundredMeters. @discussion    Dimensioned as NSUnitDuration.
+//
 // CumulativeHundredMetersAccuracyTime calls the underlying CumulativeHundredMetersAccuracyTime.
 func (x *LocationActivityMetric) CumulativeHundredMetersAccuracyTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
 	return x.inner.CumulativeHundredMetersAccuracyTime()
 }
 
+// @property      cumulativeKilometerAccuracyTime @abstract      Cumulative time spent acquiring location at kCLLocationAccuracyKilometer. @discussion    Dimensioned as NSUnitDuration.
+//
 // CumulativeKilometerAccuracyTime calls the underlying CumulativeKilometerAccuracyTime.
 func (x *LocationActivityMetric) CumulativeKilometerAccuracyTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
 	return x.inner.CumulativeKilometerAccuracyTime()
 }
 
+// @property      cumulativeThreeKilometersAccuracyTime @abstract      Cumulative time spent acquiring location at kCLLocationAccuracyThreeKilometers. @discussion    Dimensioned as NSUnitDuration.
+//
 // CumulativeThreeKilometersAccuracyTime calls the underlying CumulativeThreeKilometersAccuracyTime.
 func (x *LocationActivityMetric) CumulativeThreeKilometersAccuracyTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
 	return x.inner.CumulativeThreeKilometersAccuracyTime()

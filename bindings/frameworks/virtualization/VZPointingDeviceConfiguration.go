@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for a pointing device configuration.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzpointingdeviceconfiguration
 type VZPointingDeviceConfiguration struct {
 	foundation.NSObject

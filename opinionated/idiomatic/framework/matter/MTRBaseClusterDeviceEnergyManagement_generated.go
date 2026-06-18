@@ -35,6 +35,8 @@ func MTRBaseClusterDeviceEnergyManagementFromID(id objc.ID) *MTRBaseClusterDevic
 	return &MTRBaseClusterDeviceEnergyManagement{inner: raw.MTRBaseClusterDeviceEnergyManagementFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterDeviceEnergyManagementWithDeviceEndpointIDQueue creates a new [MTRBaseClusterDeviceEnergyManagement].
 func NewMTRBaseClusterDeviceEnergyManagementWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterDeviceEnergyManagement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterDeviceEnergyManagement")), objc.RegisterName("alloc"))
@@ -42,11 +44,15 @@ func NewMTRBaseClusterDeviceEnergyManagementWithDeviceEndpointIDQueue(device *ra
 	return &MTRBaseClusterDeviceEnergyManagement{inner: raw.MTRBaseClusterDeviceEnergyManagementFromID(_id)}
 }
 
+// Command PowerAdjustRequest Allows a client to request an adjustment in the power consumption of an ESA for a specified duration.
+//
 // PowerAdjustRequestWithParamsCompletion calls the underlying PowerAdjustRequestWithParamsCompletion.
 func (x *MTRBaseClusterDeviceEnergyManagement) PowerAdjustRequestWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterPowerAdjustRequestParams, completion func(unsafe.Pointer)) {
 	x.inner.PowerAdjustRequestWithParamsCompletion(params, completion)
 }
 
+// Command CancelPowerAdjustRequest Allows a client to cancel an ongoing PowerAdjustmentRequest operation.
+//
 // CancelPowerAdjustRequestWithParamsCompletion calls the underlying CancelPowerAdjustRequestWithParamsCompletion.
 func (x *MTRBaseClusterDeviceEnergyManagement) CancelPowerAdjustRequestWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams, completion func(unsafe.Pointer)) {
 	x.inner.CancelPowerAdjustRequestWithParamsCompletion(params, completion)
@@ -57,16 +63,22 @@ func (x *MTRBaseClusterDeviceEnergyManagement) CancelPowerAdjustRequestWithCompl
 	x.inner.CancelPowerAdjustRequestWithCompletion(completion)
 }
 
+// Command StartTimeAdjustRequest Allows a client to adjust the start time of a Forecast sequence that has not yet started operation (i.e. where the current Forecast StartTime is in the future).
+//
 // StartTimeAdjustRequestWithParamsCompletion calls the underlying StartTimeAdjustRequestWithParamsCompletion.
 func (x *MTRBaseClusterDeviceEnergyManagement) StartTimeAdjustRequestWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams, completion func(unsafe.Pointer)) {
 	x.inner.StartTimeAdjustRequestWithParamsCompletion(params, completion)
 }
 
+// Command PauseRequest Allows a client to temporarily pause an operation and reduce the ESAs energy demand.
+//
 // PauseRequestWithParamsCompletion calls the underlying PauseRequestWithParamsCompletion.
 func (x *MTRBaseClusterDeviceEnergyManagement) PauseRequestWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterPauseRequestParams, completion func(unsafe.Pointer)) {
 	x.inner.PauseRequestWithParamsCompletion(params, completion)
 }
 
+// Command ResumeRequest Allows a client to cancel the PauseRequest command and enable earlier resumption of operation.
+//
 // ResumeRequestWithParamsCompletion calls the underlying ResumeRequestWithParamsCompletion.
 func (x *MTRBaseClusterDeviceEnergyManagement) ResumeRequestWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterResumeRequestParams, completion func(unsafe.Pointer)) {
 	x.inner.ResumeRequestWithParamsCompletion(params, completion)
@@ -77,16 +89,22 @@ func (x *MTRBaseClusterDeviceEnergyManagement) ResumeRequestWithCompletion(compl
 	x.inner.ResumeRequestWithCompletion(completion)
 }
 
+// Command ModifyForecastRequest Allows a client to modify a Forecast within the limits allowed by the ESA.
+//
 // ModifyForecastRequestWithParamsCompletion calls the underlying ModifyForecastRequestWithParamsCompletion.
 func (x *MTRBaseClusterDeviceEnergyManagement) ModifyForecastRequestWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterModifyForecastRequestParams, completion func(unsafe.Pointer)) {
 	x.inner.ModifyForecastRequestWithParamsCompletion(params, completion)
 }
 
+// Command RequestConstraintBasedForecast Allows a client to ask the ESA to recompute its Forecast based on power and time constraints.
+//
 // RequestConstraintBasedForecastWithParamsCompletion calls the underlying RequestConstraintBasedForecastWithParamsCompletion.
 func (x *MTRBaseClusterDeviceEnergyManagement) RequestConstraintBasedForecastWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams, completion func(unsafe.Pointer)) {
 	x.inner.RequestConstraintBasedForecastWithParamsCompletion(params, completion)
 }
 
+// Command CancelRequest Allows a client to request cancellation of a previous adjustment request in a StartTimeAdjustRequest, ModifyForecastRequest or RequestConstraintBasedForecast command.
+//
 // CancelRequestWithParamsCompletion calls the underlying CancelRequestWithParamsCompletion.
 func (x *MTRBaseClusterDeviceEnergyManagement) CancelRequestWithParamsCompletion(params *raw.MTRDeviceEnergyManagementClusterCancelRequestParams, completion func(unsafe.Pointer)) {
 	x.inner.CancelRequestWithParamsCompletion(params, completion)

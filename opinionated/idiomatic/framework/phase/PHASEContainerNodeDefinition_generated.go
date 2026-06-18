@@ -36,6 +36,8 @@ func NewContainerNodeDefinition() *ContainerNodeDefinition {
 	return &ContainerNodeDefinition{inner: raw.PHASEContainerNodeDefinitionFromID(_id)}
 }
 
+// @method initWithIdentifier @abstract Create a container node definition @param identifier An optional custom identifier to give to this object @return A new PHASEContainerNodeDefinition object
+//
 // NewContainerNodeDefinitionWithIdentifier creates a new [ContainerNodeDefinition].
 func NewContainerNodeDefinitionWithIdentifier(identifier string) *ContainerNodeDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEContainerNodeDefinition")), objc.RegisterName("alloc"))
@@ -43,6 +45,8 @@ func NewContainerNodeDefinitionWithIdentifier(identifier string) *ContainerNodeD
 	return &ContainerNodeDefinition{inner: raw.PHASEContainerNodeDefinitionFromID(_id)}
 }
 
+// @method addSubtree @abstract Add a subtree to this node @param subtree Add a subtree of PHASESoundEventNodeDefinition nodes beneath this node.
+//
 // AddSubtree calls the underlying AddSubtree.
 func (x *ContainerNodeDefinition) AddSubtree(subtree *raw.PHASESoundEventNodeDefinition) {
 	x.inner.AddSubtree(subtree)

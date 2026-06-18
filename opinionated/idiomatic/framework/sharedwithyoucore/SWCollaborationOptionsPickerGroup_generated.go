@@ -40,24 +40,32 @@ func NewCollaborationOptionsPickerGroup() *CollaborationOptionsPickerGroup {
 	return &CollaborationOptionsPickerGroup{inner: raw.SWCollaborationOptionsPickerGroupFromID(_id)}
 }
 
+// @abstract The identifier of the selected option in the group. Defaults to the first SWCollaborationOption's identifier.
+//
 // WithSelectedOptionIdentifier sets the selectedOptionIdentifier property and returns the receiver for chaining.
 func (x *CollaborationOptionsPickerGroup) WithSelectedOptionIdentifier(selectedOptionIdentifier string) *CollaborationOptionsPickerGroup {
 	x.inner.SetSelectedOptionIdentifier(foundation.NSStringStringWithUTF8String(selectedOptionIdentifier))
 	return x
 }
 
+// @abstract Localized string used to title the section
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *CollaborationOptionsPickerGroup) WithTitle(title string) *CollaborationOptionsPickerGroup {
 	x.inner.SWCollaborationOptionsGroup.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// @abstract Localized string to describe or provide additional information about the group of options
+//
 // WithFooter sets the footer property and returns the receiver for chaining.
 func (x *CollaborationOptionsPickerGroup) WithFooter(footer string) *CollaborationOptionsPickerGroup {
 	x.inner.SWCollaborationOptionsGroup.SetFooter(foundation.NSStringStringWithUTF8String(footer))
 	return x
 }
 
+// @abstract SWCollaborationOptions to be displayed in the group
+//
 // WithOptions sets the collection, converting the Go slice to an NSArray.
 func (x *CollaborationOptionsPickerGroup) WithOptions(items ...*raw.SWCollaborationOption) *CollaborationOptionsPickerGroup {
 	if len(items) == 0 {

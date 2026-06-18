@@ -203,6 +203,8 @@ func (x *SearchableItemAttributeSet) WithContainerOrder(containerOrder *foundati
 	return x
 }
 
+// Subject of the this item.
+//
 // WithSubject sets the subject property and returns the receiver for chaining.
 func (x *SearchableItemAttributeSet) WithSubject(subject string) *SearchableItemAttributeSet {
 	x.inner.SetSubject(foundation.NSStringStringWithUTF8String(subject))
@@ -1898,6 +1900,8 @@ func (x *SearchableItemAttributeSet) SetProviderInPlaceFileTypeIdentifiers(provi
 	x.inner.SetProviderInPlaceFileTypeIdentifiers(providerInPlaceFileTypeIdentifiers)
 }
 
+// Subject of the this item.
+//
 // Subject calls the underlying Subject.
 func (x *SearchableItemAttributeSet) Subject() string {
 	_r := x.inner.Subject()

@@ -35,6 +35,8 @@ func NewMusicTrack() *MusicTrack {
 	return &MusicTrack{inner: raw.AVMusicTrackFromID(_id)}
 }
 
+// @property destinationAudioUnit @abstract The AVAudioUnit which will receive the track's events @discussion This is mutually exclusive with setting a destination MIDIEndpoint.  The AU must already be attached to an audio engine, and the track must be part of the AVAudioSequencer associated with that engine. When playing, the track will send its events to that AVAudioUnit. The destination AU cannot be changed while the track's sequence is playing.
+//
 // WithDestinationAudioUnit sets the destinationAudioUnit property and returns the receiver for chaining.
 func (x *MusicTrack) WithDestinationAudioUnit(destinationAudioUnit AudioUnitProvider) *MusicTrack {
 	x.inner.SetDestinationAudioUnit(destinationAudioUnit.asAudioUnit())
@@ -47,60 +49,80 @@ func (x *MusicTrack) WithDestinationMIDIEndpoint(destinationMIDIEndpoint uint) *
 	return x
 }
 
+// @property loopRange @abstract The timestamp range in beats for the loop @discussion The loop is set by specifying its beat range.
+//
 // WithLoopRange sets the loopRange property and returns the receiver for chaining.
 func (x *MusicTrack) WithLoopRange(loopRange raw.AVBeatRange) *MusicTrack {
 	x.inner.SetLoopRange(loopRange)
 	return x
 }
 
+// @property loopingEnabled @abstract Determines whether or not the track is looped. @discussion If loopRange has not been set, the full track will be looped.
+//
 // WithLoopingEnabled sets the loopingEnabled property and returns the receiver for chaining.
 func (x *MusicTrack) WithLoopingEnabled(loopingEnabled bool) *MusicTrack {
 	x.inner.SetLoopingEnabled(loopingEnabled)
 	return x
 }
 
+// @property numberOfLoops @abstract The number of times that the track's loop will repeat @discussion If set to AVMusicTrackLoopCountForever, the track will loop forever. Otherwise, legal values start with 1.
+//
 // WithNumberOfLoops sets the numberOfLoops property and returns the receiver for chaining.
 func (x *MusicTrack) WithNumberOfLoops(numberOfLoops int) *MusicTrack {
 	x.inner.SetNumberOfLoops(numberOfLoops)
 	return x
 }
 
+// @property offsetTime @abstract Offset the track's start time to the specified time in beats @discussion By default this value is zero.
+//
 // WithOffsetTime sets the offsetTime property and returns the receiver for chaining.
 func (x *MusicTrack) WithOffsetTime(offsetTime float64) *MusicTrack {
 	x.inner.SetOffsetTime(offsetTime)
 	return x
 }
 
+// @property muted @abstract Whether the track is muted
+//
 // WithMuted sets the muted property and returns the receiver for chaining.
 func (x *MusicTrack) WithMuted(muted bool) *MusicTrack {
 	x.inner.SetMuted(muted)
 	return x
 }
 
+// @property soloed @abstract Whether the track is soloed
+//
 // WithSoloed sets the soloed property and returns the receiver for chaining.
 func (x *MusicTrack) WithSoloed(soloed bool) *MusicTrack {
 	x.inner.SetSoloed(soloed)
 	return x
 }
 
+// @property lengthInBeats @abstract The total duration of the track in beats @discussion This will return the beat of the last event in the track plus any additional time that may be needed for fading out of ending notes or round a loop point to musical bar, etc.  If this has not been set by the user, the track length will always be adjusted to the end of the last active event in a track and is adjusted dynamically as events are added or removed. The property will return the maximum of the user-set track length, or the calculated length.
+//
 // WithLengthInBeats sets the lengthInBeats property and returns the receiver for chaining.
 func (x *MusicTrack) WithLengthInBeats(lengthInBeats float64) *MusicTrack {
 	x.inner.SetLengthInBeats(lengthInBeats)
 	return x
 }
 
+// @property lengthInSeconds @abstract The total duration of the track in seconds @discussion This will return time of the last event in the track plus any additional time that may be needed for fading out of ending notes or round a loop point to musical bar, etc.  If this has not been set by the user, the track length will always be adjusted to the end of the last active event in a track and is adjusted dynamically as events are added or removed. The property will return the maximum of the user-set track length, or the calculated length.
+//
 // WithLengthInSeconds sets the lengthInSeconds property and returns the receiver for chaining.
 func (x *MusicTrack) WithLengthInSeconds(lengthInSeconds float64) *MusicTrack {
 	x.inner.SetLengthInSeconds(lengthInSeconds)
 	return x
 }
 
+// @property usesAutomatedParameters @abstract	Indicates whether the track is an automation track. @discussion If set to YES, this can be used to contain, parameter automation events, exclusively. Adding any other event types will generate exceptions. If a track already contains non-parameter events, setting this to YES will generate an exception.
+//
 // WithUsesAutomatedParameters sets the usesAutomatedParameters property and returns the receiver for chaining.
 func (x *MusicTrack) WithUsesAutomatedParameters(usesAutomatedParameters bool) *MusicTrack {
 	x.inner.SetUsesAutomatedParameters(usesAutomatedParameters)
 	return x
 }
 
+// @property destinationAudioUnit @abstract The AVAudioUnit which will receive the track's events @discussion This is mutually exclusive with setting a destination MIDIEndpoint.  The AU must already be attached to an audio engine, and the track must be part of the AVAudioSequencer associated with that engine. When playing, the track will send its events to that AVAudioUnit. The destination AU cannot be changed while the track's sequence is playing.
+//
 // DestinationAudioUnit calls the underlying DestinationAudioUnit.
 func (x *MusicTrack) DestinationAudioUnit() *AudioUnit {
 	_r := x.inner.DestinationAudioUnit()
@@ -125,6 +147,8 @@ func (x *MusicTrack) SetDestinationMIDIEndpoint(destinationMIDIEndpoint uint) {
 	x.inner.SetDestinationMIDIEndpoint(destinationMIDIEndpoint)
 }
 
+// @property loopRange @abstract The timestamp range in beats for the loop @discussion The loop is set by specifying its beat range.
+//
 // LoopRange calls the underlying LoopRange.
 func (x *MusicTrack) LoopRange() raw.AVBeatRange {
 	return x.inner.LoopRange()
@@ -135,6 +159,8 @@ func (x *MusicTrack) SetLoopRange(loopRange raw.AVBeatRange) {
 	x.inner.SetLoopRange(loopRange)
 }
 
+// @property loopingEnabled @abstract Determines whether or not the track is looped. @discussion If loopRange has not been set, the full track will be looped.
+//
 // IsLoopingEnabled calls the underlying IsLoopingEnabled.
 func (x *MusicTrack) IsLoopingEnabled() bool {
 	return x.inner.IsLoopingEnabled()
@@ -145,6 +171,8 @@ func (x *MusicTrack) SetLoopingEnabled(loopingEnabled bool) {
 	x.inner.SetLoopingEnabled(loopingEnabled)
 }
 
+// @property numberOfLoops @abstract The number of times that the track's loop will repeat @discussion If set to AVMusicTrackLoopCountForever, the track will loop forever. Otherwise, legal values start with 1.
+//
 // NumberOfLoops calls the underlying NumberOfLoops.
 func (x *MusicTrack) NumberOfLoops() int {
 	return x.inner.NumberOfLoops()
@@ -155,6 +183,8 @@ func (x *MusicTrack) SetNumberOfLoops(numberOfLoops int) {
 	x.inner.SetNumberOfLoops(numberOfLoops)
 }
 
+// @property offsetTime @abstract Offset the track's start time to the specified time in beats @discussion By default this value is zero.
+//
 // OffsetTime calls the underlying OffsetTime.
 func (x *MusicTrack) OffsetTime() float64 {
 	return x.inner.OffsetTime()
@@ -165,6 +195,8 @@ func (x *MusicTrack) SetOffsetTime(offsetTime float64) {
 	x.inner.SetOffsetTime(offsetTime)
 }
 
+// @property muted @abstract Whether the track is muted
+//
 // IsMuted calls the underlying IsMuted.
 func (x *MusicTrack) IsMuted() bool {
 	return x.inner.IsMuted()
@@ -175,6 +207,8 @@ func (x *MusicTrack) SetMuted(muted bool) {
 	x.inner.SetMuted(muted)
 }
 
+// @property soloed @abstract Whether the track is soloed
+//
 // IsSoloed calls the underlying IsSoloed.
 func (x *MusicTrack) IsSoloed() bool {
 	return x.inner.IsSoloed()
@@ -185,6 +219,8 @@ func (x *MusicTrack) SetSoloed(soloed bool) {
 	x.inner.SetSoloed(soloed)
 }
 
+// @property lengthInBeats @abstract The total duration of the track in beats @discussion This will return the beat of the last event in the track plus any additional time that may be needed for fading out of ending notes or round a loop point to musical bar, etc.  If this has not been set by the user, the track length will always be adjusted to the end of the last active event in a track and is adjusted dynamically as events are added or removed. The property will return the maximum of the user-set track length, or the calculated length.
+//
 // LengthInBeats calls the underlying LengthInBeats.
 func (x *MusicTrack) LengthInBeats() float64 {
 	return x.inner.LengthInBeats()
@@ -195,6 +231,8 @@ func (x *MusicTrack) SetLengthInBeats(lengthInBeats float64) {
 	x.inner.SetLengthInBeats(lengthInBeats)
 }
 
+// @property lengthInSeconds @abstract The total duration of the track in seconds @discussion This will return time of the last event in the track plus any additional time that may be needed for fading out of ending notes or round a loop point to musical bar, etc.  If this has not been set by the user, the track length will always be adjusted to the end of the last active event in a track and is adjusted dynamically as events are added or removed. The property will return the maximum of the user-set track length, or the calculated length.
+//
 // LengthInSeconds calls the underlying LengthInSeconds.
 func (x *MusicTrack) LengthInSeconds() float64 {
 	return x.inner.LengthInSeconds()
@@ -205,6 +243,8 @@ func (x *MusicTrack) SetLengthInSeconds(lengthInSeconds float64) {
 	x.inner.SetLengthInSeconds(lengthInSeconds)
 }
 
+// @property timeResolution @abstract The time resolution value for the sequence, in ticks (pulses) per quarter note (PPQN) @discussion If a MIDI file was used to construct the containing sequence, the resolution will be what was in the file. If you want to keep a time resolution when writing a new file, you can retrieve this value and then specify it when calling -[AVAudioSequencer writeToFile:flags:withResolution]. It has no direct bearing on the rendering or notion of time of the sequence itself, just its representation in MIDI files. By default this is set to either 480 if the sequence was created manually, or a value based on what was in a MIDI file if the sequence was created from a MIDI file. This can only be retrieved from the tempo track.
+//
 // TimeResolution calls the underlying TimeResolution.
 func (x *MusicTrack) TimeResolution() uint {
 	return x.inner.TimeResolution()
@@ -215,36 +255,50 @@ func (x *MusicTrack) AddEventAtBeat(event *raw.AVMusicEvent, beat float64) {
 	x.inner.AddEventAtBeat(event, beat)
 }
 
+// @method moveEventsInRange:byAmount @abstract	Shift the beat location of all events in the given beat range by the amount specified. @param		range			the range of beats.  Must be a valid AVBeatRange. @param		beatAmount		the amount in beats to shift each event.  The amount may be positive or negative.
+//
 // MoveEventsInRangeByAmount calls the underlying MoveEventsInRangeByAmount.
 func (x *MusicTrack) MoveEventsInRangeByAmount(range_ raw.AVBeatRange, beatAmount float64) {
 	x.inner.MoveEventsInRangeByAmount(range_, beatAmount)
 }
 
+// @method clearEventsInRange: @abstract	Removes all events in the given beat range, erasing that portion of the AVMusicTrack. @param		range			the range of beats.  Must be a valid AVBeatRange. @discussion	All events outside of the specified range left unmodified.
+//
 // ClearEventsInRange calls the underlying ClearEventsInRange.
 func (x *MusicTrack) ClearEventsInRange(range_ raw.AVBeatRange) {
 	x.inner.ClearEventsInRange(range_)
 }
 
+// @method cutEventsInRange: @abstract	Removes all events in the given beat range, splicing out that portion of the AVMusicTrack. @param		range			the range of beats.  Must be a valid AVBeatRange. @discussion	All events past the end of the specified range will be shifted backward by the duration of the range.
+//
 // CutEventsInRange calls the underlying CutEventsInRange.
 func (x *MusicTrack) CutEventsInRange(range_ raw.AVBeatRange) {
 	x.inner.CutEventsInRange(range_)
 }
 
+// @method copyEventsInRange:fromTrack:insertAtBeat @abstract	Copies all events in the given beat range from the specified AVMusicTrack, splicing them into the current AVMusicTrack. @param		range			the range of beats.  Must be a valid AVBeatRange. @param		sourceTrack		the AVMusicTrack to copy the events from. @param		insertStartBeat	the start beat at which the copied events should be spliced in. @discussion	All events originally at or past insertStartBeat will be shifted forward by the duration of the copied-in range.
+//
 // CopyEventsInRangeFromTrackInsertAtBeat calls the underlying CopyEventsInRangeFromTrackInsertAtBeat.
 func (x *MusicTrack) CopyEventsInRangeFromTrackInsertAtBeat(range_ raw.AVBeatRange, sourceTrack *raw.AVMusicTrack, insertStartBeat float64) {
 	x.inner.CopyEventsInRangeFromTrackInsertAtBeat(range_, sourceTrack, insertStartBeat)
 }
 
+// @method copyAndMergeEventsInRange:fromTrack:mergeAtBeat @abstract	Copies all events in the given beat range from the specified AVMusicTrack, merging them into the current AVMusicTrack. @param		range			the range of beats.  Must be a valid AVBeatRange. @param		sourceTrack		the AVMusicTrack to copy the events from. @param		insertStartBeat	the start beat at which the copied events should be merged. @discussion	All events originally at or past mergeStartBeat will be left unmodified. Copying events from track to track follows the same type-exclusion rules as adding events:  The operation will generate an exception.
+//
 // CopyAndMergeEventsInRangeFromTrackMergeAtBeat calls the underlying CopyAndMergeEventsInRangeFromTrackMergeAtBeat.
 func (x *MusicTrack) CopyAndMergeEventsInRangeFromTrackMergeAtBeat(range_ raw.AVBeatRange, sourceTrack *raw.AVMusicTrack, mergeStartBeat float64) {
 	x.inner.CopyAndMergeEventsInRangeFromTrackMergeAtBeat(range_, sourceTrack, mergeStartBeat)
 }
 
+// @method enumerateEventsInRange:usingBlock: @abstract	Iterates through the AVMusicEvents within the AVMusicTrack whose timestamps fit within the range, calling the block for each. @param		block			the AVMusicEventEnumerationBlock to call for each event. @discussion	Each event returned via the block should be examined using `NSObject(isKindOfClass:)` to determine its subclass and then cast and accessed/edited accordingly. The iteration may continue after removing an event. The event objects returned via the block will not be the same instances which were added to the AVMusicTrack, though their contents will be identical.
+//
 // EnumerateEventsInRangeUsing calls the underlying EnumerateEventsInRangeUsing.
 func (x *MusicTrack) EnumerateEventsInRangeUsing(range_ raw.AVBeatRange, block func(*raw.AVMusicEvent, *float64, *bool)) {
 	x.inner.EnumerateEventsInRangeUsing(range_, block)
 }
 
+// @property usesAutomatedParameters @abstract	Indicates whether the track is an automation track. @discussion If set to YES, this can be used to contain, parameter automation events, exclusively. Adding any other event types will generate exceptions. If a track already contains non-parameter events, setting this to YES will generate an exception.
+//
 // UsesAutomatedParameters calls the underlying UsesAutomatedParameters.
 func (x *MusicTrack) UsesAutomatedParameters() bool {
 	return x.inner.UsesAutomatedParameters()

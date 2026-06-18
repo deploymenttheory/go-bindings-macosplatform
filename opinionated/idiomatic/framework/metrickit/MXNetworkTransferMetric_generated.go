@@ -36,21 +36,29 @@ func NewNetworkTransferMetric() *NetworkTransferMetric {
 	return &NetworkTransferMetric{inner: raw.MXNetworkTransferMetricFromID(_id)}
 }
 
+// @property      cumulativeWifiUpload @abstract      Cumulative amount of data uploaded over WiFi. @discussion    Dimensioned as NSUnitInformationStorage.
+//
 // CumulativeWifiUpload calls the underlying CumulativeWifiUpload.
 func (x *NetworkTransferMetric) CumulativeWifiUpload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
 	return x.inner.CumulativeWifiUpload()
 }
 
+// @property      cumulativeWifiDownload @abstract      Cumulative amount of data downloaded over WiFi. @discussion    Dimensioned as NSUnitInformationStorage.
+//
 // CumulativeWifiDownload calls the underlying CumulativeWifiDownload.
 func (x *NetworkTransferMetric) CumulativeWifiDownload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
 	return x.inner.CumulativeWifiDownload()
 }
 
+// @property      cumulativeCellularUpload @abstract      Cumulative amount of data uploaded over cellular networks. @discussion    This data is radio access technology agnostic. @discussion    Dimensioned as NSUnitInformationStorage.
+//
 // CumulativeCellularUpload calls the underlying CumulativeCellularUpload.
 func (x *NetworkTransferMetric) CumulativeCellularUpload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
 	return x.inner.CumulativeCellularUpload()
 }
 
+// @property      cumulativeCellularDownload @abstract      Cumulative amount of data downloaded over cellular networks. @discussion    This data is radio access technology agnostic. @discussion    Dimensioned as NSUnitInformationStorage.
+//
 // CumulativeCellularDownload calls the underlying CumulativeCellularDownload.
 func (x *NetworkTransferMetric) CumulativeCellularDownload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
 	return x.inner.CumulativeCellularDownload()

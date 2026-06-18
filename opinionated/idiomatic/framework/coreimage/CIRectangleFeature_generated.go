@@ -36,21 +36,29 @@ func NewRectangleFeature() *RectangleFeature {
 	return &RectangleFeature{inner: raw.CIRectangleFeatureFromID(_id)}
 }
 
+// The image coordinate of the upper-left corner of the detected rectangle.
+//
 // TopLeft calls the underlying TopLeft.
 func (x *RectangleFeature) TopLeft() corefoundation.CGPoint {
 	return x.inner.TopLeft()
 }
 
+// The image coordinate of the upper-right corner of the detected rectangle.
+//
 // TopRight calls the underlying TopRight.
 func (x *RectangleFeature) TopRight() corefoundation.CGPoint {
 	return x.inner.TopRight()
 }
 
+// The image coordinate of the lower-left corner of the detected rectangle.
+//
 // BottomLeft calls the underlying BottomLeft.
 func (x *RectangleFeature) BottomLeft() corefoundation.CGPoint {
 	return x.inner.BottomLeft()
 }
 
+// The image coordinate of the lower-right corner of the detected rectangle.
+//
 // BottomRight calls the underlying BottomRight.
 func (x *RectangleFeature) BottomRight() corefoundation.CGPoint {
 	return x.inner.BottomRight()

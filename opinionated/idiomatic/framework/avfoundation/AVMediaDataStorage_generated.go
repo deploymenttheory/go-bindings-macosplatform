@@ -30,6 +30,8 @@ func MediaDataStorageFromID(id objc.ID) *MediaDataStorage {
 	return &MediaDataStorage{inner: raw.AVMediaDataStorageFromID(id)}
 }
 
+// @method			initWithURL:options: @abstract		Creates an AVMediaDataStorage object associated with a file URL. @param			URL An NSURL object that specifies a file where sample data that is added to a movie or track should be written. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the AVMediaDataStorage object. Currently no keys are defined. @result			An AVMediaDataStorage object
+//
 // NewMediaDataStorageWithURLOptions creates a new [MediaDataStorage].
 func NewMediaDataStorageWithURLOptions(uRL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MediaDataStorage {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMediaDataStorage")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewMediaDataStorageWithURLOptions(uRL string, options *foundation.NSDiction
 	return &MediaDataStorage{inner: raw.AVMediaDataStorageFromID(_id)}
 }
 
+// @method			URL @abstract       The URL from which the receiver was initialized; may be nil.
+//
 // URL calls the underlying URL.
 func (x *MediaDataStorage) URL() *foundation.NSURL {
 	return x.inner.URL()

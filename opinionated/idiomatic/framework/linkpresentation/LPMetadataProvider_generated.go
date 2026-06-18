@@ -39,18 +39,24 @@ func NewMetadataProvider() *MetadataProvider {
 	return &MetadataProvider{inner: raw.LPMetadataProviderFromID(_id)}
 }
 
+// A Boolean value indicating whether to download subresources specified by the metadata. Subresources include the icon, image, or video. When set to `false`, the returned “LPLinkMetadata“ object consists only of metadata retrieved from the main resource identified by the url passed to “LPMetadataProvider/startFetchingMetadataForURL:completionHandler:“. The default value is `true`.
+//
 // WithShouldFetchSubresources sets the shouldFetchSubresources property and returns the receiver for chaining.
 func (x *MetadataProvider) WithShouldFetchSubresources(shouldFetchSubresources bool) *MetadataProvider {
 	x.inner.SetShouldFetchSubresources(shouldFetchSubresources)
 	return x
 }
 
+// The time interval after which the request automatically fails if it hasn’t already completed. The default timeout interval is 30 seconds. If a metadata fetch takes longer than the timeout interval, the completion handler is called with the error code “LPErrorCode/LPErrorMetadataFetchTimedOut“.
+//
 // WithTimeout sets the timeout property and returns the receiver for chaining.
 func (x *MetadataProvider) WithTimeout(timeout float64) *MetadataProvider {
 	x.inner.SetTimeout(timeout)
 	return x
 }
 
+// Fetches metadata for the given URL. Call this method once per “LPMetadataProvider“ instance. If you attempt to fetch metadata multiple times on a single “LPMetadataProvider“ instance, it throws an error. The completion handler executes on a background queue. Dispatch any necessary UI updates back to the main queue. When the completion handler returns, it deletes any file URLs returned in the resulting “LPLinkMetadata“. > Concurrency Note: You can call this method from synchronous code using a completion handler, > as shown on this page, or you can call it as an asynchronous method that has the > following declaration: > > ```swift >  func startFetchingMetadata(for url: URL) async throws -> LPLinkMetadata > ``` > > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
+//
 // StartFetchingMetadataForURL blocks until the operation completes or ctx is cancelled.
 func (x *MetadataProvider) StartFetchingMetadataForURL(ctx context.Context, uRL string) (*LinkMetadata, error) {
 	type _result struct {
@@ -77,6 +83,8 @@ func (x *MetadataProvider) StartFetchingMetadataForURL(ctx context.Context, uRL 
 	}
 }
 
+// Fetches metadata for the given “NSURLRequest“. Call this method once per “LPMetadataProvider“ instance. If you attempt to fetch metadata multiple times on a single “LPMetadataProvider“ instance, it throws an error. The completion handler executes on a background queue. Dispatch any necessary UI updates back to the main queue. When the completion handler returns, it deletes any file URLs returned in the resulting “LPLinkMetadata“. > Concurrency Note: You can call this method from synchronous code using a completion handler, > as shown on this page, or you can call it as an asynchronous method that has the > following declaration: > > ```swift >  func startFetchingMetadata(for request: URLRequest) async throws -> LPLinkMetadata > ``` > > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
+//
 // StartFetchingMetadataForRequest blocks until the operation completes or ctx is cancelled.
 func (x *MetadataProvider) StartFetchingMetadataForRequest(ctx context.Context, request *foundation.NSURLRequest) (*LinkMetadata, error) {
 	type _result struct {
@@ -103,11 +111,15 @@ func (x *MetadataProvider) StartFetchingMetadataForRequest(ctx context.Context, 
 	}
 }
 
+// Cancels a metadata request. This method invokes the completion handler with the error code “LPErrorCode/LPErrorMetadataFetchCancelled“ if the request hasn’t already completed.
+//
 // Cancel calls the underlying Cancel.
 func (x *MetadataProvider) Cancel() {
 	x.inner.Cancel()
 }
 
+// A Boolean value indicating whether to download subresources specified by the metadata. Subresources include the icon, image, or video. When set to `false`, the returned “LPLinkMetadata“ object consists only of metadata retrieved from the main resource identified by the url passed to “LPMetadataProvider/startFetchingMetadataForURL:completionHandler:“. The default value is `true`.
+//
 // ShouldFetchSubresources calls the underlying ShouldFetchSubresources.
 func (x *MetadataProvider) ShouldFetchSubresources() bool {
 	return x.inner.ShouldFetchSubresources()
@@ -118,6 +130,8 @@ func (x *MetadataProvider) SetShouldFetchSubresources(shouldFetchSubresources bo
 	x.inner.SetShouldFetchSubresources(shouldFetchSubresources)
 }
 
+// The time interval after which the request automatically fails if it hasn’t already completed. The default timeout interval is 30 seconds. If a metadata fetch takes longer than the timeout interval, the completion handler is called with the error code “LPErrorCode/LPErrorMetadataFetchTimedOut“.
+//
 // Timeout calls the underlying Timeout.
 func (x *MetadataProvider) Timeout() float64 {
 	return x.inner.Timeout()

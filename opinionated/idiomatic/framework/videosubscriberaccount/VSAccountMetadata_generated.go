@@ -37,6 +37,8 @@ func NewVSAccountMetadata() *VSAccountMetadata {
 	return &VSAccountMetadata{inner: raw.VSAccountMetadataFromID(_id)}
 }
 
+// A value that uniquely identifies the account provider. You may use this value to brand your app.
+//
 // AccountProviderIdentifier calls the underlying AccountProviderIdentifier.
 func (x *VSAccountMetadata) AccountProviderIdentifier() string {
 	_r := x.inner.AccountProviderIdentifier()
@@ -46,16 +48,22 @@ func (x *VSAccountMetadata) AccountProviderIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Specifies when the user might need to re-authenticate with the account provider. The value might be nil if the user is not currently authenticated.
+//
 // AuthenticationExpirationDate calls the underlying AuthenticationExpirationDate.
 func (x *VSAccountMetadata) AuthenticationExpirationDate() *foundation.NSDate {
 	return x.inner.AuthenticationExpirationDate()
 }
 
+// An opaque blob of data that can be used to cryptographically verify that the SAML AttributeQuery response actually came from the account provider.
+//
 // VerificationData calls the underlying VerificationData.
 func (x *VSAccountMetadata) VerificationData() *foundation.NSData {
 	return x.inner.VerificationData()
 }
 
+// The SAML AttributeQuery response received from the account provider. The value might be nil if your account metadata request did not specify any SAML attributes or if the user does not have a valid authentication.
+//
 // SAMLAttributeQueryResponse calls the underlying SAMLAttributeQueryResponse.
 func (x *VSAccountMetadata) SAMLAttributeQueryResponse() string {
 	_r := x.inner.SAMLAttributeQueryResponse()
@@ -65,6 +73,8 @@ func (x *VSAccountMetadata) SAMLAttributeQueryResponse() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The response received from the account provider. The value might be nil if your account metadata request did not specify any attributes, or if the user does not have a valid authentication.
+//
 // AccountProviderResponse calls the underlying AccountProviderResponse.
 func (x *VSAccountMetadata) AccountProviderResponse() *VSAccountProviderResponse {
 	_r := x.inner.AccountProviderResponse()

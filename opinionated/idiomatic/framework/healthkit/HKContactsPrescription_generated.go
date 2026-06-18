@@ -36,6 +36,8 @@ func NewContactsPrescription() *ContactsPrescription {
 	return &ContactsPrescription{inner: raw.HKContactsPrescriptionFromID(_id)}
 }
 
+// @property      rightEye @abstract      The right eye lens specification
+//
 // RightEye calls the underlying RightEye.
 func (x *ContactsPrescription) RightEye() *ContactsLensSpecification {
 	_r := x.inner.RightEye()
@@ -45,6 +47,8 @@ func (x *ContactsPrescription) RightEye() *ContactsLensSpecification {
 	return &ContactsLensSpecification{inner: _r}
 }
 
+// @property      leftEye @abstract      The left eye lens specification
+//
 // LeftEye calls the underlying LeftEye.
 func (x *ContactsPrescription) LeftEye() *ContactsLensSpecification {
 	_r := x.inner.LeftEye()
@@ -54,6 +58,8 @@ func (x *ContactsPrescription) LeftEye() *ContactsLensSpecification {
 	return &ContactsLensSpecification{inner: _r}
 }
 
+// @property      brand @abstract      The prescribed brand after contact lens fitting
+//
 // Brand calls the underlying Brand.
 func (x *ContactsPrescription) Brand() string {
 	_r := x.inner.Brand()

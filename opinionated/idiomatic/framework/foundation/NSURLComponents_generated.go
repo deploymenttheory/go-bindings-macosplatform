@@ -52,6 +52,8 @@ func NewURLComponentsWithString(uRLString string) *URLComponents {
 	return &URLComponents{inner: raw.NSURLComponentsFromID(_id)}
 }
 
+// Initializes an `NSURLComponents` with a URL string and the option to add (or skip) IDNA- and percent-encoding of invalid characters. If `encodingInvalidCharacters` is false, and the URL string is invalid according to RFC 3986, `nil` is returned. If `encodingInvalidCharacters` is true, `NSURLComponents` will try to encode the string to create a valid URL. If the URL string is still invalid after encoding, `nil` is returned. - Parameter URLString: The URL string. - Parameter encodingInvalidCharacters: True if `NSURLComponents` should try to encode an invalid URL string, false otherwise. - Returns: An `NSURLComponents` instance for a valid URL, or `nil` if the URL is invalid.
+//
 // NewURLComponentsWithStringEncodingInvalidCharacters creates a new [URLComponents].
 func NewURLComponentsWithStringEncodingInvalidCharacters(uRLString string, encodingInvalidCharacters bool) *URLComponents {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLComponents")), objc.RegisterName("alloc"))

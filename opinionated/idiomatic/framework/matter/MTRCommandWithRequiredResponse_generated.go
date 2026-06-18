@@ -37,24 +37,32 @@ func NewMTRCommandWithRequiredResponseWithPathCommandFieldsRequiredResponse(path
 	return &MTRCommandWithRequiredResponse{inner: raw.MTRCommandWithRequiredResponseFromID(_id)}
 }
 
+// The path of the command being invoked.
+//
 // WithPath sets the path property and returns the receiver for chaining.
 func (x *MTRCommandWithRequiredResponse) WithPath(path *MTRCommandPath) *MTRCommandWithRequiredResponse {
 	x.inner.SetPath(path.Unwrap())
 	return x
 }
 
+// The command fields to pass for the command invoke.  nil if this command does not have any fields.  If not nil, this should be a data-value dictionary of MTRStructureValueType.
+//
 // WithCommandFields sets the commandFields property and returns the receiver for chaining.
 func (x *MTRCommandWithRequiredResponse) WithCommandFields(commandFields *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MTRCommandWithRequiredResponse {
 	x.inner.SetCommandFields(commandFields)
 	return x
 }
 
+// The response that represents this command succeeding. If this is nil, that indicates that the invoke is considered successful if it does not result in an error status response. If this is is not nil, then the invoke is considered successful if the response is a data response and for each entry in the provided requiredResponse the field whose field ID matches the key of the entry has a value that equals the value of the entry.  Values of entries are data-value dictionaries.
+//
 // WithRequiredResponse sets the requiredResponse property and returns the receiver for chaining.
 func (x *MTRCommandWithRequiredResponse) WithRequiredResponse(requiredResponse *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *MTRCommandWithRequiredResponse {
 	x.inner.SetRequiredResponse(requiredResponse)
 	return x
 }
 
+// The path of the command being invoked.
+//
 // Path calls the underlying Path.
 func (x *MTRCommandWithRequiredResponse) Path() *MTRCommandPath {
 	_r := x.inner.Path()
@@ -69,6 +77,8 @@ func (x *MTRCommandWithRequiredResponse) SetPath(path *raw.MTRCommandPath) {
 	x.inner.SetPath(path)
 }
 
+// The command fields to pass for the command invoke.  nil if this command does not have any fields.  If not nil, this should be a data-value dictionary of MTRStructureValueType.
+//
 // CommandFields calls the underlying CommandFields.
 func (x *MTRCommandWithRequiredResponse) CommandFields() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.CommandFields()
@@ -79,6 +89,8 @@ func (x *MTRCommandWithRequiredResponse) SetCommandFields(commandFields *foundat
 	x.inner.SetCommandFields(commandFields)
 }
 
+// The response that represents this command succeeding. If this is nil, that indicates that the invoke is considered successful if it does not result in an error status response. If this is is not nil, then the invoke is considered successful if the response is a data response and for each entry in the provided requiredResponse the field whose field ID matches the key of the entry has a value that equals the value of the entry.  Values of entries are data-value dictionaries.
+//
 // RequiredResponse calls the underlying RequiredResponse.
 func (x *MTRCommandWithRequiredResponse) RequiredResponse() *foundation.NSDictionary[*foundation.NSNumber, objc.ID] {
 	return x.inner.RequiredResponse()

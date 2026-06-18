@@ -33,6 +33,8 @@ func MTRBaseClusterICDManagementFromID(id objc.ID) *MTRBaseClusterICDManagement 
 	return &MTRBaseClusterICDManagement{inner: raw.MTRBaseClusterICDManagementFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterICDManagementWithDeviceEndpointIDQueue creates a new [MTRBaseClusterICDManagement].
 func NewMTRBaseClusterICDManagementWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterICDManagement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterICDManagement")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewMTRBaseClusterICDManagementWithDeviceEndpointIDQueue(device *raw.MTRBase
 	return &MTRBaseClusterICDManagement{inner: raw.MTRBaseClusterICDManagementFromID(_id)}
 }
 
+// Command RegisterClient This command allows a client to register itself with the ICD to be notified when the device is available for communication.
+//
 // RegisterClientWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterICDManagement) RegisterClientWithParamsCompletion(ctx context.Context, params *raw.MTRICDManagementClusterRegisterClientParams) (*MTRICDManagementClusterRegisterClientResponseParams, error) {
 	type _result struct {
@@ -66,11 +70,15 @@ func (x *MTRBaseClusterICDManagement) RegisterClientWithParamsCompletion(ctx con
 	}
 }
 
+// Command UnregisterClient This command allows a client to unregister itself with the ICD.
+//
 // UnregisterClientWithParamsCompletion calls the underlying UnregisterClientWithParamsCompletion.
 func (x *MTRBaseClusterICDManagement) UnregisterClientWithParamsCompletion(params *raw.MTRICDManagementClusterUnregisterClientParams, completion func(unsafe.Pointer)) {
 	x.inner.UnregisterClientWithParamsCompletion(params, completion)
 }
 
+// Command StayActiveRequest This command allows a client to request that the server stays in active mode for at least a given time duration (in milliseconds) from when this command is received.
+//
 // StayActiveRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterICDManagement) StayActiveRequestWithParamsCompletion(ctx context.Context, params *raw.MTRICDManagementClusterStayActiveRequestParams) (*MTRICDManagementClusterStayActiveResponseParams, error) {
 	type _result struct {

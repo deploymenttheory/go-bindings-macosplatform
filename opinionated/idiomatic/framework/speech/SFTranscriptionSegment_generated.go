@@ -37,6 +37,8 @@ func NewTranscriptionSegment() *TranscriptionSegment {
 	return &TranscriptionSegment{inner: raw.SFTranscriptionSegmentFromID(_id)}
 }
 
+// The string representation of the utterance in the transcription segment.
+//
 // Substring calls the underlying Substring.
 func (x *TranscriptionSegment) Substring() string {
 	_r := x.inner.Substring()
@@ -46,26 +48,36 @@ func (x *TranscriptionSegment) Substring() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The range information for the transcription segment's substring, relative to the overall transcription. Use the range information to find the position of the segment within the “SFTranscription/formattedString“ property of the “SFTranscription“ object containing this segment.
+//
 // SubstringRange calls the underlying SubstringRange.
 func (x *TranscriptionSegment) SubstringRange() foundation.NSRange {
 	return x.inner.SubstringRange()
 }
 
+// The start time of the segment in the processed audio stream. The “timestamp“ is the number of seconds between the beginning of the audio content and when the user spoke the word represented by the segment. For example, if the user said the word "time" one second into the transcription "What time is it", the timestamp would be equal to `1.0`.
+//
 // Timestamp calls the underlying Timestamp.
 func (x *TranscriptionSegment) Timestamp() float64 {
 	return x.inner.Timestamp()
 }
 
+// The number of seconds it took for the user to speak the utterance represented by the segment. The “duration“ contains the number of seconds it took for the user to speak the one or more words (utterance) represented by the segment. For example, the “SFSpeechRecognizer“ sets “duration“ to `0.6` if the user took `0.6` seconds to say `“time”` in the transcription of `“What time is it?"`.
+//
 // Duration calls the underlying Duration.
 func (x *TranscriptionSegment) Duration() float64 {
 	return x.inner.Duration()
 }
 
+// The level of confidence the speech recognizer has in its recognition of the speech transcribed for the segment. This property reflects the overall confidence in the recognition of the entire phrase. The value is `0` if there was no recognition, and it is closer to `1` when there is a high certainty that a transcription matches the user's speech exactly. For example, a confidence value of `0.94` represents a very high confidence level, and is more likely to be correct than a transcription with a confidence value of `0.72`.
+//
 // Confidence calls the underlying Confidence.
 func (x *TranscriptionSegment) Confidence() float32 {
 	return x.inner.Confidence()
 }
 
+// An array of alternate interpretations of the utterance in the transcription segment.
+//
 // AlternativeSubstrings returns the collection as a Go slice.
 func (x *TranscriptionSegment) AlternativeSubstrings() []string {
 	arr := x.inner.AlternativeSubstrings()
@@ -77,6 +89,8 @@ func (x *TranscriptionSegment) AlternativeSubstrings() []string {
 	})
 }
 
+// An analysis of the transcription segment's vocal properties.
+//
 // VoiceAnalytics calls the underlying VoiceAnalytics.
 func (x *TranscriptionSegment) VoiceAnalytics() *VoiceAnalytics {
 	_r := x.inner.VoiceAnalytics()

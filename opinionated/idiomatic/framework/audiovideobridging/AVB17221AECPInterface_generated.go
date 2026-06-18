@@ -36,36 +36,50 @@ func NewAVB17221AECPInterface() *AVB17221AECPInterface {
 	return &AVB17221AECPInterface{inner: raw.AVB17221AECPInterfaceFromID(_id)}
 }
 
+// @method		setCommandHandler:forEntityID: @abstract	Add an object implementing the AVB17221AECPClient protocol as a handler for command messages to a specified Entity ID. @param		handler	The object which will handle all of the commands. @param		targetEntityID	The Entity ID of the entity the messages are to. @result		YES if the handler was added, NO if there is already a handler or if the routing ID couldn't be added.
+//
 // SetCommandHandlerForEntityID calls the underlying SetCommandHandlerForEntityID.
 func (x *AVB17221AECPInterface) SetCommandHandlerForEntityID(handler raw.AVB17221AECPClient, targetEntityID uint64) bool {
 	return x.inner.SetCommandHandlerForEntityID(handler, targetEntityID)
 }
 
+// @method		removeCommandHandlerForEntityID: @abstract	Removed a handler for command messages to or from a specified EntityID. @param		targetEntityID	The EntityID of the entity the messages are to.
+//
 // RemoveCommandHandlerForEntityID calls the underlying RemoveCommandHandlerForEntityID.
 func (x *AVB17221AECPInterface) RemoveCommandHandlerForEntityID(targetEntityID uint64) {
 	x.inner.RemoveCommandHandlerForEntityID(targetEntityID)
 }
 
+// @method		setResponseHandler:forControllerEntityID: @abstract	Add an object implementing the AVB17221AECPClient protocol as a handler for response messages for a specified controller EntityID. @param		handler	The object which will handle all of the responses for the Controller Entity ID. @param		controllerEntityID	The Entity ID of the controller the messages are for. @result		YES if the handler was added, NO if there is already a handler or if the routing ID couldn't be added.
+//
 // SetResponseHandlerForControllerEntityID calls the underlying SetResponseHandlerForControllerEntityID.
 func (x *AVB17221AECPInterface) SetResponseHandlerForControllerEntityID(handler raw.AVB17221AECPClient, controllerEntityID uint64) bool {
 	return x.inner.SetResponseHandlerForControllerEntityID(handler, controllerEntityID)
 }
 
+// @method		removeResponseHandlerForControllerEntityID: @abstract	Removed a handler for response messages to or from a specified EntityID. @param		controllerEntityID	The EntityID of the controller the messages are for.
+//
 // RemoveResponseHandlerForControllerEntityID calls the underlying RemoveResponseHandlerForControllerEntityID.
 func (x *AVB17221AECPInterface) RemoveResponseHandlerForControllerEntityID(controllerEntityID uint64) {
 	x.inner.RemoveResponseHandlerForControllerEntityID(controllerEntityID)
 }
 
+// @method		sendCommand:toMACAddress:completionHandler: @abstract	Send an AECP command message. @param		message	An instance of a subclass of AVB17221AECPMessage which contains the command message. @param		destMAC	The MAC address of the end station to send the message to. @param		completionHandler	A block containing code to execute when the command has been sent or timed out. @result		A BOOL indicating success or failure @discussion	This method synchronizes access to the kernel service providing transport for the message. This method is safe to call from any thread.
+//
 // SendCommandToMACAddressCompletionHandler calls the underlying SendCommandToMACAddressCompletionHandler.
 func (x *AVB17221AECPInterface) SendCommandToMACAddressCompletionHandler(message *raw.AVB17221AECPMessage, destMAC *raw.AVBMACAddress, completionHandler func(unsafe.Pointer, *raw.AVB17221AECPMessage)) bool {
 	return x.inner.SendCommandToMACAddressCompletionHandler(message, destMAC, completionHandler)
 }
 
+// @method		sendResponse:toMACAddress:error: @abstract	Send an AECP response. @param		message	An instance of a subclass of AVB17221AECPMessage which contains the response message. @param		destMAC	The MAC address of the end station to send the message to. This argument needs to points to kIOEthernetAddressSize bytes of memory. @result		IOReturn indicating success or failure and reason for failure. @discussion	This method synchronizes access to the kernel service providing transport for the message. This method is safe to call from any thread.
+//
 // SendResponseToMACAddressError calls the underlying SendResponseToMACAddressError.
 func (x *AVB17221AECPInterface) SendResponseToMACAddressError(message *raw.AVB17221AECPMessage, destMAC *raw.AVBMACAddress) (bool, error) {
 	return x.inner.SendResponseToMACAddressError(message, destMAC)
 }
 
+// @method		sendVendorUniqueCommand:toMACAddress:expectResponseWithinTimeout:completionHandler: @abstract	Send an AECP vendor unique command message expected to receive a matching response. @param		message	An instance of AVB17221AECPVendorMessage which contains the command message. @param		destMAC	The MAC address of the end station to send the message to. @param		timeout	The number of milliseconds before the command times out. @param		completionHandler	A block containing code to execute when the command has been sent or timed out. @result		A BOOL indicating success or failure @discussion	This method synchronizes access to the kernel service providing transport for the message. This method is safe to call from any thread.
+//
 // SendVendorUniqueCommandToMACAddressExpectResponseWithinTimeoutCompletionHandler calls the underlying SendVendorUniqueCommandToMACAddressExpectResponseWithinTimeoutCompletionHandler.
 func (x *AVB17221AECPInterface) SendVendorUniqueCommandToMACAddressExpectResponseWithinTimeoutCompletionHandler(message *raw.AVB17221AECPVendorMessage, destMAC *raw.AVBMACAddress, timeout int64, completionHandler func(unsafe.Pointer, *raw.AVB17221AECPMessage)) bool {
 	return x.inner.SendVendorUniqueCommandToMACAddressExpectResponseWithinTimeoutCompletionHandler(message, destMAC, timeout, completionHandler)

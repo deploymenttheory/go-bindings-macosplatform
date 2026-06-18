@@ -37,6 +37,8 @@ func NewPlayerItemIntegratedTimeline() *PlayerItemIntegratedTimeline {
 	return &PlayerItemIntegratedTimeline{inner: raw.AVPlayerItemIntegratedTimelineFromID(_id)}
 }
 
+// @property	currentSnapshot @abstract	This property provides an immutable representation of the timeline state at time of request. @discussion Returns an immutable representation of the timeline state at time of request. A timeline snapshot provides accessors for obtaining inspectable details of the timeline.  Because a snapshot is immutable, the snapshot's properties will not update as playback continues.
+//
 // CurrentSnapshot calls the underlying CurrentSnapshot.
 func (x *PlayerItemIntegratedTimeline) CurrentSnapshot() *PlayerItemIntegratedTimelineSnapshot {
 	_r := x.inner.CurrentSnapshot()
@@ -46,36 +48,50 @@ func (x *PlayerItemIntegratedTimeline) CurrentSnapshot() *PlayerItemIntegratedTi
 	return &PlayerItemIntegratedTimelineSnapshot{inner: _r}
 }
 
+// @property	currentTime @abstract	Returns the current time on the integrated timeline. @discussion Returns the current time on the integrated timeline. During playback of interstitial events that occupy a single point, currentTime will not change.
+//
 // CurrentTime calls the underlying CurrentTime.
 func (x *PlayerItemIntegratedTimeline) CurrentTime() coremedia.CMTime {
 	return x.inner.CurrentTime()
 }
 
+// @property	currentDate @abstract	Returns the date of current playback, or nil if playback is not mapped to any date.
+//
 // CurrentDate calls the underlying CurrentDate.
 func (x *PlayerItemIntegratedTimeline) CurrentDate() *foundation.NSDate {
 	return x.inner.CurrentDate()
 }
 
+// @method       seekToTime @abstract     Seeks to a particular time in the integrated time domain and invokes the completionHandler @param        time Time represented in the integrated time domain. @param        toleranceBefore Tolerance before target time allowed to seek to. @param        toleranceAfter Tolerance after target time allowed to seek to. @param        completionHandler CompletionHandler callback after seek completes. Success will be true if the playhead moved to the new time. @discussion The integrated timeline seeks to the the range of [time-beforeTolerance, time+afterTolerance] will be attributed to a segment and AVPlayerItem that falls in that range. You can request sample accurate seeking by passing a time value of kCMTimeZero for both toleranceBefore and toleranceAfter.
+//
 // SeekToTimeToleranceBeforeToleranceAfterCompletionHandler calls the underlying SeekToTimeToleranceBeforeToleranceAfterCompletionHandler.
 func (x *PlayerItemIntegratedTimeline) SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime, completionHandler func(bool)) {
 	x.inner.SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_, toleranceBefore, toleranceAfter, completionHandler)
 }
 
+// @method		seekToDate @abstract	Seeks playhead to corresponding date and invokes the completionHandler. @param		date The new position for the playhead. @param		completionHandler CompletionHandler callback after seek completes. Success will be true if the playhead moved to the new date. @discussion The integrated timeline will seek playhead to the coresponding date.
+//
 // SeekToDateCompletionHandler calls the underlying SeekToDateCompletionHandler.
 func (x *PlayerItemIntegratedTimeline) SeekToDateCompletionHandler(date *foundation.NSDate, completionHandler func(bool)) {
 	x.inner.SeekToDateCompletionHandler(date, completionHandler)
 }
 
+// @method     addPeriodicTimeObserverForInterval @abstract   Requests invocation of a block during playback to report changing time. @param      interval The interval of invocation of the block during normal playback, according to progress of the current time in the integrated timeline. @param      queue The serial queue onto which block should be enqueued. If you pass NULL, the main queue (obtained using dispatch_get_main_queue()) will be used. Passing a concurrent queue to this method will result in undefined behavior. @param      block The block to be invoked periodically. @result An object conforming to the AVPlayerItemIntegratedTimelineObserver protocol. You must retain this returned value as long as you want the time observer to be invoked by the timeline. The block is invoked periodically at the interval specified, interpreted according to the integrated timeline. The block is also invoked across AVPlayerItemSegment and AVPlayerItem boundaries, whenever time jumps, and whenever playback starts or stops. Each call to -addPeriodicTimeObserverForInterval:queue:usingBlock: should be paired with a corresponding call to -removeTimeObserver:. Releasing the observer object without a call to -removeTimeObserver: will result in undefined behavior
+//
 // AddPeriodicTimeObserverForIntervalQueueUsing calls the underlying AddPeriodicTimeObserverForIntervalQueueUsing.
 func (x *PlayerItemIntegratedTimeline) AddPeriodicTimeObserverForIntervalQueueUsing(interval coremedia.CMTime, queue *foundation.NSObject, block objc.Block) raw.AVPlayerItemIntegratedTimelineObserver {
 	return x.inner.AddPeriodicTimeObserverForIntervalQueueUsing(interval, queue, block)
 }
 
+// @method     addBoundaryTimeObserverForSegment @abstract   Requests invocation of a block when an offset in a segment is traversed during playback. @param      segment AVPlayerItemSegment to monitor playback traversal of. @param      offsetsIntoSegment Offsets in the segment for which the observer requests notification, supplied as an array of NSValues carrying CMTimes. @param      queue The serial queue onto which block should be enqueued. If you pass NULL, the main queue (obtained using dispatch_get_main_queue()) will be used. Passing a concurrent queue to this method will result in undefined behavior. @param      block The block to be invoked when the offset is crossed during playback of a segment. @result An object conforming to the AVPlayerItemIntegratedTimelineObserver protocol. You must retain this returned value as long as you want the time observer to be invoked by the timeline. Pass this object to -removeTimeObserver: to cancel time observation. One can also configure single point segments with segmentTimes to trigger during traversal of the segment's playback. As the timeline duration and segments change, the installed time observer will be automatically adjusted to fire at the desired offset in the segment. A segment that is removed from the timeline will trigger the invocation of the block immediately with success set as false. Each call to -addBoundaryTimeObserverForSegment:segment:offsetsInSegment:queue:usingBlock: should be paired with a corresponding call to -removeTimeObserver:. Releasing the observer object without a call to -removeTimeObserver: will result in undefined behavior
+//
 // AddBoundaryTimeObserverForSegmentOffsetsIntoSegmentQueueUsing calls the underlying AddBoundaryTimeObserverForSegmentOffsetsIntoSegmentQueueUsing.
 func (x *PlayerItemIntegratedTimeline) AddBoundaryTimeObserverForSegmentOffsetsIntoSegmentQueueUsing(segment *raw.AVPlayerItemSegment, offsetsIntoSegment *foundation.NSArray[objc.ID], queue *foundation.NSObject, block func(bool)) raw.AVPlayerItemIntegratedTimelineObserver {
 	return x.inner.AddBoundaryTimeObserverForSegmentOffsetsIntoSegmentQueueUsing(segment, offsetsIntoSegment, queue, block)
 }
 
+// @method     removeTimeObserver: @abstract   Cancels a previously registered time observer. @param      observer An object returned by a previous call to -addPeriodicTimeObserverForInterval or -addBoundaryTimeObserverForSegment.
+//
 // RemoveTimeObserver calls the underlying RemoveTimeObserver.
 func (x *PlayerItemIntegratedTimeline) RemoveTimeObserver(observer raw.AVPlayerItemIntegratedTimelineObserver) {
 	x.inner.RemoveTimeObserver(observer)

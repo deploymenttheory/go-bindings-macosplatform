@@ -35,18 +35,24 @@ func NewCommandQueueDescriptor() *CommandQueueDescriptor {
 	return &CommandQueueDescriptor{inner: raw.MTLCommandQueueDescriptorFromID(_id)}
 }
 
+// @property maxCommandBufferCount @ Specify upper bound on uncompleted command buffers that may be enqueued on this queue
+//
 // WithMaxCommandBufferCount sets the maxCommandBufferCount property and returns the receiver for chaining.
 func (x *CommandQueueDescriptor) WithMaxCommandBufferCount(maxCommandBufferCount uint) *CommandQueueDescriptor {
 	x.inner.SetMaxCommandBufferCount(maxCommandBufferCount)
 	return x
 }
 
+// @property logState @ Specify the MTLLogState to enable shader logging
+//
 // WithLogState sets the logState property and returns the receiver for chaining.
 func (x *CommandQueueDescriptor) WithLogState(logState raw.MTLLogState) *CommandQueueDescriptor {
 	x.inner.SetLogState(logState)
 	return x
 }
 
+// @property maxCommandBufferCount @ Specify upper bound on uncompleted command buffers that may be enqueued on this queue
+//
 // MaxCommandBufferCount calls the underlying MaxCommandBufferCount.
 func (x *CommandQueueDescriptor) MaxCommandBufferCount() uint {
 	return x.inner.MaxCommandBufferCount()
@@ -57,6 +63,8 @@ func (x *CommandQueueDescriptor) SetMaxCommandBufferCount(maxCommandBufferCount 
 	x.inner.SetMaxCommandBufferCount(maxCommandBufferCount)
 }
 
+// @property logState @ Specify the MTLLogState to enable shader logging
+//
 // LogState calls the underlying LogState.
 func (x *CommandQueueDescriptor) LogState() raw.MTLLogState {
 	return x.inner.LogState()

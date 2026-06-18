@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The common configuration traits for entropy devices.
+//
 // EntropyDeviceConfiguration wraps [raw.VZEntropyDeviceConfiguration] with a fluent Go API.
 type EntropyDeviceConfiguration struct {
 	inner *raw.VZEntropyDeviceConfiguration

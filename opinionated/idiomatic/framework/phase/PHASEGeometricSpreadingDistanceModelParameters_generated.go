@@ -37,12 +37,16 @@ func NewGeometricSpreadingDistanceModelParameters() *GeometricSpreadingDistanceM
 	return &GeometricSpreadingDistanceModelParameters{inner: raw.PHASEGeometricSpreadingDistanceModelParametersFromID(_id)}
 }
 
+// @property rolloffFactor @abstract Rolloff factor. @note Values are clamped to the range [0.0, DBL_MAX]. Default value is 1.0. 0.0 is no effect. 0.5 is half the effect. 1.0 is normal. 2.0 is double the effect.
+//
 // WithRolloffFactor sets the rolloffFactor property and returns the receiver for chaining.
 func (x *GeometricSpreadingDistanceModelParameters) WithRolloffFactor(rolloffFactor float64) *GeometricSpreadingDistanceModelParameters {
 	x.inner.SetRolloffFactor(rolloffFactor)
 	return x
 }
 
+// @property fadeOutParameters @abstract Fade out parameters (optional).
+//
 // WithFadeOutParameters sets the fadeOutParameters property and returns the receiver for chaining.
 func (x *GeometricSpreadingDistanceModelParameters) WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *GeometricSpreadingDistanceModelParameters {
 	x.inner.PHASEDistanceModelParameters.SetFadeOutParameters(fadeOutParameters.Unwrap())

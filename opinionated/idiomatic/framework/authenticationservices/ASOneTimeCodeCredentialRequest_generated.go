@@ -29,6 +29,8 @@ func OneTimeCodeCredentialRequestFromID(id objc.ID) *OneTimeCodeCredentialReques
 	return &OneTimeCodeCredentialRequest{inner: raw.ASOneTimeCodeCredentialRequestFromID(id)}
 }
 
+// @abstract Initializes an instance of ASOneTimeCodeCredentialRequest. @param credentialIdentity the credential identity to use for this request.
+//
 // NewOneTimeCodeCredentialRequestWithCredentialIdentity creates a new [OneTimeCodeCredentialRequest].
 func NewOneTimeCodeCredentialRequestWithCredentialIdentity(credentialIdentity *raw.ASOneTimeCodeCredentialIdentity) *OneTimeCodeCredentialRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASOneTimeCodeCredentialRequest")), objc.RegisterName("alloc"))

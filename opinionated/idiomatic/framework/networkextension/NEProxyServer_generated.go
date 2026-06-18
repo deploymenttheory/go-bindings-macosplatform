@@ -31,6 +31,8 @@ func NEProxyServerFromID(id objc.ID) *NEProxyServer {
 	return &NEProxyServer{inner: raw.NEProxyServerFromID(id)}
 }
 
+// @method initWithAddress:port: @discussion This function initializes a newly-allocated NEProxyServer object @param address The string representation of the proxy server IP address. @param port The TCP port of the proxy server.
+//
 // NewNEProxyServerWithAddressPort creates a new [NEProxyServer].
 func NewNEProxyServerWithAddressPort(address string, port int) *NEProxyServer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NEProxyServer")), objc.RegisterName("alloc"))
@@ -38,24 +40,32 @@ func NewNEProxyServerWithAddressPort(address string, port int) *NEProxyServer {
 	return &NEProxyServer{inner: raw.NEProxyServerFromID(_id)}
 }
 
+// @property authenticationRequired @discussion A flag indicating if the server requires authentication credentials.
+//
 // WithAuthenticationRequired sets the authenticationRequired property and returns the receiver for chaining.
 func (x *NEProxyServer) WithAuthenticationRequired(authenticationRequired bool) *NEProxyServer {
 	x.inner.SetAuthenticationRequired(authenticationRequired)
 	return x
 }
 
+// @property username @discussion The username portion of the authentication credential to use when communicating with the proxy server.
+//
 // WithUsername sets the username property and returns the receiver for chaining.
 func (x *NEProxyServer) WithUsername(username string) *NEProxyServer {
 	x.inner.SetUsername(foundation.NSStringStringWithUTF8String(username))
 	return x
 }
 
+// @property password @discussion The password portion of the authentication credential to use when communicating with the proxy server. This property is only saved persistently if the username property is non-nil and non-empty and if the authenticationRequired flag is set.
+//
 // WithPassword sets the password property and returns the receiver for chaining.
 func (x *NEProxyServer) WithPassword(password string) *NEProxyServer {
 	x.inner.SetPassword(foundation.NSStringStringWithUTF8String(password))
 	return x
 }
 
+// @property address @discussion The string representation of the proxy server IP address.
+//
 // Address calls the underlying Address.
 func (x *NEProxyServer) Address() string {
 	_r := x.inner.Address()
@@ -65,11 +75,15 @@ func (x *NEProxyServer) Address() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property port @discussion The TCP port of the proxy server.
+//
 // Port calls the underlying Port.
 func (x *NEProxyServer) Port() int {
 	return x.inner.Port()
 }
 
+// @property authenticationRequired @discussion A flag indicating if the server requires authentication credentials.
+//
 // AuthenticationRequired calls the underlying AuthenticationRequired.
 func (x *NEProxyServer) AuthenticationRequired() bool {
 	return x.inner.AuthenticationRequired()
@@ -80,6 +94,8 @@ func (x *NEProxyServer) SetAuthenticationRequired(authenticationRequired bool) {
 	x.inner.SetAuthenticationRequired(authenticationRequired)
 }
 
+// @property username @discussion The username portion of the authentication credential to use when communicating with the proxy server.
+//
 // Username calls the underlying Username.
 func (x *NEProxyServer) Username() string {
 	_r := x.inner.Username()
@@ -94,6 +110,8 @@ func (x *NEProxyServer) SetUsername(username string) {
 	x.inner.SetUsername(foundation.NSStringStringWithUTF8String(username))
 }
 
+// @property password @discussion The password portion of the authentication credential to use when communicating with the proxy server. This property is only saved persistently if the username property is non-nil and non-empty and if the authenticationRequired flag is set.
+//
 // Password calls the underlying Password.
 func (x *NEProxyServer) Password() string {
 	_r := x.inner.Password()

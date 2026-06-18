@@ -36,6 +36,8 @@ func NewModelStructurePipeline() *ModelStructurePipeline {
 	return &ModelStructurePipeline{inner: raw.MLModelStructurePipelineFromID(_id)}
 }
 
+// The names of the sub models in the pipeline.
+//
 // SubModelNames returns the collection as a Go slice.
 func (x *ModelStructurePipeline) SubModelNames() []string {
 	arr := x.inner.SubModelNames()
@@ -47,6 +49,8 @@ func (x *ModelStructurePipeline) SubModelNames() []string {
 	})
 }
 
+// The structure of the sub models in the pipeline.
+//
 // SubModels returns the collection as a Go slice.
 func (x *ModelStructurePipeline) SubModels() []*ModelStructure {
 	arr := x.inner.SubModels()

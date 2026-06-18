@@ -37,6 +37,8 @@ func NewBrailleTranslationResult() *BrailleTranslationResult {
 	return &BrailleTranslationResult{inner: raw.AXBrailleTranslationResultFromID(_id)}
 }
 
+// The resulting string after translation or back-translation.
+//
 // ResultString calls the underlying ResultString.
 func (x *BrailleTranslationResult) ResultString() string {
 	_r := x.inner.ResultString()
@@ -46,6 +48,8 @@ func (x *BrailleTranslationResult) ResultString() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// An array of integers that has the same length as the resultString. locationMap[i]-th character in the input string corresponds to resultString[i].
+//
 // LocationMap returns the collection as a Go slice.
 func (x *BrailleTranslationResult) LocationMap() []*foundation.NSNumber {
 	arr := x.inner.LocationMap()

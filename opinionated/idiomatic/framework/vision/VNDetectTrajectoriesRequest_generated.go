@@ -32,6 +32,8 @@ func DetectTrajectoriesRequestFromID(id objc.ID) *DetectTrajectoriesRequest {
 	return &DetectTrajectoriesRequest{inner: raw.VNDetectTrajectoriesRequestFromID(id)}
 }
 
+// @brief Create a new request that will detect the trajectory of a shape in motion. @param frameAnalysisSpacing	The reciprocal of the maximum rate at which buffers will be processed. The request will not process buffers that fall within the frameAnalysisSpacing after it has performed the analysis. The analysis is not done by wall time but by analysis of the time stamps of the samplebuffers being processed. This property is for instance useful to throttle the processing on slower devices. If this is set to kCMTimeZero then no frames get skipped in the analysis. @param trajectoryLength		The number of points required to analyze a parabola that indicates a trajectory. Must be at least 5. @param completionHandler		The block to be invoked after the request has completed its processing. The completion handler gets executed on the same dispatch queue as the request being executed.
+//
 // NewDetectTrajectoriesRequestWithFrameAnalysisSpacingTrajectoryLengthCompletionHandler creates a new [DetectTrajectoriesRequest].
 func NewDetectTrajectoriesRequestWithFrameAnalysisSpacingTrajectoryLengthCompletionHandler(frameAnalysisSpacing coremedia.CMTime, trajectoryLength int, completionHandler func(*raw.VNRequest, unsafe.Pointer)) *DetectTrajectoriesRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNDetectTrajectoriesRequest")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewDetectTrajectoriesRequestWithFrameAnalysisSpacingTrajectoryLengthComplet
 	return &DetectTrajectoriesRequest{inner: raw.VNDetectTrajectoriesRequestFromID(_id)}
 }
 
+// @brief Specifies the minimum radius of the bounding circle of the object to be tracked. This can be used to filter out noise and small objects. The default is 0.0, which means no filtering is applied. Changing the property from frame to frame can produce eratic trajectories as objects will either disappear or be added to the tracking base on this filtering. The value is specified in normalized coordinates.
+//
 // WithObjectMinimumNormalizedRadius sets the objectMinimumNormalizedRadius property and returns the receiver for chaining.
 func (x *DetectTrajectoriesRequest) WithObjectMinimumNormalizedRadius(objectMinimumNormalizedRadius float32) *DetectTrajectoriesRequest {
 	x.inner.SetObjectMinimumNormalizedRadius(objectMinimumNormalizedRadius)
@@ -51,6 +55,8 @@ func (x *DetectTrajectoriesRequest) WithMinimumObjectSize(minimumObjectSize floa
 	return x
 }
 
+// @brief Specifies the maximum radius of the bounding circle of the object to be tracked. This can be used to filter out unwanted trajectories from larger objects moving through the scene. The default is 1.0, which means no filtering is applied. Changing the maximum from frame to frame can produce eratic trajectories as objects will either disappear or be added to the tracking base on this filtering. The size is specified in normalized coordinates.
+//
 // WithObjectMaximumNormalizedRadius sets the objectMaximumNormalizedRadius property and returns the receiver for chaining.
 func (x *DetectTrajectoriesRequest) WithObjectMaximumNormalizedRadius(objectMaximumNormalizedRadius float32) *DetectTrajectoriesRequest {
 	x.inner.SetObjectMaximumNormalizedRadius(objectMaximumNormalizedRadius)
@@ -63,41 +69,55 @@ func (x *DetectTrajectoriesRequest) WithMaximumObjectSize(maximumObjectSize floa
 	return x
 }
 
+// @brief Specifies the desired target frame time for processing trajectory detection. This can be used for real-time processing of frames, which requires execution with a specific amount of time. The target frame time is evaluated from frame-to-frame. If processing takes longer than this target frame time for the currect frame, it will attempt to reduce the amount of time taken by reducing the accuracy (down to a set minimum) for the next frame. If a frame takes less time than this target, then accuracy of the next frame will be increased (up to a set maximum). The default value is kCMTimeIndefinite, meaning accuracy stays at the predefined maximum.
+//
 // WithTargetFrameTime sets the targetFrameTime property and returns the receiver for chaining.
 func (x *DetectTrajectoriesRequest) WithTargetFrameTime(targetFrameTime coremedia.CMTime) *DetectTrajectoriesRequest {
 	x.inner.SetTargetFrameTime(targetFrameTime)
 	return x
 }
 
+// @brief The region of the image in which the request will be performed.  The rectangle is normalized to the dimensions of the image being processed and has its origin specified relative to the image's lower-left corner. @discussion The default value for this property is { { 0, 0 }, { 1, 1 } }.  Setting this property to a rectangle that is outside of the normalized coordinate space will be accepted but result in the request failing to be performed.
+//
 // WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
 func (x *DetectTrajectoriesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectTrajectoriesRequest {
 	x.inner.VNStatefulRequest.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
 	return x
 }
 
+// @abstract A hint used to minimize the resource burden of the request. Memory footprint, processing footprint and/or CPU/GPU contention will be reduced (depending on the request), at the potential cost of longer execution time. This can help, for example, with ensuring UI updates and rendering are not getting blocked by Vision processing.
+//
 // WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
 func (x *DetectTrajectoriesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectTrajectoriesRequest {
 	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
 	return x
 }
 
+// @abstract This property, if set to YES, signifies that the request should be performed exclusively on the CPU and not on the GPU. The default value is NO, which signifies that the request is free to leverage the GPU to accelerate any work the request may require.
+//
 // WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
 func (x *DetectTrajectoriesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectTrajectoriesRequest {
 	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
 	return x
 }
 
+// @abstract The specific algorithm or implementation revision that is to be used to perform the request.
+//
 // WithRevision sets the revision property and returns the receiver for chaining.
 func (x *DetectTrajectoriesRequest) WithRevision(revision uint) *DetectTrajectoriesRequest {
 	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetRevision(revision)
 	return x
 }
 
+// @brief The number of points required to analyze a parabola that indicates a trajectory.
+//
 // TrajectoryLength calls the underlying TrajectoryLength.
 func (x *DetectTrajectoriesRequest) TrajectoryLength() int {
 	return x.inner.TrajectoryLength()
 }
 
+// @brief Specifies the minimum radius of the bounding circle of the object to be tracked. This can be used to filter out noise and small objects. The default is 0.0, which means no filtering is applied. Changing the property from frame to frame can produce eratic trajectories as objects will either disappear or be added to the tracking base on this filtering. The value is specified in normalized coordinates.
+//
 // ObjectMinimumNormalizedRadius calls the underlying ObjectMinimumNormalizedRadius.
 func (x *DetectTrajectoriesRequest) ObjectMinimumNormalizedRadius() float32 {
 	return x.inner.ObjectMinimumNormalizedRadius()
@@ -118,6 +138,8 @@ func (x *DetectTrajectoriesRequest) SetMinimumObjectSize(minimumObjectSize float
 	x.inner.SetMinimumObjectSize(minimumObjectSize)
 }
 
+// @brief Specifies the maximum radius of the bounding circle of the object to be tracked. This can be used to filter out unwanted trajectories from larger objects moving through the scene. The default is 1.0, which means no filtering is applied. Changing the maximum from frame to frame can produce eratic trajectories as objects will either disappear or be added to the tracking base on this filtering. The size is specified in normalized coordinates.
+//
 // ObjectMaximumNormalizedRadius calls the underlying ObjectMaximumNormalizedRadius.
 func (x *DetectTrajectoriesRequest) ObjectMaximumNormalizedRadius() float32 {
 	return x.inner.ObjectMaximumNormalizedRadius()
@@ -138,6 +160,8 @@ func (x *DetectTrajectoriesRequest) SetMaximumObjectSize(maximumObjectSize float
 	x.inner.SetMaximumObjectSize(maximumObjectSize)
 }
 
+// @brief Specifies the desired target frame time for processing trajectory detection. This can be used for real-time processing of frames, which requires execution with a specific amount of time. The target frame time is evaluated from frame-to-frame. If processing takes longer than this target frame time for the currect frame, it will attempt to reduce the amount of time taken by reducing the accuracy (down to a set minimum) for the next frame. If a frame takes less time than this target, then accuracy of the next frame will be increased (up to a set maximum). The default value is kCMTimeIndefinite, meaning accuracy stays at the predefined maximum.
+//
 // TargetFrameTime calls the underlying TargetFrameTime.
 func (x *DetectTrajectoriesRequest) TargetFrameTime() coremedia.CMTime {
 	return x.inner.TargetFrameTime()

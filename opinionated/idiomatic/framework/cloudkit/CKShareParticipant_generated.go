@@ -37,18 +37,24 @@ func NewShareParticipant() *ShareParticipant {
 	return &ShareParticipant{inner: raw.CKShareParticipantFromID(_id)}
 }
 
+// The participant's role for the share.
+//
 // WithRole sets the role property and returns the receiver for chaining.
 func (x *ShareParticipant) WithRole(role CKShareParticipantRole) *ShareParticipant {
 	x.inner.SetRole(raw.CKShareParticipantRole(role))
 	return x
 }
 
+// The participant's permission level for the share. This property controls the permissions that the participant has for the share. For a list of possible values, see “CKShare/ParticipantPermission“.
+//
 // WithPermission sets the permission property and returns the receiver for chaining.
 func (x *ShareParticipant) WithPermission(permission CKShareParticipantPermission) *ShareParticipant {
 	x.inner.SetPermission(raw.CKShareParticipantPermission(permission))
 	return x
 }
 
+// The identity of the participant. This property contains a reference to the user identity for the share participant.
+//
 // UserIdentity calls the underlying UserIdentity.
 func (x *ShareParticipant) UserIdentity() *UserIdentity {
 	_r := x.inner.UserIdentity()
@@ -58,6 +64,8 @@ func (x *ShareParticipant) UserIdentity() *UserIdentity {
 	return &UserIdentity{inner: _r}
 }
 
+// The participant's role for the share.
+//
 // Role calls the underlying Role.
 func (x *ShareParticipant) Role() CKShareParticipantRole {
 	return CKShareParticipantRole(x.inner.Role())
@@ -68,11 +76,15 @@ func (x *ShareParticipant) SetRole(role CKShareParticipantRole) {
 	x.inner.SetRole(raw.CKShareParticipantRole(role))
 }
 
+// The current state of the user's acceptance of the share. This property contains the current state of the participant's acceptance of the share. For a list of possible values, see “CKShare/ParticipantAcceptanceStatus“.
+//
 // AcceptanceStatus calls the underlying AcceptanceStatus.
 func (x *ShareParticipant) AcceptanceStatus() CKShareParticipantAcceptanceStatus {
 	return CKShareParticipantAcceptanceStatus(x.inner.AcceptanceStatus())
 }
 
+// The participant's permission level for the share. This property controls the permissions that the participant has for the share. For a list of possible values, see “CKShare/ParticipantPermission“.
+//
 // Permission calls the underlying Permission.
 func (x *ShareParticipant) Permission() CKShareParticipantPermission {
 	return CKShareParticipantPermission(x.inner.Permission())
@@ -83,6 +95,8 @@ func (x *ShareParticipant) SetPermission(permission CKShareParticipantPermission
 	x.inner.SetPermission(raw.CKShareParticipantPermission(permission))
 }
 
+// A unique identifier for this participant.
+//
 // ParticipantID calls the underlying ParticipantID.
 func (x *ShareParticipant) ParticipantID() string {
 	_r := x.inner.ParticipantID()
@@ -92,11 +106,15 @@ func (x *ShareParticipant) ParticipantID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Indicates whether the participant was originally a requester that an originator or administrator approved to join the share.
+//
 // IsApprovedRequester calls the underlying IsApprovedRequester.
 func (x *ShareParticipant) IsApprovedRequester() bool {
 	return x.inner.IsApprovedRequester()
 }
 
+// The date and time when an originator or administrator added this participant to the share. CloudKit sets this timestamp when the share is successfully saved to the server.
+//
 // DateAddedToShare calls the underlying DateAddedToShare.
 func (x *ShareParticipant) DateAddedToShare() *foundation.NSDate {
 	return x.inner.DateAddedToShare()

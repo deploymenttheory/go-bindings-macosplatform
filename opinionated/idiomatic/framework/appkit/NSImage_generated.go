@@ -238,8 +238,17 @@ func (x *Image) TIFFRepresentationUsingCompressionFactor(comp NSTIFFCompression,
 }
 
 // AddRepresentations calls the underlying AddRepresentations.
-func (x *Image) AddRepresentations(imageReps *foundation.NSArray[*raw.NSImageRep]) {
-	x.inner.AddRepresentations(imageReps)
+func (x *Image) AddRepresentations(imageReps ...ImageRepProvider) {
+	_ptrs := make([]objc.ID, len(imageReps))
+	for _i, _v := range imageReps {
+		_ptrs[_i] = _v.asImageRep().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.NSImageRep]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.NSImageRep](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.AddRepresentations(_arg0)
 }
 
 // AddRepresentation calls the underlying AddRepresentation.
@@ -290,6 +299,8 @@ func (x *Image) ImageWithSymbolConfiguration(configuration *raw.NSImageSymbolCon
 	return &Image{inner: _r}
 }
 
+// Creates and returns a new image with the specified locale. If the receiver contains locale-sensitive representations, the returned image will prefer to draw using representations appropriate for the specified locale. If locale is `nil`, the returned image uses the default behavior of choosing representations appropriate for the system’s currently-configured locale.
+//
 // ImageWithLocale calls the underlying ImageWithLocale.
 func (x *Image) ImageWithLocale(locale *foundation.NSLocale) *Image {
 	_r := x.inner.ImageWithLocale(locale)
@@ -467,6 +478,8 @@ func (x *Image) SymbolConfiguration() *ImageSymbolConfiguration {
 	return &ImageSymbolConfiguration{inner: _r}
 }
 
+// The image’s preferred locale for resolving representations, if one has been specified using `-imageWithLocale:`. Otherwise, `nil`.
+//
 // Locale calls the underlying Locale.
 func (x *Image) Locale() *foundation.NSLocale {
 	return x.inner.Locale()
@@ -611,7 +624,7 @@ type Imageable interface {
 	DrawInRect(rect corefoundation.CGRect)
 	Recache()
 	TIFFRepresentationUsingCompressionFactor(comp NSTIFFCompression, factor float32) *foundation.NSData
-	AddRepresentations(imageReps *foundation.NSArray[*raw.NSImageRep])
+	AddRepresentations(imageReps ...ImageRepProvider)
 	AddRepresentation(imageRep *raw.NSImageRep)
 	RemoveRepresentation(imageRep *raw.NSImageRep)
 	CGImageForProposedRectContextHints(proposedDestRect *corefoundation.CGRect, referenceContext *raw.NSGraphicsContext, hints *foundation.NSDictionary[*foundation.NSString, objc.ID]) unsafe.Pointer

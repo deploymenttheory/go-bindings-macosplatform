@@ -37,6 +37,8 @@ func NewMTL4PipelineDataSetSerializerDescriptor() *MTL4PipelineDataSetSerializer
 	return &MTL4PipelineDataSetSerializerDescriptor{inner: raw.MTL4PipelineDataSetSerializerDescriptorFromID(_id)}
 }
 
+// Specifies the configuration of the serialization process. The configuration of the serialization process determines the mechanisms you use to serialize pipeline data sets. When this configuration contains “MTL4PipelineDataSetSerializerConfigurationCaptureDescriptors“, use “serializeAsPipelinesScriptWithError:“ to serialize pipeline scripts. If this option contains “MTL4PipelineDataSetSerializerConfigurationCaptureBinaries“, the serializer can additionally serialize to a binary archive by calling “serializeAsArchiveAndFlushToURL:error::“.
+//
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *MTL4PipelineDataSetSerializerDescriptor) WithConfiguration(configuration MTL4PipelineDataSetSerializerConfiguration) *MTL4PipelineDataSetSerializerDescriptor {
 	x.inner.SetConfiguration(raw.MTL4PipelineDataSetSerializerConfiguration(configuration))

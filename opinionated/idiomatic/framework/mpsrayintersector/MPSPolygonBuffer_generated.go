@@ -37,6 +37,8 @@ func NewPolygonBuffer() *PolygonBuffer {
 	return &PolygonBuffer{inner: raw.MPSPolygonBufferFromID(_id)}
 }
 
+// @brief Initialize the polygon buffer with an NSCoder. Buffer properties such as the vertex buffer, instance buffer, etc. are set to nil. Encode and decode these buffers along with the polygon buffer instead.
+//
 // NewPolygonBufferWithCoder creates a new [PolygonBuffer].
 func NewPolygonBufferWithCoder(aDecoder *foundation.NSCoder) *PolygonBuffer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSPolygonBuffer")), objc.RegisterName("alloc"))
@@ -44,48 +46,64 @@ func NewPolygonBufferWithCoder(aDecoder *foundation.NSCoder) *PolygonBuffer {
 	return &PolygonBuffer{inner: raw.MPSPolygonBufferFromID(_id)}
 }
 
+// @brief Vertex buffer containing vertex data encoded as three 32 bit floats per vertex. Note that by default each vertex is aligned to the alignment of the vector_float3 type: 16 bytes. This can be changed using the vertexStride property. A vertex buffer must be provided before the acceleration structure is built. When using triangle polygons, degenerate (zero or negative area) triangles are ignored during acceleration structure construction. This can be used to pad triangle indices if needed. Quadrilateral polygons are internally treated as two triangles. If the quadrilateral has vertices v0, v1, v2, and v3, the two triangles will have vertices v0, v1, v2 and v0, v2, v3. A quadrilateral may be used to represent a triangle by repeating the last vertex. If the first triangle is degenerate (zero or negative area), the entire quadrilateral will be ignored. This can be used to pad quadrilateral indices if needed. All four vertices of a quadrilateral must be coplanar and the quadrilateral must be convex.
+//
 // WithVertexBuffer sets the vertexBuffer property and returns the receiver for chaining.
 func (x *PolygonBuffer) WithVertexBuffer(vertexBuffer metal.MTLBuffer) *PolygonBuffer {
 	x.inner.SetVertexBuffer(vertexBuffer)
 	return x
 }
 
+// @brief Offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
+//
 // WithVertexBufferOffset sets the vertexBufferOffset property and returns the receiver for chaining.
 func (x *PolygonBuffer) WithVertexBufferOffset(vertexBufferOffset uint) *PolygonBuffer {
 	x.inner.SetVertexBufferOffset(vertexBufferOffset)
 	return x
 }
 
+// @brief Index buffer containing index data. Each index references a vertex in the vertex buffer. May be nil.
+//
 // WithIndexBuffer sets the indexBuffer property and returns the receiver for chaining.
 func (x *PolygonBuffer) WithIndexBuffer(indexBuffer metal.MTLBuffer) *PolygonBuffer {
 	x.inner.SetIndexBuffer(indexBuffer)
 	return x
 }
 
+// @brief Offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure.
+//
 // WithIndexBufferOffset sets the indexBufferOffset property and returns the receiver for chaining.
 func (x *PolygonBuffer) WithIndexBufferOffset(indexBufferOffset uint) *PolygonBuffer {
 	x.inner.SetIndexBufferOffset(indexBufferOffset)
 	return x
 }
 
+// @brief Mask buffer containing one uint32_t mask per polygon. May be nil. Otherwise, the mask type must be specified on the MPSRayIntersector with which it is used.
+//
 // WithMaskBuffer sets the maskBuffer property and returns the receiver for chaining.
 func (x *PolygonBuffer) WithMaskBuffer(maskBuffer metal.MTLBuffer) *PolygonBuffer {
 	x.inner.SetMaskBuffer(maskBuffer)
 	return x
 }
 
+// @brief Offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
+//
 // WithMaskBufferOffset sets the maskBufferOffset property and returns the receiver for chaining.
 func (x *PolygonBuffer) WithMaskBufferOffset(maskBufferOffset uint) *PolygonBuffer {
 	x.inner.SetMaskBufferOffset(maskBufferOffset)
 	return x
 }
 
+// @brief Number of polygons. Changes to this property require rebuilding the acceleration structure.
+//
 // WithPolygonCount sets the polygonCount property and returns the receiver for chaining.
 func (x *PolygonBuffer) WithPolygonCount(polygonCount uint) *PolygonBuffer {
 	x.inner.SetPolygonCount(polygonCount)
 	return x
 }
 
+// @brief Vertex buffer containing vertex data encoded as three 32 bit floats per vertex. Note that by default each vertex is aligned to the alignment of the vector_float3 type: 16 bytes. This can be changed using the vertexStride property. A vertex buffer must be provided before the acceleration structure is built. When using triangle polygons, degenerate (zero or negative area) triangles are ignored during acceleration structure construction. This can be used to pad triangle indices if needed. Quadrilateral polygons are internally treated as two triangles. If the quadrilateral has vertices v0, v1, v2, and v3, the two triangles will have vertices v0, v1, v2 and v0, v2, v3. A quadrilateral may be used to represent a triangle by repeating the last vertex. If the first triangle is degenerate (zero or negative area), the entire quadrilateral will be ignored. This can be used to pad quadrilateral indices if needed. All four vertices of a quadrilateral must be coplanar and the quadrilateral must be convex.
+//
 // VertexBuffer calls the underlying VertexBuffer.
 func (x *PolygonBuffer) VertexBuffer() metal.MTLBuffer {
 	return x.inner.VertexBuffer()
@@ -96,6 +114,8 @@ func (x *PolygonBuffer) SetVertexBuffer(vertexBuffer metal.MTLBuffer) {
 	x.inner.SetVertexBuffer(vertexBuffer)
 }
 
+// @brief Offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
+//
 // VertexBufferOffset calls the underlying VertexBufferOffset.
 func (x *PolygonBuffer) VertexBufferOffset() uint {
 	return x.inner.VertexBufferOffset()
@@ -106,6 +126,8 @@ func (x *PolygonBuffer) SetVertexBufferOffset(vertexBufferOffset uint) {
 	x.inner.SetVertexBufferOffset(vertexBufferOffset)
 }
 
+// @brief Index buffer containing index data. Each index references a vertex in the vertex buffer. May be nil.
+//
 // IndexBuffer calls the underlying IndexBuffer.
 func (x *PolygonBuffer) IndexBuffer() metal.MTLBuffer {
 	return x.inner.IndexBuffer()
@@ -116,6 +138,8 @@ func (x *PolygonBuffer) SetIndexBuffer(indexBuffer metal.MTLBuffer) {
 	x.inner.SetIndexBuffer(indexBuffer)
 }
 
+// @brief Offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure.
+//
 // IndexBufferOffset calls the underlying IndexBufferOffset.
 func (x *PolygonBuffer) IndexBufferOffset() uint {
 	return x.inner.IndexBufferOffset()
@@ -126,6 +150,8 @@ func (x *PolygonBuffer) SetIndexBufferOffset(indexBufferOffset uint) {
 	x.inner.SetIndexBufferOffset(indexBufferOffset)
 }
 
+// @brief Mask buffer containing one uint32_t mask per polygon. May be nil. Otherwise, the mask type must be specified on the MPSRayIntersector with which it is used.
+//
 // MaskBuffer calls the underlying MaskBuffer.
 func (x *PolygonBuffer) MaskBuffer() metal.MTLBuffer {
 	return x.inner.MaskBuffer()
@@ -136,6 +162,8 @@ func (x *PolygonBuffer) SetMaskBuffer(maskBuffer metal.MTLBuffer) {
 	x.inner.SetMaskBuffer(maskBuffer)
 }
 
+// @brief Offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes.
+//
 // MaskBufferOffset calls the underlying MaskBufferOffset.
 func (x *PolygonBuffer) MaskBufferOffset() uint {
 	return x.inner.MaskBufferOffset()
@@ -146,6 +174,8 @@ func (x *PolygonBuffer) SetMaskBufferOffset(maskBufferOffset uint) {
 	x.inner.SetMaskBufferOffset(maskBufferOffset)
 }
 
+// @brief Number of polygons. Changes to this property require rebuilding the acceleration structure.
+//
 // PolygonCount calls the underlying PolygonCount.
 func (x *PolygonBuffer) PolygonCount() uint {
 	return x.inner.PolygonCount()

@@ -35,6 +35,8 @@ func MTRBaseClusterSoftwareDiagnosticsFromID(id objc.ID) *MTRBaseClusterSoftware
 	return &MTRBaseClusterSoftwareDiagnostics{inner: raw.MTRBaseClusterSoftwareDiagnosticsFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterSoftwareDiagnosticsWithDeviceEndpointIDQueue creates a new [MTRBaseClusterSoftwareDiagnostics].
 func NewMTRBaseClusterSoftwareDiagnosticsWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterSoftwareDiagnostics {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterSoftwareDiagnostics")), objc.RegisterName("alloc"))
@@ -49,6 +51,8 @@ func NewMTRBaseClusterSoftwareDiagnosticsWithDeviceEndpointQueue(device *raw.MTR
 	return &MTRBaseClusterSoftwareDiagnostics{inner: raw.MTRBaseClusterSoftwareDiagnosticsFromID(_id)}
 }
 
+// Command ResetWatermarks This command is used to reset the high watermarks for heap and stack memory.
+//
 // ResetWatermarksWithParamsCompletion calls the underlying ResetWatermarksWithParamsCompletion.
 func (x *MTRBaseClusterSoftwareDiagnostics) ResetWatermarksWithParamsCompletion(params *raw.MTRSoftwareDiagnosticsClusterResetWatermarksParams, completion func(unsafe.Pointer)) {
 	x.inner.ResetWatermarksWithParamsCompletion(params, completion)

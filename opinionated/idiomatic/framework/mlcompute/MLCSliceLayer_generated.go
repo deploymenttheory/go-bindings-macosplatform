@@ -37,18 +37,24 @@ func NewSliceLayer() *SliceLayer {
 	return &SliceLayer{inner: raw.MLCSliceLayerFromID(_id)}
 }
 
+// @property   label @abstract   A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *SliceLayer) WithLabel(label string) *SliceLayer {
 	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   isDebuggingEnabled @abstract   A flag to identify if we want to debug this layer when executing a graph that includes this layer @discussion If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
+//
 // WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
 func (x *SliceLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SliceLayer {
 	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
 	return x
 }
 
+// @property   start @abstract   A vector of length equal to that of source. The element at index i specifies the beginning of slice in dimension i.
+//
 // Start returns the collection as a Go slice.
 func (x *SliceLayer) Start() []*foundation.NSNumber {
 	arr := x.inner.Start()
@@ -60,6 +66,8 @@ func (x *SliceLayer) Start() []*foundation.NSNumber {
 	})
 }
 
+// @property   end @abstract   A vector of length equal to that of source. The element at index i specifies the end of slice in dimension i.
+//
 // End returns the collection as a Go slice.
 func (x *SliceLayer) End() []*foundation.NSNumber {
 	arr := x.inner.End()
@@ -71,6 +79,8 @@ func (x *SliceLayer) End() []*foundation.NSNumber {
 	})
 }
 
+// @property   stride @abstract   A vector of length equal to that of source. The element at index i specifies the stride of slice in dimension i.
+//
 // Stride returns the collection as a Go slice.
 func (x *SliceLayer) Stride() []*foundation.NSNumber {
 	arr := x.inner.Stride()

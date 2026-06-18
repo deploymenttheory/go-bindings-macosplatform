@@ -37,12 +37,16 @@ func NewCaptureInputPort() *CaptureInputPort {
 	return &CaptureInputPort{inner: raw.AVCaptureInputPortFromID(_id)}
 }
 
+// @property enabled @abstract Whether the receiver should provide data. @discussion The value of this property is a BOOL that determines whether the receiver should provide data to outputs when a session is running. Clients can set this property to fine tune which media streams from a given input will be used during capture. The default value is YES.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *CaptureInputPort) WithEnabled(enabled bool) *CaptureInputPort {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// @property input @abstract The input that owns the receiver. @discussion The value of this property is an AVCaptureInput instance that owns the receiver.
+//
 // Input calls the underlying Input.
 func (x *CaptureInputPort) Input() *CaptureInput {
 	_r := x.inner.Input()
@@ -52,6 +56,8 @@ func (x *CaptureInputPort) Input() *CaptureInput {
 	return &CaptureInput{inner: _r}
 }
 
+// @property mediaType @abstract The media type of the data provided by the receiver. @discussion The value of this property is a constant describing the type of media, such as AVMediaTypeVideo or AVMediaTypeAudio, provided by the receiver. Media type constants are defined in AVMediaFormat.h.
+//
 // MediaType calls the underlying MediaType.
 func (x *CaptureInputPort) MediaType() string {
 	_r := x.inner.MediaType()
@@ -61,11 +67,15 @@ func (x *CaptureInputPort) MediaType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property formatDescription @abstract The format of the data provided by the receiver. @discussion The value of this property is a CMFormatDescription that describes the format of the media data currently provided by the receiver. Clients can be notified of changes to the format by observing the AVCaptureInputPortFormatDescriptionDidChangeNotification.
+//
 // FormatDescription calls the underlying FormatDescription.
 func (x *CaptureInputPort) FormatDescription() unsafe.Pointer {
 	return x.inner.FormatDescription()
 }
 
+// @property enabled @abstract Whether the receiver should provide data. @discussion The value of this property is a BOOL that determines whether the receiver should provide data to outputs when a session is running. Clients can set this property to fine tune which media streams from a given input will be used during capture. The default value is YES.
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *CaptureInputPort) IsEnabled() bool {
 	return x.inner.IsEnabled()
@@ -76,6 +86,8 @@ func (x *CaptureInputPort) SetEnabled(enabled bool) {
 	x.inner.SetEnabled(enabled)
 }
 
+// @property clock @abstract Provides access to the "native" clock used by the input port. @discussion The clock is read-only.
+//
 // Clock calls the underlying Clock.
 func (x *CaptureInputPort) Clock() unsafe.Pointer {
 	return x.inner.Clock()

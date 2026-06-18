@@ -32,6 +32,8 @@ func CollaborationOptionFromID(id objc.ID) *CollaborationOption {
 	return &CollaborationOption{inner: raw.SWCollaborationOptionFromID(id)}
 }
 
+// @abstract Initializes a collaboration option object with a title and unique identifier @param title A localized title string to be used when displaying the option @param identifier The unique identifier for the option
+//
 // NewCollaborationOptionWithTitleIdentifier creates a new [CollaborationOption].
 func NewCollaborationOptionWithTitleIdentifier(title string, identifier string) *CollaborationOption {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWCollaborationOption")), objc.RegisterName("alloc"))
@@ -39,24 +41,32 @@ func NewCollaborationOptionWithTitleIdentifier(title string, identifier string) 
 	return &CollaborationOption{inner: raw.SWCollaborationOptionFromID(_id)}
 }
 
+// @abstract A localized title string to be used when displaying the option
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *CollaborationOption) WithTitle(title string) *CollaborationOption {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// @abstract A localized subtitle string to be used when displaying the option
+//
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *CollaborationOption) WithSubtitle(subtitle string) *CollaborationOption {
 	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
 	return x
 }
 
+// @abstract A flag that indicates whether the option is selected. @discussion This property should only be set directly when the option represents an individual switch. Defaults to NO
+//
 // WithSelected sets the selected property and returns the receiver for chaining.
 func (x *CollaborationOption) WithSelected(selected bool) *CollaborationOption {
 	x.inner.SetSelected(selected)
 	return x
 }
 
+// @abstract An array of option identifiers that must already be selected in order to be interacted with
+//
 // WithRequiredOptionsIdentifiers sets the collection, converting the Go slice to an NSArray.
 func (x *CollaborationOption) WithRequiredOptionsIdentifiers(items ...*foundation.NSString) *CollaborationOption {
 	if len(items) == 0 {
@@ -75,6 +85,8 @@ func (x *CollaborationOption) WithRequiredOptionsIdentifiers(items ...*foundatio
 	return x
 }
 
+// @abstract A localized title string to be used when displaying the option
+//
 // Title calls the underlying Title.
 func (x *CollaborationOption) Title() string {
 	_r := x.inner.Title()
@@ -89,6 +101,8 @@ func (x *CollaborationOption) SetTitle(title string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
+// @abstract Unique identifier
+//
 // Identifier calls the underlying Identifier.
 func (x *CollaborationOption) Identifier() string {
 	_r := x.inner.Identifier()
@@ -98,6 +112,8 @@ func (x *CollaborationOption) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract A localized subtitle string to be used when displaying the option
+//
 // Subtitle calls the underlying Subtitle.
 func (x *CollaborationOption) Subtitle() string {
 	_r := x.inner.Subtitle()
@@ -112,6 +128,8 @@ func (x *CollaborationOption) SetSubtitle(subtitle string) {
 	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
 }
 
+// @abstract A flag that indicates whether the option is selected. @discussion This property should only be set directly when the option represents an individual switch. Defaults to NO
+//
 // IsSelected calls the underlying IsSelected.
 func (x *CollaborationOption) IsSelected() bool {
 	return x.inner.IsSelected()
@@ -122,6 +140,8 @@ func (x *CollaborationOption) SetSelected(selected bool) {
 	x.inner.SetSelected(selected)
 }
 
+// @abstract An array of option identifiers that must already be selected in order to be interacted with
+//
 // RequiredOptionsIdentifiers returns the collection as a Go slice.
 func (x *CollaborationOption) RequiredOptionsIdentifiers() []string {
 	arr := x.inner.RequiredOptionsIdentifiers()

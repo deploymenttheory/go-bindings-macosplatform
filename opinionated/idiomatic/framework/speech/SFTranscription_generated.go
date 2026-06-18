@@ -36,6 +36,8 @@ func NewTranscription() *Transcription {
 	return &Transcription{inner: raw.SFTranscriptionFromID(_id)}
 }
 
+// The entire transcription of utterances, formatted into a single, user-displayable string.
+//
 // FormattedString calls the underlying FormattedString.
 func (x *Transcription) FormattedString() string {
 	_r := x.inner.FormattedString()
@@ -45,6 +47,8 @@ func (x *Transcription) FormattedString() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// An array of transcription segments that represent the parts of the transcription, as identified by the speech recognizer. The order of the segments in the array matches the order in which the corresponding utterances occur in the spoken content.
+//
 // Segments returns the collection as a Go slice.
 func (x *Transcription) Segments() []*TranscriptionSegment {
 	arr := x.inner.Segments()
@@ -56,11 +60,15 @@ func (x *Transcription) Segments() []*TranscriptionSegment {
 	})
 }
 
+// The number of words spoken per minute.
+//
 // SpeakingRate calls the underlying SpeakingRate.
 func (x *Transcription) SpeakingRate() float64 {
 	return x.inner.SpeakingRate()
 }
 
+// The average pause duration between words, measured in seconds.
+//
 // AveragePauseDuration calls the underlying AveragePauseDuration.
 func (x *Transcription) AveragePauseDuration() float64 {
 	return x.inner.AveragePauseDuration()

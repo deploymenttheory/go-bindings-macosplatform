@@ -39,12 +39,16 @@ func NewNEAppProxyFlow() *NEAppProxyFlow {
 	return &NEAppProxyFlow{inner: raw.NEAppProxyFlowFromID(_id)}
 }
 
+// @property networkInterface @discussion An nw_interface_t containing information about the network interface used by the flow. If the flow's data is transported using a different interface, this property should be set to that interface.
+//
 // WithNetworkInterface sets the networkInterface property and returns the receiver for chaining.
 func (x *NEAppProxyFlow) WithNetworkInterface(networkInterface *foundation.NSObject) *NEAppProxyFlow {
 	x.inner.SetNetworkInterface(networkInterface)
 	return x
 }
 
+// @method openWithLocalFlowEndpoint:completionHandler: @discussion This function is used by an NEProvider implementation to indicate that it is ready to handle flow data. @param localEndpoint The address and port that should be used as the local endpoint of the socket associated with this flow. If the source application already specified a local endpoint by binding the socket then this parameter is ignored. @param completionHandler A block that is called when the process of opening flow is complete. A nil value passed to this block indicates that the flow was opened successfully. A non-nil NSError value indicates that the flow failed to open successfully.
+//
 // OpenWithLocalFlowEndpoint blocks until the operation completes or ctx is cancelled.
 func (x *NEAppProxyFlow) OpenWithLocalFlowEndpoint(ctx context.Context, localEndpoint *foundation.NSObject) error {
 	_ch := make(chan error, 1)
@@ -63,6 +67,8 @@ func (x *NEAppProxyFlow) OpenWithLocalFlowEndpoint(ctx context.Context, localEnd
 	}
 }
 
+// @method openWithLocalEndpoint:completionHandler: @discussion This function is used by an NEProvider implementation to indicate that it is ready to handle flow data. @param localEndpoint The address and port that should be used as the local endpoint of the socket associated with this flow. If the source application already specified a local endpoint by binding the socket then this parameter is ignored. @param completionHandler A block that is called when the process of opening flow is complete. A nil value passed to this block indicates that the flow was opened successfully. A non-nil NSError value indicates that the flow failed to open successfully.
+//
 // OpenWithLocalEndpoint blocks until the operation completes or ctx is cancelled.
 func (x *NEAppProxyFlow) OpenWithLocalEndpoint(ctx context.Context, localEndpoint *raw.NWHostEndpoint) error {
 	_ch := make(chan error, 1)
@@ -81,21 +87,29 @@ func (x *NEAppProxyFlow) OpenWithLocalEndpoint(ctx context.Context, localEndpoin
 	}
 }
 
+// @method closeReadWithError: @discussion This function is used by an NEProvider implementation to indicate that it does not want to receive any more data from the flow. @param error An error in NEAppProxyErrorDomain that should be passed to the flow's source application.
+//
 // CloseReadWithError calls the underlying CloseReadWithError.
 func (x *NEAppProxyFlow) CloseReadWithError(error_ unsafe.Pointer) {
 	x.inner.CloseReadWithError(error_)
 }
 
+// @method closeWriteWithError: @discussion This functions is used by an NEProvider implementation to indicate that it does not have any more data to write to the flow. @param error An error in NEAppProxyErrorDomain that should be passed to the flow's source application.
+//
 // CloseWriteWithError calls the underlying CloseWriteWithError.
 func (x *NEAppProxyFlow) CloseWriteWithError(error_ unsafe.Pointer) {
 	x.inner.CloseWriteWithError(error_)
 }
 
+// @method setMetadata: @discussion Set the flow's NEFlowMetaData object in an nw_parameters_t object. The nw_parameters_t object can then be used to create a connection that transparently proxies the flow's data, and provides accurate source app information to any subsequent NEAppProxyProvider instances that transparently proxy the flow. @param parameters An nw_parameters_t object.
+//
 // SetMetadata calls the underlying SetMetadata.
 func (x *NEAppProxyFlow) SetMetadata(parameters *foundation.NSObject) {
 	x.inner.SetMetadata(parameters)
 }
 
+// @property metaData @discussion An NEFlowMetaData object containing meta data for the flow.
+//
 // MetaData calls the underlying MetaData.
 func (x *NEAppProxyFlow) MetaData() *NEFlowMetaData {
 	_r := x.inner.MetaData()
@@ -105,6 +119,8 @@ func (x *NEAppProxyFlow) MetaData() *NEFlowMetaData {
 	return &NEFlowMetaData{inner: _r}
 }
 
+// @property networkInterface @discussion An nw_interface_t containing information about the network interface used by the flow. If the flow's data is transported using a different interface, this property should be set to that interface.
+//
 // NetworkInterface calls the underlying NetworkInterface.
 func (x *NEAppProxyFlow) NetworkInterface() *foundation.NSObject {
 	return x.inner.NetworkInterface()
@@ -115,6 +131,8 @@ func (x *NEAppProxyFlow) SetNetworkInterface(networkInterface *foundation.NSObje
 	x.inner.SetNetworkInterface(networkInterface)
 }
 
+// @property remoteHostname @discussion If the flow was created by passing a hostname to a "connect by name" API such as NSURLSession or Network.framework, this property is set to the remote hostname.
+//
 // RemoteHostname calls the underlying RemoteHostname.
 func (x *NEAppProxyFlow) RemoteHostname() string {
 	_r := x.inner.RemoteHostname()
@@ -124,6 +142,8 @@ func (x *NEAppProxyFlow) RemoteHostname() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property isBound @discussion YES if the flow was bound by the application to a specific interface (contained in the networkInterface property), NO otherwise.
+//
 // IsBound calls the underlying IsBound.
 func (x *NEAppProxyFlow) IsBound() bool {
 	return x.inner.IsBound()

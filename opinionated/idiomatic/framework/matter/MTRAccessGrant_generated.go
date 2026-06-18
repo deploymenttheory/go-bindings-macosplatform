@@ -36,16 +36,22 @@ func NewMTRAccessGrant() *MTRAccessGrant {
 	return &MTRAccessGrant{inner: raw.MTRAccessGrantFromID(_id)}
 }
 
+// The matter access control subject ID that access has been granted for.  Nil when access has been granted for all subjects (e.g. via initForAllNodesWithPrivilege).
+//
 // SubjectID calls the underlying SubjectID.
 func (x *MTRAccessGrant) SubjectID() *foundation.NSNumber {
 	return x.inner.SubjectID()
 }
 
+// The privilege that has been granted
+//
 // GrantedPrivilege calls the underlying GrantedPrivilege.
 func (x *MTRAccessGrant) GrantedPrivilege() MTRAccessControlEntryPrivilege {
 	return MTRAccessControlEntryPrivilege(x.inner.GrantedPrivilege())
 }
 
+// The type of authentication mode the access grant is for. MTRAccessControlEntryAuthModeCASE for unicast messages and MTRAccessControlEntryAuthModeGroup for groupcast ones.
+//
 // AuthenticationMode calls the underlying AuthenticationMode.
 func (x *MTRAccessGrant) AuthenticationMode() MTRAccessControlEntryAuthMode {
 	return MTRAccessControlEntryAuthMode(x.inner.AuthenticationMode())

@@ -194,6 +194,8 @@ func (x *IOBluetoothDevice) OpenConnection2(target objc.ID) int {
 	return x.inner.OpenConnection2(target)
 }
 
+// @property	openConnection:withPageTimeout:authenticationRequired: @abstract	Create a baseband connection to the device. @discussion	If a target is specified, the open connection call is asynchronous and on completion of the CREATE_CONNECTION command, the method -connectionComplete:status: will be called on the specified target. If no target is specified, the call is synchronous and will not return until the connection is open or the CREATE_CONNECTION call has failed. NOTE: This method is only available in Mac OS X 10.2.7 (Bluetooth v1.3) or later. As of Mac OS X 10.7, this method will no longer mask out "Connection Exists" 'errors' with a success result code; your code must account for the cases where the baseband connection is already open. @param		target The target to message when the create connection call is complete @param		pageTimeoutValue The page timeout value to use for this call @param		authenticationRequired BOOL value to indicate whether authentication should be required for the connection @result		Returns kIOReturnSuccess if the connection was successfully created (or if asynchronous, if the CREATE_CONNECTION command was successfully issued).
+//
 // OpenConnectionWithPageTimeoutAuthenticationRequired calls the underlying OpenConnectionWithPageTimeoutAuthenticationRequired.
 func (x *IOBluetoothDevice) OpenConnectionWithPageTimeoutAuthenticationRequired(target objc.ID, pageTimeoutValue uint16, authenticationRequired bool) int {
 	return x.inner.OpenConnectionWithPageTimeoutAuthenticationRequired(target, pageTimeoutValue, authenticationRequired)
@@ -370,6 +372,8 @@ func (x *IOBluetoothDevice) Services() *foundation.NSArray[objc.ID] {
 	return x.inner.Services()
 }
 
+// @method		handsFreeAudioGatewayDriverID @abstract		Return the hands free gateway driver ID @discussion	Returns the hands free gateway driver ID which is unique based on BT Address. @result		The hands free gateway driver ID
+//
 // HandsFreeAudioGatewayDriverID calls the underlying HandsFreeAudioGatewayDriverID.
 func (x *IOBluetoothDevice) HandsFreeAudioGatewayDriverID() string {
 	_r := x.inner.HandsFreeAudioGatewayDriverID()
@@ -379,6 +383,8 @@ func (x *IOBluetoothDevice) HandsFreeAudioGatewayDriverID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @method		handsFreeAudioGatewayServiceRecord @abstract		Return the hands free gateway SDP record @discussion	Returns the hands free gateway SDP record. @result		The hands free gateway SDP record
+//
 // HandsFreeAudioGatewayServiceRecord calls the underlying HandsFreeAudioGatewayServiceRecord.
 func (x *IOBluetoothDevice) HandsFreeAudioGatewayServiceRecord() *IOBluetoothSDPServiceRecord {
 	_r := x.inner.HandsFreeAudioGatewayServiceRecord()
@@ -388,6 +394,8 @@ func (x *IOBluetoothDevice) HandsFreeAudioGatewayServiceRecord() *IOBluetoothSDP
 	return &IOBluetoothSDPServiceRecord{inner: _r}
 }
 
+// @method		handsFreeDeviceDriverID @abstract		Return the hands free device driver ID @discussion	Returns the hands free device driver ID which is unique based on BT Address. @result		The hands free device driver ID
+//
 // HandsFreeDeviceDriverID calls the underlying HandsFreeDeviceDriverID.
 func (x *IOBluetoothDevice) HandsFreeDeviceDriverID() string {
 	_r := x.inner.HandsFreeDeviceDriverID()
@@ -397,6 +405,8 @@ func (x *IOBluetoothDevice) HandsFreeDeviceDriverID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @method		handsFreeDeviceServiceRecord @abstract		Return the hands free device SDP record @discussion	Returns the hands free device SDP record. @result		The hands free device SDP record
+//
 // HandsFreeDeviceServiceRecord calls the underlying HandsFreeDeviceServiceRecord.
 func (x *IOBluetoothDevice) HandsFreeDeviceServiceRecord() *IOBluetoothSDPServiceRecord {
 	_r := x.inner.HandsFreeDeviceServiceRecord()
@@ -406,11 +416,15 @@ func (x *IOBluetoothDevice) HandsFreeDeviceServiceRecord() *IOBluetoothSDPServic
 	return &IOBluetoothSDPServiceRecord{inner: _r}
 }
 
+// @method		isHandsFreeAudioGateway @abstract		Return the devices support for hands free gateway @discussion	Returns the devices support for hands free gateway (obtained from the devices SDP record). @result		YES if the device supports hands free gateway; otherwise, NO.
+//
 // IsHandsFreeAudioGateway calls the underlying IsHandsFreeAudioGateway.
 func (x *IOBluetoothDevice) IsHandsFreeAudioGateway() bool {
 	return x.inner.IsHandsFreeAudioGateway()
 }
 
+// @method		isHandsFreeDevice @abstract		Return the devices support for hands free device @discussion	Returns the devices support for hands free device (obtained from the devices SDP record). @result		YES if the device supports hands free device; otherwise, NO.
+//
 // IsHandsFreeDevice calls the underlying IsHandsFreeDevice.
 func (x *IOBluetoothDevice) IsHandsFreeDevice() bool {
 	return x.inner.IsHandsFreeDevice()

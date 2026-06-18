@@ -33,6 +33,8 @@ func MTRClusterRVCOperationalStateFromID(id objc.ID) *MTRClusterRVCOperationalSt
 	return &MTRClusterRVCOperationalState{inner: raw.MTRClusterRVCOperationalStateFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterRVCOperationalStateWithDeviceEndpointIDQueue creates a new [MTRClusterRVCOperationalState].
 func NewMTRClusterRVCOperationalStateWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterRVCOperationalState {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterRVCOperationalState")), objc.RegisterName("alloc"))

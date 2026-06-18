@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Host audio output stream sink plays audio to the host system’s default output device.
+//
 // HostAudioOutputStreamSink wraps [raw.VZHostAudioOutputStreamSink] with a fluent Go API.
 type HostAudioOutputStreamSink struct {
 	inner *raw.VZHostAudioOutputStreamSink

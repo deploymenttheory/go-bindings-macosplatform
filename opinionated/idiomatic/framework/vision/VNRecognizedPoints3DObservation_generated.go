@@ -37,6 +37,8 @@ func NewRecognizedPoints3DObservation() *RecognizedPoints3DObservation {
 	return &RecognizedPoints3DObservation{inner: raw.VNRecognizedPoints3DObservationFromID(_id)}
 }
 
+// @brief Obtains a specific normalized recognized point. @param pointKey The key specifying the desired recognized point. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return the recognized point, or nil if the specific point is not defined.
+//
 // RecognizedPointForKeyError calls the underlying RecognizedPointForKeyError.
 func (x *RecognizedPoints3DObservation) RecognizedPointForKeyError(pointKey *foundation.NSString) (*RecognizedPoint3D, error) {
 	_r, _err := x.inner.RecognizedPointForKeyError(pointKey)
@@ -49,11 +51,15 @@ func (x *RecognizedPoints3DObservation) RecognizedPointForKeyError(pointKey *fou
 	return &RecognizedPoint3D{inner: _r}, nil
 }
 
+// @brief Obtains the collection of points associated with an identified grouping. @discussion The obtained collection is a dictionary that provides the mapping of a recognized point's key to the recognized point. @param groupKey The key representing a specific grouping of points. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return the dictionary of recognized points in the group, or nil if an error was encountered.
+//
 // RecognizedPointsForGroupKeyError calls the underlying RecognizedPointsForGroupKeyError.
 func (x *RecognizedPoints3DObservation) RecognizedPointsForGroupKeyError(groupKey *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNRecognizedPoint3D], error) {
 	return x.inner.RecognizedPointsForGroupKeyError(groupKey)
 }
 
+// @brief Returns all of the point group keys available in the observation.
+//
 // AvailableKeys returns the collection as a Go slice.
 func (x *RecognizedPoints3DObservation) AvailableKeys() []*foundation.NSString {
 	arr := x.inner.AvailableKeys()
@@ -65,6 +71,8 @@ func (x *RecognizedPoints3DObservation) AvailableKeys() []*foundation.NSString {
 	})
 }
 
+// @brief The availableGroupKeys property returns all of the point group labels usable with the observation.
+//
 // AvailableGroupKeys returns the collection as a Go slice.
 func (x *RecognizedPoints3DObservation) AvailableGroupKeys() []*foundation.NSString {
 	arr := x.inner.AvailableGroupKeys()

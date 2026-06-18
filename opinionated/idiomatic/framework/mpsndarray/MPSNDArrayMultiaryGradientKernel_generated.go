@@ -32,6 +32,8 @@ func ArrayMultiaryGradientKernelFromID(id objc.ID) *ArrayMultiaryGradientKernel 
 	return &ArrayMultiaryGradientKernel{inner: raw.MPSNDArrayMultiaryGradientKernelFromID(id)}
 }
 
+// @abstract   Initialize a MPSNDArrayMultiaryKernel @param      device                The device on which the kernel will run @param      count                 The maximum number of NDArrays read by the kernel @param      sourceGradientIndex   The source index for which gradient will be calculated @return     A valid MPSNDArrayMultiaryKernel, or nil if allocation failure.
+//
 // NewArrayMultiaryGradientKernelWithDeviceSourceCountSourceGradientIndex creates a new [ArrayMultiaryGradientKernel].
 func NewArrayMultiaryGradientKernelWithDeviceSourceCountSourceGradientIndex(device metal.MTLDevice, count uint, sourceGradientIndex uint) *ArrayMultiaryGradientKernel {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayMultiaryGradientKernel")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewArrayMultiaryGradientKernelWithDeviceSourceCountSourceGradientIndex(devi
 	return &ArrayMultiaryGradientKernel{inner: raw.MPSNDArrayMultiaryGradientKernelFromID(_id)}
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
 func (x *ArrayMultiaryGradientKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayMultiaryGradientKernel {
 	x.inner.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)

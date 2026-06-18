@@ -38,6 +38,8 @@ func NewAuthorizationOpenIDRequest() *AuthorizationOpenIDRequest {
 	return &AuthorizationOpenIDRequest{inner: raw.ASAuthorizationOpenIDRequestFromID(_id)}
 }
 
+// @abstract The contact information to be requested from the user.  Only scopes for which this app was authorized for will be returned.
+//
 // WithRequestedScopes sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationOpenIDRequest) WithRequestedScopes(items ...*foundation.NSString) *AuthorizationOpenIDRequest {
 	if len(items) == 0 {
@@ -56,24 +58,32 @@ func (x *AuthorizationOpenIDRequest) WithRequestedScopes(items ...*foundation.NS
 	return x
 }
 
+// @abstract State to be passed to the identity provider.  This value will be returned as a part of successful ASAuthorization response. @note The state size may depend on the actual technology used and an error might be returned by the request execution.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *AuthorizationOpenIDRequest) WithState(state string) *AuthorizationOpenIDRequest {
 	x.inner.SetState(foundation.NSStringStringWithUTF8String(state))
 	return x
 }
 
+// @abstract Nonce to be passed to the identity provider.  This value can be verified with the identity token provided as a part of successful ASAuthorization response. @note The nonce size may depend on the actual technology used and an error might be returned by the request execution.
+//
 // WithNonce sets the nonce property and returns the receiver for chaining.
 func (x *AuthorizationOpenIDRequest) WithNonce(nonce string) *AuthorizationOpenIDRequest {
 	x.inner.SetNonce(foundation.NSStringStringWithUTF8String(nonce))
 	return x
 }
 
+// @abstract Operation to be executed by the request. The ASAuthorizationOperationImplicit operation interpretation depends on the credential provider implementation.
+//
 // WithRequestedOperation sets the requestedOperation property and returns the receiver for chaining.
 func (x *AuthorizationOpenIDRequest) WithRequestedOperation(requestedOperation *foundation.NSString) *AuthorizationOpenIDRequest {
 	x.inner.SetRequestedOperation(requestedOperation)
 	return x
 }
 
+// @abstract The contact information to be requested from the user.  Only scopes for which this app was authorized for will be returned.
+//
 // RequestedScopes returns the collection as a Go slice.
 func (x *AuthorizationOpenIDRequest) RequestedScopes() []*foundation.NSString {
 	arr := x.inner.RequestedScopes()
@@ -90,6 +100,8 @@ func (x *AuthorizationOpenIDRequest) SetRequestedScopes(requestedScopes *foundat
 	x.inner.SetRequestedScopes(requestedScopes)
 }
 
+// @abstract State to be passed to the identity provider.  This value will be returned as a part of successful ASAuthorization response. @note The state size may depend on the actual technology used and an error might be returned by the request execution.
+//
 // State calls the underlying State.
 func (x *AuthorizationOpenIDRequest) State() string {
 	_r := x.inner.State()
@@ -104,6 +116,8 @@ func (x *AuthorizationOpenIDRequest) SetState(state string) {
 	x.inner.SetState(foundation.NSStringStringWithUTF8String(state))
 }
 
+// @abstract Nonce to be passed to the identity provider.  This value can be verified with the identity token provided as a part of successful ASAuthorization response. @note The nonce size may depend on the actual technology used and an error might be returned by the request execution.
+//
 // Nonce calls the underlying Nonce.
 func (x *AuthorizationOpenIDRequest) Nonce() string {
 	_r := x.inner.Nonce()
@@ -118,6 +132,8 @@ func (x *AuthorizationOpenIDRequest) SetNonce(nonce string) {
 	x.inner.SetNonce(foundation.NSStringStringWithUTF8String(nonce))
 }
 
+// @abstract Operation to be executed by the request. The ASAuthorizationOperationImplicit operation interpretation depends on the credential provider implementation.
+//
 // RequestedOperation calls the underlying RequestedOperation.
 func (x *AuthorizationOpenIDRequest) RequestedOperation() string {
 	_r := x.inner.RequestedOperation()

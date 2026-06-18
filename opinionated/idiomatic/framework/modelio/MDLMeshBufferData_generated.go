@@ -30,6 +30,8 @@ func MeshBufferDataFromID(id objc.ID) *MeshBufferData {
 	return &MeshBufferData{inner: raw.MDLMeshBufferDataFromID(id)}
 }
 
+// @method initWithType:length @abstract instantiate a new data backed mesh buffer @param type the intended use of the buffer @param length the size of buffer to allocate, in bytes
+//
 // NewMeshBufferDataWithTypeLength creates a new [MeshBufferData].
 func NewMeshBufferDataWithTypeLength(type_ MDLMeshBufferType, length uint) *MeshBufferData {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMeshBufferData")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewMeshBufferDataWithTypeLength(type_ MDLMeshBufferType, length uint) *Mesh
 	return &MeshBufferData{inner: raw.MDLMeshBufferDataFromID(_id)}
 }
 
+// @method initWithType:data @abstract instantiate a new data backed mesh buffer @param type the intended use of the buffer @param data the data to be used as a mesh buffer. It will be copied.
+//
 // NewMeshBufferDataWithTypeData creates a new [MeshBufferData].
 func NewMeshBufferDataWithTypeData(type_ MDLMeshBufferType, data *foundation.NSData) *MeshBufferData {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMeshBufferData")), objc.RegisterName("alloc"))

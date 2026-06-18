@@ -123,6 +123,8 @@ func (x *Screen) AuxiliaryTopRightArea() corefoundation.CGRect {
 	return x.inner.AuxiliaryTopRightArea()
 }
 
+// The CGDirectDisplayID for this screen. This will return kCGNullDirectDisplay if there isn't one.
+//
 // CGDirectDisplayID calls the underlying CGDirectDisplayID.
 func (x *Screen) CGDirectDisplayID() uint32 {
 	return x.inner.CGDirectDisplayID()
@@ -143,31 +145,43 @@ func (x *Screen) MaximumReferenceExtendedDynamicRangeColorComponentValue() float
 	return x.inner.MaximumReferenceExtendedDynamicRangeColorComponentValue()
 }
 
+// The maximum frames per second this screen supports.
+//
 // MaximumFramesPerSecond calls the underlying MaximumFramesPerSecond.
 func (x *Screen) MaximumFramesPerSecond() int {
 	return x.inner.MaximumFramesPerSecond()
 }
 
+// The minimum refresh interval this screen supports, in seconds. This is the shortest amount of time a frame will be present on screen. minimumRefreshInterval and maximumRefreshInterval will be the same for displays that do not support variable refresh rates.
+//
 // MinimumRefreshInterval calls the underlying MinimumRefreshInterval.
 func (x *Screen) MinimumRefreshInterval() float64 {
 	return x.inner.MinimumRefreshInterval()
 }
 
+// The maximum refresh interval this screen supports, in seconds. minimumRefreshInterval and maximumRefreshInterval will be the same for displays that do not support variable refresh rates.
+//
 // MaximumRefreshInterval calls the underlying MaximumRefreshInterval.
 func (x *Screen) MaximumRefreshInterval() float64 {
 	return x.inner.MaximumRefreshInterval()
 }
 
+// The update granularity of the screen's current mode, in seconds. The display will update at the next boundary defined by the granularity, after the minimum refresh interval has been reached. When 0, the display can update at any time between the minimum and maximum refresh rate intervals of the screen. Fixed refresh rate screen modes will return the refresh interval as the update granularity (e.g. 16.66ms for 60Hz refresh rates), meaning updates only occur at refresh rate boundaries.
+//
 // DisplayUpdateGranularity calls the underlying DisplayUpdateGranularity.
 func (x *Screen) DisplayUpdateGranularity() float64 {
 	return x.inner.DisplayUpdateGranularity()
 }
 
+// The time at which the last framebuffer update occurred on the display, in seconds since startup that the system has been awake.
+//
 // LastDisplayUpdateTimestamp calls the underlying LastDisplayUpdateTimestamp.
 func (x *Screen) LastDisplayUpdateTimestamp() float64 {
 	return x.inner.LastDisplayUpdateTimestamp()
 }
 
+// Returns a new display link whose callback will be invoked in-sync with the display the screen is on. Note that views and windows can move between screens and you may want to get a display link directly from `NSView` or `NSWindow` which will track those changes automatically.
+//
 // DisplayLinkWithTargetSelector calls the underlying DisplayLinkWithTargetSelector.
 func (x *Screen) DisplayLinkWithTargetSelector(target objc.ID, selector objc.SEL) *quartzcore.CADisplayLink {
 	return x.inner.DisplayLinkWithTargetSelector(target, selector)

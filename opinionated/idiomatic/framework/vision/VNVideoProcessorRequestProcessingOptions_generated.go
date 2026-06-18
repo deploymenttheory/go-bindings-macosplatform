@@ -37,6 +37,8 @@ func NewVideoProcessorRequestProcessingOptions() *VideoProcessorRequestProcessin
 	return &VideoProcessorRequestProcessingOptions{inner: raw.VNVideoProcessorRequestProcessingOptionsFromID(_id)}
 }
 
+// @brief The cadence at which the request should be performed. @discussion If this property is not defined, then every frame will be processed.
+//
 // WithCadence sets the cadence property and returns the receiver for chaining.
 func (x *VideoProcessorRequestProcessingOptions) WithCadence(cadence VideoProcessorCadenceProvider) *VideoProcessorRequestProcessingOptions {
 	x.inner.SetCadence(cadence.asVideoProcessorCadence())

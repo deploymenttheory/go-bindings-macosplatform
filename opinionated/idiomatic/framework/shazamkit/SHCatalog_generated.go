@@ -35,11 +35,15 @@ func NewCatalog() *Catalog {
 	return &Catalog{inner: raw.SHCatalogFromID(_id)}
 }
 
+// The minimum duration of a query signature that you use to match reference signatures in the catalog.
+//
 // MinimumQuerySignatureDuration calls the underlying MinimumQuerySignatureDuration.
 func (x *Catalog) MinimumQuerySignatureDuration() float64 {
 	return x.inner.MinimumQuerySignatureDuration()
 }
 
+// The maximum duration of a query signature that you use to match reference signatures in the catalog.
+//
 // MaximumQuerySignatureDuration calls the underlying MaximumQuerySignatureDuration.
 func (x *Catalog) MaximumQuerySignatureDuration() float64 {
 	return x.inner.MaximumQuerySignatureDuration()

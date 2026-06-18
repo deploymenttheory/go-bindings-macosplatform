@@ -52,6 +52,8 @@ func (x *SpeechSynthesizer) WriteUtteranceToBufferCallback(utterance *raw.AVSpee
 	x.inner.WriteUtteranceToBufferCallback(utterance, bufferCallback)
 }
 
+// Use this method to receive audio buffers and associated metadata that can be used to store or further process synthesized speech. The dictionary provided by -[AVSpeechSynthesisVoice audioFileSettings] can be used to create an AVAudioFile.
+//
 // WriteUtteranceToBufferCallbackToMarkerCallback calls the underlying WriteUtteranceToBufferCallbackToMarkerCallback.
 func (x *SpeechSynthesizer) WriteUtteranceToBufferCallbackToMarkerCallback(utterance *raw.AVSpeechUtterance, bufferCallback func(*raw.AVAudioBuffer), markerCallback func(*foundation.NSArray[*raw.AVSpeechSynthesisMarker])) {
 	x.inner.WriteUtteranceToBufferCallbackToMarkerCallback(utterance, bufferCallback, markerCallback)

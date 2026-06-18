@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A device that stores content in a disk image.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzdiskimagestoragedeviceattachment
 type VZDiskImageStorageDeviceAttachment struct {
 	VZStorageDeviceAttachment
@@ -37,7 +39,7 @@ func VZDiskImageStorageDeviceAttachmentFromID(id objc.ID) *VZDiskImageStorageDev
 	return o
 }
 
-// @abstract Initialize the attachment from a local file url. @param url Local file URL to the disk image in RAW format. @param readOnly If YES, the device attachment is read-only, otherwise the device can write data to the disk image. @param error If not nil, assigned with the error if the initialization failed. @return A newly initialized VZDiskImageStorageDeviceAttachment. If an error was encountered returns @c nil, and @c error contains the error.
+// Creates the attachment object from the specified disk image.
 func (o *VZDiskImageStorageDeviceAttachment) InitWithURLReadOnlyError(url *foundation.NSURL, readOnly bool) (*VZDiskImageStorageDeviceAttachment, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZDiskImageStorageDeviceAttachmentSelInitWithURLReadOnlyError, url.Ptr(), readOnly, unsafe.Pointer(&_nsErr))
@@ -50,7 +52,7 @@ func (o *VZDiskImageStorageDeviceAttachment) InitWithURLReadOnlyError(url *found
 	return VZDiskImageStorageDeviceAttachmentFromID(_ret), nil
 }
 
-// @abstract Initialize the attachment from a local file url. @param url Local file URL to the disk image in RAW format. @param readOnly If YES, the device attachment is read-only, otherwise the device can write data to the disk image. @param cachingMode Whether host data caching is enabled for the disk image. @param synchronizationMode How the disk image synchronizes with the underlying storage when the guest operating system flushes data. @param error If not nil, assigned with the error if the initialization failed. @return A newly initialized VZDiskImageStorageDeviceAttachment. If an error was encountered returns @c nil, and @c error contains the error.
+// Initialize the attachment from a local file URL.
 func (o *VZDiskImageStorageDeviceAttachment) InitWithURLReadOnlyCachingModeSynchronizationModeError(url *foundation.NSURL, readOnly bool, cachingMode VZDiskImageCachingMode, synchronizationMode VZDiskImageSynchronizationMode) (*VZDiskImageStorageDeviceAttachment, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZDiskImageStorageDeviceAttachmentSelInitWithURLReadOnlyCachingModeSynchronizationModeError, url.Ptr(), readOnly, cachingMode, synchronizationMode, unsafe.Pointer(&_nsErr))

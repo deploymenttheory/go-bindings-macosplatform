@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Node representing a the concatenation (in the feature channel dimension) of the results from one or more kernels
+//
 // NNConcatenationNode wraps [raw.MPSNNConcatenationNode] with a fluent Go API.
 type NNConcatenationNode struct {
 	inner *raw.MPSNNConcatenationNode
@@ -31,6 +33,8 @@ func NNConcatenationNodeFromID(id objc.ID) *NNConcatenationNode {
 	return &NNConcatenationNode{inner: raw.MPSNNConcatenationNodeFromID(id)}
 }
 
+// @abstract   Init a node that concatenates feature channels from multiple images @discussion In some neural network designs, it is necessary to append feature channels from one neural network filter to the results of another. If we have three image nodes with M, N and O feature channels in them, passed to -initWithSources: as @[imageM, imageN, imageO], then feature channels [0,M-1] will be drawn from image M,  feature channels [M, M+N-1] will be drawn from image N and feature channels [M+N, M+N+O-1] will be drawn from image O. As all images are padded out to a multiple of four feature channels, M, N and O here are also multiples of four, even when the MPSImages are not. That is, if the image is 23 feature channels and one channel of padding, it takes up 24 feature channels worth of space in the concatenated result. Performance Note:  Generally, concatenation is free as long as all of the sourceNodes are produced by filters in the same MPSNNGraph. Most MPSCNNKernels have the ability to write their results  at a feature channel offset within a target MPSImage. However, if the MPSNNImageNode source nodes come from images external to the MPSNNGraph, then we have to do a copy operation to assemble the concatenated node. As a result, when deciding where to break a large logical graph into multiple smaller MPSNNGraphs, it is better for concatenations to appear at the ends of subgraphs when possible rather than at the start, to the extent that all the images used in the concatenation are produced by that subgraph. @param      sourceNodes              The MPSNNImageNode representing the source MPSImages for the filter @return     A new MPSNNFilter node that concatenates its inputs.
+//
 // NewNNConcatenationNodeWithSources creates a new [NNConcatenationNode].
 func NewNNConcatenationNodeWithSources(sourceNodes *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *NNConcatenationNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNConcatenationNode")), objc.RegisterName("alloc"))
@@ -38,12 +42,16 @@ func NewNNConcatenationNodeWithSources(sourceNodes *foundation.NSArray[*mpsneura
 	return &NNConcatenationNode{inner: raw.MPSNNConcatenationNodeFromID(_id)}
 }
 
+// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
+//
 // WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
 func (x *NNConcatenationNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNConcatenationNode {
 	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NNConcatenationNode) WithLabel(label string) *NNConcatenationNode {
 	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))

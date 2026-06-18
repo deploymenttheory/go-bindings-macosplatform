@@ -33,6 +33,8 @@ func CaptionConversionValidatorFromID(id objc.ID) *CaptionConversionValidator {
 	return &CaptionConversionValidator{inner: raw.AVCaptionConversionValidatorFromID(id)}
 }
 
+// @method        initWithCaptions:startTime:conversionSettings: @abstract      Returns an instance of AVCaptionConversionValidator that can validate an array of captions for a specific conversion operation and warn about problems that are encountered. @param         captions The array of captions for which the validation is requested. @param         timeRange The timeRange of the media timeline into which the specified captions must be integrated. See the timeRange property for further details. @param         conversionSettings Describes the conversion operation for which the captions are to be validated. @result        A new instance of AVCaptionConversionValidator configured to perform the specified validation.
+//
 // NewCaptionConversionValidatorWithCaptionsTimeRangeConversionSettings creates a new [CaptionConversionValidator].
 func NewCaptionConversionValidatorWithCaptionsTimeRangeConversionSettings(captions *foundation.NSArray[*raw.AVCaption], timeRange coremedia.CMTimeRange, conversionSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptionConversionValidator {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionConversionValidator")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewCaptionConversionValidatorWithCaptionsTimeRangeConversionSettings(captio
 	return &CaptionConversionValidator{inner: raw.AVCaptionConversionValidatorFromID(_id)}
 }
 
+// @method        validateCaptionConversionWithWarningHandler: @abstract      Initiates the specified validation and changes the value of status to AVCaptionConversionValidatorStatusValidating. @param         handler Specifies a block to be executed in order to warn you of a specific problem. @discussion It is an error to invoke this method when the value of status is greater than AVCaptionConversionValidatorStatusUnknown. If you wish to stop a validation operation in progress before it has been completed, send the message stopValidating to the receiver. When the validation is complete and all warnings have been reported, the block will be executed once with a value of nil for its warning parameter. When this occurs, the value of status will have been changed to AVCaptionConversionValidatorStatusCompleted.
+//
 // ValidateCaptionConversionWithWarningHandler blocks until the operation completes or ctx is cancelled.
 func (x *CaptionConversionValidator) ValidateCaptionConversionWithWarningHandler(ctx context.Context) (*CaptionConversionWarning, error) {
 	type _result struct {
@@ -63,16 +67,22 @@ func (x *CaptionConversionValidator) ValidateCaptionConversionWithWarningHandler
 	}
 }
 
+// @method        stopValidating @abstract      Stops validation and changes the value of status to AVCaptionConversionValidatorStatusStopped. @discussion You can call this method at any time, even within your warning handler.
+//
 // StopValidating calls the underlying StopValidating.
 func (x *CaptionConversionValidator) StopValidating() {
 	x.inner.StopValidating()
 }
 
+// @property      status @abstract      Indicates the status of the validation.
+//
 // Status calls the underlying Status.
 func (x *CaptionConversionValidator) Status() AVCaptionConversionValidatorStatus {
 	return AVCaptionConversionValidatorStatus(x.inner.Status())
 }
 
+// @property      captions @abstract      The array of captions to be validated for the specified conversion operation.
+//
 // Captions returns the collection as a Go slice.
 func (x *CaptionConversionValidator) Captions() []*Caption {
 	arr := x.inner.Captions()
@@ -84,11 +94,15 @@ func (x *CaptionConversionValidator) Captions() []*Caption {
 	})
 }
 
+// @property      timeRange @abstract      The timeRange of the media timeline into which the specified captions must be integrated. @discussion The start of this timeRange may be less than the start of the timeRange of the initial caption in the captions array, if the captions are to appear only after the start of accompanying video or audio. If no definite duration for the media timeline is known, the timeRange can have a duration of kCMTimePositiveInfinity. However, in order to perform a comprehensive validation of a conversion to closed captions, setting the duration of the timeRange to the duration of accompanying video media is recommended.
+//
 // TimeRange calls the underlying TimeRange.
 func (x *CaptionConversionValidator) TimeRange() coremedia.CMTimeRange {
 	return x.inner.TimeRange()
 }
 
+// @property      warnings @abstract      Provides the collection of warnings for problems that have been encountered. While the value of status is AVCaptionConversionValidatorStatusValidating, the count of warnings may increase.
+//
 // Warnings returns the collection as a Go slice.
 func (x *CaptionConversionValidator) Warnings() []*CaptionConversionWarning {
 	arr := x.inner.Warnings()

@@ -39,16 +39,22 @@ func NewCrashDiagnosticObjectiveCExceptionReason() *CrashDiagnosticObjectiveCExc
 	return &CrashDiagnosticObjectiveCExceptionReason{inner: raw.MXCrashDiagnosticObjectiveCExceptionReasonFromID(_id)}
 }
 
+// @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this MXCrashDiagnosticObjectiveCExceptionReason object. @result        An NSData object containing the JSON representation
+//
 // JSONRepresentation calls the underlying JSONRepresentation.
 func (x *CrashDiagnosticObjectiveCExceptionReason) JSONRepresentation() *foundation.NSData {
 	return x.inner.JSONRepresentation()
 }
 
+// @method        dictionaryRepresentation @abstract      Convenience method to return a NSDictionary representation of this MXCrashDiagnosticObjectiveCExceptionReason object. @result        An NSDictionary object containing the dictionary representation
+//
 // DictionaryRepresentation calls the underlying DictionaryRepresentation.
 func (x *CrashDiagnosticObjectiveCExceptionReason) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.DictionaryRepresentation()
 }
 
+// @property      composedMessage @abstract      A human-readable message string summarizing the reason for the exception.
+//
 // ComposedMessage calls the underlying ComposedMessage.
 func (x *CrashDiagnosticObjectiveCExceptionReason) ComposedMessage() string {
 	_r := x.inner.ComposedMessage()
@@ -58,6 +64,8 @@ func (x *CrashDiagnosticObjectiveCExceptionReason) ComposedMessage() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      formatString @abstract      A string representing the exception message before arguments are substituted into the message
+//
 // FormatString calls the underlying FormatString.
 func (x *CrashDiagnosticObjectiveCExceptionReason) FormatString() string {
 	_r := x.inner.FormatString()
@@ -67,6 +75,8 @@ func (x *CrashDiagnosticObjectiveCExceptionReason) FormatString() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      arguments @abstract      An NSArray of strings representing arguments passed to the formatString.
+//
 // Arguments returns the collection as a Go slice.
 func (x *CrashDiagnosticObjectiveCExceptionReason) Arguments() []string {
 	arr := x.inner.Arguments()
@@ -78,6 +88,8 @@ func (x *CrashDiagnosticObjectiveCExceptionReason) Arguments() []string {
 	})
 }
 
+// @property      exceptionType @abstract      A human-readable string denoting type of the exception
+//
 // ExceptionType calls the underlying ExceptionType.
 func (x *CrashDiagnosticObjectiveCExceptionReason) ExceptionType() string {
 	_r := x.inner.ExceptionType()
@@ -87,6 +99,8 @@ func (x *CrashDiagnosticObjectiveCExceptionReason) ExceptionType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      exceptionName @abstract      A string representing name of the exception @discussion    This will align with the "name" field of the NSException
+//
 // ExceptionName calls the underlying ExceptionName.
 func (x *CrashDiagnosticObjectiveCExceptionReason) ExceptionName() string {
 	_r := x.inner.ExceptionName()

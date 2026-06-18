@@ -37,42 +37,56 @@ func NewCapsule() *Capsule {
 	return &Capsule{inner: raw.SCNCapsuleFromID(_id)}
 }
 
+// @property capRadius @abstract The cap radius of the capsule. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
+//
 // WithCapRadius sets the capRadius property and returns the receiver for chaining.
 func (x *Capsule) WithCapRadius(capRadius float64) *Capsule {
 	x.inner.SetCapRadius(capRadius)
 	return x
 }
 
+// @property height @abstract The height of the capsule. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 2.
+//
 // WithHeight sets the height property and returns the receiver for chaining.
 func (x *Capsule) WithHeight(height float64) *Capsule {
 	x.inner.SetHeight(height)
 	return x
 }
 
+// @property radialSegmentCount @abstract The number of subdivisions along the radial coordinate. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
+//
 // WithRadialSegmentCount sets the radialSegmentCount property and returns the receiver for chaining.
 func (x *Capsule) WithRadialSegmentCount(radialSegmentCount int) *Capsule {
 	x.inner.SetRadialSegmentCount(radialSegmentCount)
 	return x
 }
 
+// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // WithHeightSegmentCount sets the heightSegmentCount property and returns the receiver for chaining.
 func (x *Capsule) WithHeightSegmentCount(heightSegmentCount int) *Capsule {
 	x.inner.SetHeightSegmentCount(heightSegmentCount)
 	return x
 }
 
+// @property capSegmentCount @abstract The number of subdivisions in the cap. Animatable. @discussion If the value is less than 2, the behavior is undefined. The default value is 24.
+//
 // WithCapSegmentCount sets the capSegmentCount property and returns the receiver for chaining.
 func (x *Capsule) WithCapSegmentCount(capSegmentCount int) *Capsule {
 	x.inner.SetCapSegmentCount(capSegmentCount)
 	return x
 }
 
+// @property name @abstract Determines the name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Capsule) WithName(name string) *Capsule {
 	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+//
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Capsule) WithMaterials(items ...*raw.SCNMaterial) *Capsule {
 	if len(items) == 0 {
@@ -91,12 +105,16 @@ func (x *Capsule) WithMaterials(items ...*raw.SCNMaterial) *Capsule {
 	return x
 }
 
+// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+//
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Capsule) WithFirstMaterial(firstMaterial *Material) *Capsule {
 	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
+// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+//
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Capsule) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Capsule {
 	if len(items) == 0 {
@@ -121,30 +139,40 @@ func (x *Capsule) WithTessellator(tessellator *GeometryTessellator) *Capsule {
 	return x
 }
 
+// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+//
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Capsule) WithSubdivisionLevel(subdivisionLevel uint) *Capsule {
 	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
 	return x
 }
 
+// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+//
 // WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
 func (x *Capsule) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Capsule {
 	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
 	return x
 }
 
+// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+//
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Capsule) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Capsule {
 	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
+// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+//
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Capsule) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Capsule {
 	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
+// @property capRadius @abstract The cap radius of the capsule. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
+//
 // CapRadius calls the underlying CapRadius.
 func (x *Capsule) CapRadius() float64 {
 	return x.inner.CapRadius()
@@ -155,6 +183,8 @@ func (x *Capsule) SetCapRadius(capRadius float64) {
 	x.inner.SetCapRadius(capRadius)
 }
 
+// @property height @abstract The height of the capsule. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 2.
+//
 // Height calls the underlying Height.
 func (x *Capsule) Height() float64 {
 	return x.inner.Height()
@@ -165,6 +195,8 @@ func (x *Capsule) SetHeight(height float64) {
 	x.inner.SetHeight(height)
 }
 
+// @property radialSegmentCount @abstract The number of subdivisions along the radial coordinate. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
+//
 // RadialSegmentCount calls the underlying RadialSegmentCount.
 func (x *Capsule) RadialSegmentCount() int {
 	return x.inner.RadialSegmentCount()
@@ -175,6 +207,8 @@ func (x *Capsule) SetRadialSegmentCount(radialSegmentCount int) {
 	x.inner.SetRadialSegmentCount(radialSegmentCount)
 }
 
+// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // HeightSegmentCount calls the underlying HeightSegmentCount.
 func (x *Capsule) HeightSegmentCount() int {
 	return x.inner.HeightSegmentCount()
@@ -185,6 +219,8 @@ func (x *Capsule) SetHeightSegmentCount(heightSegmentCount int) {
 	x.inner.SetHeightSegmentCount(heightSegmentCount)
 }
 
+// @property capSegmentCount @abstract The number of subdivisions in the cap. Animatable. @discussion If the value is less than 2, the behavior is undefined. The default value is 24.
+//
 // CapSegmentCount calls the underlying CapSegmentCount.
 func (x *Capsule) CapSegmentCount() int {
 	return x.inner.CapSegmentCount()

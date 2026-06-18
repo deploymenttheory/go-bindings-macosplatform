@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for an audio device configuration.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzaudiodeviceconfiguration
 type VZAudioDeviceConfiguration struct {
 	foundation.NSObject

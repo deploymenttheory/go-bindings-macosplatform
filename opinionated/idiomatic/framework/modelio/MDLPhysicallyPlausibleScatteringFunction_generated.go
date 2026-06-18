@@ -38,6 +38,8 @@ func NewPhysicallyPlausibleScatteringFunction() *PhysicallyPlausibleScatteringFu
 	return &PhysicallyPlausibleScatteringFunction{inner: raw.MDLPhysicallyPlausibleScatteringFunctionFromID(_id)}
 }
 
+// @see MDLNamed
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *PhysicallyPlausibleScatteringFunction) WithName(name string) *PhysicallyPlausibleScatteringFunction {
 	x.inner.MDLScatteringFunction.SetName(foundation.NSStringStringWithUTF8String(name))

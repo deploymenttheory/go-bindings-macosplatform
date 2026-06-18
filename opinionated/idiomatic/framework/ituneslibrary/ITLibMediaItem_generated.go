@@ -38,6 +38,8 @@ func NewLibMediaItem() *LibMediaItem {
 	return &LibMediaItem{inner: raw.ITLibMediaItemFromID(_id)}
 }
 
+// @abstract The title of this media item. May be empty.
+//
 // Title calls the underlying Title.
 func (x *LibMediaItem) Title() string {
 	_r := x.inner.Title()
@@ -47,6 +49,8 @@ func (x *LibMediaItem) Title() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The title of this media item that should be used for sorting purposes.  If nil, use the title field.
+//
 // SortTitle calls the underlying SortTitle.
 func (x *LibMediaItem) SortTitle() string {
 	_r := x.inner.SortTitle()
@@ -56,6 +60,8 @@ func (x *LibMediaItem) SortTitle() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The artist associated with this media item.
+//
 // Artist calls the underlying Artist.
 func (x *LibMediaItem) Artist() *LibArtist {
 	_r := x.inner.Artist()
@@ -65,6 +71,8 @@ func (x *LibMediaItem) Artist() *LibArtist {
 	return &LibArtist{inner: _r}
 }
 
+// @abstract The name of the composer associated with this media item.  May be empty.
+//
 // Composer calls the underlying Composer.
 func (x *LibMediaItem) Composer() string {
 	_r := x.inner.Composer()
@@ -74,6 +82,8 @@ func (x *LibMediaItem) Composer() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The name of the composer associated with this media item that should be used for sorting purposes. If nil, use the composer field.
+//
 // SortComposer calls the underlying SortComposer.
 func (x *LibMediaItem) SortComposer() string {
 	_r := x.inner.SortComposer()
@@ -83,26 +93,36 @@ func (x *LibMediaItem) SortComposer() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The rating of this media item.
+//
 // Rating calls the underlying Rating.
 func (x *LibMediaItem) Rating() int {
 	return x.inner.Rating()
 }
 
+// @abstract Whether this media item's rating is computed.
+//
 // IsRatingComputed calls the underlying IsRatingComputed.
 func (x *LibMediaItem) IsRatingComputed() bool {
 	return x.inner.IsRatingComputed()
 }
 
+// @abstract If non-zero, the actual time playback for this media item will start instead of 0:00 (in milliseconds).
+//
 // StartTime calls the underlying StartTime.
 func (x *LibMediaItem) StartTime() uint {
 	return x.inner.StartTime()
 }
 
+// @abstract If non-zero, the actual time playback for this media item will stop vs. the total time (in milliseconds).
+//
 // StopTime calls the underlying StopTime.
 func (x *LibMediaItem) StopTime() uint {
 	return x.inner.StopTime()
 }
 
+// @abstract The album where this media item belongs.
+//
 // Album calls the underlying Album.
 func (x *LibMediaItem) Album() *LibAlbum {
 	_r := x.inner.Album()
@@ -112,6 +132,8 @@ func (x *LibMediaItem) Album() *LibAlbum {
 	return &LibAlbum{inner: _r}
 }
 
+// @abstract The genre associated with this media item. May be empty.
+//
 // Genre calls the underlying Genre.
 func (x *LibMediaItem) Genre() string {
 	_r := x.inner.Genre()
@@ -121,6 +143,8 @@ func (x *LibMediaItem) Genre() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract This media item's file kind (ex. MPEG audio file).
+//
 // Kind calls the underlying Kind.
 func (x *LibMediaItem) Kind() string {
 	_r := x.inner.Kind()
@@ -130,31 +154,43 @@ func (x *LibMediaItem) Kind() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract This media item's media kind.
+//
 // MediaKind calls the underlying MediaKind.
 func (x *LibMediaItem) MediaKind() ITLibMediaItemMediaKind {
 	return ITLibMediaItemMediaKind(x.inner.MediaKind())
 }
 
+// @abstract The size in bytes of this media item on disk.
+//
 // FileSize calls the underlying FileSize.
 func (x *LibMediaItem) FileSize() uint64 {
 	return x.inner.FileSize()
 }
 
+// @abstract The size in bytes of this media item on disk. (deprecated: use fileSize instead)
+//
 // Size calls the underlying Size.
 func (x *LibMediaItem) Size() uint {
 	return x.inner.Size()
 }
 
+// @abstract The length of this media item in milliseconds.
+//
 // TotalTime calls the underlying TotalTime.
 func (x *LibMediaItem) TotalTime() uint {
 	return x.inner.TotalTime()
 }
 
+// @abstract The position of this media item within its album.
+//
 // TrackNumber calls the underlying TrackNumber.
 func (x *LibMediaItem) TrackNumber() uint {
 	return x.inner.TrackNumber()
 }
 
+// @abstract The podcast category of this media item (implies this media item is a podcast).
+//
 // Category calls the underlying Category.
 func (x *LibMediaItem) Category() string {
 	_r := x.inner.Category()
@@ -164,11 +200,15 @@ func (x *LibMediaItem) Category() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The content rating of this media item's lyrics.
+//
 // LyricsContentRating calls the underlying LyricsContentRating.
 func (x *LibMediaItem) LyricsContentRating() ITLibMediaItemLyricsContentRating {
 	return ITLibMediaItemLyricsContentRating(x.inner.LyricsContentRating())
 }
 
+// @abstract The extended content rating of this media item.
+//
 // ContentRating calls the underlying ContentRating.
 func (x *LibMediaItem) ContentRating() string {
 	_r := x.inner.ContentRating()
@@ -178,56 +218,78 @@ func (x *LibMediaItem) ContentRating() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The date and time this media item was last modified.
+//
 // ModifiedDate calls the underlying ModifiedDate.
 func (x *LibMediaItem) ModifiedDate() *foundation.NSDate {
 	return x.inner.ModifiedDate()
 }
 
+// @abstract The date and media item this media item was added to the iTunes database.
+//
 // AddedDate calls the underlying AddedDate.
 func (x *LibMediaItem) AddedDate() *foundation.NSDate {
 	return x.inner.AddedDate()
 }
 
+// @abstract The bitrate of this media item in kbps.
+//
 // Bitrate calls the underlying Bitrate.
 func (x *LibMediaItem) Bitrate() uint {
 	return x.inner.Bitrate()
 }
 
+// @abstract The sample rate of this media item in samples per second.
+//
 // SampleRate calls the underlying SampleRate.
 func (x *LibMediaItem) SampleRate() uint {
 	return x.inner.SampleRate()
 }
 
+// @abstract The BPM (beats per minute) of this media item.
+//
 // BeatsPerMinute calls the underlying BeatsPerMinute.
 func (x *LibMediaItem) BeatsPerMinute() uint {
 	return x.inner.BeatsPerMinute()
 }
 
+// @abstract The number of times this media item has been played in iTunes.
+//
 // PlayCount calls the underlying PlayCount.
 func (x *LibMediaItem) PlayCount() uint {
 	return x.inner.PlayCount()
 }
 
+// @abstract The date and time this media item was last played in iTunes, or nil if this media item has not been played.
+//
 // LastPlayedDate calls the underlying LastPlayedDate.
 func (x *LibMediaItem) LastPlayedDate() *foundation.NSDate {
 	return x.inner.LastPlayedDate()
 }
 
+// @abstract The play status for this media.  Represents partially played and unplayed states for videos and podcasts. Other media kinds always return "none".
+//
 // PlayStatus calls the underlying PlayStatus.
 func (x *LibMediaItem) PlayStatus() ITLibMediaItemPlayStatus {
 	return ITLibMediaItemPlayStatus(x.inner.PlayStatus())
 }
 
+// @abstract The location of this media item on disk.
+//
 // Location calls the underlying Location.
 func (x *LibMediaItem) Location() *foundation.NSURL {
 	return x.inner.Location()
 }
 
+// @abstract Whether this media item has artwork.
+//
 // HasArtworkAvailable calls the underlying HasArtworkAvailable.
 func (x *LibMediaItem) HasArtworkAvailable() bool {
 	return x.inner.HasArtworkAvailable()
 }
 
+// @abstract Whether this media item has artwork.
+//
 // Artwork calls the underlying Artwork.
 func (x *LibMediaItem) Artwork() *LibArtwork {
 	_r := x.inner.Artwork()
@@ -237,6 +299,8 @@ func (x *LibMediaItem) Artwork() *LibArtwork {
 	return &LibArtwork{inner: _r}
 }
 
+// @abstract Any comments associated with this media item.
+//
 // Comments calls the underlying Comments.
 func (x *LibMediaItem) Comments() string {
 	_r := x.inner.Comments()
@@ -246,26 +310,36 @@ func (x *LibMediaItem) Comments() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Whether this media item was purchased.
+//
 // IsPurchased calls the underlying IsPurchased.
 func (x *LibMediaItem) IsPurchased() bool {
 	return x.inner.IsPurchased()
 }
 
+// @abstract Whether this media item is iTunes Match or iTunes in the Cloud.
+//
 // IsCloud calls the underlying IsCloud.
 func (x *LibMediaItem) IsCloud() bool {
 	return x.inner.IsCloud()
 }
 
+// @abstract Whether this media item is DRM protected.
+//
 // IsDRMProtected calls the underlying IsDRMProtected.
 func (x *LibMediaItem) IsDRMProtected() bool {
 	return x.inner.IsDRMProtected()
 }
 
+// @abstract Whether this media item is a video media item (video podcast, movie, etc).
+//
 // IsVideo calls the underlying IsVideo.
 func (x *LibMediaItem) IsVideo() bool {
 	return x.inner.IsVideo()
 }
 
+// @abstract The video information of this media item (implies this media item is a video media item).
+//
 // VideoInfo calls the underlying VideoInfo.
 func (x *LibMediaItem) VideoInfo() *LibMediaItemVideoInfo {
 	_r := x.inner.VideoInfo()
@@ -275,51 +349,71 @@ func (x *LibMediaItem) VideoInfo() *LibMediaItemVideoInfo {
 	return &LibMediaItemVideoInfo{inner: _r}
 }
 
+// @abstract The date this media item was released.
+//
 // ReleaseDate calls the underlying ReleaseDate.
 func (x *LibMediaItem) ReleaseDate() *foundation.NSDate {
 	return x.inner.ReleaseDate()
 }
 
+// @abstract The year when this media item was released.
+//
 // Year calls the underlying Year.
 func (x *LibMediaItem) Year() uint {
 	return x.inner.Year()
 }
 
+// @abstract The type of the file this media item refers to.
+//
 // FileType calls the underlying FileType.
 func (x *LibMediaItem) FileType() uint {
 	return x.inner.FileType()
 }
 
+// @abstract The number of times this media item has been skiped.
+//
 // SkipCount calls the underlying SkipCount.
 func (x *LibMediaItem) SkipCount() uint {
 	return x.inner.SkipCount()
 }
 
+// @abstract The date and time when this media item was last skipped.
+//
 // SkipDate calls the underlying SkipDate.
 func (x *LibMediaItem) SkipDate() *foundation.NSDate {
 	return x.inner.SkipDate()
 }
 
+// @abstract The voice-over language of this media item
+//
 // VoiceOverLanguage calls the underlying VoiceOverLanguage.
 func (x *LibMediaItem) VoiceOverLanguage() unsafe.Pointer {
 	return x.inner.VoiceOverLanguage()
 }
 
+// @abstract The volume adjustment used for this media item if any.
+//
 // VolumeAdjustment calls the underlying VolumeAdjustment.
 func (x *LibMediaItem) VolumeAdjustment() int {
 	return x.inner.VolumeAdjustment()
 }
 
+// @abstract The volume normalization energy applied to this media item.
+//
 // VolumeNormalizationEnergy calls the underlying VolumeNormalizationEnergy.
 func (x *LibMediaItem) VolumeNormalizationEnergy() uint {
 	return x.inner.VolumeNormalizationEnergy()
 }
 
+// @abstract Whether the user has disabled this media item.
+//
 // IsUserDisabled calls the underlying IsUserDisabled.
 func (x *LibMediaItem) IsUserDisabled() bool {
 	return x.inner.IsUserDisabled()
 }
 
+// @abstract The grouping of this media item.
+//
 // Grouping calls the underlying Grouping.
 func (x *LibMediaItem) Grouping() string {
 	_r := x.inner.Grouping()
@@ -329,6 +423,8 @@ func (x *LibMediaItem) Grouping() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The type of this media item with respect to its location.
+//
 // LocationType calls the underlying LocationType.
 func (x *LibMediaItem) LocationType() ITLibMediaItemLocationType {
 	return ITLibMediaItemLocationType(x.inner.LocationType())

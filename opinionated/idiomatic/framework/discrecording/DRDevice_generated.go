@@ -37,71 +37,99 @@ func NewDevice() *Device {
 	return &Device{inner: raw.DRDeviceFromID(_id)}
 }
 
+// @method			isValid @abstract		Returns whether or not the device represented by the receiver is still attached to the computer. @discussion		Because of the way some physical interconnects work, a device which is unplugged and replugged in does not necessarily look like the same device to the computer and would be invalid in that instance. @result			Returns <i>YES</i> if device is valid and <i>NO</i> if not.
+//
 // IsValid calls the underlying IsValid.
 func (x *Device) IsValid() bool {
 	return x.inner.IsValid()
 }
 
+// @method			info @abstract		Returns a dictionary of information describing the device. @discussion		The information returned include the types of media the device can write to, how it's connected and its identifying information such as the vendor and product name. @result			An NSDictionary containing device information.
+//
 // Info calls the underlying Info.
 func (x *Device) Info() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.Info()
 }
 
+// @method			status @abstract		Returns a dictionary of information describing the media in the device. @discussion		In addition to information about the media (type, space available/used, etc), the dictionary returned includes those pieces of information about the device itself which are in part determined by the media (i.e., maximum burn speed). @result			An NSDictionary containing media information.
+//
 // Status calls the underlying Status.
 func (x *Device) Status() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.Status()
 }
 
+// @method			openTray @abstract		Commands the device to open its tray. @discussion		Does nothing if the device does not have a tray (slotload). If there is media in the drive this method will do nothing and return false. In this case use @link //apple_ref/occ/instm/DRDevice/ejectMedia ejectMedia @/link to eject the media and open the tray. @result			Returns <i>YES</i> if the tray could be opened and <i>NO</i> if not.
+//
 // OpenTray calls the underlying OpenTray.
 func (x *Device) OpenTray() bool {
 	return x.inner.OpenTray()
 }
 
+// @method			closeTray @abstract		Commands the device to close its tray. @discussion		Does nothing if the device does not have a tray (slotload). @result			Returns <i>YES</i> if the tray could be closed and <i>NO</i> if not.
+//
 // CloseTray calls the underlying CloseTray.
 func (x *Device) CloseTray() bool {
 	return x.inner.CloseTray()
 }
 
+// @method			ejectMedia @abstract		Commands the device to eject the media. @discussion		This command first unmounts any volumes associated with the media and then ejects the media from the drive. If the media could not be ejected, most likely this is because a volume associated with the media could not be unmounted. @result			Returns <i>YES</i> if the media could be ejected and <i>NO</i> if not.
+//
 // EjectMedia calls the underlying EjectMedia.
 func (x *Device) EjectMedia() bool {
 	return x.inner.EjectMedia()
 }
 
+// @method			acquireExclusiveAccess @abstract		Attempts to acquire an exclusive access session with the device. @discussion		Acquiring exclusive access to the device prevents any process other than the one acquiring access from communicating with the device. So once exclusive access is granted, the device is unusable by any other process. Because of this all volumes mounted from media in the drive must be unmounted before exclusive access can be granted. Exclusive access can be acquired multiple times. Each time this method is called, a call to @link //apple_ref/occ/instm/DRDevice/releaseExclusiveAccess releaseExclusiveAccess @/link> must be made at a later time, otherwise the process will never release its exclusive access. @result			Returns <i>YES</i> if the exclusinve access is acquired and <i>NO</i> if not.
+//
 // AcquireExclusiveAccess calls the underlying AcquireExclusiveAccess.
 func (x *Device) AcquireExclusiveAccess() bool {
 	return x.inner.AcquireExclusiveAccess()
 }
 
+// @method			releaseExclusiveAccess @abstract		Releases the latest exclusive access request for the device. @discussion		A call to this method must be made for every call to @link //apple_ref/occ/instm/DRDevice/acquireExclusiveAccess acquireExclusiveAccess @/link, otherwise the process will never release its exclusive access.
+//
 // ReleaseExclusiveAccess calls the underlying ReleaseExclusiveAccess.
 func (x *Device) ReleaseExclusiveAccess() {
 	x.inner.ReleaseExclusiveAccess()
 }
 
+// @method			acquireMediaReservation @abstract		Indicate an interest in the blank media reservation. @discussion		Blank media participates in a reservation system that allows applications to express their claim on blank media to other applications.  Indicating an interest in the reservation isn't enough to assume it's been acquired, as there are likely to be other applications in the system who have also indicated an interest in the blank media reservation.  You will receive a @link DRDeviceStatusChangedNotification DRDeviceStatusChangedNotification @/link with a value of <tt>TRUE</tt> for the @link DRDeviceMediaIsReservedKey DRDeviceMediaIsReservedKey @/link when the blank media reservation has been acquired. This function may be called multiple times. Each time it is called, a call to @link //apple_ref/occ/instm/DRDevice/releaseMediaReservation releaseMediaReservation @/link must be made at a later time, otherwise the process will never fully rescind its interest in the blank media reservation.
+//
 // AcquireMediaReservation calls the underlying AcquireMediaReservation.
 func (x *Device) AcquireMediaReservation() {
 	x.inner.AcquireMediaReservation()
 }
 
+// @method			releaseMediaReservation @abstract		Releases any media reservation that might be in place for the device. @discussion		If media is inserted and reserved, then the reservation will be passed on to the next process with a reservation request.
+//
 // ReleaseMediaReservation calls the underlying ReleaseMediaReservation.
 func (x *Device) ReleaseMediaReservation() {
 	x.inner.ReleaseMediaReservation()
 }
 
+// @method			isEqualToDevice: @abstract		Compares the receiver to another device. @param			otherDevice	Another DRDevice instance to compare to the receiver. @result			Returns <i>YES</i> if the receiver is equal to otherDevice.
+//
 // IsEqualToDevice calls the underlying IsEqualToDevice.
 func (x *Device) IsEqualToDevice(otherDevice *raw.DRDevice) bool {
 	return x.inner.IsEqualToDevice(otherDevice)
 }
 
+// @method		writesCD @discussion	Reports the device's ability to burn to CD-type media. @result		Returns <i>YES</i> if the device has the ability to write to CD-R media.
+//
 // WritesCD calls the underlying WritesCD.
 func (x *Device) WritesCD() bool {
 	return x.inner.WritesCD()
 }
 
+// @method		writesDVD @discussion	Reports the device's ability to burn to DVD-type media. @result		Returns <i>YES</i> if the device has the ability to write to DVD media.
+//
 // WritesDVD calls the underlying WritesDVD.
 func (x *Device) WritesDVD() bool {
 	return x.inner.WritesDVD()
 }
 
+// @method		displayName @discussion	Returns an NSString suitable for display in the user interface.
+//
 // DisplayName calls the underlying DisplayName.
 func (x *Device) DisplayName() string {
 	_r := x.inner.DisplayName()
@@ -111,6 +139,8 @@ func (x *Device) DisplayName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @method		ioRegistryEntryPath @discussion	Returns the path to the device in the IO Registry.
+//
 // IoRegistryEntryPath calls the underlying IoRegistryEntryPath.
 func (x *Device) IoRegistryEntryPath() string {
 	_r := x.inner.IoRegistryEntryPath()
@@ -120,21 +150,29 @@ func (x *Device) IoRegistryEntryPath() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @method		mediaIsPresent @discussion	Reports the presence of the media.
+//
 // MediaIsPresent calls the underlying MediaIsPresent.
 func (x *Device) MediaIsPresent() bool {
 	return x.inner.MediaIsPresent()
 }
 
+// @method		mediaIsTransitioning @discussion	Returns <i>YES</i> if the media is in transition (spinning up or down for example).
+//
 // MediaIsTransitioning calls the underlying MediaIsTransitioning.
 func (x *Device) MediaIsTransitioning() bool {
 	return x.inner.MediaIsTransitioning()
 }
 
+// @method		mediaIsBusy @discussion	Returns <i>YES</i> if the media is in use by some process - even the one making this call.
+//
 // MediaIsBusy calls the underlying MediaIsBusy.
 func (x *Device) MediaIsBusy() bool {
 	return x.inner.MediaIsBusy()
 }
 
+// @method		mediaType @discussion	Returns the type of media currently inserted into the device.
+//
 // MediaType calls the underlying MediaType.
 func (x *Device) MediaType() string {
 	_r := x.inner.MediaType()
@@ -144,31 +182,43 @@ func (x *Device) MediaType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @method		mediaIsBlank @discussion	Returns <i>YES</i> the media in the device is blank.
+//
 // MediaIsBlank calls the underlying MediaIsBlank.
 func (x *Device) MediaIsBlank() bool {
 	return x.inner.MediaIsBlank()
 }
 
+// @method		mediaIsAppendable @discussion	Returns <i>YES</i> if the media in the device can have more data appended to any existing data.
+//
 // MediaIsAppendable calls the underlying MediaIsAppendable.
 func (x *Device) MediaIsAppendable() bool {
 	return x.inner.MediaIsAppendable()
 }
 
+// @method		mediaIsOverwritable @discussion	Returns <i>YES</i> if the media in the device can be fully (re)written.
+//
 // MediaIsOverwritable calls the underlying MediaIsOverwritable.
 func (x *Device) MediaIsOverwritable() bool {
 	return x.inner.MediaIsOverwritable()
 }
 
+// @method		mediaIsErasable @discussion	Returns <i>YES</i> if the media can be erased (i.e., CD-RW, DVD-RW, etc).
+//
 // MediaIsErasable calls the underlying MediaIsErasable.
 func (x *Device) MediaIsErasable() bool {
 	return x.inner.MediaIsErasable()
 }
 
+// @method		mediaIsReserved @discussion	Returns <i>YES</i> if the application calling this method currently holds the reservation on the media.
+//
 // MediaIsReserved calls the underlying MediaIsReserved.
 func (x *Device) MediaIsReserved() bool {
 	return x.inner.MediaIsReserved()
 }
 
+// @method		mediaSpaceOverwritable @discussion	Returns the amount of writable space on the media.
+//
 // MediaSpaceOverwritable calls the underlying MediaSpaceOverwritable.
 func (x *Device) MediaSpaceOverwritable() *MSF {
 	_r := x.inner.MediaSpaceOverwritable()
@@ -178,6 +228,8 @@ func (x *Device) MediaSpaceOverwritable() *MSF {
 	return &MSF{inner: _r}
 }
 
+// @method		mediaSpaceUsed @discussion	Returns the amount of used space on the media.
+//
 // MediaSpaceUsed calls the underlying MediaSpaceUsed.
 func (x *Device) MediaSpaceUsed() *MSF {
 	_r := x.inner.MediaSpaceUsed()
@@ -187,6 +239,8 @@ func (x *Device) MediaSpaceUsed() *MSF {
 	return &MSF{inner: _r}
 }
 
+// @method		mediaSpaceFree @discussion	Returns the amount of free space on the media.
+//
 // MediaSpaceFree calls the underlying MediaSpaceFree.
 func (x *Device) MediaSpaceFree() *MSF {
 	_r := x.inner.MediaSpaceFree()
@@ -196,11 +250,15 @@ func (x *Device) MediaSpaceFree() *MSF {
 	return &MSF{inner: _r}
 }
 
+// @method		trayIsOpen @discussion	Reports the tray state of the device. @result		Returns <i>YES</i> if the device has a tray and it is open.
+//
 // TrayIsOpen calls the underlying TrayIsOpen.
 func (x *Device) TrayIsOpen() bool {
 	return x.inner.TrayIsOpen()
 }
 
+// @method		bsdName @discussion	Returns the bsd /dev node name.
+//
 // BsdName calls the underlying BsdName.
 func (x *Device) BsdName() string {
 	_r := x.inner.BsdName()

@@ -36,6 +36,8 @@ func NewSyncEngineFailedRecordSave() *SyncEngineFailedRecordSave {
 	return &SyncEngineFailedRecordSave{inner: raw.CKSyncEngineFailedRecordSaveFromID(_id)}
 }
 
+// The record that CloudKit is unable to modify.
+//
 // Record calls the underlying Record.
 func (x *SyncEngineFailedRecordSave) Record() *Record {
 	_r := x.inner.Record()
@@ -45,6 +47,8 @@ func (x *SyncEngineFailedRecordSave) Record() *Record {
 	return &Record{inner: _r}
 }
 
+// A error that describes the reason for the unsuccessful attempt to modify the associated record.
+//
 // Error calls the underlying Error.
 func (x *SyncEngineFailedRecordSave) Error() unsafe.Pointer {
 	return x.inner.Error()

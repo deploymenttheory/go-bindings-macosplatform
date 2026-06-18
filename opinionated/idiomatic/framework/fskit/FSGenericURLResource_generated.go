@@ -30,6 +30,8 @@ func GenericURLResourceFromID(id objc.ID) *GenericURLResource {
 	return &GenericURLResource{inner: raw.FSGenericURLResourceFromID(id)}
 }
 
+// Creates a generic URL resource with the given URL. - Parameter url: A URL that provides the content of the file system. The format of this URL is completely arbitrary. It's up to your extension to access the contents represented by the URL and make them available as an “FSVolume“ that FSKit can load.
+//
 // NewGenericURLResourceWithURL creates a new [GenericURLResource].
 func NewGenericURLResourceWithURL(url string) *GenericURLResource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSGenericURLResource")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewGenericURLResourceWithURL(url string) *GenericURLResource {
 	return &GenericURLResource{inner: raw.FSGenericURLResourceFromID(_id)}
 }
 
+// The URL represented by the resource.
+//
 // Url calls the underlying Url.
 func (x *GenericURLResource) Url() *foundation.NSURL {
 	return x.inner.Url()

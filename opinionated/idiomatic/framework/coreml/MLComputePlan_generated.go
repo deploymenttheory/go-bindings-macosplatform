@@ -35,6 +35,8 @@ func NewComputePlan() *ComputePlan {
 	return &ComputePlan{inner: raw.MLComputePlanFromID(_id)}
 }
 
+// Returns the estimated cost of executing an ML Program operation. @param operation An ML Program operation. @returns The estimated cost of executing the operation or nil if the cost couldn't be estimated.
+//
 // EstimatedCostOfMLProgramOperation calls the underlying EstimatedCostOfMLProgramOperation.
 func (x *ComputePlan) EstimatedCostOfMLProgramOperation(operation *raw.MLModelStructureProgramOperation) *ComputePlanCost {
 	_r := x.inner.EstimatedCostOfMLProgramOperation(operation)
@@ -44,6 +46,8 @@ func (x *ComputePlan) EstimatedCostOfMLProgramOperation(operation *raw.MLModelSt
 	return &ComputePlanCost{inner: _r}
 }
 
+// Returns the anticipated compute devices that would be used for executing a NeuralNetwork layer. @param layer A NeuralNetwork layer. @returns The anticipated compute devices that would be used for executing the layer or `nil` if the usage couldn't be determined.
+//
 // ComputeDeviceUsageForNeuralNetworkLayer calls the underlying ComputeDeviceUsageForNeuralNetworkLayer.
 func (x *ComputePlan) ComputeDeviceUsageForNeuralNetworkLayer(layer *raw.MLModelStructureNeuralNetworkLayer) *ComputePlanDeviceUsage {
 	_r := x.inner.ComputeDeviceUsageForNeuralNetworkLayer(layer)
@@ -53,6 +57,8 @@ func (x *ComputePlan) ComputeDeviceUsageForNeuralNetworkLayer(layer *raw.MLModel
 	return &ComputePlanDeviceUsage{inner: _r}
 }
 
+// Returns The anticipated compute devices that would be used for executing an ML Program operation. @param operation  An ML Program operation. @returns The anticipated compute devices that would be used for executing the operation or `nil`if the usage couldn't be determined.
+//
 // ComputeDeviceUsageForMLProgramOperation calls the underlying ComputeDeviceUsageForMLProgramOperation.
 func (x *ComputePlan) ComputeDeviceUsageForMLProgramOperation(operation *raw.MLModelStructureProgramOperation) *ComputePlanDeviceUsage {
 	_r := x.inner.ComputeDeviceUsageForMLProgramOperation(operation)

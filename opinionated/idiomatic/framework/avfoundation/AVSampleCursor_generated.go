@@ -38,106 +38,148 @@ func NewSampleCursor() *SampleCursor {
 	return &SampleCursor{inner: raw.AVSampleCursorFromID(_id)}
 }
 
+// @method			stepInDecodeOrderByCount: @abstract		Moves the cursor a given number of samples in decode order. @param			stepCount The number of samples to move across. If positive, step forward this many samples. If negative, step backward (-stepCount) samples. @result			The number of samples the cursor traversed. If the beginning or the end of the sample sequence was reached before the requested number of samples was traversed, the absolute value of the result will be less than the absolute value of stepCount.
+//
 // StepInDecodeOrderByCount calls the underlying StepInDecodeOrderByCount.
 func (x *SampleCursor) StepInDecodeOrderByCount(stepCount int64) int64 {
 	return x.inner.StepInDecodeOrderByCount(stepCount)
 }
 
+// @method			stepInPresentationOrderByCount: @abstract		Moves the cursor a given number of samples in presentation order. @param			stepCount The number of samples to move across. If positive, step forward this many samples. If negative, step backward (-stepCount) samples. @result			The number of samples the cursor traversed. If the beginning or the end of the sample sequence was reached before the requested number of samples was traversed, the absolute value of the result will be less than the absolute value of stepCount.
+//
 // StepInPresentationOrderByCount calls the underlying StepInPresentationOrderByCount.
 func (x *SampleCursor) StepInPresentationOrderByCount(stepCount int64) int64 {
 	return x.inner.StepInPresentationOrderByCount(stepCount)
 }
 
+// @method			stepByDecodeTime:wasPinned: @abstract		Moves the cursor by a given deltaTime on the decode timeline. @param			deltaDecodeTime The amount of time to move in the decode timeline. @param			outWasPinned If the beginning or the end of the sample sequence was reached before the requested deltaDecodeTime was traversed, the BOOL value at the address specified by outWasPinned will be set to YES. May be NULL if this information isn't desired. @result			The amount of time the cursor was moved along the decode timeline. Because sample cursors snap to sample boundaries when stepped, this value may not be equal to deltaDecodeTime even if the cursor was not pinned.
+//
 // StepByDecodeTimeWasPinned calls the underlying StepByDecodeTimeWasPinned.
 func (x *SampleCursor) StepByDecodeTimeWasPinned(deltaDecodeTime coremedia.CMTime, outWasPinned *bool) coremedia.CMTime {
 	return x.inner.StepByDecodeTimeWasPinned(deltaDecodeTime, outWasPinned)
 }
 
+// @method			stepByPresentationTime:wasPinned: @abstract		Moves the cursor by a given deltaTime on the presentation timeline. @param			deltaPresentationTime The amount of time to move in the presentation timeline. @param			outWasPinned If the beginning or the end of the sample sequence was reached before the requested deltaPresentationTime was traversed, the BOOL value at the address specified by outWasPinned will be set to YES. May be NULL if this information isn't desired. @result			The amount of time the cursor was moved along the presentation timeline. Because sample cursors snap to sample boundaries when stepped, this value may not be equal to deltaPresentationTime even if the cursor was not pinned.
+//
 // StepByPresentationTimeWasPinned calls the underlying StepByPresentationTimeWasPinned.
 func (x *SampleCursor) StepByPresentationTimeWasPinned(deltaPresentationTime coremedia.CMTime, outWasPinned *bool) coremedia.CMTime {
 	return x.inner.StepByPresentationTimeWasPinned(deltaPresentationTime, outWasPinned)
 }
 
+// @method			comparePositionInDecodeOrderWithPositionOfCursor: @abstract		Compares the relative positions of two AVSampleCursors. @param			cursor An instance of AVSampleCursor with which to compare positions. @result			kCFCompareLessThan, kCFCompareEqualTo or kCFCompareGreaterThan, depending on whether the receiver points at a sample before, the same as, or after the sample pointed to by the specified AVSampleCursor. @discussion		If the receiver and cursor reference different sequences of samples, as when they're created by different instances of AVAssetTrack, results are undefined.
+//
 // ComparePositionInDecodeOrderWithPositionOfCursor calls the underlying ComparePositionInDecodeOrderWithPositionOfCursor.
 func (x *SampleCursor) ComparePositionInDecodeOrderWithPositionOfCursor(cursor *raw.AVSampleCursor) foundation.NSComparisonResult {
 	return x.inner.ComparePositionInDecodeOrderWithPositionOfCursor(cursor)
 }
 
+// @method			samplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor: @abstract		This method tests a boundary in the reordering from decode order to presentation order, determining whether it's possible for any sample earlier in decode order than the sample at the position of the receiver can have a presentation timestamp later than that of the specified sample cursor. @param			cursor An instance of AVSampleCursor with which to test the sample reordering boundary. @result			YES if it's possible for any sample earlier in decode order than the sample at the position of the receiver can have a presentation timestamp later than that of the specified sample cursor. @discussion		If the receiver and cursor reference different sequences of samples, as when they're created by different instances of AVAssetTrack, results are undefined.
+//
 // SamplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor calls the underlying SamplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor.
 func (x *SampleCursor) SamplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor(cursor *raw.AVSampleCursor) bool {
 	return x.inner.SamplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor(cursor)
 }
 
+// @method			samplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor: @abstract		This method tests a boundary in the reordering from decode order to presentation order, determining whether it's possible for any sample later in decode order than the sample at the position of the receiver can have a presentation timestamp earlier than that of the specified sample cursor. @param			cursor An instance of AVSampleCursor with which to test the sample reordering boundary. @result			YES if it's possible for any sample later in decode order than the sample at the position of the receiver can have a presentation timestamp earlier than that of the specified sample cursor. @discussion		If the receiver and cursor reference different sequences of samples, as when they're created by different instances of AVAssetTrack, results are undefined.
+//
 // SamplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor calls the underlying SamplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor.
 func (x *SampleCursor) SamplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor(cursor *raw.AVSampleCursor) bool {
 	return x.inner.SamplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor(cursor)
 }
 
+// @property		presentationTimeStamp @abstract		The presentation timestamp (PTS) of the sample at the current position of the cursor.
+//
 // PresentationTimeStamp calls the underlying PresentationTimeStamp.
 func (x *SampleCursor) PresentationTimeStamp() coremedia.CMTime {
 	return x.inner.PresentationTimeStamp()
 }
 
+// @property		decodeTimeStamp @abstract		The decode timestamp (DTS) of the sample at the current position of the cursor.
+//
 // DecodeTimeStamp calls the underlying DecodeTimeStamp.
 func (x *SampleCursor) DecodeTimeStamp() coremedia.CMTime {
 	return x.inner.DecodeTimeStamp()
 }
 
+// @method			copyCurrentSampleFormatDescription: @abstract		Provides the format description of the sample at the receiver's current position.
+//
 // CopyCurrentSampleFormatDescription calls the underlying CopyCurrentSampleFormatDescription.
 func (x *SampleCursor) CopyCurrentSampleFormatDescription() unsafe.Pointer {
 	return x.inner.CopyCurrentSampleFormatDescription()
 }
 
+// @property		currentSampleDuration @abstract		Indicates the decode duration of the sample at the receiver's current position. @discussion		If the receiver must be advanced past its current position in order to determine the decode duration of the current sample, the value of currentSampleDuration is equal to kCMTimeIndefinite. This can occur with streaming formats such as MPEG-2 transport streams.
+//
 // CurrentSampleDuration calls the underlying CurrentSampleDuration.
 func (x *SampleCursor) CurrentSampleDuration() coremedia.CMTime {
 	return x.inner.CurrentSampleDuration()
 }
 
+// @property		currentSampleSyncInfo @abstract		Provides information about the current sample for consideration when resynchronizing a decoder, as when scrubbing.
+//
 // CurrentSampleSyncInfo calls the underlying CurrentSampleSyncInfo.
 func (x *SampleCursor) CurrentSampleSyncInfo() raw.AVSampleCursorSyncInfo {
 	return x.inner.CurrentSampleSyncInfo()
 }
 
+// @property		currentSampleDependencyInfo @abstract		Provides information about dependencies between a media sample and other media samples in the same sample sequence, if known.
+//
 // CurrentSampleDependencyInfo calls the underlying CurrentSampleDependencyInfo.
 func (x *SampleCursor) CurrentSampleDependencyInfo() raw.AVSampleCursorDependencyInfo {
 	return x.inner.CurrentSampleDependencyInfo()
 }
 
+// @property               currentSampleDependencyAttachments @abstract               Provides a dictionary containing dependency related sample buffer attachments, if known.  See kCMSampleAttachmentKey_... in CoreMedia/CMSampleBuffer.h.
+//
 // CurrentSampleDependencyAttachments calls the underlying CurrentSampleDependencyAttachments.
 func (x *SampleCursor) CurrentSampleDependencyAttachments() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.CurrentSampleDependencyAttachments()
 }
 
+// @property	currentSampleAudioDependencyInfo @abstract	Provides information about the independent decodability of an audio sample. @discussion	In order to position a sample cursor at the first sample that the audio decoder requires for a full refresh, you will need to walk it back from the current sample until you find a sample that is independently decodable, and whose audioSamplePacketRefreshCount is greater than or equal to the number of steps back you have taken.  This implies that if the current sample (before this walk) is independently decodable, with an audioSampleRefreshCount of zero, no walk is required.
+//
 // CurrentSampleAudioDependencyInfo calls the underlying CurrentSampleAudioDependencyInfo.
 func (x *SampleCursor) CurrentSampleAudioDependencyInfo() raw.AVSampleCursorAudioDependencyInfo {
 	return x.inner.CurrentSampleAudioDependencyInfo()
 }
 
+// @property		samplesRequiredForDecoderRefresh @abstract		Count of samples prior to the current sample, in decode order, that the decoder requires in order to achieve fully coherent output at the current decode time, as after a seek. Zero will be returned if no samples are required for decoder refresh or if the track does not contain this information. @discussion		Some sample sequences that do not indicate sample dependencies may instead indicate that in order for a specific sample to be decoded with all available accuracy, samples prior to that sample in decode order must be decoded before the specific sample is decoded. In order to position a sample cursor at the first sample that the decoder requires for a full refresh, you can use code like the following: NSInteger samplesPriorToCurrentSampleToFeedToDecoder = [mySampleCursor samplesRequiredForDecoderRefresh]; AVSampleCursor *cursorForObtainingRefreshSamples = [mySampleCursor copy]; [cursorForObtainingRefreshSamples stepInDecodeOrderByCount: -samplesPriorToCurrentSampleToFeedToDecoder ]; // cursorForObtainingRefreshSamples is now positioned at the first sample that must be provided to the decoder // in order to decode the sample at the position of mySampleCursor in full
+//
 // SamplesRequiredForDecoderRefresh calls the underlying SamplesRequiredForDecoderRefresh.
 func (x *SampleCursor) SamplesRequiredForDecoderRefresh() int {
 	return x.inner.SamplesRequiredForDecoderRefresh()
 }
 
+// @property		currentChunkStorageURL @abstract		The URL of the storage container of the current sample, as well as other samples that are intended to be loaded in the same operation as a "chunk". @discussion		May be nil; if nil, the storage location of the chunk is the URL of the sample cursor's track's asset, if it has one.
+//
 // CurrentChunkStorageURL calls the underlying CurrentChunkStorageURL.
 func (x *SampleCursor) CurrentChunkStorageURL() *foundation.NSURL {
 	return x.inner.CurrentChunkStorageURL()
 }
 
+// @property		currentChunkStorageRange @abstract		The offset and length of samples in currentChunkStorageURL that are intended to be loaded together with the current sample as a "chunk". @discussion		If the current chunk isn't stored contiguously in its storage container, currentChunkStorageRange.offset will be -1. In such cases you can use AVSampleBufferGenerator to obtain the sample data.
+//
 // CurrentChunkStorageRange calls the underlying CurrentChunkStorageRange.
 func (x *SampleCursor) CurrentChunkStorageRange() raw.AVSampleCursorStorageRange {
 	return x.inner.CurrentChunkStorageRange()
 }
 
+// @property		currentChunkInfo @abstract		Provides information about the "chunk" of samples to which the current sample belongs. If the media format that defines the sequence of samples does not signal "chunking" of samples in any way, each sample will be considered by the receiver as belonging to a chunk of one sample only.
+//
 // CurrentChunkInfo calls the underlying CurrentChunkInfo.
 func (x *SampleCursor) CurrentChunkInfo() raw.AVSampleCursorChunkInfo {
 	return x.inner.CurrentChunkInfo()
 }
 
+// @property		currentSampleIndexInChunk @abstract		The index of the current sample within the chunk to which it belongs.
+//
 // CurrentSampleIndexInChunk calls the underlying CurrentSampleIndexInChunk.
 func (x *SampleCursor) CurrentSampleIndexInChunk() int64 {
 	return x.inner.CurrentSampleIndexInChunk()
 }
 
+// @property		currentSampleStorageRange @abstract		The offset and length of the current sample in currentChunkStorageURL. @discussion		If the current sample isn't stored contiguously in its storage container, currentSampleStorageRange.offset will be -1. In such cases you can use AVSampleBufferGenerator to obtain the sample data.
+//
 // CurrentSampleStorageRange calls the underlying CurrentSampleStorageRange.
 func (x *SampleCursor) CurrentSampleStorageRange() raw.AVSampleCursorStorageRange {
 	return x.inner.CurrentSampleStorageRange()

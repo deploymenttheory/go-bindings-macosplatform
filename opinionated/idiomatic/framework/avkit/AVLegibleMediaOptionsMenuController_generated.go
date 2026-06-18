@@ -33,6 +33,8 @@ func LegibleMediaOptionsMenuControllerFromID(id objc.ID) *LegibleMediaOptionsMen
 	return &LegibleMediaOptionsMenuController{inner: raw.AVLegibleMediaOptionsMenuControllerFromID(id)}
 }
 
+// @method			initWithPlayer: @param			player The AVPlayer to build menus from, or nil for non-track-specific options only @abstract		Creates an AVLegibleMediaOptionsMenuController with an optional player @discussion		When player is non-nil, both media tracks and caption appearance options will be included, otherwise, only caption appearance options.
+//
 // NewLegibleMediaOptionsMenuControllerWithPlayer creates a new [LegibleMediaOptionsMenuController].
 func NewLegibleMediaOptionsMenuControllerWithPlayer(player *avfoundation.AVPlayer) *LegibleMediaOptionsMenuController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVLegibleMediaOptionsMenuController")), objc.RegisterName("alloc"))
@@ -40,23 +42,31 @@ func NewLegibleMediaOptionsMenuControllerWithPlayer(player *avfoundation.AVPlaye
 	return &LegibleMediaOptionsMenuController{inner: raw.AVLegibleMediaOptionsMenuControllerFromID(_id)}
 }
 
+// @property		player @abstract		The player associated with the menu controller.
+//
 // WithPlayer sets the player property and returns the receiver for chaining.
 func (x *LegibleMediaOptionsMenuController) WithPlayer(player *avfoundation.AVPlayer) *LegibleMediaOptionsMenuController {
 	x.inner.SetPlayer(player)
 	return x
 }
 
+// @property		delegate @abstract		The delegate for receiving caption preview and state change notifications.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *LegibleMediaOptionsMenuController) WithDelegate(delegate raw.AVLegibleMediaOptionsMenuControllerDelegate) *LegibleMediaOptionsMenuController {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @method			menuWithContents: @param			contents A set of values from the AVLegibleMediaOptionsMenuContents @abstract		Builds a legible options menu using the specified contents. @return			A NSMenu ready to be presented by the client, or nil if the menu cannot be built @discussion		Returns nil if the requested menu type cannot be built due to missing content (e.g., requesting track selection without a player).
+//
 // MenuWithContents calls the underlying MenuWithContents.
 func (x *LegibleMediaOptionsMenuController) MenuWithContents(contents AVLegibleMediaOptionsMenuContents) *appkit.NSMenu {
 	return x.inner.MenuWithContents(raw.AVLegibleMediaOptionsMenuContents(contents))
 }
 
+// @property		player @abstract		The player associated with the menu controller.
+//
 // Player calls the underlying Player.
 func (x *LegibleMediaOptionsMenuController) Player() *avfoundation.AVPlayer {
 	return x.inner.Player()
@@ -67,6 +77,8 @@ func (x *LegibleMediaOptionsMenuController) SetPlayer(player *avfoundation.AVPla
 	x.inner.SetPlayer(player)
 }
 
+// @property		delegate @abstract		The delegate for receiving caption preview and state change notifications.
+//
 // Delegate calls the underlying Delegate.
 func (x *LegibleMediaOptionsMenuController) Delegate() raw.AVLegibleMediaOptionsMenuControllerDelegate {
 	return x.inner.Delegate()
@@ -77,6 +89,8 @@ func (x *LegibleMediaOptionsMenuController) SetDelegate(delegate raw.AVLegibleMe
 	x.inner.SetDelegate(delegate)
 }
 
+// @property		menuState @abstract		The current of the legible media options menu. @discussion		Use this to check the legible options menu state.
+//
 // MenuState calls the underlying MenuState.
 func (x *LegibleMediaOptionsMenuController) MenuState() raw.AVLegibleMediaOptionsMenuState {
 	return x.inner.MenuState()

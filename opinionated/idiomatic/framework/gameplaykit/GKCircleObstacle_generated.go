@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An obstacle with an impassible radius
+//
 // CircleObstacle wraps [raw.GKCircleObstacle] with a fluent Go API.
 type CircleObstacle struct {
 	inner *raw.GKCircleObstacle
@@ -37,12 +39,16 @@ func NewCircleObstacleWithRadius(radius float32) *CircleObstacle {
 	return &CircleObstacle{inner: raw.GKCircleObstacleFromID(_id)}
 }
 
+// Radius of the impassible circle
+//
 // WithRadius sets the radius property and returns the receiver for chaining.
 func (x *CircleObstacle) WithRadius(radius float32) *CircleObstacle {
 	x.inner.SetRadius(radius)
 	return x
 }
 
+// Radius of the impassible circle
+//
 // Radius calls the underlying Radius.
 func (x *CircleObstacle) Radius() float32 {
 	return x.inner.Radius()
@@ -53,6 +59,8 @@ func (x *CircleObstacle) SetRadius(radius float32) {
 	x.inner.SetRadius(radius)
 }
 
+// Position of the center of the circle in 2D space.
+//
 // Position calls the underlying Position.
 func (x *CircleObstacle) Position() unsafe.Pointer {
 	return x.inner.Position()

@@ -39,33 +39,45 @@ func NewIdentityPicker() *IdentityPicker {
 	return &IdentityPicker{inner: raw.CBIdentityPickerFromID(_id)}
 }
 
+// The title of the identity picker. The value of this property is the title text that appears at the top of the panel. By default, the title is "Select a person to share with:".
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *IdentityPicker) WithTitle(title string) *IdentityPicker {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// A Boolean value indicating whether the user is allowed to select multiple identities. The value of this property is <doc://com.apple.documentation/documentation/objectivec/yes> if the user can select multiple records; otherwise, <doc://com.apple.documentation/documentation/objectivec/no>. The default value is <doc://com.apple.documentation/documentation/objectivec/no>.
+//
 // WithAllowsMultipleSelection sets the allowsMultipleSelection property and returns the receiver for chaining.
 func (x *IdentityPicker) WithAllowsMultipleSelection(allowsMultipleSelection bool) *IdentityPicker {
 	x.inner.SetAllowsMultipleSelection(allowsMultipleSelection)
 	return x
 }
 
+// Runs the receiver as an application-modal dialog. The receiver may create identities for selected records if necessary. - Returns: `NSOKButton` if the user selected OK; otherwise, `NSCancelButton`.
+//
 // RunModal calls the underlying RunModal.
 func (x *IdentityPicker) RunModal() int {
 	return x.inner.RunModal()
 }
 
+// Runs the receiver modally as a sheet attached to a specified window. The `didEndSelector` parameter is a selector that takes three arguments. The corresponding method should have a declaration modeled on the following example: ```swift - (void)identityPickerDidEnd:(CBIdentityPicker *)identityPicker returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo; ``` where the `identityPicker` argument is the identity picker object, the `returnCode` argument is the button the user clicked, and `contextInfo` is the same `contextInfo` argument that was passed in the original message. - Parameters: - window: The parent window for the sheet. - delegate: The delegate for the modal session. - didEndSelector: A message sent to the delegate after the user responds but before the sheet is dismissed. - contextInfo: Contextual data passed to the delegate in the `didEndSelector` message.
+//
 // RunModalForWindowModalDelegateDidEndSelectorContextInfo calls the underlying RunModalForWindowModalDelegateDidEndSelectorContextInfo.
 func (x *IdentityPicker) RunModalForWindowModalDelegateDidEndSelectorContextInfo(window *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.RunModalForWindowModalDelegateDidEndSelectorContextInfo(window, delegate, didEndSelector, contextInfo)
 }
 
+// Runs the identity picker modally as a sheet attached to a specified window. - Parameters: - window: The parent window for the sheet. - completionHandler: The handler to run after the return value is known, but before the sheet is dismissed.
+//
 // RunModalForWindowCompletionHandler calls the underlying RunModalForWindowCompletionHandler.
 func (x *IdentityPicker) RunModalForWindowCompletionHandler(window *appkit.NSWindow, completionHandler func(int)) {
 	x.inner.RunModalForWindowCompletionHandler(window, completionHandler)
 }
 
+// The title of the identity picker. The value of this property is the title text that appears at the top of the panel. By default, the title is "Select a person to share with:".
+//
 // Title calls the underlying Title.
 func (x *IdentityPicker) Title() string {
 	_r := x.inner.Title()
@@ -80,6 +92,8 @@ func (x *IdentityPicker) SetTitle(title string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
+// A Boolean value indicating whether the user is allowed to select multiple identities. The value of this property is <doc://com.apple.documentation/documentation/objectivec/yes> if the user can select multiple records; otherwise, <doc://com.apple.documentation/documentation/objectivec/no>. The default value is <doc://com.apple.documentation/documentation/objectivec/no>.
+//
 // AllowsMultipleSelection calls the underlying AllowsMultipleSelection.
 func (x *IdentityPicker) AllowsMultipleSelection() bool {
 	return x.inner.AllowsMultipleSelection()
@@ -90,6 +104,8 @@ func (x *IdentityPicker) SetAllowsMultipleSelection(allowsMultipleSelection bool
 	x.inner.SetAllowsMultipleSelection(allowsMultipleSelection)
 }
 
+// The array of identities (represented by `CBIdentity` objects) selected using the identity picker.
+//
 // Identities returns the collection as a Go slice.
 func (x *IdentityPicker) Identities() []*Identity {
 	arr := x.inner.Identities()

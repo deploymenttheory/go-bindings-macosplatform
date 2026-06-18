@@ -40,12 +40,16 @@ func NewSmartCardUserInteractionForPINOperation() *SmartCardUserInteractionForPI
 	return &SmartCardUserInteractionForPINOperation{inner: raw.TKSmartCardUserInteractionForPINOperationFromID(_id)}
 }
 
+// Bitmask specifying condition(s) under which PIN entry should be considered complete. @note Default value: TKSmartCardPINCompletionKey
+//
 // WithPINCompletion sets the pINCompletion property and returns the receiver for chaining.
 func (x *SmartCardUserInteractionForPINOperation) WithPINCompletion(pINCompletion TKSmartCardPINCompletion) *SmartCardUserInteractionForPINOperation {
 	x.inner.SetPINCompletion(raw.TKSmartCardPINCompletion(pINCompletion))
 	return x
 }
 
+// List of message indices referring to a predefined message table. It is used to specify the type and number of messages displayed during the PIN operation. @discussion If nil, the reader does not display any message (reader specific). Typically, PIN verification takes 1 message, PIN modification 1-3 messages. @note Default value: nil
+//
 // WithPINMessageIndices sets the collection, converting the Go slice to an NSArray.
 func (x *SmartCardUserInteractionForPINOperation) WithPINMessageIndices(items ...*foundation.NSNumber) *SmartCardUserInteractionForPINOperation {
 	if len(items) == 0 {
@@ -64,42 +68,56 @@ func (x *SmartCardUserInteractionForPINOperation) WithPINMessageIndices(items ..
 	return x
 }
 
+// Locale defining the language of displayed messages. If set to nil, the user's current locale is used. @note Default value: the user's current locale
+//
 // WithLocale sets the locale property and returns the receiver for chaining.
 func (x *SmartCardUserInteractionForPINOperation) WithLocale(locale *foundation.NSLocale) *SmartCardUserInteractionForPINOperation {
 	x.inner.SetLocale(locale)
 	return x
 }
 
+// SW1SW2 result code.
+//
 // WithResultSW sets the resultSW property and returns the receiver for chaining.
 func (x *SmartCardUserInteractionForPINOperation) WithResultSW(resultSW uint16) *SmartCardUserInteractionForPINOperation {
 	x.inner.SetResultSW(resultSW)
 	return x
 }
 
+// Optional block of returned data (without SW1SW2 bytes).
+//
 // WithResultData sets the resultData property and returns the receiver for chaining.
 func (x *SmartCardUserInteractionForPINOperation) WithResultData(resultData *foundation.NSData) *SmartCardUserInteractionForPINOperation {
 	x.inner.SetResultData(resultData)
 	return x
 }
 
+// Delegate for state observing of the interaction.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *SmartCardUserInteractionForPINOperation) WithDelegate(delegate raw.TKSmartCardUserInteractionDelegate) *SmartCardUserInteractionForPINOperation {
 	x.inner.TKSmartCardUserInteraction.SetDelegate(delegate)
 	return x
 }
 
+// Initial interaction timeout. If set to 0, the reader-defined default timeout is used. @note Default value: 0
+//
 // WithInitialTimeout sets the initialTimeout property and returns the receiver for chaining.
 func (x *SmartCardUserInteractionForPINOperation) WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForPINOperation {
 	x.inner.TKSmartCardUserInteraction.SetInitialTimeout(initialTimeout)
 	return x
 }
 
+// Timeout after the first key stroke. If set to 0, the reader-defined default timeout is used. @note Default value: 0
+//
 // WithInteractionTimeout sets the interactionTimeout property and returns the receiver for chaining.
 func (x *SmartCardUserInteractionForPINOperation) WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForPINOperation {
 	x.inner.TKSmartCardUserInteraction.SetInteractionTimeout(interactionTimeout)
 	return x
 }
 
+// Bitmask specifying condition(s) under which PIN entry should be considered complete. @note Default value: TKSmartCardPINCompletionKey
+//
 // PINCompletion calls the underlying PINCompletion.
 func (x *SmartCardUserInteractionForPINOperation) PINCompletion() TKSmartCardPINCompletion {
 	return TKSmartCardPINCompletion(x.inner.PINCompletion())
@@ -110,6 +128,8 @@ func (x *SmartCardUserInteractionForPINOperation) SetPINCompletion(pINCompletion
 	x.inner.SetPINCompletion(raw.TKSmartCardPINCompletion(pINCompletion))
 }
 
+// List of message indices referring to a predefined message table. It is used to specify the type and number of messages displayed during the PIN operation. @discussion If nil, the reader does not display any message (reader specific). Typically, PIN verification takes 1 message, PIN modification 1-3 messages. @note Default value: nil
+//
 // PINMessageIndices returns the collection as a Go slice.
 func (x *SmartCardUserInteractionForPINOperation) PINMessageIndices() []*foundation.NSNumber {
 	arr := x.inner.PINMessageIndices()
@@ -126,6 +146,8 @@ func (x *SmartCardUserInteractionForPINOperation) SetPINMessageIndices(pINMessag
 	x.inner.SetPINMessageIndices(pINMessageIndices)
 }
 
+// Locale defining the language of displayed messages. If set to nil, the user's current locale is used. @note Default value: the user's current locale
+//
 // Locale calls the underlying Locale.
 func (x *SmartCardUserInteractionForPINOperation) Locale() *foundation.NSLocale {
 	return x.inner.Locale()
@@ -136,6 +158,8 @@ func (x *SmartCardUserInteractionForPINOperation) SetLocale(locale *foundation.N
 	x.inner.SetLocale(locale)
 }
 
+// SW1SW2 result code.
+//
 // ResultSW calls the underlying ResultSW.
 func (x *SmartCardUserInteractionForPINOperation) ResultSW() uint16 {
 	return x.inner.ResultSW()
@@ -146,6 +170,8 @@ func (x *SmartCardUserInteractionForPINOperation) SetResultSW(resultSW uint16) {
 	x.inner.SetResultSW(resultSW)
 }
 
+// Optional block of returned data (without SW1SW2 bytes).
+//
 // ResultData calls the underlying ResultData.
 func (x *SmartCardUserInteractionForPINOperation) ResultData() *foundation.NSData {
 	return x.inner.ResultData()

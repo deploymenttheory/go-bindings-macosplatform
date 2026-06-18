@@ -33,6 +33,8 @@ func MTRBaseClusterAirQualityFromID(id objc.ID) *MTRBaseClusterAirQuality {
 	return &MTRBaseClusterAirQuality{inner: raw.MTRBaseClusterAirQualityFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterAirQualityWithDeviceEndpointIDQueue creates a new [MTRBaseClusterAirQuality].
 func NewMTRBaseClusterAirQualityWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterAirQuality {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterAirQuality")), objc.RegisterName("alloc"))

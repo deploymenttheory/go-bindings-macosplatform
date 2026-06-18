@@ -39,24 +39,32 @@ func NewMTL4SpecializedFunctionDescriptor() *MTL4SpecializedFunctionDescriptor {
 	return &MTL4SpecializedFunctionDescriptor{inner: raw.MTL4SpecializedFunctionDescriptorFromID(_id)}
 }
 
+// Provides a descriptor that corresponds to a base function that the specialization applies to.
+//
 // WithFunctionDescriptor sets the functionDescriptor property and returns the receiver for chaining.
 func (x *MTL4SpecializedFunctionDescriptor) WithFunctionDescriptor(functionDescriptor MTL4FunctionDescriptorProvider) *MTL4SpecializedFunctionDescriptor {
 	x.inner.SetFunctionDescriptor(functionDescriptor.asMTL4FunctionDescriptor())
 	return x
 }
 
+// Assigns an optional name to the specialized function.
+//
 // WithSpecializedName sets the specializedName property and returns the receiver for chaining.
 func (x *MTL4SpecializedFunctionDescriptor) WithSpecializedName(specializedName string) *MTL4SpecializedFunctionDescriptor {
 	x.inner.SetSpecializedName(foundation.NSStringStringWithUTF8String(specializedName))
 	return x
 }
 
+// Configures optional function constant values to associate with the function.
+//
 // WithConstantValues sets the constantValues property and returns the receiver for chaining.
 func (x *MTL4SpecializedFunctionDescriptor) WithConstantValues(constantValues *FunctionConstantValues) *MTL4SpecializedFunctionDescriptor {
 	x.inner.SetConstantValues(constantValues.Unwrap())
 	return x
 }
 
+// Provides a descriptor that corresponds to a base function that the specialization applies to.
+//
 // FunctionDescriptor calls the underlying FunctionDescriptor.
 func (x *MTL4SpecializedFunctionDescriptor) FunctionDescriptor() *MTL4FunctionDescriptor {
 	_r := x.inner.FunctionDescriptor()
@@ -71,6 +79,8 @@ func (x *MTL4SpecializedFunctionDescriptor) SetFunctionDescriptor(functionDescri
 	x.inner.SetFunctionDescriptor(functionDescriptor)
 }
 
+// Assigns an optional name to the specialized function.
+//
 // SpecializedName calls the underlying SpecializedName.
 func (x *MTL4SpecializedFunctionDescriptor) SpecializedName() string {
 	_r := x.inner.SpecializedName()
@@ -85,6 +95,8 @@ func (x *MTL4SpecializedFunctionDescriptor) SetSpecializedName(specializedName s
 	x.inner.SetSpecializedName(foundation.NSStringStringWithUTF8String(specializedName))
 }
 
+// Configures optional function constant values to associate with the function.
+//
 // ConstantValues calls the underlying ConstantValues.
 func (x *MTL4SpecializedFunctionDescriptor) ConstantValues() *FunctionConstantValues {
 	_r := x.inner.ConstantValues()

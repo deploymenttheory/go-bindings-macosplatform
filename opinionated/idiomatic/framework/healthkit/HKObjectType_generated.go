@@ -36,11 +36,15 @@ func NewObjectType() *ObjectType {
 	return &ObjectType{inner: raw.HKObjectTypeFromID(_id)}
 }
 
+// @method        requiresPerObjectAuthorization @abstract      Returns YES if the authorization for the object type needs to be requested on per object basis.
+//
 // RequiresPerObjectAuthorization calls the underlying RequiresPerObjectAuthorization.
 func (x *ObjectType) RequiresPerObjectAuthorization() bool {
 	return x.inner.RequiresPerObjectAuthorization()
 }
 
+// @property      identifier @abstract      A unique string identifying a type of health object. @discussion    See HKTypeIdentifiers.h for possible values.
+//
 // Identifier calls the underlying Identifier.
 func (x *ObjectType) Identifier() string {
 	_r := x.inner.Identifier()

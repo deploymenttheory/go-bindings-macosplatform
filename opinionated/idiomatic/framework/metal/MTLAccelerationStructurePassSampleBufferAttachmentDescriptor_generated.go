@@ -39,24 +39,32 @@ func NewAccelerationStructurePassSampleBufferAttachmentDescriptor() *Acceleratio
 	return &AccelerationStructurePassSampleBufferAttachmentDescriptor{inner: raw.MTLAccelerationStructurePassSampleBufferAttachmentDescriptorFromID(_id)}
 }
 
+// @property sampleBuffer @abstract The sample buffer to store samples for the acceleration structure pass defined samples. If sampleBuffer is non-nil, the sample indices will be used to store samples into the sample buffer.  If no sample buffer is provided, no samples will be taken. If any of the sample indices are specified as MTLCounterDontSample, no sample will be taken for that action.
+//
 // WithSampleBuffer sets the sampleBuffer property and returns the receiver for chaining.
 func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) WithSampleBuffer(sampleBuffer raw.MTLCounterSampleBuffer) *AccelerationStructurePassSampleBufferAttachmentDescriptor {
 	x.inner.SetSampleBuffer(sampleBuffer)
 	return x
 }
 
+// @property startOfEncoderSampleIndex @abstract The sample index to use to store the sample taken at the start of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of an acceleration structure pass will fail.
+//
 // WithStartOfEncoderSampleIndex sets the startOfEncoderSampleIndex property and returns the receiver for chaining.
 func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) WithStartOfEncoderSampleIndex(startOfEncoderSampleIndex uint) *AccelerationStructurePassSampleBufferAttachmentDescriptor {
 	x.inner.SetStartOfEncoderSampleIndex(startOfEncoderSampleIndex)
 	return x
 }
 
+// @property endOfEncoderSampleIndex @abstract The sample index to use to store the sample taken at the end of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of an acceleration structure pass will fail.
+//
 // WithEndOfEncoderSampleIndex sets the endOfEncoderSampleIndex property and returns the receiver for chaining.
 func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) WithEndOfEncoderSampleIndex(endOfEncoderSampleIndex uint) *AccelerationStructurePassSampleBufferAttachmentDescriptor {
 	x.inner.SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex)
 	return x
 }
 
+// @property sampleBuffer @abstract The sample buffer to store samples for the acceleration structure pass defined samples. If sampleBuffer is non-nil, the sample indices will be used to store samples into the sample buffer.  If no sample buffer is provided, no samples will be taken. If any of the sample indices are specified as MTLCounterDontSample, no sample will be taken for that action.
+//
 // SampleBuffer calls the underlying SampleBuffer.
 func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) SampleBuffer() raw.MTLCounterSampleBuffer {
 	return x.inner.SampleBuffer()
@@ -67,6 +75,8 @@ func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) SetSampleBuf
 	x.inner.SetSampleBuffer(sampleBuffer)
 }
 
+// @property startOfEncoderSampleIndex @abstract The sample index to use to store the sample taken at the start of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of an acceleration structure pass will fail.
+//
 // StartOfEncoderSampleIndex calls the underlying StartOfEncoderSampleIndex.
 func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) StartOfEncoderSampleIndex() uint {
 	return x.inner.StartOfEncoderSampleIndex()
@@ -77,6 +87,8 @@ func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) SetStartOfEn
 	x.inner.SetStartOfEncoderSampleIndex(startOfEncoderSampleIndex)
 }
 
+// @property endOfEncoderSampleIndex @abstract The sample index to use to store the sample taken at the end of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of an acceleration structure pass will fail.
+//
 // EndOfEncoderSampleIndex calls the underlying EndOfEncoderSampleIndex.
 func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) EndOfEncoderSampleIndex() uint {
 	return x.inner.EndOfEncoderSampleIndex()

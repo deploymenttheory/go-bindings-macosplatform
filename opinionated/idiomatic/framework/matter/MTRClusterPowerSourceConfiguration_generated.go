@@ -32,6 +32,8 @@ func MTRClusterPowerSourceConfigurationFromID(id objc.ID) *MTRClusterPowerSource
 	return &MTRClusterPowerSourceConfiguration{inner: raw.MTRClusterPowerSourceConfigurationFromID(id)}
 }
 
+// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+//
 // NewMTRClusterPowerSourceConfigurationWithDeviceEndpointIDQueue creates a new [MTRClusterPowerSourceConfiguration].
 func NewMTRClusterPowerSourceConfigurationWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterPowerSourceConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterPowerSourceConfiguration")), objc.RegisterName("alloc"))

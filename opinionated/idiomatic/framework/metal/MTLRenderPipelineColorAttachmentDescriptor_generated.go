@@ -37,60 +37,80 @@ func NewRenderPipelineColorAttachmentDescriptor() *RenderPipelineColorAttachment
 	return &RenderPipelineColorAttachmentDescriptor{inner: raw.MTLRenderPipelineColorAttachmentDescriptorFromID(_id)}
 }
 
+// Pixel format.  Defaults to MTLPixelFormatInvalid
+//
 // WithPixelFormat sets the pixelFormat property and returns the receiver for chaining.
 func (x *RenderPipelineColorAttachmentDescriptor) WithPixelFormat(pixelFormat MTLPixelFormat) *RenderPipelineColorAttachmentDescriptor {
 	x.inner.SetPixelFormat(raw.MTLPixelFormat(pixelFormat))
 	return x
 }
 
+// Enable blending.  Defaults to NO.
+//
 // WithBlendingEnabled sets the blendingEnabled property and returns the receiver for chaining.
 func (x *RenderPipelineColorAttachmentDescriptor) WithBlendingEnabled(blendingEnabled bool) *RenderPipelineColorAttachmentDescriptor {
 	x.inner.SetBlendingEnabled(blendingEnabled)
 	return x
 }
 
+// Defaults to MTLBlendFactorOne
+//
 // WithSourceRGBBlendFactor sets the sourceRGBBlendFactor property and returns the receiver for chaining.
 func (x *RenderPipelineColorAttachmentDescriptor) WithSourceRGBBlendFactor(sourceRGBBlendFactor MTLBlendFactor) *RenderPipelineColorAttachmentDescriptor {
 	x.inner.SetSourceRGBBlendFactor(raw.MTLBlendFactor(sourceRGBBlendFactor))
 	return x
 }
 
+// Defaults to MTLBlendFactorZero
+//
 // WithDestinationRGBBlendFactor sets the destinationRGBBlendFactor property and returns the receiver for chaining.
 func (x *RenderPipelineColorAttachmentDescriptor) WithDestinationRGBBlendFactor(destinationRGBBlendFactor MTLBlendFactor) *RenderPipelineColorAttachmentDescriptor {
 	x.inner.SetDestinationRGBBlendFactor(raw.MTLBlendFactor(destinationRGBBlendFactor))
 	return x
 }
 
+// Defaults to MTLBlendOperationAdd
+//
 // WithRgbBlendOperation sets the rgbBlendOperation property and returns the receiver for chaining.
 func (x *RenderPipelineColorAttachmentDescriptor) WithRgbBlendOperation(rgbBlendOperation MTLBlendOperation) *RenderPipelineColorAttachmentDescriptor {
 	x.inner.SetRgbBlendOperation(raw.MTLBlendOperation(rgbBlendOperation))
 	return x
 }
 
+// Defaults to MTLBlendFactorOne
+//
 // WithSourceAlphaBlendFactor sets the sourceAlphaBlendFactor property and returns the receiver for chaining.
 func (x *RenderPipelineColorAttachmentDescriptor) WithSourceAlphaBlendFactor(sourceAlphaBlendFactor MTLBlendFactor) *RenderPipelineColorAttachmentDescriptor {
 	x.inner.SetSourceAlphaBlendFactor(raw.MTLBlendFactor(sourceAlphaBlendFactor))
 	return x
 }
 
+// Defaults to MTLBlendFactorZero
+//
 // WithDestinationAlphaBlendFactor sets the destinationAlphaBlendFactor property and returns the receiver for chaining.
 func (x *RenderPipelineColorAttachmentDescriptor) WithDestinationAlphaBlendFactor(destinationAlphaBlendFactor MTLBlendFactor) *RenderPipelineColorAttachmentDescriptor {
 	x.inner.SetDestinationAlphaBlendFactor(raw.MTLBlendFactor(destinationAlphaBlendFactor))
 	return x
 }
 
+// Defaults to MTLBlendOperationAdd
+//
 // WithAlphaBlendOperation sets the alphaBlendOperation property and returns the receiver for chaining.
 func (x *RenderPipelineColorAttachmentDescriptor) WithAlphaBlendOperation(alphaBlendOperation MTLBlendOperation) *RenderPipelineColorAttachmentDescriptor {
 	x.inner.SetAlphaBlendOperation(raw.MTLBlendOperation(alphaBlendOperation))
 	return x
 }
 
+// Defaults to MTLColorWriteMaskAll
+//
 // WithWriteMask sets the writeMask property and returns the receiver for chaining.
 func (x *RenderPipelineColorAttachmentDescriptor) WithWriteMask(writeMask MTLColorWriteMask) *RenderPipelineColorAttachmentDescriptor {
 	x.inner.SetWriteMask(raw.MTLColorWriteMask(writeMask))
 	return x
 }
 
+// Pixel format.  Defaults to MTLPixelFormatInvalid
+//
 // PixelFormat calls the underlying PixelFormat.
 func (x *RenderPipelineColorAttachmentDescriptor) PixelFormat() MTLPixelFormat {
 	return MTLPixelFormat(x.inner.PixelFormat())
@@ -101,6 +121,8 @@ func (x *RenderPipelineColorAttachmentDescriptor) SetPixelFormat(pixelFormat MTL
 	x.inner.SetPixelFormat(raw.MTLPixelFormat(pixelFormat))
 }
 
+// Enable blending.  Defaults to NO.
+//
 // IsBlendingEnabled calls the underlying IsBlendingEnabled.
 func (x *RenderPipelineColorAttachmentDescriptor) IsBlendingEnabled() bool {
 	return x.inner.IsBlendingEnabled()
@@ -111,6 +133,8 @@ func (x *RenderPipelineColorAttachmentDescriptor) SetBlendingEnabled(blendingEna
 	x.inner.SetBlendingEnabled(blendingEnabled)
 }
 
+// Defaults to MTLBlendFactorOne
+//
 // SourceRGBBlendFactor calls the underlying SourceRGBBlendFactor.
 func (x *RenderPipelineColorAttachmentDescriptor) SourceRGBBlendFactor() MTLBlendFactor {
 	return MTLBlendFactor(x.inner.SourceRGBBlendFactor())
@@ -121,6 +145,8 @@ func (x *RenderPipelineColorAttachmentDescriptor) SetSourceRGBBlendFactor(source
 	x.inner.SetSourceRGBBlendFactor(raw.MTLBlendFactor(sourceRGBBlendFactor))
 }
 
+// Defaults to MTLBlendFactorZero
+//
 // DestinationRGBBlendFactor calls the underlying DestinationRGBBlendFactor.
 func (x *RenderPipelineColorAttachmentDescriptor) DestinationRGBBlendFactor() MTLBlendFactor {
 	return MTLBlendFactor(x.inner.DestinationRGBBlendFactor())
@@ -131,6 +157,8 @@ func (x *RenderPipelineColorAttachmentDescriptor) SetDestinationRGBBlendFactor(d
 	x.inner.SetDestinationRGBBlendFactor(raw.MTLBlendFactor(destinationRGBBlendFactor))
 }
 
+// Defaults to MTLBlendOperationAdd
+//
 // RgbBlendOperation calls the underlying RgbBlendOperation.
 func (x *RenderPipelineColorAttachmentDescriptor) RgbBlendOperation() MTLBlendOperation {
 	return MTLBlendOperation(x.inner.RgbBlendOperation())
@@ -141,6 +169,8 @@ func (x *RenderPipelineColorAttachmentDescriptor) SetRgbBlendOperation(rgbBlendO
 	x.inner.SetRgbBlendOperation(raw.MTLBlendOperation(rgbBlendOperation))
 }
 
+// Defaults to MTLBlendFactorOne
+//
 // SourceAlphaBlendFactor calls the underlying SourceAlphaBlendFactor.
 func (x *RenderPipelineColorAttachmentDescriptor) SourceAlphaBlendFactor() MTLBlendFactor {
 	return MTLBlendFactor(x.inner.SourceAlphaBlendFactor())
@@ -151,6 +181,8 @@ func (x *RenderPipelineColorAttachmentDescriptor) SetSourceAlphaBlendFactor(sour
 	x.inner.SetSourceAlphaBlendFactor(raw.MTLBlendFactor(sourceAlphaBlendFactor))
 }
 
+// Defaults to MTLBlendFactorZero
+//
 // DestinationAlphaBlendFactor calls the underlying DestinationAlphaBlendFactor.
 func (x *RenderPipelineColorAttachmentDescriptor) DestinationAlphaBlendFactor() MTLBlendFactor {
 	return MTLBlendFactor(x.inner.DestinationAlphaBlendFactor())
@@ -161,6 +193,8 @@ func (x *RenderPipelineColorAttachmentDescriptor) SetDestinationAlphaBlendFactor
 	x.inner.SetDestinationAlphaBlendFactor(raw.MTLBlendFactor(destinationAlphaBlendFactor))
 }
 
+// Defaults to MTLBlendOperationAdd
+//
 // AlphaBlendOperation calls the underlying AlphaBlendOperation.
 func (x *RenderPipelineColorAttachmentDescriptor) AlphaBlendOperation() MTLBlendOperation {
 	return MTLBlendOperation(x.inner.AlphaBlendOperation())
@@ -171,6 +205,8 @@ func (x *RenderPipelineColorAttachmentDescriptor) SetAlphaBlendOperation(alphaBl
 	x.inner.SetAlphaBlendOperation(raw.MTLBlendOperation(alphaBlendOperation))
 }
 
+// Defaults to MTLColorWriteMaskAll
+//
 // WriteMask calls the underlying WriteMask.
 func (x *RenderPipelineColorAttachmentDescriptor) WriteMask() MTLColorWriteMask {
 	return MTLColorWriteMask(x.inner.WriteMask())

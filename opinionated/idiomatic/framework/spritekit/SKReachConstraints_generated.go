@@ -36,18 +36,24 @@ func NewReachConstraintsWithLowerAngleLimitUpperAngleLimit(lowerAngleLimit float
 	return &ReachConstraints{inner: raw.SKReachConstraintsFromID(_id)}
 }
 
+// Lower angle limit in radians
+//
 // WithLowerAngleLimit sets the lowerAngleLimit property and returns the receiver for chaining.
 func (x *ReachConstraints) WithLowerAngleLimit(lowerAngleLimit float64) *ReachConstraints {
 	x.inner.SetLowerAngleLimit(lowerAngleLimit)
 	return x
 }
 
+// Upper angle limit in radians
+//
 // WithUpperAngleLimit sets the upperAngleLimit property and returns the receiver for chaining.
 func (x *ReachConstraints) WithUpperAngleLimit(upperAngleLimit float64) *ReachConstraints {
 	x.inner.SetUpperAngleLimit(upperAngleLimit)
 	return x
 }
 
+// Lower angle limit in radians
+//
 // LowerAngleLimit calls the underlying LowerAngleLimit.
 func (x *ReachConstraints) LowerAngleLimit() float64 {
 	return x.inner.LowerAngleLimit()
@@ -58,6 +64,8 @@ func (x *ReachConstraints) SetLowerAngleLimit(lowerAngleLimit float64) {
 	x.inner.SetLowerAngleLimit(lowerAngleLimit)
 }
 
+// Upper angle limit in radians
+//
 // UpperAngleLimit calls the underlying UpperAngleLimit.
 func (x *ReachConstraints) UpperAngleLimit() float64 {
 	return x.inner.UpperAngleLimit()

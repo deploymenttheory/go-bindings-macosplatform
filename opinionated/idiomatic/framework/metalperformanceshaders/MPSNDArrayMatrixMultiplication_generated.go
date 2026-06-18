@@ -38,36 +38,48 @@ func NewNDArrayMatrixMultiplication() *NDArrayMatrixMultiplication {
 	return &NDArrayMatrixMultiplication{inner: raw.MPSNDArrayMatrixMultiplicationFromID(_id)}
 }
 
+// @property   alpha @discussion The scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *NDArrayMatrixMultiplication) WithAlpha(alpha float64) *NDArrayMatrixMultiplication {
 	x.inner.SetAlpha(alpha)
 	return x
 }
 
+// @property   beta @discussion The scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+//
 // WithBeta sets the beta property and returns the receiver for chaining.
 func (x *NDArrayMatrixMultiplication) WithBeta(beta float64) *NDArrayMatrixMultiplication {
 	x.inner.SetBeta(beta)
 	return x
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
 func (x *NDArrayMatrixMultiplication) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayMatrixMultiplication {
 	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *NDArrayMatrixMultiplication) WithOptions(options mpscore.MPSKernelOptions) *NDArrayMatrixMultiplication {
 	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NDArrayMatrixMultiplication) WithLabel(label string) *NDArrayMatrixMultiplication {
 	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   alpha @discussion The scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+//
 // Alpha calls the underlying Alpha.
 func (x *NDArrayMatrixMultiplication) Alpha() float64 {
 	return x.inner.Alpha()
@@ -78,6 +90,8 @@ func (x *NDArrayMatrixMultiplication) SetAlpha(alpha float64) {
 	x.inner.SetAlpha(alpha)
 }
 
+// @property   beta @discussion The scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+//
 // Beta calls the underlying Beta.
 func (x *NDArrayMatrixMultiplication) Beta() float64 {
 	return x.inner.Beta()

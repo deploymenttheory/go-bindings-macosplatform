@@ -373,8 +373,17 @@ func (x *Array) WriteToURLAtomically(url string, atomically bool) bool {
 }
 
 // PathsMatchingExtensions calls the underlying PathsMatchingExtensions.
-func (x *Array) PathsMatchingExtensions(filterTypes *raw.NSArray[*raw.NSString]) *raw.NSArray[*raw.NSString] {
-	return x.inner.PathsMatchingExtensions(filterTypes)
+func (x *Array) PathsMatchingExtensions(filterTypes ...StringProvider) *raw.NSArray[*raw.NSString] {
+	_ptrs := make([]objc.ID, len(filterTypes))
+	for _i, _v := range filterTypes {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	return x.inner.PathsMatchingExtensions(_arg0)
 }
 
 // AddObserverToObjectsAtIndexesForKeyPathOptionsContext calls the underlying AddObserverToObjectsAtIndexesForKeyPathOptionsContext.
@@ -458,7 +467,7 @@ type Arrayable interface {
 	GetObjects(objects unsafe.Pointer)
 	WriteToFileAtomically(path string, useAuxiliaryFile bool) bool
 	WriteToURLAtomically(url string, atomically bool) bool
-	PathsMatchingExtensions(filterTypes *raw.NSArray[*raw.NSString]) *raw.NSArray[*raw.NSString]
+	PathsMatchingExtensions(filterTypes ...StringProvider) *raw.NSArray[*raw.NSString]
 	AddObserverToObjectsAtIndexesForKeyPathOptionsContext(observer *raw.NSObject, indexes *raw.NSIndexSet, keyPath string, options NSKeyValueObservingOptions, context_ unsafe.Pointer)
 	RemoveObserverFromObjectsAtIndexesForKeyPathContext(observer *raw.NSObject, indexes *raw.NSIndexSet, keyPath string, context_ unsafe.Pointer)
 	RemoveObserverFromObjectsAtIndexesForKeyPath(observer *raw.NSObject, indexes *raw.NSIndexSet, keyPath string)

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class for an audio output stream sink.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzaudiooutputstreamsink
 type VZAudioOutputStreamSink struct {
 	foundation.NSObject

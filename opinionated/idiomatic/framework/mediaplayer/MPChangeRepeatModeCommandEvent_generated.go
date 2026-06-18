@@ -35,11 +35,15 @@ func NewChangeRepeatModeCommandEvent() *ChangeRepeatModeCommandEvent {
 	return &ChangeRepeatModeCommandEvent{inner: raw.MPChangeRepeatModeCommandEventFromID(_id)}
 }
 
+// The desired repeat type to use when fulfilling the request.
+//
 // RepeatType calls the underlying RepeatType.
 func (x *ChangeRepeatModeCommandEvent) RepeatType() MPRepeatType {
 	return MPRepeatType(x.inner.RepeatType())
 }
 
+// Whether or not the selection should be preserved between playback sessions
+//
 // PreservesRepeatMode calls the underlying PreservesRepeatMode.
 func (x *ChangeRepeatModeCommandEvent) PreservesRepeatMode() bool {
 	return x.inner.PreservesRepeatMode()

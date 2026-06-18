@@ -37,11 +37,15 @@ func NewDiagnostic() *Diagnostic {
 	return &Diagnostic{inner: raw.MXDiagnosticFromID(_id)}
 }
 
+// @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this diagnostic. @result        An NSData object containing the JSON representation
+//
 // JSONRepresentation calls the underlying JSONRepresentation.
 func (x *Diagnostic) JSONRepresentation() *foundation.NSData {
 	return x.inner.JSONRepresentation()
 }
 
+// @method        dictionaryRepresentation @abstract      Convenience method to return a NSDictionary representation of this diagnostic. @result        An NSDictionary object containing the dictionary representation
+//
 // DictionaryRepresentation calls the underlying DictionaryRepresentation.
 func (x *Diagnostic) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.DictionaryRepresentation()
@@ -56,6 +60,8 @@ func (x *Diagnostic) MetaData() *MetaData {
 	return &MetaData{inner: _r}
 }
 
+// @property      applicationVersion @abstract      An NSString representation of the application version from which this diagnostic was generated.
+//
 // ApplicationVersion calls the underlying ApplicationVersion.
 func (x *Diagnostic) ApplicationVersion() string {
 	_r := x.inner.ApplicationVersion()

@@ -40,24 +40,32 @@ func NewNEVPNIKEv2SecurityAssociationParameters() *NEVPNIKEv2SecurityAssociation
 	return &NEVPNIKEv2SecurityAssociationParameters{inner: raw.NEVPNIKEv2SecurityAssociationParametersFromID(_id)}
 }
 
+// @property encryptionAlgorithm @discussion The algorithm used by the Security Association to encrypt and decrypt data. On macOS and iOS, the default is NEVPNIKEv2EncryptionAlgorithmAES256 starting in macOS 11 and iOS 14. Prior to that the default was NEVPNIKEv2EncryptionAlgorithm3DES. On tvOS, the default is NEVPNIKEv2EncryptionAlgorithmAES256GCM.
+//
 // WithEncryptionAlgorithm sets the encryptionAlgorithm property and returns the receiver for chaining.
 func (x *NEVPNIKEv2SecurityAssociationParameters) WithEncryptionAlgorithm(encryptionAlgorithm NEVPNIKEv2EncryptionAlgorithm) *NEVPNIKEv2SecurityAssociationParameters {
 	x.inner.SetEncryptionAlgorithm(raw.NEVPNIKEv2EncryptionAlgorithm(encryptionAlgorithm))
 	return x
 }
 
+// @property integrityAlgorithm @discussion The algorithm used by the Security Association to verify the integrity of data.  The IKE psedo-random function algorithm will be inferred based on the integrity algorithm. Default is NEVPNIKEv2IntegrityAlgorithmSHA256 starting in macOS 11, iOS 14, and tvOS 17.  Prior to that the default was NEVPNIKEv2IntegrityAlgorithmSHA96.
+//
 // WithIntegrityAlgorithm sets the integrityAlgorithm property and returns the receiver for chaining.
 func (x *NEVPNIKEv2SecurityAssociationParameters) WithIntegrityAlgorithm(integrityAlgorithm NEVPNIKEv2IntegrityAlgorithm) *NEVPNIKEv2SecurityAssociationParameters {
 	x.inner.SetIntegrityAlgorithm(raw.NEVPNIKEv2IntegrityAlgorithm(integrityAlgorithm))
 	return x
 }
 
+// @property diffieHellmanGroup @discussion The Diffie Hellman group used by the Security Association. Default is NEVPNIKEv2DiffieHellmanGroup14 starting in macOS 11, iOS 14, and tvOS 17. Prior to that the default was NEVPNIKEv2DiffieHellmanGroup2.
+//
 // WithDiffieHellmanGroup sets the diffieHellmanGroup property and returns the receiver for chaining.
 func (x *NEVPNIKEv2SecurityAssociationParameters) WithDiffieHellmanGroup(diffieHellmanGroup NEVPNIKEv2DiffieHellmanGroup) *NEVPNIKEv2SecurityAssociationParameters {
 	x.inner.SetDiffieHellmanGroup(raw.NEVPNIKEv2DiffieHellmanGroup(diffieHellmanGroup))
 	return x
 }
 
+// @property postQuantumKeyExchangeMethods @discussion The post-quantum key exchange method(s) used by the Security Association, if any. Values are taken from NEVPNIKEv2PostQuantumKeyExchangeMethod. Up to 7 methods may be specified, mapping to ADDKE1 - ADDKE7 from RFC 9370.
+//
 // WithPostQuantumKeyExchangeMethods sets the collection, converting the Go slice to an NSArray.
 func (x *NEVPNIKEv2SecurityAssociationParameters) WithPostQuantumKeyExchangeMethods(items ...*foundation.NSNumber) *NEVPNIKEv2SecurityAssociationParameters {
 	if len(items) == 0 {
@@ -76,12 +84,16 @@ func (x *NEVPNIKEv2SecurityAssociationParameters) WithPostQuantumKeyExchangeMeth
 	return x
 }
 
+// @property lifetimeMinutes @discussion The life time of the Security Association, in minutes. Default is 60 for IKE Security Associations, and 30 for Child Security Associations. Before the lifetime is reached, IKEv2 will attempt to rekey the Security Association to maintain the connection.
+//
 // WithLifetimeMinutes sets the lifetimeMinutes property and returns the receiver for chaining.
 func (x *NEVPNIKEv2SecurityAssociationParameters) WithLifetimeMinutes(lifetimeMinutes int32) *NEVPNIKEv2SecurityAssociationParameters {
 	x.inner.SetLifetimeMinutes(lifetimeMinutes)
 	return x
 }
 
+// @property encryptionAlgorithm @discussion The algorithm used by the Security Association to encrypt and decrypt data. On macOS and iOS, the default is NEVPNIKEv2EncryptionAlgorithmAES256 starting in macOS 11 and iOS 14. Prior to that the default was NEVPNIKEv2EncryptionAlgorithm3DES. On tvOS, the default is NEVPNIKEv2EncryptionAlgorithmAES256GCM.
+//
 // EncryptionAlgorithm calls the underlying EncryptionAlgorithm.
 func (x *NEVPNIKEv2SecurityAssociationParameters) EncryptionAlgorithm() NEVPNIKEv2EncryptionAlgorithm {
 	return NEVPNIKEv2EncryptionAlgorithm(x.inner.EncryptionAlgorithm())
@@ -92,6 +104,8 @@ func (x *NEVPNIKEv2SecurityAssociationParameters) SetEncryptionAlgorithm(encrypt
 	x.inner.SetEncryptionAlgorithm(raw.NEVPNIKEv2EncryptionAlgorithm(encryptionAlgorithm))
 }
 
+// @property integrityAlgorithm @discussion The algorithm used by the Security Association to verify the integrity of data.  The IKE psedo-random function algorithm will be inferred based on the integrity algorithm. Default is NEVPNIKEv2IntegrityAlgorithmSHA256 starting in macOS 11, iOS 14, and tvOS 17.  Prior to that the default was NEVPNIKEv2IntegrityAlgorithmSHA96.
+//
 // IntegrityAlgorithm calls the underlying IntegrityAlgorithm.
 func (x *NEVPNIKEv2SecurityAssociationParameters) IntegrityAlgorithm() NEVPNIKEv2IntegrityAlgorithm {
 	return NEVPNIKEv2IntegrityAlgorithm(x.inner.IntegrityAlgorithm())
@@ -102,6 +116,8 @@ func (x *NEVPNIKEv2SecurityAssociationParameters) SetIntegrityAlgorithm(integrit
 	x.inner.SetIntegrityAlgorithm(raw.NEVPNIKEv2IntegrityAlgorithm(integrityAlgorithm))
 }
 
+// @property diffieHellmanGroup @discussion The Diffie Hellman group used by the Security Association. Default is NEVPNIKEv2DiffieHellmanGroup14 starting in macOS 11, iOS 14, and tvOS 17. Prior to that the default was NEVPNIKEv2DiffieHellmanGroup2.
+//
 // DiffieHellmanGroup calls the underlying DiffieHellmanGroup.
 func (x *NEVPNIKEv2SecurityAssociationParameters) DiffieHellmanGroup() NEVPNIKEv2DiffieHellmanGroup {
 	return NEVPNIKEv2DiffieHellmanGroup(x.inner.DiffieHellmanGroup())
@@ -112,6 +128,8 @@ func (x *NEVPNIKEv2SecurityAssociationParameters) SetDiffieHellmanGroup(diffieHe
 	x.inner.SetDiffieHellmanGroup(raw.NEVPNIKEv2DiffieHellmanGroup(diffieHellmanGroup))
 }
 
+// @property postQuantumKeyExchangeMethods @discussion The post-quantum key exchange method(s) used by the Security Association, if any. Values are taken from NEVPNIKEv2PostQuantumKeyExchangeMethod. Up to 7 methods may be specified, mapping to ADDKE1 - ADDKE7 from RFC 9370.
+//
 // PostQuantumKeyExchangeMethods returns the collection as a Go slice.
 func (x *NEVPNIKEv2SecurityAssociationParameters) PostQuantumKeyExchangeMethods() []*foundation.NSNumber {
 	arr := x.inner.PostQuantumKeyExchangeMethods()
@@ -128,6 +146,8 @@ func (x *NEVPNIKEv2SecurityAssociationParameters) SetPostQuantumKeyExchangeMetho
 	x.inner.SetPostQuantumKeyExchangeMethods(postQuantumKeyExchangeMethods)
 }
 
+// @property lifetimeMinutes @discussion The life time of the Security Association, in minutes. Default is 60 for IKE Security Associations, and 30 for Child Security Associations. Before the lifetime is reached, IKEv2 will attempt to rekey the Security Association to maintain the connection.
+//
 // LifetimeMinutes calls the underlying LifetimeMinutes.
 func (x *NEVPNIKEv2SecurityAssociationParameters) LifetimeMinutes() int32 {
 	return x.inner.LifetimeMinutes()

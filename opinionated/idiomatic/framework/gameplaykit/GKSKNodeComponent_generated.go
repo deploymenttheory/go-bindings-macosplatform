@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A component that encapsulates a SpriteKit node.
+//
 // SKNodeComponent wraps [raw.GKSKNodeComponent] with a fluent Go API.
 type SKNodeComponent struct {
 	inner *raw.GKSKNodeComponent
@@ -30,6 +32,8 @@ func SKNodeComponentFromID(id objc.ID) *SKNodeComponent {
 	return &SKNodeComponent{inner: raw.GKSKNodeComponentFromID(id)}
 }
 
+// Initializes component to encapsulate the given SpriteKit node. When the component is added to an entity, the SKNode's entity property will be set. @param node Node to associate with the component. @see SKNode.entity
+//
 // NewSKNodeComponentWithNode creates a new [SKNodeComponent].
 func NewSKNodeComponentWithNode(node *spritekit.SKNode) *SKNodeComponent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKSKNodeComponent")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewSKNodeComponentWithNode(node *spritekit.SKNode) *SKNodeComponent {
 	return &SKNodeComponent{inner: raw.GKSKNodeComponentFromID(_id)}
 }
 
+// The SpriteKit node this component encapsulates.
+//
 // WithNode sets the node property and returns the receiver for chaining.
 func (x *SKNodeComponent) WithNode(node *spritekit.SKNode) *SKNodeComponent {
 	x.inner.SetNode(node)

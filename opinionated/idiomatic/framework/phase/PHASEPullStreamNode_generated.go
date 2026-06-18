@@ -36,6 +36,8 @@ func NewPullStreamNode() *PullStreamNode {
 	return &PullStreamNode{inner: raw.PHASEPullStreamNodeFromID(_id)}
 }
 
+// @property renderBlock @abstract A property to set the render block callback that will render the samplesIW @discussion The renderBlock must be set before the PHASESoundEvent is prepared or started.  The callback will be called from a high priority realtime thread. Your implementation must be performant and not perform any realtime unsafe operations such as lock mutexes or allocate memory.
+//
 // WithRenderBlock sets the renderBlock property and returns the receiver for chaining.
 func (x *PullStreamNode) WithRenderBlock(renderBlock func(*bool, *coreaudiotypes.AudioTimeStamp, uint32, *coreaudiotypes.AudioBufferList) int) *PullStreamNode {
 	x.inner.SetRenderBlock(renderBlock)

@@ -38,96 +38,128 @@ func NewMTL4AccelerationStructureTriangleGeometryDescriptor() *MTL4AccelerationS
 	return &MTL4AccelerationStructureTriangleGeometryDescriptor{inner: raw.MTL4AccelerationStructureTriangleGeometryDescriptorFromID(_id)}
 }
 
+// Associates a vertex buffer containing triangle vertices. You are responsible for ensuring that the format of all vertex positions match the “vertexFormat“ property, and that the buffer address for the buffer range is not zero.
+//
 // WithVertexBuffer sets the vertexBuffer property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithVertexBuffer(vertexBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.SetVertexBuffer(vertexBuffer)
 	return x
 }
 
+// Describes the format of the vertices in the vertex buffer. This property controls the format of the position attribute of the vertices the “vertexBuffer“ references. The format defaults to `MTLAttributeFormatFloat3`, corresponding to three packed floating point numbers.
+//
 // WithVertexFormat sets the vertexFormat property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithVertexFormat(vertexFormat MTLAttributeFormat) *MTL4AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.SetVertexFormat(raw.MTLAttributeFormat(vertexFormat))
 	return x
 }
 
+// Sets the stride, in bytes, between vertices in the vertex buffer. The stride you specify needs to be a multiple of the size of the vertex format you provide in the “vertexFormat“ property. Similarly, you are responsible for ensuring this stride matches the vertex format data type's alignment. Defaults to `0`, which signals the stride matches the size of the “vertexFormat“ data.
+//
 // WithVertexStride sets the vertexStride property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithVertexStride(vertexStride uint) *MTL4AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.SetVertexStride(vertexStride)
 	return x
 }
 
+// Sets an optional index buffer containing references to vertices in the `vertexBuffer`. You can set this property to `0`, the default, to avoid specifying an index buffer.
+//
 // WithIndexBuffer sets the indexBuffer property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithIndexBuffer(indexBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.SetIndexBuffer(indexBuffer)
 	return x
 }
 
+// Configures the size of the indices the `indexBuffer` contains, which is typically either 16 or 32-bits for each index.
+//
 // WithIndexType sets the indexType property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithIndexType(indexType MTLIndexType) *MTL4AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.SetIndexType(raw.MTLIndexType(indexType))
 	return x
 }
 
+// Declares the number of triangles in this geometry descriptor.
+//
 // WithTriangleCount sets the triangleCount property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithTriangleCount(triangleCount uint) *MTL4AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.SetTriangleCount(triangleCount)
 	return x
 }
 
+// Assigns an optional reference to a buffer containing a `float4x3` transformation matrix. When the buffer address is non-zero, Metal applies this transform to the vertex data positions when building the acceleration structure. Building an acceleration structure with a descriptor that specifies this property doesn't modify the contents of the input `vertexBuffer`.
+//
 // WithTransformationMatrixBuffer sets the transformationMatrixBuffer property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithTransformationMatrixBuffer(transformationMatrixBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.SetTransformationMatrixBuffer(transformationMatrixBuffer)
 	return x
 }
 
+// Configures the layout for the transformation matrix in the transformation matrix buffer. You can provide matrices in column-major or row-major form, and this property allows you to control how Metal interprets them. Defaults to `MTLMatrixLayoutColumnMajor`.
+//
 // WithTransformationMatrixLayout sets the transformationMatrixLayout property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithTransformationMatrixLayout(transformationMatrixLayout MTLMatrixLayout) *MTL4AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.SetTransformationMatrixLayout(raw.MTLMatrixLayout(transformationMatrixLayout))
 	return x
 }
 
+// Sets the offset that this geometry contributes to determining the intersection function to invoke when a ray intersects it. When you perform a ray tracing operation in the Metal Shading Language, and provide the ray intersector object with an instance of “MTLIntersectionFunctionTable“, Metal adds this offset to the instance offset from structs such as: - “MTLAccelerationStructureInstanceDescriptor“ - “MTLAccelerationStructureUserIDInstanceDescriptor“ - “MTLAccelerationStructureMotionInstanceDescriptor“ - “MTLIndirectAccelerationStructureInstanceDescriptor“ - “MTLIndirectAccelerationStructureMotionInstanceDescriptor“ The sum of these offsets provides an index into the intersection function table that the ray tracing system uses to retrieve and invoke the function at this index, allowing you to customize the intersection evaluation process.
+//
 // WithIntersectionFunctionTableOffset sets the intersectionFunctionTableOffset property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *MTL4AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset)
 	return x
 }
 
+// Provides a hint to Metal that this geometry is opaque, potentially accelerating the ray/primitive intersection process.
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithOpaque(opaque bool) *MTL4AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetOpaque(opaque)
 	return x
 }
 
+// A boolean value that indicates whether the ray-tracing system in Metal allows the invocation of intersection functions more than once per ray-primitive intersection. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+//
 // WithAllowDuplicateIntersectionFunctionInvocation sets the allowDuplicateIntersectionFunctionInvocation property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation)
 	return x
 }
 
+// Assigns an optional label you can assign to this geometry for debugging purposes.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithLabel(label string) *MTL4AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// Assigns optional buffer containing data to associate with each primitive in this geometry. You can use zero as the buffer address in this buffer range.
+//
 // WithPrimitiveDataBuffer sets the primitiveDataBuffer property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetPrimitiveDataBuffer(primitiveDataBuffer)
 	return x
 }
 
+// Defines the stride, in bytes, between each primitive's data in the primitive data buffer “primitiveDataBuffer“ references. You are responsible for ensuring the stride is at least “primitiveDataElementSize“ in size and a multiple of 4 bytes. This property defaults to `0` bytes,  which indicates the stride is equal to “primitiveDataElementSize“.
+//
 // WithPrimitiveDataStride sets the primitiveDataStride property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride uint) *MTL4AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetPrimitiveDataStride(primitiveDataStride)
 	return x
 }
 
+// Sets the size, in bytes, of the data for each primitive in the primitive data buffer “primitiveDataBuffer“ references. This size needs to be at most “primitiveDataStride“ in size and a multiple of 4 bytes. This property defaults to 0 bytes.
+//
 // WithPrimitiveDataElementSize sets the primitiveDataElementSize property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize uint) *MTL4AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetPrimitiveDataElementSize(primitiveDataElementSize)
 	return x
 }
 
+// Associates a vertex buffer containing triangle vertices. You are responsible for ensuring that the format of all vertex positions match the “vertexFormat“ property, and that the buffer address for the buffer range is not zero.
+//
 // VertexBuffer calls the underlying VertexBuffer.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) VertexBuffer() raw.MTL4BufferRange {
 	return x.inner.VertexBuffer()
@@ -138,6 +170,8 @@ func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) SetVertexBuffer(ve
 	x.inner.SetVertexBuffer(vertexBuffer)
 }
 
+// Describes the format of the vertices in the vertex buffer. This property controls the format of the position attribute of the vertices the “vertexBuffer“ references. The format defaults to `MTLAttributeFormatFloat3`, corresponding to three packed floating point numbers.
+//
 // VertexFormat calls the underlying VertexFormat.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) VertexFormat() MTLAttributeFormat {
 	return MTLAttributeFormat(x.inner.VertexFormat())
@@ -148,6 +182,8 @@ func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) SetVertexFormat(ve
 	x.inner.SetVertexFormat(raw.MTLAttributeFormat(vertexFormat))
 }
 
+// Sets the stride, in bytes, between vertices in the vertex buffer. The stride you specify needs to be a multiple of the size of the vertex format you provide in the “vertexFormat“ property. Similarly, you are responsible for ensuring this stride matches the vertex format data type's alignment. Defaults to `0`, which signals the stride matches the size of the “vertexFormat“ data.
+//
 // VertexStride calls the underlying VertexStride.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) VertexStride() uint {
 	return x.inner.VertexStride()
@@ -158,6 +194,8 @@ func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) SetVertexStride(ve
 	x.inner.SetVertexStride(vertexStride)
 }
 
+// Sets an optional index buffer containing references to vertices in the `vertexBuffer`. You can set this property to `0`, the default, to avoid specifying an index buffer.
+//
 // IndexBuffer calls the underlying IndexBuffer.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) IndexBuffer() raw.MTL4BufferRange {
 	return x.inner.IndexBuffer()
@@ -168,6 +206,8 @@ func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) SetIndexBuffer(ind
 	x.inner.SetIndexBuffer(indexBuffer)
 }
 
+// Configures the size of the indices the `indexBuffer` contains, which is typically either 16 or 32-bits for each index.
+//
 // IndexType calls the underlying IndexType.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) IndexType() MTLIndexType {
 	return MTLIndexType(x.inner.IndexType())
@@ -178,6 +218,8 @@ func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) SetIndexType(index
 	x.inner.SetIndexType(raw.MTLIndexType(indexType))
 }
 
+// Declares the number of triangles in this geometry descriptor.
+//
 // TriangleCount calls the underlying TriangleCount.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) TriangleCount() uint {
 	return x.inner.TriangleCount()
@@ -188,6 +230,8 @@ func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) SetTriangleCount(t
 	x.inner.SetTriangleCount(triangleCount)
 }
 
+// Assigns an optional reference to a buffer containing a `float4x3` transformation matrix. When the buffer address is non-zero, Metal applies this transform to the vertex data positions when building the acceleration structure. Building an acceleration structure with a descriptor that specifies this property doesn't modify the contents of the input `vertexBuffer`.
+//
 // TransformationMatrixBuffer calls the underlying TransformationMatrixBuffer.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) TransformationMatrixBuffer() raw.MTL4BufferRange {
 	return x.inner.TransformationMatrixBuffer()
@@ -198,6 +242,8 @@ func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) SetTransformationM
 	x.inner.SetTransformationMatrixBuffer(transformationMatrixBuffer)
 }
 
+// Configures the layout for the transformation matrix in the transformation matrix buffer. You can provide matrices in column-major or row-major form, and this property allows you to control how Metal interprets them. Defaults to `MTLMatrixLayoutColumnMajor`.
+//
 // TransformationMatrixLayout calls the underlying TransformationMatrixLayout.
 func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) TransformationMatrixLayout() MTLMatrixLayout {
 	return MTLMatrixLayout(x.inner.TransformationMatrixLayout())

@@ -36,6 +36,8 @@ func NewDomainState() *DomainState {
 	return &DomainState{inner: raw.LADomainStateFromID(_id)}
 }
 
+// Contains biometric domain state.
+//
 // Biometry calls the underlying Biometry.
 func (x *DomainState) Biometry() *DomainStateBiometry {
 	_r := x.inner.Biometry()
@@ -45,6 +47,8 @@ func (x *DomainState) Biometry() *DomainStateBiometry {
 	return &DomainStateBiometry{inner: _r}
 }
 
+// Contains companion domain state.
+//
 // Companion calls the underlying Companion.
 func (x *DomainState) Companion() *DomainStateCompanion {
 	_r := x.inner.Companion()
@@ -54,6 +58,8 @@ func (x *DomainState) Companion() *DomainStateCompanion {
 	return &DomainStateCompanion{inner: _r}
 }
 
+// Contains combined state hash data for biometry and companion state hashes. @warning Please note that the value returned by this property can change exceptionally between major OS versions even if the list of paired companions has not changed.
+//
 // StateHash calls the underlying StateHash.
 func (x *DomainState) StateHash() *foundation.NSData {
 	return x.inner.StateHash()

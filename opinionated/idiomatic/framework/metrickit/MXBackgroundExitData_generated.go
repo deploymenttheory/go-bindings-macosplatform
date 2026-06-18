@@ -35,51 +35,71 @@ func NewBackgroundExitData() *BackgroundExitData {
 	return &BackgroundExitData{inner: raw.MXBackgroundExitDataFromID(_id)}
 }
 
+// @property      cumulativeNormalAppExitCount @abstract      Cumulative number of times the application exited normally, or was gracefully terminated by the system.
+//
 // CumulativeNormalAppExitCount calls the underlying CumulativeNormalAppExitCount.
 func (x *BackgroundExitData) CumulativeNormalAppExitCount() uint {
 	return x.inner.CumulativeNormalAppExitCount()
 }
 
+// @property      cumulativeMemoryResourceLimitExitCount @abstract      Cumulative number of times the application was terminated for exceeding a memory consumption limit.
+//
 // CumulativeMemoryResourceLimitExitCount calls the underlying CumulativeMemoryResourceLimitExitCount.
 func (x *BackgroundExitData) CumulativeMemoryResourceLimitExitCount() uint {
 	return x.inner.CumulativeMemoryResourceLimitExitCount()
 }
 
+// @property      cumulativeCPUResourceLimitExitCount @abstract      Cumulative number of times the application was terminated for exceeding a CPU consumption limit.
+//
 // CumulativeCPUResourceLimitExitCount calls the underlying CumulativeCPUResourceLimitExitCount.
 func (x *BackgroundExitData) CumulativeCPUResourceLimitExitCount() uint {
 	return x.inner.CumulativeCPUResourceLimitExitCount()
 }
 
+// @property      cumulativeMemoryPressureExitCount @abstract      Cumulative number of times the application exited due to memory pressure on the system.
+//
 // CumulativeMemoryPressureExitCount calls the underlying CumulativeMemoryPressureExitCount.
 func (x *BackgroundExitData) CumulativeMemoryPressureExitCount() uint {
 	return x.inner.CumulativeMemoryPressureExitCount()
 }
 
+// @property      cumulativeBadAccessExitCount @abstract      Cumulative number of times the application was terminated for attempting to access invalid memory, or attempting to access memory in a manner not allowed by the memory's protection level (e.g. writing to read-only memory).
+//
 // CumulativeBadAccessExitCount calls the underlying CumulativeBadAccessExitCount.
 func (x *BackgroundExitData) CumulativeBadAccessExitCount() uint {
 	return x.inner.CumulativeBadAccessExitCount()
 }
 
+// @property      cumulativeAbnormalExitCount @abstract      Cumulative number of times the application exited abnormally. @discussion    The most common causes of crashes with this exception type are uncaught Objective-C/C++ exceptions and calls to abort().
+//
 // CumulativeAbnormalExitCount calls the underlying CumulativeAbnormalExitCount.
 func (x *BackgroundExitData) CumulativeAbnormalExitCount() uint {
 	return x.inner.CumulativeAbnormalExitCount()
 }
 
+// @property      cumulativeIllegalInstructionExitCount @abstract      Cumulative number of times the application terminated for attempting to execute an illegal or undefined instruction. @discussion    The process may have attempted to jump to an invalid address via a misconfigured function pointer.
+//
 // CumulativeIllegalInstructionExitCount calls the underlying CumulativeIllegalInstructionExitCount.
 func (x *BackgroundExitData) CumulativeIllegalInstructionExitCount() uint {
 	return x.inner.CumulativeIllegalInstructionExitCount()
 }
 
+// @property      cumulativeAppWatchdogExitCount @abstract      Cumulative number of times the application was terminated because a watchdog timeout occured. @discussion    These can occur when the application took too long to launch, terminate, or respond to system events.
+//
 // CumulativeAppWatchdogExitCount calls the underlying CumulativeAppWatchdogExitCount.
 func (x *BackgroundExitData) CumulativeAppWatchdogExitCount() uint {
 	return x.inner.CumulativeAppWatchdogExitCount()
 }
 
+// @property      cumulativeSuspendedWithLockedFileExitCount @abstract      Cumulative number of times the application was terminated because it became suspended while holding onto file locks or sqlite database locks. @discussion    If your application is performing operations on a locked file or sqlite database at suspension time, it must request additional background execution time to complete those operations and relinquish the lock before suspending.
+//
 // CumulativeSuspendedWithLockedFileExitCount calls the underlying CumulativeSuspendedWithLockedFileExitCount.
 func (x *BackgroundExitData) CumulativeSuspendedWithLockedFileExitCount() uint {
 	return x.inner.CumulativeSuspendedWithLockedFileExitCount()
 }
 
+// @property      cumulativeBackgroundTaskAssertionTimeoutExitCount @abstract      Cumulative number of times the application was terminated for exceeding the alotted time limit associated with a background tasks. @discussion    If your application begins a background task, you must call endBackgroundTask() to signal completion of the task to prevent your application from being terminated. You can do this in the expiration handler of the task, but it must be done immediately.
+//
 // CumulativeBackgroundTaskAssertionTimeoutExitCount calls the underlying CumulativeBackgroundTaskAssertionTimeoutExitCount.
 func (x *BackgroundExitData) CumulativeBackgroundTaskAssertionTimeoutExitCount() uint {
 	return x.inner.CumulativeBackgroundTaskAssertionTimeoutExitCount()

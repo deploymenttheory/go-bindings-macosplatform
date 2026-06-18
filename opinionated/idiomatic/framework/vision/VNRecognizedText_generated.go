@@ -37,6 +37,8 @@ func NewRecognizedText() *RecognizedText {
 	return &RecognizedText{inner: raw.VNRecognizedTextFromID(_id)}
 }
 
+// @brief Calculate the bounding box around the characters in the range of the string. @discussion The bounding boxes are not guaranteed to be an exact fit around the characters and are purely meant for UI purposes and not for image processing.
+//
 // BoundingBoxForRangeError calls the underlying BoundingBoxForRangeError.
 func (x *RecognizedText) BoundingBoxForRangeError(range_ foundation.NSRange) (*RectangleObservation, error) {
 	_r, _err := x.inner.BoundingBoxForRangeError(range_)
@@ -49,6 +51,8 @@ func (x *RecognizedText) BoundingBoxForRangeError(range_ foundation.NSRange) (*R
 	return &RectangleObservation{inner: _r}, nil
 }
 
+// @brief        Field that contains recognized text. @discussion   This is the top candidate of the recognized text.
+//
 // String calls the underlying String.
 func (x *RecognizedText) String() string {
 	_r := x.inner.String()
@@ -58,6 +62,8 @@ func (x *RecognizedText) String() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @brief The level of confidence normalized to [0.0, 1.0] where 1.0 is most confident
+//
 // Confidence calls the underlying Confidence.
 func (x *RecognizedText) Confidence() float32 {
 	return x.inner.Confidence()

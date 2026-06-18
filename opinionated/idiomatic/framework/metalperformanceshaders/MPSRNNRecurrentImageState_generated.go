@@ -43,17 +43,23 @@ func (x *RNNRecurrentImageState) WithReadCount(readCount uint) *RNNRecurrentImag
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *RNNRecurrentImageState) WithLabel(label string) *RNNRecurrentImageState {
 	x.inner.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @abstract   Access the stored recurrent image data. @param      layerIndex      Index of the layer whose to get - belongs to { 0, 1,...,@see numberOfLayers - 1 } @return     For valid layerIndex the recurrent output image data, otherwise nil.
+//
 // GetRecurrentOutputImageForLayerIndex calls the underlying GetRecurrentOutputImageForLayerIndex.
 func (x *RNNRecurrentImageState) GetRecurrentOutputImageForLayerIndex(layerIndex uint) *mpscore.MPSImage {
 	return x.inner.GetRecurrentOutputImageForLayerIndex(layerIndex)
 }
 
+// @abstract   Access the stored memory cell image data (if present). @param      layerIndex      Index of the layer whose to get - belongs to { 0, 1,...,@see numberOfLayers - 1 } @return     For valid layerIndex the memory cell image data, otherwise nil.
+//
 // GetMemoryCellImageForLayerIndex calls the underlying GetMemoryCellImageForLayerIndex.
 func (x *RNNRecurrentImageState) GetMemoryCellImageForLayerIndex(layerIndex uint) *mpscore.MPSImage {
 	return x.inner.GetMemoryCellImageForLayerIndex(layerIndex)

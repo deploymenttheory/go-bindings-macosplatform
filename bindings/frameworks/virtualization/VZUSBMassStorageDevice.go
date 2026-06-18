@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents a hot-pluggable USB mass storage device.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzusbmassstoragedevice
 type VZUSBMassStorageDevice struct {
 	VZStorageDevice
@@ -29,7 +31,7 @@ func VZUSBMassStorageDeviceFromID(id objc.ID) *VZUSBMassStorageDevice {
 	return o
 }
 
-// @abstract Initialize the runtime USB Mass Storage device object. @param configuration The configuration of the USB Mass Storage device. @see VZUSBMassStorageDeviceConfiguration
+// Creates a USB mass storage device with the provided configuration.
 func (o *VZUSBMassStorageDevice) InitWithConfiguration(configuration *VZUSBMassStorageDeviceConfiguration) *VZUSBMassStorageDevice {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZUSBMassStorageDeviceSelInitWithConfiguration, configuration.Ptr())
 	if _ret != 0 {

@@ -3,8 +3,12 @@
     Eight body shapes: (HasError yes/no) × (RetMode void|raw|string|trialwrap),
     where string converts *NSString→Go string and trialwrap wraps *raw.T→*T.
 */}}
-{{define "plain_method"}}// {{.GoName}} calls the underlying {{.RawGoName}}.
+{{define "plain_method"}}{{if .DocComment}}{{.DocComment}}//
+{{end}}// {{.GoName}} calls the underlying {{.RawGoName}}.
 func {{.Recv}}{{.GoName}}({{.ParamStr}}){{.RetSig}} {
+{{- if .Preamble}}
+{{.Preamble}}
+{{- end}}
 {{- if .HasError}}
 {{- if or (eq .RetMode "void") (eq .RetMode "raw")}}
 return {{.Call}}

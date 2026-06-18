@@ -40,6 +40,8 @@ func NewGraphDepthwiseConvolution3DOpDescriptor() *GraphDepthwiseConvolution3DOp
 	return &GraphDepthwiseConvolution3DOpDescriptor{inner: raw.MPSGraphDepthwiseConvolution3DOpDescriptorFromID(_id)}
 }
 
+// The strides for spatial dimensions. Must be three numbers, one for each spatial dimension, fastest running index last. Default value: `@[ @1, @1, @1 ]`
+//
 // WithStrides sets the collection, converting the Go slice to an NSArray.
 func (x *GraphDepthwiseConvolution3DOpDescriptor) WithStrides(items ...*foundation.NSNumber) *GraphDepthwiseConvolution3DOpDescriptor {
 	if len(items) == 0 {
@@ -58,6 +60,8 @@ func (x *GraphDepthwiseConvolution3DOpDescriptor) WithStrides(items ...*foundati
 	return x
 }
 
+// The dilation rates for spatial dimensions. Must be three numbers, one for each spatial dimension, fastest running index last. Default value: `@[ @1, @1, @1 ]`
+//
 // WithDilationRates sets the collection, converting the Go slice to an NSArray.
 func (x *GraphDepthwiseConvolution3DOpDescriptor) WithDilationRates(items ...*foundation.NSNumber) *GraphDepthwiseConvolution3DOpDescriptor {
 	if len(items) == 0 {
@@ -76,6 +80,8 @@ func (x *GraphDepthwiseConvolution3DOpDescriptor) WithDilationRates(items ...*fo
 	return x
 }
 
+// The padding values for spatial dimensions. Must be six numbers, two for each spatial dimension. For example `paddingValues[0]` defines the explicit padding amount before the first spatial dimension (slowest running index of spatial dimensions), `paddingValues[1]` defines the padding amount after the first spatial dimension etc. Use only with `paddingStyle = MPSGraphPaddingStyleExplicit`. Default value: `@[ @0, @0, @0, @0, @0, @0 ]`
+//
 // WithPaddingValues sets the collection, converting the Go slice to an NSArray.
 func (x *GraphDepthwiseConvolution3DOpDescriptor) WithPaddingValues(items ...*foundation.NSNumber) *GraphDepthwiseConvolution3DOpDescriptor {
 	if len(items) == 0 {
@@ -94,18 +100,24 @@ func (x *GraphDepthwiseConvolution3DOpDescriptor) WithPaddingValues(items ...*fo
 	return x
 }
 
+// The padding style for the operation. Default value: `MPSGraphPaddingStyleExplicit`.
+//
 // WithPaddingStyle sets the paddingStyle property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution3DOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphDepthwiseConvolution3DOpDescriptor {
 	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
 	return x
 }
 
+// The axis that contains the channels in the input and the weights, within the 4D tile of the last dimensions. For example the value of `-1` corresponds to `NDHWC`, `NHWC` layouts. This allows the placement of the channel index anywhere within the last 4 dimensions of the tensor. In case your weights are in a different layout you can bring them to the same layout as inputs using transposes or permutations. Default value: `-4`, corresponds to `NCDHW` and `CDHW` layouts.
+//
 // WithChannelDimensionIndex sets the channelDimensionIndex property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution3DOpDescriptor) WithChannelDimensionIndex(channelDimensionIndex int) *GraphDepthwiseConvolution3DOpDescriptor {
 	x.inner.SetChannelDimensionIndex(channelDimensionIndex)
 	return x
 }
 
+// The strides for spatial dimensions. Must be three numbers, one for each spatial dimension, fastest running index last. Default value: `@[ @1, @1, @1 ]`
+//
 // Strides returns the collection as a Go slice.
 func (x *GraphDepthwiseConvolution3DOpDescriptor) Strides() []*foundation.NSNumber {
 	arr := x.inner.Strides()
@@ -122,6 +134,8 @@ func (x *GraphDepthwiseConvolution3DOpDescriptor) SetStrides(strides *foundation
 	x.inner.SetStrides(strides)
 }
 
+// The dilation rates for spatial dimensions. Must be three numbers, one for each spatial dimension, fastest running index last. Default value: `@[ @1, @1, @1 ]`
+//
 // DilationRates returns the collection as a Go slice.
 func (x *GraphDepthwiseConvolution3DOpDescriptor) DilationRates() []*foundation.NSNumber {
 	arr := x.inner.DilationRates()
@@ -138,6 +152,8 @@ func (x *GraphDepthwiseConvolution3DOpDescriptor) SetDilationRates(dilationRates
 	x.inner.SetDilationRates(dilationRates)
 }
 
+// The padding values for spatial dimensions. Must be six numbers, two for each spatial dimension. For example `paddingValues[0]` defines the explicit padding amount before the first spatial dimension (slowest running index of spatial dimensions), `paddingValues[1]` defines the padding amount after the first spatial dimension etc. Use only with `paddingStyle = MPSGraphPaddingStyleExplicit`. Default value: `@[ @0, @0, @0, @0, @0, @0 ]`
+//
 // PaddingValues returns the collection as a Go slice.
 func (x *GraphDepthwiseConvolution3DOpDescriptor) PaddingValues() []*foundation.NSNumber {
 	arr := x.inner.PaddingValues()
@@ -154,6 +170,8 @@ func (x *GraphDepthwiseConvolution3DOpDescriptor) SetPaddingValues(paddingValues
 	x.inner.SetPaddingValues(paddingValues)
 }
 
+// The padding style for the operation. Default value: `MPSGraphPaddingStyleExplicit`.
+//
 // PaddingStyle calls the underlying PaddingStyle.
 func (x *GraphDepthwiseConvolution3DOpDescriptor) PaddingStyle() MPSGraphPaddingStyle {
 	return MPSGraphPaddingStyle(x.inner.PaddingStyle())
@@ -164,6 +182,8 @@ func (x *GraphDepthwiseConvolution3DOpDescriptor) SetPaddingStyle(paddingStyle M
 	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
 }
 
+// The axis that contains the channels in the input and the weights, within the 4D tile of the last dimensions. For example the value of `-1` corresponds to `NDHWC`, `NHWC` layouts. This allows the placement of the channel index anywhere within the last 4 dimensions of the tensor. In case your weights are in a different layout you can bring them to the same layout as inputs using transposes or permutations. Default value: `-4`, corresponds to `NCDHW` and `CDHW` layouts.
+//
 // ChannelDimensionIndex calls the underlying ChannelDimensionIndex.
 func (x *GraphDepthwiseConvolution3DOpDescriptor) ChannelDimensionIndex() int {
 	return x.inner.ChannelDimensionIndex()

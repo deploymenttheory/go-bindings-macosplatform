@@ -37,60 +37,80 @@ func NewBox() *Box {
 	return &Box{inner: raw.SCNBoxFromID(_id)}
 }
 
+// @property width @abstract The width of the box. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // WithWidth sets the width property and returns the receiver for chaining.
 func (x *Box) WithWidth(width float64) *Box {
 	x.inner.SetWidth(width)
 	return x
 }
 
+// @property height @abstract The height of the box. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // WithHeight sets the height property and returns the receiver for chaining.
 func (x *Box) WithHeight(height float64) *Box {
 	x.inner.SetHeight(height)
 	return x
 }
 
+// @property length @abstract The length of the box. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // WithLength sets the length property and returns the receiver for chaining.
 func (x *Box) WithLength(length float64) *Box {
 	x.inner.SetLength(length)
 	return x
 }
 
+// @property chamferRadius @abstract The chamfer radius. Animatable. @discussion If the value is strictly less than 0, the geometry is empty. The default value is 0.
+//
 // WithChamferRadius sets the chamferRadius property and returns the receiver for chaining.
 func (x *Box) WithChamferRadius(chamferRadius float64) *Box {
 	x.inner.SetChamferRadius(chamferRadius)
 	return x
 }
 
+// @property widthSegmentCount @abstract The number of subdivisions along the X axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // WithWidthSegmentCount sets the widthSegmentCount property and returns the receiver for chaining.
 func (x *Box) WithWidthSegmentCount(widthSegmentCount int) *Box {
 	x.inner.SetWidthSegmentCount(widthSegmentCount)
 	return x
 }
 
+// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // WithHeightSegmentCount sets the heightSegmentCount property and returns the receiver for chaining.
 func (x *Box) WithHeightSegmentCount(heightSegmentCount int) *Box {
 	x.inner.SetHeightSegmentCount(heightSegmentCount)
 	return x
 }
 
+// @property lengthSegmentCount @abstract The number of subdivisions along the Z axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // WithLengthSegmentCount sets the lengthSegmentCount property and returns the receiver for chaining.
 func (x *Box) WithLengthSegmentCount(lengthSegmentCount int) *Box {
 	x.inner.SetLengthSegmentCount(lengthSegmentCount)
 	return x
 }
 
+// @property chamferSegmentCount @abstract The number of chamfer subdivisions. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 10.
+//
 // WithChamferSegmentCount sets the chamferSegmentCount property and returns the receiver for chaining.
 func (x *Box) WithChamferSegmentCount(chamferSegmentCount int) *Box {
 	x.inner.SetChamferSegmentCount(chamferSegmentCount)
 	return x
 }
 
+// @property name @abstract Determines the name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Box) WithName(name string) *Box {
 	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+//
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Box) WithMaterials(items ...*raw.SCNMaterial) *Box {
 	if len(items) == 0 {
@@ -109,12 +129,16 @@ func (x *Box) WithMaterials(items ...*raw.SCNMaterial) *Box {
 	return x
 }
 
+// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+//
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Box) WithFirstMaterial(firstMaterial *Material) *Box {
 	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
+// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+//
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Box) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Box {
 	if len(items) == 0 {
@@ -139,30 +163,40 @@ func (x *Box) WithTessellator(tessellator *GeometryTessellator) *Box {
 	return x
 }
 
+// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+//
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Box) WithSubdivisionLevel(subdivisionLevel uint) *Box {
 	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
 	return x
 }
 
+// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+//
 // WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
 func (x *Box) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Box {
 	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
 	return x
 }
 
+// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+//
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Box) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Box {
 	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
+// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+//
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Box) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Box {
 	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
+// @property width @abstract The width of the box. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // Width calls the underlying Width.
 func (x *Box) Width() float64 {
 	return x.inner.Width()
@@ -173,6 +207,8 @@ func (x *Box) SetWidth(width float64) {
 	x.inner.SetWidth(width)
 }
 
+// @property height @abstract The height of the box. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // Height calls the underlying Height.
 func (x *Box) Height() float64 {
 	return x.inner.Height()
@@ -183,6 +219,8 @@ func (x *Box) SetHeight(height float64) {
 	x.inner.SetHeight(height)
 }
 
+// @property length @abstract The length of the box. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // Length calls the underlying Length.
 func (x *Box) Length() float64 {
 	return x.inner.Length()
@@ -193,6 +231,8 @@ func (x *Box) SetLength(length float64) {
 	x.inner.SetLength(length)
 }
 
+// @property chamferRadius @abstract The chamfer radius. Animatable. @discussion If the value is strictly less than 0, the geometry is empty. The default value is 0.
+//
 // ChamferRadius calls the underlying ChamferRadius.
 func (x *Box) ChamferRadius() float64 {
 	return x.inner.ChamferRadius()
@@ -203,6 +243,8 @@ func (x *Box) SetChamferRadius(chamferRadius float64) {
 	x.inner.SetChamferRadius(chamferRadius)
 }
 
+// @property widthSegmentCount @abstract The number of subdivisions along the X axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // WidthSegmentCount calls the underlying WidthSegmentCount.
 func (x *Box) WidthSegmentCount() int {
 	return x.inner.WidthSegmentCount()
@@ -213,6 +255,8 @@ func (x *Box) SetWidthSegmentCount(widthSegmentCount int) {
 	x.inner.SetWidthSegmentCount(widthSegmentCount)
 }
 
+// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // HeightSegmentCount calls the underlying HeightSegmentCount.
 func (x *Box) HeightSegmentCount() int {
 	return x.inner.HeightSegmentCount()
@@ -223,6 +267,8 @@ func (x *Box) SetHeightSegmentCount(heightSegmentCount int) {
 	x.inner.SetHeightSegmentCount(heightSegmentCount)
 }
 
+// @property lengthSegmentCount @abstract The number of subdivisions along the Z axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // LengthSegmentCount calls the underlying LengthSegmentCount.
 func (x *Box) LengthSegmentCount() int {
 	return x.inner.LengthSegmentCount()
@@ -233,6 +279,8 @@ func (x *Box) SetLengthSegmentCount(lengthSegmentCount int) {
 	x.inner.SetLengthSegmentCount(lengthSegmentCount)
 }
 
+// @property chamferSegmentCount @abstract The number of chamfer subdivisions. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 10.
+//
 // ChamferSegmentCount calls the underlying ChamferSegmentCount.
 func (x *Box) ChamferSegmentCount() int {
 	return x.inner.ChamferSegmentCount()

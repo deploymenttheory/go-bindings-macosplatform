@@ -50,6 +50,8 @@ func (x *TurnBasedMatchmakerViewController) WithShowExistingMatches(showExisting
 	return x
 }
 
+// This controls the mode of matchmaking to support in the UI (all, nearby only, automatch only, invite only). Throws an exception if you can not set to the desired mode (due to restrictions)
+//
 // WithMatchmakingMode sets the matchmakingMode property and returns the receiver for chaining.
 func (x *TurnBasedMatchmakerViewController) WithMatchmakingMode(matchmakingMode GKMatchmakingMode) *TurnBasedMatchmakerViewController {
 	x.inner.SetMatchmakingMode(raw.GKMatchmakingMode(matchmakingMode))

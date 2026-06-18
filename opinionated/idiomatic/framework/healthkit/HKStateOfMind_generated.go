@@ -37,21 +37,29 @@ func NewStateOfMind() *StateOfMind {
 	return &StateOfMind{inner: raw.HKStateOfMindFromID(_id)}
 }
 
+// A description of the kind of feeling type captured by this state of mind. Feeling types can be understood by the timeframe considered to create this log, possibly indicated by the context used to create it. For example, a `momentary emotion` log might be in response to 'how are you feeling right now?' while a `daily mood` log might be in response to 'how have you been feeling today?'.
+//
 // Kind calls the underlying Kind.
 func (x *StateOfMind) Kind() HKStateOfMindKind {
 	return HKStateOfMindKind(x.inner.Kind())
 }
 
+// A signed, self-reported measure of how positive or negative one is feeling, on a continuous scale from -1 to +1.
+//
 // Valence calls the underlying Valence.
 func (x *StateOfMind) Valence() float64 {
 	return x.inner.Valence()
 }
 
+// A general region of pleasantness based on this sample's valence value.
+//
 // ValenceClassification calls the underlying ValenceClassification.
 func (x *StateOfMind) ValenceClassification() HKStateOfMindValenceClassification {
 	return HKStateOfMindValenceClassification(x.inner.ValenceClassification())
 }
 
+// Zero or more specific sentiments selected to represent a felt experience.
+//
 // Labels returns the collection as a Go slice.
 func (x *StateOfMind) Labels() []*foundation.NSNumber {
 	arr := x.inner.Labels()
@@ -63,6 +71,8 @@ func (x *StateOfMind) Labels() []*foundation.NSNumber {
 	})
 }
 
+// Zero or more facets of life with which this felt experience is associated.
+//
 // Associations returns the collection as a Go slice.
 func (x *StateOfMind) Associations() []*foundation.NSNumber {
 	arr := x.inner.Associations()

@@ -30,6 +30,8 @@ func MTRDeviceTypeRevisionFromID(id objc.ID) *MTRDeviceTypeRevision {
 	return &MTRDeviceTypeRevision{inner: raw.MTRDeviceTypeRevisionFromID(id)}
 }
 
+// The provided deviceTypeID must be in the range 0xVVVV0000-0xVVVVBFFF, where VVVV is the vendor identifier (0 for standard device types). The provided deviceTypeRevision must be in the range 1-65535.
+//
 // NewMTRDeviceTypeRevisionWithDeviceTypeIDRevision creates a new [MTRDeviceTypeRevision].
 func NewMTRDeviceTypeRevisionWithDeviceTypeIDRevision(deviceTypeID *foundation.NSNumber, revision *foundation.NSNumber) *MTRDeviceTypeRevision {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceTypeRevision")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewMTRDeviceTypeRevisionWithDeviceTypeIDRevision(deviceTypeID *foundation.N
 	return &MTRDeviceTypeRevision{inner: raw.MTRDeviceTypeRevisionFromID(_id)}
 }
 
+// Initializes the receiver based on the values in the specified struct.
+//
 // NewMTRDeviceTypeRevisionWithDeviceTypeStruct creates a new [MTRDeviceTypeRevision].
 func NewMTRDeviceTypeRevisionWithDeviceTypeStruct(deviceTypeStruct *raw.MTRDescriptorClusterDeviceTypeStruct) *MTRDeviceTypeRevision {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceTypeRevision")), objc.RegisterName("alloc"))
@@ -54,6 +58,8 @@ func (x *MTRDeviceTypeRevision) DeviceTypeRevision() *foundation.NSNumber {
 	return x.inner.DeviceTypeRevision()
 }
 
+// Returns the MTRDeviceType corresponding to deviceTypeID, or nil if deviceTypeID does not represent a known device type.
+//
 // TypeInformation calls the underlying TypeInformation.
 func (x *MTRDeviceTypeRevision) TypeInformation() *MTRDeviceType {
 	_r := x.inner.TypeInformation()

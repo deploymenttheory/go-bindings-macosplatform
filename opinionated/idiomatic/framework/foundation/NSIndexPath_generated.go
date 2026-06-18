@@ -72,6 +72,8 @@ func (x *IndexPath) IndexAtPosition(position uint) uint {
 	return x.inner.IndexAtPosition(position)
 }
 
+// @abstract Copies the indexes stored in this index path from the positions specified by positionRange into indexes. @param indexes Buffer of at least as many NSUIntegers as specified by the length of positionRange. On return, this memory will hold the index path's indexes. @param positionRange A range of valid positions within this index path.  If the location plus the length of positionRange is greater than the length of this index path, this method raises an NSRangeException. @discussion It is the developer’s responsibility to allocate the memory for the C array.
+//
 // GetIndexesRange calls the underlying GetIndexesRange.
 func (x *IndexPath) GetIndexesRange(indexes *uint, positionRange raw.NSRange) {
 	x.inner.GetIndexesRange(indexes, positionRange)
@@ -87,6 +89,8 @@ func (x *IndexPath) Length() uint {
 	return x.inner.Length()
 }
 
+// This method is unsafe because it could potentially cause buffer overruns. You should use -getIndexes:range: instead.
+//
 // GetIndexes calls the underlying GetIndexes.
 func (x *IndexPath) GetIndexes(indexes *uint) {
 	x.inner.GetIndexes(indexes)

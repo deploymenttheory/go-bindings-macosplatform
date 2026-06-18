@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The configuration object for the USB Extensible Host Controller Interface (XHCI) controller.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzxhcicontrollerconfiguration
 type VZXHCIControllerConfiguration struct {
 	VZUSBControllerConfiguration
@@ -29,6 +31,7 @@ func VZXHCIControllerConfigurationFromID(id objc.ID) *VZXHCIControllerConfigurat
 	return o
 }
 
+// Creates a USB Extensible Host Controller Interface (XHCI) configuration.
 func (o *VZXHCIControllerConfiguration) Init() *VZXHCIControllerConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZXHCIControllerConfigurationSelInit)
 	if _ret != 0 {

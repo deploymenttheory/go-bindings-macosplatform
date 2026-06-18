@@ -31,6 +31,8 @@ func RecordZoneSubscriptionFromID(id objc.ID) *RecordZoneSubscription {
 	return &RecordZoneSubscription{inner: raw.CKRecordZoneSubscriptionFromID(id)}
 }
 
+// Creates a subscription for all records in the specified record zone. - Parameters: - zoneID: The ID of the record zone that contains the records you want to monitor. This parameter must not be `nil`. The subscription that this method returns is a zone-based subscription that generates push notifications when CloudKit changes any of the specified record zone's records.
+//
 // NewRecordZoneSubscriptionWithZoneID creates a new [RecordZoneSubscription].
 func NewRecordZoneSubscriptionWithZoneID(zoneID *raw.CKRecordZoneID) *RecordZoneSubscription {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKRecordZoneSubscription")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewRecordZoneSubscriptionWithZoneID(zoneID *raw.CKRecordZoneID) *RecordZone
 	return &RecordZoneSubscription{inner: raw.CKRecordZoneSubscriptionFromID(_id)}
 }
 
+// Creates a named subscription for all records in the specified record zone. - Parameters: - zoneID: The ID of the record zone that contains the records you want to monitor. This parameter must not be `nil`. - subscriptionID: The subscription's name. It must be unique in the container, and must not be `nil` or an empty string. The subscription that this method returns is a zone-based subscription that generates push notifications when CloudKit changes any of the specified record zone's records.
+//
 // NewRecordZoneSubscriptionWithZoneIDSubscriptionID creates a new [RecordZoneSubscription].
 func NewRecordZoneSubscriptionWithZoneIDSubscriptionID(zoneID *raw.CKRecordZoneID, subscriptionID *foundation.NSString) *RecordZoneSubscription {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKRecordZoneSubscription")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewRecordZoneSubscriptionWithZoneIDSubscriptionID(zoneID *raw.CKRecordZoneI
 	return &RecordZoneSubscription{inner: raw.CKRecordZoneSubscriptionFromID(_id)}
 }
 
+// Creates a zone-based subscription from a serialized instance. - Parameters: - aDecoder: The coder for decoding the serialized record zone subscription.
+//
 // NewRecordZoneSubscriptionWithCoder creates a new [RecordZoneSubscription].
 func NewRecordZoneSubscriptionWithCoder(aDecoder *foundation.NSCoder) *RecordZoneSubscription {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKRecordZoneSubscription")), objc.RegisterName("alloc"))
@@ -52,18 +58,24 @@ func NewRecordZoneSubscriptionWithCoder(aDecoder *foundation.NSCoder) *RecordZon
 	return &RecordZoneSubscription{inner: raw.CKRecordZoneSubscriptionFromID(_id)}
 }
 
+// The type of record that the subscription queries.
+//
 // WithRecordType sets the recordType property and returns the receiver for chaining.
 func (x *RecordZoneSubscription) WithRecordType(recordType *foundation.NSString) *RecordZoneSubscription {
 	x.inner.SetRecordType(recordType)
 	return x
 }
 
+// The configuration for a subscription's push notifications. If you want the system to display your subscription's push notifications, assign a value to this property. The server uses the configuration you provide to determine the delivery options for notifications. For example, you can specify the text to display to the user, and the sound to play. You can also specify which fields of the record to include in the notification's payload. If you don't assign a value to this property, CloudKit still sends push notifications, but the system doesn't display them to the user. The default value of this property is `nil`.
+//
 // WithNotificationInfo sets the notificationInfo property and returns the receiver for chaining.
 func (x *RecordZoneSubscription) WithNotificationInfo(notificationInfo *NotificationInfo) *RecordZoneSubscription {
 	x.inner.CKSubscription.SetNotificationInfo(notificationInfo.Unwrap())
 	return x
 }
 
+// The ID of the record zone that the subscription queries. This property applies to query-based subscriptions and zone-based subscriptions. Specifying a record zone ID limits the scope of the query to only the records in that zone. For zone-based subscriptions, the query includes all records in the specified record zone. For a query-based subscription, the query includes only records of a specific type in the specified record zone. For zone-based subscriptions, CloudKit sets this property's value automatically. For all other subscription types, the default value is `nil`. If you want to scope your query-based subscription to a specific record zone, you must assign a value explicitly.
+//
 // ZoneID calls the underlying ZoneID.
 func (x *RecordZoneSubscription) ZoneID() *RecordZoneID {
 	_r := x.inner.ZoneID()
@@ -73,6 +85,8 @@ func (x *RecordZoneSubscription) ZoneID() *RecordZoneID {
 	return &RecordZoneID{inner: _r}
 }
 
+// The type of record that the subscription queries.
+//
 // RecordType calls the underlying RecordType.
 func (x *RecordZoneSubscription) RecordType() string {
 	_r := x.inner.RecordType()

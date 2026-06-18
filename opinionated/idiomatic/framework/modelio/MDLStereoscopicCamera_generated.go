@@ -36,6 +36,8 @@ func NewStereoscopicCamera() *StereoscopicCamera {
 	return &StereoscopicCamera{inner: raw.MDLStereoscopicCameraFromID(_id)}
 }
 
+// Inter-pupillary distance in mm. Default is 63mm.
+//
 // WithInterPupillaryDistance sets the interPupillaryDistance property and returns the receiver for chaining.
 func (x *StereoscopicCamera) WithInterPupillaryDistance(interPupillaryDistance float32) *StereoscopicCamera {
 	x.inner.SetInterPupillaryDistance(interPupillaryDistance)
@@ -54,6 +56,8 @@ func (x *StereoscopicCamera) WithRightVergence(rightVergence float32) *Stereosco
 	return x
 }
 
+// The amount, as a percentage of image width to offset an image towards the other camera. This value is used in a stereo grade to enhance or reduce the intensity of the stereoscopic effect
+//
 // WithOverlap sets the overlap property and returns the receiver for chaining.
 func (x *StereoscopicCamera) WithOverlap(overlap float32) *StereoscopicCamera {
 	x.inner.SetOverlap(overlap)
@@ -66,6 +70,8 @@ func (x *StereoscopicCamera) WithProjection(projection MDLCameraProjection) *Ste
 	return x
 }
 
+// Bounding distance for visible objects
+//
 // WithNearVisibilityDistance sets the nearVisibilityDistance property and returns the receiver for chaining.
 func (x *StereoscopicCamera) WithNearVisibilityDistance(nearVisibilityDistance float32) *StereoscopicCamera {
 	x.inner.MDLCamera.SetNearVisibilityDistance(nearVisibilityDistance)
@@ -78,108 +84,144 @@ func (x *StereoscopicCamera) WithFarVisibilityDistance(farVisibilityDistance flo
 	return x
 }
 
+// World to meters conversion scale. Required for certain calculations.
+//
 // WithWorldToMetersConversionScale sets the worldToMetersConversionScale property and returns the receiver for chaining.
 func (x *StereoscopicCamera) WithWorldToMetersConversionScale(worldToMetersConversionScale float32) *StereoscopicCamera {
 	x.inner.MDLCamera.SetWorldToMetersConversionScale(worldToMetersConversionScale)
 	return x
 }
 
+// Radial distortion of the lens, second order term
+//
 // WithBarrelDistortion sets the barrelDistortion property and returns the receiver for chaining.
 func (x *StereoscopicCamera) WithBarrelDistortion(barrelDistortion float32) *StereoscopicCamera {
 	x.inner.MDLCamera.SetBarrelDistortion(barrelDistortion)
 	return x
 }
 
+// Radial distortion of the lens, fourth order term
+//
 // WithFisheyeDistortion sets the fisheyeDistortion property and returns the receiver for chaining.
 func (x *StereoscopicCamera) WithFisheyeDistortion(fisheyeDistortion float32) *StereoscopicCamera {
 	x.inner.MDLCamera.SetFisheyeDistortion(fisheyeDistortion)
 	return x
 }
 
+// Amount of optical vignetting, rom zero to one.
+//
 // WithOpticalVignetting sets the opticalVignetting property and returns the receiver for chaining.
 func (x *StereoscopicCamera) WithOpticalVignetting(opticalVignetting float32) *StereoscopicCamera {
 	x.inner.MDLCamera.SetOpticalVignetting(opticalVignetting)
 	return x
 }
 
+// Amount of chromatic abberation, from zero to one.
+//
 // WithChromaticAberration sets the chromaticAberration property and returns the receiver for chaining.
 func (x *StereoscopicCamera) WithChromaticAberration(chromaticAberration float32) *StereoscopicCamera {
 	x.inner.MDLCamera.SetChromaticAberration(chromaticAberration)
 	return x
 }
 
+// Lens focal length in mm. @see fieldOfView
+//
 // WithFocalLength sets the focalLength property and returns the receiver for chaining.
 func (x *StereoscopicCamera) WithFocalLength(focalLength float32) *StereoscopicCamera {
 	x.inner.MDLCamera.SetFocalLength(focalLength)
 	return x
 }
 
+// Focus distance
+//
 // WithFocusDistance sets the focusDistance property and returns the receiver for chaining.
 func (x *StereoscopicCamera) WithFocusDistance(focusDistance float32) *StereoscopicCamera {
 	x.inner.MDLCamera.SetFocusDistance(focusDistance)
 	return x
 }
 
+// The field of view, in degrees. @see focalLength
+//
 // WithFieldOfView sets the fieldOfView property and returns the receiver for chaining.
 func (x *StereoscopicCamera) WithFieldOfView(fieldOfView float32) *StereoscopicCamera {
 	x.inner.MDLCamera.SetFieldOfView(fieldOfView)
 	return x
 }
 
+// f-stop, default is 5.6
+//
 // WithFStop sets the fStop property and returns the receiver for chaining.
 func (x *StereoscopicCamera) WithFStop(fStop float32) *StereoscopicCamera {
 	x.inner.MDLCamera.SetFStop(fStop)
 	return x
 }
 
+// Aperture blade count, where zero indicates a circle.
+//
 // WithApertureBladeCount sets the apertureBladeCount property and returns the receiver for chaining.
 func (x *StereoscopicCamera) WithApertureBladeCount(apertureBladeCount uint) *StereoscopicCamera {
 	x.inner.MDLCamera.SetApertureBladeCount(apertureBladeCount)
 	return x
 }
 
+// Maximum circle of confusion size in mm on the image plane
+//
 // WithMaximumCircleOfConfusion sets the maximumCircleOfConfusion property and returns the receiver for chaining.
 func (x *StereoscopicCamera) WithMaximumCircleOfConfusion(maximumCircleOfConfusion float32) *StereoscopicCamera {
 	x.inner.MDLCamera.SetMaximumCircleOfConfusion(maximumCircleOfConfusion)
 	return x
 }
 
+// Shutter open interval, in seconds
+//
 // WithShutterOpenInterval sets the shutterOpenInterval property and returns the receiver for chaining.
 func (x *StereoscopicCamera) WithShutterOpenInterval(shutterOpenInterval float64) *StereoscopicCamera {
 	x.inner.MDLCamera.SetShutterOpenInterval(shutterOpenInterval)
 	return x
 }
 
+// vertical aperture of the sensor or film gate, default is 24mm @see sensorAspect
+//
 // WithSensorVerticalAperture sets the sensorVerticalAperture property and returns the receiver for chaining.
 func (x *StereoscopicCamera) WithSensorVerticalAperture(sensorVerticalAperture float32) *StereoscopicCamera {
 	x.inner.MDLCamera.SetSensorVerticalAperture(sensorVerticalAperture)
 	return x
 }
 
+// Sensor or film gate aperture aspect ratio, default is 1.5 @see sensorVerticalAperture
+//
 // WithSensorAspect sets the sensorAspect property and returns the receiver for chaining.
 func (x *StereoscopicCamera) WithSensorAspect(sensorAspect float32) *StereoscopicCamera {
 	x.inner.MDLCamera.SetSensorAspect(sensorAspect)
 	return x
 }
 
+// @property parent @abstract Parent object. Nil if no parent. @discussion Set to nil when you remove this from an object container inside the parent object.
+//
 // WithParent sets the parent property and returns the receiver for chaining.
 func (x *StereoscopicCamera) WithParent(parent ObjectProvider) *StereoscopicCamera {
 	x.inner.MDLCamera.MDLObject.SetParent(parent.asObject())
 	return x
 }
 
+// @property instance @abstract Instance object @discussion nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
+//
 // WithInstance sets the instance property and returns the receiver for chaining.
 func (x *StereoscopicCamera) WithInstance(instance ObjectProvider) *StereoscopicCamera {
 	x.inner.MDLCamera.MDLObject.SetInstance(instance.asObject())
 	return x
 }
 
+// @property transform @abstract Short hand property for the MDLTransformComponent. @discussion The default value is nil @see MDLTransformComponent
+//
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *StereoscopicCamera) WithTransform(transform raw.MDLTransformComponent) *StereoscopicCamera {
 	x.inner.MDLCamera.MDLObject.SetTransform(transform)
 	return x
 }
 
+// @property children @abstract Short hand property for the MDLObjectContainerComponent. @discussion The default value is an empty MDLObjectContainer @see MDLObjectContainerComponent
+//
 // WithChildren sets the children property and returns the receiver for chaining.
 func (x *StereoscopicCamera) WithChildren(children raw.MDLObjectContainerComponent) *StereoscopicCamera {
 	x.inner.MDLCamera.MDLObject.SetChildren(children)
@@ -192,6 +234,8 @@ func (x *StereoscopicCamera) WithHidden(hidden bool) *StereoscopicCamera {
 	return x
 }
 
+// Inter-pupillary distance in mm. Default is 63mm.
+//
 // InterPupillaryDistance calls the underlying InterPupillaryDistance.
 func (x *StereoscopicCamera) InterPupillaryDistance() float32 {
 	return x.inner.InterPupillaryDistance()
@@ -222,6 +266,8 @@ func (x *StereoscopicCamera) SetRightVergence(rightVergence float32) {
 	x.inner.SetRightVergence(rightVergence)
 }
 
+// The amount, as a percentage of image width to offset an image towards the other camera. This value is used in a stereo grade to enhance or reduce the intensity of the stereoscopic effect
+//
 // Overlap calls the underlying Overlap.
 func (x *StereoscopicCamera) Overlap() float32 {
 	return x.inner.Overlap()
@@ -232,6 +278,8 @@ func (x *StereoscopicCamera) SetOverlap(overlap float32) {
 	x.inner.SetOverlap(overlap)
 }
 
+// Convenience utilities to create view and projection matrices. The view matrix calculations requires that the world to meters conversion scale be set. @see worldToMetersConversionScale
+//
 // LeftViewMatrix calls the underlying LeftViewMatrix.
 func (x *StereoscopicCamera) LeftViewMatrix() unsafe.Pointer {
 	return x.inner.LeftViewMatrix()

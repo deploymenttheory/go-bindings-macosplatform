@@ -36,6 +36,8 @@ func NewCloudIdentifierMapping() *CloudIdentifierMapping {
 	return &CloudIdentifierMapping{inner: raw.PHCloudIdentifierMappingFromID(_id)}
 }
 
+// The cloud identifier of the resource found for this local identifier
+//
 // CloudIdentifier calls the underlying CloudIdentifier.
 func (x *CloudIdentifierMapping) CloudIdentifier() *CloudIdentifier {
 	_r := x.inner.CloudIdentifier()
@@ -45,6 +47,8 @@ func (x *CloudIdentifierMapping) CloudIdentifier() *CloudIdentifier {
 	return &CloudIdentifier{inner: _r}
 }
 
+// error An error indicating why the \c cloudIdentifier is nil. \c PHPhotosErrorIdentifierNotFound if no resource could be found for the provided local identifier.
+//
 // Error calls the underlying Error.
 func (x *CloudIdentifierMapping) Error() unsafe.Pointer {
 	return x.inner.Error()

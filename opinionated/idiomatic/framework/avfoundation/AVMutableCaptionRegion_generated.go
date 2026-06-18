@@ -36,6 +36,8 @@ func NewMutableCaptionRegion() *MutableCaptionRegion {
 	return &MutableCaptionRegion{inner: raw.AVMutableCaptionRegionFromID(_id)}
 }
 
+// @method initWithIdentifier: @abstract Create a region object with the identifier.
+//
 // NewMutableCaptionRegionWithIdentifier creates a new [MutableCaptionRegion].
 func NewMutableCaptionRegionWithIdentifier(identifier string) *MutableCaptionRegion {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMutableCaptionRegion")), objc.RegisterName("alloc"))
@@ -43,30 +45,40 @@ func NewMutableCaptionRegionWithIdentifier(identifier string) *MutableCaptionReg
 	return &MutableCaptionRegion{inner: raw.AVMutableCaptionRegionFromID(_id)}
 }
 
+// @property origin @abstract The position of the top-left of the region.
+//
 // WithOrigin sets the origin property and returns the receiver for chaining.
 func (x *MutableCaptionRegion) WithOrigin(origin raw.AVCaptionPoint) *MutableCaptionRegion {
 	x.inner.SetOrigin(origin)
 	return x
 }
 
+// @property size @abstract The width and height of the region, potentally with unspecified fields.
+//
 // WithSize sets the size property and returns the receiver for chaining.
 func (x *MutableCaptionRegion) WithSize(size raw.AVCaptionSize) *MutableCaptionRegion {
 	x.inner.SetSize(size)
 	return x
 }
 
+// @property scroll @abstract Region scroll mode.
+//
 // WithScroll sets the scroll property and returns the receiver for chaining.
 func (x *MutableCaptionRegion) WithScroll(scroll AVCaptionRegionScroll) *MutableCaptionRegion {
 	x.inner.SetScroll(raw.AVCaptionRegionScroll(scroll))
 	return x
 }
 
+// @property displayAlignment @abstract Alignment of lines in the region.
+//
 // WithDisplayAlignment sets the displayAlignment property and returns the receiver for chaining.
 func (x *MutableCaptionRegion) WithDisplayAlignment(displayAlignment AVCaptionRegionDisplayAlignment) *MutableCaptionRegion {
 	x.inner.SetDisplayAlignment(raw.AVCaptionRegionDisplayAlignment(displayAlignment))
 	return x
 }
 
+// @property writingMode @abstract The block and inline progression direction of the region.
+//
 // WithWritingMode sets the writingMode property and returns the receiver for chaining.
 func (x *MutableCaptionRegion) WithWritingMode(writingMode AVCaptionRegionWritingMode) *MutableCaptionRegion {
 	x.inner.SetWritingMode(raw.AVCaptionRegionWritingMode(writingMode))

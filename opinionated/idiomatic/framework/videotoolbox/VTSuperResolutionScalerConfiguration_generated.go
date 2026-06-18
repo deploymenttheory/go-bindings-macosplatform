@@ -35,6 +35,8 @@ func SuperResolutionScalerConfigurationFromID(id objc.ID) *SuperResolutionScaler
 	return &SuperResolutionScalerConfiguration{inner: raw.VTSuperResolutionScalerConfigurationFromID(id)}
 }
 
+// Creates a new super-resolution scaler processor configuration. This processor increases resolution of an image or video. Returns `nil` if dimensions are out of range or revision is unsupported. - Parameters: - frameWidth: Width of source frame in pixels. With “VTSuperResolutionScalerConfigurationInputTypeVideo“, maximum width is 1920 on macOS and 1440 on iOS. With “VTSuperResolutionScalerConfigurationInputTypeImage“, maximum width is 1920. - frameHeight: Height of source frame in pixels. With “VTSuperResolutionScalerConfigurationInputTypeVideo“, maximum height is 1080. With “VTSuperResolutionScalerConfigurationInputTypeImage“, maximum height is 1920 on macOS and 1080 on iOS. - scaleFactor: Indicates the scale factor between input and output. - inputType: Indicates the type of input, either video or image. - usePrecomputedFlow: Boolean value to indicate that you provide optical flow; if false, this configuration computes the optical flow on the fly. - qualityPrioritization: A level you use to prioritize quality or performance; for more information about supported levels, see “VTSuperResolutionScalerConfigurationQualityPrioritization“. - revision: The specific algorithm or configuration revision you use to perform the request.
+//
 // NewSuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactorInputTypeUsePrecomputedFlowQualityPrioritizationRevision creates a new [SuperResolutionScalerConfiguration].
 func NewSuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactorInputTypeUsePrecomputedFlowQualityPrioritizationRevision(frameWidth int, frameHeight int, scaleFactor int, inputType VTSuperResolutionScalerConfigurationInputType, usePrecomputedFlow bool, qualityPrioritization VTSuperResolutionScalerConfigurationQualityPrioritization, revision VTSuperResolutionScalerConfigurationRevision) *SuperResolutionScalerConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTSuperResolutionScalerConfiguration")), objc.RegisterName("alloc"))
@@ -42,6 +44,8 @@ func NewSuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactorIn
 	return &SuperResolutionScalerConfiguration{inner: raw.VTSuperResolutionScalerConfigurationFromID(_id)}
 }
 
+// Downloads models that the system needs for the current configuration. This method downloads model assets required for the current configuration in background. You should call this method if “configurationModelStatus“ is “VTSuperResolutionScalerConfigurationModelStatusDownloadRequired“. After this method is called, you can query “configurationModelPercentageAvailable“ to determine progress of model asset download process. If the download fails, the completion handler is invoked with an `NSError`, and the “configurationModelStatus“ goes back to “VTSuperResolutionScalerConfigurationModelStatusDownloadRequired“. If the download succeeds, the completion handler is invoked with `nil` NSError.
+//
 // DownloadConfigurationModel blocks until the operation completes or ctx is cancelled.
 func (x *SuperResolutionScalerConfiguration) DownloadConfigurationModel(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -60,41 +64,57 @@ func (x *SuperResolutionScalerConfiguration) DownloadConfigurationModel(ctx cont
 	}
 }
 
+// Width of source frame in pixels.
+//
 // FrameWidth calls the underlying FrameWidth.
 func (x *SuperResolutionScalerConfiguration) FrameWidth() int {
 	return x.inner.FrameWidth()
 }
 
+// Height of source frame in pixels.
+//
 // FrameHeight calls the underlying FrameHeight.
 func (x *SuperResolutionScalerConfiguration) FrameHeight() int {
 	return x.inner.FrameHeight()
 }
 
+// Indicates the type of input.
+//
 // InputType calls the underlying InputType.
 func (x *SuperResolutionScalerConfiguration) InputType() VTSuperResolutionScalerConfigurationInputType {
 	return VTSuperResolutionScalerConfigurationInputType(x.inner.InputType())
 }
 
+// Indicates that you provide optical flow.
+//
 // UsesPrecomputedFlow calls the underlying UsesPrecomputedFlow.
 func (x *SuperResolutionScalerConfiguration) UsesPrecomputedFlow() bool {
 	return x.inner.UsesPrecomputedFlow()
 }
 
+// Indicates the scale factor between input and output.
+//
 // ScaleFactor calls the underlying ScaleFactor.
 func (x *SuperResolutionScalerConfiguration) ScaleFactor() int {
 	return x.inner.ScaleFactor()
 }
 
+// A parameter to control quality and performance levels. For more information about supported levels, see “VTSuperResolutionScalerConfigurationQualityPrioritization“.
+//
 // QualityPrioritization calls the underlying QualityPrioritization.
 func (x *SuperResolutionScalerConfiguration) QualityPrioritization() VTSuperResolutionScalerConfigurationQualityPrioritization {
 	return VTSuperResolutionScalerConfigurationQualityPrioritization(x.inner.QualityPrioritization())
 }
 
+// The specific algorithm or configuration revision you use to perform the request.
+//
 // Revision calls the underlying Revision.
 func (x *SuperResolutionScalerConfiguration) Revision() VTSuperResolutionScalerConfigurationRevision {
 	return VTSuperResolutionScalerConfigurationRevision(x.inner.Revision())
 }
 
+// Available supported pixel formats for source frames for current configuration.
+//
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (x *SuperResolutionScalerConfiguration) FrameSupportedPixelFormats() []*foundation.NSNumber {
 	arr := x.inner.FrameSupportedPixelFormats()
@@ -106,21 +126,29 @@ func (x *SuperResolutionScalerConfiguration) FrameSupportedPixelFormats() []*fou
 	})
 }
 
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+//
 // SourcePixelBufferAttributes calls the underlying SourcePixelBufferAttributes.
 func (x *SuperResolutionScalerConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.SourcePixelBufferAttributes()
 }
 
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+//
 // DestinationPixelBufferAttributes calls the underlying DestinationPixelBufferAttributes.
 func (x *SuperResolutionScalerConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.DestinationPixelBufferAttributes()
 }
 
+// Reports the download status of models that the system needs for the current configuration.
+//
 // ConfigurationModelStatus calls the underlying ConfigurationModelStatus.
 func (x *SuperResolutionScalerConfiguration) ConfigurationModelStatus() VTSuperResolutionScalerConfigurationModelStatus {
 	return VTSuperResolutionScalerConfigurationModelStatus(x.inner.ConfigurationModelStatus())
 }
 
+// Returns a floating point value between 0.0 and 1.0 indicating the percentage of required model assets that have been downloaded.
+//
 // ConfigurationModelPercentageAvailable calls the underlying ConfigurationModelPercentageAvailable.
 func (x *SuperResolutionScalerConfiguration) ConfigurationModelPercentageAvailable() float32 {
 	return x.inner.ConfigurationModelPercentageAvailable()

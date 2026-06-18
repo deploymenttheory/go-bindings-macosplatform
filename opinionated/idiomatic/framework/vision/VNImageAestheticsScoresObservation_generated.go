@@ -37,11 +37,15 @@ func NewImageAestheticsScoresObservation() *ImageAestheticsScoresObservation {
 	return &ImageAestheticsScoresObservation{inner: raw.VNImageAestheticsScoresObservationFromID(_id)}
 }
 
+// A Boolean value that represents images that are not necessarily of poor image quality, but may not have memorable or exciting content.
+//
 // IsUtility calls the underlying IsUtility.
 func (x *ImageAestheticsScoresObservation) IsUtility() bool {
 	return x.inner.IsUtility()
 }
 
+// A score which incorporates aesthetic score, failure score, and utility labels. This returns a value within the range of `-1` and `1`, where `-1` is least desirable and `1` is most desirable.
+//
 // OverallScore calls the underlying OverallScore.
 func (x *ImageAestheticsScoresObservation) OverallScore() float32 {
 	return x.inner.OverallScore()

@@ -40,11 +40,15 @@ func (x *SensitivityAnalysis) IsSensitive() bool {
 	return x.inner.IsSensitive()
 }
 
+// Intervention guidance that suggests the app indicate the presence of sensitive content.
+//
 // ShouldIndicateSensitivity calls the underlying ShouldIndicateSensitivity.
 func (x *SensitivityAnalysis) ShouldIndicateSensitivity() bool {
 	return x.inner.ShouldIndicateSensitivity()
 }
 
+// Intervention guidance that suggests the app mute the audio of the current video stream.
+//
 // ShouldMuteAudio calls the underlying ShouldMuteAudio.
 func (x *SensitivityAnalysis) ShouldMuteAudio() bool {
 	return x.inner.ShouldMuteAudio()

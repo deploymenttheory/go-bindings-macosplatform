@@ -39,6 +39,8 @@ func NewInkWithInkTypeColor(type_ *foundation.NSString, color *appkit.NSColor) *
 	return &Ink{inner: raw.PKInkFromID(_id)}
 }
 
+// The type of ink, eg. pen, pencil...
+//
 // InkType calls the underlying InkType.
 func (x *Ink) InkType() string {
 	_r := x.inner.InkType()
@@ -53,6 +55,8 @@ func (x *Ink) Color() *appkit.NSColor {
 	return x.inner.Color()
 }
 
+// The PencilKit version required to use this ink.
+//
 // RequiredContentVersion calls the underlying RequiredContentVersion.
 func (x *Ink) RequiredContentVersion() PKContentVersion {
 	return PKContentVersion(x.inner.RequiredContentVersion())

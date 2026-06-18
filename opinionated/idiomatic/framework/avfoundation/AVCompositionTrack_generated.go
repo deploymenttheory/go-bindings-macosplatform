@@ -36,6 +36,8 @@ func NewCompositionTrack() *CompositionTrack {
 	return &CompositionTrack{inner: raw.AVCompositionTrackFromID(_id)}
 }
 
+// @property		formatDescriptionReplacements @abstract		An array of AVCompositionTrackFormatDescriptionReplacement objects indicating original format descriptions and their replacements. @discussion     The value of this property is an array of AVCompositionTrackFormatDescriptionReplacement objects, each of which specifies an original format description together with its replacement format description (as specified by a previous call to -replaceFormatDescription:withFormatDescription:). Only format descriptions that are to be replaced will occur as the originalFormatDescription elements in the AVCompositionTrackFormatDescriptionReplacement objects in this array.
+//
 // FormatDescriptionReplacements returns the collection as a Go slice.
 func (x *CompositionTrack) FormatDescriptionReplacements() []*CompositionTrackFormatDescriptionReplacement {
 	arr := x.inner.FormatDescriptionReplacements()

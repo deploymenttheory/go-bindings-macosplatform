@@ -36,54 +36,72 @@ func NewImageDescriptor() *ImageDescriptor {
 	return &ImageDescriptor{inner: raw.MPSImageDescriptorFromID(_id)}
 }
 
+// @property   width @abstract   The width of the CNN image. @discussion The formal width of the CNN image in pixels.  Default = 1.
+//
 // WithWidth sets the width property and returns the receiver for chaining.
 func (x *ImageDescriptor) WithWidth(width uint) *ImageDescriptor {
 	x.inner.SetWidth(width)
 	return x
 }
 
+// @property   height @abstract   The height of the CNN image. @discussion The formal height of the CNN image in pixels. Default = 1.
+//
 // WithHeight sets the height property and returns the receiver for chaining.
 func (x *ImageDescriptor) WithHeight(height uint) *ImageDescriptor {
 	x.inner.SetHeight(height)
 	return x
 }
 
+// @property   featureChannels @abstract   The number of feature channels per pixel.  Default = 1.
+//
 // WithFeatureChannels sets the featureChannels property and returns the receiver for chaining.
 func (x *ImageDescriptor) WithFeatureChannels(featureChannels uint) *ImageDescriptor {
 	x.inner.SetFeatureChannels(featureChannels)
 	return x
 }
 
+// @property   numberOfImages @abstract   The number of images for batch processing.   Default = 1.
+//
 // WithNumberOfImages sets the numberOfImages property and returns the receiver for chaining.
 func (x *ImageDescriptor) WithNumberOfImages(numberOfImages uint) *ImageDescriptor {
 	x.inner.SetNumberOfImages(numberOfImages)
 	return x
 }
 
+// @property   channelFormat @abstract   The storage format to use for each channel in the image.
+//
 // WithChannelFormat sets the channelFormat property and returns the receiver for chaining.
 func (x *ImageDescriptor) WithChannelFormat(channelFormat MPSImageFeatureChannelFormat) *ImageDescriptor {
 	x.inner.SetChannelFormat(raw.MPSImageFeatureChannelFormat(channelFormat))
 	return x
 }
 
+// @property cpuCacheMode @abstract Options to specify CPU cache mode of texture resource. Default = MTLCPUCacheModeDefaultCache
+//
 // WithCpuCacheMode sets the cpuCacheMode property and returns the receiver for chaining.
 func (x *ImageDescriptor) WithCpuCacheMode(cpuCacheMode metal.MTLCPUCacheMode) *ImageDescriptor {
 	x.inner.SetCpuCacheMode(cpuCacheMode)
 	return x
 }
 
+// @property storageMode @abstract To specify storage mode of texture resource. @discussion Storage mode options: @code Default =   MTLStorageModeShared on iOS MTLStorageModeManaged on Mac OSX MTLStorageModeShared not supported on Mac OSX. See Metal headers for synchronization requirements when using StorageModeManaged @endcode
+//
 // WithStorageMode sets the storageMode property and returns the receiver for chaining.
 func (x *ImageDescriptor) WithStorageMode(storageMode metal.MTLStorageMode) *ImageDescriptor {
 	x.inner.SetStorageMode(storageMode)
 	return x
 }
 
+// @property   usage @abstract   Description of texture usage.  Default = MTLTextureUsageShaderRead/Write
+//
 // WithUsage sets the usage property and returns the receiver for chaining.
 func (x *ImageDescriptor) WithUsage(usage metal.MTLTextureUsage) *ImageDescriptor {
 	x.inner.SetUsage(usage)
 	return x
 }
 
+// @property   width @abstract   The width of the CNN image. @discussion The formal width of the CNN image in pixels.  Default = 1.
+//
 // Width calls the underlying Width.
 func (x *ImageDescriptor) Width() uint {
 	return x.inner.Width()
@@ -94,6 +112,8 @@ func (x *ImageDescriptor) SetWidth(width uint) {
 	x.inner.SetWidth(width)
 }
 
+// @property   height @abstract   The height of the CNN image. @discussion The formal height of the CNN image in pixels. Default = 1.
+//
 // Height calls the underlying Height.
 func (x *ImageDescriptor) Height() uint {
 	return x.inner.Height()
@@ -104,6 +124,8 @@ func (x *ImageDescriptor) SetHeight(height uint) {
 	x.inner.SetHeight(height)
 }
 
+// @property   featureChannels @abstract   The number of feature channels per pixel.  Default = 1.
+//
 // FeatureChannels calls the underlying FeatureChannels.
 func (x *ImageDescriptor) FeatureChannels() uint {
 	return x.inner.FeatureChannels()
@@ -114,6 +136,8 @@ func (x *ImageDescriptor) SetFeatureChannels(featureChannels uint) {
 	x.inner.SetFeatureChannels(featureChannels)
 }
 
+// @property   numberOfImages @abstract   The number of images for batch processing.   Default = 1.
+//
 // NumberOfImages calls the underlying NumberOfImages.
 func (x *ImageDescriptor) NumberOfImages() uint {
 	return x.inner.NumberOfImages()
@@ -124,11 +148,15 @@ func (x *ImageDescriptor) SetNumberOfImages(numberOfImages uint) {
 	x.inner.SetNumberOfImages(numberOfImages)
 }
 
+// @property   pixelFormat @abstract   The MTLPixelFormat expected for the underlying texture.
+//
 // PixelFormat calls the underlying PixelFormat.
 func (x *ImageDescriptor) PixelFormat() metal.MTLPixelFormat {
 	return x.inner.PixelFormat()
 }
 
+// @property   channelFormat @abstract   The storage format to use for each channel in the image.
+//
 // ChannelFormat calls the underlying ChannelFormat.
 func (x *ImageDescriptor) ChannelFormat() MPSImageFeatureChannelFormat {
 	return MPSImageFeatureChannelFormat(x.inner.ChannelFormat())
@@ -139,6 +167,8 @@ func (x *ImageDescriptor) SetChannelFormat(channelFormat MPSImageFeatureChannelF
 	x.inner.SetChannelFormat(raw.MPSImageFeatureChannelFormat(channelFormat))
 }
 
+// @property cpuCacheMode @abstract Options to specify CPU cache mode of texture resource. Default = MTLCPUCacheModeDefaultCache
+//
 // CpuCacheMode calls the underlying CpuCacheMode.
 func (x *ImageDescriptor) CpuCacheMode() metal.MTLCPUCacheMode {
 	return x.inner.CpuCacheMode()
@@ -149,6 +179,8 @@ func (x *ImageDescriptor) SetCpuCacheMode(cpuCacheMode metal.MTLCPUCacheMode) {
 	x.inner.SetCpuCacheMode(cpuCacheMode)
 }
 
+// @property storageMode @abstract To specify storage mode of texture resource. @discussion Storage mode options: @code Default =   MTLStorageModeShared on iOS MTLStorageModeManaged on Mac OSX MTLStorageModeShared not supported on Mac OSX. See Metal headers for synchronization requirements when using StorageModeManaged @endcode
+//
 // StorageMode calls the underlying StorageMode.
 func (x *ImageDescriptor) StorageMode() metal.MTLStorageMode {
 	return x.inner.StorageMode()
@@ -159,6 +191,8 @@ func (x *ImageDescriptor) SetStorageMode(storageMode metal.MTLStorageMode) {
 	x.inner.SetStorageMode(storageMode)
 }
 
+// @property   usage @abstract   Description of texture usage.  Default = MTLTextureUsageShaderRead/Write
+//
 // Usage calls the underlying Usage.
 func (x *ImageDescriptor) Usage() metal.MTLTextureUsage {
 	return x.inner.Usage()

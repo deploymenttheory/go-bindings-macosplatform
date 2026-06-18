@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class that represents a directory sharing device in a VM.
+//
 // DirectorySharingDevice wraps [raw.VZDirectorySharingDevice] with a fluent Go API.
 type DirectorySharingDevice struct {
 	inner *raw.VZDirectorySharingDevice

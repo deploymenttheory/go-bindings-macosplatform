@@ -29,6 +29,8 @@ func ExtendedTempoEventFromID(id objc.ID) *ExtendedTempoEvent {
 	return &ExtendedTempoEvent{inner: raw.AVExtendedTempoEventFromID(id)}
 }
 
+// @method initWithTempo: @abstract Initialize the event tempo. @param tempo The new tempo in beats-per-minute.  Range:  Any positive value. The new tempo will begin at the timestamp for this event.
+//
 // NewExtendedTempoEventWithTempo creates a new [ExtendedTempoEvent].
 func NewExtendedTempoEventWithTempo(tempo float64) *ExtendedTempoEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVExtendedTempoEvent")), objc.RegisterName("alloc"))
@@ -36,6 +38,8 @@ func NewExtendedTempoEventWithTempo(tempo float64) *ExtendedTempoEvent {
 	return &ExtendedTempoEvent{inner: raw.AVExtendedTempoEventFromID(_id)}
 }
 
+// @property tempo The new tempo in beats-per-minute.  Range:  Any positive value.
+//
 // WithTempo sets the tempo property and returns the receiver for chaining.
 func (x *ExtendedTempoEvent) WithTempo(tempo float64) *ExtendedTempoEvent {
 	x.inner.SetTempo(tempo)

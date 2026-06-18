@@ -37,48 +37,64 @@ func NewPyramid() *Pyramid {
 	return &Pyramid{inner: raw.SCNPyramidFromID(_id)}
 }
 
+// @property width @abstract The width of the pyramid base. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // WithWidth sets the width property and returns the receiver for chaining.
 func (x *Pyramid) WithWidth(width float64) *Pyramid {
 	x.inner.SetWidth(width)
 	return x
 }
 
+// @property height @abstract The height of the pyramid. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // WithHeight sets the height property and returns the receiver for chaining.
 func (x *Pyramid) WithHeight(height float64) *Pyramid {
 	x.inner.SetHeight(height)
 	return x
 }
 
+// @property length @abstract The length of the pyramid base. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // WithLength sets the length property and returns the receiver for chaining.
 func (x *Pyramid) WithLength(length float64) *Pyramid {
 	x.inner.SetLength(length)
 	return x
 }
 
+// @property widthSegmentCount @abstract The number of subdivisions along the X axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // WithWidthSegmentCount sets the widthSegmentCount property and returns the receiver for chaining.
 func (x *Pyramid) WithWidthSegmentCount(widthSegmentCount int) *Pyramid {
 	x.inner.SetWidthSegmentCount(widthSegmentCount)
 	return x
 }
 
+// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // WithHeightSegmentCount sets the heightSegmentCount property and returns the receiver for chaining.
 func (x *Pyramid) WithHeightSegmentCount(heightSegmentCount int) *Pyramid {
 	x.inner.SetHeightSegmentCount(heightSegmentCount)
 	return x
 }
 
+// @property lengthSegmentCount @abstract The number of subdivisions along the Z axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // WithLengthSegmentCount sets the lengthSegmentCount property and returns the receiver for chaining.
 func (x *Pyramid) WithLengthSegmentCount(lengthSegmentCount int) *Pyramid {
 	x.inner.SetLengthSegmentCount(lengthSegmentCount)
 	return x
 }
 
+// @property name @abstract Determines the name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Pyramid) WithName(name string) *Pyramid {
 	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+//
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Pyramid) WithMaterials(items ...*raw.SCNMaterial) *Pyramid {
 	if len(items) == 0 {
@@ -97,12 +113,16 @@ func (x *Pyramid) WithMaterials(items ...*raw.SCNMaterial) *Pyramid {
 	return x
 }
 
+// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+//
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Pyramid) WithFirstMaterial(firstMaterial *Material) *Pyramid {
 	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
+// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+//
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Pyramid) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Pyramid {
 	if len(items) == 0 {
@@ -127,30 +147,40 @@ func (x *Pyramid) WithTessellator(tessellator *GeometryTessellator) *Pyramid {
 	return x
 }
 
+// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+//
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Pyramid) WithSubdivisionLevel(subdivisionLevel uint) *Pyramid {
 	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
 	return x
 }
 
+// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+//
 // WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
 func (x *Pyramid) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Pyramid {
 	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
 	return x
 }
 
+// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+//
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Pyramid) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Pyramid {
 	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
+// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+//
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Pyramid) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Pyramid {
 	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
+// @property width @abstract The width of the pyramid base. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // Width calls the underlying Width.
 func (x *Pyramid) Width() float64 {
 	return x.inner.Width()
@@ -161,6 +191,8 @@ func (x *Pyramid) SetWidth(width float64) {
 	x.inner.SetWidth(width)
 }
 
+// @property height @abstract The height of the pyramid. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // Height calls the underlying Height.
 func (x *Pyramid) Height() float64 {
 	return x.inner.Height()
@@ -171,6 +203,8 @@ func (x *Pyramid) SetHeight(height float64) {
 	x.inner.SetHeight(height)
 }
 
+// @property length @abstract The length of the pyramid base. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // Length calls the underlying Length.
 func (x *Pyramid) Length() float64 {
 	return x.inner.Length()
@@ -181,6 +215,8 @@ func (x *Pyramid) SetLength(length float64) {
 	x.inner.SetLength(length)
 }
 
+// @property widthSegmentCount @abstract The number of subdivisions along the X axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // WidthSegmentCount calls the underlying WidthSegmentCount.
 func (x *Pyramid) WidthSegmentCount() int {
 	return x.inner.WidthSegmentCount()
@@ -191,6 +227,8 @@ func (x *Pyramid) SetWidthSegmentCount(widthSegmentCount int) {
 	x.inner.SetWidthSegmentCount(widthSegmentCount)
 }
 
+// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // HeightSegmentCount calls the underlying HeightSegmentCount.
 func (x *Pyramid) HeightSegmentCount() int {
 	return x.inner.HeightSegmentCount()
@@ -201,6 +239,8 @@ func (x *Pyramid) SetHeightSegmentCount(heightSegmentCount int) {
 	x.inner.SetHeightSegmentCount(heightSegmentCount)
 }
 
+// @property lengthSegmentCount @abstract The number of subdivisions along the Z axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // LengthSegmentCount calls the underlying LengthSegmentCount.
 func (x *Pyramid) LengthSegmentCount() int {
 	return x.inner.LengthSegmentCount()

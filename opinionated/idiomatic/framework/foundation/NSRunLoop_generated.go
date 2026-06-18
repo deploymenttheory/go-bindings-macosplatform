@@ -106,6 +106,8 @@ func (x *RunLoop) ConfigureAsServer() {
 	x.inner.ConfigureAsServer()
 }
 
+// Schedules the execution of a block on the target run loop in given modes. - parameter: modes   An array of input modes for which the block may be executed. - parameter: block   The block to execute
+//
 // PerformInModesBlock blocks until the operation completes or ctx is cancelled.
 func (x *RunLoop) PerformInModesBlock(ctx context.Context, modes *raw.NSArray[*raw.NSString]) error {
 	_ch := make(chan error, 1)
@@ -120,6 +122,8 @@ func (x *RunLoop) PerformInModesBlock(ctx context.Context, modes *raw.NSArray[*r
 	}
 }
 
+// Schedules the execution of a block on the target run loop. - parameter: block   The block to execute
+//
 // PerformBlock blocks until the operation completes or ctx is cancelled.
 func (x *RunLoop) PerformBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -135,8 +139,17 @@ func (x *RunLoop) PerformBlock(ctx context.Context) error {
 }
 
 // PerformSelectorTargetArgumentOrderModes calls the underlying PerformSelectorTargetArgumentOrderModes.
-func (x *RunLoop) PerformSelectorTargetArgumentOrderModes(aSelector objc.SEL, target objc.ID, arg objc.ID, order uint, modes *raw.NSArray[*raw.NSString]) {
-	x.inner.PerformSelectorTargetArgumentOrderModes(aSelector, target, arg, order, modes)
+func (x *RunLoop) PerformSelectorTargetArgumentOrderModes(aSelector objc.SEL, target objc.ID, arg objc.ID, order uint, modes ...StringProvider) {
+	_ptrs := make([]objc.ID, len(modes))
+	for _i, _v := range modes {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg4 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg4 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.PerformSelectorTargetArgumentOrderModes(aSelector, target, arg, order, _arg4)
 }
 
 // CancelPerformSelectorTargetArgument calls the underlying CancelPerformSelectorTargetArgument.
@@ -168,7 +181,7 @@ type RunLoopable interface {
 	ConfigureAsServer()
 	PerformInModesBlock(ctx context.Context, modes *raw.NSArray[*raw.NSString]) error
 	PerformBlock(ctx context.Context) error
-	PerformSelectorTargetArgumentOrderModes(aSelector objc.SEL, target objc.ID, arg objc.ID, order uint, modes *raw.NSArray[*raw.NSString])
+	PerformSelectorTargetArgumentOrderModes(aSelector objc.SEL, target objc.ID, arg objc.ID, order uint, modes ...StringProvider)
 	CancelPerformSelectorTargetArgument(aSelector objc.SEL, target objc.ID, arg objc.ID)
 	CancelPerformSelectorsWithTarget(target objc.ID)
 }

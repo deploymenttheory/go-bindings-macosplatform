@@ -32,6 +32,8 @@ func AudioFormatFromID(id objc.ID) *AudioFormat {
 	return &AudioFormat{inner: raw.AVAudioFormatFromID(id)}
 }
 
+// @method initWithStreamDescription: @abstract Initialize from an AudioStreamBasicDescription. @param asbd the AudioStreamBasicDescription @discussion If the format specifies more than 2 channels, this method fails (returns nil).
+//
 // NewAudioFormatWithStreamDescription creates a new [AudioFormat].
 func NewAudioFormatWithStreamDescription(asbd *coreaudiotypes.AudioStreamBasicDescription) *AudioFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioFormat")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewAudioFormatWithStreamDescription(asbd *coreaudiotypes.AudioStreamBasicDe
 	return &AudioFormat{inner: raw.AVAudioFormatFromID(_id)}
 }
 
+// @method initWithStreamDescription:channelLayout: @abstract Initialize from an AudioStreamBasicDescription and optional channel layout. @param asbd the AudioStreamBasicDescription @param layout the channel layout. Can be nil only if asbd specifies 1 or 2 channels. @discussion If the format specifies more than 2 channels, this method fails (returns nil) unless layout is non-nil.
+//
 // NewAudioFormatWithStreamDescriptionChannelLayout creates a new [AudioFormat].
 func NewAudioFormatWithStreamDescriptionChannelLayout(asbd *coreaudiotypes.AudioStreamBasicDescription, layout *raw.AVAudioChannelLayout) *AudioFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioFormat")), objc.RegisterName("alloc"))
@@ -46,6 +50,8 @@ func NewAudioFormatWithStreamDescriptionChannelLayout(asbd *coreaudiotypes.Audio
 	return &AudioFormat{inner: raw.AVAudioFormatFromID(_id)}
 }
 
+// @method initStandardFormatWithSampleRate:channels: @abstract Initialize to deinterleaved float with the specified sample rate and channel count. @param sampleRate the sample rate @param channels the channel count @discussion If the format specifies more than 2 channels, this method fails (returns nil).
+//
 // NewAudioFormatStandardFormatWithSampleRateChannels creates a new [AudioFormat].
 func NewAudioFormatStandardFormatWithSampleRateChannels(sampleRate float64, channels uint32) *AudioFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioFormat")), objc.RegisterName("alloc"))
@@ -53,6 +59,8 @@ func NewAudioFormatStandardFormatWithSampleRateChannels(sampleRate float64, chan
 	return &AudioFormat{inner: raw.AVAudioFormatFromID(_id)}
 }
 
+// @method initStandardFormatWithSampleRate:channelLayout: @abstract Initialize to deinterleaved float with the specified sample rate and channel layout. @param sampleRate the sample rate @param layout the channel layout. must not be nil.
+//
 // NewAudioFormatStandardFormatWithSampleRateChannelLayout creates a new [AudioFormat].
 func NewAudioFormatStandardFormatWithSampleRateChannelLayout(sampleRate float64, layout *raw.AVAudioChannelLayout) *AudioFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioFormat")), objc.RegisterName("alloc"))
@@ -60,6 +68,8 @@ func NewAudioFormatStandardFormatWithSampleRateChannelLayout(sampleRate float64,
 	return &AudioFormat{inner: raw.AVAudioFormatFromID(_id)}
 }
 
+// @method initWithCommonFormat:sampleRate:channels:interleaved: @abstract Initialize to float with the specified sample rate, channel count and interleavedness. @param format the common format type @param sampleRate the sample rate @param channels the channel count @param interleaved true if interleaved @discussion If the format specifies more than 2 channels, this method fails (returns nil).
+//
 // NewAudioFormatWithCommonFormatSampleRateChannelsInterleaved creates a new [AudioFormat].
 func NewAudioFormatWithCommonFormatSampleRateChannelsInterleaved(format AVAudioCommonFormat, sampleRate float64, channels uint32, interleaved bool) *AudioFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioFormat")), objc.RegisterName("alloc"))
@@ -67,6 +77,8 @@ func NewAudioFormatWithCommonFormatSampleRateChannelsInterleaved(format AVAudioC
 	return &AudioFormat{inner: raw.AVAudioFormatFromID(_id)}
 }
 
+// @method initWithCommonFormat:sampleRate:interleaved:channelLayout: @abstract Initialize to float with the specified sample rate, channel layout and interleavedness. @param format the common format type @param sampleRate the sample rate @param interleaved true if interleaved @param layout the channel layout. must not be nil.
+//
 // NewAudioFormatWithCommonFormatSampleRateInterleavedChannelLayout creates a new [AudioFormat].
 func NewAudioFormatWithCommonFormatSampleRateInterleavedChannelLayout(format AVAudioCommonFormat, sampleRate float64, interleaved bool, layout *raw.AVAudioChannelLayout) *AudioFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioFormat")), objc.RegisterName("alloc"))
@@ -74,6 +86,8 @@ func NewAudioFormatWithCommonFormatSampleRateInterleavedChannelLayout(format AVA
 	return &AudioFormat{inner: raw.AVAudioFormatFromID(_id)}
 }
 
+// @method initWithSettings: @abstract Initialize using a settings dictionary. @discussion See AVAudioSettings.h. Note that many settings dictionary elements pertain to encoder settings, not the basic format, and will be ignored. Returns nil if a format cannot be constructed with the provided settings, e.g. when: - AVNumberOfChannelsKey specifies more than 2 channels, but AVChannelLayoutKey hasn't been specified or the layout does not match - AVLinearPCMBitDepthKey for linear PCM format specifies less than 8 or greater than 32 bits - values for the keys are not of the expected types
+//
 // NewAudioFormatWithSettings creates a new [AudioFormat].
 func NewAudioFormatWithSettings(settings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AudioFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioFormat")), objc.RegisterName("alloc"))
@@ -81,6 +95,8 @@ func NewAudioFormatWithSettings(settings *foundation.NSDictionary[*foundation.NS
 	return &AudioFormat{inner: raw.AVAudioFormatFromID(_id)}
 }
 
+// @method initWithCMAudioFormatDescription: @abstract initialize from a CMAudioFormatDescriptionRef. @param formatDescription the CMAudioFormatDescriptionRef. @discussion If formatDescription is invalid, this method fails (returns nil).
+//
 // NewAudioFormatWithCMAudioFormatDescription creates a new [AudioFormat].
 func NewAudioFormatWithCMAudioFormatDescription(formatDescription unsafe.Pointer) *AudioFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioFormat")), objc.RegisterName("alloc"))
@@ -88,47 +104,65 @@ func NewAudioFormatWithCMAudioFormatDescription(formatDescription unsafe.Pointer
 	return &AudioFormat{inner: raw.AVAudioFormatFromID(_id)}
 }
 
+// @property magicCookie @abstract The underlying magic cookie, if any. @discussion A magic cookie contains metadata associated with encoders and decoders. Encoders produce a magic cookie, and some decoders require a magic cookie to decode properly.
+//
 // WithMagicCookie sets the magicCookie property and returns the receiver for chaining.
 func (x *AudioFormat) WithMagicCookie(magicCookie *foundation.NSData) *AudioFormat {
 	x.inner.SetMagicCookie(magicCookie)
 	return x
 }
 
+// @method isEqual: @abstract Determine whether another format is functionally equivalent. @param object the format to compare against @discussion For PCM, interleavedness is ignored for mono. Differences in the AudioStreamBasicDescription alignment and packedness are ignored when they are not significant (e.g. with 1 channel, 2 bytes per frame and 16 bits per channel, neither alignment, the format is implicitly packed and can be interpreted as either high- or low-aligned.) For AVAudioChannelLayout, a layout with standard mono/stereo tag is considered to be equivalent to a nil layout. Otherwise, the layouts are compared for equality.
+//
 // IsEqual calls the underlying IsEqual.
 func (x *AudioFormat) IsEqual(object objc.ID) bool {
 	return x.inner.IsEqual(object)
 }
 
+// @property standard @abstract Describes whether the format is deinterleaved native-endian float.
+//
 // IsStandard calls the underlying IsStandard.
 func (x *AudioFormat) IsStandard() bool {
 	return x.inner.IsStandard()
 }
 
+// @property commonFormat @abstract An `AVAudioCommonFormat` identifying the format
+//
 // CommonFormat calls the underlying CommonFormat.
 func (x *AudioFormat) CommonFormat() AVAudioCommonFormat {
 	return AVAudioCommonFormat(x.inner.CommonFormat())
 }
 
+// @property channelCount @abstract The number of channels of audio data.
+//
 // ChannelCount calls the underlying ChannelCount.
 func (x *AudioFormat) ChannelCount() uint32 {
 	return x.inner.ChannelCount()
 }
 
+// @property sampleRate @abstract A sampling rate in Hertz.
+//
 // SampleRate calls the underlying SampleRate.
 func (x *AudioFormat) SampleRate() float64 {
 	return x.inner.SampleRate()
 }
 
+// @property interleaved @abstract Describes whether the samples are interleaved. @discussion For non-PCM formats, the value is undefined.
+//
 // IsInterleaved calls the underlying IsInterleaved.
 func (x *AudioFormat) IsInterleaved() bool {
 	return x.inner.IsInterleaved()
 }
 
+// @property streamDescription @abstract Returns the AudioStreamBasicDescription, for use with lower-level audio API's.
+//
 // StreamDescription calls the underlying StreamDescription.
 func (x *AudioFormat) StreamDescription() *coreaudiotypes.AudioStreamBasicDescription {
 	return x.inner.StreamDescription()
 }
 
+// @property channelLayout @abstract The underlying AVAudioChannelLayout, if any. @discussion Only formats with more than 2 channels are required to have channel layouts.
+//
 // ChannelLayout calls the underlying ChannelLayout.
 func (x *AudioFormat) ChannelLayout() *AudioChannelLayout {
 	_r := x.inner.ChannelLayout()
@@ -138,6 +172,8 @@ func (x *AudioFormat) ChannelLayout() *AudioChannelLayout {
 	return &AudioChannelLayout{inner: _r}
 }
 
+// @property magicCookie @abstract The underlying magic cookie, if any. @discussion A magic cookie contains metadata associated with encoders and decoders. Encoders produce a magic cookie, and some decoders require a magic cookie to decode properly.
+//
 // MagicCookie calls the underlying MagicCookie.
 func (x *AudioFormat) MagicCookie() *foundation.NSData {
 	return x.inner.MagicCookie()
@@ -148,11 +184,15 @@ func (x *AudioFormat) SetMagicCookie(magicCookie *foundation.NSData) {
 	x.inner.SetMagicCookie(magicCookie)
 }
 
+// @property settings @abstract Returns the format represented as a dictionary with keys from AVAudioSettings.h.
+//
 // Settings calls the underlying Settings.
 func (x *AudioFormat) Settings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.Settings()
 }
 
+// @property formatDescription @abstract Converts to a CMAudioFormatDescriptionRef, for use with Core Media API's.
+//
 // FormatDescription calls the underlying FormatDescription.
 func (x *AudioFormat) FormatDescription() unsafe.Pointer {
 	return x.inner.FormatDescription()

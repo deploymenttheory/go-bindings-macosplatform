@@ -36,30 +36,40 @@ func NewFrameInterpolatorDescriptor() *FrameInterpolatorDescriptor {
 	return &FrameInterpolatorDescriptor{inner: raw.MTLFXFrameInterpolatorDescriptorFromID(_id)}
 }
 
+// The pixel format of the input color texture for the frame interpolator you create with this descriptor.
+//
 // WithColorTextureFormat sets the colorTextureFormat property and returns the receiver for chaining.
 func (x *FrameInterpolatorDescriptor) WithColorTextureFormat(colorTextureFormat metal.MTLPixelFormat) *FrameInterpolatorDescriptor {
 	x.inner.SetColorTextureFormat(colorTextureFormat)
 	return x
 }
 
+// The pixel format of the output color texture for the frame interpolator you create with this descriptor.
+//
 // WithOutputTextureFormat sets the outputTextureFormat property and returns the receiver for chaining.
 func (x *FrameInterpolatorDescriptor) WithOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) *FrameInterpolatorDescriptor {
 	x.inner.SetOutputTextureFormat(outputTextureFormat)
 	return x
 }
 
+// The pixel format of the input depth texture for the frame interpolator you create with this descriptor.
+//
 // WithDepthTextureFormat sets the depthTextureFormat property and returns the receiver for chaining.
 func (x *FrameInterpolatorDescriptor) WithDepthTextureFormat(depthTextureFormat metal.MTLPixelFormat) *FrameInterpolatorDescriptor {
 	x.inner.SetDepthTextureFormat(depthTextureFormat)
 	return x
 }
 
+// The pixel format of the input motion texture for the frame interpolator you create with this descriptor.
+//
 // WithMotionTextureFormat sets the motionTextureFormat property and returns the receiver for chaining.
 func (x *FrameInterpolatorDescriptor) WithMotionTextureFormat(motionTextureFormat metal.MTLPixelFormat) *FrameInterpolatorDescriptor {
 	x.inner.SetMotionTextureFormat(motionTextureFormat)
 	return x
 }
 
+// The pixel format for the frame interpolator of an input texture containing your game's custom UI.
+//
 // WithUiTextureFormat sets the uiTextureFormat property and returns the receiver for chaining.
 func (x *FrameInterpolatorDescriptor) WithUiTextureFormat(uiTextureFormat metal.MTLPixelFormat) *FrameInterpolatorDescriptor {
 	x.inner.SetUITextureFormat(uiTextureFormat)
@@ -72,40 +82,54 @@ func (x *FrameInterpolatorDescriptor) WithScaler(scaler raw.MTLFXFrameInterpolat
 	return x
 }
 
+// The width, in pixels, of the input motion and depth texture for the frame interpolator.
+//
 // WithInputWidth sets the inputWidth property and returns the receiver for chaining.
 func (x *FrameInterpolatorDescriptor) WithInputWidth(inputWidth uint) *FrameInterpolatorDescriptor {
 	x.inner.SetInputWidth(inputWidth)
 	return x
 }
 
+// The height, in pixels, of the input motion and depth texture for the frame interpolator.
+//
 // WithInputHeight sets the inputHeight property and returns the receiver for chaining.
 func (x *FrameInterpolatorDescriptor) WithInputHeight(inputHeight uint) *FrameInterpolatorDescriptor {
 	x.inner.SetInputHeight(inputHeight)
 	return x
 }
 
+// The width, in pixels, of the output color texture for the frame interpolator.
+//
 // WithOutputWidth sets the outputWidth property and returns the receiver for chaining.
 func (x *FrameInterpolatorDescriptor) WithOutputWidth(outputWidth uint) *FrameInterpolatorDescriptor {
 	x.inner.SetOutputWidth(outputWidth)
 	return x
 }
 
+// The height, in pixels, of the output color texture for the frame interpolator.
+//
 // WithOutputHeight sets the outputHeight property and returns the receiver for chaining.
 func (x *FrameInterpolatorDescriptor) WithOutputHeight(outputHeight uint) *FrameInterpolatorDescriptor {
 	x.inner.SetOutputHeight(outputHeight)
 	return x
 }
 
+// Creates a frame interpolator instance for a Metal device. - Parameters: - device: The Metal device that creates the frame interpolator. - Returns: A new frame interpolator instance upon success, or `nil` otherwise.
+//
 // NewFrameInterpolatorWithDevice calls the underlying NewFrameInterpolatorWithDevice.
 func (x *FrameInterpolatorDescriptor) NewFrameInterpolatorWithDevice(device metal.MTLDevice) raw.MTLFXFrameInterpolator {
 	return x.inner.NewFrameInterpolatorWithDevice(device)
 }
 
+// Creates a frame interpolator instance for a Metal device. - Parameters: - device: The Metal device that creates the frame interpolator. - compiler: A compiler instance this method can use to build pipeline state objects. - Returns: A new frame interpolator instance upon success, or `nil` otherwise.
+//
 // NewFrameInterpolatorWithDeviceCompiler calls the underlying NewFrameInterpolatorWithDeviceCompiler.
 func (x *FrameInterpolatorDescriptor) NewFrameInterpolatorWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) raw.MTL4FXFrameInterpolator {
 	return x.inner.NewFrameInterpolatorWithDeviceCompiler(device, compiler)
 }
 
+// The pixel format of the input color texture for the frame interpolator you create with this descriptor.
+//
 // ColorTextureFormat calls the underlying ColorTextureFormat.
 func (x *FrameInterpolatorDescriptor) ColorTextureFormat() metal.MTLPixelFormat {
 	return x.inner.ColorTextureFormat()
@@ -116,6 +140,8 @@ func (x *FrameInterpolatorDescriptor) SetColorTextureFormat(colorTextureFormat m
 	x.inner.SetColorTextureFormat(colorTextureFormat)
 }
 
+// The pixel format of the output color texture for the frame interpolator you create with this descriptor.
+//
 // OutputTextureFormat calls the underlying OutputTextureFormat.
 func (x *FrameInterpolatorDescriptor) OutputTextureFormat() metal.MTLPixelFormat {
 	return x.inner.OutputTextureFormat()
@@ -126,6 +152,8 @@ func (x *FrameInterpolatorDescriptor) SetOutputTextureFormat(outputTextureFormat
 	x.inner.SetOutputTextureFormat(outputTextureFormat)
 }
 
+// The pixel format of the input depth texture for the frame interpolator you create with this descriptor.
+//
 // DepthTextureFormat calls the underlying DepthTextureFormat.
 func (x *FrameInterpolatorDescriptor) DepthTextureFormat() metal.MTLPixelFormat {
 	return x.inner.DepthTextureFormat()
@@ -136,6 +164,8 @@ func (x *FrameInterpolatorDescriptor) SetDepthTextureFormat(depthTextureFormat m
 	x.inner.SetDepthTextureFormat(depthTextureFormat)
 }
 
+// The pixel format of the input motion texture for the frame interpolator you create with this descriptor.
+//
 // MotionTextureFormat calls the underlying MotionTextureFormat.
 func (x *FrameInterpolatorDescriptor) MotionTextureFormat() metal.MTLPixelFormat {
 	return x.inner.MotionTextureFormat()
@@ -146,6 +176,8 @@ func (x *FrameInterpolatorDescriptor) SetMotionTextureFormat(motionTextureFormat
 	x.inner.SetMotionTextureFormat(motionTextureFormat)
 }
 
+// The pixel format for the frame interpolator of an input texture containing your game's custom UI.
+//
 // UiTextureFormat calls the underlying UiTextureFormat.
 func (x *FrameInterpolatorDescriptor) UiTextureFormat() metal.MTLPixelFormat {
 	return x.inner.UiTextureFormat()
@@ -166,6 +198,8 @@ func (x *FrameInterpolatorDescriptor) SetScaler(scaler raw.MTLFXFrameInterpolata
 	x.inner.SetScaler(scaler)
 }
 
+// The width, in pixels, of the input motion and depth texture for the frame interpolator.
+//
 // InputWidth calls the underlying InputWidth.
 func (x *FrameInterpolatorDescriptor) InputWidth() uint {
 	return x.inner.InputWidth()
@@ -176,6 +210,8 @@ func (x *FrameInterpolatorDescriptor) SetInputWidth(inputWidth uint) {
 	x.inner.SetInputWidth(inputWidth)
 }
 
+// The height, in pixels, of the input motion and depth texture for the frame interpolator.
+//
 // InputHeight calls the underlying InputHeight.
 func (x *FrameInterpolatorDescriptor) InputHeight() uint {
 	return x.inner.InputHeight()
@@ -186,6 +222,8 @@ func (x *FrameInterpolatorDescriptor) SetInputHeight(inputHeight uint) {
 	x.inner.SetInputHeight(inputHeight)
 }
 
+// The width, in pixels, of the output color texture for the frame interpolator.
+//
 // OutputWidth calls the underlying OutputWidth.
 func (x *FrameInterpolatorDescriptor) OutputWidth() uint {
 	return x.inner.OutputWidth()
@@ -196,6 +234,8 @@ func (x *FrameInterpolatorDescriptor) SetOutputWidth(outputWidth uint) {
 	x.inner.SetOutputWidth(outputWidth)
 }
 
+// The height, in pixels, of the output color texture for the frame interpolator.
+//
 // OutputHeight calls the underlying OutputHeight.
 func (x *FrameInterpolatorDescriptor) OutputHeight() uint {
 	return x.inner.OutputHeight()

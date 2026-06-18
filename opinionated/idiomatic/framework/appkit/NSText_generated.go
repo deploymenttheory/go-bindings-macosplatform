@@ -427,6 +427,8 @@ func (x *Text) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.
 	return x
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *Text) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Text {
 	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)

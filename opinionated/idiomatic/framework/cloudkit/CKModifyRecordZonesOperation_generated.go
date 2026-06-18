@@ -39,6 +39,8 @@ func NewModifyRecordZonesOperation() *ModifyRecordZonesOperation {
 	return &ModifyRecordZonesOperation{inner: raw.CKModifyRecordZonesOperationFromID(_id)}
 }
 
+// Creates an operation for modifying the specified record zones. - Parameters: - recordZonesToSave: The record zones to save. You can specify `nil` for this parameter. - recordZoneIDsToDelete: The IDs of the record zones to delete. You can specify `nil` for this parameter. The record zones you intend to save or delete must all reside in the same database, which you specify when you configure the operation. If you delete a record zone, CloudKit deletes any records it contains.
+//
 // NewModifyRecordZonesOperationWithRecordZonesToSaveRecordZoneIDsToDelete creates a new [ModifyRecordZonesOperation].
 func NewModifyRecordZonesOperationWithRecordZonesToSaveRecordZoneIDsToDelete(recordZonesToSave *foundation.NSArray[*raw.CKRecordZone], recordZoneIDsToDelete *foundation.NSArray[*raw.CKRecordZoneID]) *ModifyRecordZonesOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKModifyRecordZonesOperation")), objc.RegisterName("alloc"))
@@ -46,6 +48,8 @@ func NewModifyRecordZonesOperationWithRecordZonesToSaveRecordZoneIDsToDelete(rec
 	return &ModifyRecordZonesOperation{inner: raw.CKModifyRecordZonesOperationFromID(_id)}
 }
 
+// The record zones to save to the database. The initial value of the property is the array that you provide to the “CKModifyRecordZonesOperation/init(recordZonesToSave:recordZoneIDsToDelete:)“ method. You can modify this array as necessary before you execute the operation. The record zones must all target the same database. You can specify `nil`, or an empty array, for this property. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
+//
 // WithRecordZonesToSave sets the collection, converting the Go slice to an NSArray.
 func (x *ModifyRecordZonesOperation) WithRecordZonesToSave(items ...*raw.CKRecordZone) *ModifyRecordZonesOperation {
 	if len(items) == 0 {
@@ -64,6 +68,8 @@ func (x *ModifyRecordZonesOperation) WithRecordZonesToSave(items ...*raw.CKRecor
 	return x
 }
 
+// The IDs of the record zones to delete permanently from the database. The initial value of the property is the array of zone IDs that you provide to the “CKModifyRecordZonesOperation/init(recordZonesToSave:recordZoneIDsToDelete:)“ method. You can modify this array as necessary before you execute the operation. The record zones must all target the same database. You can specify `nil`, or an empty array, for this property. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
+//
 // WithRecordZoneIDsToDelete sets the collection, converting the Go slice to an NSArray.
 func (x *ModifyRecordZonesOperation) WithRecordZoneIDsToDelete(items ...*raw.CKRecordZoneID) *ModifyRecordZonesOperation {
 	if len(items) == 0 {
@@ -82,78 +88,104 @@ func (x *ModifyRecordZonesOperation) WithRecordZoneIDsToDelete(items ...*raw.CKR
 	return x
 }
 
+// The closure to execute when CloudKit saves a record zone. This property is a closure that returns no value and has the following parameters: - The ID of the record zone that CloudKit saves. - The record zone that CloudKit saves, or `nil` if CloudKit can't save the record zone. - If CloudKit can't save the record zone, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each record zone in the “CKModifyRecordZonesOperation/recordZonesToSave“ property. Each time the closure executes, it executes serially with respect to the other record zone completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+//
 // WithPerRecordZoneSaveBlock sets the perRecordZoneSaveBlock property and returns the receiver for chaining.
 func (x *ModifyRecordZonesOperation) WithPerRecordZoneSaveBlock(perRecordZoneSaveBlock func(*raw.CKRecordZoneID, *raw.CKRecordZone, unsafe.Pointer)) *ModifyRecordZonesOperation {
 	x.inner.SetPerRecordZoneSaveBlock(perRecordZoneSaveBlock)
 	return x
 }
 
+// The closure to execute when CloudKit deletes a record zone. This property is a closure that returns no value and has the following parameters: - The ID of the record zone that CloudKit deletes. - If CloudKit can't delete the record zone, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each record zone in the “CKModifyRecordZonesOperation/recordZoneIDsToDelete“ property. Each time the closure executes, it executes serially with respect to the other record zone completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+//
 // WithPerRecordZoneDeleteBlock sets the perRecordZoneDeleteBlock property and returns the receiver for chaining.
 func (x *ModifyRecordZonesOperation) WithPerRecordZoneDeleteBlock(perRecordZoneDeleteBlock func(*raw.CKRecordZoneID, unsafe.Pointer)) *ModifyRecordZonesOperation {
 	x.inner.SetPerRecordZoneDeleteBlock(perRecordZoneDeleteBlock)
 	return x
 }
 
+// The closure to execute after CloudKit modifies all of the record zones. This property is a closure that returns no value and has the following parameters: - The record zones that CloudKit saves. - The IDs of the record zones that CloudKit deletes. - If CloudKit can't modify any of the record zones, this parameter provides information about the failure; otherwise, it's `nil`. The closure executes once, and represents your only opportunity to process the results. The closure reports an error of type “CKError/Code/partialFailure“ when it modifies only some of the record zones successfully. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are the IDs of the record zones that the operation can't modify, and the corresponding values are errors that contain information about the failures. If you intend to use this closure to process the results, set it before you execute the operation or submit the operation to a queue.
+//
 // WithModifyRecordZonesCompletionBlock sets the modifyRecordZonesCompletionBlock property and returns the receiver for chaining.
 func (x *ModifyRecordZonesOperation) WithModifyRecordZonesCompletionBlock(modifyRecordZonesCompletionBlock func(*foundation.NSArray[*raw.CKRecordZone], *foundation.NSArray[*raw.CKRecordZoneID], unsafe.Pointer)) *ModifyRecordZonesOperation {
 	x.inner.SetModifyRecordZonesCompletionBlock(modifyRecordZonesCompletionBlock)
 	return x
 }
 
+// The database that the operation uses. For operations that you execute in a custom queue, use this property to specify the target database. Setting the database also sets the corresponding container, which it inherits from “CKOperation“. If this property's value is `nil`, the operation targets the user's private database. The default value is `nil`.
+//
 // WithDatabase sets the database property and returns the receiver for chaining.
 func (x *ModifyRecordZonesOperation) WithDatabase(database *Database) *ModifyRecordZonesOperation {
 	x.inner.CKDatabaseOperation.SetDatabase(database.Unwrap())
 	return x
 }
 
+// The operation's configuration.
+//
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *ModifyRecordZonesOperation) WithConfiguration(configuration *OperationConfiguration) *ModifyRecordZonesOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
+// The operation's group.
+//
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *ModifyRecordZonesOperation) WithGroup(group *OperationGroup) *ModifyRecordZonesOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
+// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+//
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *ModifyRecordZonesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifyRecordZonesOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
 	return x
 }
 
+// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
+//
 // WithContainer sets the container property and returns the receiver for chaining.
 func (x *ModifyRecordZonesOperation) WithContainer(container *Container) *ModifyRecordZonesOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
+//
 // WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
 func (x *ModifyRecordZonesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *ModifyRecordZonesOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
 	return x
 }
 
+// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+//
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *ModifyRecordZonesOperation) WithLongLived(longLived bool) *ModifyRecordZonesOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetLongLived(longLived)
 	return x
 }
 
+// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
+//
 // WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
 func (x *ModifyRecordZonesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifyRecordZonesOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
 	return x
 }
 
+// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
+//
 // WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
 func (x *ModifyRecordZonesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifyRecordZonesOperation {
 	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
 	return x
 }
 
+// The record zones to save to the database. The initial value of the property is the array that you provide to the “CKModifyRecordZonesOperation/init(recordZonesToSave:recordZoneIDsToDelete:)“ method. You can modify this array as necessary before you execute the operation. The record zones must all target the same database. You can specify `nil`, or an empty array, for this property. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
+//
 // RecordZonesToSave returns the collection as a Go slice.
 func (x *ModifyRecordZonesOperation) RecordZonesToSave() []*RecordZone {
 	arr := x.inner.RecordZonesToSave()
@@ -170,6 +202,8 @@ func (x *ModifyRecordZonesOperation) SetRecordZonesToSave(recordZonesToSave *fou
 	x.inner.SetRecordZonesToSave(recordZonesToSave)
 }
 
+// The IDs of the record zones to delete permanently from the database. The initial value of the property is the array of zone IDs that you provide to the “CKModifyRecordZonesOperation/init(recordZonesToSave:recordZoneIDsToDelete:)“ method. You can modify this array as necessary before you execute the operation. The record zones must all target the same database. You can specify `nil`, or an empty array, for this property. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
+//
 // RecordZoneIDsToDelete returns the collection as a Go slice.
 func (x *ModifyRecordZonesOperation) RecordZoneIDsToDelete() []*RecordZoneID {
 	arr := x.inner.RecordZoneIDsToDelete()
@@ -186,6 +220,8 @@ func (x *ModifyRecordZonesOperation) SetRecordZoneIDsToDelete(recordZoneIDsToDel
 	x.inner.SetRecordZoneIDsToDelete(recordZoneIDsToDelete)
 }
 
+// The closure to execute when CloudKit saves a record zone. This property is a closure that returns no value and has the following parameters: - The ID of the record zone that CloudKit saves. - The record zone that CloudKit saves, or `nil` if CloudKit can't save the record zone. - If CloudKit can't save the record zone, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each record zone in the “CKModifyRecordZonesOperation/recordZonesToSave“ property. Each time the closure executes, it executes serially with respect to the other record zone completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+//
 // PerRecordZoneSaveBlock calls the underlying PerRecordZoneSaveBlock.
 func (x *ModifyRecordZonesOperation) PerRecordZoneSaveBlock() objc.Block {
 	return x.inner.PerRecordZoneSaveBlock()
@@ -196,6 +232,8 @@ func (x *ModifyRecordZonesOperation) SetPerRecordZoneSaveBlock(perRecordZoneSave
 	x.inner.SetPerRecordZoneSaveBlock(perRecordZoneSaveBlock)
 }
 
+// The closure to execute when CloudKit deletes a record zone. This property is a closure that returns no value and has the following parameters: - The ID of the record zone that CloudKit deletes. - If CloudKit can't delete the record zone, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each record zone in the “CKModifyRecordZonesOperation/recordZoneIDsToDelete“ property. Each time the closure executes, it executes serially with respect to the other record zone completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+//
 // PerRecordZoneDeleteBlock calls the underlying PerRecordZoneDeleteBlock.
 func (x *ModifyRecordZonesOperation) PerRecordZoneDeleteBlock() objc.Block {
 	return x.inner.PerRecordZoneDeleteBlock()
@@ -227,6 +265,8 @@ func (x *ModifyRecordZonesOperation) SetPerRecordZoneDeleteBlock(ctx context.Con
 	}
 }
 
+// The closure to execute after CloudKit modifies all of the record zones. This property is a closure that returns no value and has the following parameters: - The record zones that CloudKit saves. - The IDs of the record zones that CloudKit deletes. - If CloudKit can't modify any of the record zones, this parameter provides information about the failure; otherwise, it's `nil`. The closure executes once, and represents your only opportunity to process the results. The closure reports an error of type “CKError/Code/partialFailure“ when it modifies only some of the record zones successfully. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are the IDs of the record zones that the operation can't modify, and the corresponding values are errors that contain information about the failures. If you intend to use this closure to process the results, set it before you execute the operation or submit the operation to a queue.
+//
 // ModifyRecordZonesCompletionBlock calls the underlying ModifyRecordZonesCompletionBlock.
 func (x *ModifyRecordZonesOperation) ModifyRecordZonesCompletionBlock() objc.Block {
 	return x.inner.ModifyRecordZonesCompletionBlock()

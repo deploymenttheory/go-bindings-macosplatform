@@ -35,60 +35,80 @@ func NewGraphGRUDescriptor() *GraphGRUDescriptor {
 	return &GraphGRUDescriptor{inner: raw.MPSGraphGRUDescriptorFromID(_id)}
 }
 
+// A parameter that defines the time direction of the input sequence. If set to `YES` then the input sequence is passed in reverse time order to the layer. Note: Ignored when `bidirectional = YES`. Default value: `NO`.
+//
 // WithReverse sets the reverse property and returns the receiver for chaining.
 func (x *GraphGRUDescriptor) WithReverse(reverse bool) *GraphGRUDescriptor {
 	x.inner.SetReverse(reverse)
 	return x
 }
 
+// A parameter that defines a bidirectional GRU layer. If set to `YES` then the input sequence is traversed in both directions and the two results are concatenated together on the channel-axis. Default value: `NO`.
+//
 // WithBidirectional sets the bidirectional property and returns the receiver for chaining.
 func (x *GraphGRUDescriptor) WithBidirectional(bidirectional bool) *GraphGRUDescriptor {
 	x.inner.SetBidirectional(bidirectional)
 	return x
 }
 
+// A parameter that enables the GRU layer to support training. If set to `YES` then the layer will produce training state tensor as a secondary output. Default value: `NO`.
+//
 // WithTraining sets the training property and returns the receiver for chaining.
 func (x *GraphGRUDescriptor) WithTraining(training bool) *GraphGRUDescriptor {
 	x.inner.SetTraining(training)
 	return x
 }
 
+// A parameter that controls the internal order of the GRU gates. If set to `YES` then the layer will use the gate-ordering `[ r, z, o ]` instead of default `[ z, r, o ]`. Default value: `NO`.
+//
 // WithResetGateFirst sets the resetGateFirst property and returns the receiver for chaining.
 func (x *GraphGRUDescriptor) WithResetGateFirst(resetGateFirst bool) *GraphGRUDescriptor {
 	x.inner.SetResetGateFirst(resetGateFirst)
 	return x
 }
 
+// A parameter that chooses between two variants for the reset gate computation. If set to `YES` then the layer will compute the intermediate value as `c[t] = ( b + (h[t-1] m ) R^T) r[t]`. Otherwise it's computed as `c[t] = (h[t-1] r[t] m) R^T`. Default value: `NO`.
+//
 // WithResetAfter sets the resetAfter property and returns the receiver for chaining.
 func (x *GraphGRUDescriptor) WithResetAfter(resetAfter bool) *GraphGRUDescriptor {
 	x.inner.SetResetAfter(resetAfter)
 	return x
 }
 
+// A parameter that chooses between two variants for the final output computation. If set to `YES` then the layer will compute the final value as `h[t] = z[t] h[t-1] + (1-z[t]) o[t]`. Otherwise it's computed as `h[t] = (1-z[t]) h[t-1] + z[t] o[t]`. Default value: `NO`.
+//
 // WithFlipZ sets the flipZ property and returns the receiver for chaining.
 func (x *GraphGRUDescriptor) WithFlipZ(flipZ bool) *GraphGRUDescriptor {
 	x.inner.SetFlipZ(flipZ)
 	return x
 }
 
+// A parameter that defines the activation function to use with the update-gate of the GRU operation. Default value: `MPSGraphRNNActivationSigmoid`.
+//
 // WithUpdateGateActivation sets the updateGateActivation property and returns the receiver for chaining.
 func (x *GraphGRUDescriptor) WithUpdateGateActivation(updateGateActivation MPSGraphRNNActivation) *GraphGRUDescriptor {
 	x.inner.SetUpdateGateActivation(raw.MPSGraphRNNActivation(updateGateActivation))
 	return x
 }
 
+// A parameter that defines the activation function to use with the reset-gate of the GRU operation. Default value: `MPSGraphRNNActivationSigmoid`.
+//
 // WithResetGateActivation sets the resetGateActivation property and returns the receiver for chaining.
 func (x *GraphGRUDescriptor) WithResetGateActivation(resetGateActivation MPSGraphRNNActivation) *GraphGRUDescriptor {
 	x.inner.SetResetGateActivation(raw.MPSGraphRNNActivation(resetGateActivation))
 	return x
 }
 
+// A parameter that defines the activation function to use with the output-gate of the GRU operation. Default value: `MPSGraphRNNActivationTanh`.
+//
 // WithOutputGateActivation sets the outputGateActivation property and returns the receiver for chaining.
 func (x *GraphGRUDescriptor) WithOutputGateActivation(outputGateActivation MPSGraphRNNActivation) *GraphGRUDescriptor {
 	x.inner.SetOutputGateActivation(raw.MPSGraphRNNActivation(outputGateActivation))
 	return x
 }
 
+// A parameter that defines the time direction of the input sequence. If set to `YES` then the input sequence is passed in reverse time order to the layer. Note: Ignored when `bidirectional = YES`. Default value: `NO`.
+//
 // Reverse calls the underlying Reverse.
 func (x *GraphGRUDescriptor) Reverse() bool {
 	return x.inner.Reverse()
@@ -99,6 +119,8 @@ func (x *GraphGRUDescriptor) SetReverse(reverse bool) {
 	x.inner.SetReverse(reverse)
 }
 
+// A parameter that defines a bidirectional GRU layer. If set to `YES` then the input sequence is traversed in both directions and the two results are concatenated together on the channel-axis. Default value: `NO`.
+//
 // Bidirectional calls the underlying Bidirectional.
 func (x *GraphGRUDescriptor) Bidirectional() bool {
 	return x.inner.Bidirectional()
@@ -109,6 +131,8 @@ func (x *GraphGRUDescriptor) SetBidirectional(bidirectional bool) {
 	x.inner.SetBidirectional(bidirectional)
 }
 
+// A parameter that enables the GRU layer to support training. If set to `YES` then the layer will produce training state tensor as a secondary output. Default value: `NO`.
+//
 // Training calls the underlying Training.
 func (x *GraphGRUDescriptor) Training() bool {
 	return x.inner.Training()
@@ -119,6 +143,8 @@ func (x *GraphGRUDescriptor) SetTraining(training bool) {
 	x.inner.SetTraining(training)
 }
 
+// A parameter that controls the internal order of the GRU gates. If set to `YES` then the layer will use the gate-ordering `[ r, z, o ]` instead of default `[ z, r, o ]`. Default value: `NO`.
+//
 // ResetGateFirst calls the underlying ResetGateFirst.
 func (x *GraphGRUDescriptor) ResetGateFirst() bool {
 	return x.inner.ResetGateFirst()
@@ -129,6 +155,8 @@ func (x *GraphGRUDescriptor) SetResetGateFirst(resetGateFirst bool) {
 	x.inner.SetResetGateFirst(resetGateFirst)
 }
 
+// A parameter that chooses between two variants for the reset gate computation. If set to `YES` then the layer will compute the intermediate value as `c[t] = ( b + (h[t-1] m ) R^T) r[t]`. Otherwise it's computed as `c[t] = (h[t-1] r[t] m) R^T`. Default value: `NO`.
+//
 // ResetAfter calls the underlying ResetAfter.
 func (x *GraphGRUDescriptor) ResetAfter() bool {
 	return x.inner.ResetAfter()
@@ -139,6 +167,8 @@ func (x *GraphGRUDescriptor) SetResetAfter(resetAfter bool) {
 	x.inner.SetResetAfter(resetAfter)
 }
 
+// A parameter that chooses between two variants for the final output computation. If set to `YES` then the layer will compute the final value as `h[t] = z[t] h[t-1] + (1-z[t]) o[t]`. Otherwise it's computed as `h[t] = (1-z[t]) h[t-1] + z[t] o[t]`. Default value: `NO`.
+//
 // FlipZ calls the underlying FlipZ.
 func (x *GraphGRUDescriptor) FlipZ() bool {
 	return x.inner.FlipZ()
@@ -149,6 +179,8 @@ func (x *GraphGRUDescriptor) SetFlipZ(flipZ bool) {
 	x.inner.SetFlipZ(flipZ)
 }
 
+// A parameter that defines the activation function to use with the update-gate of the GRU operation. Default value: `MPSGraphRNNActivationSigmoid`.
+//
 // UpdateGateActivation calls the underlying UpdateGateActivation.
 func (x *GraphGRUDescriptor) UpdateGateActivation() MPSGraphRNNActivation {
 	return MPSGraphRNNActivation(x.inner.UpdateGateActivation())
@@ -159,6 +191,8 @@ func (x *GraphGRUDescriptor) SetUpdateGateActivation(updateGateActivation MPSGra
 	x.inner.SetUpdateGateActivation(raw.MPSGraphRNNActivation(updateGateActivation))
 }
 
+// A parameter that defines the activation function to use with the reset-gate of the GRU operation. Default value: `MPSGraphRNNActivationSigmoid`.
+//
 // ResetGateActivation calls the underlying ResetGateActivation.
 func (x *GraphGRUDescriptor) ResetGateActivation() MPSGraphRNNActivation {
 	return MPSGraphRNNActivation(x.inner.ResetGateActivation())
@@ -169,6 +203,8 @@ func (x *GraphGRUDescriptor) SetResetGateActivation(resetGateActivation MPSGraph
 	x.inner.SetResetGateActivation(raw.MPSGraphRNNActivation(resetGateActivation))
 }
 
+// A parameter that defines the activation function to use with the output-gate of the GRU operation. Default value: `MPSGraphRNNActivationTanh`.
+//
 // OutputGateActivation calls the underlying OutputGateActivation.
 func (x *GraphGRUDescriptor) OutputGateActivation() MPSGraphRNNActivation {
 	return MPSGraphRNNActivation(x.inner.OutputGateActivation())

@@ -116,16 +116,22 @@ func (x *Configuration) WithConnectionIdleTimeoutInSeconds(connectionIdleTimeout
 	return x
 }
 
+// @method saveUsingAuthorization:error: @abstract Saves the configuration using the provided authorization. @discussion Saves the configuration using the provided authorization.
+//
 // SaveUsingAuthorizationError calls the underlying SaveUsingAuthorizationError.
 func (x *Configuration) SaveUsingAuthorizationError(authorization *securityfoundation.SFAuthorization) (bool, error) {
 	return x.inner.SaveUsingAuthorizationError(authorization)
 }
 
+// @method addTrustType:trustAccount:trustPassword:username:password:joinExisting:error: @abstract Adds a trust account with the provided name and password using the credentials provided by the user. @discussion Adds a trust account with the provided name and password using the credentials provided by the user.  User can request that the trust be forcibly created (replacing existing trust if found in directory).  A trust should be established only after enough configuration is available and the configuration been saved.  If the trust is required, then the configuration can be deleted if necessary upon failure.
+//
 // AddTrustTypeTrustAccountTrustPasswordUsernamePasswordJoinExistingError calls the underlying AddTrustTypeTrustAccountTrustPasswordUsernamePasswordJoinExistingError.
 func (x *Configuration) AddTrustTypeTrustAccountTrustPasswordUsernamePasswordJoinExistingError(trustType string, account string, accountPassword string, username string, password string, join bool) (bool, error) {
 	return x.inner.AddTrustTypeTrustAccountTrustPasswordUsernamePasswordJoinExistingError(foundation.NSStringStringWithUTF8String(trustType), foundation.NSStringStringWithUTF8String(account), foundation.NSStringStringWithUTF8String(accountPassword), foundation.NSStringStringWithUTF8String(username), foundation.NSStringStringWithUTF8String(password), join)
 }
 
+// @method removeTrustUsingUsername:password:deleteTrustAccount:error: @abstract Removes trust using the provided username and password. @discussion Removes trust using the provided username and password.  The trust account will be removed from the directory only if requested.
+//
 // RemoveTrustUsingUsernamePasswordDeleteTrustAccountError calls the underlying RemoveTrustUsingUsernamePasswordDeleteTrustAccountError.
 func (x *Configuration) RemoveTrustUsingUsernamePasswordDeleteTrustAccountError(username string, password string, deleteAccount bool) (bool, error) {
 	return x.inner.RemoveTrustUsingUsernamePasswordDeleteTrustAccountError(foundation.NSStringStringWithUTF8String(username), foundation.NSStringStringWithUTF8String(password), deleteAccount)

@@ -31,6 +31,8 @@ func KeyValueSharedObserversFromID(id objc.ID) *KeyValueSharedObservers {
 	return &KeyValueSharedObservers{inner: raw.NSKeyValueSharedObserversFromID(id)}
 }
 
+// A new collection of observables for an observable object of the given class
+//
 // NewKeyValueSharedObserversWithObservableClass creates a new [KeyValueSharedObservers].
 func NewKeyValueSharedObserversWithObservableClass(observableClass objc.Class) *KeyValueSharedObservers {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSKeyValueSharedObservers")), objc.RegisterName("alloc"))
@@ -44,11 +46,15 @@ func (x *KeyValueSharedObservers) WithScriptingProperties(scriptingProperties *r
 	return x
 }
 
+// Add a new observer to the collection. This method works like `-[NSObject addObserver: forKey: options: context:]`, but observations on nested and computed properties are disallowed. Observers are not registered until `setSharedObservers` is called on the observable. - Parameter observer: The observer object to register for KVO notifications. The observer must implement the key-value observing method “observeValue: forKeyPath: of: change: context:“ - Parameter key: key of the property being observed. This cannot be a nested key path or a computed property - Parameter options: A combination of NSKeyValueObservingOptions values that specify what is included in observation notifications. For possible values see NSKeyValueObservingOptions. - Parameter context: Arbitrary data which is passed to the observer object
+//
 // AddSharedObserverForKeyOptionsContext calls the underlying AddSharedObserverForKeyOptionsContext.
 func (x *KeyValueSharedObservers) AddSharedObserverForKeyOptionsContext(observer *raw.NSObject, key string, options NSKeyValueObservingOptions, context_ unsafe.Pointer) {
 	x.inner.AddSharedObserverForKeyOptionsContext(observer, foundation.NSStringStringWithUTF8String(key), raw.NSKeyValueObservingOptions(options), context_)
 }
 
+// A momentary snapshot of all observers added to the collection thus far, that can be assigned to an observable using “-[NSObject setSharedObservers:]“
+//
 // Snapshot calls the underlying Snapshot.
 func (x *KeyValueSharedObservers) Snapshot() *KeyValueSharedObserversSnapshot {
 	_r := x.inner.Snapshot()

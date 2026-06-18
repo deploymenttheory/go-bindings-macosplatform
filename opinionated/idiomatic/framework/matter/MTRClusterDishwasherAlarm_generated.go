@@ -31,6 +31,8 @@ func MTRClusterDishwasherAlarmFromID(id objc.ID) *MTRClusterDishwasherAlarm {
 	return &MTRClusterDishwasherAlarm{inner: raw.MTRClusterDishwasherAlarmFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterDishwasherAlarmWithDeviceEndpointIDQueue creates a new [MTRClusterDishwasherAlarm].
 func NewMTRClusterDishwasherAlarmWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterDishwasherAlarm {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterDishwasherAlarm")), objc.RegisterName("alloc"))

@@ -32,6 +32,8 @@ func MTRClusterElectricalEnergyMeasurementFromID(id objc.ID) *MTRClusterElectric
 	return &MTRClusterElectricalEnergyMeasurement{inner: raw.MTRClusterElectricalEnergyMeasurementFromID(id)}
 }
 
+// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+//
 // NewMTRClusterElectricalEnergyMeasurementWithDeviceEndpointIDQueue creates a new [MTRClusterElectricalEnergyMeasurement].
 func NewMTRClusterElectricalEnergyMeasurementWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterElectricalEnergyMeasurement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterElectricalEnergyMeasurement")), objc.RegisterName("alloc"))

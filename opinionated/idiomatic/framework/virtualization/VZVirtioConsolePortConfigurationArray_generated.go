@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents a collection of Virtio console port configurations.
+//
 // VirtioConsolePortConfigurationArray wraps [raw.VZVirtioConsolePortConfigurationArray] with a fluent Go API.
 type VirtioConsolePortConfigurationArray struct {
 	inner *raw.VZVirtioConsolePortConfigurationArray
@@ -37,12 +39,16 @@ func NewVirtioConsolePortConfigurationArray() *VirtioConsolePortConfigurationArr
 	return &VirtioConsolePortConfigurationArray{inner: raw.VZVirtioConsolePortConfigurationArrayFromID(_id)}
 }
 
+// An unsigned integer that represents the maximum number of ports allocated by this device.
+//
 // WithMaximumPortCount sets the maximumPortCount property and returns the receiver for chaining.
 func (x *VirtioConsolePortConfigurationArray) WithMaximumPortCount(maximumPortCount uint32) *VirtioConsolePortConfigurationArray {
 	x.inner.SetMaximumPortCount(maximumPortCount)
 	return x
 }
 
+// Returns the Virtio console port configuration as the specified index.
+//
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *VirtioConsolePortConfigurationArray) ObjectAtIndexedSubscript(portIndex uint) *VirtioConsolePortConfiguration {
 	_r := x.inner.ObjectAtIndexedSubscript(portIndex)
@@ -52,11 +58,15 @@ func (x *VirtioConsolePortConfigurationArray) ObjectAtIndexedSubscript(portIndex
 	return &VirtioConsolePortConfiguration{inner: _r}
 }
 
+// @abstract Set a port configuration at the specified index.
+//
 // SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
 func (x *VirtioConsolePortConfigurationArray) SetObjectAtIndexedSubscript(configuration *raw.VZVirtioConsolePortConfiguration, portIndex uint) {
 	x.inner.SetObjectAtIndexedSubscript(configuration, portIndex)
 }
 
+// @abstract The maximum number of ports allocated by this device. The default is the number of ports attached to this device.
+//
 // MaximumPortCount calls the underlying MaximumPortCount.
 func (x *VirtioConsolePortConfigurationArray) MaximumPortCount() uint32 {
 	return x.inner.MaximumPortCount()

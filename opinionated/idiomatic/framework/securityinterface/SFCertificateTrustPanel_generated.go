@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// @class SFCertificateTrustPanel @abstract SFCertificateTrustPanel is a panel and sheet interface that allows a user to make trust decisions when one or more certificates involved in an operation are invalid or cannot be verified. It should be used whenever confirmation is required before proceeding with a certificate-related operation. It can also be displayed as an informative alert without requiring a decision to be made (if the operation or transaction has already occurred.)
+//
 // CertificateTrustPanel wraps [raw.SFCertificateTrustPanel] with a fluent Go API.
 type CertificateTrustPanel struct {
 	inner *raw.SFCertificateTrustPanel
@@ -39,21 +41,29 @@ func NewCertificateTrustPanel() *CertificateTrustPanel {
 	return &CertificateTrustPanel{inner: raw.SFCertificateTrustPanelFromID(_id)}
 }
 
+// @method runModalForTrust:message: @abstract Displays a modal panel that shows the results of a certificate trust evaluation. Returns NSOKButton if the default button is pressed, or NSCancelButton if the alternate button is pressed. Note that the user can edit trust decisions in this panel; call SecTrustGetResult after the panel is dismissed to obtain the current trust result for the SecTrustRef. @param trust A trust reference, previously created with SecTrustCreateWithCertificates (see <Security/SecTrust.h>). @param message Client-defined message string to display in the panel.
+//
 // RunModalForTrustMessage calls the underlying RunModalForTrustMessage.
 func (x *CertificateTrustPanel) RunModalForTrustMessage(trust unsafe.Pointer, message string) int {
 	return x.inner.RunModalForTrustMessage(trust, foundation.NSStringStringWithUTF8String(message))
 }
 
+// @method beginSheetForWindow:trust:message:modalDelegate:didEndSelector:contextInfo: @abstract Displays a modal sheet that shows the results of a certificate trust evaluation. @discussion The didEndSelector method should have the following signature: - (void)certificateTrustSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo returnCode will contain either NSOKButton or NSCancelButton. Note that the user can edit trust decisions in this panel; call SecTrustGetResult after the panel is dismissed to obtain the current trust result for the SecTrustRef. @param docWindow The parent window to which the sheet is attached. @param modalDelegate The object whose didEndSelector method will be called when the sheet is dismissed. @param didEndSelector This method is called when the sheet is dismissed. @param contextInfo Client-defined contextual data which will be passed to the didEndSelector method. @param trust A trust reference, previously created with SecTrustCreateWithCertificates (see <Security/SecTrust.h>). @param message Client-defined message string to display in the panel.
+//
 // BeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustMessage calls the underlying BeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustMessage.
 func (x *CertificateTrustPanel) BeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustMessage(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, trust unsafe.Pointer, message string) {
 	x.inner.BeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustMessage(docWindow, delegate, didEndSelector, contextInfo, trust, foundation.NSStringStringWithUTF8String(message))
 }
 
+// @method setInformativeText: @abstract Sets the optional informative text displayed in the SFCertificateTrustPanel. @param informativeText The informative text to display in the panel. @discussion By default, informative text describing the current certificate trust status is displayed. Call this method only if your application needs to customize the displayed informative text.
+//
 // SetInformativeText calls the underlying SetInformativeText.
 func (x *CertificateTrustPanel) SetInformativeText(informativeText string) {
 	x.inner.SetInformativeText(foundation.NSStringStringWithUTF8String(informativeText))
 }
 
+// @method informativeText @abstract Returns the informative text currently displayed in the SFCertificateTrustPanel.
+//
 // InformativeText calls the underlying InformativeText.
 func (x *CertificateTrustPanel) InformativeText() string {
 	_r := x.inner.InformativeText()

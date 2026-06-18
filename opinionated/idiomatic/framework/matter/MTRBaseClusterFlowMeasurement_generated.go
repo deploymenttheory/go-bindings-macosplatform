@@ -33,6 +33,8 @@ func MTRBaseClusterFlowMeasurementFromID(id objc.ID) *MTRBaseClusterFlowMeasurem
 	return &MTRBaseClusterFlowMeasurement{inner: raw.MTRBaseClusterFlowMeasurementFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterFlowMeasurementWithDeviceEndpointIDQueue creates a new [MTRBaseClusterFlowMeasurement].
 func NewMTRBaseClusterFlowMeasurementWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterFlowMeasurement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterFlowMeasurement")), objc.RegisterName("alloc"))

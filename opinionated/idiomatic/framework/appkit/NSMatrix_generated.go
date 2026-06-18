@@ -566,6 +566,8 @@ func (x *Matrix) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundatio
 	return x
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *Matrix) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Matrix {
 	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
@@ -753,8 +755,17 @@ func (x *Matrix) AddRow() {
 }
 
 // AddRowWithCells calls the underlying AddRowWithCells.
-func (x *Matrix) AddRowWithCells(newCells *foundation.NSArray[*raw.NSCell]) {
-	x.inner.AddRowWithCells(newCells)
+func (x *Matrix) AddRowWithCells(newCells ...CellProvider) {
+	_ptrs := make([]objc.ID, len(newCells))
+	for _i, _v := range newCells {
+		_ptrs[_i] = _v.asCell().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.NSCell]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.NSCell](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.AddRowWithCells(_arg0)
 }
 
 // InsertRow calls the underlying InsertRow.
@@ -763,8 +774,17 @@ func (x *Matrix) InsertRow(row int) {
 }
 
 // InsertRowWithCells calls the underlying InsertRowWithCells.
-func (x *Matrix) InsertRowWithCells(row int, newCells *foundation.NSArray[*raw.NSCell]) {
-	x.inner.InsertRowWithCells(row, newCells)
+func (x *Matrix) InsertRowWithCells(row int, newCells ...CellProvider) {
+	_ptrs := make([]objc.ID, len(newCells))
+	for _i, _v := range newCells {
+		_ptrs[_i] = _v.asCell().Ptr()
+	}
+	var _arg1 *foundation.NSArray[*raw.NSCell]
+	if len(_ptrs) > 0 {
+		_arg1 = foundation.NSArrayFromID[*raw.NSCell](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.InsertRowWithCells(row, _arg1)
 }
 
 // RemoveRow calls the underlying RemoveRow.
@@ -778,8 +798,17 @@ func (x *Matrix) AddColumn() {
 }
 
 // AddColumnWithCells calls the underlying AddColumnWithCells.
-func (x *Matrix) AddColumnWithCells(newCells *foundation.NSArray[*raw.NSCell]) {
-	x.inner.AddColumnWithCells(newCells)
+func (x *Matrix) AddColumnWithCells(newCells ...CellProvider) {
+	_ptrs := make([]objc.ID, len(newCells))
+	for _i, _v := range newCells {
+		_ptrs[_i] = _v.asCell().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.NSCell]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.NSCell](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.AddColumnWithCells(_arg0)
 }
 
 // InsertColumn calls the underlying InsertColumn.
@@ -788,8 +817,17 @@ func (x *Matrix) InsertColumn(column int) {
 }
 
 // InsertColumnWithCells calls the underlying InsertColumnWithCells.
-func (x *Matrix) InsertColumnWithCells(column int, newCells *foundation.NSArray[*raw.NSCell]) {
-	x.inner.InsertColumnWithCells(column, newCells)
+func (x *Matrix) InsertColumnWithCells(column int, newCells ...CellProvider) {
+	_ptrs := make([]objc.ID, len(newCells))
+	for _i, _v := range newCells {
+		_ptrs[_i] = _v.asCell().Ptr()
+	}
+	var _arg1 *foundation.NSArray[*raw.NSCell]
+	if len(_ptrs) > 0 {
+		_arg1 = foundation.NSArrayFromID[*raw.NSCell](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.InsertColumnWithCells(column, _arg1)
 }
 
 // RemoveColumn calls the underlying RemoveColumn.
@@ -1248,14 +1286,14 @@ type Matrixable interface {
 	RenewRowsColumns(newRows int, newCols int)
 	PutCellAtRowColumn(newCell *raw.NSCell, row int, col int)
 	AddRow()
-	AddRowWithCells(newCells *foundation.NSArray[*raw.NSCell])
+	AddRowWithCells(newCells ...CellProvider)
 	InsertRow(row int)
-	InsertRowWithCells(row int, newCells *foundation.NSArray[*raw.NSCell])
+	InsertRowWithCells(row int, newCells ...CellProvider)
 	RemoveRow(row int)
 	AddColumn()
-	AddColumnWithCells(newCells *foundation.NSArray[*raw.NSCell])
+	AddColumnWithCells(newCells ...CellProvider)
 	InsertColumn(column int)
-	InsertColumnWithCells(column int, newCells *foundation.NSArray[*raw.NSCell])
+	InsertColumnWithCells(column int, newCells ...CellProvider)
 	RemoveColumn(col int)
 	CellWithTag(tag int) *Cell
 	SizeToCells()

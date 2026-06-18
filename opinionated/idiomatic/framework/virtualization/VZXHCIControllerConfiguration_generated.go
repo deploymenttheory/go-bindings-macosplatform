@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The configuration object for the USB Extensible Host Controller Interface (XHCI) controller.
+//
 // XHCIControllerConfiguration wraps [raw.VZXHCIControllerConfiguration] with a fluent Go API.
 type XHCIControllerConfiguration struct {
 	inner *raw.VZXHCIControllerConfiguration

@@ -37,6 +37,8 @@ func NewIntersectionFunctionTableDescriptor() *IntersectionFunctionTableDescript
 	return &IntersectionFunctionTableDescriptor{inner: raw.MTLIntersectionFunctionTableDescriptorFromID(_id)}
 }
 
+// @property functionCount @abstract The number of functions in the table.
+//
 // WithFunctionCount sets the functionCount property and returns the receiver for chaining.
 func (x *IntersectionFunctionTableDescriptor) WithFunctionCount(functionCount uint) *IntersectionFunctionTableDescriptor {
 	x.inner.SetFunctionCount(functionCount)

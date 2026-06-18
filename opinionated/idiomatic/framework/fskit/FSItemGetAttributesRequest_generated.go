@@ -35,17 +35,23 @@ func NewItemGetAttributesRequest() *ItemGetAttributesRequest {
 	return &ItemGetAttributesRequest{inner: raw.FSItemGetAttributesRequestFromID(_id)}
 }
 
+// The attributes requested by the request. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
+//
 // WithWantedAttributes sets the wantedAttributes property and returns the receiver for chaining.
 func (x *ItemGetAttributesRequest) WithWantedAttributes(wantedAttributes FSItemAttribute) *ItemGetAttributesRequest {
 	x.inner.SetWantedAttributes(raw.FSItemAttribute(wantedAttributes))
 	return x
 }
 
+// A method that indicates whether the request wants given attribute. - Parameter attribute: The “FSItemAttribute“ to check.
+//
 // IsAttributeWanted calls the underlying IsAttributeWanted.
 func (x *ItemGetAttributesRequest) IsAttributeWanted(attribute FSItemAttribute) bool {
 	return x.inner.IsAttributeWanted(raw.FSItemAttribute(attribute))
 }
 
+// The attributes requested by the request. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
+//
 // WantedAttributes calls the underlying WantedAttributes.
 func (x *ItemGetAttributesRequest) WantedAttributes() FSItemAttribute {
 	return FSItemAttribute(x.inner.WantedAttributes())

@@ -35,76 +35,106 @@ func NewConvolutionDescriptor() *ConvolutionDescriptor {
 	return &ConvolutionDescriptor{inner: raw.MLCConvolutionDescriptorFromID(_id)}
 }
 
+// @property   convolutionType @abstract   The type of convolution.
+//
 // ConvolutionType calls the underlying ConvolutionType.
 func (x *ConvolutionDescriptor) ConvolutionType() MLCConvolutionType {
 	return MLCConvolutionType(x.inner.ConvolutionType())
 }
 
+// @property   kernelWidth @abstract   The convolution kernel size in x.
+//
 // KernelWidth calls the underlying KernelWidth.
 func (x *ConvolutionDescriptor) KernelWidth() uint {
 	return x.inner.KernelWidth()
 }
 
+// @property   kernelHeight @abstract   The convolution kernel size in y.
+//
 // KernelHeight calls the underlying KernelHeight.
 func (x *ConvolutionDescriptor) KernelHeight() uint {
 	return x.inner.KernelHeight()
 }
 
+// @property   inputFeatureChannelCount @abstract   Number of channels in the input tensor
+//
 // InputFeatureChannelCount calls the underlying InputFeatureChannelCount.
 func (x *ConvolutionDescriptor) InputFeatureChannelCount() uint {
 	return x.inner.InputFeatureChannelCount()
 }
 
+// @property   outputFeatureChannelCount @abstract   Number of channels in the output tensor
+//
 // OutputFeatureChannelCount calls the underlying OutputFeatureChannelCount.
 func (x *ConvolutionDescriptor) OutputFeatureChannelCount() uint {
 	return x.inner.OutputFeatureChannelCount()
 }
 
+// @property   strideInX @abstract   The stride of the kernel in x.
+//
 // StrideInX calls the underlying StrideInX.
 func (x *ConvolutionDescriptor) StrideInX() uint {
 	return x.inner.StrideInX()
 }
 
+// @property   strideInY @abstract   The stride of the kernel in y.
+//
 // StrideInY calls the underlying StrideInY.
 func (x *ConvolutionDescriptor) StrideInY() uint {
 	return x.inner.StrideInY()
 }
 
+// @property   dilationRateInX @abstract   The dilation rate i.e. stride of elements in the kernel in x.
+//
 // DilationRateInX calls the underlying DilationRateInX.
 func (x *ConvolutionDescriptor) DilationRateInX() uint {
 	return x.inner.DilationRateInX()
 }
 
+// @property   dilationRateInY @abstract   The dilation rate i.e. stride of elements in the kernel in y.
+//
 // DilationRateInY calls the underlying DilationRateInY.
 func (x *ConvolutionDescriptor) DilationRateInY() uint {
 	return x.inner.DilationRateInY()
 }
 
+// @property   groupCount @abstract   Number of blocked connections from input channels to output channels
+//
 // GroupCount calls the underlying GroupCount.
 func (x *ConvolutionDescriptor) GroupCount() uint {
 	return x.inner.GroupCount()
 }
 
+// @property   paddingPolicy @abstract   The padding policy to use.
+//
 // PaddingPolicy calls the underlying PaddingPolicy.
 func (x *ConvolutionDescriptor) PaddingPolicy() MLCPaddingPolicy {
 	return MLCPaddingPolicy(x.inner.PaddingPolicy())
 }
 
+// @property   paddingSizeInX @abstract   The pooling size in x (left and right) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
+//
 // PaddingSizeInX calls the underlying PaddingSizeInX.
 func (x *ConvolutionDescriptor) PaddingSizeInX() uint {
 	return x.inner.PaddingSizeInX()
 }
 
+// @property   paddingSizeInY @abstract   The pooling size in y (top and bottom) to use if paddingPolicy is MLCPaddingPolicyUsePaddingSize
+//
 // PaddingSizeInY calls the underlying PaddingSizeInY.
 func (x *ConvolutionDescriptor) PaddingSizeInY() uint {
 	return x.inner.PaddingSizeInY()
 }
 
+// @property   isConvolutionTranspose @abstract   A flag to indicate if this is a convolution transpose
+//
 // IsConvolutionTranspose calls the underlying IsConvolutionTranspose.
 func (x *ConvolutionDescriptor) IsConvolutionTranspose() bool {
 	return x.inner.IsConvolutionTranspose()
 }
 
+// @property   usesDepthwiseConvolution @abstract   A flag to indicate depthwise convolution
+//
 // UsesDepthwiseConvolution calls the underlying UsesDepthwiseConvolution.
 func (x *ConvolutionDescriptor) UsesDepthwiseConvolution() bool {
 	return x.inner.UsesDepthwiseConvolution()

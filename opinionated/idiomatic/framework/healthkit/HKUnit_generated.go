@@ -41,6 +41,8 @@ func (x *Unit) IsNull() bool {
 	return x.inner.IsNull()
 }
 
+// Returns a unique string representation for the unit that could be used with +unitFromString:
+//
 // UnitString calls the underlying UnitString.
 func (x *Unit) UnitString() string {
 	_r := x.inner.UnitString()

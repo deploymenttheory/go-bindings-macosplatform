@@ -39,6 +39,8 @@ func NewMeshWithBufferAllocator(bufferAllocator raw.MDLMeshBufferAllocator) *Mes
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
+// @method initWithVertexBuffer:vertexCount:descriptor:submeshes: @abstract Initialize object with a vertex buffer and a collection of submeshes @return Initialized mesh or nil if descriptor's layout array does not describe a single buffer @param vertexBuffer MDLMeshBuffer object containing all vertex data for the mesh @param vertexCount Number of vertices in the vertexBuffer @param descriptor VertexDescriptor specifying how to interpret vertex data @param submeshes Array of submeshes with index buffers referencing vertex data and/or materials to be applied to mesh
+//
 // NewMeshWithVertexBufferVertexCountDescriptorSubmeshes creates a new [Mesh].
 func NewMeshWithVertexBufferVertexCountDescriptorSubmeshes(vertexBuffer raw.MDLMeshBuffer, vertexCount uint, descriptor *raw.MDLVertexDescriptor, submeshes *foundation.NSArray[*raw.MDLSubmesh]) *Mesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMesh")), objc.RegisterName("alloc"))
@@ -46,6 +48,8 @@ func NewMeshWithVertexBufferVertexCountDescriptorSubmeshes(vertexBuffer raw.MDLM
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
+// @method initWithVertexBuffer:vertexCount:descriptor:submeshes: @abstract Initialize object with an array of vertex buffers (Structure of Arrays) and a collection of submeshes @return Initialized mesh or nil if descriptor's layout array is incompatible with vertexBuffers array @param vertexCount Number of vertices in vertexBuffers @param descriptor VertexDescriptor specifying how to interpret vertex data @param submeshes Array of submeshes with index buffers referencing vertex data and/or materials to be applied to mesh @discussion Allows initialization with the layout of the vertexBuffers in a structure-of-arrays form, in other words, non-interleaved vertex attributes
+//
 // NewMeshWithVertexBuffersVertexCountDescriptorSubmeshes creates a new [Mesh].
 func NewMeshWithVertexBuffersVertexCountDescriptorSubmeshes(vertexBuffers *foundation.NSArray[raw.MDLMeshBuffer], vertexCount uint, descriptor *raw.MDLVertexDescriptor, submeshes *foundation.NSArray[*raw.MDLSubmesh]) *Mesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMesh")), objc.RegisterName("alloc"))
@@ -53,6 +57,8 @@ func NewMeshWithVertexBuffersVertexCountDescriptorSubmeshes(vertexBuffers *found
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
+// @method initBoxMeshWithExtent:segments:inwardNormals:geometryType:allocator: @abstract Factory method for generating a mesh with a cube shape @return MDLMesh box with desired attributes @param extent size of the box in each dimension @param segments Number of slices in each dimension @param inwardNormals Generated Normal point inward @param geometryType Can be MDLGeometryTypeLines, MDLGeometryTypeQuads, or MDLGeometryTypeTriangles @param allocator A mesh buffer allocator used to allocate memory to back buffers for the returned mesh.  If nil, a default allocator will be used @discussion Assembled with triangle or quad primitives.  Specifying inward normals is useful for generating a skybox. The center of the box is at(0, 0, 0). Will raise an exception if an unsupported geometry type is passed in.
+//
 // NewMeshBoxWithExtentSegmentsInwardNormalsGeometryTypeAllocator creates a new [Mesh].
 func NewMeshBoxWithExtentSegmentsInwardNormalsGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, inwardNormals bool, geometryType MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMesh")), objc.RegisterName("alloc"))
@@ -60,6 +66,8 @@ func NewMeshBoxWithExtentSegmentsInwardNormalsGeometryTypeAllocator(extent unsaf
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
+// @method initSphereWithExtent:segments:inwardNormals:geometryType:allocator @abstract Factory method for generating a mesh with an ellipsoid shape @return MDLMesh ellipsoid with desired attributes @param geometryType Must be MDLGeometryTypeTriangles or MDLGeometryTypeLines @param inwardNormals If true, generated normals will face inwards. Useful for generating a skydome. Actual number of vertical slices will be half of 'vertical' segments @param allocator A mesh buffer allocator used to allocate memory to back buffers for the returned mesh.  If nil, a default allocator will be used @discussion Specifying inward normals and hemisphere is useful for generating a skydome. Specifying equal X, Y, and Z radii will generate a sphere. Specifying a y radius of 0.0 will generate a disc. Will raise an exception if radialSegments is < 3, verticalSegments is < 2, or an unsupported geometry type is passed in.
+//
 // NewMeshSphereWithExtentSegmentsInwardNormalsGeometryTypeAllocator creates a new [Mesh].
 func NewMeshSphereWithExtentSegmentsInwardNormalsGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, inwardNormals bool, geometryType MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMesh")), objc.RegisterName("alloc"))
@@ -74,6 +82,8 @@ func NewMeshHemisphereWithExtentSegmentsInwardNormalsCapGeometryTypeAllocator(ex
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
+// @method initCylinderWithExtent:segments:inwardNormals:topCap:bottomCap:geometryType:allocator @abstract Factory method for generating a mesh with a cylindrical shape @return MDLMesh cylinder with desired attributes @param geometryType Must be MDLGeometryTypeTriangles or MDLGeometryTypeLines @param inwardNormals Normals point toward center of cylinder @param allocator A mesh buffer allocator used to allocate memory to back buffers for the returned mesh.  If nil, a default allocator will be used @discussion Center of cylinder at (0, 0, 0) with a top at +Y and bottom at -Y. Specifying equal X and Z radia will generate a true cylinder. Specifying a height of 0.0 and verticalSegments of 0 will generate a disc. Will raise an exception if radialSegments is < 3 or if an unsupported geometry type is passed in. Generated texture coordinates are laid out as follows: ___ /   \   <- T texcoord = 0.0 Texture for top of cylinder   ---> [     ] \___/ [     ]  <- T texcoord = 0.3333 [     ] Texture for sides of cylinder ---> [     ] [_____]  <- T texcoord = 0.6666 /   \ Texture for base of cylinder  ---> [     ] \___/   <- T texcoord = 1.0
+//
 // NewMeshCylinderWithExtentSegmentsInwardNormalsTopCapBottomCapGeometryTypeAllocator creates a new [Mesh].
 func NewMeshCylinderWithExtentSegmentsInwardNormalsTopCapBottomCapGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, inwardNormals bool, topCap bool, bottomCap bool, geometryType MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMesh")), objc.RegisterName("alloc"))
@@ -81,6 +91,8 @@ func NewMeshCylinderWithExtentSegmentsInwardNormalsTopCapBottomCapGeometryTypeAl
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
+// @method initCapsuleWithExtent:cylinderSegments:hemisphereSegments:inwardNormals:geometryType:allocator @abstract Factory method for generating a mesh with a capsule shape; a cylinder with hemispheres for caps. @return MDLMesh capsule with desired attributes @param extent Dimension of bounding box for capsule. @param hemisphereSegments Number of slices through hemisphere caps along Y axis @param geometryType Must be MDLGeometryTypeTriangles or MDLGeometryTypeLines @param inwardNormals Normals point toward center of cylinder @param allocator A mesh buffer allocator used to allocate memory to back buffers for the returned mesh.  If nil, a default allocator will be used @discussion Center of capsule at (0, 0, 0) with a top at +Y and bottom at -Y. The height of hemisphere cap is specified by the minimum of X and Z Specifying equal X and Z radii will generate a true capsule. Specifying a height that is less than the twice of min of the X and Z radii or verticalSegments of 0 will generate a sphere. The full height of the capsule will also incorporate the hemisphere caps. Will raise an exception if radialSegments is < 3 or if hemisphereSegments < 1 or if an unsupported geometry type is specified. Generated texture coordinates for top and bottom caps are wrapped in a similar manner as for a sphere, laid out as follows: ___ /   \   <- T texcoord = 0.0 Texture for top of cylinder   ---> [-----] [     ]  <- T texcoord = extent.x/extent.y [     ] Texture for sides of cylinder ---> [     ] [_____]  <- T texcoord = 1.0 - extent.x/extent.y Texture for base of cylinder  ---> [     ] \___/   <- T texcoord = 1.0
+//
 // NewMeshCapsuleWithExtentCylinderSegmentsHemisphereSegmentsInwardNormalsGeometryTypeAllocator creates a new [Mesh].
 func NewMeshCapsuleWithExtentCylinderSegmentsHemisphereSegmentsInwardNormalsGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, hemisphereSegments int, inwardNormals bool, geometryType MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMesh")), objc.RegisterName("alloc"))
@@ -88,6 +100,8 @@ func NewMeshCapsuleWithExtentCylinderSegmentsHemisphereSegmentsInwardNormalsGeom
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
+// @method initConeWithExtent:segments:inwardNormals:cap:geometryType:allocator @abstract Factory method for generating a mesh with an ellipticalCone shape. @return MDLMesh cone with desired attributes @param geometryType Must be MDLGeometryTypeTriangles or MDLGeometryTypeLines @param inwardNormals Normals point toward center of ellipticalCone @param allocator A mesh buffer allocator used to allocate memory to back buffers for the returned mesh.  If nil, a default allocator will be used @discussion Point of cone at (0, 0, 0) while base of cone is -Y. Will raise an exception if radialSegments is < 3, or verticalSegments is < 1, or if an unsupported geometry type is passed in. Generated texture coordinates are laid out as follows: _____ [     ]  <- T texcoord = 0.0 [     ] Texture for sides of cone ---> [     ] [     ] [_____]  <- T texcoord = 0.6666 /   \ Texture for base of cone  ---> [     ] \___/   <- T texcoord = 1.0
+//
 // NewMeshConeWithExtentSegmentsInwardNormalsCapGeometryTypeAllocator creates a new [Mesh].
 func NewMeshConeWithExtentSegmentsInwardNormalsCapGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, inwardNormals bool, cap_ bool, geometryType MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMesh")), objc.RegisterName("alloc"))
@@ -95,6 +109,8 @@ func NewMeshConeWithExtentSegmentsInwardNormalsCapGeometryTypeAllocator(extent u
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
+// @method initPlaneWithExtent:segments:geometryType:allocator @abstract Factory method for generating a mesh with an planar shape @return MDLMesh plane with desired attributes @param extent extent of the plane @param segments Number of segements in the X and Y dimensions @param geometryType Can be MDLGeometryTypeLines, MDLGeometryTypeQuads, or MDLGeometryTypeTriangles @param allocator A mesh buffer allocator used to allocate memory to back buffers for the returned mesh.  If nil, a default allocator will be used @discussion Creates a plane spanning the greatest dimensions of extent. Will raise an exception if an unsupported geometry type is passed in.
+//
 // NewMeshPlaneWithExtentSegmentsGeometryTypeAllocator creates a new [Mesh].
 func NewMeshPlaneWithExtentSegmentsGeometryTypeAllocator(extent unsafe.Pointer, segments unsafe.Pointer, geometryType MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMesh")), objc.RegisterName("alloc"))
@@ -102,6 +118,8 @@ func NewMeshPlaneWithExtentSegmentsGeometryTypeAllocator(extent unsafe.Pointer, 
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
+// @method initIcosahedronWithExtent:inwardNormals:geometryType:allocator @abstract Factory method for generating a mesh icosahedron @return MDLMesh icosahedron with desired attributes @param inwardNormals Generated normals will face towards the center of the mesh @param allocator A mesh buffer allocator used to allocate memory to back buffers for the returned mesh.  If nil, a default allocator will be used @discussion  Creates an icosahedron with center at (0, 0, 0).
+//
 // NewMeshIcosahedronWithExtentInwardNormalsGeometryTypeAllocator creates a new [Mesh].
 func NewMeshIcosahedronWithExtentInwardNormalsGeometryTypeAllocator(extent unsafe.Pointer, inwardNormals bool, geometryType MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMesh")), objc.RegisterName("alloc"))
@@ -109,6 +127,8 @@ func NewMeshIcosahedronWithExtentInwardNormalsGeometryTypeAllocator(extent unsaf
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
+// @method initMeshBySubdividingMesh:submeshIndex:subdivisionLevels:allocator @abstract Factory method that generates a subdivided mesh from a source mesh @param mesh Mesh from which to generate a subdivided mesh @param submeshIndex Index of submesh in Mesh's submesh array from which to generate a subdivided mesh @param subdivisionLevels The number of levels to subdivide mesh @discussion Subdivision levels over four are likely to generate more triangles than can be reasonably displayed. Index and vertex data will use the same allocator used for the source mesh. Loading an asset using the topology preservation flag set to YES will result in the best subdivision results. @return Returns a mesh subdivided to index level, unless subdivision is impossible.
+//
 // NewMeshMeshBySubdividingMeshSubmeshIndexSubdivisionLevelsAllocator creates a new [Mesh].
 func NewMeshMeshBySubdividingMeshSubmeshIndexSubdivisionLevelsAllocator(mesh *raw.MDLMesh, submeshIndex int, subdivisionLevels uint, allocator raw.MDLMeshBufferAllocator) *Mesh {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMesh")), objc.RegisterName("alloc"))
@@ -116,18 +136,24 @@ func NewMeshMeshBySubdividingMeshSubmeshIndexSubdivisionLevelsAllocator(mesh *ra
 	return &Mesh{inner: raw.MDLMeshFromID(_id)}
 }
 
+// @property vertexDescriptor @abstract Immutable vertex descriptor for interpreting data in vertexBuffers @discussion Setting this applies the new layout in 'vertexBuffers' thus is a heavyweight operation as structured copies of almost all vertex buffer data could be made.  Additionally, if the new vertexDescriptor does not have an attribute in the original vertexDescriptor, that attribute will be deleted.  If the original vertexDescriptor does not have an attribute in the new vertexDescriptor, the data for the added attribute set as the added attribute's initializationValue property. The allocator associated with each original meshbuffer is used to reallocate the corresponding resultant meshbuffer.
+//
 // WithVertexDescriptor sets the vertexDescriptor property and returns the receiver for chaining.
 func (x *Mesh) WithVertexDescriptor(vertexDescriptor *VertexDescriptor) *Mesh {
 	x.inner.SetVertexDescriptor(vertexDescriptor.Unwrap())
 	return x
 }
 
+// @property vertexCount @abstract Number of vertices in the vertexBuffers @discussion The size of vertex data in each buffer can be computed by multiplying this value with the stride of the buffer in the vertexDescriptor's layout
+//
 // WithVertexCount sets the vertexCount property and returns the receiver for chaining.
 func (x *Mesh) WithVertexCount(vertexCount uint) *Mesh {
 	x.inner.SetVertexCount(vertexCount)
 	return x
 }
 
+// @property submeshes @abstract Array of submeshes containing an indexbuffer referencing the vertex data and material to be applied when the mesh is rendered
+//
 // WithSubmeshes sets the collection, converting the Go slice to an NSMutableArray.
 func (x *Mesh) WithSubmeshes(items ...*raw.MDLSubmesh) *Mesh {
 	if len(items) == 0 {
@@ -146,24 +172,32 @@ func (x *Mesh) WithSubmeshes(items ...*raw.MDLSubmesh) *Mesh {
 	return x
 }
 
+// @property parent @abstract Parent object. Nil if no parent. @discussion Set to nil when you remove this from an object container inside the parent object.
+//
 // WithParent sets the parent property and returns the receiver for chaining.
 func (x *Mesh) WithParent(parent ObjectProvider) *Mesh {
 	x.inner.MDLObject.SetParent(parent.asObject())
 	return x
 }
 
+// @property instance @abstract Instance object @discussion nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
+//
 // WithInstance sets the instance property and returns the receiver for chaining.
 func (x *Mesh) WithInstance(instance ObjectProvider) *Mesh {
 	x.inner.MDLObject.SetInstance(instance.asObject())
 	return x
 }
 
+// @property transform @abstract Short hand property for the MDLTransformComponent. @discussion The default value is nil @see MDLTransformComponent
+//
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *Mesh) WithTransform(transform raw.MDLTransformComponent) *Mesh {
 	x.inner.MDLObject.SetTransform(transform)
 	return x
 }
 
+// @property children @abstract Short hand property for the MDLObjectContainerComponent. @discussion The default value is an empty MDLObjectContainer @see MDLObjectContainerComponent
+//
 // WithChildren sets the children property and returns the receiver for chaining.
 func (x *Mesh) WithChildren(children raw.MDLObjectContainerComponent) *Mesh {
 	x.inner.MDLObject.SetChildren(children)
@@ -176,6 +210,8 @@ func (x *Mesh) WithHidden(hidden bool) *Mesh {
 	return x
 }
 
+// @method vertexAttributeDataForAttributeNamed: @abstract convenience selector to get quick access to vertex attribute data @discussion the vertex buffer will remain mapped until the MDLVertexAttributeData is freed.
+//
 // VertexAttributeDataForAttributeNamed calls the underlying VertexAttributeDataForAttributeNamed.
 func (x *Mesh) VertexAttributeDataForAttributeNamed(name string) *VertexAttributeData {
 	_r := x.inner.VertexAttributeDataForAttributeNamed(foundation.NSStringStringWithUTF8String(name))
@@ -185,6 +221,8 @@ func (x *Mesh) VertexAttributeDataForAttributeNamed(name string) *VertexAttribut
 	return &VertexAttributeData{inner: _r}
 }
 
+// @method vertexAttributeDataForAttributeNamed:asFormat @abstract convenience selector to get quick access to vertex attribute data reformatted to the requested format if necessary. @discussion If the desired format has less elements than the source attribute elements, excess elements will be discarded. If the desired format has more elements than the source attribute, then the destination elements will be set to zero. The vertex buffer will remain mapped until the MDLVertexAttributeData is freed.
+//
 // VertexAttributeDataForAttributeNamedAsFormat calls the underlying VertexAttributeDataForAttributeNamedAsFormat.
 func (x *Mesh) VertexAttributeDataForAttributeNamedAsFormat(name string, format MDLVertexFormat) *VertexAttributeData {
 	_r := x.inner.VertexAttributeDataForAttributeNamedAsFormat(foundation.NSStringStringWithUTF8String(name), raw.MDLVertexFormat(format))
@@ -194,11 +232,15 @@ func (x *Mesh) VertexAttributeDataForAttributeNamedAsFormat(name string, format 
 	return &VertexAttributeData{inner: _r}
 }
 
+// @property boundingBox @abstract Bounding box encompassing the mesh @discussion Calculated by iterating through MDLVertexAttributePosition to find min and max bounds. If no attribute is named MDLVertexAttributePosition this will be a invalid bounds where maxBounds is less than minBounds.
+//
 // BoundingBox calls the underlying BoundingBox.
 func (x *Mesh) BoundingBox() raw.MDLAxisAlignedBoundingBox {
 	return x.inner.BoundingBox()
 }
 
+// @property vertexDescriptor @abstract Immutable vertex descriptor for interpreting data in vertexBuffers @discussion Setting this applies the new layout in 'vertexBuffers' thus is a heavyweight operation as structured copies of almost all vertex buffer data could be made.  Additionally, if the new vertexDescriptor does not have an attribute in the original vertexDescriptor, that attribute will be deleted.  If the original vertexDescriptor does not have an attribute in the new vertexDescriptor, the data for the added attribute set as the added attribute's initializationValue property. The allocator associated with each original meshbuffer is used to reallocate the corresponding resultant meshbuffer.
+//
 // VertexDescriptor calls the underlying VertexDescriptor.
 func (x *Mesh) VertexDescriptor() *VertexDescriptor {
 	_r := x.inner.VertexDescriptor()
@@ -213,6 +255,8 @@ func (x *Mesh) SetVertexDescriptor(vertexDescriptor *raw.MDLVertexDescriptor) {
 	x.inner.SetVertexDescriptor(vertexDescriptor)
 }
 
+// @property vertexCount @abstract Number of vertices in the vertexBuffers @discussion The size of vertex data in each buffer can be computed by multiplying this value with the stride of the buffer in the vertexDescriptor's layout
+//
 // VertexCount calls the underlying VertexCount.
 func (x *Mesh) VertexCount() uint {
 	return x.inner.VertexCount()
@@ -223,16 +267,29 @@ func (x *Mesh) SetVertexCount(vertexCount uint) {
 	x.inner.SetVertexCount(vertexCount)
 }
 
+// @property vertexBuffers @abstract Array of buffers containing vertex data @discussion The vertex buffers in this array are indexed by the vertex descriptor.
+//
 // VertexBuffers calls the underlying VertexBuffers.
 func (x *Mesh) VertexBuffers() *foundation.NSArray[raw.MDLMeshBuffer] {
 	return x.inner.VertexBuffers()
 }
 
 // SetVertexBuffers calls the underlying SetVertexBuffers.
-func (x *Mesh) SetVertexBuffers(vertexBuffers *foundation.NSArray[raw.MDLMeshBuffer]) {
-	x.inner.SetVertexBuffers(vertexBuffers)
+func (x *Mesh) SetVertexBuffers(vertexBuffers ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(vertexBuffers))
+	for _i, _v := range vertexBuffers {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MDLMeshBuffer]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MDLMeshBuffer](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetVertexBuffers(_arg0)
 }
 
+// @property submeshes @abstract Array of submeshes containing an indexbuffer referencing the vertex data and material to be applied when the mesh is rendered
+//
 // Submeshes returns the collection as a Go slice.
 func (x *Mesh) Submeshes() []*Submesh {
 	arr := x.inner.Submeshes()
@@ -249,36 +306,50 @@ func (x *Mesh) SetSubmeshes(submeshes *foundation.NSMutableArray[*raw.MDLSubmesh
 	x.inner.SetSubmeshes(submeshes)
 }
 
+// @property allocator @abstract allocator used to allocate contained mesh buffers
+//
 // Allocator calls the underlying Allocator.
 func (x *Mesh) Allocator() raw.MDLMeshBufferAllocator {
 	return x.inner.Allocator()
 }
 
+// @method addAttributeWithName:format @abstract Convenience method to add an attribute @discussion The mesh's allocator will be used to create storage for the new attribute.
+//
 // AddAttributeWithNameFormat calls the underlying AddAttributeWithNameFormat.
 func (x *Mesh) AddAttributeWithNameFormat(name string, format MDLVertexFormat) {
 	x.inner.AddAttributeWithNameFormat(foundation.NSStringStringWithUTF8String(name), raw.MDLVertexFormat(format))
 }
 
+// @method addAttributeWithName:format:type:data:stride @abstract Create a new vertex attribute including an associated buffer with a copy of the supplied data, and update the vertex descriptor accordingly @param name The name the attribute can be found by @param format Format of the data, such as MDLVertexFormatFloat3 @param type The usage of the attribute, such as MDLVertexAttributePosition @param data Object containing the data to be used in the new vertex buffer @param stride The increment in bytes from the start of one data entry to the next.
+//
 // AddAttributeWithNameFormatTypeDataStride calls the underlying AddAttributeWithNameFormatTypeDataStride.
 func (x *Mesh) AddAttributeWithNameFormatTypeDataStride(name string, format MDLVertexFormat, type_ string, data *foundation.NSData, stride int) {
 	x.inner.AddAttributeWithNameFormatTypeDataStride(foundation.NSStringStringWithUTF8String(name), raw.MDLVertexFormat(format), foundation.NSStringStringWithUTF8String(type_), data, stride)
 }
 
+// @method addAttributeWithName:format:type:data:stride:time @abstract Create a new vertex attribute including an associated buffer with a copy of the supplied data, and update the vertex descriptor accordingly @param name The name the attribute can be found by @param format Format of the data, such as MDLVertexFormatFloat3 @param type The usage of the attribute, such as MDLVertexAttributePosition @param data Object containing the data to be used in the new vertex buffer @param stride The increment in bytes from the start of one data entry to the next. @param time The time the attribute is to be invoked at. @discussion Adding an attribute, such as position data, at multiple times will result in attributes being created for each of those times. Attributes corresponding to multiple times can be retrieved from the vertex descriptor.
+//
 // AddAttributeWithNameFormatTypeDataStrideTime calls the underlying AddAttributeWithNameFormatTypeDataStrideTime.
 func (x *Mesh) AddAttributeWithNameFormatTypeDataStrideTime(name string, format MDLVertexFormat, type_ string, data *foundation.NSData, stride int, time_ float64) {
 	x.inner.AddAttributeWithNameFormatTypeDataStrideTime(foundation.NSStringStringWithUTF8String(name), raw.MDLVertexFormat(format), foundation.NSStringStringWithUTF8String(type_), data, stride, time_)
 }
 
+// @method addNormalsWithAttributeNamed:creaseThreshold: @abstract Calculate and add vertex normal data @param attributeName Name is the attribute name of vertex normal attribute.  If nil, vertex normals will be added with the MDLVertexAttributeNormal name string @param creaseThreshold Threshold of the dot product between the 2 triangles after which their face normal will be smoothed out. Therefore, a threshold of 0 will smooth everything and a threshold of 1 won't smooth anything. @discussion Uses the attribute named MDLVertexAttributePosition to calculate vertex normals. If the mesh does not have an attribute with 'attributeName', it will be added, otherwise the attribute name will be overwritten with vertex normal data. 'vertexDescriptor' will be updated to reflect the new attribute.
+//
 // AddNormalsWithAttributeNamedCreaseThreshold calls the underlying AddNormalsWithAttributeNamedCreaseThreshold.
 func (x *Mesh) AddNormalsWithAttributeNamedCreaseThreshold(attributeName string, creaseThreshold float32) {
 	x.inner.AddNormalsWithAttributeNamedCreaseThreshold(foundation.NSStringStringWithUTF8String(attributeName), creaseThreshold)
 }
 
+// @method addTangentBasisForTextureCoordinateAttributeNamed:tangentAttributeNamed:bitangentAttributeNamed @abstract Create a shader basis where the tangent and bitangent span the uv -> object space transform @param textureCoordinateAttributeName Name of texture coordinates to use in calculations @param tangentAttributeName Name of vertex tangent attribute. @param bitangentAttributeName Name of vertex bitangent attribute. @discussion Uses the attribute named MDLVertexAttributePosition and textureCoordinateAttributeName to calculate tangent and bitangent attributes. The mesh's vertexDescriptor will be updated to reflect the new attributes if necessary. The basis may not be orthogonal; to guarantee an orthogonal tangent basis please use addOrthTanBasisForTextureCoordinateAttributeNamed selector.
+//
 // AddTangentBasisForTextureCoordinateAttributeNamedTangentAttributeNamedBitangentAttributeNamed calls the underlying AddTangentBasisForTextureCoordinateAttributeNamedTangentAttributeNamedBitangentAttributeNamed.
 func (x *Mesh) AddTangentBasisForTextureCoordinateAttributeNamedTangentAttributeNamedBitangentAttributeNamed(textureCoordinateAttributeName string, tangentAttributeName string, bitangentAttributeName string) {
 	x.inner.AddTangentBasisForTextureCoordinateAttributeNamedTangentAttributeNamedBitangentAttributeNamed(foundation.NSStringStringWithUTF8String(textureCoordinateAttributeName), foundation.NSStringStringWithUTF8String(tangentAttributeName), foundation.NSStringStringWithUTF8String(bitangentAttributeName))
 }
 
+// @method addTangentBasisForTextureCoordinateAttributeNamed:normalAttributeNamed:tangentAttributeNamed @abstract Create tangents which are orthogonal to the normal @param textureCoordinateAttributeName texture coordinates to use in calculations @param normalAttributeName normals to use in calculations @param tangentAttributeName Name of a four component vertex tangent attribute. @discussion Uses the attribute named MDLVertexAttributePosition and textureCoordinateAttributeName and the specified normals to calculate tangent information. The mesh's vertexDescriptor will be updated to reflect the new attribute if necessary. Note that this method does NOT produce a T.w component which is used in B = (N x T) * T.w Please use addOrthTanBasisForTextureCoordinateAttributeNamed.
+//
 // AddTangentBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed calls the underlying AddTangentBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed.
 func (x *Mesh) AddTangentBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed(textureCoordinateAttributeName string, normalAttributeName string, tangentAttributeName string) {
 	x.inner.AddTangentBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed(foundation.NSStringStringWithUTF8String(textureCoordinateAttributeName), foundation.NSStringStringWithUTF8String(normalAttributeName), foundation.NSStringStringWithUTF8String(tangentAttributeName))
@@ -289,47 +360,65 @@ func (x *Mesh) AddOrthTanBasisForTextureCoordinateAttributeNamedNormalAttributeN
 	x.inner.AddOrthTanBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed(foundation.NSStringStringWithUTF8String(textureCoordinateAttributeName), foundation.NSStringStringWithUTF8String(normalAttributeName), foundation.NSStringStringWithUTF8String(tangentAttributeName))
 }
 
+// @method addTextureCoordinatesForAttributeNamed:textureCoordinateAttributeName @abstract Creates texture coordinates by unwrapping the mesh @param textureCoordinateAttributeName texture coordinates to modify or create @discussion Uses the attribute named MDLVertexAttributePosition and if available, the attribute named MDLVertexAttributeNormal to calculate texture coordinates
+//
 // AddUnwrappedTextureCoordinatesForAttributeNamed calls the underlying AddUnwrappedTextureCoordinatesForAttributeNamed.
 func (x *Mesh) AddUnwrappedTextureCoordinatesForAttributeNamed(textureCoordinateAttributeName string) {
 	x.inner.AddUnwrappedTextureCoordinatesForAttributeNamed(foundation.NSStringStringWithUTF8String(textureCoordinateAttributeName))
 }
 
+// @method flipTextureCoordinatesInAttributeNamed: @abstract Flips texture coordinates by performing the operation (u,v) = (u, 1-v) @param textureCoordinateAttributeName texture coordinates to modify @discussion Many application generate model files with texture coordinate mapping assuming a bottom left bitmap origin. It can be more convenient to have texture coordinates corresponding to an upper left bitmap origin. This selector will perform the flip operation if the requested texture coordinate attribute exists on the mesh. An exception will be raised if the attribute cannot be found
+//
 // FlipTextureCoordinatesInAttributeNamed calls the underlying FlipTextureCoordinatesInAttributeNamed.
 func (x *Mesh) FlipTextureCoordinatesInAttributeNamed(textureCoordinateAttributeName string) {
 	x.inner.FlipTextureCoordinatesInAttributeNamed(foundation.NSStringStringWithUTF8String(textureCoordinateAttributeName))
 }
 
+// @method makeVerticesUnique: @abstract Deindexes the vertex array @discussion If any vertices are shared on multiple faces, duplicate those vertices so faces do not share vertices. The vertex buffer and index buffers on submeshes may grow to accommodate any vertices added.
+//
 // MakeVerticesUnique calls the underlying MakeVerticesUnique.
 func (x *Mesh) MakeVerticesUnique() {
 	x.inner.MakeVerticesUnique()
 }
 
+// @method makeVerticesUniqueAndReturnError: @abstract Deindexes the vertex array @discussion If any vertices are shared on multiple faces, duplicate those vertices so faces do not share vertices. The vertex buffer and index buffers on submeshes may grow to accommodate any vertices added.
+//
 // MakeVerticesUniqueAndReturnError returns any validation error.
 func (x *Mesh) MakeVerticesUniqueAndReturnError() error {
 	_, err := x.inner.MakeVerticesUniqueAndReturnError()
 	return err
 }
 
+// @method replaceAttributeNamed:withData @abstract replace existing attribute data with new attribute data retaining the format of the replacement data. @discussion If the specified attribute does not already exist, it will be created.
+//
 // ReplaceAttributeNamedWithData calls the underlying ReplaceAttributeNamedWithData.
 func (x *Mesh) ReplaceAttributeNamedWithData(name string, newData *raw.MDLVertexAttributeData) {
 	x.inner.ReplaceAttributeNamedWithData(foundation.NSStringStringWithUTF8String(name), newData)
 }
 
+// @method updateAttributeNamed:withData @abstract update existing attribute data with new attribute data retaining the format of the existing data. @discussion If the specified attribute does not already exist, it will be created with the same format as the newData.
+//
 // UpdateAttributeNamedWithData calls the underlying UpdateAttributeNamedWithData.
 func (x *Mesh) UpdateAttributeNamedWithData(name string, newData *raw.MDLVertexAttributeData) {
 	x.inner.UpdateAttributeNamedWithData(foundation.NSStringStringWithUTF8String(name), newData)
 }
 
+// @method removeAttributeNamed: @abstract remove an attribute @discussion if the named attribute does not exist, nothing happens.
+//
 // RemoveAttributeNamed calls the underlying RemoveAttributeNamed.
 func (x *Mesh) RemoveAttributeNamed(name string) {
 	x.inner.RemoveAttributeNamed(foundation.NSStringStringWithUTF8String(name))
 }
 
+// @method generateAmbientOcclusionTextureWithSize: @abstract Creates an Ambient Occlusion texture, returns true upon success, false upon failure @param textureSize Texture Size in which to bake the ambient occlusion @param raysPerSample Number of rays to be sent out of every texture texel against the object for potential occlusion. @param attenuationFactor Float between 0 to 1 that defines how to attenuate the AO value. 0 doesn't change it, and at 1, all AO values are white except if they are originally completely black. Quadratic attenuation in between. @param objectsToConsider NSArray of MDLMeshes containing the objects to raytrace against @param vertexAttributeName NSString of the MDLVertexAttribute where the vertex texture UVs will be stored. Creates it if it doesn't exist, otherwise overwrites current values. @param materialPropertyName NSString of the MDLMaterialProperty that will store the texture in the Mesh. @result Success or failure of the baking process.
+//
 // GenerateAmbientOcclusionTextureWithSizeRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed calls the underlying GenerateAmbientOcclusionTextureWithSizeRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed.
 func (x *Mesh) GenerateAmbientOcclusionTextureWithSizeRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(textureSize unsafe.Pointer, raysPerSample int, attenuationFactor float32, objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string, materialPropertyName string) bool {
 	return x.inner.GenerateAmbientOcclusionTextureWithSizeRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(textureSize, raysPerSample, attenuationFactor, objectsToConsider, foundation.NSStringStringWithUTF8String(vertexAttributeName), foundation.NSStringStringWithUTF8String(materialPropertyName))
 }
 
+// @method generateAmbientOcclusionTextureWithQuality: @abstract Creates an Ambient Occlusion texture, returns true upon success, false upon failure @param bakeQuality Float between 0 and 1 that defines quality of the bake process. 0 is of lower quality but bakes faster and uses less memory, where 1 is of higher quality. @param attenuationFactor Float between 0 to 1 that defines how to attenuate the AO value. 0 doesn't change it, and at 1, all AO values are white except if they are originally completely black. Quadratic attenuation in between. @param objectsToConsider NSArray of MDLMeshes containing the objects to raytrace against @param vertexAttributeName NSString of the MDLVertexAttribute where the vertex texture UVs will be stored. Creates it if it doesn't exist, otherwise overwrites current values. @param materialPropertyName NSString of the MDLMaterialProperty that will store the texture in the Mesh. @result Success or failure of the baking process.
+//
 // GenerateAmbientOcclusionTextureWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed calls the underlying GenerateAmbientOcclusionTextureWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed.
 func (x *Mesh) GenerateAmbientOcclusionTextureWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(bakeQuality float32, attenuationFactor float32, objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string, materialPropertyName string) bool {
 	return x.inner.GenerateAmbientOcclusionTextureWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(bakeQuality, attenuationFactor, objectsToConsider, foundation.NSStringStringWithUTF8String(vertexAttributeName), foundation.NSStringStringWithUTF8String(materialPropertyName))
@@ -381,7 +470,7 @@ type Meshable interface {
 	VertexCount() uint
 	SetVertexCount(vertexCount uint)
 	VertexBuffers() *foundation.NSArray[raw.MDLMeshBuffer]
-	SetVertexBuffers(vertexBuffers *foundation.NSArray[raw.MDLMeshBuffer])
+	SetVertexBuffers(vertexBuffers ...purego.IDer)
 	Submeshes() []*Submesh
 	SetSubmeshes(submeshes *foundation.NSMutableArray[*raw.MDLSubmesh])
 	Allocator() raw.MDLMeshBufferAllocator

@@ -36,6 +36,8 @@ func NewMedicationDoseEvent() *MedicationDoseEvent {
 	return &MedicationDoseEvent{inner: raw.HKMedicationDoseEventFromID(_id)}
 }
 
+// The data type that identified the samples that store medication dose event data. You use this type when creating queries or filtering results by sample type.
+//
 // MedicationDoseEventType calls the underlying MedicationDoseEventType.
 func (x *MedicationDoseEvent) MedicationDoseEventType() *MedicationDoseEventType {
 	_r := x.inner.MedicationDoseEventType()
@@ -45,11 +47,15 @@ func (x *MedicationDoseEvent) MedicationDoseEventType() *MedicationDoseEventType
 	return &MedicationDoseEventType{inner: _r}
 }
 
+// The scheduling context for this logged dose event. The system sets this to “HKMedicationDoseEvent/ScheduleType/asNeeded“ when the person logs a dose without a schedule and “HKMedicationDoseEvent/ScheduleType/schedule“ when a person logs a dose from a scheduled medication reminder.
+//
 // ScheduleType calls the underlying ScheduleType.
 func (x *MedicationDoseEvent) ScheduleType() HKMedicationDoseEventScheduleType {
 	return HKMedicationDoseEventScheduleType(x.inner.ScheduleType())
 }
 
+// The identifier of the medication concept the system associates with this dose event. The system uses this identifier to link the dose event back to its “HKMedicationConcept“ object.
+//
 // MedicationConceptIdentifier calls the underlying MedicationConceptIdentifier.
 func (x *MedicationDoseEvent) MedicationConceptIdentifier() *HealthConceptIdentifier {
 	_r := x.inner.MedicationConceptIdentifier()
@@ -59,26 +65,36 @@ func (x *MedicationDoseEvent) MedicationConceptIdentifier() *HealthConceptIdenti
 	return &HealthConceptIdentifier{inner: _r}
 }
 
+// The date and time the person takes the medication, if scheduled. The value is always non-null for “HKMedicationDoseEvent/ScheduleType/schedule“ and always null for  “HKMedicationDoseEvent/ScheduleType/asNeeded“.
+//
 // ScheduledDate calls the underlying ScheduledDate.
 func (x *MedicationDoseEvent) ScheduledDate() *foundation.NSDate {
 	return x.inner.ScheduledDate()
 }
 
+// The dose quantity a person is expected to take based on their medication schedule. The value is always non-null for “HKMedicationDoseEvent/ScheduleType/schedule“, and always null for “HKMedicationDoseEvent/ScheduleType/asNeeded“.
+//
 // ScheduledDoseQuantity calls the underlying ScheduledDoseQuantity.
 func (x *MedicationDoseEvent) ScheduledDoseQuantity() *foundation.NSNumber {
 	return x.inner.ScheduledDoseQuantity()
 }
 
+// The dose quantity the person reports as taken. For scheduled dose events, the value defaults to the “HKMedicationDoseEvent/scheduledDoseQuantity-477ge“, when logged from a reminder. For as needed dose events, the value defaults to `1` in the medication tracking experience, but can always be edited by the person logging.
+//
 // DoseQuantity calls the underlying DoseQuantity.
 func (x *MedicationDoseEvent) DoseQuantity() *foundation.NSNumber {
 	return x.inner.DoseQuantity()
 }
 
+// The log status the system assigns to this dose event.
+//
 // LogStatus calls the underlying LogStatus.
 func (x *MedicationDoseEvent) LogStatus() HKMedicationDoseEventLogStatus {
 	return HKMedicationDoseEventLogStatus(x.inner.LogStatus())
 }
 
+// The unit that the system associates with the medication when the person logs the dose. This ensures that the dose quantity is recorded with the correct measurement unit.
+//
 // Unit calls the underlying Unit.
 func (x *MedicationDoseEvent) Unit() *Unit {
 	_r := x.inner.Unit()

@@ -35,6 +35,8 @@ func NewLayer() *Layer {
 	return &Layer{inner: raw.SCNLayerFromID(_id)}
 }
 
+// @property scene @abstract Specifies the scene of the receiver
+//
 // WithScene sets the scene property and returns the receiver for chaining.
 func (x *Layer) WithScene(scene *Scene) *Layer {
 	x.inner.SetScene(scene.Unwrap())

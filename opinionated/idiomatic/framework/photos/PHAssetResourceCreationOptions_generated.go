@@ -44,6 +44,8 @@ func (x *AssetResourceCreationOptions) WithOriginalFilename(originalFilename str
 	return x
 }
 
+// The type of data being provided for this asset resource. If not specified, one will be inferred from the PHAssetResourceType or file URL extension (if provided).
+//
 // WithContentType sets the contentType property and returns the receiver for chaining.
 func (x *AssetResourceCreationOptions) WithContentType(contentType *uniformtypeidentifiers.UTType) *AssetResourceCreationOptions {
 	x.inner.SetContentType(contentType)
@@ -76,6 +78,8 @@ func (x *AssetResourceCreationOptions) SetOriginalFilename(originalFilename stri
 	x.inner.SetOriginalFilename(foundation.NSStringStringWithUTF8String(originalFilename))
 }
 
+// The type of data being provided for this asset resource. If not specified, one will be inferred from the PHAssetResourceType or file URL extension (if provided).
+//
 // ContentType calls the underlying ContentType.
 func (x *AssetResourceCreationOptions) ContentType() *uniformtypeidentifiers.UTType {
 	return x.inner.ContentType()

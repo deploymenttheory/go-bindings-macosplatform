@@ -30,6 +30,8 @@ func SwitchNodeDefinitionFromID(id objc.ID) *SwitchNodeDefinition {
 	return &SwitchNodeDefinition{inner: raw.PHASESwitchNodeDefinitionFromID(id)}
 }
 
+// @method initWithSwitchMetaParameterDefinition:identifier @abstract Create a switch node definition @param switchMetaParameterDefinition A metaparameter definition that wil be used to control the parameter of the switch node at runtime. @param identifier An optional custom identifier to give to this object @return A new PHASESwitchNodeDefinition object
+//
 // NewSwitchNodeDefinitionWithSwitchMetaParameterDefinitionIdentifier creates a new [SwitchNodeDefinition].
 func NewSwitchNodeDefinitionWithSwitchMetaParameterDefinitionIdentifier(switchMetaParameterDefinition *raw.PHASEStringMetaParameterDefinition, identifier string) *SwitchNodeDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASESwitchNodeDefinition")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewSwitchNodeDefinitionWithSwitchMetaParameterDefinitionIdentifier(switchMe
 	return &SwitchNodeDefinition{inner: raw.PHASESwitchNodeDefinitionFromID(_id)}
 }
 
+// @method initWithSwitchMetaParameterDefinition @abstract Create a switch node definition @param switchMetaParameterDefinition A metaparameter definition that wil be used to control the parameter of the switch node at runtime. @return A new PHASESwitchNodeDefinition object
+//
 // NewSwitchNodeDefinitionWithSwitchMetaParameterDefinition creates a new [SwitchNodeDefinition].
 func NewSwitchNodeDefinitionWithSwitchMetaParameterDefinition(switchMetaParameterDefinition *raw.PHASEStringMetaParameterDefinition) *SwitchNodeDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASESwitchNodeDefinition")), objc.RegisterName("alloc"))
@@ -44,6 +48,8 @@ func NewSwitchNodeDefinitionWithSwitchMetaParameterDefinition(switchMetaParamete
 	return &SwitchNodeDefinition{inner: raw.PHASESwitchNodeDefinitionFromID(_id)}
 }
 
+// @method addSubtree @abstract Add a subtree to a switch node @param subtree A PHASESoundEventNodeDefinition that will be a child node of this switch node @param switchValue A string value that the metaparameter will use to activate this subtree
+//
 // AddSubtreeSwitchValue calls the underlying AddSubtreeSwitchValue.
 func (x *SwitchNodeDefinition) AddSubtreeSwitchValue(subtree *raw.PHASESoundEventNodeDefinition, switchValue string) {
 	x.inner.AddSubtreeSwitchValue(subtree, foundation.NSStringStringWithUTF8String(switchValue))

@@ -37,16 +37,22 @@ func NewMetricHLSPlaylistRequestEvent() *MetricHLSPlaylistRequestEvent {
 	return &MetricHLSPlaylistRequestEvent{inner: raw.AVMetricHLSPlaylistRequestEventFromID(_id)}
 }
 
+// Returns the URL of the playlist. If no value is available, returns nil.
+//
 // Url calls the underlying Url.
 func (x *MetricHLSPlaylistRequestEvent) Url() *foundation.NSURL {
 	return x.inner.Url()
 }
 
+// Returns true if the playlist request is for a multivariant playlist.
+//
 // IsMultivariantPlaylist calls the underlying IsMultivariantPlaylist.
 func (x *MetricHLSPlaylistRequestEvent) IsMultivariantPlaylist() bool {
 	return x.inner.IsMultivariantPlaylist()
 }
 
+// Returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
+//
 // MediaType calls the underlying MediaType.
 func (x *MetricHLSPlaylistRequestEvent) MediaType() string {
 	_r := x.inner.MediaType()
@@ -56,6 +62,8 @@ func (x *MetricHLSPlaylistRequestEvent) MediaType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns the media resource request event which was used to satisfy the playlist.
+//
 // MediaResourceRequestEvent calls the underlying MediaResourceRequestEvent.
 func (x *MetricHLSPlaylistRequestEvent) MediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
 	_r := x.inner.MediaResourceRequestEvent()

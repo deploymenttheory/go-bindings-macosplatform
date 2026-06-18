@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A base class that represents a network device in a virtual machine.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vznetworkdevice
 type VZNetworkDevice struct {
 	foundation.NSObject

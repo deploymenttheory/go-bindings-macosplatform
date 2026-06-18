@@ -38,24 +38,32 @@ func NewSpeechSynthesisProviderVoiceWithNameIdentifierPrimaryLanguagesSupportedL
 	return &SpeechSynthesisProviderVoice{inner: raw.AVSpeechSynthesisProviderVoiceFromID(_id)}
 }
 
+// @brief  The size of the voice (optional) @discussion This reported size of the voice package on disk, in bytes. Defaults to 0.
+//
 // WithVoiceSize sets the voiceSize property and returns the receiver for chaining.
 func (x *SpeechSynthesisProviderVoice) WithVoiceSize(voiceSize int64) *SpeechSynthesisProviderVoice {
 	x.inner.SetVoiceSize(voiceSize)
 	return x
 }
 
+// @brief  The gender of the voice (optional)
+//
 // WithGender sets the gender property and returns the receiver for chaining.
 func (x *SpeechSynthesisProviderVoice) WithGender(gender AVSpeechSynthesisVoiceGender) *SpeechSynthesisProviderVoice {
 	x.inner.SetGender(raw.AVSpeechSynthesisVoiceGender(gender))
 	return x
 }
 
+// @brief  The age of the voice in years (optional) @discussion This is an optional property that indicates the age of this voice, to be treated as a personality trait. Defaults to 0.
+//
 // WithAge sets the age property and returns the receiver for chaining.
 func (x *SpeechSynthesisProviderVoice) WithAge(age int) *SpeechSynthesisProviderVoice {
 	x.inner.SetAge(age)
 	return x
 }
 
+// @brief  The localized name of the voice
+//
 // Name calls the underlying Name.
 func (x *SpeechSynthesisProviderVoice) Name() string {
 	_r := x.inner.Name()
@@ -65,6 +73,8 @@ func (x *SpeechSynthesisProviderVoice) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @brief  A unique identifier for the voice @discussion The recommended format is reverse domain notation. Behavior is undefined if identifiers are not unique for all voices within a given extension.
+//
 // Identifier calls the underlying Identifier.
 func (x *SpeechSynthesisProviderVoice) Identifier() string {
 	_r := x.inner.Identifier()
@@ -74,6 +84,8 @@ func (x *SpeechSynthesisProviderVoice) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @brief  A set of BCP 47 codes identifying the languages this synthesizer is primarily used for. @discussion These languages are what a user would expect a synthesizer to fully support and be primarily used for.
+//
 // PrimaryLanguages returns the collection as a Go slice.
 func (x *SpeechSynthesisProviderVoice) PrimaryLanguages() []string {
 	arr := x.inner.PrimaryLanguages()
@@ -85,6 +97,8 @@ func (x *SpeechSynthesisProviderVoice) PrimaryLanguages() []string {
 	})
 }
 
+// @brief  A superset of BCP 47 codes identifying the voice’s supported languages. @discussion These languages are what a user would expect a voice to be able to speak such that if the voice is given a multi-lingual phrase, it would be able to speak the entire phrase without a need to to switch voices. For example, a zh-CN voice could have @c ["zh-CN"] as its @c primaryLanguages, but in @c supportedLanguages have @c ["zh-CN","en-US"] indicating if it received "你好 means Hello", it would be able to speak the entire phrase.
+//
 // SupportedLanguages returns the collection as a Go slice.
 func (x *SpeechSynthesisProviderVoice) SupportedLanguages() []string {
 	arr := x.inner.SupportedLanguages()
@@ -96,6 +110,8 @@ func (x *SpeechSynthesisProviderVoice) SupportedLanguages() []string {
 	})
 }
 
+// @brief  The size of the voice (optional) @discussion This reported size of the voice package on disk, in bytes. Defaults to 0.
+//
 // VoiceSize calls the underlying VoiceSize.
 func (x *SpeechSynthesisProviderVoice) VoiceSize() int64 {
 	return x.inner.VoiceSize()
@@ -106,6 +122,8 @@ func (x *SpeechSynthesisProviderVoice) SetVoiceSize(voiceSize int64) {
 	x.inner.SetVoiceSize(voiceSize)
 }
 
+// @brief  The gender of the voice (optional)
+//
 // Gender calls the underlying Gender.
 func (x *SpeechSynthesisProviderVoice) Gender() AVSpeechSynthesisVoiceGender {
 	return AVSpeechSynthesisVoiceGender(x.inner.Gender())
@@ -116,6 +134,8 @@ func (x *SpeechSynthesisProviderVoice) SetGender(gender AVSpeechSynthesisVoiceGe
 	x.inner.SetGender(raw.AVSpeechSynthesisVoiceGender(gender))
 }
 
+// @brief  The age of the voice in years (optional) @discussion This is an optional property that indicates the age of this voice, to be treated as a personality trait. Defaults to 0.
+//
 // Age calls the underlying Age.
 func (x *SpeechSynthesisProviderVoice) Age() int {
 	return x.inner.Age()

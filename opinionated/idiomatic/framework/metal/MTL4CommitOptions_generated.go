@@ -35,6 +35,8 @@ func NewMTL4CommitOptions() *MTL4CommitOptions {
 	return &MTL4CommitOptions{inner: raw.MTL4CommitOptionsFromID(_id)}
 }
 
+// Registers a commit feedback handler that Metal calls with feedback data when available. - Parameter block: “MTL4CommitFeedbackHandler“ that Metal invokes.
+//
 // AddFeedbackHandler calls the underlying AddFeedbackHandler.
 func (x *MTL4CommitOptions) AddFeedbackHandler(block func(objc.ID)) {
 	x.inner.AddFeedbackHandler(block)

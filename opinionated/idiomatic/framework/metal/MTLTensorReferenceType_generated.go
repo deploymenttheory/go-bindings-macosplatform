@@ -35,16 +35,22 @@ func NewTensorReferenceType() *TensorReferenceType {
 	return &TensorReferenceType{inner: raw.MTLTensorReferenceTypeFromID(_id)}
 }
 
+// The underlying data format of the tensor.
+//
 // TensorDataType calls the underlying TensorDataType.
 func (x *TensorReferenceType) TensorDataType() MTLTensorDataType {
 	return MTLTensorDataType(x.inner.TensorDataType())
 }
 
+// The data format you use for indexing into the tensor.
+//
 // IndexType calls the underlying IndexType.
 func (x *TensorReferenceType) IndexType() MTLDataType {
 	return MTLDataType(x.inner.IndexType())
 }
 
+// The array of sizes, in elements, one for each dimension of this tensor. Because shader-bound tensors have dynamic extents, the “MTLTensorExtents/rank“ of `dimensions` corresponds to the rank the shader function specifies, and “MTLTensorExtents/extentsAtDimensionIndex:“ always returns a value of -1.
+//
 // Dimensions calls the underlying Dimensions.
 func (x *TensorReferenceType) Dimensions() *TensorExtents {
 	_r := x.inner.Dimensions()
@@ -54,6 +60,8 @@ func (x *TensorReferenceType) Dimensions() *TensorExtents {
 	return &TensorExtents{inner: _r}
 }
 
+// A value that represents the read/write permissions of the tensor.
+//
 // Access calls the underlying Access.
 func (x *TensorReferenceType) Access() MTLBindingAccess {
 	return MTLBindingAccess(x.inner.Access())

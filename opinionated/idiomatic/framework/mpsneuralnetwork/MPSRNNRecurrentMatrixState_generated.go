@@ -36,11 +36,15 @@ func NewRNNRecurrentMatrixState() *RNNRecurrentMatrixState {
 	return &RNNRecurrentMatrixState{inner: raw.MPSRNNRecurrentMatrixStateFromID(_id)}
 }
 
+// @abstract   Access the stored recurrent matrix data. @param      layerIndex      Index of the layer whose to get - belongs to { 0, 1,...,@see numberOfLayers - 1 } @return     For valid layerIndex the recurrent output matrix data, otherwise nil.
+//
 // GetRecurrentOutputMatrixForLayerIndex calls the underlying GetRecurrentOutputMatrixForLayerIndex.
 func (x *RNNRecurrentMatrixState) GetRecurrentOutputMatrixForLayerIndex(layerIndex uint) *mpscore.MPSMatrix {
 	return x.inner.GetRecurrentOutputMatrixForLayerIndex(layerIndex)
 }
 
+// @abstract   Access the stored memory cell matrix data (if present). @param      layerIndex      Index of the layer whose to get - belongs to { 0, 1,...,@see numberOfLayers - 1 } @return     For valid layerIndex the memory cell image matrix, otherwise nil.
+//
 // GetMemoryCellMatrixForLayerIndex calls the underlying GetMemoryCellMatrixForLayerIndex.
 func (x *RNNRecurrentMatrixState) GetMemoryCellMatrixForLayerIndex(layerIndex uint) *mpscore.MPSMatrix {
 	return x.inner.GetMemoryCellMatrixForLayerIndex(layerIndex)

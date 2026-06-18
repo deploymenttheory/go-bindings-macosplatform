@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The common configuration traits for serial port requests.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzserialportconfiguration
 type VZSerialPortConfiguration struct {
 	foundation.NSObject

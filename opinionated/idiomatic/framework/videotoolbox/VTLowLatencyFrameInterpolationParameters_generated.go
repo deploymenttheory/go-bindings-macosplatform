@@ -33,6 +33,8 @@ func LowLatencyFrameInterpolationParametersFromID(id objc.ID) *LowLatencyFrameIn
 	return &LowLatencyFrameInterpolationParameters{inner: raw.VTLowLatencyFrameInterpolationParametersFromID(id)}
 }
 
+// Creates a new low-latency frame interpolation parameters object. - Parameters: - sourceFrame: Current frame to use for interpolation; must be non `nil`. - previousFrame: Previous frame used for interpolation; must be non `nil`. - interpolationPhase: Array of float numbers that indicate interpolation phase locations at which the processor interpolates the frames. Must be greater than 0 and less than 1.0; for example 0.5 is midway between the previous frame and the source frame. If you enable spatial scaling, the only supported interpolation phase is 0.5. - destinationFrames: Caller-allocated array of `VTFrameProcessorFrame` to receive the interpolated frames. This must have the same number of elements as the the `interpolationPhase`. If you enable spatial scaling, it must also contain an element to hold the scaled version of sourceFrame.
+//
 // NewLowLatencyFrameInterpolationParametersWithSourceFramePreviousFrameInterpolationPhaseDestinationFrames creates a new [LowLatencyFrameInterpolationParameters].
 func NewLowLatencyFrameInterpolationParametersWithSourceFramePreviousFrameInterpolationPhaseDestinationFrames(sourceFrame *raw.VTFrameProcessorFrame, previousFrame *raw.VTFrameProcessorFrame, interpolationPhase *foundation.NSArray[*foundation.NSNumber], destinationFrames *foundation.NSArray[*raw.VTFrameProcessorFrame]) *LowLatencyFrameInterpolationParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTLowLatencyFrameInterpolationParameters")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewLowLatencyFrameInterpolationParametersWithSourceFramePreviousFrameInterp
 	return &LowLatencyFrameInterpolationParameters{inner: raw.VTLowLatencyFrameInterpolationParametersFromID(_id)}
 }
 
+// Source frame that you provided when creating the low-latency frame interpolation parameters object.
+//
 // SourceFrame calls the underlying SourceFrame.
 func (x *LowLatencyFrameInterpolationParameters) SourceFrame() *FrameProcessorFrame {
 	_r := x.inner.SourceFrame()
@@ -49,6 +53,8 @@ func (x *LowLatencyFrameInterpolationParameters) SourceFrame() *FrameProcessorFr
 	return &FrameProcessorFrame{inner: _r}
 }
 
+// Previous frame that you provided when creating the low-latency frame interpolation parameters object.
+//
 // PreviousFrame calls the underlying PreviousFrame.
 func (x *LowLatencyFrameInterpolationParameters) PreviousFrame() *FrameProcessorFrame {
 	_r := x.inner.PreviousFrame()
@@ -58,6 +64,8 @@ func (x *LowLatencyFrameInterpolationParameters) PreviousFrame() *FrameProcessor
 	return &FrameProcessorFrame{inner: _r}
 }
 
+// Array of interpolation phases that you provided when creating the low-latency frame interpolation parameters object.
+//
 // InterpolationPhase returns the collection as a Go slice.
 func (x *LowLatencyFrameInterpolationParameters) InterpolationPhase() []*foundation.NSNumber {
 	arr := x.inner.InterpolationPhase()
@@ -69,6 +77,8 @@ func (x *LowLatencyFrameInterpolationParameters) InterpolationPhase() []*foundat
 	})
 }
 
+// Array of destination frames that you provided when creating the low-latency frame interpolation parameters object.
+//
 // DestinationFrames returns the collection as a Go slice.
 func (x *LowLatencyFrameInterpolationParameters) DestinationFrames() []*FrameProcessorFrame {
 	arr := x.inner.DestinationFrames()

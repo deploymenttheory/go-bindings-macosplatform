@@ -42,36 +42,48 @@ func (x *ControllerDirectionPad) WithValueChangedHandler(valueChangedHandler fun
 	return x
 }
 
+// The preferred system gesture state for this element. Defaults to GCSystemGestureStateEnabled for most elements @note This is merely the preferred system gesture state - it is not guaranteed to be respected by the system. @note It is highly recommended to leave this set to the default value, however there may be situations (for example, game streaming apps) where it is preferrable to disable system gestures. @see boundToSystemGesture
+//
 // WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
 func (x *ControllerDirectionPad) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerDirectionPad {
 	x.inner.GCControllerElement.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
 	return x
 }
 
+// The element's SF Symbols name, taking input remapping into account. @note In almost all instances, you should use this over unmappedSfSymbolsName in your UI.
+//
 // WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
 func (x *ControllerDirectionPad) WithSfSymbolsName(sfSymbolsName string) *ControllerDirectionPad {
 	x.inner.GCControllerElement.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
 	return x
 }
 
+// The element's localized name, taking input remapping into account. @note In almost all instances, you should use this over unmappedLocalizedName in your UI.
+//
 // WithLocalizedName sets the localizedName property and returns the receiver for chaining.
 func (x *ControllerDirectionPad) WithLocalizedName(localizedName string) *ControllerDirectionPad {
 	x.inner.GCControllerElement.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
 	return x
 }
 
+// The element's SF Symbols name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (sfSymbolsName is nil).
+//
 // WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
 func (x *ControllerDirectionPad) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerDirectionPad {
 	x.inner.GCControllerElement.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
 	return x
 }
 
+// The element's localized name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (localizedName is nil).
+//
 // WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
 func (x *ControllerDirectionPad) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerDirectionPad {
 	x.inner.GCControllerElement.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
 	return x
 }
 
+// Sets the normalized value for the direction pad's axis inputs. Will update the states of the direction pad's button inputs as well. @param xAxis the value to set the xAxis of the touchpad to. @param yAxis the value to set the yAxis of the touchpad to. @note If the controller's snapshot flag is set to NO, this method has no effect. @see value @see pressed
+//
 // SetValueForXAxisYAxis calls the underlying SetValueForXAxisYAxis.
 func (x *ControllerDirectionPad) SetValueForXAxisYAxis(xAxis float32, yAxis float32) {
 	x.inner.SetValueForXAxisYAxis(xAxis, yAxis)

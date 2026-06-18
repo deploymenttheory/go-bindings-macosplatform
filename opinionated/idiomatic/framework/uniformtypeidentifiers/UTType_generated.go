@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// \brief A class representing a type in a type hierarchy. Types may represent files on disk, abstract data types with no on-disk representation, or even entirely unrelated hierarchical classification systems such as hardware. Older API that does not use \c UTType typically uses an untyped \c NSString or \c CFStringRef to refer to a type by its identifier. To get the identifier of a type for use with these APIs, use the \c identifier property of this class. \sa https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/understanding_utis/
+//
 // Type wraps [raw.UTType] with a fluent Go API.
 type Type struct {
 	inner *raw.UTType
@@ -37,6 +39,8 @@ func NewType() *Type {
 	return &Type{inner: raw.UTTypeFromID(_id)}
 }
 
+// \brief The receiver's identifier. A type is \em identified \em by its Uniform Type Identifier (UTI), a reverse-DNS string such as \c "public.jpeg" or \c "com.adobe.pdf". The type itself \em has a UTI, but is not itself the UTI. This terminology is not consistently used across Apple's documentation.
+//
 // Identifier calls the underlying Identifier.
 func (x *Type) Identifier() string {
 	_r := x.inner.Identifier()
@@ -46,6 +50,8 @@ func (x *Type) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// \brief If available, the preferred (first available) tag of class \c UTTagClassFilenameExtension. Many uses of types require the generation of a filename (e.g. when saving a file to disk.) If not \c nil, the value of this property is the best available filename extension for the given type. The value of this property is equivalent to, but more efficient than: \code type.tags[UTTagClassFilenameExtension].firstObject \endcode
+//
 // PreferredFilenameExtension calls the underlying PreferredFilenameExtension.
 func (x *Type) PreferredFilenameExtension() string {
 	_r := x.inner.PreferredFilenameExtension()
@@ -55,6 +61,8 @@ func (x *Type) PreferredFilenameExtension() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// \brief If available, the preferred (first available) tag of class \c UTTagClassMIMEType. If not \c nil, the value of this property is the best available MIME type for the given type, according to its declaration. The value of this property is equivalent to, but more efficient than: \code type.tags[UTTagClassMIMEType].firstObject \endcode
+//
 // PreferredMIMEType calls the underlying PreferredMIMEType.
 func (x *Type) PreferredMIMEType() string {
 	_r := x.inner.PreferredMIMEType()
@@ -64,6 +72,8 @@ func (x *Type) PreferredMIMEType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// \brief The localized description of the type. If the type does not provide a description, the system may search its supertypes for one. Dynamic types never have localized descriptions even if their supertypes do.
+//
 // LocalizedDescription calls the underlying LocalizedDescription.
 func (x *Type) LocalizedDescription() string {
 	_r := x.inner.LocalizedDescription()
@@ -73,46 +83,64 @@ func (x *Type) LocalizedDescription() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// \brief The reference URL of the type. A reference URL is a human-readable document describing a type. Most types do not specify reference URLs. \warning This URL is not validated in any way by the system, nor is its scheme or structure guaranteed in any way.
+//
 // ReferenceURL calls the underlying ReferenceURL.
 func (x *Type) ReferenceURL() *foundation.NSURL {
 	return x.inner.ReferenceURL()
 }
 
+// \brief Whether or not the receiver is a dynamically generated type. Dynamic types are recognized by the system, but may not be directly declared or claimed by an application. They are used when a file is encountered whose metadata has no corresponding type known to the system. A type cannot be both declared \em and dynamic.
+//
 // IsDynamic calls the underlying IsDynamic.
 func (x *Type) IsDynamic() bool {
 	return x.inner.IsDynamic()
 }
 
+// \brief Whether or not the receiver is a type known to the system. A type cannot be both declared \em and dynamic.
+//
 // IsDeclared calls the underlying IsDeclared.
 func (x *Type) IsDeclared() bool {
 	return x.inner.IsDeclared()
 }
 
+// \brief Whether or not the type is in the public domain. Types in the public domain have identifiers starting with \c "public." and are generally defined by a standards body or by convention. They are never dynamic.
+//
 // IsPublicType calls the underlying IsPublicType.
 func (x *Type) IsPublicType() bool {
 	return x.inner.IsPublicType()
 }
 
+// \brief Tests for a conformance relationship between the receiver and another type. \param type The type against which conformance should be tested. \result If the two types are equal, returns \c YES. If the receiver conforms, directly or indirectly, to \a type, returns \c YES. Otherwise, returns \c NO. \sa -isSupertypeOfType: \sa -isSubtypeOfType:
+//
 // ConformsToType calls the underlying ConformsToType.
 func (x *Type) ConformsToType(type_ *raw.UTType) bool {
 	return x.inner.ConformsToType(type_)
 }
 
+// \brief Tests if the receiver is a supertype of another type. \param type The type against which conformance should be tested. \result If \a type conforms, directly or indirectly, to the receiver and is not equal to it, returns \c YES. Otherwise, returns \c NO. \sa -conformsToType: \sa -isSubtypeOfType:
+//
 // IsSupertypeOfType calls the underlying IsSupertypeOfType.
 func (x *Type) IsSupertypeOfType(type_ *raw.UTType) bool {
 	return x.inner.IsSupertypeOfType(type_)
 }
 
+// \brief Tests if the receiver is a subtype of another type. \param type The type against which conformance should be tested. \result If the receiver conforms, directly or indirectly, to \a type and is not equal to it, returns \c YES. Otherwise, returns \c NO. \sa -conformsToType: \sa -isSupertypeOfType:
+//
 // IsSubtypeOfType calls the underlying IsSubtypeOfType.
 func (x *Type) IsSubtypeOfType(type_ *raw.UTType) bool {
 	return x.inner.IsSubtypeOfType(type_)
 }
 
+// \brief The set of types to which the receiving type conforms, directly or indirectly. If you are just interested in checking if one type conforms to another, it is more efficient to use \c -conformsToType: than this property.
+//
 // Supertypes calls the underlying Supertypes.
 func (x *Type) Supertypes() *foundation.NSSet[*raw.UTType] {
 	return x.inner.Supertypes()
 }
 
+// \brief The tag specification dictionary of the type. The system does not store tag information for non-standard tag classes. It normalizes string values into arrays containing those strings. For instance, a value of: \code { "public.mime-type": "x/y", "nonstandard-tag-class": "abc", } \endcode Is normalized to: \code { "public.mime-type": [ "x/y" ] } \endcode If you are simply looking for the preferred filename extension or MIME type of a type, it is more efficient for you to use the \c preferredFilenameExtension and \c preferredMIMEType properties respectively.
+//
 // Tags calls the underlying Tags.
 func (x *Type) Tags() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.Tags()

@@ -35,6 +35,8 @@ func MTRBaseClusterBooleanStateConfigurationFromID(id objc.ID) *MTRBaseClusterBo
 	return &MTRBaseClusterBooleanStateConfiguration{inner: raw.MTRBaseClusterBooleanStateConfigurationFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterBooleanStateConfigurationWithDeviceEndpointIDQueue creates a new [MTRBaseClusterBooleanStateConfiguration].
 func NewMTRBaseClusterBooleanStateConfigurationWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterBooleanStateConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterBooleanStateConfiguration")), objc.RegisterName("alloc"))
@@ -42,11 +44,15 @@ func NewMTRBaseClusterBooleanStateConfigurationWithDeviceEndpointIDQueue(device 
 	return &MTRBaseClusterBooleanStateConfiguration{inner: raw.MTRBaseClusterBooleanStateConfigurationFromID(_id)}
 }
 
+// Command SuppressAlarm This command is used to suppress the specified alarm mode.
+//
 // SuppressAlarmWithParamsCompletion calls the underlying SuppressAlarmWithParamsCompletion.
 func (x *MTRBaseClusterBooleanStateConfiguration) SuppressAlarmWithParamsCompletion(params *raw.MTRBooleanStateConfigurationClusterSuppressAlarmParams, completion func(unsafe.Pointer)) {
 	x.inner.SuppressAlarmWithParamsCompletion(params, completion)
 }
 
+// Command EnableDisableAlarm This command is used to enable or disable the specified alarm mode.
+//
 // EnableDisableAlarmWithParamsCompletion calls the underlying EnableDisableAlarmWithParamsCompletion.
 func (x *MTRBaseClusterBooleanStateConfiguration) EnableDisableAlarmWithParamsCompletion(params *raw.MTRBooleanStateConfigurationClusterEnableDisableAlarmParams, completion func(unsafe.Pointer)) {
 	x.inner.EnableDisableAlarmWithParamsCompletion(params, completion)

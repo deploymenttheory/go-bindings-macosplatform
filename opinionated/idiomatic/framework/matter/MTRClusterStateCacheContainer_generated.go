@@ -36,6 +36,8 @@ func NewMTRClusterStateCacheContainer() *MTRClusterStateCacheContainer {
 	return &MTRClusterStateCacheContainer{inner: raw.MTRClusterStateCacheContainerFromID(_id)}
 }
 
+// Reads the given attributes from the cluster state cache inside this cache container. @param endpointID  endpoint ID of the attributes. Nil means wildcard. @param clusterID  cluster ID of the attributes. Nil means wildcard. @param attributeID  attribute ID of the attributes. Nil means wildcard. @param queue  client queue to dispatch the completion handler through @param completion  block to receive the result. "values" received by the block will have the same format of object as the one received by the completion block of the MTRBaseDevice readAttributesWithEndpointID:clusterID:attributeID:queue:completion method. @note: not all combinations of wildcards might be supported.
+//
 // ReadAttributesWithEndpointIDClusterIDAttributeIDQueueCompletion calls the underlying ReadAttributesWithEndpointIDClusterIDAttributeIDQueueCompletion.
 func (x *MTRClusterStateCacheContainer) ReadAttributesWithEndpointIDClusterIDAttributeIDQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, attributeID *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
 	x.inner.ReadAttributesWithEndpointIDClusterIDAttributeIDQueueCompletion(endpointID, clusterID, attributeID, queue, completion)

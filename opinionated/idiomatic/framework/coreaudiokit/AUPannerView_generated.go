@@ -36,6 +36,8 @@ func NewAUPannerView() *AUPannerView {
 	return &AUPannerView{inner: raw.AUPannerViewFromID(_id)}
 }
 
+// @property audioUnit @abstract Read-only property for the audio unit associated with the view @result   The audio unit associated with the generic panner view
+//
 // AudioUnit calls the underlying AudioUnit.
 func (x *AUPannerView) AudioUnit() *carboncore.ComponentInstanceRecord {
 	return x.inner.AudioUnit()

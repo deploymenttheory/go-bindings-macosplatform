@@ -35,12 +35,16 @@ func NewChangeShuffleModeCommand() *ChangeShuffleModeCommand {
 	return &ChangeShuffleModeCommand{inner: raw.MPChangeShuffleModeCommandFromID(_id)}
 }
 
+// The app's current shuffle type.
+//
 // WithCurrentShuffleType sets the currentShuffleType property and returns the receiver for chaining.
 func (x *ChangeShuffleModeCommand) WithCurrentShuffleType(currentShuffleType MPShuffleType) *ChangeShuffleModeCommand {
 	x.inner.SetCurrentShuffleType(raw.MPShuffleType(currentShuffleType))
 	return x
 }
 
+// Whether a button (for example) should be enabled and tappable for this particular command.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *ChangeShuffleModeCommand) WithEnabled(enabled bool) *ChangeShuffleModeCommand {
 	x.inner.MPRemoteCommand.SetEnabled(enabled)

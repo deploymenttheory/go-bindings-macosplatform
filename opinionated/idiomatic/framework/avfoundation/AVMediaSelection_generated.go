@@ -35,6 +35,8 @@ func NewMediaSelection() *MediaSelection {
 	return &MediaSelection{inner: raw.AVMediaSelectionFromID(_id)}
 }
 
+// @method		selectedMediaOptionInMediaSelectionGroup: @abstract		Indicates the media selection option that's currently selected from the specified group. May be nil. @param 		mediaSelectionGroup A media selection group obtained from the receiver's asset. @result		An instance of AVMediaSelectionOption that describes the currently selection option in the group. @discussion If the value of the property allowsEmptySelection of the AVMediaSelectionGroup is YES, the currently selected option in the group may be nil.
+//
 // SelectedMediaOptionInMediaSelectionGroup calls the underlying SelectedMediaOptionInMediaSelectionGroup.
 func (x *MediaSelection) SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *MediaSelectionOption {
 	_r := x.inner.SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup)
@@ -44,6 +46,8 @@ func (x *MediaSelection) SelectedMediaOptionInMediaSelectionGroup(mediaSelection
 	return &MediaSelectionOption{inner: _r}
 }
 
+// @method		mediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup: @abstract		Indicates that specified media selection group is subject to automatic media selection. @param 		mediaSelectionGroup A media selection group obtained from the receiver's asset. @result		YES if the group is subject to automatic media selection. @discussion	Automatic application of media selection criteria is suspended in any group in which a specific selection has been made via an invocation of -selectMediaOption:inMediaSelectionGroup:.
+//
 // MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup calls the underlying MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup.
 func (x *MediaSelection) MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) bool {
 	return x.inner.MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup(mediaSelectionGroup)

@@ -35,6 +35,8 @@ func MTRBaseClusterThreadNetworkDiagnosticsFromID(id objc.ID) *MTRBaseClusterThr
 	return &MTRBaseClusterThreadNetworkDiagnostics{inner: raw.MTRBaseClusterThreadNetworkDiagnosticsFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterThreadNetworkDiagnosticsWithDeviceEndpointIDQueue creates a new [MTRBaseClusterThreadNetworkDiagnostics].
 func NewMTRBaseClusterThreadNetworkDiagnosticsWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterThreadNetworkDiagnostics {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterThreadNetworkDiagnostics")), objc.RegisterName("alloc"))
@@ -49,6 +51,8 @@ func NewMTRBaseClusterThreadNetworkDiagnosticsWithDeviceEndpointQueue(device *ra
 	return &MTRBaseClusterThreadNetworkDiagnostics{inner: raw.MTRBaseClusterThreadNetworkDiagnosticsFromID(_id)}
 }
 
+// Command ResetCounts Reception of this command SHALL reset the following attributes to 0:
+//
 // ResetCountsWithParamsCompletion calls the underlying ResetCountsWithParamsCompletion.
 func (x *MTRBaseClusterThreadNetworkDiagnostics) ResetCountsWithParamsCompletion(params *raw.MTRThreadNetworkDiagnosticsClusterResetCountsParams, completion func(unsafe.Pointer)) {
 	x.inner.ResetCountsWithParamsCompletion(params, completion)

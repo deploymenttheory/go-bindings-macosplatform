@@ -35,6 +35,8 @@ func MTRBaseClusterWiFiNetworkDiagnosticsFromID(id objc.ID) *MTRBaseClusterWiFiN
 	return &MTRBaseClusterWiFiNetworkDiagnostics{inner: raw.MTRBaseClusterWiFiNetworkDiagnosticsFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterWiFiNetworkDiagnosticsWithDeviceEndpointIDQueue creates a new [MTRBaseClusterWiFiNetworkDiagnostics].
 func NewMTRBaseClusterWiFiNetworkDiagnosticsWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterWiFiNetworkDiagnostics {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterWiFiNetworkDiagnostics")), objc.RegisterName("alloc"))
@@ -49,6 +51,8 @@ func NewMTRBaseClusterWiFiNetworkDiagnosticsWithDeviceEndpointQueue(device *raw.
 	return &MTRBaseClusterWiFiNetworkDiagnostics{inner: raw.MTRBaseClusterWiFiNetworkDiagnosticsFromID(_id)}
 }
 
+// Command ResetCounts This command is used to reset the count attributes.
+//
 // ResetCountsWithParamsCompletion calls the underlying ResetCountsWithParamsCompletion.
 func (x *MTRBaseClusterWiFiNetworkDiagnostics) ResetCountsWithParamsCompletion(params *raw.MTRWiFiNetworkDiagnosticsClusterResetCountsParams, completion func(unsafe.Pointer)) {
 	x.inner.ResetCountsWithParamsCompletion(params, completion)

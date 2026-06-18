@@ -36,16 +36,22 @@ func NewDomainStateCompanion() *DomainStateCompanion {
 	return &DomainStateCompanion{inner: raw.LADomainStateCompanionFromID(_id)}
 }
 
+// Returns state hash data for the given companion type. @discussion  If database of paired devices of the given type was modified state hash data will change. Nature of such database changes cannot be determined but comparing data of state hash after different policy evaluation will reveal the fact database was changed between calls. @param companionType The companion type for which state hash data should be returned.
+//
 // StateHashForCompanionType calls the underlying StateHashForCompanionType.
 func (x *DomainStateCompanion) StateHashForCompanionType(companionType LACompanionType) *foundation.NSData {
 	return x.inner.StateHashForCompanionType(raw.LACompanionType(companionType))
 }
 
+// Indicates types of companions paired with the device. The elements are NSNumber-wrapped instances of @c `LACompanionType`.
+//
 // AvailableCompanionTypes calls the underlying AvailableCompanionTypes.
 func (x *DomainStateCompanion) AvailableCompanionTypes() *foundation.NSSet[*foundation.NSNumber] {
 	return x.inner.AvailableCompanionTypes()
 }
 
+// Contains combined state hash data for all available companion types. . Returns `nil` if no companion devices are paired. @discussion  As long as database of paired companion devices doesn't change, `stateHash` stays the same for the same set of `availableCompanions`. If database of paired companion devices was modified, `stateHash` data will change. Nature of such database changes cannot be determined but comparing data of `stateHash` after different policy evaluation will reveal the fact database was changed between calls. If you are interested in a state hash for a specific companion type you can use `stateHashForCompanionType` method. @warning Please note that the value returned by this property can change exceptionally between major OS versions even if the list of paired companions has not changed.
+//
 // StateHash calls the underlying StateHash.
 func (x *DomainStateCompanion) StateHash() *foundation.NSData {
 	return x.inner.StateHash()

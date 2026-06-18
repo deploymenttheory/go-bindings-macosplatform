@@ -42,6 +42,8 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest() *Authoriza
 	return &AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest{inner: raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertionRequestFromID(_id)}
 }
 
+// A list of descriptors indicating credentials that may be used to sign in. If this is non-empty, only credentials matching the provided descriptors can be used when authenticating.
+//
 // WithAllowedCredentials sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) WithAllowedCredentials(items ...*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
 	if len(items) == 0 {
@@ -60,6 +62,8 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) WithAllowe
 	return x
 }
 
+// Use this value to request the appid WebAuthn extension. This can only be requested by web browsers.
+//
 // WithAppID sets the appID property and returns the receiver for chaining.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) WithAppID(appID string) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
 	x.inner.SetAppID(foundation.NSStringStringWithUTF8String(appID))
@@ -72,6 +76,8 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) WithPrf(pr
 	return x
 }
 
+// A list of descriptors indicating credentials that may be used to sign in. If this is non-empty, only credentials matching the provided descriptors can be used when authenticating.
+//
 // AllowedCredentials returns the collection as a Go slice.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) AllowedCredentials() []*AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
 	arr := x.inner.AllowedCredentials()
@@ -88,6 +94,8 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) SetAllowed
 	x.inner.SetAllowedCredentials(allowedCredentials)
 }
 
+// Use this value to request the appid WebAuthn extension. This can only be requested by web browsers.
+//
 // AppID calls the underlying AppID.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) AppID() string {
 	_r := x.inner.AppID()

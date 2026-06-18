@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents a USB controller in a VM.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzusbcontroller
 type VZUSBController struct {
 	foundation.NSObject
@@ -34,7 +36,7 @@ func VZUSBControllerFromID(id objc.ID) *VZUSBController {
 	return o
 }
 
-// @abstract Attach a USB device. @discussion If the device is successfully attached to the controller, it will appear in the usbDevices property, its usbController property will be set to point to the USB controller that it is attached to and completion handler will return nil. If the device was previously attached to this or another USB controller, attach function will fail with the `VZErrorDeviceAlreadyAttached`. If the device cannot be initialized correctly, attach function will fail with `VZErrorDeviceInitializationFailure`. This method must be called on the virtual machine's queue. @param device USB device to attach. @param completionHandler Block called after the device has been attached or on error. The error parameter passed to the block is nil if the attach was successful. It will be also invoked on an virtual machine's queue. @see VZUSBDevice
+// Attaches a USB device to the controller.
 func (o *VZUSBController) AttachDeviceCompletionHandler(device VZUSBDevice, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -46,7 +48,7 @@ func (o *VZUSBController) AttachDeviceCompletionHandler(device VZUSBDevice, comp
 	o.Ptr().Send(_vZUSBControllerSelAttachDeviceCompletionHandler, device, __block_completionHandler)
 }
 
-// @abstract Detach a USB device. @discussion If the device is successfully detached from the controller, it will disappear from the usbDevices property, its usbController property will be set to nil and completion handler will return nil. If the device wasn't attached to the controller at the time of calling detach method, it will fail with the `VZErrorDeviceNotFound` error. This method must be called on the virtual machine's queue. @param device USB device to detach. @param completionHandler Block called after the device has been detached or on error. The error parameter passed to the block is nil if the detach was successful. It will be also invoked on an virtual machine's queue. @see VZUSBDevice
+// Detaches a USB device from the controller.
 func (o *VZUSBController) DetachDeviceCompletionHandler(device VZUSBDevice, completionHandler func(unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

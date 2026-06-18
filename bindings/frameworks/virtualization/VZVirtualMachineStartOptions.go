@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The abstract class for VM start options.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtualmachinestartoptions
 type VZVirtualMachineStartOptions struct {
 	foundation.NSObject

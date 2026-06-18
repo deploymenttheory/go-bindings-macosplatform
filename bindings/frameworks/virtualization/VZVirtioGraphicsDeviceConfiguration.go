@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// Configuration that represents the configuration of a Virtio graphics device for a Linux VM.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtiographicsdeviceconfiguration
 type VZVirtioGraphicsDeviceConfiguration struct {
 	VZGraphicsDeviceConfiguration
@@ -32,6 +34,7 @@ func VZVirtioGraphicsDeviceConfigurationFromID(id objc.ID) *VZVirtioGraphicsDevi
 	return o
 }
 
+// Creates a new Virtio graphics device.
 func (o *VZVirtioGraphicsDeviceConfiguration) Init() *VZVirtioGraphicsDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioGraphicsDeviceConfigurationSelInit)
 	if _ret != 0 {

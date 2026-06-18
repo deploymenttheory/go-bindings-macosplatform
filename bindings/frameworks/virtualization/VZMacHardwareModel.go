@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A specification for the hardware elements and configurations present in a particular Mac hardware model.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzmachardwaremodel
 type VZMacHardwareModel struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func VZMacHardwareModelFromID(id objc.ID) *VZMacHardwareModel {
 	return o
 }
 
-// @abstract Get the hardware model described by the specified data representation. @param dataRepresentation The opaque data representation of the hardware model to be obtained.
+// Creates an instance of the hardware model described by the specified data representation.
 func (o *VZMacHardwareModel) InitWithDataRepresentation(dataRepresentation *foundation.NSData) *VZMacHardwareModel {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacHardwareModelSelInitWithDataRepresentation, dataRepresentation.Ptr())
 	if _ret != 0 {

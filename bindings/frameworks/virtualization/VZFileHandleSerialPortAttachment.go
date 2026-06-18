@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An attachment point that allows bidirectional communication using file handles.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzfilehandleserialportattachment
 type VZFileHandleSerialPortAttachment struct {
 	VZSerialPortAttachment
@@ -32,7 +34,7 @@ func VZFileHandleSerialPortAttachmentFromID(id objc.ID) *VZFileHandleSerialPortA
 	return o
 }
 
-// @abstract Initialize the VZFileHandleSerialPortAttachment from file handles. @param fileHandleForReading File handle for reading from the file. @param fileHandleForWriting File handle for writing to the file. @discussion Each file handle must either be nil or have a valid file descriptor.
+// Creates a serial port attachment object from the specified file handles.
 func (o *VZFileHandleSerialPortAttachment) InitWithFileHandleForReadingFileHandleForWriting(fileHandleForReading *foundation.NSFileHandle, fileHandleForWriting *foundation.NSFileHandle) *VZFileHandleSerialPortAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZFileHandleSerialPortAttachmentSelInitWithFileHandleForReadingFileHandleForWriting, fileHandleForReading.Ptr(), fileHandleForWriting.Ptr())
 	if _ret != 0 {

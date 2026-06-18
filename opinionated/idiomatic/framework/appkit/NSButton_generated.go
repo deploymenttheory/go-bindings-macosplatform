@@ -41,66 +41,88 @@ func NewButton() *Button {
 	return &Button{inner: raw.NSButtonFromID(_id)}
 }
 
+// The title displayed on the button when it’s in an off state, or an empty string if the button does not display a title. By default, a button's title is "Button".
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *Button) WithTitle(title string) *Button {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The button's title, expressed as an attributed string.
+//
 // WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
 func (x *Button) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *Button {
 	x.inner.SetAttributedTitle(attributedTitle)
 	return x
 }
 
+// The title that the button displays when the button is in an on state, or an empty string if there is no such title. Note that some button types do not display an alternate title.
+//
 // WithAlternateTitle sets the alternateTitle property and returns the receiver for chaining.
 func (x *Button) WithAlternateTitle(alternateTitle string) *Button {
 	x.inner.SetAlternateTitle(foundation.NSStringStringWithUTF8String(alternateTitle))
 	return x
 }
 
+// The alternate title, expressed as an attributed string.
+//
 // WithAttributedAlternateTitle sets the attributedAlternateTitle property and returns the receiver for chaining.
 func (x *Button) WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *Button {
 	x.inner.SetAttributedAlternateTitle(attributedAlternateTitle)
 	return x
 }
 
+// Indicates whether the button's action has a destructive effect on user data.  AppKit may guard a destructive-actioned button against accidental presses, and may give the button a special appearance in certain contexts to caution against unintentional use.  Defaults to NO.
+//
 // WithHasDestructiveAction sets the hasDestructiveAction property and returns the receiver for chaining.
 func (x *Button) WithHasDestructiveAction(hasDestructiveAction bool) *Button {
 	x.inner.SetHasDestructiveAction(hasDestructiveAction)
 	return x
 }
 
+// The sound that plays when the user clicks the button, or nil if the button should not play a sound. The default value is nil.
+//
 // WithSound sets the sound property and returns the receiver for chaining.
 func (x *Button) WithSound(sound *Sound) *Button {
 	x.inner.SetSound(sound.Unwrap())
 	return x
 }
 
+// Sends action on deep-press or extended hover while dragging. Defaults to NO.
+//
 // WithSpringLoaded sets the springLoaded property and returns the receiver for chaining.
 func (x *Button) WithSpringLoaded(springLoaded bool) *Button {
 	x.inner.SetSpringLoaded(springLoaded)
 	return x
 }
 
+// Configures the maximum allowed level for an NSMultiLevelAcceleratorButton, allowed values range from [1,5]. Defaults to 2.
+//
 // WithMaxAcceleratorLevel sets the maxAcceleratorLevel property and returns the receiver for chaining.
 func (x *Button) WithMaxAcceleratorLevel(maxAcceleratorLevel int) *Button {
 	x.inner.SetMaxAcceleratorLevel(maxAcceleratorLevel)
 	return x
 }
 
+// The bezel style of the button, which provides a set of bezel artwork, layout metrics, and content styling from a set of system-provided styles. See the NSBezelStyle enumeration for a list of available styles. The bezel style is not used if the `bordered` property is set to `NO`.
+//
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
 func (x *Button) WithBezelStyle(bezelStyle NSBezelStyle) *Button {
 	x.inner.SetBezelStyle(raw.NSBezelStyle(bezelStyle))
 	return x
 }
 
+// A Boolean value that determines whether the button draws a border.
+//
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *Button) WithBordered(bordered bool) *Button {
 	x.inner.SetBordered(bordered)
 	return x
 }
 
+// A Boolean value that indicates whether the button is transparent. A transparent button never draws itself, but it receives mouse events, sends its action, and tracks the mouse properly.
+//
 // WithTransparent sets the transparent property and returns the receiver for chaining.
 func (x *Button) WithTransparent(transparent bool) *Button {
 	x.inner.SetTransparent(transparent)
@@ -113,78 +135,104 @@ func (x *Button) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseIn
 	return x
 }
 
+// Applies a custom color to the button's bezel, in appearances that support it. A nil value indicates an unmodified button appearance. The default value is nil.
+//
 // WithBezelColor sets the bezelColor property and returns the receiver for chaining.
 func (x *Button) WithBezelColor(bezelColor *Color) *Button {
 	x.inner.SetBezelColor(bezelColor.Unwrap())
 	return x
 }
 
+// Applies a tint color to template image and text content, in combination with other theme-appropriate effects. Only applicable to borderless buttons. A nil value indicates the standard set of effects without color modification. The default value is nil. Non-template images and attributed string values are not affected by the contentTintColor.
+//
 // WithContentTintColor sets the contentTintColor property and returns the receiver for chaining.
 func (x *Button) WithContentTintColor(contentTintColor *Color) *Button {
 	x.inner.SetContentTintColor(contentTintColor.Unwrap())
 	return x
 }
 
+// The tint prominence of the button. Use tint prominence to gently suggest a hierarchy when multiple buttons perform similar actions. A button with primary tint prominence suggests the most preferred option, while secondary prominence indicates a reasonable alternative. See “NSTintProminence“ for a list of possible values.
+//
 // WithTintProminence sets the tintProminence property and returns the receiver for chaining.
 func (x *Button) WithTintProminence(tintProminence NSTintProminence) *Button {
 	x.inner.SetTintProminence(raw.NSTintProminence(tintProminence))
 	return x
 }
 
+// The image that appears on the button when it’s in an off state, or nil if there is no such image.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *Button) WithImage(image *Image) *Button {
 	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
+// An alternate image that appears on the button when the button is in an on state, or nil if there is no such image. Note that some button types do not display an alternate image.
+//
 // WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
 func (x *Button) WithAlternateImage(alternateImage *Image) *Button {
 	x.inner.SetAlternateImage(alternateImage.Unwrap())
 	return x
 }
 
+// The position of the button's image relative to its title. See the NSCellImagePosition enumeration for possible values.
+//
 // WithImagePosition sets the imagePosition property and returns the receiver for chaining.
 func (x *Button) WithImagePosition(imagePosition NSCellImagePosition) *Button {
 	x.inner.SetImagePosition(raw.NSCellImagePosition(imagePosition))
 	return x
 }
 
+// The scaling mode applied to make the button's image fit within its bounds.
+//
 // WithImageScaling sets the imageScaling property and returns the receiver for chaining.
 func (x *Button) WithImageScaling(imageScaling NSImageScaling) *Button {
 	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
 	return x
 }
 
+// A Boolean value that determines how the button's image and title are positioned together within the button bezel. If false, the image is positioned according to the imagePosition property at the edge of the button bezel, and the title is positioned within the remaining space. If true, the button’s image is positioned directly adjacent to the title based on the imagePosition property, and the image and title are positioned within the button bezel as a single unit.
+//
 // WithImageHugsTitle sets the imageHugsTitle property and returns the receiver for chaining.
 func (x *Button) WithImageHugsTitle(imageHugsTitle bool) *Button {
 	x.inner.SetImageHugsTitle(imageHugsTitle)
 	return x
 }
 
+// Specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the symbol is matched to the button's `font` property. The default value is nil.
+//
 // WithSymbolConfiguration sets the symbolConfiguration property and returns the receiver for chaining.
 func (x *Button) WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *Button {
 	x.inner.SetSymbolConfiguration(symbolConfiguration.Unwrap())
 	return x
 }
 
+// The button's state. Buttons support the off and on states, and an additional mixed state depending on the value of the `allowsMixedState` property.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *Button) WithState(state int) *Button {
 	x.inner.SetState(state)
 	return x
 }
 
+// A Boolean value that indicates whether the button allows a mixed state. If NO, the button has two states (on and off), and if YES, the button has three states (on, off, and mixed). The mixed state is commonly used with checkboxes and radio buttons to indicate a value which is partially on.
+//
 // WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
 func (x *Button) WithAllowsMixedState(allowsMixedState bool) *Button {
 	x.inner.SetAllowsMixedState(allowsMixedState)
 	return x
 }
 
+// This property contains the button's key equivalent, or the empty string if no equivalent has been defined. Buttons don’t have a default key equivalent. Setting the key equivalent to the Return character causes it to act as the default button for its window.
+//
 // WithKeyEquivalent sets the keyEquivalent property and returns the receiver for chaining.
 func (x *Button) WithKeyEquivalent(keyEquivalent string) *Button {
 	x.inner.SetKeyEquivalent(foundation.NSStringStringWithUTF8String(keyEquivalent))
 	return x
 }
 
+// A bitmask specifying the modifier keys that are applied to the button's key equivalent. Mask bits are defined by the NSEventModifierFlags option set. The only mask bits relevant in button key-equivalent modifier masks are NSEventModifierFlagControl, NSEventModifierFlagOption, and NSEventModifierFlagCommand.
+//
 // WithKeyEquivalentModifierMask sets the keyEquivalentModifierMask property and returns the receiver for chaining.
 func (x *Button) WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *Button {
 	x.inner.SetKeyEquivalentModifierMask(raw.NSEventModifierFlags(keyEquivalentModifierMask))
@@ -605,6 +653,8 @@ func (x *Button) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundatio
 	return x
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *Button) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Button {
 	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
@@ -683,26 +733,36 @@ func (x *Button) WithTouchBar(touchBar *TouchBar) *Button {
 	return x
 }
 
+// Sets the button’s type, which affects its user interface and behavior when clicked. See the NSButtonType enumeration for possible options and their behaviors.
+//
 // SetButtonType calls the underlying SetButtonType.
 func (x *Button) SetButtonType(type_ NSButtonType) {
 	x.inner.SetButtonType(raw.NSButtonType(type_))
 }
 
+// Sets the initial delay and repeat interval, in seconds, for repeated action messages sent when `continuous` is YES.
+//
 // SetPeriodicDelayInterval calls the underlying SetPeriodicDelayInterval.
 func (x *Button) SetPeriodicDelayInterval(delay float32, interval float32) {
 	x.inner.SetPeriodicDelayInterval(delay, interval)
 }
 
+// Gets the initial delay and repeat interval, in seconds, for repeated action messages sent when `continuous` is YES. Both parameters to this method must not be NULL.
+//
 // GetPeriodicDelayInterval calls the underlying GetPeriodicDelayInterval.
 func (x *Button) GetPeriodicDelayInterval(delay *float32, interval *float32) {
 	x.inner.GetPeriodicDelayInterval(delay, interval)
 }
 
+// Sets the button to its next eligible state. If the button allows mixed state, this cycles through the states in the order: on, off, mixed, on, etc. If the button does not allow mixed state, it toggles between off and on.
+//
 // SetNextState calls the underlying SetNextState.
 func (x *Button) SetNextState() {
 	x.inner.SetNextState()
 }
 
+// Highlights, or un-highlights, the button. Highlighting makes the button appear "pressed", which may include showing an illuminated bezel, or showing the alternate image or title, depending on the type of button.
+//
 // Highlight calls the underlying Highlight.
 func (x *Button) Highlight(flag bool) {
 	x.inner.Highlight(flag)
@@ -718,6 +778,8 @@ func (x *Button) MinimumSizeWithPrioritizedCompressionOptions(prioritizedOptions
 	return x.inner.MinimumSizeWithPrioritizedCompressionOptions(prioritizedOptions)
 }
 
+// The title displayed on the button when it’s in an off state, or an empty string if the button does not display a title. By default, a button's title is "Button".
+//
 // Title calls the underlying Title.
 func (x *Button) Title() string {
 	_r := x.inner.Title()
@@ -727,21 +789,29 @@ func (x *Button) Title() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The title displayed on the button when it’s in an off state, or an empty string if the button does not display a title. By default, a button's title is "Button".
+//
 // SetTitle calls the underlying SetTitle.
 func (x *Button) SetTitle(title string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
+// The button's title, expressed as an attributed string.
+//
 // AttributedTitle calls the underlying AttributedTitle.
 func (x *Button) AttributedTitle() *foundation.NSAttributedString {
 	return x.inner.AttributedTitle()
 }
 
+// The button's title, expressed as an attributed string.
+//
 // SetAttributedTitle calls the underlying SetAttributedTitle.
 func (x *Button) SetAttributedTitle(attributedTitle *foundation.NSAttributedString) {
 	x.inner.SetAttributedTitle(attributedTitle)
 }
 
+// The title that the button displays when the button is in an on state, or an empty string if there is no such title. Note that some button types do not display an alternate title.
+//
 // AlternateTitle calls the underlying AlternateTitle.
 func (x *Button) AlternateTitle() string {
 	_r := x.inner.AlternateTitle()
@@ -751,31 +821,43 @@ func (x *Button) AlternateTitle() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The title that the button displays when the button is in an on state, or an empty string if there is no such title. Note that some button types do not display an alternate title.
+//
 // SetAlternateTitle calls the underlying SetAlternateTitle.
 func (x *Button) SetAlternateTitle(alternateTitle string) {
 	x.inner.SetAlternateTitle(foundation.NSStringStringWithUTF8String(alternateTitle))
 }
 
+// The alternate title, expressed as an attributed string.
+//
 // AttributedAlternateTitle calls the underlying AttributedAlternateTitle.
 func (x *Button) AttributedAlternateTitle() *foundation.NSAttributedString {
 	return x.inner.AttributedAlternateTitle()
 }
 
+// The alternate title, expressed as an attributed string.
+//
 // SetAttributedAlternateTitle calls the underlying SetAttributedAlternateTitle.
 func (x *Button) SetAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) {
 	x.inner.SetAttributedAlternateTitle(attributedAlternateTitle)
 }
 
+// Indicates whether the button's action has a destructive effect on user data.  AppKit may guard a destructive-actioned button against accidental presses, and may give the button a special appearance in certain contexts to caution against unintentional use.  Defaults to NO.
+//
 // HasDestructiveAction calls the underlying HasDestructiveAction.
 func (x *Button) HasDestructiveAction() bool {
 	return x.inner.HasDestructiveAction()
 }
 
+// Indicates whether the button's action has a destructive effect on user data.  AppKit may guard a destructive-actioned button against accidental presses, and may give the button a special appearance in certain contexts to caution against unintentional use.  Defaults to NO.
+//
 // SetHasDestructiveAction calls the underlying SetHasDestructiveAction.
 func (x *Button) SetHasDestructiveAction(hasDestructiveAction bool) {
 	x.inner.SetHasDestructiveAction(hasDestructiveAction)
 }
 
+// The sound that plays when the user clicks the button, or nil if the button should not play a sound. The default value is nil.
+//
 // Sound calls the underlying Sound.
 func (x *Button) Sound() *Sound {
 	_r := x.inner.Sound()
@@ -785,56 +867,78 @@ func (x *Button) Sound() *Sound {
 	return &Sound{inner: _r}
 }
 
+// The sound that plays when the user clicks the button, or nil if the button should not play a sound. The default value is nil.
+//
 // SetSound calls the underlying SetSound.
 func (x *Button) SetSound(sound *raw.NSSound) {
 	x.inner.SetSound(sound)
 }
 
+// Sends action on deep-press or extended hover while dragging. Defaults to NO.
+//
 // IsSpringLoaded calls the underlying IsSpringLoaded.
 func (x *Button) IsSpringLoaded() bool {
 	return x.inner.IsSpringLoaded()
 }
 
+// Sends action on deep-press or extended hover while dragging. Defaults to NO.
+//
 // SetSpringLoaded calls the underlying SetSpringLoaded.
 func (x *Button) SetSpringLoaded(springLoaded bool) {
 	x.inner.SetSpringLoaded(springLoaded)
 }
 
+// Configures the maximum allowed level for an NSMultiLevelAcceleratorButton, allowed values range from [1,5]. Defaults to 2.
+//
 // MaxAcceleratorLevel calls the underlying MaxAcceleratorLevel.
 func (x *Button) MaxAcceleratorLevel() int {
 	return x.inner.MaxAcceleratorLevel()
 }
 
+// Configures the maximum allowed level for an NSMultiLevelAcceleratorButton, allowed values range from [1,5]. Defaults to 2.
+//
 // SetMaxAcceleratorLevel calls the underlying SetMaxAcceleratorLevel.
 func (x *Button) SetMaxAcceleratorLevel(maxAcceleratorLevel int) {
 	x.inner.SetMaxAcceleratorLevel(maxAcceleratorLevel)
 }
 
+// The bezel style of the button, which provides a set of bezel artwork, layout metrics, and content styling from a set of system-provided styles. See the NSBezelStyle enumeration for a list of available styles. The bezel style is not used if the `bordered` property is set to `NO`.
+//
 // BezelStyle calls the underlying BezelStyle.
 func (x *Button) BezelStyle() NSBezelStyle {
 	return NSBezelStyle(x.inner.BezelStyle())
 }
 
+// The bezel style of the button, which provides a set of bezel artwork, layout metrics, and content styling from a set of system-provided styles. See the NSBezelStyle enumeration for a list of available styles. The bezel style is not used if the `bordered` property is set to `NO`.
+//
 // SetBezelStyle calls the underlying SetBezelStyle.
 func (x *Button) SetBezelStyle(bezelStyle NSBezelStyle) {
 	x.inner.SetBezelStyle(raw.NSBezelStyle(bezelStyle))
 }
 
+// A Boolean value that determines whether the button draws a border.
+//
 // IsBordered calls the underlying IsBordered.
 func (x *Button) IsBordered() bool {
 	return x.inner.IsBordered()
 }
 
+// A Boolean value that determines whether the button draws a border.
+//
 // SetBordered calls the underlying SetBordered.
 func (x *Button) SetBordered(bordered bool) {
 	x.inner.SetBordered(bordered)
 }
 
+// A Boolean value that indicates whether the button is transparent. A transparent button never draws itself, but it receives mouse events, sends its action, and tracks the mouse properly.
+//
 // IsTransparent calls the underlying IsTransparent.
 func (x *Button) IsTransparent() bool {
 	return x.inner.IsTransparent()
 }
 
+// A Boolean value that indicates whether the button is transparent. A transparent button never draws itself, but it receives mouse events, sends its action, and tracks the mouse properly.
+//
 // SetTransparent calls the underlying SetTransparent.
 func (x *Button) SetTransparent(transparent bool) {
 	x.inner.SetTransparent(transparent)
@@ -850,6 +954,8 @@ func (x *Button) SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseIns
 	x.inner.SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside)
 }
 
+// Applies a custom color to the button's bezel, in appearances that support it. A nil value indicates an unmodified button appearance. The default value is nil.
+//
 // BezelColor calls the underlying BezelColor.
 func (x *Button) BezelColor() *Color {
 	_r := x.inner.BezelColor()
@@ -859,11 +965,15 @@ func (x *Button) BezelColor() *Color {
 	return &Color{inner: _r}
 }
 
+// Applies a custom color to the button's bezel, in appearances that support it. A nil value indicates an unmodified button appearance. The default value is nil.
+//
 // SetBezelColor calls the underlying SetBezelColor.
 func (x *Button) SetBezelColor(bezelColor *raw.NSColor) {
 	x.inner.SetBezelColor(bezelColor)
 }
 
+// Applies a tint color to template image and text content, in combination with other theme-appropriate effects. Only applicable to borderless buttons. A nil value indicates the standard set of effects without color modification. The default value is nil. Non-template images and attributed string values are not affected by the contentTintColor.
+//
 // ContentTintColor calls the underlying ContentTintColor.
 func (x *Button) ContentTintColor() *Color {
 	_r := x.inner.ContentTintColor()
@@ -873,21 +983,29 @@ func (x *Button) ContentTintColor() *Color {
 	return &Color{inner: _r}
 }
 
+// Applies a tint color to template image and text content, in combination with other theme-appropriate effects. Only applicable to borderless buttons. A nil value indicates the standard set of effects without color modification. The default value is nil. Non-template images and attributed string values are not affected by the contentTintColor.
+//
 // SetContentTintColor calls the underlying SetContentTintColor.
 func (x *Button) SetContentTintColor(contentTintColor *raw.NSColor) {
 	x.inner.SetContentTintColor(contentTintColor)
 }
 
+// The tint prominence of the button. Use tint prominence to gently suggest a hierarchy when multiple buttons perform similar actions. A button with primary tint prominence suggests the most preferred option, while secondary prominence indicates a reasonable alternative. See “NSTintProminence“ for a list of possible values.
+//
 // TintProminence calls the underlying TintProminence.
 func (x *Button) TintProminence() NSTintProminence {
 	return NSTintProminence(x.inner.TintProminence())
 }
 
+// The tint prominence of the button. Use tint prominence to gently suggest a hierarchy when multiple buttons perform similar actions. A button with primary tint prominence suggests the most preferred option, while secondary prominence indicates a reasonable alternative. See “NSTintProminence“ for a list of possible values.
+//
 // SetTintProminence calls the underlying SetTintProminence.
 func (x *Button) SetTintProminence(tintProminence NSTintProminence) {
 	x.inner.SetTintProminence(raw.NSTintProminence(tintProminence))
 }
 
+// The image that appears on the button when it’s in an off state, or nil if there is no such image.
+//
 // Image calls the underlying Image.
 func (x *Button) Image() *Image {
 	_r := x.inner.Image()
@@ -897,11 +1015,15 @@ func (x *Button) Image() *Image {
 	return &Image{inner: _r}
 }
 
+// The image that appears on the button when it’s in an off state, or nil if there is no such image.
+//
 // SetImage calls the underlying SetImage.
 func (x *Button) SetImage(image *raw.NSImage) {
 	x.inner.SetImage(image)
 }
 
+// An alternate image that appears on the button when the button is in an on state, or nil if there is no such image. Note that some button types do not display an alternate image.
+//
 // AlternateImage calls the underlying AlternateImage.
 func (x *Button) AlternateImage() *Image {
 	_r := x.inner.AlternateImage()
@@ -911,41 +1033,57 @@ func (x *Button) AlternateImage() *Image {
 	return &Image{inner: _r}
 }
 
+// An alternate image that appears on the button when the button is in an on state, or nil if there is no such image. Note that some button types do not display an alternate image.
+//
 // SetAlternateImage calls the underlying SetAlternateImage.
 func (x *Button) SetAlternateImage(alternateImage *raw.NSImage) {
 	x.inner.SetAlternateImage(alternateImage)
 }
 
+// The position of the button's image relative to its title. See the NSCellImagePosition enumeration for possible values.
+//
 // ImagePosition calls the underlying ImagePosition.
 func (x *Button) ImagePosition() NSCellImagePosition {
 	return NSCellImagePosition(x.inner.ImagePosition())
 }
 
+// The position of the button's image relative to its title. See the NSCellImagePosition enumeration for possible values.
+//
 // SetImagePosition calls the underlying SetImagePosition.
 func (x *Button) SetImagePosition(imagePosition NSCellImagePosition) {
 	x.inner.SetImagePosition(raw.NSCellImagePosition(imagePosition))
 }
 
+// The scaling mode applied to make the button's image fit within its bounds.
+//
 // ImageScaling calls the underlying ImageScaling.
 func (x *Button) ImageScaling() NSImageScaling {
 	return NSImageScaling(x.inner.ImageScaling())
 }
 
+// The scaling mode applied to make the button's image fit within its bounds.
+//
 // SetImageScaling calls the underlying SetImageScaling.
 func (x *Button) SetImageScaling(imageScaling NSImageScaling) {
 	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
 }
 
+// A Boolean value that determines how the button's image and title are positioned together within the button bezel. If false, the image is positioned according to the imagePosition property at the edge of the button bezel, and the title is positioned within the remaining space. If true, the button’s image is positioned directly adjacent to the title based on the imagePosition property, and the image and title are positioned within the button bezel as a single unit.
+//
 // ImageHugsTitle calls the underlying ImageHugsTitle.
 func (x *Button) ImageHugsTitle() bool {
 	return x.inner.ImageHugsTitle()
 }
 
+// A Boolean value that determines how the button's image and title are positioned together within the button bezel. If false, the image is positioned according to the imagePosition property at the edge of the button bezel, and the title is positioned within the remaining space. If true, the button’s image is positioned directly adjacent to the title based on the imagePosition property, and the image and title are positioned within the button bezel as a single unit.
+//
 // SetImageHugsTitle calls the underlying SetImageHugsTitle.
 func (x *Button) SetImageHugsTitle(imageHugsTitle bool) {
 	x.inner.SetImageHugsTitle(imageHugsTitle)
 }
 
+// Specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the symbol is matched to the button's `font` property. The default value is nil.
+//
 // SymbolConfiguration calls the underlying SymbolConfiguration.
 func (x *Button) SymbolConfiguration() *ImageSymbolConfiguration {
 	_r := x.inner.SymbolConfiguration()
@@ -955,31 +1093,43 @@ func (x *Button) SymbolConfiguration() *ImageSymbolConfiguration {
 	return &ImageSymbolConfiguration{inner: _r}
 }
 
+// Specifies a combination of point size, weight, and scale to use when sizing and displaying symbol images. If a symbol configuration isn't provided, the symbol is matched to the button's `font` property. The default value is nil.
+//
 // SetSymbolConfiguration calls the underlying SetSymbolConfiguration.
 func (x *Button) SetSymbolConfiguration(symbolConfiguration *raw.NSImageSymbolConfiguration) {
 	x.inner.SetSymbolConfiguration(symbolConfiguration)
 }
 
+// The button's state. Buttons support the off and on states, and an additional mixed state depending on the value of the `allowsMixedState` property.
+//
 // State calls the underlying State.
 func (x *Button) State() int {
 	return x.inner.State()
 }
 
+// The button's state. Buttons support the off and on states, and an additional mixed state depending on the value of the `allowsMixedState` property.
+//
 // SetState calls the underlying SetState.
 func (x *Button) SetState(state int) {
 	x.inner.SetState(state)
 }
 
+// A Boolean value that indicates whether the button allows a mixed state. If NO, the button has two states (on and off), and if YES, the button has three states (on, off, and mixed). The mixed state is commonly used with checkboxes and radio buttons to indicate a value which is partially on.
+//
 // AllowsMixedState calls the underlying AllowsMixedState.
 func (x *Button) AllowsMixedState() bool {
 	return x.inner.AllowsMixedState()
 }
 
+// A Boolean value that indicates whether the button allows a mixed state. If NO, the button has two states (on and off), and if YES, the button has three states (on, off, and mixed). The mixed state is commonly used with checkboxes and radio buttons to indicate a value which is partially on.
+//
 // SetAllowsMixedState calls the underlying SetAllowsMixedState.
 func (x *Button) SetAllowsMixedState(allowsMixedState bool) {
 	x.inner.SetAllowsMixedState(allowsMixedState)
 }
 
+// This property contains the button's key equivalent, or the empty string if no equivalent has been defined. Buttons don’t have a default key equivalent. Setting the key equivalent to the Return character causes it to act as the default button for its window.
+//
 // KeyEquivalent calls the underlying KeyEquivalent.
 func (x *Button) KeyEquivalent() string {
 	_r := x.inner.KeyEquivalent()
@@ -989,16 +1139,22 @@ func (x *Button) KeyEquivalent() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// This property contains the button's key equivalent, or the empty string if no equivalent has been defined. Buttons don’t have a default key equivalent. Setting the key equivalent to the Return character causes it to act as the default button for its window.
+//
 // SetKeyEquivalent calls the underlying SetKeyEquivalent.
 func (x *Button) SetKeyEquivalent(keyEquivalent string) {
 	x.inner.SetKeyEquivalent(foundation.NSStringStringWithUTF8String(keyEquivalent))
 }
 
+// A bitmask specifying the modifier keys that are applied to the button's key equivalent. Mask bits are defined by the NSEventModifierFlags option set. The only mask bits relevant in button key-equivalent modifier masks are NSEventModifierFlagControl, NSEventModifierFlagOption, and NSEventModifierFlagCommand.
+//
 // KeyEquivalentModifierMask calls the underlying KeyEquivalentModifierMask.
 func (x *Button) KeyEquivalentModifierMask() NSEventModifierFlags {
 	return NSEventModifierFlags(x.inner.KeyEquivalentModifierMask())
 }
 
+// A bitmask specifying the modifier keys that are applied to the button's key equivalent. Mask bits are defined by the NSEventModifierFlags option set. The only mask bits relevant in button key-equivalent modifier masks are NSEventModifierFlagControl, NSEventModifierFlagOption, and NSEventModifierFlagCommand.
+//
 // SetKeyEquivalentModifierMask calls the underlying SetKeyEquivalentModifierMask.
 func (x *Button) SetKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) {
 	x.inner.SetKeyEquivalentModifierMask(raw.NSEventModifierFlags(keyEquivalentModifierMask))

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @brief Contain information about an email address. This can include both valid and invalid email addresses.
+//
 // EmailAddress wraps [raw.MEEmailAddress] with a fluent Go API.
 type EmailAddress struct {
 	inner *raw.MEEmailAddress
@@ -38,6 +40,8 @@ func NewEmailAddressWithRawString(rawString string) *EmailAddress {
 	return &EmailAddress{inner: raw.MEEmailAddressFromID(_id)}
 }
 
+// @brief The raw string for the email address.
+//
 // RawString calls the underlying RawString.
 func (x *EmailAddress) RawString() string {
 	_r := x.inner.RawString()
@@ -47,6 +51,8 @@ func (x *EmailAddress) RawString() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @brief The simple address string portion of the raw string if it is valid. For example, the  @c addressString of "John Appleseed <j.appleseed@example.com>" will be "j.appleseed@example.com".
+//
 // AddressString calls the underlying AddressString.
 func (x *EmailAddress) AddressString() string {
 	_r := x.inner.AddressString()

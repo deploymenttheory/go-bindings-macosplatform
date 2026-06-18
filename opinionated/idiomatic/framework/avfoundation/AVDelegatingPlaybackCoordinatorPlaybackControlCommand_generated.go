@@ -38,6 +38,8 @@ func NewDelegatingPlaybackCoordinatorPlaybackControlCommand() *DelegatingPlaybac
 	return &DelegatingPlaybackCoordinatorPlaybackControlCommand{inner: raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommandFromID(_id)}
 }
 
+// The participant causing this command to be issued. Only commands issued on behalf of another participant will contain an originator. Commands caused by local requests, e.g., requests to coordinate a rate change, will not contain an originator. Similarly, re-application of older commands, e.g., in response to a call to [AVDelegatingPlaybackCoordinator reapplyCurrentItemStateToPlaybackControlDelegate], will not contain an originator. If the originator is non-nil, it may be appropriate to show UI indicating someone else's action.
+//
 // Originator calls the underlying Originator.
 func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) Originator() *CoordinatedPlaybackParticipant {
 	_r := x.inner.Originator()
@@ -47,6 +49,8 @@ func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) Originator() *Coor
 	return &CoordinatedPlaybackParticipant{inner: _r}
 }
 
+// Indicates the item this command was issued for. Commands are always meant for the current item. A command handler should verify that the identifier of its current item matches this identifier. If it doesn't this command is obsolete and should be ignored. Note that any completion handler of the delegate method issuing the command must still be invoked.
+//
 // ExpectedCurrentItemIdentifier calls the underlying ExpectedCurrentItemIdentifier.
 func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) ExpectedCurrentItemIdentifier() string {
 	_r := x.inner.ExpectedCurrentItemIdentifier()

@@ -39,75 +39,101 @@ func NewScene() *Scene {
 	return &Scene{inner: raw.SCNSceneFromID(_id)}
 }
 
+// @property fogStartDistance @abstract Specifies the receiver's fog start distance. Animatable. Defaults to 0.
+//
 // WithFogStartDistance sets the fogStartDistance property and returns the receiver for chaining.
 func (x *Scene) WithFogStartDistance(fogStartDistance float64) *Scene {
 	x.inner.SetFogStartDistance(fogStartDistance)
 	return x
 }
 
+// @property fogEndDistance @abstract Specifies the receiver's fog end distance. Animatable. Defaults to 0.
+//
 // WithFogEndDistance sets the fogEndDistance property and returns the receiver for chaining.
 func (x *Scene) WithFogEndDistance(fogEndDistance float64) *Scene {
 	x.inner.SetFogEndDistance(fogEndDistance)
 	return x
 }
 
+// @property fogDensityExponent @abstract Specifies the receiver's fog power exponent. Animatable. Defaults to 1. @discussion Controls the attenuation between the start and end fog distances. 0 means a constant fog, 1 a linear fog and 2 a quadratic fog, but any positive value will work.
+//
 // WithFogDensityExponent sets the fogDensityExponent property and returns the receiver for chaining.
 func (x *Scene) WithFogDensityExponent(fogDensityExponent float64) *Scene {
 	x.inner.SetFogDensityExponent(fogDensityExponent)
 	return x
 }
 
+// @property fogColor @abstract Specifies the receiver's fog color (NSColor or CGColorRef). Animatable. Defaults to white. @discussion The initial value is a NSColor.
+//
 // WithFogColor sets the fogColor property and returns the receiver for chaining.
 func (x *Scene) WithFogColor(fogColor objc.ID) *Scene {
 	x.inner.SetFogColor(fogColor)
 	return x
 }
 
+// @property wantsScreenSpaceReflection @abstract Determines if the scene use screen space reflection. @discussion Defaults to NO.
+//
 // WithWantsScreenSpaceReflection sets the wantsScreenSpaceReflection property and returns the receiver for chaining.
 func (x *Scene) WithWantsScreenSpaceReflection(wantsScreenSpaceReflection bool) *Scene {
 	x.inner.SetWantsScreenSpaceReflection(wantsScreenSpaceReflection)
 	return x
 }
 
+// @property screenSpaceReflectionSampleCount @abstract Determines the sample count of the screen space reflection. @discussion Defaults to 64.
+//
 // WithScreenSpaceReflectionSampleCount sets the screenSpaceReflectionSampleCount property and returns the receiver for chaining.
 func (x *Scene) WithScreenSpaceReflectionSampleCount(screenSpaceReflectionSampleCount int) *Scene {
 	x.inner.SetScreenSpaceReflectionSampleCount(screenSpaceReflectionSampleCount)
 	return x
 }
 
+// @property screenSpaceReflectionMaximumDistance @abstract Determines the maximum distance in world units. @discussion Defaults to 1000.
+//
 // WithScreenSpaceReflectionMaximumDistance sets the screenSpaceReflectionMaximumDistance property and returns the receiver for chaining.
 func (x *Scene) WithScreenSpaceReflectionMaximumDistance(screenSpaceReflectionMaximumDistance float64) *Scene {
 	x.inner.SetScreenSpaceReflectionMaximumDistance(screenSpaceReflectionMaximumDistance)
 	return x
 }
 
+// @property screenSpaceReflectionStride @abstract Raytracing step size in pixel. The lower the better, the higher the faster. @discussion Defaults to 8.
+//
 // WithScreenSpaceReflectionStride sets the screenSpaceReflectionStride property and returns the receiver for chaining.
 func (x *Scene) WithScreenSpaceReflectionStride(screenSpaceReflectionStride float64) *Scene {
 	x.inner.SetScreenSpaceReflectionStride(screenSpaceReflectionStride)
 	return x
 }
 
+// @property paused @abstract Controls whether or not the scene is paused. Defaults to NO. @discussion Pausing a scene will pause animations, actions, particles and physics.
+//
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *Scene) WithPaused(paused bool) *Scene {
 	x.inner.SetPaused(paused)
 	return x
 }
 
+// @method attributeForKey: @abstract Retrieves a scene attribute. @discussion The available keys are listed in the "Scene attributes" group. @param key An NSString object that specifies the attribute to be read
+//
 // AttributeForKey calls the underlying AttributeForKey.
 func (x *Scene) AttributeForKey(key string) objc.ID {
 	return x.inner.AttributeForKey(foundation.NSStringStringWithUTF8String(key))
 }
 
+// @method setAttribute:forKey: @abstract Sets a scene attribute @discussion The available keys are listed in the "Scene attributes" group. @param attribute An object that specifies the value of the attribute to be written. @param key An NSString object that specifies the attribute to be written
+//
 // SetAttributeForKey calls the underlying SetAttributeForKey.
 func (x *Scene) SetAttributeForKey(attribute objc.ID, key string) {
 	x.inner.SetAttributeForKey(attribute, foundation.NSStringStringWithUTF8String(key))
 }
 
+// @method writeToURL:options:delegate:progressHandler: @abstract write the scene to the specified url. @param url the destination url to write the scene to. @param options A dictionary of options. The valid keys are described in the "Scene writing options" section. @param delegate an optional delegate to manage external references such as images. @param progressHandler an optional block to handle the progress of the operation. @return Returns YES if the operation succeeded, NO otherwise. Errors checking can be done via the "error" parameter of the 'progressHandler'. @discussion macOS 10.10 and lower only supports exporting to .dae files. Starting macOS 10.11 exporting supports .dae, .scn as well as file all formats supported by Model I/O. Starting iOS 10 exporting supports .scn as well as all file formats supported by Model I/O.
+//
 // WriteToURLOptionsDelegateProgressHandler calls the underlying WriteToURLOptionsDelegateProgressHandler.
 func (x *Scene) WriteToURLOptionsDelegateProgressHandler(url string, options *foundation.NSDictionary[*foundation.NSString, objc.ID], delegate raw.SCNSceneExportDelegate, progressHandler func(float32, unsafe.Pointer, *bool)) bool {
 	return x.inner.WriteToURLOptionsDelegateProgressHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options, delegate, progressHandler)
 }
 
+// @property root @abstract Specifies the root node of the node hierarchy. @discussion Note that we have only one root node, whereas some file formats might have many nodes at the root of their hierarchies. The root node(s) of the imported files will therefore be children of the SCNScene's root node.
+//
 // RootNode calls the underlying RootNode.
 func (x *Scene) RootNode() *Node {
 	_r := x.inner.RootNode()
@@ -117,6 +143,8 @@ func (x *Scene) RootNode() *Node {
 	return &Node{inner: _r}
 }
 
+// @property physicsWorld @abstract Specifies the physics world of the receiver. @discussion Every scene automatically creates a physics world object to simulate physics on nodes in the scene. You use this property to access the scene’s global physics properties, such as gravity. To add physics to a particular node, see physicsBody.
+//
 // PhysicsWorld calls the underlying PhysicsWorld.
 func (x *Scene) PhysicsWorld() *PhysicsWorld {
 	_r := x.inner.PhysicsWorld()
@@ -126,6 +154,8 @@ func (x *Scene) PhysicsWorld() *PhysicsWorld {
 	return &PhysicsWorld{inner: _r}
 }
 
+// @property background @abstract Specifies the background of the receiver. @discussion The background is rendered before the rest of the scene. The background can be rendered as a skybox by setting a cube map as described in SCNMaterialProperty.h Colors are supported starting in macOS 10.12 and iOS 10. Prior to that you can use SCNView.backgroundColor. MDLSkyCubeTexture is supported starting in macOS 10.13 and iOS 11.
+//
 // Background calls the underlying Background.
 func (x *Scene) Background() *MaterialProperty {
 	_r := x.inner.Background()
@@ -135,6 +165,8 @@ func (x *Scene) Background() *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// @property lightingEnvironment @abstract Specifies the receiver's environment for image-based lighting (IBL). @discussion The environment can be - a cube map (as described in SCNMaterialProperty.h) - an instance of `MDLSkyCubeTexture` (supported since macOS 10.13 and iOS 11) - an object returned by `+[SCNMaterialProperty precomputedLightingEnvironmentContentsWithURL:error:]` or `+[SCNMaterialProperty precomputedLightingEnvironmentContentsWithData:error:]`
+//
 // LightingEnvironment calls the underlying LightingEnvironment.
 func (x *Scene) LightingEnvironment() *MaterialProperty {
 	_r := x.inner.LightingEnvironment()
@@ -144,6 +176,8 @@ func (x *Scene) LightingEnvironment() *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// @property fogStartDistance @abstract Specifies the receiver's fog start distance. Animatable. Defaults to 0.
+//
 // FogStartDistance calls the underlying FogStartDistance.
 func (x *Scene) FogStartDistance() float64 {
 	return x.inner.FogStartDistance()
@@ -154,6 +188,8 @@ func (x *Scene) SetFogStartDistance(fogStartDistance float64) {
 	x.inner.SetFogStartDistance(fogStartDistance)
 }
 
+// @property fogEndDistance @abstract Specifies the receiver's fog end distance. Animatable. Defaults to 0.
+//
 // FogEndDistance calls the underlying FogEndDistance.
 func (x *Scene) FogEndDistance() float64 {
 	return x.inner.FogEndDistance()
@@ -164,6 +200,8 @@ func (x *Scene) SetFogEndDistance(fogEndDistance float64) {
 	x.inner.SetFogEndDistance(fogEndDistance)
 }
 
+// @property fogDensityExponent @abstract Specifies the receiver's fog power exponent. Animatable. Defaults to 1. @discussion Controls the attenuation between the start and end fog distances. 0 means a constant fog, 1 a linear fog and 2 a quadratic fog, but any positive value will work.
+//
 // FogDensityExponent calls the underlying FogDensityExponent.
 func (x *Scene) FogDensityExponent() float64 {
 	return x.inner.FogDensityExponent()
@@ -174,6 +212,8 @@ func (x *Scene) SetFogDensityExponent(fogDensityExponent float64) {
 	x.inner.SetFogDensityExponent(fogDensityExponent)
 }
 
+// @property fogColor @abstract Specifies the receiver's fog color (NSColor or CGColorRef). Animatable. Defaults to white. @discussion The initial value is a NSColor.
+//
 // FogColor calls the underlying FogColor.
 func (x *Scene) FogColor() objc.ID {
 	return x.inner.FogColor()
@@ -184,6 +224,8 @@ func (x *Scene) SetFogColor(fogColor objc.ID) {
 	x.inner.SetFogColor(fogColor)
 }
 
+// @property wantsScreenSpaceReflection @abstract Determines if the scene use screen space reflection. @discussion Defaults to NO.
+//
 // WantsScreenSpaceReflection calls the underlying WantsScreenSpaceReflection.
 func (x *Scene) WantsScreenSpaceReflection() bool {
 	return x.inner.WantsScreenSpaceReflection()
@@ -194,6 +236,8 @@ func (x *Scene) SetWantsScreenSpaceReflection(wantsScreenSpaceReflection bool) {
 	x.inner.SetWantsScreenSpaceReflection(wantsScreenSpaceReflection)
 }
 
+// @property screenSpaceReflectionSampleCount @abstract Determines the sample count of the screen space reflection. @discussion Defaults to 64.
+//
 // ScreenSpaceReflectionSampleCount calls the underlying ScreenSpaceReflectionSampleCount.
 func (x *Scene) ScreenSpaceReflectionSampleCount() int {
 	return x.inner.ScreenSpaceReflectionSampleCount()
@@ -204,6 +248,8 @@ func (x *Scene) SetScreenSpaceReflectionSampleCount(screenSpaceReflectionSampleC
 	x.inner.SetScreenSpaceReflectionSampleCount(screenSpaceReflectionSampleCount)
 }
 
+// @property screenSpaceReflectionMaximumDistance @abstract Determines the maximum distance in world units. @discussion Defaults to 1000.
+//
 // ScreenSpaceReflectionMaximumDistance calls the underlying ScreenSpaceReflectionMaximumDistance.
 func (x *Scene) ScreenSpaceReflectionMaximumDistance() float64 {
 	return x.inner.ScreenSpaceReflectionMaximumDistance()
@@ -214,6 +260,8 @@ func (x *Scene) SetScreenSpaceReflectionMaximumDistance(screenSpaceReflectionMax
 	x.inner.SetScreenSpaceReflectionMaximumDistance(screenSpaceReflectionMaximumDistance)
 }
 
+// @property screenSpaceReflectionStride @abstract Raytracing step size in pixel. The lower the better, the higher the faster. @discussion Defaults to 8.
+//
 // ScreenSpaceReflectionStride calls the underlying ScreenSpaceReflectionStride.
 func (x *Scene) ScreenSpaceReflectionStride() float64 {
 	return x.inner.ScreenSpaceReflectionStride()
@@ -224,6 +272,8 @@ func (x *Scene) SetScreenSpaceReflectionStride(screenSpaceReflectionStride float
 	x.inner.SetScreenSpaceReflectionStride(screenSpaceReflectionStride)
 }
 
+// @property paused @abstract Controls whether or not the scene is paused. Defaults to NO. @discussion Pausing a scene will pause animations, actions, particles and physics.
+//
 // IsPaused calls the underlying IsPaused.
 func (x *Scene) IsPaused() bool {
 	return x.inner.IsPaused()

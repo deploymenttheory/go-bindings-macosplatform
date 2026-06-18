@@ -37,12 +37,16 @@ func NewScatteringFunction() *ScatteringFunction {
 	return &ScatteringFunction{inner: raw.MDLScatteringFunctionFromID(_id)}
 }
 
+// @see MDLNamed
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *ScatteringFunction) WithName(name string) *ScatteringFunction {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @see MDLNamed
+//
 // Name calls the underlying Name.
 func (x *ScatteringFunction) Name() string {
 	_r := x.inner.Name()

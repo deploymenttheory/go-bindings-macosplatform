@@ -38,42 +38,56 @@ func NewNERelay() *NERelay {
 	return &NERelay{inner: raw.NERelayFromID(_id)}
 }
 
+// @property HTTP3RelayURL @discussion The URL of the relay accessible over HTTP/3.
+//
 // WithHTTP3RelayURL sets the hTTP3RelayURL property and returns the receiver for chaining.
 func (x *NERelay) WithHTTP3RelayURL(hTTP3RelayURL string) *NERelay {
 	x.inner.SetHTTP3RelayURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(hTTP3RelayURL)))
 	return x
 }
 
+// @property HTTP2RelayURL @discussion The URL of the relay accessible over HTTP/2.
+//
 // WithHTTP2RelayURL sets the hTTP2RelayURL property and returns the receiver for chaining.
 func (x *NERelay) WithHTTP2RelayURL(hTTP2RelayURL string) *NERelay {
 	x.inner.SetHTTP2RelayURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(hTTP2RelayURL)))
 	return x
 }
 
+// @property dnsOverHTTPSURL @discussion The URL of a DNS-over-HTTPS (DoH) resolver accessible via the relay.
+//
 // WithDnsOverHTTPSURL sets the dnsOverHTTPSURL property and returns the receiver for chaining.
 func (x *NERelay) WithDnsOverHTTPSURL(dnsOverHTTPSURL string) *NERelay {
 	x.inner.SetDnsOverHTTPSURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(dnsOverHTTPSURL)))
 	return x
 }
 
+// @property syntheticDNSAnswerIPv4Prefix @discussion An IPv4 address prefix (such as "192.0.2.0/24") that will be used to synthesize DNS answers for apps that use `getaddrinfo()` to resolve domains included in `matchDomains`
+//
 // WithSyntheticDNSAnswerIPv4Prefix sets the syntheticDNSAnswerIPv4Prefix property and returns the receiver for chaining.
 func (x *NERelay) WithSyntheticDNSAnswerIPv4Prefix(syntheticDNSAnswerIPv4Prefix string) *NERelay {
 	x.inner.SetSyntheticDNSAnswerIPv4Prefix(foundation.NSStringStringWithUTF8String(syntheticDNSAnswerIPv4Prefix))
 	return x
 }
 
+// @property syntheticDNSAnswerIPv6Prefix @discussion An IPv6 address prefix (such as "2001:DB8::/32") that will be used to synthesize DNS answers for apps that use `getaddrinfo()` to resolve domains included in `matchDomains`
+//
 // WithSyntheticDNSAnswerIPv6Prefix sets the syntheticDNSAnswerIPv6Prefix property and returns the receiver for chaining.
 func (x *NERelay) WithSyntheticDNSAnswerIPv6Prefix(syntheticDNSAnswerIPv6Prefix string) *NERelay {
 	x.inner.SetSyntheticDNSAnswerIPv6Prefix(foundation.NSStringStringWithUTF8String(syntheticDNSAnswerIPv6Prefix))
 	return x
 }
 
+// @property additionalHTTPHeaderFields @discussion Additional HTTP header field names and values to be added to all relay requests.
+//
 // WithAdditionalHTTPHeaderFields sets the additionalHTTPHeaderFields property and returns the receiver for chaining.
 func (x *NERelay) WithAdditionalHTTPHeaderFields(additionalHTTPHeaderFields *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *NERelay {
 	x.inner.SetAdditionalHTTPHeaderFields(additionalHTTPHeaderFields)
 	return x
 }
 
+// @property rawPublicKeys @discussion TLS 1.3 raw public keys to use to authenticate the relay servers.
+//
 // WithRawPublicKeys sets the collection, converting the Go slice to an NSArray.
 func (x *NERelay) WithRawPublicKeys(items ...*foundation.NSData) *NERelay {
 	if len(items) == 0 {
@@ -92,18 +106,24 @@ func (x *NERelay) WithRawPublicKeys(items ...*foundation.NSData) *NERelay {
 	return x
 }
 
+// @property identityData @discussion The PKCS12 data for the relay client authentication. The value is a NSData in PKCS12 format.
+//
 // WithIdentityData sets the identityData property and returns the receiver for chaining.
 func (x *NERelay) WithIdentityData(identityData *foundation.NSData) *NERelay {
 	x.inner.SetIdentityData(identityData)
 	return x
 }
 
+// @property identityDataPassword @discussion The password to be used to decrypt the PKCS12 identity data.
+//
 // WithIdentityDataPassword sets the identityDataPassword property and returns the receiver for chaining.
 func (x *NERelay) WithIdentityDataPassword(identityDataPassword string) *NERelay {
 	x.inner.SetIdentityDataPassword(foundation.NSStringStringWithUTF8String(identityDataPassword))
 	return x
 }
 
+// @property HTTP3RelayURL @discussion The URL of the relay accessible over HTTP/3.
+//
 // HTTP3RelayURL calls the underlying HTTP3RelayURL.
 func (x *NERelay) HTTP3RelayURL() *foundation.NSURL {
 	return x.inner.HTTP3RelayURL()
@@ -114,6 +134,8 @@ func (x *NERelay) SetHTTP3RelayURL(hTTP3RelayURL string) {
 	x.inner.SetHTTP3RelayURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(hTTP3RelayURL)))
 }
 
+// @property HTTP2RelayURL @discussion The URL of the relay accessible over HTTP/2.
+//
 // HTTP2RelayURL calls the underlying HTTP2RelayURL.
 func (x *NERelay) HTTP2RelayURL() *foundation.NSURL {
 	return x.inner.HTTP2RelayURL()
@@ -124,6 +146,8 @@ func (x *NERelay) SetHTTP2RelayURL(hTTP2RelayURL string) {
 	x.inner.SetHTTP2RelayURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(hTTP2RelayURL)))
 }
 
+// @property dnsOverHTTPSURL @discussion The URL of a DNS-over-HTTPS (DoH) resolver accessible via the relay.
+//
 // DnsOverHTTPSURL calls the underlying DnsOverHTTPSURL.
 func (x *NERelay) DnsOverHTTPSURL() *foundation.NSURL {
 	return x.inner.DnsOverHTTPSURL()
@@ -134,6 +158,8 @@ func (x *NERelay) SetDnsOverHTTPSURL(dnsOverHTTPSURL string) {
 	x.inner.SetDnsOverHTTPSURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(dnsOverHTTPSURL)))
 }
 
+// @property syntheticDNSAnswerIPv4Prefix @discussion An IPv4 address prefix (such as "192.0.2.0/24") that will be used to synthesize DNS answers for apps that use `getaddrinfo()` to resolve domains included in `matchDomains`
+//
 // SyntheticDNSAnswerIPv4Prefix calls the underlying SyntheticDNSAnswerIPv4Prefix.
 func (x *NERelay) SyntheticDNSAnswerIPv4Prefix() string {
 	_r := x.inner.SyntheticDNSAnswerIPv4Prefix()
@@ -148,6 +174,8 @@ func (x *NERelay) SetSyntheticDNSAnswerIPv4Prefix(syntheticDNSAnswerIPv4Prefix s
 	x.inner.SetSyntheticDNSAnswerIPv4Prefix(foundation.NSStringStringWithUTF8String(syntheticDNSAnswerIPv4Prefix))
 }
 
+// @property syntheticDNSAnswerIPv6Prefix @discussion An IPv6 address prefix (such as "2001:DB8::/32") that will be used to synthesize DNS answers for apps that use `getaddrinfo()` to resolve domains included in `matchDomains`
+//
 // SyntheticDNSAnswerIPv6Prefix calls the underlying SyntheticDNSAnswerIPv6Prefix.
 func (x *NERelay) SyntheticDNSAnswerIPv6Prefix() string {
 	_r := x.inner.SyntheticDNSAnswerIPv6Prefix()
@@ -162,6 +190,8 @@ func (x *NERelay) SetSyntheticDNSAnswerIPv6Prefix(syntheticDNSAnswerIPv6Prefix s
 	x.inner.SetSyntheticDNSAnswerIPv6Prefix(foundation.NSStringStringWithUTF8String(syntheticDNSAnswerIPv6Prefix))
 }
 
+// @property additionalHTTPHeaderFields @discussion Additional HTTP header field names and values to be added to all relay requests.
+//
 // AdditionalHTTPHeaderFields calls the underlying AdditionalHTTPHeaderFields.
 func (x *NERelay) AdditionalHTTPHeaderFields() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
 	return x.inner.AdditionalHTTPHeaderFields()
@@ -172,6 +202,8 @@ func (x *NERelay) SetAdditionalHTTPHeaderFields(additionalHTTPHeaderFields *foun
 	x.inner.SetAdditionalHTTPHeaderFields(additionalHTTPHeaderFields)
 }
 
+// @property rawPublicKeys @discussion TLS 1.3 raw public keys to use to authenticate the relay servers.
+//
 // RawPublicKeys returns the collection as a Go slice.
 func (x *NERelay) RawPublicKeys() []*foundation.NSData {
 	arr := x.inner.RawPublicKeys()
@@ -188,6 +220,8 @@ func (x *NERelay) SetRawPublicKeys(rawPublicKeys *foundation.NSArray[*foundation
 	x.inner.SetRawPublicKeys(rawPublicKeys)
 }
 
+// @property identityData @discussion The PKCS12 data for the relay client authentication. The value is a NSData in PKCS12 format.
+//
 // IdentityData calls the underlying IdentityData.
 func (x *NERelay) IdentityData() *foundation.NSData {
 	return x.inner.IdentityData()
@@ -198,6 +232,8 @@ func (x *NERelay) SetIdentityData(identityData *foundation.NSData) {
 	x.inner.SetIdentityData(identityData)
 }
 
+// @property identityDataPassword @discussion The password to be used to decrypt the PKCS12 identity data.
+//
 // IdentityDataPassword calls the underlying IdentityDataPassword.
 func (x *NERelay) IdentityDataPassword() string {
 	_r := x.inner.IdentityDataPassword()

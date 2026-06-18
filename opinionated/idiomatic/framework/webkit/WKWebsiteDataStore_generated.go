@@ -56,16 +56,22 @@ func (x *WKWebsiteDataStore) WithProxyConfigurations(items ...*foundation.NSObje
 	return x
 }
 
+// @abstract Fetches data records containing the given website data types. @param dataTypes The website data types to fetch records for. @param completionHandler A block to invoke when the data records have been fetched.
+//
 // FetchDataRecordsOfTypesCompletionHandler calls the underlying FetchDataRecordsOfTypesCompletionHandler.
 func (x *WKWebsiteDataStore) FetchDataRecordsOfTypesCompletionHandler(dataTypes *foundation.NSSet[*foundation.NSString], completionHandler func(*foundation.NSArray[*raw.WKWebsiteDataRecord])) {
 	x.inner.FetchDataRecordsOfTypesCompletionHandler(dataTypes, completionHandler)
 }
 
+// @abstract Removes website data of the given types for the given data records. @param dataTypes The website data types that should be removed. @param dataRecords The website data records to delete website data for. @param completionHandler A block to invoke when the website data for the records has been removed.
+//
 // RemoveDataOfTypesForDataRecordsCompletionHandler calls the underlying RemoveDataOfTypesForDataRecordsCompletionHandler.
 func (x *WKWebsiteDataStore) RemoveDataOfTypesForDataRecordsCompletionHandler(dataTypes *foundation.NSSet[*foundation.NSString], dataRecords *foundation.NSArray[*raw.WKWebsiteDataRecord], completionHandler func()) {
 	x.inner.RemoveDataOfTypesForDataRecordsCompletionHandler(dataTypes, dataRecords, completionHandler)
 }
 
+// @abstract Removes all website data of the given types that has been modified since the given date. @param dataTypes The website data types that should be removed. @param date A date. All website data modified after this date will be removed. @param completionHandler A block to invoke when the website data has been removed.
+//
 // RemoveDataOfTypesModifiedSinceCompletionHandler calls the underlying RemoveDataOfTypesModifiedSinceCompletionHandler.
 func (x *WKWebsiteDataStore) RemoveDataOfTypesModifiedSinceCompletionHandler(dataTypes *foundation.NSSet[*foundation.NSString], date *foundation.NSDate, completionHandler func()) {
 	x.inner.RemoveDataOfTypesModifiedSinceCompletionHandler(dataTypes, date, completionHandler)
@@ -81,11 +87,15 @@ func (x *WKWebsiteDataStore) RestoreDataCompletionHandler(data *foundation.NSDat
 	x.inner.RestoreDataCompletionHandler(data, completionHandler)
 }
 
+// @abstract Whether the data store is persistent or not.
+//
 // IsPersistent calls the underlying IsPersistent.
 func (x *WKWebsiteDataStore) IsPersistent() bool {
 	return x.inner.IsPersistent()
 }
 
+// @abstract Returns the cookie store representing HTTP cookies in this website data store.
+//
 // HttpCookieStore calls the underlying HttpCookieStore.
 func (x *WKWebsiteDataStore) HttpCookieStore() *WKHTTPCookieStore {
 	_r := x.inner.HttpCookieStore()
@@ -95,6 +105,8 @@ func (x *WKWebsiteDataStore) HttpCookieStore() *WKHTTPCookieStore {
 	return &WKHTTPCookieStore{inner: _r}
 }
 
+// @abstract Get identifier for a data store. @discussion Returns nil for default and non-persistent data store .
+//
 // Identifier calls the underlying Identifier.
 func (x *WKWebsiteDataStore) Identifier() *foundation.NSUUID {
 	return x.inner.Identifier()

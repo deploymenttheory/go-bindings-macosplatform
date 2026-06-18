@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes a version of macOS to install on to a virtual machine.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzmacosrestoreimage
 type VZMacOSRestoreImage struct {
 	foundation.NSObject
@@ -38,7 +40,7 @@ func VZMacOSRestoreImageFromID(id objc.ID) *VZMacOSRestoreImage {
 	return o
 }
 
-// @abstract Load a restore image from a file on the local file system. @param fileURL A file URL indicating the macOS restore image to load. @param completionHandler Block called after the restore image has successfully loaded or has failed to load. The error parameter passed to the block is nil if the restore image was loaded successfully. The completion handler will be invoked on an arbitrary thread. @discussion VZMacOSRestoreImage can load IPSW installation media from a local file. If the fileURL parameter does not refer to a local file, an exception will be raised.
+// Load a restore image from a file on the local file system.
 func VZMacOSRestoreImageLoadFileURLCompletionHandler(fileURL *foundation.NSURL, completionHandler func(*VZMacOSRestoreImage, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {
@@ -53,7 +55,7 @@ func VZMacOSRestoreImageLoadFileURLCompletionHandler(fileURL *foundation.NSURL, 
 	objc.ID(_clsVZMacOSRestoreImage).Send(_vZMacOSRestoreImageSelLoadFileURLCompletionHandler, fileURL.Ptr(), __block_completionHandler)
 }
 
-// @abstract Fetch the latest restore image supported by this host from the network. @param completionHandler Block called after the restore image fetch has succeeded or failed. The error parameter passed to the block is nil if the restore image was fetched successfully. The completion handler will be invoked on an arbitrary thread. @discussion A VZMacOSInstaller object must be constructed with a VZMacOSRestoreImage loaded from a file on the local filesystem. A VZMacOSRestoreImage fetched with the fetchLatestSupportedWithCompletionHandler method will have a URL property referring to a restore image on the network. To use such a restore image, the file referred to by the URL property should be downloaded locally (using NSURLSession or similar API). After the restore image has been downloaded, a VZMacOSInstaller can be initialized using a URL referring to the local file.
+// Fetches the latest restore image supported by this host from the network.
 func VZMacOSRestoreImageFetchLatestSupportedWithCompletionHandler(completionHandler func(*VZMacOSRestoreImage, unsafe.Pointer)) {
 	var __block_completionHandler objc.Block
 	if completionHandler != nil {

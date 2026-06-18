@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that contains information the boot loader needs for booting macOS as a guest operating system.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzmacauxiliarystorage
 type VZMacAuxiliaryStorage struct {
 	foundation.NSObject
@@ -35,7 +37,7 @@ func VZMacAuxiliaryStorageFromID(id objc.ID) *VZMacAuxiliaryStorage {
 	return o
 }
 
-// @abstract Initialize the auxiliary storage from the URL of an existing file. @param URL The URL of the auxiliary storage on the local file system. @discussion To create a new auxiliary storage, use -[VZMacAuxiliaryStorage initCreatingStorageAtURL:hardwareModel:options:error].
+// Initializes an auxiliary storage object with data from the location at the URL you provide.
 func (o *VZMacAuxiliaryStorage) InitWithURL(uRL *foundation.NSURL) *VZMacAuxiliaryStorage {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacAuxiliaryStorageSelInitWithURL, uRL.Ptr())
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func (o *VZMacAuxiliaryStorage) InitWithURL(uRL *foundation.NSURL) *VZMacAuxilia
 	return VZMacAuxiliaryStorageFromID(_ret)
 }
 
-// @abstract Write an initialized VZMacAuxiliaryStorage to a URL on a file system. @param URL The URL to write the auxiliary storage to on the local file system. @param hardwareModel The hardware model to use. The auxiliary storage can be laid out differently for different hardware models. @param options Initialization options. @param error If not nil, used to report errors if creation fails. @return A newly initialized VZMacAuxiliaryStorage on success. If an error was encountered returns @c nil, and @c error contains the error.
+// Creates an initialized Mac auxiliary storage instance that describes a specific hardware model at a URL you specify.
 func (o *VZMacAuxiliaryStorage) InitCreatingStorageAtURLHardwareModelOptionsError(uRL *foundation.NSURL, hardwareModel *VZMacHardwareModel, options VZMacAuxiliaryStorageInitializationOptions) (*VZMacAuxiliaryStorage, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMacAuxiliaryStorageSelInitCreatingStorageAtURLHardwareModelOptionsError, uRL.Ptr(), hardwareModel.Ptr(), options, unsafe.Pointer(&_nsErr))

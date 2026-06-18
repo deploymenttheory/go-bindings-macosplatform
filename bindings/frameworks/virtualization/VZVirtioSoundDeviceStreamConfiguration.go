@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that defines a Virtio sound device stream configuration.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtiosounddevicestreamconfiguration
 type VZVirtioSoundDeviceStreamConfiguration struct {
 	foundation.NSObject

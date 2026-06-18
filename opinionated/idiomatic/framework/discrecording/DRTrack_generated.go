@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @class 		DRTrack @abstract	The DRTrack class represents a track on the burned disc. @discussion <h3>About tracks</h3> A DRTrack provides data to the for the burn and contains a description of the track on disc (length, block type, data format, etc). Data is provided for the burn in a real-time thread. It is up to the track to provide this data in a timely manner, otherwise a burn underrun can occur and ruin a disc. <h3>Data Production</h3> DRTracks do not typically store or cache the data to be written to disk, instead the data is streamed to the disc from some data producer as it's needed. This is accomplished through an object associated with the track when the track is created called the <i>track producer</i>. A track producer is a class you create that implements the @link DRTrackDataProduction DRTrackDataProduction @/link informal protocol. This protocol defines all of the methods that a track object will call during a burn to obtain data. <h3>Track Properties</h3> A DRTrack object contains several properties which define the track for the burn. These properties are stored in an NSDictionary and are accessed through the @link //apple_ref/occ/instm/DRTrack/properties properties @/link and @link //apple_ref/occ/instm/DRTrack/setProperties: setProperties: @/link methods. There are several properties that are required to be present and if they are not, will cause the burn to fail. These are: <ul> <li>@link DRTrackLengthKey DRTrackLengthKey @/link	Length of the track</li> <li>@link DRBlockSizeKey DRBlockSizeKey @/link	Size in bytes of each track block</li> <li>@link DRBlockTypeKey DRBlockTypeKey @/link	Type of each track block</li> <li>@link DRDataFormKey DRDataFormKey @/link		Data form of each block in the track</li> <li>@link DRSessionFormatKey DRSessionFormatKey @/link Session format of the track</li> <li>@link DRTrackModeKey DRTrackModeKey @/link	Track mode of the track</li> </ul> The possible values of these properties are defined in the Mt. Fuji (IFF-8090i) specification for CD/DVD devices. It's up to you to understand the possible values and meanings of each. All other keys contained in the properties dictionary are optional and can be omitted.
+//
 // Track wraps [raw.DRTrack] with a fluent Go API.
 type Track struct {
 	inner *raw.DRTrack
@@ -30,6 +32,8 @@ func TrackFromID(id objc.ID) *Track {
 	return &Track{inner: raw.DRTrackFromID(id)}
 }
 
+// @method			initWithProducer: @abstract		Initializes a DRTrack with the producer @param			producer	The object to use as the data producer @result			A DRTrack
+//
 // NewTrackWithProducer creates a new [Track].
 func NewTrackWithProducer(producer objc.ID) *Track {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DRTrack")), objc.RegisterName("alloc"))
@@ -37,31 +41,43 @@ func NewTrackWithProducer(producer objc.ID) *Track {
 	return &Track{inner: raw.DRTrackFromID(_id)}
 }
 
+// @method 		properties @abstract		Returns the properties dictionary of the track. @result  		An NSDictionary containing the properties of the track.
+//
 // Properties calls the underlying Properties.
 func (x *Track) Properties() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.Properties()
 }
 
+// @method 		setProperties: @abstract		Sets the properties dictionary of the track @param 			properties	NSDictionary of the properties to set.
+//
 // SetProperties calls the underlying SetProperties.
 func (x *Track) SetProperties(properties *foundation.NSDictionary[objc.ID, objc.ID]) {
 	x.inner.SetProperties(properties)
 }
 
+// @method 		testProductionSpeedForInterval: @abstract		Tests the production speed for a specified interval. @discussion		Runs a fake "production" cycle, repeatedly asking the receiver for data by calling it's producer's @link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataIntoBuffer:length:atAddress:blockSize:ioFlags: produceDataIntoBuffer:length:atAddress:blockSize:ioFlags: @/link for the specified time interval. Use this function to verify that the the production code can produce data fast enough to satisfy the data throughput requirements of the burn. Returns the calculated maximum speed the at which the receiver can produce data. This value should be used when setting up a burn to limit the burn speed @param 			interval	The length of the test in seconds. @result			The maximum speed data can be produced at.
+//
 // TestProductionSpeedForInterval calls the underlying TestProductionSpeedForInterval.
 func (x *Track) TestProductionSpeedForInterval(interval float64) float32 {
 	return x.inner.TestProductionSpeedForInterval(interval)
 }
 
+// @method 		testProductionSpeedForLength: @abstract		Tests the production speed for a specified byte count. @discussion		Runs a fake "production" cycle, repeatedly asking the receiver for data by calling it's producer's @link //apple_ref/occ/intfm/DRTrackDataProduction/produceDataIntoBuffer:length:atAddress:blockSize:ioFlags: produceDataIntoBuffer:length:atAddress:blockSize:ioFlags: @/link until the specified length number of bytes have been produced. Use this function to verify that the the production code can produce data fast enough to satisfy the data throughput requirements of the burn. Returns the calculated maximum speed the at which the receiver can produce data. This value should be used when setting up a burn to limit the burn speed @param 			length	The length of the test in bytes. @result			The maximum speed data can be produced at.
+//
 // TestProductionSpeedForLength calls the underlying TestProductionSpeedForLength.
 func (x *Track) TestProductionSpeedForLength(length uint32) float32 {
 	return x.inner.TestProductionSpeedForLength(length)
 }
 
+// @method		estimateLength @abstract	Asks the track producer for a size estimate. @discussion	This method calls the track producer to ask it to estimate the size needed for its data. For some types of track, this call may be very expensive. For example, a DRFilesystemTrack may need to iterate folders on disk to provide an accurate estimate, which (if a large number of files and folders are involved) can cause this call to take 30 seconds or more. Since your main thread should not be allowed to block for this long, you may wish to call this function on a separate thread. @result		The estimated length of the track.
+//
 // EstimateLength calls the underlying EstimateLength.
 func (x *Track) EstimateLength() uint64 {
 	return x.inner.EstimateLength()
 }
 
+// @method 		length @abstract		Returns the length of the track data. @discussion		The length returned does not include the length of the pregap. Only the length of the track data itself is returned. @result			A DRMSF representing the length of the track.
+//
 // Length calls the underlying Length.
 func (x *Track) Length() *MSF {
 	_r := x.inner.Length()
@@ -71,6 +87,8 @@ func (x *Track) Length() *MSF {
 	return &MSF{inner: _r}
 }
 
+// @method 		preGap @abstract		Returns the length of the pre gap. @discussion		This is a simple wrapper to obtain the @link DRPreGapLengthKey DRPreGapLengthKey @/link. If the @link DRPreGapLengthKey DRPreGapLengthKey @/link property has not been set for the track this method will return a zero-length @link //apple_ref/occ/cl/DRMSF DRMSF @/link object (0m:0s:0f). @result			A DRMSF representing the length of the pre gap.
+//
 // PreGap calls the underlying PreGap.
 func (x *Track) PreGap() *MSF {
 	_r := x.inner.PreGap()
@@ -80,6 +98,8 @@ func (x *Track) PreGap() *MSF {
 	return &MSF{inner: _r}
 }
 
+// @method 		setPreGap: @abstract		Sets the length of the pre gap. @discussion		This is a simple wrapper to set the @link DRPreGapLengthKey DRPreGapLengthKey @/link. @param			preGap	the pre gap length.
+//
 // SetPreGap calls the underlying SetPreGap.
 func (x *Track) SetPreGap(preGap *raw.DRMSF) {
 	x.inner.SetPreGap(preGap)

@@ -35,11 +35,15 @@ func NewAuthorization() *Authorization {
 	return &Authorization{inner: raw.ASAuthorizationFromID(_id)}
 }
 
+// @abstract Provider which was used to generate this authorization response.
+//
 // Provider calls the underlying Provider.
 func (x *Authorization) Provider() raw.ASAuthorizationProvider {
 	return x.inner.Provider()
 }
 
+// @abstract The credential that was returned by the authorization provider. Authorization provider type should be used to determine how to introspect the credential.
+//
 // Credential calls the underlying Credential.
 func (x *Authorization) Credential() raw.ASAuthorizationCredential {
 	return x.inner.Credential()

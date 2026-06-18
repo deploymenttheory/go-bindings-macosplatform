@@ -38,12 +38,16 @@ func NewAssetDownloadConfiguration() *AssetDownloadConfiguration {
 	return &AssetDownloadConfiguration{inner: raw.AVAssetDownloadConfigurationFromID(_id)}
 }
 
+// NSData representing artwork data for this asset. Optional. May be displayed, for example, by the usage pane of the Settings app. Must work with +[UIImage imageWithData:].
+//
 // WithArtworkData sets the artworkData property and returns the receiver for chaining.
 func (x *AssetDownloadConfiguration) WithArtworkData(artworkData *foundation.NSData) *AssetDownloadConfiguration {
 	x.inner.SetArtworkData(artworkData)
 	return x
 }
 
+// The auxiliary content for the download. Optional. By default, auxiliaryContentConfigurations will have one or more default auxiliary content configurations. These content configurations can be augmented with additional content configurations or removed entirely if no auxiliary content is desired.
+//
 // WithAuxiliaryContentConfigurations sets the collection, converting the Go slice to an NSArray.
 func (x *AssetDownloadConfiguration) WithAuxiliaryContentConfigurations(items ...*raw.AVAssetDownloadContentConfiguration) *AssetDownloadConfiguration {
 	if len(items) == 0 {
@@ -62,23 +66,31 @@ func (x *AssetDownloadConfiguration) WithAuxiliaryContentConfigurations(items ..
 	return x
 }
 
+// Optimizes auxiliary content selection depending on the primary to minimize total number of video renditions downloaded. True by default. For example, if the primary content configuration represents stereo renditions and auxiliary content configuration represents multichannel audio renditions, auxiliary multichannel variant will be chosen so as to avoid downloading duplicate video renditions.
+//
 // WithOptimizesAuxiliaryContentConfigurations sets the optimizesAuxiliaryContentConfigurations property and returns the receiver for chaining.
 func (x *AssetDownloadConfiguration) WithOptimizesAuxiliaryContentConfigurations(optimizesAuxiliaryContentConfigurations bool) *AssetDownloadConfiguration {
 	x.inner.SetOptimizesAuxiliaryContentConfigurations(optimizesAuxiliaryContentConfigurations)
 	return x
 }
 
+// Download interstitial assets as listed in the index file. False by default. Ordinarily, interstitial assets are skipped when downloading content for later playback. Setting this property to true will cause interstitial assets to be downloaded as well. Playback of the downloaded content can then match the experience of online streaming playback as closely as possible.
+//
 // WithDownloadsInterstitialAssets sets the downloadsInterstitialAssets property and returns the receiver for chaining.
 func (x *AssetDownloadConfiguration) WithDownloadsInterstitialAssets(downloadsInterstitialAssets bool) *AssetDownloadConfiguration {
 	x.inner.SetDownloadsInterstitialAssets(downloadsInterstitialAssets)
 	return x
 }
 
+// Sets media selection on interstitials for this asset Typically, interstitial assets have not been discovered when the main download is initiated. This method allows the user to specify AVMediaSelectionCriteria for all interstitials that are discovered. Each AVPlayerMediaSelectionCriteria in the array of criteria specfies a set of criteria for a variant to download. - Parameter criteria: The array of selection criteria to set - Parameter mediaCharacteristic: The AVMediaCharacteristic to which the criteria will be applied
+//
 // SetInterstitialMediaSelectionCriteriaForMediaCharacteristic calls the underlying SetInterstitialMediaSelectionCriteriaForMediaCharacteristic.
 func (x *AssetDownloadConfiguration) SetInterstitialMediaSelectionCriteriaForMediaCharacteristic(criteria *foundation.NSArray[*raw.AVPlayerMediaSelectionCriteria], mediaCharacteristic *foundation.NSString) {
 	x.inner.SetInterstitialMediaSelectionCriteriaForMediaCharacteristic(criteria, mediaCharacteristic)
 }
 
+// NSData representing artwork data for this asset. Optional. May be displayed, for example, by the usage pane of the Settings app. Must work with +[UIImage imageWithData:].
+//
 // ArtworkData calls the underlying ArtworkData.
 func (x *AssetDownloadConfiguration) ArtworkData() *foundation.NSData {
 	return x.inner.ArtworkData()
@@ -89,6 +101,8 @@ func (x *AssetDownloadConfiguration) SetArtworkData(artworkData *foundation.NSDa
 	x.inner.SetArtworkData(artworkData)
 }
 
+// The primary content for the download.
+//
 // PrimaryContentConfiguration calls the underlying PrimaryContentConfiguration.
 func (x *AssetDownloadConfiguration) PrimaryContentConfiguration() *AssetDownloadContentConfiguration {
 	_r := x.inner.PrimaryContentConfiguration()
@@ -98,6 +112,8 @@ func (x *AssetDownloadConfiguration) PrimaryContentConfiguration() *AssetDownloa
 	return &AssetDownloadContentConfiguration{inner: _r}
 }
 
+// The auxiliary content for the download. Optional. By default, auxiliaryContentConfigurations will have one or more default auxiliary content configurations. These content configurations can be augmented with additional content configurations or removed entirely if no auxiliary content is desired.
+//
 // AuxiliaryContentConfigurations returns the collection as a Go slice.
 func (x *AssetDownloadConfiguration) AuxiliaryContentConfigurations() []*AssetDownloadContentConfiguration {
 	arr := x.inner.AuxiliaryContentConfigurations()
@@ -114,6 +130,8 @@ func (x *AssetDownloadConfiguration) SetAuxiliaryContentConfigurations(auxiliary
 	x.inner.SetAuxiliaryContentConfigurations(auxiliaryContentConfigurations)
 }
 
+// Optimizes auxiliary content selection depending on the primary to minimize total number of video renditions downloaded. True by default. For example, if the primary content configuration represents stereo renditions and auxiliary content configuration represents multichannel audio renditions, auxiliary multichannel variant will be chosen so as to avoid downloading duplicate video renditions.
+//
 // OptimizesAuxiliaryContentConfigurations calls the underlying OptimizesAuxiliaryContentConfigurations.
 func (x *AssetDownloadConfiguration) OptimizesAuxiliaryContentConfigurations() bool {
 	return x.inner.OptimizesAuxiliaryContentConfigurations()
@@ -124,6 +142,8 @@ func (x *AssetDownloadConfiguration) SetOptimizesAuxiliaryContentConfigurations(
 	x.inner.SetOptimizesAuxiliaryContentConfigurations(optimizesAuxiliaryContentConfigurations)
 }
 
+// Download interstitial assets as listed in the index file. False by default. Ordinarily, interstitial assets are skipped when downloading content for later playback. Setting this property to true will cause interstitial assets to be downloaded as well. Playback of the downloaded content can then match the experience of online streaming playback as closely as possible.
+//
 // DownloadsInterstitialAssets calls the underlying DownloadsInterstitialAssets.
 func (x *AssetDownloadConfiguration) DownloadsInterstitialAssets() bool {
 	return x.inner.DownloadsInterstitialAssets()

@@ -61,78 +61,104 @@ func (x *PhysicsBody) WithPinned(pinned bool) *PhysicsBody {
 	return x
 }
 
+// If the physics simulation has determined that this body is at rest it may set the resting property to YES. Resting bodies do not participate in the simulation until some collision with a non-resting  object, or an impulse is applied, that unrests it. If all bodies in the world are resting then the simulation as a whole is "at rest".
+//
 // WithResting sets the resting property and returns the receiver for chaining.
 func (x *PhysicsBody) WithResting(resting bool) *PhysicsBody {
 	x.inner.SetResting(resting)
 	return x
 }
 
+// Determines the 'roughness' for the surface of the physics body (0.0 - 1.0). Defaults to 0.2
+//
 // WithFriction sets the friction property and returns the receiver for chaining.
 func (x *PhysicsBody) WithFriction(friction float64) *PhysicsBody {
 	x.inner.SetFriction(friction)
 	return x
 }
 
+// Specifies the charge on the body. Charge determines the degree to which a body is affected by electric and magnetic fields. Note that this is a unitless quantity, it is up to the developer to set charge and field strength appropriately. Defaults to 0.0
+//
 // WithCharge sets the charge property and returns the receiver for chaining.
 func (x *PhysicsBody) WithCharge(charge float64) *PhysicsBody {
 	x.inner.SetCharge(charge)
 	return x
 }
 
+// Determines the 'bounciness' of the physics body (0.0 - 1.0). Defaults to 0.2
+//
 // WithRestitution sets the restitution property and returns the receiver for chaining.
 func (x *PhysicsBody) WithRestitution(restitution float64) *PhysicsBody {
 	x.inner.SetRestitution(restitution)
 	return x
 }
 
+// Optionally reduce the body's linear velocity each frame to simulate fluid/air friction. Value should be zero or greater. Defaults to 0.1. Used in conjunction with per frame impulses, an object can be made to move at a constant speed. For example, if an object 64 points in size and default density and a linearDamping of 25 will slide across the screen in a few seconds if an impulse of magnitude 10 is applied every update.
+//
 // WithLinearDamping sets the linearDamping property and returns the receiver for chaining.
 func (x *PhysicsBody) WithLinearDamping(linearDamping float64) *PhysicsBody {
 	x.inner.SetLinearDamping(linearDamping)
 	return x
 }
 
+// Optionally reduce the body's angular velocity each frame to simulate rotational friction. (0.0 - 1.0). Defaults to 0.1
+//
 // WithAngularDamping sets the angularDamping property and returns the receiver for chaining.
 func (x *PhysicsBody) WithAngularDamping(angularDamping float64) *PhysicsBody {
 	x.inner.SetAngularDamping(angularDamping)
 	return x
 }
 
+// The density of the body. @discussion The unit is arbitrary, as long as the relative densities are consistent throughout the application. Note that density and mass are inherently related (they are directly proportional), so changing one also changes the other. Both are provided so either can be used depending on what is more relevant to your usage.
+//
 // WithDensity sets the density property and returns the receiver for chaining.
 func (x *PhysicsBody) WithDensity(density float64) *PhysicsBody {
 	x.inner.SetDensity(density)
 	return x
 }
 
+// The mass of the body. @discussion The unit is arbitrary, as long as the relative masses are consistent throughout the application. Note that density and mass are inherently related (they are directly proportional), so changing one also changes the other. Both are provided so either can be used depending on what is more relevant to your usage.
+//
 // WithMass sets the mass property and returns the receiver for chaining.
 func (x *PhysicsBody) WithMass(mass float64) *PhysicsBody {
 	x.inner.SetMass(mass)
 	return x
 }
 
+// Bodies are affected by field forces such as gravity if this property is set and the field's category mask is set appropriately. The default value is YES. @discussion If this is set a force is applied to the object based on the mass. Set the field force vector in the scene to modify the strength of the force.
+//
 // WithAffectedByGravity sets the affectedByGravity property and returns the receiver for chaining.
 func (x *PhysicsBody) WithAffectedByGravity(affectedByGravity bool) *PhysicsBody {
 	x.inner.SetAffectedByGravity(affectedByGravity)
 	return x
 }
 
+// Defines what logical 'categories' of fields this body responds to. Defaults to all bits set (all categories). Can be forced off via affectedByGravity.
+//
 // WithFieldBitMask sets the fieldBitMask property and returns the receiver for chaining.
 func (x *PhysicsBody) WithFieldBitMask(fieldBitMask uint32) *PhysicsBody {
 	x.inner.SetFieldBitMask(fieldBitMask)
 	return x
 }
 
+// Defines what logical 'categories' this body belongs to. Defaults to all bits set (all categories).
+//
 // WithCategoryBitMask sets the categoryBitMask property and returns the receiver for chaining.
 func (x *PhysicsBody) WithCategoryBitMask(categoryBitMask uint32) *PhysicsBody {
 	x.inner.SetCategoryBitMask(categoryBitMask)
 	return x
 }
 
+// Defines what logical 'categories' of bodies this body responds to collisions with. Defaults to all bits set (all categories).
+//
 // WithCollisionBitMask sets the collisionBitMask property and returns the receiver for chaining.
 func (x *PhysicsBody) WithCollisionBitMask(collisionBitMask uint32) *PhysicsBody {
 	x.inner.SetCollisionBitMask(collisionBitMask)
 	return x
 }
 
+// Defines what logical 'categories' of bodies this body generates intersection notifications with. Defaults to all bits cleared (no categories).
+//
 // WithContactTestBitMask sets the contactTestBitMask property and returns the receiver for chaining.
 func (x *PhysicsBody) WithContactTestBitMask(contactTestBitMask uint32) *PhysicsBody {
 	x.inner.SetContactTestBitMask(contactTestBitMask)
@@ -232,6 +258,8 @@ func (x *PhysicsBody) SetPinned(pinned bool) {
 	x.inner.SetPinned(pinned)
 }
 
+// If the physics simulation has determined that this body is at rest it may set the resting property to YES. Resting bodies do not participate in the simulation until some collision with a non-resting  object, or an impulse is applied, that unrests it. If all bodies in the world are resting then the simulation as a whole is "at rest".
+//
 // IsResting calls the underlying IsResting.
 func (x *PhysicsBody) IsResting() bool {
 	return x.inner.IsResting()
@@ -242,6 +270,8 @@ func (x *PhysicsBody) SetResting(resting bool) {
 	x.inner.SetResting(resting)
 }
 
+// Determines the 'roughness' for the surface of the physics body (0.0 - 1.0). Defaults to 0.2
+//
 // Friction calls the underlying Friction.
 func (x *PhysicsBody) Friction() float64 {
 	return x.inner.Friction()
@@ -252,6 +282,8 @@ func (x *PhysicsBody) SetFriction(friction float64) {
 	x.inner.SetFriction(friction)
 }
 
+// Specifies the charge on the body. Charge determines the degree to which a body is affected by electric and magnetic fields. Note that this is a unitless quantity, it is up to the developer to set charge and field strength appropriately. Defaults to 0.0
+//
 // Charge calls the underlying Charge.
 func (x *PhysicsBody) Charge() float64 {
 	return x.inner.Charge()
@@ -262,6 +294,8 @@ func (x *PhysicsBody) SetCharge(charge float64) {
 	x.inner.SetCharge(charge)
 }
 
+// Determines the 'bounciness' of the physics body (0.0 - 1.0). Defaults to 0.2
+//
 // Restitution calls the underlying Restitution.
 func (x *PhysicsBody) Restitution() float64 {
 	return x.inner.Restitution()
@@ -272,6 +306,8 @@ func (x *PhysicsBody) SetRestitution(restitution float64) {
 	x.inner.SetRestitution(restitution)
 }
 
+// Optionally reduce the body's linear velocity each frame to simulate fluid/air friction. Value should be zero or greater. Defaults to 0.1. Used in conjunction with per frame impulses, an object can be made to move at a constant speed. For example, if an object 64 points in size and default density and a linearDamping of 25 will slide across the screen in a few seconds if an impulse of magnitude 10 is applied every update.
+//
 // LinearDamping calls the underlying LinearDamping.
 func (x *PhysicsBody) LinearDamping() float64 {
 	return x.inner.LinearDamping()
@@ -282,6 +318,8 @@ func (x *PhysicsBody) SetLinearDamping(linearDamping float64) {
 	x.inner.SetLinearDamping(linearDamping)
 }
 
+// Optionally reduce the body's angular velocity each frame to simulate rotational friction. (0.0 - 1.0). Defaults to 0.1
+//
 // AngularDamping calls the underlying AngularDamping.
 func (x *PhysicsBody) AngularDamping() float64 {
 	return x.inner.AngularDamping()
@@ -292,6 +330,8 @@ func (x *PhysicsBody) SetAngularDamping(angularDamping float64) {
 	x.inner.SetAngularDamping(angularDamping)
 }
 
+// The density of the body. @discussion The unit is arbitrary, as long as the relative densities are consistent throughout the application. Note that density and mass are inherently related (they are directly proportional), so changing one also changes the other. Both are provided so either can be used depending on what is more relevant to your usage.
+//
 // Density calls the underlying Density.
 func (x *PhysicsBody) Density() float64 {
 	return x.inner.Density()
@@ -302,6 +342,8 @@ func (x *PhysicsBody) SetDensity(density float64) {
 	x.inner.SetDensity(density)
 }
 
+// The mass of the body. @discussion The unit is arbitrary, as long as the relative masses are consistent throughout the application. Note that density and mass are inherently related (they are directly proportional), so changing one also changes the other. Both are provided so either can be used depending on what is more relevant to your usage.
+//
 // Mass calls the underlying Mass.
 func (x *PhysicsBody) Mass() float64 {
 	return x.inner.Mass()
@@ -312,11 +354,15 @@ func (x *PhysicsBody) SetMass(mass float64) {
 	x.inner.SetMass(mass)
 }
 
+// The area of the body. @discussion The unit is arbitrary, as long as the relative areas are consistent throughout the application.
+//
 // Area calls the underlying Area.
 func (x *PhysicsBody) Area() float64 {
 	return x.inner.Area()
 }
 
+// Bodies are affected by field forces such as gravity if this property is set and the field's category mask is set appropriately. The default value is YES. @discussion If this is set a force is applied to the object based on the mass. Set the field force vector in the scene to modify the strength of the force.
+//
 // AffectedByGravity calls the underlying AffectedByGravity.
 func (x *PhysicsBody) AffectedByGravity() bool {
 	return x.inner.AffectedByGravity()
@@ -327,6 +373,8 @@ func (x *PhysicsBody) SetAffectedByGravity(affectedByGravity bool) {
 	x.inner.SetAffectedByGravity(affectedByGravity)
 }
 
+// Defines what logical 'categories' of fields this body responds to. Defaults to all bits set (all categories). Can be forced off via affectedByGravity.
+//
 // FieldBitMask calls the underlying FieldBitMask.
 func (x *PhysicsBody) FieldBitMask() uint32 {
 	return x.inner.FieldBitMask()
@@ -337,6 +385,8 @@ func (x *PhysicsBody) SetFieldBitMask(fieldBitMask uint32) {
 	x.inner.SetFieldBitMask(fieldBitMask)
 }
 
+// Defines what logical 'categories' this body belongs to. Defaults to all bits set (all categories).
+//
 // CategoryBitMask calls the underlying CategoryBitMask.
 func (x *PhysicsBody) CategoryBitMask() uint32 {
 	return x.inner.CategoryBitMask()
@@ -347,6 +397,8 @@ func (x *PhysicsBody) SetCategoryBitMask(categoryBitMask uint32) {
 	x.inner.SetCategoryBitMask(categoryBitMask)
 }
 
+// Defines what logical 'categories' of bodies this body responds to collisions with. Defaults to all bits set (all categories).
+//
 // CollisionBitMask calls the underlying CollisionBitMask.
 func (x *PhysicsBody) CollisionBitMask() uint32 {
 	return x.inner.CollisionBitMask()
@@ -357,6 +409,8 @@ func (x *PhysicsBody) SetCollisionBitMask(collisionBitMask uint32) {
 	x.inner.SetCollisionBitMask(collisionBitMask)
 }
 
+// Defines what logical 'categories' of bodies this body generates intersection notifications with. Defaults to all bits cleared (no categories).
+//
 // ContactTestBitMask calls the underlying ContactTestBitMask.
 func (x *PhysicsBody) ContactTestBitMask() uint32 {
 	return x.inner.ContactTestBitMask()
@@ -378,6 +432,8 @@ func (x *PhysicsBody) Joints() []*PhysicsJoint {
 	})
 }
 
+// The representedObject this physicsBody is currently bound to, or nil if it is not.
+//
 // Node calls the underlying Node.
 func (x *PhysicsBody) Node() *Node {
 	_r := x.inner.Node()

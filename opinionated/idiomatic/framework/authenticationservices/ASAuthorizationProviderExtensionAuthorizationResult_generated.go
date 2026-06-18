@@ -32,6 +32,8 @@ func AuthorizationProviderExtensionAuthorizationResultFromID(id objc.ID) *Author
 	return &AuthorizationProviderExtensionAuthorizationResult{inner: raw.ASAuthorizationProviderExtensionAuthorizationResultFromID(id)}
 }
 
+// @abstract Authorization succeeded with an authorization tokens stored in HTTP headers.
+//
 // NewAuthorizationProviderExtensionAuthorizationResultWithHTTPAuthorizationHeaders creates a new [AuthorizationProviderExtensionAuthorizationResult].
 func NewAuthorizationProviderExtensionAuthorizationResultWithHTTPAuthorizationHeaders(httpAuthorizationHeaders *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *AuthorizationProviderExtensionAuthorizationResult {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationProviderExtensionAuthorizationResult")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewAuthorizationProviderExtensionAuthorizationResultWithHTTPAuthorizationHe
 	return &AuthorizationProviderExtensionAuthorizationResult{inner: raw.ASAuthorizationProviderExtensionAuthorizationResultFromID(_id)}
 }
 
+// @abstract Authorization succeeded with a HTTP response.
+//
 // NewAuthorizationProviderExtensionAuthorizationResultWithHTTPResponseHttpBody creates a new [AuthorizationProviderExtensionAuthorizationResult].
 func NewAuthorizationProviderExtensionAuthorizationResultWithHTTPResponseHttpBody(httpResponse *foundation.NSHTTPURLResponse, httpBody *foundation.NSData) *AuthorizationProviderExtensionAuthorizationResult {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationProviderExtensionAuthorizationResult")), objc.RegisterName("alloc"))
@@ -46,24 +50,32 @@ func NewAuthorizationProviderExtensionAuthorizationResultWithHTTPResponseHttpBod
 	return &AuthorizationProviderExtensionAuthorizationResult{inner: raw.ASAuthorizationProviderExtensionAuthorizationResultFromID(_id)}
 }
 
+// @abstract HTTP extra headers for addition with credentials.
+//
 // WithHttpAuthorizationHeaders sets the httpAuthorizationHeaders property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionAuthorizationResult) WithHttpAuthorizationHeaders(httpAuthorizationHeaders *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *AuthorizationProviderExtensionAuthorizationResult {
 	x.inner.SetHttpAuthorizationHeaders(httpAuthorizationHeaders)
 	return x
 }
 
+// @abstract HTTP response for OAUth and SAML based authentications.
+//
 // WithHttpResponse sets the httpResponse property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionAuthorizationResult) WithHttpResponse(httpResponse *foundation.NSHTTPURLResponse) *AuthorizationProviderExtensionAuthorizationResult {
 	x.inner.SetHttpResponse(httpResponse)
 	return x
 }
 
+// @abstract HTTP response body for OAUth and SAML based authentications.
+//
 // WithHttpBody sets the httpBody property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionAuthorizationResult) WithHttpBody(httpBody *foundation.NSData) *AuthorizationProviderExtensionAuthorizationResult {
 	x.inner.SetHttpBody(httpBody)
 	return x
 }
 
+// @abstract HTTP extra headers for addition with credentials.
+//
 // HttpAuthorizationHeaders calls the underlying HttpAuthorizationHeaders.
 func (x *AuthorizationProviderExtensionAuthorizationResult) HttpAuthorizationHeaders() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
 	return x.inner.HttpAuthorizationHeaders()
@@ -74,6 +86,8 @@ func (x *AuthorizationProviderExtensionAuthorizationResult) SetHttpAuthorization
 	x.inner.SetHttpAuthorizationHeaders(httpAuthorizationHeaders)
 }
 
+// @abstract HTTP response for OAUth and SAML based authentications.
+//
 // HttpResponse calls the underlying HttpResponse.
 func (x *AuthorizationProviderExtensionAuthorizationResult) HttpResponse() *foundation.NSHTTPURLResponse {
 	return x.inner.HttpResponse()
@@ -84,6 +98,8 @@ func (x *AuthorizationProviderExtensionAuthorizationResult) SetHttpResponse(http
 	x.inner.SetHttpResponse(httpResponse)
 }
 
+// @abstract HTTP response body for OAUth and SAML based authentications.
+//
 // HttpBody calls the underlying HttpBody.
 func (x *AuthorizationProviderExtensionAuthorizationResult) HttpBody() *foundation.NSData {
 	return x.inner.HttpBody()
@@ -94,6 +110,8 @@ func (x *AuthorizationProviderExtensionAuthorizationResult) SetHttpBody(httpBody
 	x.inner.SetHttpBody(httpBody)
 }
 
+// @abstract Private SecKeys.
+//
 // PrivateKeys calls the underlying PrivateKeys.
 func (x *AuthorizationProviderExtensionAuthorizationResult) PrivateKeys() *foundation.NSArray[objc.ID] {
 	return x.inner.PrivateKeys()

@@ -35,6 +35,8 @@ func NewStringMetaParameter() *StringMetaParameter {
 	return &StringMetaParameter{inner: raw.PHASEStringMetaParameterFromID(_id)}
 }
 
+// @property value @abstract The value of this metaparameter
+//
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *StringMetaParameter) WithValue(value objc.ID) *StringMetaParameter {
 	x.inner.PHASEMetaParameter.SetValue(value)

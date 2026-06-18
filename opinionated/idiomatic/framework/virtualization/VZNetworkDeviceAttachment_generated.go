@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The common behaviors for the network attachment points of your virtual machine.
+//
 // NetworkDeviceAttachment wraps [raw.VZNetworkDeviceAttachment] with a fluent Go API.
 type NetworkDeviceAttachment struct {
 	inner *raw.VZNetworkDeviceAttachment

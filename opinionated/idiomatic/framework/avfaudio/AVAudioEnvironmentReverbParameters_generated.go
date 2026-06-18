@@ -37,23 +37,31 @@ func NewAudioEnvironmentReverbParameters() *AudioEnvironmentReverbParameters {
 	return &AudioEnvironmentReverbParameters{inner: raw.AVAudioEnvironmentReverbParametersFromID(_id)}
 }
 
+// @property enable @abstract Turns on/off the reverb @discussion Default:    NO
+//
 // WithEnable sets the enable property and returns the receiver for chaining.
 func (x *AudioEnvironmentReverbParameters) WithEnable(enable bool) *AudioEnvironmentReverbParameters {
 	x.inner.SetEnable(enable)
 	return x
 }
 
+// @property level @abstract Controls the master level of the reverb @discussion Range:      -40 to 40 dB Default:    0.0
+//
 // WithLevel sets the level property and returns the receiver for chaining.
 func (x *AudioEnvironmentReverbParameters) WithLevel(level float32) *AudioEnvironmentReverbParameters {
 	x.inner.SetLevel(level)
 	return x
 }
 
+// @method loadFactoryReverbPreset: @abstract Load one of the reverb's factory presets @param preset Reverb preset to be set. @discussion Loading a factory reverb preset changes the sound of the reverb. This works independently of the filter which follows the reverb in the signal chain.
+//
 // LoadFactoryReverbPreset calls the underlying LoadFactoryReverbPreset.
 func (x *AudioEnvironmentReverbParameters) LoadFactoryReverbPreset(preset AVAudioUnitReverbPreset) {
 	x.inner.LoadFactoryReverbPreset(raw.AVAudioUnitReverbPreset(preset))
 }
 
+// @property enable @abstract Turns on/off the reverb @discussion Default:    NO
+//
 // Enable calls the underlying Enable.
 func (x *AudioEnvironmentReverbParameters) Enable() bool {
 	return x.inner.Enable()
@@ -64,6 +72,8 @@ func (x *AudioEnvironmentReverbParameters) SetEnable(enable bool) {
 	x.inner.SetEnable(enable)
 }
 
+// @property level @abstract Controls the master level of the reverb @discussion Range:      -40 to 40 dB Default:    0.0
+//
 // Level calls the underlying Level.
 func (x *AudioEnvironmentReverbParameters) Level() float32 {
 	return x.inner.Level()
@@ -74,6 +84,8 @@ func (x *AudioEnvironmentReverbParameters) SetLevel(level float32) {
 	x.inner.SetLevel(level)
 }
 
+// @property filterParameters @abstract filter that applies to the output of the reverb
+//
 // FilterParameters calls the underlying FilterParameters.
 func (x *AudioEnvironmentReverbParameters) FilterParameters() *AudioUnitEQFilterParameters {
 	_r := x.inner.FilterParameters()

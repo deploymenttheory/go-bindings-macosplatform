@@ -39,6 +39,8 @@ func NewAuthorizationWebBrowserPlatformPublicKeyCredential() *AuthorizationWebBr
 	return &AuthorizationWebBrowserPlatformPublicKeyCredential{inner: raw.ASAuthorizationWebBrowserPlatformPublicKeyCredentialFromID(_id)}
 }
 
+// The user name of the saved credential.
+//
 // Name calls the underlying Name.
 func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) Name() string {
 	_r := x.inner.Name()
@@ -48,6 +50,8 @@ func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A user-specified title for the credential.
+//
 // CustomTitle calls the underlying CustomTitle.
 func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) CustomTitle() string {
 	_r := x.inner.CustomTitle()
@@ -57,6 +61,8 @@ func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) CustomTitle() strin
 	return purego.GoString(_r.Ptr())
 }
 
+// The "relying party" (generally website) the credential was saved for.
+//
 // RelyingParty calls the underlying RelyingParty.
 func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) RelyingParty() string {
 	_r := x.inner.RelyingParty()
@@ -66,16 +72,22 @@ func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) RelyingParty() stri
 	return purego.GoString(_r.Ptr())
 }
 
+// A unique identifier for this credential.
+//
 // CredentialID calls the underlying CredentialID.
 func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) CredentialID() *foundation.NSData {
 	return x.inner.CredentialID()
 }
 
+// A unique identifier for the user account associated with this credential. One account may have multiple associated credentials.
+//
 // UserHandle calls the underlying UserHandle.
 func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) UserHandle() *foundation.NSData {
 	return x.inner.UserHandle()
 }
 
+// The localized name of the credential provider that provided this passkey.
+//
 // ProviderName calls the underlying ProviderName.
 func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) ProviderName() string {
 	_r := x.inner.ProviderName()

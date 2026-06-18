@@ -31,6 +31,8 @@ func ClinicalCodingFromID(id objc.ID) *ClinicalCoding {
 	return &ClinicalCoding{inner: raw.HKClinicalCodingFromID(id)}
 }
 
+// Creates a clinical coding with the specified system, version, and code. @param system  The string that identifies the coding system, typically a HL7 URL. @param version The version of the system, if applicable. @param code    The clinical code string that represents the medical concept. Use when you need to explicitly construct a coding object to associate a HealthKit concept with a standardized medical code.
+//
 // NewClinicalCodingWithSystemVersionCode creates a new [ClinicalCoding].
 func NewClinicalCodingWithSystemVersionCode(system string, version string, code string) *ClinicalCoding {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKClinicalCoding")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewClinicalCodingWithSystemVersionCode(system string, version string, code 
 	return &ClinicalCoding{inner: raw.HKClinicalCodingFromID(_id)}
 }
 
+// The string that identifies the coding system that defines this clinical code. The system is usually expressed as a URL from the [HL7 Terminology](https://terminology.hl7.org/). For example, the RxNorm, a coding system for medications uses: `http://www.nlm.nih.gov/research/umls/rxnorm`.
+//
 // System calls the underlying System.
 func (x *ClinicalCoding) System() string {
 	_r := x.inner.System()
@@ -47,6 +51,8 @@ func (x *ClinicalCoding) System() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The clinical code that represents a medical concept inside the coding system. The format depends on the coding system. For example, RxNorm codes are numeric.
+//
 // Code calls the underlying Code.
 func (x *ClinicalCoding) Code() string {
 	_r := x.inner.Code()

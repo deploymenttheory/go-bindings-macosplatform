@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A network device that transmits raw network packets and frames using a datagram socket.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzfilehandlenetworkdeviceattachment
 type VZFileHandleNetworkDeviceAttachment struct {
 	VZNetworkDeviceAttachment
@@ -33,7 +35,7 @@ func VZFileHandleNetworkDeviceAttachmentFromID(id objc.ID) *VZFileHandleNetworkD
 	return o
 }
 
-// @abstract Initialize the attachment with a file handle. @param fileHandle File handle holding a connected datagram socket.
+// Creates the attachment from a file handle that contains a connected datagram socket.
 func (o *VZFileHandleNetworkDeviceAttachment) InitWithFileHandle(fileHandle *foundation.NSFileHandle) *VZFileHandleNetworkDeviceAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZFileHandleNetworkDeviceAttachmentSelInitWithFileHandle, fileHandle.Ptr())
 	if _ret != 0 {

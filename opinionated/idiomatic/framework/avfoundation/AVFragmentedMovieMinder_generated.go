@@ -30,6 +30,8 @@ func FragmentedMovieMinderFromID(id objc.ID) *FragmentedMovieMinder {
 	return &FragmentedMovieMinder{inner: raw.AVFragmentedMovieMinderFromID(id)}
 }
 
+// @method			initWithMovie:mindingInterval: @abstract       Creates an AVFragmentedMovieMinder, adds the specified movie to it, and sets the mindingInterval to the specified value. @param			movie An instance of AVFragmentedMovie to add to the AVFragmentedMovieMinder @param			mindingInterval The initial minding interval of the AVFragmentedMovieMinder. @result			A new instance of AVFragmentedMovieMinder.
+//
 // NewFragmentedMovieMinderWithMovieMindingInterval creates a new [FragmentedMovieMinder].
 func NewFragmentedMovieMinderWithMovieMindingInterval(movie *raw.AVFragmentedMovie, mindingInterval float64) *FragmentedMovieMinder {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVFragmentedMovieMinder")), objc.RegisterName("alloc"))
@@ -37,22 +39,30 @@ func NewFragmentedMovieMinderWithMovieMindingInterval(movie *raw.AVFragmentedMov
 	return &FragmentedMovieMinder{inner: raw.AVFragmentedMovieMinderFromID(_id)}
 }
 
+// An NSTimeInterval indicating how often a check for additional fragments should be performed. The default interval is 10.0. This property throws an excepion if a value is set less than one millisecond (0.001) in duration.
+//
 // WithMindingInterval sets the mindingInterval property and returns the receiver for chaining.
 func (x *FragmentedMovieMinder) WithMindingInterval(mindingInterval float64) *FragmentedMovieMinder {
 	x.inner.AVFragmentedAssetMinder.SetMindingInterval(mindingInterval)
 	return x
 }
 
+// @method			addFragmentedMovie: @abstract		Adds a fragmented movie to the array of movies being minded. @param			movie The fragmented movie to add to the minder.
+//
 // AddFragmentedMovie calls the underlying AddFragmentedMovie.
 func (x *FragmentedMovieMinder) AddFragmentedMovie(movie *raw.AVFragmentedMovie) {
 	x.inner.AddFragmentedMovie(movie)
 }
 
+// @method			removeFragmentedMovie: @abstract		Removes a fragmented movie from the array of movies being minded. @param			movie The fragmented movie to remove from the minder.
+//
 // RemoveFragmentedMovie calls the underlying RemoveFragmentedMovie.
 func (x *FragmentedMovieMinder) RemoveFragmentedMovie(movie *raw.AVFragmentedMovie) {
 	x.inner.RemoveFragmentedMovie(movie)
 }
 
+// @property       movies @abstract       An NSArray of the AVFragmentedMovie objects being minded.
+//
 // Movies returns the collection as a Go slice.
 func (x *FragmentedMovieMinder) Movies() []*FragmentedMovie {
 	arr := x.inner.Movies()

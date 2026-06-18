@@ -30,6 +30,8 @@ func HTTPURLResponseFromID(id objc.ID) *HTTPURLResponse {
 	return &HTTPURLResponse{inner: raw.NSHTTPURLResponseFromID(id)}
 }
 
+// @method	initWithURL:statusCode:HTTPVersion:headerFields: @abstract initializer for NSHTTPURLResponse objects. @param 	url the URL from which the response was generated. @param	statusCode an HTTP status code. @param	HTTPVersion The version of the HTTP response as represented by the server.  This is typically represented as "HTTP/1.1". @param 	headerFields A dictionary representing the header keys and values of the server response. @result 	the instance of the object, or NULL if an error occurred during initialization. @discussion This API was introduced in Mac OS X 10.7.2 and iOS 5.0 and is not available prior to those releases.
+//
 // NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields creates a new [HTTPURLResponse].
 func NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields(url string, statusCode int, hTTPVersion string, headerFields *raw.NSDictionary[*raw.NSString, *raw.NSString]) *HTTPURLResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSHTTPURLResponse")), objc.RegisterName("alloc"))
@@ -43,6 +45,8 @@ func (x *HTTPURLResponse) WithScriptingProperties(scriptingProperties *raw.NSDic
 	return x
 }
 
+// @method valueForHTTPHeaderField: @abstract Returns the value which corresponds to the given header field. Note that, in keeping with the HTTP RFC, HTTP header field names are case-insensitive. @param field the header field name to use for the lookup (case-insensitive). @result the value associated with the given header field, or nil if there is no value associated with the given header field.
+//
 // ValueForHTTPHeaderField calls the underlying ValueForHTTPHeaderField.
 func (x *HTTPURLResponse) ValueForHTTPHeaderField(field string) *String {
 	_r := x.inner.ValueForHTTPHeaderField(foundation.NSStringStringWithUTF8String(field))
@@ -52,11 +56,15 @@ func (x *HTTPURLResponse) ValueForHTTPHeaderField(field string) *String {
 	return &String{inner: _r}
 }
 
+// @abstract Returns the HTTP status code of the receiver. @result The HTTP status code of the receiver.
+//
 // StatusCode calls the underlying StatusCode.
 func (x *HTTPURLResponse) StatusCode() int {
 	return x.inner.StatusCode()
 }
 
+// @abstract Returns a dictionary containing all the HTTP header fields of the receiver. @discussion By examining this header dictionary, clients can see the "raw" header information which was reported to the protocol implementation by the HTTP server. This may be of use to sophisticated or special-purpose HTTP clients. @result A dictionary containing all the HTTP header fields of the receiver.
+//
 // AllHeaderFields calls the underlying AllHeaderFields.
 func (x *HTTPURLResponse) AllHeaderFields() *raw.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.AllHeaderFields()

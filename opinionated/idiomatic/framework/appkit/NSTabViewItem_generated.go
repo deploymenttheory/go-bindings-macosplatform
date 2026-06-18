@@ -63,6 +63,8 @@ func (x *TabViewItem) WithLabel(label string) *TabViewItem {
 	return x
 }
 
+// Gets and set the image for this tab view item. The image may only be used in certain tab view styles and options. The default value is `nil`.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *TabViewItem) WithImage(image *Image) *TabViewItem {
 	x.inner.SetImage(image.Unwrap())
@@ -75,6 +77,8 @@ func (x *TabViewItem) WithView(view ViewProvider) *TabViewItem {
 	return x
 }
 
+// The view controller wrapped by the tab view item. This property must be set if the tab view item will be added to an NSTabViewController, but can also be used if the tab view item is added to an NSTabView. If this is set, the tab view item will forward \c -view calls onto the viewController. Setting a viewController will also set the following properties on the tab view item: \c -identifier from the address of the viewController, \c -label from the viewController's title, and \c -image based on the classname as the view controller. An image named "ViewControllerClassName-TabViewItem" will be searched for first, followed by "ViewControllerClassName". It will search first using +[NSImage imageNamed:], then in \c viewController.nibBundle, and lastly in the bundle containing the view controller's class. As defined by: -[NSImage imageNamed:imageName], -[viewController.nibBundle imageForResource:imageName], -[[NSBundle bundleForClass:[viewController class]] imageForResource:imageName]. One pass with imageName as [NSStringFromClass([viewController class]) stringByAppendingString:@"-TabViewItem"], followed by imageName as NSStringFromClass([viewController class]).
+//
 // WithViewController sets the viewController property and returns the receiver for chaining.
 func (x *TabViewItem) WithViewController(viewController ViewControllerProvider) *TabViewItem {
 	x.inner.SetViewController(viewController.asViewController())
@@ -141,6 +145,8 @@ func (x *TabViewItem) SetLabel(label string) {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 }
 
+// Gets and set the image for this tab view item. The image may only be used in certain tab view styles and options. The default value is `nil`.
+//
 // Image calls the underlying Image.
 func (x *TabViewItem) Image() *Image {
 	_r := x.inner.Image()
@@ -150,6 +156,8 @@ func (x *TabViewItem) Image() *Image {
 	return &Image{inner: _r}
 }
 
+// Gets and set the image for this tab view item. The image may only be used in certain tab view styles and options. The default value is `nil`.
+//
 // SetImage calls the underlying SetImage.
 func (x *TabViewItem) SetImage(image *raw.NSImage) {
 	x.inner.SetImage(image)
@@ -169,6 +177,8 @@ func (x *TabViewItem) SetView(view *raw.NSView) {
 	x.inner.SetView(view)
 }
 
+// The view controller wrapped by the tab view item. This property must be set if the tab view item will be added to an NSTabViewController, but can also be used if the tab view item is added to an NSTabView. If this is set, the tab view item will forward \c -view calls onto the viewController. Setting a viewController will also set the following properties on the tab view item: \c -identifier from the address of the viewController, \c -label from the viewController's title, and \c -image based on the classname as the view controller. An image named "ViewControllerClassName-TabViewItem" will be searched for first, followed by "ViewControllerClassName". It will search first using +[NSImage imageNamed:], then in \c viewController.nibBundle, and lastly in the bundle containing the view controller's class. As defined by: -[NSImage imageNamed:imageName], -[viewController.nibBundle imageForResource:imageName], -[[NSBundle bundleForClass:[viewController class]] imageForResource:imageName]. One pass with imageName as [NSStringFromClass([viewController class]) stringByAppendingString:@"-TabViewItem"], followed by imageName as NSStringFromClass([viewController class]).
+//
 // ViewController calls the underlying ViewController.
 func (x *TabViewItem) ViewController() *ViewController {
 	_r := x.inner.ViewController()
@@ -178,6 +188,8 @@ func (x *TabViewItem) ViewController() *ViewController {
 	return &ViewController{inner: _r}
 }
 
+// The view controller wrapped by the tab view item. This property must be set if the tab view item will be added to an NSTabViewController, but can also be used if the tab view item is added to an NSTabView. If this is set, the tab view item will forward \c -view calls onto the viewController. Setting a viewController will also set the following properties on the tab view item: \c -identifier from the address of the viewController, \c -label from the viewController's title, and \c -image based on the classname as the view controller. An image named "ViewControllerClassName-TabViewItem" will be searched for first, followed by "ViewControllerClassName". It will search first using +[NSImage imageNamed:], then in \c viewController.nibBundle, and lastly in the bundle containing the view controller's class. As defined by: -[NSImage imageNamed:imageName], -[viewController.nibBundle imageForResource:imageName], -[[NSBundle bundleForClass:[viewController class]] imageForResource:imageName]. One pass with imageName as [NSStringFromClass([viewController class]) stringByAppendingString:@"-TabViewItem"], followed by imageName as NSStringFromClass([viewController class]).
+//
 // SetViewController calls the underlying SetViewController.
 func (x *TabViewItem) SetViewController(viewController *raw.NSViewController) {
 	x.inner.SetViewController(viewController)

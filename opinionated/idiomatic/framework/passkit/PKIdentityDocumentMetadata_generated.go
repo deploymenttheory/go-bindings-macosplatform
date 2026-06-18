@@ -37,12 +37,16 @@ func NewIdentityDocumentMetadata() *IdentityDocumentMetadata {
 	return &IdentityDocumentMetadata{inner: raw.PKIdentityDocumentMetadataFromID(_id)}
 }
 
+// serverEnvironmentIdentifier: Identifier referencing the target server environment Apple Pay servers should reach out to to provision this pass. If not present, the default Apply Pay server environment will be used and an empty string will be returned.
+//
 // WithServerEnvironmentIdentifier sets the serverEnvironmentIdentifier property and returns the receiver for chaining.
 func (x *IdentityDocumentMetadata) WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *IdentityDocumentMetadata {
 	x.inner.SetServerEnvironmentIdentifier(foundation.NSStringStringWithUTF8String(serverEnvironmentIdentifier))
 	return x
 }
 
+// credentialIdentifier: A unique identifier for provisioning credential data.
+//
 // CredentialIdentifier calls the underlying CredentialIdentifier.
 func (x *IdentityDocumentMetadata) CredentialIdentifier() string {
 	_r := x.inner.CredentialIdentifier()
@@ -52,6 +56,8 @@ func (x *IdentityDocumentMetadata) CredentialIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// sharingInstanceIdentifier: A unique identifier that refers to an instance of sharing of credentials to a user's device initiated from another user, device, or web.
+//
 // SharingInstanceIdentifier calls the underlying SharingInstanceIdentifier.
 func (x *IdentityDocumentMetadata) SharingInstanceIdentifier() string {
 	_r := x.inner.SharingInstanceIdentifier()
@@ -61,6 +67,8 @@ func (x *IdentityDocumentMetadata) SharingInstanceIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// cardTemplateIdentifier: Identifier referencing a card template registered by developers in web portal - identifies a combination of cardProfileIdentifier, cardConfigurationIdentifier, and cardArtBundleName. Returns empty string if no identifier is set.
+//
 // CardTemplateIdentifier calls the underlying CardTemplateIdentifier.
 func (x *IdentityDocumentMetadata) CardTemplateIdentifier() string {
 	_r := x.inner.CardTemplateIdentifier()
@@ -70,6 +78,8 @@ func (x *IdentityDocumentMetadata) CardTemplateIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// cardConfigurationIdentifier: Identifier referencing a card configuration registered by developers. Returns empty string if no identifier is set.
+//
 // CardConfigurationIdentifier calls the underlying CardConfigurationIdentifier.
 func (x *IdentityDocumentMetadata) CardConfigurationIdentifier() string {
 	_r := x.inner.CardConfigurationIdentifier()
@@ -79,6 +89,8 @@ func (x *IdentityDocumentMetadata) CardConfigurationIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// serverEnvironmentIdentifier: Identifier referencing the target server environment Apple Pay servers should reach out to to provision this pass. If not present, the default Apply Pay server environment will be used and an empty string will be returned.
+//
 // ServerEnvironmentIdentifier calls the underlying ServerEnvironmentIdentifier.
 func (x *IdentityDocumentMetadata) ServerEnvironmentIdentifier() string {
 	_r := x.inner.ServerEnvironmentIdentifier()
@@ -93,6 +105,8 @@ func (x *IdentityDocumentMetadata) SetServerEnvironmentIdentifier(serverEnvironm
 	x.inner.SetServerEnvironmentIdentifier(foundation.NSStringStringWithUTF8String(serverEnvironmentIdentifier))
 }
 
+// issuingCountryCode: identifies the issuing country of the identity document
+//
 // IssuingCountryCode calls the underlying IssuingCountryCode.
 func (x *IdentityDocumentMetadata) IssuingCountryCode() string {
 	_r := x.inner.IssuingCountryCode()
@@ -102,6 +116,8 @@ func (x *IdentityDocumentMetadata) IssuingCountryCode() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// identityDocumentType: identifies the type of the identity document
+//
 // DocumentType calls the underlying DocumentType.
 func (x *IdentityDocumentMetadata) DocumentType() PKAddIdentityDocumentType {
 	return PKAddIdentityDocumentType(x.inner.DocumentType())

@@ -37,96 +37,128 @@ func NewMaterial() *Material {
 	return &Material{inner: raw.SCNMaterialFromID(_id)}
 }
 
+// @property name @abstract Determines the name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Material) WithName(name string) *Material {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property shininess @abstract Specifies the receiver's shininess value. Defaults to 1.0. Animatable.
+//
 // WithShininess sets the shininess property and returns the receiver for chaining.
 func (x *Material) WithShininess(shininess float64) *Material {
 	x.inner.SetShininess(shininess)
 	return x
 }
 
+// @property transparency @abstract Specifies the receiver's transparency value. Defaults to 1.0. Animatable. @discussion The color of the transparent property is multiplied by this property. The result is then used to produce the final transparency according to the rule defined by the transparencyMode property.
+//
 // WithTransparency sets the transparency property and returns the receiver for chaining.
 func (x *Material) WithTransparency(transparency float64) *Material {
 	x.inner.SetTransparency(transparency)
 	return x
 }
 
+// @property lightingModelName @abstract Determines the receiver's lighting model. See above for the list of lighting models. Defaults to SCNLightingModelBlinn.
+//
 // WithLightingModelName sets the lightingModelName property and returns the receiver for chaining.
 func (x *Material) WithLightingModelName(lightingModelName *foundation.NSString) *Material {
 	x.inner.SetLightingModelName(lightingModelName)
 	return x
 }
 
+// @property litPerPixel @abstract Determines whether the receiver is lit per pixel. Defaults to YES. Animatable.
+//
 // WithLitPerPixel sets the litPerPixel property and returns the receiver for chaining.
 func (x *Material) WithLitPerPixel(litPerPixel bool) *Material {
 	x.inner.SetLitPerPixel(litPerPixel)
 	return x
 }
 
+// @property doubleSided @abstract Determines whether the receiver is double sided. Defaults to NO. Animatable.
+//
 // WithDoubleSided sets the doubleSided property and returns the receiver for chaining.
 func (x *Material) WithDoubleSided(doubleSided bool) *Material {
 	x.inner.SetDoubleSided(doubleSided)
 	return x
 }
 
+// @property fillMode @abstract Determines of to how to rasterize the receiver's primitives. Defaults to SCNFillModeFill.
+//
 // WithFillMode sets the fillMode property and returns the receiver for chaining.
 func (x *Material) WithFillMode(fillMode SCNFillMode) *Material {
 	x.inner.SetFillMode(raw.SCNFillMode(fillMode))
 	return x
 }
 
+// @property cullMode @abstract Determines the culling mode of the receiver. Defaults to SCNCullModeBack. Animatable.
+//
 // WithCullMode sets the cullMode property and returns the receiver for chaining.
 func (x *Material) WithCullMode(cullMode SCNCullMode) *Material {
 	x.inner.SetCullMode(raw.SCNCullMode(cullMode))
 	return x
 }
 
+// @property transparencyMode @abstract Determines the transparency mode of the receiver. See above for the transparency modes. Defaults to SCNTransparencyModeDefault.
+//
 // WithTransparencyMode sets the transparencyMode property and returns the receiver for chaining.
 func (x *Material) WithTransparencyMode(transparencyMode SCNTransparencyMode) *Material {
 	x.inner.SetTransparencyMode(raw.SCNTransparencyMode(transparencyMode))
 	return x
 }
 
+// @property locksAmbientWithDiffuse @abstract Makes the ambient property automatically match the diffuse property. Defaults to NO on 10.9 and before, defaults to YES otherwise. Animatable.
+//
 // WithLocksAmbientWithDiffuse sets the locksAmbientWithDiffuse property and returns the receiver for chaining.
 func (x *Material) WithLocksAmbientWithDiffuse(locksAmbientWithDiffuse bool) *Material {
 	x.inner.SetLocksAmbientWithDiffuse(locksAmbientWithDiffuse)
 	return x
 }
 
+// @property writeToDepthBuffer @abstract Determines whether the receiver writes to the depth buffer when rendered. Defaults to YES.
+//
 // WithWritesToDepthBuffer sets the writesToDepthBuffer property and returns the receiver for chaining.
 func (x *Material) WithWritesToDepthBuffer(writesToDepthBuffer bool) *Material {
 	x.inner.SetWritesToDepthBuffer(writesToDepthBuffer)
 	return x
 }
 
+// @abstract Determines whether the receiver writes to the color buffer when rendered. Defaults to SCNColorMaskAll.
+//
 // WithColorBufferWriteMask sets the colorBufferWriteMask property and returns the receiver for chaining.
 func (x *Material) WithColorBufferWriteMask(colorBufferWriteMask SCNColorMask) *Material {
 	x.inner.SetColorBufferWriteMask(raw.SCNColorMask(colorBufferWriteMask))
 	return x
 }
 
+// @property readsFromDepthBuffer @abstract Determines whether the receiver reads from the depth buffer when rendered. Defaults to YES.
+//
 // WithReadsFromDepthBuffer sets the readsFromDepthBuffer property and returns the receiver for chaining.
 func (x *Material) WithReadsFromDepthBuffer(readsFromDepthBuffer bool) *Material {
 	x.inner.SetReadsFromDepthBuffer(readsFromDepthBuffer)
 	return x
 }
 
+// @property fresnelExponent @abstract Specifies the receiver's fresnel exponent value. Defaults to 0.0. Animatable. @discussion The effect of the reflectivity property is modulated by this property. The fresnelExponent changes the exponent of the reflectance. The bigger the exponent, the more concentrated the reflection is around the edges.
+//
 // WithFresnelExponent sets the fresnelExponent property and returns the receiver for chaining.
 func (x *Material) WithFresnelExponent(fresnelExponent float64) *Material {
 	x.inner.SetFresnelExponent(fresnelExponent)
 	return x
 }
 
+// @property blendMode @abstract Specifies the receiver's blend mode. Defaults to SCNBlendModeAlpha.
+//
 // WithBlendMode sets the blendMode property and returns the receiver for chaining.
 func (x *Material) WithBlendMode(blendMode SCNBlendMode) *Material {
 	x.inner.SetBlendMode(raw.SCNBlendMode(blendMode))
 	return x
 }
 
+// @property name @abstract Determines the name of the receiver.
+//
 // Name calls the underlying Name.
 func (x *Material) Name() string {
 	_r := x.inner.Name()
@@ -141,6 +173,8 @@ func (x *Material) SetName(name string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 }
 
+// @property diffuse @abstract Specifies the receiver's diffuse property. @discussion The diffuse property specifies the amount of light diffusely reflected from the surface. The diffuse light is reflected equally in all directions and is therefore independent of the point of view.
+//
 // Diffuse calls the underlying Diffuse.
 func (x *Material) Diffuse() *MaterialProperty {
 	_r := x.inner.Diffuse()
@@ -150,6 +184,8 @@ func (x *Material) Diffuse() *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// @property ambient @abstract Specifies the receiver's ambient property. @discussion The ambient property specifies the amount of ambient light to reflect. This property has no visual impact on scenes that have no ambient light. Setting the ambient has no effect if locksAmbientWithDiffuse is set to YES.
+//
 // Ambient calls the underlying Ambient.
 func (x *Material) Ambient() *MaterialProperty {
 	_r := x.inner.Ambient()
@@ -159,6 +195,8 @@ func (x *Material) Ambient() *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// @property specular @abstract Specifies the receiver's specular property. @discussion The specular property specifies the amount of light to reflect in a mirror-like manner. The specular intensity increases when the point of view lines up with the direction of the reflected light.
+//
 // Specular calls the underlying Specular.
 func (x *Material) Specular() *MaterialProperty {
 	_r := x.inner.Specular()
@@ -168,6 +206,8 @@ func (x *Material) Specular() *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// @property emission @abstract The emission property specifies the amount of light the material emits. This emission does not light up other surfaces in the scene.
+//
 // Emission calls the underlying Emission.
 func (x *Material) Emission() *MaterialProperty {
 	_r := x.inner.Emission()
@@ -177,6 +217,8 @@ func (x *Material) Emission() *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// @property transparent @abstract The transparent property specifies the transparent areas of the material.
+//
 // Transparent calls the underlying Transparent.
 func (x *Material) Transparent() *MaterialProperty {
 	_r := x.inner.Transparent()
@@ -186,6 +228,8 @@ func (x *Material) Transparent() *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// @property reflective @abstract The reflective property specifies the reflectivity of the surface. The surface will not actually reflect other objects in the scene. This property may be used as a sphere mapping to reflect a precomputed environment.
+//
 // Reflective calls the underlying Reflective.
 func (x *Material) Reflective() *MaterialProperty {
 	_r := x.inner.Reflective()
@@ -195,6 +239,8 @@ func (x *Material) Reflective() *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// @property multiply @abstract The multiply property specifies a color or an image used to multiply the output fragments with. The computed fragments are multiplied with the multiply value to produce the final fragments. This property may be used for shadow maps, to fade out or tint 3d objects.
+//
 // Multiply calls the underlying Multiply.
 func (x *Material) Multiply() *MaterialProperty {
 	_r := x.inner.Multiply()
@@ -204,6 +250,8 @@ func (x *Material) Multiply() *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// @property normal @abstract The normal property specifies the surface orientation. @discussion When an image is set on the normal property the material is automatically lit per pixel. Setting a color has no effect.
+//
 // Normal calls the underlying Normal.
 func (x *Material) Normal() *MaterialProperty {
 	_r := x.inner.Normal()
@@ -213,6 +261,8 @@ func (x *Material) Normal() *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// @property displacement @abstract The displacement property specifies how vertex are translated in tangent space. @discussion Pass a grayscale image for a simple 'elevation' or rgb image for a vector displacement.
+//
 // Displacement calls the underlying Displacement.
 func (x *Material) Displacement() *MaterialProperty {
 	_r := x.inner.Displacement()
@@ -222,6 +272,8 @@ func (x *Material) Displacement() *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// @property ambientOcclusion @abstract The ambientOcclusion property specifies the ambient occlusion of the surface. The ambient occlusion is multiplied with the ambient light, then the result is added to the lighting contribution. This property has no visual impact on scenes that have no ambient light. When an ambient occlusion map is set, the ambient property is ignored.
+//
 // AmbientOcclusion calls the underlying AmbientOcclusion.
 func (x *Material) AmbientOcclusion() *MaterialProperty {
 	_r := x.inner.AmbientOcclusion()
@@ -231,6 +283,8 @@ func (x *Material) AmbientOcclusion() *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// @property selfIllumination @abstract The selfIllumination property specifies a texture or a color that is added to the lighting contribution of the surface. When a selfIllumination is set, the emission property is ignored.
+//
 // SelfIllumination calls the underlying SelfIllumination.
 func (x *Material) SelfIllumination() *MaterialProperty {
 	_r := x.inner.SelfIllumination()
@@ -240,6 +294,8 @@ func (x *Material) SelfIllumination() *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// @property metalness @abstract The metalness property specifies how metallic the material's surface appears. Lower values (darker colors) cause the material to appear more like a dielectric surface. Higher values (brighter colors) cause the surface to appear more metallic. This property is only used when 'lightingModelName' is 'SCNLightingModelPhysicallyBased'.
+//
 // Metalness calls the underlying Metalness.
 func (x *Material) Metalness() *MaterialProperty {
 	_r := x.inner.Metalness()
@@ -249,6 +305,8 @@ func (x *Material) Metalness() *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// @property roughness @abstract The roughness property specifies the apparent smoothness of the surface. Lower values (darker colors) cause the material to appear shiny, with well-defined specular highlights. Higher values (brighter colors) cause specular highlights to spread out and the diffuse property of the material to become more retroreflective. This property is only used when 'lightingModelName' is 'SCNLightingModelPhysicallyBased'.
+//
 // Roughness calls the underlying Roughness.
 func (x *Material) Roughness() *MaterialProperty {
 	_r := x.inner.Roughness()
@@ -258,6 +316,8 @@ func (x *Material) Roughness() *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// @property clearCoat @abstract The clearCoat property specifies color and intensity of the coat layer.
+//
 // ClearCoat calls the underlying ClearCoat.
 func (x *Material) ClearCoat() *MaterialProperty {
 	_r := x.inner.ClearCoat()
@@ -267,6 +327,8 @@ func (x *Material) ClearCoat() *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// @property clearCoatRoughness @abstract The clearCoat property specifies color and intensity of the coat roughness.
+//
 // ClearCoatRoughness calls the underlying ClearCoatRoughness.
 func (x *Material) ClearCoatRoughness() *MaterialProperty {
 	_r := x.inner.ClearCoatRoughness()
@@ -276,6 +338,8 @@ func (x *Material) ClearCoatRoughness() *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// @property clearCoatNormal @abstract The clearCoatNormal property specifies color and intensity of the optional coat normal map.
+//
 // ClearCoatNormal calls the underlying ClearCoatNormal.
 func (x *Material) ClearCoatNormal() *MaterialProperty {
 	_r := x.inner.ClearCoatNormal()
@@ -285,6 +349,8 @@ func (x *Material) ClearCoatNormal() *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// @property shininess @abstract Specifies the receiver's shininess value. Defaults to 1.0. Animatable.
+//
 // Shininess calls the underlying Shininess.
 func (x *Material) Shininess() float64 {
 	return x.inner.Shininess()
@@ -295,6 +361,8 @@ func (x *Material) SetShininess(shininess float64) {
 	x.inner.SetShininess(shininess)
 }
 
+// @property transparency @abstract Specifies the receiver's transparency value. Defaults to 1.0. Animatable. @discussion The color of the transparent property is multiplied by this property. The result is then used to produce the final transparency according to the rule defined by the transparencyMode property.
+//
 // Transparency calls the underlying Transparency.
 func (x *Material) Transparency() float64 {
 	return x.inner.Transparency()
@@ -305,6 +373,8 @@ func (x *Material) SetTransparency(transparency float64) {
 	x.inner.SetTransparency(transparency)
 }
 
+// @property lightingModelName @abstract Determines the receiver's lighting model. See above for the list of lighting models. Defaults to SCNLightingModelBlinn.
+//
 // LightingModelName calls the underlying LightingModelName.
 func (x *Material) LightingModelName() string {
 	_r := x.inner.LightingModelName()
@@ -319,6 +389,8 @@ func (x *Material) SetLightingModelName(lightingModelName *foundation.NSString) 
 	x.inner.SetLightingModelName(lightingModelName)
 }
 
+// @property litPerPixel @abstract Determines whether the receiver is lit per pixel. Defaults to YES. Animatable.
+//
 // IsLitPerPixel calls the underlying IsLitPerPixel.
 func (x *Material) IsLitPerPixel() bool {
 	return x.inner.IsLitPerPixel()
@@ -329,6 +401,8 @@ func (x *Material) SetLitPerPixel(litPerPixel bool) {
 	x.inner.SetLitPerPixel(litPerPixel)
 }
 
+// @property doubleSided @abstract Determines whether the receiver is double sided. Defaults to NO. Animatable.
+//
 // IsDoubleSided calls the underlying IsDoubleSided.
 func (x *Material) IsDoubleSided() bool {
 	return x.inner.IsDoubleSided()
@@ -339,6 +413,8 @@ func (x *Material) SetDoubleSided(doubleSided bool) {
 	x.inner.SetDoubleSided(doubleSided)
 }
 
+// @property fillMode @abstract Determines of to how to rasterize the receiver's primitives. Defaults to SCNFillModeFill.
+//
 // FillMode calls the underlying FillMode.
 func (x *Material) FillMode() SCNFillMode {
 	return SCNFillMode(x.inner.FillMode())
@@ -349,6 +425,8 @@ func (x *Material) SetFillMode(fillMode SCNFillMode) {
 	x.inner.SetFillMode(raw.SCNFillMode(fillMode))
 }
 
+// @property cullMode @abstract Determines the culling mode of the receiver. Defaults to SCNCullModeBack. Animatable.
+//
 // CullMode calls the underlying CullMode.
 func (x *Material) CullMode() SCNCullMode {
 	return SCNCullMode(x.inner.CullMode())
@@ -359,6 +437,8 @@ func (x *Material) SetCullMode(cullMode SCNCullMode) {
 	x.inner.SetCullMode(raw.SCNCullMode(cullMode))
 }
 
+// @property transparencyMode @abstract Determines the transparency mode of the receiver. See above for the transparency modes. Defaults to SCNTransparencyModeDefault.
+//
 // TransparencyMode calls the underlying TransparencyMode.
 func (x *Material) TransparencyMode() SCNTransparencyMode {
 	return SCNTransparencyMode(x.inner.TransparencyMode())
@@ -369,6 +449,8 @@ func (x *Material) SetTransparencyMode(transparencyMode SCNTransparencyMode) {
 	x.inner.SetTransparencyMode(raw.SCNTransparencyMode(transparencyMode))
 }
 
+// @property locksAmbientWithDiffuse @abstract Makes the ambient property automatically match the diffuse property. Defaults to NO on 10.9 and before, defaults to YES otherwise. Animatable.
+//
 // LocksAmbientWithDiffuse calls the underlying LocksAmbientWithDiffuse.
 func (x *Material) LocksAmbientWithDiffuse() bool {
 	return x.inner.LocksAmbientWithDiffuse()
@@ -379,6 +461,8 @@ func (x *Material) SetLocksAmbientWithDiffuse(locksAmbientWithDiffuse bool) {
 	x.inner.SetLocksAmbientWithDiffuse(locksAmbientWithDiffuse)
 }
 
+// @property writeToDepthBuffer @abstract Determines whether the receiver writes to the depth buffer when rendered. Defaults to YES.
+//
 // WritesToDepthBuffer calls the underlying WritesToDepthBuffer.
 func (x *Material) WritesToDepthBuffer() bool {
 	return x.inner.WritesToDepthBuffer()
@@ -389,6 +473,8 @@ func (x *Material) SetWritesToDepthBuffer(writesToDepthBuffer bool) {
 	x.inner.SetWritesToDepthBuffer(writesToDepthBuffer)
 }
 
+// @abstract Determines whether the receiver writes to the color buffer when rendered. Defaults to SCNColorMaskAll.
+//
 // ColorBufferWriteMask calls the underlying ColorBufferWriteMask.
 func (x *Material) ColorBufferWriteMask() SCNColorMask {
 	return SCNColorMask(x.inner.ColorBufferWriteMask())
@@ -399,6 +485,8 @@ func (x *Material) SetColorBufferWriteMask(colorBufferWriteMask SCNColorMask) {
 	x.inner.SetColorBufferWriteMask(raw.SCNColorMask(colorBufferWriteMask))
 }
 
+// @property readsFromDepthBuffer @abstract Determines whether the receiver reads from the depth buffer when rendered. Defaults to YES.
+//
 // ReadsFromDepthBuffer calls the underlying ReadsFromDepthBuffer.
 func (x *Material) ReadsFromDepthBuffer() bool {
 	return x.inner.ReadsFromDepthBuffer()
@@ -409,6 +497,8 @@ func (x *Material) SetReadsFromDepthBuffer(readsFromDepthBuffer bool) {
 	x.inner.SetReadsFromDepthBuffer(readsFromDepthBuffer)
 }
 
+// @property fresnelExponent @abstract Specifies the receiver's fresnel exponent value. Defaults to 0.0. Animatable. @discussion The effect of the reflectivity property is modulated by this property. The fresnelExponent changes the exponent of the reflectance. The bigger the exponent, the more concentrated the reflection is around the edges.
+//
 // FresnelExponent calls the underlying FresnelExponent.
 func (x *Material) FresnelExponent() float64 {
 	return x.inner.FresnelExponent()
@@ -419,6 +509,8 @@ func (x *Material) SetFresnelExponent(fresnelExponent float64) {
 	x.inner.SetFresnelExponent(fresnelExponent)
 }
 
+// @property blendMode @abstract Specifies the receiver's blend mode. Defaults to SCNBlendModeAlpha.
+//
 // BlendMode calls the underlying BlendMode.
 func (x *Material) BlendMode() SCNBlendMode {
 	return SCNBlendMode(x.inner.BlendMode())

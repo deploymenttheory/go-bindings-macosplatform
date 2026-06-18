@@ -36,41 +36,57 @@ func NewModel() *Model {
 	return &Model{inner: raw.MLModelFromID(_id)}
 }
 
+// Run a prediction on a model synchronously. This is a convenience overload method of `prediction(from:options:)` that uses the default prediction options. - Parameters - input: The input features to make a prediction from. - error: The output parameter to be filled with error information on failure. - Returns: The output features from the prediction.
+//
 // PredictionFromFeaturesError calls the underlying PredictionFromFeaturesError.
 func (x *Model) PredictionFromFeaturesError(input raw.MLFeatureProvider) (raw.MLFeatureProvider, error) {
 	return x.inner.PredictionFromFeaturesError(input)
 }
 
+// Run a prediction on a model synchronously - Parameters - input: The input features to make a prediction from. - options: Prediction options to modify how the prediction is run. - error: The output parameter to be filled with error information on failure. - Returns: The output features from the prediction.
+//
 // PredictionFromFeaturesOptionsError calls the underlying PredictionFromFeaturesOptionsError.
 func (x *Model) PredictionFromFeaturesOptionsError(input raw.MLFeatureProvider, options *raw.MLPredictionOptions) (raw.MLFeatureProvider, error) {
 	return x.inner.PredictionFromFeaturesOptionsError(input, options)
 }
 
+// Run a prediction on a model asynchronously. This is a convenience overload method of `prediction(from:options:) async` that uses the default prediction options. - Parameters - input: The input features to make a prediction from. - completionHandler: A block that will be invoked once the prediction has completed successfully or unsuccessfully. On success, it is invoked with a valid model output. On failure, it is invoked with a nil output and NSError
+//
 // PredictionFromFeaturesCompletionHandler calls the underlying PredictionFromFeaturesCompletionHandler.
 func (x *Model) PredictionFromFeaturesCompletionHandler(input raw.MLFeatureProvider, completionHandler func(objc.ID, unsafe.Pointer)) {
 	x.inner.PredictionFromFeaturesCompletionHandler(input, completionHandler)
 }
 
+// Run a prediction on a model asynchronously. - Parameters - input: The input features to make a prediction from. - options: Prediction options to modify how the prediction is run. - completionHandler: A block that will be invoked once the prediction has completed successfully or unsuccessfully. On success, it is invoked with a valid model output. On failure, it is invoked with a nil output and NSError
+//
 // PredictionFromFeaturesOptionsCompletionHandler calls the underlying PredictionFromFeaturesOptionsCompletionHandler.
 func (x *Model) PredictionFromFeaturesOptionsCompletionHandler(input raw.MLFeatureProvider, options *raw.MLPredictionOptions, completionHandler func(objc.ID, unsafe.Pointer)) {
 	x.inner.PredictionFromFeaturesOptionsCompletionHandler(input, options, completionHandler)
 }
 
+// Batch prediction without explicit options
+//
 // PredictionsFromBatchError calls the underlying PredictionsFromBatchError.
 func (x *Model) PredictionsFromBatchError(inputBatch raw.MLBatchProvider) (raw.MLBatchProvider, error) {
 	return x.inner.PredictionsFromBatchError(inputBatch)
 }
 
+// Batch prediction with explicit options
+//
 // PredictionsFromBatchOptionsError calls the underlying PredictionsFromBatchOptionsError.
 func (x *Model) PredictionsFromBatchOptionsError(inputBatch raw.MLBatchProvider, options *raw.MLPredictionOptions) (raw.MLBatchProvider, error) {
 	return x.inner.PredictionsFromBatchOptionsError(inputBatch, options)
 }
 
+// Provides value for the given parameter. Returns nil on error.
+//
 // ParameterValueForKeyError calls the underlying ParameterValueForKeyError.
 func (x *Model) ParameterValueForKeyError(key *raw.MLParameterKey) (objc.ID, error) {
 	return x.inner.ParameterValueForKeyError(key)
 }
 
+// A model holds a description of its required inputs and expected outputs.
+//
 // ModelDescription calls the underlying ModelDescription.
 func (x *Model) ModelDescription() *ModelDescription {
 	_r := x.inner.ModelDescription()
@@ -80,6 +96,8 @@ func (x *Model) ModelDescription() *ModelDescription {
 	return &ModelDescription{inner: _r}
 }
 
+// The load-time parameters used to instantiate this MLModel object.
+//
 // Configuration calls the underlying Configuration.
 func (x *Model) Configuration() *ModelConfiguration {
 	_r := x.inner.Configuration()
@@ -89,6 +107,8 @@ func (x *Model) Configuration() *ModelConfiguration {
 	return &ModelConfiguration{inner: _r}
 }
 
+// Creates a new state object. Core ML framework will allocate the state buffers declared in the model. The allocated state buffers are initialized to zeros. To initialize with different values, use `.withMultiArray(for:)` to get the mutable `MLMultiArray`-view to the state buffer. It returns an empty state when the model is stateless. One can use the empty state with stateful prediction functions such as `prediction(from:using:)` and those predictions will be stateless. This simplifies the call site which may or may not use a stateful model. ```swift // Create state that contains two state buffers: s1 and s2. // Then, initialize s1 to 1.0 and s2 to 2.0. let state = model.newState() state.withMultiArray(for: "s1") { stateMultiArray in stateMultiArray[0] = 1.0 } state.withMultiArray(for: "s2") { stateMultiArray in stateMultiArray[0] = 2.0 } ```
+//
 // NewState calls the underlying NewState.
 func (x *Model) NewState() *State {
 	_r := x.inner.NewState()
@@ -98,16 +118,22 @@ func (x *Model) NewState() *State {
 	return &State{inner: _r}
 }
 
+// Run a stateful prediction synchronously. Use this method to run predictions on a stateful model. ```swift let state = model.newState() let prediction = try model.prediction(from: inputFeatures, using: state) ``` - Parameters: - inputFeatures: The input features as declared in the model description. - state: The state object created by `newState()` method. - error: The output parameter to receive an error information on failure.
+//
 // PredictionFromFeaturesUsingStateError calls the underlying PredictionFromFeaturesUsingStateError.
 func (x *Model) PredictionFromFeaturesUsingStateError(inputFeatures raw.MLFeatureProvider, state *raw.MLState) (raw.MLFeatureProvider, error) {
 	return x.inner.PredictionFromFeaturesUsingStateError(inputFeatures, state)
 }
 
+// Run a stateful prediction synchronously with options. Use this method to run predictions on a stateful model. ```swift let state = model.newState() let prediction = try model.prediction(from: inputFeatures, using: state, options: predictionOptions) ``` - Parameters: - inputFeatures: The input features as declared in the model description. - state: The state object created by `newState()` method. - options: The prediction options. - error: The output parameter to receive an error information on failure.
+//
 // PredictionFromFeaturesUsingStateOptionsError calls the underlying PredictionFromFeaturesUsingStateOptionsError.
 func (x *Model) PredictionFromFeaturesUsingStateOptionsError(inputFeatures raw.MLFeatureProvider, state *raw.MLState, options *raw.MLPredictionOptions) (raw.MLFeatureProvider, error) {
 	return x.inner.PredictionFromFeaturesUsingStateOptionsError(inputFeatures, state, options)
 }
 
+// Run a stateful prediction asynchronously. Use this method to run predictions on a stateful model. Do not request a prediction while another prediction that shares the same state is in-flight, otherwise the behavior is undefined. ```swift let state = model.newState() let prediction = try await model.prediction(from: inputFeatures, using: state) ``` - Parameters - input: The input features to make a prediction from. - state: The state object created by `newState()` method. - options: Prediction options to modify how the prediction is run. - completionHandler: A block that will be invoked once the prediction has completed successfully or unsuccessfully. On success, it is invoked with a valid model output. On failure, it is invoked with a nil output and NSError
+//
 // PredictionFromFeaturesUsingStateOptionsCompletionHandler calls the underlying PredictionFromFeaturesUsingStateOptionsCompletionHandler.
 func (x *Model) PredictionFromFeaturesUsingStateOptionsCompletionHandler(inputFeatures raw.MLFeatureProvider, state *raw.MLState, options *raw.MLPredictionOptions, completionHandler func(objc.ID, unsafe.Pointer)) {
 	x.inner.PredictionFromFeaturesUsingStateOptionsCompletionHandler(inputFeatures, state, options, completionHandler)

@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An attachment point that enables the Spice clipboard sharing capability.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzspiceagentportattachment
 type VZSpiceAgentPortAttachment struct {
 	VZSerialPortAttachment
@@ -33,6 +35,7 @@ func VZSpiceAgentPortAttachmentFromID(id objc.ID) *VZSpiceAgentPortAttachment {
 	return o
 }
 
+// Creates a new Spice agent port attachment.
 func (o *VZSpiceAgentPortAttachment) Init() *VZSpiceAgentPortAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZSpiceAgentPortAttachmentSelInit)
 	if _ret != 0 {

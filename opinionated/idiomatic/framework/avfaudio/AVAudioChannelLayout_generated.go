@@ -30,6 +30,8 @@ func AudioChannelLayoutFromID(id objc.ID) *AudioChannelLayout {
 	return &AudioChannelLayout{inner: raw.AVAudioChannelLayoutFromID(id)}
 }
 
+// @method initWithLayoutTag: @abstract Initialize from a layout tag. @param layoutTag The tag. @discussion Returns nil if the tag is either kAudioChannelLayoutTag_UseChannelDescriptions or kAudioChannelLayoutTag_UseChannelBitmap.
+//
 // NewAudioChannelLayoutWithLayoutTag creates a new [AudioChannelLayout].
 func NewAudioChannelLayoutWithLayoutTag(layoutTag uint) *AudioChannelLayout {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioChannelLayout")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewAudioChannelLayoutWithLayoutTag(layoutTag uint) *AudioChannelLayout {
 	return &AudioChannelLayout{inner: raw.AVAudioChannelLayoutFromID(_id)}
 }
 
+// @method initWithLayout: @abstract Initialize from an AudioChannelLayout. @param layout The AudioChannelLayout. @discussion If the provided layout's tag is kAudioChannelLayoutTag_UseChannelDescriptions, this initializer attempts to convert it to a more specific tag.
+//
 // NewAudioChannelLayoutWithLayout creates a new [AudioChannelLayout].
 func NewAudioChannelLayoutWithLayout(layout *coreaudiotypes.AudioChannelLayout) *AudioChannelLayout {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioChannelLayout")), objc.RegisterName("alloc"))
@@ -44,21 +48,29 @@ func NewAudioChannelLayoutWithLayout(layout *coreaudiotypes.AudioChannelLayout) 
 	return &AudioChannelLayout{inner: raw.AVAudioChannelLayoutFromID(_id)}
 }
 
+// @method isEqual: @abstract Determine whether another AVAudioChannelLayout is exactly equal to this layout. @param object The AVAudioChannelLayout to compare against. @discussion The underlying AudioChannelLayoutTag and AudioChannelLayout are compared for equality.
+//
 // IsEqual calls the underlying IsEqual.
 func (x *AudioChannelLayout) IsEqual(object objc.ID) bool {
 	return x.inner.IsEqual(object)
 }
 
+// @property layoutTag @abstract The layout's tag.
+//
 // LayoutTag calls the underlying LayoutTag.
 func (x *AudioChannelLayout) LayoutTag() uint {
 	return x.inner.LayoutTag()
 }
 
+// @property layout @abstract The underlying AudioChannelLayout.
+//
 // Layout calls the underlying Layout.
 func (x *AudioChannelLayout) Layout() *coreaudiotypes.AudioChannelLayout {
 	return x.inner.Layout()
 }
 
+// @property channelCount @abstract The number of channels of audio data.
+//
 // ChannelCount calls the underlying ChannelCount.
 func (x *AudioChannelLayout) ChannelCount() uint32 {
 	return x.inner.ChannelCount()

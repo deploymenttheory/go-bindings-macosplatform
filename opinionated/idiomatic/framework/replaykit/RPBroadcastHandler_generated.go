@@ -36,11 +36,15 @@ func NewBroadcastHandler() *BroadcastHandler {
 	return &BroadcastHandler{inner: raw.RPBroadcastHandlerFromID(_id)}
 }
 
+// @abstract Call this method, supplying it with a dictionary defined by the service, to populate the serviceInfo property on RPBroadcastController. This can be used to communicate viewing stats or messages back to the broadcasting app. @param serviceInfo Dictionary that can be passed back to the broadcasting app that may contain information about the ongoing broadcast.
+//
 // UpdateServiceInfo calls the underlying UpdateServiceInfo.
 func (x *BroadcastHandler) UpdateServiceInfo(serviceInfo *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) {
 	x.inner.UpdateServiceInfo(serviceInfo)
 }
 
+// @abstract Call this method, supplying it with a URL to update the broadcastURL property on RPBroadcastController. @param broadcastURL URL of the resource where broadcast can be viewed which will be passed to the broadcasting app.
+//
 // UpdateBroadcastURL calls the underlying UpdateBroadcastURL.
 func (x *BroadcastHandler) UpdateBroadcastURL(broadcastURL string) {
 	x.inner.UpdateBroadcastURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(broadcastURL)))

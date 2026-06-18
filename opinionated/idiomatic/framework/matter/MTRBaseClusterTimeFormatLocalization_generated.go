@@ -35,6 +35,8 @@ func MTRBaseClusterTimeFormatLocalizationFromID(id objc.ID) *MTRBaseClusterTimeF
 	return &MTRBaseClusterTimeFormatLocalization{inner: raw.MTRBaseClusterTimeFormatLocalizationFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterTimeFormatLocalizationWithDeviceEndpointIDQueue creates a new [MTRBaseClusterTimeFormatLocalization].
 func NewMTRBaseClusterTimeFormatLocalizationWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterTimeFormatLocalization {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterTimeFormatLocalization")), objc.RegisterName("alloc"))

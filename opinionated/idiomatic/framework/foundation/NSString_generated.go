@@ -867,13 +867,31 @@ func (x *String) StringByAppendingPathExtension(str string) *String {
 }
 
 // StringsByAppendingPaths calls the underlying StringsByAppendingPaths.
-func (x *String) StringsByAppendingPaths(paths *raw.NSArray[*raw.NSString]) *raw.NSArray[*raw.NSString] {
-	return x.inner.StringsByAppendingPaths(paths)
+func (x *String) StringsByAppendingPaths(paths ...StringProvider) *raw.NSArray[*raw.NSString] {
+	_ptrs := make([]objc.ID, len(paths))
+	for _i, _v := range paths {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	return x.inner.StringsByAppendingPaths(_arg0)
 }
 
 // CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes calls the underlying CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes.
-func (x *String) CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes(outputName string, flag bool, outputArray *raw.NSArray[*raw.NSString], filterTypes *raw.NSArray[*raw.NSString]) uint {
-	return x.inner.CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes(foundation.NSStringStringWithUTF8String(outputName), flag, outputArray, filterTypes)
+func (x *String) CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes(outputName string, flag bool, outputArray *raw.NSArray[*raw.NSString], filterTypes ...StringProvider) uint {
+	_ptrs := make([]objc.ID, len(filterTypes))
+	for _i, _v := range filterTypes {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg3 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg3 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	return x.inner.CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes(foundation.NSStringStringWithUTF8String(outputName), flag, outputArray, _arg3)
 }
 
 // GetFileSystemRepresentationMaxLength calls the underlying GetFileSystemRepresentationMaxLength.
@@ -1011,8 +1029,17 @@ func (x *String) StringByRemovingPercentEncoding() *String {
 }
 
 // LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges calls the underlying LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges.
-func (x *String) LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_ raw.NSRange, scheme *raw.NSString, options NSLinguisticTaggerOptions, orthography *raw.NSOrthography, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString] {
-	return x.inner.LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_, scheme, raw.NSLinguisticTaggerOptions(options), orthography, tokenRanges)
+func (x *String) LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_ raw.NSRange, scheme *raw.NSString, options NSLinguisticTaggerOptions, orthography *raw.NSOrthography, tokenRanges ...ValueProvider) *raw.NSArray[*raw.NSString] {
+	_ptrs := make([]objc.ID, len(tokenRanges))
+	for _i, _v := range tokenRanges {
+		_ptrs[_i] = _v.asValue().Ptr()
+	}
+	var _arg4 *raw.NSArray[*raw.NSValue]
+	if len(_ptrs) > 0 {
+		_arg4 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	return x.inner.LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_, scheme, raw.NSLinguisticTaggerOptions(options), orthography, _arg4)
 }
 
 // EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing calls the underlying EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing.
@@ -1122,8 +1149,8 @@ type Stringable interface {
 	VariantFittingPresentationWidth(width int) *String
 	StringByAppendingPathComponent(str string) *String
 	StringByAppendingPathExtension(str string) *String
-	StringsByAppendingPaths(paths *raw.NSArray[*raw.NSString]) *raw.NSArray[*raw.NSString]
-	CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes(outputName string, flag bool, outputArray *raw.NSArray[*raw.NSString], filterTypes *raw.NSArray[*raw.NSString]) uint
+	StringsByAppendingPaths(paths ...StringProvider) *raw.NSArray[*raw.NSString]
+	CompletePathIntoStringCaseSensitiveMatchesIntoArrayFilterTypes(outputName string, flag bool, outputArray *raw.NSArray[*raw.NSString], filterTypes ...StringProvider) uint
 	GetFileSystemRepresentationMaxLength(cname string, max uint) bool
 	PathComponents() []string
 	IsAbsolutePath() bool
@@ -1140,7 +1167,7 @@ type Stringable interface {
 	StringByAddingPercentEscapesUsingEncoding(enc uint) *String
 	StringByReplacingPercentEscapesUsingEncoding(enc uint) *String
 	StringByRemovingPercentEncoding() *String
-	LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_ raw.NSRange, scheme *raw.NSString, options NSLinguisticTaggerOptions, orthography *raw.NSOrthography, tokenRanges *raw.NSArray[*raw.NSValue]) *raw.NSArray[*raw.NSString]
+	LinguisticTagsInRangeSchemeOptionsOrthographyTokenRanges(range_ raw.NSRange, scheme *raw.NSString, options NSLinguisticTaggerOptions, orthography *raw.NSOrthography, tokenRanges ...ValueProvider) *raw.NSArray[*raw.NSString]
 	EnumerateLinguisticTagsInRangeSchemeOptionsOrthographyUsing(range_ raw.NSRange, scheme *raw.NSString, options NSLinguisticTaggerOptions, orthography *raw.NSOrthography, block objc.Block)
 }
 

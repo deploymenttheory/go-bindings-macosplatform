@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object the defines a VIRTIO file system device.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtiofilesystemdevice
 type VZVirtioFileSystemDevice struct {
 	VZDirectorySharingDevice

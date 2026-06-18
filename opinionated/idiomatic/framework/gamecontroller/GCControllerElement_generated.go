@@ -37,36 +37,48 @@ func NewControllerElement() *ControllerElement {
 	return &ControllerElement{inner: raw.GCControllerElementFromID(_id)}
 }
 
+// The preferred system gesture state for this element. Defaults to GCSystemGestureStateEnabled for most elements @note This is merely the preferred system gesture state - it is not guaranteed to be respected by the system. @note It is highly recommended to leave this set to the default value, however there may be situations (for example, game streaming apps) where it is preferrable to disable system gestures. @see boundToSystemGesture
+//
 // WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
 func (x *ControllerElement) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerElement {
 	x.inner.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
 	return x
 }
 
+// The element's SF Symbols name, taking input remapping into account. @note In almost all instances, you should use this over unmappedSfSymbolsName in your UI.
+//
 // WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
 func (x *ControllerElement) WithSfSymbolsName(sfSymbolsName string) *ControllerElement {
 	x.inner.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
 	return x
 }
 
+// The element's localized name, taking input remapping into account. @note In almost all instances, you should use this over unmappedLocalizedName in your UI.
+//
 // WithLocalizedName sets the localizedName property and returns the receiver for chaining.
 func (x *ControllerElement) WithLocalizedName(localizedName string) *ControllerElement {
 	x.inner.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
 	return x
 }
 
+// The element's SF Symbols name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (sfSymbolsName is nil).
+//
 // WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
 func (x *ControllerElement) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerElement {
 	x.inner.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
 	return x
 }
 
+// The element's localized name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (localizedName is nil).
+//
 // WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
 func (x *ControllerElement) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerElement {
 	x.inner.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
 	return x
 }
 
+// Each element can be part of a wider collection of inputs that map to a single logical element. A directional pad (dpad) is a logical collection of two axis inputs and thus each axis belongs to the same collection element - the dpad.
+//
 // Collection calls the underlying Collection.
 func (x *ControllerElement) Collection() *ControllerElement {
 	_r := x.inner.Collection()
@@ -76,16 +88,22 @@ func (x *ControllerElement) Collection() *ControllerElement {
 	return &ControllerElement{inner: _r}
 }
 
+// Check if the element can support more than just digital values, such as decimal ranges between 0 and 1. Defaults to YES for most elements.
+//
 // IsAnalog calls the underlying IsAnalog.
 func (x *ControllerElement) IsAnalog() bool {
 	return x.inner.IsAnalog()
 }
 
+// Check if the element is bound to a system gesture. Defaults to NO for most elements. @see preferredSystemGestureState @see GCSystemGestureState
+//
 // IsBoundToSystemGesture calls the underlying IsBoundToSystemGesture.
 func (x *ControllerElement) IsBoundToSystemGesture() bool {
 	return x.inner.IsBoundToSystemGesture()
 }
 
+// The preferred system gesture state for this element. Defaults to GCSystemGestureStateEnabled for most elements @note This is merely the preferred system gesture state - it is not guaranteed to be respected by the system. @note It is highly recommended to leave this set to the default value, however there may be situations (for example, game streaming apps) where it is preferrable to disable system gestures. @see boundToSystemGesture
+//
 // PreferredSystemGestureState calls the underlying PreferredSystemGestureState.
 func (x *ControllerElement) PreferredSystemGestureState() GCSystemGestureState {
 	return GCSystemGestureState(x.inner.PreferredSystemGestureState())
@@ -96,6 +114,8 @@ func (x *ControllerElement) SetPreferredSystemGestureState(preferredSystemGestur
 	x.inner.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
 }
 
+// The element's SF Symbols name, taking input remapping into account. @note In almost all instances, you should use this over unmappedSfSymbolsName in your UI.
+//
 // SfSymbolsName calls the underlying SfSymbolsName.
 func (x *ControllerElement) SfSymbolsName() string {
 	_r := x.inner.SfSymbolsName()
@@ -110,6 +130,8 @@ func (x *ControllerElement) SetSfSymbolsName(sfSymbolsName string) {
 	x.inner.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
 }
 
+// The element's localized name, taking input remapping into account. @note In almost all instances, you should use this over unmappedLocalizedName in your UI.
+//
 // LocalizedName calls the underlying LocalizedName.
 func (x *ControllerElement) LocalizedName() string {
 	_r := x.inner.LocalizedName()
@@ -124,6 +146,8 @@ func (x *ControllerElement) SetLocalizedName(localizedName string) {
 	x.inner.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
 }
 
+// The element's SF Symbols name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (sfSymbolsName is nil).
+//
 // UnmappedSfSymbolsName calls the underlying UnmappedSfSymbolsName.
 func (x *ControllerElement) UnmappedSfSymbolsName() string {
 	_r := x.inner.UnmappedSfSymbolsName()
@@ -138,6 +162,8 @@ func (x *ControllerElement) SetUnmappedSfSymbolsName(unmappedSfSymbolsName strin
 	x.inner.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
 }
 
+// The element's localized name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (localizedName is nil).
+//
 // UnmappedLocalizedName calls the underlying UnmappedLocalizedName.
 func (x *ControllerElement) UnmappedLocalizedName() string {
 	_r := x.inner.UnmappedLocalizedName()
@@ -152,6 +178,8 @@ func (x *ControllerElement) SetUnmappedLocalizedName(unmappedLocalizedName strin
 	x.inner.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
 }
 
+// A set of aliases that can be used to access this element with keyed subscript notation.
+//
 // Aliases calls the underlying Aliases.
 func (x *ControllerElement) Aliases() *foundation.NSSet[*foundation.NSString] {
 	return x.inner.Aliases()

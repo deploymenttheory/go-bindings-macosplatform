@@ -37,56 +37,78 @@ func NewInferenceGraph() *InferenceGraph {
 	return &InferenceGraph{inner: raw.MLCInferenceGraphFromID(_id)}
 }
 
+// @abstract   Add the list of inputs to the inference graph @param      inputs           The inputs @return     A boolean indicating success or failure
+//
 // AddInputs calls the underlying AddInputs.
 func (x *InferenceGraph) AddInputs(inputs *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor]) bool {
 	return x.inner.AddInputs(inputs)
 }
 
+// @abstract   Add the list of inputs to the inference graph @discussion Each input, loss label or label weights tensor is identified by a NSString. When the inference graph is executed, this NSString is used to identify which data object should be as input data for each tensor whose device memory needs to be updated before the graph is executed. @param      inputs                        The inputs @param      lossLabels               The loss label inputs @param      lossLabelWeights  The loss label weights @return     A boolean indicating success or failure
+//
 // AddInputsLossLabelsLossLabelWeights calls the underlying AddInputsLossLabelsLossLabelWeights.
 func (x *InferenceGraph) AddInputsLossLabelsLossLabelWeights(inputs *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], lossLabels *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], lossLabelWeights *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor]) bool {
 	return x.inner.AddInputsLossLabelsLossLabelWeights(inputs, lossLabels, lossLabelWeights)
 }
 
+// @abstract   Add the list of outputs to the inference graph @param      outputs           The outputs @return     A boolean indicating success or failure
+//
 // AddOutputs calls the underlying AddOutputs.
 func (x *InferenceGraph) AddOutputs(outputs *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor]) bool {
 	return x.inner.AddOutputs(outputs)
 }
 
+// @abstract   Compile the training graph for a device. @param      options     The compiler options to use when compiling the training graph @param      device       The MLCDevice object @return     A boolean indicating success or failure
+//
 // CompileWithOptionsDevice calls the underlying CompileWithOptionsDevice.
 func (x *InferenceGraph) CompileWithOptionsDevice(options MLCGraphCompilationOptions, device *raw.MLCDevice) bool {
 	return x.inner.CompileWithOptionsDevice(raw.MLCGraphCompilationOptions(options), device)
 }
 
+// @abstract   Compile the inference graph for a device. @discussion Specifying the list of constant tensors when we compile the graph allows MLCompute to perform additional optimizations at compile time. @param      options                      The compiler options to use when compiling the inference graph @param      device                        The MLCDevice object @param      inputTensors           The list of input tensors that are constants @param      inputTensorsData  The tensor data to be used with these constant input tensors @return     A boolean indicating success or failure
+//
 // CompileWithOptionsDeviceInputTensorsInputTensorsData calls the underlying CompileWithOptionsDeviceInputTensorsInputTensorsData.
 func (x *InferenceGraph) CompileWithOptionsDeviceInputTensorsInputTensorsData(options MLCGraphCompilationOptions, device *raw.MLCDevice, inputTensors *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], inputTensorsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData]) bool {
 	return x.inner.CompileWithOptionsDeviceInputTensorsInputTensorsData(raw.MLCGraphCompilationOptions(options), device, inputTensors, inputTensorsData)
 }
 
+// @abstract   Link mutiple inference graphs @discussion This is used to link subsequent inference graphs with first inference sub-graph. This method should be used when we have tensors shared by one or more layers in multiple sub-graphs @param      graphs     The list of inference graphs to link @return     A boolean indicating success or failure
+//
 // LinkWithGraphs calls the underlying LinkWithGraphs.
 func (x *InferenceGraph) LinkWithGraphs(graphs *foundation.NSArray[*raw.MLCInferenceGraph]) bool {
 	return x.inner.LinkWithGraphs(graphs)
 }
 
+// @abstract   Execute the inference graph with given input data @discussion Execute the inference graph given input data. If MLCExecutionOptionsSynchronous is specified in 'options', this method returns after the graph has been executed. Otherwise, this method returns after the graph has been queued for execution.  The completion handler  is called after the graph has finished execution. @param      inputsData                       The data objects to use for inputs @param      batchSize                         The batch size to use.  For a graph where batch size changes between layers this value must be 0. @param      options                             The execution options @param      completionHandler       The completion handler @return     A boolean indicating success or failure
+//
 // ExecuteWithInputsDataBatchSizeOptionsCompletionHandler calls the underlying ExecuteWithInputsDataBatchSizeOptionsCompletionHandler.
 func (x *InferenceGraph) ExecuteWithInputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
 	return x.inner.ExecuteWithInputsDataBatchSizeOptionsCompletionHandler(inputsData, batchSize, raw.MLCExecutionOptions(options), completionHandler)
 }
 
+// @abstract   Execute the inference graph with given input data @discussion Execute the inference graph given input data. If MLCExecutionOptionsSynchronous is specified in 'options', this method returns after the graph has been executed. Otherwise, this method returns after the graph has been queued for execution.  The completion handler  is called after the graph has finished execution. @param      inputsData                       The data objects to use for inputs @param      outputsData                     The data objects to use for outputs @param      batchSize                         The batch size to use.  For a graph where batch size changes between layers this value must be 0. @param      options                             The execution options @param      completionHandler       The completion handler @return     A boolean indicating success or failure
+//
 // ExecuteWithInputsDataOutputsDataBatchSizeOptionsCompletionHandler calls the underlying ExecuteWithInputsDataOutputsDataBatchSizeOptionsCompletionHandler.
 func (x *InferenceGraph) ExecuteWithInputsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
 	return x.inner.ExecuteWithInputsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData, outputsData, batchSize, raw.MLCExecutionOptions(options), completionHandler)
 }
 
+// @abstract   Execute the inference graph with given input data @discussion Execute the inference graph given input data. If MLCExecutionOptionsSynchronous is specified in 'options', this method returns after the graph has been executed. Otherwise, this method returns after the graph has been queued for execution.  The completion handler  is called after the graph has finished execution. @param      inputsData                       The data objects to use for inputs @param      lossLabelsData              The data objects to use for loss labels @param      lossLabelWeightsData The data objects to use for loss label weights @param      batchSize                         The batch size to use.  For a graph where batch size changes between layers this value must be 0. @param      options                             The execution options @param      completionHandler       The completion handler @return     A boolean indicating success or failure
+//
 // ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler calls the underlying ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler.
 func (x *InferenceGraph) ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
 	return x.inner.ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataBatchSizeOptionsCompletionHandler(inputsData, lossLabelsData, lossLabelWeightsData, batchSize, raw.MLCExecutionOptions(options), completionHandler)
 }
 
+// @abstract   Execute the inference graph with given input data @discussion Execute the inference graph given input data. If MLCExecutionOptionsSynchronous is specified in 'options', this method returns after the graph has been executed. Otherwise, this method returns after the graph has been queued for execution.  The completion handler  is called after the graph has finished execution. @param      inputsData                       The data objects to use for inputs @param      lossLabelsData              The data objects to use for loss labels @param      lossLabelWeightsData The data objects to use for loss label weights @param      outputsData                     The data objects to use for outputs @param      batchSize                         The batch size to use.  For a graph where batch size changes between layers this value must be 0. @param      options                             The execution options @param      completionHandler       The completion handler @return     A boolean indicating success or failure
+//
 // ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler calls the underlying ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler.
 func (x *InferenceGraph) ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], lossLabelWeightsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], outputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], batchSize uint, options MLCExecutionOptions, completionHandler func(*raw.MLCTensor, unsafe.Pointer, float64)) bool {
 	return x.inner.ExecuteWithInputsDataLossLabelsDataLossLabelWeightsDataOutputsDataBatchSizeOptionsCompletionHandler(inputsData, lossLabelsData, lossLabelWeightsData, outputsData, batchSize, raw.MLCExecutionOptions(options), completionHandler)
 }
 
+// @property   The device memory size used by the inference graph @abstract   Returns the total size in bytes of device memory used by all intermediate tensors in the inference graph @return     A NSUInteger value
+//
 // DeviceMemorySize calls the underlying DeviceMemorySize.
 func (x *InferenceGraph) DeviceMemorySize() uint {
 	return x.inner.DeviceMemorySize()

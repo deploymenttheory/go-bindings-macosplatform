@@ -39,149 +39,203 @@ func NewIKCameraDeviceView() *IKCameraDeviceView {
 	return &IKCameraDeviceView{inner: raw.IKCameraDeviceViewFromID(_id)}
 }
 
+// @property delegate @abstract Delegate of the IKCameraDeviceView.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithDelegate(delegate objc.ID) *IKCameraDeviceView {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @property cameraDevice @abstract the camera device.
+//
 // WithCameraDevice sets the cameraDevice property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithCameraDevice(cameraDevice *imagecapturecore.ICCameraDevice) *IKCameraDeviceView {
 	x.inner.SetCameraDevice(cameraDevice)
 	return x
 }
 
+// @property mode @abstract current display mode.
+//
 // WithMode sets the mode property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithMode(mode objc.ID) *IKCameraDeviceView {
 	x.inner.SetMode(mode)
 	return x
 }
 
+// @property hasDisplayModeTable @abstract support table view display mode.
+//
 // WithHasDisplayModeTable sets the hasDisplayModeTable property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithHasDisplayModeTable(hasDisplayModeTable bool) *IKCameraDeviceView {
 	x.inner.SetHasDisplayModeTable(hasDisplayModeTable)
 	return x
 }
 
+// @property hasDisplayModeIcon @abstract support icon view display mode.
+//
 // WithHasDisplayModeIcon sets the hasDisplayModeIcon property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithHasDisplayModeIcon(hasDisplayModeIcon bool) *IKCameraDeviceView {
 	x.inner.SetHasDisplayModeIcon(hasDisplayModeIcon)
 	return x
 }
 
+// @property downloadAllControlLabel @abstract label for the 'Download All' control - allows for example renaming to 'Import All'.
+//
 // WithDownloadAllControlLabel sets the downloadAllControlLabel property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithDownloadAllControlLabel(downloadAllControlLabel string) *IKCameraDeviceView {
 	x.inner.SetDownloadAllControlLabel(foundation.NSStringStringWithUTF8String(downloadAllControlLabel))
 	return x
 }
 
+// @property downloadSelectedControlLabel @abstract label for the 'Download Selected' control.
+//
 // WithDownloadSelectedControlLabel sets the downloadSelectedControlLabel property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithDownloadSelectedControlLabel(downloadSelectedControlLabel string) *IKCameraDeviceView {
 	x.inner.SetDownloadSelectedControlLabel(foundation.NSStringStringWithUTF8String(downloadSelectedControlLabel))
 	return x
 }
 
+// @property iconSize @abstract in icon mode: size of the image thumbnails.
+//
 // WithIconSize sets the iconSize property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithIconSize(iconSize uint) *IKCameraDeviceView {
 	x.inner.SetIconSize(iconSize)
 	return x
 }
 
+// @property transferMode @abstract transfer mode either file based - or - in memory.
+//
 // WithTransferMode sets the transferMode property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithTransferMode(transferMode objc.ID) *IKCameraDeviceView {
 	x.inner.SetTransferMode(transferMode)
 	return x
 }
 
+// @property displaysDownloadsDirectoryControl @abstract show a downloads directory control.
+//
 // WithDisplaysDownloadsDirectoryControl sets the displaysDownloadsDirectoryControl property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) *IKCameraDeviceView {
 	x.inner.SetDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl)
 	return x
 }
 
+// @property downloadsDirectory @abstract downloads directory.
+//
 // WithDownloadsDirectory sets the downloadsDirectory property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithDownloadsDirectory(downloadsDirectory string) *IKCameraDeviceView {
 	x.inner.SetDownloadsDirectory(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(downloadsDirectory)))
 	return x
 }
 
+// @property displaysPostProcessApplicationControl @abstract show a postprocessing application control.
+//
 // WithDisplaysPostProcessApplicationControl sets the displaysPostProcessApplicationControl property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) *IKCameraDeviceView {
 	x.inner.SetDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl)
 	return x
 }
 
+// @property postProcessApplication @abstract postprocessing application.
+//
 // WithPostProcessApplication sets the postProcessApplication property and returns the receiver for chaining.
 func (x *IKCameraDeviceView) WithPostProcessApplication(postProcessApplication string) *IKCameraDeviceView {
 	x.inner.SetPostProcessApplication(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(postProcessApplication)))
 	return x
 }
 
+// @method selectedIndexes @abstract current user selection.
+//
 // SelectedIndexes calls the underlying SelectedIndexes.
 func (x *IKCameraDeviceView) SelectedIndexes() *foundation.NSIndexSet {
 	return x.inner.SelectedIndexes()
 }
 
+// @method selectIndexes:byExtendingSelection: @abstract setting current user selection.
+//
 // SelectIndexesByExtendingSelection calls the underlying SelectIndexesByExtendingSelection.
 func (x *IKCameraDeviceView) SelectIndexesByExtendingSelection(indexes *foundation.NSIndexSet, extend bool) {
 	x.inner.SelectIndexesByExtendingSelection(indexes, extend)
 }
 
+// @method rotateLeft: @abstract rotate selected items left.
+//
 // RotateLeft calls the underlying RotateLeft.
 func (x *IKCameraDeviceView) RotateLeft(sender objc.ID) {
 	x.inner.RotateLeft(sender)
 }
 
+// @method rotateRight: @abstract rotate selected items right.
+//
 // RotateRight calls the underlying RotateRight.
 func (x *IKCameraDeviceView) RotateRight(sender objc.ID) {
 	x.inner.RotateRight(sender)
 }
 
+// @method deleteSelectedItems: @abstract delete selected items.
+//
 // DeleteSelectedItems calls the underlying DeleteSelectedItems.
 func (x *IKCameraDeviceView) DeleteSelectedItems(sender objc.ID) {
 	x.inner.DeleteSelectedItems(sender)
 }
 
+// @method downloadSelectedItems: @abstract download selected items.
+//
 // DownloadSelectedItems calls the underlying DownloadSelectedItems.
 func (x *IKCameraDeviceView) DownloadSelectedItems(sender objc.ID) {
 	x.inner.DownloadSelectedItems(sender)
 }
 
+// @method downloadAllItems: @abstract download all items.
+//
 // DownloadAllItems calls the underlying DownloadAllItems.
 func (x *IKCameraDeviceView) DownloadAllItems(sender objc.ID) {
 	x.inner.DownloadAllItems(sender)
 }
 
+// @method setCustomIconSizeSlider: @abstract provide your own NSSlider to resize item thumbnails
+//
 // SetCustomIconSizeSlider calls the underlying SetCustomIconSizeSlider.
 func (x *IKCameraDeviceView) SetCustomIconSizeSlider(slider *appkit.NSSlider) {
 	x.inner.SetCustomIconSizeSlider(slider)
 }
 
+// @method setCustomModeControl: @abstract provide your own control to toggle between IKCameraDeviceViewDisplayMode table / icon
+//
 // SetCustomModeControl calls the underlying SetCustomModeControl.
 func (x *IKCameraDeviceView) SetCustomModeControl(control *appkit.NSSegmentedControl) {
 	x.inner.SetCustomModeControl(control)
 }
 
+// @method setCustomActionButton: @abstract provide your own control to toggle between IKCameraDeviceViewDisplayMode table / icon
+//
 // SetCustomActionControl calls the underlying SetCustomActionControl.
 func (x *IKCameraDeviceView) SetCustomActionControl(control *appkit.NSSegmentedControl) {
 	x.inner.SetCustomActionControl(control)
 }
 
+// @method setCustomRotateButton: @abstract provide your own control to rotate items (multiple of 90º)
+//
 // SetCustomRotateControl calls the underlying SetCustomRotateControl.
 func (x *IKCameraDeviceView) SetCustomRotateControl(control *appkit.NSSegmentedControl) {
 	x.inner.SetCustomRotateControl(control)
 }
 
+// @method setCustomDeleteControl: @abstract provide your own control to delete selected items
+//
 // SetCustomDeleteControl calls the underlying SetCustomDeleteControl.
 func (x *IKCameraDeviceView) SetCustomDeleteControl(control *appkit.NSSegmentedControl) {
 	x.inner.SetCustomDeleteControl(control)
 }
 
+// @method setShowStatusInfoAsWindowSubtitle: @abstract display status info as window subtitle
+//
 // SetShowStatusInfoAsWindowSubtitle calls the underlying SetShowStatusInfoAsWindowSubtitle.
 func (x *IKCameraDeviceView) SetShowStatusInfoAsWindowSubtitle(value bool) {
 	x.inner.SetShowStatusInfoAsWindowSubtitle(value)
 }
 
+// @property delegate @abstract Delegate of the IKCameraDeviceView.
+//
 // Delegate calls the underlying Delegate.
 func (x *IKCameraDeviceView) Delegate() objc.ID {
 	return x.inner.Delegate()
@@ -192,6 +246,8 @@ func (x *IKCameraDeviceView) SetDelegate(delegate objc.ID) {
 	x.inner.SetDelegate(delegate)
 }
 
+// @property cameraDevice @abstract the camera device.
+//
 // CameraDevice calls the underlying CameraDevice.
 func (x *IKCameraDeviceView) CameraDevice() *imagecapturecore.ICCameraDevice {
 	return x.inner.CameraDevice()
@@ -202,6 +258,8 @@ func (x *IKCameraDeviceView) SetCameraDevice(cameraDevice *imagecapturecore.ICCa
 	x.inner.SetCameraDevice(cameraDevice)
 }
 
+// @property mode @abstract current display mode.
+//
 // Mode calls the underlying Mode.
 func (x *IKCameraDeviceView) Mode() objc.ID {
 	return x.inner.Mode()
@@ -212,6 +270,8 @@ func (x *IKCameraDeviceView) SetMode(mode objc.ID) {
 	x.inner.SetMode(mode)
 }
 
+// @property hasDisplayModeTable @abstract support table view display mode.
+//
 // HasDisplayModeTable calls the underlying HasDisplayModeTable.
 func (x *IKCameraDeviceView) HasDisplayModeTable() bool {
 	return x.inner.HasDisplayModeTable()
@@ -222,6 +282,8 @@ func (x *IKCameraDeviceView) SetHasDisplayModeTable(hasDisplayModeTable bool) {
 	x.inner.SetHasDisplayModeTable(hasDisplayModeTable)
 }
 
+// @property hasDisplayModeIcon @abstract support icon view display mode.
+//
 // HasDisplayModeIcon calls the underlying HasDisplayModeIcon.
 func (x *IKCameraDeviceView) HasDisplayModeIcon() bool {
 	return x.inner.HasDisplayModeIcon()
@@ -232,6 +294,8 @@ func (x *IKCameraDeviceView) SetHasDisplayModeIcon(hasDisplayModeIcon bool) {
 	x.inner.SetHasDisplayModeIcon(hasDisplayModeIcon)
 }
 
+// @property downloadAllControlLabel @abstract label for the 'Download All' control - allows for example renaming to 'Import All'.
+//
 // DownloadAllControlLabel calls the underlying DownloadAllControlLabel.
 func (x *IKCameraDeviceView) DownloadAllControlLabel() string {
 	_r := x.inner.DownloadAllControlLabel()
@@ -246,6 +310,8 @@ func (x *IKCameraDeviceView) SetDownloadAllControlLabel(downloadAllControlLabel 
 	x.inner.SetDownloadAllControlLabel(foundation.NSStringStringWithUTF8String(downloadAllControlLabel))
 }
 
+// @property downloadSelectedControlLabel @abstract label for the 'Download Selected' control.
+//
 // DownloadSelectedControlLabel calls the underlying DownloadSelectedControlLabel.
 func (x *IKCameraDeviceView) DownloadSelectedControlLabel() string {
 	_r := x.inner.DownloadSelectedControlLabel()
@@ -260,6 +326,8 @@ func (x *IKCameraDeviceView) SetDownloadSelectedControlLabel(downloadSelectedCon
 	x.inner.SetDownloadSelectedControlLabel(foundation.NSStringStringWithUTF8String(downloadSelectedControlLabel))
 }
 
+// @property iconSize @abstract in icon mode: size of the image thumbnails.
+//
 // IconSize calls the underlying IconSize.
 func (x *IKCameraDeviceView) IconSize() uint {
 	return x.inner.IconSize()
@@ -270,6 +338,8 @@ func (x *IKCameraDeviceView) SetIconSize(iconSize uint) {
 	x.inner.SetIconSize(iconSize)
 }
 
+// @property transferMode @abstract transfer mode either file based - or - in memory.
+//
 // TransferMode calls the underlying TransferMode.
 func (x *IKCameraDeviceView) TransferMode() objc.ID {
 	return x.inner.TransferMode()
@@ -280,6 +350,8 @@ func (x *IKCameraDeviceView) SetTransferMode(transferMode objc.ID) {
 	x.inner.SetTransferMode(transferMode)
 }
 
+// @property displaysDownloadsDirectoryControl @abstract show a downloads directory control.
+//
 // DisplaysDownloadsDirectoryControl calls the underlying DisplaysDownloadsDirectoryControl.
 func (x *IKCameraDeviceView) DisplaysDownloadsDirectoryControl() bool {
 	return x.inner.DisplaysDownloadsDirectoryControl()
@@ -290,6 +362,8 @@ func (x *IKCameraDeviceView) SetDisplaysDownloadsDirectoryControl(displaysDownlo
 	x.inner.SetDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl)
 }
 
+// @property downloadsDirectory @abstract downloads directory.
+//
 // DownloadsDirectory calls the underlying DownloadsDirectory.
 func (x *IKCameraDeviceView) DownloadsDirectory() *foundation.NSURL {
 	return x.inner.DownloadsDirectory()
@@ -300,6 +374,8 @@ func (x *IKCameraDeviceView) SetDownloadsDirectory(downloadsDirectory string) {
 	x.inner.SetDownloadsDirectory(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(downloadsDirectory)))
 }
 
+// @property displaysPostProcessApplicationControl @abstract show a postprocessing application control.
+//
 // DisplaysPostProcessApplicationControl calls the underlying DisplaysPostProcessApplicationControl.
 func (x *IKCameraDeviceView) DisplaysPostProcessApplicationControl() bool {
 	return x.inner.DisplaysPostProcessApplicationControl()
@@ -310,6 +386,8 @@ func (x *IKCameraDeviceView) SetDisplaysPostProcessApplicationControl(displaysPo
 	x.inner.SetDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl)
 }
 
+// @property postProcessApplication @abstract postprocessing application.
+//
 // PostProcessApplication calls the underlying PostProcessApplication.
 func (x *IKCameraDeviceView) PostProcessApplication() *foundation.NSURL {
 	return x.inner.PostProcessApplication()
@@ -320,21 +398,29 @@ func (x *IKCameraDeviceView) SetPostProcessApplication(postProcessApplication st
 	x.inner.SetPostProcessApplication(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(postProcessApplication)))
 }
 
+// @property canRotateSelectedItemsLeft @abstract indicates if the user selected items can be rotated left.
+//
 // CanRotateSelectedItemsLeft calls the underlying CanRotateSelectedItemsLeft.
 func (x *IKCameraDeviceView) CanRotateSelectedItemsLeft() bool {
 	return x.inner.CanRotateSelectedItemsLeft()
 }
 
+// @property canRotateSelectedItemsRight @abstract indicates if the user selected items can be rotated right.
+//
 // CanRotateSelectedItemsRight calls the underlying CanRotateSelectedItemsRight.
 func (x *IKCameraDeviceView) CanRotateSelectedItemsRight() bool {
 	return x.inner.CanRotateSelectedItemsRight()
 }
 
+// @property canDeleteSelectedItems @abstract indicates if the user selected items can be deleted.
+//
 // CanDeleteSelectedItems calls the underlying CanDeleteSelectedItems.
 func (x *IKCameraDeviceView) CanDeleteSelectedItems() bool {
 	return x.inner.CanDeleteSelectedItems()
 }
 
+// @property canDownloadSelectedItems @abstract indicates if the user selected items can be downloaded.
+//
 // CanDownloadSelectedItems calls the underlying CanDownloadSelectedItems.
 func (x *IKCameraDeviceView) CanDownloadSelectedItems() bool {
 	return x.inner.CanDownloadSelectedItems()

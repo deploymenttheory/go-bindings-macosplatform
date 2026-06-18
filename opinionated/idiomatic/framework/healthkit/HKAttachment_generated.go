@@ -38,11 +38,15 @@ func NewAttachment() *Attachment {
 	return &Attachment{inner: raw.HKAttachmentFromID(_id)}
 }
 
+// @property      identifier @abstract      A unique identifier of the receiver in the HealthKit database.
+//
 // Identifier calls the underlying Identifier.
 func (x *Attachment) Identifier() *foundation.NSUUID {
 	return x.inner.Identifier()
 }
 
+// @property      name @abstract      Represents the name of the file.
+//
 // Name calls the underlying Name.
 func (x *Attachment) Name() string {
 	_r := x.inner.Name()
@@ -52,21 +56,29 @@ func (x *Attachment) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      contentType @abstract      The Uniform Type of the file.
+//
 // ContentType calls the underlying ContentType.
 func (x *Attachment) ContentType() *uniformtypeidentifiers.UTType {
 	return x.inner.ContentType()
 }
 
+// @property      size @abstract      The size in bytes of the file.
+//
 // Size calls the underlying Size.
 func (x *Attachment) Size() int {
 	return x.inner.Size()
 }
 
+// @property      creationDate @abstract      The date the receiver was created.
+//
 // CreationDate calls the underlying CreationDate.
 func (x *Attachment) CreationDate() *foundation.NSDate {
 	return x.inner.CreationDate()
 }
 
+// @property      metadata @abstract      Extra information describing the attachment. @discussion    Keys must be NSString and values must be either NSString, NSNumber, or NSDate.
+//
 // Metadata calls the underlying Metadata.
 func (x *Attachment) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.Metadata()

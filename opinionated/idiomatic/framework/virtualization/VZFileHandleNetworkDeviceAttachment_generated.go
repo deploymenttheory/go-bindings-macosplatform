@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A network device that transmits raw network packets and frames using a datagram socket.
+//
 // FileHandleNetworkDeviceAttachment wraps [raw.VZFileHandleNetworkDeviceAttachment] with a fluent Go API.
 type FileHandleNetworkDeviceAttachment struct {
 	inner *raw.VZFileHandleNetworkDeviceAttachment
@@ -32,6 +34,8 @@ func FileHandleNetworkDeviceAttachmentFromID(id objc.ID) *FileHandleNetworkDevic
 	return &FileHandleNetworkDeviceAttachment{inner: raw.VZFileHandleNetworkDeviceAttachmentFromID(id)}
 }
 
+// Creates the attachment from a file handle that contains a connected datagram socket.
+//
 // NewFileHandleNetworkDeviceAttachmentWithFileHandle creates a new [FileHandleNetworkDeviceAttachment].
 func NewFileHandleNetworkDeviceAttachmentWithFileHandle(fileHandle *foundation.NSFileHandle) *FileHandleNetworkDeviceAttachment {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZFileHandleNetworkDeviceAttachment")), objc.RegisterName("alloc"))
@@ -39,17 +43,23 @@ func NewFileHandleNetworkDeviceAttachmentWithFileHandle(fileHandle *foundation.N
 	return &FileHandleNetworkDeviceAttachment{inner: raw.VZFileHandleNetworkDeviceAttachmentFromID(_id)}
 }
 
+// An integer value that indicates the maximum transmission unit (MTU) associated with this attachment.
+//
 // WithMaximumTransmissionUnit sets the maximumTransmissionUnit property and returns the receiver for chaining.
 func (x *FileHandleNetworkDeviceAttachment) WithMaximumTransmissionUnit(maximumTransmissionUnit int) *FileHandleNetworkDeviceAttachment {
 	x.inner.SetMaximumTransmissionUnit(maximumTransmissionUnit)
 	return x
 }
 
+// @abstract The file handle associated with this attachment.
+//
 // FileHandle calls the underlying FileHandle.
 func (x *FileHandleNetworkDeviceAttachment) FileHandle() *foundation.NSFileHandle {
 	return x.inner.FileHandle()
 }
 
+// @abstract The maximum transmission unit (MTU) associated with this attachment. @discussion The client side of the associated datagram socket must be properly configured with the appropriate values for `SO_SNDBUF`, and `SO_RCVBUF`, which can be set using the `setsockopt` system call. The value of `SO_RCVBUF` is expected to be at least double the value of `SO_SNDBUF`, and for optimal performance, the value of `SO_RCVBUF` is recommended to be four times the value of `SO_SNDBUF`. The default MTU is 1500. The maximum MTU allowed is 65535, and the minimum MTU allowed is 1500. An invalid MTU value will result in an invalid virtual machine configuration.
+//
 // MaximumTransmissionUnit calls the underlying MaximumTransmissionUnit.
 func (x *FileHandleNetworkDeviceAttachment) MaximumTransmissionUnit() int {
 	return x.inner.MaximumTransmissionUnit()

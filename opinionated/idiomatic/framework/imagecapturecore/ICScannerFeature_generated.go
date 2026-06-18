@@ -36,11 +36,15 @@ func NewScannerFeature() *ScannerFeature {
 	return &ScannerFeature{inner: raw.ICScannerFeatureFromID(_id)}
 }
 
+// @property type @abstract ￼Scanner feature type.
+//
 // Type calls the underlying Type.
 func (x *ScannerFeature) Type() ICScannerFeatureType {
 	return ICScannerFeatureType(x.inner.Type())
 }
 
+// @property internalName @abstract ￼The internal name of this feature.
+//
 // InternalName calls the underlying InternalName.
 func (x *ScannerFeature) InternalName() string {
 	_r := x.inner.InternalName()
@@ -50,6 +54,8 @@ func (x *ScannerFeature) InternalName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property humanReadableName @abstract The human readable name of this feature.
+//
 // HumanReadableName calls the underlying HumanReadableName.
 func (x *ScannerFeature) HumanReadableName() string {
 	_r := x.inner.HumanReadableName()
@@ -59,6 +65,8 @@ func (x *ScannerFeature) HumanReadableName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property tooltip @abstract ￼Tooltip text describing the feature.
+//
 // Tooltip calls the underlying Tooltip.
 func (x *ScannerFeature) Tooltip() string {
 	_r := x.inner.Tooltip()

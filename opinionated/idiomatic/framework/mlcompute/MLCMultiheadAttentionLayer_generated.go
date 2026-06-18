@@ -37,18 +37,24 @@ func NewMultiheadAttentionLayer() *MultiheadAttentionLayer {
 	return &MultiheadAttentionLayer{inner: raw.MLCMultiheadAttentionLayerFromID(_id)}
 }
 
+// @property   label @abstract   A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MultiheadAttentionLayer) WithLabel(label string) *MultiheadAttentionLayer {
 	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   isDebuggingEnabled @abstract   A flag to identify if we want to debug this layer when executing a graph that includes this layer @discussion If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
+//
 // WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
 func (x *MultiheadAttentionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *MultiheadAttentionLayer {
 	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
 	return x
 }
 
+// @property   descriptor @abstract   The multi-head attention descriptor
+//
 // Descriptor calls the underlying Descriptor.
 func (x *MultiheadAttentionLayer) Descriptor() *MultiheadAttentionDescriptor {
 	_r := x.inner.Descriptor()
@@ -58,6 +64,8 @@ func (x *MultiheadAttentionLayer) Descriptor() *MultiheadAttentionDescriptor {
 	return &MultiheadAttentionDescriptor{inner: _r}
 }
 
+// @property   weights @abstract   The weights of query, key, value and output projections
+//
 // Weights returns the collection as a Go slice.
 func (x *MultiheadAttentionLayer) Weights() []*Tensor {
 	arr := x.inner.Weights()
@@ -69,6 +77,8 @@ func (x *MultiheadAttentionLayer) Weights() []*Tensor {
 	})
 }
 
+// @property   biases @abstract   The biases of query, key, value and output projections
+//
 // Biases returns the collection as a Go slice.
 func (x *MultiheadAttentionLayer) Biases() []*Tensor {
 	arr := x.inner.Biases()
@@ -80,6 +90,8 @@ func (x *MultiheadAttentionLayer) Biases() []*Tensor {
 	})
 }
 
+// @property   attentionBiases @abstract   The biases added to key and value
+//
 // AttentionBiases returns the collection as a Go slice.
 func (x *MultiheadAttentionLayer) AttentionBiases() []*Tensor {
 	arr := x.inner.AttentionBiases()
@@ -91,6 +103,8 @@ func (x *MultiheadAttentionLayer) AttentionBiases() []*Tensor {
 	})
 }
 
+// @property   weightsParameters @abstract   The weights tensor parameters used for optimizer update
+//
 // WeightsParameters returns the collection as a Go slice.
 func (x *MultiheadAttentionLayer) WeightsParameters() []*TensorParameter {
 	arr := x.inner.WeightsParameters()
@@ -102,6 +116,8 @@ func (x *MultiheadAttentionLayer) WeightsParameters() []*TensorParameter {
 	})
 }
 
+// @property   biasesParameters @abstract   The biases tensor parameters used for optimizer update
+//
 // BiasesParameters returns the collection as a Go slice.
 func (x *MultiheadAttentionLayer) BiasesParameters() []*TensorParameter {
 	arr := x.inner.BiasesParameters()

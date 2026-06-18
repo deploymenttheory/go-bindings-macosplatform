@@ -36,21 +36,29 @@ func NewAudioIONode() *AudioIONode {
 	return &AudioIONode{inner: raw.AVAudioIONodeFromID(_id)}
 }
 
+// @method setVoiceProcessingEnabled:error: @abstract Enable or disable voice processing on the IO node. @param enabled Whether voice processing is to be enabled. @param outError On exit, if the IO node cannot enable or diable voice processing, a description of the error @return YES for success @discussion If enabled, the input node does signal processing on the incoming audio (taking out any of the audio that is played from the device at a given time from the incoming audio). Disabling this mode on either of the IO nodes automatically disabled it on the other IO node. Voice processing requires both input and output nodes to be in the voice processing mode. Enabling this mode on either of the IO nodes automatically enables it on the other IO node. Voice processing is only supported when the engine is rendering to the audio device and not in the manual rendering mode. Voice processing can only be be enabled or disabled when the engine is in a stopped state. The output format of the input node and the input format of the output node have to be the same and they can only be changed when the engine is in a stopped state.
+//
 // SetVoiceProcessingEnabledError calls the underlying SetVoiceProcessingEnabledError.
 func (x *AudioIONode) SetVoiceProcessingEnabledError(enabled bool) (bool, error) {
 	return x.inner.SetVoiceProcessingEnabledError(enabled)
 }
 
+// @property presentationLatency @abstract The presentation or hardware latency, applicable when the engine is rendering to/from an audio device. @discussion This corresponds to kAudioDevicePropertyLatency and kAudioStreamPropertyLatency. See <CoreAudio/AudioHardwareBase.h>.
+//
 // PresentationLatency calls the underlying PresentationLatency.
 func (x *AudioIONode) PresentationLatency() float64 {
 	return x.inner.PresentationLatency()
 }
 
+// @property audioUnit @abstract The node's underlying AudioUnit, if any. @discussion This is only necessary for certain advanced usages.
+//
 // AudioUnit calls the underlying AudioUnit.
 func (x *AudioIONode) AudioUnit() *carboncore.ComponentInstanceRecord {
 	return x.inner.AudioUnit()
 }
 
+// @property voiceProcessingEnabled @abstract Indicates whether voice processing is enabled.
+//
 // IsVoiceProcessingEnabled calls the underlying IsVoiceProcessingEnabled.
 func (x *AudioIONode) IsVoiceProcessingEnabled() bool {
 	return x.inner.IsVoiceProcessingEnabled()

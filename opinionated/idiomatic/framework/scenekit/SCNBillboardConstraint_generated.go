@@ -35,24 +35,32 @@ func NewBillboardConstraint() *BillboardConstraint {
 	return &BillboardConstraint{inner: raw.SCNBillboardConstraintFromID(_id)}
 }
 
+// @property freeAxes @abstract Specifies the axes on which the billboarding orientation operates. Defaults to SCNBillboardAxisAll.
+//
 // WithFreeAxes sets the freeAxes property and returns the receiver for chaining.
 func (x *BillboardConstraint) WithFreeAxes(freeAxes SCNBillboardAxis) *BillboardConstraint {
 	x.inner.SetFreeAxes(raw.SCNBillboardAxis(freeAxes))
 	return x
 }
 
+// @property enable @abstract Determines whether the constraint is enabled or not. Defaults to YES.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *BillboardConstraint) WithEnabled(enabled bool) *BillboardConstraint {
 	x.inner.SCNConstraint.SetEnabled(enabled)
 	return x
 }
 
+// @property influenceFactor @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
+//
 // WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
 func (x *BillboardConstraint) WithInfluenceFactor(influenceFactor float64) *BillboardConstraint {
 	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
 	return x
 }
 
+// @property incremental @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+//
 // WithIncremental sets the incremental property and returns the receiver for chaining.
 func (x *BillboardConstraint) WithIncremental(incremental bool) *BillboardConstraint {
 	x.inner.SCNConstraint.SetIncremental(incremental)

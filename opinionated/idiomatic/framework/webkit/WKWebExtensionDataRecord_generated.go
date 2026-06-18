@@ -37,11 +37,15 @@ func NewWKWebExtensionDataRecord() *WKWebExtensionDataRecord {
 	return &WKWebExtensionDataRecord{inner: raw.WKWebExtensionDataRecordFromID(_id)}
 }
 
+// @abstract Retrieves the size in bytes of the specific data types in this data record. @param dataTypes The set of data types to measure the size for. @return The total size of the specified data types. @seealso totalSizeInBytes
+//
 // SizeInBytesOfTypes calls the underlying SizeInBytesOfTypes.
 func (x *WKWebExtensionDataRecord) SizeInBytesOfTypes(dataTypes *foundation.NSSet[*foundation.NSString]) uint {
 	return x.inner.SizeInBytesOfTypes(dataTypes)
 }
 
+// @abstract The display name for the web extension to which this data record belongs.
+//
 // DisplayName calls the underlying DisplayName.
 func (x *WKWebExtensionDataRecord) DisplayName() string {
 	_r := x.inner.DisplayName()
@@ -51,6 +55,8 @@ func (x *WKWebExtensionDataRecord) DisplayName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Unique identifier for the web extension context to which this data record belongs.
+//
 // UniqueIdentifier calls the underlying UniqueIdentifier.
 func (x *WKWebExtensionDataRecord) UniqueIdentifier() string {
 	_r := x.inner.UniqueIdentifier()
@@ -60,16 +66,22 @@ func (x *WKWebExtensionDataRecord) UniqueIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The set of data types contained in this data record.
+//
 // ContainedDataTypes calls the underlying ContainedDataTypes.
 func (x *WKWebExtensionDataRecord) ContainedDataTypes() *foundation.NSSet[*foundation.NSString] {
 	return x.inner.ContainedDataTypes()
 }
 
+// @abstract An array of errors that may have occurred when either calculating or deleting storage.
+//
 // Errors calls the underlying Errors.
 func (x *WKWebExtensionDataRecord) Errors() *foundation.NSArray[objc.ID] {
 	return x.inner.Errors()
 }
 
+// @abstract The total size in bytes of all data types contained in this data record. @seealso sizeInBytesOfTypes:
+//
 // TotalSizeInBytes calls the underlying TotalSizeInBytes.
 func (x *WKWebExtensionDataRecord) TotalSizeInBytes() uint {
 	return x.inner.TotalSizeInBytes()

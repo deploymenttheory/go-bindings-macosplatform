@@ -7,7 +7,9 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTL4CompilerTaskOptions wraps [raw.MTL4CompilerTaskOptions] with a fluent Go API.
@@ -42,15 +44,24 @@ func (x *MTL4CompilerTaskOptions) LookupArchives() *foundation.NSArray[raw.MTL4A
 }
 
 // SetLookupArchives calls the underlying SetLookupArchives.
-func (x *MTL4CompilerTaskOptions) SetLookupArchives(lookupArchives *foundation.NSArray[raw.MTL4Archive]) {
-	x.inner.SetLookupArchives(lookupArchives)
+func (x *MTL4CompilerTaskOptions) SetLookupArchives(lookupArchives ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(lookupArchives))
+	for _i, _v := range lookupArchives {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTL4Archive]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTL4Archive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetLookupArchives(_arg0)
 }
 
 // MTL4CompilerTaskOptionsable is the interface implemented by [MTL4CompilerTaskOptions], for mocking and DI.
 type MTL4CompilerTaskOptionsable interface {
 	Unwrap() *raw.MTL4CompilerTaskOptions
 	LookupArchives() *foundation.NSArray[raw.MTL4Archive]
-	SetLookupArchives(lookupArchives *foundation.NSArray[raw.MTL4Archive])
+	SetLookupArchives(lookupArchives ...purego.IDer)
 }
 
 var _ MTL4CompilerTaskOptionsable = (*MTL4CompilerTaskOptions)(nil)

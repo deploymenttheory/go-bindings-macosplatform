@@ -37,76 +37,106 @@ func NewAuthorizationView() *AuthorizationView {
 	return &AuthorizationView{inner: raw.SFAuthorizationViewFromID(_id)}
 }
 
+// @method setString: @abstract A convenience method to specify an authorization rights set containing a single item with the name set to the specified string. @param authorizationString Authorization string.
+//
 // SetString calls the underlying SetString.
 func (x *AuthorizationView) SetString(authorizationString string) {
 	x.inner.SetString(authorizationString)
 }
 
+// @method setAuthorizationRights: @abstract Sets the authorization rights for this view. @param authorizationRights Authorization rights.
+//
 // SetAuthorizationRights calls the underlying SetAuthorizationRights.
 func (x *AuthorizationView) SetAuthorizationRights(authorizationRights *security.AuthorizationItemSet) {
 	x.inner.SetAuthorizationRights(authorizationRights)
 }
 
+// @method authorizationRights @abstract Returns the authorization rights for this view.
+//
 // AuthorizationRights calls the underlying AuthorizationRights.
 func (x *AuthorizationView) AuthorizationRights() *security.AuthorizationItemSet {
 	return x.inner.AuthorizationRights()
 }
 
+// @method authorization @abstract Returns the authorization object associated with this view.
+//
 // Authorization calls the underlying Authorization.
 func (x *AuthorizationView) Authorization() *securityfoundation.SFAuthorization {
 	return x.inner.Authorization()
 }
 
+// @method updateStatus: @abstract This method is called when the state of the authorization object has changed. @param inSender The action that is marked for updateStatus.
+//
 // UpdateStatus calls the underlying UpdateStatus.
 func (x *AuthorizationView) UpdateStatus(inSender objc.ID) bool {
 	return x.inner.UpdateStatus(inSender)
 }
 
+// @method setAutoupdate:
+//
 // SetAutoupdate calls the underlying SetAutoupdate.
 func (x *AuthorizationView) SetAutoupdate(autoupdate bool) {
 	x.inner.SetAutoupdate(autoupdate)
 }
 
+// @method setAutoUpdate:interval:
+//
 // SetAutoupdateInterval calls the underlying SetAutoupdateInterval.
 func (x *AuthorizationView) SetAutoupdateInterval(autoupdate bool, interval float64) {
 	x.inner.SetAutoupdateInterval(autoupdate, interval)
 }
 
+// @method authorizationState @abstract Returns the current state of the authorization view.
+//
 // AuthorizationState calls the underlying AuthorizationState.
 func (x *AuthorizationView) AuthorizationState() SFAuthorizationViewState {
 	return SFAuthorizationViewState(x.inner.AuthorizationState())
 }
 
+// @method setEnabled: @abstract Sets the current state of the authorization view. @param enabled Enable flag.
+//
 // SetEnabled calls the underlying SetEnabled.
 func (x *AuthorizationView) SetEnabled(enabled bool) {
 	x.inner.SetEnabled(enabled)
 }
 
+// @method isEnabled @abstract Indicates if the authorization view is enabled or disabled.
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *AuthorizationView) IsEnabled() bool {
 	return x.inner.IsEnabled()
 }
 
+// @method setFlags: @abstract Sets the current authorization flags for the view. @param flags Authorization flags.
+//
 // SetFlags calls the underlying SetFlags.
 func (x *AuthorizationView) SetFlags(flags security.AuthorizationFlags) {
 	x.inner.SetFlags(flags)
 }
 
+// @method setDelegate: @abstract Sets the delegate for this authorization view. If you want to hear state changes (for example, the user clicked the button), set your delegate and implement the delegate methods mentioned for SFAuthorizationViewDelegate @param delegate The client's delegate object.
+//
 // SetDelegate calls the underlying SetDelegate.
 func (x *AuthorizationView) SetDelegate(delegate objc.ID) {
 	x.inner.SetDelegate(delegate)
 }
 
+// @method delegate @abstract
+//
 // Delegate calls the underlying Delegate.
 func (x *AuthorizationView) Delegate() objc.ID {
 	return x.inner.Delegate()
 }
 
+// @method authorize: @abstract
+//
 // Authorize calls the underlying Authorize.
 func (x *AuthorizationView) Authorize(inSender objc.ID) bool {
 	return x.inner.Authorize(inSender)
 }
 
+// @method deauthorize: @abstract
+//
 // Deauthorize calls the underlying Deauthorize.
 func (x *AuthorizationView) Deauthorize(inSender objc.ID) bool {
 	return x.inner.Deauthorize(inSender)

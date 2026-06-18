@@ -37,6 +37,8 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialAssertion() *AuthorizationSec
 	return &AuthorizationSecurityKeyPublicKeyCredentialAssertion{inner: raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertionFromID(_id)}
 }
 
+// Indicates that this assertion used the appid WebAuthn extension. This can only happen if the requesting app is a web browser and requested to use this extension.
+//
 // AppID calls the underlying AppID.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertion) AppID() bool {
 	return x.inner.AppID()

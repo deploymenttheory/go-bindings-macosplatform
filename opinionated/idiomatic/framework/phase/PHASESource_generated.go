@@ -31,6 +31,8 @@ func SourceFromID(id objc.ID) *Source {
 	return &Source{inner: raw.PHASESourceFromID(id)}
 }
 
+// @method initWithEngine: @abstract Initialize a new point source.
+//
 // NewSourceWithEngine creates a new [Source].
 func NewSourceWithEngine(engine *raw.PHASEEngine) *Source {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASESource")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewSourceWithEngine(engine *raw.PHASEEngine) *Source {
 	return &Source{inner: raw.PHASESourceFromID(_id)}
 }
 
+// @method initWithEngine:shapes: @abstract Initialize a new volumetric source with shapes. @param shapes The shape(s) of the source within the world @discussion The shapes array cannot be empty, otherwise an exception is thrown. @note This function is thread-safe. Clients can safely run this function to create multiple sources from multiple threads, if required.
+//
 // NewSourceWithEngineShapes creates a new [Source].
 func NewSourceWithEngineShapes(engine *raw.PHASEEngine, shapes *foundation.NSArray[*raw.PHASEShape]) *Source {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASESource")), objc.RegisterName("alloc"))
@@ -45,12 +49,16 @@ func NewSourceWithEngineShapes(engine *raw.PHASEEngine, shapes *foundation.NSArr
 	return &Source{inner: raw.PHASESourceFromID(_id)}
 }
 
+// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
+//
 // WithGain sets the gain property and returns the receiver for chaining.
 func (x *Source) WithGain(gain float64) *Source {
 	x.inner.SetGain(gain)
 	return x
 }
 
+// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
+//
 // Gain calls the underlying Gain.
 func (x *Source) Gain() float64 {
 	return x.inner.Gain()
@@ -61,6 +69,8 @@ func (x *Source) SetGain(gain float64) {
 	x.inner.SetGain(gain)
 }
 
+// @property shapes @abstract Array of shapes associated with this source.
+//
 // Shapes returns the collection as a Go slice.
 func (x *Source) Shapes() []*Shape {
 	arr := x.inner.Shapes()

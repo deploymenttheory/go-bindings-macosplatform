@@ -35,6 +35,8 @@ func NewSymbolEffectOptions() *SymbolEffectOptions {
 	return &SymbolEffectOptions{inner: raw.NSSymbolEffectOptionsFromID(_id)}
 }
 
+// Return a copy of the options that prefers to repeat indefinitely.
+//
 // OptionsWithRepeating calls the underlying OptionsWithRepeating.
 func (x *SymbolEffectOptions) OptionsWithRepeating() *SymbolEffectOptions {
 	_r := x.inner.OptionsWithRepeating()
@@ -44,6 +46,8 @@ func (x *SymbolEffectOptions) OptionsWithRepeating() *SymbolEffectOptions {
 	return &SymbolEffectOptions{inner: _r}
 }
 
+// Return a copy of the options that prefers not to repeat.
+//
 // OptionsWithNonRepeating calls the underlying OptionsWithNonRepeating.
 func (x *SymbolEffectOptions) OptionsWithNonRepeating() *SymbolEffectOptions {
 	_r := x.inner.OptionsWithNonRepeating()
@@ -53,6 +57,8 @@ func (x *SymbolEffectOptions) OptionsWithNonRepeating() *SymbolEffectOptions {
 	return &SymbolEffectOptions{inner: _r}
 }
 
+// Return a copy of the options setting a preferred repeat count. - Parameter count: The preferred number of times to play the effect. Very large or small values may be clamped. - Returns: A new options object with the preferred repeat count.
+//
 // OptionsWithRepeatCount calls the underlying OptionsWithRepeatCount.
 func (x *SymbolEffectOptions) OptionsWithRepeatCount(count int) *SymbolEffectOptions {
 	_r := x.inner.OptionsWithRepeatCount(count)
@@ -62,6 +68,8 @@ func (x *SymbolEffectOptions) OptionsWithRepeatCount(count int) *SymbolEffectOpt
 	return &SymbolEffectOptions{inner: _r}
 }
 
+// Return a copy of the options setting the preferred speed multiplier. - Parameter speed: The preferred speed multiplier to play the effect with. The default multiplier is `1.0`. Very large or small values may be clamped. - Returns: A new instance with the preferred speed multiplier.
+//
 // OptionsWithSpeed calls the underlying OptionsWithSpeed.
 func (x *SymbolEffectOptions) OptionsWithSpeed(speed float64) *SymbolEffectOptions {
 	_r := x.inner.OptionsWithSpeed(speed)
@@ -71,6 +79,8 @@ func (x *SymbolEffectOptions) OptionsWithSpeed(speed float64) *SymbolEffectOptio
 	return &SymbolEffectOptions{inner: _r}
 }
 
+// Return a copy of the options setting a preferred repeat behavior. - Parameter behavior: The preferred behavior when the effect is repeated. - Returns: A new options object with the preferred repeat behavior.
+//
 // OptionsWithRepeatBehavior calls the underlying OptionsWithRepeatBehavior.
 func (x *SymbolEffectOptions) OptionsWithRepeatBehavior(behavior *raw.NSSymbolEffectOptionsRepeatBehavior) *SymbolEffectOptions {
 	_r := x.inner.OptionsWithRepeatBehavior(behavior)

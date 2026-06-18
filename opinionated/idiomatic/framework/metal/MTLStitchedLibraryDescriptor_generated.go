@@ -56,6 +56,8 @@ func (x *StitchedLibraryDescriptor) WithFunctionGraphs(items ...*raw.MTLFunction
 	return x
 }
 
+// @property options @abstract The options to use for this new MTLLibrary.
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *StitchedLibraryDescriptor) WithOptions(options MTLStitchedLibraryOptions) *StitchedLibraryDescriptor {
 	x.inner.SetOptions(raw.MTLStitchedLibraryOptions(options))
@@ -84,20 +86,42 @@ func (x *StitchedLibraryDescriptor) Functions() *foundation.NSArray[raw.MTLFunct
 }
 
 // SetFunctions calls the underlying SetFunctions.
-func (x *StitchedLibraryDescriptor) SetFunctions(functions *foundation.NSArray[raw.MTLFunction]) {
-	x.inner.SetFunctions(functions)
+func (x *StitchedLibraryDescriptor) SetFunctions(functions ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(functions))
+	for _i, _v := range functions {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTLFunction]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTLFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetFunctions(_arg0)
 }
 
+// @property binaryArchives @abstract The array of archives to be searched. @discussion Binary archives to be searched for precompiled stitched libraries during the compilation of this library.
+//
 // BinaryArchives calls the underlying BinaryArchives.
 func (x *StitchedLibraryDescriptor) BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive] {
 	return x.inner.BinaryArchives()
 }
 
 // SetBinaryArchives calls the underlying SetBinaryArchives.
-func (x *StitchedLibraryDescriptor) SetBinaryArchives(binaryArchives *foundation.NSArray[raw.MTLBinaryArchive]) {
-	x.inner.SetBinaryArchives(binaryArchives)
+func (x *StitchedLibraryDescriptor) SetBinaryArchives(binaryArchives ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(binaryArchives))
+	for _i, _v := range binaryArchives {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTLBinaryArchive]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTLBinaryArchive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetBinaryArchives(_arg0)
 }
 
+// @property options @abstract The options to use for this new MTLLibrary.
+//
 // Options calls the underlying Options.
 func (x *StitchedLibraryDescriptor) Options() MTLStitchedLibraryOptions {
 	return MTLStitchedLibraryOptions(x.inner.Options())
@@ -116,9 +140,9 @@ type StitchedLibraryDescriptorable interface {
 	FunctionGraphs() []*FunctionStitchingGraph
 	SetFunctionGraphs(functionGraphs *foundation.NSArray[*raw.MTLFunctionStitchingGraph])
 	Functions() *foundation.NSArray[raw.MTLFunction]
-	SetFunctions(functions *foundation.NSArray[raw.MTLFunction])
+	SetFunctions(functions ...purego.IDer)
 	BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive]
-	SetBinaryArchives(binaryArchives *foundation.NSArray[raw.MTLBinaryArchive])
+	SetBinaryArchives(binaryArchives ...purego.IDer)
 	Options() MTLStitchedLibraryOptions
 	SetOptions(options MTLStitchedLibraryOptions)
 }

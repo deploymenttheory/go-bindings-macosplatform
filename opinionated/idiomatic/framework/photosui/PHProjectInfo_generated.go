@@ -36,11 +36,15 @@ func NewProjectInfo() *ProjectInfo {
 	return &ProjectInfo{inner: raw.PHProjectInfoFromID(_id)}
 }
 
+// Source from which the project was created.
+//
 // CreationSource calls the underlying CreationSource.
 func (x *ProjectInfo) CreationSource() PHProjectCreationSource {
 	return PHProjectCreationSource(x.inner.CreationSource())
 }
 
+// Selected projectType value from the extensions options as defined in -[PHProjectExtensionController supportedProjectTypes]. See PHProjectExtensionController.h for more information on configuring the options.
+//
 // ProjectType calls the underlying ProjectType.
 func (x *ProjectInfo) ProjectType() string {
 	_r := x.inner.ProjectType()
@@ -50,6 +54,8 @@ func (x *ProjectInfo) ProjectType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Array of project sections each containing one or more PHProjectSectionContent objects.
+//
 // Sections returns the collection as a Go slice.
 func (x *ProjectInfo) Sections() []*ProjectSection {
 	arr := x.inner.Sections()
@@ -61,16 +67,22 @@ func (x *ProjectInfo) Sections() []*ProjectSection {
 	})
 }
 
+// The following properties are only used when the user creates a new project from an existing Apple Print Product. YES if the source project had branding enabled.
+//
 // BrandingEnabled calls the underlying BrandingEnabled.
 func (x *ProjectInfo) BrandingEnabled() bool {
 	return x.inner.BrandingEnabled()
 }
 
+// YES if the source project had page numbers enabled.
+//
 // PageNumbersEnabled calls the underlying PageNumbersEnabled.
 func (x *ProjectInfo) PageNumbersEnabled() bool {
 	return x.inner.PageNumbersEnabled()
 }
 
+// The product identifier of the originating Apple Print Product.
+//
 // ProductIdentifier calls the underlying ProductIdentifier.
 func (x *ProjectInfo) ProductIdentifier() string {
 	_r := x.inner.ProductIdentifier()
@@ -80,6 +92,8 @@ func (x *ProjectInfo) ProductIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The product theme identifier of the originating Apple Print Product.
+//
 // ThemeIdentifier calls the underlying ThemeIdentifier.
 func (x *ProjectInfo) ThemeIdentifier() string {
 	_r := x.inner.ThemeIdentifier()

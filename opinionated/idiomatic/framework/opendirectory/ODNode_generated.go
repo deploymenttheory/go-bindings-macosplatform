@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// @class       ODNode @abstract    This class is used to work with OpenDirectory nodes. @discussion  OpenDirectory uses nodes to represent different sources of directory information, via the local disk, LDAP, etc.
+//
 // Node wraps [raw.ODNode] with a fluent Go API.
 type Node struct {
 	inner *raw.ODNode
@@ -32,6 +34,8 @@ func NodeFromID(id objc.ID) *Node {
 	return &Node{inner: raw.ODNodeFromID(id)}
 }
 
+// @method     initWithSession:type:error: @abstract   Initialize an ODNode instance of the given type, optionally in a specific session. @discussion initialize instance of an ODNode with a provided ODSession and ODNodeType.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // NewNodeWithSessionTypeError creates a new [Node].
 func NewNodeWithSessionTypeError(inSession *raw.ODSession, inType uint32) (*Node, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ODNode")), objc.RegisterName("alloc"))
@@ -43,6 +47,8 @@ func NewNodeWithSessionTypeError(inSession *raw.ODSession, inType uint32) (*Node
 	return &Node{inner: raw.ODNodeFromID(_id)}, nil
 }
 
+// @method     initWithSession:name:error: @abstract   Initialize an ODNode instance with the given name, optionally in a specific session. @discussion initialize instance of an ODNode with a provided ODSession and node name.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // NewNodeWithSessionNameError creates a new [Node].
 func NewNodeWithSessionNameError(inSession *raw.ODSession, inName string) (*Node, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ODNode")), objc.RegisterName("alloc"))
@@ -54,46 +60,64 @@ func NewNodeWithSessionNameError(inSession *raw.ODSession, inName string) (*Node
 	return &Node{inner: raw.ODNodeFromID(_id)}, nil
 }
 
+// @method     subnodeNamesAndReturnError: @abstract   Returns NSArray of node names for this node, which may contain sub-nodes or search policy nodes @discussion Returns NSArray of node names for this node, which may contain sub-nodes or search policy nodes. Commonly used with Search policy nodes.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // SubnodeNamesAndReturnError calls the underlying SubnodeNamesAndReturnError.
 func (x *Node) SubnodeNamesAndReturnError() (*foundation.NSArray[objc.ID], error) {
 	return x.inner.SubnodeNamesAndReturnError()
 }
 
+// @method     unreachableSubnodeNamesAndReturnError: @abstract   Will return NSArray of names of subnodes that are not currently reachable. @discussion Will return NSArray of names of subnodes that are not currently reachable.  Commonly used with Search policy nodes to determine if any nodes are currently unreachable, but may also return other subnodes if the OpenDirectory plugin supports.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // UnreachableSubnodeNamesAndReturnError calls the underlying UnreachableSubnodeNamesAndReturnError.
 func (x *Node) UnreachableSubnodeNamesAndReturnError() (*foundation.NSArray[objc.ID], error) {
 	return x.inner.UnreachableSubnodeNamesAndReturnError()
 }
 
+// @method     nodeDetails:error: @abstract   Returns a dictionary of information about the instance of ODNode @discussion Returns a dictionary of information about the instance of ODNode.  Details such as Trust information (kODAttributeTypeTrustInformation) or other Node details can be retrieved.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // NodeDetailsForKeysError calls the underlying NodeDetailsForKeysError.
 func (x *Node) NodeDetailsForKeysError(inKeys *foundation.NSArray[objc.ID]) (*foundation.NSDictionary[objc.ID, objc.ID], error) {
 	return x.inner.NodeDetailsForKeysError(inKeys)
 }
 
+// @method     supportedRecordTypesAndReturnError: @abstract   Returns a NSArray of the record types supported by this node. @discussion Returns a NSArray of the record types supported by this node.  If node does not support the check then all possible types will be returned.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // SupportedRecordTypesAndReturnError calls the underlying SupportedRecordTypesAndReturnError.
 func (x *Node) SupportedRecordTypesAndReturnError() (*foundation.NSArray[objc.ID], error) {
 	return x.inner.SupportedRecordTypesAndReturnError()
 }
 
+// @method     supportedAttributesForRecordType:error: @abstract   Will return a list of attribute types supported for that attribute if possible @discussion Will return a list of attribute types supported for that attribute if possible.  If no specific types are available, then all possible values will be returned instead.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // SupportedAttributesForRecordTypeError calls the underlying SupportedAttributesForRecordTypeError.
 func (x *Node) SupportedAttributesForRecordTypeError(inRecordType *foundation.NSString) (*foundation.NSArray[objc.ID], error) {
 	return x.inner.SupportedAttributesForRecordTypeError(inRecordType)
 }
 
+// @method     setCredentialsWithRecordType:recordName:password:error: @abstract   Sets the credentials for interaction with the ODNode @discussion Sets the credentials for interaction with the ODNode.  Record references, etc. will use these credentials to query or change data.  Setting the credentials on a node referenced by other OD object types will change the credentials for all for all references.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // SetCredentialsWithRecordTypeRecordNamePasswordError calls the underlying SetCredentialsWithRecordTypeRecordNamePasswordError.
 func (x *Node) SetCredentialsWithRecordTypeRecordNamePasswordError(inRecordType *foundation.NSString, inRecordName string, inPassword string) (bool, error) {
 	return x.inner.SetCredentialsWithRecordTypeRecordNamePasswordError(inRecordType, foundation.NSStringStringWithUTF8String(inRecordName), foundation.NSStringStringWithUTF8String(inPassword))
 }
 
+// @method     setCredentialsWithRecordType:authType:authItems:outAuthItems:context:error: @abstract   Allows use of other OpenDirectory types of authentications to set the credentials for an ODNode @discussion Allows the caller to use other types of authentications that are available in OpenDirectory, that may require response-request loops, etc.  Not all OD plugins will support this call, look for kODErrorCredentialsMethodNotSupported in outError.  outError is optional parameter, nil can be passed if error details is not needed.
+//
 // SetCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError calls the underlying SetCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError.
 func (x *Node) SetCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError(inRecordType *foundation.NSString, inType *foundation.NSString, inItems *foundation.NSArray[objc.ID], outItems *foundation.NSArray[objc.ID], outContext **foundation.ObjcObject) (bool, error) {
 	return x.inner.SetCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError(inRecordType, inType, inItems, outItems, outContext)
 }
 
+// @method     setCredentialsUsingKerberosCache:error: @abstract   Unsupported method. @discussion Unsupported method.
+//
 // SetCredentialsUsingKerberosCacheError calls the underlying SetCredentialsUsingKerberosCacheError.
 func (x *Node) SetCredentialsUsingKerberosCacheError(inCacheName string) (bool, error) {
 	return x.inner.SetCredentialsUsingKerberosCacheError(foundation.NSStringStringWithUTF8String(inCacheName))
 }
 
+// @method     createRecordWithRecordType:name:attributes:error: @abstract   Creates a record in this node, using the given name and attributes. @discussion Takes all the provided attributes and type to create an entire record.  The function will assign a UUID to the record automatically.  This UUID can be overwritten by the client by passing with the other attributes.  inAttributes is optional, nil can be passed if no other attributes are to be set.
+//
 // CreateRecordWithRecordTypeNameAttributesError calls the underlying CreateRecordWithRecordTypeNameAttributesError.
 func (x *Node) CreateRecordWithRecordTypeNameAttributesError(inRecordType *foundation.NSString, inRecordName string, inAttributes *foundation.NSDictionary[objc.ID, objc.ID]) (*Record, error) {
 	_r, _err := x.inner.CreateRecordWithRecordTypeNameAttributesError(inRecordType, foundation.NSStringStringWithUTF8String(inRecordName), inAttributes)
@@ -106,6 +130,8 @@ func (x *Node) CreateRecordWithRecordTypeNameAttributesError(inRecordType *found
 	return &Record{inner: _r}, nil
 }
 
+// @method     recordWithRecordType:name:attributes:error: @abstract   Returns an ODRecord object that references the requested type and name @discussion Returns an ODRecord object that references the requested type and name.  The record will have cached the attributes requested.  Further attributes can be requested via ODRecord APIs.  For performance it is best to ask for as many attributes that are needed as possible up front.
+//
 // RecordWithRecordTypeNameAttributesError calls the underlying RecordWithRecordTypeNameAttributesError.
 func (x *Node) RecordWithRecordTypeNameAttributesError(inRecordType *foundation.NSString, inRecordName string, inAttributes objc.ID) (*Record, error) {
 	_r, _err := x.inner.RecordWithRecordTypeNameAttributesError(inRecordType, foundation.NSStringStringWithUTF8String(inRecordName), inAttributes)
@@ -118,66 +144,92 @@ func (x *Node) RecordWithRecordTypeNameAttributesError(inRecordType *foundation.
 	return &Record{inner: _r}, nil
 }
 
+// @method     customCall:sendData:error: @abstract   Sends a custom code to the node; input and output data formats are specific to the call. @discussion Sends a custom code to the node; input and output data formats are specific to the call.  outError is optional parameter, nil can be passed if error details are not needed.
+//
 // CustomCallSendDataError calls the underlying CustomCallSendDataError.
 func (x *Node) CustomCallSendDataError(inCustomCode int, inSendData *foundation.NSData) (*foundation.NSData, error) {
 	return x.inner.CustomCallSendDataError(inCustomCode, inSendData)
 }
 
+// @method     customFunction:payload:error: @abstract   Sends a custom function call to the node; data is a type specific to the call. @discussion Sends a custom function call to the node; data is a type specific to the call.  'error' is an optional parameter therefore nil can be passed if error details are not needed.  Return type is defined by the custom function requested.
+//
 // CustomFunctionPayloadError calls the underlying CustomFunctionPayloadError.
 func (x *Node) CustomFunctionPayloadError(function string, payload objc.ID) (objc.ID, error) {
 	return x.inner.CustomFunctionPayloadError(foundation.NSStringStringWithUTF8String(function), payload)
 }
 
+// @method     policiesAndReturnError: @abstract   This will copy any policies configured for the node. @discussion This will copy any policies configured for the node.
+//
 // PoliciesAndReturnError calls the underlying PoliciesAndReturnError.
 func (x *Node) PoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error) {
 	return x.inner.PoliciesAndReturnError()
 }
 
+// @function   supportedPoliciesAndReturnError: @abstract   This will return a dictionary of supported policies. @discussion This will return a dictionary of supported policies, if appropriate, the value will be the maximum value allowed for the policy in question.  For example, if password history is available, it will state how much history is supported.
+//
 // SupportedPoliciesAndReturnError calls the underlying SupportedPoliciesAndReturnError.
 func (x *Node) SupportedPoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error) {
 	return x.inner.SupportedPoliciesAndReturnError()
 }
 
+// @function   setPolicies:error: @abstract   This will set the policy for the node. @discussion This will set the policy for the node.  Policies are evaluated in combination with record-level policies.
+//
 // SetPoliciesError calls the underlying SetPoliciesError.
 func (x *Node) SetPoliciesError(policies *foundation.NSDictionary[objc.ID, objc.ID]) (bool, error) {
 	return x.inner.SetPoliciesError(policies)
 }
 
+// @function   setPolicy:value:error: @abstract   This will set a specific policy setting for the node. @discussion This will set a specific policy setting for the node.
+//
 // SetPolicyValueError calls the underlying SetPolicyValueError.
 func (x *Node) SetPolicyValueError(policy *foundation.NSString, value objc.ID) (bool, error) {
 	return x.inner.SetPolicyValueError(policy, value)
 }
 
+// @function   removePolicy:value:error: @abstract   This will remove a specific policy setting from the node. @discussion This will remove a specific policy setting from the node.
+//
 // RemovePolicyError calls the underlying RemovePolicyError.
 func (x *Node) RemovePolicyError(policy *foundation.NSString) (bool, error) {
 	return x.inner.RemovePolicyError(policy)
 }
 
+// @method     addAccountPolicy:toCategory:error: @abstract   This will add an account policy to the node for the specified category. @discussion This will add an account policy to the node for the specified category. The specified policy will be applied to all users in the specified node when policies are evaluated. @param      policy a dictionary containing the specific policy to be added. The dictionary may contain the following keys: kODPolicyKeyIdentifier a required key identifying the policy. kODPolicyKeyParameters an optional key containing a dictionary of parameters that can be used for informational purposes or in the policy format string. kODPolicyKeyContent a required key specifying the policy, from which a predicate will be created for evaluating the policy. @param      category a valid ODPolicyCategoryType to which the specified policy will be added. @param      error an optional NSError reference for error details. @result     a BOOL which signifies if the policy addition succeeded, otherwise error is set.
+//
 // AddAccountPolicyToCategoryError calls the underlying AddAccountPolicyToCategoryError.
 func (x *Node) AddAccountPolicyToCategoryError(policy *foundation.NSDictionary[objc.ID, objc.ID], category *foundation.NSString) (bool, error) {
 	return x.inner.AddAccountPolicyToCategoryError(policy, category)
 }
 
+// @method     removeAccountPolicy:fromCategory:error: @abstract   This will remove an account policy from the node for the specified category. @discussion This will remove an account policy from the node for the specified category. @param      policy a dictionary containing the specific policy to be removed, with the same format as described in addAccountPolicy. @param      category a valid ODPolicyCategoryType from which the specified policy will be removed. @param      error an optional NSError reference for error details. @result     a BOOL which signifies if the policy removal succeeded, otherwise error is set.
+//
 // RemoveAccountPolicyFromCategoryError calls the underlying RemoveAccountPolicyFromCategoryError.
 func (x *Node) RemoveAccountPolicyFromCategoryError(policy *foundation.NSDictionary[objc.ID, objc.ID], category *foundation.NSString) (bool, error) {
 	return x.inner.RemoveAccountPolicyFromCategoryError(policy, category)
 }
 
+// @method     setAccountPolicies:error: @abstract   This will set the policies for the node. @discussion This will set the policies for the node, replacing any existing policies.  All of the policies in the set will be applied to all users in the specified node when policies are evaluated. @param      policies a dictionary containing all of the policies to be set for the node.  The dictionary may contain the following keys: kODPolicyCategoryAuthentication an optional key with a value of an array of policy dictionaries that specify when authentications should be allowed. kODPolicyCategoryPasswordContent an optional key with a value of an array of policy dictionaries the specify the required content of passwords. kODPolicyCategoryPasswordChange an optional key with a value of an array of policy dictionaries that specify when passwords are required to be changed. @param      error an optional NSError reference for error details. @result     a BOOL which signifies if the policy set succeeded, otherwise error is set.
+//
 // SetAccountPoliciesError calls the underlying SetAccountPoliciesError.
 func (x *Node) SetAccountPoliciesError(policies *foundation.NSDictionary[objc.ID, objc.ID]) (bool, error) {
 	return x.inner.SetAccountPoliciesError(policies)
 }
 
+// @method     accountPoliciesAndReturnError: @abstract   Returns a dictionary containing any policies configured for the node. @discussion Returns a dictionary containing any policies configured for the node. @param      error an optional NSError reference for error details. @result     an NSDictionary containing all currently set policies.  The format of the dictionary is the same as described in setAccountPolicies.
+//
 // AccountPoliciesAndReturnError calls the underlying AccountPoliciesAndReturnError.
 func (x *Node) AccountPoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error) {
 	return x.inner.AccountPoliciesAndReturnError()
 }
 
+// @method     passwordContentCheck:forRecordName:error: @abstract   Validates a password against the node's password content policies. @discussion Validates a password against the node's password content policies. The node's password content policies will be evaluated to determine if the password is acceptable.  May be used prior to creating the record. This check is only definitive at the time it was requested. The policy or the environment could change before the password change is actually requested.  Errors from the password change request should be consulted. @param      password the password to be evaluated against the content policies. @param      recordName the name of the record. @param      error an optional NSError reference for error details. @result     a bool which signifies if the password passes all content policies, otherwise error is set.
+//
 // PasswordContentCheckForRecordNameError calls the underlying PasswordContentCheckForRecordNameError.
 func (x *Node) PasswordContentCheckForRecordNameError(password string, recordName string) (bool, error) {
 	return x.inner.PasswordContentCheckForRecordNameError(foundation.NSStringStringWithUTF8String(password), foundation.NSStringStringWithUTF8String(recordName))
 }
 
+// @property   nodeName @abstract   The node name. @discussion The node name, corresponding to its path in OpenDirectory.
+//
 // NodeName calls the underlying NodeName.
 func (x *Node) NodeName() string {
 	_r := x.inner.NodeName()
@@ -187,6 +239,8 @@ func (x *Node) NodeName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @method configuration @abstract Returns an ODConfiguration object for the node. @discussion Returns an ODConfiguration object for the node.
+//
 // Configuration calls the underlying Configuration.
 func (x *Node) Configuration() *Configuration {
 	_r := x.inner.Configuration()

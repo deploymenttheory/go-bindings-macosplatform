@@ -38,6 +38,8 @@ func NewSyncEngineFetchedRecordDeletion() *SyncEngineFetchedRecordDeletion {
 	return &SyncEngineFetchedRecordDeletion{inner: raw.CKSyncEngineFetchedRecordDeletionFromID(_id)}
 }
 
+// The deleted record's unique identifier.
+//
 // RecordID calls the underlying RecordID.
 func (x *SyncEngineFetchedRecordDeletion) RecordID() *RecordID {
 	_r := x.inner.RecordID()
@@ -47,6 +49,8 @@ func (x *SyncEngineFetchedRecordDeletion) RecordID() *RecordID {
 	return &RecordID{inner: _r}
 }
 
+// The record type of the deleted record.
+//
 // RecordType calls the underlying RecordType.
 func (x *SyncEngineFetchedRecordDeletion) RecordType() string {
 	_r := x.inner.RecordType()

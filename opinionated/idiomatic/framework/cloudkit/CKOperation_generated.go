@@ -37,54 +37,72 @@ func NewOperation() *Operation {
 	return &Operation{inner: raw.CKOperationFromID(_id)}
 }
 
+// The operation's configuration.
+//
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *Operation) WithConfiguration(configuration *OperationConfiguration) *Operation {
 	x.inner.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
+// The operation's group.
+//
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *Operation) WithGroup(group *OperationGroup) *Operation {
 	x.inner.SetGroup(group.Unwrap())
 	return x
 }
 
+// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+//
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *Operation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *Operation {
 	x.inner.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
 	return x
 }
 
+// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
+//
 // WithContainer sets the container property and returns the receiver for chaining.
 func (x *Operation) WithContainer(container *Container) *Operation {
 	x.inner.SetContainer(container.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
+//
 // WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
 func (x *Operation) WithAllowsCellularAccess(allowsCellularAccess bool) *Operation {
 	x.inner.SetAllowsCellularAccess(allowsCellularAccess)
 	return x
 }
 
+// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+//
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *Operation) WithLongLived(longLived bool) *Operation {
 	x.inner.SetLongLived(longLived)
 	return x
 }
 
+// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
+//
 // WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
 func (x *Operation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *Operation {
 	x.inner.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
 	return x
 }
 
+// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
+//
 // WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
 func (x *Operation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *Operation {
 	x.inner.SetTimeoutIntervalForResource(timeoutIntervalForResource)
 	return x
 }
 
+// The operation's configuration.
+//
 // Configuration calls the underlying Configuration.
 func (x *Operation) Configuration() *OperationConfiguration {
 	_r := x.inner.Configuration()
@@ -99,6 +117,8 @@ func (x *Operation) SetConfiguration(configuration *raw.CKOperationConfiguration
 	x.inner.SetConfiguration(configuration)
 }
 
+// The operation's group.
+//
 // Group calls the underlying Group.
 func (x *Operation) Group() *OperationGroup {
 	_r := x.inner.Group()
@@ -113,6 +133,8 @@ func (x *Operation) SetGroup(group *raw.CKOperationGroup) {
 	x.inner.SetGroup(group)
 }
 
+// A unique identifier for a long-lived operation. Pass this property's value to the “CKContainer/longLivedOperation(for:)“ method to fetch the corresponding long-lived operation. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+//
 // OperationID calls the underlying OperationID.
 func (x *Operation) OperationID() string {
 	_r := x.inner.OperationID()
@@ -122,6 +144,8 @@ func (x *Operation) OperationID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+//
 // LongLivedOperationWasPersistedBlock calls the underlying LongLivedOperationWasPersistedBlock.
 func (x *Operation) LongLivedOperationWasPersistedBlock() objc.Block {
 	return x.inner.LongLivedOperationWasPersistedBlock()
@@ -141,6 +165,8 @@ func (x *Operation) SetLongLivedOperationWasPersistedBlock(ctx context.Context) 
 	}
 }
 
+// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
+//
 // Container calls the underlying Container.
 func (x *Operation) Container() *Container {
 	_r := x.inner.Container()
@@ -155,6 +181,8 @@ func (x *Operation) SetContainer(container *raw.CKContainer) {
 	x.inner.SetContainer(container)
 }
 
+// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
+//
 // AllowsCellularAccess calls the underlying AllowsCellularAccess.
 func (x *Operation) AllowsCellularAccess() bool {
 	return x.inner.AllowsCellularAccess()
@@ -165,6 +193,8 @@ func (x *Operation) SetAllowsCellularAccess(allowsCellularAccess bool) {
 	x.inner.SetAllowsCellularAccess(allowsCellularAccess)
 }
 
+// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+//
 // IsLongLived calls the underlying IsLongLived.
 func (x *Operation) IsLongLived() bool {
 	return x.inner.IsLongLived()
@@ -175,6 +205,8 @@ func (x *Operation) SetLongLived(longLived bool) {
 	x.inner.SetLongLived(longLived)
 }
 
+// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
+//
 // TimeoutIntervalForRequest calls the underlying TimeoutIntervalForRequest.
 func (x *Operation) TimeoutIntervalForRequest() float64 {
 	return x.inner.TimeoutIntervalForRequest()
@@ -185,6 +217,8 @@ func (x *Operation) SetTimeoutIntervalForRequest(timeoutIntervalForRequest float
 	x.inner.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
 }
 
+// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
+//
 // TimeoutIntervalForResource calls the underlying TimeoutIntervalForResource.
 func (x *Operation) TimeoutIntervalForResource() float64 {
 	return x.inner.TimeoutIntervalForResource()

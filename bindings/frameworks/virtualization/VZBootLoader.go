@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The base class that defines the management of the initial process of the guest system.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzbootloader
 type VZBootLoader struct {
 	foundation.NSObject

@@ -40,24 +40,32 @@ func NewGlassEffectView() *GlassEffectView {
 	return &GlassEffectView{inner: raw.NSGlassEffectViewFromID(_id)}
 }
 
+// The view to embed in glass. - Important: `NSGlassEffectView` only guarantees the `contentView` will be placed inside the glass effect; arbitrary subviews aren't guaranteed specific behavior with regard to z-order in relation to the content view or glass effect.
+//
 // WithContentView sets the contentView property and returns the receiver for chaining.
 func (x *GlassEffectView) WithContentView(contentView ViewProvider) *GlassEffectView {
 	x.inner.SetContentView(contentView.asView())
 	return x
 }
 
+// The amount of curvature for all corners of the glass.
+//
 // WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
 func (x *GlassEffectView) WithCornerRadius(cornerRadius float64) *GlassEffectView {
 	x.inner.SetCornerRadius(cornerRadius)
 	return x
 }
 
+// The color the glass effect view uses to tint the background and glass effect toward.
+//
 // WithTintColor sets the tintColor property and returns the receiver for chaining.
 func (x *GlassEffectView) WithTintColor(tintColor *Color) *GlassEffectView {
 	x.inner.SetTintColor(tintColor.Unwrap())
 	return x
 }
 
+// The style of glass this view uses.
+//
 // WithStyle sets the style property and returns the receiver for chaining.
 func (x *GlassEffectView) WithStyle(style NSGlassEffectViewStyle) *GlassEffectView {
 	x.inner.SetStyle(raw.NSGlassEffectViewStyle(style))
@@ -328,6 +336,8 @@ func (x *GlassEffectView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets 
 	return x
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *GlassEffectView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *GlassEffectView {
 	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
@@ -406,6 +416,8 @@ func (x *GlassEffectView) WithTouchBar(touchBar *TouchBar) *GlassEffectView {
 	return x
 }
 
+// The view to embed in glass. - Important: `NSGlassEffectView` only guarantees the `contentView` will be placed inside the glass effect; arbitrary subviews aren't guaranteed specific behavior with regard to z-order in relation to the content view or glass effect.
+//
 // ContentView calls the underlying ContentView.
 func (x *GlassEffectView) ContentView() *View {
 	_r := x.inner.ContentView()
@@ -415,21 +427,29 @@ func (x *GlassEffectView) ContentView() *View {
 	return &View{inner: _r}
 }
 
+// The view to embed in glass. - Important: `NSGlassEffectView` only guarantees the `contentView` will be placed inside the glass effect; arbitrary subviews aren't guaranteed specific behavior with regard to z-order in relation to the content view or glass effect.
+//
 // SetContentView calls the underlying SetContentView.
 func (x *GlassEffectView) SetContentView(contentView *raw.NSView) {
 	x.inner.SetContentView(contentView)
 }
 
+// The amount of curvature for all corners of the glass.
+//
 // CornerRadius calls the underlying CornerRadius.
 func (x *GlassEffectView) CornerRadius() float64 {
 	return x.inner.CornerRadius()
 }
 
+// The amount of curvature for all corners of the glass.
+//
 // SetCornerRadius calls the underlying SetCornerRadius.
 func (x *GlassEffectView) SetCornerRadius(cornerRadius float64) {
 	x.inner.SetCornerRadius(cornerRadius)
 }
 
+// The color the glass effect view uses to tint the background and glass effect toward.
+//
 // TintColor calls the underlying TintColor.
 func (x *GlassEffectView) TintColor() *Color {
 	_r := x.inner.TintColor()
@@ -439,16 +459,22 @@ func (x *GlassEffectView) TintColor() *Color {
 	return &Color{inner: _r}
 }
 
+// The color the glass effect view uses to tint the background and glass effect toward.
+//
 // SetTintColor calls the underlying SetTintColor.
 func (x *GlassEffectView) SetTintColor(tintColor *raw.NSColor) {
 	x.inner.SetTintColor(tintColor)
 }
 
+// The style of glass this view uses.
+//
 // Style calls the underlying Style.
 func (x *GlassEffectView) Style() NSGlassEffectViewStyle {
 	return NSGlassEffectViewStyle(x.inner.Style())
 }
 
+// The style of glass this view uses.
+//
 // SetStyle calls the underlying SetStyle.
 func (x *GlassEffectView) SetStyle(style NSGlassEffectViewStyle) {
 	x.inner.SetStyle(raw.NSGlassEffectViewStyle(style))

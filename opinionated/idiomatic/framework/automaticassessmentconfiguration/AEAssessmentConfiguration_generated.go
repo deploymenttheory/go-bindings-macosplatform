@@ -36,64 +36,86 @@ func NewAssessmentConfiguration() *AssessmentConfiguration {
 	return &AssessmentConfiguration{inner: raw.AEAssessmentConfigurationFromID(_id)}
 }
 
+// The autocorrect mode that specifies which autocorrect features to allow during an assessment. Users can turn on autocorrect in the Settings app (General > Keyboard > Auto-Correction). An assessment session disables this feature by default, but you can allow it by setting “AEAssessmentConfiguration/autocorrectMode-swift.property“ in the “AEAssessmentConfiguration“ instance that you use to initialize a session. Set the mode's value to some combination of the the values from the “AEAssessmentConfiguration/AutocorrectMode-swift.struct“ structure.
+//
 // WithAutocorrectMode sets the autocorrectMode property and returns the receiver for chaining.
 func (x *AssessmentConfiguration) WithAutocorrectMode(autocorrectMode AEAutocorrectMode) *AssessmentConfiguration {
 	x.inner.SetAutocorrectMode(raw.AEAutocorrectMode(autocorrectMode))
 	return x
 }
 
+// A Boolean value that indicates whether to allow spell check during an assessment. Users can activate the spell checker by turning on the Check Spelling feature in the Settings app (General > Keyboard). An assessment session disables spell checking by default, but you can allow it by setting “AEAssessmentConfiguration/allowsSpellCheck“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+//
 // WithAllowsSpellCheck sets the allowsSpellCheck property and returns the receiver for chaining.
 func (x *AssessmentConfiguration) WithAllowsSpellCheck(allowsSpellCheck bool) *AssessmentConfiguration {
 	x.inner.SetAllowsSpellCheck(allowsSpellCheck)
 	return x
 }
 
+// A Boolean value that indicates whether to enable the predictive keyboard during an assessment. Users can turn on the Predictive Keyboard feature in the Settings app (General > Keyboard). An assessment session disables this feature by default, but you can allow it by setting “AEAssessmentConfiguration/allowsPredictiveKeyboard“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+//
 // WithAllowsPredictiveKeyboard sets the allowsPredictiveKeyboard property and returns the receiver for chaining.
 func (x *AssessmentConfiguration) WithAllowsPredictiveKeyboard(allowsPredictiveKeyboard bool) *AssessmentConfiguration {
 	x.inner.SetAllowsPredictiveKeyboard(allowsPredictiveKeyboard)
 	return x
 }
 
+// A Boolean value that indicates whether to allow keyboard shortcuts during an assessment. Users can add Keyboard Shortcuts in the Settings app (General > Keyboard > Text Replacement). An assessment session disables the use of keyboard shortcuts by default, but you can allow them by setting “AEAssessmentConfiguration/allowsKeyboardShortcuts“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+//
 // WithAllowsKeyboardShortcuts sets the allowsKeyboardShortcuts property and returns the receiver for chaining.
 func (x *AssessmentConfiguration) WithAllowsKeyboardShortcuts(allowsKeyboardShortcuts bool) *AssessmentConfiguration {
 	x.inner.SetAllowsKeyboardShortcuts(allowsKeyboardShortcuts)
 	return x
 }
 
+// A Boolean value that indicates whether to allow alternative input methods in the Accessibility Keyboard during an assessment. Users can enable the Accessibility Keyboard in the Settings app (Accessibility > Keyboard > Accessibility Keyboard) to access an on-screen keyboard with alternative input methods. An assessment session disables alternative input methods in the Accessibility Keyboard by default, but you can allow them by setting “AEAssessmentConfiguration/allowsAccessibilityKeyboard“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+//
 // WithAllowsAccessibilityKeyboard sets the allowsAccessibilityKeyboard property and returns the receiver for chaining.
 func (x *AssessmentConfiguration) WithAllowsAccessibilityKeyboard(allowsAccessibilityKeyboard bool) *AssessmentConfiguration {
 	x.inner.SetAllowsAccessibilityKeyboard(allowsAccessibilityKeyboard)
 	return x
 }
 
+// A Boolean value that indicates whether to allow Live Captions during an assessment. Users can enable Live Captions in the Settings app (Accessibility > Live Captions) to receive real-time transcription of spoken audio as text on screen. An assessment session disables Live Captions by default, but you can allow it by setting “AEAssessmentConfiguration/allowsAccessibilityLiveCaptions“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+//
 // WithAllowsAccessibilityLiveCaptions sets the allowsAccessibilityLiveCaptions property and returns the receiver for chaining.
 func (x *AssessmentConfiguration) WithAllowsAccessibilityLiveCaptions(allowsAccessibilityLiveCaptions bool) *AssessmentConfiguration {
 	x.inner.SetAllowsAccessibilityLiveCaptions(allowsAccessibilityLiveCaptions)
 	return x
 }
 
+// A Boolean value that indicates whether to allow the Accessibility Reader during an assessment. Users can enable the Accessibility Reader in the Settings app (Accessibility > Read & Speak > Accessibility Reader) to have text content formatted or read aloud. An assessment session disables the Accessibility Reader by default, but you can allow it by setting “AEAssessmentConfiguration/allowsAccessibilityReader“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+//
 // WithAllowsAccessibilityReader sets the allowsAccessibilityReader property and returns the receiver for chaining.
 func (x *AssessmentConfiguration) WithAllowsAccessibilityReader(allowsAccessibilityReader bool) *AssessmentConfiguration {
 	x.inner.SetAllowsAccessibilityReader(allowsAccessibilityReader)
 	return x
 }
 
+// A Boolean value that indicates whether to allow screenshots copied to the clipboard during an assessment. An assessment session disables the ability to take screenshots by default to maintain assessment integrity. This property specifically applies to screenshots that are copied to the clipboard, typically those taken using the Command+Control+Shift+3 and Command+Control+Shift+4 keyboard shortcuts. You can allow clipboard screenshots by setting `allowsScreenshots` to `true`. - Note: The clipboard is cleared before the assessment session ends to prevent exporting captured content.
+//
 // WithAllowsScreenshots sets the allowsScreenshots property and returns the receiver for chaining.
 func (x *AssessmentConfiguration) WithAllowsScreenshots(allowsScreenshots bool) *AssessmentConfiguration {
 	x.inner.SetAllowsScreenshots(allowsScreenshots)
 	return x
 }
 
+// Adds an app to the list of apps available during an assessment. Use this method to make an app besides your own available during an assessment. Create a representation of the app that you want to allow as an “AEAssessmentApplication“ instance, and the configuration for that app using an “AEAssessmentParticipantConfiguration“ instance: ```swift let calculator = AEAssessmentApplication(bundleIdentifier: "com.apple.calculator") let calculatorConfig = AEAssessmentParticipantConfiguration() calculatorConfig.allowsNetworkAccess = false // Calculator doesn't need the network. ``` Use the app and its configuration to create an assessment configuration, and either create an assessment session with that, or update an existing session as shown below: ```swift let configuration = AEAssessmentConfiguration() configuration.setConfiguration(calculatorConfig, for: calculator) session.update(to: configuration) ``` You can get a list of the currently allowed apps by accessing the “AEAssessmentConfiguration/configurationsByApplication“ property. You can disallow a previously allowed app by using the “AEAssessmentConfiguration/remove(_:)“ method. - Parameters: - configuration: The configuration of the secondary app. - application: The app that you want to configure.
+//
 // SetConfigurationForApplication calls the underlying SetConfigurationForApplication.
 func (x *AssessmentConfiguration) SetConfigurationForApplication(configuration *raw.AEAssessmentParticipantConfiguration, application *raw.AEAssessmentApplication) {
 	x.inner.SetConfigurationForApplication(configuration, application)
 }
 
+// Removes the availability of a previously allowed app. Use this method to remove apps that you previously added to the list of apps that are available during an assessment with the “AEAssessmentConfiguration/setConfiguration(_:for:)“ method. You can get the list of currently allowed apps by accessing the configuration's “AEAssessmentConfiguration/configurationsByApplication“ property. - Parameters: - application: The app that you want to remove from the list of allowed secondary apps.
+//
 // RemoveApplication calls the underlying RemoveApplication.
 func (x *AssessmentConfiguration) RemoveApplication(application *raw.AEAssessmentApplication) {
 	x.inner.RemoveApplication(application)
 }
 
+// The autocorrect mode that specifies which autocorrect features to allow during an assessment. Users can turn on autocorrect in the Settings app (General > Keyboard > Auto-Correction). An assessment session disables this feature by default, but you can allow it by setting “AEAssessmentConfiguration/autocorrectMode-swift.property“ in the “AEAssessmentConfiguration“ instance that you use to initialize a session. Set the mode's value to some combination of the the values from the “AEAssessmentConfiguration/AutocorrectMode-swift.struct“ structure.
+//
 // AutocorrectMode calls the underlying AutocorrectMode.
 func (x *AssessmentConfiguration) AutocorrectMode() AEAutocorrectMode {
 	return AEAutocorrectMode(x.inner.AutocorrectMode())
@@ -104,6 +126,8 @@ func (x *AssessmentConfiguration) SetAutocorrectMode(autocorrectMode AEAutocorre
 	x.inner.SetAutocorrectMode(raw.AEAutocorrectMode(autocorrectMode))
 }
 
+// A Boolean value that indicates whether to allow spell check during an assessment. Users can activate the spell checker by turning on the Check Spelling feature in the Settings app (General > Keyboard). An assessment session disables spell checking by default, but you can allow it by setting “AEAssessmentConfiguration/allowsSpellCheck“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+//
 // AllowsSpellCheck calls the underlying AllowsSpellCheck.
 func (x *AssessmentConfiguration) AllowsSpellCheck() bool {
 	return x.inner.AllowsSpellCheck()
@@ -114,6 +138,8 @@ func (x *AssessmentConfiguration) SetAllowsSpellCheck(allowsSpellCheck bool) {
 	x.inner.SetAllowsSpellCheck(allowsSpellCheck)
 }
 
+// A Boolean value that indicates whether to enable the predictive keyboard during an assessment. Users can turn on the Predictive Keyboard feature in the Settings app (General > Keyboard). An assessment session disables this feature by default, but you can allow it by setting “AEAssessmentConfiguration/allowsPredictiveKeyboard“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+//
 // AllowsPredictiveKeyboard calls the underlying AllowsPredictiveKeyboard.
 func (x *AssessmentConfiguration) AllowsPredictiveKeyboard() bool {
 	return x.inner.AllowsPredictiveKeyboard()
@@ -124,6 +150,8 @@ func (x *AssessmentConfiguration) SetAllowsPredictiveKeyboard(allowsPredictiveKe
 	x.inner.SetAllowsPredictiveKeyboard(allowsPredictiveKeyboard)
 }
 
+// A Boolean value that indicates whether to allow keyboard shortcuts during an assessment. Users can add Keyboard Shortcuts in the Settings app (General > Keyboard > Text Replacement). An assessment session disables the use of keyboard shortcuts by default, but you can allow them by setting “AEAssessmentConfiguration/allowsKeyboardShortcuts“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+//
 // AllowsKeyboardShortcuts calls the underlying AllowsKeyboardShortcuts.
 func (x *AssessmentConfiguration) AllowsKeyboardShortcuts() bool {
 	return x.inner.AllowsKeyboardShortcuts()
@@ -134,6 +162,8 @@ func (x *AssessmentConfiguration) SetAllowsKeyboardShortcuts(allowsKeyboardShort
 	x.inner.SetAllowsKeyboardShortcuts(allowsKeyboardShortcuts)
 }
 
+// A Boolean value that indicates whether to allow alternative input methods in the Accessibility Keyboard during an assessment. Users can enable the Accessibility Keyboard in the Settings app (Accessibility > Keyboard > Accessibility Keyboard) to access an on-screen keyboard with alternative input methods. An assessment session disables alternative input methods in the Accessibility Keyboard by default, but you can allow them by setting “AEAssessmentConfiguration/allowsAccessibilityKeyboard“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+//
 // AllowsAccessibilityKeyboard calls the underlying AllowsAccessibilityKeyboard.
 func (x *AssessmentConfiguration) AllowsAccessibilityKeyboard() bool {
 	return x.inner.AllowsAccessibilityKeyboard()
@@ -144,6 +174,8 @@ func (x *AssessmentConfiguration) SetAllowsAccessibilityKeyboard(allowsAccessibi
 	x.inner.SetAllowsAccessibilityKeyboard(allowsAccessibilityKeyboard)
 }
 
+// A Boolean value that indicates whether to allow Live Captions during an assessment. Users can enable Live Captions in the Settings app (Accessibility > Live Captions) to receive real-time transcription of spoken audio as text on screen. An assessment session disables Live Captions by default, but you can allow it by setting “AEAssessmentConfiguration/allowsAccessibilityLiveCaptions“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+//
 // AllowsAccessibilityLiveCaptions calls the underlying AllowsAccessibilityLiveCaptions.
 func (x *AssessmentConfiguration) AllowsAccessibilityLiveCaptions() bool {
 	return x.inner.AllowsAccessibilityLiveCaptions()
@@ -154,6 +186,8 @@ func (x *AssessmentConfiguration) SetAllowsAccessibilityLiveCaptions(allowsAcces
 	x.inner.SetAllowsAccessibilityLiveCaptions(allowsAccessibilityLiveCaptions)
 }
 
+// A Boolean value that indicates whether to allow the Accessibility Reader during an assessment. Users can enable the Accessibility Reader in the Settings app (Accessibility > Read & Speak > Accessibility Reader) to have text content formatted or read aloud. An assessment session disables the Accessibility Reader by default, but you can allow it by setting “AEAssessmentConfiguration/allowsAccessibilityReader“ to `true` in the “AEAssessmentConfiguration“ instance that you use to initialize a session.
+//
 // AllowsAccessibilityReader calls the underlying AllowsAccessibilityReader.
 func (x *AssessmentConfiguration) AllowsAccessibilityReader() bool {
 	return x.inner.AllowsAccessibilityReader()
@@ -164,6 +198,8 @@ func (x *AssessmentConfiguration) SetAllowsAccessibilityReader(allowsAccessibili
 	x.inner.SetAllowsAccessibilityReader(allowsAccessibilityReader)
 }
 
+// A Boolean value that indicates whether to allow screenshots copied to the clipboard during an assessment. An assessment session disables the ability to take screenshots by default to maintain assessment integrity. This property specifically applies to screenshots that are copied to the clipboard, typically those taken using the Command+Control+Shift+3 and Command+Control+Shift+4 keyboard shortcuts. You can allow clipboard screenshots by setting `allowsScreenshots` to `true`. - Note: The clipboard is cleared before the assessment session ends to prevent exporting captured content.
+//
 // AllowsScreenshots calls the underlying AllowsScreenshots.
 func (x *AssessmentConfiguration) AllowsScreenshots() bool {
 	return x.inner.AllowsScreenshots()
@@ -174,6 +210,8 @@ func (x *AssessmentConfiguration) SetAllowsScreenshots(allowsScreenshots bool) {
 	x.inner.SetAllowsScreenshots(allowsScreenshots)
 }
 
+// The app-specific configuration for the app that invokes the assessment. Use this property to get and customize the app-specific configuration that's applied to your own app. For example, you can set the `allowsNetworkAccess` property for your own app: ```swift let config = AEAssessmentConfiguration() config.mainParticipantConfiguration.allowsNetworkAccess = false ```
+//
 // MainParticipantConfiguration calls the underlying MainParticipantConfiguration.
 func (x *AssessmentConfiguration) MainParticipantConfiguration() *AssessmentParticipantConfiguration {
 	_r := x.inner.MainParticipantConfiguration()
@@ -183,6 +221,8 @@ func (x *AssessmentConfiguration) MainParticipantConfiguration() *AssessmentPart
 	return &AssessmentParticipantConfiguration{inner: _r}
 }
 
+// The collection of apps available during an assessment, along with their associated configurations. Access this property to get a list of the currently allowed secondary apps and their individual configurations. Add apps to the list by calling the “AEAssessmentConfiguration/setConfiguration(_:for:)“ method. Remove them from the list by calling the “AEAssessmentConfiguration/remove(_:)“ method.
+//
 // ConfigurationsByApplication calls the underlying ConfigurationsByApplication.
 func (x *AssessmentConfiguration) ConfigurationsByApplication() *foundation.NSDictionary[*raw.AEAssessmentApplication, *raw.AEAssessmentParticipantConfiguration] {
 	return x.inner.ConfigurationsByApplication()

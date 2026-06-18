@@ -40,6 +40,8 @@ func NewPrimitiveAccelerationStructureDescriptor() *PrimitiveAccelerationStructu
 	return &PrimitiveAccelerationStructureDescriptor{inner: raw.MTLPrimitiveAccelerationStructureDescriptorFromID(_id)}
 }
 
+// @brief Array of geometry descriptors. If motionKeyframeCount is greater than one all geometryDescriptors must be motion versions and have motionKeyframeCount of primitive buffers.
+//
 // WithGeometryDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *PrimitiveAccelerationStructureDescriptor) WithGeometryDescriptors(items ...AccelerationStructureGeometryDescriptorProvider) *PrimitiveAccelerationStructureDescriptor {
 	if len(items) == 0 {
@@ -58,30 +60,40 @@ func (x *PrimitiveAccelerationStructureDescriptor) WithGeometryDescriptors(items
 	return x
 }
 
+// @brief Motion border mode describing what happens if acceleration structure is sampled before motionStartTime. If not set defaults to MTLMotionBorderModeClamp.
+//
 // WithMotionStartBorderMode sets the motionStartBorderMode property and returns the receiver for chaining.
 func (x *PrimitiveAccelerationStructureDescriptor) WithMotionStartBorderMode(motionStartBorderMode MTLMotionBorderMode) *PrimitiveAccelerationStructureDescriptor {
 	x.inner.SetMotionStartBorderMode(raw.MTLMotionBorderMode(motionStartBorderMode))
 	return x
 }
 
+// @brief Motion border mode describing what happens if acceleration structure is sampled after motionEndTime. If not set defaults to MTLMotionBorderModeClamp.
+//
 // WithMotionEndBorderMode sets the motionEndBorderMode property and returns the receiver for chaining.
 func (x *PrimitiveAccelerationStructureDescriptor) WithMotionEndBorderMode(motionEndBorderMode MTLMotionBorderMode) *PrimitiveAccelerationStructureDescriptor {
 	x.inner.SetMotionEndBorderMode(raw.MTLMotionBorderMode(motionEndBorderMode))
 	return x
 }
 
+// @brief Motion start time of this geometry. If not set defaults to 0.0f.
+//
 // WithMotionStartTime sets the motionStartTime property and returns the receiver for chaining.
 func (x *PrimitiveAccelerationStructureDescriptor) WithMotionStartTime(motionStartTime float32) *PrimitiveAccelerationStructureDescriptor {
 	x.inner.SetMotionStartTime(motionStartTime)
 	return x
 }
 
+// @brief Motion end time of this geometry. If not set defaults to 1.0f.
+//
 // WithMotionEndTime sets the motionEndTime property and returns the receiver for chaining.
 func (x *PrimitiveAccelerationStructureDescriptor) WithMotionEndTime(motionEndTime float32) *PrimitiveAccelerationStructureDescriptor {
 	x.inner.SetMotionEndTime(motionEndTime)
 	return x
 }
 
+// @brief Motion keyframe count. Is 1 by default which means no motion.
+//
 // WithMotionKeyframeCount sets the motionKeyframeCount property and returns the receiver for chaining.
 func (x *PrimitiveAccelerationStructureDescriptor) WithMotionKeyframeCount(motionKeyframeCount uint) *PrimitiveAccelerationStructureDescriptor {
 	x.inner.SetMotionKeyframeCount(motionKeyframeCount)
@@ -94,6 +106,8 @@ func (x *PrimitiveAccelerationStructureDescriptor) WithUsage(usage MTLAccelerati
 	return x
 }
 
+// @brief Array of geometry descriptors. If motionKeyframeCount is greater than one all geometryDescriptors must be motion versions and have motionKeyframeCount of primitive buffers.
+//
 // GeometryDescriptors returns the collection as a Go slice.
 func (x *PrimitiveAccelerationStructureDescriptor) GeometryDescriptors() []*AccelerationStructureGeometryDescriptor {
 	arr := x.inner.GeometryDescriptors()
@@ -106,10 +120,21 @@ func (x *PrimitiveAccelerationStructureDescriptor) GeometryDescriptors() []*Acce
 }
 
 // SetGeometryDescriptors calls the underlying SetGeometryDescriptors.
-func (x *PrimitiveAccelerationStructureDescriptor) SetGeometryDescriptors(geometryDescriptors *foundation.NSArray[*raw.MTLAccelerationStructureGeometryDescriptor]) {
-	x.inner.SetGeometryDescriptors(geometryDescriptors)
+func (x *PrimitiveAccelerationStructureDescriptor) SetGeometryDescriptors(geometryDescriptors ...AccelerationStructureGeometryDescriptorProvider) {
+	_ptrs := make([]objc.ID, len(geometryDescriptors))
+	for _i, _v := range geometryDescriptors {
+		_ptrs[_i] = _v.asAccelerationStructureGeometryDescriptor().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.MTLAccelerationStructureGeometryDescriptor]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.MTLAccelerationStructureGeometryDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetGeometryDescriptors(_arg0)
 }
 
+// @brief Motion border mode describing what happens if acceleration structure is sampled before motionStartTime. If not set defaults to MTLMotionBorderModeClamp.
+//
 // MotionStartBorderMode calls the underlying MotionStartBorderMode.
 func (x *PrimitiveAccelerationStructureDescriptor) MotionStartBorderMode() MTLMotionBorderMode {
 	return MTLMotionBorderMode(x.inner.MotionStartBorderMode())
@@ -120,6 +145,8 @@ func (x *PrimitiveAccelerationStructureDescriptor) SetMotionStartBorderMode(moti
 	x.inner.SetMotionStartBorderMode(raw.MTLMotionBorderMode(motionStartBorderMode))
 }
 
+// @brief Motion border mode describing what happens if acceleration structure is sampled after motionEndTime. If not set defaults to MTLMotionBorderModeClamp.
+//
 // MotionEndBorderMode calls the underlying MotionEndBorderMode.
 func (x *PrimitiveAccelerationStructureDescriptor) MotionEndBorderMode() MTLMotionBorderMode {
 	return MTLMotionBorderMode(x.inner.MotionEndBorderMode())
@@ -130,6 +157,8 @@ func (x *PrimitiveAccelerationStructureDescriptor) SetMotionEndBorderMode(motion
 	x.inner.SetMotionEndBorderMode(raw.MTLMotionBorderMode(motionEndBorderMode))
 }
 
+// @brief Motion start time of this geometry. If not set defaults to 0.0f.
+//
 // MotionStartTime calls the underlying MotionStartTime.
 func (x *PrimitiveAccelerationStructureDescriptor) MotionStartTime() float32 {
 	return x.inner.MotionStartTime()
@@ -140,6 +169,8 @@ func (x *PrimitiveAccelerationStructureDescriptor) SetMotionStartTime(motionStar
 	x.inner.SetMotionStartTime(motionStartTime)
 }
 
+// @brief Motion end time of this geometry. If not set defaults to 1.0f.
+//
 // MotionEndTime calls the underlying MotionEndTime.
 func (x *PrimitiveAccelerationStructureDescriptor) MotionEndTime() float32 {
 	return x.inner.MotionEndTime()
@@ -150,6 +181,8 @@ func (x *PrimitiveAccelerationStructureDescriptor) SetMotionEndTime(motionEndTim
 	x.inner.SetMotionEndTime(motionEndTime)
 }
 
+// @brief Motion keyframe count. Is 1 by default which means no motion.
+//
 // MotionKeyframeCount calls the underlying MotionKeyframeCount.
 func (x *PrimitiveAccelerationStructureDescriptor) MotionKeyframeCount() uint {
 	return x.inner.MotionKeyframeCount()
@@ -175,7 +208,7 @@ type PrimitiveAccelerationStructureDescriptorable interface {
 	WithMotionKeyframeCount(motionKeyframeCount uint) *PrimitiveAccelerationStructureDescriptor
 	WithUsage(usage MTLAccelerationStructureUsage) *PrimitiveAccelerationStructureDescriptor
 	GeometryDescriptors() []*AccelerationStructureGeometryDescriptor
-	SetGeometryDescriptors(geometryDescriptors *foundation.NSArray[*raw.MTLAccelerationStructureGeometryDescriptor])
+	SetGeometryDescriptors(geometryDescriptors ...AccelerationStructureGeometryDescriptorProvider)
 	MotionStartBorderMode() MTLMotionBorderMode
 	SetMotionStartBorderMode(motionStartBorderMode MTLMotionBorderMode)
 	MotionEndBorderMode() MTLMotionBorderMode

@@ -31,6 +31,8 @@ func HapticEventFromID(id objc.ID) *HapticEvent {
 	return &HapticEvent{inner: raw.CHHapticEventFromID(id)}
 }
 
+// @method initWithEventType:parameters:relativeTime @abstract Initialize a new CHHapticEvent.  This can only be used to create Transient event types (which do not require a duration). @param type The type of event. @param eventParams An NSArray of Event parameters.  Can be empty. @param time The relative time for this event versus the other events in the CHHapticPattern.
+//
 // NewHapticEventWithEventTypeParametersRelativeTime creates a new [HapticEvent].
 func NewHapticEventWithEventTypeParametersRelativeTime(type_ *foundation.NSString, eventParams *foundation.NSArray[*raw.CHHapticEventParameter], time_ float64) *HapticEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CHHapticEvent")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewHapticEventWithEventTypeParametersRelativeTime(type_ *foundation.NSStrin
 	return &HapticEvent{inner: raw.CHHapticEventFromID(_id)}
 }
 
+// @method initWithEventType:parameters:relativeTime:duration @abstract Initialize a new CHHapticEvent, providing a duration. @param type The type of event. @param eventParams An NSArray of Event parameters.  Can be empty. @param time The relative time for this event versus the other events in the CHHapticPattern. @param duration For Continuous event types, the length of time before the event playback begins its release. For Transient event types, the logical length of the event (used to determine pattern end and loop points).
+//
 // NewHapticEventWithEventTypeParametersRelativeTimeDuration creates a new [HapticEvent].
 func NewHapticEventWithEventTypeParametersRelativeTimeDuration(type_ *foundation.NSString, eventParams *foundation.NSArray[*raw.CHHapticEventParameter], time_ float64, duration float64) *HapticEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CHHapticEvent")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewHapticEventWithEventTypeParametersRelativeTimeDuration(type_ *foundation
 	return &HapticEvent{inner: raw.CHHapticEventFromID(_id)}
 }
 
+// @method initWithAudioResourceID:parameters:relativeTime @abstract Initialize a new CHHapticEvent using a previously-loaded audio resource. @param resID A previously-registered audio resource ID (see `CHHapticEngine(registerAudioResource:options:error)`). @param eventParams An NSArray of Event parameters.  Can be empty. @param time The relative time for this event versus the other events in the CHHapticPattern.
+//
 // NewHapticEventWithAudioResourceIDParametersRelativeTime creates a new [HapticEvent].
 func NewHapticEventWithAudioResourceIDParametersRelativeTime(resID uint, eventParams *foundation.NSArray[*raw.CHHapticEventParameter], time_ float64) *HapticEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CHHapticEvent")), objc.RegisterName("alloc"))
@@ -52,6 +58,8 @@ func NewHapticEventWithAudioResourceIDParametersRelativeTime(resID uint, eventPa
 	return &HapticEvent{inner: raw.CHHapticEventFromID(_id)}
 }
 
+// @method initWithAudioResourceID:parameters:relativeTime:duration @abstract Initialize a new CHHapticEvent using a previously-loaded audio resource. @param resID A previously-registered audio resource ID (see `CHHapticEngine(registerAudioResource:options:error)`). @param eventParams An NSArray of Event parameters.  Can be empty. @param time The relative time for this event versus the other events in the CHHapticPattern. @param duration The duration of this event in seconds. @discussion If the specified duration is less than the duration of the audio resource, its playback will be truncated.  If it is greater, its playback will be padded with silence.  If zero, it will be ignored.
+//
 // NewHapticEventWithAudioResourceIDParametersRelativeTimeDuration creates a new [HapticEvent].
 func NewHapticEventWithAudioResourceIDParametersRelativeTimeDuration(resID uint, eventParams *foundation.NSArray[*raw.CHHapticEventParameter], time_ float64, duration float64) *HapticEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CHHapticEvent")), objc.RegisterName("alloc"))
@@ -59,18 +67,24 @@ func NewHapticEventWithAudioResourceIDParametersRelativeTimeDuration(resID uint,
 	return &HapticEvent{inner: raw.CHHapticEventFromID(_id)}
 }
 
+// @property relativeTime The relative time for this event versus the start time of the pattern.  Units are seconds.
+//
 // WithRelativeTime sets the relativeTime property and returns the receiver for chaining.
 func (x *HapticEvent) WithRelativeTime(relativeTime float64) *HapticEvent {
 	x.inner.SetRelativeTime(relativeTime)
 	return x
 }
 
+// @property duration The duration for this event.  Units are seconds.  If unset (0.0), Continuous event types will have no fixed end.
+//
 // WithDuration sets the duration property and returns the receiver for chaining.
 func (x *HapticEvent) WithDuration(duration float64) *HapticEvent {
 	x.inner.SetDuration(duration)
 	return x
 }
 
+// @property type The type of event.
+//
 // Type calls the underlying Type.
 func (x *HapticEvent) Type() string {
 	_r := x.inner.Type()
@@ -80,6 +94,8 @@ func (x *HapticEvent) Type() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property eventParameters NSArray of Event parameters.  Can be empty.
+//
 // EventParameters returns the collection as a Go slice.
 func (x *HapticEvent) EventParameters() []*HapticEventParameter {
 	arr := x.inner.EventParameters()
@@ -91,6 +107,8 @@ func (x *HapticEvent) EventParameters() []*HapticEventParameter {
 	})
 }
 
+// @property relativeTime The relative time for this event versus the start time of the pattern.  Units are seconds.
+//
 // RelativeTime calls the underlying RelativeTime.
 func (x *HapticEvent) RelativeTime() float64 {
 	return x.inner.RelativeTime()
@@ -101,6 +119,8 @@ func (x *HapticEvent) SetRelativeTime(relativeTime float64) {
 	x.inner.SetRelativeTime(relativeTime)
 }
 
+// @property duration The duration for this event.  Units are seconds.  If unset (0.0), Continuous event types will have no fixed end.
+//
 // Duration calls the underlying Duration.
 func (x *HapticEvent) Duration() float64 {
 	return x.inner.Duration()

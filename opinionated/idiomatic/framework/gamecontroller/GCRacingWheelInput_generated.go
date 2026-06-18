@@ -35,6 +35,8 @@ func NewRacingWheelInput() *RacingWheelInput {
 	return &RacingWheelInput{inner: raw.GCRacingWheelInputFromID(_id)}
 }
 
+// Polls the current state vector of the racing wheel input and saves it to a new instance.
+//
 // Capture calls the underlying Capture.
 func (x *RacingWheelInput) Capture() *RacingWheelInputState {
 	_r := x.inner.Capture()

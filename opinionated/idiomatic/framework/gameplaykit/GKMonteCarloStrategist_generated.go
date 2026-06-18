@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The Monte Carlo Strategist is a generic AI that selects a game model update for a given player that results in the highest likelihood for that player to eventually win the game. It does this by sampling the updates available to the player in question. In doing this it will select the update it knows to produce the best result so far, expanding on this selection, simulating the rest of the game from that expansion, and then propogating the results (win or loss) upwards. It will do this until the budget has been reached, then returning the choice it has deemed best suited for the player in question.
+//
 // MonteCarloStrategist wraps [raw.GKMonteCarloStrategist] with a fluent Go API.
 type MonteCarloStrategist struct {
 	inner *raw.GKMonteCarloStrategist
@@ -35,18 +37,24 @@ func NewMonteCarloStrategist() *MonteCarloStrategist {
 	return &MonteCarloStrategist{inner: raw.GKMonteCarloStrategistFromID(_id)}
 }
 
+// The maximum number of samples that will be processed when searching for a move.
+//
 // WithBudget sets the budget property and returns the receiver for chaining.
 func (x *MonteCarloStrategist) WithBudget(budget uint) *MonteCarloStrategist {
 	x.inner.SetBudget(budget)
 	return x
 }
 
+// A weight that encourages exploration of less visited updates versus the continued exploitation of previously visited updates.
+//
 // WithExplorationParameter sets the explorationParameter property and returns the receiver for chaining.
 func (x *MonteCarloStrategist) WithExplorationParameter(explorationParameter uint) *MonteCarloStrategist {
 	x.inner.SetExplorationParameter(explorationParameter)
 	return x
 }
 
+// The maximum number of samples that will be processed when searching for a move.
+//
 // Budget calls the underlying Budget.
 func (x *MonteCarloStrategist) Budget() uint {
 	return x.inner.Budget()
@@ -57,6 +65,8 @@ func (x *MonteCarloStrategist) SetBudget(budget uint) {
 	x.inner.SetBudget(budget)
 }
 
+// A weight that encourages exploration of less visited updates versus the continued exploitation of previously visited updates.
+//
 // ExplorationParameter calls the underlying ExplorationParameter.
 func (x *MonteCarloStrategist) ExplorationParameter() uint {
 	return x.inner.ExplorationParameter()

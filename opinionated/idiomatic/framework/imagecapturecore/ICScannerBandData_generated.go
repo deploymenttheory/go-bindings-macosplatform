@@ -36,66 +36,92 @@ func NewScannerBandData() *ScannerBandData {
 	return &ScannerBandData{inner: raw.ICScannerBandDataFromID(_id)}
 }
 
+// @property fullImageWidth @abstract Describes the full image width of the banded image.
+//
 // FullImageWidth calls the underlying FullImageWidth.
 func (x *ScannerBandData) FullImageWidth() uint {
 	return x.inner.FullImageWidth()
 }
 
+// @property fullImageHeight @abstract Describes the full image height of the banded image.
+//
 // FullImageHeight calls the underlying FullImageHeight.
 func (x *ScannerBandData) FullImageHeight() uint {
 	return x.inner.FullImageHeight()
 }
 
+// @property bitsPerPixel @abstract Describes the number of bits per pixel for banded the image.
+//
 // BitsPerPixel calls the underlying BitsPerPixel.
 func (x *ScannerBandData) BitsPerPixel() uint {
 	return x.inner.BitsPerPixel()
 }
 
+// @property bitsPerComponent @abstract Describes the number of bits per component for the banded image.
+//
 // BitsPerComponent calls the underlying BitsPerComponent.
 func (x *ScannerBandData) BitsPerComponent() uint {
 	return x.inner.BitsPerComponent()
 }
 
+// @property numComponents @abstract Describes how many components are contained within the banded image.
+//
 // NumComponents calls the underlying NumComponents.
 func (x *ScannerBandData) NumComponents() uint {
 	return x.inner.NumComponents()
 }
 
+// @property bigEndian @abstract Describes if the banded image data is reported in big endian.
+//
 // IsBigEndian calls the underlying IsBigEndian.
 func (x *ScannerBandData) IsBigEndian() bool {
 	return x.inner.IsBigEndian()
 }
 
+// @property pixelDataType @abstract Type of pixel data that is contained in the band.
+//
 // PixelDataType calls the underlying PixelDataType.
 func (x *ScannerBandData) PixelDataType() ICScannerPixelDataType {
 	return ICScannerPixelDataType(x.inner.PixelDataType())
 }
 
+// @property colorSyncProfilePath @abstract Returns the path to the color profile matching the banded data.
+//
 // ColorSyncProfilePath calls the underlying ColorSyncProfilePath.
 func (x *ScannerBandData) ColorSyncProfilePath() unsafe.Pointer {
 	return x.inner.ColorSyncProfilePath()
 }
 
+// @property bytesPerRow @abstract Descries how many bytes are in each image band row.
+//
 // BytesPerRow calls the underlying BytesPerRow.
 func (x *ScannerBandData) BytesPerRow() uint {
 	return x.inner.BytesPerRow()
 }
 
+// @property dataStartRow @abstract Describes the start row of the image band.
+//
 // DataStartRow calls the underlying DataStartRow.
 func (x *ScannerBandData) DataStartRow() uint {
 	return x.inner.DataStartRow()
 }
 
+// @property dataNumRows @abstract Describes the number of rows contained in the image band.
+//
 // DataNumRows calls the underlying DataNumRows.
 func (x *ScannerBandData) DataNumRows() uint {
 	return x.inner.DataNumRows()
 }
 
+// @property dataSize @abstract Describes the actual data size of the image band buffer.
+//
 // DataSize calls the underlying DataSize.
 func (x *ScannerBandData) DataSize() uint {
 	return x.inner.DataSize()
 }
 
+// @property dataBuffer @abstract The pointer to the data buffer object.
+//
 // DataBuffer calls the underlying DataBuffer.
 func (x *ScannerBandData) DataBuffer() unsafe.Pointer {
 	return x.inner.DataBuffer()

@@ -35,21 +35,29 @@ func NewCentralManager() *CentralManager {
 	return &CentralManager{inner: raw.AVBCentralManagerFromID(_id)}
 }
 
+// @abstract	This method triggers the IOKit matching for the network controllers. @discussion	This is usually called by a subclass as the last thing in it's init method. This call is broken out of the AVBCentralManager's init method so that subclasses can finish their setup before calling it.
+//
 // StartControllerMatching calls the underlying StartControllerMatching.
 func (x *CentralManager) StartControllerMatching() {
 	x.inner.StartControllerMatching()
 }
 
+// @abstract	This method is called when an AVBInterface object is created for a NIC, either when the central manager is first started up or when the NIC is added later. @param		interface	An instance of an AVBInterface subclass (as appropriate for the NIC) which has been added for the discovered NIC. @discussion	The AVBCentralManager maintains it's own internal reference to the interface object until <code>didRemoveInterface:<code> is called with the same interface object, subclasses do not need to maintain another reference to this. A subclass does not need to call the AVBCentralManager implementation. Note this method is not called on the main thread and is not safe for performing UI actions.
+//
 // DidAddInterface calls the underlying DidAddInterface.
 func (x *CentralManager) DidAddInterface(interface_ *raw.AVBInterface) {
 	x.inner.DidAddInterface(interface_)
 }
 
+// @abstract	This method is called when a NIC has been removed from the system and the central manager is cleaning it up. @param		interface	An instance of an AVBInterface subclass (as appropriate for the NIC) which is being removed for the discovered NIC. @discussion	Note this method is not called on the main thread and is not safe for performing UI actions.
+//
 // DidRemoveInterface calls the underlying DidRemoveInterface.
 func (x *CentralManager) DidRemoveInterface(interface_ *raw.AVBInterface) {
 	x.inner.DidRemoveInterface(interface_)
 }
 
+// @abstract	This method is used to control if the central manager will create and process AVBInterface objects for non streaming interfaces. @result		YES for only AVB Enabled interfaces or NO for all interfaces. @discussion	The default value returned is YES and as such didAddInterface: will be called for all AVB Enabled network interfaces only.
+//
 // StreamingEnabledInterfacesOnly calls the underlying StreamingEnabledInterfacesOnly.
 func (x *CentralManager) StreamingEnabledInterfacesOnly() bool {
 	return x.inner.StreamingEnabledInterfacesOnly()

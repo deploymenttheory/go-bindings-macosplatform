@@ -47,32 +47,44 @@ func (x *CNNInstanceNormalizationGradientState) WithReadCount(readCount uint) *C
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNInstanceNormalizationGradientState) WithLabel(label string) *CNNInstanceNormalizationGradientState {
 	x.inner.MPSNNGradientState.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @abstract The MPSCNNInstanceNormalization object that created this state object.
+//
 // InstanceNormalization calls the underlying InstanceNormalization.
 func (x *CNNInstanceNormalizationGradientState) InstanceNormalization() *mpsneuralnetwork.MPSCNNInstanceNormalization {
 	return x.inner.InstanceNormalization()
 }
 
+// @abstract   Return an MTLBuffer object with the state's current gamma values.
+//
 // Gamma calls the underlying Gamma.
 func (x *CNNInstanceNormalizationGradientState) Gamma() metal.MTLBuffer {
 	return x.inner.Gamma()
 }
 
+// @abstract   Return an MTLBuffer object with the state's current beta values..
+//
 // Beta calls the underlying Beta.
 func (x *CNNInstanceNormalizationGradientState) Beta() metal.MTLBuffer {
 	return x.inner.Beta()
 }
 
+// @property   The MTLBuffer containing the gradient values for gamma.
+//
 // GradientForGamma calls the underlying GradientForGamma.
 func (x *CNNInstanceNormalizationGradientState) GradientForGamma() metal.MTLBuffer {
 	return x.inner.GradientForGamma()
 }
 
+// @property   The MTLBuffer containing the gradient values for beta.
+//
 // GradientForBeta calls the underlying GradientForBeta.
 func (x *CNNInstanceNormalizationGradientState) GradientForBeta() metal.MTLBuffer {
 	return x.inner.GradientForBeta()

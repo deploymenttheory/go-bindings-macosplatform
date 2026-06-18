@@ -42,42 +42,56 @@ func (x *ControllerAxisInput) WithValueChangedHandler(valueChangedHandler func(*
 	return x
 }
 
+// A normalized value for the input, between -1 and 1 for axis inputs. The values are deadzoned and saturated before they are returned so there is no value ouside the range. Deadzoning does not remove values from the range, the full 0 to 1 magnitude of values are possible from the input. As an axis is often used in a digital sense, you can rely on a value of 0 meaning the axis is inside the deadzone. Any value greater than or less than zero is not in the deadzone.
+//
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *ControllerAxisInput) WithValue(value float32) *ControllerAxisInput {
 	x.inner.SetValue(value)
 	return x
 }
 
+// The preferred system gesture state for this element. Defaults to GCSystemGestureStateEnabled for most elements @note This is merely the preferred system gesture state - it is not guaranteed to be respected by the system. @note It is highly recommended to leave this set to the default value, however there may be situations (for example, game streaming apps) where it is preferrable to disable system gestures. @see boundToSystemGesture
+//
 // WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
 func (x *ControllerAxisInput) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerAxisInput {
 	x.inner.GCControllerElement.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
 	return x
 }
 
+// The element's SF Symbols name, taking input remapping into account. @note In almost all instances, you should use this over unmappedSfSymbolsName in your UI.
+//
 // WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
 func (x *ControllerAxisInput) WithSfSymbolsName(sfSymbolsName string) *ControllerAxisInput {
 	x.inner.GCControllerElement.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
 	return x
 }
 
+// The element's localized name, taking input remapping into account. @note In almost all instances, you should use this over unmappedLocalizedName in your UI.
+//
 // WithLocalizedName sets the localizedName property and returns the receiver for chaining.
 func (x *ControllerAxisInput) WithLocalizedName(localizedName string) *ControllerAxisInput {
 	x.inner.GCControllerElement.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
 	return x
 }
 
+// The element's SF Symbols name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (sfSymbolsName is nil).
+//
 // WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
 func (x *ControllerAxisInput) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerAxisInput {
 	x.inner.GCControllerElement.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
 	return x
 }
 
+// The element's localized name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (localizedName is nil).
+//
 // WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
 func (x *ControllerAxisInput) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerAxisInput {
 	x.inner.GCControllerElement.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
 	return x
 }
 
+// Sets the normalized value for the input. @param value the value to set the input to. @note If the controller's snapshot flag is set to NO, this method has no effect. @see value
+//
 // SetValue calls the underlying SetValue.
 func (x *ControllerAxisInput) SetValue(value float32) {
 	x.inner.SetValue(value)
@@ -93,6 +107,8 @@ func (x *ControllerAxisInput) SetValueChangedHandler(valueChangedHandler func(*r
 	x.inner.SetValueChangedHandler(valueChangedHandler)
 }
 
+// A normalized value for the input, between -1 and 1 for axis inputs. The values are deadzoned and saturated before they are returned so there is no value ouside the range. Deadzoning does not remove values from the range, the full 0 to 1 magnitude of values are possible from the input. As an axis is often used in a digital sense, you can rely on a value of 0 meaning the axis is inside the deadzone. Any value greater than or less than zero is not in the deadzone.
+//
 // Value calls the underlying Value.
 func (x *ControllerAxisInput) Value() float32 {
 	return x.inner.Value()

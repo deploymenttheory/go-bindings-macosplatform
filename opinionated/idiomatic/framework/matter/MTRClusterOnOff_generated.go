@@ -31,6 +31,8 @@ func MTRClusterOnOffFromID(id objc.ID) *MTRClusterOnOff {
 	return &MTRClusterOnOff{inner: raw.MTRClusterOnOffFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterOnOffWithDeviceEndpointIDQueue creates a new [MTRClusterOnOff].
 func NewMTRClusterOnOffWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterOnOff {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterOnOff")), objc.RegisterName("alloc"))

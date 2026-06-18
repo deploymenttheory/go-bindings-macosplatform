@@ -38,6 +38,8 @@ func NewModelConfiguration() *ModelConfiguration {
 	return &ModelConfiguration{inner: raw.MLModelConfigurationFromID(_id)}
 }
 
+// A human readable name of a MLModel instance for display purposes. Use this property to set a name of a model instance so that runtime analysis tools (e.g. Instruments and os_log) can display that name in the user interface. CoreML framework doesn't parse nor filter the text. It is the client's responsibility to use appropriate text, which may involve localization and privacy considerations. When the property is nil, CoreML framework provides a default.
+//
 // WithModelDisplayName sets the modelDisplayName property and returns the receiver for chaining.
 func (x *ModelConfiguration) WithModelDisplayName(modelDisplayName string) *ModelConfiguration {
 	x.inner.SetModelDisplayName(foundation.NSStringStringWithUTF8String(modelDisplayName))
@@ -50,18 +52,24 @@ func (x *ModelConfiguration) WithComputeUnits(computeUnits MLComputeUnits) *Mode
 	return x
 }
 
+// A group of hints for CoreML to optimize
+//
 // WithOptimizationHints sets the optimizationHints property and returns the receiver for chaining.
 func (x *ModelConfiguration) WithOptimizationHints(optimizationHints *OptimizationHints) *ModelConfiguration {
 	x.inner.SetOptimizationHints(optimizationHints.Unwrap())
 	return x
 }
 
+// Set to YES to allow low precision accumulation on GPU when available. Defaults to NO
+//
 // WithAllowLowPrecisionAccumulationOnGPU sets the allowLowPrecisionAccumulationOnGPU property and returns the receiver for chaining.
 func (x *ModelConfiguration) WithAllowLowPrecisionAccumulationOnGPU(allowLowPrecisionAccumulationOnGPU bool) *ModelConfiguration {
 	x.inner.SetAllowLowPrecisionAccumulationOnGPU(allowLowPrecisionAccumulationOnGPU)
 	return x
 }
 
+// Set to specify a preferred Metal device. Defaults to nil which indicates automatic selection
+//
 // WithPreferredMetalDevice sets the preferredMetalDevice property and returns the receiver for chaining.
 func (x *ModelConfiguration) WithPreferredMetalDevice(preferredMetalDevice metal.MTLDevice) *ModelConfiguration {
 	x.inner.SetPreferredMetalDevice(preferredMetalDevice)
@@ -74,12 +82,16 @@ func (x *ModelConfiguration) WithParameters(parameters *foundation.NSDictionary[
 	return x
 }
 
+// Function name that `MLModel` will use. Some model types (e.g. ML Program) supports multiple functions in a model asset, where each `MLModel` instance is associated with a particular function. Use `MLModelAsset` to get the list of available functions. Use `nil` to use a default function. ```swift let configuration = MLModelConfiguration() configuration.functionName = "my_function" ```
+//
 // WithFunctionName sets the functionName property and returns the receiver for chaining.
 func (x *ModelConfiguration) WithFunctionName(functionName string) *ModelConfiguration {
 	x.inner.SetFunctionName(foundation.NSStringStringWithUTF8String(functionName))
 	return x
 }
 
+// A human readable name of a MLModel instance for display purposes. Use this property to set a name of a model instance so that runtime analysis tools (e.g. Instruments and os_log) can display that name in the user interface. CoreML framework doesn't parse nor filter the text. It is the client's responsibility to use appropriate text, which may involve localization and privacy considerations. When the property is nil, CoreML framework provides a default.
+//
 // ModelDisplayName calls the underlying ModelDisplayName.
 func (x *ModelConfiguration) ModelDisplayName() string {
 	_r := x.inner.ModelDisplayName()
@@ -104,6 +116,8 @@ func (x *ModelConfiguration) SetComputeUnits(computeUnits MLComputeUnits) {
 	x.inner.SetComputeUnits(raw.MLComputeUnits(computeUnits))
 }
 
+// A group of hints for CoreML to optimize
+//
 // OptimizationHints calls the underlying OptimizationHints.
 func (x *ModelConfiguration) OptimizationHints() *OptimizationHints {
 	_r := x.inner.OptimizationHints()
@@ -118,6 +132,8 @@ func (x *ModelConfiguration) SetOptimizationHints(optimizationHints *raw.MLOptim
 	x.inner.SetOptimizationHints(optimizationHints)
 }
 
+// Set to YES to allow low precision accumulation on GPU when available. Defaults to NO
+//
 // AllowLowPrecisionAccumulationOnGPU calls the underlying AllowLowPrecisionAccumulationOnGPU.
 func (x *ModelConfiguration) AllowLowPrecisionAccumulationOnGPU() bool {
 	return x.inner.AllowLowPrecisionAccumulationOnGPU()
@@ -128,6 +144,8 @@ func (x *ModelConfiguration) SetAllowLowPrecisionAccumulationOnGPU(allowLowPreci
 	x.inner.SetAllowLowPrecisionAccumulationOnGPU(allowLowPrecisionAccumulationOnGPU)
 }
 
+// Set to specify a preferred Metal device. Defaults to nil which indicates automatic selection
+//
 // PreferredMetalDevice calls the underlying PreferredMetalDevice.
 func (x *ModelConfiguration) PreferredMetalDevice() metal.MTLDevice {
 	return x.inner.PreferredMetalDevice()

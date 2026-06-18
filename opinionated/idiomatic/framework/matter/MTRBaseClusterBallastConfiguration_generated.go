@@ -35,6 +35,8 @@ func MTRBaseClusterBallastConfigurationFromID(id objc.ID) *MTRBaseClusterBallast
 	return &MTRBaseClusterBallastConfiguration{inner: raw.MTRBaseClusterBallastConfigurationFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterBallastConfigurationWithDeviceEndpointIDQueue creates a new [MTRBaseClusterBallastConfiguration].
 func NewMTRBaseClusterBallastConfigurationWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterBallastConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterBallastConfiguration")), objc.RegisterName("alloc"))

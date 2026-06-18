@@ -32,6 +32,8 @@ func ShapeFromID(id objc.ID) *Shape {
 	return &Shape{inner: raw.PHASEShapeFromID(id)}
 }
 
+// @method initWithEngine:mesh @abstract Initialize a shape from a mesh. @discussion One PHASEShapeElement will be created for every submesh within the mesh. @note A single shape can be used to create multiple instances of sources and occluders. For example, a client could create a single shape for a window, then create multiple occluders from it. The same can be done with with sources. @param engine The engine this shape will be used with. @param mesh A Model I/O mesh object. @return A new shape object
+//
 // NewShapeWithEngineMesh creates a new [Shape].
 func NewShapeWithEngineMesh(engine *raw.PHASEEngine, mesh *modelio.MDLMesh) *Shape {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEShape")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewShapeWithEngineMesh(engine *raw.PHASEEngine, mesh *modelio.MDLMesh) *Sha
 	return &Shape{inner: raw.PHASEShapeFromID(_id)}
 }
 
+// @method initWithEngine:mesh @abstract Initialize a shape from an MDLMesh and a list of materials @param engine The engine this shape will be used with @param mesh A Model I/O mesh object. @param materials An array of PHASEMaterial objects that overrides any acoustical materials within the mesh object @return A new shape object @discussion The materials array cannot be empty and cannot contain nil entries, otherwise an exception is thrown. If the number of submeshes within the mesh are less than or equal to the size of the material array, the material will be assigned to the corresponding element. If the number of submeshes within the mesh is greater than the size of the material array, the material assigned to the element will be the index of the element modulo the number of materials. IE: given a mesh with 6 submeshes and an array of 3 materials, the element at index 5 will be assigned the material at index: 5 % 3 = 2.
+//
 // NewShapeWithEngineMeshMaterials creates a new [Shape].
 func NewShapeWithEngineMeshMaterials(engine *raw.PHASEEngine, mesh *modelio.MDLMesh, materials *foundation.NSArray[*raw.PHASEMaterial]) *Shape {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEShape")), objc.RegisterName("alloc"))

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// Configuration for a display attached to a Mac graphics device.
+//
 // MacGraphicsDeviceConfiguration wraps [raw.VZMacGraphicsDeviceConfiguration] with a fluent Go API.
 type MacGraphicsDeviceConfiguration struct {
 	inner *raw.VZMacGraphicsDeviceConfiguration
@@ -40,6 +42,8 @@ func NewMacGraphicsDeviceConfiguration() *MacGraphicsDeviceConfiguration {
 	return &MacGraphicsDeviceConfiguration{inner: raw.VZMacGraphicsDeviceConfigurationFromID(_id)}
 }
 
+// The displays associated with this graphics device.
+//
 // WithDisplays sets the collection, converting the Go slice to an NSArray.
 func (x *MacGraphicsDeviceConfiguration) WithDisplays(items ...*raw.VZMacGraphicsDisplayConfiguration) *MacGraphicsDeviceConfiguration {
 	if len(items) == 0 {

@@ -36,65 +36,87 @@ func NewControllerTouchpad() *ControllerTouchpad {
 	return &ControllerTouchpad{inner: raw.GCControllerTouchpadFromID(_id)}
 }
 
+// Called when a touch event begins on the touchpad.
+//
 // WithTouchDown sets the touchDown property and returns the receiver for chaining.
 func (x *ControllerTouchpad) WithTouchDown(touchDown func(*raw.GCControllerTouchpad, float32, float32, float32, bool)) *ControllerTouchpad {
 	x.inner.SetTouchDown(touchDown)
 	return x
 }
 
+// Called when a touch event continues on the touchpad, but not when it begins or ends.
+//
 // WithTouchMoved sets the touchMoved property and returns the receiver for chaining.
 func (x *ControllerTouchpad) WithTouchMoved(touchMoved func(*raw.GCControllerTouchpad, float32, float32, float32, bool)) *ControllerTouchpad {
 	x.inner.SetTouchMoved(touchMoved)
 	return x
 }
 
+// Called when a touch event ends on the touchpad.
+//
 // WithTouchUp sets the touchUp property and returns the receiver for chaining.
 func (x *ControllerTouchpad) WithTouchUp(touchUp func(*raw.GCControllerTouchpad, float32, float32, float32, bool)) *ControllerTouchpad {
 	x.inner.SetTouchUp(touchUp)
 	return x
 }
 
+// The touchpad can use the raw position values of its surface as D-pad values, or it can create a virtual dpad centered around the first contact point with the surface. If NO; a smaller sliding window is created around the initial touch point and subsequent movement is relative to that center. Movement outside the window will slide the window with it to re-center it. This is great for surfaces where there is no clear sense of a middle and drift over time is an issue. If YES; the absolute values are used and any drift will have to managed manually either through user traning or by a developer using the dpad. The default value for this property is YES, meaning the touch surface's raw positional values are reported.
+//
 // WithReportsAbsoluteTouchSurfaceValues sets the reportsAbsoluteTouchSurfaceValues property and returns the receiver for chaining.
 func (x *ControllerTouchpad) WithReportsAbsoluteTouchSurfaceValues(reportsAbsoluteTouchSurfaceValues bool) *ControllerTouchpad {
 	x.inner.SetReportsAbsoluteTouchSurfaceValues(reportsAbsoluteTouchSurfaceValues)
 	return x
 }
 
+// The preferred system gesture state for this element. Defaults to GCSystemGestureStateEnabled for most elements @note This is merely the preferred system gesture state - it is not guaranteed to be respected by the system. @note It is highly recommended to leave this set to the default value, however there may be situations (for example, game streaming apps) where it is preferrable to disable system gestures. @see boundToSystemGesture
+//
 // WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
 func (x *ControllerTouchpad) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerTouchpad {
 	x.inner.GCControllerElement.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
 	return x
 }
 
+// The element's SF Symbols name, taking input remapping into account. @note In almost all instances, you should use this over unmappedSfSymbolsName in your UI.
+//
 // WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
 func (x *ControllerTouchpad) WithSfSymbolsName(sfSymbolsName string) *ControllerTouchpad {
 	x.inner.GCControllerElement.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
 	return x
 }
 
+// The element's localized name, taking input remapping into account. @note In almost all instances, you should use this over unmappedLocalizedName in your UI.
+//
 // WithLocalizedName sets the localizedName property and returns the receiver for chaining.
 func (x *ControllerTouchpad) WithLocalizedName(localizedName string) *ControllerTouchpad {
 	x.inner.GCControllerElement.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
 	return x
 }
 
+// The element's SF Symbols name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (sfSymbolsName is nil).
+//
 // WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
 func (x *ControllerTouchpad) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerTouchpad {
 	x.inner.GCControllerElement.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
 	return x
 }
 
+// The element's localized name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (localizedName is nil).
+//
 // WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
 func (x *ControllerTouchpad) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerTouchpad {
 	x.inner.GCControllerElement.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
 	return x
 }
 
+// Sets the normalized value for the touchpad's axes, as well as its current touch and button state. @note If the controller's snapshot flag is set to NO, this method has no effect. @see touchSurface @see touchState
+//
 // SetValueForXAxisYAxisTouchDownButtonValue calls the underlying SetValueForXAxisYAxisTouchDownButtonValue.
 func (x *ControllerTouchpad) SetValueForXAxisYAxisTouchDownButtonValue(xAxis float32, yAxis float32, touchDown bool, buttonValue float32) {
 	x.inner.SetValueForXAxisYAxisTouchDownButtonValue(xAxis, yAxis, touchDown, buttonValue)
 }
 
+// Button is the button built into the touch surface.
+//
 // Button calls the underlying Button.
 func (x *ControllerTouchpad) Button() *ControllerButtonInput {
 	_r := x.inner.Button()
@@ -104,6 +126,8 @@ func (x *ControllerTouchpad) Button() *ControllerButtonInput {
 	return &ControllerButtonInput{inner: _r}
 }
 
+// Called when a touch event begins on the touchpad.
+//
 // TouchDown calls the underlying TouchDown.
 func (x *ControllerTouchpad) TouchDown() objc.Block {
 	return x.inner.TouchDown()
@@ -114,6 +138,8 @@ func (x *ControllerTouchpad) SetTouchDown(touchDown func(*raw.GCControllerTouchp
 	x.inner.SetTouchDown(touchDown)
 }
 
+// Called when a touch event continues on the touchpad, but not when it begins or ends.
+//
 // TouchMoved calls the underlying TouchMoved.
 func (x *ControllerTouchpad) TouchMoved() objc.Block {
 	return x.inner.TouchMoved()
@@ -124,6 +150,8 @@ func (x *ControllerTouchpad) SetTouchMoved(touchMoved func(*raw.GCControllerTouc
 	x.inner.SetTouchMoved(touchMoved)
 }
 
+// Called when a touch event ends on the touchpad.
+//
 // TouchUp calls the underlying TouchUp.
 func (x *ControllerTouchpad) TouchUp() objc.Block {
 	return x.inner.TouchUp()
@@ -134,6 +162,8 @@ func (x *ControllerTouchpad) SetTouchUp(touchUp func(*raw.GCControllerTouchpad, 
 	x.inner.SetTouchUp(touchUp)
 }
 
+// The touch surface is a 2-axis control that represents the position of a touch event on the touchpad. The axes will indicate the most recent touch position - a non-zero value does not indicate that the surface is being touched, and a value of (0, 0) does not indicate the surface is not being touched. @see touchState - Should be polled in conjunction with touchSurface to determine if values are valid
+//
 // TouchSurface calls the underlying TouchSurface.
 func (x *ControllerTouchpad) TouchSurface() *ControllerDirectionPad {
 	_r := x.inner.TouchSurface()
@@ -143,11 +173,15 @@ func (x *ControllerTouchpad) TouchSurface() *ControllerDirectionPad {
 	return &ControllerDirectionPad{inner: _r}
 }
 
+// Indicates the current state of the touch event on the touchpad.
+//
 // TouchState calls the underlying TouchState.
 func (x *ControllerTouchpad) TouchState() GCTouchState {
 	return GCTouchState(x.inner.TouchState())
 }
 
+// The touchpad can use the raw position values of its surface as D-pad values, or it can create a virtual dpad centered around the first contact point with the surface. If NO; a smaller sliding window is created around the initial touch point and subsequent movement is relative to that center. Movement outside the window will slide the window with it to re-center it. This is great for surfaces where there is no clear sense of a middle and drift over time is an issue. If YES; the absolute values are used and any drift will have to managed manually either through user traning or by a developer using the dpad. The default value for this property is YES, meaning the touch surface's raw positional values are reported.
+//
 // ReportsAbsoluteTouchSurfaceValues calls the underlying ReportsAbsoluteTouchSurfaceValues.
 func (x *ControllerTouchpad) ReportsAbsoluteTouchSurfaceValues() bool {
 	return x.inner.ReportsAbsoluteTouchSurfaceValues()

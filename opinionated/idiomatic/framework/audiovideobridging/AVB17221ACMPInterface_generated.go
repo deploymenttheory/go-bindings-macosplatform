@@ -36,26 +36,36 @@ func NewAVB17221ACMPInterface() *AVB17221ACMPInterface {
 	return &AVB17221ACMPInterface{inner: raw.AVB17221ACMPInterfaceFromID(_id)}
 }
 
+// @method		setHandler:forEntityID: @abstract	Add an object implementing the AVB17221ACMPClient protocol as a handler for messages to or from a specified EntityID. @param		handler	The object which will handle all of the commands and responses. @param		targetEntityID	The EntityID of the entity the messages are to or from. @result		YES if the handler was added, NO if there is already a handler or if the routing ID couldn't be added.
+//
 // SetHandlerForEntityID calls the underlying SetHandlerForEntityID.
 func (x *AVB17221ACMPInterface) SetHandlerForEntityID(handler raw.AVB17221ACMPClient, targetEntityID uint64) bool {
 	return x.inner.SetHandlerForEntityID(handler, targetEntityID)
 }
 
+// @method		removeHandlerForEntityID: @abstract	Removed a handler  for messages to or from a specified EntityID. @param		targetEntityID	The EntityID of the entity the messages are to or from.
+//
 // RemoveHandlerForEntityID calls the underlying RemoveHandlerForEntityID.
 func (x *AVB17221ACMPInterface) RemoveHandlerForEntityID(targetEntityID uint64) {
 	x.inner.RemoveHandlerForEntityID(targetEntityID)
 }
 
+// @method		sendACMPResponseMessage: @abstract	Send an ACMP response message. @param		message	A pointer to an AVB17221ACMPMessage struct containing the ACMP message to send. @result		kIOReturnSuccess if the message was successfully sent, otherwise an error indicating failure reason. @discussion	This method synchronizes access to sending ACMP messages, and can safely be called from multiple threads and while handling a received command.
+//
 // SendACMPResponseMessageError calls the underlying SendACMPResponseMessageError.
 func (x *AVB17221ACMPInterface) SendACMPResponseMessageError(message *raw.AVB17221ACMPMessage) (bool, error) {
 	return x.inner.SendACMPResponseMessageError(message)
 }
 
+// @method		sendACMPCommandMessage:completionHandler: @abstract	Send an ACMP command message. @param		message	A pointer to an AVB17221ACMPMessage struct containing the ACMP message. @param		completionHandler	A block containing code to execute when the command has been sent or timed out. @result		kIOReturnSuccess if the message was successfully sent, otherwise an error indicating failure reason. @discussion	This method synchronizes access to sending ACMP messages, and can safely be called from multiple threads. The completionHandler is synchronized with the reception of messages from the kernel object providing the command transport. This method handles the retry and message timeout per the IEEE Std 1722.1™-2013 standard timeouts.
+//
 // SendACMPCommandMessageCompletionHandler calls the underlying SendACMPCommandMessageCompletionHandler.
 func (x *AVB17221ACMPInterface) SendACMPCommandMessageCompletionHandler(message *raw.AVB17221ACMPMessage, completionHandler func(unsafe.Pointer, *raw.AVB17221ACMPMessage)) bool {
 	return x.inner.SendACMPCommandMessageCompletionHandler(message, completionHandler)
 }
 
+// @property	multicastDestinationAddress @abstract	An AVBMACAddress of the multicast destination MAC address being used for all ACMP messages on the interface. @discussion	The MAC Address pointed to by the property is pre-initialized with the IEEE Std 1722.1™-2013 standard value, 91:e0:f0:01:00:00
+//
 // MulticastDestinationAddress calls the underlying MulticastDestinationAddress.
 func (x *AVB17221ACMPInterface) MulticastDestinationAddress() *MACAddress {
 	_r := x.inner.MulticastDestinationAddress()

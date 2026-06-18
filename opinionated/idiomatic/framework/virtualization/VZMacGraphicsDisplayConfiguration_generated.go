@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The configuration for a Mac graphics device.
+//
 // MacGraphicsDisplayConfiguration wraps [raw.VZMacGraphicsDisplayConfiguration] with a fluent Go API.
 type MacGraphicsDisplayConfiguration struct {
 	inner *raw.VZMacGraphicsDisplayConfiguration
@@ -33,6 +35,8 @@ func MacGraphicsDisplayConfigurationFromID(id objc.ID) *MacGraphicsDisplayConfig
 	return &MacGraphicsDisplayConfiguration{inner: raw.VZMacGraphicsDisplayConfigurationFromID(id)}
 }
 
+// Create a display configuration with the specified pixel dimensions and pixel density.
+//
 // NewMacGraphicsDisplayConfigurationWithWidthInPixelsHeightInPixelsPixelsPerInch creates a new [MacGraphicsDisplayConfiguration].
 func NewMacGraphicsDisplayConfigurationWithWidthInPixelsHeightInPixelsPixelsPerInch(widthInPixels int, heightInPixels int, pixelsPerInch int) *MacGraphicsDisplayConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacGraphicsDisplayConfiguration")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewMacGraphicsDisplayConfigurationWithWidthInPixelsHeightInPixelsPixelsPerI
 	return &MacGraphicsDisplayConfiguration{inner: raw.VZMacGraphicsDisplayConfigurationFromID(_id)}
 }
 
+// Create a display configuration suitable for showing on the specified screen.
+//
 // NewMacGraphicsDisplayConfigurationForScreenSizeInPoints creates a new [MacGraphicsDisplayConfiguration].
 func NewMacGraphicsDisplayConfigurationForScreenSizeInPoints(screen *appkit.NSScreen, sizeInPoints corefoundation.CGSize) *MacGraphicsDisplayConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacGraphicsDisplayConfiguration")), objc.RegisterName("alloc"))
@@ -47,24 +53,32 @@ func NewMacGraphicsDisplayConfigurationForScreenSizeInPoints(screen *appkit.NSSc
 	return &MacGraphicsDisplayConfiguration{inner: raw.VZMacGraphicsDisplayConfigurationFromID(_id)}
 }
 
+// The width of the display, in pixels.
+//
 // WithWidthInPixels sets the widthInPixels property and returns the receiver for chaining.
 func (x *MacGraphicsDisplayConfiguration) WithWidthInPixels(widthInPixels int) *MacGraphicsDisplayConfiguration {
 	x.inner.SetWidthInPixels(widthInPixels)
 	return x
 }
 
+// The height of the display, in pixels.
+//
 // WithHeightInPixels sets the heightInPixels property and returns the receiver for chaining.
 func (x *MacGraphicsDisplayConfiguration) WithHeightInPixels(heightInPixels int) *MacGraphicsDisplayConfiguration {
 	x.inner.SetHeightInPixels(heightInPixels)
 	return x
 }
 
+// The pixel density in pixels per inch.
+//
 // WithPixelsPerInch sets the pixelsPerInch property and returns the receiver for chaining.
 func (x *MacGraphicsDisplayConfiguration) WithPixelsPerInch(pixelsPerInch int) *MacGraphicsDisplayConfiguration {
 	x.inner.SetPixelsPerInch(pixelsPerInch)
 	return x
 }
 
+// @abstract The width of the display, in pixels.
+//
 // WidthInPixels calls the underlying WidthInPixels.
 func (x *MacGraphicsDisplayConfiguration) WidthInPixels() int {
 	return x.inner.WidthInPixels()
@@ -75,6 +89,8 @@ func (x *MacGraphicsDisplayConfiguration) SetWidthInPixels(widthInPixels int) {
 	x.inner.SetWidthInPixels(widthInPixels)
 }
 
+// @abstract The height of the display, in pixels.
+//
 // HeightInPixels calls the underlying HeightInPixels.
 func (x *MacGraphicsDisplayConfiguration) HeightInPixels() int {
 	return x.inner.HeightInPixels()
@@ -85,6 +101,8 @@ func (x *MacGraphicsDisplayConfiguration) SetHeightInPixels(heightInPixels int) 
 	x.inner.SetHeightInPixels(heightInPixels)
 }
 
+// @abstract The pixel density as a number of pixels per inch.
+//
 // PixelsPerInch calls the underlying PixelsPerInch.
 func (x *MacGraphicsDisplayConfiguration) PixelsPerInch() int {
 	return x.inner.PixelsPerInch()

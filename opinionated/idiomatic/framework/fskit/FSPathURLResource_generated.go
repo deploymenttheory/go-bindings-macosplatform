@@ -30,6 +30,8 @@ func PathURLResourceFromID(id objc.ID) *PathURLResource {
 	return &PathURLResource{inner: raw.FSPathURLResourceFromID(id)}
 }
 
+// Creates a path URL resource. - Parameters: - URL: A URL in the system file space that represents the contents of a file system. This parameter uses the `file:` scheme. - writable: A Boolean value that indicates whether the file system supports writing to the contents of the URL.
+//
 // NewPathURLResourceWithURLWritable creates a new [PathURLResource].
 func NewPathURLResourceWithURLWritable(uRL string, writable bool) *PathURLResource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSPathURLResource")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewPathURLResourceWithURLWritable(uRL string, writable bool) *PathURLResour
 	return &PathURLResource{inner: raw.FSPathURLResourceFromID(_id)}
 }
 
+// The URL represented by the resource.
+//
 // Url calls the underlying Url.
 func (x *PathURLResource) Url() *foundation.NSURL {
 	return x.inner.Url()

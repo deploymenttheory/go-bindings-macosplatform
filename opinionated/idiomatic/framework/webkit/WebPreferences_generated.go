@@ -31,6 +31,8 @@ func WebPreferencesFromID(id objc.ID) *WebPreferences {
 	return &WebPreferences{inner: raw.WebPreferencesFromID(id)}
 }
 
+// @method initWithIdentifier: @param anIdentifier A string used to identify the WebPreferences. @discussion WebViews can share instances of WebPreferences by using an instance of WebPreferences with the same identifier.  Typically, instance are not created directly.  Instead you set the preferences identifier on a WebView.  The identifier is used as a prefix that is added to the user defaults keys for the WebPreferences. @result Returns a new instance of WebPreferences or a previously allocated instance with the same identifier.
+//
 // NewWebPreferencesWithIdentifier creates a new [WebPreferences].
 func NewWebPreferencesWithIdentifier(anIdentifier string) *WebPreferences {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WebPreferences")), objc.RegisterName("alloc"))
@@ -38,174 +40,232 @@ func NewWebPreferencesWithIdentifier(anIdentifier string) *WebPreferences {
 	return &WebPreferences{inner: raw.WebPreferencesFromID(_id)}
 }
 
+// @property standardFontFamily
+//
 // WithStandardFontFamily sets the standardFontFamily property and returns the receiver for chaining.
 func (x *WebPreferences) WithStandardFontFamily(standardFontFamily string) *WebPreferences {
 	x.inner.SetStandardFontFamily(foundation.NSStringStringWithUTF8String(standardFontFamily))
 	return x
 }
 
+// @property fixedFontFamily
+//
 // WithFixedFontFamily sets the fixedFontFamily property and returns the receiver for chaining.
 func (x *WebPreferences) WithFixedFontFamily(fixedFontFamily string) *WebPreferences {
 	x.inner.SetFixedFontFamily(foundation.NSStringStringWithUTF8String(fixedFontFamily))
 	return x
 }
 
+// @property serifFontFamily
+//
 // WithSerifFontFamily sets the serifFontFamily property and returns the receiver for chaining.
 func (x *WebPreferences) WithSerifFontFamily(serifFontFamily string) *WebPreferences {
 	x.inner.SetSerifFontFamily(foundation.NSStringStringWithUTF8String(serifFontFamily))
 	return x
 }
 
+// @property sansSerifFontFamily
+//
 // WithSansSerifFontFamily sets the sansSerifFontFamily property and returns the receiver for chaining.
 func (x *WebPreferences) WithSansSerifFontFamily(sansSerifFontFamily string) *WebPreferences {
 	x.inner.SetSansSerifFontFamily(foundation.NSStringStringWithUTF8String(sansSerifFontFamily))
 	return x
 }
 
+// @property cursiveFontFamily
+//
 // WithCursiveFontFamily sets the cursiveFontFamily property and returns the receiver for chaining.
 func (x *WebPreferences) WithCursiveFontFamily(cursiveFontFamily string) *WebPreferences {
 	x.inner.SetCursiveFontFamily(foundation.NSStringStringWithUTF8String(cursiveFontFamily))
 	return x
 }
 
+// @property fantasyFontFamily
+//
 // WithFantasyFontFamily sets the fantasyFontFamily property and returns the receiver for chaining.
 func (x *WebPreferences) WithFantasyFontFamily(fantasyFontFamily string) *WebPreferences {
 	x.inner.SetFantasyFontFamily(foundation.NSStringStringWithUTF8String(fantasyFontFamily))
 	return x
 }
 
+// @property defaultFontSize
+//
 // WithDefaultFontSize sets the defaultFontSize property and returns the receiver for chaining.
 func (x *WebPreferences) WithDefaultFontSize(defaultFontSize int) *WebPreferences {
 	x.inner.SetDefaultFontSize(defaultFontSize)
 	return x
 }
 
+// @property defaultFixedFontSize
+//
 // WithDefaultFixedFontSize sets the defaultFixedFontSize property and returns the receiver for chaining.
 func (x *WebPreferences) WithDefaultFixedFontSize(defaultFixedFontSize int) *WebPreferences {
 	x.inner.SetDefaultFixedFontSize(defaultFixedFontSize)
 	return x
 }
 
+// @property minimumFontSize
+//
 // WithMinimumFontSize sets the minimumFontSize property and returns the receiver for chaining.
 func (x *WebPreferences) WithMinimumFontSize(minimumFontSize int) *WebPreferences {
 	x.inner.SetMinimumFontSize(minimumFontSize)
 	return x
 }
 
+// @property minimumLogicalFontSize
+//
 // WithMinimumLogicalFontSize sets the minimumLogicalFontSize property and returns the receiver for chaining.
 func (x *WebPreferences) WithMinimumLogicalFontSize(minimumLogicalFontSize int) *WebPreferences {
 	x.inner.SetMinimumLogicalFontSize(minimumLogicalFontSize)
 	return x
 }
 
+// @property defaultTextEncodingName
+//
 // WithDefaultTextEncodingName sets the defaultTextEncodingName property and returns the receiver for chaining.
 func (x *WebPreferences) WithDefaultTextEncodingName(defaultTextEncodingName string) *WebPreferences {
 	x.inner.SetDefaultTextEncodingName(foundation.NSStringStringWithUTF8String(defaultTextEncodingName))
 	return x
 }
 
+// @property userStyleSheetEnabled
+//
 // WithUserStyleSheetEnabled sets the userStyleSheetEnabled property and returns the receiver for chaining.
 func (x *WebPreferences) WithUserStyleSheetEnabled(userStyleSheetEnabled bool) *WebPreferences {
 	x.inner.SetUserStyleSheetEnabled(userStyleSheetEnabled)
 	return x
 }
 
+// @property userStyleSheetLocation @abstract The location of the user style sheet.
+//
 // WithUserStyleSheetLocation sets the userStyleSheetLocation property and returns the receiver for chaining.
 func (x *WebPreferences) WithUserStyleSheetLocation(userStyleSheetLocation string) *WebPreferences {
 	x.inner.SetUserStyleSheetLocation(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(userStyleSheetLocation)))
 	return x
 }
 
+// @property javaEnabled @discussion Deprecated function that does nothing and always returns false.
+//
 // WithJavaEnabled sets the javaEnabled property and returns the receiver for chaining.
 func (x *WebPreferences) WithJavaEnabled(javaEnabled bool) *WebPreferences {
 	x.inner.SetJavaEnabled(javaEnabled)
 	return x
 }
 
+// @property javaScriptEnabled
+//
 // WithJavaScriptEnabled sets the javaScriptEnabled property and returns the receiver for chaining.
 func (x *WebPreferences) WithJavaScriptEnabled(javaScriptEnabled bool) *WebPreferences {
 	x.inner.SetJavaScriptEnabled(javaScriptEnabled)
 	return x
 }
 
+// @property javaScriptCanOpenWindowsAutomatically
+//
 // WithJavaScriptCanOpenWindowsAutomatically sets the javaScriptCanOpenWindowsAutomatically property and returns the receiver for chaining.
 func (x *WebPreferences) WithJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically bool) *WebPreferences {
 	x.inner.SetJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically)
 	return x
 }
 
+// @property plugInsEnabled
+//
 // WithPlugInsEnabled sets the plugInsEnabled property and returns the receiver for chaining.
 func (x *WebPreferences) WithPlugInsEnabled(plugInsEnabled bool) *WebPreferences {
 	x.inner.SetPlugInsEnabled(plugInsEnabled)
 	return x
 }
 
+// @property allowsAnimatedImages
+//
 // WithAllowsAnimatedImages sets the allowsAnimatedImages property and returns the receiver for chaining.
 func (x *WebPreferences) WithAllowsAnimatedImages(allowsAnimatedImages bool) *WebPreferences {
 	x.inner.SetAllowsAnimatedImages(allowsAnimatedImages)
 	return x
 }
 
+// @property allowsAnimatedImageLooping
+//
 // WithAllowsAnimatedImageLooping sets the allowsAnimatedImageLooping property and returns the receiver for chaining.
 func (x *WebPreferences) WithAllowsAnimatedImageLooping(allowsAnimatedImageLooping bool) *WebPreferences {
 	x.inner.SetAllowsAnimatedImageLooping(allowsAnimatedImageLooping)
 	return x
 }
 
+// @property willLoadImagesAutomatically
+//
 // WithLoadsImagesAutomatically sets the loadsImagesAutomatically property and returns the receiver for chaining.
 func (x *WebPreferences) WithLoadsImagesAutomatically(loadsImagesAutomatically bool) *WebPreferences {
 	x.inner.SetLoadsImagesAutomatically(loadsImagesAutomatically)
 	return x
 }
 
+// @property autosaves @discussion If autosaves is YES the settings represented by WebPreferences will be stored in the user defaults database.
+//
 // WithAutosaves sets the autosaves property and returns the receiver for chaining.
 func (x *WebPreferences) WithAutosaves(autosaves bool) *WebPreferences {
 	x.inner.SetAutosaves(autosaves)
 	return x
 }
 
+// @property shouldPrintBackgrounds
+//
 // WithShouldPrintBackgrounds sets the shouldPrintBackgrounds property and returns the receiver for chaining.
 func (x *WebPreferences) WithShouldPrintBackgrounds(shouldPrintBackgrounds bool) *WebPreferences {
 	x.inner.SetShouldPrintBackgrounds(shouldPrintBackgrounds)
 	return x
 }
 
+// @property privateBrowsingEnabled: @abstract If private browsing is enabled, WebKit will not store information about sites the user visits.
+//
 // WithPrivateBrowsingEnabled sets the privateBrowsingEnabled property and returns the receiver for chaining.
 func (x *WebPreferences) WithPrivateBrowsingEnabled(privateBrowsingEnabled bool) *WebPreferences {
 	x.inner.SetPrivateBrowsingEnabled(privateBrowsingEnabled)
 	return x
 }
 
+// @property tabsToLinks @abstract If tabsToLinks is YES, the tab key will focus links and form controls. The option key temporarily reverses this preference.
+//
 // WithTabsToLinks sets the tabsToLinks property and returns the receiver for chaining.
 func (x *WebPreferences) WithTabsToLinks(tabsToLinks bool) *WebPreferences {
 	x.inner.SetTabsToLinks(tabsToLinks)
 	return x
 }
 
+// @property usesPageCache @abstract Whether the receiver's associated WebViews use the shared page cache. @discussion Pages are cached as they are added to a WebBackForwardList, and removed from the cache as they are removed from a WebBackForwardList. Because the page cache is global, caching a page in one WebBackForwardList may cause a page in another WebBackForwardList to be evicted from the cache.
+//
 // WithUsesPageCache sets the usesPageCache property and returns the receiver for chaining.
 func (x *WebPreferences) WithUsesPageCache(usesPageCache bool) *WebPreferences {
 	x.inner.SetUsesPageCache(usesPageCache)
 	return x
 }
 
+// @property cacheModel @abstract Specifies a usage model for a WebView, which WebKit will use to determine its caching behavior. If necessary, WebKit will prune its caches to match cacheModel when set. @discussion Research indicates that users tend to browse within clusters of documents that hold resources in common, and to revisit previously visited documents. WebKit and the frameworks below it include built-in caches that take advantage of these patterns, substantially improving document load speed in browsing situations. The WebKit cache model controls the behaviors of all of these caches, including NSURLCache and the various WebCore caches. Applications with a browsing interface can improve document load speed substantially by specifying WebCacheModelDocumentBrowser. Applications without a browsing interface can reduce memory usage substantially by specifying WebCacheModelDocumentViewer. If cacheModel is not set, WebKit will select a cache model automatically.
+//
 // WithCacheModel sets the cacheModel property and returns the receiver for chaining.
 func (x *WebPreferences) WithCacheModel(cacheModel WebCacheModel) *WebPreferences {
 	x.inner.SetCacheModel(raw.WebCacheModel(cacheModel))
 	return x
 }
 
+// @property suppressesIncrementalRendering
+//
 // WithSuppressesIncrementalRendering sets the suppressesIncrementalRendering property and returns the receiver for chaining.
 func (x *WebPreferences) WithSuppressesIncrementalRendering(suppressesIncrementalRendering bool) *WebPreferences {
 	x.inner.SetSuppressesIncrementalRendering(suppressesIncrementalRendering)
 	return x
 }
 
+// @property allowsAirPlayForMediaPlayback
+//
 // WithAllowsAirPlayForMediaPlayback sets the allowsAirPlayForMediaPlayback property and returns the receiver for chaining.
 func (x *WebPreferences) WithAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool) *WebPreferences {
 	x.inner.SetAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback)
 	return x
 }
 
+// @property identifier @result Returns the identifier for this WebPreferences.
+//
 // Identifier calls the underlying Identifier.
 func (x *WebPreferences) Identifier() string {
 	_r := x.inner.Identifier()
@@ -215,6 +275,8 @@ func (x *WebPreferences) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property standardFontFamily
+//
 // StandardFontFamily calls the underlying StandardFontFamily.
 func (x *WebPreferences) StandardFontFamily() string {
 	_r := x.inner.StandardFontFamily()
@@ -229,6 +291,8 @@ func (x *WebPreferences) SetStandardFontFamily(standardFontFamily string) {
 	x.inner.SetStandardFontFamily(foundation.NSStringStringWithUTF8String(standardFontFamily))
 }
 
+// @property fixedFontFamily
+//
 // FixedFontFamily calls the underlying FixedFontFamily.
 func (x *WebPreferences) FixedFontFamily() string {
 	_r := x.inner.FixedFontFamily()
@@ -243,6 +307,8 @@ func (x *WebPreferences) SetFixedFontFamily(fixedFontFamily string) {
 	x.inner.SetFixedFontFamily(foundation.NSStringStringWithUTF8String(fixedFontFamily))
 }
 
+// @property serifFontFamily
+//
 // SerifFontFamily calls the underlying SerifFontFamily.
 func (x *WebPreferences) SerifFontFamily() string {
 	_r := x.inner.SerifFontFamily()
@@ -257,6 +323,8 @@ func (x *WebPreferences) SetSerifFontFamily(serifFontFamily string) {
 	x.inner.SetSerifFontFamily(foundation.NSStringStringWithUTF8String(serifFontFamily))
 }
 
+// @property sansSerifFontFamily
+//
 // SansSerifFontFamily calls the underlying SansSerifFontFamily.
 func (x *WebPreferences) SansSerifFontFamily() string {
 	_r := x.inner.SansSerifFontFamily()
@@ -271,6 +339,8 @@ func (x *WebPreferences) SetSansSerifFontFamily(sansSerifFontFamily string) {
 	x.inner.SetSansSerifFontFamily(foundation.NSStringStringWithUTF8String(sansSerifFontFamily))
 }
 
+// @property cursiveFontFamily
+//
 // CursiveFontFamily calls the underlying CursiveFontFamily.
 func (x *WebPreferences) CursiveFontFamily() string {
 	_r := x.inner.CursiveFontFamily()
@@ -285,6 +355,8 @@ func (x *WebPreferences) SetCursiveFontFamily(cursiveFontFamily string) {
 	x.inner.SetCursiveFontFamily(foundation.NSStringStringWithUTF8String(cursiveFontFamily))
 }
 
+// @property fantasyFontFamily
+//
 // FantasyFontFamily calls the underlying FantasyFontFamily.
 func (x *WebPreferences) FantasyFontFamily() string {
 	_r := x.inner.FantasyFontFamily()
@@ -299,6 +371,8 @@ func (x *WebPreferences) SetFantasyFontFamily(fantasyFontFamily string) {
 	x.inner.SetFantasyFontFamily(foundation.NSStringStringWithUTF8String(fantasyFontFamily))
 }
 
+// @property defaultFontSize
+//
 // DefaultFontSize calls the underlying DefaultFontSize.
 func (x *WebPreferences) DefaultFontSize() int {
 	return x.inner.DefaultFontSize()
@@ -309,6 +383,8 @@ func (x *WebPreferences) SetDefaultFontSize(defaultFontSize int) {
 	x.inner.SetDefaultFontSize(defaultFontSize)
 }
 
+// @property defaultFixedFontSize
+//
 // DefaultFixedFontSize calls the underlying DefaultFixedFontSize.
 func (x *WebPreferences) DefaultFixedFontSize() int {
 	return x.inner.DefaultFixedFontSize()
@@ -319,6 +395,8 @@ func (x *WebPreferences) SetDefaultFixedFontSize(defaultFixedFontSize int) {
 	x.inner.SetDefaultFixedFontSize(defaultFixedFontSize)
 }
 
+// @property minimumFontSize
+//
 // MinimumFontSize calls the underlying MinimumFontSize.
 func (x *WebPreferences) MinimumFontSize() int {
 	return x.inner.MinimumFontSize()
@@ -329,6 +407,8 @@ func (x *WebPreferences) SetMinimumFontSize(minimumFontSize int) {
 	x.inner.SetMinimumFontSize(minimumFontSize)
 }
 
+// @property minimumLogicalFontSize
+//
 // MinimumLogicalFontSize calls the underlying MinimumLogicalFontSize.
 func (x *WebPreferences) MinimumLogicalFontSize() int {
 	return x.inner.MinimumLogicalFontSize()
@@ -339,6 +419,8 @@ func (x *WebPreferences) SetMinimumLogicalFontSize(minimumLogicalFontSize int) {
 	x.inner.SetMinimumLogicalFontSize(minimumLogicalFontSize)
 }
 
+// @property defaultTextEncodingName
+//
 // DefaultTextEncodingName calls the underlying DefaultTextEncodingName.
 func (x *WebPreferences) DefaultTextEncodingName() string {
 	_r := x.inner.DefaultTextEncodingName()
@@ -353,6 +435,8 @@ func (x *WebPreferences) SetDefaultTextEncodingName(defaultTextEncodingName stri
 	x.inner.SetDefaultTextEncodingName(foundation.NSStringStringWithUTF8String(defaultTextEncodingName))
 }
 
+// @property userStyleSheetEnabled
+//
 // UserStyleSheetEnabled calls the underlying UserStyleSheetEnabled.
 func (x *WebPreferences) UserStyleSheetEnabled() bool {
 	return x.inner.UserStyleSheetEnabled()
@@ -363,6 +447,8 @@ func (x *WebPreferences) SetUserStyleSheetEnabled(userStyleSheetEnabled bool) {
 	x.inner.SetUserStyleSheetEnabled(userStyleSheetEnabled)
 }
 
+// @property userStyleSheetLocation @abstract The location of the user style sheet.
+//
 // UserStyleSheetLocation calls the underlying UserStyleSheetLocation.
 func (x *WebPreferences) UserStyleSheetLocation() *foundation.NSURL {
 	return x.inner.UserStyleSheetLocation()
@@ -373,6 +459,8 @@ func (x *WebPreferences) SetUserStyleSheetLocation(userStyleSheetLocation string
 	x.inner.SetUserStyleSheetLocation(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(userStyleSheetLocation)))
 }
 
+// @property javaEnabled @discussion Deprecated function that does nothing and always returns false.
+//
 // IsJavaEnabled calls the underlying IsJavaEnabled.
 func (x *WebPreferences) IsJavaEnabled() bool {
 	return x.inner.IsJavaEnabled()
@@ -383,6 +471,8 @@ func (x *WebPreferences) SetJavaEnabled(javaEnabled bool) {
 	x.inner.SetJavaEnabled(javaEnabled)
 }
 
+// @property javaScriptEnabled
+//
 // IsJavaScriptEnabled calls the underlying IsJavaScriptEnabled.
 func (x *WebPreferences) IsJavaScriptEnabled() bool {
 	return x.inner.IsJavaScriptEnabled()
@@ -393,6 +483,8 @@ func (x *WebPreferences) SetJavaScriptEnabled(javaScriptEnabled bool) {
 	x.inner.SetJavaScriptEnabled(javaScriptEnabled)
 }
 
+// @property javaScriptCanOpenWindowsAutomatically
+//
 // JavaScriptCanOpenWindowsAutomatically calls the underlying JavaScriptCanOpenWindowsAutomatically.
 func (x *WebPreferences) JavaScriptCanOpenWindowsAutomatically() bool {
 	return x.inner.JavaScriptCanOpenWindowsAutomatically()
@@ -403,6 +495,8 @@ func (x *WebPreferences) SetJavaScriptCanOpenWindowsAutomatically(javaScriptCanO
 	x.inner.SetJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically)
 }
 
+// @property plugInsEnabled
+//
 // ArePlugInsEnabled calls the underlying ArePlugInsEnabled.
 func (x *WebPreferences) ArePlugInsEnabled() bool {
 	return x.inner.ArePlugInsEnabled()
@@ -413,6 +507,8 @@ func (x *WebPreferences) SetPlugInsEnabled(plugInsEnabled bool) {
 	x.inner.SetPlugInsEnabled(plugInsEnabled)
 }
 
+// @property allowsAnimatedImages
+//
 // AllowsAnimatedImages calls the underlying AllowsAnimatedImages.
 func (x *WebPreferences) AllowsAnimatedImages() bool {
 	return x.inner.AllowsAnimatedImages()
@@ -423,6 +519,8 @@ func (x *WebPreferences) SetAllowsAnimatedImages(allowsAnimatedImages bool) {
 	x.inner.SetAllowsAnimatedImages(allowsAnimatedImages)
 }
 
+// @property allowsAnimatedImageLooping
+//
 // AllowsAnimatedImageLooping calls the underlying AllowsAnimatedImageLooping.
 func (x *WebPreferences) AllowsAnimatedImageLooping() bool {
 	return x.inner.AllowsAnimatedImageLooping()
@@ -433,6 +531,8 @@ func (x *WebPreferences) SetAllowsAnimatedImageLooping(allowsAnimatedImageLoopin
 	x.inner.SetAllowsAnimatedImageLooping(allowsAnimatedImageLooping)
 }
 
+// @property willLoadImagesAutomatically
+//
 // LoadsImagesAutomatically calls the underlying LoadsImagesAutomatically.
 func (x *WebPreferences) LoadsImagesAutomatically() bool {
 	return x.inner.LoadsImagesAutomatically()
@@ -443,6 +543,8 @@ func (x *WebPreferences) SetLoadsImagesAutomatically(loadsImagesAutomatically bo
 	x.inner.SetLoadsImagesAutomatically(loadsImagesAutomatically)
 }
 
+// @property autosaves @discussion If autosaves is YES the settings represented by WebPreferences will be stored in the user defaults database.
+//
 // Autosaves calls the underlying Autosaves.
 func (x *WebPreferences) Autosaves() bool {
 	return x.inner.Autosaves()
@@ -453,6 +555,8 @@ func (x *WebPreferences) SetAutosaves(autosaves bool) {
 	x.inner.SetAutosaves(autosaves)
 }
 
+// @property shouldPrintBackgrounds
+//
 // ShouldPrintBackgrounds calls the underlying ShouldPrintBackgrounds.
 func (x *WebPreferences) ShouldPrintBackgrounds() bool {
 	return x.inner.ShouldPrintBackgrounds()
@@ -463,6 +567,8 @@ func (x *WebPreferences) SetShouldPrintBackgrounds(shouldPrintBackgrounds bool) 
 	x.inner.SetShouldPrintBackgrounds(shouldPrintBackgrounds)
 }
 
+// @property privateBrowsingEnabled: @abstract If private browsing is enabled, WebKit will not store information about sites the user visits.
+//
 // PrivateBrowsingEnabled calls the underlying PrivateBrowsingEnabled.
 func (x *WebPreferences) PrivateBrowsingEnabled() bool {
 	return x.inner.PrivateBrowsingEnabled()
@@ -473,6 +579,8 @@ func (x *WebPreferences) SetPrivateBrowsingEnabled(privateBrowsingEnabled bool) 
 	x.inner.SetPrivateBrowsingEnabled(privateBrowsingEnabled)
 }
 
+// @property tabsToLinks @abstract If tabsToLinks is YES, the tab key will focus links and form controls. The option key temporarily reverses this preference.
+//
 // TabsToLinks calls the underlying TabsToLinks.
 func (x *WebPreferences) TabsToLinks() bool {
 	return x.inner.TabsToLinks()
@@ -483,6 +591,8 @@ func (x *WebPreferences) SetTabsToLinks(tabsToLinks bool) {
 	x.inner.SetTabsToLinks(tabsToLinks)
 }
 
+// @property usesPageCache @abstract Whether the receiver's associated WebViews use the shared page cache. @discussion Pages are cached as they are added to a WebBackForwardList, and removed from the cache as they are removed from a WebBackForwardList. Because the page cache is global, caching a page in one WebBackForwardList may cause a page in another WebBackForwardList to be evicted from the cache.
+//
 // UsesPageCache calls the underlying UsesPageCache.
 func (x *WebPreferences) UsesPageCache() bool {
 	return x.inner.UsesPageCache()
@@ -493,6 +603,8 @@ func (x *WebPreferences) SetUsesPageCache(usesPageCache bool) {
 	x.inner.SetUsesPageCache(usesPageCache)
 }
 
+// @property cacheModel @abstract Specifies a usage model for a WebView, which WebKit will use to determine its caching behavior. If necessary, WebKit will prune its caches to match cacheModel when set. @discussion Research indicates that users tend to browse within clusters of documents that hold resources in common, and to revisit previously visited documents. WebKit and the frameworks below it include built-in caches that take advantage of these patterns, substantially improving document load speed in browsing situations. The WebKit cache model controls the behaviors of all of these caches, including NSURLCache and the various WebCore caches. Applications with a browsing interface can improve document load speed substantially by specifying WebCacheModelDocumentBrowser. Applications without a browsing interface can reduce memory usage substantially by specifying WebCacheModelDocumentViewer. If cacheModel is not set, WebKit will select a cache model automatically.
+//
 // CacheModel calls the underlying CacheModel.
 func (x *WebPreferences) CacheModel() WebCacheModel {
 	return WebCacheModel(x.inner.CacheModel())
@@ -503,6 +615,8 @@ func (x *WebPreferences) SetCacheModel(cacheModel WebCacheModel) {
 	x.inner.SetCacheModel(raw.WebCacheModel(cacheModel))
 }
 
+// @property suppressesIncrementalRendering
+//
 // SuppressesIncrementalRendering calls the underlying SuppressesIncrementalRendering.
 func (x *WebPreferences) SuppressesIncrementalRendering() bool {
 	return x.inner.SuppressesIncrementalRendering()
@@ -513,6 +627,8 @@ func (x *WebPreferences) SetSuppressesIncrementalRendering(suppressesIncremental
 	x.inner.SetSuppressesIncrementalRendering(suppressesIncrementalRendering)
 }
 
+// @property allowsAirPlayForMediaPlayback
+//
 // AllowsAirPlayForMediaPlayback calls the underlying AllowsAirPlayForMediaPlayback.
 func (x *WebPreferences) AllowsAirPlayForMediaPlayback() bool {
 	return x.inner.AllowsAirPlayForMediaPlayback()

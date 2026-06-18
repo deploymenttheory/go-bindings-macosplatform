@@ -35,6 +35,8 @@ func NDArrayMultiaryGradientKernelFromID(id objc.ID) *NDArrayMultiaryGradientKer
 	return &NDArrayMultiaryGradientKernel{inner: raw.MPSNDArrayMultiaryGradientKernelFromID(id)}
 }
 
+// @abstract   Initialize a MPSNDArrayMultiaryKernel @param      device                The device on which the kernel will run @param      count                 The maximum number of NDArrays read by the kernel @param      sourceGradientIndex   The source index for which gradient will be calculated @return     A valid MPSNDArrayMultiaryKernel, or nil if allocation failure.
+//
 // NewNDArrayMultiaryGradientKernelWithDeviceSourceCountSourceGradientIndex creates a new [NDArrayMultiaryGradientKernel].
 func NewNDArrayMultiaryGradientKernelWithDeviceSourceCountSourceGradientIndex(device metal.MTLDevice, count uint, sourceGradientIndex uint) *NDArrayMultiaryGradientKernel {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayMultiaryGradientKernel")), objc.RegisterName("alloc"))
@@ -42,18 +44,24 @@ func NewNDArrayMultiaryGradientKernelWithDeviceSourceCountSourceGradientIndex(de
 	return &NDArrayMultiaryGradientKernel{inner: raw.MPSNDArrayMultiaryGradientKernelFromID(_id)}
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
 func (x *NDArrayMultiaryGradientKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayMultiaryGradientKernel {
 	x.inner.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *NDArrayMultiaryGradientKernel) WithOptions(options mpscore.MPSKernelOptions) *NDArrayMultiaryGradientKernel {
 	x.inner.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NDArrayMultiaryGradientKernel) WithLabel(label string) *NDArrayMultiaryGradientKernel {
 	x.inner.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))

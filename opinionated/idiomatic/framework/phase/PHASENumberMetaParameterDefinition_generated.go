@@ -32,6 +32,8 @@ func NumberMetaParameterDefinitionFromID(id objc.ID) *NumberMetaParameterDefinit
 	return &NumberMetaParameterDefinition{inner: raw.PHASENumberMetaParameterDefinitionFromID(id)}
 }
 
+// @method initWithValue:identifier @abstract Create a new numeric metaparameter definition @param value The initial value of the metaparameter @param identifier An optional custom identifier to give to this object @return The new PHASENumberMetaParameterDefinition object
+//
 // NewNumberMetaParameterDefinitionWithValueIdentifier creates a new [NumberMetaParameterDefinition].
 func NewNumberMetaParameterDefinitionWithValueIdentifier(value float64, identifier string) *NumberMetaParameterDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASENumberMetaParameterDefinition")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewNumberMetaParameterDefinitionWithValueIdentifier(value float64, identifi
 	return &NumberMetaParameterDefinition{inner: raw.PHASENumberMetaParameterDefinitionFromID(_id)}
 }
 
+// @method initWithValue @abstract Create a new numeric metaparameter definition @param value The initial value of the metaparameter @return The new PHASENumberMetaParameterDefinition object
+//
 // NewNumberMetaParameterDefinitionWithValue creates a new [NumberMetaParameterDefinition].
 func NewNumberMetaParameterDefinitionWithValue(value float64) *NumberMetaParameterDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASENumberMetaParameterDefinition")), objc.RegisterName("alloc"))
@@ -46,6 +50,8 @@ func NewNumberMetaParameterDefinitionWithValue(value float64) *NumberMetaParamet
 	return &NumberMetaParameterDefinition{inner: raw.PHASENumberMetaParameterDefinitionFromID(_id)}
 }
 
+// @method initWithValue:minimum:maximum:identifier @abstract Create a new numeric metaparameter definition and a predefined min and maximum range @param value The initial value of the metaparameter @param minimum The minimum value for this metaparameter.  Values set to this metaparamter less than the minimum will be clamped. @param maximum The maximum value for this metaparameter.  Values set to this metaparamter less than the minimum will be clamped. @param identifier An optional custom identifier to give to this object @return The new PHASENumberMetaParameterDefinition object
+//
 // NewNumberMetaParameterDefinitionWithValueMinimumMaximumIdentifier creates a new [NumberMetaParameterDefinition].
 func NewNumberMetaParameterDefinitionWithValueMinimumMaximumIdentifier(value float64, minimum float64, maximum float64, identifier string) *NumberMetaParameterDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASENumberMetaParameterDefinition")), objc.RegisterName("alloc"))
@@ -53,6 +59,8 @@ func NewNumberMetaParameterDefinitionWithValueMinimumMaximumIdentifier(value flo
 	return &NumberMetaParameterDefinition{inner: raw.PHASENumberMetaParameterDefinitionFromID(_id)}
 }
 
+// @method initWithValue:minimum:maximum @abstract Create a new numeric metaparameter definition and a predefined min and maximum range @param value The initial value of the metaparameter @param minimum The minimum value for this metaparameter.  Values set to this metaparamter less than the minimum will be clamped. @param maximum The maximum value for this metaparameter.  Values set to this metaparamter less than the minimum will be clamped. @return The new PHASENumberMetaParameterDefinition object
+//
 // NewNumberMetaParameterDefinitionWithValueMinimumMaximum creates a new [NumberMetaParameterDefinition].
 func NewNumberMetaParameterDefinitionWithValueMinimumMaximum(value float64, minimum float64, maximum float64) *NumberMetaParameterDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASENumberMetaParameterDefinition")), objc.RegisterName("alloc"))
@@ -60,11 +68,15 @@ func NewNumberMetaParameterDefinitionWithValueMinimumMaximum(value float64, mini
 	return &NumberMetaParameterDefinition{inner: raw.PHASENumberMetaParameterDefinitionFromID(_id)}
 }
 
+// @property minimum @abstract The readonly minimum that this metaparameter definition was initialized with
+//
 // Minimum calls the underlying Minimum.
 func (x *NumberMetaParameterDefinition) Minimum() float64 {
 	return x.inner.Minimum()
 }
 
+// @property maximum @abstract The readonly maximum that this metaparameter definition was initialized with
+//
 // Maximum calls the underlying Maximum.
 func (x *NumberMetaParameterDefinition) Maximum() float64 {
 	return x.inner.Maximum()

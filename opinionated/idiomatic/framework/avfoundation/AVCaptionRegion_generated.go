@@ -37,6 +37,8 @@ func NewCaptionRegion() *CaptionRegion {
 	return &CaptionRegion{inner: raw.AVCaptionRegionFromID(_id)}
 }
 
+// @method encodeWithCoder: @abstract NSCoding protocol method override @discussion This method throws an exception if the caption region's size has different units for width and height, or if the units are unrecognizeable.
+//
 // EncodeWithCoder calls the underlying EncodeWithCoder.
 func (x *CaptionRegion) EncodeWithCoder(encoder *foundation.NSCoder) {
 	x.inner.EncodeWithCoder(encoder)
@@ -47,6 +49,8 @@ func (x *CaptionRegion) IsEqual(object objc.ID) bool {
 	return x.inner.IsEqual(object)
 }
 
+// @property identifier @abstract Identifier for the region @discussion When regionIdentifier is nil, two regions with the same position and endPosition are considered to be same, that is captions referring these regions belong to the same region when serialized to a format like TTML.  In addition, the AVCaptionRegion cannot be mutably copied. When regionIdentifier is not nil, two regions are same if and only if the region identifier is equal. It is a client's responsibility to ensure these AVCaptionRegion objects have the same properties.
+//
 // Identifier calls the underlying Identifier.
 func (x *CaptionRegion) Identifier() string {
 	_r := x.inner.Identifier()
@@ -56,26 +60,36 @@ func (x *CaptionRegion) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property origin @abstract The position of the top-left of the region, potentially with unspecified fields. @discussion It returns an AVCaptionPoint potentially with unspecified x and/or y fields. Unspecified dimensions indicate the region doesn't have positioning information for that dimension.
+//
 // Origin calls the underlying Origin.
 func (x *CaptionRegion) Origin() raw.AVCaptionPoint {
 	return x.inner.Origin()
 }
 
+// @property size @abstract The width and height of the region, potentally with unspecified fields. @discussion It returns an AVCaptionSize potentially with unspecified width and/or height. CEA608 closed captions support limits the size.height property’s value to 1 cell except when the AVCaptionRegionScroll is AVCaptionRegionScrollRollUp. If the AVCaptionRegionScroll is AVCaptionRegionScrollRollUp, the size.height property’s value must be 2, 3 or 4 cells. It returns an AVCaptionSize with unspecifed width and height when the region doesn't have width or height information.
+//
 // Size calls the underlying Size.
 func (x *CaptionRegion) Size() raw.AVCaptionSize {
 	return x.inner.Size()
 }
 
+// @property scroll @abstract Scroll mode for the region @discussion See AVCaptionRegionScrollXXX enum for possible values.
+//
 // Scroll calls the underlying Scroll.
 func (x *CaptionRegion) Scroll() AVCaptionRegionScroll {
 	return AVCaptionRegionScroll(x.inner.Scroll())
 }
 
+// @property displayAlignment @abstract Alignment of lines for the region
+//
 // DisplayAlignment calls the underlying DisplayAlignment.
 func (x *CaptionRegion) DisplayAlignment() AVCaptionRegionDisplayAlignment {
 	return AVCaptionRegionDisplayAlignment(x.inner.DisplayAlignment())
 }
 
+// @property writingMode @abstract The block and inline progression direction of the region.
+//
 // WritingMode calls the underlying WritingMode.
 func (x *CaptionRegion) WritingMode() AVCaptionRegionWritingMode {
 	return AVCaptionRegionWritingMode(x.inner.WritingMode())

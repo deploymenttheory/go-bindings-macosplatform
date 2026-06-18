@@ -31,6 +31,8 @@ func ObjectFromID(id objc.ID) *Object {
 	return &Object{inner: raw.PHASEObjectFromID(id)}
 }
 
+// @method initWithEngine: @abstract Initialize a new object.
+//
 // NewObjectWithEngine creates a new [Object].
 func NewObjectWithEngine(engine *raw.PHASEEngine) *Object {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEObject")), objc.RegisterName("alloc"))
@@ -38,21 +40,29 @@ func NewObjectWithEngine(engine *raw.PHASEEngine) *Object {
 	return &Object{inner: raw.PHASEObjectFromID(_id)}
 }
 
+// @method addChild:error: @abstract Add a child to this object @param child The child object @param error Returns an error if the child already has a parent. @return YES for success
+//
 // AddChildError calls the underlying AddChildError.
 func (x *Object) AddChildError(child *raw.PHASEObject) (bool, error) {
 	return x.inner.AddChildError(child)
 }
 
+// @method removeChild: @abstract Remove a child from this object.
+//
 // RemoveChild calls the underlying RemoveChild.
 func (x *Object) RemoveChild(child *raw.PHASEObject) {
 	x.inner.RemoveChild(child)
 }
 
+// @method removeChildren @abstract Remove all the children from this object
+//
 // RemoveChildren calls the underlying RemoveChildren.
 func (x *Object) RemoveChildren() {
 	x.inner.RemoveChildren()
 }
 
+// @property parent @abstract The parent of this object, or nil if this object doesn't have a parent object.
+//
 // Parent calls the underlying Parent.
 func (x *Object) Parent() *Object {
 	_r := x.inner.Parent()
@@ -62,6 +72,8 @@ func (x *Object) Parent() *Object {
 	return &Object{inner: _r}
 }
 
+// @property children @abstract The children of this object.
+//
 // Children returns the collection as a Go slice.
 func (x *Object) Children() []*Object {
 	arr := x.inner.Children()
@@ -73,6 +85,8 @@ func (x *Object) Children() []*Object {
 	})
 }
 
+// @property transform @abstract The object's transform. @note The transform must have orthogonal basis vectors and uniform scale.
+//
 // Transform calls the underlying Transform.
 func (x *Object) Transform() unsafe.Pointer {
 	return x.inner.Transform()
@@ -83,6 +97,8 @@ func (x *Object) SetTransform(transform unsafe.Pointer) {
 	x.inner.SetTransform(transform)
 }
 
+// @property worldTransform @abstract The world transform applied to the object. @note The transform must have orthogonal basis vectors and uniform scale.
+//
 // WorldTransform calls the underlying WorldTransform.
 func (x *Object) WorldTransform() unsafe.Pointer {
 	return x.inner.WorldTransform()

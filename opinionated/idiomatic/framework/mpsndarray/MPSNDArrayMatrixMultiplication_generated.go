@@ -36,24 +36,32 @@ func NewArrayMatrixMultiplication() *ArrayMatrixMultiplication {
 	return &ArrayMatrixMultiplication{inner: raw.MPSNDArrayMatrixMultiplicationFromID(_id)}
 }
 
+// @property   alpha @discussion The scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *ArrayMatrixMultiplication) WithAlpha(alpha float64) *ArrayMatrixMultiplication {
 	x.inner.SetAlpha(alpha)
 	return x
 }
 
+// @property   beta @discussion The scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+//
 // WithBeta sets the beta property and returns the receiver for chaining.
 func (x *ArrayMatrixMultiplication) WithBeta(beta float64) *ArrayMatrixMultiplication {
 	x.inner.SetBeta(beta)
 	return x
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
 func (x *ArrayMatrixMultiplication) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayMatrixMultiplication {
 	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
 	return x
 }
 
+// @property   alpha @discussion The scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+//
 // Alpha calls the underlying Alpha.
 func (x *ArrayMatrixMultiplication) Alpha() float64 {
 	return x.inner.Alpha()
@@ -64,6 +72,8 @@ func (x *ArrayMatrixMultiplication) SetAlpha(alpha float64) {
 	x.inner.SetAlpha(alpha)
 }
 
+// @property   beta @discussion The scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+//
 // Beta calls the underlying Beta.
 func (x *ArrayMatrixMultiplication) Beta() float64 {
 	return x.inner.Beta()

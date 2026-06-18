@@ -30,6 +30,8 @@ func SyncEngineFetchChangesScopeFromID(id objc.ID) *SyncEngineFetchChangesScope 
 	return &SyncEngineFetchChangesScope{inner: raw.CKSyncEngineFetchChangesScopeFromID(id)}
 }
 
+// Creates a scope that includes only the specified set of zones.
+//
 // NewSyncEngineFetchChangesScopeWithZoneIDs creates a new [SyncEngineFetchChangesScope].
 func NewSyncEngineFetchChangesScopeWithZoneIDs(zoneIDs *foundation.NSSet[*raw.CKRecordZoneID]) *SyncEngineFetchChangesScope {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineFetchChangesScope")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewSyncEngineFetchChangesScopeWithZoneIDs(zoneIDs *foundation.NSSet[*raw.CK
 	return &SyncEngineFetchChangesScope{inner: raw.CKSyncEngineFetchChangesScopeFromID(_id)}
 }
 
+// Creates a scope that includes all zones except the specified excluded zones.
+//
 // NewSyncEngineFetchChangesScopeWithExcludedZoneIDs creates a new [SyncEngineFetchChangesScope].
 func NewSyncEngineFetchChangesScopeWithExcludedZoneIDs(zoneIDs *foundation.NSSet[*raw.CKRecordZoneID]) *SyncEngineFetchChangesScope {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineFetchChangesScope")), objc.RegisterName("alloc"))
@@ -44,16 +48,22 @@ func NewSyncEngineFetchChangesScopeWithExcludedZoneIDs(zoneIDs *foundation.NSSet
 	return &SyncEngineFetchChangesScope{inner: raw.CKSyncEngineFetchChangesScopeFromID(_id)}
 }
 
+// Returns true if the specified zone ID is included in this scope.
+//
 // ContainsZoneID calls the underlying ContainsZoneID.
 func (x *SyncEngineFetchChangesScope) ContainsZoneID(zoneID *raw.CKRecordZoneID) bool {
 	return x.inner.ContainsZoneID(zoneID)
 }
 
+// A specific set of zone IDs to include in the scope. For example, if you want to fetch changes for a specific set of zones, you can specify them here. If `nil`, this scope includes all zones except those in `excludedZoneIDs`.
+//
 // ZoneIDs calls the underlying ZoneIDs.
 func (x *SyncEngineFetchChangesScope) ZoneIDs() *foundation.NSSet[*raw.CKRecordZoneID] {
 	return x.inner.ZoneIDs()
 }
 
+// A specific set of zone IDs to exclude from this scope. If you know that you don't want to fetch changes for a particular set of zones, you can set those zones here.
+//
 // ExcludedZoneIDs calls the underlying ExcludedZoneIDs.
 func (x *SyncEngineFetchChangesScope) ExcludedZoneIDs() *foundation.NSSet[*raw.CKRecordZoneID] {
 	return x.inner.ExcludedZoneIDs()

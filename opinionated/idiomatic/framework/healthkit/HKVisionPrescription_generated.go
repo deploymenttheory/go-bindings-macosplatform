@@ -36,16 +36,22 @@ func NewVisionPrescription() *VisionPrescription {
 	return &VisionPrescription{inner: raw.HKVisionPrescriptionFromID(_id)}
 }
 
+// @property      prescriptionType @abstract      A vision prescription type (glasses or contacts)
+//
 // PrescriptionType calls the underlying PrescriptionType.
 func (x *VisionPrescription) PrescriptionType() HKVisionPrescriptionType {
 	return HKVisionPrescriptionType(x.inner.PrescriptionType())
 }
 
+// @property      dateIssued @abstract      The date the prescription was issued
+//
 // DateIssued calls the underlying DateIssued.
 func (x *VisionPrescription) DateIssued() *foundation.NSDate {
 	return x.inner.DateIssued()
 }
 
+// @property      expirationDate @abstract      The date the prescription will expire
+//
 // ExpirationDate calls the underlying ExpirationDate.
 func (x *VisionPrescription) ExpirationDate() *foundation.NSDate {
 	return x.inner.ExpirationDate()

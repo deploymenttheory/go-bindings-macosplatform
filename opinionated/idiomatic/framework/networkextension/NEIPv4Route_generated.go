@@ -31,6 +31,8 @@ func NEIPv4RouteFromID(id objc.ID) *NEIPv4Route {
 	return &NEIPv4Route{inner: raw.NEIPv4RouteFromID(id)}
 }
 
+// @method initWithDestinationAddress:subnetMask: @discussion Initialize a newly-allocated NEIPv4Route. @param address The IPv4 address of the destination network. @param subnetMask The subnet mask of the destination network. @return The initialized NEIPv4Route.
+//
 // NewNEIPv4RouteWithDestinationAddressSubnetMask creates a new [NEIPv4Route].
 func NewNEIPv4RouteWithDestinationAddressSubnetMask(address string, subnetMask string) *NEIPv4Route {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NEIPv4Route")), objc.RegisterName("alloc"))
@@ -38,12 +40,16 @@ func NewNEIPv4RouteWithDestinationAddressSubnetMask(address string, subnetMask s
 	return &NEIPv4Route{inner: raw.NEIPv4RouteFromID(_id)}
 }
 
+// @property gatewayAddress @discussion The IPv4 address of the route's gateway. If this property is nil then the route's gateway will be set to the tunnel's virtual interface.
+//
 // WithGatewayAddress sets the gatewayAddress property and returns the receiver for chaining.
 func (x *NEIPv4Route) WithGatewayAddress(gatewayAddress string) *NEIPv4Route {
 	x.inner.SetGatewayAddress(foundation.NSStringStringWithUTF8String(gatewayAddress))
 	return x
 }
 
+// @property destinationAddress @discussion An IPv4 address represented as a dotted decimal string.
+//
 // DestinationAddress calls the underlying DestinationAddress.
 func (x *NEIPv4Route) DestinationAddress() string {
 	_r := x.inner.DestinationAddress()
@@ -53,6 +59,8 @@ func (x *NEIPv4Route) DestinationAddress() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property destinationSubnetMask @discussion An IPv4 subnet mask represented as a dotted decimal string. This mask in combination with the destinationAddress property is used to determine the destination network of the route.
+//
 // DestinationSubnetMask calls the underlying DestinationSubnetMask.
 func (x *NEIPv4Route) DestinationSubnetMask() string {
 	_r := x.inner.DestinationSubnetMask()
@@ -62,6 +70,8 @@ func (x *NEIPv4Route) DestinationSubnetMask() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property gatewayAddress @discussion The IPv4 address of the route's gateway. If this property is nil then the route's gateway will be set to the tunnel's virtual interface.
+//
 // GatewayAddress calls the underlying GatewayAddress.
 func (x *NEIPv4Route) GatewayAddress() string {
 	_r := x.inner.GatewayAddress()

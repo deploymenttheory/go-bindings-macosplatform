@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that identifies the supported network interfaces of the host computer.
+//
 // BridgedNetworkInterface wraps [raw.VZBridgedNetworkInterface] with a fluent Go API.
 type BridgedNetworkInterface struct {
 	inner *raw.VZBridgedNetworkInterface
@@ -36,6 +38,8 @@ func NewBridgedNetworkInterface() *BridgedNetworkInterface {
 	return &BridgedNetworkInterface{inner: raw.VZBridgedNetworkInterfaceFromID(_id)}
 }
 
+// @abstract Return the unique identifier for this interface. The identifier is the BSD name associated with the interface (e.g. "en0").
+//
 // Identifier calls the underlying Identifier.
 func (x *BridgedNetworkInterface) Identifier() string {
 	_r := x.inner.Identifier()
@@ -45,6 +49,8 @@ func (x *BridgedNetworkInterface) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Return a display name if available (e.g. "Ethernet").
+//
 // LocalizedDisplayName calls the underlying LocalizedDisplayName.
 func (x *BridgedNetworkInterface) LocalizedDisplayName() string {
 	_r := x.inner.LocalizedDisplayName()

@@ -39,6 +39,8 @@ func NewMetricPlayerItemVariantSwitchEvent() *MetricPlayerItemVariantSwitchEvent
 	return &MetricPlayerItemVariantSwitchEvent{inner: raw.AVMetricPlayerItemVariantSwitchEventFromID(_id)}
 }
 
+// Returns the variant before the switch. If no value is available, returns nil
+//
 // FromVariant calls the underlying FromVariant.
 func (x *MetricPlayerItemVariantSwitchEvent) FromVariant() *AssetVariant {
 	_r := x.inner.FromVariant()
@@ -48,6 +50,8 @@ func (x *MetricPlayerItemVariantSwitchEvent) FromVariant() *AssetVariant {
 	return &AssetVariant{inner: _r}
 }
 
+// Returns the variant after the switch.
+//
 // ToVariant calls the underlying ToVariant.
 func (x *MetricPlayerItemVariantSwitchEvent) ToVariant() *AssetVariant {
 	_r := x.inner.ToVariant()
@@ -57,6 +61,8 @@ func (x *MetricPlayerItemVariantSwitchEvent) ToVariant() *AssetVariant {
 	return &AssetVariant{inner: _r}
 }
 
+// This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
+//
 // LoadedTimeRanges returns the collection as a Go slice.
 func (x *MetricPlayerItemVariantSwitchEvent) LoadedTimeRanges() []*foundation.NSValue {
 	arr := x.inner.LoadedTimeRanges()
@@ -68,6 +74,8 @@ func (x *MetricPlayerItemVariantSwitchEvent) LoadedTimeRanges() []*foundation.NS
 	})
 }
 
+// Represents the currently selected video rendition's identifiers. Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+//
 // VideoRendition calls the underlying VideoRendition.
 func (x *MetricPlayerItemVariantSwitchEvent) VideoRendition() *MetricMediaRendition {
 	_r := x.inner.VideoRendition()
@@ -77,6 +85,8 @@ func (x *MetricPlayerItemVariantSwitchEvent) VideoRendition() *MetricMediaRendit
 	return &MetricMediaRendition{inner: _r}
 }
 
+// Represents the currently selected video rendition's identifiers. Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+//
 // AudioRendition calls the underlying AudioRendition.
 func (x *MetricPlayerItemVariantSwitchEvent) AudioRendition() *MetricMediaRendition {
 	_r := x.inner.AudioRendition()
@@ -86,6 +96,8 @@ func (x *MetricPlayerItemVariantSwitchEvent) AudioRendition() *MetricMediaRendit
 	return &MetricMediaRendition{inner: _r}
 }
 
+// Represents the currently selected audio rendition's identifiers. Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+//
 // SubtitleRendition calls the underlying SubtitleRendition.
 func (x *MetricPlayerItemVariantSwitchEvent) SubtitleRendition() *MetricMediaRendition {
 	_r := x.inner.SubtitleRendition()
@@ -95,6 +107,8 @@ func (x *MetricPlayerItemVariantSwitchEvent) SubtitleRendition() *MetricMediaRen
 	return &MetricMediaRendition{inner: _r}
 }
 
+// Returns if the switch did succeed.
+//
 // DidSucceed calls the underlying DidSucceed.
 func (x *MetricPlayerItemVariantSwitchEvent) DidSucceed() bool {
 	return x.inner.DidSucceed()

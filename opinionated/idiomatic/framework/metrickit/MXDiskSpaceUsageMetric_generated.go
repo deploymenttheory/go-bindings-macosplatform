@@ -36,41 +36,57 @@ func NewDiskSpaceUsageMetric() *DiskSpaceUsageMetric {
 	return &DiskSpaceUsageMetric{inner: raw.MXDiskSpaceUsageMetricFromID(_id)}
 }
 
+// @property      totalBinaryFileSize @abstract      Total fixed size used by the app. @discussion    Dimensioned as NSUnitInformationStorage, base unit is bytes.
+//
 // TotalBinaryFileSize calls the underlying TotalBinaryFileSize.
 func (x *DiskSpaceUsageMetric) TotalBinaryFileSize() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
 	return x.inner.TotalBinaryFileSize()
 }
 
+// @property      totalBinaryFileCount @abstract      Total count of fixed files owned by the app.
+//
 // TotalBinaryFileCount calls the underlying TotalBinaryFileCount.
 func (x *DiskSpaceUsageMetric) TotalBinaryFileCount() int {
 	return x.inner.TotalBinaryFileCount()
 }
 
+// @property      totalDataFileSize @abstract      Total data file size used by the app. @discussion    Dimensioned as NSUnitInformationStorage, base unit is bytes.
+//
 // TotalDataFileSize calls the underlying TotalDataFileSize.
 func (x *DiskSpaceUsageMetric) TotalDataFileSize() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
 	return x.inner.TotalDataFileSize()
 }
 
+// @property      totalDataFileCount @abstract      Total count of data files owned by the app.
+//
 // TotalDataFileCount calls the underlying TotalDataFileCount.
 func (x *DiskSpaceUsageMetric) TotalDataFileCount() int {
 	return x.inner.TotalDataFileCount()
 }
 
+// @property      totalCacheFolderSize @abstract      Total file size contained within the apps cache folder. @discussion    Dimensioned as NSUnitInformationStorage, base unit is bytes.
+//
 // TotalCacheFolderSize calls the underlying TotalCacheFolderSize.
 func (x *DiskSpaceUsageMetric) TotalCacheFolderSize() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
 	return x.inner.TotalCacheFolderSize()
 }
 
+// @property      totalCloneSize @abstract      Total clone size used by the app. @discussion    Dimensioned as NSUnitInformationStorage, base unit is bytes.
+//
 // TotalCloneSize calls the underlying TotalCloneSize.
 func (x *DiskSpaceUsageMetric) TotalCloneSize() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
 	return x.inner.TotalCloneSize()
 }
 
+// @property      totalDiskSpaceUsedSize @abstract      Total disk space used by the app. @discussion    Dimensioned as NSUnitInformationStorage, base unit is bytes.
+//
 // TotalDiskSpaceUsedSize calls the underlying TotalDiskSpaceUsedSize.
 func (x *DiskSpaceUsageMetric) TotalDiskSpaceUsedSize() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
 	return x.inner.TotalDiskSpaceUsedSize()
 }
 
+// @property      totalDiskSpaceCapacity @abstract      Total disk space capacity of the device @discussion    Dimensioned as NSUnitInformationStorage, base unit is bytes.
+//
 // TotalDiskSpaceCapacity calls the underlying TotalDiskSpaceCapacity.
 func (x *DiskSpaceUsageMetric) TotalDiskSpaceCapacity() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
 	return x.inner.TotalDiskSpaceCapacity()

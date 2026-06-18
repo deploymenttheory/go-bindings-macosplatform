@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The common behaviors for the serial attachment points of your virtual machine.
+//
 // SerialPortAttachment wraps [raw.VZSerialPortAttachment] with a fluent Go API.
 type SerialPortAttachment struct {
 	inner *raw.VZSerialPortAttachment

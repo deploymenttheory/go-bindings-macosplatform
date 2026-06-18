@@ -37,6 +37,8 @@ func NewMTROptionalQRCodeInfo() *MTROptionalQRCodeInfo {
 	return &MTROptionalQRCodeInfo{inner: raw.MTROptionalQRCodeInfoFromID(_id)}
 }
 
+// Initializes the object with a tag and string value. The tag must be in the range 0x80 - 0xFF.
+//
 // NewMTROptionalQRCodeInfoWithTagStringValue creates a new [MTROptionalQRCodeInfo].
 func NewMTROptionalQRCodeInfoWithTagStringValue(tag *foundation.NSNumber, value string) *MTROptionalQRCodeInfo {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROptionalQRCodeInfo")), objc.RegisterName("alloc"))
@@ -44,6 +46,8 @@ func NewMTROptionalQRCodeInfoWithTagStringValue(tag *foundation.NSNumber, value 
 	return &MTROptionalQRCodeInfo{inner: raw.MTROptionalQRCodeInfoFromID(_id)}
 }
 
+// Initializes the object with a tag and int32 value. The tag must be in the range 0x80 - 0xFF.
+//
 // NewMTROptionalQRCodeInfoWithTagInt32Value creates a new [MTROptionalQRCodeInfo].
 func NewMTROptionalQRCodeInfoWithTagInt32Value(tag *foundation.NSNumber, value int32) *MTROptionalQRCodeInfo {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROptionalQRCodeInfo")), objc.RegisterName("alloc"))
@@ -57,18 +61,24 @@ func (x *MTROptionalQRCodeInfo) WithType(type_ MTROptionalQRCodeInfoType) *MTROp
 	return x
 }
 
+// The vendor-specific TLV tag number for this information item. Vendor-specific elements have tags in the range 0x80 - 0xFF.
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *MTROptionalQRCodeInfo) WithTag(tag *foundation.NSNumber) *MTROptionalQRCodeInfo {
 	x.inner.SetTag(tag)
 	return x
 }
 
+// The value held in this extension element, if `type` is an integer type, or nil otherwise.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *MTROptionalQRCodeInfo) WithIntegerValue(integerValue *foundation.NSNumber) *MTROptionalQRCodeInfo {
 	x.inner.SetIntegerValue(integerValue)
 	return x
 }
 
+// The value held in this extension element, if `type` is `MTROptionalQRCodeInfoTypeString`, or nil otherwise.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *MTROptionalQRCodeInfo) WithStringValue(stringValue string) *MTROptionalQRCodeInfo {
 	x.inner.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
@@ -86,16 +96,22 @@ func (x *MTROptionalQRCodeInfo) Type() MTROptionalQRCodeInfoType {
 	return MTROptionalQRCodeInfoType(x.inner.Type())
 }
 
+// The vendor-specific TLV tag number for this information item. Vendor-specific elements have tags in the range 0x80 - 0xFF.
+//
 // Tag calls the underlying Tag.
 func (x *MTROptionalQRCodeInfo) Tag() *foundation.NSNumber {
 	return x.inner.Tag()
 }
 
+// The value held in this extension element, if `type` is an integer type, or nil otherwise.
+//
 // IntegerValue calls the underlying IntegerValue.
 func (x *MTROptionalQRCodeInfo) IntegerValue() *foundation.NSNumber {
 	return x.inner.IntegerValue()
 }
 
+// The value held in this extension element, if `type` is `MTROptionalQRCodeInfoTypeString`, or nil otherwise.
+//
 // StringValue calls the underlying StringValue.
 func (x *MTROptionalQRCodeInfo) StringValue() string {
 	_r := x.inner.StringValue()

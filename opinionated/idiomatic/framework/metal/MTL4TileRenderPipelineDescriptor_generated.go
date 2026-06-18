@@ -38,65 +38,87 @@ func NewMTL4TileRenderPipelineDescriptor() *MTL4TileRenderPipelineDescriptor {
 	return &MTL4TileRenderPipelineDescriptor{inner: raw.MTL4TileRenderPipelineDescriptorFromID(_id)}
 }
 
+// Configures the tile function that the render pipeline executes for each tile in the tile shader stage.
+//
 // WithTileFunctionDescriptor sets the tileFunctionDescriptor property and returns the receiver for chaining.
 func (x *MTL4TileRenderPipelineDescriptor) WithTileFunctionDescriptor(tileFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4TileRenderPipelineDescriptor {
 	x.inner.SetTileFunctionDescriptor(tileFunctionDescriptor.asMTL4FunctionDescriptor())
 	return x
 }
 
+// Configures the number of samples per pixel used for multisampling.
+//
 // WithRasterSampleCount sets the rasterSampleCount property and returns the receiver for chaining.
 func (x *MTL4TileRenderPipelineDescriptor) WithRasterSampleCount(rasterSampleCount uint) *MTL4TileRenderPipelineDescriptor {
 	x.inner.SetRasterSampleCount(rasterSampleCount)
 	return x
 }
 
+// Indicating whether the size of the threadgroup matches the size of a tile in the render pipeline.
+//
 // WithThreadgroupSizeMatchesTileSize sets the threadgroupSizeMatchesTileSize property and returns the receiver for chaining.
 func (x *MTL4TileRenderPipelineDescriptor) WithThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize bool) *MTL4TileRenderPipelineDescriptor {
 	x.inner.SetThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize)
 	return x
 }
 
+// Sets the maximum number of threads that the GPU can execute simultaneously within a single threadgroup in the tile render pipeline.
+//
 // WithMaxTotalThreadsPerThreadgroup sets the maxTotalThreadsPerThreadgroup property and returns the receiver for chaining.
 func (x *MTL4TileRenderPipelineDescriptor) WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint) *MTL4TileRenderPipelineDescriptor {
 	x.inner.SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup)
 	return x
 }
 
+// Sets the required number of threads per threadgroup for tile dispatches. This value is typically optional, except in the cases where the tile function that “tileFunctionDescriptor“ references uses `CooperativeTensors`. In this case, you need to provide a non-zero value to this property. Additionally, when you set this value, the `threadsPerTile` argument of any tile dispatch needs to match it. Setting this value to a size of 0 in every dimension disables this property.
+//
 // WithRequiredThreadsPerThreadgroup sets the requiredThreadsPerThreadgroup property and returns the receiver for chaining.
 func (x *MTL4TileRenderPipelineDescriptor) WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) *MTL4TileRenderPipelineDescriptor {
 	x.inner.SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup)
 	return x
 }
 
+// Configures an object that contains information about functions to link to the tile render pipeline when Metal builds it.
+//
 // WithStaticLinkingDescriptor sets the staticLinkingDescriptor property and returns the receiver for chaining.
 func (x *MTL4TileRenderPipelineDescriptor) WithStaticLinkingDescriptor(staticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4TileRenderPipelineDescriptor {
 	x.inner.SetStaticLinkingDescriptor(staticLinkingDescriptor.Unwrap())
 	return x
 }
 
+// Indicates whether the pipeline supports linking binary functions.
+//
 // WithSupportBinaryLinking sets the supportBinaryLinking property and returns the receiver for chaining.
 func (x *MTL4TileRenderPipelineDescriptor) WithSupportBinaryLinking(supportBinaryLinking bool) *MTL4TileRenderPipelineDescriptor {
 	x.inner.SetSupportBinaryLinking(supportBinaryLinking)
 	return x
 }
 
+// Assigns an optional string that uniquely identifies a pipeline descriptor. After you provide this label, you can use it to look up a pipeline state object by name in a binary archive.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MTL4TileRenderPipelineDescriptor) WithLabel(label string) *MTL4TileRenderPipelineDescriptor {
 	x.inner.MTL4PipelineDescriptor.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// Provides compile-time options when you build the pipeline.
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MTL4TileRenderPipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4TileRenderPipelineDescriptor {
 	x.inner.MTL4PipelineDescriptor.SetOptions(options.Unwrap())
 	return x
 }
 
+// Resets the descriptor to the default state.
+//
 // Reset calls the underlying Reset.
 func (x *MTL4TileRenderPipelineDescriptor) Reset() {
 	x.inner.Reset()
 }
 
+// Configures the tile function that the render pipeline executes for each tile in the tile shader stage.
+//
 // TileFunctionDescriptor calls the underlying TileFunctionDescriptor.
 func (x *MTL4TileRenderPipelineDescriptor) TileFunctionDescriptor() *MTL4FunctionDescriptor {
 	_r := x.inner.TileFunctionDescriptor()
@@ -111,6 +133,8 @@ func (x *MTL4TileRenderPipelineDescriptor) SetTileFunctionDescriptor(tileFunctio
 	x.inner.SetTileFunctionDescriptor(tileFunctionDescriptor)
 }
 
+// Configures the number of samples per pixel used for multisampling.
+//
 // RasterSampleCount calls the underlying RasterSampleCount.
 func (x *MTL4TileRenderPipelineDescriptor) RasterSampleCount() uint {
 	return x.inner.RasterSampleCount()
@@ -121,6 +145,8 @@ func (x *MTL4TileRenderPipelineDescriptor) SetRasterSampleCount(rasterSampleCoun
 	x.inner.SetRasterSampleCount(rasterSampleCount)
 }
 
+// Access an array of descriptors that configure the properties of each color attachment in the tile render pipeline.
+//
 // ColorAttachments calls the underlying ColorAttachments.
 func (x *MTL4TileRenderPipelineDescriptor) ColorAttachments() *TileRenderPipelineColorAttachmentDescriptorArray {
 	_r := x.inner.ColorAttachments()
@@ -130,6 +156,8 @@ func (x *MTL4TileRenderPipelineDescriptor) ColorAttachments() *TileRenderPipelin
 	return &TileRenderPipelineColorAttachmentDescriptorArray{inner: _r}
 }
 
+// Indicating whether the size of the threadgroup matches the size of a tile in the render pipeline.
+//
 // ThreadgroupSizeMatchesTileSize calls the underlying ThreadgroupSizeMatchesTileSize.
 func (x *MTL4TileRenderPipelineDescriptor) ThreadgroupSizeMatchesTileSize() bool {
 	return x.inner.ThreadgroupSizeMatchesTileSize()
@@ -140,6 +168,8 @@ func (x *MTL4TileRenderPipelineDescriptor) SetThreadgroupSizeMatchesTileSize(thr
 	x.inner.SetThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize)
 }
 
+// Sets the maximum number of threads that the GPU can execute simultaneously within a single threadgroup in the tile render pipeline.
+//
 // MaxTotalThreadsPerThreadgroup calls the underlying MaxTotalThreadsPerThreadgroup.
 func (x *MTL4TileRenderPipelineDescriptor) MaxTotalThreadsPerThreadgroup() uint {
 	return x.inner.MaxTotalThreadsPerThreadgroup()
@@ -150,6 +180,8 @@ func (x *MTL4TileRenderPipelineDescriptor) SetMaxTotalThreadsPerThreadgroup(maxT
 	x.inner.SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup)
 }
 
+// Sets the required number of threads per threadgroup for tile dispatches. This value is typically optional, except in the cases where the tile function that “tileFunctionDescriptor“ references uses `CooperativeTensors`. In this case, you need to provide a non-zero value to this property. Additionally, when you set this value, the `threadsPerTile` argument of any tile dispatch needs to match it. Setting this value to a size of 0 in every dimension disables this property.
+//
 // RequiredThreadsPerThreadgroup calls the underlying RequiredThreadsPerThreadgroup.
 func (x *MTL4TileRenderPipelineDescriptor) RequiredThreadsPerThreadgroup() raw.MTLSize {
 	return x.inner.RequiredThreadsPerThreadgroup()
@@ -160,6 +192,8 @@ func (x *MTL4TileRenderPipelineDescriptor) SetRequiredThreadsPerThreadgroup(requ
 	x.inner.SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup)
 }
 
+// Configures an object that contains information about functions to link to the tile render pipeline when Metal builds it.
+//
 // StaticLinkingDescriptor calls the underlying StaticLinkingDescriptor.
 func (x *MTL4TileRenderPipelineDescriptor) StaticLinkingDescriptor() *MTL4StaticLinkingDescriptor {
 	_r := x.inner.StaticLinkingDescriptor()
@@ -174,6 +208,8 @@ func (x *MTL4TileRenderPipelineDescriptor) SetStaticLinkingDescriptor(staticLink
 	x.inner.SetStaticLinkingDescriptor(staticLinkingDescriptor)
 }
 
+// Indicates whether the pipeline supports linking binary functions.
+//
 // SupportBinaryLinking calls the underlying SupportBinaryLinking.
 func (x *MTL4TileRenderPipelineDescriptor) SupportBinaryLinking() bool {
 	return x.inner.SupportBinaryLinking()

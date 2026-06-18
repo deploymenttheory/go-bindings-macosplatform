@@ -7,6 +7,7 @@ package foundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CompoundPredicate wraps [raw.NSCompoundPredicate] with a fluent Go API.
@@ -30,9 +31,18 @@ func CompoundPredicateFromID(id objc.ID) *CompoundPredicate {
 }
 
 // NewCompoundPredicateWithTypeSubpredicates creates a new [CompoundPredicate].
-func NewCompoundPredicateWithTypeSubpredicates(type_ NSCompoundPredicateType, subpredicates *raw.NSArray[*raw.NSPredicate]) *CompoundPredicate {
+func NewCompoundPredicateWithTypeSubpredicates(type_ NSCompoundPredicateType, subpredicates ...PredicateProvider) *CompoundPredicate {
+	_ptrs := make([]objc.ID, len(subpredicates))
+	for _i, _v := range subpredicates {
+		_ptrs[_i] = _v.asPredicate().Ptr()
+	}
+	var _arg1 *raw.NSArray[*raw.NSPredicate]
+	if len(_ptrs) > 0 {
+		_arg1 = raw.NSArrayFromID[*raw.NSPredicate](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCompoundPredicate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:subpredicates:"), raw.NSCompoundPredicateType(type_), subpredicates.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:subpredicates:"), raw.NSCompoundPredicateType(type_), _arg1.Ptr())
 	return &CompoundPredicate{inner: raw.NSCompoundPredicateFromID(_id)}
 }
 

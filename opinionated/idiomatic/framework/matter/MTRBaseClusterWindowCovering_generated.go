@@ -33,6 +33,8 @@ func MTRBaseClusterWindowCoveringFromID(id objc.ID) *MTRBaseClusterWindowCoverin
 	return &MTRBaseClusterWindowCovering{inner: raw.MTRBaseClusterWindowCoveringFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterWindowCoveringWithDeviceEndpointIDQueue creates a new [MTRBaseClusterWindowCovering].
 func NewMTRBaseClusterWindowCoveringWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterWindowCovering {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterWindowCovering")), objc.RegisterName("alloc"))
@@ -47,6 +49,8 @@ func NewMTRBaseClusterWindowCoveringWithDeviceEndpointQueue(device *raw.MTRBaseD
 	return &MTRBaseClusterWindowCovering{inner: raw.MTRBaseClusterWindowCoveringFromID(_id)}
 }
 
+// Command UpOrOpen Moves window covering to InstalledOpenLimitLift and InstalledOpenLimitTilt
+//
 // UpOrOpenWithParamsCompletion calls the underlying UpOrOpenWithParamsCompletion.
 func (x *MTRBaseClusterWindowCovering) UpOrOpenWithParamsCompletion(params *raw.MTRWindowCoveringClusterUpOrOpenParams, completion func(unsafe.Pointer)) {
 	x.inner.UpOrOpenWithParamsCompletion(params, completion)
@@ -57,6 +61,8 @@ func (x *MTRBaseClusterWindowCovering) UpOrOpenWithCompletion(completion func(un
 	x.inner.UpOrOpenWithCompletion(completion)
 }
 
+// Command DownOrClose Moves window covering to InstalledClosedLimitLift and InstalledCloseLimitTilt
+//
 // DownOrCloseWithParamsCompletion calls the underlying DownOrCloseWithParamsCompletion.
 func (x *MTRBaseClusterWindowCovering) DownOrCloseWithParamsCompletion(params *raw.MTRWindowCoveringClusterDownOrCloseParams, completion func(unsafe.Pointer)) {
 	x.inner.DownOrCloseWithParamsCompletion(params, completion)
@@ -67,6 +73,8 @@ func (x *MTRBaseClusterWindowCovering) DownOrCloseWithCompletion(completion func
 	x.inner.DownOrCloseWithCompletion(completion)
 }
 
+// Command StopMotion Stop any adjusting of window covering
+//
 // StopMotionWithParamsCompletion calls the underlying StopMotionWithParamsCompletion.
 func (x *MTRBaseClusterWindowCovering) StopMotionWithParamsCompletion(params *raw.MTRWindowCoveringClusterStopMotionParams, completion func(unsafe.Pointer)) {
 	x.inner.StopMotionWithParamsCompletion(params, completion)
@@ -77,21 +85,29 @@ func (x *MTRBaseClusterWindowCovering) StopMotionWithCompletion(completion func(
 	x.inner.StopMotionWithCompletion(completion)
 }
 
+// Command GoToLiftValue Go to lift value specified
+//
 // GoToLiftValueWithParamsCompletion calls the underlying GoToLiftValueWithParamsCompletion.
 func (x *MTRBaseClusterWindowCovering) GoToLiftValueWithParamsCompletion(params *raw.MTRWindowCoveringClusterGoToLiftValueParams, completion func(unsafe.Pointer)) {
 	x.inner.GoToLiftValueWithParamsCompletion(params, completion)
 }
 
+// Command GoToLiftPercentage Go to lift percentage specified
+//
 // GoToLiftPercentageWithParamsCompletion calls the underlying GoToLiftPercentageWithParamsCompletion.
 func (x *MTRBaseClusterWindowCovering) GoToLiftPercentageWithParamsCompletion(params *raw.MTRWindowCoveringClusterGoToLiftPercentageParams, completion func(unsafe.Pointer)) {
 	x.inner.GoToLiftPercentageWithParamsCompletion(params, completion)
 }
 
+// Command GoToTiltValue Go to tilt value specified
+//
 // GoToTiltValueWithParamsCompletion calls the underlying GoToTiltValueWithParamsCompletion.
 func (x *MTRBaseClusterWindowCovering) GoToTiltValueWithParamsCompletion(params *raw.MTRWindowCoveringClusterGoToTiltValueParams, completion func(unsafe.Pointer)) {
 	x.inner.GoToTiltValueWithParamsCompletion(params, completion)
 }
 
+// Command GoToTiltPercentage Go to tilt percentage specified
+//
 // GoToTiltPercentageWithParamsCompletion calls the underlying GoToTiltPercentageWithParamsCompletion.
 func (x *MTRBaseClusterWindowCovering) GoToTiltPercentageWithParamsCompletion(params *raw.MTRWindowCoveringClusterGoToTiltPercentageParams, completion func(unsafe.Pointer)) {
 	x.inner.GoToTiltPercentageWithParamsCompletion(params, completion)

@@ -35,11 +35,15 @@ func NewDeviceBattery() *DeviceBattery {
 	return &DeviceBattery{inner: raw.GCDeviceBatteryFromID(_id)}
 }
 
+// This is the battery level for controller. Battery level ranges from 0.0 (fully discharged) to 1.0 (100% charged) and defaults to 0
+//
 // BatteryLevel calls the underlying BatteryLevel.
 func (x *DeviceBattery) BatteryLevel() float32 {
 	return x.inner.BatteryLevel()
 }
 
+// A battery state for controller, defaults to GCControllerBatteryStateUnknown @note This property might be useful if you display the information about currently connected controller for player's convenience
+//
 // BatteryState calls the underlying BatteryState.
 func (x *DeviceBattery) BatteryState() GCDeviceBatteryState {
 	return GCDeviceBatteryState(x.inner.BatteryState())

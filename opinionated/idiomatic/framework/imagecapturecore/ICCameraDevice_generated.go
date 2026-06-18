@@ -39,99 +39,146 @@ func NewCameraDevice() *CameraDevice {
 	return &CameraDevice{inner: raw.ICCameraDeviceFromID(_id)}
 }
 
+// @property mediaPresentation @abstract The media presentation describes the visible assets from a device that may contain multiple formats of each media asset.  The asigngments are of the type ICMediaPresentation enumeration.  This property is available only if the capability ICCameraDeviceSupportsHEIF is  present. @discussion A device supporting this capability can specify the following presentations: ICMediaPresentationConverted - The default behavior for applications retrieving images from a device supporting HEIF is to show only converted JPG from HEIF originals, and only H264 encoded video assets from HEVC. ICMediaPresentationOriginal - This presentation will show only original images from a device supporting HEIF and HEVC.  Burned in renders are always exported in JPG, as are burned in effects for MOV clips.
+//
 // WithMediaPresentation sets the mediaPresentation property and returns the receiver for chaining.
 func (x *CameraDevice) WithMediaPresentation(mediaPresentation ICMediaPresentation) *CameraDevice {
 	x.inner.SetMediaPresentation(raw.ICMediaPresentation(mediaPresentation))
 	return x
 }
 
+// @property ptpEventHandler @abstract As an alternative to setting up an object to handle PTP event packets, a handler can be set.  The handler will always be called in place of the delegate if non-nil.  If the handler is not present, the delegate will be called if present. It is guaranteed only one of the methods will be called if both are implemented.
+//
 // WithPtpEventHandler sets the ptpEventHandler property and returns the receiver for chaining.
 func (x *CameraDevice) WithPtpEventHandler(ptpEventHandler func(*foundation.NSData)) *CameraDevice {
 	x.inner.SetPtpEventHandler(ptpEventHandler)
 	return x
 }
 
+// @property delegate @abstract The delegate to receive messages once a session is opened on the device. @discussion The delegate must conform ICDeviceDelegate protocol. In addition it should respond to selectors defined in ICCameraDeviceDelegate protocol in order to effectively interact with the device object. The messages this delegate can expect to receive are described by these protocols.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *CameraDevice) WithDelegate(delegate raw.ICDeviceDelegate) *CameraDevice {
 	x.inner.ICDevice.SetDelegate(delegate)
 	return x
 }
 
+// @method filesOfType: @abstract This method returns an array of files on the camera of type fileType. @discussion The fileType string is one of the following Uniform Type Identifier strings: kUTTypeImage, kUTTypeMovie, kUTTypeAudio, or kUTTypeData.
+//
 // FilesOfType calls the underlying FilesOfType.
 func (x *CameraDevice) FilesOfType(fileUTType string) *foundation.NSArray[*foundation.NSString] {
 	return x.inner.FilesOfType(foundation.NSStringStringWithUTF8String(fileUTType))
 }
 
+// @method requestReadDataFromFile:atOffset:length:readDelegate:didReadDataSelector:contextInfo: @abstract This method asynchronously reads data of a specified length from a specified offset. @discussion The readDelegate passed must not be nil. When this request is completed, the didReadDataSelector of the readDelegate object is called. The didReadDataSelector should have the same signature as: - (void)didReadData:(NSData*)data fromFile:(ICCameraFile*)file error:(NSError*)error contextInfo:(void*)contextInfo. The content of error returned should be examined to determine if the request completed successfully.
+//
 // RequestReadDataFromFileAtOffsetLengthReadDelegateDidReadDataSelectorContextInfo calls the underlying RequestReadDataFromFileAtOffsetLengthReadDelegateDidReadDataSelectorContextInfo.
 func (x *CameraDevice) RequestReadDataFromFileAtOffsetLengthReadDelegateDidReadDataSelectorContextInfo(file *raw.ICCameraFile, offset int64, length int64, readDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.RequestReadDataFromFileAtOffsetLengthReadDelegateDidReadDataSelectorContextInfo(file, offset, length, readDelegate, selector, contextInfo)
 }
 
+// @method requestDownloadFile:options:downloadDelegate:didDownloadSelector:contextInfo: @abstract Download a file from the camera. Please refer to the top of this header for information about the options. @discussion The downloadDelegate passed must not be nil. When this request is completed, the didDownloadSelector of the downloadDelegate object is called.The didDownloadSelector should have the same signature as: - (void)didDownloadFile:(ICCameraFile*)file error:(NSError*)error options:(NSDictionary*)options contextInfo:(void*)contextInfo. The content of error returned should be examined to determine if the request completed successfully.
+//
 // RequestDownloadFileOptionsDownloadDelegateDidDownloadSelectorContextInfo calls the underlying RequestDownloadFileOptionsDownloadDelegateDidDownloadSelectorContextInfo.
 func (x *CameraDevice) RequestDownloadFileOptionsDownloadDelegateDidDownloadSelectorContextInfo(file *raw.ICCameraFile, options *foundation.NSDictionary[*foundation.NSString, objc.ID], downloadDelegate raw.ICCameraDeviceDownloadDelegate, selector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.RequestDownloadFileOptionsDownloadDelegateDidDownloadSelectorContextInfo(file, options, downloadDelegate, selector, contextInfo)
 }
 
+// @method cancelDownload @abstract Cancels the current download operation if supported
+//
 // CancelDownload calls the underlying CancelDownload.
 func (x *CameraDevice) CancelDownload() {
 	x.inner.CancelDownload()
 }
 
+// @method requestDeleteFiles @abstract Deletes files.
+//
 // RequestDeleteFiles calls the underlying RequestDeleteFiles.
-func (x *CameraDevice) RequestDeleteFiles(files *foundation.NSArray[*raw.ICCameraItem]) {
-	x.inner.RequestDeleteFiles(files)
+func (x *CameraDevice) RequestDeleteFiles(files ...CameraItemProvider) {
+	_ptrs := make([]objc.ID, len(files))
+	for _i, _v := range files {
+		_ptrs[_i] = _v.asCameraItem().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.ICCameraItem]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.ICCameraItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.RequestDeleteFiles(_arg0)
 }
 
+// @method requestDeleteFiles:deleteFailed:completion @abstract Allows for deletion of an array of ICCameraItem objects, with the added ability to catch delete failures using the 'deleteFailed' block, and a completion block that will return the overall state of the request. The deleteFailed block will return: - NSDictionary<ICDeleteError, ICCameraItem*>* The completion block will return: — error: - nil if successful - NSError* with an code set to ICReturnDeleteFilesFailed if any file failed. - result: NSDictionary<ICDeleteResult, NSArray<ICCameraItem*>*>* result - ICDeleteSuccessful: NSArray<ICCameraItem*>* success - ICDeleteFailed: NSArray<ICCameraItem*>* failed
+//
 // RequestDeleteFilesDeleteFailedCompletion calls the underlying RequestDeleteFilesDeleteFailedCompletion.
 func (x *CameraDevice) RequestDeleteFilesDeleteFailedCompletion(files *foundation.NSArray[*raw.ICCameraItem], deleteFailed objc.Block, completion objc.Block) *foundation.NSProgress {
 	return x.inner.RequestDeleteFilesDeleteFailedCompletion(files, deleteFailed, completion)
 }
 
+// @method cancelDelete @abstract Cancels the current delete operation started by sending a 'requestDeleteFiles:'. This will only cancel operations in flight when a batch of files have been requested for deletion.
+//
 // CancelDelete calls the underlying CancelDelete.
 func (x *CameraDevice) CancelDelete() {
 	x.inner.CancelDelete()
 }
 
+// @method requestSyncClock @abstract Synchronize camera's clock with the computer's clock. You should send this request only if the camera has the 'ICCameraDeviceCanSyncClock' capability.
+//
 // RequestSyncClock calls the underlying RequestSyncClock.
 func (x *CameraDevice) RequestSyncClock() {
 	x.inner.RequestSyncClock()
 }
 
+// @method requestUploadFile:options:uploadDelegate:didUploadSelector:contextInfo: @abstract Upload a file at fileURL to the camera. The options dictionary is not used in this version. @discussion The uploadDelegate passed must not be nil. When this request is completed, the didUploadSelector of the uploadDelegate object is called. The didUploadSelector should have the same signature as: - (void)didUploadFile:(NSURL*)fileURL error:(NSError*)error contextInfo:(void*)contextInfo. The content of error returned should be examined to determine if the request completed successfully.
+//
 // RequestUploadFileOptionsUploadDelegateDidUploadSelectorContextInfo calls the underlying RequestUploadFileOptionsUploadDelegateDidUploadSelectorContextInfo.
 func (x *CameraDevice) RequestUploadFileOptionsUploadDelegateDidUploadSelectorContextInfo(fileURL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID], uploadDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.RequestUploadFileOptionsUploadDelegateDidUploadSelectorContextInfo(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), options, uploadDelegate, selector, contextInfo)
 }
 
+// @method requestTakePicture @abstract Capture a new image using the camera, the camera capabilities include 'ICCameraDeviceCanTakePicture'.
+//
 // RequestTakePicture calls the underlying RequestTakePicture.
 func (x *CameraDevice) RequestTakePicture() {
 	x.inner.RequestTakePicture()
 }
 
+// @method requestEnableTethering @abstract Send this message to enable tethered capture on the camera device if the camera has the 'ICCameraDeviceCanTakePicture' capability.
+//
 // RequestEnableTethering calls the underlying RequestEnableTethering.
 func (x *CameraDevice) RequestEnableTethering() {
 	x.inner.RequestEnableTethering()
 }
 
+// @method requestDisableTethering @abstract Send this message to disable tethered capture on the camera device if the camera has the 'ICCameraDeviceCanTakePicture' capability and if your process has already sent a 'requestEnableTethering' to it.
+//
 // RequestDisableTethering calls the underlying RequestDisableTethering.
 func (x *CameraDevice) RequestDisableTethering() {
 	x.inner.RequestDisableTethering()
 }
 
+// @method requestSendPTPCommand:outData:sendCommandDelegate:sendCommandDelegate:contextInfo: @abstract This method asynchronously sends a PTP command to a camera. @discussion This should be sent only if the 'capabilities' property contains 'ICCameraDeviceCanAcceptPTPCommands'. All PTP cameras have this capability. The response to this command will be delivered using didSendCommandSelector of sendCommandDelegate. The didSendCommandSelector should have the same signature as: - (void)didSendPTPCommand:(NSData*)command inData:(NSData*)data response:(NSData*)response error:(NSError*)error contextInfo:(void*)contextInfo. The content of error returned should be examined to determine if the request completed successfully.
+//
 // RequestSendPTPCommandOutDataSendCommandDelegateDidSendCommandSelectorContextInfo calls the underlying RequestSendPTPCommandOutDataSendCommandDelegateDidSendCommandSelectorContextInfo.
 func (x *CameraDevice) RequestSendPTPCommandOutDataSendCommandDelegateDidSendCommandSelectorContextInfo(command *foundation.NSData, data *foundation.NSData, sendCommandDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.RequestSendPTPCommandOutDataSendCommandDelegateDidSendCommandSelectorContextInfo(command, data, sendCommandDelegate, selector, contextInfo)
 }
 
+// @method requestSendPTPCommand:outData:completion @abstract This method asynchronously sends a PTP command to a camera. @discussion The response, data, and any error message will be returned the block.
+//
 // RequestSendPTPCommandOutDataCompletion calls the underlying RequestSendPTPCommandOutDataCompletion.
 func (x *CameraDevice) RequestSendPTPCommandOutDataCompletion(ptpCommand *foundation.NSData, ptpData *foundation.NSData, completion func(*foundation.NSData, *foundation.NSData, unsafe.Pointer)) {
 	x.inner.RequestSendPTPCommandOutDataCompletion(ptpCommand, ptpData, completion)
 }
 
+// @property contentCatalogPercentCompleted @abstract ￼Indicates the percentage of content cataloging completed on the device. Its value ranges from 0 to 100.
+//
 // ContentCatalogPercentCompleted calls the underlying ContentCatalogPercentCompleted.
 func (x *CameraDevice) ContentCatalogPercentCompleted() uint {
 	return x.inner.ContentCatalogPercentCompleted()
 }
 
+// @property contents @abstract ￼Contents of the camera. The structure of the elements in this array will reflect the folder structure of the storage reported by the camera. Each item in this array will correspond to a storage on the camera.
+//
 // Contents returns the collection as a Go slice.
 func (x *CameraDevice) Contents() []*CameraItem {
 	arr := x.inner.Contents()
@@ -143,6 +190,8 @@ func (x *CameraDevice) Contents() []*CameraItem {
 	})
 }
 
+// @property mediaFiles @abstract ￼The property mediaFiles represents all image, movie and audio files on the camera. These files are returned as a single array without regard to the folder hierarchy used to store these files on the camera.
+//
 // MediaFiles returns the collection as a Go slice.
 func (x *CameraDevice) MediaFiles() []*CameraItem {
 	arr := x.inner.MediaFiles()
@@ -154,31 +203,43 @@ func (x *CameraDevice) MediaFiles() []*CameraItem {
 	})
 }
 
+// @property ejectable @abstract ￼Indicates whether the device can be 'soft' removed or disconnected.
+//
 // IsEjectable calls the underlying IsEjectable.
 func (x *CameraDevice) IsEjectable() bool {
 	return x.inner.IsEjectable()
 }
 
+// @property locked @abstract ￼Indicates whether the device is locked.  A locked device does not allow for deletion of any asset.
+//
 // IsLocked calls the underlying IsLocked.
 func (x *CameraDevice) IsLocked() bool {
 	return x.inner.IsLocked()
 }
 
+// @property accessRestrictedAppleDevice @abstract Set to YES if the device is made by Apple and is pass-coded locked and connected to an untrusted host.
+//
 // IsAccessRestrictedAppleDevice calls the underlying IsAccessRestrictedAppleDevice.
 func (x *CameraDevice) IsAccessRestrictedAppleDevice() bool {
 	return x.inner.IsAccessRestrictedAppleDevice()
 }
 
+// @property iCloudPhotosEnabled @abstract Set to YES if the device is made by Apple and is pass-coded locked and connected to an untrusted host.
+//
 // ICloudPhotosEnabled calls the underlying ICloudPhotosEnabled.
 func (x *CameraDevice) ICloudPhotosEnabled() bool {
 	return x.inner.ICloudPhotosEnabled()
 }
 
+// @property mountPoint @abstract Filesystem mount point for a device with transportType of ICTransportTypeMassStorage. This will be NULL for all other devices.
+//
 // MountPoint calls the underlying MountPoint.
 func (x *CameraDevice) MountPoint() unsafe.Pointer {
 	return x.inner.MountPoint()
 }
 
+// @property mediaPresentation @abstract The media presentation describes the visible assets from a device that may contain multiple formats of each media asset.  The asigngments are of the type ICMediaPresentation enumeration.  This property is available only if the capability ICCameraDeviceSupportsHEIF is  present. @discussion A device supporting this capability can specify the following presentations: ICMediaPresentationConverted - The default behavior for applications retrieving images from a device supporting HEIF is to show only converted JPG from HEIF originals, and only H264 encoded video assets from HEVC. ICMediaPresentationOriginal - This presentation will show only original images from a device supporting HEIF and HEVC.  Burned in renders are always exported in JPG, as are burned in effects for MOV clips.
+//
 // MediaPresentation calls the underlying MediaPresentation.
 func (x *CameraDevice) MediaPresentation() ICMediaPresentation {
 	return ICMediaPresentation(x.inner.MediaPresentation())
@@ -189,26 +250,36 @@ func (x *CameraDevice) SetMediaPresentation(mediaPresentation ICMediaPresentatio
 	x.inner.SetMediaPresentation(raw.ICMediaPresentation(mediaPresentation))
 }
 
+// @property timeOffset @abstract Indicates the time offset, in seconds, between the camera's clock and the computer's clock￼. This value is positive if the camera's clock is ahead of the computer's clock. This property should be ignored if the camera's capabilities property does not contain ICCameraDeviceCanSyncClock.
+//
 // TimeOffset calls the underlying TimeOffset.
 func (x *CameraDevice) TimeOffset() float64 {
 	return x.inner.TimeOffset()
 }
 
+// @property batteryLevelAvailable @abstract Indicates if the device has reported battery charge level￼.
+//
 // BatteryLevelAvailable calls the underlying BatteryLevelAvailable.
 func (x *CameraDevice) BatteryLevelAvailable() bool {
 	return x.inner.BatteryLevelAvailable()
 }
 
+// @property batteryLevel @abstract ￼Indicates the battery charge level. Its value ranges from 0 to 100.
+//
 // BatteryLevel calls the underlying BatteryLevel.
 func (x *CameraDevice) BatteryLevel() uint {
 	return x.inner.BatteryLevel()
 }
 
+// @property tetheredCaptureEnabled @abstract This property is always set to YES when the device has the capability 'ICCameraDeviceCanTakePicture' @discussion requestEnableTethering/requestDisableTethering is no longer required to setup and destroy the standard take picture functionality of supported cameras.
+//
 // TetheredCaptureEnabled calls the underlying TetheredCaptureEnabled.
 func (x *CameraDevice) TetheredCaptureEnabled() bool {
 	return x.inner.TetheredCaptureEnabled()
 }
 
+// @property ptpEventHandler @abstract As an alternative to setting up an object to handle PTP event packets, a handler can be set.  The handler will always be called in place of the delegate if non-nil.  If the handler is not present, the delegate will be called if present. It is guaranteed only one of the methods will be called if both are implemented.
+//
 // PtpEventHandler calls the underlying PtpEventHandler.
 func (x *CameraDevice) PtpEventHandler() objc.Block {
 	return x.inner.PtpEventHandler()
@@ -247,7 +318,7 @@ type CameraDeviceable interface {
 	RequestReadDataFromFileAtOffsetLengthReadDelegateDidReadDataSelectorContextInfo(file *raw.ICCameraFile, offset int64, length int64, readDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer)
 	RequestDownloadFileOptionsDownloadDelegateDidDownloadSelectorContextInfo(file *raw.ICCameraFile, options *foundation.NSDictionary[*foundation.NSString, objc.ID], downloadDelegate raw.ICCameraDeviceDownloadDelegate, selector objc.SEL, contextInfo unsafe.Pointer)
 	CancelDownload()
-	RequestDeleteFiles(files *foundation.NSArray[*raw.ICCameraItem])
+	RequestDeleteFiles(files ...CameraItemProvider)
 	RequestDeleteFilesDeleteFailedCompletion(files *foundation.NSArray[*raw.ICCameraItem], deleteFailed objc.Block, completion objc.Block) *foundation.NSProgress
 	CancelDelete()
 	RequestSyncClock()

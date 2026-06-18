@@ -36,6 +36,8 @@ func NewMediaSelectionGroup() *MediaSelectionGroup {
 	return &MediaSelectionGroup{inner: raw.AVMediaSelectionGroupFromID(_id)}
 }
 
+// Returns the instance of AVMediaSelectionOption with properties that match the specified property list. - Parameter plist: A property list previously obtained from an option in the group via -[AVMediaSelectionOption propertyList]. - Returns: If the specified properties match those of an option in the group, an instance of AVMediaSelectionOption. Otherwise nil.
+//
 // MediaSelectionOptionWithPropertyList calls the underlying MediaSelectionOptionWithPropertyList.
 func (x *MediaSelectionGroup) MediaSelectionOptionWithPropertyList(plist objc.ID) *MediaSelectionOption {
 	_r := x.inner.MediaSelectionOptionWithPropertyList(plist)
@@ -45,6 +47,8 @@ func (x *MediaSelectionGroup) MediaSelectionOptionWithPropertyList(plist objc.ID
 	return &MediaSelectionOption{inner: _r}
 }
 
+// A collection of mutually exclusive media selection options. An NSArray of AVMediaSelectionOption*.
+//
 // Options returns the collection as a Go slice.
 func (x *MediaSelectionGroup) Options() []*MediaSelectionOption {
 	arr := x.inner.Options()
@@ -56,6 +60,8 @@ func (x *MediaSelectionGroup) Options() []*MediaSelectionOption {
 	})
 }
 
+// Indicates the default option in the group, i.e. the option that's intended for use in the absence of a specific end-user selection or preference. Can be nil, indicating that without a specific end-user selection or preference, no option in the group is intended to be selected.
+//
 // DefaultOption calls the underlying DefaultOption.
 func (x *MediaSelectionGroup) DefaultOption() *MediaSelectionOption {
 	_r := x.inner.DefaultOption()
@@ -65,6 +71,8 @@ func (x *MediaSelectionGroup) DefaultOption() *MediaSelectionOption {
 	return &MediaSelectionOption{inner: _r}
 }
 
+// Indicates whether it's possible to present none of the options in the group when an associated AVPlayerItem is played. If allowsEmptySelection is YES, all of the available media options in the group can be deselected by passing nil as the specified AVMediaSelectionOption to -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:].
+//
 // AllowsEmptySelection calls the underlying AllowsEmptySelection.
 func (x *MediaSelectionGroup) AllowsEmptySelection() bool {
 	return x.inner.AllowsEmptySelection()

@@ -38,36 +38,48 @@ func NewAttributionView() *AttributionView {
 	return &AttributionView{inner: raw.SWAttributionViewFromID(_id)}
 }
 
+// @abstract The SWHighlight to use for displaying this attribution. When this property is set to a new highlight, the contents of the view will be reloaded.
+//
 // WithHighlight sets the highlight property and returns the receiver for chaining.
 func (x *AttributionView) WithHighlight(highlight HighlightProvider) *AttributionView {
 	x.inner.SetHighlight(highlight.asHighlight())
 	return x
 }
 
+// @abstract The context for the content being displayed with this view. Set this prior to adding this view to your view hierarchy.
+//
 // WithDisplayContext sets the displayContext property and returns the receiver for chaining.
 func (x *AttributionView) WithDisplayContext(displayContext SWAttributionViewDisplayContext) *AttributionView {
 	x.inner.SetDisplayContext(raw.SWAttributionViewDisplayContext(displayContext))
 	return x
 }
 
+// @abstract The horizontal alignment of the view. You should specify a value, in case the internal default ever changes. @discussion This value specifies the horizontal anchor for the view's contents. This only has an effect when the width of the contents are less than the available width.
+//
 // WithHorizontalAlignment sets the horizontalAlignment property and returns the receiver for chaining.
 func (x *AttributionView) WithHorizontalAlignment(horizontalAlignment SWAttributionViewHorizontalAlignment) *AttributionView {
 	x.inner.SetHorizontalAlignment(raw.SWAttributionViewHorizontalAlignment(horizontalAlignment))
 	return x
 }
 
+// @abstract The background style of the inner view containing names and avatars. @discussion If you do not specify a background style, one will be chosen automatically. In general, .color looks best on monochrome backgrounds, while .material looks better on colored backgrounds.
+//
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
 func (x *AttributionView) WithBackgroundStyle(backgroundStyle SWAttributionViewBackgroundStyle) *AttributionView {
 	x.inner.SetBackgroundStyle(raw.SWAttributionViewBackgroundStyle(backgroundStyle))
 	return x
 }
 
+// @abstract For use when embedding this view in a SwiftUI view representable. @discussion When using this view in SwiftUI, this view will constrain its contents to this width. If you are not using SwiftUI this property should not be necessary, as SWAttributionView otherwise derives the maximum width from the frame or constraints you set.
+//
 // WithPreferredMaxLayoutWidth sets the preferredMaxLayoutWidth property and returns the receiver for chaining.
 func (x *AttributionView) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *AttributionView {
 	x.inner.SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth)
 	return x
 }
 
+// @abstract A custom localized string to be used as the title for the "Hide" menu item title. A nil value will result in the default title. @discussion SWAttributionView manages a context menu which includes the option for the user to hide the content for the SWHighlight represented by this view. Set a title to be used as the title for that context menu. An app that displays articles, for example, might set @"Hide Article", localized to the current language. The string should include the word "Hide", localized correctly with the custom content type.
+//
 // WithMenuTitleForHideAction sets the menuTitleForHideAction property and returns the receiver for chaining.
 func (x *AttributionView) WithMenuTitleForHideAction(menuTitleForHideAction string) *AttributionView {
 	x.inner.SetMenuTitleForHideAction(foundation.NSStringStringWithUTF8String(menuTitleForHideAction))
@@ -80,6 +92,8 @@ func (x *AttributionView) WithSupplementalMenu(supplementalMenu *appkit.NSMenuIt
 	return x
 }
 
+// @abstract The SWHighlight to use for displaying this attribution. When this property is set to a new highlight, the contents of the view will be reloaded.
+//
 // Highlight calls the underlying Highlight.
 func (x *AttributionView) Highlight() *Highlight {
 	_r := x.inner.Highlight()
@@ -94,6 +108,8 @@ func (x *AttributionView) SetHighlight(highlight *raw.SWHighlight) {
 	x.inner.SetHighlight(highlight)
 }
 
+// @abstract The context for the content being displayed with this view. Set this prior to adding this view to your view hierarchy.
+//
 // DisplayContext calls the underlying DisplayContext.
 func (x *AttributionView) DisplayContext() SWAttributionViewDisplayContext {
 	return SWAttributionViewDisplayContext(x.inner.DisplayContext())
@@ -104,6 +120,8 @@ func (x *AttributionView) SetDisplayContext(displayContext SWAttributionViewDisp
 	x.inner.SetDisplayContext(raw.SWAttributionViewDisplayContext(displayContext))
 }
 
+// @abstract The horizontal alignment of the view. You should specify a value, in case the internal default ever changes. @discussion This value specifies the horizontal anchor for the view's contents. This only has an effect when the width of the contents are less than the available width.
+//
 // HorizontalAlignment calls the underlying HorizontalAlignment.
 func (x *AttributionView) HorizontalAlignment() SWAttributionViewHorizontalAlignment {
 	return SWAttributionViewHorizontalAlignment(x.inner.HorizontalAlignment())
@@ -114,6 +132,8 @@ func (x *AttributionView) SetHorizontalAlignment(horizontalAlignment SWAttributi
 	x.inner.SetHorizontalAlignment(raw.SWAttributionViewHorizontalAlignment(horizontalAlignment))
 }
 
+// @abstract The background style of the inner view containing names and avatars. @discussion If you do not specify a background style, one will be chosen automatically. In general, .color looks best on monochrome backgrounds, while .material looks better on colored backgrounds.
+//
 // BackgroundStyle calls the underlying BackgroundStyle.
 func (x *AttributionView) BackgroundStyle() SWAttributionViewBackgroundStyle {
 	return SWAttributionViewBackgroundStyle(x.inner.BackgroundStyle())
@@ -124,6 +144,8 @@ func (x *AttributionView) SetBackgroundStyle(backgroundStyle SWAttributionViewBa
 	x.inner.SetBackgroundStyle(raw.SWAttributionViewBackgroundStyle(backgroundStyle))
 }
 
+// @abstract For use when embedding this view in a SwiftUI view representable. @discussion When using this view in SwiftUI, this view will constrain its contents to this width. If you are not using SwiftUI this property should not be necessary, as SWAttributionView otherwise derives the maximum width from the frame or constraints you set.
+//
 // PreferredMaxLayoutWidth calls the underlying PreferredMaxLayoutWidth.
 func (x *AttributionView) PreferredMaxLayoutWidth() float64 {
 	return x.inner.PreferredMaxLayoutWidth()
@@ -139,6 +161,8 @@ func (x *AttributionView) HighlightMenu() *appkit.NSMenu {
 	return x.inner.HighlightMenu()
 }
 
+// @abstract A custom localized string to be used as the title for the "Hide" menu item title. A nil value will result in the default title. @discussion SWAttributionView manages a context menu which includes the option for the user to hide the content for the SWHighlight represented by this view. Set a title to be used as the title for that context menu. An app that displays articles, for example, might set @"Hide Article", localized to the current language. The string should include the word "Hide", localized correctly with the custom content type.
+//
 // MenuTitleForHideAction calls the underlying MenuTitleForHideAction.
 func (x *AttributionView) MenuTitleForHideAction() string {
 	_r := x.inner.MenuTitleForHideAction()

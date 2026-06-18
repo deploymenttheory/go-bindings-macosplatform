@@ -35,6 +35,8 @@ func MTRBaseClusterOvenCavityOperationalStateFromID(id objc.ID) *MTRBaseClusterO
 	return &MTRBaseClusterOvenCavityOperationalState{inner: raw.MTRBaseClusterOvenCavityOperationalStateFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterOvenCavityOperationalStateWithDeviceEndpointIDQueue creates a new [MTRBaseClusterOvenCavityOperationalState].
 func NewMTRBaseClusterOvenCavityOperationalStateWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterOvenCavityOperationalState {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterOvenCavityOperationalState")), objc.RegisterName("alloc"))
@@ -42,6 +44,8 @@ func NewMTRBaseClusterOvenCavityOperationalStateWithDeviceEndpointIDQueue(device
 	return &MTRBaseClusterOvenCavityOperationalState{inner: raw.MTRBaseClusterOvenCavityOperationalStateFromID(_id)}
 }
 
+// Command Stop Upon receipt, the device SHALL stop its operation if it is at a position where it is safe to do so and/or permitted.
+//
 // StopWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterOvenCavityOperationalState) StopWithParamsCompletion(ctx context.Context, params *raw.MTROvenCavityOperationalStateClusterStopParams) (*MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, error) {
 	type _result struct {
@@ -94,6 +98,8 @@ func (x *MTRBaseClusterOvenCavityOperationalState) StopWithCompletion(ctx contex
 	}
 }
 
+// Command Start Upon receipt, the device SHALL start its operation if it is safe to do so and the device is in an operational state from which it can be started.
+//
 // StartWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterOvenCavityOperationalState) StartWithParamsCompletion(ctx context.Context, params *raw.MTROvenCavityOperationalStateClusterStartParams) (*MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, error) {
 	type _result struct {

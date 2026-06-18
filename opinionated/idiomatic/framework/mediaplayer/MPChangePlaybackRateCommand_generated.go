@@ -38,6 +38,8 @@ func NewChangePlaybackRateCommand() *ChangePlaybackRateCommand {
 	return &ChangePlaybackRateCommand{inner: raw.MPChangePlaybackRateCommandFromID(_id)}
 }
 
+// An array of NSNumbers (floats) that contain supported playback rates that the command can send.
+//
 // WithSupportedPlaybackRates sets the collection, converting the Go slice to an NSArray.
 func (x *ChangePlaybackRateCommand) WithSupportedPlaybackRates(items ...*foundation.NSNumber) *ChangePlaybackRateCommand {
 	if len(items) == 0 {
@@ -56,6 +58,8 @@ func (x *ChangePlaybackRateCommand) WithSupportedPlaybackRates(items ...*foundat
 	return x
 }
 
+// Whether a button (for example) should be enabled and tappable for this particular command.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *ChangePlaybackRateCommand) WithEnabled(enabled bool) *ChangePlaybackRateCommand {
 	x.inner.MPRemoteCommand.SetEnabled(enabled)

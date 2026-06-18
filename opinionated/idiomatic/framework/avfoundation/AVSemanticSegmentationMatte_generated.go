@@ -39,6 +39,8 @@ func NewSemanticSegmentationMatte() *SemanticSegmentationMatte {
 	return &SemanticSegmentationMatte{inner: raw.AVSemanticSegmentationMatteFromID(_id)}
 }
 
+// @method semanticSegmentationMatteByApplyingExifOrientation: @abstract Returns a derivative AVSemanticSegmentationMatte instance in which the specified Exif orientation has been applied. @param exifOrientation One of the 8 standard Exif orientation tags expressing how the matte should be rotated / mirrored. @result An AVSemanticSegmentationMatte's instance. @discussion When applying simple 90 degree rotation or mirroring edits to media containing a semantic segmentation matte, you may use this initializer to create a derivative copy of the matte in which the specified orientation is applied. This method throws an NSInvalidArgumentException if you pass an unrecognized exifOrientation.
+//
 // SemanticSegmentationMatteByApplyingExifOrientation calls the underlying SemanticSegmentationMatteByApplyingExifOrientation.
 func (x *SemanticSegmentationMatte) SemanticSegmentationMatteByApplyingExifOrientation(exifOrientation imageio.CGImagePropertyOrientation) *SemanticSegmentationMatte {
 	_r := x.inner.SemanticSegmentationMatteByApplyingExifOrientation(exifOrientation)
@@ -48,6 +50,8 @@ func (x *SemanticSegmentationMatte) SemanticSegmentationMatteByApplyingExifOrien
 	return &SemanticSegmentationMatte{inner: _r}
 }
 
+// @method semanticSegmentationMatteByReplacingSemanticSegmentationMatteWithPixelBuffer:error: @abstract Returns an AVSemanticSegmentationMatte instance wrapping the replacement pixel buffer. @param pixelBuffer A pixel buffer containing a semantic segmentation matting image, represented as kCVPixelFormatType_OneComponent8 with a kCVImageBufferTransferFunction_Linear transfer function. @param outError On return, if the AVSemanticSegmentationMatte cannot be created, points to an NSError describing the problem. @result An AVSemanticSegmentationMatte instance, or nil if the pixel buffer is malformed. @discussion When applying complex edits to media containing a semantic segmentation matte, you may create a derivative matte with arbitrary transforms applied to it, then use this initializer to create a new AVSemanticSegmentationMatte.
+//
 // SemanticSegmentationMatteByReplacingSemanticSegmentationMatteWithPixelBufferError calls the underlying SemanticSegmentationMatteByReplacingSemanticSegmentationMatteWithPixelBufferError.
 func (x *SemanticSegmentationMatte) SemanticSegmentationMatteByReplacingSemanticSegmentationMatteWithPixelBufferError(pixelBuffer unsafe.Pointer) (*SemanticSegmentationMatte, error) {
 	_r, _err := x.inner.SemanticSegmentationMatteByReplacingSemanticSegmentationMatteWithPixelBufferError(pixelBuffer)
@@ -60,11 +64,15 @@ func (x *SemanticSegmentationMatte) SemanticSegmentationMatteByReplacingSemantic
 	return &SemanticSegmentationMatte{inner: _r}, nil
 }
 
+// @method dictionaryRepresentationForAuxiliaryDataType: @abstract Returns a dictionary of primitive map information to be used when writing an image file with a semantic segmentation matte. @param outAuxDataType On output, the auxiliary data type to be used when calling CGImageDestinationAddAuxiliaryDataInfo. Currently supported auxiliary data types are enumerated in <ImageIO/CGImageProperties.h> @result A dictionary of CGImageDestination compatible semantic segmentation matte information, or nil if the auxDataType is unsupported. @discussion When using ImageIO framework's CGImageDestination API to write semantic segmentation matte information to a HEIF or JPEG file, you may use this method to generate a dictionary of primitive map information consumed by CGImageDestinationAddAuxiliaryDataInfo.
+//
 // DictionaryRepresentationForAuxiliaryDataType calls the underlying DictionaryRepresentationForAuxiliaryDataType.
 func (x *SemanticSegmentationMatte) DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.DictionaryRepresentationForAuxiliaryDataType(foundation.NSStringStringWithUTF8String(outAuxDataType))
 }
 
+// @property matteType @abstract Specifies the receiver's semantic segmentation matting image type. @discussion An AVSemanticSegmentationMatte's matteType is immutable for the life of the object.
+//
 // MatteType calls the underlying MatteType.
 func (x *SemanticSegmentationMatte) MatteType() string {
 	_r := x.inner.MatteType()
@@ -74,11 +82,15 @@ func (x *SemanticSegmentationMatte) MatteType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property pixelFormatType @abstract Specifies the pixel format type of this object's internal matting image. @discussion Currently the only supported CV pixel format type for the matting image is kCVPixelFormatType_OneComponent8.
+//
 // PixelFormatType calls the underlying PixelFormatType.
 func (x *SemanticSegmentationMatte) PixelFormatType() uint {
 	return x.inner.PixelFormatType()
 }
 
+// @property mattingImage @abstract Provides access to the semantic segmentation matte's internal image. @discussion The pixel format can be queried using the pixelFormatType property.
+//
 // MattingImage calls the underlying MattingImage.
 func (x *SemanticSegmentationMatte) MattingImage() unsafe.Pointer {
 	return x.inner.MattingImage()

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The Linux directory share for Rosetta.
+//
 // LinuxRosettaDirectoryShare wraps [raw.VZLinuxRosettaDirectoryShare] with a fluent Go API.
 type LinuxRosettaDirectoryShare struct {
 	inner *raw.VZLinuxRosettaDirectoryShare
@@ -35,12 +37,16 @@ func NewLinuxRosettaDirectoryShare() *LinuxRosettaDirectoryShare {
 	return &LinuxRosettaDirectoryShare{inner: raw.VZLinuxRosettaDirectoryShareFromID(_id)}
 }
 
+// The value that enables translation caching and configures the socket communication type for Rosetta.
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *LinuxRosettaDirectoryShare) WithOptions(options LinuxRosettaCachingOptionsProvider) *LinuxRosettaDirectoryShare {
 	x.inner.SetOptions(options.asLinuxRosettaCachingOptions())
 	return x
 }
 
+// @abstract Enable translation caching and configure the socket communication type for Rosetta.
+//
 // Options calls the underlying Options.
 func (x *LinuxRosettaDirectoryShare) Options() *LinuxRosettaCachingOptions {
 	_r := x.inner.Options()

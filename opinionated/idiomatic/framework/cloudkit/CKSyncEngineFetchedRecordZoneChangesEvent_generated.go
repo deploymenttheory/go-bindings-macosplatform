@@ -38,6 +38,8 @@ func NewSyncEngineFetchedRecordZoneChangesEvent() *SyncEngineFetchedRecordZoneCh
 	return &SyncEngineFetchedRecordZoneChangesEvent{inner: raw.CKSyncEngineFetchedRecordZoneChangesEventFromID(_id)}
 }
 
+// The fetched record modifications.
+//
 // Modifications returns the collection as a Go slice.
 func (x *SyncEngineFetchedRecordZoneChangesEvent) Modifications() []*Record {
 	arr := x.inner.Modifications()
@@ -49,6 +51,8 @@ func (x *SyncEngineFetchedRecordZoneChangesEvent) Modifications() []*Record {
 	})
 }
 
+// The fetched record deletions.
+//
 // Deletions returns the collection as a Go slice.
 func (x *SyncEngineFetchedRecordZoneChangesEvent) Deletions() []*SyncEngineFetchedRecordDeletion {
 	arr := x.inner.Deletions()

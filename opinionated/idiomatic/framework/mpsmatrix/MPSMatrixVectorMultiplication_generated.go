@@ -31,6 +31,8 @@ func MatrixVectorMultiplicationFromID(id objc.ID) *MatrixVectorMultiplication {
 	return &MatrixVectorMultiplication{inner: raw.MPSMatrixVectorMultiplicationFromID(id)}
 }
 
+// @abstract   Initialize an MPSMatrixVectorMultiplication object on a device for a given size and desired transpose and scale values. @param      device          The device on which the kernel will execute. @param      transpose       A boolean value which indicates if the input matrix should be used in transposed form.  if 'YES' then op(A) == A**T, otherwise op(A) == A. @param      rows            The number of rows in the input matrix op(A), and the number of elements in the vector y. @param      columns         The number of columns in the input matrix op(A), and the number of elements in the input vector x. @param      alpha           The scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. @param      beta            The scale factor to apply to the initial values of y.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. @return     A valid MPSMatrixVectorMultiplication object or nil, if failure.
+//
 // NewMatrixVectorMultiplicationWithDeviceTransposeRowsColumnsAlphaBeta creates a new [MatrixVectorMultiplication].
 func NewMatrixVectorMultiplicationWithDeviceTransposeRowsColumnsAlphaBeta(device metal.MTLDevice, transpose bool, rows uint, columns uint, alpha float64, beta float64) *MatrixVectorMultiplication {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixVectorMultiplication")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewMatrixVectorMultiplicationWithDeviceTransposeRowsColumnsAlphaBeta(device
 	return &MatrixVectorMultiplication{inner: raw.MPSMatrixVectorMultiplicationFromID(_id)}
 }
 
+// @abstract   Convenience initialization for a matrix-vector multiplication with no transposition, unit scaling of the product, and no accumulation of the result.  The scaling factors alpha and beta are taken to be 1.0 and 0.0 respectively. @param      device          The device on which the kernel will execute. @param      rows            The number of rows in the input matrix A, and the number of elements in the vector y. @param      columns         The number of columns in the input matrix A, and the number of elements in the input vector x. @return     A valid MPSMatrixVectorMultiplication object or nil, if failure.
+//
 // NewMatrixVectorMultiplicationWithDeviceRowsColumns creates a new [MatrixVectorMultiplication].
 func NewMatrixVectorMultiplicationWithDeviceRowsColumns(device metal.MTLDevice, rows uint, columns uint) *MatrixVectorMultiplication {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixVectorMultiplication")), objc.RegisterName("alloc"))
@@ -45,36 +49,48 @@ func NewMatrixVectorMultiplicationWithDeviceRowsColumns(device metal.MTLDevice, 
 	return &MatrixVectorMultiplication{inner: raw.MPSMatrixVectorMultiplicationFromID(_id)}
 }
 
+// @property   primarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithPrimarySourceMatrixOrigin sets the primarySourceMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixVectorMultiplication) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixVectorMultiplication {
 	x.inner.MPSMatrixBinaryKernel.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
 	return x
 }
 
+// @property   secondarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithSecondarySourceMatrixOrigin sets the secondarySourceMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixVectorMultiplication) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixVectorMultiplication {
 	x.inner.MPSMatrixBinaryKernel.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
 	return x
 }
 
+// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixVectorMultiplication) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixVectorMultiplication {
 	x.inner.MPSMatrixBinaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
 	return x
 }
 
+// @property   batchStart @discussion The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+//
 // WithBatchStart sets the batchStart property and returns the receiver for chaining.
 func (x *MatrixVectorMultiplication) WithBatchStart(batchStart uint) *MatrixVectorMultiplication {
 	x.inner.MPSMatrixBinaryKernel.SetBatchStart(batchStart)
 	return x
 }
 
+// @property   batchSize @discussion The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+//
 // WithBatchSize sets the batchSize property and returns the receiver for chaining.
 func (x *MatrixVectorMultiplication) WithBatchSize(batchSize uint) *MatrixVectorMultiplication {
 	x.inner.MPSMatrixBinaryKernel.SetBatchSize(batchSize)
 	return x
 }
 
+// @abstract   Encode a MPSMatrixVectorMultiplication object to a command buffer. @param      commandBuffer   A valid MTLCommandBuffer to receive the encoded kernel. @param      inputMatrix     A valid MPSMatrix object which specifies the input matrix A. @param      inputVector     A valid MPSVector object which specifies the input vector x. @param      resultVector    A valid MPSVector object which specifies the addend vector which will also be overwritten by the result. @discussion The left input matrix must be large enough to hold an array of size (rows x columns) elements beginning at primarySourceMatrixOrigin. The input vector must be large enough to hold an array of size (columns) elements beginning at secondarySourceMatrixOrigin.x  secondarySourceMatrixOrigin.y and secondarySourceMatrixOrigin.z must be zero. The result vector must be large enough to hold an array of size (rows) elements beginning at resultMatrixOrigin.x.  resultMatrixOrigin.y and resultMatrixOrigin.z must be zero.
+//
 // EncodeToCommandBufferInputMatrixInputVectorResultVector calls the underlying EncodeToCommandBufferInputMatrixInputVectorResultVector.
 func (x *MatrixVectorMultiplication) EncodeToCommandBufferInputMatrixInputVectorResultVector(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, inputVector *mpscore.MPSVector, resultVector *mpscore.MPSVector) {
 	x.inner.EncodeToCommandBufferInputMatrixInputVectorResultVector(commandBuffer, inputMatrix, inputVector, resultVector)

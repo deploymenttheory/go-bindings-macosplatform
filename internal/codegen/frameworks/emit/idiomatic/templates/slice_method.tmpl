@@ -3,7 +3,8 @@
     iterated through purego.NSArrayToSlice with a per-element conversion closure
     (ConvClosure, pre-built in Go). Two shapes: with and without an error return.
 */}}
-{{define "slice_method"}}// {{.GoName}} returns the collection as a Go slice.
+{{define "slice_method"}}{{if .DocComment}}{{.DocComment}}//
+{{end}}// {{.GoName}} returns the collection as a Go slice.
 {{if .HasError -}}
 func {{.Recv}}{{.GoName}}() ([]{{.ElemGoType}}, error) {
 arr, err := {{.Target}}.{{.RawGoName}}()

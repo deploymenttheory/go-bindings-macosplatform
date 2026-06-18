@@ -35,6 +35,8 @@ func NewImageSymbolConfiguration() *ImageSymbolConfiguration {
 	return &ImageSymbolConfiguration{inner: raw.NSImageSymbolConfigurationFromID(_id)}
 }
 
+// Returns a new configuration object whose values are defined by applying values from the provided configuration and the receiver. Values defined by both configurations will use the provided configuration’s values.
+//
 // ConfigurationByApplyingConfiguration calls the underlying ConfigurationByApplyingConfiguration.
 func (x *ImageSymbolConfiguration) ConfigurationByApplyingConfiguration(configuration *raw.NSImageSymbolConfiguration) *ImageSymbolConfiguration {
 	_r := x.inner.ConfigurationByApplyingConfiguration(configuration)

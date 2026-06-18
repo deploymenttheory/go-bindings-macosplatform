@@ -31,6 +31,8 @@ func ContentKeySpecifierFromID(id objc.ID) *ContentKeySpecifier {
 	return &ContentKeySpecifier{inner: raw.AVContentKeySpecifierFromID(id)}
 }
 
+// Initialize an instance of AVContentKeySpecifier. This method returns an AVContentKeySpecifier instance that represents a content key in a specific content key system. - Parameter keySystem: A valid key system for content keys. - Parameter contentKeyIdentifier: Container and protocol-specific key identifier. - Parameter options: Additional information necessary to obtain the key, can be empty if none needed. - Returns: An instance of AVContentKeySpecifier
+//
 // NewContentKeySpecifierForKeySystemIdentifierOptions creates a new [ContentKeySpecifier].
 func NewContentKeySpecifierForKeySystemIdentifierOptions(keySystem *foundation.NSString, contentKeyIdentifier objc.ID, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ContentKeySpecifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVContentKeySpecifier")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewContentKeySpecifierForKeySystemIdentifierOptions(keySystem *foundation.N
 	return &ContentKeySpecifier{inner: raw.AVContentKeySpecifierFromID(_id)}
 }
 
+// A valid key system for content keys.
+//
 // KeySystem calls the underlying KeySystem.
 func (x *ContentKeySpecifier) KeySystem() string {
 	_r := x.inner.KeySystem()
@@ -47,11 +51,15 @@ func (x *ContentKeySpecifier) KeySystem() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Container and protocol-specific key identifier.
+//
 // Identifier calls the underlying Identifier.
 func (x *ContentKeySpecifier) Identifier() objc.ID {
 	return x.inner.Identifier()
 }
 
+// Additional information necessary to obtain the key, can be empty if none needed.
+//
 // Options calls the underlying Options.
 func (x *ContentKeySpecifier) Options() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.Options()

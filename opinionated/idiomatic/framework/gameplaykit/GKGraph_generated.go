@@ -9,8 +9,11 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
+// Representation of a directed graph of GKGraphNodes
+//
 // Graph wraps [raw.GKGraph] with a fluent Go API.
 type Graph struct {
 	inner *raw.GKGraph
@@ -32,32 +35,69 @@ func GraphFromID(id objc.ID) *Graph {
 }
 
 // NewGraphWithNodes creates a new [Graph].
-func NewGraphWithNodes(nodes *foundation.NSArray[*raw.GKGraphNode]) *Graph {
+func NewGraphWithNodes(nodes ...GraphNodeProvider) *Graph {
+	_ptrs := make([]objc.ID, len(nodes))
+	for _i, _v := range nodes {
+		_ptrs[_i] = _v.asGraphNode().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.GKGraphNode]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.GKGraphNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGraph")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNodes:"), nodes.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNodes:"), _arg0.Ptr())
 	return &Graph{inner: raw.GKGraphFromID(_id)}
 }
 
+// Connects the node to this graph via the lowest cost node to reach in this graph @param node the node to connect @param bidirectional should the connection be bidirectional? Otherwise it is one way connected into the graph
+//
 // ConnectNodeToLowestCostNodeBidirectional calls the underlying ConnectNodeToLowestCostNodeBidirectional.
 func (x *Graph) ConnectNodeToLowestCostNodeBidirectional(node *raw.GKGraphNode, bidirectional bool) {
 	x.inner.ConnectNodeToLowestCostNodeBidirectional(node, bidirectional)
 }
 
+// Removes nodes from this graph. All connections starting and/or ending with this node are removed. @param nodes an array of nodes to be removed
+//
 // RemoveNodes calls the underlying RemoveNodes.
-func (x *Graph) RemoveNodes(nodes *foundation.NSArray[*raw.GKGraphNode]) {
-	x.inner.RemoveNodes(nodes)
+func (x *Graph) RemoveNodes(nodes ...GraphNodeProvider) {
+	_ptrs := make([]objc.ID, len(nodes))
+	for _i, _v := range nodes {
+		_ptrs[_i] = _v.asGraphNode().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.GKGraphNode]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.GKGraphNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.RemoveNodes(_arg0)
 }
 
+// Adds nodes to this graph.  No new connections are added. If the node already exists in this graph this does nothing. @param nodes and array of nodes to be added
+//
 // AddNodes calls the underlying AddNodes.
-func (x *Graph) AddNodes(nodes *foundation.NSArray[*raw.GKGraphNode]) {
-	x.inner.AddNodes(nodes)
+func (x *Graph) AddNodes(nodes ...GraphNodeProvider) {
+	_ptrs := make([]objc.ID, len(nodes))
+	for _i, _v := range nodes {
+		_ptrs[_i] = _v.asGraphNode().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.GKGraphNode]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.GKGraphNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.AddNodes(_arg0)
 }
 
+// Attempts to find the optimal path between the two nodes indicated. If such a path exists, it is returned in start to end order. If it doesn't exist, the array returned will be empty. Asserts if neither of these nodes are in this graph.  Use [GKGraphNode findPathFromNode:] instead. @param startNode node to start pathing from @param endNode goal node of the pathfinding attempt
+//
 // FindPathFromNodeToNode calls the underlying FindPathFromNodeToNode.
 func (x *Graph) FindPathFromNodeToNode(startNode *raw.GKGraphNode, endNode *raw.GKGraphNode) *foundation.NSArray[*raw.GKGraphNode] {
 	return x.inner.FindPathFromNodeToNode(startNode, endNode)
 }
 
+// The list of nodes in this graph
+//
 // Nodes returns the collection as a Go slice.
 func (x *Graph) Nodes() []*GraphNode {
 	arr := x.inner.Nodes()
@@ -75,8 +115,8 @@ func (x *Graph) asGraph() *raw.GKGraph { return x.inner }
 type Graphable interface {
 	Unwrap() *raw.GKGraph
 	ConnectNodeToLowestCostNodeBidirectional(node *raw.GKGraphNode, bidirectional bool)
-	RemoveNodes(nodes *foundation.NSArray[*raw.GKGraphNode])
-	AddNodes(nodes *foundation.NSArray[*raw.GKGraphNode])
+	RemoveNodes(nodes ...GraphNodeProvider)
+	AddNodes(nodes ...GraphNodeProvider)
 	FindPathFromNodeToNode(startNode *raw.GKGraphNode, endNode *raw.GKGraphNode) *foundation.NSArray[*raw.GKGraphNode]
 	Nodes() []*GraphNode
 }

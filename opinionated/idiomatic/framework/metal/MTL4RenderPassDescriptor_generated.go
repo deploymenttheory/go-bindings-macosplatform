@@ -35,100 +35,134 @@ func NewMTL4RenderPassDescriptor() *MTL4RenderPassDescriptor {
 	return &MTL4RenderPassDescriptor{inner: raw.MTL4RenderPassDescriptorFromID(_id)}
 }
 
+// Accesses state information for a render attachment that stores depth data.
+//
 // WithDepthAttachment sets the depthAttachment property and returns the receiver for chaining.
 func (x *MTL4RenderPassDescriptor) WithDepthAttachment(depthAttachment *RenderPassDepthAttachmentDescriptor) *MTL4RenderPassDescriptor {
 	x.inner.SetDepthAttachment(depthAttachment.Unwrap())
 	return x
 }
 
+// Accesses state information for a render attachment that stores stencil data.
+//
 // WithStencilAttachment sets the stencilAttachment property and returns the receiver for chaining.
 func (x *MTL4RenderPassDescriptor) WithStencilAttachment(stencilAttachment *RenderPassStencilAttachmentDescriptor) *MTL4RenderPassDescriptor {
 	x.inner.SetStencilAttachment(stencilAttachment.Unwrap())
 	return x
 }
 
+// Assigns the number of layers that all attachments this descriptor references have.
+//
 // WithRenderTargetArrayLength sets the renderTargetArrayLength property and returns the receiver for chaining.
 func (x *MTL4RenderPassDescriptor) WithRenderTargetArrayLength(renderTargetArrayLength uint) *MTL4RenderPassDescriptor {
 	x.inner.SetRenderTargetArrayLength(renderTargetArrayLength)
 	return x
 }
 
+// Assigns the per-sample size, in bytes, of the largest explicit imageblock layout in the render pass.
+//
 // WithImageblockSampleLength sets the imageblockSampleLength property and returns the receiver for chaining.
 func (x *MTL4RenderPassDescriptor) WithImageblockSampleLength(imageblockSampleLength uint) *MTL4RenderPassDescriptor {
 	x.inner.SetImageblockSampleLength(imageblockSampleLength)
 	return x
 }
 
+// Assigns the per-tile size, in bytes, of the persistent threadgroup memory allocation of this render pass.
+//
 // WithThreadgroupMemoryLength sets the threadgroupMemoryLength property and returns the receiver for chaining.
 func (x *MTL4RenderPassDescriptor) WithThreadgroupMemoryLength(threadgroupMemoryLength uint) *MTL4RenderPassDescriptor {
 	x.inner.SetThreadgroupMemoryLength(threadgroupMemoryLength)
 	return x
 }
 
+// The width of the tiles, in pixels, a render pass you create with this descriptor applies to its attachments. For tile-based rendering, Metal divides each render attachment into smaller regions, or _tiles_. The property's default is `0`, which tells Metal to select a size that fits in tile memory. See <doc:tailor-your-apps-for-apple-gpus-and-tile-based-deferred-rendering> for more information about tiles, tile memory, and deferred rendering.
+//
 // WithTileWidth sets the tileWidth property and returns the receiver for chaining.
 func (x *MTL4RenderPassDescriptor) WithTileWidth(tileWidth uint) *MTL4RenderPassDescriptor {
 	x.inner.SetTileWidth(tileWidth)
 	return x
 }
 
+// The height of the tiles, in pixels, a render pass you create with this descriptor applies to its attachments. For tile-based rendering, Metal divides each render attachment into smaller regions, or _tiles_. The property's default is `0`, which tells Metal to select a size that fits in tile memory. See <doc:tailor-your-apps-for-apple-gpus-and-tile-based-deferred-rendering> for more information about tiles, tile memory, and deferred rendering.
+//
 // WithTileHeight sets the tileHeight property and returns the receiver for chaining.
 func (x *MTL4RenderPassDescriptor) WithTileHeight(tileHeight uint) *MTL4RenderPassDescriptor {
 	x.inner.SetTileHeight(tileHeight)
 	return x
 }
 
+// Sets the default raster sample count for the render pass when it references no attachments.
+//
 // WithDefaultRasterSampleCount sets the defaultRasterSampleCount property and returns the receiver for chaining.
 func (x *MTL4RenderPassDescriptor) WithDefaultRasterSampleCount(defaultRasterSampleCount uint) *MTL4RenderPassDescriptor {
 	x.inner.SetDefaultRasterSampleCount(defaultRasterSampleCount)
 	return x
 }
 
+// Sets the width, in pixels, to which Metal constrains the render target. When this value is non-zero, you need to assign it to be smaller than or equal to the minimum width of all attachments. The default value of this property is `0`.
+//
 // WithRenderTargetWidth sets the renderTargetWidth property and returns the receiver for chaining.
 func (x *MTL4RenderPassDescriptor) WithRenderTargetWidth(renderTargetWidth uint) *MTL4RenderPassDescriptor {
 	x.inner.SetRenderTargetWidth(renderTargetWidth)
 	return x
 }
 
+// Sets the height, in pixels, to which Metal constrains the render target. When this value is non-zero, you need to assign it to be smaller than or equal to the minimum height of all attachments. The default value of this property is `0`.
+//
 // WithRenderTargetHeight sets the renderTargetHeight property and returns the receiver for chaining.
 func (x *MTL4RenderPassDescriptor) WithRenderTargetHeight(renderTargetHeight uint) *MTL4RenderPassDescriptor {
 	x.inner.SetRenderTargetHeight(renderTargetHeight)
 	return x
 }
 
+// Assigns an optional variable rasterization rate map that Metal uses in the render pass. Enabling variable rasterization rate allows Metal to decrease the rasterization rate, typically in unimportant regions of color attachments, to accelerate processing. When set to `nil`, the default, Metal doesn't use variable rasterization rate.
+//
 // WithRasterizationRateMap sets the rasterizationRateMap property and returns the receiver for chaining.
 func (x *MTL4RenderPassDescriptor) WithRasterizationRateMap(rasterizationRateMap raw.MTLRasterizationRateMap) *MTL4RenderPassDescriptor {
 	x.inner.SetRasterizationRateMap(rasterizationRateMap)
 	return x
 }
 
+// Configures a buffer into which Metal writes counts of fragments (pixels) passing the depth and stencil tests.
+//
 // WithVisibilityResultBuffer sets the visibilityResultBuffer property and returns the receiver for chaining.
 func (x *MTL4RenderPassDescriptor) WithVisibilityResultBuffer(visibilityResultBuffer raw.MTLBuffer) *MTL4RenderPassDescriptor {
 	x.inner.SetVisibilityResultBuffer(visibilityResultBuffer)
 	return x
 }
 
+// Determines if Metal accumulates visibility results between render encoders or resets them.
+//
 // WithVisibilityResultType sets the visibilityResultType property and returns the receiver for chaining.
 func (x *MTL4RenderPassDescriptor) WithVisibilityResultType(visibilityResultType MTLVisibilityResultType) *MTL4RenderPassDescriptor {
 	x.inner.SetVisibilityResultType(raw.MTLVisibilityResultType(visibilityResultType))
 	return x
 }
 
+// Controls if the render pass supports color attachment mapping.
+//
 // WithSupportColorAttachmentMapping sets the supportColorAttachmentMapping property and returns the receiver for chaining.
 func (x *MTL4RenderPassDescriptor) WithSupportColorAttachmentMapping(supportColorAttachmentMapping bool) *MTL4RenderPassDescriptor {
 	x.inner.SetSupportColorAttachmentMapping(supportColorAttachmentMapping)
 	return x
 }
 
+// Configures the custom sample positions to use in MSAA rendering. - Parameters: - positions: Array of “MTLSamplePosition“ instances. - count:     Number of “MTLSamplePosition“ instances in the array. This value needs to be a valid sample count, or `0` to disable custom sample positions.
+//
 // SetSamplePositionsCount calls the underlying SetSamplePositionsCount.
 func (x *MTL4RenderPassDescriptor) SetSamplePositionsCount(positions *raw.MTLSamplePosition, count uint) {
 	x.inner.SetSamplePositionsCount(positions, count)
 }
 
+// Retrieves the previously-configured custom sample positions. This method stores the app's last set custom sample positions into an output array. Metal only modifies the array when the `count` parameter consists of a length sufficient to store the number of sample positions. - Parameters: - positions: The destination array where Metal stores “MTLSamplePosition“ instances. - count:     Number of “MTLSamplePosition“ instances in the array. This array needs to be large enough to store all sample positions. - Returns: The number of previously-configured custom sample positions.
+//
 // GetSamplePositionsCount calls the underlying GetSamplePositionsCount.
 func (x *MTL4RenderPassDescriptor) GetSamplePositionsCount(positions *raw.MTLSamplePosition, count uint) uint {
 	return x.inner.GetSamplePositionsCount(positions, count)
 }
 
+// Accesses the array of state information for render attachments that store color data.
+//
 // ColorAttachments calls the underlying ColorAttachments.
 func (x *MTL4RenderPassDescriptor) ColorAttachments() *RenderPassColorAttachmentDescriptorArray {
 	_r := x.inner.ColorAttachments()
@@ -138,6 +172,8 @@ func (x *MTL4RenderPassDescriptor) ColorAttachments() *RenderPassColorAttachment
 	return &RenderPassColorAttachmentDescriptorArray{inner: _r}
 }
 
+// Accesses state information for a render attachment that stores depth data.
+//
 // DepthAttachment calls the underlying DepthAttachment.
 func (x *MTL4RenderPassDescriptor) DepthAttachment() *RenderPassDepthAttachmentDescriptor {
 	_r := x.inner.DepthAttachment()
@@ -152,6 +188,8 @@ func (x *MTL4RenderPassDescriptor) SetDepthAttachment(depthAttachment *raw.MTLRe
 	x.inner.SetDepthAttachment(depthAttachment)
 }
 
+// Accesses state information for a render attachment that stores stencil data.
+//
 // StencilAttachment calls the underlying StencilAttachment.
 func (x *MTL4RenderPassDescriptor) StencilAttachment() *RenderPassStencilAttachmentDescriptor {
 	_r := x.inner.StencilAttachment()
@@ -166,6 +204,8 @@ func (x *MTL4RenderPassDescriptor) SetStencilAttachment(stencilAttachment *raw.M
 	x.inner.SetStencilAttachment(stencilAttachment)
 }
 
+// Assigns the number of layers that all attachments this descriptor references have.
+//
 // RenderTargetArrayLength calls the underlying RenderTargetArrayLength.
 func (x *MTL4RenderPassDescriptor) RenderTargetArrayLength() uint {
 	return x.inner.RenderTargetArrayLength()
@@ -176,6 +216,8 @@ func (x *MTL4RenderPassDescriptor) SetRenderTargetArrayLength(renderTargetArrayL
 	x.inner.SetRenderTargetArrayLength(renderTargetArrayLength)
 }
 
+// Assigns the per-sample size, in bytes, of the largest explicit imageblock layout in the render pass.
+//
 // ImageblockSampleLength calls the underlying ImageblockSampleLength.
 func (x *MTL4RenderPassDescriptor) ImageblockSampleLength() uint {
 	return x.inner.ImageblockSampleLength()
@@ -186,6 +228,8 @@ func (x *MTL4RenderPassDescriptor) SetImageblockSampleLength(imageblockSampleLen
 	x.inner.SetImageblockSampleLength(imageblockSampleLength)
 }
 
+// Assigns the per-tile size, in bytes, of the persistent threadgroup memory allocation of this render pass.
+//
 // ThreadgroupMemoryLength calls the underlying ThreadgroupMemoryLength.
 func (x *MTL4RenderPassDescriptor) ThreadgroupMemoryLength() uint {
 	return x.inner.ThreadgroupMemoryLength()
@@ -196,6 +240,8 @@ func (x *MTL4RenderPassDescriptor) SetThreadgroupMemoryLength(threadgroupMemoryL
 	x.inner.SetThreadgroupMemoryLength(threadgroupMemoryLength)
 }
 
+// The width of the tiles, in pixels, a render pass you create with this descriptor applies to its attachments. For tile-based rendering, Metal divides each render attachment into smaller regions, or _tiles_. The property's default is `0`, which tells Metal to select a size that fits in tile memory. See <doc:tailor-your-apps-for-apple-gpus-and-tile-based-deferred-rendering> for more information about tiles, tile memory, and deferred rendering.
+//
 // TileWidth calls the underlying TileWidth.
 func (x *MTL4RenderPassDescriptor) TileWidth() uint {
 	return x.inner.TileWidth()
@@ -206,6 +252,8 @@ func (x *MTL4RenderPassDescriptor) SetTileWidth(tileWidth uint) {
 	x.inner.SetTileWidth(tileWidth)
 }
 
+// The height of the tiles, in pixels, a render pass you create with this descriptor applies to its attachments. For tile-based rendering, Metal divides each render attachment into smaller regions, or _tiles_. The property's default is `0`, which tells Metal to select a size that fits in tile memory. See <doc:tailor-your-apps-for-apple-gpus-and-tile-based-deferred-rendering> for more information about tiles, tile memory, and deferred rendering.
+//
 // TileHeight calls the underlying TileHeight.
 func (x *MTL4RenderPassDescriptor) TileHeight() uint {
 	return x.inner.TileHeight()
@@ -216,6 +264,8 @@ func (x *MTL4RenderPassDescriptor) SetTileHeight(tileHeight uint) {
 	x.inner.SetTileHeight(tileHeight)
 }
 
+// Sets the default raster sample count for the render pass when it references no attachments.
+//
 // DefaultRasterSampleCount calls the underlying DefaultRasterSampleCount.
 func (x *MTL4RenderPassDescriptor) DefaultRasterSampleCount() uint {
 	return x.inner.DefaultRasterSampleCount()
@@ -226,6 +276,8 @@ func (x *MTL4RenderPassDescriptor) SetDefaultRasterSampleCount(defaultRasterSamp
 	x.inner.SetDefaultRasterSampleCount(defaultRasterSampleCount)
 }
 
+// Sets the width, in pixels, to which Metal constrains the render target. When this value is non-zero, you need to assign it to be smaller than or equal to the minimum width of all attachments. The default value of this property is `0`.
+//
 // RenderTargetWidth calls the underlying RenderTargetWidth.
 func (x *MTL4RenderPassDescriptor) RenderTargetWidth() uint {
 	return x.inner.RenderTargetWidth()
@@ -236,6 +288,8 @@ func (x *MTL4RenderPassDescriptor) SetRenderTargetWidth(renderTargetWidth uint) 
 	x.inner.SetRenderTargetWidth(renderTargetWidth)
 }
 
+// Sets the height, in pixels, to which Metal constrains the render target. When this value is non-zero, you need to assign it to be smaller than or equal to the minimum height of all attachments. The default value of this property is `0`.
+//
 // RenderTargetHeight calls the underlying RenderTargetHeight.
 func (x *MTL4RenderPassDescriptor) RenderTargetHeight() uint {
 	return x.inner.RenderTargetHeight()
@@ -246,6 +300,8 @@ func (x *MTL4RenderPassDescriptor) SetRenderTargetHeight(renderTargetHeight uint
 	x.inner.SetRenderTargetHeight(renderTargetHeight)
 }
 
+// Assigns an optional variable rasterization rate map that Metal uses in the render pass. Enabling variable rasterization rate allows Metal to decrease the rasterization rate, typically in unimportant regions of color attachments, to accelerate processing. When set to `nil`, the default, Metal doesn't use variable rasterization rate.
+//
 // RasterizationRateMap calls the underlying RasterizationRateMap.
 func (x *MTL4RenderPassDescriptor) RasterizationRateMap() raw.MTLRasterizationRateMap {
 	return x.inner.RasterizationRateMap()
@@ -256,6 +312,8 @@ func (x *MTL4RenderPassDescriptor) SetRasterizationRateMap(rasterizationRateMap 
 	x.inner.SetRasterizationRateMap(rasterizationRateMap)
 }
 
+// Configures a buffer into which Metal writes counts of fragments (pixels) passing the depth and stencil tests.
+//
 // VisibilityResultBuffer calls the underlying VisibilityResultBuffer.
 func (x *MTL4RenderPassDescriptor) VisibilityResultBuffer() raw.MTLBuffer {
 	return x.inner.VisibilityResultBuffer()
@@ -266,6 +324,8 @@ func (x *MTL4RenderPassDescriptor) SetVisibilityResultBuffer(visibilityResultBuf
 	x.inner.SetVisibilityResultBuffer(visibilityResultBuffer)
 }
 
+// Determines if Metal accumulates visibility results between render encoders or resets them.
+//
 // VisibilityResultType calls the underlying VisibilityResultType.
 func (x *MTL4RenderPassDescriptor) VisibilityResultType() MTLVisibilityResultType {
 	return MTLVisibilityResultType(x.inner.VisibilityResultType())
@@ -276,6 +336,8 @@ func (x *MTL4RenderPassDescriptor) SetVisibilityResultType(visibilityResultType 
 	x.inner.SetVisibilityResultType(raw.MTLVisibilityResultType(visibilityResultType))
 }
 
+// Controls if the render pass supports color attachment mapping.
+//
 // SupportColorAttachmentMapping calls the underlying SupportColorAttachmentMapping.
 func (x *MTL4RenderPassDescriptor) SupportColorAttachmentMapping() bool {
 	return x.inner.SupportColorAttachmentMapping()

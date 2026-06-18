@@ -36,11 +36,15 @@ func NewMetadataItemValueRequest() *MetadataItemValueRequest {
 	return &MetadataItemValueRequest{inner: raw.AVMetadataItemValueRequestFromID(_id)}
 }
 
+// @method			respondWithValue: @abstract		Allows you to respond to an AVMetadataItemValueRequest by providing a value. @param			value The value of the AVMetadataItem.
+//
 // RespondWithValue calls the underlying RespondWithValue.
 func (x *MetadataItemValueRequest) RespondWithValue(value objc.ID) {
 	x.inner.RespondWithValue(value)
 }
 
+// @method			respondWithError: @abstract		Allows you to respond to an AVMetadataItemValueRequest in the case of failure. @param			error An instance of NSError that describes a failure encountered while loading the value of an AVMetadataItem.
+//
 // RespondWithError calls the underlying RespondWithError.
 func (x *MetadataItemValueRequest) RespondWithError(error_ unsafe.Pointer) {
 	x.inner.RespondWithError(error_)

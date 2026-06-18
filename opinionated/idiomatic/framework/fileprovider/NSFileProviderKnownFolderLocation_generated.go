@@ -32,6 +32,8 @@ func FileProviderKnownFolderLocationFromID(id objc.ID) *FileProviderKnownFolderL
 	return &FileProviderKnownFolderLocation{inner: raw.NSFileProviderKnownFolderLocationFromID(id)}
 }
 
+// Initialize a location with the filename of the folder in a specified parent. When replicating a known folder the system will reuse a folder located at the specified filename within the parent if one exists, or create a new item at this location if none exists yet.
+//
 // NewFileProviderKnownFolderLocationWithParentItemIdentifierFilename creates a new [FileProviderKnownFolderLocation].
 func NewFileProviderKnownFolderLocationWithParentItemIdentifierFilename(parentItemIdentifier *foundation.NSString, filename string) *FileProviderKnownFolderLocation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileProviderKnownFolderLocation")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewFileProviderKnownFolderLocationWithParentItemIdentifierFilename(parentIt
 	return &FileProviderKnownFolderLocation{inner: raw.NSFileProviderKnownFolderLocationFromID(_id)}
 }
 
+// Initialize a location with the item identifier of a folder that already exists on the server. If the known folder already exists on the server, the provider can specify the exact identifier of the item that needs to be used to back the known folder.
+//
 // NewFileProviderKnownFolderLocationWithExistingItemIdentifier creates a new [FileProviderKnownFolderLocation].
 func NewFileProviderKnownFolderLocationWithExistingItemIdentifier(existingItemIdentifier *foundation.NSString) *FileProviderKnownFolderLocation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileProviderKnownFolderLocation")), objc.RegisterName("alloc"))

@@ -32,6 +32,8 @@ func ExtensionStreamFormatFromID(id objc.ID) *ExtensionStreamFormat {
 	return &ExtensionStreamFormat{inner: raw.CMIOExtensionStreamFormatFromID(id)}
 }
 
+// @method initWithFormatDescription:maxFrameDuration:minFrameDuration:validFrameDurations: @abstract Initialize a stream format instance. @param formatDescription The format description of the samples delivered by the stream. @param maxFrameDuration The maximum frame duration. @param minFrameDuration The minimum frame duration. @param validFrameDurations The list of valid CMTime as dictionaries if nil the full range between min and max is valid. The CMTime in dictionary format are made with CMTimeCopyAsDictionary. @result A CMIOExtensionStreamFormat instance that describes the stream format. @discussion A frame duration is the reciprocal of a frame rate. If a CMIOExtensionStreamFormat's validFrameDurations property is not nil and not empty, the frame duration are discrete and can only have a certain set of value. Current frame duration and maximum frame duration can be changed with the properties CMIOExtensionPropertyStreamFrameDuration and CMIOExtensionPropertyStreamMaxFrameDuration.
+//
 // NewExtensionStreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations creates a new [ExtensionStreamFormat].
 func NewExtensionStreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations(formatDescription unsafe.Pointer, maxFrameDuration coremedia.CMTime, minFrameDuration coremedia.CMTime, validFrameDurations *foundation.NSArray[objc.ID]) *ExtensionStreamFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionStreamFormat")), objc.RegisterName("alloc"))
@@ -39,21 +41,29 @@ func NewExtensionStreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurati
 	return &ExtensionStreamFormat{inner: raw.CMIOExtensionStreamFormatFromID(_id)}
 }
 
+// @property formatDescription @abstract The format description of the samples delivered by the stream.
+//
 // FormatDescription calls the underlying FormatDescription.
 func (x *ExtensionStreamFormat) FormatDescription() unsafe.Pointer {
 	return x.inner.FormatDescription()
 }
 
+// @property minFrameDuration @abstract The minimum frame duration (AKA maximum frame rate).
+//
 // MinFrameDuration calls the underlying MinFrameDuration.
 func (x *ExtensionStreamFormat) MinFrameDuration() coremedia.CMTime {
 	return x.inner.MinFrameDuration()
 }
 
+// @property maxFrameDuration @abstract The maximum frame duration (AKA minimum frame rate).
+//
 // MaxFrameDuration calls the underlying MaxFrameDuration.
 func (x *ExtensionStreamFormat) MaxFrameDuration() coremedia.CMTime {
 	return x.inner.MaxFrameDuration()
 }
 
+// @property validFrameDurations @abstract The valid frame durations as an array of CMTime as dictionaries. The CMTime in dictionary format are made with CMTimeCopyAsDictionary.
+//
 // ValidFrameDurations calls the underlying ValidFrameDurations.
 func (x *ExtensionStreamFormat) ValidFrameDurations() *foundation.NSArray[objc.ID] {
 	return x.inner.ValidFrameDurations()

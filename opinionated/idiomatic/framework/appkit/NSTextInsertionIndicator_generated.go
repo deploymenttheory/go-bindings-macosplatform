@@ -41,24 +41,32 @@ func NewTextInsertionIndicator() *TextInsertionIndicator {
 	return &TextInsertionIndicator{inner: raw.NSTextInsertionIndicatorFromID(_id)}
 }
 
+// Sets-returns the indicator's display mode.
+//
 // WithDisplayMode sets the displayMode property and returns the receiver for chaining.
 func (x *TextInsertionIndicator) WithDisplayMode(displayMode NSTextInsertionIndicatorDisplayMode) *TextInsertionIndicator {
 	x.inner.SetDisplayMode(raw.NSTextInsertionIndicatorDisplayMode(displayMode))
 	return x
 }
 
+// The color of the indicator. @discussion Defaults to NSColor.textInsertionPointColor. @note If set to @c nil, uses NSColor.textInsertionPointColor.
+//
 // WithColor sets the color property and returns the receiver for chaining.
 func (x *TextInsertionIndicator) WithColor(color *Color) *TextInsertionIndicator {
 	x.inner.SetColor(color.Unwrap())
 	return x
 }
 
+// Options for the NSTextInsertionIndicatorDisplayModeAutomatic display mode. Defaults to NSTextInsertionIndicatorAutomaticModeOptionsShowEffectsView.
+//
 // WithAutomaticModeOptions sets the automaticModeOptions property and returns the receiver for chaining.
 func (x *TextInsertionIndicator) WithAutomaticModeOptions(automaticModeOptions NSTextInsertionIndicatorAutomaticModeOptions) *TextInsertionIndicator {
 	x.inner.SetAutomaticModeOptions(raw.NSTextInsertionIndicatorAutomaticModeOptions(automaticModeOptions))
 	return x
 }
 
+// Sets-returns a block that inserts a view into the view hierarchy. @discussion During dictation the NSTextInsertionIndicator displays a glow effect by inserting a view below the text view. If an application needs to insert the view in a different way, the application can specify a block of code that will be called when the glow effect needs to be displayed.
+//
 // WithEffectsViewInserter sets the effectsViewInserter property and returns the receiver for chaining.
 func (x *TextInsertionIndicator) WithEffectsViewInserter(effectsViewInserter func(*raw.NSView)) *TextInsertionIndicator {
 	x.inner.SetEffectsViewInserter(effectsViewInserter)
@@ -329,6 +337,8 @@ func (x *TextInsertionIndicator) WithAdditionalSafeAreaInsets(additionalSafeArea
 	return x
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *TextInsertionIndicator) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextInsertionIndicator {
 	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
@@ -407,16 +417,22 @@ func (x *TextInsertionIndicator) WithTouchBar(touchBar *TouchBar) *TextInsertion
 	return x
 }
 
+// Sets-returns the indicator's display mode.
+//
 // DisplayMode calls the underlying DisplayMode.
 func (x *TextInsertionIndicator) DisplayMode() NSTextInsertionIndicatorDisplayMode {
 	return NSTextInsertionIndicatorDisplayMode(x.inner.DisplayMode())
 }
 
+// Sets-returns the indicator's display mode.
+//
 // SetDisplayMode calls the underlying SetDisplayMode.
 func (x *TextInsertionIndicator) SetDisplayMode(displayMode NSTextInsertionIndicatorDisplayMode) {
 	x.inner.SetDisplayMode(raw.NSTextInsertionIndicatorDisplayMode(displayMode))
 }
 
+// The color of the indicator. @discussion Defaults to NSColor.textInsertionPointColor. @note If set to @c nil, uses NSColor.textInsertionPointColor.
+//
 // Color calls the underlying Color.
 func (x *TextInsertionIndicator) Color() *Color {
 	_r := x.inner.Color()
@@ -426,26 +442,36 @@ func (x *TextInsertionIndicator) Color() *Color {
 	return &Color{inner: _r}
 }
 
+// The color of the indicator. @discussion Defaults to NSColor.textInsertionPointColor. @note If set to @c nil, uses NSColor.textInsertionPointColor.
+//
 // SetColor calls the underlying SetColor.
 func (x *TextInsertionIndicator) SetColor(color *raw.NSColor) {
 	x.inner.SetColor(color)
 }
 
+// Options for the NSTextInsertionIndicatorDisplayModeAutomatic display mode. Defaults to NSTextInsertionIndicatorAutomaticModeOptionsShowEffectsView.
+//
 // AutomaticModeOptions calls the underlying AutomaticModeOptions.
 func (x *TextInsertionIndicator) AutomaticModeOptions() NSTextInsertionIndicatorAutomaticModeOptions {
 	return NSTextInsertionIndicatorAutomaticModeOptions(x.inner.AutomaticModeOptions())
 }
 
+// Options for the NSTextInsertionIndicatorDisplayModeAutomatic display mode. Defaults to NSTextInsertionIndicatorAutomaticModeOptionsShowEffectsView.
+//
 // SetAutomaticModeOptions calls the underlying SetAutomaticModeOptions.
 func (x *TextInsertionIndicator) SetAutomaticModeOptions(automaticModeOptions NSTextInsertionIndicatorAutomaticModeOptions) {
 	x.inner.SetAutomaticModeOptions(raw.NSTextInsertionIndicatorAutomaticModeOptions(automaticModeOptions))
 }
 
+// Sets-returns a block that inserts a view into the view hierarchy. @discussion During dictation the NSTextInsertionIndicator displays a glow effect by inserting a view below the text view. If an application needs to insert the view in a different way, the application can specify a block of code that will be called when the glow effect needs to be displayed.
+//
 // EffectsViewInserter calls the underlying EffectsViewInserter.
 func (x *TextInsertionIndicator) EffectsViewInserter() objc.Block {
 	return x.inner.EffectsViewInserter()
 }
 
+// Sets-returns a block that inserts a view into the view hierarchy. @discussion During dictation the NSTextInsertionIndicator displays a glow effect by inserting a view below the text view. If an application needs to insert the view in a different way, the application can specify a block of code that will be called when the glow effect needs to be displayed.
+//
 // SetEffectsViewInserter blocks until the operation completes or ctx is cancelled.
 func (x *TextInsertionIndicator) SetEffectsViewInserter(ctx context.Context) (*View, error) {
 	type _result struct {

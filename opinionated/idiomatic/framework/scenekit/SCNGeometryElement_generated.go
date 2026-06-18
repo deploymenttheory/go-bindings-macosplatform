@@ -36,60 +36,82 @@ func NewGeometryElement() *GeometryElement {
 	return &GeometryElement{inner: raw.SCNGeometryElementFromID(_id)}
 }
 
+// @property primitiveRange @abstract Specifies the subrange of primitives to render within NSMakeRange(0, primitiveCount). Defaults to NSMakeRange(NSNotFound, 0). @discussion When the location of the range is set to NSNotFound, the entire geometry element is rendered.
+//
 // WithPrimitiveRange sets the primitiveRange property and returns the receiver for chaining.
 func (x *GeometryElement) WithPrimitiveRange(primitiveRange foundation.NSRange) *GeometryElement {
 	x.inner.SetPrimitiveRange(primitiveRange)
 	return x
 }
 
+// @property pointSize @abstract Specifies the size of the point in local space. Defaults to 1
+//
 // WithPointSize sets the pointSize property and returns the receiver for chaining.
 func (x *GeometryElement) WithPointSize(pointSize float64) *GeometryElement {
 	x.inner.SetPointSize(pointSize)
 	return x
 }
 
+// @property minimumPointScreenSpaceRadius @abstract Specifies the minimum size in screen-space (in pixel). Defaults to 1
+//
 // WithMinimumPointScreenSpaceRadius sets the minimumPointScreenSpaceRadius property and returns the receiver for chaining.
 func (x *GeometryElement) WithMinimumPointScreenSpaceRadius(minimumPointScreenSpaceRadius float64) *GeometryElement {
 	x.inner.SetMinimumPointScreenSpaceRadius(minimumPointScreenSpaceRadius)
 	return x
 }
 
+// @property maximumPointScreenSpaceRadius @abstract Specifies the maximum size in screen-space (in pixel). Defaults to 1
+//
 // WithMaximumPointScreenSpaceRadius sets the maximumPointScreenSpaceRadius property and returns the receiver for chaining.
 func (x *GeometryElement) WithMaximumPointScreenSpaceRadius(maximumPointScreenSpaceRadius float64) *GeometryElement {
 	x.inner.SetMaximumPointScreenSpaceRadius(maximumPointScreenSpaceRadius)
 	return x
 }
 
+// @property data @abstract The data for the geometry element
+//
 // Data calls the underlying Data.
 func (x *GeometryElement) Data() *foundation.NSData {
 	return x.inner.Data()
 }
 
+// @property primitiveType @abstract The type of the geometry element. Possible values are listed in the SCNGeometryPrimitiveType enumeration.
+//
 // PrimitiveType calls the underlying PrimitiveType.
 func (x *GeometryElement) PrimitiveType() SCNGeometryPrimitiveType {
 	return SCNGeometryPrimitiveType(x.inner.PrimitiveType())
 }
 
+// @property primitiveCount @abstract The number of primitives in the data.
+//
 // PrimitiveCount calls the underlying PrimitiveCount.
 func (x *GeometryElement) PrimitiveCount() int {
 	return x.inner.PrimitiveCount()
 }
 
+// @property interleavedIndicesChannels @abstract Determines whether the channels are interleaved.
+//
 // HasInterleavedIndicesChannels calls the underlying HasInterleavedIndicesChannels.
 func (x *GeometryElement) HasInterleavedIndicesChannels() bool {
 	return x.inner.HasInterleavedIndicesChannels()
 }
 
+// @property indicesChannelCount @abstract The number of channels in the geometry element.
+//
 // IndicesChannelCount calls the underlying IndicesChannelCount.
 func (x *GeometryElement) IndicesChannelCount() int {
 	return x.inner.IndicesChannelCount()
 }
 
+// @property bytesPerIndex @abstract The number of bytes that represent an index value
+//
 // BytesPerIndex calls the underlying BytesPerIndex.
 func (x *GeometryElement) BytesPerIndex() int {
 	return x.inner.BytesPerIndex()
 }
 
+// @property primitiveRange @abstract Specifies the subrange of primitives to render within NSMakeRange(0, primitiveCount). Defaults to NSMakeRange(NSNotFound, 0). @discussion When the location of the range is set to NSNotFound, the entire geometry element is rendered.
+//
 // PrimitiveRange calls the underlying PrimitiveRange.
 func (x *GeometryElement) PrimitiveRange() foundation.NSRange {
 	return x.inner.PrimitiveRange()
@@ -100,6 +122,8 @@ func (x *GeometryElement) SetPrimitiveRange(primitiveRange foundation.NSRange) {
 	x.inner.SetPrimitiveRange(primitiveRange)
 }
 
+// @property pointSize @abstract Specifies the size of the point in local space. Defaults to 1
+//
 // PointSize calls the underlying PointSize.
 func (x *GeometryElement) PointSize() float64 {
 	return x.inner.PointSize()
@@ -110,6 +134,8 @@ func (x *GeometryElement) SetPointSize(pointSize float64) {
 	x.inner.SetPointSize(pointSize)
 }
 
+// @property minimumPointScreenSpaceRadius @abstract Specifies the minimum size in screen-space (in pixel). Defaults to 1
+//
 // MinimumPointScreenSpaceRadius calls the underlying MinimumPointScreenSpaceRadius.
 func (x *GeometryElement) MinimumPointScreenSpaceRadius() float64 {
 	return x.inner.MinimumPointScreenSpaceRadius()
@@ -120,6 +146,8 @@ func (x *GeometryElement) SetMinimumPointScreenSpaceRadius(minimumPointScreenSpa
 	x.inner.SetMinimumPointScreenSpaceRadius(minimumPointScreenSpaceRadius)
 }
 
+// @property maximumPointScreenSpaceRadius @abstract Specifies the maximum size in screen-space (in pixel). Defaults to 1
+//
 // MaximumPointScreenSpaceRadius calls the underlying MaximumPointScreenSpaceRadius.
 func (x *GeometryElement) MaximumPointScreenSpaceRadius() float64 {
 	return x.inner.MaximumPointScreenSpaceRadius()

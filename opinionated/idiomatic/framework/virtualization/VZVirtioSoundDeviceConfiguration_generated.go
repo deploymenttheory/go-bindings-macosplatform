@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that defines a Virtio sound device configuration.
+//
 // VirtioSoundDeviceConfiguration wraps [raw.VZVirtioSoundDeviceConfiguration] with a fluent Go API.
 type VirtioSoundDeviceConfiguration struct {
 	inner *raw.VZVirtioSoundDeviceConfiguration
@@ -40,6 +42,8 @@ func NewVirtioSoundDeviceConfiguration() *VirtioSoundDeviceConfiguration {
 	return &VirtioSoundDeviceConfiguration{inner: raw.VZVirtioSoundDeviceConfigurationFromID(_id)}
 }
 
+// List of audio streams exposed by this device.
+//
 // WithStreams sets the collection, converting the Go slice to an NSArray.
 func (x *VirtioSoundDeviceConfiguration) WithStreams(items ...VirtioSoundDeviceStreamConfigurationProvider) *VirtioSoundDeviceConfiguration {
 	if len(items) == 0 {
@@ -70,8 +74,17 @@ func (x *VirtioSoundDeviceConfiguration) Streams() []*VirtioSoundDeviceStreamCon
 }
 
 // SetStreams calls the underlying SetStreams.
-func (x *VirtioSoundDeviceConfiguration) SetStreams(streams *foundation.NSArray[*raw.VZVirtioSoundDeviceStreamConfiguration]) {
-	x.inner.SetStreams(streams)
+func (x *VirtioSoundDeviceConfiguration) SetStreams(streams ...VirtioSoundDeviceStreamConfigurationProvider) {
+	_ptrs := make([]objc.ID, len(streams))
+	for _i, _v := range streams {
+		_ptrs[_i] = _v.asVirtioSoundDeviceStreamConfiguration().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.VZVirtioSoundDeviceStreamConfiguration]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.VZVirtioSoundDeviceStreamConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetStreams(_arg0)
 }
 
 func (x *VirtioSoundDeviceConfiguration) asAudioDeviceConfiguration() *raw.VZAudioDeviceConfiguration {
@@ -83,7 +96,7 @@ type VirtioSoundDeviceConfigurationable interface {
 	Unwrap() *raw.VZVirtioSoundDeviceConfiguration
 	WithStreams(items ...VirtioSoundDeviceStreamConfigurationProvider) *VirtioSoundDeviceConfiguration
 	Streams() []*VirtioSoundDeviceStreamConfiguration
-	SetStreams(streams *foundation.NSArray[*raw.VZVirtioSoundDeviceStreamConfiguration])
+	SetStreams(streams ...VirtioSoundDeviceStreamConfigurationProvider)
 }
 
 var _ VirtioSoundDeviceConfigurationable = (*VirtioSoundDeviceConfiguration)(nil)

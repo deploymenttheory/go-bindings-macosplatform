@@ -41,39 +41,53 @@ func NewNDArrayIdentityWithDevice(device metal.MTLDevice) *NDArrayIdentity {
 	return &NDArrayIdentity{inner: raw.MPSNDArrayIdentityFromID(_id)}
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
 func (x *NDArrayIdentity) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayIdentity {
 	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *NDArrayIdentity) WithOptions(options mpscore.MPSKernelOptions) *NDArrayIdentity {
 	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NDArrayIdentity) WithLabel(label string) *NDArrayIdentity {
 	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @abstract   Do a reshape operation, either by trying to alias the array, returning an arrayview, or by copying. @param      cmdBuf              `MTLCommandBuffer` into which to encode the kernel, or to create a temporary array alias. @param      sourceArray         Source array. If this function returns a non-nil result, then the readCount of `sourceArray` is decremented. @param      shape               The new shape, given in TF dimension ordering (as always with MPSShape). @param      destinationArray    If not nil, then the result of reshape will be copied to this. Shape of `destinationArray` must match `shape`. @result     If `destinationArray` is not nil, then `destinationArray`. Otherwise aliasing is tried, and if aliasing is not possible due to existing slices or transposes nil is returned. If aliasing is successful, then a new arrayview of `sourceArray` is returned; If `sourceArray` is a `MPSTemporaryArray` then a `MPSTemporaryArray` is returned referencing the same data, otherwise a `MPSNDArray` type result is returned.
+//
 // ReshapeWithCommandBufferSourceArrayShapeDestinationArray calls the underlying ReshapeWithCommandBufferSourceArrayShapeDestinationArray.
 func (x *NDArrayIdentity) ReshapeWithCommandBufferSourceArrayShapeDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, shape unsafe.Pointer, destinationArray *mpscore.MPSNDArray) *mpscore.MPSNDArray {
 	return x.inner.ReshapeWithCommandBufferSourceArrayShapeDestinationArray(cmdBuf, sourceArray, shape, destinationArray)
 }
 
+// @abstract   Do a reshape operation, either by trying to alias the array, returning an arrayview, or by copying. @param      cmdBuf              `MTLCommandBuffer` into which to encode the kernel, or to create a temporary array alias. @param      sourceArray         Source array. If this function returns a non-nil result, then the readCount of `sourceArray` is decremented. @param      numberOfDimensions  The number of dimensions of the NDArray. @param      dimensionSizes      The extents of each dimensions of the NDArray. @param      destinationArray    If not nil, then the result of reshape will be copied to this. Shape of `destinationArray` must match `shape`. @result     If `destinationArray` is not nil, then `destinationArray`. Otherwise aliasing is tried, and if aliasing is not possible due to existing slices or transposes nil is returned. If aliasing is successful, then a new arrayview of `sourceArray` is returned; If `sourceArray` is a `MPSTemporaryArray` then a `MPSTemporaryArray` is returned referencing the same data, otherwise a `MPSNDArray` type result is returned.
+//
 // ReshapeWithCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray calls the underlying ReshapeWithCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray.
 func (x *NDArrayIdentity) ReshapeWithCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, numberOfDimensions uint, dimensionSizes *uint, destinationArray *mpscore.MPSNDArray) *mpscore.MPSNDArray {
 	return x.inner.ReshapeWithCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray(cmdBuf, sourceArray, numberOfDimensions, dimensionSizes, destinationArray)
 }
 
+// @abstract   Do a reshape operation, either by trying to alias the array, returning an arrayview, or by copying. @param      encoder             The `MTLComputeCommandEncoder` that the kernel will be encoded with. @param      cmdBuf              `MTLCommandBuffer` into which to encode the kernel, or to create a temporary array alias. @param      sourceArray         Source array. If this function returns a non-nil result, then the readCount of `sourceArray` is decremented. @param      shape               The new shape, given in TF dimension ordering (as always with MPSShape). @param      destinationArray    If not nil, then the result of reshape will be copied to this. Shape of `destinationArray` must match `shape`. @result     If `destinationArray` is not nil, then `destinationArray`. Otherwise aliasing is tried, and if aliasing is not possible due to existing slices or transposes nil is returned. If aliasing is successful, then a new arrayview of `sourceArray` is returned; If `sourceArray` is a `MPSTemporaryArray` then a `MPSTemporaryArray` is returned referencing the same data, otherwise a `MPSNDArray` type result is returned.
+//
 // ReshapeWithCommandEncoderCommandBufferSourceArrayShapeDestinationArray calls the underlying ReshapeWithCommandEncoderCommandBufferSourceArrayShapeDestinationArray.
 func (x *NDArrayIdentity) ReshapeWithCommandEncoderCommandBufferSourceArrayShapeDestinationArray(encoder metal.MTLComputeCommandEncoder, cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, shape unsafe.Pointer, destinationArray *mpscore.MPSNDArray) *mpscore.MPSNDArray {
 	return x.inner.ReshapeWithCommandEncoderCommandBufferSourceArrayShapeDestinationArray(encoder, cmdBuf, sourceArray, shape, destinationArray)
 }
 
+// @abstract   Do a reshape operation, either by trying to alias the array, returning an arrayview, or by copying. @param      encoder             The `MTLComputeCommandEncoder` that the kernel will be encoded with. @param      cmdBuf              `MTLCommandBuffer` into which to encode the kernel, or to create a temporary array alias. @param      sourceArray         Source array. If this function returns a non-nil result, then the readCount of `sourceArray` is decremented. @param      numberOfDimensions  The number of dimensions of the NDArray. @param      dimensionSizes      The extents of each dimensions of the NDArray. @param      destinationArray    If not nil, then the result of reshape will be copied to this. Shape of `destinationArray` must match `shape`. @result     If `destinationArray` is not nil, then `destinationArray`. Otherwise aliasing is tried, and if aliasing is not possible due to existing slices or transposes nil is returned. If aliasing is successful, then a new arrayview of `sourceArray` is returned; If `sourceArray` is a `MPSTemporaryArray` then a `MPSTemporaryArray` is returned referencing the same data, otherwise a `MPSNDArray` type result is returned.
+//
 // ReshapeWithCommandEncoderCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray calls the underlying ReshapeWithCommandEncoderCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray.
 func (x *NDArrayIdentity) ReshapeWithCommandEncoderCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray(encoder metal.MTLComputeCommandEncoder, cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, numberOfDimensions uint, dimensionSizes *uint, destinationArray *mpscore.MPSNDArray) *mpscore.MPSNDArray {
 	return x.inner.ReshapeWithCommandEncoderCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray(encoder, cmdBuf, sourceArray, numberOfDimensions, dimensionSizes, destinationArray)

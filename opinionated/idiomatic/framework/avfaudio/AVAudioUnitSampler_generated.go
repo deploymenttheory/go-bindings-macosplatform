@@ -36,45 +36,61 @@ func NewAudioUnitSampler() *AudioUnitSampler {
 	return &AudioUnitSampler{inner: raw.AVAudioUnitSamplerFromID(_id)}
 }
 
+// @property stereoPan @abstract adjusts the pan for all the notes played. Range:     -100 -> +100 Default:   0
+//
 // WithStereoPan sets the stereoPan property and returns the receiver for chaining.
 func (x *AudioUnitSampler) WithStereoPan(stereoPan float32) *AudioUnitSampler {
 	x.inner.SetStereoPan(stereoPan)
 	return x
 }
 
+// @property overallGain @abstract adjusts the gain of all the notes played Range:     -90.0 -> +12 db Default: 0 db
+//
 // WithOverallGain sets the overallGain property and returns the receiver for chaining.
 func (x *AudioUnitSampler) WithOverallGain(overallGain float32) *AudioUnitSampler {
 	x.inner.SetOverallGain(overallGain)
 	return x
 }
 
+// @property masterGain @abstract adjusts the gain of all the notes played Range:     -90.0 -> +12 db Default: 0 db
+//
 // WithMasterGain sets the masterGain property and returns the receiver for chaining.
 func (x *AudioUnitSampler) WithMasterGain(masterGain float32) *AudioUnitSampler {
 	x.inner.SetMasterGain(masterGain)
 	return x
 }
 
+// @property globalTuning @abstract adjusts the tuning of all the notes played. Range:     -2400 -> +2400 cents Default:   0
+//
 // WithGlobalTuning sets the globalTuning property and returns the receiver for chaining.
 func (x *AudioUnitSampler) WithGlobalTuning(globalTuning float32) *AudioUnitSampler {
 	x.inner.SetGlobalTuning(globalTuning)
 	return x
 }
 
+// @method loadSoundBankInstrumentAtURL:program:bankMSB:bankLSB:error: @abstract loads a specific instrument from the specified sound bank @param bankURL URL for a Soundbank file. The file can be either a DLS bank (.dls) or a SoundFont bank (.sf2). @param program program number for the instrument to load @param bankMSB MSB for the bank number for the instrument to load.  This is usually 0x79 for melodic instruments and 0x78 for percussion instruments. @param bankLSB LSB for the bank number for the instrument to load.  This is often 0, and represents the "bank variation". @param outError the status of the operation @discussion This method reads from file and allocates memory, so it should not be called on a real time thread.
+//
 // LoadSoundBankInstrumentAtURLProgramBankMSBBankLSBError calls the underlying LoadSoundBankInstrumentAtURLProgramBankMSBBankLSBError.
 func (x *AudioUnitSampler) LoadSoundBankInstrumentAtURLProgramBankMSBBankLSBError(bankURL string, program uint8, bankMSB uint8, bankLSB uint8) (bool, error) {
 	return x.inner.LoadSoundBankInstrumentAtURLProgramBankMSBBankLSBError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(bankURL)), program, bankMSB, bankLSB)
 }
 
+// @method loadInstrumentAtURL:error: @abstract configures the sampler by loading the specified preset file. @param instrumentURL URL to the preset file or audio file @param outError the status of the operation @discussion The file can be of one of the following types: Logic/GarageBand EXS24 instrument, the Sampler AU's native aupreset, or an audio file (eg. .caf, .aiff, .wav, .mp3). If an audio file URL is loaded, it will become the sole sample in a new default instrument. Any information contained in the file regarding its keyboard placement (e.g. root key, key range) will be used. This method reads from file and allocates memory, so it should not be called on a real time thread.
+//
 // LoadInstrumentAtURLError calls the underlying LoadInstrumentAtURLError.
 func (x *AudioUnitSampler) LoadInstrumentAtURLError(instrumentURL string) (bool, error) {
 	return x.inner.LoadInstrumentAtURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(instrumentURL)))
 }
 
+// @method loadAudioFilesAtURLs:error: @abstract configures the sampler by loading a set of audio files. @param audioFiles array of URLs for audio files to be loaded @param outError the status of the operation @discussion The audio files are loaded into a new default instrument with each audio file placed into its own sampler zone. Any information contained in the audio file regarding their placement on the keyboard (e.g. root key, key range) will be used. This method reads from file and allocates memory, so it should not be called on a real time thread.
+//
 // LoadAudioFilesAtURLsError calls the underlying LoadAudioFilesAtURLsError.
 func (x *AudioUnitSampler) LoadAudioFilesAtURLsError(audioFiles *foundation.NSArray[*foundation.NSURL]) (bool, error) {
 	return x.inner.LoadAudioFilesAtURLsError(audioFiles)
 }
 
+// @property stereoPan @abstract adjusts the pan for all the notes played. Range:     -100 -> +100 Default:   0
+//
 // StereoPan calls the underlying StereoPan.
 func (x *AudioUnitSampler) StereoPan() float32 {
 	return x.inner.StereoPan()
@@ -85,6 +101,8 @@ func (x *AudioUnitSampler) SetStereoPan(stereoPan float32) {
 	x.inner.SetStereoPan(stereoPan)
 }
 
+// @property overallGain @abstract adjusts the gain of all the notes played Range:     -90.0 -> +12 db Default: 0 db
+//
 // OverallGain calls the underlying OverallGain.
 func (x *AudioUnitSampler) OverallGain() float32 {
 	return x.inner.OverallGain()
@@ -95,6 +113,8 @@ func (x *AudioUnitSampler) SetOverallGain(overallGain float32) {
 	x.inner.SetOverallGain(overallGain)
 }
 
+// @property masterGain @abstract adjusts the gain of all the notes played Range:     -90.0 -> +12 db Default: 0 db
+//
 // MasterGain calls the underlying MasterGain.
 func (x *AudioUnitSampler) MasterGain() float32 {
 	return x.inner.MasterGain()
@@ -105,6 +125,8 @@ func (x *AudioUnitSampler) SetMasterGain(masterGain float32) {
 	x.inner.SetMasterGain(masterGain)
 }
 
+// @property globalTuning @abstract adjusts the tuning of all the notes played. Range:     -2400 -> +2400 cents Default:   0
+//
 // GlobalTuning calls the underlying GlobalTuning.
 func (x *AudioUnitSampler) GlobalTuning() float32 {
 	return x.inner.GlobalTuning()

@@ -38,37 +38,51 @@ func NewTensor() *Tensor {
 	return &Tensor{inner: raw.MLCTensorFromID(_id)}
 }
 
+// @property   label @abstract   A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *Tensor) WithLabel(label string) *Tensor {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @abstract   Synchronize the data in host memory. @discussion Synchronize the data in host memory i.e. tensor.data with latest contents in device memory This should only be called once the graph that this tensor is used with has finished execution; Otherwise the results in device memory may not be up to date. NOTE:  This method should not be called from a completion callback when device is the GPU. @return     Returns YES if success, NO if there is a failure to synchronize
+//
 // SynchronizeData calls the underlying SynchronizeData.
 func (x *Tensor) SynchronizeData() bool {
 	return x.inner.SynchronizeData()
 }
 
+// @abstract   Synchronize the optimizer data in host memory. @discussion Synchronize the optimizer data in host memory with latest contents in device memory This should only be called once the graph that this tensor is used with has finished execution; Otherwise the results in device memory may not be up to date. NOTE:  This method should not be called from a completion callback when device is the GPU. @return     Returns YES if success, NO if there is a failure to synchronize
+//
 // SynchronizeOptimizerData calls the underlying SynchronizeOptimizerData.
 func (x *Tensor) SynchronizeOptimizerData() bool {
 	return x.inner.SynchronizeOptimizerData()
 }
 
+// @abstract   Copy tensor data from device memory to user specified memory @discussion Before copying tensor data from device memory, one may need to synchronize the device memory for example when device is the GPU.  The synchronizeWithDevice argumet can be set appropraitely to indicate this. For CPU this is ignored.  If the tensor has been specified in outputs of a graph using addOutputs, synchronizeWithDevice should be set to NO. NOTE:  This method should only be called once the graph that this tensor is used with has finished execution; Otherwise the results in device memory may not be up to date.  synchronizeWithDevice must be set to NO when this method is called from a completion callback for GPU. @param bytes                                     The user specified data in which to copy @param length                                   The size in bytes to copy @param synchronizeWithDevice  Whether to synchronize device memory if device is GPU @return     Returns YES if success, NO if there is a failure to synchronize
+//
 // CopyDataFromDeviceMemoryToBytesLengthSynchronizeWithDevice calls the underlying CopyDataFromDeviceMemoryToBytesLengthSynchronizeWithDevice.
 func (x *Tensor) CopyDataFromDeviceMemoryToBytesLengthSynchronizeWithDevice(bytes_ unsafe.Pointer, length uint, synchronizeWithDevice bool) bool {
 	return x.inner.CopyDataFromDeviceMemoryToBytesLengthSynchronizeWithDevice(bytes_, length, synchronizeWithDevice)
 }
 
+// @abstract   Associates the given data to the tensor. If the device is GPU, also copies the data to the device memory. Returns true if the data is successfully associated with the tensor and copied to the device. @discussion The caller must guarantee the lifetime of the underlying memory of \p data for the entirety of the tensor's lifetime.  For input tensors, we recommend that the bindAndwriteData method provided by MLCTrainingGraph and MLCInferenceGraph be used.  This method should only be used to allocate and copy data to device memory for tensors that are typically layer parameters such as weights, bias for convolution layers, beta, gamma for normalization layers. @param      data             The data to associated with the tensor @param      device           The compute device @return     A Boolean value indicating whether the data is successfully associated with the tensor and copied to the device.
+//
 // BindAndWriteDataToDevice calls the underlying BindAndWriteDataToDevice.
 func (x *Tensor) BindAndWriteDataToDevice(data *raw.MLCTensorData, device *raw.MLCDevice) bool {
 	return x.inner.BindAndWriteDataToDevice(data, device)
 }
 
+// @abstract   Associates the given optimizer data and device data buffers to the tensor. Returns true if the data is successfully associated with the tensor and copied to the device. @discussion The caller must guarantee the lifetime of the underlying memory of \p data for the entirety of the tensor's lifetime.  The \p deviceData buffers are allocated by MLCompute.  This method must be called before executeOptimizerUpdateWithOptions or executeWithInputsData is called for the training graph. @param      data                The optimizer data to be associated with the tensor @param      deviceData  The optimizer device data to be associated with the tensor @return     A Boolean value indicating whether the data is successfully associated with the tensor .
+//
 // BindOptimizerDataDeviceData calls the underlying BindOptimizerDataDeviceData.
 func (x *Tensor) BindOptimizerDataDeviceData(data *foundation.NSArray[*raw.MLCTensorData], deviceData *foundation.NSArray[*raw.MLCTensorOptimizerDeviceData]) bool {
 	return x.inner.BindOptimizerDataDeviceData(data, deviceData)
 }
 
+// @abstract   Converts a 32-bit floating-point tensor with given scale and a zero point Returns a quantized tensor @param      type  The quantized data type.  Must be MLCDataTypeInt8, MLCDataTypeUInt8 or MLCDataTypeInt32 @param      scale  The scale to apply in quantization @param      bias The offset value that maps to float zero @return     A quantized tensor
+//
 // TensorByQuantizingToTypeScaleBias calls the underlying TensorByQuantizingToTypeScaleBias.
 func (x *Tensor) TensorByQuantizingToTypeScaleBias(type_ MLCDataType, scale float32, bias int) *Tensor {
 	_r := x.inner.TensorByQuantizingToTypeScaleBias(raw.MLCDataType(type_), scale, bias)
@@ -78,6 +92,8 @@ func (x *Tensor) TensorByQuantizingToTypeScaleBias(type_ MLCDataType, scale floa
 	return &Tensor{inner: _r}
 }
 
+// @abstract   Converts a 32-bit floating-point tensor with given scale and a zero point Returns a quantized tensor @param      type  The quantized data type.  Must be MLCDataTypeInt8, MLCDataTypeUInt8 or MLCDataTypeInt32 @param      scale  The scale to apply in quantization @param      bias The offset value that maps to float zero @param      axis The dimension on which to apply per-channel quantization @return     A quantized tensor
+//
 // TensorByQuantizingToTypeScaleBiasAxis calls the underlying TensorByQuantizingToTypeScaleBiasAxis.
 func (x *Tensor) TensorByQuantizingToTypeScaleBiasAxis(type_ MLCDataType, scale *raw.MLCTensor, bias *raw.MLCTensor, axis int) *Tensor {
 	_r := x.inner.TensorByQuantizingToTypeScaleBiasAxis(raw.MLCDataType(type_), scale, bias, axis)
@@ -87,6 +103,8 @@ func (x *Tensor) TensorByQuantizingToTypeScaleBiasAxis(type_ MLCDataType, scale 
 	return &Tensor{inner: _r}
 }
 
+// @abstract   Converts a quantized tensor to a 32-bit floating-point tensor Returns a de-quantized tensor @param      type  The de-quantized data type.  Must be MLCFloat32 @param      scale  The scale thst was used for the quantized data @param      bias The offset value that maps to float zero used for the quantized data @return     A quantized tensor
+//
 // TensorByDequantizingToTypeScaleBias calls the underlying TensorByDequantizingToTypeScaleBias.
 func (x *Tensor) TensorByDequantizingToTypeScaleBias(type_ MLCDataType, scale *raw.MLCTensor, bias *raw.MLCTensor) *Tensor {
 	_r := x.inner.TensorByDequantizingToTypeScaleBias(raw.MLCDataType(type_), scale, bias)
@@ -96,6 +114,8 @@ func (x *Tensor) TensorByDequantizingToTypeScaleBias(type_ MLCDataType, scale *r
 	return &Tensor{inner: _r}
 }
 
+// @abstract   Converts a quantized tensor to a 32-bit floating-point tensor Returns a de-quantized tensor @param      type  The de-quantized data type.  Must be MLCFloat32 @param      scale  The scale thst was used for the quantized data @param      bias The offset value that maps to float zero used for the quantized data @param      axis The dimension on which to apply per-channel quantization @return     A quantized tensor
+//
 // TensorByDequantizingToTypeScaleBiasAxis calls the underlying TensorByDequantizingToTypeScaleBiasAxis.
 func (x *Tensor) TensorByDequantizingToTypeScaleBiasAxis(type_ MLCDataType, scale *raw.MLCTensor, bias *raw.MLCTensor, axis int) *Tensor {
 	_r := x.inner.TensorByDequantizingToTypeScaleBiasAxis(raw.MLCDataType(type_), scale, bias, axis)
@@ -105,11 +125,15 @@ func (x *Tensor) TensorByDequantizingToTypeScaleBiasAxis(type_ MLCDataType, scal
 	return &Tensor{inner: _r}
 }
 
+// @property   tensorID @abstract   The tensor ID @discussion A unique number to identify each tensor.  Assigned when the tensor is created.
+//
 // TensorID calls the underlying TensorID.
 func (x *Tensor) TensorID() uint {
 	return x.inner.TensorID()
 }
 
+// @property   descriptor @abstract   The tensor descriptor
+//
 // Descriptor calls the underlying Descriptor.
 func (x *Tensor) Descriptor() *TensorDescriptor {
 	_r := x.inner.Descriptor()
@@ -119,11 +143,15 @@ func (x *Tensor) Descriptor() *TensorDescriptor {
 	return &TensorDescriptor{inner: _r}
 }
 
+// @property   data @abstract   The tensor data
+//
 // Data calls the underlying Data.
 func (x *Tensor) Data() *foundation.NSData {
 	return x.inner.Data()
 }
 
+// @property   label @abstract   A string to help identify this object.
+//
 // Label calls the underlying Label.
 func (x *Tensor) Label() string {
 	_r := x.inner.Label()
@@ -138,6 +166,8 @@ func (x *Tensor) SetLabel(label string) {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 }
 
+// @property   device @abstract   The device associated with this tensor.
+//
 // Device calls the underlying Device.
 func (x *Tensor) Device() *Device {
 	_r := x.inner.Device()
@@ -147,6 +177,8 @@ func (x *Tensor) Device() *Device {
 	return &Device{inner: _r}
 }
 
+// @property   optimizer buffers to use if tensor is used as a parameter @abstract   These are the host side optimizer (momentum and velocity) buffers which developers can query and initialize @discussion When customizing optimizer data, the contents of these buffers must be initialized before executing optimizer update for a graph.
+//
 // OptimizerData returns the collection as a Go slice.
 func (x *Tensor) OptimizerData() []*TensorData {
 	arr := x.inner.OptimizerData()
@@ -158,6 +190,8 @@ func (x *Tensor) OptimizerData() []*TensorData {
 	})
 }
 
+// @property   optimizer device buffers to use if tensor is used as a parameter @abstract   These are the device side optimizer (momentum and velocity) buffers which developers can query
+//
 // OptimizerDeviceData returns the collection as a Go slice.
 func (x *Tensor) OptimizerDeviceData() []*TensorOptimizerDeviceData {
 	arr := x.inner.OptimizerDeviceData()
@@ -169,6 +203,8 @@ func (x *Tensor) OptimizerDeviceData() []*TensorOptimizerDeviceData {
 	})
 }
 
+// @abstract   Returns a Boolean value indicating whether the underlying data has valid floating-point numerics, i.e. it does not contain NaN or INF floating-point values.
+//
 // HasValidNumerics calls the underlying HasValidNumerics.
 func (x *Tensor) HasValidNumerics() bool {
 	return x.inner.HasValidNumerics()

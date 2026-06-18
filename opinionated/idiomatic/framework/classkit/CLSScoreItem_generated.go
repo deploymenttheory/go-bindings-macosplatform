@@ -30,6 +30,8 @@ func ScoreItemFromID(id objc.ID) *ScoreItem {
 	return &ScoreItem{inner: raw.CLSScoreItemFromID(id)}
 }
 
+// @abstract      Create a score item with identifiers, title, score and maximum score. @param         identifier      An identifier that is unique within activity. @param         title           Title of score. Ex @em Biology- Cellular Division Quiz @param         score           The score the user received. @param         maxScore        The maximum score possible.
+//
 // NewScoreItemWithIdentifierTitleScoreMaxScore creates a new [ScoreItem].
 func NewScoreItemWithIdentifierTitleScoreMaxScore(identifier string, title string, score float64, maxScore float64) *ScoreItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLSScoreItem")), objc.RegisterName("alloc"))
@@ -37,24 +39,32 @@ func NewScoreItemWithIdentifierTitleScoreMaxScore(identifier string, title strin
 	return &ScoreItem{inner: raw.CLSScoreItemFromID(_id)}
 }
 
+// @abstract      Score out of @c maxScore. @discussion    Should be between zero and @c maxScore [0.0,maxScore].
+//
 // WithScore sets the score property and returns the receiver for chaining.
 func (x *ScoreItem) WithScore(score float64) *ScoreItem {
 	x.inner.SetScore(score)
 	return x
 }
 
+// @abstract      Total score possible. @discussion    Must be greater than zero.
+//
 // WithMaxScore sets the maxScore property and returns the receiver for chaining.
 func (x *ScoreItem) WithMaxScore(maxScore float64) *ScoreItem {
 	x.inner.SetMaxScore(maxScore)
 	return x
 }
 
+// @abstract      Title of what this ActivityItem represents. @discussion    This will be the title associated with the activity item in the generated progress report.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *ScoreItem) WithTitle(title string) *ScoreItem {
 	x.inner.CLSActivityItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// @abstract      Score out of @c maxScore. @discussion    Should be between zero and @c maxScore [0.0,maxScore].
+//
 // Score calls the underlying Score.
 func (x *ScoreItem) Score() float64 {
 	return x.inner.Score()
@@ -65,6 +75,8 @@ func (x *ScoreItem) SetScore(score float64) {
 	x.inner.SetScore(score)
 }
 
+// @abstract      Total score possible. @discussion    Must be greater than zero.
+//
 // MaxScore calls the underlying MaxScore.
 func (x *ScoreItem) MaxScore() float64 {
 	return x.inner.MaxScore()

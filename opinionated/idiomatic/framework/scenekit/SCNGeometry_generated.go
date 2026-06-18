@@ -38,12 +38,16 @@ func NewGeometry() *Geometry {
 	return &Geometry{inner: raw.SCNGeometryFromID(_id)}
 }
 
+// @property name @abstract Determines the name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Geometry) WithName(name string) *Geometry {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+//
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Geometry) WithMaterials(items ...*raw.SCNMaterial) *Geometry {
 	if len(items) == 0 {
@@ -62,12 +66,16 @@ func (x *Geometry) WithMaterials(items ...*raw.SCNMaterial) *Geometry {
 	return x
 }
 
+// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+//
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Geometry) WithFirstMaterial(firstMaterial *Material) *Geometry {
 	x.inner.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
+// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+//
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Geometry) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Geometry {
 	if len(items) == 0 {
@@ -92,45 +100,61 @@ func (x *Geometry) WithTessellator(tessellator *GeometryTessellator) *Geometry {
 	return x
 }
 
+// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+//
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Geometry) WithSubdivisionLevel(subdivisionLevel uint) *Geometry {
 	x.inner.SetSubdivisionLevel(subdivisionLevel)
 	return x
 }
 
+// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+//
 // WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
 func (x *Geometry) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Geometry {
 	x.inner.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
 	return x
 }
 
+// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+//
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Geometry) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Geometry {
 	x.inner.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
+// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+//
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Geometry) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Geometry {
 	x.inner.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
+// @method insertMaterial:atIndex: @abstract Insert a material in the materials array at the specified index. @param material The material to insert. @param index Index in the materials array to insert the new material.
+//
 // InsertMaterialAtIndex calls the underlying InsertMaterialAtIndex.
 func (x *Geometry) InsertMaterialAtIndex(material *raw.SCNMaterial, index uint) {
 	x.inner.InsertMaterialAtIndex(material, index)
 }
 
+// @method removeMaterialAtIndex: @abstract Remove the material at the specified index from the materials array. @param index The index of the material to remove from the 'materials' array.
+//
 // RemoveMaterialAtIndex calls the underlying RemoveMaterialAtIndex.
 func (x *Geometry) RemoveMaterialAtIndex(index uint) {
 	x.inner.RemoveMaterialAtIndex(index)
 }
 
+// @method replaceMaterialAtIndex:withMaterial: @abstract Remove the material at the index 'index' from the materials array of the receiver and insert 'material' in its position. @param index The index of the material to replace in the materials array. @param material The new material that will replace the previous one.
+//
 // ReplaceMaterialAtIndexWithMaterial calls the underlying ReplaceMaterialAtIndexWithMaterial.
 func (x *Geometry) ReplaceMaterialAtIndexWithMaterial(index uint, material *raw.SCNMaterial) {
 	x.inner.ReplaceMaterialAtIndexWithMaterial(index, material)
 }
 
+// @method materialWithName: @abstract Return the first material from the materials array of the receiver with the specified name. @param name The name of the material to retrieve.
+//
 // MaterialWithName calls the underlying MaterialWithName.
 func (x *Geometry) MaterialWithName(name string) *Material {
 	_r := x.inner.MaterialWithName(foundation.NSStringStringWithUTF8String(name))
@@ -140,11 +164,15 @@ func (x *Geometry) MaterialWithName(name string) *Material {
 	return &Material{inner: _r}
 }
 
+// @method geometrySourcesForSemantic: @abstract Returns the geometry sources for a given semantic. @param semantic The semantic of the geometry sources that should be retrieved. @discussion Returns nil if no geometry source is found for the given semantic. May return more than one source, typically for multiple texture coordinate sources.
+//
 // GeometrySourcesForSemantic calls the underlying GeometrySourcesForSemantic.
 func (x *Geometry) GeometrySourcesForSemantic(semantic *foundation.NSString) *foundation.NSArray[*raw.SCNGeometrySource] {
 	return x.inner.GeometrySourcesForSemantic(semantic)
 }
 
+// @method geometryElementAtIndex: @abstract Returns the geometry element at a given index. @param elementIndex The index of the geometry element.
+//
 // GeometryElementAtIndex calls the underlying GeometryElementAtIndex.
 func (x *Geometry) GeometryElementAtIndex(elementIndex int) *GeometryElement {
 	_r := x.inner.GeometryElementAtIndex(elementIndex)
@@ -154,6 +182,8 @@ func (x *Geometry) GeometryElementAtIndex(elementIndex int) *GeometryElement {
 	return &GeometryElement{inner: _r}
 }
 
+// @property name @abstract Determines the name of the receiver.
+//
 // Name calls the underlying Name.
 func (x *Geometry) Name() string {
 	_r := x.inner.Name()
@@ -168,6 +198,8 @@ func (x *Geometry) SetName(name string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 }
 
+// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+//
 // Materials returns the collection as a Go slice.
 func (x *Geometry) Materials() []*Material {
 	arr := x.inner.Materials()
@@ -184,6 +216,8 @@ func (x *Geometry) SetMaterials(materials *foundation.NSArray[*raw.SCNMaterial])
 	x.inner.SetMaterials(materials)
 }
 
+// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+//
 // FirstMaterial calls the underlying FirstMaterial.
 func (x *Geometry) FirstMaterial() *Material {
 	_r := x.inner.FirstMaterial()
@@ -198,6 +232,8 @@ func (x *Geometry) SetFirstMaterial(firstMaterial *raw.SCNMaterial) {
 	x.inner.SetFirstMaterial(firstMaterial)
 }
 
+// @property geometrySources @abstract The array of geometry sources of the receiver.
+//
 // GeometrySources returns the collection as a Go slice.
 func (x *Geometry) GeometrySources() []*GeometrySource {
 	arr := x.inner.GeometrySources()
@@ -209,6 +245,8 @@ func (x *Geometry) GeometrySources() []*GeometrySource {
 	})
 }
 
+// @property geometryElements @abstract The array of geometry elements of the receiver.
+//
 // GeometryElements returns the collection as a Go slice.
 func (x *Geometry) GeometryElements() []*GeometryElement {
 	arr := x.inner.GeometryElements()
@@ -220,11 +258,15 @@ func (x *Geometry) GeometryElements() []*GeometryElement {
 	})
 }
 
+// @property geometryElementCount @abstract Returns the number of geometry elements owned by the geometry.
+//
 // GeometryElementCount calls the underlying GeometryElementCount.
 func (x *Geometry) GeometryElementCount() int {
 	return x.inner.GeometryElementCount()
 }
 
+// @property geometrySourceChannels @abstract An array of indices that describes, for each geometry source, which channel of the geometry elements to use.
+//
 // GeometrySourceChannels returns the collection as a Go slice.
 func (x *Geometry) GeometrySourceChannels() []*foundation.NSNumber {
 	arr := x.inner.GeometrySourceChannels()
@@ -236,6 +278,8 @@ func (x *Geometry) GeometrySourceChannels() []*foundation.NSNumber {
 	})
 }
 
+// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+//
 // LevelsOfDetail returns the collection as a Go slice.
 func (x *Geometry) LevelsOfDetail() []*LevelOfDetail {
 	arr := x.inner.LevelsOfDetail()
@@ -266,6 +310,8 @@ func (x *Geometry) SetTessellator(tessellator *raw.SCNGeometryTessellator) {
 	x.inner.SetTessellator(tessellator)
 }
 
+// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+//
 // SubdivisionLevel calls the underlying SubdivisionLevel.
 func (x *Geometry) SubdivisionLevel() uint {
 	return x.inner.SubdivisionLevel()
@@ -276,6 +322,8 @@ func (x *Geometry) SetSubdivisionLevel(subdivisionLevel uint) {
 	x.inner.SetSubdivisionLevel(subdivisionLevel)
 }
 
+// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+//
 // WantsAdaptiveSubdivision calls the underlying WantsAdaptiveSubdivision.
 func (x *Geometry) WantsAdaptiveSubdivision() bool {
 	return x.inner.WantsAdaptiveSubdivision()
@@ -286,6 +334,8 @@ func (x *Geometry) SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) {
 	x.inner.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
 }
 
+// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+//
 // EdgeCreasesElement calls the underlying EdgeCreasesElement.
 func (x *Geometry) EdgeCreasesElement() *GeometryElement {
 	_r := x.inner.EdgeCreasesElement()
@@ -300,6 +350,8 @@ func (x *Geometry) SetEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElem
 	x.inner.SetEdgeCreasesElement(edgeCreasesElement)
 }
 
+// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+//
 // EdgeCreasesSource calls the underlying EdgeCreasesSource.
 func (x *Geometry) EdgeCreasesSource() *GeometrySource {
 	_r := x.inner.EdgeCreasesSource()

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration object that requests the creation of a socket device to communicate with the guest system.
+//
 // VirtioSocketDeviceConfiguration wraps [raw.VZVirtioSocketDeviceConfiguration] with a fluent Go API.
 type VirtioSocketDeviceConfiguration struct {
 	inner *raw.VZVirtioSocketDeviceConfiguration

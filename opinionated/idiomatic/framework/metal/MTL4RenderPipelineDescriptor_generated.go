@@ -36,113 +36,151 @@ func NewMTL4RenderPipelineDescriptor() *MTL4RenderPipelineDescriptor {
 	return &MTL4RenderPipelineDescriptor{inner: raw.MTL4RenderPipelineDescriptorFromID(_id)}
 }
 
+// Assigns the shader function that this pipeline executes for each vertex.
+//
 // WithVertexFunctionDescriptor sets the vertexFunctionDescriptor property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineDescriptor) WithVertexFunctionDescriptor(vertexFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4RenderPipelineDescriptor {
 	x.inner.SetVertexFunctionDescriptor(vertexFunctionDescriptor.asMTL4FunctionDescriptor())
 	return x
 }
 
+// Assigns the shader function that this pipeline executes for each fragment. When you don't specify a fragment function, you need to disable rasterization by setting property “rasterizationEnabled“ to false.
+//
 // WithFragmentFunctionDescriptor sets the fragmentFunctionDescriptor property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineDescriptor) WithFragmentFunctionDescriptor(fragmentFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4RenderPipelineDescriptor {
 	x.inner.SetFragmentFunctionDescriptor(fragmentFunctionDescriptor.asMTL4FunctionDescriptor())
 	return x
 }
 
+// Configures an optional vertex descriptor for the vertex input. A vertex descriptor specifies the layout of your vertex data, allowing your vertex shaders to access the content in your vertex arrays via the `[[stage_in]]` attribute in Metal Shading Language.
+//
 // WithVertexDescriptor sets the vertexDescriptor property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineDescriptor) WithVertexDescriptor(vertexDescriptor *VertexDescriptor) *MTL4RenderPipelineDescriptor {
 	x.inner.SetVertexDescriptor(vertexDescriptor.Unwrap())
 	return x
 }
 
+// Controls the number of samples this pipeline applies for each fragment.
+//
 // WithRasterSampleCount sets the rasterSampleCount property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineDescriptor) WithRasterSampleCount(rasterSampleCount uint) *MTL4RenderPipelineDescriptor {
 	x.inner.SetRasterSampleCount(rasterSampleCount)
 	return x
 }
 
+// Indicates whether to read and use the alpha channel fragment output of color attachments to compute a sample coverage mask.
+//
 // WithAlphaToCoverageState sets the alphaToCoverageState property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineDescriptor) WithAlphaToCoverageState(alphaToCoverageState MTL4AlphaToCoverageState) *MTL4RenderPipelineDescriptor {
 	x.inner.SetAlphaToCoverageState(raw.MTL4AlphaToCoverageState(alphaToCoverageState))
 	return x
 }
 
+// Indicates whether the pipeline forces alpha channel values of color attachments to the largest representable value.
+//
 // WithAlphaToOneState sets the alphaToOneState property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineDescriptor) WithAlphaToOneState(alphaToOneState MTL4AlphaToOneState) *MTL4RenderPipelineDescriptor {
 	x.inner.SetAlphaToOneState(raw.MTL4AlphaToOneState(alphaToOneState))
 	return x
 }
 
+// Determines whether the pipeline rasterizes primitives. By default, this value is <doc://com.apple.documentation/documentation/swift/true>, specifying that this pipeline rasterizes primitives. Set this property to <doc://com.apple.documentation/documentation/swift/false> when you don't provide a fragment shader function via function “fragmentFunctionDescriptor“.
+//
 // WithRasterizationEnabled sets the rasterizationEnabled property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineDescriptor) WithRasterizationEnabled(rasterizationEnabled bool) *MTL4RenderPipelineDescriptor {
 	x.inner.SetRasterizationEnabled(rasterizationEnabled)
 	return x
 }
 
+// Determines the maximum value that can you can pass as the pipeline's amplification count. This property controls the maximum count you pass to “MTL4RenderCommandEncoder/setVertexAmplificationCount:viewMappings:“ when using vertex amplification with this pipeline.
+//
 // WithMaxVertexAmplificationCount sets the maxVertexAmplificationCount property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineDescriptor) WithMaxVertexAmplificationCount(maxVertexAmplificationCount uint) *MTL4RenderPipelineDescriptor {
 	x.inner.SetMaxVertexAmplificationCount(maxVertexAmplificationCount)
 	return x
 }
 
+// Assigns type of primitive topology this pipeline renders.
+//
 // WithInputPrimitiveTopology sets the inputPrimitiveTopology property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineDescriptor) WithInputPrimitiveTopology(inputPrimitiveTopology MTLPrimitiveTopologyClass) *MTL4RenderPipelineDescriptor {
 	x.inner.SetInputPrimitiveTopology(raw.MTLPrimitiveTopologyClass(inputPrimitiveTopology))
 	return x
 }
 
+// Provides static linking information for the vertex stage of the render pipeline. Use this property to link extra shader functions to the vertex stage of the render pipeline.
+//
 // WithVertexStaticLinkingDescriptor sets the vertexStaticLinkingDescriptor property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineDescriptor) WithVertexStaticLinkingDescriptor(vertexStaticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4RenderPipelineDescriptor {
 	x.inner.SetVertexStaticLinkingDescriptor(vertexStaticLinkingDescriptor.Unwrap())
 	return x
 }
 
+// Provides static linking information for the fragment stage of the render pipeline. Use this property to link extra shader functions to the fragment stage of the render pipeline.
+//
 // WithFragmentStaticLinkingDescriptor sets the fragmentStaticLinkingDescriptor property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineDescriptor) WithFragmentStaticLinkingDescriptor(fragmentStaticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4RenderPipelineDescriptor {
 	x.inner.SetFragmentStaticLinkingDescriptor(fragmentStaticLinkingDescriptor.Unwrap())
 	return x
 }
 
+// Indicates whether you can use the render pipeline to create new pipelines by adding binary functions to the vertex shader function’s callable functions list.
+//
 // WithSupportVertexBinaryLinking sets the supportVertexBinaryLinking property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineDescriptor) WithSupportVertexBinaryLinking(supportVertexBinaryLinking bool) *MTL4RenderPipelineDescriptor {
 	x.inner.SetSupportVertexBinaryLinking(supportVertexBinaryLinking)
 	return x
 }
 
+// Indicates whether you can use the pipeline to create new pipelines by adding binary functions to the fragment shader function’s callable functions list.
+//
 // WithSupportFragmentBinaryLinking sets the supportFragmentBinaryLinking property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineDescriptor) WithSupportFragmentBinaryLinking(supportFragmentBinaryLinking bool) *MTL4RenderPipelineDescriptor {
 	x.inner.SetSupportFragmentBinaryLinking(supportFragmentBinaryLinking)
 	return x
 }
 
+// Configures a logical-to-physical rendering remap state. Use this property to assign how a “MTL4RenderCommandEncoder“ instance maps the output of your fragment shader to physical color attachments.
+//
 // WithColorAttachmentMappingState sets the colorAttachmentMappingState property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineDescriptor) WithColorAttachmentMappingState(colorAttachmentMappingState MTL4LogicalToPhysicalColorAttachmentMappingState) *MTL4RenderPipelineDescriptor {
 	x.inner.SetColorAttachmentMappingState(raw.MTL4LogicalToPhysicalColorAttachmentMappingState(colorAttachmentMappingState))
 	return x
 }
 
+// Indicates whether the pipeline supports indirect command buffers.
+//
 // WithSupportIndirectCommandBuffers sets the supportIndirectCommandBuffers property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineDescriptor) WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers MTL4IndirectCommandBufferSupportState) *MTL4RenderPipelineDescriptor {
 	x.inner.SetSupportIndirectCommandBuffers(raw.MTL4IndirectCommandBufferSupportState(supportIndirectCommandBuffers))
 	return x
 }
 
+// Assigns an optional string that uniquely identifies a pipeline descriptor. After you provide this label, you can use it to look up a pipeline state object by name in a binary archive.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineDescriptor) WithLabel(label string) *MTL4RenderPipelineDescriptor {
 	x.inner.MTL4PipelineDescriptor.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// Provides compile-time options when you build the pipeline.
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4RenderPipelineDescriptor {
 	x.inner.MTL4PipelineDescriptor.SetOptions(options.Unwrap())
 	return x
 }
 
+// Resets this descriptor to its default state.
+//
 // Reset calls the underlying Reset.
 func (x *MTL4RenderPipelineDescriptor) Reset() {
 	x.inner.Reset()
 }
 
+// Assigns the shader function that this pipeline executes for each vertex.
+//
 // VertexFunctionDescriptor calls the underlying VertexFunctionDescriptor.
 func (x *MTL4RenderPipelineDescriptor) VertexFunctionDescriptor() *MTL4FunctionDescriptor {
 	_r := x.inner.VertexFunctionDescriptor()
@@ -157,6 +195,8 @@ func (x *MTL4RenderPipelineDescriptor) SetVertexFunctionDescriptor(vertexFunctio
 	x.inner.SetVertexFunctionDescriptor(vertexFunctionDescriptor)
 }
 
+// Assigns the shader function that this pipeline executes for each fragment. When you don't specify a fragment function, you need to disable rasterization by setting property “rasterizationEnabled“ to false.
+//
 // FragmentFunctionDescriptor calls the underlying FragmentFunctionDescriptor.
 func (x *MTL4RenderPipelineDescriptor) FragmentFunctionDescriptor() *MTL4FunctionDescriptor {
 	_r := x.inner.FragmentFunctionDescriptor()
@@ -171,6 +211,8 @@ func (x *MTL4RenderPipelineDescriptor) SetFragmentFunctionDescriptor(fragmentFun
 	x.inner.SetFragmentFunctionDescriptor(fragmentFunctionDescriptor)
 }
 
+// Configures an optional vertex descriptor for the vertex input. A vertex descriptor specifies the layout of your vertex data, allowing your vertex shaders to access the content in your vertex arrays via the `[[stage_in]]` attribute in Metal Shading Language.
+//
 // VertexDescriptor calls the underlying VertexDescriptor.
 func (x *MTL4RenderPipelineDescriptor) VertexDescriptor() *VertexDescriptor {
 	_r := x.inner.VertexDescriptor()
@@ -185,6 +227,8 @@ func (x *MTL4RenderPipelineDescriptor) SetVertexDescriptor(vertexDescriptor *raw
 	x.inner.SetVertexDescriptor(vertexDescriptor)
 }
 
+// Controls the number of samples this pipeline applies for each fragment.
+//
 // RasterSampleCount calls the underlying RasterSampleCount.
 func (x *MTL4RenderPipelineDescriptor) RasterSampleCount() uint {
 	return x.inner.RasterSampleCount()
@@ -195,6 +239,8 @@ func (x *MTL4RenderPipelineDescriptor) SetRasterSampleCount(rasterSampleCount ui
 	x.inner.SetRasterSampleCount(rasterSampleCount)
 }
 
+// Indicates whether to read and use the alpha channel fragment output of color attachments to compute a sample coverage mask.
+//
 // AlphaToCoverageState calls the underlying AlphaToCoverageState.
 func (x *MTL4RenderPipelineDescriptor) AlphaToCoverageState() MTL4AlphaToCoverageState {
 	return MTL4AlphaToCoverageState(x.inner.AlphaToCoverageState())
@@ -205,6 +251,8 @@ func (x *MTL4RenderPipelineDescriptor) SetAlphaToCoverageState(alphaToCoverageSt
 	x.inner.SetAlphaToCoverageState(raw.MTL4AlphaToCoverageState(alphaToCoverageState))
 }
 
+// Indicates whether the pipeline forces alpha channel values of color attachments to the largest representable value.
+//
 // AlphaToOneState calls the underlying AlphaToOneState.
 func (x *MTL4RenderPipelineDescriptor) AlphaToOneState() MTL4AlphaToOneState {
 	return MTL4AlphaToOneState(x.inner.AlphaToOneState())
@@ -215,6 +263,8 @@ func (x *MTL4RenderPipelineDescriptor) SetAlphaToOneState(alphaToOneState MTL4Al
 	x.inner.SetAlphaToOneState(raw.MTL4AlphaToOneState(alphaToOneState))
 }
 
+// Determines whether the pipeline rasterizes primitives. By default, this value is <doc://com.apple.documentation/documentation/swift/true>, specifying that this pipeline rasterizes primitives. Set this property to <doc://com.apple.documentation/documentation/swift/false> when you don't provide a fragment shader function via function “fragmentFunctionDescriptor“.
+//
 // IsRasterizationEnabled calls the underlying IsRasterizationEnabled.
 func (x *MTL4RenderPipelineDescriptor) IsRasterizationEnabled() bool {
 	return x.inner.IsRasterizationEnabled()
@@ -225,6 +275,8 @@ func (x *MTL4RenderPipelineDescriptor) SetRasterizationEnabled(rasterizationEnab
 	x.inner.SetRasterizationEnabled(rasterizationEnabled)
 }
 
+// Determines the maximum value that can you can pass as the pipeline's amplification count. This property controls the maximum count you pass to “MTL4RenderCommandEncoder/setVertexAmplificationCount:viewMappings:“ when using vertex amplification with this pipeline.
+//
 // MaxVertexAmplificationCount calls the underlying MaxVertexAmplificationCount.
 func (x *MTL4RenderPipelineDescriptor) MaxVertexAmplificationCount() uint {
 	return x.inner.MaxVertexAmplificationCount()
@@ -235,6 +287,8 @@ func (x *MTL4RenderPipelineDescriptor) SetMaxVertexAmplificationCount(maxVertexA
 	x.inner.SetMaxVertexAmplificationCount(maxVertexAmplificationCount)
 }
 
+// Accesses an array containing descriptions of the color attachments this pipeline writes to.
+//
 // ColorAttachments calls the underlying ColorAttachments.
 func (x *MTL4RenderPipelineDescriptor) ColorAttachments() *MTL4RenderPipelineColorAttachmentDescriptorArray {
 	_r := x.inner.ColorAttachments()
@@ -244,6 +298,8 @@ func (x *MTL4RenderPipelineDescriptor) ColorAttachments() *MTL4RenderPipelineCol
 	return &MTL4RenderPipelineColorAttachmentDescriptorArray{inner: _r}
 }
 
+// Assigns type of primitive topology this pipeline renders.
+//
 // InputPrimitiveTopology calls the underlying InputPrimitiveTopology.
 func (x *MTL4RenderPipelineDescriptor) InputPrimitiveTopology() MTLPrimitiveTopologyClass {
 	return MTLPrimitiveTopologyClass(x.inner.InputPrimitiveTopology())
@@ -254,6 +310,8 @@ func (x *MTL4RenderPipelineDescriptor) SetInputPrimitiveTopology(inputPrimitiveT
 	x.inner.SetInputPrimitiveTopology(raw.MTLPrimitiveTopologyClass(inputPrimitiveTopology))
 }
 
+// Provides static linking information for the vertex stage of the render pipeline. Use this property to link extra shader functions to the vertex stage of the render pipeline.
+//
 // VertexStaticLinkingDescriptor calls the underlying VertexStaticLinkingDescriptor.
 func (x *MTL4RenderPipelineDescriptor) VertexStaticLinkingDescriptor() *MTL4StaticLinkingDescriptor {
 	_r := x.inner.VertexStaticLinkingDescriptor()
@@ -268,6 +326,8 @@ func (x *MTL4RenderPipelineDescriptor) SetVertexStaticLinkingDescriptor(vertexSt
 	x.inner.SetVertexStaticLinkingDescriptor(vertexStaticLinkingDescriptor)
 }
 
+// Provides static linking information for the fragment stage of the render pipeline. Use this property to link extra shader functions to the fragment stage of the render pipeline.
+//
 // FragmentStaticLinkingDescriptor calls the underlying FragmentStaticLinkingDescriptor.
 func (x *MTL4RenderPipelineDescriptor) FragmentStaticLinkingDescriptor() *MTL4StaticLinkingDescriptor {
 	_r := x.inner.FragmentStaticLinkingDescriptor()
@@ -282,6 +342,8 @@ func (x *MTL4RenderPipelineDescriptor) SetFragmentStaticLinkingDescriptor(fragme
 	x.inner.SetFragmentStaticLinkingDescriptor(fragmentStaticLinkingDescriptor)
 }
 
+// Indicates whether you can use the render pipeline to create new pipelines by adding binary functions to the vertex shader function’s callable functions list.
+//
 // SupportVertexBinaryLinking calls the underlying SupportVertexBinaryLinking.
 func (x *MTL4RenderPipelineDescriptor) SupportVertexBinaryLinking() bool {
 	return x.inner.SupportVertexBinaryLinking()
@@ -292,6 +354,8 @@ func (x *MTL4RenderPipelineDescriptor) SetSupportVertexBinaryLinking(supportVert
 	x.inner.SetSupportVertexBinaryLinking(supportVertexBinaryLinking)
 }
 
+// Indicates whether you can use the pipeline to create new pipelines by adding binary functions to the fragment shader function’s callable functions list.
+//
 // SupportFragmentBinaryLinking calls the underlying SupportFragmentBinaryLinking.
 func (x *MTL4RenderPipelineDescriptor) SupportFragmentBinaryLinking() bool {
 	return x.inner.SupportFragmentBinaryLinking()
@@ -302,6 +366,8 @@ func (x *MTL4RenderPipelineDescriptor) SetSupportFragmentBinaryLinking(supportFr
 	x.inner.SetSupportFragmentBinaryLinking(supportFragmentBinaryLinking)
 }
 
+// Configures a logical-to-physical rendering remap state. Use this property to assign how a “MTL4RenderCommandEncoder“ instance maps the output of your fragment shader to physical color attachments.
+//
 // ColorAttachmentMappingState calls the underlying ColorAttachmentMappingState.
 func (x *MTL4RenderPipelineDescriptor) ColorAttachmentMappingState() MTL4LogicalToPhysicalColorAttachmentMappingState {
 	return MTL4LogicalToPhysicalColorAttachmentMappingState(x.inner.ColorAttachmentMappingState())
@@ -312,6 +378,8 @@ func (x *MTL4RenderPipelineDescriptor) SetColorAttachmentMappingState(colorAttac
 	x.inner.SetColorAttachmentMappingState(raw.MTL4LogicalToPhysicalColorAttachmentMappingState(colorAttachmentMappingState))
 }
 
+// Indicates whether the pipeline supports indirect command buffers.
+//
 // SupportIndirectCommandBuffers calls the underlying SupportIndirectCommandBuffers.
 func (x *MTL4RenderPipelineDescriptor) SupportIndirectCommandBuffers() MTL4IndirectCommandBufferSupportState {
 	return MTL4IndirectCommandBufferSupportState(x.inner.SupportIndirectCommandBuffers())

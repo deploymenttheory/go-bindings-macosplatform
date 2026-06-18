@@ -39,12 +39,16 @@ func NewSplitViewController() *SplitViewController {
 	return &SplitViewController{inner: raw.NSSplitViewControllerFromID(_id)}
 }
 
+// The split view managed by the SplitViewController. This can be used to customize view properties such as the dividerStyle, vertical, and autosaveName. It is not guaranteed to be the same view as the receivers 'view' property. The default created splitView is vertical with a dividerStyle of \c NSSplitViewDividerStyleThin. To provide a custom NSSplitView, set the splitView property anytime before self.viewLoaded is YES.
+//
 // WithSplitView sets the splitView property and returns the receiver for chaining.
 func (x *SplitViewController) WithSplitView(splitView *SplitView) *SplitViewController {
 	x.inner.SetSplitView(splitView.Unwrap())
 	return x
 }
 
+// The array of SplitViewItems that correspond to the current child view controllers. After a child view controller is added to the receiving splitViewController, a NSSplitViewItem with the default values will be created for it. Once the child is removed, its corresponding splitViewItem will be removed from the splitViewItems array. Setting this will call through to \c -insertSplitViewItem:atIndex and \c -removeSplitViewItem: for items that are new or need removal.
+//
 // WithSplitViewItems sets the collection, converting the Go slice to an NSArray.
 func (x *SplitViewController) WithSplitViewItems(items ...*raw.NSSplitViewItem) *SplitViewController {
 	if len(items) == 0 {
@@ -63,6 +67,8 @@ func (x *SplitViewController) WithSplitViewItems(items ...*raw.NSSplitViewItem) 
 	return x
 }
 
+// The minimum thickness in the primary axis of split view (width for "vertical", height otherwise) before sidebar items will automatically collapse. If reshown in fullscreen, they will overlay over the other split items. Auto-collapsed sidebars will automatically uncollapse if the thickness is increased back to or past the minimum thickness. Defaults to \c NSSplitViewControllerAutomaticDimension, which will use the effective minimum sizes of the split view item views as described by constraints in the window to determine the minimum size for inline sidebars. Once constraints establishing the minimum size can't be satisfied for all non-collapsed split panes, all sidebars will auto-collapse. When fullscreen, if a sidebar tries to uncollapse in this state, it will overlay.
+//
 // WithMinimumThicknessForInlineSidebars sets the minimumThicknessForInlineSidebars property and returns the receiver for chaining.
 func (x *SplitViewController) WithMinimumThicknessForInlineSidebars(minimumThicknessForInlineSidebars float64) *SplitViewController {
 	x.inner.SetMinimumThicknessForInlineSidebars(minimumThicknessForInlineSidebars)
@@ -147,21 +153,29 @@ func (x *SplitViewController) WithTouchBar(touchBar *TouchBar) *SplitViewControl
 	return x
 }
 
+// Adds a SplitViewItem to the end of the SplitViewController. If the receiver's view is loaded and the SplitViewItem is not collapsed, the SplitViewItem's viewController's view will be loaded and added to the splitView. This calls through to -insertSplitViewItem:atIndex:. \param splitViewItem The SplitViewItem to add. It must have a viewController set by the time it is added or an exception will be thrown. An exception will also be thrown if splitViewItem is nil.
+//
 // AddSplitViewItem calls the underlying AddSplitViewItem.
 func (x *SplitViewController) AddSplitViewItem(splitViewItem *raw.NSSplitViewItem) {
 	x.inner.AddSplitViewItem(splitViewItem)
 }
 
+// Adds a SplitViewItem to a given index in the SplitViewController. If the receiver's view is loaded and the SplitViewItem is not collapsed, the SplitViewItem's viewController's view will be loaded and added to the \c splitView. Subclasses must call through \c -insertSplitViewItem:atIndex: to add a SplitViewItem. \param splitViewItem The SplitViewItem to add. It must have a \c viewController set by the time it is added or an exception will be thrown. An exception will also be thrown if splitViewItem is nil. \param index The index to add the SplitViewItem at. Will throw an exception if \c index < 0 or \c index > \c splitViewItems.count
+//
 // InsertSplitViewItemAtIndex calls the underlying InsertSplitViewItemAtIndex.
 func (x *SplitViewController) InsertSplitViewItemAtIndex(splitViewItem *raw.NSSplitViewItem, index int) {
 	x.inner.InsertSplitViewItemAtIndex(splitViewItem, index)
 }
 
+// Removes a SplitViewItem from the receiver. The layout of the \c splitView will be adjusted for its removal. Subclasses must call through \c -removeSplitViewItem: to remove a SplitViewItem. \param splitViewItem The SplitViewItem to remove. An exception will be thrown if \c splitViewItem is not in the SplitViewController or if it is nil.
+//
 // RemoveSplitViewItem calls the underlying RemoveSplitViewItem.
 func (x *SplitViewController) RemoveSplitViewItem(splitViewItem *raw.NSSplitViewItem) {
 	x.inner.RemoveSplitViewItem(splitViewItem)
 }
 
+// Returns the corresponding SplitViewItem for a given child ViewController. \param viewController The ViewController to look up. \return The corresponding SplitViewItem. Returns nil if \c viewController is not a child of the SplitViewController.
+//
 // SplitViewItemForViewController calls the underlying SplitViewItemForViewController.
 func (x *SplitViewController) SplitViewItemForViewController(viewController *raw.NSViewController) *SplitViewItem {
 	_r := x.inner.SplitViewItemForViewController(viewController)
@@ -171,6 +185,8 @@ func (x *SplitViewController) SplitViewItemForViewController(viewController *raw
 	return &SplitViewItem{inner: _r}
 }
 
+// Validates items with an action of `toggleSidebar:` to reflect the status of the sidebar item contained within the receiver.
+//
 // ValidateUserInterfaceItem calls the underlying ValidateUserInterfaceItem.
 func (x *SplitViewController) ValidateUserInterfaceItem(item raw.NSValidatedUserInterfaceItem) bool {
 	return x.inner.ValidateUserInterfaceItem(item)
@@ -201,6 +217,8 @@ func (x *SplitViewController) SplitViewAdditionalEffectiveRectOfDividerAtIndex(s
 	return x.inner.SplitViewAdditionalEffectiveRectOfDividerAtIndex(splitView, dividerIndex)
 }
 
+// The split view managed by the SplitViewController. This can be used to customize view properties such as the dividerStyle, vertical, and autosaveName. It is not guaranteed to be the same view as the receivers 'view' property. The default created splitView is vertical with a dividerStyle of \c NSSplitViewDividerStyleThin. To provide a custom NSSplitView, set the splitView property anytime before self.viewLoaded is YES.
+//
 // SplitView calls the underlying SplitView.
 func (x *SplitViewController) SplitView() *SplitView {
 	_r := x.inner.SplitView()
@@ -210,11 +228,15 @@ func (x *SplitViewController) SplitView() *SplitView {
 	return &SplitView{inner: _r}
 }
 
+// The split view managed by the SplitViewController. This can be used to customize view properties such as the dividerStyle, vertical, and autosaveName. It is not guaranteed to be the same view as the receivers 'view' property. The default created splitView is vertical with a dividerStyle of \c NSSplitViewDividerStyleThin. To provide a custom NSSplitView, set the splitView property anytime before self.viewLoaded is YES.
+//
 // SetSplitView calls the underlying SetSplitView.
 func (x *SplitViewController) SetSplitView(splitView *raw.NSSplitView) {
 	x.inner.SetSplitView(splitView)
 }
 
+// The array of SplitViewItems that correspond to the current child view controllers. After a child view controller is added to the receiving splitViewController, a NSSplitViewItem with the default values will be created for it. Once the child is removed, its corresponding splitViewItem will be removed from the splitViewItems array. Setting this will call through to \c -insertSplitViewItem:atIndex and \c -removeSplitViewItem: for items that are new or need removal.
+//
 // SplitViewItems returns the collection as a Go slice.
 func (x *SplitViewController) SplitViewItems() []*SplitViewItem {
 	arr := x.inner.SplitViewItems()
@@ -226,26 +248,36 @@ func (x *SplitViewController) SplitViewItems() []*SplitViewItem {
 	})
 }
 
+// The array of SplitViewItems that correspond to the current child view controllers. After a child view controller is added to the receiving splitViewController, a NSSplitViewItem with the default values will be created for it. Once the child is removed, its corresponding splitViewItem will be removed from the splitViewItems array. Setting this will call through to \c -insertSplitViewItem:atIndex and \c -removeSplitViewItem: for items that are new or need removal.
+//
 // SetSplitViewItems calls the underlying SetSplitViewItems.
 func (x *SplitViewController) SetSplitViewItems(splitViewItems *foundation.NSArray[*raw.NSSplitViewItem]) {
 	x.inner.SetSplitViewItems(splitViewItems)
 }
 
+// The minimum thickness in the primary axis of split view (width for "vertical", height otherwise) before sidebar items will automatically collapse. If reshown in fullscreen, they will overlay over the other split items. Auto-collapsed sidebars will automatically uncollapse if the thickness is increased back to or past the minimum thickness. Defaults to \c NSSplitViewControllerAutomaticDimension, which will use the effective minimum sizes of the split view item views as described by constraints in the window to determine the minimum size for inline sidebars. Once constraints establishing the minimum size can't be satisfied for all non-collapsed split panes, all sidebars will auto-collapse. When fullscreen, if a sidebar tries to uncollapse in this state, it will overlay.
+//
 // MinimumThicknessForInlineSidebars calls the underlying MinimumThicknessForInlineSidebars.
 func (x *SplitViewController) MinimumThicknessForInlineSidebars() float64 {
 	return x.inner.MinimumThicknessForInlineSidebars()
 }
 
+// The minimum thickness in the primary axis of split view (width for "vertical", height otherwise) before sidebar items will automatically collapse. If reshown in fullscreen, they will overlay over the other split items. Auto-collapsed sidebars will automatically uncollapse if the thickness is increased back to or past the minimum thickness. Defaults to \c NSSplitViewControllerAutomaticDimension, which will use the effective minimum sizes of the split view item views as described by constraints in the window to determine the minimum size for inline sidebars. Once constraints establishing the minimum size can't be satisfied for all non-collapsed split panes, all sidebars will auto-collapse. When fullscreen, if a sidebar tries to uncollapse in this state, it will overlay.
+//
 // SetMinimumThicknessForInlineSidebars calls the underlying SetMinimumThicknessForInlineSidebars.
 func (x *SplitViewController) SetMinimumThicknessForInlineSidebars(minimumThicknessForInlineSidebars float64) {
 	x.inner.SetMinimumThicknessForInlineSidebars(minimumThicknessForInlineSidebars)
 }
 
+// Collapses or expands the first sidebar in the split view controller using an animation. If the split view controller doesn't contain a sidebar, calling this method does nothing.
+//
 // ToggleSidebar calls the underlying ToggleSidebar.
 func (x *SplitViewController) ToggleSidebar(sender objc.ID) {
 	x.inner.ToggleSidebar(sender)
 }
 
+// Collapses or expands the first inspector in the split view controller using an animation. If the split view controller doesn't contain an inspector, calling this method does nothing.
+//
 // ToggleInspector calls the underlying ToggleInspector.
 func (x *SplitViewController) ToggleInspector(sender objc.ID) {
 	x.inner.ToggleInspector(sender)

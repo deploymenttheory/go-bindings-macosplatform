@@ -38,66 +38,88 @@ func NewAccelerationStructureTriangleGeometryDescriptor() *AccelerationStructure
 	return &AccelerationStructureTriangleGeometryDescriptor{inner: raw.MTLAccelerationStructureTriangleGeometryDescriptorFromID(_id)}
 }
 
+// @brief Vertex buffer containing triangle vertices. Each vertex position must be formatted according to the vertex format. Must not be nil.
+//
 // WithVertexBuffer sets the vertexBuffer property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithVertexBuffer(vertexBuffer raw.MTLBuffer) *AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.SetVertexBuffer(vertexBuffer)
 	return x
 }
 
+// @brief Vertex buffer offset. Must be a multiple of the vertex stride and must be aligned to the platform's buffer offset alignment.
+//
 // WithVertexBufferOffset sets the vertexBufferOffset property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithVertexBufferOffset(vertexBufferOffset uint) *AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.SetVertexBufferOffset(vertexBufferOffset)
 	return x
 }
 
+// @brief Format type of the vertex buffer. Defaults to MTLAttributeFormatFloat3 (packed).
+//
 // WithVertexFormat sets the vertexFormat property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithVertexFormat(vertexFormat MTLAttributeFormat) *AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.SetVertexFormat(raw.MTLAttributeFormat(vertexFormat))
 	return x
 }
 
+// @brief Stride, in bytes, between vertices in the vertex buffer. Must be a multiple of the vertex format data type size and must be aligned to the vertex format data type's alignment. Defaults to 0, which will result in a stride of the vertex format data size.
+//
 // WithVertexStride sets the vertexStride property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithVertexStride(vertexStride uint) *AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.SetVertexStride(vertexStride)
 	return x
 }
 
+// Optional index buffer containing references to vertices in the vertex buffer. May be nil.
+//
 // WithIndexBuffer sets the indexBuffer property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithIndexBuffer(indexBuffer raw.MTLBuffer) *AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.SetIndexBuffer(indexBuffer)
 	return x
 }
 
+// @brief Index buffer offset. Must be a multiple of the index data type size and must be aligned to both the index data type's alignment and the platform's buffer offset alignment.
+//
 // WithIndexBufferOffset sets the indexBufferOffset property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithIndexBufferOffset(indexBufferOffset uint) *AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.SetIndexBufferOffset(indexBufferOffset)
 	return x
 }
 
+// @brief Index type
+//
 // WithIndexType sets the indexType property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithIndexType(indexType MTLIndexType) *AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.SetIndexType(raw.MTLIndexType(indexType))
 	return x
 }
 
+// @brief Number of triangles
+//
 // WithTriangleCount sets the triangleCount property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithTriangleCount(triangleCount uint) *AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.SetTriangleCount(triangleCount)
 	return x
 }
 
+// @brief Buffer containing packed float4x3 transformation matrix. Transform is applied to the vertex data when building the acceleration structure. Input vertex buffers are not modified. When set to nil, transformation matrix is not applied to vertex data.
+//
 // WithTransformationMatrixBuffer sets the transformationMatrixBuffer property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithTransformationMatrixBuffer(transformationMatrixBuffer raw.MTLBuffer) *AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.SetTransformationMatrixBuffer(transformationMatrixBuffer)
 	return x
 }
 
+// @brief Transformation matrix buffer offset. Must be a multiple of 4 bytes. Defaults to 0.
+//
 // WithTransformationMatrixBufferOffset sets the transformationMatrixBufferOffset property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithTransformationMatrixBufferOffset(transformationMatrixBufferOffset uint) *AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.SetTransformationMatrixBufferOffset(transformationMatrixBufferOffset)
 	return x
 }
 
+// @brief Matrix layout for the transformation matrix in the transformation matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
+//
 // WithTransformationMatrixLayout sets the transformationMatrixLayout property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithTransformationMatrixLayout(transformationMatrixLayout MTLMatrixLayout) *AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.SetTransformationMatrixLayout(raw.MTLMatrixLayout(transformationMatrixLayout))
@@ -110,48 +132,64 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) WithIntersectionFuncti
 	return x
 }
 
+// @brief Whether the geometry is opaque
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithOpaque(opaque bool) *AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetOpaque(opaque)
 	return x
 }
 
+// @brief Whether intersection functions may be invoked more than once per ray/primitive intersection. Defaults to YES.
+//
 // WithAllowDuplicateIntersectionFunctionInvocation sets the allowDuplicateIntersectionFunctionInvocation property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation)
 	return x
 }
 
+// @brief Label
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithLabel(label string) *AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @brief Data buffer containing per-primitive data. May be nil.
+//
 // WithPrimitiveDataBuffer sets the primitiveDataBuffer property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTLBuffer) *AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetPrimitiveDataBuffer(primitiveDataBuffer)
 	return x
 }
 
+// @brief Primitive data buffer offset in bytes. Must be aligned to the platform's buffer offset alignment. Defaults to 0 bytes.
+//
 // WithPrimitiveDataBufferOffset sets the primitiveDataBufferOffset property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataBufferOffset(primitiveDataBufferOffset uint) *AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetPrimitiveDataBufferOffset(primitiveDataBufferOffset)
 	return x
 }
 
+// @brief Stride, in bytes, between per-primitive data in the primitive data buffer. Must be at least primitiveDataElementSize and must be a multiple of 4 bytes. Defaults to 0 bytes. Assumed to be equal to primitiveDataElementSize if zero.
+//
 // WithPrimitiveDataStride sets the primitiveDataStride property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride uint) *AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetPrimitiveDataStride(primitiveDataStride)
 	return x
 }
 
+// @brief Size, in bytes, of the data for each primitive in the primitive data buffer. Must be at most primitiveDataStride and must be a multiple of 4 bytes. Defaults to 0 bytes.
+//
 // WithPrimitiveDataElementSize sets the primitiveDataElementSize property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize uint) *AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetPrimitiveDataElementSize(primitiveDataElementSize)
 	return x
 }
 
+// @brief Vertex buffer containing triangle vertices. Each vertex position must be formatted according to the vertex format. Must not be nil.
+//
 // VertexBuffer calls the underlying VertexBuffer.
 func (x *AccelerationStructureTriangleGeometryDescriptor) VertexBuffer() raw.MTLBuffer {
 	return x.inner.VertexBuffer()
@@ -162,6 +200,8 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) SetVertexBuffer(vertex
 	x.inner.SetVertexBuffer(vertexBuffer)
 }
 
+// @brief Vertex buffer offset. Must be a multiple of the vertex stride and must be aligned to the platform's buffer offset alignment.
+//
 // VertexBufferOffset calls the underlying VertexBufferOffset.
 func (x *AccelerationStructureTriangleGeometryDescriptor) VertexBufferOffset() uint {
 	return x.inner.VertexBufferOffset()
@@ -172,6 +212,8 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) SetVertexBufferOffset(
 	x.inner.SetVertexBufferOffset(vertexBufferOffset)
 }
 
+// @brief Format type of the vertex buffer. Defaults to MTLAttributeFormatFloat3 (packed).
+//
 // VertexFormat calls the underlying VertexFormat.
 func (x *AccelerationStructureTriangleGeometryDescriptor) VertexFormat() MTLAttributeFormat {
 	return MTLAttributeFormat(x.inner.VertexFormat())
@@ -182,6 +224,8 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) SetVertexFormat(vertex
 	x.inner.SetVertexFormat(raw.MTLAttributeFormat(vertexFormat))
 }
 
+// @brief Stride, in bytes, between vertices in the vertex buffer. Must be a multiple of the vertex format data type size and must be aligned to the vertex format data type's alignment. Defaults to 0, which will result in a stride of the vertex format data size.
+//
 // VertexStride calls the underlying VertexStride.
 func (x *AccelerationStructureTriangleGeometryDescriptor) VertexStride() uint {
 	return x.inner.VertexStride()
@@ -192,6 +236,8 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) SetVertexStride(vertex
 	x.inner.SetVertexStride(vertexStride)
 }
 
+// Optional index buffer containing references to vertices in the vertex buffer. May be nil.
+//
 // IndexBuffer calls the underlying IndexBuffer.
 func (x *AccelerationStructureTriangleGeometryDescriptor) IndexBuffer() raw.MTLBuffer {
 	return x.inner.IndexBuffer()
@@ -202,6 +248,8 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) SetIndexBuffer(indexBu
 	x.inner.SetIndexBuffer(indexBuffer)
 }
 
+// @brief Index buffer offset. Must be a multiple of the index data type size and must be aligned to both the index data type's alignment and the platform's buffer offset alignment.
+//
 // IndexBufferOffset calls the underlying IndexBufferOffset.
 func (x *AccelerationStructureTriangleGeometryDescriptor) IndexBufferOffset() uint {
 	return x.inner.IndexBufferOffset()
@@ -212,6 +260,8 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) SetIndexBufferOffset(i
 	x.inner.SetIndexBufferOffset(indexBufferOffset)
 }
 
+// @brief Index type
+//
 // IndexType calls the underlying IndexType.
 func (x *AccelerationStructureTriangleGeometryDescriptor) IndexType() MTLIndexType {
 	return MTLIndexType(x.inner.IndexType())
@@ -222,6 +272,8 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) SetIndexType(indexType
 	x.inner.SetIndexType(raw.MTLIndexType(indexType))
 }
 
+// @brief Number of triangles
+//
 // TriangleCount calls the underlying TriangleCount.
 func (x *AccelerationStructureTriangleGeometryDescriptor) TriangleCount() uint {
 	return x.inner.TriangleCount()
@@ -232,6 +284,8 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) SetTriangleCount(trian
 	x.inner.SetTriangleCount(triangleCount)
 }
 
+// @brief Buffer containing packed float4x3 transformation matrix. Transform is applied to the vertex data when building the acceleration structure. Input vertex buffers are not modified. When set to nil, transformation matrix is not applied to vertex data.
+//
 // TransformationMatrixBuffer calls the underlying TransformationMatrixBuffer.
 func (x *AccelerationStructureTriangleGeometryDescriptor) TransformationMatrixBuffer() raw.MTLBuffer {
 	return x.inner.TransformationMatrixBuffer()
@@ -242,6 +296,8 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) SetTransformationMatri
 	x.inner.SetTransformationMatrixBuffer(transformationMatrixBuffer)
 }
 
+// @brief Transformation matrix buffer offset. Must be a multiple of 4 bytes. Defaults to 0.
+//
 // TransformationMatrixBufferOffset calls the underlying TransformationMatrixBufferOffset.
 func (x *AccelerationStructureTriangleGeometryDescriptor) TransformationMatrixBufferOffset() uint {
 	return x.inner.TransformationMatrixBufferOffset()
@@ -252,6 +308,8 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) SetTransformationMatri
 	x.inner.SetTransformationMatrixBufferOffset(transformationMatrixBufferOffset)
 }
 
+// @brief Matrix layout for the transformation matrix in the transformation matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
+//
 // TransformationMatrixLayout calls the underlying TransformationMatrixLayout.
 func (x *AccelerationStructureTriangleGeometryDescriptor) TransformationMatrixLayout() MTLMatrixLayout {
 	return MTLMatrixLayout(x.inner.TransformationMatrixLayout())

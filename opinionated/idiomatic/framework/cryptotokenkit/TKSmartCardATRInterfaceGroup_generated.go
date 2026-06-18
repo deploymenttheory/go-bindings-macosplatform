@@ -36,21 +36,29 @@ func NewSmartCardATRInterfaceGroup() *SmartCardATRInterfaceGroup {
 	return &SmartCardATRInterfaceGroup{inner: raw.TKSmartCardATRInterfaceGroupFromID(_id)}
 }
 
+// TA interface byte of ATR group, or nil if TA is not present.
+//
 // TA calls the underlying TA.
 func (x *SmartCardATRInterfaceGroup) TA() *foundation.NSNumber {
 	return x.inner.TA()
 }
 
+// TB interface byte of ATR group, or nil if TB is not present.
+//
 // TB calls the underlying TB.
 func (x *SmartCardATRInterfaceGroup) TB() *foundation.NSNumber {
 	return x.inner.TB()
 }
 
+// TC interface byte of ATR group, or nil if TC is not present.
+//
 // TC calls the underlying TC.
 func (x *SmartCardATRInterfaceGroup) TC() *foundation.NSNumber {
 	return x.inner.TC()
 }
 
+// Protocol number for this group.  First group (global) has protocol unassigned, contains nil.
+//
 // Protocol calls the underlying Protocol.
 func (x *SmartCardATRInterfaceGroup) Protocol() *foundation.NSNumber {
 	return x.inner.Protocol()

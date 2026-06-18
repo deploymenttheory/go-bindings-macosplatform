@@ -36,11 +36,15 @@ func NewDeletedObject() *DeletedObject {
 	return &DeletedObject{inner: raw.HKDeletedObjectFromID(_id)}
 }
 
+// @property      UUID @abstract      The unique identifier of the HKObject that was deleted from the HealthKit database.
+//
 // UUID calls the underlying UUID.
 func (x *DeletedObject) UUID() *foundation.NSUUID {
 	return x.inner.UUID()
 }
 
+// @property      metadata @abstract      Extra information describing properties of the receiver. @discussion    Metadata retained from the deleted HKObject. Available keys: HKMetadataKeySyncIdentifier, HKMetadataKeySyncVersion
+//
 // Metadata calls the underlying Metadata.
 func (x *DeletedObject) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.Metadata()

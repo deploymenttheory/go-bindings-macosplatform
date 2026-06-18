@@ -40,66 +40,88 @@ func NewDiscoverAllUserIdentitiesOperation() *DiscoverAllUserIdentitiesOperation
 	return &DiscoverAllUserIdentitiesOperation{inner: raw.CKDiscoverAllUserIdentitiesOperationFromID(_id)}
 }
 
+// The closure to execute for each user identity. The closure doesn't return a value and takes the following parameter: - The user identity that matches an entry in the device's Contacts. The operation executes this closure one or more times for each user identity it discovers. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or add the operation to a queue.
+//
 // WithUserIdentityDiscoveredBlock sets the userIdentityDiscoveredBlock property and returns the receiver for chaining.
 func (x *DiscoverAllUserIdentitiesOperation) WithUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(*raw.CKUserIdentity)) *DiscoverAllUserIdentitiesOperation {
 	x.inner.SetUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock)
 	return x
 }
 
+// The closure to execute when the operation finishes. The closure doesn't return a value and takes the following parameter: - An error if a problem occurs, or `nil` if CloudKit successfully fetches the user identities. This closure executes only once, after all of the individual discovery closures finish. The closure executes serially with respect to the operation's other closures. If you intend to use this closure to process results, update the property's value before you execute the operation or submit it to a queue.
+//
 // WithDiscoverAllUserIdentitiesCompletionBlock sets the discoverAllUserIdentitiesCompletionBlock property and returns the receiver for chaining.
 func (x *DiscoverAllUserIdentitiesOperation) WithDiscoverAllUserIdentitiesCompletionBlock(discoverAllUserIdentitiesCompletionBlock func(unsafe.Pointer)) *DiscoverAllUserIdentitiesOperation {
 	x.inner.SetDiscoverAllUserIdentitiesCompletionBlock(discoverAllUserIdentitiesCompletionBlock)
 	return x
 }
 
+// The operation's configuration.
+//
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *DiscoverAllUserIdentitiesOperation) WithConfiguration(configuration *OperationConfiguration) *DiscoverAllUserIdentitiesOperation {
 	x.inner.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
+// The operation's group.
+//
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *DiscoverAllUserIdentitiesOperation) WithGroup(group *OperationGroup) *DiscoverAllUserIdentitiesOperation {
 	x.inner.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
+// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+//
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *DiscoverAllUserIdentitiesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DiscoverAllUserIdentitiesOperation {
 	x.inner.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
 	return x
 }
 
+// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
+//
 // WithContainer sets the container property and returns the receiver for chaining.
 func (x *DiscoverAllUserIdentitiesOperation) WithContainer(container *Container) *DiscoverAllUserIdentitiesOperation {
 	x.inner.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
+//
 // WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
 func (x *DiscoverAllUserIdentitiesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *DiscoverAllUserIdentitiesOperation {
 	x.inner.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
 	return x
 }
 
+// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+//
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *DiscoverAllUserIdentitiesOperation) WithLongLived(longLived bool) *DiscoverAllUserIdentitiesOperation {
 	x.inner.CKOperation.SetLongLived(longLived)
 	return x
 }
 
+// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
+//
 // WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
 func (x *DiscoverAllUserIdentitiesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DiscoverAllUserIdentitiesOperation {
 	x.inner.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
 	return x
 }
 
+// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
+//
 // WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
 func (x *DiscoverAllUserIdentitiesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DiscoverAllUserIdentitiesOperation {
 	x.inner.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
 	return x
 }
 
+// The closure to execute for each user identity. The closure doesn't return a value and takes the following parameter: - The user identity that matches an entry in the device's Contacts. The operation executes this closure one or more times for each user identity it discovers. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or add the operation to a queue.
+//
 // UserIdentityDiscoveredBlock calls the underlying UserIdentityDiscoveredBlock.
 func (x *DiscoverAllUserIdentitiesOperation) UserIdentityDiscoveredBlock() objc.Block {
 	return x.inner.UserIdentityDiscoveredBlock()
@@ -128,6 +150,8 @@ func (x *DiscoverAllUserIdentitiesOperation) SetUserIdentityDiscoveredBlock(ctx 
 	}
 }
 
+// The closure to execute when the operation finishes. The closure doesn't return a value and takes the following parameter: - An error if a problem occurs, or `nil` if CloudKit successfully fetches the user identities. This closure executes only once, after all of the individual discovery closures finish. The closure executes serially with respect to the operation's other closures. If you intend to use this closure to process results, update the property's value before you execute the operation or submit it to a queue.
+//
 // DiscoverAllUserIdentitiesCompletionBlock calls the underlying DiscoverAllUserIdentitiesCompletionBlock.
 func (x *DiscoverAllUserIdentitiesOperation) DiscoverAllUserIdentitiesCompletionBlock() objc.Block {
 	return x.inner.DiscoverAllUserIdentitiesCompletionBlock()

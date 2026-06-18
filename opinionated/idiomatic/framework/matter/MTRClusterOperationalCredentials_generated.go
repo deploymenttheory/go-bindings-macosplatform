@@ -35,6 +35,8 @@ func MTRClusterOperationalCredentialsFromID(id objc.ID) *MTRClusterOperationalCr
 	return &MTRClusterOperationalCredentials{inner: raw.MTRClusterOperationalCredentialsFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterOperationalCredentialsWithDeviceEndpointIDQueue creates a new [MTRClusterOperationalCredentials].
 func NewMTRClusterOperationalCredentialsWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterOperationalCredentials {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterOperationalCredentials")), objc.RegisterName("alloc"))

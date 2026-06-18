@@ -30,6 +30,8 @@ func AudioSinkNodeFromID(id objc.ID) *AudioSinkNode {
 	return &AudioSinkNode{inner: raw.AVAudioSinkNodeFromID(id)}
 }
 
+// @method initWithReceiverBlock: @abstract Create a node with a receiver block. @param block The block that receives audio data from the input. @discussion The receiver block is called when the input data is available. The block will be called on the realtime thread and it is the client's responsibility to handle it in a thread-safe manner and to not make any blocking calls. The audio format for the input bus will be set from the connection format when connecting to another node. The audio format for the data received by the block will be set to the node's input format.
+//
 // NewAudioSinkNodeWithReceiverBlock creates a new [AudioSinkNode].
 func NewAudioSinkNodeWithReceiverBlock(block func(*coreaudiotypes.AudioTimeStamp, uint32, *coreaudiotypes.AudioBufferList) int) *AudioSinkNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioSinkNode")), objc.RegisterName("alloc"))

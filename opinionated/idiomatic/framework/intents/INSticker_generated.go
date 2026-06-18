@@ -31,6 +31,8 @@ func StickerFromID(id objc.ID) *Sticker {
 	return &Sticker{inner: raw.INStickerFromID(id)}
 }
 
+// Creates an object that represents a sticker a person sends in a message. - Parameters: - type: The type of the sticker. - emoji: The single emoji character that the sticker represents.
+//
 // NewStickerWithTypeEmoji creates a new [Sticker].
 func NewStickerWithTypeEmoji(type_ INStickerType, emoji string) *Sticker {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INSticker")), objc.RegisterName("alloc"))

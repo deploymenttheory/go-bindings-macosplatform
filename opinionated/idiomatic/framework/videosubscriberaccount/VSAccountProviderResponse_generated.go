@@ -36,6 +36,8 @@ func NewVSAccountProviderResponse() *VSAccountProviderResponse {
 	return &VSAccountProviderResponse{inner: raw.VSAccountProviderResponseFromID(_id)}
 }
 
+// Identifies the protocol used in constructing this response.
+//
 // AuthenticationScheme calls the underlying AuthenticationScheme.
 func (x *VSAccountProviderResponse) AuthenticationScheme() string {
 	_r := x.inner.AuthenticationScheme()
@@ -45,6 +47,8 @@ func (x *VSAccountProviderResponse) AuthenticationScheme() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The status code for this response. May be nil if there is no meaningful value for this type of response.
+//
 // Status calls the underlying Status.
 func (x *VSAccountProviderResponse) Status() string {
 	_r := x.inner.Status()
@@ -54,6 +58,8 @@ func (x *VSAccountProviderResponse) Status() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The raw response from the provider. May be nil if the response contained security-sensitive information.
+//
 // Body calls the underlying Body.
 func (x *VSAccountProviderResponse) Body() string {
 	_r := x.inner.Body()

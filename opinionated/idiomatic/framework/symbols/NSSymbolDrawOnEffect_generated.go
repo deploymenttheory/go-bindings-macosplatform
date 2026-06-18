@@ -35,6 +35,8 @@ func NewSymbolDrawOnEffect() *SymbolDrawOnEffect {
 	return &SymbolDrawOnEffect{inner: raw.NSSymbolDrawOnEffectFromID(_id)}
 }
 
+// Returns a copy of the effect requesting an animation that applies separately to each motion group.
+//
 // EffectWithByLayer calls the underlying EffectWithByLayer.
 func (x *SymbolDrawOnEffect) EffectWithByLayer() *SymbolDrawOnEffect {
 	_r := x.inner.EffectWithByLayer()
@@ -44,6 +46,8 @@ func (x *SymbolDrawOnEffect) EffectWithByLayer() *SymbolDrawOnEffect {
 	return &SymbolDrawOnEffect{inner: _r}
 }
 
+// Returns a copy of the effect requesting an animation that applies to all motion groups simultaneously.
+//
 // EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
 func (x *SymbolDrawOnEffect) EffectWithWholeSymbol() *SymbolDrawOnEffect {
 	_r := x.inner.EffectWithWholeSymbol()
@@ -53,6 +57,8 @@ func (x *SymbolDrawOnEffect) EffectWithWholeSymbol() *SymbolDrawOnEffect {
 	return &SymbolDrawOnEffect{inner: _r}
 }
 
+// Returns a copy of the effect requesting an animation that applies separately to each motion group, where only one motion group is active at a time.
+//
 // EffectWithIndividually calls the underlying EffectWithIndividually.
 func (x *SymbolDrawOnEffect) EffectWithIndividually() *SymbolDrawOnEffect {
 	_r := x.inner.EffectWithIndividually()

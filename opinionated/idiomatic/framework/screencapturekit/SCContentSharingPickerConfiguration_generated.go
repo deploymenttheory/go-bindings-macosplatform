@@ -40,12 +40,16 @@ func NewContentSharingPickerConfiguration() *ContentSharingPickerConfiguration {
 	return &ContentSharingPickerConfiguration{inner: raw.SCContentSharingPickerConfigurationFromID[objc.ID](_id)}
 }
 
+// @abstract allowedPickerModes Limits the type of selections available to the user when the picker is presented. Default is 0, no excluded picking modes
+//
 // WithAllowedPickerModes sets the allowedPickerModes property and returns the receiver for chaining.
 func (x *ContentSharingPickerConfiguration) WithAllowedPickerModes(allowedPickerModes SCContentSharingPickerMode) *ContentSharingPickerConfiguration {
 	x.inner.SetAllowedPickerModes(raw.SCContentSharingPickerMode(allowedPickerModes))
 	return x
 }
 
+// @abstract excludedWindowIDs Excludes CGWindowIDs for picking
+//
 // WithExcludedWindowIDs sets the collection, converting the Go slice to an NSArray.
 func (x *ContentSharingPickerConfiguration) WithExcludedWindowIDs(items ...*foundation.NSNumber) *ContentSharingPickerConfiguration {
 	if len(items) == 0 {
@@ -64,6 +68,8 @@ func (x *ContentSharingPickerConfiguration) WithExcludedWindowIDs(items ...*foun
 	return x
 }
 
+// @abstract excludedBundleIDs Excludes bundle IDs for picking
+//
 // WithExcludedBundleIDs sets the collection, converting the Go slice to an NSArray.
 func (x *ContentSharingPickerConfiguration) WithExcludedBundleIDs(items ...*foundation.NSString) *ContentSharingPickerConfiguration {
 	if len(items) == 0 {
@@ -82,12 +88,16 @@ func (x *ContentSharingPickerConfiguration) WithExcludedBundleIDs(items ...*foun
 	return x
 }
 
+// @abstract allowsChangingSelectedContent Controls if the user can make updates to the content filter after the initial selection. Defaults is YES.
+//
 // WithAllowsChangingSelectedContent sets the allowsChangingSelectedContent property and returns the receiver for chaining.
 func (x *ContentSharingPickerConfiguration) WithAllowsChangingSelectedContent(allowsChangingSelectedContent bool) *ContentSharingPickerConfiguration {
 	x.inner.SetAllowsChangingSelectedContent(allowsChangingSelectedContent)
 	return x
 }
 
+// @abstract allowedPickerModes Limits the type of selections available to the user when the picker is presented. Default is 0, no excluded picking modes
+//
 // AllowedPickerModes calls the underlying AllowedPickerModes.
 func (x *ContentSharingPickerConfiguration) AllowedPickerModes() SCContentSharingPickerMode {
 	return SCContentSharingPickerMode(x.inner.AllowedPickerModes())
@@ -98,6 +108,8 @@ func (x *ContentSharingPickerConfiguration) SetAllowedPickerModes(allowedPickerM
 	x.inner.SetAllowedPickerModes(raw.SCContentSharingPickerMode(allowedPickerModes))
 }
 
+// @abstract excludedWindowIDs Excludes CGWindowIDs for picking
+//
 // ExcludedWindowIDs returns the collection as a Go slice.
 func (x *ContentSharingPickerConfiguration) ExcludedWindowIDs() []*foundation.NSNumber {
 	arr := x.inner.ExcludedWindowIDs()
@@ -114,6 +126,8 @@ func (x *ContentSharingPickerConfiguration) SetExcludedWindowIDs(excludedWindowI
 	x.inner.SetExcludedWindowIDs(excludedWindowIDs)
 }
 
+// @abstract excludedBundleIDs Excludes bundle IDs for picking
+//
 // ExcludedBundleIDs returns the collection as a Go slice.
 func (x *ContentSharingPickerConfiguration) ExcludedBundleIDs() []string {
 	arr := x.inner.ExcludedBundleIDs()
@@ -130,6 +144,8 @@ func (x *ContentSharingPickerConfiguration) SetExcludedBundleIDs(excludedBundleI
 	x.inner.SetExcludedBundleIDs(excludedBundleIDs)
 }
 
+// @abstract allowsChangingSelectedContent Controls if the user can make updates to the content filter after the initial selection. Defaults is YES.
+//
 // AllowsChangingSelectedContent calls the underlying AllowsChangingSelectedContent.
 func (x *ContentSharingPickerConfiguration) AllowsChangingSelectedContent() bool {
 	return x.inner.AllowsChangingSelectedContent()

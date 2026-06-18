@@ -39,51 +39,71 @@ func NewValue() *Value {
 	return &Value{inner: raw.JSValueFromID(_id)}
 }
 
+// @methodgroup Converting to Objective-C Types @discussion When converting between JavaScript values and Objective-C objects a copy is performed. Values of types listed below are copied to the corresponding types on conversion in each direction. For NSDictionaries, entries in the dictionary that are keyed by strings are copied onto a JavaScript object. For dictionaries and arrays, conversion is recursive, with the same object conversion being applied to all entries in the collection. <pre> @textblock Objective-C type  |   JavaScript type --------------------+--------------------- nil         |     undefined NSNull       |        null NSString      |       string NSNumber      |   number, boolean NSDictionary    |   Object object NSArray       |    Array object NSDate       |     Date object NSBlock (1)   |   Function object (1) id (2)     |   Wrapper object (2) Class (3)    | Constructor object (3) @/textblock </pre> (1) Instances of NSBlock with supported arguments types will be presented to JavaScript as a callable Function object. For more information on supported argument types see JSExport.h. If a JavaScript Function originating from an Objective-C block is converted back to an Objective-C object the block will be returned. All other JavaScript functions will be converted in the same manner as a JavaScript object of type Object. (2) For Objective-C instances that do not derive from the set of types listed above, a wrapper object to provide a retaining handle to the Objective-C instance from JavaScript. For more information on these wrapper objects, see JSExport.h. When a JavaScript wrapper object is converted back to Objective-C the Objective-C instance being retained by the wrapper is returned. (3) For Objective-C Class objects a constructor object containing exported class methods will be returned. See JSExport.h for more information on constructor objects. For all methods taking arguments of type id, arguments will be converted into a JavaScript value according to the above conversion. @method @abstract Convert this JSValue to an Objective-C object. @discussion The JSValue is converted to an Objective-C object according to the conversion rules specified above. @result The Objective-C representation of this JSValue.
+//
 // ToObject calls the underlying ToObject.
 func (x *Value) ToObject() objc.ID {
 	return x.inner.ToObject()
 }
 
+// @method @abstract Convert a JSValue to an Objective-C object of a specific class. @discussion The JSValue is converted to an Objective-C object of the specified Class. If the result is not of the specified Class then <code>nil</code> will be returned. @result An Objective-C object of the specified Class or <code>nil</code>.
+//
 // ToObjectOfClass calls the underlying ToObjectOfClass.
 func (x *Value) ToObjectOfClass(expectedClass objc.Class) objc.ID {
 	return x.inner.ToObjectOfClass(expectedClass)
 }
 
+// @method @abstract Convert a JSValue to a boolean. @discussion The JSValue is converted to a boolean according to the rules specified by the JavaScript language. @result The boolean result of the conversion.
+//
 // ToBool calls the underlying ToBool.
 func (x *Value) ToBool() bool {
 	return x.inner.ToBool()
 }
 
+// @method @abstract Convert a JSValue to a double. @result The double result of the conversion. @discussion Convert the JSValue to a number according to the rules specified by the JavaScript language. Unless the JSValue is a BigInt then this is equivalent to <code>Number(value)</code> in JavaScript.
+//
 // ToDouble calls the underlying ToDouble.
 func (x *Value) ToDouble() float64 {
 	return x.inner.ToDouble()
 }
 
+// @method @abstract Convert a JSValue to an <code>int32_t</code>. @discussion The JSValue is converted to an integer according to the rules specified by the JavaScript language. If the JSValue is a BigInt, then the value is truncated to an <code>int32_t</code>. @result The <code>int32_t</code> result of the conversion.
+//
 // ToInt32 calls the underlying ToInt32.
 func (x *Value) ToInt32() int32 {
 	return x.inner.ToInt32()
 }
 
+// @method @abstract Convert a JSValue to a <code>uint32_t</code>. @discussion The JSValue is converted to an integer according to the rules specified by the JavaScript language. If the JSValue is a BigInt, then the value is truncated to a <code>uint32_t</code>. @result The <code>uint32_t</code> result of the conversion.
+//
 // ToUInt32 calls the underlying ToUInt32.
 func (x *Value) ToUInt32() uint32 {
 	return x.inner.ToUInt32()
 }
 
+// @method @abstract Convert a JSValue to a <code>int64_t</code>. @discussion The JSValue is converted to an integer according to the rules specified by the JavaScript language. If the value is a BigInt, then the value is truncated to an <code>int64_t</code>.
+//
 // ToInt64 calls the underlying ToInt64.
 func (x *Value) ToInt64() int64 {
 	return x.inner.ToInt64()
 }
 
+// @method @abstract Convert a JSValue to a <code>uint64_t</code>. @discussion The JSValue is converted to an integer according to the rules specified by the JavaScript language. If the value is a BigInt, then the value is truncated to a <code>uint64_t</code>.
+//
 // ToUInt64 calls the underlying ToUInt64.
 func (x *Value) ToUInt64() uint64 {
 	return x.inner.ToUInt64()
 }
 
+// @method @abstract Convert a JSValue to a NSNumber. @discussion If the JSValue represents a boolean, a NSNumber value of YES or NO will be returned. For all other types, the result is equivalent to <code>Number(value)</code> in JavaScript. @result The NSNumber result of the conversion.
+//
 // ToNumber calls the underlying ToNumber.
 func (x *Value) ToNumber() *foundation.NSNumber {
 	return x.inner.ToNumber()
 }
 
+// @method @abstract Convert a JSValue to a NSString. @discussion The JSValue is converted to a string according to the rules specified by the JavaScript language. @result The NSString containing the result of the conversion.
+//
 // ToString calls the underlying ToString.
 func (x *Value) ToString() string {
 	_r := x.inner.ToString()
@@ -93,56 +113,78 @@ func (x *Value) ToString() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @method @abstract Convert a JSValue to a NSDate. @discussion The value is converted to a number representing a time interval since 1970 which is then used to create a new NSDate instance. @result The NSDate created using the converted time interval.
+//
 // ToDate calls the underlying ToDate.
 func (x *Value) ToDate() *foundation.NSDate {
 	return x.inner.ToDate()
 }
 
+// @method @abstract Convert a JSValue to a NSArray. @discussion If the value is <code>null</code> or <code>undefined</code> then <code>nil</code> is returned. If the value is not an object then a JavaScript TypeError will be thrown. The property <code>length</code> is read from the object, converted to an unsigned integer, and an NSArray of this size is allocated. Properties corresponding to indices within the array bounds will be copied to the array, with JSValues converted to equivalent Objective-C objects as specified. @result The NSArray containing the recursively converted contents of the converted JavaScript array.
+//
 // ToArray calls the underlying ToArray.
 func (x *Value) ToArray() *foundation.NSArray[objc.ID] {
 	return x.inner.ToArray()
 }
 
+// @method @abstract Convert a JSValue to a NSDictionary. @discussion If the value is <code>null</code> or <code>undefined</code> then <code>nil</code> is returned. If the value is not an object then a JavaScript TypeError will be thrown. All enumerable properties of the object are copied to the dictionary, with JSValues converted to equivalent Objective-C objects as specified. @result The NSDictionary containing the recursively converted contents of the converted JavaScript object.
+//
 // ToDictionary calls the underlying ToDictionary.
 func (x *Value) ToDictionary() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.ToDictionary()
 }
 
+// @method @abstract Check if a JSValue is an instance of another object. @discussion This method has the same function as the JavaScript operator <code>instanceof</code>. If an object other than a JSValue is passed, it will first be converted according to the aforementioned rules.
+//
 // IsInstanceOf calls the underlying IsInstanceOf.
 func (x *Value) IsInstanceOf(value objc.ID) bool {
 	return x.inner.IsInstanceOf(value)
 }
 
+// @method @abstract Compare two JSValues using JavaScript's <code>===</code> operator.
+//
 // IsEqualToObject calls the underlying IsEqualToObject.
 func (x *Value) IsEqualToObject(value objc.ID) bool {
 	return x.inner.IsEqualToObject(value)
 }
 
+// @method @abstract Compare two JSValues using JavaScript's <code>==</code> operator.
+//
 // IsEqualWithTypeCoercionToObject calls the underlying IsEqualWithTypeCoercionToObject.
 func (x *Value) IsEqualWithTypeCoercionToObject(value objc.ID) bool {
 	return x.inner.IsEqualWithTypeCoercionToObject(value)
 }
 
+// @method @abstract Compare two JSValues. @other The JSValue to compare with. @result A value of JSRelationCondition, a kJSRelationConditionUndefined is returned if an exception is thrown. @discussion The result is computed by comparing the results of JavaScript's <code>==</code>, <code><</code>, and <code>></code> operators. If either <code>self</code> or <code>other</code> is (or would coerce to) <code>NaN</code> in JavaScript, then the result is kJSRelationConditionUndefined.
+//
 // CompareJSValue calls the underlying CompareJSValue.
 func (x *Value) CompareJSValue(other *raw.JSValue) JSRelationCondition {
 	return JSRelationCondition(x.inner.CompareJSValue(other))
 }
 
+// @method @abstract Compare a JSValue with a <code>int64_t</code>. @other The <code>int64_t</code> to compare with. @result A value of JSRelationCondition, a kJSRelationConditionUndefined is returned if an exception is thrown. @discussion The JSValue is converted to an integer according to the rules specified by the JavaScript language then compared with <code>other</code>.
+//
 // CompareInt64 calls the underlying CompareInt64.
 func (x *Value) CompareInt64(other int64) JSRelationCondition {
 	return JSRelationCondition(x.inner.CompareInt64(other))
 }
 
+// @method @abstract Compare a JSValue with a <code>uint64_t</code>. @other The <code>uint64_t</code> to compare with. @result A value of JSRelationCondition, a kJSRelationConditionUndefined is returned if an exception is thrown. @discussion The JSValue is converted to an integer according to the rules specified by the JavaScript language then compared with <code>other</code>.
+//
 // CompareUInt64 calls the underlying CompareUInt64.
 func (x *Value) CompareUInt64(other uint64) JSRelationCondition {
 	return JSRelationCondition(x.inner.CompareUInt64(other))
 }
 
+// @method @abstract Compare a JSValue with a double. @other The double to compare with. @result A value of JSRelationCondition, a kJSRelationConditionUndefined is returned if an exception is thrown. @discussion The JSValue is converted to a double according to the rules specified by the JavaScript language then compared with <code>other</code>.
+//
 // CompareDouble calls the underlying CompareDouble.
 func (x *Value) CompareDouble(other float64) JSRelationCondition {
 	return JSRelationCondition(x.inner.CompareDouble(other))
 }
 
+// @methodgroup Calling Functions and Constructors @method @abstract Invoke a JSValue as a function. @discussion In JavaScript, if a function doesn't explicitly return a value then it implicitly returns the JavaScript value <code>undefined</code>. @param arguments The arguments to pass to the function. @result The return value of the function call.
+//
 // CallWithArguments calls the underlying CallWithArguments.
 func (x *Value) CallWithArguments(arguments *foundation.NSArray[objc.ID]) *Value {
 	_r := x.inner.CallWithArguments(arguments)
@@ -152,6 +194,8 @@ func (x *Value) CallWithArguments(arguments *foundation.NSArray[objc.ID]) *Value
 	return &Value{inner: _r}
 }
 
+// @method @abstract Invoke a JSValue as a constructor. @discussion This is equivalent to using the <code>new</code> syntax in JavaScript. @param arguments The arguments to pass to the constructor. @result The return value of the constructor call.
+//
 // ConstructWithArguments calls the underlying ConstructWithArguments.
 func (x *Value) ConstructWithArguments(arguments *foundation.NSArray[objc.ID]) *Value {
 	_r := x.inner.ConstructWithArguments(arguments)
@@ -161,6 +205,8 @@ func (x *Value) ConstructWithArguments(arguments *foundation.NSArray[objc.ID]) *
 	return &Value{inner: _r}
 }
 
+// @method @abstract Invoke a method on a JSValue. @discussion Accesses the property named <code>method</code> from this value and calls the resulting value as a function, passing this JSValue as the <code>this</code> value along with the specified arguments. @param method The name of the method to be invoked. @param arguments The arguments to pass to the method. @result The return value of the method call.
+//
 // InvokeMethodWithArguments calls the underlying InvokeMethodWithArguments.
 func (x *Value) InvokeMethodWithArguments(method string, arguments *foundation.NSArray[objc.ID]) *Value {
 	_r := x.inner.InvokeMethodWithArguments(foundation.NSStringStringWithUTF8String(method), arguments)
@@ -170,6 +216,8 @@ func (x *Value) InvokeMethodWithArguments(method string, arguments *foundation.N
 	return &Value{inner: _r}
 }
 
+// @property @abstract The JSContext that this value originates from.
+//
 // Context calls the underlying Context.
 func (x *Value) Context() *Context {
 	_r := x.inner.Context()
@@ -179,76 +227,106 @@ func (x *Value) Context() *Context {
 	return &Context{inner: _r}
 }
 
+// @property @abstract Check if a JSValue corresponds to the JavaScript value <code>undefined</code>.
+//
 // IsUndefined calls the underlying IsUndefined.
 func (x *Value) IsUndefined() bool {
 	return x.inner.IsUndefined()
 }
 
+// @property @abstract Check if a JSValue corresponds to the JavaScript value <code>null</code>.
+//
 // IsNull calls the underlying IsNull.
 func (x *Value) IsNull() bool {
 	return x.inner.IsNull()
 }
 
+// @property @abstract Check if a JSValue is a boolean.
+//
 // IsBoolean calls the underlying IsBoolean.
 func (x *Value) IsBoolean() bool {
 	return x.inner.IsBoolean()
 }
 
+// @property @abstract Check if a JSValue is a number. @discussion In JavaScript, there is no differentiation between types of numbers. Semantically all numbers behave like doubles except in special cases like bit operations.
+//
 // IsNumber calls the underlying IsNumber.
 func (x *Value) IsNumber() bool {
 	return x.inner.IsNumber()
 }
 
+// @property @abstract Check if a JSValue is a string.
+//
 // IsString calls the underlying IsString.
 func (x *Value) IsString() bool {
 	return x.inner.IsString()
 }
 
+// @property @abstract Check if a JSValue is an object.
+//
 // IsObject calls the underlying IsObject.
 func (x *Value) IsObject() bool {
 	return x.inner.IsObject()
 }
 
+// @property @abstract Check if a JSValue is an array.
+//
 // IsArray calls the underlying IsArray.
 func (x *Value) IsArray() bool {
 	return x.inner.IsArray()
 }
 
+// @property @abstract Check if a JSValue is a date.
+//
 // IsDate calls the underlying IsDate.
 func (x *Value) IsDate() bool {
 	return x.inner.IsDate()
 }
 
+// @property @abstract Check if a JSValue is a symbol.
+//
 // IsSymbol calls the underlying IsSymbol.
 func (x *Value) IsSymbol() bool {
 	return x.inner.IsSymbol()
 }
 
+// @property @abstract Check if a JSValue is a BigInt.
+//
 // IsBigInt calls the underlying IsBigInt.
 func (x *Value) IsBigInt() bool {
 	return x.inner.IsBigInt()
 }
 
+// @method @abstract Convert a JSValue to a CGPoint. @discussion Reads the properties named <code>x</code> and <code>y</code> from this JSValue, and converts the results to double. @result The new CGPoint.
+//
 // ToPoint calls the underlying ToPoint.
 func (x *Value) ToPoint() corefoundation.CGPoint {
 	return x.inner.ToPoint()
 }
 
+// @method @abstract Convert a JSValue to an NSRange. @discussion Reads the properties named <code>location</code> and <code>length</code> from this JSValue and converts the results to double. @result The new NSRange.
+//
 // ToRange calls the underlying ToRange.
 func (x *Value) ToRange() foundation.NSRange {
 	return x.inner.ToRange()
 }
 
+// @method @abstract Convert a JSValue to a CGRect. @discussion Reads the properties named <code>x</code>, <code>y</code>, <code>width</code>, and <code>height</code> from this JSValue and converts the results to double. @result The new CGRect.
+//
 // ToRect calls the underlying ToRect.
 func (x *Value) ToRect() corefoundation.CGRect {
 	return x.inner.ToRect()
 }
 
+// @method @abstract Convert a JSValue to a CGSize. @discussion Reads the properties named <code>width</code> and <code>height</code> from this JSValue and converts the results to double. @result The new CGSize.
+//
 // ToSize calls the underlying ToSize.
 func (x *Value) ToSize() corefoundation.CGSize {
 	return x.inner.ToSize()
 }
 
+// @method @abstract Access a property of a JSValue. @result The JSValue for the requested property or the JSValue <code>undefined</code> if the property does not exist. @discussion Corresponds to the JavaScript operation <code>object[property]</code>. Starting with macOS 10.15 and iOS 13, 'property' can be any 'id' and will be converted to a JSValue using the conversion rules of <code>valueWithObject:inContext:</code>. Prior to macOS 10.15 and iOS 13, 'property' was expected to be an NSString *.
+//
 // ValueForProperty calls the underlying ValueForProperty.
 func (x *Value) ValueForProperty(property objc.ID) *Value {
 	_r := x.inner.ValueForProperty(property)
@@ -258,26 +336,36 @@ func (x *Value) ValueForProperty(property objc.ID) *Value {
 	return &Value{inner: _r}
 }
 
+// @method @abstract Set a property on a JSValue. @discussion Corresponds to the JavaScript operation <code>object[property] = value</code>. Starting with macOS 10.15 and iOS 13, 'property' can be any 'id' and will be converted to a JSValue using the conversion rules of <code>valueWithObject:inContext:</code>. Prior to macOS 10.15 and iOS 13, 'property' was expected to be an NSString *.
+//
 // SetValueForProperty calls the underlying SetValueForProperty.
 func (x *Value) SetValueForProperty(value objc.ID, property objc.ID) {
 	x.inner.SetValueForProperty(value, property)
 }
 
+// @method @abstract Delete a property from a JSValue. @result YES if deletion is successful, NO otherwise. @discussion Corresponds to the JavaScript operation <code>delete object[property]</code>. Starting with macOS 10.15 and iOS 13, 'property' can be any 'id' and will be converted to a JSValue using the conversion rules of <code>valueWithObject:inContext:</code>. Prior to macOS 10.15 and iOS 13, 'property' was expected to be an NSString *.
+//
 // DeleteProperty calls the underlying DeleteProperty.
 func (x *Value) DeleteProperty(property objc.ID) bool {
 	return x.inner.DeleteProperty(property)
 }
 
+// @method @abstract Check if a JSValue has a property. @discussion This method has the same function as the JavaScript operator <code>in</code>. @result Returns YES if property is present on the value. @discussion Corresponds to the JavaScript operation <code>property in object</code>. Starting with macOS 10.15 and iOS 13, 'property' can be any 'id' and will be converted to a JSValue using the conversion rules of <code>valueWithObject:inContext:</code>. Prior to macOS 10.15 and iOS 13, 'property' was expected to be an NSString *.
+//
 // HasProperty calls the underlying HasProperty.
 func (x *Value) HasProperty(property objc.ID) bool {
 	return x.inner.HasProperty(property)
 }
 
+// @method @abstract Define properties with custom descriptors on JSValues. @discussion This method may be used to create a data or accessor property on an object. This method operates in accordance with the Object.defineProperty method in the JavaScript language. Starting with macOS 10.15 and iOS 13, 'property' can be any 'id' and will be converted to a JSValue using the conversion rules of <code>valueWithObject:inContext:</code>. Prior to macOS 10.15 and iOS 13, 'property' was expected to be an NSString *.
+//
 // DefinePropertyDescriptor calls the underlying DefinePropertyDescriptor.
 func (x *Value) DefinePropertyDescriptor(property objc.ID, descriptor objc.ID) {
 	x.inner.DefinePropertyDescriptor(property, descriptor)
 }
 
+// @method @abstract Access an indexed (numerical) property on a JSValue. @result The JSValue for the property at the specified index. Returns the JavaScript value <code>undefined</code> if no property exists at that index.
+//
 // ValueAtIndex calls the underlying ValueAtIndex.
 func (x *Value) ValueAtIndex(index uint) *Value {
 	_r := x.inner.ValueAtIndex(index)
@@ -287,6 +375,8 @@ func (x *Value) ValueAtIndex(index uint) *Value {
 	return &Value{inner: _r}
 }
 
+// @method @abstract Set an indexed (numerical) property on a JSValue. @discussion For JSValues that are JavaScript arrays, indices greater than UINT_MAX - 1 will not affect the length of the array.
+//
 // SetValueAtIndex calls the underlying SetValueAtIndex.
 func (x *Value) SetValueAtIndex(value objc.ID, index uint) {
 	x.inner.SetValueAtIndex(value, index)

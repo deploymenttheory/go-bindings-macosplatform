@@ -33,6 +33,8 @@ func MTRClusterWaterHeaterModeFromID(id objc.ID) *MTRClusterWaterHeaterMode {
 	return &MTRClusterWaterHeaterMode{inner: raw.MTRClusterWaterHeaterModeFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterWaterHeaterModeWithDeviceEndpointIDQueue creates a new [MTRClusterWaterHeaterMode].
 func NewMTRClusterWaterHeaterModeWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterWaterHeaterMode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterWaterHeaterMode")), objc.RegisterName("alloc"))

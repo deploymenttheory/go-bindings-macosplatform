@@ -30,6 +30,8 @@ func FrameProcessorOpticalFlowFromID(id objc.ID) *FrameProcessorOpticalFlow {
 	return &FrameProcessorOpticalFlow{inner: raw.VTFrameProcessorOpticalFlowFromID(id)}
 }
 
+// Creates a new instance of forward and backward optical flow with pixel buffers. Create a new instance with forward and backward optical flow “CVPixelBuffer“s. Instances retain the pixel buffers you provide to this method. Returns `nil` if either `CVPixelBuffer` is NULL or the `CVPixelBuffer`s are not `IOSurface` backed. - Parameters: - forwardFlow: `CVPixelBuffer` that contains forward optical flow; it must not be `nil` and must be `IOSurface` backed. - backwardFlow: `CVPixelBuffer` that contains backward optical flow; it must not be `nil` and must be `IOSurface` backed.
+//
 // NewFrameProcessorOpticalFlowWithForwardFlowBackwardFlow creates a new [FrameProcessorOpticalFlow].
 func NewFrameProcessorOpticalFlowWithForwardFlowBackwardFlow(forwardFlow unsafe.Pointer, backwardFlow unsafe.Pointer) *FrameProcessorOpticalFlow {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTFrameProcessorOpticalFlow")), objc.RegisterName("alloc"))
@@ -37,11 +39,15 @@ func NewFrameProcessorOpticalFlowWithForwardFlowBackwardFlow(forwardFlow unsafe.
 	return &FrameProcessorOpticalFlow{inner: raw.VTFrameProcessorOpticalFlowFromID(_id)}
 }
 
+// Returns the forward optical flow `CVPixelBuffer` that you provided when you initialized the object.
+//
 // ForwardFlow calls the underlying ForwardFlow.
 func (x *FrameProcessorOpticalFlow) ForwardFlow() unsafe.Pointer {
 	return x.inner.ForwardFlow()
 }
 
+// Returns the backward optical flow `CVPixelBuffer` that you provided when you initialized the object.
+//
 // BackwardFlow calls the underlying BackwardFlow.
 func (x *FrameProcessorOpticalFlow) BackwardFlow() unsafe.Pointer {
 	return x.inner.BackwardFlow()

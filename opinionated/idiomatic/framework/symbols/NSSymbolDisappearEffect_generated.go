@@ -35,6 +35,8 @@ func NewSymbolDisappearEffect() *SymbolDisappearEffect {
 	return &SymbolDisappearEffect{inner: raw.NSSymbolDisappearEffectFromID(_id)}
 }
 
+// Returns a copy of the effect that animates incrementally, by layer.
+//
 // EffectWithByLayer calls the underlying EffectWithByLayer.
 func (x *SymbolDisappearEffect) EffectWithByLayer() *SymbolDisappearEffect {
 	_r := x.inner.EffectWithByLayer()
@@ -44,6 +46,8 @@ func (x *SymbolDisappearEffect) EffectWithByLayer() *SymbolDisappearEffect {
 	return &SymbolDisappearEffect{inner: _r}
 }
 
+// Returns a copy of the effect that animates all layers of the symbol simultaneously.
+//
 // EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
 func (x *SymbolDisappearEffect) EffectWithWholeSymbol() *SymbolDisappearEffect {
 	_r := x.inner.EffectWithWholeSymbol()

@@ -37,6 +37,8 @@ func NewModuleIdentity() *ModuleIdentity {
 	return &ModuleIdentity{inner: raw.FSModuleIdentityFromID(_id)}
 }
 
+// The module's bundle identifier.
+//
 // BundleIdentifier calls the underlying BundleIdentifier.
 func (x *ModuleIdentity) BundleIdentifier() string {
 	_r := x.inner.BundleIdentifier()
@@ -46,6 +48,8 @@ func (x *ModuleIdentity) BundleIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The module's URL.
+//
 // Url calls the underlying Url.
 func (x *ModuleIdentity) Url() *foundation.NSURL {
 	return x.inner.Url()

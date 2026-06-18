@@ -32,6 +32,8 @@ func MatrixRandomPhiloxFromID(id objc.ID) *MatrixRandomPhilox {
 	return &MatrixRandomPhilox{inner: raw.MPSMatrixRandomPhiloxFromID(id)}
 }
 
+// @abstract   initialize a MPSMatrixRandomPhilox filter to generate 32-bit unsigned integer values with an initial seed of 0. @param      device          The device the filter will run on
+//
 // NewMatrixRandomPhiloxWithDevice creates a new [MatrixRandomPhilox].
 func NewMatrixRandomPhiloxWithDevice(device metal.MTLDevice) *MatrixRandomPhilox {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixRandomPhilox")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewMatrixRandomPhiloxWithDevice(device metal.MTLDevice) *MatrixRandomPhilox
 	return &MatrixRandomPhilox{inner: raw.MPSMatrixRandomPhiloxFromID(_id)}
 }
 
+// @abstract   initialize a MPSMatrixRandomPhilox filter @param      device                  The device the filter will run on @param      destinationDataType     The data type of the result. @param      seed                    The seed to initialize the random number generators with. @param      distributionDescriptor  A descriptor containing information about the distribution.
+//
 // NewMatrixRandomPhiloxWithDeviceDestinationDataTypeSeedDistributionDescriptor creates a new [MatrixRandomPhilox].
 func NewMatrixRandomPhiloxWithDeviceDestinationDataTypeSeedDistributionDescriptor(device metal.MTLDevice, destinationDataType mpscore.MPSDataType, seed uint, distributionDescriptor *raw.MPSMatrixRandomDistributionDescriptor) *MatrixRandomPhilox {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixRandomPhilox")), objc.RegisterName("alloc"))
@@ -46,6 +50,8 @@ func NewMatrixRandomPhiloxWithDeviceDestinationDataTypeSeedDistributionDescripto
 	return &MatrixRandomPhilox{inner: raw.MPSMatrixRandomPhiloxFromID(_id)}
 }
 
+// @abstract   initialize a MPSMatrixRandomPhilox filter using a default distribution. @param      device                  The device the filter will run on @param      destinationDataType     The data type of the result. @param      seed                    The seed to initialize the random number generators with.
+//
 // NewMatrixRandomPhiloxWithDeviceDestinationDataTypeSeed creates a new [MatrixRandomPhilox].
 func NewMatrixRandomPhiloxWithDeviceDestinationDataTypeSeed(device metal.MTLDevice, destinationDataType mpscore.MPSDataType, seed uint) *MatrixRandomPhilox {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixRandomPhilox")), objc.RegisterName("alloc"))
@@ -60,12 +66,16 @@ func NewMatrixRandomPhiloxWithCoderDevice(aDecoder *foundation.NSCoder, device m
 	return &MatrixRandomPhilox{inner: raw.MPSMatrixRandomPhiloxFromID(_id)}
 }
 
+// @property   batchStart @discussion The starting index in the destination batch.
+//
 // WithBatchStart sets the batchStart property and returns the receiver for chaining.
 func (x *MatrixRandomPhilox) WithBatchStart(batchStart uint) *MatrixRandomPhilox {
 	x.inner.MPSMatrixRandom.SetBatchStart(batchStart)
 	return x
 }
 
+// @property   batchSize @discussion The size of the batch to process.
+//
 // WithBatchSize sets the batchSize property and returns the receiver for chaining.
 func (x *MatrixRandomPhilox) WithBatchSize(batchSize uint) *MatrixRandomPhilox {
 	x.inner.MPSMatrixRandom.SetBatchSize(batchSize)

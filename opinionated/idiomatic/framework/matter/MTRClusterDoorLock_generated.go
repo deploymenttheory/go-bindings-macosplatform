@@ -33,6 +33,8 @@ func MTRClusterDoorLockFromID(id objc.ID) *MTRClusterDoorLock {
 	return &MTRClusterDoorLock{inner: raw.MTRClusterDoorLockFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterDoorLockWithDeviceEndpointIDQueue creates a new [MTRClusterDoorLock].
 func NewMTRClusterDoorLockWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterDoorLock {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterDoorLock")), objc.RegisterName("alloc"))

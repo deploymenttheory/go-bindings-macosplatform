@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that describes start options for macOS VMs.
+//
 // MacOSVirtualMachineStartOptions wraps [raw.VZMacOSVirtualMachineStartOptions] with a fluent Go API.
 type MacOSVirtualMachineStartOptions struct {
 	inner *raw.VZMacOSVirtualMachineStartOptions
@@ -37,6 +39,8 @@ func NewMacOSVirtualMachineStartOptions() *MacOSVirtualMachineStartOptions {
 	return &MacOSVirtualMachineStartOptions{inner: raw.VZMacOSVirtualMachineStartOptionsFromID(_id)}
 }
 
+// A Boolean value that indicates whether the macOS guest should start in recovery mode.
+//
 // WithStartUpFromMacOSRecovery sets the startUpFromMacOSRecovery property and returns the receiver for chaining.
 func (x *MacOSVirtualMachineStartOptions) WithStartUpFromMacOSRecovery(startUpFromMacOSRecovery bool) *MacOSVirtualMachineStartOptions {
 	x.inner.SetStartUpFromMacOSRecovery(startUpFromMacOSRecovery)

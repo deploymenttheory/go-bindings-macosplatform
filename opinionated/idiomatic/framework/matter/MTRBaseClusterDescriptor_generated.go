@@ -33,6 +33,8 @@ func MTRBaseClusterDescriptorFromID(id objc.ID) *MTRBaseClusterDescriptor {
 	return &MTRBaseClusterDescriptor{inner: raw.MTRBaseClusterDescriptorFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterDescriptorWithDeviceEndpointIDQueue creates a new [MTRBaseClusterDescriptor].
 func NewMTRBaseClusterDescriptorWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterDescriptor")), objc.RegisterName("alloc"))

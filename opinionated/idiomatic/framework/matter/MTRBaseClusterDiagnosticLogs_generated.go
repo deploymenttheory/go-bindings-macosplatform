@@ -33,6 +33,8 @@ func MTRBaseClusterDiagnosticLogsFromID(id objc.ID) *MTRBaseClusterDiagnosticLog
 	return &MTRBaseClusterDiagnosticLogs{inner: raw.MTRBaseClusterDiagnosticLogsFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterDiagnosticLogsWithDeviceEndpointIDQueue creates a new [MTRBaseClusterDiagnosticLogs].
 func NewMTRBaseClusterDiagnosticLogsWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterDiagnosticLogs {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterDiagnosticLogs")), objc.RegisterName("alloc"))
@@ -47,6 +49,8 @@ func NewMTRBaseClusterDiagnosticLogsWithDeviceEndpointQueue(device *raw.MTRBaseD
 	return &MTRBaseClusterDiagnosticLogs{inner: raw.MTRBaseClusterDiagnosticLogsFromID(_id)}
 }
 
+// Command RetrieveLogsRequest Reception of this command starts the process of retrieving diagnostic logs from a Node.
+//
 // RetrieveLogsRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterDiagnosticLogs) RetrieveLogsRequestWithParamsCompletion(ctx context.Context, params *raw.MTRDiagnosticLogsClusterRetrieveLogsRequestParams) (*MTRDiagnosticLogsClusterRetrieveLogsResponseParams, error) {
 	type _result struct {

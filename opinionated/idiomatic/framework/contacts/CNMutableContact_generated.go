@@ -265,18 +265,24 @@ func (x *MutableContact) WithInstantMessageAddresses(items ...*raw.CNLabeledValu
 	return x
 }
 
+// @abstract The Gregorian birthday. @description Only uses day, month and year components. Needs to have at least a day and a month.
+//
 // WithBirthday sets the birthday property and returns the receiver for chaining.
 func (x *MutableContact) WithBirthday(birthday *foundation.NSDateComponents) *MutableContact {
 	x.inner.SetBirthday(birthday)
 	return x
 }
 
+// @abstract The alternate birthday (Lunisolar). @description Only uses day, month, year and calendar components. Needs to have at least a day and a month. Calendar must be Chinese, Hebrew or Islamic.
+//
 // WithNonGregorianBirthday sets the nonGregorianBirthday property and returns the receiver for chaining.
 func (x *MutableContact) WithNonGregorianBirthday(nonGregorianBirthday *foundation.NSDateComponents) *MutableContact {
 	x.inner.SetNonGregorianBirthday(nonGregorianBirthday)
 	return x
 }
 
+// @abstract Other Gregorian dates (anniversaries, etc). @description Only uses day, month and year components. Needs to have at least a day and a month.
+//
 // WithDates sets the collection, converting the Go slice to an NSArray.
 func (x *MutableContact) WithDates(items ...*raw.CNLabeledValue[*foundation.NSDateComponents]) *MutableContact {
 	if len(items) == 0 {

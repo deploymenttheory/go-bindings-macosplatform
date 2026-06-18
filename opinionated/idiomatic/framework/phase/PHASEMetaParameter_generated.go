@@ -36,12 +36,16 @@ func NewMetaParameter() *MetaParameter {
 	return &MetaParameter{inner: raw.PHASEMetaParameterFromID(_id)}
 }
 
+// @property value @abstract The value of this metaparameter
+//
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *MetaParameter) WithValue(value objc.ID) *MetaParameter {
 	x.inner.SetValue(value)
 	return x
 }
 
+// @property identifier @abstract The identifier that uniquely represents this metaparameter.
+//
 // Identifier calls the underlying Identifier.
 func (x *MetaParameter) Identifier() string {
 	_r := x.inner.Identifier()
@@ -51,6 +55,8 @@ func (x *MetaParameter) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property value @abstract The value of this metaparameter
+//
 // Value calls the underlying Value.
 func (x *MetaParameter) Value() objc.ID {
 	return x.inner.Value()

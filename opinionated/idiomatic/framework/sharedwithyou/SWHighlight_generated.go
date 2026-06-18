@@ -36,11 +36,15 @@ func NewHighlight() *Highlight {
 	return &Highlight{inner: raw.SWHighlightFromID(_id)}
 }
 
+// @abstract The unique identifier for this highlight
+//
 // Identifier calls the underlying Identifier.
 func (x *Highlight) Identifier() objc.ID {
 	return x.inner.Identifier()
 }
 
+// @abstract The surfaced content URL
+//
 // URL calls the underlying URL.
 func (x *Highlight) URL() *foundation.NSURL {
 	return x.inner.URL()

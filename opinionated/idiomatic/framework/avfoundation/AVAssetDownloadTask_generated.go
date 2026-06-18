@@ -37,6 +37,8 @@ func NewAssetDownloadTask() *AssetDownloadTask {
 	return &AssetDownloadTask{inner: raw.AVAssetDownloadTaskFromID(_id)}
 }
 
+// The asset supplied to the download task upon initialization.
+//
 // URLAsset calls the underlying URLAsset.
 func (x *AssetDownloadTask) URLAsset() *URLAsset {
 	_r := x.inner.URLAsset()
@@ -46,11 +48,15 @@ func (x *AssetDownloadTask) URLAsset() *URLAsset {
 	return &URLAsset{inner: _r}
 }
 
+// The options supplied to the download task upon initialization.
+//
 // Options calls the underlying Options.
 func (x *AssetDownloadTask) Options() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.Options()
 }
 
+// This property provides a collection of time ranges for which the download task has media data already downloaded and playable. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
+//
 // LoadedTimeRanges returns the collection as a Go slice.
 func (x *AssetDownloadTask) LoadedTimeRanges() []*foundation.NSValue {
 	arr := x.inner.LoadedTimeRanges()

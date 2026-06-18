@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes a directory share for multiple directories.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzmultipledirectoryshare
 type VZMultipleDirectoryShare struct {
 	VZDirectoryShare
@@ -36,7 +38,7 @@ func VZMultipleDirectoryShareFromID(id objc.ID) *VZMultipleDirectoryShare {
 	return o
 }
 
-// @abstract Initialize the directory share with an empty set of directories.
+// Initializes the directory share with an empty set of directories.
 func (o *VZMultipleDirectoryShare) Init() *VZMultipleDirectoryShare {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMultipleDirectoryShareSelInit)
 	if _ret != 0 {
@@ -45,7 +47,7 @@ func (o *VZMultipleDirectoryShare) Init() *VZMultipleDirectoryShare {
 	return VZMultipleDirectoryShareFromID(_ret)
 }
 
-// @abstract Initialize the directory share with a set of directories on the host. @param directories Directories on the host to expose to the guest by name. @discussion The dictionary string keys will be the name for the directory. The keys must be valid names or an exception will be raised. @see +[VZMultipleDirectoryShare validateName:error:]
+// Creates the directory share with a set of directories on the host.
 func (o *VZMultipleDirectoryShare) InitWithDirectories(directories *foundation.NSDictionary[*foundation.NSString, *VZSharedDirectory]) *VZMultipleDirectoryShare {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZMultipleDirectoryShareSelInitWithDirectories, directories)
 	if _ret != 0 {
@@ -54,7 +56,7 @@ func (o *VZMultipleDirectoryShare) InitWithDirectories(directories *foundation.N
 	return VZMultipleDirectoryShareFromID(_ret)
 }
 
-// @abstract Check if a name is a valid directory name. @param name The name to validate. @param error If not nil, assigned with an error describing why the name is not valid. @discussion The name must not be empty, have characters unsafe for file systems, be longer than NAME_MAX, or other restrictions. @see +[VZMultipleDirectoryShare canonicalizedNameFromName:]
+// Check if a name is a valid directory name.
 func VZMultipleDirectoryShareValidateNameError(name *foundation.NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsVZMultipleDirectoryShare), _vZMultipleDirectoryShareSelValidateNameError, name.Ptr(), unsafe.Pointer(&_nsErr))
@@ -64,7 +66,7 @@ func VZMultipleDirectoryShareValidateNameError(name *foundation.NSString) (bool,
 	return _ret, nil
 }
 
-// @abstract Canonicalize a string to be a valid directory name. @param name The name to canonicalize. @discussion This returns nil when it cannot produce a valid name. When not nil, the result is a valid directory name. @see +[VZMultipleDirectoryShare validateName:error:]
+// Transforms a string to be a valid directory name.
 func VZMultipleDirectoryShareCanonicalizedNameFromName(name *foundation.NSString) *foundation.NSString {
 	_ret := objc.Send[objc.ID](objc.ID(_clsVZMultipleDirectoryShare), _vZMultipleDirectoryShareSelCanonicalizedNameFromName, name.Ptr())
 	if _ret != 0 {

@@ -97,51 +97,71 @@ func (x *Context) ClearCaches() {
 	x.inner.ClearCaches()
 }
 
+// The working color space of the CIContext. The working color space determines the color space used when executing filter kernels. You specify a working color space using the “kCIContextWorkingColorSpace“ option when creating a “CIContext“. * All input images are color matched from the input's color space to the working space. * All renders are color matched from the working space to the destination space. The property will be `null` if the context was created with color management disabled.
+//
 // WorkingColorSpace calls the underlying WorkingColorSpace.
 func (x *Context) WorkingColorSpace() unsafe.Pointer {
 	return x.inner.WorkingColorSpace()
 }
 
+// The working pixel format that the CIContext uses for intermediate buffers. The working format determines the pixel format that Core Image uses to create intermediate buffers for rendering images. You specify a working pixel format using the “kCIContextWorkingFormat“ option when creating a “CIContext“.
+//
 // WorkingFormat calls the underlying WorkingFormat.
 func (x *Context) WorkingFormat() int {
 	return x.inner.WorkingFormat()
 }
 
+// Creates a Core Graphics image from a region of a Core Image image instance. The color space of the created `CGImage` will be sRGB unless the receiving “CIContext“ was created with a `kCIContextOutputColorSpace` option. Normally the pixel format of the created CGImage will be 8 bits-per-component. It will be 16 bits-per-component float if the above color space is HDR. - Parameters: - image: A “CIImage“ image instance for which to create a `CGImage`. - fromRect: The `CGRect` region of the `image` to use. This region relative to the cartesean coordinate system of `image`. This region will be intersected with integralized and intersected with `image.extent`. - Returns: Returns a new `CGImage` instance. You are responsible for releasing the returned image when you no longer need it. The returned value will be `null` if the extent is empty or too big.
+//
 // CreateCGImageFromRect calls the underlying CreateCGImageFromRect.
 func (x *Context) CreateCGImageFromRect(image *raw.CIImage, fromRect corefoundation.CGRect) unsafe.Pointer {
 	return x.inner.CreateCGImageFromRect(image, fromRect)
 }
 
+// Creates a Core Graphics image from a region of a Core Image image instance with an option for controlling the pixel format and color space of the `CGImage`. - Parameters: - image: A “CIImage“ image instance for which to create a `CGImage`. - fromRect: The `CGRect` region of the `image` to use. This region relative to the cartesean coordinate system of `image`. This region will be intersected with integralized and intersected with `image.extent`. - format: A “CIFormat“ to specify the pixel format of the created `CGImage`. For example, if `kCIFormatRGBX16` is specified, then the created `CGImage` will be 16 bits-per-component and opaque. - colorSpace: The `CGColorSpace` for the output image. This color space must have either `CGColorSpaceModel.rgb` or `CGColorSpaceModel.monochrome` and be compatible with the specified pixel format. - Returns: Returns a new `CGImage` instance. You are responsible for releasing the returned image when you no longer need it. The returned value will be `null` if the extent is empty or too big.
+//
 // CreateCGImageFromRectFormatColorSpace calls the underlying CreateCGImageFromRectFormatColorSpace.
 func (x *Context) CreateCGImageFromRectFormatColorSpace(image *raw.CIImage, fromRect corefoundation.CGRect, format int, colorSpace unsafe.Pointer) unsafe.Pointer {
 	return x.inner.CreateCGImageFromRectFormatColorSpace(image, fromRect, format, colorSpace)
 }
 
+// Creates a Core Graphics image from a region of a Core Image image instance with an option for controlling when the image is rendered. - Parameters: - image: A “CIImage“ image instance for which to create a `CGImage`. - fromRect: The `CGRect` region of the `image` to use. This region relative to the cartesean coordinate system of `image`. This region will be intersected with integralized and intersected with `image.extent`. - format: A “CIFormat“ to specify the pixel format of the created `CGImage`. For example, if `kCIFormatRGBX16` is specified, then the created `CGImage` will be 16 bits-per-component and opaque. - colorSpace: The `CGColorSpace` for the output image. This color space must have either `CGColorSpaceModel.rgb` or `CGColorSpaceModel.monochrome` and be compatible with the specified pixel format. - deferred: Controls when Core Image renders `image`. * True: rendering of `image` is deferred until the created `CGImage` rendered. * False: the `image` is rendered immediately. - Returns: Returns a new `CGImage` instance. You are responsible for releasing the returned image when you no longer need it. The returned value will be `null` if the extent is empty or too big.
+//
 // CreateCGImageFromRectFormatColorSpaceDeferred calls the underlying CreateCGImageFromRectFormatColorSpaceDeferred.
 func (x *Context) CreateCGImageFromRectFormatColorSpaceDeferred(image *raw.CIImage, fromRect corefoundation.CGRect, format int, colorSpace unsafe.Pointer, deferred bool) unsafe.Pointer {
 	return x.inner.CreateCGImageFromRectFormatColorSpaceDeferred(image, fromRect, format, colorSpace, deferred)
 }
 
+// Creates a Core Graphics image from a region of a Core Image image instance with an option for calculating HDR statistics. - Parameters: - image: A “CIImage“ image instance for which to create a `CGImage`. - fromRect: The `CGRect` region of the `image` to use. This region relative to the cartesean coordinate system of `image`. This region will be intersected with integralized and intersected with `image.extent`. - format: A “CIFormat“ to specify the pixel format of the created `CGImage`. For example, if `kCIFormatRGBX16` is specified, then the created `CGImage` will be 16 bits-per-component and opaque. - colorSpace: The `CGColorSpace` for the output image. This color space must have either `CGColorSpaceModel.rgb` or `CGColorSpaceModel.monochrome` and be compatible with the specified pixel format. - deferred: Controls when Core Image renders `image`. * True: rendering of `image` is deferred until the created `CGImage` rendered. * False: the `image` is rendered immediately. - calculateHDRStats: Controls if Core Image calculates HDR statistics. * True: Core Image will immediately render `image`, calculate the HDR statistics and create a `CGImage` that has the calculated values. * False:  the created `CGImage` will not have any HDR statistics. - Returns: Returns a new `CGImage` instance. You are responsible for releasing the returned image when you no longer need it. The returned value will be `null` if the extent is empty or too big.
+//
 // CreateCGImageFromRectFormatColorSpaceDeferredCalculateHDRStats calls the underlying CreateCGImageFromRectFormatColorSpaceDeferredCalculateHDRStats.
 func (x *Context) CreateCGImageFromRectFormatColorSpaceDeferredCalculateHDRStats(image *raw.CIImage, fromRect corefoundation.CGRect, format int, colorSpace unsafe.Pointer, deferred bool, calculateHDRStats bool) unsafe.Pointer {
 	return x.inner.CreateCGImageFromRectFormatColorSpaceDeferredCalculateHDRStats(image, fromRect, format, colorSpace, deferred, calculateHDRStats)
 }
 
+// Given an IOSurface, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then update the surface's attachments to store the values. If the `IOSurface` has a Clean Aperture rectangle then only pixels within that rectangle are considered. - Parameters: - surface: A mutable `IOSurfaceRef` for which to calculate and attach statistics.
+//
 // CalculateHDRStatsForIOSurface calls the underlying CalculateHDRStatsForIOSurface.
 func (x *Context) CalculateHDRStatsForIOSurface(surface unsafe.Pointer) {
 	x.inner.CalculateHDRStatsForIOSurface(surface)
 }
 
+// Given a CVPixelBuffer, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then update the buffers's attachments to store the values. If the `CVPixelBuffer` has a Clean Aperture rectangle then only pixels within that rectangle are considered. - Parameters: - buffer: A mutable `CVPixelBuffer` for which to calculate and attach statistics.
+//
 // CalculateHDRStatsForCVPixelBuffer calls the underlying CalculateHDRStatsForCVPixelBuffer.
 func (x *Context) CalculateHDRStatsForCVPixelBuffer(buffer unsafe.Pointer) {
 	x.inner.CalculateHDRStatsForCVPixelBuffer(buffer)
 }
 
+// Given a Core Graphics image, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then return a new Core Graphics image that has the calculated values. - Parameters: - cgimage: An immutable `CGImage` for which to calculate statistics. - Returns: Returns a new `CGImage` instance that has the calculated statistics attached.
+//
 // CalculateHDRStatsForCGImage calls the underlying CalculateHDRStatsForCGImage.
 func (x *Context) CalculateHDRStatsForCGImage(cgimage unsafe.Pointer) unsafe.Pointer {
 	return x.inner.CalculateHDRStatsForCGImage(cgimage)
 }
 
+// Given a Core Image image, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then return a new Core Image image that has the calculated values. If the image extent is not finite, then nil will be returned. - Parameters: - image: An immutable “CIImage“ for which to calculate statistics. - Returns: Returns a new “CIImage“ instance that has the calculated statistics attached.
+//
 // CalculateHDRStatsForImage calls the underlying CalculateHDRStatsForImage.
 func (x *Context) CalculateHDRStatsForImage(image *raw.CIImage) *Image {
 	_r := x.inner.CalculateHDRStatsForImage(image)

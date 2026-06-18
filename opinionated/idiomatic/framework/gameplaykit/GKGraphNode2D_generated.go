@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// GKGraphNode coupled with a 2D position
+//
 // GraphNode2D wraps [raw.GKGraphNode2D] with a fluent Go API.
 type GraphNode2D struct {
 	inner *raw.GKGraphNode2D

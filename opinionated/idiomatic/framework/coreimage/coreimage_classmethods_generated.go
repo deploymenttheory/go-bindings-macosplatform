@@ -1225,8 +1225,17 @@ func SynchronizeInputs() bool {
 }
 
 // ProcessWithInputsArgumentsOutputsError calls the underlying CIImageProcessorKernelProcessWithInputsArgumentsOutputsError.
-func ProcessWithInputsArgumentsOutputsError(inputs *foundation.NSArray[raw.CIImageProcessorInput], arguments *foundation.NSDictionary[*foundation.NSString, objc.ID], outputs *foundation.NSArray[raw.CIImageProcessorOutput]) (bool, error) {
-	return raw.CIImageProcessorKernelProcessWithInputsArgumentsOutputsError(inputs, arguments, outputs)
+func ProcessWithInputsArgumentsOutputsError(inputs *foundation.NSArray[raw.CIImageProcessorInput], arguments *foundation.NSDictionary[*foundation.NSString, objc.ID], outputs ...purego.IDer) (bool, error) {
+	_ptrs := make([]objc.ID, len(outputs))
+	for _i, _v := range outputs {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg2 *foundation.NSArray[raw.CIImageProcessorOutput]
+	if len(_ptrs) > 0 {
+		_arg2 = foundation.NSArrayFromID[raw.CIImageProcessorOutput](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	return raw.CIImageProcessorKernelProcessWithInputsArgumentsOutputsError(inputs, arguments, _arg2)
 }
 
 // OutputFormatAtIndexArguments calls the underlying CIImageProcessorKernelOutputFormatAtIndexArguments.

@@ -35,33 +35,45 @@ func NewRMSPropOptimizer() *RMSPropOptimizer {
 	return &RMSPropOptimizer{inner: raw.MLCRMSPropOptimizerFromID(_id)}
 }
 
+// @property   learningRate @abstract   The learning rate.  This property is 'readwrite' so that callers can implement a 'decay' during training
+//
 // WithLearningRate sets the learningRate property and returns the receiver for chaining.
 func (x *RMSPropOptimizer) WithLearningRate(learningRate float32) *RMSPropOptimizer {
 	x.inner.MLCOptimizer.SetLearningRate(learningRate)
 	return x
 }
 
+// @property   appliesGradientClipping @abstract   Whether gradient clipping should be applied or not.
+//
 // WithAppliesGradientClipping sets the appliesGradientClipping property and returns the receiver for chaining.
 func (x *RMSPropOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *RMSPropOptimizer {
 	x.inner.MLCOptimizer.SetAppliesGradientClipping(appliesGradientClipping)
 	return x
 }
 
+// @property   momentumScale @abstract   The momentum factor.  A hyper-parameter. @discussion The default is 0.0.
+//
 // MomentumScale calls the underlying MomentumScale.
 func (x *RMSPropOptimizer) MomentumScale() float32 {
 	return x.inner.MomentumScale()
 }
 
+// @property   alpha @abstract   The smoothing constant. @discussion The default is 0.99.
+//
 // Alpha calls the underlying Alpha.
 func (x *RMSPropOptimizer) Alpha() float32 {
 	return x.inner.Alpha()
 }
 
+// @property   epsilon @abstract   A term added to improve numerical stability. @discussion The default is 1e-8.
+//
 // Epsilon calls the underlying Epsilon.
 func (x *RMSPropOptimizer) Epsilon() float32 {
 	return x.inner.Epsilon()
 }
 
+// @property   isCentered @abstract   If True, compute the centered RMSProp, the gradient is normalized by an estimation of its variance. @discussion The default is false.
+//
 // IsCentered calls the underlying IsCentered.
 func (x *RMSPropOptimizer) IsCentered() bool {
 	return x.inner.IsCentered()

@@ -39,6 +39,8 @@ func NewAudioUnitComponent() *AudioUnitComponent {
 	return &AudioUnitComponent{inner: raw.AVAudioUnitComponentFromID(_id)}
 }
 
+// @property userTagNames @abstract User tags represent the tags from the current user.
+//
 // WithUserTagNames sets the collection, converting the Go slice to an NSArray.
 func (x *AudioUnitComponent) WithUserTagNames(items ...*foundation.NSString) *AudioUnitComponent {
 	if len(items) == 0 {
@@ -57,11 +59,15 @@ func (x *AudioUnitComponent) WithUserTagNames(items ...*foundation.NSString) *Au
 	return x
 }
 
+// @method supportsNumberInputChannels:outputChannels: @abstract returns YES if the AudioComponent supports the input/output channel configuration
+//
 // SupportsNumberInputChannelsOutputChannels calls the underlying SupportsNumberInputChannelsOutputChannels.
 func (x *AudioUnitComponent) SupportsNumberInputChannelsOutputChannels(numInputChannels int, numOutputChannels int) bool {
 	return x.inner.SupportsNumberInputChannelsOutputChannels(numInputChannels, numOutputChannels)
 }
 
+// @property name @abstract the name of an audio component
+//
 // Name calls the underlying Name.
 func (x *AudioUnitComponent) Name() string {
 	_r := x.inner.Name()
@@ -71,6 +77,8 @@ func (x *AudioUnitComponent) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property typeName @abstract standard audio component types returned as strings
+//
 // TypeName calls the underlying TypeName.
 func (x *AudioUnitComponent) TypeName() string {
 	_r := x.inner.TypeName()
@@ -80,6 +88,8 @@ func (x *AudioUnitComponent) TypeName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property localizedTypeName @abstract localized string of typeName for display
+//
 // LocalizedTypeName calls the underlying LocalizedTypeName.
 func (x *AudioUnitComponent) LocalizedTypeName() string {
 	_r := x.inner.LocalizedTypeName()
@@ -89,6 +99,8 @@ func (x *AudioUnitComponent) LocalizedTypeName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property manufacturerName @abstract the manufacturer name, extracted from the manufacturer key defined in Info.plist dictionary
+//
 // ManufacturerName calls the underlying ManufacturerName.
 func (x *AudioUnitComponent) ManufacturerName() string {
 	_r := x.inner.ManufacturerName()
@@ -98,6 +110,8 @@ func (x *AudioUnitComponent) ManufacturerName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property versionString @abstract version number as string
+//
 // VersionString calls the underlying VersionString.
 func (x *AudioUnitComponent) VersionString() string {
 	_r := x.inner.VersionString()
@@ -107,11 +121,15 @@ func (x *AudioUnitComponent) VersionString() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property componentURL @abstract URL representing location of component
+//
 // ComponentURL calls the underlying ComponentURL.
 func (x *AudioUnitComponent) ComponentURL() *foundation.NSURL {
 	return x.inner.ComponentURL()
 }
 
+// @property availableArchitectures @abstract NSArray of NSNumbers each of which corresponds to one of the constants in Mach-O Architecture in NSBundle Class Reference
+//
 // AvailableArchitectures returns the collection as a Go slice.
 func (x *AudioUnitComponent) AvailableArchitectures() []*foundation.NSNumber {
 	arr := x.inner.AvailableArchitectures()
@@ -123,26 +141,36 @@ func (x *AudioUnitComponent) AvailableArchitectures() []*foundation.NSNumber {
 	})
 }
 
+// @property sandboxSafe @abstract On OSX, YES if the AudioComponent can be loaded into a sandboxed process otherwise NO. On iOS, this is always YES.
+//
 // IsSandboxSafe calls the underlying IsSandboxSafe.
 func (x *AudioUnitComponent) IsSandboxSafe() bool {
 	return x.inner.IsSandboxSafe()
 }
 
+// @property hasMIDIInput @abstract YES if AudioComponent has midi input, otherwise NO
+//
 // HasMIDIInput calls the underlying HasMIDIInput.
 func (x *AudioUnitComponent) HasMIDIInput() bool {
 	return x.inner.HasMIDIInput()
 }
 
+// @property hasMIDIOutput @abstract YES if AudioComponent has midi output, otherwise NO
+//
 // HasMIDIOutput calls the underlying HasMIDIOutput.
 func (x *AudioUnitComponent) HasMIDIOutput() bool {
 	return x.inner.HasMIDIOutput()
 }
 
+// @property audioComponent @abstract the audioComponent that can be used in AudioComponent APIs.
+//
 // AudioComponent calls the underlying AudioComponent.
 func (x *AudioUnitComponent) AudioComponent() unsafe.Pointer {
 	return x.inner.AudioComponent()
 }
 
+// @property userTagNames @abstract User tags represent the tags from the current user.
+//
 // UserTagNames returns the collection as a Go slice.
 func (x *AudioUnitComponent) UserTagNames() []string {
 	arr := x.inner.UserTagNames()
@@ -159,6 +187,8 @@ func (x *AudioUnitComponent) SetUserTagNames(userTagNames *foundation.NSArray[*f
 	x.inner.SetUserTagNames(userTagNames)
 }
 
+// @property allTagNames @abstract represent the tags from the current user and the system tags defined by AudioComponent.
+//
 // AllTagNames returns the collection as a Go slice.
 func (x *AudioUnitComponent) AllTagNames() []string {
 	arr := x.inner.AllTagNames()
@@ -170,11 +200,15 @@ func (x *AudioUnitComponent) AllTagNames() []string {
 	})
 }
 
+// @property audioComponentDescription @abstract description of the audio component that can be used in AudioComponent APIs.
+//
 // AudioComponentDescription calls the underlying AudioComponentDescription.
 func (x *AudioUnitComponent) AudioComponentDescription() objc.ID {
 	return x.inner.AudioComponentDescription()
 }
 
+// @property iconURL @abstract A URL that will specify the location of an icon file that can be used when presenting UI for this audio component.
+//
 // IconURL calls the underlying IconURL.
 func (x *AudioUnitComponent) IconURL() *foundation.NSURL {
 	return x.inner.IconURL()
@@ -185,16 +219,22 @@ func (x *AudioUnitComponent) Icon() *appkit.NSImage {
 	return x.inner.Icon()
 }
 
+// @property passesAUVal @abstract YES if the AudioComponent has passed the AU validation tests, otherwise NO
+//
 // PassesAUVal calls the underlying PassesAUVal.
 func (x *AudioUnitComponent) PassesAUVal() bool {
 	return x.inner.PassesAUVal()
 }
 
+// @property hasCustomView @abstract YES if the AudioComponent provides custom view, otherwise NO
+//
 // HasCustomView calls the underlying HasCustomView.
 func (x *AudioUnitComponent) HasCustomView() bool {
 	return x.inner.HasCustomView()
 }
 
+// @property configurationDictionary @abstract A NSDictionary that contains information describing the capabilities of the AudioComponent. The specific information depends on the type and the keys are defined in AudioUnitProperties.h
+//
 // ConfigurationDictionary calls the underlying ConfigurationDictionary.
 func (x *AudioUnitComponent) ConfigurationDictionary() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.ConfigurationDictionary()

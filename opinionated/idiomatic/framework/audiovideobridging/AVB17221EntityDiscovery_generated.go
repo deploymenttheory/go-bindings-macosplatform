@@ -31,6 +31,8 @@ func AVB17221EntityDiscoveryFromID(id objc.ID) *AVB17221EntityDiscovery {
 	return &AVB17221EntityDiscovery{inner: raw.AVB17221EntityDiscoveryFromID(id)}
 }
 
+// @method		initWithInterfaceName: @abstract	Initializes the receiver with a particular interface name. @param		anInterfaceName	The BSD interface name for the interface to perform discovery on. @result		The initialized receiver.
+//
 // NewAVB17221EntityDiscoveryWithInterfaceName creates a new [AVB17221EntityDiscovery].
 func NewAVB17221EntityDiscoveryWithInterfaceName(anInterfaceName string) *AVB17221EntityDiscovery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVB17221EntityDiscovery")), objc.RegisterName("alloc"))
@@ -38,48 +40,66 @@ func NewAVB17221EntityDiscoveryWithInterfaceName(anInterfaceName string) *AVB172
 	return &AVB17221EntityDiscovery{inner: raw.AVB17221EntityDiscoveryFromID(_id)}
 }
 
+// @property	interfaceName @abstract	The BSD interface name for the interface that discovery is being performed on.
+//
 // WithInterfaceName sets the interfaceName property and returns the receiver for chaining.
 func (x *AVB17221EntityDiscovery) WithInterfaceName(interfaceName string) *AVB17221EntityDiscovery {
 	x.inner.SetInterfaceName(foundation.NSStringStringWithUTF8String(interfaceName))
 	return x
 }
 
+// @property	discoveryDelegate @abstract	The delegate, implementing the AVB17221EntityDiscoveryDelegate protocol, which will handle entities arriving, departing and changing properties.
+//
 // WithDiscoveryDelegate sets the discoveryDelegate property and returns the receiver for chaining.
 func (x *AVB17221EntityDiscovery) WithDiscoveryDelegate(discoveryDelegate raw.AVB17221EntityDiscoveryDelegate) *AVB17221EntityDiscovery {
 	x.inner.SetDiscoveryDelegate(discoveryDelegate)
 	return x
 }
 
+// @method		primeIterators @abstract	Prepares the IOIterators for receiving entity arrival, departure and property change notifications. @discussion	This method primes the iterators by iterating over any already available entities. This may be called once, at any time after object creation, but if the discoveryDelegate property has not been set, any already discovered entity notifications will be lost.
+//
 // PrimeIterators calls the underlying PrimeIterators.
 func (x *AVB17221EntityDiscovery) PrimeIterators() {
 	x.inner.PrimeIterators()
 }
 
+// @method		discoverEntities @abstract	Triggers the IEEE Std 1722.1™-2013 ADP service to perform an ENTITY_DISCOVER for all entities (an entity_id of 0). @result		A boolean indicating if the call succedded.
+//
 // DiscoverEntities calls the underlying DiscoverEntities.
 func (x *AVB17221EntityDiscovery) DiscoverEntities() bool {
 	return x.inner.DiscoverEntities()
 }
 
+// @method		discoverEntity: @abstract	Triggers the IEEE Std 1722.1™-2013 ADP service to perform an ENTITY_DISCOVER for a specified entity. @param		entityID	The entity_id of the entity to look for. @result		A boolean indicating if the call succedded.
+//
 // DiscoverEntity calls the underlying DiscoverEntity.
 func (x *AVB17221EntityDiscovery) DiscoverEntity(entityID uint64) bool {
 	return x.inner.DiscoverEntity(entityID)
 }
 
+// @method		addLocalEntity:error: @abstract	Publishes a entity as being available on the interface. The in kernel portion creates an IOAVB17221LocalEntity and maintains the ADP messaging. @param		anEntity	The entity to be published. @param		error		If the request couldn't be completed, on return it contains an instance of NSError that describes the reason why. @result		A boolean indicating if the entity was added.
+//
 // AddLocalEntityError calls the underlying AddLocalEntityError.
 func (x *AVB17221EntityDiscovery) AddLocalEntityError(anEntity *raw.AVB17221Entity) (bool, error) {
 	return x.inner.AddLocalEntityError(anEntity)
 }
 
+// @method		removeLocalEntity: @abstract	Removes a published local entity with the given GUID. @param		guid	The GUID of the local entity to remove. @param		error		If the request couldn't be completed, on return it contains an instance of NSError that describes the reason why. @result		A boolean indicating if the entity was removed.
+//
 // RemoveLocalEntityError calls the underlying RemoveLocalEntityError.
 func (x *AVB17221EntityDiscovery) RemoveLocalEntityError(guid uint64) (bool, error) {
 	return x.inner.RemoveLocalEntityError(guid)
 }
 
+// @method		changeEntityWithEntityID:toNewGPTPGrandmasterID: @abstract	Change the gptp_grandmaster_id value of the entity when the grandmaster changes. @param		entityID		The entity_id of the entity to change. @param		gPTPGrandmasterID	The new IEEE Std 802.1AS grandmaster ID. @param		error			If the request couldn't be completed, on return it contains an instance of NSError that describes the reason why. @result		A boolean indicating if the entity was updated.
+//
 // ChangeEntityWithEntityIDToNewGPTPGrandmasterIDError calls the underlying ChangeEntityWithEntityIDToNewGPTPGrandmasterIDError.
 func (x *AVB17221EntityDiscovery) ChangeEntityWithEntityIDToNewGPTPGrandmasterIDError(entityID uint64, gPTPGrandmasterID uint64) (bool, error) {
 	return x.inner.ChangeEntityWithEntityIDToNewGPTPGrandmasterIDError(entityID, gPTPGrandmasterID)
 }
 
+// @property	interfaceName @abstract	The BSD interface name for the interface that discovery is being performed on.
+//
 // InterfaceName calls the underlying InterfaceName.
 func (x *AVB17221EntityDiscovery) InterfaceName() string {
 	_r := x.inner.InterfaceName()
@@ -94,6 +114,8 @@ func (x *AVB17221EntityDiscovery) SetInterfaceName(interfaceName string) {
 	x.inner.SetInterfaceName(foundation.NSStringStringWithUTF8String(interfaceName))
 }
 
+// @property	interface @abstract	The AVBInterface object which owns this object. This may be nil if it was not created by an instance of AVBInterface
+//
 // Interface calls the underlying Interface.
 func (x *AVB17221EntityDiscovery) Interface() *Interface {
 	_r := x.inner.Interface()
@@ -103,6 +125,8 @@ func (x *AVB17221EntityDiscovery) Interface() *Interface {
 	return &Interface{inner: _r}
 }
 
+// @property	discoveryDelegate @abstract	The delegate, implementing the AVB17221EntityDiscoveryDelegate protocol, which will handle entities arriving, departing and changing properties.
+//
 // DiscoveryDelegate calls the underlying DiscoveryDelegate.
 func (x *AVB17221EntityDiscovery) DiscoveryDelegate() raw.AVB17221EntityDiscoveryDelegate {
 	return x.inner.DiscoveryDelegate()

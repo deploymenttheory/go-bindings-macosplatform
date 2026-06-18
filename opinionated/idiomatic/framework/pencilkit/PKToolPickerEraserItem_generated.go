@@ -29,6 +29,8 @@ func ToolPickerEraserItemFromID(id objc.ID) *ToolPickerEraserItem {
 	return &ToolPickerEraserItem{inner: raw.PKToolPickerEraserItemFromID(id)}
 }
 
+// Create a new eraser tool item.
+//
 // NewToolPickerEraserItemWithEraserType creates a new [ToolPickerEraserItem].
 func NewToolPickerEraserItemWithEraserType(eraserType PKEraserType) *ToolPickerEraserItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKToolPickerEraserItem")), objc.RegisterName("alloc"))
@@ -36,6 +38,8 @@ func NewToolPickerEraserItemWithEraserType(eraserType PKEraserType) *ToolPickerE
 	return &ToolPickerEraserItem{inner: raw.PKToolPickerEraserItemFromID(_id)}
 }
 
+// Create a new eraser tool item with a width. @param eraserType The type of eraser. @param width The width of the eraser.
+//
 // NewToolPickerEraserItemWithEraserTypeWidth creates a new [ToolPickerEraserItem].
 func NewToolPickerEraserItemWithEraserTypeWidth(eraserType PKEraserType, width float64) *ToolPickerEraserItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKToolPickerEraserItem")), objc.RegisterName("alloc"))

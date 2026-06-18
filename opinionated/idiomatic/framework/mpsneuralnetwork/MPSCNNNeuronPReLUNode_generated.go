@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @abstract   A ReLU node with parameter a provided independently for each feature channel @discussion For each pixel, applies the following function: @code f(x) = x                if x >= 0 = aData[i] * x     if x < 0,  i is the index of the feature channel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      aData                   An array of single precision floating-point alpha values to use @endcode
+//
 // CNNNeuronPReLUNode wraps [raw.MPSCNNNeuronPReLUNode] with a fluent Go API.
 type CNNNeuronPReLUNode struct {
 	inner *raw.MPSCNNNeuronPReLUNode
@@ -30,6 +32,8 @@ func CNNNeuronPReLUNodeFromID(id objc.ID) *CNNNeuronPReLUNode {
 	return &CNNNeuronPReLUNode{inner: raw.MPSCNNNeuronPReLUNodeFromID(id)}
 }
 
+// @abstract   Init a node representing a MPSCNNNeuronTanH kernel @discussion For each pixel, applies the following function: @code f(x) = x                if x >= 0 = aData[i] * x     if x < 0,  i is the index of the feature channel @endcode @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      aData                   An array of single precision floating-point alpha values to use @return     A new MPSNNFilter node for a MPSCNNNeuronTanH kernel.
+//
 // NewCNNNeuronPReLUNodeWithSourceAData creates a new [CNNNeuronPReLUNode].
 func NewCNNNeuronPReLUNodeWithSourceAData(sourceNode *raw.MPSNNImageNode, aData *foundation.NSData) *CNNNeuronPReLUNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNNeuronPReLUNode")), objc.RegisterName("alloc"))
@@ -37,12 +41,16 @@ func NewCNNNeuronPReLUNodeWithSourceAData(sourceNode *raw.MPSNNImageNode, aData 
 	return &CNNNeuronPReLUNode{inner: raw.MPSCNNNeuronPReLUNodeFromID(_id)}
 }
 
+// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
+//
 // WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
 func (x *CNNNeuronPReLUNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNNeuronPReLUNode {
 	x.inner.MPSCNNNeuronNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNNeuronPReLUNode) WithLabel(label string) *CNNNeuronPReLUNode {
 	x.inner.MPSCNNNeuronNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))

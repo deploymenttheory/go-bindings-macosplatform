@@ -37,16 +37,22 @@ func NewPlayerItemErrorLog() *PlayerItemErrorLog {
 	return &PlayerItemErrorLog{inner: raw.AVPlayerItemErrorLogFromID(_id)}
 }
 
+// Serializes an AVPlayerItemErrorLog in the Extended Log File Format. This method converts the webserver error log into a textual format that conforms to the W3C Extended Log File Format for web server log files. For more information see: http://www.w3.org/pub/WWW/TR/WD-logfile.html - Returns: An autoreleased NSData instance.
+//
 // ExtendedLogData calls the underlying ExtendedLogData.
 func (x *PlayerItemErrorLog) ExtendedLogData() *foundation.NSData {
 	return x.inner.ExtendedLogData()
 }
 
+// Returns the NSStringEncoding for extendedLogData, see above. A string suitable for console output is obtainable by: [[NSString alloc] initWithData:[myLog extendedLogData] encoding:[myLog extendedLogDataStringEncoding]]
+//
 // ExtendedLogDataStringEncoding calls the underlying ExtendedLogDataStringEncoding.
 func (x *PlayerItemErrorLog) ExtendedLogDataStringEncoding() uint {
 	return x.inner.ExtendedLogDataStringEncoding()
 }
 
+// An ordered collection of AVPlayerItemErrorLogEvent instances. An ordered collection of AVPlayerItemErrorLogEvent instances that represent the chronological sequence of events contained in the error log. This property is not observable.
+//
 // Events returns the collection as a Go slice.
 func (x *PlayerItemErrorLog) Events() []*PlayerItemErrorLogEvent {
 	arr := x.inner.Events()

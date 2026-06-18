@@ -36,30 +36,40 @@ func NewMutableConfiguration() *MutableConfiguration {
 	return &MutableConfiguration{inner: raw.CWMutableConfigurationFromID(_id)}
 }
 
+// @property @abstract Add, remove, or update the preferred networks list.
+//
 // WithNetworkProfiles sets the networkProfiles property and returns the receiver for chaining.
 func (x *MutableConfiguration) WithNetworkProfiles(networkProfiles *foundation.NSOrderedSet[*raw.CWNetworkProfile]) *MutableConfiguration {
 	x.inner.SetNetworkProfiles(networkProfiles)
 	return x
 }
 
+// @property @abstract Set the preference to require an administrator password to change networks.
+//
 // WithRequireAdministratorForAssociation sets the requireAdministratorForAssociation property and returns the receiver for chaining.
 func (x *MutableConfiguration) WithRequireAdministratorForAssociation(requireAdministratorForAssociation bool) *MutableConfiguration {
 	x.inner.SetRequireAdministratorForAssociation(requireAdministratorForAssociation)
 	return x
 }
 
+// @property @abstract Set the preference to require an administrator password to change the interface power state.
+//
 // WithRequireAdministratorForPower sets the requireAdministratorForPower property and returns the receiver for chaining.
 func (x *MutableConfiguration) WithRequireAdministratorForPower(requireAdministratorForPower bool) *MutableConfiguration {
 	x.inner.SetRequireAdministratorForPower(requireAdministratorForPower)
 	return x
 }
 
+// @property @abstract Set the preference to require an administrator password to change networks.
+//
 // WithRequireAdministratorForIBSSMode sets the requireAdministratorForIBSSMode property and returns the receiver for chaining.
 func (x *MutableConfiguration) WithRequireAdministratorForIBSSMode(requireAdministratorForIBSSMode bool) *MutableConfiguration {
 	x.inner.SetRequireAdministratorForIBSSMode(requireAdministratorForIBSSMode)
 	return x
 }
 
+// @property @abstract Set the preference to require an administrator password to create a computer-to-computer network.
+//
 // WithRememberJoinedNetworks sets the rememberJoinedNetworks property and returns the receiver for chaining.
 func (x *MutableConfiguration) WithRememberJoinedNetworks(rememberJoinedNetworks bool) *MutableConfiguration {
 	x.inner.SetRememberJoinedNetworks(rememberJoinedNetworks)

@@ -35,12 +35,16 @@ func NewRouteDetector() *RouteDetector {
 	return &RouteDetector{inner: raw.AVRouteDetectorFromID(_id)}
 }
 
+// @property	routeDetectionEnabled @abstract	Whether or not route detection is enabled. The default value is NO. @discussion Route detection significantly increases power consumption and must be turned off when it's no longer needed.
+//
 // WithRouteDetectionEnabled sets the routeDetectionEnabled property and returns the receiver for chaining.
 func (x *RouteDetector) WithRouteDetectionEnabled(routeDetectionEnabled bool) *RouteDetector {
 	x.inner.SetRouteDetectionEnabled(routeDetectionEnabled)
 	return x
 }
 
+// @property	routeDetectionEnabled @abstract	Whether or not route detection is enabled. The default value is NO. @discussion Route detection significantly increases power consumption and must be turned off when it's no longer needed.
+//
 // IsRouteDetectionEnabled calls the underlying IsRouteDetectionEnabled.
 func (x *RouteDetector) IsRouteDetectionEnabled() bool {
 	return x.inner.IsRouteDetectionEnabled()
@@ -51,6 +55,8 @@ func (x *RouteDetector) SetRouteDetectionEnabled(routeDetectionEnabled bool) {
 	x.inner.SetRouteDetectionEnabled(routeDetectionEnabled)
 }
 
+// @property	multipleRoutesDetected @abstract	This property is YES if, in addition to the local playback route, at least one more playback route has been detected. @discussion If multiple route have been detected, AVKit's AVRoutePickerView can be used to allow users to pick from the set of available routes. When the values of this property changes AVRouteDetectorMultipleRoutesDetectedDidChangeNotification is posted.
+//
 // MultipleRoutesDetected calls the underlying MultipleRoutesDetected.
 func (x *RouteDetector) MultipleRoutesDetected() bool {
 	return x.inner.MultipleRoutesDetected()

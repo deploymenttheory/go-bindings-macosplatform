@@ -31,6 +31,8 @@ func PasskeyAssertionCredentialFromID(id objc.ID) *PasskeyAssertionCredential {
 	return &PasskeyAssertionCredential{inner: raw.ASPasskeyAssertionCredentialFromID(id)}
 }
 
+// @abstract Initializes an ASPasskeyCredential object. @param userHandle The identifier for the account the passkey is associated with. @param relyingParty the relying party. @param signature the signature for the assertion challenge.
+//
 // NewPasskeyAssertionCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID creates a new [PasskeyAssertionCredential].
 func NewPasskeyAssertionCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID(userHandle *foundation.NSData, relyingParty string, signature *foundation.NSData, clientDataHash *foundation.NSData, authenticatorData *foundation.NSData, credentialID *foundation.NSData) *PasskeyAssertionCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasskeyAssertionCredential")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewPasskeyAssertionCredentialWithUserHandleRelyingPartySignatureClientDataH
 	return &PasskeyAssertionCredential{inner: raw.ASPasskeyAssertionCredentialFromID(_id)}
 }
 
+// @abstract Initializes an ASPasskeyCredential object. @param userHandle The identifier for the account the passkey is associated with. @param relyingParty The relying party. @param signature The signature for the assertion challenge. @param extensionOutput The outputs of WebAuthn extensions processed by the credential provider.
+//
 // NewPasskeyAssertionCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialIDExtensionOutput creates a new [PasskeyAssertionCredential].
 func NewPasskeyAssertionCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialIDExtensionOutput(userHandle *foundation.NSData, relyingParty string, signature *foundation.NSData, clientDataHash *foundation.NSData, authenticatorData *foundation.NSData, credentialID *foundation.NSData, extensionOutput *raw.ASPasskeyAssertionCredentialExtensionOutput) *PasskeyAssertionCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasskeyAssertionCredential")), objc.RegisterName("alloc"))
@@ -45,17 +49,23 @@ func NewPasskeyAssertionCredentialWithUserHandleRelyingPartySignatureClientDataH
 	return &PasskeyAssertionCredential{inner: raw.ASPasskeyAssertionCredentialFromID(_id)}
 }
 
+// @abstract The outputs of WebAuthn extensions processed by the credential provider.
+//
 // WithExtensionOutput sets the extensionOutput property and returns the receiver for chaining.
 func (x *PasskeyAssertionCredential) WithExtensionOutput(extensionOutput *PasskeyAssertionCredentialExtensionOutput) *PasskeyAssertionCredential {
 	x.inner.SetExtensionOutput(extensionOutput.Unwrap())
 	return x
 }
 
+// @abstract The user handle of this passkey.
+//
 // UserHandle calls the underlying UserHandle.
 func (x *PasskeyAssertionCredential) UserHandle() *foundation.NSData {
 	return x.inner.UserHandle()
 }
 
+// @abstract The relying party of this credential.
+//
 // RelyingParty calls the underlying RelyingParty.
 func (x *PasskeyAssertionCredential) RelyingParty() string {
 	_r := x.inner.RelyingParty()
@@ -65,26 +75,36 @@ func (x *PasskeyAssertionCredential) RelyingParty() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The signature of this credential.
+//
 // Signature calls the underlying Signature.
 func (x *PasskeyAssertionCredential) Signature() *foundation.NSData {
 	return x.inner.Signature()
 }
 
+// @abstract The hash of the client data for this assertion result.
+//
 // ClientDataHash calls the underlying ClientDataHash.
 func (x *PasskeyAssertionCredential) ClientDataHash() *foundation.NSData {
 	return x.inner.ClientDataHash()
 }
 
+// @abstract The authenticator data of the application that created this credential.
+//
 // AuthenticatorData calls the underlying AuthenticatorData.
 func (x *PasskeyAssertionCredential) AuthenticatorData() *foundation.NSData {
 	return x.inner.AuthenticatorData()
 }
 
+// @abstract The raw credential ID for this passkey credential.
+//
 // CredentialID calls the underlying CredentialID.
 func (x *PasskeyAssertionCredential) CredentialID() *foundation.NSData {
 	return x.inner.CredentialID()
 }
 
+// @abstract The outputs of WebAuthn extensions processed by the credential provider.
+//
 // ExtensionOutput calls the underlying ExtensionOutput.
 func (x *PasskeyAssertionCredential) ExtensionOutput() *PasskeyAssertionCredentialExtensionOutput {
 	_r := x.inner.ExtensionOutput()

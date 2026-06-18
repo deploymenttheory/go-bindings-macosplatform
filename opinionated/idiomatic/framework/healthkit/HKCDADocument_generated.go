@@ -37,11 +37,15 @@ func NewCDADocument() *CDADocument {
 	return &CDADocument{inner: raw.HKCDADocumentFromID(_id)}
 }
 
+// @property  documentData @abstract  The CDA document content in XML format as specified in the CDA standard. This may be nil if the includeDocumentData option in HKDocumentQuery is specified as NO.
+//
 // DocumentData calls the underlying DocumentData.
 func (x *CDADocument) DocumentData() *foundation.NSData {
 	return x.inner.DocumentData()
 }
 
+// @property      title @abstract      The title of the document. @discussion    This property is extracted automatically from the document.
+//
 // Title calls the underlying Title.
 func (x *CDADocument) Title() string {
 	_r := x.inner.Title()
@@ -51,6 +55,8 @@ func (x *CDADocument) Title() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      patientName @abstract      The name of the patient receiving treatment. @discussion    This property is extracted automatically from the document.
+//
 // PatientName calls the underlying PatientName.
 func (x *CDADocument) PatientName() string {
 	_r := x.inner.PatientName()
@@ -60,6 +66,8 @@ func (x *CDADocument) PatientName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      authorName @abstract      The person responsible for authoring the document.  Usually, this is the treating physician. @discussion    This property is extracted automatically from the document.
+//
 // AuthorName calls the underlying AuthorName.
 func (x *CDADocument) AuthorName() string {
 	_r := x.inner.AuthorName()
@@ -69,6 +77,8 @@ func (x *CDADocument) AuthorName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      custodianName @abstract      The organization responsible for the document.  This is usually the treating institution name. @discussion    This property is extracted automatically from the document.
+//
 // CustodianName calls the underlying CustodianName.
 func (x *CDADocument) CustodianName() string {
 	_r := x.inner.CustodianName()

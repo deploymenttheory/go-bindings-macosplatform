@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A console device that enables communication between the host and the guest using console ports through a Virtio interface.
+//
 // VirtioConsoleDeviceConfiguration wraps [raw.VZVirtioConsoleDeviceConfiguration] with a fluent Go API.
 type VirtioConsoleDeviceConfiguration struct {
 	inner *raw.VZVirtioConsoleDeviceConfiguration

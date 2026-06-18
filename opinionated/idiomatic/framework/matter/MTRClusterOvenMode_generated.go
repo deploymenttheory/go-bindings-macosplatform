@@ -33,6 +33,8 @@ func MTRClusterOvenModeFromID(id objc.ID) *MTRClusterOvenMode {
 	return &MTRClusterOvenMode{inner: raw.MTRClusterOvenModeFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterOvenModeWithDeviceEndpointIDQueue creates a new [MTRClusterOvenMode].
 func NewMTRClusterOvenModeWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterOvenMode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterOvenMode")), objc.RegisterName("alloc"))

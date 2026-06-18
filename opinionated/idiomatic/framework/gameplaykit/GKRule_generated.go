@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The concrete class that the GKRuleSystem uses to evaluate the current state and facts with predicated rules. These are sharable between systems, so don't retain any state in the rules themselves. Use the system-provided state storage. @see GKRuleSystem.state
+//
 // Rule wraps [raw.GKRule] with a fluent Go API.
 type Rule struct {
 	inner *raw.GKRule
@@ -35,22 +37,30 @@ func NewRule() *Rule {
 	return &Rule{inner: raw.GKRuleFromID(_id)}
 }
 
+// Salience defines the order in the rule agenda that the system will evaluate. A rule with higher salience will be evaluated before another rule in the agenda that has a lower salience. Defaults to 0. @see GKRuleSystem.agenda
+//
 // WithSalience sets the salience property and returns the receiver for chaining.
 func (x *Rule) WithSalience(salience int) *Rule {
 	x.inner.SetSalience(salience)
 	return x
 }
 
+// Called by the rule system when it is this rule's turn to be evaluated. If the predicate returns YES then the action for the rule will be performed. Once the action is performed the rule will move to the system's executed list until the agenda is reset. @see performAction @see GKRuleSystem.agenda @see GKRuleSystem.executed @see GKRuleSystem.reset @return YES is the predicate passes and the action needs to be performed, NO otherwise.
+//
 // EvaluatePredicateWithSystem calls the underlying EvaluatePredicateWithSystem.
 func (x *Rule) EvaluatePredicateWithSystem(system *raw.GKRuleSystem) bool {
 	return x.inner.EvaluatePredicateWithSystem(system)
 }
 
+// Performs the action consequence for the rule. This will only be called if the predicate evaluates to YES. Any facts asserted or retracted by the action on the system will cause the system to evaluate the agenda rule set again once the action completes.
+//
 // PerformActionWithSystem calls the underlying PerformActionWithSystem.
 func (x *Rule) PerformActionWithSystem(system *raw.GKRuleSystem) {
 	x.inner.PerformActionWithSystem(system)
 }
 
+// Salience defines the order in the rule agenda that the system will evaluate. A rule with higher salience will be evaluated before another rule in the agenda that has a lower salience. Defaults to 0. @see GKRuleSystem.agenda
+//
 // Salience calls the underlying Salience.
 func (x *Rule) Salience() int {
 	return x.inner.Salience()

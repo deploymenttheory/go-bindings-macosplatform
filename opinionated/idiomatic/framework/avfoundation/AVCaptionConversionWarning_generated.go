@@ -37,6 +37,8 @@ func NewCaptionConversionWarning() *CaptionConversionWarning {
 	return &CaptionConversionWarning{inner: raw.AVCaptionConversionWarningFromID(_id)}
 }
 
+// @property      warningType @abstract      Indicates the type of warning provided by the receiver.
+//
 // WarningType calls the underlying WarningType.
 func (x *CaptionConversionWarning) WarningType() string {
 	_r := x.inner.WarningType()
@@ -46,11 +48,15 @@ func (x *CaptionConversionWarning) WarningType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      rangeOfCaptions @abstract      Indicates the range of captions in the validator's captions array for which the specified warning has been issued. @discussion    Only captions with the same start time and duration will be referenced. If captions with different start times and durations exhibit similar problems, a separate instance of AVCaptionConversionWarning will be used to indicate each problematic case. If the referenced captions have multiple problems, a separate instance of AVCaptionConversionWarning will be issued to indicate each problem.
+//
 // RangeOfCaptions calls the underlying RangeOfCaptions.
 func (x *CaptionConversionWarning) RangeOfCaptions() foundation.NSRange {
 	return x.inner.RangeOfCaptions()
 }
 
+// @property      adjustment @abstract      Indicates an adjustment to the indicated captions that can be applied in order to correct the problem. @discussion    If the value of adjustment is not nil and the conversion operation is performed without correcting the problem, the adjustment will be applied during conversion. If the value of adjustment is nil and the conversion operation is performed without correcting the problem, the indicated captions will be omitted from the output media data.
+//
 // Adjustment calls the underlying Adjustment.
 func (x *CaptionConversionWarning) Adjustment() *CaptionConversionAdjustment {
 	_r := x.inner.Adjustment()

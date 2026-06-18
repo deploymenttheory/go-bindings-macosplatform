@@ -37,16 +37,22 @@ func NewMediaSelectionOption() *MediaSelectionOption {
 	return &MediaSelectionOption{inner: raw.AVMediaSelectionOptionFromID(_id)}
 }
 
+// Reports whether the media selection option includes media with the specified media characteristic. - Parameter mediaCharacteristic: The media characteristic of interest, e.g. AVMediaCharacteristicVisual, AVMediaCharacteristicAudible, AVMediaCharacteristicLegible, etc. - Returns: YES if the media selection option includes media with the specified characteristic, otherwise NO.
+//
 // HasMediaCharacteristic calls the underlying HasMediaCharacteristic.
 func (x *MediaSelectionOption) HasMediaCharacteristic(mediaCharacteristic *foundation.NSString) bool {
 	return x.inner.HasMediaCharacteristic(mediaCharacteristic)
 }
 
+// Provides an NSArray of AVMetadataItems, one for each metadata item in the container of the specified format. - Parameter format: The metadata format for which items are requested. - Returns: An NSArray containing AVMetadataItems.
+//
 // MetadataForFormat calls the underlying MetadataForFormat.
 func (x *MediaSelectionOption) MetadataForFormat(format string) *foundation.NSArray[*raw.AVMetadataItem] {
 	return x.inner.MetadataForFormat(foundation.NSStringStringWithUTF8String(format))
 }
 
+// If a media selection option in another group is associated with the specified option, returns a reference to the associated option. Audible media selection options often have associated legible media selection options; in particular, audible options are typically associated with forced-only subtitle options with the same locale. See AVMediaCharacteristicContainsOnlyForcedSubtitles in AVMediaFormat.h for a discussion of forced-only subtitles. - Parameter mediaSelectionGroup: A media selection group in which an associated option is to be sought. - Returns: An instance of AVMediaSelectionOption.
+//
 // AssociatedMediaSelectionOptionInMediaSelectionGroup calls the underlying AssociatedMediaSelectionOptionInMediaSelectionGroup.
 func (x *MediaSelectionOption) AssociatedMediaSelectionOptionInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *MediaSelectionOption {
 	_r := x.inner.AssociatedMediaSelectionOptionInMediaSelectionGroup(mediaSelectionGroup)
@@ -56,11 +62,15 @@ func (x *MediaSelectionOption) AssociatedMediaSelectionOptionInMediaSelectionGro
 	return &MediaSelectionOption{inner: _r}
 }
 
+// Returns a serializable property list that can be used to obtain an instance of AVMediaSelectionOption representing the same option as the receiver via -[AVMediaSelectionGroup mediaSelectionOptionWithPropertyList:]. - Returns: A serializable property list that's sufficient to identify the option within its group. For serialization utilities, see NSPropertyList.h.
+//
 // PropertyList calls the underlying PropertyList.
 func (x *MediaSelectionOption) PropertyList() objc.ID {
 	return x.inner.PropertyList()
 }
 
+// Provides an NSString suitable for display. May use this option's common metadata, media characteristics and locale properties in addition to the provided locale to formulate an NSString intended for display. Will only consider common metadata with the specified locale. - Parameter locale: Localize manufactured portions of the string using the specificed locale.
+//
 // DisplayNameWithLocale calls the underlying DisplayNameWithLocale.
 func (x *MediaSelectionOption) DisplayNameWithLocale(locale *foundation.NSLocale) string {
 	_r := x.inner.DisplayNameWithLocale(locale)
@@ -70,6 +80,8 @@ func (x *MediaSelectionOption) DisplayNameWithLocale(locale *foundation.NSLocale
 	return purego.GoString(_r.Ptr())
 }
 
+// The media type of the media data, e.g. AVMediaTypeAudio, AVMediaTypeSubtitle, etc.
+//
 // MediaType calls the underlying MediaType.
 func (x *MediaSelectionOption) MediaType() string {
 	_r := x.inner.MediaType()
@@ -79,6 +91,8 @@ func (x *MediaSelectionOption) MediaType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The mediaSubTypes of the media data associated with the option. An NSArray of NSNumbers carrying four character codes (of type FourCharCode) as defined in CoreAudioTypes.h for audio media and in CMFormatDescription.h for video media. Also see CMFormatDescriptionGetMediaSubType in CMFormatDescription.h for more information about media subtypes. Note that if no information is available about the encoding of the media presented when a media option is selected, the value of mediaSubTypes will be an empty array. This can occur, for example, with streaming media. In these cases the value of mediaSubTypes should simply not be used as a criteria for selection.
+//
 // MediaSubTypes returns the collection as a Go slice.
 func (x *MediaSelectionOption) MediaSubTypes() []*foundation.NSNumber {
 	arr := x.inner.MediaSubTypes()
@@ -90,11 +104,15 @@ func (x *MediaSelectionOption) MediaSubTypes() []*foundation.NSNumber {
 	})
 }
 
+// Indicates whether a media selection option is playable. If the media data associated with the option cannot be decoded or otherwise rendered, playable is NO.
+//
 // IsPlayable calls the underlying IsPlayable.
 func (x *MediaSelectionOption) IsPlayable() bool {
 	return x.inner.IsPlayable()
 }
 
+// Indicates the RFC 4646 language tag associated with the option. May be nil.
+//
 // ExtendedLanguageTag calls the underlying ExtendedLanguageTag.
 func (x *MediaSelectionOption) ExtendedLanguageTag() string {
 	_r := x.inner.ExtendedLanguageTag()
@@ -104,11 +122,15 @@ func (x *MediaSelectionOption) ExtendedLanguageTag() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Indicates the locale for which the media option was authored. Use -[NSLocale objectForKey:NSLocaleLanguageCode] to obtain the language code of the locale. See NSLocale.h for additional information.
+//
 // Locale calls the underlying Locale.
 func (x *MediaSelectionOption) Locale() *foundation.NSLocale {
 	return x.inner.Locale()
 }
 
+// Provides an array of AVMetadataItems for each common metadata key for which a value is available. The array of AVMetadataItems can be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:], according to locale via +[AVMetadataItem metadataItemsFromArray:withLocale:], or according to key via +[AVMetadataItem metadataItemsFromArray:withKey:keySpace:]. Example: to obtain the name (or title) of a media selection option in any of the user's preferred languages. ```objc NSString *title = nil; NSArray *titles = [AVMetadataItem metadataItemsFromArray:[mediaSelectionOption commonMetadata] withKey:AVMetadataCommonKeyTitle keySpace:AVMetadataKeySpaceCommon]; if ([titles count] > 0) { // Try to get a title that matches one of the user's preferred languages. NSArray *titlesForPreferredLanguages = [AVMetadataItem metadataItemsFromArray:titles filteredAndSortedAccordingToPreferredLanguages:[NSLocale preferredLanguages]]; if ([titlesForPreferredLanguages count] > 0) { title = [[titlesForPreferredLanguages objectAtIndex:0] stringValue]; } // No matches in any of the preferred languages. Just use the primary title metadata we find. if (title == nil) { title = [[titles objectAtIndex:0] stringValue]; } } ```
+//
 // CommonMetadata returns the collection as a Go slice.
 func (x *MediaSelectionOption) CommonMetadata() []*MetadataItem {
 	arr := x.inner.CommonMetadata()
@@ -120,6 +142,8 @@ func (x *MediaSelectionOption) CommonMetadata() []*MetadataItem {
 	})
 }
 
+// Provides an NSArray of NSStrings, each representing a metadata format that contains metadata associated with the option (e.g. ID3, iTunes metadata, etc.). Metadata formats are defined in AVMetadataFormat.h.
+//
 // AvailableMetadataFormats returns the collection as a Go slice.
 func (x *MediaSelectionOption) AvailableMetadataFormats() []string {
 	arr := x.inner.AvailableMetadataFormats()
@@ -131,6 +155,8 @@ func (x *MediaSelectionOption) AvailableMetadataFormats() []string {
 	})
 }
 
+// Provides an NSString suitable for display using the current system locale. May use this option's common metadata, media characteristics and locale properties in addition to the current system locale to formulate an NSString intended for display. In the event that common metadata is not available in the specified locale, displayName will fall back to considering locales with the multilingual ("mul") then undetermined ("und") locale identifiers. For a display name strictly with the specified locale use displayNameWithLocale: instead.
+//
 // DisplayName calls the underlying DisplayName.
 func (x *MediaSelectionOption) DisplayName() string {
 	_r := x.inner.DisplayName()

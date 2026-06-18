@@ -36,11 +36,15 @@ func NewAppExtensionInfo() *AppExtensionInfo {
 	return &AppExtensionInfo{inner: raw.BAAppExtensionInfoFromID(_id)}
 }
 
+// @brief The number of bytes remaining that can be scheduled if the total download size is restricted. @discussion When a download is restricted, your extension can only schedule up to its `BADownloadAllowance` defined in your app's `Info.plist`. This result tells you the number of bytes remaining that can be scheduled before the application is launched. Once the application is launched, this restriction is removed. @result The result is `nil` if downloads are not restricted. It returns a valid number with the remaining available download size otherwise.
+//
 // RestrictedDownloadSizeRemaining calls the underlying RestrictedDownloadSizeRemaining.
 func (x *AppExtensionInfo) RestrictedDownloadSizeRemaining() *foundation.NSNumber {
 	return x.inner.RestrictedDownloadSizeRemaining()
 }
 
+// @brief The number of bytes remaining that can be scheduled if the total download size of optional assets is restricted. @discussion When a download is restricted, your extension can only schedule up to its `BAEssentialDownloadAllowance` defined in your app's `Info.plist`. This result tells you the number of bytes remaining that can be scheduled before the application is launched. Once the application is launched, this restriction is removed. @result The result is `nil` if downloads are not restricted. It returns a valid number with the remaining available download size otherwise.
+//
 // RestrictedEssentialDownloadSizeRemaining calls the underlying RestrictedEssentialDownloadSizeRemaining.
 func (x *AppExtensionInfo) RestrictedEssentialDownloadSizeRemaining() *foundation.NSNumber {
 	return x.inner.RestrictedEssentialDownloadSizeRemaining()

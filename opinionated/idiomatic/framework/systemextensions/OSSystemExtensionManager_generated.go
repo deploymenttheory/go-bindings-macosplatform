@@ -35,6 +35,8 @@ func NewSystemExtensionManager() *SystemExtensionManager {
 	return &SystemExtensionManager{inner: raw.OSSystemExtensionManagerFromID(_id)}
 }
 
+// @abstract Submits a System Extension request to the manager. @param request The request to process.
+//
 // SubmitRequest calls the underlying SubmitRequest.
 func (x *SystemExtensionManager) SubmitRequest(request *raw.OSSystemExtensionRequest) {
 	x.inner.SubmitRequest(request)

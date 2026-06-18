@@ -31,6 +31,8 @@ func PasswordCredentialFromID(id objc.ID) *PasswordCredential {
 	return &PasswordCredential{inner: raw.ASPasswordCredentialFromID(id)}
 }
 
+// @abstract Initializes an ASPasswordCredential object. @param user the user. @param password the password.
+//
 // NewPasswordCredentialWithUserPassword creates a new [PasswordCredential].
 func NewPasswordCredentialWithUserPassword(user string, password string) *PasswordCredential {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasswordCredential")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewPasswordCredentialWithUserPassword(user string, password string) *Passwo
 	return &PasswordCredential{inner: raw.ASPasswordCredentialFromID(_id)}
 }
 
+// @abstract The user name of this credential. @result The user string.
+//
 // User calls the underlying User.
 func (x *PasswordCredential) User() string {
 	_r := x.inner.User()
@@ -47,6 +51,8 @@ func (x *PasswordCredential) User() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The password of this credential. @result The password string.
+//
 // Password calls the underlying Password.
 func (x *PasswordCredential) Password() string {
 	_r := x.inner.Password()

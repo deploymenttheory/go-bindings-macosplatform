@@ -35,17 +35,23 @@ func NewRacingWheel() *RacingWheel {
 	return &RacingWheel{inner: raw.GCRacingWheelFromID(_id)}
 }
 
+// A GCRacingWheel must be acquired before your application can begin receiving events from it.  Prior to acquisition, your application may only query the properties of the racing wheel.  Acquisition is exclusive and may fail.
+//
 // AcquireDevice returns any validation error.
 func (x *RacingWheel) AcquireDevice() error {
 	_, err := x.inner.AcquireDeviceWithError()
 	return err
 }
 
+// Releases a previous acquisition of the racing wheel.
+//
 // RelinquishDevice calls the underlying RelinquishDevice.
 func (x *RacingWheel) RelinquishDevice() {
 	x.inner.RelinquishDevice()
 }
 
+// Polls the state vector of the racing wheel and saves it to a new instance of GCRacingWheel. If your application is heavily multithreaded this may also be useful to guarantee atomicity of input handling as a snapshot will not change based on user input once it is taken. @see snapshot @return A new racing wheel with the duplicated state vector of the receiver.
+//
 // Capture calls the underlying Capture.
 func (x *RacingWheel) Capture() *RacingWheel {
 	_r := x.inner.Capture()
@@ -55,11 +61,15 @@ func (x *RacingWheel) Capture() *RacingWheel {
 	return &RacingWheel{inner: _r}
 }
 
+// Checks if the racing wheel has been acquired by the application. This property is observable.
+//
 // IsAcquired calls the underlying IsAcquired.
 func (x *RacingWheel) IsAcquired() bool {
 	return x.inner.IsAcquired()
 }
 
+// Get the physical input profile for the racing wheel.
+//
 // WheelInput calls the underlying WheelInput.
 func (x *RacingWheel) WheelInput() *RacingWheelInput {
 	_r := x.inner.WheelInput()
@@ -69,6 +79,8 @@ func (x *RacingWheel) WheelInput() *RacingWheelInput {
 	return &RacingWheelInput{inner: _r}
 }
 
+// A GCRacingWheel may represent a real device managed by the operating system, or a snapshot created by the developer. @see capture
+//
 // IsSnapshot calls the underlying IsSnapshot.
 func (x *RacingWheel) IsSnapshot() bool {
 	return x.inner.IsSnapshot()

@@ -35,12 +35,16 @@ func NewScannerFeatureRange() *ScannerFeatureRange {
 	return &ScannerFeatureRange{inner: raw.ICScannerFeatureRangeFromID(_id)}
 }
 
+// @property currentValue @abstract ￼The current value. Attempting to set the current value to a value that is not coincident with a step will result in a value corresponding to the nearest step being assigned to the current value.
+//
 // WithCurrentValue sets the currentValue property and returns the receiver for chaining.
 func (x *ScannerFeatureRange) WithCurrentValue(currentValue float64) *ScannerFeatureRange {
 	x.inner.SetCurrentValue(currentValue)
 	return x
 }
 
+// @property currentValue @abstract ￼The current value. Attempting to set the current value to a value that is not coincident with a step will result in a value corresponding to the nearest step being assigned to the current value.
+//
 // CurrentValue calls the underlying CurrentValue.
 func (x *ScannerFeatureRange) CurrentValue() float64 {
 	return x.inner.CurrentValue()
@@ -51,21 +55,29 @@ func (x *ScannerFeatureRange) SetCurrentValue(currentValue float64) {
 	x.inner.SetCurrentValue(currentValue)
 }
 
+// @property defaultValue @abstract The default value￼. Attempting to set the default value to a value that is not coincident with a step will result in a value corresponding to the nearest step being assigned to the default value.
+//
 // DefaultValue calls the underlying DefaultValue.
 func (x *ScannerFeatureRange) DefaultValue() float64 {
 	return x.inner.DefaultValue()
 }
 
+// @property minValue @abstract The minimum value.
+//
 // MinValue calls the underlying MinValue.
 func (x *ScannerFeatureRange) MinValue() float64 {
 	return x.inner.MinValue()
 }
 
+// @property maxValue @abstract ￼The maximum value.
+//
 // MaxValue calls the underlying MaxValue.
 func (x *ScannerFeatureRange) MaxValue() float64 {
 	return x.inner.MaxValue()
 }
 
+// @property stepSize @abstract ￼The step size.
+//
 // StepSize calls the underlying StepSize.
 func (x *ScannerFeatureRange) StepSize() float64 {
 	return x.inner.StepSize()

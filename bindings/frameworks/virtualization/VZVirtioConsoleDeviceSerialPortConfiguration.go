@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration object that requests the creation of a console device to communicate with the guest system.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtioconsoledeviceserialportconfiguration
 type VZVirtioConsoleDeviceSerialPortConfiguration struct {
 	VZSerialPortConfiguration
@@ -29,6 +31,7 @@ func VZVirtioConsoleDeviceSerialPortConfigurationFromID(id objc.ID) *VZVirtioCon
 	return o
 }
 
+// Creates a serial port configuration object.
 func (o *VZVirtioConsoleDeviceSerialPortConfiguration) Init() *VZVirtioConsoleDeviceSerialPortConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioConsoleDeviceSerialPortConfigurationSelInit)
 	if _ret != 0 {

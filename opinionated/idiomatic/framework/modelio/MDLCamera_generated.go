@@ -42,6 +42,8 @@ func (x *Camera) WithProjection(projection MDLCameraProjection) *Camera {
 	return x
 }
 
+// Bounding distance for visible objects
+//
 // WithNearVisibilityDistance sets the nearVisibilityDistance property and returns the receiver for chaining.
 func (x *Camera) WithNearVisibilityDistance(nearVisibilityDistance float32) *Camera {
 	x.inner.SetNearVisibilityDistance(nearVisibilityDistance)
@@ -54,108 +56,144 @@ func (x *Camera) WithFarVisibilityDistance(farVisibilityDistance float32) *Camer
 	return x
 }
 
+// World to meters conversion scale. Required for certain calculations.
+//
 // WithWorldToMetersConversionScale sets the worldToMetersConversionScale property and returns the receiver for chaining.
 func (x *Camera) WithWorldToMetersConversionScale(worldToMetersConversionScale float32) *Camera {
 	x.inner.SetWorldToMetersConversionScale(worldToMetersConversionScale)
 	return x
 }
 
+// Radial distortion of the lens, second order term
+//
 // WithBarrelDistortion sets the barrelDistortion property and returns the receiver for chaining.
 func (x *Camera) WithBarrelDistortion(barrelDistortion float32) *Camera {
 	x.inner.SetBarrelDistortion(barrelDistortion)
 	return x
 }
 
+// Radial distortion of the lens, fourth order term
+//
 // WithFisheyeDistortion sets the fisheyeDistortion property and returns the receiver for chaining.
 func (x *Camera) WithFisheyeDistortion(fisheyeDistortion float32) *Camera {
 	x.inner.SetFisheyeDistortion(fisheyeDistortion)
 	return x
 }
 
+// Amount of optical vignetting, rom zero to one.
+//
 // WithOpticalVignetting sets the opticalVignetting property and returns the receiver for chaining.
 func (x *Camera) WithOpticalVignetting(opticalVignetting float32) *Camera {
 	x.inner.SetOpticalVignetting(opticalVignetting)
 	return x
 }
 
+// Amount of chromatic abberation, from zero to one.
+//
 // WithChromaticAberration sets the chromaticAberration property and returns the receiver for chaining.
 func (x *Camera) WithChromaticAberration(chromaticAberration float32) *Camera {
 	x.inner.SetChromaticAberration(chromaticAberration)
 	return x
 }
 
+// Lens focal length in mm. @see fieldOfView
+//
 // WithFocalLength sets the focalLength property and returns the receiver for chaining.
 func (x *Camera) WithFocalLength(focalLength float32) *Camera {
 	x.inner.SetFocalLength(focalLength)
 	return x
 }
 
+// Focus distance
+//
 // WithFocusDistance sets the focusDistance property and returns the receiver for chaining.
 func (x *Camera) WithFocusDistance(focusDistance float32) *Camera {
 	x.inner.SetFocusDistance(focusDistance)
 	return x
 }
 
+// The field of view, in degrees. @see focalLength
+//
 // WithFieldOfView sets the fieldOfView property and returns the receiver for chaining.
 func (x *Camera) WithFieldOfView(fieldOfView float32) *Camera {
 	x.inner.SetFieldOfView(fieldOfView)
 	return x
 }
 
+// f-stop, default is 5.6
+//
 // WithFStop sets the fStop property and returns the receiver for chaining.
 func (x *Camera) WithFStop(fStop float32) *Camera {
 	x.inner.SetFStop(fStop)
 	return x
 }
 
+// Aperture blade count, where zero indicates a circle.
+//
 // WithApertureBladeCount sets the apertureBladeCount property and returns the receiver for chaining.
 func (x *Camera) WithApertureBladeCount(apertureBladeCount uint) *Camera {
 	x.inner.SetApertureBladeCount(apertureBladeCount)
 	return x
 }
 
+// Maximum circle of confusion size in mm on the image plane
+//
 // WithMaximumCircleOfConfusion sets the maximumCircleOfConfusion property and returns the receiver for chaining.
 func (x *Camera) WithMaximumCircleOfConfusion(maximumCircleOfConfusion float32) *Camera {
 	x.inner.SetMaximumCircleOfConfusion(maximumCircleOfConfusion)
 	return x
 }
 
+// Shutter open interval, in seconds
+//
 // WithShutterOpenInterval sets the shutterOpenInterval property and returns the receiver for chaining.
 func (x *Camera) WithShutterOpenInterval(shutterOpenInterval float64) *Camera {
 	x.inner.SetShutterOpenInterval(shutterOpenInterval)
 	return x
 }
 
+// vertical aperture of the sensor or film gate, default is 24mm @see sensorAspect
+//
 // WithSensorVerticalAperture sets the sensorVerticalAperture property and returns the receiver for chaining.
 func (x *Camera) WithSensorVerticalAperture(sensorVerticalAperture float32) *Camera {
 	x.inner.SetSensorVerticalAperture(sensorVerticalAperture)
 	return x
 }
 
+// Sensor or film gate aperture aspect ratio, default is 1.5 @see sensorVerticalAperture
+//
 // WithSensorAspect sets the sensorAspect property and returns the receiver for chaining.
 func (x *Camera) WithSensorAspect(sensorAspect float32) *Camera {
 	x.inner.SetSensorAspect(sensorAspect)
 	return x
 }
 
+// @property parent @abstract Parent object. Nil if no parent. @discussion Set to nil when you remove this from an object container inside the parent object.
+//
 // WithParent sets the parent property and returns the receiver for chaining.
 func (x *Camera) WithParent(parent ObjectProvider) *Camera {
 	x.inner.MDLObject.SetParent(parent.asObject())
 	return x
 }
 
+// @property instance @abstract Instance object @discussion nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
+//
 // WithInstance sets the instance property and returns the receiver for chaining.
 func (x *Camera) WithInstance(instance ObjectProvider) *Camera {
 	x.inner.MDLObject.SetInstance(instance.asObject())
 	return x
 }
 
+// @property transform @abstract Short hand property for the MDLTransformComponent. @discussion The default value is nil @see MDLTransformComponent
+//
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *Camera) WithTransform(transform raw.MDLTransformComponent) *Camera {
 	x.inner.MDLObject.SetTransform(transform)
 	return x
 }
 
+// @property children @abstract Short hand property for the MDLObjectContainerComponent. @discussion The default value is an empty MDLObjectContainer @see MDLObjectContainerComponent
+//
 // WithChildren sets the children property and returns the receiver for chaining.
 func (x *Camera) WithChildren(children raw.MDLObjectContainerComponent) *Camera {
 	x.inner.MDLObject.SetChildren(children)
@@ -168,26 +206,36 @@ func (x *Camera) WithHidden(hidden bool) *Camera {
 	return x
 }
 
+// Move the camera back and orient the camera so that a bounding box is framed within the current field of view. Uses the Y axis as up. If setNearAndFar is YES, the near and far visibility distances will be set.
+//
 // FrameBoundingBoxSetNearAndFar calls the underlying FrameBoundingBoxSetNearAndFar.
 func (x *Camera) FrameBoundingBoxSetNearAndFar(boundingBox raw.MDLAxisAlignedBoundingBox, setNearAndFar bool) {
 	x.inner.FrameBoundingBoxSetNearAndFar(boundingBox, setNearAndFar)
 }
 
+// Orient the camera so that the camera points at focusPosition. Assumes that the Y axis is up.
+//
 // LookAt calls the underlying LookAt.
 func (x *Camera) LookAt(focusPosition unsafe.Pointer) {
 	x.inner.LookAt(focusPosition)
 }
 
+// Set the position of the camera and orient it so that it points at focusPosition. Assumes that the Y axis is up.
+//
 // LookAtFrom calls the underlying LookAtFrom.
 func (x *Camera) LookAtFrom(focusPosition unsafe.Pointer, cameraPosition unsafe.Pointer) {
 	x.inner.LookAtFrom(focusPosition, cameraPosition)
 }
 
+// A convenience function to calculate a ray from the camera to a pixel in a viewport of a given size
+//
 // RayToForViewPort calls the underlying RayToForViewPort.
 func (x *Camera) RayToForViewPort(pixel unsafe.Pointer, size unsafe.Pointer) unsafe.Pointer {
 	return x.inner.RayToForViewPort(pixel, size)
 }
 
+// Create a bokeh kernel corresponding to the apertureBladeCount
+//
 // BokehKernelWithSize calls the underlying BokehKernelWithSize.
 func (x *Camera) BokehKernelWithSize(size unsafe.Pointer) *Texture {
 	_r := x.inner.BokehKernelWithSize(size)
@@ -197,6 +245,8 @@ func (x *Camera) BokehKernelWithSize(size unsafe.Pointer) *Texture {
 	return &Texture{inner: _r}
 }
 
+// The projection matrix is calculated from the near and far visibility distances, and the field of view. @see nearVisibilityDistance, nearVisibilityDistance
+//
 // ProjectionMatrix calls the underlying ProjectionMatrix.
 func (x *Camera) ProjectionMatrix() unsafe.Pointer {
 	return x.inner.ProjectionMatrix()
@@ -212,6 +262,8 @@ func (x *Camera) SetProjection(projection MDLCameraProjection) {
 	x.inner.SetProjection(raw.MDLCameraProjection(projection))
 }
 
+// Bounding distance for visible objects
+//
 // NearVisibilityDistance calls the underlying NearVisibilityDistance.
 func (x *Camera) NearVisibilityDistance() float32 {
 	return x.inner.NearVisibilityDistance()
@@ -232,6 +284,8 @@ func (x *Camera) SetFarVisibilityDistance(farVisibilityDistance float32) {
 	x.inner.SetFarVisibilityDistance(farVisibilityDistance)
 }
 
+// World to meters conversion scale. Required for certain calculations.
+//
 // WorldToMetersConversionScale calls the underlying WorldToMetersConversionScale.
 func (x *Camera) WorldToMetersConversionScale() float32 {
 	return x.inner.WorldToMetersConversionScale()
@@ -242,6 +296,8 @@ func (x *Camera) SetWorldToMetersConversionScale(worldToMetersConversionScale fl
 	x.inner.SetWorldToMetersConversionScale(worldToMetersConversionScale)
 }
 
+// Radial distortion of the lens, second order term
+//
 // BarrelDistortion calls the underlying BarrelDistortion.
 func (x *Camera) BarrelDistortion() float32 {
 	return x.inner.BarrelDistortion()
@@ -252,6 +308,8 @@ func (x *Camera) SetBarrelDistortion(barrelDistortion float32) {
 	x.inner.SetBarrelDistortion(barrelDistortion)
 }
 
+// Radial distortion of the lens, fourth order term
+//
 // FisheyeDistortion calls the underlying FisheyeDistortion.
 func (x *Camera) FisheyeDistortion() float32 {
 	return x.inner.FisheyeDistortion()
@@ -262,6 +320,8 @@ func (x *Camera) SetFisheyeDistortion(fisheyeDistortion float32) {
 	x.inner.SetFisheyeDistortion(fisheyeDistortion)
 }
 
+// Amount of optical vignetting, rom zero to one.
+//
 // OpticalVignetting calls the underlying OpticalVignetting.
 func (x *Camera) OpticalVignetting() float32 {
 	return x.inner.OpticalVignetting()
@@ -272,6 +332,8 @@ func (x *Camera) SetOpticalVignetting(opticalVignetting float32) {
 	x.inner.SetOpticalVignetting(opticalVignetting)
 }
 
+// Amount of chromatic abberation, from zero to one.
+//
 // ChromaticAberration calls the underlying ChromaticAberration.
 func (x *Camera) ChromaticAberration() float32 {
 	return x.inner.ChromaticAberration()
@@ -282,6 +344,8 @@ func (x *Camera) SetChromaticAberration(chromaticAberration float32) {
 	x.inner.SetChromaticAberration(chromaticAberration)
 }
 
+// Lens focal length in mm. @see fieldOfView
+//
 // FocalLength calls the underlying FocalLength.
 func (x *Camera) FocalLength() float32 {
 	return x.inner.FocalLength()
@@ -292,6 +356,8 @@ func (x *Camera) SetFocalLength(focalLength float32) {
 	x.inner.SetFocalLength(focalLength)
 }
 
+// Focus distance
+//
 // FocusDistance calls the underlying FocusDistance.
 func (x *Camera) FocusDistance() float32 {
 	return x.inner.FocusDistance()
@@ -302,6 +368,8 @@ func (x *Camera) SetFocusDistance(focusDistance float32) {
 	x.inner.SetFocusDistance(focusDistance)
 }
 
+// The field of view, in degrees. @see focalLength
+//
 // FieldOfView calls the underlying FieldOfView.
 func (x *Camera) FieldOfView() float32 {
 	return x.inner.FieldOfView()
@@ -312,6 +380,8 @@ func (x *Camera) SetFieldOfView(fieldOfView float32) {
 	x.inner.SetFieldOfView(fieldOfView)
 }
 
+// f-stop, default is 5.6
+//
 // FStop calls the underlying FStop.
 func (x *Camera) FStop() float32 {
 	return x.inner.FStop()
@@ -322,6 +392,8 @@ func (x *Camera) SetFStop(fStop float32) {
 	x.inner.SetFStop(fStop)
 }
 
+// Aperture blade count, where zero indicates a circle.
+//
 // ApertureBladeCount calls the underlying ApertureBladeCount.
 func (x *Camera) ApertureBladeCount() uint {
 	return x.inner.ApertureBladeCount()
@@ -332,6 +404,8 @@ func (x *Camera) SetApertureBladeCount(apertureBladeCount uint) {
 	x.inner.SetApertureBladeCount(apertureBladeCount)
 }
 
+// Maximum circle of confusion size in mm on the image plane
+//
 // MaximumCircleOfConfusion calls the underlying MaximumCircleOfConfusion.
 func (x *Camera) MaximumCircleOfConfusion() float32 {
 	return x.inner.MaximumCircleOfConfusion()
@@ -342,6 +416,8 @@ func (x *Camera) SetMaximumCircleOfConfusion(maximumCircleOfConfusion float32) {
 	x.inner.SetMaximumCircleOfConfusion(maximumCircleOfConfusion)
 }
 
+// Shutter open interval, in seconds
+//
 // ShutterOpenInterval calls the underlying ShutterOpenInterval.
 func (x *Camera) ShutterOpenInterval() float64 {
 	return x.inner.ShutterOpenInterval()
@@ -352,6 +428,8 @@ func (x *Camera) SetShutterOpenInterval(shutterOpenInterval float64) {
 	x.inner.SetShutterOpenInterval(shutterOpenInterval)
 }
 
+// vertical aperture of the sensor or film gate, default is 24mm @see sensorAspect
+//
 // SensorVerticalAperture calls the underlying SensorVerticalAperture.
 func (x *Camera) SensorVerticalAperture() float32 {
 	return x.inner.SensorVerticalAperture()
@@ -362,6 +440,8 @@ func (x *Camera) SetSensorVerticalAperture(sensorVerticalAperture float32) {
 	x.inner.SetSensorVerticalAperture(sensorVerticalAperture)
 }
 
+// Sensor or film gate aperture aspect ratio, default is 1.5 @see sensorVerticalAperture
+//
 // SensorAspect calls the underlying SensorAspect.
 func (x *Camera) SensorAspect() float32 {
 	return x.inner.SensorAspect()
@@ -372,6 +452,8 @@ func (x *Camera) SetSensorAspect(sensorAspect float32) {
 	x.inner.SetSensorAspect(sensorAspect)
 }
 
+// Sensor zoom factor
+//
 // SensorEnlargement calls the underlying SensorEnlargement.
 func (x *Camera) SensorEnlargement() unsafe.Pointer {
 	return x.inner.SensorEnlargement()
@@ -382,6 +464,8 @@ func (x *Camera) SetSensorEnlargement(sensorEnlargement unsafe.Pointer) {
 	x.inner.SetSensorEnlargement(sensorEnlargement)
 }
 
+// Sensor shift factor in mm.
+//
 // SensorShift calls the underlying SensorShift.
 func (x *Camera) SensorShift() unsafe.Pointer {
 	return x.inner.SensorShift()
@@ -392,6 +476,8 @@ func (x *Camera) SetSensorShift(sensorShift unsafe.Pointer) {
 	x.inner.SetSensorShift(sensorShift)
 }
 
+// Flash amount, unit less
+//
 // Flash calls the underlying Flash.
 func (x *Camera) Flash() unsafe.Pointer {
 	return x.inner.Flash()
@@ -402,6 +488,8 @@ func (x *Camera) SetFlash(flash unsafe.Pointer) {
 	x.inner.SetFlash(flash)
 }
 
+// exposure curve compression where values below the x value are to be passed through, above the y value, values are to be clamped at maximum display brightness, and a function such as a logarithmic ramp is to be applied in between.
+//
 // ExposureCompression calls the underlying ExposureCompression.
 func (x *Camera) ExposureCompression() unsafe.Pointer {
 	return x.inner.ExposureCompression()
@@ -412,6 +500,8 @@ func (x *Camera) SetExposureCompression(exposureCompression unsafe.Pointer) {
 	x.inner.SetExposureCompression(exposureCompression)
 }
 
+// Exposure amount, unit less
+//
 // Exposure calls the underlying Exposure.
 func (x *Camera) Exposure() unsafe.Pointer {
 	return x.inner.Exposure()

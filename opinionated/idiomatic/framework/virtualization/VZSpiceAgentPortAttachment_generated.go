@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An attachment point that enables the Spice clipboard sharing capability.
+//
 // SpiceAgentPortAttachment wraps [raw.VZSpiceAgentPortAttachment] with a fluent Go API.
 type SpiceAgentPortAttachment struct {
 	inner *raw.VZSpiceAgentPortAttachment
@@ -35,12 +37,16 @@ func NewSpiceAgentPortAttachment() *SpiceAgentPortAttachment {
 	return &SpiceAgentPortAttachment{inner: raw.VZSpiceAgentPortAttachmentFromID(_id)}
 }
 
+// A Boolean value that indicates whether the framework needs to share the clipboard between the host and the VM.
+//
 // WithSharesClipboard sets the sharesClipboard property and returns the receiver for chaining.
 func (x *SpiceAgentPortAttachment) WithSharesClipboard(sharesClipboard bool) *SpiceAgentPortAttachment {
 	x.inner.SetSharesClipboard(sharesClipboard)
 	return x
 }
 
+// @abstract Enable the Spice agent clipboard sharing capability. @discussion If enabled, the clipboard capability will be advertised to the Spice guest agent. Copy and paste events will be shared between the host and the virtual machine. This property is enabled by default.
+//
 // SharesClipboard calls the underlying SharesClipboard.
 func (x *SpiceAgentPortAttachment) SharesClipboard() bool {
 	return x.inner.SharesClipboard()

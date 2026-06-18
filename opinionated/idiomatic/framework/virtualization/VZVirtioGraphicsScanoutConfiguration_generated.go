@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The configuration for a Virtio graphics device that configures the dimensions of the graphics device for a Linux VM.
+//
 // VirtioGraphicsScanoutConfiguration wraps [raw.VZVirtioGraphicsScanoutConfiguration] with a fluent Go API.
 type VirtioGraphicsScanoutConfiguration struct {
 	inner *raw.VZVirtioGraphicsScanoutConfiguration
@@ -31,6 +33,8 @@ func VirtioGraphicsScanoutConfigurationFromID(id objc.ID) *VirtioGraphicsScanout
 	return &VirtioGraphicsScanoutConfiguration{inner: raw.VZVirtioGraphicsScanoutConfigurationFromID(id)}
 }
 
+// Creates a Virtio graphics device with the specified dimensions.
+//
 // NewVirtioGraphicsScanoutConfigurationWithWidthInPixelsHeightInPixels creates a new [VirtioGraphicsScanoutConfiguration].
 func NewVirtioGraphicsScanoutConfigurationWithWidthInPixelsHeightInPixels(widthInPixels int, heightInPixels int) *VirtioGraphicsScanoutConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioGraphicsScanoutConfiguration")), objc.RegisterName("alloc"))
@@ -38,18 +42,24 @@ func NewVirtioGraphicsScanoutConfigurationWithWidthInPixelsHeightInPixels(widthI
 	return &VirtioGraphicsScanoutConfiguration{inner: raw.VZVirtioGraphicsScanoutConfigurationFromID(_id)}
 }
 
+// An integer value that describes the width of the graphics device in pixels.
+//
 // WithWidthInPixels sets the widthInPixels property and returns the receiver for chaining.
 func (x *VirtioGraphicsScanoutConfiguration) WithWidthInPixels(widthInPixels int) *VirtioGraphicsScanoutConfiguration {
 	x.inner.SetWidthInPixels(widthInPixels)
 	return x
 }
 
+// An integer value that describes the height of the graphics device in pixels.
+//
 // WithHeightInPixels sets the heightInPixels property and returns the receiver for chaining.
 func (x *VirtioGraphicsScanoutConfiguration) WithHeightInPixels(heightInPixels int) *VirtioGraphicsScanoutConfiguration {
 	x.inner.SetHeightInPixels(heightInPixels)
 	return x
 }
 
+// @abstract The width of the scanout, in pixels.
+//
 // WidthInPixels calls the underlying WidthInPixels.
 func (x *VirtioGraphicsScanoutConfiguration) WidthInPixels() int {
 	return x.inner.WidthInPixels()
@@ -60,6 +70,8 @@ func (x *VirtioGraphicsScanoutConfiguration) SetWidthInPixels(widthInPixels int)
 	x.inner.SetWidthInPixels(widthInPixels)
 }
 
+// @abstract The height of the scanout, in pixels.
+//
 // HeightInPixels calls the underlying HeightInPixels.
 func (x *VirtioGraphicsScanoutConfiguration) HeightInPixels() int {
 	return x.inner.HeightInPixels()

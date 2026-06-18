@@ -39,6 +39,8 @@ func NewShareRequestAccessOperation() *ShareRequestAccessOperation {
 	return &ShareRequestAccessOperation{inner: raw.CKShareRequestAccessOperationFromID(_id)}
 }
 
+// Creates a share request access operation configured with specified share URLs. - Parameter shareURLs: An array of `NSURL` objects representing the shares to request access to. - Returns: A configured “CKShareRequestAccessOperation“ instance.
+//
 // NewShareRequestAccessOperationWithShareURLs creates a new [ShareRequestAccessOperation].
 func NewShareRequestAccessOperationWithShareURLs(shareURLs *foundation.NSArray[*foundation.NSURL]) *ShareRequestAccessOperation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKShareRequestAccessOperation")), objc.RegisterName("alloc"))
@@ -46,6 +48,8 @@ func NewShareRequestAccessOperationWithShareURLs(shareURLs *foundation.NSArray[*
 	return &ShareRequestAccessOperation{inner: raw.CKShareRequestAccessOperationFromID(_id)}
 }
 
+// The URLs of the shares to request access to. Include multiple URLs to request access to multiple shares simultaneously. The server processes each URL independently.
+//
 // WithShareURLs sets the collection, converting the Go slice to an NSArray.
 func (x *ShareRequestAccessOperation) WithShareURLs(items ...*foundation.NSURL) *ShareRequestAccessOperation {
 	if len(items) == 0 {
@@ -64,66 +68,88 @@ func (x *ShareRequestAccessOperation) WithShareURLs(items ...*foundation.NSURL) 
 	return x
 }
 
+// The closure to execute when CloudKit processes a share access request. The server does not disclose share existence to protect user privacy. This property is a closure that returns no value and has the following parameters: - The URL of the share that was processed. - An error describing why the access request failed, or `nil` if successful. The closure executes once for each URL in the “CKShareRequestAccessOperation/shareURLs“ property. Each time the closure executes, it executes serially with respect to the other closure of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+//
 // WithPerShareAccessRequestCompletionBlock sets the perShareAccessRequestCompletionBlock property and returns the receiver for chaining.
 func (x *ShareRequestAccessOperation) WithPerShareAccessRequestCompletionBlock(perShareAccessRequestCompletionBlock func(*foundation.NSURL, unsafe.Pointer)) *ShareRequestAccessOperation {
 	x.inner.SetPerShareAccessRequestCompletionBlock(perShareAccessRequestCompletionBlock)
 	return x
 }
 
+// The closure to execute after CloudKit processes all share access requests. This property is a closure that returns no value and has the following parameter: - An error that contains information about a problem, or `nil` if the system successfully processes the share access requests. The closure executes only once, and represents your final opportunity to process the operation's results. It executes after all share access request completion closures finish. The closure executes serially with respect to the other closures of the operation. The closure reports an error of type “CKError/Code/partialFailure“ when it processes only some of the share access requests successfully. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are the URLs of the shares whose access requests can't be processed by the operation. The corresponding values are errors that contain information about the failures. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+//
 // WithShareRequestAccessCompletionBlock sets the shareRequestAccessCompletionBlock property and returns the receiver for chaining.
 func (x *ShareRequestAccessOperation) WithShareRequestAccessCompletionBlock(shareRequestAccessCompletionBlock func(unsafe.Pointer)) *ShareRequestAccessOperation {
 	x.inner.SetShareRequestAccessCompletionBlock(shareRequestAccessCompletionBlock)
 	return x
 }
 
+// The operation's configuration.
+//
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *ShareRequestAccessOperation) WithConfiguration(configuration *OperationConfiguration) *ShareRequestAccessOperation {
 	x.inner.CKOperation.SetConfiguration(configuration.Unwrap())
 	return x
 }
 
+// The operation's group.
+//
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *ShareRequestAccessOperation) WithGroup(group *OperationGroup) *ShareRequestAccessOperation {
 	x.inner.CKOperation.SetGroup(group.Unwrap())
 	return x
 }
 
+// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+//
 // WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
 func (x *ShareRequestAccessOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ShareRequestAccessOperation {
 	x.inner.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
 	return x
 }
 
+// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
+//
 // WithContainer sets the container property and returns the receiver for chaining.
 func (x *ShareRequestAccessOperation) WithContainer(container *Container) *ShareRequestAccessOperation {
 	x.inner.CKOperation.SetContainer(container.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
+//
 // WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
 func (x *ShareRequestAccessOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *ShareRequestAccessOperation {
 	x.inner.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
 	return x
 }
 
+// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
+//
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *ShareRequestAccessOperation) WithLongLived(longLived bool) *ShareRequestAccessOperation {
 	x.inner.CKOperation.SetLongLived(longLived)
 	return x
 }
 
+// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
+//
 // WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
 func (x *ShareRequestAccessOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ShareRequestAccessOperation {
 	x.inner.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
 	return x
 }
 
+// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
+//
 // WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
 func (x *ShareRequestAccessOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ShareRequestAccessOperation {
 	x.inner.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
 	return x
 }
 
+// The URLs of the shares to request access to. Include multiple URLs to request access to multiple shares simultaneously. The server processes each URL independently.
+//
 // ShareURLs returns the collection as a Go slice.
 func (x *ShareRequestAccessOperation) ShareURLs() []*foundation.NSURL {
 	arr := x.inner.ShareURLs()
@@ -140,6 +166,8 @@ func (x *ShareRequestAccessOperation) SetShareURLs(shareURLs *foundation.NSArray
 	x.inner.SetShareURLs(shareURLs)
 }
 
+// The closure to execute when CloudKit processes a share access request. The server does not disclose share existence to protect user privacy. This property is a closure that returns no value and has the following parameters: - The URL of the share that was processed. - An error describing why the access request failed, or `nil` if successful. The closure executes once for each URL in the “CKShareRequestAccessOperation/shareURLs“ property. Each time the closure executes, it executes serially with respect to the other closure of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+//
 // PerShareAccessRequestCompletionBlock calls the underlying PerShareAccessRequestCompletionBlock.
 func (x *ShareRequestAccessOperation) PerShareAccessRequestCompletionBlock() objc.Block {
 	return x.inner.PerShareAccessRequestCompletionBlock()
@@ -169,6 +197,8 @@ func (x *ShareRequestAccessOperation) SetPerShareAccessRequestCompletionBlock(ct
 	}
 }
 
+// The closure to execute after CloudKit processes all share access requests. This property is a closure that returns no value and has the following parameter: - An error that contains information about a problem, or `nil` if the system successfully processes the share access requests. The closure executes only once, and represents your final opportunity to process the operation's results. It executes after all share access request completion closures finish. The closure executes serially with respect to the other closures of the operation. The closure reports an error of type “CKError/Code/partialFailure“ when it processes only some of the share access requests successfully. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are the URLs of the shares whose access requests can't be processed by the operation. The corresponding values are errors that contain information about the failures. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
+//
 // ShareRequestAccessCompletionBlock calls the underlying ShareRequestAccessCompletionBlock.
 func (x *ShareRequestAccessOperation) ShareRequestAccessCompletionBlock() objc.Block {
 	return x.inner.ShareRequestAccessCompletionBlock()

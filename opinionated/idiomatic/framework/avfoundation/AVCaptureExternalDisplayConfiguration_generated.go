@@ -38,24 +38,32 @@ func NewCaptureExternalDisplayConfiguration() *CaptureExternalDisplayConfigurati
 	return &CaptureExternalDisplayConfiguration{inner: raw.AVCaptureExternalDisplayConfigurationFromID(_id)}
 }
 
+// A property indicating whether the frame rate of the external display should be configured to match the camera's frame rate. If you want to configure your “AVCaptureVideoPreviewLayer“ to match its source “AVCaptureDevice/activeVideoMinFrameDuration“, set “shouldMatchFrameRate“ to `true`. The default value is `false`.
+//
 // WithShouldMatchFrameRate sets the shouldMatchFrameRate property and returns the receiver for chaining.
 func (x *CaptureExternalDisplayConfiguration) WithShouldMatchFrameRate(shouldMatchFrameRate bool) *CaptureExternalDisplayConfiguration {
 	x.inner.SetShouldMatchFrameRate(shouldMatchFrameRate)
 	return x
 }
 
+// A property indicating whether the color space of the configurator's preview layer should be preserved on the output display by avoiding color space conversions. Set “bypassColorSpaceConversion“ to `true` if you would like the configurator's  “AVCaptureVideoPreviewLayer“ color space preserved on the output display. This is accomplished by setting the working color space to match the color space of the external display. The color properties of the “CALayer“ remain untouched. The default value is `false`.
+//
 // WithBypassColorSpaceConversion sets the bypassColorSpaceConversion property and returns the receiver for chaining.
 func (x *CaptureExternalDisplayConfiguration) WithBypassColorSpaceConversion(bypassColorSpaceConversion bool) *CaptureExternalDisplayConfiguration {
 	x.inner.SetBypassColorSpaceConversion(bypassColorSpaceConversion)
 	return x
 }
 
+// Your preferred external display resolution. Use “preferredResolution“ to set your desired resolution of the external display. When left at the default value of { 0, 0 },  the native resolution of the external display is used.
+//
 // WithPreferredResolution sets the preferredResolution property and returns the receiver for chaining.
 func (x *CaptureExternalDisplayConfiguration) WithPreferredResolution(preferredResolution coremedia.CMVideoDimensions) *CaptureExternalDisplayConfiguration {
 	x.inner.SetPreferredResolution(preferredResolution)
 	return x
 }
 
+// A property indicating whether the frame rate of the external display should be configured to match the camera's frame rate. If you want to configure your “AVCaptureVideoPreviewLayer“ to match its source “AVCaptureDevice/activeVideoMinFrameDuration“, set “shouldMatchFrameRate“ to `true`. The default value is `false`.
+//
 // ShouldMatchFrameRate calls the underlying ShouldMatchFrameRate.
 func (x *CaptureExternalDisplayConfiguration) ShouldMatchFrameRate() bool {
 	return x.inner.ShouldMatchFrameRate()
@@ -66,6 +74,8 @@ func (x *CaptureExternalDisplayConfiguration) SetShouldMatchFrameRate(shouldMatc
 	x.inner.SetShouldMatchFrameRate(shouldMatchFrameRate)
 }
 
+// A property indicating whether the color space of the configurator's preview layer should be preserved on the output display by avoiding color space conversions. Set “bypassColorSpaceConversion“ to `true` if you would like the configurator's  “AVCaptureVideoPreviewLayer“ color space preserved on the output display. This is accomplished by setting the working color space to match the color space of the external display. The color properties of the “CALayer“ remain untouched. The default value is `false`.
+//
 // BypassColorSpaceConversion calls the underlying BypassColorSpaceConversion.
 func (x *CaptureExternalDisplayConfiguration) BypassColorSpaceConversion() bool {
 	return x.inner.BypassColorSpaceConversion()
@@ -76,6 +86,8 @@ func (x *CaptureExternalDisplayConfiguration) SetBypassColorSpaceConversion(bypa
 	x.inner.SetBypassColorSpaceConversion(bypassColorSpaceConversion)
 }
 
+// Your preferred external display resolution. Use “preferredResolution“ to set your desired resolution of the external display. When left at the default value of { 0, 0 },  the native resolution of the external display is used.
+//
 // PreferredResolution calls the underlying PreferredResolution.
 func (x *CaptureExternalDisplayConfiguration) PreferredResolution() coremedia.CMVideoDimensions {
 	return x.inner.PreferredResolution()

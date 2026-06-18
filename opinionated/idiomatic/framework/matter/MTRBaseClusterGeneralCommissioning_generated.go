@@ -35,6 +35,8 @@ func MTRBaseClusterGeneralCommissioningFromID(id objc.ID) *MTRBaseClusterGeneral
 	return &MTRBaseClusterGeneralCommissioning{inner: raw.MTRBaseClusterGeneralCommissioningFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterGeneralCommissioningWithDeviceEndpointIDQueue creates a new [MTRBaseClusterGeneralCommissioning].
 func NewMTRBaseClusterGeneralCommissioningWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterGeneralCommissioning {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterGeneralCommissioning")), objc.RegisterName("alloc"))
@@ -49,6 +51,8 @@ func NewMTRBaseClusterGeneralCommissioningWithDeviceEndpointQueue(device *raw.MT
 	return &MTRBaseClusterGeneralCommissioning{inner: raw.MTRBaseClusterGeneralCommissioningFromID(_id)}
 }
 
+// Command ArmFailSafe This command is used to arm or disarm the fail-safe timer.
+//
 // ArmFailSafeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterGeneralCommissioning) ArmFailSafeWithParamsCompletion(ctx context.Context, params *raw.MTRGeneralCommissioningClusterArmFailSafeParams) (*MTRGeneralCommissioningClusterArmFailSafeResponseParams, error) {
 	type _result struct {
@@ -75,6 +79,8 @@ func (x *MTRBaseClusterGeneralCommissioning) ArmFailSafeWithParamsCompletion(ctx
 	}
 }
 
+// Command SetRegulatoryConfig This command is used to set the regulatory configuration for the device.
+//
 // SetRegulatoryConfigWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterGeneralCommissioning) SetRegulatoryConfigWithParamsCompletion(ctx context.Context, params *raw.MTRGeneralCommissioningClusterSetRegulatoryConfigParams) (*MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, error) {
 	type _result struct {
@@ -101,6 +107,8 @@ func (x *MTRBaseClusterGeneralCommissioning) SetRegulatoryConfigWithParamsComple
 	}
 }
 
+// Command CommissioningComplete This command is used to indicate that the commissioning process is complete.
+//
 // CommissioningCompleteWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterGeneralCommissioning) CommissioningCompleteWithParamsCompletion(ctx context.Context, params *raw.MTRGeneralCommissioningClusterCommissioningCompleteParams) (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, error) {
 	type _result struct {

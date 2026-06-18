@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The configuration object that requests the creation of a virtual storage device in the guest system.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtioblockdeviceconfiguration
 type VZVirtioBlockDeviceConfiguration struct {
 	VZStorageDeviceConfiguration
@@ -35,7 +37,7 @@ func VZVirtioBlockDeviceConfigurationFromID(id objc.ID) *VZVirtioBlockDeviceConf
 	return o
 }
 
-// @abstract Initialize a VZVirtioBlockDeviceConfiguration with a device attachment. @param attachment The storage device attachment. This defines how the virtualized device operates on the host side. @see VZDiskImageStorageDeviceAttachment
+// Creates a block device configuration object that uses the specified storage medium.
 func (o *VZVirtioBlockDeviceConfiguration) InitWithAttachment(attachment *VZStorageDeviceAttachment) *VZVirtioBlockDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioBlockDeviceConfigurationSelInitWithAttachment, attachment.Ptr())
 	if _ret != 0 {
@@ -44,7 +46,7 @@ func (o *VZVirtioBlockDeviceConfiguration) InitWithAttachment(attachment *VZStor
 	return VZVirtioBlockDeviceConfigurationFromID(_ret)
 }
 
-// @abstract Check if blockDeviceIdentifier is a valid Virtio block device identifier. @param blockDeviceIdentifier The device identifier to validate. @param error If not nil, assigned with an error describing why the device identifier is not valid. @discussion The device identifier must be at most 20 bytes in length and ASCII-encodable.
+// Checks the validity of a block device identifier.
 func VZVirtioBlockDeviceConfigurationValidateBlockDeviceIdentifierError(blockDeviceIdentifier *foundation.NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsVZVirtioBlockDeviceConfiguration), _vZVirtioBlockDeviceConfigurationSelValidateBlockDeviceIdentifierError, blockDeviceIdentifier.Ptr(), unsafe.Pointer(&_nsErr))

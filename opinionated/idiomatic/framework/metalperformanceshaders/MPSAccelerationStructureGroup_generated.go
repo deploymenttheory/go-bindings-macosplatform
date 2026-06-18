@@ -37,6 +37,8 @@ func NewAccelerationStructureGroupWithDevice(device metal.MTLDevice) *Accelerati
 	return &AccelerationStructureGroup{inner: raw.MPSAccelerationStructureGroupFromID(_id)}
 }
 
+// @brief The Metal device this acceleration structure group was created with
+//
 // Device calls the underlying Device.
 func (x *AccelerationStructureGroup) Device() metal.MTLDevice {
 	return x.inner.Device()

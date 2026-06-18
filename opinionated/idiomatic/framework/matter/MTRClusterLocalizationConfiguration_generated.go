@@ -32,6 +32,8 @@ func MTRClusterLocalizationConfigurationFromID(id objc.ID) *MTRClusterLocalizati
 	return &MTRClusterLocalizationConfiguration{inner: raw.MTRClusterLocalizationConfigurationFromID(id)}
 }
 
+// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+//
 // NewMTRClusterLocalizationConfigurationWithDeviceEndpointIDQueue creates a new [MTRClusterLocalizationConfiguration].
 func NewMTRClusterLocalizationConfigurationWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterLocalizationConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterLocalizationConfiguration")), objc.RegisterName("alloc"))

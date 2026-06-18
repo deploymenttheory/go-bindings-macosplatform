@@ -29,6 +29,8 @@ func MIDIProgramChangeEventFromID(id objc.ID) *MIDIProgramChangeEvent {
 	return &MIDIProgramChangeEvent{inner: raw.AVMIDIProgramChangeEventFromID(id)}
 }
 
+// @method initWithChannel:programNumber: @abstract Initialize the event with a channel and a program number. @param channel The MIDI channel for the message.  Range: 0-15. @param programNumber The program number to be sent.  Range: 0-127. @discussion Per the General MIDI specification, the actual instrument that is chosen will depend on optional AVMIDIControlChangeMessageTypeBankSelect events sent prior to this program change.
+//
 // NewMIDIProgramChangeEventWithChannelProgramNumber creates a new [MIDIProgramChangeEvent].
 func NewMIDIProgramChangeEventWithChannelProgramNumber(channel uint, programNumber uint) *MIDIProgramChangeEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMIDIProgramChangeEvent")), objc.RegisterName("alloc"))
@@ -36,12 +38,16 @@ func NewMIDIProgramChangeEventWithChannelProgramNumber(channel uint, programNumb
 	return &MIDIProgramChangeEvent{inner: raw.AVMIDIProgramChangeEventFromID(_id)}
 }
 
+// @property programNumber The MIDI program number.  Range: 0-127.
+//
 // WithProgramNumber sets the programNumber property and returns the receiver for chaining.
 func (x *MIDIProgramChangeEvent) WithProgramNumber(programNumber uint) *MIDIProgramChangeEvent {
 	x.inner.SetProgramNumber(programNumber)
 	return x
 }
 
+// @property channel The MIDI channel for the event.  Range: 0-15.
+//
 // WithChannel sets the channel property and returns the receiver for chaining.
 func (x *MIDIProgramChangeEvent) WithChannel(channel uint) *MIDIProgramChangeEvent {
 	x.inner.AVMIDIChannelEvent.SetChannel(channel)

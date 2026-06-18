@@ -1,0 +1,335 @@
+{
+  "schema_version": 1,
+  "framework": "NearbyInteraction",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "NIAlgorithmConvergence": {
+      "doc": "An object that provides the state and reason for user coaching recommendations.",
+      "url": "https://developer.apple.com/documentation/nearbyinteraction/nialgorithmconvergence"
+    },
+    "NIConfiguration": {
+      "doc": "An abstract base class for interaction configurations.",
+      "url": "https://developer.apple.com/documentation/nearbyinteraction/niconfiguration"
+    },
+    "NIDLTDOAConfiguration": {
+      "doc": "A configuration that enables Downlink Time-Difference-of-Arrival ranging.",
+      "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoaconfiguration"
+    },
+    "NIDLTDOAMeasurement": {
+      "doc": "Information from a Downlink Time-Difference-of-Arrival anchor that you use to derive a range estimate.",
+      "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurement"
+    },
+    "NIDiscoveryToken": {
+      "doc": "An object that uniquely identifies a peer that participates in an interaction session.",
+      "url": "https://developer.apple.com/documentation/nearbyinteraction/nidiscoverytoken"
+    },
+    "NINearbyAccessoryConfiguration": {
+      "doc": "A configuration that enables interaction between iPhone and third-party accessories.",
+      "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyaccessoryconfiguration"
+    },
+    "NINearbyObject": {
+      "doc": "Location information for a peer device in an interaction session.",
+      "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobject"
+    },
+    "NINearbyPeerConfiguration": {
+      "doc": "A configuration that enables interaction between iPhone or Apple Watch devices.",
+      "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbypeerconfiguration"
+    },
+    "NISession": {
+      "doc": "An object that identifies a unique connection between two peer devices.",
+      "url": "https://developer.apple.com/documentation/nearbyinteraction/nisession"
+    }
+  },
+  "protocols": {
+    "NIDeviceCapability": {
+      "doc": "An interface that adds Boolean values that indicate an interaction session feature support.",
+      "url": "https://developer.apple.com/documentation/nearbyinteraction/nidevicecapability"
+    },
+    "NISessionDelegate": {
+      "doc": "An object that monitors and reacts to session updates.",
+      "url": "https://developer.apple.com/documentation/nearbyinteraction/nisessiondelegate"
+    }
+  },
+  "enums": {
+    "NIAlgorithmConvergenceStatus": {
+      "doc": "The possible states of Camera Assistance.",
+      "url": "https://developer.apple.com/documentation/nearbyinteraction/nialgorithmconvergencestatus"
+    },
+    "NIDLTDOACoordinatesType": {
+      "doc": "The possible coordinate types for Downlink Time-Difference-of-Arrival measurement updates.",
+      "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoacoordinatestype",
+      "members": {
+        "NIDLTDOACoordinatesTypeGeodetic": {
+          "doc": "A coordinate type that specifies a latitude, longitude, and altitude triplet.",
+          "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoacoordinatestype/geodetic"
+        },
+        "NIDLTDOACoordinatesTypeRelative": {
+          "doc": "A coordinate type that specifies a 3D Cartesian triplet.",
+          "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoacoordinatestype/relative"
+        },
+        "init(rawValue:)": {
+          "doc": "Initializes a coordinate type for a Downlink Time-Difference-of-Arrival measurement.",
+          "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoacoordinatestype/init(rawvalue:)"
+        }
+      }
+    },
+    "NIDLTDOAMeasurementType": {
+      "doc": "The possible phases of downlink positioning signals.",
+      "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurementtype",
+      "members": {
+        "NIDLTDOAMeasurementTypeFinal": {
+          "doc": "A type that indicates the measurement derives from an initial anchor’s last message.",
+          "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurementtype/final"
+        },
+        "NIDLTDOAMeasurementTypePoll": {
+          "doc": "A type that indicates the measurement derives from an initiating anchor’s first message.",
+          "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurementtype/poll"
+        },
+        "NIDLTDOAMeasurementTypeResponse": {
+          "doc": "A type that indicates the measurement derives from responder anchors’ messages.",
+          "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurementtype/response"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a measurement type from the given underlying value.",
+          "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurementtype/init(rawvalue:)"
+        }
+      }
+    },
+    "NIErrorCode": {
+      "doc": "Codes that identify errors in Nearby Interaction.",
+      "url": "https://developer.apple.com/documentation/nearbyinteraction/nierrorcode"
+    },
+    "NINearbyObjectRemovalReason": {
+      "doc": "The reason a session removed a nearby object.",
+      "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobjectremovalreason"
+    },
+    "NINearbyObjectVerticalDirectionEstimate": {
+      "doc": "Estimations of a nearby object’s vertical position in relation to the user’s device.",
+      "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobjectverticaldirectionestimate"
+    }
+  },
+  "methods": {
+    "NIDLTDOAConfiguration": {
+      "-initWithNetworkIdentifier:": {
+        "doc": "Initializes a Downlink Time-Difference-of-Arrival (DL-TDOA) configuration for a specific tracked area.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoaconfiguration/init(networkidentifier:)"
+      },
+      "-initWithNetworkIdentifier:discoveryMethod:": {
+        "doc": "Initializes a DL-TDOA configuration with a network identifier and discovery method.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoaconfiguration/init(networkidentifier:discoverymethod:)"
+      }
+    },
+    "NINearbyAccessoryConfiguration": {
+      "-initWithAccessoryData:bluetoothPeerIdentifier:error:": {
+        "doc": "Creates a configuration for an accessory with the given Bluetooth peer identifier.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyaccessoryconfiguration/init(accessorydata:bluetoothpeeridentifier:)"
+      },
+      "-initWithBluetoothChannelSoundingIdentifier:previousBluetoothIdentifier:": {
+        "doc": "Initializes a configuration for Bluetooth Channel Sounding ranging with an accessory.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyaccessoryconfiguration/init(bluetoothchannelsoundingidentifier:previousbluetoothidentifier:)"
+      },
+      "-initWithData:error:": {
+        "doc": "Creates a configuration for interaction between iPhone and third-party accessories.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyaccessoryconfiguration/init(data:)"
+      }
+    },
+    "NINearbyPeerConfiguration": {
+      "-initWithPeerToken:": {
+        "doc": "Creates a configuration for interaction between devices, including iPhone and Apple Watch.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbypeerconfiguration/init(peertoken:)"
+      }
+    },
+    "NISession": {
+      "-invalidate": {
+        "doc": "Stops a running session.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nisession/invalidate()"
+      },
+      "-pause": {
+        "doc": "Stops sending distance and direction updates to the peer.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nisession/pause()"
+      },
+      "-runWithConfiguration:": {
+        "doc": "Starts a session with a nearby peer.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nisession/run(_:)"
+      },
+      "-setARSession:": {
+        "doc": "Provides the framework with an existing AR session to use for Camera Assistance.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nisession/setarsession(_:)"
+      },
+      "-updateMotionState:forObjectWithToken:": {
+        "doc": "Notifies the session of an accessory’s motion state change.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nisession/updatemotionstate(_:forobjectwithtoken:)"
+      },
+      "-worldTransformForObject:": {
+        "doc": "Returns a world transform to integrate a nearby object in an AR experience.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nisession/worldtransformforobject:"
+      }
+    }
+  },
+  "properties": {
+    "NIAlgorithmConvergence": {
+      "reasons": {
+        "doc": "An array of reasons that contribute to the convergence status.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nialgorithmconvergence/reasons"
+      },
+      "status": {
+        "doc": "The current state of the framework’s Camera Assistance feature.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nialgorithmconvergence/status-654t"
+      }
+    },
+    "NIDLTDOAConfiguration": {
+      "NIDLTDOADiscoveryMethod": {
+        "doc": "The technologies an app can use to discover Downlink Time-Difference-of-Arrival anchors.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoaconfiguration/discoverymethod-swift.enum"
+      },
+      "discoveryMethod": {
+        "doc": "The technology your app uses to discover DL-TDOA anchors.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoaconfiguration/discoverymethod-swift.property"
+      },
+      "networkIdentifier": {
+        "doc": "A unique identifier for a Downlink Time-Difference-of-Arrival network.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoaconfiguration/networkidentifier"
+      }
+    },
+    "NIDLTDOAMeasurement": {
+      "NIDLTDOAMeasurementFloorElevation": {
+        "doc": "An object that describes how high off the ground DL-TDOA anchors reside in the environment.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurement/floorelevation-swift.class"
+      },
+      "address": {
+        "doc": "A value that uniquely identifies an anchor in a tracked area.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurement/address"
+      },
+      "carrierFrequencyOffset": {
+        "doc": "The drift, as a ratio, across the frequencies of the receiver and the anchor.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurement/carrierfrequencyoffset"
+      },
+      "clusterInitiatorAddress": {
+        "doc": "The address of the initiator anchor within the same cluster.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurement/clusterinitiatoraddress"
+      },
+      "coordinates": {
+        "doc": "A triplet that represents the location in 3D space of the anchor that provides the measurement.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurement/coordinates"
+      },
+      "coordinatesType": {
+        "doc": "The type of coordinate system that the measurement conforms to.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurement/coordinatestype"
+      },
+      "floorElevation": {
+        "doc": "The floor elevation information for the anchor, if available.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurement/floorelevation-swift.property"
+      },
+      "measurementType": {
+        "doc": "The type of anchor message that the measurement derives from.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurement/measurementtype"
+      },
+      "receiveTime": {
+        "doc": "A timestamp, in seconds, for the time that the device receives the measurement.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurement/receivetime"
+      },
+      "responderClockFrequencyOffset": {
+        "doc": "The clock frequency offset of the responder anchor relative to the initiator anchor.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurement/responderclockfrequencyoffset-8wu5r"
+      },
+      "signalStrength": {
+        "doc": "A value that represents the received signal strength, in dBm, from the anchor that provides the measurement.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurement/signalstrength"
+      },
+      "transmitTime": {
+        "doc": "A transmission timestamp, in seconds, for the received message.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidltdoameasurement/transmittime"
+      }
+    },
+    "NIDiscoveryToken": {
+      "deviceCapabilities": {
+        "doc": "A protocol object that describes the nearby interaction capabilities of a person’s device.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nidiscoverytoken/devicecapabilities"
+      }
+    },
+    "NINearbyAccessoryConfiguration": {
+      "accessoryDiscoveryToken": {
+        "doc": "An identifier for the accessory in a session.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyaccessoryconfiguration/accessorydiscoverytoken"
+      },
+      "cameraAssistanceEnabled": {
+        "doc": "A Boolean value that combines the spatial awareness of ARKit with Nearby Interaction to improve the accuracy of a nearby object’s position.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyaccessoryconfiguration/iscameraassistanceenabled"
+      }
+    },
+    "NINearbyObject": {
+      "NINearbyObjectRemovalReason": {
+        "doc": "The reason a session removed a nearby object.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobject/removalreason"
+      },
+      "NINearbyObjectVerticalDirectionEstimate": {
+        "doc": "Estimations of a nearby object’s vertical position in relation to the user’s device.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobject/verticaldirectionestimate-swift.enum"
+      },
+      "direction": {
+        "doc": "A vector that points from the user’s device in the direction of the peer device.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobject/direction-4qh5w"
+      },
+      "discoveryToken": {
+        "doc": "A unique identifier for a peer device in the session.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobject/discoverytoken"
+      },
+      "distance": {
+        "doc": "The distance from the user’s device to the peer device in meters.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobject/distance-9atp7"
+      },
+      "horizontalAngle": {
+        "doc": "An angle in radians that indicates the azimuthal direction to the nearby object.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobject/horizontalangle-9ibky"
+      },
+      "verticalDirectionEstimate": {
+        "doc": "The estimation of a nearby object’s vertical position as it relates to the user’s device.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbyobject/verticaldirectionestimate-swift.property"
+      }
+    },
+    "NINearbyPeerConfiguration": {
+      "cameraAssistanceEnabled": {
+        "doc": "A Boolean value that combines the spatial awareness of ARKit with Nearby Interaction to improve the accuracy of a nearby object’s position.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbypeerconfiguration/iscameraassistanceenabled"
+      },
+      "extendedDistanceMeasurementEnabled": {
+        "doc": "A Boolean value that indicates whether both peers can use extended distance measurement for this Nearby Interaction session instance.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbypeerconfiguration/isextendeddistancemeasurementenabled"
+      },
+      "peerDiscoveryToken": {
+        "doc": "A value that uniquely identifies the other peer in the interaction session.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/ninearbypeerconfiguration/peerdiscoverytoken"
+      }
+    },
+    "NISession": {
+      "configuration": {
+        "doc": "The configuration run by the session.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nisession/configuration"
+      },
+      "delegate": {
+        "doc": "An object that the framework notifies of session events.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nisession/delegate"
+      },
+      "delegateQueue": {
+        "doc": "The dispatch queue on which the session invokes delegate callbacks.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nisession/delegatequeue"
+      },
+      "deviceCapabilities": {
+        "doc": "An object that communicates the device’s supported framework features.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nisession/devicecapabilities"
+      },
+      "discoveryToken": {
+        "doc": "A temporary, random identifier for a device.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nisession/discoverytoken"
+      },
+      "supported": {
+        "doc": "A Boolean value that indicates whether the device supports basic interaction-session functionality.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nisession/issupported"
+      },
+      "worldTransform(for:)": {
+        "doc": "Returns a world transform to integrate a nearby object in an AR experience.",
+        "url": "https://developer.apple.com/documentation/nearbyinteraction/nisession/worldtransform(for:)"
+      }
+    }
+  }
+}

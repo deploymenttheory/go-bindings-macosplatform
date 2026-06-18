@@ -36,6 +36,8 @@ func NewNWHostEndpoint() *NWHostEndpoint {
 	return &NWHostEndpoint{inner: raw.NWHostEndpointFromID(_id)}
 }
 
+// @property hostname @discussion The endpoint's hostname.
+//
 // Hostname calls the underlying Hostname.
 func (x *NWHostEndpoint) Hostname() string {
 	_r := x.inner.Hostname()
@@ -45,6 +47,8 @@ func (x *NWHostEndpoint) Hostname() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property port @discussion The endpoint's port.
+//
 // Port calls the underlying Port.
 func (x *NWHostEndpoint) Port() string {
 	_r := x.inner.Port()

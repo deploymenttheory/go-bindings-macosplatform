@@ -34,6 +34,8 @@ func MutableMovieFromID(id objc.ID) *MutableMovie {
 	return &MutableMovie{inner: raw.AVMutableMovieFromID(id)}
 }
 
+// @method			initWithURL:options:error: @abstract		Creates an AVMutableMovie object from a movie header stored in a QuickTime movie file or ISO base media file. @param			URL An NSURL object that specifies a file containing a movie header. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the AVMutableMovie object. @param			outError If an error occurs creating a movie, describes the nature of the failure. @result			An AVMutableMovie object @discussion     By default, the defaultMediaDataStorage property will be nil and each associated AVMutableMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from a file and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
+//
 // NewMutableMovieWithURLOptionsError creates a new [MutableMovie].
 func NewMutableMovieWithURLOptionsError(uRL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MutableMovie, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMutableMovie")), objc.RegisterName("alloc"))
@@ -45,6 +47,8 @@ func NewMutableMovieWithURLOptionsError(uRL string, options *foundation.NSDictio
 	return &MutableMovie{inner: raw.AVMutableMovieFromID(_id)}, nil
 }
 
+// @method			initWithData:options:error: @abstract		Creates an AVMutableMovie object from a movie header stored in an NSData object. @param			data An NSData object containing a movie header. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the AVMutableMovie object. @param			outError If an error occurs creating a movie, describes the nature of the failure. @result			An AVMutableMovie object @discussion     You can use this method to operate on movie headers that are not stored in files. In general you should avoid loading an entire movie file with its media data into an instance of NSData! By default, the defaultMediaDataStorage property will be nil and each associated AVMutableMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from an NSData object and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
+//
 // NewMutableMovieWithDataOptionsError creates a new [MutableMovie].
 func NewMutableMovieWithDataOptionsError(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MutableMovie, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMutableMovie")), objc.RegisterName("alloc"))
@@ -56,6 +60,8 @@ func NewMutableMovieWithDataOptionsError(data *foundation.NSData, options *found
 	return &MutableMovie{inner: raw.AVMutableMovieFromID(_id)}, nil
 }
 
+// @method			initWithSettingsFromMovie:options:error: @abstract		Creates an AVMutableMovie object without tracks (and therefore without media). @param			movie If you wish to transfer settings from an existing movie (including movie userdata and metadata, preferred rate, preferred volume, etc.), pass a reference to an AVMovie object representing that movie. Otherwise pass nil. The userdata and metadata from the source movie may need to be converted if the format of that movie differs from fileType; you may wish to inspect the userdata or metadata of the receiver to ensure that important data was copied. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the AVMutableMovie object. Pass nil for default initialization behavior. @param			outError If an error occurs creating a movie, describes the nature of the failure. @result			An AVMutableMovie object @discussion By default, the defaultMediaDataStorage property will be nil and each associated AVMovieTrack's mediaDataStorage property will be nil. If you want to create an AVMutableMovie from an NSData object and then append sample buffers to any of its tracks, you must first set one of these properties to indicate where the sample data should be written.
+//
 // NewMutableMovieWithSettingsFromMovieOptionsError creates a new [MutableMovie].
 func NewMutableMovieWithSettingsFromMovieOptionsError(movie *raw.AVMovie, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MutableMovie, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMutableMovie")), objc.RegisterName("alloc"))
@@ -67,48 +73,64 @@ func NewMutableMovieWithSettingsFromMovieOptionsError(movie *raw.AVMovie, option
 	return &MutableMovie{inner: raw.AVMutableMovieFromID(_id)}, nil
 }
 
+// @property       preferredRate @abstract       The natural rate at which the movie is to be played; often but not always 1.0.
+//
 // WithPreferredRate sets the preferredRate property and returns the receiver for chaining.
 func (x *MutableMovie) WithPreferredRate(preferredRate float32) *MutableMovie {
 	x.inner.SetPreferredRate(preferredRate)
 	return x
 }
 
+// @property       preferredVolume @abstract       The preferred volume of the audible media data of the movie; often but not always 1.0.
+//
 // WithPreferredVolume sets the preferredVolume property and returns the receiver for chaining.
 func (x *MutableMovie) WithPreferredVolume(preferredVolume float32) *MutableMovie {
 	x.inner.SetPreferredVolume(preferredVolume)
 	return x
 }
 
+// @property       preferredTransform @abstract       A CGAffineTransform indicating the transform specified in the movie's storage container as the preferred transformation of the visual media data for display purposes; the value is often but not always CGAffineTransformIdentity.
+//
 // WithPreferredTransform sets the preferredTransform property and returns the receiver for chaining.
 func (x *MutableMovie) WithPreferredTransform(preferredTransform corefoundation.CGAffineTransform) *MutableMovie {
 	x.inner.SetPreferredTransform(preferredTransform)
 	return x
 }
 
+// @property       timescale @abstract       For file types that contain a 'moov' atom, such as QuickTime Movie files, specifies the time scale of the movie. @discussion		The default movie time scale is 600. In certain cases, you may want to set this to a different value. For instance, a movie that contains a single audio track should typically have the movie time scale set to the media time scale of that track. This property should be set on a new empty movie before any edits are performed on the movie.
+//
 // WithTimescale sets the timescale property and returns the receiver for chaining.
 func (x *MutableMovie) WithTimescale(timescale int32) *MutableMovie {
 	x.inner.SetTimescale(timescale)
 	return x
 }
 
+// @property       modified @abstract       Whether a movie has been modified. @discussion     The value of this property is a BOOL that indicates whether the AVMutableMovie object has been modified since it was created, was last written, or had its modified state cleared via a call to setModified:NO.
+//
 // WithModified sets the modified property and returns the receiver for chaining.
 func (x *MutableMovie) WithModified(modified bool) *MutableMovie {
 	x.inner.SetModified(modified)
 	return x
 }
 
+// @property       defaultMediaDataStorage @abstract       The default storage container for media data added to a movie. @discussion     The value of this property is an AVMediaDataStorage object that indicates where sample data that is added to a movie should be written, for any track for whose mediaDataStorage property is nil.
+//
 // WithDefaultMediaDataStorage sets the defaultMediaDataStorage property and returns the receiver for chaining.
 func (x *MutableMovie) WithDefaultMediaDataStorage(defaultMediaDataStorage *MediaDataStorage) *MutableMovie {
 	x.inner.SetDefaultMediaDataStorage(defaultMediaDataStorage.Unwrap())
 	return x
 }
 
+// @property		interleavingPeriod @abstract		A CMTime that indicates the duration for interleaving runs of samples of each track. @discussion		The default interleaving period is 0.5 seconds.
+//
 // WithInterleavingPeriod sets the interleavingPeriod property and returns the receiver for chaining.
 func (x *MutableMovie) WithInterleavingPeriod(interleavingPeriod coremedia.CMTime) *MutableMovie {
 	x.inner.SetInterleavingPeriod(interleavingPeriod)
 	return x
 }
 
+// @property       metadata @abstract       A collection of metadata stored by the movie. @discussion     The value of this property is an array of AVMetadataItem objects representing the collection of metadata stored by the movie.
+//
 // WithMetadata sets the collection, converting the Go slice to an NSArray.
 func (x *MutableMovie) WithMetadata(items ...MetadataItemProvider) *MutableMovie {
 	if len(items) == 0 {
@@ -142,6 +164,8 @@ func (x *MutableMovie) SetPreferredTransform(preferredTransform corefoundation.C
 	x.inner.SetPreferredTransform(preferredTransform)
 }
 
+// @property       timescale @abstract       For file types that contain a 'moov' atom, such as QuickTime Movie files, specifies the time scale of the movie. @discussion		The default movie time scale is 600. In certain cases, you may want to set this to a different value. For instance, a movie that contains a single audio track should typically have the movie time scale set to the media time scale of that track. This property should be set on a new empty movie before any edits are performed on the movie.
+//
 // Timescale calls the underlying Timescale.
 func (x *MutableMovie) Timescale() int32 {
 	return x.inner.Timescale()
@@ -152,26 +176,36 @@ func (x *MutableMovie) SetTimescale(timescale int32) {
 	x.inner.SetTimescale(timescale)
 }
 
+// @method			insertTimeRange:ofAsset:atTime:copySampleData:error: @abstract		Inserts all the tracks of a timeRange of an asset into a movie. @param			timeRange The time range of the asset to be inserted. @param			asset An AVAsset object indicating the source of the inserted media. Only instances of AVURLAsset and AVComposition are supported. Must not be nil. @param			startTime The time in the target movie at which the media is to be inserted. @param			copySampleData A BOOL value that indicates whether sample data is to be copied from the source to the destination during edits. If YES, the sample data is written to the location specified by the track property mediaDataStorage if non-nil, or else by the movie property defaultMediaDataStorage if non-nil; if both are nil, the method will fail and return NO. If NO, sample data will not be written and sample references to the samples in their original container will be added as necessary. Note that in this case, this method will fail if the source AVAsset is not able to provide sample reference information for the original container. @param			outError If the insertion fails, an NSError object that describes the nature of the failure. @result			A BOOL value that indicates the success of the insertion. @discussion		This method may add new tracks to the target movie to ensure that all tracks of the asset are represented in the inserted timeRange. Existing content at the specified startTime will be pushed out by the duration of timeRange. Note that metadata will not be automatically copied.
+//
 // InsertTimeRangeOfAssetAtTimeCopySampleDataError calls the underlying InsertTimeRangeOfAssetAtTimeCopySampleDataError.
 func (x *MutableMovie) InsertTimeRangeOfAssetAtTimeCopySampleDataError(timeRange coremedia.CMTimeRange, asset *raw.AVAsset, startTime coremedia.CMTime, copySampleData bool) (bool, error) {
 	return x.inner.InsertTimeRangeOfAssetAtTimeCopySampleDataError(timeRange, asset, startTime, copySampleData)
 }
 
+// @method			insertEmptyTimeRange: @abstract		Adds an empty time range to the target movie. @param			timeRange The time range to be made empty. Note that you cannot add empty time ranges to the end of a movie.
+//
 // InsertEmptyTimeRange calls the underlying InsertEmptyTimeRange.
 func (x *MutableMovie) InsertEmptyTimeRange(timeRange coremedia.CMTimeRange) {
 	x.inner.InsertEmptyTimeRange(timeRange)
 }
 
+// @method			removeTimeRange: @abstract		Removes a specified time range from a movie. @param			timeRange The time range to be removed.
+//
 // RemoveTimeRange calls the underlying RemoveTimeRange.
 func (x *MutableMovie) RemoveTimeRange(timeRange coremedia.CMTimeRange) {
 	x.inner.RemoveTimeRange(timeRange)
 }
 
+// @method			scaleTimeRange:toDuration: @abstract		Changes the duration of a time range of a movie. @param			timeRange The time range to be scaled. @param			duration The new duration of the time range.
+//
 // ScaleTimeRangeToDuration calls the underlying ScaleTimeRangeToDuration.
 func (x *MutableMovie) ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime) {
 	x.inner.ScaleTimeRangeToDuration(timeRange, duration)
 }
 
+// @property       modified @abstract       Whether a movie has been modified. @discussion     The value of this property is a BOOL that indicates whether the AVMutableMovie object has been modified since it was created, was last written, or had its modified state cleared via a call to setModified:NO.
+//
 // IsModified calls the underlying IsModified.
 func (x *MutableMovie) IsModified() bool {
 	return x.inner.IsModified()
@@ -187,6 +221,8 @@ func (x *MutableMovie) SetDefaultMediaDataStorage(defaultMediaDataStorage *raw.A
 	x.inner.SetDefaultMediaDataStorage(defaultMediaDataStorage)
 }
 
+// @property		interleavingPeriod @abstract		A CMTime that indicates the duration for interleaving runs of samples of each track. @discussion		The default interleaving period is 0.5 seconds.
+//
 // InterleavingPeriod calls the underlying InterleavingPeriod.
 func (x *MutableMovie) InterleavingPeriod() coremedia.CMTime {
 	return x.inner.InterleavingPeriod()
@@ -197,6 +233,8 @@ func (x *MutableMovie) SetInterleavingPeriod(interleavingPeriod coremedia.CMTime
 	x.inner.SetInterleavingPeriod(interleavingPeriod)
 }
 
+// @method			mutableTrackCompatibleWithTrack: @abstract		Provides a reference to a track of a mutable movie into which any time range of an AVAssetTrack can be inserted (via -[AVMutableMovieTrack insertTimeRange:ofTrack:atTime:copySampleData:error:]). @param			track A reference to the AVAssetTrack from which a time range may be inserted. @result			An AVMutableMovieTrack that can accommodate the insertion. If no such track is available, the result is nil. A new track of the same media type as the AVAssetTrack can be created via -addMutableTrackWithMediaType:copySettingsFromTrack:options:, and this new track will be compatible. @discussion		For best performance, the number of tracks in a movie should be kept to a minimum, corresponding to the number for which media data must be presented in parallel. If media data of the same type is to be presented serially, even from multiple assets, a single track of that media type should be used. This method, -mutableTrackCompatibleWithTrack:, can help the client to identify an existing target track for an insertion.
+//
 // MutableTrackCompatibleWithTrack calls the underlying MutableTrackCompatibleWithTrack.
 func (x *MutableMovie) MutableTrackCompatibleWithTrack(track *raw.AVAssetTrack) *MutableMovieTrack {
 	_r := x.inner.MutableTrackCompatibleWithTrack(track)
@@ -206,6 +244,8 @@ func (x *MutableMovie) MutableTrackCompatibleWithTrack(track *raw.AVAssetTrack) 
 	return &MutableMovieTrack{inner: _r}
 }
 
+// @method			addMutableTrackWithMediaType:copySettingsFromTrack:options: @abstract		Adds an empty track to the target movie. @param			mediaType The media type of the new track (e.g. AVMediaTypeVideo for a video track). @param			track If you wish to transfer settings from an existing track, including width, height, preferred volume, etc., pass a reference to an AVAssetTrack representing that track. Otherwise pass nil. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the new AVMutableMovieTrack object. Pass nil for default initialization behavior. @result			An AVMutableMovieTrack object @discussion		The trackID of the newly added track is a property of the returned instance of AVMutableMovieTrack. This method throws an exception if media type is not equal to the track's media type, or if any option is invalid. Note that metadata will not be automatically copied.
+//
 // AddMutableTrackWithMediaTypeCopySettingsFromTrackOptions calls the underlying AddMutableTrackWithMediaTypeCopySettingsFromTrackOptions.
 func (x *MutableMovie) AddMutableTrackWithMediaTypeCopySettingsFromTrackOptions(mediaType *foundation.NSString, track *raw.AVAssetTrack, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MutableMovieTrack {
 	_r := x.inner.AddMutableTrackWithMediaTypeCopySettingsFromTrackOptions(mediaType, track, options)
@@ -215,19 +255,32 @@ func (x *MutableMovie) AddMutableTrackWithMediaTypeCopySettingsFromTrackOptions(
 	return &MutableMovieTrack{inner: _r}
 }
 
+// @method			addMutableTracksCopyingSettingsFromTracks:options: @abstract		Adds one or more empty tracks to the target movie, copying track settings from the source tracks. @param			existingTracks An array of AVAssetTrack objects. @param			options An NSDictionary object that contains keys for specifying options for the initialization of the new AVMutableMovieTrack objects. Pass nil for default initialization behavior. @result			An array of AVMutableMovieTrack objects; the index of a track in this array is the same as the index of its source track in the existingTracks array. @discussion		This method creates one or more empty tracks in the target movie and configures those tracks with settings (such as track userdata and metadata, width, height, and preferred volume) copied from the source tracks in the existingTracks array. Also, properties involving pairs of tracks (such as track references) are copied from the source tracks to the target tracks. This method throws an exception if any option is invalid.
+//
 // AddMutableTracksCopyingSettingsFromTracksOptions calls the underlying AddMutableTracksCopyingSettingsFromTracksOptions.
 func (x *MutableMovie) AddMutableTracksCopyingSettingsFromTracksOptions(existingTracks *foundation.NSArray[*raw.AVAssetTrack], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.AVMutableMovieTrack] {
 	return x.inner.AddMutableTracksCopyingSettingsFromTracksOptions(existingTracks, options)
 }
 
+// @method			removeTrack: @abstract		Removes a track from the target movie. @param			track The track to be removed.
+//
 // RemoveTrack calls the underlying RemoveTrack.
 func (x *MutableMovie) RemoveTrack(track *raw.AVMovieTrack) {
 	x.inner.RemoveTrack(track)
 }
 
 // SetMetadata calls the underlying SetMetadata.
-func (x *MutableMovie) SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem]) {
-	x.inner.SetMetadata(metadata)
+func (x *MutableMovie) SetMetadata(metadata ...MetadataItemProvider) {
+	_ptrs := make([]objc.ID, len(metadata))
+	for _i, _v := range metadata {
+		_ptrs[_i] = _v.asMetadataItem().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.AVMetadataItem]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.AVMetadataItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetMetadata(_arg0)
 }
 
 func (x *MutableMovie) asMovie() *raw.AVMovie { return &x.inner.AVMovie }
@@ -263,7 +316,7 @@ type MutableMovieable interface {
 	AddMutableTrackWithMediaTypeCopySettingsFromTrackOptions(mediaType *foundation.NSString, track *raw.AVAssetTrack, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MutableMovieTrack
 	AddMutableTracksCopyingSettingsFromTracksOptions(existingTracks *foundation.NSArray[*raw.AVAssetTrack], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.AVMutableMovieTrack]
 	RemoveTrack(track *raw.AVMovieTrack)
-	SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem])
+	SetMetadata(metadata ...MetadataItemProvider)
 }
 
 var _ MutableMovieable = (*MutableMovie)(nil)

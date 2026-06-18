@@ -38,18 +38,24 @@ func NewWKWebExtensionMessagePort() *WKWebExtensionMessagePort {
 	return &WKWebExtensionMessagePort{inner: raw.WKWebExtensionMessagePortFromID(_id)}
 }
 
+// @abstract The block to be executed when a message is received from the web extension. @discussion An optional block to be invoked when a message is received, taking two parameters: the message and an optional error.
+//
 // WithMessageHandler sets the messageHandler property and returns the receiver for chaining.
 func (x *WKWebExtensionMessagePort) WithMessageHandler(messageHandler func(objc.ID, unsafe.Pointer)) *WKWebExtensionMessagePort {
 	x.inner.SetMessageHandler(messageHandler)
 	return x
 }
 
+// @abstract The block to be executed when the port disconnects. @discussion An optional block to be invoked when the port disconnects, taking an optional error that indicates if the disconnection was caused by an error.
+//
 // WithDisconnectHandler sets the disconnectHandler property and returns the receiver for chaining.
 func (x *WKWebExtensionMessagePort) WithDisconnectHandler(disconnectHandler func(unsafe.Pointer)) *WKWebExtensionMessagePort {
 	x.inner.SetDisconnectHandler(disconnectHandler)
 	return x
 }
 
+// @abstract Sends a message to the connected web extension. @param message The JSON-serializable message to be sent. @param completionHandler An optional block to be invoked after the message is sent, taking an optional error. @note The message must be JSON-serializable according to “NSJSONSerialization“.
+//
 // SendMessage blocks until the operation completes or ctx is cancelled.
 func (x *WKWebExtensionMessagePort) SendMessage(ctx context.Context, message objc.ID) error {
 	_ch := make(chan error, 1)
@@ -68,16 +74,22 @@ func (x *WKWebExtensionMessagePort) SendMessage(ctx context.Context, message obj
 	}
 }
 
+// @abstract Disconnects the port, terminating all further messages.
+//
 // Disconnect calls the underlying Disconnect.
 func (x *WKWebExtensionMessagePort) Disconnect() {
 	x.inner.Disconnect()
 }
 
+// @abstract Disconnects the port, terminating all further messages with an optional error. @param error An optional error indicating the reason for disconnection.
+//
 // DisconnectWithError calls the underlying DisconnectWithError.
 func (x *WKWebExtensionMessagePort) DisconnectWithError(error_ unsafe.Pointer) {
 	x.inner.DisconnectWithError(error_)
 }
 
+// @abstract The unique identifier for the app to which this port should be connected. @discussion This identifier is provided by the web extension and may or may not be used by the app. It's up to the app to decide how to interpret this identifier.
+//
 // ApplicationIdentifier calls the underlying ApplicationIdentifier.
 func (x *WKWebExtensionMessagePort) ApplicationIdentifier() string {
 	_r := x.inner.ApplicationIdentifier()
@@ -87,6 +99,8 @@ func (x *WKWebExtensionMessagePort) ApplicationIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The block to be executed when a message is received from the web extension. @discussion An optional block to be invoked when a message is received, taking two parameters: the message and an optional error.
+//
 // MessageHandler calls the underlying MessageHandler.
 func (x *WKWebExtensionMessagePort) MessageHandler() objc.Block {
 	return x.inner.MessageHandler()
@@ -97,6 +111,8 @@ func (x *WKWebExtensionMessagePort) SetMessageHandler(messageHandler func(objc.I
 	x.inner.SetMessageHandler(messageHandler)
 }
 
+// @abstract The block to be executed when the port disconnects. @discussion An optional block to be invoked when the port disconnects, taking an optional error that indicates if the disconnection was caused by an error.
+//
 // DisconnectHandler calls the underlying DisconnectHandler.
 func (x *WKWebExtensionMessagePort) DisconnectHandler() objc.Block {
 	return x.inner.DisconnectHandler()
@@ -120,6 +136,8 @@ func (x *WKWebExtensionMessagePort) SetDisconnectHandler(ctx context.Context) er
 	}
 }
 
+// @abstract Indicates whether the message port is disconnected.
+//
 // IsDisconnected calls the underlying IsDisconnected.
 func (x *WKWebExtensionMessagePort) IsDisconnected() bool {
 	return x.inner.IsDisconnected()

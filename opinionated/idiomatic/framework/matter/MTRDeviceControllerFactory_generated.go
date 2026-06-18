@@ -36,16 +36,22 @@ func NewMTRDeviceControllerFactory() *MTRDeviceControllerFactory {
 	return &MTRDeviceControllerFactory{inner: raw.MTRDeviceControllerFactoryFromID(_id)}
 }
 
+// Start the controller factory. Repeated calls to startControllerFactory without calls to stopControllerFactory in between are NO-OPs. Use the isRunning property to check whether the controller factory needs to be started up. @param[in] startupParams data needed to start up the controller factory. @return Whether startup succeded.
+//
 // StartControllerFactoryError calls the underlying StartControllerFactoryError.
 func (x *MTRDeviceControllerFactory) StartControllerFactoryError(startupParams *raw.MTRDeviceControllerFactoryParams) (bool, error) {
 	return x.inner.StartControllerFactoryError(startupParams)
 }
 
+// Stop the controller factory. This will shut down any outstanding controllers as part of the factory stopping. Repeated calls to stopControllerFactory without calls to startControllerFactory in between are NO-OPs.
+//
 // StopControllerFactory calls the underlying StopControllerFactory.
 func (x *MTRDeviceControllerFactory) StopControllerFactory() {
 	x.inner.StopControllerFactory()
 }
 
+// Create a MTRDeviceController on an existing fabric.  Returns nil on failure. This method will fail if there is no such fabric or if there is already a controller started for that fabric. The fabric is identified by the root public key and fabric id in the startupParams. This method can only be used if the factory was initialized with storage. When using per-controller storage, use [MTRDeviceController initWithParameters:error:].
+//
 // CreateControllerOnExistingFabricError calls the underlying CreateControllerOnExistingFabricError.
 func (x *MTRDeviceControllerFactory) CreateControllerOnExistingFabricError(startupParams *raw.MTRDeviceControllerStartupParams) (*MTRDeviceController, error) {
 	_r, _err := x.inner.CreateControllerOnExistingFabricError(startupParams)
@@ -58,6 +64,8 @@ func (x *MTRDeviceControllerFactory) CreateControllerOnExistingFabricError(start
 	return &MTRDeviceController{inner: _r}, nil
 }
 
+// Create a MTRDeviceController on a new fabric.  Returns nil on failure. This method will fail if the given fabric already exists. The fabric is identified by the root public key and fabric id in the startupParams. This method can only be used if the factory was initialized with storage. When using per-controller storage, use [MTRDeviceController initWithParameters:error:].
+//
 // CreateControllerOnNewFabricError calls the underlying CreateControllerOnNewFabricError.
 func (x *MTRDeviceControllerFactory) CreateControllerOnNewFabricError(startupParams *raw.MTRDeviceControllerStartupParams) (*MTRDeviceController, error) {
 	_r, _err := x.inner.CreateControllerOnNewFabricError(startupParams)
@@ -70,16 +78,22 @@ func (x *MTRDeviceControllerFactory) CreateControllerOnNewFabricError(startupPar
 	return &MTRDeviceController{inner: _r}, nil
 }
 
+// If possible, pre-warm the Matter stack for setting up a commissioning session. This may be called before -[MTRDeviceController setupCommissioningSessionWithPayload:] if it is known that a commissioning attempt will soon take place, but the commissioning payload is not known yet. The controller factory must be running for pre-warming to take place.  Pre-warming can take place before any controllers are started.
+//
 // PreWarmCommissioningSession calls the underlying PreWarmCommissioningSession.
 func (x *MTRDeviceControllerFactory) PreWarmCommissioningSession() {
 	x.inner.PreWarmCommissioningSession()
 }
 
+// If true, the factory is in a state where it can create controllers: startControllerFactory has been called, but stopControllerFactory has not been called since then.
+//
 // IsRunning calls the underlying IsRunning.
 func (x *MTRDeviceControllerFactory) IsRunning() bool {
 	return x.inner.IsRunning()
 }
 
+// Returns the list of MTRFabricInfo representing the fabrics the MTRDeviceControllerFactory knows about and the corresponding node identities of the controller factory on those fabrics.  Returns nil if the factory is not running or if there is an error reading fabric information. All entries in this list will have a non-nil rootCertificate.
+//
 // KnownFabrics returns the collection as a Go slice.
 func (x *MTRDeviceControllerFactory) KnownFabrics() []*MTRFabricInfo {
 	arr := x.inner.KnownFabrics()

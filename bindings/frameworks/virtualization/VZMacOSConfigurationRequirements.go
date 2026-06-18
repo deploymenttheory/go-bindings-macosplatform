@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that describes the parameter constraints required by a specific configuration of macOS.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzmacosconfigurationrequirements
 type VZMacOSConfigurationRequirements struct {
 	foundation.NSObject

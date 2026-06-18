@@ -51,12 +51,16 @@ func (x *MTRGroupsClusterAddGroupIfIdentifyingParams) WithGroupName(groupName st
 	return x
 }
 
+// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+//
 // WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
 func (x *MTRGroupsClusterAddGroupIfIdentifyingParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupsClusterAddGroupIfIdentifyingParams {
 	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
 	return x
 }
 
+// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+//
 // WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
 func (x *MTRGroupsClusterAddGroupIfIdentifyingParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGroupsClusterAddGroupIfIdentifyingParams {
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
@@ -93,6 +97,8 @@ func (x *MTRGroupsClusterAddGroupIfIdentifyingParams) SetGroupName(groupName str
 	x.inner.SetGroupName(foundation.NSStringStringWithUTF8String(groupName))
 }
 
+// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+//
 // TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
 func (x *MTRGroupsClusterAddGroupIfIdentifyingParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	return x.inner.TimedInvokeTimeoutMs()
@@ -103,6 +109,8 @@ func (x *MTRGroupsClusterAddGroupIfIdentifyingParams) SetTimedInvokeTimeoutMs(ti
 	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
 }
 
+// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+//
 // ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
 func (x *MTRGroupsClusterAddGroupIfIdentifyingParams) ServerSideProcessingTimeout() *foundation.NSNumber {
 	return x.inner.ServerSideProcessingTimeout()

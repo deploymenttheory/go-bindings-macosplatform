@@ -37,11 +37,15 @@ func NewGraphVariableOp() *GraphVariableOp {
 	return &GraphVariableOp{inner: raw.MPSGraphVariableOpFromID(_id)}
 }
 
+// The shape of the variable.
+//
 // Shape calls the underlying Shape.
 func (x *GraphVariableOp) Shape() unsafe.Pointer {
 	return x.inner.Shape()
 }
 
+// The data type of the variable.
+//
 // DataType calls the underlying DataType.
 func (x *GraphVariableOp) DataType() mpscore.MPSDataType {
 	return x.inner.DataType()

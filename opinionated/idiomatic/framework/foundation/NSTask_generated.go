@@ -169,8 +169,17 @@ func (x *Task) Arguments() []string {
 }
 
 // SetArguments calls the underlying SetArguments.
-func (x *Task) SetArguments(arguments *raw.NSArray[*raw.NSString]) {
-	x.inner.SetArguments(arguments)
+func (x *Task) SetArguments(arguments ...StringProvider) {
+	_ptrs := make([]objc.ID, len(arguments))
+	for _i, _v := range arguments {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetArguments(_arg0)
 }
 
 // Environment calls the underlying Environment.
@@ -353,7 +362,7 @@ type Taskable interface {
 	ExecutableURL() *URL
 	SetExecutableURL(executableURL string)
 	Arguments() []string
-	SetArguments(arguments *raw.NSArray[*raw.NSString])
+	SetArguments(arguments ...StringProvider)
 	Environment() *raw.NSDictionary[*raw.NSString, *raw.NSString]
 	SetEnvironment(environment *raw.NSDictionary[*raw.NSString, *raw.NSString])
 	CurrentDirectoryURL() *URL

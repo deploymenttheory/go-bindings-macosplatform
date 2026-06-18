@@ -34,6 +34,8 @@ func CertificatePresentationFromID(id objc.ID) *CertificatePresentation {
 	return &CertificatePresentation{inner: raw.SFCertificatePresentationFromID(id)}
 }
 
+// Initialize the certificate presentation with a certificate trust reference.
+//
 // NewCertificatePresentationWithTrust creates a new [CertificatePresentation].
 func NewCertificatePresentationWithTrust(trust unsafe.Pointer) *CertificatePresentation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SFCertificatePresentation")), objc.RegisterName("alloc"))
@@ -41,18 +43,24 @@ func NewCertificatePresentationWithTrust(trust unsafe.Pointer) *CertificatePrese
 	return &CertificatePresentation{inner: raw.SFCertificatePresentationFromID(_id)}
 }
 
+// Title string to be displayed. If no title is provided, a default title will be used.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *CertificatePresentation) WithTitle(title string) *CertificatePresentation {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// Message string to be displayed. If no message is provided, a default message will be used.
+//
 // WithMessage sets the message property and returns the receiver for chaining.
 func (x *CertificatePresentation) WithMessage(message string) *CertificatePresentation {
 	x.inner.SetMessage(foundation.NSStringStringWithUTF8String(message))
 	return x
 }
 
+// The URL that will be opened by clicking the "Learn More" button.
+//
 // WithHelpURL sets the helpURL property and returns the receiver for chaining.
 func (x *CertificatePresentation) WithHelpURL(helpURL string) *CertificatePresentation {
 	x.inner.SetHelpURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(helpURL)))
@@ -73,16 +81,22 @@ func (x *CertificatePresentation) PresentSheetInWindowDismissHandler(ctx context
 	}
 }
 
+// Dismisses the certificate sheet.
+//
 // DismissSheet calls the underlying DismissSheet.
 func (x *CertificatePresentation) DismissSheet() {
 	x.inner.DismissSheet()
 }
 
+// A trust reference, previously created with SecTrustCreateWithCertificates (see <Security/SecTrust.h>).
+//
 // Trust calls the underlying Trust.
 func (x *CertificatePresentation) Trust() unsafe.Pointer {
 	return x.inner.Trust()
 }
 
+// Title string to be displayed. If no title is provided, a default title will be used.
+//
 // Title calls the underlying Title.
 func (x *CertificatePresentation) Title() string {
 	_r := x.inner.Title()
@@ -97,6 +111,8 @@ func (x *CertificatePresentation) SetTitle(title string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
+// Message string to be displayed. If no message is provided, a default message will be used.
+//
 // Message calls the underlying Message.
 func (x *CertificatePresentation) Message() string {
 	_r := x.inner.Message()
@@ -111,6 +127,8 @@ func (x *CertificatePresentation) SetMessage(message string) {
 	x.inner.SetMessage(foundation.NSStringStringWithUTF8String(message))
 }
 
+// The URL that will be opened by clicking the "Learn More" button.
+//
 // HelpURL calls the underlying HelpURL.
 func (x *CertificatePresentation) HelpURL() *foundation.NSURL {
 	return x.inner.HelpURL()

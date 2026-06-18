@@ -38,6 +38,8 @@ func NewModelStructureProgramNamedValueType() *ModelStructureProgramNamedValueTy
 	return &ModelStructureProgramNamedValueType{inner: raw.MLModelStructureProgramNamedValueTypeFromID(_id)}
 }
 
+// The name of the parameter.
+//
 // Name calls the underlying Name.
 func (x *ModelStructureProgramNamedValueType) Name() string {
 	_r := x.inner.Name()
@@ -47,6 +49,8 @@ func (x *ModelStructureProgramNamedValueType) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The type of the parameter.
+//
 // Type calls the underlying Type.
 func (x *ModelStructureProgramNamedValueType) Type() *ModelStructureProgramValueType {
 	_r := x.inner.Type()

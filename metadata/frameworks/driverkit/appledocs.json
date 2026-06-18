@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "framework": "DriverKit",
+  "source": "developer.apple.com DocC render API",
+  "enums": {
+    "IOLockAssertState": {
+      "url": "https://developer.apple.com/documentation/driverkit/iolockassertstate"
+    },
+    "IORWLockAssertState": {
+      "url": "https://developer.apple.com/documentation/driverkit/iorwlockassertstate"
+    },
+    "IOStateReporter_valueSelector": {
+      "url": "https://developer.apple.com/documentation/driverkit/iostatereporter_valueselector"
+    }
+  },
+  "structs": {
+    "IOAddressSegment": {
+      "doc": "A structure that describes the location and size of a block of memory.",
+      "url": "https://developer.apple.com/documentation/driverkit/ioaddresssegment"
+    },
+    "IOCallOnceFlag": {
+      "url": "https://developer.apple.com/documentation/driverkit/iocallonceflag"
+    },
+    "IODMACommandSpecification": {
+      "url": "https://developer.apple.com/documentation/driverkit/iodmacommandspecification"
+    },
+    "IOHistogramReportValues": {
+      "url": "https://developer.apple.com/documentation/driverkit/iohistogramreportvalues"
+    },
+    "IOHistogramReporter_IVars": {
+      "url": "https://developer.apple.com/documentation/driverkit/iohistogramreporter_ivars"
+    },
+    "IOHistogramSegmentConfig": {
+      "url": "https://developer.apple.com/documentation/driverkit/iohistogramsegmentconfig"
+    },
+    "IOInterruptDispatchSourcePayload": {
+      "doc": "A private structure for an interrupt dispatch source.",
+      "url": "https://developer.apple.com/documentation/driverkit/iointerruptdispatchsourcepayload"
+    },
+    "IONormDistReportValues": {
+      "url": "https://developer.apple.com/documentation/driverkit/ionormdistreportvalues"
+    },
+    "IORPC": {
+      "url": "https://developer.apple.com/documentation/driverkit/iorpc"
+    },
+    "IORPCMessage": {
+      "url": "https://developer.apple.com/documentation/driverkit/iorpcmessage"
+    },
+    "IORPCMessageErrorReturn": {
+      "url": "https://developer.apple.com/documentation/driverkit/iorpcmessageerrorreturn"
+    },
+    "IORPCMessageErrorReturnContent": {
+      "url": "https://developer.apple.com/documentation/driverkit/iorpcmessageerrorreturncontent"
+    },
+    "IORPCMessageMach": {
+      "url": "https://developer.apple.com/documentation/driverkit/iorpcmessagemach"
+    },
+    "IOReportChannel": {
+      "url": "https://developer.apple.com/documentation/driverkit/ioreportchannel"
+    },
+    "IOReportChannelList": {
+      "url": "https://developer.apple.com/documentation/driverkit/ioreportchannellist"
+    },
+    "IOReportChannelType": {
+      "url": "https://developer.apple.com/documentation/driverkit/ioreportchanneltype"
+    },
+    "IOReportElement": {
+      "url": "https://developer.apple.com/documentation/driverkit/ioreportelement"
+    },
+    "IOReportElementValues": {
+      "url": "https://developer.apple.com/documentation/driverkit/ioreportelementvalues"
+    },
+    "IOReportInterest": {
+      "url": "https://developer.apple.com/documentation/driverkit/ioreportinterest"
+    },
+    "IOReportInterestList": {
+      "url": "https://developer.apple.com/documentation/driverkit/ioreportinterestlist"
+    },
+    "IOReporter_IVars": {
+      "url": "https://developer.apple.com/documentation/driverkit/ioreporter_ivars"
+    },
+    "IOSimpleArrayReportValues": {
+      "url": "https://developer.apple.com/documentation/driverkit/iosimplearrayreportvalues"
+    },
+    "IOSimpleReportValues": {
+      "url": "https://developer.apple.com/documentation/driverkit/iosimplereportvalues"
+    },
+    "IOSimpleReporter_IVars": {
+      "url": "https://developer.apple.com/documentation/driverkit/iosimplereporter_ivars"
+    },
+    "IOStateReportValues": {
+      "url": "https://developer.apple.com/documentation/driverkit/iostatereportvalues"
+    },
+    "IOStateReporter_IVars": {
+      "url": "https://developer.apple.com/documentation/driverkit/iostatereporter_ivars"
+    },
+    "IOUserClientMethodArguments": {
+      "doc": "Arguments to pass to IOConnectMethod calls.",
+      "url": "https://developer.apple.com/documentation/driverkit/iouserclientmethodarguments"
+    },
+    "IOUserClientMethodDispatch": {
+      "doc": "A structure that specifies how to validate the arguments passed to a client method function.",
+      "url": "https://developer.apple.com/documentation/driverkit/iouserclientmethoddispatch"
+    },
+    "OSClassDescription": {
+      "url": "https://developer.apple.com/documentation/driverkit/osclassdescription"
+    },
+    "OSClassLoadInformation": {
+      "url": "https://developer.apple.com/documentation/driverkit/osclassloadinformation"
+    },
+    "OSObject": {
+      "doc": "The base class for DriverKit objects",
+      "url": "https://developer.apple.com/documentation/driverkit/osobject"
+    },
+    "queue_entry": {
+      "url": "https://developer.apple.com/documentation/driverkit/queue_entry"
+    }
+  }
+}

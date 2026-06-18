@@ -35,6 +35,8 @@ func NewLensSpecification() *LensSpecification {
 	return &LensSpecification{inner: raw.HKLensSpecificationFromID(_id)}
 }
 
+// @property      sphere @abstract      The lens power to correct nearsightedness or farsightedness. (-) means nearsighted while (+) farsighted.
+//
 // Sphere calls the underlying Sphere.
 func (x *LensSpecification) Sphere() *Quantity {
 	_r := x.inner.Sphere()
@@ -44,6 +46,8 @@ func (x *LensSpecification) Sphere() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property      cylinder @abstract      The lens power required to correct astigmatism. Can be positive or negative.
+//
 // Cylinder calls the underlying Cylinder.
 func (x *LensSpecification) Cylinder() *Quantity {
 	_r := x.inner.Cylinder()
@@ -53,6 +57,8 @@ func (x *LensSpecification) Cylinder() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property      axis @abstract      The angle along which cylindrical power should be positioned to correct astigmatism
+//
 // Axis calls the underlying Axis.
 func (x *LensSpecification) Axis() *Quantity {
 	_r := x.inner.Axis()
@@ -62,6 +68,8 @@ func (x *LensSpecification) Axis() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property      addPower @abstract      The power adjustment applied to a multifocal lens to correct presbyopia
+//
 // AddPower calls the underlying AddPower.
 func (x *LensSpecification) AddPower() *Quantity {
 	_r := x.inner.AddPower()

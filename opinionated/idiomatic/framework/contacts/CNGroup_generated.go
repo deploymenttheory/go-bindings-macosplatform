@@ -36,6 +36,8 @@ func NewGroup() *Group {
 	return &Group{inner: raw.CNGroupFromID(_id)}
 }
 
+// The identifier is unique among groups on the device. It can be saved and used for fetching groups next application launch.
+//
 // Identifier calls the underlying Identifier.
 func (x *Group) Identifier() string {
 	_r := x.inner.Identifier()

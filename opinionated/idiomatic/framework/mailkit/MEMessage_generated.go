@@ -37,16 +37,22 @@ func NewMessage() *Message {
 	return &Message{inner: raw.MEMessageFromID(_id)}
 }
 
+// @brief The state of the mail message.
+//
 // State calls the underlying State.
 func (x *Message) State() MEMessageState {
 	return MEMessageState(x.inner.State())
 }
 
+// @brief The encryption state of the mail message.
+//
 // EncryptionState calls the underlying EncryptionState.
 func (x *Message) EncryptionState() MEMessageEncryptionState {
 	return MEMessageEncryptionState(x.inner.EncryptionState())
 }
 
+// @brief The subject of the mail message.
+//
 // Subject calls the underlying Subject.
 func (x *Message) Subject() string {
 	_r := x.inner.Subject()
@@ -56,6 +62,8 @@ func (x *Message) Subject() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @brief Message sender's email address.
+//
 // FromAddress calls the underlying FromAddress.
 func (x *Message) FromAddress() *EmailAddress {
 	_r := x.inner.FromAddress()
@@ -65,6 +73,8 @@ func (x *Message) FromAddress() *EmailAddress {
 	return &EmailAddress{inner: _r}
 }
 
+// @brief Recipient email addresses in the "To" address field of the message.
+//
 // ToAddresses returns the collection as a Go slice.
 func (x *Message) ToAddresses() []*EmailAddress {
 	arr := x.inner.ToAddresses()
@@ -76,6 +86,8 @@ func (x *Message) ToAddresses() []*EmailAddress {
 	})
 }
 
+// @brief Recipient email addresses in the "Cc" address field of the message.
+//
 // CcAddresses returns the collection as a Go slice.
 func (x *Message) CcAddresses() []*EmailAddress {
 	arr := x.inner.CcAddresses()
@@ -87,6 +99,8 @@ func (x *Message) CcAddresses() []*EmailAddress {
 	})
 }
 
+// @brief Recipient email addresses in the "Bcc" address field of the message.
+//
 // BccAddresses returns the collection as a Go slice.
 func (x *Message) BccAddresses() []*EmailAddress {
 	arr := x.inner.BccAddresses()
@@ -98,6 +112,8 @@ func (x *Message) BccAddresses() []*EmailAddress {
 	})
 }
 
+// @brief Recipient email addresses in the "Reply-To" field of the message.
+//
 // ReplyToAddresses returns the collection as a Go slice.
 func (x *Message) ReplyToAddresses() []*EmailAddress {
 	arr := x.inner.ReplyToAddresses()
@@ -109,6 +125,8 @@ func (x *Message) ReplyToAddresses() []*EmailAddress {
 	})
 }
 
+// @brief An array containing all recipients of the message.
+//
 // AllRecipientAddresses returns the collection as a Go slice.
 func (x *Message) AllRecipientAddresses() []*EmailAddress {
 	arr := x.inner.AllRecipientAddresses()
@@ -120,21 +138,29 @@ func (x *Message) AllRecipientAddresses() []*EmailAddress {
 	})
 }
 
+// @brief The date the mail message was sent. Optionally set by the by the sender.
+//
 // DateSent calls the underlying DateSent.
 func (x *Message) DateSent() *foundation.NSDate {
 	return x.inner.DateSent()
 }
 
+// @brief The date the mail message was received. Only present if the message has been received.
+//
 // DateReceived calls the underlying DateReceived.
 func (x *Message) DateReceived() *foundation.NSDate {
 	return x.inner.DateReceived()
 }
 
+// @brief The headers for the message. Might only be a subset if the full body has not been downloaded.
+//
 // Headers calls the underlying Headers.
 func (x *Message) Headers() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.Headers()
 }
 
+// @brief The full raw RFC822 message data if it has been downloaded and the extension has permissions to access.
+//
 // RawData calls the underlying RawData.
 func (x *Message) RawData() *foundation.NSData {
 	return x.inner.RawData()

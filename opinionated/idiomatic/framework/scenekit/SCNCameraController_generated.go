@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CameraController wraps [raw.SCNCameraController] with a fluent Go API.
@@ -115,8 +116,17 @@ func (x *CameraController) TranslateInCameraSpaceByXYZ(deltaX float32, deltaY fl
 }
 
 // FrameNodes calls the underlying FrameNodes.
-func (x *CameraController) FrameNodes(nodes *foundation.NSArray[*raw.SCNNode]) {
-	x.inner.FrameNodes(nodes)
+func (x *CameraController) FrameNodes(nodes ...NodeProvider) {
+	_ptrs := make([]objc.ID, len(nodes))
+	for _i, _v := range nodes {
+		_ptrs[_i] = _v.asNode().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.SCNNode]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.SCNNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.FrameNodes(_arg0)
 }
 
 // RotateByXY calls the underlying RotateByXY.
@@ -314,7 +324,7 @@ type CameraControllerable interface {
 	WithMinimumHorizontalAngle(minimumHorizontalAngle float32) *CameraController
 	WithMaximumHorizontalAngle(maximumHorizontalAngle float32) *CameraController
 	TranslateInCameraSpaceByXYZ(deltaX float32, deltaY float32, deltaZ float32)
-	FrameNodes(nodes *foundation.NSArray[*raw.SCNNode])
+	FrameNodes(nodes ...NodeProvider)
 	RotateByXY(deltaX float32, deltaY float32)
 	RollByAroundScreenPointViewport(delta float32, point corefoundation.CGPoint, viewport corefoundation.CGSize)
 	DollyByOnScreenPointViewport(delta float32, point corefoundation.CGPoint, viewport corefoundation.CGSize)

@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// @class IOBluetoothDeviceSelectorController @abstract A NSWindowController subclass to display a window to initiate pairing to other bluetooth devices. @discussion Implementation of a window controller to return a NSArray of selected bluetooth devices.  This class will handle connecting to the Bluetooth Daemon for the purposes of searches, and displaying the results.  This controller will return a NSArray of IOBluetoothDevice objects to the user.
+//
 // BluetoothDeviceSelectorController wraps [raw.IOBluetoothDeviceSelectorController] with a fluent Go API.
 type BluetoothDeviceSelectorController struct {
 	inner *raw.IOBluetoothDeviceSelectorController

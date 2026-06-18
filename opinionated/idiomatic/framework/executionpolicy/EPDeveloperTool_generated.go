@@ -35,11 +35,15 @@ func NewDeveloperTool() *DeveloperTool {
 	return &DeveloperTool{inner: raw.EPDeveloperToolFromID(_id)}
 }
 
+// Checks whether developer tool privileges are already available and if not populates an entry in Settings for user approval. This method does not show any UI to the user or guide them towards Settings for approval, if necessary. - Parameter handler: A block called asynchronously with whether the privilege is available. > New info > Concurrency Note: You can call this method from synchronous code using a completion handler, > as shown on this page, or you can call it as an asynchronous method that has the > following declaration: > > ```swift > func requestAccess() async -> Bool > ``` > > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
+//
 // RequestDeveloperToolAccessWithCompletionHandler calls the underlying RequestDeveloperToolAccessWithCompletionHandler.
 func (x *DeveloperTool) RequestDeveloperToolAccessWithCompletionHandler(handler func(bool)) {
 	x.inner.RequestDeveloperToolAccessWithCompletionHandler(handler)
 }
 
+// The current authorization status of the current process. - Returns: An EPDeveloperToolStatus indicating whether the current process has developer tool privileges.
+//
 // AuthorizationStatus calls the underlying AuthorizationStatus.
 func (x *DeveloperTool) AuthorizationStatus() EPDeveloperToolStatus {
 	return EPDeveloperToolStatus(x.inner.AuthorizationStatus())

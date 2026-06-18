@@ -30,6 +30,8 @@ func MTRClusterBasicInformationFromID(id objc.ID) *MTRClusterBasicInformation {
 	return &MTRClusterBasicInformation{inner: raw.MTRClusterBasicInformationFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterBasicInformationWithDeviceEndpointIDQueue creates a new [MTRClusterBasicInformation].
 func NewMTRClusterBasicInformationWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterBasicInformation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterBasicInformation")), objc.RegisterName("alloc"))

@@ -33,6 +33,8 @@ func MTRBaseClusterBindingFromID(id objc.ID) *MTRBaseClusterBinding {
 	return &MTRBaseClusterBinding{inner: raw.MTRBaseClusterBindingFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterBindingWithDeviceEndpointIDQueue creates a new [MTRBaseClusterBinding].
 func NewMTRBaseClusterBindingWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterBinding {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterBinding")), objc.RegisterName("alloc"))

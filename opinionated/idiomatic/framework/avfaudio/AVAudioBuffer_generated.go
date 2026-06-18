@@ -36,6 +36,8 @@ func NewAudioBuffer() *AudioBuffer {
 	return &AudioBuffer{inner: raw.AVAudioBufferFromID(_id)}
 }
 
+// @property format @abstract The format of the audio in the buffer.
+//
 // Format calls the underlying Format.
 func (x *AudioBuffer) Format() *AudioFormat {
 	_r := x.inner.Format()
@@ -45,11 +47,15 @@ func (x *AudioBuffer) Format() *AudioFormat {
 	return &AudioFormat{inner: _r}
 }
 
+// @property audioBufferList @abstract The buffer's underlying AudioBufferList. @discussion For compatibility with lower-level CoreAudio and AudioToolbox API's, this method accesses the buffer implementation's internal AudioBufferList. The buffer list structure must not be modified, though you may modify buffer contents. The mDataByteSize fields of this AudioBufferList express the buffer's current frameLength.
+//
 // AudioBufferList calls the underlying AudioBufferList.
 func (x *AudioBuffer) AudioBufferList() *coreaudiotypes.AudioBufferList {
 	return x.inner.AudioBufferList()
 }
 
+// @property mutableAudioBufferList @abstract A mutable version of the buffer's underlying AudioBufferList. @discussion Some lower-level CoreAudio and AudioToolbox API's require a mutable AudioBufferList, for example, AudioConverterConvertComplexBuffer. The mDataByteSize fields of this AudioBufferList express the buffer's current frameCapacity. If they are altered, you should modify the buffer's frameLength to match.
+//
 // MutableAudioBufferList calls the underlying MutableAudioBufferList.
 func (x *AudioBuffer) MutableAudioBufferList() *coreaudiotypes.AudioBufferList {
 	return x.inner.MutableAudioBufferList()

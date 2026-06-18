@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The common configuration traits for socket device requests.
+//
 // SocketDeviceConfiguration wraps [raw.VZSocketDeviceConfiguration] with a fluent Go API.
 type SocketDeviceConfiguration struct {
 	inner *raw.VZSocketDeviceConfiguration

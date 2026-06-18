@@ -37,16 +37,22 @@ func NewSignpostRecord() *SignpostRecord {
 	return &SignpostRecord{inner: raw.MXSignpostRecordFromID(_id)}
 }
 
+// @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this SignpostRecord. @result        An NSData object containing the JSON representation
+//
 // JSONRepresentation calls the underlying JSONRepresentation.
 func (x *SignpostRecord) JSONRepresentation() *foundation.NSData {
 	return x.inner.JSONRepresentation()
 }
 
+// @method        dictionaryRepresentation @abstract      Convenience method to return a NSDictionary representation of this SignpostRecord. @result        An NSDictionary object containing the dictionary representation
+//
 // DictionaryRepresentation calls the underlying DictionaryRepresentation.
 func (x *SignpostRecord) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.DictionaryRepresentation()
 }
 
+// @property      subsystem @abstract      An NSString representation of the subsystem of the signpost instance.
+//
 // Subsystem calls the underlying Subsystem.
 func (x *SignpostRecord) Subsystem() string {
 	_r := x.inner.Subsystem()

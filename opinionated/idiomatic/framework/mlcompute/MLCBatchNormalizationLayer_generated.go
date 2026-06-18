@@ -36,23 +36,31 @@ func NewBatchNormalizationLayer() *BatchNormalizationLayer {
 	return &BatchNormalizationLayer{inner: raw.MLCBatchNormalizationLayerFromID(_id)}
 }
 
+// @property   label @abstract   A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *BatchNormalizationLayer) WithLabel(label string) *BatchNormalizationLayer {
 	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   isDebuggingEnabled @abstract   A flag to identify if we want to debug this layer when executing a graph that includes this layer @discussion If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
+//
 // WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
 func (x *BatchNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *BatchNormalizationLayer {
 	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
 	return x
 }
 
+// @property   featureChannelCount @abstract   The number of feature channels
+//
 // FeatureChannelCount calls the underlying FeatureChannelCount.
 func (x *BatchNormalizationLayer) FeatureChannelCount() uint {
 	return x.inner.FeatureChannelCount()
 }
 
+// @property   mean @abstract   The mean tensor
+//
 // Mean calls the underlying Mean.
 func (x *BatchNormalizationLayer) Mean() *Tensor {
 	_r := x.inner.Mean()
@@ -62,6 +70,8 @@ func (x *BatchNormalizationLayer) Mean() *Tensor {
 	return &Tensor{inner: _r}
 }
 
+// @property   variance @abstract   The variance tensor
+//
 // Variance calls the underlying Variance.
 func (x *BatchNormalizationLayer) Variance() *Tensor {
 	_r := x.inner.Variance()
@@ -71,6 +81,8 @@ func (x *BatchNormalizationLayer) Variance() *Tensor {
 	return &Tensor{inner: _r}
 }
 
+// @property   beta @abstract   The beta tensor
+//
 // Beta calls the underlying Beta.
 func (x *BatchNormalizationLayer) Beta() *Tensor {
 	_r := x.inner.Beta()
@@ -80,6 +92,8 @@ func (x *BatchNormalizationLayer) Beta() *Tensor {
 	return &Tensor{inner: _r}
 }
 
+// @property   gamma @abstract   The gamma tensor
+//
 // Gamma calls the underlying Gamma.
 func (x *BatchNormalizationLayer) Gamma() *Tensor {
 	_r := x.inner.Gamma()
@@ -89,6 +103,8 @@ func (x *BatchNormalizationLayer) Gamma() *Tensor {
 	return &Tensor{inner: _r}
 }
 
+// @property   betaParameter @abstract   The beta tensor parameter used for optimizer update
+//
 // BetaParameter calls the underlying BetaParameter.
 func (x *BatchNormalizationLayer) BetaParameter() *TensorParameter {
 	_r := x.inner.BetaParameter()
@@ -98,6 +114,8 @@ func (x *BatchNormalizationLayer) BetaParameter() *TensorParameter {
 	return &TensorParameter{inner: _r}
 }
 
+// @property   gammaParameter @abstract   The gamma tensor parameter used for optimizer update
+//
 // GammaParameter calls the underlying GammaParameter.
 func (x *BatchNormalizationLayer) GammaParameter() *TensorParameter {
 	_r := x.inner.GammaParameter()
@@ -107,11 +125,15 @@ func (x *BatchNormalizationLayer) GammaParameter() *TensorParameter {
 	return &TensorParameter{inner: _r}
 }
 
+// @property   varianceEpsilon @abstract   A value used for numerical stability
+//
 // VarianceEpsilon calls the underlying VarianceEpsilon.
 func (x *BatchNormalizationLayer) VarianceEpsilon() float32 {
 	return x.inner.VarianceEpsilon()
 }
 
+// @property   momentum @abstract   The value used for the running mean and variance computation @discussion The default is 0.99f.
+//
 // Momentum calls the underlying Momentum.
 func (x *BatchNormalizationLayer) Momentum() float32 {
 	return x.inner.Momentum()

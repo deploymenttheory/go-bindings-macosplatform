@@ -68,8 +68,17 @@ func (x *MutableTimedMetadataGroup) SetTimeRange(timeRange coremedia.CMTimeRange
 }
 
 // SetItems calls the underlying SetItems.
-func (x *MutableTimedMetadataGroup) SetItems(items *foundation.NSArray[*raw.AVMetadataItem]) {
-	x.inner.SetItems(items)
+func (x *MutableTimedMetadataGroup) SetItems(items ...MetadataItemProvider) {
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asMetadataItem().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.AVMetadataItem]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.AVMetadataItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetItems(_arg0)
 }
 
 func (x *MutableTimedMetadataGroup) asTimedMetadataGroup() *raw.AVTimedMetadataGroup {
@@ -86,7 +95,7 @@ type MutableTimedMetadataGroupable interface {
 	WithTimeRange(timeRange coremedia.CMTimeRange) *MutableTimedMetadataGroup
 	WithItems(items ...MetadataItemProvider) *MutableTimedMetadataGroup
 	SetTimeRange(timeRange coremedia.CMTimeRange)
-	SetItems(items *foundation.NSArray[*raw.AVMetadataItem])
+	SetItems(items ...MetadataItemProvider)
 }
 
 var _ MutableTimedMetadataGroupable = (*MutableTimedMetadataGroup)(nil)

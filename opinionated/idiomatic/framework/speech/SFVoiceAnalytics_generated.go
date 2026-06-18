@@ -44,6 +44,8 @@ func (x *VoiceAnalytics) Jitter() *AcousticFeature {
 	return &AcousticFeature{inner: _r}
 }
 
+// The variation in vocal volume stability (amplitude) in each frame of a transcription segment, expressed in decibels.
+//
 // Shimmer calls the underlying Shimmer.
 func (x *VoiceAnalytics) Shimmer() *AcousticFeature {
 	_r := x.inner.Shimmer()
@@ -53,6 +55,8 @@ func (x *VoiceAnalytics) Shimmer() *AcousticFeature {
 	return &AcousticFeature{inner: _r}
 }
 
+// The highness or lowness of the tone (fundamental frequency) in each frame of a transcription segment, expressed as a logarithm. The value is a logarithm (base `e`) of the normalized pitch estimate for each frame.
+//
 // Pitch calls the underlying Pitch.
 func (x *VoiceAnalytics) Pitch() *AcousticFeature {
 	_r := x.inner.Pitch()

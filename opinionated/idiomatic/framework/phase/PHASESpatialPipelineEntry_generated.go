@@ -35,18 +35,24 @@ func NewSpatialPipelineEntry() *SpatialPipelineEntry {
 	return &SpatialPipelineEntry{inner: raw.PHASESpatialPipelineEntryFromID(_id)}
 }
 
+// @property sendLevel @abstract Send level. @note Values are clamped to the range [0, 1]. Default value is 1.
+//
 // WithSendLevel sets the sendLevel property and returns the receiver for chaining.
 func (x *SpatialPipelineEntry) WithSendLevel(sendLevel float64) *SpatialPipelineEntry {
 	x.inner.SetSendLevel(sendLevel)
 	return x
 }
 
+// @property sendLevelMetaParameterDefinition @abstract An optional metaparameter used to drive the send level during playback.
+//
 // WithSendLevelMetaParameterDefinition sets the sendLevelMetaParameterDefinition property and returns the receiver for chaining.
 func (x *SpatialPipelineEntry) WithSendLevelMetaParameterDefinition(sendLevelMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SpatialPipelineEntry {
 	x.inner.SetSendLevelMetaParameterDefinition(sendLevelMetaParameterDefinition.asNumberMetaParameterDefinition())
 	return x
 }
 
+// @property sendLevel @abstract Send level. @note Values are clamped to the range [0, 1]. Default value is 1.
+//
 // SendLevel calls the underlying SendLevel.
 func (x *SpatialPipelineEntry) SendLevel() float64 {
 	return x.inner.SendLevel()
@@ -57,6 +63,8 @@ func (x *SpatialPipelineEntry) SetSendLevel(sendLevel float64) {
 	x.inner.SetSendLevel(sendLevel)
 }
 
+// @property sendLevelMetaParameterDefinition @abstract An optional metaparameter used to drive the send level during playback.
+//
 // SendLevelMetaParameterDefinition calls the underlying SendLevelMetaParameterDefinition.
 func (x *SpatialPipelineEntry) SendLevelMetaParameterDefinition() *NumberMetaParameterDefinition {
 	_r := x.inner.SendLevelMetaParameterDefinition()

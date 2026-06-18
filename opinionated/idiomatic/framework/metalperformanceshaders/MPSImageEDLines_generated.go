@@ -33,6 +33,8 @@ func ImageEDLinesFromID(id objc.ID) *ImageEDLines {
 	return &ImageEDLines{inner: raw.MPSImageEDLinesFromID(id)}
 }
 
+// @abstract   Initialize an EDLines kernel on a given device with specified parameters. @param      device             The device the filter will run on @param      gaussianSigma     The standard deviation of gaussian blur filter. Gaussian weight, centered at 0, at integer grid i is given as @code w(i) = 1/sqrt(2*pi*sigma) * exp(-i^2/(2*sigma^2)) @endcode If we take cut off at 1% of w(0) (max weight) beyond which weights are considered 0, we have @code ceil (sqrt(-log(0.01)*2)*sigma) ~ ceil(3.7*sigma) @endcode as rough estimate of filter width @param      minLineLength           The minimum length of output line segments. @param      maxLines                      The maximum amount of lines for the EDLines algorithm to output. The size of the endpointBuffer supplied at encode must be >= maxLines * 4 * sizeof(unsigned short) + sizeof(uint32_t). @param      detailRatio                The detailRatio to use in the EDLines algorithm, which inversely effects the number of anchor points @param      gradientThreshold   Any pixel with a gradient below the gradientThreshold will not be considerd an edge @param      lineErrorThreshold  The limit of how much error a line segment can have relative to the edge it represents @param      mergeLocalityThreshold  Determines how many pixels apart two lines can deviate spatially and still be merged. This value is normalized to the diagonal length of the image. @return     A valid object or nil, if failure.
+//
 // NewImageEDLinesWithDeviceGaussianSigmaMinLineLengthMaxLinesDetailRatioGradientThresholdLineErrorThresholdMergeLocalityThreshold creates a new [ImageEDLines].
 func NewImageEDLinesWithDeviceGaussianSigmaMinLineLengthMaxLinesDetailRatioGradientThresholdLineErrorThresholdMergeLocalityThreshold(device metal.MTLDevice, gaussianSigma unsafe.Pointer, minLineLength unsafe.Pointer, maxLines uint, detailRatio unsafe.Pointer, gradientThreshold unsafe.Pointer, lineErrorThreshold unsafe.Pointer, mergeLocalityThreshold unsafe.Pointer) *ImageEDLines {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageEDLines")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewImageEDLinesWithDeviceGaussianSigmaMinLineLengthMaxLinesDetailRatioGradi
 	return &ImageEDLines{inner: raw.MPSImageEDLinesFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+//
 // NewImageEDLinesWithCoderDevice creates a new [ImageEDLines].
 func NewImageEDLinesWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageEDLines {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageEDLines")), objc.RegisterName("alloc"))
@@ -47,65 +51,87 @@ func NewImageEDLinesWithCoderDevice(aDecoder *foundation.NSCoder, device metal.M
 	return &ImageEDLines{inner: raw.MPSImageEDLinesFromID(_id)}
 }
 
+// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
+//
 // WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
 func (x *ImageEDLines) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageEDLines {
 	x.inner.SetClipRectSource(clipRectSource)
 	return x
 }
 
+// @property minLineLength @abstract Read-write value used to set the minimum length of a line segment. Default is 32
+//
 // WithMinLineLength sets the minLineLength property and returns the receiver for chaining.
 func (x *ImageEDLines) WithMinLineLength(minLineLength uint16) *ImageEDLines {
 	x.inner.SetMinLineLength(minLineLength)
 	return x
 }
 
+// @property maxLines @abstract Read-write value used to set the max number of line segments to be written out. The endpointBuffer at encode must be >= maxLines * 4 * sizeof(unsigned short) + sizeof(uint32_t). Default is 256
+//
 // WithMaxLines sets the maxLines property and returns the receiver for chaining.
 func (x *ImageEDLines) WithMaxLines(maxLines uint) *ImageEDLines {
 	x.inner.SetMaxLines(maxLines)
 	return x
 }
 
+// @property detailRatio @abstract Read-write value used to set the detailRatio to use in the EDLines algorithm Default is 32
+//
 // WithDetailRatio sets the detailRatio property and returns the receiver for chaining.
 func (x *ImageEDLines) WithDetailRatio(detailRatio uint16) *ImageEDLines {
 	x.inner.SetDetailRatio(detailRatio)
 	return x
 }
 
+// @property gradientThreshold @abstract Read-write value used to set the threshold for a pixel to be considered an edge Default is 0.2
+//
 // WithGradientThreshold sets the gradientThreshold property and returns the receiver for chaining.
 func (x *ImageEDLines) WithGradientThreshold(gradientThreshold float32) *ImageEDLines {
 	x.inner.SetGradientThreshold(gradientThreshold)
 	return x
 }
 
+// @property lineErrorThreshold @abstract Read-write value used to set the limit on error for a line segment relative to the edge it fits Default is 0.05
+//
 // WithLineErrorThreshold sets the lineErrorThreshold property and returns the receiver for chaining.
 func (x *ImageEDLines) WithLineErrorThreshold(lineErrorThreshold float32) *ImageEDLines {
 	x.inner.SetLineErrorThreshold(lineErrorThreshold)
 	return x
 }
 
+// @property mergeLocalityThreshold @abstract Read-write value used to set how many pixels apart two lines can deviate spatially and still be merged. Default is 0.0025
+//
 // WithMergeLocalityThreshold sets the mergeLocalityThreshold property and returns the receiver for chaining.
 func (x *ImageEDLines) WithMergeLocalityThreshold(mergeLocalityThreshold float32) *ImageEDLines {
 	x.inner.SetMergeLocalityThreshold(mergeLocalityThreshold)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *ImageEDLines) WithOptions(options mpscore.MPSKernelOptions) *ImageEDLines {
 	x.inner.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ImageEDLines) WithLabel(label string) *ImageEDLines {
 	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @abstract Encode the filter to a command buffer using a MTLComputeCommandEncoder. @discussion The filter will not begin to execute until after the command buffer has been enqueued and committed. @param  commandBuffer           A valid MTLCommandBuffer. @param  source                  A valid MTLTexture containing the source image for the filter @param  dest              A valid MTLTexture containing the destination image for the filter. If not nil, the output will be the edges found through the Edge Drawing algorithm. @param  endpointBuffer         A valid MTLBuffer to receive the line segment count and endpoint results. @param  endpointOffset         Byte offset into endpoint buffer at which to write the  line segment endpoint results. Must be a multiple of 32 bytes. The total line segment count and the line segment endpoints are written to the endpoint buffer. The count is written as a uint32_t at the start of the buffer. The line segments are written to the endpoint buffer as start and end pixel coordinates of the segment. Coordinates are stored as unsigned short pairs, and a single line segment will consist of two pairs, or four total unsigned shorts. The endpoint buffer size must be >= 4 * maxLines * sizeof(unsigned short) + sizeof(uint32_t).
+//
 // EncodeToCommandBufferSourceTextureDestinationTextureEndpointBufferEndpointOffset calls the underlying EncodeToCommandBufferSourceTextureDestinationTextureEndpointBufferEndpointOffset.
 func (x *ImageEDLines) EncodeToCommandBufferSourceTextureDestinationTextureEndpointBufferEndpointOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, dest metal.MTLTexture, endpointBuffer metal.MTLBuffer, endpointOffset uint) {
 	x.inner.EncodeToCommandBufferSourceTextureDestinationTextureEndpointBufferEndpointOffset(commandBuffer, source, dest, endpointBuffer, endpointOffset)
 }
 
+// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
+//
 // ClipRectSource calls the underlying ClipRectSource.
 func (x *ImageEDLines) ClipRectSource() metal.MTLRegion {
 	return x.inner.ClipRectSource()
@@ -116,11 +142,15 @@ func (x *ImageEDLines) SetClipRectSource(clipRectSource metal.MTLRegion) {
 	x.inner.SetClipRectSource(clipRectSource)
 }
 
+// @property sigma @abstract Read-only sigma value used in performing Gaussian blur of the image. Default is 2.0
+//
 // GaussianSigma calls the underlying GaussianSigma.
 func (x *ImageEDLines) GaussianSigma() float32 {
 	return x.inner.GaussianSigma()
 }
 
+// @property minLineLength @abstract Read-write value used to set the minimum length of a line segment. Default is 32
+//
 // MinLineLength calls the underlying MinLineLength.
 func (x *ImageEDLines) MinLineLength() uint16 {
 	return x.inner.MinLineLength()
@@ -131,6 +161,8 @@ func (x *ImageEDLines) SetMinLineLength(minLineLength uint16) {
 	x.inner.SetMinLineLength(minLineLength)
 }
 
+// @property maxLines @abstract Read-write value used to set the max number of line segments to be written out. The endpointBuffer at encode must be >= maxLines * 4 * sizeof(unsigned short) + sizeof(uint32_t). Default is 256
+//
 // MaxLines calls the underlying MaxLines.
 func (x *ImageEDLines) MaxLines() uint {
 	return x.inner.MaxLines()
@@ -141,6 +173,8 @@ func (x *ImageEDLines) SetMaxLines(maxLines uint) {
 	x.inner.SetMaxLines(maxLines)
 }
 
+// @property detailRatio @abstract Read-write value used to set the detailRatio to use in the EDLines algorithm Default is 32
+//
 // DetailRatio calls the underlying DetailRatio.
 func (x *ImageEDLines) DetailRatio() uint16 {
 	return x.inner.DetailRatio()
@@ -151,6 +185,8 @@ func (x *ImageEDLines) SetDetailRatio(detailRatio uint16) {
 	x.inner.SetDetailRatio(detailRatio)
 }
 
+// @property gradientThreshold @abstract Read-write value used to set the threshold for a pixel to be considered an edge Default is 0.2
+//
 // GradientThreshold calls the underlying GradientThreshold.
 func (x *ImageEDLines) GradientThreshold() float32 {
 	return x.inner.GradientThreshold()
@@ -161,6 +197,8 @@ func (x *ImageEDLines) SetGradientThreshold(gradientThreshold float32) {
 	x.inner.SetGradientThreshold(gradientThreshold)
 }
 
+// @property lineErrorThreshold @abstract Read-write value used to set the limit on error for a line segment relative to the edge it fits Default is 0.05
+//
 // LineErrorThreshold calls the underlying LineErrorThreshold.
 func (x *ImageEDLines) LineErrorThreshold() float32 {
 	return x.inner.LineErrorThreshold()
@@ -171,6 +209,8 @@ func (x *ImageEDLines) SetLineErrorThreshold(lineErrorThreshold float32) {
 	x.inner.SetLineErrorThreshold(lineErrorThreshold)
 }
 
+// @property mergeLocalityThreshold @abstract Read-write value used to set how many pixels apart two lines can deviate spatially and still be merged. Default is 0.0025
+//
 // MergeLocalityThreshold calls the underlying MergeLocalityThreshold.
 func (x *ImageEDLines) MergeLocalityThreshold() float32 {
 	return x.inner.MergeLocalityThreshold()

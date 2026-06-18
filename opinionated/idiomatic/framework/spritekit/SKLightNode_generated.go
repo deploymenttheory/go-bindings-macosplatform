@@ -39,126 +39,168 @@ func NewLightNode() *LightNode {
 	return &LightNode{inner: raw.SKLightNodeFromID(_id)}
 }
 
+// Enables or disables lighting contribution from this light node. Set to YES; sprites using this light will be lit with the ambient color and the light color, with a falloff in intensity according to the falloff property. Set to NO; this light does not contribute any lighting. If no lights are active on a sprite it will be drawn normally, as if not lit. The default value is YES. @see lightColor @see falloff @see categoryBitMask
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *LightNode) WithEnabled(enabled bool) *LightNode {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// Diffuse and Specular color of the light source, defaults to opaque white. The alpha component of the color is ignored. If using shaders bind a uniform to this property to use scene based custom lighting. @see SKUniform @see falloff
+//
 // WithLightColor sets the lightColor property and returns the receiver for chaining.
 func (x *LightNode) WithLightColor(lightColor *appkit.NSColor) *LightNode {
 	x.inner.SetLightColor(lightColor)
 	return x
 }
 
+// Ambient color of the light source, defaults to black. If you had only a single light in the scene with an ambient color of opaque white and a light color of black, it would appear as if the scene was rendered without lighting. The alpha component of the color is ignored. The color is not affected by falloff or surface normals. @see lightColor
+//
 // WithAmbientColor sets the ambientColor property and returns the receiver for chaining.
 func (x *LightNode) WithAmbientColor(ambientColor *appkit.NSColor) *LightNode {
 	x.inner.SetAmbientColor(ambientColor)
 	return x
 }
 
+// Color of the shadow casted on occluded objects, defaults to half opacity black. The alpha component of the color is used for blending with the regions that are in shadow. @see SKSpriteNode.shadowCastBitMask @see SKSpriteNode.shadowedBitMask
+//
 // WithShadowColor sets the shadowColor property and returns the receiver for chaining.
 func (x *LightNode) WithShadowColor(shadowColor *appkit.NSColor) *LightNode {
 	x.inner.SetShadowColor(shadowColor)
 	return x
 }
 
+// Falloff in intensity of the light over distance, defaults to 1. The falloff does not affect the ambient color nor the shadow color. @see lightColor
+//
 // WithFalloff sets the falloff property and returns the receiver for chaining.
 func (x *LightNode) WithFalloff(falloff float64) *LightNode {
 	x.inner.SetFalloff(falloff)
 	return x
 }
 
+// The category of the light, which determines the group(s) a light belongs to. Any node that has its corresponding light and shadow bitmasks set to an overlapping value will be lit, shadow casting or shadowed by this light. @see SKSpriteNode.lightingBitMask @see SKSpriteNode.shadowCastBitMask @see SKSpriteNode.shadowedBitMask
+//
 // WithCategoryBitMask sets the categoryBitMask property and returns the receiver for chaining.
 func (x *LightNode) WithCategoryBitMask(categoryBitMask uint32) *LightNode {
 	x.inner.SetCategoryBitMask(categoryBitMask)
 	return x
 }
 
+// The position of the node in the parent's coordinate system
+//
 // WithPosition sets the position property and returns the receiver for chaining.
 func (x *LightNode) WithPosition(position corefoundation.CGPoint) *LightNode {
 	x.inner.SKNode.SetPosition(position)
 	return x
 }
 
+// The z-order of the node (used for ordering). Negative z is "into" the screen, Positive z is "out" of the screen. A greater zPosition will sort in front of a lesser zPosition.
+//
 // WithZPosition sets the zPosition property and returns the receiver for chaining.
 func (x *LightNode) WithZPosition(zPosition float64) *LightNode {
 	x.inner.SKNode.SetZPosition(zPosition)
 	return x
 }
 
+// The Euler rotation about the z axis (in radians)
+//
 // WithZRotation sets the zRotation property and returns the receiver for chaining.
 func (x *LightNode) WithZRotation(zRotation float64) *LightNode {
 	x.inner.SKNode.SetZRotation(zRotation)
 	return x
 }
 
+// The scaling in the X axis
+//
 // WithXScale sets the xScale property and returns the receiver for chaining.
 func (x *LightNode) WithXScale(xScale float64) *LightNode {
 	x.inner.SKNode.SetXScale(xScale)
 	return x
 }
 
+// The scaling in the Y axis
+//
 // WithYScale sets the yScale property and returns the receiver for chaining.
 func (x *LightNode) WithYScale(yScale float64) *LightNode {
 	x.inner.SKNode.SetYScale(yScale)
 	return x
 }
 
+// The speed multiplier applied to all actions run on this node. Inherited by its children.
+//
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *LightNode) WithSpeed(speed float64) *LightNode {
 	x.inner.SKNode.SetSpeed(speed)
 	return x
 }
 
+// Alpha of this node (multiplied by the output color to give the final result)
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *LightNode) WithAlpha(alpha float64) *LightNode {
 	x.inner.SKNode.SetAlpha(alpha)
 	return x
 }
 
+// Controls whether or not the node's actions is updated or paused.
+//
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *LightNode) WithPaused(paused bool) *LightNode {
 	x.inner.SKNode.SetPaused(paused)
 	return x
 }
 
+// Controls whether or not the node and its children are rendered.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *LightNode) WithHidden(hidden bool) *LightNode {
 	x.inner.SKNode.SetHidden(hidden)
 	return x
 }
 
+// Controls whether or not the node receives touch events
+//
 // WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
 func (x *LightNode) WithUserInteractionEnabled(userInteractionEnabled bool) *LightNode {
 	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
 	return x
 }
 
+// The client assignable name. In general, this should be unique among peers in the scene graph.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *LightNode) WithName(name string) *LightNode {
 	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// Physics body attached to the node, with synchronized scale, rotation, and position
+//
 // WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
 func (x *LightNode) WithPhysicsBody(physicsBody *PhysicsBody) *LightNode {
 	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
 	return x
 }
 
+// An optional dictionary that can be used to store your own data in a node. Defaults to nil.
+//
 // WithUserData sets the userData property and returns the receiver for chaining.
 func (x *LightNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *LightNode {
 	x.inner.SKNode.SetUserData(userData)
 	return x
 }
 
+// Kinematic constraints, used in IK solving
+//
 // WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
 func (x *LightNode) WithReachConstraints(reachConstraints *ReachConstraints) *LightNode {
 	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
 	return x
 }
 
+// Optional array of SKConstraints Constraints are evaluated each frame after actions and physics. The node's transform will be changed to satisfy the constraint.
+//
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *LightNode) WithConstraints(items ...*raw.SKConstraint) *LightNode {
 	if len(items) == 0 {
@@ -177,6 +219,8 @@ func (x *LightNode) WithConstraints(items ...*raw.SKConstraint) *LightNode {
 	return x
 }
 
+// Optional dictionary of SKAttributeValues Attributes can be used with custom SKShaders. DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+//
 // WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
 func (x *LightNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *LightNode {
 	x.inner.SKNode.SetAttributeValues(attributeValues)
@@ -237,6 +281,8 @@ func (x *LightNode) WithAccessibilityEnabled(accessibilityEnabled bool) *LightNo
 	return x
 }
 
+// Enables or disables lighting contribution from this light node. Set to YES; sprites using this light will be lit with the ambient color and the light color, with a falloff in intensity according to the falloff property. Set to NO; this light does not contribute any lighting. If no lights are active on a sprite it will be drawn normally, as if not lit. The default value is YES. @see lightColor @see falloff @see categoryBitMask
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *LightNode) IsEnabled() bool {
 	return x.inner.IsEnabled()
@@ -247,6 +293,8 @@ func (x *LightNode) SetEnabled(enabled bool) {
 	x.inner.SetEnabled(enabled)
 }
 
+// Diffuse and Specular color of the light source, defaults to opaque white. The alpha component of the color is ignored. If using shaders bind a uniform to this property to use scene based custom lighting. @see SKUniform @see falloff
+//
 // LightColor calls the underlying LightColor.
 func (x *LightNode) LightColor() *appkit.NSColor {
 	return x.inner.LightColor()
@@ -257,6 +305,8 @@ func (x *LightNode) SetLightColor(lightColor *appkit.NSColor) {
 	x.inner.SetLightColor(lightColor)
 }
 
+// Ambient color of the light source, defaults to black. If you had only a single light in the scene with an ambient color of opaque white and a light color of black, it would appear as if the scene was rendered without lighting. The alpha component of the color is ignored. The color is not affected by falloff or surface normals. @see lightColor
+//
 // AmbientColor calls the underlying AmbientColor.
 func (x *LightNode) AmbientColor() *appkit.NSColor {
 	return x.inner.AmbientColor()
@@ -267,6 +317,8 @@ func (x *LightNode) SetAmbientColor(ambientColor *appkit.NSColor) {
 	x.inner.SetAmbientColor(ambientColor)
 }
 
+// Color of the shadow casted on occluded objects, defaults to half opacity black. The alpha component of the color is used for blending with the regions that are in shadow. @see SKSpriteNode.shadowCastBitMask @see SKSpriteNode.shadowedBitMask
+//
 // ShadowColor calls the underlying ShadowColor.
 func (x *LightNode) ShadowColor() *appkit.NSColor {
 	return x.inner.ShadowColor()
@@ -277,6 +329,8 @@ func (x *LightNode) SetShadowColor(shadowColor *appkit.NSColor) {
 	x.inner.SetShadowColor(shadowColor)
 }
 
+// Falloff in intensity of the light over distance, defaults to 1. The falloff does not affect the ambient color nor the shadow color. @see lightColor
+//
 // Falloff calls the underlying Falloff.
 func (x *LightNode) Falloff() float64 {
 	return x.inner.Falloff()
@@ -287,6 +341,8 @@ func (x *LightNode) SetFalloff(falloff float64) {
 	x.inner.SetFalloff(falloff)
 }
 
+// The category of the light, which determines the group(s) a light belongs to. Any node that has its corresponding light and shadow bitmasks set to an overlapping value will be lit, shadow casting or shadowed by this light. @see SKSpriteNode.lightingBitMask @see SKSpriteNode.shadowCastBitMask @see SKSpriteNode.shadowedBitMask
+//
 // CategoryBitMask calls the underlying CategoryBitMask.
 func (x *LightNode) CategoryBitMask() uint32 {
 	return x.inner.CategoryBitMask()

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines a Virtio sound device stream configuration.
+//
 // VirtioSoundDeviceStreamConfiguration wraps [raw.VZVirtioSoundDeviceStreamConfiguration] with a fluent Go API.
 type VirtioSoundDeviceStreamConfiguration struct {
 	inner *raw.VZVirtioSoundDeviceStreamConfiguration

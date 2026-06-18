@@ -35,48 +35,64 @@ func NewAvoidOccluderConstraint() *AvoidOccluderConstraint {
 	return &AvoidOccluderConstraint{inner: raw.SCNAvoidOccluderConstraintFromID(_id)}
 }
 
+// @property delegate @abstract The receiver's delegate
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *AvoidOccluderConstraint) WithDelegate(delegate raw.SCNAvoidOccluderConstraintDelegate) *AvoidOccluderConstraint {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @property target @abstract Defines the target node
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *AvoidOccluderConstraint) WithTarget(target NodeProvider) *AvoidOccluderConstraint {
 	x.inner.SetTarget(target.asNode())
 	return x
 }
 
+// @property occluderCategoryBitMask @abstract Defines the category of node to consider as occluder. Defaults to 1.
+//
 // WithOccluderCategoryBitMask sets the occluderCategoryBitMask property and returns the receiver for chaining.
 func (x *AvoidOccluderConstraint) WithOccluderCategoryBitMask(occluderCategoryBitMask uint) *AvoidOccluderConstraint {
 	x.inner.SetOccluderCategoryBitMask(occluderCategoryBitMask)
 	return x
 }
 
+// @property bias @abstract Defines the bias the apply after moving the receiver to avoid occluders. Defaults to 10e-5. @discussion A positive bias will move the receiver closer to the target.
+//
 // WithBias sets the bias property and returns the receiver for chaining.
 func (x *AvoidOccluderConstraint) WithBias(bias float64) *AvoidOccluderConstraint {
 	x.inner.SetBias(bias)
 	return x
 }
 
+// @property enable @abstract Determines whether the constraint is enabled or not. Defaults to YES.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *AvoidOccluderConstraint) WithEnabled(enabled bool) *AvoidOccluderConstraint {
 	x.inner.SCNConstraint.SetEnabled(enabled)
 	return x
 }
 
+// @property influenceFactor @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
+//
 // WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
 func (x *AvoidOccluderConstraint) WithInfluenceFactor(influenceFactor float64) *AvoidOccluderConstraint {
 	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
 	return x
 }
 
+// @property incremental @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+//
 // WithIncremental sets the incremental property and returns the receiver for chaining.
 func (x *AvoidOccluderConstraint) WithIncremental(incremental bool) *AvoidOccluderConstraint {
 	x.inner.SCNConstraint.SetIncremental(incremental)
 	return x
 }
 
+// @property delegate @abstract The receiver's delegate
+//
 // Delegate calls the underlying Delegate.
 func (x *AvoidOccluderConstraint) Delegate() raw.SCNAvoidOccluderConstraintDelegate {
 	return x.inner.Delegate()
@@ -87,6 +103,8 @@ func (x *AvoidOccluderConstraint) SetDelegate(delegate raw.SCNAvoidOccluderConst
 	x.inner.SetDelegate(delegate)
 }
 
+// @property target @abstract Defines the target node
+//
 // Target calls the underlying Target.
 func (x *AvoidOccluderConstraint) Target() *Node {
 	_r := x.inner.Target()
@@ -101,6 +119,8 @@ func (x *AvoidOccluderConstraint) SetTarget(target *raw.SCNNode) {
 	x.inner.SetTarget(target)
 }
 
+// @property occluderCategoryBitMask @abstract Defines the category of node to consider as occluder. Defaults to 1.
+//
 // OccluderCategoryBitMask calls the underlying OccluderCategoryBitMask.
 func (x *AvoidOccluderConstraint) OccluderCategoryBitMask() uint {
 	return x.inner.OccluderCategoryBitMask()
@@ -111,6 +131,8 @@ func (x *AvoidOccluderConstraint) SetOccluderCategoryBitMask(occluderCategoryBit
 	x.inner.SetOccluderCategoryBitMask(occluderCategoryBitMask)
 }
 
+// @property bias @abstract Defines the bias the apply after moving the receiver to avoid occluders. Defaults to 10e-5. @discussion A positive bias will move the receiver closer to the target.
+//
 // Bias calls the underlying Bias.
 func (x *AvoidOccluderConstraint) Bias() float64 {
 	return x.inner.Bias()

@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "framework": "dispatch",
+  "source": "developer.apple.com DocC render API",
+  "protocols": {
+    "OS_dispatch_data": {
+      "url": "https://developer.apple.com/documentation/dispatch/os_dispatch_data"
+    },
+    "OS_dispatch_group": {
+      "url": "https://developer.apple.com/documentation/dispatch/os_dispatch_group"
+    },
+    "OS_dispatch_io": {
+      "url": "https://developer.apple.com/documentation/dispatch/os_dispatch_io"
+    },
+    "OS_dispatch_object": {
+      "url": "https://developer.apple.com/documentation/dispatch/os_dispatch_object"
+    },
+    "OS_dispatch_queue": {
+      "url": "https://developer.apple.com/documentation/dispatch/os_dispatch_queue"
+    },
+    "OS_dispatch_queue_attr": {
+      "url": "https://developer.apple.com/documentation/dispatch/os_dispatch_queue_attr"
+    },
+    "OS_dispatch_queue_concurrent": {
+      "url": "https://developer.apple.com/documentation/dispatch/os_dispatch_queue_concurrent"
+    },
+    "OS_dispatch_queue_global": {
+      "doc": "A system-provided dispatch queue that schedules tasks for concurrent execution.",
+      "url": "https://developer.apple.com/documentation/dispatch/os_dispatch_queue_global"
+    },
+    "OS_dispatch_queue_main": {
+      "doc": "A system-provided dispatch queue that schedules tasks for serial execution on the app’s main thread.",
+      "url": "https://developer.apple.com/documentation/dispatch/os_dispatch_queue_main"
+    },
+    "OS_dispatch_queue_serial": {
+      "url": "https://developer.apple.com/documentation/dispatch/os_dispatch_queue_serial"
+    },
+    "OS_dispatch_queue_serial_executor": {
+      "url": "https://developer.apple.com/documentation/dispatch/os_dispatch_queue_serial_executor"
+    },
+    "OS_dispatch_semaphore": {
+      "url": "https://developer.apple.com/documentation/dispatch/os_dispatch_semaphore"
+    },
+    "OS_dispatch_source": {
+      "doc": "Defines a common set of properties and methods that are shared with all dispatch source types.",
+      "url": "https://developer.apple.com/documentation/dispatch/os_dispatch_source"
+    },
+    "OS_dispatch_workloop": {
+      "doc": "A dispatch queue that prioritizes the execution of tasks based on their quality-of-service level.",
+      "url": "https://developer.apple.com/documentation/dispatch/os_dispatch_workloop"
+    }
+  },
+  "enums": {
+    "dispatch_autorelease_frequency_t": {
+      "doc": "Constants indicating the frequency with which a dispatch queue creates autorelease pools for its tasks.",
+      "url": "https://developer.apple.com/documentation/dispatch/dispatch_autorelease_frequency_t",
+      "members": {
+        "DISPATCH_AUTORELEASE_FREQUENCY_INHERIT": {
+          "doc": "The queue inherits its autorelease frequency from its target queue.",
+          "url": "https://developer.apple.com/documentation/dispatch/dispatch_autorelease_frequency_t/dispatch_autorelease_frequency_inherit"
+        },
+        "DISPATCH_AUTORELEASE_FREQUENCY_NEVER": {
+          "doc": "The queue does not set up an autorelease pool around executed blocks.",
+          "url": "https://developer.apple.com/documentation/dispatch/dispatch_autorelease_frequency_t/dispatch_autorelease_frequency_never"
+        },
+        "DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM": {
+          "doc": "The queue configures an autorelease pool before the execution of a block and releases the objects in that pool after the block finishes executing.",
+          "url": "https://developer.apple.com/documentation/dispatch/dispatch_autorelease_frequency_t/dispatch_autorelease_frequency_work_item"
+        }
+      }
+    },
+    "dispatch_block_flags_t": {
+      "doc": "Flags to pass to the dispatch_block_create and dispatch_block_create_with_qos_class functions.",
+      "url": "https://developer.apple.com/documentation/dispatch/dispatch_block_flags_t",
+      "members": {
+        "DISPATCH_BLOCK_ASSIGN_CURRENT": {
+          "doc": "Set the attributes of the work item to match the attributes of the current execution context.",
+          "url": "https://developer.apple.com/documentation/dispatch/dispatch_block_flags_t/dispatch_block_assign_current"
+        },
+        "DISPATCH_BLOCK_BARRIER": {
+          "doc": "Cause the work item to act as a barrier block when submitted to a concurrent queue.",
+          "url": "https://developer.apple.com/documentation/dispatch/dispatch_block_flags_t/dispatch_block_barrier"
+        },
+        "DISPATCH_BLOCK_DETACHED": {
+          "doc": "Disassociate the work item’s attributes from the current execution context.",
+          "url": "https://developer.apple.com/documentation/dispatch/dispatch_block_flags_t/dispatch_block_detached"
+        },
+        "DISPATCH_BLOCK_ENFORCE_QOS_CLASS": {
+          "doc": "Prefer the quality-of-service class associated with the block.",
+          "url": "https://developer.apple.com/documentation/dispatch/dispatch_block_flags_t/dispatch_block_enforce_qos_class"
+        },
+        "DISPATCH_BLOCK_INHERIT_QOS_CLASS": {
+          "doc": "Prefer the quality-of-service class associated with the current execution context.",
+          "url": "https://developer.apple.com/documentation/dispatch/dispatch_block_flags_t/dispatch_block_inherit_qos_class"
+        },
+        "DISPATCH_BLOCK_NO_QOS_CLASS": {
+          "doc": "Execute the work item without assigning a quality-of-service class.",
+          "url": "https://developer.apple.com/documentation/dispatch/dispatch_block_flags_t/dispatch_block_no_qos_class"
+        }
+      }
+    }
+  }
+}

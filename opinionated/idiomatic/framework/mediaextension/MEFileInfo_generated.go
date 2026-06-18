@@ -38,24 +38,32 @@ func NewFileInfo() *FileInfo {
 	return &FileInfo{inner: raw.MEFileInfoFromID(_id)}
 }
 
+// @property		duration @abstract		The duration of the media asset if known, otherwise kCMTimeInvalid.
+//
 // WithDuration sets the duration property and returns the receiver for chaining.
 func (x *FileInfo) WithDuration(duration coremedia.CMTime) *FileInfo {
 	x.inner.SetDuration(duration)
 	return x
 }
 
+// @property		fragmentsStatus @abstract		Indicates if the media asset is capable of being extended by fragments or contains fragments @discussion		See the MEFileInfoFragmentsStatus values for details of the return value. The value will default to MEFileInfoCouldNotContainFragments.
+//
 // WithFragmentsStatus sets the fragmentsStatus property and returns the receiver for chaining.
 func (x *FileInfo) WithFragmentsStatus(fragmentsStatus MEFileInfoFragmentsStatus) *FileInfo {
 	x.inner.SetFragmentsStatus(raw.MEFileInfoFragmentsStatus(fragmentsStatus))
 	return x
 }
 
+// @property		sidecarFileName @abstract		The sidecar filename used by the MediaExtension. @discussion		Represents a new or existing sidecar file located in the same directory as the primary media file. The filename should include the file extension, and should not contain the file path, or contain any slashes. The file extension should be supported by the format reader, and present in the EXAppExtensionAttributes and UTExportedTypeDeclarations dictionaries in the MediaExtension format reader Info.plist.
+//
 // WithSidecarFileName sets the sidecarFileName property and returns the receiver for chaining.
 func (x *FileInfo) WithSidecarFileName(sidecarFileName string) *FileInfo {
 	x.inner.SetSidecarFileName(foundation.NSStringStringWithUTF8String(sidecarFileName))
 	return x
 }
 
+// @property		duration @abstract		The duration of the media asset if known, otherwise kCMTimeInvalid.
+//
 // Duration calls the underlying Duration.
 func (x *FileInfo) Duration() coremedia.CMTime {
 	return x.inner.Duration()
@@ -66,6 +74,8 @@ func (x *FileInfo) SetDuration(duration coremedia.CMTime) {
 	x.inner.SetDuration(duration)
 }
 
+// @property		fragmentsStatus @abstract		Indicates if the media asset is capable of being extended by fragments or contains fragments @discussion		See the MEFileInfoFragmentsStatus values for details of the return value. The value will default to MEFileInfoCouldNotContainFragments.
+//
 // FragmentsStatus calls the underlying FragmentsStatus.
 func (x *FileInfo) FragmentsStatus() MEFileInfoFragmentsStatus {
 	return MEFileInfoFragmentsStatus(x.inner.FragmentsStatus())
@@ -76,6 +86,8 @@ func (x *FileInfo) SetFragmentsStatus(fragmentsStatus MEFileInfoFragmentsStatus)
 	x.inner.SetFragmentsStatus(raw.MEFileInfoFragmentsStatus(fragmentsStatus))
 }
 
+// @property		sidecarFileName @abstract		The sidecar filename used by the MediaExtension. @discussion		Represents a new or existing sidecar file located in the same directory as the primary media file. The filename should include the file extension, and should not contain the file path, or contain any slashes. The file extension should be supported by the format reader, and present in the EXAppExtensionAttributes and UTExportedTypeDeclarations dictionaries in the MediaExtension format reader Info.plist.
+//
 // SidecarFileName calls the underlying SidecarFileName.
 func (x *FileInfo) SidecarFileName() string {
 	_r := x.inner.SidecarFileName()

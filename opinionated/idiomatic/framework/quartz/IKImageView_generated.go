@@ -42,209 +42,287 @@ func NewIKImageView() *IKImageView {
 	return &IKImageView{inner: raw.IKImageViewFromID(_id)}
 }
 
+// @property delegate @abstract Specifies the delegate object of the receiver.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *IKImageView) WithDelegate(delegate objc.ID) *IKImageView {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @property zoomFactor @abstract Specifies the zoom factor for the image view.
+//
 // WithZoomFactor sets the zoomFactor property and returns the receiver for chaining.
 func (x *IKImageView) WithZoomFactor(zoomFactor float64) *IKImageView {
 	x.inner.SetZoomFactor(zoomFactor)
 	return x
 }
 
+// @property rotationAngle @abstract Specifies the rotation angle for the image view.
+//
 // WithRotationAngle sets the rotationAngle property and returns the receiver for chaining.
 func (x *IKImageView) WithRotationAngle(rotationAngle float64) *IKImageView {
 	x.inner.SetRotationAngle(rotationAngle)
 	return x
 }
 
+// @property currentToolMode @abstract Specifies the current tool mode for the image view.
+//
 // WithCurrentToolMode sets the currentToolMode property and returns the receiver for chaining.
 func (x *IKImageView) WithCurrentToolMode(currentToolMode string) *IKImageView {
 	x.inner.SetCurrentToolMode(foundation.NSStringStringWithUTF8String(currentToolMode))
 	return x
 }
 
+// @property autoresizes @abstract Specifies the automatic resizing state for the image view.
+//
 // WithAutoresizes sets the autoresizes property and returns the receiver for chaining.
 func (x *IKImageView) WithAutoresizes(autoresizes bool) *IKImageView {
 	x.inner.SetAutoresizes(autoresizes)
 	return x
 }
 
+// @property hasHorizontalScroller @abstract Specifies the horizontal scroll bar state for the image view.
+//
 // WithHasHorizontalScroller sets the hasHorizontalScroller property and returns the receiver for chaining.
 func (x *IKImageView) WithHasHorizontalScroller(hasHorizontalScroller bool) *IKImageView {
 	x.inner.SetHasHorizontalScroller(hasHorizontalScroller)
 	return x
 }
 
+// @property hasVerticalScroller @abstract Specifies the vertical scroll bar state for the image view.
+//
 // WithHasVerticalScroller sets the hasVerticalScroller property and returns the receiver for chaining.
 func (x *IKImageView) WithHasVerticalScroller(hasVerticalScroller bool) *IKImageView {
 	x.inner.SetHasVerticalScroller(hasVerticalScroller)
 	return x
 }
 
+// @property autohidesScrollers @abstract Specifies the automatic-hiding scroll bar state for the image view.
+//
 // WithAutohidesScrollers sets the autohidesScrollers property and returns the receiver for chaining.
 func (x *IKImageView) WithAutohidesScrollers(autohidesScrollers bool) *IKImageView {
 	x.inner.SetAutohidesScrollers(autohidesScrollers)
 	return x
 }
 
+// @property supportsDragAndDrop @abstract Specifies the drag-and-drop support state for the image view.
+//
 // WithSupportsDragAndDrop sets the supportsDragAndDrop property and returns the receiver for chaining.
 func (x *IKImageView) WithSupportsDragAndDrop(supportsDragAndDrop bool) *IKImageView {
 	x.inner.SetSupportsDragAndDrop(supportsDragAndDrop)
 	return x
 }
 
+// @property editable @abstract Specifies the editable state for the image view.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *IKImageView) WithEditable(editable bool) *IKImageView {
 	x.inner.SetEditable(editable)
 	return x
 }
 
+// @property doubleClickOpensImageEditPane @abstract Specifies the image-opening state of the editing pane in the image view.
+//
 // WithDoubleClickOpensImageEditPanel sets the doubleClickOpensImageEditPanel property and returns the receiver for chaining.
 func (x *IKImageView) WithDoubleClickOpensImageEditPanel(doubleClickOpensImageEditPanel bool) *IKImageView {
 	x.inner.SetDoubleClickOpensImageEditPanel(doubleClickOpensImageEditPanel)
 	return x
 }
 
+// @property imageCorrection @abstract Specifies a Core Image filter for image correction.
+//
 // WithImageCorrection sets the imageCorrection property and returns the receiver for chaining.
 func (x *IKImageView) WithImageCorrection(imageCorrection *coreimage.CIFilter) *IKImageView {
 	x.inner.SetImageCorrection(imageCorrection)
 	return x
 }
 
+// @property backgroundColor @abstract Specifies the background color for the image view.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *IKImageView) WithBackgroundColor(backgroundColor *appkit.NSColor) *IKImageView {
 	x.inner.SetBackgroundColor(backgroundColor)
 	return x
 }
 
+// @method setImage:imageProperties: @abstract Sets the image & metadata (both retrieved from ImageIO).
+//
 // SetImageImageProperties calls the underlying SetImageImageProperties.
 func (x *IKImageView) SetImageImageProperties(image unsafe.Pointer, metaData *foundation.NSDictionary[objc.ID, objc.ID]) {
 	x.inner.SetImageImageProperties(image, metaData)
 }
 
+// @method setImageWithURL: @abstract Initializes an image view with the image specified by a URL.
+//
 // SetImageWithURL calls the underlying SetImageWithURL.
 func (x *IKImageView) SetImageWithURL(url string) {
 	x.inner.SetImageWithURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 }
 
+// @method image @abstract Returns the image associated with the view, after any image corrections.
+//
 // Image calls the underlying Image.
 func (x *IKImageView) Image() unsafe.Pointer {
 	return x.inner.Image()
 }
 
+// @method imageSize @abstract Returns the size of the image in the image view.
+//
 // ImageSize calls the underlying ImageSize.
 func (x *IKImageView) ImageSize() corefoundation.CGSize {
 	return x.inner.ImageSize()
 }
 
+// @method imageProperties @abstract Returns the metadata for the image in the view.
+//
 // ImageProperties calls the underlying ImageProperties.
 func (x *IKImageView) ImageProperties() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.ImageProperties()
 }
 
+// @method setRotationAngle:centerPoint: @abstract Sets the rotation angle at the provided origin.
+//
 // SetRotationAngleCenterPoint calls the underlying SetRotationAngleCenterPoint.
 func (x *IKImageView) SetRotationAngleCenterPoint(rotationAngle float64, centerPoint corefoundation.CGPoint) {
 	x.inner.SetRotationAngleCenterPoint(rotationAngle, centerPoint)
 }
 
+// @method rotateImageLeft: @abstract Rotates the image left.
+//
 // RotateImageLeft calls the underlying RotateImageLeft.
 func (x *IKImageView) RotateImageLeft(sender objc.ID) {
 	x.inner.RotateImageLeft(sender)
 }
 
+// @method rotateImageRight: @abstract Rotates the image right.
+//
 // RotateImageRight calls the underlying RotateImageRight.
 func (x *IKImageView) RotateImageRight(sender objc.ID) {
 	x.inner.RotateImageRight(sender)
 }
 
+// @method setImageZoomFactor:centerPoint: @abstract Sets the zoom factor at the provided origin.
+//
 // SetImageZoomFactorCenterPoint calls the underlying SetImageZoomFactorCenterPoint.
 func (x *IKImageView) SetImageZoomFactorCenterPoint(zoomFactor float64, centerPoint corefoundation.CGPoint) {
 	x.inner.SetImageZoomFactorCenterPoint(zoomFactor, centerPoint)
 }
 
+// @method zoomImageToRect: @abstract Zooms the image so that it fits in the specified rectangle.
+//
 // ZoomImageToRect calls the underlying ZoomImageToRect.
 func (x *IKImageView) ZoomImageToRect(rect corefoundation.CGRect) {
 	x.inner.ZoomImageToRect(rect)
 }
 
+// @method zoomImageToFit: @abstract Zooms the image so that it fits in the image view.
+//
 // ZoomImageToFit calls the underlying ZoomImageToFit.
 func (x *IKImageView) ZoomImageToFit(sender objc.ID) {
 	x.inner.ZoomImageToFit(sender)
 }
 
+// @method zoomImageToActualSize: @abstract Zooms the image so that it is displayed using its true size.
+//
 // ZoomImageToActualSize calls the underlying ZoomImageToActualSize.
 func (x *IKImageView) ZoomImageToActualSize(sender objc.ID) {
 	x.inner.ZoomImageToActualSize(sender)
 }
 
+// @method zoomIn: @abstract Zooms the image in.
+//
 // ZoomIn calls the underlying ZoomIn.
 func (x *IKImageView) ZoomIn(sender objc.ID) {
 	x.inner.ZoomIn(sender)
 }
 
+// @method zoomOut: @abstract Zooms the image out.
+//
 // ZoomOut calls the underlying ZoomOut.
 func (x *IKImageView) ZoomOut(sender objc.ID) {
 	x.inner.ZoomOut(sender)
 }
 
+// @method flipImageHorizontal: @abstract Flips an image along the horizontal axis.
+//
 // FlipImageHorizontal calls the underlying FlipImageHorizontal.
 func (x *IKImageView) FlipImageHorizontal(sender objc.ID) {
 	x.inner.FlipImageHorizontal(sender)
 }
 
+// @method flipImageVertical: @abstract Flips an image along the vertical axis.
+//
 // FlipImageVertical calls the underlying FlipImageVertical.
 func (x *IKImageView) FlipImageVertical(sender objc.ID) {
 	x.inner.FlipImageVertical(sender)
 }
 
+// @method crop: @abstract Crops the image using the current selection.
+//
 // Crop calls the underlying Crop.
 func (x *IKImageView) Crop(sender objc.ID) {
 	x.inner.Crop(sender)
 }
 
+// @method setOverlay:forType: @abstract Sets an overlay (Core Animation layer) for the image or the image background.
+//
 // SetOverlayForType calls the underlying SetOverlayForType.
 func (x *IKImageView) SetOverlayForType(layer *quartzcore.CALayer, layerType string) {
 	x.inner.SetOverlayForType(layer, foundation.NSStringStringWithUTF8String(layerType))
 }
 
+// @method overlayForType: @abstract Returns the overlay (Core Animation layer) for the image or the image background.
+//
 // OverlayForType calls the underlying OverlayForType.
 func (x *IKImageView) OverlayForType(layerType string) *quartzcore.CALayer {
 	return x.inner.OverlayForType(foundation.NSStringStringWithUTF8String(layerType))
 }
 
+// @method scrollToPoint: @abstract Scrolls the view to the specified point.
+//
 // ScrollToPoint calls the underlying ScrollToPoint.
 func (x *IKImageView) ScrollToPoint(point corefoundation.CGPoint) {
 	x.inner.ScrollToPoint(point)
 }
 
+// @method scrollToRect: @abstract Scrolls the view so that it includes the provided rectangular area.
+//
 // ScrollToRect calls the underlying ScrollToRect.
 func (x *IKImageView) ScrollToRect(rect corefoundation.CGRect) {
 	x.inner.ScrollToRect(rect)
 }
 
+// @method convertViewPointToImagePoint: @abstract Converts an image view coordinate to an image coordinate.
+//
 // ConvertViewPointToImagePoint calls the underlying ConvertViewPointToImagePoint.
 func (x *IKImageView) ConvertViewPointToImagePoint(viewPoint corefoundation.CGPoint) corefoundation.CGPoint {
 	return x.inner.ConvertViewPointToImagePoint(viewPoint)
 }
 
+// @method convertViewRectToImageRect: @abstract Converts an image view rectangle to an image rectangle.
+//
 // ConvertViewRectToImageRect calls the underlying ConvertViewRectToImageRect.
 func (x *IKImageView) ConvertViewRectToImageRect(viewRect corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.ConvertViewRectToImageRect(viewRect)
 }
 
+// @method convertImagePointToViewPoint: @abstract Converts an image coordinate to an image view coordinate.
+//
 // ConvertImagePointToViewPoint calls the underlying ConvertImagePointToViewPoint.
 func (x *IKImageView) ConvertImagePointToViewPoint(imagePoint corefoundation.CGPoint) corefoundation.CGPoint {
 	return x.inner.ConvertImagePointToViewPoint(imagePoint)
 }
 
+// @method convertImageRectToViewRect: @abstract Converts an image rectangle to an image view rectangle.
+//
 // ConvertImageRectToViewRect calls the underlying ConvertImageRectToViewRect.
 func (x *IKImageView) ConvertImageRectToViewRect(imageRect corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.ConvertImageRectToViewRect(imageRect)
 }
 
+// @property delegate @abstract Specifies the delegate object of the receiver.
+//
 // Delegate calls the underlying Delegate.
 func (x *IKImageView) Delegate() objc.ID {
 	return x.inner.Delegate()
@@ -255,6 +333,8 @@ func (x *IKImageView) SetDelegate(delegate objc.ID) {
 	x.inner.SetDelegate(delegate)
 }
 
+// @property zoomFactor @abstract Specifies the zoom factor for the image view.
+//
 // ZoomFactor calls the underlying ZoomFactor.
 func (x *IKImageView) ZoomFactor() float64 {
 	return x.inner.ZoomFactor()
@@ -265,6 +345,8 @@ func (x *IKImageView) SetZoomFactor(zoomFactor float64) {
 	x.inner.SetZoomFactor(zoomFactor)
 }
 
+// @property rotationAngle @abstract Specifies the rotation angle for the image view.
+//
 // RotationAngle calls the underlying RotationAngle.
 func (x *IKImageView) RotationAngle() float64 {
 	return x.inner.RotationAngle()
@@ -275,6 +357,8 @@ func (x *IKImageView) SetRotationAngle(rotationAngle float64) {
 	x.inner.SetRotationAngle(rotationAngle)
 }
 
+// @property currentToolMode @abstract Specifies the current tool mode for the image view.
+//
 // CurrentToolMode calls the underlying CurrentToolMode.
 func (x *IKImageView) CurrentToolMode() string {
 	_r := x.inner.CurrentToolMode()
@@ -289,6 +373,8 @@ func (x *IKImageView) SetCurrentToolMode(currentToolMode string) {
 	x.inner.SetCurrentToolMode(foundation.NSStringStringWithUTF8String(currentToolMode))
 }
 
+// @property autoresizes @abstract Specifies the automatic resizing state for the image view.
+//
 // Autoresizes calls the underlying Autoresizes.
 func (x *IKImageView) Autoresizes() bool {
 	return x.inner.Autoresizes()
@@ -299,6 +385,8 @@ func (x *IKImageView) SetAutoresizes(autoresizes bool) {
 	x.inner.SetAutoresizes(autoresizes)
 }
 
+// @property hasHorizontalScroller @abstract Specifies the horizontal scroll bar state for the image view.
+//
 // HasHorizontalScroller calls the underlying HasHorizontalScroller.
 func (x *IKImageView) HasHorizontalScroller() bool {
 	return x.inner.HasHorizontalScroller()
@@ -309,6 +397,8 @@ func (x *IKImageView) SetHasHorizontalScroller(hasHorizontalScroller bool) {
 	x.inner.SetHasHorizontalScroller(hasHorizontalScroller)
 }
 
+// @property hasVerticalScroller @abstract Specifies the vertical scroll bar state for the image view.
+//
 // HasVerticalScroller calls the underlying HasVerticalScroller.
 func (x *IKImageView) HasVerticalScroller() bool {
 	return x.inner.HasVerticalScroller()
@@ -319,6 +409,8 @@ func (x *IKImageView) SetHasVerticalScroller(hasVerticalScroller bool) {
 	x.inner.SetHasVerticalScroller(hasVerticalScroller)
 }
 
+// @property autohidesScrollers @abstract Specifies the automatic-hiding scroll bar state for the image view.
+//
 // AutohidesScrollers calls the underlying AutohidesScrollers.
 func (x *IKImageView) AutohidesScrollers() bool {
 	return x.inner.AutohidesScrollers()
@@ -329,6 +421,8 @@ func (x *IKImageView) SetAutohidesScrollers(autohidesScrollers bool) {
 	x.inner.SetAutohidesScrollers(autohidesScrollers)
 }
 
+// @property supportsDragAndDrop @abstract Specifies the drag-and-drop support state for the image view.
+//
 // SupportsDragAndDrop calls the underlying SupportsDragAndDrop.
 func (x *IKImageView) SupportsDragAndDrop() bool {
 	return x.inner.SupportsDragAndDrop()
@@ -339,6 +433,8 @@ func (x *IKImageView) SetSupportsDragAndDrop(supportsDragAndDrop bool) {
 	x.inner.SetSupportsDragAndDrop(supportsDragAndDrop)
 }
 
+// @property editable @abstract Specifies the editable state for the image view.
+//
 // Editable calls the underlying Editable.
 func (x *IKImageView) Editable() bool {
 	return x.inner.Editable()
@@ -349,6 +445,8 @@ func (x *IKImageView) SetEditable(editable bool) {
 	x.inner.SetEditable(editable)
 }
 
+// @property doubleClickOpensImageEditPane @abstract Specifies the image-opening state of the editing pane in the image view.
+//
 // DoubleClickOpensImageEditPanel calls the underlying DoubleClickOpensImageEditPanel.
 func (x *IKImageView) DoubleClickOpensImageEditPanel() bool {
 	return x.inner.DoubleClickOpensImageEditPanel()
@@ -359,6 +457,8 @@ func (x *IKImageView) SetDoubleClickOpensImageEditPanel(doubleClickOpensImageEdi
 	x.inner.SetDoubleClickOpensImageEditPanel(doubleClickOpensImageEditPanel)
 }
 
+// @property imageCorrection @abstract Specifies a Core Image filter for image correction.
+//
 // ImageCorrection calls the underlying ImageCorrection.
 func (x *IKImageView) ImageCorrection() *coreimage.CIFilter {
 	return x.inner.ImageCorrection()
@@ -369,6 +469,8 @@ func (x *IKImageView) SetImageCorrection(imageCorrection *coreimage.CIFilter) {
 	x.inner.SetImageCorrection(imageCorrection)
 }
 
+// @property backgroundColor @abstract Specifies the background color for the image view.
+//
 // BackgroundColor calls the underlying BackgroundColor.
 func (x *IKImageView) BackgroundColor() *appkit.NSColor {
 	return x.inner.BackgroundColor()

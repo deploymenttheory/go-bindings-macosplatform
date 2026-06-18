@@ -38,6 +38,8 @@ func NewSampleBufferGeneratorBatch() *SampleBufferGeneratorBatch {
 	return &SampleBufferGeneratorBatch{inner: raw.AVSampleBufferGeneratorBatchFromID(_id)}
 }
 
+// @method		makeDataReadyWithCompletionHandler: @abstract		Loads sample data asynchronously for all CMSampleBuffers within a batch. This can only be called once on a batch, an exception will be thrown otherwise. @param		completionHandler The completionHandler is called once, when all CMSampleBuffers in the batch are data-ready, or as soon as an error has occurred.
+//
 // MakeDataReady blocks until the operation completes or ctx is cancelled.
 func (x *SampleBufferGeneratorBatch) MakeDataReady(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -56,6 +58,8 @@ func (x *SampleBufferGeneratorBatch) MakeDataReady(ctx context.Context) error {
 	}
 }
 
+// @method		cancel @abstract		Attempt to cancel any I/O for this batch. The associated sample buffers will have their data ready handler invoked with an error.
+//
 // Cancel calls the underlying Cancel.
 func (x *SampleBufferGeneratorBatch) Cancel() {
 	x.inner.Cancel()

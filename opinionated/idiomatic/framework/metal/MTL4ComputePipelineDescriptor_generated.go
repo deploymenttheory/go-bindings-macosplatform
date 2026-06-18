@@ -36,65 +36,87 @@ func NewMTL4ComputePipelineDescriptor() *MTL4ComputePipelineDescriptor {
 	return &MTL4ComputePipelineDescriptor{inner: raw.MTL4ComputePipelineDescriptorFromID(_id)}
 }
 
+// A descriptor representing the compute pipeline's function. You don't assign instances of “MTL4FunctionDescriptor“ to this property directly, instead assign an instance of one of its subclasses, such as “MTL4LibraryFunctionDescriptor“, which represents a function from a Metal library.
+//
 // WithComputeFunctionDescriptor sets the computeFunctionDescriptor property and returns the receiver for chaining.
 func (x *MTL4ComputePipelineDescriptor) WithComputeFunctionDescriptor(computeFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4ComputePipelineDescriptor {
 	x.inner.SetComputeFunctionDescriptor(computeFunctionDescriptor.asMTL4FunctionDescriptor())
 	return x
 }
 
+// A boolean value indicating whether each dimension of the threadgroup size is a multiple of its corresponding thread execution width.
+//
 // WithThreadGroupSizeIsMultipleOfThreadExecutionWidth sets the threadGroupSizeIsMultipleOfThreadExecutionWidth property and returns the receiver for chaining.
 func (x *MTL4ComputePipelineDescriptor) WithThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth bool) *MTL4ComputePipelineDescriptor {
 	x.inner.SetThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth)
 	return x
 }
 
+// The maximum total number of threads that Metal can execute in a single threadgroup for the compute function.
+//
 // WithMaxTotalThreadsPerThreadgroup sets the maxTotalThreadsPerThreadgroup property and returns the receiver for chaining.
 func (x *MTL4ComputePipelineDescriptor) WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint) *MTL4ComputePipelineDescriptor {
 	x.inner.SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup)
 	return x
 }
 
+// The required number of threads per threadgroup for compute dispatches. When you set this value, you are responsible for ensuring that the `threadsPerThreadgroup` argument of any compute dispatch matches it. Setting this property is optional, except in cases where the pipeline uses *CooperativeTensors*. This property's default value is `0`, which disables its effect.
+//
 // WithRequiredThreadsPerThreadgroup sets the requiredThreadsPerThreadgroup property and returns the receiver for chaining.
 func (x *MTL4ComputePipelineDescriptor) WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) *MTL4ComputePipelineDescriptor {
 	x.inner.SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup)
 	return x
 }
 
+// A boolean value indicating whether the compute pipeline supports linking binary functions.
+//
 // WithSupportBinaryLinking sets the supportBinaryLinking property and returns the receiver for chaining.
 func (x *MTL4ComputePipelineDescriptor) WithSupportBinaryLinking(supportBinaryLinking bool) *MTL4ComputePipelineDescriptor {
 	x.inner.SetSupportBinaryLinking(supportBinaryLinking)
 	return x
 }
 
+// An object that contains information about functions to link to the compute pipeline.
+//
 // WithStaticLinkingDescriptor sets the staticLinkingDescriptor property and returns the receiver for chaining.
 func (x *MTL4ComputePipelineDescriptor) WithStaticLinkingDescriptor(staticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4ComputePipelineDescriptor {
 	x.inner.SetStaticLinkingDescriptor(staticLinkingDescriptor.Unwrap())
 	return x
 }
 
+// A value indicating whether the pipeline supports Metal indirect command buffers.
+//
 // WithSupportIndirectCommandBuffers sets the supportIndirectCommandBuffers property and returns the receiver for chaining.
 func (x *MTL4ComputePipelineDescriptor) WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers MTL4IndirectCommandBufferSupportState) *MTL4ComputePipelineDescriptor {
 	x.inner.SetSupportIndirectCommandBuffers(raw.MTL4IndirectCommandBufferSupportState(supportIndirectCommandBuffers))
 	return x
 }
 
+// Assigns an optional string that uniquely identifies a pipeline descriptor. After you provide this label, you can use it to look up a pipeline state object by name in a binary archive.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MTL4ComputePipelineDescriptor) WithLabel(label string) *MTL4ComputePipelineDescriptor {
 	x.inner.MTL4PipelineDescriptor.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// Provides compile-time options when you build the pipeline.
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MTL4ComputePipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4ComputePipelineDescriptor {
 	x.inner.MTL4PipelineDescriptor.SetOptions(options.Unwrap())
 	return x
 }
 
+// Resets the descriptor to its default values.
+//
 // Reset calls the underlying Reset.
 func (x *MTL4ComputePipelineDescriptor) Reset() {
 	x.inner.Reset()
 }
 
+// A descriptor representing the compute pipeline's function. You don't assign instances of “MTL4FunctionDescriptor“ to this property directly, instead assign an instance of one of its subclasses, such as “MTL4LibraryFunctionDescriptor“, which represents a function from a Metal library.
+//
 // ComputeFunctionDescriptor calls the underlying ComputeFunctionDescriptor.
 func (x *MTL4ComputePipelineDescriptor) ComputeFunctionDescriptor() *MTL4FunctionDescriptor {
 	_r := x.inner.ComputeFunctionDescriptor()
@@ -109,6 +131,8 @@ func (x *MTL4ComputePipelineDescriptor) SetComputeFunctionDescriptor(computeFunc
 	x.inner.SetComputeFunctionDescriptor(computeFunctionDescriptor)
 }
 
+// A boolean value indicating whether each dimension of the threadgroup size is a multiple of its corresponding thread execution width.
+//
 // ThreadGroupSizeIsMultipleOfThreadExecutionWidth calls the underlying ThreadGroupSizeIsMultipleOfThreadExecutionWidth.
 func (x *MTL4ComputePipelineDescriptor) ThreadGroupSizeIsMultipleOfThreadExecutionWidth() bool {
 	return x.inner.ThreadGroupSizeIsMultipleOfThreadExecutionWidth()
@@ -119,6 +143,8 @@ func (x *MTL4ComputePipelineDescriptor) SetThreadGroupSizeIsMultipleOfThreadExec
 	x.inner.SetThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth)
 }
 
+// The maximum total number of threads that Metal can execute in a single threadgroup for the compute function.
+//
 // MaxTotalThreadsPerThreadgroup calls the underlying MaxTotalThreadsPerThreadgroup.
 func (x *MTL4ComputePipelineDescriptor) MaxTotalThreadsPerThreadgroup() uint {
 	return x.inner.MaxTotalThreadsPerThreadgroup()
@@ -129,6 +155,8 @@ func (x *MTL4ComputePipelineDescriptor) SetMaxTotalThreadsPerThreadgroup(maxTota
 	x.inner.SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup)
 }
 
+// The required number of threads per threadgroup for compute dispatches. When you set this value, you are responsible for ensuring that the `threadsPerThreadgroup` argument of any compute dispatch matches it. Setting this property is optional, except in cases where the pipeline uses *CooperativeTensors*. This property's default value is `0`, which disables its effect.
+//
 // RequiredThreadsPerThreadgroup calls the underlying RequiredThreadsPerThreadgroup.
 func (x *MTL4ComputePipelineDescriptor) RequiredThreadsPerThreadgroup() raw.MTLSize {
 	return x.inner.RequiredThreadsPerThreadgroup()
@@ -139,6 +167,8 @@ func (x *MTL4ComputePipelineDescriptor) SetRequiredThreadsPerThreadgroup(require
 	x.inner.SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup)
 }
 
+// A boolean value indicating whether the compute pipeline supports linking binary functions.
+//
 // SupportBinaryLinking calls the underlying SupportBinaryLinking.
 func (x *MTL4ComputePipelineDescriptor) SupportBinaryLinking() bool {
 	return x.inner.SupportBinaryLinking()
@@ -149,6 +179,8 @@ func (x *MTL4ComputePipelineDescriptor) SetSupportBinaryLinking(supportBinaryLin
 	x.inner.SetSupportBinaryLinking(supportBinaryLinking)
 }
 
+// An object that contains information about functions to link to the compute pipeline.
+//
 // StaticLinkingDescriptor calls the underlying StaticLinkingDescriptor.
 func (x *MTL4ComputePipelineDescriptor) StaticLinkingDescriptor() *MTL4StaticLinkingDescriptor {
 	_r := x.inner.StaticLinkingDescriptor()
@@ -163,6 +195,8 @@ func (x *MTL4ComputePipelineDescriptor) SetStaticLinkingDescriptor(staticLinking
 	x.inner.SetStaticLinkingDescriptor(staticLinkingDescriptor)
 }
 
+// A value indicating whether the pipeline supports Metal indirect command buffers.
+//
 // SupportIndirectCommandBuffers calls the underlying SupportIndirectCommandBuffers.
 func (x *MTL4ComputePipelineDescriptor) SupportIndirectCommandBuffers() MTL4IndirectCommandBufferSupportState {
 	return MTL4IndirectCommandBufferSupportState(x.inner.SupportIndirectCommandBuffers())

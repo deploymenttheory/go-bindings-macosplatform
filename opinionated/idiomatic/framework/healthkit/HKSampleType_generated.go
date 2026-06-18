@@ -35,26 +35,36 @@ func NewSampleType() *SampleType {
 	return &SampleType{inner: raw.HKSampleTypeFromID(_id)}
 }
 
+// @property      isMaximumDurationRestricted @abstract      Returns YES if the start and end date for samples of this type are restricted by a maximum duration.
+//
 // IsMaximumDurationRestricted calls the underlying IsMaximumDurationRestricted.
 func (x *SampleType) IsMaximumDurationRestricted() bool {
 	return x.inner.IsMaximumDurationRestricted()
 }
 
+// @property      maximumAllowedDuration @abstract      When the duration is restricted for samples of this type, returns the maximum duration allowed, calculated as the difference between end and start dates. @discussion    Throws an exception if there is no maximum restriction on duration for samples of this type.
+//
 // MaximumAllowedDuration calls the underlying MaximumAllowedDuration.
 func (x *SampleType) MaximumAllowedDuration() float64 {
 	return x.inner.MaximumAllowedDuration()
 }
 
+// @property      isMinimumDurationRestricted @abstract      Returns YES if the start and end date for samples of this type are restricted by a minimum duration.
+//
 // IsMinimumDurationRestricted calls the underlying IsMinimumDurationRestricted.
 func (x *SampleType) IsMinimumDurationRestricted() bool {
 	return x.inner.IsMinimumDurationRestricted()
 }
 
+// @property      minimumAllowedDuration @abstract      When the duration is restricted for samples of this type, returns the minimum duration allowed, calculated as the difference between end and start dates. @discussion    Throws an exception if there is no minimum restriction on duration for samples of this type.
+//
 // MinimumAllowedDuration calls the underlying MinimumAllowedDuration.
 func (x *SampleType) MinimumAllowedDuration() float64 {
 	return x.inner.MinimumAllowedDuration()
 }
 
+// @property      allowsRecalibrationForEstimates @abstract      Returns YES if first-party samples of this type are produced using a prediction algorithm, and that algorithm supports recalibration. To recalibrate the estimates for a sample type, see -[HKHealthStore recalibrateEstimatesForSampleType:atDate:completion:]
+//
 // AllowsRecalibrationForEstimates calls the underlying AllowsRecalibrationForEstimates.
 func (x *SampleType) AllowsRecalibrationForEstimates() bool {
 	return x.inner.AllowsRecalibrationForEstimates()

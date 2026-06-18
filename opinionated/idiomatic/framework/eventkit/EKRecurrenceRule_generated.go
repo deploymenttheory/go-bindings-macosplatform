@@ -31,6 +31,8 @@ func RecurrenceRuleFromID(id objc.ID) *RecurrenceRule {
 	return &RecurrenceRule{inner: raw.EKRecurrenceRuleFromID(id)}
 }
 
+// @method     initRecurrenceWithFrequency:interval:end: @abstract   Simple initializer to create a recurrence. @discussion This is used to create a simple recurrence with a specific type, interval and end. If interval is 0, an exception is raised. The end parameter can be nil.
+//
 // NewRecurrenceRuleRecurrenceWithFrequencyIntervalEnd creates a new [RecurrenceRule].
 func NewRecurrenceRuleRecurrenceWithFrequencyIntervalEnd(type_ EKRecurrenceFrequency, interval int, end *raw.EKRecurrenceEnd) *RecurrenceRule {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("EKRecurrenceRule")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewRecurrenceRuleRecurrenceWithFrequencyIntervalEnd(type_ EKRecurrenceFrequ
 	return &RecurrenceRule{inner: raw.EKRecurrenceRuleFromID(_id)}
 }
 
+// @method     initRecurrenceWithFrequency:interval:daysOfTheWeek:daysOfTheMonth:monthsOfTheYear:weeksOfTheYear:daysOfTheYear:setPositions:end: @abstract   The designated initializer. @discussion This can be used to build any kind of recurrence rule. But be aware that certain combinations make no sense and will be ignored. For example, if you pass daysOfTheWeek for a daily recurrence, they will be ignored. @param      type            The type of recurrence @param      interval        The interval. Passing zero will raise an exception. @param      daysOfTheWeek   An array of EKRecurrenceDayOfWeek objects. Valid for all recurrence types except daily. Ignored otherwise. Corresponds to the BYDAY value in the iCalendar specification. @param      daysOfTheMonth  An array of NSNumbers ([+/-] 1 to 31). Negative numbers infer counting from the end of the month. For example, -1 means the last day of the month. Valid only for monthly recurrences. Ignored otherwise. Corresponds to the BYMONTHDAY value in the iCalendar specification. @param      monthsOfTheYear An array of NSNumbers (1 to 12). Valid only for yearly recurrences. Ignored otherwise. Corresponds to the BYMONTH value in the iCalendar specification. @param      weeksOfTheYear  An array of NSNumbers ([+/1] 1 to 53). Negative numbers infer counting from the end of the year. For example, -1 means the last week of the year. Valid only for yearly recurrences. Ignored otherwise. Corresponds to the BYWEEKNO value in the iCalendar specification. @param      daysOfTheYear   An array of NSNumbers ([+/1] 1 to 366). Negative numbers infer counting from the end of the year. For example, -1 means the last day of the year. Valid only for yearly recurrences. Ignored otherwise. Corresponds to the BYYEARDAY value in the iCalendar specification. @param      setPositions    An array of NSNumbers ([+/1] 1 to 366). Used at the end of recurrence computation to filter the list to the positions specified. Negative numbers indicate starting at the end, i.e. -1 indicates taking the last result of the set. Valid when daysOfTheWeek, daysOfTheMonth, monthsOfTheYear, weeksOfTheYear, or daysOfTheYear is passed. Ignored otherwise. Corresponds to the BYSETPOS value in the iCalendar specification. @param      end             The recurrence end, or nil.
+//
 // NewRecurrenceRuleRecurrenceWithFrequencyIntervalDaysOfTheWeekDaysOfTheMonthMonthsOfTheYearWeeksOfTheYearDaysOfTheYearSetPositionsEnd creates a new [RecurrenceRule].
 func NewRecurrenceRuleRecurrenceWithFrequencyIntervalDaysOfTheWeekDaysOfTheMonthMonthsOfTheYearWeeksOfTheYearDaysOfTheYearSetPositionsEnd(type_ EKRecurrenceFrequency, interval int, days *foundation.NSArray[*raw.EKRecurrenceDayOfWeek], monthDays *foundation.NSArray[*foundation.NSNumber], months *foundation.NSArray[*foundation.NSNumber], weeksOfTheYear *foundation.NSArray[*foundation.NSNumber], daysOfTheYear *foundation.NSArray[*foundation.NSNumber], setPositions *foundation.NSArray[*foundation.NSNumber], end *raw.EKRecurrenceEnd) *RecurrenceRule {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("EKRecurrenceRule")), objc.RegisterName("alloc"))
@@ -45,12 +49,16 @@ func NewRecurrenceRuleRecurrenceWithFrequencyIntervalDaysOfTheWeekDaysOfTheMonth
 	return &RecurrenceRule{inner: raw.EKRecurrenceRuleFromID(_id)}
 }
 
+// @property       recurrenceEnd @discussion     This property defines when the the repeating event is scheduled to end. The end date can be specified by a number of occurrences, or with an end date.
+//
 // WithRecurrenceEnd sets the recurrenceEnd property and returns the receiver for chaining.
 func (x *RecurrenceRule) WithRecurrenceEnd(recurrenceEnd *RecurrenceEnd) *RecurrenceRule {
 	x.inner.SetRecurrenceEnd(recurrenceEnd.Unwrap())
 	return x
 }
 
+// @property       calendarIdentifier; @discussion     Calendar used by this recurrence rule.
+//
 // CalendarIdentifier calls the underlying CalendarIdentifier.
 func (x *RecurrenceRule) CalendarIdentifier() string {
 	_r := x.inner.CalendarIdentifier()
@@ -60,6 +68,8 @@ func (x *RecurrenceRule) CalendarIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property       recurrenceEnd @discussion     This property defines when the the repeating event is scheduled to end. The end date can be specified by a number of occurrences, or with an end date.
+//
 // RecurrenceEnd calls the underlying RecurrenceEnd.
 func (x *RecurrenceRule) RecurrenceEnd() *RecurrenceEnd {
 	_r := x.inner.RecurrenceEnd()
@@ -74,21 +84,29 @@ func (x *RecurrenceRule) SetRecurrenceEnd(recurrenceEnd *raw.EKRecurrenceEnd) {
 	x.inner.SetRecurrenceEnd(recurrenceEnd)
 }
 
+// @property       frequency @discussion     This property designates the unit of time used to describe the recurrence pattern.
+//
 // Frequency calls the underlying Frequency.
 func (x *RecurrenceRule) Frequency() EKRecurrenceFrequency {
 	return EKRecurrenceFrequency(x.inner.Frequency())
 }
 
+// @property       interval @discussion     The interval of a EKRecurrenceRule is an integer value which specifies how often the recurrence rule repeats over the unit of time described by the EKRecurrenceFrequency. For example, if the EKRecurrenceFrequency is EKRecurrenceWeekly, then an interval of 1 means the pattern is repeated every week. A value of 2 indicates it is repeated every other week, 3 means every third week, and so on. The value must be a positive integer; 0 is not a valid value, and nil will be returned if the client attempts to initialize a rule with a negative or zero interval.
+//
 // Interval calls the underlying Interval.
 func (x *RecurrenceRule) Interval() int {
 	return x.inner.Interval()
 }
 
+// @property       firstDayOfTheWeek @discussion     Recurrence patterns can specify which day of the week should be treated as the first day. Possible values for this property are integers 0 and 1-7, which correspond to days of the week with Sunday = 1. Zero indicates that the property is not set for this recurrence. The first day of the week only affects the way the recurrence is expanded for weekly recurrence patterns with an interval greater than 1. For those types of recurrence patterns, the Calendar framework will set firstDayOfTheWeek to be 2 (Monday). In all other cases, this property will be set to zero. The iCalendar spec stipulates that the default value is Monday if this property is not set.
+//
 // FirstDayOfTheWeek calls the underlying FirstDayOfTheWeek.
 func (x *RecurrenceRule) FirstDayOfTheWeek() int {
 	return x.inner.FirstDayOfTheWeek()
 }
 
+// @property       daysOfTheWeek @discussion     This property is valid for rules whose EKRecurrenceFrequency is EKRecurrenceFrequencyWeekly, EKRecurrenceFrequencyMonthly, or EKRecurrenceFrequencyYearly. This property can be accessed as an array containing one or more EKRecurrenceDayOfWeek objects corresponding to the days of the week the event recurs. For all other EKRecurrenceRules, this property is nil. This property corresponds to BYDAY in the iCalendar specification.
+//
 // DaysOfTheWeek returns the collection as a Go slice.
 func (x *RecurrenceRule) DaysOfTheWeek() []*RecurrenceDayOfWeek {
 	arr := x.inner.DaysOfTheWeek()
@@ -100,6 +118,8 @@ func (x *RecurrenceRule) DaysOfTheWeek() []*RecurrenceDayOfWeek {
 	})
 }
 
+// @property       daysOfTheMonth @discussion     This property is valid for rules whose EKRecurrenceFrequency is EKRecurrenceFrequencyMonthly, and that were initialized with one or more specific days of the month (not with a day of the week and week of the month). This property can be accessed as an array containing one or more NSNumbers corresponding to the days of the month the event recurs. For all other EKRecurrenceRules, this property is nil. This property corresponds to BYMONTHDAY in the iCalendar specification.
+//
 // DaysOfTheMonth returns the collection as a Go slice.
 func (x *RecurrenceRule) DaysOfTheMonth() []*foundation.NSNumber {
 	arr := x.inner.DaysOfTheMonth()
@@ -111,6 +131,8 @@ func (x *RecurrenceRule) DaysOfTheMonth() []*foundation.NSNumber {
 	})
 }
 
+// @property       daysOfTheYear @discussion     This property is valid for rules whose EKRecurrenceFrequency is EKRecurrenceFrequencyYearly. This property can be accessed as an array containing one or more NSNumbers corresponding to the days of the year the event recurs. For all other EKRecurrenceRules, this property is nil. This property corresponds to BYYEARDAY in the iCalendar specification. It should contain values between 1 to 366 or -366 to -1.
+//
 // DaysOfTheYear returns the collection as a Go slice.
 func (x *RecurrenceRule) DaysOfTheYear() []*foundation.NSNumber {
 	arr := x.inner.DaysOfTheYear()
@@ -122,6 +144,8 @@ func (x *RecurrenceRule) DaysOfTheYear() []*foundation.NSNumber {
 	})
 }
 
+// @property       weeksOfTheYear @discussion     This property is valid for rules whose EKRecurrenceFrequency is EKRecurrenceFrequencyYearly. This property can be accessed as an array containing one or more NSNumbers corresponding to the weeks of the year the event recurs. For all other EKRecurrenceRules, this property is nil. This property corresponds to BYWEEK in the iCalendar specification. It should contain integers from 1 to 53 or -1 to -53.
+//
 // WeeksOfTheYear returns the collection as a Go slice.
 func (x *RecurrenceRule) WeeksOfTheYear() []*foundation.NSNumber {
 	arr := x.inner.WeeksOfTheYear()
@@ -133,6 +157,8 @@ func (x *RecurrenceRule) WeeksOfTheYear() []*foundation.NSNumber {
 	})
 }
 
+// @property       monthsOfTheYear @discussion     This property is valid for rules whose EKRecurrenceFrequency is EKRecurrenceFrequencyYearly. This property can be accessed as an array containing one or more NSNumbers corresponding to the months of the year the event recurs. For all other EKRecurrenceRules, this property is nil. This property corresponds to BYMONTH in the iCalendar specification.
+//
 // MonthsOfTheYear returns the collection as a Go slice.
 func (x *RecurrenceRule) MonthsOfTheYear() []*foundation.NSNumber {
 	arr := x.inner.MonthsOfTheYear()
@@ -144,6 +170,8 @@ func (x *RecurrenceRule) MonthsOfTheYear() []*foundation.NSNumber {
 	})
 }
 
+// @property       setPositions @discussion     This property is valid for rules which have a valid daysOfTheWeek, daysOfTheMonth, weeksOfTheYear, or monthsOfTheYear property. It allows you to specify a set of ordinal numbers to help choose which objects out of the set of selected events should be included. For example, setting the daysOfTheWeek to Monday-Friday and including a value of -1 in the array would indicate the last weekday in the recurrence range (month, year, etc). This value corresponds to the iCalendar BYSETPOS property.
+//
 // SetPositions returns the collection as a Go slice.
 func (x *RecurrenceRule) SetPositions() []*foundation.NSNumber {
 	arr := x.inner.SetPositions()

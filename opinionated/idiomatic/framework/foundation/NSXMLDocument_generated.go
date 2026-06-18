@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// @class NSXMLDocument @abstract An XML Document @discussion Note: if the application of a method would result in more than one element in the children array, an exception is thrown. Trying to add a document, namespace, attribute, or node with a parent also throws an exception. To add a node with a parent first detach or create a copy of it.
+//
 // XMLDocument wraps [raw.NSXMLDocument] with a fluent Go API.
 type XMLDocument struct {
 	inner *raw.NSXMLDocument
@@ -38,6 +40,8 @@ func NewXMLDocument() *XMLDocument {
 	return &XMLDocument{inner: raw.NSXMLDocumentFromID(_id)}
 }
 
+// @method initWithXMLString:options:error: @abstract Returns a document created from either XML or HTML, if the HTMLTidy option is set. Parse errors are returned in <tt>error</tt>.
+//
 // NewXMLDocumentWithXMLStringOptionsError creates a new [XMLDocument].
 func NewXMLDocumentWithXMLStringOptionsError(string_ string, mask NSXMLNodeOptions) (*XMLDocument, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLDocument")), objc.RegisterName("alloc"))
@@ -49,6 +53,8 @@ func NewXMLDocumentWithXMLStringOptionsError(string_ string, mask NSXMLNodeOptio
 	return &XMLDocument{inner: raw.NSXMLDocumentFromID(_id)}, nil
 }
 
+// @method initWithContentsOfURL:options:error: @abstract Returns a document created from the contents of an XML or HTML URL. Connection problems such as 404, parse errors are returned in <tt>error</tt>.
+//
 // NewXMLDocumentWithContentsOfURLOptionsError creates a new [XMLDocument].
 func NewXMLDocumentWithContentsOfURLOptionsError(url string, mask NSXMLNodeOptions) (*XMLDocument, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLDocument")), objc.RegisterName("alloc"))
@@ -60,6 +66,8 @@ func NewXMLDocumentWithContentsOfURLOptionsError(url string, mask NSXMLNodeOptio
 	return &XMLDocument{inner: raw.NSXMLDocumentFromID(_id)}, nil
 }
 
+// @method initWithData:options:error: @abstract Returns a document created from data. Parse errors are returned in <tt>error</tt>.
+//
 // NewXMLDocumentWithDataOptionsError creates a new [XMLDocument].
 func NewXMLDocumentWithDataOptionsError(data *raw.NSData, mask NSXMLNodeOptions) (*XMLDocument, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLDocument")), objc.RegisterName("alloc"))
@@ -71,6 +79,8 @@ func NewXMLDocumentWithDataOptionsError(data *raw.NSData, mask NSXMLNodeOptions)
 	return &XMLDocument{inner: raw.NSXMLDocumentFromID(_id)}, nil
 }
 
+// @method initWithRootElement: @abstract Returns a document with a single child, the root element.
+//
 // NewXMLDocumentWithRootElement creates a new [XMLDocument].
 func NewXMLDocumentWithRootElement(element *raw.NSXMLElement) *XMLDocument {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXMLDocument")), objc.RegisterName("alloc"))
@@ -78,54 +88,72 @@ func NewXMLDocumentWithRootElement(element *raw.NSXMLElement) *XMLDocument {
 	return &XMLDocument{inner: raw.NSXMLDocumentFromID(_id)}
 }
 
+// @abstract Sets the character encoding to an IANA type.
+//
 // WithCharacterEncoding sets the characterEncoding property and returns the receiver for chaining.
 func (x *XMLDocument) WithCharacterEncoding(characterEncoding string) *XMLDocument {
 	x.inner.SetCharacterEncoding(foundation.NSStringStringWithUTF8String(characterEncoding))
 	return x
 }
 
+// @abstract Set whether this document depends on an external DTD. If this option is set the standalone declaration will appear on output.
+//
 // WithStandalone sets the standalone property and returns the receiver for chaining.
 func (x *XMLDocument) WithStandalone(standalone bool) *XMLDocument {
 	x.inner.SetStandalone(standalone)
 	return x
 }
 
+// @abstract The kind of document.
+//
 // WithDocumentContentKind sets the documentContentKind property and returns the receiver for chaining.
 func (x *XMLDocument) WithDocumentContentKind(documentContentKind NSXMLDocumentContentKind) *XMLDocument {
 	x.inner.SetDocumentContentKind(raw.NSXMLDocumentContentKind(documentContentKind))
 	return x
 }
 
+// @abstract Set the MIME type, eg text/xml.
+//
 // WithMIMEType sets the mIMEType property and returns the receiver for chaining.
 func (x *XMLDocument) WithMIMEType(mIMEType string) *XMLDocument {
 	x.inner.SetMIMEType(foundation.NSStringStringWithUTF8String(mIMEType))
 	return x
 }
 
+// @abstract Set the associated DTD. This DTD will be output with the document.
+//
 // WithDTD sets the dTD property and returns the receiver for chaining.
 func (x *XMLDocument) WithDTD(dTD *XMLDTD) *XMLDocument {
 	x.inner.SetDTD(dTD.Unwrap())
 	return x
 }
 
+// @abstract Sets the nodes name. Applicable for element, attribute, namespace, processing-instruction, document type declaration, element declaration, attribute declaration, entity declaration, and notation declaration.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *XMLDocument) WithName(name string) *XMLDocument {
 	x.inner.NSXMLNode.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @abstract Sets the content of the node. Setting the objectValue removes all existing children including processing instructions and comments. Setting the object value on an element creates a single text node child.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *XMLDocument) WithObjectValue(objectValue objc.ID) *XMLDocument {
 	x.inner.NSXMLNode.SetObjectValue(objectValue)
 	return x
 }
 
+// @abstract Sets the content of the node. Setting the stringValue removes all existing children including processing instructions and comments. Setting the string value on an element creates a single text node child. The getter returns the string value of the node, which may be either its content or child text nodes, depending on the type of node. Elements are recursed and text nodes concatenated in document order with no intervening spaces.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *XMLDocument) WithStringValue(stringValue string) *XMLDocument {
 	x.inner.NSXMLNode.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// @abstract Set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
+//
 // WithURI sets the uRI property and returns the receiver for chaining.
 func (x *XMLDocument) WithURI(uRI string) *XMLDocument {
 	x.inner.NSXMLNode.SetURI(foundation.NSStringStringWithUTF8String(uRI))
@@ -138,11 +166,15 @@ func (x *XMLDocument) WithScriptingProperties(scriptingProperties *raw.NSDiction
 	return x
 }
 
+// @method setRootElement: @abstract Set the root element. Removes all other children including comments and processing-instructions.
+//
 // SetRootElement calls the underlying SetRootElement.
 func (x *XMLDocument) SetRootElement(root *raw.NSXMLElement) {
 	x.inner.SetRootElement(root)
 }
 
+// @method rootElement @abstract The root element.
+//
 // RootElement calls the underlying RootElement.
 func (x *XMLDocument) RootElement() *XMLElement {
 	_r := x.inner.RootElement()
@@ -152,36 +184,59 @@ func (x *XMLDocument) RootElement() *XMLElement {
 	return &XMLElement{inner: _r}
 }
 
+// @method insertChild:atIndex: @abstract Inserts a child at a particular index.
+//
 // InsertChildAtIndex calls the underlying InsertChildAtIndex.
 func (x *XMLDocument) InsertChildAtIndex(child *raw.NSXMLNode, index uint) {
 	x.inner.InsertChildAtIndex(child, index)
 }
 
+// @method insertChildren:atIndex: @abstract Insert several children at a particular index.
+//
 // InsertChildrenAtIndex calls the underlying InsertChildrenAtIndex.
 func (x *XMLDocument) InsertChildrenAtIndex(children *raw.NSArray[*raw.NSXMLNode], index uint) {
 	x.inner.InsertChildrenAtIndex(children, index)
 }
 
+// @method removeChildAtIndex:atIndex: @abstract Removes a child at a particular index.
+//
 // RemoveChildAtIndex calls the underlying RemoveChildAtIndex.
 func (x *XMLDocument) RemoveChildAtIndex(index uint) {
 	x.inner.RemoveChildAtIndex(index)
 }
 
+// @method setChildren: @abstract Removes all existing children and replaces them with the new children. Set children to nil to simply remove all children.
+//
 // SetChildren calls the underlying SetChildren.
-func (x *XMLDocument) SetChildren(children *raw.NSArray[*raw.NSXMLNode]) {
-	x.inner.SetChildren(children)
+func (x *XMLDocument) SetChildren(children ...XMLNodeProvider) {
+	_ptrs := make([]objc.ID, len(children))
+	for _i, _v := range children {
+		_ptrs[_i] = _v.asXMLNode().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSXMLNode]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSXMLNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetChildren(_arg0)
 }
 
+// @method addChild: @abstract Adds a child to the end of the existing children.
+//
 // AddChild calls the underlying AddChild.
 func (x *XMLDocument) AddChild(child *raw.NSXMLNode) {
 	x.inner.AddChild(child)
 }
 
+// @method replaceChildAtIndex:withNode: @abstract Replaces a child at a particular index with another child.
+//
 // ReplaceChildAtIndexWithNode calls the underlying ReplaceChildAtIndexWithNode.
 func (x *XMLDocument) ReplaceChildAtIndexWithNode(index uint, node *raw.NSXMLNode) {
 	x.inner.ReplaceChildAtIndexWithNode(index, node)
 }
 
+// @method XMLDataWithOptions: @abstract The representation of this node as it would appear in an XML document, encoded based on characterEncoding.
+//
 // XMLDataWithOptions calls the underlying XMLDataWithOptions.
 func (x *XMLDocument) XMLDataWithOptions(options NSXMLNodeOptions) *Data {
 	_r := x.inner.XMLDataWithOptions(raw.NSXMLNodeOptions(options))
@@ -191,16 +246,22 @@ func (x *XMLDocument) XMLDataWithOptions(options NSXMLNodeOptions) *Data {
 	return &Data{inner: _r}
 }
 
+// @method objectByApplyingXSLT:arguments:error: @abstract Applies XSLT with arguments (NSString key/value pairs) to this document, returning a new document.
+//
 // ObjectByApplyingXSLTArgumentsError calls the underlying ObjectByApplyingXSLTArgumentsError.
 func (x *XMLDocument) ObjectByApplyingXSLTArgumentsError(xslt *raw.NSData, arguments *raw.NSDictionary[*raw.NSString, *raw.NSString]) (objc.ID, error) {
 	return x.inner.ObjectByApplyingXSLTArgumentsError(xslt, arguments)
 }
 
+// @method objectByApplyingXSLTString:arguments:error: @abstract Applies XSLT as expressed by a string with arguments (NSString key/value pairs) to this document, returning a new document.
+//
 // ObjectByApplyingXSLTStringArgumentsError calls the underlying ObjectByApplyingXSLTStringArgumentsError.
 func (x *XMLDocument) ObjectByApplyingXSLTStringArgumentsError(xslt string, arguments *raw.NSDictionary[*raw.NSString, *raw.NSString]) (objc.ID, error) {
 	return x.inner.ObjectByApplyingXSLTStringArgumentsError(foundation.NSStringStringWithUTF8String(xslt), arguments)
 }
 
+// @method objectByApplyingXSLTAtURL:arguments:error: @abstract Applies the XSLT at a URL with arguments (NSString key/value pairs) to this document, returning a new document. Error may contain a connection error from the URL.
+//
 // ObjectByApplyingXSLTAtURLArgumentsError calls the underlying ObjectByApplyingXSLTAtURLArgumentsError.
 func (x *XMLDocument) ObjectByApplyingXSLTAtURLArgumentsError(xsltURL string, argument *raw.NSDictionary[*raw.NSString, *raw.NSString]) (objc.ID, error) {
 	return x.inner.ObjectByApplyingXSLTAtURLArgumentsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(xsltURL)), argument)
@@ -212,6 +273,8 @@ func (x *XMLDocument) ValidateAndReturnError() error {
 	return err
 }
 
+// @abstract Sets the character encoding to an IANA type.
+//
 // CharacterEncoding calls the underlying CharacterEncoding.
 func (x *XMLDocument) CharacterEncoding() *String {
 	_r := x.inner.CharacterEncoding()
@@ -226,6 +289,8 @@ func (x *XMLDocument) SetCharacterEncoding(characterEncoding string) {
 	x.inner.SetCharacterEncoding(foundation.NSStringStringWithUTF8String(characterEncoding))
 }
 
+// @abstract Set whether this document depends on an external DTD. If this option is set the standalone declaration will appear on output.
+//
 // IsStandalone calls the underlying IsStandalone.
 func (x *XMLDocument) IsStandalone() bool {
 	return x.inner.IsStandalone()
@@ -236,6 +301,8 @@ func (x *XMLDocument) SetStandalone(standalone bool) {
 	x.inner.SetStandalone(standalone)
 }
 
+// @abstract The kind of document.
+//
 // DocumentContentKind calls the underlying DocumentContentKind.
 func (x *XMLDocument) DocumentContentKind() NSXMLDocumentContentKind {
 	return NSXMLDocumentContentKind(x.inner.DocumentContentKind())
@@ -246,6 +313,8 @@ func (x *XMLDocument) SetDocumentContentKind(documentContentKind NSXMLDocumentCo
 	x.inner.SetDocumentContentKind(raw.NSXMLDocumentContentKind(documentContentKind))
 }
 
+// @abstract Set the MIME type, eg text/xml.
+//
 // MIMEType calls the underlying MIMEType.
 func (x *XMLDocument) MIMEType() *String {
 	_r := x.inner.MIMEType()
@@ -260,6 +329,8 @@ func (x *XMLDocument) SetMIMEType(mIMEType string) {
 	x.inner.SetMIMEType(foundation.NSStringStringWithUTF8String(mIMEType))
 }
 
+// @abstract Set the associated DTD. This DTD will be output with the document.
+//
 // DTD calls the underlying DTD.
 func (x *XMLDocument) DTD() *XMLDTD {
 	_r := x.inner.DTD()
@@ -274,6 +345,8 @@ func (x *XMLDocument) SetDTD(dTD *raw.NSXMLDTD) {
 	x.inner.SetDTD(dTD)
 }
 
+// @abstract Invokes XMLDataWithOptions with NSXMLNodeOptionsNone.
+//
 // XMLData calls the underlying XMLData.
 func (x *XMLDocument) XMLData() *Data {
 	_r := x.inner.XMLData()
@@ -305,7 +378,7 @@ type XMLDocumentable interface {
 	InsertChildAtIndex(child *raw.NSXMLNode, index uint)
 	InsertChildrenAtIndex(children *raw.NSArray[*raw.NSXMLNode], index uint)
 	RemoveChildAtIndex(index uint)
-	SetChildren(children *raw.NSArray[*raw.NSXMLNode])
+	SetChildren(children ...XMLNodeProvider)
 	AddChild(child *raw.NSXMLNode)
 	ReplaceChildAtIndexWithNode(index uint, node *raw.NSXMLNode)
 	XMLDataWithOptions(options NSXMLNodeOptions) *Data

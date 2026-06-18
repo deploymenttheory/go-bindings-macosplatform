@@ -33,6 +33,8 @@ func AudioUnitBusFromID(id objc.ID) *AudioUnitBus {
 	return &AudioUnitBus{inner: raw.AUAudioUnitBusFromID(id)}
 }
 
+// @method		initWithFormat:error: @brief		initialize with a default format. @param format	The initial format for the bus. @param outError	An error if the format is unsupported for the bus.
+//
 // NewAudioUnitBusWithFormatError creates a new [AudioUnitBus].
 func NewAudioUnitBusWithFormatError(format *avfaudio.AVAudioFormat) (*AudioUnitBus, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AUAudioUnitBus")), objc.RegisterName("alloc"))
@@ -44,30 +46,40 @@ func NewAudioUnitBusWithFormatError(format *avfaudio.AVAudioFormat) (*AudioUnitB
 	return &AudioUnitBus{inner: raw.AUAudioUnitBusFromID(_id)}, nil
 }
 
+// @property	shouldAllocateBuffer @brief		Controls the audio unit's allocation strategy for a bus. @discussion Hosts can set this flag to communicate whether an audio unit should allocate its own buffer. By default this flag is set to true. On the output side, shouldAllocateBuffer=false means the AU can assume that it will be called with non-null output buffers. If shouldAllocateBuffer=true (the default), the AU must be prepared to be called with null pointers and replace them with pointers to its internally allocated buffer. On the input side, shouldAllocateBuffer=false means the AU can pull for input using a buffer list with null buffer pointers, and assume that the pull input block will provide pointers. If shouldAllocateBuffer=true (the default), the AU must pull with non-null pointers while still being prepared for the source to replace them with pointers of its own. Bridged to the v2 property kAudioUnitProperty_ShouldAllocateBuffer.
+//
 // WithShouldAllocateBuffer sets the shouldAllocateBuffer property and returns the receiver for chaining.
 func (x *AudioUnitBus) WithShouldAllocateBuffer(shouldAllocateBuffer bool) *AudioUnitBus {
 	x.inner.SetShouldAllocateBuffer(shouldAllocateBuffer)
 	return x
 }
 
+// @property	enabled @brief		Whether the bus is active. @discussion Hosts must enable input busses before using them. The reason for this is to allow a unit such as a mixer to be prepared to render a large number of inputs, but avoid the work of preparing to pull inputs which are not in use. Bridged to the v2 properties kAudioUnitProperty_MakeConnection and kAudioUnitProperty_SetRenderCallback.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *AudioUnitBus) WithEnabled(enabled bool) *AudioUnitBus {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// @property	name @brief		A name for the bus. Can be set by host.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *AudioUnitBus) WithName(name string) *AudioUnitBus {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property	contextPresentationLatency @brief		Information about latency in the audio unit's processing context. @discussion This should not be confused with the audio unit's latency property, where the audio unit describes to the host any processing latency it introduces between its input and its output. A host may set this property to describe to the audio unit the presentation latency of its input and/or output audio data. Latency is described in seconds. A value of zero means either no latency or an unknown latency. A host should set this property on each active bus, since, for example, the audio routing path to each of multiple output busses may differ. For input busses: Describes how long ago the audio arriving on this bus was acquired. For instance, when reading from a file to the first audio unit in a chain, the input presentation latency is zero. For audio input from a device, this initial input latency is the presentation latency of the device itself, i.e. the device's safety offset and latency. A second chained audio unit's input presentation latency will be the input presentation latency of the first unit, plus the processing latency of the first unit. For output busses: Describes how long it will be before the output audio of an audio unit is presented. For instance, when writing to a file, the output presentation latency of the last audio unit in a chain is zero. When the audio from that audio unit is to be played to a device, then that initial presentation latency will be the presentation latency of the device itself, which is the I/O buffer size, plus the device's safety offset and latency A previous chained audio unit's output presentation latency is the last unit's presentation latency plus its processing latency. So, for a given audio unit anywhere within a mixing graph, the input and output presentation latencies describe to that unit how long from the moment of generation it has taken for its input to arrive, and how long it will take for its output to be presented. Bridged to the v2 property kAudioUnitProperty_PresentationLatency.
+//
 // WithContextPresentationLatency sets the contextPresentationLatency property and returns the receiver for chaining.
 func (x *AudioUnitBus) WithContextPresentationLatency(contextPresentationLatency float64) *AudioUnitBus {
 	x.inner.SetContextPresentationLatency(contextPresentationLatency)
 	return x
 }
 
+// @property	supportedChannelCounts @brief		An array of numbers giving the supported numbers of channels for this bus. @discussion If supportedChannelCounts is nil, then any number less than or equal to maximumChannelCount is supported. If setting supportedChannelCounts makes the current format unsupported, then format will be set to nil. The default value is nil.
+//
 // WithSupportedChannelCounts sets the collection, converting the Go slice to an NSArray.
 func (x *AudioUnitBus) WithSupportedChannelCounts(items ...*foundation.NSNumber) *AudioUnitBus {
 	if len(items) == 0 {
@@ -86,22 +98,30 @@ func (x *AudioUnitBus) WithSupportedChannelCounts(items ...*foundation.NSNumber)
 	return x
 }
 
+// @property	maximumChannelCount @brief		The maximum numbers of channels supported for this bus. @discussion If supportedChannelCounts is set, then this value is derived from supportedChannelCounts. If setting maximumChannelCount makes the current format unsupported, then format will be set to nil. The default value is UINT_MAX.
+//
 // WithMaximumChannelCount sets the maximumChannelCount property and returns the receiver for chaining.
 func (x *AudioUnitBus) WithMaximumChannelCount(maximumChannelCount uint32) *AudioUnitBus {
 	x.inner.SetMaximumChannelCount(maximumChannelCount)
 	return x
 }
 
+// @property	setFormat:error: @brief		Sets the bus's audio format. @discussion Audio units can generally be expected to support AVAudioFormat's standard format (deinterleaved 32-bit float), at any sample rate. Channel counts can be more complex; see AUAudioUnit.channelCapabilities.
+//
 // SetFormatError calls the underlying SetFormatError.
 func (x *AudioUnitBus) SetFormatError(format *avfaudio.AVAudioFormat) (bool, error) {
 	return x.inner.SetFormatError(format)
 }
 
+// @property	format @brief		The audio format and channel layout of audio being transferred on the bus. @discussion Bridged to the v2 property kAudioUnitProperty_StreamFormat.
+//
 // Format calls the underlying Format.
 func (x *AudioUnitBus) Format() *avfaudio.AVAudioFormat {
 	return x.inner.Format()
 }
 
+// @property	shouldAllocateBuffer @brief		Controls the audio unit's allocation strategy for a bus. @discussion Hosts can set this flag to communicate whether an audio unit should allocate its own buffer. By default this flag is set to true. On the output side, shouldAllocateBuffer=false means the AU can assume that it will be called with non-null output buffers. If shouldAllocateBuffer=true (the default), the AU must be prepared to be called with null pointers and replace them with pointers to its internally allocated buffer. On the input side, shouldAllocateBuffer=false means the AU can pull for input using a buffer list with null buffer pointers, and assume that the pull input block will provide pointers. If shouldAllocateBuffer=true (the default), the AU must pull with non-null pointers while still being prepared for the source to replace them with pointers of its own. Bridged to the v2 property kAudioUnitProperty_ShouldAllocateBuffer.
+//
 // ShouldAllocateBuffer calls the underlying ShouldAllocateBuffer.
 func (x *AudioUnitBus) ShouldAllocateBuffer() bool {
 	return x.inner.ShouldAllocateBuffer()
@@ -112,6 +132,8 @@ func (x *AudioUnitBus) SetShouldAllocateBuffer(shouldAllocateBuffer bool) {
 	x.inner.SetShouldAllocateBuffer(shouldAllocateBuffer)
 }
 
+// @property	enabled @brief		Whether the bus is active. @discussion Hosts must enable input busses before using them. The reason for this is to allow a unit such as a mixer to be prepared to render a large number of inputs, but avoid the work of preparing to pull inputs which are not in use. Bridged to the v2 properties kAudioUnitProperty_MakeConnection and kAudioUnitProperty_SetRenderCallback.
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *AudioUnitBus) IsEnabled() bool {
 	return x.inner.IsEnabled()
@@ -122,6 +144,8 @@ func (x *AudioUnitBus) SetEnabled(enabled bool) {
 	x.inner.SetEnabled(enabled)
 }
 
+// @property	name @brief		A name for the bus. Can be set by host.
+//
 // Name calls the underlying Name.
 func (x *AudioUnitBus) Name() string {
 	_r := x.inner.Name()
@@ -136,16 +160,22 @@ func (x *AudioUnitBus) SetName(name string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 }
 
+// @property   index @brief      The index of this bus in the containing array.
+//
 // Index calls the underlying Index.
 func (x *AudioUnitBus) Index() uint {
 	return x.inner.Index()
 }
 
+// @property   busType @brief      The AUAudioUnitBusType.
+//
 // BusType calls the underlying BusType.
 func (x *AudioUnitBus) BusType() AUAudioUnitBusType {
 	return AUAudioUnitBusType(x.inner.BusType())
 }
 
+// @property   ownerAudioUnit @brief      The audio unit that owns the bus.
+//
 // OwnerAudioUnit calls the underlying OwnerAudioUnit.
 func (x *AudioUnitBus) OwnerAudioUnit() *AudioUnit {
 	_r := x.inner.OwnerAudioUnit()
@@ -155,6 +185,8 @@ func (x *AudioUnitBus) OwnerAudioUnit() *AudioUnit {
 	return &AudioUnit{inner: _r}
 }
 
+// @property	supportedChannelLayoutTags @discussion This is an array of NSNumbers representing AudioChannelLayoutTag.
+//
 // SupportedChannelLayoutTags returns the collection as a Go slice.
 func (x *AudioUnitBus) SupportedChannelLayoutTags() []*foundation.NSNumber {
 	arr := x.inner.SupportedChannelLayoutTags()
@@ -166,6 +198,8 @@ func (x *AudioUnitBus) SupportedChannelLayoutTags() []*foundation.NSNumber {
 	})
 }
 
+// @property	contextPresentationLatency @brief		Information about latency in the audio unit's processing context. @discussion This should not be confused with the audio unit's latency property, where the audio unit describes to the host any processing latency it introduces between its input and its output. A host may set this property to describe to the audio unit the presentation latency of its input and/or output audio data. Latency is described in seconds. A value of zero means either no latency or an unknown latency. A host should set this property on each active bus, since, for example, the audio routing path to each of multiple output busses may differ. For input busses: Describes how long ago the audio arriving on this bus was acquired. For instance, when reading from a file to the first audio unit in a chain, the input presentation latency is zero. For audio input from a device, this initial input latency is the presentation latency of the device itself, i.e. the device's safety offset and latency. A second chained audio unit's input presentation latency will be the input presentation latency of the first unit, plus the processing latency of the first unit. For output busses: Describes how long it will be before the output audio of an audio unit is presented. For instance, when writing to a file, the output presentation latency of the last audio unit in a chain is zero. When the audio from that audio unit is to be played to a device, then that initial presentation latency will be the presentation latency of the device itself, which is the I/O buffer size, plus the device's safety offset and latency A previous chained audio unit's output presentation latency is the last unit's presentation latency plus its processing latency. So, for a given audio unit anywhere within a mixing graph, the input and output presentation latencies describe to that unit how long from the moment of generation it has taken for its input to arrive, and how long it will take for its output to be presented. Bridged to the v2 property kAudioUnitProperty_PresentationLatency.
+//
 // ContextPresentationLatency calls the underlying ContextPresentationLatency.
 func (x *AudioUnitBus) ContextPresentationLatency() float64 {
 	return x.inner.ContextPresentationLatency()
@@ -176,6 +210,8 @@ func (x *AudioUnitBus) SetContextPresentationLatency(contextPresentationLatency 
 	x.inner.SetContextPresentationLatency(contextPresentationLatency)
 }
 
+// @property	supportedChannelCounts @brief		An array of numbers giving the supported numbers of channels for this bus. @discussion If supportedChannelCounts is nil, then any number less than or equal to maximumChannelCount is supported. If setting supportedChannelCounts makes the current format unsupported, then format will be set to nil. The default value is nil.
+//
 // SupportedChannelCounts returns the collection as a Go slice.
 func (x *AudioUnitBus) SupportedChannelCounts() []*foundation.NSNumber {
 	arr := x.inner.SupportedChannelCounts()
@@ -192,6 +228,8 @@ func (x *AudioUnitBus) SetSupportedChannelCounts(supportedChannelCounts *foundat
 	x.inner.SetSupportedChannelCounts(supportedChannelCounts)
 }
 
+// @property	maximumChannelCount @brief		The maximum numbers of channels supported for this bus. @discussion If supportedChannelCounts is set, then this value is derived from supportedChannelCounts. If setting maximumChannelCount makes the current format unsupported, then format will be set to nil. The default value is UINT_MAX.
+//
 // MaximumChannelCount calls the underlying MaximumChannelCount.
 func (x *AudioUnitBus) MaximumChannelCount() uint32 {
 	return x.inner.MaximumChannelCount()

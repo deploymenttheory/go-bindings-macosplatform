@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The common configuration traits for network devices.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vznetworkdeviceconfiguration
 type VZNetworkDeviceConfiguration struct {
 	foundation.NSObject

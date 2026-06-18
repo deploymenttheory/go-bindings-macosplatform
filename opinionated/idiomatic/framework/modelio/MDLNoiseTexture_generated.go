@@ -31,6 +31,8 @@ func NoiseTextureFromID(id objc.ID) *NoiseTexture {
 	return &NoiseTexture{inner: raw.MDLNoiseTextureFromID(id)}
 }
 
+// Create a four channel texture containing directional noise. The RGBA values in this texture can be used as a normal map or as direction possibly with length. XYZ are a three dimensional direction, and A is a magnitude. @param smoothness how similar neighboring pixels are. A value of zero is like static, one is smooth.
+//
 // NewNoiseTextureVectorNoiseWithSmoothnessNameTextureDimensionsChannelEncoding creates a new [NoiseTexture].
 func NewNoiseTextureVectorNoiseWithSmoothnessNameTextureDimensionsChannelEncoding(smoothness float32, name string, textureDimensions unsafe.Pointer, channelEncoding MDLTextureChannelEncoding) *NoiseTexture {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLNoiseTexture")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewNoiseTextureVectorNoiseWithSmoothnessNameTextureDimensionsChannelEncodin
 	return &NoiseTexture{inner: raw.MDLNoiseTextureFromID(_id)}
 }
 
+// Create a texture containing colored noise. The noise texture is tileable with itself. @param smoothness how similar neighboring pixels are. A value of zero is like static, one is smooth. @param grayscale if YES, RGB and A will all be the same. If no, RGB and A will all be different. A is not pre-multiplied, because the intent is that if you read a texel in a shader, all four values will be exactly the same value if grayscale, or four different, uncorrelated values if not grayscale.
+//
 // NewNoiseTextureScalarNoiseWithSmoothnessNameTextureDimensionsChannelCountChannelEncodingGrayscale creates a new [NoiseTexture].
 func NewNoiseTextureScalarNoiseWithSmoothnessNameTextureDimensionsChannelCountChannelEncodingGrayscale(smoothness float32, name string, textureDimensions unsafe.Pointer, channelCount int, channelEncoding MDLTextureChannelEncoding, grayscale bool) *NoiseTexture {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLNoiseTexture")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewNoiseTextureScalarNoiseWithSmoothnessNameTextureDimensionsChannelCountCh
 	return &NoiseTexture{inner: raw.MDLNoiseTextureFromID(_id)}
 }
 
+// Create a texture containing cellular noise. @param frequency How large the cells will be
+//
 // NewNoiseTextureCellularNoiseWithFrequencyNameTextureDimensionsChannelEncoding creates a new [NoiseTexture].
 func NewNoiseTextureCellularNoiseWithFrequencyNameTextureDimensionsChannelEncoding(frequency float32, name string, textureDimensions unsafe.Pointer, channelEncoding MDLTextureChannelEncoding) *NoiseTexture {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLNoiseTexture")), objc.RegisterName("alloc"))
@@ -58,6 +64,8 @@ func (x *NoiseTexture) WithIsCube(isCube bool) *NoiseTexture {
 	return x
 }
 
+// hasAlphaValues @summary Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
+//
 // WithHasAlphaValues sets the hasAlphaValues property and returns the receiver for chaining.
 func (x *NoiseTexture) WithHasAlphaValues(hasAlphaValues bool) *NoiseTexture {
 	x.inner.MDLTexture.SetHasAlphaValues(hasAlphaValues)

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A continuous detection track representing focus at a fixed disparity.
+//
 // FixedDetectionTrack wraps [raw.CNFixedDetectionTrack] with a fluent Go API.
 type FixedDetectionTrack struct {
 	inner *raw.CNFixedDetectionTrack
@@ -29,6 +31,8 @@ func FixedDetectionTrackFromID(id objc.ID) *FixedDetectionTrack {
 	return &FixedDetectionTrack{inner: raw.CNFixedDetectionTrackFromID(id)}
 }
 
+// Create a detection track with fixed focus at the given disparity.
+//
 // NewFixedDetectionTrackWithFocusDisparity creates a new [FixedDetectionTrack].
 func NewFixedDetectionTrackWithFocusDisparity(focusDisparity float32) *FixedDetectionTrack {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNFixedDetectionTrack")), objc.RegisterName("alloc"))
@@ -36,6 +40,8 @@ func NewFixedDetectionTrackWithFocusDisparity(focusDisparity float32) *FixedDete
 	return &FixedDetectionTrack{inner: raw.CNFixedDetectionTrackFromID(_id)}
 }
 
+// Create a detection track with fixed focus at the disparity of an existing detection.
+//
 // NewFixedDetectionTrackWithOriginalDetection creates a new [FixedDetectionTrack].
 func NewFixedDetectionTrackWithOriginalDetection(originalDetection *raw.CNDetection) *FixedDetectionTrack {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNFixedDetectionTrack")), objc.RegisterName("alloc"))
@@ -48,6 +54,8 @@ func (x *FixedDetectionTrack) FocusDisparity() float32 {
 	return x.inner.FocusDisparity()
 }
 
+// The original detection upon which this fixed detection track was based, if any. This is the way to determine the time and rect from which fixed focus originated, if any. This detection is not part of the detection track and has a different detectionID or none. - Important: To get a detection from the fixed detection track, use detectionAtOrBeforeTime: instead, which will return a properly time-stamped detection.
+//
 // OriginalDetection calls the underlying OriginalDetection.
 func (x *FixedDetectionTrack) OriginalDetection() *Detection {
 	_r := x.inner.OriginalDetection()

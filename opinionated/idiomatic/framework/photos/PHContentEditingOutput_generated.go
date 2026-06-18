@@ -52,6 +52,8 @@ func (x *ContentEditingOutput) WithAdjustmentData(adjustmentData *AdjustmentData
 	return x
 }
 
+// Returns a file URL where the rendered output in the specified format, with adjustments baked-in, needs to be written to. Returns nil and provides an error identifying the reason if the format is unsupported or the requested content URL cannot be provided
+//
 // RenderedContentURLForTypeError calls the underlying RenderedContentURLForTypeError.
 func (x *ContentEditingOutput) RenderedContentURLForTypeError(type_ *uniformtypeidentifiers.UTType) (*foundation.NSURL, error) {
 	return x.inner.RenderedContentURLForTypeError(type_)
@@ -71,16 +73,22 @@ func (x *ContentEditingOutput) SetAdjustmentData(adjustmentData *raw.PHAdjustmen
 	x.inner.SetAdjustmentData(adjustmentData)
 }
 
+// File URL where the rendered output in the default format, with adjustments baked-in, needs to be written to.
+//
 // RenderedContentURL calls the underlying RenderedContentURL.
 func (x *ContentEditingOutput) RenderedContentURL() *foundation.NSURL {
 	return x.inner.RenderedContentURL()
 }
 
+// Returns the default type for the rendered content output
+//
 // DefaultRenderedContentType calls the underlying DefaultRenderedContentType.
 func (x *ContentEditingOutput) DefaultRenderedContentType() *uniformtypeidentifiers.UTType {
 	return x.inner.DefaultRenderedContentType()
 }
 
+// Returns the supported types for the rendered content output
+//
 // SupportedRenderedContentTypes returns the collection as a Go slice.
 func (x *ContentEditingOutput) SupportedRenderedContentTypes() []*uniformtypeidentifiers.UTType {
 	arr := x.inner.SupportedRenderedContentTypes()

@@ -33,6 +33,8 @@ func MTRBaseClusterOnOffFromID(id objc.ID) *MTRBaseClusterOnOff {
 	return &MTRBaseClusterOnOff{inner: raw.MTRBaseClusterOnOffFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterOnOffWithDeviceEndpointIDQueue creates a new [MTRBaseClusterOnOff].
 func NewMTRBaseClusterOnOffWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterOnOff {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterOnOff")), objc.RegisterName("alloc"))
@@ -47,6 +49,8 @@ func NewMTRBaseClusterOnOffWithDeviceEndpointQueue(device *raw.MTRBaseDevice, en
 	return &MTRBaseClusterOnOff{inner: raw.MTRBaseClusterOnOffFromID(_id)}
 }
 
+// Command Off On receipt of this command, a device SHALL enter its ‘Off’ state. This state is device dependent, but it is recommended that it is used for power off or similar functions. On receipt of the Off command, the OnTime attribute SHALL be set to 0.
+//
 // OffWithParamsCompletion calls the underlying OffWithParamsCompletion.
 func (x *MTRBaseClusterOnOff) OffWithParamsCompletion(params *raw.MTROnOffClusterOffParams, completion func(unsafe.Pointer)) {
 	x.inner.OffWithParamsCompletion(params, completion)
@@ -57,6 +61,8 @@ func (x *MTRBaseClusterOnOff) OffWithCompletion(completion func(unsafe.Pointer))
 	x.inner.OffWithCompletion(completion)
 }
 
+// Command On On receipt of this command, a device SHALL enter its ‘On’ state. This state is device dependent, but it is recommended that it is used for power on or similar functions. On receipt of the On command, if the value of the OnTime attribute is equal to 0, the device SHALL set the OffWaitTime attribute to 0.
+//
 // OnWithParamsCompletion calls the underlying OnWithParamsCompletion.
 func (x *MTRBaseClusterOnOff) OnWithParamsCompletion(params *raw.MTROnOffClusterOnParams, completion func(unsafe.Pointer)) {
 	x.inner.OnWithParamsCompletion(params, completion)
@@ -67,6 +73,8 @@ func (x *MTRBaseClusterOnOff) OnWithCompletion(completion func(unsafe.Pointer)) 
 	x.inner.OnWithCompletion(completion)
 }
 
+// Command Toggle On receipt of this command, if a device is in its ‘Off’ state it SHALL enter its ‘On’ state. Otherwise, if it is in its ‘On’ state it SHALL enter its ‘Off’ state. On receipt of the Toggle command, if the value of the OnOff attribute is equal to FALSE and if the value of the OnTime attribute is equal to 0, the device SHALL set the OffWaitTime attribute to 0. If the value of the OnOff attribute is equal to TRUE, the OnTime attribute SHALL be set to 0.
+//
 // ToggleWithParamsCompletion calls the underlying ToggleWithParamsCompletion.
 func (x *MTRBaseClusterOnOff) ToggleWithParamsCompletion(params *raw.MTROnOffClusterToggleParams, completion func(unsafe.Pointer)) {
 	x.inner.ToggleWithParamsCompletion(params, completion)
@@ -77,11 +85,15 @@ func (x *MTRBaseClusterOnOff) ToggleWithCompletion(completion func(unsafe.Pointe
 	x.inner.ToggleWithCompletion(completion)
 }
 
+// Command OffWithEffect The OffWithEffect command allows devices to be turned off using enhanced ways of fading.
+//
 // OffWithEffectWithParamsCompletion calls the underlying OffWithEffectWithParamsCompletion.
 func (x *MTRBaseClusterOnOff) OffWithEffectWithParamsCompletion(params *raw.MTROnOffClusterOffWithEffectParams, completion func(unsafe.Pointer)) {
 	x.inner.OffWithEffectWithParamsCompletion(params, completion)
 }
 
+// Command OnWithRecallGlobalScene This command allows the recall of the settings when the device was turned off.
+//
 // OnWithRecallGlobalSceneWithParamsCompletion calls the underlying OnWithRecallGlobalSceneWithParamsCompletion.
 func (x *MTRBaseClusterOnOff) OnWithRecallGlobalSceneWithParamsCompletion(params *raw.MTROnOffClusterOnWithRecallGlobalSceneParams, completion func(unsafe.Pointer)) {
 	x.inner.OnWithRecallGlobalSceneWithParamsCompletion(params, completion)
@@ -92,6 +104,8 @@ func (x *MTRBaseClusterOnOff) OnWithRecallGlobalSceneWithCompletion(completion f
 	x.inner.OnWithRecallGlobalSceneWithCompletion(completion)
 }
 
+// Command OnWithTimedOff This command allows devices to be turned on for a specific duration with a guarded off duration so that SHOULD the device be subsequently turned off, further OnWithTimedOff commands, received during this time, are prevented from turning the devices back on.
+//
 // OnWithTimedOffWithParamsCompletion calls the underlying OnWithTimedOffWithParamsCompletion.
 func (x *MTRBaseClusterOnOff) OnWithTimedOffWithParamsCompletion(params *raw.MTROnOffClusterOnWithTimedOffParams, completion func(unsafe.Pointer)) {
 	x.inner.OnWithTimedOffWithParamsCompletion(params, completion)

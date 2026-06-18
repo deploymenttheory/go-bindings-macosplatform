@@ -45,16 +45,22 @@ func (x *ClassificationObservation) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @brief	Determine whether or not the observation's operation point for a specific precision has a minimum recall value. @param minimumRecall	The minimum recall desired for an operation point. @param precision		The precision value used to select the operation point. @return YES if the recall value for the operation point specified by a precision value has the minimum value; otherwise, NO.
+//
 // HasMinimumRecallForPrecision calls the underlying HasMinimumRecallForPrecision.
 func (x *ClassificationObservation) HasMinimumRecallForPrecision(minimumRecall float32, precision float32) bool {
 	return x.inner.HasMinimumRecallForPrecision(minimumRecall, precision)
 }
 
+// @brief	Determine whether or not the observation's operation point for a specific recall has a minimum precision value. @param minimumPrecision	The minimum precision desired for an operation point. @param recall		The recall value used to select the operation point. @return YES if the precision value for the operation point specified by a recall value has the minimum value; otherwise, NO.
+//
 // HasMinimumPrecisionForRecall calls the underlying HasMinimumPrecisionForRecall.
 func (x *ClassificationObservation) HasMinimumPrecisionForRecall(minimumPrecision float32, recall float32) bool {
 	return x.inner.HasMinimumPrecisionForRecall(minimumPrecision, recall)
 }
 
+// @brief	Determine whether or not precision/recall curves are available with the observation. @discussion	If this property is YES, then all other precision/recall related methods in this addition can be called.
+//
 // HasPrecisionRecallCurve calls the underlying HasPrecisionRecallCurve.
 func (x *ClassificationObservation) HasPrecisionRecallCurve() bool {
 	return x.inner.HasPrecisionRecallCurve()

@@ -39,6 +39,8 @@ func NewSensitivityAnalyzer() *SensitivityAnalyzer {
 	return &SensitivityAnalyzer{inner: raw.SCSensitivityAnalyzerFromID(_id)}
 }
 
+// Analyze sensitivity of Image File on disk (only local fileURL) @param fileURL  Image file location on disk @param completionHandler  Block to be called on completion (callback is called on unspecified queue)
+//
 // AnalyzeImageFile blocks until the operation completes or ctx is cancelled.
 func (x *SensitivityAnalyzer) AnalyzeImageFile(ctx context.Context, fileURL string) (*SensitivityAnalysis, error) {
 	type _result struct {
@@ -65,6 +67,8 @@ func (x *SensitivityAnalyzer) AnalyzeImageFile(ctx context.Context, fileURL stri
 	}
 }
 
+// Analyze sensitivity of CGImage in memory @param image  CGImage reference @param completionHandler  Block to be called on completion (callback is called on unspecified queue)
+//
 // AnalyzeCGImage blocks until the operation completes or ctx is cancelled.
 func (x *SensitivityAnalyzer) AnalyzeCGImage(ctx context.Context, image unsafe.Pointer) (*SensitivityAnalysis, error) {
 	type _result struct {
@@ -91,11 +95,15 @@ func (x *SensitivityAnalyzer) AnalyzeCGImage(ctx context.Context, image unsafe.P
 	}
 }
 
+// Analyze sensitivity of Video File on disk. @param fileURL  Video file location on disk @param completionHandler  Block to be called on completion (callback is called on unspecified queue) @return An NSProgress instance for tracking video file analysis progress
+//
 // AnalyzeVideoFileCompletionHandler calls the underlying AnalyzeVideoFileCompletionHandler.
 func (x *SensitivityAnalyzer) AnalyzeVideoFileCompletionHandler(fileURL string, completionHandler func(*raw.SCSensitivityAnalysis, unsafe.Pointer)) *foundation.NSProgress {
 	return x.inner.AnalyzeVideoFileCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), completionHandler)
 }
 
+// Current SCSensitivityAnalysisPolicy set on device. Can be used to determine whether analysis is available or not
+//
 // AnalysisPolicy calls the underlying AnalysisPolicy.
 func (x *SensitivityAnalyzer) AnalysisPolicy() SCSensitivityAnalysisPolicy {
 	return SCSensitivityAnalysisPolicy(x.inner.AnalysisPolicy())

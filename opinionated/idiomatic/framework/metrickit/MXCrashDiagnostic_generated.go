@@ -37,6 +37,8 @@ func NewCrashDiagnostic() *CrashDiagnostic {
 	return &CrashDiagnostic{inner: raw.MXCrashDiagnosticFromID(_id)}
 }
 
+// @property      callStackTree @abstract      The application call stack tree associated with this crash. @discussion    This call stack tree includes those stack frames present at the time of the crash.
+//
 // CallStackTree calls the underlying CallStackTree.
 func (x *CrashDiagnostic) CallStackTree() *CallStackTree {
 	_r := x.inner.CallStackTree()
@@ -46,6 +48,8 @@ func (x *CrashDiagnostic) CallStackTree() *CallStackTree {
 	return &CallStackTree{inner: _r}
 }
 
+// @property      terminationReason @abstract      The termination reason associated with this crash. @discussion    Exit reason information specified when a process is terminated. Key system components, both inside and outside of a process, will terminate the process upon encountering a fatal error (e.g. a bad code signature, a missing dependent library, or accessing privacy sensitive information without the proper entitlement).
+//
 // TerminationReason calls the underlying TerminationReason.
 func (x *CrashDiagnostic) TerminationReason() string {
 	_r := x.inner.TerminationReason()
@@ -55,6 +59,8 @@ func (x *CrashDiagnostic) TerminationReason() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      virtualMemoryRegionInfo @abstract      Details about memory that the app incorrectly accessed in relation to other sections of the app’s virtual memory address space. @discussion    This property is set when a bad memory access crash occurs.
+//
 // VirtualMemoryRegionInfo calls the underlying VirtualMemoryRegionInfo.
 func (x *CrashDiagnostic) VirtualMemoryRegionInfo() string {
 	_r := x.inner.VirtualMemoryRegionInfo()
@@ -64,21 +70,29 @@ func (x *CrashDiagnostic) VirtualMemoryRegionInfo() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      exceptionType @abstract      The name of the Mach exception that terminated the app. @see           sys/exception_types.h
+//
 // ExceptionType calls the underlying ExceptionType.
 func (x *CrashDiagnostic) ExceptionType() *foundation.NSNumber {
 	return x.inner.ExceptionType()
 }
 
+// @property      exceptionCode @abstract      Processor specific information about the exception encoded into one or more 64-bit hexadecimal numbers @see           sys/exception_types.h
+//
 // ExceptionCode calls the underlying ExceptionCode.
 func (x *CrashDiagnostic) ExceptionCode() *foundation.NSNumber {
 	return x.inner.ExceptionCode()
 }
 
+// @property      signal @abstract      The signal associated with this crash. @see           sys/signal.h
+//
 // Signal calls the underlying Signal.
 func (x *CrashDiagnostic) Signal() *foundation.NSNumber {
 	return x.inner.Signal()
 }
 
+// @property      exceptionReason @abstract      The MXCrashDiagnosticObjectiveCExceptionReason object associated with this crash. @see           <MetricKit/MXCrashDiagnosticObjectiveCExceptionReason.h>
+//
 // ExceptionReason calls the underlying ExceptionReason.
 func (x *CrashDiagnostic) ExceptionReason() *CrashDiagnosticObjectiveCExceptionReason {
 	_r := x.inner.ExceptionReason()

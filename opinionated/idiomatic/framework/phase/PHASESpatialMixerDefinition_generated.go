@@ -30,6 +30,8 @@ func SpatialMixerDefinitionFromID(id objc.ID) *SpatialMixerDefinition {
 	return &SpatialMixerDefinition{inner: raw.PHASESpatialMixerDefinitionFromID(id)}
 }
 
+// @method initWithSpatialPipeline @abstract Create a new PHASESpatialMixerDefinition @param spatialPipeline A spatial pipeline. @return A new PHASESpatialMixerDefinition object
+//
 // NewSpatialMixerDefinitionWithSpatialPipeline creates a new [SpatialMixerDefinition].
 func NewSpatialMixerDefinitionWithSpatialPipeline(spatialPipeline *raw.PHASESpatialPipeline) *SpatialMixerDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASESpatialMixerDefinition")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewSpatialMixerDefinitionWithSpatialPipeline(spatialPipeline *raw.PHASESpat
 	return &SpatialMixerDefinition{inner: raw.PHASESpatialMixerDefinitionFromID(_id)}
 }
 
+// @method initWithSpatialPipeline:identifier @abstract Create a new PHASESpatialMixerDefinition @param spatialPipeline A spatial pipeline. @param identifier An optional custom identifier to give to this object @return A new PHASESpatialMixerDefinition object
+//
 // NewSpatialMixerDefinitionWithSpatialPipelineIdentifier creates a new [SpatialMixerDefinition].
 func NewSpatialMixerDefinitionWithSpatialPipelineIdentifier(spatialPipeline *raw.PHASESpatialPipeline, identifier string) *SpatialMixerDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASESpatialMixerDefinition")), objc.RegisterName("alloc"))
@@ -44,36 +48,48 @@ func NewSpatialMixerDefinitionWithSpatialPipelineIdentifier(spatialPipeline *raw
 	return &SpatialMixerDefinition{inner: raw.PHASESpatialMixerDefinitionFromID(_id)}
 }
 
+// @property distanceModelParameters @abstract Distance model parameters (optional).
+//
 // WithDistanceModelParameters sets the distanceModelParameters property and returns the receiver for chaining.
 func (x *SpatialMixerDefinition) WithDistanceModelParameters(distanceModelParameters DistanceModelParametersProvider) *SpatialMixerDefinition {
 	x.inner.SetDistanceModelParameters(distanceModelParameters.asDistanceModelParameters())
 	return x
 }
 
+// @property listenerDirectivityModelParameters @abstract Listener directivity model parameters (optional).
+//
 // WithListenerDirectivityModelParameters sets the listenerDirectivityModelParameters property and returns the receiver for chaining.
 func (x *SpatialMixerDefinition) WithListenerDirectivityModelParameters(listenerDirectivityModelParameters DirectivityModelParametersProvider) *SpatialMixerDefinition {
 	x.inner.SetListenerDirectivityModelParameters(listenerDirectivityModelParameters.asDirectivityModelParameters())
 	return x
 }
 
+// @property sourceDirectivityModelParameters @abstract Source directivity model parameters (optional).
+//
 // WithSourceDirectivityModelParameters sets the sourceDirectivityModelParameters property and returns the receiver for chaining.
 func (x *SpatialMixerDefinition) WithSourceDirectivityModelParameters(sourceDirectivityModelParameters DirectivityModelParametersProvider) *SpatialMixerDefinition {
 	x.inner.SetSourceDirectivityModelParameters(sourceDirectivityModelParameters.asDirectivityModelParameters())
 	return x
 }
 
+// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
+//
 // WithGain sets the gain property and returns the receiver for chaining.
 func (x *SpatialMixerDefinition) WithGain(gain float64) *SpatialMixerDefinition {
 	x.inner.PHASEMixerDefinition.SetGain(gain)
 	return x
 }
 
+// @property gainMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable real-time control of the gain during playback.
+//
 // WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
 func (x *SpatialMixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SpatialMixerDefinition {
 	x.inner.PHASEMixerDefinition.SetGainMetaParameterDefinition(gainMetaParameterDefinition.asNumberMetaParameterDefinition())
 	return x
 }
 
+// @property spatialPipeline @abstract Spatial Pipeline.
+//
 // SpatialPipeline calls the underlying SpatialPipeline.
 func (x *SpatialMixerDefinition) SpatialPipeline() *SpatialPipeline {
 	_r := x.inner.SpatialPipeline()
@@ -83,6 +99,8 @@ func (x *SpatialMixerDefinition) SpatialPipeline() *SpatialPipeline {
 	return &SpatialPipeline{inner: _r}
 }
 
+// @property distanceModelParameters @abstract Distance model parameters (optional).
+//
 // DistanceModelParameters calls the underlying DistanceModelParameters.
 func (x *SpatialMixerDefinition) DistanceModelParameters() *DistanceModelParameters {
 	_r := x.inner.DistanceModelParameters()
@@ -97,6 +115,8 @@ func (x *SpatialMixerDefinition) SetDistanceModelParameters(distanceModelParamet
 	x.inner.SetDistanceModelParameters(distanceModelParameters)
 }
 
+// @property listenerDirectivityModelParameters @abstract Listener directivity model parameters (optional).
+//
 // ListenerDirectivityModelParameters calls the underlying ListenerDirectivityModelParameters.
 func (x *SpatialMixerDefinition) ListenerDirectivityModelParameters() *DirectivityModelParameters {
 	_r := x.inner.ListenerDirectivityModelParameters()
@@ -111,6 +131,8 @@ func (x *SpatialMixerDefinition) SetListenerDirectivityModelParameters(listenerD
 	x.inner.SetListenerDirectivityModelParameters(listenerDirectivityModelParameters)
 }
 
+// @property sourceDirectivityModelParameters @abstract Source directivity model parameters (optional).
+//
 // SourceDirectivityModelParameters calls the underlying SourceDirectivityModelParameters.
 func (x *SpatialMixerDefinition) SourceDirectivityModelParameters() *DirectivityModelParameters {
 	_r := x.inner.SourceDirectivityModelParameters()

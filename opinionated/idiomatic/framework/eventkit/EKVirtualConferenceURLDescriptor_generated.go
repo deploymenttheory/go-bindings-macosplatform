@@ -33,6 +33,8 @@ func VirtualConferenceURLDescriptorFromID(id objc.ID) *VirtualConferenceURLDescr
 	return &VirtualConferenceURLDescriptor{inner: raw.EKVirtualConferenceURLDescriptorFromID(id)}
 }
 
+// @method     initWithTitle:URL: @abstract   Initializes an instance of EKVirtualConferenceURLDescriptor. @param      title       A user-readable title describing this URL. This string may be displayed in the UI. This string is optional and may be left nil. If your virtual conference only has one way to join it, then you can probably leave this nil. However, if your virtual conference has multiple ways to join it, you should have a title for each URL so that users can better understand what each URL represents. @param      URL         A URL that, when opened, will join the virtual conference.
+//
 // NewVirtualConferenceURLDescriptorWithTitleURL creates a new [VirtualConferenceURLDescriptor].
 func NewVirtualConferenceURLDescriptorWithTitleURL(title string, uRL string) *VirtualConferenceURLDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("EKVirtualConferenceURLDescriptor")), objc.RegisterName("alloc"))

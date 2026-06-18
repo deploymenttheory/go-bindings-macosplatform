@@ -31,6 +31,8 @@ func TokenKeychainCertificateFromID(id objc.ID) *TokenKeychainCertificate {
 	return &TokenKeychainCertificate{inner: raw.TKTokenKeychainCertificateFromID(id)}
 }
 
+// @discussion initialize TKTokenKeychainCertificate with data from SecCertificateRef.  Use SecCertificateCreateWithData to obtain SecCertificateRef.  @c constraints property is initialized indicating that reading of certificate is always allowed, all other operations are disallowed.
+//
 // NewTokenKeychainCertificateWithCertificateObjectID creates a new [TokenKeychainCertificate].
 func NewTokenKeychainCertificateWithCertificateObjectID(certificateRef unsafe.Pointer, objectID objc.ID) *TokenKeychainCertificate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTokenKeychainCertificate")), objc.RegisterName("alloc"))
@@ -38,12 +40,16 @@ func NewTokenKeychainCertificateWithCertificateObjectID(certificateRef unsafe.Po
 	return &TokenKeychainCertificate{inner: raw.TKTokenKeychainCertificateFromID(_id)}
 }
 
+// @discussion Contains the user-visible label for this item.  This property is an equivalent of kSecAttrLabel in SecItem.h
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *TokenKeychainCertificate) WithLabel(label string) *TokenKeychainCertificate {
 	x.inner.TKTokenKeychainItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @discussion Contains access constraints for this object keyed by TKTOpenOperation wrapped in NSNumber.
+//
 // WithConstraints sets the constraints property and returns the receiver for chaining.
 func (x *TokenKeychainCertificate) WithConstraints(constraints *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *TokenKeychainCertificate {
 	x.inner.TKTokenKeychainItem.SetConstraints(constraints)

@@ -38,16 +38,22 @@ func NewCoordinatedPlaybackSuspension() *CoordinatedPlaybackSuspension {
 	return &CoordinatedPlaybackSuspension{inner: raw.AVCoordinatedPlaybackSuspensionFromID(_id)}
 }
 
+// Ends the suspension. If this is the last suspension, the coordinator will adjust timing of its playback object to match the group. Also see endProposingNewTime: for a way to end a suspension and simultaneously proposing a new time to the group.
+//
 // End calls the underlying End.
 func (x *CoordinatedPlaybackSuspension) End() {
 	x.inner.End()
 }
 
+// Ends the suspension and proposes a new time that everyone should seek to. If this is the last suspension, the coordinator will propose the new time to the group without changing the groups playback rate. If this is not the last suspension, the time will be ignored. If the time is not numeric, this will behave like a call to [suspension end].
+//
 // EndProposingNewTime calls the underlying EndProposingNewTime.
 func (x *CoordinatedPlaybackSuspension) EndProposingNewTime(time_ coremedia.CMTime) {
 	x.inner.EndProposingNewTime(time_)
 }
 
+// The reason for the suspension. This will be communicated to other participants while coordination is suspended.
+//
 // Reason calls the underlying Reason.
 func (x *CoordinatedPlaybackSuspension) Reason() string {
 	_r := x.inner.Reason()
@@ -57,6 +63,8 @@ func (x *CoordinatedPlaybackSuspension) Reason() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The begin time of the suspension.
+//
 // BeginDate calls the underlying BeginDate.
 func (x *CoordinatedPlaybackSuspension) BeginDate() *foundation.NSDate {
 	return x.inner.BeginDate()

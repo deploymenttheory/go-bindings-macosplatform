@@ -35,54 +35,72 @@ func NewTensorDescriptor() *TensorDescriptor {
 	return &TensorDescriptor{inner: raw.MTLTensorDescriptorFromID(_id)}
 }
 
+// An array of sizes, in elements, one for each dimension of the tensors you create with this descriptor. The default value of this property is a rank one extents with size one.
+//
 // WithDimensions sets the dimensions property and returns the receiver for chaining.
 func (x *TensorDescriptor) WithDimensions(dimensions *TensorExtents) *TensorDescriptor {
 	x.inner.SetDimensions(dimensions.Unwrap())
 	return x
 }
 
+// An array of strides, in elements, one for each dimension in the tensors you create with this descriptor, if applicable. You are responsible for ensuring `strides` meets the following requirements: - The first element of `strides` is one. - If “usage“ contains “MTLTensorUsage/MTLTensorUsageMachineLearning“, the second element of `strides` is aligned to 64 bytes, and for any `i` larger than one, `strides[i]` is equal to `strides[i-1] * dimensions[i-1]`. - If “dataType“ is a sub-byte “MTLTensorDataType“, for any `i` greater than or equal to 1, `strides[i]` is aligned to 128 bytes. This is not a requirement for non-sub-byte data types, but following this convention improves performance. Only set this property when creating tensors from a buffer.
+//
 // WithStrides sets the strides property and returns the receiver for chaining.
 func (x *TensorDescriptor) WithStrides(strides *TensorExtents) *TensorDescriptor {
 	x.inner.SetStrides(strides.Unwrap())
 	return x
 }
 
+// A data format for the tensors you create with this descriptor. The default value of this property is “MTLTensorDataType/MTLTensorDataTypeFloat32“.
+//
 // WithDataType sets the dataType property and returns the receiver for chaining.
 func (x *TensorDescriptor) WithDataType(dataType MTLTensorDataType) *TensorDescriptor {
 	x.inner.SetDataType(raw.MTLTensorDataType(dataType))
 	return x
 }
 
+// A set of contexts in which you can use tensors you create with this descriptor. The default value for this property is a bitwise `OR` of: - “MTLTensorUsage/MTLTensorUsageRender“ - “MTLTensorUsage/MTLTensorUsageCompute“
+//
 // WithUsage sets the usage property and returns the receiver for chaining.
 func (x *TensorDescriptor) WithUsage(usage MTLTensorUsage) *TensorDescriptor {
 	x.inner.SetUsage(raw.MTLTensorUsage(usage))
 	return x
 }
 
+// A packed set of the `storageMode`, `cpuCacheMode` and `hazardTrackingMode` properties.
+//
 // WithResourceOptions sets the resourceOptions property and returns the receiver for chaining.
 func (x *TensorDescriptor) WithResourceOptions(resourceOptions MTLResourceOptions) *TensorDescriptor {
 	x.inner.SetResourceOptions(raw.MTLResourceOptions(resourceOptions))
 	return x
 }
 
+// A value that configures the cache mode of CPU mapping of tensors you create with this descriptor. The default value of this property is “MTLCPUCacheMode/MTLCPUCacheModeDefaultCache“.
+//
 // WithCpuCacheMode sets the cpuCacheMode property and returns the receiver for chaining.
 func (x *TensorDescriptor) WithCpuCacheMode(cpuCacheMode MTLCPUCacheMode) *TensorDescriptor {
 	x.inner.SetCpuCacheMode(raw.MTLCPUCacheMode(cpuCacheMode))
 	return x
 }
 
+// A value that configures the memory location and access permissions of tensors you create with this descriptor. The default value of this property defaults to “MTLStorageMode/MTLStorageModeShared“.
+//
 // WithStorageMode sets the storageMode property and returns the receiver for chaining.
 func (x *TensorDescriptor) WithStorageMode(storageMode MTLStorageMode) *TensorDescriptor {
 	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
 	return x
 }
 
+// A value that configures the hazard tracking of tensors you create with this descriptor. The default value of this property is “MTLHazardTrackingMode/MTLHazardTrackingModeDefault“.
+//
 // WithHazardTrackingMode sets the hazardTrackingMode property and returns the receiver for chaining.
 func (x *TensorDescriptor) WithHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode) *TensorDescriptor {
 	x.inner.SetHazardTrackingMode(raw.MTLHazardTrackingMode(hazardTrackingMode))
 	return x
 }
 
+// An array of sizes, in elements, one for each dimension of the tensors you create with this descriptor. The default value of this property is a rank one extents with size one.
+//
 // Dimensions calls the underlying Dimensions.
 func (x *TensorDescriptor) Dimensions() *TensorExtents {
 	_r := x.inner.Dimensions()
@@ -97,6 +115,8 @@ func (x *TensorDescriptor) SetDimensions(dimensions *raw.MTLTensorExtents) {
 	x.inner.SetDimensions(dimensions)
 }
 
+// An array of strides, in elements, one for each dimension in the tensors you create with this descriptor, if applicable. You are responsible for ensuring `strides` meets the following requirements: - The first element of `strides` is one. - If “usage“ contains “MTLTensorUsage/MTLTensorUsageMachineLearning“, the second element of `strides` is aligned to 64 bytes, and for any `i` larger than one, `strides[i]` is equal to `strides[i-1] * dimensions[i-1]`. - If “dataType“ is a sub-byte “MTLTensorDataType“, for any `i` greater than or equal to 1, `strides[i]` is aligned to 128 bytes. This is not a requirement for non-sub-byte data types, but following this convention improves performance. Only set this property when creating tensors from a buffer.
+//
 // Strides calls the underlying Strides.
 func (x *TensorDescriptor) Strides() *TensorExtents {
 	_r := x.inner.Strides()
@@ -111,6 +131,8 @@ func (x *TensorDescriptor) SetStrides(strides *raw.MTLTensorExtents) {
 	x.inner.SetStrides(strides)
 }
 
+// A data format for the tensors you create with this descriptor. The default value of this property is “MTLTensorDataType/MTLTensorDataTypeFloat32“.
+//
 // DataType calls the underlying DataType.
 func (x *TensorDescriptor) DataType() MTLTensorDataType {
 	return MTLTensorDataType(x.inner.DataType())
@@ -121,6 +143,8 @@ func (x *TensorDescriptor) SetDataType(dataType MTLTensorDataType) {
 	x.inner.SetDataType(raw.MTLTensorDataType(dataType))
 }
 
+// A set of contexts in which you can use tensors you create with this descriptor. The default value for this property is a bitwise `OR` of: - “MTLTensorUsage/MTLTensorUsageRender“ - “MTLTensorUsage/MTLTensorUsageCompute“
+//
 // Usage calls the underlying Usage.
 func (x *TensorDescriptor) Usage() MTLTensorUsage {
 	return MTLTensorUsage(x.inner.Usage())
@@ -131,6 +155,8 @@ func (x *TensorDescriptor) SetUsage(usage MTLTensorUsage) {
 	x.inner.SetUsage(raw.MTLTensorUsage(usage))
 }
 
+// A packed set of the `storageMode`, `cpuCacheMode` and `hazardTrackingMode` properties.
+//
 // ResourceOptions calls the underlying ResourceOptions.
 func (x *TensorDescriptor) ResourceOptions() MTLResourceOptions {
 	return MTLResourceOptions(x.inner.ResourceOptions())
@@ -141,6 +167,8 @@ func (x *TensorDescriptor) SetResourceOptions(resourceOptions MTLResourceOptions
 	x.inner.SetResourceOptions(raw.MTLResourceOptions(resourceOptions))
 }
 
+// A value that configures the cache mode of CPU mapping of tensors you create with this descriptor. The default value of this property is “MTLCPUCacheMode/MTLCPUCacheModeDefaultCache“.
+//
 // CpuCacheMode calls the underlying CpuCacheMode.
 func (x *TensorDescriptor) CpuCacheMode() MTLCPUCacheMode {
 	return MTLCPUCacheMode(x.inner.CpuCacheMode())
@@ -151,6 +179,8 @@ func (x *TensorDescriptor) SetCpuCacheMode(cpuCacheMode MTLCPUCacheMode) {
 	x.inner.SetCpuCacheMode(raw.MTLCPUCacheMode(cpuCacheMode))
 }
 
+// A value that configures the memory location and access permissions of tensors you create with this descriptor. The default value of this property defaults to “MTLStorageMode/MTLStorageModeShared“.
+//
 // StorageMode calls the underlying StorageMode.
 func (x *TensorDescriptor) StorageMode() MTLStorageMode {
 	return MTLStorageMode(x.inner.StorageMode())
@@ -161,6 +191,8 @@ func (x *TensorDescriptor) SetStorageMode(storageMode MTLStorageMode) {
 	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
 }
 
+// A value that configures the hazard tracking of tensors you create with this descriptor. The default value of this property is “MTLHazardTrackingMode/MTLHazardTrackingModeDefault“.
+//
 // HazardTrackingMode calls the underlying HazardTrackingMode.
 func (x *TensorDescriptor) HazardTrackingMode() MTLHazardTrackingMode {
 	return MTLHazardTrackingMode(x.inner.HazardTrackingMode())

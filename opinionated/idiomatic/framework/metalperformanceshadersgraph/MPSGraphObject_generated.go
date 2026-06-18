@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The common base class for all Metal Performance Shaders Graph objects. Only the child classes should be used.
+//
 // GraphObject wraps [raw.MPSGraphObject] with a fluent Go API.
 type GraphObject struct {
 	inner *raw.MPSGraphObject

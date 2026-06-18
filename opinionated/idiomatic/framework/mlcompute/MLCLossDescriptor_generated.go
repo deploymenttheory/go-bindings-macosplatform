@@ -35,36 +35,50 @@ func NewLossDescriptor() *LossDescriptor {
 	return &LossDescriptor{inner: raw.MLCLossDescriptorFromID(_id)}
 }
 
+// @property   lossType @abstract   Specifies the loss function.
+//
 // LossType calls the underlying LossType.
 func (x *LossDescriptor) LossType() MLCLossType {
 	return MLCLossType(x.inner.LossType())
 }
 
+// @property   reductionType @abstract   The reduction operation performed by the loss function.
+//
 // ReductionType calls the underlying ReductionType.
 func (x *LossDescriptor) ReductionType() MLCReductionType {
 	return MLCReductionType(x.inner.ReductionType())
 }
 
+// @property   weight @abstract   The scale factor to apply to each element of a result.  The default value is 1.0.
+//
 // Weight calls the underlying Weight.
 func (x *LossDescriptor) Weight() float32 {
 	return x.inner.Weight()
 }
 
+// @property    labelSmoothing @abstract    The label smoothing parameter. The default value is 0.0. @discussion  This parameter is valid only for the loss functions of the following type(s): MLCLossTypeSoftmaxCrossEntropy and MLCLossTypeSigmoidCrossEntropy.
+//
 // LabelSmoothing calls the underlying LabelSmoothing.
 func (x *LossDescriptor) LabelSmoothing() float32 {
 	return x.inner.LabelSmoothing()
 }
 
+// @property    numberOfClasses @abstract    The number of classes parameter. The default value is 1. @discussion  This parameter is valid only for the loss function MLCLossTypeSoftmaxCrossEntropy.
+//
 // ClassCount calls the underlying ClassCount.
 func (x *LossDescriptor) ClassCount() uint {
 	return x.inner.ClassCount()
 }
 
+// @property    epsilon @abstract    The epsilon parameter. The default value is 1e-7. @discussion  This parameter is valid only for the loss function MLCLossTypeLog.
+//
 // Epsilon calls the underlying Epsilon.
 func (x *LossDescriptor) Epsilon() float32 {
 	return x.inner.Epsilon()
 }
 
+// @property    delta @abstract    The delta parameter. The default value is 1.0f. @discussion  This parameter is valid only for the loss function MLCLossTypeHuber.
+//
 // Delta calls the underlying Delta.
 func (x *LossDescriptor) Delta() float32 {
 	return x.inner.Delta()

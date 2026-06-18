@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains parcel tracking information that the data detection system matches. The DataDetection framework returns a shipment tracking number match in a `DDMatchShipmentTrackingNumber` object, which contains a carrier name and tracking identifier.
+//
 // MatchShipmentTrackingNumber wraps [raw.DDMatchShipmentTrackingNumber] with a fluent Go API.
 type MatchShipmentTrackingNumber struct {
 	inner *raw.DDMatchShipmentTrackingNumber
@@ -36,6 +38,8 @@ func NewMatchShipmentTrackingNumber() *MatchShipmentTrackingNumber {
 	return &MatchShipmentTrackingNumber{inner: raw.DDMatchShipmentTrackingNumberFromID(_id)}
 }
 
+// The name of a parcel carrier.
+//
 // Carrier calls the underlying Carrier.
 func (x *MatchShipmentTrackingNumber) Carrier() string {
 	_r := x.inner.Carrier()
@@ -45,6 +49,8 @@ func (x *MatchShipmentTrackingNumber) Carrier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A string that represents a carrier’s tracking identifier for a parcel.
+//
 // TrackingNumber calls the underlying TrackingNumber.
 func (x *MatchShipmentTrackingNumber) TrackingNumber() string {
 	_r := x.inner.TrackingNumber()

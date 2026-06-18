@@ -32,6 +32,8 @@ func ImageThresholdTruncateFromID(id objc.ID) *ImageThresholdTruncate {
 	return &ImageThresholdTruncate{inner: raw.MPSImageThresholdTruncateFromID(id)}
 }
 
+// @abstract   initialize a MPSImageThresholdTruncate filter @param      device          The device the filter will run on @param      thresholdValue The threshold value to use @param      transform       This matrix is an array of 3 floats. The default if no transform is specifed is BT.601/JPEG: {0.299f, 0.587f, 0.114f};
+//
 // NewImageThresholdTruncateWithDeviceThresholdValueLinearGrayColorTransform creates a new [ImageThresholdTruncate].
 func NewImageThresholdTruncateWithDeviceThresholdValueLinearGrayColorTransform(device metal.MTLDevice, thresholdValue float32, transform *float32) *ImageThresholdTruncate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageThresholdTruncate")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewImageThresholdTruncateWithDeviceThresholdValueLinearGrayColorTransform(d
 	return &ImageThresholdTruncate{inner: raw.MPSImageThresholdTruncateFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+//
 // NewImageThresholdTruncateWithCoderDevice creates a new [ImageThresholdTruncate].
 func NewImageThresholdTruncateWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageThresholdTruncate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageThresholdTruncate")), objc.RegisterName("alloc"))
@@ -46,29 +50,39 @@ func NewImageThresholdTruncateWithCoderDevice(aDecoder *foundation.NSCoder, devi
 	return &ImageThresholdTruncate{inner: raw.MPSImageThresholdTruncateFromID(_id)}
 }
 
+// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+//
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *ImageThresholdTruncate) WithOffset(offset mpscore.MPSOffset) *ImageThresholdTruncate {
 	x.inner.MPSUnaryImageKernel.SetOffset(offset)
 	return x
 }
 
+// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+//
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *ImageThresholdTruncate) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdTruncate {
 	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
 	return x
 }
 
+// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
+//
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *ImageThresholdTruncate) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdTruncate {
 	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
 	return x
 }
 
+// @property thresholdValue @discussion The threshold value used to init the threshold filter
+//
 // ThresholdValue calls the underlying ThresholdValue.
 func (x *ImageThresholdTruncate) ThresholdValue() float32 {
 	return x.inner.ThresholdValue()
 }
 
+// @property transform @discussion The color transform used to init the threshold filter
+//
 // Transform calls the underlying Transform.
 func (x *ImageThresholdTruncate) Transform() *float32 {
 	return x.inner.Transform()

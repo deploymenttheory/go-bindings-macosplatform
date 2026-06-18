@@ -36,21 +36,29 @@ func NewFileProviderRequest() *FileProviderRequest {
 	return &FileProviderRequest{inner: raw.NSFileProviderRequestFromID(_id)}
 }
 
+// The request was made by the sync system, e.g. to update a file to its latest version after a remote update was pushed. This is only valid for NSFileProviderRequest objects passed to these methods: - [NSFileProviderEnumerating enumeratorForContainerItemIdentifier:] - [NSFileProviderReplicatedExtension fetchContentsForItemWithIdentifier:] For sync up methods (createItem/modifyItem/deleteItem), the system does not know which actor made the modifications to the file, so it cannot supply this information.
+//
 // IsSystemRequest calls the underlying IsSystemRequest.
 func (x *FileProviderRequest) IsSystemRequest() bool {
 	return x.inner.IsSystemRequest()
 }
 
+// The request was made by Finder or one of its helpers. This is only valid for NSFileProviderRequest objects passed to these methods: - [NSFileProviderEnumerating enumeratorForContainerItemIdentifier:] - [NSFileProviderReplicatedExtension fetchContentsForItemWithIdentifier:] For sync up methods (createItem/modifyItem/deleteItem), the system does not know which actor made the modifications to the file, so it cannot supply this information.
+//
 // IsFileViewerRequest calls the underlying IsFileViewerRequest.
 func (x *FileProviderRequest) IsFileViewerRequest() bool {
 	return x.inner.IsFileViewerRequest()
 }
 
+// The URL of the requesting executable. This will always be nil unless both an MDM profile key is set, and the provider's application is installed by an MDM profile.
+//
 // RequestingExecutable calls the underlying RequestingExecutable.
 func (x *FileProviderRequest) RequestingExecutable() *foundation.NSURL {
 	return x.inner.RequestingExecutable()
 }
 
+// The version of the domain when the event that triggered the request was observed. If the extension doesn't implement the NSFileProviderDomainState protocol, this will be nil.
+//
 // DomainVersion calls the underlying DomainVersion.
 func (x *FileProviderRequest) DomainVersion() *FileProviderDomainVersion {
 	_r := x.inner.DomainVersion()

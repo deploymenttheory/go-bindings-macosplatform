@@ -37,6 +37,8 @@ func NewUserIdentity() *UserIdentity {
 	return &UserIdentity{inner: raw.CKUserIdentityFromID(_id)}
 }
 
+// The user record ID for the corresponding user record.
+//
 // UserRecordID calls the underlying UserRecordID.
 func (x *UserIdentity) UserRecordID() *RecordID {
 	_r := x.inner.UserRecordID()
@@ -46,6 +48,8 @@ func (x *UserIdentity) UserRecordID() *RecordID {
 	return &RecordID{inner: _r}
 }
 
+// The lookup info for retrieving the user identity. Use this property's value to retrieve the user identity when using the “CKDiscoverUserIdentitiesOperation“ and “CKFetchShareParticipantsOperation“ operations.
+//
 // LookupInfo calls the underlying LookupInfo.
 func (x *UserIdentity) LookupInfo() *UserIdentityLookupInfo {
 	_r := x.inner.LookupInfo()
@@ -55,16 +59,22 @@ func (x *UserIdentity) LookupInfo() *UserIdentityLookupInfo {
 	return &UserIdentityLookupInfo{inner: _r}
 }
 
+// The user's name. You can use this property to construct the user's name for display. Use the components with an instance of <doc://com.apple.documentation/documentation/foundation/personnamecomponentsformatter> to create a string representation for the current locale.
+//
 // NameComponents calls the underlying NameComponents.
 func (x *UserIdentity) NameComponents() *foundation.NSPersonNameComponents {
 	return x.inner.NameComponents()
 }
 
+// A Boolean value that indicates whether the user has an iCloud account. `true` if the user identity has an iCloud account; otherwise, `false`.
+//
 // HasiCloudAccount calls the underlying HasiCloudAccount.
 func (x *UserIdentity) HasiCloudAccount() bool {
 	return x.inner.HasiCloudAccount()
 }
 
+// Identifiers that match contacts in the local Contacts database. Identities that CloudKit discovers using “CKDiscoverAllUserIdentitiesOperation“ correspond to entries in the local Contacts database, matching the identifier on <doc://com.apple.documentation/documentation/contacts/cncontact>.  Use these identifiers with the Contacts database to get additional information about the contacts. Multiple identifiers can exist for a single discovered user because multiple contacts can contain the same email addresses or phone numbers. To transform these identifiers into an array of unified contact identifiers, create a predicate by calling the <doc://com.apple.documentation/documentation/contacts/cncontact/predicateforcontacts(withidentifiers:)> method, and then pass that predicate to the <doc://com.apple.documentation/documentation/contacts/cncontactstore/unifiedcontacts(matching:keystofetch:)> method.
+//
 // ContactIdentifiers returns the collection as a Go slice.
 func (x *UserIdentity) ContactIdentifiers() []string {
 	arr := x.inner.ContactIdentifiers()

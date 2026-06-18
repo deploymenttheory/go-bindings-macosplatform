@@ -50,27 +50,37 @@ func (x *Texture) WithIsCube(isCube bool) *Texture {
 	return x
 }
 
+// hasAlphaValues @summary Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
+//
 // WithHasAlphaValues sets the hasAlphaValues property and returns the receiver for chaining.
 func (x *Texture) WithHasAlphaValues(hasAlphaValues bool) *Texture {
 	x.inner.SetHasAlphaValues(hasAlphaValues)
 	return x
 }
 
+// write a texture to URL, deducing type from path extension
+//
 // WriteToURL calls the underlying WriteToURL.
 func (x *Texture) WriteToURL(uRL string) bool {
 	return x.inner.WriteToURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 }
 
+// write a particular level of a mipped texture to URL, deducing type from path extension
+//
 // WriteToURLLevel calls the underlying WriteToURLLevel.
 func (x *Texture) WriteToURLLevel(uRL string, level uint) bool {
 	return x.inner.WriteToURLLevel(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), level)
 }
 
+// write a texture to URL, using a specific UT type
+//
 // WriteToURLType calls the underlying WriteToURLType.
 func (x *Texture) WriteToURLType(nsurl string, type_ unsafe.Pointer) bool {
 	return x.inner.WriteToURLType(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(nsurl)), type_)
 }
 
+// write a particular level of a mipped texture to URL, using a specific UT type
+//
 // WriteToURLTypeLevel calls the underlying WriteToURLTypeLevel.
 func (x *Texture) WriteToURLTypeLevel(nsurl string, type_ unsafe.Pointer, level uint) bool {
 	return x.inner.WriteToURLTypeLevel(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(nsurl)), type_, level)
@@ -141,6 +151,8 @@ func (x *Texture) SetIsCube(isCube bool) {
 	x.inner.SetIsCube(isCube)
 }
 
+// hasAlphaValues @summary Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
+//
 // HasAlphaValues calls the underlying HasAlphaValues.
 func (x *Texture) HasAlphaValues() bool {
 	return x.inner.HasAlphaValues()

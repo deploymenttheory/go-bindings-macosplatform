@@ -33,6 +33,8 @@ func MatrixSolveLUFromID(id objc.ID) *MatrixSolveLU {
 	return &MatrixSolveLU{inner: raw.MPSMatrixSolveLUFromID(id)}
 }
 
+// @abstract   Initialize an MPSMatrixSolveLU object on a device @param      device          The device on which the kernel will execute. @param      transpose       A boolean value which indicates if the source matrix should be used in transposed form. @param      order           The order of the source matrix and the number of rows in the solution and right hand side matrices. @param      numberOfRightHandSides  The number of columns in the solution and right hand side matrices. @return     A valid MPSMatrixSolveLU object or nil, if failure.
+//
 // NewMatrixSolveLUWithDeviceTransposeOrderNumberOfRightHandSides creates a new [MatrixSolveLU].
 func NewMatrixSolveLUWithDeviceTransposeOrderNumberOfRightHandSides(device metal.MTLDevice, transpose bool, order uint, numberOfRightHandSides uint) *MatrixSolveLU {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixSolveLU")), objc.RegisterName("alloc"))
@@ -40,48 +42,64 @@ func NewMatrixSolveLUWithDeviceTransposeOrderNumberOfRightHandSides(device metal
 	return &MatrixSolveLU{inner: raw.MPSMatrixSolveLUFromID(_id)}
 }
 
+// @property   primarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithPrimarySourceMatrixOrigin sets the primarySourceMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixSolveLU) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveLU {
 	x.inner.MPSMatrixBinaryKernel.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
 	return x
 }
 
+// @property   secondarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithSecondarySourceMatrixOrigin sets the secondarySourceMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixSolveLU) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveLU {
 	x.inner.MPSMatrixBinaryKernel.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
 	return x
 }
 
+// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixSolveLU) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSolveLU {
 	x.inner.MPSMatrixBinaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
 	return x
 }
 
+// @property   batchStart @discussion The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+//
 // WithBatchStart sets the batchStart property and returns the receiver for chaining.
 func (x *MatrixSolveLU) WithBatchStart(batchStart uint) *MatrixSolveLU {
 	x.inner.MPSMatrixBinaryKernel.SetBatchStart(batchStart)
 	return x
 }
 
+// @property   batchSize @discussion The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+//
 // WithBatchSize sets the batchSize property and returns the receiver for chaining.
 func (x *MatrixSolveLU) WithBatchSize(batchSize uint) *MatrixSolveLU {
 	x.inner.MPSMatrixBinaryKernel.SetBatchSize(batchSize)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixSolveLU) WithOptions(options mpscore.MPSKernelOptions) *MatrixSolveLU {
 	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixSolveLU) WithLabel(label string) *MatrixSolveLU {
 	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @abstract   Encode a MPSMatrixSolveLU kernel into a command Buffer. @param      commandBuffer       A valid MTLCommandBuffer to receive the encoded filter @param      sourceMatrix        A valid MPSMatrix containing the source matrix in factored form as returned by a previous successful execution of a MPSMatrixDecompositionLU kernel. @param      rightHandSideMatrix A valid MPSMatrix containing the right hand side values. @param      pivotIndices        A valid MPSMatrix which contains the pivot indices as returned by a previous successful execution of a MPSMatrixDecompositionLU kernel. @param      solutionMatrix      A valid MPSMatrix to contain the result. @discussion This function encodes the MPSMatrixSolveLU object to a valid command buffer. sourceMatrix should contain the lower and upper triangular factors of A as results from a previous execution of MPSMatrixDecompositionLU. pivotIndices is an array of pivots resulting from a previous execution of MPSMatrixDecompositionLU. rightHandSideMatrix and solutionMatrix must be large enough to hold a matrix of size order x numberOfRightHandSides starting at secondarySourceMatrixOrigin and resultMatrixOrigin respectively. sourceMatrix must be at least size order x order starting at primarySourceMatrixOrigin.
+//
 // EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix calls the underlying EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix.
 func (x *MatrixSolveLU) EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, rightHandSideMatrix *mpscore.MPSMatrix, pivotIndices *mpscore.MPSMatrix, solutionMatrix *mpscore.MPSMatrix) {
 	x.inner.EncodeToCommandBufferSourceMatrixRightHandSideMatrixPivotIndicesSolutionMatrix(commandBuffer, sourceMatrix, rightHandSideMatrix, pivotIndices, solutionMatrix)

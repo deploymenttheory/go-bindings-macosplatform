@@ -35,6 +35,8 @@ func MTRBaseClusterBridgedDeviceBasicInformationFromID(id objc.ID) *MTRBaseClust
 	return &MTRBaseClusterBridgedDeviceBasicInformation{inner: raw.MTRBaseClusterBridgedDeviceBasicInformationFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue creates a new [MTRBaseClusterBridgedDeviceBasicInformation].
 func NewMTRBaseClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterBridgedDeviceBasicInformation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterBridgedDeviceBasicInformation")), objc.RegisterName("alloc"))
@@ -42,6 +44,8 @@ func NewMTRBaseClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue(dev
 	return &MTRBaseClusterBridgedDeviceBasicInformation{inner: raw.MTRBaseClusterBridgedDeviceBasicInformationFromID(_id)}
 }
 
+// Command KeepActive Upon receipt, the server SHALL attempt to keep the bridged device active for the duration specified by the command, when the device is next active.
+//
 // KeepActiveWithParamsCompletion calls the underlying KeepActiveWithParamsCompletion.
 func (x *MTRBaseClusterBridgedDeviceBasicInformation) KeepActiveWithParamsCompletion(params *raw.MTRBridgedDeviceBasicInformationClusterKeepActiveParams, completion func(unsafe.Pointer)) {
 	x.inner.KeepActiveWithParamsCompletion(params, completion)

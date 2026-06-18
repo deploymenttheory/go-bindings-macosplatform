@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents the configuration of a Virtio file system device.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtiofilesystemdeviceconfiguration
 type VZVirtioFileSystemDeviceConfiguration struct {
 	VZDirectorySharingDeviceConfiguration
@@ -38,7 +40,7 @@ func VZVirtioFileSystemDeviceConfigurationFromID(id objc.ID) *VZVirtioFileSystem
 	return o
 }
 
-// @abstract Configuration of the Virtio file system device. @param tag The label identifying this device in the guest. @discussion The tag is presented as a label in the guest identifying this device for mounting. The tag must be valid, which can be checked with +[VZVirtioFileSystemDeviceConfiguration validateTag:error:]. @see +[VZVirtioFileSystemDeviceConfiguration validateTag:error:]
+// Creates a configuration for a VIRTIO file system device.
 func (o *VZVirtioFileSystemDeviceConfiguration) InitWithTag(tag *foundation.NSString) *VZVirtioFileSystemDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioFileSystemDeviceConfigurationSelInitWithTag, tag.Ptr())
 	if _ret != 0 {
@@ -47,7 +49,7 @@ func (o *VZVirtioFileSystemDeviceConfiguration) InitWithTag(tag *foundation.NSSt
 	return VZVirtioFileSystemDeviceConfigurationFromID(_ret)
 }
 
-// @abstract Check if tag is a valid Virtio file system tag. @param tag The tag to validate. @param error If not nil, assigned with an error describing why the tag is not valid. @discussion The tag must be non-empty and less than 36 bytes when encoded in UTF-8.
+// Checks to see whether a Virtio tag is valid.
 func VZVirtioFileSystemDeviceConfigurationValidateTagError(tag *foundation.NSString) (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](objc.ID(_clsVZVirtioFileSystemDeviceConfiguration), _vZVirtioFileSystemDeviceConfigurationSelValidateTagError, tag.Ptr(), unsafe.Pointer(&_nsErr))

@@ -36,11 +36,15 @@ func NewTokenKeyExchangeParameters() *TokenKeyExchangeParameters {
 	return &TokenKeyExchangeParameters{inner: raw.TKTokenKeyExchangeParametersFromID(_id)}
 }
 
+// @discussion Requested output size of key exchange result.  Should be ignored if output size is not configurable for specified key exchange algorithm.
+//
 // RequestedSize calls the underlying RequestedSize.
 func (x *TokenKeyExchangeParameters) RequestedSize() int {
 	return x.inner.RequestedSize()
 }
 
+// @discussion Additional shared information input, typically used for key derivation (KDF) step of key exchange algorithm.  Should be ignored if shared info is not used for specified key exchange algorithm.
+//
 // SharedInfo calls the underlying SharedInfo.
 func (x *TokenKeyExchangeParameters) SharedInfo() *foundation.NSData {
 	return x.inner.SharedInfo()

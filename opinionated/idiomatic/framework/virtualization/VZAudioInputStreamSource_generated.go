@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class for an audio input stream source.
+//
 // AudioInputStreamSource wraps [raw.VZAudioInputStreamSource] with a fluent Go API.
 type AudioInputStreamSource struct {
 	inner *raw.VZAudioInputStreamSource

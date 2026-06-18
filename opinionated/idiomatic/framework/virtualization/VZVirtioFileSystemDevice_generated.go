@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object the defines a VIRTIO file system device.
+//
 // VirtioFileSystemDevice wraps [raw.VZVirtioFileSystemDevice] with a fluent Go API.
 type VirtioFileSystemDevice struct {
 	inner *raw.VZVirtioFileSystemDevice
@@ -36,12 +38,16 @@ func NewVirtioFileSystemDevice() *VirtioFileSystemDevice {
 	return &VirtioFileSystemDevice{inner: raw.VZVirtioFileSystemDeviceFromID(_id)}
 }
 
+// A value that defines the directory share the host exposes to the guest VM.
+//
 // WithShare sets the share property and returns the receiver for chaining.
 func (x *VirtioFileSystemDevice) WithShare(share DirectoryShareProvider) *VirtioFileSystemDevice {
 	x.inner.SetShare(share.asDirectoryShare())
 	return x
 }
 
+// @abstract The tag is a string identifying the device. @discussion The tag is presented as a label in the guest identifying this device for mounting.
+//
 // Tag calls the underlying Tag.
 func (x *VirtioFileSystemDevice) Tag() string {
 	_r := x.inner.Tag()
@@ -51,6 +57,8 @@ func (x *VirtioFileSystemDevice) Tag() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Directory share. Defines how host resources are exposed to the guest virtual machine. @discussion Setting this property to VZLinuxRosettaDirectoryShare is not supported and will cause an exception to be raised. @see VZSingleDirectoryShare @see VZMultipleDirectoryShare
+//
 // Share calls the underlying Share.
 func (x *VirtioFileSystemDevice) Share() *DirectoryShare {
 	_r := x.inner.Share()

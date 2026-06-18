@@ -31,6 +31,8 @@ func SyncEnginePendingRecordZoneChangeFromID(id objc.ID) *SyncEnginePendingRecor
 	return &SyncEnginePendingRecordZoneChange{inner: raw.CKSyncEnginePendingRecordZoneChangeFromID(id)}
 }
 
+// Creates a record zone change of the specified type for the given record. - Parameters: - recordID: The identifier of the record to change. - type: The type of change to make. - Returns: An initialized record zone change.
+//
 // NewSyncEnginePendingRecordZoneChangeWithRecordIDType creates a new [SyncEnginePendingRecordZoneChange].
 func NewSyncEnginePendingRecordZoneChangeWithRecordIDType(recordID *raw.CKRecordID, type_ CKSyncEnginePendingRecordZoneChangeType) *SyncEnginePendingRecordZoneChange {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEnginePendingRecordZoneChange")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewSyncEnginePendingRecordZoneChangeWithRecordIDType(recordID *raw.CKRecord
 	return &SyncEnginePendingRecordZoneChange{inner: raw.CKSyncEnginePendingRecordZoneChangeFromID(_id)}
 }
 
+// The identifier of the modified record.
+//
 // RecordID calls the underlying RecordID.
 func (x *SyncEnginePendingRecordZoneChange) RecordID() *RecordID {
 	_r := x.inner.RecordID()
@@ -47,6 +51,8 @@ func (x *SyncEnginePendingRecordZoneChange) RecordID() *RecordID {
 	return &RecordID{inner: _r}
 }
 
+// The type of change to make.
+//
 // Type calls the underlying Type.
 func (x *SyncEnginePendingRecordZoneChange) Type() CKSyncEnginePendingRecordZoneChangeType {
 	return CKSyncEnginePendingRecordZoneChangeType(x.inner.Type())

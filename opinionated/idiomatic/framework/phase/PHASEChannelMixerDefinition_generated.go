@@ -31,6 +31,8 @@ func ChannelMixerDefinitionFromID(id objc.ID) *ChannelMixerDefinition {
 	return &ChannelMixerDefinition{inner: raw.PHASEChannelMixerDefinitionFromID(id)}
 }
 
+// @method initWithChannelLayout:identifier @abstract Create a new PHASEChannelMixerDefinition @note Any connected sampler must match this channel layout. @param layout The input channel layout. @param identifier An optional custom identifier to give to this object @return A new PHASEChannelMixerDefinition object
+//
 // NewChannelMixerDefinitionWithChannelLayoutIdentifier creates a new [ChannelMixerDefinition].
 func NewChannelMixerDefinitionWithChannelLayoutIdentifier(layout *avfaudio.AVAudioChannelLayout, identifier string) *ChannelMixerDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEChannelMixerDefinition")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewChannelMixerDefinitionWithChannelLayoutIdentifier(layout *avfaudio.AVAud
 	return &ChannelMixerDefinition{inner: raw.PHASEChannelMixerDefinitionFromID(_id)}
 }
 
+// @method initWithChannelLayout @abstract Create a new PHASEChannelMixerDefinition @note Any connected sampler must match this channel layout. @param layout The input channel layout. Any connected sampler must match this channel layout. @return A new PHASEChannelMixerDefinition object
+//
 // NewChannelMixerDefinitionWithChannelLayout creates a new [ChannelMixerDefinition].
 func NewChannelMixerDefinitionWithChannelLayout(layout *avfaudio.AVAudioChannelLayout) *ChannelMixerDefinition {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEChannelMixerDefinition")), objc.RegisterName("alloc"))
@@ -45,12 +49,16 @@ func NewChannelMixerDefinitionWithChannelLayout(layout *avfaudio.AVAudioChannelL
 	return &ChannelMixerDefinition{inner: raw.PHASEChannelMixerDefinitionFromID(_id)}
 }
 
+// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
+//
 // WithGain sets the gain property and returns the receiver for chaining.
 func (x *ChannelMixerDefinition) WithGain(gain float64) *ChannelMixerDefinition {
 	x.inner.PHASEMixerDefinition.SetGain(gain)
 	return x
 }
 
+// @property gainMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable real-time control of the gain during playback.
+//
 // WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
 func (x *ChannelMixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *ChannelMixerDefinition {
 	x.inner.PHASEMixerDefinition.SetGainMetaParameterDefinition(gainMetaParameterDefinition.asNumberMetaParameterDefinition())

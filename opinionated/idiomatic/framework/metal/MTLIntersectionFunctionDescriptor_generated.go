@@ -38,24 +38,32 @@ func NewIntersectionFunctionDescriptor() *IntersectionFunctionDescriptor {
 	return &IntersectionFunctionDescriptor{inner: raw.MTLIntersectionFunctionDescriptorFromID(_id)}
 }
 
+// @property name @abstract The name of the `visible` function to find.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *IntersectionFunctionDescriptor) WithName(name string) *IntersectionFunctionDescriptor {
 	x.inner.MTLFunctionDescriptor.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property specializedName @abstract An optional new name for a `visible` function to allow reuse with different specializations.
+//
 // WithSpecializedName sets the specializedName property and returns the receiver for chaining.
 func (x *IntersectionFunctionDescriptor) WithSpecializedName(specializedName string) *IntersectionFunctionDescriptor {
 	x.inner.MTLFunctionDescriptor.SetSpecializedName(foundation.NSStringStringWithUTF8String(specializedName))
 	return x
 }
 
+// @property constantValues @abstract The set of constant values assigned to the function constants. Compilation fails if you do not provide valid constant values for all required function constants.
+//
 // WithConstantValues sets the constantValues property and returns the receiver for chaining.
 func (x *IntersectionFunctionDescriptor) WithConstantValues(constantValues *FunctionConstantValues) *IntersectionFunctionDescriptor {
 	x.inner.MTLFunctionDescriptor.SetConstantValues(constantValues.Unwrap())
 	return x
 }
 
+// @property options @abstract The options to use for this new `MTLFunction`.
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *IntersectionFunctionDescriptor) WithOptions(options MTLFunctionOptions) *IntersectionFunctionDescriptor {
 	x.inner.MTLFunctionDescriptor.SetOptions(raw.MTLFunctionOptions(options))

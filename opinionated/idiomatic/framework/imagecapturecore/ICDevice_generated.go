@@ -39,27 +39,37 @@ func NewDevice() *Device {
 	return &Device{inner: raw.ICDeviceFromID(_id)}
 }
 
+// @property delegate @abstract The delegate to receive messages once a session is opened on the device. @discussion The delegate must conform ICDeviceDelegate protocol. In addition it should respond to selectors defined in ICCameraDeviceDelegate protocol in order to effectively interact with the device object. The messages this delegate can expect to receive are described by these protocols.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Device) WithDelegate(delegate raw.ICDeviceDelegate) *Device {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @method requestOpenSession @abstract This message requests to open a session on the device. @discussion Make sure the receiver's delegate is set prior to sending this message; otherwise this message will be ignored. This request is completed when the delegate receives a "device:didOpenSessionWithError:" message. @note Execution of the delegate callback will occur on the main thread.
+//
 // RequestOpenSession calls the underlying RequestOpenSession.
 func (x *Device) RequestOpenSession() {
 	x.inner.RequestOpenSession()
 }
 
+// @method requestCloseSession @abstract This message requests to close a previously opened session on this device. @discussion This request is completed when the delegate receives a "device:didCloseSessionWithError:" message. @note Execution of the delegate callback will occur on the main thread.
+//
 // RequestCloseSession calls the underlying RequestCloseSession.
 func (x *Device) RequestCloseSession() {
 	x.inner.RequestCloseSession()
 }
 
+// @method requestEject @abstract Eject the media if permitted by the device, or disconnect from a remote device.
+//
 // RequestEject calls the underlying RequestEject.
 func (x *Device) RequestEject() {
 	x.inner.RequestEject()
 }
 
+// @method requestOpenSessionWithOptions:completion @abstract This message requests to open a session on the device. @discussion This request will execute the completion handler provided upon return. @note The completion block will execute on an any available queue, often this will not be the main queue.
+//
 // RequestOpenSessionWithOptionsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Device) RequestOpenSessionWithOptionsCompletion(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) error {
 	_ch := make(chan error, 1)
@@ -78,6 +88,8 @@ func (x *Device) RequestOpenSessionWithOptionsCompletion(ctx context.Context, op
 	}
 }
 
+// @method requestCloseSessionWithOptions:completion @abstract This message requests to close a previously opened session on this device. @discussion This request will execute the completion handler provided upon return. @note The completion block will execute on an any available queue, often this will not be the main queue.
+//
 // RequestCloseSessionWithOptionsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Device) RequestCloseSessionWithOptionsCompletion(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) error {
 	_ch := make(chan error, 1)
@@ -96,6 +108,8 @@ func (x *Device) RequestCloseSessionWithOptionsCompletion(ctx context.Context, o
 	}
 }
 
+// @method requestEjectWithCompletion: @abstract Eject the media, or disconnect the device - if permitted by the device. @discussion This request will execute the completion handler provided upon return. @note The completion block will execute on an any available queue, often this will not be the main queue.
+//
 // RequestEjectWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Device) RequestEjectWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -114,21 +128,29 @@ func (x *Device) RequestEjectWithCompletion(ctx context.Context) error {
 	}
 }
 
+// @method requestSendMessage:outData:maxReturnDataSize:sendMessageDelegate:didSendMessageSelector:contextInfo: @abstract This method asynchronously sends an arbitrary message with optional data to a device. @discussion This method allows developers to send a private message from a client application to a device module. The response to this command will be delivered using didSendMessageSelector of sendMessageDelegate. The didSendMessageSelector should have the same signature as: - (void)didSendMessage:(UInt32)messageCode inData:(NSData*)data error:(NSError*)error contextInfo:(void*)contextInfo. The content of error returned should be examined to determine if the request completed successfully. @note This method should not be used to send PTP pass-through commands to a PTP camera. Please refer to 'requestSendPTPCommand:outData:sendCommandDelegate:sendCommandDelegate:contextInfo:' defined in ICCameraDevice.h for sending PTP pass-through commands. @note Execution of the delegate callback will occur on the main thread.
+//
 // RequestSendMessageOutDataMaxReturnedDataSizeSendMessageDelegateDidSendMessageSelectorContextInfo calls the underlying RequestSendMessageOutDataMaxReturnedDataSizeSendMessageDelegateDidSendMessageSelectorContextInfo.
 func (x *Device) RequestSendMessageOutDataMaxReturnedDataSizeSendMessageDelegateDidSendMessageSelectorContextInfo(messageCode uint, data *foundation.NSData, maxReturnedDataSize uint, sendMessageDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.RequestSendMessageOutDataMaxReturnedDataSizeSendMessageDelegateDidSendMessageSelectorContextInfo(messageCode, data, maxReturnedDataSize, sendMessageDelegate, selector, contextInfo)
 }
 
+// @method requestEjectOrDisconnect @abstract Eject the media if permitted by the device, or disconnect from a remote device.
+//
 // RequestEjectOrDisconnect calls the underlying RequestEjectOrDisconnect.
 func (x *Device) RequestEjectOrDisconnect() {
 	x.inner.RequestEjectOrDisconnect()
 }
 
+// @method requestYield @abstract This message requests the device module in control of this device to yield control. @discussion This message should be used only if the client is planning on communicating with the device directly. The device module may not yield control of the device if it has an open session.
+//
 // RequestYield calls the underlying RequestYield.
 func (x *Device) RequestYield() {
 	x.inner.RequestYield()
 }
 
+// @property delegate @abstract The delegate to receive messages once a session is opened on the device. @discussion The delegate must conform ICDeviceDelegate protocol. In addition it should respond to selectors defined in ICCameraDeviceDelegate protocol in order to effectively interact with the device object. The messages this delegate can expect to receive are described by these protocols.
+//
 // Delegate calls the underlying Delegate.
 func (x *Device) Delegate() raw.ICDeviceDelegate {
 	return x.inner.Delegate()
@@ -139,11 +161,15 @@ func (x *Device) SetDelegate(delegate raw.ICDeviceDelegate) {
 	x.inner.SetDelegate(delegate)
 }
 
+// @property type @abstract ￼The type of the device as defined by ICDeviceType OR'd with its ICDeviceLocationType. @note The type of this device can be obtained by AND'ing the value retuned by this property with an appropriate ICDeviceTypeMask. @note The location type of this device can be obtained by AND'ing the value retuned by this property with an appropriate ICDeviceLocationTypeMask.
+//
 // Type calls the underlying Type.
 func (x *Device) Type() ICDeviceType {
 	return ICDeviceType(x.inner.Type())
 }
 
+// @property capabilities @abstract ￼The capabilities of the device as reported by the device module.
+//
 // Capabilities returns the collection as a Go slice.
 func (x *Device) Capabilities() []string {
 	arr := x.inner.Capabilities()
@@ -155,6 +181,8 @@ func (x *Device) Capabilities() []string {
 	})
 }
 
+// @property name @abstract ￼Name of the device as reported by the device module or by the device transport when a device module is not in control of this device. @note This name may change if the device module overrides the default name of the device reported by the device's transport, or if the name of the filesystem volume mounted by the device is changed by the user.
+//
 // Name calls the underlying Name.
 func (x *Device) Name() string {
 	_r := x.inner.Name()
@@ -164,6 +192,8 @@ func (x *Device) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property productKind @abstract ￼Type of the device. Possible values are: @"iPhone", @"iPod", @"iPad", @"Camera", @"Scanner"
+//
 // ProductKind calls the underlying ProductKind.
 func (x *Device) ProductKind() string {
 	_r := x.inner.ProductKind()
@@ -173,11 +203,15 @@ func (x *Device) ProductKind() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property icon @abstract ￼Icon image for the device class.  If there is no custom icon present from a device manufacturer, this will be a rendered version of the system symbol for the device class.  Using a rendered system symbol instead of the systemSymbolName is discouraged.
+//
 // Icon calls the underlying Icon.
 func (x *Device) Icon() unsafe.Pointer {
 	return x.inner.Icon()
 }
 
+// @property systemSymbolName @abstract ￼Standard system symbol used to represent the device class.  Using the symbol to render an appropriate device icon will ensure proper scaling for high resolution devices.
+//
 // SystemSymbolName calls the underlying SystemSymbolName.
 func (x *Device) SystemSymbolName() string {
 	_r := x.inner.SystemSymbolName()
@@ -187,6 +221,8 @@ func (x *Device) SystemSymbolName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property transportType @abstract ￼The transport type used by the device. The possible values are: ICTransportTypeUSB or ICTransportTypeMassStorage.
+//
 // TransportType calls the underlying TransportType.
 func (x *Device) TransportType() string {
 	_r := x.inner.TransportType()
@@ -196,6 +232,8 @@ func (x *Device) TransportType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property UUIDString @abstract ￼A string representation of the Universally Unique ID of the device.
+//
 // UUIDString calls the underlying UUIDString.
 func (x *Device) UUIDString() string {
 	_r := x.inner.UUIDString()
@@ -205,51 +243,71 @@ func (x *Device) UUIDString() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property locationDescription @abstract ￼A non-localized location description string for the device. @discussion The value returned in one of the location description strings defined above, or location obtained from the Bonjour TXT record of a network device.
+//
 // LocationDescription calls the underlying LocationDescription.
 func (x *Device) LocationDescription() unsafe.Pointer {
 	return x.inner.LocationDescription()
 }
 
+// @property hasOpenSession @abstract ￼Indicates whether the device has an open session.
+//
 // HasOpenSession calls the underlying HasOpenSession.
 func (x *Device) HasOpenSession() bool {
 	return x.inner.HasOpenSession()
 }
 
+// @property userData @abstract ￼Client convenience bookkeeping object retained by the framework.
+//
 // UserData calls the underlying UserData.
 func (x *Device) UserData() *foundation.NSMutableDictionary[objc.ID, objc.ID] {
 	return x.inner.UserData()
 }
 
+// @property modulePath @abstract ￼Filesystem path of the device module that is associated with this device. Camera-specific capabilities are defined in ICCameraDevice.h and scanner-specific capabilities are defined in ICScannerDevice.h.
+//
 // ModulePath calls the underlying ModulePath.
 func (x *Device) ModulePath() unsafe.Pointer {
 	return x.inner.ModulePath()
 }
 
+// @property moduleVersion @abstract ￼The bundle version of the device module associated with this device. @note This may change if an existing device module associated with this device is updated or a new device module for this device is installed.
+//
 // ModuleVersion calls the underlying ModuleVersion.
 func (x *Device) ModuleVersion() unsafe.Pointer {
 	return x.inner.ModuleVersion()
 }
 
+// @property serialNumberString @abstract ￼The serial number of the device. This will be NULL if the device does not provide a serial number.
+//
 // SerialNumberString calls the underlying SerialNumberString.
 func (x *Device) SerialNumberString() unsafe.Pointer {
 	return x.inner.SerialNumberString()
 }
 
+// @property usbLocationID @abstract ￼The USB location of which the device is occupying.
+//
 // UsbLocationID calls the underlying UsbLocationID.
 func (x *Device) UsbLocationID() int {
 	return x.inner.UsbLocationID()
 }
 
+// @property usbProductID @abstract ￼The USB PID associated with the device attached.
+//
 // UsbProductID calls the underlying UsbProductID.
 func (x *Device) UsbProductID() int {
 	return x.inner.UsbProductID()
 }
 
+// @property usbVendorID @abstract ￼The USB VID associated with the device attached.
+//
 // UsbVendorID calls the underlying UsbVendorID.
 func (x *Device) UsbVendorID() int {
 	return x.inner.UsbVendorID()
 }
 
+// @property autolaunchApplicationPath @abstract ￼Filesystem path of an application that is to be automatically launched when this device is added. @discussion This property is unavailable for devices of ICTransportTypeProximity.
+//
 // AutolaunchApplicationPath calls the underlying AutolaunchApplicationPath.
 func (x *Device) AutolaunchApplicationPath() unsafe.Pointer {
 	return x.inner.AutolaunchApplicationPath()
@@ -260,16 +318,22 @@ func (x *Device) SetAutolaunchApplicationPath(autolaunchApplicationPath unsafe.P
 	x.inner.SetAutolaunchApplicationPath(autolaunchApplicationPath)
 }
 
+// @property remote @abstract ￼Indicates whether the device is a remote device published by Image Capture device sharing facility. @property name @discussion ￼Name of the device as reported by the device module or by the device transport when a device module is not in control of this device. @note This name may change if the device module overrides the default name of the device reported by the device's transport, or if the name of the filesystem volume mounted by the device is changed by the user.
+//
 // IsRemote calls the underlying IsRemote.
 func (x *Device) IsRemote() bool {
 	return x.inner.IsRemote()
 }
 
+// @property persistentIDString @abstract ￼A string representation of the persistent ID of the device.
+//
 // PersistentIDString calls the underlying PersistentIDString.
 func (x *Device) PersistentIDString() unsafe.Pointer {
 	return x.inner.PersistentIDString()
 }
 
+// @property moduleExecutableArchitecture @abstract Reports the device module servicing the requests executable architecture.
+//
 // ModuleExecutableArchitecture calls the underlying ModuleExecutableArchitecture.
 func (x *Device) ModuleExecutableArchitecture() int {
 	return x.inner.ModuleExecutableArchitecture()

@@ -41,47 +41,65 @@ func NewAuthorizationProviderExtensionLoginManager() *AuthorizationProviderExten
 	return &AuthorizationProviderExtensionLoginManager{inner: raw.ASAuthorizationProviderExtensionLoginManagerFromID(_id)}
 }
 
+// @abstract Retrieves or sets the current SSO tokens response for the current user and extension.
+//
 // WithSsoTokens sets the ssoTokens property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginManager) WithSsoTokens(ssoTokens *foundation.NSDictionary[objc.ID, objc.ID]) *AuthorizationProviderExtensionLoginManager {
 	x.inner.SetSsoTokens(ssoTokens)
 	return x
 }
 
+// Saves or replaces the user login configration. @param userLoginConfiguration The user login configration to use. @param error The error when there are validation errors or nil.
+//
 // SaveUserLoginConfigurationError calls the underlying SaveUserLoginConfigurationError.
 func (x *AuthorizationProviderExtensionLoginManager) SaveUserLoginConfigurationError(userLoginConfiguration *raw.ASAuthorizationProviderExtensionUserLoginConfiguration) (bool, error) {
 	return x.inner.SaveUserLoginConfigurationError(userLoginConfiguration)
 }
 
+// Saves or replaces the login configration. @param loginConfiguration The login configration to use. @param error The error when there are validation errors or nil.
+//
 // SaveLoginConfigurationError calls the underlying SaveLoginConfigurationError.
 func (x *AuthorizationProviderExtensionLoginManager) SaveLoginConfigurationError(loginConfiguration *raw.ASAuthorizationProviderExtensionLoginConfiguration) (bool, error) {
 	return x.inner.SaveLoginConfigurationError(loginConfiguration)
 }
 
+// @abstract Saves the provided certificate for the key type. @param certificate The certificate to save. @param keyType The key type for the certificate.
+//
 // SaveCertificateKeyType calls the underlying SaveCertificateKeyType.
 func (x *AuthorizationProviderExtensionLoginManager) SaveCertificateKeyType(certificate unsafe.Pointer, keyType ASAuthorizationProviderExtensionKeyType) {
 	x.inner.SaveCertificateKeyType(certificate, raw.ASAuthorizationProviderExtensionKeyType(keyType))
 }
 
+// @abstract Retrieves the key for the specified platform SSO key type. @param keyType The key type to retrieve.
+//
 // CopyKeyForKeyType calls the underlying CopyKeyForKeyType.
 func (x *AuthorizationProviderExtensionLoginManager) CopyKeyForKeyType(keyType ASAuthorizationProviderExtensionKeyType) unsafe.Pointer {
 	return x.inner.CopyKeyForKeyType(raw.ASAuthorizationProviderExtensionKeyType(keyType))
 }
 
+// @abstract Retrieves the identity for the specified platform SSO key type. @param keyType The key type to retrieve.
+//
 // CopyIdentityForKeyType calls the underlying CopyIdentityForKeyType.
 func (x *AuthorizationProviderExtensionLoginManager) CopyIdentityForKeyType(keyType ASAuthorizationProviderExtensionKeyType) unsafe.Pointer {
 	return x.inner.CopyIdentityForKeyType(raw.ASAuthorizationProviderExtensionKeyType(keyType))
 }
 
+// @abstract Generates a new key for the specified platform SSO key type using the strongest supported key strength returning the new key.  Nil is returned if there is an error generating the new key. @param keyType The key type to retrieve.
+//
 // BeginKeyRotationForKeyType calls the underlying BeginKeyRotationForKeyType.
 func (x *AuthorizationProviderExtensionLoginManager) BeginKeyRotationForKeyType(keyType ASAuthorizationProviderExtensionKeyType) unsafe.Pointer {
 	return x.inner.BeginKeyRotationForKeyType(raw.ASAuthorizationProviderExtensionKeyType(keyType))
 }
 
+// @abstract Completes rotation for the key to replace the previous key. @param keyType The key type to retrieve.
+//
 // CompleteKeyRotationForKeyType calls the underlying CompleteKeyRotationForKeyType.
 func (x *AuthorizationProviderExtensionLoginManager) CompleteKeyRotationForKeyType(keyType ASAuthorizationProviderExtensionKeyType) {
 	x.inner.CompleteKeyRotationForKeyType(raw.ASAuthorizationProviderExtensionKeyType(keyType))
 }
 
+// @abstract Requests AppSSOAgent reauthenticate the current user for the current extension.  This is used when the tokens are revoked, or expired and need to be requested again.
+//
 // UserNeedsReauthenticationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *AuthorizationProviderExtensionLoginManager) UserNeedsReauthenticationWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -100,46 +118,64 @@ func (x *AuthorizationProviderExtensionLoginManager) UserNeedsReauthenticationWi
 	}
 }
 
+// @abstract Requests that the device registration be run again to repair it.
+//
 // DeviceRegistrationsNeedsRepair calls the underlying DeviceRegistrationsNeedsRepair.
 func (x *AuthorizationProviderExtensionLoginManager) DeviceRegistrationsNeedsRepair() {
 	x.inner.DeviceRegistrationsNeedsRepair()
 }
 
+// @abstract Requests that user registration be run again for the current user to repair it.
+//
 // UserRegistrationsNeedsRepair calls the underlying UserRegistrationsNeedsRepair.
 func (x *AuthorizationProviderExtensionLoginManager) UserRegistrationsNeedsRepair() {
 	x.inner.UserRegistrationsNeedsRepair()
 }
 
+// @abstract Requests that the decryption keys are repaired.
+//
 // DecryptionKeysNeedRepair calls the underlying DecryptionKeysNeedRepair.
 func (x *AuthorizationProviderExtensionLoginManager) DecryptionKeysNeedRepair() {
 	x.inner.DecryptionKeysNeedRepair()
 }
 
+// @abstract Creates new Encryption, Signing, and Secure Enclave keys for the user.  The old keys will be destroyed.
+//
 // ResetKeys calls the underlying ResetKeys.
 func (x *AuthorizationProviderExtensionLoginManager) ResetKeys() {
 	x.inner.ResetKeys()
 }
 
+// @abstract Creates new Encryption, and Signing keys for the device or user.  The old keys will be destroyed.
+//
 // ResetDeviceKeys calls the underlying ResetDeviceKeys.
 func (x *AuthorizationProviderExtensionLoginManager) ResetDeviceKeys() {
 	x.inner.ResetDeviceKeys()
 }
 
+// @abstract Creates new Encryption, Signing, and Secure Enclave keys for the user.  The old keys will be destroyed.
+//
 // ResetUserSecureEnclaveKey calls the underlying ResetUserSecureEnclaveKey.
 func (x *AuthorizationProviderExtensionLoginManager) ResetUserSecureEnclaveKey() {
 	x.inner.ResetUserSecureEnclaveKey()
 }
 
+// @abstract Provides a new or cached attestation for the specified key type. @param keyType The key type for the attestation. @param clientDataHash A SHA256 hash of a unique, single-use data block that embeds a challenge from your server. @param completion A closure that the method calls upon completion with the following parameters: * attestationCertificates An array of certificates that verify the validity of the key associated with the keyType. Send this to your server for processing. * error A DCError instance that indicates the reason for failure, or nil on success.
+//
 // AttestKeyClientDataHashCompletion calls the underlying AttestKeyClientDataHashCompletion.
 func (x *AuthorizationProviderExtensionLoginManager) AttestKeyClientDataHashCompletion(keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData, completion objc.Block) {
 	x.inner.AttestKeyClientDataHashCompletion(raw.ASAuthorizationProviderExtensionKeyType(keyType), clientDataHash, completion)
 }
 
+// @abstract Provides a new or cached attestation for the specified pending key type. @param keyType The pending key type for the attestation. @param clientDataHash A SHA256 hash of a unique, single-use data block that embeds a challenge from your server. @param completion A closure that the method calls upon completion with the following parameters: * attestationCertificates An array of certificates that verify the validity of the pending key associated with the keyType. Send this to your server for processing. * error A DCError instance that indicates the reason for failure, or nil on success.
+//
 // AttestPendingKeyClientDataHashCompletion calls the underlying AttestPendingKeyClientDataHashCompletion.
 func (x *AuthorizationProviderExtensionLoginManager) AttestPendingKeyClientDataHashCompletion(keyType ASAuthorizationProviderExtensionKeyType, clientDataHash *foundation.NSData, completion objc.Block) {
 	x.inner.AttestPendingKeyClientDataHashCompletion(raw.ASAuthorizationProviderExtensionKeyType(keyType), clientDataHash, completion)
 }
 
+// @abstract Asks authorization service to show extension view controller for registration. If the controller cannot be shown an error is returned.  This is only valid during registration.
+//
 // PresentRegistrationViewControllerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *AuthorizationProviderExtensionLoginManager) PresentRegistrationViewControllerWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -158,16 +194,22 @@ func (x *AuthorizationProviderExtensionLoginManager) PresentRegistrationViewCont
 	}
 }
 
+// @abstract Returns YES if the current device completed registration.
+//
 // IsDeviceRegistered calls the underlying IsDeviceRegistered.
 func (x *AuthorizationProviderExtensionLoginManager) IsDeviceRegistered() bool {
 	return x.inner.IsDeviceRegistered()
 }
 
+// @abstract Returns YES if current user completed registration.
+//
 // IsUserRegistered calls the underlying IsUserRegistered.
 func (x *AuthorizationProviderExtensionLoginManager) IsUserRegistered() bool {
 	return x.inner.IsUserRegistered()
 }
 
+// @abstract Returns the device registration token from the MDM profile.
+//
 // RegistrationToken calls the underlying RegistrationToken.
 func (x *AuthorizationProviderExtensionLoginManager) RegistrationToken() string {
 	_r := x.inner.RegistrationToken()
@@ -177,16 +219,22 @@ func (x *AuthorizationProviderExtensionLoginManager) RegistrationToken() string 
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Returns the authentication method used for the device.
+//
 // AuthenticationMethod calls the underlying AuthenticationMethod.
 func (x *AuthorizationProviderExtensionLoginManager) AuthenticationMethod() ASAuthorizationProviderExtensionAuthenticationMethod {
 	return ASAuthorizationProviderExtensionAuthenticationMethod(x.inner.AuthenticationMethod())
 }
 
+// @abstract Returns the extension data from the MDM profile.
+//
 // ExtensionData calls the underlying ExtensionData.
 func (x *AuthorizationProviderExtensionLoginManager) ExtensionData() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.ExtensionData()
 }
 
+// @abstract The user name to use when authenticating with the identity provider.
+//
 // LoginUserName calls the underlying LoginUserName.
 func (x *AuthorizationProviderExtensionLoginManager) LoginUserName() unsafe.Pointer {
 	return x.inner.LoginUserName()
@@ -197,6 +245,8 @@ func (x *AuthorizationProviderExtensionLoginManager) SetLoginUserName(loginUserN
 	x.inner.SetLoginUserName(loginUserName)
 }
 
+// @abstract Retrieves the current user login configuration for the extension.
+//
 // UserLoginConfiguration calls the underlying UserLoginConfiguration.
 func (x *AuthorizationProviderExtensionLoginManager) UserLoginConfiguration() *AuthorizationProviderExtensionUserLoginConfiguration {
 	_r := x.inner.UserLoginConfiguration()
@@ -206,6 +256,8 @@ func (x *AuthorizationProviderExtensionLoginManager) UserLoginConfiguration() *A
 	return &AuthorizationProviderExtensionUserLoginConfiguration{inner: _r}
 }
 
+// @abstract Retrieves or sets the current SSO tokens response for the current user and extension.
+//
 // SsoTokens calls the underlying SsoTokens.
 func (x *AuthorizationProviderExtensionLoginManager) SsoTokens() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.SsoTokens()
@@ -216,6 +268,8 @@ func (x *AuthorizationProviderExtensionLoginManager) SetSsoTokens(ssoTokens *fou
 	x.inner.SetSsoTokens(ssoTokens)
 }
 
+// @abstract Retrieves or sets the current login configuration for the extension.
+//
 // LoginConfiguration calls the underlying LoginConfiguration.
 func (x *AuthorizationProviderExtensionLoginManager) LoginConfiguration() *AuthorizationProviderExtensionLoginConfiguration {
 	_r := x.inner.LoginConfiguration()

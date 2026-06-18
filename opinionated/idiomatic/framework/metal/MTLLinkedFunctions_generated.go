@@ -7,7 +7,9 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // LinkedFunctions wraps [raw.MTLLinkedFunctions] with a fluent Go API.
@@ -36,32 +38,58 @@ func NewLinkedFunctions() *LinkedFunctions {
 	return &LinkedFunctions{inner: raw.MTLLinkedFunctionsFromID(_id)}
 }
 
+// @property groups @abstract Groups of functions, grouped to match callsites in the shader code.
+//
 // WithGroups sets the groups property and returns the receiver for chaining.
 func (x *LinkedFunctions) WithGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID]) *LinkedFunctions {
 	x.inner.SetGroups(groups)
 	return x
 }
 
+// @property functions @abstract The array of functions to be AIR linked.
+//
 // Functions calls the underlying Functions.
 func (x *LinkedFunctions) Functions() *foundation.NSArray[raw.MTLFunction] {
 	return x.inner.Functions()
 }
 
 // SetFunctions calls the underlying SetFunctions.
-func (x *LinkedFunctions) SetFunctions(functions *foundation.NSArray[raw.MTLFunction]) {
-	x.inner.SetFunctions(functions)
+func (x *LinkedFunctions) SetFunctions(functions ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(functions))
+	for _i, _v := range functions {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTLFunction]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTLFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetFunctions(_arg0)
 }
 
+// @property binaryFunctions @abstract The array of functions compiled to binary to be linked.
+//
 // BinaryFunctions calls the underlying BinaryFunctions.
 func (x *LinkedFunctions) BinaryFunctions() *foundation.NSArray[raw.MTLFunction] {
 	return x.inner.BinaryFunctions()
 }
 
 // SetBinaryFunctions calls the underlying SetBinaryFunctions.
-func (x *LinkedFunctions) SetBinaryFunctions(binaryFunctions *foundation.NSArray[raw.MTLFunction]) {
-	x.inner.SetBinaryFunctions(binaryFunctions)
+func (x *LinkedFunctions) SetBinaryFunctions(binaryFunctions ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(binaryFunctions))
+	for _i, _v := range binaryFunctions {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTLFunction]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTLFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetBinaryFunctions(_arg0)
 }
 
+// @property groups @abstract Groups of functions, grouped to match callsites in the shader code.
+//
 // Groups calls the underlying Groups.
 func (x *LinkedFunctions) Groups() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.Groups()
@@ -72,14 +100,25 @@ func (x *LinkedFunctions) SetGroups(groups *foundation.NSDictionary[*foundation.
 	x.inner.SetGroups(groups)
 }
 
+// @property privateFunctions @abstract The array of functions to be AIR linked. @discussion These functions are not exported by the pipeline state as MTLFunctionHandle objects. Function pointer support is not required to link private functions.
+//
 // PrivateFunctions calls the underlying PrivateFunctions.
 func (x *LinkedFunctions) PrivateFunctions() *foundation.NSArray[raw.MTLFunction] {
 	return x.inner.PrivateFunctions()
 }
 
 // SetPrivateFunctions calls the underlying SetPrivateFunctions.
-func (x *LinkedFunctions) SetPrivateFunctions(privateFunctions *foundation.NSArray[raw.MTLFunction]) {
-	x.inner.SetPrivateFunctions(privateFunctions)
+func (x *LinkedFunctions) SetPrivateFunctions(privateFunctions ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(privateFunctions))
+	for _i, _v := range privateFunctions {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTLFunction]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTLFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetPrivateFunctions(_arg0)
 }
 
 // LinkedFunctionsable is the interface implemented by [LinkedFunctions], for mocking and DI.
@@ -87,13 +126,13 @@ type LinkedFunctionsable interface {
 	Unwrap() *raw.MTLLinkedFunctions
 	WithGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID]) *LinkedFunctions
 	Functions() *foundation.NSArray[raw.MTLFunction]
-	SetFunctions(functions *foundation.NSArray[raw.MTLFunction])
+	SetFunctions(functions ...purego.IDer)
 	BinaryFunctions() *foundation.NSArray[raw.MTLFunction]
-	SetBinaryFunctions(binaryFunctions *foundation.NSArray[raw.MTLFunction])
+	SetBinaryFunctions(binaryFunctions ...purego.IDer)
 	Groups() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	SetGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID])
 	PrivateFunctions() *foundation.NSArray[raw.MTLFunction]
-	SetPrivateFunctions(privateFunctions *foundation.NSArray[raw.MTLFunction])
+	SetPrivateFunctions(privateFunctions ...purego.IDer)
 }
 
 var _ LinkedFunctionsable = (*LinkedFunctions)(nil)

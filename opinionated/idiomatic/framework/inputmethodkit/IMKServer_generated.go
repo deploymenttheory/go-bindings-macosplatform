@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @class      IMKServer @abstract   This class manages input sessions. @discussion An input method should create one and only one of these objects.  An IMKServer creates an NSConnection that can be connected to by input clients.  After a connection has been made an IMKServer manages communication between the client and the input method.  For each communication session the IMKServer will create an IMKInputController class as well as delegate classes for that controller.  Each controller object then serves as a proxy for the input session on the client side.  This means that input methods do not have to concern themselves with managing client sessions.  A given controller will only receive communication from a single session. IMKServer's also will manage a basic candidate window for an input method.  See IMKCandidates.h to understand how to create a candidate window and associate the candidate window with the IMKServer object.
+//
 // Server wraps [raw.IMKServer] with a fluent Go API.
 type Server struct {
 	inner *raw.IMKServer
@@ -30,6 +32,8 @@ func ServerFromID(id objc.ID) *Server {
 	return &Server{inner: raw.IMKServerFromID(id)}
 }
 
+// @method @abstract   Create a IMKServer from information in the bundle's Info.plist. @discussion This method will look into the info.plist for a controller class and delegate class.  The class names will be loaded, no classes will be instantiated.  Additionally, an NSConnection will be allocated and registered with the name parameter.
+//
 // NewServerWithNameBundleIdentifier creates a new [Server].
 func NewServerWithNameBundleIdentifier(name string, bundleIdentifier string) *Server {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IMKServer")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewServerWithNameBundleIdentifier(name string, bundleIdentifier string) *Se
 	return &Server{inner: raw.IMKServerFromID(_id)}
 }
 
+// @method @abstract   Creates an IMKServer using the parameters. @discussion This method creates an IMKServer object without attempting to examine the bundle instead the class names provided as parameters are used to create input controller objects and delegate objects.
+//
 // NewServerWithNameControllerClassDelegateClass creates a new [Server].
 func NewServerWithNameControllerClassDelegateClass(name string, controllerClassID objc.Class, delegateClassID objc.Class) *Server {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IMKServer")), objc.RegisterName("alloc"))
@@ -44,16 +50,22 @@ func NewServerWithNameControllerClassDelegateClass(name string, controllerClassI
 	return &Server{inner: raw.IMKServerFromID(_id)}
 }
 
+// @method @abstract   Returns an NSBundle for the input method. @discussion If the IMKServer contains a bundle identifier the NSBundle is created from that.  Otherwise, the bundle  is created for the main bundle.  The returned NSBundle is an autoreleased object.
+//
 // Bundle calls the underlying Bundle.
 func (x *Server) Bundle() *foundation.NSBundle {
 	return x.inner.Bundle()
 }
 
+// @method @abstract   Call this before terminating a palette IM. @discussion Palettes need to be able to terminate.  When this method is called the IMKServer will notify each client of the palette that the palette is about to terminate.  The palette can terminate safely if a value of YES is returned.  If the caller of this method is not an input method of type palette an exception will be thrown. If the method returns NO the palette should not terminate.
+//
 // PaletteWillTerminate calls the underlying PaletteWillTerminate.
 func (x *Server) PaletteWillTerminate() bool {
 	return x.inner.PaletteWillTerminate()
 }
 
+// @method @abstract   Returns a BOOL indicating whether or not the last key press was a dead key.
+//
 // LastKeyEventWasDeadKey calls the underlying LastKeyEventWasDeadKey.
 func (x *Server) LastKeyEventWasDeadKey() bool {
 	return x.inner.LastKeyEventWasDeadKey()

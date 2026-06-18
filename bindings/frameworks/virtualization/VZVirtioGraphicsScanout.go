@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A Virtio graphics scanout that corresponds to a Virtio graphics scanout configuration.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtiographicsscanout
 type VZVirtioGraphicsScanout struct {
 	VZGraphicsDisplay

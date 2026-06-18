@@ -33,6 +33,8 @@ func NDArrayVectorLUTDequantizeFromID(id objc.ID) *NDArrayVectorLUTDequantize {
 	return &NDArrayVectorLUTDequantize{inner: raw.MPSNDArrayVectorLUTDequantizeFromID(id)}
 }
 
+// @abstract   Initializes a kernel for vector-based LUT dequantization. @param      device    The Metal device to be used with this kernel. @param      axis        The vector axis in the output. @result     A new vector LUT dequantization kernel.
+//
 // NewNDArrayVectorLUTDequantizeWithDeviceAxis creates a new [NDArrayVectorLUTDequantize].
 func NewNDArrayVectorLUTDequantizeWithDeviceAxis(device metal.MTLDevice, axis uint) *NDArrayVectorLUTDequantize {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayVectorLUTDequantize")), objc.RegisterName("alloc"))
@@ -40,30 +42,40 @@ func NewNDArrayVectorLUTDequantizeWithDeviceAxis(device metal.MTLDevice, axis ui
 	return &NDArrayVectorLUTDequantize{inner: raw.MPSNDArrayVectorLUTDequantizeFromID(_id)}
 }
 
+// @property  vectorAxis @abstract  Which axis in the destination will receive the vector component, must be less than 4.
+//
 // WithVectorAxis sets the vectorAxis property and returns the receiver for chaining.
 func (x *NDArrayVectorLUTDequantize) WithVectorAxis(vectorAxis uint) *NDArrayVectorLUTDequantize {
 	x.inner.SetVectorAxis(vectorAxis)
 	return x
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
 func (x *NDArrayVectorLUTDequantize) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayVectorLUTDequantize {
 	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *NDArrayVectorLUTDequantize) WithOptions(options mpscore.MPSKernelOptions) *NDArrayVectorLUTDequantize {
 	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NDArrayVectorLUTDequantize) WithLabel(label string) *NDArrayVectorLUTDequantize {
 	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property  vectorAxis @abstract  Which axis in the destination will receive the vector component, must be less than 4.
+//
 // VectorAxis calls the underlying VectorAxis.
 func (x *NDArrayVectorLUTDequantize) VectorAxis() uint {
 	return x.inner.VectorAxis()

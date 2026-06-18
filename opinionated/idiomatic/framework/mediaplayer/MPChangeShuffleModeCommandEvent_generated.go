@@ -35,11 +35,15 @@ func NewChangeShuffleModeCommandEvent() *ChangeShuffleModeCommandEvent {
 	return &ChangeShuffleModeCommandEvent{inner: raw.MPChangeShuffleModeCommandEventFromID(_id)}
 }
 
+// The desired shuffle type to use when fulfilling the request.
+//
 // ShuffleType calls the underlying ShuffleType.
 func (x *ChangeShuffleModeCommandEvent) ShuffleType() MPShuffleType {
 	return MPShuffleType(x.inner.ShuffleType())
 }
 
+// Whether or not the selection should be preserved between playback sessions
+//
 // PreservesShuffleMode calls the underlying PreservesShuffleMode.
 func (x *ChangeShuffleModeCommandEvent) PreservesShuffleMode() bool {
 	return x.inner.PreservesShuffleMode()

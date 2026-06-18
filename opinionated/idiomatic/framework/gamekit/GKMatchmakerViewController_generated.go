@@ -31,6 +31,8 @@ func MatchmakerViewControllerFromID(id objc.ID) *MatchmakerViewController {
 	return &MatchmakerViewController{inner: raw.GKMatchmakerViewControllerFromID(id)}
 }
 
+// Initialize with a matchmaking request, allowing the user to send invites and/or start matchmaking
+//
 // NewMatchmakerViewControllerWithMatchRequest creates a new [MatchmakerViewController].
 func NewMatchmakerViewControllerWithMatchRequest(request *raw.GKMatchRequest) *MatchmakerViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKMatchmakerViewController")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewMatchmakerViewControllerWithMatchRequest(request *raw.GKMatchRequest) *M
 	return &MatchmakerViewController{inner: raw.GKMatchmakerViewControllerFromID(_id)}
 }
 
+// Initialize with an accepted invite, allowing the user to see the status of other invited players and get notified when the game starts
+//
 // NewMatchmakerViewControllerWithInvite creates a new [MatchmakerViewController].
 func NewMatchmakerViewControllerWithInvite(invite *raw.GKInvite) *MatchmakerViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKMatchmakerViewController")), objc.RegisterName("alloc"))
@@ -51,30 +55,40 @@ func (x *MatchmakerViewController) WithMatchmakerDelegate(matchmakerDelegate raw
 	return x
 }
 
+// set to YES to receive hosted (eg. not peer-to-peer) match results. Will cause the controller to return an array of players instead of a match.
+//
 // WithHosted sets the hosted property and returns the receiver for chaining.
 func (x *MatchmakerViewController) WithHosted(hosted bool) *MatchmakerViewController {
 	x.inner.SetHosted(hosted)
 	return x
 }
 
+// this controls which mode of matchmaking to support in the UI (all, nearby only, automatch only, invite only).  Throws an exeption if you can not set to the desired mode (due to restrictions)
+//
 // WithMatchmakingMode sets the matchmakingMode property and returns the receiver for chaining.
 func (x *MatchmakerViewController) WithMatchmakingMode(matchmakingMode GKMatchmakingMode) *MatchmakerViewController {
 	x.inner.SetMatchmakingMode(raw.GKMatchmakingMode(matchmakingMode))
 	return x
 }
 
+// A BOOL value to allow the GKMatchMakerViewController to return control to the game once the minimum number of players are connected. By default the value is NO, and the multiplayer match can only proceed after all players are connected. If the value is set to YES, then once the number of connected players is greater than or equal to minPlayers of the match request, matchmakerViewController:didFindMatch: will be called and the game can get the match instance, and update the game scene accordingly. The remaining players wil continue to connect.
+//
 // WithCanStartWithMinimumPlayers sets the canStartWithMinimumPlayers property and returns the receiver for chaining.
 func (x *MatchmakerViewController) WithCanStartWithMinimumPlayers(canStartWithMinimumPlayers bool) *MatchmakerViewController {
 	x.inner.SetCanStartWithMinimumPlayers(canStartWithMinimumPlayers)
 	return x
 }
 
+// deprecated, set the message on the match request instead
+//
 // WithDefaultInvitationMessage sets the defaultInvitationMessage property and returns the receiver for chaining.
 func (x *MatchmakerViewController) WithDefaultInvitationMessage(defaultInvitationMessage string) *MatchmakerViewController {
 	x.inner.SetDefaultInvitationMessage(foundation.NSStringStringWithUTF8String(defaultInvitationMessage))
 	return x
 }
 
+// Add additional players (not currently connected) to an existing peer-to-peer match. Apps should elect a single device to do this, otherwise conflicts could arise resulting in unexpected connection errors.
+//
 // AddPlayersToMatch calls the underlying AddPlayersToMatch.
 func (x *MatchmakerViewController) AddPlayersToMatch(match *raw.GKMatch) {
 	x.inner.AddPlayersToMatch(match)
@@ -104,6 +118,8 @@ func (x *MatchmakerViewController) MatchRequest() *MatchRequest {
 	return &MatchRequest{inner: _r}
 }
 
+// set to YES to receive hosted (eg. not peer-to-peer) match results. Will cause the controller to return an array of players instead of a match.
+//
 // IsHosted calls the underlying IsHosted.
 func (x *MatchmakerViewController) IsHosted() bool {
 	return x.inner.IsHosted()
@@ -114,6 +130,8 @@ func (x *MatchmakerViewController) SetHosted(hosted bool) {
 	x.inner.SetHosted(hosted)
 }
 
+// this controls which mode of matchmaking to support in the UI (all, nearby only, automatch only, invite only).  Throws an exeption if you can not set to the desired mode (due to restrictions)
+//
 // MatchmakingMode calls the underlying MatchmakingMode.
 func (x *MatchmakerViewController) MatchmakingMode() GKMatchmakingMode {
 	return GKMatchmakingMode(x.inner.MatchmakingMode())
@@ -124,6 +142,8 @@ func (x *MatchmakerViewController) SetMatchmakingMode(matchmakingMode GKMatchmak
 	x.inner.SetMatchmakingMode(raw.GKMatchmakingMode(matchmakingMode))
 }
 
+// A BOOL value to allow the GKMatchMakerViewController to return control to the game once the minimum number of players are connected. By default the value is NO, and the multiplayer match can only proceed after all players are connected. If the value is set to YES, then once the number of connected players is greater than or equal to minPlayers of the match request, matchmakerViewController:didFindMatch: will be called and the game can get the match instance, and update the game scene accordingly. The remaining players wil continue to connect.
+//
 // CanStartWithMinimumPlayers calls the underlying CanStartWithMinimumPlayers.
 func (x *MatchmakerViewController) CanStartWithMinimumPlayers() bool {
 	return x.inner.CanStartWithMinimumPlayers()
@@ -134,6 +154,8 @@ func (x *MatchmakerViewController) SetCanStartWithMinimumPlayers(canStartWithMin
 	x.inner.SetCanStartWithMinimumPlayers(canStartWithMinimumPlayers)
 }
 
+// deprecated, set the message on the match request instead
+//
 // DefaultInvitationMessage calls the underlying DefaultInvitationMessage.
 func (x *MatchmakerViewController) DefaultInvitationMessage() string {
 	_r := x.inner.DefaultInvitationMessage()
@@ -148,6 +170,8 @@ func (x *MatchmakerViewController) SetDefaultInvitationMessage(defaultInvitation
 	x.inner.SetDefaultInvitationMessage(foundation.NSStringStringWithUTF8String(defaultInvitationMessage))
 }
 
+// * This method is obsolete. It will never be invoked and its implementation does nothing**
+//
 // SetHostedPlayerConnected calls the underlying SetHostedPlayerConnected.
 func (x *MatchmakerViewController) SetHostedPlayerConnected(playerID string, connected bool) {
 	x.inner.SetHostedPlayerConnected(foundation.NSStringStringWithUTF8String(playerID), connected)

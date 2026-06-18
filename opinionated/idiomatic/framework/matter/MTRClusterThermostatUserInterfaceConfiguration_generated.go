@@ -32,6 +32,8 @@ func MTRClusterThermostatUserInterfaceConfigurationFromID(id objc.ID) *MTRCluste
 	return &MTRClusterThermostatUserInterfaceConfiguration{inner: raw.MTRClusterThermostatUserInterfaceConfigurationFromID(id)}
 }
 
+// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+//
 // NewMTRClusterThermostatUserInterfaceConfigurationWithDeviceEndpointIDQueue creates a new [MTRClusterThermostatUserInterfaceConfiguration].
 func NewMTRClusterThermostatUserInterfaceConfigurationWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterThermostatUserInterfaceConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterThermostatUserInterfaceConfiguration")), objc.RegisterName("alloc"))

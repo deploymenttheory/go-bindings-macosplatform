@@ -37,23 +37,31 @@ func NewConeDirectivityModelSubbandParameters() *ConeDirectivityModelSubbandPara
 	return &ConeDirectivityModelSubbandParameters{inner: raw.PHASEConeDirectivityModelSubbandParametersFromID(_id)}
 }
 
+// @property frequency @abstract The frequency of the subband, in hertz. @note Default value is 1000.0.
+//
 // WithFrequency sets the frequency property and returns the receiver for chaining.
 func (x *ConeDirectivityModelSubbandParameters) WithFrequency(frequency float64) *ConeDirectivityModelSubbandParameters {
 	x.inner.SetFrequency(frequency)
 	return x
 }
 
+// @property outerGain @abstract The outer gain. @note Values are clamped to the range [0.0, 1.0]. Default value is 1.0.
+//
 // WithOuterGain sets the outerGain property and returns the receiver for chaining.
 func (x *ConeDirectivityModelSubbandParameters) WithOuterGain(outerGain float64) *ConeDirectivityModelSubbandParameters {
 	x.inner.SetOuterGain(outerGain)
 	return x
 }
 
+// @method setInnerAngle:outerAngle @abstract Set the innerAngle and outerAngle of the Cone Directivity Model Subband @param innerAngle The inner angle of the cone directivity model, must be less than or equal to outer angle. @param outerAngle The outer angle of the cone directivity model, must be greater than or equal to inner angle. @note The default value for each angle is 360.0. outerAngle must be >= innerAngle.
+//
 // SetInnerAngleOuterAngle calls the underlying SetInnerAngleOuterAngle.
 func (x *ConeDirectivityModelSubbandParameters) SetInnerAngleOuterAngle(innerAngle float64, outerAngle float64) {
 	x.inner.SetInnerAngleOuterAngle(innerAngle, outerAngle)
 }
 
+// @property frequency @abstract The frequency of the subband, in hertz. @note Default value is 1000.0.
+//
 // Frequency calls the underlying Frequency.
 func (x *ConeDirectivityModelSubbandParameters) Frequency() float64 {
 	return x.inner.Frequency()
@@ -64,16 +72,22 @@ func (x *ConeDirectivityModelSubbandParameters) SetFrequency(frequency float64) 
 	x.inner.SetFrequency(frequency)
 }
 
+// @property innerAngle @abstract The inner angle, in degrees. @note Default value is 360.0.
+//
 // InnerAngle calls the underlying InnerAngle.
 func (x *ConeDirectivityModelSubbandParameters) InnerAngle() float64 {
 	return x.inner.InnerAngle()
 }
 
+// @property outerAngle @abstract The outer angle, in degrees. @note Default value is 360.0.
+//
 // OuterAngle calls the underlying OuterAngle.
 func (x *ConeDirectivityModelSubbandParameters) OuterAngle() float64 {
 	return x.inner.OuterAngle()
 }
 
+// @property outerGain @abstract The outer gain. @note Values are clamped to the range [0.0, 1.0]. Default value is 1.0.
+//
 // OuterGain calls the underlying OuterGain.
 func (x *ConeDirectivityModelSubbandParameters) OuterGain() float64 {
 	return x.inner.OuterGain()

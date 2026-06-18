@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A view that allows user interaction with a VM.
+//
 // VirtualMachineView wraps [raw.VZVirtualMachineView] with a fluent Go API.
 type VirtualMachineView struct {
 	inner *raw.VZVirtualMachineView
@@ -35,24 +37,32 @@ func NewVirtualMachineView() *VirtualMachineView {
 	return &VirtualMachineView{inner: raw.VZVirtualMachineViewFromID(_id)}
 }
 
+// The VM to display in the view.
+//
 // WithVirtualMachine sets the virtualMachine property and returns the receiver for chaining.
 func (x *VirtualMachineView) WithVirtualMachine(virtualMachine *VirtualMachine) *VirtualMachineView {
 	x.inner.SetVirtualMachine(virtualMachine.Unwrap())
 	return x
 }
 
+// A Boolean value that determines whether the system should send certain system keyboard shortcuts to the guest instead of the host.
+//
 // WithCapturesSystemKeys sets the capturesSystemKeys property and returns the receiver for chaining.
 func (x *VirtualMachineView) WithCapturesSystemKeys(capturesSystemKeys bool) *VirtualMachineView {
 	x.inner.SetCapturesSystemKeys(capturesSystemKeys)
 	return x
 }
 
+// A Boolean value that indicates whether the graphics display associated with this view automatically reconfigures with respect to view changes.
+//
 // WithAutomaticallyReconfiguresDisplay sets the automaticallyReconfiguresDisplay property and returns the receiver for chaining.
 func (x *VirtualMachineView) WithAutomaticallyReconfiguresDisplay(automaticallyReconfiguresDisplay bool) *VirtualMachineView {
 	x.inner.SetAutomaticallyReconfiguresDisplay(automaticallyReconfiguresDisplay)
 	return x
 }
 
+// @abstract The virtual machine to display in the view.
+//
 // VirtualMachine calls the underlying VirtualMachine.
 func (x *VirtualMachineView) VirtualMachine() *VirtualMachine {
 	_r := x.inner.VirtualMachine()
@@ -67,6 +77,8 @@ func (x *VirtualMachineView) SetVirtualMachine(virtualMachine *raw.VZVirtualMach
 	x.inner.SetVirtualMachine(virtualMachine)
 }
 
+// @abstract Whether certain system hot keys should be sent to the guest instead of the host. Defaults to NO.
+//
 // CapturesSystemKeys calls the underlying CapturesSystemKeys.
 func (x *VirtualMachineView) CapturesSystemKeys() bool {
 	return x.inner.CapturesSystemKeys()
@@ -77,6 +89,8 @@ func (x *VirtualMachineView) SetCapturesSystemKeys(capturesSystemKeys bool) {
 	x.inner.SetCapturesSystemKeys(capturesSystemKeys)
 }
 
+// @abstract Automatically reconfigures the graphics display associated with this view with respect to view changes. Defaults to NO. @discussion Automatically resize or reconfigure this graphics display when the view properties update. For example, resizing the display when the view has a live resize operation. When enabled, the graphics display will automatically be reconfigured to match the host display environment. This property can only be set on a single VZVirtualMachineView targeting a particular VZGraphicsDisplay at a time. If multiple VZVirtualMachineViews targeting the same VZGraphicsDisplay enable this property, only one view will respect the property, and the other view will have had the property disabled.
+//
 // AutomaticallyReconfiguresDisplay calls the underlying AutomaticallyReconfiguresDisplay.
 func (x *VirtualMachineView) AutomaticallyReconfiguresDisplay() bool {
 	return x.inner.AutomaticallyReconfiguresDisplay()

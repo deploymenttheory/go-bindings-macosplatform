@@ -32,6 +32,8 @@ func CNNBinaryFullyConnectedFromID(id objc.ID) *CNNBinaryFullyConnected {
 	return &CNNBinaryFullyConnected{inner: raw.MPSCNNBinaryFullyConnectedFromID(id)}
 }
 
+// @abstract   Initializes a binary fully connected kernel with binary weights and a single scaling term. @param      device                          The MTLDevice on which this MPSCNNBinaryFullyConnected filter will be used @param      convolutionData                 A pointer to a object that conforms to the MPSCNNConvolutionDataSource protocol. The MPSCNNConvolutionDataSource protocol declares the methods that an instance of MPSCNNBinaryFullyConnected uses to obtain the weights and bias terms as well as the convolution descriptor. Each entry in the convolutionData:weights array is a 32-bit unsigned integer value and each bit represents one filter weight (given in machine byte order). The featurechannel indices increase from the least significant bit within the 32-bits. The number of entries is = ceil( inputFeatureChannels/32.0 ) * outputFeatureChannels * kernelHeight * kernelWidth The layout of filter weight is so that it can be reinterpreted as a 4D tensor (array) weight[ outputChannels ][ kernelHeight ][ kernelWidth ][ ceil( inputChannels / 32.0 ) ] (The ordering of the reduction from 4D tensor to 1D is per C convention. The index based on inputchannels varies most rapidly, followed by kernelWidth, then kernelHeight and finally outputChannels varies least rapidly.) @param      scaleValue                      A single floating point value used to scale the entire convolution. Each entry is a float value. The number of entries is 'inputFeatureChannels'. If nil then 1.0 is used. @param      type                            What kind of binarization strategy is to be used. @param      flags                           See documentation above and documentation of MPSCNNBinaryConvolutionFlags. @return     A valid MPSCNNBinaryFullyConnected object or nil, if failure.
+//
 // NewCNNBinaryFullyConnectedWithDeviceConvolutionDataScaleValueTypeFlags creates a new [CNNBinaryFullyConnected].
 func NewCNNBinaryFullyConnectedWithDeviceConvolutionDataScaleValueTypeFlags(device metal.MTLDevice, convolutionData raw.MPSCNNConvolutionDataSource, scaleValue float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *CNNBinaryFullyConnected {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNBinaryFullyConnected")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewCNNBinaryFullyConnectedWithDeviceConvolutionDataScaleValueTypeFlags(devi
 	return &CNNBinaryFullyConnected{inner: raw.MPSCNNBinaryFullyConnectedFromID(_id)}
 }
 
+// @abstract   Initializes a binary fully connected kernel with binary weights as well as both pre and post scaling terms. @param      device                          The MTLDevice on which this MPSCNNBinaryFullyConnected filter will be used @param      convolutionData                 A pointer to a object that conforms to the MPSCNNConvolutionDataSource protocol. The MPSCNNConvolutionDataSource protocol declares the methods that an instance of MPSCNNBinaryFullyConnected uses to obtain the weights and the convolution descriptor. Each entry in the convolutionData:weights array is a 32-bit unsigned integer value and each bit represents one filter weight (given in machine byte order). The featurechannel indices increase from the least significant bit within the 32-bits. The number of entries is = ceil( inputFeatureChannels/32.0 ) * outputFeatureChannels * kernelHeight * kernelWidth The layout of filter weight is so that it can be reinterpreted as a 4D tensor (array) weight[ outputChannels ][ kernelHeight ][ kernelWidth ][ ceil( inputChannels / 32.0 ) ] (The ordering of the reduction from 4D tensor to 1D is per C convention. The index based on inputchannels varies most rapidly, followed by kernelWidth, then kernelHeight and finally outputChannels varies least rapidly.) @param      outputBiasTerms                 A pointer to bias terms to be applied to the convolution output.  Each entry is a float value. The number of entries is = numberOfOutputFeatureMaps. If nil then 0.0 is used for bias. The values stored in the pointer are copied in and the array can be freed after this function returns. @param      outputScaleTerms                A pointer to scale terms to be applied to binary convolution results per output feature channel. Each entry is a float value. The number of entries is = numberOfOutputFeatureMaps. If nil then 1.0 is used. The values stored in the pointer are copied in and the array can be freed after this function returns. @param      inputBiasTerms                  A pointer to offset terms to be applied to the input before convolution and before input scaling. Each entry is a float value. The number of entries is 'inputFeatureChannels'. If NULL then 0.0 is used for bias. The values stored in the pointer are copied in and the array can be freed after this function returns. @param      inputScaleTerms                 A pointer to scale terms to be applied to the input before convolution, but after input biasing. Each entry is a float value. The number of entries is 'inputFeatureChannels'. If nil then 1.0 is used. The values stored in the pointer are copied in and the array can be freed after this function returns. @param      type                            What kind of binarization strategy is to be used. @param      flags                           See documentation above and documentation of MPSCNNBinaryConvolutionFlags. @return     A valid MPSCNNBinaryFullyConnected object or nil, if failure.
+//
 // NewCNNBinaryFullyConnectedWithDeviceConvolutionDataOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags creates a new [CNNBinaryFullyConnected].
 func NewCNNBinaryFullyConnectedWithDeviceConvolutionDataOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(device metal.MTLDevice, convolutionData raw.MPSCNNConvolutionDataSource, outputBiasTerms *float32, outputScaleTerms *float32, inputBiasTerms *float32, inputScaleTerms *float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *CNNBinaryFullyConnected {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNBinaryFullyConnected")), objc.RegisterName("alloc"))
@@ -46,6 +50,8 @@ func NewCNNBinaryFullyConnectedWithDeviceConvolutionDataOutputBiasTermsOutputSca
 	return &CNNBinaryFullyConnected{inner: raw.MPSCNNBinaryFullyConnectedFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+//
 // NewCNNBinaryFullyConnectedWithCoderDevice creates a new [CNNBinaryFullyConnected].
 func NewCNNBinaryFullyConnectedWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *CNNBinaryFullyConnected {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNBinaryFullyConnected")), objc.RegisterName("alloc"))
@@ -53,48 +59,64 @@ func NewCNNBinaryFullyConnectedWithCoderDevice(aDecoder *foundation.NSCoder, dev
 	return &CNNBinaryFullyConnected{inner: raw.MPSCNNBinaryFullyConnectedFromID(_id)}
 }
 
+// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+//
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *CNNBinaryFullyConnected) WithOffset(offset mpscore.MPSOffset) *CNNBinaryFullyConnected {
 	x.inner.MPSCNNBinaryConvolution.MPSCNNKernel.SetOffset(offset)
 	return x
 }
 
+// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+//
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *CNNBinaryFullyConnected) WithClipRect(clipRect metal.MTLRegion) *CNNBinaryFullyConnected {
 	x.inner.MPSCNNBinaryConvolution.MPSCNNKernel.SetClipRect(clipRect)
 	return x
 }
 
+// @property   destinationFeatureChannelOffset @abstract   The number of channels in the destination MPSImage to skip before writing output. @discussion This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, the destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and the destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+//
 // WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
 func (x *CNNBinaryFullyConnected) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNBinaryFullyConnected {
 	x.inner.MPSCNNBinaryConvolution.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
 	return x
 }
 
+// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+//
 // WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
 func (x *CNNBinaryFullyConnected) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNBinaryFullyConnected {
 	x.inner.MPSCNNBinaryConvolution.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
 	return x
 }
 
+// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+//
 // WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
 func (x *CNNBinaryFullyConnected) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNBinaryFullyConnected {
 	x.inner.MPSCNNBinaryConvolution.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
 	return x
 }
 
+// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode Note: For @ref MPSCNNPoolingAverage specifying edge mode @ref MPSImageEdgeModeClamp is interpreted as a "shrink-to-edge" operation, which shrinks the effective filtering window to remain within the source image borders.
+//
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *CNNBinaryFullyConnected) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNBinaryFullyConnected {
 	x.inner.MPSCNNBinaryConvolution.MPSCNNKernel.SetEdgeMode(edgeMode)
 	return x
 }
 
+// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
+//
 // WithPadding sets the padding property and returns the receiver for chaining.
 func (x *CNNBinaryFullyConnected) WithPadding(padding raw.MPSNNPadding) *CNNBinaryFullyConnected {
 	x.inner.MPSCNNBinaryConvolution.MPSCNNKernel.SetPadding(padding)
 	return x
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
 func (x *CNNBinaryFullyConnected) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNBinaryFullyConnected {
 	x.inner.MPSCNNBinaryConvolution.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)

@@ -38,6 +38,8 @@ func NewSyncEngineDidFetchRecordZoneChangesEvent() *SyncEngineDidFetchRecordZone
 	return &SyncEngineDidFetchRecordZoneChangesEvent{inner: raw.CKSyncEngineDidFetchRecordZoneChangesEventFromID(_id)}
 }
 
+// The associated record zone's unique identifier.
+//
 // ZoneID calls the underlying ZoneID.
 func (x *SyncEngineDidFetchRecordZoneChangesEvent) ZoneID() *RecordZoneID {
 	_r := x.inner.ZoneID()
@@ -47,6 +49,8 @@ func (x *SyncEngineDidFetchRecordZoneChangesEvent) ZoneID() *RecordZoneID {
 	return &RecordZoneID{inner: _r}
 }
 
+// An error that describes the cause of a failed fetch operation. A `nil` value indicates a successful fetch.
+//
 // Error calls the underlying Error.
 func (x *SyncEngineDidFetchRecordZoneChangesEvent) Error() unsafe.Pointer {
 	return x.inner.Error()

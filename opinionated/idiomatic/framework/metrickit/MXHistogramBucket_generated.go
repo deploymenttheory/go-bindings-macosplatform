@@ -36,16 +36,22 @@ func NewHistogramBucket() *HistogramBucket {
 	return &HistogramBucket{inner: raw.MXHistogramBucketFromID[objc.ID](_id)}
 }
 
+// @property      bucketStart @abstract      An NSMeasurement representing the start of a histogram bucket.
+//
 // BucketStart calls the underlying BucketStart.
 func (x *HistogramBucket) BucketStart() *foundation.NSMeasurement[objc.ID] {
 	return x.inner.BucketStart()
 }
 
+// @property      bucketEnd @abstract      An NSMeasurement representing the end of a histogram bucket.
+//
 // BucketEnd calls the underlying BucketEnd.
 func (x *HistogramBucket) BucketEnd() *foundation.NSMeasurement[objc.ID] {
 	return x.inner.BucketEnd()
 }
 
+// @property      bucketCount @abstract      An NSUInteger representing the number of samples in this histogram bucket.
+//
 // BucketCount calls the underlying BucketCount.
 func (x *HistogramBucket) BucketCount() uint {
 	return x.inner.BucketCount()

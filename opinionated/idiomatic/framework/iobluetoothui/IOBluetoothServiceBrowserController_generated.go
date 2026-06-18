@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// @class IOBluetoothServiceBrowserController @abstract A NSWindowController subclass to display a window to search for and perform SDP queries on bluetooth devices within range. @discussion This NSWindowController subclass will bring up a generic Bluetooth search and SDP browsing window allowing the user to find devices within range, perform SDP queries on a particular device, and select a SDP service to connect to.  The client application can provide NSArrays of valid service UUIDs to allow, and an NSArray of valid device types to allow.  The device type filter is not yet implemented.
+//
 // BluetoothServiceBrowserController wraps [raw.IOBluetoothServiceBrowserController] with a fluent Go API.
 type BluetoothServiceBrowserController struct {
 	inner *raw.IOBluetoothServiceBrowserController
@@ -42,26 +44,36 @@ func NewBluetoothServiceBrowserController() *BluetoothServiceBrowserController {
 	return &BluetoothServiceBrowserController{inner: raw.IOBluetoothServiceBrowserControllerFromID(_id)}
 }
 
+// @method	getServiceBrowserControllerRef @abstract	Returns an IOBluetoothServiceBrowserControllerRef representation of the target IOBluetoothServiceBrowserController object. @result		Returns an IOBluetoothServiceBrowserControllerRef representation of the target IOBluetoothServiceBrowserController object.
+//
 // GetServiceBrowserControllerRef calls the underlying GetServiceBrowserControllerRef.
 func (x *BluetoothServiceBrowserController) GetServiceBrowserControllerRef() unsafe.Pointer {
 	return x.inner.GetServiceBrowserControllerRef()
 }
 
+// @method	discover: @abstract	Invoke an already created window controller to display, and run the modal dialog. @discussion	***WARNING*** This method has been deprecated in favor of -runModal and -getResults. @param		outRecord 	Pointer to a (IOBluetoothSDPServiceRecord *) object.  This will get allocated and returned to the client if the user selects a service. @result		IOReturn - kIOReturnSuccess  - on successful completion. kCanceledErr - User canceled. @discussion	This method will run the IOBluetoothServiceBrowserController browser window modally.
+//
 // Discover calls the underlying Discover.
 func (x *BluetoothServiceBrowserController) Discover(outRecord *iobluetooth.IOBluetoothSDPServiceRecord) int {
 	return x.inner.Discover(outRecord)
 }
 
+// @method	discoverAsSheetForWindow:withRecord: @abstract	Invoke an already created window controller to display, and run the modal dialog. @discussion	***WARNING*** This method has been deprecated in favor of -beginSheetModalForWindow:... and -getResults. @param		sheetWindow 	The window to use for the anchor of the sheet.. @param		outRecord 	Pointer to a (IOBluetoothSDPServiceRecord *) object.  This will get allocated and returned to the client if the user selects a service. @result		IOReturn - kIOReturnSuccess  - on successful completion. kCanceledErr - User canceled. @discussion	This method will run the IOBluetoothServiceBrowserController browser window as a sheet for the window passed to it in sheetWindow.
+//
 // DiscoverAsSheetForWindowWithRecord calls the underlying DiscoverAsSheetForWindowWithRecord.
 func (x *BluetoothServiceBrowserController) DiscoverAsSheetForWindowWithRecord(sheetWindow *appkit.NSWindow, outRecord *iobluetooth.IOBluetoothSDPServiceRecord) int {
 	return x.inner.DiscoverAsSheetForWindowWithRecord(sheetWindow, outRecord)
 }
 
+// @method	discoverWithDeviceAttributes:serviceList:serviceRecord: @abstract	Invoke an already created window controller to display, and run the modal dialog. @discussion	***WARNING*** This method has been deprecated in favor of -setSearchAttributes:, -addAllowedUUID:, -runModal and -getResults. @param		deviceArray 	A NSArray of valid device type objects to allow.  Not implemented yet. @param		serviceArray 	A NSArray of valid UUIDs to allow. The array should contain NSData objects specifying the UUID to allow.  We currently only support 16-bit short UUID forms, but will allow for any of the 16, 32 or full 128-bit UUID forms. @param		outRecord 	Pointer to a (IOBluetoothSDPServiceRecord *) object.  This will get allocated and returned to the client if the user selects a service. @result		IOReturn - kIOReturnSuccess  - on successful completion. kCanceledErr - User canceled. @discussion	This method will run the IOBluetoothServiceBrowserController browser window as a sheet for the window passed to it in sheetWindow.
+//
 // DiscoverWithDeviceAttributesServiceListServiceRecord calls the underlying DiscoverWithDeviceAttributesServiceListServiceRecord.
 func (x *BluetoothServiceBrowserController) DiscoverWithDeviceAttributesServiceListServiceRecord(deviceAttributes *iobluetooth.IOBluetoothDeviceSearchAttributes, serviceArray *foundation.NSArray[objc.ID], outRecord *iobluetooth.IOBluetoothSDPServiceRecord) int {
 	return x.inner.DiscoverWithDeviceAttributesServiceListServiceRecord(deviceAttributes, serviceArray, outRecord)
 }
 
+// @method	setOptions: @abstract	Modify the options for the window controller. @param		inOptions 	Bit field to set the options to. @result		None. @discussion	This method will set the options for the browser to new values.
+//
 // SetOptions calls the underlying SetOptions.
 func (x *BluetoothServiceBrowserController) SetOptions(inOptions uint32) {
 	x.inner.SetOptions(inOptions)

@@ -35,36 +35,48 @@ func NewRNNDescriptor() *RNNDescriptor {
 	return &RNNDescriptor{inner: raw.MPSRNNDescriptorFromID(_id)}
 }
 
+// @property   inputFeatureChannels @abstract   The number of feature channels per pixel in the input image or number of rows in the input matrix.
+//
 // WithInputFeatureChannels sets the inputFeatureChannels property and returns the receiver for chaining.
 func (x *RNNDescriptor) WithInputFeatureChannels(inputFeatureChannels uint) *RNNDescriptor {
 	x.inner.SetInputFeatureChannels(inputFeatureChannels)
 	return x
 }
 
+// @property   outputFeatureChannels @abstract   The number of feature channels per pixel in the destination image or number of rows in the destination matrix.
+//
 // WithOutputFeatureChannels sets the outputFeatureChannels property and returns the receiver for chaining.
 func (x *RNNDescriptor) WithOutputFeatureChannels(outputFeatureChannels uint) *RNNDescriptor {
 	x.inner.SetOutputFeatureChannels(outputFeatureChannels)
 	return x
 }
 
+// @property   useLayerInputUnitTransformMode @abstract   if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in @ref MPSRNNSingleGateDescriptor. Defaults to NO.
+//
 // WithUseLayerInputUnitTransformMode sets the useLayerInputUnitTransformMode property and returns the receiver for chaining.
 func (x *RNNDescriptor) WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *RNNDescriptor {
 	x.inner.SetUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode)
 	return x
 }
 
+// @property   useFloat32Weights @abstract   If YES, then @ref MPSRNNMatrixInferenceLayer uses 32-bit floating point numbers internally for weights when computing matrix transformations. If NO, then 16-bit, half precision floating point numbers are used. Currently @ref MPSRNNImageInferenceLayer ignores this property and the convolution operations always convert FP32 weights into FP16 for better performance. Defaults to NO.
+//
 // WithUseFloat32Weights sets the useFloat32Weights property and returns the receiver for chaining.
 func (x *RNNDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *RNNDescriptor {
 	x.inner.SetUseFloat32Weights(useFloat32Weights)
 	return x
 }
 
+// @property   layerSequenceDirection @abstract   When the layer specified with this descriptor is used to process a sequence of inputs by calling @see encodeBidirectionalSequenceToCommandBuffer then this parameter defines in which direction the sequence is processed. The operation of the layer is: (yt, ht, ct) = f(xt,ht-1,ct-1) for MPSRNNSequenceDirectionForward and (yt, ht, ct) = f(xt,ht+1,ct+1) for MPSRNNSequenceDirectionBackward, where xt is the output of the previous layer that encodes in the same direction as this layer, (or the input image or matrix if this is the first layer in stack with this direction). @see MPSRNNImageInferenceLayer and @see MPSRNNMatrixInferenceLayer.
+//
 // WithLayerSequenceDirection sets the layerSequenceDirection property and returns the receiver for chaining.
 func (x *RNNDescriptor) WithLayerSequenceDirection(layerSequenceDirection MPSRNNSequenceDirection) *RNNDescriptor {
 	x.inner.SetLayerSequenceDirection(raw.MPSRNNSequenceDirection(layerSequenceDirection))
 	return x
 }
 
+// @property   inputFeatureChannels @abstract   The number of feature channels per pixel in the input image or number of rows in the input matrix.
+//
 // InputFeatureChannels calls the underlying InputFeatureChannels.
 func (x *RNNDescriptor) InputFeatureChannels() uint {
 	return x.inner.InputFeatureChannels()
@@ -75,6 +87,8 @@ func (x *RNNDescriptor) SetInputFeatureChannels(inputFeatureChannels uint) {
 	x.inner.SetInputFeatureChannels(inputFeatureChannels)
 }
 
+// @property   outputFeatureChannels @abstract   The number of feature channels per pixel in the destination image or number of rows in the destination matrix.
+//
 // OutputFeatureChannels calls the underlying OutputFeatureChannels.
 func (x *RNNDescriptor) OutputFeatureChannels() uint {
 	return x.inner.OutputFeatureChannels()
@@ -85,6 +99,8 @@ func (x *RNNDescriptor) SetOutputFeatureChannels(outputFeatureChannels uint) {
 	x.inner.SetOutputFeatureChannels(outputFeatureChannels)
 }
 
+// @property   useLayerInputUnitTransformMode @abstract   if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in @ref MPSRNNSingleGateDescriptor. Defaults to NO.
+//
 // UseLayerInputUnitTransformMode calls the underlying UseLayerInputUnitTransformMode.
 func (x *RNNDescriptor) UseLayerInputUnitTransformMode() bool {
 	return x.inner.UseLayerInputUnitTransformMode()
@@ -95,6 +111,8 @@ func (x *RNNDescriptor) SetUseLayerInputUnitTransformMode(useLayerInputUnitTrans
 	x.inner.SetUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode)
 }
 
+// @property   useFloat32Weights @abstract   If YES, then @ref MPSRNNMatrixInferenceLayer uses 32-bit floating point numbers internally for weights when computing matrix transformations. If NO, then 16-bit, half precision floating point numbers are used. Currently @ref MPSRNNImageInferenceLayer ignores this property and the convolution operations always convert FP32 weights into FP16 for better performance. Defaults to NO.
+//
 // UseFloat32Weights calls the underlying UseFloat32Weights.
 func (x *RNNDescriptor) UseFloat32Weights() bool {
 	return x.inner.UseFloat32Weights()
@@ -105,6 +123,8 @@ func (x *RNNDescriptor) SetUseFloat32Weights(useFloat32Weights bool) {
 	x.inner.SetUseFloat32Weights(useFloat32Weights)
 }
 
+// @property   layerSequenceDirection @abstract   When the layer specified with this descriptor is used to process a sequence of inputs by calling @see encodeBidirectionalSequenceToCommandBuffer then this parameter defines in which direction the sequence is processed. The operation of the layer is: (yt, ht, ct) = f(xt,ht-1,ct-1) for MPSRNNSequenceDirectionForward and (yt, ht, ct) = f(xt,ht+1,ct+1) for MPSRNNSequenceDirectionBackward, where xt is the output of the previous layer that encodes in the same direction as this layer, (or the input image or matrix if this is the first layer in stack with this direction). @see MPSRNNImageInferenceLayer and @see MPSRNNMatrixInferenceLayer.
+//
 // LayerSequenceDirection calls the underlying LayerSequenceDirection.
 func (x *RNNDescriptor) LayerSequenceDirection() MPSRNNSequenceDirection {
 	return MPSRNNSequenceDirection(x.inner.LayerSequenceDirection())

@@ -39,6 +39,8 @@ func NewMetricPlayerItemVariantSwitchStartEvent() *MetricPlayerItemVariantSwitch
 	return &MetricPlayerItemVariantSwitchStartEvent{inner: raw.AVMetricPlayerItemVariantSwitchStartEventFromID(_id)}
 }
 
+// Returns the variant from which the switch is attempted. If no value is available, returns nil
+//
 // FromVariant calls the underlying FromVariant.
 func (x *MetricPlayerItemVariantSwitchStartEvent) FromVariant() *AssetVariant {
 	_r := x.inner.FromVariant()
@@ -48,6 +50,8 @@ func (x *MetricPlayerItemVariantSwitchStartEvent) FromVariant() *AssetVariant {
 	return &AssetVariant{inner: _r}
 }
 
+// Returns the variant to which the switch is attempted.
+//
 // ToVariant calls the underlying ToVariant.
 func (x *MetricPlayerItemVariantSwitchStartEvent) ToVariant() *AssetVariant {
 	_r := x.inner.ToVariant()
@@ -57,6 +61,8 @@ func (x *MetricPlayerItemVariantSwitchStartEvent) ToVariant() *AssetVariant {
 	return &AssetVariant{inner: _r}
 }
 
+// This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
+//
 // LoadedTimeRanges returns the collection as a Go slice.
 func (x *MetricPlayerItemVariantSwitchStartEvent) LoadedTimeRanges() []*foundation.NSValue {
 	arr := x.inner.LoadedTimeRanges()
@@ -68,6 +74,8 @@ func (x *MetricPlayerItemVariantSwitchStartEvent) LoadedTimeRanges() []*foundati
 	})
 }
 
+// @property videoRendition @abstract Contains information corresponding to the currently selected video rendition.
+//
 // VideoRendition calls the underlying VideoRendition.
 func (x *MetricPlayerItemVariantSwitchStartEvent) VideoRendition() *MetricMediaRendition {
 	_r := x.inner.VideoRendition()
@@ -77,6 +85,8 @@ func (x *MetricPlayerItemVariantSwitchStartEvent) VideoRendition() *MetricMediaR
 	return &MetricMediaRendition{inner: _r}
 }
 
+// @property audioRendition @abstract Contains information corresponding to the currently selected audio rendition.
+//
 // AudioRendition calls the underlying AudioRendition.
 func (x *MetricPlayerItemVariantSwitchStartEvent) AudioRendition() *MetricMediaRendition {
 	_r := x.inner.AudioRendition()
@@ -86,6 +96,8 @@ func (x *MetricPlayerItemVariantSwitchStartEvent) AudioRendition() *MetricMediaR
 	return &MetricMediaRendition{inner: _r}
 }
 
+// @property subtitleRendition @abstract Contains information corresponding to the currently selected subtitle rendition.
+//
 // SubtitleRendition calls the underlying SubtitleRendition.
 func (x *MetricPlayerItemVariantSwitchStartEvent) SubtitleRendition() *MetricMediaRendition {
 	_r := x.inner.SubtitleRendition()

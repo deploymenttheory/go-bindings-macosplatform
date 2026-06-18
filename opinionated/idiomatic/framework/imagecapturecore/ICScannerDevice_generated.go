@@ -37,59 +37,81 @@ func NewScannerDevice() *ScannerDevice {
 	return &ScannerDevice{inner: raw.ICScannerDeviceFromID(_id)}
 }
 
+// @property transferMode @abstract ￼The transfer mode for scanned document.
+//
 // WithTransferMode sets the transferMode property and returns the receiver for chaining.
 func (x *ScannerDevice) WithTransferMode(transferMode ICScannerTransferMode) *ScannerDevice {
 	x.inner.SetTransferMode(raw.ICScannerTransferMode(transferMode))
 	return x
 }
 
+// @property maxMemoryBandSize @abstract ￼The total maximum band size requested when performing a ICScannerTransferModeMemoryBased.
+//
 // WithMaxMemoryBandSize sets the maxMemoryBandSize property and returns the receiver for chaining.
 func (x *ScannerDevice) WithMaxMemoryBandSize(maxMemoryBandSize uint) *ScannerDevice {
 	x.inner.SetMaxMemoryBandSize(maxMemoryBandSize)
 	return x
 }
 
+// @property delegate @abstract The delegate to receive messages once a session is opened on the device. @discussion The delegate must conform ICDeviceDelegate protocol. In addition it should respond to selectors defined in ICCameraDeviceDelegate protocol in order to effectively interact with the device object. The messages this delegate can expect to receive are described by these protocols.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *ScannerDevice) WithDelegate(delegate raw.ICDeviceDelegate) *ScannerDevice {
 	x.inner.ICDevice.SetDelegate(delegate)
 	return x
 }
 
+// @method requestOpenSessionWithCredentials: @abstract This message requests to open a session on the protected device with the authorized username and passcode.  If the device reports back a failure of credentials, they can be provided here for the launch. A client MUST open a session on a device in order to use the device. @discussion Make sure the receiver's delegate is set prior to sending this message; otherwise this message will be ignored. This request is completed when the delegate receives a "device:didOpenSessionWithError:" message. No more messages will be sent to the delegate if this request fails.
+//
 // RequestOpenSessionWithCredentialsPassword calls the underlying RequestOpenSessionWithCredentialsPassword.
 func (x *ScannerDevice) RequestOpenSessionWithCredentialsPassword(username string, password string) {
 	x.inner.RequestOpenSessionWithCredentialsPassword(foundation.NSStringStringWithUTF8String(username), foundation.NSStringStringWithUTF8String(password))
 }
 
+// @method requestSelectFunctionalUnit:delegate:selector:contextInfo: @abstract Requests the scanner device to select a functional unit. @discussion When this request is completed, the delegate will be notified using the 'scannerDevice:didSelectFunctionalUnit:error:' message.
+//
 // RequestSelectFunctionalUnit calls the underlying RequestSelectFunctionalUnit.
 func (x *ScannerDevice) RequestSelectFunctionalUnit(type_ ICScannerFunctionalUnitType) {
 	x.inner.RequestSelectFunctionalUnit(raw.ICScannerFunctionalUnitType(type_))
 }
 
+// @method requestOverviewScan @abstract Starts an overview scan on selectedFunctionalUnit. @discussion When this request is completed, the delegate will be notified using the 'scannerDevice:didCompleteOverviewScanWithError:' message. The content of error returned should be examined to determine if the request completed successfully.
+//
 // RequestOverviewScan calls the underlying RequestOverviewScan.
 func (x *ScannerDevice) RequestOverviewScan() {
 	x.inner.RequestOverviewScan()
 }
 
+// @method requestScan @abstract Starts a scan on selectedFunctionalUnit. @discussion When this request is completed, the delegate will be notified using the 'scannerDevice:didCompleteScanWithError:' message. The content of error returned should be examined to determine if the request completed successfully.
+//
 // RequestScan calls the underlying RequestScan.
 func (x *ScannerDevice) RequestScan() {
 	x.inner.RequestScan()
 }
 
+// @method cancelScan @abstract Cancels the current scan operation started by sending a 'requestOverviewScan' or 'requestScan'.
+//
 // CancelScan calls the underlying CancelScan.
 func (x *ScannerDevice) CancelScan() {
 	x.inner.CancelScan()
 }
 
+// @property availableFunctionalUnitTypes @abstract ￼An array of functional unit types available on this scanner device. This is an array of NSNumber objects whose values are of type ICScannerFunctionalUnitType.
+//
 // AvailableFunctionalUnitTypes calls the underlying AvailableFunctionalUnitTypes.
 func (x *ScannerDevice) AvailableFunctionalUnitTypes() unsafe.Pointer {
 	return x.inner.AvailableFunctionalUnitTypes()
 }
 
+// @property selectedFunctionalUnit @abstract ￼The currently selected functional unit on the scanner device.
+//
 // SelectedFunctionalUnit calls the underlying SelectedFunctionalUnit.
 func (x *ScannerDevice) SelectedFunctionalUnit() unsafe.Pointer {
 	return x.inner.SelectedFunctionalUnit()
 }
 
+// @property transferMode @abstract ￼The transfer mode for scanned document.
+//
 // TransferMode calls the underlying TransferMode.
 func (x *ScannerDevice) TransferMode() ICScannerTransferMode {
 	return ICScannerTransferMode(x.inner.TransferMode())
@@ -100,6 +122,8 @@ func (x *ScannerDevice) SetTransferMode(transferMode ICScannerTransferMode) {
 	x.inner.SetTransferMode(raw.ICScannerTransferMode(transferMode))
 }
 
+// @property maxMemoryBandSize @abstract ￼The total maximum band size requested when performing a ICScannerTransferModeMemoryBased.
+//
 // MaxMemoryBandSize calls the underlying MaxMemoryBandSize.
 func (x *ScannerDevice) MaxMemoryBandSize() uint {
 	return x.inner.MaxMemoryBandSize()
@@ -110,6 +134,8 @@ func (x *ScannerDevice) SetMaxMemoryBandSize(maxMemoryBandSize uint) {
 	x.inner.SetMaxMemoryBandSize(maxMemoryBandSize)
 }
 
+// @property downloadsDirectory @abstract ￼The downloads directory.
+//
 // DownloadsDirectory calls the underlying DownloadsDirectory.
 func (x *ScannerDevice) DownloadsDirectory() unsafe.Pointer {
 	return x.inner.DownloadsDirectory()
@@ -120,6 +146,8 @@ func (x *ScannerDevice) SetDownloadsDirectory(downloadsDirectory unsafe.Pointer)
 	x.inner.SetDownloadsDirectory(downloadsDirectory)
 }
 
+// @property documentName @abstract ￼The document name.
+//
 // DocumentName calls the underlying DocumentName.
 func (x *ScannerDevice) DocumentName() unsafe.Pointer {
 	return x.inner.DocumentName()
@@ -130,6 +158,8 @@ func (x *ScannerDevice) SetDocumentName(documentName unsafe.Pointer) {
 	x.inner.SetDocumentName(documentName)
 }
 
+// @property documentUTI @abstract ￼The document UTI. Currently supported UTIs are: kUTTypeJPEG, kUTTypeJPEG2000, kUTTypeTIFF, kUTTypePNG etc.
+//
 // DocumentUTI calls the underlying DocumentUTI.
 func (x *ScannerDevice) DocumentUTI() unsafe.Pointer {
 	return x.inner.DocumentUTI()
@@ -140,6 +170,8 @@ func (x *ScannerDevice) SetDocumentUTI(documentUTI unsafe.Pointer) {
 	x.inner.SetDocumentUTI(documentUTI)
 }
 
+// @property defaultUsername @abstract If the device is protected, instead of prompting the user for a username, this property can be set to default to a specific username as a convience.  The value will persist until reset by setting it to nil.
+//
 // DefaultUsername calls the underlying DefaultUsername.
 func (x *ScannerDevice) DefaultUsername() unsafe.Pointer {
 	return x.inner.DefaultUsername()

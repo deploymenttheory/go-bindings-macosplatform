@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// GKNoise is the object used to manipulate and combine noise in continuous 3D space.  It takes a GKNoiseSource as input. To extract and use a portion of the noise within the 3D space use the GKNoiseMap class. @see GKNoiseSource @see GKNoiseMap
+//
 // Noise wraps [raw.GKNoise] with a fluent Go API.
 type Noise struct {
 	inner *raw.GKNoise
@@ -38,6 +40,8 @@ func NewNoise() *Noise {
 	return &Noise{inner: raw.GKNoiseFromID(_id)}
 }
 
+// Initializes a noise with the specified noise source. @param noiseSource The noise source to use to initially populate the 3D noise space.
+//
 // NewNoiseWithNoiseSource creates a new [Noise].
 func NewNoiseWithNoiseSource(noiseSource *raw.GKNoiseSource) *Noise {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKNoise")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewNoiseWithNoiseSource(noiseSource *raw.GKNoiseSource) *Noise {
 	return &Noise{inner: raw.GKNoiseFromID(_id)}
 }
 
+// Initializes a noise with the specified noise source and parameters. @param noiseSource The noise source to use to initially populate the 3D noise space. @param gradientColors The color gradient to use for this noise in 'value : color' pairs.
+//
 // NewNoiseWithNoiseSourceGradientColors creates a new [Noise].
 func NewNoiseWithNoiseSourceGradientColors(noiseSource *raw.GKNoiseSource, gradientColors *foundation.NSDictionary[*foundation.NSNumber, *appkit.NSColor]) *Noise {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKNoise")), objc.RegisterName("alloc"))
@@ -52,97 +58,135 @@ func NewNoiseWithNoiseSourceGradientColors(noiseSource *raw.GKNoiseSource, gradi
 	return &Noise{inner: raw.GKNoiseFromID(_id)}
 }
 
+// Color gradient of this noise, represented as 'value : color' pairs.  Utilized when this noise is rendered to a texture.
+//
 // WithGradientColors sets the gradientColors property and returns the receiver for chaining.
 func (x *Noise) WithGradientColors(gradientColors *foundation.NSDictionary[*foundation.NSNumber, *appkit.NSColor]) *Noise {
 	x.inner.SetGradientColors(gradientColors)
 	return x
 }
 
+// The noise value at the specified sample index of the 2D plane. @param position Sample index of the extracted 2D plane at which to query the value @return The noise map value at the specified position.
+//
 // ValueAtPosition calls the underlying ValueAtPosition.
 func (x *Noise) ValueAtPosition(position unsafe.Pointer) float32 {
 	return x.inner.ValueAtPosition(position)
 }
 
+// Takes the absoltue value of all noise positions.
+//
 // ApplyAbsoluteValue calls the underlying ApplyAbsoluteValue.
 func (x *Noise) ApplyAbsoluteValue() {
 	x.inner.ApplyAbsoluteValue()
 }
 
+// Clamps all noise values to the specified bounds. @param lowerBound The noise value lower bound. @param upperBound The noise value upper bound.
+//
 // ClampWithLowerBoundUpperBound calls the underlying ClampWithLowerBoundUpperBound.
 func (x *Noise) ClampWithLowerBoundUpperBound(lowerBound float64, upperBound float64) {
 	x.inner.ClampWithLowerBoundUpperBound(lowerBound, upperBound)
 }
 
+// Raises all noise values to the specified power. @param power The power to which to raise all noise values.
+//
 // RaiseToPower calls the underlying RaiseToPower.
 func (x *Noise) RaiseToPower(power float64) {
 	x.inner.RaiseToPower(power)
 }
 
+// Inverts all noise values, from positive to negative and vice versa.
+//
 // Invert calls the underlying Invert.
 func (x *Noise) Invert() {
 	x.inner.Invert()
 }
 
+// Applies a turbulent displacement to all noise values.
+//
 // ApplyTurbulenceWithFrequencyPowerRoughnessSeed calls the underlying ApplyTurbulenceWithFrequencyPowerRoughnessSeed.
 func (x *Noise) ApplyTurbulenceWithFrequencyPowerRoughnessSeed(frequency float64, power float64, roughness int, seed int32) {
 	x.inner.ApplyTurbulenceWithFrequencyPowerRoughnessSeed(frequency, power, roughness, seed)
 }
 
+// Remaps all noise values to a smooth curve that passes through the specified control points. @param controlPoints Pairs of 'input : output' values to use as control points for the smooth remapping curve. Duplicate input values are not permitted.
+//
 // RemapValuesToCurveWithControlPoints calls the underlying RemapValuesToCurveWithControlPoints.
 func (x *Noise) RemapValuesToCurveWithControlPoints(controlPoints *foundation.NSDictionary[*foundation.NSNumber, *foundation.NSNumber]) {
 	x.inner.RemapValuesToCurveWithControlPoints(controlPoints)
 }
 
+// Remaps all noise values to one or more terraces with peaks.  Useful for creating valleys and trenches. @param peakInputValues Inputs positions of terrace peaks. @param inverted Governs the curve direction from peak to peak.
+//
 // RemapValuesToTerracesWithPeaksTerracesInverted calls the underlying RemapValuesToTerracesWithPeaksTerracesInverted.
 func (x *Noise) RemapValuesToTerracesWithPeaksTerracesInverted(peakInputValues *foundation.NSArray[*foundation.NSNumber], inverted bool) {
 	x.inner.RemapValuesToTerracesWithPeaksTerracesInverted(peakInputValues, inverted)
 }
 
+// Translates all noise values by the specified amount. @param delta The amount by which to move all noise values.
+//
 // MoveBy calls the underlying MoveBy.
 func (x *Noise) MoveBy(delta unsafe.Pointer) {
 	x.inner.MoveBy(delta)
 }
 
+// Scales all noise values by the specified amount. @param factor The factor by which to scale all noise values.
+//
 // ScaleBy calls the underlying ScaleBy.
 func (x *Noise) ScaleBy(factor unsafe.Pointer) {
 	x.inner.ScaleBy(factor)
 }
 
+// Rotates all noise values by the specified amount. @param radians The number of radians in x-, y- and z-axes by which to rotate all noise values.
+//
 // RotateBy calls the underlying RotateBy.
 func (x *Noise) RotateBy(radians unsafe.Pointer) {
 	x.inner.RotateBy(radians)
 }
 
+// Adds all noise values by the noise values at the same position in specified noise. @param noise The noise from which to add values to this noise.
+//
 // AddWithNoise calls the underlying AddWithNoise.
 func (x *Noise) AddWithNoise(noise *raw.GKNoise) {
 	x.inner.AddWithNoise(noise)
 }
 
+// Multiplies all noise values by the noise values at the same position in specified noise. @param noise The noise from which to multiply values to this noise.
+//
 // MultiplyWithNoise calls the underlying MultiplyWithNoise.
 func (x *Noise) MultiplyWithNoise(noise *raw.GKNoise) {
 	x.inner.MultiplyWithNoise(noise)
 }
 
+// Takes the minimum value between this noise and the specified noise at each position. @param noise The noise to compare against this noise at each position in determining which to take the minimum value from.
+//
 // MinimumWithNoise calls the underlying MinimumWithNoise.
 func (x *Noise) MinimumWithNoise(noise *raw.GKNoise) {
 	x.inner.MinimumWithNoise(noise)
 }
 
+// Takes the maximum value between this noise and the specified noise at each position. @param noise The noise to compare against this noise at each position in determining which to take the maximum value from.
+//
 // MaximumWithNoise calls the underlying MaximumWithNoise.
 func (x *Noise) MaximumWithNoise(noise *raw.GKNoise) {
 	x.inner.MaximumWithNoise(noise)
 }
 
+// Raises all noise values to the power of the value at the same position of the specified noise. @param noise The noise from which to raise this noise's values by.
+//
 // RaiseToPowerWithNoise calls the underlying RaiseToPowerWithNoise.
 func (x *Noise) RaiseToPowerWithNoise(noise *raw.GKNoise) {
 	x.inner.RaiseToPowerWithNoise(noise)
 }
 
+// Displaces all noise values by the values at the same positions of the specified noises. @param xDisplacementNoise The noise from which to displace along the x-axis this noise's values at the same positions. @param yDisplacementNoise The noise from which to displace along the y-axis this noise's values at the same positions. @param zDisplacementNoise The noise from which to displace along the z-axis this noise's values at the same positions.
+//
 // DisplaceXWithNoiseYWithNoiseZWithNoise calls the underlying DisplaceXWithNoiseYWithNoiseZWithNoise.
 func (x *Noise) DisplaceXWithNoiseYWithNoiseZWithNoise(xDisplacementNoise *raw.GKNoise, yDisplacementNoise *raw.GKNoise, zDisplacementNoise *raw.GKNoise) {
 	x.inner.DisplaceXWithNoiseYWithNoiseZWithNoise(xDisplacementNoise, yDisplacementNoise, zDisplacementNoise)
 }
 
+// Color gradient of this noise, represented as 'value : color' pairs.  Utilized when this noise is rendered to a texture.
+//
 // GradientColors calls the underlying GradientColors.
 func (x *Noise) GradientColors() *foundation.NSDictionary[*foundation.NSNumber, *appkit.NSColor] {
 	return x.inner.GradientColors()

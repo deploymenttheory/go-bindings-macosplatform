@@ -31,6 +31,8 @@ func GraphShapedTypeFromID(id objc.ID) *GraphShapedType {
 	return &GraphShapedType{inner: raw.MPSGraphShapedTypeFromID(id)}
 }
 
+// Initializes a shaped type. - Parameters: - shape: The shape of the shaped type. - dataType: The dataType of the shaped type. - Returns: A valid MPSGraphShapedType, or nil if allocation failure.
+//
 // NewGraphShapedTypeWithShapeDataType creates a new [GraphShapedType].
 func NewGraphShapedTypeWithShapeDataType(shape unsafe.Pointer, dataType mpscore.MPSDataType) *GraphShapedType {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphShapedType")), objc.RegisterName("alloc"))
@@ -38,12 +40,16 @@ func NewGraphShapedTypeWithShapeDataType(shape unsafe.Pointer, dataType mpscore.
 	return &GraphShapedType{inner: raw.MPSGraphShapedTypeFromID(_id)}
 }
 
+// The data type of the shaped type.
+//
 // WithDataType sets the dataType property and returns the receiver for chaining.
 func (x *GraphShapedType) WithDataType(dataType mpscore.MPSDataType) *GraphShapedType {
 	x.inner.SetDataType(dataType)
 	return x
 }
 
+// The Shape of the shaped type.
+//
 // Shape calls the underlying Shape.
 func (x *GraphShapedType) Shape() unsafe.Pointer {
 	return x.inner.Shape()
@@ -54,6 +60,8 @@ func (x *GraphShapedType) SetShape(shape unsafe.Pointer) {
 	x.inner.SetShape(shape)
 }
 
+// The data type of the shaped type.
+//
 // DataType calls the underlying DataType.
 func (x *GraphShapedType) DataType() mpscore.MPSDataType {
 	return x.inner.DataType()

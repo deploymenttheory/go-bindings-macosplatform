@@ -37,11 +37,15 @@ func NewVoiceShortcut() *VoiceShortcut {
 	return &VoiceShortcut{inner: raw.INVoiceShortcutFromID(_id)}
 }
 
+// @abstract The unique identifier for this voice shortcut
+//
 // Identifier calls the underlying Identifier.
 func (x *VoiceShortcut) Identifier() *foundation.NSUUID {
 	return x.inner.Identifier()
 }
 
+// @abstract The phrase the user speaks to invoke this shortcut; set by the user when they add it to Siri.
+//
 // InvocationPhrase calls the underlying InvocationPhrase.
 func (x *VoiceShortcut) InvocationPhrase() string {
 	_r := x.inner.InvocationPhrase()
@@ -51,6 +55,8 @@ func (x *VoiceShortcut) InvocationPhrase() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The shortcut that will be performed when this voice shortcut is invoked via Siri.
+//
 // Shortcut calls the underlying Shortcut.
 func (x *VoiceShortcut) Shortcut() *Shortcut {
 	_r := x.inner.Shortcut()

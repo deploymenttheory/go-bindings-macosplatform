@@ -37,6 +37,8 @@ func NewAnimalBodyPoseObservation() *AnimalBodyPoseObservation {
 	return &AnimalBodyPoseObservation{inner: raw.VNAnimalBodyPoseObservationFromID(_id)}
 }
 
+// @brief Obtain a specific normalized point for a named animal body joint. @param jointName The name of the animal body joint. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return the recognized point, or nil if the point could not be obtained.
+//
 // RecognizedPointForJointNameError calls the underlying RecognizedPointForJointNameError.
 func (x *AnimalBodyPoseObservation) RecognizedPointForJointNameError(jointName *foundation.NSString) (*RecognizedPoint, error) {
 	_r, _err := x.inner.RecognizedPointForJointNameError(jointName)
@@ -49,11 +51,15 @@ func (x *AnimalBodyPoseObservation) RecognizedPointForJointNameError(jointName *
 	return &RecognizedPoint{inner: _r}, nil
 }
 
+// @brief Obtains the collection of points associated with a named animal body joints group. @discussion The obtained collection is a dictionary that provides the mapping of animal join names to the recognized point. @param jointsGroupName The name of the animal body joints group. @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed. @return a dictionary of recognized points in the group, or nil if an error was encountered.
+//
 // RecognizedPointsForJointsGroupNameError calls the underlying RecognizedPointsForJointsGroupNameError.
 func (x *AnimalBodyPoseObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNRecognizedPoint], error) {
 	return x.inner.RecognizedPointsForJointsGroupNameError(jointsGroupName)
 }
 
+// @brief All animal joint names available in the observation.
+//
 // AvailableJointNames returns the collection as a Go slice.
 func (x *AnimalBodyPoseObservation) AvailableJointNames() []*foundation.NSString {
 	arr := x.inner.AvailableJointNames()
@@ -65,6 +71,8 @@ func (x *AnimalBodyPoseObservation) AvailableJointNames() []*foundation.NSString
 	})
 }
 
+// @brief All animal joints group names available in the observation.
+//
 // AvailableJointGroupNames returns the collection as a Go slice.
 func (x *AnimalBodyPoseObservation) AvailableJointGroupNames() []*foundation.NSString {
 	arr := x.inner.AvailableJointGroupNames()

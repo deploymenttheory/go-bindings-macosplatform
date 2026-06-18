@@ -42,6 +42,8 @@ func (x *DualSenseAdaptiveTrigger) WithValueChangedHandler(valueChangedHandler f
 	return x
 }
 
+// Set this block if you want to be notified when only the pressed state on this button changes. This will get called less often than the valueChangedHandler with the additional feature of the pressed state being different to the last time it was called.
+//
 // WithPressedChangedHandler sets the pressedChangedHandler property and returns the receiver for chaining.
 func (x *DualSenseAdaptiveTrigger) WithPressedChangedHandler(pressedChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) *DualSenseAdaptiveTrigger {
 	x.inner.GCControllerButtonInput.SetPressedChangedHandler(pressedChangedHandler)
@@ -54,87 +56,119 @@ func (x *DualSenseAdaptiveTrigger) WithTouchedChangedHandler(touchedChangedHandl
 	return x
 }
 
+// A normalized value for the input. Between 0 and 1 for button inputs. Values are saturated and thus never exceed the range of [0, 1]. @see valueChangedHandler @see pressed
+//
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *DualSenseAdaptiveTrigger) WithValue(value float32) *DualSenseAdaptiveTrigger {
 	x.inner.GCControllerButtonInput.SetValue(value)
 	return x
 }
 
+// The preferred system gesture state for this element. Defaults to GCSystemGestureStateEnabled for most elements @note This is merely the preferred system gesture state - it is not guaranteed to be respected by the system. @note It is highly recommended to leave this set to the default value, however there may be situations (for example, game streaming apps) where it is preferrable to disable system gestures. @see boundToSystemGesture
+//
 // WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
 func (x *DualSenseAdaptiveTrigger) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *DualSenseAdaptiveTrigger {
 	x.inner.GCControllerButtonInput.GCControllerElement.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
 	return x
 }
 
+// The element's SF Symbols name, taking input remapping into account. @note In almost all instances, you should use this over unmappedSfSymbolsName in your UI.
+//
 // WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
 func (x *DualSenseAdaptiveTrigger) WithSfSymbolsName(sfSymbolsName string) *DualSenseAdaptiveTrigger {
 	x.inner.GCControllerButtonInput.GCControllerElement.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
 	return x
 }
 
+// The element's localized name, taking input remapping into account. @note In almost all instances, you should use this over unmappedLocalizedName in your UI.
+//
 // WithLocalizedName sets the localizedName property and returns the receiver for chaining.
 func (x *DualSenseAdaptiveTrigger) WithLocalizedName(localizedName string) *DualSenseAdaptiveTrigger {
 	x.inner.GCControllerButtonInput.GCControllerElement.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
 	return x
 }
 
+// The element's SF Symbols name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (sfSymbolsName is nil).
+//
 // WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
 func (x *DualSenseAdaptiveTrigger) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *DualSenseAdaptiveTrigger {
 	x.inner.GCControllerButtonInput.GCControllerElement.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
 	return x
 }
 
+// The element's localized name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (localizedName is nil).
+//
 // WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
 func (x *DualSenseAdaptiveTrigger) WithUnmappedLocalizedName(unmappedLocalizedName string) *DualSenseAdaptiveTrigger {
 	x.inner.GCControllerButtonInput.GCControllerElement.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
 	return x
 }
 
+// Sets the adaptive trigger to slope feedback mode. The start position, end position, start strength, and end strength of the effect can be set arbitrarily; however the end position must be larger than the start position. The trigger arm will provide a linearly interpolated degree of feedback whenever it is depressed between the start and end positions based on the starting and ending strengths. @param startPosition - A normalized float from [0-1], with 0 representing the smallest possible trigger depression and 1 representing the maximum trigger depression. The effect will begin once the trigger is depressed beyond this point. @param endPosition - A normalized float from [0-1], with 0 representing the smallest possible depression and 1 representing the maximum trigger depression. Must be greater than startPosition. The effect will end once the trigger is depressed beyond this point. @param startStrength - A normalized float from [0-1], with 0 representing the minimum effect strength (off entirely) and 1 representing the maximum effect strength. The effect will begin at startStrength once the trigger is depressed beyond startPosition. @param endStrength - A normalized float from [0-1], with 0 representing the minimum effect strength (off entirely) and 1 representing the maximum effect strength. The effect will end at endStrength once the trigger is depressed to endPosition.
+//
 // SetModeSlopeFeedbackWithStartPositionEndPositionStartStrengthEndStrength calls the underlying SetModeSlopeFeedbackWithStartPositionEndPositionStartStrengthEndStrength.
 func (x *DualSenseAdaptiveTrigger) SetModeSlopeFeedbackWithStartPositionEndPositionStartStrengthEndStrength(startPosition float32, endPosition float32, startStrength float32, endStrength float32) {
 	x.inner.SetModeSlopeFeedbackWithStartPositionEndPositionStartStrengthEndStrength(startPosition, endPosition, startStrength, endStrength)
 }
 
+// Sets the adaptive trigger to feedback mode. The start position and strength of the effect can be set arbitrarily. The trigger arm will continue to provide a constant degree of feedback whenever it is depressed further than the start position. @param startPosition - A normalized float from [0-1], with 0 representing the smallest possible trigger depression and 1 representing the maximum trigger depression. @param resistiveStrength - A normalized float from [0-1], with 0 representing the minimum effect strength (off entirely) and 1 representing the maximum effect strength.
+//
 // SetModeFeedbackWithStartPositionResistiveStrength calls the underlying SetModeFeedbackWithStartPositionResistiveStrength.
 func (x *DualSenseAdaptiveTrigger) SetModeFeedbackWithStartPositionResistiveStrength(startPosition float32, resistiveStrength float32) {
 	x.inner.SetModeFeedbackWithStartPositionResistiveStrength(startPosition, resistiveStrength)
 }
 
+// Sets the adaptive trigger to feedback mode. The strength of the effect can be set for each possible trigger position. The trigger arm will provide a degree of feedback based on the resistive strength for a given position. @param positionalResistiveStrengths - Positional normalized floats from [0-1], with 0 representing the minimum effect strength (off entirely) and 1 representing the maximum effect strength.
+//
 // SetModeFeedbackWithResistiveStrengths calls the underlying SetModeFeedbackWithResistiveStrengths.
 func (x *DualSenseAdaptiveTrigger) SetModeFeedbackWithResistiveStrengths(positionalResistiveStrengths raw.GCDualSenseAdaptiveTriggerPositionalResistiveStrengths) {
 	x.inner.SetModeFeedbackWithResistiveStrengths(positionalResistiveStrengths)
 }
 
+// Sets the adaptive trigger to weapon mode. The start position, end position, and strength of the effect can be set arbitrarily; however the end position must be larger than the start position. The trigger arm will continue to provide a constant degree of feedback whenever it is depressed further than the start position. Once the trigger arm has been depressed past the end position, the strength of the effect will immediately fall to zero, providing a "sense of release" similar to that provided by pulling the trigger of a weapon. @param startPosition - A normalized float from [0-1], with 0 representing the smallest possible depression and 1 representing the maximum trigger depression. The effect will begin once the trigger is depressed beyond this point. @param endPosition - A normalized float from [0-1], with 0 representing the smallest possible depression and 1 representing the maximum trigger depression. Must be greater than startPosition. The effect will end once the trigger is depressed beyond this point. @param resistiveStrength - A normalized float from [0-1], with 0 representing the minimum effect strength (off entirely) and 1 representing the maximum effect strength.
+//
 // SetModeWeaponWithStartPositionEndPositionResistiveStrength calls the underlying SetModeWeaponWithStartPositionEndPositionResistiveStrength.
 func (x *DualSenseAdaptiveTrigger) SetModeWeaponWithStartPositionEndPositionResistiveStrength(startPosition float32, endPosition float32, resistiveStrength float32) {
 	x.inner.SetModeWeaponWithStartPositionEndPositionResistiveStrength(startPosition, endPosition, resistiveStrength)
 }
 
+// Sets the adaptive trigger to vibration mode. The start position, amplitude, and frequency of the effect can be set arbitrarily. The trigger arm will continue to strike against the trigger whenever it is depressed further than the start position, providing a "sense of vibration". @param startPosition - A normalized float from [0-1], with 0 representing the smallest possible depression and 1 representing the maximum trigger depression. The effect will begin once the trigger is depressed beyond this point. @param amplitude - A normalized float from [0-1], with 0 representing the minimum effect strength (off entirely) and 1 representing the maximum effect strength. @param frequency - A normalized float from [0-1], with 0 representing the minimum frequency and 1 representing the maximum frequency of the vibration effect.
+//
 // SetModeVibrationWithStartPositionAmplitudeFrequency calls the underlying SetModeVibrationWithStartPositionAmplitudeFrequency.
 func (x *DualSenseAdaptiveTrigger) SetModeVibrationWithStartPositionAmplitudeFrequency(startPosition float32, amplitude float32, frequency float32) {
 	x.inner.SetModeVibrationWithStartPositionAmplitudeFrequency(startPosition, amplitude, frequency)
 }
 
+// Sets the adaptive trigger to vibration mode. The amplitude of the effect can be set for each possible trigger position. The trigger arm will provide a degree of feedback based on the amplitude for a given position. The trigger arm will continue to strike against the trigger, providing a "sense of vibration". @param positionalAmplitudes - Positional normalized floats from [0-1], with 0 representing the minimum effect strength (off entirely) and 1 representing the maximum effect strength. @param frequency - A normalized float from [0-1], with 0 representing the minimum frequency and 1 representing the maximum frequency of the vibration effect.
+//
 // SetModeVibrationWithAmplitudesFrequency calls the underlying SetModeVibrationWithAmplitudesFrequency.
 func (x *DualSenseAdaptiveTrigger) SetModeVibrationWithAmplitudesFrequency(positionalAmplitudes raw.GCDualSenseAdaptiveTriggerPositionalAmplitudes, frequency float32) {
 	x.inner.SetModeVibrationWithAmplitudesFrequency(positionalAmplitudes, frequency)
 }
 
+// Sets the adaptive trigger to off mode. This turns off the adaptive trigger effect.
+//
 // SetModeOff calls the underlying SetModeOff.
 func (x *DualSenseAdaptiveTrigger) SetModeOff() {
 	x.inner.SetModeOff()
 }
 
+// The mode that the adaptive trigger is currently in. This property reflects the physical state of the triggers - and requires a response from the controller. It does not update immediately after calling -[GCDualSenseAdaptiveTrigger setMode...]. @see GCDualSenseAdaptiveTriggerMode
+//
 // Mode calls the underlying Mode.
 func (x *DualSenseAdaptiveTrigger) Mode() GCDualSenseAdaptiveTriggerMode {
 	return GCDualSenseAdaptiveTriggerMode(x.inner.Mode())
 }
 
+// The current status of the adaptive trigger - whether it is ready to apply a load, is currently applying a load, or has finished applying a load. @see GCDualSenseAdaptiveTriggerStatus
+//
 // Status calls the underlying Status.
 func (x *DualSenseAdaptiveTrigger) Status() GCDualSenseAdaptiveTriggerStatus {
 	return GCDualSenseAdaptiveTriggerStatus(x.inner.Status())
 }
 
+// A normalized float from [0-1], with 0 representing the lowest possible trigger arm position and 1 representing the maximum trigger arm position. @see GCDualSenseAdaptiveTriggerStatus
+//
 // ArmPosition calls the underlying ArmPosition.
 func (x *DualSenseAdaptiveTrigger) ArmPosition() float32 {
 	return x.inner.ArmPosition()

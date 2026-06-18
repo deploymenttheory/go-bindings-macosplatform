@@ -36,46 +36,64 @@ func NewWKWebExtensionTabConfiguration() *WKWebExtensionTabConfiguration {
 	return &WKWebExtensionTabConfiguration{inner: raw.WKWebExtensionTabConfigurationFromID(_id)}
 }
 
+// @abstract Indicates the window where the tab should be opened. @discussion If this property is `nil`, no window was specified.
+//
 // Window calls the underlying Window.
 func (x *WKWebExtensionTabConfiguration) Window() raw.WKWebExtensionWindow {
 	return x.inner.Window()
 }
 
+// @abstract Indicates the position where the tab should be opened within the window.
+//
 // Index calls the underlying Index.
 func (x *WKWebExtensionTabConfiguration) Index() uint {
 	return x.inner.Index()
 }
 
+// @abstract Indicates the parent tab with which the tab should be related. @discussion If this property is `nil`, no parent tab was specified.
+//
 // ParentTab calls the underlying ParentTab.
 func (x *WKWebExtensionTabConfiguration) ParentTab() raw.WKWebExtensionTab {
 	return x.inner.ParentTab()
 }
 
+// @abstract Indicates the initial URL for the tab. @discussion If this property is `nil`, the app's default "start page" should appear in the tab.
+//
 // Url calls the underlying Url.
 func (x *WKWebExtensionTabConfiguration) Url() *foundation.NSURL {
 	return x.inner.Url()
 }
 
+// @abstract Indicates whether the tab should be the active tab. @discussion If this property is `YES`, the tab should be made active in the window, ensuring it is the frontmost tab. Being active implies the tab is also selected. If this property is `NO`, the tab shouldn't affect the currently active tab.
+//
 // ShouldBeActive calls the underlying ShouldBeActive.
 func (x *WKWebExtensionTabConfiguration) ShouldBeActive() bool {
 	return x.inner.ShouldBeActive()
 }
 
+// @abstract Indicates whether the tab should be added to the current tab selection. @discussion If this property is `YES`, the tab should be part of the current selection, but not necessarily become the active tab unless “shouldBeActive“ is also `YES`. If this property is `NO`, the tab shouldn't be part of the current selection.
+//
 // ShouldAddToSelection calls the underlying ShouldAddToSelection.
 func (x *WKWebExtensionTabConfiguration) ShouldAddToSelection() bool {
 	return x.inner.ShouldAddToSelection()
 }
 
+// @abstract Indicates whether the tab should be pinned.
+//
 // ShouldBePinned calls the underlying ShouldBePinned.
 func (x *WKWebExtensionTabConfiguration) ShouldBePinned() bool {
 	return x.inner.ShouldBePinned()
 }
 
+// @abstract Indicates whether the tab should be muted.
+//
 // ShouldBeMuted calls the underlying ShouldBeMuted.
 func (x *WKWebExtensionTabConfiguration) ShouldBeMuted() bool {
 	return x.inner.ShouldBeMuted()
 }
 
+// @abstract Indicates whether reader mode in the tab should be active.
+//
 // ShouldReaderModeBeActive calls the underlying ShouldReaderModeBeActive.
 func (x *WKWebExtensionTabConfiguration) ShouldReaderModeBeActive() bool {
 	return x.inner.ShouldReaderModeBeActive()

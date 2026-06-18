@@ -37,36 +37,48 @@ func NewTorus() *Torus {
 	return &Torus{inner: raw.SCNTorusFromID(_id)}
 }
 
+// @property ringRadius @abstract The radius of the torus ring. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
+//
 // WithRingRadius sets the ringRadius property and returns the receiver for chaining.
 func (x *Torus) WithRingRadius(ringRadius float64) *Torus {
 	x.inner.SetRingRadius(ringRadius)
 	return x
 }
 
+// @property pipeRadius @abstract The radius of the torus pipe. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 0.25.
+//
 // WithPipeRadius sets the pipeRadius property and returns the receiver for chaining.
 func (x *Torus) WithPipeRadius(pipeRadius float64) *Torus {
 	x.inner.SetPipeRadius(pipeRadius)
 	return x
 }
 
+// @property ringSegmentCount @abstract The number of subdivisions of the ring. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
+//
 // WithRingSegmentCount sets the ringSegmentCount property and returns the receiver for chaining.
 func (x *Torus) WithRingSegmentCount(ringSegmentCount int) *Torus {
 	x.inner.SetRingSegmentCount(ringSegmentCount)
 	return x
 }
 
+// @property pipeSegmentCount @abstract The number of subdivisions of the pipe. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 24.
+//
 // WithPipeSegmentCount sets the pipeSegmentCount property and returns the receiver for chaining.
 func (x *Torus) WithPipeSegmentCount(pipeSegmentCount int) *Torus {
 	x.inner.SetPipeSegmentCount(pipeSegmentCount)
 	return x
 }
 
+// @property name @abstract Determines the name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Torus) WithName(name string) *Torus {
 	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+//
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Torus) WithMaterials(items ...*raw.SCNMaterial) *Torus {
 	if len(items) == 0 {
@@ -85,12 +97,16 @@ func (x *Torus) WithMaterials(items ...*raw.SCNMaterial) *Torus {
 	return x
 }
 
+// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+//
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Torus) WithFirstMaterial(firstMaterial *Material) *Torus {
 	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
+// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+//
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Torus) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Torus {
 	if len(items) == 0 {
@@ -115,30 +131,40 @@ func (x *Torus) WithTessellator(tessellator *GeometryTessellator) *Torus {
 	return x
 }
 
+// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+//
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Torus) WithSubdivisionLevel(subdivisionLevel uint) *Torus {
 	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
 	return x
 }
 
+// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+//
 // WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
 func (x *Torus) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Torus {
 	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
 	return x
 }
 
+// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+//
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Torus) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Torus {
 	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
+// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+//
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Torus) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Torus {
 	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
+// @property ringRadius @abstract The radius of the torus ring. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
+//
 // RingRadius calls the underlying RingRadius.
 func (x *Torus) RingRadius() float64 {
 	return x.inner.RingRadius()
@@ -149,6 +175,8 @@ func (x *Torus) SetRingRadius(ringRadius float64) {
 	x.inner.SetRingRadius(ringRadius)
 }
 
+// @property pipeRadius @abstract The radius of the torus pipe. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 0.25.
+//
 // PipeRadius calls the underlying PipeRadius.
 func (x *Torus) PipeRadius() float64 {
 	return x.inner.PipeRadius()
@@ -159,6 +187,8 @@ func (x *Torus) SetPipeRadius(pipeRadius float64) {
 	x.inner.SetPipeRadius(pipeRadius)
 }
 
+// @property ringSegmentCount @abstract The number of subdivisions of the ring. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
+//
 // RingSegmentCount calls the underlying RingSegmentCount.
 func (x *Torus) RingSegmentCount() int {
 	return x.inner.RingSegmentCount()
@@ -169,6 +199,8 @@ func (x *Torus) SetRingSegmentCount(ringSegmentCount int) {
 	x.inner.SetRingSegmentCount(ringSegmentCount)
 }
 
+// @property pipeSegmentCount @abstract The number of subdivisions of the pipe. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 24.
+//
 // PipeSegmentCount calls the underlying PipeSegmentCount.
 func (x *Torus) PipeSegmentCount() int {
 	return x.inner.PipeSegmentCount()

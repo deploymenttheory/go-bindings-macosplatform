@@ -36,11 +36,15 @@ func NewDetectedObjectObservation() *DetectedObjectObservation {
 	return &DetectedObjectObservation{inner: raw.VNDetectedObjectObservationFromID(_id)}
 }
 
+// @brief The bounding box of the detected object. The coordinates are normalized to the dimensions of the processed image, with the origin at the image's lower-left corner.
+//
 // BoundingBox calls the underlying BoundingBox.
 func (x *DetectedObjectObservation) BoundingBox() corefoundation.CGRect {
 	return x.inner.BoundingBox()
 }
 
+// @brief The resulting CVPixelBuffer from requests that generate a segmentation mask for the entire image.
+//
 // GlobalSegmentationMask calls the underlying GlobalSegmentationMask.
 func (x *DetectedObjectObservation) GlobalSegmentationMask() *PixelBufferObservation {
 	_r := x.inner.GlobalSegmentationMask()

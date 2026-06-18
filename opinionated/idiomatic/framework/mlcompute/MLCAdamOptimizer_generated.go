@@ -35,23 +35,31 @@ func NewAdamOptimizer() *AdamOptimizer {
 	return &AdamOptimizer{inner: raw.MLCAdamOptimizerFromID(_id)}
 }
 
+// @property   learningRate @abstract   The learning rate.  This property is 'readwrite' so that callers can implement a 'decay' during training
+//
 // WithLearningRate sets the learningRate property and returns the receiver for chaining.
 func (x *AdamOptimizer) WithLearningRate(learningRate float32) *AdamOptimizer {
 	x.inner.MLCOptimizer.SetLearningRate(learningRate)
 	return x
 }
 
+// @property   appliesGradientClipping @abstract   Whether gradient clipping should be applied or not.
+//
 // WithAppliesGradientClipping sets the appliesGradientClipping property and returns the receiver for chaining.
 func (x *AdamOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *AdamOptimizer {
 	x.inner.MLCOptimizer.SetAppliesGradientClipping(appliesGradientClipping)
 	return x
 }
 
+// @property   beta1 @abstract   Coefficent used for computing running averages of gradient. @discussion The default is 0.9.
+//
 // Beta1 calls the underlying Beta1.
 func (x *AdamOptimizer) Beta1() float32 {
 	return x.inner.Beta1()
 }
 
+// @property   beta2 @abstract   Coefficent used for computing running averages of square of gradient. @discussion The default is 0.999.
+//
 // Beta2 calls the underlying Beta2.
 func (x *AdamOptimizer) Beta2() float32 {
 	return x.inner.Beta2()
@@ -62,11 +70,15 @@ func (x *AdamOptimizer) Epsilon() float32 {
 	return x.inner.Epsilon()
 }
 
+// @property   usesAMSGrad @abstract   Whether to use the AMSGrad variant of this algorithm @discussion The default is false
+//
 // UsesAMSGrad calls the underlying UsesAMSGrad.
 func (x *AdamOptimizer) UsesAMSGrad() bool {
 	return x.inner.UsesAMSGrad()
 }
 
+// @property   timeStep @abstract   The current timestep used for the update. @discussion The default is 1.
+//
 // TimeStep calls the underlying TimeStep.
 func (x *AdamOptimizer) TimeStep() uint {
 	return x.inner.TimeStep()

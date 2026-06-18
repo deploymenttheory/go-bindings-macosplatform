@@ -32,6 +32,8 @@ func EnvelopeFromID(id objc.ID) *Envelope {
 	return &Envelope{inner: raw.PHASEEnvelopeFromID(id)}
 }
 
+// @method initWithStartPoint:segments @abstract Initialize an envelope from a start point and an array of segments. @discussion If the segment array is empty (i.e., count == 0), the envelope will internally create a single segment with an end point matching the start point. If the segment array has more than one segment, segments will be sorted internally in ascending order of x value. Note that the startPoint.x value must be <= the segment with the lowest x value provided in segments. Failure to do so will cause this function to return nil. @param startPoint The start point of the envelope. @param segments An array of segments. @return A new envelope.
+//
 // NewEnvelopeWithStartPointSegments creates a new [Envelope].
 func NewEnvelopeWithStartPointSegments(startPoint unsafe.Pointer, segments *foundation.NSArray[*raw.PHASEEnvelopeSegment]) *Envelope {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEEnvelope")), objc.RegisterName("alloc"))
@@ -39,16 +41,22 @@ func NewEnvelopeWithStartPointSegments(startPoint unsafe.Pointer, segments *foun
 	return &Envelope{inner: raw.PHASEEnvelopeFromID(_id)}
 }
 
+// @method evaluateForValue @abstract Evaluates the envelope. @discussion If required, x will be clamped to the envelope's domain. @param x The input along the x-axis. @return The output along the y-axis.
+//
 // EvaluateForValue calls the underlying EvaluateForValue.
 func (x *Envelope) EvaluateForValue(x_ float64) float64 {
 	return x.inner.EvaluateForValue(x_)
 }
 
+// @property startPoint @abstract The start point of the envelope.
+//
 // StartPoint calls the underlying StartPoint.
 func (x *Envelope) StartPoint() unsafe.Pointer {
 	return x.inner.StartPoint()
 }
 
+// @property segments @abstract The segments of the envelope.
+//
 // Segments returns the collection as a Go slice.
 func (x *Envelope) Segments() []*EnvelopeSegment {
 	arr := x.inner.Segments()
@@ -60,6 +68,8 @@ func (x *Envelope) Segments() []*EnvelopeSegment {
 	})
 }
 
+// @property domain @abstract The domain (along the x-axis). @discussion The first value in the pair is the minimum value of the domain. The second value in the pair is the maximum value of the domain.
+//
 // Domain calls the underlying Domain.
 func (x *Envelope) Domain() *NumericPair {
 	_r := x.inner.Domain()
@@ -69,6 +79,8 @@ func (x *Envelope) Domain() *NumericPair {
 	return &NumericPair{inner: _r}
 }
 
+// @property range @abstract The range (along the y-axis). @discussion The first value in the pair is the minimum value of the range. The second value in the pair is the maximum value of the range.
+//
 // Range calls the underlying Range.
 func (x *Envelope) Range() *NumericPair {
 	_r := x.inner.Range()

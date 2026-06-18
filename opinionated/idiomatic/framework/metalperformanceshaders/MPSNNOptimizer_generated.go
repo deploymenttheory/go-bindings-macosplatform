@@ -38,24 +38,32 @@ func NewNNOptimizer() *NNOptimizer {
 	return &NNOptimizer{inner: raw.MPSNNOptimizerFromID(_id)}
 }
 
+// @property   learningRate @abstract   The learningRate at which we update values @discussion The default value is 1e-3
+//
 // WithLearningRate sets the learningRate property and returns the receiver for chaining.
 func (x *NNOptimizer) WithLearningRate(learningRate float32) *NNOptimizer {
 	x.inner.SetLearningRate(learningRate)
 	return x
 }
 
+// @property   applyGradientClipping @abstract   A bool which decides if gradient will be clipped @discussion The default value is NO
+//
 // WithApplyGradientClipping sets the applyGradientClipping property and returns the receiver for chaining.
 func (x *NNOptimizer) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizer {
 	x.inner.SetApplyGradientClipping(applyGradientClipping)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *NNOptimizer) WithOptions(options mpscore.MPSKernelOptions) *NNOptimizer {
 	x.inner.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NNOptimizer) WithLabel(label string) *NNOptimizer {
 	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
@@ -67,16 +75,22 @@ func (x *NNOptimizer) SetLearningRate(newLearningRate float32) {
 	x.inner.SetLearningRate(newLearningRate)
 }
 
+// @property   learningRate @abstract   The learningRate at which we update values @discussion The default value is 1e-3
+//
 // LearningRate calls the underlying LearningRate.
 func (x *NNOptimizer) LearningRate() float32 {
 	return x.inner.LearningRate()
 }
 
+// @property   gradientRescale @abstract   The gradientRescale at which we apply to incoming gradient values @discussion The default value is 1.0
+//
 // GradientRescale calls the underlying GradientRescale.
 func (x *NNOptimizer) GradientRescale() float32 {
 	return x.inner.GradientRescale()
 }
 
+// @property   applyGradientClipping @abstract   A bool which decides if gradient will be clipped @discussion The default value is NO
+//
 // ApplyGradientClipping calls the underlying ApplyGradientClipping.
 func (x *NNOptimizer) ApplyGradientClipping() bool {
 	return x.inner.ApplyGradientClipping()
@@ -87,21 +101,29 @@ func (x *NNOptimizer) SetApplyGradientClipping(applyGradientClipping bool) {
 	x.inner.SetApplyGradientClipping(applyGradientClipping)
 }
 
+// @property   gradientClipMax @abstract   The maximum value at which incoming gradient will be clipped before rescaling, applyGradientClipping must be true
+//
 // GradientClipMax calls the underlying GradientClipMax.
 func (x *NNOptimizer) GradientClipMax() float32 {
 	return x.inner.GradientClipMax()
 }
 
+// @property   gradientClipMin @abstract   The minimum value at which incoming gradient will be clipped before rescaling, applyGradientClipping must be true
+//
 // GradientClipMin calls the underlying GradientClipMin.
 func (x *NNOptimizer) GradientClipMin() float32 {
 	return x.inner.GradientClipMin()
 }
 
+// @property   regularizationScale @abstract   The regularizationScale at which we apply L1 or L2 regularization, it gets ignored if regularization is None @discussion The default value is 0.0
+//
 // RegularizationScale calls the underlying RegularizationScale.
 func (x *NNOptimizer) RegularizationScale() float32 {
 	return x.inner.RegularizationScale()
 }
 
+// @property   regularizationType @abstract   The regularizationType which we apply. @discussion The default value is MPSRegularizationTypeNone
+//
 // RegularizationType calls the underlying RegularizationType.
 func (x *NNOptimizer) RegularizationType() mpsneuralnetwork.MPSNNRegularizationType {
 	return x.inner.RegularizationType()

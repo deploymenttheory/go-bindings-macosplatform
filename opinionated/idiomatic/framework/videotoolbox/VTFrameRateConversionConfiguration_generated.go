@@ -33,6 +33,8 @@ func FrameRateConversionConfigurationFromID(id objc.ID) *FrameRateConversionConf
 	return &FrameRateConversionConfiguration{inner: raw.VTFrameRateConversionConfigurationFromID(id)}
 }
 
+// Creates a new frame-rate conversion configuration. Returns `nil` if dimensions are out of range or revision is unsupported. - Parameters: - frameWidth: Width of source frame in pixels; the maximum value is 8192 for macOS, and 4096 for iOS. - frameHeight: Height of source frame in pixels; the maximum value is 4320 for macOS, and 2160 for iOS. - usePrecomputedFlow: A Boolean value that indicates whether you are providing Optical Flow. If false, optical flow is computed on the fly. - qualityPrioritization: A level you use to prioritize quality or performance; for more information about supported levels, see “VTFrameRateConversionConfigurationQualityPrioritization“. - revision: The specific algorithm or configuration revision you use to perform the request.
+//
 // NewFrameRateConversionConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision creates a new [FrameRateConversionConfiguration].
 func NewFrameRateConversionConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision(frameWidth int, frameHeight int, usePrecomputedFlow bool, qualityPrioritization VTFrameRateConversionConfigurationQualityPrioritization, revision VTFrameRateConversionConfigurationRevision) *FrameRateConversionConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTFrameRateConversionConfiguration")), objc.RegisterName("alloc"))
@@ -40,31 +42,43 @@ func NewFrameRateConversionConfigurationWithFrameWidthFrameHeightUsePrecomputedF
 	return &FrameRateConversionConfiguration{inner: raw.VTFrameRateConversionConfigurationFromID(_id)}
 }
 
+// Width of source frame in pixels.
+//
 // FrameWidth calls the underlying FrameWidth.
 func (x *FrameRateConversionConfiguration) FrameWidth() int {
 	return x.inner.FrameWidth()
 }
 
+// Height of source frame in pixels.
+//
 // FrameHeight calls the underlying FrameHeight.
 func (x *FrameRateConversionConfiguration) FrameHeight() int {
 	return x.inner.FrameHeight()
 }
 
+// Indicates that caller provides optical flow.
+//
 // UsePrecomputedFlow calls the underlying UsePrecomputedFlow.
 func (x *FrameRateConversionConfiguration) UsePrecomputedFlow() bool {
 	return x.inner.UsePrecomputedFlow()
 }
 
+// A parameter you use to control quality and performance levels. For more information about supported levels, see “VTFrameRateConversionConfigurationQualityPrioritization“.
+//
 // QualityPrioritization calls the underlying QualityPrioritization.
 func (x *FrameRateConversionConfiguration) QualityPrioritization() VTFrameRateConversionConfigurationQualityPrioritization {
 	return VTFrameRateConversionConfigurationQualityPrioritization(x.inner.QualityPrioritization())
 }
 
+// The specific algorithm or configuration revision you use to perform the request.
+//
 // Revision calls the underlying Revision.
 func (x *FrameRateConversionConfiguration) Revision() VTFrameRateConversionConfigurationRevision {
 	return VTFrameRateConversionConfigurationRevision(x.inner.Revision())
 }
 
+// Supported pixel formats available for source frames for current configuration.
+//
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (x *FrameRateConversionConfiguration) FrameSupportedPixelFormats() []*foundation.NSNumber {
 	arr := x.inner.FrameSupportedPixelFormats()
@@ -76,11 +90,15 @@ func (x *FrameRateConversionConfiguration) FrameSupportedPixelFormats() []*found
 	})
 }
 
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+//
 // SourcePixelBufferAttributes calls the underlying SourcePixelBufferAttributes.
 func (x *FrameRateConversionConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.SourcePixelBufferAttributes()
 }
 
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+//
 // DestinationPixelBufferAttributes calls the underlying DestinationPixelBufferAttributes.
 func (x *FrameRateConversionConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.DestinationPixelBufferAttributes()

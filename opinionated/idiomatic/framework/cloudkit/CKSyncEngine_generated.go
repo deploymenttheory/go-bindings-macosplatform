@@ -32,6 +32,8 @@ func SyncEngineFromID(id objc.ID) *SyncEngine {
 	return &SyncEngine{inner: raw.CKSyncEngineFromID(id)}
 }
 
+// Creates a sync engine with the specified configuration. - Parameters: - configuration: The attributes of the new sync engine, such as the associated database and the object to use as the engine's delegate. For more information, see “CKSyncEngineConfiguration“. - Returns: A configured sync engine.
+//
 // NewSyncEngineWithConfiguration creates a new [SyncEngine].
 func NewSyncEngineWithConfiguration(configuration *raw.CKSyncEngineConfiguration) *SyncEngine {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngine")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewSyncEngineWithConfiguration(configuration *raw.CKSyncEngineConfiguration
 	return &SyncEngine{inner: raw.CKSyncEngineFromID(_id)}
 }
 
+// Fetches pending remote changes from the server. - Parameters: - completionHandler: The block to execute when the fetch completes. If the fetch fails, the completion handler's `error` parameter is an object that describes that failure; otherwise, it's `nil`. Use this method to request the sync engine immediately fetches all pending remote changes before your app continues. This isn't necessary in normal use, as the engine automatically syncs your app's records. It is useful, however, in scenarios where you require more control over sync, such as pull-to-refresh or unit tests. - Note: The sync engine invokes the completion handler only after your sync delegate finishes processing all related fetch events.
+//
 // FetchChanges blocks until the operation completes or ctx is cancelled.
 func (x *SyncEngine) FetchChanges(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -57,6 +61,8 @@ func (x *SyncEngine) FetchChanges(ctx context.Context) error {
 	}
 }
 
+// Fetches pending remote changes from the server using the specified options. - Parameters: - options: The options to use when fetching changes. For more information, see “CKSyncEngineFetchChangesOptions“. - completionHandler: The block to execute when the fetch completes. If the fetch fails, the completion handler's `error` parameter is an object that describes that failure; otherwise, it's `nil`. Use this method to request the sync engine immediately fetches all pending remote changes before your app continues. This isn't necessary in normal use, as the engine automatically syncs your app's records. It is useful, however, in scenarios where you require more control over sync, such as pull-to-refresh or unit tests. - Note: The sync engine invokes the completion handler only after your sync delegate finishes processing all related fetch events.
+//
 // FetchChangesWithOptions blocks until the operation completes or ctx is cancelled.
 func (x *SyncEngine) FetchChangesWithOptions(ctx context.Context, options *raw.CKSyncEngineFetchChangesOptions) error {
 	_ch := make(chan error, 1)
@@ -75,6 +81,8 @@ func (x *SyncEngine) FetchChangesWithOptions(ctx context.Context, options *raw.C
 	}
 }
 
+// Sends pending local changes to the server. - Parameters: - completionHandler: The block to execute when the send completes. If the send fails, the completion handler's `error` parameter is an object that describes that failure; otherwise, it's `nil`. Use this method to request the sync engine sends all pending local changes to the server before your app continues. This isn't necessary in normal use, as the engine automatically syncs your app's records. It is useful, however, in scenarios where you require greater control over sync, such as a "Backup now" button or unit tests. - Note: The sync engine invokes the completion handler only after your sync delegate finishes processing all related send events.
+//
 // SendChanges blocks until the operation completes or ctx is cancelled.
 func (x *SyncEngine) SendChanges(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -93,6 +101,8 @@ func (x *SyncEngine) SendChanges(ctx context.Context) error {
 	}
 }
 
+// Sends pending local changes to the server using the specified options. - Parameters: - options: The options to use when sending changes. For more information, see “CKSyncEngineSendChangesOptions“. - completionHandler: The block to execute when the send completes. If the send fails, the completion handler's `error` parameter is an object that describes that failure; otherwise, it's `nil`. Use this method to request the sync engine sends all pending local changes to the server before your app continues. This isn't necessary in normal use, as the engine automatically syncs your app's records. It is useful, however, in scenarios where you require greater control over sync, such as a "Backup now" button or unit tests. - Note: The sync engine invokes the completion handler only after your sync delegate finishes processing all related send events.
+//
 // SendChangesWithOptions blocks until the operation completes or ctx is cancelled.
 func (x *SyncEngine) SendChangesWithOptions(ctx context.Context, options *raw.CKSyncEngineSendChangesOptions) error {
 	_ch := make(chan error, 1)
@@ -111,6 +121,8 @@ func (x *SyncEngine) SendChangesWithOptions(ctx context.Context, options *raw.CK
 	}
 }
 
+// Cancels any in-progress or pending sync operations. The sync engine processes cancelation requests asynchronously, meaning it's possible for in-progress operations to complete even after this method returns.
+//
 // CancelOperations blocks until the operation completes or ctx is cancelled.
 func (x *SyncEngine) CancelOperations(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -125,6 +137,8 @@ func (x *SyncEngine) CancelOperations(ctx context.Context) error {
 	}
 }
 
+// The associated database. Multiple sync engines can run in the same process, each targeting a different database. For example, you may use one sync engine for a person's private database and another for their shared database.
+//
 // Database calls the underlying Database.
 func (x *SyncEngine) Database() *Database {
 	_r := x.inner.Database()
@@ -134,6 +148,8 @@ func (x *SyncEngine) Database() *Database {
 	return &Database{inner: _r}
 }
 
+// A collection of state properties used to efficiently manage sync engine operation. - SeeAlso: “CKSyncEngineState“
+//
 // State calls the underlying State.
 func (x *SyncEngine) State() *SyncEngineState {
 	_r := x.inner.State()

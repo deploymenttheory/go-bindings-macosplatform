@@ -35,6 +35,8 @@ func NewMTL4CommandBufferOptions() *MTL4CommandBufferOptions {
 	return &MTL4CommandBufferOptions{inner: raw.MTL4CommandBufferOptionsFromID(_id)}
 }
 
+// Contains information related to shader logging. To enable shader logging, call “MTL4CommandBuffer/beginCommandBufferWithAllocator:options:“ with an instance of “MTL4CommandBufferOptions“ that contains a non-`nil` “MTLLogState“ instance in this property. Shader functions log messages until the command buffer ends.
+//
 // WithLogState sets the logState property and returns the receiver for chaining.
 func (x *MTL4CommandBufferOptions) WithLogState(logState raw.MTLLogState) *MTL4CommandBufferOptions {
 	x.inner.SetLogState(logState)

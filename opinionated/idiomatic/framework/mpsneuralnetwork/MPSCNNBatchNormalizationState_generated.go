@@ -36,36 +36,50 @@ func NewCNNBatchNormalizationState() *CNNBatchNormalizationState {
 	return &CNNBatchNormalizationState{inner: raw.MPSCNNBatchNormalizationStateFromID(_id)}
 }
 
+// @abstract   Reset any accumulated state data to its initial values.
+//
 // Reset calls the underlying Reset.
 func (x *CNNBatchNormalizationState) Reset() {
 	x.inner.Reset()
 }
 
+// @abstract   Return an MTLBuffer object with the state's current gamma values.
+//
 // Gamma calls the underlying Gamma.
 func (x *CNNBatchNormalizationState) Gamma() metal.MTLBuffer {
 	return x.inner.Gamma()
 }
 
+// @abstract   Return an MTLBuffer object with the state's current beta values..
+//
 // Beta calls the underlying Beta.
 func (x *CNNBatchNormalizationState) Beta() metal.MTLBuffer {
 	return x.inner.Beta()
 }
 
+// @abstract   Return an MTLBuffer object with the most recently computed batch mean values.
+//
 // Mean calls the underlying Mean.
 func (x *CNNBatchNormalizationState) Mean() metal.MTLBuffer {
 	return x.inner.Mean()
 }
 
+// @abstract   Return an MTLBuffer object with the most recently computed batch variance values.
+//
 // Variance calls the underlying Variance.
 func (x *CNNBatchNormalizationState) Variance() metal.MTLBuffer {
 	return x.inner.Variance()
 }
 
+// @abstract   Return an MTLBuffer object containing the values of the gradient of the loss function with respect to the scale factors.  If a MPSCNNBatchNormalizationGradient kernel has not successfully generated these values nil will be returned.
+//
 // GradientForGamma calls the underlying GradientForGamma.
 func (x *CNNBatchNormalizationState) GradientForGamma() metal.MTLBuffer {
 	return x.inner.GradientForGamma()
 }
 
+// @abstract   Return an MTLBuffer object containing the values of the gradient of the loss function with respect to the bias terms.  If a MPSCNNBatchNormalizationGradient kernel has not successfully generated these values nil will be returned.
+//
 // GradientForBeta calls the underlying GradientForBeta.
 func (x *CNNBatchNormalizationState) GradientForBeta() metal.MTLBuffer {
 	return x.inner.GradientForBeta()

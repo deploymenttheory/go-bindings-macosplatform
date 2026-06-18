@@ -37,6 +37,8 @@ func NewElectrocardiogramVoltageMeasurement() *ElectrocardiogramVoltageMeasureme
 	return &ElectrocardiogramVoltageMeasurement{inner: raw.HKElectrocardiogramVoltageMeasurementFromID(_id)}
 }
 
+// @method        quantityForLead: @abstract      Returns an HKQuantity for the specified lead with a unit compatible with [HKUnit voltUnit]. @param         lead      The HKElectrocardiogramLead for which voltage quantity will be returned.
+//
 // QuantityForLead calls the underlying QuantityForLead.
 func (x *ElectrocardiogramVoltageMeasurement) QuantityForLead(lead HKElectrocardiogramLead) *Quantity {
 	_r := x.inner.QuantityForLead(raw.HKElectrocardiogramLead(lead))
@@ -46,6 +48,8 @@ func (x *ElectrocardiogramVoltageMeasurement) QuantityForLead(lead HKElectrocard
 	return &Quantity{inner: _r}
 }
 
+// The time interval between this voltage measurement and the start of the sample.
+//
 // TimeSinceSampleStart calls the underlying TimeSinceSampleStart.
 func (x *ElectrocardiogramVoltageMeasurement) TimeSinceSampleStart() float64 {
 	return x.inner.TimeSinceSampleStart()

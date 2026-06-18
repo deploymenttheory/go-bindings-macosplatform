@@ -125,18 +125,24 @@ func (x *Menu) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSU
 	return x
 }
 
+// The presentation style of the menu. @note This property is not respected if the menu is the main menu of the app.
+//
 // WithPresentationStyle sets the presentationStyle property and returns the receiver for chaining.
 func (x *Menu) WithPresentationStyle(presentationStyle NSMenuPresentationStyle) *Menu {
 	x.inner.SetPresentationStyle(raw.NSMenuPresentationStyle(presentationStyle))
 	return x
 }
 
+// The selection mode of the menu. Note the selection mode only has effect on menu items that belong to the same selection group. A selection group consists of the items with the same target/action.
+//
 // WithSelectionMode sets the selectionMode property and returns the receiver for chaining.
 func (x *Menu) WithSelectionMode(selectionMode NSMenuSelectionMode) *Menu {
 	x.inner.SetSelectionMode(raw.NSMenuSelectionMode(selectionMode))
 	return x
 }
 
+// The menu items that are selected. An item is selected when its state is `NSControl.StateValue.on`. @note This property is settable. Setting `selectedItems` will select any items that are contained in the provided array, and deselect any previously selected items that are not in the array.
+//
 // WithSelectedItems sets the collection, converting the Go slice to an NSArray.
 func (x *Menu) WithSelectedItems(items ...*raw.NSMenuItem) *Menu {
 	if len(items) == 0 {
@@ -453,26 +459,36 @@ func (x *Menu) SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUs
 	x.inner.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 }
 
+// The presentation style of the menu. @note This property is not respected if the menu is the main menu of the app.
+//
 // PresentationStyle calls the underlying PresentationStyle.
 func (x *Menu) PresentationStyle() NSMenuPresentationStyle {
 	return NSMenuPresentationStyle(x.inner.PresentationStyle())
 }
 
+// The presentation style of the menu. @note This property is not respected if the menu is the main menu of the app.
+//
 // SetPresentationStyle calls the underlying SetPresentationStyle.
 func (x *Menu) SetPresentationStyle(presentationStyle NSMenuPresentationStyle) {
 	x.inner.SetPresentationStyle(raw.NSMenuPresentationStyle(presentationStyle))
 }
 
+// The selection mode of the menu. Note the selection mode only has effect on menu items that belong to the same selection group. A selection group consists of the items with the same target/action.
+//
 // SelectionMode calls the underlying SelectionMode.
 func (x *Menu) SelectionMode() NSMenuSelectionMode {
 	return NSMenuSelectionMode(x.inner.SelectionMode())
 }
 
+// The selection mode of the menu. Note the selection mode only has effect on menu items that belong to the same selection group. A selection group consists of the items with the same target/action.
+//
 // SetSelectionMode calls the underlying SetSelectionMode.
 func (x *Menu) SetSelectionMode(selectionMode NSMenuSelectionMode) {
 	x.inner.SetSelectionMode(raw.NSMenuSelectionMode(selectionMode))
 }
 
+// The menu items that are selected. An item is selected when its state is `NSControl.StateValue.on`. @note This property is settable. Setting `selectedItems` will select any items that are contained in the provided array, and deselect any previously selected items that are not in the array.
+//
 // SelectedItems returns the collection as a Go slice.
 func (x *Menu) SelectedItems() []*MenuItem {
 	arr := x.inner.SelectedItems()
@@ -484,6 +500,8 @@ func (x *Menu) SelectedItems() []*MenuItem {
 	})
 }
 
+// The menu items that are selected. An item is selected when its state is `NSControl.StateValue.on`. @note This property is settable. Setting `selectedItems` will select any items that are contained in the provided array, and deselect any previously selected items that are not in the array.
+//
 // SetSelectedItems calls the underlying SetSelectedItems.
 func (x *Menu) SetSelectedItems(selectedItems *foundation.NSArray[*raw.NSMenuItem]) {
 	x.inner.SetSelectedItems(selectedItems)

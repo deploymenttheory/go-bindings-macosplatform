@@ -29,6 +29,8 @@ func MaterialPropertyConnectionFromID(id objc.ID) *MaterialPropertyConnection {
 	return &MaterialPropertyConnection{inner: raw.MDLMaterialPropertyConnectionFromID(id)}
 }
 
+// Connects the output to the input
+//
 // NewMaterialPropertyConnectionWithOutputInput creates a new [MaterialPropertyConnection].
 func NewMaterialPropertyConnectionWithOutputInput(output *raw.MDLMaterialProperty, input *raw.MDLMaterialProperty) *MaterialPropertyConnection {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialPropertyConnection")), objc.RegisterName("alloc"))

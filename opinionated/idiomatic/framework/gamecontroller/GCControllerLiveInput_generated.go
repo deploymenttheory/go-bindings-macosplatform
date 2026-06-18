@@ -53,6 +53,8 @@ func (x *ControllerLiveInput) NextInputState() *ControllerInputState {
 	return &ControllerInputState{inner: _r}
 }
 
+// Get a view of the controller's input without any system-level control remapping applied. Developers should avoid implementing their own control remapping functionality and to instead direct users to the system game controller settings to remap controls.  If you choose to implement your own control remapping functionality, or if your app streams controller input to a remote device that implements control remapping functionality, you should access controller physical input through this interface.
+//
 // UnmappedInput calls the underlying UnmappedInput.
 func (x *ControllerLiveInput) UnmappedInput() *ControllerLiveInput {
 	_r := x.inner.UnmappedInput()

@@ -38,30 +38,40 @@ func NewCNNBatchNormalizationNodeWithSourceDataSource(source *mpsneuralnetwork.M
 	return &CNNBatchNormalizationNode{inner: raw.MPSCNNBatchNormalizationNodeFromID(_id)}
 }
 
+// @abstract Options controlling how batch normalization is calculated @discussion     Default: MPSCNNBatchNormalizationFlagsDefault
+//
 // WithFlags sets the flags property and returns the receiver for chaining.
 func (x *CNNBatchNormalizationNode) WithFlags(flags mpsneuralnetwork.MPSCNNBatchNormalizationFlags) *CNNBatchNormalizationNode {
 	x.inner.SetFlags(flags)
 	return x
 }
 
+// @abstract   The training style of the forward node will be propagated to gradient nodes made from it
+//
 // WithTrainingStyle sets the trainingStyle property and returns the receiver for chaining.
 func (x *CNNBatchNormalizationNode) WithTrainingStyle(trainingStyle mpsneuralnetwork.MPSNNTrainingStyle) *CNNBatchNormalizationNode {
 	x.inner.SetTrainingStyle(trainingStyle)
 	return x
 }
 
+// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
+//
 // WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
 func (x *CNNBatchNormalizationNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNBatchNormalizationNode {
 	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNBatchNormalizationNode) WithLabel(label string) *CNNBatchNormalizationNode {
 	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @abstract Options controlling how batch normalization is calculated @discussion     Default: MPSCNNBatchNormalizationFlagsDefault
+//
 // Flags calls the underlying Flags.
 func (x *CNNBatchNormalizationNode) Flags() mpsneuralnetwork.MPSCNNBatchNormalizationFlags {
 	return x.inner.Flags()
@@ -72,11 +82,15 @@ func (x *CNNBatchNormalizationNode) SetFlags(flags mpsneuralnetwork.MPSCNNBatchN
 	x.inner.SetFlags(flags)
 }
 
+// @abstract   The training style of the forward node will be propagated to gradient nodes made from it
+//
 // TrainingStyle calls the underlying TrainingStyle.
 func (x *CNNBatchNormalizationNode) TrainingStyle() mpsneuralnetwork.MPSNNTrainingStyle {
 	return x.inner.TrainingStyle()
 }
 
+// @abstract   The training style of the forward node will be propagated to gradient nodes made from it
+//
 // SetTrainingStyle calls the underlying SetTrainingStyle.
 func (x *CNNBatchNormalizationNode) SetTrainingStyle(trainingStyle mpsneuralnetwork.MPSNNTrainingStyle) {
 	x.inner.SetTrainingStyle(trainingStyle)

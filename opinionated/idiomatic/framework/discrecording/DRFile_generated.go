@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @class		DRFile @abstract	Represents a file to be created on the disc. @discussion A file can be either a pointer to an exiting file (residing on a hard drive for example) or can be created at burn time from data passed into the file object as requested. DRFiles can only exist inside of virtual @link //apple_ref/occ/cl/DRFolder DRFolder @/link objects.
+//
 // File wraps [raw.DRFile] with a fluent Go API.
 type File struct {
 	inner *raw.DRFile
@@ -30,6 +32,8 @@ func FileFromID(id objc.ID) *File {
 	return &File{inner: raw.DRFileFromID(id)}
 }
 
+// @method 		initWithPath: @abstract		Initializes a real file object @discussion		This type of DRFile reads in data from an existing file located at path and burns that data to disc. @param 			path	The path to an existing file. @result  		An DRFile object.
+//
 // NewFileWithPath creates a new [File].
 func NewFileWithPath(path string) *File {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DRFile")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewFileWithPath(path string) *File {
 	return &File{inner: raw.DRFileFromID(_id)}
 }
 
+// @method 		initWithName:data: @abstract		Initializes a virtual file object @discussion		This type of DRFile burns the data passed in to the output disc, creating a file with the passed in name. @param 			name	The name of the file on output disc. @param			data	The data that will become the contents of the file on the output disc. @result  		A DRFile object.
+//
 // NewFileWithNameData creates a new [File].
 func NewFileWithNameData(name string, data *foundation.NSData) *File {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DRFile")), objc.RegisterName("alloc"))
@@ -44,6 +50,8 @@ func NewFileWithNameData(name string, data *foundation.NSData) *File {
 	return &File{inner: raw.DRFileFromID(_id)}
 }
 
+// @method 		initWithName:dataProducer: @abstract		Initializes a virtual file object @discussion		This type of DRFile burns the data produced to the output disc, creating a file with the passed in name. @param 			name		The name of the file on output disc. @param			producer	The object supplying the file data to the burn. @result  		A DRFile object.
+//
 // NewFileWithNameDataProducer creates a new [File].
 func NewFileWithNameDataProducer(name string, producer objc.ID) *File {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DRFile")), objc.RegisterName("alloc"))
@@ -51,6 +59,8 @@ func NewFileWithNameDataProducer(name string, producer objc.ID) *File {
 	return &File{inner: raw.DRFileFromID(_id)}
 }
 
+// @method 		initWithLinkType:pointingTo:inFilesystem: @abstract		Initializes a file object to point to another file on the output disc. @param 			linkType	The type of link that will be created. @param 			original	The file to point he hard link to @param			filesystem	The filesystem this link will exist on. @result  		A DRFile object.
+//
 // NewFileWithLinkTypePointingToInFilesystem creates a new [File].
 func NewFileWithLinkTypePointingToInFilesystem(linkType string, original *raw.DRFSObject, filesystem string) *File {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DRFile")), objc.RegisterName("alloc"))

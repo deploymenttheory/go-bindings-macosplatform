@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A class that represents a Virtio console device in a virtual machine.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtioconsoledevice
 type VZVirtioConsoleDevice struct {
 	VZConsoleDevice

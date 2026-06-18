@@ -35,6 +35,8 @@ func MTRBaseClusterLaundryDryerControlsFromID(id objc.ID) *MTRBaseClusterLaundry
 	return &MTRBaseClusterLaundryDryerControls{inner: raw.MTRBaseClusterLaundryDryerControlsFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterLaundryDryerControlsWithDeviceEndpointIDQueue creates a new [MTRBaseClusterLaundryDryerControls].
 func NewMTRBaseClusterLaundryDryerControlsWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterLaundryDryerControls {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterLaundryDryerControls")), objc.RegisterName("alloc"))

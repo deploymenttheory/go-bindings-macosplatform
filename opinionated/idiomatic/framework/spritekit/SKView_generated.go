@@ -37,12 +37,16 @@ func NewView() *View {
 	return &View{inner: raw.SKViewFromID(_id)}
 }
 
+// Pause the entire view
+//
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *View) WithPaused(paused bool) *View {
 	x.inner.SetPaused(paused)
 	return x
 }
 
+// Toggles display of performance stats in the view. All default to false.
+//
 // WithShowsFPS sets the showsFPS property and returns the receiver for chaining.
 func (x *View) WithShowsFPS(showsFPS bool) *View {
 	x.inner.SetShowsFPS(showsFPS)
@@ -79,18 +83,24 @@ func (x *View) WithShowsFields(showsFields bool) *View {
 	return x
 }
 
+// Toggles whether the view updates is rendered asynchronously or aligned with Core Animation updates. Defaults to YES.
+//
 // WithAsynchronous sets the asynchronous property and returns the receiver for chaining.
 func (x *View) WithAsynchronous(asynchronous bool) *View {
 	x.inner.SetAsynchronous(asynchronous)
 	return x
 }
 
+// Toggles whether the view allows transparent rendering. This allows content under the view to show through if a non-opaque backgroundColor is set on the scene. Defaults to NO.
+//
 // WithAllowsTransparency sets the allowsTransparency property and returns the receiver for chaining.
 func (x *View) WithAllowsTransparency(allowsTransparency bool) *View {
 	x.inner.SetAllowsTransparency(allowsTransparency)
 	return x
 }
 
+// Ignores sibling and traversal order to sort the rendered contents of a scene into the most efficient batching possible. This will require zPosition to be used in the scenes to properly guarantee elements are in front or behind each other. This defaults to NO, meaning that sibling order overrides efficiency heuristics in the rendering of the scenes in the view. Setting this to YES for a complex scene may substantially increase performance, but care must be taken as only zPosition determines render order before the efficiency heuristics are used.
+//
 // WithIgnoresSiblingOrder sets the ignoresSiblingOrder property and returns the receiver for chaining.
 func (x *View) WithIgnoresSiblingOrder(ignoresSiblingOrder bool) *View {
 	x.inner.SetIgnoresSiblingOrder(ignoresSiblingOrder)
@@ -115,6 +125,8 @@ func (x *View) WithDisableDepthStencilBuffer(disableDepthStencilBuffer bool) *Vi
 	return x
 }
 
+// Optional view delegate, see SKViewDelegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *View) WithDelegate(delegate *foundation.NSObject) *View {
 	x.inner.SetDelegate(delegate)
@@ -133,16 +145,22 @@ func (x *View) WithPreferredFrameRate(preferredFrameRate float32) *View {
 	return x
 }
 
+// Present an SKScene in the view, replacing the current scene. @param scene the scene to present.
+//
 // PresentScene calls the underlying PresentScene.
 func (x *View) PresentScene(scene *raw.SKScene) {
 	x.inner.PresentScene(scene)
 }
 
+// Present an SKScene in the view, replacing the current scene. If there is currently a scene being presented in the view, the transition is used to swap between them. @param scene the scene to present. @param transition the transition to use when presenting the scene.
+//
 // PresentSceneTransition calls the underlying PresentSceneTransition.
 func (x *View) PresentSceneTransition(scene *raw.SKScene, transition *raw.SKTransition) {
 	x.inner.PresentSceneTransition(scene, transition)
 }
 
+// Create an SKTexture containing a snapshot of how it would have been rendered in this view. The texture is tightly cropped to the size of the node. @param node the node subtree to render to the texture.
+//
 // TextureFromNode calls the underlying TextureFromNode.
 func (x *View) TextureFromNode(node *raw.SKNode) *Texture {
 	_r := x.inner.TextureFromNode(node)
@@ -152,6 +170,8 @@ func (x *View) TextureFromNode(node *raw.SKNode) *Texture {
 	return &Texture{inner: _r}
 }
 
+// Create an SKTexture containing a snapshot of how it would have been rendered in this view. The texture is cropped to the specified rectangle @param node the node subtree to render to the texture. @param crop the crop
+//
 // TextureFromNodeCrop calls the underlying TextureFromNodeCrop.
 func (x *View) TextureFromNodeCrop(node *raw.SKNode, crop corefoundation.CGRect) *Texture {
 	_r := x.inner.TextureFromNodeCrop(node, crop)
@@ -161,16 +181,22 @@ func (x *View) TextureFromNodeCrop(node *raw.SKNode, crop corefoundation.CGRect)
 	return &Texture{inner: _r}
 }
 
+// Converts a point from view space to scene space. @param point the point to convert. @param scene the scene to convert the point into.
+//
 // ConvertPointToScene calls the underlying ConvertPointToScene.
 func (x *View) ConvertPointToScene(point corefoundation.CGPoint, scene *raw.SKScene) corefoundation.CGPoint {
 	return x.inner.ConvertPointToScene(point, scene)
 }
 
+// Converts a point from scene space to view space. @param point the point to convert. @param scene the scene to convert the point into.
+//
 // ConvertPointFromScene calls the underlying ConvertPointFromScene.
 func (x *View) ConvertPointFromScene(point corefoundation.CGPoint, scene *raw.SKScene) corefoundation.CGPoint {
 	return x.inner.ConvertPointFromScene(point, scene)
 }
 
+// Pause the entire view
+//
 // IsPaused calls the underlying IsPaused.
 func (x *View) IsPaused() bool {
 	return x.inner.IsPaused()
@@ -181,6 +207,8 @@ func (x *View) SetPaused(paused bool) {
 	x.inner.SetPaused(paused)
 }
 
+// Toggles display of performance stats in the view. All default to false.
+//
 // ShowsFPS calls the underlying ShowsFPS.
 func (x *View) ShowsFPS() bool {
 	return x.inner.ShowsFPS()
@@ -241,6 +269,8 @@ func (x *View) SetShowsFields(showsFields bool) {
 	x.inner.SetShowsFields(showsFields)
 }
 
+// Toggles whether the view updates is rendered asynchronously or aligned with Core Animation updates. Defaults to YES.
+//
 // IsAsynchronous calls the underlying IsAsynchronous.
 func (x *View) IsAsynchronous() bool {
 	return x.inner.IsAsynchronous()
@@ -251,6 +281,8 @@ func (x *View) SetAsynchronous(asynchronous bool) {
 	x.inner.SetAsynchronous(asynchronous)
 }
 
+// Toggles whether the view allows transparent rendering. This allows content under the view to show through if a non-opaque backgroundColor is set on the scene. Defaults to NO.
+//
 // AllowsTransparency calls the underlying AllowsTransparency.
 func (x *View) AllowsTransparency() bool {
 	return x.inner.AllowsTransparency()
@@ -261,6 +293,8 @@ func (x *View) SetAllowsTransparency(allowsTransparency bool) {
 	x.inner.SetAllowsTransparency(allowsTransparency)
 }
 
+// Ignores sibling and traversal order to sort the rendered contents of a scene into the most efficient batching possible. This will require zPosition to be used in the scenes to properly guarantee elements are in front or behind each other. This defaults to NO, meaning that sibling order overrides efficiency heuristics in the rendering of the scenes in the view. Setting this to YES for a complex scene may substantially increase performance, but care must be taken as only zPosition determines render order before the efficiency heuristics are used.
+//
 // IgnoresSiblingOrder calls the underlying IgnoresSiblingOrder.
 func (x *View) IgnoresSiblingOrder() bool {
 	return x.inner.IgnoresSiblingOrder()
@@ -301,6 +335,8 @@ func (x *View) SetDisableDepthStencilBuffer(disableDepthStencilBuffer bool) {
 	x.inner.SetDisableDepthStencilBuffer(disableDepthStencilBuffer)
 }
 
+// Optional view delegate, see SKViewDelegate.
+//
 // Delegate calls the underlying Delegate.
 func (x *View) Delegate() *foundation.NSObject {
 	return x.inner.Delegate()
@@ -331,6 +367,8 @@ func (x *View) SetPreferredFrameRate(preferredFrameRate float32) {
 	x.inner.SetPreferredFrameRate(preferredFrameRate)
 }
 
+// The currently presented scene, otherwise nil. If in a transition, the 'incoming' scene is returned.
+//
 // Scene calls the underlying Scene.
 func (x *View) Scene() *Scene {
 	_r := x.inner.Scene()

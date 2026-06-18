@@ -37,28 +37,38 @@ func NewDeviceBrowser() *DeviceBrowser {
 	return &DeviceBrowser{inner: raw.ICDeviceBrowserFromID(_id)}
 }
 
+// @property delegate @abstract The delegate. It must conform to ICDeviceBrowserDelegate protocol. The messages this delegate can expect to receive are described by ICDeviceBrowserDelegate protocol.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *DeviceBrowser) WithDelegate(delegate raw.ICDeviceBrowserDelegate) *DeviceBrowser {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @property browsedDeviceTypeMask @abstract A mask whose set bits indicate the type of device(s) being browsed after the receiver receives the start message. This property can be changed while the browser is browsing for devices. This property can be constructed by OR'd values of ICDeviceTypeMask with values of ICDeviceLocationTypeMask.
+//
 // WithBrowsedDeviceTypeMask sets the browsedDeviceTypeMask property and returns the receiver for chaining.
 func (x *DeviceBrowser) WithBrowsedDeviceTypeMask(browsedDeviceTypeMask ICDeviceTypeMask) *DeviceBrowser {
 	x.inner.SetBrowsedDeviceTypeMask(raw.ICDeviceTypeMask(browsedDeviceTypeMask))
 	return x
 }
 
+// @method start: @abstract This message tells the receiver to start looking for devices. @discussion Make sure that the receiver's delegate is set prior to sending this message; otherwise this message will be ignored. The messages the delegate can expect to receive are described by ICDeviceBrowserDelegate protocol.
+//
 // Start calls the underlying Start.
 func (x *DeviceBrowser) Start() {
 	x.inner.Start()
 }
 
+// @method stop: @abstract This method tells the receiver to stop looking for devices. @discussion This will free all device instances that are not in use.
+//
 // Stop calls the underlying Stop.
 func (x *DeviceBrowser) Stop() {
 	x.inner.Stop()
 }
 
+// @property delegate @abstract The delegate. It must conform to ICDeviceBrowserDelegate protocol. The messages this delegate can expect to receive are described by ICDeviceBrowserDelegate protocol.
+//
 // Delegate calls the underlying Delegate.
 func (x *DeviceBrowser) Delegate() raw.ICDeviceBrowserDelegate {
 	return x.inner.Delegate()
@@ -69,11 +79,15 @@ func (x *DeviceBrowser) SetDelegate(delegate raw.ICDeviceBrowserDelegate) {
 	x.inner.SetDelegate(delegate)
 }
 
+// @property browsing @abstract Indicates whether the device browser is browsing for devices.
+//
 // IsBrowsing calls the underlying IsBrowsing.
 func (x *DeviceBrowser) IsBrowsing() bool {
 	return x.inner.IsBrowsing()
 }
 
+// @property browsedDeviceTypeMask @abstract A mask whose set bits indicate the type of device(s) being browsed after the receiver receives the start message. This property can be changed while the browser is browsing for devices. This property can be constructed by OR'd values of ICDeviceTypeMask with values of ICDeviceLocationTypeMask.
+//
 // BrowsedDeviceTypeMask calls the underlying BrowsedDeviceTypeMask.
 func (x *DeviceBrowser) BrowsedDeviceTypeMask() ICDeviceTypeMask {
 	return ICDeviceTypeMask(x.inner.BrowsedDeviceTypeMask())
@@ -84,6 +98,8 @@ func (x *DeviceBrowser) SetBrowsedDeviceTypeMask(browsedDeviceTypeMask ICDeviceT
 	x.inner.SetBrowsedDeviceTypeMask(raw.ICDeviceTypeMask(browsedDeviceTypeMask))
 }
 
+// @property devices @abstract All devices found by the browser. This property will change as devices appear and disappear. This array is empty before the first invocation of the delegate method 'deviceBrowser:didAddDevice:moreComing:'.
+//
 // Devices returns the collection as a Go slice.
 func (x *DeviceBrowser) Devices() []*Device {
 	arr := x.inner.Devices()
@@ -95,6 +111,8 @@ func (x *DeviceBrowser) Devices() []*Device {
 	})
 }
 
+// @property preferredDevice @abstract This property returns a device object that should be selected by the client application when it is launched. @discussion If the client application that calls this method is the auto-launch application associated with a device and that device is the last device attached (through USB, FireWire or network), then that device will be the preferred device. The best place to call this method is in the implmentation of the ICDeviceBrowser delegate method "deviceBrowser:didAddDevice:moreComing:", if the "moreComing" parameter passed to the delegate is "NO"; or in the delegate method "deviceBrowserDidEnumerateLocalDevices:".
+//
 // PreferredDevice calls the underlying PreferredDevice.
 func (x *DeviceBrowser) PreferredDevice() unsafe.Pointer {
 	return x.inner.PreferredDevice()

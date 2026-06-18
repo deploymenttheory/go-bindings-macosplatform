@@ -37,6 +37,8 @@ func NewMTRCommissionableBrowserResult() *MTRCommissionableBrowserResult {
 	return &MTRCommissionableBrowserResult{inner: raw.MTRCommissionableBrowserResultFromID(_id)}
 }
 
+// For a node advertising over DNS-SD, the instance name is a dynamic, pseudo-randomly selected, 64-bit temporary unique identifier, expressed as a fixed-length sixteen-character hexadecimal string, encoded as ASCII text using capital letters. For a node advertising over Bluetooth Low Energy, the instance name is always "BLE".
+//
 // InstanceName calls the underlying InstanceName.
 func (x *MTRCommissionableBrowserResult) InstanceName() string {
 	_r := x.inner.InstanceName()
@@ -46,21 +48,29 @@ func (x *MTRCommissionableBrowserResult) InstanceName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A 16-bit unsigned value identifying the device manufacturer.
+//
 // VendorID calls the underlying VendorID.
 func (x *MTRCommissionableBrowserResult) VendorID() *foundation.NSNumber {
 	return x.inner.VendorID()
 }
 
+// A 16-bit unsigned value identifying the product.
+//
 // ProductID calls the underlying ProductID.
 func (x *MTRCommissionableBrowserResult) ProductID() *foundation.NSNumber {
 	return x.inner.ProductID()
 }
 
+// A 12-bit value matching the field of the same name in MTRSetupPayload.
+//
 // Discriminator calls the underlying Discriminator.
 func (x *MTRCommissionableBrowserResult) Discriminator() *foundation.NSNumber {
 	return x.inner.Discriminator()
 }
 
+// A boolean indicating whether the device has a commissioning window open.
+//
 // CommissioningMode calls the underlying CommissioningMode.
 func (x *MTRCommissionableBrowserResult) CommissioningMode() bool {
 	return x.inner.CommissioningMode()

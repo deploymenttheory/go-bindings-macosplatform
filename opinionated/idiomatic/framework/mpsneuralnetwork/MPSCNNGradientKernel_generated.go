@@ -33,6 +33,8 @@ func CNNGradientKernelFromID(id objc.ID) *CNNGradientKernel {
 	return &CNNGradientKernel{inner: raw.MPSCNNGradientKernelFromID(id)}
 }
 
+// @abstract   Standard init with default properties per filter type @param      device      The device that the filter will be used on. May not be NULL. @result     A pointer to the newly initialized object. This will fail, returning nil if the device is not supported. Devices must be MTLFeatureSet_iOS_GPUFamily2_v1 or later.
+//
 // NewCNNGradientKernelWithDevice creates a new [CNNGradientKernel].
 func NewCNNGradientKernelWithDevice(device metal.MTLDevice) *CNNGradientKernel {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNGradientKernel")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewCNNGradientKernelWithDevice(device metal.MTLDevice) *CNNGradientKernel {
 	return &CNNGradientKernel{inner: raw.MPSCNNGradientKernelFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+//
 // NewCNNGradientKernelWithCoderDevice creates a new [CNNGradientKernel].
 func NewCNNGradientKernelWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *CNNGradientKernel {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNGradientKernel")), objc.RegisterName("alloc"))
@@ -47,134 +51,180 @@ func NewCNNGradientKernelWithCoderDevice(aDecoder *foundation.NSCoder, device me
 	return &CNNGradientKernel{inner: raw.MPSCNNGradientKernelFromID(_id)}
 }
 
+// @property   kernelOffsetX @abstract   Offset in the kernel reference frame to position the kernel in the X dimension @discussion In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
+//
 // WithKernelOffsetX sets the kernelOffsetX property and returns the receiver for chaining.
 func (x *CNNGradientKernel) WithKernelOffsetX(kernelOffsetX int) *CNNGradientKernel {
 	x.inner.SetKernelOffsetX(kernelOffsetX)
 	return x
 }
 
+// @property   kernelOffsetY @abstract   Offset in the kernel reference frame to position the kernel in the Y dimension @discussion In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
+//
 // WithKernelOffsetY sets the kernelOffsetY property and returns the receiver for chaining.
 func (x *CNNGradientKernel) WithKernelOffsetY(kernelOffsetY int) *CNNGradientKernel {
 	x.inner.SetKernelOffsetY(kernelOffsetY)
 	return x
 }
 
+// @property   primaryOffset @abstract   The position of the destination clip rectangle origin relative to the primary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref subsubsection_mpsoffset
+//
 // WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
 func (x *CNNGradientKernel) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNGradientKernel {
 	x.inner.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
 	return x
 }
 
+// @property   secondaryOffset @abstract   The position of the destination clip rectangle origin relative to the secondary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref subsubsection_mpsoffset
+//
 // WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
 func (x *CNNGradientKernel) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNGradientKernel {
 	x.inner.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
 	return x
 }
 
+// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also: @ref subsubsection_clipRect
+//
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *CNNGradientKernel) WithClipRect(clipRect metal.MTLRegion) *CNNGradientKernel {
 	x.inner.MPSCNNBinaryKernel.SetClipRect(clipRect)
 	return x
 }
 
+// @property   destinationFeatureChannelOffset @abstract   The number of channels in the destination MPSImage to skip before writing output. @discussion This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+//
 // WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
 func (x *CNNGradientKernel) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNGradientKernel {
 	x.inner.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
 	return x
 }
 
+// @property   primarySourceFeatureChannelOffset @abstract   The number of channels in the primary source MPSImage to skip before reading the input. @discussion This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+//
 // WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
 func (x *CNNGradientKernel) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNGradientKernel {
 	x.inner.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
 	return x
 }
 
+// @property   secondarySourceFeatureChannelOffset @abstract   The number of channels in the secondary source MPSImage to skip before reading the input. @discussion This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+//
 // WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
 func (x *CNNGradientKernel) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNGradientKernel {
 	x.inner.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
 	return x
 }
 
+// @property   primarySourceFeatureChannelMaxCount @abstract   The maximum number of channels in the primary source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+//
 // WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
 func (x *CNNGradientKernel) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNGradientKernel {
 	x.inner.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
 	return x
 }
 
+// @property   secondarySourceFeatureChannelMaxCount @abstract   The maximum number of channels in the secondary source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+//
 // WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
 func (x *CNNGradientKernel) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNGradientKernel {
 	x.inner.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
 	return x
 }
 
+// @property   primaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the primary source image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref subsubsection_edgemode
+//
 // WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
 func (x *CNNGradientKernel) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNGradientKernel {
 	x.inner.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
 	return x
 }
 
+// @property   secondaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the primary source image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref subsubsection_edgemode
+//
 // WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
 func (x *CNNGradientKernel) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNGradientKernel {
 	x.inner.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
 	return x
 }
 
+// @property   primaryStrideInPixelsX @abstract   The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image @discussion If the filter does not do up or downsampling, 1 is returned.
+//
 // WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
 func (x *CNNGradientKernel) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNGradientKernel {
 	x.inner.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
 	return x
 }
 
+// @property   primaryStrideInPixelsY @abstract   The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image @discussion If the filter does not do up or downsampling, 1 is returned.
+//
 // WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
 func (x *CNNGradientKernel) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNGradientKernel {
 	x.inner.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
 	return x
 }
 
+// @property   secondaryStrideInPixelsX @abstract   The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image @discussion If the filter does not do up or downsampling, 1 is returned.
+//
 // WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
 func (x *CNNGradientKernel) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNGradientKernel {
 	x.inner.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
 	return x
 }
 
+// @property   secondaryStrideInPixelsY @abstract   The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image @discussion If the filter does not do up or downsampling, 1 is returned.
+//
 // WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
 func (x *CNNGradientKernel) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNGradientKernel {
 	x.inner.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
 	return x
 }
 
+// @property   padding @abstract   The padding method used by the filter @discussion This influences how strideInPixelsX/Y should be interpreted. Default:  MPSNNPaddingMethodAlignCentered | MPSNNPaddingMethodAddRemainderToTopLeft | MPSNNPaddingMethodSizeSame Some object types (e.g. MPSCNNFullyConnected) may override this default with something appropriate to its operation.
+//
 // WithPadding sets the padding property and returns the receiver for chaining.
 func (x *CNNGradientKernel) WithPadding(padding raw.MPSNNPadding) *CNNGradientKernel {
 	x.inner.MPSCNNBinaryKernel.SetPadding(padding)
 	return x
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
 func (x *CNNGradientKernel) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNGradientKernel {
 	x.inner.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
 	return x
 }
 
+// @abstract   Encode a gradient filter and return a gradient @discussion During training, gradient filters are used to calculate the gradient associated with the loss for each feature channel in the forward pass source image. For those nodes that are trainable, these are then used to refine the value used in the trainable parameter. They consume a source gradient image which contains the gradients corresponding with the forward pass destination image, and calculate the gradients corresponding to the forward pass source image. A gradient filter consumes a MPSNNGradientState object which captured various forward pass properties such as offset and edgeMode at the time the forward pass was encoded. These are transferred to the MPSCNNBinaryKernel secondary image properties automatically when this method creates its destination image. @param      commandBuffer   The MTLCommandBuffer on which to encode @param      sourceGradient  The gradient image from the "next" filter in the graph (in the inference direction) @param      sourceImage     The image used as source image by the forward inference pass @param      gradientState   The MPSNNGradientState or MPSNNBinaryGradientState subclass produced by the forward inference pass @result   The result gradient from the gradient filter
+//
 // EncodeToCommandBufferSourceGradientSourceImageGradientState calls the underlying EncodeToCommandBufferSourceGradientSourceImageGradientState.
 func (x *CNNGradientKernel) EncodeToCommandBufferSourceGradientSourceImageGradientState(commandBuffer metal.MTLCommandBuffer, sourceGradient *mpscore.MPSImage, sourceImage *mpscore.MPSImage, gradientState *mpscore.MPSState) *mpscore.MPSImage {
 	return x.inner.EncodeToCommandBufferSourceGradientSourceImageGradientState(commandBuffer, sourceGradient, sourceImage, gradientState)
 }
 
+// @abstract   Encode a gradient filter and return a gradient @discussion During training, gradient filters are used to calculate the gradient associated with the loss for each feature channel in the forward pass source image. For those nodes that are trainable, these are then used to refine the value used in the trainable parameter. They consume a source gradient image which contains the gradients corresponding with the forward pass destination image, and calculate the gradients corresponding to the forward pass source image. A gradient filter consumes a MPSNNGradientState object which captured various forward pass properties such as offset and edgeMode at the time the forward pass was encoded. These are transferred to the MPSCNNBinaryKernel secondary image properties automatically when you use -[MPSCNNGradientKernel destinationImageDescriptorForSourceImages:sourceStates:]. If you do not call this method, then you are responsible for configuring all of the primary and secondary image properties in MPSCNNBinaryKernel. Please see class description for expected ordering of operations. @param      commandBuffer   The MTLCommandBuffer on which to encode @param      sourceGradient  The gradient image from the "next" filter in the graph @param      sourceImage     The image used as source image from the forward pass @param      gradientState   The MPSNNGradientState and MPSNNBinaryGradientState subclass produced by the forward pass @param      destinationGradient  The MPSImage into which to write the filter result
+//
 // EncodeToCommandBufferSourceGradientSourceImageGradientStateDestinationGradient calls the underlying EncodeToCommandBufferSourceGradientSourceImageGradientStateDestinationGradient.
 func (x *CNNGradientKernel) EncodeToCommandBufferSourceGradientSourceImageGradientStateDestinationGradient(commandBuffer metal.MTLCommandBuffer, sourceGradient *mpscore.MPSImage, sourceImage *mpscore.MPSImage, gradientState *mpscore.MPSState, destinationGradient *mpscore.MPSImage) {
 	x.inner.EncodeToCommandBufferSourceGradientSourceImageGradientStateDestinationGradient(commandBuffer, sourceGradient, sourceImage, gradientState, destinationGradient)
 }
 
+// @abstract   Encode a gradient filter and return a gradient @discussion During training, gradient filters are used to calculate the gradient associated with the loss for each feature channel in the forward pass source image. For those nodes that are trainable, these are then used to refine the value used in the trainable parameter. They consume a source gradient image which contains the gradients corresponding with the forward pass destination image, and calculate the gradients corresponding to the forward pass source image. A gradient filter consumes a MPSNNGradientState object which captured various forward pass properties such as offset and edgeMode at the time the forward pass was encoded. These are transferred to the MPSCNNBinaryKernel secondary image properties automatically when this method creates its destination image. @param      commandBuffer    The MTLCommandBuffer on which to encode @param      sourceGradients  The gradient images from the "next" filter in the graph @param      sourceImages     The images used as source image from the forward pass @param      gradientStates   The MPSNNGradientState or MPSNNBinaryGradientState subclass produced by the forward pass
+//
 // EncodeBatchToCommandBufferSourceGradientsSourceImagesGradientStates calls the underlying EncodeBatchToCommandBufferSourceGradientsSourceImagesGradientStates.
 func (x *CNNGradientKernel) EncodeBatchToCommandBufferSourceGradientsSourceImagesGradientStates(commandBuffer metal.MTLCommandBuffer, sourceGradients unsafe.Pointer, sourceImages unsafe.Pointer, gradientStates unsafe.Pointer) unsafe.Pointer {
 	return x.inner.EncodeBatchToCommandBufferSourceGradientsSourceImagesGradientStates(commandBuffer, sourceGradients, sourceImages, gradientStates)
 }
 
+// @abstract   Encode a gradient filter and return a gradient @discussion During training, gradient filters are used to calculate the gradient associated with the loss for each feature channel in the forward pass source image. For those nodes that are trainable, these are then used to refine the value used in the trainable parameter. They consume a source gradient image which contains the gradients corresponding with the forward pass destination image, and calculate the gradients corresponding to the forward pass source image. A gradient filter consumes a MPSNNGradientState object which captured various forward pass properties such as offset and edgeMode at the time the forward pass was encoded. These are transferred to the MPSCNNBinaryKernel secondary image properties automatically when you use -[MPSCNNGradientKernel destinationImageDescriptorForSourceImages:sourceStates:]. If you do not call this method, then you are responsible for configuring all of the primary and secondary image properties in MPSCNNBinaryKernel. Please see class description for expected ordering of operations. @param      commandBuffer    The MTLCommandBuffer on which to encode @param      sourceGradients  The gradient images from the "next" filter in the graph @param      sourceImages     The image used as source images from the forward pass @param      gradientStates   An array of the MPSNNGradientState or MPSNNBinaryGradientState subclass produced by the forward pass @param      destinationGradients  The MPSImages into which to write the filter result
+//
 // EncodeBatchToCommandBufferSourceGradientsSourceImagesGradientStatesDestinationGradients calls the underlying EncodeBatchToCommandBufferSourceGradientsSourceImagesGradientStatesDestinationGradients.
 func (x *CNNGradientKernel) EncodeBatchToCommandBufferSourceGradientsSourceImagesGradientStatesDestinationGradients(commandBuffer metal.MTLCommandBuffer, sourceGradients unsafe.Pointer, sourceImages unsafe.Pointer, gradientStates unsafe.Pointer, destinationGradients unsafe.Pointer) {
 	x.inner.EncodeBatchToCommandBufferSourceGradientsSourceImagesGradientStatesDestinationGradients(commandBuffer, sourceGradients, sourceImages, gradientStates, destinationGradients)
 }
 
+// @property   kernelOffsetX @abstract   Offset in the kernel reference frame to position the kernel in the X dimension @discussion In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
+//
 // KernelOffsetX calls the underlying KernelOffsetX.
 func (x *CNNGradientKernel) KernelOffsetX() int {
 	return x.inner.KernelOffsetX()
@@ -185,6 +235,8 @@ func (x *CNNGradientKernel) SetKernelOffsetX(kernelOffsetX int) {
 	x.inner.SetKernelOffsetX(kernelOffsetX)
 }
 
+// @property   kernelOffsetY @abstract   Offset in the kernel reference frame to position the kernel in the Y dimension @discussion In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
+//
 // KernelOffsetY calls the underlying KernelOffsetY.
 func (x *CNNGradientKernel) KernelOffsetY() int {
 	return x.inner.KernelOffsetY()

@@ -30,6 +30,8 @@ func PointFromID(id objc.ID) *Point {
 	return &Point{inner: raw.VNPointFromID(id)}
 }
 
+// @brief Initializes a VNPoint object from X and Y coordinates.
+//
 // NewPointWithXY creates a new [Point].
 func NewPointWithXY(x float64, y float64) *Point {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNPoint")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewPointWithXY(x float64, y float64) *Point {
 	return &Point{inner: raw.VNPointFromID(_id)}
 }
 
+// @brief Initializes a VNPoint object from a CGPoint.
+//
 // NewPointWithLocation creates a new [Point].
 func NewPointWithLocation(location corefoundation.CGPoint) *Point {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNPoint")), objc.RegisterName("alloc"))
@@ -44,21 +48,29 @@ func NewPointWithLocation(location corefoundation.CGPoint) *Point {
 	return &Point{inner: raw.VNPointFromID(_id)}
 }
 
+// @brief Returns the Euclidean distance to another point. @param point The destination point. @return the Euclidean distance between the target and specified points.
+//
 // DistanceToPoint calls the underlying DistanceToPoint.
 func (x *Point) DistanceToPoint(point *raw.VNPoint) float64 {
 	return x.inner.DistanceToPoint(point)
 }
 
+// @brief Returns the X and Y coordinates of the point, as CGPoint type, with respect to the origin of the coordinate system the point is defined in.
+//
 // Location calls the underlying Location.
 func (x *Point) Location() corefoundation.CGPoint {
 	return x.inner.Location()
 }
 
+// @brief Returns the X coordinate of the point with respect to the origin of the coordinate system the point is defined in.
+//
 // X calls the underlying X.
 func (x *Point) X() float64 {
 	return x.inner.X()
 }
 
+// @brief Returns the Y coordinate of the point with respect to the origin of the coordinate system the point is defined in.
+//
 // Y calls the underlying Y.
 func (x *Point) Y() float64 {
 	return x.inner.Y()

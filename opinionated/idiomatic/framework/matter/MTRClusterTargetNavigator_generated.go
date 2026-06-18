@@ -33,6 +33,8 @@ func MTRClusterTargetNavigatorFromID(id objc.ID) *MTRClusterTargetNavigator {
 	return &MTRClusterTargetNavigator{inner: raw.MTRClusterTargetNavigatorFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterTargetNavigatorWithDeviceEndpointIDQueue creates a new [MTRClusterTargetNavigator].
 func NewMTRClusterTargetNavigatorWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterTargetNavigator {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterTargetNavigator")), objc.RegisterName("alloc"))

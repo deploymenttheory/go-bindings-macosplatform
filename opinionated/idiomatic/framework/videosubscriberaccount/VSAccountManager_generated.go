@@ -35,12 +35,16 @@ func NewVSAccountManager() *VSAccountManager {
 	return &VSAccountManager{inner: raw.VSAccountManagerFromID(_id)}
 }
 
+// An object that can help the account manager by presenting and dismissing view controllers when needed, and deciding whether to allow authentication with the selected provider. Some requests may fail if a delegate is not provided.  For example, an account metadata request may require a delegate if it allows interruption.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *VSAccountManager) WithDelegate(delegate raw.VSAccountManagerDelegate) *VSAccountManager {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// An object that can help the account manager by presenting and dismissing view controllers when needed, and deciding whether to allow authentication with the selected provider. Some requests may fail if a delegate is not provided.  For example, an account metadata request may require a delegate if it allows interruption.
+//
 // Delegate calls the underlying Delegate.
 func (x *VSAccountManager) Delegate() raw.VSAccountManagerDelegate {
 	return x.inner.Delegate()

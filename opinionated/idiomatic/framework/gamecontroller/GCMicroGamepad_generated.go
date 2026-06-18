@@ -41,24 +41,32 @@ func (x *MicroGamepad) WithValueChangedHandler(valueChangedHandler func(*raw.GCM
 	return x
 }
 
+// The Micro profile can use the raw position values of the touchpad on the remote as D-pad values, or it can create a virtual dpad centered around the first contact point with the surface. If NO; a smaller sliding window is created around the initial touch point and subsequent movement is relative to that center. Movement outside the window will slide the window with it to re-center it. This is great for surfaces where there is no clear sense of a middle and drift over time is an issue. If YES; the absolute values are used and any drift will have to managed manually either through user traning or by a developer using the dpad. The default value for this property is NO, meaning a sliding window is used for the dpad.
+//
 // WithReportsAbsoluteDpadValues sets the reportsAbsoluteDpadValues property and returns the receiver for chaining.
 func (x *MicroGamepad) WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *MicroGamepad {
 	x.inner.SetReportsAbsoluteDpadValues(reportsAbsoluteDpadValues)
 	return x
 }
 
+// Allows the Micro profile to monitor the orientation of the controller, if the controller is positioned in landscape orientation, D-pad input values will be transposed 90 degrees to match the new orientation. The default value for this property is NO.
+//
 // WithAllowsRotation sets the allowsRotation property and returns the receiver for chaining.
 func (x *MicroGamepad) WithAllowsRotation(allowsRotation bool) *MicroGamepad {
 	x.inner.SetAllowsRotation(allowsRotation)
 	return x
 }
 
+// Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called for each element that changed. @param profile this profile that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons. @param element the element that has been modified.
+//
 // WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
 func (x *MicroGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *MicroGamepad {
 	x.inner.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
 	return x
 }
 
+// Polls the state vector of the controller and saves it to a snapshot. The snapshot is stored in a device independent format that can be serialized and used at a later date. This is useful for features such as quality assurance, save game or replay functionality among many. If your application is heavily multithreaded this may also be useful to guarantee atomicity of input handling as a snapshot will not change based on user input once it is taken. @see GCMicroGamepadSnapshot
+//
 // SaveSnapshot calls the underlying SaveSnapshot.
 func (x *MicroGamepad) SaveSnapshot() *MicroGamepadSnapshot {
 	_r := x.inner.SaveSnapshot()
@@ -68,11 +76,15 @@ func (x *MicroGamepad) SaveSnapshot() *MicroGamepadSnapshot {
 	return &MicroGamepadSnapshot{inner: _r}
 }
 
+// Sets the state vector of the micro gamepad to a copy of the input micro gamepad's state vector. @note If the controller's snapshot flag is set to NO, this method has no effect. @see GCController.snapshot
+//
 // SetStateFromMicroGamepad calls the underlying SetStateFromMicroGamepad.
 func (x *MicroGamepad) SetStateFromMicroGamepad(microGamepad *raw.GCMicroGamepad) {
 	x.inner.SetStateFromMicroGamepad(microGamepad)
 }
 
+// A profile keeps a reference to the controller that this profile is mapping input from.
+//
 // Controller calls the underlying Controller.
 func (x *MicroGamepad) Controller() *Controller {
 	_r := x.inner.Controller()
@@ -92,6 +104,8 @@ func (x *MicroGamepad) SetValueChangedHandler(valueChangedHandler func(*raw.GCMi
 	x.inner.SetValueChangedHandler(valueChangedHandler)
 }
 
+// Optionally analog in the Micro profile. All the elements of this directional input are either analog or digital.
+//
 // Dpad calls the underlying Dpad.
 func (x *MicroGamepad) Dpad() *ControllerDirectionPad {
 	_r := x.inner.Dpad()
@@ -101,6 +115,8 @@ func (x *MicroGamepad) Dpad() *ControllerDirectionPad {
 	return &ControllerDirectionPad{inner: _r}
 }
 
+// The Micro profile has two buttons that are optionally analog in the Micro profile. Button A is the primary action button, it indicates affirmative action and should be used to advance in menus or perform the primary action in gameplay.
+//
 // ButtonA calls the underlying ButtonA.
 func (x *MicroGamepad) ButtonA() *ControllerButtonInput {
 	_r := x.inner.ButtonA()
@@ -110,6 +126,8 @@ func (x *MicroGamepad) ButtonA() *ControllerButtonInput {
 	return &ControllerButtonInput{inner: _r}
 }
 
+// Button X is the secondary action button, it indicates an alternate affirmative action and should be used to perform a secondary action. If there is no secondary action it should be used as equivalent to buttonA. Unlike on other profiles there is no negative button on this profile. Instead the menu button should be used to present menu content or to retreat in a menu flow. @see buttonA
+//
 // ButtonX calls the underlying ButtonX.
 func (x *MicroGamepad) ButtonX() *ControllerButtonInput {
 	_r := x.inner.ButtonX()
@@ -119,6 +137,8 @@ func (x *MicroGamepad) ButtonX() *ControllerButtonInput {
 	return &ControllerButtonInput{inner: _r}
 }
 
+// Button menu is the primary menu button, and should be used to enter the main menu and pause the game.
+//
 // ButtonMenu calls the underlying ButtonMenu.
 func (x *MicroGamepad) ButtonMenu() *ControllerButtonInput {
 	_r := x.inner.ButtonMenu()
@@ -128,6 +148,8 @@ func (x *MicroGamepad) ButtonMenu() *ControllerButtonInput {
 	return &ControllerButtonInput{inner: _r}
 }
 
+// The Micro profile can use the raw position values of the touchpad on the remote as D-pad values, or it can create a virtual dpad centered around the first contact point with the surface. If NO; a smaller sliding window is created around the initial touch point and subsequent movement is relative to that center. Movement outside the window will slide the window with it to re-center it. This is great for surfaces where there is no clear sense of a middle and drift over time is an issue. If YES; the absolute values are used and any drift will have to managed manually either through user traning or by a developer using the dpad. The default value for this property is NO, meaning a sliding window is used for the dpad.
+//
 // ReportsAbsoluteDpadValues calls the underlying ReportsAbsoluteDpadValues.
 func (x *MicroGamepad) ReportsAbsoluteDpadValues() bool {
 	return x.inner.ReportsAbsoluteDpadValues()
@@ -138,6 +160,8 @@ func (x *MicroGamepad) SetReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bo
 	x.inner.SetReportsAbsoluteDpadValues(reportsAbsoluteDpadValues)
 }
 
+// Allows the Micro profile to monitor the orientation of the controller, if the controller is positioned in landscape orientation, D-pad input values will be transposed 90 degrees to match the new orientation. The default value for this property is NO.
+//
 // AllowsRotation calls the underlying AllowsRotation.
 func (x *MicroGamepad) AllowsRotation() bool {
 	return x.inner.AllowsRotation()

@@ -32,6 +32,8 @@ func MTRDeviceControllerStartupParamsFromID(id objc.ID) *MTRDeviceControllerStar
 	return &MTRDeviceControllerStartupParams{inner: raw.MTRDeviceControllerStartupParamsFromID(id)}
 }
 
+// Prepare to initialize a controller given a keypair to use for signing operational certificates. A controller created from MTRDeviceControllerStartupParams initialized with this method will be able to issue operational certificates to devices it commissions, using nocSigner to sign them. @param ipk The Identity Protection Key, must be 16 bytes in length @param fabricID The fabric identifier, must be non-zero.
+//
 // NewMTRDeviceControllerStartupParamsWithIPKFabricIDNocSigner creates a new [MTRDeviceControllerStartupParams].
 func NewMTRDeviceControllerStartupParamsWithIPKFabricIDNocSigner(ipk *foundation.NSData, fabricID *foundation.NSNumber, nocSigner raw.MTRKeypair) *MTRDeviceControllerStartupParams {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceControllerStartupParams")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewMTRDeviceControllerStartupParamsWithIPKFabricIDNocSigner(ipk *foundation
 	return &MTRDeviceControllerStartupParams{inner: raw.MTRDeviceControllerStartupParamsFromID(_id)}
 }
 
+// Prepare to initialize a controller that is not able to sign operational certificates itself, and therefore needs to be provided with a complete operational certificate chain.  This initialization method should be used when none of the certificate-signing private keys are available locally. A controller created from MTRDeviceControllerStartupParams initialized with this method will not be able to commission devices unless operationalCertificateIssuer and operationalCertificateIssuerQueue are set. The fabric id and node id to use for the controller will be derived from the provided operationalCertificate. @param ipk The Identity Protection Key, must be 16 bytes in length @param intermediateCertificate may be nil if operationalCertificate is directly signed by rootCertificate.
+//
 // NewMTRDeviceControllerStartupParamsWithIPKOperationalKeypairOperationalCertificateIntermediateCertificateRootCertificate creates a new [MTRDeviceControllerStartupParams].
 func NewMTRDeviceControllerStartupParamsWithIPKOperationalKeypairOperationalCertificateIntermediateCertificateRootCertificate(ipk *foundation.NSData, operationalKeypair raw.MTRKeypair, operationalCertificate *foundation.NSData, intermediateCertificate *foundation.NSData, rootCertificate *foundation.NSData) *MTRDeviceControllerStartupParams {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceControllerStartupParams")), objc.RegisterName("alloc"))
@@ -60,12 +64,16 @@ func NewMTRDeviceControllerStartupParamsWithOperationalKeypairOperationalCertifi
 	return &MTRDeviceControllerStartupParams{inner: raw.MTRDeviceControllerStartupParamsFromID(_id)}
 }
 
+// Vendor ID (allocated by the Connectivity Standards Alliance) for this controller. If not nil, must not be the "standard" vendor id (0). When creating a new fabric: * Must not be nil. When using an existing fabric: * Will override existing value if not nil. Otherwise existing value will be used.
+//
 // WithVendorID sets the vendorID property and returns the receiver for chaining.
 func (x *MTRDeviceControllerStartupParams) WithVendorID(vendorID *foundation.NSNumber) *MTRDeviceControllerStartupParams {
 	x.inner.SetVendorID(vendorID)
 	return x
 }
 
+// Node id for this controller. If operationalCertificate is not nil, must be nil.  The provided operational certificate will be used as-is. If not nil, must be a valid Matter operational node id. If operationalCertificate is nil, nodeID and operationalKeypair are used to determine an operational certificate, as follows: * When creating a new fabric: ** nodeID is allowed to be nil to indicate that a random node id should be generated. * When using an existing fabric: ** nodeID is allowed to be nil to indicate that the existing operational node id should be used.  The existing operational keys will also be used, unless operationalKeypair is provided.  The existing caseAuthenticatedTags will be used. ** If nodeID is not nil, a new operational certificate will be generated for the provided node id (even if that matches the existing node id), using either the operationalKeypair if that is provided or a new randomly generated operational key, and using the provided caseAuthenticatedTags.
+//
 // WithNodeID sets the nodeID property and returns the receiver for chaining.
 func (x *MTRDeviceControllerStartupParams) WithNodeID(nodeID *foundation.NSNumber) *MTRDeviceControllerStartupParams {
 	x.inner.SetNodeID(nodeID)
@@ -78,24 +86,32 @@ func (x *MTRDeviceControllerStartupParams) WithCaseAuthenticatedTags(caseAuthent
 	return x
 }
 
+// Root certificate, in X.509 DER form, to use. Must not be nil if an intermediate CA is being used, to allow determination of the root public key. If not nil, and if an intermediate CA is not being used, the public key of this certificate must match the public key of nocSigner, if nocSigner is not nil. When creating a new fabric: * May be nil if nocSigner is not nil and an intermediate CA is not being used.  In that case the nocSigner keypair, which is the keypair for the root certificate, will be used to generate and sign a root certificate, with a random issuer id.  In this case, the fabricID will be included in the root certificate's subject DN. When using an existing fabric: * May be nil if nocSigner is not nil and an intermediate CA is not being used.  In that case, the existing root certificate for the fabric will be used. * If not nil must satisfy the following properties: 1) The public key must match the public key of the existing root certificate. 2) The subject DN must match the subject DN of the existing root certificate.
+//
 // WithRootCertificate sets the rootCertificate property and returns the receiver for chaining.
 func (x *MTRDeviceControllerStartupParams) WithRootCertificate(rootCertificate *foundation.NSData) *MTRDeviceControllerStartupParams {
 	x.inner.SetRootCertificate(rootCertificate)
 	return x
 }
 
+// Intermediate certificate, in X.509 DER form, to use. If not nil, rootCertificate must not be nil, and the intermediate certificate must be signed by rootCertificate. If not nil, and nocSigner is not nil, the public key of this certificate must match the public key of nocSigner. When creating a new fabric: * Must not be nil if an intermediate CA is being used. * Must be nil if an intermediate CA is not being used. When using an existing fabric: * If not nil, will be used as the intermediate certificate for issuing operational certificates. * If nil: * If nocSigner is not nil, there is an existing intermediate certificate, and it matches the nocSigner public key, the existing intermediate certificate will be used. * Otherwise the fabric will not use an intermediate certificate.  This allows switching from using an intermediate CA to not using one.
+//
 // WithIntermediateCertificate sets the intermediateCertificate property and returns the receiver for chaining.
 func (x *MTRDeviceControllerStartupParams) WithIntermediateCertificate(intermediateCertificate *foundation.NSData) *MTRDeviceControllerStartupParams {
 	x.inner.SetIntermediateCertificate(intermediateCertificate)
 	return x
 }
 
+// Operational keypair to use.  If operationalCertificate is not nil, the public key must match operationalCertificate. If not nil, and if operationalCertificate is nil, a new operational certificate will be generated for the given operationalKeypair.  The node id for that certificate will be determined as described in the documentation for nodeID.
+//
 // WithOperationalKeypair sets the operationalKeypair property and returns the receiver for chaining.
 func (x *MTRDeviceControllerStartupParams) WithOperationalKeypair(operationalKeypair raw.MTRKeypair) *MTRDeviceControllerStartupParams {
 	x.inner.SetOperationalKeypair(operationalKeypair)
 	return x
 }
 
+// The certificate issuer delegate to use for issuing operational certificates when commissioning devices.  Allowed to be nil if this controller either does not issue operational certificates at all or internally generates the certificates to be issued.  In the latter case, nocSigner must not be nil.
+//
 // WithOperationalCertificateIssuer sets the operationalCertificateIssuer property and returns the receiver for chaining.
 func (x *MTRDeviceControllerStartupParams) WithOperationalCertificateIssuer(operationalCertificateIssuer raw.MTROperationalCertificateIssuer) *MTRDeviceControllerStartupParams {
 	x.inner.SetOperationalCertificateIssuer(operationalCertificateIssuer)
@@ -120,21 +136,29 @@ func (x *MTRDeviceControllerStartupParams) WithNodeId(nodeId *foundation.NSNumbe
 	return x
 }
 
+// Keypair used to sign operational certificates.  This is the root CA keypair if not using an intermediate CA, the intermediate CA's keypair otherwise. Allowed to be nil if this controller will not be issuing internally-generated operational certificates.  In that case, the MTRDeviceControllerStartupParams object must be initialized using initWithIPK:operationalKeypair:operationalCertificate:intermediateCertificate:rootCertificate: (to provide the operational credentials for t2he controller itself).
+//
 // NocSigner calls the underlying NocSigner.
 func (x *MTRDeviceControllerStartupParams) NocSigner() raw.MTRKeypair {
 	return x.inner.NocSigner()
 }
 
+// Fabric id for the controller.  Must be set to a nonzero value.  This is scoped by the root public key, which is determined as follows: * If a root certificate is provided, it is the public key of the root certificate. * If a root certificate is not provided, the root public key is the public key of the nocSigner keypair, since in this case we are not using an intermediate certificate.
+//
 // FabricID calls the underlying FabricID.
 func (x *MTRDeviceControllerStartupParams) FabricID() *foundation.NSNumber {
 	return x.inner.FabricID()
 }
 
+// IPK to use for the controller's fabric.  Allowed to change from the last time a controller was started on this fabric if a new IPK has been distributed to all the devices the controller wants to interact with.
+//
 // Ipk calls the underlying Ipk.
 func (x *MTRDeviceControllerStartupParams) Ipk() *foundation.NSData {
 	return x.inner.Ipk()
 }
 
+// Vendor ID (allocated by the Connectivity Standards Alliance) for this controller. If not nil, must not be the "standard" vendor id (0). When creating a new fabric: * Must not be nil. When using an existing fabric: * Will override existing value if not nil. Otherwise existing value will be used.
+//
 // VendorID calls the underlying VendorID.
 func (x *MTRDeviceControllerStartupParams) VendorID() *foundation.NSNumber {
 	return x.inner.VendorID()
@@ -145,6 +169,8 @@ func (x *MTRDeviceControllerStartupParams) SetVendorID(vendorID *foundation.NSNu
 	x.inner.SetVendorID(vendorID)
 }
 
+// Node id for this controller. If operationalCertificate is not nil, must be nil.  The provided operational certificate will be used as-is. If not nil, must be a valid Matter operational node id. If operationalCertificate is nil, nodeID and operationalKeypair are used to determine an operational certificate, as follows: * When creating a new fabric: ** nodeID is allowed to be nil to indicate that a random node id should be generated. * When using an existing fabric: ** nodeID is allowed to be nil to indicate that the existing operational node id should be used.  The existing operational keys will also be used, unless operationalKeypair is provided.  The existing caseAuthenticatedTags will be used. ** If nodeID is not nil, a new operational certificate will be generated for the provided node id (even if that matches the existing node id), using either the operationalKeypair if that is provided or a new randomly generated operational key, and using the provided caseAuthenticatedTags.
+//
 // NodeID calls the underlying NodeID.
 func (x *MTRDeviceControllerStartupParams) NodeID() *foundation.NSNumber {
 	return x.inner.NodeID()
@@ -165,6 +191,8 @@ func (x *MTRDeviceControllerStartupParams) SetCaseAuthenticatedTags(caseAuthenti
 	x.inner.SetCaseAuthenticatedTags(caseAuthenticatedTags)
 }
 
+// Root certificate, in X.509 DER form, to use. Must not be nil if an intermediate CA is being used, to allow determination of the root public key. If not nil, and if an intermediate CA is not being used, the public key of this certificate must match the public key of nocSigner, if nocSigner is not nil. When creating a new fabric: * May be nil if nocSigner is not nil and an intermediate CA is not being used.  In that case the nocSigner keypair, which is the keypair for the root certificate, will be used to generate and sign a root certificate, with a random issuer id.  In this case, the fabricID will be included in the root certificate's subject DN. When using an existing fabric: * May be nil if nocSigner is not nil and an intermediate CA is not being used.  In that case, the existing root certificate for the fabric will be used. * If not nil must satisfy the following properties: 1) The public key must match the public key of the existing root certificate. 2) The subject DN must match the subject DN of the existing root certificate.
+//
 // RootCertificate calls the underlying RootCertificate.
 func (x *MTRDeviceControllerStartupParams) RootCertificate() *foundation.NSData {
 	return x.inner.RootCertificate()
@@ -175,6 +203,8 @@ func (x *MTRDeviceControllerStartupParams) SetRootCertificate(rootCertificate *f
 	x.inner.SetRootCertificate(rootCertificate)
 }
 
+// Intermediate certificate, in X.509 DER form, to use. If not nil, rootCertificate must not be nil, and the intermediate certificate must be signed by rootCertificate. If not nil, and nocSigner is not nil, the public key of this certificate must match the public key of nocSigner. When creating a new fabric: * Must not be nil if an intermediate CA is being used. * Must be nil if an intermediate CA is not being used. When using an existing fabric: * If not nil, will be used as the intermediate certificate for issuing operational certificates. * If nil: * If nocSigner is not nil, there is an existing intermediate certificate, and it matches the nocSigner public key, the existing intermediate certificate will be used. * Otherwise the fabric will not use an intermediate certificate.  This allows switching from using an intermediate CA to not using one.
+//
 // IntermediateCertificate calls the underlying IntermediateCertificate.
 func (x *MTRDeviceControllerStartupParams) IntermediateCertificate() *foundation.NSData {
 	return x.inner.IntermediateCertificate()
@@ -185,11 +215,15 @@ func (x *MTRDeviceControllerStartupParams) SetIntermediateCertificate(intermedia
 	x.inner.SetIntermediateCertificate(intermediateCertificate)
 }
 
+// Operational certificate, in X.509 DER form, to use. If not nil, will be used as the operational certificate.  In this case operationalKeypair must not be nil. If nil, an operational certificate will be determined as described in the documentation for nodeID.
+//
 // OperationalCertificate calls the underlying OperationalCertificate.
 func (x *MTRDeviceControllerStartupParams) OperationalCertificate() *foundation.NSData {
 	return x.inner.OperationalCertificate()
 }
 
+// Operational keypair to use.  If operationalCertificate is not nil, the public key must match operationalCertificate. If not nil, and if operationalCertificate is nil, a new operational certificate will be generated for the given operationalKeypair.  The node id for that certificate will be determined as described in the documentation for nodeID.
+//
 // OperationalKeypair calls the underlying OperationalKeypair.
 func (x *MTRDeviceControllerStartupParams) OperationalKeypair() raw.MTRKeypair {
 	return x.inner.OperationalKeypair()
@@ -200,6 +234,8 @@ func (x *MTRDeviceControllerStartupParams) SetOperationalKeypair(operationalKeyp
 	x.inner.SetOperationalKeypair(operationalKeypair)
 }
 
+// The certificate issuer delegate to use for issuing operational certificates when commissioning devices.  Allowed to be nil if this controller either does not issue operational certificates at all or internally generates the certificates to be issued.  In the latter case, nocSigner must not be nil.
+//
 // OperationalCertificateIssuer calls the underlying OperationalCertificateIssuer.
 func (x *MTRDeviceControllerStartupParams) OperationalCertificateIssuer() raw.MTROperationalCertificateIssuer {
 	return x.inner.OperationalCertificateIssuer()

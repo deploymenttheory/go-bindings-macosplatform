@@ -39,22 +39,30 @@ func NewVideoDecoderPixelBufferManager() *VideoDecoderPixelBufferManager {
 	return &VideoDecoderPixelBufferManager{inner: raw.MEVideoDecoderPixelBufferManagerFromID(_id)}
 }
 
+// @property		pixelBufferAttributes @abstract		VideoToolbox will use these attributes when creating a PixelBuffer for the decoder. @discussion		This can be updated by the decoder before requesting a new pixelBuffer.
+//
 // WithPixelBufferAttributes sets the pixelBufferAttributes property and returns the receiver for chaining.
 func (x *VideoDecoderPixelBufferManager) WithPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VideoDecoderPixelBufferManager {
 	x.inner.SetPixelBufferAttributes(pixelBufferAttributes)
 	return x
 }
 
+// @method			createPixelBufferAndReturnError: @abstract		Generates a pixel buffer using the session's pixel buffer pool. @discussion		If implemented in Objective-C, the caller is responsible for releasing the returned CVPixelBuffer. @param			error If provided, returns error information in the event that the method fails. @result A pixel buffer compatible with the extension's most recently set pixelBufferAttributes
+//
 // CreatePixelBufferAndReturnError calls the underlying CreatePixelBufferAndReturnError.
 func (x *VideoDecoderPixelBufferManager) CreatePixelBufferAndReturnError() (unsafe.Pointer, error) {
 	return x.inner.CreatePixelBufferAndReturnError()
 }
 
+// @method			registerCustomPixelFormat @abstract		VideoToolbox will register the described pixelFormat in both the Extension process and the client process. @discussion		This property is appropriate for decoders which produce output in a custom pixel format.  This will generally only be used by decoders which produce RAW output, where the decoder's output buffers will only be consumed by an MERAWProcessor extension which registers the same pixel format. MERAWProcessor needs to manually register the custom pixel format using CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType(). @param			customPixelFormat This dictionary contains a set of keys and values as described in CoreVideo/CVPixelFormatDescription.h suitable for providing as the 'description' parameter to CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType.  This must contain the custom pixel format fourCC as the value for the kCVPixelFormatCodecType key.
+//
 // RegisterCustomPixelFormat calls the underlying RegisterCustomPixelFormat.
 func (x *VideoDecoderPixelBufferManager) RegisterCustomPixelFormat(customPixelFormat *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	x.inner.RegisterCustomPixelFormat(customPixelFormat)
 }
 
+// @property		pixelBufferAttributes @abstract		VideoToolbox will use these attributes when creating a PixelBuffer for the decoder. @discussion		This can be updated by the decoder before requesting a new pixelBuffer.
+//
 // PixelBufferAttributes calls the underlying PixelBufferAttributes.
 func (x *VideoDecoderPixelBufferManager) PixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.PixelBufferAttributes()

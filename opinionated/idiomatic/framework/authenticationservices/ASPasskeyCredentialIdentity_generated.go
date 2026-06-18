@@ -31,6 +31,8 @@ func PasskeyCredentialIdentityFromID(id objc.ID) *PasskeyCredentialIdentity {
 	return &PasskeyCredentialIdentity{inner: raw.ASPasskeyCredentialIdentityFromID(id)}
 }
 
+// @abstract Initialize an instance of ASPasskeyCredentialIdentity. @param relyingPartyIdentifier relying party for this credential. @param userName user name associated with this credential. @param credentialID credential ID of this passkey credential. @param userHandle user handle data of this passkey credential. @param recordIdentifier identifier used by credential provider extension to identify this credential.
+//
 // NewPasskeyCredentialIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier creates a new [PasskeyCredentialIdentity].
 func NewPasskeyCredentialIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier(relyingPartyIdentifier string, userName string, credentialID *foundation.NSData, userHandle *foundation.NSData, recordIdentifier string) *PasskeyCredentialIdentity {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasskeyCredentialIdentity")), objc.RegisterName("alloc"))
@@ -38,12 +40,16 @@ func NewPasskeyCredentialIdentityWithRelyingPartyIdentifierUserNameCredentialIDU
 	return &PasskeyCredentialIdentity{inner: raw.ASPasskeyCredentialIdentityFromID(_id)}
 }
 
+// @abstract Get or set the rank of the credential identity object. @discussion The system may utilize the rank to decide which credential identity precedes the other if two identities have the same service identifier. A credential identity with a larger rank value precedes one with a smaller value if both credential identities have the same service identifier. The default value of this property is 0.
+//
 // WithRank sets the rank property and returns the receiver for chaining.
 func (x *PasskeyCredentialIdentity) WithRank(rank int) *PasskeyCredentialIdentity {
 	x.inner.SetRank(rank)
 	return x
 }
 
+// @abstract The relying party identifier of this passkey credential. @discussion This field is reported as the serviceIdentifier property of ASCredentialIdentity.
+//
 // RelyingPartyIdentifier calls the underlying RelyingPartyIdentifier.
 func (x *PasskeyCredentialIdentity) RelyingPartyIdentifier() string {
 	_r := x.inner.RelyingPartyIdentifier()
@@ -53,6 +59,8 @@ func (x *PasskeyCredentialIdentity) RelyingPartyIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The user name of this passkey credential. @discussion This field is reported as the user property of ASCredentialIdentity.
+//
 // UserName calls the underlying UserName.
 func (x *PasskeyCredentialIdentity) UserName() string {
 	_r := x.inner.UserName()
@@ -62,16 +70,22 @@ func (x *PasskeyCredentialIdentity) UserName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The credential ID of this passkey credential. @discussion This field is used to identify the correct credential to use based on relying party request parameters.
+//
 // CredentialID calls the underlying CredentialID.
 func (x *PasskeyCredentialIdentity) CredentialID() *foundation.NSData {
 	return x.inner.CredentialID()
 }
 
+// @abstract The user handle of this passkey credential. @discussion This field is used to identify the correct credential to use based on relying party request parameters.
+//
 // UserHandle calls the underlying UserHandle.
 func (x *PasskeyCredentialIdentity) UserHandle() *foundation.NSData {
 	return x.inner.UserHandle()
 }
 
+// @abstract Get the record identifier. @result The record identifier. @discussion You can utilize the record identifier to uniquely identify the credential identity in your local database.
+//
 // RecordIdentifier calls the underlying RecordIdentifier.
 func (x *PasskeyCredentialIdentity) RecordIdentifier() string {
 	_r := x.inner.RecordIdentifier()
@@ -81,6 +95,8 @@ func (x *PasskeyCredentialIdentity) RecordIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Get or set the rank of the credential identity object. @discussion The system may utilize the rank to decide which credential identity precedes the other if two identities have the same service identifier. A credential identity with a larger rank value precedes one with a smaller value if both credential identities have the same service identifier. The default value of this property is 0.
+//
 // Rank calls the underlying Rank.
 func (x *PasskeyCredentialIdentity) Rank() int {
 	return x.inner.Rank()

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The class that represents the configuration for a Mac trackpad.
+//
 // MacTrackpadConfiguration wraps [raw.VZMacTrackpadConfiguration] with a fluent Go API.
 type MacTrackpadConfiguration struct {
 	inner *raw.VZMacTrackpadConfiguration

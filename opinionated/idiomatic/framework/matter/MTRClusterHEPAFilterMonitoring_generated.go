@@ -31,6 +31,8 @@ func MTRClusterHEPAFilterMonitoringFromID(id objc.ID) *MTRClusterHEPAFilterMonit
 	return &MTRClusterHEPAFilterMonitoring{inner: raw.MTRClusterHEPAFilterMonitoringFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterHEPAFilterMonitoringWithDeviceEndpointIDQueue creates a new [MTRClusterHEPAFilterMonitoring].
 func NewMTRClusterHEPAFilterMonitoringWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterHEPAFilterMonitoring {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterHEPAFilterMonitoring")), objc.RegisterName("alloc"))

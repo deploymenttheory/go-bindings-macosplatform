@@ -36,16 +36,22 @@ func NewAssetVariant() *AssetVariant {
 	return &AssetVariant{inner: raw.AVAssetVariantFromID(_id)}
 }
 
+// If it is not declared, the value will be negative.
+//
 // PeakBitRate calls the underlying PeakBitRate.
 func (x *AssetVariant) PeakBitRate() float64 {
 	return x.inner.PeakBitRate()
 }
 
+// If it is not declared, the value will be negative.
+//
 // AverageBitRate calls the underlying AverageBitRate.
 func (x *AssetVariant) AverageBitRate() float64 {
 	return x.inner.AverageBitRate()
 }
 
+// Provides variant's video rendition attributes. If no video attributes are declared, it will be nil.
+//
 // VideoAttributes calls the underlying VideoAttributes.
 func (x *AssetVariant) VideoAttributes() *AssetVariantVideoAttributes {
 	_r := x.inner.VideoAttributes()
@@ -55,6 +61,8 @@ func (x *AssetVariant) VideoAttributes() *AssetVariantVideoAttributes {
 	return &AssetVariantVideoAttributes{inner: _r}
 }
 
+// Provides variant's audio rendition attributes. If no audio attributes are declared, it will be nil.
+//
 // AudioAttributes calls the underlying AudioAttributes.
 func (x *AssetVariant) AudioAttributes() *AssetVariantAudioAttributes {
 	_r := x.inner.AudioAttributes()
@@ -64,6 +72,8 @@ func (x *AssetVariant) AudioAttributes() *AssetVariantAudioAttributes {
 	return &AssetVariantAudioAttributes{inner: _r}
 }
 
+// Provides URL to media playlist corresponding to variant
+//
 // URL calls the underlying URL.
 func (x *AssetVariant) URL() *foundation.NSURL {
 	return x.inner.URL()

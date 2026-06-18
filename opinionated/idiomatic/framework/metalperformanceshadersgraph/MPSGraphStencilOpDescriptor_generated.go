@@ -36,30 +36,40 @@ func NewGraphStencilOpDescriptor() *GraphStencilOpDescriptor {
 	return &GraphStencilOpDescriptor{inner: raw.MPSGraphStencilOpDescriptorFromID(_id)}
 }
 
+// The reduction mode to use within the stencil window. Default value: `MPSGraphReductionModeSum`.
+//
 // WithReductionMode sets the reductionMode property and returns the receiver for chaining.
 func (x *GraphStencilOpDescriptor) WithReductionMode(reductionMode MPSGraphReductionMode) *GraphStencilOpDescriptor {
 	x.inner.SetReductionMode(raw.MPSGraphReductionMode(reductionMode))
 	return x
 }
 
+// The property that determines which values to use for padding the input tensor. Default value: `MPSGraphPaddingModeZero`.
+//
 // WithBoundaryMode sets the boundaryMode property and returns the receiver for chaining.
 func (x *GraphStencilOpDescriptor) WithBoundaryMode(boundaryMode MPSGraphPaddingMode) *GraphStencilOpDescriptor {
 	x.inner.SetBoundaryMode(raw.MPSGraphPaddingMode(boundaryMode))
 	return x
 }
 
+// The property that defines what kind of padding to apply to the stencil operation. Default value: `MPSGraphPaddingStyleExplicit`.
+//
 // WithPaddingStyle sets the paddingStyle property and returns the receiver for chaining.
 func (x *GraphStencilOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphStencilOpDescriptor {
 	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
 	return x
 }
 
+// The padding value for `boundaryMode = MPSGraphPaddingModeConstant`. Default value: 0.
+//
 // WithPaddingConstant sets the paddingConstant property and returns the receiver for chaining.
 func (x *GraphStencilOpDescriptor) WithPaddingConstant(paddingConstant float32) *GraphStencilOpDescriptor {
 	x.inner.SetPaddingConstant(paddingConstant)
 	return x
 }
 
+// The reduction mode to use within the stencil window. Default value: `MPSGraphReductionModeSum`.
+//
 // ReductionMode calls the underlying ReductionMode.
 func (x *GraphStencilOpDescriptor) ReductionMode() MPSGraphReductionMode {
 	return MPSGraphReductionMode(x.inner.ReductionMode())
@@ -70,6 +80,8 @@ func (x *GraphStencilOpDescriptor) SetReductionMode(reductionMode MPSGraphReduct
 	x.inner.SetReductionMode(raw.MPSGraphReductionMode(reductionMode))
 }
 
+// An array of length four that determines from which offset to start reading the input tensor. Only used when `paddingStyle` is `MPSGraphPaddingStyleExplicitOffset`. For example zero offset means that the first stencil window will align its top-left corner (in 4 dimensions) to the top-left corner of the input tensor. Default value: `@[ @0, @0, @0, @0 ]`
+//
 // Offsets calls the underlying Offsets.
 func (x *GraphStencilOpDescriptor) Offsets() unsafe.Pointer {
 	return x.inner.Offsets()
@@ -80,6 +92,8 @@ func (x *GraphStencilOpDescriptor) SetOffsets(offsets unsafe.Pointer) {
 	x.inner.SetOffsets(offsets)
 }
 
+// The property that defines strides for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last. Default value: `@[ @1, @1, @1, @1 ]`
+//
 // Strides calls the underlying Strides.
 func (x *GraphStencilOpDescriptor) Strides() unsafe.Pointer {
 	return x.inner.Strides()
@@ -90,6 +104,8 @@ func (x *GraphStencilOpDescriptor) SetStrides(strides unsafe.Pointer) {
 	x.inner.SetStrides(strides)
 }
 
+// The property that defines dilation rates for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last. Default value: `@[ @1, @1, @1, @1 ]`
+//
 // DilationRates calls the underlying DilationRates.
 func (x *GraphStencilOpDescriptor) DilationRates() unsafe.Pointer {
 	return x.inner.DilationRates()
@@ -100,6 +116,8 @@ func (x *GraphStencilOpDescriptor) SetDilationRates(dilationRates unsafe.Pointer
 	x.inner.SetDilationRates(dilationRates)
 }
 
+// The property that defines padding values for spatial dimensions. Must be eight numbers, two for each spatial dimension. For example `paddingValues[0]` defines the explicit padding amount before the first spatial dimension (slowest running index of spatial dimensions), `paddingValues[1]` defines the padding amount after the first spatial dimension etc. Used only when `paddingStyle = MPSGraphPaddingStyleExplicit`. Default value: `@[ @0, @0, @0, @0, @0, @0, @0, @0 ]`
+//
 // ExplicitPadding calls the underlying ExplicitPadding.
 func (x *GraphStencilOpDescriptor) ExplicitPadding() unsafe.Pointer {
 	return x.inner.ExplicitPadding()
@@ -110,6 +128,8 @@ func (x *GraphStencilOpDescriptor) SetExplicitPadding(explicitPadding unsafe.Poi
 	x.inner.SetExplicitPadding(explicitPadding)
 }
 
+// The property that determines which values to use for padding the input tensor. Default value: `MPSGraphPaddingModeZero`.
+//
 // BoundaryMode calls the underlying BoundaryMode.
 func (x *GraphStencilOpDescriptor) BoundaryMode() MPSGraphPaddingMode {
 	return MPSGraphPaddingMode(x.inner.BoundaryMode())
@@ -120,6 +140,8 @@ func (x *GraphStencilOpDescriptor) SetBoundaryMode(boundaryMode MPSGraphPaddingM
 	x.inner.SetBoundaryMode(raw.MPSGraphPaddingMode(boundaryMode))
 }
 
+// The property that defines what kind of padding to apply to the stencil operation. Default value: `MPSGraphPaddingStyleExplicit`.
+//
 // PaddingStyle calls the underlying PaddingStyle.
 func (x *GraphStencilOpDescriptor) PaddingStyle() MPSGraphPaddingStyle {
 	return MPSGraphPaddingStyle(x.inner.PaddingStyle())
@@ -130,6 +152,8 @@ func (x *GraphStencilOpDescriptor) SetPaddingStyle(paddingStyle MPSGraphPaddingS
 	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
 }
 
+// The padding value for `boundaryMode = MPSGraphPaddingModeConstant`. Default value: 0.
+//
 // PaddingConstant calls the underlying PaddingConstant.
 func (x *GraphStencilOpDescriptor) PaddingConstant() float32 {
 	return x.inner.PaddingConstant()

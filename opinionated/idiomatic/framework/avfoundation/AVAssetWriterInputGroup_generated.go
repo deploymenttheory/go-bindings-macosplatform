@@ -38,6 +38,8 @@ func NewAssetWriterInputGroupWithInputsDefaultInput(inputs *foundation.NSArray[*
 	return &AssetWriterInputGroup{inner: raw.AVAssetWriterInputGroupFromID(_id)}
 }
 
+// @property inputs @abstract The inputs grouped together by the receiver. @discussion The value of this property is an NSArray containing concrete instances of AVAssetWriterInput.
+//
 // Inputs returns the collection as a Go slice.
 func (x *AssetWriterInputGroup) Inputs() []*AssetWriterInput {
 	arr := x.inner.Inputs()
@@ -49,6 +51,8 @@ func (x *AssetWriterInputGroup) Inputs() []*AssetWriterInput {
 	})
 }
 
+// @property defaultInput @abstract The input designated at the defaultInput of the receiver. @discussion The value of this property is a concrete instance of AVAssetWriterInput.
+//
 // DefaultInput calls the underlying DefaultInput.
 func (x *AssetWriterInputGroup) DefaultInput() *AssetWriterInput {
 	_r := x.inner.DefaultInput()

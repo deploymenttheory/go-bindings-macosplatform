@@ -38,6 +38,8 @@ func NewPhysicalInputElementCollection() *PhysicalInputElementCollection {
 	return &PhysicalInputElementCollection{inner: raw.GCPhysicalInputElementCollectionFromID[objc.ID, objc.ID](_id)}
 }
 
+// Returns the element associated with a given alias. @param alias The alias for which to return the corresponding element.  Typically, you pass one of the constants defined in \c GCInputNames.h. @return The element associated with \a alias, or nil if no element is associated with \a alias.
+//
 // ElementForAlias calls the underlying ElementForAlias.
 func (x *PhysicalInputElementCollection) ElementForAlias(alias objc.ID) objc.ID {
 	return x.inner.ElementForAlias(alias)
@@ -53,6 +55,8 @@ func (x *PhysicalInputElementCollection) ElementEnumerator() *foundation.NSEnume
 	return x.inner.ElementEnumerator()
 }
 
+// The number of elements in the collection.
+//
 // Count calls the underlying Count.
 func (x *PhysicalInputElementCollection) Count() uint {
 	return x.inner.Count()

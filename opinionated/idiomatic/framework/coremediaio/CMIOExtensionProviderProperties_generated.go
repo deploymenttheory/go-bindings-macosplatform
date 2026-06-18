@@ -31,6 +31,8 @@ func ExtensionProviderPropertiesFromID(id objc.ID) *ExtensionProviderProperties 
 	return &ExtensionProviderProperties{inner: raw.CMIOExtensionProviderPropertiesFromID(id)}
 }
 
+// @method initWithDictionary: @abstract Initialize a provider properties instance. @param propertiesDictionary The dictionary of properties. @result A CMIOExtensionProviderProperties instance.
+//
 // NewExtensionProviderPropertiesWithDictionary creates a new [ExtensionProviderProperties].
 func NewExtensionProviderPropertiesWithDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ExtensionProviderProperties {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionProviderProperties")), objc.RegisterName("alloc"))
@@ -38,29 +40,39 @@ func NewExtensionProviderPropertiesWithDictionary(propertiesDictionary *foundati
 	return &ExtensionProviderProperties{inner: raw.CMIOExtensionProviderPropertiesFromID(_id)}
 }
 
+// @property name @abstract The provider name. @discussion The property key is CMIOExtensionPropertyProviderName.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *ExtensionProviderProperties) WithName(name string) *ExtensionProviderProperties {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property manufacturer @abstract The provider manufacturer. @discussion The property key is CMIOExtensionPropertyProviderManufacturer.
+//
 // WithManufacturer sets the manufacturer property and returns the receiver for chaining.
 func (x *ExtensionProviderProperties) WithManufacturer(manufacturer string) *ExtensionProviderProperties {
 	x.inner.SetManufacturer(foundation.NSStringStringWithUTF8String(manufacturer))
 	return x
 }
 
+// @property propertiesDictionary @abstract The dictionary of properties. @discussion The dictionary containing all keys and values.
+//
 // WithPropertiesDictionary sets the propertiesDictionary property and returns the receiver for chaining.
 func (x *ExtensionProviderProperties) WithPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ExtensionProviderProperties {
 	x.inner.SetPropertiesDictionary(propertiesDictionary)
 	return x
 }
 
+// @property setPropertyState:forProperty: @abstract Set the property value. @param propertyState The property state. @param property The property key. @discussion Setting nil to propertyState does remove the property.
+//
 // SetPropertyStateForProperty calls the underlying SetPropertyStateForProperty.
 func (x *ExtensionProviderProperties) SetPropertyStateForProperty(propertyState *raw.CMIOExtensionPropertyState[objc.ID], property *foundation.NSString) {
 	x.inner.SetPropertyStateForProperty(propertyState, property)
 }
 
+// @property name @abstract The provider name. @discussion The property key is CMIOExtensionPropertyProviderName.
+//
 // Name calls the underlying Name.
 func (x *ExtensionProviderProperties) Name() string {
 	_r := x.inner.Name()
@@ -75,6 +87,8 @@ func (x *ExtensionProviderProperties) SetName(name string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 }
 
+// @property manufacturer @abstract The provider manufacturer. @discussion The property key is CMIOExtensionPropertyProviderManufacturer.
+//
 // Manufacturer calls the underlying Manufacturer.
 func (x *ExtensionProviderProperties) Manufacturer() string {
 	_r := x.inner.Manufacturer()
@@ -89,6 +103,8 @@ func (x *ExtensionProviderProperties) SetManufacturer(manufacturer string) {
 	x.inner.SetManufacturer(foundation.NSStringStringWithUTF8String(manufacturer))
 }
 
+// @property propertiesDictionary @abstract The dictionary of properties. @discussion The dictionary containing all keys and values.
+//
 // PropertiesDictionary calls the underlying PropertiesDictionary.
 func (x *ExtensionProviderProperties) PropertiesDictionary() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.PropertiesDictionary()

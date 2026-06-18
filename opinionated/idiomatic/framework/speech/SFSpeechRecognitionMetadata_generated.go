@@ -35,26 +35,36 @@ func NewSpeechRecognitionMetadata() *SpeechRecognitionMetadata {
 	return &SpeechRecognitionMetadata{inner: raw.SFSpeechRecognitionMetadataFromID(_id)}
 }
 
+// The number of words spoken per minute.
+//
 // SpeakingRate calls the underlying SpeakingRate.
 func (x *SpeechRecognitionMetadata) SpeakingRate() float64 {
 	return x.inner.SpeakingRate()
 }
 
+// The average pause duration between words, measured in seconds.
+//
 // AveragePauseDuration calls the underlying AveragePauseDuration.
 func (x *SpeechRecognitionMetadata) AveragePauseDuration() float64 {
 	return x.inner.AveragePauseDuration()
 }
 
+// The start timestamp of speech in the audio.
+//
 // SpeechStartTimestamp calls the underlying SpeechStartTimestamp.
 func (x *SpeechRecognitionMetadata) SpeechStartTimestamp() float64 {
 	return x.inner.SpeechStartTimestamp()
 }
 
+// The duration in seconds of speech in the audio.
+//
 // SpeechDuration calls the underlying SpeechDuration.
 func (x *SpeechRecognitionMetadata) SpeechDuration() float64 {
 	return x.inner.SpeechDuration()
 }
 
+// An analysis of the transcription segment's vocal properties.
+//
 // VoiceAnalytics calls the underlying VoiceAnalytics.
 func (x *SpeechRecognitionMetadata) VoiceAnalytics() *VoiceAnalytics {
 	_r := x.inner.VoiceAnalytics()

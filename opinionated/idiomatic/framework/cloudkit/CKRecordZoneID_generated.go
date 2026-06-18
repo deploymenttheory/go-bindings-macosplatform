@@ -31,6 +31,8 @@ func RecordZoneIDFromID(id objc.ID) *RecordZoneID {
 	return &RecordZoneID{inner: raw.CKRecordZoneIDFromID(id)}
 }
 
+// Creates a record zone ID with the specified name and owner. - Parameters: - zoneName: The name that identifies the record zone. Zone names consist of up to 255 ASCII characters, and don't start with an underscore. To specify the default zone of the current database, use “CKRecordZoneDefaultName-8mfij“. This parameter must not be `nil` or an empty string. - ownerName: The user who creates the record zone. To specify the current user, use “CKCurrentUserDefaultName“. If you provide `nil` or an empty string for this parameter, the method throws an exception. - Returns: A new record zone ID.
+//
 // NewRecordZoneIDWithZoneNameOwnerName creates a new [RecordZoneID].
 func NewRecordZoneIDWithZoneNameOwnerName(zoneName string, ownerName string) *RecordZoneID {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKRecordZoneID")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewRecordZoneIDWithZoneNameOwnerName(zoneName string, ownerName string) *Re
 	return &RecordZoneID{inner: raw.CKRecordZoneIDFromID(_id)}
 }
 
+// The unique name of the record zone.
+//
 // ZoneName calls the underlying ZoneName.
 func (x *RecordZoneID) ZoneName() string {
 	_r := x.inner.ZoneName()
@@ -47,6 +51,8 @@ func (x *RecordZoneID) ZoneName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The ID of the user who owns the record zone.
+//
 // OwnerName calls the underlying OwnerName.
 func (x *RecordZoneID) OwnerName() string {
 	_r := x.inner.OwnerName()

@@ -38,16 +38,22 @@ func NewParticipant() *Participant {
 	return &Participant{inner: raw.EKParticipantFromID(_id)}
 }
 
+// @method     ABPersonInAddressBook @abstract   Returns the ABPerson that represents this participant. @discussion This method returns the ABPerson that represents this participant, if a match can be found based on email address in the address book passed. If we cannot find the participant, nil is returned.
+//
 // ABPersonInAddressBook calls the underlying ABPersonInAddressBook.
 func (x *Participant) ABPersonInAddressBook(addressBook *addressbook.ABAddressBook) *addressbook.ABPerson {
 	return x.inner.ABPersonInAddressBook(addressBook)
 }
 
+// @property   url @abstract   URL representing this participant.
+//
 // URL calls the underlying URL.
 func (x *Participant) URL() *foundation.NSURL {
 	return x.inner.URL()
 }
 
+// @property   name @abstract   Name of this participant.
+//
 // Name calls the underlying Name.
 func (x *Participant) Name() string {
 	_r := x.inner.Name()
@@ -57,26 +63,36 @@ func (x *Participant) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property   participantStatus @abstract   The status of the attendee. @discussion Returns the status of the attendee as a EKParticipantStatus value.
+//
 // ParticipantStatus calls the underlying ParticipantStatus.
 func (x *Participant) ParticipantStatus() EKParticipantStatus {
 	return EKParticipantStatus(x.inner.ParticipantStatus())
 }
 
+// @property   participantRole @abstract   The role of the attendee. @discussion Returns the role of the attendee as a EKParticipantRole value.
+//
 // ParticipantRole calls the underlying ParticipantRole.
 func (x *Participant) ParticipantRole() EKParticipantRole {
 	return EKParticipantRole(x.inner.ParticipantRole())
 }
 
+// @property   participantType @abstract   The type of the attendee. @discussion Returns the type of the attendee as a EKParticipantType value.
+//
 // ParticipantType calls the underlying ParticipantType.
 func (x *Participant) ParticipantType() EKParticipantType {
 	return EKParticipantType(x.inner.ParticipantType())
 }
 
+// @property   currentUser @abstract   A boolean indicating whether this participant represents the owner of this account.
+//
 // IsCurrentUser calls the underlying IsCurrentUser.
 func (x *Participant) IsCurrentUser() bool {
 	return x.inner.IsCurrentUser()
 }
 
+// @method     contactPredicate @abstract   Returns a predicate to use with Contacts.framework to retrieve the corresponding CNContact instance. @discussion This method returns a predicate that can be used with a CNContactStore to fetch a CNContact instance for this participant, if one exists.
+//
 // ContactPredicate calls the underlying ContactPredicate.
 func (x *Participant) ContactPredicate() *foundation.NSPredicate {
 	return x.inner.ContactPredicate()

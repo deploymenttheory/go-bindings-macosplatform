@@ -36,12 +36,16 @@ func NewATTRequest() *ATTRequest {
 	return &ATTRequest{inner: raw.CBATTRequestFromID(_id)}
 }
 
+// @property value @discussion The data being read or written. For read requests, <i>value</i> will be nil and should be set before responding via @link respondToRequest:withResult: @/link. For write requests, <i>value</i> will contain the data to be written.
+//
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *ATTRequest) WithValue(value *foundation.NSData) *ATTRequest {
 	x.inner.SetValue(value)
 	return x
 }
 
+// @property central @discussion The central that originated the request.
+//
 // Central calls the underlying Central.
 func (x *ATTRequest) Central() *Central {
 	_r := x.inner.Central()
@@ -51,6 +55,8 @@ func (x *ATTRequest) Central() *Central {
 	return &Central{inner: _r}
 }
 
+// @property characteristic @discussion The characteristic whose value will be read or written.
+//
 // Characteristic calls the underlying Characteristic.
 func (x *ATTRequest) Characteristic() *Characteristic {
 	_r := x.inner.Characteristic()
@@ -60,11 +66,15 @@ func (x *ATTRequest) Characteristic() *Characteristic {
 	return &Characteristic{inner: _r}
 }
 
+// @property offset @discussion The zero-based index of the first byte for the read or write.
+//
 // Offset calls the underlying Offset.
 func (x *ATTRequest) Offset() uint {
 	return x.inner.Offset()
 }
 
+// @property value @discussion The data being read or written. For read requests, <i>value</i> will be nil and should be set before responding via @link respondToRequest:withResult: @/link. For write requests, <i>value</i> will contain the data to be written.
+//
 // Value calls the underlying Value.
 func (x *ATTRequest) Value() *foundation.NSData {
 	return x.inner.Value()

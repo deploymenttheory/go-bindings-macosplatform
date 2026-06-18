@@ -29,6 +29,8 @@ func ListenerFromID(id objc.ID) *Listener {
 	return &Listener{inner: raw.PHASEListenerFromID(id)}
 }
 
+// @method initWithEngine: @abstract Initialize a new listener.
+//
 // NewListenerWithEngine creates a new [Listener].
 func NewListenerWithEngine(engine *raw.PHASEEngine) *Listener {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEListener")), objc.RegisterName("alloc"))
@@ -36,18 +38,24 @@ func NewListenerWithEngine(engine *raw.PHASEEngine) *Listener {
 	return &Listener{inner: raw.PHASEListenerFromID(_id)}
 }
 
+// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
+//
 // WithGain sets the gain property and returns the receiver for chaining.
 func (x *Listener) WithGain(gain float64) *Listener {
 	x.inner.SetGain(gain)
 	return x
 }
 
+// @property automaticHeadTrackingFlags @abstract A combination of flags to express automatic headtracking behaviors for this listener.
+//
 // WithAutomaticHeadTrackingFlags sets the automaticHeadTrackingFlags property and returns the receiver for chaining.
 func (x *Listener) WithAutomaticHeadTrackingFlags(automaticHeadTrackingFlags PHASEAutomaticHeadTrackingFlags) *Listener {
 	x.inner.SetAutomaticHeadTrackingFlags(raw.PHASEAutomaticHeadTrackingFlags(automaticHeadTrackingFlags))
 	return x
 }
 
+// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
+//
 // Gain calls the underlying Gain.
 func (x *Listener) Gain() float64 {
 	return x.inner.Gain()
@@ -58,11 +66,15 @@ func (x *Listener) SetGain(gain float64) {
 	x.inner.SetGain(gain)
 }
 
+// @property automaticHeadTrackingFlags @abstract A combination of flags to express automatic headtracking behaviors for this listener.
+//
 // AutomaticHeadTrackingFlags calls the underlying AutomaticHeadTrackingFlags.
 func (x *Listener) AutomaticHeadTrackingFlags() PHASEAutomaticHeadTrackingFlags {
 	return PHASEAutomaticHeadTrackingFlags(x.inner.AutomaticHeadTrackingFlags())
 }
 
+// @property automaticHeadTrackingFlags @abstract A combination of flags to express automatic headtracking behaviors for this listener.
+//
 // SetAutomaticHeadTrackingFlags calls the underlying SetAutomaticHeadTrackingFlags.
 func (x *Listener) SetAutomaticHeadTrackingFlags(automaticHeadTrackingFlags PHASEAutomaticHeadTrackingFlags) {
 	x.inner.SetAutomaticHeadTrackingFlags(raw.PHASEAutomaticHeadTrackingFlags(automaticHeadTrackingFlags))

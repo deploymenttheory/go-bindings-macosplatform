@@ -31,6 +31,8 @@ func MotionBlurConfigurationFromID(id objc.ID) *MotionBlurConfiguration {
 	return &MotionBlurConfiguration{inner: raw.VTMotionBlurConfigurationFromID(id)}
 }
 
+// Creates a new motion blur configuration. Returns `nil` if dimensions are out of range or revision is unsupported. - Parameters: - frameWidth: Width of source frame in pixels; the maximum value is 8192 for macOS, and 4096 for iOS. - frameHeight: Height of source frame in pixels; the maximum value is 4320 for macOS, and 2160 for iOS. - usePrecomputedFlow: Boolean value that indicates whether you will provide optical flow; if false, this configuration computes the optical flow on the fly. - qualityPrioritization: A level you use to prioritize quality or performance; for more information about supported levels, see “VTMotionBlurConfigurationQualityPrioritization“. - revision: The specific algorithm or configuration revision you use to perform the request.
+//
 // NewMotionBlurConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision creates a new [MotionBlurConfiguration].
 func NewMotionBlurConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualityPrioritizationRevision(frameWidth int, frameHeight int, usePrecomputedFlow bool, qualityPrioritization VTMotionBlurConfigurationQualityPrioritization, revision VTMotionBlurConfigurationRevision) *MotionBlurConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTMotionBlurConfiguration")), objc.RegisterName("alloc"))
@@ -38,31 +40,43 @@ func NewMotionBlurConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualit
 	return &MotionBlurConfiguration{inner: raw.VTMotionBlurConfigurationFromID(_id)}
 }
 
+// Width of source frame in pixels.
+//
 // FrameWidth calls the underlying FrameWidth.
 func (x *MotionBlurConfiguration) FrameWidth() int {
 	return x.inner.FrameWidth()
 }
 
+// Height of source frame in pixels.
+//
 // FrameHeight calls the underlying FrameHeight.
 func (x *MotionBlurConfiguration) FrameHeight() int {
 	return x.inner.FrameHeight()
 }
 
+// Indicates that you provide optical flow.
+//
 // UsePrecomputedFlow calls the underlying UsePrecomputedFlow.
 func (x *MotionBlurConfiguration) UsePrecomputedFlow() bool {
 	return x.inner.UsePrecomputedFlow()
 }
 
+// A parameter you use to control quality and performance levels. For more information about supported levels, see “VTMotionBlurConfigurationQualityPrioritization“.
+//
 // QualityPrioritization calls the underlying QualityPrioritization.
 func (x *MotionBlurConfiguration) QualityPrioritization() VTMotionBlurConfigurationQualityPrioritization {
 	return VTMotionBlurConfigurationQualityPrioritization(x.inner.QualityPrioritization())
 }
 
+// The specific algorithm or configuration revision you use to perform the request.
+//
 // Revision calls the underlying Revision.
 func (x *MotionBlurConfiguration) Revision() VTMotionBlurConfigurationRevision {
 	return VTMotionBlurConfigurationRevision(x.inner.Revision())
 }
 
+// Available supported pixel formats for source frames for current configuration.
+//
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (x *MotionBlurConfiguration) FrameSupportedPixelFormats() []*foundation.NSNumber {
 	arr := x.inner.FrameSupportedPixelFormats()
@@ -74,11 +88,15 @@ func (x *MotionBlurConfiguration) FrameSupportedPixelFormats() []*foundation.NSN
 	})
 }
 
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+//
 // SourcePixelBufferAttributes calls the underlying SourcePixelBufferAttributes.
 func (x *MotionBlurConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.SourcePixelBufferAttributes()
 }
 
+// Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+//
 // DestinationPixelBufferAttributes calls the underlying DestinationPixelBufferAttributes.
 func (x *MotionBlurConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.DestinationPixelBufferAttributes()

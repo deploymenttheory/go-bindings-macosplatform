@@ -163,6 +163,8 @@ func (x *Locale) LanguageCode() *String {
 	return &String{inner: _r}
 }
 
+// Returns the identifier for the language part of the locale. For example, returns "en-US" for "en_US@rg=gbzzzz"  locale.
+//
 // LanguageIdentifier calls the underlying LanguageIdentifier.
 func (x *Locale) LanguageIdentifier() *String {
 	_r := x.inner.LanguageIdentifier()
@@ -181,6 +183,8 @@ func (x *Locale) CountryCode() *String {
 	return &String{inner: _r}
 }
 
+// Returns the region code of the locale. If the `rg` subtag is present, the value of the subtag will be used. For example,  returns "GB" for "en_US@rg=gbzzzz" locale. If the `localeIdentifier` doesn’t contain a region, returns `nil`.
+//
 // RegionCode calls the underlying RegionCode.
 func (x *Locale) RegionCode() *String {
 	_r := x.inner.RegionCode()

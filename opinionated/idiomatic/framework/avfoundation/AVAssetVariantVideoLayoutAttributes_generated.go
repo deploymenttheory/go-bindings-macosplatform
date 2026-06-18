@@ -38,11 +38,15 @@ func NewAssetVariantVideoLayoutAttributes() *AssetVariantVideoLayoutAttributes {
 	return &AssetVariantVideoLayoutAttributes{inner: raw.AVAssetVariantVideoLayoutAttributesFromID(_id)}
 }
 
+// Describes the stereo components. If not declared, the value will be `kCMStereoViewComponent_None`. In case of monoscopic content, the value will be `kCMStereoViewComponent_None` and incase of stereoscopic content, the value will be `(kCMStereoViewComponent_LeftEye | kCMStereoViewComponent_RightEye)`.
+//
 // StereoViewComponents calls the underlying StereoViewComponents.
 func (x *AssetVariantVideoLayoutAttributes) StereoViewComponents() coremedia.CMStereoViewComponents {
 	return x.inner.StereoViewComponents()
 }
 
+// Describes the video projection.
+//
 // ProjectionType calls the underlying ProjectionType.
 func (x *AssetVariantVideoLayoutAttributes) ProjectionType() coremedia.CMProjectionType {
 	return x.inner.ProjectionType()

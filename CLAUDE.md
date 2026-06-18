@@ -77,6 +77,15 @@ go run ./cmd/generate/ all
 # Run after 'scan' when the SDK changes; output is committed to metadata/objcclasshierarchy/.
 go run ./cmd/generate/ class-hierarchy
 
+# ── Apple developer docs ──────────────────────────────────────────────────────
+# Harvest Apple's developer documentation (DocC render API) into per-framework
+# appledocs.json sidecars next to the committed metadata. The pipeline loaders
+# merge these into Doc fields at load time (Apple-preferred, header fallback), so
+# the next 'bindings'/'idiomatic' run emits Apple's prose. See docs/appledocs.md.
+go run ./scripts/tools/appledeveloperdocs fetch --framework Foundation
+go run ./scripts/tools/appledeveloperdocs fetch --framework Foundation,AppKit --deep
+go run ./scripts/tools/appledeveloperdocs fetch --framework all
+
 # ── List ──────────────────────────────────────────────────────────────────────
 # List all frameworks the installed SDK exposes
 go run ./cmd/generate/ list

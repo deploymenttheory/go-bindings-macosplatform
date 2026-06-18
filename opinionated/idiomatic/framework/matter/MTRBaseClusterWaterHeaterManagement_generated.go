@@ -35,6 +35,8 @@ func MTRBaseClusterWaterHeaterManagementFromID(id objc.ID) *MTRBaseClusterWaterH
 	return &MTRBaseClusterWaterHeaterManagement{inner: raw.MTRBaseClusterWaterHeaterManagementFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterWaterHeaterManagementWithDeviceEndpointIDQueue creates a new [MTRBaseClusterWaterHeaterManagement].
 func NewMTRBaseClusterWaterHeaterManagementWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterWaterHeaterManagement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterWaterHeaterManagement")), objc.RegisterName("alloc"))
@@ -42,11 +44,15 @@ func NewMTRBaseClusterWaterHeaterManagementWithDeviceEndpointIDQueue(device *raw
 	return &MTRBaseClusterWaterHeaterManagement{inner: raw.MTRBaseClusterWaterHeaterManagementFromID(_id)}
 }
 
+// Command Boost Allows a client to request that the water heater is put into a Boost state.
+//
 // BoostWithParamsCompletion calls the underlying BoostWithParamsCompletion.
 func (x *MTRBaseClusterWaterHeaterManagement) BoostWithParamsCompletion(params *raw.MTRWaterHeaterManagementClusterBoostParams, completion func(unsafe.Pointer)) {
 	x.inner.BoostWithParamsCompletion(params, completion)
 }
 
+// Command CancelBoost Allows a client to cancel an ongoing Boost operation.
+//
 // CancelBoostWithParamsCompletion calls the underlying CancelBoostWithParamsCompletion.
 func (x *MTRBaseClusterWaterHeaterManagement) CancelBoostWithParamsCompletion(params *raw.MTRWaterHeaterManagementClusterCancelBoostParams, completion func(unsafe.Pointer)) {
 	x.inner.CancelBoostWithParamsCompletion(params, completion)

@@ -38,24 +38,32 @@ func NewSkeletonWithNameJointPaths(name string, jointPaths *foundation.NSArray[*
 	return &Skeleton{inner: raw.MDLSkeletonFromID(_id)}
 }
 
+// @property parent @abstract Parent object. Nil if no parent. @discussion Set to nil when you remove this from an object container inside the parent object.
+//
 // WithParent sets the parent property and returns the receiver for chaining.
 func (x *Skeleton) WithParent(parent ObjectProvider) *Skeleton {
 	x.inner.MDLObject.SetParent(parent.asObject())
 	return x
 }
 
+// @property instance @abstract Instance object @discussion nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
+//
 // WithInstance sets the instance property and returns the receiver for chaining.
 func (x *Skeleton) WithInstance(instance ObjectProvider) *Skeleton {
 	x.inner.MDLObject.SetInstance(instance.asObject())
 	return x
 }
 
+// @property transform @abstract Short hand property for the MDLTransformComponent. @discussion The default value is nil @see MDLTransformComponent
+//
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *Skeleton) WithTransform(transform raw.MDLTransformComponent) *Skeleton {
 	x.inner.MDLObject.SetTransform(transform)
 	return x
 }
 
+// @property children @abstract Short hand property for the MDLObjectContainerComponent. @discussion The default value is an empty MDLObjectContainer @see MDLObjectContainerComponent
+//
 // WithChildren sets the children property and returns the receiver for chaining.
 func (x *Skeleton) WithChildren(children raw.MDLObjectContainerComponent) *Skeleton {
 	x.inner.MDLObject.SetChildren(children)

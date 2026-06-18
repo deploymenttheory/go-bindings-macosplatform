@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that loads and configures a boot loader for running macOS on Apple silicon as a guest system of your VM.
+//
 // MacOSBootLoader wraps [raw.VZMacOSBootLoader] with a fluent Go API.
 type MacOSBootLoader struct {
 	inner *raw.VZMacOSBootLoader

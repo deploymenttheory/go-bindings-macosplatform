@@ -33,6 +33,8 @@ func MTRClusterOperationalStateFromID(id objc.ID) *MTRClusterOperationalState {
 	return &MTRClusterOperationalState{inner: raw.MTRClusterOperationalStateFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterOperationalStateWithDeviceEndpointIDQueue creates a new [MTRClusterOperationalState].
 func NewMTRClusterOperationalStateWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterOperationalState {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterOperationalState")), objc.RegisterName("alloc"))

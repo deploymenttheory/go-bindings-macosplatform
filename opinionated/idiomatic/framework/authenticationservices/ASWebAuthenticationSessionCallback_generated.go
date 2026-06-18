@@ -38,6 +38,8 @@ func NewWebAuthenticationSessionCallback() *WebAuthenticationSessionCallback {
 	return &WebAuthenticationSessionCallback{inner: raw.ASWebAuthenticationSessionCallbackFromID(_id)}
 }
 
+// Check whether a given main-frame navigation URL matches the callback expected by the client app. Handles all URL-based callback strategies, including custom schemes and HTTPS navigations. This is mainly meant for web browsers adopting the ASWebAuthenticationWebBrowser API, but may also be useful for other apps for debugging purposes. @param url The URL to check.
+//
 // MatchesURL calls the underlying MatchesURL.
 func (x *WebAuthenticationSessionCallback) MatchesURL(url string) bool {
 	return x.inner.MatchesURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))

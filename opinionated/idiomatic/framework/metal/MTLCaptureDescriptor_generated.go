@@ -36,24 +36,32 @@ func NewCaptureDescriptor() *CaptureDescriptor {
 	return &CaptureDescriptor{inner: raw.MTLCaptureDescriptorFromID(_id)}
 }
 
+// @brief The object that is captured. Must be one of the following: MTLDevice captures all command queues of the device. MTLCommandQueue captures a single command queue. MTLCaptureScope captures between the next begin and end of the scope.
+//
 // WithCaptureObject sets the captureObject property and returns the receiver for chaining.
 func (x *CaptureDescriptor) WithCaptureObject(captureObject objc.ID) *CaptureDescriptor {
 	x.inner.SetCaptureObject(captureObject)
 	return x
 }
 
+// The destination you want the GPU trace to be captured to.
+//
 // WithDestination sets the destination property and returns the receiver for chaining.
 func (x *CaptureDescriptor) WithDestination(destination MTLCaptureDestination) *CaptureDescriptor {
 	x.inner.SetDestination(raw.MTLCaptureDestination(destination))
 	return x
 }
 
+// URL the GPU Trace document will be captured to. Must be specified when destiation is MTLCaptureDestinationGPUTraceDocument.
+//
 // WithOutputURL sets the outputURL property and returns the receiver for chaining.
 func (x *CaptureDescriptor) WithOutputURL(outputURL string) *CaptureDescriptor {
 	x.inner.SetOutputURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputURL)))
 	return x
 }
 
+// @brief The object that is captured. Must be one of the following: MTLDevice captures all command queues of the device. MTLCommandQueue captures a single command queue. MTLCaptureScope captures between the next begin and end of the scope.
+//
 // CaptureObject calls the underlying CaptureObject.
 func (x *CaptureDescriptor) CaptureObject() objc.ID {
 	return x.inner.CaptureObject()
@@ -64,6 +72,8 @@ func (x *CaptureDescriptor) SetCaptureObject(captureObject objc.ID) {
 	x.inner.SetCaptureObject(captureObject)
 }
 
+// The destination you want the GPU trace to be captured to.
+//
 // Destination calls the underlying Destination.
 func (x *CaptureDescriptor) Destination() MTLCaptureDestination {
 	return MTLCaptureDestination(x.inner.Destination())
@@ -74,6 +84,8 @@ func (x *CaptureDescriptor) SetDestination(destination MTLCaptureDestination) {
 	x.inner.SetDestination(raw.MTLCaptureDestination(destination))
 }
 
+// URL the GPU Trace document will be captured to. Must be specified when destiation is MTLCaptureDestinationGPUTraceDocument.
+//
 // OutputURL calls the underlying OutputURL.
 func (x *CaptureDescriptor) OutputURL() *foundation.NSURL {
 	return x.inner.OutputURL()

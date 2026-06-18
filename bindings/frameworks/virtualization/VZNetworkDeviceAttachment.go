@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The common behaviors for the network attachment points of your virtual machine.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vznetworkdeviceattachment
 type VZNetworkDeviceAttachment struct {
 	foundation.NSObject

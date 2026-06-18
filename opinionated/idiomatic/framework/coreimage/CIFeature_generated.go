@@ -37,6 +37,8 @@ func NewFeature() *Feature {
 	return &Feature{inner: raw.CIFeatureFromID(_id)}
 }
 
+// The type of feature that was discovered. The type can be one of: * “CIFeatureTypeFace“ * “CIFeatureTypeRectangle“ * “CIFeatureTypeQRCode“ * “CIFeatureTypeText“
+//
 // Type calls the underlying Type.
 func (x *Feature) Type() string {
 	_r := x.inner.Type()
@@ -46,6 +48,8 @@ func (x *Feature) Type() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The rectangle that bounds the location of discovered feature. The rectangle is in the cartesian coordinate system of the image.
+//
 // Bounds calls the underlying Bounds.
 func (x *Feature) Bounds() corefoundation.CGRect {
 	return x.inner.Bounds()

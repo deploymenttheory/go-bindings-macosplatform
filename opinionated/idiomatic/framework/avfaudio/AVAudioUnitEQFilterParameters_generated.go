@@ -35,36 +35,48 @@ func NewAudioUnitEQFilterParameters() *AudioUnitEQFilterParameters {
 	return &AudioUnitEQFilterParameters{inner: raw.AVAudioUnitEQFilterParametersFromID(_id)}
 }
 
+// @property filterType @abstract AVAudioUnitEQFilterType @discussion Default:    AVAudioUnitEQFilterTypeParametric
+//
 // WithFilterType sets the filterType property and returns the receiver for chaining.
 func (x *AudioUnitEQFilterParameters) WithFilterType(filterType AVAudioUnitEQFilterType) *AudioUnitEQFilterParameters {
 	x.inner.SetFilterType(raw.AVAudioUnitEQFilterType(filterType))
 	return x
 }
 
+// @property frequency @abstract Frequency in Hertz. @discussion Range:      20 -> (SampleRate/2) Unit:       Hertz
+//
 // WithFrequency sets the frequency property and returns the receiver for chaining.
 func (x *AudioUnitEQFilterParameters) WithFrequency(frequency float32) *AudioUnitEQFilterParameters {
 	x.inner.SetFrequency(frequency)
 	return x
 }
 
+// @property bandwidth @abstract Bandwidth in octaves. @discussion Range:      0.05 -> 5.0 Unit:       Octaves
+//
 // WithBandwidth sets the bandwidth property and returns the receiver for chaining.
 func (x *AudioUnitEQFilterParameters) WithBandwidth(bandwidth float32) *AudioUnitEQFilterParameters {
 	x.inner.SetBandwidth(bandwidth)
 	return x
 }
 
+// @property gain @abstract Gain in dB. @discussion Range:      -96 -> 24 Default:    0 Unit:       dB
+//
 // WithGain sets the gain property and returns the receiver for chaining.
 func (x *AudioUnitEQFilterParameters) WithGain(gain float32) *AudioUnitEQFilterParameters {
 	x.inner.SetGain(gain)
 	return x
 }
 
+// @property bypass @abstract bypass state of band. @discussion Default:    YES
+//
 // WithBypass sets the bypass property and returns the receiver for chaining.
 func (x *AudioUnitEQFilterParameters) WithBypass(bypass bool) *AudioUnitEQFilterParameters {
 	x.inner.SetBypass(bypass)
 	return x
 }
 
+// @property filterType @abstract AVAudioUnitEQFilterType @discussion Default:    AVAudioUnitEQFilterTypeParametric
+//
 // FilterType calls the underlying FilterType.
 func (x *AudioUnitEQFilterParameters) FilterType() AVAudioUnitEQFilterType {
 	return AVAudioUnitEQFilterType(x.inner.FilterType())
@@ -75,6 +87,8 @@ func (x *AudioUnitEQFilterParameters) SetFilterType(filterType AVAudioUnitEQFilt
 	x.inner.SetFilterType(raw.AVAudioUnitEQFilterType(filterType))
 }
 
+// @property frequency @abstract Frequency in Hertz. @discussion Range:      20 -> (SampleRate/2) Unit:       Hertz
+//
 // Frequency calls the underlying Frequency.
 func (x *AudioUnitEQFilterParameters) Frequency() float32 {
 	return x.inner.Frequency()
@@ -85,6 +99,8 @@ func (x *AudioUnitEQFilterParameters) SetFrequency(frequency float32) {
 	x.inner.SetFrequency(frequency)
 }
 
+// @property bandwidth @abstract Bandwidth in octaves. @discussion Range:      0.05 -> 5.0 Unit:       Octaves
+//
 // Bandwidth calls the underlying Bandwidth.
 func (x *AudioUnitEQFilterParameters) Bandwidth() float32 {
 	return x.inner.Bandwidth()
@@ -95,6 +111,8 @@ func (x *AudioUnitEQFilterParameters) SetBandwidth(bandwidth float32) {
 	x.inner.SetBandwidth(bandwidth)
 }
 
+// @property gain @abstract Gain in dB. @discussion Range:      -96 -> 24 Default:    0 Unit:       dB
+//
 // Gain calls the underlying Gain.
 func (x *AudioUnitEQFilterParameters) Gain() float32 {
 	return x.inner.Gain()
@@ -105,6 +123,8 @@ func (x *AudioUnitEQFilterParameters) SetGain(gain float32) {
 	x.inner.SetGain(gain)
 }
 
+// @property bypass @abstract bypass state of band. @discussion Default:    YES
+//
 // Bypass calls the underlying Bypass.
 func (x *AudioUnitEQFilterParameters) Bypass() bool {
 	return x.inner.Bypass()

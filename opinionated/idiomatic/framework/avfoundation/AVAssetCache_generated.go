@@ -36,21 +36,29 @@ func NewAssetCache() *AssetCache {
 	return &AssetCache{inner: raw.AVAssetCacheFromID(_id)}
 }
 
+// Returns an array of AVMediaSelectionOptions in an AVMediaSelectionGroup that are available for offline operations, e.g. playback.
+//
 // MediaSelectionOptionsInMediaSelectionGroup calls the underlying MediaSelectionOptionsInMediaSelectionGroup.
 func (x *AssetCache) MediaSelectionOptionsInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSArray[*raw.AVMediaSelectionOption] {
 	return x.inner.MediaSelectionOptionsInMediaSelectionGroup(mediaSelectionGroup)
 }
 
+// Returns YES if a complete rendition of an AVAsset is available to be played without a network connection. An answer of YES does not indicate that any given media selection is available for offline playback. To determine if a specific media selection is available offline, see mediaSelectionOptionsInMediaSelectionGroup:.
+//
 // IsPlayableOffline calls the underlying IsPlayableOffline.
 func (x *AssetCache) IsPlayableOffline() bool {
 	return x.inner.IsPlayableOffline()
 }
 
+// For each AVMediaPresentationSelector defined by the AVCustomMediaSelectionScheme of an AVMediaSelectionGroup, returns the AVMediaPresentationSettings that can be satisfied for offline operations, e.g. playback.
+//
 // MediaPresentationSettingsForMediaSelectionGroup calls the underlying MediaPresentationSettingsForMediaSelectionGroup.
 func (x *AssetCache) MediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSDictionary[*raw.AVMediaPresentationSelector, objc.ID] {
 	return x.inner.MediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup)
 }
 
+// Returns an array of extended language tags for languages that can be selected for offline operations via use of the AVMediaSelectionGroup's AVCustomMediaSelectionScheme.
+//
 // MediaPresentationLanguagesForMediaSelectionGroup calls the underlying MediaPresentationLanguagesForMediaSelectionGroup.
 func (x *AssetCache) MediaPresentationLanguagesForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSArray[*foundation.NSString] {
 	return x.inner.MediaPresentationLanguagesForMediaSelectionGroup(mediaSelectionGroup)

@@ -36,16 +36,22 @@ func NewWKFrameInfo() *WKFrameInfo {
 	return &WKFrameInfo{inner: raw.WKFrameInfoFromID(_id)}
 }
 
+// @abstract A Boolean value indicating whether the frame is the main frame or a subframe.
+//
 // IsMainFrame calls the underlying IsMainFrame.
 func (x *WKFrameInfo) IsMainFrame() bool {
 	return x.inner.IsMainFrame()
 }
 
+// @abstract The frame's current request.
+//
 // Request calls the underlying Request.
 func (x *WKFrameInfo) Request() *foundation.NSURLRequest {
 	return x.inner.Request()
 }
 
+// @abstract The frame's current security origin.
+//
 // SecurityOrigin calls the underlying SecurityOrigin.
 func (x *WKFrameInfo) SecurityOrigin() *WKSecurityOrigin {
 	_r := x.inner.SecurityOrigin()
@@ -55,6 +61,8 @@ func (x *WKFrameInfo) SecurityOrigin() *WKSecurityOrigin {
 	return &WKSecurityOrigin{inner: _r}
 }
 
+// @abstract The web view of the webpage that contains this frame.
+//
 // WebView calls the underlying WebView.
 func (x *WKFrameInfo) WebView() *WKWebView {
 	_r := x.inner.WebView()

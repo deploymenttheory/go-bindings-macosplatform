@@ -86,6 +86,8 @@ func NewAttributedStringWithMarkdownStringOptionsBaseURLError(markdownString str
 	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}, nil
 }
 
+// Formats the string using the specified locale (or the canonical one, if nil).
+//
 // NewAttributedStringWithFormatOptionsLocale creates a new [AttributedString].
 func NewAttributedStringWithFormatOptionsLocale(format *raw.NSAttributedString, options NSAttributedStringFormattingOptions, locale *raw.NSLocale) *AttributedString {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedString")), objc.RegisterName("alloc"))
@@ -93,6 +95,8 @@ func NewAttributedStringWithFormatOptionsLocale(format *raw.NSAttributedString, 
 	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}
 }
 
+// Formats the string using the arguments list and the specified locale (or the canonical one, if nil).
+//
 // NewAttributedStringWithFormatOptionsLocaleArguments creates a new [AttributedString].
 func NewAttributedStringWithFormatOptionsLocaleArguments(format *raw.NSAttributedString, options NSAttributedStringFormattingOptions, locale *raw.NSLocale, arguments string) *AttributedString {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedString")), objc.RegisterName("alloc"))
@@ -100,6 +104,8 @@ func NewAttributedStringWithFormatOptionsLocaleArguments(format *raw.NSAttribute
 	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}
 }
 
+// Formats the string using the specified locale (or the canonical one, if nil).
+//
 // NewAttributedStringWithFormatOptionsLocaleContext creates a new [AttributedString].
 func NewAttributedStringWithFormatOptionsLocaleContext(format *raw.NSAttributedString, options NSAttributedStringFormattingOptions, locale *raw.NSLocale, context_ *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedString {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedString")), objc.RegisterName("alloc"))
@@ -107,6 +113,8 @@ func NewAttributedStringWithFormatOptionsLocaleContext(format *raw.NSAttributedS
 	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}
 }
 
+// Formats the string using the arguments list and the specified locale (or the canonical one, if nil).
+//
 // NewAttributedStringWithFormatOptionsLocaleContextArguments creates a new [AttributedString].
 func NewAttributedStringWithFormatOptionsLocaleContextArguments(format *raw.NSAttributedString, options NSAttributedStringFormattingOptions, locale *raw.NSLocale, context_ *raw.NSDictionary[*raw.NSString, objc.ID], arguments string) *AttributedString {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedString")), objc.RegisterName("alloc"))
@@ -178,6 +186,8 @@ func (x *AttributedString) Length() uint {
 	return x.inner.Length()
 }
 
+// If the string has portions tagged with NSInflectionRuleAttributeName that have no format specifiers, create a new string with those portions inflected by following the rule in the attribute.
+//
 // AttributedStringByInflectingString calls the underlying AttributedStringByInflectingString.
 func (x *AttributedString) AttributedStringByInflectingString() *AttributedString {
 	_r := x.inner.AttributedStringByInflectingString()

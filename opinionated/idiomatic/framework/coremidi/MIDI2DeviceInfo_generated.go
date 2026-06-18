@@ -29,6 +29,8 @@ func MIDI2DeviceInfoFromID(id objc.ID) *MIDI2DeviceInfo {
 	return &MIDI2DeviceInfo{inner: raw.MIDI2DeviceInfoFromID(id)}
 }
 
+// @method		initWithManufacturerID:family:modelNumber:revisionLevel: @brief		The initializer for constructing the MIDI2DeviceInfo object. @param		manufacturerID	The 3-Byte manufacturer System Exclusive ID. @param		family			The 14-bit device family. @param		modelNumber		The 14-bit model number. @param		revisionLevel	The 4-Byte revision level. @discussion	Provided values for family or modelNumber must be within their expected bit range. For example, if modelNumber is outside of the range of a 14-bit number.
+//
 // NewMIDI2DeviceInfoWithManufacturerIDFamilyModelNumberRevisionLevel creates a new [MIDI2DeviceInfo].
 func NewMIDI2DeviceInfoWithManufacturerIDFamilyModelNumberRevisionLevel(manufacturerID raw.MIDI2DeviceManufacturer, family uint16, modelNumber uint16, revisionLevel raw.MIDI2DeviceRevisionLevel) *MIDI2DeviceInfo {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDI2DeviceInfo")), objc.RegisterName("alloc"))
@@ -36,21 +38,29 @@ func NewMIDI2DeviceInfoWithManufacturerIDFamilyModelNumberRevisionLevel(manufact
 	return &MIDI2DeviceInfo{inner: raw.MIDI2DeviceInfoFromID(_id)}
 }
 
+// @property	manufacturerID @brief		The MIDI System Exclusive ID of the device manufacturer, up to 3-Bytes. @discussion One-byte SysEx IDs use only the least significant byte (e.g., Apple's System Exclusive ID, 0x11).
+//
 // ManufacturerID calls the underlying ManufacturerID.
 func (x *MIDI2DeviceInfo) ManufacturerID() raw.MIDI2DeviceManufacturer {
 	return x.inner.ManufacturerID()
 }
 
+// @property	family @brief		The family of models to which the device belongs, up to 14 bits.
+//
 // Family calls the underlying Family.
 func (x *MIDI2DeviceInfo) Family() uint16 {
 	return x.inner.Family()
 }
 
+// @property	modelNumber @brief		The specific model from the device manufacturer, up to 14 bits.
+//
 // ModelNumber calls the underlying ModelNumber.
 func (x *MIDI2DeviceInfo) ModelNumber() uint16 {
 	return x.inner.ModelNumber()
 }
 
+// @property	revisionLevel @brief		The version number of a device model number.
+//
 // RevisionLevel calls the underlying RevisionLevel.
 func (x *MIDI2DeviceInfo) RevisionLevel() raw.MIDI2DeviceRevisionLevel {
 	return x.inner.RevisionLevel()

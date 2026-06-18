@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The common configuration traits for serial port requests.
+//
 // SerialPortConfiguration wraps [raw.VZSerialPortConfiguration] with a fluent Go API.
 type SerialPortConfiguration struct {
 	inner *raw.VZSerialPortConfiguration
@@ -35,6 +37,8 @@ func NewSerialPortConfiguration() *SerialPortConfiguration {
 	return &SerialPortConfiguration{inner: raw.VZSerialPortConfigurationFromID(_id)}
 }
 
+// The object that defines how the configuration of the virtual machine’s serial port interfaces.
+//
 // WithAttachment sets the attachment property and returns the receiver for chaining.
 func (x *SerialPortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *SerialPortConfiguration {
 	x.inner.SetAttachment(attachment.asSerialPortAttachment())

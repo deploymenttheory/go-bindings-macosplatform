@@ -36,6 +36,8 @@ func NewClassification() *Classification {
 	return &Classification{inner: raw.SNClassificationFromID(_id)}
 }
 
+// The identifier of a classification request. An example classification could be a string like 'laughter' or 'applause'. The string is defined in the model that was used for the classification. Usually these are technical labels that are not localized and not meant to be used directly to be presented to an end user in the UI.
+//
 // Identifier calls the underlying Identifier.
 func (x *Classification) Identifier() string {
 	_r := x.inner.Identifier()
@@ -45,6 +47,8 @@ func (x *Classification) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The level of confidence normalized to [0, 1], where 1 is most confident
+//
 // Confidence calls the underlying Confidence.
 func (x *Classification) Confidence() float64 {
 	return x.inner.Confidence()

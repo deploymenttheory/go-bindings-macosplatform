@@ -37,48 +37,64 @@ func NewAlarm() *Alarm {
 	return &Alarm{inner: raw.EKAlarmFromID(_id)}
 }
 
+// @property   relativeOffset @abstract   Specifies a relative offset from an event start date to fire an alarm. @discussion Set this property to an appropriate negative value to establish an alarm trigger relative to the start date/time of an event. Setting this clears any existing date trigger.
+//
 // WithRelativeOffset sets the relativeOffset property and returns the receiver for chaining.
 func (x *Alarm) WithRelativeOffset(relativeOffset float64) *Alarm {
 	x.inner.SetRelativeOffset(relativeOffset)
 	return x
 }
 
+// @property   absoluteDate @abstract   Represents an alarm that fires at a specific date. @discussion Set this property to a date to establish an absolute alarm trigger. Setting this clears any relative interval trigger.
+//
 // WithAbsoluteDate sets the absoluteDate property and returns the receiver for chaining.
 func (x *Alarm) WithAbsoluteDate(absoluteDate *foundation.NSDate) *Alarm {
 	x.inner.SetAbsoluteDate(absoluteDate)
 	return x
 }
 
+// @property   structuredLocation @discussion Allows you to set a structured location (a location with a potential geo-coordinate) on an alarm. This is used in conjunction with proximity to do geofence-based triggering of reminders.
+//
 // WithStructuredLocation sets the structuredLocation property and returns the receiver for chaining.
 func (x *Alarm) WithStructuredLocation(structuredLocation *StructuredLocation) *Alarm {
 	x.inner.SetStructuredLocation(structuredLocation.Unwrap())
 	return x
 }
 
+// @property   proximity @discussion Defines whether this alarm triggers via entering/exiting a geofence as defined by structuredLocation.
+//
 // WithProximity sets the proximity property and returns the receiver for chaining.
 func (x *Alarm) WithProximity(proximity EKAlarmProximity) *Alarm {
 	x.inner.SetProximity(raw.EKAlarmProximity(proximity))
 	return x
 }
 
+// @property   emailAddress @abstract   An email address that is the recipient of an email alarm, which is an alarm that triggers an email message. @discussion When you set the emailAddress property, the action property is set to EKAlarmTypeEmail, and the soundName and url properties are set to nil.
+//
 // WithEmailAddress sets the emailAddress property and returns the receiver for chaining.
 func (x *Alarm) WithEmailAddress(emailAddress string) *Alarm {
 	x.inner.SetEmailAddress(foundation.NSStringStringWithUTF8String(emailAddress))
 	return x
 }
 
+// @property   soundName @abstract   The name of the sound to play when the alarm triggers. @discussion The value of this property is the name of a system sound that can be used with the soundNamed: class method to create an NSSound object. When you set the soundName property, the action property is set to EKAlarmTypeAudio, and the emailAddress and url properties are set to nil.
+//
 // WithSoundName sets the soundName property and returns the receiver for chaining.
 func (x *Alarm) WithSoundName(soundName string) *Alarm {
 	x.inner.SetSoundName(foundation.NSStringStringWithUTF8String(soundName))
 	return x
 }
 
+// @property   url @abstract   The URL to open when the alarm triggers. @discussion When you set the url property, the action property is set to EKAlarmTypeProcedure, and the emailAddress and soundName properties are set to nil. Note: Starting with OS X 10.9, it is not possible to create new procedure alarms or view URLs for existing procedure alarms. Trying to save or modify a procedure alarm will result in a save error. Editing other aspects of events or reminders that have existing procedure alarms is allowed as long as the alarm isn't modified.
+//
 // WithUrl sets the url property and returns the receiver for chaining.
 func (x *Alarm) WithUrl(url string) *Alarm {
 	x.inner.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 	return x
 }
 
+// @property   relativeOffset @abstract   Specifies a relative offset from an event start date to fire an alarm. @discussion Set this property to an appropriate negative value to establish an alarm trigger relative to the start date/time of an event. Setting this clears any existing date trigger.
+//
 // RelativeOffset calls the underlying RelativeOffset.
 func (x *Alarm) RelativeOffset() float64 {
 	return x.inner.RelativeOffset()
@@ -89,6 +105,8 @@ func (x *Alarm) SetRelativeOffset(relativeOffset float64) {
 	x.inner.SetRelativeOffset(relativeOffset)
 }
 
+// @property   absoluteDate @abstract   Represents an alarm that fires at a specific date. @discussion Set this property to a date to establish an absolute alarm trigger. Setting this clears any relative interval trigger.
+//
 // AbsoluteDate calls the underlying AbsoluteDate.
 func (x *Alarm) AbsoluteDate() *foundation.NSDate {
 	return x.inner.AbsoluteDate()
@@ -99,6 +117,8 @@ func (x *Alarm) SetAbsoluteDate(absoluteDate *foundation.NSDate) {
 	x.inner.SetAbsoluteDate(absoluteDate)
 }
 
+// @property   structuredLocation @discussion Allows you to set a structured location (a location with a potential geo-coordinate) on an alarm. This is used in conjunction with proximity to do geofence-based triggering of reminders.
+//
 // StructuredLocation calls the underlying StructuredLocation.
 func (x *Alarm) StructuredLocation() *StructuredLocation {
 	_r := x.inner.StructuredLocation()
@@ -113,6 +133,8 @@ func (x *Alarm) SetStructuredLocation(structuredLocation *raw.EKStructuredLocati
 	x.inner.SetStructuredLocation(structuredLocation)
 }
 
+// @property   proximity @discussion Defines whether this alarm triggers via entering/exiting a geofence as defined by structuredLocation.
+//
 // Proximity calls the underlying Proximity.
 func (x *Alarm) Proximity() EKAlarmProximity {
 	return EKAlarmProximity(x.inner.Proximity())
@@ -123,11 +145,15 @@ func (x *Alarm) SetProximity(proximity EKAlarmProximity) {
 	x.inner.SetProximity(raw.EKAlarmProximity(proximity))
 }
 
+// @property   type @abstract   The type of alarm, based on the action taken when triggering the alarm. @discussion This field is read-only; to change the type of alarm, set emailAddress for EKAlarmTypeEmail, soundName for EKAlarmTypeAudio or url for EKAlarmTypeProcedure. Setting all of those to nil will change it to EKAlarmTypeDisplay.
+//
 // Type calls the underlying Type.
 func (x *Alarm) Type() EKAlarmType {
 	return EKAlarmType(x.inner.Type())
 }
 
+// @property   emailAddress @abstract   An email address that is the recipient of an email alarm, which is an alarm that triggers an email message. @discussion When you set the emailAddress property, the action property is set to EKAlarmTypeEmail, and the soundName and url properties are set to nil.
+//
 // EmailAddress calls the underlying EmailAddress.
 func (x *Alarm) EmailAddress() string {
 	_r := x.inner.EmailAddress()
@@ -142,6 +168,8 @@ func (x *Alarm) SetEmailAddress(emailAddress string) {
 	x.inner.SetEmailAddress(foundation.NSStringStringWithUTF8String(emailAddress))
 }
 
+// @property   soundName @abstract   The name of the sound to play when the alarm triggers. @discussion The value of this property is the name of a system sound that can be used with the soundNamed: class method to create an NSSound object. When you set the soundName property, the action property is set to EKAlarmTypeAudio, and the emailAddress and url properties are set to nil.
+//
 // SoundName calls the underlying SoundName.
 func (x *Alarm) SoundName() string {
 	_r := x.inner.SoundName()
@@ -156,6 +184,8 @@ func (x *Alarm) SetSoundName(soundName string) {
 	x.inner.SetSoundName(foundation.NSStringStringWithUTF8String(soundName))
 }
 
+// @property   url @abstract   The URL to open when the alarm triggers. @discussion When you set the url property, the action property is set to EKAlarmTypeProcedure, and the emailAddress and soundName properties are set to nil. Note: Starting with OS X 10.9, it is not possible to create new procedure alarms or view URLs for existing procedure alarms. Trying to save or modify a procedure alarm will result in a save error. Editing other aspects of events or reminders that have existing procedure alarms is allowed as long as the alarm isn't modified.
+//
 // Url calls the underlying Url.
 func (x *Alarm) Url() *foundation.NSURL {
 	return x.inner.Url()

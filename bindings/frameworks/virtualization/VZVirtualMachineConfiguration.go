@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The environment attributes and list of devices to use during the configuration of macOS or Linux VMs.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtualmachineconfiguration
 type VZVirtualMachineConfiguration struct {
 	foundation.NSObject
@@ -286,7 +288,7 @@ func (o *VZVirtualMachineConfiguration) SetUsbControllers(usbControllers *founda
 	o.Ptr().Send(_vZVirtualMachineConfigurationSelSetUsbControllers, usbControllers.Ptr())
 }
 
-// @abstract Validate the configuration. @param error If not nil, assigned with the validation error if the validation failed. @return YES if the configuration is valid.
+// Validates the current configuration settings and reports any issues that might prevent the successful initialization of the VM.
 func (o *VZVirtualMachineConfiguration) ValidateWithError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vZVirtualMachineConfigurationSelValidateWithError, unsafe.Pointer(&_nsErr))
@@ -296,7 +298,7 @@ func (o *VZVirtualMachineConfiguration) ValidateWithError() (bool, error) {
 	return _ret, nil
 }
 
-// @abstract Validate the configuration is savable. @discussion Verify that a virtual machine with this configuration is savable. Not all configuration options can be safely saved and restored from file. If this evaluates to NO, the caller should expect future calls to saveMachineStateToURL:completionHandler: to fail. @param error If not nil, assigned with an error describing the unsupported configuration option. @return YES if the configuration is savable.
+// Determines whether the framework can save or restore the VM’s current configuration.
 func (o *VZVirtualMachineConfiguration) ValidateSaveRestoreSupportWithError() (bool, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[bool](o.Ptr(), _vZVirtualMachineConfigurationSelValidateSaveRestoreSupportWithError, unsafe.Pointer(&_nsErr))

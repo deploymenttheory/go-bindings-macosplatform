@@ -33,6 +33,8 @@ func MatrixCopyToImageFromID(id objc.ID) *MatrixCopyToImage {
 	return &MatrixCopyToImage{inner: raw.MPSMatrixCopyToImageFromID(id)}
 }
 
+// @abstract Initialize a MPSMatrixCopyToImage object on a device @param    device        The device the kernel will run on @param    dataLayout    The data layout @return   A valid MPSMatrixCopyToImage object or nil, if failure.
+//
 // NewMatrixCopyToImageWithDeviceDataLayout creates a new [MatrixCopyToImage].
 func NewMatrixCopyToImageWithDeviceDataLayout(device metal.MTLDevice, dataLayout mpscore.MPSDataLayout) *MatrixCopyToImage {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixCopyToImage")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewMatrixCopyToImageWithDeviceDataLayout(device metal.MTLDevice, dataLayout
 	return &MatrixCopyToImage{inner: raw.MPSMatrixCopyToImageFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+//
 // NewMatrixCopyToImageWithCoderDevice creates a new [MatrixCopyToImage].
 func NewMatrixCopyToImageWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MatrixCopyToImage {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixCopyToImage")), objc.RegisterName("alloc"))
@@ -47,40 +51,54 @@ func NewMatrixCopyToImageWithCoderDevice(aDecoder *foundation.NSCoder, device me
 	return &MatrixCopyToImage{inner: raw.MPSMatrixCopyToImageFromID(_id)}
 }
 
+// @property   sourceMatrixOrigin @discussion The origin, relative to [0, 0] in the source matrix. This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // WithSourceMatrixOrigin sets the sourceMatrixOrigin property and returns the receiver for chaining.
 func (x *MatrixCopyToImage) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixCopyToImage {
 	x.inner.SetSourceMatrixOrigin(sourceMatrixOrigin)
 	return x
 }
 
+// @property   sourceMatrixBatchIndex @discussion The index of the source matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.
+//
 // WithSourceMatrixBatchIndex sets the sourceMatrixBatchIndex property and returns the receiver for chaining.
 func (x *MatrixCopyToImage) WithSourceMatrixBatchIndex(sourceMatrixBatchIndex uint) *MatrixCopyToImage {
 	x.inner.SetSourceMatrixBatchIndex(sourceMatrixBatchIndex)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *MatrixCopyToImage) WithOptions(options mpscore.MPSKernelOptions) *MatrixCopyToImage {
 	x.inner.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MatrixCopyToImage) WithLabel(label string) *MatrixCopyToImage {
 	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @abstract Encode a kernel that copies a MPSMatrix to a MPSImage into a command buffer using a MTLComputeCommandEncoder. @discussion The kernel copies feature channels from sourceMatrix to the destinationImage. The kernel will not begin to execute until after the command buffer has been enqueued and committed. NOTE: The sourceMatrix.dataType must match the feature channel data type in destinationImage. @param  commandBuffer       A valid MTLCommandBuffer. @param  sourceMatrix        A valid MPSMatrix or MPSTemporaryMatrix object describing the source matrix. @param  destinationImage    A valid MPSImage describing the image to copy to.
+//
 // EncodeToCommandBufferSourceMatrixDestinationImage calls the underlying EncodeToCommandBufferSourceMatrixDestinationImage.
 func (x *MatrixCopyToImage) EncodeToCommandBufferSourceMatrixDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, destinationImage *mpscore.MPSImage) {
 	x.inner.EncodeToCommandBufferSourceMatrixDestinationImage(commandBuffer, sourceMatrix, destinationImage)
 }
 
+// @abstract Encode a kernel that copies a MPSMatrix to a MPSImageBatch into a command buffer using a MTLComputeCommandEncoder. @discussion The kernel copies feature channels from sourceImage to the buffer associated with destinationMatrix.  The kernel will not begin to execute until after the command buffer has been enqueued and committed. Each image will be copied to its own row in the matrix, starting with row destinationMatrixOrigin.x. NOTE: The destinationMatrix.dataType must match the feature channel data type in sourceImage. NOTE: All the images in the source batch should be of the same size and have numberOfImages = 1. @param  commandBuffer       A valid MTLCommandBuffer. @param  sourceMatrix        A valid MPSMatrix or MPSTemporaryMatrix object describing the source matrix. @param  destinationImages   A valid MPSImageBatch describing the images to copy to.
+//
 // EncodeBatchToCommandBufferSourceMatrixDestinationImages calls the underlying EncodeBatchToCommandBufferSourceMatrixDestinationImages.
 func (x *MatrixCopyToImage) EncodeBatchToCommandBufferSourceMatrixDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, destinationImages unsafe.Pointer) {
 	x.inner.EncodeBatchToCommandBufferSourceMatrixDestinationImages(commandBuffer, sourceMatrix, destinationImages)
 }
 
+// @property   sourceMatrixOrigin @discussion The origin, relative to [0, 0] in the source matrix. This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+//
 // SourceMatrixOrigin calls the underlying SourceMatrixOrigin.
 func (x *MatrixCopyToImage) SourceMatrixOrigin() metal.MTLOrigin {
 	return x.inner.SourceMatrixOrigin()
@@ -91,6 +109,8 @@ func (x *MatrixCopyToImage) SetSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOr
 	x.inner.SetSourceMatrixOrigin(sourceMatrixOrigin)
 }
 
+// @property   sourceMatrixBatchIndex @discussion The index of the source matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.
+//
 // SourceMatrixBatchIndex calls the underlying SourceMatrixBatchIndex.
 func (x *MatrixCopyToImage) SourceMatrixBatchIndex() uint {
 	return x.inner.SourceMatrixBatchIndex()
@@ -101,6 +121,8 @@ func (x *MatrixCopyToImage) SetSourceMatrixBatchIndex(sourceMatrixBatchIndex uin
 	x.inner.SetSourceMatrixBatchIndex(sourceMatrixBatchIndex)
 }
 
+// @property   dataLayout @abstract   The data layout to use @discussion Returns the data layout.  When copying from a MPSMatrix to a MPSImage, this describes the order in which the image values are to be stored in the buffer associated with the MPSMatrix. Default: MPSDataLayoutFeatureChannelsxHeightxWidth
+//
 // DataLayout calls the underlying DataLayout.
 func (x *MatrixCopyToImage) DataLayout() mpscore.MPSDataLayout {
 	return x.inner.DataLayout()

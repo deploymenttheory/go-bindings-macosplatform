@@ -33,6 +33,8 @@ func SharingCollaborationModeRestrictionFromID(id objc.ID) *SharingCollaboration
 	return &SharingCollaborationModeRestriction{inner: raw.NSSharingCollaborationModeRestrictionFromID(id)}
 }
 
+// - Parameters: - disabledMode: The disabled type of sharing
+//
 // NewSharingCollaborationModeRestrictionWithDisabledMode creates a new [SharingCollaborationModeRestriction].
 func NewSharingCollaborationModeRestrictionWithDisabledMode(disabledMode NSSharingCollaborationMode) *SharingCollaborationModeRestriction {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSharingCollaborationModeRestriction")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewSharingCollaborationModeRestrictionWithDisabledMode(disabledMode NSShari
 	return &SharingCollaborationModeRestriction{inner: raw.NSSharingCollaborationModeRestrictionFromID(_id)}
 }
 
+// - Parameters: - disabledMode: The disabled type of sharing - alertTitle: The alert title - alertMessage: The alert message
+//
 // NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessage creates a new [SharingCollaborationModeRestriction].
 func NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessage(disabledMode NSSharingCollaborationMode, alertTitle string, alertMessage string) *SharingCollaborationModeRestriction {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSharingCollaborationModeRestriction")), objc.RegisterName("alloc"))
@@ -47,6 +51,8 @@ func NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessag
 	return &SharingCollaborationModeRestriction{inner: raw.NSSharingCollaborationModeRestrictionFromID(_id)}
 }
 
+// - Parameters: - disabledMode: The disabled type of sharing - alertTitle: The alert title - alertMessage: The alert message - alertDismissButtonTitle: The label on the default alert button
+//
 // NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessageAlertDismissButtonTitle creates a new [SharingCollaborationModeRestriction].
 func NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessageAlertDismissButtonTitle(disabledMode NSSharingCollaborationMode, alertTitle string, alertMessage string, alertDismissButtonTitle string) *SharingCollaborationModeRestriction {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSharingCollaborationModeRestriction")), objc.RegisterName("alloc"))
@@ -54,6 +60,8 @@ func NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessag
 	return &SharingCollaborationModeRestriction{inner: raw.NSSharingCollaborationModeRestrictionFromID(_id)}
 }
 
+// - Parameters: - disabledMode: The disabled type of sharing - alertTitle: The alert title - alertMessage: The alert message - alertDismissButtonTitle: The label on the default alert button - alertRecoverySuggestionButtonTitle: The label on the optional recovery suggestion button on the alert - alertRecoverySuggestionButtonLaunchURL: The URL that is opened when the optional recovery suggestion button is selected
+//
 // NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessageAlertDismissButtonTitleAlertRecoverySuggestionButtonTitleAlertRecoverySuggestionButtonLaunchURL creates a new [SharingCollaborationModeRestriction].
 func NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessageAlertDismissButtonTitleAlertRecoverySuggestionButtonTitleAlertRecoverySuggestionButtonLaunchURL(disabledMode NSSharingCollaborationMode, alertTitle string, alertMessage string, alertDismissButtonTitle string, alertRecoverySuggestionButtonTitle string, alertRecoverySuggestionButtonLaunchURL string) *SharingCollaborationModeRestriction {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSharingCollaborationModeRestriction")), objc.RegisterName("alloc"))
@@ -61,11 +69,15 @@ func NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessag
 	return &SharingCollaborationModeRestriction{inner: raw.NSSharingCollaborationModeRestrictionFromID(_id)}
 }
 
+// The type of sharing which should be disabled
+//
 // DisabledMode calls the underlying DisabledMode.
 func (x *SharingCollaborationModeRestriction) DisabledMode() NSSharingCollaborationMode {
 	return NSSharingCollaborationMode(x.inner.DisabledMode())
 }
 
+// The title of the alert if a reason for disabling is provided
+//
 // AlertTitle calls the underlying AlertTitle.
 func (x *SharingCollaborationModeRestriction) AlertTitle() string {
 	_r := x.inner.AlertTitle()
@@ -75,6 +87,8 @@ func (x *SharingCollaborationModeRestriction) AlertTitle() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The message of the alert if a reason for disabling is provided
+//
 // AlertMessage calls the underlying AlertMessage.
 func (x *SharingCollaborationModeRestriction) AlertMessage() string {
 	_r := x.inner.AlertMessage()
@@ -84,6 +98,8 @@ func (x *SharingCollaborationModeRestriction) AlertMessage() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The label on the alert button which will simply confirm that the alert was viewed and dismiss it Defaults to "OK"
+//
 // AlertDismissButtonTitle calls the underlying AlertDismissButtonTitle.
 func (x *SharingCollaborationModeRestriction) AlertDismissButtonTitle() string {
 	_r := x.inner.AlertDismissButtonTitle()
@@ -93,6 +109,8 @@ func (x *SharingCollaborationModeRestriction) AlertDismissButtonTitle() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The label on the recovery suggestion button if it is provided
+//
 // AlertRecoverySuggestionButtonTitle calls the underlying AlertRecoverySuggestionButtonTitle.
 func (x *SharingCollaborationModeRestriction) AlertRecoverySuggestionButtonTitle() string {
 	_r := x.inner.AlertRecoverySuggestionButtonTitle()
@@ -102,6 +120,8 @@ func (x *SharingCollaborationModeRestriction) AlertRecoverySuggestionButtonTitle
 	return purego.GoString(_r.Ptr())
 }
 
+// The URL that is opened when the user selects the recovery suggestion, if any
+//
 // AlertRecoverySuggestionButtonLaunchURL calls the underlying AlertRecoverySuggestionButtonLaunchURL.
 func (x *SharingCollaborationModeRestriction) AlertRecoverySuggestionButtonLaunchURL() *foundation.NSURL {
 	return x.inner.AlertRecoverySuggestionButtonLaunchURL()

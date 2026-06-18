@@ -36,6 +36,8 @@ func NewEraserToolWithEraserType(eraserType PKEraserType) *EraserTool {
 	return &EraserTool{inner: raw.PKEraserToolFromID(_id)}
 }
 
+// Create a new eraser tool with a width. @param eraserType The type of eraser. @param width The width of the eraser.
+//
 // NewEraserToolWithEraserTypeWidth creates a new [EraserTool].
 func NewEraserToolWithEraserTypeWidth(eraserType PKEraserType, width float64) *EraserTool {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKEraserTool")), objc.RegisterName("alloc"))
@@ -43,11 +45,15 @@ func NewEraserToolWithEraserTypeWidth(eraserType PKEraserType, width float64) *E
 	return &EraserTool{inner: raw.PKEraserToolFromID(_id)}
 }
 
+// The eraser type.
+//
 // EraserType calls the underlying EraserType.
 func (x *EraserTool) EraserType() PKEraserType {
 	return PKEraserType(x.inner.EraserType())
 }
 
+// The width of the eraser.
+//
 // Width calls the underlying Width.
 func (x *EraserTool) Width() float64 {
 	return x.inner.Width()

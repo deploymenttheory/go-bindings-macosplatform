@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The configuration object that represents a USB Mass storage device.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzusbmassstoragedeviceconfiguration
 type VZUSBMassStorageDeviceConfiguration struct {
 	VZStorageDeviceConfiguration
@@ -29,7 +31,7 @@ func VZUSBMassStorageDeviceConfigurationFromID(id objc.ID) *VZUSBMassStorageDevi
 	return o
 }
 
-// @abstract Initialize a VZUSBMassStorageDeviceConfiguration with a device attachment. @param attachment The storage device attachment. This defines how the virtualized device operates on the host side. @see VZDiskImageStorageDeviceAttachment
+// Creates a new storage device configuration with the specified attachment.
 func (o *VZUSBMassStorageDeviceConfiguration) InitWithAttachment(attachment *VZStorageDeviceAttachment) *VZUSBMassStorageDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZUSBMassStorageDeviceConfigurationSelInitWithAttachment, attachment.Ptr())
 	if _ret != 0 {

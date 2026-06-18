@@ -37,6 +37,8 @@ func NewPushCredentials() *PushCredentials {
 	return &PushCredentials{inner: raw.PKPushCredentialsFromID(_id)}
 }
 
+// The push type constant associated with the token. For possible values, see “PushKit/PKPushType“.
+//
 // Type calls the underlying Type.
 func (x *PushCredentials) Type() string {
 	_r := x.inner.Type()
@@ -46,6 +48,8 @@ func (x *PushCredentials) Type() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A unique device token to use when sending push notifications to the current device. Forward this token to the server you use to generate push notifications. When preparing to deliver a push notification to the current device, include the token in the HTTP request you send to Apple Push Notification service (APNs).
+//
 // Token calls the underlying Token.
 func (x *PushCredentials) Token() *foundation.NSData {
 	return x.inner.Token()

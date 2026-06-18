@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A network device attachment that allows a custom network topology.
+//
 // VmnetNetworkDeviceAttachment wraps [raw.VZVmnetNetworkDeviceAttachment] with a fluent Go API.
 type VmnetNetworkDeviceAttachment struct {
 	inner *raw.VZVmnetNetworkDeviceAttachment
@@ -30,6 +32,8 @@ func VmnetNetworkDeviceAttachmentFromID(id objc.ID) *VmnetNetworkDeviceAttachmen
 	return &VmnetNetworkDeviceAttachment{inner: raw.VZVmnetNetworkDeviceAttachmentFromID(id)}
 }
 
+// Creates the attachment and configures it with the specified data.
+//
 // NewVmnetNetworkDeviceAttachmentWithNetwork creates a new [VmnetNetworkDeviceAttachment].
 func NewVmnetNetworkDeviceAttachmentWithNetwork(network unsafe.Pointer) *VmnetNetworkDeviceAttachment {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVmnetNetworkDeviceAttachment")), objc.RegisterName("alloc"))

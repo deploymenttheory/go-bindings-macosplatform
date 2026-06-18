@@ -35,30 +35,40 @@ func NewWorkoutConfiguration() *WorkoutConfiguration {
 	return &WorkoutConfiguration{inner: raw.HKWorkoutConfigurationFromID(_id)}
 }
 
+// @property      activityType @abstract      Indicates the type of workout for the configuration.
+//
 // WithActivityType sets the activityType property and returns the receiver for chaining.
 func (x *WorkoutConfiguration) WithActivityType(activityType HKWorkoutActivityType) *WorkoutConfiguration {
 	x.inner.SetActivityType(raw.HKWorkoutActivityType(activityType))
 	return x
 }
 
+// @property      locationType @abstract      Indicates the type of location (indoors vs. outdoors) for the configuration.
+//
 // WithLocationType sets the locationType property and returns the receiver for chaining.
 func (x *WorkoutConfiguration) WithLocationType(locationType HKWorkoutSessionLocationType) *WorkoutConfiguration {
 	x.inner.SetLocationType(raw.HKWorkoutSessionLocationType(locationType))
 	return x
 }
 
+// @property      swimmingLocationType @abstract      Indicates the type of swimming location (pool vs. open water) where the workout will take place.
+//
 // WithSwimmingLocationType sets the swimmingLocationType property and returns the receiver for chaining.
 func (x *WorkoutConfiguration) WithSwimmingLocationType(swimmingLocationType HKWorkoutSwimmingLocationType) *WorkoutConfiguration {
 	x.inner.SetSwimmingLocationType(raw.HKWorkoutSwimmingLocationType(swimmingLocationType))
 	return x
 }
 
+// @property      lapLength @abstract      Indicates the length of the pool, when the workout location type is pool. @discussion    This metric represents the length of the pool where the workout takes place. It should be a quantity with a unit representing length.
+//
 // WithLapLength sets the lapLength property and returns the receiver for chaining.
 func (x *WorkoutConfiguration) WithLapLength(lapLength *Quantity) *WorkoutConfiguration {
 	x.inner.SetLapLength(lapLength.Unwrap())
 	return x
 }
 
+// @property      activityType @abstract      Indicates the type of workout for the configuration.
+//
 // ActivityType calls the underlying ActivityType.
 func (x *WorkoutConfiguration) ActivityType() HKWorkoutActivityType {
 	return HKWorkoutActivityType(x.inner.ActivityType())
@@ -69,6 +79,8 @@ func (x *WorkoutConfiguration) SetActivityType(activityType HKWorkoutActivityTyp
 	x.inner.SetActivityType(raw.HKWorkoutActivityType(activityType))
 }
 
+// @property      locationType @abstract      Indicates the type of location (indoors vs. outdoors) for the configuration.
+//
 // LocationType calls the underlying LocationType.
 func (x *WorkoutConfiguration) LocationType() HKWorkoutSessionLocationType {
 	return HKWorkoutSessionLocationType(x.inner.LocationType())
@@ -79,6 +91,8 @@ func (x *WorkoutConfiguration) SetLocationType(locationType HKWorkoutSessionLoca
 	x.inner.SetLocationType(raw.HKWorkoutSessionLocationType(locationType))
 }
 
+// @property      swimmingLocationType @abstract      Indicates the type of swimming location (pool vs. open water) where the workout will take place.
+//
 // SwimmingLocationType calls the underlying SwimmingLocationType.
 func (x *WorkoutConfiguration) SwimmingLocationType() HKWorkoutSwimmingLocationType {
 	return HKWorkoutSwimmingLocationType(x.inner.SwimmingLocationType())
@@ -89,6 +103,8 @@ func (x *WorkoutConfiguration) SetSwimmingLocationType(swimmingLocationType HKWo
 	x.inner.SetSwimmingLocationType(raw.HKWorkoutSwimmingLocationType(swimmingLocationType))
 }
 
+// @property      lapLength @abstract      Indicates the length of the pool, when the workout location type is pool. @discussion    This metric represents the length of the pool where the workout takes place. It should be a quantity with a unit representing length.
+//
 // LapLength calls the underlying LapLength.
 func (x *WorkoutConfiguration) LapLength() *Quantity {
 	_r := x.inner.LapLength()

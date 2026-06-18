@@ -37,48 +37,64 @@ func NewLinkMetadata() *LinkMetadata {
 	return &LinkMetadata{inner: raw.LPLinkMetadataFromID(_id)}
 }
 
+// The original URL of the metadata request.
+//
 // WithOriginalURL sets the originalURL property and returns the receiver for chaining.
 func (x *LinkMetadata) WithOriginalURL(originalURL string) *LinkMetadata {
 	x.inner.SetOriginalURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(originalURL)))
 	return x
 }
 
+// The URL that returned the metadata, taking server-side redirects into account. The URL that returns the metadata may differ from the “LPLinkMetadata/originalURL“ to which you sent the metadata request. This can happen if the server redirects the request, for example, when a resource has moved, or when the original URL is a domain alias.
+//
 // WithURL sets the uRL property and returns the receiver for chaining.
 func (x *LinkMetadata) WithURL(uRL string) *LinkMetadata {
 	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 	return x
 }
 
+// A representative title for the URL.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *LinkMetadata) WithTitle(title string) *LinkMetadata {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// An object that retrieves data corresponding to a representative icon for the URL.
+//
 // WithIconProvider sets the iconProvider property and returns the receiver for chaining.
 func (x *LinkMetadata) WithIconProvider(iconProvider *foundation.NSItemProvider) *LinkMetadata {
 	x.inner.SetIconProvider(iconProvider)
 	return x
 }
 
+// An object that retrieves data corresponding to a representative image for the URL.
+//
 // WithImageProvider sets the imageProvider property and returns the receiver for chaining.
 func (x *LinkMetadata) WithImageProvider(imageProvider *foundation.NSItemProvider) *LinkMetadata {
 	x.inner.SetImageProvider(imageProvider)
 	return x
 }
 
+// An object that retrieves data corresponding to a representative video for the URL. The item provider returns a video that <doc://com.apple.documentation/documentation/avfoundation> can play.
+//
 // WithVideoProvider sets the videoProvider property and returns the receiver for chaining.
 func (x *LinkMetadata) WithVideoProvider(videoProvider *foundation.NSItemProvider) *LinkMetadata {
 	x.inner.SetVideoProvider(videoProvider)
 	return x
 }
 
+// A remote URL corresponding to a representative video for the URL. This may reference a remote video file that <doc://com.apple.documentation/documentation/avfoundation> can stream.
+//
 // WithRemoteVideoURL sets the remoteVideoURL property and returns the receiver for chaining.
 func (x *LinkMetadata) WithRemoteVideoURL(remoteVideoURL string) *LinkMetadata {
 	x.inner.SetRemoteVideoURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(remoteVideoURL)))
 	return x
 }
 
+// The original URL of the metadata request.
+//
 // OriginalURL calls the underlying OriginalURL.
 func (x *LinkMetadata) OriginalURL() *foundation.NSURL {
 	return x.inner.OriginalURL()
@@ -89,6 +105,8 @@ func (x *LinkMetadata) SetOriginalURL(originalURL string) {
 	x.inner.SetOriginalURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(originalURL)))
 }
 
+// The URL that returned the metadata, taking server-side redirects into account. The URL that returns the metadata may differ from the “LPLinkMetadata/originalURL“ to which you sent the metadata request. This can happen if the server redirects the request, for example, when a resource has moved, or when the original URL is a domain alias.
+//
 // URL calls the underlying URL.
 func (x *LinkMetadata) URL() *foundation.NSURL {
 	return x.inner.URL()
@@ -99,6 +117,8 @@ func (x *LinkMetadata) SetURL(uRL string) {
 	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 }
 
+// A representative title for the URL.
+//
 // Title calls the underlying Title.
 func (x *LinkMetadata) Title() string {
 	_r := x.inner.Title()
@@ -113,6 +133,8 @@ func (x *LinkMetadata) SetTitle(title string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
+// An object that retrieves data corresponding to a representative icon for the URL.
+//
 // IconProvider calls the underlying IconProvider.
 func (x *LinkMetadata) IconProvider() *foundation.NSItemProvider {
 	return x.inner.IconProvider()
@@ -123,6 +145,8 @@ func (x *LinkMetadata) SetIconProvider(iconProvider *foundation.NSItemProvider) 
 	x.inner.SetIconProvider(iconProvider)
 }
 
+// An object that retrieves data corresponding to a representative image for the URL.
+//
 // ImageProvider calls the underlying ImageProvider.
 func (x *LinkMetadata) ImageProvider() *foundation.NSItemProvider {
 	return x.inner.ImageProvider()
@@ -133,6 +157,8 @@ func (x *LinkMetadata) SetImageProvider(imageProvider *foundation.NSItemProvider
 	x.inner.SetImageProvider(imageProvider)
 }
 
+// An object that retrieves data corresponding to a representative video for the URL. The item provider returns a video that <doc://com.apple.documentation/documentation/avfoundation> can play.
+//
 // VideoProvider calls the underlying VideoProvider.
 func (x *LinkMetadata) VideoProvider() *foundation.NSItemProvider {
 	return x.inner.VideoProvider()
@@ -143,6 +169,8 @@ func (x *LinkMetadata) SetVideoProvider(videoProvider *foundation.NSItemProvider
 	x.inner.SetVideoProvider(videoProvider)
 }
 
+// A remote URL corresponding to a representative video for the URL. This may reference a remote video file that <doc://com.apple.documentation/documentation/avfoundation> can stream.
+//
 // RemoteVideoURL calls the underlying RemoteVideoURL.
 func (x *LinkMetadata) RemoteVideoURL() *foundation.NSURL {
 	return x.inner.RemoteVideoURL()

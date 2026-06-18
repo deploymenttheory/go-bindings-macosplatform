@@ -36,88 +36,118 @@ func NewItemAttributes() *ItemAttributes {
 	return &ItemAttributes{inner: raw.FSItemAttributesFromID(_id)}
 }
 
+// The user identifier.
+//
 // WithUid sets the uid property and returns the receiver for chaining.
 func (x *ItemAttributes) WithUid(uid uint32) *ItemAttributes {
 	x.inner.SetUid(uid)
 	return x
 }
 
+// The group identifier.
+//
 // WithGid sets the gid property and returns the receiver for chaining.
 func (x *ItemAttributes) WithGid(gid uint32) *ItemAttributes {
 	x.inner.SetGid(gid)
 	return x
 }
 
+// The mode of the item. The mode is often used for `setuid`, `setgid`, and `sticky` bits.
+//
 // WithMode sets the mode property and returns the receiver for chaining.
 func (x *ItemAttributes) WithMode(mode uint32) *ItemAttributes {
 	x.inner.SetMode(mode)
 	return x
 }
 
+// The item type, such as a regular file, directory, or symbolic link.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *ItemAttributes) WithType(type_ FSItemType) *ItemAttributes {
 	x.inner.SetType(raw.FSItemType(type_))
 	return x
 }
 
+// The number of hard links to the item.
+//
 // WithLinkCount sets the linkCount property and returns the receiver for chaining.
 func (x *ItemAttributes) WithLinkCount(linkCount uint32) *ItemAttributes {
 	x.inner.SetLinkCount(linkCount)
 	return x
 }
 
+// The item's behavior flags. See `st_flags` in `stat.h` for flag definitions.
+//
 // WithFlags sets the flags property and returns the receiver for chaining.
 func (x *ItemAttributes) WithFlags(flags uint32) *ItemAttributes {
 	x.inner.SetFlags(flags)
 	return x
 }
 
+// The item's size.
+//
 // WithSize sets the size property and returns the receiver for chaining.
 func (x *ItemAttributes) WithSize(size uint64) *ItemAttributes {
 	x.inner.SetSize(size)
 	return x
 }
 
+// The item's allocated size.
+//
 // WithAllocSize sets the allocSize property and returns the receiver for chaining.
 func (x *ItemAttributes) WithAllocSize(allocSize uint64) *ItemAttributes {
 	x.inner.SetAllocSize(allocSize)
 	return x
 }
 
+// The item's file identifier.
+//
 // WithFileID sets the fileID property and returns the receiver for chaining.
 func (x *ItemAttributes) WithFileID(fileID FSItemID) *ItemAttributes {
 	x.inner.SetFileID(raw.FSItemID(fileID))
 	return x
 }
 
+// The identifier of the item's parent.
+//
 // WithParentID sets the parentID property and returns the receiver for chaining.
 func (x *ItemAttributes) WithParentID(parentID FSItemID) *ItemAttributes {
 	x.inner.SetParentID(raw.FSItemID(parentID))
 	return x
 }
 
+// A Boolean value that indicates whether the item supports a limited set of extended attributes.
+//
 // WithSupportsLimitedXAttrs sets the supportsLimitedXAttrs property and returns the receiver for chaining.
 func (x *ItemAttributes) WithSupportsLimitedXAttrs(supportsLimitedXAttrs bool) *ItemAttributes {
 	x.inner.SetSupportsLimitedXAttrs(supportsLimitedXAttrs)
 	return x
 }
 
+// A Boolean value that indicates whether the file system overrides the per-volume settings for kernel offloaded I/O for a specific file. This property has no meaning if the volume doesn't conform to “FSVolumeKernelOffloadedIOOperations“.
+//
 // WithInhibitKernelOffloadedIO sets the inhibitKernelOffloadedIO property and returns the receiver for chaining.
 func (x *ItemAttributes) WithInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool) *ItemAttributes {
 	x.inner.SetInhibitKernelOffloadedIO(inhibitKernelOffloadedIO)
 	return x
 }
 
+// Marks all attributes inactive.
+//
 // InvalidateAllProperties calls the underlying InvalidateAllProperties.
 func (x *ItemAttributes) InvalidateAllProperties() {
 	x.inner.InvalidateAllProperties()
 }
 
+// Returns a Boolean value that indicates whether the attribute is valid. If the value returned by this method is `YES` (Objective-C) or `true` (Swift), a caller can safely use the given attribute.
+//
 // IsValid calls the underlying IsValid.
 func (x *ItemAttributes) IsValid(attribute FSItemAttribute) bool {
 	return x.inner.IsValid(raw.FSItemAttribute(attribute))
 }
 
+// The user identifier.
+//
 // Uid calls the underlying Uid.
 func (x *ItemAttributes) Uid() uint32 {
 	return x.inner.Uid()
@@ -128,6 +158,8 @@ func (x *ItemAttributes) SetUid(uid uint32) {
 	x.inner.SetUid(uid)
 }
 
+// The group identifier.
+//
 // Gid calls the underlying Gid.
 func (x *ItemAttributes) Gid() uint32 {
 	return x.inner.Gid()
@@ -138,6 +170,8 @@ func (x *ItemAttributes) SetGid(gid uint32) {
 	x.inner.SetGid(gid)
 }
 
+// The mode of the item. The mode is often used for `setuid`, `setgid`, and `sticky` bits.
+//
 // Mode calls the underlying Mode.
 func (x *ItemAttributes) Mode() uint32 {
 	return x.inner.Mode()
@@ -148,6 +182,8 @@ func (x *ItemAttributes) SetMode(mode uint32) {
 	x.inner.SetMode(mode)
 }
 
+// The item type, such as a regular file, directory, or symbolic link.
+//
 // Type calls the underlying Type.
 func (x *ItemAttributes) Type() FSItemType {
 	return FSItemType(x.inner.Type())
@@ -158,6 +194,8 @@ func (x *ItemAttributes) SetType(type_ FSItemType) {
 	x.inner.SetType(raw.FSItemType(type_))
 }
 
+// The number of hard links to the item.
+//
 // LinkCount calls the underlying LinkCount.
 func (x *ItemAttributes) LinkCount() uint32 {
 	return x.inner.LinkCount()
@@ -168,6 +206,8 @@ func (x *ItemAttributes) SetLinkCount(linkCount uint32) {
 	x.inner.SetLinkCount(linkCount)
 }
 
+// The item's behavior flags. See `st_flags` in `stat.h` for flag definitions.
+//
 // Flags calls the underlying Flags.
 func (x *ItemAttributes) Flags() uint32 {
 	return x.inner.Flags()
@@ -178,6 +218,8 @@ func (x *ItemAttributes) SetFlags(flags uint32) {
 	x.inner.SetFlags(flags)
 }
 
+// The item's size.
+//
 // Size calls the underlying Size.
 func (x *ItemAttributes) Size() uint64 {
 	return x.inner.Size()
@@ -188,6 +230,8 @@ func (x *ItemAttributes) SetSize(size uint64) {
 	x.inner.SetSize(size)
 }
 
+// The item's allocated size.
+//
 // AllocSize calls the underlying AllocSize.
 func (x *ItemAttributes) AllocSize() uint64 {
 	return x.inner.AllocSize()
@@ -198,6 +242,8 @@ func (x *ItemAttributes) SetAllocSize(allocSize uint64) {
 	x.inner.SetAllocSize(allocSize)
 }
 
+// The item's file identifier.
+//
 // FileID calls the underlying FileID.
 func (x *ItemAttributes) FileID() FSItemID {
 	return FSItemID(x.inner.FileID())
@@ -208,6 +254,8 @@ func (x *ItemAttributes) SetFileID(fileID FSItemID) {
 	x.inner.SetFileID(raw.FSItemID(fileID))
 }
 
+// The identifier of the item's parent.
+//
 // ParentID calls the underlying ParentID.
 func (x *ItemAttributes) ParentID() FSItemID {
 	return FSItemID(x.inner.ParentID())
@@ -218,6 +266,8 @@ func (x *ItemAttributes) SetParentID(parentID FSItemID) {
 	x.inner.SetParentID(raw.FSItemID(parentID))
 }
 
+// A Boolean value that indicates whether the item supports a limited set of extended attributes.
+//
 // SupportsLimitedXAttrs calls the underlying SupportsLimitedXAttrs.
 func (x *ItemAttributes) SupportsLimitedXAttrs() bool {
 	return x.inner.SupportsLimitedXAttrs()
@@ -228,6 +278,8 @@ func (x *ItemAttributes) SetSupportsLimitedXAttrs(supportsLimitedXAttrs bool) {
 	x.inner.SetSupportsLimitedXAttrs(supportsLimitedXAttrs)
 }
 
+// A Boolean value that indicates whether the file system overrides the per-volume settings for kernel offloaded I/O for a specific file. This property has no meaning if the volume doesn't conform to “FSVolumeKernelOffloadedIOOperations“.
+//
 // InhibitKernelOffloadedIO calls the underlying InhibitKernelOffloadedIO.
 func (x *ItemAttributes) InhibitKernelOffloadedIO() bool {
 	return x.inner.InhibitKernelOffloadedIO()
@@ -238,6 +290,8 @@ func (x *ItemAttributes) SetInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bo
 	x.inner.SetInhibitKernelOffloadedIO(inhibitKernelOffloadedIO)
 }
 
+// The item's last-modified time. This property represents `mtime`, the last time the item's contents changed.
+//
 // ModifyTime calls the underlying ModifyTime.
 func (x *ItemAttributes) ModifyTime() unsafe.Pointer {
 	return x.inner.ModifyTime()
@@ -248,6 +302,8 @@ func (x *ItemAttributes) SetModifyTime(modifyTime unsafe.Pointer) {
 	x.inner.SetModifyTime(modifyTime)
 }
 
+// The item's added time. This property represents the time the file system added the item to its parent directory.
+//
 // AddedTime calls the underlying AddedTime.
 func (x *ItemAttributes) AddedTime() unsafe.Pointer {
 	return x.inner.AddedTime()
@@ -258,6 +314,8 @@ func (x *ItemAttributes) SetAddedTime(addedTime unsafe.Pointer) {
 	x.inner.SetAddedTime(addedTime)
 }
 
+// The item's last-changed time. This property represents `ctime`, the last time the item's metadata changed.
+//
 // ChangeTime calls the underlying ChangeTime.
 func (x *ItemAttributes) ChangeTime() unsafe.Pointer {
 	return x.inner.ChangeTime()
@@ -268,6 +326,8 @@ func (x *ItemAttributes) SetChangeTime(changeTime unsafe.Pointer) {
 	x.inner.SetChangeTime(changeTime)
 }
 
+// The item's last-accessed time.
+//
 // AccessTime calls the underlying AccessTime.
 func (x *ItemAttributes) AccessTime() unsafe.Pointer {
 	return x.inner.AccessTime()
@@ -278,6 +338,8 @@ func (x *ItemAttributes) SetAccessTime(accessTime unsafe.Pointer) {
 	x.inner.SetAccessTime(accessTime)
 }
 
+// The item's creation time.
+//
 // BirthTime calls the underlying BirthTime.
 func (x *ItemAttributes) BirthTime() unsafe.Pointer {
 	return x.inner.BirthTime()
@@ -288,6 +350,8 @@ func (x *ItemAttributes) SetBirthTime(birthTime unsafe.Pointer) {
 	x.inner.SetBirthTime(birthTime)
 }
 
+// The item's last-backup time.
+//
 // BackupTime calls the underlying BackupTime.
 func (x *ItemAttributes) BackupTime() unsafe.Pointer {
 	return x.inner.BackupTime()

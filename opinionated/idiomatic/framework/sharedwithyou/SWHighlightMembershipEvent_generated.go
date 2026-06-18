@@ -29,6 +29,8 @@ func HighlightMembershipEventFromID(id objc.ID) *HighlightMembershipEvent {
 	return &HighlightMembershipEvent{inner: raw.SWHighlightMembershipEventFromID(id)}
 }
 
+// Initializes a highlight membership event object to represent changes to a highlight membership. @param highlight The object on which the event occurred. @param trigger The trigger membership event for the highlight.
+//
 // NewHighlightMembershipEventWithHighlightTrigger creates a new [HighlightMembershipEvent].
 func NewHighlightMembershipEventWithHighlightTrigger(highlight *raw.SWHighlight, trigger SWHighlightMembershipEventTrigger) *HighlightMembershipEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWHighlightMembershipEvent")), objc.RegisterName("alloc"))
@@ -36,6 +38,8 @@ func NewHighlightMembershipEventWithHighlightTrigger(highlight *raw.SWHighlight,
 	return &HighlightMembershipEvent{inner: raw.SWHighlightMembershipEventFromID(_id)}
 }
 
+// The type of membership event for the highlight.
+//
 // MembershipEventTrigger calls the underlying MembershipEventTrigger.
 func (x *HighlightMembershipEvent) MembershipEventTrigger() SWHighlightMembershipEventTrigger {
 	return SWHighlightMembershipEventTrigger(x.inner.MembershipEventTrigger())

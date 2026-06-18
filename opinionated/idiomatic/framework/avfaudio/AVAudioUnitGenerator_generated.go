@@ -29,6 +29,8 @@ func AudioUnitGeneratorFromID(id objc.ID) *AudioUnitGenerator {
 	return &AudioUnitGenerator{inner: raw.AVAudioUnitGeneratorFromID(id)}
 }
 
+// @method initWithAudioComponentDescription: @abstract Create an AVAudioUnitGenerator object. @param audioComponentDescription AudioComponentDescription of the audio unit to be instantiated. @discussion The componentType must be kAudioUnitType_Generator or kAudioUnitType_RemoteGenerator
+//
 // NewAudioUnitGeneratorWithAudioComponentDescription creates a new [AudioUnitGenerator].
 func NewAudioUnitGeneratorWithAudioComponentDescription(audioComponentDescription objc.ID) *AudioUnitGenerator {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioUnitGenerator")), objc.RegisterName("alloc"))
@@ -36,6 +38,8 @@ func NewAudioUnitGeneratorWithAudioComponentDescription(audioComponentDescriptio
 	return &AudioUnitGenerator{inner: raw.AVAudioUnitGeneratorFromID(_id)}
 }
 
+// @property bypass @abstract Bypass state of the audio unit.
+//
 // WithBypass sets the bypass property and returns the receiver for chaining.
 func (x *AudioUnitGenerator) WithBypass(bypass bool) *AudioUnitGenerator {
 	x.inner.SetBypass(bypass)

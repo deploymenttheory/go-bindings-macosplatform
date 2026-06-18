@@ -36,6 +36,8 @@ func NewWKContentWorld() *WKContentWorld {
 	return &WKContentWorld{inner: raw.WKContentWorldFromID(_id)}
 }
 
+// @abstract The name of the WKContentWorld @discussion The pageWorld and defaultClientWorld instances will have a nil name. All other instances will have the non-nil name they were accessed by.
+//
 // Name calls the underlying Name.
 func (x *WKContentWorld) Name() string {
 	_r := x.inner.Name()

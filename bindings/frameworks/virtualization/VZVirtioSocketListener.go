@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that listens for port-based connection requests from the guest operating system.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtiosocketlistener
 type VZVirtioSocketListener struct {
 	foundation.NSObject

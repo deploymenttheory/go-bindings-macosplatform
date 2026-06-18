@@ -31,6 +31,8 @@ func ColorFromID(id objc.ID) *Color {
 	return &Color{inner: raw.CIColorFromID(id)}
 }
 
+// Create a Core Image color object with a Core Graphics color object. - Returns: An initialized “CIColor“ instance.
+//
 // NewColorWithCGColor creates a new [Color].
 func NewColorWithCGColor(color unsafe.Pointer) *Color {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIColor")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewColorWithCGColor(color unsafe.Pointer) *Color {
 	return &Color{inner: raw.CIColorFromID(_id)}
 }
 
+// Initialize a Core Image color object in the sRGB color space with the specified red, green, blue, and alpha component values. On macOS before 10.10, the CIColor's color space will be Generic RGB. - Parameters: - red: The color's unpremultiplied red component value between 0 and 1. - green: The color's unpremultiplied green component value between 0 and 1. - blue: The color's unpremultiplied blue component value between 0 and 1. - alpha: The color's alpha (opacity) value between 0 and 1. - Returns: An initialized “CIColor“ instance.
+//
 // NewColorWithRedGreenBlueAlpha creates a new [Color].
 func NewColorWithRedGreenBlueAlpha(red float64, green float64, blue float64, alpha float64) *Color {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIColor")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewColorWithRedGreenBlueAlpha(red float64, green float64, blue float64, alp
 	return &Color{inner: raw.CIColorFromID(_id)}
 }
 
+// Initialize a Core Image color object in the sRGB color space with the specified red, green, and blue component values. On macOS before 10.10, the CIColor's color space will be Generic RGB. - Parameters: - red: The color's unpremultiplied red component value between 0 and 1. - green: The color's unpremultiplied green component value between 0 and 1. - blue: The color's unpremultiplied blue component value between 0 and 1. - Returns: An initialized “CIColor“ instance.
+//
 // NewColorWithRedGreenBlue creates a new [Color].
 func NewColorWithRedGreenBlue(red float64, green float64, blue float64) *Color {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIColor")), objc.RegisterName("alloc"))
@@ -52,6 +58,8 @@ func NewColorWithRedGreenBlue(red float64, green float64, blue float64) *Color {
 	return &Color{inner: raw.CIColorFromID(_id)}
 }
 
+// Initialize a Core Image color object with the specified red, green, and blue component values as measured in the specified color space. This will return null if the `CGColorSpace` is not `kCGColorSpaceModelRGB`. The RGB values can be outside the `0...1` range if the `CGColorSpace` is unclamped. - Parameters: - red: The color's unpremultiplied red component value. - green: The color's unpremultiplied green component value. - blue: The color's unpremultiplied blue component value. - alpha: The color's alpha (opacity) value between 0 and 1. - colorSpace: The color's `CGColorSpace` which must have `kCGColorSpaceModelRGB`. - Returns: An initialized “CIColor“ instance.
+//
 // NewColorWithRedGreenBlueAlphaColorSpace creates a new [Color].
 func NewColorWithRedGreenBlueAlphaColorSpace(red float64, green float64, blue float64, alpha float64, colorSpace unsafe.Pointer) *Color {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIColor")), objc.RegisterName("alloc"))
@@ -59,6 +67,8 @@ func NewColorWithRedGreenBlueAlphaColorSpace(red float64, green float64, blue fl
 	return &Color{inner: raw.CIColorFromID(_id)}
 }
 
+// Initialize a Core Image color object with the specified red, green, and blue component values as measured in the specified color space. This will return null if the `CGColorSpace` is not `kCGColorSpaceModelRGB`. The RGB values can be outside the `0...1` range if the `CGColorSpace` is unclamped. - Parameters: - red: The color's unpremultiplied red component value. - green: The color's unpremultiplied green component value. - blue: The color's unpremultiplied blue component value. - colorSpace: The color's `CGColorSpace` which must have `kCGColorSpaceModelRGB`. - Returns: An initialized “CIColor“ instance.
+//
 // NewColorWithRedGreenBlueColorSpace creates a new [Color].
 func NewColorWithRedGreenBlueColorSpace(red float64, green float64, blue float64, colorSpace unsafe.Pointer) *Color {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIColor")), objc.RegisterName("alloc"))
@@ -66,41 +76,57 @@ func NewColorWithRedGreenBlueColorSpace(red float64, green float64, blue float64
 	return &Color{inner: raw.CIColorFromID(_id)}
 }
 
+// Returns the color components of the color including alpha. This number includes the alpha component if the color contains one. Typically this number will be `4` for red, green, blue, and alpha. If the “CIColor“ was initialized with a `CGColor` then the number will be the same as calling `CGColorGetNumberOfComponents()`
+//
 // NumberOfComponents calls the underlying NumberOfComponents.
 func (x *Color) NumberOfComponents() uint {
 	return x.inner.NumberOfComponents()
 }
 
+// Return a pointer to an array of `CGFloat` values including alpha. Typically this array will contain `4` `CGFloat` values for red, green, blue, and alpha. If the “CIColor“ was initialized with a `CGColor` then returned pointer will be the same as calling `CGColorGetComponents()`
+//
 // Components calls the underlying Components.
 func (x *Color) Components() unsafe.Pointer {
 	return x.inner.Components()
 }
 
+// Returns the alpha value of the color.
+//
 // Alpha calls the underlying Alpha.
 func (x *Color) Alpha() float64 {
 	return x.inner.Alpha()
 }
 
+// Returns the `CGColorSpace` associated with the color
+//
 // ColorSpace calls the underlying ColorSpace.
 func (x *Color) ColorSpace() unsafe.Pointer {
 	return x.inner.ColorSpace()
 }
 
+// Returns the unpremultiplied red component of the color. If the “CIColor“ was initialized with a `CGColor` in a non-RGB `CGColorSpace` then it will be converted to sRGB to get the red component.
+//
 // Red calls the underlying Red.
 func (x *Color) Red() float64 {
 	return x.inner.Red()
 }
 
+// Returns the unpremultiplied green component of the color. If the “CIColor“ was initialized with a `CGColor` in a non-RGB `CGColorSpace` then it will be converted to sRGB to get the green component.
+//
 // Green calls the underlying Green.
 func (x *Color) Green() float64 {
 	return x.inner.Green()
 }
 
+// Returns the unpremultiplied blue component of the color. If the “CIColor“ was initialized with a `CGColor` in a non-RGB `CGColorSpace` then it will be converted to sRGB to get the green component.
+//
 // Blue calls the underlying Blue.
 func (x *Color) Blue() float64 {
 	return x.inner.Blue()
 }
 
+// Returns a formatted string with the unpremultiplied color and alpha components of the color. The string representation always has four components: red, green, blue, and alpha. Some example string representations of colors: `CIColor`                                       | `stringRepresentation` ----------------------------------------------- | -------------- `[CIColor colorWithRed:0.2 green:0.4 blue:0.6]` | `"0.2 0.4 0.6 1.0"` “/CIColor/yellowColor“                        | `"1.0 1.0 0.0 1.0"` To create a “CIColor“ instance from a string representation, use the “colorWithString:“ method. If the “CIColor“ was initialized with a `CGColor` in a non-RGB `CGColorSpace` then it will be converted to sRGB to get the red, green, and blue components. This property is not KVO-safe because it returns a new `NSString` instance each time. The value of the `NSString` will be the same each time it is called.
+//
 // StringRepresentation calls the underlying StringRepresentation.
 func (x *Color) StringRepresentation() string {
 	_r := x.inner.StringRepresentation()

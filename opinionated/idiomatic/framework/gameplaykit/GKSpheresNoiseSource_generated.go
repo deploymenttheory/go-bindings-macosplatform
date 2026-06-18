@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Produces 3D spherical noise with an infinite number of spheres-within-spheres of constantly-increasing radius.
+//
 // SpheresNoiseSource wraps [raw.GKSpheresNoiseSource] with a fluent Go API.
 type SpheresNoiseSource struct {
 	inner *raw.GKSpheresNoiseSource

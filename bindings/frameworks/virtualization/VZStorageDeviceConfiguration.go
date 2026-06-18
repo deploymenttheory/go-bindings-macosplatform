@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The common configuration traits for storage device requests.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzstoragedeviceconfiguration
 type VZStorageDeviceConfiguration struct {
 	foundation.NSObject

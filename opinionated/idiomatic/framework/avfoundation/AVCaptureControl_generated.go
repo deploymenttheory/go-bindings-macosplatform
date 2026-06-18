@@ -35,6 +35,8 @@ func NewCaptureControl() *CaptureControl {
 	return &CaptureControl{inner: raw.AVCaptureControlFromID(_id)}
 }
 
+// @property enabled @abstract Indicates whether the control should be enabled for user interaction. @discussion The value of this property is a `BOOL` that determines whether the control should be enabled for user interaction. Clients can set this property to keep a control added to an `AVCaptureSession` but prevent it from being interacted with by the user. A control's value may still be changed while it is disabled. The default value is `YES`.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *CaptureControl) WithEnabled(enabled bool) *CaptureControl {
 	x.inner.SetEnabled(enabled)

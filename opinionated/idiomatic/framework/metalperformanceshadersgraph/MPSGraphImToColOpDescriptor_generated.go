@@ -35,77 +35,103 @@ func NewGraphImToColOpDescriptor() *GraphImToColOpDescriptor {
 	return &GraphImToColOpDescriptor{inner: raw.MPSGraphImToColOpDescriptorFromID(_id)}
 }
 
+// The property that defines the kernel size in width dimension.
+//
 // WithKernelWidth sets the kernelWidth property and returns the receiver for chaining.
 func (x *GraphImToColOpDescriptor) WithKernelWidth(kernelWidth uint) *GraphImToColOpDescriptor {
 	x.inner.SetKernelWidth(kernelWidth)
 	return x
 }
 
+// The property that defines the kernel size  in height dimension.
+//
 // WithKernelHeight sets the kernelHeight property and returns the receiver for chaining.
 func (x *GraphImToColOpDescriptor) WithKernelHeight(kernelHeight uint) *GraphImToColOpDescriptor {
 	x.inner.SetKernelHeight(kernelHeight)
 	return x
 }
 
+// The property that defines the stride in width dimension.
+//
 // WithStrideInX sets the strideInX property and returns the receiver for chaining.
 func (x *GraphImToColOpDescriptor) WithStrideInX(strideInX uint) *GraphImToColOpDescriptor {
 	x.inner.SetStrideInX(strideInX)
 	return x
 }
 
+// The property that defines the stride in height dimension.
+//
 // WithStrideInY sets the strideInY property and returns the receiver for chaining.
 func (x *GraphImToColOpDescriptor) WithStrideInY(strideInY uint) *GraphImToColOpDescriptor {
 	x.inner.SetStrideInY(strideInY)
 	return x
 }
 
+// The property that defines the dilation in width dimension.
+//
 // WithDilationRateInX sets the dilationRateInX property and returns the receiver for chaining.
 func (x *GraphImToColOpDescriptor) WithDilationRateInX(dilationRateInX uint) *GraphImToColOpDescriptor {
 	x.inner.SetDilationRateInX(dilationRateInX)
 	return x
 }
 
+// The property that defines the dilation in height dimension.
+//
 // WithDilationRateInY sets the dilationRateInY property and returns the receiver for chaining.
 func (x *GraphImToColOpDescriptor) WithDilationRateInY(dilationRateInY uint) *GraphImToColOpDescriptor {
 	x.inner.SetDilationRateInY(dilationRateInY)
 	return x
 }
 
+// The property that defines the padding in width dimension on the left side.
+//
 // WithPaddingLeft sets the paddingLeft property and returns the receiver for chaining.
 func (x *GraphImToColOpDescriptor) WithPaddingLeft(paddingLeft uint) *GraphImToColOpDescriptor {
 	x.inner.SetPaddingLeft(paddingLeft)
 	return x
 }
 
+// The property that defines the padding in width dimension on the right side.
+//
 // WithPaddingRight sets the paddingRight property and returns the receiver for chaining.
 func (x *GraphImToColOpDescriptor) WithPaddingRight(paddingRight uint) *GraphImToColOpDescriptor {
 	x.inner.SetPaddingRight(paddingRight)
 	return x
 }
 
+// The property that defines the padding in height dimension at the top.
+//
 // WithPaddingTop sets the paddingTop property and returns the receiver for chaining.
 func (x *GraphImToColOpDescriptor) WithPaddingTop(paddingTop uint) *GraphImToColOpDescriptor {
 	x.inner.SetPaddingTop(paddingTop)
 	return x
 }
 
+// The property that defines the padding in height dimension at the bottom.
+//
 // WithPaddingBottom sets the paddingBottom property and returns the receiver for chaining.
 func (x *GraphImToColOpDescriptor) WithPaddingBottom(paddingBottom uint) *GraphImToColOpDescriptor {
 	x.inner.SetPaddingBottom(paddingBottom)
 	return x
 }
 
+// The property that defines the layout of source or output  tensor. e.g. `batch x channels x width x height` for `NCHW` layout
+//
 // WithDataLayout sets the dataLayout property and returns the receiver for chaining.
 func (x *GraphImToColOpDescriptor) WithDataLayout(dataLayout MPSGraphTensorNamedDataLayout) *GraphImToColOpDescriptor {
 	x.inner.SetDataLayout(raw.MPSGraphTensorNamedDataLayout(dataLayout))
 	return x
 }
 
+// Sets the descriptor's padding to the given values. - Parameters: - paddingLeft: See `paddingLeft` property. - paddingRight: See `paddingRight` property. - paddingTop: See `paddingTop` property. - paddingBottom: See `paddingBottom` property.
+//
 // SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom calls the underlying SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom.
 func (x *GraphImToColOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint) {
 	x.inner.SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft, paddingRight, paddingTop, paddingBottom)
 }
 
+// The property that defines the kernel size in width dimension.
+//
 // KernelWidth calls the underlying KernelWidth.
 func (x *GraphImToColOpDescriptor) KernelWidth() uint {
 	return x.inner.KernelWidth()
@@ -116,6 +142,8 @@ func (x *GraphImToColOpDescriptor) SetKernelWidth(kernelWidth uint) {
 	x.inner.SetKernelWidth(kernelWidth)
 }
 
+// The property that defines the kernel size  in height dimension.
+//
 // KernelHeight calls the underlying KernelHeight.
 func (x *GraphImToColOpDescriptor) KernelHeight() uint {
 	return x.inner.KernelHeight()
@@ -126,6 +154,8 @@ func (x *GraphImToColOpDescriptor) SetKernelHeight(kernelHeight uint) {
 	x.inner.SetKernelHeight(kernelHeight)
 }
 
+// The property that defines the stride in width dimension.
+//
 // StrideInX calls the underlying StrideInX.
 func (x *GraphImToColOpDescriptor) StrideInX() uint {
 	return x.inner.StrideInX()
@@ -136,6 +166,8 @@ func (x *GraphImToColOpDescriptor) SetStrideInX(strideInX uint) {
 	x.inner.SetStrideInX(strideInX)
 }
 
+// The property that defines the stride in height dimension.
+//
 // StrideInY calls the underlying StrideInY.
 func (x *GraphImToColOpDescriptor) StrideInY() uint {
 	return x.inner.StrideInY()
@@ -146,6 +178,8 @@ func (x *GraphImToColOpDescriptor) SetStrideInY(strideInY uint) {
 	x.inner.SetStrideInY(strideInY)
 }
 
+// The property that defines the dilation in width dimension.
+//
 // DilationRateInX calls the underlying DilationRateInX.
 func (x *GraphImToColOpDescriptor) DilationRateInX() uint {
 	return x.inner.DilationRateInX()
@@ -156,6 +190,8 @@ func (x *GraphImToColOpDescriptor) SetDilationRateInX(dilationRateInX uint) {
 	x.inner.SetDilationRateInX(dilationRateInX)
 }
 
+// The property that defines the dilation in height dimension.
+//
 // DilationRateInY calls the underlying DilationRateInY.
 func (x *GraphImToColOpDescriptor) DilationRateInY() uint {
 	return x.inner.DilationRateInY()
@@ -166,6 +202,8 @@ func (x *GraphImToColOpDescriptor) SetDilationRateInY(dilationRateInY uint) {
 	x.inner.SetDilationRateInY(dilationRateInY)
 }
 
+// The property that defines the padding in width dimension on the left side.
+//
 // PaddingLeft calls the underlying PaddingLeft.
 func (x *GraphImToColOpDescriptor) PaddingLeft() uint {
 	return x.inner.PaddingLeft()
@@ -176,6 +214,8 @@ func (x *GraphImToColOpDescriptor) SetPaddingLeft(paddingLeft uint) {
 	x.inner.SetPaddingLeft(paddingLeft)
 }
 
+// The property that defines the padding in width dimension on the right side.
+//
 // PaddingRight calls the underlying PaddingRight.
 func (x *GraphImToColOpDescriptor) PaddingRight() uint {
 	return x.inner.PaddingRight()
@@ -186,6 +226,8 @@ func (x *GraphImToColOpDescriptor) SetPaddingRight(paddingRight uint) {
 	x.inner.SetPaddingRight(paddingRight)
 }
 
+// The property that defines the padding in height dimension at the top.
+//
 // PaddingTop calls the underlying PaddingTop.
 func (x *GraphImToColOpDescriptor) PaddingTop() uint {
 	return x.inner.PaddingTop()
@@ -196,6 +238,8 @@ func (x *GraphImToColOpDescriptor) SetPaddingTop(paddingTop uint) {
 	x.inner.SetPaddingTop(paddingTop)
 }
 
+// The property that defines the padding in height dimension at the bottom.
+//
 // PaddingBottom calls the underlying PaddingBottom.
 func (x *GraphImToColOpDescriptor) PaddingBottom() uint {
 	return x.inner.PaddingBottom()
@@ -206,6 +250,8 @@ func (x *GraphImToColOpDescriptor) SetPaddingBottom(paddingBottom uint) {
 	x.inner.SetPaddingBottom(paddingBottom)
 }
 
+// The property that defines the layout of source or output  tensor. e.g. `batch x channels x width x height` for `NCHW` layout
+//
 // DataLayout calls the underlying DataLayout.
 func (x *GraphImToColOpDescriptor) DataLayout() MPSGraphTensorNamedDataLayout {
 	return MPSGraphTensorNamedDataLayout(x.inner.DataLayout())

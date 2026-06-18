@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The object you use to change the amount of memory allocated to the guest system.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtiotraditionalmemoryballoondevice
 type VZVirtioTraditionalMemoryBalloonDevice struct {
 	VZMemoryBalloonDevice

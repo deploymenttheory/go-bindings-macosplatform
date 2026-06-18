@@ -35,6 +35,8 @@ func MTRBaseClusterValveConfigurationAndControlFromID(id objc.ID) *MTRBaseCluste
 	return &MTRBaseClusterValveConfigurationAndControl{inner: raw.MTRBaseClusterValveConfigurationAndControlFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterValveConfigurationAndControlWithDeviceEndpointIDQueue creates a new [MTRBaseClusterValveConfigurationAndControl].
 func NewMTRBaseClusterValveConfigurationAndControlWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterValveConfigurationAndControl {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterValveConfigurationAndControl")), objc.RegisterName("alloc"))
@@ -42,6 +44,8 @@ func NewMTRBaseClusterValveConfigurationAndControlWithDeviceEndpointIDQueue(devi
 	return &MTRBaseClusterValveConfigurationAndControl{inner: raw.MTRBaseClusterValveConfigurationAndControlFromID(_id)}
 }
 
+// Command Open This command is used to set the valve to its open position.
+//
 // OpenWithParamsCompletion calls the underlying OpenWithParamsCompletion.
 func (x *MTRBaseClusterValveConfigurationAndControl) OpenWithParamsCompletion(params *raw.MTRValveConfigurationAndControlClusterOpenParams, completion func(unsafe.Pointer)) {
 	x.inner.OpenWithParamsCompletion(params, completion)
@@ -52,6 +56,8 @@ func (x *MTRBaseClusterValveConfigurationAndControl) OpenWithCompletion(completi
 	x.inner.OpenWithCompletion(completion)
 }
 
+// Command Close This command is used to set the valve to its closed position.
+//
 // CloseWithParamsCompletion calls the underlying CloseWithParamsCompletion.
 func (x *MTRBaseClusterValveConfigurationAndControl) CloseWithParamsCompletion(params *raw.MTRValveConfigurationAndControlClusterCloseParams, completion func(unsafe.Pointer)) {
 	x.inner.CloseWithParamsCompletion(params, completion)

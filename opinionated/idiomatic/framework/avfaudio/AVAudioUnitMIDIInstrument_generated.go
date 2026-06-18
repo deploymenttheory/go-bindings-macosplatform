@@ -31,6 +31,8 @@ func AudioUnitMIDIInstrumentFromID(id objc.ID) *AudioUnitMIDIInstrument {
 	return &AudioUnitMIDIInstrument{inner: raw.AVAudioUnitMIDIInstrumentFromID(id)}
 }
 
+// Initialize the node with the component description for an AUv2 Audio Unit. - Parameter description: audio component description structure that describes the audio component of type kAudioUnitType_MusicDevice or kAudioUnitType_RemoteInstrument. - note: To load AUv3 audio units (or any audio unit asynchronously), use the class method “AVAudioUnit/instantiateWithComponentDescription:options:completionHandler:“ instead.
+//
 // NewAudioUnitMIDIInstrumentWithAudioComponentDescription creates a new [AudioUnitMIDIInstrument].
 func NewAudioUnitMIDIInstrumentWithAudioComponentDescription(description objc.ID) *AudioUnitMIDIInstrument {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioUnitMIDIInstrument")), objc.RegisterName("alloc"))
@@ -38,61 +40,85 @@ func NewAudioUnitMIDIInstrumentWithAudioComponentDescription(description objc.ID
 	return &AudioUnitMIDIInstrument{inner: raw.AVAudioUnitMIDIInstrumentFromID(_id)}
 }
 
+// Sends a MIDI Note On event to the instrument - Parameters: - note: the note number (key) to play. Range: 0 -> 127 - velocity: specifies the volume with which the note is played. Range: 0 -> 127 - channel: the channel number to which the event is sent. Range: 0 -> 15
+//
 // StartNoteWithVelocityOnChannel calls the underlying StartNoteWithVelocityOnChannel.
 func (x *AudioUnitMIDIInstrument) StartNoteWithVelocityOnChannel(note uint8, velocity uint8, channel uint8) {
 	x.inner.StartNoteWithVelocityOnChannel(note, velocity, channel)
 }
 
+// Sends a MIDI Note Off event to the instrument - Parameters: - note: the note number (key) to stop. Range: 0 -> 127 - channel: the channel number to which the event is sent. Range: 0 -> 15
+//
 // StopNoteOnChannel calls the underlying StopNoteOnChannel.
 func (x *AudioUnitMIDIInstrument) StopNoteOnChannel(note uint8, channel uint8) {
 	x.inner.StopNoteOnChannel(note, channel)
 }
 
+// Sends a MIDI controller event to the instrument. - Parameters: - controller: a standard MIDI controller number. Range: 0 -> 127 - value: value for the controller. Range: 0 -> 127 - channel: the channel number to which the event is sent. Range: 0 -> 15
+//
 // SendControllerWithValueOnChannel calls the underlying SendControllerWithValueOnChannel.
 func (x *AudioUnitMIDIInstrument) SendControllerWithValueOnChannel(controller uint8, value uint8, channel uint8) {
 	x.inner.SendControllerWithValueOnChannel(controller, value, channel)
 }
 
+// Sends a MIDI controller event to the instrument. - Parameters: - controller: a standard MIDI controller number. Range: 0 -> 127 - value: value for the controller. Range: 0 -> 127 - channel: the channel number to which the event is sent. Range: 0 -> 15
+//
 // SendPitchBendOnChannel calls the underlying SendPitchBendOnChannel.
 func (x *AudioUnitMIDIInstrument) SendPitchBendOnChannel(pitchbend uint16, channel uint8) {
 	x.inner.SendPitchBendOnChannel(pitchbend, channel)
 }
 
+// Sends MIDI channel pressure event to the instrument. - Parameters: - pressure: value of the pressure. Range: 0 -> 127 - channel: the channel number to which the event is sent. Range: 0 -> 15
+//
 // SendPressureOnChannel calls the underlying SendPressureOnChannel.
 func (x *AudioUnitMIDIInstrument) SendPressureOnChannel(pressure uint8, channel uint8) {
 	x.inner.SendPressureOnChannel(pressure, channel)
 }
 
+// Sends MIDI Polyphonic key pressure event to the instrument - Parameters: - key: the key (note) number to which the pressure event applies. Range: 0 -> 127 - value: value of the pressure. Range: 0 -> 127 - channel: the channel number to which the event is sent. Range: 0 -> 15so
+//
 // SendPressureForKeyWithValueOnChannel calls the underlying SendPressureForKeyWithValueOnChannel.
 func (x *AudioUnitMIDIInstrument) SendPressureForKeyWithValueOnChannel(key uint8, value uint8, channel uint8) {
 	x.inner.SendPressureForKeyWithValueOnChannel(key, value, channel)
 }
 
+// Sends MIDI Program Change event to the instrument The instrument will be loaded from the bank that has been previous set by MIDI Bank Select controller messages (0 and 31). If none has been set, bank 0 will be used. - Parameters: - program: the program number. Range: 0 -> 127 - channel: the channel number to which the event is sent. Range: 0 -> 15
+//
 // SendProgramChangeOnChannel calls the underlying SendProgramChangeOnChannel.
 func (x *AudioUnitMIDIInstrument) SendProgramChangeOnChannel(program uint8, channel uint8) {
 	x.inner.SendProgramChangeOnChannel(program, channel)
 }
 
+// Sends a MIDI Program Change and Bank Select events to the instrument - Parameters: - program: specifies the program (preset) number within the bank to load. Range: 0 -> 127 - bankMSB: specifies the most significant byte value for the bank to select. Range: 0 -> 127 - bankLSB: specifies the least significant byte value for the bank to select. Range: 0 -> 127 - channel: the channel number to which the event is sent. Range: 0 -> 15
+//
 // SendProgramChangeBankMSBBankLSBOnChannel calls the underlying SendProgramChangeBankMSBBankLSBOnChannel.
 func (x *AudioUnitMIDIInstrument) SendProgramChangeBankMSBBankLSBOnChannel(program uint8, bankMSB uint8, bankLSB uint8, channel uint8) {
 	x.inner.SendProgramChangeBankMSBBankLSBOnChannel(program, bankMSB, bankLSB, channel)
 }
 
+// Sends a MIDI event which contains two data bytes to the instrument. - Parameters: - midiStatus: the STATUS value of the MIDI event - data1: the first data byte of the MIDI event - data2: the second data byte of the MIDI event.
+//
 // SendMIDIEventData1Data2 calls the underlying SendMIDIEventData1Data2.
 func (x *AudioUnitMIDIInstrument) SendMIDIEventData1Data2(midiStatus uint8, data1 uint8, data2 uint8) {
 	x.inner.SendMIDIEventData1Data2(midiStatus, data1, data2)
 }
 
+// Sends a MIDI event which contains one data byte to the instrument. - Parameters: - midiStatus: the STATUS value of the MIDI event - data1: the first data byte of the MIDI event
+//
 // SendMIDIEventData1 calls the underlying SendMIDIEventData1.
 func (x *AudioUnitMIDIInstrument) SendMIDIEventData1(midiStatus uint8, data1 uint8) {
 	x.inner.SendMIDIEventData1(midiStatus, data1)
 }
 
+// Sends a MIDI System Exclusive event to the instrument. - Parameters: - midiData: a NSData object containing the complete SysEx data including start(F0) and termination(F7) bytes.
+//
 // SendMIDISysExEvent calls the underlying SendMIDISysExEvent.
 func (x *AudioUnitMIDIInstrument) SendMIDISysExEvent(midiData *foundation.NSData) {
 	x.inner.SendMIDISysExEvent(midiData)
 }
 
+// Sends a MIDI event list to the instrument. - Parameters: - eventList: the MIDIEventList
+//
 // SendMIDIEventList calls the underlying SendMIDIEventList.
 func (x *AudioUnitMIDIInstrument) SendMIDIEventList(eventList *coremidi.MIDIEventList) {
 	x.inner.SendMIDIEventList(eventList)

@@ -32,6 +32,8 @@ func NEEvaluateConnectionRuleFromID(id objc.ID) *NEEvaluateConnectionRule {
 	return &NEEvaluateConnectionRule{inner: raw.NEEvaluateConnectionRuleFromID(id)}
 }
 
+// @method initWithMatchDomains:andAction @discussion Initialize an NEEvaluateConnectionRule instance with a list of destination host domains and an action
+//
 // NewNEEvaluateConnectionRuleWithMatchDomainsAndAction creates a new [NEEvaluateConnectionRule].
 func NewNEEvaluateConnectionRuleWithMatchDomainsAndAction(domains *foundation.NSArray[*foundation.NSString], action NEEvaluateConnectionRuleAction) *NEEvaluateConnectionRule {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NEEvaluateConnectionRule")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewNEEvaluateConnectionRuleWithMatchDomainsAndAction(domains *foundation.NS
 	return &NEEvaluateConnectionRule{inner: raw.NEEvaluateConnectionRuleFromID(_id)}
 }
 
+// @property useDNSServers @discussion An array of NSString objects. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded, the DNS servers specified in this array are used to resolve the host name of the destination while evaluating connectivity to the destination. If the resolution fails for any reason, the VPN is started.
+//
 // WithUseDNSServers sets the collection, converting the Go slice to an NSArray.
 func (x *NEEvaluateConnectionRule) WithUseDNSServers(items ...*foundation.NSString) *NEEvaluateConnectionRule {
 	if len(items) == 0 {
@@ -57,17 +61,23 @@ func (x *NEEvaluateConnectionRule) WithUseDNSServers(items ...*foundation.NSStri
 	return x
 }
 
+// @property probeURL @discussion An HTTP or HTTPS URL. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded and a request sent to this URL results in a response with an HTTP response code other than 200, then the VPN is started.
+//
 // WithProbeURL sets the probeURL property and returns the receiver for chaining.
 func (x *NEEvaluateConnectionRule) WithProbeURL(probeURL string) *NEEvaluateConnectionRule {
 	x.inner.SetProbeURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(probeURL)))
 	return x
 }
 
+// @property action @discussion The action to take if the properties of the network connection being established match the rule.
+//
 // Action calls the underlying Action.
 func (x *NEEvaluateConnectionRule) Action() NEEvaluateConnectionRuleAction {
 	return NEEvaluateConnectionRuleAction(x.inner.Action())
 }
 
+// @property matchDomains @discussion An array of NSString objects. If the host name of the destination of the network connection being established shares a suffix with one of the strings in this array, then the rule matches.
+//
 // MatchDomains returns the collection as a Go slice.
 func (x *NEEvaluateConnectionRule) MatchDomains() []string {
 	arr := x.inner.MatchDomains()
@@ -79,6 +89,8 @@ func (x *NEEvaluateConnectionRule) MatchDomains() []string {
 	})
 }
 
+// @property useDNSServers @discussion An array of NSString objects. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded, the DNS servers specified in this array are used to resolve the host name of the destination while evaluating connectivity to the destination. If the resolution fails for any reason, the VPN is started.
+//
 // UseDNSServers returns the collection as a Go slice.
 func (x *NEEvaluateConnectionRule) UseDNSServers() []string {
 	arr := x.inner.UseDNSServers()
@@ -95,6 +107,8 @@ func (x *NEEvaluateConnectionRule) SetUseDNSServers(useDNSServers *foundation.NS
 	x.inner.SetUseDNSServers(useDNSServers)
 }
 
+// @property probeURL @discussion An HTTP or HTTPS URL. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded and a request sent to this URL results in a response with an HTTP response code other than 200, then the VPN is started.
+//
 // ProbeURL calls the underlying ProbeURL.
 func (x *NEEvaluateConnectionRule) ProbeURL() *foundation.NSURL {
 	return x.inner.ProbeURL()

@@ -33,6 +33,8 @@ func MTRBaseClusterBinaryInputBasicFromID(id objc.ID) *MTRBaseClusterBinaryInput
 	return &MTRBaseClusterBinaryInputBasic{inner: raw.MTRBaseClusterBinaryInputBasicFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterBinaryInputBasicWithDeviceEndpointIDQueue creates a new [MTRBaseClusterBinaryInputBasic].
 func NewMTRBaseClusterBinaryInputBasicWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterBinaryInputBasic {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterBinaryInputBasic")), objc.RegisterName("alloc"))

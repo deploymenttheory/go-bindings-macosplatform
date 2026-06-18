@@ -35,6 +35,8 @@ func NewSymbolWiggleEffect() *SymbolWiggleEffect {
 	return &SymbolWiggleEffect{inner: raw.NSSymbolWiggleEffectFromID(_id)}
 }
 
+// Returns a copy of the effect that animates incrementally, by layer.
+//
 // EffectWithByLayer calls the underlying EffectWithByLayer.
 func (x *SymbolWiggleEffect) EffectWithByLayer() *SymbolWiggleEffect {
 	_r := x.inner.EffectWithByLayer()
@@ -44,6 +46,8 @@ func (x *SymbolWiggleEffect) EffectWithByLayer() *SymbolWiggleEffect {
 	return &SymbolWiggleEffect{inner: _r}
 }
 
+// Returns a copy of the effect that animates all layers of the symbol simultaneously.
+//
 // EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
 func (x *SymbolWiggleEffect) EffectWithWholeSymbol() *SymbolWiggleEffect {
 	_r := x.inner.EffectWithWholeSymbol()

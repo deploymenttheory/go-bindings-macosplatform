@@ -37,6 +37,8 @@ func NewNotificationContent() *NotificationContent {
 	return &NotificationContent{inner: raw.UNNotificationContentFromID(_id)}
 }
 
+// Contextualizes your UNNotificationContent object with other Apple SDK objects conforming to UNNotificationContentProviding. This will specialize the notification and decorate its look and behavior accordingly. For example, the notification will be treated as a message with an avatar and be promoted to the top of notification center if the object passed in is a valid INSendMessageIntent<UNNotificationContentProviding>. This throws an error with a UNErrorCode found in UNError.h if the UNNotificationContentProviding object is invalid. A valid UNNotificationContent result should not be mutated and be passed directly to UNUserNotificationCenter. This should be called in the UNNotificationServiceExtension in didReceiveNotificationRequest:withContentHandler: and the returned UNNotificationContent should be passed to the contentHandler for incoming push notifications.
+//
 // ContentByUpdatingWithProviderError calls the underlying ContentByUpdatingWithProviderError.
 func (x *NotificationContent) ContentByUpdatingWithProviderError(provider raw.UNNotificationContentProviding) (*NotificationContent, error) {
 	_r, _err := x.inner.ContentByUpdatingWithProviderError(provider)
@@ -115,6 +117,8 @@ func (x *NotificationContent) UserInfo() *foundation.NSDictionary[objc.ID, objc.
 	return x.inner.UserInfo()
 }
 
+// The argument to be inserted in the summary for this notification.
+//
 // SummaryArgument calls the underlying SummaryArgument.
 func (x *NotificationContent) SummaryArgument() string {
 	_r := x.inner.SummaryArgument()
@@ -124,6 +128,8 @@ func (x *NotificationContent) SummaryArgument() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A number that indicates how many items in the summary are represented in the summary. For example if a podcast app sends one notification for 3 new episodes in a show, the argument should be the name of the show and the count should be 3. Default is 1 and cannot be 0.
+//
 // SummaryArgumentCount calls the underlying SummaryArgumentCount.
 func (x *NotificationContent) SummaryArgumentCount() uint {
 	return x.inner.SummaryArgumentCount()

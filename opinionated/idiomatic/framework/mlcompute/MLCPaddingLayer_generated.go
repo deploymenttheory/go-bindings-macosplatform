@@ -36,43 +36,59 @@ func NewPaddingLayer() *PaddingLayer {
 	return &PaddingLayer{inner: raw.MLCPaddingLayerFromID(_id)}
 }
 
+// @property   label @abstract   A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *PaddingLayer) WithLabel(label string) *PaddingLayer {
 	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   isDebuggingEnabled @abstract   A flag to identify if we want to debug this layer when executing a graph that includes this layer @discussion If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
+//
 // WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
 func (x *PaddingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *PaddingLayer {
 	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
 	return x
 }
 
+// @property   paddingType @abstract   The padding type i.e. constant, zero, reflect or symmetric
+//
 // PaddingType calls the underlying PaddingType.
 func (x *PaddingLayer) PaddingType() MLCPaddingType {
 	return MLCPaddingType(x.inner.PaddingType())
 }
 
+// @property   paddingLeft @abstract   The left padding size
+//
 // PaddingLeft calls the underlying PaddingLeft.
 func (x *PaddingLayer) PaddingLeft() uint {
 	return x.inner.PaddingLeft()
 }
 
+// @property   paddingRight @abstract   The right padding size
+//
 // PaddingRight calls the underlying PaddingRight.
 func (x *PaddingLayer) PaddingRight() uint {
 	return x.inner.PaddingRight()
 }
 
+// @property   paddingTop @abstract   The top padding size
+//
 // PaddingTop calls the underlying PaddingTop.
 func (x *PaddingLayer) PaddingTop() uint {
 	return x.inner.PaddingTop()
 }
 
+// @property   paddingBottom @abstract   The bottom padding size
+//
 // PaddingBottom calls the underlying PaddingBottom.
 func (x *PaddingLayer) PaddingBottom() uint {
 	return x.inner.PaddingBottom()
 }
 
+// @property   constantValue @abstract   The constant value to use if padding type is constant.
+//
 // ConstantValue calls the underlying ConstantValue.
 func (x *PaddingLayer) ConstantValue() float32 {
 	return x.inner.ConstantValue()

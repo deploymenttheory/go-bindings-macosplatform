@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration object that requests the creation of a network device for the guest system.
+//
 // VirtioNetworkDeviceConfiguration wraps [raw.VZVirtioNetworkDeviceConfiguration] with a fluent Go API.
 type VirtioNetworkDeviceConfiguration struct {
 	inner *raw.VZVirtioNetworkDeviceConfiguration
@@ -37,12 +39,16 @@ func NewVirtioNetworkDeviceConfiguration() *VirtioNetworkDeviceConfiguration {
 	return &VirtioNetworkDeviceConfiguration{inner: raw.VZVirtioNetworkDeviceConfigurationFromID(_id)}
 }
 
+// The media access control (MAC) address to assign to the network device.
+//
 // WithMACAddress sets the mACAddress property and returns the receiver for chaining.
 func (x *VirtioNetworkDeviceConfiguration) WithMACAddress(mACAddress *MACAddress) *VirtioNetworkDeviceConfiguration {
 	x.inner.VZNetworkDeviceConfiguration.SetMACAddress(mACAddress.Unwrap())
 	return x
 }
 
+// The object that defines how the virtual network device communicates with the host system.
+//
 // WithAttachment sets the attachment property and returns the receiver for chaining.
 func (x *VirtioNetworkDeviceConfiguration) WithAttachment(attachment NetworkDeviceAttachmentProvider) *VirtioNetworkDeviceConfiguration {
 	x.inner.VZNetworkDeviceConfiguration.SetAttachment(attachment.asNetworkDeviceAttachment())

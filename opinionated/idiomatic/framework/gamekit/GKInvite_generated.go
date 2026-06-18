@@ -50,16 +50,22 @@ func (x *Invite) IsHosted() bool {
 	return x.inner.IsHosted()
 }
 
+// player group from inviter's match request
+//
 // PlayerGroup calls the underlying PlayerGroup.
 func (x *Invite) PlayerGroup() uint {
 	return x.inner.PlayerGroup()
 }
 
+// player attributes from inviter's match request
+//
 // PlayerAttributes calls the underlying PlayerAttributes.
 func (x *Invite) PlayerAttributes() uint32 {
 	return x.inner.PlayerAttributes()
 }
 
+// * This property is obsolete. **
+//
 // Inviter calls the underlying Inviter.
 func (x *Invite) Inviter() string {
 	_r := x.inner.Inviter()

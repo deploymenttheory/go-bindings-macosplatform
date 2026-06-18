@@ -37,52 +37,70 @@ func NewGraphCompilationDescriptor() *GraphCompilationDescriptor {
 	return &GraphCompilationDescriptor{inner: raw.MPSGraphCompilationDescriptorFromID(_id)}
 }
 
+// The optimization level for the graph execution, default is MPSGraphOptimizationLevel1.
+//
 // WithOptimizationLevel sets the optimizationLevel property and returns the receiver for chaining.
 func (x *GraphCompilationDescriptor) WithOptimizationLevel(optimizationLevel MPSGraphOptimization) *GraphCompilationDescriptor {
 	x.inner.SetOptimizationLevel(raw.MPSGraphOptimization(optimizationLevel))
 	return x
 }
 
+// Flag that makes the compile or specialize call blocking till the entire compilation is complete, defaults to NO.
+//
 // WithWaitForCompilationCompletion sets the waitForCompilationCompletion property and returns the receiver for chaining.
 func (x *GraphCompilationDescriptor) WithWaitForCompilationCompletion(waitForCompilationCompletion bool) *GraphCompilationDescriptor {
 	x.inner.SetWaitForCompilationCompletion(waitForCompilationCompletion)
 	return x
 }
 
+// The handler that the graph calls when the compilation completes. Default value is nil.
+//
 // WithCompilationCompletionHandler sets the compilationCompletionHandler property and returns the receiver for chaining.
 func (x *GraphCompilationDescriptor) WithCompilationCompletionHandler(compilationCompletionHandler func(*raw.MPSGraphExecutable, unsafe.Pointer)) *GraphCompilationDescriptor {
 	x.inner.SetCompilationCompletionHandler(compilationCompletionHandler)
 	return x
 }
 
+// The dispatch queue used for the compilation. Default value is nil.
+//
 // WithDispatchQueue sets the dispatchQueue property and returns the receiver for chaining.
 func (x *GraphCompilationDescriptor) WithDispatchQueue(dispatchQueue *foundation.NSObject) *GraphCompilationDescriptor {
 	x.inner.SetDispatchQueue(dispatchQueue)
 	return x
 }
 
+// The optimization profile for the graph optimization. Default is MPSGraphOptimizationProfilePerformance.
+//
 // WithOptimizationProfile sets the optimizationProfile property and returns the receiver for chaining.
 func (x *GraphCompilationDescriptor) WithOptimizationProfile(optimizationProfile MPSGraphOptimizationProfile) *GraphCompilationDescriptor {
 	x.inner.SetOptimizationProfile(raw.MPSGraphOptimizationProfile(optimizationProfile))
 	return x
 }
 
+// Across the executable allow reduced precision fast math optimizations.
+//
 // WithReducedPrecisionFastMath sets the reducedPrecisionFastMath property and returns the receiver for chaining.
 func (x *GraphCompilationDescriptor) WithReducedPrecisionFastMath(reducedPrecisionFastMath MPSGraphReducedPrecisionFastMath) *GraphCompilationDescriptor {
 	x.inner.SetReducedPrecisionFastMath(raw.MPSGraphReducedPrecisionFastMath(reducedPrecisionFastMath))
 	return x
 }
 
+// Turns off type inference and relies on type inference during runtime.
+//
 // DisableTypeInference calls the underlying DisableTypeInference.
 func (x *GraphCompilationDescriptor) DisableTypeInference() {
 	x.inner.DisableTypeInference()
 }
 
+// Turns on Automatic Layout Conversion (for conv like operations) for GPU.
+//
 // ConvertLayoutToNHWC calls the underlying ConvertLayoutToNHWC.
 func (x *GraphCompilationDescriptor) ConvertLayoutToNHWC() {
 	x.inner.ConvertLayoutToNHWC()
 }
 
+// The optimization level for the graph execution, default is MPSGraphOptimizationLevel1.
+//
 // OptimizationLevel calls the underlying OptimizationLevel.
 func (x *GraphCompilationDescriptor) OptimizationLevel() MPSGraphOptimization {
 	return MPSGraphOptimization(x.inner.OptimizationLevel())
@@ -93,6 +111,8 @@ func (x *GraphCompilationDescriptor) SetOptimizationLevel(optimizationLevel MPSG
 	x.inner.SetOptimizationLevel(raw.MPSGraphOptimization(optimizationLevel))
 }
 
+// Flag that makes the compile or specialize call blocking till the entire compilation is complete, defaults to NO.
+//
 // WaitForCompilationCompletion calls the underlying WaitForCompilationCompletion.
 func (x *GraphCompilationDescriptor) WaitForCompilationCompletion() bool {
 	return x.inner.WaitForCompilationCompletion()
@@ -103,6 +123,8 @@ func (x *GraphCompilationDescriptor) SetWaitForCompilationCompletion(waitForComp
 	x.inner.SetWaitForCompilationCompletion(waitForCompilationCompletion)
 }
 
+// The handler that the graph calls when the compilation completes. Default value is nil.
+//
 // CompilationCompletionHandler calls the underlying CompilationCompletionHandler.
 func (x *GraphCompilationDescriptor) CompilationCompletionHandler() objc.Block {
 	return x.inner.CompilationCompletionHandler()
@@ -113,6 +135,8 @@ func (x *GraphCompilationDescriptor) SetCompilationCompletionHandler(compilation
 	x.inner.SetCompilationCompletionHandler(compilationCompletionHandler)
 }
 
+// The dispatch queue used for the compilation. Default value is nil.
+//
 // DispatchQueue calls the underlying DispatchQueue.
 func (x *GraphCompilationDescriptor) DispatchQueue() *foundation.NSObject {
 	return x.inner.DispatchQueue()
@@ -123,16 +147,22 @@ func (x *GraphCompilationDescriptor) SetDispatchQueue(dispatchQueue *foundation.
 	x.inner.SetDispatchQueue(dispatchQueue)
 }
 
+// The optimization profile for the graph optimization. Default is MPSGraphOptimizationProfilePerformance.
+//
 // OptimizationProfile calls the underlying OptimizationProfile.
 func (x *GraphCompilationDescriptor) OptimizationProfile() MPSGraphOptimizationProfile {
 	return MPSGraphOptimizationProfile(x.inner.OptimizationProfile())
 }
 
+// The optimization profile for the graph optimization. Default is MPSGraphOptimizationProfilePerformance.
+//
 // SetOptimizationProfile calls the underlying SetOptimizationProfile.
 func (x *GraphCompilationDescriptor) SetOptimizationProfile(optimizationProfile MPSGraphOptimizationProfile) {
 	x.inner.SetOptimizationProfile(raw.MPSGraphOptimizationProfile(optimizationProfile))
 }
 
+// The dictionary used during runtime to lookup the “MPSGraphExecutable“ which correspond to the “symbolName“.
+//
 // Callables calls the underlying Callables.
 func (x *GraphCompilationDescriptor) Callables() unsafe.Pointer {
 	return x.inner.Callables()
@@ -143,6 +173,8 @@ func (x *GraphCompilationDescriptor) SetCallables(callables unsafe.Pointer) {
 	x.inner.SetCallables(callables)
 }
 
+// Across the executable allow reduced precision fast math optimizations.
+//
 // ReducedPrecisionFastMath calls the underlying ReducedPrecisionFastMath.
 func (x *GraphCompilationDescriptor) ReducedPrecisionFastMath() MPSGraphReducedPrecisionFastMath {
 	return MPSGraphReducedPrecisionFastMath(x.inner.ReducedPrecisionFastMath())

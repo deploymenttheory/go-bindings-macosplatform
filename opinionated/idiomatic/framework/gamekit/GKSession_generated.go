@@ -45,18 +45,24 @@ func (x *Session) WithDelegate(delegate raw.GKSessionDelegate) *Session {
 	return x
 }
 
+// Toggle availability on the network based on session mode and search criteria.  Delegate will get a callback -session:didReceiveConnectionRequestFromPeer: when a peer attempts a connection.
+//
 // WithAvailable sets the available property and returns the receiver for chaining.
 func (x *Session) WithAvailable(available bool) *Session {
 	x.inner.SetAvailable(available)
 	return x
 }
 
+// The timeout for disconnecting a peer if it appears that the peer has lost connection to the game network
+//
 // WithDisconnectTimeout sets the disconnectTimeout property and returns the receiver for chaining.
 func (x *Session) WithDisconnectTimeout(disconnectTimeout float64) *Session {
 	x.inner.SetDisconnectTimeout(disconnectTimeout)
 	return x
 }
 
+// Return the application chosen name of a specific peer
+//
 // DisplayNameForPeer calls the underlying DisplayNameForPeer.
 func (x *Session) DisplayNameForPeer(peerID string) string {
 	_r := x.inner.DisplayNameForPeer(foundation.NSStringStringWithUTF8String(peerID))
@@ -66,21 +72,29 @@ func (x *Session) DisplayNameForPeer(peerID string) string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Asynchronous delivery of data to one or more peers.  Returns YES if delivery started, NO if unable to start sending, and error will be set.  Delivery will be reliable or unreliable as set by mode.
+//
 // SendDataToPeersWithDataModeError calls the underlying SendDataToPeersWithDataModeError.
 func (x *Session) SendDataToPeersWithDataModeError(data *foundation.NSData, peers *foundation.NSArray[objc.ID], mode GKSendDataMode) (bool, error) {
 	return x.inner.SendDataToPeersWithDataModeError(data, peers, raw.GKSendDataMode(mode))
 }
 
+// Asynchronous delivery to all peers.  Returns YES if delivery started, NO if unable to start sending, and error will be set.  Delivery will be reliable or unreliable as set by mode.
+//
 // SendDataToAllPeersWithDataModeError calls the underlying SendDataToAllPeersWithDataModeError.
 func (x *Session) SendDataToAllPeersWithDataModeError(data *foundation.NSData, mode GKSendDataMode) (bool, error) {
 	return x.inner.SendDataToAllPeersWithDataModeError(data, raw.GKSendDataMode(mode))
 }
 
+// Set the handler to receive data sent from remote peers.
+//
 // SetDataReceiveHandlerWithContext calls the underlying SetDataReceiveHandlerWithContext.
 func (x *Session) SetDataReceiveHandlerWithContext(handler objc.ID, context_ unsafe.Pointer) {
 	x.inner.SetDataReceiveHandlerWithContext(handler, context_)
 }
 
+// Attempt connection to a remote peer.  Remote peer gets a callback to -session:didReceiveConnectionRequestFromPeer:. Success results in a call to delegate -session:peer:didChangeState: GKPeerStateConnected Failure results in a call to delegate -session:connectionWithPeerFailed:withError:
+//
 // ConnectToPeerWithTimeout calls the underlying ConnectToPeerWithTimeout.
 func (x *Session) ConnectToPeerWithTimeout(peerID string, timeout float64) {
 	x.inner.ConnectToPeerWithTimeout(foundation.NSStringStringWithUTF8String(peerID), timeout)
@@ -91,6 +105,8 @@ func (x *Session) CancelConnectToPeer(peerID string) {
 	x.inner.CancelConnectToPeer(foundation.NSStringStringWithUTF8String(peerID))
 }
 
+// Methods to accept or deny a prior connection request from -session:didReceiveConnectionRequestFromPeer:
+//
 // AcceptConnectionFromPeerError calls the underlying AcceptConnectionFromPeerError.
 func (x *Session) AcceptConnectionFromPeerError(peerID string) (bool, error) {
 	return x.inner.AcceptConnectionFromPeerError(foundation.NSStringStringWithUTF8String(peerID))
@@ -101,16 +117,22 @@ func (x *Session) DenyConnectionFromPeer(peerID string) {
 	x.inner.DenyConnectionFromPeer(foundation.NSStringStringWithUTF8String(peerID))
 }
 
+// Disconnect a peer from the session (the peer gets disconnected from all connected peers).
+//
 // DisconnectPeerFromAllPeers calls the underlying DisconnectPeerFromAllPeers.
 func (x *Session) DisconnectPeerFromAllPeers(peerID string) {
 	x.inner.DisconnectPeerFromAllPeers(foundation.NSStringStringWithUTF8String(peerID))
 }
 
+// Disconnect local peer
+//
 // DisconnectFromAllPeers calls the underlying DisconnectFromAllPeers.
 func (x *Session) DisconnectFromAllPeers() {
 	x.inner.DisconnectFromAllPeers()
 }
 
+// Returns peers according to connection state
+//
 // PeersWithConnectionState calls the underlying PeersWithConnectionState.
 func (x *Session) PeersWithConnectionState(state GKPeerConnectionState) *foundation.NSArray[objc.ID] {
 	return x.inner.PeersWithConnectionState(raw.GKPeerConnectionState(state))
@@ -158,6 +180,8 @@ func (x *Session) PeerID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Toggle availability on the network based on session mode and search criteria.  Delegate will get a callback -session:didReceiveConnectionRequestFromPeer: when a peer attempts a connection.
+//
 // IsAvailable calls the underlying IsAvailable.
 func (x *Session) IsAvailable() bool {
 	return x.inner.IsAvailable()
@@ -168,6 +192,8 @@ func (x *Session) SetAvailable(available bool) {
 	x.inner.SetAvailable(available)
 }
 
+// The timeout for disconnecting a peer if it appears that the peer has lost connection to the game network
+//
 // DisconnectTimeout calls the underlying DisconnectTimeout.
 func (x *Session) DisconnectTimeout() float64 {
 	return x.inner.DisconnectTimeout()

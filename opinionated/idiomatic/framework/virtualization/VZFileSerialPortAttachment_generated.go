@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An attachment point that writes data from the guest system to a file.
+//
 // FileSerialPortAttachment wraps [raw.VZFileSerialPortAttachment] with a fluent Go API.
 type FileSerialPortAttachment struct {
 	inner *raw.VZFileSerialPortAttachment
@@ -32,6 +34,8 @@ func FileSerialPortAttachmentFromID(id objc.ID) *FileSerialPortAttachment {
 	return &FileSerialPortAttachment{inner: raw.VZFileSerialPortAttachmentFromID(id)}
 }
 
+// Creates a file-based serial port attachment object.
+//
 // NewFileSerialPortAttachmentWithURLAppendError creates a new [FileSerialPortAttachment].
 func NewFileSerialPortAttachmentWithURLAppendError(url string, shouldAppend bool) (*FileSerialPortAttachment, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZFileSerialPortAttachment")), objc.RegisterName("alloc"))
@@ -43,11 +47,15 @@ func NewFileSerialPortAttachmentWithURLAppendError(url string, shouldAppend bool
 	return &FileSerialPortAttachment{inner: raw.VZFileSerialPortAttachmentFromID(_id)}, nil
 }
 
+// @abstract The URL of the file for the attachment on the local file system.
+//
 // URL calls the underlying URL.
 func (x *FileSerialPortAttachment) URL() *foundation.NSURL {
 	return x.inner.URL()
 }
 
+// @abstract True if the file should be opened in append mode, false otherwise.
+//
 // Append calls the underlying Append.
 func (x *FileSerialPortAttachment) Append() bool {
 	return x.inner.Append()

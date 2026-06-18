@@ -9,6 +9,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // FunctionDescriptor wraps [raw.MTLFunctionDescriptor] with a fluent Go API.
@@ -37,30 +38,40 @@ func NewFunctionDescriptor() *FunctionDescriptor {
 	return &FunctionDescriptor{inner: raw.MTLFunctionDescriptorFromID(_id)}
 }
 
+// @property name @abstract The name of the `visible` function to find.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *FunctionDescriptor) WithName(name string) *FunctionDescriptor {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property specializedName @abstract An optional new name for a `visible` function to allow reuse with different specializations.
+//
 // WithSpecializedName sets the specializedName property and returns the receiver for chaining.
 func (x *FunctionDescriptor) WithSpecializedName(specializedName string) *FunctionDescriptor {
 	x.inner.SetSpecializedName(foundation.NSStringStringWithUTF8String(specializedName))
 	return x
 }
 
+// @property constantValues @abstract The set of constant values assigned to the function constants. Compilation fails if you do not provide valid constant values for all required function constants.
+//
 // WithConstantValues sets the constantValues property and returns the receiver for chaining.
 func (x *FunctionDescriptor) WithConstantValues(constantValues *FunctionConstantValues) *FunctionDescriptor {
 	x.inner.SetConstantValues(constantValues.Unwrap())
 	return x
 }
 
+// @property options @abstract The options to use for this new `MTLFunction`.
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *FunctionDescriptor) WithOptions(options MTLFunctionOptions) *FunctionDescriptor {
 	x.inner.SetOptions(raw.MTLFunctionOptions(options))
 	return x
 }
 
+// @property name @abstract The name of the `visible` function to find.
+//
 // Name calls the underlying Name.
 func (x *FunctionDescriptor) Name() string {
 	_r := x.inner.Name()
@@ -75,6 +86,8 @@ func (x *FunctionDescriptor) SetName(name string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 }
 
+// @property specializedName @abstract An optional new name for a `visible` function to allow reuse with different specializations.
+//
 // SpecializedName calls the underlying SpecializedName.
 func (x *FunctionDescriptor) SpecializedName() string {
 	_r := x.inner.SpecializedName()
@@ -89,6 +102,8 @@ func (x *FunctionDescriptor) SetSpecializedName(specializedName string) {
 	x.inner.SetSpecializedName(foundation.NSStringStringWithUTF8String(specializedName))
 }
 
+// @property constantValues @abstract The set of constant values assigned to the function constants. Compilation fails if you do not provide valid constant values for all required function constants.
+//
 // ConstantValues calls the underlying ConstantValues.
 func (x *FunctionDescriptor) ConstantValues() *FunctionConstantValues {
 	_r := x.inner.ConstantValues()
@@ -103,6 +118,8 @@ func (x *FunctionDescriptor) SetConstantValues(constantValues *raw.MTLFunctionCo
 	x.inner.SetConstantValues(constantValues)
 }
 
+// @property options @abstract The options to use for this new `MTLFunction`.
+//
 // Options calls the underlying Options.
 func (x *FunctionDescriptor) Options() MTLFunctionOptions {
 	return MTLFunctionOptions(x.inner.Options())
@@ -113,14 +130,25 @@ func (x *FunctionDescriptor) SetOptions(options MTLFunctionOptions) {
 	x.inner.SetOptions(raw.MTLFunctionOptions(options))
 }
 
+// @property binaryArchives @abstract The array of archives to be searched. @discussion Binary archives to be searched for precompiled functions during the compilation of this function.
+//
 // BinaryArchives calls the underlying BinaryArchives.
 func (x *FunctionDescriptor) BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive] {
 	return x.inner.BinaryArchives()
 }
 
 // SetBinaryArchives calls the underlying SetBinaryArchives.
-func (x *FunctionDescriptor) SetBinaryArchives(binaryArchives *foundation.NSArray[raw.MTLBinaryArchive]) {
-	x.inner.SetBinaryArchives(binaryArchives)
+func (x *FunctionDescriptor) SetBinaryArchives(binaryArchives ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(binaryArchives))
+	for _i, _v := range binaryArchives {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.MTLBinaryArchive]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.MTLBinaryArchive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetBinaryArchives(_arg0)
 }
 
 func (x *FunctionDescriptor) asFunctionDescriptor() *raw.MTLFunctionDescriptor { return x.inner }
@@ -141,7 +169,7 @@ type FunctionDescriptorable interface {
 	Options() MTLFunctionOptions
 	SetOptions(options MTLFunctionOptions)
 	BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive]
-	SetBinaryArchives(binaryArchives *foundation.NSArray[raw.MTLBinaryArchive])
+	SetBinaryArchives(binaryArchives ...purego.IDer)
 }
 
 var _ FunctionDescriptorable = (*FunctionDescriptor)(nil)

@@ -32,6 +32,8 @@ func SpeechLanguageModelConfigurationFromID(id objc.ID) *SpeechLanguageModelConf
 	return &SpeechLanguageModelConfiguration{inner: raw.SFSpeechLanguageModelConfigurationFromID(id)}
 }
 
+// Creates a configuration with the location of a language model file.
+//
 // NewSpeechLanguageModelConfigurationWithLanguageModel creates a new [SpeechLanguageModelConfiguration].
 func NewSpeechLanguageModelConfigurationWithLanguageModel(languageModel string) *SpeechLanguageModelConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSpeechLanguageModelConfiguration")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewSpeechLanguageModelConfigurationWithLanguageModel(languageModel string) 
 	return &SpeechLanguageModelConfiguration{inner: raw.SFSpeechLanguageModelConfigurationFromID(_id)}
 }
 
+// Creates a configuration with the locations of language model and vocabulary files.
+//
 // NewSpeechLanguageModelConfigurationWithLanguageModelVocabulary creates a new [SpeechLanguageModelConfiguration].
 func NewSpeechLanguageModelConfigurationWithLanguageModelVocabulary(languageModel string, vocabulary string) *SpeechLanguageModelConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSpeechLanguageModelConfiguration")), objc.RegisterName("alloc"))
@@ -46,6 +50,8 @@ func NewSpeechLanguageModelConfigurationWithLanguageModelVocabulary(languageMode
 	return &SpeechLanguageModelConfiguration{inner: raw.SFSpeechLanguageModelConfigurationFromID(_id)}
 }
 
+// Creates a configuration with the locations of language model and vocabulary files, and custom weight.
+//
 // NewSpeechLanguageModelConfigurationWithLanguageModelVocabularyWeight creates a new [SpeechLanguageModelConfiguration].
 func NewSpeechLanguageModelConfigurationWithLanguageModelVocabularyWeight(languageModel string, vocabulary string, weight *foundation.NSNumber) *SpeechLanguageModelConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSpeechLanguageModelConfiguration")), objc.RegisterName("alloc"))
@@ -53,16 +59,22 @@ func NewSpeechLanguageModelConfigurationWithLanguageModelVocabularyWeight(langua
 	return &SpeechLanguageModelConfiguration{inner: raw.SFSpeechLanguageModelConfigurationFromID(_id)}
 }
 
+// The location of a compiled language model file.
+//
 // LanguageModel calls the underlying LanguageModel.
 func (x *SpeechLanguageModelConfiguration) LanguageModel() *foundation.NSURL {
 	return x.inner.LanguageModel()
 }
 
+// The location of a compiled vocabulary file.
+//
 // Vocabulary calls the underlying Vocabulary.
 func (x *SpeechLanguageModelConfiguration) Vocabulary() *foundation.NSURL {
 	return x.inner.Vocabulary()
 }
 
+// The relative weight of the language model customization. Value must be between 0.0 and 1.0 inclusive.
+//
 // Weight calls the underlying Weight.
 func (x *SpeechLanguageModelConfiguration) Weight() *foundation.NSNumber {
 	return x.inner.Weight()

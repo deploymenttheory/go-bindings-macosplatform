@@ -40,6 +40,8 @@ func NewImageBrowserCell() *ImageBrowserCell {
 	return &ImageBrowserCell{inner: raw.IKImageBrowserCellFromID(_id)}
 }
 
+// @method imageBrowserView @abstract Returns the view the receiver uses to display its represented object. @discussion Subclasses should not override this method.
+//
 // ImageBrowserView calls the underlying ImageBrowserView.
 func (x *ImageBrowserCell) ImageBrowserView() *ImageBrowserView {
 	_r := x.inner.ImageBrowserView()
@@ -49,66 +51,92 @@ func (x *ImageBrowserCell) ImageBrowserView() *ImageBrowserView {
 	return &ImageBrowserView{inner: _r}
 }
 
+// @method representedItem @abstract Returns the receiver�s represented object. @discussion Subclasses should not override this method.
+//
 // RepresentedItem calls the underlying RepresentedItem.
 func (x *ImageBrowserCell) RepresentedItem() objc.ID {
 	return x.inner.RepresentedItem()
 }
 
+// @method indexOfRepresentedItem @abstract Returns the index of the receiver�s represented object in the datasource. @discussion Subclasses should not override this method.
+//
 // IndexOfRepresentedItem calls the underlying IndexOfRepresentedItem.
 func (x *ImageBrowserCell) IndexOfRepresentedItem() uint {
 	return x.inner.IndexOfRepresentedItem()
 }
 
+// @method frame @abstract Returns the receiver�s frame rectangle, which defines its position in its IKImageBrowserView. @discussion The coordinates of this frame are in view's coordinate space. Subclasses should not override this method.
+//
 // Frame calls the underlying Frame.
 func (x *ImageBrowserCell) Frame() corefoundation.CGRect {
 	return x.inner.Frame()
 }
 
+// @method imageContainerFrame @abstract Returns the receiver�s image container frame rectangle, which defines the position of the container of the thumbnail in its IKImageBrowserView. @discussion The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the thumbnail container. The image frame is computed automatically from the image container frame by taking in account the image alignment and the image aspect ratio.
+//
 // ImageContainerFrame calls the underlying ImageContainerFrame.
 func (x *ImageBrowserCell) ImageContainerFrame() corefoundation.CGRect {
 	return x.inner.ImageContainerFrame()
 }
 
+// @method imageFrame @abstract Returns the receiver�s image frame rectangle, which defines the position of the thumbnail in its IKImageBrowserView. @discussion The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the thumbnail.
+//
 // ImageFrame calls the underlying ImageFrame.
 func (x *ImageBrowserCell) ImageFrame() corefoundation.CGRect {
 	return x.inner.ImageFrame()
 }
 
+// @method selectionFrame @abstract Returns the receiver�s selection frame rectangle, which defines the position of the selection rectangle in its IKImageBrowserView. @discussion The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the selection frame.
+//
 // SelectionFrame calls the underlying SelectionFrame.
 func (x *ImageBrowserCell) SelectionFrame() corefoundation.CGRect {
 	return x.inner.SelectionFrame()
 }
 
+// @method titleFrame @abstract Returns the receiver�s title frame rectangle, which defines the position of the title in its IKImageBrowserView. @discussion The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the title.
+//
 // TitleFrame calls the underlying TitleFrame.
 func (x *ImageBrowserCell) TitleFrame() corefoundation.CGRect {
 	return x.inner.TitleFrame()
 }
 
+// @method subtitleFrame @abstract Returns the receiver�s subtitle frame rectangle, which defines the position of the subtitle in its IKImageBrowserView. @discussion The coordinates of this frame are in view's coordinate space. Subclasses can override this method to customize the position of the subtitle.
+//
 // SubtitleFrame calls the underlying SubtitleFrame.
 func (x *ImageBrowserCell) SubtitleFrame() corefoundation.CGRect {
 	return x.inner.SubtitleFrame()
 }
 
+// @method imageAlignment @abstract Returns the position of the cell�s image in the frame. The default is NSImageAlignCenter. @discussion Subclasses can override this method to customize the image alignment. For the list of possible alignments, see [NSImageView setImageAlignment:]. The image frame will be computed automatically from the image container frame by taking in account the image alignment and the image aspect ratio.
+//
 // ImageAlignment calls the underlying ImageAlignment.
 func (x *ImageBrowserCell) ImageAlignment() appkit.NSImageAlignment {
 	return x.inner.ImageAlignment()
 }
 
+// @method isSelected @abstract Returns the selection state of the receiver. @discussion Returns YES if the receiver is selected, otherwise NO. Subclasses should not override this method.
+//
 // IsSelected calls the underlying IsSelected.
 func (x *ImageBrowserCell) IsSelected() bool {
 	return x.inner.IsSelected()
 }
 
+// @method cellState @abstract Returns the current cell state of the receiver. @discussion Returns IKImageStateReady if the receiver�s represented object has been set and the cell is ready to display. The IKImageBrowserView creates thumbnails asynchronously; This method returns IKImageStateNoImage until a thumbnail has been created from the represented object.
+//
 // CellState calls the underlying CellState.
 func (x *ImageBrowserCell) CellState() quartz.IKImageBrowserCellState {
 	return x.inner.CellState()
 }
 
+// @method opacity @abstract Determines the opacity of the receiver. @discussion Possible values are between 0.0 (transparent) and 1.0 (opaque). Subclasses can override this method to customize the opacity of the cell.
+//
 // Opacity calls the underlying Opacity.
 func (x *ImageBrowserCell) Opacity() float64 {
 	return x.inner.Opacity()
 }
 
+// @method layerForType: @abstract Provides the receiver�s layer for the given type. The default is nil. @discussion Subclasses can override this method to add a layer in the background, foreground... of the cell (see possible types above).
+//
 // LayerForType calls the underlying LayerForType.
 func (x *ImageBrowserCell) LayerForType(type_ string) *quartzcore.CALayer {
 	return x.inner.LayerForType(foundation.NSStringStringWithUTF8String(type_))

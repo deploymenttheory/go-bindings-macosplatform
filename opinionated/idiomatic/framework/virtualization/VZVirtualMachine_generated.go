@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that manages the overall state and configuration of your VM.
+//
 // VirtualMachine wraps [raw.VZVirtualMachine] with a fluent Go API.
 type VirtualMachine struct {
 	inner *raw.VZVirtualMachine
@@ -33,6 +35,8 @@ func VirtualMachineFromID(id objc.ID) *VirtualMachine {
 	return &VirtualMachine{inner: raw.VZVirtualMachineFromID(id)}
 }
 
+// Creates the VM and configures it with the specified data.
+//
 // NewVirtualMachineWithConfiguration creates a new [VirtualMachine].
 func NewVirtualMachineWithConfiguration(configuration *raw.VZVirtualMachineConfiguration) *VirtualMachine {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtualMachine")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewVirtualMachineWithConfiguration(configuration *raw.VZVirtualMachineConfi
 	return &VirtualMachine{inner: raw.VZVirtualMachineFromID(_id)}
 }
 
+// Creates and configures the VM with the specified data and dispatch queue.
+//
 // NewVirtualMachineWithConfigurationQueue creates a new [VirtualMachine].
 func NewVirtualMachineWithConfigurationQueue(configuration *raw.VZVirtualMachineConfiguration, queue *foundation.NSObject) *VirtualMachine {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtualMachine")), objc.RegisterName("alloc"))
@@ -47,12 +53,16 @@ func NewVirtualMachineWithConfigurationQueue(configuration *raw.VZVirtualMachine
 	return &VirtualMachine{inner: raw.VZVirtualMachineFromID(_id)}
 }
 
+// A custom object you use to determine when the VM stops.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *VirtualMachine) WithDelegate(delegate raw.VZVirtualMachineDelegate) *VirtualMachine {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Starts the VM and notifies the specified completion handler if startup was successful.
+//
 // Start blocks until the operation completes or ctx is cancelled.
 func (x *VirtualMachine) Start(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -71,6 +81,8 @@ func (x *VirtualMachine) Start(ctx context.Context) error {
 	}
 }
 
+// Starts the VM with the options and a completion handler you provide.
+//
 // StartWithOptions blocks until the operation completes or ctx is cancelled.
 func (x *VirtualMachine) StartWithOptions(ctx context.Context, options *raw.VZVirtualMachineStartOptions) error {
 	_ch := make(chan error, 1)
@@ -89,6 +101,8 @@ func (x *VirtualMachine) StartWithOptions(ctx context.Context, options *raw.VZVi
 	}
 }
 
+// Stops a VM that’s in either a running or paused state.
+//
 // Stop blocks until the operation completes or ctx is cancelled.
 func (x *VirtualMachine) Stop(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -107,6 +121,8 @@ func (x *VirtualMachine) Stop(ctx context.Context) error {
 	}
 }
 
+// Pauses a running VM and notifies the specified completion handler of the results.
+//
 // Pause blocks until the operation completes or ctx is cancelled.
 func (x *VirtualMachine) Pause(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -125,6 +141,8 @@ func (x *VirtualMachine) Pause(ctx context.Context) error {
 	}
 }
 
+// Resumes a paused VM and notifies the specified completion handler of the results.
+//
 // Resume blocks until the operation completes or ctx is cancelled.
 func (x *VirtualMachine) Resume(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -143,6 +161,8 @@ func (x *VirtualMachine) Resume(ctx context.Context) error {
 	}
 }
 
+// Restores a VM from a previously saved state.
+//
 // RestoreMachineStateFromURL blocks until the operation completes or ctx is cancelled.
 func (x *VirtualMachine) RestoreMachineStateFromURL(ctx context.Context, saveFileURL string) error {
 	_ch := make(chan error, 1)
@@ -161,6 +181,8 @@ func (x *VirtualMachine) RestoreMachineStateFromURL(ctx context.Context, saveFil
 	}
 }
 
+// Saves the state of a VM.
+//
 // SaveMachineStateToURL blocks until the operation completes or ctx is cancelled.
 func (x *VirtualMachine) SaveMachineStateToURL(ctx context.Context, saveFileURL string) error {
 	_ch := make(chan error, 1)
@@ -179,22 +201,30 @@ func (x *VirtualMachine) SaveMachineStateToURL(ctx context.Context, saveFileURL 
 	}
 }
 
+// Asks the guest operating system to stop running.
+//
 // RequestStop returns any validation error.
 func (x *VirtualMachine) RequestStop() error {
 	_, err := x.inner.RequestStopWithError()
 	return err
 }
 
+// @abstract The queue associated with this virtual machine. @discussion This property is a reference to the queue used to create the virtual machine. If no queue was passed, the default queue is the main queue. The property can be accessed from any queue or actor. Other properties or function calls on the VZVirtualMachine must happen on this queue. The completion handlers from the asynchronous functions are also invoked on this queue.
+//
 // Queue calls the underlying Queue.
 func (x *VirtualMachine) Queue() *foundation.NSObject {
 	return x.inner.Queue()
 }
 
+// @abstract Execution state of the virtual machine.
+//
 // State calls the underlying State.
 func (x *VirtualMachine) State() VZVirtualMachineState {
 	return VZVirtualMachineState(x.inner.State())
 }
 
+// @abstract The virtual machine delegate.
+//
 // Delegate calls the underlying Delegate.
 func (x *VirtualMachine) Delegate() raw.VZVirtualMachineDelegate {
 	return x.inner.Delegate()
@@ -205,31 +235,43 @@ func (x *VirtualMachine) SetDelegate(delegate raw.VZVirtualMachineDelegate) {
 	x.inner.SetDelegate(delegate)
 }
 
+// @abstract Return YES if the machine is in a state that can be started. @see -[VZVirtualMachine startWithCompletionHandler:]. @see -[VZVirtualMachine state]
+//
 // CanStart calls the underlying CanStart.
 func (x *VirtualMachine) CanStart() bool {
 	return x.inner.CanStart()
 }
 
+// @abstract Return YES if the machine is in a state that can be stopped. @see -[VZVirtualMachine stopWithCompletionHandler:] @see -[VZVirtualMachine state]
+//
 // CanStop calls the underlying CanStop.
 func (x *VirtualMachine) CanStop() bool {
 	return x.inner.CanStop()
 }
 
+// @abstract Return YES if the machine is in a state that can be paused. @see -[VZVirtualMachine pauseWithCompletionHandler:] @see -[VZVirtualMachine state]
+//
 // CanPause calls the underlying CanPause.
 func (x *VirtualMachine) CanPause() bool {
 	return x.inner.CanPause()
 }
 
+// @abstract Return YES if the machine is in a state that can be resumed. @see -[VZVirtualMachine resumeWithCompletionHandler:] @see -[VZVirtualMachine state]
+//
 // CanResume calls the underlying CanResume.
 func (x *VirtualMachine) CanResume() bool {
 	return x.inner.CanResume()
 }
 
+// @abstract Returns whether the machine is in a state where the guest can be asked to stop. @see -[VZVirtualMachine requestStopWithError:] @see -[VZVirtualMachine state]
+//
 // CanRequestStop calls the underlying CanRequestStop.
 func (x *VirtualMachine) CanRequestStop() bool {
 	return x.inner.CanRequestStop()
 }
 
+// @abstract Return the list of console devices configured on this virtual machine. Return an empty array if no console device is configured. @see VZVirtioConsoleDeviceConfiguration @see VZVirtualMachineConfiguration
+//
 // ConsoleDevices returns the collection as a Go slice.
 func (x *VirtualMachine) ConsoleDevices() []*ConsoleDevice {
 	arr := x.inner.ConsoleDevices()
@@ -241,6 +283,8 @@ func (x *VirtualMachine) ConsoleDevices() []*ConsoleDevice {
 	})
 }
 
+// @abstract Return the list of directory sharing devices configured on this virtual machine. Return an empty array if no directory sharing device is configured. @see VZVirtioFileSystemDeviceConfiguration @see VZVirtualMachineConfiguration
+//
 // DirectorySharingDevices returns the collection as a Go slice.
 func (x *VirtualMachine) DirectorySharingDevices() []*DirectorySharingDevice {
 	arr := x.inner.DirectorySharingDevices()
@@ -252,6 +296,8 @@ func (x *VirtualMachine) DirectorySharingDevices() []*DirectorySharingDevice {
 	})
 }
 
+// @abstract Return the list of graphics devices configured on this virtual machine. Return an empty array if no graphics device is configured. @see VZGraphicsDeviceConfiguration @see VZVirtualMachineConfiguration
+//
 // GraphicsDevices returns the collection as a Go slice.
 func (x *VirtualMachine) GraphicsDevices() []*GraphicsDevice {
 	arr := x.inner.GraphicsDevices()
@@ -263,6 +309,8 @@ func (x *VirtualMachine) GraphicsDevices() []*GraphicsDevice {
 	})
 }
 
+// @abstract Return the list of memory balloon devices configured on this virtual machine. Return an empty array if no memory balloon device is configured. @see VZVirtioTraditionalMemoryBalloonDeviceConfiguration @see VZVirtualMachineConfiguration
+//
 // MemoryBalloonDevices returns the collection as a Go slice.
 func (x *VirtualMachine) MemoryBalloonDevices() []*MemoryBalloonDevice {
 	arr := x.inner.MemoryBalloonDevices()
@@ -274,6 +322,8 @@ func (x *VirtualMachine) MemoryBalloonDevices() []*MemoryBalloonDevice {
 	})
 }
 
+// @abstract Return the list of network devices configured on this virtual machine. Return an empty array if no network device is configured. @see VZVirtioNetworkDeviceConfiguration @see VZVirtualMachineConfiguration
+//
 // NetworkDevices returns the collection as a Go slice.
 func (x *VirtualMachine) NetworkDevices() []*NetworkDevice {
 	arr := x.inner.NetworkDevices()
@@ -285,6 +335,8 @@ func (x *VirtualMachine) NetworkDevices() []*NetworkDevice {
 	})
 }
 
+// @abstract Return the list of socket devices configured on this virtual machine. Return an empty array if no socket device is configured. @see VZVirtioSocketDeviceConfiguration @see VZVirtualMachineConfiguration
+//
 // SocketDevices returns the collection as a Go slice.
 func (x *VirtualMachine) SocketDevices() []*SocketDevice {
 	arr := x.inner.SocketDevices()
@@ -296,6 +348,8 @@ func (x *VirtualMachine) SocketDevices() []*SocketDevice {
 	})
 }
 
+// @abstract Return the list of USB controllers configured on this virtual machine. Return an empty array if no USB controller is configured. @see VZUSBControllerConfiguration @see VZVirtualMachineConfiguration
+//
 // UsbControllers returns the collection as a Go slice.
 func (x *VirtualMachine) UsbControllers() []*USBController {
 	arr := x.inner.UsbControllers()

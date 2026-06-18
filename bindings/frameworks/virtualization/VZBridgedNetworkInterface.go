@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that identifies the supported network interfaces of the host computer.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzbridgednetworkinterface
 type VZBridgedNetworkInterface struct {
 	foundation.NSObject

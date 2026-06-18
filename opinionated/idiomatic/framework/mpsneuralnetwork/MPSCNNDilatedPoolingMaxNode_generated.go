@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @abstract  A node for a MPSCNNDilatedPooling kernel @discussion This class corresponds to the MPSCNNDilatedPooling class.
+//
 // CNNDilatedPoolingMaxNode wraps [raw.MPSCNNDilatedPoolingMaxNode] with a fluent Go API.
 type CNNDilatedPoolingMaxNode struct {
 	inner *raw.MPSCNNDilatedPoolingMaxNode
@@ -30,6 +32,8 @@ func CNNDilatedPoolingMaxNodeFromID(id objc.ID) *CNNDilatedPoolingMaxNode {
 	return &CNNDilatedPoolingMaxNode{inner: raw.MPSCNNDilatedPoolingMaxNodeFromID(id)}
 }
 
+// @abstract   Init a node representing a MPSCNNPooling kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      kernelWidth             The width of the max filter window @param      kernelHeight            The height of the max filter window @param      strideInPixelsX         The output stride (downsampling factor) in the x dimension. @param      strideInPixelsY         The output stride (downsampling factor) in the y dimension. @param      dilationRateX           The dilation factor in the x dimension. @param      dilationRateY           The dilation factor in the y dimension. @return     A new MPSNNFilter node for a MPSCNNPooling kernel.
+//
 // NewCNNDilatedPoolingMaxNodeWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY creates a new [CNNDilatedPoolingMaxNode].
 func NewCNNDilatedPoolingMaxNodeWithSourceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsYDilationRateXDilationRateY(sourceNode *raw.MPSNNImageNode, kernelWidth uint, kernelHeight uint, strideInPixelsX uint, strideInPixelsY uint, dilationRateX uint, dilationRateY uint) *CNNDilatedPoolingMaxNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNDilatedPoolingMaxNode")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewCNNDilatedPoolingMaxNodeWithSourceKernelWidthKernelHeightStrideInPixelsX
 	return &CNNDilatedPoolingMaxNode{inner: raw.MPSCNNDilatedPoolingMaxNodeFromID(_id)}
 }
 
+// @abstract Convenience initializer for MPSCNNDilatedPooling nodes with square kernels and equal dilation factors @param      sourceNode      The MPSNNImageNode representing the source MPSImage for the filter @param      size            kernelWidth = kernelHeight = size @param      stride          strideInPixelsX = strideInPixelsY = stride @param      dilationRate    dilationRateX = dilationRateY = stride @return     A new MPSNNFilter node for a MPSCNNDilatedPooling kernel.
+//
 // NewCNNDilatedPoolingMaxNodeWithSourceFilterSizeStrideDilationRate creates a new [CNNDilatedPoolingMaxNode].
 func NewCNNDilatedPoolingMaxNodeWithSourceFilterSizeStrideDilationRate(sourceNode *raw.MPSNNImageNode, size uint, stride uint, dilationRate uint) *CNNDilatedPoolingMaxNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNDilatedPoolingMaxNode")), objc.RegisterName("alloc"))
@@ -44,6 +50,8 @@ func NewCNNDilatedPoolingMaxNodeWithSourceFilterSizeStrideDilationRate(sourceNod
 	return &CNNDilatedPoolingMaxNode{inner: raw.MPSCNNDilatedPoolingMaxNodeFromID(_id)}
 }
 
+// @abstract Convenience initializer for MPSCNNDilatedPooling nodes with square non-overlapping kernels @param      sourceNode      The MPSNNImageNode representing the source MPSImage for the filter @param      size            kernelWidth = kernelHeight = strideInPixelsX = strideInPixelsY = dilationRateX = dilationRateY = size @return     A new MPSNNFilter node for a MPSCNNDilatedPooling kernel.
+//
 // NewCNNDilatedPoolingMaxNodeWithSourceFilterSize creates a new [CNNDilatedPoolingMaxNode].
 func NewCNNDilatedPoolingMaxNodeWithSourceFilterSize(sourceNode *raw.MPSNNImageNode, size uint) *CNNDilatedPoolingMaxNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNDilatedPoolingMaxNode")), objc.RegisterName("alloc"))
@@ -51,12 +59,16 @@ func NewCNNDilatedPoolingMaxNodeWithSourceFilterSize(sourceNode *raw.MPSNNImageN
 	return &CNNDilatedPoolingMaxNode{inner: raw.MPSCNNDilatedPoolingMaxNodeFromID(_id)}
 }
 
+// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
+//
 // WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
 func (x *CNNDilatedPoolingMaxNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNDilatedPoolingMaxNode {
 	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNDilatedPoolingMaxNode) WithLabel(label string) *CNNDilatedPoolingMaxNode {
 	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))

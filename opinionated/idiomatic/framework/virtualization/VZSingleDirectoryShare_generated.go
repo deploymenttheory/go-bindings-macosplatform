@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines the directory share for a single directory.
+//
 // SingleDirectoryShare wraps [raw.VZSingleDirectoryShare] with a fluent Go API.
 type SingleDirectoryShare struct {
 	inner *raw.VZSingleDirectoryShare
@@ -29,6 +31,8 @@ func SingleDirectoryShareFromID(id objc.ID) *SingleDirectoryShare {
 	return &SingleDirectoryShare{inner: raw.VZSingleDirectoryShareFromID(id)}
 }
 
+// Creates a directory share with a directory that you specify on the host.
+//
 // NewSingleDirectoryShareWithDirectory creates a new [SingleDirectoryShare].
 func NewSingleDirectoryShareWithDirectory(directory *raw.VZSharedDirectory) *SingleDirectoryShare {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZSingleDirectoryShare")), objc.RegisterName("alloc"))

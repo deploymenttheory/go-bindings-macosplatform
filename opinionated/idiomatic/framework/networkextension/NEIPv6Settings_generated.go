@@ -32,6 +32,8 @@ func NEIPv6SettingsFromID(id objc.ID) *NEIPv6Settings {
 	return &NEIPv6Settings{inner: raw.NEIPv6SettingsFromID(id)}
 }
 
+// @method initWithAddresses:networkPrefixLengths: @discussion Initialize a newly-allocated NEIPv6Settings object. @param addresses An array of IPv6 addresses represented as dotted decimal strings. @param networkPrefixLengths An array of NSNumber objects each containing the length in bits of the network prefix of the corresponding address in the addresses parameter. @return The initialized object.
+//
 // NewNEIPv6SettingsWithAddressesNetworkPrefixLengths creates a new [NEIPv6Settings].
 func NewNEIPv6SettingsWithAddressesNetworkPrefixLengths(addresses *foundation.NSArray[*foundation.NSString], networkPrefixLengths *foundation.NSArray[*foundation.NSNumber]) *NEIPv6Settings {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NEIPv6Settings")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewNEIPv6SettingsWithAddressesNetworkPrefixLengths(addresses *foundation.NS
 	return &NEIPv6Settings{inner: raw.NEIPv6SettingsFromID(_id)}
 }
 
+// @property includedRoutes @discussion An array of NEIPv6Route objects. Traffic matching these routes will be routed through the virtual interface used by the VPN tunnel.
+//
 // WithIncludedRoutes sets the collection, converting the Go slice to an NSArray.
 func (x *NEIPv6Settings) WithIncludedRoutes(items ...*raw.NEIPv6Route) *NEIPv6Settings {
 	if len(items) == 0 {
@@ -57,6 +61,8 @@ func (x *NEIPv6Settings) WithIncludedRoutes(items ...*raw.NEIPv6Route) *NEIPv6Se
 	return x
 }
 
+// @property excludedRoutes @discussion An array of NEIPv6Route objects. Traffic matching these routes will be routed through the current primary physical interface of the device.
+//
 // WithExcludedRoutes sets the collection, converting the Go slice to an NSArray.
 func (x *NEIPv6Settings) WithExcludedRoutes(items ...*raw.NEIPv6Route) *NEIPv6Settings {
 	if len(items) == 0 {
@@ -75,6 +81,8 @@ func (x *NEIPv6Settings) WithExcludedRoutes(items ...*raw.NEIPv6Route) *NEIPv6Se
 	return x
 }
 
+// @property addresses @discussion An array of IPv6 addresses represented strings. These addresses will be set on the virtual interface used by the VPN tunnel.
+//
 // Addresses returns the collection as a Go slice.
 func (x *NEIPv6Settings) Addresses() []string {
 	arr := x.inner.Addresses()
@@ -86,6 +94,8 @@ func (x *NEIPv6Settings) Addresses() []string {
 	})
 }
 
+// @property networkPrefixLengths @discussion An array of NSNumber objects each representing the length in bits of the network prefix of the corresponding address in the addresses property.
+//
 // NetworkPrefixLengths returns the collection as a Go slice.
 func (x *NEIPv6Settings) NetworkPrefixLengths() []*foundation.NSNumber {
 	arr := x.inner.NetworkPrefixLengths()
@@ -97,6 +107,8 @@ func (x *NEIPv6Settings) NetworkPrefixLengths() []*foundation.NSNumber {
 	})
 }
 
+// @property includedRoutes @discussion An array of NEIPv6Route objects. Traffic matching these routes will be routed through the virtual interface used by the VPN tunnel.
+//
 // IncludedRoutes returns the collection as a Go slice.
 func (x *NEIPv6Settings) IncludedRoutes() []*NEIPv6Route {
 	arr := x.inner.IncludedRoutes()
@@ -113,6 +125,8 @@ func (x *NEIPv6Settings) SetIncludedRoutes(includedRoutes *foundation.NSArray[*r
 	x.inner.SetIncludedRoutes(includedRoutes)
 }
 
+// @property excludedRoutes @discussion An array of NEIPv6Route objects. Traffic matching these routes will be routed through the current primary physical interface of the device.
+//
 // ExcludedRoutes returns the collection as a Go slice.
 func (x *NEIPv6Settings) ExcludedRoutes() []*NEIPv6Route {
 	arr := x.inner.ExcludedRoutes()

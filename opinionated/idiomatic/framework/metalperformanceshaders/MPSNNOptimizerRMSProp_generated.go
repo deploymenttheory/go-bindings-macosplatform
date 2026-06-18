@@ -33,6 +33,8 @@ func NNOptimizerRMSPropFromID(id objc.ID) *NNOptimizerRMSProp {
 	return &NNOptimizerRMSProp{inner: raw.MPSNNOptimizerRMSPropFromID(id)}
 }
 
+// @abstract   Convenience initialization for the RMSProp update @param      device                     The device on which the kernel will execute. @param      learningRate               The learningRate which will be applied @return     A valid MPSNNOptimizerRMSProp object or nil, if failure.
+//
 // NewNNOptimizerRMSPropWithDeviceLearningRate creates a new [NNOptimizerRMSProp].
 func NewNNOptimizerRMSPropWithDeviceLearningRate(device metal.MTLDevice, learningRate float32) *NNOptimizerRMSProp {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNOptimizerRMSProp")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewNNOptimizerRMSPropWithDeviceLearningRate(device metal.MTLDevice, learnin
 	return &NNOptimizerRMSProp{inner: raw.MPSNNOptimizerRMSPropFromID(_id)}
 }
 
+// @abstract   Full initialization for the rmsProp update @param      device                     The device on which the kernel will execute. @param      decay                      The decay to update sumOfSquares @param      epsilon                    The epsilon which will be applied @param      optimizerDescriptor        The optimizerDescriptor which will have a bunch of properties to be applied @return     A valid MPSNNOptimizerRMSProp object or nil, if failure.
+//
 // NewNNOptimizerRMSPropWithDeviceDecayEpsilonOptimizerDescriptor creates a new [NNOptimizerRMSProp].
 func NewNNOptimizerRMSPropWithDeviceDecayEpsilonOptimizerDescriptor(device metal.MTLDevice, decay float64, epsilon float32, optimizerDescriptor *mpsneuralnetwork.MPSNNOptimizerDescriptor) *NNOptimizerRMSProp {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNOptimizerRMSProp")), objc.RegisterName("alloc"))
@@ -47,30 +51,40 @@ func NewNNOptimizerRMSPropWithDeviceDecayEpsilonOptimizerDescriptor(device metal
 	return &NNOptimizerRMSProp{inner: raw.MPSNNOptimizerRMSPropFromID(_id)}
 }
 
+// @property   learningRate @abstract   The learningRate at which we update values @discussion The default value is 1e-3
+//
 // WithLearningRate sets the learningRate property and returns the receiver for chaining.
 func (x *NNOptimizerRMSProp) WithLearningRate(learningRate float32) *NNOptimizerRMSProp {
 	x.inner.MPSNNOptimizer.SetLearningRate(learningRate)
 	return x
 }
 
+// @property   applyGradientClipping @abstract   A bool which decides if gradient will be clipped @discussion The default value is NO
+//
 // WithApplyGradientClipping sets the applyGradientClipping property and returns the receiver for chaining.
 func (x *NNOptimizerRMSProp) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerRMSProp {
 	x.inner.MPSNNOptimizer.SetApplyGradientClipping(applyGradientClipping)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *NNOptimizerRMSProp) WithOptions(options mpscore.MPSKernelOptions) *NNOptimizerRMSProp {
 	x.inner.MPSNNOptimizer.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NNOptimizerRMSProp) WithLabel(label string) *NNOptimizerRMSProp {
 	x.inner.MPSNNOptimizer.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @abstract   Encode an MPSNNOptimizerRMSProp object to a command buffer to perform out of place update @param      commandBuffer              A valid MTLCommandBuffer to receive the encoded kernel. @param      inputGradientVector        A valid MPSVector object which specifies the input vector of gradients for this update. @param      inputValuesVector          A valid MPSVector object which specifies the input vector of values to be updated. @param      inputSumOfSquaresVector    A valid MPSVector object which specifies the gradient velocity vector which will be updated and overwritten. @param      resultValuesVector         A valid MPSVector object which specifies the resultValues vector which will be updated and overwritten. @discussion The following operations would be applied s[t]     = decay * s[t-1] + (1 - decay) * (g ^ 2) variable = variable - learningRate * g / (sqrt(s[t]) + epsilon) where, g    is gradient of error wrt variable s[t] is weighted sum of squares of gradients
+//
 // EncodeToCommandBufferInputGradientVectorInputValuesVectorInputSumOfSquaresVectorResultValuesVector calls the underlying EncodeToCommandBufferInputGradientVectorInputValuesVectorInputSumOfSquaresVectorResultValuesVector.
 func (x *NNOptimizerRMSProp) EncodeToCommandBufferInputGradientVectorInputValuesVectorInputSumOfSquaresVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputSumOfSquaresVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector) {
 	x.inner.EncodeToCommandBufferInputGradientVectorInputValuesVectorInputSumOfSquaresVectorResultValuesVector(commandBuffer, inputGradientVector, inputValuesVector, inputSumOfSquaresVector, resultValuesVector)
@@ -81,26 +95,36 @@ func (x *NNOptimizerRMSProp) EncodeToCommandBufferInputGradientMatrixInputValues
 	x.inner.EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputSumOfSquaresMatrixResultValuesMatrix(commandBuffer, inputGradientMatrix, inputValuesMatrix, inputSumOfSquaresMatrix, resultValuesMatrix)
 }
 
+// @abstract   Encode an MPSNNOptimizerRMSProp object to a command buffer to perform out of place update @param      commandBuffer              A valid MTLCommandBuffer to receive the encoded kernel. @param      convolutionGradientState   A valid MPSCNNConvolutionGradientState object which specifies the input state with gradients for this update. @param      convolutionSourceState     A valid MPSCNNConvolutionWeightsAndBiasesState object which specifies the input state with values to be updated. @param      inputSumOfSquaresVectors   An array MPSVector object which specifies the gradient sumOfSquares vectors which will be updated and overwritten. The index 0 corresponds to weights, index 1 corresponds to biases, array can be of size 1 in which case biases won't be updated @param      resultState                A valid MPSCNNConvolutionWeightsAndBiasesState object which specifies the resultValues state which will be updated and overwritten. @discussion The following operations would be applied s[t]     = decay * s[t-1] + (1 - decay) * (g ^ 2) variable = variable - learningRate * g / (sqrt(s[t]) + epsilon) where, g    is gradient of error wrt variable s[t] is weighted sum of squares of gradients
+//
 // EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputSumOfSquaresVectorsResultState calls the underlying EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputSumOfSquaresVectorsResultState.
 func (x *NNOptimizerRMSProp) EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputSumOfSquaresVectorsResultState(commandBuffer metal.MTLCommandBuffer, convolutionGradientState *mpsneuralnetwork.MPSCNNConvolutionGradientState, convolutionSourceState *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState, inputSumOfSquaresVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState) {
 	x.inner.EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputSumOfSquaresVectorsResultState(commandBuffer, convolutionGradientState, convolutionSourceState, inputSumOfSquaresVectors, resultState)
 }
 
+// @abstract   Encode an MPSNNOptimizerRMSProp object to a command buffer to perform out of place update @param      commandBuffer                              A valid MTLCommandBuffer to receive the encoded kernel. @param      batchNormalizationState                    A valid MPSCNNBatchNormalizationState object which specifies the input state with gradients and original gamma/beta for this update. @param      inputSumOfSquaresVectors                   An array MPSVector object which specifies the gradient sumOfSquares vectors which will be updated and overwritten. The index 0 corresponds to gamma, index 1 corresponds to beta, array can be of size 1 in which case beta won't be updated @param      resultState                                A valid MPSCNNNormalizationGammaAndBetaState object which specifies the resultValues state which will be updated and overwritten. @discussion The following operations would be applied s[t]     = decay * s[t-1] + (1 - decay) * (g ^ 2) variable = variable - learningRate * g / (sqrt(s[t]) + epsilon) where, g    is gradient of error wrt variable s[t] is weighted sum of squares of gradients
+//
 // EncodeToCommandBufferBatchNormalizationStateInputSumOfSquaresVectorsResultState calls the underlying EncodeToCommandBufferBatchNormalizationStateInputSumOfSquaresVectorsResultState.
 func (x *NNOptimizerRMSProp) EncodeToCommandBufferBatchNormalizationStateInputSumOfSquaresVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState, inputSumOfSquaresVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState) {
 	x.inner.EncodeToCommandBufferBatchNormalizationStateInputSumOfSquaresVectorsResultState(commandBuffer, batchNormalizationState, inputSumOfSquaresVectors, resultState)
 }
 
+// @abstract   Encode an MPSNNOptimizerRMSProp object to a command buffer to perform out of place update @param      commandBuffer                              A valid MTLCommandBuffer to receive the encoded kernel. @param      batchNormalizationGradientState            A valid MPSCNNBatchNormalizationState object which specifies the input state with gradients for this update. @param      batchNormalizationSourceState              A valid MPSCNNBatchNormalizationState object which specifies the input state with original gamma/beta for this update. @param      inputSumOfSquaresVectors                   An array MPSVector object which specifies the gradient sumOfSquares vectors which will be updated and overwritten. The index 0 corresponds to gamma, index 1 corresponds to beta, array can be of size 1 in which case beta won't be updated @param      resultState                                A valid MPSCNNNormalizationGammaAndBetaState object which specifies the resultValues state which will be updated and overwritten. @discussion The following operations would be applied s[t]     = decay * s[t-1] + (1 - decay) * (g ^ 2) variable = variable - learningRate * g / (sqrt(s[t]) + epsilon) where, g    is gradient of error wrt variable s[t] is weighted sum of squares of gradients
+//
 // EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputSumOfSquaresVectorsResultState calls the underlying EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputSumOfSquaresVectorsResultState.
 func (x *NNOptimizerRMSProp) EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputSumOfSquaresVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationGradientState *mpsneuralnetwork.MPSCNNBatchNormalizationState, batchNormalizationSourceState *mpsneuralnetwork.MPSCNNBatchNormalizationState, inputSumOfSquaresVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState) {
 	x.inner.EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputSumOfSquaresVectorsResultState(commandBuffer, batchNormalizationGradientState, batchNormalizationSourceState, inputSumOfSquaresVectors, resultState)
 }
 
+// @property   decay @abstract   The decay at which we update sumOfSquares @discussion Default value is 0.9
+//
 // Decay calls the underlying Decay.
 func (x *NNOptimizerRMSProp) Decay() float64 {
 	return x.inner.Decay()
 }
 
+// @property   epsilon @abstract   The epsilon at which we update values @discussion This value is usually used to ensure to avoid divide by 0, default value is 1e-8
+//
 // Epsilon calls the underlying Epsilon.
 func (x *NNOptimizerRMSProp) Epsilon() float32 {
 	return x.inner.Epsilon()

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The object you use to change the amount of memory allocated to the guest system.
+//
 // VirtioTraditionalMemoryBalloonDevice wraps [raw.VZVirtioTraditionalMemoryBalloonDevice] with a fluent Go API.
 type VirtioTraditionalMemoryBalloonDevice struct {
 	inner *raw.VZVirtioTraditionalMemoryBalloonDevice
@@ -37,6 +39,8 @@ func NewVirtioTraditionalMemoryBalloonDevice() *VirtioTraditionalMemoryBalloonDe
 	return &VirtioTraditionalMemoryBalloonDevice{inner: raw.VZVirtioTraditionalMemoryBalloonDeviceFromID(_id)}
 }
 
+// The target amount of memory, in bytes, to make available to the virtual machine.
+//
 // WithTargetVirtualMachineMemorySize sets the targetVirtualMachineMemorySize property and returns the receiver for chaining.
 func (x *VirtioTraditionalMemoryBalloonDevice) WithTargetVirtualMachineMemorySize(targetVirtualMachineMemorySize uint64) *VirtioTraditionalMemoryBalloonDevice {
 	x.inner.SetTargetVirtualMachineMemorySize(targetVirtualMachineMemorySize)

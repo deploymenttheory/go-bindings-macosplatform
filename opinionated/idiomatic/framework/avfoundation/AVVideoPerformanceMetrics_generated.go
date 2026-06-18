@@ -35,26 +35,36 @@ func NewVideoPerformanceMetrics() *VideoPerformanceMetrics {
 	return &VideoPerformanceMetrics{inner: raw.AVVideoPerformanceMetricsFromID(_id)}
 }
 
+// @property		totalNumberOfFrames @abstract		[SPI] The total number of frames that would have been displayed if no frames are dropped.
+//
 // TotalNumberOfFrames calls the underlying TotalNumberOfFrames.
 func (x *VideoPerformanceMetrics) TotalNumberOfFrames() int {
 	return x.inner.TotalNumberOfFrames()
 }
 
+// @property		numberOfDroppedFrames @abstract		[SPI] The total number of frames dropped prior to decoding or dropped because a frame missed its display deadline.
+//
 // NumberOfDroppedFrames calls the underlying NumberOfDroppedFrames.
 func (x *VideoPerformanceMetrics) NumberOfDroppedFrames() int {
 	return x.inner.NumberOfDroppedFrames()
 }
 
+// @property		numberOfCorruptedFrames @abstract		[SPI] The total number of corrupted frames that have been detected.
+//
 // NumberOfCorruptedFrames calls the underlying NumberOfCorruptedFrames.
 func (x *VideoPerformanceMetrics) NumberOfCorruptedFrames() int {
 	return x.inner.NumberOfCorruptedFrames()
 }
 
+// @property		numberOfFramesDisplayedUsingOptimizedCompositing @abstract		[SPI] The total number of full screen frames that were rendered in a special power-efficient mode that didn't require the frame to be composited with other UI elements.
+//
 // NumberOfFramesDisplayedUsingOptimizedCompositing calls the underlying NumberOfFramesDisplayedUsingOptimizedCompositing.
 func (x *VideoPerformanceMetrics) NumberOfFramesDisplayedUsingOptimizedCompositing() int {
 	return x.inner.NumberOfFramesDisplayedUsingOptimizedCompositing()
 }
 
+// @property		totalAccumulatedFrameDelay @abstract		[SPI] The accumulated amount of time between the prescribed presentation times of displayed video frames and the actual time at which they were displayed. @discussion	This delay is always greater than or equal to zero since frames must never be displayed before their presentation time. Non-zero delays are a sign of playback jitter and possible loss of A/V sync.
+//
 // TotalAccumulatedFrameDelay calls the underlying TotalAccumulatedFrameDelay.
 func (x *VideoPerformanceMetrics) TotalAccumulatedFrameDelay() float64 {
 	return x.inner.TotalAccumulatedFrameDelay()

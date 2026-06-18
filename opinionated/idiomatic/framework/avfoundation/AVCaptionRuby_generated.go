@@ -45,6 +45,8 @@ func NewCaptionRubyWithTextPositionAlignment(text string, position AVCaptionRuby
 	return &CaptionRuby{inner: raw.AVCaptionRubyFromID(_id)}
 }
 
+// @property text @abstract The ruby text
+//
 // Text calls the underlying Text.
 func (x *CaptionRuby) Text() string {
 	_r := x.inner.Text()
@@ -54,11 +56,15 @@ func (x *CaptionRuby) Text() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property position @abstract The position of ruby text with respect to the ruby base.
+//
 // Position calls the underlying Position.
 func (x *CaptionRuby) Position() AVCaptionRubyPosition {
 	return AVCaptionRubyPosition(x.inner.Position())
 }
 
+// @property alignment @abstract The alignment of ruby text.
+//
 // Alignment calls the underlying Alignment.
 func (x *CaptionRuby) Alignment() AVCaptionRubyAlignment {
 	return AVCaptionRubyAlignment(x.inner.Alignment())

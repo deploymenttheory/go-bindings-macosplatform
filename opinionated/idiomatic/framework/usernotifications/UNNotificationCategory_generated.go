@@ -81,6 +81,8 @@ func (x *NotificationCategory) HiddenPreviewsBodyPlaceholder() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A format string for a summary description when notifications from this category are grouped together. It should contain descriptive text and format arguments that will be replaced with the information from the notifications that have been grouped together. The arguments are replaced with the number of notifications and the list created by joining the argument in each grouped notification. For example: "%u new messages from %@". The arguments list is optional, "%u new messages" is also accepted.
+//
 // CategorySummaryFormat calls the underlying CategorySummaryFormat.
 func (x *NotificationCategory) CategorySummaryFormat() string {
 	_r := x.inner.CategorySummaryFormat()

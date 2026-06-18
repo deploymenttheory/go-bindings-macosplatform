@@ -31,6 +31,8 @@ func CredentialServiceIdentifierFromID(id objc.ID) *CredentialServiceIdentifier 
 	return &CredentialServiceIdentifier{inner: raw.ASCredentialServiceIdentifierFromID(id)}
 }
 
+// @abstract Initializes an ASCredentialServiceIdentifier object. @param identifier string value for the service identifier. @param type the type that the service identifier string represents.
+//
 // NewCredentialServiceIdentifierWithIdentifierType creates a new [CredentialServiceIdentifier].
 func NewCredentialServiceIdentifierWithIdentifierType(identifier string, type_ ASCredentialServiceIdentifierType) *CredentialServiceIdentifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASCredentialServiceIdentifier")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewCredentialServiceIdentifierWithIdentifierType(identifier string, type_ A
 	return &CredentialServiceIdentifier{inner: raw.ASCredentialServiceIdentifierFromID(_id)}
 }
 
+// Initializes an ASCredentialServiceIdentifier object. - Parameters: - identifier: The string value for the service identifier. - type: The type that the service identifier string represents. - displayName: A user visible name that describes the service.
+//
 // NewCredentialServiceIdentifierWithIdentifierTypeDisplayName creates a new [CredentialServiceIdentifier].
 func NewCredentialServiceIdentifierWithIdentifierTypeDisplayName(identifier string, type_ ASCredentialServiceIdentifierType, displayName string) *CredentialServiceIdentifier {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASCredentialServiceIdentifier")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewCredentialServiceIdentifierWithIdentifierTypeDisplayName(identifier stri
 	return &CredentialServiceIdentifier{inner: raw.ASCredentialServiceIdentifierFromID(_id)}
 }
 
+// A user visible name for the identifier. For `app` types it will contain the localized name of the app. For `URL` types it will contain the host name of the URL if it contains a valid host. For `URL` type identifiers that do not contain a valid host and for `domain` type identifiers, this will be equal to `identifier`. This property is meant only as a best effort suggestion for display purposes. It is not used by the system to identify the service or suggest a credential for AutoFill.
+//
 // DisplayName calls the underlying DisplayName.
 func (x *CredentialServiceIdentifier) DisplayName() string {
 	_r := x.inner.DisplayName()
@@ -54,6 +60,8 @@ func (x *CredentialServiceIdentifier) DisplayName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Get the identifier. @result The service identifier.
+//
 // Identifier calls the underlying Identifier.
 func (x *CredentialServiceIdentifier) Identifier() string {
 	_r := x.inner.Identifier()
@@ -63,6 +71,8 @@ func (x *CredentialServiceIdentifier) Identifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Get the service identifier type. @result The service identifier type.
+//
 // Type calls the underlying Type.
 func (x *CredentialServiceIdentifier) Type() ASCredentialServiceIdentifierType {
 	return ASCredentialServiceIdentifierType(x.inner.Type())

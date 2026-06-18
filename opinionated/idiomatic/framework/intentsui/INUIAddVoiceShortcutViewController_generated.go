@@ -32,6 +32,8 @@ func AddVoiceShortcutViewControllerFromID(id objc.ID) *AddVoiceShortcutViewContr
 	return &AddVoiceShortcutViewController{inner: raw.INUIAddVoiceShortcutViewControllerFromID(id)}
 }
 
+// @param shortcut The shortcut is what will be run when the resulting voice shortcut is invoked. It also provides the suggested invocation phrase, via the @c suggestedInvocationPhrase property on the intent or user activity.
+//
 // NewAddVoiceShortcutViewControllerWithShortcut creates a new [AddVoiceShortcutViewController].
 func NewAddVoiceShortcutViewControllerWithShortcut(shortcut *intents.INShortcut) *AddVoiceShortcutViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INUIAddVoiceShortcutViewController")), objc.RegisterName("alloc"))

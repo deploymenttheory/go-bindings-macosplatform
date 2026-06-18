@@ -33,6 +33,8 @@ func MTRBaseClusterGroupsFromID(id objc.ID) *MTRBaseClusterGroups {
 	return &MTRBaseClusterGroups{inner: raw.MTRBaseClusterGroupsFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterGroupsWithDeviceEndpointIDQueue creates a new [MTRBaseClusterGroups].
 func NewMTRBaseClusterGroupsWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterGroups {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterGroups")), objc.RegisterName("alloc"))
@@ -47,6 +49,8 @@ func NewMTRBaseClusterGroupsWithDeviceEndpointQueue(device *raw.MTRBaseDevice, e
 	return &MTRBaseClusterGroups{inner: raw.MTRBaseClusterGroupsFromID(_id)}
 }
 
+// Command AddGroup The AddGroup command allows a client to add group membership in a particular group for the server endpoint.
+//
 // AddGroupWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterGroups) AddGroupWithParamsCompletion(ctx context.Context, params *raw.MTRGroupsClusterAddGroupParams) (*MTRGroupsClusterAddGroupResponseParams, error) {
 	type _result struct {
@@ -73,6 +77,8 @@ func (x *MTRBaseClusterGroups) AddGroupWithParamsCompletion(ctx context.Context,
 	}
 }
 
+// Command ViewGroup The ViewGroup command allows a client to request that the server responds with a ViewGroupResponse command containing the name string for a particular group.
+//
 // ViewGroupWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterGroups) ViewGroupWithParamsCompletion(ctx context.Context, params *raw.MTRGroupsClusterViewGroupParams) (*MTRGroupsClusterViewGroupResponseParams, error) {
 	type _result struct {
@@ -99,6 +105,8 @@ func (x *MTRBaseClusterGroups) ViewGroupWithParamsCompletion(ctx context.Context
 	}
 }
 
+// Command GetGroupMembership The GetGroupMembership command allows a client to inquire about the group membership of the server endpoint, in a number of ways.
+//
 // GetGroupMembershipWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterGroups) GetGroupMembershipWithParamsCompletion(ctx context.Context, params *raw.MTRGroupsClusterGetGroupMembershipParams) (*MTRGroupsClusterGetGroupMembershipResponseParams, error) {
 	type _result struct {
@@ -125,6 +133,8 @@ func (x *MTRBaseClusterGroups) GetGroupMembershipWithParamsCompletion(ctx contex
 	}
 }
 
+// Command RemoveGroup The RemoveGroup command allows a client to request that the server removes the membership for the server endpoint, if any, in a particular group.
+//
 // RemoveGroupWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterGroups) RemoveGroupWithParamsCompletion(ctx context.Context, params *raw.MTRGroupsClusterRemoveGroupParams) (*MTRGroupsClusterRemoveGroupResponseParams, error) {
 	type _result struct {
@@ -151,6 +161,8 @@ func (x *MTRBaseClusterGroups) RemoveGroupWithParamsCompletion(ctx context.Conte
 	}
 }
 
+// Command RemoveAllGroups The RemoveAllGroups command allows a client to direct the server to remove all group associations for the server endpoint.
+//
 // RemoveAllGroupsWithParamsCompletion calls the underlying RemoveAllGroupsWithParamsCompletion.
 func (x *MTRBaseClusterGroups) RemoveAllGroupsWithParamsCompletion(params *raw.MTRGroupsClusterRemoveAllGroupsParams, completion func(unsafe.Pointer)) {
 	x.inner.RemoveAllGroupsWithParamsCompletion(params, completion)
@@ -161,6 +173,8 @@ func (x *MTRBaseClusterGroups) RemoveAllGroupsWithCompletion(completion func(uns
 	x.inner.RemoveAllGroupsWithCompletion(completion)
 }
 
+// Command AddGroupIfIdentifying The AddGroupIfIdentifying command allows a client to add group membership in a particular group for the server endpoint, on condition that the endpoint is identifying itself.
+//
 // AddGroupIfIdentifyingWithParamsCompletion calls the underlying AddGroupIfIdentifyingWithParamsCompletion.
 func (x *MTRBaseClusterGroups) AddGroupIfIdentifyingWithParamsCompletion(params *raw.MTRGroupsClusterAddGroupIfIdentifyingParams, completion func(unsafe.Pointer)) {
 	x.inner.AddGroupIfIdentifyingWithParamsCompletion(params, completion)

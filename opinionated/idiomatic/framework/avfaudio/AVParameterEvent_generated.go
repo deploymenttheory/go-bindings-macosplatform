@@ -29,6 +29,8 @@ func ParameterEventFromID(id objc.ID) *ParameterEvent {
 	return &ParameterEvent{inner: raw.AVParameterEventFromID(id)}
 }
 
+// @method initWithParameterID:scope:element:value @abstract Initialize the event with the parameter ID, scope, element, and value for the parameter to be set. @param parameterID The ID of the parameter (see AudioUnitParameterID). @param scope The audio unit scope for the parameter (see AudioUnitScope). @param element The element index within the scope (see AudioUnitElement). @param value The value of the parameter to be set.  Range:  Dependent on parameter.
+//
 // NewParameterEventWithParameterIDScopeElementValue creates a new [ParameterEvent].
 func NewParameterEventWithParameterIDScopeElementValue(parameterID uint, scope uint, element uint, value float32) *ParameterEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVParameterEvent")), objc.RegisterName("alloc"))
@@ -36,30 +38,40 @@ func NewParameterEventWithParameterIDScopeElementValue(parameterID uint, scope u
 	return &ParameterEvent{inner: raw.AVParameterEventFromID(_id)}
 }
 
+// @property parameterID The ID of the parameter (see AudioUnitParameterID).
+//
 // WithParameterID sets the parameterID property and returns the receiver for chaining.
 func (x *ParameterEvent) WithParameterID(parameterID uint) *ParameterEvent {
 	x.inner.SetParameterID(parameterID)
 	return x
 }
 
+// @property scope The audio unit scope for the parameter (see AudioUnitScope).
+//
 // WithScope sets the scope property and returns the receiver for chaining.
 func (x *ParameterEvent) WithScope(scope uint) *ParameterEvent {
 	x.inner.SetScope(scope)
 	return x
 }
 
+// @property element The element index within the scope (see AudioUnitElement).
+//
 // WithElement sets the element property and returns the receiver for chaining.
 func (x *ParameterEvent) WithElement(element uint) *ParameterEvent {
 	x.inner.SetElement(element)
 	return x
 }
 
+// @property value The value of the parameter to be set.  Range:  Dependent on parameter.
+//
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *ParameterEvent) WithValue(value float32) *ParameterEvent {
 	x.inner.SetValue(value)
 	return x
 }
 
+// @property parameterID The ID of the parameter (see AudioUnitParameterID).
+//
 // ParameterID calls the underlying ParameterID.
 func (x *ParameterEvent) ParameterID() uint {
 	return x.inner.ParameterID()
@@ -70,6 +82,8 @@ func (x *ParameterEvent) SetParameterID(parameterID uint) {
 	x.inner.SetParameterID(parameterID)
 }
 
+// @property scope The audio unit scope for the parameter (see AudioUnitScope).
+//
 // Scope calls the underlying Scope.
 func (x *ParameterEvent) Scope() uint {
 	return x.inner.Scope()
@@ -80,6 +94,8 @@ func (x *ParameterEvent) SetScope(scope uint) {
 	x.inner.SetScope(scope)
 }
 
+// @property element The element index within the scope (see AudioUnitElement).
+//
 // Element calls the underlying Element.
 func (x *ParameterEvent) Element() uint {
 	return x.inner.Element()
@@ -90,6 +106,8 @@ func (x *ParameterEvent) SetElement(element uint) {
 	x.inner.SetElement(element)
 }
 
+// @property value The value of the parameter to be set.  Range:  Dependent on parameter.
+//
 // Value calls the underlying Value.
 func (x *ParameterEvent) Value() float32 {
 	return x.inner.Value()

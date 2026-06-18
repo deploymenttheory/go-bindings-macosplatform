@@ -35,48 +35,64 @@ func NewRNNSingleGateDescriptor() *RNNSingleGateDescriptor {
 	return &RNNSingleGateDescriptor{inner: raw.MPSRNNSingleGateDescriptorFromID(_id)}
 }
 
+// @property   inputWeights @abstract   Contains weights 'W_ij', bias 'b_i' and neuron 'gi' from the simple RNN layer formula. If nil then assumed zero weights, bias and no neuron (identity mapping). Defaults to nil.
+//
 // WithInputWeights sets the inputWeights property and returns the receiver for chaining.
 func (x *RNNSingleGateDescriptor) WithInputWeights(inputWeights raw.MPSCNNConvolutionDataSource) *RNNSingleGateDescriptor {
 	x.inner.SetInputWeights(inputWeights)
 	return x
 }
 
+// @property   recurrentWeights @abstract   Contains weights 'U_ij' from the simple RNN layer formula. If nil then assumed zero weights. Defaults to nil.
+//
 // WithRecurrentWeights sets the recurrentWeights property and returns the receiver for chaining.
 func (x *RNNSingleGateDescriptor) WithRecurrentWeights(recurrentWeights raw.MPSCNNConvolutionDataSource) *RNNSingleGateDescriptor {
 	x.inner.SetRecurrentWeights(recurrentWeights)
 	return x
 }
 
+// @property   inputFeatureChannels @abstract   The number of feature channels per pixel in the input image or number of rows in the input matrix.
+//
 // WithInputFeatureChannels sets the inputFeatureChannels property and returns the receiver for chaining.
 func (x *RNNSingleGateDescriptor) WithInputFeatureChannels(inputFeatureChannels uint) *RNNSingleGateDescriptor {
 	x.inner.MPSRNNDescriptor.SetInputFeatureChannels(inputFeatureChannels)
 	return x
 }
 
+// @property   outputFeatureChannels @abstract   The number of feature channels per pixel in the destination image or number of rows in the destination matrix.
+//
 // WithOutputFeatureChannels sets the outputFeatureChannels property and returns the receiver for chaining.
 func (x *RNNSingleGateDescriptor) WithOutputFeatureChannels(outputFeatureChannels uint) *RNNSingleGateDescriptor {
 	x.inner.MPSRNNDescriptor.SetOutputFeatureChannels(outputFeatureChannels)
 	return x
 }
 
+// @property   useLayerInputUnitTransformMode @abstract   if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in @ref MPSRNNSingleGateDescriptor. Defaults to NO.
+//
 // WithUseLayerInputUnitTransformMode sets the useLayerInputUnitTransformMode property and returns the receiver for chaining.
 func (x *RNNSingleGateDescriptor) WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *RNNSingleGateDescriptor {
 	x.inner.MPSRNNDescriptor.SetUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode)
 	return x
 }
 
+// @property   useFloat32Weights @abstract   If YES, then @ref MPSRNNMatrixInferenceLayer uses 32-bit floating point numbers internally for weights when computing matrix transformations. If NO, then 16-bit, half precision floating point numbers are used. Currently @ref MPSRNNImageInferenceLayer ignores this property and the convolution operations always convert FP32 weights into FP16 for better performance. Defaults to NO.
+//
 // WithUseFloat32Weights sets the useFloat32Weights property and returns the receiver for chaining.
 func (x *RNNSingleGateDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *RNNSingleGateDescriptor {
 	x.inner.MPSRNNDescriptor.SetUseFloat32Weights(useFloat32Weights)
 	return x
 }
 
+// @property   layerSequenceDirection @abstract   When the layer specified with this descriptor is used to process a sequence of inputs by calling @see encodeBidirectionalSequenceToCommandBuffer then this parameter defines in which direction the sequence is processed. The operation of the layer is: (yt, ht, ct) = f(xt,ht-1,ct-1) for MPSRNNSequenceDirectionForward and (yt, ht, ct) = f(xt,ht+1,ct+1) for MPSRNNSequenceDirectionBackward, where xt is the output of the previous layer that encodes in the same direction as this layer, (or the input image or matrix if this is the first layer in stack with this direction). @see MPSRNNImageInferenceLayer and @see MPSRNNMatrixInferenceLayer.
+//
 // WithLayerSequenceDirection sets the layerSequenceDirection property and returns the receiver for chaining.
 func (x *RNNSingleGateDescriptor) WithLayerSequenceDirection(layerSequenceDirection MPSRNNSequenceDirection) *RNNSingleGateDescriptor {
 	x.inner.MPSRNNDescriptor.SetLayerSequenceDirection(raw.MPSRNNSequenceDirection(layerSequenceDirection))
 	return x
 }
 
+// @property   inputWeights @abstract   Contains weights 'W_ij', bias 'b_i' and neuron 'gi' from the simple RNN layer formula. If nil then assumed zero weights, bias and no neuron (identity mapping). Defaults to nil.
+//
 // InputWeights calls the underlying InputWeights.
 func (x *RNNSingleGateDescriptor) InputWeights() raw.MPSCNNConvolutionDataSource {
 	return x.inner.InputWeights()
@@ -87,6 +103,8 @@ func (x *RNNSingleGateDescriptor) SetInputWeights(inputWeights raw.MPSCNNConvolu
 	x.inner.SetInputWeights(inputWeights)
 }
 
+// @property   recurrentWeights @abstract   Contains weights 'U_ij' from the simple RNN layer formula. If nil then assumed zero weights. Defaults to nil.
+//
 // RecurrentWeights calls the underlying RecurrentWeights.
 func (x *RNNSingleGateDescriptor) RecurrentWeights() raw.MPSCNNConvolutionDataSource {
 	return x.inner.RecurrentWeights()

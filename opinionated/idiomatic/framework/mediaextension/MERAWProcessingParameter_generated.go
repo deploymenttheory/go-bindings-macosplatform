@@ -36,12 +36,16 @@ func NewRAWProcessingParameter() *RAWProcessingParameter {
 	return &RAWProcessingParameter{inner: raw.MERAWProcessingParameterFromID(_id)}
 }
 
+// @property		enabled @abstract		Indicates whether the parameter is enabled or disabled by the extension. @discussion	This parameter can only be modified by the extension.  From the application-facing interface, VTRAWProcessingSession, this is a read-only value which indicates whether the parameter should be greyed out and disabled in any UI being generated.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *RAWProcessingParameter) WithEnabled(enabled bool) *RAWProcessingParameter {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// @property		name @abstract		A localized human-readable name for the parameter, suitable for displaying in application UI.
+//
 // Name calls the underlying Name.
 func (x *RAWProcessingParameter) Name() string {
 	_r := x.inner.Name()
@@ -51,6 +55,8 @@ func (x *RAWProcessingParameter) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property		key @abstract		A unique key string identifying this parameter.
+//
 // Key calls the underlying Key.
 func (x *RAWProcessingParameter) Key() string {
 	_r := x.inner.Key()
@@ -60,6 +66,8 @@ func (x *RAWProcessingParameter) Key() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property		longDescription @abstract		A localized description of the parameter, suitable for displaying in a tool tip or similar explanatory UI.
+//
 // LongDescription calls the underlying LongDescription.
 func (x *RAWProcessingParameter) LongDescription() string {
 	_r := x.inner.LongDescription()
@@ -69,6 +77,8 @@ func (x *RAWProcessingParameter) LongDescription() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property		enabled @abstract		Indicates whether the parameter is enabled or disabled by the extension. @discussion	This parameter can only be modified by the extension.  From the application-facing interface, VTRAWProcessingSession, this is a read-only value which indicates whether the parameter should be greyed out and disabled in any UI being generated.
+//
 // Enabled calls the underlying Enabled.
 func (x *RAWProcessingParameter) Enabled() bool {
 	return x.inner.Enabled()

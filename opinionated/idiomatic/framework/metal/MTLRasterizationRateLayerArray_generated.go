@@ -35,6 +35,8 @@ func NewRasterizationRateLayerArray() *RasterizationRateLayerArray {
 	return &RasterizationRateLayerArray{inner: raw.MTLRasterizationRateLayerArrayFromID(_id)}
 }
 
+// @method objectAtIndexedSubscript: @return The MTLRasterizationRateLayerDescriptor instance for the given layerIndex, or nil if no instance hasn't been set for this index. @discussion Use setObject:atIndexedSubscript: to set the layer
+//
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *RasterizationRateLayerArray) ObjectAtIndexedSubscript(layerIndex uint) *RasterizationRateLayerDescriptor {
 	_r := x.inner.ObjectAtIndexedSubscript(layerIndex)
@@ -44,6 +46,8 @@ func (x *RasterizationRateLayerArray) ObjectAtIndexedSubscript(layerIndex uint) 
 	return &RasterizationRateLayerDescriptor{inner: _r}
 }
 
+// @method setObject:atIndexedSubscript: @abstract Sets the MTLRasterizationRateLayerDescriptor instance for the given layerIndex. @discussion The previous instance at this index will be overwritten.
+//
 // SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
 func (x *RasterizationRateLayerArray) SetObjectAtIndexedSubscript(layer *raw.MTLRasterizationRateLayerDescriptor, layerIndex uint) {
 	x.inner.SetObjectAtIndexedSubscript(layer, layerIndex)

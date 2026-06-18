@@ -37,6 +37,8 @@ func NewChangeLanguageOptionCommandEvent() *ChangeLanguageOptionCommandEvent {
 	return &ChangeLanguageOptionCommandEvent{inner: raw.MPChangeLanguageOptionCommandEventFromID(_id)}
 }
 
+// The requested language option to change. The supplied language option may be the Automatic Legible Language Option which would mean that best legible language option based on user preferences is being requested. See MPNowPlayingInfoLanguageOption isAutomaticLegibleLanguageOption
+//
 // LanguageOption calls the underlying LanguageOption.
 func (x *ChangeLanguageOptionCommandEvent) LanguageOption() *NowPlayingInfoLanguageOption {
 	_r := x.inner.LanguageOption()
@@ -46,6 +48,8 @@ func (x *ChangeLanguageOptionCommandEvent) LanguageOption() *NowPlayingInfoLangu
 	return &NowPlayingInfoLanguageOption{inner: _r}
 }
 
+// Describes the extent of the changed language option
+//
 // Setting calls the underlying Setting.
 func (x *ChangeLanguageOptionCommandEvent) Setting() MPChangeLanguageOptionSetting {
 	return MPChangeLanguageOptionSetting(x.inner.Setting())

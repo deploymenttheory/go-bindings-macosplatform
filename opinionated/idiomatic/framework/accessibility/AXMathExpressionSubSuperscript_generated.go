@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MathExpressionSubSuperscript wraps [raw.AXMathExpressionSubSuperscript] with a fluent Go API.
@@ -32,9 +33,18 @@ func MathExpressionSubSuperscriptFromID(id objc.ID) *MathExpressionSubSuperscrip
 }
 
 // NewMathExpressionSubSuperscriptWithBaseExpressionSubscriptExpressionsSuperscriptExpressions creates a new [MathExpressionSubSuperscript].
-func NewMathExpressionSubSuperscriptWithBaseExpressionSubscriptExpressionsSuperscriptExpressions(baseExpression *foundation.NSArray[*raw.AXMathExpression], subscriptExpressions *foundation.NSArray[*raw.AXMathExpression], superscriptExpressions *foundation.NSArray[*raw.AXMathExpression]) *MathExpressionSubSuperscript {
+func NewMathExpressionSubSuperscriptWithBaseExpressionSubscriptExpressionsSuperscriptExpressions(baseExpression *foundation.NSArray[*raw.AXMathExpression], subscriptExpressions *foundation.NSArray[*raw.AXMathExpression], superscriptExpressions ...MathExpressionProvider) *MathExpressionSubSuperscript {
+	_ptrs := make([]objc.ID, len(superscriptExpressions))
+	for _i, _v := range superscriptExpressions {
+		_ptrs[_i] = _v.asMathExpression().Ptr()
+	}
+	var _arg2 *foundation.NSArray[*raw.AXMathExpression]
+	if len(_ptrs) > 0 {
+		_arg2 = foundation.NSArrayFromID[*raw.AXMathExpression](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXMathExpressionSubSuperscript")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBaseExpression:subscriptExpressions:superscriptExpressions:"), baseExpression.Ptr(), subscriptExpressions.Ptr(), superscriptExpressions.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBaseExpression:subscriptExpressions:superscriptExpressions:"), baseExpression.Ptr(), subscriptExpressions.Ptr(), _arg2.Ptr())
 	return &MathExpressionSubSuperscript{inner: raw.AXMathExpressionSubSuperscriptFromID(_id)}
 }
 

@@ -35,6 +35,8 @@ func NewModelStructure() *ModelStructure {
 	return &ModelStructure{inner: raw.MLModelStructureFromID(_id)}
 }
 
+// If the model is of NeuralNetwork type then it is the structure of the NeuralNetwork otherwise `nil`.
+//
 // NeuralNetwork calls the underlying NeuralNetwork.
 func (x *ModelStructure) NeuralNetwork() *ModelStructureNeuralNetwork {
 	_r := x.inner.NeuralNetwork()
@@ -44,6 +46,8 @@ func (x *ModelStructure) NeuralNetwork() *ModelStructureNeuralNetwork {
 	return &ModelStructureNeuralNetwork{inner: _r}
 }
 
+// If the model is of ML Program type then it is the structure of the ML Program otherwise `nil`.
+//
 // Program calls the underlying Program.
 func (x *ModelStructure) Program() *ModelStructureProgram {
 	_r := x.inner.Program()
@@ -53,6 +57,8 @@ func (x *ModelStructure) Program() *ModelStructureProgram {
 	return &ModelStructureProgram{inner: _r}
 }
 
+// If the model is of Pipeline type then it is the structure of the Pipeline otherwise `nil`.
+//
 // Pipeline calls the underlying Pipeline.
 func (x *ModelStructure) Pipeline() *ModelStructurePipeline {
 	_r := x.inner.Pipeline()

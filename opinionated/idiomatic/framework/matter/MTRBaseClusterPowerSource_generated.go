@@ -33,6 +33,8 @@ func MTRBaseClusterPowerSourceFromID(id objc.ID) *MTRBaseClusterPowerSource {
 	return &MTRBaseClusterPowerSource{inner: raw.MTRBaseClusterPowerSourceFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterPowerSourceWithDeviceEndpointIDQueue creates a new [MTRBaseClusterPowerSource].
 func NewMTRBaseClusterPowerSourceWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterPowerSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterPowerSource")), objc.RegisterName("alloc"))

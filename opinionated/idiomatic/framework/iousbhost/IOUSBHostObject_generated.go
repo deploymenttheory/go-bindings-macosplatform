@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// @class   IOUSBHostObject @brief   The Abstract class IOUSBHostDevice and IOUSBHostInterface derive from. @details Defines common methods that are shared between IOUSBHostDevice and IOUSBHostInterface including instance management.
+//
 // HostObject wraps [raw.IOUSBHostObject] with a fluent Go API.
 type HostObject struct {
 	inner *raw.IOUSBHostObject
@@ -32,6 +34,8 @@ func HostObjectFromID(id objc.ID) *HostObject {
 	return &HostObject{inner: raw.IOUSBHostObjectFromID(id)}
 }
 
+// @brief      Initializes IOUSBHostObject object along with user client @discussion If the io_service_t is not found nil will be returned. If an IOUSBHostDevice or IOUSBHostInterface user client is already created, nil will be returned. Upon creation, exclusive ownership of the IOService will be established. When done using the object destroy must be called on the object. @param      ioService io_service_t of the IOUSBHostDevice or IOUSBHostInterface the user client is for. The IOUSBHostObject will keep a reference to the io_service_t and release it after the IOUSBHostObject has been released. @param      options IOUSBHostObjectInitOptions. Default value is IOUSBHostObjectInitOptionsNone @param      queue A serial queue that all asynchronous io will be serviced. By default a serial queue will be created on behalf of the client. Setting a queue will create a dispatch source event handler for the target queue to service all underlying io. @param      interestHandler IOUSBHostInterestHandler a generalInterest IOService handler. This is to handle underlying service state changes such as termination. See IOServiceAddInterestNotification in IOKitLib for more details. All notifications will be serviced on an internal serial queue separate from the IO queue. @return     An IOUSBHostDevice or IOUSBHostInterface. The object is to be released by the caller. An IOReturn error code will be reported on failure.
+//
 // NewHostObjectWithIOServiceOptionsQueueErrorInterestHandler creates a new [HostObject].
 func NewHostObjectWithIOServiceOptionsQueueErrorInterestHandler(ioService uint, options IOUSBHostObjectInitOptions, queue *foundation.NSObject, error_ unsafe.Pointer, interestHandler func(*raw.IOUSBHostObject, uint32, unsafe.Pointer)) *HostObject {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOUSBHostObject")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewHostObjectWithIOServiceOptionsQueueErrorInterestHandler(ioService uint, 
 	return &HostObject{inner: raw.IOUSBHostObjectFromID(_id)}
 }
 
+// @brief      Initializes IOUSBHostObject object along with user client @discussion This method should be called from either IOUSBHostDevice or IOUSBHostInterface. If the io_service_t is not found nil will be returned. If an IOUSBHostDevice or IOUSBHostInterface user client is already created, nil will be returned. Upon creation, exclusive ownership of the IOService will be established. When done using the object destroy must be called on the object. @param      ioService io_service_t of the IOUSBHostDevice or IOUSBHostInterface the user client is for. The IOUSBHostObject will keep a reference to the io_service_t and release it after the IOUSBHostObject has been released. @param      queue A serial queue that all asynchronous io will be serviced. By default a serial queue will be created on behalf of the client. Setting a queue will create a dispatch source event handler for the target queue to service all underlying io. @param      interestHandler IOUSBHostInterestHandler a generalInterest IOService handler. This is to handle underlying service state changes such as termination. See IOServiceAddInterestNotification in IOKitLib for more details. All notifications will be serviced on an internal serial queue separate from the IO queue. @return     An IOUSBHostDevice or IOUSBHostInterface. The object is to be released by the caller. An IOReturn error code will be reported on failure.
+//
 // NewHostObjectWithIOServiceQueueErrorInterestHandler creates a new [HostObject].
 func NewHostObjectWithIOServiceQueueErrorInterestHandler(ioService uint, queue *foundation.NSObject, error_ unsafe.Pointer, interestHandler func(*raw.IOUSBHostObject, uint32, unsafe.Pointer)) *HostObject {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOUSBHostObject")), objc.RegisterName("alloc"))
@@ -46,82 +52,114 @@ func NewHostObjectWithIOServiceQueueErrorInterestHandler(ioService uint, queue *
 	return &HostObject{inner: raw.IOUSBHostObjectFromID(_id)}
 }
 
+// @brief      Removes underlying allocations of the IOUSBHostObject object along with user client @discussion When the IOUSBHostObject is no longer needed, destroy must be called. This will destroy the connection with the user client and de-register interest on the service. If the object is free'd destroy will be called automatically. Calling destroy multiple times has no effect.
+//
 // Destroy calls the underlying Destroy.
 func (x *HostObject) Destroy() {
 	x.inner.Destroy()
 }
 
+// @brief      Removes underlying allocations of the IOUSBHostObject object along with user client @discussion Extends <code>destroy</code> to take an options to modify the destroy behavior.  Currently only the <code>IOUSBHostObjectDestroyOptionsDeviceSurrender</code> is defined to support surrendering ownersip of the kernel service.  To be used when accepting the <code>kUSBHostMessageDeviceIsRequestingClose</code> message.
+//
 // DestroyWithOptions calls the underlying DestroyWithOptions.
 func (x *HostObject) DestroyWithOptions(options IOUSBHostObjectDestroyOptions) {
 	x.inner.DestroyWithOptions(raw.IOUSBHostObjectDestroyOptions(options))
 }
 
+// @brief      Send a request on the default control endpoint @discussion This method will send a synchronous request on the default control endpoint, and will not return until the request is complete. @param      request IOUSBDeviceRequest structure. @param      data An NSMutableData* defining the memory to use for the request's data phase. @param      bytesTransferred Optional NSUInteger reference which will be updated with the byte count of the completed data phase. @param      completionTimeout Timeout of the request. If 0, the request will never timeout. By default this value is IOUSBHostDefaultControlCompletionTimeout. @return     YES on success, an IOReturn error code will be reported on failure.
+//
 // SendDeviceRequestDataBytesTransferredCompletionTimeoutError calls the underlying SendDeviceRequestDataBytesTransferredCompletionTimeoutError.
 func (x *HostObject) SendDeviceRequestDataBytesTransferredCompletionTimeoutError(request unsafe.Pointer, data *foundation.NSMutableData, bytesTransferred *uint, completionTimeout float64) (bool, error) {
 	return x.inner.SendDeviceRequestDataBytesTransferredCompletionTimeoutError(request, data, bytesTransferred, completionTimeout)
 }
 
+// @brief      Send a request on the default control endpoint @discussion This method will send a synchronous request on the default control endpoint, and will not return until the request is complete. @param      request IOUSBDeviceRequest structure. @param      data An NSMutableData* defining the memory to use for the request's data phase. @param      bytesTransferred Optional NSUInteger reference which will be updated with the byte count of the completed data phase. @return     YES on success, an IOReturn error code will be reported on failure.
+//
 // SendDeviceRequestDataBytesTransferredError calls the underlying SendDeviceRequestDataBytesTransferredError.
 func (x *HostObject) SendDeviceRequestDataBytesTransferredError(request unsafe.Pointer, data *foundation.NSMutableData, bytesTransferred *uint) (bool, error) {
 	return x.inner.SendDeviceRequestDataBytesTransferredError(request, data, bytesTransferred)
 }
 
+// @brief      Send a request on the default control endpoint @discussion This method will send a synchronous request on the default control endpoint, and will not return until the request is complete. @param      request IOUSBDeviceRequest structure. @return     YES on success, an IOReturn error code will be reported on failure.
+//
 // SendDeviceRequestError calls the underlying SendDeviceRequestError.
 func (x *HostObject) SendDeviceRequestError(request unsafe.Pointer) (bool, error) {
 	return x.inner.SendDeviceRequestError(request)
 }
 
+// @brief      Enqueue a request on the default control endpoint @discussion This method will enqueue an asynchronous request on the default control endpoint. If successful, the provided completionHandler will be called to report the status of the completed IO. @param      data An NSMutableData* defining the memory to use for the request's data phase. @param      completionTimeout Timeout of the request. If 0, the request will never timeout. By default this value is IOUSBHostDefaultControlCompletionTimeout @param      completionHandler an IOUSBHostCompletionHandler @return     YES on success, an IOReturn error code will be reported on failure
+//
 // EnqueueDeviceRequestDataCompletionTimeoutErrorCompletionHandler calls the underlying EnqueueDeviceRequestDataCompletionTimeoutErrorCompletionHandler.
 func (x *HostObject) EnqueueDeviceRequestDataCompletionTimeoutErrorCompletionHandler(request unsafe.Pointer, data *foundation.NSMutableData, completionTimeout float64, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
 	return x.inner.EnqueueDeviceRequestDataCompletionTimeoutErrorCompletionHandler(request, data, completionTimeout, error_, completionHandler)
 }
 
+// @brief      Enqueue a request on the default control endpoint @discussion This method will enqueue an asynchronous request on the default control endpoint. If successful, the provided completionHandler will be called to report the status of the completed IO. @param      data An NSMutableData* defining the memory to use for the request's data phase. @param      completionHandler an IOUSBHostCompletionHandler @return     YES on success, an IOReturn error code will be reported on failure
+//
 // EnqueueDeviceRequestDataErrorCompletionHandler calls the underlying EnqueueDeviceRequestDataErrorCompletionHandler.
 func (x *HostObject) EnqueueDeviceRequestDataErrorCompletionHandler(request unsafe.Pointer, data *foundation.NSMutableData, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
 	return x.inner.EnqueueDeviceRequestDataErrorCompletionHandler(request, data, error_, completionHandler)
 }
 
+// @brief      Enqueue a request on the default control endpoint @discussion This method will enqueue an asynchronous request on the default control endpoint. If successful, the provided completionHandler will be called to report the status of the completed IO. default this value is IOUSBHostDefaultControlCompletionTimeout @param      completionHandler an IOUSBHostCompletionHandler @return     YES on success, an IOReturn error code will be reported on failure
+//
 // EnqueueDeviceRequestErrorCompletionHandler calls the underlying EnqueueDeviceRequestErrorCompletionHandler.
 func (x *HostObject) EnqueueDeviceRequestErrorCompletionHandler(request unsafe.Pointer, error_ unsafe.Pointer, completionHandler func(int, uint)) bool {
 	return x.inner.EnqueueDeviceRequestErrorCompletionHandler(request, error_, completionHandler)
 }
 
+// @brief      Abort device requests @discussion This method will abort any requests made via the @link sendDeviceRequest @/link and @link enqueueDeviceRequest @/link methods. @param      option IOUSBHostAbortOption by default IOUSBHostAbortOptionSynchronous is used @return     YES on success, an IOReturn error code will be reported on failure
+//
 // AbortDeviceRequestsWithOptionError calls the underlying AbortDeviceRequestsWithOptionError.
 func (x *HostObject) AbortDeviceRequestsWithOptionError(option IOUSBHostAbortOption) (bool, error) {
 	return x.inner.AbortDeviceRequestsWithOptionError(raw.IOUSBHostAbortOption(option))
 }
 
+// @brief      Abort device requests @discussion This method will abort any requests made via the @link sendDeviceRequest @/link and @link enqueueDeviceRequest @/link methods. @return     YES on success, an IOReturn error code will be reported on failure
+//
 // AbortDeviceRequests returns any validation error.
 func (x *HostObject) AbortDeviceRequests() error {
 	_, err := x.inner.AbortDeviceRequestsWithError()
 	return err
 }
 
+// @brief       Retrieve a descriptor from the cache or the device @discussion  This method will search the descriptor cache for the descriptor that matches the input arguments.  If the descriptor is not in the cache, a GET_DESCRIPTOR control request (USB 2.0 9.4.3) will be issued to retrieve the descriptor from the device. If the device request is successful, the retrieved descriptor will be added to the cache. @param       type <code>bDescriptorType</code> of the descriptor to find. @param       length Reference to a NSUInteger which will be updated with the length of the descriptor. As input, used as <code>wLength</code> when fetching variable-length configuration or BOS descriptors, or when fetching nonstandard descriptor types. @param       index Descriptor index value.  Low byte of <code>wValue</code> of the SET_DESCRIPTOR control request (USB 2.0 9.4.8). By default the value is 0 @param       languageID Descriptor language ID.  <code>wIndex</code> of the SET_DESCRIPTOR control request (USB 2.0 9.4.8).  By default the value is 0 @param       requestType tDeviceRequestType to be used for a GET_DESCRIPTOR control request. By default the value is IOUSBRequestTypeStandard @param       requestRecipient tDeviceRequestRecipient to be used for a GET_DESCRIPTOR control request. By default the value is IOUSBRequestRecipientDevice @return      Pointer to the cached descriptor if found, otherwise nil. An IOReturn error code will be reported on failure.
+//
 // DescriptorWithTypeLengthIndexLanguageIDRequestTypeRequestRecipientError calls the underlying DescriptorWithTypeLengthIndexLanguageIDRequestTypeRequestRecipientError.
 func (x *HostObject) DescriptorWithTypeLengthIndexLanguageIDRequestTypeRequestRecipientError(type_ unsafe.Pointer, length *uint, index uint, languageID uint, requestType unsafe.Pointer, requestRecipient unsafe.Pointer) (unsafe.Pointer, error) {
 	return x.inner.DescriptorWithTypeLengthIndexLanguageIDRequestTypeRequestRecipientError(type_, length, index, languageID, requestType, requestRecipient)
 }
 
+// @brief       Retrieve a descriptor from the cache or the device @discussion  This method will search the descriptor cache for the descriptor that matches the input arguments.  If the descriptor is not in the cache, a GET_DESCRIPTOR control request (USB 2.0 9.4.3) will be issued to retrieve the descriptor from the device. If the device request is successful, the retrieved descriptor will be added to the cache. @param       type <code>bDescriptorType</code> of the descriptor to find. @param       length Reference to a NSUInteger which will be updated with the length of the descriptor. As input, used as <code>wLength</code> when fetching variable-length configuration or BOS descriptors, or when fetching nonstandard descriptor types. @param       index Descriptor index value.  Low byte of <code>wValue</code> of the SET_DESCRIPTOR control request (USB 2.0 9.4.8). By default the value is 0 @param       languageID Descriptor language ID.  <code>wIndex</code> of the SET_DESCRIPTOR control request (USB 2.0 9.4.8).  By default the value is 0 @return      Pointer to the cached descriptor if found, otherwise nil. An IOReturn error code will be reported on failure.
+//
 // DescriptorWithTypeLengthIndexLanguageIDError calls the underlying DescriptorWithTypeLengthIndexLanguageIDError.
 func (x *HostObject) DescriptorWithTypeLengthIndexLanguageIDError(type_ unsafe.Pointer, length *uint, index uint, languageID uint) (unsafe.Pointer, error) {
 	return x.inner.DescriptorWithTypeLengthIndexLanguageIDError(type_, length, index, languageID)
 }
 
+// @brief       Retrieve a descriptor from the cache or the device @discussion  This method will search the descriptor cache for the descriptor that matches the input arguments.  If the descriptor is not in the cache, a GET_DESCRIPTOR control request (USB 2.0 9.4.3) will be issued to retrieve the descriptor from the device. If the device request is successful, the retrieved descriptor will be added to the cache. @param       type <code>bDescriptorType</code> of the descriptor to find. @param       length Reference to a NSUInteger which will be updated with the length of the descriptor. As input, used as <code>wLength</code> when fetching variable-length configuration or BOS descriptors, or when fetching nonstandard descriptor types. By default the value is 0 @return      Pointer to the cached descriptor if found, otherwise nil. An IOReturn error code will be reported on failure.
+//
 // DescriptorWithTypeLengthError calls the underlying DescriptorWithTypeLengthError.
 func (x *HostObject) DescriptorWithTypeLengthError(type_ unsafe.Pointer, length *uint) (unsafe.Pointer, error) {
 	return x.inner.DescriptorWithTypeLengthError(type_, length)
 }
 
+// @brief       Return the configuration descriptor at a specified index @discussion  This method uses descriptorWithType to retrieve the configuration descriptor. @param       index Descriptor index value @return      Pointer of the configuration descriptor if found, otherwise nil. An IOReturn error code will be reported on failure.
+//
 // ConfigurationDescriptorWithIndexError calls the underlying ConfigurationDescriptorWithIndexError.
 func (x *HostObject) ConfigurationDescriptorWithIndexError(index uint) (unsafe.Pointer, error) {
 	return x.inner.ConfigurationDescriptorWithIndexError(index)
 }
 
+// @brief       Return the configuration descriptor with a specified value @discussion  This method uses descriptorWithType to search for a configuration descriptor with a specific <code>bConfigurationValue</code> field. @param       configurationValue Value to match @return      Pointer of the configuration descriptor if found, otherwise nil. An IOReturn error code will be reported on failure.
+//
 // ConfigurationDescriptorWithConfigurationValueError calls the underlying ConfigurationDescriptorWithConfigurationValueError.
 func (x *HostObject) ConfigurationDescriptorWithConfigurationValueError(configurationValue uint) (unsafe.Pointer, error) {
 	return x.inner.ConfigurationDescriptorWithConfigurationValueError(configurationValue)
 }
 
+// @brief       Returns the string from a string descriptor @discussion  This method uses descriptorWithType to retrieve the string descriptor. @param       index Descriptor index value.  Low byte of <code>wValue</code> of the SET_DESCRIPTOR control request (USB 2.0 9.4.8). @param       languageID Descriptor language ID.  <code>wIndex</code> of the SET_DESCRIPTOR control request (USB 2.0 9.4.8). By default this value is kLanguageIDEnglishUS @return      NSString reference to string from descriptor, an IOReturn error code will be reported on failure.
+//
 // StringWithIndexLanguageIDError calls the underlying StringWithIndexLanguageIDError.
 func (x *HostObject) StringWithIndexLanguageIDError(index uint, languageID uint) (string, error) {
 	_r, _err := x.inner.StringWithIndexLanguageIDError(index, languageID)
@@ -134,6 +172,8 @@ func (x *HostObject) StringWithIndexLanguageIDError(index uint, languageID uint)
 	return purego.GoString(_r.Ptr()), nil
 }
 
+// @brief       Returns the string from a string descriptor @discussion  This method uses descriptorWithType to retrieve the string descriptor. @param       index Descriptor index value.  Low byte of <code>wValue</code> of the SET_DESCRIPTOR control request (USB 2.0 9.4.8). @return      NSString reference to string from descriptor, an IOReturn error code will be reported on failure.
+//
 // StringWithIndexError calls the underlying StringWithIndexError.
 func (x *HostObject) StringWithIndexError(index uint) (string, error) {
 	_r, _err := x.inner.StringWithIndexError(index)
@@ -146,46 +186,64 @@ func (x *HostObject) StringWithIndexError(index uint) (string, error) {
 	return purego.GoString(_r.Ptr()), nil
 }
 
+// @brief       Return the current frame number of the USB controller @discussion  This method will return the current frame number of the USB controller, omitting micro frame.  This is most useful for scheduling future isochronous requests. @param       time If not nil, this will be updated with the current system time @return      The current frame number
+//
 // FrameNumberWithTime calls the underlying FrameNumberWithTime.
 func (x *HostObject) FrameNumberWithTime(time_ *uint64) uint64 {
 	return x.inner.FrameNumberWithTime(time_)
 }
 
+// @brief       Return the current microframe number of the USB controller @discussion  This method will return the current microframe number of the USB controller. This is most useful for scheduling future isochronous requests. @param       time If not nil, this will be updated with system time associated with the microframe. @return      The current microframe number. Returns 0 on failure, with NSError populated with the IOReturn error code.
+//
 // CurrentMicroframeWithTimeError calls the underlying CurrentMicroframeWithTimeError.
 func (x *HostObject) CurrentMicroframeWithTimeError(time_ *uint64) (uint64, error) {
 	return x.inner.CurrentMicroframeWithTimeError(time_)
 }
 
+// @brief       Return a recent microframe number of the USB controller @discussion  This method will return a recent microframe number of the USB controller. This is most useful for scheduling future isochronous requests. @param       time If not nil, this will be updated with system time associated with the microframe. @return      A recent microframe number. Returns 0 on failure, with NSError populated with the IOReturn error code.
+//
 // ReferenceMicroframeWithTimeError calls the underlying ReferenceMicroframeWithTimeError.
 func (x *HostObject) ReferenceMicroframeWithTimeError(time_ *uint64) (uint64, error) {
 	return x.inner.ReferenceMicroframeWithTimeError(time_)
 }
 
+// @brief       Allocate a buffer to be used for I/O @discussion  This method will allocate and map an IOBufferMemoryDescriptor optimized for use by the underlying controller hardware. A buffer allocated by this method will not be bounced to perform DMA operations. Because the NSMutableData is backed by kernel memory, the length and capacity are not mutable. Any changes to the length or capacity will cause an exception to be thrown. @param       capacity Size of the buffer to allocate @return      NSMutableData of memory mapped to user space of an IOBufferMemoryDescriptor if successful, otherwise nil. An IOReturn error code will be reported on failure. The result is to be released by the caller
+//
 // IoDataWithCapacityError calls the underlying IoDataWithCapacityError.
 func (x *HostObject) IoDataWithCapacityError(capacity uint) (*foundation.NSMutableData, error) {
 	return x.inner.IoDataWithCapacityError(capacity)
 }
 
+// @brief   Retrieve the IOUSBHostObject's io_service_t.
+//
 // IoService calls the underlying IoService.
 func (x *HostObject) IoService() uint {
 	return x.inner.IoService()
 }
 
+// @brief      The dispatch queue that all asynchronous io will be serviced.
+//
 // Queue calls the underlying Queue.
 func (x *HostObject) Queue() *foundation.NSObject {
 	return x.inner.Queue()
 }
 
+// @brief       Return the device descriptor @discussion  This method uses descriptorWithType to retrieve the device descriptor. @return      Pointer to the device descriptor.
+//
 // DeviceDescriptor calls the underlying DeviceDescriptor.
 func (x *HostObject) DeviceDescriptor() unsafe.Pointer {
 	return x.inner.DeviceDescriptor()
 }
 
+// @brief       Return the capability descriptors of the device @discussion  This method uses descriptorWithType to return the device's BOS descriptors @return      Pointer to the BOS descriptor if found, otherwise nil.
+//
 // CapabilityDescriptors calls the underlying CapabilityDescriptors.
 func (x *HostObject) CapabilityDescriptors() unsafe.Pointer {
 	return x.inner.CapabilityDescriptors()
 }
 
+// @brief   Retrieve the current address of the device.
+//
 // DeviceAddress calls the underlying DeviceAddress.
 func (x *HostObject) DeviceAddress() uint {
 	return x.inner.DeviceAddress()

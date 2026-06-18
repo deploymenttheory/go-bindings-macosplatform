@@ -35,24 +35,32 @@ func NewConstraint() *Constraint {
 	return &Constraint{inner: raw.SCNConstraintFromID(_id)}
 }
 
+// @property enable @abstract Determines whether the constraint is enabled or not. Defaults to YES.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *Constraint) WithEnabled(enabled bool) *Constraint {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// @property influenceFactor @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
+//
 // WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
 func (x *Constraint) WithInfluenceFactor(influenceFactor float64) *Constraint {
 	x.inner.SetInfluenceFactor(influenceFactor)
 	return x
 }
 
+// @property incremental @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+//
 // WithIncremental sets the incremental property and returns the receiver for chaining.
 func (x *Constraint) WithIncremental(incremental bool) *Constraint {
 	x.inner.SetIncremental(incremental)
 	return x
 }
 
+// @property enable @abstract Determines whether the constraint is enabled or not. Defaults to YES.
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *Constraint) IsEnabled() bool {
 	return x.inner.IsEnabled()
@@ -63,6 +71,8 @@ func (x *Constraint) SetEnabled(enabled bool) {
 	x.inner.SetEnabled(enabled)
 }
 
+// @property influenceFactor @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
+//
 // InfluenceFactor calls the underlying InfluenceFactor.
 func (x *Constraint) InfluenceFactor() float64 {
 	return x.inner.InfluenceFactor()
@@ -73,6 +83,8 @@ func (x *Constraint) SetInfluenceFactor(influenceFactor float64) {
 	x.inner.SetInfluenceFactor(influenceFactor)
 }
 
+// @property incremental @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+//
 // IsIncremental calls the underlying IsIncremental.
 func (x *Constraint) IsIncremental() bool {
 	return x.inner.IsIncremental()

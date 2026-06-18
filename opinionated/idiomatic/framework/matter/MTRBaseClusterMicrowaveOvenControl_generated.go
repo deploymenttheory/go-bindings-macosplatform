@@ -35,6 +35,8 @@ func MTRBaseClusterMicrowaveOvenControlFromID(id objc.ID) *MTRBaseClusterMicrowa
 	return &MTRBaseClusterMicrowaveOvenControl{inner: raw.MTRBaseClusterMicrowaveOvenControlFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterMicrowaveOvenControlWithDeviceEndpointIDQueue creates a new [MTRBaseClusterMicrowaveOvenControl].
 func NewMTRBaseClusterMicrowaveOvenControlWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterMicrowaveOvenControl {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterMicrowaveOvenControl")), objc.RegisterName("alloc"))
@@ -42,6 +44,8 @@ func NewMTRBaseClusterMicrowaveOvenControlWithDeviceEndpointIDQueue(device *raw.
 	return &MTRBaseClusterMicrowaveOvenControl{inner: raw.MTRBaseClusterMicrowaveOvenControlFromID(_id)}
 }
 
+// Command SetCookingParameters This command is used to set the cooking parameters associated with the operation of the device.
+//
 // SetCookingParametersWithParamsCompletion calls the underlying SetCookingParametersWithParamsCompletion.
 func (x *MTRBaseClusterMicrowaveOvenControl) SetCookingParametersWithParamsCompletion(params *raw.MTRMicrowaveOvenControlClusterSetCookingParametersParams, completion func(unsafe.Pointer)) {
 	x.inner.SetCookingParametersWithParamsCompletion(params, completion)
@@ -52,6 +56,8 @@ func (x *MTRBaseClusterMicrowaveOvenControl) SetCookingParametersWithCompletion(
 	x.inner.SetCookingParametersWithCompletion(completion)
 }
 
+// Command AddMoreTime This command is used to add more time to the CookTime attribute of the server.
+//
 // AddMoreTimeWithParamsCompletion calls the underlying AddMoreTimeWithParamsCompletion.
 func (x *MTRBaseClusterMicrowaveOvenControl) AddMoreTimeWithParamsCompletion(params *raw.MTRMicrowaveOvenControlClusterAddMoreTimeParams, completion func(unsafe.Pointer)) {
 	x.inner.AddMoreTimeWithParamsCompletion(params, completion)

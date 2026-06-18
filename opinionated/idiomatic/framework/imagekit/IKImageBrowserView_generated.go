@@ -33,6 +33,8 @@ func ImageBrowserViewFromID(id objc.ID) *ImageBrowserView {
 	return &ImageBrowserView{inner: raw.IKImageBrowserViewFromID(id)}
 }
 
+// @method initWithFrame: @abstract Initializes and returns a newly allocated IKImageBrowserView object with a specified frame rectangle. @param frame The frame rectangle for the created view object.
+//
 // NewImageBrowserViewWithFrame creates a new [ImageBrowserView].
 func NewImageBrowserViewWithFrame(frame corefoundation.CGRect) *ImageBrowserView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IKImageBrowserView")), objc.RegisterName("alloc"))
@@ -40,23 +42,31 @@ func NewImageBrowserViewWithFrame(frame corefoundation.CGRect) *ImageBrowserView
 	return &ImageBrowserView{inner: raw.IKImageBrowserViewFromID(_id)}
 }
 
+// @property datasource @abstract The receiver's data source. the data source is not retained by the receiver.
+//
 // WithDataSource sets the dataSource property and returns the receiver for chaining.
 func (x *ImageBrowserView) WithDataSource(dataSource objc.ID) *ImageBrowserView {
 	x.inner.SetDataSource(dataSource)
 	return x
 }
 
+// @property delegate @abstract The receiver's delegate. aDelegate is expected to implement the IKImageBrowserDelegate informal protocol.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *ImageBrowserView) WithDelegate(delegate objc.ID) *ImageBrowserView {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @method reloadData @abstract Marks the receiver as needing redisplay, so it will reload the data and draw the new values.
+//
 // ReloadData calls the underlying ReloadData.
 func (x *ImageBrowserView) ReloadData() {
 	x.inner.ReloadData()
 }
 
+// @property datasource @abstract The receiver's data source. the data source is not retained by the receiver.
+//
 // DataSource calls the underlying DataSource.
 func (x *ImageBrowserView) DataSource() objc.ID {
 	return x.inner.DataSource()
@@ -67,6 +77,8 @@ func (x *ImageBrowserView) SetDataSource(dataSource objc.ID) {
 	x.inner.SetDataSource(dataSource)
 }
 
+// @property delegate @abstract The receiver's delegate. aDelegate is expected to implement the IKImageBrowserDelegate informal protocol.
+//
 // Delegate calls the underlying Delegate.
 func (x *ImageBrowserView) Delegate() objc.ID {
 	return x.inner.Delegate()
@@ -77,46 +89,64 @@ func (x *ImageBrowserView) SetDelegate(delegate objc.ID) {
 	x.inner.SetDelegate(delegate)
 }
 
+// @method setCellsStyleMask: @abstract Defines the cells appearance style. @param mask An integer bit mask; see the discussion below. @discussion mask can be specified by combining any of the options below using the C bitwise OR operator
+//
 // SetCellsStyleMask calls the underlying SetCellsStyleMask.
 func (x *ImageBrowserView) SetCellsStyleMask(mask uint) {
 	x.inner.SetCellsStyleMask(mask)
 }
 
+// @method cellsStyleMask @abstract Return the cells appearance style mask.
+//
 // CellsStyleMask calls the underlying CellsStyleMask.
 func (x *ImageBrowserView) CellsStyleMask() uint {
 	return x.inner.CellsStyleMask()
 }
 
+// @method setConstrainsToOriginalSize: @abstract Sets whether the receiver constraints the cells's image to their original size. Default is NO.
+//
 // SetConstrainsToOriginalSize calls the underlying SetConstrainsToOriginalSize.
 func (x *ImageBrowserView) SetConstrainsToOriginalSize(flag bool) {
 	x.inner.SetConstrainsToOriginalSize(flag)
 }
 
+// @method constrainsToOriginalSize @abstract Returns whether the receiver constraints the cells's image to their original size.
+//
 // ConstrainsToOriginalSize calls the underlying ConstrainsToOriginalSize.
 func (x *ImageBrowserView) ConstrainsToOriginalSize() bool {
 	return x.inner.ConstrainsToOriginalSize()
 }
 
+// @method setBackgroundLayer: @abstract Specifies the receiver�s background layer.
+//
 // SetBackgroundLayer calls the underlying SetBackgroundLayer.
 func (x *ImageBrowserView) SetBackgroundLayer(aLayer *quartzcore.CALayer) {
 	x.inner.SetBackgroundLayer(aLayer)
 }
 
+// @method backgroundLayer @abstract Provides the receiver�s background layer.
+//
 // BackgroundLayer calls the underlying BackgroundLayer.
 func (x *ImageBrowserView) BackgroundLayer() *quartzcore.CALayer {
 	return x.inner.BackgroundLayer()
 }
 
+// @method setForegroundLayer: @abstract Specifies the receiver�s foreground layer.
+//
 // SetForegroundLayer calls the underlying SetForegroundLayer.
 func (x *ImageBrowserView) SetForegroundLayer(aLayer *quartzcore.CALayer) {
 	x.inner.SetForegroundLayer(aLayer)
 }
 
+// @method foregroundLayer @abstract Provides the receiver�s foreground layer.
+//
 // ForegroundLayer calls the underlying ForegroundLayer.
 func (x *ImageBrowserView) ForegroundLayer() *quartzcore.CALayer {
 	return x.inner.ForegroundLayer()
 }
 
+// @method newCellForRepresentedItem: @abstract Returns the cell to use for the specified item. The returned cell should not be autoreleased. @param The item that the returned cell will represent. @discussion Subclasses can override this method to customize the appearance of the cell that will represent "anItem".
+//
 // NewCellForRepresentedItem calls the underlying NewCellForRepresentedItem.
 func (x *ImageBrowserView) NewCellForRepresentedItem(anItem objc.ID) *ImageBrowserCell {
 	_r := x.inner.NewCellForRepresentedItem(anItem)
@@ -126,6 +156,8 @@ func (x *ImageBrowserView) NewCellForRepresentedItem(anItem objc.ID) *ImageBrows
 	return &ImageBrowserCell{inner: _r}
 }
 
+// @method cellForItemAtIndex: @abstract Returns the cell at the specified index. @discussion Subclasses must not override this method.
+//
 // CellForItemAtIndex calls the underlying CellForItemAtIndex.
 func (x *ImageBrowserView) CellForItemAtIndex(index uint) *ImageBrowserCell {
 	_r := x.inner.CellForItemAtIndex(index)
@@ -135,181 +167,253 @@ func (x *ImageBrowserView) CellForItemAtIndex(index uint) *ImageBrowserCell {
 	return &ImageBrowserCell{inner: _r}
 }
 
+// @method setZoomValue: @abstract Sets the zoom value to <i>aValue</i>. @discussion This value should be greater or equal to zero and less or equal than one. A zoom value of zero corresponds to the minimum size (40x40 pixels), A zoom value of one means images fit the browser bounds. Other values are interpolated.
+//
 // SetZoomValue calls the underlying SetZoomValue.
 func (x *ImageBrowserView) SetZoomValue(aValue float32) {
 	x.inner.SetZoomValue(aValue)
 }
 
+// @method zoomValue @abstract Returns the current zoom value.
+//
 // ZoomValue calls the underlying ZoomValue.
 func (x *ImageBrowserView) ZoomValue() float32 {
 	return x.inner.ZoomValue()
 }
 
+// @method setContentResizingMask @abtract Determines how the receiver resize its content when zooming. @discussion mask can be specified by combining any of the following options using the C bitwise OR operator:NSViewWidthSizable NSViewHeightSizable, other values are ignored.
+//
 // SetContentResizingMask calls the underlying SetContentResizingMask.
 func (x *ImageBrowserView) SetContentResizingMask(mask uint) {
 	x.inner.SetContentResizingMask(mask)
 }
 
+// @method setContentResizingMask @abtract Returns the receiver�s content resizing mask, which determines how it�s content is resized while zooming.
+//
 // ContentResizingMask calls the underlying ContentResizingMask.
 func (x *ImageBrowserView) ContentResizingMask() uint {
 	return x.inner.ContentResizingMask()
 }
 
+// @method scrollIndexToVisible: @abstract Scrolls the receiver so the item at the specified index is visible.
+//
 // ScrollIndexToVisible calls the underlying ScrollIndexToVisible.
 func (x *ImageBrowserView) ScrollIndexToVisible(index int) {
 	x.inner.ScrollIndexToVisible(index)
 }
 
+// @method setCellSize: @abstract sets the size of the cells to size
+//
 // SetCellSize calls the underlying SetCellSize.
 func (x *ImageBrowserView) SetCellSize(size corefoundation.CGSize) {
 	x.inner.SetCellSize(size)
 }
 
+// @method setCellSize: @abstract Returns the size of the cells
+//
 // CellSize calls the underlying CellSize.
 func (x *ImageBrowserView) CellSize() corefoundation.CGSize {
 	return x.inner.CellSize()
 }
 
+// @method intercellSpacing @abstract Returns the spacing between cells in the image browser.
+//
 // IntercellSpacing calls the underlying IntercellSpacing.
 func (x *ImageBrowserView) IntercellSpacing() corefoundation.CGSize {
 	return x.inner.IntercellSpacing()
 }
 
+// @method setIntercellSpacing: @abstract Sets the spacing between cells in the matrix. @param aSize The vertical and horizontal spacing to use between cells in the receiver. By default, both values are 10.0 in the receiver�s coordinate system.
+//
 // SetIntercellSpacing calls the underlying SetIntercellSpacing.
 func (x *ImageBrowserView) SetIntercellSpacing(aSize corefoundation.CGSize) {
 	x.inner.SetIntercellSpacing(aSize)
 }
 
+// @method indexOfItemAtPoint: @abstract Returns the item at the specified location or NSNotFound if no item at this location.
+//
 // IndexOfItemAtPoint calls the underlying IndexOfItemAtPoint.
 func (x *ImageBrowserView) IndexOfItemAtPoint(point corefoundation.CGPoint) int {
 	return x.inner.IndexOfItemAtPoint(point)
 }
 
+// @method itemFrameAtIndex: @abstract Returns the frame rectangle of the item that would be drawn at the specified location.
+//
 // ItemFrameAtIndex calls the underlying ItemFrameAtIndex.
 func (x *ImageBrowserView) ItemFrameAtIndex(index int) corefoundation.CGRect {
 	return x.inner.ItemFrameAtIndex(index)
 }
 
+// @method visibleItemIndexes @abstract Returns indexes of the receiver�s currently visible items.
+//
 // VisibleItemIndexes calls the underlying VisibleItemIndexes.
 func (x *ImageBrowserView) VisibleItemIndexes() *foundation.NSIndexSet {
 	return x.inner.VisibleItemIndexes()
 }
 
+// @method rowIndexesInRect: @abstract Returns the indexes of the receiver�s rows that intersect the specified rectangle.
+//
 // RowIndexesInRect calls the underlying RowIndexesInRect.
 func (x *ImageBrowserView) RowIndexesInRect(rect corefoundation.CGRect) *foundation.NSIndexSet {
 	return x.inner.RowIndexesInRect(rect)
 }
 
+// @method columnIndexesInRect: @abstract Returns the indexes of the receiver�s columns that intersect the specified rectangle.
+//
 // ColumnIndexesInRect calls the underlying ColumnIndexesInRect.
 func (x *ImageBrowserView) ColumnIndexesInRect(rect corefoundation.CGRect) *foundation.NSIndexSet {
 	return x.inner.ColumnIndexesInRect(rect)
 }
 
+// @method rectOfColumn: @abstract Returns the rectangle containing the column at a given index. @param columnIndex The index of a column in the receiver.
+//
 // RectOfColumn calls the underlying RectOfColumn.
 func (x *ImageBrowserView) RectOfColumn(columnIndex uint) corefoundation.CGRect {
 	return x.inner.RectOfColumn(columnIndex)
 }
 
+// @method rectOfRow: @abstract Returns the rectangle containing the row at a given index. @param rowIndex The index of a row in the receiver.
+//
 // RectOfRow calls the underlying RectOfRow.
 func (x *ImageBrowserView) RectOfRow(rowIndex uint) corefoundation.CGRect {
 	return x.inner.RectOfRow(rowIndex)
 }
 
+// @method numberOfRows @abstract Returns the number of rows in the receiver.
+//
 // NumberOfRows calls the underlying NumberOfRows.
 func (x *ImageBrowserView) NumberOfRows() uint {
 	return x.inner.NumberOfRows()
 }
 
+// @method numberOfColumns @abstract Returns the number of columns in the receiver.
+//
 // NumberOfColumns calls the underlying NumberOfColumns.
 func (x *ImageBrowserView) NumberOfColumns() uint {
 	return x.inner.NumberOfColumns()
 }
 
+// @method setCanControlQuickLookPanel: @abstract Sets whether the receiver can automatically take control of the Quick Look panel. @param flag if YES, KImageBrowser can take control of the Quick Look panel automatically whenever it becomes first responder. This means that it provides the spacebar key store to open/close Quick Look panel and sets itself as the panel's datasource and delegate. @discussion default value is NO. IKImageBrowserView's datasource items should provide file paths or URLs as their representation (see IKImageBrowserItem protocol).
+//
 // SetCanControlQuickLookPanel calls the underlying SetCanControlQuickLookPanel.
 func (x *ImageBrowserView) SetCanControlQuickLookPanel(flag bool) {
 	x.inner.SetCanControlQuickLookPanel(flag)
 }
 
+// @method canControlQuickLookPanel @abstract Returns a Boolean value that indicates whether the receiver can automatically take control of the Quick Look panel.
+//
 // CanControlQuickLookPanel calls the underlying CanControlQuickLookPanel.
 func (x *ImageBrowserView) CanControlQuickLookPanel() bool {
 	return x.inner.CanControlQuickLookPanel()
 }
 
+// @method selectionIndexes @abstract Returns the indexes of the selected cells
+//
 // SelectionIndexes calls the underlying SelectionIndexes.
 func (x *ImageBrowserView) SelectionIndexes() *foundation.NSIndexSet {
 	return x.inner.SelectionIndexes()
 }
 
+// @method setSelectionIndexes:byExtendingSelection: @abstract Selects cells at indexes <i>indexes</i>. If <i>extendSelection</i> is YES it extends the current selection, otherwise it replaces the current selection.
+//
 // SetSelectionIndexesByExtendingSelection calls the underlying SetSelectionIndexesByExtendingSelection.
 func (x *ImageBrowserView) SetSelectionIndexesByExtendingSelection(indexes *foundation.NSIndexSet, extendSelection bool) {
 	x.inner.SetSelectionIndexesByExtendingSelection(indexes, extendSelection)
 }
 
+// @method setAllowsMultipleSelection: @abstract Controls whether the user can select more than one cell at a time.
+//
 // SetAllowsMultipleSelection calls the underlying SetAllowsMultipleSelection.
 func (x *ImageBrowserView) SetAllowsMultipleSelection(flag bool) {
 	x.inner.SetAllowsMultipleSelection(flag)
 }
 
+// @method allowsMultipleSelection @abstract Returns YES if the receiver allows the user to select more than one cell at a time, NO otherwise.
+//
 // AllowsMultipleSelection calls the underlying AllowsMultipleSelection.
 func (x *ImageBrowserView) AllowsMultipleSelection() bool {
 	return x.inner.AllowsMultipleSelection()
 }
 
+// @method setAllowsMultipleSelection: @abstract Controls whether the receiver allows zero cell to be selected.
+//
 // SetAllowsEmptySelection calls the underlying SetAllowsEmptySelection.
 func (x *ImageBrowserView) SetAllowsEmptySelection(flag bool) {
 	x.inner.SetAllowsEmptySelection(flag)
 }
 
+// @method setAllowsEmptySelection @abstract Returns YES if the receiver allows the user to select zero cell, NO otherwise.
+//
 // AllowsEmptySelection calls the underlying AllowsEmptySelection.
 func (x *ImageBrowserView) AllowsEmptySelection() bool {
 	return x.inner.AllowsEmptySelection()
 }
 
+// @method setAllowsReordering: @abstract Controls whether the user can reorder items.
+//
 // SetAllowsReordering calls the underlying SetAllowsReordering.
 func (x *ImageBrowserView) SetAllowsReordering(flag bool) {
 	x.inner.SetAllowsReordering(flag)
 }
 
+// @method allowsReordering @abstract Returns YES if the receiver allows the user to reorder items, NO otherwise.
+//
 // AllowsReordering calls the underlying AllowsReordering.
 func (x *ImageBrowserView) AllowsReordering() bool {
 	return x.inner.AllowsReordering()
 }
 
+// @method setAnimates: @abstract Controls whether the receiver animate reordering and changes of the data source.
+//
 // SetAnimates calls the underlying SetAnimates.
 func (x *ImageBrowserView) SetAnimates(flag bool) {
 	x.inner.SetAnimates(flag)
 }
 
+// @method animates @abstract Returns YES if the receiver animate changes of the data source, NO otherwise.
+//
 // Animates calls the underlying Animates.
 func (x *ImageBrowserView) Animates() bool {
 	return x.inner.Animates()
 }
 
+// @method expandGroupAtIndex: @abstract Expands group at index 'index' if it is not already expanded; otherwise, does nothing.
+//
 // ExpandGroupAtIndex calls the underlying ExpandGroupAtIndex.
 func (x *ImageBrowserView) ExpandGroupAtIndex(index uint) {
 	x.inner.ExpandGroupAtIndex(index)
 }
 
+// @method collapseGroupAtIndex: @abstract Collapse group at index 'index' if it is expanded; otherwise, does nothing.
+//
 // CollapseGroupAtIndex calls the underlying CollapseGroupAtIndex.
 func (x *ImageBrowserView) CollapseGroupAtIndex(index uint) {
 	x.inner.CollapseGroupAtIndex(index)
 }
 
+// @method isGroupExpandedAtIndex: @abstract Returns YES if the group at index 'index' is expanded.
+//
 // IsGroupExpandedAtIndex calls the underlying IsGroupExpandedAtIndex.
 func (x *ImageBrowserView) IsGroupExpandedAtIndex(index uint) bool {
 	return x.inner.IsGroupExpandedAtIndex(index)
 }
 
+// @method setDraggingDestinationDelegate: @abstract Sets the receiver's dragging destination delegate to <i>delegate</i>.
+//
 // SetDraggingDestinationDelegate calls the underlying SetDraggingDestinationDelegate.
 func (x *ImageBrowserView) SetDraggingDestinationDelegate(delegate objc.ID) {
 	x.inner.SetDraggingDestinationDelegate(delegate)
 }
 
+// @method draggingDestinationDelegate @abstract Returns the receiver's dragging destination delegate.
+//
 // DraggingDestinationDelegate calls the underlying DraggingDestinationDelegate.
 func (x *ImageBrowserView) DraggingDestinationDelegate() objc.ID {
 	return x.inner.DraggingDestinationDelegate()
 }
 
+// @method indexAtLocationOfDroppedItem @abstract Returns the index of the cell where the drop operation occured. This index is valid when a drop occurred and until next drop.
+//
 // IndexAtLocationOfDroppedItem calls the underlying IndexAtLocationOfDroppedItem.
 func (x *ImageBrowserView) IndexAtLocationOfDroppedItem() uint {
 	return x.inner.IndexAtLocationOfDroppedItem()
@@ -320,16 +424,22 @@ func (x *ImageBrowserView) DropOperation() quartz.IKImageBrowserDropOperation {
 	return x.inner.DropOperation()
 }
 
+// @method setAllowsDroppingOnItems: @abstract Controls whether the user can drop on items. Default is NO.
+//
 // SetAllowsDroppingOnItems calls the underlying SetAllowsDroppingOnItems.
 func (x *ImageBrowserView) SetAllowsDroppingOnItems(flag bool) {
 	x.inner.SetAllowsDroppingOnItems(flag)
 }
 
+// @method allowsDroppingOnItems @abstract Returns YES if the receiver allows the user to drop on items, NO otherwise.
+//
 // AllowsDroppingOnItems calls the underlying AllowsDroppingOnItems.
 func (x *ImageBrowserView) AllowsDroppingOnItems() bool {
 	return x.inner.AllowsDroppingOnItems()
 }
 
+// @method setDropIndex:dropOperation: @abstract Used if you wish to �retarget� the proposed drop. @discussion To specify a drop on the second item, one would specify index as 1, and operation as IKImageBrowserDropOn. To specify a drop after the last item, one would specify index as the number of items and operation as IKImageBrowserDropBefore. Passing a value of �1 for index, and IKImageBrowserDropOn as the operation causes the entire browser view to be highlighted rather than a specific item. This is useful if the data displayed by the receiver does not allow the user to drop items at a specific item location.
+//
 // SetDropIndexDropOperation calls the underlying SetDropIndexDropOperation.
 func (x *ImageBrowserView) SetDropIndexDropOperation(index int, operation quartz.IKImageBrowserDropOperation) {
 	x.inner.SetDropIndexDropOperation(index, operation)

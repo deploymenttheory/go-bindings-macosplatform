@@ -35,6 +35,8 @@ func MTRBaseClusterTimeSynchronizationFromID(id objc.ID) *MTRBaseClusterTimeSync
 	return &MTRBaseClusterTimeSynchronization{inner: raw.MTRBaseClusterTimeSynchronizationFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterTimeSynchronizationWithDeviceEndpointIDQueue creates a new [MTRBaseClusterTimeSynchronization].
 func NewMTRBaseClusterTimeSynchronizationWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterTimeSynchronization {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterTimeSynchronization")), objc.RegisterName("alloc"))
@@ -42,16 +44,22 @@ func NewMTRBaseClusterTimeSynchronizationWithDeviceEndpointIDQueue(device *raw.M
 	return &MTRBaseClusterTimeSynchronization{inner: raw.MTRBaseClusterTimeSynchronizationFromID(_id)}
 }
 
+// Command SetUTCTime This command is used to set the UTC time of the node.
+//
 // SetUTCTimeWithParamsCompletion calls the underlying SetUTCTimeWithParamsCompletion.
 func (x *MTRBaseClusterTimeSynchronization) SetUTCTimeWithParamsCompletion(params *raw.MTRTimeSynchronizationClusterSetUTCTimeParams, completion func(unsafe.Pointer)) {
 	x.inner.SetUTCTimeWithParamsCompletion(params, completion)
 }
 
+// Command SetTrustedTimeSource This command is used to set the TrustedTimeSource attribute.
+//
 // SetTrustedTimeSourceWithParamsCompletion calls the underlying SetTrustedTimeSourceWithParamsCompletion.
 func (x *MTRBaseClusterTimeSynchronization) SetTrustedTimeSourceWithParamsCompletion(params *raw.MTRTimeSynchronizationClusterSetTrustedTimeSourceParams, completion func(unsafe.Pointer)) {
 	x.inner.SetTrustedTimeSourceWithParamsCompletion(params, completion)
 }
 
+// Command SetTimeZone This command is used to set the time zone of the node.
+//
 // SetTimeZoneWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterTimeSynchronization) SetTimeZoneWithParamsCompletion(ctx context.Context, params *raw.MTRTimeSynchronizationClusterSetTimeZoneParams) (*MTRTimeSynchronizationClusterSetTimeZoneResponseParams, error) {
 	type _result struct {
@@ -78,11 +86,15 @@ func (x *MTRBaseClusterTimeSynchronization) SetTimeZoneWithParamsCompletion(ctx 
 	}
 }
 
+// Command SetDSTOffset This command is used to set the DST offsets for a node.
+//
 // SetDSTOffsetWithParamsCompletion calls the underlying SetDSTOffsetWithParamsCompletion.
 func (x *MTRBaseClusterTimeSynchronization) SetDSTOffsetWithParamsCompletion(params *raw.MTRTimeSynchronizationClusterSetDSTOffsetParams, completion func(unsafe.Pointer)) {
 	x.inner.SetDSTOffsetWithParamsCompletion(params, completion)
 }
 
+// Command SetDefaultNTP This command is used to set the DefaultNTP attribute.
+//
 // SetDefaultNTPWithParamsCompletion calls the underlying SetDefaultNTPWithParamsCompletion.
 func (x *MTRBaseClusterTimeSynchronization) SetDefaultNTPWithParamsCompletion(params *raw.MTRTimeSynchronizationClusterSetDefaultNTPParams, completion func(unsafe.Pointer)) {
 	x.inner.SetDefaultNTPWithParamsCompletion(params, completion)

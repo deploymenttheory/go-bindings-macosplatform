@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// @class         MPSNNPadNode @abstract      A node for a MPSNNPad kernel @discussion    You should not use this node to zero pad your data in the XY-plane. This node copies the input image and therefore should only be used in special circumstances where the normal padding operation, defined for most filters and nodes through @ref MPSNNPadding, cannot achieve the necessary padding. Therefore use this node only when you need one of the special edge modes: @ref MPSImageEdgeModeConstant, @ref MPSImageEdgeModeMirror, @ref MPSImageEdgeModeMirrorWithEdge or, if you need padding in the feature-channel dimesion. In other cases use to @ref MPSNNPadding to get best performance.
+//
 // NNPadNode wraps [raw.MPSNNPadNode] with a fluent Go API.
 type NNPadNode struct {
 	inner *raw.MPSNNPadNode
@@ -32,6 +34,8 @@ func NNPadNodeFromID(id objc.ID) *NNPadNode {
 	return &NNPadNode{inner: raw.MPSNNPadNodeFromID(id)}
 }
 
+// @abstract   Init a node representing a MPSNNPad kernel @param      source                  The MPSNNImageNode representing the source MPSImage for the filter @param      paddingSizeBefore       The amount of padding to apply before the image in each dimension. @param      paddingSizeAfter        The amount of padding to apply after the image in each dimension. @param      edgeMode                The @ref MPSImageEdgeMode for the padding node - Note that for now the pad-node and its gradient are the only nodes that support the extended edge-modes, ie. the ones beyond MPSImageEdgeModeClamp. @return     A new MPSNNFilter node for a MPSNNPad kernel.
+//
 // NewNNPadNodeWithSourcePaddingSizeBeforePaddingSizeAfterEdgeMode creates a new [NNPadNode].
 func NewNNPadNodeWithSourcePaddingSizeBeforePaddingSizeAfterEdgeMode(source *mpsneuralnetwork.MPSNNImageNode, paddingSizeBefore mpscore.MPSImageCoordinate, paddingSizeAfter mpscore.MPSImageCoordinate, edgeMode mpscore.MPSImageEdgeMode) *NNPadNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNPadNode")), objc.RegisterName("alloc"))
@@ -39,24 +43,32 @@ func NewNNPadNodeWithSourcePaddingSizeBeforePaddingSizeAfterEdgeMode(source *mps
 	return &NNPadNode{inner: raw.MPSNNPadNodeFromID(_id)}
 }
 
+// @property   fillValue @abstract   Determines the constant value to apply when using @ref MPSImageEdgeModeConstant. Default: 0.0f.
+//
 // WithFillValue sets the fillValue property and returns the receiver for chaining.
 func (x *NNPadNode) WithFillValue(fillValue float32) *NNPadNode {
 	x.inner.SetFillValue(fillValue)
 	return x
 }
 
+// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
+//
 // WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
 func (x *NNPadNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNPadNode {
 	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *NNPadNode) WithLabel(label string) *NNPadNode {
 	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   fillValue @abstract   Determines the constant value to apply when using @ref MPSImageEdgeModeConstant. Default: 0.0f.
+//
 // FillValue calls the underlying FillValue.
 func (x *NNPadNode) FillValue() float32 {
 	return x.inner.FillValue()

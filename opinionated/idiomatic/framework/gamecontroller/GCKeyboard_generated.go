@@ -35,6 +35,8 @@ func NewKeyboard() *Keyboard {
 	return &Keyboard{inner: raw.GCKeyboardFromID(_id)}
 }
 
+// Unlike GCController GCKeyboard only has one input profile. This profile allows you to query buttons and button state
+//
 // KeyboardInput calls the underlying KeyboardInput.
 func (x *Keyboard) KeyboardInput() *KeyboardInput {
 	_r := x.inner.KeyboardInput()

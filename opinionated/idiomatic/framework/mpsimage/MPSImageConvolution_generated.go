@@ -39,6 +39,8 @@ func NewImageConvolutionWithDeviceKernelWidthKernelHeightWeights(device metal.MT
 	return &ImageConvolution{inner: raw.MPSImageConvolutionFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+//
 // NewImageConvolutionWithCoderDevice creates a new [ImageConvolution].
 func NewImageConvolutionWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageConvolution {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageConvolution")), objc.RegisterName("alloc"))
@@ -46,40 +48,54 @@ func NewImageConvolutionWithCoderDevice(aDecoder *foundation.NSCoder, device met
 	return &ImageConvolution{inner: raw.MPSImageConvolutionFromID(_id)}
 }
 
+// @property    bias @discussion  The bias is a value to be added to convolved pixel before it is converted back to the storage format. It can be used to convert negative values into a representable range for a unsigned MTLPixelFormat. For example, many edge detection filters produce results in the range [-k,k]. By scaling the filter weights by 0.5/k and adding 0.5, the results will be in range [0,1] suitable for use with unorm formats. It can be used in combination with renormalization of the filter weights to do video ranging as part of the convolution effect. It can also just be used to increase the brightness of the image. Default value is 0.0f.
+//
 // WithBias sets the bias property and returns the receiver for chaining.
 func (x *ImageConvolution) WithBias(bias float32) *ImageConvolution {
 	x.inner.SetBias(bias)
 	return x
 }
 
+// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+//
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *ImageConvolution) WithOffset(offset mpscore.MPSOffset) *ImageConvolution {
 	x.inner.MPSUnaryImageKernel.SetOffset(offset)
 	return x
 }
 
+// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+//
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *ImageConvolution) WithClipRect(clipRect metal.MTLRegion) *ImageConvolution {
 	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
 	return x
 }
 
+// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
+//
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *ImageConvolution) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageConvolution {
 	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
 	return x
 }
 
+// @property kernelHeight @abstract  The height of the filter window. Must be an odd number.
+//
 // KernelHeight calls the underlying KernelHeight.
 func (x *ImageConvolution) KernelHeight() uint {
 	return x.inner.KernelHeight()
 }
 
+// @property kernelWidth @abstract  The width of the filter window. Must be an odd number.
+//
 // KernelWidth calls the underlying KernelWidth.
 func (x *ImageConvolution) KernelWidth() uint {
 	return x.inner.KernelWidth()
 }
 
+// @property    bias @discussion  The bias is a value to be added to convolved pixel before it is converted back to the storage format. It can be used to convert negative values into a representable range for a unsigned MTLPixelFormat. For example, many edge detection filters produce results in the range [-k,k]. By scaling the filter weights by 0.5/k and adding 0.5, the results will be in range [0,1] suitable for use with unorm formats. It can be used in combination with renormalization of the filter weights to do video ranging as part of the convolution effect. It can also just be used to increase the brightness of the image. Default value is 0.0f.
+//
 // Bias calls the underlying Bias.
 func (x *ImageConvolution) Bias() float32 {
 	return x.inner.Bias()

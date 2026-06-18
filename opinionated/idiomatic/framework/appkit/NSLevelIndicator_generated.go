@@ -94,18 +94,24 @@ func (x *LevelIndicator) WithNumberOfMajorTickMarks(numberOfMajorTickMarks int) 
 	return x
 }
 
+// Sets the fill color used by Continuous and Discrete Capacity indicators when drawing the "normal" state, and by the rating indicator when drawing stars. The default value is a system-defined color which may vary between level indicator styles and OS releases.
+//
 // WithFillColor sets the fillColor property and returns the receiver for chaining.
 func (x *LevelIndicator) WithFillColor(fillColor *Color) *LevelIndicator {
 	x.inner.SetFillColor(fillColor.Unwrap())
 	return x
 }
 
+// Sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "warning" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
+//
 // WithWarningFillColor sets the warningFillColor property and returns the receiver for chaining.
 func (x *LevelIndicator) WithWarningFillColor(warningFillColor *Color) *LevelIndicator {
 	x.inner.SetWarningFillColor(warningFillColor.Unwrap())
 	return x
 }
 
+// Sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "critical" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
+//
 // WithCriticalFillColor sets the criticalFillColor property and returns the receiver for chaining.
 func (x *LevelIndicator) WithCriticalFillColor(criticalFillColor *Color) *LevelIndicator {
 	x.inner.SetCriticalFillColor(criticalFillColor.Unwrap())
@@ -118,12 +124,16 @@ func (x *LevelIndicator) WithDrawsTieredCapacityLevels(drawsTieredCapacityLevels
 	return x
 }
 
+// For a rating-style indicator, sets the conditions under which rating placeholders are displayed. This property currently has no effect for other indicator styles. The default value is `NSLevelIndicatorPlaceholderVisibilityAutomatic`.
+//
 // WithPlaceholderVisibility sets the placeholderVisibility property and returns the receiver for chaining.
 func (x *LevelIndicator) WithPlaceholderVisibility(placeholderVisibility NSLevelIndicatorPlaceholderVisibility) *LevelIndicator {
 	x.inner.SetPlaceholderVisibility(raw.NSLevelIndicatorPlaceholderVisibility(placeholderVisibility))
 	return x
 }
 
+// Sets the image used by the rating indicator style in place of the default star image. The default value is `nil`.
+//
 // WithRatingImage sets the ratingImage property and returns the receiver for chaining.
 func (x *LevelIndicator) WithRatingImage(ratingImage *Image) *LevelIndicator {
 	x.inner.SetRatingImage(ratingImage.Unwrap())
@@ -544,6 +554,8 @@ func (x *LevelIndicator) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets f
 	return x
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *LevelIndicator) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *LevelIndicator {
 	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
@@ -722,6 +734,8 @@ func (x *LevelIndicator) SetNumberOfMajorTickMarks(numberOfMajorTickMarks int) {
 	x.inner.SetNumberOfMajorTickMarks(numberOfMajorTickMarks)
 }
 
+// Sets the fill color used by Continuous and Discrete Capacity indicators when drawing the "normal" state, and by the rating indicator when drawing stars. The default value is a system-defined color which may vary between level indicator styles and OS releases.
+//
 // FillColor calls the underlying FillColor.
 func (x *LevelIndicator) FillColor() *Color {
 	_r := x.inner.FillColor()
@@ -731,11 +745,15 @@ func (x *LevelIndicator) FillColor() *Color {
 	return &Color{inner: _r}
 }
 
+// Sets the fill color used by Continuous and Discrete Capacity indicators when drawing the "normal" state, and by the rating indicator when drawing stars. The default value is a system-defined color which may vary between level indicator styles and OS releases.
+//
 // SetFillColor calls the underlying SetFillColor.
 func (x *LevelIndicator) SetFillColor(fillColor *raw.NSColor) {
 	x.inner.SetFillColor(fillColor)
 }
 
+// Sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "warning" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
+//
 // WarningFillColor calls the underlying WarningFillColor.
 func (x *LevelIndicator) WarningFillColor() *Color {
 	_r := x.inner.WarningFillColor()
@@ -745,11 +763,15 @@ func (x *LevelIndicator) WarningFillColor() *Color {
 	return &Color{inner: _r}
 }
 
+// Sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "warning" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
+//
 // SetWarningFillColor calls the underlying SetWarningFillColor.
 func (x *LevelIndicator) SetWarningFillColor(warningFillColor *raw.NSColor) {
 	x.inner.SetWarningFillColor(warningFillColor)
 }
 
+// Sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "critical" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
+//
 // CriticalFillColor calls the underlying CriticalFillColor.
 func (x *LevelIndicator) CriticalFillColor() *Color {
 	_r := x.inner.CriticalFillColor()
@@ -759,6 +781,8 @@ func (x *LevelIndicator) CriticalFillColor() *Color {
 	return &Color{inner: _r}
 }
 
+// Sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "critical" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
+//
 // SetCriticalFillColor calls the underlying SetCriticalFillColor.
 func (x *LevelIndicator) SetCriticalFillColor(criticalFillColor *raw.NSColor) {
 	x.inner.SetCriticalFillColor(criticalFillColor)
@@ -774,16 +798,22 @@ func (x *LevelIndicator) SetDrawsTieredCapacityLevels(drawsTieredCapacityLevels 
 	x.inner.SetDrawsTieredCapacityLevels(drawsTieredCapacityLevels)
 }
 
+// For a rating-style indicator, sets the conditions under which rating placeholders are displayed. This property currently has no effect for other indicator styles. The default value is `NSLevelIndicatorPlaceholderVisibilityAutomatic`.
+//
 // PlaceholderVisibility calls the underlying PlaceholderVisibility.
 func (x *LevelIndicator) PlaceholderVisibility() NSLevelIndicatorPlaceholderVisibility {
 	return NSLevelIndicatorPlaceholderVisibility(x.inner.PlaceholderVisibility())
 }
 
+// For a rating-style indicator, sets the conditions under which rating placeholders are displayed. This property currently has no effect for other indicator styles. The default value is `NSLevelIndicatorPlaceholderVisibilityAutomatic`.
+//
 // SetPlaceholderVisibility calls the underlying SetPlaceholderVisibility.
 func (x *LevelIndicator) SetPlaceholderVisibility(placeholderVisibility NSLevelIndicatorPlaceholderVisibility) {
 	x.inner.SetPlaceholderVisibility(raw.NSLevelIndicatorPlaceholderVisibility(placeholderVisibility))
 }
 
+// Sets the image used by the rating indicator style in place of the default star image. The default value is `nil`.
+//
 // RatingImage calls the underlying RatingImage.
 func (x *LevelIndicator) RatingImage() *Image {
 	_r := x.inner.RatingImage()
@@ -793,6 +823,8 @@ func (x *LevelIndicator) RatingImage() *Image {
 	return &Image{inner: _r}
 }
 
+// Sets the image used by the rating indicator style in place of the default star image. The default value is `nil`.
+//
 // SetRatingImage calls the underlying SetRatingImage.
 func (x *LevelIndicator) SetRatingImage(ratingImage *raw.NSImage) {
 	x.inner.SetRatingImage(ratingImage)

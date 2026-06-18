@@ -31,6 +31,8 @@ func ExtensionProviderFromID(id objc.ID) *ExtensionProvider {
 	return &ExtensionProvider{inner: raw.CMIOExtensionProviderFromID(id)}
 }
 
+// @method initWithSource:clientQueue: @abstract Initialize a provider instance. @param source The provider source. @param clientQueue The client dispatch queue, or nil for the default dispatch queue. @result A CMIOExtensionProvider instance.
+//
 // NewExtensionProviderWithSourceClientQueue creates a new [ExtensionProvider].
 func NewExtensionProviderWithSourceClientQueue(source raw.CMIOExtensionProviderSource, clientQueue *foundation.NSObject) *ExtensionProvider {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionProvider")), objc.RegisterName("alloc"))
@@ -38,31 +40,43 @@ func NewExtensionProviderWithSourceClientQueue(source raw.CMIOExtensionProviderS
 	return &ExtensionProvider{inner: raw.CMIOExtensionProviderFromID(_id)}
 }
 
+// @method addDevice:error: @abstract Add a device to the provider devices array. @param device The device to be added to the provider devices array. @param outError An error return on failure. @result Return YES on success, NO otherwise.
+//
 // AddDeviceError calls the underlying AddDeviceError.
 func (x *ExtensionProvider) AddDeviceError(device *raw.CMIOExtensionDevice) (bool, error) {
 	return x.inner.AddDeviceError(device)
 }
 
+// @method removeDevice:error: @abstract Remove a device from the provider devices array. @param device The device to be removed from the provider devices array. @param outError An error return on failure. @result Return YES on success, NO otherwise.
+//
 // RemoveDeviceError calls the underlying RemoveDeviceError.
 func (x *ExtensionProvider) RemoveDeviceError(device *raw.CMIOExtensionDevice) (bool, error) {
 	return x.inner.RemoveDeviceError(device)
 }
 
+// @method notifyPropertiesChanged: @abstract Notify client(s) of device properties changes. @param propertyStates The dictionary of properties having changed.
+//
 // NotifyPropertiesChanged calls the underlying NotifyPropertiesChanged.
 func (x *ExtensionProvider) NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	x.inner.NotifyPropertiesChanged(propertyStates)
 }
 
+// @property source @abstract The provider source.
+//
 // Source calls the underlying Source.
 func (x *ExtensionProvider) Source() raw.CMIOExtensionProviderSource {
 	return x.inner.Source()
 }
 
+// @property clientQueue @abstract The dispatch queue on which source methods from the provider/device/stream will be called.
+//
 // ClientQueue calls the underlying ClientQueue.
 func (x *ExtensionProvider) ClientQueue() *foundation.NSObject {
 	return x.inner.ClientQueue()
 }
 
+// @property connectedClients @abstract The array of connected clients. @discussion This property is key-value observable.
+//
 // ConnectedClients returns the collection as a Go slice.
 func (x *ExtensionProvider) ConnectedClients() []*ExtensionClient {
 	arr := x.inner.ConnectedClients()
@@ -74,6 +88,8 @@ func (x *ExtensionProvider) ConnectedClients() []*ExtensionClient {
 	})
 }
 
+// @property devices @abstract The devices array of the provider. @discussion This property is not key-value observable.
+//
 // Devices returns the collection as a Go slice.
 func (x *ExtensionProvider) Devices() []*ExtensionDevice {
 	arr := x.inner.Devices()

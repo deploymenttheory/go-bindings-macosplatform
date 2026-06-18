@@ -31,6 +31,8 @@ func AudiogramSensitivityTestFromID(id objc.ID) *AudiogramSensitivityTest {
 	return &AudiogramSensitivityTest{inner: raw.HKAudiogramSensitivityTestFromID(id)}
 }
 
+// @method                    initWithSensitivity:type:masked:side:clampingRange:error: @abstract                  Creates a sensitivity test which can be added to a HKAudiogramSensitivityPoint @param sensitivity         The ear sensitivity measured in dB from a baseline of 0 dB with unit `HKUnit.decibelHearingLevelUnit` or "dBHL". @param type                The type of test @param masked              If the test was conducted with or without masking @param side                The test side which was tested @param clampingRange       The clamping range (if any) @param errorOut            If there was a problem creating this instance this will contain the error. @return                    New instance of a Sensitivity Test or nil if there were problems creating the instance.  Errors may include incorrect quantity units or sensitivity out of range
+//
 // NewAudiogramSensitivityTestWithSensitivityTypeMaskedSideClampingRangeError creates a new [AudiogramSensitivityTest].
 func NewAudiogramSensitivityTestWithSensitivityTypeMaskedSideClampingRangeError(sensitivity *raw.HKQuantity, type_ HKAudiogramConductionType, masked bool, side HKAudiogramSensitivityTestSide, clampingRange *raw.HKAudiogramSensitivityPointClampingRange) (*AudiogramSensitivityTest, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKAudiogramSensitivityTest")), objc.RegisterName("alloc"))
@@ -42,6 +44,8 @@ func NewAudiogramSensitivityTestWithSensitivityTypeMaskedSideClampingRangeError(
 	return &AudiogramSensitivityTest{inner: raw.HKAudiogramSensitivityTestFromID(_id)}, nil
 }
 
+// @property      sensitivity @abstract      Ear sensitivity measured in dB from a baseline of 0 dB. Reduced hearing sensitivity corresponds to an increase from 0 dB. The unit of measurement is `HKUnit.decibelHearingLevelUnit` or "dBHL".
+//
 // Sensitivity calls the underlying Sensitivity.
 func (x *AudiogramSensitivityTest) Sensitivity() *Quantity {
 	_r := x.inner.Sensitivity()
@@ -51,21 +55,29 @@ func (x *AudiogramSensitivityTest) Sensitivity() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property      type @abstract      The conduction type
+//
 // Type calls the underlying Type.
 func (x *AudiogramSensitivityTest) Type() HKAudiogramConductionType {
 	return HKAudiogramConductionType(x.inner.Type())
 }
 
+// @property      masked @abstract      Indicates if the test was conducted with or without masking
+//
 // Masked calls the underlying Masked.
 func (x *AudiogramSensitivityTest) Masked() bool {
 	return x.inner.Masked()
 }
 
+// @property      side @abstract      The test side
+//
 // Side calls the underlying Side.
 func (x *AudiogramSensitivityTest) Side() HKAudiogramSensitivityTestSide {
 	return HKAudiogramSensitivityTestSide(x.inner.Side())
 }
 
+// @property      clampingRange @abstract      If present, indicates that the range within which the sensitivity point should be clamped.
+//
 // ClampingRange calls the underlying ClampingRange.
 func (x *AudiogramSensitivityTest) ClampingRange() *AudiogramSensitivityPointClampingRange {
 	_r := x.inner.ClampingRange()

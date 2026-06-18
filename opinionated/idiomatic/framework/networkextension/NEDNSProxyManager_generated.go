@@ -39,24 +39,32 @@ func NewNEDNSProxyManager() *NEDNSProxyManager {
 	return &NEDNSProxyManager{inner: raw.NEDNSProxyManagerFromID(_id)}
 }
 
+// @property localizedDescription @discussion A string containing a description of the DNS proxy.
+//
 // WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
 func (x *NEDNSProxyManager) WithLocalizedDescription(localizedDescription string) *NEDNSProxyManager {
 	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
 	return x
 }
 
+// @property providerProtocol @discussion An NEDNSProxyProviderProtocol object containing the provider-specific portion of the DNS proxy configuration.
+//
 // WithProviderProtocol sets the providerProtocol property and returns the receiver for chaining.
 func (x *NEDNSProxyManager) WithProviderProtocol(providerProtocol *NEDNSProxyProviderProtocol) *NEDNSProxyManager {
 	x.inner.SetProviderProtocol(providerProtocol.Unwrap())
 	return x
 }
 
+// @property enabled @discussion Toggles the enabled status of the DNS proxy. Setting this property will disable DNS proxy configurations of other apps. This property will be set to NO when other DNS proxy configurations are enabled.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *NEDNSProxyManager) WithEnabled(enabled bool) *NEDNSProxyManager {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// @method loadFromPreferencesWithCompletionHandler: @discussion This function loads the current DNS proxy configuration from the caller's DNS proxy preferences. @param completionHandler A block that will be called when the load operation is completed. The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
+//
 // LoadFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEDNSProxyManager) LoadFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -75,6 +83,8 @@ func (x *NEDNSProxyManager) LoadFromPreferences(ctx context.Context) error {
 	}
 }
 
+// @method removeFromPreferencesWithCompletionHandler: @discussion This function removes the DNS proxy configuration from the caller's DNS proxy preferences. If the DNS proxy is enabled, the DNS proxy becomes disabled. @param completionHandler A block that will be called when the remove operation is completed. The NSError passed to this block will be nil if the remove operation succeeded, non-nil otherwise.
+//
 // RemoveFromPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEDNSProxyManager) RemoveFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -93,6 +103,8 @@ func (x *NEDNSProxyManager) RemoveFromPreferences(ctx context.Context) error {
 	}
 }
 
+// @method saveToPreferencesWithCompletionHandler: @discussion This function saves the DNS proxy configuration in the caller's DNS proxy preferences. If the DNS proxy is enabled, it will become active. @param completionHandler A block that will be called when the save operation is completed. The NSError passed to this block will be nil if the save operation succeeded, non-nil otherwise.
+//
 // SaveToPreferences blocks until the operation completes or ctx is cancelled.
 func (x *NEDNSProxyManager) SaveToPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -111,6 +123,8 @@ func (x *NEDNSProxyManager) SaveToPreferences(ctx context.Context) error {
 	}
 }
 
+// @property localizedDescription @discussion A string containing a description of the DNS proxy.
+//
 // LocalizedDescription calls the underlying LocalizedDescription.
 func (x *NEDNSProxyManager) LocalizedDescription() string {
 	_r := x.inner.LocalizedDescription()
@@ -125,6 +139,8 @@ func (x *NEDNSProxyManager) SetLocalizedDescription(localizedDescription string)
 	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
 }
 
+// @property providerProtocol @discussion An NEDNSProxyProviderProtocol object containing the provider-specific portion of the DNS proxy configuration.
+//
 // ProviderProtocol calls the underlying ProviderProtocol.
 func (x *NEDNSProxyManager) ProviderProtocol() *NEDNSProxyProviderProtocol {
 	_r := x.inner.ProviderProtocol()
@@ -139,6 +155,8 @@ func (x *NEDNSProxyManager) SetProviderProtocol(providerProtocol *raw.NEDNSProxy
 	x.inner.SetProviderProtocol(providerProtocol)
 }
 
+// @property enabled @discussion Toggles the enabled status of the DNS proxy. Setting this property will disable DNS proxy configurations of other apps. This property will be set to NO when other DNS proxy configurations are enabled.
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *NEDNSProxyManager) IsEnabled() bool {
 	return x.inner.IsEnabled()

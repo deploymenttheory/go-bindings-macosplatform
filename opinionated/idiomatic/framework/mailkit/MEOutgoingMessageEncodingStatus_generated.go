@@ -39,21 +39,29 @@ func NewOutgoingMessageEncodingStatusWithCanSignCanEncryptSecurityErrorAddresses
 	return &OutgoingMessageEncodingStatus{inner: raw.MEOutgoingMessageEncodingStatusFromID(_id)}
 }
 
+// @brief Whether or not the message can be signed.
+//
 // CanSign calls the underlying CanSign.
 func (x *OutgoingMessageEncodingStatus) CanSign() bool {
 	return x.inner.CanSign()
 }
 
+// @brief Whether or not the message can be encrypted.
+//
 // CanEncrypt calls the underlying CanEncrypt.
 func (x *OutgoingMessageEncodingStatus) CanEncrypt() bool {
 	return x.inner.CanEncrypt()
 }
 
+// @brief Any error that occurred while verifying the security status for the outgoing mail message.
+//
 // SecurityError calls the underlying SecurityError.
 func (x *OutgoingMessageEncodingStatus) SecurityError() unsafe.Pointer {
 	return x.inner.SecurityError()
 }
 
+// @brief A list of any recipients for which the message should be encrypted but an error occurred. This could include missing the public key for the recipient.
+//
 // AddressesFailingEncryption returns the collection as a Go slice.
 func (x *OutgoingMessageEncodingStatus) AddressesFailingEncryption() []*EmailAddress {
 	arr := x.inner.AddressesFailingEncryption()

@@ -37,6 +37,8 @@ func NewObject() *Object {
 	return &Object{inner: raw.HKObjectFromID(_id)}
 }
 
+// @property      UUID @abstract      A unique identifier of the receiver in the HealthKit database.
+//
 // UUID calls the underlying UUID.
 func (x *Object) UUID() *foundation.NSUUID {
 	return x.inner.UUID()
@@ -47,6 +49,8 @@ func (x *Object) Source() unsafe.Pointer {
 	return x.inner.Source()
 }
 
+// @property      sourceRevision @abstract      Represents the revision of the source responsible for saving the receiver.
+//
 // SourceRevision calls the underlying SourceRevision.
 func (x *Object) SourceRevision() *SourceRevision {
 	_r := x.inner.SourceRevision()
@@ -56,6 +60,8 @@ func (x *Object) SourceRevision() *SourceRevision {
 	return &SourceRevision{inner: _r}
 }
 
+// @property      device @abstract      Represents the device that generated the data of the receiver.
+//
 // Device calls the underlying Device.
 func (x *Object) Device() *Device {
 	_r := x.inner.Device()
@@ -65,6 +71,8 @@ func (x *Object) Device() *Device {
 	return &Device{inner: _r}
 }
 
+// @property      metadata @abstract      Extra information describing properties of the receiver. @discussion    Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
+//
 // Metadata calls the underlying Metadata.
 func (x *Object) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.Metadata()

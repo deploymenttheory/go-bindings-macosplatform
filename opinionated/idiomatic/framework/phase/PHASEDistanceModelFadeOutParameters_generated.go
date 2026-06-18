@@ -31,6 +31,8 @@ func DistanceModelFadeOutParametersFromID(id objc.ID) *DistanceModelFadeOutParam
 	return &DistanceModelFadeOutParameters{inner: raw.PHASEDistanceModelFadeOutParametersFromID(id)}
 }
 
+// @method initWithCullDistance @abstract Initialize with a cullDistance. @param cullDistance The distance beyond which the sound will be culled. Values must be >= 1. @note The cullDistance is scaled by unitsPerMeter internally, so can be provided at the client's native spatial scale. The system will smoothly fade the sound to zero before reaching this distance to avoid any audible artifacts. @return An instance, or nil if initialization fails.
+//
 // NewDistanceModelFadeOutParametersWithCullDistance creates a new [DistanceModelFadeOutParameters].
 func NewDistanceModelFadeOutParametersWithCullDistance(cullDistance float64) *DistanceModelFadeOutParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEDistanceModelFadeOutParameters")), objc.RegisterName("alloc"))

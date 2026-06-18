@@ -71,6 +71,8 @@ func (x *ArrayType) ElementPointerType() *PointerType {
 	return &PointerType{inner: _r}
 }
 
+// Provides a description of the underlying tensor type when this array holds tensors as its elements. - Returns: A description of the tensor type that this array holds, or `nil` if this struct member doesn't hold a tensor.
+//
 // ElementTensorReferenceType calls the underlying ElementTensorReferenceType.
 func (x *ArrayType) ElementTensorReferenceType() *TensorReferenceType {
 	_r := x.inner.ElementTensorReferenceType()

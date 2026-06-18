@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A device that defines the configuration for a USB keyboard.
+//
 // USBKeyboardConfiguration wraps [raw.VZUSBKeyboardConfiguration] with a fluent Go API.
 type USBKeyboardConfiguration struct {
 	inner *raw.VZUSBKeyboardConfiguration

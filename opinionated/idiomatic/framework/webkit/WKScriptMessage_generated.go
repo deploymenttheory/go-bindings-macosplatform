@@ -36,11 +36,15 @@ func NewWKScriptMessage() *WKScriptMessage {
 	return &WKScriptMessage{inner: raw.WKScriptMessageFromID(_id)}
 }
 
+// @abstract The body of the message. @discussion Allowed types are NSNumber, NSString, NSDate, NSArray, NSDictionary, and NSNull.
+//
 // Body calls the underlying Body.
 func (x *WKScriptMessage) Body() objc.ID {
 	return x.inner.Body()
 }
 
+// @abstract The web view sending the message.
+//
 // WebView calls the underlying WebView.
 func (x *WKScriptMessage) WebView() *WKWebView {
 	_r := x.inner.WebView()
@@ -50,6 +54,8 @@ func (x *WKScriptMessage) WebView() *WKWebView {
 	return &WKWebView{inner: _r}
 }
 
+// @abstract The frame sending the message.
+//
 // FrameInfo calls the underlying FrameInfo.
 func (x *WKScriptMessage) FrameInfo() *WKFrameInfo {
 	_r := x.inner.FrameInfo()
@@ -59,6 +65,8 @@ func (x *WKScriptMessage) FrameInfo() *WKFrameInfo {
 	return &WKFrameInfo{inner: _r}
 }
 
+// @abstract The name of the message handler to which the message is sent.
+//
 // Name calls the underlying Name.
 func (x *WKScriptMessage) Name() string {
 	_r := x.inner.Name()
@@ -68,6 +76,8 @@ func (x *WKScriptMessage) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The content world from which the message was sent.
+//
 // World calls the underlying World.
 func (x *WKScriptMessage) World() *WKContentWorld {
 	_r := x.inner.World()

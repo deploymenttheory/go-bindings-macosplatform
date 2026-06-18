@@ -37,6 +37,8 @@ func NewSpatialVideoConfiguration() *SpatialVideoConfiguration {
 	return &SpatialVideoConfiguration{inner: raw.AVSpatialVideoConfigurationFromID(_id)}
 }
 
+// Initializes an AVSpatialVideoConfiguration with a format description. The format description is not stored. - Parameter formatDescription: Format description to use to initialize the AVSpatialVideoConfiguration. - Returns: An instance of AVSpatialVideoConfiguration
+//
 // NewSpatialVideoConfigurationWithFormatDescription creates a new [SpatialVideoConfiguration].
 func NewSpatialVideoConfigurationWithFormatDescription(formatDescription unsafe.Pointer) *SpatialVideoConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSpatialVideoConfiguration")), objc.RegisterName("alloc"))
@@ -44,6 +46,8 @@ func NewSpatialVideoConfigurationWithFormatDescription(formatDescription unsafe.
 	return &SpatialVideoConfiguration{inner: raw.AVSpatialVideoConfigurationFromID(_id)}
 }
 
+// Specifies intrinsic and extrinsic parameters for single or multiple lenses. The property value is an array of dictionaries describing the camera calibration data for each lens. The camera calibration data includes intrinsics and extrinics with other parameters.  This property is only applicable when the projection kind is kCMTagProjectionTypeParametricImmersive.  Can be nil if the value is unknown.
+//
 // WithCameraCalibrationDataLensCollection sets the collection, converting the Go slice to an NSArray.
 func (x *SpatialVideoConfiguration) WithCameraCalibrationDataLensCollection(items ...*foundation.NSDictionary[*foundation.NSString, objc.ID]) *SpatialVideoConfiguration {
 	if len(items) == 0 {
@@ -62,24 +66,32 @@ func (x *SpatialVideoConfiguration) WithCameraCalibrationDataLensCollection(item
 	return x
 }
 
+// Specifies horizontal field of view in thousandths of a degree. Can be nil if the value is unknown.
+//
 // WithHorizontalFieldOfView sets the horizontalFieldOfView property and returns the receiver for chaining.
 func (x *SpatialVideoConfiguration) WithHorizontalFieldOfView(horizontalFieldOfView *foundation.NSNumber) *SpatialVideoConfiguration {
 	x.inner.SetHorizontalFieldOfView(horizontalFieldOfView)
 	return x
 }
 
+// Specifies the distance between centers of the lenses of the camera system that created the video. The distance is in micrometers or thousandths of a millimeter. Can be nil if the value is unknown.
+//
 // WithCameraSystemBaseline sets the cameraSystemBaseline property and returns the receiver for chaining.
 func (x *SpatialVideoConfiguration) WithCameraSystemBaseline(cameraSystemBaseline *foundation.NSNumber) *SpatialVideoConfiguration {
 	x.inner.SetCameraSystemBaseline(cameraSystemBaseline)
 	return x
 }
 
+// Specifies a relative shift of the left and right images, which changes the zero parallax plane. The value is in normalized image space and measured over the range of -10000 to 10000 mapping to the uniform range [-1.0...1.0]. The interval of 0.0 to 1.0 or 0 to 10000 maps onto the stereo eye view image width. The negative interval 0.0 to -1.0 or 0 to -10000 similarly map onto the stereo eye view image width. Can be nil if the value is unknown.
+//
 // WithDisparityAdjustment sets the disparityAdjustment property and returns the receiver for chaining.
 func (x *SpatialVideoConfiguration) WithDisparityAdjustment(disparityAdjustment *foundation.NSNumber) *SpatialVideoConfiguration {
 	x.inner.SetDisparityAdjustment(disparityAdjustment)
 	return x
 }
 
+// Specifies intrinsic and extrinsic parameters for single or multiple lenses. The property value is an array of dictionaries describing the camera calibration data for each lens. The camera calibration data includes intrinsics and extrinics with other parameters.  This property is only applicable when the projection kind is kCMTagProjectionTypeParametricImmersive.  Can be nil if the value is unknown.
+//
 // CameraCalibrationDataLensCollection calls the underlying CameraCalibrationDataLensCollection.
 func (x *SpatialVideoConfiguration) CameraCalibrationDataLensCollection() *foundation.NSArray[objc.ID] {
 	return x.inner.CameraCalibrationDataLensCollection()
@@ -90,6 +102,8 @@ func (x *SpatialVideoConfiguration) SetCameraCalibrationDataLensCollection(camer
 	x.inner.SetCameraCalibrationDataLensCollection(cameraCalibrationDataLensCollection)
 }
 
+// Specifies horizontal field of view in thousandths of a degree. Can be nil if the value is unknown.
+//
 // HorizontalFieldOfView calls the underlying HorizontalFieldOfView.
 func (x *SpatialVideoConfiguration) HorizontalFieldOfView() *foundation.NSNumber {
 	return x.inner.HorizontalFieldOfView()
@@ -100,6 +114,8 @@ func (x *SpatialVideoConfiguration) SetHorizontalFieldOfView(horizontalFieldOfVi
 	x.inner.SetHorizontalFieldOfView(horizontalFieldOfView)
 }
 
+// Specifies the distance between centers of the lenses of the camera system that created the video. The distance is in micrometers or thousandths of a millimeter. Can be nil if the value is unknown.
+//
 // CameraSystemBaseline calls the underlying CameraSystemBaseline.
 func (x *SpatialVideoConfiguration) CameraSystemBaseline() *foundation.NSNumber {
 	return x.inner.CameraSystemBaseline()
@@ -110,6 +126,8 @@ func (x *SpatialVideoConfiguration) SetCameraSystemBaseline(cameraSystemBaseline
 	x.inner.SetCameraSystemBaseline(cameraSystemBaseline)
 }
 
+// Specifies a relative shift of the left and right images, which changes the zero parallax plane. The value is in normalized image space and measured over the range of -10000 to 10000 mapping to the uniform range [-1.0...1.0]. The interval of 0.0 to 1.0 or 0 to 10000 maps onto the stereo eye view image width. The negative interval 0.0 to -1.0 or 0 to -10000 similarly map onto the stereo eye view image width. Can be nil if the value is unknown.
+//
 // DisparityAdjustment calls the underlying DisparityAdjustment.
 func (x *SpatialVideoConfiguration) DisparityAdjustment() *foundation.NSNumber {
 	return x.inner.DisparityAdjustment()

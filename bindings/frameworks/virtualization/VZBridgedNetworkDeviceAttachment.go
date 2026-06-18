@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A network device that interacts directly with a physical network interface on the host computer.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzbridgednetworkdeviceattachment
 type VZBridgedNetworkDeviceAttachment struct {
 	VZNetworkDeviceAttachment
@@ -30,7 +32,7 @@ func VZBridgedNetworkDeviceAttachmentFromID(id objc.ID) *VZBridgedNetworkDeviceA
 	return o
 }
 
-// @abstract Initialize a VZBridgedNetworkDeviceAttachment with a host network interface. @param interface Host network interface controller.
+// Creates the attachment from a bridged network interface object.
 func (o *VZBridgedNetworkDeviceAttachment) InitWithInterface(interface_ *VZBridgedNetworkInterface) *VZBridgedNetworkDeviceAttachment {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZBridgedNetworkDeviceAttachmentSelInitWithInterface, interface_.Ptr())
 	if _ret != 0 {

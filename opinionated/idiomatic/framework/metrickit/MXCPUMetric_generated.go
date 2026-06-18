@@ -36,11 +36,15 @@ func NewCPUMetric() *CPUMetric {
 	return &CPUMetric{inner: raw.MXCPUMetricFromID(_id)}
 }
 
+// @property      cumulativeCPUTime @abstract      CPU time aggregated cumulatively. @discussion    The data here represents the total CPU time an application consumed over the date range of the containing payload. @discussion    Dimensioned as NSUnitDuration.
+//
 // CumulativeCPUTime calls the underlying CumulativeCPUTime.
 func (x *CPUMetric) CumulativeCPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
 	return x.inner.CumulativeCPUTime()
 }
 
+// @property      cumulativeCPUInstructions @abstract      CPU instructions retired aggregated cumulatively. @discussion    The data here represents the total number of CPU instructions an application retired over the date range of the containing payload. @discussion    Dimensionless.
+//
 // CumulativeCPUInstructions calls the underlying CumulativeCPUInstructions.
 func (x *CPUMetric) CumulativeCPUInstructions() *foundation.NSMeasurement[*foundation.NSUnit] {
 	return x.inner.CumulativeCPUInstructions()

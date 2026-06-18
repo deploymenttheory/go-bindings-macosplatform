@@ -36,6 +36,8 @@ func NewContainer() *Container {
 	return &Container{inner: raw.CNContainerFromID(_id)}
 }
 
+// The identifier is unique among containers on the device. It can be saved and used for fetching containers next application launch.
+//
 // Identifier calls the underlying Identifier.
 func (x *Container) Identifier() string {
 	_r := x.inner.Identifier()

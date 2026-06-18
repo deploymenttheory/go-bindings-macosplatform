@@ -34,6 +34,8 @@ func WKWebExtensionContextFromID(id objc.ID) *WKWebExtensionContext {
 	return &WKWebExtensionContext{inner: raw.WKWebExtensionContextFromID(id)}
 }
 
+// @abstract Returns a web extension context initialized with a specified extension. @param extension The extension to use for the new web extension context. @result An initialized web extension context. @discussion This is a designated initializer.
+//
 // NewWKWebExtensionContextForExtension creates a new [WKWebExtensionContext].
 func NewWKWebExtensionContextForExtension(extension *raw.WKWebExtension) *WKWebExtensionContext {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WKWebExtensionContext")), objc.RegisterName("alloc"))
@@ -41,157 +43,215 @@ func NewWKWebExtensionContextForExtension(extension *raw.WKWebExtension) *WKWebE
 	return &WKWebExtensionContext{inner: raw.WKWebExtensionContextFromID(_id)}
 }
 
+// @abstract The base URL the context uses for loading extension resources or injecting content into webpages. @discussion The default value is a unique URL using the `webkit-extension` scheme. The base URL can be set to any URL, but only the scheme and host will be used. The scheme cannot be a scheme that is already supported by “WKWebView“ (e.g. http, https, etc.) Setting is only allowed when the context is not loaded.
+//
 // WithBaseURL sets the baseURL property and returns the receiver for chaining.
 func (x *WKWebExtensionContext) WithBaseURL(baseURL string) *WKWebExtensionContext {
 	x.inner.SetBaseURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)))
 	return x
 }
 
+// @abstract A unique identifier used to distinguish the extension from other extensions and target it for messages. @discussion The default value is a unique value that matches the host in the default base URL. The identifier can be any value that is unique. Setting is only allowed when the context is not loaded. This value is accessible by the extension via `browser.runtime.id` and is used for messaging the extension via `browser.runtime.sendMessage()`.
+//
 // WithUniqueIdentifier sets the uniqueIdentifier property and returns the receiver for chaining.
 func (x *WKWebExtensionContext) WithUniqueIdentifier(uniqueIdentifier string) *WKWebExtensionContext {
 	x.inner.SetUniqueIdentifier(foundation.NSStringStringWithUTF8String(uniqueIdentifier))
 	return x
 }
 
+// @abstract Determines whether Web Inspector can inspect the “WKWebView“ instances for this context. @discussion A context can control multiple “WKWebView“ instances, from the background content, to the popover. You should set this to `YES` when needed for debugging purposes. The default value is `NO`.
+//
 // WithInspectable sets the inspectable property and returns the receiver for chaining.
 func (x *WKWebExtensionContext) WithInspectable(inspectable bool) *WKWebExtensionContext {
 	x.inner.SetInspectable(inspectable)
 	return x
 }
 
+// @abstract The name shown when inspecting the background web view. @discussion This is the text that will appear when inspecting the background web view.
+//
 // WithInspectionName sets the inspectionName property and returns the receiver for chaining.
 func (x *WKWebExtensionContext) WithInspectionName(inspectionName string) *WKWebExtensionContext {
 	x.inner.SetInspectionName(foundation.NSStringStringWithUTF8String(inspectionName))
 	return x
 }
 
+// @abstract Specifies unsupported APIs for this extension, making them `undefined` in JavaScript. @discussion This property allows the app to specify a subset of web extension APIs that it chooses not to support, effectively making these APIs `undefined` within the extension's JavaScript contexts. This enables extensions to employ feature detection techniques for unsupported APIs, allowing them to adapt their behavior based on the APIs actually supported by the app. Setting is only allowed when the context is not loaded. Only certain APIs can be specified here, particularly those within the `browser` namespace and other dynamic functions and properties, anything else will be silently ignored. @note For example, specifying `"browser.windows.create"` and `"browser.storage"` in this set will result in the `browser.windows.create()` function and `browser.storage` property being `undefined`.
+//
 // WithUnsupportedAPIs sets the unsupportedAPIs property and returns the receiver for chaining.
 func (x *WKWebExtensionContext) WithUnsupportedAPIs(unsupportedAPIs *foundation.NSSet[*foundation.NSString]) *WKWebExtensionContext {
 	x.inner.SetUnsupportedAPIs(unsupportedAPIs)
 	return x
 }
 
+// @abstract The currently granted permissions and their expiration dates. @discussion Permissions that don't expire will have a distant future date. This will never include expired entries at time of access. Setting this property will replace all existing entries. Use this property for saving and restoring permission status in bulk. Permissions in this dictionary should be explicitly granted by the user before being added. Any permissions in this collection will not be presented for approval again until they expire. This value should be saved and restored as needed by the app. @seealso setPermissionStatus:forPermission: @seealso setPermissionStatus:forPermission:expirationDate:
+//
 // WithGrantedPermissions sets the grantedPermissions property and returns the receiver for chaining.
 func (x *WKWebExtensionContext) WithGrantedPermissions(grantedPermissions *foundation.NSDictionary[*foundation.NSString, *foundation.NSDate]) *WKWebExtensionContext {
 	x.inner.SetGrantedPermissions(grantedPermissions)
 	return x
 }
 
+// @abstract The currently granted permission match patterns and their expiration dates. @discussion Match patterns that don't expire will have a distant future date. This will never include expired entries at time of access. Setting this property will replace all existing entries. Use this property for saving and restoring permission status in bulk. Match patterns in this dictionary should be explicitly granted by the user before being added. Any match pattern in this collection will not be presented for approval again until they expire. This value should be saved and restored as needed by the app. @seealso setPermissionStatus:forMatchPattern: @seealso setPermissionStatus:forMatchPattern:expirationDate:
+//
 // WithGrantedPermissionMatchPatterns sets the grantedPermissionMatchPatterns property and returns the receiver for chaining.
 func (x *WKWebExtensionContext) WithGrantedPermissionMatchPatterns(grantedPermissionMatchPatterns *foundation.NSDictionary[*raw.WKWebExtensionMatchPattern, *foundation.NSDate]) *WKWebExtensionContext {
 	x.inner.SetGrantedPermissionMatchPatterns(grantedPermissionMatchPatterns)
 	return x
 }
 
+// @abstract The currently denied permissions and their expiration dates. @discussion Permissions that don't expire will have a distant future date. This will never include expired entries at time of access. Setting this property will replace all existing entries. Use this property for saving and restoring permission status in bulk. Permissions in this dictionary should be explicitly denied by the user before being added. Any match pattern in this collection will not be presented for approval again until they expire. This value should be saved and restored as needed by the app. @seealso setPermissionStatus:forPermission: @seealso setPermissionStatus:forPermission:expirationDate:
+//
 // WithDeniedPermissions sets the deniedPermissions property and returns the receiver for chaining.
 func (x *WKWebExtensionContext) WithDeniedPermissions(deniedPermissions *foundation.NSDictionary[*foundation.NSString, *foundation.NSDate]) *WKWebExtensionContext {
 	x.inner.SetDeniedPermissions(deniedPermissions)
 	return x
 }
 
+// @abstract The currently denied permission match patterns and their expiration dates. @discussion Match patterns that don't expire will have a distant future date. This will never include expired entries at time of access. Setting this property will replace all existing entries. Use this property for saving and restoring permission status in bulk. Match patterns in this dictionary should be explicitly denied by the user before being added. Any match pattern in this collection will not be presented for approval again until they expire. This value should be saved and restored as needed by the app. @seealso setPermissionStatus:forMatchPattern: @seealso setPermissionStatus:forMatchPattern:expirationDate:
+//
 // WithDeniedPermissionMatchPatterns sets the deniedPermissionMatchPatterns property and returns the receiver for chaining.
 func (x *WKWebExtensionContext) WithDeniedPermissionMatchPatterns(deniedPermissionMatchPatterns *foundation.NSDictionary[*raw.WKWebExtensionMatchPattern, *foundation.NSDate]) *WKWebExtensionContext {
 	x.inner.SetDeniedPermissionMatchPatterns(deniedPermissionMatchPatterns)
 	return x
 }
 
+// @abstract A Boolean value indicating if the extension has requested optional access to all hosts. @discussion If this property is `YES`, the extension has asked for access to all hosts in a call to `browser.runtime.permissions.request()`, and future permission checks will present discrete hosts for approval as being implicitly requested. This value should be saved and restored as needed by the app.
+//
 // WithHasRequestedOptionalAccessToAllHosts sets the hasRequestedOptionalAccessToAllHosts property and returns the receiver for chaining.
 func (x *WKWebExtensionContext) WithHasRequestedOptionalAccessToAllHosts(hasRequestedOptionalAccessToAllHosts bool) *WKWebExtensionContext {
 	x.inner.SetHasRequestedOptionalAccessToAllHosts(hasRequestedOptionalAccessToAllHosts)
 	return x
 }
 
+// @abstract A Boolean value indicating if the extension has access to private data. @discussion If this property is `YES`, the extension is granted permission to interact with private windows, tabs, and cookies. Access to private data should be explicitly allowed by the user before setting this property. This value should be saved and restored as needed by the app. @note To ensure proper isolation between private and non-private data, web views associated with private data must use a different “WKUserContentController“. Likewise, to be identified as a private web view and to ensure that cookies and other website data is not shared, private web views must be configured to use a non-persistent “WKWebsiteDataStore“.
+//
 // WithHasAccessToPrivateData sets the hasAccessToPrivateData property and returns the receiver for chaining.
 func (x *WKWebExtensionContext) WithHasAccessToPrivateData(hasAccessToPrivateData bool) *WKWebExtensionContext {
 	x.inner.SetHasAccessToPrivateData(hasAccessToPrivateData)
 	return x
 }
 
+// @abstract Checks the specified permission against the currently granted permissions. @param permission The permission for which to return the status. @seealso currentPermissions @seealso hasPermission:inTab: @seealso permissionStatusForPermission: @seealso permissionStatusForPermission:inTab:
+//
 // HasPermission calls the underlying HasPermission.
 func (x *WKWebExtensionContext) HasPermission(permission *foundation.NSString) bool {
 	return x.inner.HasPermission(permission)
 }
 
+// @abstract Checks the specified permission against the currently granted permissions in a specific tab. @param permission The permission for which to return the status. @param tab The tab in which to return the permission status, or \c nil if the tab is not known or the global status is desired. @discussion Permissions can be granted on a per-tab basis. When the tab is known, permission checks should always use this method. @seealso currentPermissions @seealso hasPermission: @seealso permissionStatusForPermission: @seealso permissionStatusForPermission:inTab:
+//
 // HasPermissionInTab calls the underlying HasPermissionInTab.
 func (x *WKWebExtensionContext) HasPermissionInTab(permission *foundation.NSString, tab raw.WKWebExtensionTab) bool {
 	return x.inner.HasPermissionInTab(permission, tab)
 }
 
+// @abstract Checks the specified URL against the currently granted permission match patterns. @param url The URL for which to return the status. @seealso currentPermissionMatchPatterns @seealso hasAccessToURL:inTab: @seealso permissionStatusForURL: @seealso permissionStatusForURL:inTab: @seealso permissionStatusForMatchPattern: @seealso permissionStatusForMatchPattern:inTab:
+//
 // HasAccessToURL calls the underlying HasAccessToURL.
 func (x *WKWebExtensionContext) HasAccessToURL(url string) bool {
 	return x.inner.HasAccessToURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 }
 
+// @abstract Checks the specified URL against the currently granted permission match patterns in a specific tab. @param url The URL for which to return the status. @param tab The tab in which to return the permission status, or \c nil if the tab is not known or the global status is desired. @discussion Some match patterns can be granted on a per-tab basis. When the tab is known, access checks should always use this method. @seealso currentPermissionMatchPatterns @seealso hasAccessToURL: @seealso permissionStatusForURL: @seealso permissionStatusForURL:inTab: @seealso permissionStatusForMatchPattern: @seealso permissionStatusForMatchPattern:inTab:
+//
 // HasAccessToURLInTab calls the underlying HasAccessToURLInTab.
 func (x *WKWebExtensionContext) HasAccessToURLInTab(url string, tab raw.WKWebExtensionTab) bool {
 	return x.inner.HasAccessToURLInTab(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), tab)
 }
 
+// @abstract Checks if the extension has script or stylesheet content that can be injected into the specified URL. @param url The webpage URL to check. @result Returns `YES` if the extension has content that can be injected by matching the URL against the extension's requested match patterns. @discussion The extension context will still need to be loaded and have granted website permissions for its content to actually be injected.
+//
 // HasInjectedContentForURL calls the underlying HasInjectedContentForURL.
 func (x *WKWebExtensionContext) HasInjectedContentForURL(url string) bool {
 	return x.inner.HasInjectedContentForURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 }
 
+// @abstract Checks the specified permission against the currently denied, granted, and requested permissions. @param permission The permission for which to return the status. @discussion Permissions can be granted on a per-tab basis. When the tab is known, access checks should always use the method that checks in a tab. @seealso permissionStatusForPermission:inTab: @seealso hasPermission:
+//
 // PermissionStatusForPermission calls the underlying PermissionStatusForPermission.
 func (x *WKWebExtensionContext) PermissionStatusForPermission(permission *foundation.NSString) WKWebExtensionContextPermissionStatus {
 	return WKWebExtensionContextPermissionStatus(x.inner.PermissionStatusForPermission(permission))
 }
 
+// @abstract Checks the specified permission against the currently denied, granted, and requested permissions. @param permission The permission for which to return the status. @param tab The tab in which to return the permission status, or \c nil if the tab is not known or the global status is desired. @discussion Permissions can be granted on a per-tab basis. When the tab is known, access checks should always specify the tab. @seealso permissionStatusForPermission: @seealso hasPermission:inTab:
+//
 // PermissionStatusForPermissionInTab calls the underlying PermissionStatusForPermissionInTab.
 func (x *WKWebExtensionContext) PermissionStatusForPermissionInTab(permission *foundation.NSString, tab raw.WKWebExtensionTab) WKWebExtensionContextPermissionStatus {
 	return WKWebExtensionContextPermissionStatus(x.inner.PermissionStatusForPermissionInTab(permission, tab))
 }
 
+// @abstract Sets the status of a permission with a distant future expiration date. @param status The new permission status to set for the given permission. @param permission The permission for which to set the status. @discussion This method will update “grantedPermissions“ and “deniedPermissions“. Use this method for changing a single permission's status. Only “WKWebExtensionContextPermissionStatusDeniedExplicitly“, “WKWebExtensionContextPermissionStatusUnknown“, and “WKWebExtensionContextPermissionStatusGrantedExplicitly“ states are allowed to be set using this method. @seealso setPermissionStatus:forPermission:expirationDate: @seealso setPermissionStatus:forPermission:inTab:
+//
 // SetPermissionStatusForPermission calls the underlying SetPermissionStatusForPermission.
 func (x *WKWebExtensionContext) SetPermissionStatusForPermission(status WKWebExtensionContextPermissionStatus, permission *foundation.NSString) {
 	x.inner.SetPermissionStatusForPermission(raw.WKWebExtensionContextPermissionStatus(status), permission)
 }
 
+// @abstract Sets the status of a permission with a specific expiration date. @param status The new permission status to set for the given permission. @param permission The permission for which to set the status. @param expirationDate The expiration date for the new permission status, or \c nil for distant future. @discussion This method will update “grantedPermissions“ and “deniedPermissions“. Use this method for changing a single permission's status. Passing a `nil` expiration date will be treated as a distant future date. Only “WKWebExtensionContextPermissionStatusDeniedExplicitly“, “WKWebExtensionContextPermissionStatusUnknown“, and “WKWebExtensionContextPermissionStatusGrantedExplicitly“ states are allowed to be set using this method. @seealso setPermissionStatus:forPermission: @seealso setPermissionStatus:forPermission:inTab:
+//
 // SetPermissionStatusForPermissionExpirationDate calls the underlying SetPermissionStatusForPermissionExpirationDate.
 func (x *WKWebExtensionContext) SetPermissionStatusForPermissionExpirationDate(status WKWebExtensionContextPermissionStatus, permission *foundation.NSString, expirationDate *foundation.NSDate) {
 	x.inner.SetPermissionStatusForPermissionExpirationDate(raw.WKWebExtensionContextPermissionStatus(status), permission, expirationDate)
 }
 
+// @abstract Checks the specified URL against the currently denied, granted, and requested permission match patterns. @param url The URL for which to return the status. @discussion URLs and match patterns can be granted on a per-tab basis. When the tab is known, access checks should always use the method that checks in a tab. @seealso permissionStatusForURL:inTab: @seealso hasAccessToURL:
+//
 // PermissionStatusForURL calls the underlying PermissionStatusForURL.
 func (x *WKWebExtensionContext) PermissionStatusForURL(url string) WKWebExtensionContextPermissionStatus {
 	return WKWebExtensionContextPermissionStatus(x.inner.PermissionStatusForURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url))))
 }
 
+// @abstract Checks the specified URL against the currently denied, granted, and requested permission match patterns. @param url The URL for which to return the status. @param tab The tab in which to return the permission status, or \c nil if the tab is not known or the global status is desired. @discussion URLs and match patterns can be granted on a per-tab basis. When the tab is known, access checks should always use this method. @seealso permissionStatusForURL: @seealso hasAccessToURL:inTab:
+//
 // PermissionStatusForURLInTab calls the underlying PermissionStatusForURLInTab.
 func (x *WKWebExtensionContext) PermissionStatusForURLInTab(url string, tab raw.WKWebExtensionTab) WKWebExtensionContextPermissionStatus {
 	return WKWebExtensionContextPermissionStatus(x.inner.PermissionStatusForURLInTab(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), tab))
 }
 
+// @abstract Sets the permission status of a URL with a distant future expiration date. @param status The new permission status to set for the given URL. @param url The URL for which to set the status. @discussion The URL is converted into a match pattern and will update “grantedPermissionMatchPatterns“ and “deniedPermissionMatchPatterns“. Use this method for changing a single URL's status. Only “WKWebExtensionContextPermissionStatusDeniedExplicitly“, “WKWebExtensionContextPermissionStatusUnknown“, and “WKWebExtensionContextPermissionStatusGrantedExplicitly“ states are allowed to be set using this method. @seealso setPermissionStatus:forURL:expirationDate: @seealso setPermissionStatus:forURL:inTab:
+//
 // SetPermissionStatusForURL calls the underlying SetPermissionStatusForURL.
 func (x *WKWebExtensionContext) SetPermissionStatusForURL(status WKWebExtensionContextPermissionStatus, url string) {
 	x.inner.SetPermissionStatusForURL(raw.WKWebExtensionContextPermissionStatus(status), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 }
 
+// @abstract Sets the permission status of a URL with a distant future expiration date. @param status The new permission status to set for the given URL. @param url The URL for which to set the status. @param expirationDate The expiration date for the new permission status, or \c nil for distant future. @discussion The URL is converted into a match pattern and will update “grantedPermissionMatchPatterns“ and “deniedPermissionMatchPatterns“. Use this method for changing a single URL's status. Passing a `nil` expiration date will be treated as a distant future date. Only “WKWebExtensionContextPermissionStatusDeniedExplicitly“, “WKWebExtensionContextPermissionStatusUnknown“, and “WKWebExtensionContextPermissionStatusGrantedExplicitly“ states are allowed to be set using this method. @seealso setPermissionStatus:forURL: @seealso setPermissionStatus:forURL:inTab:
+//
 // SetPermissionStatusForURLExpirationDate calls the underlying SetPermissionStatusForURLExpirationDate.
 func (x *WKWebExtensionContext) SetPermissionStatusForURLExpirationDate(status WKWebExtensionContextPermissionStatus, url string, expirationDate *foundation.NSDate) {
 	x.inner.SetPermissionStatusForURLExpirationDate(raw.WKWebExtensionContextPermissionStatus(status), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), expirationDate)
 }
 
+// @abstract Checks the specified match pattern against the currently denied, granted, and requested permission match patterns. @param pattern The pattern for which to return the status. @discussion Match patterns can be granted on a per-tab basis. When the tab is known, access checks should always use the method that checks in a tab. @seealso permissionStatusForMatchPattern:inTab: @seealso hasAccessToURL:inTab:
+//
 // PermissionStatusForMatchPattern calls the underlying PermissionStatusForMatchPattern.
 func (x *WKWebExtensionContext) PermissionStatusForMatchPattern(pattern *raw.WKWebExtensionMatchPattern) WKWebExtensionContextPermissionStatus {
 	return WKWebExtensionContextPermissionStatus(x.inner.PermissionStatusForMatchPattern(pattern))
 }
 
+// @abstract Checks the specified match pattern against the currently denied, granted, and requested permission match patterns. @param pattern The pattern for which to return the status. @param tab The tab in which to return the permission status, or \c nil if the tab is not known or the global status is desired. @discussion Match patterns can be granted on a per-tab basis. When the tab is known, access checks should always use this method. @seealso permissionStatusForMatchPattern: @seealso hasAccessToURL:inTab:
+//
 // PermissionStatusForMatchPatternInTab calls the underlying PermissionStatusForMatchPatternInTab.
 func (x *WKWebExtensionContext) PermissionStatusForMatchPatternInTab(pattern *raw.WKWebExtensionMatchPattern, tab raw.WKWebExtensionTab) WKWebExtensionContextPermissionStatus {
 	return WKWebExtensionContextPermissionStatus(x.inner.PermissionStatusForMatchPatternInTab(pattern, tab))
 }
 
+// @abstract Sets the status of a match pattern with a distant future expiration date. @param status The new permission status to set for the given match pattern. @param pattern The match pattern for which to set the status. @discussion This method will update “grantedPermissionMatchPatterns“ and “deniedPermissionMatchPatterns“. Use this method for changing a single match pattern's status. Only “WKWebExtensionContextPermissionStatusDeniedExplicitly“, “WKWebExtensionContextPermissionStatusUnknown“, and “WKWebExtensionContextPermissionStatusGrantedExplicitly“ states are allowed to be set using this method. @seealso setPermissionStatus:forMatchPattern:expirationDate: @seealso setPermissionStatus:forMatchPattern:inTab:
+//
 // SetPermissionStatusForMatchPattern calls the underlying SetPermissionStatusForMatchPattern.
 func (x *WKWebExtensionContext) SetPermissionStatusForMatchPattern(status WKWebExtensionContextPermissionStatus, pattern *raw.WKWebExtensionMatchPattern) {
 	x.inner.SetPermissionStatusForMatchPattern(raw.WKWebExtensionContextPermissionStatus(status), pattern)
 }
 
+// @abstract Sets the status of a match pattern with a specific expiration date. @param status The new permission status to set for the given match pattern. @param pattern The match pattern for which to set the status. @param expirationDate The expiration date for the new permission status, or \c nil for distant future. @discussion This method will update “grantedPermissionMatchPatterns“ and “deniedPermissionMatchPatterns“. Use this method for changing a single match pattern's status. Passing a `nil` expiration date will be treated as a distant future date. Only “WKWebExtensionContextPermissionStatusDeniedExplicitly“, “WKWebExtensionContextPermissionStatusUnknown“, and “WKWebExtensionContextPermissionStatusGrantedExplicitly“ states are allowed to be set using this method. @seealso setPermissionStatus:forMatchPattern: @seealso setPermissionStatus:forMatchPattern:inTab:
+//
 // SetPermissionStatusForMatchPatternExpirationDate calls the underlying SetPermissionStatusForMatchPatternExpirationDate.
 func (x *WKWebExtensionContext) SetPermissionStatusForMatchPatternExpirationDate(status WKWebExtensionContextPermissionStatus, pattern *raw.WKWebExtensionMatchPattern, expirationDate *foundation.NSDate) {
 	x.inner.SetPermissionStatusForMatchPatternExpirationDate(raw.WKWebExtensionContextPermissionStatus(status), pattern, expirationDate)
 }
 
+// @abstract Loads the background content if needed for the extension. @param completionHandler A block to be called upon completion of the loading process, with an optional error. @discussion This method forces the loading of the background content for the extension that will otherwise be loaded on-demand during specific events. It is useful when the app requires the background content to be loaded for other reasons. If the background content is already loaded, the completion handler will be called immediately. An error will occur if the extension does not have any background content to load or loading fails.
+//
 // LoadBackgroundContent blocks until the operation completes or ctx is cancelled.
 func (x *WKWebExtensionContext) LoadBackgroundContent(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -210,6 +270,8 @@ func (x *WKWebExtensionContext) LoadBackgroundContent(ctx context.Context) error
 	}
 }
 
+// @abstract Retrieves the extension action for a given tab, or the default action if `nil` is passed. @param tab The tab for which to retrieve the extension action, or `nil` to get the default action. @discussion The returned object represents the action specific to the tab when provided; otherwise, it returns the default action. The default action is useful when the context is unrelated to a specific tab. When possible, specify the tab to get the most context-relevant action. @seealso performActionForTab:
+//
 // ActionForTab calls the underlying ActionForTab.
 func (x *WKWebExtensionContext) ActionForTab(tab raw.WKWebExtensionTab) *WKWebExtensionAction {
 	_r := x.inner.ActionForTab(tab)
@@ -219,21 +281,29 @@ func (x *WKWebExtensionContext) ActionForTab(tab raw.WKWebExtensionTab) *WKWebEx
 	return &WKWebExtensionAction{inner: _r}
 }
 
+// @abstract Performs the extension action associated with the specified tab or performs the default action if `nil` is passed. @param tab The tab for which to perform the extension action, or `nil` to perform the default action. @discussion Performing the action will mark the tab, if specified, as having an active user gesture. When the “tab“ parameter is `nil`, the default action is performed. The action can either trigger an event or display a popup, depending on how the extension is configured. If the action is configured to display a popup, implementing the appropriate web extension controller delegate method is required; otherwise, no action is performed for popup actions.
+//
 // PerformActionForTab calls the underlying PerformActionForTab.
 func (x *WKWebExtensionContext) PerformActionForTab(tab raw.WKWebExtensionTab) {
 	x.inner.PerformActionForTab(tab)
 }
 
+// @abstract Performs the specified command, triggering events specific to this extension. @param command The command to be performed. @discussion This method performs the given command as if it was triggered by a user gesture within the context of the focused window and active tab.
+//
 // PerformCommand calls the underlying PerformCommand.
 func (x *WKWebExtensionContext) PerformCommand(command *raw.WKWebExtensionCommand) {
 	x.inner.PerformCommand(command)
 }
 
+// @abstract Performs the command associated with the given event. @discussion This method checks for a command corresponding to the provided event and performs it, if available. The app should use this method to perform any extension commands at an appropriate time in the app's event handling, like in “sendEvent:“ of “NSApplication“ or “NSWindow“ subclasses. @param event The event representing the user input. @result Returns `YES` if a command corresponding to the event was found and performed, `NO` otherwise.
+//
 // PerformCommandForEvent calls the underlying PerformCommandForEvent.
 func (x *WKWebExtensionContext) PerformCommandForEvent(event *appkit.NSEvent) bool {
 	return x.inner.PerformCommandForEvent(event)
 }
 
+// @abstract Retrieves the command associated with the given event without performing it. @discussion Returns the command that corresponds to the provided event, if such a command exists. This provides a way to programmatically determine what action would occur for a given event, without triggering the command. @param event The event for which to retrieve the corresponding command. @result The command associated with the event, or `nil` if there is no such command.
+//
 // CommandForEvent calls the underlying CommandForEvent.
 func (x *WKWebExtensionContext) CommandForEvent(event *appkit.NSEvent) *WKWebExtensionCommand {
 	_r := x.inner.CommandForEvent(event)
@@ -248,76 +318,124 @@ func (x *WKWebExtensionContext) MenuItemsForTab(tab raw.WKWebExtensionTab) *foun
 	return x.inner.MenuItemsForTab(tab)
 }
 
+// @abstract Should be called by the app when a user gesture is performed in a specific tab. @param tab The tab in which the user gesture was performed. @discussion When a user gesture is performed in a tab, this method should be called to update the extension context. This enables the extension to be aware of the user gesture, potentially granting it access to features that require user interaction, such as `activeTab`. Not required if using “performActionForTab:“. @seealso hasActiveUserGestureInTab:
+//
 // UserGesturePerformedInTab calls the underlying UserGesturePerformedInTab.
 func (x *WKWebExtensionContext) UserGesturePerformedInTab(tab raw.WKWebExtensionTab) {
 	x.inner.UserGesturePerformedInTab(tab)
 }
 
+// @abstract Indicates if a user gesture is currently active in the specified tab. @param tab The tab for which to check for an active user gesture. @discussion An active user gesture may influence the availability of certain permissions, such as `activeTab`. User gestures can be triggered by various user interactions with the web extension, including clicking on extension menu items, executing extension commands, or interacting with extension actions. A tab as having an active user gesture enables the extension to access features that require user interaction. @seealso userGesturePerformedInTab:
+//
 // HasActiveUserGestureInTab calls the underlying HasActiveUserGestureInTab.
 func (x *WKWebExtensionContext) HasActiveUserGestureInTab(tab raw.WKWebExtensionTab) bool {
 	return x.inner.HasActiveUserGestureInTab(tab)
 }
 
+// @abstract Should be called by the app to clear a user gesture in a specific tab. @param tab The tab from which the user gesture should be cleared. @discussion When a user gesture is no longer relevant in a tab, this method should be called to update the extension context. This will revoke the extension's access to features that require active user interaction, such as `activeTab`. User gestures are automatically cleared during navigation in certain scenarios; this method is needed if the app intends to clear the gesture more aggressively. @seealso userGesturePerformedInTab:
+//
 // ClearUserGestureInTab calls the underlying ClearUserGestureInTab.
 func (x *WKWebExtensionContext) ClearUserGestureInTab(tab raw.WKWebExtensionTab) {
 	x.inner.ClearUserGestureInTab(tab)
 }
 
+// @abstract Should be called by the app when a new window is opened to fire appropriate events with only this extension. @param newWindow The newly opened window. @discussion This method informs only the specific extension of the opening of a new window. If the intention is to inform all loaded extensions consistently, you should use the respective method on the extension controller instead. @seealso didCloseWindow: @seealso openWindows
+//
 // DidOpenWindow calls the underlying DidOpenWindow.
 func (x *WKWebExtensionContext) DidOpenWindow(newWindow raw.WKWebExtensionWindow) {
 	x.inner.DidOpenWindow(newWindow)
 }
 
+// @abstract Should be called by the app when a window is closed to fire appropriate events with only this extension. @param newWindow The window that was closed. @discussion This method informs only the specific extension of the closure of a window. If the intention is to inform all loaded extensions consistently, you should use the respective method on the extension controller instead. @seealso didOpenWindow: @seealso openWindows
+//
 // DidCloseWindow calls the underlying DidCloseWindow.
 func (x *WKWebExtensionContext) DidCloseWindow(closedWindow raw.WKWebExtensionWindow) {
 	x.inner.DidCloseWindow(closedWindow)
 }
 
+// @abstract Should be called by the app when a window gains focus to fire appropriate events with only this extension. @param focusedWindow The window that gained focus, or \c nil if no window has focus or a window has focus that is not visible to this extension. @discussion This method informs only the specific extension that a window has gained focus. If the intention is to inform all loaded extensions consistently, you should use the respective method on the extension controller instead.
+//
 // DidFocusWindow calls the underlying DidFocusWindow.
 func (x *WKWebExtensionContext) DidFocusWindow(focusedWindow raw.WKWebExtensionWindow) {
 	x.inner.DidFocusWindow(focusedWindow)
 }
 
+// @abstract Should be called by the app when a new tab is opened to fire appropriate events with only this extension. @param newTab The newly opened tab. @discussion This method informs only the specific extension of the opening of a new tab. If the intention is to inform all loaded extensions consistently, you should use the respective method on the extension controller instead. @seealso didCloseTab: @seealso openTabs
+//
 // DidOpenTab calls the underlying DidOpenTab.
 func (x *WKWebExtensionContext) DidOpenTab(newTab raw.WKWebExtensionTab) {
 	x.inner.DidOpenTab(newTab)
 }
 
+// @abstract Should be called by the app when a tab is closed to fire appropriate events with only this extension. @param closedTab The tab that was closed. @param windowIsClosing A boolean value indicating whether the window containing the tab is also closing. @discussion This method informs only the specific extension of the closure of a tab. If the intention is to inform all loaded extensions consistently, you should use the respective method on the extension controller instead. @seealso didOpenTab: @seealso openTabs
+//
 // DidCloseTabWindowIsClosing calls the underlying DidCloseTabWindowIsClosing.
 func (x *WKWebExtensionContext) DidCloseTabWindowIsClosing(closedTab raw.WKWebExtensionTab, windowIsClosing bool) {
 	x.inner.DidCloseTabWindowIsClosing(closedTab, windowIsClosing)
 }
 
+// @abstract Should be called by the app when a tab is activated to notify only this specific extension. @param activatedTab The tab that has become active. @param previousTab The tab that was active before. This parameter can be \c nil if there was no previously active tab. @discussion This method informs only the specific extension of the tab activation. If the intention is to inform all loaded extensions consistently, you should use the respective method on the extension controller instead.
+//
 // DidActivateTabPreviousActiveTab calls the underlying DidActivateTabPreviousActiveTab.
 func (x *WKWebExtensionContext) DidActivateTabPreviousActiveTab(activatedTab raw.WKWebExtensionTab, previousTab raw.WKWebExtensionTab) {
 	x.inner.DidActivateTabPreviousActiveTab(activatedTab, previousTab)
 }
 
+// @abstract Should be called by the app when tabs are selected to fire appropriate events with only this extension. @param selectedTabs The set of tabs that were selected. @discussion This method informs only the specific extension that tabs have been selected. If the intention is to inform all loaded extensions consistently, you should use the respective method on the extension controller instead.
+//
 // DidSelectTabs calls the underlying DidSelectTabs.
-func (x *WKWebExtensionContext) DidSelectTabs(selectedTabs *foundation.NSArray[raw.WKWebExtensionTab]) {
-	x.inner.DidSelectTabs(selectedTabs)
+func (x *WKWebExtensionContext) DidSelectTabs(selectedTabs ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(selectedTabs))
+	for _i, _v := range selectedTabs {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.WKWebExtensionTab]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.WKWebExtensionTab](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.DidSelectTabs(_arg0)
 }
 
+// @abstract Should be called by the app when tabs are deselected to fire appropriate events with only this extension. @param deselectedTabs The set of tabs that were deselected. @discussion This method informs only the specific extension that tabs have been deselected. If the intention is to inform all loaded extensions consistently, you should use the respective method on the extension controller instead.
+//
 // DidDeselectTabs calls the underlying DidDeselectTabs.
-func (x *WKWebExtensionContext) DidDeselectTabs(deselectedTabs *foundation.NSArray[raw.WKWebExtensionTab]) {
-	x.inner.DidDeselectTabs(deselectedTabs)
+func (x *WKWebExtensionContext) DidDeselectTabs(deselectedTabs ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(deselectedTabs))
+	for _i, _v := range deselectedTabs {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.WKWebExtensionTab]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.WKWebExtensionTab](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.DidDeselectTabs(_arg0)
 }
 
+// @abstract Should be called by the app when a tab is moved to fire appropriate events with only this extension. @param movedTab The tab that was moved. @param index The old index of the tab within the window. @param oldWindow The window that the tab was moved from, or \c nil if the tab is moving from no open window. @discussion If the window is staying the same, the current window should be specified. This method informs only the specific extension that a tab has been moved. If the intention is to inform all loaded extensions consistently, you should use the respective method on the extension controller instead.
+//
 // DidMoveTabFromIndexInWindow calls the underlying DidMoveTabFromIndexInWindow.
 func (x *WKWebExtensionContext) DidMoveTabFromIndexInWindow(movedTab raw.WKWebExtensionTab, index uint, oldWindow raw.WKWebExtensionWindow) {
 	x.inner.DidMoveTabFromIndexInWindow(movedTab, index, oldWindow)
 }
 
+// @abstract Should be called by the app when a tab is replaced by another tab to fire appropriate events with only this extension. @param oldTab The tab that was replaced. @param newTab The tab that replaced the old tab. @discussion This method informs only the specific extension that a tab has been replaced. If the intention is to inform all loaded extensions consistently, you should use the respective method on the extension controller instead.
+//
 // DidReplaceTabWithTab calls the underlying DidReplaceTabWithTab.
 func (x *WKWebExtensionContext) DidReplaceTabWithTab(oldTab raw.WKWebExtensionTab, newTab raw.WKWebExtensionTab) {
 	x.inner.DidReplaceTabWithTab(oldTab, newTab)
 }
 
+// @abstract Should be called by the app when the properties of a tab are changed to fire appropriate events with only this extension. @param properties The properties of the tab that were changed. @param changedTab The tab whose properties were changed. @discussion This method informs only the specific extension of the changes to a tab's properties. If the intention is to inform all loaded extensions consistently, you should use the respective method on the extension controller instead.
+//
 // DidChangeTabPropertiesForTab calls the underlying DidChangeTabPropertiesForTab.
 func (x *WKWebExtensionContext) DidChangeTabPropertiesForTab(properties WKWebExtensionTabChangedProperties, changedTab raw.WKWebExtensionTab) {
 	x.inner.DidChangeTabPropertiesForTab(raw.WKWebExtensionTabChangedProperties(properties), changedTab)
 }
 
+// @abstract The extension this context represents.
+//
 // WebExtension calls the underlying WebExtension.
 func (x *WKWebExtensionContext) WebExtension() *WKWebExtension {
 	_r := x.inner.WebExtension()
@@ -327,6 +445,8 @@ func (x *WKWebExtensionContext) WebExtension() *WKWebExtension {
 	return &WKWebExtension{inner: _r}
 }
 
+// @abstract The extension controller this context is loaded in, otherwise `nil` if it isn't loaded.
+//
 // WebExtensionController calls the underlying WebExtensionController.
 func (x *WKWebExtensionContext) WebExtensionController() *WKWebExtensionController {
 	_r := x.inner.WebExtensionController()
@@ -336,16 +456,22 @@ func (x *WKWebExtensionContext) WebExtensionController() *WKWebExtensionControll
 	return &WKWebExtensionController{inner: _r}
 }
 
+// @abstract A Boolean value indicating if this context is loaded in an extension controller.
+//
 // IsLoaded calls the underlying IsLoaded.
 func (x *WKWebExtensionContext) IsLoaded() bool {
 	return x.inner.IsLoaded()
 }
 
+// @abstract All errors that occurred in the extension context. @discussion Provides an array of all parse-time and runtime errors for the extension and extension context, with repeat errors consolidated into a single entry for the original occurrence. If no errors occurred, an empty array is returned.
+//
 // Errors calls the underlying Errors.
 func (x *WKWebExtensionContext) Errors() *foundation.NSArray[objc.ID] {
 	return x.inner.Errors()
 }
 
+// @abstract The base URL the context uses for loading extension resources or injecting content into webpages. @discussion The default value is a unique URL using the `webkit-extension` scheme. The base URL can be set to any URL, but only the scheme and host will be used. The scheme cannot be a scheme that is already supported by “WKWebView“ (e.g. http, https, etc.) Setting is only allowed when the context is not loaded.
+//
 // BaseURL calls the underlying BaseURL.
 func (x *WKWebExtensionContext) BaseURL() *foundation.NSURL {
 	return x.inner.BaseURL()
@@ -356,6 +482,8 @@ func (x *WKWebExtensionContext) SetBaseURL(baseURL string) {
 	x.inner.SetBaseURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)))
 }
 
+// @abstract A unique identifier used to distinguish the extension from other extensions and target it for messages. @discussion The default value is a unique value that matches the host in the default base URL. The identifier can be any value that is unique. Setting is only allowed when the context is not loaded. This value is accessible by the extension via `browser.runtime.id` and is used for messaging the extension via `browser.runtime.sendMessage()`.
+//
 // UniqueIdentifier calls the underlying UniqueIdentifier.
 func (x *WKWebExtensionContext) UniqueIdentifier() string {
 	_r := x.inner.UniqueIdentifier()
@@ -370,6 +498,8 @@ func (x *WKWebExtensionContext) SetUniqueIdentifier(uniqueIdentifier string) {
 	x.inner.SetUniqueIdentifier(foundation.NSStringStringWithUTF8String(uniqueIdentifier))
 }
 
+// @abstract Determines whether Web Inspector can inspect the “WKWebView“ instances for this context. @discussion A context can control multiple “WKWebView“ instances, from the background content, to the popover. You should set this to `YES` when needed for debugging purposes. The default value is `NO`.
+//
 // IsInspectable calls the underlying IsInspectable.
 func (x *WKWebExtensionContext) IsInspectable() bool {
 	return x.inner.IsInspectable()
@@ -380,6 +510,8 @@ func (x *WKWebExtensionContext) SetInspectable(inspectable bool) {
 	x.inner.SetInspectable(inspectable)
 }
 
+// @abstract The name shown when inspecting the background web view. @discussion This is the text that will appear when inspecting the background web view.
+//
 // InspectionName calls the underlying InspectionName.
 func (x *WKWebExtensionContext) InspectionName() string {
 	_r := x.inner.InspectionName()
@@ -394,6 +526,8 @@ func (x *WKWebExtensionContext) SetInspectionName(inspectionName string) {
 	x.inner.SetInspectionName(foundation.NSStringStringWithUTF8String(inspectionName))
 }
 
+// @abstract Specifies unsupported APIs for this extension, making them `undefined` in JavaScript. @discussion This property allows the app to specify a subset of web extension APIs that it chooses not to support, effectively making these APIs `undefined` within the extension's JavaScript contexts. This enables extensions to employ feature detection techniques for unsupported APIs, allowing them to adapt their behavior based on the APIs actually supported by the app. Setting is only allowed when the context is not loaded. Only certain APIs can be specified here, particularly those within the `browser` namespace and other dynamic functions and properties, anything else will be silently ignored. @note For example, specifying `"browser.windows.create"` and `"browser.storage"` in this set will result in the `browser.windows.create()` function and `browser.storage` property being `undefined`.
+//
 // UnsupportedAPIs calls the underlying UnsupportedAPIs.
 func (x *WKWebExtensionContext) UnsupportedAPIs() *foundation.NSSet[*foundation.NSString] {
 	return x.inner.UnsupportedAPIs()
@@ -404,6 +538,8 @@ func (x *WKWebExtensionContext) SetUnsupportedAPIs(unsupportedAPIs *foundation.N
 	x.inner.SetUnsupportedAPIs(unsupportedAPIs)
 }
 
+// @abstract The web view configuration to use for web views that load pages from this extension. @discussion Returns a customized copy of the configuration, originally set in the web extension controller configuration, for this extension. The app must use this configuration when initializing web views intended to navigate to a URL originating from this extension's base URL. The app must also swap web views in tabs when navigating to and from web extension URLs. This property returns `nil` if the context isn't associated with a web extension controller. The returned configuration copy can be customized prior to web view initialization. @note Navigations will fail if a web view using this configuration attempts to navigate to a URL that doesn't originate from this extension's base URL. Similarly, navigations will be canceled if a web view not configured with this configuration attempts to navigate to a URL that does originate from this extension's base URL.
+//
 // WebViewConfiguration calls the underlying WebViewConfiguration.
 func (x *WKWebExtensionContext) WebViewConfiguration() *WKWebViewConfiguration {
 	_r := x.inner.WebViewConfiguration()
@@ -413,16 +549,22 @@ func (x *WKWebExtensionContext) WebViewConfiguration() *WKWebViewConfiguration {
 	return &WKWebViewConfiguration{inner: _r}
 }
 
+// @abstract The URL of the extension's options page, if the extension has one. @discussion Provides the URL for the dedicated options page, if provided by the extension; otherwise `nil` if no page is defined. The app should provide access to this page through a user interface element. @note Navigation to the options page is only possible after this extension has been loaded. @seealso webViewConfiguration
+//
 // OptionsPageURL calls the underlying OptionsPageURL.
 func (x *WKWebExtensionContext) OptionsPageURL() *foundation.NSURL {
 	return x.inner.OptionsPageURL()
 }
 
+// @abstract The URL to use as an alternative to the default new tab page, if the extension has one. @discussion Provides the URL for a new tab page, if provided by the extension; otherwise `nil` if no page is defined. The app should prompt the user for permission to use the extension's new tab page as the default. @note Navigation to the override new tab page is only possible after this extension has been loaded. @seealso webViewConfiguration
+//
 // OverrideNewTabPageURL calls the underlying OverrideNewTabPageURL.
 func (x *WKWebExtensionContext) OverrideNewTabPageURL() *foundation.NSURL {
 	return x.inner.OverrideNewTabPageURL()
 }
 
+// @abstract The currently granted permissions and their expiration dates. @discussion Permissions that don't expire will have a distant future date. This will never include expired entries at time of access. Setting this property will replace all existing entries. Use this property for saving and restoring permission status in bulk. Permissions in this dictionary should be explicitly granted by the user before being added. Any permissions in this collection will not be presented for approval again until they expire. This value should be saved and restored as needed by the app. @seealso setPermissionStatus:forPermission: @seealso setPermissionStatus:forPermission:expirationDate:
+//
 // GrantedPermissions calls the underlying GrantedPermissions.
 func (x *WKWebExtensionContext) GrantedPermissions() *foundation.NSDictionary[*foundation.NSString, *foundation.NSDate] {
 	return x.inner.GrantedPermissions()
@@ -433,6 +575,8 @@ func (x *WKWebExtensionContext) SetGrantedPermissions(grantedPermissions *founda
 	x.inner.SetGrantedPermissions(grantedPermissions)
 }
 
+// @abstract The currently granted permission match patterns and their expiration dates. @discussion Match patterns that don't expire will have a distant future date. This will never include expired entries at time of access. Setting this property will replace all existing entries. Use this property for saving and restoring permission status in bulk. Match patterns in this dictionary should be explicitly granted by the user before being added. Any match pattern in this collection will not be presented for approval again until they expire. This value should be saved and restored as needed by the app. @seealso setPermissionStatus:forMatchPattern: @seealso setPermissionStatus:forMatchPattern:expirationDate:
+//
 // GrantedPermissionMatchPatterns calls the underlying GrantedPermissionMatchPatterns.
 func (x *WKWebExtensionContext) GrantedPermissionMatchPatterns() *foundation.NSDictionary[*raw.WKWebExtensionMatchPattern, *foundation.NSDate] {
 	return x.inner.GrantedPermissionMatchPatterns()
@@ -443,6 +587,8 @@ func (x *WKWebExtensionContext) SetGrantedPermissionMatchPatterns(grantedPermiss
 	x.inner.SetGrantedPermissionMatchPatterns(grantedPermissionMatchPatterns)
 }
 
+// @abstract The currently denied permissions and their expiration dates. @discussion Permissions that don't expire will have a distant future date. This will never include expired entries at time of access. Setting this property will replace all existing entries. Use this property for saving and restoring permission status in bulk. Permissions in this dictionary should be explicitly denied by the user before being added. Any match pattern in this collection will not be presented for approval again until they expire. This value should be saved and restored as needed by the app. @seealso setPermissionStatus:forPermission: @seealso setPermissionStatus:forPermission:expirationDate:
+//
 // DeniedPermissions calls the underlying DeniedPermissions.
 func (x *WKWebExtensionContext) DeniedPermissions() *foundation.NSDictionary[*foundation.NSString, *foundation.NSDate] {
 	return x.inner.DeniedPermissions()
@@ -453,6 +599,8 @@ func (x *WKWebExtensionContext) SetDeniedPermissions(deniedPermissions *foundati
 	x.inner.SetDeniedPermissions(deniedPermissions)
 }
 
+// @abstract The currently denied permission match patterns and their expiration dates. @discussion Match patterns that don't expire will have a distant future date. This will never include expired entries at time of access. Setting this property will replace all existing entries. Use this property for saving and restoring permission status in bulk. Match patterns in this dictionary should be explicitly denied by the user before being added. Any match pattern in this collection will not be presented for approval again until they expire. This value should be saved and restored as needed by the app. @seealso setPermissionStatus:forMatchPattern: @seealso setPermissionStatus:forMatchPattern:expirationDate:
+//
 // DeniedPermissionMatchPatterns calls the underlying DeniedPermissionMatchPatterns.
 func (x *WKWebExtensionContext) DeniedPermissionMatchPatterns() *foundation.NSDictionary[*raw.WKWebExtensionMatchPattern, *foundation.NSDate] {
 	return x.inner.DeniedPermissionMatchPatterns()
@@ -463,6 +611,8 @@ func (x *WKWebExtensionContext) SetDeniedPermissionMatchPatterns(deniedPermissio
 	x.inner.SetDeniedPermissionMatchPatterns(deniedPermissionMatchPatterns)
 }
 
+// @abstract A Boolean value indicating if the extension has requested optional access to all hosts. @discussion If this property is `YES`, the extension has asked for access to all hosts in a call to `browser.runtime.permissions.request()`, and future permission checks will present discrete hosts for approval as being implicitly requested. This value should be saved and restored as needed by the app.
+//
 // HasRequestedOptionalAccessToAllHosts calls the underlying HasRequestedOptionalAccessToAllHosts.
 func (x *WKWebExtensionContext) HasRequestedOptionalAccessToAllHosts() bool {
 	return x.inner.HasRequestedOptionalAccessToAllHosts()
@@ -473,6 +623,8 @@ func (x *WKWebExtensionContext) SetHasRequestedOptionalAccessToAllHosts(hasReque
 	x.inner.SetHasRequestedOptionalAccessToAllHosts(hasRequestedOptionalAccessToAllHosts)
 }
 
+// @abstract A Boolean value indicating if the extension has access to private data. @discussion If this property is `YES`, the extension is granted permission to interact with private windows, tabs, and cookies. Access to private data should be explicitly allowed by the user before setting this property. This value should be saved and restored as needed by the app. @note To ensure proper isolation between private and non-private data, web views associated with private data must use a different “WKUserContentController“. Likewise, to be identified as a private web view and to ensure that cookies and other website data is not shared, private web views must be configured to use a non-persistent “WKWebsiteDataStore“.
+//
 // HasAccessToPrivateData calls the underlying HasAccessToPrivateData.
 func (x *WKWebExtensionContext) HasAccessToPrivateData() bool {
 	return x.inner.HasAccessToPrivateData()
@@ -483,36 +635,50 @@ func (x *WKWebExtensionContext) SetHasAccessToPrivateData(hasAccessToPrivateData
 	x.inner.SetHasAccessToPrivateData(hasAccessToPrivateData)
 }
 
+// @abstract The currently granted permissions that have not expired. @seealso grantedPermissions
+//
 // CurrentPermissions calls the underlying CurrentPermissions.
 func (x *WKWebExtensionContext) CurrentPermissions() *foundation.NSSet[*foundation.NSString] {
 	return x.inner.CurrentPermissions()
 }
 
+// @abstract The currently granted permission match patterns that have not expired. @seealso grantedPermissionMatchPatterns
+//
 // CurrentPermissionMatchPatterns calls the underlying CurrentPermissionMatchPatterns.
 func (x *WKWebExtensionContext) CurrentPermissionMatchPatterns() *foundation.NSSet[*raw.WKWebExtensionMatchPattern] {
 	return x.inner.CurrentPermissionMatchPatterns()
 }
 
+// @abstract A Boolean value indicating if the currently granted permission match patterns set contains the `<all_urls>` pattern. @discussion This does not check for any `*` host patterns. In most cases you should use the broader “hasAccessToAllHosts“. @seealso currentPermissionMatchPatterns @seealso hasAccessToAllHosts
+//
 // HasAccessToAllURLs calls the underlying HasAccessToAllURLs.
 func (x *WKWebExtensionContext) HasAccessToAllURLs() bool {
 	return x.inner.HasAccessToAllURLs()
 }
 
+// @abstract A Boolean value indicating if the currently granted permission match patterns set contains the `<all_urls>` pattern or any `*` host patterns. @seealso currentPermissionMatchPatterns @seealso hasAccessToAllURLs
+//
 // HasAccessToAllHosts calls the underlying HasAccessToAllHosts.
 func (x *WKWebExtensionContext) HasAccessToAllHosts() bool {
 	return x.inner.HasAccessToAllHosts()
 }
 
+// @abstract A Boolean value indicating whether the extension has script or stylesheet content that can be injected into webpages. @discussion If this property is `YES`, the extension has content that can be injected by matching against the extension's requested match patterns. @seealso hasInjectedContentForURL:
+//
 // HasInjectedContent calls the underlying HasInjectedContent.
 func (x *WKWebExtensionContext) HasInjectedContent() bool {
 	return x.inner.HasInjectedContent()
 }
 
+// @abstract A boolean value indicating whether the extension includes rules used for content modification or blocking. @discussion This includes both static rules available in the extension's manifest and dynamic rules applied during a browsing session.
+//
 // HasContentModificationRules calls the underlying HasContentModificationRules.
 func (x *WKWebExtensionContext) HasContentModificationRules() bool {
 	return x.inner.HasContentModificationRules()
 }
 
+// @abstract The commands associated with the extension. @discussion Provides all commands registered within the extension. Each command represents an action or behavior available for the web extension. @seealso performCommand:
+//
 // Commands returns the collection as a Go slice.
 func (x *WKWebExtensionContext) Commands() []*WKWebExtensionCommand {
 	arr := x.inner.Commands()
@@ -524,16 +690,22 @@ func (x *WKWebExtensionContext) Commands() []*WKWebExtensionCommand {
 	})
 }
 
+// @abstract The open windows that are exposed to this extension. @discussion Provides the windows that are open and visible to the extension, as updated by the “didOpenWindow:“ and “didCloseWindow:“ methods. Initially populated by the windows returned by the extension controller delegate method “webExtensionController:openWindowsForExtensionContext:“. @seealso didOpenWindow: @seealso didCloseWindow:
+//
 // OpenWindows calls the underlying OpenWindows.
 func (x *WKWebExtensionContext) OpenWindows() *foundation.NSArray[raw.WKWebExtensionWindow] {
 	return x.inner.OpenWindows()
 }
 
+// @abstract The window that currently has focus for this extension. @discussion Provides the window that currently has focus, as set by the “didFocusWindow:“ method. It will be `nil` if no window has focus or if a window has focus that is not visible to the extension. Initially populated by the window returned by the extension controller delegate method “webExtensionController:focusedWindowForExtensionContext:“. @seealso didFocusWindow:
+//
 // FocusedWindow calls the underlying FocusedWindow.
 func (x *WKWebExtensionContext) FocusedWindow() raw.WKWebExtensionWindow {
 	return x.inner.FocusedWindow()
 }
 
+// @abstract A set of open tabs in all open windows that are exposed to this extension. @discussion Provides a set of tabs in all open windows that are visible to the extension, as updated by the “didOpenTab:“ and “didCloseTab:“ methods. Initially populated by the tabs in the windows returned by the extension controller delegate method “webExtensionController:openWindowsForExtensionContext:“. @seealso didOpenTab: @seealso didCloseTab:
+//
 // OpenTabs calls the underlying OpenTabs.
 func (x *WKWebExtensionContext) OpenTabs() *foundation.NSSet[raw.WKWebExtensionTab] {
 	return x.inner.OpenTabs()
@@ -586,8 +758,8 @@ type WKWebExtensionContextable interface {
 	DidOpenTab(newTab raw.WKWebExtensionTab)
 	DidCloseTabWindowIsClosing(closedTab raw.WKWebExtensionTab, windowIsClosing bool)
 	DidActivateTabPreviousActiveTab(activatedTab raw.WKWebExtensionTab, previousTab raw.WKWebExtensionTab)
-	DidSelectTabs(selectedTabs *foundation.NSArray[raw.WKWebExtensionTab])
-	DidDeselectTabs(deselectedTabs *foundation.NSArray[raw.WKWebExtensionTab])
+	DidSelectTabs(selectedTabs ...purego.IDer)
+	DidDeselectTabs(deselectedTabs ...purego.IDer)
 	DidMoveTabFromIndexInWindow(movedTab raw.WKWebExtensionTab, index uint, oldWindow raw.WKWebExtensionWindow)
 	DidReplaceTabWithTab(oldTab raw.WKWebExtensionTab, newTab raw.WKWebExtensionTab)
 	DidChangeTabPropertiesForTab(properties WKWebExtensionTabChangedProperties, changedTab raw.WKWebExtensionTab)

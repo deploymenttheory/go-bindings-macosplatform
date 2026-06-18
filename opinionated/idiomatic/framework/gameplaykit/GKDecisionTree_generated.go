@@ -31,6 +31,8 @@ func DecisionTreeFromID(id objc.ID) *DecisionTree {
 	return &DecisionTree{inner: raw.GKDecisionTreeFromID(id)}
 }
 
+// Initializes the decision tree with a root node containing the provided attribute @param attribute The attribute to be contained at the root of the tree @return GKDecisionTree with the set root
+//
 // NewDecisionTreeWithAttribute creates a new [DecisionTree].
 func NewDecisionTreeWithAttribute(attribute foundation.NSObjectProtocol) *DecisionTree {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKDecisionTree")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewDecisionTreeWithAttribute(attribute foundation.NSObjectProtocol) *Decisi
 	return &DecisionTree{inner: raw.GKDecisionTreeFromID(_id)}
 }
 
+// Initializes and constructs a decision tree by learning from the provided examples & attributes @param examples Must be an array of examples (with each example being a collection of the various attributes at a given state) @param actions An array of the corresponding actions for each example. Ordered such that the first action matches with the first example in examples. @param attributes The list of attributes. Ordered such that the first attribute matches with the first result in each example. So if we have two attributes: [distance, jump height], and two examples: [[20, 8], [15, 14]], and the resulting actions here: [Roll, Jump], we can think of this as a matrix: distance| height            <-  Attributes _______|_______ |       |       | |  20   |   8   |  jump |-------|-------|-------    <-  Results |  15   |   14  |  roll |_______|_______| ^ | Examples @return GKDecisionTree created by learning from the provided examples for the provided attributes
+//
 // NewDecisionTreeWithExamplesActionsAttributes creates a new [DecisionTree].
 func NewDecisionTreeWithExamplesActionsAttributes(examples *foundation.NSArray[objc.ID], actions *foundation.NSArray[foundation.NSObjectProtocol], attributes *foundation.NSArray[foundation.NSObjectProtocol]) *DecisionTree {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKDecisionTree")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewDecisionTreeWithExamplesActionsAttributes(examples *foundation.NSArray[o
 	return &DecisionTree{inner: raw.GKDecisionTreeFromID(_id)}
 }
 
+// Initializes a decision tree from the contents of a file @param url The URL from which the contents will be loaded @return The instance of the decision tree constructed
+//
 // NewDecisionTreeWithURLError creates a new [DecisionTree].
 func NewDecisionTreeWithURLError(url string, error_ unsafe.Pointer) *DecisionTree {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKDecisionTree")), objc.RegisterName("alloc"))
@@ -52,22 +58,30 @@ func NewDecisionTreeWithURLError(url string, error_ unsafe.Pointer) *DecisionTre
 	return &DecisionTree{inner: raw.GKDecisionTreeFromID(_id)}
 }
 
+// The random source used by the decision tree when descending on a random branch This must be set before creating any weighted branches @see GKDecisionNode
+//
 // WithRandomSource sets the randomSource property and returns the receiver for chaining.
 func (x *DecisionTree) WithRandomSource(randomSource RandomSourceProvider) *DecisionTree {
 	x.inner.SetRandomSource(randomSource.asRandomSource())
 	return x
 }
 
+// Exports a decision tree to the given URL @param url The URL to which the contents will be exported @return The response indicating the status of the decision tree being successfully exported
+//
 // ExportToURLError calls the underlying ExportToURLError.
 func (x *DecisionTree) ExportToURLError(url string, error_ unsafe.Pointer) bool {
 	return x.inner.ExportToURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), error_)
 }
 
+// Will branch down from the root node to find the correct action attribute for the given collection of results and their respective attributes @param answers The dictionary of attributes (keys) and their answers (values) @return The attribute found by traversing the tree given the provided answers
+//
 // FindActionForAnswers calls the underlying FindActionForAnswers.
 func (x *DecisionTree) FindActionForAnswers(answers *foundation.NSDictionary[foundation.NSObjectProtocol, foundation.NSObjectProtocol]) foundation.NSObjectProtocol {
 	return x.inner.FindActionForAnswers(answers)
 }
 
+// The node for the decision tree that all other nodes descend from
+//
 // RootNode calls the underlying RootNode.
 func (x *DecisionTree) RootNode() *DecisionNode {
 	_r := x.inner.RootNode()
@@ -77,6 +91,8 @@ func (x *DecisionTree) RootNode() *DecisionNode {
 	return &DecisionNode{inner: _r}
 }
 
+// The random source used by the decision tree when descending on a random branch This must be set before creating any weighted branches @see GKDecisionNode
+//
 // RandomSource calls the underlying RandomSource.
 func (x *DecisionTree) RandomSource() *RandomSource {
 	_r := x.inner.RandomSource()

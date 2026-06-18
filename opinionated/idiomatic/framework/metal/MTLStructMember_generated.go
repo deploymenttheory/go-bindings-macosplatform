@@ -72,6 +72,8 @@ func (x *StructMember) PointerType() *PointerType {
 	return &PointerType{inner: _r}
 }
 
+// Provides a description of the underlying tensor type when this struct member holds a tensor. - Returns: A description of the tensor type that this struct member holds, or `nil` if this struct member doesn't hold a tensor.
+//
 // TensorReferenceType calls the underlying TensorReferenceType.
 func (x *StructMember) TensorReferenceType() *TensorReferenceType {
 	_r := x.inner.TensorReferenceType()

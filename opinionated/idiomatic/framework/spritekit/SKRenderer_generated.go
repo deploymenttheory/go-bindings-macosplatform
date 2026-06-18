@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A renderer for displaying a SpriteKit scene in an existing Metal workflow.
+//
 // Renderer wraps [raw.SKRenderer] with a fluent Go API.
 type Renderer struct {
 	inner *raw.SKRenderer
@@ -37,24 +39,32 @@ func NewRenderer() *Renderer {
 	return &Renderer{inner: raw.SKRendererFromID(_id)}
 }
 
+// The currently presented scene, otherwise nil. If in a transition, the 'incoming' scene is returned.
+//
 // WithScene sets the scene property and returns the receiver for chaining.
 func (x *Renderer) WithScene(scene *Scene) *Renderer {
 	x.inner.SetScene(scene.Unwrap())
 	return x
 }
 
+// Ignores sibling and traversal order to sort the rendered contents of a scene into the most efficient batching possible. This will require zPosition to be used in the scenes to properly guarantee elements are in front or behind each other. This defaults to NO, meaning that sibling order overrides efficiency heuristics in the rendering of the scenes in the view. Setting this to YES for a complex scene may substantially increase performance, but care must be taken as only zPosition determines render order before the efficiency heuristics are used.
+//
 // WithIgnoresSiblingOrder sets the ignoresSiblingOrder property and returns the receiver for chaining.
 func (x *Renderer) WithIgnoresSiblingOrder(ignoresSiblingOrder bool) *Renderer {
 	x.inner.SetIgnoresSiblingOrder(ignoresSiblingOrder)
 	return x
 }
 
+// A boolean that indicated whether non-visible nodes should be automatically culled when rendering.
+//
 // WithShouldCullNonVisibleNodes sets the shouldCullNonVisibleNodes property and returns the receiver for chaining.
 func (x *Renderer) WithShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool) *Renderer {
 	x.inner.SetShouldCullNonVisibleNodes(shouldCullNonVisibleNodes)
 	return x
 }
 
+// Toggles display of performance stats when rendering. All default to false.
+//
 // WithShowsDrawCount sets the showsDrawCount property and returns the receiver for chaining.
 func (x *Renderer) WithShowsDrawCount(showsDrawCount bool) *Renderer {
 	x.inner.SetShowsDrawCount(showsDrawCount)
@@ -85,21 +95,29 @@ func (x *Renderer) WithShowsFields(showsFields bool) *Renderer {
 	return x
 }
 
+// Render the scene content in the specified Metal command buffer. @param viewport The pixel dimensions in which to render. @param commandBuffer The Metal command buffer in which SpriteKit should schedule rendering commands. @param renderPassDescriptor The Metal render pass descriptor describing the rendering target.
+//
 // RenderWithViewportCommandBufferRenderPassDescriptor calls the underlying RenderWithViewportCommandBufferRenderPassDescriptor.
 func (x *Renderer) RenderWithViewportCommandBufferRenderPassDescriptor(viewport corefoundation.CGRect, commandBuffer metal.MTLCommandBuffer, renderPassDescriptor *metal.MTLRenderPassDescriptor) {
 	x.inner.RenderWithViewportCommandBufferRenderPassDescriptor(viewport, commandBuffer, renderPassDescriptor)
 }
 
+// Render the scene content using a specific Metal command encoder. @param viewport The pixel dimensions in which to render. @param renderCommandEncoder The Metal render command encoder that SpriteKit will use to encode rendering commands. This method will not call endEncoding. @param renderPassDescriptor The Metal render pass descriptor describing the rendering target. @param commandQueue The Metal command queue.
+//
 // RenderWithViewportRenderCommandEncoderRenderPassDescriptorCommandQueue calls the underlying RenderWithViewportRenderCommandEncoderRenderPassDescriptorCommandQueue.
 func (x *Renderer) RenderWithViewportRenderCommandEncoderRenderPassDescriptorCommandQueue(viewport corefoundation.CGRect, renderCommandEncoder metal.MTLRenderCommandEncoder, renderPassDescriptor *metal.MTLRenderPassDescriptor, commandQueue metal.MTLCommandQueue) {
 	x.inner.RenderWithViewportRenderCommandEncoderRenderPassDescriptorCommandQueue(viewport, renderCommandEncoder, renderPassDescriptor, commandQueue)
 }
 
+// Update the scene at the specified system time. @param currentTime The timestamp in seconds.
+//
 // UpdateAtTime calls the underlying UpdateAtTime.
 func (x *Renderer) UpdateAtTime(currentTime float64) {
 	x.inner.UpdateAtTime(currentTime)
 }
 
+// The currently presented scene, otherwise nil. If in a transition, the 'incoming' scene is returned.
+//
 // Scene calls the underlying Scene.
 func (x *Renderer) Scene() *Scene {
 	_r := x.inner.Scene()
@@ -114,6 +132,8 @@ func (x *Renderer) SetScene(scene *raw.SKScene) {
 	x.inner.SetScene(scene)
 }
 
+// Ignores sibling and traversal order to sort the rendered contents of a scene into the most efficient batching possible. This will require zPosition to be used in the scenes to properly guarantee elements are in front or behind each other. This defaults to NO, meaning that sibling order overrides efficiency heuristics in the rendering of the scenes in the view. Setting this to YES for a complex scene may substantially increase performance, but care must be taken as only zPosition determines render order before the efficiency heuristics are used.
+//
 // IgnoresSiblingOrder calls the underlying IgnoresSiblingOrder.
 func (x *Renderer) IgnoresSiblingOrder() bool {
 	return x.inner.IgnoresSiblingOrder()
@@ -124,6 +144,8 @@ func (x *Renderer) SetIgnoresSiblingOrder(ignoresSiblingOrder bool) {
 	x.inner.SetIgnoresSiblingOrder(ignoresSiblingOrder)
 }
 
+// A boolean that indicated whether non-visible nodes should be automatically culled when rendering.
+//
 // ShouldCullNonVisibleNodes calls the underlying ShouldCullNonVisibleNodes.
 func (x *Renderer) ShouldCullNonVisibleNodes() bool {
 	return x.inner.ShouldCullNonVisibleNodes()
@@ -134,6 +156,8 @@ func (x *Renderer) SetShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool) 
 	x.inner.SetShouldCullNonVisibleNodes(shouldCullNonVisibleNodes)
 }
 
+// Toggles display of performance stats when rendering. All default to false.
+//
 // ShowsDrawCount calls the underlying ShowsDrawCount.
 func (x *Renderer) ShowsDrawCount() bool {
 	return x.inner.ShowsDrawCount()

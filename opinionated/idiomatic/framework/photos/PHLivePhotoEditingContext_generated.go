@@ -37,6 +37,8 @@ func LivePhotoEditingContextFromID(id objc.ID) *LivePhotoEditingContext {
 	return &LivePhotoEditingContext{inner: raw.PHLivePhotoEditingContextFromID(id)}
 }
 
+// Initializer from the specified live photo input Return nil if the specified input is not for a live photo
+//
 // NewLivePhotoEditingContextWithLivePhotoEditingInput creates a new [LivePhotoEditingContext].
 func NewLivePhotoEditingContextWithLivePhotoEditingInput(livePhotoInput *raw.PHContentEditingInput) *LivePhotoEditingContext {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHLivePhotoEditingContext")), objc.RegisterName("alloc"))
@@ -44,18 +46,24 @@ func NewLivePhotoEditingContextWithLivePhotoEditingInput(livePhotoInput *raw.PHC
 	return &LivePhotoEditingContext{inner: raw.PHLivePhotoEditingContextFromID(_id)}
 }
 
+// A block that can be set to process each frame of the live photo Note that the context uses a copy of the processor block during processing
+//
 // WithFrameProcessor sets the frameProcessor property and returns the receiver for chaining.
 func (x *LivePhotoEditingContext) WithFrameProcessor(frameProcessor objc.Block) *LivePhotoEditingContext {
 	x.inner.SetFrameProcessor(frameProcessor)
 	return x
 }
 
+// Specify the audio volume of the edited live photo Must be between 0.0 and 1.0 Default to 1.0
+//
 // WithAudioVolume sets the audioVolume property and returns the receiver for chaining.
 func (x *LivePhotoEditingContext) WithAudioVolume(audioVolume float32) *LivePhotoEditingContext {
 	x.inner.SetAudioVolume(audioVolume)
 	return x
 }
 
+// Asynchronously generate a new live photo suitable for playback in a PHLivePhotoView of the specified target size The options dictionary can contain additional options, see below
+//
 // PrepareLivePhotoForPlaybackWithTargetSizeOptions blocks until the operation completes or ctx is cancelled.
 func (x *LivePhotoEditingContext) PrepareLivePhotoForPlaybackWithTargetSizeOptions(ctx context.Context, targetSize corefoundation.CGSize, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*LivePhoto, error) {
 	type _result struct {
@@ -82,46 +90,64 @@ func (x *LivePhotoEditingContext) PrepareLivePhotoForPlaybackWithTargetSizeOptio
 	}
 }
 
+// Asynchronously process and save the edited live photo to the specified content editing output Options dictionary should be nil, reserved for future expansion
+//
 // SaveLivePhotoToOutputOptionsCompletionHandler calls the underlying SaveLivePhotoToOutputOptionsCompletionHandler.
 func (x *LivePhotoEditingContext) SaveLivePhotoToOutputOptionsCompletionHandler(output *raw.PHContentEditingOutput, options *foundation.NSDictionary[*foundation.NSString, objc.ID], handler func(bool, unsafe.Pointer)) {
 	x.inner.SaveLivePhotoToOutputOptionsCompletionHandler(output, options, handler)
 }
 
+// Cancel the current asynchronous operation This is implicitly called whenever prepare or save is called A canceled operation will call its completion handler with an appropriate error code
+//
 // Cancel calls the underlying Cancel.
 func (x *LivePhotoEditingContext) Cancel() {
 	x.inner.Cancel()
 }
 
+// The original full-size image from the input live photo
+//
 // FullSizeImage calls the underlying FullSizeImage.
 func (x *LivePhotoEditingContext) FullSizeImage() *coreimage.CIImage {
 	return x.inner.FullSizeImage()
 }
 
+// The duration of the live photo
+//
 // Duration calls the underlying Duration.
 func (x *LivePhotoEditingContext) Duration() coremedia.CMTime {
 	return x.inner.Duration()
 }
 
+// The time of the still image within the live photo
+//
 // PhotoTime calls the underlying PhotoTime.
 func (x *LivePhotoEditingContext) PhotoTime() coremedia.CMTime {
 	return x.inner.PhotoTime()
 }
 
+// A block that can be set to process each frame of the live photo Note that the context uses a copy of the processor block during processing
+//
 // FrameProcessor calls the underlying FrameProcessor.
 func (x *LivePhotoEditingContext) FrameProcessor() objc.Block {
 	return x.inner.FrameProcessor()
 }
 
+// A block that can be set to process each frame of the live photo Note that the context uses a copy of the processor block during processing
+//
 // SetFrameProcessor calls the underlying SetFrameProcessor.
 func (x *LivePhotoEditingContext) SetFrameProcessor(frameProcessor objc.Block) {
 	x.inner.SetFrameProcessor(frameProcessor)
 }
 
+// Specify the audio volume of the edited live photo Must be between 0.0 and 1.0 Default to 1.0
+//
 // AudioVolume calls the underlying AudioVolume.
 func (x *LivePhotoEditingContext) AudioVolume() float32 {
 	return x.inner.AudioVolume()
 }
 
+// Specify the audio volume of the edited live photo Must be between 0.0 and 1.0 Default to 1.0
+//
 // SetAudioVolume calls the underlying SetAudioVolume.
 func (x *LivePhotoEditingContext) SetAudioVolume(audioVolume float32) {
 	x.inner.SetAudioVolume(audioVolume)

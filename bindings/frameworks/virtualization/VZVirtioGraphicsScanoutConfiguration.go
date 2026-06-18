@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The configuration for a Virtio graphics device that configures the dimensions of the graphics device for a Linux VM.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtiographicsscanoutconfiguration
 type VZVirtioGraphicsScanoutConfiguration struct {
 	VZGraphicsDisplayConfiguration
@@ -33,7 +35,7 @@ func VZVirtioGraphicsScanoutConfigurationFromID(id objc.ID) *VZVirtioGraphicsSca
 	return o
 }
 
-// @abstract Create a scanout configuration with the specified pixel dimensions. @param widthInPixels The width of the scanout, in pixels. @param heightInPixels The height of the scanout, in pixels.
+// Creates a Virtio graphics device with the specified dimensions.
 func (o *VZVirtioGraphicsScanoutConfiguration) InitWithWidthInPixelsHeightInPixels(widthInPixels int, heightInPixels int) *VZVirtioGraphicsScanoutConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioGraphicsScanoutConfigurationSelInitWithWidthInPixelsHeightInPixels, widthInPixels, heightInPixels)
 	if _ret != 0 {

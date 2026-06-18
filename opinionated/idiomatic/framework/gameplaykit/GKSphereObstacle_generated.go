@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An obstacle with an impassible radius in 3D space For use with GKAgent3D.  Using this with a GKAgent2D is no different than using GKCircleObstacle.
+//
 // SphereObstacle wraps [raw.GKSphereObstacle] with a fluent Go API.
 type SphereObstacle struct {
 	inner *raw.GKSphereObstacle
@@ -37,12 +39,16 @@ func NewSphereObstacleWithRadius(radius float32) *SphereObstacle {
 	return &SphereObstacle{inner: raw.GKSphereObstacleFromID(_id)}
 }
 
+// Radius of the impassible circle
+//
 // WithRadius sets the radius property and returns the receiver for chaining.
 func (x *SphereObstacle) WithRadius(radius float32) *SphereObstacle {
 	x.inner.SetRadius(radius)
 	return x
 }
 
+// Radius of the impassible circle
+//
 // Radius calls the underlying Radius.
 func (x *SphereObstacle) Radius() float32 {
 	return x.inner.Radius()
@@ -53,6 +59,8 @@ func (x *SphereObstacle) SetRadius(radius float32) {
 	x.inner.SetRadius(radius)
 }
 
+// Position of the center of the circle in 3D space.
+//
 // Position calls the underlying Position.
 func (x *SphereObstacle) Position() unsafe.Pointer {
 	return x.inner.Position()

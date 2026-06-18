@@ -35,6 +35,8 @@ func NewDDDiscoverySession() *DDDiscoverySession {
 	return &DDDiscoverySession{inner: raw.DDDiscoverySessionFromID(_id)}
 }
 
+// Reports an event to the host.
+//
 // ReportEvent calls the underlying ReportEvent.
 func (x *DDDiscoverySession) ReportEvent(inEvent *raw.DDDeviceEvent) {
 	x.inner.ReportEvent(inEvent)

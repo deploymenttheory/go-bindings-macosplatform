@@ -30,6 +30,8 @@ func MTRClusterBindingFromID(id objc.ID) *MTRClusterBinding {
 	return &MTRClusterBinding{inner: raw.MTRClusterBindingFromID(id)}
 }
 
+// The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
+//
 // NewMTRClusterBindingWithDeviceEndpointIDQueue creates a new [MTRClusterBinding].
 func NewMTRClusterBindingWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterBinding {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterBinding")), objc.RegisterName("alloc"))

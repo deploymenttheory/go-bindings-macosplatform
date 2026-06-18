@@ -33,6 +33,8 @@ func MTRBaseClusterOccupancySensingFromID(id objc.ID) *MTRBaseClusterOccupancySe
 	return &MTRBaseClusterOccupancySensing{inner: raw.MTRBaseClusterOccupancySensingFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterOccupancySensingWithDeviceEndpointIDQueue creates a new [MTRBaseClusterOccupancySensing].
 func NewMTRBaseClusterOccupancySensingWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterOccupancySensing {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterOccupancySensing")), objc.RegisterName("alloc"))

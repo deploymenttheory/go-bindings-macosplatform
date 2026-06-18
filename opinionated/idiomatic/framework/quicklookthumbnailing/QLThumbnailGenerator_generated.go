@@ -40,6 +40,8 @@ func NewThumbnailGenerator() *ThumbnailGenerator {
 	return &ThumbnailGenerator{inner: raw.QLThumbnailGeneratorFromID(_id)}
 }
 
+// @param completionHandler Always called when the thumbnail generation is over. The thumbnail passed to this handler is the most representative version of the thumbnail that was successfully generated (if any). If set, the error contains information about the issue that occurred while trying to generate the thumbnail. QLThumbnail error codes can be found in <QuickLookThumbnailing/QLThumbnailErrors.h>.
+//
 // GenerateBestRepresentationForRequest blocks until the operation completes or ctx is cancelled.
 func (x *ThumbnailGenerator) GenerateBestRepresentationForRequest(ctx context.Context, request *raw.QLThumbnailGenerationRequest) (*ThumbnailRepresentation, error) {
 	type _result struct {
@@ -66,6 +68,8 @@ func (x *ThumbnailGenerator) GenerateBestRepresentationForRequest(ctx context.Co
 	}
 }
 
+// @param updateHandler Called for the successive requested representations of a thumbnail. If a representation was not successfully generated, this may be called with a nil representation. If a requested more representative version was successfully generated before a less representative one, this handler will be called only for the more representative version, skipping the less representative one. This handler is guaranteed to be called at least once, for the requested most representative version, whether a representation could be successfully generated or not. If set, the error contains information about the issue that occurred while trying to generate the representation of the given type. QLThumbnail error codes can be found in <QuickLookThumbnailing/QLThumbnailErrors.h>.
+//
 // GenerateRepresentationsForRequestUpdateHandler calls the underlying GenerateRepresentationsForRequestUpdateHandler.
 func (x *ThumbnailGenerator) GenerateRepresentationsForRequestUpdateHandler(request *raw.QLThumbnailGenerationRequest, updateHandler func(*raw.QLThumbnailRepresentation, QLThumbnailRepresentationType, unsafe.Pointer)) {
 	x.inner.GenerateRepresentationsForRequestUpdateHandler(request, func(_a0 *raw.QLThumbnailRepresentation, _a1 raw.QLThumbnailRepresentationType, _a2 unsafe.Pointer) {
@@ -73,11 +77,15 @@ func (x *ThumbnailGenerator) GenerateRepresentationsForRequestUpdateHandler(requ
 	})
 }
 
+// Cancels the given QLThumbnailGenerationRequest. @param request The request that should be cancelled.
+//
 // CancelRequest calls the underlying CancelRequest.
 func (x *ThumbnailGenerator) CancelRequest(request *raw.QLThumbnailGenerationRequest) {
 	x.inner.CancelRequest(request)
 }
 
+// Saves a thumbnail for the request on disk at fileURL. The file saved at fileURL has to be deleted when it is not used anymore. This is primarily intended for file provider extensions which need to upload thumbnails and have a small memory limit. @param contentType An image content type to save the thumbnail as, supported by CGImageDestination, such as UTTypePNG or UTTypeJPEG @param completionHandler Always called when the thumbnail generation is over. Will contain an error if the thumbnail could not be successfully saved to disk at fileURL.
+//
 // SaveBestRepresentationForRequestToFileAtURLAsContentType blocks until the operation completes or ctx is cancelled.
 func (x *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLAsContentType(ctx context.Context, request *raw.QLThumbnailGenerationRequest, fileURL string, contentType *uniformtypeidentifiers.UTType) error {
 	_ch := make(chan error, 1)
@@ -96,6 +104,8 @@ func (x *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLAsConten
 	}
 }
 
+// Saves a thumbnail for the request on disk at fileURL. The file saved at fileURL has to be deleted when it is not used anymore. This is primarily intended for file provider extensions which need to upload thumbnails and have a small memory limit. @param contentType An image content type to save the thumbnail as, supported by CGImageDestination, such as kUTTypePNG or kUTTypeJPEG @param completionHandler Always called when the thumbnail generation is over. Will contain an error if the thumbnail could not be successfully saved to disk at fileURL.
+//
 // SaveBestRepresentationForRequestToFileAtURLWithContentType blocks until the operation completes or ctx is cancelled.
 func (x *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLWithContentType(ctx context.Context, request *raw.QLThumbnailGenerationRequest, fileURL string, contentType string) error {
 	_ch := make(chan error, 1)

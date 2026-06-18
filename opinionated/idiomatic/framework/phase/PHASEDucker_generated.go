@@ -31,6 +31,8 @@ func DuckerFromID(id objc.ID) *Ducker {
 	return &Ducker{inner: raw.PHASEDuckerFromID(id)}
 }
 
+// @method initWithSourceGroups:targetGroups:attenuation:attackTime:releaseTime: @discussion Whenever a generator node from any source group plays, all the generator nodes in the target groups will be ducked by the given gain using the given attack and release times. @note The ducker is initialially inactive. The client must call activate() to make it active. Once a ducker is active, it will listen for generator nodes to start playback in source groups. Once triggered, it will duck its target groups. Deactivating a ducker will make it stop listening. Furthermore, it will enter the release phase if it has been previously triggered. Dealloc'ing a ducker will force the ducker into its release phase if it is actively ducking and remove it from the system when it finishes. @param engine The engine to register this ducker with. @param sourceGroups The source groups that will trigger the ducker when a sound in one of the source groups starts playback. @param targetGroups The target groups that will be ducked when a sound in one of the source groups triggers the ducker. @param gain The linear gain scalar to apply when the ducker is engaged. 0 means full attenuation. 1 is no attenuation. Values are clamped to the range [0, 1]. @param attackTime The time for the attenuation gain to ramp into effect. This value is scaled by unitsPerSecond internally, so can be provided at the client's native time scale. @param releaseTime The time for the ducked sounds to ramp back to their original level. This value is scaled by unitsPerSecond internally, so can be provided at the client's native time scale. @param attackCurve The type of curve function to use during the attack phase of gain reduction. @param releaseCurve The type of curve function to use during the release phase of gain reduction.
+//
 // NewDuckerWithEngineSourceGroupsTargetGroupsGainAttackTimeReleaseTimeAttackCurveReleaseCurve creates a new [Ducker].
 func NewDuckerWithEngineSourceGroupsTargetGroupsGainAttackTimeReleaseTimeAttackCurveReleaseCurve(engine *raw.PHASEEngine, sourceGroups *foundation.NSSet[*raw.PHASEGroup], targetGroups *foundation.NSSet[*raw.PHASEGroup], gain float64, attackTime float64, releaseTime float64, attackCurve PHASECurveType, releaseCurve PHASECurveType) *Ducker {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEDucker")), objc.RegisterName("alloc"))
@@ -38,56 +40,78 @@ func NewDuckerWithEngineSourceGroupsTargetGroupsGainAttackTimeReleaseTimeAttackC
 	return &Ducker{inner: raw.PHASEDuckerFromID(_id)}
 }
 
+// @method activate @abstract Activates the ducker
+//
 // Activate calls the underlying Activate.
 func (x *Ducker) Activate() {
 	x.inner.Activate()
 }
 
+// @method deactivate @abstract Deactivates the ducker
+//
 // Deactivate calls the underlying Deactivate.
 func (x *Ducker) Deactivate() {
 	x.inner.Deactivate()
 }
 
+// @property sourceGroups @abstract The source groups that will trigger the ducker when a sound in one of the source groups starts playback.
+//
 // SourceGroups calls the underlying SourceGroups.
 func (x *Ducker) SourceGroups() *foundation.NSSet[*raw.PHASEGroup] {
 	return x.inner.SourceGroups()
 }
 
+// @property targetGroups @abstract The target groups that will be ducked when a sound in one of the source groups triggers the ducker.
+//
 // TargetGroups calls the underlying TargetGroups.
 func (x *Ducker) TargetGroups() *foundation.NSSet[*raw.PHASEGroup] {
 	return x.inner.TargetGroups()
 }
 
+// @property active @abstract YES if the ducker is active; otherwise, NO.
+//
 // IsActive calls the underlying IsActive.
 func (x *Ducker) IsActive() bool {
 	return x.inner.IsActive()
 }
 
+// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
+//
 // Gain calls the underlying Gain.
 func (x *Ducker) Gain() float64 {
 	return x.inner.Gain()
 }
 
+// @property attackTime @abstract The time for the attenuation gain to ramp into effect. @note The attack time is scaled by unitsPerSecond internally, so can be provided at the client's native time scale.
+//
 // AttackTime calls the underlying AttackTime.
 func (x *Ducker) AttackTime() float64 {
 	return x.inner.AttackTime()
 }
 
+// @property releaseTime @abstract The time for the ducked sounds to ramp back to their original level. @note The release time is scaled by unitsPerSecond internally, so can be provided at the client's native time scale.
+//
 // ReleaseTime calls the underlying ReleaseTime.
 func (x *Ducker) ReleaseTime() float64 {
 	return x.inner.ReleaseTime()
 }
 
+// @property attackCurve @abstract The type of curve function to use during the attack phase of gain reduction.
+//
 // AttackCurve calls the underlying AttackCurve.
 func (x *Ducker) AttackCurve() PHASECurveType {
 	return PHASECurveType(x.inner.AttackCurve())
 }
 
+// @property releaseCurve @abstract The type of curve function to use during the release phase of gain reduction.
+//
 // ReleaseCurve calls the underlying ReleaseCurve.
 func (x *Ducker) ReleaseCurve() PHASECurveType {
 	return PHASECurveType(x.inner.ReleaseCurve())
 }
 
+// @property identifier @abstract The identifier that uniquely represents this ducker.
+//
 // Identifier calls the underlying Identifier.
 func (x *Ducker) Identifier() string {
 	_r := x.inner.Identifier()

@@ -36,11 +36,15 @@ func NewProjectJournalEntryElement() *ProjectJournalEntryElement {
 	return &ProjectJournalEntryElement{inner: raw.PHProjectJournalEntryElementFromID(_id)}
 }
 
+// Date to which the provided asset and/or text pertain
+//
 // Date calls the underlying Date.
 func (x *ProjectJournalEntryElement) Date() *foundation.NSDate {
 	return x.inner.Date()
 }
 
+// Representative asset, if any, for that date.
+//
 // AssetElement calls the underlying AssetElement.
 func (x *ProjectJournalEntryElement) AssetElement() *ProjectAssetElement {
 	_r := x.inner.AssetElement()
@@ -50,6 +54,8 @@ func (x *ProjectJournalEntryElement) AssetElement() *ProjectAssetElement {
 	return &ProjectAssetElement{inner: _r}
 }
 
+// Descriptive text (e.g., "Mom's Birthday") for that date.
+//
 // TextElement calls the underlying TextElement.
 func (x *ProjectJournalEntryElement) TextElement() *ProjectTextElement {
 	_r := x.inner.TextElement()

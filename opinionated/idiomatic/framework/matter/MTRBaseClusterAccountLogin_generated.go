@@ -33,6 +33,8 @@ func MTRBaseClusterAccountLoginFromID(id objc.ID) *MTRBaseClusterAccountLogin {
 	return &MTRBaseClusterAccountLogin{inner: raw.MTRBaseClusterAccountLoginFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterAccountLoginWithDeviceEndpointIDQueue creates a new [MTRBaseClusterAccountLogin].
 func NewMTRBaseClusterAccountLoginWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterAccountLogin {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterAccountLogin")), objc.RegisterName("alloc"))
@@ -47,6 +49,8 @@ func NewMTRBaseClusterAccountLoginWithDeviceEndpointQueue(device *raw.MTRBaseDev
 	return &MTRBaseClusterAccountLogin{inner: raw.MTRBaseClusterAccountLoginFromID(_id)}
 }
 
+// Command GetSetupPIN The purpose of this command is to determine if the active user account of the given Content App matches the active user account of a given Commissionee, and when it does, return a Setup PIN which can be used for password-authenticated session establishment (PASE) with the Commissionee.
+//
 // GetSetupPINWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterAccountLogin) GetSetupPINWithParamsCompletion(ctx context.Context, params *raw.MTRAccountLoginClusterGetSetupPINParams) (*MTRAccountLoginClusterGetSetupPINResponseParams, error) {
 	type _result struct {
@@ -73,11 +77,15 @@ func (x *MTRBaseClusterAccountLogin) GetSetupPINWithParamsCompletion(ctx context
 	}
 }
 
+// Command Login The purpose of this command is to allow the Content App to assume the user account of a given Commissionee by leveraging the Setup PIN input by the user during the commissioning process.
+//
 // LoginWithParamsCompletion calls the underlying LoginWithParamsCompletion.
 func (x *MTRBaseClusterAccountLogin) LoginWithParamsCompletion(params *raw.MTRAccountLoginClusterLoginParams, completion func(unsafe.Pointer)) {
 	x.inner.LoginWithParamsCompletion(params, completion)
 }
 
+// Command Logout The purpose of this command is to instruct the Content App to clear the current user account.
+//
 // LogoutWithParamsCompletion calls the underlying LogoutWithParamsCompletion.
 func (x *MTRBaseClusterAccountLogin) LogoutWithParamsCompletion(params *raw.MTRAccountLoginClusterLogoutParams, completion func(unsafe.Pointer)) {
 	x.inner.LogoutWithParamsCompletion(params, completion)

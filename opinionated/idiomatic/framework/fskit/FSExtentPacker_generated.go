@@ -35,6 +35,8 @@ func NewExtentPacker() *ExtentPacker {
 	return &ExtentPacker{inner: raw.FSExtentPackerFromID(_id)}
 }
 
+// Packs a single extent to send to the kernel. - Parameters: - resource: The resource on which to perform I/O. - type: The type of extent, indicating whether it contains valid data. - logicalOffset: The extent offset within the file, in bytes. - physicalOffset: The extent offset on disk, in bytes. - length: The extent length, in bytes. - Returns: A Boolean value that indicates whether the packer can pack more extents.
+//
 // PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength calls the underlying PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength.
 func (x *ExtentPacker) PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength(resource *raw.FSBlockDeviceResource, type_ FSExtentType, logicalOffset int64, physicalOffset int64, length uint) bool {
 	return x.inner.PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength(resource, raw.FSExtentType(type_), logicalOffset, physicalOffset, length)

@@ -31,6 +31,8 @@ func ExtensionDevicePropertiesFromID(id objc.ID) *ExtensionDeviceProperties {
 	return &ExtensionDeviceProperties{inner: raw.CMIOExtensionDevicePropertiesFromID(id)}
 }
 
+// @method initWithDictionary: @abstract Initialize a device properties instance. @param propertiesDictionary The dictionary of properties. @result A CMIOExtensionDeviceProperties instance.
+//
 // NewExtensionDevicePropertiesWithDictionary creates a new [ExtensionDeviceProperties].
 func NewExtensionDevicePropertiesWithDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ExtensionDeviceProperties {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionDeviceProperties")), objc.RegisterName("alloc"))
@@ -38,41 +40,55 @@ func NewExtensionDevicePropertiesWithDictionary(propertiesDictionary *foundation
 	return &ExtensionDeviceProperties{inner: raw.CMIOExtensionDevicePropertiesFromID(_id)}
 }
 
+// @property model @abstract The device model. @discussion The property key is CMIOExtensionPropertyDeviceModel.
+//
 // WithModel sets the model property and returns the receiver for chaining.
 func (x *ExtensionDeviceProperties) WithModel(model string) *ExtensionDeviceProperties {
 	x.inner.SetModel(foundation.NSStringStringWithUTF8String(model))
 	return x
 }
 
+// @property suspended @abstract Indicates whether the device is suspended. @discussion The property key is CMIOExtensionPropertyDeviceIsSuspended.
+//
 // WithSuspended sets the suspended property and returns the receiver for chaining.
 func (x *ExtensionDeviceProperties) WithSuspended(suspended *foundation.NSNumber) *ExtensionDeviceProperties {
 	x.inner.SetSuspended(suspended)
 	return x
 }
 
+// @property transportType @abstract The transport type of the receiver (e.g. USB, PCI, etc) whose value correspond to the audio transport type ( kIOAudioDeviceTransportType... ) defined in <IOKit/audio/IOAudioTypes.h>. @discussion The property key is CMIOExtensionPropertyDeviceTransportType.
+//
 // WithTransportType sets the transportType property and returns the receiver for chaining.
 func (x *ExtensionDeviceProperties) WithTransportType(transportType *foundation.NSNumber) *ExtensionDeviceProperties {
 	x.inner.SetTransportType(transportType)
 	return x
 }
 
+// @property linkedCoreAudioDeviceUID @abstract The device linked CoreAudio device UID. @discussion The property key is CMIOExtensionPropertyDeviceLinkedCoreAudioDeviceUID.
+//
 // WithLinkedCoreAudioDeviceUID sets the linkedCoreAudioDeviceUID property and returns the receiver for chaining.
 func (x *ExtensionDeviceProperties) WithLinkedCoreAudioDeviceUID(linkedCoreAudioDeviceUID string) *ExtensionDeviceProperties {
 	x.inner.SetLinkedCoreAudioDeviceUID(foundation.NSStringStringWithUTF8String(linkedCoreAudioDeviceUID))
 	return x
 }
 
+// @property propertiesDictionary @abstract The dictionary of properties. @discussion The dictionary containing all keys and values.
+//
 // WithPropertiesDictionary sets the propertiesDictionary property and returns the receiver for chaining.
 func (x *ExtensionDeviceProperties) WithPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ExtensionDeviceProperties {
 	x.inner.SetPropertiesDictionary(propertiesDictionary)
 	return x
 }
 
+// @property setPropertyState:forProperty: @abstract Set the property value. @param propertyState The property state. @param property The property key. @discussion Setting nil to propertyState does remove the property.
+//
 // SetPropertyStateForProperty calls the underlying SetPropertyStateForProperty.
 func (x *ExtensionDeviceProperties) SetPropertyStateForProperty(propertyState *raw.CMIOExtensionPropertyState[objc.ID], property *foundation.NSString) {
 	x.inner.SetPropertyStateForProperty(propertyState, property)
 }
 
+// @property model @abstract The device model. @discussion The property key is CMIOExtensionPropertyDeviceModel.
+//
 // Model calls the underlying Model.
 func (x *ExtensionDeviceProperties) Model() string {
 	_r := x.inner.Model()
@@ -87,6 +103,8 @@ func (x *ExtensionDeviceProperties) SetModel(model string) {
 	x.inner.SetModel(foundation.NSStringStringWithUTF8String(model))
 }
 
+// @property suspended @abstract Indicates whether the device is suspended. @discussion The property key is CMIOExtensionPropertyDeviceIsSuspended.
+//
 // Suspended calls the underlying Suspended.
 func (x *ExtensionDeviceProperties) Suspended() *foundation.NSNumber {
 	return x.inner.Suspended()
@@ -97,6 +115,8 @@ func (x *ExtensionDeviceProperties) SetSuspended(suspended *foundation.NSNumber)
 	x.inner.SetSuspended(suspended)
 }
 
+// @property transportType @abstract The transport type of the receiver (e.g. USB, PCI, etc) whose value correspond to the audio transport type ( kIOAudioDeviceTransportType... ) defined in <IOKit/audio/IOAudioTypes.h>. @discussion The property key is CMIOExtensionPropertyDeviceTransportType.
+//
 // TransportType calls the underlying TransportType.
 func (x *ExtensionDeviceProperties) TransportType() *foundation.NSNumber {
 	return x.inner.TransportType()
@@ -107,6 +127,8 @@ func (x *ExtensionDeviceProperties) SetTransportType(transportType *foundation.N
 	x.inner.SetTransportType(transportType)
 }
 
+// @property linkedCoreAudioDeviceUID @abstract The device linked CoreAudio device UID. @discussion The property key is CMIOExtensionPropertyDeviceLinkedCoreAudioDeviceUID.
+//
 // LinkedCoreAudioDeviceUID calls the underlying LinkedCoreAudioDeviceUID.
 func (x *ExtensionDeviceProperties) LinkedCoreAudioDeviceUID() string {
 	_r := x.inner.LinkedCoreAudioDeviceUID()
@@ -121,6 +143,8 @@ func (x *ExtensionDeviceProperties) SetLinkedCoreAudioDeviceUID(linkedCoreAudioD
 	x.inner.SetLinkedCoreAudioDeviceUID(foundation.NSStringStringWithUTF8String(linkedCoreAudioDeviceUID))
 }
 
+// @property propertiesDictionary @abstract The dictionary of properties. @discussion The dictionary containing all keys and values.
+//
 // PropertiesDictionary calls the underlying PropertiesDictionary.
 func (x *ExtensionDeviceProperties) PropertiesDictionary() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.PropertiesDictionary()

@@ -35,60 +35,80 @@ func NewSmartCardPINFormat() *SmartCardPINFormat {
 	return &SmartCardPINFormat{inner: raw.TKSmartCardPINFormatFromID(_id)}
 }
 
+// Format of PIN characters. @note Default value: TKSmartCardPINCharsetNumeric
+//
 // WithCharset sets the charset property and returns the receiver for chaining.
 func (x *SmartCardPINFormat) WithCharset(charset TKSmartCardPINCharset) *SmartCardPINFormat {
 	x.inner.SetCharset(raw.TKSmartCardPINCharset(charset))
 	return x
 }
 
+// Encoding of PIN characters. @note Default value: TKSmartCardPINEncodingASCII
+//
 // WithEncoding sets the encoding property and returns the receiver for chaining.
 func (x *SmartCardPINFormat) WithEncoding(encoding TKSmartCardPINEncoding) *SmartCardPINFormat {
 	x.inner.SetEncoding(raw.TKSmartCardPINEncoding(encoding))
 	return x
 }
 
+// Minimum number of characters to form a valid PIN. @note Default value: 4
+//
 // WithMinPINLength sets the minPINLength property and returns the receiver for chaining.
 func (x *SmartCardPINFormat) WithMinPINLength(minPINLength int) *SmartCardPINFormat {
 	x.inner.SetMinPINLength(minPINLength)
 	return x
 }
 
+// Maximum number of characters to form a valid PIN. @note Default value: 8
+//
 // WithMaxPINLength sets the maxPINLength property and returns the receiver for chaining.
 func (x *SmartCardPINFormat) WithMaxPINLength(maxPINLength int) *SmartCardPINFormat {
 	x.inner.SetMaxPINLength(maxPINLength)
 	return x
 }
 
+// Total length of the PIN block in bytes. @note Default value: 8
+//
 // WithPINBlockByteLength sets the pINBlockByteLength property and returns the receiver for chaining.
 func (x *SmartCardPINFormat) WithPINBlockByteLength(pINBlockByteLength int) *SmartCardPINFormat {
 	x.inner.SetPINBlockByteLength(pINBlockByteLength)
 	return x
 }
 
+// PIN justification within the PIN block. @note Default value: TKSmartCardPINJustificationLeft
+//
 // WithPINJustification sets the pINJustification property and returns the receiver for chaining.
 func (x *SmartCardPINFormat) WithPINJustification(pINJustification TKSmartCardPINJustification) *SmartCardPINFormat {
 	x.inner.SetPINJustification(raw.TKSmartCardPINJustification(pINJustification))
 	return x
 }
 
+// Offset in bits within the PIN block to mark a location for filling in the formatted PIN (justified with respect to PINJustification). @note Default value: 0 @discussion The offset, in bits, within the PIN block to mark a location for filling in the formatted PIN, which is justified with respect to the PINJustification property value.
+//
 // WithPINBitOffset sets the pINBitOffset property and returns the receiver for chaining.
 func (x *SmartCardPINFormat) WithPINBitOffset(pINBitOffset int) *SmartCardPINFormat {
 	x.inner.SetPINBitOffset(pINBitOffset)
 	return x
 }
 
+// Offset in bits within the PIN block to mark a location for filling in the PIN length (always left justified). @note Default value: 0 @discussion The offset, in bits, within the PIN block to mark a location for filling in the PIN length, which is always left justified.
+//
 // WithPINLengthBitOffset sets the pINLengthBitOffset property and returns the receiver for chaining.
 func (x *SmartCardPINFormat) WithPINLengthBitOffset(pINLengthBitOffset int) *SmartCardPINFormat {
 	x.inner.SetPINLengthBitOffset(pINLengthBitOffset)
 	return x
 }
 
+// Size in bits of the PIN length field. If set to 0, PIN length is not written. @note Default value: 0
+//
 // WithPINLengthBitSize sets the pINLengthBitSize property and returns the receiver for chaining.
 func (x *SmartCardPINFormat) WithPINLengthBitSize(pINLengthBitSize int) *SmartCardPINFormat {
 	x.inner.SetPINLengthBitSize(pINLengthBitSize)
 	return x
 }
 
+// Format of PIN characters. @note Default value: TKSmartCardPINCharsetNumeric
+//
 // Charset calls the underlying Charset.
 func (x *SmartCardPINFormat) Charset() TKSmartCardPINCharset {
 	return TKSmartCardPINCharset(x.inner.Charset())
@@ -99,6 +119,8 @@ func (x *SmartCardPINFormat) SetCharset(charset TKSmartCardPINCharset) {
 	x.inner.SetCharset(raw.TKSmartCardPINCharset(charset))
 }
 
+// Encoding of PIN characters. @note Default value: TKSmartCardPINEncodingASCII
+//
 // Encoding calls the underlying Encoding.
 func (x *SmartCardPINFormat) Encoding() TKSmartCardPINEncoding {
 	return TKSmartCardPINEncoding(x.inner.Encoding())
@@ -109,6 +131,8 @@ func (x *SmartCardPINFormat) SetEncoding(encoding TKSmartCardPINEncoding) {
 	x.inner.SetEncoding(raw.TKSmartCardPINEncoding(encoding))
 }
 
+// Minimum number of characters to form a valid PIN. @note Default value: 4
+//
 // MinPINLength calls the underlying MinPINLength.
 func (x *SmartCardPINFormat) MinPINLength() int {
 	return x.inner.MinPINLength()
@@ -119,6 +143,8 @@ func (x *SmartCardPINFormat) SetMinPINLength(minPINLength int) {
 	x.inner.SetMinPINLength(minPINLength)
 }
 
+// Maximum number of characters to form a valid PIN. @note Default value: 8
+//
 // MaxPINLength calls the underlying MaxPINLength.
 func (x *SmartCardPINFormat) MaxPINLength() int {
 	return x.inner.MaxPINLength()
@@ -129,6 +155,8 @@ func (x *SmartCardPINFormat) SetMaxPINLength(maxPINLength int) {
 	x.inner.SetMaxPINLength(maxPINLength)
 }
 
+// Total length of the PIN block in bytes. @note Default value: 8
+//
 // PINBlockByteLength calls the underlying PINBlockByteLength.
 func (x *SmartCardPINFormat) PINBlockByteLength() int {
 	return x.inner.PINBlockByteLength()
@@ -139,6 +167,8 @@ func (x *SmartCardPINFormat) SetPINBlockByteLength(pINBlockByteLength int) {
 	x.inner.SetPINBlockByteLength(pINBlockByteLength)
 }
 
+// PIN justification within the PIN block. @note Default value: TKSmartCardPINJustificationLeft
+//
 // PINJustification calls the underlying PINJustification.
 func (x *SmartCardPINFormat) PINJustification() TKSmartCardPINJustification {
 	return TKSmartCardPINJustification(x.inner.PINJustification())
@@ -149,6 +179,8 @@ func (x *SmartCardPINFormat) SetPINJustification(pINJustification TKSmartCardPIN
 	x.inner.SetPINJustification(raw.TKSmartCardPINJustification(pINJustification))
 }
 
+// Offset in bits within the PIN block to mark a location for filling in the formatted PIN (justified with respect to PINJustification). @note Default value: 0 @discussion The offset, in bits, within the PIN block to mark a location for filling in the formatted PIN, which is justified with respect to the PINJustification property value.
+//
 // PINBitOffset calls the underlying PINBitOffset.
 func (x *SmartCardPINFormat) PINBitOffset() int {
 	return x.inner.PINBitOffset()
@@ -159,6 +191,8 @@ func (x *SmartCardPINFormat) SetPINBitOffset(pINBitOffset int) {
 	x.inner.SetPINBitOffset(pINBitOffset)
 }
 
+// Offset in bits within the PIN block to mark a location for filling in the PIN length (always left justified). @note Default value: 0 @discussion The offset, in bits, within the PIN block to mark a location for filling in the PIN length, which is always left justified.
+//
 // PINLengthBitOffset calls the underlying PINLengthBitOffset.
 func (x *SmartCardPINFormat) PINLengthBitOffset() int {
 	return x.inner.PINLengthBitOffset()
@@ -169,6 +203,8 @@ func (x *SmartCardPINFormat) SetPINLengthBitOffset(pINLengthBitOffset int) {
 	x.inner.SetPINLengthBitOffset(pINLengthBitOffset)
 }
 
+// Size in bits of the PIN length field. If set to 0, PIN length is not written. @note Default value: 0
+//
 // PINLengthBitSize calls the underlying PINLengthBitSize.
 func (x *SmartCardPINFormat) PINLengthBitSize() int {
 	return x.inner.PINLengthBitSize()

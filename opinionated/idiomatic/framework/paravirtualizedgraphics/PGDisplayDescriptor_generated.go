@@ -38,54 +38,72 @@ func NewPGDisplayDescriptor() *PGDisplayDescriptor {
 	return &PGDisplayDescriptor{inner: raw.PGDisplayDescriptorFromID(_id)}
 }
 
+// @property name @abstract Client supplied name of display, as seen by guest. @discussion Truncates to 13 characters.  Defaults to "Apple Virtual".  Value provided here may be made visible via guest UI.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *PGDisplayDescriptor) WithName(name string) *PGDisplayDescriptor {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property sizeInMillimeters @abstract Client supplied display size conveyed to guest compositor. @discussion Conveyed size contributes to guest compositor layout, but host-side VM app can scale to UI of its own choosing.
+//
 // WithSizeInMillimeters sets the sizeInMillimeters property and returns the receiver for chaining.
 func (x *PGDisplayDescriptor) WithSizeInMillimeters(sizeInMillimeters corefoundation.CGSize) *PGDisplayDescriptor {
 	x.inner.SetSizeInMillimeters(sizeInMillimeters)
 	return x
 }
 
+// @property queue @abstract Client supplied dispatch_queue on which to invoke client supplied blocks. @discussion Typical client provides serial queue, and redispatches if beneficial to process out of order.
+//
 // WithQueue sets the queue property and returns the receiver for chaining.
 func (x *PGDisplayDescriptor) WithQueue(queue *foundation.NSObject) *PGDisplayDescriptor {
 	x.inner.SetQueue(queue)
 	return x
 }
 
+// @property modeChangeHandler @abstract The block to invoke to handle display mode change. @discussion Handler invocation indicative of display mode change.
+//
 // WithModeChangeHandler sets the modeChangeHandler property and returns the receiver for chaining.
 func (x *PGDisplayDescriptor) WithModeChangeHandler(modeChangeHandler objc.Block) *PGDisplayDescriptor {
 	x.inner.SetModeChangeHandler(modeChangeHandler)
 	return x
 }
 
+// @property newFrameEventHandler @abstract The block to invoke to handle notification of the presence of a new Guest compositor frame. @discussion Handler invocation indicates presence of new frame to be processed for display.  Only one of newFrameEventHandler or presentHandler may be non-nil.
+//
 // WithNewFrameEventHandler sets the newFrameEventHandler property and returns the receiver for chaining.
 func (x *PGDisplayDescriptor) WithNewFrameEventHandler(newFrameEventHandler func()) *PGDisplayDescriptor {
 	x.inner.SetNewFrameEventHandler(newFrameEventHandler)
 	return x
 }
 
+// @property cursorGlyphHandler @abstract The block to invoke to handle cursor glyph updates. @discussion Handler invocation indicative of new cursor image for display.  If this block is not set, cursor will be precomposited in presented image.
+//
 // WithCursorGlyphHandler sets the cursorGlyphHandler property and returns the receiver for chaining.
 func (x *PGDisplayDescriptor) WithCursorGlyphHandler(cursorGlyphHandler objc.Block) *PGDisplayDescriptor {
 	x.inner.SetCursorGlyphHandler(cursorGlyphHandler)
 	return x
 }
 
+// @property cursorShowHandler @abstract The block to invoke to handle cursor show/hide updates. @discussion Handler invocation indicative of hide/show of cursor glyph.  If this block is not set, cursor will be precomposited in presented image.
+//
 // WithCursorShowHandler sets the cursorShowHandler property and returns the receiver for chaining.
 func (x *PGDisplayDescriptor) WithCursorShowHandler(cursorShowHandler func(bool)) *PGDisplayDescriptor {
 	x.inner.SetCursorShowHandler(cursorShowHandler)
 	return x
 }
 
+// @property cursorMoveHandler @abstract The block to invoke to handle cursor movement. @discussion Handler invocation indicative of movement.  Handler should resampling via PGDisplay::cursorPosition.
+//
 // WithCursorMoveHandler sets the cursorMoveHandler property and returns the receiver for chaining.
 func (x *PGDisplayDescriptor) WithCursorMoveHandler(cursorMoveHandler func()) *PGDisplayDescriptor {
 	x.inner.SetCursorMoveHandler(cursorMoveHandler)
 	return x
 }
 
+// @property name @abstract Client supplied name of display, as seen by guest. @discussion Truncates to 13 characters.  Defaults to "Apple Virtual".  Value provided here may be made visible via guest UI.
+//
 // Name calls the underlying Name.
 func (x *PGDisplayDescriptor) Name() string {
 	_r := x.inner.Name()
@@ -100,6 +118,8 @@ func (x *PGDisplayDescriptor) SetName(name string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 }
 
+// @property sizeInMillimeters @abstract Client supplied display size conveyed to guest compositor. @discussion Conveyed size contributes to guest compositor layout, but host-side VM app can scale to UI of its own choosing.
+//
 // SizeInMillimeters calls the underlying SizeInMillimeters.
 func (x *PGDisplayDescriptor) SizeInMillimeters() corefoundation.CGSize {
 	return x.inner.SizeInMillimeters()
@@ -110,6 +130,8 @@ func (x *PGDisplayDescriptor) SetSizeInMillimeters(sizeInMillimeters corefoundat
 	x.inner.SetSizeInMillimeters(sizeInMillimeters)
 }
 
+// @property queue @abstract Client supplied dispatch_queue on which to invoke client supplied blocks. @discussion Typical client provides serial queue, and redispatches if beneficial to process out of order.
+//
 // Queue calls the underlying Queue.
 func (x *PGDisplayDescriptor) Queue() *foundation.NSObject {
 	return x.inner.Queue()
@@ -120,6 +142,8 @@ func (x *PGDisplayDescriptor) SetQueue(queue *foundation.NSObject) {
 	x.inner.SetQueue(queue)
 }
 
+// @property modeChangeHandler @abstract The block to invoke to handle display mode change. @discussion Handler invocation indicative of display mode change.
+//
 // ModeChangeHandler calls the underlying ModeChangeHandler.
 func (x *PGDisplayDescriptor) ModeChangeHandler() objc.Block {
 	return x.inner.ModeChangeHandler()
@@ -130,6 +154,8 @@ func (x *PGDisplayDescriptor) SetModeChangeHandler(modeChangeHandler objc.Block)
 	x.inner.SetModeChangeHandler(modeChangeHandler)
 }
 
+// @property newFrameEventHandler @abstract The block to invoke to handle notification of the presence of a new Guest compositor frame. @discussion Handler invocation indicates presence of new frame to be processed for display.  Only one of newFrameEventHandler or presentHandler may be non-nil.
+//
 // NewFrameEventHandler calls the underlying NewFrameEventHandler.
 func (x *PGDisplayDescriptor) NewFrameEventHandler() objc.Block {
 	return x.inner.NewFrameEventHandler()
@@ -140,6 +166,8 @@ func (x *PGDisplayDescriptor) SetNewFrameEventHandler(newFrameEventHandler func(
 	x.inner.SetNewFrameEventHandler(newFrameEventHandler)
 }
 
+// @property cursorGlyphHandler @abstract The block to invoke to handle cursor glyph updates. @discussion Handler invocation indicative of new cursor image for display.  If this block is not set, cursor will be precomposited in presented image.
+//
 // CursorGlyphHandler calls the underlying CursorGlyphHandler.
 func (x *PGDisplayDescriptor) CursorGlyphHandler() objc.Block {
 	return x.inner.CursorGlyphHandler()
@@ -150,6 +178,8 @@ func (x *PGDisplayDescriptor) SetCursorGlyphHandler(cursorGlyphHandler objc.Bloc
 	x.inner.SetCursorGlyphHandler(cursorGlyphHandler)
 }
 
+// @property cursorShowHandler @abstract The block to invoke to handle cursor show/hide updates. @discussion Handler invocation indicative of hide/show of cursor glyph.  If this block is not set, cursor will be precomposited in presented image.
+//
 // CursorShowHandler calls the underlying CursorShowHandler.
 func (x *PGDisplayDescriptor) CursorShowHandler() objc.Block {
 	return x.inner.CursorShowHandler()
@@ -160,6 +190,8 @@ func (x *PGDisplayDescriptor) SetCursorShowHandler(cursorShowHandler func(bool))
 	x.inner.SetCursorShowHandler(cursorShowHandler)
 }
 
+// @property cursorMoveHandler @abstract The block to invoke to handle cursor movement. @discussion Handler invocation indicative of movement.  Handler should resampling via PGDisplay::cursorPosition.
+//
 // CursorMoveHandler calls the underlying CursorMoveHandler.
 func (x *PGDisplayDescriptor) CursorMoveHandler() objc.Block {
 	return x.inner.CursorMoveHandler()

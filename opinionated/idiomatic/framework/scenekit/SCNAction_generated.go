@@ -35,30 +35,40 @@ func NewAction() *Action {
 	return &Action{inner: raw.SCNActionFromID(_id)}
 }
 
+// @property duration @abstract This is the expected duration of an action’s animation. The actual time an action takes to complete is modified by the speed property of the action.
+//
 // WithDuration sets the duration property and returns the receiver for chaining.
 func (x *Action) WithDuration(duration float64) *Action {
 	x.inner.SetDuration(duration)
 	return x
 }
 
+// @property timingMode @abstract The timing mode used to execute an action.
+//
 // WithTimingMode sets the timingMode property and returns the receiver for chaining.
 func (x *Action) WithTimingMode(timingMode SCNActionTimingMode) *Action {
 	x.inner.SetTimingMode(raw.SCNActionTimingMode(timingMode))
 	return x
 }
 
+// When set, prodives a custom timing via a block. Applies after the 'timingMode' property is taken into account, defaults to nil @see SCNActionTimingFunction
+//
 // WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
 func (x *Action) WithTimingFunction(timingFunction objc.Block) *Action {
 	x.inner.SetTimingFunction(timingFunction)
 	return x
 }
 
+// @property speed @abstract A speed factor that modifies how fast an action runs. Defaults to 1.
+//
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *Action) WithSpeed(speed float64) *Action {
 	x.inner.SetSpeed(speed)
 	return x
 }
 
+// @method reversedAction @abstract Creates an action that reverses the behavior of another action.
+//
 // ReversedAction calls the underlying ReversedAction.
 func (x *Action) ReversedAction() *Action {
 	_r := x.inner.ReversedAction()
@@ -68,6 +78,8 @@ func (x *Action) ReversedAction() *Action {
 	return &Action{inner: _r}
 }
 
+// @property duration @abstract This is the expected duration of an action’s animation. The actual time an action takes to complete is modified by the speed property of the action.
+//
 // Duration calls the underlying Duration.
 func (x *Action) Duration() float64 {
 	return x.inner.Duration()
@@ -78,6 +90,8 @@ func (x *Action) SetDuration(duration float64) {
 	x.inner.SetDuration(duration)
 }
 
+// @property timingMode @abstract The timing mode used to execute an action.
+//
 // TimingMode calls the underlying TimingMode.
 func (x *Action) TimingMode() SCNActionTimingMode {
 	return SCNActionTimingMode(x.inner.TimingMode())
@@ -88,6 +102,8 @@ func (x *Action) SetTimingMode(timingMode SCNActionTimingMode) {
 	x.inner.SetTimingMode(raw.SCNActionTimingMode(timingMode))
 }
 
+// When set, prodives a custom timing via a block. Applies after the 'timingMode' property is taken into account, defaults to nil @see SCNActionTimingFunction
+//
 // TimingFunction calls the underlying TimingFunction.
 func (x *Action) TimingFunction() objc.Block {
 	return x.inner.TimingFunction()
@@ -98,6 +114,8 @@ func (x *Action) SetTimingFunction(timingFunction objc.Block) {
 	x.inner.SetTimingFunction(timingFunction)
 }
 
+// @property speed @abstract A speed factor that modifies how fast an action runs. Defaults to 1.
+//
 // Speed calls the underlying Speed.
 func (x *Action) Speed() float64 {
 	return x.inner.Speed()

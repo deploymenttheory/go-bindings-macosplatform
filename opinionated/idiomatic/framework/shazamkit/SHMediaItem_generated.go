@@ -37,16 +37,22 @@ func NewMediaItem() *MediaItem {
 	return &MediaItem{inner: raw.SHMediaItemFromID(_id)}
 }
 
+// Accesses the property for the specified key for reading. - Parameters: - property: The key for the property. - Returns: The value of the property; otherwise, `nil`.
+//
 // ValueForProperty calls the underlying ValueForProperty.
 func (x *MediaItem) ValueForProperty(property *foundation.NSString) objc.ID {
 	return x.inner.ValueForProperty(property)
 }
 
+// Accesses the property for the specified key for reading. - Parameters: - key: The key for the media item property. - Returns: The value of the property; otherwise, `nil`.
+//
 // ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
 func (x *MediaItem) ObjectForKeyedSubscript(key *foundation.NSString) objc.ID {
 	return x.inner.ObjectForKeyedSubscript(key)
 }
 
+// The Shazam ID for the song.
+//
 // ShazamID calls the underlying ShazamID.
 func (x *MediaItem) ShazamID() string {
 	_r := x.inner.ShazamID()
@@ -56,6 +62,8 @@ func (x *MediaItem) ShazamID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A title for the media item.
+//
 // Title calls the underlying Title.
 func (x *MediaItem) Title() string {
 	_r := x.inner.Title()
@@ -65,6 +73,8 @@ func (x *MediaItem) Title() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A subtitle for the media item.
+//
 // Subtitle calls the underlying Subtitle.
 func (x *MediaItem) Subtitle() string {
 	_r := x.inner.Subtitle()
@@ -74,6 +84,8 @@ func (x *MediaItem) Subtitle() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The name of the artist for the media item, such as the performer of a song.
+//
 // Artist calls the underlying Artist.
 func (x *MediaItem) Artist() string {
 	_r := x.inner.Artist()
@@ -83,6 +95,8 @@ func (x *MediaItem) Artist() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// An array of genre names for the media item. The array is empty if there are no media items.
+//
 // Genres returns the collection as a Go slice.
 func (x *MediaItem) Genres() []string {
 	arr := x.inner.Genres()
@@ -94,6 +108,8 @@ func (x *MediaItem) Genres() []string {
 	})
 }
 
+// The Apple Music ID for the song.
+//
 // AppleMusicID calls the underlying AppleMusicID.
 func (x *MediaItem) AppleMusicID() string {
 	_r := x.inner.AppleMusicID()
@@ -103,31 +119,43 @@ func (x *MediaItem) AppleMusicID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// A link to the Apple Music page that contains the full information for the song.
+//
 // AppleMusicURL calls the underlying AppleMusicURL.
 func (x *MediaItem) AppleMusicURL() *foundation.NSURL {
 	return x.inner.AppleMusicURL()
 }
 
+// A link to the Shazam Music catalog page that contains the full information for the song. This link opens the Shazam app or App Clip if it's available on the device.
+//
 // WebURL calls the underlying WebURL.
 func (x *MediaItem) WebURL() *foundation.NSURL {
 	return x.inner.WebURL()
 }
 
+// The URL for artwork for the media item, such as an album cover.
+//
 // ArtworkURL calls the underlying ArtworkURL.
 func (x *MediaItem) ArtworkURL() *foundation.NSURL {
 	return x.inner.ArtworkURL()
 }
 
+// The URL for a video for the media item, such as a music video.
+//
 // VideoURL calls the underlying VideoURL.
 func (x *MediaItem) VideoURL() *foundation.NSURL {
 	return x.inner.VideoURL()
 }
 
+// A Boolean value that indicates whether the media item contains explicit content.
+//
 // ExplicitContent calls the underlying ExplicitContent.
 func (x *MediaItem) ExplicitContent() bool {
 	return x.inner.ExplicitContent()
 }
 
+// The International Standard Recording Code (ISRC) for the media item.
+//
 // Isrc calls the underlying Isrc.
 func (x *MediaItem) Isrc() string {
 	_r := x.inner.Isrc()
@@ -137,6 +165,8 @@ func (x *MediaItem) Isrc() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// An array of ranges that indicate the offsets within the reference signature that this media item describes.
+//
 // TimeRanges returns the collection as a Go slice.
 func (x *MediaItem) TimeRanges() []*Range {
 	arr := x.inner.TimeRanges()
@@ -148,6 +178,8 @@ func (x *MediaItem) TimeRanges() []*Range {
 	})
 }
 
+// An array of ranges that indicate the frequency skews in the reference signature that this media item describes.
+//
 // FrequencySkewRanges returns the collection as a Go slice.
 func (x *MediaItem) FrequencySkewRanges() []*Range {
 	arr := x.inner.FrequencySkewRanges()
@@ -159,6 +191,8 @@ func (x *MediaItem) FrequencySkewRanges() []*Range {
 	})
 }
 
+// The date the media item was created.
+//
 // CreationDate calls the underlying CreationDate.
 func (x *MediaItem) CreationDate() *foundation.NSDate {
 	return x.inner.CreationDate()

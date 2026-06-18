@@ -39,6 +39,8 @@ func NewImageHistogramEqualizationWithDeviceHistogramInfo(device metal.MTLDevice
 	return &ImageHistogramEqualization{inner: raw.MPSImageHistogramEqualizationFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+//
 // NewImageHistogramEqualizationWithCoderDevice creates a new [ImageHistogramEqualization].
 func NewImageHistogramEqualizationWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageHistogramEqualization {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageHistogramEqualization")), objc.RegisterName("alloc"))
@@ -46,29 +48,39 @@ func NewImageHistogramEqualizationWithCoderDevice(aDecoder *foundation.NSCoder, 
 	return &ImageHistogramEqualization{inner: raw.MPSImageHistogramEqualizationFromID(_id)}
 }
 
+// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+//
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *ImageHistogramEqualization) WithOffset(offset mpscore.MPSOffset) *ImageHistogramEqualization {
 	x.inner.MPSUnaryImageKernel.SetOffset(offset)
 	return x
 }
 
+// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+//
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *ImageHistogramEqualization) WithClipRect(clipRect metal.MTLRegion) *ImageHistogramEqualization {
 	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
 	return x
 }
 
+// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
+//
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *ImageHistogramEqualization) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageHistogramEqualization {
 	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
 	return x
 }
 
+// @abstract Encode the transform function to a command buffer using a MTLComputeCommandEncoder. The transform function computes the equalization lookup table. @discussion The transform function will not begin to execute until after the command buffer has been enqueued and committed.  This step will need to be repeated with the new MPSKernel if -copyWithZone:device or -copyWithZone: is called. The transform is stored as internal state to the object. You still need to call -encodeToCommandBuffer:sourceTexture:destinationTexture: afterward to apply the transform to produce a result texture. @param  commandBuffer   A valid MTLCommandBuffer. @param  source          A valid MTLTexture containing the source image for the filter. @param  histogram       A valid MTLBuffer containing the histogram results for an image.  This filter will use these histogram results to generate the cumulative histogram for equalizing the image.  The histogram results / channel are stored together.  The number of channels for which histogram results are stored is determined by the number of channels in the image. If histogramInfo.histogramForAlpha is false and the source image is RGBA then only histogram results for RGB channels are stored. @param  histogramOffset A byte offset into the histogram MTLBuffer where the histogram starts. Must conform to alignment requirements for [MTLComputeCommandEncoder setBuffer:offset:atIndex:] offset parameter.
+//
 // EncodeTransformToCommandBufferSourceTextureHistogramHistogramOffset calls the underlying EncodeTransformToCommandBufferSourceTextureHistogramHistogramOffset.
 func (x *ImageHistogramEqualization) EncodeTransformToCommandBufferSourceTextureHistogramHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, histogram metal.MTLBuffer, histogramOffset uint) {
 	x.inner.EncodeTransformToCommandBufferSourceTextureHistogramHistogramOffset(commandBuffer, source, histogram, histogramOffset)
 }
 
+// @property   histogramInfo @abstract   Return a structure describing the histogram content @discussion Returns a MPSImageHistogramInfo structure describing the format of the histogram.
+//
 // HistogramInfo calls the underlying HistogramInfo.
 func (x *ImageHistogramEqualization) HistogramInfo() raw.MPSImageHistogramInfo {
 	return x.inner.HistogramInfo()

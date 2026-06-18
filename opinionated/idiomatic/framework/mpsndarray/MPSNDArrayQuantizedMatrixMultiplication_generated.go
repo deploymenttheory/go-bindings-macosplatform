@@ -33,6 +33,8 @@ func ArrayQuantizedMatrixMultiplicationFromID(id objc.ID) *ArrayQuantizedMatrixM
 	return &ArrayQuantizedMatrixMultiplication{inner: raw.MPSNDArrayQuantizedMatrixMultiplicationFromID(id)}
 }
 
+// @abstract   Initializes a quantized matrix multiplication kernel. @param      leftQuantizationDescriptor    The quantization definition for the LHS input. @param      rightQuantizationDescriptor    The quantization definition for the RHS input. @result     A new valid quantized matrix multiplication kernel.
+//
 // NewArrayQuantizedMatrixMultiplicationWithDeviceLeftQuantizationDescriptorRightQuantizationDescriptor creates a new [ArrayQuantizedMatrixMultiplication].
 func NewArrayQuantizedMatrixMultiplicationWithDeviceLeftQuantizationDescriptorRightQuantizationDescriptor(device metal.MTLDevice, leftQuantizationDescriptor *raw.MPSNDArrayQuantizationDescriptor, rightQuantizationDescriptor *raw.MPSNDArrayQuantizationDescriptor) *ArrayQuantizedMatrixMultiplication {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayQuantizedMatrixMultiplication")), objc.RegisterName("alloc"))
@@ -40,18 +42,24 @@ func NewArrayQuantizedMatrixMultiplicationWithDeviceLeftQuantizationDescriptorRi
 	return &ArrayQuantizedMatrixMultiplication{inner: raw.MPSNDArrayQuantizedMatrixMultiplicationFromID(_id)}
 }
 
+// @property   alpha @discussion The scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *ArrayQuantizedMatrixMultiplication) WithAlpha(alpha float64) *ArrayQuantizedMatrixMultiplication {
 	x.inner.MPSNDArrayMatrixMultiplication.SetAlpha(alpha)
 	return x
 }
 
+// @property   beta @discussion The scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+//
 // WithBeta sets the beta property and returns the receiver for chaining.
 func (x *ArrayQuantizedMatrixMultiplication) WithBeta(beta float64) *ArrayQuantizedMatrixMultiplication {
 	x.inner.MPSNDArrayMatrixMultiplication.SetBeta(beta)
 	return x
 }
 
+// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
+//
 // WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
 func (x *ArrayQuantizedMatrixMultiplication) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayQuantizedMatrixMultiplication {
 	x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)

@@ -36,66 +36,88 @@ func NewAVB17221AECPAEMMessage() *AVB17221AECPAEMMessage {
 	return &AVB17221AECPAEMMessage{inner: raw.AVB17221AECPAEMMessageFromID(_id)}
 }
 
+// @property	commandType @abstract	The command_type field of the AECP AEM message.
+//
 // WithCommandType sets the commandType property and returns the receiver for chaining.
 func (x *AVB17221AECPAEMMessage) WithCommandType(commandType AVB17221AEMCommandType) *AVB17221AECPAEMMessage {
 	x.inner.SetCommandType(raw.AVB17221AEMCommandType(commandType))
 	return x
 }
 
+// @property	unsolicited @abstract	The u field of the AECP AEM message.
+//
 // WithUnsolicited sets the unsolicited property and returns the receiver for chaining.
 func (x *AVB17221AECPAEMMessage) WithUnsolicited(unsolicited bool) *AVB17221AECPAEMMessage {
 	x.inner.SetUnsolicited(unsolicited)
 	return x
 }
 
+// @property	controllerRequest @abstract	The cr field of the AECP AEM message.
+//
 // WithControllerRequest sets the controllerRequest property and returns the receiver for chaining.
 func (x *AVB17221AECPAEMMessage) WithControllerRequest(controllerRequest bool) *AVB17221AECPAEMMessage {
 	x.inner.SetControllerRequest(controllerRequest)
 	return x
 }
 
+// @property	commandSpecificData @abstract	The command_specific_data field of the AECP AEM message.
+//
 // WithCommandSpecificData sets the commandSpecificData property and returns the receiver for chaining.
 func (x *AVB17221AECPAEMMessage) WithCommandSpecificData(commandSpecificData *foundation.NSData) *AVB17221AECPAEMMessage {
 	x.inner.SetCommandSpecificData(commandSpecificData)
 	return x
 }
 
+// @property	messageType @abstract	The message_type field of the AECP message.
+//
 // WithMessageType sets the messageType property and returns the receiver for chaining.
 func (x *AVB17221AECPAEMMessage) WithMessageType(messageType AVB17221AECPMessageType) *AVB17221AECPAEMMessage {
 	x.inner.AVB17221AECPMessage.SetMessageType(raw.AVB17221AECPMessageType(messageType))
 	return x
 }
 
+// @property	status @abstract	The status field of the AECP message.
+//
 // WithStatus sets the status property and returns the receiver for chaining.
 func (x *AVB17221AECPAEMMessage) WithStatus(status AVB17221AECPStatusCode) *AVB17221AECPAEMMessage {
 	x.inner.AVB17221AECPMessage.SetStatus(raw.AVB17221AECPStatusCode(status))
 	return x
 }
 
+// @property	targetEntityID @abstract	The target_entity_id field of the AECP message.
+//
 // WithTargetEntityID sets the targetEntityID property and returns the receiver for chaining.
 func (x *AVB17221AECPAEMMessage) WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAEMMessage {
 	x.inner.AVB17221AECPMessage.SetTargetEntityID(targetEntityID)
 	return x
 }
 
+// @property	controllerEntityID @abstract	The controller_entity_id field of the AECP message.
+//
 // WithControllerEntityID sets the controllerEntityID property and returns the receiver for chaining.
 func (x *AVB17221AECPAEMMessage) WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAEMMessage {
 	x.inner.AVB17221AECPMessage.SetControllerEntityID(controllerEntityID)
 	return x
 }
 
+// @property	sequenceID @abstract	The sequence_id field of the AECP message.
+//
 // WithSequenceID sets the sequenceID property and returns the receiver for chaining.
 func (x *AVB17221AECPAEMMessage) WithSequenceID(sequenceID uint16) *AVB17221AECPAEMMessage {
 	x.inner.AVB17221AECPMessage.SetSequenceID(sequenceID)
 	return x
 }
 
+// @property	sourceMAC @abstract	The source_mac field of the AECP message.
+//
 // WithSourceMAC sets the sourceMAC property and returns the receiver for chaining.
 func (x *AVB17221AECPAEMMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221AECPAEMMessage {
 	x.inner.AVB17221AECPMessage.SetSourceMAC(sourceMAC.Unwrap())
 	return x
 }
 
+// @property	commandType @abstract	The command_type field of the AECP AEM message.
+//
 // CommandType calls the underlying CommandType.
 func (x *AVB17221AECPAEMMessage) CommandType() AVB17221AEMCommandType {
 	return AVB17221AEMCommandType(x.inner.CommandType())
@@ -106,6 +128,8 @@ func (x *AVB17221AECPAEMMessage) SetCommandType(commandType AVB17221AEMCommandTy
 	x.inner.SetCommandType(raw.AVB17221AEMCommandType(commandType))
 }
 
+// @property	unsolicited @abstract	The u field of the AECP AEM message.
+//
 // IsUnsolicited calls the underlying IsUnsolicited.
 func (x *AVB17221AECPAEMMessage) IsUnsolicited() bool {
 	return x.inner.IsUnsolicited()
@@ -116,6 +140,8 @@ func (x *AVB17221AECPAEMMessage) SetUnsolicited(unsolicited bool) {
 	x.inner.SetUnsolicited(unsolicited)
 }
 
+// @property	controllerRequest @abstract	The cr field of the AECP AEM message.
+//
 // IsControllerRequest calls the underlying IsControllerRequest.
 func (x *AVB17221AECPAEMMessage) IsControllerRequest() bool {
 	return x.inner.IsControllerRequest()
@@ -126,6 +152,8 @@ func (x *AVB17221AECPAEMMessage) SetControllerRequest(controllerRequest bool) {
 	x.inner.SetControllerRequest(controllerRequest)
 }
 
+// @property	commandSpecificData @abstract	The command_specific_data field of the AECP AEM message.
+//
 // CommandSpecificData calls the underlying CommandSpecificData.
 func (x *AVB17221AECPAEMMessage) CommandSpecificData() *foundation.NSData {
 	return x.inner.CommandSpecificData()

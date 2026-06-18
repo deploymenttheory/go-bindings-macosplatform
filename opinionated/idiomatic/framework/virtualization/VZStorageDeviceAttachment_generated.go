@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The common behaviors for storage devices in the guest system.
+//
 // StorageDeviceAttachment wraps [raw.VZStorageDeviceAttachment] with a fluent Go API.
 type StorageDeviceAttachment struct {
 	inner *raw.VZStorageDeviceAttachment

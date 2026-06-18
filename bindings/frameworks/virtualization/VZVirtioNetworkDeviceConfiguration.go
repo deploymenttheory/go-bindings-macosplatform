@@ -9,6 +9,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A configuration object that requests the creation of a network device for the guest system.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzvirtionetworkdeviceconfiguration
 type VZVirtioNetworkDeviceConfiguration struct {
 	VZNetworkDeviceConfiguration
@@ -29,6 +31,7 @@ func VZVirtioNetworkDeviceConfigurationFromID(id objc.ID) *VZVirtioNetworkDevice
 	return o
 }
 
+// Creates a network device configuration object for you to configure.
 func (o *VZVirtioNetworkDeviceConfiguration) Init() *VZVirtioNetworkDeviceConfiguration {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZVirtioNetworkDeviceConfigurationSelInit)
 	if _ret != 0 {

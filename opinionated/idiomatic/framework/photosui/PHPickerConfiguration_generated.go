@@ -40,6 +40,8 @@ func NewPickerConfiguration() *PickerConfiguration {
 	return &PickerConfiguration{inner: raw.PHPickerConfigurationFromID(_id)}
 }
 
+// Initializes a new configuration with the \c photoLibrary the picker should use.
+//
 // NewPickerConfigurationWithPhotoLibrary creates a new [PickerConfiguration].
 func NewPickerConfigurationWithPhotoLibrary(photoLibrary *photos.PHPhotoLibrary) *PickerConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHPickerConfiguration")), objc.RegisterName("alloc"))
@@ -47,30 +49,40 @@ func NewPickerConfigurationWithPhotoLibrary(photoLibrary *photos.PHPhotoLibrary)
 	return &PickerConfiguration{inner: raw.PHPickerConfigurationFromID(_id)}
 }
 
+// The preferred representation mode of selected assets. Default is \c PHPickerConfigurationAssetRepresentationModeAutomatic. @discussion Setting \c preferredAssetRepresentationMode to \c PHPickerConfigurationAssetRepresentationModeAutomatic means the best representation determined by the system will be used.
+//
 // WithPreferredAssetRepresentationMode sets the preferredAssetRepresentationMode property and returns the receiver for chaining.
 func (x *PickerConfiguration) WithPreferredAssetRepresentationMode(preferredAssetRepresentationMode PHPickerConfigurationAssetRepresentationMode) *PickerConfiguration {
 	x.inner.SetPreferredAssetRepresentationMode(raw.PHPickerConfigurationAssetRepresentationMode(preferredAssetRepresentationMode))
 	return x
 }
 
+// The selection behavior of the picker. Default is \c PHPickerConfigurationSelectionDefault.
+//
 // WithSelection sets the selection property and returns the receiver for chaining.
 func (x *PickerConfiguration) WithSelection(selection PHPickerConfigurationSelection) *PickerConfiguration {
 	x.inner.SetSelection(raw.PHPickerConfigurationSelection(selection))
 	return x
 }
 
+// The maximum number of assets that can be selected. Default is 1. @discussion Setting \c selectionLimit to 0 means maximum supported by the system.
+//
 // WithSelectionLimit sets the selectionLimit property and returns the receiver for chaining.
 func (x *PickerConfiguration) WithSelectionLimit(selectionLimit int) *PickerConfiguration {
 	x.inner.SetSelectionLimit(selectionLimit)
 	return x
 }
 
+// Types of assets that can be shown. Default is \c nil. @discussion Setting \c filter to \c nil means all asset types can be shown.
+//
 // WithFilter sets the filter property and returns the receiver for chaining.
 func (x *PickerConfiguration) WithFilter(filter *PickerFilter) *PickerConfiguration {
 	x.inner.SetFilter(filter.Unwrap())
 	return x
 }
 
+// Local identifiers of assets to be shown as selected when the picker is presented. Default is an empty array. @discussion \c preselectedAssetIdentifiers should be an empty array if \c selectionLimit is 1 or \c photoLibrary is not specified. Returned item providers for preselected assets are always empty.
+//
 // WithPreselectedAssetIdentifiers sets the collection, converting the Go slice to an NSArray.
 func (x *PickerConfiguration) WithPreselectedAssetIdentifiers(items ...*foundation.NSString) *PickerConfiguration {
 	if len(items) == 0 {
@@ -89,54 +101,74 @@ func (x *PickerConfiguration) WithPreselectedAssetIdentifiers(items ...*foundati
 	return x
 }
 
+// The mode of the picker. Default is \c PHPickerModeDefault.
+//
 // WithMode sets the mode property and returns the receiver for chaining.
 func (x *PickerConfiguration) WithMode(mode PHPickerMode) *PickerConfiguration {
 	x.inner.SetMode(raw.PHPickerMode(mode))
 	return x
 }
 
+// Edges of the picker that have no margin between the content and the edge (e.g. without bars in between). Default is \c NSDirectionalRectEdgeNone.
+//
 // WithEdgesWithoutContentMargins sets the edgesWithoutContentMargins property and returns the receiver for chaining.
 func (x *PickerConfiguration) WithEdgesWithoutContentMargins(edgesWithoutContentMargins appkit.NSDirectionalRectEdge) *PickerConfiguration {
 	x.inner.SetEdgesWithoutContentMargins(edgesWithoutContentMargins)
 	return x
 }
 
+// Capabilities of the picker that should be disabled. Default is \c PHPickerCapabilitiesNone.
+//
 // WithDisabledCapabilities sets the disabledCapabilities property and returns the receiver for chaining.
 func (x *PickerConfiguration) WithDisabledCapabilities(disabledCapabilities PHPickerCapabilities) *PickerConfiguration {
 	x.inner.SetDisabledCapabilities(raw.PHPickerCapabilities(disabledCapabilities))
 	return x
 }
 
+// The preferred representation mode of selected assets. Default is \c PHPickerConfigurationAssetRepresentationModeAutomatic. @discussion Setting \c preferredAssetRepresentationMode to \c PHPickerConfigurationAssetRepresentationModeAutomatic means the best representation determined by the system will be used.
+//
 // PreferredAssetRepresentationMode calls the underlying PreferredAssetRepresentationMode.
 func (x *PickerConfiguration) PreferredAssetRepresentationMode() PHPickerConfigurationAssetRepresentationMode {
 	return PHPickerConfigurationAssetRepresentationMode(x.inner.PreferredAssetRepresentationMode())
 }
 
+// The preferred representation mode of selected assets. Default is \c PHPickerConfigurationAssetRepresentationModeAutomatic. @discussion Setting \c preferredAssetRepresentationMode to \c PHPickerConfigurationAssetRepresentationModeAutomatic means the best representation determined by the system will be used.
+//
 // SetPreferredAssetRepresentationMode calls the underlying SetPreferredAssetRepresentationMode.
 func (x *PickerConfiguration) SetPreferredAssetRepresentationMode(preferredAssetRepresentationMode PHPickerConfigurationAssetRepresentationMode) {
 	x.inner.SetPreferredAssetRepresentationMode(raw.PHPickerConfigurationAssetRepresentationMode(preferredAssetRepresentationMode))
 }
 
+// The selection behavior of the picker. Default is \c PHPickerConfigurationSelectionDefault.
+//
 // Selection calls the underlying Selection.
 func (x *PickerConfiguration) Selection() PHPickerConfigurationSelection {
 	return PHPickerConfigurationSelection(x.inner.Selection())
 }
 
+// The selection behavior of the picker. Default is \c PHPickerConfigurationSelectionDefault.
+//
 // SetSelection calls the underlying SetSelection.
 func (x *PickerConfiguration) SetSelection(selection PHPickerConfigurationSelection) {
 	x.inner.SetSelection(raw.PHPickerConfigurationSelection(selection))
 }
 
+// The maximum number of assets that can be selected. Default is 1. @discussion Setting \c selectionLimit to 0 means maximum supported by the system.
+//
 // SelectionLimit calls the underlying SelectionLimit.
 func (x *PickerConfiguration) SelectionLimit() int {
 	return x.inner.SelectionLimit()
 }
 
+// The maximum number of assets that can be selected. Default is 1. @discussion Setting \c selectionLimit to 0 means maximum supported by the system.
+//
 // SetSelectionLimit calls the underlying SetSelectionLimit.
 func (x *PickerConfiguration) SetSelectionLimit(selectionLimit int) {
 	x.inner.SetSelectionLimit(selectionLimit)
 }
 
+// Types of assets that can be shown. Default is \c nil. @discussion Setting \c filter to \c nil means all asset types can be shown.
+//
 // Filter calls the underlying Filter.
 func (x *PickerConfiguration) Filter() *PickerFilter {
 	_r := x.inner.Filter()
@@ -146,11 +178,15 @@ func (x *PickerConfiguration) Filter() *PickerFilter {
 	return &PickerFilter{inner: _r}
 }
 
+// Types of assets that can be shown. Default is \c nil. @discussion Setting \c filter to \c nil means all asset types can be shown.
+//
 // SetFilter calls the underlying SetFilter.
 func (x *PickerConfiguration) SetFilter(filter *raw.PHPickerFilter) {
 	x.inner.SetFilter(filter)
 }
 
+// Local identifiers of assets to be shown as selected when the picker is presented. Default is an empty array. @discussion \c preselectedAssetIdentifiers should be an empty array if \c selectionLimit is 1 or \c photoLibrary is not specified. Returned item providers for preselected assets are always empty.
+//
 // PreselectedAssetIdentifiers returns the collection as a Go slice.
 func (x *PickerConfiguration) PreselectedAssetIdentifiers() []string {
 	arr := x.inner.PreselectedAssetIdentifiers()
@@ -162,36 +198,50 @@ func (x *PickerConfiguration) PreselectedAssetIdentifiers() []string {
 	})
 }
 
+// Local identifiers of assets to be shown as selected when the picker is presented. Default is an empty array. @discussion \c preselectedAssetIdentifiers should be an empty array if \c selectionLimit is 1 or \c photoLibrary is not specified. Returned item providers for preselected assets are always empty.
+//
 // SetPreselectedAssetIdentifiers calls the underlying SetPreselectedAssetIdentifiers.
 func (x *PickerConfiguration) SetPreselectedAssetIdentifiers(preselectedAssetIdentifiers *foundation.NSArray[*foundation.NSString]) {
 	x.inner.SetPreselectedAssetIdentifiers(preselectedAssetIdentifiers)
 }
 
+// The mode of the picker. Default is \c PHPickerModeDefault.
+//
 // Mode calls the underlying Mode.
 func (x *PickerConfiguration) Mode() PHPickerMode {
 	return PHPickerMode(x.inner.Mode())
 }
 
+// The mode of the picker. Default is \c PHPickerModeDefault.
+//
 // SetMode calls the underlying SetMode.
 func (x *PickerConfiguration) SetMode(mode PHPickerMode) {
 	x.inner.SetMode(raw.PHPickerMode(mode))
 }
 
+// Edges of the picker that have no margin between the content and the edge (e.g. without bars in between). Default is \c NSDirectionalRectEdgeNone.
+//
 // EdgesWithoutContentMargins calls the underlying EdgesWithoutContentMargins.
 func (x *PickerConfiguration) EdgesWithoutContentMargins() appkit.NSDirectionalRectEdge {
 	return x.inner.EdgesWithoutContentMargins()
 }
 
+// Edges of the picker that have no margin between the content and the edge (e.g. without bars in between). Default is \c NSDirectionalRectEdgeNone.
+//
 // SetEdgesWithoutContentMargins calls the underlying SetEdgesWithoutContentMargins.
 func (x *PickerConfiguration) SetEdgesWithoutContentMargins(edgesWithoutContentMargins appkit.NSDirectionalRectEdge) {
 	x.inner.SetEdgesWithoutContentMargins(edgesWithoutContentMargins)
 }
 
+// Capabilities of the picker that should be disabled. Default is \c PHPickerCapabilitiesNone.
+//
 // DisabledCapabilities calls the underlying DisabledCapabilities.
 func (x *PickerConfiguration) DisabledCapabilities() PHPickerCapabilities {
 	return PHPickerCapabilities(x.inner.DisabledCapabilities())
 }
 
+// Capabilities of the picker that should be disabled. Default is \c PHPickerCapabilitiesNone.
+//
 // SetDisabledCapabilities calls the underlying SetDisabledCapabilities.
 func (x *PickerConfiguration) SetDisabledCapabilities(disabledCapabilities PHPickerCapabilities) {
 	x.inner.SetDisabledCapabilities(raw.PHPickerCapabilities(disabledCapabilities))

@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A 3D specialization of an agent that moves on a 3-axis logical coordinate system.
+//
 // Agent3D wraps [raw.GKAgent3D] with a fluent Go API.
 type Agent3D struct {
 	inner *raw.GKAgent3D
@@ -36,54 +38,72 @@ func NewAgent3D() *Agent3D {
 	return &Agent3D{inner: raw.GKAgent3DFromID(_id)}
 }
 
+// Should this vehicle operate in a right-handed coordinate system? NO means it will be left-handed
+//
 // WithRightHanded sets the rightHanded property and returns the receiver for chaining.
 func (x *Agent3D) WithRightHanded(rightHanded bool) *Agent3D {
 	x.inner.SetRightHanded(rightHanded)
 	return x
 }
 
+// Object which has agentDidUpdate called on it during this agent's behavior updatekbeha
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Agent3D) WithDelegate(delegate raw.GKAgentDelegate) *Agent3D {
 	x.inner.GKAgent.SetDelegate(delegate)
 	return x
 }
 
+// The behavior to apply when updateWithDeltaTime is called. All forces from the goals in the behavior are summed and then applied.
+//
 // WithBehavior sets the behavior property and returns the receiver for chaining.
 func (x *Agent3D) WithBehavior(behavior BehaviorProvider) *Agent3D {
 	x.inner.GKAgent.SetBehavior(behavior.asBehavior())
 	return x
 }
 
+// Agent's mass. Used for agent impulse application purposes. Defaults to 1.0
+//
 // WithMass sets the mass property and returns the receiver for chaining.
 func (x *Agent3D) WithMass(mass float32) *Agent3D {
 	x.inner.GKAgent.SetMass(mass)
 	return x
 }
 
+// Radius of the agent's bounding circle.  Used by the agent avoid steering functions. Defaults to 0.5 for a canonical diameter of 1.0
+//
 // WithRadius sets the radius property and returns the receiver for chaining.
 func (x *Agent3D) WithRadius(radius float32) *Agent3D {
 	x.inner.GKAgent.SetRadius(radius)
 	return x
 }
 
+// Current speed of the agent along its foward direction. Defaults to 0.0
+//
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *Agent3D) WithSpeed(speed float32) *Agent3D {
 	x.inner.GKAgent.SetSpeed(speed)
 	return x
 }
 
+// Maximum amount of acceleration that can be applied to this agent.  All applied impulses are clipped to this amount. Defaults to 1.0
+//
 // WithMaxAcceleration sets the maxAcceleration property and returns the receiver for chaining.
 func (x *Agent3D) WithMaxAcceleration(maxAcceleration float32) *Agent3D {
 	x.inner.GKAgent.SetMaxAcceleration(maxAcceleration)
 	return x
 }
 
+// Maximum speed of this agent. Impulses cannot cause the agents speed to ever be greater than this value. Defaults to 1.0
+//
 // WithMaxSpeed sets the maxSpeed property and returns the receiver for chaining.
 func (x *Agent3D) WithMaxSpeed(maxSpeed float32) *Agent3D {
 	x.inner.GKAgent.SetMaxSpeed(maxSpeed)
 	return x
 }
 
+// Position of the agent on the logical XYZ plane
+//
 // Position calls the underlying Position.
 func (x *Agent3D) Position() unsafe.Pointer {
 	return x.inner.Position()
@@ -94,11 +114,15 @@ func (x *Agent3D) SetPosition(position unsafe.Pointer) {
 	x.inner.SetPosition(position)
 }
 
+// Current logical velocity of the agent. The forward vector can be derived by normalizing this.
+//
 // Velocity calls the underlying Velocity.
 func (x *Agent3D) Velocity() unsafe.Pointer {
 	return x.inner.Velocity()
 }
 
+// Should this vehicle operate in a right-handed coordinate system? NO means it will be left-handed
+//
 // RightHanded calls the underlying RightHanded.
 func (x *Agent3D) RightHanded() bool {
 	return x.inner.RightHanded()
@@ -109,6 +133,8 @@ func (x *Agent3D) SetRightHanded(rightHanded bool) {
 	x.inner.SetRightHanded(rightHanded)
 }
 
+// The 3x3 rotation matrix that defines the orientation of this agent in 3D space columns[0] is forward, columns[1] is up, columns[2] is side
+//
 // Rotation calls the underlying Rotation.
 func (x *Agent3D) Rotation() unsafe.Pointer {
 	return x.inner.Rotation()

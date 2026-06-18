@@ -39,11 +39,15 @@ func NewPlayer() *Player {
 	return &Player{inner: raw.GKPlayerFromID(_id)}
 }
 
+// This convenience method checks if the gamePlayerID and the teamPlayerID (scopedIDs) are persistent or unique for the instantiation of this app.
+//
 // ScopedIDsArePersistent calls the underlying ScopedIDsArePersistent.
 func (x *Player) ScopedIDsArePersistent() bool {
 	return x.inner.ScopedIDsArePersistent()
 }
 
+// This is the player's unique and persistent ID that is scoped to this application.
+//
 // GamePlayerID calls the underlying GamePlayerID.
 func (x *Player) GamePlayerID() string {
 	_r := x.inner.GamePlayerID()
@@ -53,6 +57,8 @@ func (x *Player) GamePlayerID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// This is the player's unique and persistent ID that is scoped to the Apple Store Connect Team identifier of this application.
+//
 // TeamPlayerID calls the underlying TeamPlayerID.
 func (x *Player) TeamPlayerID() string {
 	_r := x.inner.TeamPlayerID()
@@ -62,6 +68,8 @@ func (x *Player) TeamPlayerID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// The alias property contains the player's nickname. When you need to display the name to the user, consider using displayName instead. The nickname is unique but not invariant: the player may change their nickname. The nickname may be very long, so be sure to use appropriate string truncation API when drawing.
+//
 // Alias calls the underlying Alias.
 func (x *Player) Alias() string {
 	_r := x.inner.Alias()
@@ -85,6 +93,8 @@ func (x *Player) IsInvitable() bool {
 	return x.inner.IsInvitable()
 }
 
+// Asynchronously load the player's photo. Error will be nil on success. Possible reasons for error: 1. Communications failure
+//
 // LoadPhotoForSize blocks until the operation completes or ctx is cancelled.
 func (x *Player) LoadPhotoForSize(ctx context.Context, size GKPhotoSize) (*appkit.NSImage, error) {
 	type _result struct {

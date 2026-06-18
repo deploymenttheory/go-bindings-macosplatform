@@ -30,6 +30,8 @@ func PDF417CodeDescriptorFromID(id objc.ID) *PDF417CodeDescriptor {
 	return &PDF417CodeDescriptor{inner: raw.CIPDF417CodeDescriptorFromID(id)}
 }
 
+// Initializes an PDF417 code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the PDF417 code symbol. - isCompact: A Boolean indicating whether or not the PDF417 code is compact. - rowCount: The number of rows in the PDF417 code, from 3 to 90. - columnCount: The number of columns in the Aztec code, from 1 to 30. - Returns: An initialized “CIPDF417CodeDescriptor“ instance or `nil` if the parameters are invalid
+//
 // NewPDF417CodeDescriptorWithPayloadIsCompactRowCountColumnCount creates a new [PDF417CodeDescriptor].
 func NewPDF417CodeDescriptorWithPayloadIsCompactRowCountColumnCount(errorCorrectedPayload *foundation.NSData, isCompact bool, rowCount int, columnCount int) *PDF417CodeDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIPDF417CodeDescriptor")), objc.RegisterName("alloc"))
@@ -37,21 +39,29 @@ func NewPDF417CodeDescriptorWithPayloadIsCompactRowCountColumnCount(errorCorrect
 	return &PDF417CodeDescriptor{inner: raw.CIPDF417CodeDescriptorFromID(_id)}
 }
 
+// The error-corrected payload containing the data encoded in the PDF417 code symbol. The first codeword indicates the number of data codewords in the errorCorrectedPayload. PDF417 codes are comprised of a start character on the left and a stop character on the right. Each row begins and ends with special characters indicating the current row as well as information about the dimensions of the PDF417 symbol. The errorCorrectedPayload represents the sequence of PDF417 codewords that make up the body of the message. The first codeword indicates the number of codewords in the message. This count includes the "count" codeword and any padding codewords, but does not include the error correction codewords. Each codeword is a 16-bit value in the range of 0...928. The sequence is to be interpreted as described in the PDF417 bar code symbology specification -- ISO/IEC 15438:2006(E).
+//
 // ErrorCorrectedPayload calls the underlying ErrorCorrectedPayload.
 func (x *PDF417CodeDescriptor) ErrorCorrectedPayload() *foundation.NSData {
 	return x.inner.ErrorCorrectedPayload()
 }
 
+// A boolean value telling if the PDF417 code is compact. Compact PDF417 symbols have abbreviated right-side guard bars.
+//
 // IsCompact calls the underlying IsCompact.
 func (x *PDF417CodeDescriptor) IsCompact() bool {
 	return x.inner.IsCompact()
 }
 
+// The number of rows in the PDF417 code symbol. Valid row count values are from 3 to 90.
+//
 // RowCount calls the underlying RowCount.
 func (x *PDF417CodeDescriptor) RowCount() int {
 	return x.inner.RowCount()
 }
 
+// The number of columns in the PDF417 code symbol. Valid column count values are from 1 to 30. This count excluded the columns used to indicate the symbol structure.
+//
 // ColumnCount calls the underlying ColumnCount.
 func (x *PDF417CodeDescriptor) ColumnCount() int {
 	return x.inner.ColumnCount()

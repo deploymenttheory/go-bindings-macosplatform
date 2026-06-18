@@ -38,18 +38,24 @@ func NewGraphCreateSparseOpDescriptor() *GraphCreateSparseOpDescriptor {
 	return &GraphCreateSparseOpDescriptor{inner: raw.MPSGraphCreateSparseOpDescriptorFromID(_id)}
 }
 
+// Defines the storage format of the sparse tensor.
+//
 // WithSparseStorageType sets the sparseStorageType property and returns the receiver for chaining.
 func (x *GraphCreateSparseOpDescriptor) WithSparseStorageType(sparseStorageType MPSGraphSparseStorageType) *GraphCreateSparseOpDescriptor {
 	x.inner.SetSparseStorageType(raw.MPSGraphSparseStorageType(sparseStorageType))
 	return x
 }
 
+// Defines the datatype of the sparse tensor.
+//
 // WithDataType sets the dataType property and returns the receiver for chaining.
 func (x *GraphCreateSparseOpDescriptor) WithDataType(dataType mpscore.MPSDataType) *GraphCreateSparseOpDescriptor {
 	x.inner.SetDataType(dataType)
 	return x
 }
 
+// Defines the storage format of the sparse tensor.
+//
 // SparseStorageType calls the underlying SparseStorageType.
 func (x *GraphCreateSparseOpDescriptor) SparseStorageType() MPSGraphSparseStorageType {
 	return MPSGraphSparseStorageType(x.inner.SparseStorageType())
@@ -60,6 +66,8 @@ func (x *GraphCreateSparseOpDescriptor) SetSparseStorageType(sparseStorageType M
 	x.inner.SetSparseStorageType(raw.MPSGraphSparseStorageType(sparseStorageType))
 }
 
+// Defines the datatype of the sparse tensor.
+//
 // DataType calls the underlying DataType.
 func (x *GraphCreateSparseOpDescriptor) DataType() mpscore.MPSDataType {
 	return x.inner.DataType()

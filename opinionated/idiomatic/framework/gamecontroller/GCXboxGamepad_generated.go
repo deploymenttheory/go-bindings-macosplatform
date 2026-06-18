@@ -41,12 +41,16 @@ func (x *XboxGamepad) WithValueChangedHandler(valueChangedHandler func(*raw.GCEx
 	return x
 }
 
+// Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called for each element that changed. @param profile this profile that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons. @param element the element that has been modified.
+//
 // WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
 func (x *XboxGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *XboxGamepad {
 	x.inner.GCExtendedGamepad.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
 	return x
 }
 
+// Some Xbox controller variants can support up to four additional buttons. @example The standard Bluetooth-enabled Xbox Wireless Controller does not have paddle buttons @example The Xbox Elite Wireless Controller has four extra digital buttons. @note The four extra digital buttons on the Xbox Elite Wireless Controller are only directly addressable when the controller is on its default mapping profile. Otherwise, the paddle buttons are directly bound to other inputs on the controller.
+//
 // PaddleButton1 calls the underlying PaddleButton1.
 func (x *XboxGamepad) PaddleButton1() *ControllerButtonInput {
 	_r := x.inner.PaddleButton1()
@@ -83,6 +87,8 @@ func (x *XboxGamepad) PaddleButton4() *ControllerButtonInput {
 	return &ControllerButtonInput{inner: _r}
 }
 
+// Some Xbox controller variants feature a Share button. @example The Bluetooth-enabled Xbox Wireless Controller introduced with the Xbox Series X and Xbox Series S in 2020 has a Share button. @note The Share button is reserved by the system for screenshot and video recording gestures. If you wish to disable these gestures in your app and take control of the Share button, set buttonShare.preferredSystemGestureState to GCSystemGestureStateDisabled.
+//
 // ButtonShare calls the underlying ButtonShare.
 func (x *XboxGamepad) ButtonShare() *ControllerButtonInput {
 	_r := x.inner.ButtonShare()

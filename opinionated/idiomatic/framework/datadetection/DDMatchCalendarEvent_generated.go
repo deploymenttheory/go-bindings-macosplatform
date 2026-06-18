@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a calendar date or date range that the data detection system matches. The DataDetection framework returns a calendar event match in a `DDMatchCalendarEvent` object, which has only a beginning date, only an end date, or both a beginning date and an end date.
+//
 // MatchCalendarEvent wraps [raw.DDMatchCalendarEvent] with a fluent Go API.
 type MatchCalendarEvent struct {
 	inner *raw.DDMatchCalendarEvent
@@ -36,26 +38,36 @@ func NewMatchCalendarEvent() *MatchCalendarEvent {
 	return &MatchCalendarEvent{inner: raw.DDMatchCalendarEventFromID(_id)}
 }
 
+// A Boolean value that indicates whether the event is an all-day event.
+//
 // IsAllDay calls the underlying IsAllDay.
 func (x *MatchCalendarEvent) IsAllDay() bool {
 	return x.inner.IsAllDay()
 }
 
+// A date that represents the start of the event.
+//
 // StartDate calls the underlying StartDate.
 func (x *MatchCalendarEvent) StartDate() *foundation.NSDate {
 	return x.inner.StartDate()
 }
 
+// The time zone for the event’s start date.
+//
 // StartTimeZone calls the underlying StartTimeZone.
 func (x *MatchCalendarEvent) StartTimeZone() *foundation.NSTimeZone {
 	return x.inner.StartTimeZone()
 }
 
+// A date that represents the end of the event.
+//
 // EndDate calls the underlying EndDate.
 func (x *MatchCalendarEvent) EndDate() *foundation.NSDate {
 	return x.inner.EndDate()
 }
 
+// The time zone for the event’s end date.
+//
 // EndTimeZone calls the underlying EndTimeZone.
 func (x *MatchCalendarEvent) EndTimeZone() *foundation.NSTimeZone {
 	return x.inner.EndTimeZone()

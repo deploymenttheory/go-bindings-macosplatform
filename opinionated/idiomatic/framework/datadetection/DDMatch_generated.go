@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A base class for common types of data that the data detection system matches. The DataDetection framework returns results in objects that are subclasses of `DDMatch`, which are specific to the type of matching data. Each object contains the matched string.
+//
 // Match wraps [raw.DDMatch] with a fluent Go API.
 type Match struct {
 	inner *raw.DDMatch
@@ -36,6 +38,8 @@ func NewMatch() *Match {
 	return &Match{inner: raw.DDMatchFromID(_id)}
 }
 
+// A substring that the data detection system identifies from an original string as a common type of data. Use `DDMatch` subclasses that the data detection system provides for a semantic interpretation of this string.
+//
 // MatchedString calls the underlying MatchedString.
 func (x *Match) MatchedString() string {
 	_r := x.inner.MatchedString()

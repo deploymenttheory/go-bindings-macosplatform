@@ -34,6 +34,8 @@ func AuthorizationProviderExtensionLoginConfigurationFromID(id objc.ID) *Authori
 	return &AuthorizationProviderExtensionLoginConfiguration{inner: raw.ASAuthorizationProviderExtensionLoginConfigurationFromID(id)}
 }
 
+// @abstract Initializes an ASAuthorizationProviderExtensionLoginConfiguration class with the required values. @param clientID The client_id for the Apple platform SSO login at the identity provider. @param issuer The issuer for the requests, used to validate responses. @param tokenEndpointURL The token endpoint at the idP for login. @param jwksEndpointURL The JWKS URL at the idP for validating tokens. @param audience The audience used for signed assertions.  This should be the tenent at the idP. @return An instance of a ASAuthorizationProviderExtensionLoginConfiguration.
+//
 // NewAuthorizationProviderExtensionLoginConfigurationWithClientIDIssuerTokenEndpointURLJwksEndpointURLAudience creates a new [AuthorizationProviderExtensionLoginConfiguration].
 func NewAuthorizationProviderExtensionLoginConfigurationWithClientIDIssuerTokenEndpointURLJwksEndpointURLAudience(clientID string, issuer string, tokenEndpointURL string, jwksEndpointURL string, audience string) *AuthorizationProviderExtensionLoginConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationProviderExtensionLoginConfiguration")), objc.RegisterName("alloc"))
@@ -41,66 +43,88 @@ func NewAuthorizationProviderExtensionLoginConfigurationWithClientIDIssuerTokenE
 	return &AuthorizationProviderExtensionLoginConfiguration{inner: raw.ASAuthorizationProviderExtensionLoginConfigurationFromID(_id)}
 }
 
+// @abstract Predicate string used to identify invalid credential errors. @discussion If there is an HTTP 400 or HTTP 401 error when authenticating, this predicate will be used on the response body JSON to determine if the error is due to an invalid password or something else.  If nil, then only an HTTP 401 will be used for an invalid credential.
+//
 // WithInvalidCredentialPredicate sets the invalidCredentialPredicate property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithInvalidCredentialPredicate(invalidCredentialPredicate string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetInvalidCredentialPredicate(foundation.NSStringStringWithUTF8String(invalidCredentialPredicate))
 	return x
 }
 
+// @abstract The display name for the account.  Used for notifications and login prompts.
+//
 // WithAccountDisplayName sets the accountDisplayName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithAccountDisplayName(accountDisplayName string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetAccountDisplayName(foundation.NSStringStringWithUTF8String(accountDisplayName))
 	return x
 }
 
+// @abstract The audience for validation and requests.
+//
 // WithAudience sets the audience property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithAudience(audience string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetAudience(foundation.NSStringStringWithUTF8String(audience))
 	return x
 }
 
+// @abstract Token Endpoint URL for login request.
+//
 // WithTokenEndpointURL sets the tokenEndpointURL property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithTokenEndpointURL(tokenEndpointURL string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetTokenEndpointURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(tokenEndpointURL)))
 	return x
 }
 
+// @abstract JWKS Endpoint URL for keys.
+//
 // WithJwksEndpointURL sets the jwksEndpointURL property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithJwksEndpointURL(jwksEndpointURL string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetJwksEndpointURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(jwksEndpointURL)))
 	return x
 }
 
+// @abstract The device context for storing device meta data.
+//
 // WithDeviceContext sets the deviceContext property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithDeviceContext(deviceContext *foundation.NSData) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetDeviceContext(deviceContext)
 	return x
 }
 
+// @abstract The biometric policy for User Secure Enclave Key authentication.
+//
 // WithUserSecureEnclaveKeyBiometricPolicy sets the userSecureEnclaveKeyBiometricPolicy property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithUserSecureEnclaveKeyBiometricPolicy(userSecureEnclaveKeyBiometricPolicy ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetUserSecureEnclaveKeyBiometricPolicy(raw.ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy(userSecureEnclaveKeyBiometricPolicy))
 	return x
 }
 
+// @abstract Nonce Endpoint URL, defaults to token tokenEndpointURL.
+//
 // WithNonceEndpointURL sets the nonceEndpointURL property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithNonceEndpointURL(nonceEndpointURL string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetNonceEndpointURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(nonceEndpointURL)))
 	return x
 }
 
+// @abstract The keypath in the nonce response that contains the nonce value.
+//
 // WithNonceResponseKeypath sets the nonceResponseKeypath property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithNonceResponseKeypath(nonceResponseKeypath string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetNonceResponseKeypath(foundation.NSStringStringWithUTF8String(nonceResponseKeypath))
 	return x
 }
 
+// @abstract The name of the server nonce claim when included in authentication requests.
+//
 // WithServerNonceClaimName sets the serverNonceClaimName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithServerNonceClaimName(serverNonceClaimName string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetServerNonceClaimName(foundation.NSStringStringWithUTF8String(serverNonceClaimName))
 	return x
 }
 
+// @abstract Custom values added to the server nonce POST request body.
+//
 // WithCustomNonceRequestValues sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomNonceRequestValues(items ...*foundation.NSURLQueryItem) *AuthorizationProviderExtensionLoginConfiguration {
 	if len(items) == 0 {
@@ -119,36 +143,48 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomNonceReques
 	return x
 }
 
+// @abstract Additional login scopes.
+//
 // WithAdditionalScopes sets the additionalScopes property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithAdditionalScopes(additionalScopes string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetAdditionalScopes(foundation.NSStringStringWithUTF8String(additionalScopes))
 	return x
 }
 
+// @abstract Additional authorization scopes.
+//
 // WithAdditionalAuthorizationScopes sets the additionalAuthorizationScopes property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithAdditionalAuthorizationScopes(additionalAuthorizationScopes string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetAdditionalAuthorizationScopes(foundation.NSStringStringWithUTF8String(additionalAuthorizationScopes))
 	return x
 }
 
+// @abstract If true and there is a refresh token for the user in the SSO tokens, it will be included in the login request.
+//
 // WithIncludePreviousRefreshTokenInLoginRequest sets the includePreviousRefreshTokenInLoginRequest property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithIncludePreviousRefreshTokenInLoginRequest(includePreviousRefreshTokenInLoginRequest bool) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetIncludePreviousRefreshTokenInLoginRequest(includePreviousRefreshTokenInLoginRequest)
 	return x
 }
 
+// @abstract The claim name for the previous SSO token value in the login request.
+//
 // WithPreviousRefreshTokenClaimName sets the previousRefreshTokenClaimName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithPreviousRefreshTokenClaimName(previousRefreshTokenClaimName string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetPreviousRefreshTokenClaimName(foundation.NSStringStringWithUTF8String(previousRefreshTokenClaimName))
 	return x
 }
 
+// @abstract The request parameter name for the JWT.  The default is "assertion".
+//
 // WithCustomRequestJWTParameterName sets the customRequestJWTParameterName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomRequestJWTParameterName(customRequestJWTParameterName string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetCustomRequestJWTParameterName(foundation.NSStringStringWithUTF8String(customRequestJWTParameterName))
 	return x
 }
 
+// @abstract Custom values added to the login POST request body.
+//
 // WithCustomLoginRequestValues sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomLoginRequestValues(items ...*foundation.NSURLQueryItem) *AuthorizationProviderExtensionLoginConfiguration {
 	if len(items) == 0 {
@@ -167,24 +203,32 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomLoginReques
 	return x
 }
 
+// @abstract The claim name for the user unique identifier in the id token. Defaults to "sub".
+//
 // WithUniqueIdentifierClaimName sets the uniqueIdentifierClaimName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithUniqueIdentifierClaimName(uniqueIdentifierClaimName string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetUniqueIdentifierClaimName(foundation.NSStringStringWithUTF8String(uniqueIdentifierClaimName))
 	return x
 }
 
+// @abstract The claim name for group membership request.
+//
 // WithGroupRequestClaimName sets the groupRequestClaimName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithGroupRequestClaimName(groupRequestClaimName string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetGroupRequestClaimName(foundation.NSStringStringWithUTF8String(groupRequestClaimName))
 	return x
 }
 
+// @abstract The claim name for group responses in the id_token.
+//
 // WithGroupResponseClaimName sets the groupResponseClaimName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithGroupResponseClaimName(groupResponseClaimName string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetGroupResponseClaimName(foundation.NSStringStringWithUTF8String(groupResponseClaimName))
 	return x
 }
 
+// @abstract The Kerberos ticket mappings to use.
+//
 // WithKerberosTicketMappings sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithKerberosTicketMappings(items ...*raw.ASAuthorizationProviderExtensionKerberosMapping) *AuthorizationProviderExtensionLoginConfiguration {
 	if len(items) == 0 {
@@ -203,12 +247,16 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithKerberosTicketMap
 	return x
 }
 
+// @abstract Token Refresh Endpoint URL for login request.  Defaults to the tokenEndpointURL.
+//
 // WithRefreshEndpointURL sets the refreshEndpointURL property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithRefreshEndpointURL(refreshEndpointURL string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetRefreshEndpointURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(refreshEndpointURL)))
 	return x
 }
 
+// @abstract Custom values added to the refresh POST request body.
+//
 // WithCustomRefreshRequestValues sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomRefreshRequestValues(items ...*foundation.NSURLQueryItem) *AuthorizationProviderExtensionLoginConfiguration {
 	if len(items) == 0 {
@@ -227,42 +275,56 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomRefreshRequ
 	return x
 }
 
+// @abstract The federation method to use.
+//
 // WithFederationType sets the federationType property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithFederationType(federationType ASAuthorizationProviderExtensionFederationType) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetFederationType(raw.ASAuthorizationProviderExtensionFederationType(federationType))
 	return x
 }
 
+// @abstract The URN to request when performing a federated login.
+//
 // WithFederationRequestURN sets the federationRequestURN property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithFederationRequestURN(federationRequestURN string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetFederationRequestURN(foundation.NSStringStringWithUTF8String(federationRequestURN))
 	return x
 }
 
+// @abstract The federation MEX URL to use.  This can be overwritten when using dynamic federation.
+//
 // WithFederationMEXURL sets the federationMEXURL property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithFederationMEXURL(federationMEXURL string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetFederationMEXURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(federationMEXURL)))
 	return x
 }
 
+// @abstract The URL to use when performing dynamic federation.
+//
 // WithFederationUserPreauthenticationURL sets the federationUserPreauthenticationURL property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithFederationUserPreauthenticationURL(federationUserPreauthenticationURL string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetFederationUserPreauthenticationURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(federationUserPreauthenticationURL)))
 	return x
 }
 
+// @abstract The claim in the preauthentication response that contains the MEX URL.
+//
 // WithFederationMEXURLKeypath sets the federationMEXURLKeypath property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithFederationMEXURLKeypath(federationMEXURLKeypath string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetFederationMEXURLKeypath(foundation.NSStringStringWithUTF8String(federationMEXURLKeypath))
 	return x
 }
 
+// @abstract The predicate to apply to the preauthentication response to perform federation or not.
+//
 // WithFederationPredicate sets the federationPredicate property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithFederationPredicate(federationPredicate string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetFederationPredicate(foundation.NSStringStringWithUTF8String(federationPredicate))
 	return x
 }
 
+// @abstract The custom query string values to add when making the preauthenticaion request.
+//
 // WithCustomFederationUserPreauthenticationRequestValues sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomFederationUserPreauthenticationRequestValues(items ...*foundation.NSURLQueryItem) *AuthorizationProviderExtensionLoginConfiguration {
 	if len(items) == 0 {
@@ -281,36 +343,48 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomFederationU
 	return x
 }
 
+// @abstract The APV prefix used for encrypted embedded login assertions.
+//
 // WithLoginRequestEncryptionAPVPrefix sets the loginRequestEncryptionAPVPrefix property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithLoginRequestEncryptionAPVPrefix(loginRequestEncryptionAPVPrefix *foundation.NSData) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetLoginRequestEncryptionAPVPrefix(loginRequestEncryptionAPVPrefix)
 	return x
 }
 
+// @abstract The encryption algorithm to use for the embedded login assertion.
+//
 // WithLoginRequestEncryptionAlgorithm sets the loginRequestEncryptionAlgorithm property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithLoginRequestEncryptionAlgorithm(loginRequestEncryptionAlgorithm *foundation.NSNumber) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetLoginRequestEncryptionAlgorithm(loginRequestEncryptionAlgorithm)
 	return x
 }
 
+// @abstract The PreSharedKey to be used for HKPE for embedded login assertions. Setting this value will change the mode to PSK if the loginRequestHPKEPreSharedKeyID is also set. Must be at least 32 bytes.
+//
 // WithLoginRequestHPKEPreSharedKey sets the loginRequestHPKEPreSharedKey property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithLoginRequestHPKEPreSharedKey(loginRequestHPKEPreSharedKey *foundation.NSData) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetLoginRequestHPKEPreSharedKey(loginRequestHPKEPreSharedKey)
 	return x
 }
 
+// @abstract  The PreSharedKey Id to be used for HPKE PSK for embedded login assertions.  This is required if the loginRequestHPKEPreSharedKey is set.
+//
 // WithLoginRequestHPKEPreSharedKeyID sets the loginRequestHPKEPreSharedKeyID property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithLoginRequestHPKEPreSharedKeyID(loginRequestHPKEPreSharedKeyID *foundation.NSData) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetLoginRequestHPKEPreSharedKeyID(loginRequestHPKEPreSharedKeyID)
 	return x
 }
 
+// @abstract The url endpoint for key service, defaults to token tokenEndpointURL.
+//
 // WithKeyEndpointURL sets the keyEndpointURL property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithKeyEndpointURL(keyEndpointURL string) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetKeyEndpointURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(keyEndpointURL)))
 	return x
 }
 
+// @abstract Custom values added to the key exchange POST request body.
+//
 // WithCustomKeyExchangeRequestValues sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomKeyExchangeRequestValues(items ...*foundation.NSURLQueryItem) *AuthorizationProviderExtensionLoginConfiguration {
 	if len(items) == 0 {
@@ -329,6 +403,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomKeyExchange
 	return x
 }
 
+// @abstract Custom values added to the key request POST request body.
+//
 // WithCustomKeyRequestValues sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomKeyRequestValues(items ...*foundation.NSURLQueryItem) *AuthorizationProviderExtensionLoginConfiguration {
 	if len(items) == 0 {
@@ -347,68 +423,94 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) WithCustomKeyRequestV
 	return x
 }
 
+// @abstract The PreSharedKey to be used for HKPE. Setting this value will change the mode to PSK or AuthPSK if the hpkeAuthPublicKey is also set. Must be at least 32 bytes.
+//
 // WithHpkePreSharedKey sets the hpkePreSharedKey property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithHpkePreSharedKey(hpkePreSharedKey *foundation.NSData) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetHpkePreSharedKey(hpkePreSharedKey)
 	return x
 }
 
+// @abstract The PreSharedKey Id to be used for HPKE PSK or AuthPSK mode.  This is requred if the hpkePreSharedKey is set.
+//
 // WithHpkePreSharedKeyID sets the hpkePreSharedKeyID property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionLoginConfiguration) WithHpkePreSharedKeyID(hpkePreSharedKeyID *foundation.NSData) *AuthorizationProviderExtensionLoginConfiguration {
 	x.inner.SetHpkePreSharedKeyID(hpkePreSharedKeyID)
 	return x
 }
 
+// @abstract Sets custom claims to be added to the embedded assertion request header. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+//
 // SetCustomAssertionRequestHeaderClaimsReturningError calls the underlying SetCustomAssertionRequestHeaderClaimsReturningError.
 func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomAssertionRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	return x.inner.SetCustomAssertionRequestHeaderClaimsReturningError(claims)
 }
 
+// @abstract Sets custom claims to be added to the embedded assertion request body. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+//
 // SetCustomAssertionRequestBodyClaimsReturningError calls the underlying SetCustomAssertionRequestBodyClaimsReturningError.
 func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomAssertionRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	return x.inner.SetCustomAssertionRequestBodyClaimsReturningError(claims)
 }
 
+// @abstract Sets custom claims to be added to the login request header. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+//
 // SetCustomLoginRequestHeaderClaimsReturningError calls the underlying SetCustomLoginRequestHeaderClaimsReturningError.
 func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomLoginRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	return x.inner.SetCustomLoginRequestHeaderClaimsReturningError(claims)
 }
 
+// @abstract Sets custom claims to be added to the login request body. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+//
 // SetCustomLoginRequestBodyClaimsReturningError calls the underlying SetCustomLoginRequestBodyClaimsReturningError.
 func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomLoginRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	return x.inner.SetCustomLoginRequestBodyClaimsReturningError(claims)
 }
 
+// @abstract Sets custom claims to be added to the refresh request header. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+//
 // SetCustomRefreshRequestHeaderClaimsReturningError calls the underlying SetCustomRefreshRequestHeaderClaimsReturningError.
 func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomRefreshRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	return x.inner.SetCustomRefreshRequestHeaderClaimsReturningError(claims)
 }
 
+// @abstract Sets custom claims to be added to the refresh request bode. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+//
 // SetCustomRefreshRequestBodyClaimsReturningError calls the underlying SetCustomRefreshRequestBodyClaimsReturningError.
 func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomRefreshRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	return x.inner.SetCustomRefreshRequestBodyClaimsReturningError(claims)
 }
 
+// @abstract Sets custom claims to be added to the key exchange request header. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+//
 // SetCustomKeyExchangeRequestHeaderClaimsReturningError calls the underlying SetCustomKeyExchangeRequestHeaderClaimsReturningError.
 func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomKeyExchangeRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	return x.inner.SetCustomKeyExchangeRequestHeaderClaimsReturningError(claims)
 }
 
+// @abstract Sets custom claims to be added to the key exchange request body. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+//
 // SetCustomKeyExchangeRequestBodyClaimsReturningError calls the underlying SetCustomKeyExchangeRequestBodyClaimsReturningError.
 func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomKeyExchangeRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	return x.inner.SetCustomKeyExchangeRequestBodyClaimsReturningError(claims)
 }
 
+// @abstract Sets custom claims to be added to the key request header. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+//
 // SetCustomKeyRequestHeaderClaimsReturningError calls the underlying SetCustomKeyRequestHeaderClaimsReturningError.
 func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomKeyRequestHeaderClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	return x.inner.SetCustomKeyRequestHeaderClaimsReturningError(claims)
 }
 
+// @abstract Sets custom claims to be added to the key request body. @param claims The claims to be added. It must serialize as valid JSON to be accepted. @param error Nil or an NSError indicating why the claims were rejected. @returns YES when successful and NO when claims are rejected.
+//
 // SetCustomKeyRequestBodyClaimsReturningError calls the underlying SetCustomKeyRequestBodyClaimsReturningError.
 func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomKeyRequestBodyClaimsReturningError(claims *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	return x.inner.SetCustomKeyRequestBodyClaimsReturningError(claims)
 }
 
+// @abstract Predicate string used to identify invalid credential errors. @discussion If there is an HTTP 400 or HTTP 401 error when authenticating, this predicate will be used on the response body JSON to determine if the error is due to an invalid password or something else.  If nil, then only an HTTP 401 will be used for an invalid credential.
+//
 // InvalidCredentialPredicate calls the underlying InvalidCredentialPredicate.
 func (x *AuthorizationProviderExtensionLoginConfiguration) InvalidCredentialPredicate() string {
 	_r := x.inner.InvalidCredentialPredicate()
@@ -423,6 +525,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetInvalidCredentialP
 	x.inner.SetInvalidCredentialPredicate(foundation.NSStringStringWithUTF8String(invalidCredentialPredicate))
 }
 
+// @abstract The display name for the account.  Used for notifications and login prompts.
+//
 // AccountDisplayName calls the underlying AccountDisplayName.
 func (x *AuthorizationProviderExtensionLoginConfiguration) AccountDisplayName() string {
 	_r := x.inner.AccountDisplayName()
@@ -437,6 +541,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetAccountDisplayName
 	x.inner.SetAccountDisplayName(foundation.NSStringStringWithUTF8String(accountDisplayName))
 }
 
+// @abstract The login client_id.
+//
 // ClientID calls the underlying ClientID.
 func (x *AuthorizationProviderExtensionLoginConfiguration) ClientID() string {
 	_r := x.inner.ClientID()
@@ -446,6 +552,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) ClientID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The issuer for validation.
+//
 // Issuer calls the underlying Issuer.
 func (x *AuthorizationProviderExtensionLoginConfiguration) Issuer() string {
 	_r := x.inner.Issuer()
@@ -455,6 +563,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) Issuer() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The audience for validation and requests.
+//
 // Audience calls the underlying Audience.
 func (x *AuthorizationProviderExtensionLoginConfiguration) Audience() string {
 	_r := x.inner.Audience()
@@ -469,6 +579,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetAudience(audience 
 	x.inner.SetAudience(foundation.NSStringStringWithUTF8String(audience))
 }
 
+// @abstract Token Endpoint URL for login request.
+//
 // TokenEndpointURL calls the underlying TokenEndpointURL.
 func (x *AuthorizationProviderExtensionLoginConfiguration) TokenEndpointURL() *foundation.NSURL {
 	return x.inner.TokenEndpointURL()
@@ -479,6 +591,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetTokenEndpointURL(t
 	x.inner.SetTokenEndpointURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(tokenEndpointURL)))
 }
 
+// @abstract JWKS Endpoint URL for keys.
+//
 // JwksEndpointURL calls the underlying JwksEndpointURL.
 func (x *AuthorizationProviderExtensionLoginConfiguration) JwksEndpointURL() *foundation.NSURL {
 	return x.inner.JwksEndpointURL()
@@ -489,6 +603,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetJwksEndpointURL(jw
 	x.inner.SetJwksEndpointURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(jwksEndpointURL)))
 }
 
+// @abstract The root certificates to use for trust evaluation of jwks keys. @discussion if set, certificates will be required in jwks responses and evaluated using the supplied certificates.  If the jwks certificates are missing or fail trust evaluation the login will fail.
+//
 // JwksTrustedRootCertificates calls the underlying JwksTrustedRootCertificates.
 func (x *AuthorizationProviderExtensionLoginConfiguration) JwksTrustedRootCertificates() *foundation.NSArray[objc.ID] {
 	return x.inner.JwksTrustedRootCertificates()
@@ -499,6 +615,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetJwksTrustedRootCer
 	x.inner.SetJwksTrustedRootCertificates(jwksTrustedRootCertificates)
 }
 
+// @abstract The device context for storing device meta data.
+//
 // DeviceContext calls the underlying DeviceContext.
 func (x *AuthorizationProviderExtensionLoginConfiguration) DeviceContext() *foundation.NSData {
 	return x.inner.DeviceContext()
@@ -509,6 +627,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetDeviceContext(devi
 	x.inner.SetDeviceContext(deviceContext)
 }
 
+// @abstract The biometric policy for User Secure Enclave Key authentication.
+//
 // UserSecureEnclaveKeyBiometricPolicy calls the underlying UserSecureEnclaveKeyBiometricPolicy.
 func (x *AuthorizationProviderExtensionLoginConfiguration) UserSecureEnclaveKeyBiometricPolicy() ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy {
 	return ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy(x.inner.UserSecureEnclaveKeyBiometricPolicy())
@@ -519,6 +639,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetUserSecureEnclaveK
 	x.inner.SetUserSecureEnclaveKeyBiometricPolicy(raw.ASAuthorizationProviderExtensionUserSecureEnclaveKeyBiometricPolicy(userSecureEnclaveKeyBiometricPolicy))
 }
 
+// @abstract Nonce Endpoint URL, defaults to token tokenEndpointURL.
+//
 // NonceEndpointURL calls the underlying NonceEndpointURL.
 func (x *AuthorizationProviderExtensionLoginConfiguration) NonceEndpointURL() *foundation.NSURL {
 	return x.inner.NonceEndpointURL()
@@ -529,6 +651,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetNonceEndpointURL(n
 	x.inner.SetNonceEndpointURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(nonceEndpointURL)))
 }
 
+// @abstract The keypath in the nonce response that contains the nonce value.
+//
 // NonceResponseKeypath calls the underlying NonceResponseKeypath.
 func (x *AuthorizationProviderExtensionLoginConfiguration) NonceResponseKeypath() string {
 	_r := x.inner.NonceResponseKeypath()
@@ -543,6 +667,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetNonceResponseKeypa
 	x.inner.SetNonceResponseKeypath(foundation.NSStringStringWithUTF8String(nonceResponseKeypath))
 }
 
+// @abstract The name of the server nonce claim when included in authentication requests.
+//
 // ServerNonceClaimName calls the underlying ServerNonceClaimName.
 func (x *AuthorizationProviderExtensionLoginConfiguration) ServerNonceClaimName() string {
 	_r := x.inner.ServerNonceClaimName()
@@ -557,6 +683,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetServerNonceClaimNa
 	x.inner.SetServerNonceClaimName(foundation.NSStringStringWithUTF8String(serverNonceClaimName))
 }
 
+// @abstract Custom values added to the server nonce POST request body.
+//
 // CustomNonceRequestValues returns the collection as a Go slice.
 func (x *AuthorizationProviderExtensionLoginConfiguration) CustomNonceRequestValues() []*foundation.NSURLQueryItem {
 	arr := x.inner.CustomNonceRequestValues()
@@ -573,6 +701,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomNonceRequest
 	x.inner.SetCustomNonceRequestValues(customNonceRequestValues)
 }
 
+// @abstract Additional login scopes.
+//
 // AdditionalScopes calls the underlying AdditionalScopes.
 func (x *AuthorizationProviderExtensionLoginConfiguration) AdditionalScopes() string {
 	_r := x.inner.AdditionalScopes()
@@ -587,6 +717,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetAdditionalScopes(a
 	x.inner.SetAdditionalScopes(foundation.NSStringStringWithUTF8String(additionalScopes))
 }
 
+// @abstract Additional authorization scopes.
+//
 // AdditionalAuthorizationScopes calls the underlying AdditionalAuthorizationScopes.
 func (x *AuthorizationProviderExtensionLoginConfiguration) AdditionalAuthorizationScopes() string {
 	_r := x.inner.AdditionalAuthorizationScopes()
@@ -601,6 +733,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetAdditionalAuthoriz
 	x.inner.SetAdditionalAuthorizationScopes(foundation.NSStringStringWithUTF8String(additionalAuthorizationScopes))
 }
 
+// @abstract If true and there is a refresh token for the user in the SSO tokens, it will be included in the login request.
+//
 // IncludePreviousRefreshTokenInLoginRequest calls the underlying IncludePreviousRefreshTokenInLoginRequest.
 func (x *AuthorizationProviderExtensionLoginConfiguration) IncludePreviousRefreshTokenInLoginRequest() bool {
 	return x.inner.IncludePreviousRefreshTokenInLoginRequest()
@@ -611,6 +745,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetIncludePreviousRef
 	x.inner.SetIncludePreviousRefreshTokenInLoginRequest(includePreviousRefreshTokenInLoginRequest)
 }
 
+// @abstract The claim name for the previous SSO token value in the login request.
+//
 // PreviousRefreshTokenClaimName calls the underlying PreviousRefreshTokenClaimName.
 func (x *AuthorizationProviderExtensionLoginConfiguration) PreviousRefreshTokenClaimName() string {
 	_r := x.inner.PreviousRefreshTokenClaimName()
@@ -625,6 +761,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetPreviousRefreshTok
 	x.inner.SetPreviousRefreshTokenClaimName(foundation.NSStringStringWithUTF8String(previousRefreshTokenClaimName))
 }
 
+// @abstract The request parameter name for the JWT.  The default is "assertion".
+//
 // CustomRequestJWTParameterName calls the underlying CustomRequestJWTParameterName.
 func (x *AuthorizationProviderExtensionLoginConfiguration) CustomRequestJWTParameterName() string {
 	_r := x.inner.CustomRequestJWTParameterName()
@@ -639,6 +777,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomRequestJWTPa
 	x.inner.SetCustomRequestJWTParameterName(foundation.NSStringStringWithUTF8String(customRequestJWTParameterName))
 }
 
+// @abstract Custom values added to the login POST request body.
+//
 // CustomLoginRequestValues returns the collection as a Go slice.
 func (x *AuthorizationProviderExtensionLoginConfiguration) CustomLoginRequestValues() []*foundation.NSURLQueryItem {
 	arr := x.inner.CustomLoginRequestValues()
@@ -655,6 +795,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomLoginRequest
 	x.inner.SetCustomLoginRequestValues(customLoginRequestValues)
 }
 
+// @abstract The claim name for the user unique identifier in the id token. Defaults to "sub".
+//
 // UniqueIdentifierClaimName calls the underlying UniqueIdentifierClaimName.
 func (x *AuthorizationProviderExtensionLoginConfiguration) UniqueIdentifierClaimName() string {
 	_r := x.inner.UniqueIdentifierClaimName()
@@ -669,6 +811,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetUniqueIdentifierCl
 	x.inner.SetUniqueIdentifierClaimName(foundation.NSStringStringWithUTF8String(uniqueIdentifierClaimName))
 }
 
+// @abstract The claim name for group membership request.
+//
 // GroupRequestClaimName calls the underlying GroupRequestClaimName.
 func (x *AuthorizationProviderExtensionLoginConfiguration) GroupRequestClaimName() string {
 	_r := x.inner.GroupRequestClaimName()
@@ -683,6 +827,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetGroupRequestClaimN
 	x.inner.SetGroupRequestClaimName(foundation.NSStringStringWithUTF8String(groupRequestClaimName))
 }
 
+// @abstract The claim name for group responses in the id_token.
+//
 // GroupResponseClaimName calls the underlying GroupResponseClaimName.
 func (x *AuthorizationProviderExtensionLoginConfiguration) GroupResponseClaimName() string {
 	_r := x.inner.GroupResponseClaimName()
@@ -697,6 +843,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetGroupResponseClaim
 	x.inner.SetGroupResponseClaimName(foundation.NSStringStringWithUTF8String(groupResponseClaimName))
 }
 
+// @abstract The Kerberos ticket mappings to use.
+//
 // KerberosTicketMappings returns the collection as a Go slice.
 func (x *AuthorizationProviderExtensionLoginConfiguration) KerberosTicketMappings() []*AuthorizationProviderExtensionKerberosMapping {
 	arr := x.inner.KerberosTicketMappings()
@@ -713,6 +861,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetKerberosTicketMapp
 	x.inner.SetKerberosTicketMappings(kerberosTicketMappings)
 }
 
+// @abstract Token Refresh Endpoint URL for login request.  Defaults to the tokenEndpointURL.
+//
 // RefreshEndpointURL calls the underlying RefreshEndpointURL.
 func (x *AuthorizationProviderExtensionLoginConfiguration) RefreshEndpointURL() *foundation.NSURL {
 	return x.inner.RefreshEndpointURL()
@@ -723,6 +873,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetRefreshEndpointURL
 	x.inner.SetRefreshEndpointURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(refreshEndpointURL)))
 }
 
+// @abstract Custom values added to the refresh POST request body.
+//
 // CustomRefreshRequestValues returns the collection as a Go slice.
 func (x *AuthorizationProviderExtensionLoginConfiguration) CustomRefreshRequestValues() []*foundation.NSURLQueryItem {
 	arr := x.inner.CustomRefreshRequestValues()
@@ -739,6 +891,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomRefreshReque
 	x.inner.SetCustomRefreshRequestValues(customRefreshRequestValues)
 }
 
+// @abstract The federation method to use.
+//
 // FederationType calls the underlying FederationType.
 func (x *AuthorizationProviderExtensionLoginConfiguration) FederationType() ASAuthorizationProviderExtensionFederationType {
 	return ASAuthorizationProviderExtensionFederationType(x.inner.FederationType())
@@ -749,6 +903,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetFederationType(fed
 	x.inner.SetFederationType(raw.ASAuthorizationProviderExtensionFederationType(federationType))
 }
 
+// @abstract The URN to request when performing a federated login.
+//
 // FederationRequestURN calls the underlying FederationRequestURN.
 func (x *AuthorizationProviderExtensionLoginConfiguration) FederationRequestURN() string {
 	_r := x.inner.FederationRequestURN()
@@ -763,6 +919,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetFederationRequestU
 	x.inner.SetFederationRequestURN(foundation.NSStringStringWithUTF8String(federationRequestURN))
 }
 
+// @abstract The federation MEX URL to use.  This can be overwritten when using dynamic federation.
+//
 // FederationMEXURL calls the underlying FederationMEXURL.
 func (x *AuthorizationProviderExtensionLoginConfiguration) FederationMEXURL() *foundation.NSURL {
 	return x.inner.FederationMEXURL()
@@ -773,6 +931,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetFederationMEXURL(f
 	x.inner.SetFederationMEXURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(federationMEXURL)))
 }
 
+// @abstract The URL to use when performing dynamic federation.
+//
 // FederationUserPreauthenticationURL calls the underlying FederationUserPreauthenticationURL.
 func (x *AuthorizationProviderExtensionLoginConfiguration) FederationUserPreauthenticationURL() *foundation.NSURL {
 	return x.inner.FederationUserPreauthenticationURL()
@@ -783,6 +943,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetFederationUserPrea
 	x.inner.SetFederationUserPreauthenticationURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(federationUserPreauthenticationURL)))
 }
 
+// @abstract The claim in the preauthentication response that contains the MEX URL.
+//
 // FederationMEXURLKeypath calls the underlying FederationMEXURLKeypath.
 func (x *AuthorizationProviderExtensionLoginConfiguration) FederationMEXURLKeypath() string {
 	_r := x.inner.FederationMEXURLKeypath()
@@ -797,6 +959,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetFederationMEXURLKe
 	x.inner.SetFederationMEXURLKeypath(foundation.NSStringStringWithUTF8String(federationMEXURLKeypath))
 }
 
+// @abstract The predicate to apply to the preauthentication response to perform federation or not.
+//
 // FederationPredicate calls the underlying FederationPredicate.
 func (x *AuthorizationProviderExtensionLoginConfiguration) FederationPredicate() string {
 	_r := x.inner.FederationPredicate()
@@ -811,6 +975,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetFederationPredicat
 	x.inner.SetFederationPredicate(foundation.NSStringStringWithUTF8String(federationPredicate))
 }
 
+// @abstract The custom query string values to add when making the preauthenticaion request.
+//
 // CustomFederationUserPreauthenticationRequestValues returns the collection as a Go slice.
 func (x *AuthorizationProviderExtensionLoginConfiguration) CustomFederationUserPreauthenticationRequestValues() []*foundation.NSURLQueryItem {
 	arr := x.inner.CustomFederationUserPreauthenticationRequestValues()
@@ -827,6 +993,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomFederationUs
 	x.inner.SetCustomFederationUserPreauthenticationRequestValues(customFederationUserPreauthenticationRequestValues)
 }
 
+// @abstract The public key to use for encrypting the embedded login assertion. @discussion Only applies to password authentication.  If set, the password will encrypted in an embedded assertion instead of the login request itself.
+//
 // LoginRequestEncryptionPublicKey calls the underlying LoginRequestEncryptionPublicKey.
 func (x *AuthorizationProviderExtensionLoginConfiguration) LoginRequestEncryptionPublicKey() unsafe.Pointer {
 	return x.inner.LoginRequestEncryptionPublicKey()
@@ -837,6 +1005,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetLoginRequestEncryp
 	x.inner.SetLoginRequestEncryptionPublicKey(loginRequestEncryptionPublicKey)
 }
 
+// @abstract The APV prefix used for encrypted embedded login assertions.
+//
 // LoginRequestEncryptionAPVPrefix calls the underlying LoginRequestEncryptionAPVPrefix.
 func (x *AuthorizationProviderExtensionLoginConfiguration) LoginRequestEncryptionAPVPrefix() *foundation.NSData {
 	return x.inner.LoginRequestEncryptionAPVPrefix()
@@ -847,6 +1017,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetLoginRequestEncryp
 	x.inner.SetLoginRequestEncryptionAPVPrefix(loginRequestEncryptionAPVPrefix)
 }
 
+// @abstract The encryption algorithm to use for the embedded login assertion.
+//
 // LoginRequestEncryptionAlgorithm calls the underlying LoginRequestEncryptionAlgorithm.
 func (x *AuthorizationProviderExtensionLoginConfiguration) LoginRequestEncryptionAlgorithm() *foundation.NSNumber {
 	return x.inner.LoginRequestEncryptionAlgorithm()
@@ -857,6 +1029,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetLoginRequestEncryp
 	x.inner.SetLoginRequestEncryptionAlgorithm(loginRequestEncryptionAlgorithm)
 }
 
+// @abstract The PreSharedKey to be used for HKPE for embedded login assertions. Setting this value will change the mode to PSK if the loginRequestHPKEPreSharedKeyID is also set. Must be at least 32 bytes.
+//
 // LoginRequestHPKEPreSharedKey calls the underlying LoginRequestHPKEPreSharedKey.
 func (x *AuthorizationProviderExtensionLoginConfiguration) LoginRequestHPKEPreSharedKey() *foundation.NSData {
 	return x.inner.LoginRequestHPKEPreSharedKey()
@@ -867,6 +1041,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetLoginRequestHPKEPr
 	x.inner.SetLoginRequestHPKEPreSharedKey(loginRequestHPKEPreSharedKey)
 }
 
+// @abstract  The PreSharedKey Id to be used for HPKE PSK for embedded login assertions.  This is required if the loginRequestHPKEPreSharedKey is set.
+//
 // LoginRequestHPKEPreSharedKeyID calls the underlying LoginRequestHPKEPreSharedKeyID.
 func (x *AuthorizationProviderExtensionLoginConfiguration) LoginRequestHPKEPreSharedKeyID() *foundation.NSData {
 	return x.inner.LoginRequestHPKEPreSharedKeyID()
@@ -877,6 +1053,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetLoginRequestHPKEPr
 	x.inner.SetLoginRequestHPKEPreSharedKeyID(loginRequestHPKEPreSharedKeyID)
 }
 
+// @abstract The url endpoint for key service, defaults to token tokenEndpointURL.
+//
 // KeyEndpointURL calls the underlying KeyEndpointURL.
 func (x *AuthorizationProviderExtensionLoginConfiguration) KeyEndpointURL() *foundation.NSURL {
 	return x.inner.KeyEndpointURL()
@@ -887,6 +1065,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetKeyEndpointURL(key
 	x.inner.SetKeyEndpointURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(keyEndpointURL)))
 }
 
+// @abstract Custom values added to the key exchange POST request body.
+//
 // CustomKeyExchangeRequestValues returns the collection as a Go slice.
 func (x *AuthorizationProviderExtensionLoginConfiguration) CustomKeyExchangeRequestValues() []*foundation.NSURLQueryItem {
 	arr := x.inner.CustomKeyExchangeRequestValues()
@@ -903,6 +1083,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomKeyExchangeR
 	x.inner.SetCustomKeyExchangeRequestValues(customKeyExchangeRequestValues)
 }
 
+// @abstract Custom values added to the key request POST request body.
+//
 // CustomKeyRequestValues returns the collection as a Go slice.
 func (x *AuthorizationProviderExtensionLoginConfiguration) CustomKeyRequestValues() []*foundation.NSURLQueryItem {
 	arr := x.inner.CustomKeyRequestValues()
@@ -919,6 +1101,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetCustomKeyRequestVa
 	x.inner.SetCustomKeyRequestValues(customKeyRequestValues)
 }
 
+// @abstract The PreSharedKey to be used for HKPE. Setting this value will change the mode to PSK or AuthPSK if the hpkeAuthPublicKey is also set. Must be at least 32 bytes.
+//
 // HpkePreSharedKey calls the underlying HpkePreSharedKey.
 func (x *AuthorizationProviderExtensionLoginConfiguration) HpkePreSharedKey() *foundation.NSData {
 	return x.inner.HpkePreSharedKey()
@@ -929,6 +1113,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetHpkePreSharedKey(h
 	x.inner.SetHpkePreSharedKey(hpkePreSharedKey)
 }
 
+// @abstract The PreSharedKey Id to be used for HPKE PSK or AuthPSK mode.  This is requred if the hpkePreSharedKey is set.
+//
 // HpkePreSharedKeyID calls the underlying HpkePreSharedKeyID.
 func (x *AuthorizationProviderExtensionLoginConfiguration) HpkePreSharedKeyID() *foundation.NSData {
 	return x.inner.HpkePreSharedKeyID()
@@ -939,6 +1125,8 @@ func (x *AuthorizationProviderExtensionLoginConfiguration) SetHpkePreSharedKeyID
 	x.inner.SetHpkePreSharedKeyID(hpkePreSharedKeyID)
 }
 
+// @abstract The Authentication public key to be used for HPKE.  Setting this value with changet the mode to Auth or AuthPSK if the hpkePreSharedKey is also set.  This public key is used to authenticate HPKE responses.
+//
 // HpkeAuthPublicKey calls the underlying HpkeAuthPublicKey.
 func (x *AuthorizationProviderExtensionLoginConfiguration) HpkeAuthPublicKey() unsafe.Pointer {
 	return x.inner.HpkeAuthPublicKey()

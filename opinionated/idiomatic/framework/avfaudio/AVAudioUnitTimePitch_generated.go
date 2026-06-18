@@ -35,30 +35,40 @@ func NewAudioUnitTimePitch() *AudioUnitTimePitch {
 	return &AudioUnitTimePitch{inner: raw.AVAudioUnitTimePitchFromID(_id)}
 }
 
+// @property rate @abstract playback rate of the input signal Range:      1/32 -> 32.0 Default:    1.0 Unit:       Generic
+//
 // WithRate sets the rate property and returns the receiver for chaining.
 func (x *AudioUnitTimePitch) WithRate(rate float32) *AudioUnitTimePitch {
 	x.inner.SetRate(rate)
 	return x
 }
 
+// @property pitch @abstract amount by which the input signal is pitch shifted @discussion 1 octave  = 1200 cents 1 musical semitone  = 100 cents Range:      -2400 -> 2400 Default:    0.0 Unit:       Cents
+//
 // WithPitch sets the pitch property and returns the receiver for chaining.
 func (x *AudioUnitTimePitch) WithPitch(pitch float32) *AudioUnitTimePitch {
 	x.inner.SetPitch(pitch)
 	return x
 }
 
+// @property overlap @abstract amount of overlap between segments of the input audio signal @discussion A higher value results in fewer artifacts in the output signal. This parameter also impacts the amount of CPU used. Range:      3.0 -> 32.0 Default:    8.0 Unit:       Generic
+//
 // WithOverlap sets the overlap property and returns the receiver for chaining.
 func (x *AudioUnitTimePitch) WithOverlap(overlap float32) *AudioUnitTimePitch {
 	x.inner.SetOverlap(overlap)
 	return x
 }
 
+// @property bypass @abstract bypass state of the audio unit
+//
 // WithBypass sets the bypass property and returns the receiver for chaining.
 func (x *AudioUnitTimePitch) WithBypass(bypass bool) *AudioUnitTimePitch {
 	x.inner.AVAudioUnitTimeEffect.SetBypass(bypass)
 	return x
 }
 
+// @property rate @abstract playback rate of the input signal Range:      1/32 -> 32.0 Default:    1.0 Unit:       Generic
+//
 // Rate calls the underlying Rate.
 func (x *AudioUnitTimePitch) Rate() float32 {
 	return x.inner.Rate()
@@ -69,6 +79,8 @@ func (x *AudioUnitTimePitch) SetRate(rate float32) {
 	x.inner.SetRate(rate)
 }
 
+// @property pitch @abstract amount by which the input signal is pitch shifted @discussion 1 octave  = 1200 cents 1 musical semitone  = 100 cents Range:      -2400 -> 2400 Default:    0.0 Unit:       Cents
+//
 // Pitch calls the underlying Pitch.
 func (x *AudioUnitTimePitch) Pitch() float32 {
 	return x.inner.Pitch()
@@ -79,6 +91,8 @@ func (x *AudioUnitTimePitch) SetPitch(pitch float32) {
 	x.inner.SetPitch(pitch)
 }
 
+// @property overlap @abstract amount of overlap between segments of the input audio signal @discussion A higher value results in fewer artifacts in the output signal. This parameter also impacts the amount of CPU used. Range:      3.0 -> 32.0 Default:    8.0 Unit:       Generic
+//
 // Overlap calls the underlying Overlap.
 func (x *AudioUnitTimePitch) Overlap() float32 {
 	return x.inner.Overlap()

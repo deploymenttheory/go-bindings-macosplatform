@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The environment attributes and list of devices to use during the configuration of macOS or Linux VMs.
+//
 // VirtualMachineConfiguration wraps [raw.VZVirtualMachineConfiguration] with a fluent Go API.
 type VirtualMachineConfiguration struct {
 	inner *raw.VZVirtualMachineConfiguration
@@ -38,30 +40,40 @@ func NewVirtualMachineConfiguration() *VirtualMachineConfiguration {
 	return &VirtualMachineConfiguration{inner: raw.VZVirtualMachineConfigurationFromID(_id)}
 }
 
+// The guest system to boot when the VM starts.
+//
 // WithBootLoader sets the bootLoader property and returns the receiver for chaining.
 func (x *VirtualMachineConfiguration) WithBootLoader(bootLoader BootLoaderProvider) *VirtualMachineConfiguration {
 	x.inner.SetBootLoader(bootLoader.asBootLoader())
 	return x
 }
 
+// The amount of physical memory the guest operating system recognizes.
+//
 // WithMemorySize sets the memorySize property and returns the receiver for chaining.
 func (x *VirtualMachineConfiguration) WithMemorySize(memorySize uint64) *VirtualMachineConfiguration {
 	x.inner.SetMemorySize(memorySize)
 	return x
 }
 
+// The number of CPUs you make available to the guest operating system.
+//
 // WithCPUCount sets the cPUCount property and returns the receiver for chaining.
 func (x *VirtualMachineConfiguration) WithCPUCount(cPUCount uint) *VirtualMachineConfiguration {
 	x.inner.SetCPUCount(cPUCount)
 	return x
 }
 
+// The hardware platform to use.
+//
 // WithPlatform sets the platform property and returns the receiver for chaining.
 func (x *VirtualMachineConfiguration) WithPlatform(platform PlatformConfigurationProvider) *VirtualMachineConfiguration {
 	x.inner.SetPlatform(platform.asPlatformConfiguration())
 	return x
 }
 
+// The list of audio devices.
+//
 // WithAudioDevices sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithAudioDevices(items ...AudioDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
@@ -80,6 +92,8 @@ func (x *VirtualMachineConfiguration) WithAudioDevices(items ...AudioDeviceConfi
 	return x
 }
 
+// The array of console devices that you expose to the guest operating system.
+//
 // WithConsoleDevices sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithConsoleDevices(items ...ConsoleDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
@@ -98,6 +112,8 @@ func (x *VirtualMachineConfiguration) WithConsoleDevices(items ...ConsoleDeviceC
 	return x
 }
 
+// The list of directory sharing devices.
+//
 // WithDirectorySharingDevices sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithDirectorySharingDevices(items ...DirectorySharingDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
@@ -116,6 +132,8 @@ func (x *VirtualMachineConfiguration) WithDirectorySharingDevices(items ...Direc
 	return x
 }
 
+// The array of randomization devices that you expose to the guest operating system.
+//
 // WithEntropyDevices sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithEntropyDevices(items ...EntropyDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
@@ -134,6 +152,8 @@ func (x *VirtualMachineConfiguration) WithEntropyDevices(items ...EntropyDeviceC
 	return x
 }
 
+// An array that you configure with a memory balloon device, used to update the memory in the VM.
+//
 // WithMemoryBalloonDevices sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithMemoryBalloonDevices(items ...MemoryBalloonDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
@@ -152,6 +172,8 @@ func (x *VirtualMachineConfiguration) WithMemoryBalloonDevices(items ...MemoryBa
 	return x
 }
 
+// The array of network devices that you expose to the guest operating system.
+//
 // WithNetworkDevices sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithNetworkDevices(items ...NetworkDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
@@ -170,6 +192,8 @@ func (x *VirtualMachineConfiguration) WithNetworkDevices(items ...NetworkDeviceC
 	return x
 }
 
+// The array of serial ports that you expose to the guest operating system.
+//
 // WithSerialPorts sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithSerialPorts(items ...SerialPortConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
@@ -188,6 +212,8 @@ func (x *VirtualMachineConfiguration) WithSerialPorts(items ...SerialPortConfigu
 	return x
 }
 
+// The socket device that you use to implement port-based communication with the guest operating system.
+//
 // WithSocketDevices sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithSocketDevices(items ...SocketDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
@@ -206,6 +232,8 @@ func (x *VirtualMachineConfiguration) WithSocketDevices(items ...SocketDeviceCon
 	return x
 }
 
+// The array of storage devices that you expose to the guest operating system.
+//
 // WithStorageDevices sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithStorageDevices(items ...StorageDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
@@ -224,6 +252,8 @@ func (x *VirtualMachineConfiguration) WithStorageDevices(items ...StorageDeviceC
 	return x
 }
 
+// The list of keyboards.
+//
 // WithKeyboards sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithKeyboards(items ...KeyboardConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
@@ -242,6 +272,8 @@ func (x *VirtualMachineConfiguration) WithKeyboards(items ...KeyboardConfigurati
 	return x
 }
 
+// The list of pointing devices.
+//
 // WithPointingDevices sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithPointingDevices(items ...PointingDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
@@ -260,6 +292,8 @@ func (x *VirtualMachineConfiguration) WithPointingDevices(items ...PointingDevic
 	return x
 }
 
+// The list of graphics devices.
+//
 // WithGraphicsDevices sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithGraphicsDevices(items ...GraphicsDeviceConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
@@ -278,6 +312,8 @@ func (x *VirtualMachineConfiguration) WithGraphicsDevices(items ...GraphicsDevic
 	return x
 }
 
+// The list of configured USB controllers for the VM.
+//
 // WithUsbControllers sets the collection, converting the Go slice to an NSArray.
 func (x *VirtualMachineConfiguration) WithUsbControllers(items ...USBControllerConfigurationProvider) *VirtualMachineConfiguration {
 	if len(items) == 0 {
@@ -296,6 +332,8 @@ func (x *VirtualMachineConfiguration) WithUsbControllers(items ...USBControllerC
 	return x
 }
 
+// @abstract Boot loader used when the virtual machine starts. @see VZLinuxBootLoader @see VZMacOSBootLoader
+//
 // BootLoader calls the underlying BootLoader.
 func (x *VirtualMachineConfiguration) BootLoader() *BootLoader {
 	_r := x.inner.BootLoader()
@@ -310,6 +348,8 @@ func (x *VirtualMachineConfiguration) SetBootLoader(bootLoader *raw.VZBootLoader
 	x.inner.SetBootLoader(bootLoader)
 }
 
+// @abstract Virtual machine memory size in bytes. @discussion The memory size must be a multiple of a 1 megabyte (1024 * 1024 bytes) between VZVirtualMachineConfiguration.minimumAllowedMemorySize and VZVirtualMachineConfiguration.maximumAllowedMemorySize. The memorySize represents the total physical memory seen by a guest OS running in the virtual machine. Not all memory is allocated on start, the virtual machine allocates memory on demand. @see VZVirtualMachineConfiguration.minimumAllowedMemorySize @see VZVirtualMachineConfiguration.maximumAllowedMemorySize
+//
 // MemorySize calls the underlying MemorySize.
 func (x *VirtualMachineConfiguration) MemorySize() uint64 {
 	return x.inner.MemorySize()
@@ -320,6 +360,8 @@ func (x *VirtualMachineConfiguration) SetMemorySize(memorySize uint64) {
 	x.inner.SetMemorySize(memorySize)
 }
 
+// @abstract Number of CPUs. @discussion The number of CPUs must be a value between VZVirtualMachineConfiguration.minimumAllowedCPUCount and VZVirtualMachineConfiguration.maximumAllowedCPUCount. @see VZVirtualMachineConfiguration.minimumAllowedCPUCount @see VZVirtualMachineConfiguration.maximumAllowedCPUCount
+//
 // CPUCount calls the underlying CPUCount.
 func (x *VirtualMachineConfiguration) CPUCount() uint {
 	return x.inner.CPUCount()
@@ -330,6 +372,8 @@ func (x *VirtualMachineConfiguration) SetCPUCount(cPUCount uint) {
 	x.inner.SetCPUCount(cPUCount)
 }
 
+// @abstract The hardware platform to use. @discussion Can be an instance of a VZGenericPlatformConfiguration or VZMacPlatformConfiguration. Defaults to VZGenericPlatformConfiguration. When restoring from saved state you must ensure your configuration matches that of the saved virtual machine. @see VZGenericPlatformConfiguration @see VZMacPlatformConfiguration
+//
 // Platform calls the underlying Platform.
 func (x *VirtualMachineConfiguration) Platform() *PlatformConfiguration {
 	_r := x.inner.Platform()
@@ -344,6 +388,8 @@ func (x *VirtualMachineConfiguration) SetPlatform(platform *raw.VZPlatformConfig
 	x.inner.SetPlatform(platform)
 }
 
+// @abstract List of audio devices. Empty by default. @see VZVirtioSoundDeviceConfiguration
+//
 // AudioDevices returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) AudioDevices() []*AudioDeviceConfiguration {
 	arr := x.inner.AudioDevices()
@@ -356,10 +402,21 @@ func (x *VirtualMachineConfiguration) AudioDevices() []*AudioDeviceConfiguration
 }
 
 // SetAudioDevices calls the underlying SetAudioDevices.
-func (x *VirtualMachineConfiguration) SetAudioDevices(audioDevices *foundation.NSArray[*raw.VZAudioDeviceConfiguration]) {
-	x.inner.SetAudioDevices(audioDevices)
+func (x *VirtualMachineConfiguration) SetAudioDevices(audioDevices ...AudioDeviceConfigurationProvider) {
+	_ptrs := make([]objc.ID, len(audioDevices))
+	for _i, _v := range audioDevices {
+		_ptrs[_i] = _v.asAudioDeviceConfiguration().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.VZAudioDeviceConfiguration]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.VZAudioDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetAudioDevices(_arg0)
 }
 
+// @abstract List of console devices. Empty by default. @see VZVirtioConsoleDeviceConfiguration
+//
 // ConsoleDevices returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) ConsoleDevices() []*ConsoleDeviceConfiguration {
 	arr := x.inner.ConsoleDevices()
@@ -372,10 +429,21 @@ func (x *VirtualMachineConfiguration) ConsoleDevices() []*ConsoleDeviceConfigura
 }
 
 // SetConsoleDevices calls the underlying SetConsoleDevices.
-func (x *VirtualMachineConfiguration) SetConsoleDevices(consoleDevices *foundation.NSArray[*raw.VZConsoleDeviceConfiguration]) {
-	x.inner.SetConsoleDevices(consoleDevices)
+func (x *VirtualMachineConfiguration) SetConsoleDevices(consoleDevices ...ConsoleDeviceConfigurationProvider) {
+	_ptrs := make([]objc.ID, len(consoleDevices))
+	for _i, _v := range consoleDevices {
+		_ptrs[_i] = _v.asConsoleDeviceConfiguration().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.VZConsoleDeviceConfiguration]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.VZConsoleDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetConsoleDevices(_arg0)
 }
 
+// @abstract List of directory sharing devices. Empty by default. @see VZVirtioFileSystemDeviceConfiguration
+//
 // DirectorySharingDevices returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) DirectorySharingDevices() []*DirectorySharingDeviceConfiguration {
 	arr := x.inner.DirectorySharingDevices()
@@ -388,10 +456,21 @@ func (x *VirtualMachineConfiguration) DirectorySharingDevices() []*DirectoryShar
 }
 
 // SetDirectorySharingDevices calls the underlying SetDirectorySharingDevices.
-func (x *VirtualMachineConfiguration) SetDirectorySharingDevices(directorySharingDevices *foundation.NSArray[*raw.VZDirectorySharingDeviceConfiguration]) {
-	x.inner.SetDirectorySharingDevices(directorySharingDevices)
+func (x *VirtualMachineConfiguration) SetDirectorySharingDevices(directorySharingDevices ...DirectorySharingDeviceConfigurationProvider) {
+	_ptrs := make([]objc.ID, len(directorySharingDevices))
+	for _i, _v := range directorySharingDevices {
+		_ptrs[_i] = _v.asDirectorySharingDeviceConfiguration().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.VZDirectorySharingDeviceConfiguration]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.VZDirectorySharingDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetDirectorySharingDevices(_arg0)
 }
 
+// @abstract List of entropy devices. Empty by default. @see VZVirtioEntropyDeviceConfiguration
+//
 // EntropyDevices returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) EntropyDevices() []*EntropyDeviceConfiguration {
 	arr := x.inner.EntropyDevices()
@@ -404,10 +483,21 @@ func (x *VirtualMachineConfiguration) EntropyDevices() []*EntropyDeviceConfigura
 }
 
 // SetEntropyDevices calls the underlying SetEntropyDevices.
-func (x *VirtualMachineConfiguration) SetEntropyDevices(entropyDevices *foundation.NSArray[*raw.VZEntropyDeviceConfiguration]) {
-	x.inner.SetEntropyDevices(entropyDevices)
+func (x *VirtualMachineConfiguration) SetEntropyDevices(entropyDevices ...EntropyDeviceConfigurationProvider) {
+	_ptrs := make([]objc.ID, len(entropyDevices))
+	for _i, _v := range entropyDevices {
+		_ptrs[_i] = _v.asEntropyDeviceConfiguration().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.VZEntropyDeviceConfiguration]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.VZEntropyDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetEntropyDevices(_arg0)
 }
 
+// @abstract List of memory balloon devices. Empty by default. @see VZVirtioTraditionalMemoryBalloonDeviceConfiguration
+//
 // MemoryBalloonDevices returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) MemoryBalloonDevices() []*MemoryBalloonDeviceConfiguration {
 	arr := x.inner.MemoryBalloonDevices()
@@ -420,10 +510,21 @@ func (x *VirtualMachineConfiguration) MemoryBalloonDevices() []*MemoryBalloonDev
 }
 
 // SetMemoryBalloonDevices calls the underlying SetMemoryBalloonDevices.
-func (x *VirtualMachineConfiguration) SetMemoryBalloonDevices(memoryBalloonDevices *foundation.NSArray[*raw.VZMemoryBalloonDeviceConfiguration]) {
-	x.inner.SetMemoryBalloonDevices(memoryBalloonDevices)
+func (x *VirtualMachineConfiguration) SetMemoryBalloonDevices(memoryBalloonDevices ...MemoryBalloonDeviceConfigurationProvider) {
+	_ptrs := make([]objc.ID, len(memoryBalloonDevices))
+	for _i, _v := range memoryBalloonDevices {
+		_ptrs[_i] = _v.asMemoryBalloonDeviceConfiguration().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.VZMemoryBalloonDeviceConfiguration]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.VZMemoryBalloonDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetMemoryBalloonDevices(_arg0)
 }
 
+// @abstract List of network adapters. Empty by default. @see VZVirtioNetworkDeviceConfiguration
+//
 // NetworkDevices returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) NetworkDevices() []*NetworkDeviceConfiguration {
 	arr := x.inner.NetworkDevices()
@@ -436,10 +537,21 @@ func (x *VirtualMachineConfiguration) NetworkDevices() []*NetworkDeviceConfigura
 }
 
 // SetNetworkDevices calls the underlying SetNetworkDevices.
-func (x *VirtualMachineConfiguration) SetNetworkDevices(networkDevices *foundation.NSArray[*raw.VZNetworkDeviceConfiguration]) {
-	x.inner.SetNetworkDevices(networkDevices)
+func (x *VirtualMachineConfiguration) SetNetworkDevices(networkDevices ...NetworkDeviceConfigurationProvider) {
+	_ptrs := make([]objc.ID, len(networkDevices))
+	for _i, _v := range networkDevices {
+		_ptrs[_i] = _v.asNetworkDeviceConfiguration().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.VZNetworkDeviceConfiguration]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.VZNetworkDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetNetworkDevices(_arg0)
 }
 
+// @abstract List of serial ports. Empty by default. @see VZVirtioConsoleDeviceSerialPortConfiguration
+//
 // SerialPorts returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) SerialPorts() []*SerialPortConfiguration {
 	arr := x.inner.SerialPorts()
@@ -452,10 +564,21 @@ func (x *VirtualMachineConfiguration) SerialPorts() []*SerialPortConfiguration {
 }
 
 // SetSerialPorts calls the underlying SetSerialPorts.
-func (x *VirtualMachineConfiguration) SetSerialPorts(serialPorts *foundation.NSArray[*raw.VZSerialPortConfiguration]) {
-	x.inner.SetSerialPorts(serialPorts)
+func (x *VirtualMachineConfiguration) SetSerialPorts(serialPorts ...SerialPortConfigurationProvider) {
+	_ptrs := make([]objc.ID, len(serialPorts))
+	for _i, _v := range serialPorts {
+		_ptrs[_i] = _v.asSerialPortConfiguration().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.VZSerialPortConfiguration]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.VZSerialPortConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetSerialPorts(_arg0)
 }
 
+// @abstract List of socket devices. Empty by default. @see VZVirtioSocketDeviceConfiguration
+//
 // SocketDevices returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) SocketDevices() []*SocketDeviceConfiguration {
 	arr := x.inner.SocketDevices()
@@ -468,10 +591,21 @@ func (x *VirtualMachineConfiguration) SocketDevices() []*SocketDeviceConfigurati
 }
 
 // SetSocketDevices calls the underlying SetSocketDevices.
-func (x *VirtualMachineConfiguration) SetSocketDevices(socketDevices *foundation.NSArray[*raw.VZSocketDeviceConfiguration]) {
-	x.inner.SetSocketDevices(socketDevices)
+func (x *VirtualMachineConfiguration) SetSocketDevices(socketDevices ...SocketDeviceConfigurationProvider) {
+	_ptrs := make([]objc.ID, len(socketDevices))
+	for _i, _v := range socketDevices {
+		_ptrs[_i] = _v.asSocketDeviceConfiguration().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.VZSocketDeviceConfiguration]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.VZSocketDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetSocketDevices(_arg0)
 }
 
+// @abstract List of disk devices. Empty by default. @see VZNVMExpressControllerDeviceConfiguration @see VZUSBMassStorageDeviceConfiguration @see VZVirtioBlockDeviceConfiguration
+//
 // StorageDevices returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) StorageDevices() []*StorageDeviceConfiguration {
 	arr := x.inner.StorageDevices()
@@ -484,10 +618,21 @@ func (x *VirtualMachineConfiguration) StorageDevices() []*StorageDeviceConfigura
 }
 
 // SetStorageDevices calls the underlying SetStorageDevices.
-func (x *VirtualMachineConfiguration) SetStorageDevices(storageDevices *foundation.NSArray[*raw.VZStorageDeviceConfiguration]) {
-	x.inner.SetStorageDevices(storageDevices)
+func (x *VirtualMachineConfiguration) SetStorageDevices(storageDevices ...StorageDeviceConfigurationProvider) {
+	_ptrs := make([]objc.ID, len(storageDevices))
+	for _i, _v := range storageDevices {
+		_ptrs[_i] = _v.asStorageDeviceConfiguration().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.VZStorageDeviceConfiguration]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.VZStorageDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetStorageDevices(_arg0)
 }
 
+// @abstract List of keyboards. Empty by default. @see VZUSBKeyboardConfiguration @see VZMacKeyboardConfiguration
+//
 // Keyboards returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) Keyboards() []*KeyboardConfiguration {
 	arr := x.inner.Keyboards()
@@ -500,10 +645,21 @@ func (x *VirtualMachineConfiguration) Keyboards() []*KeyboardConfiguration {
 }
 
 // SetKeyboards calls the underlying SetKeyboards.
-func (x *VirtualMachineConfiguration) SetKeyboards(keyboards *foundation.NSArray[*raw.VZKeyboardConfiguration]) {
-	x.inner.SetKeyboards(keyboards)
+func (x *VirtualMachineConfiguration) SetKeyboards(keyboards ...KeyboardConfigurationProvider) {
+	_ptrs := make([]objc.ID, len(keyboards))
+	for _i, _v := range keyboards {
+		_ptrs[_i] = _v.asKeyboardConfiguration().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.VZKeyboardConfiguration]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.VZKeyboardConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetKeyboards(_arg0)
 }
 
+// @abstract List of pointing devices. Empty by default. @see VZUSBScreenCoordinatePointingDeviceConfiguration @see VZMacTrackpadConfiguration
+//
 // PointingDevices returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) PointingDevices() []*PointingDeviceConfiguration {
 	arr := x.inner.PointingDevices()
@@ -516,10 +672,21 @@ func (x *VirtualMachineConfiguration) PointingDevices() []*PointingDeviceConfigu
 }
 
 // SetPointingDevices calls the underlying SetPointingDevices.
-func (x *VirtualMachineConfiguration) SetPointingDevices(pointingDevices *foundation.NSArray[*raw.VZPointingDeviceConfiguration]) {
-	x.inner.SetPointingDevices(pointingDevices)
+func (x *VirtualMachineConfiguration) SetPointingDevices(pointingDevices ...PointingDeviceConfigurationProvider) {
+	_ptrs := make([]objc.ID, len(pointingDevices))
+	for _i, _v := range pointingDevices {
+		_ptrs[_i] = _v.asPointingDeviceConfiguration().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.VZPointingDeviceConfiguration]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.VZPointingDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetPointingDevices(_arg0)
 }
 
+// @abstract List of graphics devices. Empty by default. @see VZMacGraphicsDeviceConfiguration
+//
 // GraphicsDevices returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) GraphicsDevices() []*GraphicsDeviceConfiguration {
 	arr := x.inner.GraphicsDevices()
@@ -532,10 +699,21 @@ func (x *VirtualMachineConfiguration) GraphicsDevices() []*GraphicsDeviceConfigu
 }
 
 // SetGraphicsDevices calls the underlying SetGraphicsDevices.
-func (x *VirtualMachineConfiguration) SetGraphicsDevices(graphicsDevices *foundation.NSArray[*raw.VZGraphicsDeviceConfiguration]) {
-	x.inner.SetGraphicsDevices(graphicsDevices)
+func (x *VirtualMachineConfiguration) SetGraphicsDevices(graphicsDevices ...GraphicsDeviceConfigurationProvider) {
+	_ptrs := make([]objc.ID, len(graphicsDevices))
+	for _i, _v := range graphicsDevices {
+		_ptrs[_i] = _v.asGraphicsDeviceConfiguration().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.VZGraphicsDeviceConfiguration]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.VZGraphicsDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetGraphicsDevices(_arg0)
 }
 
+// @abstract List of USB Controllers. Empty by default. @discussion This list represents a set of USB controllers that the virtual machine will start with. For each entry in this list, there will be a corresponding runtime object created in VZVirtualMachine.usbControllers property. @see VZUSBControllerConfiguration
+//
 // UsbControllers returns the collection as a Go slice.
 func (x *VirtualMachineConfiguration) UsbControllers() []*USBControllerConfiguration {
 	arr := x.inner.UsbControllers()
@@ -548,16 +726,29 @@ func (x *VirtualMachineConfiguration) UsbControllers() []*USBControllerConfigura
 }
 
 // SetUsbControllers calls the underlying SetUsbControllers.
-func (x *VirtualMachineConfiguration) SetUsbControllers(usbControllers *foundation.NSArray[*raw.VZUSBControllerConfiguration]) {
-	x.inner.SetUsbControllers(usbControllers)
+func (x *VirtualMachineConfiguration) SetUsbControllers(usbControllers ...USBControllerConfigurationProvider) {
+	_ptrs := make([]objc.ID, len(usbControllers))
+	for _i, _v := range usbControllers {
+		_ptrs[_i] = _v.asUSBControllerConfiguration().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.VZUSBControllerConfiguration]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.VZUSBControllerConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetUsbControllers(_arg0)
 }
 
+// Validates the current configuration settings and reports any issues that might prevent the successful initialization of the VM.
+//
 // Validate returns any validation error.
 func (x *VirtualMachineConfiguration) Validate() error {
 	_, err := x.inner.ValidateWithError()
 	return err
 }
 
+// Determines whether the framework can save or restore the VM’s current configuration.
+//
 // ValidateSaveRestoreSupport returns any validation error.
 func (x *VirtualMachineConfiguration) ValidateSaveRestoreSupport() error {
 	_, err := x.inner.ValidateSaveRestoreSupportWithError()
@@ -593,31 +784,31 @@ type VirtualMachineConfigurationable interface {
 	Platform() *PlatformConfiguration
 	SetPlatform(platform *raw.VZPlatformConfiguration)
 	AudioDevices() []*AudioDeviceConfiguration
-	SetAudioDevices(audioDevices *foundation.NSArray[*raw.VZAudioDeviceConfiguration])
+	SetAudioDevices(audioDevices ...AudioDeviceConfigurationProvider)
 	ConsoleDevices() []*ConsoleDeviceConfiguration
-	SetConsoleDevices(consoleDevices *foundation.NSArray[*raw.VZConsoleDeviceConfiguration])
+	SetConsoleDevices(consoleDevices ...ConsoleDeviceConfigurationProvider)
 	DirectorySharingDevices() []*DirectorySharingDeviceConfiguration
-	SetDirectorySharingDevices(directorySharingDevices *foundation.NSArray[*raw.VZDirectorySharingDeviceConfiguration])
+	SetDirectorySharingDevices(directorySharingDevices ...DirectorySharingDeviceConfigurationProvider)
 	EntropyDevices() []*EntropyDeviceConfiguration
-	SetEntropyDevices(entropyDevices *foundation.NSArray[*raw.VZEntropyDeviceConfiguration])
+	SetEntropyDevices(entropyDevices ...EntropyDeviceConfigurationProvider)
 	MemoryBalloonDevices() []*MemoryBalloonDeviceConfiguration
-	SetMemoryBalloonDevices(memoryBalloonDevices *foundation.NSArray[*raw.VZMemoryBalloonDeviceConfiguration])
+	SetMemoryBalloonDevices(memoryBalloonDevices ...MemoryBalloonDeviceConfigurationProvider)
 	NetworkDevices() []*NetworkDeviceConfiguration
-	SetNetworkDevices(networkDevices *foundation.NSArray[*raw.VZNetworkDeviceConfiguration])
+	SetNetworkDevices(networkDevices ...NetworkDeviceConfigurationProvider)
 	SerialPorts() []*SerialPortConfiguration
-	SetSerialPorts(serialPorts *foundation.NSArray[*raw.VZSerialPortConfiguration])
+	SetSerialPorts(serialPorts ...SerialPortConfigurationProvider)
 	SocketDevices() []*SocketDeviceConfiguration
-	SetSocketDevices(socketDevices *foundation.NSArray[*raw.VZSocketDeviceConfiguration])
+	SetSocketDevices(socketDevices ...SocketDeviceConfigurationProvider)
 	StorageDevices() []*StorageDeviceConfiguration
-	SetStorageDevices(storageDevices *foundation.NSArray[*raw.VZStorageDeviceConfiguration])
+	SetStorageDevices(storageDevices ...StorageDeviceConfigurationProvider)
 	Keyboards() []*KeyboardConfiguration
-	SetKeyboards(keyboards *foundation.NSArray[*raw.VZKeyboardConfiguration])
+	SetKeyboards(keyboards ...KeyboardConfigurationProvider)
 	PointingDevices() []*PointingDeviceConfiguration
-	SetPointingDevices(pointingDevices *foundation.NSArray[*raw.VZPointingDeviceConfiguration])
+	SetPointingDevices(pointingDevices ...PointingDeviceConfigurationProvider)
 	GraphicsDevices() []*GraphicsDeviceConfiguration
-	SetGraphicsDevices(graphicsDevices *foundation.NSArray[*raw.VZGraphicsDeviceConfiguration])
+	SetGraphicsDevices(graphicsDevices ...GraphicsDeviceConfigurationProvider)
 	UsbControllers() []*USBControllerConfiguration
-	SetUsbControllers(usbControllers *foundation.NSArray[*raw.VZUSBControllerConfiguration])
+	SetUsbControllers(usbControllers ...USBControllerConfigurationProvider)
 	Validate() error
 	ValidateSaveRestoreSupport() error
 }

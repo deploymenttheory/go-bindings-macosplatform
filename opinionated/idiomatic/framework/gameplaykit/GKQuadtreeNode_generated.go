@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The individual node(s) that make up a GKQuadtree. Used as a hint for faster removal via [GKQuadtree removeData:WithNode:]
+//
 // QuadtreeNode wraps [raw.GKQuadtreeNode] with a fluent Go API.
 type QuadtreeNode struct {
 	inner *raw.GKQuadtreeNode

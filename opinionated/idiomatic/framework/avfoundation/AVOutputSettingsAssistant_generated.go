@@ -39,28 +39,38 @@ func NewOutputSettingsAssistant() *OutputSettingsAssistant {
 	return &OutputSettingsAssistant{inner: raw.AVOutputSettingsAssistantFromID(_id)}
 }
 
+// @property sourceVideoAverageFrameDuration @abstract A CMTime describing the average frame duration (reciprocal of average frame rate) of your video data @discussion Setting this property will allow the receiver to make a more informed recommendation for the video settings that should be used.  After setting this property, you should re-query the videoSettings property to get the new recommendation. The default value is 1/30, which means that the receiver is assuming that your source video has an average frame rate of 30fps. It is an error to set this property to a value that is not positive or not numeric.  See CMTIME_IS_NUMERIC.
+//
 // WithSourceVideoAverageFrameDuration sets the sourceVideoAverageFrameDuration property and returns the receiver for chaining.
 func (x *OutputSettingsAssistant) WithSourceVideoAverageFrameDuration(sourceVideoAverageFrameDuration coremedia.CMTime) *OutputSettingsAssistant {
 	x.inner.SetSourceVideoAverageFrameDuration(sourceVideoAverageFrameDuration)
 	return x
 }
 
+// @property sourceVideoMinFrameDuration @abstract A CMTime describing the minimum frame duration (reciprocal of the maximum frame rate) of your video data @discussion Setting this property will allow the receiver to make a more informed recommendation for the video settings that should be used.  After setting this property, you should re-query the videoSettings property to get the new recommendation. If your source of video data is an instance of AVAssetReaderOutput, you can discover the minimum frame duration of your source asset using the AVAssetTrack.minFrameDuration property. The default value is 1/30, which means that the receiver is assuming that your source video has a maximum frame rate of 30fps. It is an error to set this property to a value that is not positive or not numeric.  See CMTIME_IS_NUMERIC.
+//
 // WithSourceVideoMinFrameDuration sets the sourceVideoMinFrameDuration property and returns the receiver for chaining.
 func (x *OutputSettingsAssistant) WithSourceVideoMinFrameDuration(sourceVideoMinFrameDuration coremedia.CMTime) *OutputSettingsAssistant {
 	x.inner.SetSourceVideoMinFrameDuration(sourceVideoMinFrameDuration)
 	return x
 }
 
+// @property audioSettings @abstract A dictionary of key/value pairs, as specified in AVAudioSettings.h, to be used when e.g. creating an instance of AVAssetWriterInput @discussion The value of this property may change as a result of setting a new value for the sourceAudioFormat property.
+//
 // AudioSettings calls the underlying AudioSettings.
 func (x *OutputSettingsAssistant) AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.AudioSettings()
 }
 
+// @property videoSettings @abstract A dictionary of key/value pairs, as specified in AVVideoSettings.h, to be used when e.g. creating an instance of AVAssetWriterInput @discussion The value of this property may change as a result of setting a new value for the sourceVideoFormat property.
+//
 // VideoSettings calls the underlying VideoSettings.
 func (x *OutputSettingsAssistant) VideoSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.VideoSettings()
 }
 
+// @property outputFileType @abstract A UTI indicating the type of file to be written, to be used when e.g. creating an instance of AVAssetWriter @discussion Use [[UTType typeWithIdentifier:outputFileType] preferredFilenameExtension] to get a suitable file extension for a given file type.
+//
 // OutputFileType calls the underlying OutputFileType.
 func (x *OutputSettingsAssistant) OutputFileType() string {
 	_r := x.inner.OutputFileType()
@@ -70,6 +80,8 @@ func (x *OutputSettingsAssistant) OutputFileType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property sourceAudioFormat @abstract A CMAudioFormatDescription object describing the format of you audio data @discussion Setting this property will allow the receiver to make a more informed recommendation for the audio settings that should be used.  After setting this property, you should re-query the audioSettings property to get the new recommendation.  The default value is NULL, which means that the receiver does not know anything about the format of your audio data. If you set a non-NULL value for this property, and are using the receiver to initialize an AVAssetWriterInput, the same format description should be used to initialize the AVAssetWriterInput, along with the dictionary from the audioSettings property.
+//
 // SourceAudioFormat calls the underlying SourceAudioFormat.
 func (x *OutputSettingsAssistant) SourceAudioFormat() unsafe.Pointer {
 	return x.inner.SourceAudioFormat()
@@ -80,6 +92,8 @@ func (x *OutputSettingsAssistant) SetSourceAudioFormat(sourceAudioFormat unsafe.
 	x.inner.SetSourceAudioFormat(sourceAudioFormat)
 }
 
+// @property sourceVideoFormat @abstract A CMVideoFormatDescription object describing the format of your video data @discussion Setting this property will allow the receiver to make a more informed recommendation for the video settings that should be used.  After setting this property, you should re-query the videoSettings property to get the new recommendation.  The default value is NULL, which means that the receiver does not know anything about the format of your video data. If you set a non-NULL value for this property, and are using the receiver to initialize an AVAssetWriterInput, the same format description should be used to initialize the AVAssetWriterInput, along with the dictionary from the videoSettings property.
+//
 // SourceVideoFormat calls the underlying SourceVideoFormat.
 func (x *OutputSettingsAssistant) SourceVideoFormat() unsafe.Pointer {
 	return x.inner.SourceVideoFormat()
@@ -90,6 +104,8 @@ func (x *OutputSettingsAssistant) SetSourceVideoFormat(sourceVideoFormat unsafe.
 	x.inner.SetSourceVideoFormat(sourceVideoFormat)
 }
 
+// @property sourceVideoAverageFrameDuration @abstract A CMTime describing the average frame duration (reciprocal of average frame rate) of your video data @discussion Setting this property will allow the receiver to make a more informed recommendation for the video settings that should be used.  After setting this property, you should re-query the videoSettings property to get the new recommendation. The default value is 1/30, which means that the receiver is assuming that your source video has an average frame rate of 30fps. It is an error to set this property to a value that is not positive or not numeric.  See CMTIME_IS_NUMERIC.
+//
 // SourceVideoAverageFrameDuration calls the underlying SourceVideoAverageFrameDuration.
 func (x *OutputSettingsAssistant) SourceVideoAverageFrameDuration() coremedia.CMTime {
 	return x.inner.SourceVideoAverageFrameDuration()
@@ -100,6 +116,8 @@ func (x *OutputSettingsAssistant) SetSourceVideoAverageFrameDuration(sourceVideo
 	x.inner.SetSourceVideoAverageFrameDuration(sourceVideoAverageFrameDuration)
 }
 
+// @property sourceVideoMinFrameDuration @abstract A CMTime describing the minimum frame duration (reciprocal of the maximum frame rate) of your video data @discussion Setting this property will allow the receiver to make a more informed recommendation for the video settings that should be used.  After setting this property, you should re-query the videoSettings property to get the new recommendation. If your source of video data is an instance of AVAssetReaderOutput, you can discover the minimum frame duration of your source asset using the AVAssetTrack.minFrameDuration property. The default value is 1/30, which means that the receiver is assuming that your source video has a maximum frame rate of 30fps. It is an error to set this property to a value that is not positive or not numeric.  See CMTIME_IS_NUMERIC.
+//
 // SourceVideoMinFrameDuration calls the underlying SourceVideoMinFrameDuration.
 func (x *OutputSettingsAssistant) SourceVideoMinFrameDuration() coremedia.CMTime {
 	return x.inner.SourceVideoMinFrameDuration()

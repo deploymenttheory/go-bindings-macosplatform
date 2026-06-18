@@ -39,48 +39,64 @@ func NewAuthorizationProviderExtensionKerberosMapping() *AuthorizationProviderEx
 	return &AuthorizationProviderExtensionKerberosMapping{inner: raw.ASAuthorizationProviderExtensionKerberosMappingFromID(_id)}
 }
 
+// @abstract The keypath in the response JSON that uses this set of mappings. @discussion If the response tokens from login contain this keypath, then the mapping in this class will be used to create a Kerberos ticket. The expected response is a JSON dictionary with the supplied key names.
+//
 // WithTicketKeyPath sets the ticketKeyPath property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionKerberosMapping) WithTicketKeyPath(ticketKeyPath string) *AuthorizationProviderExtensionKerberosMapping {
 	x.inner.SetTicketKeyPath(foundation.NSStringStringWithUTF8String(ticketKeyPath))
 	return x
 }
 
+// @abstract The key name that contains the base64 encoded kerberos AS-REP string.
+//
 // WithMessageBufferKeyName sets the messageBufferKeyName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionKerberosMapping) WithMessageBufferKeyName(messageBufferKeyName string) *AuthorizationProviderExtensionKerberosMapping {
 	x.inner.SetMessageBufferKeyName(foundation.NSStringStringWithUTF8String(messageBufferKeyName))
 	return x
 }
 
+// @abstract The key name that contains the Kerberos Realm string.
+//
 // WithRealmKeyName sets the realmKeyName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionKerberosMapping) WithRealmKeyName(realmKeyName string) *AuthorizationProviderExtensionKerberosMapping {
 	x.inner.SetRealmKeyName(foundation.NSStringStringWithUTF8String(realmKeyName))
 	return x
 }
 
+// @abstract The key name that contains the Kerberos service name string.
+//
 // WithServiceNameKeyName sets the serviceNameKeyName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionKerberosMapping) WithServiceNameKeyName(serviceNameKeyName string) *AuthorizationProviderExtensionKerberosMapping {
 	x.inner.SetServiceNameKeyName(foundation.NSStringStringWithUTF8String(serviceNameKeyName))
 	return x
 }
 
+// @abstract The key name that contains the Kerberos client name string.
+//
 // WithClientNameKeyName sets the clientNameKeyName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionKerberosMapping) WithClientNameKeyName(clientNameKeyName string) *AuthorizationProviderExtensionKerberosMapping {
 	x.inner.SetClientNameKeyName(foundation.NSStringStringWithUTF8String(clientNameKeyName))
 	return x
 }
 
+// @abstract The key name that contains the Kerberos session key type number. @discussion The value for this key should be the correct encryption type per RFC3962, section 7 for the session key.
+//
 // WithEncryptionKeyTypeKeyName sets the encryptionKeyTypeKeyName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionKerberosMapping) WithEncryptionKeyTypeKeyName(encryptionKeyTypeKeyName string) *AuthorizationProviderExtensionKerberosMapping {
 	x.inner.SetEncryptionKeyTypeKeyName(foundation.NSStringStringWithUTF8String(encryptionKeyTypeKeyName))
 	return x
 }
 
+// @abstract The key name that contains the Kerberos session key.
+//
 // WithSessionKeyKeyName sets the sessionKeyKeyName property and returns the receiver for chaining.
 func (x *AuthorizationProviderExtensionKerberosMapping) WithSessionKeyKeyName(sessionKeyKeyName string) *AuthorizationProviderExtensionKerberosMapping {
 	x.inner.SetSessionKeyKeyName(foundation.NSStringStringWithUTF8String(sessionKeyKeyName))
 	return x
 }
 
+// @abstract The keypath in the response JSON that uses this set of mappings. @discussion If the response tokens from login contain this keypath, then the mapping in this class will be used to create a Kerberos ticket. The expected response is a JSON dictionary with the supplied key names.
+//
 // TicketKeyPath calls the underlying TicketKeyPath.
 func (x *AuthorizationProviderExtensionKerberosMapping) TicketKeyPath() string {
 	_r := x.inner.TicketKeyPath()
@@ -95,6 +111,8 @@ func (x *AuthorizationProviderExtensionKerberosMapping) SetTicketKeyPath(ticketK
 	x.inner.SetTicketKeyPath(foundation.NSStringStringWithUTF8String(ticketKeyPath))
 }
 
+// @abstract The key name that contains the base64 encoded kerberos AS-REP string.
+//
 // MessageBufferKeyName calls the underlying MessageBufferKeyName.
 func (x *AuthorizationProviderExtensionKerberosMapping) MessageBufferKeyName() string {
 	_r := x.inner.MessageBufferKeyName()
@@ -109,6 +127,8 @@ func (x *AuthorizationProviderExtensionKerberosMapping) SetMessageBufferKeyName(
 	x.inner.SetMessageBufferKeyName(foundation.NSStringStringWithUTF8String(messageBufferKeyName))
 }
 
+// @abstract The key name that contains the Kerberos Realm string.
+//
 // RealmKeyName calls the underlying RealmKeyName.
 func (x *AuthorizationProviderExtensionKerberosMapping) RealmKeyName() string {
 	_r := x.inner.RealmKeyName()
@@ -123,6 +143,8 @@ func (x *AuthorizationProviderExtensionKerberosMapping) SetRealmKeyName(realmKey
 	x.inner.SetRealmKeyName(foundation.NSStringStringWithUTF8String(realmKeyName))
 }
 
+// @abstract The key name that contains the Kerberos service name string.
+//
 // ServiceNameKeyName calls the underlying ServiceNameKeyName.
 func (x *AuthorizationProviderExtensionKerberosMapping) ServiceNameKeyName() string {
 	_r := x.inner.ServiceNameKeyName()
@@ -137,6 +159,8 @@ func (x *AuthorizationProviderExtensionKerberosMapping) SetServiceNameKeyName(se
 	x.inner.SetServiceNameKeyName(foundation.NSStringStringWithUTF8String(serviceNameKeyName))
 }
 
+// @abstract The key name that contains the Kerberos client name string.
+//
 // ClientNameKeyName calls the underlying ClientNameKeyName.
 func (x *AuthorizationProviderExtensionKerberosMapping) ClientNameKeyName() string {
 	_r := x.inner.ClientNameKeyName()
@@ -151,6 +175,8 @@ func (x *AuthorizationProviderExtensionKerberosMapping) SetClientNameKeyName(cli
 	x.inner.SetClientNameKeyName(foundation.NSStringStringWithUTF8String(clientNameKeyName))
 }
 
+// @abstract The key name that contains the Kerberos session key type number. @discussion The value for this key should be the correct encryption type per RFC3962, section 7 for the session key.
+//
 // EncryptionKeyTypeKeyName calls the underlying EncryptionKeyTypeKeyName.
 func (x *AuthorizationProviderExtensionKerberosMapping) EncryptionKeyTypeKeyName() string {
 	_r := x.inner.EncryptionKeyTypeKeyName()
@@ -165,6 +191,8 @@ func (x *AuthorizationProviderExtensionKerberosMapping) SetEncryptionKeyTypeKeyN
 	x.inner.SetEncryptionKeyTypeKeyName(foundation.NSStringStringWithUTF8String(encryptionKeyTypeKeyName))
 }
 
+// @abstract The key name that contains the Kerberos session key.
+//
 // SessionKeyKeyName calls the underlying SessionKeyKeyName.
 func (x *AuthorizationProviderExtensionKerberosMapping) SessionKeyKeyName() string {
 	_r := x.inner.SessionKeyKeyName()

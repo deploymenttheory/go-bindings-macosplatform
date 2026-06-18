@@ -32,6 +32,8 @@ func VerifiableClinicalRecordQueryFromID(id objc.ID) *VerifiableClinicalRecordQu
 	return &VerifiableClinicalRecordQuery{inner: raw.HKVerifiableClinicalRecordQueryFromID(id)}
 }
 
+// @method        initWithRecordTypes:predicate:resultsHandler: @abstract      Returns an one-time query that will ask for access to verifiable clinical records that match the query. @param         recordTypes     The record types that need to be present on a verifiable clinical record. @param         predicate       The predicate which records should match. @param         resultsHandler  The block to invoke with the verifiable clinical records from the query.
+//
 // NewVerifiableClinicalRecordQueryWithRecordTypesPredicateResultsHandler creates a new [VerifiableClinicalRecordQuery].
 func NewVerifiableClinicalRecordQueryWithRecordTypesPredicateResultsHandler(recordTypes *foundation.NSArray[*foundation.NSString], predicate *foundation.NSPredicate, resultsHandler func(*raw.HKVerifiableClinicalRecordQuery, *foundation.NSArray[*raw.HKVerifiableClinicalRecord], unsafe.Pointer)) *VerifiableClinicalRecordQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKVerifiableClinicalRecordQuery")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewVerifiableClinicalRecordQueryWithRecordTypesPredicateResultsHandler(reco
 	return &VerifiableClinicalRecordQuery{inner: raw.HKVerifiableClinicalRecordQueryFromID(_id)}
 }
 
+// @method        initWithRecordTypes:sourceTypes:predicate:resultsHandler: @abstract      Returns a one-time query that will ask for access to and return verifiable clinical records that match the query. @param         recordTypes     The record types that need to be present on a verifiable clinical record. @param         sourceTypes     The source type(s) of the records. @param         predicate       The predicate which records should match. @param         resultsHandler  The block to invoke with the verifiable clinical records from the query.
+//
 // NewVerifiableClinicalRecordQueryWithRecordTypesSourceTypesPredicateResultsHandler creates a new [VerifiableClinicalRecordQuery].
 func NewVerifiableClinicalRecordQueryWithRecordTypesSourceTypesPredicateResultsHandler(recordTypes *foundation.NSArray[*foundation.NSString], sourceTypes *foundation.NSArray[*foundation.NSString], predicate *foundation.NSPredicate, resultsHandler func(*raw.HKVerifiableClinicalRecordQuery, *foundation.NSArray[*raw.HKVerifiableClinicalRecord], unsafe.Pointer)) *VerifiableClinicalRecordQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKVerifiableClinicalRecordQuery")), objc.RegisterName("alloc"))
@@ -46,6 +50,8 @@ func NewVerifiableClinicalRecordQueryWithRecordTypesSourceTypesPredicateResultsH
 	return &VerifiableClinicalRecordQuery{inner: raw.HKVerifiableClinicalRecordQueryFromID(_id)}
 }
 
+// @property      recordTypes @abstract      The record types that need to be present on desired records.
+//
 // RecordTypes returns the collection as a Go slice.
 func (x *VerifiableClinicalRecordQuery) RecordTypes() []string {
 	arr := x.inner.RecordTypes()
@@ -57,6 +63,8 @@ func (x *VerifiableClinicalRecordQuery) RecordTypes() []string {
 	})
 }
 
+// @property      sourceTypes @abstract      The source type(s) of the records.
+//
 // SourceTypes returns the collection as a Go slice.
 func (x *VerifiableClinicalRecordQuery) SourceTypes() []*foundation.NSString {
 	arr := x.inner.SourceTypes()

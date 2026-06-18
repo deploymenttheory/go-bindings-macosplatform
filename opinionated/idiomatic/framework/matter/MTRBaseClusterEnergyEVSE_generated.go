@@ -33,6 +33,8 @@ func MTRBaseClusterEnergyEVSEFromID(id objc.ID) *MTRBaseClusterEnergyEVSE {
 	return &MTRBaseClusterEnergyEVSE{inner: raw.MTRBaseClusterEnergyEVSEFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterEnergyEVSEWithDeviceEndpointIDQueue creates a new [MTRBaseClusterEnergyEVSE].
 func NewMTRBaseClusterEnergyEVSEWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterEnergyEVSE {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterEnergyEVSE")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewMTRBaseClusterEnergyEVSEWithDeviceEndpointIDQueue(device *raw.MTRBaseDev
 	return &MTRBaseClusterEnergyEVSE{inner: raw.MTRBaseClusterEnergyEVSEFromID(_id)}
 }
 
+// Command Disable Allows a client to disable the EVSE from charging and discharging.
+//
 // DisableWithParamsCompletion calls the underlying DisableWithParamsCompletion.
 func (x *MTRBaseClusterEnergyEVSE) DisableWithParamsCompletion(params *raw.MTREnergyEVSEClusterDisableParams, completion func(unsafe.Pointer)) {
 	x.inner.DisableWithParamsCompletion(params, completion)
@@ -50,11 +54,15 @@ func (x *MTRBaseClusterEnergyEVSE) DisableWithCompletion(completion func(unsafe.
 	x.inner.DisableWithCompletion(completion)
 }
 
+// Command EnableCharging This command allows a client to enable the EVSE to charge an EV, and to provide or update the maximum and minimum charge current.
+//
 // EnableChargingWithParamsCompletion calls the underlying EnableChargingWithParamsCompletion.
 func (x *MTRBaseClusterEnergyEVSE) EnableChargingWithParamsCompletion(params *raw.MTREnergyEVSEClusterEnableChargingParams, completion func(unsafe.Pointer)) {
 	x.inner.EnableChargingWithParamsCompletion(params, completion)
 }
 
+// Command StartDiagnostics Allows a client to put the EVSE into a self-diagnostics mode.
+//
 // StartDiagnosticsWithParamsCompletion calls the underlying StartDiagnosticsWithParamsCompletion.
 func (x *MTRBaseClusterEnergyEVSE) StartDiagnosticsWithParamsCompletion(params *raw.MTREnergyEVSEClusterStartDiagnosticsParams, completion func(unsafe.Pointer)) {
 	x.inner.StartDiagnosticsWithParamsCompletion(params, completion)
@@ -65,11 +73,15 @@ func (x *MTRBaseClusterEnergyEVSE) StartDiagnosticsWithCompletion(completion fun
 	x.inner.StartDiagnosticsWithCompletion(completion)
 }
 
+// Command SetTargets Allows a client to set the user specified charging targets.
+//
 // SetTargetsWithParamsCompletion calls the underlying SetTargetsWithParamsCompletion.
 func (x *MTRBaseClusterEnergyEVSE) SetTargetsWithParamsCompletion(params *raw.MTREnergyEVSEClusterSetTargetsParams, completion func(unsafe.Pointer)) {
 	x.inner.SetTargetsWithParamsCompletion(params, completion)
 }
 
+// Command GetTargets Allows a client to retrieve the current set of charging targets.
+//
 // GetTargetsWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterEnergyEVSE) GetTargetsWithParamsCompletion(ctx context.Context, params *raw.MTREnergyEVSEClusterGetTargetsParams) (*MTREnergyEVSEClusterGetTargetsResponseParams, error) {
 	type _result struct {
@@ -122,6 +134,8 @@ func (x *MTRBaseClusterEnergyEVSE) GetTargetsWithCompletion(ctx context.Context)
 	}
 }
 
+// Command ClearTargets Allows a client to clear all stored charging targets.
+//
 // ClearTargetsWithParamsCompletion calls the underlying ClearTargetsWithParamsCompletion.
 func (x *MTRBaseClusterEnergyEVSE) ClearTargetsWithParamsCompletion(params *raw.MTREnergyEVSEClusterClearTargetsParams, completion func(unsafe.Pointer)) {
 	x.inner.ClearTargetsWithParamsCompletion(params, completion)

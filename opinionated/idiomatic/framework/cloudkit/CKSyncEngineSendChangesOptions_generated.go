@@ -29,6 +29,8 @@ func SyncEngineSendChangesOptionsFromID(id objc.ID) *SyncEngineSendChangesOption
 	return &SyncEngineSendChangesOptions{inner: raw.CKSyncEngineSendChangesOptionsFromID(id)}
 }
 
+// Initializes a set of options with the specific scope. If no scope is provided, the default scope will include everything.
+//
 // NewSyncEngineSendChangesOptionsWithScope creates a new [SyncEngineSendChangesOptions].
 func NewSyncEngineSendChangesOptionsWithScope(scope *raw.CKSyncEngineSendChangesScope) *SyncEngineSendChangesOptions {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineSendChangesOptions")), objc.RegisterName("alloc"))
@@ -36,18 +38,24 @@ func NewSyncEngineSendChangesOptionsWithScope(scope *raw.CKSyncEngineSendChanges
 	return &SyncEngineSendChangesOptions{inner: raw.CKSyncEngineSendChangesOptionsFromID(_id)}
 }
 
+// The scope in which to send changes to the server.
+//
 // WithScope sets the scope property and returns the receiver for chaining.
 func (x *SyncEngineSendChangesOptions) WithScope(scope *SyncEngineSendChangesScope) *SyncEngineSendChangesOptions {
 	x.inner.SetScope(scope.Unwrap())
 	return x
 }
 
+// The operation group to use for the underlying CloudKit operations. - Tip: Providing a specific operation group helps you to identify and analyze the telemetry of send operations in CloudKit Console. The default value is `nil`.
+//
 // WithOperationGroup sets the operationGroup property and returns the receiver for chaining.
 func (x *SyncEngineSendChangesOptions) WithOperationGroup(operationGroup *OperationGroup) *SyncEngineSendChangesOptions {
 	x.inner.SetOperationGroup(operationGroup.Unwrap())
 	return x
 }
 
+// The scope in which to send changes to the server.
+//
 // Scope calls the underlying Scope.
 func (x *SyncEngineSendChangesOptions) Scope() *SyncEngineSendChangesScope {
 	_r := x.inner.Scope()
@@ -62,6 +70,8 @@ func (x *SyncEngineSendChangesOptions) SetScope(scope *raw.CKSyncEngineSendChang
 	x.inner.SetScope(scope)
 }
 
+// The operation group to use for the underlying CloudKit operations. - Tip: Providing a specific operation group helps you to identify and analyze the telemetry of send operations in CloudKit Console. The default value is `nil`.
+//
 // OperationGroup calls the underlying OperationGroup.
 func (x *SyncEngineSendChangesOptions) OperationGroup() *OperationGroup {
 	_r := x.inner.OperationGroup()

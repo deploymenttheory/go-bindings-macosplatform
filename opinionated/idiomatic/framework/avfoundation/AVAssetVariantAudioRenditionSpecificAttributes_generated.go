@@ -37,21 +37,29 @@ func NewAssetVariantAudioRenditionSpecificAttributes() *AssetVariantAudioRenditi
 	return &AssetVariantAudioRenditionSpecificAttributes{inner: raw.AVAssetVariantAudioRenditionSpecificAttributesFromID(_id)}
 }
 
+// If it is not declared, the value will be negative. A channel count greater than two indicates that the variant offers a rich multichannel authoring.
+//
 // ChannelCount calls the underlying ChannelCount.
 func (x *AssetVariantAudioRenditionSpecificAttributes) ChannelCount() int {
 	return x.inner.ChannelCount()
 }
 
+// Indicates that the variant is best suited for delivery to headphones. A binaural variant may originate from a direct binaural recording or from the processing of a multichannel audio source.
+//
 // IsBinaural calls the underlying IsBinaural.
 func (x *AssetVariantAudioRenditionSpecificAttributes) IsBinaural() bool {
 	return x.inner.IsBinaural()
 }
 
+// Indicates that this variant contains virtualized or otherwise pre-processed audio content that is suitable for a variety of purposes. If a variant audio redition is immersive it is eligible for rendering either to headphones or speakers.
+//
 // IsImmersive calls the underlying IsImmersive.
 func (x *AssetVariantAudioRenditionSpecificAttributes) IsImmersive() bool {
 	return x.inner.IsImmersive()
 }
 
+// Indicates that this variant is declared as a downmix derivative of other media of greater channel count. If one or more multichannel variants are also provided, the dowmix is assumed to be compatible in its internal timing and other attributes with those variants. Typically this is because it has been derived from the same source. A downmix can be used as a suitable substitute for a multichannel variant under some conditions.
+//
 // IsDownmix calls the underlying IsDownmix.
 func (x *AssetVariantAudioRenditionSpecificAttributes) IsDownmix() bool {
 	return x.inner.IsDownmix()

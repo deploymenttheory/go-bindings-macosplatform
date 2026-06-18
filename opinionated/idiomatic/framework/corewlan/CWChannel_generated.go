@@ -35,21 +35,29 @@ func NewChannel() *Channel {
 	return &Channel{inner: raw.CWChannelFromID(_id)}
 }
 
+// @method @param channel The CWChannel with which to compare the receiver. @result YES if the objects are equal, otherwise NO. @abstract Determine CWChannel equality. @discussion CWChannel objects are considered equal if all their corresponding properties are equal.
+//
 // IsEqualToChannel calls the underlying IsEqualToChannel.
 func (x *Channel) IsEqualToChannel(channel *raw.CWChannel) bool {
 	return x.inner.IsEqualToChannel(channel)
 }
 
+// @property @abstract The channel number represented as an integer value.
+//
 // ChannelNumber calls the underlying ChannelNumber.
 func (x *Channel) ChannelNumber() int {
 	return x.inner.ChannelNumber()
 }
 
+// @property @abstract The channel width as indicated by the CWChannelWidth type.
+//
 // ChannelWidth calls the underlying ChannelWidth.
 func (x *Channel) ChannelWidth() CWChannelWidth {
 	return CWChannelWidth(x.inner.ChannelWidth())
 }
 
+// @property @abstract The channel band as indicated by the CWChannelBand type.
+//
 // ChannelBand calls the underlying ChannelBand.
 func (x *Channel) ChannelBand() CWChannelBand {
 	return CWChannelBand(x.inner.ChannelBand())

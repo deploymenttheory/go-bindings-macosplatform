@@ -33,6 +33,8 @@ func MTRClusterRVCRunModeFromID(id objc.ID) *MTRClusterRVCRunMode {
 	return &MTRClusterRVCRunMode{inner: raw.MTRClusterRVCRunModeFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterRVCRunModeWithDeviceEndpointIDQueue creates a new [MTRClusterRVCRunMode].
 func NewMTRClusterRVCRunModeWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterRVCRunMode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterRVCRunMode")), objc.RegisterName("alloc"))

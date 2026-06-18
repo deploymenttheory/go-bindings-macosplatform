@@ -39,6 +39,8 @@ func NewCoordinatedPlaybackParticipant() *CoordinatedPlaybackParticipant {
 	return &CoordinatedPlaybackParticipant{inner: raw.AVCoordinatedPlaybackParticipantFromID(_id)}
 }
 
+// The reason, if any, this participant is currently not participating in coordinated playback.
+//
 // SuspensionReasons returns the collection as a Go slice.
 func (x *CoordinatedPlaybackParticipant) SuspensionReasons() []*foundation.NSString {
 	arr := x.inner.SuspensionReasons()
@@ -50,11 +52,15 @@ func (x *CoordinatedPlaybackParticipant) SuspensionReasons() []*foundation.NSStr
 	})
 }
 
+// YES if the participant is ready to play.
+//
 // IsReadyToPlay calls the underlying IsReadyToPlay.
 func (x *CoordinatedPlaybackParticipant) IsReadyToPlay() bool {
 	return x.inner.IsReadyToPlay()
 }
 
+// A unique id for the participant. Use this identifier to distinguish participants.
+//
 // Identifier calls the underlying Identifier.
 func (x *CoordinatedPlaybackParticipant) Identifier() *foundation.NSUUID {
 	return x.inner.Identifier()

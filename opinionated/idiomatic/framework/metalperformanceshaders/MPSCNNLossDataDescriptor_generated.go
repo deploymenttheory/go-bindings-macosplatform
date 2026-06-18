@@ -37,28 +37,38 @@ func NewCNNLossDataDescriptor() *CNNLossDataDescriptor {
 	return &CNNLossDataDescriptor{inner: raw.MPSCNNLossDataDescriptorFromID(_id)}
 }
 
+// @property   bytesPerRow @abstract   Row bytes of loss data. @discussion This parameter specifies the row bytes of loss data.
+//
 // WithBytesPerRow sets the bytesPerRow property and returns the receiver for chaining.
 func (x *CNNLossDataDescriptor) WithBytesPerRow(bytesPerRow uint) *CNNLossDataDescriptor {
 	x.inner.SetBytesPerRow(bytesPerRow)
 	return x
 }
 
+// @property   bytesPerImage @abstract   Slice bytes of loss data. @discussion This parameter specifies the slice bytes of loss data.
+//
 // WithBytesPerImage sets the bytesPerImage property and returns the receiver for chaining.
 func (x *CNNLossDataDescriptor) WithBytesPerImage(bytesPerImage uint) *CNNLossDataDescriptor {
 	x.inner.SetBytesPerImage(bytesPerImage)
 	return x
 }
 
+// @property   layout @abstract   Data layout of loss data. See MPSImage.h for more information. @discussion This parameter specifies the layout of loss data.
+//
 // Layout calls the underlying Layout.
 func (x *CNNLossDataDescriptor) Layout() mpscore.MPSDataLayout {
 	return x.inner.Layout()
 }
 
+// @property   size @abstract   Size of loss data: (width, height, feature channels}. @discussion This parameter specifies the size of loss data.
+//
 // Size calls the underlying Size.
 func (x *CNNLossDataDescriptor) Size() metal.MTLSize {
 	return x.inner.Size()
 }
 
+// @property   bytesPerRow @abstract   Row bytes of loss data. @discussion This parameter specifies the row bytes of loss data.
+//
 // BytesPerRow calls the underlying BytesPerRow.
 func (x *CNNLossDataDescriptor) BytesPerRow() uint {
 	return x.inner.BytesPerRow()
@@ -69,6 +79,8 @@ func (x *CNNLossDataDescriptor) SetBytesPerRow(bytesPerRow uint) {
 	x.inner.SetBytesPerRow(bytesPerRow)
 }
 
+// @property   bytesPerImage @abstract   Slice bytes of loss data. @discussion This parameter specifies the slice bytes of loss data.
+//
 // BytesPerImage calls the underlying BytesPerImage.
 func (x *CNNLossDataDescriptor) BytesPerImage() uint {
 	return x.inner.BytesPerImage()

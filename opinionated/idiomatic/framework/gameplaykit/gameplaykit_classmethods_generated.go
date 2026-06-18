@@ -78,8 +78,17 @@ func ObstacleWithRadius(radius float32) *CircleObstacle {
 }
 
 // BehaviorWithBehaviors calls the underlying GKCompositeBehaviorBehaviorWithBehaviors.
-func BehaviorWithBehaviors(behaviors *foundation.NSArray[*raw.GKBehavior]) *CompositeBehavior {
-	_r := raw.GKCompositeBehaviorBehaviorWithBehaviors(behaviors)
+func BehaviorWithBehaviors(behaviors ...BehaviorProvider) *CompositeBehavior {
+	_ptrs := make([]objc.ID, len(behaviors))
+	for _i, _v := range behaviors {
+		_ptrs[_i] = _v.asBehavior().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.GKBehavior]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.GKBehavior](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	_r := raw.GKCompositeBehaviorBehaviorWithBehaviors(_arg0)
 	if _r == nil {
 		return nil
 	}
@@ -231,8 +240,17 @@ func GoalToStayOnPathMaxPredictionTime(path *raw.GKPath, maxPredictionTime float
 }
 
 // GraphWithNodes calls the underlying GKGraphGraphWithNodes.
-func GraphWithNodes(nodes *foundation.NSArray[*raw.GKGraphNode]) *Graph {
-	_r := raw.GKGraphGraphWithNodes(nodes)
+func GraphWithNodes(nodes ...GraphNodeProvider) *Graph {
+	_ptrs := make([]objc.ID, len(nodes))
+	for _i, _v := range nodes {
+		_ptrs[_i] = _v.asGraphNode().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.GKGraphNode]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.GKGraphNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	_r := raw.GKGraphGraphWithNodes(_arg0)
 	if _r == nil {
 		return nil
 	}

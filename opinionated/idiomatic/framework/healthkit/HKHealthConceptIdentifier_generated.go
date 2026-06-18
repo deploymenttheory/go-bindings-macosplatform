@@ -36,6 +36,8 @@ func NewHealthConceptIdentifier() *HealthConceptIdentifier {
 	return &HealthConceptIdentifier{inner: raw.HKHealthConceptIdentifierFromID(_id)}
 }
 
+// The domain this identifier belongs to. This value identifies the group of concepts the identifier comes from. For example, if the identifier represents a medication, the category will be the medication domain.
+//
 // Domain calls the underlying Domain.
 func (x *HealthConceptIdentifier) Domain() string {
 	_r := x.inner.Domain()

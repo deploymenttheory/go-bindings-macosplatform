@@ -35,11 +35,15 @@ func NewSyncEngineFetchChangesContext() *SyncEngineFetchChangesContext {
 	return &SyncEngineFetchChangesContext{inner: raw.CKSyncEngineFetchChangesContextFromID(_id)}
 }
 
+// The reason why the sync engine is attempting to fetch changes.
+//
 // Reason calls the underlying Reason.
 func (x *SyncEngineFetchChangesContext) Reason() CKSyncEngineSyncReason {
 	return CKSyncEngineSyncReason(x.inner.Reason())
 }
 
+// The options being used for this attempt to fetch changes.
+//
 // Options calls the underlying Options.
 func (x *SyncEngineFetchChangesContext) Options() *SyncEngineFetchChangesOptions {
 	_r := x.inner.Options()

@@ -12,6 +12,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An attachment point that writes data from the guest system to a file.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzfileserialportattachment
 type VZFileSerialPortAttachment struct {
 	VZSerialPortAttachment
@@ -34,7 +36,7 @@ func VZFileSerialPortAttachmentFromID(id objc.ID) *VZFileSerialPortAttachment {
 	return o
 }
 
-// @abstract Initialize the VZFileSerialPortAttachment from a URL of a file. @param url The URL of the file for the attachment on the local file system. @param shouldAppend True if the file should be opened in append mode, false otherwise. When a file is opened in append mode, writing to that file will append to the end of it. @param error If not nil, used to report errors if initialization fails. @return A newly initialized VZFileSerialPortAttachment. If an error was encountered returns @c nil, and @c error contains the error.
+// Creates a file-based serial port attachment object.
 func (o *VZFileSerialPortAttachment) InitWithURLAppendError(url *foundation.NSURL, shouldAppend bool) (*VZFileSerialPortAttachment, error) {
 	var _nsErr uintptr
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZFileSerialPortAttachmentSelInitWithURLAppendError, url.Ptr(), shouldAppend, unsafe.Pointer(&_nsErr))

@@ -31,6 +31,8 @@ func OneTimeCodeCredentialIdentityFromID(id objc.ID) *OneTimeCodeCredentialIdent
 	return &OneTimeCodeCredentialIdentity{inner: raw.ASOneTimeCodeCredentialIdentityFromID(id)}
 }
 
+// @abstract Initializes an instance of ASOneTimeCodeCredentialIdentity. @param serviceIdentifier The service identifier for which this credential identity is valid. @param label A user-provided label to identify the one time code. @param recordIdentifier An optional string to uniquely identify this record in your local database.
+//
 // NewOneTimeCodeCredentialIdentityWithServiceIdentifierLabelRecordIdentifier creates a new [OneTimeCodeCredentialIdentity].
 func NewOneTimeCodeCredentialIdentityWithServiceIdentifierLabelRecordIdentifier(serviceIdentifier *raw.ASCredentialServiceIdentifier, label string, recordIdentifier string) *OneTimeCodeCredentialIdentity {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASOneTimeCodeCredentialIdentity")), objc.RegisterName("alloc"))

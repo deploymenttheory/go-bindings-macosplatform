@@ -35,6 +35,8 @@ func NewComposeContext() *ComposeContext {
 	return &ComposeContext{inner: raw.MEComposeContextFromID(_id)}
 }
 
+// @brief The original email message on which user performed an action It is @c nil for @c MEComposeUserActionNewMessage actions.
+//
 // OriginalMessage calls the underlying OriginalMessage.
 func (x *ComposeContext) OriginalMessage() *Message {
 	_r := x.inner.OriginalMessage()
@@ -44,26 +46,36 @@ func (x *ComposeContext) OriginalMessage() *Message {
 	return &Message{inner: _r}
 }
 
+// Indicates the action performed by the user that created this compose context.
+//
 // Action calls the underlying Action.
 func (x *ComposeContext) Action() MEComposeUserAction {
 	return MEComposeUserAction(x.inner.Action())
 }
 
+// Boolean that indicates the message is encrypted by a Message Security extension.
+//
 // IsEncrypted calls the underlying IsEncrypted.
 func (x *ComposeContext) IsEncrypted() bool {
 	return x.inner.IsEncrypted()
 }
 
+// Boolean that indicates if the user wants to encrypt the message.
+//
 // ShouldEncrypt calls the underlying ShouldEncrypt.
 func (x *ComposeContext) ShouldEncrypt() bool {
 	return x.inner.ShouldEncrypt()
 }
 
+// Boolean that indicates the message is signed by a Message Security extension.
+//
 // IsSigned calls the underlying IsSigned.
 func (x *ComposeContext) IsSigned() bool {
 	return x.inner.IsSigned()
 }
 
+// A Boolean that indicates if the user wants to sign the message.
+//
 // ShouldSign calls the underlying ShouldSign.
 func (x *ComposeContext) ShouldSign() bool {
 	return x.inner.ShouldSign()

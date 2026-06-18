@@ -7,6 +7,7 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/appledocs"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/libraries/typemap"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/macosplatformmetadata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/overrides"
@@ -124,6 +125,11 @@ func LoadAll(paths []string, modulePrefix string) (*Registry, error) {
 		}
 		for _, warning := range warnings {
 			fmt.Fprintf(os.Stderr, "warning: %s\n", warning)
+		}
+		// Enrich Doc fields with Apple's developer documentation harvested into
+		// the adjacent appledocs.json sidecar (Apple-preferred, header fallback).
+		if err := appledocs.ApplyAdjacent(p, framework); err != nil {
+			return nil, fmt.Errorf("load %s: %w", p, err)
 		}
 		all = append(all, fmWithPath{framework, p})
 	}
@@ -682,7 +688,10 @@ func selectBestArch(files []string) []string {
 // lookupStruct returns the struct metadata for `name` from the framework matching
 // `fwName`, or nil when absent. Used during ownership resolution to compare a
 // candidate entry's completeness against the prior winner without re-scanning.
-func lookupStruct(frameworks []*macosplatformmetadata.FrameworkMeta, fwName, name string) *macosplatformmetadata.Struct {
+func lookupStruct(
+	frameworks []*macosplatformmetadata.FrameworkMeta,
+	fwName, name string,
+) *macosplatformmetadata.Struct {
 	for _, framework := range frameworks {
 		if framework.Framework != fwName {
 			continue
@@ -698,7 +707,10 @@ func lookupStruct(frameworks []*macosplatformmetadata.FrameworkMeta, fwName, nam
 // across many frameworks would otherwise win the registry by alphabetical
 // order. Comparing method counts at registration time keeps the canonical
 // definition's framework as the owner.
-func lookupProtocol(frameworks []*macosplatformmetadata.FrameworkMeta, fwName, name string) *macosplatformmetadata.Protocol {
+func lookupProtocol(
+	frameworks []*macosplatformmetadata.FrameworkMeta,
+	fwName, name string,
+) *macosplatformmetadata.Protocol {
 	for _, framework := range frameworks {
 		if framework.Framework != fwName {
 			continue
@@ -769,7 +781,10 @@ func capitaliseFirst(s string) string {
 // buildProtocolProxyIndex inspects class method return types and records
 // any single-protocol id<P> returns in dst. Only protocols already in
 // knownProtocols are recorded (forward-declared ones are ignored).
-func buildProtocolProxyIndex(classes map[string]macosplatformmetadata.Class, knownProtocols, dst map[string]string) {
+func buildProtocolProxyIndex(
+	classes map[string]macosplatformmetadata.Class,
+	knownProtocols, dst map[string]string,
+) {
 	for _, cls := range classes {
 		for _, method := range cls.Methods {
 			recordIDProtocolReturn(method.Return.ObjCType, knownProtocols, dst)

@@ -39,16 +39,22 @@ func NewMetricHLSMediaSegmentRequestEvent() *MetricHLSMediaSegmentRequestEvent {
 	return &MetricHLSMediaSegmentRequestEvent{inner: raw.AVMetricHLSMediaSegmentRequestEventFromID(_id)}
 }
 
+// Returns the URL of the media segment. If no value is available, returns nil.
+//
 // Url calls the underlying Url.
 func (x *MetricHLSMediaSegmentRequestEvent) Url() *foundation.NSURL {
 	return x.inner.Url()
 }
 
+// Returns true if the media segment request is for a map segment.
+//
 // IsMapSegment calls the underlying IsMapSegment.
 func (x *MetricHLSMediaSegmentRequestEvent) IsMapSegment() bool {
 	return x.inner.IsMapSegment()
 }
 
+// Returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
+//
 // MediaType calls the underlying MediaType.
 func (x *MetricHLSMediaSegmentRequestEvent) MediaType() string {
 	_r := x.inner.MediaType()
@@ -58,21 +64,29 @@ func (x *MetricHLSMediaSegmentRequestEvent) MediaType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns the byte range for the media segment. If not available, the range start and end will be 0.
+//
 // ByteRange calls the underlying ByteRange.
 func (x *MetricHLSMediaSegmentRequestEvent) ByteRange() foundation.NSRange {
 	return x.inner.ByteRange()
 }
 
+// Returns the URL of the index file in which this segment was declared. If not available, returns nil.
+//
 // IndexFileURL calls the underlying IndexFileURL.
 func (x *MetricHLSMediaSegmentRequestEvent) IndexFileURL() *foundation.NSURL {
 	return x.inner.IndexFileURL()
 }
 
+// Returns the duration of segment in seconds.
+//
 // SegmentDuration calls the underlying SegmentDuration.
 func (x *MetricHLSMediaSegmentRequestEvent) SegmentDuration() float64 {
 	return x.inner.SegmentDuration()
 }
 
+// Returns the media resource request event which was used to satisfy the media segment.
+//
 // MediaResourceRequestEvent calls the underlying MediaResourceRequestEvent.
 func (x *MetricHLSMediaSegmentRequestEvent) MediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
 	_r := x.inner.MediaResourceRequestEvent()

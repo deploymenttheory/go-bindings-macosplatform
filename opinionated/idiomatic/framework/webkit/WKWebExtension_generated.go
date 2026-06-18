@@ -39,6 +39,8 @@ func NewWKWebExtension() *WKWebExtension {
 	return &WKWebExtension{inner: raw.WKWebExtensionFromID(_id)}
 }
 
+// @abstract Checks if a manifest version is supported by the extension. @param manifestVersion The version number to check. @result Returns `YES` if the extension specified a manifest version that is greater than or equal to `manifestVersion`.
+//
 // SupportsManifestVersion calls the underlying SupportsManifestVersion.
 func (x *WKWebExtension) SupportsManifestVersion(manifestVersion float64) bool {
 	return x.inner.SupportsManifestVersion(manifestVersion)
@@ -54,26 +56,36 @@ func (x *WKWebExtension) ActionIconForSize(size corefoundation.CGSize) *appkit.N
 	return x.inner.ActionIconForSize(size)
 }
 
+// @abstract An array of all errors that occurred during the processing of the extension. @discussion Provides an array of all parse-time errors for the extension, with repeat errors consolidated into a single entry for the original occurrence only. If no errors occurred, an empty array is returned. @note Once the extension is loaded, use the “errors“ property on an extension context to monitor any runtime errors, as they can occur after the extension is loaded.
+//
 // Errors calls the underlying Errors.
 func (x *WKWebExtension) Errors() *foundation.NSArray[objc.ID] {
 	return x.inner.Errors()
 }
 
+// @abstract The parsed manifest as a dictionary.
+//
 // Manifest calls the underlying Manifest.
 func (x *WKWebExtension) Manifest() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.Manifest()
 }
 
+// @abstract The parsed manifest version, or `0` if there is no version specified in the manifest. @note An “WKWebExtensionErrorUnsupportedManifestVersion“ error will be reported if the manifest version isn't specified.
+//
 // ManifestVersion calls the underlying ManifestVersion.
 func (x *WKWebExtension) ManifestVersion() float64 {
 	return x.inner.ManifestVersion()
 }
 
+// @abstract The default locale for the extension. Returns `nil` if there was no default locale specified.
+//
 // DefaultLocale calls the underlying DefaultLocale.
 func (x *WKWebExtension) DefaultLocale() *foundation.NSLocale {
 	return x.inner.DefaultLocale()
 }
 
+// @abstract The localized extension name. Returns `nil` if there was no name specified.
+//
 // DisplayName calls the underlying DisplayName.
 func (x *WKWebExtension) DisplayName() string {
 	_r := x.inner.DisplayName()
@@ -83,6 +95,8 @@ func (x *WKWebExtension) DisplayName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The localized extension short name. Returns `nil` if there was no short name specified.
+//
 // DisplayShortName calls the underlying DisplayShortName.
 func (x *WKWebExtension) DisplayShortName() string {
 	_r := x.inner.DisplayShortName()
@@ -92,6 +106,8 @@ func (x *WKWebExtension) DisplayShortName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The localized extension display version. Returns `nil` if there was no display version specified.
+//
 // DisplayVersion calls the underlying DisplayVersion.
 func (x *WKWebExtension) DisplayVersion() string {
 	_r := x.inner.DisplayVersion()
@@ -101,6 +117,8 @@ func (x *WKWebExtension) DisplayVersion() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The localized extension description. Returns `nil` if there was no description specified.
+//
 // DisplayDescription calls the underlying DisplayDescription.
 func (x *WKWebExtension) DisplayDescription() string {
 	_r := x.inner.DisplayDescription()
@@ -110,6 +128,8 @@ func (x *WKWebExtension) DisplayDescription() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The default localized extension action label. Returns `nil` if there was no default action label specified. @discussion This label serves as a default and should be used to represent the extension in contexts like action sheets or toolbars prior to the extension being loaded into an extension context. Once the extension is loaded, use the “actionForTab:“ API to get the tab-specific label.
+//
 // DisplayActionLabel calls the underlying DisplayActionLabel.
 func (x *WKWebExtension) DisplayActionLabel() string {
 	_r := x.inner.DisplayActionLabel()
@@ -119,61 +139,85 @@ func (x *WKWebExtension) DisplayActionLabel() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The set of permissions that the extension requires for its base functionality.
+//
 // RequestedPermissions calls the underlying RequestedPermissions.
 func (x *WKWebExtension) RequestedPermissions() *foundation.NSSet[*foundation.NSString] {
 	return x.inner.RequestedPermissions()
 }
 
+// @abstract The set of permissions that the extension may need for optional functionality. These permissions can be requested by the extension at a later time.
+//
 // OptionalPermissions calls the underlying OptionalPermissions.
 func (x *WKWebExtension) OptionalPermissions() *foundation.NSSet[*foundation.NSString] {
 	return x.inner.OptionalPermissions()
 }
 
+// @abstract The set of websites that the extension requires access to for its base functionality.
+//
 // RequestedPermissionMatchPatterns calls the underlying RequestedPermissionMatchPatterns.
 func (x *WKWebExtension) RequestedPermissionMatchPatterns() *foundation.NSSet[*raw.WKWebExtensionMatchPattern] {
 	return x.inner.RequestedPermissionMatchPatterns()
 }
 
+// @abstract The set of websites that the extension may need access to for optional functionality. These match patterns can be requested by the extension at a later time.
+//
 // OptionalPermissionMatchPatterns calls the underlying OptionalPermissionMatchPatterns.
 func (x *WKWebExtension) OptionalPermissionMatchPatterns() *foundation.NSSet[*raw.WKWebExtensionMatchPattern] {
 	return x.inner.OptionalPermissionMatchPatterns()
 }
 
+// @abstract The set of websites that the extension requires access to for injected content and for receiving messages from websites.
+//
 // AllRequestedMatchPatterns calls the underlying AllRequestedMatchPatterns.
 func (x *WKWebExtension) AllRequestedMatchPatterns() *foundation.NSSet[*raw.WKWebExtensionMatchPattern] {
 	return x.inner.AllRequestedMatchPatterns()
 }
 
+// @abstract A Boolean value indicating whether the extension has background content that can run when needed. @discussion If this property is `YES`, the extension can run in the background even when no webpages are open.
+//
 // HasBackgroundContent calls the underlying HasBackgroundContent.
 func (x *WKWebExtension) HasBackgroundContent() bool {
 	return x.inner.HasBackgroundContent()
 }
 
+// @abstract A Boolean value indicating whether the extension has background content that stays in memory as long as the extension is loaded. @note Note that extensions are only allowed to have persistent background content on macOS. An “WKWebExtensionErrorInvalidBackgroundPersistence“ error will be reported on iOS, iPadOS, and visionOS if an attempt is made to load a persistent extension.
+//
 // HasPersistentBackgroundContent calls the underlying HasPersistentBackgroundContent.
 func (x *WKWebExtension) HasPersistentBackgroundContent() bool {
 	return x.inner.HasPersistentBackgroundContent()
 }
 
+// @abstract A Boolean value indicating whether the extension has script or stylesheet content that can be injected into webpages. @discussion If this property is `YES`, the extension has content that can be injected by matching against the extension's requested match patterns. @note Once the extension is loaded, use the “hasInjectedContent“ property on an extension context, as the injectable content can change after the extension is loaded.
+//
 // HasInjectedContent calls the underlying HasInjectedContent.
 func (x *WKWebExtension) HasInjectedContent() bool {
 	return x.inner.HasInjectedContent()
 }
 
+// @abstract A Boolean value indicating whether the extension has an options page. @discussion If this property is `YES`, the extension includes a dedicated options page where users can customize settings. The app should provide access to this page through a user interface element, which can be accessed via “optionsPageURL“ on an extension context.
+//
 // HasOptionsPage calls the underlying HasOptionsPage.
 func (x *WKWebExtension) HasOptionsPage() bool {
 	return x.inner.HasOptionsPage()
 }
 
+// @abstract A Boolean value indicating whether the extension provides an alternative to the default new tab page. @discussion If this property is `YES`, the extension can specify a custom page that can be displayed when a new tab is opened in the app, instead of the default new tab page. The app should prompt the user for permission to use the extension's new tab page as the default, which can be accessed via “overrideNewTabPageURL“ on an extension context.
+//
 // HasOverrideNewTabPage calls the underlying HasOverrideNewTabPage.
 func (x *WKWebExtension) HasOverrideNewTabPage() bool {
 	return x.inner.HasOverrideNewTabPage()
 }
 
+// @abstract A Boolean value indicating whether the extension includes commands that users can invoke. @discussion If this property is `YES`, the extension contains one or more commands that can be performed by the user. These commands should be accessible via keyboard shortcuts, menu items, or other user interface elements provided by the app. The list of commands can be accessed via “commands“ on an extension context, and invoked via “performCommand:“.
+//
 // HasCommands calls the underlying HasCommands.
 func (x *WKWebExtension) HasCommands() bool {
 	return x.inner.HasCommands()
 }
 
+// @abstract A boolean value indicating whether the extension includes rules used for content modification or blocking.
+//
 // HasContentModificationRules calls the underlying HasContentModificationRules.
 func (x *WKWebExtension) HasContentModificationRules() bool {
 	return x.inner.HasContentModificationRules()

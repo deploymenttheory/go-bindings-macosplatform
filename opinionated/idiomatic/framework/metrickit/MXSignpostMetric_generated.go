@@ -36,6 +36,8 @@ func NewSignpostMetric() *SignpostMetric {
 	return &SignpostMetric{inner: raw.MXSignpostMetricFromID(_id)}
 }
 
+// @property      signpostName @abstract      The name associated with this aggregated signpost.
+//
 // SignpostName calls the underlying SignpostName.
 func (x *SignpostMetric) SignpostName() string {
 	_r := x.inner.SignpostName()
@@ -45,6 +47,8 @@ func (x *SignpostMetric) SignpostName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      signpostCategory @abstract      The category associated with this aggregated signpost.
+//
 // SignpostCategory calls the underlying SignpostCategory.
 func (x *SignpostMetric) SignpostCategory() string {
 	_r := x.inner.SignpostCategory()
@@ -54,6 +58,8 @@ func (x *SignpostMetric) SignpostCategory() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property      signpostIntervalData @abstract      A class that encapsulates metrics associated with app specific signpost intervals. @discussion    This property is null when signposts with the associated signpostName and signpostCategory contain no intervals.
+//
 // SignpostIntervalData calls the underlying SignpostIntervalData.
 func (x *SignpostMetric) SignpostIntervalData() *SignpostIntervalData {
 	_r := x.inner.SignpostIntervalData()
@@ -63,6 +69,8 @@ func (x *SignpostMetric) SignpostIntervalData() *SignpostIntervalData {
 	return &SignpostIntervalData{inner: _r}
 }
 
+// @property      totalCount @abstract      The total number of signposts emit with the given signpostName in the aggregation period of the parent payload.
+//
 // TotalCount calls the underlying TotalCount.
 func (x *SignpostMetric) TotalCount() uint {
 	return x.inner.TotalCount()

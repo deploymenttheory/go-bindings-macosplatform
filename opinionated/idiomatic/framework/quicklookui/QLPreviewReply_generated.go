@@ -34,6 +34,8 @@ func PreviewReplyFromID(id objc.ID) *PreviewReply {
 	return &PreviewReply{inner: raw.QLPreviewReplyFromID(id)}
 }
 
+// @abstract Use this method to provide a preview by drawing into a context. @param contextSize The size of your image. @param isBitmap Whether the context should be bitmap or vector. @param drawingBlock The preview should be drawn into the context passed to this block. The QLPreviewReply passed into this block is the same as the one created by this method and is provided for convenience for any further updates to its properties during the drawing block. Return YES if the preview was successfully drawn into the context. Return NO and populate error otherwise.
+//
 // NewPreviewReplyWithContextSizeIsBitmapDrawingBlock creates a new [PreviewReply].
 func NewPreviewReplyWithContextSizeIsBitmapDrawingBlock(contextSize corefoundation.CGSize, isBitmap bool, drawingBlock func(unsafe.Pointer, *raw.QLPreviewReply, unsafe.Pointer) bool) *PreviewReply {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QLPreviewReply")), objc.RegisterName("alloc"))
@@ -41,6 +43,8 @@ func NewPreviewReplyWithContextSizeIsBitmapDrawingBlock(contextSize corefoundati
 	return &PreviewReply{inner: raw.QLPreviewReplyFromID(_id)}
 }
 
+// @abstract Use this method to provide a preview by providing a URL to a file of a supported type. @param fileURL  A file URL representing a preview of the previewed URL. Currently supported types include: UTTypeImage, UTTypePDF, UTTypeHTML, UTTypeXML, UTTypePlainText, UTTypeRTF, UTTypeRTFD, UTTypeMovie, UTTypeAudio
+//
 // NewPreviewReplyWithFileURL creates a new [PreviewReply].
 func NewPreviewReplyWithFileURL(fileURL string) *PreviewReply {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QLPreviewReply")), objc.RegisterName("alloc"))
@@ -55,6 +59,8 @@ func NewPreviewReplyWithDataOfContentTypeContentSizeDataCreationBlock(contentTyp
 	return &PreviewReply{inner: raw.QLPreviewReplyFromID(_id)}
 }
 
+// @abstract Use this method to provide a preview with a PDFDocument @param defaultPageSize The size of your pages in the document. If the page size varies, use the first page's size. @param documentCreationBlock Create and return the PDFDocument. Heavy lifting should be done inside of the documentCreationBlock instead of when creating the QLPreviewReply. The QLPreviewReply passed into this block is the same as the one created by this method and is provided for convenience for any further updates to its properties during document creation. Return the PDFDocument if successfully created. Populate error if unsuccessful.
+//
 // NewPreviewReplyForPDFWithPageSizeDocumentCreationBlock creates a new [PreviewReply].
 func NewPreviewReplyForPDFWithPageSizeDocumentCreationBlock(defaultPageSize corefoundation.CGSize, documentCreationBlock objc.Block) *PreviewReply {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QLPreviewReply")), objc.RegisterName("alloc"))
@@ -62,24 +68,32 @@ func NewPreviewReplyForPDFWithPageSizeDocumentCreationBlock(defaultPageSize core
 	return &PreviewReply{inner: raw.QLPreviewReplyFromID(_id)}
 }
 
+// String encoding for text or html based previews. Defaults to NSUTF8StringEncoding.
+//
 // WithStringEncoding sets the stringEncoding property and returns the receiver for chaining.
 func (x *PreviewReply) WithStringEncoding(stringEncoding uint) *PreviewReply {
 	x.inner.SetStringEncoding(stringEncoding)
 	return x
 }
 
+// Attachments for HTML data previews. The keys of the dictionary are the attachment identifiers (eg foo) that can be referenced with the cid:id URL (eg cid:foo).
+//
 // WithAttachments sets the attachments property and returns the receiver for chaining.
 func (x *PreviewReply) WithAttachments(attachments *foundation.NSDictionary[*foundation.NSString, *raw.QLPreviewReplyAttachment]) *PreviewReply {
 	x.inner.SetAttachments(attachments)
 	return x
 }
 
+// Custom display title for the preview. If left as the empty string, QuickLook will use the file name.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *PreviewReply) WithTitle(title string) *PreviewReply {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// String encoding for text or html based previews. Defaults to NSUTF8StringEncoding.
+//
 // StringEncoding calls the underlying StringEncoding.
 func (x *PreviewReply) StringEncoding() uint {
 	return x.inner.StringEncoding()
@@ -90,6 +104,8 @@ func (x *PreviewReply) SetStringEncoding(stringEncoding uint) {
 	x.inner.SetStringEncoding(stringEncoding)
 }
 
+// Attachments for HTML data previews. The keys of the dictionary are the attachment identifiers (eg foo) that can be referenced with the cid:id URL (eg cid:foo).
+//
 // Attachments calls the underlying Attachments.
 func (x *PreviewReply) Attachments() *foundation.NSDictionary[*foundation.NSString, *raw.QLPreviewReplyAttachment] {
 	return x.inner.Attachments()
@@ -100,6 +116,8 @@ func (x *PreviewReply) SetAttachments(attachments *foundation.NSDictionary[*foun
 	x.inner.SetAttachments(attachments)
 }
 
+// Custom display title for the preview. If left as the empty string, QuickLook will use the file name.
+//
 // Title calls the underlying Title.
 func (x *PreviewReply) Title() string {
 	_r := x.inner.Title()

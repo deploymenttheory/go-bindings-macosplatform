@@ -32,6 +32,8 @@ func MTRXPCDeviceControllerParametersFromID(id objc.ID) *MTRXPCDeviceControllerP
 	return &MTRXPCDeviceControllerParameters{inner: raw.MTRXPCDeviceControllerParametersFromID(id)}
 }
 
+// A controller created from this way will connect to a remote instance of an MTRDeviceController loaded in an XPC Service @param xpcConnectionBlock The XPC Connection block that will return an NSXPCConnection to the intended listener. @param uniqueIdentifier The unique id to assign to the controller.
+//
 // NewMTRXPCDeviceControllerParametersWithXPCConnectionBlockUniqueIdentifier creates a new [MTRXPCDeviceControllerParameters].
 func NewMTRXPCDeviceControllerParametersWithXPCConnectionBlockUniqueIdentifier(xpcConnectionBlock objc.Block, uniqueIdentifier *foundation.NSUUID) *MTRXPCDeviceControllerParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRXPCDeviceControllerParameters")), objc.RegisterName("alloc"))
@@ -46,6 +48,8 @@ func NewMTRXPCDeviceControllerParametersWithXPConnectionBlockUniqueIdentifier(xp
 	return &MTRXPCDeviceControllerParameters{inner: raw.MTRXPCDeviceControllerParametersFromID(_id)}
 }
 
+// Whether the controller should start out suspended. Defaults to NO.
+//
 // WithStartSuspended sets the startSuspended property and returns the receiver for chaining.
 func (x *MTRXPCDeviceControllerParameters) WithStartSuspended(startSuspended bool) *MTRXPCDeviceControllerParameters {
 	x.inner.MTRDeviceControllerAbstractParameters.SetStartSuspended(startSuspended)

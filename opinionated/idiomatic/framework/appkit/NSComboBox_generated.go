@@ -226,6 +226,8 @@ func (x *ComboBox) WithPlaceholderAttributedStrings(items ...*foundation.NSAttri
 	return x
 }
 
+// Specifies the behavior for resolving “NSTextAlignment/natural“ to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `false`.
+//
 // WithResolvesNaturalAlignmentWithBaseWritingDirection sets the resolvesNaturalAlignmentWithBaseWritingDirection property and returns the receiver for chaining.
 func (x *ComboBox) WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *ComboBox {
 	x.inner.NSTextField.SetResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection)
@@ -664,6 +666,8 @@ func (x *ComboBox) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundat
 	return x
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *ComboBox) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ComboBox {
 	x.inner.NSTextField.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)

@@ -38,6 +38,8 @@ func NewCustomCatalog() *CustomCatalog {
 	return &CustomCatalog{inner: raw.SHCustomCatalogFromID(_id)}
 }
 
+// Load a @c SHCustomCatalog from data @param dataRepresentation The data representation of the @c SHCustomCatalog @param error Error populated if not a valid data representation
+//
 // NewCustomCatalogWithDataRepresentationError creates a new [CustomCatalog].
 func NewCustomCatalogWithDataRepresentationError(dataRepresentation *foundation.NSData) (*CustomCatalog, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SHCustomCatalog")), objc.RegisterName("alloc"))
@@ -49,21 +51,38 @@ func NewCustomCatalogWithDataRepresentationError(dataRepresentation *foundation.
 	return &CustomCatalog{inner: raw.SHCustomCatalogFromID(_id)}, nil
 }
 
+// Adds a reference signature and its associated metadata to a catalog. > Note: > This system ignores calls to `addReferenceSignature(_:representing:)` after adding the catalog to an `SHSession`. - Parameters: - signature: The reference signature for the audio recording. - mediaItems: The metadata for the recording.
+//
 // AddReferenceSignatureRepresentingMediaItemsError calls the underlying AddReferenceSignatureRepresentingMediaItemsError.
-func (x *CustomCatalog) AddReferenceSignatureRepresentingMediaItemsError(signature *raw.SHSignature, mediaItems *foundation.NSArray[*raw.SHMediaItem]) (bool, error) {
-	return x.inner.AddReferenceSignatureRepresentingMediaItemsError(signature, mediaItems)
+func (x *CustomCatalog) AddReferenceSignatureRepresentingMediaItemsError(signature *raw.SHSignature, mediaItems ...MediaItemProvider) (bool, error) {
+	_ptrs := make([]objc.ID, len(mediaItems))
+	for _i, _v := range mediaItems {
+		_ptrs[_i] = _v.asMediaItem().Ptr()
+	}
+	var _arg1 *foundation.NSArray[*raw.SHMediaItem]
+	if len(_ptrs) > 0 {
+		_arg1 = foundation.NSArrayFromID[*raw.SHMediaItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	return x.inner.AddReferenceSignatureRepresentingMediaItemsError(signature, _arg1)
 }
 
+// Loads a saved custom catalog from a file. - Parameters: - customCatalogURL: The file URL for a custom catalog. - error: An output value in Objective-C that indicates the type of error; otherwise, `nil`.
+//
 // AddCustomCatalogFromURLError calls the underlying AddCustomCatalogFromURLError.
 func (x *CustomCatalog) AddCustomCatalogFromURLError(customCatalogURL string) (bool, error) {
 	return x.inner.AddCustomCatalogFromURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(customCatalogURL)))
 }
 
+// Saves the custom catalog to a local file. If `destinationURL` is a directory, the system creates a `Signatures.shazamcatalog` file. - Parameters: - destinationURL: A URL for the saved custom catalog file. - error: An output value in Objective-C that indicates the type of error; otherwise, `nil`. - Returns: `YES` if the catalog writes to the file; otherwise, `NO`.
+//
 // WriteToURLError calls the underlying WriteToURLError.
 func (x *CustomCatalog) WriteToURLError(destinationURL string) (bool, error) {
 	return x.inner.WriteToURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(destinationURL)))
 }
 
+// The data representation of this file, it can be written to disk
+//
 // DataRepresentation calls the underlying DataRepresentation.
 func (x *CustomCatalog) DataRepresentation() *foundation.NSData {
 	return x.inner.DataRepresentation()
@@ -74,7 +93,7 @@ func (x *CustomCatalog) asCatalog() *raw.SHCatalog { return &x.inner.SHCatalog }
 // CustomCatalogable is the interface implemented by [CustomCatalog], for mocking and DI.
 type CustomCatalogable interface {
 	Unwrap() *raw.SHCustomCatalog
-	AddReferenceSignatureRepresentingMediaItemsError(signature *raw.SHSignature, mediaItems *foundation.NSArray[*raw.SHMediaItem]) (bool, error)
+	AddReferenceSignatureRepresentingMediaItemsError(signature *raw.SHSignature, mediaItems ...MediaItemProvider) (bool, error)
 	AddCustomCatalogFromURLError(customCatalogURL string) (bool, error)
 	WriteToURLError(destinationURL string) (bool, error)
 	DataRepresentation() *foundation.NSData

@@ -37,30 +37,40 @@ func NewLeaderboardScore() *LeaderboardScore {
 	return &LeaderboardScore{inner: raw.GKLeaderboardScoreFromID(_id)}
 }
 
+// The player who earns the score.
+//
 // WithPlayer sets the player property and returns the receiver for chaining.
 func (x *LeaderboardScore) WithPlayer(player PlayerProvider) *LeaderboardScore {
 	x.inner.SetPlayer(player.asPlayer())
 	return x
 }
 
+// The score that the player earns.
+//
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *LeaderboardScore) WithValue(value int) *LeaderboardScore {
 	x.inner.SetValue(value)
 	return x
 }
 
+// An integer value that your game uses.
+//
 // WithContext sets the context_ property and returns the receiver for chaining.
 func (x *LeaderboardScore) WithContext(context_ uint) *LeaderboardScore {
 	x.inner.SetContext(context_)
 	return x
 }
 
+// The ID that Game Center uses for the leaderboard.
+//
 // WithLeaderboardID sets the leaderboardID property and returns the receiver for chaining.
 func (x *LeaderboardScore) WithLeaderboardID(leaderboardID string) *LeaderboardScore {
 	x.inner.SetLeaderboardID(foundation.NSStringStringWithUTF8String(leaderboardID))
 	return x
 }
 
+// The player who earns the score.
+//
 // Player calls the underlying Player.
 func (x *LeaderboardScore) Player() *Player {
 	_r := x.inner.Player()
@@ -75,6 +85,8 @@ func (x *LeaderboardScore) SetPlayer(player *raw.GKPlayer) {
 	x.inner.SetPlayer(player)
 }
 
+// The score that the player earns.
+//
 // Value calls the underlying Value.
 func (x *LeaderboardScore) Value() int {
 	return x.inner.Value()
@@ -85,6 +97,8 @@ func (x *LeaderboardScore) SetValue(value int) {
 	x.inner.SetValue(value)
 }
 
+// An integer value that your game uses.
+//
 // Context calls the underlying Context.
 func (x *LeaderboardScore) Context() uint {
 	return x.inner.Context()
@@ -95,6 +109,8 @@ func (x *LeaderboardScore) SetContext(context_ uint) {
 	x.inner.SetContext(context_)
 }
 
+// The ID that Game Center uses for the leaderboard.
+//
 // LeaderboardID calls the underlying LeaderboardID.
 func (x *LeaderboardScore) LeaderboardID() string {
 	_r := x.inner.LeaderboardID()

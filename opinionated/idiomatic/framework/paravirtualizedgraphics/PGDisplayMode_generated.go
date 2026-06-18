@@ -29,6 +29,8 @@ func PGDisplayModeFromID(id objc.ID) *PGDisplayMode {
 	return &PGDisplayMode{inner: raw.PGDisplayModeFromID(id)}
 }
 
+// @method initWithSizeInPixels:refreshRateInHz @abstract Used to conjure up display mode objects (to be arranged into NSArrays for modeList). @param sizeInPixels Width/height of supported display mode. @param refreshRateInHz Refresh rate of supported display mode.
+//
 // NewPGDisplayModeWithSizeInPixelsRefreshRateInHz creates a new [PGDisplayMode].
 func NewPGDisplayModeWithSizeInPixelsRefreshRateInHz(sizeInPixels raw.PGDisplayCoord_t, refreshRateInHz float64) *PGDisplayMode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PGDisplayMode")), objc.RegisterName("alloc"))
@@ -36,11 +38,15 @@ func NewPGDisplayModeWithSizeInPixelsRefreshRateInHz(sizeInPixels raw.PGDisplayC
 	return &PGDisplayMode{inner: raw.PGDisplayModeFromID(_id)}
 }
 
+// @property sizeInPixels @abstract Width/height of supported display mode.
+//
 // SizeInPixels calls the underlying SizeInPixels.
 func (x *PGDisplayMode) SizeInPixels() raw.PGDisplayCoord_t {
 	return x.inner.SizeInPixels()
 }
 
+// @property refreshRateInHz @abstract refreshRate of supported display mode.  Consider only supplying modes using a refreshRate equal to that of host OS's physical display where representation is ultimately shown.
+//
 // RefreshRate calls the underlying RefreshRate.
 func (x *PGDisplayMode) RefreshRate() float64 {
 	return x.inner.RefreshRate()

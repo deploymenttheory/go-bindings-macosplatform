@@ -111,6 +111,8 @@ func (x *MutableAttributedString) MutableString() *MutableString {
 	return &MutableString{inner: _r}
 }
 
+// Formats the specified string and arguments with the current locale, then appends the result to the receiver.
+//
 // AppendLocalizedFormat calls the underlying AppendLocalizedFormat.
 func (x *MutableAttributedString) AppendLocalizedFormat(format *raw.NSAttributedString) {
 	x.inner.AppendLocalizedFormat(format)

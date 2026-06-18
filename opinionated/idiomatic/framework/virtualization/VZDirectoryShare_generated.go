@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class for a directory share.
+//
 // DirectoryShare wraps [raw.VZDirectoryShare] with a fluent Go API.
 type DirectoryShare struct {
 	inner *raw.VZDirectoryShare

@@ -38,18 +38,24 @@ func NewVSSubscription() *VSSubscription {
 	return &VSSubscription{inner: raw.VSSubscriptionFromID(_id)}
 }
 
+// After this point in time, the subscription will be considered inactive. If the current subscription becomes inactive, the system will behave as though the user is not subscribed at all, i.e. as though the registration center's current subscription had been set to nil. Defaults to distantFuture. Providing a value is useful in a limited number of scenarios, e.g. when the a subscriber decides not to renew their subscription, you should provide an expiration date that corresponds to the point in time when the final billing cycle will end. This might also be useful if the subscription only grants access to content that is time-limited, e.g. a single season of games for a sports league.
+//
 // WithExpirationDate sets the expirationDate property and returns the receiver for chaining.
 func (x *VSSubscription) WithExpirationDate(expirationDate *foundation.NSDate) *VSSubscription {
 	x.inner.SetExpirationDate(expirationDate)
 	return x
 }
 
+// Describes the level of access the subscriber has to your catalog of content. It is an error to provide a subscription with an unknown access level as the current subscription.  Instead, choose the access level that describes the content that the subscriber can play.
+//
 // WithAccessLevel sets the accessLevel property and returns the receiver for chaining.
 func (x *VSSubscription) WithAccessLevel(accessLevel VSSubscriptionAccessLevel) *VSSubscription {
 	x.inner.SetAccessLevel(raw.VSSubscriptionAccessLevel(accessLevel))
 	return x
 }
 
+// Identifies a subset of content from your catalog that subscriber can play. Only provide values that are used in your availability feed's tier restrictions.
+//
 // WithTierIdentifiers sets the collection, converting the Go slice to an NSArray.
 func (x *VSSubscription) WithTierIdentifiers(items ...*foundation.NSString) *VSSubscription {
 	if len(items) == 0 {
@@ -68,12 +74,16 @@ func (x *VSSubscription) WithTierIdentifiers(items ...*foundation.NSString) *VSS
 	return x
 }
 
+// Identifies the billing group associated with the subscription.  May be used, for example, to restrict content availability based on the proximity of the billing address to a specific venue.
+//
 // WithBillingIdentifier sets the billingIdentifier property and returns the receiver for chaining.
 func (x *VSSubscription) WithBillingIdentifier(billingIdentifier string) *VSSubscription {
 	x.inner.SetBillingIdentifier(foundation.NSStringStringWithUTF8String(billingIdentifier))
 	return x
 }
 
+// After this point in time, the subscription will be considered inactive. If the current subscription becomes inactive, the system will behave as though the user is not subscribed at all, i.e. as though the registration center's current subscription had been set to nil. Defaults to distantFuture. Providing a value is useful in a limited number of scenarios, e.g. when the a subscriber decides not to renew their subscription, you should provide an expiration date that corresponds to the point in time when the final billing cycle will end. This might also be useful if the subscription only grants access to content that is time-limited, e.g. a single season of games for a sports league.
+//
 // ExpirationDate calls the underlying ExpirationDate.
 func (x *VSSubscription) ExpirationDate() *foundation.NSDate {
 	return x.inner.ExpirationDate()
@@ -84,6 +94,8 @@ func (x *VSSubscription) SetExpirationDate(expirationDate *foundation.NSDate) {
 	x.inner.SetExpirationDate(expirationDate)
 }
 
+// Describes the level of access the subscriber has to your catalog of content. It is an error to provide a subscription with an unknown access level as the current subscription.  Instead, choose the access level that describes the content that the subscriber can play.
+//
 // AccessLevel calls the underlying AccessLevel.
 func (x *VSSubscription) AccessLevel() VSSubscriptionAccessLevel {
 	return VSSubscriptionAccessLevel(x.inner.AccessLevel())
@@ -94,6 +106,8 @@ func (x *VSSubscription) SetAccessLevel(accessLevel VSSubscriptionAccessLevel) {
 	x.inner.SetAccessLevel(raw.VSSubscriptionAccessLevel(accessLevel))
 }
 
+// Identifies a subset of content from your catalog that subscriber can play. Only provide values that are used in your availability feed's tier restrictions.
+//
 // TierIdentifiers returns the collection as a Go slice.
 func (x *VSSubscription) TierIdentifiers() []string {
 	arr := x.inner.TierIdentifiers()
@@ -110,6 +124,8 @@ func (x *VSSubscription) SetTierIdentifiers(tierIdentifiers *foundation.NSArray[
 	x.inner.SetTierIdentifiers(tierIdentifiers)
 }
 
+// Identifies the billing group associated with the subscription.  May be used, for example, to restrict content availability based on the proximity of the billing address to a specific venue.
+//
 // BillingIdentifier calls the underlying BillingIdentifier.
 func (x *VSSubscription) BillingIdentifier() string {
 	_r := x.inner.BillingIdentifier()

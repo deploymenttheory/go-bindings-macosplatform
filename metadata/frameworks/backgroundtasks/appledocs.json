@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "framework": "BackgroundTasks",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "BGAppRefreshTask": {
+      "doc": "An object representing a short task typically used to refresh content that’s run while the app is in the background.",
+      "url": "https://developer.apple.com/documentation/backgroundtasks/bgapprefreshtask"
+    },
+    "BGAppRefreshTaskRequest": {
+      "doc": "A request to launch your app in the background to execute a short refresh task.",
+      "url": "https://developer.apple.com/documentation/backgroundtasks/bgapprefreshtaskrequest"
+    },
+    "BGContinuedProcessingTask": {
+      "doc": "A task that starts in the foreground and can continue running in the background as needed.",
+      "url": "https://developer.apple.com/documentation/backgroundtasks/bgcontinuedprocessingtask"
+    },
+    "BGContinuedProcessingTaskRequest": {
+      "doc": "A request for a workload that the system continues processing even if a person backgrounds the app.",
+      "url": "https://developer.apple.com/documentation/backgroundtasks/bgcontinuedprocessingtaskrequest"
+    },
+    "BGHealthResearchTask": {
+      "doc": "A time-consuming, necessary processing task that runs while the app is in the background to prepare data essential to a health research study.",
+      "url": "https://developer.apple.com/documentation/backgroundtasks/bghealthresearchtask"
+    },
+    "BGHealthResearchTaskRequest": {
+      "doc": "A request to launch your app in the background to execute processing for a health research study in which a user participates.",
+      "url": "https://developer.apple.com/documentation/backgroundtasks/bghealthresearchtaskrequest"
+    },
+    "BGProcessingTask": {
+      "doc": "A time-consuming processing task that runs while the app is in the background.",
+      "url": "https://developer.apple.com/documentation/backgroundtasks/bgprocessingtask"
+    },
+    "BGProcessingTaskRequest": {
+      "doc": "A request to launch your app in the background to execute a processing task that can take minutes to complete.",
+      "url": "https://developer.apple.com/documentation/backgroundtasks/bgprocessingtaskrequest"
+    },
+    "BGTask": {
+      "doc": "An abstract class for the framework’s tasks.",
+      "url": "https://developer.apple.com/documentation/backgroundtasks/bgtask"
+    },
+    "BGTaskRequest": {
+      "doc": "An abstract class for representing task requests.",
+      "url": "https://developer.apple.com/documentation/backgroundtasks/bgtaskrequest"
+    },
+    "BGTaskScheduler": {
+      "doc": "A class for scheduling tasks that add background support to your app’s most critical work.",
+      "url": "https://developer.apple.com/documentation/backgroundtasks/bgtaskscheduler"
+    }
+  },
+  "enums": {
+    "BGTaskSchedulerErrorCode": {
+      "doc": "An enumeration of the task scheduling errors.",
+      "url": "https://developer.apple.com/documentation/backgroundtasks/bgtaskschedulererrorcode"
+    }
+  },
+  "methods": {
+    "BGAppRefreshTaskRequest": {
+      "-initWithIdentifier:": {
+        "doc": "Return a new refresh task request for the specified identifier.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgapprefreshtaskrequest/init(identifier:)"
+      }
+    },
+    "BGContinuedProcessingTask": {
+      "-updateTitle:subtitle:": {
+        "doc": "Update the task title and subtitle that the system displays to a person.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgcontinuedprocessingtask/updatetitle(_:subtitle:)"
+      }
+    },
+    "BGContinuedProcessingTaskRequest": {
+      "-initWithIdentifier:title:subtitle:": {
+        "doc": "Creates an instance on behalf of the currently foregrounded app.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgcontinuedprocessingtaskrequest/init(identifier:title:subtitle:)"
+      }
+    },
+    "BGProcessingTaskRequest": {
+      "-initWithIdentifier:": {
+        "doc": "Return a new processing task request for the specified identifier.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgprocessingtaskrequest/init(identifier:)"
+      }
+    },
+    "BGTask": {
+      "-setTaskCompletedWithSuccess:": {
+        "doc": "Informs the background task scheduler that the task is complete.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgtask/settaskcompleted(success:)"
+      }
+    },
+    "BGTaskScheduler": {
+      "-cancelAllTaskRequests": {
+        "doc": "Cancel all scheduled task requests.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgtaskscheduler/cancelalltaskrequests()"
+      },
+      "-cancelTaskRequestWithIdentifier:": {
+        "doc": "Cancel a previously scheduled task request.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgtaskscheduler/cancel(taskrequestwithidentifier:)"
+      },
+      "-getPendingTaskRequestsWithCompletionHandler:": {
+        "doc": "Request a list of unexecuted scheduled task requests.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgtaskscheduler/getpendingtaskrequests(completionhandler:)"
+      },
+      "-registerForTaskWithIdentifier:usingQueue:launchHandler:": {
+        "doc": "Register a launch handler for the task with the associated identifier that’s executed on the specified queue.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgtaskscheduler/register(fortaskwithidentifier:using:launchhandler:)"
+      },
+      "-submitTaskRequest:completionHandler:": {
+        "doc": "Submits a background task request to be scheduled with a completion handler.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgtaskscheduler/submittaskrequest(_:completionhandler:)"
+      },
+      "-submitTaskRequest:error:": {
+        "doc": "Submit a previously registered background task for execution.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgtaskscheduler/submit(_:)"
+      }
+    }
+  },
+  "properties": {
+    "BGContinuedProcessingTask": {
+      "subtitle": {
+        "doc": "The localized subtitle displayed to a person.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgcontinuedprocessingtask/subtitle"
+      },
+      "title": {
+        "doc": "The localized title displayed to a person.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgcontinuedprocessingtask/title"
+      }
+    },
+    "BGContinuedProcessingTaskRequest": {
+      "BGContinuedProcessingTaskRequestResources": {
+        "doc": "Options that specify additional system resources a background task needs.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgcontinuedprocessingtaskrequest/resources"
+      },
+      "BGContinuedProcessingTaskRequestSubmissionStrategy": {
+        "doc": "The ways your app suggests the system handle your task’s submission under varying conditions.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgcontinuedprocessingtaskrequest/submissionstrategy"
+      },
+      "requiredResources": {
+        "doc": "An option that indicates any special system resources that the task requires.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgcontinuedprocessingtaskrequest/requiredresources"
+      },
+      "strategy": {
+        "doc": "The submission strategy for the scheduler to abide by.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgcontinuedprocessingtaskrequest/strategy"
+      },
+      "subtitle": {
+        "doc": "The localized subtitle displayed to a person.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgcontinuedprocessingtaskrequest/subtitle"
+      },
+      "title": {
+        "doc": "The localized task title displayed to a person.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgcontinuedprocessingtaskrequest/title"
+      }
+    },
+    "BGHealthResearchTaskRequest": {
+      "protectionTypeOfRequiredData": {
+        "doc": "The file protection required to access health research data relevant to complete the task.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bghealthresearchtaskrequest/protectiontypeofrequireddata"
+      }
+    },
+    "BGProcessingTaskRequest": {
+      "requiresExternalPower": {
+        "doc": "A Boolean specifying if the processing task requires a device connected to power.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgprocessingtaskrequest/requiresexternalpower"
+      },
+      "requiresNetworkConnectivity": {
+        "doc": "A Boolean specifying if the processing task requires network connectivity.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgprocessingtaskrequest/requiresnetworkconnectivity"
+      }
+    },
+    "BGTask": {
+      "expirationHandler": {
+        "doc": "A handler called shortly before the task’s background time expires.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgtask/expirationhandler"
+      },
+      "identifier": {
+        "doc": "The string identifier of the task.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgtask/identifier"
+      }
+    },
+    "BGTaskRequest": {
+      "earliestBeginDate": {
+        "doc": "The earliest date and time at which to run the task.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgtaskrequest/earliestbegindate"
+      },
+      "identifier": {
+        "doc": "The identifier of the task associated with the request.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgtaskrequest/identifier"
+      }
+    },
+    "BGTaskScheduler": {
+      "BGTaskScheduler.Error": {
+        "doc": "The Errors for the BGTaskSchedulerError domain.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgtaskscheduler/error"
+      },
+      "BGTaskSchedulerErrorDomain": {
+        "doc": "The background tasks error domain as a string.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgtaskscheduler/errordomain"
+      },
+      "sharedScheduler": {
+        "doc": "The shared background task scheduler instance.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgtaskscheduler/shared"
+      },
+      "supportedResources": {
+        "doc": "Additional system resources that a continuous background task can request.",
+        "url": "https://developer.apple.com/documentation/backgroundtasks/bgtaskscheduler/supportedresources"
+      }
+    }
+  }
+}

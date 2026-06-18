@@ -41,26 +41,36 @@ func (x *SpeechRecognitionTask) Finish() {
 	x.inner.Finish()
 }
 
+// Cancels the current speech recognition task. You can cancel recognition tasks for both prerecorded and live audio input. For example, you might cancel a task in response to a user action or because the recording was interrupted. When canceling a task, be sure to release any resources associated with the task, such as the audio input resources you are using to capture audio samples.
+//
 // Cancel calls the underlying Cancel.
 func (x *SpeechRecognitionTask) Cancel() {
 	x.inner.Cancel()
 }
 
+// The current state of the speech recognition task. Check the value of this property to get the state of the in-progress speech recognition session. For valid values, see “SFSpeechRecognitionTaskState“.
+//
 // State calls the underlying State.
 func (x *SpeechRecognitionTask) State() SFSpeechRecognitionTaskState {
 	return SFSpeechRecognitionTaskState(x.inner.State())
 }
 
+// A Boolean value that indicates whether audio input has stopped. By default, the value of this property is `false`.
+//
 // IsFinishing calls the underlying IsFinishing.
 func (x *SpeechRecognitionTask) IsFinishing() bool {
 	return x.inner.IsFinishing()
 }
 
+// A Boolean value that indicates whether the speech recognition task was canceled. By default, the value of this property is `false`.
+//
 // IsCancelled calls the underlying IsCancelled.
 func (x *SpeechRecognitionTask) IsCancelled() bool {
 	return x.inner.IsCancelled()
 }
 
+// An error object that specifies the error that occurred during a speech recognition task. The system may return one of the errors listed in the table below. | Error Code | Error Domain | Description | |---|---|---| | `102` | `kLSRErrorDomain` | Assets are not installed. | | `201` | `kLSRErrorDomain` | Siri or Dictation is disabled. | | `300` | `kLSRErrorDomain` | Failed to initialize recognizer. | | `301` | `kLSRErrorDomain` | Request was canceled. | | `203` | `kAFAssistantErrorDomain` | Failure occurred during speech recognition. | | `1100` | `kAFAssistantErrorDomain` | Trying to start recognition while an earlier instance is still active. | | `1101` | `kAFAssistantErrorDomain` | Connection to speech process was invalidated. | | `1107` | `kAFAssistantErrorDomain` | Connection to speech process was interrupted. | | `1110` | `kAFAssistantErrorDomain` | Failed to recognize any speech. | | `1700` | `kAFAssistantErrorDomain` | Request is not authorized. |
+//
 // Error calls the underlying Error.
 func (x *SpeechRecognitionTask) Error() unsafe.Pointer {
 	return x.inner.Error()

@@ -37,72 +37,96 @@ func NewRenderPassAttachmentDescriptor() *RenderPassAttachmentDescriptor {
 	return &RenderPassAttachmentDescriptor{inner: raw.MTLRenderPassAttachmentDescriptorFromID(_id)}
 }
 
+// @property texture @abstract The MTLTexture object for this attachment.
+//
 // WithTexture sets the texture property and returns the receiver for chaining.
 func (x *RenderPassAttachmentDescriptor) WithTexture(texture raw.MTLTexture) *RenderPassAttachmentDescriptor {
 	x.inner.SetTexture(texture)
 	return x
 }
 
+// @property level @abstract The mipmap level of the texture to be used for rendering.  Default is zero.
+//
 // WithLevel sets the level property and returns the receiver for chaining.
 func (x *RenderPassAttachmentDescriptor) WithLevel(level uint) *RenderPassAttachmentDescriptor {
 	x.inner.SetLevel(level)
 	return x
 }
 
+// @property slice @abstract The slice of the texture to be used for rendering.  Default is zero.
+//
 // WithSlice sets the slice property and returns the receiver for chaining.
 func (x *RenderPassAttachmentDescriptor) WithSlice(slice uint) *RenderPassAttachmentDescriptor {
 	x.inner.SetSlice(slice)
 	return x
 }
 
+// @property depthPlane @abstract The depth plane of the texture to be used for rendering.  Default is zero.
+//
 // WithDepthPlane sets the depthPlane property and returns the receiver for chaining.
 func (x *RenderPassAttachmentDescriptor) WithDepthPlane(depthPlane uint) *RenderPassAttachmentDescriptor {
 	x.inner.SetDepthPlane(depthPlane)
 	return x
 }
 
+// @property resolveTexture @abstract The texture used for multisample resolve operations.  Only used (and required) if the store action is set to MTLStoreActionMultisampleResolve.
+//
 // WithResolveTexture sets the resolveTexture property and returns the receiver for chaining.
 func (x *RenderPassAttachmentDescriptor) WithResolveTexture(resolveTexture raw.MTLTexture) *RenderPassAttachmentDescriptor {
 	x.inner.SetResolveTexture(resolveTexture)
 	return x
 }
 
+// @property resolveLevel @abstract The mipmap level of the resolve texture to be used for multisample resolve.  Defaults to zero.
+//
 // WithResolveLevel sets the resolveLevel property and returns the receiver for chaining.
 func (x *RenderPassAttachmentDescriptor) WithResolveLevel(resolveLevel uint) *RenderPassAttachmentDescriptor {
 	x.inner.SetResolveLevel(resolveLevel)
 	return x
 }
 
+// @property resolveLevel @abstract The texture slice of the resolve texture to be used for multisample resolve.  Defaults to zero.
+//
 // WithResolveSlice sets the resolveSlice property and returns the receiver for chaining.
 func (x *RenderPassAttachmentDescriptor) WithResolveSlice(resolveSlice uint) *RenderPassAttachmentDescriptor {
 	x.inner.SetResolveSlice(resolveSlice)
 	return x
 }
 
+// @property resolveDepthPlane @abstract The texture depth plane of the resolve texture to be used for multisample resolve.  Defaults to zero.
+//
 // WithResolveDepthPlane sets the resolveDepthPlane property and returns the receiver for chaining.
 func (x *RenderPassAttachmentDescriptor) WithResolveDepthPlane(resolveDepthPlane uint) *RenderPassAttachmentDescriptor {
 	x.inner.SetResolveDepthPlane(resolveDepthPlane)
 	return x
 }
 
+// @property loadAction @abstract The action to be performed with this attachment at the beginning of a render pass.  Default is MTLLoadActionDontCare unless specified by a creation or init method.
+//
 // WithLoadAction sets the loadAction property and returns the receiver for chaining.
 func (x *RenderPassAttachmentDescriptor) WithLoadAction(loadAction MTLLoadAction) *RenderPassAttachmentDescriptor {
 	x.inner.SetLoadAction(raw.MTLLoadAction(loadAction))
 	return x
 }
 
+// @property storeAction @abstract The action to be performed with this attachment at the end of a render pass.  Default is MTLStoreActionDontCare unless specified by a creation or init method.
+//
 // WithStoreAction sets the storeAction property and returns the receiver for chaining.
 func (x *RenderPassAttachmentDescriptor) WithStoreAction(storeAction MTLStoreAction) *RenderPassAttachmentDescriptor {
 	x.inner.SetStoreAction(raw.MTLStoreAction(storeAction))
 	return x
 }
 
+// @property storeActionOptions @abstract Optional configuration for the store action performed with this attachment at the end of a render pass.  Default is MTLStoreActionOptionNone.
+//
 // WithStoreActionOptions sets the storeActionOptions property and returns the receiver for chaining.
 func (x *RenderPassAttachmentDescriptor) WithStoreActionOptions(storeActionOptions MTLStoreActionOptions) *RenderPassAttachmentDescriptor {
 	x.inner.SetStoreActionOptions(raw.MTLStoreActionOptions(storeActionOptions))
 	return x
 }
 
+// @property texture @abstract The MTLTexture object for this attachment.
+//
 // Texture calls the underlying Texture.
 func (x *RenderPassAttachmentDescriptor) Texture() raw.MTLTexture {
 	return x.inner.Texture()
@@ -113,6 +137,8 @@ func (x *RenderPassAttachmentDescriptor) SetTexture(texture raw.MTLTexture) {
 	x.inner.SetTexture(texture)
 }
 
+// @property level @abstract The mipmap level of the texture to be used for rendering.  Default is zero.
+//
 // Level calls the underlying Level.
 func (x *RenderPassAttachmentDescriptor) Level() uint {
 	return x.inner.Level()
@@ -123,6 +149,8 @@ func (x *RenderPassAttachmentDescriptor) SetLevel(level uint) {
 	x.inner.SetLevel(level)
 }
 
+// @property slice @abstract The slice of the texture to be used for rendering.  Default is zero.
+//
 // Slice calls the underlying Slice.
 func (x *RenderPassAttachmentDescriptor) Slice() uint {
 	return x.inner.Slice()
@@ -133,6 +161,8 @@ func (x *RenderPassAttachmentDescriptor) SetSlice(slice uint) {
 	x.inner.SetSlice(slice)
 }
 
+// @property depthPlane @abstract The depth plane of the texture to be used for rendering.  Default is zero.
+//
 // DepthPlane calls the underlying DepthPlane.
 func (x *RenderPassAttachmentDescriptor) DepthPlane() uint {
 	return x.inner.DepthPlane()
@@ -143,6 +173,8 @@ func (x *RenderPassAttachmentDescriptor) SetDepthPlane(depthPlane uint) {
 	x.inner.SetDepthPlane(depthPlane)
 }
 
+// @property resolveTexture @abstract The texture used for multisample resolve operations.  Only used (and required) if the store action is set to MTLStoreActionMultisampleResolve.
+//
 // ResolveTexture calls the underlying ResolveTexture.
 func (x *RenderPassAttachmentDescriptor) ResolveTexture() raw.MTLTexture {
 	return x.inner.ResolveTexture()
@@ -153,6 +185,8 @@ func (x *RenderPassAttachmentDescriptor) SetResolveTexture(resolveTexture raw.MT
 	x.inner.SetResolveTexture(resolveTexture)
 }
 
+// @property resolveLevel @abstract The mipmap level of the resolve texture to be used for multisample resolve.  Defaults to zero.
+//
 // ResolveLevel calls the underlying ResolveLevel.
 func (x *RenderPassAttachmentDescriptor) ResolveLevel() uint {
 	return x.inner.ResolveLevel()
@@ -163,6 +197,8 @@ func (x *RenderPassAttachmentDescriptor) SetResolveLevel(resolveLevel uint) {
 	x.inner.SetResolveLevel(resolveLevel)
 }
 
+// @property resolveLevel @abstract The texture slice of the resolve texture to be used for multisample resolve.  Defaults to zero.
+//
 // ResolveSlice calls the underlying ResolveSlice.
 func (x *RenderPassAttachmentDescriptor) ResolveSlice() uint {
 	return x.inner.ResolveSlice()
@@ -173,6 +209,8 @@ func (x *RenderPassAttachmentDescriptor) SetResolveSlice(resolveSlice uint) {
 	x.inner.SetResolveSlice(resolveSlice)
 }
 
+// @property resolveDepthPlane @abstract The texture depth plane of the resolve texture to be used for multisample resolve.  Defaults to zero.
+//
 // ResolveDepthPlane calls the underlying ResolveDepthPlane.
 func (x *RenderPassAttachmentDescriptor) ResolveDepthPlane() uint {
 	return x.inner.ResolveDepthPlane()
@@ -183,6 +221,8 @@ func (x *RenderPassAttachmentDescriptor) SetResolveDepthPlane(resolveDepthPlane 
 	x.inner.SetResolveDepthPlane(resolveDepthPlane)
 }
 
+// @property loadAction @abstract The action to be performed with this attachment at the beginning of a render pass.  Default is MTLLoadActionDontCare unless specified by a creation or init method.
+//
 // LoadAction calls the underlying LoadAction.
 func (x *RenderPassAttachmentDescriptor) LoadAction() MTLLoadAction {
 	return MTLLoadAction(x.inner.LoadAction())
@@ -193,6 +233,8 @@ func (x *RenderPassAttachmentDescriptor) SetLoadAction(loadAction MTLLoadAction)
 	x.inner.SetLoadAction(raw.MTLLoadAction(loadAction))
 }
 
+// @property storeAction @abstract The action to be performed with this attachment at the end of a render pass.  Default is MTLStoreActionDontCare unless specified by a creation or init method.
+//
 // StoreAction calls the underlying StoreAction.
 func (x *RenderPassAttachmentDescriptor) StoreAction() MTLStoreAction {
 	return MTLStoreAction(x.inner.StoreAction())
@@ -203,6 +245,8 @@ func (x *RenderPassAttachmentDescriptor) SetStoreAction(storeAction MTLStoreActi
 	x.inner.SetStoreAction(raw.MTLStoreAction(storeAction))
 }
 
+// @property storeActionOptions @abstract Optional configuration for the store action performed with this attachment at the end of a render pass.  Default is MTLStoreActionOptionNone.
+//
 // StoreActionOptions calls the underlying StoreActionOptions.
 func (x *RenderPassAttachmentDescriptor) StoreActionOptions() MTLStoreActionOptions {
 	return MTLStoreActionOptions(x.inner.StoreActionOptions())

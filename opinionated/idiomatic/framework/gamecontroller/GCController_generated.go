@@ -36,18 +36,24 @@ func NewController() *Controller {
 	return &Controller{inner: raw.GCControllerFromID(_id)}
 }
 
+// Set this block to be notified when a user intends to suspend or resume the current game state. A controller will have a button dedicated to suspending and resuming play and invoking context sensitive actions. During event handling the system will notify the application using this block such that the application can handle the suspension and resumption from the given controller. Use this to implement your canonical transition to a pause menu for example if that is your application's desired handling of suspension in play. You may pause and resume based on game state as well so the event is only called each time the pause/resume button is pressed. @note This handler has been deprecated in favor of the Menu button found on GCMicroGamepad and GCExtendedGamepad. @see microGamepad @see extendedGamepad
+//
 // WithControllerPausedHandler sets the controllerPausedHandler property and returns the receiver for chaining.
 func (x *Controller) WithControllerPausedHandler(controllerPausedHandler func(*raw.GCController)) *Controller {
 	x.inner.SetControllerPausedHandler(controllerPausedHandler)
 	return x
 }
 
+// A player index for the controller, defaults to GCControllerPlayerIndexUnset. This can be set both for the application to keep track of controllers and as a signal to make a controller display a player index on a set of LEDs or some other mechanism. A controller is not guaranteed to have a visual display of the playerIndex, playerIndex does not persist for a controller with regards to a system. Negative values less than GCControllerPlayerIndexUnset will just map back to GCControllerPlayerIndexUnset when read back.
+//
 // WithPlayerIndex sets the playerIndex property and returns the receiver for chaining.
 func (x *Controller) WithPlayerIndex(playerIndex GCControllerPlayerIndex) *Controller {
 	x.inner.SetPlayerIndex(raw.GCControllerPlayerIndex(playerIndex))
 	return x
 }
 
+// Set this block to be notified when a user intends to suspend or resume the current game state. A controller will have a button dedicated to suspending and resuming play and invoking context sensitive actions. During event handling the system will notify the application using this block such that the application can handle the suspension and resumption from the given controller. Use this to implement your canonical transition to a pause menu for example if that is your application's desired handling of suspension in play. You may pause and resume based on game state as well so the event is only called each time the pause/resume button is pressed. @note This handler has been deprecated in favor of the Menu button found on GCMicroGamepad and GCExtendedGamepad. @see microGamepad @see extendedGamepad
+//
 // ControllerPausedHandler calls the underlying ControllerPausedHandler.
 func (x *Controller) ControllerPausedHandler() objc.Block {
 	return x.inner.ControllerPausedHandler()
@@ -76,11 +82,15 @@ func (x *Controller) SetControllerPausedHandler(ctx context.Context) (*Controlle
 	}
 }
 
+// A controller may be form fitting or otherwise closely attached to the device. This closeness to other inputs on the device may suggest that interaction with the device may use other inputs easily. This is presented to developers to allow them to make informed decisions about UI and interactions to choose for their game in this situation.
+//
 // IsAttachedToDevice calls the underlying IsAttachedToDevice.
 func (x *Controller) IsAttachedToDevice() bool {
 	return x.inner.IsAttachedToDevice()
 }
 
+// A player index for the controller, defaults to GCControllerPlayerIndexUnset. This can be set both for the application to keep track of controllers and as a signal to make a controller display a player index on a set of LEDs or some other mechanism. A controller is not guaranteed to have a visual display of the playerIndex, playerIndex does not persist for a controller with regards to a system. Negative values less than GCControllerPlayerIndexUnset will just map back to GCControllerPlayerIndexUnset when read back.
+//
 // PlayerIndex calls the underlying PlayerIndex.
 func (x *Controller) PlayerIndex() GCControllerPlayerIndex {
 	return GCControllerPlayerIndex(x.inner.PlayerIndex())
@@ -91,6 +101,8 @@ func (x *Controller) SetPlayerIndex(playerIndex GCControllerPlayerIndex) {
 	x.inner.SetPlayerIndex(raw.GCControllerPlayerIndex(playerIndex))
 }
 
+// Gets the input profile for the controller.
+//
 // Input calls the underlying Input.
 func (x *Controller) Input() *ControllerLiveInput {
 	_r := x.inner.Input()
@@ -100,6 +112,8 @@ func (x *Controller) Input() *ControllerLiveInput {
 	return &ControllerLiveInput{inner: _r}
 }
 
+// Gets the battery information if controller supports one This property is useful when you try to notify your user to change or charge controller before it runs out of battery life or simply display the current battery level and status.
+//
 // Battery calls the underlying Battery.
 func (x *Controller) Battery() *DeviceBattery {
 	_r := x.inner.Battery()
@@ -109,6 +123,8 @@ func (x *Controller) Battery() *DeviceBattery {
 	return &DeviceBattery{inner: _r}
 }
 
+// Gets the physical input profile for the controller. @note This is equivalent to the controller's microGamepad, or extendedGamepad instance. @see microGamepad @see extendedGamepad
+//
 // PhysicalInputProfile calls the underlying PhysicalInputProfile.
 func (x *Controller) PhysicalInputProfile() *PhysicalInputProfile {
 	_r := x.inner.PhysicalInputProfile()
@@ -118,6 +134,8 @@ func (x *Controller) PhysicalInputProfile() *PhysicalInputProfile {
 	return &PhysicalInputProfile{inner: _r}
 }
 
+// Gets the profile for the controller that suits current application. There are several supported profiles, with an additional optional profile for motion as well. Each controller may be able to map its inputs into all profiles or just one kind of profile. Query for the controller profile that suits your game, the simplest kind will be supported by the broadest variety of controllers. A controller supporting the Extended Gamepad profile for example supports the Gamepad profile and more. As such it can always be used just in the Gamepad profile if that suits the game. A physical controller that supports a profile must support it completely. That means that all buttons and axis inputs must be valid inputs that a developer can utilize. If a controller does not support the given profile the returned value will be nil. Use this to filter controllers if the application requires a specific kind of profile. @see motion
+//
 // Gamepad calls the underlying Gamepad.
 func (x *Controller) Gamepad() *Gamepad {
 	_r := x.inner.Gamepad()
@@ -145,6 +163,8 @@ func (x *Controller) ExtendedGamepad() *ExtendedGamepad {
 	return &ExtendedGamepad{inner: _r}
 }
 
+// Gets the motion input profile. This profile is optional and may be available if the controller is attached to a device that supports motion. If this is nil the controller does not support motion input and only the gamepad & extendedGamepad profiles are available. @see gamepad @see extendedGamepad
+//
 // Motion calls the underlying Motion.
 func (x *Controller) Motion() *Motion {
 	_r := x.inner.Motion()
@@ -154,6 +174,8 @@ func (x *Controller) Motion() *Motion {
 	return &Motion{inner: _r}
 }
 
+// Gets the light for the controller, if one exists. A controller's light can be used to signal information to the player, such as using different light colors based on the player index. It can also be used to react to in-game events and enhance user immersion.
+//
 // Light calls the underlying Light.
 func (x *Controller) Light() *DeviceLight {
 	_r := x.inner.Light()
@@ -163,6 +185,8 @@ func (x *Controller) Light() *DeviceLight {
 	return &DeviceLight{inner: _r}
 }
 
+// Gets the haptics for the controller, if one exists. Use this property to create CHHapticEngine instances according to your needs. @note Haptics are a drain on the controller's battery, and can be distracting when used excessively.
+//
 // Haptics calls the underlying Haptics.
 func (x *Controller) Haptics() *DeviceHaptics {
 	_r := x.inner.Haptics()
@@ -172,6 +196,8 @@ func (x *Controller) Haptics() *DeviceHaptics {
 	return &DeviceHaptics{inner: _r}
 }
 
+// Polls the state vector of the controller and saves it to a new and writable instance of GCController. If your application is heavily multithreaded this may also be useful to guarantee atomicity of input handling as a snapshot will not change based on user input once it is taken. @see snapshot @return A new controller with the duplicated state vector of the current controller.
+//
 // Capture calls the underlying Capture.
 func (x *Controller) Capture() *Controller {
 	_r := x.inner.Capture()
@@ -181,6 +207,8 @@ func (x *Controller) Capture() *Controller {
 	return &Controller{inner: _r}
 }
 
+// A controller may represent a real device managed by the operating system, or a virtual snapshot created by the developer.  If a controller is created by the developer, it is considered to be a snapshot, allowing direct writes to any GCControllerElement of its profiles.  If the controller is not snapshot, the system will reject any write requests to GCControllerElement. @see controllerWithMicroGamepad @see controllerWithExtendedGamepad @see capture
+//
 // IsSnapshot calls the underlying IsSnapshot.
 func (x *Controller) IsSnapshot() bool {
 	return x.inner.IsSnapshot()

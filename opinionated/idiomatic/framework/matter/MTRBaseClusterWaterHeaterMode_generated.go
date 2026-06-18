@@ -33,6 +33,8 @@ func MTRBaseClusterWaterHeaterModeFromID(id objc.ID) *MTRBaseClusterWaterHeaterM
 	return &MTRBaseClusterWaterHeaterMode{inner: raw.MTRBaseClusterWaterHeaterModeFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterWaterHeaterModeWithDeviceEndpointIDQueue creates a new [MTRBaseClusterWaterHeaterMode].
 func NewMTRBaseClusterWaterHeaterModeWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterWaterHeaterMode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterWaterHeaterMode")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewMTRBaseClusterWaterHeaterModeWithDeviceEndpointIDQueue(device *raw.MTRBa
 	return &MTRBaseClusterWaterHeaterMode{inner: raw.MTRBaseClusterWaterHeaterModeFromID(_id)}
 }
 
+// Command ChangeToMode This command is used to change device modes.
+//
 // ChangeToModeWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterWaterHeaterMode) ChangeToModeWithParamsCompletion(ctx context.Context, params *raw.MTRWaterHeaterModeClusterChangeToModeParams) (*MTRWaterHeaterModeClusterChangeToModeResponseParams, error) {
 	type _result struct {

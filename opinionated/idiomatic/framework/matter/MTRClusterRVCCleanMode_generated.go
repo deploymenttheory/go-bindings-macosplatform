@@ -33,6 +33,8 @@ func MTRClusterRVCCleanModeFromID(id objc.ID) *MTRClusterRVCCleanMode {
 	return &MTRClusterRVCCleanMode{inner: raw.MTRClusterRVCCleanModeFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterRVCCleanModeWithDeviceEndpointIDQueue creates a new [MTRClusterRVCCleanMode].
 func NewMTRClusterRVCCleanModeWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterRVCCleanMode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterRVCCleanMode")), objc.RegisterName("alloc"))

@@ -35,6 +35,8 @@ func MTRBaseClusterIlluminanceMeasurementFromID(id objc.ID) *MTRBaseClusterIllum
 	return &MTRBaseClusterIlluminanceMeasurement{inner: raw.MTRBaseClusterIlluminanceMeasurementFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterIlluminanceMeasurementWithDeviceEndpointIDQueue creates a new [MTRBaseClusterIlluminanceMeasurement].
 func NewMTRBaseClusterIlluminanceMeasurementWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterIlluminanceMeasurement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterIlluminanceMeasurement")), objc.RegisterName("alloc"))

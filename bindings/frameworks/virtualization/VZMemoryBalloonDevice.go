@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// The common behavior for memory devices.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzmemoryballoondevice
 type VZMemoryBalloonDevice struct {
 	foundation.NSObject

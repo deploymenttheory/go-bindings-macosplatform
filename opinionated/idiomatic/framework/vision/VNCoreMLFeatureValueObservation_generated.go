@@ -37,11 +37,15 @@ func NewCoreMLFeatureValueObservation() *CoreMLFeatureValueObservation {
 	return &CoreMLFeatureValueObservation{inner: raw.VNCoreMLFeatureValueObservationFromID(_id)}
 }
 
+// @brief The result VNCoreMLRequest where the model produces an MLFeatureValue that is neither a classification or image. Refer to the Core ML documentation and the model itself for the handling of the content of the featureValue.
+//
 // FeatureValue calls the underlying FeatureValue.
 func (x *CoreMLFeatureValueObservation) FeatureValue() *coreml.MLFeatureValue {
 	return x.inner.FeatureValue()
 }
 
+// @brief The name used in the model description of the CoreML model that produced this observation allowing to correlate the observation back to the output of the model.
+//
 // FeatureName calls the underlying FeatureName.
 func (x *CoreMLFeatureValueObservation) FeatureName() string {
 	_r := x.inner.FeatureName()

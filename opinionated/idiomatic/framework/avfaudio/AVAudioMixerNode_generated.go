@@ -35,12 +35,16 @@ func NewAudioMixerNode() *AudioMixerNode {
 	return &AudioMixerNode{inner: raw.AVAudioMixerNodeFromID(_id)}
 }
 
+// @property outputVolume @abstract The mixer's output volume. @discussion This accesses the mixer's output volume (0.0-1.0, inclusive).
+//
 // WithOutputVolume sets the outputVolume property and returns the receiver for chaining.
 func (x *AudioMixerNode) WithOutputVolume(outputVolume float32) *AudioMixerNode {
 	x.inner.SetOutputVolume(outputVolume)
 	return x
 }
 
+// @property outputVolume @abstract The mixer's output volume. @discussion This accesses the mixer's output volume (0.0-1.0, inclusive).
+//
 // OutputVolume calls the underlying OutputVolume.
 func (x *AudioMixerNode) OutputVolume() float32 {
 	return x.inner.OutputVolume()
@@ -51,6 +55,8 @@ func (x *AudioMixerNode) SetOutputVolume(outputVolume float32) {
 	x.inner.SetOutputVolume(outputVolume)
 }
 
+// @property nextAvailableInputBus @abstract Find an unused input bus. @discussion This will find and return the first input bus to which no other node is connected.
+//
 // NextAvailableInputBus calls the underlying NextAvailableInputBus.
 func (x *AudioMixerNode) NextAvailableInputBus() uint {
 	return x.inner.NextAvailableInputBus()

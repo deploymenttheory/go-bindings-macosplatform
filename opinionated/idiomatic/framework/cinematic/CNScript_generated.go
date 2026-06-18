@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Database of focus decisions with methods to change them. Knows what has been detected in each frame and which detection is being focused on. All operations are executed in a thread-safe manner, but that also means that a long-running update can stall a lookup. Best practice is to lookup what you need up front (outside your critical code) and pass the immutable results to where it's needed. That way, you're not blocked when you access the information, say inside the rendering portion of your code.
+//
 // Script wraps [raw.CNScript] with a fluent Go API.
 type Script struct {
 	inner *raw.CNScript
@@ -38,17 +40,23 @@ func NewScript() *Script {
 	return &Script{inner: raw.CNScriptFromID(_id)}
 }
 
+// The f/number to apply to the entire movie, initially set to that of the recorded movie. Pass this to the rendering session in the rendering frame attributes to match the selected aperture. Change this property when the user selects a different aperture for the edited movie. Changes to this property are reflected in the script changes for later restoration.
+//
 // WithFNumber sets the fNumber property and returns the receiver for chaining.
 func (x *Script) WithFNumber(fNumber float32) *Script {
 	x.inner.SetFNumber(fNumber)
 	return x
 }
 
+// Reload the cinematic script with optional changes applied, removing any previous changes made. This can be more efficient than loading the asset from scratch. - Parameters: - changes: optional changes since asset was recorded. Can be obtained from a previous editing session. If `nil`, the asset is reloaded as originally recorded.
+//
 // ReloadWithChanges calls the underlying ReloadWithChanges.
 func (x *Script) ReloadWithChanges(changes *raw.CNScriptChanges) {
 	x.inner.ReloadWithChanges(changes)
 }
 
+// Changes made since cinematic asset was recorded. Can be used to checkpoint and later restore changes made so far.
+//
 // Changes calls the underlying Changes.
 func (x *Script) Changes() *ScriptChanges {
 	_r := x.inner.Changes()
@@ -58,6 +66,8 @@ func (x *Script) Changes() *ScriptChanges {
 	return &ScriptChanges{inner: _r}
 }
 
+// Changes trimmed and time range shifted to start at zero — for use with a similarly trimmed cinematic asset.
+//
 // ChangesTrimmedByTimeRange calls the underlying ChangesTrimmedByTimeRange.
 func (x *Script) ChangesTrimmedByTimeRange(timeRange coremedia.CMTimeRange) *ScriptChanges {
 	_r := x.inner.ChangesTrimmedByTimeRange(timeRange)
@@ -67,6 +77,8 @@ func (x *Script) ChangesTrimmedByTimeRange(timeRange coremedia.CMTimeRange) *Scr
 	return &ScriptChanges{inner: _r}
 }
 
+// The closest frame to the given time within the given tolerance. Returns `nil` if there are none.
+//
 // FrameAtTimeTolerance calls the underlying FrameAtTimeTolerance.
 func (x *Script) FrameAtTimeTolerance(time_ coremedia.CMTime, tolerance coremedia.CMTime) *ScriptFrame {
 	_r := x.inner.FrameAtTimeTolerance(time_, tolerance)
@@ -76,11 +88,15 @@ func (x *Script) FrameAtTimeTolerance(time_ coremedia.CMTime, tolerance coremedi
 	return &ScriptFrame{inner: _r}
 }
 
+// All frames within the given time range.
+//
 // FramesInTimeRange calls the underlying FramesInTimeRange.
 func (x *Script) FramesInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.CNScriptFrame] {
 	return x.inner.FramesInTimeRange(timeRange)
 }
 
+// The closest decision to the given time within the given tolerance. Returns `nil` if there are none.
+//
 // DecisionAtTimeTolerance calls the underlying DecisionAtTimeTolerance.
 func (x *Script) DecisionAtTimeTolerance(time_ coremedia.CMTime, tolerance coremedia.CMTime) *Decision {
 	_r := x.inner.DecisionAtTimeTolerance(time_, tolerance)
@@ -90,11 +106,15 @@ func (x *Script) DecisionAtTimeTolerance(time_ coremedia.CMTime, tolerance corem
 	return &Decision{inner: _r}
 }
 
+// All decisions within the given time range.
+//
 // DecisionsInTimeRange calls the underlying DecisionsInTimeRange.
 func (x *Script) DecisionsInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.CNDecision] {
 	return x.inner.DecisionsInTimeRange(timeRange)
 }
 
+// The decision that occurs after the given time. Pass the time of an existing decision to find the next one.
+//
 // DecisionAfterTime calls the underlying DecisionAfterTime.
 func (x *Script) DecisionAfterTime(time_ coremedia.CMTime) *Decision {
 	_r := x.inner.DecisionAfterTime(time_)
@@ -104,6 +124,8 @@ func (x *Script) DecisionAfterTime(time_ coremedia.CMTime) *Decision {
 	return &Decision{inner: _r}
 }
 
+// The decision that occurs before the given time. Pass the time of an existing decisions to find the previous one.
+//
 // DecisionBeforeTime calls the underlying DecisionBeforeTime.
 func (x *Script) DecisionBeforeTime(time_ coremedia.CMTime) *Decision {
 	_r := x.inner.DecisionBeforeTime(time_)
@@ -113,6 +135,8 @@ func (x *Script) DecisionBeforeTime(time_ coremedia.CMTime) *Decision {
 	return &Decision{inner: _r}
 }
 
+// The primary decision that is in effect at the specified time, unless if it's outside the time range of the cinematic script. Also represents the decision that is being transitioned away from if the given time is during a focus transition.
+//
 // PrimaryDecisionAtTime calls the underlying PrimaryDecisionAtTime.
 func (x *Script) PrimaryDecisionAtTime(time_ coremedia.CMTime) *Decision {
 	_r := x.inner.PrimaryDecisionAtTime(time_)
@@ -122,6 +146,8 @@ func (x *Script) PrimaryDecisionAtTime(time_ coremedia.CMTime) *Decision {
 	return &Decision{inner: _r}
 }
 
+// The secondary decision that is being transitioned towards if the given time is during a focus transition.
+//
 // SecondaryDecisionAtTime calls the underlying SecondaryDecisionAtTime.
 func (x *Script) SecondaryDecisionAtTime(time_ coremedia.CMTime) *Decision {
 	_r := x.inner.SecondaryDecisionAtTime(time_)
@@ -131,26 +157,36 @@ func (x *Script) SecondaryDecisionAtTime(time_ coremedia.CMTime) *Decision {
 	return &Decision{inner: _r}
 }
 
+// The time range during which the focus transition away from the given decision occurs.
+//
 // TimeRangeOfTransitionAfterDecision calls the underlying TimeRangeOfTransitionAfterDecision.
 func (x *Script) TimeRangeOfTransitionAfterDecision(decision *raw.CNDecision) coremedia.CMTimeRange {
 	return x.inner.TimeRangeOfTransitionAfterDecision(decision)
 }
 
+// The time range during which the focus transition towards the given decision occurs.
+//
 // TimeRangeOfTransitionBeforeDecision calls the underlying TimeRangeOfTransitionBeforeDecision.
 func (x *Script) TimeRangeOfTransitionBeforeDecision(decision *raw.CNDecision) coremedia.CMTimeRange {
 	return x.inner.TimeRangeOfTransitionBeforeDecision(decision)
 }
 
+// All user decisions in the given time range. Includes user decisions made during recording or added to the script.
+//
 // UserDecisionsInTimeRange calls the underlying UserDecisionsInTimeRange.
 func (x *Script) UserDecisionsInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.CNDecision] {
 	return x.inner.UserDecisionsInTimeRange(timeRange)
 }
 
+// All base decisions made automatically during recording in the given time range. These apply if no user decision overrides them.
+//
 // BaseDecisionsInTimeRange calls the underlying BaseDecisionsInTimeRange.
 func (x *Script) BaseDecisionsInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.CNDecision] {
 	return x.inner.BaseDecisionsInTimeRange(timeRange)
 }
 
+// A detection track representing all detections with the given detectionID over the entire cinematic script.
+//
 // DetectionTrackForID calls the underlying DetectionTrackForID.
 func (x *Script) DetectionTrackForID(detectionID int64) *DetectionTrack {
 	_r := x.inner.DetectionTrackForID(detectionID)
@@ -160,6 +196,8 @@ func (x *Script) DetectionTrackForID(detectionID int64) *DetectionTrack {
 	return &DetectionTrack{inner: _r}
 }
 
+// A detection track representing all detections that would be chosen by a given decision.
+//
 // DetectionTrackForDecision calls the underlying DetectionTrackForDecision.
 func (x *Script) DetectionTrackForDecision(decision *raw.CNDecision) *DetectionTrack {
 	_r := x.inner.DetectionTrackForDecision(decision)
@@ -169,36 +207,50 @@ func (x *Script) DetectionTrackForDecision(decision *raw.CNDecision) *DetectionT
 	return &DetectionTrack{inner: _r}
 }
 
+// Add a new user decision. Replaces an existing user decision if the times are identical. Adding a decision can fail if the decision focuses on an detection or group that does not exist or if its time is not within the time range of the cinematic script. - Returns: whether adding was successful
+//
 // AddUserDecision calls the underlying AddUserDecision.
 func (x *Script) AddUserDecision(decision *raw.CNDecision) bool {
 	return x.inner.AddUserDecision(decision)
 }
 
+// Remove an existing user decision. User decisions added to the script or those made at recording time (by tapping during recording) can be removed. Decisions that are not user decisions cannot be removed. - Returns: whether removal was successful
+//
 // RemoveUserDecision calls the underlying RemoveUserDecision.
 func (x *Script) RemoveUserDecision(decision *raw.CNDecision) bool {
 	return x.inner.RemoveUserDecision(decision)
 }
 
+// Remove all user decisions and revert to base decisions only.
+//
 // RemoveAllUserDecisions calls the underlying RemoveAllUserDecisions.
 func (x *Script) RemoveAllUserDecisions() {
 	x.inner.RemoveAllUserDecisions()
 }
 
+// Add user created detection track. - Returns: the detectionID assigned to the added track, which can be used for later lookup or decision creation.
+//
 // AddDetectionTrack calls the underlying AddDetectionTrack.
 func (x *Script) AddDetectionTrack(detectionTrack *raw.CNDetectionTrack) int64 {
 	return x.inner.AddDetectionTrack(detectionTrack)
 }
 
+// Remove user created detection track. Tracks created at recording time cannot be removed. - Returns: whether removal was successful
+//
 // RemoveDetectionTrack calls the underlying RemoveDetectionTrack.
 func (x *Script) RemoveDetectionTrack(detectionTrack *raw.CNDetectionTrack) bool {
 	return x.inner.RemoveDetectionTrack(detectionTrack)
 }
 
+// The time range of the cinematic asset. All frames, decisions, and detections are within this time range.
+//
 // TimeRange calls the underlying TimeRange.
 func (x *Script) TimeRange() coremedia.CMTimeRange {
 	return x.inner.TimeRange()
 }
 
+// The f/number to apply to the entire movie, initially set to that of the recorded movie. Pass this to the rendering session in the rendering frame attributes to match the selected aperture. Change this property when the user selects a different aperture for the edited movie. Changes to this property are reflected in the script changes for later restoration.
+//
 // FNumber calls the underlying FNumber.
 func (x *Script) FNumber() float32 {
 	return x.inner.FNumber()
@@ -209,6 +261,8 @@ func (x *Script) SetFNumber(fNumber float32) {
 	x.inner.SetFNumber(fNumber)
 }
 
+// All detection tracks that have been added since recording.
+//
 // AddedDetectionTracks returns the collection as a Go slice.
 func (x *Script) AddedDetectionTracks() []*DetectionTrack {
 	arr := x.inner.AddedDetectionTracks()

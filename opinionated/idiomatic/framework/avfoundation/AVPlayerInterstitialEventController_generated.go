@@ -35,6 +35,8 @@ func PlayerInterstitialEventControllerFromID(id objc.ID) *PlayerInterstitialEven
 	return &PlayerInterstitialEventController{inner: raw.AVPlayerInterstitialEventControllerFromID(id)}
 }
 
+// This method throws an exception if the primary player is an interstitial player.
+//
 // NewPlayerInterstitialEventControllerWithPrimaryPlayer creates a new [PlayerInterstitialEventController].
 func NewPlayerInterstitialEventControllerWithPrimaryPlayer(primaryPlayer *raw.AVPlayer) *PlayerInterstitialEventController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerInterstitialEventController")), objc.RegisterName("alloc"))
@@ -42,6 +44,8 @@ func NewPlayerInterstitialEventControllerWithPrimaryPlayer(primaryPlayer *raw.AV
 	return &PlayerInterstitialEventController{inner: raw.AVPlayerInterstitialEventControllerFromID(_id)}
 }
 
+// Specifies the current schedule of interstitial events. Setting this property to a non-nil value cancels and overrides all previously scheduled future interstitial events, including those that are intrinsically specified by the content of primary items, such as directives carried by HLS media playlists. Setting it to nil causes its value to be reset in accordance with the content of the current primary item. If you change the value of events during an interstitial event and the current event is not included in the new value of events, the current event is nevertheless allowed to continue until completion. If you wish to cancel the current event, use -cancelCurrentEventWithResumptionOffset:. If interstitial events are scheduled with dates that coincide either with the date of another scheduled interstitial event or with the date range of the primary content that's omitted according to the resumption offset of another scheduled interstitial event, the primary content will remain suspended until all coinciding interstitial events have been completed. The effective resumption offset will be the sum of the resumption offsets of the coinciding interstitial events. (Note that the sum of a numeric CMTime and kCMTimeIndefinite is kCMTimeIndefinite.) If interstitial events are scheduled for the same date, they are ordered according to their position in the events array. The receiver will make a copy of the events that are set on it. Subsequent mutations on the original events will have no effect on the copy. An NSInvalidArgumentException will be raised if an under-specified AVPlayerInterstitialEvent is set, such as one with a nil primaryItem, or with neither a time nor a date.
+//
 // WithEvents sets the collection, converting the Go slice to an NSArray.
 func (x *PlayerInterstitialEventController) WithEvents(items ...*raw.AVPlayerInterstitialEvent) *PlayerInterstitialEventController {
 	if len(items) == 0 {
@@ -60,23 +64,31 @@ func (x *PlayerInterstitialEventController) WithEvents(items ...*raw.AVPlayerInt
 	return x
 }
 
+// The bundle that contains the localized strings to be used by the AVPlayerInterstitialEventController. If the value of the property is nil, any UI elements triggered by the AVPlayerInterstitialEventController, such as the skip button, may contain a generic label based on the implementation of the UI that's in use. To ensure the best available user experience in various playback configurations, including external playback, set a value for this property that provides localized translations of skip control labels.
+//
 // WithLocalizedStringsBundle sets the localizedStringsBundle property and returns the receiver for chaining.
 func (x *PlayerInterstitialEventController) WithLocalizedStringsBundle(localizedStringsBundle *foundation.NSBundle) *PlayerInterstitialEventController {
 	x.inner.SetLocalizedStringsBundle(localizedStringsBundle)
 	return x
 }
 
+// The name of the table in the bundle that contains the localized strings to be used by the AVPlayerInterstitialEventController. If the value of the property is nil, it will default to "Localizable"
+//
 // WithLocalizedStringsTableName sets the localizedStringsTableName property and returns the receiver for chaining.
 func (x *PlayerInterstitialEventController) WithLocalizedStringsTableName(localizedStringsTableName string) *PlayerInterstitialEventController {
 	x.inner.SetLocalizedStringsTableName(foundation.NSStringStringWithUTF8String(localizedStringsTableName))
 	return x
 }
 
+// Causes the playback of any and all interstitial content currently in progress to be abandoned and the playback of primary content to be resumed. If invoked during the handling of coinciding interstitial events, they will all be canceled. When you cancel interstitial events via the use of this method, the value of resumptionOffset that you pass overrides the events' resumptionOffset. Has no effect while currentEvent is nil. - Parameter resumptionOffset: Specifies the offset in time at which playback of the primary player's current item should resume after interstitial playback has finished. To specify that the effective resumption time offset should match with the wallclock time elapsed during interstitial playback, pass a value of kCMTimeIndefinite. To specify that the effective resumption time offset should match with the projected playback time, pass a value of kCMTimeInvalid.
+//
 // CancelCurrentEventWithResumptionOffset calls the underlying CancelCurrentEventWithResumptionOffset.
 func (x *PlayerInterstitialEventController) CancelCurrentEventWithResumptionOffset(resumptionOffset coremedia.CMTime) {
 	x.inner.CancelCurrentEventWithResumptionOffset(resumptionOffset)
 }
 
+// Causes the playback of the currently playing interstital event to be abandoned. Note that coinciding events will NOT be skipped. This results in AVPlayerInterstitialEventMonitorCurrentEventSkippedNotification being posted. Has no effect while the currentEvent is nil.
+//
 // SkipCurrentEvent calls the underlying SkipCurrentEvent.
 func (x *PlayerInterstitialEventController) SkipCurrentEvent() {
 	x.inner.SkipCurrentEvent()
@@ -87,6 +99,8 @@ func (x *PlayerInterstitialEventController) SetEvents(events *foundation.NSArray
 	x.inner.SetEvents(events)
 }
 
+// The bundle that contains the localized strings to be used by the AVPlayerInterstitialEventController. If the value of the property is nil, any UI elements triggered by the AVPlayerInterstitialEventController, such as the skip button, may contain a generic label based on the implementation of the UI that's in use. To ensure the best available user experience in various playback configurations, including external playback, set a value for this property that provides localized translations of skip control labels.
+//
 // LocalizedStringsBundle calls the underlying LocalizedStringsBundle.
 func (x *PlayerInterstitialEventController) LocalizedStringsBundle() *foundation.NSBundle {
 	return x.inner.LocalizedStringsBundle()
@@ -97,6 +111,8 @@ func (x *PlayerInterstitialEventController) SetLocalizedStringsBundle(localizedS
 	x.inner.SetLocalizedStringsBundle(localizedStringsBundle)
 }
 
+// The name of the table in the bundle that contains the localized strings to be used by the AVPlayerInterstitialEventController. If the value of the property is nil, it will default to "Localizable"
+//
 // LocalizedStringsTableName calls the underlying LocalizedStringsTableName.
 func (x *PlayerInterstitialEventController) LocalizedStringsTableName() string {
 	_r := x.inner.LocalizedStringsTableName()

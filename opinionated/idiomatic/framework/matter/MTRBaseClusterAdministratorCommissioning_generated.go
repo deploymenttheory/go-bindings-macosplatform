@@ -35,6 +35,8 @@ func MTRBaseClusterAdministratorCommissioningFromID(id objc.ID) *MTRBaseClusterA
 	return &MTRBaseClusterAdministratorCommissioning{inner: raw.MTRBaseClusterAdministratorCommissioningFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterAdministratorCommissioningWithDeviceEndpointIDQueue creates a new [MTRBaseClusterAdministratorCommissioning].
 func NewMTRBaseClusterAdministratorCommissioningWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterAdministratorCommissioning {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterAdministratorCommissioning")), objc.RegisterName("alloc"))
@@ -49,16 +51,22 @@ func NewMTRBaseClusterAdministratorCommissioningWithDeviceEndpointQueue(device *
 	return &MTRBaseClusterAdministratorCommissioning{inner: raw.MTRBaseClusterAdministratorCommissioningFromID(_id)}
 }
 
+// Command OpenCommissioningWindow This command is used by a current Administrator to instruct a Node to go into commissioning mode.
+//
 // OpenCommissioningWindowWithParamsCompletion calls the underlying OpenCommissioningWindowWithParamsCompletion.
 func (x *MTRBaseClusterAdministratorCommissioning) OpenCommissioningWindowWithParamsCompletion(params *raw.MTRAdministratorCommissioningClusterOpenCommissioningWindowParams, completion func(unsafe.Pointer)) {
 	x.inner.OpenCommissioningWindowWithParamsCompletion(params, completion)
 }
 
+// Command OpenBasicCommissioningWindow This command MAY be used by a current Administrator to instruct a Node to go into commissioning mode, if the node supports the Basic Commissioning Method.
+//
 // OpenBasicCommissioningWindowWithParamsCompletion calls the underlying OpenBasicCommissioningWindowWithParamsCompletion.
 func (x *MTRBaseClusterAdministratorCommissioning) OpenBasicCommissioningWindowWithParamsCompletion(params *raw.MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams, completion func(unsafe.Pointer)) {
 	x.inner.OpenBasicCommissioningWindowWithParamsCompletion(params, completion)
 }
 
+// Command RevokeCommissioning This command is used by a current Administrator to instruct a Node to revoke any active OpenCommissioningWindow or OpenBasicCommissioningWindow command.
+//
 // RevokeCommissioningWithParamsCompletion calls the underlying RevokeCommissioningWithParamsCompletion.
 func (x *MTRBaseClusterAdministratorCommissioning) RevokeCommissioningWithParamsCompletion(params *raw.MTRAdministratorCommissioningClusterRevokeCommissioningParams, completion func(unsafe.Pointer)) {
 	x.inner.RevokeCommissioningWithParamsCompletion(params, completion)

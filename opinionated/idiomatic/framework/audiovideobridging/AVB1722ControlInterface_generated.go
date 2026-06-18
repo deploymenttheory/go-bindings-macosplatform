@@ -31,6 +31,8 @@ func AVB1722ControlInterfaceFromID(id objc.ID) *AVB1722ControlInterface {
 	return &AVB1722ControlInterface{inner: raw.AVB1722ControlInterfaceFromID(id)}
 }
 
+// @method		initWithInterfaceName: @abstract	Initializes the receiver to work with a 1722 control service on the specified interface. The client must have previously be requested to load on the interface. @param		anInterfaceName	The BSD name of the interface on which to create the object. @result		The initialized receiver.
+//
 // NewAVB1722ControlInterfaceWithInterfaceName creates a new [AVB1722ControlInterface].
 func NewAVB1722ControlInterfaceWithInterfaceName(anInterfaceName string) *AVB1722ControlInterface {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVB1722ControlInterface")), objc.RegisterName("alloc"))
@@ -38,6 +40,8 @@ func NewAVB1722ControlInterfaceWithInterfaceName(anInterfaceName string) *AVB172
 	return &AVB1722ControlInterface{inner: raw.AVB1722ControlInterfaceFromID(_id)}
 }
 
+// @method		initWithInterface: @abstract	Initializes the receiver to work with a 1722 control service on the specified interface. The client must have previously be requested to load on the interface. @param		anInterface	The AVBInterface object of the interface on which to create the object. @result		The initialized receiver.
+//
 // NewAVB1722ControlInterfaceWithInterface creates a new [AVB1722ControlInterface].
 func NewAVB1722ControlInterfaceWithInterface(anInterface *raw.AVBInterface) *AVB1722ControlInterface {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVB1722ControlInterface")), objc.RegisterName("alloc"))
@@ -54,6 +58,8 @@ func (x *AVB1722ControlInterface) InterfaceName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property	interface @abstract	The AVBInterface object which owns this object. This may be nil if it was not created by an instance of AVBInterface
+//
 // Interface calls the underlying Interface.
 func (x *AVB1722ControlInterface) Interface() *Interface {
 	_r := x.inner.Interface()

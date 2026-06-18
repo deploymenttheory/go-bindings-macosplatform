@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// This object represents the client data for a public key credential request, as defined in the WebAuthentication standard.
+//
 // PublicKeyCredentialClientData wraps [raw.ASPublicKeyCredentialClientData] with a fluent Go API.
 type PublicKeyCredentialClientData struct {
 	inner *raw.ASPublicKeyCredentialClientData
@@ -38,30 +40,40 @@ func NewPublicKeyCredentialClientDataWithChallengeOrigin(challenge *foundation.N
 	return &PublicKeyCredentialClientData{inner: raw.ASPublicKeyCredentialClientDataFromID(_id)}
 }
 
+// The challenge to be signed during the operation.
+//
 // WithChallenge sets the challenge property and returns the receiver for chaining.
 func (x *PublicKeyCredentialClientData) WithChallenge(challenge *foundation.NSData) *PublicKeyCredentialClientData {
 	x.inner.SetChallenge(challenge)
 	return x
 }
 
+// The origin for where the request was performed.
+//
 // WithOrigin sets the origin property and returns the receiver for chaining.
 func (x *PublicKeyCredentialClientData) WithOrigin(origin string) *PublicKeyCredentialClientData {
 	x.inner.SetOrigin(foundation.NSStringStringWithUTF8String(origin))
 	return x
 }
 
+// The top-level origin, if applicable.
+//
 // WithTopOrigin sets the topOrigin property and returns the receiver for chaining.
 func (x *PublicKeyCredentialClientData) WithTopOrigin(topOrigin string) *PublicKeyCredentialClientData {
 	x.inner.SetTopOrigin(foundation.NSStringStringWithUTF8String(topOrigin))
 	return x
 }
 
+// Indicates whether this is a cross-origin request, if applicable.
+//
 // WithCrossOrigin sets the crossOrigin property and returns the receiver for chaining.
 func (x *PublicKeyCredentialClientData) WithCrossOrigin(crossOrigin ASPublicKeyCredentialClientDataCrossOriginValue) *PublicKeyCredentialClientData {
 	x.inner.SetCrossOrigin(raw.ASPublicKeyCredentialClientDataCrossOriginValue(crossOrigin))
 	return x
 }
 
+// The challenge to be signed during the operation.
+//
 // Challenge calls the underlying Challenge.
 func (x *PublicKeyCredentialClientData) Challenge() *foundation.NSData {
 	return x.inner.Challenge()
@@ -72,6 +84,8 @@ func (x *PublicKeyCredentialClientData) SetChallenge(challenge *foundation.NSDat
 	x.inner.SetChallenge(challenge)
 }
 
+// The origin for where the request was performed.
+//
 // Origin calls the underlying Origin.
 func (x *PublicKeyCredentialClientData) Origin() string {
 	_r := x.inner.Origin()
@@ -86,6 +100,8 @@ func (x *PublicKeyCredentialClientData) SetOrigin(origin string) {
 	x.inner.SetOrigin(foundation.NSStringStringWithUTF8String(origin))
 }
 
+// The top-level origin, if applicable.
+//
 // TopOrigin calls the underlying TopOrigin.
 func (x *PublicKeyCredentialClientData) TopOrigin() string {
 	_r := x.inner.TopOrigin()
@@ -100,6 +116,8 @@ func (x *PublicKeyCredentialClientData) SetTopOrigin(topOrigin string) {
 	x.inner.SetTopOrigin(foundation.NSStringStringWithUTF8String(topOrigin))
 }
 
+// Indicates whether this is a cross-origin request, if applicable.
+//
 // CrossOrigin calls the underlying CrossOrigin.
 func (x *PublicKeyCredentialClientData) CrossOrigin() ASPublicKeyCredentialClientDataCrossOriginValue {
 	return ASPublicKeyCredentialClientDataCrossOriginValue(x.inner.CrossOrigin())

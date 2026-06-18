@@ -36,6 +36,8 @@ func NewLivePhoto() *LivePhoto {
 	return &LivePhoto{inner: raw.PHLivePhotoFromID(_id)}
 }
 
+// The dimensions of the live photo measured in pixels.
+//
 // Size calls the underlying Size.
 func (x *LivePhoto) Size() corefoundation.CGSize {
 	return x.inner.Size()

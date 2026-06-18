@@ -45,6 +45,8 @@ func NewTemporalAAWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTL
 	return &TemporalAA{inner: raw.MPSTemporalAAFromID(_id)}
 }
 
+// @brief How much to blend the current frame with the previous frame during temporal antialiasing. The final value is given by current * blendFactor + previous * (1 - blendFactor). Must be between zero and one, inclusive. Defaults to 0.1.
+//
 // WithBlendFactor sets the blendFactor property and returns the receiver for chaining.
 func (x *TemporalAA) WithBlendFactor(blendFactor float32) *TemporalAA {
 	x.inner.SetBlendFactor(blendFactor)
@@ -56,11 +58,15 @@ func (x *TemporalAA) EncodeWithCoder(coder *foundation.NSCoder) {
 	x.inner.EncodeWithCoder(coder)
 }
 
+// @brief Encode temporal antialiasing a command buffer @discussion The motion vector texture must be at least a two channel texture representing how many texels each texel in the source image(s) have moved since the previous frame. The remaining channels will be ignored if present. This texture may be nil, in which case the motion vector is assumed to be zero, which is suitable for static images. The depth texture must contain the depth values for directly visible geometry for the current frame for each pixel. The first channel must store the depth value from zero to infinity. The depth texture may be nil, but this will prevent motion vectors from being dilated and may introduce aliasing along silhouette edges. The destination texture should be used as the previous texture in the next frame. @param commandBuffer       Command buffer to encode into @param sourceTexture       Current frame to denoise @param previousTexture     Previous denoised frame to reproject into current frame @param destinationTexture  Output blended image @param motionVectorTexture Motion vector texture @param depthTexture        The depth values for the current frame
+//
 // EncodeToCommandBufferSourceTexturePreviousTextureDestinationTextureMotionVectorTextureDepthTexture calls the underlying EncodeToCommandBufferSourceTexturePreviousTextureDestinationTextureMotionVectorTextureDepthTexture.
 func (x *TemporalAA) EncodeToCommandBufferSourceTexturePreviousTextureDestinationTextureMotionVectorTextureDepthTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, previousTexture metal.MTLTexture, destinationTexture metal.MTLTexture, motionVectorTexture metal.MTLTexture, depthTexture metal.MTLTexture) {
 	x.inner.EncodeToCommandBufferSourceTexturePreviousTextureDestinationTextureMotionVectorTextureDepthTexture(commandBuffer, sourceTexture, previousTexture, destinationTexture, motionVectorTexture, depthTexture)
 }
 
+// @brief How much to blend the current frame with the previous frame during temporal antialiasing. The final value is given by current * blendFactor + previous * (1 - blendFactor). Must be between zero and one, inclusive. Defaults to 0.1.
+//
 // BlendFactor calls the underlying BlendFactor.
 func (x *TemporalAA) BlendFactor() float32 {
 	return x.inner.BlendFactor()

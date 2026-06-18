@@ -36,6 +36,8 @@ func NewNWBonjourServiceEndpoint() *NWBonjourServiceEndpoint {
 	return &NWBonjourServiceEndpoint{inner: raw.NWBonjourServiceEndpointFromID(_id)}
 }
 
+// @property name @discussion The endpoint's Bonjour service name.
+//
 // Name calls the underlying Name.
 func (x *NWBonjourServiceEndpoint) Name() string {
 	_r := x.inner.Name()
@@ -45,6 +47,8 @@ func (x *NWBonjourServiceEndpoint) Name() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property type @discussion The endpoint's Bonjour service type.
+//
 // Type calls the underlying Type.
 func (x *NWBonjourServiceEndpoint) Type() string {
 	_r := x.inner.Type()
@@ -54,6 +58,8 @@ func (x *NWBonjourServiceEndpoint) Type() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property domain @discussion The endpoint's Bonjour service domain.
+//
 // Domain calls the underlying Domain.
 func (x *NWBonjourServiceEndpoint) Domain() string {
 	_r := x.inner.Domain()

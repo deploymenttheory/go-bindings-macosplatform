@@ -39,6 +39,8 @@ func NewAuthorizationSingleSignOnCredential() *AuthorizationSingleSignOnCredenti
 	return &AuthorizationSingleSignOnCredential{inner: raw.ASAuthorizationSingleSignOnCredentialFromID(_id)}
 }
 
+// @abstract A state returned from the AuthenticationServices extension.
+//
 // State calls the underlying State.
 func (x *AuthorizationSingleSignOnCredential) State() string {
 	_r := x.inner.State()
@@ -48,16 +50,22 @@ func (x *AuthorizationSingleSignOnCredential) State() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract An access token used to access other systems with the authorized scopes.
+//
 // AccessToken calls the underlying AccessToken.
 func (x *AuthorizationSingleSignOnCredential) AccessToken() *foundation.NSData {
 	return x.inner.AccessToken()
 }
 
+// @abstract A JSON Web Token (JWT) used to communicate information about the identity of the user in a secure way to the app.
+//
 // IdentityToken calls the underlying IdentityToken.
 func (x *AuthorizationSingleSignOnCredential) IdentityToken() *foundation.NSData {
 	return x.inner.IdentityToken()
 }
 
+// @abstract This value will contain a list of scopes for which the user provided authorization.  These may contain a subset of the requested scopes on @see ASAuthorizationOpenIDRequest.  The application should query this value to identify which scopes were returned as it maybe different from ones requested.
+//
 // AuthorizedScopes returns the collection as a Go slice.
 func (x *AuthorizationSingleSignOnCredential) AuthorizedScopes() []*foundation.NSString {
 	arr := x.inner.AuthorizedScopes()
@@ -69,11 +77,15 @@ func (x *AuthorizationSingleSignOnCredential) AuthorizedScopes() []*foundation.N
 	})
 }
 
+// @abstract The complete AuthenticationServices extension response with the additional outputs used by the specific technology used by the Authorization Server instance and AuthenticationServices Extension. @note for some operations all properties can be null and the response will indicate just successful result of the operation.
+//
 // AuthenticatedResponse calls the underlying AuthenticatedResponse.
 func (x *AuthorizationSingleSignOnCredential) AuthenticatedResponse() *foundation.NSHTTPURLResponse {
 	return x.inner.AuthenticatedResponse()
 }
 
+// @abstract Private SecKeys returned from the AuthenticationServices extension.
+//
 // PrivateKeys calls the underlying PrivateKeys.
 func (x *AuthorizationSingleSignOnCredential) PrivateKeys() *foundation.NSArray[objc.ID] {
 	return x.inner.PrivateKeys()

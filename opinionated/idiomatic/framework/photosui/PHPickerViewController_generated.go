@@ -30,6 +30,8 @@ func PickerViewControllerFromID(id objc.ID) *PickerViewController {
 	return &PickerViewController{inner: raw.PHPickerViewControllerFromID(id)}
 }
 
+// Initializes a new picker with the \c configuration the picker should use.
+//
 // NewPickerViewControllerWithConfiguration creates a new [PickerViewController].
 func NewPickerViewControllerWithConfiguration(configuration *raw.PHPickerConfiguration) *PickerViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHPickerViewController")), objc.RegisterName("alloc"))
@@ -37,42 +39,58 @@ func NewPickerViewControllerWithConfiguration(configuration *raw.PHPickerConfigu
 	return &PickerViewController{inner: raw.PHPickerViewControllerFromID(_id)}
 }
 
+// The delegate to be notified.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *PickerViewController) WithDelegate(delegate raw.PHPickerViewControllerDelegate) *PickerViewController {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Updates the picker using the configuration.
+//
 // UpdatePickerUsingConfiguration calls the underlying UpdatePickerUsingConfiguration.
 func (x *PickerViewController) UpdatePickerUsingConfiguration(configuration *raw.PHPickerUpdateConfiguration) {
 	x.inner.UpdatePickerUsingConfiguration(configuration)
 }
 
+// Deselects selected assets in the picker. @discussion Does nothing if asset identifiers are invalid or not selected, or \c photoLibrary is not specified in the configuration.
+//
 // DeselectAssetsWithIdentifiers calls the underlying DeselectAssetsWithIdentifiers.
 func (x *PickerViewController) DeselectAssetsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString]) {
 	x.inner.DeselectAssetsWithIdentifiers(identifiers)
 }
 
+// Reorders selected assets in the picker. A \c nil \c afterIdentifier means moving to the front. @discussion Does nothing if asset identifiers are invalid or not selected, or \c photoLibrary is not specified in the configuration.
+//
 // MoveAssetWithIdentifierAfterAssetWithIdentifier calls the underlying MoveAssetWithIdentifierAfterAssetWithIdentifier.
 func (x *PickerViewController) MoveAssetWithIdentifierAfterAssetWithIdentifier(identifier string, afterIdentifier string) {
 	x.inner.MoveAssetWithIdentifierAfterAssetWithIdentifier(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(afterIdentifier))
 }
 
+// Scrolls content to the initial position if possible.
+//
 // ScrollToInitialPosition calls the underlying ScrollToInitialPosition.
 func (x *PickerViewController) ScrollToInitialPosition() {
 	x.inner.ScrollToInitialPosition()
 }
 
+// Zooms in content if possible.
+//
 // ZoomIn calls the underlying ZoomIn.
 func (x *PickerViewController) ZoomIn() {
 	x.inner.ZoomIn()
 }
 
+// Zooms out content if possible.
+//
 // ZoomOut calls the underlying ZoomOut.
 func (x *PickerViewController) ZoomOut() {
 	x.inner.ZoomOut()
 }
 
+// The configuration passed in during initialization.
+//
 // Configuration calls the underlying Configuration.
 func (x *PickerViewController) Configuration() *PickerConfiguration {
 	_r := x.inner.Configuration()
@@ -82,11 +100,15 @@ func (x *PickerViewController) Configuration() *PickerConfiguration {
 	return &PickerConfiguration{inner: _r}
 }
 
+// The delegate to be notified.
+//
 // Delegate calls the underlying Delegate.
 func (x *PickerViewController) Delegate() raw.PHPickerViewControllerDelegate {
 	return x.inner.Delegate()
 }
 
+// The delegate to be notified.
+//
 // SetDelegate calls the underlying SetDelegate.
 func (x *PickerViewController) SetDelegate(delegate raw.PHPickerViewControllerDelegate) {
 	x.inner.SetDelegate(delegate)

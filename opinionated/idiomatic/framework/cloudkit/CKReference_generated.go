@@ -29,6 +29,8 @@ func ReferenceFromID(id objc.ID) *Reference {
 	return &Reference{inner: raw.CKReferenceFromID(id)}
 }
 
+// Creates a reference object that points to the record with the specified ID. - Parameters: - recordID: The ID of the target record. This method throws an exception if you specify `nil` for this parameter. - action: The ownership option use between the target record and any records that incorporate this reference object. If you specify the “CKRecord/ReferenceAction/deleteSelf“ option, the record that the `recordID` parameter references becomes the owner of (or acts as the parent of) any objects that use this reference object. For a list of possible values, see “CKRecord/ReferenceAction“. - Returns: An initialized reference object that points to the specified record. Use this method when you have only the ID of the record for the target of a link. You might use this method if you save only the ID of the record to a local data cache. When you create a reference object for use in a search predicate, the predicate ignores the value in the `action` parameter. Search predicates use only the ID of the record during their comparison.
+//
 // NewReferenceWithRecordIDAction creates a new [Reference].
 func NewReferenceWithRecordIDAction(recordID *raw.CKRecordID, action CKReferenceAction) *Reference {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKReference")), objc.RegisterName("alloc"))
@@ -36,6 +38,8 @@ func NewReferenceWithRecordIDAction(recordID *raw.CKRecordID, action CKReference
 	return &Reference{inner: raw.CKReferenceFromID(_id)}
 }
 
+// Creates a reference object that points to the specified record object. - Parameters: - record: The target record of the reference. - action: The ownership options to use for the records. If you specify the “CKRecord/ReferenceAction/deleteSelf“ option, the object that the `recordID` parameter references becomes the owner of (or acts as the parent of) any objects that use this reference object. For a list of possible values, see “CKRecord/ReferenceAction“. - Returns: An initialized reference object that points to the specified record. Use this method to initialize a reference to a local record object. You can reference a local record that you create, or one that you fetch from the server. When you create a reference object for use in a search predicate, the predicate ignores the value in the `action` parameter. Search predicates use only the ID of the record during their comparison.
+//
 // NewReferenceWithRecordAction creates a new [Reference].
 func NewReferenceWithRecordAction(record *raw.CKRecord, action CKReferenceAction) *Reference {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKReference")), objc.RegisterName("alloc"))
@@ -43,11 +47,15 @@ func NewReferenceWithRecordAction(record *raw.CKRecord, action CKReferenceAction
 	return &Reference{inner: raw.CKReferenceFromID(_id)}
 }
 
+// The ownership behavior for the records. The value in this property determines which action, if any, to take when deleting the target of the reference object — that is, the object that the “CKRecord/Reference/recordID“ property points to. When this property is “CKRecord/ReferenceAction/deleteSelf“, deleting the target object deletes any records that contain that reference in one of their fields. When this property is “CKRecord/ReferenceAction/none“, deleting the target object doesn't delete any additional objects.
+//
 // ReferenceAction calls the underlying ReferenceAction.
 func (x *Reference) ReferenceAction() CKReferenceAction {
 	return CKReferenceAction(x.inner.ReferenceAction())
 }
 
+// The ID of the referenced record. Use the ID in this property to fetch the record on the other end of the link.
+//
 // RecordID calls the underlying RecordID.
 func (x *Reference) RecordID() *RecordID {
 	_r := x.inner.RecordID()

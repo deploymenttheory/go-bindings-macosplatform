@@ -70,6 +70,8 @@ func (x *TextLayoutManager) WithUsesHyphenation(usesHyphenation bool) *TextLayou
 	return x
 }
 
+// Specifies the behavior for resolving “NSTextAlignment.natural“ to the visual alignment. When set to “true“, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is “true“.
+//
 // WithResolvesNaturalAlignmentWithBaseWritingDirection sets the resolvesNaturalAlignmentWithBaseWritingDirection property and returns the receiver for chaining.
 func (x *TextLayoutManager) WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *TextLayoutManager {
 	x.inner.SetResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection)
@@ -197,8 +199,17 @@ func (x *TextLayoutManager) EnumerateTextSegmentsInRangeTypeOptionsUsing(textRan
 }
 
 // ReplaceContentsInRangeWithTextElements calls the underlying ReplaceContentsInRangeWithTextElements.
-func (x *TextLayoutManager) ReplaceContentsInRangeWithTextElements(range_ *raw.NSTextRange, textElements *foundation.NSArray[*raw.NSTextElement]) {
-	x.inner.ReplaceContentsInRangeWithTextElements(range_, textElements)
+func (x *TextLayoutManager) ReplaceContentsInRangeWithTextElements(range_ *raw.NSTextRange, textElements ...TextElementProvider) {
+	_ptrs := make([]objc.ID, len(textElements))
+	for _i, _v := range textElements {
+		_ptrs[_i] = _v.asTextElement().Ptr()
+	}
+	var _arg1 *foundation.NSArray[*raw.NSTextElement]
+	if len(_ptrs) > 0 {
+		_arg1 = foundation.NSArrayFromID[*raw.NSTextElement](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.ReplaceContentsInRangeWithTextElements(range_, _arg1)
 }
 
 // ReplaceContentsInRangeWithAttributedString calls the underlying ReplaceContentsInRangeWithAttributedString.
@@ -246,6 +257,8 @@ func (x *TextLayoutManager) SetUsesHyphenation(usesHyphenation bool) {
 	x.inner.SetUsesHyphenation(usesHyphenation)
 }
 
+// Specifies the behavior for resolving “NSTextAlignment.natural“ to the visual alignment. When set to “true“, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is “true“.
+//
 // ResolvesNaturalAlignmentWithBaseWritingDirection calls the underlying ResolvesNaturalAlignmentWithBaseWritingDirection.
 func (x *TextLayoutManager) ResolvesNaturalAlignmentWithBaseWritingDirection() bool {
 	return x.inner.ResolvesNaturalAlignmentWithBaseWritingDirection()
@@ -370,7 +383,7 @@ type TextLayoutManagerable interface {
 	InvalidateRenderingAttributesForTextRange(textRange *raw.NSTextRange)
 	RenderingAttributesForLinkAtLocation(link objc.ID, location raw.NSTextLocation) *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	EnumerateTextSegmentsInRangeTypeOptionsUsing(textRange *raw.NSTextRange, type_ NSTextLayoutManagerSegmentType, options NSTextLayoutManagerSegmentOptions, block objc.Block)
-	ReplaceContentsInRangeWithTextElements(range_ *raw.NSTextRange, textElements *foundation.NSArray[*raw.NSTextElement])
+	ReplaceContentsInRangeWithTextElements(range_ *raw.NSTextRange, textElements ...TextElementProvider)
 	ReplaceContentsInRangeWithAttributedString(range_ *raw.NSTextRange, attributedString *foundation.NSAttributedString)
 	Delegate() raw.NSTextLayoutManagerDelegate
 	SetDelegate(delegate raw.NSTextLayoutManagerDelegate)

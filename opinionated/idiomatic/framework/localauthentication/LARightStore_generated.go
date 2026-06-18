@@ -39,6 +39,8 @@ func NewRightStore() *RightStore {
 	return &RightStore{inner: raw.LARightStoreFromID(_id)}
 }
 
+// @brief Fetches a right stored under the given identifier. @param identifier Identifier associated with a previously stored right. @param handler Completion handler with the fetched right or an error on failure.
+//
 // RightForIdentifierCompletion blocks until the operation completes or ctx is cancelled.
 func (x *RightStore) RightForIdentifierCompletion(ctx context.Context, identifier string) (*PersistedRight, error) {
 	type _result struct {
@@ -65,6 +67,8 @@ func (x *RightStore) RightForIdentifierCompletion(ctx context.Context, identifie
 	}
 }
 
+// @brief Persists a right for later usage. @param right @c LARight instance to store. @param identifier Identifier to be associated with the right. Useful for later retrieval. @param handler Completion handler with the persisted right or an error on failure.
+//
 // SaveRightIdentifierCompletion blocks until the operation completes or ctx is cancelled.
 func (x *RightStore) SaveRightIdentifierCompletion(ctx context.Context, right *raw.LARight, identifier string) (*PersistedRight, error) {
 	type _result struct {
@@ -91,6 +95,8 @@ func (x *RightStore) SaveRightIdentifierCompletion(ctx context.Context, right *r
 	}
 }
 
+// @brief Persists a right for later usage. @param right @c LARight instance to store. @param identifier Identifier to be associated with the right. Useful for later retrieval. @param secret Secret data to be associated with the provided right. @param handler Completion handler with the persisted right or an error on failure.
+//
 // SaveRightIdentifierSecretCompletion blocks until the operation completes or ctx is cancelled.
 func (x *RightStore) SaveRightIdentifierSecretCompletion(ctx context.Context, right *raw.LARight, identifier string, secret *foundation.NSData) (*PersistedRight, error) {
 	type _result struct {
@@ -117,6 +123,8 @@ func (x *RightStore) SaveRightIdentifierSecretCompletion(ctx context.Context, ri
 	}
 }
 
+// @brief Removes a right from the persistent storage along with its associated resources. @param right @c LAPersistedRight instance to remove. @param handler Completion handler with an error on failure.
+//
 // RemoveRightCompletion blocks until the operation completes or ctx is cancelled.
 func (x *RightStore) RemoveRightCompletion(ctx context.Context, right *raw.LAPersistedRight) error {
 	_ch := make(chan error, 1)
@@ -135,6 +143,8 @@ func (x *RightStore) RemoveRightCompletion(ctx context.Context, right *raw.LAPer
 	}
 }
 
+// @brief Removes right with provided identifier from persistent storage. @param identifier Identifier of @c LAPersistedRight instance to remove. @param handler Completion handler with an error on failure.
+//
 // RemoveRightForIdentifierCompletion blocks until the operation completes or ctx is cancelled.
 func (x *RightStore) RemoveRightForIdentifierCompletion(ctx context.Context, identifier string) error {
 	_ch := make(chan error, 1)
@@ -153,6 +163,8 @@ func (x *RightStore) RemoveRightForIdentifierCompletion(ctx context.Context, ide
 	}
 }
 
+// @brief Removes all rights stored by the client @param handler Completion handler with an error on failure.
+//
 // RemoveAllRightsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *RightStore) RemoveAllRightsWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)

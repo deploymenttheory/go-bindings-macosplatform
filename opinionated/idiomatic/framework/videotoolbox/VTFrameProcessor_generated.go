@@ -37,31 +37,43 @@ func NewFrameProcessor() *FrameProcessor {
 	return &FrameProcessor{inner: raw.VTFrameProcessorFromID(_id)}
 }
 
+// Starts a new session and configures the processor pipeline for an effect. - Parameters: - configuration: The system uses this parameter to create an effect pipeline for processing frames. This object must conform to the “VTFrameProcessorConfiguration“ interface. - error: Contains error information if any. You may specify NULL for this parameter if you do not want the error information.
+//
 // StartSessionWithConfigurationError calls the underlying StartSessionWithConfigurationError.
 func (x *FrameProcessor) StartSessionWithConfigurationError(configuration raw.VTFrameProcessorConfiguration) (bool, error) {
 	return x.inner.StartSessionWithConfigurationError(configuration)
 }
 
+// Synchronously performs the processor effects. Use the respective “VTFrameProcessorParameters“ to pass frame level settings and frame level input/output parameters for the effect that you configured this session for by calling “startSessionWithConfiguration:error“. - Parameters: - parameters: A `VTFrameProcessorParameters` based object to specify additional frame based parameters to use during processing. It needs to match the configuration type used during start session. - error: Contains error information if any. You may specify NULL for this parameter if you do not want the error information.
+//
 // ProcessWithParametersError calls the underlying ProcessWithParametersError.
 func (x *FrameProcessor) ProcessWithParametersError(parameters raw.VTFrameProcessorParameters) (bool, error) {
 	return x.inner.ProcessWithParametersError(parameters)
 }
 
+// Asynchronously performs the processor effects. - Parameters: - parameters: A `VTFrameProcessorParameters` based object to specify additional frame based parameters to use during processing. It needs to match the configuration type used during start session. - completionHandler: This completion handler is called when frame processing is completed. The completion handler receives the same parameters object that you provided to the original call, as well as an `NSError` which contains an error code if processing was not successful.
+//
 // ProcessWithParametersCompletionHandler calls the underlying ProcessWithParametersCompletionHandler.
 func (x *FrameProcessor) ProcessWithParametersCompletionHandler(parameters raw.VTFrameProcessorParameters, completionHandler func(objc.ID, unsafe.Pointer)) {
 	x.inner.ProcessWithParametersCompletionHandler(parameters, completionHandler)
 }
 
+// Asynchronously performs the processor effects and outputs each frame separately. Use with frame processor configurations which allow multiple output frames from a single processing call, such as frame rate conversion processor cases when you need access to output frames as they become available, rather than waiting for all output frames to be complete. This interface is suitable for low-latency scenarios when a call would generate multiple output frames, but waiting for all frames to be generated before beginning to use the frames is not ideal. Because the processor may use the output frames as references for frames still being generated, the output frames are strictly read-only. If you want to modify the frames, you must create a copy first. - Parameters: - parameters: A `VTFrameProcessorParameters` based object to specify additional frame based parameters to use during processing. It needs to match the configuration type used during start session. - frameOutputHandler: This frame output handler is called once for each destination frame in the provided parameters if no errors are encountered. The output handler receives the same parameters object that you provided to the original call, a flag indicating if this is the final output to be called for this processing request, and the presentation timestamp associated with the `VTFrameProcessorFrame` that it is being called for. The `NSError` parameter contains an error code if processing was not successful.
+//
 // ProcessWithParametersFrameOutputHandler calls the underlying ProcessWithParametersFrameOutputHandler.
 func (x *FrameProcessor) ProcessWithParametersFrameOutputHandler(parameters raw.VTFrameProcessorParameters, frameOutputHandler objc.Block) {
 	x.inner.ProcessWithParametersFrameOutputHandler(parameters, frameOutputHandler)
 }
 
+// Performs effects in a Metal command buffer. This function allows you to add the effect to an existing Metal command buffer. The clients that have an existing Metal pipeline and want to add this effect to it can use this function. > Note: this function waits until all previously inserted tasks in the command buffer finish before running. Tasks inserted after the `processWithCommandBuffer` returns are run by the system after the effect is applied. Processing does not happen until the commandBuffer is executed. - Parameters: - commandBuffer: An existing Metal command buffer where the frame processing is inserted. - parameters: A `VTFrameProcessorParameters` based object to specify additional frame based parameters to use during processing. It needs to match the configuration type used during start session.
+//
 // ProcessWithCommandBufferParameters calls the underlying ProcessWithCommandBufferParameters.
 func (x *FrameProcessor) ProcessWithCommandBufferParameters(commandBuffer metal.MTLCommandBuffer, parameters raw.VTFrameProcessorParameters) {
 	x.inner.ProcessWithCommandBufferParameters(commandBuffer, parameters)
 }
 
+// Performs all necessary tasks to end the session. After this call completes, you can process no new frames unless you call “startSessionWithConfiguration“ again.
+//
 // EndSession calls the underlying EndSession.
 func (x *FrameProcessor) EndSession() {
 	x.inner.EndSession()

@@ -37,18 +37,24 @@ func NewNNArithmeticGradientStateNode() *NNArithmeticGradientStateNode {
 	return &NNArithmeticGradientStateNode{inner: raw.MPSNNArithmeticGradientStateNodeFromID(_id)}
 }
 
+// @abstract   MPS resource identification @discussion See MPSHandle protocol reference.  Default: nil
+//
 // WithHandle sets the handle property and returns the receiver for chaining.
 func (x *NNArithmeticGradientStateNode) WithHandle(handle raw.MPSHandle) *NNArithmeticGradientStateNode {
 	x.inner.MPSNNBinaryGradientStateNode.MPSNNStateNode.SetHandle(handle)
 	return x
 }
 
+// @abstract   Tag a state node for view later @discussion Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
+//
 // WithExportFromGraph sets the exportFromGraph property and returns the receiver for chaining.
 func (x *NNArithmeticGradientStateNode) WithExportFromGraph(exportFromGraph bool) *NNArithmeticGradientStateNode {
 	x.inner.MPSNNBinaryGradientStateNode.MPSNNStateNode.SetExportFromGraph(exportFromGraph)
 	return x
 }
 
+// @abstract   Set to true to cause the resource to be synchronized with the CPU @discussion Ignored on non-MacOS.
+//
 // WithSynchronizeResource sets the synchronizeResource property and returns the receiver for chaining.
 func (x *NNArithmeticGradientStateNode) WithSynchronizeResource(synchronizeResource bool) *NNArithmeticGradientStateNode {
 	x.inner.MPSNNBinaryGradientStateNode.MPSNNStateNode.SetSynchronizeResource(synchronizeResource)

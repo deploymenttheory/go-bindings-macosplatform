@@ -37,18 +37,24 @@ func NewMTL4LibraryFunctionDescriptor() *MTL4LibraryFunctionDescriptor {
 	return &MTL4LibraryFunctionDescriptor{inner: raw.MTL4LibraryFunctionDescriptorFromID(_id)}
 }
 
+// Assigns a name to the function.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *MTL4LibraryFunctionDescriptor) WithName(name string) *MTL4LibraryFunctionDescriptor {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// Returns a reference to the library containing the function.
+//
 // WithLibrary sets the library property and returns the receiver for chaining.
 func (x *MTL4LibraryFunctionDescriptor) WithLibrary(library raw.MTLLibrary) *MTL4LibraryFunctionDescriptor {
 	x.inner.SetLibrary(library)
 	return x
 }
 
+// Assigns a name to the function.
+//
 // Name calls the underlying Name.
 func (x *MTL4LibraryFunctionDescriptor) Name() string {
 	_r := x.inner.Name()
@@ -63,6 +69,8 @@ func (x *MTL4LibraryFunctionDescriptor) SetName(name string) {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 }
 
+// Returns a reference to the library containing the function.
+//
 // Library calls the underlying Library.
 func (x *MTL4LibraryFunctionDescriptor) Library() raw.MTLLibrary {
 	return x.inner.Library()

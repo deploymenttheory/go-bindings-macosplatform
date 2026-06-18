@@ -9,6 +9,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MetadataItem wraps [raw.NSMetadataItem] with a fluent Go API.
@@ -50,8 +51,17 @@ func (x *MetadataItem) ValueForAttribute(key string) objc.ID {
 }
 
 // ValuesForAttributes calls the underlying ValuesForAttributes.
-func (x *MetadataItem) ValuesForAttributes(keys *raw.NSArray[*raw.NSString]) *raw.NSDictionary[*raw.NSString, objc.ID] {
-	return x.inner.ValuesForAttributes(keys)
+func (x *MetadataItem) ValuesForAttributes(keys ...StringProvider) *raw.NSDictionary[*raw.NSString, objc.ID] {
+	_ptrs := make([]objc.ID, len(keys))
+	for _i, _v := range keys {
+		_ptrs[_i] = _v.asString().Ptr()
+	}
+	var _arg0 *raw.NSArray[*raw.NSString]
+	if len(_ptrs) > 0 {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	return x.inner.ValuesForAttributes(_arg0)
 }
 
 // Attributes returns the collection as a Go slice.
@@ -72,7 +82,7 @@ type MetadataItemable interface {
 	Unwrap() *raw.NSMetadataItem
 	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MetadataItem
 	ValueForAttribute(key string) objc.ID
-	ValuesForAttributes(keys *raw.NSArray[*raw.NSString]) *raw.NSDictionary[*raw.NSString, objc.ID]
+	ValuesForAttributes(keys ...StringProvider) *raw.NSDictionary[*raw.NSString, objc.ID]
 	Attributes() []string
 }
 

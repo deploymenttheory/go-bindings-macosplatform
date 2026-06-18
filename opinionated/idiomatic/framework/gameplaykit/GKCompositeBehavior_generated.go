@@ -35,26 +35,36 @@ func NewCompositeBehavior() *CompositeBehavior {
 	return &CompositeBehavior{inner: raw.GKCompositeBehaviorFromID(_id)}
 }
 
+// Adds a new sub-behavior or changes the weight of the existing sub-behavior in this behavior. If the sub-behavior  does not exist in this behavior, it is added. @param weight the weight for this goal @param behavior the sub-behavior who's weight to change
+//
 // SetWeightForBehavior calls the underlying SetWeightForBehavior.
 func (x *CompositeBehavior) SetWeightForBehavior(weight float32, behavior *raw.GKBehavior) {
 	x.inner.SetWeightForBehavior(weight, behavior)
 }
 
+// Gets the current weight for a given sub-behavior. @return the weight of the sub-behavior, or 0 if there is no such sub-behavior on this behavior
+//
 // WeightForBehavior calls the underlying WeightForBehavior.
 func (x *CompositeBehavior) WeightForBehavior(behavior *raw.GKBehavior) float32 {
 	return x.inner.WeightForBehavior(behavior)
 }
 
+// Remove the indicated sub-behavior from this behavior. @param behavior the sub-behavior to be removed
+//
 // RemoveBehavior calls the underlying RemoveBehavior.
 func (x *CompositeBehavior) RemoveBehavior(behavior *raw.GKBehavior) {
 	x.inner.RemoveBehavior(behavior)
 }
 
+// Removes all the sub-behavior on the behavior.
+//
 // RemoveAllBehaviors calls the underlying RemoveAllBehaviors.
 func (x *CompositeBehavior) RemoveAllBehaviors() {
 	x.inner.RemoveAllBehaviors()
 }
 
+// Number of sub-behaviors in this behavior
+//
 // BehaviorCount calls the underlying BehaviorCount.
 func (x *CompositeBehavior) BehaviorCount() int {
 	return x.inner.BehaviorCount()

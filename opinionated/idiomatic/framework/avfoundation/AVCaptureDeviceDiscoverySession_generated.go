@@ -36,6 +36,8 @@ func NewCaptureDeviceDiscoverySession() *CaptureDeviceDiscoverySession {
 	return &CaptureDeviceDiscoverySession{inner: raw.AVCaptureDeviceDiscoverySessionFromID(_id)}
 }
 
+// @property devices @abstract The list of devices that comply to the search criteria specified on the discovery session. @discussion The returned array contains only devices that are available at the time the method is called. Applications can key-value observe this property to be notified when the list of available devices has changed. For apps linked against iOS 10, the devices returned are unsorted. For apps linked against iOS 11 or later, the devices are sorted by AVCaptureDeviceType, matching the order specified in the deviceTypes parameter of +[AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:mediaType:position:]. If a position of AVCaptureDevicePositionUnspecified is specified, the results are further ordered by position in the AVCaptureDevicePosition enum. Starting in Mac Catalyst 14.0, clients can key value observe the value of this property to be notified when the devices change.
+//
 // Devices returns the collection as a Go slice.
 func (x *CaptureDeviceDiscoverySession) Devices() []*CaptureDevice {
 	arr := x.inner.Devices()

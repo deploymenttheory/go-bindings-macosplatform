@@ -36,26 +36,36 @@ func NewEnvironmentMechanismBiometry() *EnvironmentMechanismBiometry {
 	return &EnvironmentMechanismBiometry{inner: raw.LAEnvironmentMechanismBiometryFromID(_id)}
 }
 
+// @brief Type of biometry supported by the device. @discussion This property does not indicate whether biometry is available or not. It always reads the type of biometry supported by device hardware. You should check @c isUsable property to see if it is available for use.
+//
 // BiometryType calls the underlying BiometryType.
 func (x *EnvironmentMechanismBiometry) BiometryType() LABiometryType {
 	return LABiometryType(x.inner.BiometryType())
 }
 
+// @brief Whether the user has enrolled this biometry. @discussion Even if biometry is enrolled, it does not necessarily mean that it can be used. You should check @c isUsable property to see if it is available for use.
+//
 // IsEnrolled calls the underlying IsEnrolled.
 func (x *EnvironmentMechanismBiometry) IsEnrolled() bool {
 	return x.inner.IsEnrolled()
 }
 
+// @brief Whether biometry is locked out. @discussion The system might lock the user out of biometry for various reasons. For example, with Face ID, the user is locked out after 5 failed match attempts in row. To recover from bio lockout, users need to enter their passcode (e.g. during device ulock).
+//
 // IsLockedOut calls the underlying IsLockedOut.
 func (x *EnvironmentMechanismBiometry) IsLockedOut() bool {
 	return x.inner.IsLockedOut()
 }
 
+// @brief The application specific state of the biometric enrollment as returned by @c LAContext.domainState.biometry.stateHash @discussion This value represents the state of the enrollment and changes whenever the biometric enrollment is changed. It does not directly map to the enrolled templates, e.g. if a finger is added to Touch ID enrollment and then removed, the final state would be different. It also returns different values to different apps to prevent tracking of user identity.
+//
 // StateHash calls the underlying StateHash.
 func (x *EnvironmentMechanismBiometry) StateHash() *foundation.NSData {
 	return x.inner.StateHash()
 }
 
+// @brief Whether the built in biometric sensor is inaccessible in the current configuration, preventing the use of biometry. @discussion Currently, the only example of this is a Clamshell Mode on macOS. The user will be not able to use Touch ID if the MacBook lid is closed while connected to external monitor and keyboard, unless the external keyboard has Touch ID.
+//
 // BuiltInSensorInaccessible calls the underlying BuiltInSensorInaccessible.
 func (x *EnvironmentMechanismBiometry) BuiltInSensorInaccessible() bool {
 	return x.inner.BuiltInSensorInaccessible()

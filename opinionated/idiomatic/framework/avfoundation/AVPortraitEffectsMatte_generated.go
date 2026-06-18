@@ -38,6 +38,8 @@ func NewPortraitEffectsMatte() *PortraitEffectsMatte {
 	return &PortraitEffectsMatte{inner: raw.AVPortraitEffectsMatteFromID(_id)}
 }
 
+// @method portraitEffectsMatteByApplyingExifOrientation: @abstract Returns a derivative AVPortraitEffectsMatte instance in which the specified Exif orientation has been applied. @param exifOrientation One of the 8 standard Exif orientation tags expressing how the portrait effects matte should be rotated / mirrored. @result An AVPortraitEffectsMatte instance. @discussion When applying simple 90 degree rotation or mirroring edits to media containing a portrait effects matte, you may use this initializer to create a derivative copy of the portrait effects matte in which the specified orientation is applied. This method throws an NSInvalidArgumentException if you pass an unrecognized exifOrientation.
+//
 // PortraitEffectsMatteByApplyingExifOrientation calls the underlying PortraitEffectsMatteByApplyingExifOrientation.
 func (x *PortraitEffectsMatte) PortraitEffectsMatteByApplyingExifOrientation(exifOrientation imageio.CGImagePropertyOrientation) *PortraitEffectsMatte {
 	_r := x.inner.PortraitEffectsMatteByApplyingExifOrientation(exifOrientation)
@@ -47,6 +49,8 @@ func (x *PortraitEffectsMatte) PortraitEffectsMatteByApplyingExifOrientation(exi
 	return &PortraitEffectsMatte{inner: _r}
 }
 
+// @method portraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBuffer:error: @abstract Returns an AVPortraitEffectsMatte instance wrapping the replacement pixel buffer. @param pixelBuffer A pixel buffer containing a portrait effects matting image, represented as kCVPixelFormatType_OneComponent8 with a kCVImageBufferTransferFunction_Linear transfer function. @param outError On return, if the AVPortraitEffectsMatte cannot be created, points to an NSError describing the problem. @result An AVPortraitEffectsMatte instance, or nil if the pixel buffer is malformed. @discussion When applying complex edits to media containing a portrait effects matte, you may create a derivative matte with arbitrary transforms applied to it, then use this initializer to create a new AVPortraitEffectsMatte.
+//
 // PortraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBufferError calls the underlying PortraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBufferError.
 func (x *PortraitEffectsMatte) PortraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBufferError(pixelBuffer unsafe.Pointer) (*PortraitEffectsMatte, error) {
 	_r, _err := x.inner.PortraitEffectsMatteByReplacingPortraitEffectsMatteWithPixelBufferError(pixelBuffer)
@@ -59,16 +63,22 @@ func (x *PortraitEffectsMatte) PortraitEffectsMatteByReplacingPortraitEffectsMat
 	return &PortraitEffectsMatte{inner: _r}, nil
 }
 
+// @method dictionaryRepresentationForAuxiliaryDataType: @abstract Returns a dictionary of primitive map information to be used when writing an image file with a portrait effects matte. @param outAuxDataType On output, the auxiliary data type to be used when calling CGImageDestinationAddAuxiliaryDataInfo. Currently the only supported auxiliary data type is kCGImageAuxiliaryDataTypePortraitEffectsMatte. @result A dictionary of CGImageDestination compatible portrait effects matte information, or nil if the auxDataType is unsupported. @discussion When using ImageIO framework's CGImageDestination API to write portrait effects matte information to a HEIF or JPEG file, you may use this method to generate a dictionary of primitive map information consumed by CGImageDestinationAddAuxiliaryDataInfo.
+//
 // DictionaryRepresentationForAuxiliaryDataType calls the underlying DictionaryRepresentationForAuxiliaryDataType.
 func (x *PortraitEffectsMatte) DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.DictionaryRepresentationForAuxiliaryDataType(foundation.NSStringStringWithUTF8String(outAuxDataType))
 }
 
+// @property pixelFormatType @abstract Specifies the pixel format type of this object's internal matting image. @discussion Currently the only supported CV pixel format type for the matting image is kCVPixelFormatType_OneComponent8.
+//
 // PixelFormatType calls the underlying PixelFormatType.
 func (x *PortraitEffectsMatte) PixelFormatType() uint {
 	return x.inner.PixelFormatType()
 }
 
+// @property mattingImage @abstract Provides access to the portrait effects matte's internal image. @discussion The pixel format can be queried using the pixelFormatType property.
+//
 // MattingImage calls the underlying MattingImage.
 func (x *PortraitEffectsMatte) MattingImage() unsafe.Pointer {
 	return x.inner.MattingImage()

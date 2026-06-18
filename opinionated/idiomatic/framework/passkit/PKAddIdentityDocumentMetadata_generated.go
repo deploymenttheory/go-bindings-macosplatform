@@ -30,6 +30,8 @@ func AddIdentityDocumentMetadataFromID(id objc.ID) *AddIdentityDocumentMetadata 
 	return &AddIdentityDocumentMetadata{inner: raw.PKAddIdentityDocumentMetadataFromID(id)}
 }
 
+// Initialize with parameters configured by issuer's server to indicate the specific product instance to provision. - Properties: - provisioningCredentialIdentifier: Identifies this user's instance for provisioning. - sharingInstanceIdentifier: A short lived token to prevent replay-ability. - cardTemplateIdentifier: An identifier for a legacy product on our Apple Pay servers. - preview: Object containing information to represent the pass to provision in our UI. - issuingCountryCode:  identifies the issuing country of the identity document - identityDocumentType: identifies the type of the identity document - preview: Object containing information to represent the pass to provision in our UI.
+//
 // NewAddIdentityDocumentMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierIssuingCountryCodeDocumentTypePreview creates a new [AddIdentityDocumentMetadata].
 func NewAddIdentityDocumentMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierIssuingCountryCodeDocumentTypePreview(credentialIdentifier string, sharingInstanceIdentifier string, templateIdentifier string, issuingCountryCode string, documentType PKAddIdentityDocumentType, preview *raw.PKAddPassMetadataPreview) *AddIdentityDocumentMetadata {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKAddIdentityDocumentMetadata")), objc.RegisterName("alloc"))
@@ -37,6 +39,8 @@ func NewAddIdentityDocumentMetadataWithProvisioningCredentialIdentifierSharingIn
 	return &AddIdentityDocumentMetadata{inner: raw.PKAddIdentityDocumentMetadataFromID(_id)}
 }
 
+// serverEnvironmentIdentifier: Identifier referencing the target server environment Apple Pay servers should reach out to to provision this pass. If not present, the default Apply Pay server environment will be used and an empty string will be returned.
+//
 // WithServerEnvironmentIdentifier sets the serverEnvironmentIdentifier property and returns the receiver for chaining.
 func (x *AddIdentityDocumentMetadata) WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *AddIdentityDocumentMetadata {
 	x.inner.PKIdentityDocumentMetadata.SetServerEnvironmentIdentifier(foundation.NSStringStringWithUTF8String(serverEnvironmentIdentifier))

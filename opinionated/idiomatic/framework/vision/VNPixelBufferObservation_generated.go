@@ -37,11 +37,15 @@ func NewPixelBufferObservation() *PixelBufferObservation {
 	return &PixelBufferObservation{inner: raw.VNPixelBufferObservationFromID(_id)}
 }
 
+// @brief The resulting image from a request like VNCoreMLRequest where the model produces an image as an output.
+//
 // PixelBuffer calls the underlying PixelBuffer.
 func (x *PixelBufferObservation) PixelBuffer() unsafe.Pointer {
 	return x.inner.PixelBuffer()
 }
 
+// @brief The name used in the model description of the CoreML model that produced this observation allowing to correlate the observation back to the output of the model. This can be nil if the observation is not the result of a VNCoreMLRequest operation.
+//
 // FeatureName calls the underlying FeatureName.
 func (x *PixelBufferObservation) FeatureName() string {
 	_r := x.inner.FeatureName()

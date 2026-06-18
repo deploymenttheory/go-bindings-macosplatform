@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// A directory on the host that you can expose to a guest.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzshareddirectory
 type VZSharedDirectory struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func VZSharedDirectoryFromID(id objc.ID) *VZSharedDirectory {
 	return o
 }
 
-// @abstract Initialize with a host directory. @param url Local file URL to expose to the guest. @param readOnly Whether or not the directory will be exposed as read-only to the guest.
+// Initialize with a host directory.
 func (o *VZSharedDirectory) InitWithURLReadOnly(url *foundation.NSURL, readOnly bool) *VZSharedDirectory {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZSharedDirectorySelInitWithURLReadOnly, url.Ptr(), readOnly)
 	if _ret != 0 {

@@ -39,6 +39,8 @@ func NewAssetDownloadStorageManagementPolicy() *AssetDownloadStorageManagementPo
 	return &AssetDownloadStorageManagementPolicy{inner: raw.AVAssetDownloadStorageManagementPolicyFromID(_id)}
 }
 
+// Indicates the eviction priority of downloaded asset. Assets with default priority will be purged first before assets with higher priorities. In case this is not set, default priority is used.
+//
 // Priority calls the underlying Priority.
 func (x *AssetDownloadStorageManagementPolicy) Priority() string {
 	_r := x.inner.Priority()
@@ -48,6 +50,8 @@ func (x *AssetDownloadStorageManagementPolicy) Priority() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns the expiration date of asset.
+//
 // ExpirationDate calls the underlying ExpirationDate.
 func (x *AssetDownloadStorageManagementPolicy) ExpirationDate() *foundation.NSDate {
 	return x.inner.ExpirationDate()

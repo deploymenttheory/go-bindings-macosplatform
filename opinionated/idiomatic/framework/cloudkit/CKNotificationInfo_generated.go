@@ -38,6 +38,8 @@ func NewNotificationInfo() *NotificationInfo {
 	return &NotificationInfo{inner: raw.CKNotificationInfoFromID(_id)}
 }
 
+// The names of fields to include in the push notification's payload. This property contains an array of strings, each of which corresponds to the name of a field in the record that triggers the notification. When the system receives a notification, it includes the keys, and their corresponding values. You can request a maximum of three keys. For the keys you specify, the allowable types are <doc://com.apple.documentation/documentation/foundation/nsstring>, <doc://com.apple.documentation/documentation/foundation/nsnumber>, <doc://com.apple.documentation/documentation/corelocation/cllocation>, <doc://com.apple.documentation/documentation/foundation/nsdate>, and “CKRecord/Reference“. You can't specify keys with values that contain other data types. CloudKit may truncate strings that are more than 100 characters when it adds them to the notification's payload.
+//
 // WithDesiredKeys sets the collection, converting the Go slice to an NSArray.
 func (x *NotificationInfo) WithDesiredKeys(items ...*foundation.NSString) *NotificationInfo {
 	if len(items) == 0 {
@@ -56,30 +58,40 @@ func (x *NotificationInfo) WithDesiredKeys(items ...*foundation.NSString) *Notif
 	return x
 }
 
+// A Boolean value that determines whether an app's icon badge increments its value. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>. Set it to <doc://com.apple.documentation/documentation/swift/true> to cause the system to increment the badge value whenever it receives the corresponding push notification.
+//
 // WithShouldBadge sets the shouldBadge property and returns the receiver for chaining.
 func (x *NotificationInfo) WithShouldBadge(shouldBadge bool) *NotificationInfo {
 	x.inner.SetShouldBadge(shouldBadge)
 	return x
 }
 
+// A Boolean value that indicates whether the push notification includes the content available flag. When this property is <doc://com.apple.documentation/documentation/swift/true>, the server includes the `content-available` flag in the push notification's payload. That flag causes the system to wake or launch an app that isn't currently running. The app then receives background execution time to download any data for the push notification, such as the set of changed records. If the app is already running in the foreground, the inclusion of this flag has no additional effect and the system delivers the notification to the app delegate for processing as usual. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
+//
 // WithShouldSendContentAvailable sets the shouldSendContentAvailable property and returns the receiver for chaining.
 func (x *NotificationInfo) WithShouldSendContentAvailable(shouldSendContentAvailable bool) *NotificationInfo {
 	x.inner.SetShouldSendContentAvailable(shouldSendContentAvailable)
 	return x
 }
 
+// A Boolean value that indicates whether the push notification sets the mutable content flag. When this property is <doc://com.apple.documentation/documentation/swift/true>, the server includes the `mutable-content` flag with a value of `1` in the push notification's payload. When the value is `1`, the system passes the notification to your app extension for modification before delivery. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more information about the `mutable-content` flag, and <doc://com.apple.documentation/documentation/usernotifications/modifying-content-in-newly-delivered-notifications> for information about how to modify push notifiction content in your app extension prior to delivery. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
+//
 // WithShouldSendMutableContent sets the shouldSendMutableContent property and returns the receiver for chaining.
 func (x *NotificationInfo) WithShouldSendMutableContent(shouldSendMutableContent bool) *NotificationInfo {
 	x.inner.SetShouldSendMutableContent(shouldSendMutableContent)
 	return x
 }
 
+// A value that the system uses to coalesce unseen push notifications. When CloudKit generates a push notification, it sets the notification's `apns-collapse-id` header to this property's value. The system uses this header to coalesce unseen notifications. See <doc://com.apple.documentation/documentation/usernotifications/sending-notification-requests-to-apns> for more information about sending notifications using the Apple Push Notification service.
+//
 // WithCollapseIDKey sets the collapseIDKey property and returns the receiver for chaining.
 func (x *NotificationInfo) WithCollapseIDKey(collapseIDKey string) *NotificationInfo {
 	x.inner.SetCollapseIDKey(foundation.NSStringStringWithUTF8String(collapseIDKey))
 	return x
 }
 
+// The text for the notification's alert. Set this property's value to have the system display the specified string when it receives the corresponding push notification. If you localize your app's content, use the “CKSubscription/NotificationInfo/alertLocalizationKey“ property instead.
+//
 // AlertBody calls the underlying AlertBody.
 func (x *NotificationInfo) AlertBody() unsafe.Pointer {
 	return x.inner.AlertBody()
@@ -90,6 +102,8 @@ func (x *NotificationInfo) SetAlertBody(alertBody unsafe.Pointer) {
 	x.inner.SetAlertBody(alertBody)
 }
 
+// The key that identifies the localized string for the notification's alert. Set this property's value to have the system display a localized string when it receives the corresponding push notification. The system uses the key to find the matching string in your app's `Localizable.string` file. If you specify a value for this property, CloudKit ignores the “CKSubscription/NotificationInfo/alertBody“ property's value. For information about localizing string resources, see [Internationalization and Localization Guide](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPInternational/Introduction/Introduction.html#//apple_ref/doc/uid/10000171i).
+//
 // AlertLocalizationKey calls the underlying AlertLocalizationKey.
 func (x *NotificationInfo) AlertLocalizationKey() unsafe.Pointer {
 	return x.inner.AlertLocalizationKey()
@@ -100,6 +114,8 @@ func (x *NotificationInfo) SetAlertLocalizationKey(alertLocalizationKey unsafe.P
 	x.inner.SetAlertLocalizationKey(alertLocalizationKey)
 }
 
+// The fields for building a notification's alert. This property is an array of field names that CloudKit uses to extract the corresponding values from the record that triggers the push notification. The values must be strings, numbers, or dates. Don't specify keys that use other value types. CloudKit may truncate strings with a length greater than 100 characters when it adds them to a notification's payload. If you use `%@` for your substitution variables, CloudKit replaces those variables by traversing the array in order. If you use variables of the form `%n$@`, where `n` is an integer, `n` represents the index (starting at 1) of the item in the array to use. So, the first item in the array replaces the variable `%1$@`, the second item replaces the variable `%2$@`, and so on. You can use indexed substitution variables to change the order of items in the resulting string, which might be necessary when you localize your app's content.
+//
 // AlertLocalizationArgs calls the underlying AlertLocalizationArgs.
 func (x *NotificationInfo) AlertLocalizationArgs() unsafe.Pointer {
 	return x.inner.AlertLocalizationArgs()
@@ -110,6 +126,8 @@ func (x *NotificationInfo) SetAlertLocalizationArgs(alertLocalizationArgs unsafe
 	x.inner.SetAlertLocalizationArgs(alertLocalizationArgs)
 }
 
+// The notification's title. CloudKit uses this value to set the `title` push notification property. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more detail about push notification properties.
+//
 // Title calls the underlying Title.
 func (x *NotificationInfo) Title() unsafe.Pointer {
 	return x.inner.Title()
@@ -120,6 +138,8 @@ func (x *NotificationInfo) SetTitle(title unsafe.Pointer) {
 	x.inner.SetTitle(title)
 }
 
+// The key that identifies the localized string for the notification's title. CloudKit uses this value to set the `title-loc-key` push notification property. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more details about push notification properties.
+//
 // TitleLocalizationKey calls the underlying TitleLocalizationKey.
 func (x *NotificationInfo) TitleLocalizationKey() unsafe.Pointer {
 	return x.inner.TitleLocalizationKey()
@@ -130,6 +150,8 @@ func (x *NotificationInfo) SetTitleLocalizationKey(titleLocalizationKey unsafe.P
 	x.inner.SetTitleLocalizationKey(titleLocalizationKey)
 }
 
+// The fields for building a notification's title. This property is an array of field names that CloudKit uses to extract the corresponding values from the record that triggers the push notification. The values must be strings, numbers, or dates. Don't specify keys that use other value types. CloudKit may truncate strings with a length greater than 100 characters when it adds them to a notification's payload. If you use `%@` for your substitution variables, CloudKit replaces those variables by traversing the array in order. If you use variables of the form `%n$@`, where `n` is an integer, `n` represents the index (starting at 1) of the item in the array to use. So, the first item in the array replaces the variable `%1$@`, the second item replaces the variable `%2$@`, and so on. You can use indexed substitution variables to change the order of items in the resulting string, which might be necessary when you localize your app's content.
+//
 // TitleLocalizationArgs calls the underlying TitleLocalizationArgs.
 func (x *NotificationInfo) TitleLocalizationArgs() unsafe.Pointer {
 	return x.inner.TitleLocalizationArgs()
@@ -140,6 +162,8 @@ func (x *NotificationInfo) SetTitleLocalizationArgs(titleLocalizationArgs unsafe
 	x.inner.SetTitleLocalizationArgs(titleLocalizationArgs)
 }
 
+// The notification's subtitle. CloudKit uses this value to set the `subtitle` push notification property. If you set “CKSubscription/NotificationInfo/subtitleLocalizationKey“, CloudKit ignores this value. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more details about push notification properties.
+//
 // Subtitle calls the underlying Subtitle.
 func (x *NotificationInfo) Subtitle() unsafe.Pointer {
 	return x.inner.Subtitle()
@@ -150,6 +174,8 @@ func (x *NotificationInfo) SetSubtitle(subtitle unsafe.Pointer) {
 	x.inner.SetSubtitle(subtitle)
 }
 
+// The key that identifies the localized string for the notification's subtitle. CloudKit uses this value to set the `subtitle-loc-key` push notification property. Setting this property overrides any value in “CKSubscription/NotificationInfo/subtitle“. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more details about push notification properties.
+//
 // SubtitleLocalizationKey calls the underlying SubtitleLocalizationKey.
 func (x *NotificationInfo) SubtitleLocalizationKey() unsafe.Pointer {
 	return x.inner.SubtitleLocalizationKey()
@@ -160,6 +186,8 @@ func (x *NotificationInfo) SetSubtitleLocalizationKey(subtitleLocalizationKey un
 	x.inner.SetSubtitleLocalizationKey(subtitleLocalizationKey)
 }
 
+// The fields for building a notification's subtitle. This property is an array of field names that CloudKit uses to extract the corresponding values from the record that triggers the push notification. The values must be strings, numbers, or dates. Don't specify keys that use other value types. CloudKit may truncate strings with a length greater than 100 characters when it adds them to a notification's payload. If you use `%@` for your substitution variables, CloudKit replaces those variables by traversing the array in order. If you use variables of the form `%n$@`, where `n` is an integer, `n` represents the index (starting at 1) of the item in the array to use. So, the first item in the array replaces the variable `%1$@`, the second item replaces the variable `%2$@`, and so on. You can use indexed substitution variables to change the order of items in the resulting string, which might be necessary when you localize your app's content.
+//
 // SubtitleLocalizationArgs calls the underlying SubtitleLocalizationArgs.
 func (x *NotificationInfo) SubtitleLocalizationArgs() unsafe.Pointer {
 	return x.inner.SubtitleLocalizationArgs()
@@ -170,6 +198,8 @@ func (x *NotificationInfo) SetSubtitleLocalizationArgs(subtitleLocalizationArgs 
 	x.inner.SetSubtitleLocalizationArgs(subtitleLocalizationArgs)
 }
 
+// The key that identifies the localized string for the notification's action. Set this property's value to have the system use a localized string for the text of the notification's button that opens your app. The system uses the key to find the matching string in your app's `Localizable.string` file. If this property's value is `nil`, the system displays a single button to dismiss the alert. For information about localizing string resources, see [Internationalization and Localization Guide](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPInternational/Introduction/Introduction.html#//apple_ref/doc/uid/10000171i).
+//
 // AlertActionLocalizationKey calls the underlying AlertActionLocalizationKey.
 func (x *NotificationInfo) AlertActionLocalizationKey() unsafe.Pointer {
 	return x.inner.AlertActionLocalizationKey()
@@ -180,6 +210,8 @@ func (x *NotificationInfo) SetAlertActionLocalizationKey(alertActionLocalization
 	x.inner.SetAlertActionLocalizationKey(alertActionLocalizationKey)
 }
 
+// The filename of an image to use as a launch image. If you specify a value, the system uses it to locate an image in the app's bundle, and displays it as a launch image when the user launches the app after receiving a push notification.
+//
 // AlertLaunchImage calls the underlying AlertLaunchImage.
 func (x *NotificationInfo) AlertLaunchImage() unsafe.Pointer {
 	return x.inner.AlertLaunchImage()
@@ -190,6 +222,8 @@ func (x *NotificationInfo) SetAlertLaunchImage(alertLaunchImage unsafe.Pointer) 
 	x.inner.SetAlertLaunchImage(alertLaunchImage)
 }
 
+// The filename of the sound file to play when a notification arrives. If you specify a value, the system uses it to locate a sound file in the app's bundle. The sound plays when the system receives a push notification. If the system can't find the specified file, or if you use the string `default`, the system plays the default sound.
+//
 // SoundName calls the underlying SoundName.
 func (x *NotificationInfo) SoundName() unsafe.Pointer {
 	return x.inner.SoundName()
@@ -200,6 +234,8 @@ func (x *NotificationInfo) SetSoundName(soundName unsafe.Pointer) {
 	x.inner.SetSoundName(soundName)
 }
 
+// The names of fields to include in the push notification's payload. This property contains an array of strings, each of which corresponds to the name of a field in the record that triggers the notification. When the system receives a notification, it includes the keys, and their corresponding values. You can request a maximum of three keys. For the keys you specify, the allowable types are <doc://com.apple.documentation/documentation/foundation/nsstring>, <doc://com.apple.documentation/documentation/foundation/nsnumber>, <doc://com.apple.documentation/documentation/corelocation/cllocation>, <doc://com.apple.documentation/documentation/foundation/nsdate>, and “CKRecord/Reference“. You can't specify keys with values that contain other data types. CloudKit may truncate strings that are more than 100 characters when it adds them to the notification's payload.
+//
 // DesiredKeys returns the collection as a Go slice.
 func (x *NotificationInfo) DesiredKeys() []*foundation.NSString {
 	arr := x.inner.DesiredKeys()
@@ -216,6 +252,8 @@ func (x *NotificationInfo) SetDesiredKeys(desiredKeys *foundation.NSArray[*found
 	x.inner.SetDesiredKeys(desiredKeys)
 }
 
+// A Boolean value that determines whether an app's icon badge increments its value. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>. Set it to <doc://com.apple.documentation/documentation/swift/true> to cause the system to increment the badge value whenever it receives the corresponding push notification.
+//
 // ShouldBadge calls the underlying ShouldBadge.
 func (x *NotificationInfo) ShouldBadge() bool {
 	return x.inner.ShouldBadge()
@@ -226,6 +264,8 @@ func (x *NotificationInfo) SetShouldBadge(shouldBadge bool) {
 	x.inner.SetShouldBadge(shouldBadge)
 }
 
+// A Boolean value that indicates whether the push notification includes the content available flag. When this property is <doc://com.apple.documentation/documentation/swift/true>, the server includes the `content-available` flag in the push notification's payload. That flag causes the system to wake or launch an app that isn't currently running. The app then receives background execution time to download any data for the push notification, such as the set of changed records. If the app is already running in the foreground, the inclusion of this flag has no additional effect and the system delivers the notification to the app delegate for processing as usual. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
+//
 // ShouldSendContentAvailable calls the underlying ShouldSendContentAvailable.
 func (x *NotificationInfo) ShouldSendContentAvailable() bool {
 	return x.inner.ShouldSendContentAvailable()
@@ -236,6 +276,8 @@ func (x *NotificationInfo) SetShouldSendContentAvailable(shouldSendContentAvaila
 	x.inner.SetShouldSendContentAvailable(shouldSendContentAvailable)
 }
 
+// A Boolean value that indicates whether the push notification sets the mutable content flag. When this property is <doc://com.apple.documentation/documentation/swift/true>, the server includes the `mutable-content` flag with a value of `1` in the push notification's payload. When the value is `1`, the system passes the notification to your app extension for modification before delivery. See <doc://com.apple.documentation/documentation/usernotifications/generating-a-remote-notification> for more information about the `mutable-content` flag, and <doc://com.apple.documentation/documentation/usernotifications/modifying-content-in-newly-delivered-notifications> for information about how to modify push notifiction content in your app extension prior to delivery. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
+//
 // ShouldSendMutableContent calls the underlying ShouldSendMutableContent.
 func (x *NotificationInfo) ShouldSendMutableContent() bool {
 	return x.inner.ShouldSendMutableContent()
@@ -246,6 +288,8 @@ func (x *NotificationInfo) SetShouldSendMutableContent(shouldSendMutableContent 
 	x.inner.SetShouldSendMutableContent(shouldSendMutableContent)
 }
 
+// The name of the action group that corresponds to this notification. Categories allow you to present custom actions to the user on your push notifications. For more information, see <doc://com.apple.documentation/documentation/uikit/uimutableusernotificationcategory>.
+//
 // Category calls the underlying Category.
 func (x *NotificationInfo) Category() unsafe.Pointer {
 	return x.inner.Category()
@@ -256,6 +300,8 @@ func (x *NotificationInfo) SetCategory(category unsafe.Pointer) {
 	x.inner.SetCategory(category)
 }
 
+// A value that the system uses to coalesce unseen push notifications. When CloudKit generates a push notification, it sets the notification's `apns-collapse-id` header to this property's value. The system uses this header to coalesce unseen notifications. See <doc://com.apple.documentation/documentation/usernotifications/sending-notification-requests-to-apns> for more information about sending notifications using the Apple Push Notification service.
+//
 // CollapseIDKey calls the underlying CollapseIDKey.
 func (x *NotificationInfo) CollapseIDKey() string {
 	_r := x.inner.CollapseIDKey()

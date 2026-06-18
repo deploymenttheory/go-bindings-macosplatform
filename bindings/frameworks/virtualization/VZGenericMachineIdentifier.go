@@ -10,6 +10,8 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 )
 
+// An object that represents a unique identifier for a virtual machine.
+//
 // Apple documentation: https://developer.apple.com/documentation/virtualization/vzgenericmachineidentifier
 type VZGenericMachineIdentifier struct {
 	foundation.NSObject
@@ -32,7 +34,7 @@ func VZGenericMachineIdentifierFromID(id objc.ID) *VZGenericMachineIdentifier {
 	return o
 }
 
-// @abstract Create a new unique machine identifier.
+// Creates a new unique identifier for a VM.
 func (o *VZGenericMachineIdentifier) Init() *VZGenericMachineIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZGenericMachineIdentifierSelInit)
 	if _ret != 0 {
@@ -41,7 +43,7 @@ func (o *VZGenericMachineIdentifier) Init() *VZGenericMachineIdentifier {
 	return VZGenericMachineIdentifierFromID(_ret)
 }
 
-// @abstract Get the machine identifier described by the specified data representation. @param dataRepresentation The opaque data representation of the machine identifier to be obtained. @return A unique identifier identical to the one that generated the dataRepresentation, or nil if the data is invalid. @see VZGenericMachineIdentifier.dataRepresentation
+// Creates a new unique identifier for a VM with the provided data.
 func (o *VZGenericMachineIdentifier) InitWithDataRepresentation(dataRepresentation *foundation.NSData) *VZGenericMachineIdentifier {
 	_ret := objc.Send[objc.ID](o.Ptr(), _vZGenericMachineIdentifierSelInitWithDataRepresentation, dataRepresentation.Ptr())
 	if _ret != 0 {

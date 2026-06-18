@@ -8,6 +8,7 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/appledocs"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/overrides"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
@@ -95,6 +96,11 @@ func LoadAll(paths []string, modulePrefix, libraryModulePrefix string) (*Registr
 		}
 		for _, warning := range warnings {
 			fmt.Fprintf(os.Stderr, "warning: %s\n", warning)
+		}
+		// Enrich Doc fields with Apple's developer documentation harvested into
+		// the adjacent appledocs.json sidecar (Apple-preferred, header fallback).
+		if err := appledocs.ApplyAdjacent(p, framework); err != nil {
+			return nil, fmt.Errorf("load %s: %w", p, err)
 		}
 		all = append(all, fmWithPath{framework, p})
 	}

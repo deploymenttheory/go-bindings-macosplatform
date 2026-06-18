@@ -33,6 +33,8 @@ func MTRClusterGeneralCommissioningFromID(id objc.ID) *MTRClusterGeneralCommissi
 	return &MTRClusterGeneralCommissioning{inner: raw.MTRClusterGeneralCommissioningFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterGeneralCommissioningWithDeviceEndpointIDQueue creates a new [MTRClusterGeneralCommissioning].
 func NewMTRClusterGeneralCommissioningWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterGeneralCommissioning {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterGeneralCommissioning")), objc.RegisterName("alloc"))

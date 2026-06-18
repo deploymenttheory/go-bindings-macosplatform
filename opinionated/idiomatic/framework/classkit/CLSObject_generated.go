@@ -36,11 +36,15 @@ func NewObject() *Object {
 	return &Object{inner: raw.CLSObjectFromID(_id)}
 }
 
+// @abstract      The date this object was created.
+//
 // DateCreated calls the underlying DateCreated.
 func (x *Object) DateCreated() *foundation.NSDate {
 	return x.inner.DateCreated()
 }
 
+// @abstract      The date this object was last modified.
+//
 // DateLastModified calls the underlying DateLastModified.
 func (x *Object) DateLastModified() *foundation.NSDate {
 	return x.inner.DateLastModified()

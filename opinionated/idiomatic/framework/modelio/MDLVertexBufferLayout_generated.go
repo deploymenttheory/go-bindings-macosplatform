@@ -36,6 +36,8 @@ func NewVertexBufferLayoutWithStride(stride uint) *VertexBufferLayout {
 	return &VertexBufferLayout{inner: raw.MDLVertexBufferLayoutFromID(_id)}
 }
 
+// @property stride @abstract stride in bytes of each vertex element in the buffer. @discussion - If you store multiple attributes interleaved in the vertex buffer, the stride will be the sum of sizes of each attribute (and any padding). - If you store multiple attributes non-interleaved (back to back), the stride will be the size of an attribute (and all attributes are required to have the same size).
+//
 // WithStride sets the stride property and returns the receiver for chaining.
 func (x *VertexBufferLayout) WithStride(stride uint) *VertexBufferLayout {
 	x.inner.SetStride(stride)

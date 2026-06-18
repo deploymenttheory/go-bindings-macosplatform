@@ -36,16 +36,22 @@ func NewQuantity() *Quantity {
 	return &Quantity{inner: raw.HKQuantityFromID(_id)}
 }
 
+// @method        isCompatibleWithUnit: @abstract      Returns yes if the receiver's value can be converted to a value of the given unit.
+//
 // IsCompatibleWithUnit calls the underlying IsCompatibleWithUnit.
 func (x *Quantity) IsCompatibleWithUnit(unit *raw.HKUnit) bool {
 	return x.inner.IsCompatibleWithUnit(unit)
 }
 
+// @method        doubleValueForUnit: @abstract      Returns the quantity value converted to the given unit. @discussion    Throws an exception if the receiver's value cannot be converted to one of the requested unit.
+//
 // DoubleValueForUnit calls the underlying DoubleValueForUnit.
 func (x *Quantity) DoubleValueForUnit(unit *raw.HKUnit) float64 {
 	return x.inner.DoubleValueForUnit(unit)
 }
 
+// @method        compare: @abstract      Returns an NSComparisonResult value that indicates whether the receiver is greater than, equal to, or less than a given quantity. @discussion    Throws an exception if the unit of the given quantity is not compatible with the receiver's unit.
+//
 // Compare calls the underlying Compare.
 func (x *Quantity) Compare(quantity *raw.HKQuantity) foundation.NSComparisonResult {
 	return x.inner.Compare(quantity)

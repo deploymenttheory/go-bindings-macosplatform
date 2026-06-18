@@ -36,6 +36,8 @@ func NewCIDeviceManager() *CIDeviceManager {
 	return &CIDeviceManager{inner: raw.MIDICIDeviceManagerFromID(_id)}
 }
 
+// @property	discoveredCIDevices @brief		A list of MIDICIDevices that responded to the last MIDI-CI discovery request.
+//
 // DiscoveredCIDevices returns the collection as a Go slice.
 func (x *CIDeviceManager) DiscoveredCIDevices() []*CIDevice {
 	arr := x.inner.DiscoveredCIDevices()

@@ -37,12 +37,16 @@ func NewScrubberFlowLayout() *ScrubberFlowLayout {
 	return &ScrubberFlowLayout{inner: raw.NSScrubberFlowLayoutFromID(_id)}
 }
 
+// The amount of horizontal spacing between items in points. The default value is 0.0.
+//
 // WithItemSpacing sets the itemSpacing property and returns the receiver for chaining.
 func (x *ScrubberFlowLayout) WithItemSpacing(itemSpacing float64) *ScrubberFlowLayout {
 	x.inner.SetItemSpacing(itemSpacing)
 	return x
 }
 
+// The frame size for each item, if not provided by the scrubber's delegate. The default value is { 50.0, 30.0 }.
+//
 // WithItemSize sets the itemSize property and returns the receiver for chaining.
 func (x *ScrubberFlowLayout) WithItemSize(itemSize corefoundation.CGSize) *ScrubberFlowLayout {
 	x.inner.SetItemSize(itemSize)
@@ -54,21 +58,29 @@ func (x *ScrubberFlowLayout) InvalidateLayoutForItemsAtIndexes(invalidItemIndexe
 	x.inner.InvalidateLayoutForItemsAtIndexes(invalidItemIndexes)
 }
 
+// The amount of horizontal spacing between items in points. The default value is 0.0.
+//
 // ItemSpacing calls the underlying ItemSpacing.
 func (x *ScrubberFlowLayout) ItemSpacing() float64 {
 	return x.inner.ItemSpacing()
 }
 
+// The amount of horizontal spacing between items in points. The default value is 0.0.
+//
 // SetItemSpacing calls the underlying SetItemSpacing.
 func (x *ScrubberFlowLayout) SetItemSpacing(itemSpacing float64) {
 	x.inner.SetItemSpacing(itemSpacing)
 }
 
+// The frame size for each item, if not provided by the scrubber's delegate. The default value is { 50.0, 30.0 }.
+//
 // ItemSize calls the underlying ItemSize.
 func (x *ScrubberFlowLayout) ItemSize() corefoundation.CGSize {
 	return x.inner.ItemSize()
 }
 
+// The frame size for each item, if not provided by the scrubber's delegate. The default value is { 50.0, 30.0 }.
+//
 // SetItemSize calls the underlying SetItemSize.
 func (x *ScrubberFlowLayout) SetItemSize(itemSize corefoundation.CGSize) {
 	x.inner.SetItemSize(itemSize)

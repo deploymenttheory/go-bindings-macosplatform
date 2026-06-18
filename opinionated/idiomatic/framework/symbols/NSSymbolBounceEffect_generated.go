@@ -35,6 +35,8 @@ func NewSymbolBounceEffect() *SymbolBounceEffect {
 	return &SymbolBounceEffect{inner: raw.NSSymbolBounceEffectFromID(_id)}
 }
 
+// Returns a copy of the effect that animates incrementally, by layer.
+//
 // EffectWithByLayer calls the underlying EffectWithByLayer.
 func (x *SymbolBounceEffect) EffectWithByLayer() *SymbolBounceEffect {
 	_r := x.inner.EffectWithByLayer()
@@ -44,6 +46,8 @@ func (x *SymbolBounceEffect) EffectWithByLayer() *SymbolBounceEffect {
 	return &SymbolBounceEffect{inner: _r}
 }
 
+// Returns a copy of the effect that animates all layers of the symbol simultaneously.
+//
 // EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
 func (x *SymbolBounceEffect) EffectWithWholeSymbol() *SymbolBounceEffect {
 	_r := x.inner.EffectWithWholeSymbol()

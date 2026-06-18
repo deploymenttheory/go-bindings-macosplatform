@@ -40,6 +40,8 @@ func NewAssetWriter() *AssetWriter {
 	return &AssetWriter{inner: raw.AVAssetWriterFromID(_id)}
 }
 
+// @method initWithURL:fileType:error: @abstract Creates an instance of AVAssetWriter configured to write to a file in a specified container format. @param URL The location of the file to be written. The URL must be a file URL. @param fileType A UTI indicating the format of the file to be written. @param outError On return, if initialization of the AVAssetWriter fails, points to an NSError describing the nature of the failure. @result An instance of AVAssetWriter. @discussion Writing will fail if a file already exists at the specified URL. This method throws an exception if the output file type is not declared in AVMediaFormat.h.
+//
 // NewAssetWriterWithURLFileTypeError creates a new [AssetWriter].
 func NewAssetWriterWithURLFileTypeError(outputURL string, outputFileType *foundation.NSString) (*AssetWriter, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetWriter")), objc.RegisterName("alloc"))
@@ -51,6 +53,8 @@ func NewAssetWriterWithURLFileTypeError(outputURL string, outputFileType *founda
 	return &AssetWriter{inner: raw.AVAssetWriterFromID(_id)}, nil
 }
 
+// @method initWithContentType: @abstract Creates an instance of AVAssetWriter configured to output segment data in a specified container format. @param outputContentType A UTType indicating the format of the segment data to be output. @result An instance of AVAssetWriter. @discussion Clients that want to receive segment data through the -assetWriter:didOutputSegmentData:segmentType:segmentReport: or -assetWriter:didOutputSegmentData:segmentType: delegate method should use this initializer instead of -initWithURL:fileType:error:. Clients may use +typeWithIdentifier: with a UTI to create an instance of UTType. See <UniformTypeIdentifiers/UTType.h>. This method throws an exception if the output content type UTI for container format is not declared in AVMediaFormat.h.
+//
 // NewAssetWriterWithContentType creates a new [AssetWriter].
 func NewAssetWriterWithContentType(outputContentType *uniformtypeidentifiers.UTType) *AssetWriter {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetWriter")), objc.RegisterName("alloc"))
@@ -58,6 +62,8 @@ func NewAssetWriterWithContentType(outputContentType *uniformtypeidentifiers.UTT
 	return &AssetWriter{inner: raw.AVAssetWriterFromID(_id)}
 }
 
+// @property metadata @abstract A collection of metadata to be written to the receiver's output file. @discussion The value of this property is an array of AVMetadataItem objects representing the collection of top-level metadata to be written in the output file. This property cannot be set after writing has started.
+//
 // WithMetadata sets the collection, converting the Go slice to an NSArray.
 func (x *AssetWriter) WithMetadata(items ...MetadataItemProvider) *AssetWriter {
 	if len(items) == 0 {
@@ -76,60 +82,80 @@ func (x *AssetWriter) WithMetadata(items ...MetadataItemProvider) *AssetWriter {
 	return x
 }
 
+// @property shouldOptimizeForNetworkUse @abstract Specifies whether the output file should be written in way that makes it more suitable for playback over a network @discussion When the value of this property is YES, the output file will be written in such a way that playback can start after only a small amount of the file is downloaded. This property cannot be set after writing has started.
+//
 // WithShouldOptimizeForNetworkUse sets the shouldOptimizeForNetworkUse property and returns the receiver for chaining.
 func (x *AssetWriter) WithShouldOptimizeForNetworkUse(shouldOptimizeForNetworkUse bool) *AssetWriter {
 	x.inner.SetShouldOptimizeForNetworkUse(shouldOptimizeForNetworkUse)
 	return x
 }
 
+// @property directoryForTemporaryFiles @abstract Specifies a directory that is suitable for containing temporary files generated during the process of writing an asset. @discussion AVAssetWriter may need to write temporary files when configured in certain ways, such as when performsMultiPassEncodingIfSupported is set to YES on one or more of its inputs.  This property can be used to control where in the filesystem those temporary files are created.  All temporary files will be deleted when asset writing is completed, is canceled, or fails. When the value of this property is nil, the asset writer will choose a suitable location when writing temporary files.  The default value is nil. This property cannot be set after writing has started.  The asset writer will fail if a file cannot be created in this directory (for example, due to insufficient permissions).
+//
 // WithDirectoryForTemporaryFiles sets the directoryForTemporaryFiles property and returns the receiver for chaining.
 func (x *AssetWriter) WithDirectoryForTemporaryFiles(directoryForTemporaryFiles string) *AssetWriter {
 	x.inner.SetDirectoryForTemporaryFiles(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(directoryForTemporaryFiles)))
 	return x
 }
 
+// @property movieFragmentInterval @abstract For file types that support movie fragments, specifies the frequency at which movie fragments should be written. @discussion When movie fragments are used, a partially written asset whose writing is unexpectedly interrupted can be successfully opened and played up to multiples of the specified time interval. The default value of this property is kCMTimeInvalid, which indicates that movie fragments should not be used. When using movie fragments, for best writing performance to external storage devices, set the movieFragmentInterval to 10 seconds or greater. This property cannot be set after writing has started.
+//
 // WithMovieFragmentInterval sets the movieFragmentInterval property and returns the receiver for chaining.
 func (x *AssetWriter) WithMovieFragmentInterval(movieFragmentInterval coremedia.CMTime) *AssetWriter {
 	x.inner.SetMovieFragmentInterval(movieFragmentInterval)
 	return x
 }
 
+// @property initialMovieFragmentInterval @abstract For file types that support movie fragments, specifies the interval at which initial movie fragment should be written. @discussion This property is irrelevant if the movieFragmentInterval property is not set. The default value is kCMTimeInvalid, which indicates that the interval for initial movie fragment is same as the one specified by movieFragmentInterval property. This property cannot be set after writing has started.
+//
 // WithInitialMovieFragmentInterval sets the initialMovieFragmentInterval property and returns the receiver for chaining.
 func (x *AssetWriter) WithInitialMovieFragmentInterval(initialMovieFragmentInterval coremedia.CMTime) *AssetWriter {
 	x.inner.SetInitialMovieFragmentInterval(initialMovieFragmentInterval)
 	return x
 }
 
+// @property initialMovieFragmentSequenceNumber @abstract For file types that support movie fragments, specifies the initial movie fragment sequence number. @discussion The value must be equal to or greater than 1. The default value is 1. Note that if you combine movie fragments produced by an instance of AVAssetWriter with additional movie fragments, produced either by a different instance of AVAssetWriter or by some other means, it is necessary to ensure that movie fragment sequence numbers increase monotonically across the entire combined collection, in temporal order. This property cannot be set after writing has started.
+//
 // WithInitialMovieFragmentSequenceNumber sets the initialMovieFragmentSequenceNumber property and returns the receiver for chaining.
 func (x *AssetWriter) WithInitialMovieFragmentSequenceNumber(initialMovieFragmentSequenceNumber int) *AssetWriter {
 	x.inner.SetInitialMovieFragmentSequenceNumber(initialMovieFragmentSequenceNumber)
 	return x
 }
 
+// @property producesCombinableFragments @abstract For file types that support fragmented MPEG-4, specifies whether the movie fragments should be produced in way that makes them suitable for combining with movie fragments produced by one or more other instances of AVAssetWriter into a single fragment stream of uniform encoding. @discussion The default value is NO. When multiple instances of AVAssetWriter are used to produce distinct streams that complement each other, for example to create HLS encoding or bitrate variants, it’s not necessary to set this property to YES. This property cannot be set after writing has started.
+//
 // WithProducesCombinableFragments sets the producesCombinableFragments property and returns the receiver for chaining.
 func (x *AssetWriter) WithProducesCombinableFragments(producesCombinableFragments bool) *AssetWriter {
 	x.inner.SetProducesCombinableFragments(producesCombinableFragments)
 	return x
 }
 
+// @property overallDurationHint @abstract For file types that support movie fragments, provides a hint of the final duration of the file to be written @discussion The value of this property must be a nonnegative, numeric CMTime.  Alternatively, if the value of this property is an invalid CMTime (e.g. kCMTimeInvalid), no overall duration hint will be written to the file.  The default value is kCMTimeInvalid. This property is currently ignored if movie fragments are not being written.  Use the movieFragmentInterval property to enable movie fragments. This property cannot be set after writing has started.
+//
 // WithOverallDurationHint sets the overallDurationHint property and returns the receiver for chaining.
 func (x *AssetWriter) WithOverallDurationHint(overallDurationHint coremedia.CMTime) *AssetWriter {
 	x.inner.SetOverallDurationHint(overallDurationHint)
 	return x
 }
 
+// @property movieTimeScale @abstract For file types that contain a 'moov' atom, such as QuickTime Movie files, specifies the asset-level time scale to be used. @discussion The default value is 0, which indicates that the receiver should choose a convenient value, if applicable. This property cannot be set after writing has started.
+//
 // WithMovieTimeScale sets the movieTimeScale property and returns the receiver for chaining.
 func (x *AssetWriter) WithMovieTimeScale(movieTimeScale int32) *AssetWriter {
 	x.inner.SetMovieTimeScale(movieTimeScale)
 	return x
 }
 
+// @property preferredOutputSegmentInterval @abstract Specifies preferred segment interval. @discussion The default value is kCMTimeInvalid, which means that the receiver will choose an appropriate default value. The value can be set to positive numeric or kCMTimeIndefinite. If the value is kCMTimeIndefinite, every time a client calls -flushSegment the receiver outputs a segment data. This property cannot be set after writing has started.
+//
 // WithPreferredOutputSegmentInterval sets the preferredOutputSegmentInterval property and returns the receiver for chaining.
 func (x *AssetWriter) WithPreferredOutputSegmentInterval(preferredOutputSegmentInterval coremedia.CMTime) *AssetWriter {
 	x.inner.SetPreferredOutputSegmentInterval(preferredOutputSegmentInterval)
 	return x
 }
 
+// @property initialSegmentStartTime @abstract Specifies start time of initial segment. @discussion A numeric time must be set if the value of preferredOutputSegmentInterval property is positive numeric. If not, this property is irrelevant. This property cannot be set after writing has started.
+//
 // WithInitialSegmentStartTime sets the initialSegmentStartTime property and returns the receiver for chaining.
 func (x *AssetWriter) WithInitialSegmentStartTime(initialSegmentStartTime coremedia.CMTime) *AssetWriter {
 	x.inner.SetInitialSegmentStartTime(initialSegmentStartTime)
@@ -142,57 +168,79 @@ func (x *AssetWriter) WithOutputFileTypeProfile(outputFileTypeProfile *foundatio
 	return x
 }
 
+// @property delegate @abstract An object that implements one or more of the methods in the AVAssetWriterDelegate protocol. @discussion This property cannot be set after writing has started.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *AssetWriter) WithDelegate(delegate raw.AVAssetWriterDelegate) *AssetWriter {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @method canApplyOutputSettings:forMediaType: @abstract Tests whether output settings for a specific media type are supported by the receiver's file format. @param outputSettings The output settings that are to be tested. @param mediaType The media type for which the output settings are to be tested. Media types are defined in AVMediaFormat.h. @result A BOOL indicating whether the given output settings can be used for the given media type. @discussion This method determines whether the output settings for the specified media type can be used with the receiver's file format. For example, video compression settings that specify H.264 compression are not compatible with file formats that cannot contain H.264-compressed video. Attempting to add an input with output settings and a media type for which this method returns NO will cause an exception to be thrown.
+//
 // CanApplyOutputSettingsForMediaType calls the underlying CanApplyOutputSettingsForMediaType.
 func (x *AssetWriter) CanApplyOutputSettingsForMediaType(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID], mediaType *foundation.NSString) bool {
 	return x.inner.CanApplyOutputSettingsForMediaType(outputSettings, mediaType)
 }
 
+// @method canAddInput: @abstract Tests whether an input can be added to the receiver. @param input The AVAssetWriterInput object to be tested. @result A BOOL indicating whether the input can be added to the receiver. @discussion An input that accepts media data of a type that is not compatible with the receiver, or with output settings that are not compatible with the receiver, cannot be added.
+//
 // CanAddInput calls the underlying CanAddInput.
 func (x *AssetWriter) CanAddInput(input *raw.AVAssetWriterInput) bool {
 	return x.inner.CanAddInput(input)
 }
 
+// @method addInput: @abstract Adds an input to the receiver. @param input The AVAssetWriterInput object to be added. @discussion Inputs are created with a media type and output settings. These both must be compatible with the receiver. Inputs cannot be added after writing has started. This method throws an exception if any of the following conditions are satisfied: - the input's media type is not allowed for this asset writer - writing uncompressed video in a specific format - passthrough* to files (other than AVFileTypeQuickTimeMovie) is missing a format hint in the AVAssetWriterInput initializer - passthrough* is not supported for this media/file type combination (for example, AVFileTypeWAVE only supports AVMediaTypeAudio) Passthrough is indicated when the input's output settings are nil.
+//
 // AddInput calls the underlying AddInput.
 func (x *AssetWriter) AddInput(input *raw.AVAssetWriterInput) {
 	x.inner.AddInput(input)
 }
 
+// @method startWriting @abstract Prepares the receiver for accepting input and for writing its output to its output file. @result A BOOL indicating whether writing successfully started. @discussion This method must be called after all inputs have been added and other configuration properties have been set in order to tell the receiver to prepare for writing. After this method is called, clients can start writing sessions using startSessionAtSourceTime: and can write media samples using the methods provided by each of the receiver's inputs. If writing cannot be started, this method returns NO. Clients can check the values of the status and error properties for more information on why writing could not be started. On iOS, if the status of an AVAssetWriter is AVAssetWriterStatusWriting when the client app goes into the background, its status will change to AVAssetWriterStatusFailed and appending to any of its inputs will fail.  You may want to use -[UIApplication beginBackgroundTaskWithExpirationHandler:] to avoid being interrupted in the middle of a writing session and to finish writing the data that has already been appended.  For more information about executing code in the background, see the iOS Application Programming Guide.
+//
 // StartWriting calls the underlying StartWriting.
 func (x *AssetWriter) StartWriting() bool {
 	return x.inner.StartWriting()
 }
 
+// @method startSessionAtSourceTime: @abstract Initiates a sample-writing session for the receiver. @param startTime The starting asset time for the sample-writing session, in the timeline of the source samples. @discussion Sequences of sample data appended to the asset writer inputs are considered to fall within "sample-writing sessions", initiated with this method. Accordingly, this method must be called after writing has started (using -startWriting) but before any sample data is appended to the receiver's inputs. Each writing session has a start time which, where allowed by the file format being written, defines the mapping from the timeline of source samples to the timeline of the written file. In the case of the QuickTime movie file format, the first session begins at movie time 0, so a sample appended with timestamp T will be played at movie time (T-startTime).  Samples with timestamps earlier than startTime will still be added to the output file but will be edited out (i.e. not presented during playback). If the earliest appended sample for an input has a timestamp later than than startTime, an empty edit will be inserted to preserve synchronization between tracks of the output asset. To end the session started by use of this method, use -endSessionAtSourceTime: or -finishWritingWithCompletionHandler:.  It is an error to invoke -startSessionAtSourceTime: twice in a row without invoking -endSessionAtSourceTime: in between. NOTE: Multiple sample-writing sessions are currently not supported. It is an error to call -startSessionAtSourceTime: a second time after calling -endSessionAtSourceTime:.
+//
 // StartSessionAtSourceTime calls the underlying StartSessionAtSourceTime.
 func (x *AssetWriter) StartSessionAtSourceTime(startTime coremedia.CMTime) {
 	x.inner.StartSessionAtSourceTime(startTime)
 }
 
+// @method endSessionAtSourceTime: @abstract Concludes a sample-writing session. @param endTime The ending asset time for the sample-writing session, in the timeline of the source samples. @discussion Call this method to complete a session started with -startSessionAtSourceTime:. The endTime defines the moment on the timeline of source samples at which the session ends. In the case of the QuickTime movie file format, each sample-writing session's startTime...endTime pair corresponds to a period of movie time into which the session's samples are inserted. Samples with timestamps that are later than the session end time will still be added to the written file but will be edited out (i.e. not presented during playback). So if the first session has duration D1 = endTime - startTime, it will be inserted into the written file at time 0 through D1; the second session would be inserted into the written file at time D1 through D1+D2, etc. It is legal to have a session with no samples; this will cause creation of an empty edit of the prescribed duration. It is not mandatory to call -endSessionAtSourceTime:; if -finishWritingWithCompletionHandler: is called without first invoking -endSessionAtSourceTime:, the session's effective end time will be the latest end timestamp of the session's appended samples (i.e. no samples will be edited out at the end). It is an error to append samples outside of a sample-writing session.  To append more samples after invoking -endSessionAtSourceTime:, you must first start a new session using -startSessionAtSourceTime:. NOTE: Multiple sample-writing sessions are currently not supported. It is an error to call -startSessionAtSourceTime: a second time after calling -endSessionAtSourceTime:. This method throws an exception if the session is ended without first starting it.
+//
 // EndSessionAtSourceTime calls the underlying EndSessionAtSourceTime.
 func (x *AssetWriter) EndSessionAtSourceTime(endTime coremedia.CMTime) {
 	x.inner.EndSessionAtSourceTime(endTime)
 }
 
+// @method cancelWriting @abstract Cancels the creation of the output file. @discussion If the status of the receiver is "failed" or "completed," -cancelWriting is a no-op.  Otherwise, this method will block until writing is canceled. If an output file was created by the receiver during the writing process, -cancelWriting will delete the file. This method should not be called concurrently with -[AVAssetWriterInput appendSampleBuffer:] or -[AVAssetWriterInputPixelBufferAdaptor appendPixelBuffer:withPresentationTime:].
+//
 // CancelWriting calls the underlying CancelWriting.
 func (x *AssetWriter) CancelWriting() {
 	x.inner.CancelWriting()
 }
 
+// @method finishWriting @abstract Completes the writing of the output file. @result A BOOL indicating whether writing successfully finished. @discussion This method is deprecated.  Use finishWritingWithCompletionHandler: instead. This method will block until writing is finished. When this method returns successfully, the file being written by the receiver is complete and ready to use. Because this method is blocking and can take a long time to execute (especially with shouldOptimizeForNetworkUse set to YES), it should not be called from the main thread.  Doing so can cause the finishWriting operation to fail. If writing cannot be finished, this method returns NO. Clients can check the values of the status and error properties for more information on why writing could not be finished. This method should not be called concurrently with -[AVAssetWriterInput appendSampleBuffer:] or -[AVAssetWriterInputPixelBufferAdaptor appendPixelBuffer:withPresentationTime:].
+//
 // FinishWriting calls the underlying FinishWriting.
 func (x *AssetWriter) FinishWriting() bool {
 	return x.inner.FinishWriting()
 }
 
+// @property outputURL @abstract The location of the file for which the instance of AVAssetWriter was initialized for writing. @discussion You may use [[UTType typeWithIdentifier:outputFileType] preferredFilenameExtension] to obtain an appropriate path extension for the outputFileType you have specified. For more information, see <UniformTypeIdentifiers/UTType.h>.
+//
 // OutputURL calls the underlying OutputURL.
 func (x *AssetWriter) OutputURL() *foundation.NSURL {
 	return x.inner.OutputURL()
 }
 
+// @property outputFileType @abstract The UTI of the file format of the file for which the instance of AVAssetWriter was initialized for writing.
+//
 // OutputFileType calls the underlying OutputFileType.
 func (x *AssetWriter) OutputFileType() string {
 	_r := x.inner.OutputFileType()
@@ -202,6 +250,8 @@ func (x *AssetWriter) OutputFileType() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property availableMediaTypes @abstract The media types for which inputs can be added to the receiver. @discussion Some media types may not be accepted within the file format with which an AVAssetWriter was initialized.
+//
 // AvailableMediaTypes returns the collection as a Go slice.
 func (x *AssetWriter) AvailableMediaTypes() []*foundation.NSString {
 	arr := x.inner.AvailableMediaTypes()
@@ -213,16 +263,22 @@ func (x *AssetWriter) AvailableMediaTypes() []*foundation.NSString {
 	})
 }
 
+// @property status @abstract The status of writing samples to the receiver's output file. @discussion The value of this property is an AVAssetWriterStatus that indicates whether writing is in progress, has completed successfully, has been canceled, or has failed. Clients of AVAssetWriterInput objects should check the value of this property after appending samples fails to determine why no more samples could be written. This property is thread safe.
+//
 // Status calls the underlying Status.
 func (x *AssetWriter) Status() AVAssetWriterStatus {
 	return AVAssetWriterStatus(x.inner.Status())
 }
 
+// @property error @abstract If the receiver's status is AVAssetWriterStatusFailed, this describes the error that caused the failure. @discussion The value of this property is an NSError that describes what caused the receiver to no longer be able to write to its output file. If the receiver's status is not AVAssetWriterStatusFailed, the value of this property is nil. This property is thread safe.
+//
 // Error calls the underlying Error.
 func (x *AssetWriter) Error() unsafe.Pointer {
 	return x.inner.Error()
 }
 
+// @property metadata @abstract A collection of metadata to be written to the receiver's output file. @discussion The value of this property is an array of AVMetadataItem objects representing the collection of top-level metadata to be written in the output file. This property cannot be set after writing has started.
+//
 // Metadata returns the collection as a Go slice.
 func (x *AssetWriter) Metadata() []*MetadataItem {
 	arr := x.inner.Metadata()
@@ -235,10 +291,21 @@ func (x *AssetWriter) Metadata() []*MetadataItem {
 }
 
 // SetMetadata calls the underlying SetMetadata.
-func (x *AssetWriter) SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem]) {
-	x.inner.SetMetadata(metadata)
+func (x *AssetWriter) SetMetadata(metadata ...MetadataItemProvider) {
+	_ptrs := make([]objc.ID, len(metadata))
+	for _i, _v := range metadata {
+		_ptrs[_i] = _v.asMetadataItem().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.AVMetadataItem]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.AVMetadataItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetMetadata(_arg0)
 }
 
+// @property shouldOptimizeForNetworkUse @abstract Specifies whether the output file should be written in way that makes it more suitable for playback over a network @discussion When the value of this property is YES, the output file will be written in such a way that playback can start after only a small amount of the file is downloaded. This property cannot be set after writing has started.
+//
 // ShouldOptimizeForNetworkUse calls the underlying ShouldOptimizeForNetworkUse.
 func (x *AssetWriter) ShouldOptimizeForNetworkUse() bool {
 	return x.inner.ShouldOptimizeForNetworkUse()
@@ -249,6 +316,8 @@ func (x *AssetWriter) SetShouldOptimizeForNetworkUse(shouldOptimizeForNetworkUse
 	x.inner.SetShouldOptimizeForNetworkUse(shouldOptimizeForNetworkUse)
 }
 
+// @property directoryForTemporaryFiles @abstract Specifies a directory that is suitable for containing temporary files generated during the process of writing an asset. @discussion AVAssetWriter may need to write temporary files when configured in certain ways, such as when performsMultiPassEncodingIfSupported is set to YES on one or more of its inputs.  This property can be used to control where in the filesystem those temporary files are created.  All temporary files will be deleted when asset writing is completed, is canceled, or fails. When the value of this property is nil, the asset writer will choose a suitable location when writing temporary files.  The default value is nil. This property cannot be set after writing has started.  The asset writer will fail if a file cannot be created in this directory (for example, due to insufficient permissions).
+//
 // DirectoryForTemporaryFiles calls the underlying DirectoryForTemporaryFiles.
 func (x *AssetWriter) DirectoryForTemporaryFiles() *foundation.NSURL {
 	return x.inner.DirectoryForTemporaryFiles()
@@ -259,6 +328,8 @@ func (x *AssetWriter) SetDirectoryForTemporaryFiles(directoryForTemporaryFiles s
 	x.inner.SetDirectoryForTemporaryFiles(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(directoryForTemporaryFiles)))
 }
 
+// @property inputs @abstract The inputs from which the asset writer receives media data. @discussion The value of this property is an NSArray containing concrete instances of AVAssetWriterInput. Inputs can be added to the receiver using the addInput: method.
+//
 // Inputs returns the collection as a Go slice.
 func (x *AssetWriter) Inputs() []*AssetWriterInput {
 	arr := x.inner.Inputs()
@@ -270,6 +341,8 @@ func (x *AssetWriter) Inputs() []*AssetWriterInput {
 	})
 }
 
+// @property movieFragmentInterval @abstract For file types that support movie fragments, specifies the frequency at which movie fragments should be written. @discussion When movie fragments are used, a partially written asset whose writing is unexpectedly interrupted can be successfully opened and played up to multiples of the specified time interval. The default value of this property is kCMTimeInvalid, which indicates that movie fragments should not be used. When using movie fragments, for best writing performance to external storage devices, set the movieFragmentInterval to 10 seconds or greater. This property cannot be set after writing has started.
+//
 // MovieFragmentInterval calls the underlying MovieFragmentInterval.
 func (x *AssetWriter) MovieFragmentInterval() coremedia.CMTime {
 	return x.inner.MovieFragmentInterval()
@@ -290,6 +363,8 @@ func (x *AssetWriter) SetInitialMovieFragmentSequenceNumber(initialMovieFragment
 	x.inner.SetInitialMovieFragmentSequenceNumber(initialMovieFragmentSequenceNumber)
 }
 
+// @property producesCombinableFragments @abstract For file types that support fragmented MPEG-4, specifies whether the movie fragments should be produced in way that makes them suitable for combining with movie fragments produced by one or more other instances of AVAssetWriter into a single fragment stream of uniform encoding. @discussion The default value is NO. When multiple instances of AVAssetWriter are used to produce distinct streams that complement each other, for example to create HLS encoding or bitrate variants, it’s not necessary to set this property to YES. This property cannot be set after writing has started.
+//
 // ProducesCombinableFragments calls the underlying ProducesCombinableFragments.
 func (x *AssetWriter) ProducesCombinableFragments() bool {
 	return x.inner.ProducesCombinableFragments()
@@ -300,6 +375,8 @@ func (x *AssetWriter) SetProducesCombinableFragments(producesCombinableFragments
 	x.inner.SetProducesCombinableFragments(producesCombinableFragments)
 }
 
+// @property overallDurationHint @abstract For file types that support movie fragments, provides a hint of the final duration of the file to be written @discussion The value of this property must be a nonnegative, numeric CMTime.  Alternatively, if the value of this property is an invalid CMTime (e.g. kCMTimeInvalid), no overall duration hint will be written to the file.  The default value is kCMTimeInvalid. This property is currently ignored if movie fragments are not being written.  Use the movieFragmentInterval property to enable movie fragments. This property cannot be set after writing has started.
+//
 // OverallDurationHint calls the underlying OverallDurationHint.
 func (x *AssetWriter) OverallDurationHint() coremedia.CMTime {
 	return x.inner.OverallDurationHint()
@@ -310,6 +387,8 @@ func (x *AssetWriter) SetOverallDurationHint(overallDurationHint coremedia.CMTim
 	x.inner.SetOverallDurationHint(overallDurationHint)
 }
 
+// @property movieTimeScale @abstract For file types that contain a 'moov' atom, such as QuickTime Movie files, specifies the asset-level time scale to be used. @discussion The default value is 0, which indicates that the receiver should choose a convenient value, if applicable. This property cannot be set after writing has started.
+//
 // MovieTimeScale calls the underlying MovieTimeScale.
 func (x *AssetWriter) MovieTimeScale() int32 {
 	return x.inner.MovieTimeScale()
@@ -320,6 +399,8 @@ func (x *AssetWriter) SetMovieTimeScale(movieTimeScale int32) {
 	x.inner.SetMovieTimeScale(movieTimeScale)
 }
 
+// @method canAddInputGroup: @abstract Tests whether an input group can be added to the receiver. @param inputGroup The AVAssetWriterInputGroup object to be tested. @result A BOOL indicating whether the input group can be added to the receiver. @discussion If outputFileType specifies a container format that does not support mutually exclusive relationships among tracks, or if the specified instance of AVAssetWriterInputGroup contains inputs with media types that cannot be related, the group cannot be added to the AVAssetWriter. This method throws an exception if any of the following conditions are satisfied: - this writer's output file type does not support mutually exclusive relationships among tracks (allowed types are AVFileTypeQuickTimeMovie, AVFileTypeAppleM4A, AVFileTypeAppleM4V, AVFileType3GPP, AVFileTypeMPEG4) - any AVAssetWriterInput in the input group is also present in an input group already added
+//
 // CanAddInputGroup calls the underlying CanAddInputGroup.
 func (x *AssetWriter) CanAddInputGroup(inputGroup *raw.AVAssetWriterInputGroup) bool {
 	return x.inner.CanAddInputGroup(inputGroup)
@@ -341,11 +422,15 @@ func (x *AssetWriter) InputGroups() []*AssetWriterInputGroup {
 	})
 }
 
+// @method flushSegment @abstract Closes the current segment and outputs it to the -assetWriter:didOutputSegmentData:segmentType:segmentReport: or -assetWriter:didOutputSegmentData:segmentType: delegate method. @discussion This method throws an exception if the delegate method to output segment data is not implemented, or if the value of the preferredOutputSegmentInterval property is not kCMTimeIndefinite.
+//
 // FlushSegment calls the underlying FlushSegment.
 func (x *AssetWriter) FlushSegment() {
 	x.inner.FlushSegment()
 }
 
+// @property preferredOutputSegmentInterval @abstract Specifies preferred segment interval. @discussion The default value is kCMTimeInvalid, which means that the receiver will choose an appropriate default value. The value can be set to positive numeric or kCMTimeIndefinite. If the value is kCMTimeIndefinite, every time a client calls -flushSegment the receiver outputs a segment data. This property cannot be set after writing has started.
+//
 // PreferredOutputSegmentInterval calls the underlying PreferredOutputSegmentInterval.
 func (x *AssetWriter) PreferredOutputSegmentInterval() coremedia.CMTime {
 	return x.inner.PreferredOutputSegmentInterval()
@@ -375,6 +460,8 @@ func (x *AssetWriter) SetOutputFileTypeProfile(outputFileTypeProfile *foundation
 	x.inner.SetOutputFileTypeProfile(outputFileTypeProfile)
 }
 
+// @property delegate @abstract An object that implements one or more of the methods in the AVAssetWriterDelegate protocol. @discussion This property cannot be set after writing has started.
+//
 // Delegate calls the underlying Delegate.
 func (x *AssetWriter) Delegate() raw.AVAssetWriterDelegate {
 	return x.inner.Delegate()
@@ -415,7 +502,7 @@ type AssetWriterable interface {
 	Status() AVAssetWriterStatus
 	Error() unsafe.Pointer
 	Metadata() []*MetadataItem
-	SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem])
+	SetMetadata(metadata ...MetadataItemProvider)
 	ShouldOptimizeForNetworkUse() bool
 	SetShouldOptimizeForNetworkUse(shouldOptimizeForNetworkUse bool)
 	DirectoryForTemporaryFiles() *foundation.NSURL

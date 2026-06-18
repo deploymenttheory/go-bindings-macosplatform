@@ -7,9 +7,13 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
+// The base class for a USB controller configuration.
+//
 // USBControllerConfiguration wraps [raw.VZUSBControllerConfiguration] with a fluent Go API.
 type USBControllerConfiguration struct {
 	inner *raw.VZUSBControllerConfiguration
@@ -42,8 +46,17 @@ func (x *USBControllerConfiguration) UsbDevices() *foundation.NSArray[raw.VZUSBD
 }
 
 // SetUsbDevices calls the underlying SetUsbDevices.
-func (x *USBControllerConfiguration) SetUsbDevices(usbDevices *foundation.NSArray[raw.VZUSBDeviceConfiguration]) {
-	x.inner.SetUsbDevices(usbDevices)
+func (x *USBControllerConfiguration) SetUsbDevices(usbDevices ...purego.IDer) {
+	_ptrs := make([]objc.ID, len(usbDevices))
+	for _i, _v := range usbDevices {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.VZUSBDeviceConfiguration]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.VZUSBDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	x.inner.SetUsbDevices(_arg0)
 }
 
 func (x *USBControllerConfiguration) asUSBControllerConfiguration() *raw.VZUSBControllerConfiguration {
@@ -54,7 +67,7 @@ func (x *USBControllerConfiguration) asUSBControllerConfiguration() *raw.VZUSBCo
 type USBControllerConfigurationable interface {
 	Unwrap() *raw.VZUSBControllerConfiguration
 	UsbDevices() *foundation.NSArray[raw.VZUSBDeviceConfiguration]
-	SetUsbDevices(usbDevices *foundation.NSArray[raw.VZUSBDeviceConfiguration])
+	SetUsbDevices(usbDevices ...purego.IDer)
 }
 
 var _ USBControllerConfigurationable = (*USBControllerConfiguration)(nil)

@@ -39,47 +39,63 @@ func NewSmartCard() *SmartCard {
 	return &SmartCard{inner: raw.TKSmartCardFromID(_id)}
 }
 
+// Bitmask containing allowed protocols to be used when communicating with the card.  This property is consulted only during connection to the card, changes are not propagated to already connected session.  By default, any protocol can be used.
+//
 // WithAllowedProtocols sets the allowedProtocols property and returns the receiver for chaining.
 func (x *SmartCard) WithAllowedProtocols(allowedProtocols TKSmartCardProtocol) *SmartCard {
 	x.inner.SetAllowedProtocols(raw.TKSmartCardProtocol(allowedProtocols))
 	return x
 }
 
+// Flag indicating whether card session should be considered as sensitive.  Sensitive session always gets card after reset before communicating with it and never leaves card without reset to be used by another SmartCard object.  This might be important in case that card session contain some important state which should not leak to another SmartCard object (possibly running in another, foreign application).  Default is NO.
+//
 // WithSensitive sets the sensitive property and returns the receiver for chaining.
 func (x *SmartCard) WithSensitive(sensitive bool) *SmartCard {
 	x.inner.SetSensitive(sensitive)
 	return x
 }
 
+// User-specified context kept as long as the card is powered.  Once the card is removed or another TKSmartCard object opens session, this property is automatically set to nil.
+//
 // WithContext sets the context_ property and returns the receiver for chaining.
 func (x *SmartCard) WithContext(context_ objc.ID) *SmartCard {
 	x.inner.SetContext(context_)
 	return x
 }
 
+// CLA byte which will be used for sendIns: APDU transmits.  Default value is 0x00.
+//
 // WithCla sets the cla property and returns the receiver for chaining.
 func (x *SmartCard) WithCla(cla uint8) *SmartCard {
 	x.inner.SetCla(cla)
 	return x
 }
 
+// Flag indicating whether extended length APDUs should be used. It is automatically enabled only when used slot supports transmitting extended length commands and card announces that extended length APDU are supported in its ATR. However, caller can explicitly override this decision.
+//
 // WithUseExtendedLength sets the useExtendedLength property and returns the receiver for chaining.
 func (x *SmartCard) WithUseExtendedLength(useExtendedLength bool) *SmartCard {
 	x.inner.SetUseExtendedLength(useExtendedLength)
 	return x
 }
 
+// Flag indicating whether command chaining of APDU with data field longer than 255 bytes can be used.  It is automatically enabled when card announces that command chaining is supported in its ATR.  However, caller can explicitly override this decision.
+//
 // WithUseCommandChaining sets the useCommandChaining property and returns the receiver for chaining.
 func (x *SmartCard) WithUseCommandChaining(useCommandChaining bool) *SmartCard {
 	x.inner.SetUseCommandChaining(useCommandChaining)
 	return x
 }
 
+// Begins session with the card. @discussion When session exists, other requests for sessions from other card objects to the same card are blocked. Session is reference-counted, the same amount of 'end' calls must be done to really terminate the session. Note that finishing session does not automatically mean that the card is disconnected; it only happens when another session from different card object is requested. @param success Signals whether session was successfully started. @param error More information about error preventing the transaction to start
+//
 // BeginSessionWithReply calls the underlying BeginSessionWithReply.
 func (x *SmartCard) BeginSessionWithReply(reply func(bool, unsafe.Pointer)) {
 	x.inner.BeginSessionWithReply(reply)
 }
 
+// Transmits raw command to the card.  This call is allowed only inside session. @param request Request part of APDU @param reponse Response part of APDU, or nil if communication with the card failed @param error Error details when communication with the card failed
+//
 // TransmitRequestReply blocks until the operation completes or ctx is cancelled.
 func (x *SmartCard) TransmitRequestReply(ctx context.Context, request *foundation.NSData) (*foundation.NSData, error) {
 	type _result struct {
@@ -104,11 +120,15 @@ func (x *SmartCard) TransmitRequestReply(ctx context.Context, request *foundatio
 	}
 }
 
+// Terminates the transaction. If no transaction is pending any more, the connection will be closed if there is another session in the system waiting for the transaction.
+//
 // EndSession calls the underlying EndSession.
 func (x *SmartCard) EndSession() {
 	x.inner.EndSession()
 }
 
+// Creates a new user interaction object for secure PIN verification using the SmartCard reader facilities (typically a HW keypad). @note This interaction is only allowed within a session. @param PINFormat PIN format descriptor. @param APDU Predefined APDU in which the SmartCard reader fills in the PIN. @param PINByteOffset Offset in bytes within APDU data field to mark a location of a PIN block for filling in the entered PIN (currently unused, must be 0). @return A new user interaction object, or nil if this feature is not supported by the SmartCard reader. After the interaction has been successfully completed the operation result is available in the result properites.
+//
 // UserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset calls the underlying UserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset.
 func (x *SmartCard) UserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset(pINFormat *raw.TKSmartCardPINFormat, aPDU *foundation.NSData, pINByteOffset int) *SmartCardUserInteractionForSecurePINVerification {
 	_r := x.inner.UserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset(pINFormat, aPDU, pINByteOffset)
@@ -118,6 +138,8 @@ func (x *SmartCard) UserInteractionForSecurePINVerificationWithPINFormatAPDUPINB
 	return &SmartCardUserInteractionForSecurePINVerification{inner: _r}
 }
 
+// Creates a new user interaction object for secure PIN change using the SmartCard reader facilities (typically a HW keypad). @note This interaction is only allowed within a session. @param PINFormat PIN format descriptor. @param APDU Predefined APDU in which the SmartCard reader fills in the PIN(s). @param currentPINByteOffset Offset in bytes within APDU data field to mark a location of a PIN block for filling in the current PIN. @param newPINByteOffset Offset in bytes within APDU data field to mark a location of a PIN block for filling in the new PIN. @return A new user interaction object, or nil if this feature is not supported by the SmartCard reader. After the interaction has been successfully completed the operation result is available in the result properites.
+//
 // UserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset calls the underlying UserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset.
 func (x *SmartCard) UserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset(pINFormat *raw.TKSmartCardPINFormat, aPDU *foundation.NSData, currentPINByteOffset int, newPINByteOffset int) *SmartCardUserInteractionForSecurePINChange {
 	_r := x.inner.UserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset(pINFormat, aPDU, currentPINByteOffset, newPINByteOffset)
@@ -127,6 +149,8 @@ func (x *SmartCard) UserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPIN
 	return &SmartCardUserInteractionForSecurePINChange{inner: _r}
 }
 
+// Slot in which is this card inserted.
+//
 // Slot calls the underlying Slot.
 func (x *SmartCard) Slot() *SmartCardSlot {
 	_r := x.inner.Slot()
@@ -136,11 +160,15 @@ func (x *SmartCard) Slot() *SmartCardSlot {
 	return &SmartCardSlot{inner: _r}
 }
 
+// Flag indicating whether card is valid, i.e. it was not removed from the reader.  Use Key-Value-Observing to be notified about card removal.
+//
 // Valid calls the underlying Valid.
 func (x *SmartCard) Valid() bool {
 	return x.inner.Valid()
 }
 
+// Bitmask containing allowed protocols to be used when communicating with the card.  This property is consulted only during connection to the card, changes are not propagated to already connected session.  By default, any protocol can be used.
+//
 // AllowedProtocols calls the underlying AllowedProtocols.
 func (x *SmartCard) AllowedProtocols() TKSmartCardProtocol {
 	return TKSmartCardProtocol(x.inner.AllowedProtocols())
@@ -151,11 +179,15 @@ func (x *SmartCard) SetAllowedProtocols(allowedProtocols TKSmartCardProtocol) {
 	x.inner.SetAllowedProtocols(raw.TKSmartCardProtocol(allowedProtocols))
 }
 
+// Protocol used for communication with the SmartCard.  If no card session is established, TKSmartCardProtocolNone is set.
+//
 // CurrentProtocol calls the underlying CurrentProtocol.
 func (x *SmartCard) CurrentProtocol() TKSmartCardProtocol {
 	return TKSmartCardProtocol(x.inner.CurrentProtocol())
 }
 
+// Flag indicating whether card session should be considered as sensitive.  Sensitive session always gets card after reset before communicating with it and never leaves card without reset to be used by another SmartCard object.  This might be important in case that card session contain some important state which should not leak to another SmartCard object (possibly running in another, foreign application).  Default is NO.
+//
 // Sensitive calls the underlying Sensitive.
 func (x *SmartCard) Sensitive() bool {
 	return x.inner.Sensitive()
@@ -166,6 +198,8 @@ func (x *SmartCard) SetSensitive(sensitive bool) {
 	x.inner.SetSensitive(sensitive)
 }
 
+// User-specified context kept as long as the card is powered.  Once the card is removed or another TKSmartCard object opens session, this property is automatically set to nil.
+//
 // Context calls the underlying Context.
 func (x *SmartCard) Context() objc.ID {
 	return x.inner.Context()
@@ -176,46 +210,64 @@ func (x *SmartCard) SetContext(context_ objc.ID) {
 	x.inner.SetContext(context_)
 }
 
+// Transmits APDU to the card and returns response. @discussion Asynchronous high level variant of command for transmitting APDU to the card.  Handles all ISO7816-4 APDU cases translation to proper sequences according to used protocol.  Consults useExtendedAPDU and useCommandChaining properties and uses these modes whenever appropriate and beneficial for sending requested APDU request. @param ins INS code of the APDU @param p1 P1 code of the APDU @param p2 P2 code of the APDU @param requestData Data field of the APDU, or nil if no input data field should be present (i.e case1 or case2 APDUs).  Length of the data serves as Lc field of the APDU. @param le Expected number of bytes to be returned, or nil if no output data are expected (i.e. case1 or case3 APDUs). To get as much bytes as card provides, pass @0. @param replyData Block of returned data without SW1SW2 bytes, or nil if an error occured. @param sw SW1SW2 result code, first two bytes of returned card's reply. @param error Contains error details when nil is returned.  Specific error is also filled in if there was no communication error, but card returned other SW code than 0x9000.
+//
 // SendInsP1P2DataLeReply calls the underlying SendInsP1P2DataLeReply.
 func (x *SmartCard) SendInsP1P2DataLeReply(ins uint8, p1 uint8, p2 uint8, requestData *foundation.NSData, le *foundation.NSNumber, reply func(*foundation.NSData, uint16, unsafe.Pointer)) {
 	x.inner.SendInsP1P2DataLeReply(ins, p1, p2, requestData, le, reply)
 }
 
+// Synchronous variant of session creation.  Begins the session, executes given block and ends session. @param error Error receiving more information when transaction failed to start or block failed for some reason. @param block Block to be executed when the session was successfully begun. @return Returns YES if the session was successfully begun and block returned YES, otherwise NO.
+//
 // InSessionWithErrorExecuteBlock calls the underlying InSessionWithErrorExecuteBlock.
 func (x *SmartCard) InSessionWithErrorExecuteBlock(error_ unsafe.Pointer, block func(unsafe.Pointer) bool) bool {
 	return x.inner.InSessionWithErrorExecuteBlock(error_, block)
 }
 
+// Transmits APDU to the card and returns response. @discussion Synchronous high level variant of command for transmitting APDU to the card.  Handles all ISO7816-4 APDU cases translation to proper sequences according to used protocol.  Should be used in block passed to -[TKSmartCard inSessionWithError:executeBlock:] method. @param ins INS code of the APDU @param p1 P1 code of the APDU @param p2 P2 code of the APDU @param data Data field of the APDU.  Length of the data serves as Lc field of the APDU @param le Expected number of bytes to be returned, or nil if no output data are expected (i.e. case1 or case3 APDUs). To get as much bytes as card provides, pass @0. @param sw On output, filled with SW1SW2 result code @param error Contains error details when nil is returned.  Specific error is also filled in if there was no communication error, but card returned other SW code than 0x9000. @return Returned data field, excluding SW status bytes.  If an error occured, returns nil.
+//
 // SendInsP1P2DataLeSwError calls the underlying SendInsP1P2DataLeSwError.
 func (x *SmartCard) SendInsP1P2DataLeSwError(ins uint8, p1 uint8, p2 uint8, requestData *foundation.NSData, le *foundation.NSNumber, sw *uint16) (*foundation.NSData, error) {
 	return x.inner.SendInsP1P2DataLeSwError(ins, p1, p2, requestData, le, sw)
 }
 
+// CLA byte which will be used for sendIns: APDU transmits.  Default value is 0x00.
+//
 // Cla calls the underlying Cla.
 func (x *SmartCard) Cla() uint8 {
 	return x.inner.Cla()
 }
 
+// CLA byte which will be used for sendIns: APDU transmits.  Default value is 0x00.
+//
 // SetCla calls the underlying SetCla.
 func (x *SmartCard) SetCla(cla uint8) {
 	x.inner.SetCla(cla)
 }
 
+// Flag indicating whether extended length APDUs should be used. It is automatically enabled only when used slot supports transmitting extended length commands and card announces that extended length APDU are supported in its ATR. However, caller can explicitly override this decision.
+//
 // UseExtendedLength calls the underlying UseExtendedLength.
 func (x *SmartCard) UseExtendedLength() bool {
 	return x.inner.UseExtendedLength()
 }
 
+// Flag indicating whether extended length APDUs should be used. It is automatically enabled only when used slot supports transmitting extended length commands and card announces that extended length APDU are supported in its ATR. However, caller can explicitly override this decision.
+//
 // SetUseExtendedLength calls the underlying SetUseExtendedLength.
 func (x *SmartCard) SetUseExtendedLength(useExtendedLength bool) {
 	x.inner.SetUseExtendedLength(useExtendedLength)
 }
 
+// Flag indicating whether command chaining of APDU with data field longer than 255 bytes can be used.  It is automatically enabled when card announces that command chaining is supported in its ATR.  However, caller can explicitly override this decision.
+//
 // UseCommandChaining calls the underlying UseCommandChaining.
 func (x *SmartCard) UseCommandChaining() bool {
 	return x.inner.UseCommandChaining()
 }
 
+// Flag indicating whether command chaining of APDU with data field longer than 255 bytes can be used.  It is automatically enabled when card announces that command chaining is supported in its ATR.  However, caller can explicitly override this decision.
+//
 // SetUseCommandChaining calls the underlying SetUseCommandChaining.
 func (x *SmartCard) SetUseCommandChaining(useCommandChaining bool) {
 	x.inner.SetUseCommandChaining(useCommandChaining)

@@ -37,42 +37,56 @@ func NewCone() *Cone {
 	return &Cone{inner: raw.SCNConeFromID(_id)}
 }
 
+// @property topRadius @abstract The radius at the top of the cone. Animatable. @discussion If the value is less than 0, the geometry is empty. The default value is 0.
+//
 // WithTopRadius sets the topRadius property and returns the receiver for chaining.
 func (x *Cone) WithTopRadius(topRadius float64) *Cone {
 	x.inner.SetTopRadius(topRadius)
 	return x
 }
 
+// @property bottomRadius @abstract The radius at the bottom of the cone. Animatable. @discussion If the value is less than 0, the geometry is empty. The default value is 0.5.
+//
 // WithBottomRadius sets the bottomRadius property and returns the receiver for chaining.
 func (x *Cone) WithBottomRadius(bottomRadius float64) *Cone {
 	x.inner.SetBottomRadius(bottomRadius)
 	return x
 }
 
+// @property height @abstract The height of the cone. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // WithHeight sets the height property and returns the receiver for chaining.
 func (x *Cone) WithHeight(height float64) *Cone {
 	x.inner.SetHeight(height)
 	return x
 }
 
+// @property radialSegmentCount @abstract The number of subdivisions along the radial coordinate. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
+//
 // WithRadialSegmentCount sets the radialSegmentCount property and returns the receiver for chaining.
 func (x *Cone) WithRadialSegmentCount(radialSegmentCount int) *Cone {
 	x.inner.SetRadialSegmentCount(radialSegmentCount)
 	return x
 }
 
+// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // WithHeightSegmentCount sets the heightSegmentCount property and returns the receiver for chaining.
 func (x *Cone) WithHeightSegmentCount(heightSegmentCount int) *Cone {
 	x.inner.SetHeightSegmentCount(heightSegmentCount)
 	return x
 }
 
+// @property name @abstract Determines the name of the receiver.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Cone) WithName(name string) *Cone {
 	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// @property materials @abstract Specifies the receiver's materials array. @discussion Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
+//
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Cone) WithMaterials(items ...*raw.SCNMaterial) *Cone {
 	if len(items) == 0 {
@@ -91,12 +105,16 @@ func (x *Cone) WithMaterials(items ...*raw.SCNMaterial) *Cone {
 	return x
 }
 
+// @property firstMaterial @abstract Determines the first material of the geometry. Returns nil if the geometry has no material. @discussion This method is here for convenience. It is equivalent to the first object in the "materials" array above.
+//
 // WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
 func (x *Cone) WithFirstMaterial(firstMaterial *Material) *Cone {
 	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
 	return x
 }
 
+// @property levelsOfDetail @abstract Determines the receiver's levels of detail. Defaults to nil.
+//
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Cone) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Cone {
 	if len(items) == 0 {
@@ -121,30 +139,40 @@ func (x *Cone) WithTessellator(tessellator *GeometryTessellator) *Cone {
 	return x
 }
 
+// @property subdivisionLevel @abstract Specifies the subdivision level of the receiver. Defaults to 0. @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
+//
 // WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
 func (x *Cone) WithSubdivisionLevel(subdivisionLevel uint) *Cone {
 	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
 	return x
 }
 
+// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+//
 // WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
 func (x *Cone) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Cone {
 	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
 	return x
 }
 
+// @property edgeCreasesElement @abstract Specifies the edges creases that control the subdivision. Defaults to nil. @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
+//
 // WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
 func (x *Cone) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Cone {
 	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
 	return x
 }
 
+// @property edgeCreasesSource @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
+//
 // WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
 func (x *Cone) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Cone {
 	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
 	return x
 }
 
+// @property topRadius @abstract The radius at the top of the cone. Animatable. @discussion If the value is less than 0, the geometry is empty. The default value is 0.
+//
 // TopRadius calls the underlying TopRadius.
 func (x *Cone) TopRadius() float64 {
 	return x.inner.TopRadius()
@@ -155,6 +183,8 @@ func (x *Cone) SetTopRadius(topRadius float64) {
 	x.inner.SetTopRadius(topRadius)
 }
 
+// @property bottomRadius @abstract The radius at the bottom of the cone. Animatable. @discussion If the value is less than 0, the geometry is empty. The default value is 0.5.
+//
 // BottomRadius calls the underlying BottomRadius.
 func (x *Cone) BottomRadius() float64 {
 	return x.inner.BottomRadius()
@@ -165,6 +195,8 @@ func (x *Cone) SetBottomRadius(bottomRadius float64) {
 	x.inner.SetBottomRadius(bottomRadius)
 }
 
+// @property height @abstract The height of the cone. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
+//
 // Height calls the underlying Height.
 func (x *Cone) Height() float64 {
 	return x.inner.Height()
@@ -175,6 +207,8 @@ func (x *Cone) SetHeight(height float64) {
 	x.inner.SetHeight(height)
 }
 
+// @property radialSegmentCount @abstract The number of subdivisions along the radial coordinate. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
+//
 // RadialSegmentCount calls the underlying RadialSegmentCount.
 func (x *Cone) RadialSegmentCount() int {
 	return x.inner.RadialSegmentCount()
@@ -185,6 +219,8 @@ func (x *Cone) SetRadialSegmentCount(radialSegmentCount int) {
 	x.inner.SetRadialSegmentCount(radialSegmentCount)
 }
 
+// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
+//
 // HeightSegmentCount calls the underlying HeightSegmentCount.
 func (x *Cone) HeightSegmentCount() int {
 	return x.inner.HeightSegmentCount()

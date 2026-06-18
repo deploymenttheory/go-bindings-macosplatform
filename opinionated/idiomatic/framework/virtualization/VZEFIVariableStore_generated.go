@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents the Extensible Firmware Interface (EFI) variable store that contains NVRAM variables the EFI exposes.
+//
 // EFIVariableStore wraps [raw.VZEFIVariableStore] with a fluent Go API.
 type EFIVariableStore struct {
 	inner *raw.VZEFIVariableStore
@@ -32,6 +34,8 @@ func EFIVariableStoreFromID(id objc.ID) *EFIVariableStore {
 	return &EFIVariableStore{inner: raw.VZEFIVariableStoreFromID(id)}
 }
 
+// Initialize the variable store from the URL of an existing file.
+//
 // NewEFIVariableStoreWithURL creates a new [EFIVariableStore].
 func NewEFIVariableStoreWithURL(uRL string) *EFIVariableStore {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZEFIVariableStore")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewEFIVariableStoreWithURL(uRL string) *EFIVariableStore {
 	return &EFIVariableStore{inner: raw.VZEFIVariableStoreFromID(_id)}
 }
 
+// Creates a new EFI variable store at specified the URL on the filesystem, initialization options, and error-return variable.
+//
 // NewEFIVariableStoreCreatingVariableStoreAtURLOptionsError creates a new [EFIVariableStore].
 func NewEFIVariableStoreCreatingVariableStoreAtURLOptionsError(uRL string, options VZEFIVariableStoreInitializationOptions) (*EFIVariableStore, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZEFIVariableStore")), objc.RegisterName("alloc"))

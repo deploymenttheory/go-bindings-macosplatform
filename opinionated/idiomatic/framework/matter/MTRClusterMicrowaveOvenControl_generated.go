@@ -31,6 +31,8 @@ func MTRClusterMicrowaveOvenControlFromID(id objc.ID) *MTRClusterMicrowaveOvenCo
 	return &MTRClusterMicrowaveOvenControl{inner: raw.MTRClusterMicrowaveOvenControlFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterMicrowaveOvenControlWithDeviceEndpointIDQueue creates a new [MTRClusterMicrowaveOvenControl].
 func NewMTRClusterMicrowaveOvenControlWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterMicrowaveOvenControl {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterMicrowaveOvenControl")), objc.RegisterName("alloc"))

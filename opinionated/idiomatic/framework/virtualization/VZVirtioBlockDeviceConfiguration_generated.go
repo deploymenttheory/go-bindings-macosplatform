@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The configuration object that requests the creation of a virtual storage device in the guest system.
+//
 // VirtioBlockDeviceConfiguration wraps [raw.VZVirtioBlockDeviceConfiguration] with a fluent Go API.
 type VirtioBlockDeviceConfiguration struct {
 	inner *raw.VZVirtioBlockDeviceConfiguration
@@ -33,6 +35,8 @@ func VirtioBlockDeviceConfigurationFromID(id objc.ID) *VirtioBlockDeviceConfigur
 	return &VirtioBlockDeviceConfiguration{inner: raw.VZVirtioBlockDeviceConfigurationFromID(id)}
 }
 
+// Creates a block device configuration object that uses the specified storage medium.
+//
 // NewVirtioBlockDeviceConfigurationWithAttachment creates a new [VirtioBlockDeviceConfiguration].
 func NewVirtioBlockDeviceConfigurationWithAttachment(attachment *raw.VZStorageDeviceAttachment) *VirtioBlockDeviceConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioBlockDeviceConfiguration")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewVirtioBlockDeviceConfigurationWithAttachment(attachment *raw.VZStorageDe
 	return &VirtioBlockDeviceConfiguration{inner: raw.VZVirtioBlockDeviceConfigurationFromID(_id)}
 }
 
+// The string that identifies the VIRTIO block device.
+//
 // WithBlockDeviceIdentifier sets the blockDeviceIdentifier property and returns the receiver for chaining.
 func (x *VirtioBlockDeviceConfiguration) WithBlockDeviceIdentifier(blockDeviceIdentifier string) *VirtioBlockDeviceConfiguration {
 	x.inner.SetBlockDeviceIdentifier(foundation.NSStringStringWithUTF8String(blockDeviceIdentifier))

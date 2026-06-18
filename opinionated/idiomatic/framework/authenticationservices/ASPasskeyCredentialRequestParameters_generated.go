@@ -39,6 +39,8 @@ func NewPasskeyCredentialRequestParameters() *PasskeyCredentialRequestParameters
 	return &PasskeyCredentialRequestParameters{inner: raw.ASPasskeyCredentialRequestParametersFromID(_id)}
 }
 
+// The relying party identifier for this request.
+//
 // RelyingPartyIdentifier calls the underlying RelyingPartyIdentifier.
 func (x *PasskeyCredentialRequestParameters) RelyingPartyIdentifier() string {
 	_r := x.inner.RelyingPartyIdentifier()
@@ -48,11 +50,15 @@ func (x *PasskeyCredentialRequestParameters) RelyingPartyIdentifier() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Hash of client data for credential provider to sign as part of the operation.
+//
 // ClientDataHash calls the underlying ClientDataHash.
 func (x *PasskeyCredentialRequestParameters) ClientDataHash() *foundation.NSData {
 	return x.inner.ClientDataHash()
 }
 
+// A preference for whether the authenticator should attempt to verify that it is being used by its owner, such as through a PIN or biometrics.
+//
 // UserVerificationPreference calls the underlying UserVerificationPreference.
 func (x *PasskeyCredentialRequestParameters) UserVerificationPreference() string {
 	_r := x.inner.UserVerificationPreference()
@@ -62,6 +68,8 @@ func (x *PasskeyCredentialRequestParameters) UserVerificationPreference() string
 	return purego.GoString(_r.Ptr())
 }
 
+// A list of allowed credential IDs for this request. An empty list means all credentials are allowed.
+//
 // AllowedCredentials returns the collection as a Go slice.
 func (x *PasskeyCredentialRequestParameters) AllowedCredentials() []*foundation.NSData {
 	arr := x.inner.AllowedCredentials()
@@ -73,6 +81,8 @@ func (x *PasskeyCredentialRequestParameters) AllowedCredentials() []*foundation.
 	})
 }
 
+// Inputs for WebAuthn extensions used for passkey assertion.
+//
 // ExtensionInput calls the underlying ExtensionInput.
 func (x *PasskeyCredentialRequestParameters) ExtensionInput() *PasskeyAssertionCredentialExtensionInput {
 	_r := x.inner.ExtensionInput()

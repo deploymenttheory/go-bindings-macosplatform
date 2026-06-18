@@ -33,6 +33,8 @@ func ImageAreaMaxFromID(id objc.ID) *ImageAreaMax {
 	return &ImageAreaMax{inner: raw.MPSImageAreaMaxFromID(id)}
 }
 
+// @abstract Set the kernel height and width @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel. Must be an odd number. @param      kernelHeight        The height of the kernel. Must be an odd number.
+//
 // NewImageAreaMaxWithDeviceKernelWidthKernelHeight creates a new [ImageAreaMax].
 func NewImageAreaMaxWithDeviceKernelWidthKernelHeight(device metal.MTLDevice, kernelWidth uint, kernelHeight uint) *ImageAreaMax {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageAreaMax")), objc.RegisterName("alloc"))
@@ -40,6 +42,8 @@ func NewImageAreaMaxWithDeviceKernelWidthKernelHeight(device metal.MTLDevice, ke
 	return &ImageAreaMax{inner: raw.MPSImageAreaMaxFromID(_id)}
 }
 
+// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
+//
 // NewImageAreaMaxWithCoderDevice creates a new [ImageAreaMax].
 func NewImageAreaMaxWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageAreaMax {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageAreaMax")), objc.RegisterName("alloc"))
@@ -47,41 +51,55 @@ func NewImageAreaMaxWithCoderDevice(aDecoder *foundation.NSCoder, device metal.M
 	return &ImageAreaMax{inner: raw.MPSImageAreaMaxFromID(_id)}
 }
 
+// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+//
 // WithOffset sets the offset property and returns the receiver for chaining.
 func (x *ImageAreaMax) WithOffset(offset mpscore.MPSOffset) *ImageAreaMax {
 	x.inner.MPSUnaryImageKernel.SetOffset(offset)
 	return x
 }
 
+// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+//
 // WithClipRect sets the clipRect property and returns the receiver for chaining.
 func (x *ImageAreaMax) WithClipRect(clipRect metal.MTLRegion) *ImageAreaMax {
 	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
 	return x
 }
 
+// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
+//
 // WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
 func (x *ImageAreaMax) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageAreaMax {
 	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
 	return x
 }
 
+// @property   options @abstract   The set of options used to run the kernel. @ref        subsubsection_options
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *ImageAreaMax) WithOptions(options mpscore.MPSKernelOptions) *ImageAreaMax {
 	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ImageAreaMax) WithLabel(label string) *ImageAreaMax {
 	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property kernelHeight @abstract  The height of the filter window. Must be an odd number.
+//
 // KernelHeight calls the underlying KernelHeight.
 func (x *ImageAreaMax) KernelHeight() uint {
 	return x.inner.KernelHeight()
 }
 
+// @property kernelWidth @abstract  The width of the filter window. Must be an odd number.
+//
 // KernelWidth calls the underlying KernelWidth.
 func (x *ImageAreaMax) KernelWidth() uint {
 	return x.inner.KernelWidth()

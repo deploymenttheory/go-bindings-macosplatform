@@ -178,6 +178,8 @@ func (x *SecureTextField) WithPlaceholderAttributedStrings(items ...*foundation.
 	return x
 }
 
+// Specifies the behavior for resolving “NSTextAlignment/natural“ to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `false`.
+//
 // WithResolvesNaturalAlignmentWithBaseWritingDirection sets the resolvesNaturalAlignmentWithBaseWritingDirection property and returns the receiver for chaining.
 func (x *SecureTextField) WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *SecureTextField {
 	x.inner.NSTextField.SetResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection)
@@ -616,6 +618,8 @@ func (x *SecureTextField) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets 
 	return x
 }
 
+// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+//
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *SecureTextField) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SecureTextField {
 	x.inner.NSTextField.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)

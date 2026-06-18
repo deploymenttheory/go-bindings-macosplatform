@@ -35,6 +35,8 @@ func MTRBaseClusterActivatedCarbonFilterMonitoringFromID(id objc.ID) *MTRBaseClu
 	return &MTRBaseClusterActivatedCarbonFilterMonitoring{inner: raw.MTRBaseClusterActivatedCarbonFilterMonitoringFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterActivatedCarbonFilterMonitoringWithDeviceEndpointIDQueue creates a new [MTRBaseClusterActivatedCarbonFilterMonitoring].
 func NewMTRBaseClusterActivatedCarbonFilterMonitoringWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterActivatedCarbonFilterMonitoring {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterActivatedCarbonFilterMonitoring")), objc.RegisterName("alloc"))
@@ -42,6 +44,8 @@ func NewMTRBaseClusterActivatedCarbonFilterMonitoringWithDeviceEndpointIDQueue(d
 	return &MTRBaseClusterActivatedCarbonFilterMonitoring{inner: raw.MTRBaseClusterActivatedCarbonFilterMonitoringFromID(_id)}
 }
 
+// Command ResetCondition Upon receipt, the device SHALL reset the Condition and ChangeIndicator attributes, indicating full resource availability and readiness for use, as initially configured.
+//
 // ResetConditionWithParamsCompletion calls the underlying ResetConditionWithParamsCompletion.
 func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ResetConditionWithParamsCompletion(params *raw.MTRActivatedCarbonFilterMonitoringClusterResetConditionParams, completion func(unsafe.Pointer)) {
 	x.inner.ResetConditionWithParamsCompletion(params, completion)

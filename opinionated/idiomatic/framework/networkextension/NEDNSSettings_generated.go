@@ -32,6 +32,8 @@ func NEDNSSettingsFromID(id objc.ID) *NEDNSSettings {
 	return &NEDNSSettings{inner: raw.NEDNSSettingsFromID(id)}
 }
 
+// @method initWithServers: @discussion Initialize a newly-allocated NEDNSSettings object. @param servers An array of DNS server IP address strings.
+//
 // NewNEDNSSettingsWithServers creates a new [NEDNSSettings].
 func NewNEDNSSettingsWithServers(servers *foundation.NSArray[*foundation.NSString]) *NEDNSSettings {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NEDNSSettings")), objc.RegisterName("alloc"))
@@ -39,6 +41,8 @@ func NewNEDNSSettingsWithServers(servers *foundation.NSArray[*foundation.NSStrin
 	return &NEDNSSettings{inner: raw.NEDNSSettingsFromID(_id)}
 }
 
+// @property searchDomains @discussion An array of DNS server search domain strings.
+//
 // WithSearchDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEDNSSettings) WithSearchDomains(items ...*foundation.NSString) *NEDNSSettings {
 	if len(items) == 0 {
@@ -57,12 +61,16 @@ func (x *NEDNSSettings) WithSearchDomains(items ...*foundation.NSString) *NEDNSS
 	return x
 }
 
+// @property domainName @discussion A string containing the DNS domain.
+//
 // WithDomainName sets the domainName property and returns the receiver for chaining.
 func (x *NEDNSSettings) WithDomainName(domainName string) *NEDNSSettings {
 	x.inner.SetDomainName(foundation.NSStringStringWithUTF8String(domainName))
 	return x
 }
 
+// @property matchDomains @discussion An array of strings containing domain strings. If this property is non-nil, the DNS settings will only be used to resolve host names within the specified domains.
+//
 // WithMatchDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEDNSSettings) WithMatchDomains(items ...*foundation.NSString) *NEDNSSettings {
 	if len(items) == 0 {
@@ -81,23 +89,31 @@ func (x *NEDNSSettings) WithMatchDomains(items ...*foundation.NSString) *NEDNSSe
 	return x
 }
 
+// @property matchDomainsNoSearch @discussion A boolean indicating if the match domains should be appended to the search domain list.  Default is NO (match domains will be appended to the search domain list).
+//
 // WithMatchDomainsNoSearch sets the matchDomainsNoSearch property and returns the receiver for chaining.
 func (x *NEDNSSettings) WithMatchDomainsNoSearch(matchDomainsNoSearch bool) *NEDNSSettings {
 	x.inner.SetMatchDomainsNoSearch(matchDomainsNoSearch)
 	return x
 }
 
+// @property allowFailover @discussion A boolean indicating if failover to the default system resolver is permitted on resolution failure.
+//
 // WithAllowFailover sets the allowFailover property and returns the receiver for chaining.
 func (x *NEDNSSettings) WithAllowFailover(allowFailover bool) *NEDNSSettings {
 	x.inner.SetAllowFailover(allowFailover)
 	return x
 }
 
+// @property dnsProtocol @discussion The DNS protocol used by the settings.
+//
 // DnsProtocol calls the underlying DnsProtocol.
 func (x *NEDNSSettings) DnsProtocol() NEDNSProtocol {
 	return NEDNSProtocol(x.inner.DnsProtocol())
 }
 
+// @property servers @discussion An array of DNS server address strings.
+//
 // Servers returns the collection as a Go slice.
 func (x *NEDNSSettings) Servers() []string {
 	arr := x.inner.Servers()
@@ -109,6 +125,8 @@ func (x *NEDNSSettings) Servers() []string {
 	})
 }
 
+// @property searchDomains @discussion An array of DNS server search domain strings.
+//
 // SearchDomains returns the collection as a Go slice.
 func (x *NEDNSSettings) SearchDomains() []string {
 	arr := x.inner.SearchDomains()
@@ -125,6 +143,8 @@ func (x *NEDNSSettings) SetSearchDomains(searchDomains *foundation.NSArray[*foun
 	x.inner.SetSearchDomains(searchDomains)
 }
 
+// @property domainName @discussion A string containing the DNS domain.
+//
 // DomainName calls the underlying DomainName.
 func (x *NEDNSSettings) DomainName() string {
 	_r := x.inner.DomainName()
@@ -139,6 +159,8 @@ func (x *NEDNSSettings) SetDomainName(domainName string) {
 	x.inner.SetDomainName(foundation.NSStringStringWithUTF8String(domainName))
 }
 
+// @property matchDomains @discussion An array of strings containing domain strings. If this property is non-nil, the DNS settings will only be used to resolve host names within the specified domains.
+//
 // MatchDomains returns the collection as a Go slice.
 func (x *NEDNSSettings) MatchDomains() []string {
 	arr := x.inner.MatchDomains()
@@ -155,6 +177,8 @@ func (x *NEDNSSettings) SetMatchDomains(matchDomains *foundation.NSArray[*founda
 	x.inner.SetMatchDomains(matchDomains)
 }
 
+// @property matchDomainsNoSearch @discussion A boolean indicating if the match domains should be appended to the search domain list.  Default is NO (match domains will be appended to the search domain list).
+//
 // MatchDomainsNoSearch calls the underlying MatchDomainsNoSearch.
 func (x *NEDNSSettings) MatchDomainsNoSearch() bool {
 	return x.inner.MatchDomainsNoSearch()
@@ -165,6 +189,8 @@ func (x *NEDNSSettings) SetMatchDomainsNoSearch(matchDomainsNoSearch bool) {
 	x.inner.SetMatchDomainsNoSearch(matchDomainsNoSearch)
 }
 
+// @property allowFailover @discussion A boolean indicating if failover to the default system resolver is permitted on resolution failure.
+//
 // AllowFailover calls the underlying AllowFailover.
 func (x *NEDNSSettings) AllowFailover() bool {
 	return x.inner.AllowFailover()

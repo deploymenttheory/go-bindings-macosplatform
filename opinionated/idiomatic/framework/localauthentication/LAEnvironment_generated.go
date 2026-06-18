@@ -35,16 +35,22 @@ func NewEnvironment() *Environment {
 	return &Environment{inner: raw.LAEnvironmentFromID(_id)}
 }
 
+// @brief Adds observer to monitor changes of the environment. @discussion The observer will be held weakly so its instance should be kept alive by the caller.
+//
 // AddObserver calls the underlying AddObserver.
 func (x *Environment) AddObserver(observer raw.LAEnvironmentObserver) {
 	x.inner.AddObserver(observer)
 }
 
+// @brief Removes the previously registered observer. @discussion If the observer is deallocated, it will be removed automatically.
+//
 // RemoveObserver calls the underlying RemoveObserver.
 func (x *Environment) RemoveObserver(observer raw.LAEnvironmentObserver) {
 	x.inner.RemoveObserver(observer)
 }
 
+// The environment state information.
+//
 // State calls the underlying State.
 func (x *Environment) State() *EnvironmentState {
 	_r := x.inner.State()

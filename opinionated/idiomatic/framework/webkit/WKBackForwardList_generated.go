@@ -36,6 +36,8 @@ func NewWKBackForwardList() *WKBackForwardList {
 	return &WKBackForwardList{inner: raw.WKBackForwardListFromID(_id)}
 }
 
+// @abstract Returns the item at a specified distance from the current item. @param index Index of the desired list item relative to the current item: 0 for the current item, -1 for the immediately preceding item, 1 for the immediately following item, and so on. @result The item at the specified distance from the current item, or nil if the index parameter exceeds the limits of the list.
+//
 // ItemAtIndex calls the underlying ItemAtIndex.
 func (x *WKBackForwardList) ItemAtIndex(index int) *WKBackForwardListItem {
 	_r := x.inner.ItemAtIndex(index)
@@ -45,6 +47,8 @@ func (x *WKBackForwardList) ItemAtIndex(index int) *WKBackForwardListItem {
 	return &WKBackForwardListItem{inner: _r}
 }
 
+// @abstract The current item.
+//
 // CurrentItem calls the underlying CurrentItem.
 func (x *WKBackForwardList) CurrentItem() *WKBackForwardListItem {
 	_r := x.inner.CurrentItem()
@@ -54,6 +58,8 @@ func (x *WKBackForwardList) CurrentItem() *WKBackForwardListItem {
 	return &WKBackForwardListItem{inner: _r}
 }
 
+// @abstract The item immediately preceding the current item, or nil if there isn't one.
+//
 // BackItem calls the underlying BackItem.
 func (x *WKBackForwardList) BackItem() *WKBackForwardListItem {
 	_r := x.inner.BackItem()
@@ -63,6 +69,8 @@ func (x *WKBackForwardList) BackItem() *WKBackForwardListItem {
 	return &WKBackForwardListItem{inner: _r}
 }
 
+// @abstract The item immediately following the current item, or nil if there isn't one.
+//
 // ForwardItem calls the underlying ForwardItem.
 func (x *WKBackForwardList) ForwardItem() *WKBackForwardListItem {
 	_r := x.inner.ForwardItem()
@@ -72,6 +80,8 @@ func (x *WKBackForwardList) ForwardItem() *WKBackForwardListItem {
 	return &WKBackForwardListItem{inner: _r}
 }
 
+// @abstract The portion of the list preceding the current item. @discussion The items are in the order in which they were originally visited.
+//
 // BackList returns the collection as a Go slice.
 func (x *WKBackForwardList) BackList() []*WKBackForwardListItem {
 	arr := x.inner.BackList()
@@ -83,6 +93,8 @@ func (x *WKBackForwardList) BackList() []*WKBackForwardListItem {
 	})
 }
 
+// @abstract The portion of the list following the current item. @discussion The items are in the order in which they were originally visited.
+//
 // ForwardList returns the collection as a Go slice.
 func (x *WKBackForwardList) ForwardList() []*WKBackForwardListItem {
 	arr := x.inner.ForwardList()

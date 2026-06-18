@@ -30,6 +30,8 @@ func MIDIMetaEventFromID(id objc.ID) *MIDIMetaEvent {
 	return &MIDIMetaEvent{inner: raw.AVMIDIMetaEventFromID(id)}
 }
 
+// @method initWithType:data @abstract Initialize the event with a MIDI Meta-Event type and an NSData. @param type A AVMIDIMetaEventType indicating which type of Meta-Event. @param data An NSData object containing the raw contents of the Meta-Event.
+//
 // NewMIDIMetaEventWithTypeData creates a new [MIDIMetaEvent].
 func NewMIDIMetaEventWithTypeData(type_ AVMIDIMetaEventType, data *foundation.NSData) *MIDIMetaEvent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMIDIMetaEvent")), objc.RegisterName("alloc"))

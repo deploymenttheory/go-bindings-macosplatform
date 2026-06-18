@@ -79,12 +79,16 @@ func (x *SpeechSynthesisMarker) WithMark(mark AVSpeechSynthesisMarkerMark) *Spee
 	return x
 }
 
+// Byte offset into the associated audio buffer
+//
 // WithByteSampleOffset sets the byteSampleOffset property and returns the receiver for chaining.
 func (x *SpeechSynthesisMarker) WithByteSampleOffset(byteSampleOffset uint) *SpeechSynthesisMarker {
 	x.inner.SetByteSampleOffset(byteSampleOffset)
 	return x
 }
 
+// The location and length of the pertaining speech request's SSML text. This marker applies to the range of characters represented by the NSString.
+//
 // WithTextRange sets the textRange property and returns the receiver for chaining.
 func (x *SpeechSynthesisMarker) WithTextRange(textRange foundation.NSRange) *SpeechSynthesisMarker {
 	x.inner.SetTextRange(textRange)
@@ -113,6 +117,8 @@ func (x *SpeechSynthesisMarker) SetMark(mark AVSpeechSynthesisMarkerMark) {
 	x.inner.SetMark(raw.AVSpeechSynthesisMarkerMark(mark))
 }
 
+// Byte offset into the associated audio buffer
+//
 // ByteSampleOffset calls the underlying ByteSampleOffset.
 func (x *SpeechSynthesisMarker) ByteSampleOffset() uint {
 	return x.inner.ByteSampleOffset()
@@ -123,6 +129,8 @@ func (x *SpeechSynthesisMarker) SetByteSampleOffset(byteSampleOffset uint) {
 	x.inner.SetByteSampleOffset(byteSampleOffset)
 }
 
+// The location and length of the pertaining speech request's SSML text. This marker applies to the range of characters represented by the NSString.
+//
 // TextRange calls the underlying TextRange.
 func (x *SpeechSynthesisMarker) TextRange() foundation.NSRange {
 	return x.inner.TextRange()

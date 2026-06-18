@@ -37,6 +37,8 @@ func NewSource() *Source {
 	return &Source{inner: raw.EKSourceFromID(_id)}
 }
 
+// @method      calendarsForEntityType @abstract    Returns the calendars that belong to this source that support a given entity type (reminders, events)
+//
 // CalendarsForEntityType calls the underlying CalendarsForEntityType.
 func (x *Source) CalendarsForEntityType(entityType EKEntityType) *foundation.NSSet[*raw.EKCalendar] {
 	return x.inner.CalendarsForEntityType(raw.EKEntityType(entityType))
@@ -65,6 +67,8 @@ func (x *Source) Title() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property    isDelegate @abstract    Returns YES if this EKSource represents an account delegated by another user.
+//
 // IsDelegate calls the underlying IsDelegate.
 func (x *Source) IsDelegate() bool {
 	return x.inner.IsDelegate()

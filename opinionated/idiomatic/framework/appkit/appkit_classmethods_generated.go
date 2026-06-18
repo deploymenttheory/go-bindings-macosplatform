@@ -343,8 +343,17 @@ func ImageRepWithData(data *foundation.NSData) *BitmapImageRep {
 }
 
 // TIFFRepresentationOfImageRepsInArray calls the underlying NSBitmapImageRepTIFFRepresentationOfImageRepsInArray.
-func TIFFRepresentationOfImageRepsInArray(array *foundation.NSArray[*raw.NSImageRep]) *foundation.NSData {
-	return raw.NSBitmapImageRepTIFFRepresentationOfImageRepsInArray(array)
+func TIFFRepresentationOfImageRepsInArray(array ...ImageRepProvider) *foundation.NSData {
+	_ptrs := make([]objc.ID, len(array))
+	for _i, _v := range array {
+		_ptrs[_i] = _v.asImageRep().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.NSImageRep]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.NSImageRep](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	return raw.NSBitmapImageRepTIFFRepresentationOfImageRepsInArray(_arg0)
 }
 
 // TIFFRepresentationOfImageRepsInArrayUsingCompressionFactor calls the underlying NSBitmapImageRepTIFFRepresentationOfImageRepsInArrayUsingCompressionFactor.
@@ -617,8 +626,17 @@ func HorizontalGroupWithLayoutSizeSubitemCount(layoutSize *raw.NSCollectionLayou
 }
 
 // HorizontalGroupWithLayoutSizeSubitems calls the underlying NSCollectionLayoutGroupHorizontalGroupWithLayoutSizeSubitems.
-func HorizontalGroupWithLayoutSizeSubitems(layoutSize *raw.NSCollectionLayoutSize, subitems *foundation.NSArray[*raw.NSCollectionLayoutItem]) *CollectionLayoutGroup {
-	_r := raw.NSCollectionLayoutGroupHorizontalGroupWithLayoutSizeSubitems(layoutSize, subitems)
+func HorizontalGroupWithLayoutSizeSubitems(layoutSize *raw.NSCollectionLayoutSize, subitems ...CollectionLayoutItemProvider) *CollectionLayoutGroup {
+	_ptrs := make([]objc.ID, len(subitems))
+	for _i, _v := range subitems {
+		_ptrs[_i] = _v.asCollectionLayoutItem().Ptr()
+	}
+	var _arg1 *foundation.NSArray[*raw.NSCollectionLayoutItem]
+	if len(_ptrs) > 0 {
+		_arg1 = foundation.NSArrayFromID[*raw.NSCollectionLayoutItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	_r := raw.NSCollectionLayoutGroupHorizontalGroupWithLayoutSizeSubitems(layoutSize, _arg1)
 	if _r == nil {
 		return nil
 	}
@@ -635,8 +653,17 @@ func VerticalGroupWithLayoutSizeSubitemCount(layoutSize *raw.NSCollectionLayoutS
 }
 
 // VerticalGroupWithLayoutSizeSubitems calls the underlying NSCollectionLayoutGroupVerticalGroupWithLayoutSizeSubitems.
-func VerticalGroupWithLayoutSizeSubitems(layoutSize *raw.NSCollectionLayoutSize, subitems *foundation.NSArray[*raw.NSCollectionLayoutItem]) *CollectionLayoutGroup {
-	_r := raw.NSCollectionLayoutGroupVerticalGroupWithLayoutSizeSubitems(layoutSize, subitems)
+func VerticalGroupWithLayoutSizeSubitems(layoutSize *raw.NSCollectionLayoutSize, subitems ...CollectionLayoutItemProvider) *CollectionLayoutGroup {
+	_ptrs := make([]objc.ID, len(subitems))
+	for _i, _v := range subitems {
+		_ptrs[_i] = _v.asCollectionLayoutItem().Ptr()
+	}
+	var _arg1 *foundation.NSArray[*raw.NSCollectionLayoutItem]
+	if len(_ptrs) > 0 {
+		_arg1 = foundation.NSArrayFromID[*raw.NSCollectionLayoutItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	_r := raw.NSCollectionLayoutGroupVerticalGroupWithLayoutSizeSubitems(layoutSize, _arg1)
 	if _r == nil {
 		return nil
 	}
@@ -680,8 +707,17 @@ func ItemWithLayoutSize(layoutSize *raw.NSCollectionLayoutSize) *CollectionLayou
 }
 
 // ItemWithLayoutSizeSupplementaryItems calls the underlying NSCollectionLayoutItemItemWithLayoutSizeSupplementaryItems.
-func ItemWithLayoutSizeSupplementaryItems(layoutSize *raw.NSCollectionLayoutSize, supplementaryItems *foundation.NSArray[*raw.NSCollectionLayoutSupplementaryItem]) *CollectionLayoutItem {
-	_r := raw.NSCollectionLayoutItemItemWithLayoutSizeSupplementaryItems(layoutSize, supplementaryItems)
+func ItemWithLayoutSizeSupplementaryItems(layoutSize *raw.NSCollectionLayoutSize, supplementaryItems ...CollectionLayoutSupplementaryItemProvider) *CollectionLayoutItem {
+	_ptrs := make([]objc.ID, len(supplementaryItems))
+	for _i, _v := range supplementaryItems {
+		_ptrs[_i] = _v.asCollectionLayoutSupplementaryItem().Ptr()
+	}
+	var _arg1 *foundation.NSArray[*raw.NSCollectionLayoutSupplementaryItem]
+	if len(_ptrs) > 0 {
+		_arg1 = foundation.NSArrayFromID[*raw.NSCollectionLayoutSupplementaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	_r := raw.NSCollectionLayoutItemItemWithLayoutSizeSupplementaryItems(layoutSize, _arg1)
 	if _r == nil {
 		return nil
 	}
@@ -3022,8 +3058,17 @@ func GridViewWithViews(rows *foundation.NSArray[objc.ID]) *GridView {
 }
 
 // GroupItemWithIdentifierItems calls the underlying NSGroupTouchBarItemGroupItemWithIdentifierItems.
-func GroupItemWithIdentifierItems(identifier *foundation.NSString, items *foundation.NSArray[*raw.NSTouchBarItem]) *GroupTouchBarItem {
-	_r := raw.NSGroupTouchBarItemGroupItemWithIdentifierItems(identifier, items)
+func GroupItemWithIdentifierItems(identifier *foundation.NSString, items ...TouchBarItemProvider) *GroupTouchBarItem {
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items {
+		_ptrs[_i] = _v.asTouchBarItem().Ptr()
+	}
+	var _arg1 *foundation.NSArray[*raw.NSTouchBarItem]
+	if len(_ptrs) > 0 {
+		_arg1 = foundation.NSArrayFromID[*raw.NSTouchBarItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	_r := raw.NSGroupTouchBarItemGroupItemWithIdentifierItems(identifier, _arg1)
 	if _r == nil {
 		return nil
 	}
@@ -4573,8 +4618,17 @@ func InspectorWithViewController(viewController *raw.NSViewController) *SplitVie
 }
 
 // StackViewWithViews calls the underlying NSStackViewStackViewWithViews.
-func StackViewWithViews(views *foundation.NSArray[*raw.NSView]) *StackView {
-	_r := raw.NSStackViewStackViewWithViews(views)
+func StackViewWithViews(views ...ViewProvider) *StackView {
+	_ptrs := make([]objc.ID, len(views))
+	for _i, _v := range views {
+		_ptrs[_i] = _v.asView().Ptr()
+	}
+	var _arg0 *foundation.NSArray[*raw.NSView]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	_r := raw.NSStackViewStackViewWithViews(_arg0)
 	if _r == nil {
 		return nil
 	}

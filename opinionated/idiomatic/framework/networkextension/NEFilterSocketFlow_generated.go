@@ -38,16 +38,22 @@ func NewNEFilterSocketFlow() *NEFilterSocketFlow {
 	return &NEFilterSocketFlow{inner: raw.NEFilterSocketFlowFromID(_id)}
 }
 
+// @property remoteFlowEndpoint @discussion The flow's remote endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data. In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
+//
 // RemoteFlowEndpoint calls the underlying RemoteFlowEndpoint.
 func (x *NEFilterSocketFlow) RemoteFlowEndpoint() *foundation.NSObject {
 	return x.inner.RemoteFlowEndpoint()
 }
 
+// @property remoteEndpoint @discussion The flow's remote endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data. In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
+//
 // RemoteEndpoint calls the underlying RemoteEndpoint.
 func (x *NEFilterSocketFlow) RemoteEndpoint() unsafe.Pointer {
 	return x.inner.RemoteEndpoint()
 }
 
+// @property remoteHostname @discussion The flow's remote hostname. This property is only non-nil if the flow was created using Network.framework or NSURLSession.
+//
 // RemoteHostname calls the underlying RemoteHostname.
 func (x *NEFilterSocketFlow) RemoteHostname() string {
 	_r := x.inner.RemoteHostname()
@@ -57,26 +63,36 @@ func (x *NEFilterSocketFlow) RemoteHostname() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @property localFlowEndpoint @discussion The flow's local endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data. In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
+//
 // LocalFlowEndpoint calls the underlying LocalFlowEndpoint.
 func (x *NEFilterSocketFlow) LocalFlowEndpoint() *foundation.NSObject {
 	return x.inner.LocalFlowEndpoint()
 }
 
+// @property localEndpoint @discussion The flow's local endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data. In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
+//
 // LocalEndpoint calls the underlying LocalEndpoint.
 func (x *NEFilterSocketFlow) LocalEndpoint() unsafe.Pointer {
 	return x.inner.LocalEndpoint()
 }
 
+// @property socketFamily @discussion Socket family of the socket flow, such as PF_INET.
+//
 // SocketFamily calls the underlying SocketFamily.
 func (x *NEFilterSocketFlow) SocketFamily() int {
 	return x.inner.SocketFamily()
 }
 
+// @property socketType @discussion Socket type of the socket flow, such as SOCK_STREAM.
+//
 // SocketType calls the underlying SocketType.
 func (x *NEFilterSocketFlow) SocketType() int {
 	return x.inner.SocketType()
 }
 
+// @property socketProtocol @discussion Socket protocol of the socket flow, such as IPPROTO_TCP.
+//
 // SocketProtocol calls the underlying SocketProtocol.
 func (x *NEFilterSocketFlow) SocketProtocol() int {
 	return x.inner.SocketProtocol()

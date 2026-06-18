@@ -38,6 +38,8 @@ func NewLibAlbum() *LibAlbum {
 	return &LibAlbum{inner: raw.ITLibAlbumFromID(_id)}
 }
 
+// @abstract The name of this album.
+//
 // Title calls the underlying Title.
 func (x *LibAlbum) Title() string {
 	_r := x.inner.Title()
@@ -47,6 +49,8 @@ func (x *LibAlbum) Title() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The name of this that should be used for sorting purposes.
+//
 // SortTitle calls the underlying SortTitle.
 func (x *LibAlbum) SortTitle() string {
 	_r := x.inner.SortTitle()
@@ -56,46 +60,64 @@ func (x *LibAlbum) SortTitle() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract Whether this album is a compilation.
+//
 // IsCompilation calls the underlying IsCompilation.
 func (x *LibAlbum) IsCompilation() bool {
 	return x.inner.IsCompilation()
 }
 
+// @abstract Deprecated. Will be removed in future versions.
+//
 // Artist calls the underlying Artist.
 func (x *LibAlbum) Artist() unsafe.Pointer {
 	return x.inner.Artist()
 }
 
+// @abstract The number of discs in this album.
+//
 // DiscCount calls the underlying DiscCount.
 func (x *LibAlbum) DiscCount() uint {
 	return x.inner.DiscCount()
 }
 
+// @abstract The index (i.e. 1, 2, 3, etc.) of the disc this album refers to within a compilation.
+//
 // DiscNumber calls the underlying DiscNumber.
 func (x *LibAlbum) DiscNumber() uint {
 	return x.inner.DiscNumber()
 }
 
+// @abstract The rating of this track's album.
+//
 // Rating calls the underlying Rating.
 func (x *LibAlbum) Rating() int {
 	return x.inner.Rating()
 }
 
+// @abstract The rating of this track's album.
+//
 // IsRatingComputed calls the underlying IsRatingComputed.
 func (x *LibAlbum) IsRatingComputed() bool {
 	return x.inner.IsRatingComputed()
 }
 
+// @abstract Whether this track's album is gapless.
+//
 // IsGapless calls the underlying IsGapless.
 func (x *LibAlbum) IsGapless() bool {
 	return x.inner.IsGapless()
 }
 
+// @abstract Number of tracks in this album.
+//
 // TrackCount calls the underlying TrackCount.
 func (x *LibAlbum) TrackCount() uint {
 	return x.inner.TrackCount()
 }
 
+// @abstract The artist associated with this album.
+//
 // AlbumArtist calls the underlying AlbumArtist.
 func (x *LibAlbum) AlbumArtist() string {
 	_r := x.inner.AlbumArtist()
@@ -105,6 +127,8 @@ func (x *LibAlbum) AlbumArtist() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The artist associated with this album. This field should be used when sorting.
+//
 // SortAlbumArtist calls the underlying SortAlbumArtist.
 func (x *LibAlbum) SortAlbumArtist() string {
 	_r := x.inner.SortAlbumArtist()
@@ -114,6 +138,8 @@ func (x *LibAlbum) SortAlbumArtist() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The unique identifier of this album.
+//
 // PersistentID calls the underlying PersistentID.
 func (x *LibAlbum) PersistentID() *foundation.NSNumber {
 	return x.inner.PersistentID()

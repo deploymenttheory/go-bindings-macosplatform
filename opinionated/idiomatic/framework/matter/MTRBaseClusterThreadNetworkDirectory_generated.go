@@ -35,6 +35,8 @@ func MTRBaseClusterThreadNetworkDirectoryFromID(id objc.ID) *MTRBaseClusterThrea
 	return &MTRBaseClusterThreadNetworkDirectory{inner: raw.MTRBaseClusterThreadNetworkDirectoryFromID(id)}
 }
 
+// For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
+//
 // NewMTRBaseClusterThreadNetworkDirectoryWithDeviceEndpointIDQueue creates a new [MTRBaseClusterThreadNetworkDirectory].
 func NewMTRBaseClusterThreadNetworkDirectoryWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterThreadNetworkDirectory {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterThreadNetworkDirectory")), objc.RegisterName("alloc"))
@@ -42,16 +44,22 @@ func NewMTRBaseClusterThreadNetworkDirectoryWithDeviceEndpointIDQueue(device *ra
 	return &MTRBaseClusterThreadNetworkDirectory{inner: raw.MTRBaseClusterThreadNetworkDirectoryFromID(_id)}
 }
 
+// Command AddNetwork Adds an entry to the ThreadNetworks attribute with the specified Thread Operational Dataset.
+//
 // AddNetworkWithParamsCompletion calls the underlying AddNetworkWithParamsCompletion.
 func (x *MTRBaseClusterThreadNetworkDirectory) AddNetworkWithParamsCompletion(params *raw.MTRThreadNetworkDirectoryClusterAddNetworkParams, completion func(unsafe.Pointer)) {
 	x.inner.AddNetworkWithParamsCompletion(params, completion)
 }
 
+// Command RemoveNetwork Removes the network with the given Extended PAN ID from the ThreadNetworks attribute.
+//
 // RemoveNetworkWithParamsCompletion calls the underlying RemoveNetworkWithParamsCompletion.
 func (x *MTRBaseClusterThreadNetworkDirectory) RemoveNetworkWithParamsCompletion(params *raw.MTRThreadNetworkDirectoryClusterRemoveNetworkParams, completion func(unsafe.Pointer)) {
 	x.inner.RemoveNetworkWithParamsCompletion(params, completion)
 }
 
+// Command GetOperationalDataset Retrieves the Thread Operational Dataset with the given Extended PAN ID.
+//
 // GetOperationalDatasetWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseClusterThreadNetworkDirectory) GetOperationalDatasetWithParamsCompletion(ctx context.Context, params *raw.MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams) (*MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams, error) {
 	type _result struct {

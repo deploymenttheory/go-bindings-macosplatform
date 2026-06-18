@@ -37,77 +37,103 @@ func NewScannerFunctionalUnitFlatbed() *ScannerFunctionalUnitFlatbed {
 	return &ScannerFunctionalUnitFlatbed{inner: raw.ICScannerFunctionalUnitFlatbedFromID(_id)}
 }
 
+// @property documentType @abstract ￼Current document type. This will always be one of the supported document types.
+//
 // WithDocumentType sets the documentType property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitFlatbed) WithDocumentType(documentType ICScannerDocumentType) *ScannerFunctionalUnitFlatbed {
 	x.inner.SetDocumentType(raw.ICScannerDocumentType(documentType))
 	return x
 }
 
+// @property pixelDataType @abstract ￼The pixel data type.
+//
 // WithPixelDataType sets the pixelDataType property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitFlatbed) WithPixelDataType(pixelDataType ICScannerPixelDataType) *ScannerFunctionalUnitFlatbed {
 	x.inner.ICScannerFunctionalUnit.SetPixelDataType(raw.ICScannerPixelDataType(pixelDataType))
 	return x
 }
 
+// @property bitDepth @abstract ￼The bit depth to use when performing the final scan. This will always be one of the supported bit depths.
+//
 // WithBitDepth sets the bitDepth property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitFlatbed) WithBitDepth(bitDepth ICScannerBitDepth) *ScannerFunctionalUnitFlatbed {
 	x.inner.ICScannerFunctionalUnit.SetBitDepth(raw.ICScannerBitDepth(bitDepth))
 	return x
 }
 
+// @property measurementUnit @abstract ￼Current measurement unit. This will always be one of the supported measurement units.
+//
 // WithMeasurementUnit sets the measurementUnit property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitFlatbed) WithMeasurementUnit(measurementUnit ICScannerMeasurementUnit) *ScannerFunctionalUnitFlatbed {
 	x.inner.ICScannerFunctionalUnit.SetMeasurementUnit(raw.ICScannerMeasurementUnit(measurementUnit))
 	return x
 }
 
+// @property resolution @abstract ￼Current scan resolution. This will always be one of the supported resolution values.
+//
 // WithResolution sets the resolution property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitFlatbed) WithResolution(resolution uint) *ScannerFunctionalUnitFlatbed {
 	x.inner.ICScannerFunctionalUnit.SetResolution(resolution)
 	return x
 }
 
+// @property scaleFactor @abstract ￼Current scale factor. This will always be one of the supported scale factor values.
+//
 // WithScaleFactor sets the scaleFactor property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitFlatbed) WithScaleFactor(scaleFactor uint) *ScannerFunctionalUnitFlatbed {
 	x.inner.ICScannerFunctionalUnit.SetScaleFactor(scaleFactor)
 	return x
 }
 
+// @property scanArea @abstract ￼This property along with scanAreaOrientation describes the area to be scanned.
+//
 // WithScanArea sets the scanArea property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitFlatbed) WithScanArea(scanArea corefoundation.CGRect) *ScannerFunctionalUnitFlatbed {
 	x.inner.ICScannerFunctionalUnit.SetScanArea(scanArea)
 	return x
 }
 
+// @property scanAreaOrientation @abstract ￼Desired orientation of the scan area. This property along with scanArea describes the area to be scanned. @discussion This property is set to ICEXIFOrientation1 initially. This property is not used by the ICScannerFunctionalUnitDocumentFeeder subclass.
+//
 // WithScanAreaOrientation sets the scanAreaOrientation property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitFlatbed) WithScanAreaOrientation(scanAreaOrientation ICEXIFOrientationType) *ScannerFunctionalUnitFlatbed {
 	x.inner.ICScannerFunctionalUnit.SetScanAreaOrientation(raw.ICEXIFOrientationType(scanAreaOrientation))
 	return x
 }
 
+// @property usesThresholdForBlackAndWhiteScanning @abstract ￼Indicates if this functional unit uses threshold value to be used when performing a scan in black & white.
+//
 // WithUsesThresholdForBlackAndWhiteScanning sets the usesThresholdForBlackAndWhiteScanning property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitFlatbed) WithUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) *ScannerFunctionalUnitFlatbed {
 	x.inner.ICScannerFunctionalUnit.SetUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning)
 	return x
 }
 
+// @property thresholdForBlackAndWhiteScanning @abstract ￼Threshold value to be used when performing a scan in black & white. This value should be from 0 to 255.
+//
 // WithThresholdForBlackAndWhiteScanning sets the thresholdForBlackAndWhiteScanning property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitFlatbed) WithThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) *ScannerFunctionalUnitFlatbed {
 	x.inner.ICScannerFunctionalUnit.SetThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning)
 	return x
 }
 
+// @property overviewResolution @abstract ￼Overview image resolution. Value assigned to this will be contrained by resolutions allowed by the device.
+//
 // WithOverviewResolution sets the overviewResolution property and returns the receiver for chaining.
 func (x *ScannerFunctionalUnitFlatbed) WithOverviewResolution(overviewResolution uint) *ScannerFunctionalUnitFlatbed {
 	x.inner.ICScannerFunctionalUnit.SetOverviewResolution(overviewResolution)
 	return x
 }
 
+// @property supportedDocumentTypes @abstract ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
+//
 // SupportedDocumentTypes calls the underlying SupportedDocumentTypes.
 func (x *ScannerFunctionalUnitFlatbed) SupportedDocumentTypes() *foundation.NSIndexSet {
 	return x.inner.SupportedDocumentTypes()
 }
 
+// @property documentType @abstract ￼Current document type. This will always be one of the supported document types.
+//
 // DocumentType calls the underlying DocumentType.
 func (x *ScannerFunctionalUnitFlatbed) DocumentType() ICScannerDocumentType {
 	return ICScannerDocumentType(x.inner.DocumentType())
@@ -118,6 +144,8 @@ func (x *ScannerFunctionalUnitFlatbed) SetDocumentType(documentType ICScannerDoc
 	x.inner.SetDocumentType(raw.ICScannerDocumentType(documentType))
 }
 
+// @property documentSize @abstract ￼Document size of the current document type expressed in current measurement unit.
+//
 // DocumentSize calls the underlying DocumentSize.
 func (x *ScannerFunctionalUnitFlatbed) DocumentSize() corefoundation.CGSize {
 	return x.inner.DocumentSize()

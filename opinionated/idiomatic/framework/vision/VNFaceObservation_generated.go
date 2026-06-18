@@ -36,6 +36,8 @@ func NewFaceObservation() *FaceObservation {
 	return &FaceObservation{inner: raw.VNFaceObservationFromID(_id)}
 }
 
+// @brief The face landmarks populated by the VNDetectFaceLandmarksRequest. This is set to nil if only a VNDetectFaceRectanglesRequest was performed.
+//
 // Landmarks calls the underlying Landmarks.
 func (x *FaceObservation) Landmarks() *FaceLandmarks2D {
 	_r := x.inner.Landmarks()
@@ -45,21 +47,29 @@ func (x *FaceObservation) Landmarks() *FaceLandmarks2D {
 	return &FaceLandmarks2D{inner: _r}
 }
 
+// @brief The capture quality of the face as a normalized value between 0.0 and 1.0 that can be used to compare the quality of the face in terms of it capture attributes (lighting, blur, position). This score can be used to compare the capture quality of a face against other captures of the same face in a given set.
+//
 // FaceCaptureQuality calls the underlying FaceCaptureQuality.
 func (x *FaceObservation) FaceCaptureQuality() *foundation.NSNumber {
 	return x.inner.FaceCaptureQuality()
 }
 
+// @brief Face roll angle populated by VNDetectFaceRectanglesRequest. The roll is reported in radians, positive angle corresponds to counterclockwise direction, range [-Pi, Pi). nil value indicates that the roll angle hasn't been computed
+//
 // Roll calls the underlying Roll.
 func (x *FaceObservation) Roll() *foundation.NSNumber {
 	return x.inner.Roll()
 }
 
+// @brief Face yaw angle populated by VNDetectFaceRectanglesRequest. The yaw is reported in radians, positive angle corresponds to counterclockwise direction, range [-Pi/2, Pi/2]. nil value indicates that the yaw angle hasn't been computed
+//
 // Yaw calls the underlying Yaw.
 func (x *FaceObservation) Yaw() *foundation.NSNumber {
 	return x.inner.Yaw()
 }
 
+// @brief Face pitch angle populated by VNDetectFaceRectanglesRequest. The pitch is reported in radians, positive angle corresponds to nodding head down direction, range [-Pi/2, Pi/2]. nil value indicates that the pitch angle hasn't been computed
+//
 // Pitch calls the underlying Pitch.
 func (x *FaceObservation) Pitch() *foundation.NSNumber {
 	return x.inner.Pitch()

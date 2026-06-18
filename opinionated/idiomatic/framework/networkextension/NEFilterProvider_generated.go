@@ -38,6 +38,8 @@ func NewNEFilterProvider() *NEFilterProvider {
 	return &NEFilterProvider{inner: raw.NEFilterProviderFromID(_id)}
 }
 
+// @method startFilterWithCompletionHandler: @discussion This function is called by the framework when the content filter is being started. Subclasses must override this method and perform whatever steps are necessary to start the filter. @param completionHandler A block that must be called when the process of starting the filter is complete. If the filter was started successfully, subclass implementations must pass the nil value to this block. If an error occurred while starting the filter, sublcass implementations must pass a non-nil NSError containing more details about the error.
+//
 // StartFilter blocks until the operation completes or ctx is cancelled.
 func (x *NEFilterProvider) StartFilter(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -56,6 +58,8 @@ func (x *NEFilterProvider) StartFilter(ctx context.Context) error {
 	}
 }
 
+// @method stopFilterWithReason:completionHandler: @discussion This function is called by the framework when the content filter is being stopped. Subclasses must override this method and perform whatever steps are necessary to stop the filter. @param reason An NEProviderStopReason indicating why the filter is being stopped. @param completionHandler A block that must be called when the process of stopping the filter is complete.
+//
 // StopFilterWithReason blocks until the operation completes or ctx is cancelled.
 func (x *NEFilterProvider) StopFilterWithReason(ctx context.Context, reason NEProviderStopReason) error {
 	_ch := make(chan error, 1)
@@ -70,11 +74,15 @@ func (x *NEFilterProvider) StopFilterWithReason(ctx context.Context, reason NEPr
 	}
 }
 
+// @method handleReport: @discussion This function is called by the framework when the data provider extension returns a verdict with the report property set to True. Subclass implementations may override this method to handle the flow report. @param report The report being delivered.
+//
 // HandleReport calls the underlying HandleReport.
 func (x *NEFilterProvider) HandleReport(report *raw.NEFilterReport) {
 	x.inner.HandleReport(report)
 }
 
+// @property filterConfiguration @discussion An NEContentFilterConfiguration object containing the current filter configuration. The value of this property can change during the lifetime of a filter. Filter implementations can use KVO to be notified when the configuration changes.
+//
 // FilterConfiguration calls the underlying FilterConfiguration.
 func (x *NEFilterProvider) FilterConfiguration() *NEFilterProviderConfiguration {
 	_r := x.inner.FilterConfiguration()

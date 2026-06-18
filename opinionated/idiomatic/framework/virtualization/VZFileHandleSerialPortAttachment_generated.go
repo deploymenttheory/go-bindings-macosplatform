@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An attachment point that allows bidirectional communication using file handles.
+//
 // FileHandleSerialPortAttachment wraps [raw.VZFileHandleSerialPortAttachment] with a fluent Go API.
 type FileHandleSerialPortAttachment struct {
 	inner *raw.VZFileHandleSerialPortAttachment
@@ -32,6 +34,8 @@ func FileHandleSerialPortAttachmentFromID(id objc.ID) *FileHandleSerialPortAttac
 	return &FileHandleSerialPortAttachment{inner: raw.VZFileHandleSerialPortAttachmentFromID(id)}
 }
 
+// Creates a serial port attachment object from the specified file handles.
+//
 // NewFileHandleSerialPortAttachmentWithFileHandleForReadingFileHandleForWriting creates a new [FileHandleSerialPortAttachment].
 func NewFileHandleSerialPortAttachmentWithFileHandleForReadingFileHandleForWriting(fileHandleForReading *foundation.NSFileHandle, fileHandleForWriting *foundation.NSFileHandle) *FileHandleSerialPortAttachment {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZFileHandleSerialPortAttachment")), objc.RegisterName("alloc"))
@@ -39,11 +43,15 @@ func NewFileHandleSerialPortAttachmentWithFileHandleForReadingFileHandleForWriti
 	return &FileHandleSerialPortAttachment{inner: raw.VZFileHandleSerialPortAttachmentFromID(_id)}
 }
 
+// @abstract File handle for reading from the file. @discussion Data written to fileHandleForReading goes to the guest.
+//
 // FileHandleForReading calls the underlying FileHandleForReading.
 func (x *FileHandleSerialPortAttachment) FileHandleForReading() *foundation.NSFileHandle {
 	return x.inner.FileHandleForReading()
 }
 
+// @abstract File handle for writing to the file. @discussion Data sent from the guest appears on fileHandleForWriting.
+//
 // FileHandleForWriting calls the underlying FileHandleForWriting.
 func (x *FileHandleSerialPortAttachment) FileHandleForWriting() *foundation.NSFileHandle {
 	return x.inner.FileHandleForWriting()

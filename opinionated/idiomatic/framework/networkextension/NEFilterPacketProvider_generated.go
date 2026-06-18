@@ -37,6 +37,8 @@ func NewNEFilterPacketProvider() *NEFilterPacketProvider {
 	return &NEFilterPacketProvider{inner: raw.NEFilterPacketProviderFromID(_id)}
 }
 
+// @property packetHandler @discussion A block to be set to handle each packet received or to be sent.  A verdict to allow, drop or delay must be returned to indicate the treatment of the packet.  Since there may be multiple filtering sources presenting frames to the provider, this packet handler may be executed by multiple simultaneous threads.  This packet handler must be able to handle execution in a multi-threaded environment.
+//
 // WithPacketHandler sets the packetHandler property and returns the receiver for chaining.
 func (x *NEFilterPacketProvider) WithPacketHandler(packetHandler func(*raw.NEFilterPacketContext, *foundation.NSObject, NETrafficDirection, unsafe.Pointer, unsafe.Pointer) NEFilterPacketProviderVerdict) *NEFilterPacketProvider {
 	x.inner.SetPacketHandler(func(_a0 *raw.NEFilterPacketContext, _a1 *foundation.NSObject, _a2 raw.NETrafficDirection, _a3 unsafe.Pointer, _a4 unsafe.Pointer) raw.NEFilterPacketProviderVerdict {
@@ -45,6 +47,8 @@ func (x *NEFilterPacketProvider) WithPacketHandler(packetHandler func(*raw.NEFil
 	return x
 }
 
+// @method delayCurrentPacket @discussion This function is used to delay a packet currently presented by packetHandler. This function is only valid within the packetHandler block and a verdict of NEFilterPacketProviderVerdictDelay must be returned after a packet is delayed.  A delayed packet will be prevented from continuing its journey through the networking stack until it is either allowed by calling allow() or is dropped by being released. @param context The context of the current packet filter which is passed to the packetHandler block. The packetHandler block must pass this context when calling delayCurrentPacket().
+//
 // DelayCurrentPacket calls the underlying DelayCurrentPacket.
 func (x *NEFilterPacketProvider) DelayCurrentPacket(context_ *raw.NEFilterPacketContext) *NEPacket {
 	_r := x.inner.DelayCurrentPacket(context_)
@@ -54,11 +58,15 @@ func (x *NEFilterPacketProvider) DelayCurrentPacket(context_ *raw.NEFilterPacket
 	return &NEPacket{inner: _r}
 }
 
+// @method allowPacket: @discussion This function is used to allow a previously-delayed packet to continue its journey into or out of the networking stack. @param packet A NEPacket object that contains the data of the packet that was previously delayed by the NEFilterPacketProvider.
+//
 // AllowPacket calls the underlying AllowPacket.
 func (x *NEFilterPacketProvider) AllowPacket(packet *raw.NEPacket) {
 	x.inner.AllowPacket(packet)
 }
 
+// @property packetHandler @discussion A block to be set to handle each packet received or to be sent.  A verdict to allow, drop or delay must be returned to indicate the treatment of the packet.  Since there may be multiple filtering sources presenting frames to the provider, this packet handler may be executed by multiple simultaneous threads.  This packet handler must be able to handle execution in a multi-threaded environment.
+//
 // PacketHandler calls the underlying PacketHandler.
 func (x *NEFilterPacketProvider) PacketHandler() objc.Block {
 	return x.inner.PacketHandler()

@@ -37,6 +37,8 @@ func NewAssetVariantAudioAttributes() *AssetVariantAudioAttributes {
 	return &AssetVariantAudioAttributes{inner: raw.AVAssetVariantAudioAttributesFromID(_id)}
 }
 
+// Provides attributes for a specific audio media selection option. If no rendition specific attributes are declared, it will be nil. - Parameter mediaSelectionOption: The option to return rendition specific information for.
+//
 // RenditionSpecificAttributesForMediaOption calls the underlying RenditionSpecificAttributesForMediaOption.
 func (x *AssetVariantAudioAttributes) RenditionSpecificAttributesForMediaOption(mediaSelectionOption *raw.AVMediaSelectionOption) *AssetVariantAudioRenditionSpecificAttributes {
 	_r := x.inner.RenditionSpecificAttributesForMediaOption(mediaSelectionOption)
@@ -46,6 +48,8 @@ func (x *AssetVariantAudioAttributes) RenditionSpecificAttributesForMediaOption(
 	return &AssetVariantAudioRenditionSpecificAttributes{inner: _r}
 }
 
+// Provides an array of audio formats present in the variant's renditions if any are declared. Each value in the array is a NSNumber representation of AudioFormatID.
+//
 // FormatIDs returns the collection as a Go slice.
 func (x *AssetVariantAudioAttributes) FormatIDs() []*foundation.NSNumber {
 	arr := x.inner.FormatIDs()

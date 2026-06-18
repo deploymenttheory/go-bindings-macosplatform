@@ -34,6 +34,8 @@ func CNNNormalizationGammaAndBetaStateFromID(id objc.ID) *CNNNormalizationGammaA
 	return &CNNNormalizationGammaAndBetaState{inner: raw.MPSCNNNormalizationGammaAndBetaStateFromID(id)}
 }
 
+// @abstract   Initialize a MPSCNNNormalizationGammaAndBetaState object using values contained in MTLBuffers. @param      gamma       The MTLBuffer containing gamma terms. @param      beta        The MTLBuffer containing beta terms.
+//
 // NewCNNNormalizationGammaAndBetaStateWithGammaBeta creates a new [CNNNormalizationGammaAndBetaState].
 func NewCNNNormalizationGammaAndBetaStateWithGammaBeta(gamma metal.MTLBuffer, beta metal.MTLBuffer) *CNNNormalizationGammaAndBetaState {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNNormalizationGammaAndBetaState")), objc.RegisterName("alloc"))
@@ -47,17 +49,23 @@ func (x *CNNNormalizationGammaAndBetaState) WithReadCount(readCount uint) *CNNNo
 	return x
 }
 
+// @property label @abstract A string to help identify this object.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *CNNNormalizationGammaAndBetaState) WithLabel(label string) *CNNNormalizationGammaAndBetaState {
 	x.inner.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// @property   gamma @abstract   A MTLBuffer containing the gamma terms.
+//
 // Gamma calls the underlying Gamma.
 func (x *CNNNormalizationGammaAndBetaState) Gamma() metal.MTLBuffer {
 	return x.inner.Gamma()
 }
 
+// @property   beta @abstract   A MTLBuffer containing the beta terms.
+//
 // Beta calls the underlying Beta.
 func (x *CNNNormalizationGammaAndBetaState) Beta() metal.MTLBuffer {
 	return x.inner.Beta()

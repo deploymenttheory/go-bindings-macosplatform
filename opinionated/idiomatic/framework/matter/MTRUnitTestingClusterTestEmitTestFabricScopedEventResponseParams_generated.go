@@ -36,6 +36,8 @@ func MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsFromID(id o
 	return &MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams{inner: raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsFromID(id)}
 }
 
+// Initialize an MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
+//
 // NewMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsWithResponseValueError creates a new [MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams].
 func NewMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams")), objc.RegisterName("alloc"))
@@ -53,6 +55,8 @@ func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) WithV
 	return x
 }
 
+// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+//
 // WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
 func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams {
 	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
@@ -69,6 +73,8 @@ func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) SetVa
 	x.inner.SetValue(value)
 }
 
+// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+//
 // TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
 func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
 	return x.inner.TimedInvokeTimeoutMs()

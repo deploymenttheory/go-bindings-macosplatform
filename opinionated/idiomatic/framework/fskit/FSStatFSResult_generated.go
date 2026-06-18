@@ -31,6 +31,8 @@ func StatFSResultFromID(id objc.ID) *StatFSResult {
 	return &StatFSResult{inner: raw.FSStatFSResultFromID(id)}
 }
 
+// Creates an statistics result instance, using the given file system type name. - Parameters fileSystemTypeName: A type name for the file system. The maximum allowed length is `MFSTYPENAMELEN`, including the terminating `NUL` character.
+//
 // NewStatFSResultWithFileSystemTypeName creates a new [StatFSResult].
 func NewStatFSResultWithFileSystemTypeName(fileSystemTypeName string) *StatFSResult {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSStatFSResult")), objc.RegisterName("alloc"))
@@ -38,84 +40,112 @@ func NewStatFSResultWithFileSystemTypeName(fileSystemTypeName string) *StatFSRes
 	return &StatFSResult{inner: raw.FSStatFSResultFromID(_id)}
 }
 
+// A property for the volume's block size, in bytes. This value defaults to `4096`. Zero isn't a valid block size.
+//
 // WithBlockSize sets the blockSize property and returns the receiver for chaining.
 func (x *StatFSResult) WithBlockSize(blockSize int) *StatFSResult {
 	x.inner.SetBlockSize(blockSize)
 	return x
 }
 
+// A property for the optimal block size with which to perform I/O. For best performance, specify an `ioSize` that's an even multiple of “blockSize“.
+//
 // WithIoSize sets the ioSize property and returns the receiver for chaining.
 func (x *StatFSResult) WithIoSize(ioSize int) *StatFSResult {
 	x.inner.SetIoSize(ioSize)
 	return x
 }
 
+// A property for the volume's total data block count.
+//
 // WithTotalBlocks sets the totalBlocks property and returns the receiver for chaining.
 func (x *StatFSResult) WithTotalBlocks(totalBlocks uint64) *StatFSResult {
 	x.inner.SetTotalBlocks(totalBlocks)
 	return x
 }
 
+// A property for the number of free blocks available to a non-superuser on the volume.
+//
 // WithAvailableBlocks sets the availableBlocks property and returns the receiver for chaining.
 func (x *StatFSResult) WithAvailableBlocks(availableBlocks uint64) *StatFSResult {
 	x.inner.SetAvailableBlocks(availableBlocks)
 	return x
 }
 
+// A property for the number of free blocks in the volume.
+//
 // WithFreeBlocks sets the freeBlocks property and returns the receiver for chaining.
 func (x *StatFSResult) WithFreeBlocks(freeBlocks uint64) *StatFSResult {
 	x.inner.SetFreeBlocks(freeBlocks)
 	return x
 }
 
+// A property for the number of used blocks in the volume.
+//
 // WithUsedBlocks sets the usedBlocks property and returns the receiver for chaining.
 func (x *StatFSResult) WithUsedBlocks(usedBlocks uint64) *StatFSResult {
 	x.inner.SetUsedBlocks(usedBlocks)
 	return x
 }
 
+// A property for the total size, in bytes, of the volume.
+//
 // WithTotalBytes sets the totalBytes property and returns the receiver for chaining.
 func (x *StatFSResult) WithTotalBytes(totalBytes uint64) *StatFSResult {
 	x.inner.SetTotalBytes(totalBytes)
 	return x
 }
 
+// A property for the amount of space available to users, in bytes, in the volume.
+//
 // WithAvailableBytes sets the availableBytes property and returns the receiver for chaining.
 func (x *StatFSResult) WithAvailableBytes(availableBytes uint64) *StatFSResult {
 	x.inner.SetAvailableBytes(availableBytes)
 	return x
 }
 
+// A property for the amount of free space, in bytes, in the volume.
+//
 // WithFreeBytes sets the freeBytes property and returns the receiver for chaining.
 func (x *StatFSResult) WithFreeBytes(freeBytes uint64) *StatFSResult {
 	x.inner.SetFreeBytes(freeBytes)
 	return x
 }
 
+// A property for the amount of used space, in bytes, in the volume.
+//
 // WithUsedBytes sets the usedBytes property and returns the receiver for chaining.
 func (x *StatFSResult) WithUsedBytes(usedBytes uint64) *StatFSResult {
 	x.inner.SetUsedBytes(usedBytes)
 	return x
 }
 
+// A property for the total number of file slots in the volume,
+//
 // WithTotalFiles sets the totalFiles property and returns the receiver for chaining.
 func (x *StatFSResult) WithTotalFiles(totalFiles uint64) *StatFSResult {
 	x.inner.SetTotalFiles(totalFiles)
 	return x
 }
 
+// A property for the total number of free file slots in the volume.
+//
 // WithFreeFiles sets the freeFiles property and returns the receiver for chaining.
 func (x *StatFSResult) WithFreeFiles(freeFiles uint64) *StatFSResult {
 	x.inner.SetFreeFiles(freeFiles)
 	return x
 }
 
+// A property for the file system's subtype or flavor. Match this value to the `FSPersonalities`'s `FSSubType` attribute, if it exists within the `EXAppExtensionAttributes` dictionary of the module's `Info.plist`.
+//
 // WithFileSystemSubType sets the fileSystemSubType property and returns the receiver for chaining.
 func (x *StatFSResult) WithFileSystemSubType(fileSystemSubType int) *StatFSResult {
 	x.inner.SetFileSystemSubType(fileSystemSubType)
 	return x
 }
 
+// A property for the volume's block size, in bytes. This value defaults to `4096`. Zero isn't a valid block size.
+//
 // BlockSize calls the underlying BlockSize.
 func (x *StatFSResult) BlockSize() int {
 	return x.inner.BlockSize()
@@ -126,6 +156,8 @@ func (x *StatFSResult) SetBlockSize(blockSize int) {
 	x.inner.SetBlockSize(blockSize)
 }
 
+// A property for the optimal block size with which to perform I/O. For best performance, specify an `ioSize` that's an even multiple of “blockSize“.
+//
 // IoSize calls the underlying IoSize.
 func (x *StatFSResult) IoSize() int {
 	return x.inner.IoSize()
@@ -136,6 +168,8 @@ func (x *StatFSResult) SetIoSize(ioSize int) {
 	x.inner.SetIoSize(ioSize)
 }
 
+// A property for the volume's total data block count.
+//
 // TotalBlocks calls the underlying TotalBlocks.
 func (x *StatFSResult) TotalBlocks() uint64 {
 	return x.inner.TotalBlocks()
@@ -146,6 +180,8 @@ func (x *StatFSResult) SetTotalBlocks(totalBlocks uint64) {
 	x.inner.SetTotalBlocks(totalBlocks)
 }
 
+// A property for the number of free blocks available to a non-superuser on the volume.
+//
 // AvailableBlocks calls the underlying AvailableBlocks.
 func (x *StatFSResult) AvailableBlocks() uint64 {
 	return x.inner.AvailableBlocks()
@@ -156,6 +192,8 @@ func (x *StatFSResult) SetAvailableBlocks(availableBlocks uint64) {
 	x.inner.SetAvailableBlocks(availableBlocks)
 }
 
+// A property for the number of free blocks in the volume.
+//
 // FreeBlocks calls the underlying FreeBlocks.
 func (x *StatFSResult) FreeBlocks() uint64 {
 	return x.inner.FreeBlocks()
@@ -166,6 +204,8 @@ func (x *StatFSResult) SetFreeBlocks(freeBlocks uint64) {
 	x.inner.SetFreeBlocks(freeBlocks)
 }
 
+// A property for the number of used blocks in the volume.
+//
 // UsedBlocks calls the underlying UsedBlocks.
 func (x *StatFSResult) UsedBlocks() uint64 {
 	return x.inner.UsedBlocks()
@@ -176,6 +216,8 @@ func (x *StatFSResult) SetUsedBlocks(usedBlocks uint64) {
 	x.inner.SetUsedBlocks(usedBlocks)
 }
 
+// A property for the total size, in bytes, of the volume.
+//
 // TotalBytes calls the underlying TotalBytes.
 func (x *StatFSResult) TotalBytes() uint64 {
 	return x.inner.TotalBytes()
@@ -186,6 +228,8 @@ func (x *StatFSResult) SetTotalBytes(totalBytes uint64) {
 	x.inner.SetTotalBytes(totalBytes)
 }
 
+// A property for the amount of space available to users, in bytes, in the volume.
+//
 // AvailableBytes calls the underlying AvailableBytes.
 func (x *StatFSResult) AvailableBytes() uint64 {
 	return x.inner.AvailableBytes()
@@ -196,6 +240,8 @@ func (x *StatFSResult) SetAvailableBytes(availableBytes uint64) {
 	x.inner.SetAvailableBytes(availableBytes)
 }
 
+// A property for the amount of free space, in bytes, in the volume.
+//
 // FreeBytes calls the underlying FreeBytes.
 func (x *StatFSResult) FreeBytes() uint64 {
 	return x.inner.FreeBytes()
@@ -206,6 +252,8 @@ func (x *StatFSResult) SetFreeBytes(freeBytes uint64) {
 	x.inner.SetFreeBytes(freeBytes)
 }
 
+// A property for the amount of used space, in bytes, in the volume.
+//
 // UsedBytes calls the underlying UsedBytes.
 func (x *StatFSResult) UsedBytes() uint64 {
 	return x.inner.UsedBytes()
@@ -216,6 +264,8 @@ func (x *StatFSResult) SetUsedBytes(usedBytes uint64) {
 	x.inner.SetUsedBytes(usedBytes)
 }
 
+// A property for the total number of file slots in the volume,
+//
 // TotalFiles calls the underlying TotalFiles.
 func (x *StatFSResult) TotalFiles() uint64 {
 	return x.inner.TotalFiles()
@@ -226,6 +276,8 @@ func (x *StatFSResult) SetTotalFiles(totalFiles uint64) {
 	x.inner.SetTotalFiles(totalFiles)
 }
 
+// A property for the total number of free file slots in the volume.
+//
 // FreeFiles calls the underlying FreeFiles.
 func (x *StatFSResult) FreeFiles() uint64 {
 	return x.inner.FreeFiles()
@@ -236,6 +288,8 @@ func (x *StatFSResult) SetFreeFiles(freeFiles uint64) {
 	x.inner.SetFreeFiles(freeFiles)
 }
 
+// A property for the file system's subtype or flavor. Match this value to the `FSPersonalities`'s `FSSubType` attribute, if it exists within the `EXAppExtensionAttributes` dictionary of the module's `Info.plist`.
+//
 // FileSystemSubType calls the underlying FileSystemSubType.
 func (x *StatFSResult) FileSystemSubType() int {
 	return x.inner.FileSystemSubType()
@@ -246,6 +300,8 @@ func (x *StatFSResult) SetFileSystemSubType(fileSystemSubType int) {
 	x.inner.SetFileSystemSubType(fileSystemSubType)
 }
 
+// A property for the file system type name. Match this value to the `FSShortName` attribute within the `EXAppExtensionAttributes` dictionary of the module's `Info.plist`. The maximum allowed length is `MFSTYPENAMELEN`, including the terminating `NUL` character.
+//
 // FileSystemTypeName calls the underlying FileSystemTypeName.
 func (x *StatFSResult) FileSystemTypeName() string {
 	_r := x.inner.FileSystemTypeName()

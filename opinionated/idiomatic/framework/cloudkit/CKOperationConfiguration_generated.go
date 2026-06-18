@@ -36,42 +36,56 @@ func NewOperationConfiguration() *OperationConfiguration {
 	return &OperationConfiguration{inner: raw.CKOperationConfigurationFromID(_id)}
 }
 
+// The configuration's container. If you don't provide a container, CloudKit uses the default container that “CKContainer“ provides.
+//
 // WithContainer sets the container property and returns the receiver for chaining.
 func (x *OperationConfiguration) WithContainer(container *Container) *OperationConfiguration {
 	x.inner.SetContainer(container.Unwrap())
 	return x
 }
 
+// The priority that the system uses when it allocates resources to the operations that use this configuration.
+//
 // WithQualityOfService sets the qualityOfService property and returns the receiver for chaining.
 func (x *OperationConfiguration) WithQualityOfService(qualityOfService foundation.NSQualityOfService) *OperationConfiguration {
 	x.inner.SetQualityOfService(qualityOfService)
 	return x
 }
 
+// A Boolean value that indicates whether operations that use this configuration can send data over the cellular network.
+//
 // WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
 func (x *OperationConfiguration) WithAllowsCellularAccess(allowsCellularAccess bool) *OperationConfiguration {
 	x.inner.SetAllowsCellularAccess(allowsCellularAccess)
 	return x
 }
 
+// A Boolean value that indicates whether the operations that use this configuration are long-lived.
+//
 // WithLongLived sets the longLived property and returns the receiver for chaining.
 func (x *OperationConfiguration) WithLongLived(longLived bool) *OperationConfiguration {
 	x.inner.SetLongLived(longLived)
 	return x
 }
 
+// The maximum amount of time that a request can take. - SeeAlso: `NSURLSessionConfiguration.timeoutIntervalForRequest`
+//
 // WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
 func (x *OperationConfiguration) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *OperationConfiguration {
 	x.inner.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
 	return x
 }
 
+// The maximum amount of time that a resource request can take. - SeeAlso: `NSURLSessionConfiguration.timeoutIntervalForResource`
+//
 // WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
 func (x *OperationConfiguration) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *OperationConfiguration {
 	x.inner.SetTimeoutIntervalForResource(timeoutIntervalForResource)
 	return x
 }
 
+// The configuration's container. If you don't provide a container, CloudKit uses the default container that “CKContainer“ provides.
+//
 // Container calls the underlying Container.
 func (x *OperationConfiguration) Container() *Container {
 	_r := x.inner.Container()
@@ -86,6 +100,8 @@ func (x *OperationConfiguration) SetContainer(container *raw.CKContainer) {
 	x.inner.SetContainer(container)
 }
 
+// The priority that the system uses when it allocates resources to the operations that use this configuration.
+//
 // QualityOfService calls the underlying QualityOfService.
 func (x *OperationConfiguration) QualityOfService() foundation.NSQualityOfService {
 	return x.inner.QualityOfService()
@@ -96,6 +112,8 @@ func (x *OperationConfiguration) SetQualityOfService(qualityOfService foundation
 	x.inner.SetQualityOfService(qualityOfService)
 }
 
+// A Boolean value that indicates whether operations that use this configuration can send data over the cellular network.
+//
 // AllowsCellularAccess calls the underlying AllowsCellularAccess.
 func (x *OperationConfiguration) AllowsCellularAccess() bool {
 	return x.inner.AllowsCellularAccess()
@@ -106,6 +124,8 @@ func (x *OperationConfiguration) SetAllowsCellularAccess(allowsCellularAccess bo
 	x.inner.SetAllowsCellularAccess(allowsCellularAccess)
 }
 
+// A Boolean value that indicates whether the operations that use this configuration are long-lived.
+//
 // IsLongLived calls the underlying IsLongLived.
 func (x *OperationConfiguration) IsLongLived() bool {
 	return x.inner.IsLongLived()
@@ -116,6 +136,8 @@ func (x *OperationConfiguration) SetLongLived(longLived bool) {
 	x.inner.SetLongLived(longLived)
 }
 
+// The maximum amount of time that a request can take. - SeeAlso: `NSURLSessionConfiguration.timeoutIntervalForRequest`
+//
 // TimeoutIntervalForRequest calls the underlying TimeoutIntervalForRequest.
 func (x *OperationConfiguration) TimeoutIntervalForRequest() float64 {
 	return x.inner.TimeoutIntervalForRequest()
@@ -126,6 +148,8 @@ func (x *OperationConfiguration) SetTimeoutIntervalForRequest(timeoutIntervalFor
 	x.inner.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
 }
 
+// The maximum amount of time that a resource request can take. - SeeAlso: `NSURLSessionConfiguration.timeoutIntervalForResource`
+//
 // TimeoutIntervalForResource calls the underlying TimeoutIntervalForResource.
 func (x *OperationConfiguration) TimeoutIntervalForResource() float64 {
 	return x.inner.TimeoutIntervalForResource()

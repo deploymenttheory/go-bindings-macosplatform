@@ -37,77 +37,103 @@ func NewGraphDepthwiseConvolution2DOpDescriptor() *GraphDepthwiseConvolution2DOp
 	return &GraphDepthwiseConvolution2DOpDescriptor{inner: raw.MPSGraphDepthwiseConvolution2DOpDescriptorFromID(_id)}
 }
 
+// The stride for the x dimension. Default value: 1.
+//
 // WithStrideInX sets the strideInX property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithStrideInX(strideInX uint) *GraphDepthwiseConvolution2DOpDescriptor {
 	x.inner.SetStrideInX(strideInX)
 	return x
 }
 
+// The stride for the y dimension. Default value: 1.
+//
 // WithStrideInY sets the strideInY property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithStrideInY(strideInY uint) *GraphDepthwiseConvolution2DOpDescriptor {
 	x.inner.SetStrideInY(strideInY)
 	return x
 }
 
+// The dilation rate for the x dimension. Default value: 1.
+//
 // WithDilationRateInX sets the dilationRateInX property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithDilationRateInX(dilationRateInX uint) *GraphDepthwiseConvolution2DOpDescriptor {
 	x.inner.SetDilationRateInX(dilationRateInX)
 	return x
 }
 
+// The dilation rate for the y dimension. Default value: 1.
+//
 // WithDilationRateInY sets the dilationRateInY property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithDilationRateInY(dilationRateInY uint) *GraphDepthwiseConvolution2DOpDescriptor {
 	x.inner.SetDilationRateInY(dilationRateInY)
 	return x
 }
 
+// The explicit padding value for the x dimension the operation adds before the data. Default value: 0.
+//
 // WithPaddingLeft sets the paddingLeft property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingLeft(paddingLeft uint) *GraphDepthwiseConvolution2DOpDescriptor {
 	x.inner.SetPaddingLeft(paddingLeft)
 	return x
 }
 
+// The explicit padding value for the x dimension operation adds after the data. Default value: 0.
+//
 // WithPaddingRight sets the paddingRight property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingRight(paddingRight uint) *GraphDepthwiseConvolution2DOpDescriptor {
 	x.inner.SetPaddingRight(paddingRight)
 	return x
 }
 
+// The explicit padding value for the y dimension operation adds before the data. Default value: 0.
+//
 // WithPaddingTop sets the paddingTop property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingTop(paddingTop uint) *GraphDepthwiseConvolution2DOpDescriptor {
 	x.inner.SetPaddingTop(paddingTop)
 	return x
 }
 
+// The explicit padding value for the y dimension operation adds after the data. Default value: 0.
+//
 // WithPaddingBottom sets the paddingBottom property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingBottom(paddingBottom uint) *GraphDepthwiseConvolution2DOpDescriptor {
 	x.inner.SetPaddingBottom(paddingBottom)
 	return x
 }
 
+// The padding style for the operation. Default value is `MPSGraphPaddingStyleExplicit`.
+//
 // WithPaddingStyle sets the paddingStyle property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphDepthwiseConvolution2DOpDescriptor {
 	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
 	return x
 }
 
+// The data layout of the input data in the forward pass. See: “MPSGraphTensorNamedDataLayout“.
+//
 // WithDataLayout sets the dataLayout property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithDataLayout(dataLayout MPSGraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor {
 	x.inner.SetDataLayout(raw.MPSGraphTensorNamedDataLayout(dataLayout))
 	return x
 }
 
+// The data layout of the weights. NOTE: 'O' index is channel multiplier index. See: “MPSGraphTensorNamedDataLayout“.
+//
 // WithWeightsLayout sets the weightsLayout property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithWeightsLayout(weightsLayout MPSGraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor {
 	x.inner.SetWeightsLayout(raw.MPSGraphTensorNamedDataLayout(weightsLayout))
 	return x
 }
 
+// Sets the explicit padding values. Note: this method also sets `paddingStyle` to `MPSGraphPaddingStyleExplicit` (see “MPSGraphPaddingStyle“). - Parameters: - paddingLeft: See `paddingLeft` property. - paddingRight: See `paddingRight` property. - paddingTop: See `paddingTop` property. - paddingBottom: See `paddingBottom` property.
+//
 // SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom calls the underlying SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint) {
 	x.inner.SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft, paddingRight, paddingTop, paddingBottom)
 }
 
+// The stride for the x dimension. Default value: 1.
+//
 // StrideInX calls the underlying StrideInX.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) StrideInX() uint {
 	return x.inner.StrideInX()
@@ -118,6 +144,8 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) SetStrideInX(strideInX uint) {
 	x.inner.SetStrideInX(strideInX)
 }
 
+// The stride for the y dimension. Default value: 1.
+//
 // StrideInY calls the underlying StrideInY.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) StrideInY() uint {
 	return x.inner.StrideInY()
@@ -128,6 +156,8 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) SetStrideInY(strideInY uint) {
 	x.inner.SetStrideInY(strideInY)
 }
 
+// The dilation rate for the x dimension. Default value: 1.
+//
 // DilationRateInX calls the underlying DilationRateInX.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) DilationRateInX() uint {
 	return x.inner.DilationRateInX()
@@ -138,6 +168,8 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) SetDilationRateInX(dilationRat
 	x.inner.SetDilationRateInX(dilationRateInX)
 }
 
+// The dilation rate for the y dimension. Default value: 1.
+//
 // DilationRateInY calls the underlying DilationRateInY.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) DilationRateInY() uint {
 	return x.inner.DilationRateInY()
@@ -148,6 +180,8 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) SetDilationRateInY(dilationRat
 	x.inner.SetDilationRateInY(dilationRateInY)
 }
 
+// The explicit padding value for the x dimension the operation adds before the data. Default value: 0.
+//
 // PaddingLeft calls the underlying PaddingLeft.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) PaddingLeft() uint {
 	return x.inner.PaddingLeft()
@@ -158,6 +192,8 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) SetPaddingLeft(paddingLeft uin
 	x.inner.SetPaddingLeft(paddingLeft)
 }
 
+// The explicit padding value for the x dimension operation adds after the data. Default value: 0.
+//
 // PaddingRight calls the underlying PaddingRight.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) PaddingRight() uint {
 	return x.inner.PaddingRight()
@@ -168,6 +204,8 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) SetPaddingRight(paddingRight u
 	x.inner.SetPaddingRight(paddingRight)
 }
 
+// The explicit padding value for the y dimension operation adds before the data. Default value: 0.
+//
 // PaddingTop calls the underlying PaddingTop.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) PaddingTop() uint {
 	return x.inner.PaddingTop()
@@ -178,6 +216,8 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) SetPaddingTop(paddingTop uint)
 	x.inner.SetPaddingTop(paddingTop)
 }
 
+// The explicit padding value for the y dimension operation adds after the data. Default value: 0.
+//
 // PaddingBottom calls the underlying PaddingBottom.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) PaddingBottom() uint {
 	return x.inner.PaddingBottom()
@@ -188,6 +228,8 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) SetPaddingBottom(paddingBottom
 	x.inner.SetPaddingBottom(paddingBottom)
 }
 
+// The padding style for the operation. Default value is `MPSGraphPaddingStyleExplicit`.
+//
 // PaddingStyle calls the underlying PaddingStyle.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) PaddingStyle() MPSGraphPaddingStyle {
 	return MPSGraphPaddingStyle(x.inner.PaddingStyle())
@@ -198,6 +240,8 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) SetPaddingStyle(paddingStyle M
 	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
 }
 
+// The data layout of the input data in the forward pass. See: “MPSGraphTensorNamedDataLayout“.
+//
 // DataLayout calls the underlying DataLayout.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) DataLayout() MPSGraphTensorNamedDataLayout {
 	return MPSGraphTensorNamedDataLayout(x.inner.DataLayout())
@@ -208,6 +252,8 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) SetDataLayout(dataLayout MPSGr
 	x.inner.SetDataLayout(raw.MPSGraphTensorNamedDataLayout(dataLayout))
 }
 
+// The data layout of the weights. NOTE: 'O' index is channel multiplier index. See: “MPSGraphTensorNamedDataLayout“.
+//
 // WeightsLayout calls the underlying WeightsLayout.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WeightsLayout() MPSGraphTensorNamedDataLayout {
 	return MPSGraphTensorNamedDataLayout(x.inner.WeightsLayout())

@@ -39,12 +39,16 @@ func NewWKWebExtensionAction() *WKWebExtensionAction {
 	return &WKWebExtensionAction{inner: raw.WKWebExtensionActionFromID(_id)}
 }
 
+// @abstract A Boolean value indicating whether the badge text is unread. @discussion This property is automatically set to `YES` when “badgeText“ changes and is not empty. If “badgeText“ becomes empty or the popup associated with the action is presented, this property is automatically set to `NO`. Additionally, it should be set to `NO` by the app when the badge has been presented to the user. This property is useful for higher-level notification badges when extensions might be hidden behind an action sheet.
+//
 // WithHasUnreadBadgeText sets the hasUnreadBadgeText property and returns the receiver for chaining.
 func (x *WKWebExtensionAction) WithHasUnreadBadgeText(hasUnreadBadgeText bool) *WKWebExtensionAction {
 	x.inner.SetHasUnreadBadgeText(hasUnreadBadgeText)
 	return x
 }
 
+// @abstract The name shown when inspecting the popup web view. @discussion This is the text that will appear when inspecting the popup web view.
+//
 // WithInspectionName sets the inspectionName property and returns the receiver for chaining.
 func (x *WKWebExtensionAction) WithInspectionName(inspectionName string) *WKWebExtensionAction {
 	x.inner.SetInspectionName(foundation.NSStringStringWithUTF8String(inspectionName))
@@ -56,11 +60,15 @@ func (x *WKWebExtensionAction) IconForSize(size corefoundation.CGSize) *appkit.N
 	return x.inner.IconForSize(size)
 }
 
+// @abstract Triggers the dismissal process of the popup. @discussion Invoke this method to manage the popup's lifecycle, ensuring the web view is unloaded and resources are released once the popup closes. This method is automatically called upon the dismissal of the action's “UIViewController“ or “NSPopover“.  For custom scenarios where the popup's lifecycle is manually managed, it must be explicitly invoked to ensure proper closure.
+//
 // ClosePopup calls the underlying ClosePopup.
 func (x *WKWebExtensionAction) ClosePopup() {
 	x.inner.ClosePopup()
 }
 
+// @abstract The extension context to which this action is related.
+//
 // WebExtensionContext calls the underlying WebExtensionContext.
 func (x *WKWebExtensionAction) WebExtensionContext() *WKWebExtensionContext {
 	_r := x.inner.WebExtensionContext()
@@ -70,11 +78,15 @@ func (x *WKWebExtensionAction) WebExtensionContext() *WKWebExtensionContext {
 	return &WKWebExtensionContext{inner: _r}
 }
 
+// @abstract The tab that this action is associated with, or `nil` if it is the default action. @discussion When this property is `nil`, it indicates that the action is the default action and not associated with a specific tab.
+//
 // AssociatedTab calls the underlying AssociatedTab.
 func (x *WKWebExtensionAction) AssociatedTab() raw.WKWebExtensionTab {
 	return x.inner.AssociatedTab()
 }
 
+// @abstract The localized display label for the action.
+//
 // Label calls the underlying Label.
 func (x *WKWebExtensionAction) Label() string {
 	_r := x.inner.Label()
@@ -84,6 +96,8 @@ func (x *WKWebExtensionAction) Label() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract The badge text for the action. @discussion Provides the text that appears on the badge for the action. An empty string signifies that no badge should be shown.
+//
 // BadgeText calls the underlying BadgeText.
 func (x *WKWebExtensionAction) BadgeText() string {
 	_r := x.inner.BadgeText()
@@ -93,6 +107,8 @@ func (x *WKWebExtensionAction) BadgeText() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// @abstract A Boolean value indicating whether the badge text is unread. @discussion This property is automatically set to `YES` when “badgeText“ changes and is not empty. If “badgeText“ becomes empty or the popup associated with the action is presented, this property is automatically set to `NO`. Additionally, it should be set to `NO` by the app when the badge has been presented to the user. This property is useful for higher-level notification badges when extensions might be hidden behind an action sheet.
+//
 // HasUnreadBadgeText calls the underlying HasUnreadBadgeText.
 func (x *WKWebExtensionAction) HasUnreadBadgeText() bool {
 	return x.inner.HasUnreadBadgeText()
@@ -103,6 +119,8 @@ func (x *WKWebExtensionAction) SetHasUnreadBadgeText(hasUnreadBadgeText bool) {
 	x.inner.SetHasUnreadBadgeText(hasUnreadBadgeText)
 }
 
+// @abstract The name shown when inspecting the popup web view. @discussion This is the text that will appear when inspecting the popup web view.
+//
 // InspectionName calls the underlying InspectionName.
 func (x *WKWebExtensionAction) InspectionName() string {
 	_r := x.inner.InspectionName()
@@ -117,6 +135,8 @@ func (x *WKWebExtensionAction) SetInspectionName(inspectionName string) {
 	x.inner.SetInspectionName(foundation.NSStringStringWithUTF8String(inspectionName))
 }
 
+// @abstract A Boolean value indicating whether the action is enabled.
+//
 // IsEnabled calls the underlying IsEnabled.
 func (x *WKWebExtensionAction) IsEnabled() bool {
 	return x.inner.IsEnabled()
@@ -133,16 +153,22 @@ func (x *WKWebExtensionAction) MenuItems() []*appkit.NSMenuItem {
 	})
 }
 
+// @abstract A Boolean value indicating whether the action has a popup. @discussion Use this property to check if the action has a popup before attempting to show any popup views.
+//
 // PresentsPopup calls the underlying PresentsPopup.
 func (x *WKWebExtensionAction) PresentsPopup() bool {
 	return x.inner.PresentsPopup()
 }
 
+// @abstract A popover that presents a web view loaded with the popup page for this action, or `nil` if no popup is specified. @discussion This popover contains a view controller with a web view preloaded with the popup page. It automatically adjusts its size to fit the web view's content size. The “presentsPopup“ property should be checked to determine the availability of a popup before using this property.  Dismissing the popover will close the popup and unload the web view. @seealso presentsPopup
+//
 // PopupPopover calls the underlying PopupPopover.
 func (x *WKWebExtensionAction) PopupPopover() *appkit.NSPopover {
 	return x.inner.PopupPopover()
 }
 
+// @abstract A web view loaded with the popup page for this action, or `nil` if no popup is specified. @discussion The web view will be preloaded with the popup page upon first access or after it has been unloaded. Use the “presentsPopup“ property to determine whether a popup should be displayed before using this property. @seealso presentsPopup
+//
 // PopupWebView calls the underlying PopupWebView.
 func (x *WKWebExtensionAction) PopupWebView() *WKWebView {
 	_r := x.inner.PopupWebView()

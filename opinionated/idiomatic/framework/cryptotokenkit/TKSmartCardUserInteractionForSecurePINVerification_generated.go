@@ -39,12 +39,16 @@ func NewSmartCardUserInteractionForSecurePINVerification() *SmartCardUserInterac
 	return &SmartCardUserInteractionForSecurePINVerification{inner: raw.TKSmartCardUserInteractionForSecurePINVerificationFromID(_id)}
 }
 
+// Bitmask specifying condition(s) under which PIN entry should be considered complete. @note Default value: TKSmartCardPINCompletionKey
+//
 // WithPINCompletion sets the pINCompletion property and returns the receiver for chaining.
 func (x *SmartCardUserInteractionForSecurePINVerification) WithPINCompletion(pINCompletion TKSmartCardPINCompletion) *SmartCardUserInteractionForSecurePINVerification {
 	x.inner.TKSmartCardUserInteractionForPINOperation.SetPINCompletion(raw.TKSmartCardPINCompletion(pINCompletion))
 	return x
 }
 
+// List of message indices referring to a predefined message table. It is used to specify the type and number of messages displayed during the PIN operation. @discussion If nil, the reader does not display any message (reader specific). Typically, PIN verification takes 1 message, PIN modification 1-3 messages. @note Default value: nil
+//
 // WithPINMessageIndices sets the collection, converting the Go slice to an NSArray.
 func (x *SmartCardUserInteractionForSecurePINVerification) WithPINMessageIndices(items ...*foundation.NSNumber) *SmartCardUserInteractionForSecurePINVerification {
 	if len(items) == 0 {
@@ -63,36 +67,48 @@ func (x *SmartCardUserInteractionForSecurePINVerification) WithPINMessageIndices
 	return x
 }
 
+// Locale defining the language of displayed messages. If set to nil, the user's current locale is used. @note Default value: the user's current locale
+//
 // WithLocale sets the locale property and returns the receiver for chaining.
 func (x *SmartCardUserInteractionForSecurePINVerification) WithLocale(locale *foundation.NSLocale) *SmartCardUserInteractionForSecurePINVerification {
 	x.inner.TKSmartCardUserInteractionForPINOperation.SetLocale(locale)
 	return x
 }
 
+// SW1SW2 result code.
+//
 // WithResultSW sets the resultSW property and returns the receiver for chaining.
 func (x *SmartCardUserInteractionForSecurePINVerification) WithResultSW(resultSW uint16) *SmartCardUserInteractionForSecurePINVerification {
 	x.inner.TKSmartCardUserInteractionForPINOperation.SetResultSW(resultSW)
 	return x
 }
 
+// Optional block of returned data (without SW1SW2 bytes).
+//
 // WithResultData sets the resultData property and returns the receiver for chaining.
 func (x *SmartCardUserInteractionForSecurePINVerification) WithResultData(resultData *foundation.NSData) *SmartCardUserInteractionForSecurePINVerification {
 	x.inner.TKSmartCardUserInteractionForPINOperation.SetResultData(resultData)
 	return x
 }
 
+// Delegate for state observing of the interaction.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *SmartCardUserInteractionForSecurePINVerification) WithDelegate(delegate raw.TKSmartCardUserInteractionDelegate) *SmartCardUserInteractionForSecurePINVerification {
 	x.inner.TKSmartCardUserInteractionForPINOperation.TKSmartCardUserInteraction.SetDelegate(delegate)
 	return x
 }
 
+// Initial interaction timeout. If set to 0, the reader-defined default timeout is used. @note Default value: 0
+//
 // WithInitialTimeout sets the initialTimeout property and returns the receiver for chaining.
 func (x *SmartCardUserInteractionForSecurePINVerification) WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForSecurePINVerification {
 	x.inner.TKSmartCardUserInteractionForPINOperation.TKSmartCardUserInteraction.SetInitialTimeout(initialTimeout)
 	return x
 }
 
+// Timeout after the first key stroke. If set to 0, the reader-defined default timeout is used. @note Default value: 0
+//
 // WithInteractionTimeout sets the interactionTimeout property and returns the receiver for chaining.
 func (x *SmartCardUserInteractionForSecurePINVerification) WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForSecurePINVerification {
 	x.inner.TKSmartCardUserInteractionForPINOperation.TKSmartCardUserInteraction.SetInteractionTimeout(interactionTimeout)

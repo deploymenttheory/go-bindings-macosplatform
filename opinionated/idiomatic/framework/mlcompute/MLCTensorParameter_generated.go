@@ -35,12 +35,16 @@ func NewTensorParameter() *TensorParameter {
 	return &TensorParameter{inner: raw.MLCTensorParameterFromID(_id)}
 }
 
+// @property   isUpdatable @abstract   Specifies whether this tensor parameter is updatable
+//
 // WithIsUpdatable sets the isUpdatable property and returns the receiver for chaining.
 func (x *TensorParameter) WithIsUpdatable(isUpdatable bool) *TensorParameter {
 	x.inner.SetIsUpdatable(isUpdatable)
 	return x
 }
 
+// @property   tensor @abstract   The underlying tensor
+//
 // Tensor calls the underlying Tensor.
 func (x *TensorParameter) Tensor() *Tensor {
 	_r := x.inner.Tensor()
@@ -50,6 +54,8 @@ func (x *TensorParameter) Tensor() *Tensor {
 	return &Tensor{inner: _r}
 }
 
+// @property   isUpdatable @abstract   Specifies whether this tensor parameter is updatable
+//
 // IsUpdatable calls the underlying IsUpdatable.
 func (x *TensorParameter) IsUpdatable() bool {
 	return x.inner.IsUpdatable()

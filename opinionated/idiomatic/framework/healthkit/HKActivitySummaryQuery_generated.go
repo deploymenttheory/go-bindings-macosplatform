@@ -31,6 +31,8 @@ func ActivitySummaryQueryFromID(id objc.ID) *ActivitySummaryQuery {
 	return &ActivitySummaryQuery{inner: raw.HKActivitySummaryQueryFromID(id)}
 }
 
+// @method        initWithPredicate:resultsHandler: @abstract      Returns a query that will retrieve HKActivitySummaries matching the given predicate. @discussion    If no updateHandler is set on the query, the query will automatically stop after calling resultsHandler. Otherwise, the query continues to run and calls the updateHandler as HKActivitySummaries matching the predicate are updated. @param         predicate  The predicate which HKActivitySummaries should match. @param         handler    The block to invoke with results when the query has finished.
+//
 // NewActivitySummaryQueryWithPredicateResultsHandler creates a new [ActivitySummaryQuery].
 func NewActivitySummaryQueryWithPredicateResultsHandler(predicate *foundation.NSPredicate, handler func(*raw.HKActivitySummaryQuery, *foundation.NSArray[*raw.HKActivitySummary], unsafe.Pointer)) *ActivitySummaryQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKActivitySummaryQuery")), objc.RegisterName("alloc"))
@@ -38,12 +40,16 @@ func NewActivitySummaryQueryWithPredicateResultsHandler(predicate *foundation.NS
 	return &ActivitySummaryQuery{inner: raw.HKActivitySummaryQueryFromID(_id)}
 }
 
+// @property      updateHandler @abstract      An optional handler to be called when activity summaries matching the given predicate are updated. @discussion    This property may not be modified once the query has been executed. If this property is nonnull, then the query must be manually stopped.
+//
 // WithUpdateHandler sets the updateHandler property and returns the receiver for chaining.
 func (x *ActivitySummaryQuery) WithUpdateHandler(updateHandler func(*raw.HKActivitySummaryQuery, *foundation.NSArray[*raw.HKActivitySummary], unsafe.Pointer)) *ActivitySummaryQuery {
 	x.inner.SetUpdateHandler(updateHandler)
 	return x
 }
 
+// @property      updateHandler @abstract      An optional handler to be called when activity summaries matching the given predicate are updated. @discussion    This property may not be modified once the query has been executed. If this property is nonnull, then the query must be manually stopped.
+//
 // UpdateHandler calls the underlying UpdateHandler.
 func (x *ActivitySummaryQuery) UpdateHandler() objc.Block {
 	return x.inner.UpdateHandler()

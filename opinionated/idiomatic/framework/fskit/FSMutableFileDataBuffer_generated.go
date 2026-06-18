@@ -36,11 +36,15 @@ func NewMutableFileDataBuffer() *MutableFileDataBuffer {
 	return &MutableFileDataBuffer{inner: raw.FSMutableFileDataBufferFromID(_id)}
 }
 
+// The byte data.
+//
 // MutableBytes calls the underlying MutableBytes.
 func (x *MutableFileDataBuffer) MutableBytes() unsafe.Pointer {
 	return x.inner.MutableBytes()
 }
 
+// The data length of the buffer.
+//
 // Length calls the underlying Length.
 func (x *MutableFileDataBuffer) Length() uint {
 	return x.inner.Length()

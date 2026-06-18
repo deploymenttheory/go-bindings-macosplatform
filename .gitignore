@@ -71,3 +71,6 @@ example/weave/weave
 ./generate
 # Apple provisioning profiles — contain signing credentials, never commit
 *.provisionprofile
+
+# Apple developer docs HTTP cache (scripts/tools/appledeveloperdocs)
+.appledocs-httpcache/

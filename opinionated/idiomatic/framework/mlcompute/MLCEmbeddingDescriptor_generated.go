@@ -36,31 +36,43 @@ func NewEmbeddingDescriptor() *EmbeddingDescriptor {
 	return &EmbeddingDescriptor{inner: raw.MLCEmbeddingDescriptorFromID(_id)}
 }
 
+// @property   embeddingCount @abstract   The size of the dictionary
+//
 // EmbeddingCount calls the underlying EmbeddingCount.
 func (x *EmbeddingDescriptor) EmbeddingCount() *foundation.NSNumber {
 	return x.inner.EmbeddingCount()
 }
 
+// @property   embeddingDimension @abstract   The dimension of embedding vectors
+//
 // EmbeddingDimension calls the underlying EmbeddingDimension.
 func (x *EmbeddingDescriptor) EmbeddingDimension() *foundation.NSNumber {
 	return x.inner.EmbeddingDimension()
 }
 
+// @property   paddingIndex @abstract   If set, the embedding vector at paddingIndex is initialized with zero and will not be updated in gradient pass, Default=nil
+//
 // PaddingIndex calls the underlying PaddingIndex.
 func (x *EmbeddingDescriptor) PaddingIndex() *foundation.NSNumber {
 	return x.inner.PaddingIndex()
 }
 
+// @property   maximumNorm @abstract   A float, if set, in the forward pass only, the selected embedding vectors will be re-normalized to have an Lp norm of less than maximumNorm in the dictionary, Default=nil
+//
 // MaximumNorm calls the underlying MaximumNorm.
 func (x *EmbeddingDescriptor) MaximumNorm() *foundation.NSNumber {
 	return x.inner.MaximumNorm()
 }
 
+// @property   pNorm @abstract   A float, the p of the Lp norm, can be set to infinity norm by [NSNumber numberWithFloat:INFINITY]. Default=2.0
+//
 // PNorm calls the underlying PNorm.
 func (x *EmbeddingDescriptor) PNorm() *foundation.NSNumber {
 	return x.inner.PNorm()
 }
 
+// @property   scalesGradientByFrequency @abstract   If set, the gradients are scaled by the inverse of the frequency of the words in batch before the weight update. Default=NO
+//
 // ScalesGradientByFrequency calls the underlying ScalesGradientByFrequency.
 func (x *EmbeddingDescriptor) ScalesGradientByFrequency() bool {
 	return x.inner.ScalesGradientByFrequency()

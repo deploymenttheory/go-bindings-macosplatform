@@ -40,6 +40,8 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialProviderWithRelyingPartyIdent
 	return &AuthorizationSecurityKeyPublicKeyCredentialProvider{inner: raw.ASAuthorizationSecurityKeyPublicKeyCredentialProviderFromID(_id)}
 }
 
+// @abstract Create a request to register a new security key credential. @param challenge The challenge to sign. @param displayName The display name for the new credential. @param name The name for the new credential. @param userID An identifier to be stored alongside the credential, which will be returned with the credential when it is used to authenticate.
+//
 // CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID calls the underlying CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID(challenge *foundation.NSData, displayName string, name string, userID *foundation.NSData) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
 	_r := x.inner.CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID(challenge, foundation.NSStringStringWithUTF8String(displayName), foundation.NSStringStringWithUTF8String(name), userID)
@@ -49,6 +51,8 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialRe
 	return &AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest{inner: _r}
 }
 
+// @abstract Create a request to authenticate using an existing credential. @param challenge The challenge to sign.
+//
 // CreateCredentialAssertionRequestWithChallenge calls the underlying CreateCredentialAssertionRequestWithChallenge.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialAssertionRequestWithChallenge(challenge *foundation.NSData) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
 	_r := x.inner.CreateCredentialAssertionRequestWithChallenge(challenge)
@@ -58,6 +62,8 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialAs
 	return &AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest{inner: _r}
 }
 
+// @abstract The Relying Party identifier used for all requests created by this object.
+//
 // RelyingPartyIdentifier calls the underlying RelyingPartyIdentifier.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) RelyingPartyIdentifier() string {
 	_r := x.inner.RelyingPartyIdentifier()

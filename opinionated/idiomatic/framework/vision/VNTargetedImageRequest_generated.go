@@ -34,6 +34,8 @@ func TargetedImageRequestFromID(id objc.ID) *TargetedImageRequest {
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(id)}
 }
 
+// @brief Create a new request that targets an image in a pixel buffer. @param	pixelBuffer			The pixel buffer containing the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image.
+//
 // NewTargetedImageRequestWithTargetedCVPixelBufferOptions creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedCVPixelBufferOptions(pixelBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -41,6 +43,8 @@ func NewTargetedImageRequestWithTargetedCVPixelBufferOptions(pixelBuffer unsafe.
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request that targets an image in a pixel buffer. @param	pixelBuffer			The pixel buffer containing the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image. @param	completionHandler	The block that is invoked when the request has been performed.
+//
 // NewTargetedImageRequestWithTargetedCVPixelBufferOptionsCompletionHandler creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedCVPixelBufferOptionsCompletionHandler(pixelBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -48,6 +52,8 @@ func NewTargetedImageRequestWithTargetedCVPixelBufferOptionsCompletionHandler(pi
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request that targets an image in a pixel buffer. @param	pixelBuffer			The pixel buffer containing the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image.
+//
 // NewTargetedImageRequestWithTargetedCVPixelBufferOrientationOptions creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedCVPixelBufferOrientationOptions(pixelBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -55,6 +61,8 @@ func NewTargetedImageRequestWithTargetedCVPixelBufferOrientationOptions(pixelBuf
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request that targets an image in a pixel buffer. @param	pixelBuffer			The pixel buffer containing the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image. @param	completionHandler	The block that is invoked when the request has been performed.
+//
 // NewTargetedImageRequestWithTargetedCVPixelBufferOrientationOptionsCompletionHandler creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedCVPixelBufferOrientationOptionsCompletionHandler(pixelBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -62,6 +70,8 @@ func NewTargetedImageRequestWithTargetedCVPixelBufferOrientationOptionsCompletio
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request with a targeted CGImage. @param	cgImage				The CGImageRef of the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image.
+//
 // NewTargetedImageRequestWithTargetedCGImageOptions creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedCGImageOptions(cgImage unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -69,6 +79,8 @@ func NewTargetedImageRequestWithTargetedCGImageOptions(cgImage unsafe.Pointer, o
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request with a targeted CGImage. @param	cgImage				The CGImageRef of the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image. @param	completionHandler	The block that is invoked when the request has been performed.
+//
 // NewTargetedImageRequestWithTargetedCGImageOptionsCompletionHandler creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedCGImageOptionsCompletionHandler(cgImage unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -76,6 +88,8 @@ func NewTargetedImageRequestWithTargetedCGImageOptionsCompletionHandler(cgImage 
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request with a targeted CGImage. @param	cgImage				The CGImageRef of the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image.
+//
 // NewTargetedImageRequestWithTargetedCGImageOrientationOptions creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedCGImageOrientationOptions(cgImage unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -83,6 +97,8 @@ func NewTargetedImageRequestWithTargetedCGImageOrientationOptions(cgImage unsafe
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request with a targeted CGImage. @param	cgImage				The CGImageRef of the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image. @param	completionHandler	The block that is invoked when the request has been performed.
+//
 // NewTargetedImageRequestWithTargetedCGImageOrientationOptionsCompletionHandler creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedCGImageOrientationOptionsCompletionHandler(cgImage unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -90,6 +106,8 @@ func NewTargetedImageRequestWithTargetedCGImageOrientationOptionsCompletionHandl
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request with a targeted CIImage. @param	ciImage				The CIImage of the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image.
+//
 // NewTargetedImageRequestWithTargetedCIImageOptions creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedCIImageOptions(ciImage *coreimage.CIImage, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -97,6 +115,8 @@ func NewTargetedImageRequestWithTargetedCIImageOptions(ciImage *coreimage.CIImag
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request with a targeted CIImage. @param	ciImage				The CIImage of the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image. @param	completionHandler	The block that is invoked when the request has been performed.
+//
 // NewTargetedImageRequestWithTargetedCIImageOptionsCompletionHandler creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedCIImageOptionsCompletionHandler(ciImage *coreimage.CIImage, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -104,6 +124,8 @@ func NewTargetedImageRequestWithTargetedCIImageOptionsCompletionHandler(ciImage 
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request with a targeted CIImage. @param	ciImage				The CIImage of the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image.
+//
 // NewTargetedImageRequestWithTargetedCIImageOrientationOptions creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedCIImageOrientationOptions(ciImage *coreimage.CIImage, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -111,6 +133,8 @@ func NewTargetedImageRequestWithTargetedCIImageOrientationOptions(ciImage *corei
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request with a targeted CIImage. @param	ciImage				The CIImage of the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image. @param	completionHandler	The block that is invoked when the request has been performed.
+//
 // NewTargetedImageRequestWithTargetedCIImageOrientationOptionsCompletionHandler creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedCIImageOrientationOptionsCompletionHandler(ciImage *coreimage.CIImage, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -118,6 +142,8 @@ func NewTargetedImageRequestWithTargetedCIImageOrientationOptionsCompletionHandl
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request with a targeted image URL. @param	imageURL			The URL of the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image.
+//
 // NewTargetedImageRequestWithTargetedImageURLOptions creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedImageURLOptions(imageURL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -125,6 +151,8 @@ func NewTargetedImageRequestWithTargetedImageURLOptions(imageURL string, options
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request with a targeted image URL. @param	imageURL			The URL of the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image. @param	completionHandler	The block that is invoked when the request has been performed.
+//
 // NewTargetedImageRequestWithTargetedImageURLOptionsCompletionHandler creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedImageURLOptionsCompletionHandler(imageURL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -132,6 +160,8 @@ func NewTargetedImageRequestWithTargetedImageURLOptionsCompletionHandler(imageUR
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request with a targeted image URL. @param	imageURL			The URL of the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image.
+//
 // NewTargetedImageRequestWithTargetedImageURLOrientationOptions creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedImageURLOrientationOptions(imageURL string, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -139,6 +169,8 @@ func NewTargetedImageRequestWithTargetedImageURLOrientationOptions(imageURL stri
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request with a targeted image URL. @param	imageURL			The URL of the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image. @param	completionHandler	The block that is invoked when the request has been performed.
+//
 // NewTargetedImageRequestWithTargetedImageURLOrientationOptionsCompletionHandler creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedImageURLOrientationOptionsCompletionHandler(imageURL string, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -146,6 +178,8 @@ func NewTargetedImageRequestWithTargetedImageURLOrientationOptionsCompletionHand
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request with a targeted image data. @param imageData			The data of the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image.
+//
 // NewTargetedImageRequestWithTargetedImageDataOptions creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedImageDataOptions(imageData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -153,6 +187,8 @@ func NewTargetedImageRequestWithTargetedImageDataOptions(imageData *foundation.N
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request with a targeted image data. @param imageData			The data of the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image. @param	completionHandler	The block that is invoked when the request has been performed.
+//
 // NewTargetedImageRequestWithTargetedImageDataOptionsCompletionHandler creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedImageDataOptionsCompletionHandler(imageData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -160,6 +196,8 @@ func NewTargetedImageRequestWithTargetedImageDataOptionsCompletionHandler(imageD
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request with a targeted image data. @param imageData			The data of the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image.
+//
 // NewTargetedImageRequestWithTargetedImageDataOrientationOptions creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedImageDataOrientationOptions(imageData *foundation.NSData, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -167,6 +205,8 @@ func NewTargetedImageRequestWithTargetedImageDataOrientationOptions(imageData *f
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request with a targeted image data. @param imageData			The data of the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image. @param	completionHandler	The block that is invoked when the request has been performed.
+//
 // NewTargetedImageRequestWithTargetedImageDataOrientationOptionsCompletionHandler creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedImageDataOrientationOptionsCompletionHandler(imageData *foundation.NSData, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -174,6 +214,8 @@ func NewTargetedImageRequestWithTargetedImageDataOrientationOptionsCompletionHan
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request with a targeted CMSampleBuffer. @param sampleBuffer The CMSampleBuffer containing the CVImageBuffer to be used by the request. @param options A dictionary with options specifying auxiliary information for the image.
+//
 // NewTargetedImageRequestWithTargetedCMSampleBufferOptions creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedCMSampleBufferOptions(sampleBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -181,6 +223,8 @@ func NewTargetedImageRequestWithTargetedCMSampleBufferOptions(sampleBuffer unsaf
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request with a targeted CMSampleBuffer. @param sampleBuffer The CMSampleBuffer containing the CVImageBuffer to be used by the request. @param options A dictionary with options specifying auxiliary information for the image. @param completionHandler The block that is invoked after the request has been performed.
+//
 // NewTargetedImageRequestWithTargetedCMSampleBufferOptionsCompletionHandler creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedCMSampleBufferOptionsCompletionHandler(sampleBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -188,6 +232,8 @@ func NewTargetedImageRequestWithTargetedCMSampleBufferOptionsCompletionHandler(s
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request with a targeted CMSampleBuffer. @param sampleBuffer The CMSampleBuffer containing the CVImageBuffer to be used by the request. @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param options A dictionary with options specifying auxiliary information for the image.
+//
 // NewTargetedImageRequestWithTargetedCMSampleBufferOrientationOptions creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedCMSampleBufferOrientationOptions(sampleBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -195,6 +241,8 @@ func NewTargetedImageRequestWithTargetedCMSampleBufferOrientationOptions(sampleB
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief Create a new request with a targeted CMSampleBuffer. @param sampleBuffer The CMSampleBuffer containing the CVImageBuffer to be used by the request. @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param options A dictionary with options specifying auxiliary information for the image. @param completionHandler The block that is invoked after the request has been performed.
+//
 // NewTargetedImageRequestWithTargetedCMSampleBufferOrientationOptionsCompletionHandler creates a new [TargetedImageRequest].
 func NewTargetedImageRequestWithTargetedCMSampleBufferOrientationOptionsCompletionHandler(sampleBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
@@ -202,24 +250,32 @@ func NewTargetedImageRequestWithTargetedCMSampleBufferOrientationOptionsCompleti
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
+// @brief The region of the image in which the request will be performed.  The rectangle is normalized to the dimensions of the image being processed and has its origin specified relative to the image's lower-left corner. @discussion The default value for this property is { { 0, 0 }, { 1, 1 } }.  Setting this property to a rectangle that is outside of the normalized coordinate space will be accepted but result in the request failing to be performed.
+//
 // WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
 func (x *TargetedImageRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TargetedImageRequest {
 	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
 	return x
 }
 
+// @abstract A hint used to minimize the resource burden of the request. Memory footprint, processing footprint and/or CPU/GPU contention will be reduced (depending on the request), at the potential cost of longer execution time. This can help, for example, with ensuring UI updates and rendering are not getting blocked by Vision processing.
+//
 // WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
 func (x *TargetedImageRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TargetedImageRequest {
 	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
 	return x
 }
 
+// @abstract This property, if set to YES, signifies that the request should be performed exclusively on the CPU and not on the GPU. The default value is NO, which signifies that the request is free to leverage the GPU to accelerate any work the request may require.
+//
 // WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
 func (x *TargetedImageRequest) WithUsesCPUOnly(usesCPUOnly bool) *TargetedImageRequest {
 	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
 	return x
 }
 
+// @abstract The specific algorithm or implementation revision that is to be used to perform the request.
+//
 // WithRevision sets the revision property and returns the receiver for chaining.
 func (x *TargetedImageRequest) WithRevision(revision uint) *TargetedImageRequest {
 	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)

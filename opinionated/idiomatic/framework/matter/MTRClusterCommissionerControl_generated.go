@@ -33,6 +33,8 @@ func MTRClusterCommissionerControlFromID(id objc.ID) *MTRClusterCommissionerCont
 	return &MTRClusterCommissionerControl{inner: raw.MTRClusterCommissionerControlFromID(id)}
 }
 
+// For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
+//
 // NewMTRClusterCommissionerControlWithDeviceEndpointIDQueue creates a new [MTRClusterCommissionerControl].
 func NewMTRClusterCommissionerControlWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterCommissionerControl {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterCommissionerControl")), objc.RegisterName("alloc"))

@@ -39,11 +39,15 @@ func NewIdentity() *Identity {
 	return &Identity{inner: raw.CBIdentityFromID(_id)}
 }
 
+// Returns a Boolean value indicating whether the identity is a member of the specified group. - Parameters: - group: The group to check for membership. - Returns: <doc://com.apple.documentation/documentation/objectivec/yes> if the identity is a member of the group; <doc://com.apple.documentation/documentation/objectivec/no> if it is not.
+//
 // IsMemberOfGroup calls the underlying IsMemberOfGroup.
 func (x *Identity) IsMemberOfGroup(group *raw.CBGroupIdentity) bool {
 	return x.inner.IsMemberOfGroup(group)
 }
 
+// Returns the identity authority where the identity is stored. - Returns: The identity authority where the identity is stored.
+//
 // Authority calls the underlying Authority.
 func (x *Identity) Authority() *IdentityAuthority {
 	_r := x.inner.Authority()
@@ -58,6 +62,8 @@ func (x *Identity) UniqueIdentifier() *foundation.NSUUID {
 	return x.inner.UniqueIdentifier()
 }
 
+// Returns the UUID of the identity as a string. The UUID string is generated so it is unique across all identity authorities. When storing ACLs, one method is to store the UUID of each identity. However, it is recommended that you use a persistent data object instead (see “CBIdentity/persistentReference“). - Returns: The UUID string of the identity.
+//
 // UUIDString calls the underlying UUIDString.
 func (x *Identity) UUIDString() string {
 	_r := x.inner.UUIDString()
@@ -67,6 +73,8 @@ func (x *Identity) UUIDString() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns the full name of the identity. - Returns: The full name for the identity.
+//
 // FullName calls the underlying FullName.
 func (x *Identity) FullName() string {
 	_r := x.inner.FullName()
@@ -76,6 +84,8 @@ func (x *Identity) FullName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns the POSIX name of the identity. The POSIX name is also referred to as the “short name” for an identity. It can only contain the characters A-Z, a-z, 0-9, -, _, ., and @. - Returns: The POSIX name of the identity.
+//
 // PosixName calls the underlying PosixName.
 func (x *Identity) PosixName() string {
 	_r := x.inner.PosixName()
@@ -85,6 +95,8 @@ func (x *Identity) PosixName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns an array of aliases (alternate names) for the identity. An identity can have zero or more aliases. Like the full and short names, two identities cannot share an alias. - Returns: An array of `NSString` objects containing the alternate names for the identity.
+//
 // Aliases returns the collection as a Go slice.
 func (x *Identity) Aliases() []string {
 	arr := x.inner.Aliases()
@@ -96,6 +108,8 @@ func (x *Identity) Aliases() []string {
 	})
 }
 
+// Returns the email address of an identity. - Returns: The email address of an identity or `nil` if none exists.
+//
 // EmailAddress calls the underlying EmailAddress.
 func (x *Identity) EmailAddress() string {
 	_r := x.inner.EmailAddress()
@@ -105,21 +119,29 @@ func (x *Identity) EmailAddress() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns the image associated with an identity. - Returns: The image associated with an identity, or `nil` if none exists.
+//
 // Image calls the underlying Image.
 func (x *Identity) Image() *appkit.NSImage {
 	return x.inner.Image()
 }
 
+// Returns a persistent reference to store a reference to an identity. A persistent reference data object is an object generated from an identity. Persistent data objects can be written to and read from a file, making them extremely useful for storing identities in an ACL. - Returns: A data object that uniquely references an identity.
+//
 // PersistentReference calls the underlying PersistentReference.
 func (x *Identity) PersistentReference() *foundation.NSData {
 	return x.inner.PersistentReference()
 }
 
+// Returns a Boolean value indicating the state of the identity’s hidden property. A hidden identity does not show up in the Identity Picker. A hidden identity refers to system identities such as `root`, `www`, and `wheel`. - Returns: <doc://com.apple.documentation/documentation/objectivec/yes> if the identity is hidden; <doc://com.apple.documentation/documentation/objectivec/no> if it is not.
+//
 // IsHidden calls the underlying IsHidden.
 func (x *Identity) IsHidden() bool {
 	return x.inner.IsHidden()
 }
 
+// Returns an opaque object for use with the Core Services Identity API. This method, along with “CBIdentity/identityWithCSIdentity:“, is used for interoperability with the Core Services Identity API. - Returns: The opaque object for use with the Core Services Identity API.
+//
 // CSIdentity calls the underlying CSIdentity.
 func (x *Identity) CSIdentity() unsafe.Pointer {
 	return x.inner.CSIdentity()

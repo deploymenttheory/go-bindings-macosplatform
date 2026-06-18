@@ -35,6 +35,8 @@ func NewNETransparentProxyProvider() *NETransparentProxyProvider {
 	return &NETransparentProxyProvider{inner: raw.NETransparentProxyProviderFromID(_id)}
 }
 
+// @property reasserting @discussion A flag that indicates to the framework if this NETunnelProvider is currently re-establishing the tunnel. Setting this flag will cause the session status visible to the user to change to "Reasserting". Clearing this flag will change the user-visible status of the session back to "Connected". Setting and clearing this flag only has an effect if the session is in the "Connected" state.
+//
 // WithReasserting sets the reasserting property and returns the receiver for chaining.
 func (x *NETransparentProxyProvider) WithReasserting(reasserting bool) *NETransparentProxyProvider {
 	x.inner.NEAppProxyProvider.NETunnelProvider.SetReasserting(reasserting)

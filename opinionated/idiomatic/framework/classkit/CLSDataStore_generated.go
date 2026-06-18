@@ -39,12 +39,16 @@ func NewDataStore() *DataStore {
 	return &DataStore{inner: raw.CLSDataStoreFromID(_id)}
 }
 
+// @abstract      The data store delegate allows for easy population of the app's context hierarchy.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *DataStore) WithDelegate(delegate raw.CLSDataStoreDelegate) *DataStore {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// @abstract      Save changes made in the data store. @discussion    Save new/modified/removed contexts, activities, etc. to the local store. In case of an error -[NSError userInfo] will contain the object that caused the error under the CLSErrorObjectKey..
+//
 // SaveWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *DataStore) SaveWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -63,11 +67,15 @@ func (x *DataStore) SaveWithCompletion(ctx context.Context) error {
 	}
 }
 
+// @abstract      Complete all assigned actvities. @discussion    Marks all of the currently active assigned activities for this contextPath as complete.
+//
 // CompleteAllAssignedActivitiesMatching calls the underlying CompleteAllAssignedActivitiesMatching.
 func (x *DataStore) CompleteAllAssignedActivitiesMatching(contextPath *foundation.NSArray[*foundation.NSString]) {
 	x.inner.CompleteAllAssignedActivitiesMatching(contextPath)
 }
 
+// @abstract      Fetch the top level context for the current app. @discussion    The main context is automatically created. Add child contexts to this context to persist them in the data store.
+//
 // MainAppContext calls the underlying MainAppContext.
 func (x *DataStore) MainAppContext() *Context {
 	_r := x.inner.MainAppContext()
@@ -77,6 +85,8 @@ func (x *DataStore) MainAppContext() *Context {
 	return &Context{inner: _r}
 }
 
+// @abstract      Returns the context that is currently active. If no context is active, this will return nil.
+//
 // ActiveContext calls the underlying ActiveContext.
 func (x *DataStore) ActiveContext() *Context {
 	_r := x.inner.ActiveContext()
@@ -86,6 +96,8 @@ func (x *DataStore) ActiveContext() *Context {
 	return &Context{inner: _r}
 }
 
+// @abstract      Returns the most recently started activity that is running.
+//
 // RunningActivity calls the underlying RunningActivity.
 func (x *DataStore) RunningActivity() *Activity {
 	_r := x.inner.RunningActivity()
@@ -95,6 +107,8 @@ func (x *DataStore) RunningActivity() *Activity {
 	return &Activity{inner: _r}
 }
 
+// @abstract      The data store delegate allows for easy population of the app's context hierarchy.
+//
 // Delegate calls the underlying Delegate.
 func (x *DataStore) Delegate() raw.CLSDataStoreDelegate {
 	return x.inner.Delegate()
@@ -105,6 +119,8 @@ func (x *DataStore) SetDelegate(delegate raw.CLSDataStoreDelegate) {
 	x.inner.SetDelegate(delegate)
 }
 
+// @abstract      Fetch contexts matching a predicate. @discussion    For example: NSPredicate<topic == CLSContextTopicMath AND parent == someContext>.  Completion block may be called on a background thread.
+//
 // ContextsMatchingPredicateCompletion blocks until the operation completes or ctx is cancelled.
 func (x *DataStore) ContextsMatchingPredicateCompletion(ctx context.Context, predicate *foundation.NSPredicate) (*foundation.NSArray[*raw.CLSContext], error) {
 	type _result struct {
@@ -129,6 +145,8 @@ func (x *DataStore) ContextsMatchingPredicateCompletion(ctx context.Context, pre
 	}
 }
 
+// @abstract      Returns contexts matching a set of identifiers where each identifier is the parent of the following identifier. @discussion    For example: @c@["math-game", @c"level1"] returns two contexts where @em math-game is the parent of @em level1. If there are any missing contexts, they will be filled in by calling the following method on the data store's delegate: @code -[CLSDataStoreDelegate createContextForIdentifier:parentContext:parentIdentifierPath:] @endcode If the dataStore does not have a delegate and there are missing contexts then an incomplete list of contexts will be passed to the completion handler.  Completion block may be called on a background thread.
+//
 // ContextsMatchingIdentifierPathCompletion blocks until the operation completes or ctx is cancelled.
 func (x *DataStore) ContextsMatchingIdentifierPathCompletion(ctx context.Context, identifierPath *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*raw.CLSContext], error) {
 	type _result struct {
@@ -153,11 +171,15 @@ func (x *DataStore) ContextsMatchingIdentifierPathCompletion(ctx context.Context
 	}
 }
 
+// @abstract      Mark a context for removal. @discussion    Save to commit removal. Removal cascades and deletes all descendants.
+//
 // RemoveContext calls the underlying RemoveContext.
 func (x *DataStore) RemoveContext(context_ *raw.CLSContext) {
 	x.inner.RemoveContext(context_)
 }
 
+// @abstract Implement to fetch the current CLSActivity instance for your document to add progress to. @discussion Gets the currently CLSActivity for the file. If no current activity exists, one will be created for you. @param  url File url for the document.
+//
 // FetchActivityForURLCompletion blocks until the operation completes or ctx is cancelled.
 func (x *DataStore) FetchActivityForURLCompletion(ctx context.Context, url string) (*Activity, error) {
 	type _result struct {
@@ -184,6 +206,8 @@ func (x *DataStore) FetchActivityForURLCompletion(ctx context.Context, url strin
 	}
 }
 
+// @abstract      Determines whether a URL to the document was assigned to the student. @discussion    This method checks if the document at the specified URL is assigned to the current student signed into the device. This is particularly useful for implementing student-specific workflows, such as: - Showing submission UI only for assigned documents - Displaying assignment-specific metadata or instructions - Enabling special features or restrictions for assigned work The completion handler's `isAssignedDocument` parameter will be `YES` when: - The document URL corresponds to an active assigned document - The current user is authenticated as a student and assigned to this specific document The completion handler's `isAssignedDocument` parameter will be `NO` when: - The document is not part of any assigned document - The current user is not a student (e.g., teacher) - The document has been unassigned or deleted - The student does not have permission to access this assignment @note          This method is designed to be called from ClassKitUI clients and requires proper ClassKit entitlements. The completion handler may be called on a background thread, so dispatch to the main queue if you need to update UI based on the result. @param         documentURL         The file URL of the document to check. @param         completion          A block called when the check is complete. The block takes two parameters: - isAssignedDocument: A Boolean indicating whether the document is assigned to the current user. - error: An error object if the check failed, or nil if successful. @code [[CLSDataStore shared] checkIsAssignedDocument:documentURL completion:^(BOOL isAssignedDocument, NSError * _Nullable error) { dispatch_async(dispatch_get_main_queue(), ^{ if (error) { NSLog(@"Error checking assignment status: %@", error); return; } if (isAssignedDocument) { // Show UI with submission options [self showAssignedDocumentSubmissionUI]; } else { // Show standard document UI [self showStandardDocumentUI]; } }); }]; @endcode
+//
 // CheckIsAssignedDocumentCompletion calls the underlying CheckIsAssignedDocumentCompletion.
 func (x *DataStore) CheckIsAssignedDocumentCompletion(documentURL string, completion func(bool, unsafe.Pointer)) {
 	x.inner.CheckIsAssignedDocumentCompletion(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(documentURL)), completion)

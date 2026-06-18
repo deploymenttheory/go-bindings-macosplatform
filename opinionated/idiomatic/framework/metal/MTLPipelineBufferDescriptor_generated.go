@@ -35,6 +35,8 @@ func NewPipelineBufferDescriptor() *PipelineBufferDescriptor {
 	return &PipelineBufferDescriptor{inner: raw.MTLPipelineBufferDescriptorFromID(_id)}
 }
 
+// Buffer mutability. Defaults to MTLMutabilityDefault: mutable for standard buffers, immutable for argument buffers
+//
 // WithMutability sets the mutability property and returns the receiver for chaining.
 func (x *PipelineBufferDescriptor) WithMutability(mutability MTLMutability) *PipelineBufferDescriptor {
 	x.inner.SetMutability(raw.MTLMutability(mutability))

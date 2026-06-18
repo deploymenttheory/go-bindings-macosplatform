@@ -31,6 +31,8 @@ func EPSImageRepFromID(id objc.ID) *EPSImageRep {
 	return &EPSImageRep{inner: raw.NSEPSImageRepFromID(id)}
 }
 
+// Returns a representation of an image initialized with the specified EPS data. - Note: This method always returns `nil` on macOS 14.0 and later.
+//
 // NewEPSImageRepWithData creates a new [EPSImageRep].
 func NewEPSImageRepWithData(epsData *foundation.NSData) *EPSImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSEPSImageRep")), objc.RegisterName("alloc"))
@@ -86,16 +88,22 @@ func (x *EPSImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection
 	return x
 }
 
+// The `-[NSEPSImageRep draw]` method sends this message to itself just before rendering the EPS code. The default implementation of this method does nothing. It can be overridden in a subclass to prepare the graphics state as needed.
+//
 // PrepareGState calls the underlying PrepareGState.
 func (x *EPSImageRep) PrepareGState() {
 	x.inner.PrepareGState()
 }
 
+// The rectangle that bounds the image representation.
+//
 // BoundingBox calls the underlying BoundingBox.
 func (x *EPSImageRep) BoundingBox() corefoundation.CGRect {
 	return x.inner.BoundingBox()
 }
 
+// The EPS representation of the image representation.
+//
 // EPSRepresentation calls the underlying EPSRepresentation.
 func (x *EPSImageRep) EPSRepresentation() *foundation.NSData {
 	return x.inner.EPSRepresentation()

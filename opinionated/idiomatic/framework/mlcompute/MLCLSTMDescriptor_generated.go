@@ -35,46 +35,64 @@ func NewLSTMDescriptor() *LSTMDescriptor {
 	return &LSTMDescriptor{inner: raw.MLCLSTMDescriptorFromID(_id)}
 }
 
+// @property   inputSize @abstract   The number of expected feature channels in the input
+//
 // InputSize calls the underlying InputSize.
 func (x *LSTMDescriptor) InputSize() uint {
 	return x.inner.InputSize()
 }
 
+// @property   hiddenSize @abstract   The number of feature channels in the hidden state
+//
 // HiddenSize calls the underlying HiddenSize.
 func (x *LSTMDescriptor) HiddenSize() uint {
 	return x.inner.HiddenSize()
 }
 
+// @property   layerCount @abstract   The number of recurrent layers.  Default is 1.
+//
 // LayerCount calls the underlying LayerCount.
 func (x *LSTMDescriptor) LayerCount() uint {
 	return x.inner.LayerCount()
 }
 
+// @property   usesBiases @abstract   If NO, the layer does not use bias terms.  Default is YES.
+//
 // UsesBiases calls the underlying UsesBiases.
 func (x *LSTMDescriptor) UsesBiases() bool {
 	return x.inner.UsesBiases()
 }
 
+// @property   batchFirst @abstract   LSTM only supports batchFirst=YES. This means the input and output will have shape [batch size, time steps, feature]. Default is YES.
+//
 // BatchFirst calls the underlying BatchFirst.
 func (x *LSTMDescriptor) BatchFirst() bool {
 	return x.inner.BatchFirst()
 }
 
+// @property   isBidirectional @abstract   If YES, becomes a bidirectional LSTM.  Default is NO.
+//
 // IsBidirectional calls the underlying IsBidirectional.
 func (x *LSTMDescriptor) IsBidirectional() bool {
 	return x.inner.IsBidirectional()
 }
 
+// @property   returnsSequences @abstract   if YES return output for all sequences else return output only for the last sequences. Default: YES
+//
 // ReturnsSequences calls the underlying ReturnsSequences.
 func (x *LSTMDescriptor) ReturnsSequences() bool {
 	return x.inner.ReturnsSequences()
 }
 
+// @property   dropout @abstract   If non-zero, intrdouces a dropout layer on the outputs of each LSTM layer except the last layer, with dropout probablity equal to dropout.  Default is 0.0.
+//
 // Dropout calls the underlying Dropout.
 func (x *LSTMDescriptor) Dropout() float32 {
 	return x.inner.Dropout()
 }
 
+// @property   resultMode @abstract   MLCLSTMResultModeOutput returns output data. MLCLSTMResultModeOutputAndStates returns output data, last hidden state h_n, and last cell state c_n. Default MLCLSTMResultModeOutput.
+//
 // ResultMode calls the underlying ResultMode.
 func (x *LSTMDescriptor) ResultMode() MLCLSTMResultMode {
 	return MLCLSTMResultMode(x.inner.ResultMode())

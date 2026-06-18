@@ -29,6 +29,8 @@ func ManagedValueFromID(id objc.ID) *ManagedValue {
 	return &ManagedValue{inner: raw.JSManagedValueFromID(id)}
 }
 
+// @method @abstract Create a JSManagedValue. @result The new JSManagedValue.
+//
 // NewManagedValueWithValue creates a new [ManagedValue].
 func NewManagedValueWithValue(value *raw.JSValue) *ManagedValue {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("JSManagedValue")), objc.RegisterName("alloc"))

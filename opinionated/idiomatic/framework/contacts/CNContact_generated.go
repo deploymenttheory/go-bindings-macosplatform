@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Contact wraps [raw.CNContact] with a fluent Go API.
@@ -37,21 +38,38 @@ func NewContact() *Contact {
 	return &Contact{inner: raw.CNContactFromID(_id)}
 }
 
+// Returns YES if the value for the specified key was fetched.
+//
 // IsKeyAvailable calls the underlying IsKeyAvailable.
 func (x *Contact) IsKeyAvailable(key string) bool {
 	return x.inner.IsKeyAvailable(foundation.NSStringStringWithUTF8String(key))
 }
 
+// Returns YES if the values for the keys specified by all the descriptors were fetched.
+//
 // AreKeysAvailable calls the underlying AreKeysAvailable.
-func (x *Contact) AreKeysAvailable(keyDescriptors *foundation.NSArray[raw.CNKeyDescriptor]) bool {
-	return x.inner.AreKeysAvailable(keyDescriptors)
+func (x *Contact) AreKeysAvailable(keyDescriptors ...purego.IDer) bool {
+	_ptrs := make([]objc.ID, len(keyDescriptors))
+	for _i, _v := range keyDescriptors {
+		_ptrs[_i] = _v.ID()
+	}
+	var _arg0 *foundation.NSArray[raw.CNKeyDescriptor]
+	if len(_ptrs) > 0 {
+		_arg0 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	}
+
+	return x.inner.AreKeysAvailable(_arg0)
 }
 
+// Returns YES if the receiver was fetched as a unified contact and includes the contact having contactIdentifier in its unification
+//
 // IsUnifiedWithContactWithIdentifier calls the underlying IsUnifiedWithContactWithIdentifier.
 func (x *Contact) IsUnifiedWithContactWithIdentifier(contactIdentifier string) bool {
 	return x.inner.IsUnifiedWithContactWithIdentifier(foundation.NSStringStringWithUTF8String(contactIdentifier))
 }
 
+// The identifier is unique among contacts on the device. It can be saved and used for fetching contacts next application launch.
+//
 // Identifier calls the underlying Identifier.
 func (x *Contact) Identifier() string {
 	_r := x.inner.Identifier()
@@ -251,16 +269,22 @@ func (x *Contact) InstantMessageAddresses() *foundation.NSArray[objc.ID] {
 	return x.inner.InstantMessageAddresses()
 }
 
+// The Gregorian birthday.
+//
 // Birthday calls the underlying Birthday.
 func (x *Contact) Birthday() *foundation.NSDateComponents {
 	return x.inner.Birthday()
 }
 
+// The alternate birthday (Lunisolar).
+//
 // NonGregorianBirthday calls the underlying NonGregorianBirthday.
 func (x *Contact) NonGregorianBirthday() *foundation.NSDateComponents {
 	return x.inner.NonGregorianBirthday()
 }
 
+// Other Gregorian dates (anniversaries, etc).
+//
 // Dates calls the underlying Dates.
 func (x *Contact) Dates() *foundation.NSArray[objc.ID] {
 	return x.inner.Dates()
@@ -272,7 +296,7 @@ func (x *Contact) asContact() *raw.CNContact { return x.inner }
 type Contactable interface {
 	Unwrap() *raw.CNContact
 	IsKeyAvailable(key string) bool
-	AreKeysAvailable(keyDescriptors *foundation.NSArray[raw.CNKeyDescriptor]) bool
+	AreKeysAvailable(keyDescriptors ...purego.IDer) bool
 	IsUnifiedWithContactWithIdentifier(contactIdentifier string) bool
 	Identifier() string
 	ContactType() CNContactType

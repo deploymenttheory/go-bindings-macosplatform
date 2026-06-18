@@ -45,6 +45,8 @@ func (x *BasePlayer) PlayerID() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// This player's name representation as displayed in the Game Center in-game UI. Use this when you need to display the player's name. The display name may be very long, so be sure to use appropriate string truncation API when drawing.
+//
 // DisplayName calls the underlying DisplayName.
 func (x *BasePlayer) DisplayName() string {
 	_r := x.inner.DisplayName()

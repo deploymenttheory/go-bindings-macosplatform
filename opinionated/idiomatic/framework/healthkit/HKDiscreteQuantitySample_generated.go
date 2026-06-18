@@ -36,6 +36,8 @@ func NewDiscreteQuantitySample() *DiscreteQuantitySample {
 	return &DiscreteQuantitySample{inner: raw.HKDiscreteQuantitySampleFromID(_id)}
 }
 
+// @property      minimumQuantity @abstract      The minimum of the receiver's quantities
+//
 // MinimumQuantity calls the underlying MinimumQuantity.
 func (x *DiscreteQuantitySample) MinimumQuantity() *Quantity {
 	_r := x.inner.MinimumQuantity()
@@ -45,6 +47,8 @@ func (x *DiscreteQuantitySample) MinimumQuantity() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property      averageQuantity @abstract      The average of the receiver's quantities
+//
 // AverageQuantity calls the underlying AverageQuantity.
 func (x *DiscreteQuantitySample) AverageQuantity() *Quantity {
 	_r := x.inner.AverageQuantity()
@@ -54,6 +58,8 @@ func (x *DiscreteQuantitySample) AverageQuantity() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property      maximumQuantity @abstract      The maximum of the receiver's quantities
+//
 // MaximumQuantity calls the underlying MaximumQuantity.
 func (x *DiscreteQuantitySample) MaximumQuantity() *Quantity {
 	_r := x.inner.MaximumQuantity()
@@ -63,6 +69,8 @@ func (x *DiscreteQuantitySample) MaximumQuantity() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property      mostRecentQuantity @abstract      The receiver's quantity with most recent date interval
+//
 // MostRecentQuantity calls the underlying MostRecentQuantity.
 func (x *DiscreteQuantitySample) MostRecentQuantity() *Quantity {
 	_r := x.inner.MostRecentQuantity()
@@ -72,6 +80,8 @@ func (x *DiscreteQuantitySample) MostRecentQuantity() *Quantity {
 	return &Quantity{inner: _r}
 }
 
+// @property      mostRecentQuantityDateInterval @abstract      The date interval for the receiver's most recent quantity
+//
 // MostRecentQuantityDateInterval calls the underlying MostRecentQuantityDateInterval.
 func (x *DiscreteQuantitySample) MostRecentQuantityDateInterval() *foundation.NSDateInterval {
 	return x.inner.MostRecentQuantityDateInterval()

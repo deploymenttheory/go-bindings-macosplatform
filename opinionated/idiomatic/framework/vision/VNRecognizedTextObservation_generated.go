@@ -36,6 +36,8 @@ func NewRecognizedTextObservation() *RecognizedTextObservation {
 	return &RecognizedTextObservation{inner: raw.VNRecognizedTextObservationFromID(_id)}
 }
 
+// @brief Returns the top N candidates sorted by decreasing confidence score @discussion This will return no more than N but can be less than N candidates. The maximum number of candidates returned cannot exceed 10 candidates.
+//
 // TopCandidates calls the underlying TopCandidates.
 func (x *RecognizedTextObservation) TopCandidates(maxCandidateCount uint) *foundation.NSArray[*raw.VNRecognizedText] {
 	return x.inner.TopCandidates(maxCandidateCount)

@@ -39,24 +39,32 @@ func NewGraphExecutableSerializationDescriptor() *GraphExecutableSerializationDe
 	return &GraphExecutableSerializationDescriptor{inner: raw.MPSGraphExecutableSerializationDescriptorFromID(_id)}
 }
 
+// Flag to append to an existing .mpsgraphpackage if found at provided url. If false, the exisiting .mpsgraphpackage will be overwritten.
+//
 // WithAppend sets the append_ property and returns the receiver for chaining.
 func (x *GraphExecutableSerializationDescriptor) WithAppend(append_ bool) *GraphExecutableSerializationDescriptor {
 	x.inner.SetAppend(append_)
 	return x
 }
 
+// The deployment platform used to serialize the executable. Defaults to the current platform.
+//
 // WithDeploymentPlatform sets the deploymentPlatform property and returns the receiver for chaining.
 func (x *GraphExecutableSerializationDescriptor) WithDeploymentPlatform(deploymentPlatform MPSGraphDeploymentPlatform) *GraphExecutableSerializationDescriptor {
 	x.inner.SetDeploymentPlatform(raw.MPSGraphDeploymentPlatform(deploymentPlatform))
 	return x
 }
 
+// The minimum deployment target to serialize the executable. If not set, the package created will target the latest version of the `deploymentPlatform` set.
+//
 // WithMinimumDeploymentTarget sets the minimumDeploymentTarget property and returns the receiver for chaining.
 func (x *GraphExecutableSerializationDescriptor) WithMinimumDeploymentTarget(minimumDeploymentTarget string) *GraphExecutableSerializationDescriptor {
 	x.inner.SetMinimumDeploymentTarget(foundation.NSStringStringWithUTF8String(minimumDeploymentTarget))
 	return x
 }
 
+// Flag to append to an existing .mpsgraphpackage if found at provided url. If false, the exisiting .mpsgraphpackage will be overwritten.
+//
 // Append calls the underlying Append.
 func (x *GraphExecutableSerializationDescriptor) Append() bool {
 	return x.inner.Append()
@@ -67,6 +75,8 @@ func (x *GraphExecutableSerializationDescriptor) SetAppend(append_ bool) {
 	x.inner.SetAppend(append_)
 }
 
+// The deployment platform used to serialize the executable. Defaults to the current platform.
+//
 // DeploymentPlatform calls the underlying DeploymentPlatform.
 func (x *GraphExecutableSerializationDescriptor) DeploymentPlatform() MPSGraphDeploymentPlatform {
 	return MPSGraphDeploymentPlatform(x.inner.DeploymentPlatform())
@@ -77,6 +87,8 @@ func (x *GraphExecutableSerializationDescriptor) SetDeploymentPlatform(deploymen
 	x.inner.SetDeploymentPlatform(raw.MPSGraphDeploymentPlatform(deploymentPlatform))
 }
 
+// The minimum deployment target to serialize the executable. If not set, the package created will target the latest version of the `deploymentPlatform` set.
+//
 // MinimumDeploymentTarget calls the underlying MinimumDeploymentTarget.
 func (x *GraphExecutableSerializationDescriptor) MinimumDeploymentTarget() string {
 	_r := x.inner.MinimumDeploymentTarget()

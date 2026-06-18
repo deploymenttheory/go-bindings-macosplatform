@@ -35,39 +35,53 @@ func NewAnimationPlayer() *AnimationPlayer {
 	return &AnimationPlayer{inner: raw.SCNAnimationPlayerFromID(_id)}
 }
 
+// The speed to play the animation at. Defaults to 1.0. Animatable
+//
 // WithSpeed sets the speed property and returns the receiver for chaining.
 func (x *AnimationPlayer) WithSpeed(speed float64) *AnimationPlayer {
 	x.inner.SetSpeed(speed)
 	return x
 }
 
+// Controls the influence of the played animation. When set to 1 the animation is applied without any blending. When set to less than 1, the animation value is blent with the current presentation value of the animated property. Defaults to 1.0. Animatable.
+//
 // WithBlendFactor sets the blendFactor property and returns the receiver for chaining.
 func (x *AnimationPlayer) WithBlendFactor(blendFactor float64) *AnimationPlayer {
 	x.inner.SetBlendFactor(blendFactor)
 	return x
 }
 
+// Specifies if the animation is paused. Defaults to NO.
+//
 // WithPaused sets the paused property and returns the receiver for chaining.
 func (x *AnimationPlayer) WithPaused(paused bool) *AnimationPlayer {
 	x.inner.SetPaused(paused)
 	return x
 }
 
+// Set paused to NO and restart playing from the beginning of the animation.
+//
 // Play calls the underlying Play.
 func (x *AnimationPlayer) Play() {
 	x.inner.Play()
 }
 
+// Stop the animation.
+//
 // Stop calls the underlying Stop.
 func (x *AnimationPlayer) Stop() {
 	x.inner.Stop()
 }
 
+// Stop the animation and smoothly blend out the animation over the specified duration.
+//
 // StopWithBlendOutDuration calls the underlying StopWithBlendOutDuration.
 func (x *AnimationPlayer) StopWithBlendOutDuration(duration float64) {
 	x.inner.StopWithBlendOutDuration(duration)
 }
 
+// The played animation
+//
 // Animation calls the underlying Animation.
 func (x *AnimationPlayer) Animation() *Animation {
 	_r := x.inner.Animation()
@@ -77,6 +91,8 @@ func (x *AnimationPlayer) Animation() *Animation {
 	return &Animation{inner: _r}
 }
 
+// The speed to play the animation at. Defaults to 1.0. Animatable
+//
 // Speed calls the underlying Speed.
 func (x *AnimationPlayer) Speed() float64 {
 	return x.inner.Speed()
@@ -87,6 +103,8 @@ func (x *AnimationPlayer) SetSpeed(speed float64) {
 	x.inner.SetSpeed(speed)
 }
 
+// Controls the influence of the played animation. When set to 1 the animation is applied without any blending. When set to less than 1, the animation value is blent with the current presentation value of the animated property. Defaults to 1.0. Animatable.
+//
 // BlendFactor calls the underlying BlendFactor.
 func (x *AnimationPlayer) BlendFactor() float64 {
 	return x.inner.BlendFactor()
@@ -97,6 +115,8 @@ func (x *AnimationPlayer) SetBlendFactor(blendFactor float64) {
 	x.inner.SetBlendFactor(blendFactor)
 }
 
+// Specifies if the animation is paused. Defaults to NO.
+//
 // Paused calls the underlying Paused.
 func (x *AnimationPlayer) Paused() bool {
 	return x.inner.Paused()

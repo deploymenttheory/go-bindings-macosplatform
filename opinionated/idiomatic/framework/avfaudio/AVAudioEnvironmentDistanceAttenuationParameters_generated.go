@@ -37,30 +37,40 @@ func NewAudioEnvironmentDistanceAttenuationParameters() *AudioEnvironmentDistanc
 	return &AudioEnvironmentDistanceAttenuationParameters{inner: raw.AVAudioEnvironmentDistanceAttenuationParametersFromID(_id)}
 }
 
+// @property distanceAttenuationModel @abstract Type of distance attenuation model @discussion Default:    AVAudioEnvironmentDistanceAttenuationModelInverse
+//
 // WithDistanceAttenuationModel sets the distanceAttenuationModel property and returns the receiver for chaining.
 func (x *AudioEnvironmentDistanceAttenuationParameters) WithDistanceAttenuationModel(distanceAttenuationModel AVAudioEnvironmentDistanceAttenuationModel) *AudioEnvironmentDistanceAttenuationParameters {
 	x.inner.SetDistanceAttenuationModel(raw.AVAudioEnvironmentDistanceAttenuationModel(distanceAttenuationModel))
 	return x
 }
 
+// @property referenceDistance @abstract The minimum distance at which attenuation is applied @discussion Default:    1.0 meter Models:     AVAudioEnvironmentDistanceAttenuationModelInverse, AVAudioEnvironmentDistanceAttenuationModelLinear
+//
 // WithReferenceDistance sets the referenceDistance property and returns the receiver for chaining.
 func (x *AudioEnvironmentDistanceAttenuationParameters) WithReferenceDistance(referenceDistance float32) *AudioEnvironmentDistanceAttenuationParameters {
 	x.inner.SetReferenceDistance(referenceDistance)
 	return x
 }
 
+// @property maximumDistance @abstract The distance beyond which no further attenuation is applied @discussion Default:    100000.0 meters Models:     AVAudioEnvironmentDistanceAttenuationModelLinear
+//
 // WithMaximumDistance sets the maximumDistance property and returns the receiver for chaining.
 func (x *AudioEnvironmentDistanceAttenuationParameters) WithMaximumDistance(maximumDistance float32) *AudioEnvironmentDistanceAttenuationParameters {
 	x.inner.SetMaximumDistance(maximumDistance)
 	return x
 }
 
+// @property rolloffFactor @abstract Determines the attenuation curve @discussion A higher value results in a steeper attenuation curve. The rolloff factor should be a value greater than 0. Default:    1.0 Models:     AVAudioEnvironmentDistanceAttenuationModelExponential AVAudioEnvironmentDistanceAttenuationModelInverse AVAudioEnvironmentDistanceAttenuationModelLinear
+//
 // WithRolloffFactor sets the rolloffFactor property and returns the receiver for chaining.
 func (x *AudioEnvironmentDistanceAttenuationParameters) WithRolloffFactor(rolloffFactor float32) *AudioEnvironmentDistanceAttenuationParameters {
 	x.inner.SetRolloffFactor(rolloffFactor)
 	return x
 }
 
+// @property distanceAttenuationModel @abstract Type of distance attenuation model @discussion Default:    AVAudioEnvironmentDistanceAttenuationModelInverse
+//
 // DistanceAttenuationModel calls the underlying DistanceAttenuationModel.
 func (x *AudioEnvironmentDistanceAttenuationParameters) DistanceAttenuationModel() AVAudioEnvironmentDistanceAttenuationModel {
 	return AVAudioEnvironmentDistanceAttenuationModel(x.inner.DistanceAttenuationModel())
@@ -71,6 +81,8 @@ func (x *AudioEnvironmentDistanceAttenuationParameters) SetDistanceAttenuationMo
 	x.inner.SetDistanceAttenuationModel(raw.AVAudioEnvironmentDistanceAttenuationModel(distanceAttenuationModel))
 }
 
+// @property referenceDistance @abstract The minimum distance at which attenuation is applied @discussion Default:    1.0 meter Models:     AVAudioEnvironmentDistanceAttenuationModelInverse, AVAudioEnvironmentDistanceAttenuationModelLinear
+//
 // ReferenceDistance calls the underlying ReferenceDistance.
 func (x *AudioEnvironmentDistanceAttenuationParameters) ReferenceDistance() float32 {
 	return x.inner.ReferenceDistance()
@@ -81,6 +93,8 @@ func (x *AudioEnvironmentDistanceAttenuationParameters) SetReferenceDistance(ref
 	x.inner.SetReferenceDistance(referenceDistance)
 }
 
+// @property maximumDistance @abstract The distance beyond which no further attenuation is applied @discussion Default:    100000.0 meters Models:     AVAudioEnvironmentDistanceAttenuationModelLinear
+//
 // MaximumDistance calls the underlying MaximumDistance.
 func (x *AudioEnvironmentDistanceAttenuationParameters) MaximumDistance() float32 {
 	return x.inner.MaximumDistance()
@@ -91,6 +105,8 @@ func (x *AudioEnvironmentDistanceAttenuationParameters) SetMaximumDistance(maxim
 	x.inner.SetMaximumDistance(maximumDistance)
 }
 
+// @property rolloffFactor @abstract Determines the attenuation curve @discussion A higher value results in a steeper attenuation curve. The rolloff factor should be a value greater than 0. Default:    1.0 Models:     AVAudioEnvironmentDistanceAttenuationModelExponential AVAudioEnvironmentDistanceAttenuationModelInverse AVAudioEnvironmentDistanceAttenuationModelLinear
+//
 // RolloffFactor calls the underlying RolloffFactor.
 func (x *AudioEnvironmentDistanceAttenuationParameters) RolloffFactor() float32 {
 	return x.inner.RolloffFactor()

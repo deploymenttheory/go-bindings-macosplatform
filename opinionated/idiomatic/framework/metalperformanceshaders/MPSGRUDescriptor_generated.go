@@ -36,90 +36,120 @@ func NewGRUDescriptor() *GRUDescriptor {
 	return &GRUDescriptor{inner: raw.MPSGRUDescriptorFromID(_id)}
 }
 
+// @property   inputGateInputWeights @abstract   Contains weights 'Wz_ij', bias 'bz_i' and neuron 'gz' from the GRU formula. If nil then assumed zero weights, bias and no neuron (identity mapping). Defaults to nil.
+//
 // WithInputGateInputWeights sets the inputGateInputWeights property and returns the receiver for chaining.
 func (x *GRUDescriptor) WithInputGateInputWeights(inputGateInputWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *GRUDescriptor {
 	x.inner.SetInputGateInputWeights(inputGateInputWeights)
 	return x
 }
 
+// @property   inputGateRecurrentWeights @abstract   Contains weights 'Uz_ij' from the GRU formula. If nil then assumed zero weights. Defaults to nil.
+//
 // WithInputGateRecurrentWeights sets the inputGateRecurrentWeights property and returns the receiver for chaining.
 func (x *GRUDescriptor) WithInputGateRecurrentWeights(inputGateRecurrentWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *GRUDescriptor {
 	x.inner.SetInputGateRecurrentWeights(inputGateRecurrentWeights)
 	return x
 }
 
+// @property   recurrentGateInputWeights @abstract   Contains weights 'Wr_ij', bias 'br_i' and neuron 'gr' from the GRU formula. If nil then assumed zero weights, bias and no neuron (identity mapping).Defaults to nil.
+//
 // WithRecurrentGateInputWeights sets the recurrentGateInputWeights property and returns the receiver for chaining.
 func (x *GRUDescriptor) WithRecurrentGateInputWeights(recurrentGateInputWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *GRUDescriptor {
 	x.inner.SetRecurrentGateInputWeights(recurrentGateInputWeights)
 	return x
 }
 
+// @property   recurrentGateRecurrentWeights @abstract   Contains weights 'Ur_ij' from the GRU formula. If nil then assumed zero weights.Defaults to nil.
+//
 // WithRecurrentGateRecurrentWeights sets the recurrentGateRecurrentWeights property and returns the receiver for chaining.
 func (x *GRUDescriptor) WithRecurrentGateRecurrentWeights(recurrentGateRecurrentWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *GRUDescriptor {
 	x.inner.SetRecurrentGateRecurrentWeights(recurrentGateRecurrentWeights)
 	return x
 }
 
+// @property   outputGateInputWeights @abstract   Contains weights 'Wh_ij', bias 'bh_i' and neuron 'gh' from the GRU formula. If nil then assumed zero weights, bias and no neuron (identity mapping).Defaults to nil.
+//
 // WithOutputGateInputWeights sets the outputGateInputWeights property and returns the receiver for chaining.
 func (x *GRUDescriptor) WithOutputGateInputWeights(outputGateInputWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *GRUDescriptor {
 	x.inner.SetOutputGateInputWeights(outputGateInputWeights)
 	return x
 }
 
+// @property   outputGateRecurrentWeights @abstract   Contains weights 'Uh_ij' from the GRU formula. If nil then assumed zero weights. Defaults to nil.
+//
 // WithOutputGateRecurrentWeights sets the outputGateRecurrentWeights property and returns the receiver for chaining.
 func (x *GRUDescriptor) WithOutputGateRecurrentWeights(outputGateRecurrentWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *GRUDescriptor {
 	x.inner.SetOutputGateRecurrentWeights(outputGateRecurrentWeights)
 	return x
 }
 
+// @property   outputGateInputGateWeights @abstract   Contains weights 'Vh_ij' - can be used to implement the "Minimally Gated Unit". If nil then assumed zero weights. Defaults to nil.
+//
 // WithOutputGateInputGateWeights sets the outputGateInputGateWeights property and returns the receiver for chaining.
 func (x *GRUDescriptor) WithOutputGateInputGateWeights(outputGateInputGateWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *GRUDescriptor {
 	x.inner.SetOutputGateInputGateWeights(outputGateInputGateWeights)
 	return x
 }
 
+// @property   gatePnormValue @abstract   The p-norm gating norm value as specified by the GRU formulae. Defaults to 1.0f.
+//
 // WithGatePnormValue sets the gatePnormValue property and returns the receiver for chaining.
 func (x *GRUDescriptor) WithGatePnormValue(gatePnormValue float32) *GRUDescriptor {
 	x.inner.SetGatePnormValue(gatePnormValue)
 	return x
 }
 
+// @property   flipOutputGates @abstract   If YES then the GRU-block output formula is changed to: h1_i = ( 1 - z_i ^ p)^(1/p) h0_i + z_i h_i. Defaults to NO.
+//
 // WithFlipOutputGates sets the flipOutputGates property and returns the receiver for chaining.
 func (x *GRUDescriptor) WithFlipOutputGates(flipOutputGates bool) *GRUDescriptor {
 	x.inner.SetFlipOutputGates(flipOutputGates)
 	return x
 }
 
+// @property   inputFeatureChannels @abstract   The number of feature channels per pixel in the input image or number of rows in the input matrix.
+//
 // WithInputFeatureChannels sets the inputFeatureChannels property and returns the receiver for chaining.
 func (x *GRUDescriptor) WithInputFeatureChannels(inputFeatureChannels uint) *GRUDescriptor {
 	x.inner.MPSRNNDescriptor.SetInputFeatureChannels(inputFeatureChannels)
 	return x
 }
 
+// @property   outputFeatureChannels @abstract   The number of feature channels per pixel in the destination image or number of rows in the destination matrix.
+//
 // WithOutputFeatureChannels sets the outputFeatureChannels property and returns the receiver for chaining.
 func (x *GRUDescriptor) WithOutputFeatureChannels(outputFeatureChannels uint) *GRUDescriptor {
 	x.inner.MPSRNNDescriptor.SetOutputFeatureChannels(outputFeatureChannels)
 	return x
 }
 
+// @property   useLayerInputUnitTransformMode @abstract   if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in @ref MPSRNNSingleGateDescriptor. Defaults to NO.
+//
 // WithUseLayerInputUnitTransformMode sets the useLayerInputUnitTransformMode property and returns the receiver for chaining.
 func (x *GRUDescriptor) WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *GRUDescriptor {
 	x.inner.MPSRNNDescriptor.SetUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode)
 	return x
 }
 
+// @property   useFloat32Weights @abstract   If YES, then @ref MPSRNNMatrixInferenceLayer uses 32-bit floating point numbers internally for weights when computing matrix transformations. If NO, then 16-bit, half precision floating point numbers are used. Currently @ref MPSRNNImageInferenceLayer ignores this property and the convolution operations always convert FP32 weights into FP16 for better performance. Defaults to NO.
+//
 // WithUseFloat32Weights sets the useFloat32Weights property and returns the receiver for chaining.
 func (x *GRUDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *GRUDescriptor {
 	x.inner.MPSRNNDescriptor.SetUseFloat32Weights(useFloat32Weights)
 	return x
 }
 
+// @property   layerSequenceDirection @abstract   When the layer specified with this descriptor is used to process a sequence of inputs by calling @see encodeBidirectionalSequenceToCommandBuffer then this parameter defines in which direction the sequence is processed. The operation of the layer is: (yt, ht, ct) = f(xt,ht-1,ct-1) for MPSRNNSequenceDirectionForward and (yt, ht, ct) = f(xt,ht+1,ct+1) for MPSRNNSequenceDirectionBackward, where xt is the output of the previous layer that encodes in the same direction as this layer, (or the input image or matrix if this is the first layer in stack with this direction). @see MPSRNNImageInferenceLayer and @see MPSRNNMatrixInferenceLayer.
+//
 // WithLayerSequenceDirection sets the layerSequenceDirection property and returns the receiver for chaining.
 func (x *GRUDescriptor) WithLayerSequenceDirection(layerSequenceDirection mpsneuralnetwork.MPSRNNSequenceDirection) *GRUDescriptor {
 	x.inner.MPSRNNDescriptor.SetLayerSequenceDirection(layerSequenceDirection)
 	return x
 }
 
+// @property   inputGateInputWeights @abstract   Contains weights 'Wz_ij', bias 'bz_i' and neuron 'gz' from the GRU formula. If nil then assumed zero weights, bias and no neuron (identity mapping). Defaults to nil.
+//
 // InputGateInputWeights calls the underlying InputGateInputWeights.
 func (x *GRUDescriptor) InputGateInputWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
 	return x.inner.InputGateInputWeights()
@@ -130,6 +160,8 @@ func (x *GRUDescriptor) SetInputGateInputWeights(inputGateInputWeights mpsneural
 	x.inner.SetInputGateInputWeights(inputGateInputWeights)
 }
 
+// @property   inputGateRecurrentWeights @abstract   Contains weights 'Uz_ij' from the GRU formula. If nil then assumed zero weights. Defaults to nil.
+//
 // InputGateRecurrentWeights calls the underlying InputGateRecurrentWeights.
 func (x *GRUDescriptor) InputGateRecurrentWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
 	return x.inner.InputGateRecurrentWeights()
@@ -140,6 +172,8 @@ func (x *GRUDescriptor) SetInputGateRecurrentWeights(inputGateRecurrentWeights m
 	x.inner.SetInputGateRecurrentWeights(inputGateRecurrentWeights)
 }
 
+// @property   recurrentGateInputWeights @abstract   Contains weights 'Wr_ij', bias 'br_i' and neuron 'gr' from the GRU formula. If nil then assumed zero weights, bias and no neuron (identity mapping).Defaults to nil.
+//
 // RecurrentGateInputWeights calls the underlying RecurrentGateInputWeights.
 func (x *GRUDescriptor) RecurrentGateInputWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
 	return x.inner.RecurrentGateInputWeights()
@@ -150,6 +184,8 @@ func (x *GRUDescriptor) SetRecurrentGateInputWeights(recurrentGateInputWeights m
 	x.inner.SetRecurrentGateInputWeights(recurrentGateInputWeights)
 }
 
+// @property   recurrentGateRecurrentWeights @abstract   Contains weights 'Ur_ij' from the GRU formula. If nil then assumed zero weights.Defaults to nil.
+//
 // RecurrentGateRecurrentWeights calls the underlying RecurrentGateRecurrentWeights.
 func (x *GRUDescriptor) RecurrentGateRecurrentWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
 	return x.inner.RecurrentGateRecurrentWeights()
@@ -160,6 +196,8 @@ func (x *GRUDescriptor) SetRecurrentGateRecurrentWeights(recurrentGateRecurrentW
 	x.inner.SetRecurrentGateRecurrentWeights(recurrentGateRecurrentWeights)
 }
 
+// @property   outputGateInputWeights @abstract   Contains weights 'Wh_ij', bias 'bh_i' and neuron 'gh' from the GRU formula. If nil then assumed zero weights, bias and no neuron (identity mapping).Defaults to nil.
+//
 // OutputGateInputWeights calls the underlying OutputGateInputWeights.
 func (x *GRUDescriptor) OutputGateInputWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
 	return x.inner.OutputGateInputWeights()
@@ -170,6 +208,8 @@ func (x *GRUDescriptor) SetOutputGateInputWeights(outputGateInputWeights mpsneur
 	x.inner.SetOutputGateInputWeights(outputGateInputWeights)
 }
 
+// @property   outputGateRecurrentWeights @abstract   Contains weights 'Uh_ij' from the GRU formula. If nil then assumed zero weights. Defaults to nil.
+//
 // OutputGateRecurrentWeights calls the underlying OutputGateRecurrentWeights.
 func (x *GRUDescriptor) OutputGateRecurrentWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
 	return x.inner.OutputGateRecurrentWeights()
@@ -180,6 +220,8 @@ func (x *GRUDescriptor) SetOutputGateRecurrentWeights(outputGateRecurrentWeights
 	x.inner.SetOutputGateRecurrentWeights(outputGateRecurrentWeights)
 }
 
+// @property   outputGateInputGateWeights @abstract   Contains weights 'Vh_ij' - can be used to implement the "Minimally Gated Unit". If nil then assumed zero weights. Defaults to nil.
+//
 // OutputGateInputGateWeights calls the underlying OutputGateInputGateWeights.
 func (x *GRUDescriptor) OutputGateInputGateWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
 	return x.inner.OutputGateInputGateWeights()
@@ -190,6 +232,8 @@ func (x *GRUDescriptor) SetOutputGateInputGateWeights(outputGateInputGateWeights
 	x.inner.SetOutputGateInputGateWeights(outputGateInputGateWeights)
 }
 
+// @property   gatePnormValue @abstract   The p-norm gating norm value as specified by the GRU formulae. Defaults to 1.0f.
+//
 // GatePnormValue calls the underlying GatePnormValue.
 func (x *GRUDescriptor) GatePnormValue() float32 {
 	return x.inner.GatePnormValue()
@@ -200,6 +244,8 @@ func (x *GRUDescriptor) SetGatePnormValue(gatePnormValue float32) {
 	x.inner.SetGatePnormValue(gatePnormValue)
 }
 
+// @property   flipOutputGates @abstract   If YES then the GRU-block output formula is changed to: h1_i = ( 1 - z_i ^ p)^(1/p) h0_i + z_i h_i. Defaults to NO.
+//
 // FlipOutputGates calls the underlying FlipOutputGates.
 func (x *GRUDescriptor) FlipOutputGates() bool {
 	return x.inner.FlipOutputGates()

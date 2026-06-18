@@ -32,6 +32,8 @@ func WritingToolsCoordinatorContextFromID(id objc.ID) *WritingToolsCoordinatorCo
 	return &WritingToolsCoordinatorContext{inner: raw.NSWritingToolsCoordinatorContextFromID(id)}
 }
 
+// Creates a context object with the specified attributed string and range information. - Parameters: - attributedString: A string that contains some or all of the content from your view’s text storage. This initializer makes a copy of the string you provide, so you can discard the original when you’re done. - range: The portion of `attributedString` you want Writing Tools to evaluate. If you want Writing Tools to evaluate the entire string you provided, specify a range with a location of `0` and a length equal to your string’s length. If you want Writing Tools to evaluate only part of the string, provide the appropriate range in this parameter. Writing Tools suggests changes only to the range of text you specify, but it can consider text outside that range during the evaluation process. When Writing Tools asks for your view’s current selection, it’s best to create a string that includes text before and after that selection. During the evaluation process, Writing Tools can use the additional text you provided to improve the results it delivers. If you do provide additional text, set the `range` parameter to the portion of `attributedString` with the current selection. Don’t use the `range` parameter to specify the location of the text in your view’s text storage.
+//
 // NewWritingToolsCoordinatorContextWithAttributedStringRange creates a new [WritingToolsCoordinatorContext].
 func NewWritingToolsCoordinatorContextWithAttributedStringRange(attributedString *foundation.NSAttributedString, range_ foundation.NSRange) *WritingToolsCoordinatorContext {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWritingToolsCoordinatorContext")), objc.RegisterName("alloc"))
@@ -39,21 +41,29 @@ func NewWritingToolsCoordinatorContextWithAttributedStringRange(attributedString
 	return &WritingToolsCoordinatorContext{inner: raw.NSWritingToolsCoordinatorContextFromID(_id)}
 }
 
+// The portion of your view’s text to evaluate. The “NSWritingToolsCoordinator/Context“ object initializes the value of this property at creation time and doesn’t change it during the course of an operation. Instead, it suggests changes to the text in the indicated range and reports those changes to your “NSWritingToolsCoordinator/Delegate“ object. Use the methods of your delegate object to integrate those changes back into your view’s text storage. It’s your responsibility to track the location of this text in your view’s text storage object. When Writing Tools reports changes, it provides range values relative to this string. If you initialize this property with a subset of your view’s content, you must adjust any ranges that Writing Tools provides to get the correct location in your text storage.
+//
 // AttributedString calls the underlying AttributedString.
 func (x *WritingToolsCoordinatorContext) AttributedString() *foundation.NSAttributedString {
 	return x.inner.AttributedString()
 }
 
+// The unique identifier of the context object. The “NSWritingToolsCoordinator/Context“ object initializes the value of this property at creation time. Use this value to identify the context object within your app.
+//
 // Range calls the underlying Range.
 func (x *WritingToolsCoordinatorContext) Range() foundation.NSRange {
 	return x.inner.Range()
 }
 
+// The unique identifier of the context object. The “NSWritingToolsCoordinator/Context“ object initializes the value of this property at creation time. Use this value to identify the context object within your app.
+//
 // Identifier calls the underlying Identifier.
 func (x *WritingToolsCoordinatorContext) Identifier() *foundation.NSUUID {
 	return x.inner.Identifier()
 }
 
+// The actual range of text that Writing Tools might change, which can be different than the range of text you supplied. After analyzing the text in your context object, Writing Tools sets this property to the portion of “attributedString“ it might modify. Initially, this property has a location of <doc://com.apple.documentation/documentation/foundation/nsnotfound> and a length of `0`, but Writing Tools updates those values before making any changes to the text. While the Writing Tools operation is active, make sure Writing Tools has exclusive access to the text in this range. Your “NSWritingToolsCoordinator/Delegate“ object can make changes to the text as part of incorporating Writing Tools results, but don’t allow changes to come from other sources. For example, don’t let someone edit the text in this range directly until Writing Tools finishes.
+//
 // ResolvedRange calls the underlying ResolvedRange.
 func (x *WritingToolsCoordinatorContext) ResolvedRange() foundation.NSRange {
 	return x.inner.ResolvedRange()

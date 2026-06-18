@@ -31,6 +31,8 @@ func AnchoredObjectQueryFromID(id objc.ID) *AnchoredObjectQuery {
 	return &AnchoredObjectQuery{inner: raw.HKAnchoredObjectQueryFromID(id)}
 }
 
+// @method        initWithType:predicate:anchor:limit:resultsHandler: @abstract      Returns a query that will retrieve HKSamples and HKDeletedObjects matching the given predicate that are newer than the given anchor. @discussion    If no updateHandler is set on the query, the query will automatically stop after calling resultsHandler. Otherwise, the query continues to run and call updateHandler as samples matching the predicate are created or deleted. @param         type            The type of sample to retrieve. @param         predicate       The predicate which samples should match. @param         anchor          The anchor which was returned by a previous HKAnchoredObjectQuery result or update handler.  Pass nil when querying for the first time. @param         limit           The maximum number of samples and deleted objects to return.  Pass HKObjectQueryNoLimit for no limit. @param         handler         The block to invoke with results when the query has finished finding.
+//
 // NewAnchoredObjectQueryWithTypePredicateAnchorLimitResultsHandler creates a new [AnchoredObjectQuery].
 func NewAnchoredObjectQueryWithTypePredicateAnchorLimitResultsHandler(type_ *raw.HKSampleType, predicate *foundation.NSPredicate, anchor *raw.HKQueryAnchor, limit uint, handler func(*raw.HKAnchoredObjectQuery, *foundation.NSArray[*raw.HKSample], *foundation.NSArray[*raw.HKDeletedObject], *raw.HKQueryAnchor, unsafe.Pointer)) *AnchoredObjectQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKAnchoredObjectQuery")), objc.RegisterName("alloc"))
@@ -45,6 +47,8 @@ func NewAnchoredObjectQueryWithTypePredicateAnchorLimitCompletionHandler(type_ *
 	return &AnchoredObjectQuery{inner: raw.HKAnchoredObjectQueryFromID(_id)}
 }
 
+// @method        initWithQueryDescriptors:anchor:limit:resultsHandler @abstract      Returns a query that will retrieve HKSamples and HKDeletedObjects matching the given query descriptors that are newer than the given anchor. @discussion    If no updateHandler is set on the query, the query will automatically stop after calling resultsHandler. Otherwise, the query continues to run and call updateHandler as samples matching the query descriptors are created or deleted. @param         queryDescriptors   An array of query descriptors that describes the sample types and predicates that you are interested in getting notified for. @param         anchor             The anchor which was returned by a previous HKAnchoredObjectQuery result or update handler.  Pass nil when querying for the first time. @param         limit              The maximum number of samples and deleted objects to return. Pass HKObjectQueryNoLimit for no limit. @param         handler            The block to invoke with results when the query has finished finding.
+//
 // NewAnchoredObjectQueryWithQueryDescriptorsAnchorLimitResultsHandler creates a new [AnchoredObjectQuery].
 func NewAnchoredObjectQueryWithQueryDescriptorsAnchorLimitResultsHandler(queryDescriptors *foundation.NSArray[*raw.HKQueryDescriptor], anchor *raw.HKQueryAnchor, limit int, handler func(*raw.HKAnchoredObjectQuery, *foundation.NSArray[*raw.HKSample], *foundation.NSArray[*raw.HKDeletedObject], *raw.HKQueryAnchor, unsafe.Pointer)) *AnchoredObjectQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKAnchoredObjectQuery")), objc.RegisterName("alloc"))
@@ -52,12 +56,16 @@ func NewAnchoredObjectQueryWithQueryDescriptorsAnchorLimitResultsHandler(queryDe
 	return &AnchoredObjectQuery{inner: raw.HKAnchoredObjectQueryFromID(_id)}
 }
 
+// @property      updateHandler @abstract      An optional handler to be called when samples matching the given predicate are added or deleted. @discussion    This property may not be modified once the query has been executed.  It may only be set if the query has no limit.
+//
 // WithUpdateHandler sets the updateHandler property and returns the receiver for chaining.
 func (x *AnchoredObjectQuery) WithUpdateHandler(updateHandler func(*raw.HKAnchoredObjectQuery, *foundation.NSArray[*raw.HKSample], *foundation.NSArray[*raw.HKDeletedObject], *raw.HKQueryAnchor, unsafe.Pointer)) *AnchoredObjectQuery {
 	x.inner.SetUpdateHandler(updateHandler)
 	return x
 }
 
+// @property      updateHandler @abstract      An optional handler to be called when samples matching the given predicate are added or deleted. @discussion    This property may not be modified once the query has been executed.  It may only be set if the query has no limit.
+//
 // UpdateHandler calls the underlying UpdateHandler.
 func (x *AnchoredObjectQuery) UpdateHandler() objc.Block {
 	return x.inner.UpdateHandler()

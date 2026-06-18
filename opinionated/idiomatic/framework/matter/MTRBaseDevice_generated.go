@@ -39,51 +39,71 @@ func NewMTRBaseDevice() *MTRBaseDevice {
 	return &MTRBaseDevice{inner: raw.MTRBaseDeviceFromID(_id)}
 }
 
+// Subscribe to receive attribute reports for everything (all endpoints, all clusters, all attributes, all events) on the device. A non-nil attribute cache container will cache attribute values, retrievable through the designated attribute cache container. attributeReportHandler will be called any time a data update is available (with a non-nil "value") The array passed to attributeReportHandler will contain MTRAttributeReport instances.  Errors for specific paths, not the whole subscription, will be reported via those objects. eventReportHandler will be called any time an event is reported (with a non-nil "value") The array passed to eventReportHandler will contain MTREventReport instances.  Errors for specific paths, not the whole subscription, will be reported via those objects. errorHandler will be called any time there is an error for the entire subscription (with a non-nil "error"), and terminate the subscription.  This will generally not be invoked if auto-resubscription is enabled, unless there is a fatal error during a resubscription attempt. Both report handlers are not supported over XPC at the moment. The subscriptionEstablished block, if not nil, will be called once the subscription is established.  This will be _after_ the first (priming) call to both report handlers.  Note that if the MTRSubscribeParams are set to automatically resubscribe this can end up being called more than once. The resubscriptionScheduled block, if not nil, will be called if auto-resubscription is enabled, subscription loss is detected, and a resubscription is scheduled.  This can be called multiple times in a row without an intervening subscriptionEstablished call if the resubscription attempts fail.
+//
 // SubscribeWithQueueParamsClusterStateCacheContainerAttributeReportHandlerEventReportHandlerErrorHandlerSubscriptionEstablishedResubscriptionScheduled calls the underlying SubscribeWithQueueParamsClusterStateCacheContainerAttributeReportHandlerEventReportHandlerErrorHandlerSubscriptionEstablishedResubscriptionScheduled.
 func (x *MTRBaseDevice) SubscribeWithQueueParamsClusterStateCacheContainerAttributeReportHandlerEventReportHandlerErrorHandlerSubscriptionEstablishedResubscriptionScheduled(queue *foundation.NSObject, params *raw.MTRSubscribeParams, clusterStateCacheContainer *raw.MTRClusterStateCacheContainer, attributeReportHandler objc.Block, eventReportHandler objc.Block, errorHandler func(unsafe.Pointer), subscriptionEstablished func(), resubscriptionScheduled func(unsafe.Pointer, *foundation.NSNumber)) {
 	x.inner.SubscribeWithQueueParamsClusterStateCacheContainerAttributeReportHandlerEventReportHandlerErrorHandlerSubscriptionEstablishedResubscriptionScheduled(queue, params, clusterStateCacheContainer, attributeReportHandler, eventReportHandler, errorHandler, subscriptionEstablished, resubscriptionScheduled)
 }
 
+// Reads attributes from the device. Nil values for endpointID, clusterID, attributeID indicate wildcards (e.g. nil attributeID means "read all the attributes from the endpoint(s) and cluster(s) that match endpointID/clusterID"). If all of endpointID, clusterID, attributeID are non-nil, a single attribute will be read. If all of endpointID, clusterID, attributeID are nil, all attributes on the device will be read. A non-nil attributeID along with a nil clusterID will only succeed if the attribute ID is for a global attribute that applies to all clusters. The completion will be called with an error if the entire read interaction fails. Otherwise it will be called with values, which may be empty (e.g. if no paths matched the wildcard) or may include per-path errors if particular paths failed.
+//
 // ReadAttributesWithEndpointIDClusterIDAttributeIDParamsQueueCompletion calls the underlying ReadAttributesWithEndpointIDClusterIDAttributeIDParamsQueueCompletion.
 func (x *MTRBaseDevice) ReadAttributesWithEndpointIDClusterIDAttributeIDParamsQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, attributeID *foundation.NSNumber, params *raw.MTRReadParams, queue *foundation.NSObject, completion objc.Block) {
 	x.inner.ReadAttributesWithEndpointIDClusterIDAttributeIDParamsQueueCompletion(endpointID, clusterID, attributeID, params, queue, completion)
 }
 
+// Reads multiple attribute or event paths from the device. Nil is treated as an empty array for attributePaths and eventPaths. Lists of attribute and event paths to read can be provided via attributePaths and eventPaths. The completion will be called with an error if the entire read interaction fails. Otherwise it will be called with an array of values. This array may be empty (e.g. if no paths matched the wildcard paths passed in, or if empty lists of paths were passed in) or may include per-path errors if particular paths failed. If the sum of the lengths of attributePaths and eventPaths exceeds 9, the read may fail due to the device not supporting that many read paths.
+//
 // ReadAttributePathsEventPathsParamsQueueCompletion calls the underlying ReadAttributePathsEventPathsParamsQueueCompletion.
 func (x *MTRBaseDevice) ReadAttributePathsEventPathsParamsQueueCompletion(attributePaths *foundation.NSArray[*raw.MTRAttributeRequestPath], eventPaths *foundation.NSArray[*raw.MTREventRequestPath], params *raw.MTRReadParams, queue *foundation.NSObject, completion objc.Block) {
 	x.inner.ReadAttributePathsEventPathsParamsQueueCompletion(attributePaths, eventPaths, params, queue, completion)
 }
 
+// Write to attribute in a designated attribute path @param value       A data-value NSDictionary object as described in MTRDeviceResponseHandler. @param timeoutMs   timeout in milliseconds for timed write, or nil. @param completion  response handler will receive either values or error. A path-specific error status will get turned into an error passed to the completion, so values will only be passed in when the write succeeds.  In that case, values will have the format documented in the definition of MTRDeviceResponseHandler and will be an array with a single element which is a dictionary that has a MTRAttributePathKey entry in it, whose value is the attribute path that was successfully written to.
+//
 // WriteAttributeWithEndpointIDClusterIDAttributeIDValueTimedWriteTimeoutQueueCompletion calls the underlying WriteAttributeWithEndpointIDClusterIDAttributeIDValueTimedWriteTimeoutQueueCompletion.
 func (x *MTRBaseDevice) WriteAttributeWithEndpointIDClusterIDAttributeIDValueTimedWriteTimeoutQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, attributeID *foundation.NSNumber, value objc.ID, timeoutMs *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
 	x.inner.WriteAttributeWithEndpointIDClusterIDAttributeIDValueTimedWriteTimeoutQueueCompletion(endpointID, clusterID, attributeID, value, timeoutMs, queue, completion)
 }
 
+// Invoke a command with a designated command path @param commandFields   command fields object. The object must be a data-value NSDictionary object as described in the MTRDeviceResponseHandler. The attribute must be a Structure, i.e., the NSDictionary MTRTypeKey key must have the value MTRStructureValueType. @param timeoutMs   timeout in milliseconds for timed invoke, or nil. @param completion  response handler will receive either values or error.  A path-specific error status from the command invocation will result in an error being passed to the completion, so values will only be passed in when the command succeeds.
+//
 // InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsTimedInvokeTimeoutQueueCompletion calls the underlying InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsTimedInvokeTimeoutQueueCompletion.
 func (x *MTRBaseDevice) InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsTimedInvokeTimeoutQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, commandID *foundation.NSNumber, commandFields objc.ID, timeoutMs *foundation.NSNumber, queue *foundation.NSObject, completion objc.Block) {
 	x.inner.InvokeCommandWithEndpointIDClusterIDCommandIDCommandFieldsTimedInvokeTimeoutQueueCompletion(endpointID, clusterID, commandID, commandFields, timeoutMs, queue, completion)
 }
 
+// Subscribes to the specified attributes on the device. Nil values for endpointID, clusterID, attributeID indicate wildcards (e.g. nil attributeID means "subscribe to all the attributes from the endpoint(s) and cluster(s) that match endpointID/clusterID"). If all of endpointID, clusterID, attributeID are non-nil, a single attribute will be subscribed to. If all of endpointID, clusterID, attributeID are nil, all attributes on the device will be subscribed to. A non-nil attributeID along with a nil clusterID will only succeed if the attribute ID is for a global attribute that applies to all clusters. The reportHandler will be called with an error if the subscription fails entirely. The reportHandler will be called with arrays of response-value dictionaries (which may be data or errors) as path-specific data is received. subscriptionEstablished will be called when the subscription is first successfully established (after the initial set of data reports has been delivered to reportHandler).  If params allow automatic resubscription, it will be called any time resubscription succeeds.
+//
 // SubscribeToAttributesWithEndpointIDClusterIDAttributeIDParamsQueueReportHandlerSubscriptionEstablished calls the underlying SubscribeToAttributesWithEndpointIDClusterIDAttributeIDParamsQueueReportHandlerSubscriptionEstablished.
 func (x *MTRBaseDevice) SubscribeToAttributesWithEndpointIDClusterIDAttributeIDParamsQueueReportHandlerSubscriptionEstablished(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, attributeID *foundation.NSNumber, params *raw.MTRSubscribeParams, queue *foundation.NSObject, reportHandler objc.Block, subscriptionEstablished func()) {
 	x.inner.SubscribeToAttributesWithEndpointIDClusterIDAttributeIDParamsQueueReportHandlerSubscriptionEstablished(endpointID, clusterID, attributeID, params, queue, reportHandler, subscriptionEstablished)
 }
 
+// Subscribes to multiple attribute or event paths. Nil is treated as an empty array for attributePaths and eventPaths. Lists of attribute and event paths to subscribe to can be provided via attributePaths and eventPaths. The reportHandler will be called with an error if the subscription fails entirely (including when both attributePaths and eventPaths are empty). The reportHandler will be called with arrays of response-value dictionaries (which may be data or errors) as path-specific data is received. subscriptionEstablished will be called when the subscription is first successfully established (after the initial set of data reports has been delivered to reportHandler).  If params allow automatic resubscription, it will be called any time resubscription succeeds. resubscriptionScheduled will be called if subscription drop is detected and params allow automatic resubscription. If the sum of the lengths of attributePaths and eventPaths exceeds 3, the subscribe may fail due to the device not supporting that many paths for a subscription.
+//
 // SubscribeToAttributePathsEventPathsParamsQueueReportHandlerSubscriptionEstablishedResubscriptionScheduled calls the underlying SubscribeToAttributePathsEventPathsParamsQueueReportHandlerSubscriptionEstablishedResubscriptionScheduled.
 func (x *MTRBaseDevice) SubscribeToAttributePathsEventPathsParamsQueueReportHandlerSubscriptionEstablishedResubscriptionScheduled(attributePaths *foundation.NSArray[*raw.MTRAttributeRequestPath], eventPaths *foundation.NSArray[*raw.MTREventRequestPath], params *raw.MTRSubscribeParams, queue *foundation.NSObject, reportHandler objc.Block, subscriptionEstablished func(), resubscriptionScheduled func(unsafe.Pointer, *foundation.NSNumber)) {
 	x.inner.SubscribeToAttributePathsEventPathsParamsQueueReportHandlerSubscriptionEstablishedResubscriptionScheduled(attributePaths, eventPaths, params, queue, reportHandler, subscriptionEstablished, resubscriptionScheduled)
 }
 
+// Deregister all local report handlers for a remote device This method is applicable only for a remote device. For a local device, the stack has to be shutdown to stop report handlers. There could be multiple clients accessing a node through a remote controller object and hence it is not appropriate for one of those clients to shut down the entire stack to stop receiving reports.
+//
 // DeregisterReportHandlersWithQueueCompletion calls the underlying DeregisterReportHandlersWithQueueCompletion.
 func (x *MTRBaseDevice) DeregisterReportHandlersWithQueueCompletion(queue *foundation.NSObject, completion func()) {
 	x.inner.DeregisterReportHandlersWithQueueCompletion(queue, completion)
 }
 
+// Open a commissioning window on the device. On success, completion will be called on queue with the MTRSetupPayload that can be used to commission the device. @param setupPasscode The setup passcode to use for the commissioning window. See MTRSetupPayload's generateRandomSetupPasscode for generating a valid random passcode. @param discriminator The discriminator to use for the commissionable advertisement. @param duration      Duration, in seconds, during which the commissioning window will be open.
+//
 // OpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion calls the underlying OpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion.
 func (x *MTRBaseDevice) OpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion(setupPasscode *foundation.NSNumber, discriminator *foundation.NSNumber, duration *foundation.NSNumber, queue *foundation.NSObject, completion func(*raw.MTRSetupPayload, unsafe.Pointer)) {
 	x.inner.OpenCommissioningWindowWithSetupPasscodeDiscriminatorDurationQueueCompletion(setupPasscode, discriminator, duration, queue, completion)
 }
 
+// Open a commissioning window on the device, using a random setup passcode. On success, completion will be called on queue with the MTRSetupPayload that can be used to commission the device. @param discriminator The discriminator to use for the commissionable advertisement. @param duration      Duration, in seconds, during which the commissioning window will be open.
+//
 // OpenCommissioningWindowWithDiscriminatorDurationQueueCompletion calls the underlying OpenCommissioningWindowWithDiscriminatorDurationQueueCompletion.
 func (x *MTRBaseDevice) OpenCommissioningWindowWithDiscriminatorDurationQueueCompletion(discriminator *foundation.NSNumber, duration *foundation.NSNumber, queue *foundation.NSObject, completion func(*raw.MTRSetupPayload, unsafe.Pointer)) {
 	x.inner.OpenCommissioningWindowWithDiscriminatorDurationQueueCompletion(discriminator, duration, queue, completion)
@@ -94,11 +114,15 @@ func (x *MTRBaseDevice) ReadEventsWithEndpointIDClusterIDEventIDParamsQueueCompl
 	x.inner.ReadEventsWithEndpointIDClusterIDEventIDParamsQueueCompletion(endpointID, clusterID, eventID, params, queue, completion)
 }
 
+// Subscribes to the specified events on the device. Nil values for endpointID, clusterID, eventID indicate wildcards (e.g. nil eventID means "subscribe to all the events from the endpoint(s) and cluster(s) that match endpointID/clusterID"). If all of endpointID, clusterID, eventID are non-nil, a single event will be subscribed to. If all of endpointID, clusterID, eventID are nil, all events on the device will be subscribed to. The reportHandler will be called with an error if the subscription fails entirely. The reportHandler will be called with arrays of response-value dictionaries (which may be data or errors) as path-specific data is received. subscriptionEstablished will be called when the subscription is first successfully established (after the initial set of data reports has been delivered to reportHandler).  If params allow automatic resubscription, it will be called any time resubscription succeeds.
+//
 // SubscribeToEventsWithEndpointIDClusterIDEventIDParamsQueueReportHandlerSubscriptionEstablished calls the underlying SubscribeToEventsWithEndpointIDClusterIDEventIDParamsQueueReportHandlerSubscriptionEstablished.
 func (x *MTRBaseDevice) SubscribeToEventsWithEndpointIDClusterIDEventIDParamsQueueReportHandlerSubscriptionEstablished(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, eventID *foundation.NSNumber, params *raw.MTRSubscribeParams, queue *foundation.NSObject, reportHandler objc.Block, subscriptionEstablished func()) {
 	x.inner.SubscribeToEventsWithEndpointIDClusterIDEventIDParamsQueueReportHandlerSubscriptionEstablished(endpointID, clusterID, eventID, params, queue, reportHandler, subscriptionEstablished)
 }
 
+// Download log of the desired type from the device. Note: The consumer of this API should move the file that the url points to or open it for reading before the completion handler returns. Otherwise, the file will be deleted, and the data will be lost. @param type       The type of log being requested. This should correspond to a value in the enum MTRDiagnosticLogType. @param timeout    The timeout for getting the log. If the timeout expires, completion will be called with whatever has been retrieved by that point (which might be none or a partial log). If the timeout is set to 0, the request will not expire and completion will not be called until the log is fully retrieved or an error occurs. @param queue      The queue on which completion will be called. @param completion The completion handler that is called after attempting to retrieve the requested log. - In case of success, the completion handler is called with a non-nil URL and a nil error. - If there is an error, a non-nil error is used and the url can be non-nil too if some logs have already been downloaded.
+//
 // DownloadLogOfTypeTimeoutQueueCompletion blocks until the operation completes or ctx is cancelled.
 func (x *MTRBaseDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Context, type_ MTRDiagnosticLogType, timeout float64, queue *foundation.NSObject) (*foundation.NSURL, error) {
 	type _result struct {
@@ -123,11 +147,15 @@ func (x *MTRBaseDevice) DownloadLogOfTypeTimeoutQueueCompletion(ctx context.Cont
 	}
 }
 
+// The transport used by the current session with this device, or `MTRTransportTypeUndefined` if no session is currently active.
+//
 // SessionTransportType calls the underlying SessionTransportType.
 func (x *MTRBaseDevice) SessionTransportType() MTRTransportType {
 	return MTRTransportType(x.inner.SessionTransportType())
 }
 
+// Deprecated MTRBaseDevice APIs.
+//
 // SubscribeWithQueueMinIntervalMaxIntervalParamsCacheContainerAttributeReportHandlerEventReportHandlerErrorHandlerSubscriptionEstablishedResubscriptionScheduled calls the underlying SubscribeWithQueueMinIntervalMaxIntervalParamsCacheContainerAttributeReportHandlerEventReportHandlerErrorHandlerSubscriptionEstablishedResubscriptionScheduled.
 func (x *MTRBaseDevice) SubscribeWithQueueMinIntervalMaxIntervalParamsCacheContainerAttributeReportHandlerEventReportHandlerErrorHandlerSubscriptionEstablishedResubscriptionScheduled(queue *foundation.NSObject, minInterval uint16, maxInterval uint16, params *raw.MTRSubscribeParams, attributeCacheContainer *raw.MTRAttributeCacheContainer, attributeReportHandler objc.Block, eventReportHandler objc.Block, errorHandler func(unsafe.Pointer), subscriptionEstablishedHandler func(), resubscriptionScheduledHandler func(unsafe.Pointer, *foundation.NSNumber)) {
 	x.inner.SubscribeWithQueueMinIntervalMaxIntervalParamsCacheContainerAttributeReportHandlerEventReportHandlerErrorHandlerSubscriptionEstablishedResubscriptionScheduled(queue, minInterval, maxInterval, params, attributeCacheContainer, attributeReportHandler, eventReportHandler, errorHandler, subscriptionEstablishedHandler, resubscriptionScheduledHandler)

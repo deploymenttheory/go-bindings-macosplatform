@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The common configuration traits for storage device requests.
+//
 // StorageDeviceConfiguration wraps [raw.VZStorageDeviceConfiguration] with a fluent Go API.
 type StorageDeviceConfiguration struct {
 	inner *raw.VZStorageDeviceConfiguration

@@ -38,31 +38,43 @@ func NewFeatureValue() *FeatureValue {
 	return &FeatureValue{inner: raw.MLFeatureValueFromID(_id)}
 }
 
+// @abstract Returns a Boolean value that indicates whether a feature value is equal to another. @discussion If the types of the MLFeatureValue objects "self" and "value"  are integer in one case and double in the other (in either order) then those mixed mode numeric values are compared as NSNumbers. Otherwise if the types of the MLFeatureValue objects are different NO is returned. When "self" and "value" are both PixelBuffer MLFeatureValue types, only their CVPixelBufferRef values are compared for equality, the underlying arrays of pixelValues are not examined. [So, distinct PixelBuffer MLFeatureValue objects with distinct CVPixelBufferRef values which encapsulate the same array of pixels will compare *not* equal.] For all other (matching) MLFeatureValue types, the BOOL value returned is the result of comparing "self" with "value" via isEqualToNumber:, isEqualToString:, isEqualtoDictionary:, isEqualToMultiArray:, isEqualToArray: as chosen by the MLFeatureValue types.
+//
 // IsEqualToFeatureValue calls the underlying IsEqualToFeatureValue.
 func (x *FeatureValue) IsEqualToFeatureValue(value *raw.MLFeatureValue) bool {
 	return x.inner.IsEqualToFeatureValue(value)
 }
 
+// Type of the value for which the corresponding property below is held
+//
 // Type calls the underlying Type.
 func (x *FeatureValue) Type() MLFeatureType {
 	return MLFeatureType(x.inner.Type())
 }
 
+// True if the value represents a missing or undefined value
+//
 // IsUndefined calls the underlying IsUndefined.
 func (x *FeatureValue) IsUndefined() bool {
 	return x.inner.IsUndefined()
 }
 
+// Populated value if the type is MLFeatureTypeInt64
+//
 // Int64Value calls the underlying Int64Value.
 func (x *FeatureValue) Int64Value() int64 {
 	return x.inner.Int64Value()
 }
 
+// Populated value if the type is MLFeatureTypeDouble
+//
 // DoubleValue calls the underlying DoubleValue.
 func (x *FeatureValue) DoubleValue() float64 {
 	return x.inner.DoubleValue()
 }
 
+// Populated value if the type is MLFeatureTypeString
+//
 // StringValue calls the underlying StringValue.
 func (x *FeatureValue) StringValue() string {
 	_r := x.inner.StringValue()
@@ -72,6 +84,8 @@ func (x *FeatureValue) StringValue() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Populated value if the type is MLFeatureTypeMultiArray
+//
 // MultiArrayValue calls the underlying MultiArrayValue.
 func (x *FeatureValue) MultiArrayValue() *MultiArray {
 	_r := x.inner.MultiArrayValue()
@@ -81,16 +95,22 @@ func (x *FeatureValue) MultiArrayValue() *MultiArray {
 	return &MultiArray{inner: _r}
 }
 
+// Populated value if the type is MLFeatureTypeDictionary
+//
 // DictionaryValue calls the underlying DictionaryValue.
 func (x *FeatureValue) DictionaryValue() *foundation.NSDictionary[objc.ID, *foundation.NSNumber] {
 	return x.inner.DictionaryValue()
 }
 
+// Populated value if the type is MLFeatureTypeImage
+//
 // ImageBufferValue calls the underlying ImageBufferValue.
 func (x *FeatureValue) ImageBufferValue() unsafe.Pointer {
 	return x.inner.ImageBufferValue()
 }
 
+// Populated value if the type is MLFeatureTypeSequence
+//
 // SequenceValue calls the underlying SequenceValue.
 func (x *FeatureValue) SequenceValue() *Sequence {
 	_r := x.inner.SequenceValue()

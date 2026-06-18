@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The common configuration traits for network devices.
+//
 // NetworkDeviceConfiguration wraps [raw.VZNetworkDeviceConfiguration] with a fluent Go API.
 type NetworkDeviceConfiguration struct {
 	inner *raw.VZNetworkDeviceConfiguration
@@ -35,18 +37,24 @@ func NewNetworkDeviceConfiguration() *NetworkDeviceConfiguration {
 	return &NetworkDeviceConfiguration{inner: raw.VZNetworkDeviceConfigurationFromID(_id)}
 }
 
+// The media access control (MAC) address to assign to the network device.
+//
 // WithMACAddress sets the mACAddress property and returns the receiver for chaining.
 func (x *NetworkDeviceConfiguration) WithMACAddress(mACAddress *MACAddress) *NetworkDeviceConfiguration {
 	x.inner.SetMACAddress(mACAddress.Unwrap())
 	return x
 }
 
+// The object that defines how the virtual network device communicates with the host system.
+//
 // WithAttachment sets the attachment property and returns the receiver for chaining.
 func (x *NetworkDeviceConfiguration) WithAttachment(attachment NetworkDeviceAttachmentProvider) *NetworkDeviceConfiguration {
 	x.inner.SetAttachment(attachment.asNetworkDeviceAttachment())
 	return x
 }
 
+// @abstract The media access control address of the device. The default is a random, locally administered, unicast address.
+//
 // MACAddress calls the underlying MACAddress.
 func (x *NetworkDeviceConfiguration) MACAddress() *MACAddress {
 	_r := x.inner.MACAddress()
@@ -61,6 +69,8 @@ func (x *NetworkDeviceConfiguration) SetMACAddress(mACAddress *raw.VZMACAddress)
 	x.inner.SetMACAddress(mACAddress)
 }
 
+// @abstract Network device attachment. Defines how the virtual device interfaces with the host system. The default is nil. @see VZBridgedNetworkDeviceAttachment @see VZFileHandleNetworkDeviceAttachment @see VZNATNetworkDeviceAttachment
+//
 // Attachment calls the underlying Attachment.
 func (x *NetworkDeviceConfiguration) Attachment() *NetworkDeviceAttachment {
 	_r := x.inner.Attachment()
