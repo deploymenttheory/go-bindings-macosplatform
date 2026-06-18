@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "framework": "ExtensionKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "EXAppExtensionBrowserViewController": {
+      "doc": "A view controller that displays an interface to enable or disable the host app’s extensions.",
+      "url": "https://developer.apple.com/documentation/extensionkit/exappextensionbrowserviewcontroller"
+    },
+    "EXHostViewController": {
+      "doc": "A view controller that hosts remote views provided by an app extension.",
+      "url": "https://developer.apple.com/documentation/extensionkit/exhostviewcontroller"
+    }
+  },
+  "protocols": {
+    "EXHostViewControllerDelegate": {
+      "doc": "An interface you use to track the activation and deactivation of an app extension.",
+      "url": "https://developer.apple.com/documentation/extensionkit/exhostviewcontrollerdelegate"
+    }
+  },
+  "properties": {
+    "EXHostViewController": {
+      "EXHostViewController.Configuration": {
+        "doc": "An object that holds configuration options for a host view controller.",
+        "url": "https://developer.apple.com/documentation/extensionkit/exhostviewcontroller/configuration-swift.struct"
+      },
+      "configuration": {
+        "doc": "The information the host view controller uses to fetch the appropriate scene from an app extension.",
+        "url": "https://developer.apple.com/documentation/extensionkit/exhostviewcontroller/configuration-swift.property"
+      },
+      "delegate": {
+        "doc": "A custom delegate object you use to receive notifications about the activation and deactivation of the app extension.",
+        "url": "https://developer.apple.com/documentation/extensionkit/exhostviewcontroller/delegate"
+      },
+      "makeXPCConnection()": {
+        "doc": "Initiates an XPC connection to the app extension’s scene.",
+        "url": "https://developer.apple.com/documentation/extensionkit/exhostviewcontroller/makexpcconnection()"
+      },
+      "placeholderView": {
+        "doc": "The view to display when the view controller has no app extension content to display.",
+        "url": "https://developer.apple.com/documentation/extensionkit/exhostviewcontroller/placeholderview"
+      }
+    }
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "framework": "ImageIO",
+  "source": "developer.apple.com DocC render API",
+  "enums": {
+    "CGImageAnimationStatus": {
+      "doc": "Constants that indicate the result of animating an image sequence.",
+      "url": "https://developer.apple.com/documentation/imageio/cgimageanimationstatus"
+    },
+    "CGImageMetadataErrors": {
+      "doc": "Constants for errors that occur when getting or setting metadata information.",
+      "url": "https://developer.apple.com/documentation/imageio/cgimagemetadataerrors",
+      "members": {
+        "kCGImageMetadataErrorBadArgument": {
+          "doc": "An error that indicates a parameter was malformed or contained invalid data.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagemetadataerrors/badargument"
+        },
+        "kCGImageMetadataErrorConflictingArguments": {
+          "doc": "An error that indicates an attempt to save conflicting metadata values.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagemetadataerrors/conflictingarguments"
+        },
+        "kCGImageMetadataErrorPrefixConflict": {
+          "doc": "An error that indicates an attempt to register a namespace with a prefix that is different than the namespace’s existing prefix.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagemetadataerrors/prefixconflict"
+        },
+        "kCGImageMetadataErrorUnknown": {
+          "doc": "An error that indicates an unknown condition occurred.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagemetadataerrors/unknown"
+        },
+        "kCGImageMetadataErrorUnsupportedFormat": {
+          "doc": "An error that indicates the metadata was in an unsupported format.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagemetadataerrors/unsupportedformat"
+        }
+      }
+    },
+    "CGImageMetadataType": {
+      "doc": "Constants that indicate the XMP type for a metadata tag.",
+      "url": "https://developer.apple.com/documentation/imageio/cgimagemetadatatype",
+      "members": {
+        "kCGImageMetadataTypeAlternateArray": {
+          "doc": "An ordered array, in which all elements are alternates for the same value.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagemetadatatype/alternatearray"
+        },
+        "kCGImageMetadataTypeAlternateText": {
+          "doc": "An alternate array, in which all elements are localized strings for the same value.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagemetadatatype/alternatetext"
+        },
+        "kCGImageMetadataTypeArrayOrdered": {
+          "doc": "An array that preserves the order of items.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagemetadatatype/arrayordered"
+        },
+        "kCGImageMetadataTypeArrayUnordered": {
+          "doc": "An array that doesn’t preserve the order of items.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagemetadatatype/arrayunordered"
+        },
+        "kCGImageMetadataTypeDefault": {
+          "doc": "The default type for new tags.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagemetadatatype/default"
+        },
+        "kCGImageMetadataTypeInvalid": {
+          "doc": "An invalid metadata type.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagemetadatatype/invalid"
+        },
+        "kCGImageMetadataTypeString": {
+          "doc": "A string value.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagemetadatatype/string"
+        },
+        "kCGImageMetadataTypeStructure": {
+          "doc": "A collection of keys and values.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagemetadatatype/structure"
+        }
+      }
+    },
+    "CGImagePropertyOrientation": {
+      "doc": "A value describing the intended display orientation for an image.",
+      "url": "https://developer.apple.com/documentation/imageio/cgimagepropertyorientation",
+      "members": {
+        "kCGImagePropertyOrientationDown": {
+          "doc": "The encoded image data is rotated 180° from the image’s intended display orientation.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagepropertyorientation/down"
+        },
+        "kCGImagePropertyOrientationDownMirrored": {
+          "doc": "The encoded image data is vertically flipped from the image’s intended display orientation.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagepropertyorientation/downmirrored"
+        },
+        "kCGImagePropertyOrientationLeft": {
+          "doc": "The encoded image data is rotated 90° clockwise from the image’s intended display orientation.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagepropertyorientation/left"
+        },
+        "kCGImagePropertyOrientationLeftMirrored": {
+          "doc": "The encoded image data is horizontally flipped and rotated 90° counter-clockwise from the image’s intended display orientation.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagepropertyorientation/leftmirrored"
+        },
+        "kCGImagePropertyOrientationRight": {
+          "doc": "The encoded image data is rotated 90° counter-clockwise from the image’s intended display orientation.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagepropertyorientation/right"
+        },
+        "kCGImagePropertyOrientationRightMirrored": {
+          "doc": "The encoded image data is horizontally flipped and rotated 90° clockwise from the image’s intended display orientation.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagepropertyorientation/rightmirrored"
+        },
+        "kCGImagePropertyOrientationUp": {
+          "doc": "The encoded image data matches the image’s intended display orientation.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagepropertyorientation/up"
+        },
+        "kCGImagePropertyOrientationUpMirrored": {
+          "doc": "The encoded image data is horizontally flipped from the image’s intended display orientation.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagepropertyorientation/upmirrored"
+        }
+      }
+    },
+    "CGImagePropertyTGACompression": {
+      "url": "https://developer.apple.com/documentation/imageio/cgimagepropertytgacompression"
+    },
+    "CGImageSourceStatus": {
+      "doc": "The set of status values for images and image sources.",
+      "url": "https://developer.apple.com/documentation/imageio/cgimagesourcestatus",
+      "members": {
+        "kCGImageStatusComplete": {
+          "doc": "The operation is complete.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagesourcestatus/statuscomplete"
+        },
+        "kCGImageStatusIncomplete": {
+          "doc": "The operation is not complete",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagesourcestatus/statusincomplete"
+        },
+        "kCGImageStatusInvalidData": {
+          "doc": "The data is not valid.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagesourcestatus/statusinvaliddata"
+        },
+        "kCGImageStatusReadingHeader": {
+          "doc": "The image source is reading the header.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagesourcestatus/statusreadingheader"
+        },
+        "kCGImageStatusUnexpectedEOF": {
+          "doc": "The end of the file occurred unexpectedly.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagesourcestatus/statusunexpectedeof"
+        },
+        "kCGImageStatusUnknownType": {
+          "doc": "The image is an unknown type.",
+          "url": "https://developer.apple.com/documentation/imageio/cgimagesourcestatus/statusunknowntype"
+        }
+      }
+    }
+  },
+  "structs": {
+    "CGImageDestination": {
+      "doc": "An opaque type that you use to write image data to a URL, data object, or data consumer.",
+      "url": "https://developer.apple.com/documentation/imageio/cgimagedestination"
+    },
+    "CGImageMetadata": {
+      "doc": "An immutable object that contains the XMP metadata associated with an image.",
+      "url": "https://developer.apple.com/documentation/imageio/cgimagemetadata"
+    },
+    "CGImageMetadataTag": {
+      "doc": "An immutable type that contains information about a single piece of image metadata.",
+      "url": "https://developer.apple.com/documentation/imageio/cgimagemetadatatag"
+    },
+    "CGImageSource": {
+      "doc": "An opaque type that you use to read image data from a URL, data object, or data consumer.",
+      "url": "https://developer.apple.com/documentation/imageio/cgimagesource"
+    }
+  }
+}

@@ -1,0 +1,2031 @@
+{
+  "schema_version": 1,
+  "framework": "IOBluetooth",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "IOBluetoothDevice": {
+      "doc": "An instance of IOBluetoothDevice represents a single remote Bluetooth device.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice"
+    },
+    "IOBluetoothDeviceInquiry": {
+      "doc": "Object representing a device inquiry that finds Bluetooth devices in-range of the computer, and (optionally) retrieves name information for them.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdeviceinquiry"
+    },
+    "IOBluetoothDevicePair": {
+      "doc": "An instance of IOBluetoothDevicePair represents a pairing attempt to a remote Bluetooth device.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevicepair"
+    },
+    "IOBluetoothHandsFree": {
+      "doc": "Hands free profile class.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree"
+    },
+    "IOBluetoothHandsFreeAudioGateway": {
+      "doc": "An object that sends data to a connected Bluetooth hands-free phone or headset and processes commands from it.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreeaudiogateway"
+    },
+    "IOBluetoothHandsFreeDevice": {
+      "doc": "An object you use to manage phone calls on a connected Bluetooth hands-free phone or headset.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice"
+    },
+    "IOBluetoothHostController": {
+      "doc": "This class is a representation of a Bluetooth Host Controller Interface that is present on the local computer (either plugged in externally or available internally).",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhostcontroller"
+    },
+    "IOBluetoothL2CAPChannel": {
+      "doc": "An instance of IOBluetoothL2CAPChannel represents a single open L2CAP channel.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel"
+    },
+    "IOBluetoothOBEXSession": {
+      "doc": "An OBEX Session with a Bluetooth RFCOMM channel as the transport.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothobexsession"
+    },
+    "IOBluetoothObject": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothobject"
+    },
+    "IOBluetoothRFCOMMChannel": {
+      "doc": "An instance of this class represents an RFCOMM channel as defined by the Bluetooth SDP spec..",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel"
+    },
+    "IOBluetoothSDPDataElement": {
+      "doc": "An instance of this class represents a single SDP data element as defined by the Bluetooth SDP spec.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpdataelement"
+    },
+    "IOBluetoothSDPServiceAttribute": {
+      "doc": "IOBluetoothSDPServiceAttribute represents a single SDP service attribute.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpserviceattribute"
+    },
+    "IOBluetoothSDPServiceRecord": {
+      "doc": "An instance of this class represents a single SDP service record.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpservicerecord"
+    },
+    "IOBluetoothSDPUUID": {
+      "doc": "An NSData subclass that represents a UUID as defined in the Bluetooth SDP spec.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpuuid"
+    },
+    "IOBluetoothUserNotification": {
+      "doc": "Represents a registered notification.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothusernotification"
+    },
+    "OBEXFileTransferServices": {
+      "doc": "Implements advanced OBEX operations in addition to simple PUT and GET.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexfiletransferservices"
+    },
+    "OBEXSession": {
+      "doc": "Object representing an OBEX connection to a remote target.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexsession"
+    }
+  },
+  "protocols": {
+    "IOBluetoothDeviceAsyncCallbacks": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdeviceasynccallbacks"
+    },
+    "IOBluetoothDeviceInquiryDelegate": {
+      "doc": "This category on NSObject describes the delegate methods for the IOBluetoothDeviceInquiry object. All methods are optional, but it is highly recommended you implement them all. Do NOT invoke remote name requests on found IOBluetoothDevice objects unless the inquiry object has been stopped. Doing so may deadlock your process.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdeviceinquirydelegate"
+    },
+    "IOBluetoothDevicePairDelegate": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevicepairdelegate"
+    },
+    "IOBluetoothHandsFreeAudioGatewayDelegate": {
+      "doc": "A set of optional methods for receiving information about status changes for a connected Bluetooth hands-free phone or headset.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreeaudiogatewaydelegate"
+    },
+    "IOBluetoothHandsFreeDelegate": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedelegate"
+    },
+    "IOBluetoothHandsFreeDeviceDelegate": {
+      "doc": "A set of optional methods for receiving status change updates and information about a connected Bluetooth hands-free phone or headset.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevicedelegate"
+    },
+    "IOBluetoothL2CAPChannelDelegate": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchanneldelegate"
+    },
+    "IOBluetoothRFCOMMChannelDelegate": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchanneldelegate"
+    }
+  },
+  "enums": {
+    "BluetoothAMPCommandRejectReason": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothampcommandrejectreason"
+    },
+    "BluetoothAMPCreatePhysicalLinkResponseStatus": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothampcreatephysicallinkresponsestatus"
+    },
+    "BluetoothAMPDisconnectPhysicalLinkResponseStatus": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothampdisconnectphysicallinkresponsestatus"
+    },
+    "BluetoothAMPDiscoverResponseControllerStatus": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothampdiscoverresponsecontrollerstatus"
+    },
+    "BluetoothAMPGetAssocResponseStatus": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothampgetassocresponsestatus"
+    },
+    "BluetoothAMPGetInfoResponseStatus": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothampgetinforesponsestatus"
+    },
+    "BluetoothAMPManagerCode": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothampmanagercode"
+    },
+    "BluetoothAuthenticationRequirementsValues": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothauthenticationrequirementsvalues"
+    },
+    "BluetoothCompanyIdentifers": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothcompanyidentifers"
+    },
+    "BluetoothFeatureBits": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothfeaturebits"
+    },
+    "BluetoothHCIAFHChannelAssessmentModes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciafhchannelassessmentmodes"
+    },
+    "BluetoothHCIAuthentionEnableModes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciauthentionenablemodes"
+    },
+    "BluetoothHCIConnectionModes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciconnectionmodes"
+    },
+    "BluetoothHCIDeleteStoredLinkKeyFlags": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcideletestoredlinkkeyflags"
+    },
+    "BluetoothHCIEncryptionModes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciencryptionmodes"
+    },
+    "BluetoothHCIExtendedInquiryResponseDataTypes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciextendedinquiryresponsedatatypes"
+    },
+    "BluetoothHCIFECRequiredValues": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcifecrequiredvalues"
+    },
+    "BluetoothHCIGeneralFlowControlStates": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcigeneralflowcontrolstates"
+    },
+    "BluetoothHCIHoldModeActivityStates": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciholdmodeactivitystates"
+    },
+    "BluetoothHCIInquiryModes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciinquirymodes"
+    },
+    "BluetoothHCIInquiryScanTypes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciinquiryscantypes"
+    },
+    "BluetoothHCILinkPolicySettingsValues": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcilinkpolicysettingsvalues"
+    },
+    "BluetoothHCIPageScanEnableStates": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcipagescanenablestates"
+    },
+    "BluetoothHCIPageScanModes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcipagescanmodes"
+    },
+    "BluetoothHCIPageScanPeriodModes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcipagescanperiodmodes"
+    },
+    "BluetoothHCIPageScanTypes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcipagescantypes"
+    },
+    "BluetoothHCIPowerState": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcipowerstate"
+    },
+    "BluetoothHCIReadStoredLinkKeysFlags": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcireadstoredlinkkeysflags"
+    },
+    "BluetoothHCIRetransmissionEffortTypes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciretransmissionefforttypes"
+    },
+    "BluetoothHCIRoles": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciroles"
+    },
+    "BluetoothHCISCOFlowControlStates": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciscoflowcontrolstates"
+    },
+    "BluetoothHCISimplePairingModes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcisimplepairingmodes"
+    },
+    "BluetoothHCITimeoutValues": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcitimeoutvalues"
+    },
+    "BluetoothHCITransmitReadPowerLevelTypes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcitransmitreadpowerleveltypes"
+    },
+    "BluetoothHCIVersions": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciversions"
+    },
+    "BluetoothIOCapabilities": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothiocapabilities"
+    },
+    "BluetoothKeypressNotificationTypes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothkeypressnotificationtypes"
+    },
+    "BluetoothL2CAPCommandCode": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothl2capcommandcode"
+    },
+    "BluetoothL2CAPCommandRejectReason": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothl2capcommandrejectreason"
+    },
+    "BluetoothL2CAPConfigurationOption": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothl2capconfigurationoption"
+    },
+    "BluetoothL2CAPConfigurationResult": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothl2capconfigurationresult"
+    },
+    "BluetoothL2CAPConfigurationRetransmissionAndFlowControlFlags": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothl2capconfigurationretransmissionandflowcontrolflags"
+    },
+    "BluetoothL2CAPConnectionResult": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothl2capconnectionresult"
+    },
+    "BluetoothL2CAPConnectionStatus": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothl2capconnectionstatus"
+    },
+    "BluetoothL2CAPInformationExtendedFeaturesMask": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothl2capinformationextendedfeaturesmask"
+    },
+    "BluetoothL2CAPInformationResult": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothl2capinformationresult"
+    },
+    "BluetoothL2CAPInformationType": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothl2capinformationtype"
+    },
+    "BluetoothL2CAPQoSType": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothl2capqostype"
+    },
+    "BluetoothL2CAPSegmentationAndReassembly": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothl2capsegmentationandreassembly"
+    },
+    "BluetoothL2CAPSupervisoryFuctionType": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothl2capsupervisoryfuctiontype"
+    },
+    "BluetoothLEAddressType": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothleaddresstype"
+    },
+    "BluetoothLEAdvertisingType": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothleadvertisingtype"
+    },
+    "BluetoothLEConnectionInterval": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothleconnectioninterval"
+    },
+    "BluetoothLEFeatureBits": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothlefeaturebits"
+    },
+    "BluetoothLEScan": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothlescan"
+    },
+    "BluetoothLEScanDuplicateFilter": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothlescanduplicatefilter"
+    },
+    "BluetoothLEScanFilter": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothlescanfilter"
+    },
+    "BluetoothLEScanType": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothlescantype"
+    },
+    "BluetoothLESecurityManagerCommandCode": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothlesecuritymanagercommandcode"
+    },
+    "BluetoothLESecurityManagerIOCapability": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothlesecuritymanageriocapability"
+    },
+    "BluetoothLESecurityManagerKeyDistributionFormat": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothlesecuritymanagerkeydistributionformat"
+    },
+    "BluetoothLESecurityManagerKeypressNotificationType": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothlesecuritymanagerkeypressnotificationtype"
+    },
+    "BluetoothLESecurityManagerOOBData": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothlesecuritymanageroobdata"
+    },
+    "BluetoothLESecurityManagerPairingFailedReasonCode": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothlesecuritymanagerpairingfailedreasoncode"
+    },
+    "BluetoothLESecurityManagerUserInputCapability": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothlesecuritymanageruserinputcapability"
+    },
+    "BluetoothLESecurityManagerUserOutputCapability": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothlesecuritymanageruseroutputcapability"
+    },
+    "BluetoothLMPVersions": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothlmpversions"
+    },
+    "BluetoothLinkTypes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothlinktypes"
+    },
+    "BluetoothOOBDataPresenceValues": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothoobdatapresencevalues"
+    },
+    "BluetoothRFCOMMLineStatus": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothrfcommlinestatus"
+    },
+    "BluetoothRFCOMMParityType": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothrfcommparitytype"
+    },
+    "BluetoothSimplePairingDebugModes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothsimplepairingdebugmodes"
+    },
+    "BluetoothTransportTypes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothtransporttypes"
+    },
+    "FTSFileType": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/ftsfiletype"
+    },
+    "IOBluetoothDeviceSearchOptionsBits": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevicesearchoptionsbits"
+    },
+    "IOBluetoothDeviceSearchTypesBits": {
+      "doc": "Bits to determine what Bluetooth devices to search for",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevicesearchtypesbits"
+    },
+    "IOBluetoothHandsFreeAudioGatewayFeatures": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreeaudiogatewayfeatures"
+    },
+    "IOBluetoothHandsFreeCallHoldModes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreecallholdmodes"
+    },
+    "IOBluetoothHandsFreeCodecID": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreecodecid"
+    },
+    "IOBluetoothHandsFreeDeviceFeatures": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevicefeatures"
+    },
+    "IOBluetoothHandsFreePDUMessageStatus": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreepdumessagestatus"
+    },
+    "IOBluetoothHandsFreeSMSSupport": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreesmssupport"
+    },
+    "IOBluetoothL2CAPChannelEventType": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchanneleventtype"
+    },
+    "IOBluetoothSMSMode": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsmsmode"
+    },
+    "IOBluetoothUserNotificationChannelDirection": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothusernotificationchanneldirection"
+    },
+    "OBEXConnectFlagValues": {
+      "doc": "Flags for Connect command.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexconnectflagvalues"
+    },
+    "OBEXErrorCodes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexerrorcodes"
+    },
+    "OBEXHeaderIdentifiers": {
+      "doc": "Identifiers for OBEX Headers.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexheaderidentifiers"
+    },
+    "OBEXNonceFlagValues": {
+      "doc": "Flags for Nonce command during digest challenge.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexnonceflagvalues"
+    },
+    "OBEXOpCodeCommandValues": {
+      "doc": "Operation OpCode values for commands.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexopcodecommandvalues"
+    },
+    "OBEXOpCodeResponseValues": {
+      "doc": "Response opCode values.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexopcoderesponsevalues"
+    },
+    "OBEXOpCodeSessionValues": {
+      "doc": "Operation OpCode values for sessions. From the OBEX 1.3 specification.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexopcodesessionvalues"
+    },
+    "OBEXPutFlagValues": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexputflagvalues"
+    },
+    "OBEXRealmValues": {
+      "doc": "Values for Realm during digest response.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexrealmvalues"
+    },
+    "OBEXSessionEventTypes": {
+      "doc": "Type identifiers for OBEX sessions.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexsessioneventtypes"
+    },
+    "OBEXSessionParameterTags": {
+      "doc": "Tags for SessionParameters.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexsessionparametertags"
+    },
+    "OBEXTransportEventTypes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/obextransporteventtypes"
+    },
+    "OBEXVersions": {
+      "doc": "The available/supported OBEX versions.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexversions"
+    },
+    "ProtocolParameters": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/protocolparameters"
+    },
+    "SDPAttributeDeviceIdentificationRecord": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/sdpattributedeviceidentificationrecord"
+    },
+    "SDPAttributeIdentifierCodes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/sdpattributeidentifiercodes"
+    },
+    "SDPServiceClasses": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/sdpserviceclasses"
+    }
+  },
+  "structs": {
+    "BluetoothAFHHostChannelClassification": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothafhhostchannelclassification"
+    },
+    "BluetoothAFHResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothafhresults"
+    },
+    "BluetoothDeviceAddress": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothdeviceaddress"
+    },
+    "BluetoothEnhancedSynchronousConnectionInfo": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothenhancedsynchronousconnectioninfo"
+    },
+    "BluetoothEventFilterCondition": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetootheventfiltercondition"
+    },
+    "BluetoothHCIAcceptSynchronousConnectionRequestParams": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciacceptsynchronousconnectionrequestparams"
+    },
+    "BluetoothHCIAutomaticFlushTimeoutInfo": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciautomaticflushtimeoutinfo"
+    },
+    "BluetoothHCIBufferSize": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcibuffersize"
+    },
+    "BluetoothHCICurrentInquiryAccessCodes": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcicurrentinquiryaccesscodes"
+    },
+    "BluetoothHCICurrentInquiryAccessCodesForWrite": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcicurrentinquiryaccesscodesforwrite"
+    },
+    "BluetoothHCIEncryptionKeySizeInfo": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciencryptionkeysizeinfo"
+    },
+    "BluetoothHCIEnhancedAcceptSynchronousConnectionRequestParams": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcienhancedacceptsynchronousconnectionrequestparams"
+    },
+    "BluetoothHCIEnhancedSetupSynchronousConnectionParams": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcienhancedsetupsynchronousconnectionparams"
+    },
+    "BluetoothHCIEventAuthenticationCompleteResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventauthenticationcompleteresults"
+    },
+    "BluetoothHCIEventChangeConnectionLinkKeyCompleteResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventchangeconnectionlinkkeycompleteresults"
+    },
+    "BluetoothHCIEventConnectionCompleteResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventconnectioncompleteresults"
+    },
+    "BluetoothHCIEventConnectionPacketTypeResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventconnectionpackettyperesults"
+    },
+    "BluetoothHCIEventConnectionRequestResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventconnectionrequestresults"
+    },
+    "BluetoothHCIEventDataBufferOverflowResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventdatabufferoverflowresults"
+    },
+    "BluetoothHCIEventDisconnectionCompleteResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventdisconnectioncompleteresults"
+    },
+    "BluetoothHCIEventEncryptionChangeResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventencryptionchangeresults"
+    },
+    "BluetoothHCIEventEncryptionKeyRefreshCompleteResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventencryptionkeyrefreshcompleteresults"
+    },
+    "BluetoothHCIEventFlowSpecificationData": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventflowspecificationdata"
+    },
+    "BluetoothHCIEventFlushOccurredResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventflushoccurredresults"
+    },
+    "BluetoothHCIEventHardwareErrorResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventhardwareerrorresults"
+    },
+    "BluetoothHCIEventLEConnectionCompleteResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventleconnectioncompleteresults"
+    },
+    "BluetoothHCIEventLEConnectionUpdateCompleteResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventleconnectionupdatecompleteresults"
+    },
+    "BluetoothHCIEventLEEnhancedConnectionCompleteResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventleenhancedconnectioncompleteresults"
+    },
+    "BluetoothHCIEventLELongTermKeyRequestResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventlelongtermkeyrequestresults"
+    },
+    "BluetoothHCIEventLEMetaResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventlemetaresults"
+    },
+    "BluetoothHCIEventLEReadRemoteUsedFeaturesCompleteResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventlereadremoteusedfeaturescompleteresults"
+    },
+    "BluetoothHCIEventLinkKeyNotificationResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventlinkkeynotificationresults"
+    },
+    "BluetoothHCIEventMasterLinkKeyCompleteResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventmasterlinkkeycompleteresults"
+    },
+    "BluetoothHCIEventMaxSlotsChangeResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventmaxslotschangeresults"
+    },
+    "BluetoothHCIEventModeChangeResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventmodechangeresults"
+    },
+    "BluetoothHCIEventPageScanModeChangeResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventpagescanmodechangeresults"
+    },
+    "BluetoothHCIEventPageScanRepetitionModeChangeResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventpagescanrepetitionmodechangeresults"
+    },
+    "BluetoothHCIEventQoSSetupCompleteResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventqossetupcompleteresults"
+    },
+    "BluetoothHCIEventQoSViolationResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventqosviolationresults"
+    },
+    "BluetoothHCIEventReadClockOffsetResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventreadclockoffsetresults"
+    },
+    "BluetoothHCIEventReadExtendedFeaturesResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventreadextendedfeaturesresults"
+    },
+    "BluetoothHCIEventReadRemoteExtendedFeaturesResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventreadremoteextendedfeaturesresults"
+    },
+    "BluetoothHCIEventReadRemoteSupportedFeaturesResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventreadremotesupportedfeaturesresults"
+    },
+    "BluetoothHCIEventReadRemoteVersionInfoResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventreadremoteversioninforesults"
+    },
+    "BluetoothHCIEventReadSupportedFeaturesResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventreadsupportedfeaturesresults"
+    },
+    "BluetoothHCIEventRemoteNameRequestResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventremotenamerequestresults"
+    },
+    "BluetoothHCIEventReturnLinkKeysResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventreturnlinkkeysresults"
+    },
+    "BluetoothHCIEventRoleChangeResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventrolechangeresults"
+    },
+    "BluetoothHCIEventSimplePairingCompleteResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventsimplepairingcompleteresults"
+    },
+    "BluetoothHCIEventSniffSubratingResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventsniffsubratingresults"
+    },
+    "BluetoothHCIEventSynchronousConnectionChangedResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventsynchronousconnectionchangedresults"
+    },
+    "BluetoothHCIEventSynchronousConnectionCompleteResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventsynchronousconnectioncompleteresults"
+    },
+    "BluetoothHCIEventVendorSpecificResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcieventvendorspecificresults"
+    },
+    "BluetoothHCIExtendedFeaturesInfo": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciextendedfeaturesinfo"
+    },
+    "BluetoothHCIExtendedInquiryResponse": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciextendedinquiryresponse"
+    },
+    "BluetoothHCIExtendedInquiryResult": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciextendedinquiryresult"
+    },
+    "BluetoothHCIFailedContactInfo": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcifailedcontactinfo"
+    },
+    "BluetoothHCIInquiryAccessCode": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciinquiryaccesscode"
+    },
+    "BluetoothHCIInquiryResult": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciinquiryresult"
+    },
+    "BluetoothHCIInquiryResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciinquiryresults"
+    },
+    "BluetoothHCIInquiryWithRSSIResult": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciinquirywithrssiresult"
+    },
+    "BluetoothHCIInquiryWithRSSIResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciinquirywithrssiresults"
+    },
+    "BluetoothHCILEBufferSize": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcilebuffersize"
+    },
+    "BluetoothHCILinkPolicySettingsInfo": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcilinkpolicysettingsinfo"
+    },
+    "BluetoothHCILinkQualityInfo": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcilinkqualityinfo"
+    },
+    "BluetoothHCILinkSupervisionTimeout": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcilinksupervisiontimeout"
+    },
+    "BluetoothHCIQualityOfServiceSetupParams": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciqualityofservicesetupparams"
+    },
+    "BluetoothHCIRSSIInfo": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcirssiinfo"
+    },
+    "BluetoothHCIReadExtendedInquiryResponseResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcireadextendedinquiryresponseresults"
+    },
+    "BluetoothHCIReadLMPHandleResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcireadlmphandleresults"
+    },
+    "BluetoothHCIReadLocalOOBDataResults": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcireadlocaloobdataresults"
+    },
+    "BluetoothHCIRequestCallbackInfo": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcirequestcallbackinfo"
+    },
+    "BluetoothHCIRoleInfo": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciroleinfo"
+    },
+    "BluetoothHCIScanActivity": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciscanactivity"
+    },
+    "BluetoothHCISetupSynchronousConnectionParams": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcisetupsynchronousconnectionparams"
+    },
+    "BluetoothHCISimplePairingOOBData": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcisimplepairingoobdata"
+    },
+    "BluetoothHCIStoredLinkKeysInfo": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcistoredlinkkeysinfo"
+    },
+    "BluetoothHCISupportedCommands": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcisupportedcommands"
+    },
+    "BluetoothHCISupportedFeatures": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcisupportedfeatures"
+    },
+    "BluetoothHCITransmitPowerLevelInfo": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhcitransmitpowerlevelinfo"
+    },
+    "BluetoothHCIVersionInfo": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothhciversioninfo"
+    },
+    "BluetoothIOCapabilityResponse": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothiocapabilityresponse"
+    },
+    "BluetoothIRK": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothirk"
+    },
+    "BluetoothKey": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothkey"
+    },
+    "BluetoothKeypressNotification": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothkeypressnotification"
+    },
+    "BluetoothL2CAPQualityOfServiceOptions": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothl2capqualityofserviceoptions"
+    },
+    "BluetoothL2CAPRetransmissionAndFlowControlOptions": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothl2capretransmissionandflowcontroloptions"
+    },
+    "BluetoothPINCode": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothpincode"
+    },
+    "BluetoothReadClockInfo": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothreadclockinfo"
+    },
+    "BluetoothRemoteHostSupportedFeaturesNotification": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothremotehostsupportedfeaturesnotification"
+    },
+    "BluetoothSetEventMask": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothseteventmask"
+    },
+    "BluetoothSynchronousConnectionInfo": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothsynchronousconnectioninfo"
+    },
+    "BluetoothTransportInfo": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothtransportinfo"
+    },
+    "BluetoothUserConfirmationRequest": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothuserconfirmationrequest"
+    },
+    "BluetoothUserPasskeyNotification": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/bluetoothuserpasskeynotification"
+    },
+    "IOBluetoothDeviceSearchAttributes": {
+      "doc": "Structure used to search for particular devices.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevicesearchattributes"
+    },
+    "IOBluetoothDeviceSearchDeviceAttributes": {
+      "doc": "Structure used to search for particular devices.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevicesearchdeviceattributes"
+    },
+    "IOBluetoothL2CAPChannelDataBlock": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchanneldatablock"
+    },
+    "IOBluetoothL2CAPChannelEvent": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannelevent"
+    },
+    "OBEXAbortCommandData": {
+      "doc": "Part of the OBEXSessionEvent structure.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexabortcommanddata"
+    },
+    "OBEXAbortCommandResponseData": {
+      "doc": "Part of the OBEXSessionEvent structure.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexabortcommandresponsedata"
+    },
+    "OBEXConnectCommandData": {
+      "doc": "Part of the OBEXSessionEvent structure.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexconnectcommanddata"
+    },
+    "OBEXConnectCommandResponseData": {
+      "doc": "Part of the OBEXSessionEvent structure.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexconnectcommandresponsedata"
+    },
+    "OBEXDisconnectCommandData": {
+      "doc": "Part of the OBEXSessionEvent structure.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexdisconnectcommanddata"
+    },
+    "OBEXDisconnectCommandResponseData": {
+      "doc": "Part of the OBEXSessionEvent structure.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexdisconnectcommandresponsedata"
+    },
+    "OBEXErrorData": {
+      "doc": "Part of the OBEXSessionEvent structure.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexerrordata"
+    },
+    "OBEXGetCommandData": {
+      "doc": "Part of the OBEXSessionEvent structure.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexgetcommanddata"
+    },
+    "OBEXGetCommandResponseData": {
+      "doc": "Part of the OBEXSessionEvent structure.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexgetcommandresponsedata"
+    },
+    "OBEXPutCommandData": {
+      "doc": "Part of the OBEXSessionEvent structure.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexputcommanddata"
+    },
+    "OBEXPutCommandResponseData": {
+      "doc": "Part of the OBEXSessionEvent structure.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexputcommandresponsedata"
+    },
+    "OBEXSessionEvent": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexsessionevent"
+    },
+    "OBEXSetPathCommandData": {
+      "doc": "Part of the OBEXSessionEvent structure.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexsetpathcommanddata"
+    },
+    "OBEXSetPathCommandResponseData": {
+      "doc": "Part of the OBEXSessionEvent structure.",
+      "url": "https://developer.apple.com/documentation/iobluetooth/obexsetpathcommandresponsedata"
+    },
+    "OBEXTransportEvent": {
+      "url": "https://developer.apple.com/documentation/iobluetooth/obextransportevent"
+    }
+  },
+  "methods": {
+    "IOBluetoothDevice": {
+      "+deviceWithAddress:": {
+        "doc": "Returns the IOBluetoothDevice object for the given BluetoothDeviceAddress",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/init(address:)"
+      },
+      "+deviceWithAddressString:": {
+        "doc": "Returns the IOBluetoothDevice object for the given BluetoothDeviceAddress",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/init(addressstring:)"
+      },
+      "+favoriteDevices": {
+        "doc": "Gets an array of the user’s favorite devices.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/favoritedevices()"
+      },
+      "+pairedDevices": {
+        "doc": "Gets an array of all of the paired devices on the system.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/paireddevices()"
+      },
+      "+recentDevices:": {
+        "doc": "Gets an array of recently used Bluetooth devices.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/recentdevices(_:)"
+      },
+      "+registerForConnectNotifications:selector:": {
+        "doc": "Allows a client to register for device connect notifications for any connection.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/register(forconnectnotifications:selector:)"
+      },
+      "+withDeviceRef:": {
+        "doc": "Method call to convert an IOBluetoothDeviceRef into an IOBluetoothDevice *.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/withdeviceref:"
+      },
+      "-RSSI": {
+        "doc": "Get the RSSI device (if connected), above or below the golden range. If the RSSI is within the golden range, a value of 0 is returned. For the actual RSSI value, use getRawRSSI. For more information, see the Bluetooth 4.0 Core Specification.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/rssi()"
+      },
+      "-addToFavorites": {
+        "doc": "Adds the target device to the user’s favorite devices list.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/addtofavorites()"
+      },
+      "-closeConnection": {
+        "doc": "Close down the baseband connection to the device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/closeconnection()"
+      },
+      "-getAddress": {
+        "doc": "Get the Bluetooth device address for the target device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/getaddress()"
+      },
+      "-getAddressString": {
+        "doc": "Get a string representation of the Bluetooth device address for the target device. The format of the string is the same as returned by IOBluetoothNSStringFromDeviceAddress().",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/getaddressstring"
+      },
+      "-getClassOfDevice": {
+        "doc": "Gets the full class of device value for the remote device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/getclassofdevice"
+      },
+      "-getClockOffset": {
+        "doc": "Get the clock offset value of the device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/getclockoffset()"
+      },
+      "-getConnectionHandle": {
+        "doc": "Get the connection handle for the baseband connection.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/getconnectionhandle"
+      },
+      "-getDeviceClassMajor": {
+        "doc": "Get the major device class of the device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/getdeviceclassmajor"
+      },
+      "-getDeviceClassMinor": {
+        "doc": "Get the minor service class of the device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/getdeviceclassminor"
+      },
+      "-getDeviceRef": {
+        "doc": "Returns an IOBluetoothDeviceRef representation of the target IOBluetoothDevice object.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/getdeviceref"
+      },
+      "-getEncryptionMode": {
+        "doc": "Get the encryption mode for the baseband connection.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/getencryptionmode()"
+      },
+      "-getLastInquiryUpdate": {
+        "doc": "Get the date/time of the last time the device was returned during an inquiry.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/getlastinquiryupdate()"
+      },
+      "-getLastNameUpdate": {
+        "doc": "Get the date/time of the last successful remote name request.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/getlastnameupdate"
+      },
+      "-getLastServicesUpdate": {
+        "doc": "Get the date/time of the last SDP query.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/getlastservicesupdate()"
+      },
+      "-getLinkType": {
+        "doc": "Get the link type for the baseband connection.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/getlinktype()"
+      },
+      "-getName": {
+        "doc": "Get the human readable name of the remote device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/getname"
+      },
+      "-getNameOrAddress": {
+        "doc": "Get the human readable name of the remote device. If the name is not present, it will return a string containing the device’s address.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/getnameoraddress"
+      },
+      "-getPageScanMode": {
+        "doc": "Get the page scan mode for the device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/getpagescanmode()"
+      },
+      "-getPageScanPeriodMode": {
+        "doc": "Get the value of the page scan period mode for the device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/getpagescanperiodmode()"
+      },
+      "-getPageScanRepetitionMode": {
+        "doc": "Get the value of the page scan repetition mode for the device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/getpagescanrepetitionmode()"
+      },
+      "-getServiceClassMajor": {
+        "doc": "Get the major service class of the device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/getserviceclassmajor"
+      },
+      "-getServiceRecordForUUID:": {
+        "doc": "Search for a service record containing the given UUID.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/getservicerecord(for:)"
+      },
+      "-isConnected": {
+        "doc": "Indicates whether a baseband connection to the device exists.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/isconnected()"
+      },
+      "-isFavorite": {
+        "doc": "Reports whether the target device is a favorite for the user.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/isfavorite()"
+      },
+      "-isIncoming": {
+        "doc": "Returns TRUE if the device connection was generated by the remote host.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/isincoming()"
+      },
+      "-isPaired": {
+        "doc": "Returns whether the target device is paired.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/ispaired()"
+      },
+      "-openConnection": {
+        "doc": "Create a baseband connection to the device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/openconnection()"
+      },
+      "-openConnection:": {
+        "doc": "Create a baseband connection to the device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/openconnection(_:)"
+      },
+      "-openConnection:withPageTimeout:authenticationRequired:": {
+        "doc": "Create a baseband connection to the device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/openconnection(_:withpagetimeout:authenticationrequired:)"
+      },
+      "-openL2CAPChannel:findExisting:newChannel:": {
+        "doc": "Opens a new L2CAP channel to the target device. Returns immedialty after starting the opening process.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/openl2capchannel:findexisting:newchannel:"
+      },
+      "-openL2CAPChannelAsync:withPSM:delegate:": {
+        "doc": "Opens a new L2CAP channel to the target device. Returns immediately after starting the opening process.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/openl2capchannelasync(_:withpsm:delegate:)"
+      },
+      "-openL2CAPChannelAsync:withPSM:withConfiguration:delegate:": {
+        "doc": "Opens a new L2CAP channel to the target device. Returns immediately after starting the opening process.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/openl2capchannelasync(_:withpsm:withconfiguration:delegate:)"
+      },
+      "-openL2CAPChannelSync:withPSM:delegate:": {
+        "doc": "Opens a new L2CAP channel to the target device. Returns only after the channel is opened.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/openl2capchannelsync(_:withpsm:delegate:)"
+      },
+      "-openL2CAPChannelSync:withPSM:withConfiguration:delegate:": {
+        "doc": "Opens a new L2CAP channel to the target device. Returns only after the channel is opened.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/openl2capchannelsync(_:withpsm:withconfiguration:delegate:)"
+      },
+      "-openRFCOMMChannel:channel:": {
+        "doc": "Opens a new RFCOMM channel to the target device. Returns only once the channel is open or failed to open.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/openrfcommchannel:channel:"
+      },
+      "-openRFCOMMChannelAsync:withChannelID:delegate:": {
+        "doc": "Opens a new RFCOMM channel to the target device. Returns immediately.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/openrfcommchannelasync(_:withchannelid:delegate:)"
+      },
+      "-openRFCOMMChannelSync:withChannelID:delegate:": {
+        "doc": "Opens a new RFCOMM channel to the target device. Returns only once the channel is open or failed to open.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/openrfcommchannelsync(_:withchannelid:delegate:)"
+      },
+      "-performSDPQuery:": {
+        "doc": "Performs an SDP query on the target device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/performsdpquery(_:)"
+      },
+      "-performSDPQuery:uuids:": {
+        "doc": "Performs an SDP query on the target device with the specified service UUIDs.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/performsdpquery(_:uuids:)"
+      },
+      "-rawRSSI": {
+        "doc": "Get the raw RSSI device (if connected).",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/rawrssi()"
+      },
+      "-recentAccessDate": {
+        "doc": "Returns the date/time of the most recent access of the target device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/recentaccessdate()"
+      },
+      "-registerForDisconnectNotification:selector:": {
+        "doc": "Allows a client to register for device disconnect notification.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/register(fordisconnectnotification:selector:)"
+      },
+      "-remoteNameRequest:": {
+        "doc": "Issues a remote name request to the target device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/remotenamerequest(_:)"
+      },
+      "-remoteNameRequest:withPageTimeout:": {
+        "doc": "Issues a remote name request to the target device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/remotenamerequest(_:withpagetimeout:)"
+      },
+      "-removeFromFavorites": {
+        "doc": "Removes the target device from the user’s favorite devices list.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/removefromfavorites()"
+      },
+      "-requestAuthentication": {
+        "doc": "Requests that the existing baseband connection be authenticated.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/requestauthentication()"
+      },
+      "-sendL2CAPEchoRequest:length:": {
+        "doc": "Send an echo request over the L2CAP connection to a remote device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/sendl2capechorequest(_:length:)"
+      },
+      "-setSupervisionTimeout:": {
+        "doc": "Sets the connection supervision timeout.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/setsupervisiontimeout(_:)"
+      }
+    },
+    "IOBluetoothDeviceInquiry": {
+      "+inquiryWithDelegate:": {
+        "doc": "Class method to create an inquiry object.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdeviceinquiry/inquirywithdelegate:"
+      },
+      "-clearFoundDevices": {
+        "doc": "Removes all found devices from the inquiry object.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdeviceinquiry/clearfounddevices()"
+      },
+      "-foundDevices": {
+        "doc": "Returns found IOBluetoothDevice objects as an array.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdeviceinquiry/founddevices()"
+      },
+      "-initWithDelegate:": {
+        "doc": "Initializes an alloc’d inquiry object, and sets the delegate object, as if -setDelegate: were called on it.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdeviceinquiry/init(delegate:)"
+      },
+      "-setSearchCriteria:majorDeviceClass:minorDeviceClass:": {
+        "doc": "Use this method to set the criteria for the device search.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdeviceinquiry/setsearchcriteria(_:majordeviceclass:minordeviceclass:)"
+      },
+      "-start": {
+        "doc": "Tells inquiry object to begin the inquiry and name updating process, if specified.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdeviceinquiry/start()"
+      },
+      "-stop": {
+        "doc": "Halts the inquiry object. Could either stop the search for new devices, or the updating of found device names.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdeviceinquiry/stop()"
+      }
+    },
+    "IOBluetoothDevicePair": {
+      "+pairWithDevice:": {
+        "doc": "Creates an autorelease IOBluetoothDevicePair object with a device as the pairing target.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevicepair/init(device:)"
+      },
+      "-device": {
+        "doc": "Get the IOBluetoothDevice being used by the object.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevicepair/device()"
+      },
+      "-replyPINCode:PINCode:": {
+        "doc": "This is the required reply to the devicePairingPINCodeRequest delegate message. Set the PIN code to use during pairing if required.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevicepair/replypincode(_:pincode:)"
+      },
+      "-replyUserConfirmation:": {
+        "doc": "This is the required reply to the devicePairingUserConfirmationRequest delegate message.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevicepair/replyuserconfirmation(_:)"
+      },
+      "-setDevice:": {
+        "doc": "Set the device object to pair with. It is retained by the object.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevicepair/setdevice(_:)"
+      },
+      "-start": {
+        "doc": "Kicks off the pairing with the device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevicepair/start()"
+      },
+      "-stop": {
+        "doc": "Stops the current pairing. Removes the delegate and disconnects if device was connected.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevicepair/stop()"
+      }
+    },
+    "IOBluetoothHandsFree": {
+      "-connect": {
+        "doc": "Connect to the device",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree/connect()"
+      },
+      "-connectSCO": {
+        "doc": "Open a SCO connection with the device",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree/connectsco()"
+      },
+      "-disconnect": {
+        "doc": "Disconnect from the device",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree/disconnect()"
+      },
+      "-disconnectSCO": {
+        "doc": "Disconnect the SCO connection with the device",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree/disconnectsco()"
+      },
+      "-indicator:": {
+        "doc": "Return an indicator’s value",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree/indicator(_:)"
+      },
+      "-initWithDevice:delegate:": {
+        "doc": "Create a new IOBluetoothHandsFree object",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree/init(device:delegate:)"
+      },
+      "-isSCOConnected": {
+        "doc": "Determine if there is a SCO connection to the device",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree/isscoconnected()"
+      },
+      "-setIndicator:value:": {
+        "doc": "Set an indicator’s value",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree/setindicator(_:value:)"
+      }
+    },
+    "IOBluetoothHandsFreeAudioGateway": {
+      "-createIndicator:min:max:currentValue:": {
+        "doc": "Sends a request to the Bluetooth device to show or update a status indicator.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreeaudiogateway/createindicator(_:min:max:currentvalue:)"
+      },
+      "-initWithDevice:delegate:": {
+        "doc": "Creates an object that controls a connected Bluetooth hands-free phone or headset.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreeaudiogateway/init(device:delegate:)"
+      },
+      "-processATCommand:": {
+        "doc": "Processes a command from a connected Bluetooth hands-free phone or headset.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreeaudiogateway/process(atcommand:)"
+      },
+      "-sendOKResponse": {
+        "doc": "Sends a success message to a connected Bluetooth hands-free phone or headset.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreeaudiogateway/sendokresponse()"
+      },
+      "-sendResponse:": {
+        "doc": "Sends data followed by a success message to a connected Bluetooth hands-free phone or headset.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreeaudiogateway/sendresponse(_:)"
+      },
+      "-sendResponse:withOK:": {
+        "doc": "Sends data followed by an optional success message to a connected Bluetooth hands-free phone or headset.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreeaudiogateway/sendresponse(_:withok:)"
+      }
+    },
+    "IOBluetoothHandsFreeDevice": {
+      "-acceptCall": {
+        "doc": "Accepts an incoming call.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/acceptcall()"
+      },
+      "-acceptCallOnPhone": {
+        "doc": "Accepts an incoming call and transfers the audio to the managed hands-free phone or headset.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/acceptcallonphone()"
+      },
+      "-addHeldCall": {
+        "doc": "Adds held calls to the current conversation.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/addheldcall()"
+      },
+      "-callTransfer": {
+        "doc": "Ends all calls that are active or on hold, and accepts any waiting calls.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/calltransfer()"
+      },
+      "-currentCallList": {
+        "doc": "Requests that the Bluetooth audio gateway send the delegate a list of calls that are active, on hold, or being set up.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/currentcalllist()"
+      },
+      "-dialNumber:": {
+        "doc": "Calls the phone number on a hands-free phone or headset.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/dialnumber(_:)"
+      },
+      "-endCall": {
+        "doc": "Ends the current call or refuses an incoming call.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/endcall()"
+      },
+      "-holdCall": {
+        "doc": "Places all active calls on hold and accepts a held or waiting call.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/holdcall()"
+      },
+      "-initWithDevice:delegate:": {
+        "doc": "Creates an object to manage phone calls on a hands-free Bluetooth device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/init(device:delegate:)"
+      },
+      "-memoryDial:": {
+        "doc": "Calls the phone number stored in a speed dial or memory slot of the hands-free phone or headset.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/memorydial(_:)"
+      },
+      "-placeAllOthersOnHold:": {
+        "doc": "Places all calls except the call with the specified index on hold.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/placeallothers(onhold:)"
+      },
+      "-redial": {
+        "doc": "Calls the number stored on the hands-free phone or headset again.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/redial()"
+      },
+      "-releaseActiveCalls": {
+        "doc": "Ends all active calls and accepts a held or waiting call.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/releaseactivecalls()"
+      },
+      "-releaseCall:": {
+        "doc": "Ends the call with the specified index.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/releasecall(_:)"
+      },
+      "-releaseHeldCalls": {
+        "doc": "Ends all calls that are on hold or returns a busy signal for a waiting call.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/releaseheldcalls()"
+      },
+      "-sendATCommand:": {
+        "doc": "Sends an AT command to the Bluetooth audio gateway.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/send(atcommand:)"
+      },
+      "-sendATCommand:timeout:selector:target:": {
+        "doc": "Send an AT command to the Bluetooth audio gateway and performs a selector on completion or timeout.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/send(atcommand:timeout:selector:target:)"
+      },
+      "-sendDTMF:": {
+        "doc": "Sends the tone associated with a phone key to the hands-free Bluetooth device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/senddtmf(_:)"
+      },
+      "-sendSMS:message:": {
+        "doc": "Sends a text message to a phone number.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/sendsms(_:message:)"
+      },
+      "-subscriberNumber": {
+        "doc": "Requests that the Bluetooth audio gateway send the subscriber number to the delegate.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/subscribernumber()"
+      },
+      "-transferAudioToComputer": {
+        "doc": "Moves the audio for current and future calls to a Mac.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/transferaudiotocomputer()"
+      },
+      "-transferAudioToPhone": {
+        "doc": "Moves the audio for current or future calls to a phone.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfreedevice/transferaudiotophone()"
+      }
+    },
+    "IOBluetoothHostController": {
+      "+defaultController": {
+        "doc": "Gets the default HCI controller object.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhostcontroller/default()"
+      },
+      "-addressAsString": {
+        "doc": "Convience routine to get the HCI controller’s Bluetooth address as an NSString object.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhostcontroller/addressasstring()"
+      },
+      "-classOfDevice": {
+        "doc": "Gets the current class of device value.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhostcontroller/classofdevice()"
+      },
+      "-nameAsString": {
+        "doc": "Gets the “friendly” name of HCI controller.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhostcontroller/nameasstring()"
+      },
+      "-setClassOfDevice:forTimeInterval:": {
+        "doc": "Sets the current class of device value, for the specified amount of time. Note that the time interval must be set and valid. The range of acceptable values is 30-120 seconds. Anything above or below will be rounded up, or down, as appropriate.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhostcontroller/setclassofdevice(_:fortimeinterval:)"
+      }
+    },
+    "IOBluetoothL2CAPChannel": {
+      "+registerForChannelOpenNotifications:selector:": {
+        "doc": "Allows a client to register for L2CAP channel open notifications for any L2CAP channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/register(forchannelopennotifications:selector:)"
+      },
+      "+registerForChannelOpenNotifications:selector:withPSM:direction:": {
+        "doc": "Allows a client to register for L2CAP channel open notifications for certain types of L2CAP channels.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/register(forchannelopennotifications:selector:withpsm:direction:)"
+      },
+      "+withObjectID:": {
+        "doc": "Returns the IObluetoothL2CAPChannel with the given IOBluetoothObjectID.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/withobjectid(_:)"
+      },
+      "-closeChannel": {
+        "doc": "Initiates the close process on an open L2CAP channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/close()"
+      },
+      "-delegate": {
+        "doc": "Returns the currently assigned delegate",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/delegate()"
+      },
+      "-getDevice": {
+        "doc": "Returns the IOBluetoothDevice to which the target L2CAP channel is open.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/getdevice"
+      },
+      "-getIncomingMTU": {
+        "doc": "Returns the current incoming MTU for the L2CAP channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/getincomingmtu"
+      },
+      "-getLocalChannelID": {
+        "doc": "Returns the local L2CAP channel ID for the target L2CAP channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/getlocalchannelid"
+      },
+      "-getObjectID": {
+        "doc": "Returns the IOBluetoothObjectID of the given IOBluetoothL2CAPChannel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/getobjectid"
+      },
+      "-getOutgoingMTU": {
+        "doc": "Returns the current outgoing MTU for the L2CAP channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/getoutgoingmtu"
+      },
+      "-getPSM": {
+        "doc": "Returns the PSM for the target L2CAP channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/getpsm"
+      },
+      "-getRemoteChannelID": {
+        "doc": "Returns the remote L2CAP channel ID for the target L2CAP channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/getremotechannelid"
+      },
+      "-isIncoming": {
+        "doc": "Returns TRUE if the channel is an incoming channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/isincoming()"
+      },
+      "-registerForChannelCloseNotification:selector:": {
+        "doc": "Allows a client to register for a channel close notification.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/register(forchannelclosenotification:selector:)"
+      },
+      "-requestRemoteMTU:": {
+        "doc": "Initiates the process to reconfigure the L2CAP channel with a new outgoing MTU.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/requestremotemtu(_:)"
+      },
+      "-setDelegate:": {
+        "doc": "Allows an object to register itself as client of the L2CAP channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/setdelegate(_:)"
+      },
+      "-setDelegate:withConfiguration:": {
+        "doc": "Allows an object to register itself as client of the L2CAP channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/setdelegate(_:withconfiguration:)"
+      },
+      "-writeAsync:length:refcon:": {
+        "doc": "Writes the given data over the target L2CAP channel asynchronously to the remote device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/writeasync(_:length:refcon:)"
+      },
+      "-writeSync:length:": {
+        "doc": "Writes the given data synchronously over the target L2CAP channel to the remote device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/writesync(_:length:)"
+      }
+    },
+    "IOBluetoothOBEXSession": {
+      "+withDevice:channelID:": {
+        "doc": "Creates a Bluetooth-based OBEX Session using a Bluetooth device and a Bluetooth RFCOMM channel ID.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothobexsession/withdevice(_:channelid:)"
+      },
+      "+withIncomingRFCOMMChannel:eventSelector:selectorTarget:refCon:": {
+        "doc": "Creates a Bluetooth-based OBEX Session using an incoming RFCOMM channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothobexsession/withincomingrfcommchannel(_:eventselector:selectortarget:refcon:)"
+      },
+      "+withSDPServiceRecord:": {
+        "doc": "Creates a Bluetooth-based OBEX Session using an SDP service record, typically obtained from a device/service browser window controller.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothobexsession/withsdpservicerecord(_:)"
+      },
+      "-closeTransportConnection": {
+        "doc": "An OBEXSession override. When this is called by the session baseclass, we will close the transport connection if it is opened. In our case, it will be the RFCOMM channel that needs closing.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothobexsession/closetransportconnection()"
+      },
+      "-getDevice": {
+        "doc": "Get the Bluetooth Device being used by the session object.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothobexsession/getdevice()"
+      },
+      "-getRFCOMMChannel": {
+        "doc": "Get the Bluetooth RFCOMM channel being used by the session object.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothobexsession/getrfcommchannel()"
+      },
+      "-hasOpenTransportConnection": {
+        "doc": "An OBEXSession override. When this is called by the session baseclass, we will return whether or not we have a transport connection established to another OBEX server/client. In our case we will tell whether or not the RFCOMM channel to a remote device is still open.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothobexsession/hasopentransportconnection()"
+      },
+      "-initWithDevice:channelID:": {
+        "doc": "Initializes a Bluetooth-based OBEX Session using a Bluetooth device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothobexsession/init(device:channelid:)"
+      },
+      "-initWithIncomingRFCOMMChannel:eventSelector:selectorTarget:refCon:": {
+        "doc": "Initializes a Bluetooth-based OBEX Session using an incoming RFCOMM channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothobexsession/init(incomingrfcommchannel:eventselector:selectortarget:refcon:)"
+      },
+      "-initWithSDPServiceRecord:": {
+        "doc": "Initializes a Bluetooth-based OBEX Session using an SDP service record.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothobexsession/init(sdpservicerecord:)-h1xg"
+      },
+      "-isSessionTargetAMac": {
+        "doc": "Tells whether the target device is a Mac by checking its service record.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothobexsession/issessiontargetamac()"
+      },
+      "-openTransportConnection:selectorTarget:refCon:": {
+        "doc": "An OBEXSession override. When this is called by the session baseclass, we will attempt to open the transport connection. In our case, this would be an RFCOMM channel to another Bluetooth device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothobexsession/opentransportconnection(_:selectortarget:refcon:)"
+      },
+      "-restartTransmission": {
+        "doc": "If the transmission was stopped due to the lack of buffers this call restarts it.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothobexsession/restarttransmission()"
+      },
+      "-sendBufferTroughChannel": {
+        "doc": "Sends the next block of data through the rfcomm channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothobexsession/sendbuffertroughchannel()"
+      },
+      "-sendDataToTransport:dataLength:": {
+        "doc": "An OBEXSession override. When this is called by the session baseclass, we will send the data we are given over our transport connection. If none is open, we could try to open it, or just return an error. In our case, it will be sent over the RFCOMM channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothobexsession/senddata(totransport:datalength:)"
+      },
+      "-setOBEXSessionOpenConnectionCallback:refCon:": {
+        "doc": "For C API support. Allows you to set the callback to be invoked when the OBEX connection is actually opened.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothobexsession/setobexsessionopenconnectioncallback(_:refcon:)"
+      },
+      "-setOpenTransportConnectionAsyncSelector:target:refCon:": {
+        "doc": "Allows you to set the selector to be used when a transport connection is opened, or fails to open.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothobexsession/setopentransportconnectionasyncselector(_:target:refcon:)"
+      }
+    },
+    "IOBluetoothRFCOMMChannel": {
+      "+registerForChannelOpenNotifications:selector:": {
+        "doc": "Allows a client to register for RFCOMM channel open notifications for any RFCOMM channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/register(forchannelopennotifications:selector:)"
+      },
+      "+registerForChannelOpenNotifications:selector:withChannelID:direction:": {
+        "doc": "Allows a client to register for RFCOMM channel open notifications for certain types of RFCOMM channels.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/register(forchannelopennotifications:selector:withchannelid:direction:)"
+      },
+      "+withObjectID:": {
+        "doc": "Returns the IObluetoothRFCOMMChannel with the given IOBluetoothObjectID.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/withobjectid(_:)"
+      },
+      "+withRFCOMMChannelRef:": {
+        "doc": "Method call to convert an IOBluetoothRFCOMMChannelRef into an IOBluetoothRFCOMMChannel *.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/withrfcommchannelref(_:)"
+      },
+      "-closeChannel": {
+        "doc": "Close the channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/close()"
+      },
+      "-delegate": {
+        "doc": "Returns the object delegate",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/delegate()"
+      },
+      "-getChannelID": {
+        "doc": "Returns the object rfcomm channel ID.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/getid()"
+      },
+      "-getDevice": {
+        "doc": "Returns the Bluetooth Device that carries the rfcomm data.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/getdevice()"
+      },
+      "-getMTU": {
+        "doc": "Returns the channel maximum transfer unit.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/getmtu()"
+      },
+      "-getObjectID": {
+        "doc": "Returns the IOBluetoothObjectID of the given IOBluetoothRFCOMMChannel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/getobjectid()"
+      },
+      "-getRFCOMMChannelRef": {
+        "doc": "Returns an IOBluetoothRFCOMMChannelRef representation of the target IOBluetoothRFCOMMChannel object.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/getref()"
+      },
+      "-isIncoming": {
+        "doc": "Returns the direction of the channel. An incoming channel is one that was opened by the remote device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/isincoming()"
+      },
+      "-isOpen": {
+        "doc": "Returns the state of the channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/isopen()"
+      },
+      "-isTransmissionPaused": {
+        "doc": "Returns TRUE if flow control is off.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/istransmissionpaused()"
+      },
+      "-registerForChannelCloseNotification:selector:": {
+        "doc": "Allows a client to register for a channel close notification.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/register(forchannelclosenotification:selector:)"
+      },
+      "-sendRemoteLineStatus:": {
+        "doc": "Sends an error to the remote side.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/sendremotelinestatus(_:)"
+      },
+      "-setDelegate:": {
+        "doc": "Allows an object to register itself as a client of the RFCOMM channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/setdelegate(_:)"
+      },
+      "-setSerialParameters:dataBits:parity:stopBits:": {
+        "doc": "Changes the parameters of the serial connection.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/setserialparameters(_:databits:parity:stopbits:)"
+      },
+      "-write:length:sleep:": {
+        "doc": "Sends a block of data in the channel syncronously.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/write:length:sleep:"
+      },
+      "-writeAsync:length:refcon:": {
+        "doc": "Sends a block of data in the channel asynchronously.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/writeasync(_:length:refcon:)"
+      },
+      "-writeSimple:length:sleep:bytesSent:": {
+        "doc": "Sends a block of data in the channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/writesimple:length:sleep:bytessent:"
+      },
+      "-writeSync:length:": {
+        "doc": "Sends a block of data in the channel synchronously.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothrfcommchannel/writesync(_:length:)"
+      }
+    },
+    "IOBluetoothSDPDataElement": {
+      "+withElementValue:": {
+        "doc": "Creates a new IOBluetoothSDPDataElement with the given value.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpdataelement/withelementvalue(_:)"
+      },
+      "+withSDPDataElementRef:": {
+        "doc": "Method call to convert an IOBluetoothSDPDataElementRef into an IOBluetoothSDPDataElement *.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpdataelement/withsdpdataelementref(_:)"
+      },
+      "+withType:sizeDescriptor:size:value:": {
+        "doc": "Creates a new IOBluetoothSDPDataElement with the given attributes.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpdataelement/withtype(_:sizedescriptor:size:value:)"
+      },
+      "-containsDataElement:": {
+        "doc": "Checks to see if the target data element is the same as the dataElement parameter or if it contains the dataElement parameter (if its a sequence type).",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpdataelement/contains(_:)"
+      },
+      "-containsValue:": {
+        "doc": "Checks to see if the target data element’s value is the same as the value parameter or if it contains the value parameter.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpdataelement/containsvalue(_:)"
+      },
+      "-getArrayValue": {
+        "doc": "If the data element is represented by an array object, it returns the value as an NSArray.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpdataelement/getarrayvalue()"
+      },
+      "-getDataValue": {
+        "doc": "If the data element is represented by a data object, it returns the value as an NSData.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpdataelement/getdatavalue()"
+      },
+      "-getNumberValue": {
+        "doc": "If the data element is represented by a number, it returns the value as an NSNumber.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpdataelement/getnumbervalue()"
+      },
+      "-getSDPDataElementRef": {
+        "doc": "Returns an IOBluetoothSDPDataElementRef representation of the target IOBluetoothSDPDataElement object.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpdataelement/getref()"
+      },
+      "-getSize": {
+        "doc": "Returns the size in bytes of the target data element.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpdataelement/getsize()"
+      },
+      "-getSizeDescriptor": {
+        "doc": "Returns the SDP spec defined data element size descriptor for the target data element.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpdataelement/getsizedescriptor()"
+      },
+      "-getStringValue": {
+        "doc": "If the data element is represented by a string object, it returns the value as an NSString.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpdataelement/getstringvalue()"
+      },
+      "-getTypeDescriptor": {
+        "doc": "Returns the SDP spec defined data element type descriptor for the target data element.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpdataelement/gettypedescriptor()"
+      },
+      "-getUUIDValue": {
+        "doc": "If the data element is a UUID (type 3), it returns the value as an IOBluetoothSDPUUID.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpdataelement/getuuidvalue()"
+      },
+      "-getValue": {
+        "doc": "Returns the object value of the data element.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpdataelement/getvalue()"
+      },
+      "-initWithElementValue:": {
+        "doc": "Initializes a new IOBluetoothSDPDataElement with the given value.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpdataelement/init(elementvalue:)"
+      },
+      "-initWithType:sizeDescriptor:size:value:": {
+        "doc": "Initializes a new IOBluetoothSDPDataElement with the given attributes.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpdataelement/init(type:sizedescriptor:size:value:)"
+      }
+    },
+    "IOBluetoothSDPServiceAttribute": {
+      "+withID:attributeElement:": {
+        "doc": "Creates a new service attribute with the given ID and data element.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpserviceattribute/withid(_:attributeelement:)"
+      },
+      "+withID:attributeElementValue:": {
+        "doc": "Creates a new service attribute with the given ID and element value.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpserviceattribute/withid(_:attributeelementvalue:)"
+      },
+      "-getAttributeID": {
+        "doc": "Returns the attribute ID for the target service attribute.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpserviceattribute/getid()"
+      },
+      "-getDataElement": {
+        "doc": "Returns the data element for the target service attribute.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpserviceattribute/getdataelement()"
+      },
+      "-getIDDataElement": {
+        "doc": "Returns the data element representing the attribute ID for the target service attribute.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpserviceattribute/getiddataelement()"
+      },
+      "-initWithID:attributeElement:": {
+        "doc": "Initializes a new service attribute with the given ID and data element.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpserviceattribute/init(id:attributeelement:)-7oebi"
+      },
+      "-initWithID:attributeElementValue:": {
+        "doc": "Initializes a new service attribute with the given ID and element value.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpserviceattribute/init(id:attributeelementvalue:)-84b3r"
+      }
+    },
+    "IOBluetoothSDPServiceRecord": {
+      "+publishedServiceRecordWithDictionary:": {
+        "doc": "Adds a service to the local SDP server.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpservicerecord/publishedservicerecord(with:)"
+      },
+      "+withSDPServiceRecordRef:": {
+        "doc": "Method call to convert an IOBluetoothSDPServiceRecordRef into an IOBluetoothSDPServiceRecord *.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpservicerecord/withsdpservicerecordref(_:)"
+      },
+      "+withServiceDictionary:device:": {
+        "doc": "Returns an IOBluetoothSDPServiceRecord * with the attributes specified in the provided service dictionary. Provide a pointer to an IOBlueotothDevice if you wish to associate the record to a specific IOBluetoothDevice.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpservicerecord/withservicedictionary(_:device:)"
+      },
+      "-getAttributeDataElement:": {
+        "doc": "Returns the data element for the given attribute ID in the target service.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpservicerecord/getattributedataelement(_:)"
+      },
+      "-getL2CAPPSM:": {
+        "doc": "Allows the discovery of the L2CAP PSM assigned to the service.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpservicerecord/getl2cappsm(_:)"
+      },
+      "-getRFCOMMChannelID:": {
+        "doc": "Allows the discovery of the RFCOMM channel ID assigned to the service.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpservicerecord/getrfcommchannelid(_:)"
+      },
+      "-getSDPServiceRecordRef": {
+        "doc": "Returns an IOBluetoothSDPServiceRecordRef representation of the target IOBluetoothSDPServiceRecord object.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpservicerecord/getref()"
+      },
+      "-getServiceName": {
+        "doc": "Returns the name of the service.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpservicerecord/getservicename()"
+      },
+      "-getServiceRecordHandle:": {
+        "doc": "Allows the discovery of the service record handle assigned to the service.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpservicerecord/gethandle(_:)"
+      },
+      "-hasServiceFromArray:": {
+        "doc": "Returns TRUE if any one of the UUIDs in the given array is found in the target service.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpservicerecord/hasservice(from:)"
+      },
+      "-initWithServiceDictionary:device:": {
+        "doc": "Returns an initialized IOBluetoothSDPServiceRecord * with the attributes specified in the provided service dictionary. Provide a pointer to an IOBlueotothDevice if you wish to associate the record to a specific IOBluetoothDevice.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpservicerecord/init(servicedictionary:device:)"
+      },
+      "-matchesSearchArray:": {
+        "doc": "Returns TRUE any of the UUID arrays in the search array match the target service.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpservicerecord/matchessearch(_:)"
+      },
+      "-matchesUUID16:": {
+        "doc": "Returns TRUE the UUID16 is found in the target service.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpservicerecord/matchesuuid16(_:)"
+      },
+      "-matchesUUIDArray:": {
+        "doc": "Returns TRUE if ALL of the UUIDs in the given array is found in the target service.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpservicerecord/matchesuuidarray(_:)"
+      },
+      "-removeServiceRecord": {
+        "doc": "Removes the service from the local SDP server.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpservicerecord/remove()"
+      }
+    },
+    "IOBluetoothSDPUUID": {
+      "+uuid16:": {
+        "doc": "Creates a new 16-bit IOBluetoothSDPUUID with the given UUID16",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpuuid/uuid16(_:)"
+      },
+      "+uuid32:": {
+        "doc": "Creates a new 32-bit IOBluetoothSDPUUID with the given UUID32",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpuuid/uuid32(_:)"
+      },
+      "+uuidWithBytes:length:": {
+        "doc": "Creates a new IOBluetoothSDPUUID object with the given bytes of the given length.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpuuid/init(bytes:length:)"
+      },
+      "+uuidWithData:": {
+        "doc": "Creates a new IOBluetoothSDPUUID object from the given NSData.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpuuid/init(data:)"
+      },
+      "+withSDPUUIDRef:": {
+        "doc": "Method call to convert an IOBluetoothSDPUUIDRef into an IOBluetoothSDPUUID *.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpuuid/withsdpuuidref:"
+      },
+      "-getSDPUUIDRef": {
+        "doc": "Returns an IOBluetoothSDPUUIDRef representation of the target IOBluetoothSDPUUID object.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpuuid/getsdpuuidref"
+      },
+      "-getUUIDWithLength:": {
+        "doc": "Returns an IOBluetoothSDPUUID object matching the target UUID, but with the given number of bytes.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpuuid/getwithlength(_:)"
+      },
+      "-initWithUUID16:": {
+        "doc": "Initializes a new 16-bit IOBluetoothSDPUUID with the given UUID16",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpuuid/init(uuid16:)-7j3zk"
+      },
+      "-initWithUUID32:": {
+        "doc": "Creates a new 32-bit IOBluetoothSDPUUID with the given UUID32",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpuuid/init(uuid32:)-7qjwq"
+      },
+      "-isEqualToUUID:": {
+        "doc": "Compares the target IOBluetoothSDPUUID object with the given otherUUID object.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpuuid/isequal(to:)"
+      }
+    },
+    "IOBluetoothUserNotification": {
+      "-unregister": {
+        "doc": "Called to unregister the target notification.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothusernotification/unregister()"
+      }
+    },
+    "OBEXFileTransferServices": {
+      "+withOBEXSession:": {
+        "doc": "Create a new OBEXFileTransferServices object",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexfiletransferservices/withobexsession(_:)"
+      },
+      "-abort": {
+        "doc": "Abort the current operation",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexfiletransferservices/abort()"
+      },
+      "-changeCurrentFolderBackward": {
+        "doc": "Change to the directory above the current level if not at the root",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexfiletransferservices/changecurrentfolderbackward()"
+      },
+      "-changeCurrentFolderForwardToPath:": {
+        "doc": "Change the remote path",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexfiletransferservices/changecurrentfolderforward(topath:)"
+      },
+      "-changeCurrentFolderToRoot": {
+        "doc": "Asynchronously change to the remote root directory",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexfiletransferservices/changecurrentfoldertoroot()"
+      },
+      "-connectToFTPService": {
+        "doc": "Connect to a remote device for FTP operations",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexfiletransferservices/connecttoftpservice()"
+      },
+      "-connectToObjectPushService": {
+        "doc": "Connect to a remote device for ObjectPush operations. Most of the FTP functionality of this object will be disabled.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexfiletransferservices/connecttoobjectpushservice()"
+      },
+      "-copyRemoteFile:toLocalPath:": {
+        "doc": "Copy a remote file to a local path",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexfiletransferservices/copyremotefile(_:tolocalpath:)"
+      },
+      "-createFolder:": {
+        "doc": "Create a folder on the remote target",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexfiletransferservices/createfolder(_:)"
+      },
+      "-currentPath": {
+        "doc": "Get the remote current directory path during an FTP session",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexfiletransferservices/currentpath()"
+      },
+      "-disconnect": {
+        "doc": "Disconnect from the remote device",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexfiletransferservices/disconnect()"
+      },
+      "-getDefaultVCard:": {
+        "doc": "Get the remote default VCard, if it is supported",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexfiletransferservices/getdefaultvcard(_:)"
+      },
+      "-initWithOBEXSession:": {
+        "doc": "Create a new OBEXFileTransferServices object",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexfiletransferservices/init(obexsession:)-8xm7d"
+      },
+      "-isBusy": {
+        "doc": "Get the action state of the module",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexfiletransferservices/isbusy()"
+      },
+      "-isConnected": {
+        "doc": "Get the connected state of this module.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexfiletransferservices/isconnected()"
+      },
+      "-removeItem:": {
+        "doc": "Remove a remote item.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexfiletransferservices/removeitem(_:)"
+      },
+      "-retrieveFolderListing": {
+        "doc": "Get a remote directory listing",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexfiletransferservices/retrievefolderlisting()"
+      },
+      "-sendData:type:name:": {
+        "doc": "Send data to a remote target",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexfiletransferservices/send(_:type:name:)"
+      },
+      "-sendFile:": {
+        "doc": "Put a local file to the remote target",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexfiletransferservices/sendfile(_:)"
+      }
+    },
+    "OBEXSession": {
+      "-OBEXAbort:optionalHeadersLength:eventSelector:selectorTarget:refCon:": {
+        "doc": "Send an OBEX Abort command to the session’s target.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/obexabort(_:optionalheaderslength:eventselector:selectortarget:refcon:)"
+      },
+      "-OBEXAbortResponse:optionalHeaders:optionalHeadersLength:eventSelector:selectorTarget:refCon:": {
+        "doc": "Send an abort response to a session’s target.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/obexabortresponse(_:optionalheaders:optionalheaderslength:eventselector:selectortarget:refcon:)"
+      },
+      "-OBEXConnect:maxPacketLength:optionalHeaders:optionalHeadersLength:eventSelector:selectorTarget:refCon:": {
+        "doc": "Initiate an OBEX connection to a device. Causes underlying transport (Bluetooth, et al) to attempt to connect to a remote device. After success, an OBEX connect packet is sent to establish the OBEX Connection.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/obexconnect(_:maxpacketlength:optionalheaders:optionalheaderslength:eventselector:selectortarget:refcon:)"
+      },
+      "-OBEXConnectResponse:flags:maxPacketLength:optionalHeaders:optionalHeadersLength:eventSelector:selectorTarget:refCon:": {
+        "doc": "Send a connect response to a session’s target.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/obexconnectresponse(_:flags:maxpacketlength:optionalheaders:optionalheaderslength:eventselector:selectortarget:refcon:)"
+      },
+      "-OBEXDisconnect:optionalHeadersLength:eventSelector:selectorTarget:refCon:": {
+        "doc": "Send an OBEX Disconnect command to the session’s target. THIS DOES NOT necessarily close the underlying transport connection. Deleting the session will ensure that closure.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/obexdisconnect(_:optionalheaderslength:eventselector:selectortarget:refcon:)"
+      },
+      "-OBEXDisconnectResponse:optionalHeaders:optionalHeadersLength:eventSelector:selectorTarget:refCon:": {
+        "doc": "Send a disconnect response to a session’s target.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/obexdisconnectresponse(_:optionalheaders:optionalheaderslength:eventselector:selectortarget:refcon:)"
+      },
+      "-OBEXGet:headers:headersLength:eventSelector:selectorTarget:refCon:": {
+        "doc": "Send an OBEX Get command to the session’s target.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/obexget(_:headers:headerslength:eventselector:selectortarget:refcon:)"
+      },
+      "-OBEXGetResponse:optionalHeaders:optionalHeadersLength:eventSelector:selectorTarget:refCon:": {
+        "doc": "Send a get response to a session’s target.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/obexgetresponse(_:optionalheaders:optionalheaderslength:eventselector:selectortarget:refcon:)"
+      },
+      "-OBEXPut:headersData:headersDataLength:bodyData:bodyDataLength:eventSelector:selectorTarget:refCon:": {
+        "doc": "Send an OBEX Put command to the session’s target.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/obexput(_:headersdata:headersdatalength:bodydata:bodydatalength:eventselector:selectortarget:refcon:)"
+      },
+      "-OBEXPutResponse:optionalHeaders:optionalHeadersLength:eventSelector:selectorTarget:refCon:": {
+        "doc": "Send a put response to a session’s target.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/obexputresponse(_:optionalheaders:optionalheaderslength:eventselector:selectortarget:refcon:)"
+      },
+      "-OBEXSetPath:constants:optionalHeaders:optionalHeadersLength:eventSelector:selectorTarget:refCon:": {
+        "doc": "Send an OBEX SetPath command to the session’s target.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/obexsetpath(_:constants:optionalheaders:optionalheaderslength:eventselector:selectortarget:refcon:)"
+      },
+      "-OBEXSetPathResponse:optionalHeaders:optionalHeadersLength:eventSelector:selectorTarget:refCon:": {
+        "doc": "Send a set path response to a session’s target.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/obexsetpathresponse(_:optionalheaders:optionalheaderslength:eventselector:selectortarget:refcon:)"
+      },
+      "-clientHandleIncomingData:": {
+        "doc": "Tranport subclasses need to invoke this from their own data-receive handlers. For example, when data is received over a Bluetooth RFCOMM channel in the IOBluetoothOBEXSession, it in turn calls this to dispatch the data. If you do not handle this case, your server session will not work, guaranteed.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/clienthandleincomingdata(_:)"
+      },
+      "-closeTransportConnection": {
+        "doc": "You must override this - it will be called when the transport connection should be shutdown.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/closetransportconnection()"
+      },
+      "-getAvailableCommandPayloadLength:": {
+        "doc": "Determine the maximum amount of data you can send in a particular command as an OBEX client session.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/getavailablecommandpayloadlength(_:)"
+      },
+      "-getAvailableCommandResponsePayloadLength:": {
+        "doc": "Determine the maximum amount of data you can send in a particular command response as an OBEX server session.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/getavailablecommandresponsepayloadlength(_:)"
+      },
+      "-getMaxPacketLength": {
+        "doc": "Gets current max packet length.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/getmaxpacketlength()"
+      },
+      "-hasOpenOBEXConnection": {
+        "doc": "Has a successful connect packet been sent and received? This API tells you so.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/hasopenobexconnection()"
+      },
+      "-hasOpenTransportConnection": {
+        "doc": "You must override this - it will be called periodically to determine if a transport connection is open or not.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/hasopentransportconnection()"
+      },
+      "-openTransportConnection:selectorTarget:refCon:": {
+        "doc": "Opens a transport connection to a device. A Bluetooth connection is one example of a transport.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/opentransportconnection(_:selectortarget:refcon:)"
+      },
+      "-sendDataToTransport:dataLength:": {
+        "doc": "You must override this to send data over your transport. This does nothing by default, it will return a kOBEXUnsupportedError.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/senddata(totransport:datalength:)"
+      },
+      "-serverHandleIncomingData:": {
+        "doc": "Tranport subclasses need to invoke this from their own data-receive handlers. For example, when data is received over a Bluetooth RFCOMM channel in the IOBluetoothOBEXSession, it in turn calls this to dispatch the data. If you do not handle this case, your server session will not work, guaranteed.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/serverhandleincomingdata(_:)"
+      },
+      "-setEventCallback:": {
+        "doc": "Sets the C-API callback used when the session recieves data.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/seteventcallback(_:)"
+      },
+      "-setEventRefCon:": {
+        "doc": "Sets the C-API callback refCon used when the session recieves data.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/seteventrefcon(_:)"
+      },
+      "-setEventSelector:target:refCon:": {
+        "doc": "Allow you to set a selector to be called when events occur on the OBEX session.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/obexsession/seteventselector(_:target:refcon:)"
+      }
+    }
+  },
+  "properties": {
+    "IOBluetoothDevice": {
+      "addressString": {
+        "doc": "Get a string representation of the Bluetooth device address for the target device. The format of the string is the same as returned by IOBluetoothNSStringFromDeviceAddress().",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/addressstring"
+      },
+      "classOfDevice": {
+        "doc": "Gets the full class of device value for the remote device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/classofdevice"
+      },
+      "connectionHandle": {
+        "doc": "Get the connection handle for the baseband connection.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/connectionhandle"
+      },
+      "deviceClassMajor": {
+        "doc": "Get the major device class of the device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/deviceclassmajor"
+      },
+      "deviceClassMinor": {
+        "doc": "Get the minor service class of the device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/deviceclassminor"
+      },
+      "lastNameUpdate": {
+        "doc": "Get the date/time of the last successful remote name request.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/lastnameupdate"
+      },
+      "name": {
+        "doc": "Get the human readable name of the remote device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/name"
+      },
+      "nameOrAddress": {
+        "doc": "Get the human readable name of the remote device. If the name is not present, it will return a string containing the device’s address.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/nameoraddress"
+      },
+      "serviceClassMajor": {
+        "doc": "Get the major service class of the device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/serviceclassmajor"
+      },
+      "services": {
+        "doc": "Gets an array of service records for the device.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdevice/services"
+      }
+    },
+    "IOBluetoothDeviceInquiry": {
+      "inquiryLength": {
+        "doc": "Set the length of the inquiry that is performed each time -start is used on an inquiry object.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdeviceinquiry/inquirylength"
+      },
+      "searchType": {
+        "doc": "Set the devices that are found.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdeviceinquiry/searchtype"
+      },
+      "updateNewDeviceNames": {
+        "doc": "Sets whether or not the inquiry object will retrieve the names of devices found during the search.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothdeviceinquiry/updatenewdevicenames"
+      }
+    },
+    "IOBluetoothHandsFree": {
+      "SMSEnabled": {
+        "doc": "Return YES if the device has SMS enabled.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree/issmsenabled"
+      },
+      "SMSMode": {
+        "doc": "Return the device’s SMS mode.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree/smsmode"
+      },
+      "delegate": {
+        "doc": "Return the delegate",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree/delegate"
+      },
+      "device": {
+        "doc": "Return the IOBluetoothDevice.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree/device"
+      },
+      "deviceCallHoldModes": {
+        "doc": "Return the device’s supported call hold modes.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree/devicecallholdmodes"
+      },
+      "deviceSupportedFeatures": {
+        "doc": "Return the device’s supported features.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree/devicesupportedfeatures"
+      },
+      "deviceSupportedSMSServices": {
+        "doc": "Return the device’s supported SMS services.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree/devicesupportedsmsservices"
+      },
+      "inputMuted": {
+        "doc": "Return the input mute state.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree/isinputmuted"
+      },
+      "inputVolume": {
+        "doc": "Return the input volume",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree/inputvolume"
+      },
+      "outputMuted": {
+        "doc": "Return the output mute state.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree/isoutputmuted"
+      },
+      "outputVolume": {
+        "doc": "Return the output volume",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree/outputvolume"
+      },
+      "supportedFeatures": {
+        "doc": "Set the supported features",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhandsfree/supportedfeatures"
+      }
+    },
+    "IOBluetoothHostController": {
+      "powerState": {
+        "doc": "Gets the controller power state",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothhostcontroller/powerstate"
+      }
+    },
+    "IOBluetoothL2CAPChannel": {
+      "PSM": {
+        "doc": "Returns the PSM for the target L2CAP channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/psm"
+      },
+      "device": {
+        "doc": "Returns the IOBluetoothDevice to which the target L2CAP channel is open.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/device"
+      },
+      "incomingMTU": {
+        "doc": "Returns the current incoming MTU for the L2CAP channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/incomingmtu"
+      },
+      "localChannelID": {
+        "doc": "Returns the local L2CAP channel ID for the target L2CAP channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/localchannelid"
+      },
+      "objectID": {
+        "doc": "Returns the IOBluetoothObjectID of the given IOBluetoothL2CAPChannel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/objectid"
+      },
+      "outgoingMTU": {
+        "doc": "Returns the current outgoing MTU for the L2CAP channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/outgoingmtu"
+      },
+      "remoteChannelID": {
+        "doc": "Returns the remote L2CAP channel ID for the target L2CAP channel.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothl2capchannel/remotechannelid"
+      }
+    },
+    "IOBluetoothSDPServiceRecord": {
+      "attributes": {
+        "doc": "Returns an NSDictionary containing the attributes for the service.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpservicerecord/attributes"
+      },
+      "device": {
+        "doc": "Returns the IOBluetoothDevice that the target service belongs to.",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpservicerecord/device"
+      },
+      "sortedAttributes": {
+        "doc": "Returns a sorted array of SDP attributes",
+        "url": "https://developer.apple.com/documentation/iobluetooth/iobluetoothsdpservicerecord/sortedattributes-swift.property"
+      }
+    }
+  }
+}

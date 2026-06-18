@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "framework": "ScreenSaver",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "ScreenSaverDefaults": {
+      "doc": "A class that defines a set of methods for saving and restoring user defaults for screen savers.",
+      "url": "https://developer.apple.com/documentation/screensaver/screensaverdefaults"
+    },
+    "ScreenSaverView": {
+      "doc": "An abstract class that defines the interface for subclassers to interact with the screen saver infrastructure.",
+      "url": "https://developer.apple.com/documentation/screensaver/screensaverview"
+    }
+  },
+  "methods": {
+    "ScreenSaverDefaults": {
+      "+defaultsForModuleWithName:": {
+        "doc": "Returns a screen saver defaults instance that reads and writes defaults for the specified module.",
+        "url": "https://developer.apple.com/documentation/screensaver/screensaverdefaults/init(formodulewithname:)"
+      }
+    },
+    "ScreenSaverView": {
+      "+backingStoreType": {
+        "doc": "Returns the type of backing store you want for your screen saver’s window.",
+        "url": "https://developer.apple.com/documentation/screensaver/screensaverview/backingstoretype()"
+      },
+      "+performGammaFade": {
+        "doc": "Indicates whether to perform a gradual screen fade when the system starts and stops your screen saver’s animation.",
+        "url": "https://developer.apple.com/documentation/screensaver/screensaverview/performgammafade()"
+      },
+      "-animateOneFrame": {
+        "doc": "Advances the screen saver’s animation by a single frame.",
+        "url": "https://developer.apple.com/documentation/screensaver/screensaverview/animateoneframe()"
+      },
+      "-drawRect:": {
+        "doc": "Draws the screen saver view.",
+        "url": "https://developer.apple.com/documentation/screensaver/screensaverview/draw(_:)"
+      },
+      "-initWithFrame:isPreview:": {
+        "doc": "Creates a newly allocated screen saver view with the specified frame rectangle and preview information.",
+        "url": "https://developer.apple.com/documentation/screensaver/screensaverview/init(frame:ispreview:)"
+      },
+      "-startAnimation": {
+        "doc": "Activates the periodic timer that animates the screen saver.",
+        "url": "https://developer.apple.com/documentation/screensaver/screensaverview/startanimation()"
+      },
+      "-stopAnimation": {
+        "doc": "Deactivates the timer that advances the animation.",
+        "url": "https://developer.apple.com/documentation/screensaver/screensaverview/stopanimation()"
+      }
+    }
+  },
+  "properties": {
+    "ScreenSaverView": {
+      "animating": {
+        "doc": "A Boolean value that indicates whether the screen saver is animating.",
+        "url": "https://developer.apple.com/documentation/screensaver/screensaverview/isanimating"
+      },
+      "animationTimeInterval": {
+        "doc": "The time interval between animation frames.",
+        "url": "https://developer.apple.com/documentation/screensaver/screensaverview/animationtimeinterval"
+      },
+      "configureSheet": {
+        "doc": "The window that contains the controls to configure the screen saver.",
+        "url": "https://developer.apple.com/documentation/screensaver/screensaverview/configuresheet"
+      },
+      "hasConfigureSheet": {
+        "doc": "A Boolean value that indicates whether the screen saver has an associated configuration sheet.",
+        "url": "https://developer.apple.com/documentation/screensaver/screensaverview/hasconfiguresheet"
+      },
+      "preview": {
+        "doc": "A Boolean value that indicates whether the screen saver view is set to a size suitable for previewing its content.",
+        "url": "https://developer.apple.com/documentation/screensaver/screensaverview/ispreview"
+      }
+    }
+  }
+}

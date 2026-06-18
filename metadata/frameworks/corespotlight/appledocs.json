@@ -1,0 +1,1267 @@
+{
+  "schema_version": 1,
+  "framework": "CoreSpotlight",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "CSCustomAttributeKey": {
+      "doc": "A key associated with a custom attribute for a searchable item.",
+      "url": "https://developer.apple.com/documentation/corespotlight/cscustomattributekey"
+    },
+    "CSImportExtension": {
+      "doc": "An object that provides searchable attributes for file types that the app supports.",
+      "url": "https://developer.apple.com/documentation/corespotlight/csimportextension"
+    },
+    "CSIndexExtensionRequestHandler": {
+      "doc": "An interface that implements an index-maintenance app extension.",
+      "url": "https://developer.apple.com/documentation/corespotlight/csindexextensionrequesthandler"
+    },
+    "CSLocalizedString": {
+      "doc": "An object that displays localized text in search results related to your app.",
+      "url": "https://developer.apple.com/documentation/corespotlight/cslocalizedstring"
+    },
+    "CSPerson": {
+      "doc": "An object that represents a person in the context of search results.",
+      "url": "https://developer.apple.com/documentation/corespotlight/csperson"
+    },
+    "CSSearchQuery": {
+      "doc": "A type you use to programmatically search the indexed app content.",
+      "url": "https://developer.apple.com/documentation/corespotlight/cssearchquery"
+    },
+    "CSSearchQueryContext": {
+      "doc": "The behavior configuration to use for a search query.",
+      "url": "https://developer.apple.com/documentation/corespotlight/cssearchquerycontext"
+    },
+    "CSSearchableIndex": {
+      "doc": "An on-device index for your app’s searchable content.",
+      "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindex"
+    },
+    "CSSearchableItem": {
+      "doc": "The details of your app-specific content that someone might search for on their devices.",
+      "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem"
+    },
+    "CSSearchableItemAttributeSet": {
+      "doc": "The detailed metadata for a searchable item.",
+      "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset"
+    },
+    "CSSuggestion": {
+      "doc": "The kind of suggestion to use in a query.",
+      "url": "https://developer.apple.com/documentation/corespotlight/cssuggestion"
+    },
+    "CSUserQuery": {
+      "doc": "A type you use to initiate searches from your interface and offer suggested text completions.",
+      "url": "https://developer.apple.com/documentation/corespotlight/csuserquery"
+    },
+    "CSUserQueryContext": {
+      "doc": "The configuration details to apply to a user query.",
+      "url": "https://developer.apple.com/documentation/corespotlight/csuserquerycontext"
+    }
+  },
+  "protocols": {
+    "CSSearchableIndexDelegate": {
+      "doc": "A protocol that defines methods a delegate object or app extension uses to handle communication from the on-device index.",
+      "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindexdelegate"
+    }
+  },
+  "enums": {
+    "CSIndexErrorCode": {
+      "doc": "Error codes that describe indexing-specific errors.",
+      "url": "https://developer.apple.com/documentation/corespotlight/csindexerrorcode"
+    },
+    "CSSearchQueryErrorCode": {
+      "doc": "Error codes that describe reasons a query might fail.",
+      "url": "https://developer.apple.com/documentation/corespotlight/cssearchqueryerrorcode"
+    },
+    "CSSearchQuerySourceOptions": {
+      "doc": "The query source options to allow or deny Mail messages in the search.",
+      "url": "https://developer.apple.com/documentation/corespotlight/cssearchquerysourceoptions",
+      "members": {
+        "CSSearchQuerySourceOptionDefault": {
+          "doc": "The query uses the default search option that excludes Mail messages.",
+          "url": "https://developer.apple.com/documentation/corespotlight/cssearchquerysourceoptions/cssearchquerysourceoptiondefault"
+        }
+      }
+    },
+    "CSSuggestionKind": {
+      "doc": "The suggestion type that determines how the system handles a suggestion.",
+      "url": "https://developer.apple.com/documentation/corespotlight/cssuggestionkind"
+    }
+  },
+  "methods": {
+    "CSCustomAttributeKey": {
+      "-initWithKeyName:": {
+        "doc": "Returns a new custom attribute key with the specified name.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cscustomattributekey/init(keyname:)"
+      },
+      "-initWithKeyName:searchable:searchableByDefault:unique:multiValued:": {
+        "doc": "Returns a new custom attribute key with the specified name and properties.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cscustomattributekey/init(keyname:searchable:searchablebydefault:unique:multivalued:)"
+      }
+    },
+    "CSImportExtension": {
+      "-updateAttributes:forFileAtURL:error:": {
+        "doc": "Provides searchable attributes for a file at the specified URL.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csimportextension/update(_:forfileat:)"
+      }
+    },
+    "CSLocalizedString": {
+      "-initWithLocalizedStrings:": {
+        "doc": "Initializes a CSLocalizedString object with the specified dictionary of localized strings.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cslocalizedstring/init(localizedstrings:)"
+      },
+      "-localizedString": {
+        "doc": "Returns the localized string for the current language.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cslocalizedstring/localizedstring()"
+      }
+    },
+    "CSPerson": {
+      "-initWithDisplayName:handles:handleIdentifier:": {
+        "doc": "Returns a new CSPerson object initialized with the specified display name and contact attributes.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csperson/init(displayname:handles:handleidentifier:)"
+      }
+    },
+    "CSSearchQuery": {
+      "-cancel": {
+        "doc": "Cancels the current query operation.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchquery/cancel()"
+      },
+      "-initWithQueryString:attributes:": {
+        "doc": "Initializes and returns a query object with the specified query string and item attributes.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchquery/init(querystring:attributes:)"
+      },
+      "-initWithQueryString:queryContext:": {
+        "doc": "Initializes and returns a query object with the specified query string and query context.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchquery/init(querystring:querycontext:)"
+      },
+      "-start": {
+        "doc": "Starts searching the index for items that match the current query string and parameters.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchquery/start()"
+      }
+    },
+    "CSSearchableIndex": {
+      "+defaultSearchableIndex": {
+        "doc": "Returns the default on-device index.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindex/default()"
+      },
+      "+isIndexingAvailable": {
+        "doc": "Returns a Boolean value that indicates whether indexing is available on the current device.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindex/isindexingavailable()"
+      },
+      "-beginIndexBatch": {
+        "doc": "Begins a batch of updates to an index.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindex/beginbatch()"
+      },
+      "-deleteAllSearchableItemsWithCompletionHandler:": {
+        "doc": "Deletes all searchable items from the index.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindex/deleteallsearchableitems(completionhandler:)"
+      },
+      "-deleteSearchableItemsWithDomainIdentifiers:completionHandler:": {
+        "doc": "Removes from the index all searchable items associated with the specified domain.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindex/deletesearchableitems(withdomainidentifiers:completionhandler:)"
+      },
+      "-deleteSearchableItemsWithIdentifiers:completionHandler:": {
+        "doc": "Removes from the index all items with the specified identifiers.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindex/deletesearchableitems(withidentifiers:completionhandler:)"
+      },
+      "-endIndexBatchWithClientState:completionHandler:": {
+        "doc": "Ends a batch of index updates and stores the specified state information.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindex/endbatch(withclientstate:completionhandler:)"
+      },
+      "-endIndexBatchWithExpectedClientState:newClientState:completionHandler:": {
+        "doc": "Ends a batch of index updates and stores the specified state information.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindex/endindexbatch(expectedclientstate:newclientstate:completionhandler:)"
+      },
+      "-fetchDataForBundleIdentifier:itemIdentifier:contentType:completionHandler:": {
+        "doc": "Fetches data from an external provider.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindex/fetchdata(forbundleidentifier:itemidentifier:contenttype:completionhandler:)"
+      },
+      "-fetchLastClientStateWithCompletionHandler:": {
+        "doc": "Fetches the app’s most recent client state information asynchronously.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindex/fetchlastclientstate(completionhandler:)"
+      },
+      "-indexSearchableItems:completionHandler:": {
+        "doc": "Adds or updates items in the index.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindex/indexsearchableitems(_:completionhandler:)"
+      },
+      "-initWithName:": {
+        "doc": "Returns an on-device index with the specified name.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindex/init(name:)"
+      },
+      "-initWithName:protectionClass:": {
+        "doc": "Returns an on-device index with the specified name and data protection class.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindex/init(name:protectionclass:)"
+      }
+    },
+    "CSSearchableItem": {
+      "-compareByRank:": {
+        "doc": "Compares two items by rank and returns the result.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/compare(byrank:)"
+      },
+      "-initWithUniqueIdentifier:domainIdentifier:attributeSet:": {
+        "doc": "Returns a searchable item associated with the specified identifier, domain identifier, and attribute set.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/init(uniqueidentifier:domainidentifier:attributeset:)"
+      }
+    },
+    "CSSearchableItemAttributeSet": {
+      "-initWithContentType:": {
+        "doc": "Creates an attribute set for the specified content type.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/init(contenttype:)"
+      },
+      "-initWithItemContentType:": {
+        "doc": "Creates an attribute set for the specified content type.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/init(itemcontenttype:)"
+      },
+      "-setValue:forCustomKey:": {
+        "doc": "Sets the value for a custom attribute key.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/setvalue(_:forcustomkey:)"
+      },
+      "-valueForCustomKey:": {
+        "doc": "Returns the value associated with the specified custom attribute key.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/value(forcustomkey:)"
+      }
+    },
+    "CSSuggestion": {
+      "-compare:": {
+        "doc": "Compares the suggestion with a second specified suggestion.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssuggestion/compare(_:)"
+      }
+    },
+    "CSUserQuery": {
+      "+prepare": {
+        "doc": "Performs one-time tasks that prepare Spotlight to search for content in all search indexes.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquery/prepare()"
+      },
+      "+prepareProtectionClasses:": {
+        "doc": "Performs one-time tasks that prepare Spotlight to search for content in one or more protected search indexes.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquery/prepareprotectionclasses(_:)"
+      },
+      "-cancel": {
+        "doc": "Cancels the current query operation.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquery/cancel()"
+      },
+      "-initWithUserQueryString:userQueryContext:": {
+        "doc": "Creates a new user query that searches for the specified term.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquery/init(userquerystring:userquerycontext:)"
+      },
+      "-start": {
+        "doc": "Starts searching the index for items that match the current query string and parameters.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquery/start()"
+      }
+    },
+    "CSUserQueryContext": {
+      "+userQueryContext": {
+        "doc": "Returns the current behavior configuration for the user query.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquerycontext/userquerycontext"
+      },
+      "+userQueryContextWithCurrentSuggestion:": {
+        "doc": "Creates a new query context object with an optional suggested search string.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquerycontext/init(currentsuggestion:)"
+      }
+    }
+  },
+  "properties": {
+    "CSCustomAttributeKey": {
+      "keyName": {
+        "doc": "The name of the custom attribute key.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cscustomattributekey/keyname"
+      },
+      "multiValued": {
+        "doc": "A Boolean value that indicates if the custom attribute is likely to have multiple values, such as arrays, associated with it.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cscustomattributekey/ismultivalued"
+      },
+      "searchable": {
+        "doc": "A Boolean value that indicates if the custom attribute can be specified as a search term.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cscustomattributekey/issearchable"
+      },
+      "searchableByDefault": {
+        "doc": "A Boolean value that indicates if the custom attribute should be searchable by default.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cscustomattributekey/issearchablebydefault"
+      },
+      "unique": {
+        "doc": "A Boolean value that indicates if duplicate custom attribute values should be treated as the same value to save storage space.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cscustomattributekey/isunique"
+      }
+    },
+    "CSPerson": {
+      "contactIdentifier": {
+        "doc": "The identifier for the contact associated with the person.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csperson/contactidentifier"
+      },
+      "displayName": {
+        "doc": "A display name for the person.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csperson/displayname"
+      },
+      "handleIdentifier": {
+        "doc": "A key that identifies the type of contact property represented by the person object’s handle.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csperson/handleidentifier"
+      },
+      "handles": {
+        "doc": "An array of contact handles related to the person.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csperson/handles"
+      }
+    },
+    "CSSearchQuery": {
+      "CSSearchQuery.Results": {
+        "doc": "An asynchronous sequence that contains the results that match the query string.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchquery/results-swift.struct"
+      },
+      "cancelled": {
+        "doc": "A Boolean value that indicates whether the current query is no longer running.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchquery/iscancelled"
+      },
+      "completionHandler": {
+        "doc": "The block to execute when the query finishes delivering all results.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchquery/completionhandler"
+      },
+      "foundItemCount": {
+        "doc": "The number of matching items found for the given query string.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchquery/founditemcount"
+      },
+      "foundItemsHandler": {
+        "doc": "The block to execute when the query delivers a new batch of matching items.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchquery/founditemshandler"
+      },
+      "protectionClasses": {
+        "doc": "The protection types of the indexes you want to search.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchquery/protectionclasses"
+      },
+      "results": {
+        "doc": "The results that match the current query string.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchquery/results-swift.property"
+      }
+    },
+    "CSSearchQueryContext": {
+      "CSSearchQuerySourceOptions": {
+        "doc": "The query source options to allow or deny Mail messages in the search.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchquerycontext/sourceoptions-swift.struct"
+      },
+      "fetchAttributes": {
+        "doc": "The attributes the system fetches for the searchable items.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchquerycontext/fetchattributes"
+      },
+      "filterQueries": {
+        "doc": "The query string used to filter the results.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchquerycontext/filterqueries"
+      },
+      "keyboardLanguage": {
+        "doc": "The language used for the query.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchquerycontext/keyboardlanguage"
+      },
+      "sourceOptions": {
+        "doc": "The query source options to allow or deny Mail messages in the search.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchquerycontext/sourceoptions-swift.property"
+      }
+    },
+    "CSSearchableIndex": {
+      "deleteAppEntities(identifiedBy:ofType:)": {
+        "doc": "Deletes entities with the specified identifiers and type from the current index.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindex/deleteappentities(identifiedby:oftype:)"
+      },
+      "deleteAppEntities(ofType:)": {
+        "doc": "Deletes all app entities of the specified type from the current index.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindex/deleteappentities(oftype:)"
+      },
+      "indexAppEntities(_:priority:)": {
+        "doc": "Indexes one or more app entities and assigns an optional priority to them.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindex/indexappentities(_:priority:)"
+      },
+      "indexDelegate": {
+        "doc": "The delegate object that can handle index-management tasks.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableindex/indexdelegate"
+      }
+    },
+    "CSSearchableItem": {
+      "CSSearchableItemUpdateListenerOptions": {
+        "doc": "The options to generate summarization or prioritization information for a searchable item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/updatelisteneroptions-swift.struct"
+      },
+      "associateAppEntity(_:priority:)": {
+        "doc": "Associates an app entity with this searchable item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/associateappentity(_:priority:)-736lx"
+      },
+      "attributeSet": {
+        "doc": "The set of attributes that contain metadata associated with the item in a CSSearchableItemAttributeSet object.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/attributeset"
+      },
+      "domainIdentifier": {
+        "doc": "An optional identifier that represents the domain or owner of the item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/domainidentifier"
+      },
+      "expirationDate": {
+        "doc": "The date after which the searchable item should no longer exist.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/expirationdate"
+      },
+      "init(appEntity:)": {
+        "doc": "Initializes a new searchable item with the relevant fields populated from the provided app entity. Resolves deferred properties before indexing.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/init(appentity:)-3hv5"
+      },
+      "init(appEntity:priority:)": {
+        "doc": "Initializes a new searchable item with the relevant fields populated from the provided app entity. Resolves deferred properties before indexing.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/init(appentity:priority:)-7xlow"
+      },
+      "isUpdate": {
+        "doc": "A Boolean value that indicates whether to treat the item as an update instead of a new item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/isupdate"
+      },
+      "relatedAppEntityIdentifier": {
+        "doc": "The identifier of the related indexed entity for this searchable item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/relatedappentityidentifier"
+      },
+      "uniqueIdentifier": {
+        "doc": "The value that uniquely identifies the searchable item within your app.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/uniqueidentifier"
+      },
+      "updateListenerOptions": {
+        "doc": "The types of notifications to request from Spotlight.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitem/updatelisteneroptions-swift.property"
+      }
+    },
+    "CSSearchableItemAttributeSet": {
+      "EXIFGPSVersion": {
+        "doc": "The version of GPS Info IFD header that was used to generate the metadata for the image.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/exifgpsversion"
+      },
+      "EXIFVersion": {
+        "doc": "The version of the EXIF header that was used to generate the metadata for the image.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/exifversion"
+      },
+      "GPSAreaInformation": {
+        "doc": "Information about the GPS area.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/gpsareainformation"
+      },
+      "GPSDOP": {
+        "doc": "The GPS dilution of precision value.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/gpsdop"
+      },
+      "GPSDateStamp": {
+        "doc": "The date and time related to the GPS value.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/gpsdatestamp"
+      },
+      "GPSDestBearing": {
+        "doc": "The bearing to the destination point.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/gpsdestbearing"
+      },
+      "GPSDestDistance": {
+        "doc": "The distance to the destination point.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/gpsdestdistance"
+      },
+      "GPSDestLatitude": {
+        "doc": "The latitude of the destination point.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/gpsdestlatitude"
+      },
+      "GPSDestLongitude": {
+        "doc": "The longitude of the destination point.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/gpsdestlongitude"
+      },
+      "GPSDifferental": {
+        "doc": "The differential correction applied to the GPS receiver.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/gpsdifferental"
+      },
+      "GPSMapDatum": {
+        "doc": "The geodetic data that the GPS receiver uses.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/gpsmapdatum"
+      },
+      "GPSMeasureMode": {
+        "doc": "The measurement precision mode in use by the GPS receiver.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/gpsmeasuremode"
+      },
+      "GPSProcessingMethod": {
+        "doc": "The location finding method that the GPS receiver uses.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/gpsprocessingmethod"
+      },
+      "GPSStatus": {
+        "doc": "The status of the GPS receiver.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/gpsstatus"
+      },
+      "GPSTrack": {
+        "doc": "The direction of travel of the item in degrees from true north.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/gpstrack"
+      },
+      "HTMLContentData": {
+        "doc": "The HTML content of the document encoded as an NSData object representing a UTF-8 encoded string.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/htmlcontentdata"
+      },
+      "ISOSpeed": {
+        "doc": "The ISO speed setting at the time the camera captured the image.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/isospeed"
+      },
+      "URL": {
+        "doc": "The URL associated with the media.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/url"
+      },
+      "accountHandles": {
+        "doc": "An array of the canonical handles for the account with which the message is associated.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/accounthandles"
+      },
+      "accountIdentifier": {
+        "doc": "The unique identifier for the account with which the message is associated, if any.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/accountidentifier"
+      },
+      "acquisitionMake": {
+        "doc": "The manufacturer of the device that captured the image.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/acquisitionmake"
+      },
+      "acquisitionModel": {
+        "doc": "The model of the device that captured the image.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/acquisitionmodel"
+      },
+      "actionIdentifiers": {
+        "doc": "The identifiers that specify custom actions the app supports for the item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/actionidentifiers"
+      },
+      "addedDate": {
+        "doc": "The date on which the item was moved into its current location.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/addeddate"
+      },
+      "additionalRecipients": {
+        "doc": "An array of CSPerson objects representing the content of the Cc: field in an email message.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/additionalrecipients"
+      },
+      "album": {
+        "doc": "The title for a collection of audio media.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/album"
+      },
+      "allDay": {
+        "doc": "A value that indicates if the event covers an entire day.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/allday"
+      },
+      "alternateNames": {
+        "doc": "An array of localized strings that represent alternate display names for the item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/alternatenames"
+      },
+      "altitude": {
+        "doc": "The altitude of the item in meters above sea level, expressed using the WGS84 datum.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/altitude"
+      },
+      "aperture": {
+        "doc": "The size of the lens aperture at the time the camera captured the image, as a log-scale APEX value.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/aperture"
+      },
+      "artist": {
+        "doc": "The artist associated with the media.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/artist"
+      },
+      "associateAppEntity(_:priority:)": {
+        "doc": "Associates the specified app entity with this attribute set.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/associateappentity(_:priority:)"
+      },
+      "audiences": {
+        "doc": "A class of entity for which the item is intended or useful.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/audiences"
+      },
+      "audioBitRate": {
+        "doc": "The audio bit rate of the media.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/audiobitrate"
+      },
+      "audioChannelCount": {
+        "doc": "The number of channels in the audio data that the file contains.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/audiochannelcount"
+      },
+      "audioEncodingApplication": {
+        "doc": "The name of the application that encoded the data the audio file contains.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/audioencodingapplication"
+      },
+      "audioSampleRate": {
+        "doc": "The sample rate of the audio data the file contains, as a float value representing Hz (audio frames per second), such as 44100.0 or 22254.54.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/audiosamplerate"
+      },
+      "audioTrackNumber": {
+        "doc": "The track number of a song or audio composition when part of an album.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/audiotracknumber"
+      },
+      "authorAddresses": {
+        "doc": "An array of addresses associated with the author of the message.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/authoraddresses"
+      },
+      "authorEmailAddresses": {
+        "doc": "An array of email addresses associated with the author of the message.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/authoremailaddresses"
+      },
+      "authorNames": {
+        "doc": "An array of names representing the authors who have worked on the message.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/authornames"
+      },
+      "authors": {
+        "doc": "An array of CSPerson objects representing the content of the From: field in an item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/authors"
+      },
+      "bitsPerSample": {
+        "doc": "The number of bits per sample.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/bitspersample"
+      },
+      "cameraOwner": {
+        "doc": "The owner of the camera that captured the image.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/cameraowner"
+      },
+      "city": {
+        "doc": "The city of the item’s origin according to guidelines that the provider establishes.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/city"
+      },
+      "codecs": {
+        "doc": "The codecs used to encode/decode the media.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/codecs"
+      },
+      "colorSpace": {
+        "doc": "The color space model the image uses, such as RGB, CMYK, YUV, or YCbCr.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/colorspace"
+      },
+      "comment": {
+        "doc": "A comment related to the media file.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/comment"
+      },
+      "completionDate": {
+        "doc": "The date on which the item was completed.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/completiondate"
+      },
+      "composer": {
+        "doc": "The composer of the song or audio composition that the audio file contains.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/composer"
+      },
+      "contactKeywords": {
+        "doc": "A list of contacts who are associated with the content in some way, not including the author.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/contactkeywords"
+      },
+      "containerDisplayName": {
+        "doc": "A localized string that specifies the name of a container to which the item belongs, suitable to display in the user interface.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/containerdisplayname"
+      },
+      "containerIdentifier": {
+        "doc": "The identifier of the container to which the item belongs.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/containeridentifier"
+      },
+      "containerOrder": {
+        "doc": "The order of the item within the container.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/containerorder"
+      },
+      "containerTitle": {
+        "doc": "The title of the container to which the item belongs.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/containertitle"
+      },
+      "contentCreationDate": {
+        "doc": "The creation date of an edited or optimized version of the song or composition.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/contentcreationdate"
+      },
+      "contentDescription": {
+        "doc": "A description of the item’s content.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/contentdescription"
+      },
+      "contentModificationDate": {
+        "doc": "The date on which the contents of the file was last modified.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/contentmodificationdate"
+      },
+      "contentRating": {
+        "doc": "A value that indicates if the media contains explicit content.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/contentrating"
+      },
+      "contentSources": {
+        "doc": "An array of sources from which the media was obtained.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/contentsources"
+      },
+      "contentType": {
+        "doc": "The uniform type identifier (UTI) of the item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/contenttype"
+      },
+      "contentTypeTree": {
+        "doc": "An attribute type that identifies a custom hierarchy of types to describe the attributes of your item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/contenttypetree"
+      },
+      "contentURL": {
+        "doc": "The file URL of the content to index.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/contenturl"
+      },
+      "contributors": {
+        "doc": "A list of people, organizations, or services that made contributions to the media content.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/contributors"
+      },
+      "copyright": {
+        "doc": "The copyright date of the content.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/copyright"
+      },
+      "country": {
+        "doc": "The full, publishable name of the country or region in which the intellectual property of the item was created, according to guidelines the provider establishes.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/country"
+      },
+      "coverage": {
+        "doc": "A list of descriptors that specify the extent or scope of the media.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/coverage"
+      },
+      "creator": {
+        "doc": "The name of the app that created the content.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/creator"
+      },
+      "darkThumbnailURL": {
+        "doc": "The local file URL of the thumbnail image for the item when Dark Mode is active.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/darkthumbnailurl"
+      },
+      "deliveryType": {
+        "doc": "The delivery type of the file.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/deliverytype"
+      },
+      "director": {
+        "doc": "The name of the director of the media (for example, a movie director).",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/director"
+      },
+      "displayName": {
+        "doc": "A localized string that contains the name of the item, suitable to display in the user interface.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/displayname"
+      },
+      "domainIdentifier": {
+        "doc": "An identifier that represents the domain or owner of the item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/domainidentifier"
+      },
+      "downloadedDate": {
+        "doc": "The most recent date on which the file was downloaded or received.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/downloadeddate"
+      },
+      "dueDate": {
+        "doc": "The date on which the item is due.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/duedate"
+      },
+      "duration": {
+        "doc": "The duration (if appropriate) of the content of the file, in seconds.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/duration"
+      },
+      "editors": {
+        "doc": "A list of editors who have worked on the file.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/editors"
+      },
+      "emailAddresses": {
+        "doc": "An array of email addresses associated with the message.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/emailaddresses"
+      },
+      "emailHeaders": {
+        "doc": "A dictionary that contains all the headers of the message.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/emailheaders"
+      },
+      "encodingApplications": {
+        "doc": "The name of the apps that converted the original content into a PDF stream.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/encodingapplications"
+      },
+      "endDate": {
+        "doc": "The end date for the item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/enddate"
+      },
+      "exposureMode": {
+        "doc": "The mode the camera used for the exposure of the image.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/exposuremode"
+      },
+      "exposureProgram": {
+        "doc": "The class of the program the camera used to set exposure when capturing the image.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/exposureprogram"
+      },
+      "exposureTime": {
+        "doc": "The time that the lens was open during exposure, in seconds.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/exposuretime"
+      },
+      "exposureTimeString": {
+        "doc": "The time that the lens was open during exposure, in a string, such as “1/250 seconds”.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/exposuretimestring"
+      },
+      "fNumber": {
+        "doc": "The focal length of the lens, divided by the diameter of the aperture when the camera captured the image.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/fnumber"
+      },
+      "fileSize": {
+        "doc": "The size of the document file.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/filesize"
+      },
+      "flashOn": {
+        "doc": "A value that indicates if the camera used a flash to capture the image.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/flashon"
+      },
+      "focalLength": {
+        "doc": "The actual focal length of the lens, in millimeters.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/focallength"
+      },
+      "focalLength35mm": {
+        "doc": "A value that indicates if the focal length is 35mm.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/focallength35mm"
+      },
+      "fontNames": {
+        "doc": "An array of font names the document uses.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/fontnames"
+      },
+      "fullyFormattedAddress": {
+        "doc": "The fully formatted address of the item, received from MapKit.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/fullyformattedaddress"
+      },
+      "generalMIDISequence": {
+        "doc": "A value that indicates whether the MIDI sequence the file contains is set up for use with a general MIDI device.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/generalmidisequence"
+      },
+      "genre": {
+        "doc": "The genre of the media.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/genre"
+      },
+      "hasAlphaChannel": {
+        "doc": "Indicates if the image file has an alpha channel.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/hasalphachannel"
+      },
+      "headline": {
+        "doc": "A publishable string that provides a synopsis of the contents of the item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/headline"
+      },
+      "hiddenAdditionalRecipients": {
+        "doc": "An array of CSPerson objects representing the content of the Bcc: field in an email message.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/hiddenadditionalrecipients"
+      },
+      "identifier": {
+        "doc": "A formal identifier that references the document the item represents.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/identifier"
+      },
+      "imageDirection": {
+        "doc": "The direction of the item’s image in degrees from true north.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/imagedirection"
+      },
+      "importantDates": {
+        "doc": "An array of important dates associated with the item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/importantdates"
+      },
+      "information": {
+        "doc": "Information about the media.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/information"
+      },
+      "instantMessageAddresses": {
+        "doc": "An array of instant message addresses for the message.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/instantmessageaddresses"
+      },
+      "instructions": {
+        "doc": "Instructions that concern the use of the item, such as an embargo or warning.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/instructions"
+      },
+      "isPriority": {
+        "doc": "A Boolean value that indicates whether the mail or messages content represents a prioritized item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/ispriority"
+      },
+      "keySignature": {
+        "doc": "The musical key of the song or audio composition that the file contains, such as C, Dm, or F#m.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/keysignature"
+      },
+      "keywords": {
+        "doc": "An array of keywords associated with the item, such as work, birthday, important, and so on.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/keywords"
+      },
+      "kind": {
+        "doc": "A description of the kind of document the item represents.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/kind"
+      },
+      "languages": {
+        "doc": "A list of the included languages for the intellectual content of the media.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/languages"
+      },
+      "lastUsedDate": {
+        "doc": "The date on which the file was last used.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/lastuseddate"
+      },
+      "latitude": {
+        "doc": "The latitude of the item, in degrees north of the equator, expressed using the WGS84 datum.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/latitude"
+      },
+      "layerNames": {
+        "doc": "An array that contains the names of the various layers in the file.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/layernames"
+      },
+      "lensModel": {
+        "doc": "The model of the lens that captured the image.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/lensmodel"
+      },
+      "likelyJunk": {
+        "doc": "A value that indicates if the message is likely to be considered junk.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/likelyjunk"
+      },
+      "local": {
+        "doc": "A value that indicates if the media is local.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/local"
+      },
+      "longitude": {
+        "doc": "The longitude of the item, in degrees east of the prime meridian, expressed using the WGS84 datum.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/longitude"
+      },
+      "lyricist": {
+        "doc": "The lyricist or text writer for the song or audio composition that the file contains.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/lyricist"
+      },
+      "mailboxIdentifiers": {
+        "doc": "An array of mailbox identifiers associated with the message.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/mailboxidentifiers"
+      },
+      "maxAperture": {
+        "doc": "The smallest F number of the lens.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/maxaperture"
+      },
+      "mediaTypes": {
+        "doc": "The media types present in the content.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/mediatypes"
+      },
+      "metadataModificationDate": {
+        "doc": "The date on which the last metadata attribute was changed.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/metadatamodificationdate"
+      },
+      "meteringMode": {
+        "doc": "The metering mode.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/meteringmode"
+      },
+      "musicalGenre": {
+        "doc": "The musical genre of the song or audio composition that the file contains, such as jazz, pop, rock, or classical.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/musicalgenre"
+      },
+      "musicalInstrumentCategory": {
+        "doc": "The category of the instrument associated with the audio file.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/musicalinstrumentcategory"
+      },
+      "musicalInstrumentName": {
+        "doc": "The name of an instrument within the context of an instrument category.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/musicalinstrumentname"
+      },
+      "namedLocation": {
+        "doc": "The name of the location or point of interest associated with the item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/namedlocation"
+      },
+      "organizations": {
+        "doc": "A list of companies or organizations that created the content.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/organizations"
+      },
+      "orientation": {
+        "doc": "The orientation of the data.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/orientation"
+      },
+      "originalFormat": {
+        "doc": "The original format of the media.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/originalformat"
+      },
+      "originalSource": {
+        "doc": "The original source of the media.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/originalsource"
+      },
+      "pageCount": {
+        "doc": "The number of pages in the document.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/pagecount"
+      },
+      "pageHeight": {
+        "doc": "The height of the document page, in points (72 points per inch).",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/pageheight"
+      },
+      "pageWidth": {
+        "doc": "The width of the document page, in points (72 points per inch).",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/pagewidth"
+      },
+      "participants": {
+        "doc": "A list of people who are visible in an image or movie or written about in a document.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/participants"
+      },
+      "path": {
+        "doc": "The complete path to the item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/path"
+      },
+      "performers": {
+        "doc": "A list of performers in the media.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/performers"
+      },
+      "phoneNumbers": {
+        "doc": "An array of phone numbers associated with the message.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/phonenumbers"
+      },
+      "pixelCount": {
+        "doc": "The total number of pixels in the image.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/pixelcount"
+      },
+      "pixelHeight": {
+        "doc": "The height of the item, such as image or video frame height, in pixels.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/pixelheight"
+      },
+      "pixelWidth": {
+        "doc": "The width of the item, such as image or video frame width, in pixels.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/pixelwidth"
+      },
+      "playCount": {
+        "doc": "A user-supplied play count for the media.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/playcount"
+      },
+      "postalCode": {
+        "doc": "The postal code for the item according to guidelines the provider establishes.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/postalcode"
+      },
+      "primaryRecipients": {
+        "doc": "An array of CSPerson objects representing the content of the To: field in an email message.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/primaryrecipients"
+      },
+      "producer": {
+        "doc": "The producer of the content.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/producer"
+      },
+      "profileName": {
+        "doc": "The name of the color profile the camera used for the image.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/profilename"
+      },
+      "projects": {
+        "doc": "A list of projects of which this file is a part.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/projects"
+      },
+      "providerDataTypeIdentifiers": {
+        "doc": "An array of type identifiers that correspond to data types your delegate object can provide.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/providerdatatypeidentifiers"
+      },
+      "providerFileTypeIdentifiers": {
+        "doc": "An array of type identifiers that correspond to file types your delegate object can provide.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/providerfiletypeidentifiers"
+      },
+      "providerInPlaceFileTypeIdentifiers": {
+        "doc": "An array of type identifiers that correspond to in-place file types your delegate object can provide.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/providerinplacefiletypeidentifiers"
+      },
+      "publishers": {
+        "doc": "A list of people, organizations, services, or other entities responsible for making the media available.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/publishers"
+      },
+      "rankingHint": {
+        "doc": "A number that indicates the relative importance of the item among other items from the app.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/rankinghint"
+      },
+      "rating": {
+        "doc": "The user-supplied rating of the media.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/rating"
+      },
+      "ratingDescription": {
+        "doc": "A description of the rating.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/ratingdescription"
+      },
+      "recipientAddresses": {
+        "doc": "An array of addresses associated with the recipients of the message.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/recipientaddresses"
+      },
+      "recipientEmailAddresses": {
+        "doc": "An array of email addresses associated with the recipient.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/recipientemailaddresses"
+      },
+      "recipientNames": {
+        "doc": "An array of names representing the recipients of this message.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/recipientnames"
+      },
+      "recordingDate": {
+        "doc": "The recording date of the song or composition.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/recordingdate"
+      },
+      "redEyeOn": {
+        "doc": "A value that indicates if the camera used red-eye reduction when capturing the image.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/redeyeon"
+      },
+      "relatedUniqueIdentifier": {
+        "doc": "The unique identifier for the item to which the activity is related.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/relateduniqueidentifier"
+      },
+      "resolutionHeightDPI": {
+        "doc": "The resolution height of the image, in DPI.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/resolutionheightdpi"
+      },
+      "resolutionWidthDPI": {
+        "doc": "The resolution width of the image, in DPI.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/resolutionwidthdpi"
+      },
+      "rights": {
+        "doc": "A link to information about the rights held in and over the media.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/rights"
+      },
+      "role": {
+        "doc": "Indicates the role of the content creator.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/role"
+      },
+      "securityMethod": {
+        "doc": "The security method (a type of encryption) that protects the document file.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/securitymethod"
+      },
+      "sharedItemContentType": {
+        "doc": "The file type of the item to enable the user to share items from Spotlight.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/shareditemcontenttype"
+      },
+      "speed": {
+        "doc": "The speed of the item, in kilometers per hour.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/speed"
+      },
+      "startDate": {
+        "doc": "The start date for the item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/startdate"
+      },
+      "stateOrProvince": {
+        "doc": "The province or state of origin according to guidelines the provider establishes.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/stateorprovince"
+      },
+      "streamable": {
+        "doc": "A value that indicates if the content is prepared for streaming.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/streamable"
+      },
+      "subThoroughfare": {
+        "doc": "The sublocation, such as a street number, for the item according to guidelines the provider establishes.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/subthoroughfare"
+      },
+      "subject": {
+        "doc": "The subject of the document.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/subject"
+      },
+      "supportsNavigation": {
+        "doc": "A value that indicates whether the item contains information sufficient to provide navigation to the location it represents.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/supportsnavigation"
+      },
+      "supportsPhoneCall": {
+        "doc": "A value that indicates whether the item contains information sufficient to allow a phone call to a number associated with the item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/supportsphonecall"
+      },
+      "tempo": {
+        "doc": "The tempo of the music that the audio file contains, in beats per minute.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/tempo"
+      },
+      "textContent": {
+        "doc": "The textual content of the message.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/textcontent"
+      },
+      "textContentSummary": {
+        "doc": "A string that presents the Apple Intelligence summarization of the item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/textcontentsummary"
+      },
+      "theme": {
+        "doc": "The theme of the document.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/theme"
+      },
+      "thoroughfare": {
+        "doc": "The thoroughfare, such as a street name, associated with the location for the item according to guidelines the provider establishes.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/thoroughfare"
+      },
+      "thumbnailData": {
+        "doc": "Image data that represents the thumbnail of the item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/thumbnaildata"
+      },
+      "thumbnailURL": {
+        "doc": "The local file URL of the thumbnail image for the item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/thumbnailurl"
+      },
+      "timeSignature": {
+        "doc": "The time signature of the musical composition that the audio or MIDI file contains, in a string, such as “4/4” or “7/8”.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/timesignature"
+      },
+      "timestamp": {
+        "doc": "The timestamp on the item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/timestamp"
+      },
+      "title": {
+        "doc": "The title of the item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/title"
+      },
+      "totalBitRate": {
+        "doc": "The total bit rate of the media, combining audio and video.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/totalbitrate"
+      },
+      "transcribedTextContent": {
+        "doc": "A string that represents the text the system transcribed.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/transcribedtextcontent"
+      },
+      "userCreated": {
+        "doc": "A value that indicates the user created the item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/usercreated"
+      },
+      "userCurated": {
+        "doc": "A value that indicates the user selected the item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/usercurated"
+      },
+      "userOwned": {
+        "doc": "A value that indicates the user purchased or owns the item.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/userowned"
+      },
+      "version": {
+        "doc": "A version string associated with the file.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/version"
+      },
+      "videoBitRate": {
+        "doc": "The video bit rate of the media.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/videobitrate"
+      },
+      "weakRelatedUniqueIdentifier": {
+        "doc": "The unique identifier for the item to which the activity is related, but not linked.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/weakrelateduniqueidentifier"
+      },
+      "whiteBalance": {
+        "doc": "The white balance setting when the camera captured the image.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssearchableitemattributeset/whitebalance"
+      }
+    },
+    "CSSuggestion": {
+      "CSSuggestionKind": {
+        "doc": "The suggestion type that determines how the system handles a suggestion.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssuggestion/suggestionkind-swift.enum"
+      },
+      "localizedAttributedSuggestion": {
+        "doc": "An attributed string for the localized suggestion.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssuggestion/localizedattributedsuggestion-3ssly"
+      },
+      "suggestionKind": {
+        "doc": "The type of suggestion.",
+        "url": "https://developer.apple.com/documentation/corespotlight/cssuggestion/suggestionkind-swift.property"
+      }
+    },
+    "CSUserQuery": {
+      "CSUserInteraction": {
+        "doc": "Constants that indicate how someone engaged with search-related content.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquery/userinteractionkind"
+      },
+      "CSUserQuery.Item": {
+        "doc": "A search result that the query returns in a response.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquery/item"
+      },
+      "CSUserQuery.Responses": {
+        "doc": "An asynchronous sequence that contains the results and suggestions for a query string.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquery/responses-swift.struct"
+      },
+      "CSUserQuery.Suggestion": {
+        "doc": "A suggested text completion for a query’s search term.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquery/suggestion"
+      },
+      "CSUserQuery.Suggestions": {
+        "doc": "An asynchronous sequence that contains the suggested completions for a search string.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquery/suggestions-swift.struct"
+      },
+      "foundSuggestionCount": {
+        "doc": "The number of suggested items the query found so far.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquery/foundsuggestioncount"
+      },
+      "foundSuggestionsHandler": {
+        "doc": "The block to execute when the query delivers a new batch of suggested items.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquery/foundsuggestionshandler"
+      },
+      "responses": {
+        "doc": "The matching results and suggestions for the current query string.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquery/responses-swift.property"
+      },
+      "suggestions": {
+        "doc": "An asynchronous sequence of suggested completions for the current query text.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquery/suggestions-swift.property"
+      },
+      "userEngaged(_:visibleItems:interaction:)": {
+        "doc": "Notifies the system that someone engaged with a specific search result in your app’s interface.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquery/userengaged(_:visibleitems:interaction:)"
+      },
+      "userEngaged(_:visibleSuggestions:interaction:)": {
+        "doc": "Notifies the system that someone engaged with a specific text completion in your app’s interface.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquery/userengaged(_:visiblesuggestions:interaction:)"
+      }
+    },
+    "CSUserQueryContext": {
+      "disableSemanticSearch": {
+        "doc": "A Boolean value that indicates whether to exclude semantic-based search results from the output.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquerycontext/disablesemanticsearch"
+      },
+      "enableRankedResults": {
+        "doc": "A Boolean value that indicates whether the query sorts results by their relevance.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquerycontext/enablerankedresults"
+      },
+      "maxRankedResultCount": {
+        "doc": "The maximum number of ranked results to return during the query.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquerycontext/maxrankedresultcount"
+      },
+      "maxResultCount": {
+        "doc": "The maximum number of search results for the query to return.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquerycontext/maxresultcount"
+      },
+      "maxSuggestionCount": {
+        "doc": "The maximum number of suggested text completions for the query to return.",
+        "url": "https://developer.apple.com/documentation/corespotlight/csuserquerycontext/maxsuggestioncount"
+      }
+    }
+  }
+}

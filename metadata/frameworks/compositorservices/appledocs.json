@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "framework": "CompositorServices",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "CP_OBJECT_cp_layer_renderer": {
+      "doc": "A type that provides the Metal types and timing information you need to draw your content.",
+      "url": "https://developer.apple.com/documentation/compositorservices/cp_object_cp_layer_renderer"
+    },
+    "CP_OBJECT_cp_layer_renderer_capabilities": {
+      "url": "https://developer.apple.com/documentation/compositorservices/cp_object_cp_layer_renderer_capabilities"
+    },
+    "CP_OBJECT_cp_layer_renderer_configuration": {
+      "url": "https://developer.apple.com/documentation/compositorservices/cp_object_cp_layer_renderer_configuration"
+    },
+    "CP_OBJECT_cp_layer_renderer_properties": {
+      "url": "https://developer.apple.com/documentation/compositorservices/cp_object_cp_layer_renderer_properties"
+    }
+  },
+  "enums": {
+    "cp_axis_direction_convention": {
+      "doc": "Constants that indicate the axis and direction to use for a perspective projection matrix.",
+      "url": "https://developer.apple.com/documentation/compositorservices/cp_axis_direction_convention"
+    },
+    "cp_drawable_state": {
+      "doc": "The state of ownership for the drawable.",
+      "url": "https://developer.apple.com/documentation/compositorservices/cp_drawable_state"
+    },
+    "cp_layer_renderer_configuration_error_code": {
+      "doc": "Errors that can occur during layer configuration.",
+      "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_configuration_error_code",
+      "members": {
+        "cp_layer_renderer_configuration_error_code_layout_not_supported": {
+          "doc": "An error that indicates the configuration’s current layout value is invalid.",
+          "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_configuration_error_code/cp_layer_renderer_configuration_error_code_layout_not_supported"
+        },
+        "cp_layer_renderer_configuration_error_code_missing_configuration": {
+          "doc": "An error that indicates the system didn’t find a default layer configuration.",
+          "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_configuration_error_code/cp_layer_renderer_configuration_error_code_missing_configuration"
+        },
+        "cp_layer_renderer_configuration_error_code_not_enough_frames_requested": {
+          "doc": "An error that indicates not enough frames are available for rendering.",
+          "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_configuration_error_code/cp_layer_renderer_configuration_error_code_not_enough_frames_requested"
+        },
+        "cp_layer_renderer_configuration_error_code_temporal_anti_aliasing_not_supported": {
+          "doc": "An error that occurs when you try to enable temporal anti-aliasing but the current configuration parameters don’t support it.",
+          "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_configuration_error_code/cp_layer_renderer_configuration_error_code_temporal_anti_aliasing_not_supported"
+        },
+        "cp_layer_renderer_configuration_error_code_too_many_frames_requested": {
+          "doc": "An error that indicates your app requested too many frames for rendering.",
+          "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_configuration_error_code/cp_layer_renderer_configuration_error_code_too_many_frames_requested"
+        },
+        "cp_layer_renderer_configuration_error_code_unsupported_color_format": {
+          "doc": "An error that indicates the system doesn’t support the specified color format choice.",
+          "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_configuration_error_code/cp_layer_renderer_configuration_error_code_unsupported_color_format"
+        },
+        "cp_layer_renderer_configuration_error_code_unsupported_color_usage": {
+          "doc": "An error that indicates the system doesn’t support the specified color usage option.",
+          "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_configuration_error_code/cp_layer_renderer_configuration_error_code_unsupported_color_usage"
+        },
+        "cp_layer_renderer_configuration_error_code_unsupported_depth_format": {
+          "doc": "An error that indicates the system doesn’t support the specified depth format choice.",
+          "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_configuration_error_code/cp_layer_renderer_configuration_error_code_unsupported_depth_format"
+        },
+        "cp_layer_renderer_configuration_error_code_unsupported_depth_usage": {
+          "doc": "An error that indicates the system doesn’t support the specified depth usage choice.",
+          "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_configuration_error_code/cp_layer_renderer_configuration_error_code_unsupported_depth_usage"
+        },
+        "cp_layer_renderer_configuration_error_code_unsupported_drawable_render_context_stencil_format": {
+          "doc": "An error that indicates the layer doesn’t support the current pixel format for stencil texture.",
+          "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_configuration_error_code/cp_layer_renderer_configuration_error_code_unsupported_drawable_render_context_stencil_format"
+        },
+        "cp_layer_renderer_configuration_error_code_unsupported_forward_depth_range": {
+          "doc": "An error that indicates the depth range values aren’t in reverse-z order.",
+          "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_configuration_error_code/cp_layer_renderer_configuration_error_code_unsupported_forward_depth_range"
+        },
+        "cp_layer_renderer_configuration_error_code_unsupported_near_plane_distance": {
+          "doc": "An error that indicates the near plane of the client is closer than the minimum supported distance.",
+          "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_configuration_error_code/cp_layer_renderer_configuration_error_code_unsupported_near_plane_distance"
+        },
+        "cp_layer_renderer_configuration_error_code_unsupported_render_quality": {
+          "doc": "An error that indicates the configuration’s render quality is unsupported. This could be because foveation is disabled or the quality is outside of the valid range of [0, 1], the error userInfo will contain additional information.",
+          "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_configuration_error_code/cp_layer_renderer_configuration_error_code_unsupported_render_quality"
+        },
+        "cp_layer_renderer_configuration_error_code_unsupported_tracking_areas_format": {
+          "doc": "An error that indicates the layer doesn’t support the current pixel format for tracking areas textures.",
+          "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_configuration_error_code/cp_layer_renderer_configuration_error_code_unsupported_tracking_areas_format"
+        },
+        "cp_layer_renderer_configuration_error_code_unsupported_tracking_areas_usage": {
+          "doc": "An error that indicates the layer doesn’t support the current texture usage for tracking areas textures.",
+          "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_configuration_error_code/cp_layer_renderer_configuration_error_code_unsupported_tracking_areas_usage"
+        },
+        "cp_layer_renderer_configuration_error_code_variable_rasterization_rate_is_not_supported": {
+          "doc": "An error that indicates foveation is enabled but not supported.",
+          "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_configuration_error_code/cp_layer_renderer_configuration_error_code_variable_rasterization_rate_is_not_supported"
+        }
+      }
+    },
+    "cp_layer_renderer_layout": {
+      "doc": "Constants that specify the organization of the textures you use for drawing.",
+      "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_layout"
+    },
+    "cp_layer_renderer_state": {
+      "doc": "The states of the layer renderer, which tell you how to proceed with drawing operations.",
+      "url": "https://developer.apple.com/documentation/compositorservices/cp_layer_renderer_state"
+    },
+    "cp_supported_color_formats_options": {
+      "doc": "The options to provide when calling cp_layer_renderer_capabilities_supported_color_formats and cp_layer_renderer_capabilities_supported_color_formats_count",
+      "url": "https://developer.apple.com/documentation/compositorservices/cp_supported_color_formats_options"
+    },
+    "cp_supported_layouts_options": {
+      "doc": "The options you can pass to functions that relate to rendering capabilities and layout support.",
+      "url": "https://developer.apple.com/documentation/compositorservices/cp_supported_layouts_options"
+    }
+  },
+  "structs": {
+    "cp_time": {
+      "doc": "A Mach absolute time clock value.",
+      "url": "https://developer.apple.com/documentation/compositorservices/cp_time"
+    }
+  }
+}

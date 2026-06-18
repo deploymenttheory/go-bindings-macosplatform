@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "framework": "NotificationCenter",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "NCWidgetController": {
+      "doc": "An object used to specify whether a Today widget has content to display.",
+      "url": "https://developer.apple.com/documentation/notificationcenter/ncwidgetcontroller"
+    },
+    "NCWidgetListViewController": {
+      "doc": "An object that provides a list view for displaying content in a macOS Today widget.",
+      "url": "https://developer.apple.com/documentation/notificationcenter/ncwidgetlistviewcontroller"
+    },
+    "NCWidgetSearchViewController": {
+      "doc": "An object that provides a default search view within a macOS Today widget.",
+      "url": "https://developer.apple.com/documentation/notificationcenter/ncwidgetsearchviewcontroller"
+    }
+  },
+  "protocols": {
+    "NCWidgetListViewDelegate": {
+      "doc": "The interface for handling content display and editing in the list view of a macOS Today widget.",
+      "url": "https://developer.apple.com/documentation/notificationcenter/ncwidgetlistviewdelegate"
+    },
+    "NCWidgetProviding": {
+      "doc": "The interface for customizing the appearance and behavior of a Today widget.",
+      "url": "https://developer.apple.com/documentation/notificationcenter/ncwidgetproviding"
+    },
+    "NCWidgetSearchViewDelegate": {
+      "doc": "The interface for enabling user searches in the search view controller of a macOS Today widget.",
+      "url": "https://developer.apple.com/documentation/notificationcenter/ncwidgetsearchviewdelegate"
+    }
+  },
+  "enums": {
+    "NCUpdateResult": {
+      "doc": "The result of updating a widget’s state.",
+      "url": "https://developer.apple.com/documentation/notificationcenter/ncupdateresult",
+      "members": {
+        "NCUpdateResultFailed": {
+          "doc": "The update attempt failed.",
+          "url": "https://developer.apple.com/documentation/notificationcenter/ncupdateresult/failed"
+        },
+        "NCUpdateResultNewData": {
+          "doc": "The update resulted in new data to display.",
+          "url": "https://developer.apple.com/documentation/notificationcenter/ncupdateresult/newdata"
+        },
+        "NCUpdateResultNoData": {
+          "doc": "The update did not result in any new data since the last update.",
+          "url": "https://developer.apple.com/documentation/notificationcenter/ncupdateresult/nodata"
+        }
+      }
+    }
+  },
+  "methods": {
+    "NCWidgetController": {
+      "+widgetController": {
+        "doc": "Returns a widget controller used to specify whether a widget has content to display.",
+        "url": "https://developer.apple.com/documentation/notificationcenter/ncwidgetcontroller/widgetcontroller()"
+      },
+      "-setHasContent:forWidgetWithBundleIdentifier:": {
+        "doc": "Sets whether the specified widget has content to display.",
+        "url": "https://developer.apple.com/documentation/notificationcenter/ncwidgetcontroller/sethascontent(_:forwidgetwithbundleidentifier:)"
+      }
+    },
+    "NCWidgetListViewController": {
+      "-rowForViewController:": {
+        "doc": "Returns the row represented by the specified content view controller.",
+        "url": "https://developer.apple.com/documentation/notificationcenter/ncwidgetlistviewcontroller/row(for:)"
+      },
+      "-viewControllerAtRow:makeIfNecessary:": {
+        "doc": "Returns the content view controller associated with the specified row, or a new content view controller if desired.",
+        "url": "https://developer.apple.com/documentation/notificationcenter/ncwidgetlistviewcontroller/viewcontroller(atrow:makeifnecessary:)"
+      }
+    }
+  },
+  "properties": {
+    "NCWidgetListViewController": {
+      "contents": {
+        "doc": "An array of objects to display in the list view.",
+        "url": "https://developer.apple.com/documentation/notificationcenter/ncwidgetlistviewcontroller/contents"
+      },
+      "delegate": {
+        "doc": "The list view controller’s delegate or nil if the receiver doesn’t have a delegate.",
+        "url": "https://developer.apple.com/documentation/notificationcenter/ncwidgetlistviewcontroller/delegate"
+      },
+      "editing": {
+        "doc": "A Boolean value that indicates whether the list is in editing mode.",
+        "url": "https://developer.apple.com/documentation/notificationcenter/ncwidgetlistviewcontroller/editing"
+      },
+      "hasDividerLines": {
+        "doc": "A Boolean value that indicates whether list displays divider lines between rows.",
+        "url": "https://developer.apple.com/documentation/notificationcenter/ncwidgetlistviewcontroller/hasdividerlines"
+      },
+      "minimumVisibleRowCount": {
+        "doc": "The minimum number of visible rows to display.",
+        "url": "https://developer.apple.com/documentation/notificationcenter/ncwidgetlistviewcontroller/minimumvisiblerowcount"
+      },
+      "showsAddButtonWhenEditing": {
+        "doc": "A Boolean value that indicates whether an Add (+) button is displayed while the list is in editing mode.",
+        "url": "https://developer.apple.com/documentation/notificationcenter/ncwidgetlistviewcontroller/showsaddbuttonwhenediting"
+      }
+    },
+    "NCWidgetSearchViewController": {
+      "delegate": {
+        "doc": "The search view controller’s delegate or nil if the receiver doesn’t have a delegate.",
+        "url": "https://developer.apple.com/documentation/notificationcenter/ncwidgetsearchviewcontroller/delegate"
+      },
+      "searchDescription": {
+        "doc": "A localized description of the nature of the search.",
+        "url": "https://developer.apple.com/documentation/notificationcenter/ncwidgetsearchviewcontroller/searchdescription"
+      },
+      "searchResultKeyPath": {
+        "doc": "A key path for the string property to display for each object in the search results array.",
+        "url": "https://developer.apple.com/documentation/notificationcenter/ncwidgetsearchviewcontroller/searchresultkeypath"
+      },
+      "searchResults": {
+        "doc": "An array of search results.",
+        "url": "https://developer.apple.com/documentation/notificationcenter/ncwidgetsearchviewcontroller/searchresults"
+      },
+      "searchResultsPlaceholderString": {
+        "doc": "A localized phrase displayed in the results list when no search results are available.",
+        "url": "https://developer.apple.com/documentation/notificationcenter/ncwidgetsearchviewcontroller/searchresultsplaceholderstring"
+      }
+    }
+  }
+}

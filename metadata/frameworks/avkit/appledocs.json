@@ -1,0 +1,502 @@
+{
+  "schema_version": 1,
+  "framework": "AVKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "AVCaptureView": {
+      "doc": "A view that displays standard user interface controls for capturing media data.",
+      "url": "https://developer.apple.com/documentation/avkit/avcaptureview"
+    },
+    "AVLegibleMediaOptionsMenuController": {
+      "url": "https://developer.apple.com/documentation/avkit/avlegiblemediaoptionsmenucontroller"
+    },
+    "AVPictureInPictureController": {
+      "doc": "A controller that responds to user-initiated Picture in Picture playback of video in a floating, resizable window.",
+      "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller"
+    },
+    "AVPictureInPictureControllerContentSource": {
+      "doc": "An object that represents the source of the content to present in Picture in Picture.",
+      "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontrollercontentsource"
+    },
+    "AVPlaybackSpeed": {
+      "doc": "An object that represents a user-selectable playback speed in a playback user interface.",
+      "url": "https://developer.apple.com/documentation/avkit/avplaybackspeed"
+    },
+    "AVPlayerView": {
+      "doc": "A view that displays content from a player and presents a native user interface to control playback.",
+      "url": "https://developer.apple.com/documentation/avkit/avplayerview"
+    },
+    "AVRoutePickerView": {
+      "doc": "A view that presents a list of nearby media receivers.",
+      "url": "https://developer.apple.com/documentation/avkit/avroutepickerview"
+    }
+  },
+  "protocols": {
+    "AVCaptureViewDelegate": {
+      "doc": "The protocol that defines the methods you can implement to respond to capture view events.",
+      "url": "https://developer.apple.com/documentation/avkit/avcaptureviewdelegate"
+    },
+    "AVPictureInPictureControllerDelegate": {
+      "doc": "A protocol to adopt to respond to Picture in Picture events.",
+      "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontrollerdelegate"
+    },
+    "AVPictureInPictureSampleBufferPlaybackDelegate": {
+      "doc": "A protocol for controlling playback from a sample buffer display layer in Picture in Picture.",
+      "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturesamplebufferplaybackdelegate"
+    },
+    "AVPlayerViewDelegate": {
+      "doc": "A protocol that defines the methods to implement to participate in the player view’s full-screen presentation life cycle.",
+      "url": "https://developer.apple.com/documentation/avkit/avplayerviewdelegate"
+    },
+    "AVPlayerViewPictureInPictureDelegate": {
+      "doc": "A protocol that defines the methods to implement to respond to Picture in Picture playback events.",
+      "url": "https://developer.apple.com/documentation/avkit/avplayerviewpictureinpicturedelegate"
+    },
+    "AVRoutePickerViewDelegate": {
+      "doc": "A protocol that defines the methods to adopt to respond to route picker view presentation events.",
+      "url": "https://developer.apple.com/documentation/avkit/avroutepickerviewdelegate"
+    }
+  },
+  "enums": {
+    "AVCaptureViewControlsStyle": {
+      "doc": "Constants that describe the capture view’s supported controls styles.",
+      "url": "https://developer.apple.com/documentation/avkit/avcaptureviewcontrolsstyle",
+      "members": {
+        "AVCaptureViewControlsStyleDefault": {
+          "doc": "The view’s default controls style.",
+          "url": "https://developer.apple.com/documentation/avkit/avcaptureviewcontrolsstyle/default"
+        },
+        "AVCaptureViewControlsStyleFloating": {
+          "doc": "The view’s floating controls style, which matches the user interface of QuickTime Player.",
+          "url": "https://developer.apple.com/documentation/avkit/avcaptureviewcontrolsstyle/floating"
+        },
+        "AVCaptureViewControlsStyleInline": {
+          "doc": "The view’s inline controls style.",
+          "url": "https://developer.apple.com/documentation/avkit/avcaptureviewcontrolsstyle/inline"
+        },
+        "AVCaptureViewControlsStyleInlineDeviceSelection": {
+          "doc": "The view’s inline device selection style.",
+          "url": "https://developer.apple.com/documentation/avkit/avcaptureviewcontrolsstyle/inlinedeviceselection"
+        }
+      }
+    },
+    "AVDisplayDynamicRange": {
+      "doc": "Describes how High Dynamic Range (HDR) video content renders.",
+      "url": "https://developer.apple.com/documentation/avkit/avdisplaydynamicrange",
+      "members": {
+        "AVDisplayDynamicRangeAutomatic": {
+          "doc": "Defines an automatic dynamic range. Indicates that the dynamic range will be set automatically.",
+          "url": "https://developer.apple.com/documentation/avkit/avdisplaydynamicrange/automatic"
+        },
+        "AVDisplayDynamicRangeConstrainedHigh": {
+          "doc": "Defines a constrained high dynamic range. Allows for constrained High Dynamic Range (HDR) video content which is useful for mixing HDR and Standard Dynamic Range (SDR) content.",
+          "url": "https://developer.apple.com/documentation/avkit/avdisplaydynamicrange/constrainedhigh"
+        },
+        "AVDisplayDynamicRangeHigh": {
+          "doc": "Defines a high dynamic range. Allows video content to use extended dynamic range if it has dynamic range content.",
+          "url": "https://developer.apple.com/documentation/avkit/avdisplaydynamicrange/high"
+        },
+        "AVDisplayDynamicRangeStandard": {
+          "doc": "Defines a standard dynamic range. Restricts the video content dynamic range to the standard range regardless of the actual range of the video content.",
+          "url": "https://developer.apple.com/documentation/avkit/avdisplaydynamicrange/standard"
+        }
+      }
+    },
+    "AVLegibleMediaOptionsMenuType": {
+      "url": "https://developer.apple.com/documentation/avkit/avlegiblemediaoptionsmenutype"
+    },
+    "AVPlayerViewControlsStyle": {
+      "doc": "Constants that indicate which user interface controls the view displays.",
+      "url": "https://developer.apple.com/documentation/avkit/avplayerviewcontrolsstyle",
+      "members": {
+        "AVPlayerViewControlsStyleDefault": {
+          "doc": "The view’s default controls style.",
+          "url": "https://developer.apple.com/documentation/avkit/avplayerviewcontrolsstyle/default"
+        },
+        "AVPlayerViewControlsStyleFloating": {
+          "doc": "The view displays playback controls in a floating window over the video content.",
+          "url": "https://developer.apple.com/documentation/avkit/avplayerviewcontrolsstyle/floating"
+        },
+        "AVPlayerViewControlsStyleInline": {
+          "doc": "The view displays playback controls in a bar along the view’s bottom edge.",
+          "url": "https://developer.apple.com/documentation/avkit/avplayerviewcontrolsstyle/inline"
+        },
+        "AVPlayerViewControlsStyleMinimal": {
+          "doc": "The view presents basic controls to play and pause playback.",
+          "url": "https://developer.apple.com/documentation/avkit/avplayerviewcontrolsstyle/minimal"
+        },
+        "AVPlayerViewControlsStyleNone": {
+          "doc": "The view displays no playback controls.",
+          "url": "https://developer.apple.com/documentation/avkit/avplayerviewcontrolsstyle/none"
+        }
+      }
+    },
+    "AVPlayerViewTrimResult": {
+      "doc": "Constants that specify an action a user takes when trimming media in a player view.",
+      "url": "https://developer.apple.com/documentation/avkit/avplayerviewtrimresult",
+      "members": {
+        "AVPlayerViewTrimCancelButton": {
+          "doc": "The user clicked the Cancel button.",
+          "url": "https://developer.apple.com/documentation/avkit/avplayerviewtrimresult/cancelbutton"
+        },
+        "AVPlayerViewTrimOKButton": {
+          "doc": "The user clicked the Trim button.",
+          "url": "https://developer.apple.com/documentation/avkit/avplayerviewtrimresult/okbutton"
+        }
+      }
+    },
+    "AVRoutePickerViewButtonState": {
+      "doc": "Constants that describe the available button states.",
+      "url": "https://developer.apple.com/documentation/avkit/avroutepickerviewbuttonstate"
+    },
+    "AVRoutePickerViewButtonStyle": {
+      "doc": "Constants that define the button styles a route picker view supports.",
+      "url": "https://developer.apple.com/documentation/avkit/avroutepickerviewbuttonstyle",
+      "members": {
+        "AVRoutePickerViewButtonStyleCustom": {
+          "doc": "A custom button style.",
+          "url": "https://developer.apple.com/documentation/avkit/avroutepickerviewbuttonstyle/custom"
+        },
+        "AVRoutePickerViewButtonStylePlain": {
+          "doc": "A plain button style.",
+          "url": "https://developer.apple.com/documentation/avkit/avroutepickerviewbuttonstyle/plain"
+        },
+        "AVRoutePickerViewButtonStyleSystem": {
+          "doc": "A system-defined button style.",
+          "url": "https://developer.apple.com/documentation/avkit/avroutepickerviewbuttonstyle/system"
+        }
+      }
+    },
+    "AVVideoFrameAnalysisType": {
+      "doc": "Constants that define the types of analysis a player view controller may perform on a paused video frame.",
+      "url": "https://developer.apple.com/documentation/avkit/avvideoframeanalysistype",
+      "members": {
+        "AVVideoFrameAnalysisTypeDefault": {
+          "doc": "The default types of analysis to perform.",
+          "url": "https://developer.apple.com/documentation/avkit/avvideoframeanalysistype/default"
+        },
+        "AVVideoFrameAnalysisTypeMachineReadableCode": {
+          "doc": "A type that recognizes machine-readable codes, such as QR codes.",
+          "url": "https://developer.apple.com/documentation/avkit/avvideoframeanalysistype/machinereadablecode"
+        },
+        "AVVideoFrameAnalysisTypeNone": {
+          "doc": "A type that performs no analysis.",
+          "url": "https://developer.apple.com/documentation/avkit/avvideoframeanalysistype/avvideoframeanalysistypenone"
+        },
+        "AVVideoFrameAnalysisTypeSubject": {
+          "doc": "A type that finds a subject that a user can copy out of frame.",
+          "url": "https://developer.apple.com/documentation/avkit/avvideoframeanalysistype/subject"
+        },
+        "AVVideoFrameAnalysisTypeText": {
+          "doc": "A type that finds text in a paused video frame.",
+          "url": "https://developer.apple.com/documentation/avkit/avvideoframeanalysistype/text"
+        },
+        "AVVideoFrameAnalysisTypeVisualSearch": {
+          "doc": "A type that identifies objects, landmarks, art, and so on.",
+          "url": "https://developer.apple.com/documentation/avkit/avvideoframeanalysistype/visualsearch"
+        },
+        "init(rawValue:)": {
+          "doc": "Creates a type from a string value.",
+          "url": "https://developer.apple.com/documentation/avkit/avvideoframeanalysistype/init(rawvalue:)"
+        }
+      }
+    }
+  },
+  "structs": {
+    "AVLegibleMediaOptionsMenuState": {
+      "url": "https://developer.apple.com/documentation/avkit/avlegiblemediaoptionsmenustate"
+    }
+  },
+  "methods": {
+    "AVCaptureView": {
+      "-setSession:showVideoPreview:showAudioPreview:": {
+        "doc": "Sets the view’s capture session.",
+        "url": "https://developer.apple.com/documentation/avkit/avcaptureview/setsession(_:showvideopreview:showaudiopreview:)"
+      }
+    },
+    "AVPictureInPictureController": {
+      "+isPictureInPictureSupported": {
+        "doc": "Returns a Boolean value that indicates whether the current device supports Picture in Picture.",
+        "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller/ispictureinpicturesupported()"
+      },
+      "+pictureInPictureButtonStartImageCompatibleWithTraitCollection:": {
+        "doc": "Returns a system-default template image that’s compatible with a trait collection for the button that starts Picture in Picture in your app.",
+        "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller/pictureinpicturebuttonstartimage(compatiblewith:)"
+      },
+      "+pictureInPictureButtonStopImageCompatibleWithTraitCollection:": {
+        "doc": "Returns a system-default template image that’s compatible with a trait collection for the button that stops Picture in Picture in your app.",
+        "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller/pictureinpicturebuttonstopimage(compatiblewith:)"
+      },
+      "-initWithContentSource:": {
+        "doc": "Creates a Picture in Picture controller with a content source.",
+        "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller/init(contentsource:)"
+      },
+      "-initWithPlayerLayer:": {
+        "doc": "Creates a Picture in Picture controller with a player layer.",
+        "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller/init(playerlayer:)"
+      },
+      "-invalidatePlaybackState": {
+        "doc": "Invalidates the controller’s current playback state and fetches the updated state from the sample buffer playback delegate object.",
+        "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller/invalidateplaybackstate()"
+      },
+      "-startPictureInPicture": {
+        "doc": "Starts Picture in Picture, if possible.",
+        "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller/startpictureinpicture()"
+      },
+      "-stopPictureInPicture": {
+        "doc": "Stops Picture in Picture, if active.",
+        "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller/stoppictureinpicture()"
+      }
+    },
+    "AVPlaybackSpeed": {
+      "-initWithRate:localizedName:": {
+        "doc": "Creates a playback speed with a rate and localized name.",
+        "url": "https://developer.apple.com/documentation/avkit/avplaybackspeed/init(rate:localizedname:)"
+      }
+    },
+    "AVPlayerView": {
+      "-beginTrimmingWithCompletionHandler:": {
+        "doc": "Puts the player view into trimming mode.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/begintrimming(completionhandler:)"
+      },
+      "-flashChapterNumber:chapterTitle:": {
+        "doc": "Displays the chapter number and title in the player view for a brief moment.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/flashchapternumber(_:chaptertitle:)"
+      },
+      "-selectSpeed:": {
+        "doc": "Selects a specified playback speed.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/selectspeed(_:)"
+      },
+      "-setMagnification:centeredAtPoint:": {
+        "doc": "Scales the video’s view by a specified factor, and centers the result on a specified point.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/setmagnification(_:centeredat:)"
+      }
+    },
+    "AVRoutePickerView": {
+      "-routePickerButtonColorForState:": {
+        "doc": "Returns the color of the picker button for the specified state.",
+        "url": "https://developer.apple.com/documentation/avkit/avroutepickerview/routepickerbuttoncolor(for:)"
+      },
+      "-setRoutePickerButtonColor:forState:": {
+        "doc": "Sets the route picker button color for the specified state.",
+        "url": "https://developer.apple.com/documentation/avkit/avroutepickerview/setroutepickerbuttoncolor(_:for:)"
+      }
+    }
+  },
+  "properties": {
+    "AVCaptureView": {
+      "controlsStyle": {
+        "doc": "The style of the capture controls presented by the view.",
+        "url": "https://developer.apple.com/documentation/avkit/avcaptureview/controlsstyle"
+      },
+      "delegate": {
+        "doc": "The capture view’s delegate object.",
+        "url": "https://developer.apple.com/documentation/avkit/avcaptureview/delegate"
+      },
+      "fileOutput": {
+        "doc": "The capture file output used to record media data.",
+        "url": "https://developer.apple.com/documentation/avkit/avcaptureview/fileoutput"
+      },
+      "session": {
+        "doc": "The view’s associated capture session.",
+        "url": "https://developer.apple.com/documentation/avkit/avcaptureview/session"
+      },
+      "videoGravity": {
+        "doc": "A string value that defines how the capture view displays video within its bounds.",
+        "url": "https://developer.apple.com/documentation/avkit/avcaptureview/videogravity"
+      }
+    },
+    "AVPictureInPictureController": {
+      "AVPictureInPictureControllerContentSource": {
+        "doc": "An object that represents the source of the content to present in Picture in Picture.",
+        "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller/contentsource-swift.class"
+      },
+      "canStartPictureInPictureAutomaticallyFromInline": {
+        "doc": "A Boolean value that indicates whether Picture in Picture starts automatically when the controller embeds its content inline and the app transitions to the background.",
+        "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller/canstartpictureinpictureautomaticallyfrominline"
+      },
+      "canStopPictureInPicture": {
+        "doc": "A Boolean value that indicates whether Picture in Picture is active and is able to stop.",
+        "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller/canstoppictureinpicture"
+      },
+      "contentSource": {
+        "doc": "The source of the controller’s content.",
+        "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller/contentsource-swift.property"
+      },
+      "delegate": {
+        "doc": "A delegate object for a Picture in Picture controller.",
+        "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller/delegate"
+      },
+      "pictureInPictureActive": {
+        "doc": "A Boolean value that indicates whether the Picture in Picture window is onscreen.",
+        "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller/ispictureinpictureactive"
+      },
+      "pictureInPictureButtonStartImage": {
+        "doc": "A system-default template image for the button that starts Picture in Picture in your app.",
+        "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller/pictureinpicturebuttonstartimage"
+      },
+      "pictureInPictureButtonStopImage": {
+        "doc": "A system-default template image for the button that stops Picture in Picture in your app.",
+        "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller/pictureinpicturebuttonstopimage"
+      },
+      "pictureInPicturePossible": {
+        "doc": "A Boolean value that indicates whether Picture in Picture playback is currently possible.",
+        "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller/ispictureinpicturepossible"
+      },
+      "pictureInPictureSuspended": {
+        "doc": "A Boolean value that indicates whether the system suspends the controller’s Picture in Picture window.",
+        "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller/ispictureinpicturesuspended"
+      },
+      "playerLayer": {
+        "doc": "The layer that displays the video content.",
+        "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller/playerlayer"
+      },
+      "requiresLinearPlayback": {
+        "doc": "A Boolean value that determines whether the controller allows the user to skip media content.",
+        "url": "https://developer.apple.com/documentation/avkit/avpictureinpicturecontroller/requireslinearplayback"
+      }
+    },
+    "AVPlaybackSpeed": {
+      "localizedName": {
+        "doc": "A localized name for a speed that’s suitable for display in a user interface.",
+        "url": "https://developer.apple.com/documentation/avkit/avplaybackspeed/localizedname"
+      },
+      "localizedNumericName": {
+        "doc": "A localized numeric name for a speed that’s suitable for display in a user interface.",
+        "url": "https://developer.apple.com/documentation/avkit/avplaybackspeed/localizednumericname"
+      },
+      "rate": {
+        "doc": "The playback rate to use when you select this speed.",
+        "url": "https://developer.apple.com/documentation/avkit/avplaybackspeed/rate"
+      },
+      "systemDefaultSpeeds": {
+        "doc": "A list of playback speeds the system uses by default.",
+        "url": "https://developer.apple.com/documentation/avkit/avplaybackspeed/systemdefaultspeeds"
+      }
+    },
+    "AVPlayerView": {
+      "actionPopUpButtonMenu": {
+        "doc": "An action pop-up button menu that the player view displays.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/actionpopupbuttonmenu"
+      },
+      "allowsMagnification": {
+        "doc": "A Boolean value that indicates whether the magnify gesture changes the video’s view magnification.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/allowsmagnification"
+      },
+      "allowsPictureInPicturePlayback": {
+        "doc": "A Boolean value that determines whether the player view allows Picture in Picture playback.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/allowspictureinpictureplayback"
+      },
+      "allowsVideoFrameAnalysis": {
+        "doc": "A Boolean value that indicates whether to perform video frame analysis.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/allowsvideoframeanalysis"
+      },
+      "canBeginTrimming": {
+        "doc": "A Boolean value that indicates whether the player view can begin trimming.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/canbegintrimming"
+      },
+      "contentOverlayView": {
+        "doc": "A view that adds additional custom views between the video content and the controls.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/contentoverlayview"
+      },
+      "controlsStyle": {
+        "doc": "The player view’s controls style.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/controlsstyle"
+      },
+      "delegate": {
+        "doc": "The player view’s delegate object.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/delegate"
+      },
+      "magnification": {
+        "doc": "The factor by which the video’s view is currently scaled.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/magnification"
+      },
+      "pictureInPictureDelegate": {
+        "doc": "The Picture in Picture delegate object.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/pictureinpicturedelegate"
+      },
+      "player": {
+        "doc": "The player instance that provides the media content for the view.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/player"
+      },
+      "preferredDisplayDynamicRange": {
+        "doc": "Describes how High Dynamic Range (HDR) video content renders.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/preferreddisplaydynamicrange"
+      },
+      "readyForDisplay": {
+        "doc": "A Boolean value that indicates whether the current player item’s first video frame is ready for display.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/isreadyfordisplay"
+      },
+      "selectedSpeed": {
+        "doc": "The currently selected playback speed.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/selectedspeed"
+      },
+      "showsFrameSteppingButtons": {
+        "doc": "A Boolean value that determines whether the player view displays frame stepping buttons.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/showsframesteppingbuttons"
+      },
+      "showsFullScreenToggleButton": {
+        "doc": "A Boolean value that determines whether the player view displays a full-screen toggle button.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/showsfullscreentogglebutton"
+      },
+      "showsSharingServiceButton": {
+        "doc": "A Boolean value that determines whether the player view displays a sharing service button.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/showssharingservicebutton"
+      },
+      "showsTimecodes": {
+        "doc": "A Boolean value that determines whether the player view displays timecodes, if available.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/showstimecodes"
+      },
+      "speeds": {
+        "doc": "A list of user-selectable playback speeds to show in the playback speed control.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/speeds"
+      },
+      "updatesNowPlayingInfoCenter": {
+        "doc": "A Boolean value that indicates whether the player view controller updates the Now Playing info center.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/updatesnowplayinginfocenter"
+      },
+      "videoBounds": {
+        "doc": "The current size and position of the video image that displays within the player view’s bounds.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/videobounds"
+      },
+      "videoGravity": {
+        "doc": "A value that determines how the player view displays video content within its bounds.",
+        "url": "https://developer.apple.com/documentation/avkit/avplayerview/videogravity"
+      }
+    },
+    "AVRoutePickerView": {
+      "AVRoutePickerViewButtonState": {
+        "doc": "Constants that describe the available button states.",
+        "url": "https://developer.apple.com/documentation/avkit/avroutepickerview/buttonstate"
+      },
+      "activeTintColor": {
+        "doc": "The view’s tint color when AirPlay is active.",
+        "url": "https://developer.apple.com/documentation/avkit/avroutepickerview/activetintcolor"
+      },
+      "customRoutingController": {
+        "doc": "A routing controller that enables connections to non-AirPlay devices.",
+        "url": "https://developer.apple.com/documentation/avkit/avroutepickerview/customroutingcontroller"
+      },
+      "delegate": {
+        "doc": "The delegate object for the route picker.",
+        "url": "https://developer.apple.com/documentation/avkit/avroutepickerview/delegate"
+      },
+      "player": {
+        "doc": "The player object to perform routing operations for.",
+        "url": "https://developer.apple.com/documentation/avkit/avroutepickerview/player"
+      },
+      "prioritizesVideoDevices": {
+        "doc": "A Boolean value that indicates whether the route picker sorts video output devices to the top of the list.",
+        "url": "https://developer.apple.com/documentation/avkit/avroutepickerview/prioritizesvideodevices"
+      },
+      "routePickerButtonBordered": {
+        "doc": "A Boolean value that indicates whether the route picker button has a border.",
+        "url": "https://developer.apple.com/documentation/avkit/avroutepickerview/isroutepickerbuttonbordered"
+      },
+      "routePickerButtonStyle": {
+        "doc": "The button style for the route picker.",
+        "url": "https://developer.apple.com/documentation/avkit/avroutepickerview/routepickerbuttonstyle"
+      }
+    }
+  }
+}

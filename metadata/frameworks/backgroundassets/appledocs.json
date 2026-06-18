@@ -1,0 +1,387 @@
+{
+  "schema_version": 1,
+  "framework": "BackgroundAssets",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "BAAppExtensionInfo": {
+      "url": "https://developer.apple.com/documentation/backgroundassets/baappextensioninfo"
+    },
+    "BAAssetPack": {
+      "doc": "An archive of assets that the system downloads together.",
+      "url": "https://developer.apple.com/documentation/backgroundassets/baassetpack"
+    },
+    "BAAssetPackManager": {
+      "doc": "A class that manages asset packs.",
+      "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager"
+    },
+    "BAAssetPackManifest": {
+      "doc": "A manifest of asset packs that are available to download.",
+      "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanifest"
+    },
+    "BADownload": {
+      "doc": "An object that represents an in-progress or concluded asset download.",
+      "url": "https://developer.apple.com/documentation/backgroundassets/badownload"
+    },
+    "BADownloadManager": {
+      "doc": "An object that manages the queue of scheduled asset downloads.",
+      "url": "https://developer.apple.com/documentation/backgroundassets/badownloadmanager"
+    },
+    "BAURLDownload": {
+      "doc": "An object that represents a remote asset to download.",
+      "url": "https://developer.apple.com/documentation/backgroundassets/baurldownload"
+    }
+  },
+  "protocols": {
+    "BADownloadManagerDelegate": {
+      "doc": "An interface for reacting to asset download events and processing concluded downloads.",
+      "url": "https://developer.apple.com/documentation/backgroundassets/badownloadmanagerdelegate"
+    },
+    "BADownloaderExtension": {
+      "doc": "An interface for reacting to app life-cycle events and processing concluded asset downloads while your app isn’t running.",
+      "url": "https://developer.apple.com/documentation/backgroundassets/badownloaderextension"
+    },
+    "BAManagedAssetPackDownloadDelegate": {
+      "doc": "An object that handles status updates when downloading an asset pack.",
+      "url": "https://developer.apple.com/documentation/backgroundassets/bamanagedassetpackdownloaddelegate"
+    },
+    "BAManagedDownloaderExtension": {
+      "doc": "An application extension that uses the system implementation to schedule asset-pack downloads automatically.",
+      "url": "https://developer.apple.com/documentation/backgroundassets/bamanageddownloaderextension"
+    }
+  },
+  "enums": {
+    "BAAssetPackStatus": {
+      "doc": "The status of an asset pack.",
+      "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackstatus",
+      "members": {
+        "BAAssetPackStatusDownloadAvailable": {
+          "doc": "A status value that indicates that the asset pack is available to download.",
+          "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackstatus/baassetpackstatusdownloadavailable"
+        },
+        "BAAssetPackStatusDownloaded": {
+          "doc": "A status value that indicates that the system finished downloading the asset pack.",
+          "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackstatus/baassetpackstatusdownloaded"
+        },
+        "BAAssetPackStatusDownloading": {
+          "doc": "A status value that indicates that the system is currently downloading the asset pack.",
+          "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackstatus/baassetpackstatusdownloading"
+        },
+        "BAAssetPackStatusObsolete": {
+          "doc": "A status value that indicates that the asset pack is no longer available to download.",
+          "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackstatus/baassetpackstatusobsolete"
+        },
+        "BAAssetPackStatusOutOfDate": {
+          "doc": "A status value that indicates that the downloaded asset pack is out of date.",
+          "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackstatus/baassetpackstatusoutofdate"
+        },
+        "BAAssetPackStatusUpToDate": {
+          "doc": "A status value that indicates that the downloaded asset pack is up to date.",
+          "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackstatus/baassetpackstatusuptodate"
+        },
+        "BAAssetPackStatusUpdateAvailable": {
+          "doc": "A status value that indicates that an update to the asset pack is available to download.",
+          "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackstatus/baassetpackstatusupdateavailable"
+        }
+      }
+    },
+    "BAContentRequest": {
+      "doc": "The content request type used in the downloader extension.",
+      "url": "https://developer.apple.com/documentation/backgroundassets/bacontentrequest",
+      "members": {
+        "BAContentRequestInstall": {
+          "doc": "A content request resulting from the installation of the app.",
+          "url": "https://developer.apple.com/documentation/backgroundassets/bacontentrequest/install"
+        },
+        "BAContentRequestLanguageChange": {
+          "doc": "A content request resulting from someone changing the app’s preferred language.",
+          "url": "https://developer.apple.com/documentation/backgroundassets/bacontentrequest/languagechange"
+        },
+        "BAContentRequestPeriodic": {
+          "doc": "A content request resulting from a system request for updated content within the app.",
+          "url": "https://developer.apple.com/documentation/backgroundassets/bacontentrequest/periodic"
+        },
+        "BAContentRequestUpdate": {
+          "doc": "A content request resulting from an update of the app.",
+          "url": "https://developer.apple.com/documentation/backgroundassets/bacontentrequest/update"
+        }
+      }
+    },
+    "BADownloadState": {
+      "doc": "Constants that indicate the state of a download.",
+      "url": "https://developer.apple.com/documentation/backgroundassets/badownloadstate"
+    },
+    "BAErrorCode": {
+      "url": "https://developer.apple.com/documentation/backgroundassets/baerrorcode"
+    },
+    "BAManagedErrorCode": {
+      "doc": "An error code for a managed asset pack.",
+      "url": "https://developer.apple.com/documentation/backgroundassets/bamanagederrorcode",
+      "members": {
+        "BAManagedErrorCodeAssetPackNotFound": {
+          "doc": "An error code that indicates the system couldn’t find an asset pack with the given identifier.",
+          "url": "https://developer.apple.com/documentation/backgroundassets/bamanagederrorcode/bamanagederrorcodeassetpacknotfound"
+        },
+        "BAManagedErrorCodeFileNotFound": {
+          "doc": "An error code that indicates the system couldn’t find a file at the specified path.",
+          "url": "https://developer.apple.com/documentation/backgroundassets/bamanagederrorcode/bamanagederrorcodefilenotfound"
+        },
+        "BAManagedErrorCodeLocalAvailabilityFailure": {
+          "doc": "An error code that indicates that the system couldn’t ensure the local availability of some or all of the requested asset packs.",
+          "url": "https://developer.apple.com/documentation/backgroundassets/bamanagederrorcode/bamanagederrorcodelocalavailabilityfailure"
+        }
+      }
+    }
+  },
+  "methods": {
+    "BAAssetPack": {
+      "-download": {
+        "doc": "Creates a download object for the asset pack that you schedule using a download manager.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpack/download"
+      },
+      "-downloadForContentRequest:": {
+        "doc": "Creates a download object for the asset pack that you schedule using a download manager.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpack/downloadforcontentrequest:"
+      }
+    },
+    "BAAssetPackManager": {
+      "-URLForPath:asLocalizedForLanguage:error:": {
+        "doc": "Returns a URL for the specified relative path.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/urlforpath:aslocalizedforlanguage:error:"
+      },
+      "-URLForPath:error:": {
+        "doc": "Returns a URL for the specified relative path.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/urlforpath:error:"
+      },
+      "-assetPackIsAvailableLocallyWithIdentifier:": {
+        "doc": "Checks whether the asset pack with the specified identifier is available locally.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/assetpackisavailablelocallywithidentifier:"
+      },
+      "-checkForUpdatesWithCompletionHandler:": {
+        "doc": "Gets the latest asset-pack information from the server, updates outdated asset packs, and removes obsolete asset packs.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/checkforupdateswithcompletionhandler:"
+      },
+      "-contentsAtPath:asLocalizedForLanguage:options:error:": {
+        "doc": "Returns the contents of a localized asset file at the specified relative path.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/contentsatpath:aslocalizedforlanguage:options:error:"
+      },
+      "-contentsAtPath:searchingInAssetPackWithIdentifier:options:error:": {
+        "doc": "Returns the contents of an asset file at the specified relative path.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/contentsatpath:searchinginassetpackwithidentifier:options:error:"
+      },
+      "-ensureLocalAvailabilityOfAssetPack:completionHandler:": {
+        "doc": "Ensures that the specified asset pack be available locally.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/ensurelocalavailabilityofassetpack:completionhandler:"
+      },
+      "-ensureLocalAvailabilityOfAssetPack:requireLatestVersion:completionHandler:": {
+        "doc": "Ensures that the specified asset pack is available locally, performing a download if necessary.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/ensurelocalavailabilityofassetpack:requirelatestversion:completionhandler:"
+      },
+      "-ensureLocalAvailabilityOfAssetPacks:completionHandler:": {
+        "doc": "Ensures that the specified asset packs are available locally.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/ensurelocalavailabilityofassetpacks:completionhandler:"
+      },
+      "-ensureLocalAvailabilityOfAssetPacks:requireLatestVersions:completionHandler:": {
+        "doc": "Ensures that the specified asset packs are available locally, performing a batch download if necessary.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/ensurelocalavailabilityofassetpacks:requirelatestversions:completionhandler:"
+      },
+      "-fileDescriptorForPath:asLocalizedForLanguage:error:": {
+        "doc": "Opens and returns a file descriptor for a localized asset file at the specified relative path.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/filedescriptorforpath:aslocalizedforlanguage:error:"
+      },
+      "-fileDescriptorForPath:searchingInAssetPackWithIdentifier:error:": {
+        "doc": "Opens and returns a file descriptor for the asset file at the specified relative path.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/filedescriptorforpath:searchinginassetpackwithidentifier:error:"
+      },
+      "-getAllAssetPacksWithCompletionHandler:": {
+        "doc": "Gets the asset packs that are available to download.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/getallassetpackswithcompletionhandler:"
+      },
+      "-getAssetPackWithIdentifier:completionHandler:": {
+        "doc": "Gets the asset pack with the given identifier.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/getassetpackwithidentifier:completionhandler:"
+      },
+      "-getLocalStatusOfAssetPackWithIdentifier:completionHandler:": {
+        "doc": "Gets an asset pack’s local status.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/getlocalstatusofassetpackwithidentifier:completionhandler:"
+      },
+      "-getLocallyAvailableLanguagesWithCompletionHandler:": {
+        "doc": "Gets the languages used by asset packs that are localized and are available locally.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/getlocallyavailablelanguageswithcompletionhandler:"
+      },
+      "-getManifestWithCompletionHandler:": {
+        "doc": "Gets the manifest of asset packs that are available to download.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/getmanifestwithcompletionhandler:"
+      },
+      "-getStatusOfAssetPackWithIdentifier:completionHandler:": {
+        "doc": "Gets an asset pack’s status.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/getstatusofassetpackwithidentifier:completionhandler:"
+      },
+      "-getStatusRelativeToAssetPack:completionHandler:": {
+        "doc": "Gets the current status relative to a particular asset pack.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/getstatusrelativetoassetpack:completionhandler:"
+      },
+      "-reconcilePreferredLanguagesWithCompletionHandler:": {
+        "doc": "Reconciles the set of locally available asset packs with the current preferred languages.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/reconcilepreferredlanguageswithcompletionhandler:"
+      },
+      "-removeAssetPackWithIdentifier:completionHandler:": {
+        "doc": "Removes the specified asset pack from the device.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/removeassetpackwithidentifier:completionhandler:"
+      }
+    },
+    "BAAssetPackManifest": {
+      "-allDownloads": {
+        "doc": "Creates download objects for every asset pack in this manifest.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanifest/alldownloads"
+      },
+      "-allDownloadsForContentRequest:": {
+        "doc": "Creates download objects for every asset pack in this manifest.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanifest/alldownloadsforcontentrequest:"
+      },
+      "-assetPackWithIdentifier:": {
+        "doc": "Returns the asset pack in this manifest with the given identifier.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanifest/assetpackwithidentifier:"
+      },
+      "-initFromData:applicationGroupIdentifier:error:": {
+        "doc": "Initializes a representation of a manifest in memory from JSON-encoded data.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanifest/initfromdata:applicationgroupidentifier:error:"
+      },
+      "-initWithContentsOfURL:applicationGroupIdentifier:error:": {
+        "doc": "Initializes a representation of a manifest in memory given a URL to the manifest’s representation as a JSON file on disk.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanifest/initwithcontentsofurl:applicationgroupidentifier:error:"
+      },
+      "-localizedAssetPacksForLanguage:": {
+        "doc": "Returns the subset of asset packs in this manifest that are available to download and that best match the specified language.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanifest/localizedassetpacksforlanguage:"
+      }
+    },
+    "BADownloadManager": {
+      "-cancelDownload:error:": {
+        "doc": "Cancels an asset download.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/badownloadmanager/cancel(_:)"
+      },
+      "-fetchCurrentDownloadsWithCompletionHandler:": {
+        "doc": "Fetches the contents of the manager’s download queue.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/badownloadmanager/fetchcurrentdownloads(completionhandler:)"
+      },
+      "-performWithExclusiveControl:": {
+        "doc": "Attempts to acquire immediate, exclusive access to the download manager.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/badownloadmanager/withexclusivecontrol(_:)"
+      },
+      "-scheduleDownload:error:": {
+        "doc": "Schedules an asset download to execute in the background at a nonspecific time in the future.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/badownloadmanager/scheduledownload(_:)"
+      },
+      "-startForegroundDownload:error:": {
+        "doc": "Schedules an asset download that executes immediately in the foreground.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/badownloadmanager/startforegrounddownload(_:)"
+      }
+    },
+    "BAURLDownload": {
+      "-initWithIdentifier:request:applicationGroupIdentifier:": {
+        "doc": "Creates a download that uses the specified identifier and App Group.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baurldownload/init(identifier:request:applicationgroupidentifier:)"
+      },
+      "-initWithIdentifier:request:applicationGroupIdentifier:priority:": {
+        "doc": "Creates a prioritized download that uses the specified identifier and App Group.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baurldownload/init(identifier:request:applicationgroupidentifier:priority:)"
+      }
+    }
+  },
+  "properties": {
+    "BAAssetPack": {
+      "downloadSize": {
+        "doc": "The size of the download file containing the asset pack in bytes.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpack/downloadsize"
+      },
+      "identifier": {
+        "doc": "A unique identifier for the asset pack.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpack/identifier"
+      },
+      "language": {
+        "doc": "The language, represented as a BCP-47 identifier, for which this asset pack is localized.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpack/language"
+      },
+      "userInfo": {
+        "doc": "JSON-encoded custom information that’s associated with the asset pack.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpack/userinfo"
+      },
+      "version": {
+        "doc": "The asset pack’s version number",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpack/version"
+      }
+    },
+    "BAAssetPackManager": {
+      "delegate": {
+        "doc": "An object that receives notifications about events that occur as an asset pack is downloaded.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/delegate"
+      },
+      "resolvedLanguage": {
+        "doc": "The language asset packs that are localized for which the system automatically makes available locally, represented as a BCP-47 identifier.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/resolvedlanguage"
+      },
+      "sharedManager": {
+        "doc": "The shared asset-pack manager.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanager/sharedmanager"
+      }
+    },
+    "BAAssetPackManifest": {
+      "assetPacks": {
+        "doc": "The asset packs in this manifest that are available to download.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanifest/assetpacks"
+      },
+      "availableLanguages": {
+        "doc": "The languages, represented as their respective BCP-47 identifiers, for which asset packs in this manifest are localized.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanifest/availablelanguages"
+      },
+      "localizedAssetPacks": {
+        "doc": "The subset of asset packs in this manifest that best match the current preferred languages.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanifest/localizedassetpacks"
+      },
+      "primaryLanguage": {
+        "doc": "The application’s primary language, represented as a BCP-47 identifier, as configured in App Store Connect.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanifest/primarylanguage"
+      },
+      "resolvedLanguage": {
+        "doc": "The language, represented as a BCP-47 identifier, asset packs in this manifest that are localized for which the system automatically makes available locally.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/baassetpackmanifest/resolvedlanguage"
+      }
+    },
+    "BADownload": {
+      "BADownloadState": {
+        "doc": "Constants that indicate the state of a download.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/badownload/state-swift.enum"
+      },
+      "BADownloaderPriority": {
+        "doc": "A type that determines the execution priority of a scheduled asset download.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/badownload/priority-swift.struct"
+      },
+      "identifier": {
+        "doc": "The app-specific string that uniquely identifies the downloadable asset.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/badownload/identifier"
+      },
+      "priority": {
+        "doc": "The download’s execution priority.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/badownload/priority-swift.property"
+      },
+      "state": {
+        "doc": "The current state of the download.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/badownload/state-swift.property"
+      },
+      "uniqueIdentifier": {
+        "doc": "The system-provided string that uniquely identifies the download object.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/badownload/uniqueidentifier"
+      }
+    },
+    "BADownloadManager": {
+      "delegate": {
+        "doc": "The download manager’s delegate.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/badownloadmanager/delegate"
+      },
+      "sharedManager": {
+        "doc": "The download manager that both the app and the extension share.",
+        "url": "https://developer.apple.com/documentation/backgroundassets/badownloadmanager/shared"
+      }
+    }
+  }
+}

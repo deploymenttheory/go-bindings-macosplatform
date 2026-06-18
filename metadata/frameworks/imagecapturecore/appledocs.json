@@ -1,0 +1,885 @@
+{
+  "schema_version": 1,
+  "framework": "ImageCaptureCore",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "ICCameraDevice": {
+      "doc": "An object that represents a camera.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice"
+    },
+    "ICCameraFile": {
+      "doc": "An object that represents a file on a camera.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile"
+    },
+    "ICCameraFolder": {
+      "doc": "An object that represents a folder on a camera.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafolder"
+    },
+    "ICCameraItem": {
+      "doc": "An abstract class that represents a camera item.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem"
+    },
+    "ICDevice": {
+      "doc": "An abstract object that represents a device.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice"
+    },
+    "ICDeviceBrowser": {
+      "doc": "An object for finding digital cameras and scanners.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicebrowser"
+    },
+    "ICScannerBandData": {
+      "doc": "The options for each band of data that the scanner reads.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerbanddata"
+    },
+    "ICScannerDevice": {
+      "doc": "An object that represents a scanner.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerdevice"
+    },
+    "ICScannerFeature": {
+      "doc": "An abstract class that describes a scanner feature.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfeature"
+    },
+    "ICScannerFeatureBoolean": {
+      "doc": "A feature with a value of YES or NO.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfeatureboolean"
+    },
+    "ICScannerFeatureEnumeration": {
+      "doc": "A feature that can have one of several discrete values, strings or numbers.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfeatureenumeration"
+    },
+    "ICScannerFeatureRange": {
+      "doc": "A feature with a value that lies within a range.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfeaturerange"
+    },
+    "ICScannerFeatureTemplate": {
+      "doc": "A group of one or more rectangular scan areas that can be used with a scanner functional unit.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfeaturetemplate"
+    },
+    "ICScannerFunctionalUnit": {
+      "doc": "An abstract class that represents a scanner functional unit.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfunctionalunit"
+    },
+    "ICScannerFunctionalUnitDocumentFeeder": {
+      "doc": "An object that represents the document feeder unit on a scanner.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfunctionalunitdocumentfeeder"
+    },
+    "ICScannerFunctionalUnitFlatbed": {
+      "doc": "An object that represents the flatbed unit on a scanner.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfunctionalunitflatbed"
+    },
+    "ICScannerFunctionalUnitNegativeTransparency": {
+      "doc": "An object that represents the transparency unit for scanning negatives on the scanner.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfunctionalunitnegativetransparency"
+    },
+    "ICScannerFunctionalUnitPositiveTransparency": {
+      "doc": "An object that represents the transparency unit for scanning positives on the scanner.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfunctionalunitpositivetransparency"
+    }
+  },
+  "protocols": {
+    "ICCameraDeviceDelegate": {
+      "doc": "Methods for detecting cameras, getting metadata and thumbnails, handling access and capability changes, and performing other actions on connected cameras.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevicedelegate"
+    },
+    "ICCameraDeviceDownloadDelegate": {
+      "doc": "Methods for managing camera file downloads.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevicedownloaddelegate"
+    },
+    "ICDeviceBrowserDelegate": {
+      "doc": "Methods for managing the addition and removal of devices and responding to device changes.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicebrowserdelegate"
+    },
+    "ICDeviceDelegate": {
+      "doc": "Methods for responding to device events and changes.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicedelegate"
+    },
+    "ICScannerDeviceDelegate": {
+      "doc": "Methods for determining availability, selecting a functional unit, and performing scans on connected scanners.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerdevicedelegate"
+    }
+  },
+  "enums": {
+    "ICDeviceLocationType": {
+      "doc": "The location of the image capture device.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicelocationtype",
+      "members": {
+        "ICDeviceLocationTypeBluetooth": {
+          "doc": "A paired Bluetooth device.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicelocationtype/bluetooth"
+        },
+        "ICDeviceLocationTypeBonjour": {
+          "doc": "A supported Bonjour services device.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicelocationtype/bonjour"
+        },
+        "ICDeviceLocationTypeLocal": {
+          "doc": "A device that’s directly attached to the Mac through its USB or FireWire port.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicelocationtype/local"
+        },
+        "ICDeviceLocationTypeShared": {
+          "doc": "A device that’s shared by other Mac hosts.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicelocationtype/shared"
+        }
+      }
+    },
+    "ICDeviceLocationTypeMask": {
+      "doc": "Masks for detecting different device locations.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicelocationtypemask",
+      "members": {
+        "ICDeviceLocationTypeMaskBluetooth": {
+          "doc": "A mask for detecting a paired Bluetooth device.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicelocationtypemask/bluetooth"
+        },
+        "ICDeviceLocationTypeMaskBonjour": {
+          "doc": "A mask for detecting a network device that publishes a Bonjour service.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicelocationtypemask/bonjour"
+        },
+        "ICDeviceLocationTypeMaskLocal": {
+          "doc": "A mask for detecting a local device, such as USB or FireWire.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicelocationtypemask/local"
+        },
+        "ICDeviceLocationTypeMaskRemote": {
+          "doc": "A mask for detecting a remote device, such as a shared, Bonjour, or Bluetooth device.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicelocationtypemask/remote"
+        },
+        "ICDeviceLocationTypeMaskShared": {
+          "doc": "A mask for detecting a device shared by another Mac host.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicelocationtypemask/shared"
+        }
+      }
+    },
+    "ICDeviceType": {
+      "doc": "The type of image capture device.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicetype",
+      "members": {
+        "ICDeviceTypeCamera": {
+          "doc": "The device is a camera.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicetype/camera"
+        },
+        "ICDeviceTypeScanner": {
+          "doc": "The device is a scanner.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicetype/scanner"
+        }
+      }
+    },
+    "ICDeviceTypeMask": {
+      "doc": "Masks for detecting different device types.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicetypemask",
+      "members": {
+        "ICDeviceTypeMaskCamera": {
+          "doc": "A mask for detecting a camera.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicetypemask/camera"
+        },
+        "ICDeviceTypeMaskScanner": {
+          "doc": "A mask for detecting a scanner.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicetypemask/scanner"
+        }
+      }
+    },
+    "ICEXIFOrientationType": {
+      "doc": "The file’s orientation type.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icexiforientationtype",
+      "members": {
+        "ICEXIFOrientation1": {
+          "doc": "Normal",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icexiforientationtype/orientation1"
+        },
+        "ICEXIFOrientation2": {
+          "doc": "Flipped horizontally",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icexiforientationtype/orientation2"
+        },
+        "ICEXIFOrientation3": {
+          "doc": "Rotated 180°",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icexiforientationtype/orientation3"
+        },
+        "ICEXIFOrientation4": {
+          "doc": "Flipped vertically",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icexiforientationtype/orientation4"
+        },
+        "ICEXIFOrientation5": {
+          "doc": "Rotated 90° CCW and flipped vertically",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icexiforientationtype/orientation5"
+        },
+        "ICEXIFOrientation6": {
+          "doc": "Rotated 90° CCW",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icexiforientationtype/orientation6"
+        },
+        "ICEXIFOrientation7": {
+          "doc": "Rotated 90° CW and flipped vertically",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icexiforientationtype/orientation7"
+        },
+        "ICEXIFOrientation8": {
+          "doc": "Rotated 90° CW",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icexiforientationtype/orientation8"
+        }
+      }
+    },
+    "ICLegacyReturnCode": {
+      "url": "https://developer.apple.com/documentation/imagecapturecore/iclegacyreturncode"
+    },
+    "ICMediaPresentation": {
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icmediapresentation"
+    },
+    "ICReturnCode": {
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icreturncode"
+    },
+    "ICReturnCodeOffset": {
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icreturncodeoffset"
+    },
+    "ICReturnConnectionErrorCode": {
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icreturnconnectionerrorcode"
+    },
+    "ICReturnDownloadErrorCode": {
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icreturndownloaderrorcode"
+    },
+    "ICReturnMetadataErrorCode": {
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icreturnmetadataerrorcode"
+    },
+    "ICReturnObjectErrorCode": {
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icreturnobjecterrorcode"
+    },
+    "ICReturnPTPDeviceErrorCode": {
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icreturnptpdeviceerrorcode"
+    },
+    "ICReturnThumbnailErrorCode": {
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icreturnthumbnailerrorcode"
+    },
+    "ICScannerBitDepth": {
+      "doc": "The number of bits per channel in the scanned image.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerbitdepth"
+    },
+    "ICScannerColorDataFormatType": {
+      "doc": "The color data formats relevant to multichannel data.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannercolordataformattype"
+    },
+    "ICScannerDocumentType": {
+      "doc": "The supported document size types.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerdocumenttype"
+    },
+    "ICScannerFeatureType": {
+      "doc": "The types of scanner features.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfeaturetype",
+      "members": {
+        "ICScannerFeatureTypeBoolean": {
+          "doc": "A feature with a value of YES or NO.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfeaturetype/boolean"
+        },
+        "ICScannerFeatureTypeEnumeration": {
+          "doc": "A feature that can have one of several discrete values, strings, or numbers.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfeaturetype/enumeration"
+        },
+        "ICScannerFeatureTypeRange": {
+          "doc": "A feature with a value that lies within a range.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfeaturetype/range"
+        },
+        "ICScannerFeatureTypeTemplate": {
+          "doc": "A group of one or more rectangular scan areas that can be used with a scanner functional unit.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfeaturetype/template"
+        }
+      }
+    },
+    "ICScannerFunctionalUnitState": {
+      "doc": "Flags to indicate the state of the scanner functional unit.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfunctionalunitstate",
+      "members": {
+        "ICScannerFunctionalUnitStateOverviewScanInProgress": {
+          "doc": "A flag indicating that the functional unit is performing an overview scan.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfunctionalunitstate/overviewscaninprogress"
+        },
+        "ICScannerFunctionalUnitStateReady": {
+          "doc": "A flag indicating that the functional unit is ready for operation.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfunctionalunitstate/ready"
+        },
+        "ICScannerFunctionalUnitStateScanInProgress": {
+          "doc": "A flag indicating that the functional unit is performing a scan.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfunctionalunitstate/scaninprogress"
+        }
+      }
+    },
+    "ICScannerFunctionalUnitType": {
+      "doc": "The types of scanner functional units.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfunctionalunittype",
+      "members": {
+        "ICScannerFunctionalUnitTypeDocumentFeeder": {
+          "doc": "A document feeder functional unit.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfunctionalunittype/documentfeeder"
+        },
+        "ICScannerFunctionalUnitTypeFlatbed": {
+          "doc": "A flatbed functional unit.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfunctionalunittype/flatbed"
+        },
+        "ICScannerFunctionalUnitTypeNegativeTransparency": {
+          "doc": "A transparency functional unit for scanning negatives.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfunctionalunittype/negativetransparency"
+        },
+        "ICScannerFunctionalUnitTypePositiveTransparency": {
+          "doc": "A transparency functional unit for scanning positives.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerfunctionalunittype/positivetransparency"
+        }
+      }
+    },
+    "ICScannerMeasurementUnit": {
+      "doc": "The unit of measurement used by the scanner.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannermeasurementunit"
+    },
+    "ICScannerPixelDataType": {
+      "doc": "The pixel data types.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerpixeldatatype"
+    },
+    "ICScannerTransferMode": {
+      "doc": "The modes for transferring scan data from the scanner functional unit.",
+      "url": "https://developer.apple.com/documentation/imagecapturecore/icscannertransfermode",
+      "members": {
+        "ICScannerTransferModeFileBased": {
+          "doc": "The mode for transferring the scan as a file.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icscannertransfermode/filebased"
+        },
+        "ICScannerTransferModeMemoryBased": {
+          "doc": "The mode for transferring the scan as data.",
+          "url": "https://developer.apple.com/documentation/imagecapturecore/icscannertransfermode/memorybased"
+        }
+      }
+    }
+  },
+  "methods": {
+    "ICCameraDevice": {
+      "-cancelDelete": {
+        "doc": "Cancels the current delete operation.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/canceldelete()"
+      },
+      "-cancelDownload": {
+        "doc": "Cancels a download from the camera.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/canceldownload()"
+      },
+      "-filesOfType:": {
+        "doc": "Returns an array of files of the selected type on the camera.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/files(oftype:)"
+      },
+      "-requestDeleteFiles:": {
+        "doc": "Deletes files from the camera.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/requestdeletefiles(_:)"
+      },
+      "-requestDeleteFiles:deleteFailed:completion:": {
+        "doc": "Deletes files from the camera, with the ability to catch failures and execute a completion block.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/requestdeletefiles(_:deletefailed:completion:)"
+      },
+      "-requestDisableTethering": {
+        "doc": "Disables tethered capture on the camera.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/requestdisabletethering()"
+      },
+      "-requestDownloadFile:options:downloadDelegate:didDownloadSelector:contextInfo:": {
+        "doc": "Downloads a file from the camera.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/requestdownloadfile(_:options:downloaddelegate:diddownloadselector:contextinfo:)"
+      },
+      "-requestEnableTethering": {
+        "doc": "Enables tethered capture if the camera has the capability to take pictures while connected.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/requestenabletethering()"
+      },
+      "-requestReadDataFromFile:atOffset:length:readDelegate:didReadDataSelector:contextInfo:": {
+        "doc": "Asynchronously reads data of a specified length from a specified offset.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/requestreaddata(from:atoffset:length:readdelegate:didreaddataselector:contextinfo:)"
+      },
+      "-requestSendPTPCommand:outData:completion:": {
+        "doc": "Sends a Picture Transfer Protocol (PTP) command to a camera asynchronously.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/requestsendptpcommand(_:outdata:completion:)"
+      },
+      "-requestSendPTPCommand:outData:sendCommandDelegate:didSendCommandSelector:contextInfo:": {
+        "doc": "Sends a Picture Transfer Protocol (PTP) command to a camera asynchronously.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/requestsendptpcommand(_:outdata:sendcommanddelegate:didsendcommand:contextinfo:)"
+      },
+      "-requestSyncClock": {
+        "doc": "Synchronizes the camera’s clock with the computer’s clock.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/requestsyncclock()"
+      },
+      "-requestTakePicture": {
+        "doc": "Captures a new image using the camera.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/requesttakepicture()"
+      },
+      "-requestUploadFile:options:uploadDelegate:didUploadSelector:contextInfo:": {
+        "doc": "Uploads a file to the camera.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/requestuploadfile(_:options:uploaddelegate:diduploadselector:contextinfo:)"
+      }
+    },
+    "ICCameraFile": {
+      "-requestDownloadWithOptions:completion:": {
+        "doc": "Requests a download and executes the completion block in place of the delegate.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/requestdownload(options:completion:)"
+      },
+      "-requestMetadataDictionaryWithOptions:completion:": {
+        "doc": "Requests metadata and executes the completion block in place of the delegate.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/requestmetadatadictionary(options:completion:)"
+      },
+      "-requestReadDataAtOffset:length:completion:": {
+        "doc": "Requests to asynchronously read data of a specified length from a specified offset, then executes the completion block.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/requestreaddata(atoffset:length:completion:)"
+      },
+      "-requestThumbnailDataWithOptions:completion:": {
+        "doc": "Requests a thumbnail and executes the completion block in place of the delegate.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/requestthumbnaildata(options:completion:)"
+      }
+    },
+    "ICCameraItem": {
+      "-flushMetadataCache": {
+        "doc": "Deletes the item’s cached metadata.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/flushmetadatacache()"
+      },
+      "-flushThumbnailCache": {
+        "doc": "Deletes the item’s cached thumbnail.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/flushthumbnailcache()"
+      },
+      "-requestMetadata": {
+        "doc": "Requests metadata for the item.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/requestmetadata()"
+      },
+      "-requestThumbnail": {
+        "doc": "Requests a thumbnail for the item.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/requestthumbnail()"
+      }
+    },
+    "ICDevice": {
+      "-requestCloseSession": {
+        "doc": "Requests to close an open session on the device.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/requestclosesession()"
+      },
+      "-requestCloseSessionWithOptions:completion:": {
+        "doc": "Requests to close an open session on the device, then executes the completion handler.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/requestclosesession(options:completion:)"
+      },
+      "-requestEject": {
+        "doc": "Requests to eject the media if permitted by the device, or to disconnect from a remote device.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/requesteject()"
+      },
+      "-requestEjectOrDisconnect": {
+        "doc": "Requests to eject the media if permitted by the device, or to disconnect from a remote device.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/requestejectordisconnect()"
+      },
+      "-requestEjectWithCompletion:": {
+        "doc": "Requests to eject the media if permitted by the device, or to disconnect from a remote device, then executes the completion handler.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/requesteject(completion:)"
+      },
+      "-requestOpenSession": {
+        "doc": "Requests to open a session on the device.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/requestopensession()"
+      },
+      "-requestOpenSessionWithOptions:completion:": {
+        "doc": "Requests to open a session on the device, then executes the completion handler.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/requestopensession(options:completion:)"
+      },
+      "-requestSendMessage:outData:maxReturnedDataSize:sendMessageDelegate:didSendMessageSelector:contextInfo:": {
+        "doc": "Asynchronously sends an arbitrary message with optional data to a device.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/requestsendmessage(_:outdata:maxreturneddatasize:sendmessagedelegate:didsendmessageselector:contextinfo:)"
+      },
+      "-requestYield": {
+        "doc": "Requests that device module in control of this device yield control.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/requestyield()"
+      }
+    },
+    "ICDeviceBrowser": {
+      "-init": {
+        "doc": "Creates an ImageCaptureCore device browser.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicebrowser/init()"
+      },
+      "-start": {
+        "doc": "Tells the delegate to start looking for devices.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicebrowser/start()"
+      },
+      "-stop": {
+        "doc": "Tells the delegate to stop looking for devices.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicebrowser/stop()"
+      }
+    },
+    "ICScannerDevice": {
+      "-cancelScan": {
+        "doc": "Cancels the current scan.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerdevice/cancelscan()"
+      },
+      "-requestOpenSessionWithCredentials:password:": {
+        "doc": "Opens a session on the protected device with the authorized username and passcode.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerdevice/requestopensession(withcredentials:password:)"
+      },
+      "-requestOverviewScan": {
+        "doc": "Starts an overview scan on the selected functional unit.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerdevice/requestoverviewscan()"
+      },
+      "-requestScan": {
+        "doc": "Starts a scan on the selected functional unit.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerdevice/requestscan()"
+      },
+      "-requestSelectFunctionalUnit:": {
+        "doc": "Requests to select a functional unit on the scanner.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerdevice/requestselect(_:)"
+      }
+    }
+  },
+  "properties": {
+    "ICCameraDevice": {
+      "accessRestrictedAppleDevice": {
+        "doc": "A Boolean value indicating whether the device is an Apple device, passcode-locked, and connected to an untrusted host.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/isaccessrestrictedappledevice"
+      },
+      "batteryLevel": {
+        "doc": "The battery charge level.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/batterylevel"
+      },
+      "batteryLevelAvailable": {
+        "doc": "A Boolean value that indicates whether the battery charge level is available.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/batterylevelavailable"
+      },
+      "contentCatalogPercentCompleted": {
+        "doc": "The percentage of the camera’s content that has been catalogued.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/contentcatalogpercentcompleted"
+      },
+      "contents": {
+        "doc": "All image, movie, and audio files stored on the camera, in an order that reflects the camera’s storage folder structure.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/contents"
+      },
+      "ejectable": {
+        "doc": "A Boolean value indicating whether the device can be ‘soft’ removed or disconnected.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/isejectable"
+      },
+      "iCloudPhotosEnabled": {
+        "doc": "A Boolean value indicating whether the iCloud Photo Library is enabled on the device.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/icloudphotosenabled"
+      },
+      "locked": {
+        "doc": "A Boolean value indicating whether the device is locked, preventing deletion of any asset.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/islocked"
+      },
+      "mediaFiles": {
+        "doc": "All image, movie and audio files stored on the camera, without regard to the camera’s storage folder structure.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/mediafiles"
+      },
+      "mountPoint": {
+        "doc": "The file system mount point for a camera using the mass storage transport type.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/mountpoint"
+      },
+      "ptpEventHandler": {
+        "doc": "A closure for handling PTP event packets.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/ptpeventhandler"
+      },
+      "tetheredCaptureEnabled": {
+        "doc": "A Boolean value indicating whether tethered capture is enabled on the camera.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/tetheredcaptureenabled"
+      },
+      "timeOffset": {
+        "doc": "The time offset, in seconds, between the camera’s clock and the computer’s clock.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameradevice/timeoffset"
+      }
+    },
+    "ICCameraFile": {
+      "burstFavorite": {
+        "doc": "A Boolean value that indicates this file is the burst favorite in a burst.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/burstfavorite"
+      },
+      "burstPicked": {
+        "doc": "A Boolean value that indicates whether this file is user picked in a burst.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/burstpicked"
+      },
+      "burstUUID": {
+        "doc": "The burst UUID of the file if it is in a burst.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/burstuuid"
+      },
+      "createdFilename": {
+        "doc": "The created name of the file.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/createdfilename"
+      },
+      "duration": {
+        "doc": "The duration, in seconds, of an audio or video file.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/duration"
+      },
+      "exifCreationDate": {
+        "doc": "The EXIF creation date of the file.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/exifcreationdate"
+      },
+      "exifModificationDate": {
+        "doc": "The EXIF modification date of the file.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/exifmodificationdate"
+      },
+      "fileCreationDate": {
+        "doc": "The creation date of the file.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/filecreationdate"
+      },
+      "fileModificationDate": {
+        "doc": "The modification date of the file.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/filemodificationdate"
+      },
+      "fileSize": {
+        "doc": "The size of the file, in bytes.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/filesize"
+      },
+      "firstPicked": {
+        "doc": "A Boolean value that indicates whether a file is autopicked by Photos to represent the burst.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/firstpicked"
+      },
+      "gpsString": {
+        "doc": "The GPS String of the file in standard format.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/gpsstring"
+      },
+      "groupUUID": {
+        "doc": "The group UUID of the file.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/groupuuid"
+      },
+      "height": {
+        "doc": "The height of an image or movie frame.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/height"
+      },
+      "highFramerate": {
+        "doc": "A Boolean value that indicates whether the file is a slow motion or high-frame-rate video file.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/highframerate"
+      },
+      "orientation": {
+        "doc": "The orientation to use when downloading the image.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/orientation"
+      },
+      "originalFilename": {
+        "doc": "The original name of the file on disk.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/originalfilename"
+      },
+      "originatingAssetID": {
+        "doc": "The originating asset ID of an HEIF or HVEC file.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/originatingassetid"
+      },
+      "pairedRawImage": {
+        "doc": "A sidecar file containing the logical RAW compliment of a JPG or other two-format image.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/pairedrawimage"
+      },
+      "relatedUUID": {
+        "doc": "A related UUID correlating several images from an Apple device.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/relateduuid"
+      },
+      "sidecarFiles": {
+        "doc": "An array of two camera files associated with this file.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/sidecarfiles"
+      },
+      "timeLapse": {
+        "doc": "A Boolean value that indicates whether the file is a time-lapse video file.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/timelapse"
+      },
+      "width": {
+        "doc": "The width of an image or movie frame.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafile/width"
+      }
+    },
+    "ICCameraFolder": {
+      "contents": {
+        "doc": "A list of items that this folder contains.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccamerafolder/contents"
+      }
+    },
+    "ICCameraItem": {
+      "UTI": {
+        "doc": "The item’s uniform type identifier (UTI) string.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/uti"
+      },
+      "addedAfterContentCatalogCompleted": {
+        "doc": "A Boolean value indicating whether the item was captured on the camera after the camera’s content had been fully enumerated.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/wasaddedaftercontentcatalogcompleted"
+      },
+      "creationDate": {
+        "doc": "The item’s creation date, usually the same as its EXIF creation date.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/creationdate"
+      },
+      "device": {
+        "doc": "The item’s parent device.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/device"
+      },
+      "fileSystemPath": {
+        "doc": "The item’s file system path on a camera using the mass storage transport type.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/filesystempath"
+      },
+      "inTemporaryStore": {
+        "doc": "A Boolean value that indicates whether this item is in a temporary store.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/isintemporarystore"
+      },
+      "largeThumbnailIfAvailable": {
+        "doc": "A large thumbnail for the item if one is readily available.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/largethumbnailifavailable"
+      },
+      "locked": {
+        "doc": "A Boolean value that indicates whether the storage card in the camera is locked.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/islocked"
+      },
+      "metadata": {
+        "doc": "The item’s metadata.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/metadata"
+      },
+      "metadataIfAvailable": {
+        "doc": "The item’s metadata if it is readily available.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/metadataifavailable"
+      },
+      "modificationDate": {
+        "doc": "The item’s modification date, usually the same as its EXIF modification date.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/modificationdate"
+      },
+      "name": {
+        "doc": "The item’s name.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/name"
+      },
+      "parentFolder": {
+        "doc": "This item’s parent folder.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/parentfolder"
+      },
+      "ptpObjectHandle": {
+        "doc": "The item’s PTP object handle value, if the camera uses the PTP protocol.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/ptpobjecthandle"
+      },
+      "raw": {
+        "doc": "A Boolean value indicating whether the item is a raw image file.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/israw"
+      },
+      "thumbnail": {
+        "doc": "The item’s thumbnail.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/thumbnail"
+      },
+      "thumbnailIfAvailable": {
+        "doc": "The item’s thumbnail if it is readily available.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/thumbnailifavailable"
+      },
+      "userData": {
+        "doc": "A mutable dictionary to store arbitrary key-value pairs associated with a camera item.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/iccameraitem/userdata"
+      }
+    },
+    "ICDevice": {
+      "UUIDString": {
+        "doc": "A string representation of the device’s universally unique identifier (UUID).",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/uuidstring"
+      },
+      "autolaunchApplicationPath": {
+        "doc": "The file system path of an application to launch automatically when this device is added.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/autolaunchapplicationpath"
+      },
+      "capabilities": {
+        "doc": "The capabilities of the device as reported by the device module.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/capabilities"
+      },
+      "delegate": {
+        "doc": "The delegate to receive messages once a session is opened on the device.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/delegate"
+      },
+      "hasOpenSession": {
+        "doc": "A Boolean value that indicates whether the device has an open session.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/hasopensession"
+      },
+      "icon": {
+        "doc": "The device’s icon image.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/icon"
+      },
+      "locationDescription": {
+        "doc": "A nonlocalized location description for the device.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/locationdescription"
+      },
+      "moduleExecutableArchitecture": {
+        "doc": "The executable architecture of the device module servicing the requests.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/moduleexecutablearchitecture"
+      },
+      "modulePath": {
+        "doc": "The file system path of the device module associated with this device.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/modulepath"
+      },
+      "moduleVersion": {
+        "doc": "The bundle version of the device module associated with this device.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/moduleversion"
+      },
+      "name": {
+        "doc": "The device’s name as reported by the device module, or if no device module is in control of this device, by the device transport.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/name"
+      },
+      "persistentIDString": {
+        "doc": "A string representation of the device’s persistent ID.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/persistentidstring"
+      },
+      "productKind": {
+        "doc": "The device’s type.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/productkind"
+      },
+      "remote": {
+        "doc": "A Boolean value indicating whether the device is published by the Image Capture device-sharing facility.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/isremote"
+      },
+      "serialNumberString": {
+        "doc": "The device’s serial number.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/serialnumberstring"
+      },
+      "transportType": {
+        "doc": "The hardware connection type the device is using.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/transporttype"
+      },
+      "type": {
+        "doc": "A combination of the device’s type and its location type.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/type"
+      },
+      "usbLocationID": {
+        "doc": "The USB location that the device is occupying.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/usblocationid"
+      },
+      "usbProductID": {
+        "doc": "The USB Product ID (PID) associated with the device.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/usbproductid"
+      },
+      "usbVendorID": {
+        "doc": "The USB Vendor ID (VID) associated with the device.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/usbvendorid"
+      },
+      "userData": {
+        "doc": "A bookkeeping object for client convenience.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevice/userdata"
+      }
+    },
+    "ICDeviceBrowser": {
+      "browsedDeviceTypeMask": {
+        "doc": "A mask whose set bits indicate the type of devices being browsed after the delegate receives the start message.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicebrowser/browseddevicetypemask"
+      },
+      "browsing": {
+        "doc": "A Boolean value indicating whether the device browser is browsing for devices.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicebrowser/isbrowsing"
+      },
+      "delegate": {
+        "doc": "The object that acts as the delegate of the device browser.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicebrowser/delegate"
+      },
+      "devices": {
+        "doc": "All devices found by the browser.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicebrowser/devices"
+      },
+      "preferredDevice": {
+        "doc": "Returns a device object that the client application should select when it launches.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icdevicebrowser/preferreddevice"
+      }
+    },
+    "ICScannerDevice": {
+      "availableFunctionalUnitTypes": {
+        "doc": "An array of functional unit types available on this scanner.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerdevice/availablefunctionalunittypes"
+      },
+      "defaultUsername": {
+        "doc": "A default username on protected scanners.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerdevice/defaultusername"
+      },
+      "documentName": {
+        "doc": "The document’s name.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerdevice/documentname"
+      },
+      "documentUTI": {
+        "doc": "The document’s uniform type identifier.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerdevice/documentuti"
+      },
+      "downloadsDirectory": {
+        "doc": "The downloads directory.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerdevice/downloadsdirectory"
+      },
+      "maxMemoryBandSize": {
+        "doc": "The total maximum band size requested when performing a memory-based transfer.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerdevice/maxmemorybandsize"
+      },
+      "selectedFunctionalUnit": {
+        "doc": "The currently selected functional unit on the scanner.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerdevice/selectedfunctionalunit"
+      },
+      "transferMode": {
+        "doc": "The transfer mode for the scanned document.",
+        "url": "https://developer.apple.com/documentation/imagecapturecore/icscannerdevice/transfermode"
+      }
+    }
+  }
+}

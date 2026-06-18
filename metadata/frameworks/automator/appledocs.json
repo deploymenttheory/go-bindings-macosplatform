@@ -1,0 +1,347 @@
+{
+  "schema_version": 1,
+  "framework": "Automator",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "AMAction": {
+      "doc": "An abstract class that defines the interface and general characteristics of Automator actions.",
+      "url": "https://developer.apple.com/documentation/automator/amaction"
+    },
+    "AMAppleScriptAction": {
+      "doc": "An object that represents Automator actions whose runtime behavior is driven by an AppleScript script.",
+      "url": "https://developer.apple.com/documentation/automator/amapplescriptaction"
+    },
+    "AMBundleAction": {
+      "doc": "An object that represents an Automator action that’s a loadable bundle.",
+      "url": "https://developer.apple.com/documentation/automator/ambundleaction"
+    },
+    "AMShellScriptAction": {
+      "doc": "An object that represents Automator actions whose runtime behavior is driven by a shell script or by a Perl or Python script.",
+      "url": "https://developer.apple.com/documentation/automator/amshellscriptaction"
+    },
+    "AMWorkflow": {
+      "doc": "An object that lets you use an Automator workflow in your app.",
+      "url": "https://developer.apple.com/documentation/automator/amworkflow"
+    },
+    "AMWorkflowController": {
+      "doc": "An object that lets you manage an Automator workflow in your app.",
+      "url": "https://developer.apple.com/documentation/automator/amworkflowcontroller"
+    },
+    "AMWorkflowView": {
+      "doc": "An object that lets you view and edit Automator workflows in your app.",
+      "url": "https://developer.apple.com/documentation/automator/amworkflowview"
+    },
+    "AMWorkspace": {
+      "doc": "A workspace for running an Automator workflow.",
+      "url": "https://developer.apple.com/documentation/automator/amworkspace"
+    }
+  },
+  "protocols": {
+    "AMWorkflowControllerDelegate": {
+      "doc": "A set of optional methods that a delegate of a workflow controller implements.",
+      "url": "https://developer.apple.com/documentation/automator/amworkflowcontrollerdelegate"
+    }
+  },
+  "enums": {
+    "AMLogLevel": {
+      "doc": "Logging levels that Automator supports.",
+      "url": "https://developer.apple.com/documentation/automator/amloglevel",
+      "members": {
+        "AMLogLevelDebug": {
+          "doc": "The debug log level.",
+          "url": "https://developer.apple.com/documentation/automator/amloglevel/debug"
+        },
+        "AMLogLevelError": {
+          "doc": "The error log level.",
+          "url": "https://developer.apple.com/documentation/automator/amloglevel/error"
+        },
+        "AMLogLevelInfo": {
+          "doc": "The informational log level.",
+          "url": "https://developer.apple.com/documentation/automator/amloglevel/info"
+        },
+        "AMLogLevelWarn": {
+          "doc": "The warning log level.",
+          "url": "https://developer.apple.com/documentation/automator/amloglevel/warn"
+        }
+      }
+    }
+  },
+  "methods": {
+    "AMAction": {
+      "-activated": {
+        "doc": "Allows the action to synchronize its information with settings in another app.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/activated()"
+      },
+      "-closed": {
+        "doc": "Invoked by Automator when the receiving action is removed from a workflow, allowing it to perform cleanup operations.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/closed()"
+      },
+      "-didFinishRunningWithError:": {
+        "doc": "Sent by the action to itself when it has finished running asynchronously.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/didfinishrunningwitherror:"
+      },
+      "-finishRunningWithError:": {
+        "doc": "Causes the action to stop running and return an error, which, in turn, causes the workflow to stop.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/finishrunningwitherror(_:)"
+      },
+      "-initWithContentsOfURL:error:": {
+        "doc": "Loads an Automator action from a file URL.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/init(contentsof:)"
+      },
+      "-initWithDefinition:fromArchive:": {
+        "doc": "Initializes the action with the specified definition.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/init(definition:fromarchive:)"
+      },
+      "-logMessageWithLevel:format:": {
+        "doc": "Displays a message in Automator’s log area.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/logmessagewithlevel:format:"
+      },
+      "-opened": {
+        "doc": "Allows the action to initialize its user interface.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/opened()"
+      },
+      "-parametersUpdated": {
+        "doc": "Requests the action to update its user interface from its stored parameters, which have changed.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/parametersupdated()"
+      },
+      "-reset": {
+        "doc": "Resets the action to its initial state.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/reset()"
+      },
+      "-runAsynchronouslyWithInput:": {
+        "doc": "Causes Automator to wait for notification that the action has completed execution, which allows the action to perform an asynchronous operation.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/runasynchronously(withinput:)"
+      },
+      "-runWithInput:error:": {
+        "doc": "Requests the action to perform its task using the specified input.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/run(withinput:)"
+      },
+      "-runWithInput:fromAction:error:": {
+        "doc": "Requests the action to perform its task using the specified input from the specified action.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/runwithinput:fromaction:error:"
+      },
+      "-stop": {
+        "doc": "Stops the action from running.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/stop()"
+      },
+      "-updateParameters": {
+        "doc": "Requests the action to update its stored set of parameters from the settings in the action’s user interface.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/updateparameters()"
+      },
+      "-willFinishRunning": {
+        "doc": "Provides an opportunity for an action to perform cleanup operations, such as closing windows and deallocating memory.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/willfinishrunning()"
+      },
+      "-writeToDictionary:": {
+        "doc": "Examines the parameters and other configuration information specified in the passed dictionary and adds its own information to it if appropriate.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/write(to:)"
+      }
+    },
+    "AMBundleAction": {
+      "-awakeFromBundle": {
+        "doc": "Allows the action object to perform setup tasks requiring the presence of all bundle objects.",
+        "url": "https://developer.apple.com/documentation/automator/ambundleaction/awakefrombundle()"
+      }
+    },
+    "AMWorkflow": {
+      "+runWorkflowAtURL:withInput:error:": {
+        "doc": "Loads and runs the specified workflow file.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflow/run(at:withinput:)"
+      },
+      "-addAction:": {
+        "doc": "Adds the specified action at the end of the receiving workflow.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflow/addaction(_:)"
+      },
+      "-init": {
+        "doc": "Creates and initializes a workflow.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflow/init()"
+      },
+      "-initWithContentsOfURL:error:": {
+        "doc": "Creates and initializes a workflow based on the contents of the specified file.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflow/init(contentsof:)"
+      },
+      "-insertAction:atIndex:": {
+        "doc": "Inserts the specified action at the specified position of the receiving workflow.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflow/insertaction(_:at:)"
+      },
+      "-moveActionAtIndex:toIndex:": {
+        "doc": "Moves the action from the specified start position to the specified end position in the receiving workflow.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflow/moveaction(at:to:)"
+      },
+      "-removeAction:": {
+        "doc": "Removes the specified action from the workflow.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflow/removeaction(_:)"
+      },
+      "-setValue:forVariableWithName:": {
+        "doc": "Sets the value of the workflow variable with the specified name.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflow/setvalue(_:forvariablewithname:)"
+      },
+      "-valueForVariableWithName:": {
+        "doc": "Returns the value of the workflow variable with the specified name.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflow/valueforvariable(withname:)"
+      },
+      "-writeToURL:error:": {
+        "doc": "Writes the workflow to the specified file.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflow/write(to:)"
+      }
+    },
+    "AMWorkflowController": {
+      "-pause:": {
+        "doc": "Pauses a workflow that’s running.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflowcontroller/pause(_:)"
+      },
+      "-reset:": {
+        "doc": "Stops a workflow, clears any action results, and resets the workflow back to an un-run state.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflowcontroller/reset(_:)"
+      },
+      "-run:": {
+        "doc": "Runs the associated workflow, after first clearing any results stored by its actions during any previous run.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflowcontroller/run(_:)"
+      },
+      "-step:": {
+        "doc": "In a paused workflow, runs the next action in the workflow and then pauses again.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflowcontroller/step(_:)"
+      },
+      "-stop:": {
+        "doc": "Stops the associated workflow.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflowcontroller/stop(_:)"
+      }
+    },
+    "AMWorkspace": {
+      "-runWorkflowAtPath:withInput:error:": {
+        "doc": "Loads and runs the specified workflow file.",
+        "url": "https://developer.apple.com/documentation/automator/amworkspace/runworkflow(atpath:withinput:)"
+      }
+    }
+  },
+  "properties": {
+    "AMAction": {
+      "ignoresInput": {
+        "doc": "A Boolean value that indicates whether the action acts upon its input or the input is ignored.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/ignoresinput"
+      },
+      "name": {
+        "doc": "The name of the action.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/name"
+      },
+      "output": {
+        "doc": "The action’s output.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/output"
+      },
+      "progressValue": {
+        "doc": "A float value between 0 and 1, which indicates how far along the action is while processing.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/progressvalue"
+      },
+      "selectedInputType": {
+        "doc": "The type of input, in UTI format, of the input received by the action.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/selectedinputtype"
+      },
+      "selectedOutputType": {
+        "doc": "The type of output, in UTI format, of the output to be produced by the action.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/selectedoutputtype"
+      },
+      "stopped": {
+        "doc": "A Boolean value that indicates whether the user clicked the stop button on the parent workflow.",
+        "url": "https://developer.apple.com/documentation/automator/amaction/isstopped"
+      }
+    },
+    "AMAppleScriptAction": {
+      "script": {
+        "doc": "An OSAScript object representing the receiver’s script containing the on run command handler.",
+        "url": "https://developer.apple.com/documentation/automator/amapplescriptaction/script"
+      }
+    },
+    "AMBundleAction": {
+      "bundle": {
+        "doc": "The action’s bundle object.",
+        "url": "https://developer.apple.com/documentation/automator/ambundleaction/bundle"
+      },
+      "hasView": {
+        "doc": "A Boolean value that indicates whether the action has a view associated with it.",
+        "url": "https://developer.apple.com/documentation/automator/ambundleaction/hasview"
+      },
+      "parameters": {
+        "doc": "The action’s parameters.",
+        "url": "https://developer.apple.com/documentation/automator/ambundleaction/parameters"
+      },
+      "view": {
+        "doc": "The action’s view object.",
+        "url": "https://developer.apple.com/documentation/automator/ambundleaction/view"
+      }
+    },
+    "AMShellScriptAction": {
+      "inputFieldSeparator": {
+        "doc": "A string to use as the delimiter between items in the string passed to the action through standard input.",
+        "url": "https://developer.apple.com/documentation/automator/amshellscriptaction/inputfieldseparator"
+      },
+      "outputFieldSeparator": {
+        "doc": "A string to use as a delimiter in the string output by the action.",
+        "url": "https://developer.apple.com/documentation/automator/amshellscriptaction/outputfieldseparator"
+      },
+      "remapLineEndings": {
+        "doc": "A Boolean value that indicates whether you want automatic remapping of carriage return (\\r) to newline (\\n) characters in the input string.",
+        "url": "https://developer.apple.com/documentation/automator/amshellscriptaction/remaplineendings"
+      }
+    },
+    "AMWorkflow": {
+      "actions": {
+        "doc": "An array of the workflow’s actions.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflow/actions"
+      },
+      "fileURL": {
+        "doc": "A URL that specifies the location of the workflow file.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflow/fileurl"
+      },
+      "input": {
+        "doc": "The input data that is passed to the first action in the workflow.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflow/input"
+      },
+      "output": {
+        "doc": "The output data that is provided by the last action in the workflow.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflow/output"
+      }
+    },
+    "AMWorkflowController": {
+      "canRun": {
+        "doc": "A Boolean value that indicates whether the controller’s workflow is able to run.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflowcontroller/canrun"
+      },
+      "delegate": {
+        "doc": "The controller’s delegate.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflowcontroller/delegate"
+      },
+      "paused": {
+        "doc": "A Boolean value that indicates whether the controller’s workflow is currently paused.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflowcontroller/ispaused"
+      },
+      "running": {
+        "doc": "A Boolean value that indicates whether the controller’s workflow is currently running.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflowcontroller/isrunning"
+      },
+      "workflow": {
+        "doc": "The controller’s workflow.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflowcontroller/workflow"
+      },
+      "workflowView": {
+        "doc": "The controller’s workflow view.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflowcontroller/workflowview-swift.property"
+      }
+    },
+    "AMWorkflowView": {
+      "editable": {
+        "doc": "A Boolean value that indicates whether the workflow view is editable.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflowview/iseditable"
+      },
+      "workflowController": {
+        "doc": "The view’s workflow controller.",
+        "url": "https://developer.apple.com/documentation/automator/amworkflowview/workflowcontroller"
+      }
+    },
+    "AMWorkspace": {
+      "sharedWorkspace": {
+        "doc": "The shared workspace object.",
+        "url": "https://developer.apple.com/documentation/automator/amworkspace/shared"
+      }
+    }
+  }
+}

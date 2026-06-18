@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "framework": "PushKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "PKPushCredentials": {
+      "doc": "An object that encapsulates the device token you use to deliver push notifications to your app.",
+      "url": "https://developer.apple.com/documentation/pushkit/pkpushcredentials"
+    },
+    "PKPushPayload": {
+      "doc": "An object that contains information about a received PushKit notification.",
+      "url": "https://developer.apple.com/documentation/pushkit/pkpushpayload"
+    },
+    "PKPushRegistry": {
+      "doc": "An object that requests the delivery and handles the receipt of PushKit notifications.",
+      "url": "https://developer.apple.com/documentation/pushkit/pkpushregistry"
+    },
+    "PKVoIPPushMetadata": {
+      "doc": "An object that contains metadata about a received PushKit VoIP notification.",
+      "url": "https://developer.apple.com/documentation/pushkit/pkvoippushmetadata"
+    }
+  },
+  "protocols": {
+    "PKPushRegistryDelegate": {
+      "doc": "The methods that you use to handle incoming PushKit notifications and registration events.",
+      "url": "https://developer.apple.com/documentation/pushkit/pkpushregistrydelegate"
+    }
+  },
+  "methods": {
+    "PKPushRegistry": {
+      "-initWithQueue:": {
+        "doc": "Creates a push registry with the specified dispatch queue.",
+        "url": "https://developer.apple.com/documentation/pushkit/pkpushregistry/init(queue:)"
+      },
+      "-pushTokenForType:": {
+        "doc": "Retrieves the locally cached push token for the specified push type.",
+        "url": "https://developer.apple.com/documentation/pushkit/pkpushregistry/pushtoken(for:)"
+      }
+    }
+  },
+  "properties": {
+    "PKPushCredentials": {
+      "token": {
+        "doc": "A unique device token to use when sending push notifications to the current device.",
+        "url": "https://developer.apple.com/documentation/pushkit/pkpushcredentials/token"
+      },
+      "type": {
+        "doc": "The push type constant associated with the token.",
+        "url": "https://developer.apple.com/documentation/pushkit/pkpushcredentials/type"
+      }
+    },
+    "PKPushPayload": {
+      "dictionaryPayload": {
+        "doc": "The contents of the received payload.",
+        "url": "https://developer.apple.com/documentation/pushkit/pkpushpayload/dictionarypayload"
+      },
+      "type": {
+        "doc": "The type value indicating how to interpret the payload.",
+        "url": "https://developer.apple.com/documentation/pushkit/pkpushpayload/type"
+      }
+    },
+    "PKPushRegistry": {
+      "delegate": {
+        "doc": "The delegate object that receives notifications coming from the push registry object.",
+        "url": "https://developer.apple.com/documentation/pushkit/pkpushregistry/delegate"
+      },
+      "desiredPushTypes": {
+        "doc": "Registers the push types for this push registry object.",
+        "url": "https://developer.apple.com/documentation/pushkit/pkpushregistry/desiredpushtypes"
+      }
+    },
+    "PKVoIPPushMetadata": {
+      "mustReport": {
+        "doc": "A boolean indicating whether a VoIP app must report a call or live conversation in response to receiving this VoIP notification.",
+        "url": "https://developer.apple.com/documentation/pushkit/pkvoippushmetadata/mustreport"
+      }
+    }
+  }
+}

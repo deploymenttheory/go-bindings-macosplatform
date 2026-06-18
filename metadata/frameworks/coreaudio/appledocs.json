@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "framework": "CoreAudio",
+  "source": "developer.apple.com DocC render API",
+  "enums": {
+    "AudioHardwarePowerHint": {
+      "url": "https://developer.apple.com/documentation/coreaudio/audiohardwarepowerhint"
+    },
+    "AudioLevelControlTransferFunction": {
+      "url": "https://developer.apple.com/documentation/coreaudio/audiolevelcontroltransferfunction"
+    }
+  },
+  "structs": {
+    "AudioHardwareIOProcStreamUsage": {
+      "doc": "This structure describes which streams a given AudioDeviceIOProc will use. It is used in conjunction with kAudioDevicePropertyIOProcStreamUsage.",
+      "url": "https://developer.apple.com/documentation/coreaudio/audiohardwareioprocstreamusage"
+    },
+    "AudioObjectPropertyAddress": {
+      "doc": "An AudioObjectPropertyAddress collects the three parts that identify a specific property together in a struct for easy transmission.",
+      "url": "https://developer.apple.com/documentation/coreaudio/audioobjectpropertyaddress"
+    },
+    "AudioStreamRangedDescription": {
+      "doc": "This structure allows a specific sample rate range to be associated with an AudioStreamBasicDescription that specifies its sample rate as kAudioStreamAnyRate.",
+      "url": "https://developer.apple.com/documentation/coreaudio/audiostreamrangeddescription"
+    }
+  }
+}

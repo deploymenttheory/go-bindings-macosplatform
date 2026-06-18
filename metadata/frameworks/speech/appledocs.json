@@ -1,0 +1,423 @@
+{
+  "schema_version": 1,
+  "framework": "Speech",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "SFAcousticFeature": {
+      "doc": "The value of a voice analysis metric.",
+      "url": "https://developer.apple.com/documentation/speech/sfacousticfeature"
+    },
+    "SFSpeechAudioBufferRecognitionRequest": {
+      "doc": "A request to recognize speech from captured audio content, such as audio from the device’s microphone.",
+      "url": "https://developer.apple.com/documentation/speech/sfspeechaudiobufferrecognitionrequest"
+    },
+    "SFSpeechLanguageModel": {
+      "doc": "A language model built from custom training data.",
+      "url": "https://developer.apple.com/documentation/speech/sfspeechlanguagemodel"
+    },
+    "SFSpeechLanguageModelConfiguration": {
+      "doc": "An object describing the location of a custom language model and specialized vocabulary.",
+      "url": "https://developer.apple.com/documentation/speech/sfspeechlanguagemodelconfiguration"
+    },
+    "SFSpeechRecognitionMetadata": {
+      "doc": "The metadata of speech in the audio of a speech recognition request.",
+      "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitionmetadata"
+    },
+    "SFSpeechRecognitionRequest": {
+      "doc": "An abstract class that represents a request to recognize speech from an audio source.",
+      "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitionrequest"
+    },
+    "SFSpeechRecognitionResult": {
+      "doc": "An object that contains the partial or final results of a speech recognition request.",
+      "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitionresult"
+    },
+    "SFSpeechRecognitionTask": {
+      "doc": "A task object for monitoring the speech recognition progress.",
+      "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitiontask"
+    },
+    "SFSpeechRecognizer": {
+      "doc": "An object you use to check for the availability of the speech recognition service, and to initiate the speech recognition process.",
+      "url": "https://developer.apple.com/documentation/speech/sfspeechrecognizer"
+    },
+    "SFSpeechURLRecognitionRequest": {
+      "doc": "A request to recognize speech in a recorded audio file.",
+      "url": "https://developer.apple.com/documentation/speech/sfspeechurlrecognitionrequest"
+    },
+    "SFTranscription": {
+      "doc": "A textual representation of the specified speech in its entirety, as recognized by the speech recognizer.",
+      "url": "https://developer.apple.com/documentation/speech/sftranscription"
+    },
+    "SFTranscriptionSegment": {
+      "doc": "A discrete part of an entire transcription, as identified by the speech recognizer.",
+      "url": "https://developer.apple.com/documentation/speech/sftranscriptionsegment"
+    },
+    "SFVoiceAnalytics": {
+      "doc": "A collection of vocal analysis metrics.",
+      "url": "https://developer.apple.com/documentation/speech/sfvoiceanalytics"
+    }
+  },
+  "protocols": {
+    "SFSpeechRecognitionTaskDelegate": {
+      "doc": "A protocol with methods for managing multi-utterance speech recognition requests.",
+      "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitiontaskdelegate"
+    },
+    "SFSpeechRecognizerDelegate": {
+      "doc": "A protocol that you adopt in your objects to track the availability of a speech recognizer.",
+      "url": "https://developer.apple.com/documentation/speech/sfspeechrecognizerdelegate"
+    }
+  },
+  "enums": {
+    "SFSpeechErrorCode": {
+      "doc": "Error codes that can be thrown under the Speech framework’s error domain.",
+      "url": "https://developer.apple.com/documentation/speech/sfspeecherrorcode"
+    },
+    "SFSpeechRecognitionTaskHint": {
+      "doc": "The type of task for which you are using speech recognition.",
+      "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitiontaskhint",
+      "members": {
+        "SFSpeechRecognitionTaskHintConfirmation": {
+          "doc": "A task that uses captured speech for short, confirmation-style requests.",
+          "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitiontaskhint/confirmation"
+        },
+        "SFSpeechRecognitionTaskHintDictation": {
+          "doc": "A task that uses captured speech for text entry.",
+          "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitiontaskhint/dictation"
+        },
+        "SFSpeechRecognitionTaskHintSearch": {
+          "doc": "A task that uses captured speech to specify search terms.",
+          "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitiontaskhint/search"
+        },
+        "SFSpeechRecognitionTaskHintUnspecified": {
+          "doc": "An unspecified type of task.",
+          "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitiontaskhint/unspecified"
+        }
+      }
+    },
+    "SFSpeechRecognitionTaskState": {
+      "doc": "The state of the task associated with the recognition request.",
+      "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitiontaskstate",
+      "members": {
+        "SFSpeechRecognitionTaskStateCanceling": {
+          "doc": "Delivery of recognition results has finished, but audio recording may be ongoing.",
+          "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitiontaskstate/canceling"
+        },
+        "SFSpeechRecognitionTaskStateCompleted": {
+          "doc": "Delivery of recognition requests has finished and audio recording has stopped.",
+          "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitiontaskstate/completed"
+        },
+        "SFSpeechRecognitionTaskStateFinishing": {
+          "doc": "Audio recording has stopped, but delivery of recognition results may continue.",
+          "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitiontaskstate/finishing"
+        },
+        "SFSpeechRecognitionTaskStateRunning": {
+          "doc": "Speech recognition (potentially including audio recording) is in progress.",
+          "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitiontaskstate/running"
+        },
+        "SFSpeechRecognitionTaskStateStarting": {
+          "doc": "Speech recognition (potentially including audio recording) has not yet started.",
+          "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitiontaskstate/starting"
+        }
+      }
+    },
+    "SFSpeechRecognizerAuthorizationStatus": {
+      "doc": "The app’s authorization to perform speech recognition.",
+      "url": "https://developer.apple.com/documentation/speech/sfspeechrecognizerauthorizationstatus",
+      "members": {
+        "SFSpeechRecognizerAuthorizationStatusAuthorized": {
+          "doc": "The user granted your app’s request to perform speech recognition.",
+          "url": "https://developer.apple.com/documentation/speech/sfspeechrecognizerauthorizationstatus/authorized"
+        },
+        "SFSpeechRecognizerAuthorizationStatusDenied": {
+          "doc": "The user denied your app’s request to perform speech recognition.",
+          "url": "https://developer.apple.com/documentation/speech/sfspeechrecognizerauthorizationstatus/denied"
+        },
+        "SFSpeechRecognizerAuthorizationStatusNotDetermined": {
+          "doc": "The app’s authorization status has not yet been determined.",
+          "url": "https://developer.apple.com/documentation/speech/sfspeechrecognizerauthorizationstatus/notdetermined"
+        },
+        "SFSpeechRecognizerAuthorizationStatusRestricted": {
+          "doc": "The device prevents your app from performing speech recognition.",
+          "url": "https://developer.apple.com/documentation/speech/sfspeechrecognizerauthorizationstatus/restricted"
+        }
+      }
+    }
+  },
+  "methods": {
+    "SFSpeechAudioBufferRecognitionRequest": {
+      "-appendAudioPCMBuffer:": {
+        "doc": "Appends audio in the PCM format to the end of the recognition request.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechaudiobufferrecognitionrequest/append(_:)"
+      },
+      "-appendAudioSampleBuffer:": {
+        "doc": "Appends audio to the end of the recognition request.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechaudiobufferrecognitionrequest/appendaudiosamplebuffer(_:)"
+      },
+      "-endAudio": {
+        "doc": "Marks the end of audio input for the recognition request.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechaudiobufferrecognitionrequest/endaudio()"
+      }
+    },
+    "SFSpeechLanguageModel": {
+      "+prepareCustomLanguageModelForUrl:configuration:completion:": {
+        "doc": "Creates a language model from custom training data.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechlanguagemodel/preparecustomlanguagemodel(for:configuration:completion:)"
+      },
+      "+prepareCustomLanguageModelForUrl:configuration:ignoresCache:completion:": {
+        "doc": "Creates a language model from custom training data.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechlanguagemodel/preparecustomlanguagemodel(for:configuration:ignorescache:completion:)"
+      }
+    },
+    "SFSpeechRecognitionTask": {
+      "-cancel": {
+        "doc": "Cancels the current speech recognition task.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitiontask/cancel()"
+      },
+      "-finish": {
+        "doc": "Stops accepting new audio and finishes processing on the audio input that has already been accepted.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitiontask/finish()"
+      }
+    },
+    "SFSpeechRecognizer": {
+      "+authorizationStatus": {
+        "doc": "Returns your app’s current authorization to perform speech recognition.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognizer/authorizationstatus()"
+      },
+      "+requestAuthorization:": {
+        "doc": "Asks the user to allow your app to perform speech recognition.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognizer/requestauthorization(_:)"
+      },
+      "+supportedLocales": {
+        "doc": "Returns the set of locales that are supported by the speech recognizer.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognizer/supportedlocales()"
+      },
+      "-init": {
+        "doc": "Creates a speech recognizer associated with the user’s default language settings.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognizer/init()"
+      },
+      "-initWithLocale:": {
+        "doc": "Creates a speech recognizer associated with the specified locale.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognizer/init(locale:)"
+      },
+      "-recognitionTaskWithRequest:delegate:": {
+        "doc": "Recognizes speech from the audio source associated with the specified request, using the specified delegate to manage the results.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognizer/recognitiontask(with:delegate:)"
+      },
+      "-recognitionTaskWithRequest:resultHandler:": {
+        "doc": "Executes the speech recognition request and delivers the results to the specified handler block.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognizer/recognitiontask(with:resulthandler:)"
+      }
+    },
+    "SFSpeechURLRecognitionRequest": {
+      "-initWithURL:": {
+        "doc": "Creates a speech recognition request, initialized with the specified URL.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechurlrecognitionrequest/init(url:)-3ymmz"
+      }
+    }
+  },
+  "properties": {
+    "SFAcousticFeature": {
+      "acousticFeatureValuePerFrame": {
+        "doc": "An array of feature values, one value per audio frame, corresponding to a transcript segment of recorded audio.",
+        "url": "https://developer.apple.com/documentation/speech/sfacousticfeature/acousticfeaturevalueperframe-5krkk"
+      },
+      "frameDuration": {
+        "doc": "The duration of the audio frame.",
+        "url": "https://developer.apple.com/documentation/speech/sfacousticfeature/frameduration"
+      }
+    },
+    "SFSpeechAudioBufferRecognitionRequest": {
+      "nativeAudioFormat": {
+        "doc": "The preferred audio format for optimal speech recognition.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechaudiobufferrecognitionrequest/nativeaudioformat"
+      }
+    },
+    "SFSpeechLanguageModel": {
+      "SFSpeechLanguageModelConfiguration": {
+        "doc": "An object describing the location of a custom language model and specialized vocabulary.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechlanguagemodel/configuration"
+      }
+    },
+    "SFSpeechRecognitionMetadata": {
+      "averagePauseDuration": {
+        "doc": "The average pause duration between words, measured in seconds.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitionmetadata/averagepauseduration"
+      },
+      "speakingRate": {
+        "doc": "The number of words spoken per minute.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitionmetadata/speakingrate"
+      },
+      "speechDuration": {
+        "doc": "The duration in seconds of speech in the audio.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitionmetadata/speechduration"
+      },
+      "speechStartTimestamp": {
+        "doc": "The start timestamp of speech in the audio.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitionmetadata/speechstarttimestamp"
+      },
+      "voiceAnalytics": {
+        "doc": "An analysis of the transcription segment’s vocal properties.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitionmetadata/voiceanalytics"
+      }
+    },
+    "SFSpeechRecognitionRequest": {
+      "addsPunctuation": {
+        "doc": "A Boolean value that indicates whether to add punctuation to speech recognition results.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitionrequest/addspunctuation"
+      },
+      "contextualStrings": {
+        "doc": "An array of phrases that should be recognized, even if they are not in the system vocabulary.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitionrequest/contextualstrings"
+      },
+      "interactionIdentifier": {
+        "doc": "An identifier string that you use to describe the type of interaction associated with the speech recognition request.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitionrequest/interactionidentifier"
+      },
+      "requiresOnDeviceRecognition": {
+        "doc": "A Boolean value that determines whether a request must keep its audio data on the device.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitionrequest/requiresondevicerecognition"
+      },
+      "shouldReportPartialResults": {
+        "doc": "A Boolean value that indicates whether you want intermediate results returned for each utterance.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitionrequest/shouldreportpartialresults"
+      },
+      "taskHint": {
+        "doc": "A value that indicates the type of speech recognition being performed.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitionrequest/taskhint"
+      }
+    },
+    "SFSpeechRecognitionResult": {
+      "bestTranscription": {
+        "doc": "The transcription with the highest confidence level.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitionresult/besttranscription"
+      },
+      "final": {
+        "doc": "A Boolean value that indicates whether speech recognition is complete and whether the transcriptions are final.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitionresult/isfinal"
+      },
+      "speechRecognitionMetadata": {
+        "doc": "An object that contains the metadata results for a speech recognition request.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitionresult/speechrecognitionmetadata"
+      },
+      "transcriptions": {
+        "doc": "An array of potential transcriptions, sorted in descending order of confidence.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitionresult/transcriptions"
+      }
+    },
+    "SFSpeechRecognitionTask": {
+      "cancelled": {
+        "doc": "A Boolean value that indicates whether the speech recognition task was canceled.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitiontask/iscancelled"
+      },
+      "error": {
+        "doc": "An error object that specifies the error that occurred during a speech recognition task.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitiontask/error"
+      },
+      "finishing": {
+        "doc": "A Boolean value that indicates whether audio input has stopped.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitiontask/isfinishing"
+      },
+      "state": {
+        "doc": "The current state of the speech recognition task.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognitiontask/state"
+      }
+    },
+    "SFSpeechRecognizer": {
+      "available": {
+        "doc": "A Boolean value that indicates whether the speech recognizer is currently available.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognizer/isavailable"
+      },
+      "defaultTaskHint": {
+        "doc": "A hint that indicates the type of speech recognition being requested.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognizer/defaulttaskhint"
+      },
+      "delegate": {
+        "doc": "The delegate object that handles changes to the availability of speech recognition services.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognizer/delegate"
+      },
+      "locale": {
+        "doc": "The locale of the speech recognizer.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognizer/locale"
+      },
+      "queue": {
+        "doc": "The queue on which to execute recognition task handlers and delegate methods.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognizer/queue"
+      },
+      "supportsOnDeviceRecognition": {
+        "doc": "A Boolean value that indicates whether the speech recognizer can operate without network access.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechrecognizer/supportsondevicerecognition"
+      }
+    },
+    "SFSpeechURLRecognitionRequest": {
+      "URL": {
+        "doc": "The URL of the audio file.",
+        "url": "https://developer.apple.com/documentation/speech/sfspeechurlrecognitionrequest/url"
+      }
+    },
+    "SFTranscription": {
+      "averagePauseDuration": {
+        "doc": "The average pause duration between words, measured in seconds.",
+        "url": "https://developer.apple.com/documentation/speech/sftranscription/averagepauseduration"
+      },
+      "formattedString": {
+        "doc": "The entire transcription of utterances, formatted into a single, user-displayable string.",
+        "url": "https://developer.apple.com/documentation/speech/sftranscription/formattedstring"
+      },
+      "segments": {
+        "doc": "An array of transcription segments that represent the parts of the transcription, as identified by the speech recognizer.",
+        "url": "https://developer.apple.com/documentation/speech/sftranscription/segments"
+      },
+      "speakingRate": {
+        "doc": "The number of words spoken per minute.",
+        "url": "https://developer.apple.com/documentation/speech/sftranscription/speakingrate"
+      }
+    },
+    "SFTranscriptionSegment": {
+      "alternativeSubstrings": {
+        "doc": "An array of alternate interpretations of the utterance in the transcription segment.",
+        "url": "https://developer.apple.com/documentation/speech/sftranscriptionsegment/alternativesubstrings"
+      },
+      "confidence": {
+        "doc": "The level of confidence the speech recognizer has in its recognition of the speech transcribed for the segment.",
+        "url": "https://developer.apple.com/documentation/speech/sftranscriptionsegment/confidence"
+      },
+      "duration": {
+        "doc": "The number of seconds it took for the user to speak the utterance represented by the segment.",
+        "url": "https://developer.apple.com/documentation/speech/sftranscriptionsegment/duration"
+      },
+      "substring": {
+        "doc": "The string representation of the utterance in the transcription segment.",
+        "url": "https://developer.apple.com/documentation/speech/sftranscriptionsegment/substring"
+      },
+      "substringRange": {
+        "doc": "The range information for the transcription segment’s substring, relative to the overall transcription.",
+        "url": "https://developer.apple.com/documentation/speech/sftranscriptionsegment/substringrange"
+      },
+      "timestamp": {
+        "doc": "The start time of the segment in the processed audio stream.",
+        "url": "https://developer.apple.com/documentation/speech/sftranscriptionsegment/timestamp"
+      },
+      "voiceAnalytics": {
+        "doc": "An analysis of the transcription segment’s vocal properties.",
+        "url": "https://developer.apple.com/documentation/speech/sftranscriptionsegment/voiceanalytics"
+      }
+    },
+    "SFVoiceAnalytics": {
+      "jitter": {
+        "doc": "The variation in pitch in each frame of a transcription segment, expressed as a percentage of the frame’s fundamental frequency.",
+        "url": "https://developer.apple.com/documentation/speech/sfvoiceanalytics/jitter"
+      },
+      "pitch": {
+        "doc": "The highness or lowness of the tone (fundamental frequency) in each frame of a transcription segment, expressed as a logarithm.",
+        "url": "https://developer.apple.com/documentation/speech/sfvoiceanalytics/pitch"
+      },
+      "shimmer": {
+        "doc": "The variation in vocal volume stability (amplitude) in each frame of a transcription segment, expressed in decibels.",
+        "url": "https://developer.apple.com/documentation/speech/sfvoiceanalytics/shimmer"
+      },
+      "voicing": {
+        "doc": "The likelihood of a voice in each frame of a transcription segment.",
+        "url": "https://developer.apple.com/documentation/speech/sfvoiceanalytics/voicing"
+      }
+    }
+  }
+}

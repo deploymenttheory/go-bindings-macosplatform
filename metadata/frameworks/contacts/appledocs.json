@@ -1,0 +1,1227 @@
+{
+  "schema_version": 1,
+  "framework": "Contacts",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "CNChangeHistoryAddContactEvent": {
+      "doc": "An object that represents a user adding a contact.",
+      "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryaddcontactevent"
+    },
+    "CNChangeHistoryAddGroupEvent": {
+      "doc": "An object that represents a user adding a group.",
+      "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryaddgroupevent"
+    },
+    "CNChangeHistoryAddMemberToGroupEvent": {
+      "doc": "An object that represents a user adding a contact to a group.",
+      "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryaddmembertogroupevent"
+    },
+    "CNChangeHistoryAddSubgroupToGroupEvent": {
+      "doc": "An object that represents a user adding a subgroup to a group.",
+      "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryaddsubgrouptogroupevent"
+    },
+    "CNChangeHistoryDeleteContactEvent": {
+      "doc": "An object that represents a user deleting a contact.",
+      "url": "https://developer.apple.com/documentation/contacts/cnchangehistorydeletecontactevent"
+    },
+    "CNChangeHistoryDeleteGroupEvent": {
+      "doc": "An object that represents a user deleting a group.",
+      "url": "https://developer.apple.com/documentation/contacts/cnchangehistorydeletegroupevent"
+    },
+    "CNChangeHistoryDropEverythingEvent": {
+      "doc": "An object that indicates the delegate should drop all contacts and groups before handling change events.",
+      "url": "https://developer.apple.com/documentation/contacts/cnchangehistorydropeverythingevent"
+    },
+    "CNChangeHistoryEvent": {
+      "doc": "An object that represents the user adding, updating, or deleting a contact or group.",
+      "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryevent"
+    },
+    "CNChangeHistoryFetchRequest": {
+      "doc": "An object that specifies the criteria for fetching change history.",
+      "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryfetchrequest"
+    },
+    "CNChangeHistoryRemoveMemberFromGroupEvent": {
+      "doc": "An object that represents a user removing a contact from a group.",
+      "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryremovememberfromgroupevent"
+    },
+    "CNChangeHistoryRemoveSubgroupFromGroupEvent": {
+      "doc": "An object that represents a user removing a subgroup from a group.",
+      "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryremovesubgroupfromgroupevent"
+    },
+    "CNChangeHistoryUpdateContactEvent": {
+      "doc": "An object that represents a user updating a contact.",
+      "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryupdatecontactevent"
+    },
+    "CNChangeHistoryUpdateGroupEvent": {
+      "doc": "An object that represents an updated group event.",
+      "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryupdategroupevent"
+    },
+    "CNContact": {
+      "doc": "An immutable object that stores information about a single contact, such as the contact’s first name, phone numbers, and addresses.",
+      "url": "https://developer.apple.com/documentation/contacts/cncontact"
+    },
+    "CNContactFetchRequest": {
+      "doc": "An object that defines the options to use when fetching contacts.",
+      "url": "https://developer.apple.com/documentation/contacts/cncontactfetchrequest"
+    },
+    "CNContactFormatter": {
+      "doc": "An object that you use to format contact information before displaying it to the user.",
+      "url": "https://developer.apple.com/documentation/contacts/cncontactformatter"
+    },
+    "CNContactProperty": {
+      "doc": "An object that represents a property of a contact.",
+      "url": "https://developer.apple.com/documentation/contacts/cncontactproperty"
+    },
+    "CNContactRelation": {
+      "doc": "An immutable object that represents the relationship between one contact to another.",
+      "url": "https://developer.apple.com/documentation/contacts/cncontactrelation"
+    },
+    "CNContactStore": {
+      "doc": "The object that fetches and saves contacts, groups, and containers from the user’s Contacts database.",
+      "url": "https://developer.apple.com/documentation/contacts/cncontactstore"
+    },
+    "CNContactVCardSerialization": {
+      "doc": "An object you use to convert to and from a vCard representation of the user’s contacts.",
+      "url": "https://developer.apple.com/documentation/contacts/cncontactvcardserialization"
+    },
+    "CNContactsUserDefaults": {
+      "doc": "An object that defines the default options to use when displaying contacts.",
+      "url": "https://developer.apple.com/documentation/contacts/cncontactsuserdefaults"
+    },
+    "CNContainer": {
+      "doc": "An immutable object that represents a collection of contacts.",
+      "url": "https://developer.apple.com/documentation/contacts/cncontainer"
+    },
+    "CNFetchRequest": {
+      "doc": "The base class for contact fetch requests.",
+      "url": "https://developer.apple.com/documentation/contacts/cnfetchrequest"
+    },
+    "CNFetchResult": {
+      "doc": "An object that represents the result of a change-history fetch request.",
+      "url": "https://developer.apple.com/documentation/contacts/cnfetchresult"
+    },
+    "CNGroup": {
+      "doc": "An immutable object that represents a group of contacts.",
+      "url": "https://developer.apple.com/documentation/contacts/cngroup"
+    },
+    "CNInstantMessageAddress": {
+      "doc": "An immutable object representing an instant message address for the contact.",
+      "url": "https://developer.apple.com/documentation/contacts/cninstantmessageaddress"
+    },
+    "CNLabeledValue": {
+      "doc": "An immutable object that combines a contact property value with a label that describes that property.",
+      "url": "https://developer.apple.com/documentation/contacts/cnlabeledvalue"
+    },
+    "CNMutableContact": {
+      "doc": "A mutable object that stores information about a single contact, such as the contact’s first name, phone numbers, and addresses.",
+      "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact"
+    },
+    "CNMutableGroup": {
+      "doc": "A mutable object that represents a group of contacts.",
+      "url": "https://developer.apple.com/documentation/contacts/cnmutablegroup"
+    },
+    "CNMutablePostalAddress": {
+      "doc": "A mutable representation of the postal address for a contact.",
+      "url": "https://developer.apple.com/documentation/contacts/cnmutablepostaladdress"
+    },
+    "CNPhoneNumber": {
+      "doc": "An immutable object representing a phone number for a contact.",
+      "url": "https://developer.apple.com/documentation/contacts/cnphonenumber"
+    },
+    "CNPostalAddress": {
+      "doc": "An immutable representation of the postal address for a contact.",
+      "url": "https://developer.apple.com/documentation/contacts/cnpostaladdress"
+    },
+    "CNPostalAddressFormatter": {
+      "doc": "An object that you use to format a contact’s postal addresses.",
+      "url": "https://developer.apple.com/documentation/contacts/cnpostaladdressformatter"
+    },
+    "CNSaveRequest": {
+      "doc": "An object that collects the changes you want to save to the user’s contacts database.",
+      "url": "https://developer.apple.com/documentation/contacts/cnsaverequest"
+    },
+    "CNSocialProfile": {
+      "doc": "An immutable object that represents one of the user’s social profiles.",
+      "url": "https://developer.apple.com/documentation/contacts/cnsocialprofile"
+    }
+  },
+  "protocols": {
+    "CNChangeHistoryEventVisitor": {
+      "doc": "An interface for receiving notice of changes to contacts and groups.",
+      "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryeventvisitor"
+    },
+    "CNKeyDescriptor": {
+      "doc": "This protocol is reserved for Contacts framework usage.",
+      "url": "https://developer.apple.com/documentation/contacts/cnkeydescriptor"
+    }
+  },
+  "enums": {
+    "CNAuthorizationStatus": {
+      "doc": "An authorization status the user can grant for an app to access the specified entity type.",
+      "url": "https://developer.apple.com/documentation/contacts/cnauthorizationstatus",
+      "members": {
+        "CNAuthorizationStatusAuthorized": {
+          "doc": "The application is authorized to access contact data.",
+          "url": "https://developer.apple.com/documentation/contacts/cnauthorizationstatus/authorized"
+        },
+        "CNAuthorizationStatusDenied": {
+          "doc": "The user explicitly denied access to contact data for the application.",
+          "url": "https://developer.apple.com/documentation/contacts/cnauthorizationstatus/denied"
+        },
+        "CNAuthorizationStatusLimited": {
+          "doc": "The app has access to a limited subset of contacts, chosen by the person using the app.",
+          "url": "https://developer.apple.com/documentation/contacts/cnauthorizationstatus/limited"
+        },
+        "CNAuthorizationStatusNotDetermined": {
+          "doc": "The user has not yet made a choice regarding whether the application may access contact data.",
+          "url": "https://developer.apple.com/documentation/contacts/cnauthorizationstatus/notdetermined"
+        },
+        "CNAuthorizationStatusRestricted": {
+          "doc": "The application is not authorized to access contact data. The user cannot change this application’s status, possibly due to active restrictions such as parental controls being in place.",
+          "url": "https://developer.apple.com/documentation/contacts/cnauthorizationstatus/restricted"
+        }
+      }
+    },
+    "CNContactDisplayNameOrder": {
+      "doc": "The formatting orders for contact names component.",
+      "url": "https://developer.apple.com/documentation/contacts/cncontactdisplaynameorder",
+      "members": {
+        "CNContactDisplayNameOrderFamilyNameFirst": {
+          "doc": "Display name order by family name first.",
+          "url": "https://developer.apple.com/documentation/contacts/cncontactdisplaynameorder/familynamefirst"
+        },
+        "CNContactDisplayNameOrderGivenNameFirst": {
+          "doc": "Display name order by given name first.",
+          "url": "https://developer.apple.com/documentation/contacts/cncontactdisplaynameorder/givennamefirst"
+        },
+        "CNContactDisplayNameOrderUserDefault": {
+          "doc": "Display name order by user default.",
+          "url": "https://developer.apple.com/documentation/contacts/cncontactdisplaynameorder/userdefault"
+        }
+      }
+    },
+    "CNContactFormatterStyle": {
+      "doc": "The formatting styles for contact names.",
+      "url": "https://developer.apple.com/documentation/contacts/cncontactformatterstyle",
+      "members": {
+        "CNContactFormatterStyleFullName": {
+          "doc": "Combines the contact name components into a full name.",
+          "url": "https://developer.apple.com/documentation/contacts/cncontactformatterstyle/fullname"
+        },
+        "CNContactFormatterStylePhoneticFullName": {
+          "doc": "Combines the contact phonetic name components into a phonetic full name.",
+          "url": "https://developer.apple.com/documentation/contacts/cncontactformatterstyle/phoneticfullname"
+        }
+      }
+    },
+    "CNContactSortOrder": {
+      "doc": "Indicates the sorting order for contacts.",
+      "url": "https://developer.apple.com/documentation/contacts/cncontactsortorder",
+      "members": {
+        "CNContactSortOrderFamilyName": {
+          "doc": "Sorting contacts by family name.",
+          "url": "https://developer.apple.com/documentation/contacts/cncontactsortorder/familyname"
+        },
+        "CNContactSortOrderGivenName": {
+          "doc": "Sorting contacts by given name.",
+          "url": "https://developer.apple.com/documentation/contacts/cncontactsortorder/givenname"
+        },
+        "CNContactSortOrderNone": {
+          "doc": "No sorting order.",
+          "url": "https://developer.apple.com/documentation/contacts/cncontactsortorder/none"
+        },
+        "CNContactSortOrderUserDefault": {
+          "doc": "The user’s default sorting order.",
+          "url": "https://developer.apple.com/documentation/contacts/cncontactsortorder/userdefault"
+        }
+      }
+    },
+    "CNContactType": {
+      "doc": "The types a contact can be.",
+      "url": "https://developer.apple.com/documentation/contacts/cncontacttype",
+      "members": {
+        "CNContactTypeOrganization": {
+          "doc": "The contact is an Organization.",
+          "url": "https://developer.apple.com/documentation/contacts/cncontacttype/organization"
+        },
+        "CNContactTypePerson": {
+          "doc": "The contact is a person.",
+          "url": "https://developer.apple.com/documentation/contacts/cncontacttype/person"
+        }
+      }
+    },
+    "CNContainerType": {
+      "doc": "The container may be local on the device or associated with a server account that has contacts.",
+      "url": "https://developer.apple.com/documentation/contacts/cncontainertype",
+      "members": {
+        "CNContainerTypeCardDAV": {
+          "doc": "A container for contacts stored in an CardDAV server, such as iCloud.",
+          "url": "https://developer.apple.com/documentation/contacts/cncontainertype/carddav"
+        },
+        "CNContainerTypeExchange": {
+          "doc": "A container for contacts stored in an Exchange folder from an Exchange server.",
+          "url": "https://developer.apple.com/documentation/contacts/cncontainertype/exchange"
+        },
+        "CNContainerTypeLocal": {
+          "doc": "A container for contacts only stored locally on the device.",
+          "url": "https://developer.apple.com/documentation/contacts/cncontainertype/local"
+        },
+        "CNContainerTypeUnassigned": {
+          "doc": "A container where the system hasn’t assigned the container type.",
+          "url": "https://developer.apple.com/documentation/contacts/cncontainertype/unassigned"
+        }
+      }
+    },
+    "CNEntityType": {
+      "doc": "The entities the user can grant access to.",
+      "url": "https://developer.apple.com/documentation/contacts/cnentitytype",
+      "members": {
+        "CNEntityTypeContacts": {
+          "doc": "The user’s contacts.",
+          "url": "https://developer.apple.com/documentation/contacts/cnentitytype/contacts"
+        }
+      }
+    },
+    "CNErrorCode": {
+      "doc": "Error codes that the system may return when you use Contacts framework methods.",
+      "url": "https://developer.apple.com/documentation/contacts/cnerrorcode"
+    },
+    "CNPostalAddressFormatterStyle": {
+      "doc": "Constants for postal formatting styles.",
+      "url": "https://developer.apple.com/documentation/contacts/cnpostaladdressformatterstyle",
+      "members": {
+        "CNPostalAddressFormatterStyleMailingAddress": {
+          "doc": "A style that combines the postal address components into a multi-line mailing address.",
+          "url": "https://developer.apple.com/documentation/contacts/cnpostaladdressformatterstyle/mailingaddress"
+        }
+      }
+    }
+  },
+  "methods": {
+    "CNChangeHistoryEvent": {
+      "-acceptEventVisitor:": {
+        "doc": "Forwards the event to the delegate you provide to process the change-history event.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryevent/accept(_:)"
+      }
+    },
+    "CNContact": {
+      "+comparatorForNameSortOrder:": {
+        "doc": "Returns a comparator to sort contacts with the specified order.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/comparator(fornamesortorder:)"
+      },
+      "+descriptorForAllComparatorKeys": {
+        "doc": "Fetches all the keys required for the contact sort comparator.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/descriptorforallcomparatorkeys()"
+      },
+      "+localizedStringForKey:": {
+        "doc": "Returns a string containing the localized contact property name.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/localizedstring(forkey:)"
+      },
+      "+predicateForContactsInContainerWithIdentifier:": {
+        "doc": "Returns a predicate to find the contacts in the specified container.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/predicateforcontactsincontainer(withidentifier:)"
+      },
+      "+predicateForContactsInGroupWithIdentifier:": {
+        "doc": "Returns a predicate to find the contacts that are members in the specified group.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/predicateforcontactsingroup(withidentifier:)"
+      },
+      "+predicateForContactsMatchingEmailAddress:": {
+        "doc": "Returns a predicate to find the contacts whose email address matches the specified value.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/predicateforcontacts(matchingemailaddress:)"
+      },
+      "+predicateForContactsMatchingName:": {
+        "doc": "Returns a predicate to find the contacts matching the specified name.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/predicateforcontacts(matchingname:)"
+      },
+      "+predicateForContactsMatchingPhoneNumber:": {
+        "doc": "Returns a predicate to find the contacts whose phone number matches the specified value.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/predicateforcontacts(matching:)"
+      },
+      "+predicateForContactsWithIdentifiers:": {
+        "doc": "Returns a predicate to find the contacts matching the specified identifiers.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/predicateforcontacts(withidentifiers:)"
+      },
+      "-areKeysAvailable:": {
+        "doc": "Determines whether all contact property values for the specified keys are fetched.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/arekeysavailable(_:)"
+      },
+      "-isKeyAvailable:": {
+        "doc": "Determines whether the contact property value for the specified key is fetched.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/iskeyavailable(_:)"
+      },
+      "-isUnifiedWithContactWithIdentifier:": {
+        "doc": "Returns a Boolean indicating whether the current contact is a unified contact and includes a contact with the specified identifier.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/isunifiedwithcontact(withidentifier:)"
+      }
+    },
+    "CNContactFetchRequest": {
+      "-initWithKeysToFetch:": {
+        "doc": "Creates a fetch request for the specified keys.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactfetchrequest/init(keystofetch:)"
+      }
+    },
+    "CNContactFormatter": {
+      "+attributedStringFromContact:style:defaultAttributes:": {
+        "doc": "Formats the contact name as an attributed string.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactformatter/attributedstring(from:style:defaultattributes:)"
+      },
+      "+delimiterForContact:": {
+        "doc": "Returns the delimiter to use between name components.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactformatter/delimiter(for:)"
+      },
+      "+descriptorForRequiredKeysForStyle:": {
+        "doc": "Returns the required key descriptor for the specified formatting style of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactformatter/descriptorforrequiredkeys(for:)"
+      },
+      "+nameOrderForContact:": {
+        "doc": "Returns the display name order.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactformatter/nameorder(for:)"
+      },
+      "+stringFromContact:style:": {
+        "doc": "Returns the contact name, formatted with the specified formatter.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactformatter/string(from:style:)"
+      },
+      "-attributedStringFromContact:defaultAttributes:": {
+        "doc": "Formats the contact name as an attributed string.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactformatter/attributedstring(from:defaultattributes:)"
+      },
+      "-stringFromContact:": {
+        "doc": "Formats the contact name.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactformatter/string(from:)"
+      }
+    },
+    "CNContactRelation": {
+      "+contactRelationWithName:": {
+        "doc": "Instantiate a class instance with the name of the related contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactrelation/contactrelationwithname:"
+      },
+      "-initWithName:": {
+        "doc": "Creates an object with the name of the related contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactrelation/init(name:)"
+      }
+    },
+    "CNContactStore": {
+      "+authorizationStatusForEntityType:": {
+        "doc": "Returns the current authorization status to access the contact data.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactstore/authorizationstatus(for:)"
+      },
+      "-containersMatchingPredicate:error:": {
+        "doc": "Fetches all containers matching the specified predicate.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactstore/containers(matching:)"
+      },
+      "-defaultContainerIdentifier": {
+        "doc": "Returns the identifier of the default container.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactstore/defaultcontaineridentifier()"
+      },
+      "-enumerateContactsWithFetchRequest:error:usingBlock:": {
+        "doc": "Returns a Boolean value that indicates whether the enumeration of all contacts matching a contact fetch request executes successfully.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactstore/enumeratecontacts(with:usingblock:)"
+      },
+      "-enumeratorForChangeHistoryFetchRequest:error:": {
+        "doc": "Enumerates a change history fetch request.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactstore/enumeratorforchangehistoryfetchrequest:error:"
+      },
+      "-enumeratorForContactFetchRequest:error:": {
+        "doc": "Enumerates a contact fetch request.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactstore/enumeratorforcontactfetchrequest:error:"
+      },
+      "-executeSaveRequest:error:": {
+        "doc": "Executes a save request and returns success or failure.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactstore/execute(_:)"
+      },
+      "-groupsMatchingPredicate:error:": {
+        "doc": "Fetches all groups matching the specified predicate.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactstore/groups(matching:)"
+      },
+      "-requestAccessForEntityType:completionHandler:": {
+        "doc": "Requests access to the user’s contacts.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactstore/requestaccess(for:completionhandler:)"
+      },
+      "-unifiedContactWithIdentifier:keysToFetch:error:": {
+        "doc": "Fetches a unified contact for the specified contact identifier.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactstore/unifiedcontact(withidentifier:keystofetch:)"
+      },
+      "-unifiedContactsMatchingPredicate:keysToFetch:error:": {
+        "doc": "Fetches all unified contacts matching the specified predicate.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactstore/unifiedcontacts(matching:keystofetch:)"
+      },
+      "-unifiedMeContactWithKeysToFetch:error:": {
+        "doc": "Fetches the unified contact that’s the me card.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactstore/unifiedmecontactwithkeys(tofetch:)"
+      }
+    },
+    "CNContactVCardSerialization": {
+      "+contactsWithData:error:": {
+        "doc": "Returns the contacts from the vCard data.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactvcardserialization/contacts(with:)"
+      },
+      "+dataWithContacts:error:": {
+        "doc": "Returns the vCard representation of the specified contacts.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactvcardserialization/data(with:)"
+      },
+      "+descriptorForRequiredKeys": {
+        "doc": "Use to fetch all contact keys required to create vCard data from a contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactvcardserialization/descriptorforrequiredkeys()"
+      }
+    },
+    "CNContactsUserDefaults": {
+      "+sharedDefaults": {
+        "doc": "The singleton contacts user defaults object.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactsuserdefaults/shared()"
+      }
+    },
+    "CNContainer": {
+      "+predicateForContainerOfContactWithIdentifier:": {
+        "doc": "Returns a predicate to find the container of the specified contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontainer/predicateforcontainerofcontact(withidentifier:)"
+      },
+      "+predicateForContainerOfGroupWithIdentifier:": {
+        "doc": "Returns a predicate to find the container of the specified group.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontainer/predicateforcontainerofgroup(withidentifier:)"
+      },
+      "+predicateForContainersWithIdentifiers:": {
+        "doc": "Returns a predicate to find the containers with the specified identifiers.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontainer/predicateforcontainers(withidentifiers:)"
+      }
+    },
+    "CNGroup": {
+      "+predicateForGroupsInContainerWithIdentifier:": {
+        "doc": "Returns a predicate to find groups in the specified container.",
+        "url": "https://developer.apple.com/documentation/contacts/cngroup/predicateforgroupsincontainer(withidentifier:)"
+      },
+      "+predicateForGroupsWithIdentifiers:": {
+        "doc": "Returns a predicate to find groups with the specified identifiers.",
+        "url": "https://developer.apple.com/documentation/contacts/cngroup/predicateforgroups(withidentifiers:)"
+      },
+      "+predicateForSubgroupsInGroupWithIdentifier:": {
+        "doc": "Returns a predicate to find subgroups in the specified parent group.",
+        "url": "https://developer.apple.com/documentation/contacts/cngroup/predicateforsubgroupsingroup(withidentifier:)"
+      }
+    },
+    "CNInstantMessageAddress": {
+      "+localizedStringForKey:": {
+        "doc": "Returns a string containing the localized property name.",
+        "url": "https://developer.apple.com/documentation/contacts/cninstantmessageaddress/localizedstring(forkey:)"
+      },
+      "+localizedStringForService:": {
+        "doc": "Returns a string containing the localized name of the specified service.",
+        "url": "https://developer.apple.com/documentation/contacts/cninstantmessageaddress/localizedstring(forservice:)"
+      },
+      "-initWithUsername:service:": {
+        "doc": "Returns a CNInstantMessageAddress object initialized with the specified user name and service.",
+        "url": "https://developer.apple.com/documentation/contacts/cninstantmessageaddress/init(username:service:)"
+      }
+    },
+    "CNLabeledValue": {
+      "+labeledValueWithLabel:value:": {
+        "doc": "Returns a new labeled value identifier.",
+        "url": "https://developer.apple.com/documentation/contacts/cnlabeledvalue/labeledvaluewithlabel:value:"
+      },
+      "+localizedStringForLabel:": {
+        "doc": "Returns a localized string for the specified label.",
+        "url": "https://developer.apple.com/documentation/contacts/cnlabeledvalue/localizedstring(forlabel:)"
+      },
+      "-initWithLabel:value:": {
+        "doc": "Returns a new labeled value identifier.",
+        "url": "https://developer.apple.com/documentation/contacts/cnlabeledvalue/init(label:value:)"
+      },
+      "-labeledValueBySettingLabel:": {
+        "doc": "Returns a labeled value object with an existing value and identifier.",
+        "url": "https://developer.apple.com/documentation/contacts/cnlabeledvalue/settinglabel(_:)"
+      },
+      "-labeledValueBySettingLabel:value:": {
+        "doc": "Returns a labeled value object with the specified label and value with the existing identifier.",
+        "url": "https://developer.apple.com/documentation/contacts/cnlabeledvalue/settinglabel(_:value:)"
+      },
+      "-labeledValueBySettingValue:": {
+        "doc": "Returns a new value for an existing label and identifier.",
+        "url": "https://developer.apple.com/documentation/contacts/cnlabeledvalue/settingvalue(_:)"
+      }
+    },
+    "CNPhoneNumber": {
+      "+phoneNumberWithStringValue:": {
+        "doc": "Returns a new phone number object initialized with the specified phone number string.",
+        "url": "https://developer.apple.com/documentation/contacts/cnphonenumber/phonenumberwithstringvalue:"
+      },
+      "-initWithStringValue:": {
+        "doc": "Returns a new phone number object initialized with the specified phone number string.",
+        "url": "https://developer.apple.com/documentation/contacts/cnphonenumber/init(stringvalue:)"
+      }
+    },
+    "CNPostalAddress": {
+      "+localizedStringForKey:": {
+        "doc": "Returns the localized name for the property associated with the specified key.",
+        "url": "https://developer.apple.com/documentation/contacts/cnpostaladdress/localizedstring(forkey:)"
+      }
+    },
+    "CNPostalAddressFormatter": {
+      "+attributedStringFromPostalAddress:style:withDefaultAttributes:": {
+        "doc": "Returns a postal address as an attributed string and formatted for the specified style.",
+        "url": "https://developer.apple.com/documentation/contacts/cnpostaladdressformatter/attributedstring(from:style:withdefaultattributes:)"
+      },
+      "+stringFromPostalAddress:style:": {
+        "doc": "Returns a postal address as a string and formatted for the specified style.",
+        "url": "https://developer.apple.com/documentation/contacts/cnpostaladdressformatter/string(from:style:)"
+      },
+      "-attributedStringFromPostalAddress:withDefaultAttributes:": {
+        "doc": "Returns a formatted postal address as an attributed string.",
+        "url": "https://developer.apple.com/documentation/contacts/cnpostaladdressformatter/attributedstring(from:withdefaultattributes:)"
+      },
+      "-stringFromPostalAddress:": {
+        "doc": "Returns a formatted postal address.",
+        "url": "https://developer.apple.com/documentation/contacts/cnpostaladdressformatter/string(from:)"
+      }
+    },
+    "CNSaveRequest": {
+      "-addContact:toContainerWithIdentifier:": {
+        "doc": "Adds the specified contact to the contact store.",
+        "url": "https://developer.apple.com/documentation/contacts/cnsaverequest/add(_:tocontainerwithidentifier:)-7eut4"
+      },
+      "-addGroup:toContainerWithIdentifier:": {
+        "doc": "Adds a group to the contact store.",
+        "url": "https://developer.apple.com/documentation/contacts/cnsaverequest/add(_:tocontainerwithidentifier:)-4ikaa"
+      },
+      "-addMember:toGroup:": {
+        "doc": "Adds a contact as a member of a group.",
+        "url": "https://developer.apple.com/documentation/contacts/cnsaverequest/addmember(_:to:)"
+      },
+      "-addSubgroup:toGroup:": {
+        "doc": "Add the specified group to a parent group.",
+        "url": "https://developer.apple.com/documentation/contacts/cnsaverequest/addsubgroup(_:to:)"
+      },
+      "-deleteContact:": {
+        "doc": "Deletes a contact from the contact store.",
+        "url": "https://developer.apple.com/documentation/contacts/cnsaverequest/delete(_:)-8m1tc"
+      },
+      "-deleteGroup:": {
+        "doc": "Deletes a group from the contact store.",
+        "url": "https://developer.apple.com/documentation/contacts/cnsaverequest/delete(_:)-29lsm"
+      },
+      "-removeMember:fromGroup:": {
+        "doc": "Removes a contact as a member of a group.",
+        "url": "https://developer.apple.com/documentation/contacts/cnsaverequest/removemember(_:from:)"
+      },
+      "-removeSubgroup:fromGroup:": {
+        "doc": "Remove a subgroup from the specified parent group.",
+        "url": "https://developer.apple.com/documentation/contacts/cnsaverequest/removesubgroup(_:from:)"
+      },
+      "-updateContact:": {
+        "doc": "Updates an existing contact in the contact store.",
+        "url": "https://developer.apple.com/documentation/contacts/cnsaverequest/update(_:)-3gaig"
+      },
+      "-updateGroup:": {
+        "doc": "Updates an existing group in the contact store.",
+        "url": "https://developer.apple.com/documentation/contacts/cnsaverequest/update(_:)-8h6f6"
+      }
+    },
+    "CNSocialProfile": {
+      "+localizedStringForKey:": {
+        "doc": "Returns the localized name of the property for the specified key.",
+        "url": "https://developer.apple.com/documentation/contacts/cnsocialprofile/localizedstring(forkey:)"
+      },
+      "+localizedStringForService:": {
+        "doc": "Returns the localized name of the specified service.",
+        "url": "https://developer.apple.com/documentation/contacts/cnsocialprofile/localizedstring(forservice:)"
+      },
+      "-initWithUrlString:username:userIdentifier:service:": {
+        "doc": "Initializes a new social profile object with the specified URL.",
+        "url": "https://developer.apple.com/documentation/contacts/cnsocialprofile/init(urlstring:username:useridentifier:service:)"
+      }
+    }
+  },
+  "properties": {
+    "CNChangeHistoryAddContactEvent": {
+      "contact": {
+        "doc": "The contact the user added.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryaddcontactevent/contact"
+      },
+      "containerIdentifier": {
+        "doc": "A string that uniquely identifies the container where the user added the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryaddcontactevent/containeridentifier"
+      }
+    },
+    "CNChangeHistoryAddGroupEvent": {
+      "containerIdentifier": {
+        "doc": "A string that uniquely identifies the container where the user added the group.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryaddgroupevent/containeridentifier"
+      },
+      "group": {
+        "doc": "The group the user added.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryaddgroupevent/group"
+      }
+    },
+    "CNChangeHistoryAddMemberToGroupEvent": {
+      "group": {
+        "doc": "The group where the user added a contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryaddmembertogroupevent/group"
+      },
+      "member": {
+        "doc": "The contact the user added to the group.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryaddmembertogroupevent/member"
+      }
+    },
+    "CNChangeHistoryAddSubgroupToGroupEvent": {
+      "group": {
+        "doc": "The group where the user added a subgroup.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryaddsubgrouptogroupevent/group"
+      },
+      "subgroup": {
+        "doc": "The subgroup that the user added to the group.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryaddsubgrouptogroupevent/subgroup"
+      }
+    },
+    "CNChangeHistoryDeleteContactEvent": {
+      "contactIdentifier": {
+        "doc": "A string that uniquely identifies the contact that the user deleted.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistorydeletecontactevent/contactidentifier"
+      }
+    },
+    "CNChangeHistoryDeleteGroupEvent": {
+      "groupIdentifier": {
+        "doc": "A string that uniquely identifies the group that the user deleted.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistorydeletegroupevent/groupidentifier"
+      }
+    },
+    "CNChangeHistoryFetchRequest": {
+      "additionalContactKeyDescriptors": {
+        "doc": "An array of contact property keys or key descriptors from contact objects to fetch in the returned contacts.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryfetchrequest/additionalcontactkeydescriptors"
+      },
+      "excludedTransactionAuthors": {
+        "doc": "An array of strings that identify transaction authors to exclude from the fetch results.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryfetchrequest/excludedtransactionauthors"
+      },
+      "includeGroupChanges": {
+        "doc": "A Boolean value that indicates whether the fetch should also return group changes.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryfetchrequest/includegroupchanges"
+      },
+      "mutableObjects": {
+        "doc": "A Boolean value that indicates whether the fetch should return mutable contacts and groups.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryfetchrequest/mutableobjects"
+      },
+      "shouldUnifyResults": {
+        "doc": "A Boolean value that indicates whether the fetch should return contact changes as unified contacts.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryfetchrequest/shouldunifyresults"
+      },
+      "startingToken": {
+        "doc": "An opaque token that indicates a point in history in the user’s Contacts database.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryfetchrequest/startingtoken"
+      }
+    },
+    "CNChangeHistoryRemoveMemberFromGroupEvent": {
+      "group": {
+        "doc": "The group where the user removed a contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryremovememberfromgroupevent/group"
+      },
+      "member": {
+        "doc": "The contact that the user removed from the group.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryremovememberfromgroupevent/member"
+      }
+    },
+    "CNChangeHistoryRemoveSubgroupFromGroupEvent": {
+      "group": {
+        "doc": "The group where the user removed a subgroup.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryremovesubgroupfromgroupevent/group"
+      },
+      "subgroup": {
+        "doc": "The subgroup that the user removed from the group.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryremovesubgroupfromgroupevent/subgroup"
+      }
+    },
+    "CNChangeHistoryUpdateContactEvent": {
+      "contact": {
+        "doc": "The contact that the user updated.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryupdatecontactevent/contact"
+      }
+    },
+    "CNChangeHistoryUpdateGroupEvent": {
+      "group": {
+        "doc": "The group that the user updated.",
+        "url": "https://developer.apple.com/documentation/contacts/cnchangehistoryupdategroupevent/group"
+      }
+    },
+    "CNContact": {
+      "birthday": {
+        "doc": "A date component for the Gregorian birthday of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/birthday"
+      },
+      "contactRelations": {
+        "doc": "An array of labeled relations for the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/contactrelations"
+      },
+      "contactType": {
+        "doc": "An enum identifying the contact type.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/contacttype"
+      },
+      "dates": {
+        "doc": "An array containing labeled Gregorian dates.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/dates"
+      },
+      "departmentName": {
+        "doc": "The name of the department associated with the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/departmentname"
+      },
+      "emailAddresses": {
+        "doc": "An array of labeled email addresses for the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/emailaddresses"
+      },
+      "familyName": {
+        "doc": "The family name of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/familyname"
+      },
+      "givenName": {
+        "doc": "The given name of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/givenname"
+      },
+      "identifier": {
+        "doc": "A value that uniquely identifies a contact on the device.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/identifier"
+      },
+      "imageData": {
+        "doc": "The profile picture of a contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/imagedata"
+      },
+      "imageDataAvailable": {
+        "doc": "A Boolean indicating whether a contact has a profile picture.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/imagedataavailable"
+      },
+      "instantMessageAddresses": {
+        "doc": "An array of labeled IM addresses for the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/instantmessageaddresses"
+      },
+      "jobTitle": {
+        "doc": "The contact’s job title.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/jobtitle"
+      },
+      "middleName": {
+        "doc": "The middle name of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/middlename"
+      },
+      "namePrefix": {
+        "doc": "The name prefix of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/nameprefix"
+      },
+      "nameSuffix": {
+        "doc": "The name suffix of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/namesuffix"
+      },
+      "nickname": {
+        "doc": "The nickname of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/nickname"
+      },
+      "nonGregorianBirthday": {
+        "doc": "A date component for the non-Gregorian birthday of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/nongregorianbirthday"
+      },
+      "note": {
+        "doc": "A string containing notes for the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/note"
+      },
+      "organizationName": {
+        "doc": "The name of the organization associated with the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/organizationname"
+      },
+      "phoneNumbers": {
+        "doc": "An array of labeled phone numbers for a contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/phonenumbers"
+      },
+      "phoneticFamilyName": {
+        "doc": "A string for the phonetic family name of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/phoneticfamilyname"
+      },
+      "phoneticGivenName": {
+        "doc": "The phonetic given name of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/phoneticgivenname"
+      },
+      "phoneticMiddleName": {
+        "doc": "The phonetic middle name of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/phoneticmiddlename"
+      },
+      "phoneticOrganizationName": {
+        "doc": "The phonetic name of the organization associated with the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/phoneticorganizationname"
+      },
+      "postalAddresses": {
+        "doc": "An array of labeled postal addresses for a contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/postaladdresses"
+      },
+      "previousFamilyName": {
+        "doc": "A string for the previous family name of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/previousfamilyname"
+      },
+      "socialProfiles": {
+        "doc": "An array of labeled social profiles for a contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/socialprofiles"
+      },
+      "thumbnailImageData": {
+        "doc": "The thumbnail version of the contact’s profile picture.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/thumbnailimagedata"
+      },
+      "urlAddresses": {
+        "doc": "An array of labeled URL addresses for a contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontact/urladdresses"
+      }
+    },
+    "CNContactFetchRequest": {
+      "keysToFetch": {
+        "doc": "The properties to fetch in the returned contacts.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactfetchrequest/keystofetch"
+      },
+      "mutableObjects": {
+        "doc": "A Boolean value that indicates whether to return mutable contacts.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactfetchrequest/mutableobjects"
+      },
+      "predicate": {
+        "doc": "The predicate to match contacts against.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactfetchrequest/predicate"
+      },
+      "sortOrder": {
+        "doc": "The sort order for contacts.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactfetchrequest/sortorder"
+      },
+      "unifyResults": {
+        "doc": "A Boolean value that indicates whether to return linked contacts as unified contacts.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactfetchrequest/unifyresults"
+      }
+    },
+    "CNContactFormatter": {
+      "descriptorForRequiredKeysForDelimiter": {
+        "doc": "Returns the required key descriptor for the name delimiter.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactformatter/descriptorforrequiredkeysfordelimiter"
+      },
+      "descriptorForRequiredKeysForNameOrder": {
+        "doc": "Returns the required key descriptor for the display name order.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactformatter/descriptorforrequiredkeysfornameorder"
+      },
+      "style": {
+        "doc": "The formatting style for the contact name.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactformatter/style"
+      }
+    },
+    "CNContactProperty": {
+      "contact": {
+        "doc": "The associated contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactproperty/contact"
+      },
+      "identifier": {
+        "doc": "The identifier of the labeled value in the array of labeled.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactproperty/identifier"
+      },
+      "key": {
+        "doc": "The key of the contact property.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactproperty/key"
+      },
+      "label": {
+        "doc": "The label of the labeled value of the property array.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactproperty/label"
+      },
+      "value": {
+        "doc": "The value of the property.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactproperty/value"
+      }
+    },
+    "CNContactRelation": {
+      "name": {
+        "doc": "The name of the related contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactrelation/name"
+      }
+    },
+    "CNContactStore": {
+      "currentHistoryToken": {
+        "doc": "The current history token.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactstore/currenthistorytoken"
+      }
+    },
+    "CNContactsUserDefaults": {
+      "countryCode": {
+        "doc": "An ISO country code.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactsuserdefaults/countrycode"
+      },
+      "sortOrder": {
+        "doc": "Default sorting order by name.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontactsuserdefaults/sortorder"
+      }
+    },
+    "CNContainer": {
+      "identifier": {
+        "doc": "The unique identifier for a contacts container on the device.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontainer/identifier"
+      },
+      "name": {
+        "doc": "The name of the container.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontainer/name"
+      },
+      "type": {
+        "doc": "The type of the container.",
+        "url": "https://developer.apple.com/documentation/contacts/cncontainer/type"
+      }
+    },
+    "CNFetchResult": {
+      "currentHistoryToken": {
+        "doc": "An opaque token that indicates a point in history in the user’s Contacts database.",
+        "url": "https://developer.apple.com/documentation/contacts/cnfetchresult/currenthistorytoken"
+      },
+      "value": {
+        "doc": "The result of the fetch request, expressed as the value type you specify.",
+        "url": "https://developer.apple.com/documentation/contacts/cnfetchresult/value"
+      }
+    },
+    "CNGroup": {
+      "identifier": {
+        "doc": "The unique identifier for a group on the device.",
+        "url": "https://developer.apple.com/documentation/contacts/cngroup/identifier"
+      },
+      "name": {
+        "doc": "The name of the group.",
+        "url": "https://developer.apple.com/documentation/contacts/cngroup/name"
+      }
+    },
+    "CNInstantMessageAddress": {
+      "service": {
+        "doc": "The name of the instant message address service.",
+        "url": "https://developer.apple.com/documentation/contacts/cninstantmessageaddress/service"
+      },
+      "username": {
+        "doc": "The user name for instant message service address.",
+        "url": "https://developer.apple.com/documentation/contacts/cninstantmessageaddress/username"
+      }
+    },
+    "CNLabeledValue": {
+      "identifier": {
+        "doc": "A unique identifier for the labeled value object.",
+        "url": "https://developer.apple.com/documentation/contacts/cnlabeledvalue/identifier"
+      },
+      "label": {
+        "doc": "The label for a contact property value.",
+        "url": "https://developer.apple.com/documentation/contacts/cnlabeledvalue/label"
+      },
+      "value": {
+        "doc": "A contact property value.",
+        "url": "https://developer.apple.com/documentation/contacts/cnlabeledvalue/value"
+      }
+    },
+    "CNMutableContact": {
+      "birthday": {
+        "doc": "A date component for the Gregorian birthday of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/birthday"
+      },
+      "contactRelations": {
+        "doc": "An array of labeled contact relations for the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/contactrelations"
+      },
+      "contactType": {
+        "doc": "An enum identifying the contact type.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/contacttype"
+      },
+      "dates": {
+        "doc": "An array containing labeled Gregorian dates.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/dates"
+      },
+      "departmentName": {
+        "doc": "The name of the department associated with the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/departmentname"
+      },
+      "emailAddresses": {
+        "doc": "An array of labeled email addresses for the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/emailaddresses"
+      },
+      "familyName": {
+        "doc": "The family name of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/familyname"
+      },
+      "givenName": {
+        "doc": "The given name of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/givenname"
+      },
+      "imageData": {
+        "doc": "The profile picture of a contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/imagedata"
+      },
+      "instantMessageAddresses": {
+        "doc": "An array of labeled IM addresses for the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/instantmessageaddresses"
+      },
+      "jobTitle": {
+        "doc": "The contact’s job title.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/jobtitle"
+      },
+      "middleName": {
+        "doc": "The middle name of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/middlename"
+      },
+      "namePrefix": {
+        "doc": "The name prefix of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/nameprefix"
+      },
+      "nameSuffix": {
+        "doc": "The name suffix of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/namesuffix"
+      },
+      "nickname": {
+        "doc": "The nickname of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/nickname"
+      },
+      "nonGregorianBirthday": {
+        "doc": "A date component for the non-Gregorian birthday of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/nongregorianbirthday"
+      },
+      "note": {
+        "doc": "A string containing notes for the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/note"
+      },
+      "organizationName": {
+        "doc": "The name of the organization associated with the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/organizationname"
+      },
+      "phoneNumbers": {
+        "doc": "An array of labeled phone numbers for a contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/phonenumbers"
+      },
+      "phoneticFamilyName": {
+        "doc": "The phonetic family name of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/phoneticfamilyname"
+      },
+      "phoneticGivenName": {
+        "doc": "The phonetic given name of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/phoneticgivenname"
+      },
+      "phoneticMiddleName": {
+        "doc": "The phonetic middle name of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/phoneticmiddlename"
+      },
+      "phoneticOrganizationName": {
+        "doc": "The phonetic name of the organization associated with the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/phoneticorganizationname"
+      },
+      "postalAddresses": {
+        "doc": "An array of labeled postal addresses for a contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/postaladdresses"
+      },
+      "previousFamilyName": {
+        "doc": "The previous family name of the contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/previousfamilyname"
+      },
+      "socialProfiles": {
+        "doc": "An array of labeled social profiles for a contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/socialprofiles"
+      },
+      "urlAddresses": {
+        "doc": "An array of labeled URL addresses for a contact.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablecontact/urladdresses"
+      }
+    },
+    "CNMutableGroup": {
+      "name": {
+        "doc": "The name of the group.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablegroup/name"
+      }
+    },
+    "CNMutablePostalAddress": {
+      "ISOCountryCode": {
+        "doc": "The ISO country code, using the ISO 3166-1 alpha-2 standard.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablepostaladdress/isocountrycode"
+      },
+      "city": {
+        "doc": "The city name of the address.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablepostaladdress/city"
+      },
+      "country": {
+        "doc": "The country or region name of the address.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablepostaladdress/country"
+      },
+      "postalCode": {
+        "doc": "The postal code of the address.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablepostaladdress/postalcode"
+      },
+      "state": {
+        "doc": "The state name of the address.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablepostaladdress/state"
+      },
+      "street": {
+        "doc": "The street name of the address.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablepostaladdress/street"
+      },
+      "subAdministrativeArea": {
+        "doc": "The subadministrative area (such as a county or other region) in a postal address.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablepostaladdress/subadministrativearea"
+      },
+      "subLocality": {
+        "doc": "Additional information associated with the location, typically defined at the city or town level, in a postal address.",
+        "url": "https://developer.apple.com/documentation/contacts/cnmutablepostaladdress/sublocality"
+      }
+    },
+    "CNPhoneNumber": {
+      "stringValue": {
+        "doc": "The string value of the phone number.",
+        "url": "https://developer.apple.com/documentation/contacts/cnphonenumber/stringvalue"
+      }
+    },
+    "CNPostalAddress": {
+      "ISOCountryCode": {
+        "doc": "The ISO country code for the country or region in a postal address, using the ISO 3166-1 alpha-2 standard.",
+        "url": "https://developer.apple.com/documentation/contacts/cnpostaladdress/isocountrycode"
+      },
+      "city": {
+        "doc": "The city name in a postal address.",
+        "url": "https://developer.apple.com/documentation/contacts/cnpostaladdress/city"
+      },
+      "country": {
+        "doc": "The country or region name in a postal address.",
+        "url": "https://developer.apple.com/documentation/contacts/cnpostaladdress/country"
+      },
+      "postalCode": {
+        "doc": "The postal code in a postal address.",
+        "url": "https://developer.apple.com/documentation/contacts/cnpostaladdress/postalcode"
+      },
+      "state": {
+        "doc": "The state name in a postal address.",
+        "url": "https://developer.apple.com/documentation/contacts/cnpostaladdress/state"
+      },
+      "street": {
+        "doc": "The street name in a postal address.",
+        "url": "https://developer.apple.com/documentation/contacts/cnpostaladdress/street"
+      },
+      "subAdministrativeArea": {
+        "doc": "The subadministrative area (such as a county or other region) in a postal address.",
+        "url": "https://developer.apple.com/documentation/contacts/cnpostaladdress/subadministrativearea"
+      },
+      "subLocality": {
+        "doc": "Additional information associated with the location, typically defined at the city or town level, in a postal address.",
+        "url": "https://developer.apple.com/documentation/contacts/cnpostaladdress/sublocality"
+      }
+    },
+    "CNPostalAddressFormatter": {
+      "style": {
+        "doc": "The style to apply when formatting strings.",
+        "url": "https://developer.apple.com/documentation/contacts/cnpostaladdressformatter/style"
+      }
+    },
+    "CNSaveRequest": {
+      "shouldRefetchContacts": {
+        "doc": "A Boolean value that indicates whether to refetch the added and updated contacts after the save request executes.",
+        "url": "https://developer.apple.com/documentation/contacts/cnsaverequest/shouldrefetchcontacts"
+      },
+      "transactionAuthor": {
+        "doc": "A string that identifies the author of the transaction.",
+        "url": "https://developer.apple.com/documentation/contacts/cnsaverequest/transactionauthor"
+      }
+    },
+    "CNSocialProfile": {
+      "service": {
+        "doc": "The social profile’s service name.",
+        "url": "https://developer.apple.com/documentation/contacts/cnsocialprofile/service"
+      },
+      "urlString": {
+        "doc": "The URL associated with the social profile.",
+        "url": "https://developer.apple.com/documentation/contacts/cnsocialprofile/urlstring"
+      },
+      "userIdentifier": {
+        "doc": "The service’s user identifier associated with the social profile.",
+        "url": "https://developer.apple.com/documentation/contacts/cnsocialprofile/useridentifier"
+      },
+      "username": {
+        "doc": "The user name for the social profile.",
+        "url": "https://developer.apple.com/documentation/contacts/cnsocialprofile/username"
+      }
+    }
+  }
+}

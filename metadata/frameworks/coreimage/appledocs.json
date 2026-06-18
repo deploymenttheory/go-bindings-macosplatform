@@ -1,0 +1,2059 @@
+{
+  "schema_version": 1,
+  "framework": "CoreImage",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "CIAztecCodeDescriptor": {
+      "doc": "A concrete subclass the Core Image Barcode Descriptor that represents an Aztec code symbol.",
+      "url": "https://developer.apple.com/documentation/coreimage/ciazteccodedescriptor"
+    },
+    "CIBarcodeDescriptor": {
+      "doc": "An abstract base class that represents a machine-readable code’s attributes.",
+      "url": "https://developer.apple.com/documentation/coreimage/cibarcodedescriptor"
+    },
+    "CIBlendKernel": {
+      "doc": "A GPU-based image-processing routine that is optimized for blending two images.",
+      "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel"
+    },
+    "CIColor": {
+      "doc": "The Core Image class that defines a color object.",
+      "url": "https://developer.apple.com/documentation/coreimage/cicolor"
+    },
+    "CIColorKernel": {
+      "doc": "A GPU-based image-processing routine that processes only the color information in images, used to create custom Core Image filters.",
+      "url": "https://developer.apple.com/documentation/coreimage/cicolorkernel"
+    },
+    "CIContext": {
+      "doc": "The Core Image context class provides an evaluation context for Core Image processing with Metal, OpenGL, or OpenCL.",
+      "url": "https://developer.apple.com/documentation/coreimage/cicontext"
+    },
+    "CIDataMatrixCodeDescriptor": {
+      "doc": "A concrete subclass the Core Image Barcode Descriptor that represents an Data Matrix code symbol.",
+      "url": "https://developer.apple.com/documentation/coreimage/cidatamatrixcodedescriptor"
+    },
+    "CIDetector": {
+      "doc": "An image processor that identifies notable features, such as faces and barcodes, in a still image or video.",
+      "url": "https://developer.apple.com/documentation/coreimage/cidetector"
+    },
+    "CIFaceFeature": {
+      "doc": "Information about a face detected in a still or video image.",
+      "url": "https://developer.apple.com/documentation/coreimage/cifacefeature"
+    },
+    "CIFeature": {
+      "doc": "The abstract superclass for objects representing notable features detected in an image.",
+      "url": "https://developer.apple.com/documentation/coreimage/cifeature"
+    },
+    "CIFilter": {
+      "doc": "An image processor that produces an image by manipulating one or more input images or by generating new image data.",
+      "url": "https://developer.apple.com/documentation/coreimage/cifilter"
+    },
+    "CIFilterGenerator": {
+      "doc": "An object that creates and configures chains of individual image filters.",
+      "url": "https://developer.apple.com/documentation/coreimage/cifiltergenerator"
+    },
+    "CIFilterShape": {
+      "doc": "A description of the bounding shape of a filter and the domain of definition for a filter operation.",
+      "url": "https://developer.apple.com/documentation/coreimage/cifiltershape"
+    },
+    "CIImage": {
+      "doc": "A representation of an image to be processed or produced by Core Image filters.",
+      "url": "https://developer.apple.com/documentation/coreimage/ciimage"
+    },
+    "CIImageAccumulator": {
+      "doc": "An object that manages feedback-based image processing for tasks such as painting or fluid simulation.",
+      "url": "https://developer.apple.com/documentation/coreimage/ciimageaccumulator"
+    },
+    "CIImageProcessorKernel": {
+      "doc": "The abstract class you extend to create custom image processors that can integrate with Core Image workflows.",
+      "url": "https://developer.apple.com/documentation/coreimage/ciimageprocessorkernel"
+    },
+    "CIKernel": {
+      "doc": "A GPU-based image-processing routine used to create custom Core Image filters.",
+      "url": "https://developer.apple.com/documentation/coreimage/cikernel"
+    },
+    "CIPDF417CodeDescriptor": {
+      "doc": "A concrete subclass of Core Image Barcode Descriptor that represents a PDF417 symbol.",
+      "url": "https://developer.apple.com/documentation/coreimage/cipdf417codedescriptor"
+    },
+    "CIPlugIn": {
+      "doc": "The mechanism for loading image units in macOS.",
+      "url": "https://developer.apple.com/documentation/coreimage/ciplugin"
+    },
+    "CIQRCodeDescriptor": {
+      "doc": "A concrete subclass of the Core Image Barcode Descriptor that represents a square QR code symbol.",
+      "url": "https://developer.apple.com/documentation/coreimage/ciqrcodedescriptor"
+    },
+    "CIQRCodeFeature": {
+      "doc": "Information about a Quick Response code detected in a still or video image.",
+      "url": "https://developer.apple.com/documentation/coreimage/ciqrcodefeature"
+    },
+    "CIRAWFilter": {
+      "doc": "A filter subclass that produces an image by manipulating RAW image sensor data from a digital camera or scanner.",
+      "url": "https://developer.apple.com/documentation/coreimage/cirawfilter"
+    },
+    "CIRectangleFeature": {
+      "doc": "Information about a rectangular region detected in a still or video image.",
+      "url": "https://developer.apple.com/documentation/coreimage/cirectanglefeature"
+    },
+    "CIRenderDestination": {
+      "doc": "A specification for configuring all attributes of a render task’s destination and issuing asynchronous render tasks.",
+      "url": "https://developer.apple.com/documentation/coreimage/cirenderdestination"
+    },
+    "CIRenderInfo": {
+      "doc": "An encapsulation of a render task’s timing, passes, and pixels processed.",
+      "url": "https://developer.apple.com/documentation/coreimage/cirenderinfo"
+    },
+    "CIRenderTask": {
+      "doc": "A single render task.",
+      "url": "https://developer.apple.com/documentation/coreimage/cirendertask"
+    },
+    "CISampler": {
+      "doc": "An object that retrieves pixel samples for processing by a filter kernel.",
+      "url": "https://developer.apple.com/documentation/coreimage/cisampler"
+    },
+    "CITextFeature": {
+      "doc": "Information about a text that was detected in a still or video image.",
+      "url": "https://developer.apple.com/documentation/coreimage/citextfeature"
+    },
+    "CIVector": {
+      "doc": "The Core Image class that defines a vector object.",
+      "url": "https://developer.apple.com/documentation/coreimage/civector"
+    },
+    "CIWarpKernel": {
+      "doc": "A GPU-based image-processing routine that processes only the geometry information in an image, used to create custom Core Image filters.",
+      "url": "https://developer.apple.com/documentation/coreimage/ciwarpkernel"
+    }
+  },
+  "protocols": {
+    "CIFilter": {
+      "doc": "An image processor that produces an image by manipulating one or more input images or by generating new image data.",
+      "url": "https://developer.apple.com/documentation/coreimage/cifilter"
+    },
+    "CIFilterConstructor": {
+      "doc": "A general interface for objects that produce filters.",
+      "url": "https://developer.apple.com/documentation/coreimage/cifilterconstructor"
+    },
+    "CIImageProcessorInput": {
+      "doc": "A container of image data and information for use in a custom image processor.",
+      "url": "https://developer.apple.com/documentation/coreimage/ciimageprocessorinput"
+    },
+    "CIImageProcessorOutput": {
+      "doc": "A container for writing image data and information produced by a custom image processor.",
+      "url": "https://developer.apple.com/documentation/coreimage/ciimageprocessoroutput"
+    },
+    "CIPlugInRegistration": {
+      "doc": "The interface for loading Core Image image units.",
+      "url": "https://developer.apple.com/documentation/coreimage/cipluginregistration"
+    }
+  },
+  "enums": {
+    "CIDataMatrixCodeECCVersion": {
+      "doc": "Constants indicating the Data Matrix code ECC version.",
+      "url": "https://developer.apple.com/documentation/coreimage/cidatamatrixcodeeccversion"
+    },
+    "CIQRCodeErrorCorrectionLevel": {
+      "doc": "Constants indicating the percentage of the symbol that is dedicated to error correction.",
+      "url": "https://developer.apple.com/documentation/coreimage/ciqrcodeerrorcorrectionlevel"
+    },
+    "CIRenderDestinationAlphaMode": {
+      "doc": "Different ways of representing alpha.",
+      "url": "https://developer.apple.com/documentation/coreimage/cirenderdestinationalphamode",
+      "members": {
+        "CIRenderDestinationAlphaNone": {
+          "doc": "Designates a destination with no alpha compositing.",
+          "url": "https://developer.apple.com/documentation/coreimage/cirenderdestinationalphamode/none"
+        },
+        "CIRenderDestinationAlphaPremultiplied": {
+          "doc": "Designates a destination that expects premultiplied alpha values.",
+          "url": "https://developer.apple.com/documentation/coreimage/cirenderdestinationalphamode/premultiplied"
+        },
+        "CIRenderDestinationAlphaUnpremultiplied": {
+          "doc": "Designates a destination that expects non-premultiplied alpha values.",
+          "url": "https://developer.apple.com/documentation/coreimage/cirenderdestinationalphamode/unpremultiplied"
+        }
+      }
+    }
+  },
+  "methods": {
+    "CIAztecCodeDescriptor": {
+      "+descriptorWithPayload:isCompact:layerCount:dataCodewordCount:": {
+        "doc": "Creates an Aztec code descriptor for the given payload and parameters.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciazteccodedescriptor/descriptorwithpayload:iscompact:layercount:datacodewordcount:"
+      },
+      "-initWithPayload:isCompact:layerCount:dataCodewordCount:": {
+        "doc": "Initializes an Aztec code descriptor for the given payload and parameters.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciazteccodedescriptor/init(payload:iscompact:layercount:datacodewordcount:)"
+      }
+    },
+    "CIBlendKernel": {
+      "+kernelWithString:": {
+        "doc": "Creates a custom blend kernel from a program string.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/init(source:)"
+      },
+      "-applyWithForeground:background:": {
+        "doc": "Creates a new image using the blend kernel and specified foreground and background images.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/apply(foreground:background:)"
+      }
+    },
+    "CIColor": {
+      "+colorWithCGColor:": {
+        "doc": "Create a Core Image color object with a Core Graphics color object.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/colorwithcgcolor:"
+      },
+      "+colorWithRed:green:blue:": {
+        "doc": "Create a Core Image color object in the sRGB color space with the specified red, green, and blue component values.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/init(red:green:blue:)"
+      },
+      "+colorWithRed:green:blue:alpha:": {
+        "doc": "Create a Core Image color object in the sRGB color space with the specified red, green, blue, and alpha component values.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/colorwithred:green:blue:alpha:"
+      },
+      "+colorWithRed:green:blue:alpha:colorSpace:": {
+        "doc": "Create a Core Image color object with the specified red, green, blue, and alpha component values as measured in the specified color space.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/init(red:green:blue:alpha:colorspace:)-5mvff"
+      },
+      "+colorWithRed:green:blue:colorSpace:": {
+        "doc": "Create a Core Image color object with the specified red, green, and blue component values as measured in the specified color space.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/init(red:green:blue:colorspace:)-2og6y"
+      },
+      "+colorWithString:": {
+        "doc": "Create a Core Image color object in the sRGB color space using a string containing the RGBA color component values.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/init(string:)"
+      },
+      "-initWithCGColor:": {
+        "doc": "Create a Core Image color object with a Core Graphics color object.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/init(cgcolor:)-1hzk4"
+      },
+      "-initWithRed:green:blue:": {
+        "doc": "Initialize a Core Image color object in the sRGB color space with the specified red, green, and blue component values.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/initwithred:green:blue:"
+      },
+      "-initWithRed:green:blue:alpha:": {
+        "doc": "Initialize a Core Image color object in the sRGB color space with the specified red, green, blue, and alpha component values.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/init(red:green:blue:alpha:)"
+      },
+      "-initWithRed:green:blue:alpha:colorSpace:": {
+        "doc": "Initialize a Core Image color object with the specified red, green, and blue component values as measured in the specified color space.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/init(red:green:blue:alpha:colorspace:)-8yg0z"
+      },
+      "-initWithRed:green:blue:colorSpace:": {
+        "doc": "Initialize a Core Image color object with the specified red, green, and blue component values as measured in the specified color space.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/init(red:green:blue:colorspace:)-6d8o"
+      }
+    },
+    "CIColorKernel": {
+      "+kernelWithString:": {
+        "doc": "Creates a color kernel object from the specified kernel source code.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolorkernel/init(source:)"
+      },
+      "-applyWithExtent:arguments:": {
+        "doc": "Creates a new image using the kernel and specified arguments.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolorkernel/apply(extent:arguments:)"
+      }
+    },
+    "CIContext": {
+      "+context": {
+        "doc": "Creates a context without a specific rendering destination, using default options.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/context"
+      },
+      "+contextWithCGContext:options:": {
+        "doc": "Creates a Core Image context from a Quartz context, using the specified options.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/init(cgcontext:options:)-6p78w"
+      },
+      "+contextWithCGLContext:pixelFormat:colorSpace:options:": {
+        "doc": "Creates a Core Image context from a CGL context, using the specified options, color space, and pixel format object.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/init(cglcontext:pixelformat:colorspace:options:)-6rp6d"
+      },
+      "+contextWithCGLContext:pixelFormat:options:": {
+        "doc": "Creates a Core Image context from a CGL context, using the specified options and pixel format object.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/contextwithcglcontext:pixelformat:options:"
+      },
+      "+contextWithEAGLContext:": {
+        "doc": "Creates a Core Image context from an EAGL context.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/init(eaglcontext:)-8ajef"
+      },
+      "+contextWithEAGLContext:options:": {
+        "doc": "Creates a Core Image context from an EAGL context using the specified options.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/init(eaglcontext:options:)-6uyqj"
+      },
+      "+contextWithMTLDevice:": {
+        "doc": "Creates a Core Image context using the specified Metal device.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/init(mtldevice:)-swey"
+      },
+      "+contextWithMTLDevice:options:": {
+        "doc": "Creates a Core Image context using the specified Metal device and options.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/init(mtldevice:options:)-26usb"
+      },
+      "+contextWithOptions:": {
+        "doc": "Initializes a context without a specific rendering destination, using the specified options.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/contextwithoptions:"
+      },
+      "+offlineGPUCount": {
+        "doc": "Returns the number of GPUs not currently driving a display.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/offlinegpucount()"
+      },
+      "-HEIF10RepresentationOfImage:colorSpace:options:error:": {
+        "doc": "Renders the image and exports the resulting image data in HEIF10 format.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/heif10representation(of:colorspace:options:)"
+      },
+      "-HEIFRepresentationOfImage:format:colorSpace:options:": {
+        "doc": "Renders the image and exports the resulting image data in HEIF format.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/heifrepresentation(of:format:colorspace:options:)"
+      },
+      "-JPEGRepresentationOfImage:colorSpace:options:": {
+        "doc": "Renders the image and exports the resulting image data in JPEG format.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/jpegrepresentation(of:colorspace:options:)"
+      },
+      "-OpenEXRRepresentationOfImage:options:error:": {
+        "doc": "Renders the image and exports the resulting image data in open EXR format.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/openexrrepresentation(of:options:)"
+      },
+      "-PNGRepresentationOfImage:format:colorSpace:options:": {
+        "doc": "Renders the image and exports the resulting image data in PNG format.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/pngrepresentation(of:format:colorspace:options:)"
+      },
+      "-TIFFRepresentationOfImage:format:colorSpace:options:": {
+        "doc": "Renders the image and exports the resulting image data in TIFF format.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/tiffrepresentation(of:format:colorspace:options:)"
+      },
+      "-calculateHDRStatsForCGImage:": {
+        "doc": "Given a Core Graphics image, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then return a new Core Graphics image that has the calculated values.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/calculatehdrstats(for:)-3ia7r"
+      },
+      "-calculateHDRStatsForCVPixelBuffer:": {
+        "doc": "Given a CVPixelBuffer, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then update the buffer’s attachments to store the values.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/calculatehdrstats(for:)-7bcki"
+      },
+      "-calculateHDRStatsForIOSurface:": {
+        "doc": "Given an IOSurface, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then update the surface’s attachments to store the values.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/calculatehdrstats(for:)-6lwmz"
+      },
+      "-calculateHDRStatsForImage:": {
+        "doc": "Given a Core Image image, use the receiving Core Image context to calculate its HDR statistics (content headroom and content average light level) and then return a new Core Image image that has the calculated values.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/calculatehdrstats(for:)-l1rj"
+      },
+      "-clearCaches": {
+        "doc": "Frees any cached data, such as temporary images, associated with the context and runs the garbage collector.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/clearcaches()"
+      },
+      "-createCGImage:fromRect:": {
+        "doc": "Creates a Core Graphics image from a region of a Core Image image instance.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/createcgimage(_:from:)"
+      },
+      "-createCGImage:fromRect:format:colorSpace:": {
+        "doc": "Creates a Core Graphics image from a region of a Core Image image instance with an option for controlling the pixel format and color space of the CGImage.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/createcgimage(_:from:format:colorspace:)"
+      },
+      "-createCGImage:fromRect:format:colorSpace:deferred:": {
+        "doc": "Creates a Core Graphics image from a region of a Core Image image instance with an option for controlling when the image is rendered.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/createcgimage(_:from:format:colorspace:deferred:)"
+      },
+      "-createCGImage:fromRect:format:colorSpace:deferred:calculateHDRStats:": {
+        "doc": "Creates a Core Graphics image from a region of a Core Image image instance with an option for calculating HDR statistics.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/createcgimage(_:from:format:colorspace:deferred:calculatehdrstats:)"
+      },
+      "-createCGLayerWithSize:info:": {
+        "doc": "Creates a CGLayer object from the provided parameters.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/createcglayer(with:info:)"
+      },
+      "-depthBlurEffectFilterForImage:disparityImage:portraitEffectsMatte:hairSemanticSegmentation:glassesMatte:gainMap:orientation:options:": {
+        "doc": "Create a CIFilter instance for the supplied image data that can be used to apply a depth blur effect created with the supplied auxiliary images.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/depthblureffectfilter(for:disparityimage:portraiteffectsmatte:hairsemanticsegmentation:glassesmatte:gainmap:orientation:options:)"
+      },
+      "-depthBlurEffectFilterForImage:disparityImage:portraitEffectsMatte:hairSemanticSegmentation:orientation:options:": {
+        "doc": "Create a CIFilter instance for the supplied image data that can be used to apply a depth blur effect created with the supplied auxiliary images.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/depthblureffectfilter(for:disparityimage:portraiteffectsmatte:hairsemanticsegmentation:orientation:options:)"
+      },
+      "-depthBlurEffectFilterForImage:disparityImage:portraitEffectsMatte:orientation:options:": {
+        "doc": "Create a CIFilter instance for the supplied image data that can be used to apply a depth blur effect created with the supplied auxiliary images.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/depthblureffectfilter(for:disparityimage:portraiteffectsmatte:orientation:options:)"
+      },
+      "-depthBlurEffectFilterForImageData:options:": {
+        "doc": "Create a CIFilter instance for the supplied image data that can be used to apply a depth blur effect.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/depthblureffectfilter(forimagedata:options:)"
+      },
+      "-depthBlurEffectFilterForImageURL:options:": {
+        "doc": "Create a CIFilter instance for the supplied image URL that can be used to apply a depth blur effect.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/depthblureffectfilter(forimageurl:options:)"
+      },
+      "-drawImage:atPoint:fromRect:": {
+        "doc": "Renders a region of an image to a point in the context destination.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/draw(_:at:from:)"
+      },
+      "-drawImage:inRect:fromRect:": {
+        "doc": "Renders a region of an image to a rectangle in the context destination.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/draw(_:in:from:)"
+      },
+      "-init": {
+        "doc": "Initializes a context without a specific rendering destination, using default options.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/init()"
+      },
+      "-initWithOptions:": {
+        "doc": "Initializes a context without a specific rendering destination, using the specified options.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/init(options:)"
+      },
+      "-inputImageMaximumSize": {
+        "doc": "Returns the maximum size allowed for any image rendered into the context.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/inputimagemaximumsize()"
+      },
+      "-outputImageMaximumSize": {
+        "doc": "Returns the maximum size allowed for any image created by the context.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/outputimagemaximumsize()"
+      },
+      "-prepareRender:fromRect:toDestination:atPoint:error:": {
+        "doc": "An optional call to warm up a CIContext so that subsequent calls to render with the same arguments run more efficiently.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/preparerender(_:from:to:at:)"
+      },
+      "-reclaimResources": {
+        "doc": "Runs the garbage collector to reclaim any resources that the context no longer requires.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/reclaimresources()"
+      },
+      "-render:toBitmap:rowBytes:bounds:format:colorSpace:": {
+        "doc": "Renders to the given bitmap.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/render(_:tobitmap:rowbytes:bounds:format:colorspace:)"
+      },
+      "-render:toCVPixelBuffer:": {
+        "doc": "Renders an image into a pixel buffer.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/render(_:to:)"
+      },
+      "-render:toCVPixelBuffer:bounds:colorSpace:": {
+        "doc": "Renders a region of an image into a pixel buffer.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/render(_:to:bounds:colorspace:)-2k8l2"
+      },
+      "-render:toIOSurface:bounds:colorSpace:": {
+        "doc": "Renders a region of an image into an IOSurface object.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/render(_:to:bounds:colorspace:)-54b9l"
+      },
+      "-render:toMTLTexture:commandBuffer:bounds:colorSpace:": {
+        "doc": "Renders a region of an image to a Metal texture.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/render(_:to:commandbuffer:bounds:colorspace:)"
+      },
+      "-startTaskToClear:error:": {
+        "doc": "Fills the entire destination with black or clear depending on its alphaMode.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/starttask(toclear:)"
+      },
+      "-startTaskToRender:fromRect:toDestination:atPoint:error:": {
+        "doc": "Renders a portion of an image to a point in the destination.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/starttask(torender:from:to:at:)"
+      },
+      "-startTaskToRender:toDestination:error:": {
+        "doc": "Renders an image to a destination so that point (0, 0) of the image maps to point (0, 0) of the destination.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/starttask(torender:to:)"
+      },
+      "-writeHEIF10RepresentationOfImage:toURL:colorSpace:options:error:": {
+        "doc": "Renders the image and exports the resulting image data as a file in HEIF10 format.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/writeheif10representation(of:to:colorspace:options:)"
+      },
+      "-writeHEIFRepresentationOfImage:toURL:format:colorSpace:options:error:": {
+        "doc": "Renders the image and exports the resulting image data as a file in HEIF format.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/writeheifrepresentation(of:to:format:colorspace:options:)"
+      },
+      "-writeJPEGRepresentationOfImage:toURL:colorSpace:options:error:": {
+        "doc": "Renders the image and exports the resulting image data as a file in JPEG format.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/writejpegrepresentation(of:to:colorspace:options:)"
+      },
+      "-writeOpenEXRRepresentationOfImage:toURL:options:error:": {
+        "doc": "Renders the image and exports the resulting image data as a file in open EXR format.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/writeopenexrrepresentation(of:to:options:)"
+      },
+      "-writePNGRepresentationOfImage:toURL:format:colorSpace:options:error:": {
+        "doc": "Renders the image and exports the resulting image data as a file in PNG format.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/writepngrepresentation(of:to:format:colorspace:options:)"
+      },
+      "-writeTIFFRepresentationOfImage:toURL:format:colorSpace:options:error:": {
+        "doc": "Renders the image and exports the resulting image data as a file in TIFF format.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/writetiffrepresentation(of:to:format:colorspace:options:)"
+      }
+    },
+    "CIDataMatrixCodeDescriptor": {
+      "+descriptorWithPayload:rowCount:columnCount:eccVersion:": {
+        "doc": "Creates a Data Matrix code descriptor for the given payload and parameters.",
+        "url": "https://developer.apple.com/documentation/coreimage/cidatamatrixcodedescriptor/descriptorwithpayload:rowcount:columncount:eccversion:"
+      },
+      "-initWithPayload:rowCount:columnCount:eccVersion:": {
+        "doc": "Initializes a Data Matrix code descriptor for the given payload and parameters.",
+        "url": "https://developer.apple.com/documentation/coreimage/cidatamatrixcodedescriptor/init(payload:rowcount:columncount:eccversion:)"
+      }
+    },
+    "CIDetector": {
+      "+detectorOfType:context:options:": {
+        "doc": "Creates and returns a configured detector.",
+        "url": "https://developer.apple.com/documentation/coreimage/cidetector/init(oftype:context:options:)"
+      },
+      "-featuresInImage:": {
+        "doc": "Searches for features in an image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cidetector/features(in:)"
+      },
+      "-featuresInImage:options:": {
+        "doc": "Searches for features in an image based on the specified image orientation.",
+        "url": "https://developer.apple.com/documentation/coreimage/cidetector/features(in:options:)"
+      }
+    },
+    "CIFilterGenerator": {
+      "+filterGenerator": {
+        "doc": "Creates and returns an empty filter generator object.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltergenerator/filtergenerator"
+      },
+      "+filterGeneratorWithContentsOfURL:": {
+        "doc": "Creates and returns a filter generator object and initializes it with the contents of a filter generator file.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltergenerator/filtergeneratorwithcontentsofurl:"
+      },
+      "-connectObject:withKey:toObject:withKey:": {
+        "doc": "Adds an object to the filter chain.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltergenerator/connect(_:withkey:to:withkey:)"
+      },
+      "-disconnectObject:withKey:toObject:withKey:": {
+        "doc": "Removes the connection between two objects in the filter chain.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltergenerator/disconnectobject(_:withkey:to:withkey:)"
+      },
+      "-exportKey:fromObject:withName:": {
+        "doc": "Exports an input or output key of an object in the filter chain.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltergenerator/exportkey(_:from:withname:)"
+      },
+      "-filter": {
+        "doc": "Creates a filter object based on the filter chain.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltergenerator/filter()"
+      },
+      "-initWithContentsOfURL:": {
+        "doc": "Initializes a filter generator object with the contents of a filter generator file.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltergenerator/init(contentsof:)"
+      },
+      "-registerFilterName:": {
+        "doc": "Registers the name associated with a filter chain.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltergenerator/registerfiltername(_:)"
+      },
+      "-removeExportedKey:": {
+        "doc": "Removes a key that was previously exported.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltergenerator/removeexportedkey(_:)"
+      },
+      "-setAttributes:forExportedKey:": {
+        "doc": "Sets a dictionary of attributes for an exported key.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltergenerator/setattributes(_:forexportedkey:)"
+      },
+      "-writeToURL:atomically:": {
+        "doc": "Archives a filter generator object to a filter generator file.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltergenerator/write(to:atomically:)"
+      }
+    },
+    "CIFilterShape": {
+      "+shapeWithRect:": {
+        "doc": "Creates a filter shape object and initializes it with a rectangle.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltershape/shapewithrect:"
+      },
+      "-initWithRect:": {
+        "doc": "Initializes a filter shape object with a rectangle.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltershape/init(rect:)"
+      },
+      "-insetByX:Y:": {
+        "doc": "Modifies a filter shape object so that it is inset by the specified x and y values.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltershape/insetby(x:y:)"
+      },
+      "-intersectWith:": {
+        "doc": "Creates a filter shape object that represents the intersection of the current filter shape and the specified filter shape object.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltershape/intersect(with:)-8iw"
+      },
+      "-intersectWithRect:": {
+        "doc": "Creates a filter shape that represents the intersection of the current filter shape and a rectangle.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltershape/intersect(with:)-2o2n8"
+      },
+      "-transformBy:interior:": {
+        "doc": "Creates a filter shape that results from applying a transform to the current filter shape.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltershape/transform(by:interior:)"
+      },
+      "-unionWith:": {
+        "doc": "Creates a filter shape that results from the union of the current filter shape and another filter shape object.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltershape/union(with:)-52mnd"
+      },
+      "-unionWithRect:": {
+        "doc": "Creates a filter shape that results from the union of the current filter shape and a rectangle.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltershape/union(with:)-75ebo"
+      }
+    },
+    "CIImage": {
+      "+emptyImage": {
+        "doc": "Creates and returns an empty image object.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/empty()"
+      },
+      "+imageWithBitmapData:bytesPerRow:size:format:colorSpace:": {
+        "doc": "Creates and returns an image object from bitmap data.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/imagewithbitmapdata:bytesperrow:size:format:colorspace:"
+      },
+      "+imageWithCGImage:": {
+        "doc": "Creates and returns an image object from a Quartz 2D image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/imagewithcgimage:"
+      },
+      "+imageWithCGImage:options:": {
+        "doc": "Creates and returns an image object from a Quartz 2D image using the specified options.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/imagewithcgimage:options:"
+      },
+      "+imageWithCGLayer:": {
+        "doc": "Creates and returns an image object from the contents supplied by a CGLayer object.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/imagewithcglayer:"
+      },
+      "+imageWithCGLayer:options:": {
+        "doc": "Creates and returns an image object from the contents supplied by a CGLayer object, using the specified options.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/imagewithcglayer:options:"
+      },
+      "+imageWithCVImageBuffer:": {
+        "doc": "Creates and returns an image object from the contents of CVImageBuffer object.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/imagewithcvimagebuffer:"
+      },
+      "+imageWithCVImageBuffer:options:": {
+        "doc": "Creates and returns an image object from the contents of CVImageBuffer object, using the specified options.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/imagewithcvimagebuffer:options:"
+      },
+      "+imageWithCVPixelBuffer:": {
+        "doc": "Creates and returns an image object from the contents of CVPixelBuffer object.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/imagewithcvpixelbuffer:"
+      },
+      "+imageWithCVPixelBuffer:options:": {
+        "doc": "Creates and returns an image object from the contents of CVPixelBuffer object, using the specified options.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/imagewithcvpixelbuffer:options:"
+      },
+      "+imageWithColor:": {
+        "doc": "Creates and returns an image of infinite extent whose entire content is the specified color.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/imagewithcolor:"
+      },
+      "+imageWithContentsOfURL:": {
+        "doc": "Creates and returns an image object from the contents of a file.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/imagewithcontentsofurl:"
+      },
+      "+imageWithContentsOfURL:options:": {
+        "doc": "Creates and returns an image object from the contents of a file, using the specified options.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/imagewithcontentsofurl:options:"
+      },
+      "+imageWithData:": {
+        "doc": "Creates and returns an image object initialized with the supplied image data.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/imagewithdata:"
+      },
+      "+imageWithData:options:": {
+        "doc": "Creates and returns an image object initialized with the supplied image data, using the specified options.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/imagewithdata:options:"
+      },
+      "+imageWithIOSurface:": {
+        "doc": "Creates and returns an image from the contents of an IOSurface.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/imagewithiosurface:"
+      },
+      "+imageWithIOSurface:options:": {
+        "doc": "Creates, using the specified options, and returns an image from the contents of an IOSurface.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/imagewithiosurface:options:"
+      },
+      "+imageWithImageProvider:size::format:colorSpace:options:": {
+        "doc": "Create an image object based on pixels from an image provider object.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/imagewithimageprovider:size::format:colorspace:options:"
+      },
+      "+imageWithMTLTexture:options:": {
+        "doc": "Creates and returns an image object with data supplied by a Metal texture.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/imagewithmtltexture:options:"
+      },
+      "+imageWithTexture:size:flipped:colorSpace:": {
+        "doc": "Creates and returns an image object initialized with data supplied by an OpenGL texture.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/imagewithtexture:size:flipped:colorspace:"
+      },
+      "+imageWithTexture:size:flipped:options:": {
+        "doc": "Creates and returns an image object initialized with data supplied by an OpenGL texture.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/imagewithtexture:size:flipped:options:"
+      },
+      "-autoAdjustmentFilters": {
+        "doc": "Returns all possible automatically selected and configured filters for adjusting the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/autoadjustmentfilters()"
+      },
+      "-autoAdjustmentFiltersWithOptions:": {
+        "doc": "Returns a subset of automatically selected and configured filters for adjusting the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/autoadjustmentfilters(options:)"
+      },
+      "-drawAtPoint:fromRect:operation:fraction:": {
+        "doc": "Draws all or part of the image at the specified point in the current coordinate system.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/draw(at:from:operation:fraction:)"
+      },
+      "-drawInRect:fromRect:operation:fraction:": {
+        "doc": "Draws all or part of the image in the specified rectangle in the current coordinate system",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/draw(in:from:operation:fraction:)"
+      },
+      "-imageByApplyingCGOrientation:": {
+        "doc": "Transforms the original image by a given orientation.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/oriented(_:)"
+      },
+      "-imageByApplyingFilter:": {
+        "doc": "Applies the filter to an image and returns the output.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/applyingfilter(_:)"
+      },
+      "-imageByApplyingFilter:withInputParameters:": {
+        "doc": "Returns a new image created by applying a filter to the original image with the specified name and parameters.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/applyingfilter(_:parameters:)"
+      },
+      "-imageByApplyingGainMap:": {
+        "doc": "Create an image that applies a gain map Core Image image to the received Core Image image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/applyinggainmap(_:)"
+      },
+      "-imageByApplyingGainMap:headroom:": {
+        "doc": "Create an image that applies a gain map Core Image image with a specified headroom to the received Core Image image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/applyinggainmap(_:headroom:)"
+      },
+      "-imageByApplyingGaussianBlurWithSigma:": {
+        "doc": "Create an image by applying a gaussian blur to the receiver.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/applyinggaussianblur(sigma:)"
+      },
+      "-imageByApplyingOrientation:": {
+        "doc": "Returns a new image created by transforming the original image to the specified EXIF orientation.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/oriented(forexiforientation:)"
+      },
+      "-imageByApplyingTransform:": {
+        "doc": "Returns a new image that represents the original image after applying an affine transform.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/transformed(by:)"
+      },
+      "-imageByClampingToExtent": {
+        "doc": "Returns a new image created by making the pixel colors along its edges extend infinitely in all directions.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/clampedtoextent()"
+      },
+      "-imageByClampingToRect:": {
+        "doc": "Returns a new image created by cropping to a specified area, then making the pixel colors along the edges of the cropped image extend infinitely in all directions.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/clamped(to:)"
+      },
+      "-imageByColorMatchingColorSpaceToWorkingSpace:": {
+        "doc": "Returns a new image created by color matching from the specified color space to the context’s working color space.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/matchedtoworkingspace(from:)"
+      },
+      "-imageByColorMatchingWorkingSpaceToColorSpace:": {
+        "doc": "Returns a new image created by color matching from the context’s working color space to the specified color space.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/matchedfromworkingspace(to:)"
+      },
+      "-imageByCompositingOverImage:": {
+        "doc": "Returns a new image created by compositing the original image over the specified destination image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/composited(over:)"
+      },
+      "-imageByCroppingToRect:": {
+        "doc": "Returns a new image with a cropped portion of the original image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/cropped(to:)"
+      },
+      "-imageByInsertingIntermediate": {
+        "doc": "Create an image that inserts a intermediate that is cacheable",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/insertingintermediate()"
+      },
+      "-imageByInsertingIntermediate:": {
+        "doc": "Create an image that inserts a intermediate that is cacheable.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/insertingintermediate(cache:)"
+      },
+      "-imageByInsertingTiledIntermediate": {
+        "doc": "Create an image that inserts a intermediate that is cached in tiles",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/insertingtiledintermediate()"
+      },
+      "-imageByPremultiplyingAlpha": {
+        "doc": "Returns a new image created by multiplying the image’s RGB values by its alpha values.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/premultiplyingalpha()"
+      },
+      "-imageBySamplingLinear": {
+        "doc": "Create an image by changing the receiver’s sample mode to bilinear interpolation.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/samplinglinear()"
+      },
+      "-imageBySamplingNearest": {
+        "doc": "Create an image by changing the receiver’s sample mode to nearest neighbor.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/samplingnearest()"
+      },
+      "-imageBySettingAlphaOneInExtent:": {
+        "doc": "Returns a new image created by setting all alpha values to 1.0 within the specified rectangle and to 0.0 outside of that area.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/settingalphaone(in:)"
+      },
+      "-imageBySettingContentAverageLightLevel:": {
+        "doc": "Create an image by changing the receiver’s contentAverageLightLevel property.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/settingcontentaveragelightlevel(_:)"
+      },
+      "-imageBySettingContentHeadroom:": {
+        "doc": "Create an image by changing the receiver’s contentHeadroom property.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/settingcontentheadroom(_:)"
+      },
+      "-imageBySettingProperties:": {
+        "doc": "Return a new image by changing the receiver’s metadata properties.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/settingproperties(_:)"
+      },
+      "-imageByUnpremultiplyingAlpha": {
+        "doc": "Returns a new image created by dividing the image’s RGB values by its alpha values.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/unpremultiplyingalpha()"
+      },
+      "-imageTransformForCGOrientation:": {
+        "doc": "The affine transform for changing the image to the given orientation.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/orientationtransform(for:)"
+      },
+      "-imageTransformForOrientation:": {
+        "doc": "Returns the transformation needed to reorient the image to the specified orientation.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/orientationtransform(forexiforientation:)"
+      },
+      "-initWithBitmapData:bytesPerRow:size:format:colorSpace:": {
+        "doc": "Initializes an image object with bitmap data.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(bitmapdata:bytesperrow:size:format:colorspace:)"
+      },
+      "-initWithBitmapImageRep:": {
+        "doc": "Initializes an image object with the specified bitmap image representation.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(bitmapimagerep:)"
+      },
+      "-initWithCGImage:": {
+        "doc": "Initializes an image object with a Quartz 2D image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(cgimage:)-2kvvb"
+      },
+      "-initWithCGImage:options:": {
+        "doc": "Initializes an image object with a Quartz 2D image, using the specified options.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(cgimage:options:)-8663h"
+      },
+      "-initWithCGLayer:": {
+        "doc": "Initializes an image object from the contents supplied by a CGLayer object.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(cglayer:)-2lgo6"
+      },
+      "-initWithCGLayer:options:": {
+        "doc": "Initializes an image object from the contents supplied by a CGLayer object, using the specified options.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(cglayer:options:)-3p3l3"
+      },
+      "-initWithCVImageBuffer:": {
+        "doc": "Initializes an image object from the contents of a Core Video image buffer.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(cvimagebuffer:)-7wmzq"
+      },
+      "-initWithCVImageBuffer:options:": {
+        "doc": "Initializes an image object from the contents of a Core Video image buffer, using the specified options.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(cvimagebuffer:options:)-8upim"
+      },
+      "-initWithCVPixelBuffer:": {
+        "doc": "Initializes an image object from the contents of a Core Video pixel buffer.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(cvpixelbuffer:)-3wng7"
+      },
+      "-initWithCVPixelBuffer:options:": {
+        "doc": "Initializes an image object from the contents of a Core Video pixel buffer using the specified options.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(cvpixelbuffer:options:)-9x2pz"
+      },
+      "-initWithColor:": {
+        "doc": "Initializes an image of infinite extent whose entire content is the specified color.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(color:)"
+      },
+      "-initWithContentsOfURL:": {
+        "doc": "Initializes an image object by reading an image from a URL.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(contentsof:)"
+      },
+      "-initWithContentsOfURL:options:": {
+        "doc": "Initializes an image object by reading an image from a URL, using the specified options.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(contentsof:options:)"
+      },
+      "-initWithData:": {
+        "doc": "Initializes an image object with the supplied image data.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(data:)"
+      },
+      "-initWithData:options:": {
+        "doc": "Initializes an image object with the supplied image data, using the specified options.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(data:options:)"
+      },
+      "-initWithIOSurface:": {
+        "doc": "Initializes an image with the contents of an IOSurface.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(iosurface:)-5e9yc"
+      },
+      "-initWithIOSurface:options:": {
+        "doc": "Initializes, using the specified options, an image with the contents of an IOSurface.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(iosurface:options:)-48cta"
+      },
+      "-initWithIOSurface:plane:format:options:": {
+        "doc": "Initializes, using the specified format and options, an image with the contents of a specific data plane in an IOSurface.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(iosurface:plane:format:options:)-93isn"
+      },
+      "-initWithImage:": {
+        "doc": "Initializes an image object with the specified UIKit image object.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(image:)"
+      },
+      "-initWithImage:options:": {
+        "doc": "Initializes an image object with the specified UIKit image object, using the specified options.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(image:options:)"
+      },
+      "-initWithImageProvider:size::format:colorSpace:options:": {
+        "doc": "Initializes an image object based on pixels from an image provider object.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(imageprovider:size:_:format:colorspace:options:)"
+      },
+      "-initWithMTLTexture:options:": {
+        "doc": "Initializes an image object with data supplied by a Metal texture.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(mtltexture:options:)-67uvj"
+      },
+      "-initWithTexture:size:flipped:colorSpace:": {
+        "doc": "Initializes an image object with data supplied by an OpenGL texture.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(texture:size:flipped:colorspace:)"
+      },
+      "-initWithTexture:size:flipped:options:": {
+        "doc": "Initializes an image object with data supplied by an OpenGL texture.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/init(texture:size:flipped:options:)"
+      },
+      "-regionOfInterestForImage:inRect:": {
+        "doc": "Returns the region of interest for the filter chain that generates the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/regionofinterest(for:in:)"
+      }
+    },
+    "CIImageAccumulator": {
+      "+imageAccumulatorWithExtent:format:": {
+        "doc": "Creates an image accumulator with the specified extent and pixel format.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageaccumulator/imageaccumulatorwithextent:format:"
+      },
+      "+imageAccumulatorWithExtent:format:colorSpace:": {
+        "doc": "Creates an image accumulator with the specified extent, pixel format, and color space.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageaccumulator/imageaccumulatorwithextent:format:colorspace:"
+      },
+      "-clear": {
+        "doc": "Resets the accumulator, discarding any pending updates and the current content.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageaccumulator/clear()"
+      },
+      "-image": {
+        "doc": "Returns the current contents of the image accumulator.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageaccumulator/image()"
+      },
+      "-initWithExtent:format:": {
+        "doc": "Initializes an image accumulator with the specified extent and pixel format.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageaccumulator/init(extent:format:)"
+      },
+      "-initWithExtent:format:colorSpace:": {
+        "doc": "Initializes an image accumulator with the specified extent, pixel format, and color space.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageaccumulator/init(extent:format:colorspace:)"
+      },
+      "-setImage:": {
+        "doc": "Sets the contents of the image accumulator to the contents of the specified image object.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageaccumulator/setimage(_:)"
+      },
+      "-setImage:dirtyRect:": {
+        "doc": "Updates an image accumulator with a subregion of an image object.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageaccumulator/setimage(_:dirtyrect:)"
+      }
+    },
+    "CIImageProcessorKernel": {
+      "+applyWithExtent:inputs:arguments:error:": {
+        "doc": "Call this method on your Core Image Processor Kernel subclass to create a new image of the specified extent.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageprocessorkernel/apply(withextent:inputs:arguments:)"
+      },
+      "+applyWithExtents:inputs:arguments:error:": {
+        "doc": "Call this method on your multiple-output Core Image Processor Kernel subclass to create an array of new image objects given the specified array of extents.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageprocessorkernel/apply(withextents:inputs:arguments:)"
+      },
+      "+applyWithTiledExtent:inputs:arguments:error:": {
+        "doc": "Call this method on your Core Image Processor Kernel subclass to create a new image based on an array of tile extents that together cover the output.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageprocessorkernel/apply(withtiledextent:inputs:arguments:)"
+      },
+      "+formatForInputAtIndex:": {
+        "doc": "Override this class method if you want your any of the inputs to be in a specific pixel format.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageprocessorkernel/formatforinput(at:)"
+      },
+      "+outputFormatAtIndex:arguments:": {
+        "doc": "Override this class method if your processor has more than one output and you want your processor’s output to be in a specific supported CIPixelFormat.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageprocessorkernel/outputformat(at:arguments:)"
+      },
+      "+processWithInputs:arguments:output:error:": {
+        "doc": "Override this class method to implement your Core Image Processor Kernel subclass.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageprocessorkernel/process(with:arguments:output:)"
+      },
+      "+processWithInputs:arguments:outputs:error:": {
+        "doc": "Override this class method of your Core Image Processor Kernel subclass if it needs to produce multiple outputs.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageprocessorkernel/process(with:arguments:outputs:)"
+      },
+      "+roiForInput:arguments:outputRect:": {
+        "doc": "Override this class method to implement your processor’s ROI callback.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageprocessorkernel/roi(forinput:arguments:outputrect:)"
+      },
+      "+roiTileArrayForInput:arguments:outputRect:": {
+        "doc": "Override this class method to implement your processor’s tiled ROI callback.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageprocessorkernel/roitilearray(forinput:arguments:outputrect:)"
+      }
+    },
+    "CIKernel": {
+      "+kernelNamesFromMetalLibraryData:": {
+        "doc": "Return an array of strings containing the names of all of the kernels contained in the Metal library.",
+        "url": "https://developer.apple.com/documentation/coreimage/cikernel/kernelnames(frommetallibrarydata:)"
+      },
+      "+kernelWithFunctionName:fromMetalLibraryData:error:": {
+        "doc": "Creates a single kernel object using a Metal Shading Language (MSL) kernel function.",
+        "url": "https://developer.apple.com/documentation/coreimage/cikernel/init(functionname:frommetallibrarydata:)"
+      },
+      "+kernelWithFunctionName:fromMetalLibraryData:outputPixelFormat:error:": {
+        "doc": "Creates a single kernel object using a Metal Shading Language kernel function with optional pixel format.",
+        "url": "https://developer.apple.com/documentation/coreimage/cikernel/init(functionname:frommetallibrarydata:outputpixelformat:)"
+      },
+      "+kernelWithString:": {
+        "doc": "Creates a single kernel object.",
+        "url": "https://developer.apple.com/documentation/coreimage/cikernel/init(source:)"
+      },
+      "+kernelsWithMetalString:error:": {
+        "doc": "Load kernels from a Metal language string.",
+        "url": "https://developer.apple.com/documentation/coreimage/cikernel/kernels(withmetalstring:)"
+      },
+      "+kernelsWithString:": {
+        "doc": "Creates and returns and array of CIKernel objects.",
+        "url": "https://developer.apple.com/documentation/coreimage/cikernel/makekernels(source:)"
+      },
+      "-applyWithExtent:roiCallback:arguments:": {
+        "doc": "Creates a new image using the kernel and specified arguments.",
+        "url": "https://developer.apple.com/documentation/coreimage/cikernel/apply(extent:roicallback:arguments:)"
+      },
+      "-setROISelector:": {
+        "doc": "Sets the selector Core Image uses to query the region of interest for image processing with the kernel.",
+        "url": "https://developer.apple.com/documentation/coreimage/cikernel/setroiselector(_:)"
+      }
+    },
+    "CIPDF417CodeDescriptor": {
+      "+descriptorWithPayload:isCompact:rowCount:columnCount:": {
+        "doc": "Creates an PDF417 code descriptor for the given payload and parameters.",
+        "url": "https://developer.apple.com/documentation/coreimage/cipdf417codedescriptor/descriptorwithpayload:iscompact:rowcount:columncount:"
+      },
+      "-initWithPayload:isCompact:rowCount:columnCount:": {
+        "doc": "Initializes an PDF417 code descriptor for the given payload and parameters.",
+        "url": "https://developer.apple.com/documentation/coreimage/cipdf417codedescriptor/init(payload:iscompact:rowcount:columncount:)"
+      }
+    },
+    "CIPlugIn": {
+      "+loadAllPlugIns": {
+        "doc": "Scans directories for files that have the .plugin extension and then loads the image units.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciplugin/loadallplugins()"
+      },
+      "+loadNonExecutablePlugIn:": {
+        "doc": "Loads a non-executable plug-in specified by its URL.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciplugin/loadnonexecutableplugin(_:)"
+      },
+      "+loadNonExecutablePlugIns": {
+        "doc": "Scans directories for plugins.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciplugin/loadnonexecutableplugins()"
+      },
+      "+loadPlugIn:allowExecutableCode:": {
+        "doc": "Loads filters from an image unit that have the appropriate executable status.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciplugin/load(_:allowexecutablecode:)"
+      },
+      "+loadPlugIn:allowNonExecutable:": {
+        "doc": "Loads filters from an image unit that have the appropriate executable status.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciplugin/loadplugin:allownonexecutable:"
+      }
+    },
+    "CIQRCodeDescriptor": {
+      "+descriptorWithPayload:symbolVersion:maskPattern:errorCorrectionLevel:": {
+        "doc": "Creates a QR code descriptor for the given payload and parameters.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciqrcodedescriptor/descriptorwithpayload:symbolversion:maskpattern:errorcorrectionlevel:"
+      },
+      "-initWithPayload:symbolVersion:maskPattern:errorCorrectionLevel:": {
+        "doc": "Initializes a QR code descriptor for the given payload and parameters.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciqrcodedescriptor/init(payload:symbolversion:maskpattern:errorcorrectionlevel:)"
+      }
+    },
+    "CIRAWFilter": {
+      "+filterWithCVPixelBuffer:properties:": {
+        "doc": "Creates a RAW filter from the pixel buffer and its properties that you specify.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/init(cvpixelbuffer:properties:)-6209q"
+      },
+      "+filterWithImageData:identifierHint:": {
+        "doc": "Creates a RAW filter from the image data and type hint that you specify.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/init(imagedata:identifierhint:)"
+      },
+      "+filterWithImageURL:": {
+        "doc": "Creates a RAW filter from the image at the URL location that you specify.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/init(imageurl:)"
+      }
+    },
+    "CIRenderDestination": {
+      "-initWithBitmapData:width:height:bytesPerRow:format:": {
+        "doc": "Creates a render destination based on a client-managed buffer.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirenderdestination/init(bitmapdata:width:height:bytesperrow:format:)"
+      },
+      "-initWithGLTexture:target:width:height:": {
+        "doc": "Creates a render destination based on an OpenGL texture.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirenderdestination/init(gltexture:target:width:height:)-9ci8e"
+      },
+      "-initWithIOSurface:": {
+        "doc": "Creates a render destination based on an IOSurface object.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirenderdestination/init(iosurface:)-1hfcq"
+      },
+      "-initWithMTLTexture:commandBuffer:": {
+        "doc": "Creates a render destination based on a Metal texture.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirenderdestination/init(mtltexture:commandbuffer:)-2iu5i"
+      },
+      "-initWithPixelBuffer:": {
+        "doc": "Creates a render destination based on a Core Video pixel buffer.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirenderdestination/init(pixelbuffer:)"
+      },
+      "-initWithWidth:height:pixelFormat:commandBuffer:mtlTextureProvider:": {
+        "doc": "Creates a render destination based on a Metal texture with specified pixel format.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirenderdestination/init(width:height:pixelformat:commandbuffer:mtltextureprovider:)"
+      }
+    },
+    "CIRenderTask": {
+      "-waitUntilCompletedAndReturnError:": {
+        "doc": "Waits until the CIRenderTask finishes and returns.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirendertask/waituntilcompleted()"
+      }
+    },
+    "CISampler": {
+      "+samplerWithImage:": {
+        "doc": "Creates and returns a sampler that references an image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cisampler/samplerwithimage:"
+      },
+      "+samplerWithImage:keysAndValues:": {
+        "doc": "Creates and returns a sampler that references an image using options specified as key-value pairs.",
+        "url": "https://developer.apple.com/documentation/coreimage/cisampler/samplerwithimage:keysandvalues:"
+      },
+      "+samplerWithImage:options:": {
+        "doc": "Creates and returns a sampler that references an image using options specified in a dictionary.",
+        "url": "https://developer.apple.com/documentation/coreimage/cisampler/samplerwithimage:options:"
+      },
+      "-initWithImage:": {
+        "doc": "Initializes a sampler with an image object.",
+        "url": "https://developer.apple.com/documentation/coreimage/cisampler/init(image:)"
+      },
+      "-initWithImage:keysAndValues:": {
+        "doc": "Initializes the sampler with an image object using options specified as key-value pairs.",
+        "url": "https://developer.apple.com/documentation/coreimage/cisampler/initwithimage:keysandvalues:"
+      },
+      "-initWithImage:options:": {
+        "doc": "Initializes the sampler with an image object using options specified in a dictionary.",
+        "url": "https://developer.apple.com/documentation/coreimage/cisampler/init(image:options:)"
+      }
+    },
+    "CIVector": {
+      "+vectorWithCGAffineTransform:": {
+        "doc": "Create a Core Image vector object that is initialized with six values provided by a CGAffineTransform structure.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/init(cgaffinetransform:)-59e4k"
+      },
+      "+vectorWithCGPoint:": {
+        "doc": "Create a Core Image vector object that is initialized with two values provided by a CGPoint structure.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/init(cgpoint:)-3mobm"
+      },
+      "+vectorWithCGRect:": {
+        "doc": "Create a Core Image vector object that is initialized with four values provided by a CGRect structure.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/init(cgrect:)-3undj"
+      },
+      "+vectorWithString:": {
+        "doc": "Create a Core Image vector object with values provided in a string representation.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/vectorwithstring:"
+      },
+      "+vectorWithValues:count:": {
+        "doc": "Create a Core Image vector object that is initialized with the specified values.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/vectorwithvalues:count:"
+      },
+      "+vectorWithX:": {
+        "doc": "Create a Core Image vector object that is initialized with one value.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/vectorwithx:"
+      },
+      "+vectorWithX:Y:": {
+        "doc": "Create a Core Image vector object that is initialized with two values.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/vectorwithx:y:"
+      },
+      "+vectorWithX:Y:Z:": {
+        "doc": "Create a Core Image vector object that is initialized with three values.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/vectorwithx:y:z:"
+      },
+      "+vectorWithX:Y:Z:W:": {
+        "doc": "Create a Core Image vector object that is initialized with four values.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/vectorwithx:y:z:w:"
+      },
+      "-initWithCGAffineTransform:": {
+        "doc": "Initialize a Core Image vector object with six values provided by a CGAffineTransform structure.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/init(cgaffinetransform:)-6o8gl"
+      },
+      "-initWithCGPoint:": {
+        "doc": "Initialize a Core Image vector object with two values provided by a CGPoint structure.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/init(cgpoint:)-8cf9j"
+      },
+      "-initWithCGRect:": {
+        "doc": "Initialize a Core Image vector object with four values provided by a CGRect structure.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/init(cgrect:)-6bolw"
+      },
+      "-initWithString:": {
+        "doc": "Initialize a Core Image vector object with values provided in a string representation.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/init(string:)"
+      },
+      "-initWithValues:count:": {
+        "doc": "Initialize a Core Image vector object with the specified the values.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/init(values:count:)"
+      },
+      "-initWithX:": {
+        "doc": "Initialize a Core Image vector object with one value.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/init(x:)"
+      },
+      "-initWithX:Y:": {
+        "doc": "Initialize a Core Image vector object with two values.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/init(x:y:)-4grr"
+      },
+      "-initWithX:Y:Z:": {
+        "doc": "Initialize a Core Image vector object with three values.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/init(x:y:z:)-zais"
+      },
+      "-initWithX:Y:Z:W:": {
+        "doc": "Initialize a Core Image vector object with four values.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/init(x:y:z:w:)-75emo"
+      },
+      "-valueAtIndex:": {
+        "doc": "Returns a value from a specific position in the vector.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/value(at:)"
+      }
+    },
+    "CIWarpKernel": {
+      "+kernelWithString:": {
+        "doc": "Creates a warp kernel object from the specified kernel source code.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciwarpkernel/init(source:)"
+      },
+      "-applyWithExtent:roiCallback:inputImage:arguments:": {
+        "doc": "Creates a new image using the kernel and the specified input image and arguments.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciwarpkernel/apply(extent:roicallback:image:arguments:)"
+      }
+    }
+  },
+  "properties": {
+    "CIAztecCodeDescriptor": {
+      "dataCodewordCount": {
+        "doc": "The number of non-error-correction codewords carried by the Aztec code symbol.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciazteccodedescriptor/datacodewordcount-swift.property"
+      },
+      "errorCorrectedPayload": {
+        "doc": "The error-corrected payload that comprises the the Aztec code symbol.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciazteccodedescriptor/errorcorrectedpayload-swift.property"
+      },
+      "isCompact": {
+        "doc": "A Boolean value telling if the Aztec code is compact.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciazteccodedescriptor/iscompact-swift.property"
+      },
+      "layerCount": {
+        "doc": "The number of data layers in the Aztec code symbol.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciazteccodedescriptor/layercount-swift.property"
+      }
+    },
+    "CIBlendKernel": {
+      "clear": {
+        "doc": "A blend kernel that returns a clear color.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/clear"
+      },
+      "color": {
+        "doc": "A blend kernel that uses the luminance values of the background with the hue and saturation values of the foreground image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/color"
+      },
+      "colorBurn": {
+        "doc": "A blend kernel that darkens the background image samples to reflect the foreground image samples.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/colorburn"
+      },
+      "colorDodge": {
+        "doc": "A blend kernel that brightens the background image samples to reflect the foreground image samples.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/colordodge"
+      },
+      "componentAdd": {
+        "doc": "A blend kernel that adds color components to achieve a brightening effect.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/componentadd"
+      },
+      "componentMax": {
+        "doc": "A blend kernel that creates an image using the maximum values of two input images.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/componentmax"
+      },
+      "componentMin": {
+        "doc": "A blend kernel that creates an image using the minimum values of two input images.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/componentmin"
+      },
+      "componentMultiply": {
+        "doc": "A blend kernel that multiplies the color components of its input images.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/componentmultiply"
+      },
+      "darken": {
+        "doc": "A blend kernel that creates an image using the darker values of two input images.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/darken"
+      },
+      "darkerColor": {
+        "doc": "A blend kernel that creates an image using the darker color of two input images.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/darkercolor"
+      },
+      "destination": {
+        "doc": "A blend kernel that returns the background input image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/destination"
+      },
+      "destinationAtop": {
+        "doc": "A blend kernel that places the background over the foreground and crops based on the visibility of the foreground.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/destinationatop"
+      },
+      "destinationIn": {
+        "doc": "A blend kernel that places the background over the foreground and crops based on the visibility of both.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/destinationin"
+      },
+      "destinationOut": {
+        "doc": "A blend kernel that uses the background image to define what to take out of the foreground image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/destinationout"
+      },
+      "destinationOver": {
+        "doc": "A blend kernel that places the background image over the input foreground image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/destinationover"
+      },
+      "difference": {
+        "doc": "A blend kernel that creates an image using the difference between the background and foreground images.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/difference"
+      },
+      "divide": {
+        "doc": "A blend kernel that divides the background image sample color with the foreground image sample color.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/divide"
+      },
+      "exclusion": {
+        "doc": "A blend kernel that produces an effect similar to difference blending but with lower contrast.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/exclusion"
+      },
+      "exclusiveOr": {
+        "doc": "A blend kernel that returns either the foreground or background image if the other contains a clear color.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/exclusiveor"
+      },
+      "hardLight": {
+        "doc": "A blend kernel that either multiplies or screens colors, depending on the source image sample color.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/hardlight"
+      },
+      "hardMix": {
+        "doc": "A blend kernel that adds two images together, setting each color channel value to either 0 or 1.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/hardmix"
+      },
+      "hue": {
+        "doc": "A blend kernel that uses the luminance and saturation values of the background image with the hue of the foreground image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/hue"
+      },
+      "lighten": {
+        "doc": "A blend kernel that creates an image using the lighter values of two input images.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/lighten"
+      },
+      "lighterColor": {
+        "doc": "A blend kernel that creates an image using the lighter color of two input images.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/lightercolor"
+      },
+      "linearBurn": {
+        "doc": "A blend kernel that darkens the background image samples to reflect the foreground image samples while also increasing contrast.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/linearburn"
+      },
+      "linearDodge": {
+        "doc": "A blend kernel that lightens the background image samples to reflect the foreground image samples while also increasing contrast.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/lineardodge"
+      },
+      "linearLight": {
+        "doc": "A blend kernel that burns or dodges colors by changing brightness, depending on the blend color.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/linearlight"
+      },
+      "luminosity": {
+        "doc": "A blend kernel that uses the hue and saturation of the background image with the luminance of the foreground image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/luminosity"
+      },
+      "multiply": {
+        "doc": "A blend kernel that multiplies the background image sample color with the foreground image sample color.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/multiply"
+      },
+      "overlay": {
+        "doc": "A blend kernel that either multiplies or screens the foreground image samples with the background image samples, depending on the background color.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/overlay"
+      },
+      "pinLight": {
+        "doc": "A blend kernel that conditionally replaces background image samples with source image samples depending on the brightness of the source image samples.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/pinlight"
+      },
+      "saturation": {
+        "doc": "A blend kernel that uses the luminance and hue values of the background image with the saturation of the foreground image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/saturation"
+      },
+      "screen": {
+        "doc": "A blend kernel that multiplies the inverse of the foreground image samples with the inverse of the background image samples.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/screen"
+      },
+      "softLight": {
+        "doc": "A blend kernel that either darkens or lightens colors, depending on the foreground image sample color.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/softlight"
+      },
+      "source": {
+        "doc": "A blend kernel that returns the foreground input image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/source"
+      },
+      "sourceAtop": {
+        "doc": "A blend kernel that places the foreground over the background and crops based on the visibility of the background.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/sourceatop"
+      },
+      "sourceIn": {
+        "doc": "A blend kernel that places the foreground over the background and crops based on the visibility of both.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/sourcein"
+      },
+      "sourceOut": {
+        "doc": "A blend kernel that uses the foreground image to define what to take out of the background image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/sourceout"
+      },
+      "sourceOver": {
+        "doc": "A blend kernel that places the foreground image over the input background image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/sourceover"
+      },
+      "subtract": {
+        "doc": "A blend kernel that subtracts the background image sample color from the foreground image sample color.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/subtract"
+      },
+      "vividLight": {
+        "doc": "A blend kernel that burns or dodges colors by changing contrast, depending on the blend color.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciblendkernel/vividlight"
+      }
+    },
+    "CIColor": {
+      "alpha": {
+        "doc": "Returns the alpha value of the color.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/alpha"
+      },
+      "blackColor": {
+        "doc": "Returns a singleton Core Image color instance in the sRGB color space with RGB values 0,0,0 and alpha value 1.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/black"
+      },
+      "blue": {
+        "doc": "Returns the unpremultiplied blue component of the color.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/blue-swift.property"
+      },
+      "blueColor": {
+        "doc": "Returns a singleton Core Image color instance in the sRGB color space with RGB values 0,0,1 and alpha value 1.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/blue-swift.type.property"
+      },
+      "clearColor": {
+        "doc": "Returns a singleton Core Image color instance in the sRGB color space with RGB values 0,0,0 and alpha value 0.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/clear"
+      },
+      "colorSpace": {
+        "doc": "Returns the CGColorSpace associated with the color",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/colorspace"
+      },
+      "components": {
+        "doc": "Return a pointer to an array of CGFloat values including alpha.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/components"
+      },
+      "cyanColor": {
+        "doc": "Returns a singleton Core Image color instance in the sRGB color space with RGB values 0,1,1 and alpha value 1.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/cyan"
+      },
+      "grayColor": {
+        "doc": "Returns a singleton Core Image color instance in the sRGB color space with RGB values 0.5,0.5,0.5 and alpha value 1.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/gray"
+      },
+      "green": {
+        "doc": "Returns the unpremultiplied green component of the color.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/green-swift.property"
+      },
+      "greenColor": {
+        "doc": "Returns a singleton Core Image color instance in the sRGB color space with RGB values 0,1,0 and alpha value 1.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/green-swift.type.property"
+      },
+      "magentaColor": {
+        "doc": "Returns a singleton Core Image color instance in the sRGB color space with RGB values 1,0,1 and alpha value 1.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/magenta"
+      },
+      "numberOfComponents": {
+        "doc": "Returns the color components of the color including alpha.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/numberofcomponents"
+      },
+      "red": {
+        "doc": "Returns the unpremultiplied red component of the color.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/red-swift.property"
+      },
+      "redColor": {
+        "doc": "Returns a singleton Core Image color instance in the sRGB color space with RGB values 1,0,0 and alpha value 1.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/red-swift.type.property"
+      },
+      "stringRepresentation": {
+        "doc": "Returns a formatted string with the unpremultiplied color and alpha components of the color.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/stringrepresentation"
+      },
+      "whiteColor": {
+        "doc": "Returns a singleton Core Image color instance in the sRGB color space with RGB values 1,1,1 and alpha value 1.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/white"
+      },
+      "yellowColor": {
+        "doc": "Returns a singleton Core Image color instance in the sRGB color space with RGB values 1,1,0 and alpha value 1.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicolor/yellow"
+      }
+    },
+    "CIContext": {
+      "init(forOfflineGPUAtIndex:)": {
+        "doc": "Creates an OpenGL-based Core Image context using a GPU that is not currently driving a display.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/init(forofflinegpuatindex:)"
+      },
+      "init(forOfflineGPUAtIndex:colorSpace:options:sharedContext:)": {
+        "doc": "Creates an OpenGL-based Core Image context using a GPU that is not currently driving a display, with the specified options.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/init(forofflinegpuatindex:colorspace:options:sharedcontext:)"
+      },
+      "workingColorSpace": {
+        "doc": "The working color space of the Core Image context.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/workingcolorspace"
+      },
+      "workingFormat": {
+        "doc": "The working pixel format of the Core Image context.",
+        "url": "https://developer.apple.com/documentation/coreimage/cicontext/workingformat"
+      }
+    },
+    "CIDataMatrixCodeDescriptor": {
+      "CIDataMatrixCodeECCVersion": {
+        "doc": "Constants indicating the Data Matrix code ECC version.",
+        "url": "https://developer.apple.com/documentation/coreimage/cidatamatrixcodedescriptor/eccversion-swift.enum"
+      },
+      "columnCount": {
+        "doc": "The number of columns in the Data Matrix code symbol.",
+        "url": "https://developer.apple.com/documentation/coreimage/cidatamatrixcodedescriptor/columncount-swift.property"
+      },
+      "eccVersion": {
+        "doc": "The error correction version of the Data Matrix code symbol.",
+        "url": "https://developer.apple.com/documentation/coreimage/cidatamatrixcodedescriptor/eccversion-swift.property"
+      },
+      "errorCorrectedPayload": {
+        "doc": "The error-corrected payload containing the data encoded in the Data Matrix code symbol.",
+        "url": "https://developer.apple.com/documentation/coreimage/cidatamatrixcodedescriptor/errorcorrectedpayload-swift.property"
+      },
+      "rowCount": {
+        "doc": "The number of rows in the Data Matrix code symbol.",
+        "url": "https://developer.apple.com/documentation/coreimage/cidatamatrixcodedescriptor/rowcount-swift.property"
+      }
+    },
+    "CIFaceFeature": {
+      "bounds": {
+        "doc": "A rectangle indicating the position and extent of the face feature in image coordinates.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifacefeature/bounds-swift.property"
+      },
+      "faceAngle": {
+        "doc": "The rotation of the face.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifacefeature/faceangle-swift.property"
+      },
+      "hasFaceAngle": {
+        "doc": "A Boolean value that indicates whether information about face rotation is available.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifacefeature/hasfaceangle-swift.property"
+      },
+      "hasLeftEyePosition": {
+        "doc": "A Boolean value that indicates whether the detector found the face’s left eye.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifacefeature/haslefteyeposition-swift.property"
+      },
+      "hasMouthPosition": {
+        "doc": "A Boolean value that indicates whether the detector found the face’s mouth.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifacefeature/hasmouthposition-swift.property"
+      },
+      "hasRightEyePosition": {
+        "doc": "A Boolean value that indicates whether the detector found the face’s right eye.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifacefeature/hasrighteyeposition-swift.property"
+      },
+      "hasSmile": {
+        "doc": "A Boolean value that indicates whether a smile is detected in the face.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifacefeature/hassmile-swift.property"
+      },
+      "hasTrackingFrameCount": {
+        "doc": "A Boolean value that indicates the face object has a tracking frame count.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifacefeature/hastrackingframecount-swift.property"
+      },
+      "hasTrackingID": {
+        "doc": "A Boolean value that indicates whether the face object has a tracking ID.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifacefeature/hastrackingid-swift.property"
+      },
+      "leftEyeClosed": {
+        "doc": "A Boolean value that indicates whether a closed left eye is detected in the face.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifacefeature/lefteyeclosed-swift.property"
+      },
+      "leftEyePosition": {
+        "doc": "The image coordinate of the center of the left eye.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifacefeature/lefteyeposition-swift.property"
+      },
+      "mouthPosition": {
+        "doc": "The image coordinate of the center of the mouth.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifacefeature/mouthposition-swift.property"
+      },
+      "rightEyeClosed": {
+        "doc": "A Boolean value that indicates whether a closed right eye is detected in the face.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifacefeature/righteyeclosed-swift.property"
+      },
+      "rightEyePosition": {
+        "doc": "The image coordinate of the center of the right eye.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifacefeature/righteyeposition-swift.property"
+      },
+      "trackingFrameCount": {
+        "doc": "The tracking frame count of the face.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifacefeature/trackingframecount-swift.property"
+      },
+      "trackingID": {
+        "doc": "The tracking identifier of the face object.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifacefeature/trackingid-swift.property"
+      }
+    },
+    "CIFeature": {
+      "bounds": {
+        "doc": "The rectangle that holds discovered feature.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifeature/bounds"
+      },
+      "type": {
+        "doc": "The type of feature that was discovered.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifeature/type"
+      }
+    },
+    "CIFilterGenerator": {
+      "classAttributes": {
+        "doc": "The class attributes associated with the filter.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltergenerator/classattributes"
+      },
+      "exportedKeys": {
+        "doc": "Returns an array of the exported keys.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltergenerator/exportedkeys"
+      }
+    },
+    "CIFilterShape": {
+      "extent": {
+        "doc": "The extent of the filter shape.",
+        "url": "https://developer.apple.com/documentation/coreimage/cifiltershape/extent"
+      }
+    },
+    "CIImage": {
+      "CGImage": {
+        "doc": "The CoreGraphics image object this image was created from, if applicable.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/cgimage"
+      },
+      "colorSpace": {
+        "doc": "The color space of the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/colorspace"
+      },
+      "contentAverageLightLevel": {
+        "doc": "Returns the content average light level of the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/contentaveragelightlevel"
+      },
+      "contentHeadroom": {
+        "doc": "Returns the content headroom of the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/contentheadroom"
+      },
+      "definition": {
+        "doc": "Returns a filter shape object that represents the domain of definition of the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/definition"
+      },
+      "depthData": {
+        "doc": "Depth data associated with the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/depthdata"
+      },
+      "extent": {
+        "doc": "A rectangle that specifies the extent of the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/extent"
+      },
+      "opaque": {
+        "doc": "Returns YES if the image is known to have and alpha value of 1.0 over the entire image extent.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/isopaque"
+      },
+      "pixelBuffer": {
+        "doc": "The CoreVideo pixel buffer this image was created from, if applicable.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/pixelbuffer"
+      },
+      "portraitEffectsMatte": {
+        "doc": "The portrait effects matte associated with the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/portraiteffectsmatte"
+      },
+      "properties": {
+        "doc": "Returns the metadata properties dictionary of the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/properties"
+      },
+      "url": {
+        "doc": "The URL from which the image was loaded.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimage/url"
+      }
+    },
+    "CIImageAccumulator": {
+      "extent": {
+        "doc": "The extent of the image associated with the image accumulator.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageaccumulator/extent"
+      },
+      "format": {
+        "doc": "The pixel format of the image accumulator.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageaccumulator/format"
+      }
+    },
+    "CIImageProcessorKernel": {
+      "outputFormat": {
+        "doc": "Override this class property if you want your processor’s output to be in a specific pixel format.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageprocessorkernel/outputformat"
+      },
+      "outputIsOpaque": {
+        "doc": "Override this class property if your processor’s output stores 1.0 into the alpha channel of all pixels within the output extent.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageprocessorkernel/outputisopaque"
+      },
+      "synchronizeInputs": {
+        "doc": "Override this class property to return false if you want your processor to be given input objects that have not been synchronized for CPU access.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciimageprocessorkernel/synchronizeinputs"
+      }
+    },
+    "CIKernel": {
+      "name": {
+        "doc": "The name of the kernel routine.",
+        "url": "https://developer.apple.com/documentation/coreimage/cikernel/name"
+      }
+    },
+    "CIPDF417CodeDescriptor": {
+      "columnCount": {
+        "doc": "The number of columns in the PDF417 code symbol.",
+        "url": "https://developer.apple.com/documentation/coreimage/cipdf417codedescriptor/columncount-swift.property"
+      },
+      "errorCorrectedPayload": {
+        "doc": "The error-corrected payload containing the data encoded in the PDF417 code symbol.",
+        "url": "https://developer.apple.com/documentation/coreimage/cipdf417codedescriptor/errorcorrectedpayload-swift.property"
+      },
+      "isCompact": {
+        "doc": "A boolean value telling if the PDF417 code is compact.",
+        "url": "https://developer.apple.com/documentation/coreimage/cipdf417codedescriptor/iscompact-swift.property"
+      },
+      "rowCount": {
+        "doc": "The number of rows in the PDF417 code symbol.",
+        "url": "https://developer.apple.com/documentation/coreimage/cipdf417codedescriptor/rowcount-swift.property"
+      }
+    },
+    "CIQRCodeDescriptor": {
+      "CIQRCodeErrorCorrectionLevel": {
+        "doc": "Constants indicating the percentage of the symbol that is dedicated to error correction.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciqrcodedescriptor/errorcorrectionlevel-swift.enum"
+      },
+      "errorCorrectedPayload": {
+        "doc": "The error-corrected codeword payload that comprises the QR code symbol.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciqrcodedescriptor/errorcorrectedpayload-swift.property"
+      },
+      "errorCorrectionLevel": {
+        "doc": "The error correction level of the QR code symbol.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciqrcodedescriptor/errorcorrectionlevel-swift.property"
+      },
+      "maskPattern": {
+        "doc": "The data mask pattern for the QR code symbol.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciqrcodedescriptor/maskpattern-swift.property"
+      },
+      "symbolVersion": {
+        "doc": "The version of the QR code which corresponds to the size of the QR code symbol.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciqrcodedescriptor/symbolversion-swift.property"
+      }
+    },
+    "CIQRCodeFeature": {
+      "bottomLeft": {
+        "doc": "The image coordinate of the lower-left corner of the detected QR code.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciqrcodefeature/bottomleft-swift.property"
+      },
+      "bottomRight": {
+        "doc": "The image coordinate of the lower-right corner of the detected QR code.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciqrcodefeature/bottomright-swift.property"
+      },
+      "bounds": {
+        "doc": "A rectangle that indicates the position and extent of the QR code feature in image coordinates.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciqrcodefeature/bounds-swift.property"
+      },
+      "messageString": {
+        "doc": "The string decoded from the detected barcode.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciqrcodefeature/messagestring"
+      },
+      "symbolDescriptor": {
+        "doc": "An abstract representation of a QR Code symbol.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciqrcodefeature/symboldescriptor-swift.property"
+      },
+      "topLeft": {
+        "doc": "The image coordinate of the upper-left corner of the detected QR code.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciqrcodefeature/topleft-swift.property"
+      },
+      "topRight": {
+        "doc": "The image coordinate of the upper-right corner of the detected QR code.",
+        "url": "https://developer.apple.com/documentation/coreimage/ciqrcodefeature/topright-swift.property"
+      }
+    },
+    "CIRAWFilter": {
+      "baselineExposure": {
+        "doc": "A value that indicates the baseline exposure to apply to the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/baselineexposure"
+      },
+      "boostAmount": {
+        "doc": "A value that indicates the amount of global tone curve to apply to the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/boostamount"
+      },
+      "boostShadowAmount": {
+        "doc": "A value that indicates the amount to boost the shadow areas of the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/boostshadowamount"
+      },
+      "colorNoiseReductionAmount": {
+        "doc": "A value that indicates the amount of chroma noise reduction to apply to the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/colornoisereductionamount"
+      },
+      "colorNoiseReductionSupported": {
+        "doc": "A Boolean that indicates if the current image supports color noise reduction adjustments.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/iscolornoisereductionsupported"
+      },
+      "contrastAmount": {
+        "doc": "A value that indicates the amount of local contrast to apply to the edges of the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/contrastamount"
+      },
+      "contrastSupported": {
+        "doc": "A Boolean that indicates if the current image supports contrast adjustments.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/iscontrastsupported"
+      },
+      "decoderVersion": {
+        "doc": "A value that indicates the decoder version to use.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/decoderversion"
+      },
+      "detailAmount": {
+        "doc": "A value that indicates the amount of detail enhancement to apply to the edges of the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/detailamount"
+      },
+      "detailSupported": {
+        "doc": "A Boolean that indicates if the current image supports detail enhancement adjustments.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/isdetailsupported"
+      },
+      "draftModeEnabled": {
+        "doc": "A Boolean that indicates whether to enable draft mode.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/isdraftmodeenabled"
+      },
+      "exposure": {
+        "doc": "A value that indicates the amount of exposure to apply to the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/exposure"
+      },
+      "extendedDynamicRangeAmount": {
+        "doc": "A value that indicates the amount of extended dynamic range (EDR) to apply to the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/extendeddynamicrangeamount"
+      },
+      "gamutMappingEnabled": {
+        "doc": "A Boolean that indicates whether to enable gamut mapping.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/isgamutmappingenabled"
+      },
+      "lensCorrectionEnabled": {
+        "doc": "A Boolean that indicates whether to enable lens correction.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/islenscorrectionenabled"
+      },
+      "lensCorrectionSupported": {
+        "doc": "A Boolean that indicates if you can enable lens correction for the current image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/islenscorrectionsupported"
+      },
+      "linearSpaceFilter": {
+        "doc": "An optional filter you can apply to the RAW image while it’s in linear space.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/linearspacefilter"
+      },
+      "localToneMapAmount": {
+        "doc": "A value that indicates the amount of local tone curve to apply to the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/localtonemapamount"
+      },
+      "localToneMapSupported": {
+        "doc": "A Boolean that indicates if the current image supports local tone curve adjustments.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/islocaltonemapsupported"
+      },
+      "luminanceNoiseReductionAmount": {
+        "doc": "A value that indicates the amount of luminance noise reduction to apply to the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/luminancenoisereductionamount"
+      },
+      "luminanceNoiseReductionSupported": {
+        "doc": "A Boolean that indicates if the current image supports luminance noise reduction adjustments.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/isluminancenoisereductionsupported"
+      },
+      "moireReductionAmount": {
+        "doc": "A value that indicates the amount of moire artifact reduction to apply to high frequency areas of the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/moirereductionamount"
+      },
+      "moireReductionSupported": {
+        "doc": "A Boolean that indicates if the current image supports moire artifact reduction adjustments.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/ismoirereductionsupported"
+      },
+      "nativeSize": {
+        "doc": "The full native size of the unscaled image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/nativesize"
+      },
+      "neutralChromaticity": {
+        "doc": "A value that indicates the amount of white balance based on chromaticity values to apply to the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/neutralchromaticity"
+      },
+      "neutralLocation": {
+        "doc": "A value that indicates the amount of white balance based on pixel coordinates to apply to the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/neutrallocation"
+      },
+      "neutralTemperature": {
+        "doc": "A value that indicates the amount of white balance based on temperature values to apply to the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/neutraltemperature"
+      },
+      "neutralTint": {
+        "doc": "A value that indicates the amount of white balance based on tint values to apply to the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/neutraltint"
+      },
+      "orientation": {
+        "doc": "A value that indicates the orientation of the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/orientation"
+      },
+      "portraitEffectsMatte": {
+        "doc": "An optional auxiliary image that represents the portrait effects matte of the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/portraiteffectsmatte"
+      },
+      "previewImage": {
+        "doc": "An optional auxiliary image that represents a preview of the original image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/previewimage"
+      },
+      "properties": {
+        "doc": "A dictionary that contains properties of the image source.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/properties"
+      },
+      "scaleFactor": {
+        "doc": "A value that indicates the desired scale factor to draw the output image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/scalefactor"
+      },
+      "semanticSegmentationGlassesMatte": {
+        "doc": "An optional auxiliary image that represents the semantic segmentation glasses matte of the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/semanticsegmentationglassesmatte"
+      },
+      "semanticSegmentationHairMatte": {
+        "doc": "An optional auxiliary image that represents the semantic segmentation hair matte of the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/semanticsegmentationhairmatte"
+      },
+      "semanticSegmentationSkinMatte": {
+        "doc": "An optional auxiliary image that represents the semantic segmentation skin matte of the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/semanticsegmentationskinmatte"
+      },
+      "semanticSegmentationSkyMatte": {
+        "doc": "An optional auxiliary image that represents the semantic segmentation sky matte of the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/semanticsegmentationskymatte"
+      },
+      "semanticSegmentationTeethMatte": {
+        "doc": "An optional auxiliary image that represents the semantic segmentation teeth matte of the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/semanticsegmentationteethmatte"
+      },
+      "shadowBias": {
+        "doc": "A value that indicates the amount to subtract from the shadows in the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/shadowbias"
+      },
+      "sharpnessAmount": {
+        "doc": "A value that indicates the amount of sharpness to apply to the edges of the image.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/sharpnessamount"
+      },
+      "sharpnessSupported": {
+        "doc": "A Boolean that indicates if the current image supports sharpness adjustments.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/issharpnesssupported"
+      },
+      "supportedCameraModels": {
+        "doc": "An array containing the names of all supported camera models.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/supportedcameramodels"
+      },
+      "supportedDecoderVersions": {
+        "doc": "An array of all supported decoder versions for the given image type.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirawfilter/supporteddecoderversions"
+      }
+    },
+    "CIRectangleFeature": {
+      "bottomLeft": {
+        "doc": "The lower-left corner of the detected rectangle, in image coordinates.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirectanglefeature/bottomleft-swift.property"
+      },
+      "bottomRight": {
+        "doc": "The lower-right corner of the detected rectangle, in image coordinates.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirectanglefeature/bottomright-swift.property"
+      },
+      "bounds": {
+        "doc": "A rectangle indicating the position and extent of the feature in image coordinates.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirectanglefeature/bounds-swift.property"
+      },
+      "topLeft": {
+        "doc": "The upper-left corner of the detected rectangle, in image coordinates.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirectanglefeature/topleft-swift.property"
+      },
+      "topRight": {
+        "doc": "The upper-right corner of the detected rectangle, in image coordinates.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirectanglefeature/topright-swift.property"
+      }
+    },
+    "CIRenderDestination": {
+      "alphaMode": {
+        "doc": "The render destination’s representation of alpha (transparency) values.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirenderdestination/alphamode"
+      },
+      "blendKernel": {
+        "doc": "The destination’s blend kernel.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirenderdestination/blendkernel"
+      },
+      "blendsInDestinationColorSpace": {
+        "doc": "Indicator of whether to blend in the destination’s color space.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirenderdestination/blendsindestinationcolorspace"
+      },
+      "captureTraceURL": {
+        "doc": "Tell the next render using this destination to capture a Metal trace.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirenderdestination/capturetraceurl"
+      },
+      "clamped": {
+        "doc": "Indicator of whether or not the destination clamps.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirenderdestination/isclamped"
+      },
+      "colorSpace": {
+        "doc": "The destination’s color space.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirenderdestination/colorspace"
+      },
+      "dithered": {
+        "doc": "Indicator of whether or not the destination dithers.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirenderdestination/isdithered"
+      },
+      "flipped": {
+        "doc": "Indicator of whether the destination is flipped.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirenderdestination/isflipped"
+      },
+      "height": {
+        "doc": "The render destination’s buffer height.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirenderdestination/height"
+      },
+      "width": {
+        "doc": "The render destination’s row width.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirenderdestination/width"
+      }
+    },
+    "CIRenderInfo": {
+      "kernelExecutionTime": {
+        "doc": "The amount of time a render spent executing kernels.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirenderinfo/kernelexecutiontime"
+      },
+      "passCount": {
+        "doc": "The number of passes the render took.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirenderinfo/passcount"
+      },
+      "pixelsProcessed": {
+        "doc": "The number of pixels the render produced executing kernels.",
+        "url": "https://developer.apple.com/documentation/coreimage/cirenderinfo/pixelsprocessed"
+      }
+    },
+    "CISampler": {
+      "definition": {
+        "doc": "The domain of definition (DOD) of the sampler",
+        "url": "https://developer.apple.com/documentation/coreimage/cisampler/definition"
+      },
+      "extent": {
+        "doc": "The rectangle that specifies the extent of the sampler",
+        "url": "https://developer.apple.com/documentation/coreimage/cisampler/extent"
+      }
+    },
+    "CITextFeature": {
+      "bottomLeft": {
+        "doc": "The image coordinate of the lower-left corner of the detected text.",
+        "url": "https://developer.apple.com/documentation/coreimage/citextfeature/bottomleft"
+      },
+      "bottomRight": {
+        "doc": "The image coordinate of the lower-right corner of the detected text.",
+        "url": "https://developer.apple.com/documentation/coreimage/citextfeature/bottomright"
+      },
+      "bounds": {
+        "doc": "A rectangle that indicates the position and extent of the text feature in image coordinates.",
+        "url": "https://developer.apple.com/documentation/coreimage/citextfeature/bounds"
+      },
+      "subFeatures": {
+        "doc": "An array containing additional features detected within the feature.",
+        "url": "https://developer.apple.com/documentation/coreimage/citextfeature/subfeatures"
+      },
+      "topLeft": {
+        "doc": "The image coordinate of the upper-left corner of the detected text.",
+        "url": "https://developer.apple.com/documentation/coreimage/citextfeature/topleft"
+      },
+      "topRight": {
+        "doc": "The image coordinate of the upper-right corner of the detected text.",
+        "url": "https://developer.apple.com/documentation/coreimage/citextfeature/topright"
+      }
+    },
+    "CIVector": {
+      "CGAffineTransformValue": {
+        "doc": "Returns the values in the vector as a CGAffineTransformValue structure.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/cgaffinetransformvalue"
+      },
+      "CGPointValue": {
+        "doc": "Returns the values in the vector as a CGPoint structure.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/cgpointvalue"
+      },
+      "CGRectValue": {
+        "doc": "Returns the values in the vector as a CGRect structure.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/cgrectvalue"
+      },
+      "W": {
+        "doc": "The value located in the forth position in the vector.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/w"
+      },
+      "X": {
+        "doc": "The value located in the first position in the vector.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/x"
+      },
+      "Y": {
+        "doc": "The value located in the second position in the vector.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/y"
+      },
+      "Z": {
+        "doc": "The value located in the third position in the vector.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/z"
+      },
+      "count": {
+        "doc": "The number of items in the vector.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/count"
+      },
+      "stringRepresentation": {
+        "doc": "Returns a formatted string with all the values of a CIVector.",
+        "url": "https://developer.apple.com/documentation/coreimage/civector/stringrepresentation"
+      }
+    }
+  }
+}

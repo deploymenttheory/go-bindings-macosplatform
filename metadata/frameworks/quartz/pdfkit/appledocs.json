@@ -1,0 +1,1192 @@
+{
+  "schema_version": 1,
+  "framework": "PDFKit",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "PDFAction": {
+      "doc": "An action that is performed when, for example, a PDF annotation is activated or an outline item is clicked.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfaction"
+    },
+    "PDFActionGoTo": {
+      "doc": "PDFActionGoTo, a subclass of PDFAction, defines methods for getting and setting the destination of a go-to action.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfactiongoto"
+    },
+    "PDFActionNamed": {
+      "doc": "PDFActionNamed defines methods used to work with actions in PDF documents, some of which are named in the Adobe PDF Specification.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfactionnamed"
+    },
+    "PDFActionRemoteGoTo": {
+      "doc": "PDFActionRemoteGoTo, a subclass of PDFAction, defines methods for getting and setting the destination of a go-to action that targets another document.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfactionremotegoto"
+    },
+    "PDFActionResetForm": {
+      "doc": "PDFActionResetForm, a subclass of PDFAction, defines methods for getting and clearing fields in a PDF form.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfactionresetform"
+    },
+    "PDFActionURL": {
+      "doc": "PDFActionURL, a subclass of PDFAction, defines methods for getting and setting the URL associated with a URL action.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfactionurl"
+    },
+    "PDFAnnotation": {
+      "doc": "An annotation in a PDF document.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation"
+    },
+    "PDFAnnotationButtonWidget": {
+      "doc": "A PDFAnnotationButtonWidget object provides user interactivity on a page of a PDF document. There are three types of buttons available: push button, radio button, and checkbox.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationbuttonwidget"
+    },
+    "PDFAnnotationChoiceWidget": {
+      "doc": "A PDFAnnotationChoiceWidget object provides user interactivity on a page of a PDF document, in the form of pop-up menus and lists.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationchoicewidget"
+    },
+    "PDFAnnotationCircle": {
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationcircle"
+    },
+    "PDFAnnotationFreeText": {
+      "doc": "A PDFAnnotationFreeText object displays text on a page.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationfreetext"
+    },
+    "PDFAnnotationInk": {
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationink"
+    },
+    "PDFAnnotationLine": {
+      "doc": "A PDFAnnotationLine object displays a single line on a page.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationline"
+    },
+    "PDFAnnotationLink": {
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationlink"
+    },
+    "PDFAnnotationMarkup": {
+      "doc": "A PDFAnnotationMarkup object appears as highlighting, underlining, or a strikethrough style applied to the text of a document.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationmarkup"
+    },
+    "PDFAnnotationPopup": {
+      "doc": "A PDFAnnotationPopup object provides user interactivity on a PDF page in the form of a pop-up menu.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationpopup"
+    },
+    "PDFAnnotationSquare": {
+      "doc": "A rectangle annotation on a page.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationsquare"
+    },
+    "PDFAnnotationStamp": {
+      "doc": "A PDFAnnotationStamp object allows you to display a word or phrase, such as “Confidential,” in a PDF page.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationstamp"
+    },
+    "PDFAnnotationText": {
+      "doc": "A PDFAnnotationText object displays as an icon (such as a “sticky note”) attached to a specified point in the PDF document.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationtext"
+    },
+    "PDFAnnotationTextWidget": {
+      "doc": "A PDFAnnotationTextWidget object allows you to manage the appearance and content of text fields.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationtextwidget"
+    },
+    "PDFAppearanceCharacteristics": {
+      "doc": "An object that represents appearance characteristics of a widget annotation.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfappearancecharacteristics"
+    },
+    "PDFBorder": {
+      "doc": "An optional border for an annotation that lies completely within the annotation rectangle.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfborder"
+    },
+    "PDFDestination": {
+      "doc": "A PDFDestination object describes a point on a PDF page.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfdestination"
+    },
+    "PDFDocument": {
+      "doc": "An object that represents PDF data or a PDF file and defines methods for writing, searching, and selecting PDF data.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfdocument"
+    },
+    "PDFOutline": {
+      "doc": "A PDFOutline object is an element in a tree-structured hierarchy that can represent the structure of a PDF document.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfoutline"
+    },
+    "PDFPage": {
+      "doc": "PDFPage, a subclass of NSObject, defines methods used to render PDF pages and work with annotations, text, and selections.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfpage"
+    },
+    "PDFSelection": {
+      "doc": "A PDFSelection object identifies a contiguous or noncontiguous selection of text in a PDF document.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfselection"
+    },
+    "PDFThumbnailView": {
+      "doc": "An object that contains a set of thumbnails, each of which represents a page in a PDF document.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfthumbnailview"
+    },
+    "PDFView": {
+      "doc": "An object that encapsulates the functionality of PDF Kit into a single widget that you can add to your application using Interface Builder.",
+      "url": "https://developer.apple.com/documentation/pdfkit/pdfview"
+    }
+  },
+  "methods": {
+    "PDFActionGoTo": {
+      "-initWithDestination:": {
+        "doc": "Initializes the go-to action.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfactiongoto/init(destination:)"
+      }
+    },
+    "PDFActionNamed": {
+      "-initWithName:": {
+        "doc": "Initializes the PDFActionName object with the specified named action.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfactionnamed/init(name:)"
+      }
+    },
+    "PDFActionRemoteGoTo": {
+      "-initWithPageIndex:atPoint:fileURL:": {
+        "doc": "Initializes the remote go-to action with the specified page index, point, and document URL.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfactionremotegoto/init(pageindex:at:fileurl:)"
+      }
+    },
+    "PDFActionResetForm": {
+      "-init": {
+        "doc": "Initializes a reset form action.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfactionresetform/init()"
+      }
+    },
+    "PDFActionURL": {
+      "-initWithURL:": {
+        "doc": "Initializes a URL action with the specified URL.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfactionurl/init(url:)-5wtb3"
+      }
+    },
+    "PDFAnnotation": {
+      "+lineStyleFromName:": {
+        "doc": "Returns a line style that corresponds to the specified name.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/linestyle(fromname:)"
+      },
+      "+nameForLineStyle:": {
+        "doc": "Returns the name of the line style, which matches the definition in the Adobe PDF Specification.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/name(for:)"
+      },
+      "-addBezierPath:": {
+        "doc": "Adds a bezier path to the ink annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/add(_:)"
+      },
+      "-drawWithBox:inContext:": {
+        "doc": "Draws the annotation in a graphics context using page-space coordinates relative to the origin of the specified box.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/draw(with:in:)"
+      },
+      "-initWithBounds:forType:withProperties:": {
+        "doc": "Creates a PDF annotation with the specified bounds, type, and optional properties.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/init(bounds:fortype:withproperties:)"
+      },
+      "-removeBezierPath:": {
+        "doc": "Removes a bezier path from an ink annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/remove(_:)"
+      },
+      "-removeValueForAnnotationKey:": {
+        "doc": "Removes a value from the annotation’s dictionary.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/removevalue(forannotationkey:)"
+      },
+      "-setBoolean:forAnnotationKey:": {
+        "doc": "Sets a Boolean value in the annotation’s dictionary.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/setboolean(_:forannotationkey:)"
+      },
+      "-setRect:forAnnotationKey:": {
+        "doc": "Sets a rectangle value in the annotation’s dictionary.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/setrect(_:forannotationkey:)"
+      },
+      "-setValue:forAnnotationKey:": {
+        "doc": "Sets a value in the annotation’s dictionary.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/setvalue(_:forannotationkey:)"
+      },
+      "-valueForAnnotationKey:": {
+        "doc": "Returns a deep copy of the key-value pairs of properties for the specified key.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/value(forannotationkey:)"
+      }
+    },
+    "PDFAnnotationButtonWidget": {
+      "-allowsToggleToOff": {
+        "doc": "Returns a Boolean value indicating whether a radio button behaves in a toggling manner.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationbuttonwidget/allowstoggletooff()"
+      },
+      "-backgroundColor": {
+        "doc": "Returns the background color of the control.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationbuttonwidget/backgroundcolor()"
+      },
+      "-caption": {
+        "doc": "Returns the text of the label on a push button control.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationbuttonwidget/caption()"
+      },
+      "-controlType": {
+        "doc": "Returns the type of the control.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationbuttonwidget/controltype()"
+      },
+      "-fieldName": {
+        "doc": "Returns the internal name of a field (used for reset-form actions).",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationbuttonwidget/fieldname()"
+      },
+      "-font": {
+        "doc": "Returns the font used in the control’s label.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationbuttonwidget/font()"
+      },
+      "-fontColor": {
+        "doc": "Returns the font color used in the control’s label.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationbuttonwidget/fontcolor()"
+      },
+      "-onStateValue": {
+        "doc": "Returns the string associated with the on state of a radio button or checkbox control.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationbuttonwidget/onstatevalue()"
+      },
+      "-setBackgroundColor:": {
+        "doc": "Sets the control’s background color.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationbuttonwidget/setbackgroundcolor(_:)"
+      },
+      "-setCaption:": {
+        "doc": "Sets the text of the label on a push button control.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationbuttonwidget/setcaption(_:)"
+      },
+      "-setControlType:": {
+        "doc": "Sets the type of the control.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationbuttonwidget/setcontroltype(_:)"
+      },
+      "-setFieldName:": {
+        "doc": "Sets the internal name of a field (used for reset-form actions).",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationbuttonwidget/setfieldname(_:)"
+      },
+      "-setFont:": {
+        "doc": "Sets the font of the control’s label.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationbuttonwidget/setfont(_:)"
+      },
+      "-setFontColor:": {
+        "doc": "Sets the font color used in the control’s label.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationbuttonwidget/setfontcolor(_:)"
+      },
+      "-setOnStateValue:": {
+        "doc": "Sets the string that is associated with the on state of a radio button or checkbox control.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationbuttonwidget/setonstatevalue(_:)"
+      },
+      "-setState:": {
+        "doc": "Sets the state of the control.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationbuttonwidget/setstate(_:)"
+      },
+      "-state": {
+        "doc": "Returns the state of the control.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationbuttonwidget/state()"
+      }
+    },
+    "PDFAnnotationChoiceWidget": {
+      "-backgroundColor": {
+        "doc": "Returns the color of the widget annotation background.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationchoicewidget/backgroundcolor()"
+      },
+      "-choices": {
+        "doc": "Returns an array of strings that represent the items available in the list or pop-up menu of the choice widget annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationchoicewidget/choices()"
+      },
+      "-fieldName": {
+        "doc": "Returns the internal field name associated with the widget annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationchoicewidget/fieldname()"
+      },
+      "-font": {
+        "doc": "Returns the font used to display the text in the widget annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationchoicewidget/font()"
+      },
+      "-fontColor": {
+        "doc": "Returns the font color used to display the text in the widget annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationchoicewidget/fontcolor()"
+      },
+      "-isListChoice": {
+        "doc": "Returns a Boolean value indicating whether the widget annotation is a list.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationchoicewidget/islistchoice()"
+      },
+      "-setBackgroundColor:": {
+        "doc": "Sets the background color of the widget annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationchoicewidget/setbackgroundcolor(_:)"
+      },
+      "-setChoices:": {
+        "doc": "Sets the items available in the list or pop-up menu of the choice widget annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationchoicewidget/setchoices(_:)"
+      },
+      "-setFieldName:": {
+        "doc": "Sets the internal field name associated with the widget annotation’s value.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationchoicewidget/setfieldname(_:)"
+      },
+      "-setFont:": {
+        "doc": "Sets the font used to display the text in the widget annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationchoicewidget/setfont(_:)"
+      },
+      "-setFontColor:": {
+        "doc": "Sets the font color used to display the text in the widget annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationchoicewidget/setfontcolor(_:)"
+      },
+      "-setIsListChoice:": {
+        "doc": "Sets whether the widget annotation is a list.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationchoicewidget/setislistchoice(_:)"
+      },
+      "-setStringValue:": {
+        "doc": "Sets the selection in the widget annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationchoicewidget/setstringvalue(_:)"
+      },
+      "-stringValue": {
+        "doc": "Returns the selection in the widget annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationchoicewidget/stringvalue()"
+      }
+    },
+    "PDFAnnotationCircle": {
+      "-interiorColor": {
+        "doc": "Returns the fill color used for drawing the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationcircle/interiorcolor()"
+      },
+      "-setInteriorColor:": {
+        "doc": "Sets the fill color used for drawing the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationcircle/setinteriorcolor(_:)"
+      }
+    },
+    "PDFAnnotationFreeText": {
+      "-alignment": {
+        "doc": "Returns the horizontal alignment of text within the bounds of the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationfreetext/alignment()"
+      },
+      "-font": {
+        "doc": "Returns the font used for the annotation’s text field.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationfreetext/font()"
+      },
+      "-fontColor": {
+        "doc": "Returns the font color used in the text field of the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationfreetext/fontcolor()"
+      },
+      "-setAlignment:": {
+        "doc": "Sets the horizontal alignment of text within the bounds of the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationfreetext/setalignment(_:)"
+      },
+      "-setFont:": {
+        "doc": "Sets the font used in the text field of the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationfreetext/setfont(_:)"
+      },
+      "-setFontColor:": {
+        "doc": "Sets the font color used in the text field of the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationfreetext/setfontcolor(_:)"
+      }
+    },
+    "PDFAnnotationInk": {
+      "-addBezierPath:": {
+        "doc": "Adds a Bezier path to an annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationink/add(_:)"
+      },
+      "-paths": {
+        "doc": "Returns an array containing the Bezier paths that make up an annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationink/paths()"
+      },
+      "-removeBezierPath:": {
+        "doc": "Removes a Bezier path from an annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationink/remove(_:)"
+      }
+    },
+    "PDFAnnotationLine": {
+      "-endLineStyle": {
+        "doc": "Returns the line ending style for the ending point of the line.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationline/endlinestyle()"
+      },
+      "-endPoint": {
+        "doc": "Returns the ending point for the line in page space.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationline/endpoint()"
+      },
+      "-interiorColor": {
+        "doc": "Returns the color used to fill the ornament at the ends of the line.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationline/interiorcolor()"
+      },
+      "-setEndLineStyle:": {
+        "doc": "Sets the line ending style for the ending point of the line.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationline/setend(_:)-9cp0t"
+      },
+      "-setEndPoint:": {
+        "doc": "Sets the ending point for the line.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationline/setend(_:)-2qn58"
+      },
+      "-setInteriorColor:": {
+        "doc": "Sets the color used to fill the ornament at the ends of the line.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationline/setinteriorcolor(_:)"
+      },
+      "-setStartLineStyle:": {
+        "doc": "Sets the line ending style for the starting point of the line.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationline/setstart(_:)-57pe0"
+      },
+      "-setStartPoint:": {
+        "doc": "Sets the starting point for the line.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationline/setstart(_:)-86is0"
+      },
+      "-startLineStyle": {
+        "doc": "Returns the line ending style for the starting point of the line.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationline/startlinestyle()"
+      },
+      "-startPoint": {
+        "doc": "Returns the starting point for the line.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationline/startpoint()"
+      }
+    },
+    "PDFAnnotationLink": {
+      "-URL": {
+        "doc": "Gets the destination for the link when the destination was specified as a URL.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationlink/url()"
+      },
+      "-destination": {
+        "doc": "Gets the destination for the link when the destination was specified as a PDFDestination object.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationlink/destination()"
+      },
+      "-setDestination:": {
+        "doc": "Sets the destination for the link as a PDFDestination object.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationlink/setdestination(_:)"
+      },
+      "-setURL:": {
+        "doc": "Sets the destination for the link as a URL.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationlink/seturl(_:)"
+      }
+    },
+    "PDFAnnotationMarkup": {
+      "-markupType": {
+        "doc": "Gets the markup style.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationmarkup/markuptype()"
+      },
+      "-quadrilateralPoints": {
+        "doc": "Gets the array of quadrilateral points defining the bounds of the markup.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationmarkup/quadrilateralpoints()"
+      },
+      "-setMarkupType:": {
+        "doc": "Sets the markup style.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationmarkup/setmarkuptype(_:)"
+      },
+      "-setQuadrilateralPoints:": {
+        "doc": "Sets the array of quadrilateral points defining the bounds of the markup.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationmarkup/setquadrilateralpoints(_:)"
+      }
+    },
+    "PDFAnnotationPopup": {
+      "-isOpen": {
+        "doc": "Returns a Boolean value indicating whether the pop-up is open.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationpopup/isopen()"
+      },
+      "-setIsOpen:": {
+        "doc": "Sets the open state of the pop-up menu.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationpopup/setisopen(_:)"
+      }
+    },
+    "PDFAnnotationSquare": {
+      "-interiorColor": {
+        "doc": "Gets the fill color used for drawing the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationsquare/interiorcolor()"
+      },
+      "-setInteriorColor:": {
+        "doc": "Sets the fill color used for drawing the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationsquare/setinteriorcolor(_:)"
+      }
+    },
+    "PDFAnnotationStamp": {
+      "-name": {
+        "doc": "Returns name associated with the stamp annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationstamp/name()"
+      },
+      "-setName:": {
+        "doc": "Sets the name associated with the stamp annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationstamp/setname(_:)"
+      }
+    },
+    "PDFAnnotationText": {
+      "-iconType": {
+        "doc": "Returns the icon type for the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationtext/icontype()"
+      },
+      "-setIconType:": {
+        "doc": "Sets the icon type for the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationtext/seticontype(_:)"
+      }
+    },
+    "PDFAnnotationTextWidget": {
+      "-alignment": {
+        "doc": "Returns the text alignment setting for the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationtextwidget/alignment()"
+      },
+      "-backgroundColor": {
+        "doc": "Returns the background color of the annotation text field.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationtextwidget/backgroundcolor()"
+      },
+      "-fieldName": {
+        "doc": "Returns the internal name for the annotation text field.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationtextwidget/fieldname()"
+      },
+      "-font": {
+        "doc": "Returns the font used for the annotation’s text field.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationtextwidget/font()"
+      },
+      "-fontColor": {
+        "doc": "Returns the font color used for the annotation’s text field.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationtextwidget/fontcolor()"
+      },
+      "-maximumLength": {
+        "doc": "Returns the maximum number of characters allowed in the annotation string.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationtextwidget/maximumlength()"
+      },
+      "-rotation": {
+        "doc": "Returns the rotation angle of the annotation text field in degrees.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationtextwidget/rotation()"
+      },
+      "-setAlignment:": {
+        "doc": "Sets the text alignment for the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationtextwidget/setalignment(_:)"
+      },
+      "-setBackgroundColor:": {
+        "doc": "Sets the background color of the annotation text field.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationtextwidget/setbackgroundcolor(_:)"
+      },
+      "-setFieldName:": {
+        "doc": "Sets the internal field name for the annotation text field.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationtextwidget/setfieldname(_:)"
+      },
+      "-setFont:": {
+        "doc": "Sets the font used in the text field of the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationtextwidget/setfont(_:)"
+      },
+      "-setFontColor:": {
+        "doc": "Sets the font color used for the annotation’s text field.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationtextwidget/setfontcolor(_:)"
+      },
+      "-setMaximumLength:": {
+        "doc": "Sets the maximum number of characters allowed in the annotation string.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationtextwidget/setmaximumlength(_:)"
+      },
+      "-setRotation:": {
+        "doc": "Sets the rotation angle of the annotation text field in degrees.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationtextwidget/setrotation(_:)"
+      },
+      "-setStringValue:": {
+        "doc": "Sets the string for the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationtextwidget/setstringvalue(_:)"
+      },
+      "-stringValue": {
+        "doc": "Returns the string assigned to the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotationtextwidget/stringvalue()"
+      }
+    },
+    "PDFBorder": {
+      "-drawInRect:": {
+        "doc": "Draws the border.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfborder/draw(in:)"
+      }
+    },
+    "PDFDestination": {
+      "-compare:": {
+        "doc": "Returns a comparison result that indicates the location of the destination in the document, relative to the current position.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfdestination/compare(_:)"
+      },
+      "-initWithPage:atPoint:": {
+        "doc": "Initializes the destination.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfdestination/init(page:at:)"
+      }
+    },
+    "PDFDocument": {
+      "-beginFindString:withOptions:": {
+        "doc": "Asynchronously finds all instances of the specified string in the document.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfdocument/beginfindstring(_:withoptions:)"
+      },
+      "-findString:withOptions:": {
+        "doc": "Synchronously finds all instances of the specified string in the document.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfdocument/findstring(_:withoptions:)"
+      },
+      "-init": {
+        "doc": "Initializes a PDFDocument object.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfdocument/init()"
+      },
+      "-initWithData:": {
+        "doc": "Initializes a PDFDocument object with the passed-in data.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfdocument/init(data:)"
+      },
+      "-initWithURL:": {
+        "doc": "Initializes a PDFDocument object with the contents at the specified URL (if the URL is invalid, this method returns NULL).",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfdocument/init(url:)-98jte"
+      },
+      "-unlockWithPassword:": {
+        "doc": "Attempts to unlock an encrypted document.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfdocument/unlock(withpassword:)"
+      }
+    },
+    "PDFOutline": {
+      "-childAtIndex:": {
+        "doc": "Returns the child outline object at the specified index.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfoutline/child(at:)"
+      },
+      "-init": {
+        "doc": "Initializes a PDFOutline object.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfoutline/init()"
+      },
+      "-insertChild:atIndex:": {
+        "doc": "Inserts the specified outline object at the specified index.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfoutline/insertchild(_:at:)"
+      },
+      "-removeFromParent": {
+        "doc": "Removes the outline object from its parent (does nothing if outline object is the root outline object).",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfoutline/removefromparent()"
+      }
+    },
+    "PDFPage": {
+      "-addAnnotation:": {
+        "doc": "Adds the specified annotation object to the page.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/addannotation(_:)"
+      },
+      "-annotationAtPoint:": {
+        "doc": "Returns the annotation, if there is one, at the specified point.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/annotation(at:)"
+      },
+      "-boundsForBox:": {
+        "doc": "Returns the bounds for the specified PDF display box.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/bounds(for:)"
+      },
+      "-characterBoundsAtIndex:": {
+        "doc": "Returns the bounds, in page space, of the character at the specified index.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/characterbounds(at:)"
+      },
+      "-characterIndexAtPoint:": {
+        "doc": "Returns the character index value for the specified point in page space.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/characterindex(at:)"
+      },
+      "-drawWithBox:": {
+        "doc": "Draws the page within the specified box.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/draw(with:)"
+      },
+      "-initWithImage:": {
+        "doc": "Creates a new PDFPage object and initializes it with the specified NSImage object.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/init(image:)"
+      },
+      "-removeAnnotation:": {
+        "doc": "Removes the specified annotation from the page.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/removeannotation(_:)"
+      },
+      "-selectionForLineAtPoint:": {
+        "doc": "Returns the whole line of text that includes the specified point.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/selectionforline(at:)"
+      },
+      "-selectionForRange:": {
+        "doc": "Returns the text contained within the specified range.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/selection(for:)-20y9d"
+      },
+      "-selectionForRect:": {
+        "doc": "Returns the text enclosed within the specified rectangle, expressed in page (user) coordinates.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/selection(for:)-2ckpi"
+      },
+      "-selectionForWordAtPoint:": {
+        "doc": "Returns the whole word that includes the specified point.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/selectionforword(at:)"
+      },
+      "-selectionFromPoint:toPoint:": {
+        "doc": "Returns the text between the two specified points in page space.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/selection(from:to:)"
+      },
+      "-setBounds:forBox:": {
+        "doc": "Sets the bounds for the specified box.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/setbounds(_:for:)"
+      },
+      "-transformContextForBox:": {
+        "doc": "Transforms the current context, given the specified box.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/transformcontext(for:)"
+      }
+    },
+    "PDFSelection": {
+      "-addSelection:": {
+        "doc": "Adds the specified selection to the receiving selection.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfselection/add(_:)-8c2r"
+      },
+      "-addSelections:": {
+        "doc": "Adds the specified array of selections to the receiving selection.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfselection/add(_:)-3fyld"
+      },
+      "-boundsForPage:": {
+        "doc": "Returns the bounds of the selection on the specified page.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfselection/bounds(for:)"
+      },
+      "-drawForPage:active:": {
+        "doc": "Calls drawForPage:withBox:active: with a default value for box parameter.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfselection/draw(for:active:)"
+      },
+      "-drawForPage:withBox:active:": {
+        "doc": "Draws the selection relative to the origin of the specified box in page space.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfselection/draw(for:with:active:)"
+      },
+      "-extendSelectionAtEnd:": {
+        "doc": "Extends the selection from its end toward the end of the document.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfselection/extend(atend:)"
+      },
+      "-extendSelectionAtStart:": {
+        "doc": "Extends the selection from its start toward the beginning of the document.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfselection/extend(atstart:)"
+      },
+      "-initWithDocument:": {
+        "doc": "Returns an empty PDFSelection object.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfselection/init(document:)"
+      },
+      "-selectionsByLine": {
+        "doc": "Returns an array of selections, one for each line of text covered by the receiver.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfselection/selectionsbyline()"
+      }
+    },
+    "PDFView": {
+      "-takePasswordFrom:": {
+        "doc": "Unlocks with the password from the specified sender.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfview/takepasswordfrom(_:)"
+      }
+    }
+  },
+  "properties": {
+    "PDFAction": {
+      "type": {
+        "doc": "Returns the type of the action.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfaction/type"
+      }
+    },
+    "PDFActionGoTo": {
+      "destination": {
+        "doc": "Returns the destination associated with the action.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfactiongoto/destination"
+      }
+    },
+    "PDFActionNamed": {
+      "name": {
+        "doc": "Returns the name of the named action.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfactionnamed/name"
+      }
+    },
+    "PDFActionRemoteGoTo": {
+      "URL": {
+        "doc": "Returns the URL of the document referenced by the remote go-to action.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfactionremotegoto/url"
+      },
+      "pageIndex": {
+        "doc": "Returns the zero-based page index referenced by the remote go-to action.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfactionremotegoto/pageindex"
+      },
+      "point": {
+        "doc": "Sets the point, in page space, on the page referenced by the remote go-to action.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfactionremotegoto/point"
+      }
+    },
+    "PDFActionResetForm": {
+      "fields": {
+        "doc": "Returns an array of fields associated with the reset action.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfactionresetform/fields"
+      },
+      "fieldsIncludedAreCleared": {
+        "doc": "Sets whether the fields associated with the reset action are cleared when the action is performed.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfactionresetform/fieldsincludedarecleared"
+      }
+    },
+    "PDFActionURL": {
+      "URL": {
+        "doc": "Returns the URL associated with the URL action.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfactionurl/url"
+      }
+    },
+    "PDFAnnotation": {
+      "URL": {
+        "doc": "A URL for a link annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/url"
+      },
+      "action": {
+        "doc": "An object that represents an action for a PDF element, such as a link annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/action"
+      },
+      "alignment": {
+        "doc": "The alignment of the free text and text widget annotation’s text content.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/alignment"
+      },
+      "allowsToggleToOff": {
+        "doc": "A Boolean value that indicates whether clicking or tapping a selected radio button toggles it to an unselected state.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/allowstoggletooff"
+      },
+      "annotationKeyValues": {
+        "doc": "A dictionary that contains a deep copy of the widget’s properties.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/annotationkeyvalues"
+      },
+      "backgroundColor": {
+        "doc": "The color of the widget’s background.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/backgroundcolor"
+      },
+      "border": {
+        "doc": "Sets the border style for the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/border"
+      },
+      "bounds": {
+        "doc": "Returns the bounding box for the annotation in page space.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/bounds"
+      },
+      "buttonWidgetState": {
+        "doc": "The current state of the button widget annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/buttonwidgetstate"
+      },
+      "buttonWidgetStateString": {
+        "doc": "A string value that differentiates button widgets in the same group, such as to identify mutually exclusive radio buttons from each other.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/buttonwidgetstatestring"
+      },
+      "caption": {
+        "doc": "The title of push button widget annotations.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/caption"
+      },
+      "choices": {
+        "doc": "An array of strings that specifies the options in either a list or a pop-up menu.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/choices"
+      },
+      "color": {
+        "doc": "Sets the stroke color for the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/color"
+      },
+      "comb": {
+        "doc": "A Boolean value that indicates whether the annotation divides the text widget’s bounds into equally spaced segments, such as in a form entry field.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/hascomb"
+      },
+      "contents": {
+        "doc": "Returns the textual content (if any) associated with the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/contents"
+      },
+      "destination": {
+        "doc": "The destination for a link annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/destination"
+      },
+      "endLineStyle": {
+        "doc": "The style of the line annotation’s ending point, such as square or filled arrowhead.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/endlinestyle"
+      },
+      "endPoint": {
+        "doc": "The point where a line ends, in annotation-space coordinates.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/endpoint"
+      },
+      "fieldName": {
+        "doc": "The widget identifier for form annotation actions and behaviors.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/fieldname"
+      },
+      "font": {
+        "doc": "The font the annotation uses to display text.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/font"
+      },
+      "fontColor": {
+        "doc": "The font color the annotation uses to display text.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/fontcolor"
+      },
+      "hasAppearanceStream": {
+        "doc": "Returns a Boolean value that indicates whether the annotation has an appearance stream associated with it.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/hasappearancestream"
+      },
+      "highlighted": {
+        "doc": "A Boolean value that indicates whether the annotation is in a highlighted state, such as when the mouse is down on a link annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/ishighlighted"
+      },
+      "iconType": {
+        "doc": "The type of icon to display for a pop-up text annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/icontype"
+      },
+      "interiorColor": {
+        "doc": "The fill color for drawing a circle, line, or square annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/interiorcolor"
+      },
+      "isPasswordField": {
+        "doc": "A Boolean value that indicates whether the text widget annotation displays a password field using bullet characters.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/ispasswordfield"
+      },
+      "listChoice": {
+        "doc": "A Boolean value that indicates whether the choice widget annotation is a list or a pop-up menu.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/islistchoice"
+      },
+      "markupType": {
+        "doc": "The markup type that the annotation displays, either highlight, strikethrough, underline, or redact.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/markuptype"
+      },
+      "maximumLength": {
+        "doc": "The maximum number of characters the text widget annotation allows.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/maximumlength"
+      },
+      "modificationDate": {
+        "doc": "Returns the modification date of the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/modificationdate"
+      },
+      "multiline": {
+        "doc": "A Boolean value that indicates whether the text widget annotation displays multiple lines.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/ismultiline"
+      },
+      "open": {
+        "doc": "A Boolean value that indicates whether the pop-up annotation is in an opened state, displaying its text content, or in a closed state, displaying an icon.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/isopen"
+      },
+      "page": {
+        "doc": "Returns the page that the annotation is associated with.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/page"
+      },
+      "paths": {
+        "doc": "An array of bezier paths, in annotation-space coordinates, that compose the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/paths"
+      },
+      "popup": {
+        "doc": "Returns the pop-up annotation associated with an annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/popup"
+      },
+      "quadrilateralPoints": {
+        "doc": "An array of values that represents the points bounding the marked-up text.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/quadrilateralpoints"
+      },
+      "radiosInUnison": {
+        "doc": "A Boolean value that indicates whether radio buttons in a group turn on and off in unison.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/radiosinunison"
+      },
+      "readOnly": {
+        "doc": "A Boolean value that determines whether the widget is editable.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/isreadonly"
+      },
+      "shouldDisplay": {
+        "doc": "Returns a Boolean value indicating whether the annotation should be displayed.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/shoulddisplay"
+      },
+      "shouldPrint": {
+        "doc": "Returns a Boolean value indicating whether the annotation should appear when the document is printed.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/shouldprint"
+      },
+      "stampName": {
+        "doc": "The name of the stamp, a text or graphics annotation that emulates a rubber stamp effect.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/stampname"
+      },
+      "startLineStyle": {
+        "doc": "The style of the line annotation’s starting point, such as square or filled arrowhead.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/startlinestyle"
+      },
+      "startPoint": {
+        "doc": "The point where a line begins, in annotation-space coordinates.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/startpoint"
+      },
+      "type": {
+        "doc": "Returns the type of the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/type"
+      },
+      "userName": {
+        "doc": "Returns the name of the user who created the annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/username"
+      },
+      "values": {
+        "doc": "An array of strings that specifies the export values for items in a list or a pop-up menu.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/values"
+      },
+      "widgetControlType": {
+        "doc": "The type of button widget control, either radio button, push button, or checkbox.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/widgetcontroltype"
+      },
+      "widgetDefaultStringValue": {
+        "doc": "The string value that the widget reverts to when performing a reset form action.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/widgetdefaultstringvalue"
+      },
+      "widgetFieldType": {
+        "doc": "The type of widget annotation, such as button, choice, or text.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/widgetfieldtype"
+      },
+      "widgetStringValue": {
+        "doc": "The string value of the widget annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfannotation/widgetstringvalue"
+      }
+    },
+    "PDFAppearanceCharacteristics": {
+      "appearanceCharacteristicsKeyValues": {
+        "doc": "A dictionary that contains a deep copy of the appearance characteristic key-value pairs.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfappearancecharacteristics/appearancecharacteristicskeyvalues"
+      },
+      "backgroundColor": {
+        "doc": "The background color of the widget annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfappearancecharacteristics/backgroundcolor"
+      },
+      "borderColor": {
+        "doc": "The border color of the widget annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfappearancecharacteristics/bordercolor"
+      },
+      "caption": {
+        "doc": "The text that the button widget annotation displays when the user isn’t interacting with it.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfappearancecharacteristics/caption"
+      },
+      "controlType": {
+        "doc": "The type of button widget annotation.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfappearancecharacteristics/controltype"
+      },
+      "downCaption": {
+        "doc": "The text that the button widget annotation displays when the user holds down on it.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfappearancecharacteristics/downcaption"
+      },
+      "rolloverCaption": {
+        "doc": "The text that the widget annotation displays when the user hovers the pointer over it.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfappearancecharacteristics/rollovercaption"
+      },
+      "rotation": {
+        "doc": "The number of degrees, in multiples of 90, that the widget annotation rotates counterclockwise relative to the page.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfappearancecharacteristics/rotation"
+      }
+    },
+    "PDFBorder": {
+      "borderKeyValues": {
+        "doc": "A dictionary that contains a deep copy of all border properties.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfborder/borderkeyvalues"
+      },
+      "dashPattern": {
+        "doc": "Gets the dash pattern for the border as an array of NSNumber objects.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfborder/dashpattern"
+      },
+      "lineWidth": {
+        "doc": "Sets the line width (in points) for the border.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfborder/linewidth"
+      },
+      "style": {
+        "doc": "Sets the border style.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfborder/style"
+      }
+    },
+    "PDFDestination": {
+      "page": {
+        "doc": "Returns the page that the destination refers to.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfdestination/page"
+      },
+      "point": {
+        "doc": "Returns the point, in page space, that the destination refers to.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfdestination/point"
+      }
+    },
+    "PDFDocument": {
+      "delegate": {
+        "doc": "The object acting as the delegate for the PDFDocument object.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfdocument/delegate"
+      }
+    },
+    "PDFOutline": {
+      "action": {
+        "doc": "Returns the action performed when users click the outline.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfoutline/action"
+      },
+      "destination": {
+        "doc": "Returns the destination associated with the outline.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfoutline/destination"
+      },
+      "document": {
+        "doc": "Returns the document with which the outline is associated.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfoutline/document"
+      },
+      "index": {
+        "doc": "Returns the index of the outline.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfoutline/index"
+      },
+      "isOpen": {
+        "doc": "Returns a Boolean value that indicates whether the outline object is initially disclosed.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfoutline/isopen"
+      },
+      "label": {
+        "doc": "Returns the label for the outline.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfoutline/label"
+      },
+      "numberOfChildren": {
+        "doc": "Returns the number of child outline objects in the outline.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfoutline/numberofchildren"
+      },
+      "parent": {
+        "doc": "Returns the parent outline object of the outline (returns NULL if called on the root outline object).",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfoutline/parent"
+      }
+    },
+    "PDFPage": {
+      "annotations": {
+        "doc": "Returns an array containing the page’s annotations.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/annotations"
+      },
+      "attributedString": {
+        "doc": "Returns an NSAttributedString object representing the text on the page.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/attributedstring"
+      },
+      "dataRepresentation": {
+        "doc": "Returns the PDF data (that is, a PDF document) representing this page. This method does not preserve external page links.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/datarepresentation"
+      },
+      "displaysAnnotations": {
+        "doc": "Returns a Boolean value indicating whether annotations are displayed for the page.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/displaysannotations"
+      },
+      "document": {
+        "doc": "Returns the PDFDocument object with which the page is associated.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/document"
+      },
+      "label": {
+        "doc": "Returns the label for the page.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/label"
+      },
+      "numberOfCharacters": {
+        "doc": "Returns the number of characters on the page, including whitespace characters.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/numberofcharacters"
+      },
+      "rotation": {
+        "doc": "Sets the rotation angle for the page in degrees.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/rotation"
+      },
+      "string": {
+        "doc": "Returns an NSString object representing the text on the page.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfpage/string"
+      }
+    },
+    "PDFSelection": {
+      "attributedString": {
+        "doc": "Returns an NSAttributedString object representing the text contained in the selection (may contain linefeed characters).",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfselection/attributedstring"
+      },
+      "color": {
+        "doc": "Sets the color used for the drawing of a selection in both active and inactive states.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfselection/color"
+      },
+      "pages": {
+        "doc": "Returns the array of pages contained in the selection.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfselection/pages"
+      },
+      "string": {
+        "doc": "Returns an NSString object representing the text contained in the selection (may contain linefeed characters).",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfselection/string"
+      }
+    },
+    "PDFThumbnailView": {
+      "PDFView": {
+        "doc": "Returns the PDFView object associated with the thumbnail view.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfthumbnailview/pdfview"
+      },
+      "allowsDragging": {
+        "doc": "Returns a Boolean value indicating whether users can drag thumbnails (that is, re-order pages in the document) within the thumbnail view.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfthumbnailview/allowsdragging"
+      },
+      "allowsMultipleSelection": {
+        "doc": "Returns a Boolean value indicating whether users can select multiple thumbnails in the thumbnail view at one time.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfthumbnailview/allowsmultipleselection"
+      },
+      "backgroundColor": {
+        "doc": "Returns the color used in the background of the thumbnail view.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfthumbnailview/backgroundcolor"
+      },
+      "labelFont": {
+        "doc": "Returns the font used to label the thumbnails.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfthumbnailview/labelfont"
+      },
+      "maximumNumberOfColumns": {
+        "doc": "Returns the maximum number of columns of thumbnails the thumbnail view can display.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfthumbnailview/maximumnumberofcolumns"
+      },
+      "selectedPages": {
+        "doc": "Returns an array of PDF pages that correspond to the selected thumbnails in the thumbnail view.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfthumbnailview/selectedpages"
+      },
+      "thumbnailSize": {
+        "doc": "Returns the maximum width and height of the thumbnails in the thumbnail view.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfthumbnailview/thumbnailsize"
+      }
+    },
+    "PDFView": {
+      "currentDestination": {
+        "doc": "Returns a PDFDestination object representing the current page and the current point in the view specified in page space.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfview/currentdestination"
+      },
+      "currentPage": {
+        "doc": "Returns the current page.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfview/currentpage"
+      },
+      "delegate": {
+        "doc": "Returns the view’s delegate.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfview/delegate"
+      },
+      "document": {
+        "doc": "Returns the document associated with a PDFView object.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfview/document"
+      },
+      "visiblePages": {
+        "doc": "Returns an array of PDFPage objects that represent the currently visible pages.",
+        "url": "https://developer.apple.com/documentation/pdfkit/pdfview/visiblepages"
+      }
+    }
+  }
+}
