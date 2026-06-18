@@ -1,0 +1,523 @@
+{
+  "schema_version": 1,
+  "framework": "Accessibility",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "AXBrailleMap": {
+      "doc": "A representation of a two-dimensional braille display.",
+      "url": "https://developer.apple.com/documentation/accessibility/axbraillemap"
+    },
+    "AXBrailleTable": {
+      "doc": "A rule for translating print text to Braille, and back-translating Braille to print text.",
+      "url": "https://developer.apple.com/documentation/accessibility/axbrailletable"
+    },
+    "AXBrailleTranslationResult": {
+      "doc": "The result of translation or back-translation.",
+      "url": "https://developer.apple.com/documentation/accessibility/axbrailletranslationresult"
+    },
+    "AXBrailleTranslator": {
+      "doc": "Translates print text to Braille and Braille to print text according to the given Braille table.",
+      "url": "https://developer.apple.com/documentation/accessibility/axbrailletranslator"
+    },
+    "AXCategoricalDataAxisDescriptor": {
+      "doc": "An object that represents an axis of categorical data.",
+      "url": "https://developer.apple.com/documentation/accessibility/axcategoricaldataaxisdescriptor"
+    },
+    "AXChartDescriptor": {
+      "doc": "An object that contains all the semantic information about an accessible chart.",
+      "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor"
+    },
+    "AXCustomContent": {
+      "doc": "Objects that define custom content and the timing of its output.",
+      "url": "https://developer.apple.com/documentation/accessibility/axcustomcontent"
+    },
+    "AXDataPoint": {
+      "doc": "An object that represents a single data point in a chart.",
+      "url": "https://developer.apple.com/documentation/accessibility/axdatapoint"
+    },
+    "AXDataPointValue": {
+      "doc": "A single data value.",
+      "url": "https://developer.apple.com/documentation/accessibility/axdatapointvalue"
+    },
+    "AXDataSeriesDescriptor": {
+      "doc": "An object that represents a series of data points.",
+      "url": "https://developer.apple.com/documentation/accessibility/axdataseriesdescriptor"
+    },
+    "AXLiveAudioGraph": {
+      "doc": "An object that represents an audio graph for a live-updating, continuous data series for VoiceOver.",
+      "url": "https://developer.apple.com/documentation/accessibility/axliveaudiograph"
+    },
+    "AXMathExpression": {
+      "url": "https://developer.apple.com/documentation/accessibility/axmathexpression"
+    },
+    "AXMathExpressionFenced": {
+      "url": "https://developer.apple.com/documentation/accessibility/axmathexpressionfenced"
+    },
+    "AXMathExpressionFraction": {
+      "url": "https://developer.apple.com/documentation/accessibility/axmathexpressionfraction"
+    },
+    "AXMathExpressionIdentifier": {
+      "url": "https://developer.apple.com/documentation/accessibility/axmathexpressionidentifier"
+    },
+    "AXMathExpressionMultiscript": {
+      "url": "https://developer.apple.com/documentation/accessibility/axmathexpressionmultiscript"
+    },
+    "AXMathExpressionNumber": {
+      "url": "https://developer.apple.com/documentation/accessibility/axmathexpressionnumber"
+    },
+    "AXMathExpressionOperator": {
+      "url": "https://developer.apple.com/documentation/accessibility/axmathexpressionoperator"
+    },
+    "AXMathExpressionRoot": {
+      "url": "https://developer.apple.com/documentation/accessibility/axmathexpressionroot"
+    },
+    "AXMathExpressionRow": {
+      "url": "https://developer.apple.com/documentation/accessibility/axmathexpressionrow"
+    },
+    "AXMathExpressionSubSuperscript": {
+      "url": "https://developer.apple.com/documentation/accessibility/axmathexpressionsubsuperscript"
+    },
+    "AXMathExpressionTable": {
+      "url": "https://developer.apple.com/documentation/accessibility/axmathexpressiontable"
+    },
+    "AXMathExpressionTableCell": {
+      "url": "https://developer.apple.com/documentation/accessibility/axmathexpressiontablecell"
+    },
+    "AXMathExpressionTableRow": {
+      "url": "https://developer.apple.com/documentation/accessibility/axmathexpressiontablerow"
+    },
+    "AXMathExpressionText": {
+      "url": "https://developer.apple.com/documentation/accessibility/axmathexpressiontext"
+    },
+    "AXMathExpressionUnderOver": {
+      "url": "https://developer.apple.com/documentation/accessibility/axmathexpressionunderover"
+    },
+    "AXNumericDataAxisDescriptor": {
+      "doc": "An object that represents an axis of numerical data.",
+      "url": "https://developer.apple.com/documentation/accessibility/axnumericdataaxisdescriptor"
+    }
+  },
+  "protocols": {
+    "AXBrailleMapRenderer": {
+      "doc": "The interface for providing data for a braille map.",
+      "url": "https://developer.apple.com/documentation/accessibility/axbraillemaprenderer"
+    },
+    "AXChart": {
+      "doc": "A protocol that declares the minimum interface necessary for an accessibility element to act as a chart.",
+      "url": "https://developer.apple.com/documentation/accessibility/axchart"
+    },
+    "AXCustomContentProvider": {
+      "doc": "The interface for customizing the accessibility content.",
+      "url": "https://developer.apple.com/documentation/accessibility/axcustomcontentprovider"
+    },
+    "AXDataAxisDescriptor": {
+      "doc": "The basic interface for a data axis in a chart.",
+      "url": "https://developer.apple.com/documentation/accessibility/axdataaxisdescriptor"
+    },
+    "AXMathExpressionProvider": {
+      "url": "https://developer.apple.com/documentation/accessibility/axmathexpressionprovider"
+    }
+  },
+  "enums": {
+    "AXChartDescriptorContentDirection": {
+      "doc": "A constant that describes the content direction of the chart.",
+      "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptorcontentdirection"
+    },
+    "AXCustomContentImportance": {
+      "doc": "Objects that control the timing of content output.",
+      "url": "https://developer.apple.com/documentation/accessibility/axcustomcontentimportance"
+    },
+    "AXHearingDeviceEar": {
+      "doc": "Constants that represent a hearing device ear.",
+      "url": "https://developer.apple.com/documentation/accessibility/axhearingdeviceear",
+      "members": {
+        "AXHearingDeviceEarNone": {
+          "doc": "A constant that represents neither ear.",
+          "url": "https://developer.apple.com/documentation/accessibility/axhearingdeviceear/axhearingdeviceearnone"
+        }
+      }
+    },
+    "AXNumericDataAxisDescriptorScale": {
+      "doc": "Constants that describe the scale of a numeric axis.",
+      "url": "https://developer.apple.com/documentation/accessibility/axnumericdataaxisdescriptorscale"
+    }
+  },
+  "methods": {
+    "AXBrailleMap": {
+      "-heightAtPoint:": {
+        "doc": "Retrieves the height of an individual pin on the braille display.",
+        "url": "https://developer.apple.com/documentation/accessibility/axbraillemap/height(at:)"
+      },
+      "-presentImage:": {
+        "doc": "Converts the data from the image you specify into the braille map.",
+        "url": "https://developer.apple.com/documentation/accessibility/axbraillemap/present(_:)"
+      },
+      "-setHeight:atPoint:": {
+        "doc": "Sets the height of an individual pin on the braille display.",
+        "url": "https://developer.apple.com/documentation/accessibility/axbraillemap/setheight(_:at:)"
+      }
+    },
+    "AXBrailleTable": {
+      "+defaultTableForLocale:": {
+        "doc": "The default table that provides translations for the given locale’s language. Returns nil if there is none.",
+        "url": "https://developer.apple.com/documentation/accessibility/axbrailletable/defaulttable(for:)"
+      },
+      "+languageAgnosticTables": {
+        "doc": "All tables that are not specific to any language.",
+        "url": "https://developer.apple.com/documentation/accessibility/axbrailletable/languageagnostictables()"
+      },
+      "+supportedLocales": {
+        "doc": "All locales supported by existing tables.",
+        "url": "https://developer.apple.com/documentation/accessibility/axbrailletable/supportedlocales()"
+      },
+      "+tablesForLocale:": {
+        "doc": "All tables that provide translations for the given locale’s language.",
+        "url": "https://developer.apple.com/documentation/accessibility/axbrailletable/tables(for:)"
+      },
+      "-initWithIdentifier:": {
+        "doc": "Returns nil if there is no table with the given identifier.",
+        "url": "https://developer.apple.com/documentation/accessibility/axbrailletable/init(identifier:)"
+      }
+    },
+    "AXBrailleTranslator": {
+      "-backTranslateBraille:": {
+        "doc": "Input Braille should use the unicode Braille characters (0x2800-0x28FF).",
+        "url": "https://developer.apple.com/documentation/accessibility/axbrailletranslator/backtranslatebraille(_:)"
+      },
+      "-translatePrintText:": {
+        "doc": "Output Braille uses the unicode Braille characters (0x2800-0x28FF).",
+        "url": "https://developer.apple.com/documentation/accessibility/axbrailletranslator/translateprinttext(_:)"
+      }
+    },
+    "AXCategoricalDataAxisDescriptor": {
+      "-initWithAttributedTitle:categoryOrder:": {
+        "doc": "Creates a categorical data axis with the specified attributed title and an array of categories in the specified order.",
+        "url": "https://developer.apple.com/documentation/accessibility/axcategoricaldataaxisdescriptor/init(attributedtitle:categoryorder:)"
+      },
+      "-initWithTitle:categoryOrder:": {
+        "doc": "Creates a categorical data axis with the specified title and an array of categories in the specified order.",
+        "url": "https://developer.apple.com/documentation/accessibility/axcategoricaldataaxisdescriptor/init(title:categoryorder:)"
+      }
+    },
+    "AXChartDescriptor": {
+      "-initWithAttributedTitle:summary:xAxisDescriptor:yAxisDescriptor:additionalAxes:series:": {
+        "doc": "Creates a chart descriptor with the specified attributed title, summary, x-axis descriptor, y-axis descriptor, descriptors for additional axes, and array of data series.",
+        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/initwithattributedtitle:summary:xaxisdescriptor:yaxisdescriptor:additionalaxes:series:"
+      },
+      "-initWithAttributedTitle:summary:xAxisDescriptor:yAxisDescriptor:series:": {
+        "doc": "Creates a chart descriptor with the specified attributed title, summary, x-axis descriptor, y-axis descriptor, and array of data series.",
+        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/initwithattributedtitle:summary:xaxisdescriptor:yaxisdescriptor:series:"
+      },
+      "-initWithTitle:summary:xAxisDescriptor:yAxisDescriptor:additionalAxes:series:": {
+        "doc": "Creates a chart descriptor with the specified title, summary, x-axis descriptor, y-axis descriptor, descriptors for additional axes, and array of data series.",
+        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/initwithtitle:summary:xaxisdescriptor:yaxisdescriptor:additionalaxes:series:"
+      },
+      "-initWithTitle:summary:xAxisDescriptor:yAxisDescriptor:series:": {
+        "doc": "Creates a chart descriptor with the specified title, summary, x-axis descriptor, y-axis descriptor, descriptors for additional axes, and array of data series.",
+        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/initwithtitle:summary:xaxisdescriptor:yaxisdescriptor:series:"
+      }
+    },
+    "AXCustomContent": {
+      "+customContentWithAttributedLabel:attributedValue:": {
+        "doc": "Creates new custom content with an attributed string and attributed value.",
+        "url": "https://developer.apple.com/documentation/accessibility/axcustomcontent/init(attributedlabel:attributedvalue:)"
+      },
+      "+customContentWithLabel:value:": {
+        "doc": "Creates new custom content with a label and value.",
+        "url": "https://developer.apple.com/documentation/accessibility/axcustomcontent/init(label:value:)"
+      }
+    },
+    "AXDataPoint": {
+      "-initWithX:y:": {
+        "doc": "Creates a data point with the specified x- and y-values.",
+        "url": "https://developer.apple.com/documentation/accessibility/axdatapoint/initwithx:y:"
+      },
+      "-initWithX:y:additionalValues:": {
+        "doc": "Creates a data point with the specified x-value, y-value, and additional values.",
+        "url": "https://developer.apple.com/documentation/accessibility/axdatapoint/initwithx:y:additionalvalues:"
+      },
+      "-initWithX:y:additionalValues:label:": {
+        "doc": "Creates a data point with the specified x-value, y-value, additional values, and label.",
+        "url": "https://developer.apple.com/documentation/accessibility/axdatapoint/initwithx:y:additionalvalues:label:"
+      }
+    },
+    "AXDataPointValue": {
+      "+valueWithCategory:": {
+        "doc": "Creates a categorical data value with the specified category string.",
+        "url": "https://developer.apple.com/documentation/accessibility/axdatapointvalue/valuewithcategory:"
+      },
+      "+valueWithNumber:": {
+        "doc": "Creates a numeric data value with the specified number.",
+        "url": "https://developer.apple.com/documentation/accessibility/axdatapointvalue/valuewithnumber:"
+      }
+    },
+    "AXDataSeriesDescriptor": {
+      "-initWithAttributedName:isContinuous:dataPoints:": {
+        "doc": "Creates a data series with the specified attributed name, a Boolean value that indicates whether the series is continuous, and data points.",
+        "url": "https://developer.apple.com/documentation/accessibility/axdataseriesdescriptor/init(attributedname:iscontinuous:datapoints:)"
+      },
+      "-initWithName:isContinuous:dataPoints:": {
+        "doc": "Creates a data series with the specified name, a Boolean value that indicates whether the series is continuous, and data points.",
+        "url": "https://developer.apple.com/documentation/accessibility/axdataseriesdescriptor/init(name:iscontinuous:datapoints:)"
+      }
+    },
+    "AXLiveAudioGraph": {
+      "+start": {
+        "doc": "Begins the live audio graph session.",
+        "url": "https://developer.apple.com/documentation/accessibility/axliveaudiograph/start()"
+      },
+      "+stop": {
+        "doc": "Ends the live audio graph session.",
+        "url": "https://developer.apple.com/documentation/accessibility/axliveaudiograph/stop()"
+      },
+      "+updateValue:": {
+        "doc": "Sets the pitch of the audio graph’s tone.",
+        "url": "https://developer.apple.com/documentation/accessibility/axliveaudiograph/updatevalue(_:)"
+      }
+    },
+    "AXNumericDataAxisDescriptor": {
+      "-initWithAttributedTitle:lowerBound:upperBound:gridlinePositions:valueDescriptionProvider:": {
+        "doc": "Creates a numeric data axis with the specified attributed title, lower bound value, upper bound value, gridline positions, and value description provider block.",
+        "url": "https://developer.apple.com/documentation/accessibility/axnumericdataaxisdescriptor/initwithattributedtitle:lowerbound:upperbound:gridlinepositions:valuedescriptionprovider:"
+      },
+      "-initWithTitle:lowerBound:upperBound:gridlinePositions:valueDescriptionProvider:": {
+        "doc": "Creates a numeric data axis with the specified title, lower bound value, upper bound value, gridline positions, and value description provider block.",
+        "url": "https://developer.apple.com/documentation/accessibility/axnumericdataaxisdescriptor/initwithtitle:lowerbound:upperbound:gridlinepositions:valuedescriptionprovider:"
+      }
+    }
+  },
+  "properties": {
+    "AXBrailleMap": {
+      "dimensions": {
+        "doc": "The number of pins in each dimension of the braille display.",
+        "url": "https://developer.apple.com/documentation/accessibility/axbraillemap/dimensions"
+      },
+      "subscript(_:)": {
+        "doc": "Accesses the height of an individual pin on the braille display.",
+        "url": "https://developer.apple.com/documentation/accessibility/axbraillemap/subscript(_:)"
+      }
+    },
+    "AXBrailleTable": {
+      "identifier": {
+        "doc": "A unique string that identifies this table.",
+        "url": "https://developer.apple.com/documentation/accessibility/axbrailletable/identifier"
+      },
+      "isEightDot": {
+        "doc": "Returns true if this table makes use of eight dots as opposed to six dots.",
+        "url": "https://developer.apple.com/documentation/accessibility/axbrailletable/iseightdot"
+      },
+      "language": {
+        "doc": "The 3-character code from ISO 639-2 for the language this Braille table pertains to.",
+        "url": "https://developer.apple.com/documentation/accessibility/axbrailletable/language-3570f"
+      },
+      "locales": {
+        "doc": "All locales this table supports.",
+        "url": "https://developer.apple.com/documentation/accessibility/axbrailletable/locales"
+      },
+      "localizedName": {
+        "doc": "The localized name of this table for user display.",
+        "url": "https://developer.apple.com/documentation/accessibility/axbrailletable/localizedname"
+      },
+      "localizedProviderName": {
+        "doc": "The localized name of the provider of this table for user display.",
+        "url": "https://developer.apple.com/documentation/accessibility/axbrailletable/localizedprovidername"
+      },
+      "providerIdentifier": {
+        "doc": "The identifier of the provider of this table.",
+        "url": "https://developer.apple.com/documentation/accessibility/axbrailletable/provideridentifier"
+      }
+    },
+    "AXBrailleTranslationResult": {
+      "inputIndex(forResultIndex:)": {
+        "doc": "Maps a location in the resultString to where it came from in the input string.",
+        "url": "https://developer.apple.com/documentation/accessibility/axbrailletranslationresult/inputindex(forresultindex:)"
+      },
+      "locationMap": {
+        "doc": "An array of integers that has the same length as the resultString. locationMap[i]-th character in the input string corresponds to resultString[i].",
+        "url": "https://developer.apple.com/documentation/accessibility/axbrailletranslationresult/locationmap"
+      },
+      "resultString": {
+        "doc": "The resulting string after translation or back-translation.",
+        "url": "https://developer.apple.com/documentation/accessibility/axbrailletranslationresult/resultstring"
+      }
+    },
+    "AXCategoricalDataAxisDescriptor": {
+      "categoryOrder": {
+        "doc": "A list of every category value for the axis in the order they appear visually in the graph or legend.",
+        "url": "https://developer.apple.com/documentation/accessibility/axcategoricaldataaxisdescriptor/categoryorder"
+      }
+    },
+    "AXChartDescriptor": {
+      "AXChartDescriptorContentDirection": {
+        "doc": "A constant that describes the content direction of the chart.",
+        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/contentdirection-swift.enum"
+      },
+      "additionalAxes": {
+        "doc": "The descriptors for additional categorical or numerical axes beyond the x-axis and y-axis.",
+        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/additionalaxes-9ldc0"
+      },
+      "attributedTitle": {
+        "doc": "An attributed version of the chart title.",
+        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/attributedtitle"
+      },
+      "contentDirection": {
+        "doc": "The direction of the content in the chart.",
+        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/contentdirection-swift.property"
+      },
+      "contentFrame": {
+        "doc": "The bounds of the view, in screen coordinates, for visually rendering data values.",
+        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/contentframe"
+      },
+      "init(attributedTitle:summary:xAxis:yAxis:additionalAxes:series:)": {
+        "doc": "Creates a chart descriptor with the specified attributed title, summary, x-axis descriptor, y-axis descriptor, descriptors for additional axes, and array of data series.",
+        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/init(attributedtitle:summary:xaxis:yaxis:additionalaxes:series:)"
+      },
+      "init(title:summary:xAxis:yAxis:additionalAxes:series:)": {
+        "doc": "Creates a chart descriptor with the specified title, summary, x-axis descriptor, y-axis descriptor, descriptors for additional axes, and array of data series.",
+        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/init(title:summary:xaxis:yaxis:additionalaxes:series:)"
+      },
+      "series": {
+        "doc": "The descriptors for each data series in the chart.",
+        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/series"
+      },
+      "summary": {
+        "doc": "A description of the key takeaways or features of the chart.",
+        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/summary"
+      },
+      "title": {
+        "doc": "The title of the chart.",
+        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/title"
+      },
+      "xAxis": {
+        "doc": "The axis descriptor for the chart’s x-axis.",
+        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/xaxis-6dnxd"
+      },
+      "yAxis": {
+        "doc": "The axis descriptor for the chart’s y-axis.",
+        "url": "https://developer.apple.com/documentation/accessibility/axchartdescriptor/yaxis"
+      }
+    },
+    "AXCustomContent": {
+      "AXCustomContentImportance": {
+        "doc": "Objects that control the timing of content output.",
+        "url": "https://developer.apple.com/documentation/accessibility/axcustomcontent/importance-swift.enum"
+      },
+      "attributedLabel": {
+        "doc": "A localized attributed string that identifies the label for this content.",
+        "url": "https://developer.apple.com/documentation/accessibility/axcustomcontent/attributedlabel"
+      },
+      "attributedValue": {
+        "doc": "A localized attributed string that provides a value for the label.",
+        "url": "https://developer.apple.com/documentation/accessibility/axcustomcontent/attributedvalue"
+      },
+      "importance": {
+        "doc": "An object that determines when to output custom accessibility content.",
+        "url": "https://developer.apple.com/documentation/accessibility/axcustomcontent/importance-swift.property"
+      },
+      "label": {
+        "doc": "A localized string that identifies the label for this content.",
+        "url": "https://developer.apple.com/documentation/accessibility/axcustomcontent/label"
+      },
+      "value": {
+        "doc": "A localized string that provides a value for the label.",
+        "url": "https://developer.apple.com/documentation/accessibility/axcustomcontent/value"
+      }
+    },
+    "AXDataPoint": {
+      "AXDataPoint.Value": {
+        "doc": "Constants that describe types of data values.",
+        "url": "https://developer.apple.com/documentation/accessibility/axdatapoint/value"
+      },
+      "additionalValues": {
+        "doc": "An array of values for additional axes for the data point.",
+        "url": "https://developer.apple.com/documentation/accessibility/axdatapoint/additionalvalues"
+      },
+      "attributedLabel": {
+        "doc": "An attributed version of the label for the data point.",
+        "url": "https://developer.apple.com/documentation/accessibility/axdatapoint/attributedlabel"
+      },
+      "init(x:y:additionalValues:label:)": {
+        "doc": "Creates a data point with the specified x-value, y-value, additional values, and label.",
+        "url": "https://developer.apple.com/documentation/accessibility/axdatapoint/init(x:y:additionalvalues:label:)-4v3sb"
+      },
+      "label": {
+        "doc": "The label for the data point.",
+        "url": "https://developer.apple.com/documentation/accessibility/axdatapoint/label"
+      },
+      "xValue": {
+        "doc": "The value of the x-axis for the data point.",
+        "url": "https://developer.apple.com/documentation/accessibility/axdatapoint/xvalue"
+      },
+      "yValue": {
+        "doc": "The value of the y-axis for the data point.",
+        "url": "https://developer.apple.com/documentation/accessibility/axdatapoint/yvalue"
+      }
+    },
+    "AXDataPointValue": {
+      "category": {
+        "doc": "A string that represents the categorical data value.",
+        "url": "https://developer.apple.com/documentation/accessibility/axdatapointvalue/category"
+      },
+      "number": {
+        "doc": "A number that represents the numeric data value.",
+        "url": "https://developer.apple.com/documentation/accessibility/axdatapointvalue/number"
+      }
+    },
+    "AXDataSeriesDescriptor": {
+      "attributedName": {
+        "doc": "An attributed version of the data series name.",
+        "url": "https://developer.apple.com/documentation/accessibility/axdataseriesdescriptor/attributedname"
+      },
+      "dataPoints": {
+        "doc": "The data points that the series contains.",
+        "url": "https://developer.apple.com/documentation/accessibility/axdataseriesdescriptor/datapoints"
+      },
+      "isContinuous": {
+        "doc": "A Boolean value that determines whether the data series is continuous.",
+        "url": "https://developer.apple.com/documentation/accessibility/axdataseriesdescriptor/iscontinuous"
+      },
+      "name": {
+        "doc": "The name of the data series.",
+        "url": "https://developer.apple.com/documentation/accessibility/axdataseriesdescriptor/name"
+      }
+    },
+    "AXNumericDataAxisDescriptor": {
+      "AXNumericDataAxisDescriptorScale": {
+        "doc": "Constants that describe the scale of a numeric axis.",
+        "url": "https://developer.apple.com/documentation/accessibility/axnumericdataaxisdescriptor/scaletype-swift.enum"
+      },
+      "gridlinePositions": {
+        "doc": "The positions of the gridlines along the axis.",
+        "url": "https://developer.apple.com/documentation/accessibility/axnumericdataaxisdescriptor/gridlinepositions-9z10e"
+      },
+      "init(attributedTitle:range:gridlinePositions:valueDescriptionProvider:)": {
+        "doc": "Creates a numeric data axis with the specified attributed title, range, gridline positions, and value description provider closure.",
+        "url": "https://developer.apple.com/documentation/accessibility/axnumericdataaxisdescriptor/init(attributedtitle:range:gridlinepositions:valuedescriptionprovider:)"
+      },
+      "init(title:range:gridlinePositions:valueDescriptionProvider:)": {
+        "doc": "Creates a numeric data axis with the specified title, range, gridline positions, and value description provider closure.",
+        "url": "https://developer.apple.com/documentation/accessibility/axnumericdataaxisdescriptor/init(title:range:gridlinepositions:valuedescriptionprovider:)"
+      },
+      "lowerBound": {
+        "doc": "The minimum displayable value for the axis.",
+        "url": "https://developer.apple.com/documentation/accessibility/axnumericdataaxisdescriptor/lowerbound"
+      },
+      "range": {
+        "doc": "A range that defines the minimum and maximum displayable values for the axis.",
+        "url": "https://developer.apple.com/documentation/accessibility/axnumericdataaxisdescriptor/range"
+      },
+      "scaleType": {
+        "doc": "The scale for the axis.",
+        "url": "https://developer.apple.com/documentation/accessibility/axnumericdataaxisdescriptor/scaletype-swift.property"
+      },
+      "upperBound": {
+        "doc": "The maximum displayable value for the axis.",
+        "url": "https://developer.apple.com/documentation/accessibility/axnumericdataaxisdescriptor/upperbound"
+      },
+      "valueDescriptionProvider": {
+        "doc": "A description to speak for a particular data value on the axis.",
+        "url": "https://developer.apple.com/documentation/accessibility/axnumericdataaxisdescriptor/valuedescriptionprovider"
+      }
+    }
+  }
+}

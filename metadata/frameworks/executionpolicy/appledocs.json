@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "framework": "ExecutionPolicy",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "EPDeveloperTool": {
+      "url": "https://developer.apple.com/documentation/executionpolicy/epdevelopertool"
+    },
+    "EPExecutionPolicy": {
+      "url": "https://developer.apple.com/documentation/executionpolicy/epexecutionpolicy"
+    }
+  },
+  "enums": {
+    "EPDeveloperToolStatus": {
+      "url": "https://developer.apple.com/documentation/executionpolicy/epdevelopertoolstatus"
+    },
+    "EPError": {
+      "url": "https://developer.apple.com/documentation/executionpolicy/eperror"
+    }
+  }
+}

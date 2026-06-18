@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "framework": "CoreServices",
+  "source": "developer.apple.com DocC render API",
+  "enums": {
+    "MDLabelDomain": {
+      "url": "https://developer.apple.com/documentation/coreservices/mdlabeldomain"
+    },
+    "MDQueryOptionFlags": {
+      "doc": "Specify the execution mode for a query.",
+      "url": "https://developer.apple.com/documentation/coreservices/mdqueryoptionflags"
+    },
+    "MDQuerySortOptionFlags": {
+      "url": "https://developer.apple.com/documentation/coreservices/mdquerysortoptionflags"
+    }
+  }
+}

@@ -1,0 +1,413 @@
+{
+  "schema_version": 1,
+  "framework": "IOUSBHost",
+  "source": "developer.apple.com DocC render API",
+  "classes": {
+    "IOUSBHostCIControllerStateMachine": {
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostcicontrollerstatemachine"
+    },
+    "IOUSBHostCIDeviceStateMachine": {
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostcidevicestatemachine"
+    },
+    "IOUSBHostCIEndpointStateMachine": {
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostciendpointstatemachine"
+    },
+    "IOUSBHostCIPortStateMachine": {
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostciportstatemachine"
+    },
+    "IOUSBHostControllerInterface": {
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostcontrollerinterface"
+    },
+    "IOUSBHostDevice": {
+      "doc": "The class that claims and configures devices, retrieves descriptors, and sends device requests.",
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostdevice"
+    },
+    "IOUSBHostIOSource": {
+      "doc": "This class provides basic functionality for deriving pipe and stream classes.",
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostiosource"
+    },
+    "IOUSBHostInterface": {
+      "doc": "The class for accessing USB-related services.",
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostinterface"
+    },
+    "IOUSBHostObject": {
+      "doc": "This class provides basic functionality for sending device requests and retrieving descriptors.",
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject"
+    },
+    "IOUSBHostPipe": {
+      "doc": "The class that sends control, bulk, interrupt, and isochronous input/output requests for function drivers, and manages stream capabilities.",
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe"
+    },
+    "IOUSBHostStream": {
+      "doc": "The class responsible for sending stream data for function drivers.",
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhoststream"
+    }
+  },
+  "enums": {
+    "IOUSBHostAbortOption": {
+      "doc": "Options for aborting pending input/output requests.",
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostabortoption",
+      "members": {
+        "IOUSBHostAbortOptionAsynchronous": {
+          "doc": "The option to abort input/output requests asynchronously.",
+          "url": "https://developer.apple.com/documentation/iousbhost/iousbhostabortoption/asynchronous"
+        },
+        "IOUSBHostAbortOptionSynchronous": {
+          "doc": "The option to abort input/output requests synchronously.",
+          "url": "https://developer.apple.com/documentation/iousbhost/iousbhostabortoption/synchronous"
+        }
+      }
+    },
+    "IOUSBHostCIControllerState": {
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostcicontrollerstate"
+    },
+    "IOUSBHostCIDeviceSpeed": {
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostcidevicespeed"
+    },
+    "IOUSBHostCIDeviceState": {
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostcidevicestate"
+    },
+    "IOUSBHostCIEndpointState": {
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostciendpointstate"
+    },
+    "IOUSBHostCIExceptionType": {
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostciexceptiontype"
+    },
+    "IOUSBHostCILinkState": {
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostcilinkstate"
+    },
+    "IOUSBHostCIMessageStatus": {
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostcimessagestatus"
+    },
+    "IOUSBHostCIMessageType": {
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostcimessagetype"
+    },
+    "IOUSBHostCIPortState": {
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostciportstate"
+    },
+    "IOUSBHostCIUserClientVersion": {
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostciuserclientversion"
+    },
+    "IOUSBHostIsochronousTransactionOptions": {
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostisochronoustransactionoptions"
+    },
+    "IOUSBHostIsochronousTransferOptions": {
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostisochronoustransferoptions"
+    },
+    "IOUSBHostObjectDestroyOptions": {
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobjectdestroyoptions"
+    },
+    "IOUSBHostObjectInitOptions": {
+      "doc": "Options for initializing the host object.",
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobjectinitoptions",
+      "members": {
+        "IOUSBHostObjectInitOptionsDeviceCapture": {
+          "doc": "The option to capture the device and terminate existing drivers.",
+          "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobjectinitoptions/devicecapture"
+        },
+        "IOUSBHostObjectInitOptionsNone": {
+          "doc": "The default argument for initializing the host object.",
+          "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobjectinitoptions/iousbhostobjectinitoptionsnone"
+        },
+        "init(rawValue:)": {
+          "doc": "Initializes the object.",
+          "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobjectinitoptions/init(rawvalue:)"
+        }
+      }
+    }
+  },
+  "structs": {
+    "IOUSBHostCIMessage": {
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostcimessage"
+    },
+    "IOUSBHostIOSourceDescriptors": {
+      "doc": "The descriptors for a single endpoint.",
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostiosourcedescriptors"
+    },
+    "IOUSBHostIsochronousFrame": {
+      "doc": "A structure that represents a single frame in an isochronous transfer.",
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostisochronousframe"
+    },
+    "IOUSBHostIsochronousTransaction": {
+      "url": "https://developer.apple.com/documentation/iousbhost/iousbhostisochronoustransaction"
+    }
+  },
+  "methods": {
+    "IOUSBHostDevice": {
+      "+createMatchingDictionaryWithVendorID:productID:bcdDevice:deviceClass:deviceSubclass:deviceProtocol:speed:productIDArray:": {
+        "doc": "Creates a matching dictionary to find a USB device.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostdevice/creatematchingdictionarywithvendorid:productid:bcddevice:deviceclass:devicesubclass:deviceprotocol:speed:productidarray:"
+      },
+      "-configureWithValue:error:": {
+        "doc": "Selects a new configuration for the device and registers the interfaces for matching.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostdevice/configurewithvalue:error:"
+      },
+      "-configureWithValue:matchInterfaces:error:": {
+        "doc": "Selects a new configuration for the device.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostdevice/configurewithvalue:matchinterfaces:error:"
+      },
+      "-resetWithError:": {
+        "doc": "Terminates the device and attempts to re-enumerate it.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostdevice/reset()"
+      }
+    },
+    "IOUSBHostInterface": {
+      "+createMatchingDictionaryWithVendorID:productID:bcdDevice:interfaceNumber:configurationValue:interfaceClass:interfaceSubclass:interfaceProtocol:speed:productIDArray:": {
+        "doc": "Creates a matching dictionary to find a USB interface.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostinterface/creatematchingdictionarywithvendorid:productid:bcddevice:interfacenumber:configurationvalue:interfaceclass:interfacesubclass:interfaceprotocol:speed:productidarray:"
+      },
+      "-copyPipeWithAddress:error:": {
+        "doc": "Copies a pipe for a specific endpoint address.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostinterface/copypipe(withaddress:)"
+      },
+      "-selectAlternateSetting:error:": {
+        "doc": "Selects an alternative setting for the interface.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostinterface/selectalternatesetting(_:)"
+      },
+      "-setIdleTimeout:error:": {
+        "doc": "Sets the desired idle suspend timeout for the interface.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostinterface/setidletimeout(_:)"
+      }
+    },
+    "IOUSBHostObject": {
+      "-abortDeviceRequestsWithError:": {
+        "doc": "Aborts device requests synchronously.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject/abortdevicerequestswitherror:"
+      },
+      "-abortDeviceRequestsWithOption:error:": {
+        "doc": "Aborts device requests.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject/abortdevicerequestswithoption:error:"
+      },
+      "-descriptorWithType:length:error:": {
+        "doc": "Retrieves a descriptor with default arguments from the cache or the device.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject/descriptorwithtype:length:error:"
+      },
+      "-descriptorWithType:length:index:languageID:error:": {
+        "doc": "Retrieves a string descriptor from the cache or the device.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject/descriptorwithtype:length:index:languageid:error:"
+      },
+      "-descriptorWithType:length:index:languageID:requestType:requestRecipient:error:": {
+        "doc": "Retrieves a descriptor from the cache or the device.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject/descriptorwithtype:length:index:languageid:requesttype:requestrecipient:error:"
+      },
+      "-destroy": {
+        "doc": "Removes underlying allocations and connections from the USB host object.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject/destroy()"
+      },
+      "-enqueueDeviceRequest:data:completionTimeout:error:completionHandler:": {
+        "doc": "Enqueues a request on the default control endpoint.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject/enqueuedevicerequest:data:completiontimeout:error:completionhandler:"
+      },
+      "-enqueueDeviceRequest:data:error:completionHandler:": {
+        "doc": "Enqueues a request on the default control endpoint with a default completion timeout.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject/enqueuedevicerequest:data:error:completionhandler:"
+      },
+      "-enqueueDeviceRequest:error:completionHandler:": {
+        "doc": "Enqueues a request on the default control endpoint without a data phase and a default timeout.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject/enqueuedevicerequest:error:completionhandler:"
+      },
+      "-frameNumberWithTime:": {
+        "doc": "Returns the current frame number of the USB controller.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject/framenumberwithtime:"
+      },
+      "-initWithIOService:options:queue:error:interestHandler:": {
+        "doc": "Creates a USB host object and sets up a communication channel to the kernel.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject/initwithioservice:options:queue:error:interesthandler:"
+      },
+      "-initWithIOService:queue:error:interestHandler:": {
+        "doc": "Creates a USB host object and sets up a default communication channel to the kernel.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject/initwithioservice:queue:error:interesthandler:"
+      },
+      "-ioDataWithCapacity:error:": {
+        "doc": "Allocates a buffer for input/output requests.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject/iodata(withcapacity:)"
+      },
+      "-sendDeviceRequest:data:bytesTransferred:completionTimeout:error:": {
+        "doc": "Sends a request on the default control endpoint.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject/senddevicerequest:data:bytestransferred:completiontimeout:error:"
+      },
+      "-sendDeviceRequest:data:bytesTransferred:error:": {
+        "doc": "Sends a request on the default control endpoint with a default completion timeout.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject/senddevicerequest:data:bytestransferred:error:"
+      },
+      "-sendDeviceRequest:error:": {
+        "doc": "Sends a request on the default control endpoint without a data phase and default completion timeout.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject/senddevicerequest:error:"
+      },
+      "-stringWithIndex:error:": {
+        "doc": "Retrieves an English-language string from a string descriptor.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject/stringwithindex:error:"
+      },
+      "-stringWithIndex:languageID:error:": {
+        "doc": "Retrieves a string from a string descriptor.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject/stringwithindex:languageid:error:"
+      }
+    },
+    "IOUSBHostPipe": {
+      "-abortWithError:": {
+        "doc": "Aborts pending input/output requests synchronously.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe/abortwitherror:"
+      },
+      "-abortWithOption:error:": {
+        "doc": "Aborts pending input/output requests.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe/abortwithoption:error:"
+      },
+      "-adjustPipeWithDescriptors:error:": {
+        "doc": "Adjusts the behavior of periodic endpoints to consume a different amount of bus bandwidth.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe/adjust(with:)"
+      },
+      "-clearStallWithError:": {
+        "doc": "Clears the halt condition of the pipe.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe/clearstall()"
+      },
+      "-copyStreamWithStreamID:error:": {
+        "doc": "Returns the stream for a stream ID.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe/copystream(withstreamid:)"
+      },
+      "-disableStreamsWithError:": {
+        "doc": "Disables streams for the pipe.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe/disablestreams()"
+      },
+      "-enableStreamsWithError:": {
+        "doc": "Enables streams for the pipe.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe/enablestreams()"
+      },
+      "-enqueueControlRequest:data:completionTimeout:error:completionHandler:": {
+        "doc": "Enqueues a request on a control endpoint.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe/enqueuecontrolrequest:data:completiontimeout:error:completionhandler:"
+      },
+      "-enqueueControlRequest:data:error:completionHandler:": {
+        "doc": "Enqueues a request on a control endpoint with a default completion timeout.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe/enqueuecontrolrequest:data:error:completionhandler:"
+      },
+      "-enqueueControlRequest:error:completionHandler:": {
+        "doc": "Enqueues a request on a control endpoint without a data phase and a default completion timeout.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe/enqueuecontrolrequest:error:completionhandler:"
+      },
+      "-enqueueIORequestWithData:completionTimeout:error:completionHandler:": {
+        "doc": "Enqueues an input/output request on the pipe.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe/enqueueiorequest(with:completiontimeout:completionhandler:)"
+      },
+      "-enqueueIORequestWithData:frameList:frameListCount:firstFrameNumber:error:completionHandler:": {
+        "doc": "Enqueues a request on an isochronous endpoint.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe/enqueueiorequest(with:framelist:framelistcount:firstframenumber:completionhandler:)"
+      },
+      "-sendControlRequest:data:bytesTransferred:completionTimeout:error:": {
+        "doc": "Sends a request on a control endpoint.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe/sendcontrolrequest:data:bytestransferred:completiontimeout:error:"
+      },
+      "-sendControlRequest:data:bytesTransferred:error:": {
+        "doc": "Sends a request on a control endpoint with a default timeout.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe/sendcontrolrequest:data:bytestransferred:error:"
+      },
+      "-sendControlRequest:error:": {
+        "doc": "Sends a request on a control endpoint without a data phase and a default completion timeout.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe/sendcontrolrequest:error:"
+      },
+      "-sendIORequestWithData:bytesTransferred:completionTimeout:error:": {
+        "doc": "Sends an input/output request on the pipe.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe/sendiorequestwithdata:bytestransferred:completiontimeout:error:"
+      },
+      "-sendIORequestWithData:frameList:frameListCount:firstFrameNumber:error:": {
+        "doc": "Sends a request on an isochronous endpoint.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe/sendiorequest(with:framelist:framelistcount:firstframenumber:)"
+      },
+      "-setIdleTimeout:error:": {
+        "doc": "Sets the desired idle suspend timeout for the interface.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe/setidletimeout(_:)"
+      }
+    },
+    "IOUSBHostStream": {
+      "-abortWithError:": {
+        "doc": "Aborts pending input/output requests synchronously.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhoststream/abort()"
+      },
+      "-abortWithOption:error:": {
+        "doc": "Aborts pending input/output requests.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhoststream/abort(with:)"
+      },
+      "-enqueueIORequestWithData:error:completionHandler:": {
+        "doc": "Enqueues an input/output request on the stream.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhoststream/enqueueiorequest(with:completionhandler:)"
+      },
+      "-sendIORequestWithData:bytesTransferred:error:": {
+        "doc": "Sends an input/output request on the stream.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhoststream/sendiorequestwithdata:bytestransferred:error:"
+      }
+    }
+  },
+  "properties": {
+    "IOUSBHostDevice": {
+      "configurationDescriptor": {
+        "doc": "The currently selected configuration descriptor.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostdevice/configurationdescriptor"
+      }
+    },
+    "IOUSBHostIOSource": {
+      "deviceAddress": {
+        "doc": "The device’s bus address.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostiosource/deviceaddress"
+      },
+      "endpointAddress": {
+        "doc": "The pipe or stream’s endpoint address.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostiosource/endpointaddress"
+      },
+      "hostInterface": {
+        "doc": "The interface for the input/output source.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostiosource/hostinterface"
+      }
+    },
+    "IOUSBHostInterface": {
+      "configurationDescriptor": {
+        "doc": "The configuration descriptor for the interface.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostinterface/configurationdescriptor"
+      },
+      "idleTimeout": {
+        "doc": "The current idle suspend timeout.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostinterface/idletimeout"
+      },
+      "interfaceDescriptor": {
+        "doc": "The descriptor for the interface.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostinterface/interfacedescriptor"
+      }
+    },
+    "IOUSBHostObject": {
+      "deviceAddress": {
+        "doc": "The device’s bus address.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject/deviceaddress"
+      },
+      "ioService": {
+        "doc": "A reference to the kernel object.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject/ioservice"
+      },
+      "queue": {
+        "doc": "The queue for servicing input/output requests.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostobject/queue"
+      }
+    },
+    "IOUSBHostPipe": {
+      "descriptors": {
+        "doc": "A property that retrieves the current endpoint descriptors controlling the endpoint.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe/descriptors"
+      },
+      "idleTimeout": {
+        "doc": "A property that retrieves the current idle suspend timeout.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe/idletimeout"
+      },
+      "originalDescriptors": {
+        "doc": "A property that retrieves the original endpoint descriptors from the pipe at the point of creation.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhostpipe/originaldescriptors"
+      }
+    },
+    "IOUSBHostStream": {
+      "hostPipe": {
+        "doc": "The pipe that creates the stream.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhoststream/hostpipe"
+      },
+      "streamID": {
+        "doc": "The ID for the stream.",
+        "url": "https://developer.apple.com/documentation/iousbhost/iousbhoststream/streamid"
+      }
+    }
+  }
+}

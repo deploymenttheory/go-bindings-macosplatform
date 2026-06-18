@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "framework": "CoreAudioTypes",
+  "source": "developer.apple.com DocC render API",
+  "enums": {
+    "AVAudioSessionErrorCode": {
+      "doc": "Codes that describe error conditions that may occur when performing audio session operations.",
+      "url": "https://developer.apple.com/documentation/coreaudiotypes/avaudiosessionerrorcode"
+    },
+    "AudioChannelBitmap": {
+      "doc": "The supported channel bitmaps to use when defining channel layouts.",
+      "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Creates an audio channel bitmap.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/init(rawvalue:)"
+        },
+        "kAudioChannelBit_Center": {
+          "doc": "The center channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_center"
+        },
+        "kAudioChannelBit_CenterSurround": {
+          "doc": "The center surround channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_centersurround"
+        },
+        "kAudioChannelBit_CenterTopFront": {
+          "doc": "The top-front center channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_centertopfront"
+        },
+        "kAudioChannelBit_CenterTopMiddle": {
+          "doc": "The top-middle center channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_centertopmiddle"
+        },
+        "kAudioChannelBit_CenterTopRear": {
+          "doc": "The top-right center channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_centertoprear"
+        },
+        "kAudioChannelBit_LFEScreen": {
+          "doc": "The Low Frequency Effects (LFE) screen channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_lfescreen"
+        },
+        "kAudioChannelBit_Left": {
+          "doc": "The left channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_left"
+        },
+        "kAudioChannelBit_LeftCenter": {
+          "doc": "The left center channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_leftcenter"
+        },
+        "kAudioChannelBit_LeftSurround": {
+          "doc": "The left surround channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_leftsurround"
+        },
+        "kAudioChannelBit_LeftSurroundDirect": {
+          "doc": "The left surround direct channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_leftsurrounddirect"
+        },
+        "kAudioChannelBit_LeftTopFront": {
+          "doc": "The left-top front channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_lefttopfront"
+        },
+        "kAudioChannelBit_LeftTopMiddle": {
+          "doc": "The left-top middle channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_lefttopmiddle"
+        },
+        "kAudioChannelBit_LeftTopRear": {
+          "doc": "The left-top rear channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_lefttoprear"
+        },
+        "kAudioChannelBit_Right": {
+          "doc": "The right channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_right"
+        },
+        "kAudioChannelBit_RightCenter": {
+          "doc": "The right center channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_rightcenter"
+        },
+        "kAudioChannelBit_RightSurround": {
+          "doc": "The rIght surround channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_rightsurround"
+        },
+        "kAudioChannelBit_RightSurroundDirect": {
+          "doc": "The right surround direct channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_rightsurrounddirect"
+        },
+        "kAudioChannelBit_RightTopFront": {
+          "doc": "The top-front front channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_righttopfront"
+        },
+        "kAudioChannelBit_RightTopMiddle": {
+          "doc": "The top-middle right channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_righttopmiddle"
+        },
+        "kAudioChannelBit_RightTopRear": {
+          "doc": "The top-rear right channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_righttoprear"
+        },
+        "kAudioChannelBit_TopBackCenter": {
+          "doc": "The top-back center channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_topbackcenter"
+        },
+        "kAudioChannelBit_TopBackLeft": {
+          "doc": "The top-back left channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_topbackleft"
+        },
+        "kAudioChannelBit_TopBackRight": {
+          "doc": "The top-back right channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_topbackright"
+        },
+        "kAudioChannelBit_TopCenterSurround": {
+          "doc": "The top center surround channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_topcentersurround"
+        },
+        "kAudioChannelBit_VerticalHeightCenter": {
+          "doc": "The vertical height center channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_verticalheightcenter"
+        },
+        "kAudioChannelBit_VerticalHeightLeft": {
+          "doc": "The vertical height left channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_verticalheightleft"
+        },
+        "kAudioChannelBit_VerticalHeightRight": {
+          "doc": "The vertical height right channel.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelbitmap/bit_verticalheightright"
+        }
+      }
+    },
+    "AudioChannelCoordinateIndex": {
+      "doc": "Indexes the fields of the mCoordinates array in an AudioChannelDescription structure.",
+      "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelcoordinateindex",
+      "members": {
+        "kAudioChannelCoordinates_Azimuth": {
+          "doc": "For spherical coordinates, 0 is front center, positive is right, negative is left, and measurements are in degrees.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelcoordinateindex/coordinates_azimuth"
+        },
+        "kAudioChannelCoordinates_BackFront": {
+          "doc": "For rectangular coordinates, negative is back and positive is front. The units are specified by the mChannelFlags field.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelcoordinateindex/coordinates_backfront"
+        },
+        "kAudioChannelCoordinates_Distance": {
+          "doc": "For spherical coordinates, distance is radially from the center. The units are specified by the mChannelFlags field of the AudioChannelDescription structure.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelcoordinateindex/coordinates_distance"
+        },
+        "kAudioChannelCoordinates_DownUp": {
+          "doc": "For rectangular coordinates, negative is below ground level, 0 is ground level, and positive is above ground level. The units are specified by the mChannelFlags field.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelcoordinateindex/coordinates_downup"
+        },
+        "kAudioChannelCoordinates_Elevation": {
+          "doc": "For spherical coordinates, +90 is zenith, 0 is horizontal, -90 is nadir, and measurements are in degrees.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelcoordinateindex/coordinates_elevation"
+        },
+        "kAudioChannelCoordinates_LeftRight": {
+          "doc": "For rectangular coordinates, negative is left and positive is right. The units are specified by the mChannelFlags field of the AudioChannelDescription structure.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelcoordinateindex/coordinates_leftright"
+        }
+      }
+    },
+    "AudioChannelFlags": {
+      "doc": "Constants that define the audio channel flags of an audio channel description.",
+      "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelflags",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Creates a audio channel flags structure with a unsigned integer value.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelflags/init(rawvalue:)"
+        },
+        "kAudioChannelFlags_AllOff": {
+          "doc": "All flags are clear.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelflags/kaudiochannelflags_alloff"
+        },
+        "kAudioChannelFlags_Meters": {
+          "doc": "A flag that indicates that unit values are in meters.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelflags/meters"
+        },
+        "kAudioChannelFlags_RectangularCoordinates": {
+          "doc": "A flag that indicates the channel uses the speaker position’s cartesian coordinates.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelflags/rectangularcoordinates"
+        },
+        "kAudioChannelFlags_SphericalCoordinates": {
+          "doc": "A flag that indicates the channel uses the speaker position’s spherical coordinates.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannelflags/sphericalcoordinates"
+        }
+      }
+    },
+    "AudioTimeStampFlags": {
+      "doc": "A structure that represents flags for a timestamp.",
+      "url": "https://developer.apple.com/documentation/coreaudiotypes/audiotimestampflags",
+      "members": {
+        "init(rawValue:)": {
+          "doc": "Creates a flag with an unsigned-integer value.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiotimestampflags/init(rawvalue:)"
+        },
+        "kAudioTimeStampHostTimeValid": {
+          "doc": "A flag that indicates that the host time is valid.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiotimestampflags/hosttimevalid"
+        },
+        "kAudioTimeStampNothingValid": {
+          "doc": "A flag that indicates no fields are valid.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiotimestampflags/kaudiotimestampnothingvalid"
+        },
+        "kAudioTimeStampRateScalarValid": {
+          "doc": "A flag that indicates that the rate scalar is valid.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiotimestampflags/ratescalarvalid"
+        },
+        "kAudioTimeStampSMPTETimeValid": {
+          "doc": "A flag that indicates that the SMPTE time is valid.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiotimestampflags/smptetimevalid"
+        },
+        "kAudioTimeStampSampleHostTimeValid": {
+          "doc": "A flag that indicates that the sample frame time and the host time are valid.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiotimestampflags/samplehosttimevalid"
+        },
+        "kAudioTimeStampSampleTimeValid": {
+          "doc": "A flag that indicates that the sample frame time is valid.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiotimestampflags/sampletimevalid"
+        },
+        "kAudioTimeStampWordClockTimeValid": {
+          "doc": "A flag that indicates that the word clock time is valid.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/audiotimestampflags/wordclocktimevalid"
+        }
+      }
+    },
+    "MPEG4ObjectID": {
+      "doc": "Constants that define the type of MPEG-4 audio data.",
+      "url": "https://developer.apple.com/documentation/coreaudiotypes/mpeg4objectid",
+      "members": {
+        "kMPEG4Object_AAC_LC": {
+          "doc": "A constant that specifies lossless coding, which provides compression with no loss of quality.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/mpeg4objectid/aac_lc"
+        },
+        "kMPEG4Object_AAC_LTP": {
+          "doc": "A constant that specifies long-term prediction, which reduces redundancy in a coded signal.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/mpeg4objectid/aac_ltp"
+        },
+        "kMPEG4Object_AAC_Main": {
+          "doc": "A constant that specifies advanced audio coding, which is the basic MPEG-4 technology.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/mpeg4objectid/aac_main"
+        },
+        "kMPEG4Object_AAC_SBR": {
+          "doc": "A constant that specifies spectral band replication, which reconstructs high-frequency content from lower frequencies and side information.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/mpeg4objectid/aac_sbr"
+        },
+        "kMPEG4Object_AAC_SSR": {
+          "doc": "A constant that specifies scalable sampling rate, which provides different sampling frequencies for different targets.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/mpeg4objectid/aac_ssr"
+        },
+        "kMPEG4Object_AAC_Scalable": {
+          "doc": "A constant that specifies scalable lossless coding.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/mpeg4objectid/aac_scalable"
+        },
+        "kMPEG4Object_CELP": {
+          "doc": "A constant that specifies code-excited linear prediction, which is a narrow-band/wide-band speech codec.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/mpeg4objectid/celp"
+        },
+        "kMPEG4Object_HVXC": {
+          "doc": "A constant that specifies harmonic vector excitation coding, which is a very-low bit-rate parametric speech codec.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/mpeg4objectid/hvxc"
+        },
+        "kMPEG4Object_TwinVQ": {
+          "doc": "A constant that specifies transform-domain weighted interleaved vector quantization.",
+          "url": "https://developer.apple.com/documentation/coreaudiotypes/mpeg4objectid/twinvq"
+        }
+      }
+    },
+    "SMPTETimeFlags": {
+      "doc": "A structure that defines SMPTE time flags.",
+      "url": "https://developer.apple.com/documentation/coreaudiotypes/smptetimeflags"
+    },
+    "SMPTETimeType": {
+      "doc": "Constants that define SMPTE time types.",
+      "url": "https://developer.apple.com/documentation/coreaudiotypes/smptetimetype"
+    }
+  },
+  "structs": {
+    "AudioBuffer": {
+      "doc": "A structure that holds a buffer of audio data.",
+      "url": "https://developer.apple.com/documentation/coreaudiotypes/audiobuffer"
+    },
+    "AudioBufferList": {
+      "doc": "A structure that stores a variable-length array of audio buffers.",
+      "url": "https://developer.apple.com/documentation/coreaudiotypes/audiobufferlist"
+    },
+    "AudioChannelDescription": {
+      "doc": "A structure that describes a channel of audio data.",
+      "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochanneldescription"
+    },
+    "AudioChannelLayout": {
+      "doc": "A structure that specifies a channel layout in a file or in hardware.",
+      "url": "https://developer.apple.com/documentation/coreaudiotypes/audiochannellayout"
+    },
+    "AudioClassDescription": {
+      "doc": "A structure that describes an audio codec.",
+      "url": "https://developer.apple.com/documentation/coreaudiotypes/audioclassdescription"
+    },
+    "AudioFormatListItem": {
+      "url": "https://developer.apple.com/documentation/coreaudiotypes/audioformatlistitem"
+    },
+    "AudioStreamBasicDescription": {
+      "doc": "A format specification for an audio stream.",
+      "url": "https://developer.apple.com/documentation/coreaudiotypes/audiostreambasicdescription"
+    },
+    "AudioStreamPacketDependencyDescription": {
+      "url": "https://developer.apple.com/documentation/coreaudiotypes/audiostreampacketdependencydescription"
+    },
+    "AudioStreamPacketDescription": {
+      "doc": "A value that describes a packet in a buffer of audio data.",
+      "url": "https://developer.apple.com/documentation/coreaudiotypes/audiostreampacketdescription"
+    },
+    "AudioTimeStamp": {
+      "doc": "A structure that represents a timestamp value.",
+      "url": "https://developer.apple.com/documentation/coreaudiotypes/audiotimestamp"
+    },
+    "AudioValueRange": {
+      "doc": "A structure that represents a continuous range of values.",
+      "url": "https://developer.apple.com/documentation/coreaudiotypes/audiovaluerange"
+    },
+    "AudioValueTranslation": {
+      "doc": "A structure that stores buffers to use in translation operations.",
+      "url": "https://developer.apple.com/documentation/coreaudiotypes/audiovaluetranslation"
+    },
+    "SMPTETime": {
+      "doc": "A structure that defines an SMPTE time value.",
+      "url": "https://developer.apple.com/documentation/coreaudiotypes/smptetime"
+    }
+  }
+}
