@@ -133,14 +133,7 @@ func emitEnums(
 		imports["strings"] = "strings"
 	}
 
-	var buf bytes.Buffer
-	fmt.Fprint(&buf, generatedHeader+"\n")
-	fmt.Fprint(&buf, buildTag+"\n")
-	fmt.Fprintf(&buf, "package %s\n\n", pkgName)
-	writeImportBlock(&buf, imports)
-	buf.Write(body.Bytes())
-
-	return emit.WriteGoFile(filepath.Join(outDir, enumsFile), buf.Bytes())
+	return emit.WriteGoFile(filepath.Join(outDir, enumsFile), assembleFile(pkgName, imports, body.Bytes()))
 }
 
 // buildEnumView populates the template view-model from raw metadata, matching

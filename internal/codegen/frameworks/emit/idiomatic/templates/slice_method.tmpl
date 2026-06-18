@@ -1,0 +1,27 @@
+{{/*
+    slice_method.tmpl — an NSArray-returning method surfaced as a Go []Elem,
+    iterated through purego.NSArrayToSlice with a per-element conversion closure
+    (ConvClosure, pre-built in Go). Two shapes: with and without an error return.
+*/}}
+{{define "slice_method"}}// {{.GoName}} returns the collection as a Go slice.
+{{if .HasError -}}
+func {{.Recv}}{{.GoName}}() ([]{{.ElemGoType}}, error) {
+arr, err := {{.Target}}.{{.RawGoName}}()
+if err != nil {
+return nil, err
+}
+if arr == nil {
+return nil, nil
+}
+return purego.NSArrayToSlice(arr.Ptr(), {{.ConvClosure}}), nil
+}
+{{else -}}
+func {{.Recv}}{{.GoName}}() []{{.ElemGoType}} {
+arr := {{.Target}}.{{.RawGoName}}()
+if arr == nil {
+return nil
+}
+return purego.NSArrayToSlice(arr.Ptr(), {{.ConvClosure}})
+}
+{{end}}
+{{end}}

@@ -384,6 +384,30 @@ func receiverTypeName(recv *ast.FieldList) string {
 	return ""
 }
 
+// providerMethodItem / providerMethodView are the template data for
+// provider_method.tmpl.
+type providerMethodItem struct {
+	MethodName string
+	RawType    string
+	BodyExpr   string
+}
+
+type providerMethodView struct {
+	GoTypeName string
+	Items      []providerMethodItem
+}
+
+// classHeaderView is the template data for class_header.tmpl.
+type classHeaderView struct {
+	GoTypeName  string
+	RawAlias    string
+	ClassName   string
+	RawType     string
+	EmitID      bool
+	EmitFromID  bool
+	GenericArgs string
+}
+
 func emitClassFile(
 	w io.Writer,
 	pkgName, rawPkgAlias, rawPkgPath string,
@@ -465,39 +489,19 @@ func emitClassFile(
 		rawType += genericInstantiation(len(cls.GenericParams))
 	}
 
-	fmt.Fprintf(
-		&body,
-		"// %s wraps [%s.%s] with a fluent Go API.\n",
-		goTypeName,
-		rawPkgAlias,
-		className,
-	)
-	fmt.Fprintf(&body, "type %s struct {\n\tinner *%s\n}\n\n", goTypeName, rawType)
-	fmt.Fprintf(&body, "// Unwrap returns the underlying [%s.%s].\n", rawPkgAlias, className)
-	fmt.Fprintf(&body, "func (x *%s) Unwrap() *%s { return x.inner }\n\n", goTypeName, rawType)
-
-	// ID exposes the underlying Objective-C object pointer so the wrapper can be
-	// passed to C APIs that take an object or CFTypeRef pointer (e.g. the Security
-	// keychain functions) without importing the raw bindings. Skipped when a
-	// generated method already claims the name.
-	if !methodNameClaimed("ID", withMethods, methods, handMethods) {
-		fmt.Fprintf(&body, "// ID returns the underlying Objective-C object pointer (objc.ID), for\n")
-		fmt.Fprintf(&body, "// passing to C APIs that take an object or CFTypeRef pointer.\n")
-		fmt.Fprintf(&body, "func (x *%s) ID() objc.ID { return x.inner.Ptr() }\n\n", goTypeName)
-	}
-
-	// <Type>FromID adopts an existing Objective-C object pointer (e.g. an objc.ID
-	// reinterpreted from a CFTypeRef a C API returned) as a wrapper. It mirrors
-	// the raw FromID — which installs a releasing finalizer but does not retain —
-	// so it is correct for +1-owned results such as CF_RETURNS_RETAINED returns.
-	if !handFuncs[goTypeName+"FromID"] {
-		genericArgs := genericInstantiation(len(cls.GenericParams))
-		fmt.Fprintf(&body, "// %sFromID adopts an existing object pointer as a %s (nil for 0).\n", goTypeName, goTypeName)
-		fmt.Fprintf(&body, "func %sFromID(id objc.ID) *%s {\n", goTypeName, goTypeName)
-		fmt.Fprintf(&body, "\tif id == 0 {\n\t\treturn nil\n\t}\n")
-		fmt.Fprintf(&body, "\treturn &%s{inner: %s.%sFromID%s(id)}\n", goTypeName, rawPkgAlias, className, genericArgs)
-		fmt.Fprintf(&body, "}\n\n")
-	}
+	// Wrapper struct + Unwrap, plus ID (unless a generated method claims the
+	// name) and <Type>FromID (unless hand-authored). ID lets the wrapper reach C
+	// APIs taking an object/CFTypeRef pointer without the raw import; FromID
+	// mirrors the raw FromID (releasing finalizer, no retain).
+	renderTemplate(&body, "class_header", classHeaderView{
+		GoTypeName:  goTypeName,
+		RawAlias:    rawPkgAlias,
+		ClassName:   className,
+		RawType:     rawType,
+		EmitID:      !methodNameClaimed("ID", withMethods, methods, handMethods),
+		EmitFromID:  !handFuncs[goTypeName+"FromID"],
+		GenericArgs: genericInstantiation(len(cls.GenericParams)),
+	})
 
 	for _, c := range ctors {
 		writeConstructor(
@@ -515,16 +519,15 @@ func emitClassFile(
 	for _, me := range methods {
 		writeMethod(&body, goTypeName, me)
 	}
-	for _, pm := range providerMethods {
-		fmt.Fprintf(
-			&body,
-			"func (x *%s) %s() %s { return %s }\n\n",
-			goTypeName,
-			pm.methodName,
-			pm.rawType,
-			pm.bodyExpr,
-		)
+	provItems := make([]providerMethodItem, len(providerMethods))
+	for i, pm := range providerMethods {
+		provItems[i] = providerMethodItem{
+			MethodName: pm.methodName,
+			RawType:    pm.rawType,
+			BodyExpr:   pm.bodyExpr,
+		}
 	}
+	renderTemplate(&body, "provider_method", providerMethodView{GoTypeName: goTypeName, Items: provItems})
 
 	emitDictionaryAugment(&body, className, goTypeName, rawPkgAlias, genericInstantiation(len(cls.GenericParams)))
 
@@ -555,11 +558,7 @@ func emitClassFile(
 
 	// ── Write output ───────────────────────────────────────────────────────────
 
-	fmt.Fprint(w, generatedHeader+"\n")
-	fmt.Fprint(w, buildTag+"\n")
-	fmt.Fprintf(w, "package %s\n\n", pkgName)
-	writeImportBlock(w, imports)
-	if _, err := w.Write(body.Bytes()); err != nil {
+	if _, err := w.Write(assembleFile(pkgName, imports, body.Bytes())); err != nil {
 		return fmt.Errorf("write class body: %w", err)
 	}
 
@@ -905,11 +904,7 @@ func emitDictionaryAugment(w io.Writer, className, goTypeName, _, _ string) {
 	if className != "NSMutableDictionary" {
 		return
 	}
-	fmt.Fprintf(w, "// Set inserts value for key (both object pointers, e.g. the CFStringRef\n")
-	fmt.Fprintf(w, "// constant security.KSecClass()) and returns the receiver for chaining.\n")
-	fmt.Fprintf(w, "func (x *%s) Set(key, value objc.ID) *%s {\n", goTypeName, goTypeName)
-	fmt.Fprintf(w, "\tobjc.Send[objc.ID](x.inner.Ptr(), objc.RegisterName(\"setObject:forKey:\"), value, key)\n")
-	fmt.Fprintf(w, "\treturn x\n}\n\n")
+	renderTemplate(w, "dict_augment", struct{ GoTypeName string }{GoTypeName: goTypeName})
 }
 
 // ── Constructor generation ─────────────────────────────────────────────────────
@@ -1864,48 +1859,46 @@ func writePlainMethod(w io.Writer, recv, target string, me methodEntry) {
 		paramParts = append(paramParts, p.goName+" "+p.goType)
 		rawArgs = append(rawArgs, p.rawExpr)
 	}
-	call := fmt.Sprintf("%s.%s(%s)", target, me.rawGoName, strings.Join(rawArgs, ", "))
+	renderTemplate(w, "plain_method", plainMethodView{
+		Recv:      recv,
+		GoName:    me.goName,
+		RawGoName: me.rawGoName,
+		ParamStr:  strings.Join(paramParts, ", "),
+		RetSig:    plainRetSig(me),
+		Call:      fmt.Sprintf("%s.%s(%s)", target, me.rawGoName, strings.Join(rawArgs, ", ")),
+		HasError:  me.plainHasError,
+		RetMode:   plainRetModeName(me.plainRetMode),
+		TrialType: me.plainTrialType,
+	})
+}
 
-	retSig := plainRetSig(me)
-
-	fmt.Fprintf(w, "// %s calls the underlying %s.\n", me.goName, me.rawGoName)
-	fmt.Fprintf(w, "func %s%s(%s)%s {\n", recv, me.goName, strings.Join(paramParts, ", "), retSig)
-
-	if me.plainHasError {
-		switch me.plainRetMode {
-		case plainRetVoid, plainRetRaw:
-			// raw returns `error` (void) or `(value, error)` — forward directly.
-			fmt.Fprintf(w, "\treturn %s\n", call)
-		case plainRetString:
-			fmt.Fprintf(w, "\t_r, _err := %s\n", call)
-			fmt.Fprintf(w, "\tif _err != nil {\n\t\treturn \"\", _err\n\t}\n")
-			fmt.Fprintf(w, "\tif _r == nil {\n\t\treturn \"\", nil\n\t}\n")
-			fmt.Fprintf(w, "\treturn purego.GoString(_r.Ptr()), nil\n")
-		case plainRetTrialWrap:
-			fmt.Fprintf(w, "\t_r, _err := %s\n", call)
-			fmt.Fprintf(w, "\tif _err != nil {\n\t\treturn nil, _err\n\t}\n")
-			fmt.Fprintf(w, "\tif _r == nil {\n\t\treturn nil, nil\n\t}\n")
-			fmt.Fprintf(w, "\treturn &%s{inner: _r}, nil\n", me.plainTrialType)
-		}
-		fmt.Fprintf(w, "}\n\n")
-		return
-	}
-
-	switch me.plainRetMode {
+// plainRetModeName maps a plainRetMode to the string the plain_method template
+// switches on.
+func plainRetModeName(m plainRetMode) string {
+	switch m {
 	case plainRetVoid:
-		fmt.Fprintf(w, "\t%s\n", call)
+		return "void"
 	case plainRetRaw:
-		fmt.Fprintf(w, "\treturn %s\n", call)
+		return "raw"
 	case plainRetString:
-		fmt.Fprintf(w, "\t_r := %s\n", call)
-		fmt.Fprintf(w, "\tif _r == nil {\n\t\treturn \"\"\n\t}\n")
-		fmt.Fprintf(w, "\treturn purego.GoString(_r.Ptr())\n")
+		return "string"
 	case plainRetTrialWrap:
-		fmt.Fprintf(w, "\t_r := %s\n", call)
-		fmt.Fprintf(w, "\tif _r == nil {\n\t\treturn nil\n\t}\n")
-		fmt.Fprintf(w, "\treturn &%s{inner: _r}\n", me.plainTrialType)
+		return "trialwrap"
 	}
-	fmt.Fprintf(w, "}\n\n")
+	return ""
+}
+
+// plainMethodView is the template data for plain_method.tmpl.
+type plainMethodView struct {
+	Recv      string
+	GoName    string
+	RawGoName string
+	ParamStr  string
+	RetSig    string
+	Call      string
+	HasError  bool
+	RetMode   string // "void" | "raw" | "string" | "trialwrap"
+	TrialType string
 }
 
 // plainRetSig is the return clause for a plain method, shared by the writer and
@@ -1932,18 +1925,27 @@ func writeMockInterface(
 	withMethods []withEntry,
 	methods []methodEntry,
 ) {
-	ifaceName := typeName + "able"
-	fmt.Fprintf(w, "// %s is the interface implemented by [%s], for mocking and DI.\n", ifaceName, typeName)
-	fmt.Fprintf(w, "type %s interface {\n", ifaceName)
-	fmt.Fprintf(w, "\tUnwrap() *%s\n", rawType)
+	lines := make([]string, 0, len(withMethods)+len(methods))
 	for _, we := range withMethods {
-		fmt.Fprintf(w, "\t%s\n", interfaceWithLine(we, typeName))
+		lines = append(lines, interfaceWithLine(we, typeName))
 	}
 	for _, me := range methods {
-		fmt.Fprintf(w, "\t%s\n", interfaceMethodLine(me))
+		lines = append(lines, interfaceMethodLine(me))
 	}
-	fmt.Fprintf(w, "}\n\n")
-	fmt.Fprintf(w, "var _ %s = (*%s)(nil)\n\n", ifaceName, typeName)
+	renderTemplate(w, "mock_interface", mockInterfaceView{
+		IfaceName: typeName + "able",
+		TypeName:  typeName,
+		RawType:   rawType,
+		Lines:     lines,
+	})
+}
+
+// mockInterfaceView is the template data for mock_interface.tmpl.
+type mockInterfaceView struct {
+	IfaceName string
+	TypeName  string
+	RawType   string
+	Lines     []string
 }
 
 // interfaceWithLine renders the With-setter signature for the mockable interface.
@@ -2036,15 +2038,14 @@ func writeAsyncMethod(w io.Writer, recv, target string, me methodEntry) {
 		if errIdx >= 0 {
 			closureBody = "\t\tvar _err error\n" + errExpr("_err") + "\t\t_ch <- _err\n"
 		}
-		fmt.Fprintf(w, "// %s blocks until the operation completes or ctx is cancelled.\n", me.goName)
-		fmt.Fprintf(w, "func %s%s(%s) error {\n", recv, me.goName, paramStr)
-		fmt.Fprintf(w, "\t_ch := make(chan error, 1)\n")
 		rawArgs = append(rawArgs, "func("+strings.Join(closureParams, ", ")+") {\n"+closureBody+"\t}")
-		fmt.Fprintf(w, "\t%s.%s(%s)\n", target, me.rawGoName, strings.Join(rawArgs, ", "))
-		fmt.Fprintf(w, "\tselect {\n")
-		fmt.Fprintf(w, "\tcase err := <-_ch:\n\t\treturn err\n")
-		fmt.Fprintf(w, "\tcase <-ctx.Done():\n\t\treturn ctx.Err()\n")
-		fmt.Fprintf(w, "\t}\n}\n\n")
+		renderTemplate(w, "async_method", asyncMethodView{
+			Recv:      recv,
+			GoName:    me.goName,
+			ParamStr:  paramStr,
+			HasResult: false,
+			RawCall:   fmt.Sprintf("%s.%s(%s)", target, me.rawGoName, strings.Join(rawArgs, ", ")),
+		})
 		return
 	}
 
@@ -2062,23 +2063,35 @@ func writeAsyncMethod(w io.Writer, recv, target string, me methodEntry) {
 	}
 	closureBody := "\t\tvar _o _result\n" + errExpr("_o.err") + resultConv + "\t\t_ch <- _o\n"
 
-	fmt.Fprintf(w, "// %s blocks until the operation completes or ctx is cancelled.\n", me.goName)
-	fmt.Fprintf(w, "func %s%s(%s) (%s, error) {\n", recv, me.goName, paramStr, me.asyncResultGoType)
-	fmt.Fprintf(w, "\ttype _result struct {\n\t\tval %s\n\t\terr error\n\t}\n", me.asyncResultGoType)
-	fmt.Fprintf(w, "\t_ch := make(chan _result, 1)\n")
 	rawArgs = append(rawArgs, "func("+strings.Join(closureParams, ", ")+") {\n"+closureBody+"\t}")
-	fmt.Fprintf(w, "\t%s.%s(%s)\n", target, me.rawGoName, strings.Join(rawArgs, ", "))
-	fmt.Fprintf(w, "\tselect {\n")
-	fmt.Fprintf(w, "\tcase _o := <-_ch:\n\t\treturn _o.val, _o.err\n")
-	fmt.Fprintf(w, "\tcase <-ctx.Done():\n\t\tvar _zero %s\n\t\treturn _zero, ctx.Err()\n", me.asyncResultGoType)
-	fmt.Fprintf(w, "\t}\n}\n\n")
+	renderTemplate(w, "async_method", asyncMethodView{
+		Recv:         recv,
+		GoName:       me.goName,
+		ParamStr:     paramStr,
+		HasResult:    true,
+		ResultGoType: me.asyncResultGoType,
+		RawCall:      fmt.Sprintf("%s.%s(%s)", target, me.rawGoName, strings.Join(rawArgs, ", ")),
+	})
+}
+
+// asyncMethodView is the template data for async_method.tmpl. RawCall is the
+// fully-built raw call (including the channel-feeding completion closure).
+type asyncMethodView struct {
+	Recv         string
+	GoName       string
+	ParamStr     string
+	HasResult    bool
+	ResultGoType string
+	RawCall      string
 }
 
 func writeBoolNSErrorMethod(w io.Writer, recv, target string, me methodEntry) {
-	fmt.Fprintf(w, "// %s returns any validation error.\n", me.goName)
-	fmt.Fprintf(w, "func %s%s() error {\n", recv, me.goName)
-	fmt.Fprintf(w, "\t_, err := %s.%s()\n", target, me.rawGoName)
-	fmt.Fprintf(w, "\treturn err\n}\n\n")
+	renderTemplate(w, "boolnserror_method", boolNSErrorMethodView{
+		Recv:      recv,
+		GoName:    me.goName,
+		Target:    target,
+		RawGoName: me.rawGoName,
+	})
 }
 
 func writeSliceMethod(w io.Writer, recv, target string, me methodEntry) {
@@ -2086,20 +2099,36 @@ func writeSliceMethod(w io.Writer, recv, target string, me methodEntry) {
 	// typed-NSArray element accessor whose returned wrapper is not ABI-safe.
 	conv := fmt.Sprintf(me.sliceConvFmt, "_id")
 	convClosure := fmt.Sprintf("func(_id objc.ID) %s {\n\t\treturn %s\n\t}", me.sliceElemGoType, conv)
+	renderTemplate(w, "slice_method", sliceMethodView{
+		Recv:        recv,
+		GoName:      me.goName,
+		Target:      target,
+		RawGoName:   me.rawGoName,
+		ElemGoType:  me.sliceElemGoType,
+		HasError:    me.sliceHasError,
+		ConvClosure: convClosure,
+	})
+}
 
-	fmt.Fprintf(w, "// %s returns the collection as a Go slice.\n", me.goName)
-	if me.sliceHasError {
-		fmt.Fprintf(w, "func %s%s() ([]%s, error) {\n", recv, me.goName, me.sliceElemGoType)
-		fmt.Fprintf(w, "\tarr, err := %s.%s()\n", target, me.rawGoName)
-		fmt.Fprintf(w, "\tif err != nil {\n\t\treturn nil, err\n\t}\n")
-		fmt.Fprintf(w, "\tif arr == nil {\n\t\treturn nil, nil\n\t}\n")
-		fmt.Fprintf(w, "\treturn purego.NSArrayToSlice(arr.Ptr(), %s), nil\n}\n\n", convClosure)
-		return
-	}
-	fmt.Fprintf(w, "func %s%s() []%s {\n", recv, me.goName, me.sliceElemGoType)
-	fmt.Fprintf(w, "\tarr := %s.%s()\n", target, me.rawGoName)
-	fmt.Fprintf(w, "\tif arr == nil {\n\t\treturn nil\n\t}\n")
-	fmt.Fprintf(w, "\treturn purego.NSArrayToSlice(arr.Ptr(), %s)\n}\n\n", convClosure)
+// boolNSErrorMethodView / sliceMethodView are template data for
+// boolnserror_method.tmpl and slice_method.tmpl. Recv is "(x *Type) " for an
+// instance method or "" for a package-level class function; Target is the
+// receiver/raw-package expression the method forwards to.
+type boolNSErrorMethodView struct {
+	Recv      string
+	GoName    string
+	Target    string
+	RawGoName string
+}
+
+type sliceMethodView struct {
+	Recv        string
+	GoName      string
+	Target      string
+	RawGoName   string
+	ElemGoType  string
+	HasError    bool
+	ConvClosure string
 }
 
 // rawParamGoType resolves a raw method/function parameter type exactly as the
@@ -2483,45 +2512,81 @@ func sortedKeys(m map[string]meta.Class) []string {
 	return keys
 }
 
-func writeImportBlock(w io.Writer, imports map[string]string) {
+// importLines returns the import statements (each `"path"` or `alias "path"`)
+// for the alias→path map, sorted by path then alias (the same path can be
+// imported under two aliases, e.g. raw and foundation in the trial foundation
+// package).
+func importLines(imports map[string]string) []string {
 	type imp struct{ alias, path string }
 	list := make([]imp, 0, len(imports))
 	for alias, path := range imports {
 		list = append(list, imp{alias, path})
 	}
 	sort.Slice(list, func(i, j int) bool {
-		// Tie-break on alias: the same path can be imported under two aliases
-		// (e.g. raw and foundation in the trial foundation package).
 		if list[i].path != list[j].path {
 			return list[i].path < list[j].path
 		}
 		return list[i].alias < list[j].alias
 	})
-	fmt.Fprint(w, "import (\n")
+	lines := make([]string, 0, len(list))
 	for _, i := range list {
 		segs := strings.Split(i.path, "/")
 		defaultAlias := segs[len(segs)-1]
 		if i.alias == defaultAlias || i.alias == i.path {
-			fmt.Fprintf(w, "\t%q\n", i.path)
+			lines = append(lines, fmt.Sprintf("%q", i.path))
 		} else {
-			fmt.Fprintf(w, "\t%s %q\n", i.alias, i.path)
+			lines = append(lines, fmt.Sprintf("%s %q", i.alias, i.path))
 		}
 	}
-	fmt.Fprint(w, ")\n\n")
+	return lines
+}
+
+// fileView is the template data for file.tmpl.
+type fileView struct {
+	Header      string
+	BuildTag    string
+	PkgName     string
+	ImportLines []string
+	Body        string
+}
+
+// assembleFile renders a complete generated file — the scaffold (header, build
+// tag, package clause, import block) plus the already-rendered body — through
+// file.tmpl.
+func assembleFile(pkgName string, imports map[string]string, body []byte) []byte {
+	var buf bytes.Buffer
+	renderTemplate(&buf, "file", fileView{
+		Header:      strings.TrimRight(generatedHeader, "\n"),
+		BuildTag:    strings.TrimRight(buildTag, "\n"),
+		PkgName:     pkgName,
+		ImportLines: importLines(imports),
+		Body:        string(body),
+	})
+	return buf.Bytes()
 }
 
 func emitDocGo(outDir, pkgName string, fw *meta.FrameworkMeta) error {
 	var buf bytes.Buffer
-	fmt.Fprint(&buf, generatedHeader+"\n")
-	fmt.Fprint(&buf, buildTag+"\n")
-	fmt.Fprintf(
-		&buf,
-		"// Package %s provides a fluent Go API over the macOS %s framework.\n",
-		pkgName,
-		fw.Framework,
-	)
-	fmt.Fprintf(&buf, "package %s\n", pkgName)
+	renderTemplate(&buf, "docfile", struct{ Header, BuildTag, PkgName, Framework string }{
+		Header:    strings.TrimRight(generatedHeader, "\n"),
+		BuildTag:  strings.TrimRight(buildTag, "\n"),
+		PkgName:   pkgName,
+		Framework: fw.Framework,
+	})
 	return emit.WriteGoFile(filepath.Join(outDir, "doc.go"), buf.Bytes())
+}
+
+// providerIfaceItem / providersView are the template data for providers.tmpl.
+type providerIfaceItem struct {
+	IfaceName  string
+	GoTypeName string
+	BaseName   string
+	MethName   string
+	RawType    string
+}
+
+type providersView struct {
+	Items []providerIfaceItem
 }
 
 // emitProvidersFile writes <pkgname>_providers_generated.go containing one provider
@@ -2543,40 +2608,35 @@ func emitProvidersFile(
 	sort.Strings(baseNames)
 
 	providerImports := make(typemap.ImportSet)
-	var body bytes.Buffer
+	var view providersView
 	for _, baseName := range baseNames {
 		goTypeName := abstractBases[baseName]
-		ifaceName := providerInterfaceName(goTypeName)
-		methName := providerMethodName(goTypeName)
 		rawType := providerRawType(baseName, fw, m, rawPkgAlias, providerImports)
 		if rawType == "" {
 			continue
 		}
-		fmt.Fprintf(
-			&body,
-			"// %s is implemented by %s and any idiomatic type wrapping a %s subclass.\n",
-			ifaceName,
-			goTypeName,
-			baseName,
-		)
-		fmt.Fprintf(&body, "type %s interface {\n\t%s() %s\n}\n\n", ifaceName, methName, rawType)
+		view.Items = append(view.Items, providerIfaceItem{
+			IfaceName:  providerInterfaceName(goTypeName),
+			GoTypeName: goTypeName,
+			BaseName:   baseName,
+			MethName:   providerMethodName(goTypeName),
+			RawType:    rawType,
+		})
 	}
-	if body.Len() == 0 {
+	if len(view.Items) == 0 {
 		return nil
+	}
+	var body bytes.Buffer
+	if err := executeTemplate(&body, "providers", view); err != nil {
+		return err
 	}
 
 	candidates := map[string]string{rawPkgAlias: rawPkgPath, "objc": objcImportPath}
 	maps.Copy(candidates, providerImports)
 
-	var buf bytes.Buffer
-	fmt.Fprint(&buf, generatedHeader+"\n")
-	fmt.Fprint(&buf, buildTag+"\n")
-	fmt.Fprintf(&buf, "package %s\n\n", pkgName)
-	writeImportBlock(&buf, usedImports(body.Bytes(), candidates))
-	buf.Write(body.Bytes())
-
 	fname := pkgName + "_providers_generated.go"
-	return emit.WriteGoFile(filepath.Join(outDir, fname), buf.Bytes())
+	file := assembleFile(pkgName, usedImports(body.Bytes(), candidates), body.Bytes())
+	return emit.WriteGoFile(filepath.Join(outDir, fname), file)
 }
 
 // ── C function wrappers (CFErrorRef * / NSError ** out-parameters) ────────────
@@ -2587,6 +2647,23 @@ const objcerrorsImportPath = "github.com/deploymenttheory/go-bindings-macosplatf
 func isCFErrorOutParam(objcType string) bool {
 	t := normaliseObjC(objcType)
 	return t == "CFErrorRef *" || t == "CFErrorRef **"
+}
+
+// cfErrFuncEntry / cfErrFunctionsView are the template data for
+// cferr_functions.tmpl. RawCall is the fully-built raw call including the
+// trailing unsafe.Pointer(&_cfErr) out-parameter.
+type cfErrFuncEntry struct {
+	GoFnName   string
+	Sig        string
+	RawCall    string
+	RetIsBool  bool
+	IsPureBool bool // true → use `if !call`; false → `_ok := call; if _ok == 0`
+	RawFnName  string
+}
+
+type cfErrFunctionsView struct {
+	RawAlias string
+	Entries  []cfErrFuncEntry
 }
 
 // emitFunctionWrappers writes <pkgname>_functions_generated.go for any functions
@@ -2685,11 +2762,6 @@ func emitFunctionWrappers(
 		return emittedNames, nil
 	}
 
-	var buf bytes.Buffer
-	fmt.Fprint(&buf, generatedHeader+"\n")
-	fmt.Fprint(&buf, buildTag+"\n")
-	fmt.Fprintf(&buf, "package %s\n\n", pkgName)
-
 	imports := map[string]string{
 		rawPkgAlias:  rawPkgPath,
 		"fmt":        "fmt",
@@ -2699,8 +2771,9 @@ func emitFunctionWrappers(
 	if needsFoundation {
 		imports["foundation"] = foundationImportPath
 	}
-	writeImportBlock(&buf, imports)
 
+	var body bytes.Buffer
+	view := cfErrFunctionsView{RawAlias: rawPkgAlias}
 	for _, e := range entries {
 		var sigParts, callArgs []string
 		for _, p := range e.params {
@@ -2712,68 +2785,20 @@ func emitFunctionWrappers(
 		// The raw layer exports C functions under their Go names
 		// (snake_case → PascalCase; already-exported names unchanged).
 		goFnName := naming.ExportedFunctionName(e.rawFnName)
-		rawCall := fmt.Sprintf("%s.%s(%s)", rawPkgAlias, goFnName, strings.Join(callArgs, ", "))
-		sig := strings.Join(sigParts, ", ")
-
-		fmt.Fprintf(
-			&buf,
-			"// %s calls [%s.%s], converting the CFErrorRef out-parameter to a structured Go error on failure.\n",
-			goFnName,
-			rawPkgAlias,
-			goFnName,
-		)
-
-		if e.retIsBool {
-			fmt.Fprintf(&buf, "func %s(%s) error {\n", goFnName, sig)
-			fmt.Fprintf(&buf, "\tvar _cfErr unsafe.Pointer\n")
-			if e.goRetType == "bool" {
-				// pure Go bool: use !
-				fmt.Fprintf(&buf, "\tif !%s {\n", rawCall)
-			} else {
-				// CF Boolean / BOOL → uint8 or similar: 0 means failure
-				fmt.Fprintf(&buf, "\t_ok := %s\n", rawCall)
-				fmt.Fprintf(&buf, "\tif _ok == 0 {\n")
-			}
-			fmt.Fprintf(&buf, "\t\treturn _cfErrOrMsg(_cfErr, %q)\n", e.rawFnName)
-			fmt.Fprintf(&buf, "\t}\n")
-			fmt.Fprintf(&buf, "\treturn nil\n}\n\n")
-		} else {
-			fmt.Fprintf(&buf, "func %s(%s) (unsafe.Pointer, error) {\n", goFnName, sig)
-			fmt.Fprintf(&buf, "\tvar _cfErr unsafe.Pointer\n")
-			fmt.Fprintf(&buf, "\t_result := %s\n", rawCall)
-			fmt.Fprintf(&buf, "\tif _result == nil {\n")
-			fmt.Fprintf(&buf, "\t\treturn nil, _cfErrOrMsg(_cfErr, %q)\n", e.rawFnName)
-			fmt.Fprintf(&buf, "\t}\n")
-			fmt.Fprintf(&buf, "\treturn _result, nil\n}\n\n")
-		}
+		view.Entries = append(view.Entries, cfErrFuncEntry{
+			GoFnName:   goFnName,
+			Sig:        strings.Join(sigParts, ", "),
+			RawCall:    fmt.Sprintf("%s.%s(%s)", rawPkgAlias, goFnName, strings.Join(callArgs, ", ")),
+			RetIsBool:  e.retIsBool,
+			IsPureBool: e.goRetType == "bool",
+			RawFnName:  e.rawFnName,
+		})
 	}
-
-	// Package-private helper emitted once per package.
-	fmt.Fprint(
-		&buf,
-		"// _cfErrOrMsg converts a CFErrorRef to a structured Go error (domain, code,\n",
-	)
-	fmt.Fprint(
-		&buf,
-		"// description, failure reason). A CFErrorRef is an NSError, so it is read\n",
-	)
-	fmt.Fprint(
-		&buf,
-		"// through the NSError path with no CGo. Falls back to a plain message if no\n",
-	)
-	fmt.Fprint(
-		&buf,
-		"// error was populated.\n",
-	)
-	fmt.Fprint(&buf, "func _cfErrOrMsg(ptr unsafe.Pointer, fn string) error {\n")
-	fmt.Fprint(&buf, "\tif ptr != nil {\n")
-	fmt.Fprint(&buf, "\t\treturn objcerrors.CFErrorToError(ptr)\n")
-	fmt.Fprint(&buf, "\t}\n")
-	fmt.Fprintf(&buf, "\treturn fmt.Errorf(\"[%%s] operation failed\", fn)\n")
-	fmt.Fprint(&buf, "}\n")
+	renderTemplate(&body, "cferr_functions", view)
 
 	fname := pkgName + "_functions_generated.go"
-	if err := emit.WriteGoFile(filepath.Join(outDir, fname), buf.Bytes()); err != nil {
+	file := assembleFile(pkgName, imports, body.Bytes())
+	if err := emit.WriteGoFile(filepath.Join(outDir, fname), file); err != nil {
 		return nil, err
 	}
 	return emittedNames, nil

@@ -1,0 +1,27 @@
+{{/*
+    class_header.tmpl — the wrapper struct + Unwrap, plus optional ID and
+    <Type>FromID. ID exposes the raw objc.ID for C APIs taking an object/CFTypeRef
+    pointer (skipped when a generated method claims the name); FromID adopts an
+    existing pointer, mirroring the raw FromID (releasing finalizer, no retain).
+*/}}
+{{define "class_header"}}// {{.GoTypeName}} wraps [{{.RawAlias}}.{{.ClassName}}] with a fluent Go API.
+type {{.GoTypeName}} struct {
+inner *{{.RawType}}
+}
+
+// Unwrap returns the underlying [{{.RawAlias}}.{{.ClassName}}].
+func (x *{{.GoTypeName}}) Unwrap() *{{.RawType}} { return x.inner }
+
+{{if .EmitID}}// ID returns the underlying Objective-C object pointer (objc.ID), for
+// passing to C APIs that take an object or CFTypeRef pointer.
+func (x *{{.GoTypeName}}) ID() objc.ID { return x.inner.Ptr() }
+
+{{end}}{{if .EmitFromID}}// {{.GoTypeName}}FromID adopts an existing object pointer as a {{.GoTypeName}} (nil for 0).
+func {{.GoTypeName}}FromID(id objc.ID) *{{.GoTypeName}} {
+if id == 0 {
+return nil
+}
+return &{{.GoTypeName}}{inner: {{.RawAlias}}.{{.ClassName}}FromID{{.GenericArgs}}(id)}
+}
+
+{{end}}{{end}}

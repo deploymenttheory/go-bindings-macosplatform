@@ -1,0 +1,8 @@
+{{/*
+    provider_method.tmpl — the as<Base>() accessors a wrapper exposes so it
+    satisfies the provider interface(s) for the abstract base(s) it descends
+    from, each returning the embedded raw base pointer.
+*/}}
+{{define "provider_method"}}{{range .Items}}func (x *{{$.GoTypeName}}) {{.MethodName}}() {{.RawType}} { return {{.BodyExpr}} }
+
+{{end}}{{end}}
