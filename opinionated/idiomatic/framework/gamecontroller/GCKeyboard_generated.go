@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a physical keyboard connected to a device.
+//
 // Keyboard wraps [raw.GCKeyboard] with a fluent Go API.
 type Keyboard struct {
 	inner *raw.GCKeyboard

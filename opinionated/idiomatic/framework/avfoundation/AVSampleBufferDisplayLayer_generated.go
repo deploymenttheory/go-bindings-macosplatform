@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that displays compressed or uncompressed video frames.
+//
 // SampleBufferDisplayLayer wraps [raw.AVSampleBufferDisplayLayer] with a fluent Go API.
 type SampleBufferDisplayLayer struct {
 	inner *raw.AVSampleBufferDisplayLayer
@@ -39,7 +41,7 @@ func NewSampleBufferDisplayLayer() *SampleBufferDisplayLayer {
 	return &SampleBufferDisplayLayer{inner: raw.AVSampleBufferDisplayLayerFromID(_id)}
 }
 
-// @property		videoGravity @abstract		A string defining how the video is displayed within an AVSampleBufferDisplayLayer bounds rect. @discusssion	Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default. See <AVFoundation/AVAnimation.h> for a description of these options.
+// A value that indicates how the layer displays video within its bounds.
 //
 // WithVideoGravity sets the videoGravity property and returns the receiver for chaining.
 func (x *SampleBufferDisplayLayer) WithVideoGravity(videoGravity *foundation.NSString) *SampleBufferDisplayLayer {
@@ -47,7 +49,7 @@ func (x *SampleBufferDisplayLayer) WithVideoGravity(videoGravity *foundation.NSS
 	return x
 }
 
-// @property		preventsCapture @abstract		Indicates that image data should be protected from capture.
+// A Boolean value that indicates whether the layer protects against screen capture.
 //
 // WithPreventsCapture sets the preventsCapture property and returns the receiver for chaining.
 func (x *SampleBufferDisplayLayer) WithPreventsCapture(preventsCapture bool) *SampleBufferDisplayLayer {
@@ -55,7 +57,7 @@ func (x *SampleBufferDisplayLayer) WithPreventsCapture(preventsCapture bool) *Sa
 	return x
 }
 
-// @property   preventsDisplaySleepDuringVideoPlayback @abstract   Indicates whether video playback prevents display and device sleep. @discussion Default is YES on iOS, tvOS and in Mac Catalyst apps.  Default is NO on macOS. Setting this property to NO does not force the display to sleep, it simply stops preventing display sleep.  Other apps or frameworks within your app may still be preventing display sleep for various reasons. Note: If sample buffers are being enqueued for playback at the user's request, you should ensure that the value of this property is set to YES. If video is not being displayed as part of the user's primary focus, you should ensure that the value of this property is set to NO.
+// A Boolean value that indicates whether the layer prevents the system from sleeping during video playback.
 //
 // WithPreventsDisplaySleepDuringVideoPlayback sets the preventsDisplaySleepDuringVideoPlayback property and returns the receiver for chaining.
 func (x *SampleBufferDisplayLayer) WithPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) *SampleBufferDisplayLayer {

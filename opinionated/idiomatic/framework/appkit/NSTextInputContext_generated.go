@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents the Cocoa text input system.
+//
 // TextInputContext wraps [raw.NSTextInputContext] with a fluent Go API.
 type TextInputContext struct {
 	inner *raw.NSTextInputContext
@@ -32,6 +34,8 @@ func TextInputContextFromID(id objc.ID) *TextInputContext {
 	return &TextInputContext{inner: raw.NSTextInputContextFromID(id)}
 }
 
+// The designated initializer
+//
 // NewTextInputContextWithClient creates a new [TextInputContext].
 func NewTextInputContextWithClient(client raw.NSTextInputClient) *TextInputContext {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextInputContext")), objc.RegisterName("alloc"))
@@ -39,12 +43,16 @@ func NewTextInputContextWithClient(client raw.NSTextInputClient) *TextInputConte
 	return &TextInputContext{inner: raw.NSTextInputContextFromID(_id)}
 }
 
+// A Boolean value that indicates whether the client handles NSGlyphInfoAttributeName or not.
+//
 // WithAcceptsGlyphInfo sets the acceptsGlyphInfo property and returns the receiver for chaining.
 func (x *TextInputContext) WithAcceptsGlyphInfo(acceptsGlyphInfo bool) *TextInputContext {
 	x.inner.SetAcceptsGlyphInfo(acceptsGlyphInfo)
 	return x
 }
 
+// The set of keyboard input source locales allowed when this input context is active.
+//
 // WithAllowedInputSourceLocales sets the collection, converting the Go slice to an NSArray.
 func (x *TextInputContext) WithAllowedInputSourceLocales(items ...*foundation.NSString) *TextInputContext {
 	if len(items) == 0 {
@@ -63,32 +71,44 @@ func (x *TextInputContext) WithAllowedInputSourceLocales(items ...*foundation.NS
 	return x
 }
 
+// The identifier string for the selected keyboard text input source.
+//
 // WithSelectedKeyboardInputSource sets the selectedKeyboardInputSource property and returns the receiver for chaining.
 func (x *TextInputContext) WithSelectedKeyboardInputSource(selectedKeyboardInputSource *foundation.NSString) *TextInputContext {
 	x.inner.SetSelectedKeyboardInputSource(selectedKeyboardInputSource)
 	return x
 }
 
+// Activates the receiver.
+//
 // Activate calls the underlying Activate.
 func (x *TextInputContext) Activate() {
 	x.inner.Activate()
 }
 
+// Deactivates the receiver.
+//
 // Deactivate calls the underlying Deactivate.
 func (x *TextInputContext) Deactivate() {
 	x.inner.Deactivate()
 }
 
+// Tells the Cocoa text input system to handle mouse or key events.
+//
 // HandleEvent calls the underlying HandleEvent.
 func (x *TextInputContext) HandleEvent(event *raw.NSEvent) bool {
 	return x.inner.HandleEvent(event)
 }
 
+// Tells the Cocoa text input system to discard the current conversion session.
+//
 // DiscardMarkedText calls the underlying DiscardMarkedText.
 func (x *TextInputContext) DiscardMarkedText() {
 	x.inner.DiscardMarkedText()
 }
 
+// Notifies the Cocoa text input system that the position information previously queried via methods like firstRectForCharacterRange:actualRange: needs to be updated.
+//
 // InvalidateCharacterCoordinates calls the underlying InvalidateCharacterCoordinates.
 func (x *TextInputContext) InvalidateCharacterCoordinates() {
 	x.inner.InvalidateCharacterCoordinates()

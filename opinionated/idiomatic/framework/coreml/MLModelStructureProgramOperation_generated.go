@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class representing an Operation in a Program.
+//
 // ModelStructureProgramOperation wraps [raw.MLModelStructureProgramOperation] with a fluent Go API.
 type ModelStructureProgramOperation struct {
 	inner *raw.MLModelStructureProgramOperation

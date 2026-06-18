@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A key for the metrics dictionary in an update context.
+//
 // MetricKey wraps [raw.MLMetricKey] with a fluent Go API.
 type MetricKey struct {
 	inner *raw.MLMetricKey

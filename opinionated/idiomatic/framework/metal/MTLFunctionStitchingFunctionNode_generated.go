@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A call graph node that describes a function call and its inputs.
+//
 // FunctionStitchingFunctionNode wraps [raw.MTLFunctionStitchingFunctionNode] with a fluent Go API.
 type FunctionStitchingFunctionNode struct {
 	inner *raw.MTLFunctionStitchingFunctionNode
@@ -34,6 +36,8 @@ func FunctionStitchingFunctionNodeFromID(id objc.ID) *FunctionStitchingFunctionN
 	return &FunctionStitchingFunctionNode{inner: raw.MTLFunctionStitchingFunctionNodeFromID(id)}
 }
 
+// Creates a new function node.
+//
 // NewFunctionStitchingFunctionNodeWithNameArgumentsControlDependencies creates a new [FunctionStitchingFunctionNode].
 func NewFunctionStitchingFunctionNodeWithNameArgumentsControlDependencies(name string, arguments *foundation.NSArray[raw.MTLFunctionStitchingNode], controlDependencies *foundation.NSArray[*raw.MTLFunctionStitchingFunctionNode]) *FunctionStitchingFunctionNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLFunctionStitchingFunctionNode")), objc.RegisterName("alloc"))
@@ -41,12 +45,16 @@ func NewFunctionStitchingFunctionNodeWithNameArgumentsControlDependencies(name s
 	return &FunctionStitchingFunctionNode{inner: raw.MTLFunctionStitchingFunctionNodeFromID(_id)}
 }
 
+// The name of the function to call.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *FunctionStitchingFunctionNode) WithName(name string) *FunctionStitchingFunctionNode {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
 
+// The list of nodes that need to execute before executing the node.
+//
 // WithControlDependencies sets the collection, converting the Go slice to an NSArray.
 func (x *FunctionStitchingFunctionNode) WithControlDependencies(items ...*raw.MTLFunctionStitchingFunctionNode) *FunctionStitchingFunctionNode {
 	if len(items) == 0 {

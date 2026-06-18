@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An object that provides convenience access to vertex data for a specific vertex attribute of a mesh.
+//
 // VertexAttributeData wraps [raw.MDLVertexAttributeData] with a fluent Go API.
 type VertexAttributeData struct {
 	inner *raw.MDLVertexAttributeData
@@ -42,12 +44,16 @@ func (x *VertexAttributeData) WithMap(map_ *MeshBufferMap) *VertexAttributeData 
 	return x
 }
 
+// The stride, in bytes, between vertex information for consecutive vertices in the data.
+//
 // WithStride sets the stride property and returns the receiver for chaining.
 func (x *VertexAttributeData) WithStride(stride uint) *VertexAttributeData {
 	x.inner.SetStride(stride)
 	return x
 }
 
+// The format of per-vertex data for the attribute.
+//
 // WithFormat sets the format property and returns the receiver for chaining.
 func (x *VertexAttributeData) WithFormat(format MDLVertexFormat) *VertexAttributeData {
 	x.inner.SetFormat(raw.MDLVertexFormat(format))

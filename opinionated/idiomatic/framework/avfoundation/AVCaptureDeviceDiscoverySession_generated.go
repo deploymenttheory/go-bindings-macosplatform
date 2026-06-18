@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that finds capture devices that match specific search criteria.
+//
 // CaptureDeviceDiscoverySession wraps [raw.AVCaptureDeviceDiscoverySession] with a fluent Go API.
 type CaptureDeviceDiscoverySession struct {
 	inner *raw.AVCaptureDeviceDiscoverySession

@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A mutable collection of font descriptors taken together as a single object.
+//
 // MutableFontCollection wraps [raw.NSMutableFontCollection] with a fluent Go API.
 type MutableFontCollection struct {
 	inner *raw.NSMutableFontCollection
@@ -37,6 +39,8 @@ func NewMutableFontCollection() *MutableFontCollection {
 	return &MutableFontCollection{inner: raw.NSMutableFontCollectionFromID(_id)}
 }
 
+// The font descriptors to include in query results.
+//
 // WithQueryDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *MutableFontCollection) WithQueryDescriptors(items ...*raw.NSFontDescriptor) *MutableFontCollection {
 	if len(items) == 0 {
@@ -55,6 +59,8 @@ func (x *MutableFontCollection) WithQueryDescriptors(items ...*raw.NSFontDescrip
 	return x
 }
 
+// The font descriptors to exclude from query results.
+//
 // WithExclusionDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *MutableFontCollection) WithExclusionDescriptors(items ...*raw.NSFontDescriptor) *MutableFontCollection {
 	if len(items) == 0 {
@@ -73,11 +79,15 @@ func (x *MutableFontCollection) WithExclusionDescriptors(items ...*raw.NSFontDes
 	return x
 }
 
+// Edits the query and exclusion arrays by adding the specified font descriptors.
+//
 // AddQueryForDescriptors calls the underlying AddQueryForDescriptors.
 func (x *MutableFontCollection) AddQueryForDescriptors(descriptors *foundation.NSArray[*raw.NSFontDescriptor]) {
 	x.inner.AddQueryForDescriptors(descriptors)
 }
 
+// Edits the query and exclusion arrays by removing the specified font descriptors.
+//
 // RemoveQueryForDescriptors calls the underlying RemoveQueryForDescriptors.
 func (x *MutableFontCollection) RemoveQueryForDescriptors(descriptors *foundation.NSArray[*raw.NSFontDescriptor]) {
 	x.inner.RemoveQueryForDescriptors(descriptors)

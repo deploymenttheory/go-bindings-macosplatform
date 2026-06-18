@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A group of related tracks in an asset.
+//
 // AssetTrackGroup wraps [raw.AVAssetTrackGroup] with a fluent Go API.
 type AssetTrackGroup struct {
 	inner *raw.AVAssetTrackGroup

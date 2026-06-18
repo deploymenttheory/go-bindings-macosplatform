@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resource that represents an abstract URL.
+//
 // GenericURLResource wraps [raw.FSGenericURLResource] with a fluent Go API.
 type GenericURLResource struct {
 	inner *raw.FSGenericURLResource
@@ -30,7 +32,7 @@ func GenericURLResourceFromID(id objc.ID) *GenericURLResource {
 	return &GenericURLResource{inner: raw.FSGenericURLResourceFromID(id)}
 }
 
-// Creates a generic URL resource with the given URL. - Parameter url: A URL that provides the content of the file system. The format of this URL is completely arbitrary. It's up to your extension to access the contents represented by the URL and make them available as an “FSVolume“ that FSKit can load.
+// Creates a generic URL resource with the given URL.
 //
 // NewGenericURLResourceWithURL creates a new [GenericURLResource].
 func NewGenericURLResourceWithURL(url string) *GenericURLResource {

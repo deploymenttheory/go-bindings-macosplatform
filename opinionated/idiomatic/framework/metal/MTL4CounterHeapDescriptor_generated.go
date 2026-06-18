@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Groups together parameters for configuring a counter heap object at creation time.
+//
 // MTL4CounterHeapDescriptor wraps [raw.MTL4CounterHeapDescriptor] with a fluent Go API.
 type MTL4CounterHeapDescriptor struct {
 	inner *raw.MTL4CounterHeapDescriptor
@@ -43,7 +45,7 @@ func (x *MTL4CounterHeapDescriptor) WithType(type_ MTL4CounterHeapType) *MTL4Cou
 	return x
 }
 
-// Assigns the number of entries in the heap. Each entry represents one item in the heap. The size of the individual entries depends on the heap type.
+// Assigns the number of entries in the heap.
 //
 // WithCount sets the count property and returns the receiver for chaining.
 func (x *MTL4CounterHeapDescriptor) WithCount(count uint) *MTL4CounterHeapDescriptor {

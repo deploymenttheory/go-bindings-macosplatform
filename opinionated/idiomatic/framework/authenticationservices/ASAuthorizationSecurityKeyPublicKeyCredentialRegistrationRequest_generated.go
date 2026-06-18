@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The object for registering a new security key credential.
+//
 // AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest wraps [raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest] with a fluent Go API.
 type AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest struct {
 	inner *raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest
@@ -42,7 +44,7 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest() *Author
 	return &AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest{inner: raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestFromID(_id)}
 }
 
-// @abstract A list of parameters for the new credential which are supported by the Relying Party. The authenticator should choose from these parameters when creating the credential.
+// An array of parameters for the credential.
 //
 // WithCredentialParameters sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) WithCredentialParameters(items ...*raw.ASAuthorizationPublicKeyCredentialParameters) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
@@ -62,7 +64,7 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) WithCre
 	return x
 }
 
-// @abstract A list of descriptors indicating credentials which must not already exist on the authenticator. If a credential already exists on the authenticator which matches one or more of these descriptors, a new credential will not be created and authentication will fail.
+// An array of excluded parameters for the credential.
 //
 // WithExcludedCredentials sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) WithExcludedCredentials(items ...*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
@@ -82,7 +84,7 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) WithExc
 	return x
 }
 
-// @abstract A preference whether the authenticator should store the private key of the newly created credential.
+// The preference that indicates where the resident key resides.
 //
 // WithResidentKeyPreference sets the residentKeyPreference property and returns the receiver for chaining.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) WithResidentKeyPreference(residentKeyPreference *foundation.NSString) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {

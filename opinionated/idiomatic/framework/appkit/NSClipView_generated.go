@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An object that clips a document view to a scroll view’s frame.
+//
 // ClipView wraps [raw.NSClipView] with a fluent Go API.
 type ClipView struct {
 	inner *raw.NSClipView
@@ -40,42 +42,56 @@ func NewClipView() *ClipView {
 	return &ClipView{inner: raw.NSClipViewFromID(_id)}
 }
 
+// The color of the clip view’s background.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *ClipView) WithBackgroundColor(backgroundColor *Color) *ClipView {
 	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates if the clip view draws its background color.
+//
 // WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
 func (x *ClipView) WithDrawsBackground(drawsBackground bool) *ClipView {
 	x.inner.SetDrawsBackground(drawsBackground)
 	return x
 }
 
+// The clip view’s document view.
+//
 // WithDocumentView sets the documentView property and returns the receiver for chaining.
 func (x *ClipView) WithDocumentView(documentView ViewProvider) *ClipView {
 	x.inner.SetDocumentView(documentView.asView())
 	return x
 }
 
+// The cursor object used when the pointer lies over the view.
+//
 // WithDocumentCursor sets the documentCursor property and returns the receiver for chaining.
 func (x *ClipView) WithDocumentCursor(documentCursor *Cursor) *ClipView {
 	x.inner.SetDocumentCursor(documentCursor.Unwrap())
 	return x
 }
 
+// The distance that the content view is inset from the enclosing scroll view.
+//
 // WithContentInsets sets the contentInsets property and returns the receiver for chaining.
 func (x *ClipView) WithContentInsets(contentInsets foundation.NSEdgeInsets) *ClipView {
 	x.inner.SetContentInsets(contentInsets)
 	return x
 }
 
+// A Boolean value that indicates if the clip view automatically accounts for other scroll view subviews.
+//
 // WithAutomaticallyAdjustsContentInsets sets the automaticallyAdjustsContentInsets property and returns the receiver for chaining.
 func (x *ClipView) WithAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool) *ClipView {
 	x.inner.SetAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets)
 	return x
 }
 
+// A Boolean value that indicates if the clip view copies rendered images while scrolling.
+//
 // WithCopiesOnScroll sets the copiesOnScroll property and returns the receiver for chaining.
 func (x *ClipView) WithCopiesOnScroll(copiesOnScroll bool) *ClipView {
 	x.inner.SetCopiesOnScroll(copiesOnScroll)
@@ -124,6 +140,8 @@ func (x *ClipView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptio
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *ClipView) WithFrame(frame corefoundation.CGRect) *ClipView {
 	x.inner.NSView.SetFrame(frame)
@@ -148,6 +166,8 @@ func (x *ClipView) WithBoundsRotation(boundsRotation float64) *ClipView {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *ClipView) WithBounds(bounds corefoundation.CGRect) *ClipView {
 	x.inner.NSView.SetBounds(bounds)
@@ -160,6 +180,8 @@ func (x *ClipView) WithCanDrawConcurrently(canDrawConcurrently bool) *ClipView {
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *ClipView) WithNeedsDisplay(needsDisplay bool) *ClipView {
 	x.inner.NSView.SetNeedsDisplay(needsDisplay)
@@ -346,7 +368,7 @@ func (x *ClipView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundat
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *ClipView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ClipView {
@@ -402,45 +424,61 @@ func (x *ClipView) WithPressureConfiguration(pressureConfiguration *PressureConf
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *ClipView) WithNextResponder(nextResponder ResponderProvider) *ClipView {
 	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *ClipView) WithMenu(menu *Menu) *ClipView {
 	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *ClipView) WithUserActivity(userActivity *foundation.NSUserActivity) *ClipView {
 	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *ClipView) WithTouchBar(touchBar *TouchBar) *ClipView {
 	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Handles an NSViewFrameDidChangeNotification, passed in the aNotification argument, by updating a containing NSScrollView based on the new frame.
+//
 // ViewFrameChanged calls the underlying ViewFrameChanged.
 func (x *ClipView) ViewFrameChanged(notification *foundation.NSNotification) {
 	x.inner.ViewFrameChanged(notification)
 }
 
+// Handles an NSViewBoundsDidChangeNotification, passed in the aNotification argument, by updating a containing NSScrollView based on the new bounds.
+//
 // ViewBoundsChanged calls the underlying ViewBoundsChanged.
 func (x *ClipView) ViewBoundsChanged(notification *foundation.NSNotification) {
 	x.inner.ViewBoundsChanged(notification)
 }
 
+// Changes the origin of the clip view’s bounds rectangle to newOrigin.
+//
 // ScrollToPoint calls the underlying ScrollToPoint.
 func (x *ClipView) ScrollToPoint(newOrigin corefoundation.CGPoint) {
 	x.inner.ScrollToPoint(newOrigin)
 }
 
+// Constrains the bounds of the clip view while the user is magnifying and scrolling.
+//
 // ConstrainBoundsRect calls the underlying ConstrainBoundsRect.
 func (x *ClipView) ConstrainBoundsRect(proposedBounds corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.ConstrainBoundsRect(proposedBounds)
@@ -528,6 +566,8 @@ func (x *ClipView) SetAutomaticallyAdjustsContentInsets(automaticallyAdjustsCont
 	x.inner.SetAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets)
 }
 
+// Returns a scroll point adjusted from the proposed new origin, if necessary, to guarantee the view will lie within its document view.
+//
 // ConstrainScrollPoint calls the underlying ConstrainScrollPoint.
 func (x *ClipView) ConstrainScrollPoint(newOrigin corefoundation.CGPoint) corefoundation.CGPoint {
 	return x.inner.ConstrainScrollPoint(newOrigin)

@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A controller that manages a view, typically loaded from a nib file.
+//
 // ViewController wraps [raw.NSViewController] with a fluent Go API.
 type ViewController struct {
 	inner *raw.NSViewController
@@ -34,6 +36,8 @@ func ViewControllerFromID(id objc.ID) *ViewController {
 	return &ViewController{inner: raw.NSViewControllerFromID(id)}
 }
 
+// Returns a view controller object initialized to the nib file in the specified bundle.
+//
 // NewViewControllerWithNibNameBundle creates a new [ViewController].
 func NewViewControllerWithNibNameBundle(nibNameOrNil *foundation.NSString, nibBundleOrNil *foundation.NSBundle) *ViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSViewController")), objc.RegisterName("alloc"))
@@ -48,30 +52,40 @@ func NewViewControllerWithCoder(coder *foundation.NSCoder) *ViewController {
 	return &ViewController{inner: raw.NSViewControllerFromID(_id)}
 }
 
+// The object whose value is presented in the receiver’s primary view.
+//
 // WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
 func (x *ViewController) WithRepresentedObject(representedObject objc.ID) *ViewController {
 	x.inner.SetRepresentedObject(representedObject)
 	return x
 }
 
+// The localized title of the receiver’s primary view.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *ViewController) WithTitle(title string) *ViewController {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The view controller’s primary view.
+//
 // WithView sets the view property and returns the receiver for chaining.
 func (x *ViewController) WithView(view ViewProvider) *ViewController {
 	x.inner.SetView(view.asView())
 	return x
 }
 
+// The desired size of the view controller’s view, in screen units.
+//
 // WithPreferredContentSize sets the preferredContentSize property and returns the receiver for chaining.
 func (x *ViewController) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *ViewController {
 	x.inner.SetPreferredContentSize(preferredContentSize)
 	return x
 }
 
+// An array of view controllers that are hierarchical children of the view controller.
+//
 // WithChildViewControllers sets the collection, converting the Go slice to an NSArray.
 func (x *ViewController) WithChildViewControllers(items ...ViewControllerProvider) *ViewController {
 	if len(items) == 0 {
@@ -96,36 +110,48 @@ func (x *ViewController) WithSourceItemView(sourceItemView ViewProvider) *ViewCo
 	return x
 }
 
+// For a view controller that is part of an app extension, the preferred screen origin.
+//
 // WithPreferredScreenOrigin sets the preferredScreenOrigin property and returns the receiver for chaining.
 func (x *ViewController) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *ViewController {
 	x.inner.SetPreferredScreenOrigin(preferredScreenOrigin)
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *ViewController) WithNextResponder(nextResponder ResponderProvider) *ViewController {
 	x.inner.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *ViewController) WithMenu(menu *Menu) *ViewController {
 	x.inner.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *ViewController) WithUserActivity(userActivity *foundation.NSUserActivity) *ViewController {
 	x.inner.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *ViewController) WithTouchBar(touchBar *TouchBar) *ViewController {
 	x.inner.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Instantiates a view from a nib file and sets the value of the view property.
+//
 // LoadView calls the underlying LoadView.
 func (x *ViewController) LoadView() {
 	x.inner.LoadView()
@@ -136,56 +162,78 @@ func (x *ViewController) LoadViewIfNeeded() {
 	x.inner.LoadViewIfNeeded()
 }
 
+// Attempt to commit any currently edited results of the receiver.
+//
 // CommitEditingWithDelegateDidCommitSelectorContextInfo calls the underlying CommitEditingWithDelegateDidCommitSelectorContextInfo.
 func (x *ViewController) CommitEditingWithDelegateDidCommitSelectorContextInfo(delegate objc.ID, didCommitSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.CommitEditingWithDelegateDidCommitSelectorContextInfo(delegate, didCommitSelector, contextInfo)
 }
 
+// Returns whether the receiver was able to commit any pending edits.
+//
 // CommitEditing calls the underlying CommitEditing.
 func (x *ViewController) CommitEditing() bool {
 	return x.inner.CommitEditing()
 }
 
+// Causes the receiver to discard any changes, restoring the previous values.
+//
 // DiscardEditing calls the underlying DiscardEditing.
 func (x *ViewController) DiscardEditing() {
 	x.inner.DiscardEditing()
 }
 
+// Called after the view controller’s view has been loaded into memory.
+//
 // ViewDidLoad calls the underlying ViewDidLoad.
 func (x *ViewController) ViewDidLoad() {
 	x.inner.ViewDidLoad()
 }
 
+// Called after the view controller’s view has been loaded into memory is about to be added to the view hierarchy in the window.
+//
 // ViewWillAppear calls the underlying ViewWillAppear.
 func (x *ViewController) ViewWillAppear() {
 	x.inner.ViewWillAppear()
 }
 
+// Called when the view controller’s view is fully transitioned onto the screen.
+//
 // ViewDidAppear calls the underlying ViewDidAppear.
 func (x *ViewController) ViewDidAppear() {
 	x.inner.ViewDidAppear()
 }
 
+// Called when the view controller’s view is about to be removed from the view hierarchy in the window.
+//
 // ViewWillDisappear calls the underlying ViewWillDisappear.
 func (x *ViewController) ViewWillDisappear() {
 	x.inner.ViewWillDisappear()
 }
 
+// Called after the view controller’s view is removed from the view hierarchy in a window.
+//
 // ViewDidDisappear calls the underlying ViewDidDisappear.
 func (x *ViewController) ViewDidDisappear() {
 	x.inner.ViewDidDisappear()
 }
 
+// Called during Auto Layout constraint updating to enable the view controller to mediate the process.
+//
 // UpdateViewConstraints calls the underlying UpdateViewConstraints.
 func (x *ViewController) UpdateViewConstraints() {
 	x.inner.UpdateViewConstraints()
 }
 
+// Called just before the layout method of the view controller’s view is called.
+//
 // ViewWillLayout calls the underlying ViewWillLayout.
 func (x *ViewController) ViewWillLayout() {
 	x.inner.ViewWillLayout()
 }
 
+// Called immediately after the layout method of the view controller’s view is called.
+//
 // ViewDidLayout calls the underlying ViewDidLayout.
 func (x *ViewController) ViewDidLayout() {
 	x.inner.ViewDidLayout()
@@ -267,11 +315,15 @@ func (x *ViewController) SetPreferredContentSize(preferredContentSize corefounda
 	x.inner.SetPreferredContentSize(preferredContentSize)
 }
 
+// Presents another view controller using a specified, custom animator for presentation and dismissal.
+//
 // PresentViewControllerAnimator calls the underlying PresentViewControllerAnimator.
 func (x *ViewController) PresentViewControllerAnimator(viewController *raw.NSViewController, animator raw.NSViewControllerPresentationAnimator) {
 	x.inner.PresentViewControllerAnimator(viewController, animator)
 }
 
+// Dismisses a presented view controller, using the same animator that presented it.
+//
 // DismissViewController calls the underlying DismissViewController.
 func (x *ViewController) DismissViewController(viewController *raw.NSViewController) {
 	x.inner.DismissViewController(viewController)
@@ -302,16 +354,22 @@ func (x *ViewController) PresentingViewController() *ViewController {
 	return &ViewController{inner: _r}
 }
 
+// Presents another view controller as a sheet.
+//
 // PresentViewControllerAsSheet calls the underlying PresentViewControllerAsSheet.
 func (x *ViewController) PresentViewControllerAsSheet(viewController *raw.NSViewController) {
 	x.inner.PresentViewControllerAsSheet(viewController)
 }
 
+// Presents another view controller as a modal window, also known as an alert.
+//
 // PresentViewControllerAsModalWindow calls the underlying PresentViewControllerAsModalWindow.
 func (x *ViewController) PresentViewControllerAsModalWindow(viewController *raw.NSViewController) {
 	x.inner.PresentViewControllerAsModalWindow(viewController)
 }
 
+// Presents another view controller as a popover.
+//
 // PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior calls the underlying PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior.
 func (x *ViewController) PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior(viewController *raw.NSViewController, positioningRect corefoundation.CGRect, positioningView *raw.NSView, preferredEdge foundation.NSRectEdge, behavior NSPopoverBehavior) {
 	x.inner.PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehavior(viewController, positioningRect, positioningView, preferredEdge, raw.NSPopoverBehavior(behavior))
@@ -322,6 +380,8 @@ func (x *ViewController) PresentViewControllerAsPopoverRelativeToRectOfViewPrefe
 	x.inner.PresentViewControllerAsPopoverRelativeToRectOfViewPreferredEdgeBehaviorHasFullSizeContent(viewController, positioningRect, positioningView, preferredEdge, raw.NSPopoverBehavior(behavior), hasFullSizeContent)
 }
 
+// Performs a transition between two sibling child view controllers of the view controller.
+//
 // TransitionFromViewControllerToViewControllerOptions blocks until the operation completes or ctx is cancelled.
 func (x *ViewController) TransitionFromViewControllerToViewControllerOptions(ctx context.Context, fromViewController *raw.NSViewController, toViewController *raw.NSViewController, options NSViewControllerTransitionOptions) error {
 	_ch := make(chan error, 1)
@@ -336,31 +396,43 @@ func (x *ViewController) TransitionFromViewControllerToViewControllerOptions(ctx
 	}
 }
 
+// A convenience method for adding a child view controller at the end of the childViewControllers array.
+//
 // AddChildViewController calls the underlying AddChildViewController.
 func (x *ViewController) AddChildViewController(childViewController *raw.NSViewController) {
 	x.inner.AddChildViewController(childViewController)
 }
 
+// Removes the called view controller from its parent view controller.
+//
 // RemoveFromParentViewController calls the underlying RemoveFromParentViewController.
 func (x *ViewController) RemoveFromParentViewController() {
 	x.inner.RemoveFromParentViewController()
 }
 
+// Inserts a specified child view controller into the childViewControllers array at a specified position.
+//
 // InsertChildViewControllerAtIndex calls the underlying InsertChildViewControllerAtIndex.
 func (x *ViewController) InsertChildViewControllerAtIndex(childViewController *raw.NSViewController, index int) {
 	x.inner.InsertChildViewControllerAtIndex(childViewController, index)
 }
 
+// Removes a specified child controller from the view controller.
+//
 // RemoveChildViewControllerAtIndex calls the underlying RemoveChildViewControllerAtIndex.
 func (x *ViewController) RemoveChildViewControllerAtIndex(index int) {
 	x.inner.RemoveChildViewControllerAtIndex(index)
 }
 
+// Called when there is a change in value of the preferredContentSize property of a child view controller or a presented view controller.
+//
 // PreferredContentSizeDidChangeForViewController calls the underlying PreferredContentSizeDidChangeForViewController.
 func (x *ViewController) PreferredContentSizeDidChangeForViewController(viewController *raw.NSViewController) {
 	x.inner.PreferredContentSizeDidChangeForViewController(viewController)
 }
 
+// For a view controller that is part of an app extension, called when its view is about to be resized.
+//
 // ViewWillTransitionToSize calls the underlying ViewWillTransitionToSize.
 func (x *ViewController) ViewWillTransitionToSize(newSize corefoundation.CGSize) {
 	x.inner.ViewWillTransitionToSize(newSize)

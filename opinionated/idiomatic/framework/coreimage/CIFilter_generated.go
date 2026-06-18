@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An image processor that produces an image by manipulating one or more input images or by generating new image data.
+//
 // Filter wraps [raw.CIFilter] with a fluent Go API.
 type Filter struct {
 	inner *raw.CIFilter

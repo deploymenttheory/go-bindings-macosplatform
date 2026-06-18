@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The color of a device light.
+//
 // Color wraps [raw.GCColor] with a fluent Go API.
 type Color struct {
 	inner *raw.GCColor
@@ -29,6 +31,8 @@ func ColorFromID(id objc.ID) *Color {
 	return &Color{inner: raw.GCColorFromID(id)}
 }
 
+// Creates a color with the specified red, green, and blue values.
+//
 // NewColorWithRedGreenBlue creates a new [Color].
 func NewColorWithRedGreenBlue(red float32, green float32, blue float32) *Color {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GCColor")), objc.RegisterName("alloc"))

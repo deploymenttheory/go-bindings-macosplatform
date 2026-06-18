@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An element that represents either a pattern or a sequential gear shift.
+//
 // GearShifterElement wraps [raw.GCGearShifterElement] with a fluent Go API.
 type GearShifterElement struct {
 	inner *raw.GCGearShifterElement

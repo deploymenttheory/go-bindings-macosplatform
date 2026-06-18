@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that responds to requests to change the current repeat mode used during playback.
+//
 // ChangeRepeatModeCommand wraps [raw.MPChangeRepeatModeCommand] with a fluent Go API.
 type ChangeRepeatModeCommand struct {
 	inner *raw.MPChangeRepeatModeCommand
@@ -35,7 +37,7 @@ func NewChangeRepeatModeCommand() *ChangeRepeatModeCommand {
 	return &ChangeRepeatModeCommand{inner: raw.MPChangeRepeatModeCommandFromID(_id)}
 }
 
-// The app's current repeat mode.
+// The current repeat option for a media item.
 //
 // WithCurrentRepeatType sets the currentRepeatType property and returns the receiver for chaining.
 func (x *ChangeRepeatModeCommand) WithCurrentRepeatType(currentRepeatType MPRepeatType) *ChangeRepeatModeCommand {
@@ -43,7 +45,7 @@ func (x *ChangeRepeatModeCommand) WithCurrentRepeatType(currentRepeatType MPRepe
 	return x
 }
 
-// Whether a button (for example) should be enabled and tappable for this particular command.
+// A Boolean value that indicates whether a user can interact with the displayed element.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *ChangeRepeatModeCommand) WithEnabled(enabled bool) *ChangeRepeatModeCommand {

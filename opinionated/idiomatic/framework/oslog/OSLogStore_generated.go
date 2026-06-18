@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A set of entries from the unified logging system.
+//
 // LogStore wraps [raw.OSLogStore] with a fluent Go API.
 type LogStore struct {
 	inner *raw.OSLogStore
@@ -36,7 +38,7 @@ func NewLogStore() *LogStore {
 	return &LogStore{inner: raw.OSLogStoreFromID(_id)}
 }
 
-// @method entriesEnumeratorWithOptions @abstract Return an OSLogEnumerator object based on an underlying store. This object represents the sequence of entries for the store. OSLogStore. Additional parameters control which entries are yielded and their order. @param options Control the direction of iteration. @param position Where to start iteration. If nil, depend on the direction of the iteration: if forwards, start with the earliest entry; if reverse, start with the latest entry. @param predicate A predicate that filters which entries are in the sequence. If this is nil, yield all entries. @param error If the enumerator cannot be set up --- for example, the predicate has an unrecognized key --- return nil and set this to a pointer to an error object that describes the reason.
+// Returns a log enumerator based on an underlying store.
 //
 // EntriesEnumeratorWithOptionsPositionPredicateError calls the underlying EntriesEnumeratorWithOptionsPositionPredicateError.
 func (x *LogStore) EntriesEnumeratorWithOptionsPositionPredicateError(options OSLogEnumeratorOptions, position *raw.OSLogPosition, predicate *foundation.NSPredicate) (*LogEnumerator, error) {
@@ -50,7 +52,7 @@ func (x *LogStore) EntriesEnumeratorWithOptionsPositionPredicateError(options OS
 	return &LogEnumerator{inner: _r}, nil
 }
 
-// @method entriesEnumeratorAndReturnError @abstract Return an OSLogEnumerator object with default options for viewing the entries; all are viewed, from earliest to latest. @param error If the enumerator cannot be set up, return nil and set this to a pointer to an error object that describes the reason.
+// Returns a log enumerator with default options for viewing the entries.
 //
 // EntriesEnumeratorAndReturnError calls the underlying EntriesEnumeratorAndReturnError.
 func (x *LogStore) EntriesEnumeratorAndReturnError() (*LogEnumerator, error) {
@@ -64,7 +66,7 @@ func (x *LogStore) EntriesEnumeratorAndReturnError() (*LogEnumerator, error) {
 	return &LogEnumerator{inner: _r}, nil
 }
 
-// @method positionWithDate @abstract Return a position representing the time specified. @param date The date to look for. @discussion If there are multiple occurences of the same time --- if, for example, there was a time change during the range of entries --- the earliest occurrence is used.
+// Returns a position representing the time specified.
 //
 // PositionWithDate calls the underlying PositionWithDate.
 func (x *LogStore) PositionWithDate(date *foundation.NSDate) *LogPosition {
@@ -75,7 +77,7 @@ func (x *LogStore) PositionWithDate(date *foundation.NSDate) *LogPosition {
 	return &LogPosition{inner: _r}
 }
 
-// @method positionWithTimeIntervalSinceEnd @abstract Return a position representing an offset since the end of the time range that the entries span. @param seconds The seconds to add to the last time point in the range of entries.
+// Returns a position representing time since the end of the time range that the entries span.
 //
 // PositionWithTimeIntervalSinceEnd calls the underlying PositionWithTimeIntervalSinceEnd.
 func (x *LogStore) PositionWithTimeIntervalSinceEnd(seconds float64) *LogPosition {
@@ -86,7 +88,7 @@ func (x *LogStore) PositionWithTimeIntervalSinceEnd(seconds float64) *LogPositio
 	return &LogPosition{inner: _r}
 }
 
-// @method positionWithTimeIntervalSinceLatestBoot @abstract Return a position representing time since the last boot in the series of entries. @param seconds The seconds to add to the boot time point in the log time range. @discussion Negative seconds would create an ambiguous or imprecise position; this function asserts that the interval is positive.
+// Returns a position representing time since the last boot in the series of entries.
 //
 // PositionWithTimeIntervalSinceLatestBoot calls the underlying PositionWithTimeIntervalSinceLatestBoot.
 func (x *LogStore) PositionWithTimeIntervalSinceLatestBoot(seconds float64) *LogPosition {

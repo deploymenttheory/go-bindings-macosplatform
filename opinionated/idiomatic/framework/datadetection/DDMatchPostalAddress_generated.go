@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains a postal address that the data detection system matches. The DataDetection framework returns a postal address match in a `DDMatchPostalAddress` object, which optionally contains the matching parts of a postal address: street, city, state, postal code, and country.
+// An object that contains a postal address that the data detection system matches.
 //
 // MatchPostalAddress wraps [raw.DDMatchPostalAddress] with a fluent Go API.
 type MatchPostalAddress struct {

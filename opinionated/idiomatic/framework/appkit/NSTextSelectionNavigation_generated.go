@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An interface you use to expose methods for obtaining results from actions performed on text selections.
+//
 // TextSelectionNavigation wraps [raw.NSTextSelectionNavigation] with a fluent Go API.
 type TextSelectionNavigation struct {
 	inner *raw.NSTextSelectionNavigation
@@ -31,6 +33,8 @@ func TextSelectionNavigationFromID(id objc.ID) *TextSelectionNavigation {
 	return &TextSelectionNavigation{inner: raw.NSTextSelectionNavigationFromID(id)}
 }
 
+// Creates a new object using the text selection data source you provide.
+//
 // NewTextSelectionNavigationWithDataSource creates a new [TextSelectionNavigation].
 func NewTextSelectionNavigationWithDataSource(dataSource raw.NSTextSelectionDataSource) *TextSelectionNavigation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextSelectionNavigation")), objc.RegisterName("alloc"))
@@ -38,23 +42,31 @@ func NewTextSelectionNavigationWithDataSource(dataSource raw.NSTextSelectionData
 	return &TextSelectionNavigation{inner: raw.NSTextSelectionNavigationFromID(_id)}
 }
 
+// Determines if the instance could produce selections with multiple noncontiguous selections.
+//
 // WithAllowsNonContiguousRanges sets the allowsNonContiguousRanges property and returns the receiver for chaining.
 func (x *TextSelectionNavigation) WithAllowsNonContiguousRanges(allowsNonContiguousRanges bool) *TextSelectionNavigation {
 	x.inner.SetAllowsNonContiguousRanges(allowsNonContiguousRanges)
 	return x
 }
 
+// Determines if the framework rotates the coordinate system to match the layout orientation.
+//
 // WithRotatesCoordinateSystemForLayoutOrientation sets the rotatesCoordinateSystemForLayoutOrientation property and returns the receiver for chaining.
 func (x *TextSelectionNavigation) WithRotatesCoordinateSystemForLayoutOrientation(rotatesCoordinateSystemForLayoutOrientation bool) *TextSelectionNavigation {
 	x.inner.SetRotatesCoordinateSystemForLayoutOrientation(rotatesCoordinateSystemForLayoutOrientation)
 	return x
 }
 
+// Flushes cached layout information.
+//
 // FlushLayoutCache calls the underlying FlushLayoutCache.
 func (x *TextSelectionNavigation) FlushLayoutCache() {
 	x.inner.FlushLayoutCache()
 }
 
+// Returns a new selection that results from applying the navigation operations you specify to the text selection you provide.
+//
 // DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined calls the underlying DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined.
 func (x *TextSelectionNavigation) DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined(textSelection *raw.NSTextSelection, direction NSTextSelectionNavigationDirection, destination NSTextSelectionNavigationDestination, extending bool, confined bool) *TextSelection {
 	_r := x.inner.DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined(textSelection, raw.NSTextSelectionNavigationDirection(direction), raw.NSTextSelectionNavigationDestination(destination), extending, confined)
@@ -64,11 +76,15 @@ func (x *TextSelectionNavigation) DestinationSelectionForTextSelectionDirectionD
 	return &TextSelection{inner: _r}
 }
 
+// Returns an array of text selections produced by a tap or click at the point you specify.
+//
 // TextSelectionsInteractingAtPointInContainerAtLocationAnchorsModifiersSelectingBounds calls the underlying TextSelectionsInteractingAtPointInContainerAtLocationAnchorsModifiersSelectingBounds.
 func (x *TextSelectionNavigation) TextSelectionsInteractingAtPointInContainerAtLocationAnchorsModifiersSelectingBounds(point corefoundation.CGPoint, containerLocation raw.NSTextLocation, anchors *foundation.NSArray[*raw.NSTextSelection], modifiers NSTextSelectionNavigationModifier, selecting bool, bounds corefoundation.CGRect) *foundation.NSArray[*raw.NSTextSelection] {
 	return x.inner.TextSelectionsInteractingAtPointInContainerAtLocationAnchorsModifiersSelectingBounds(point, containerLocation, anchors, raw.NSTextSelectionNavigationModifier(modifiers), selecting, bounds)
 }
 
+// Returns a text selection expanded to the nearest boundaries for the selection granularity and enclosing text selection text ranges you specify.
+//
 // TextSelectionForSelectionGranularityEnclosingTextSelection calls the underlying TextSelectionForSelectionGranularityEnclosingTextSelection.
 func (x *TextSelectionNavigation) TextSelectionForSelectionGranularityEnclosingTextSelection(selectionGranularity NSTextSelectionGranularity, textSelection *raw.NSTextSelection) *TextSelection {
 	_r := x.inner.TextSelectionForSelectionGranularityEnclosingTextSelection(raw.NSTextSelectionGranularity(selectionGranularity), textSelection)
@@ -78,6 +94,8 @@ func (x *TextSelectionNavigation) TextSelectionForSelectionGranularityEnclosingT
 	return &TextSelection{inner: _r}
 }
 
+// Returns a text selection that expands to the nearest boundaries for selection granularity and an enclosing point you specify.
+//
 // TextSelectionForSelectionGranularityEnclosingPointInContainerAtLocation calls the underlying TextSelectionForSelectionGranularityEnclosingPointInContainerAtLocation.
 func (x *TextSelectionNavigation) TextSelectionForSelectionGranularityEnclosingPointInContainerAtLocation(selectionGranularity NSTextSelectionGranularity, point corefoundation.CGPoint, location raw.NSTextLocation) *TextSelection {
 	_r := x.inner.TextSelectionForSelectionGranularityEnclosingPointInContainerAtLocation(raw.NSTextSelectionGranularity(selectionGranularity), point, location)
@@ -87,11 +105,15 @@ func (x *TextSelectionNavigation) TextSelectionForSelectionGranularityEnclosingP
 	return &TextSelection{inner: _r}
 }
 
+// Returns the location for inserting the next input depending on the state of the current and secondary selections.
+//
 // ResolvedInsertionLocationForTextSelectionWritingDirection calls the underlying ResolvedInsertionLocationForTextSelectionWritingDirection.
 func (x *TextSelectionNavigation) ResolvedInsertionLocationForTextSelectionWritingDirection(textSelection *raw.NSTextSelection, writingDirection NSTextSelectionNavigationWritingDirection) raw.NSTextLocation {
 	return x.inner.ResolvedInsertionLocationForTextSelectionWritingDirection(textSelection, raw.NSTextSelectionNavigationWritingDirection(writingDirection))
 }
 
+// Returns the ranges for deleting the text based on the current selection and movement arguments.
+//
 // DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition calls the underlying DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition.
 func (x *TextSelectionNavigation) DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition(textSelection *raw.NSTextSelection, direction NSTextSelectionNavigationDirection, destination NSTextSelectionNavigationDestination, allowsDecomposition bool) *foundation.NSArray[*raw.NSTextRange] {
 	return x.inner.DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition(textSelection, raw.NSTextSelectionNavigationDirection(direction), raw.NSTextSelectionNavigationDestination(destination), allowsDecomposition)

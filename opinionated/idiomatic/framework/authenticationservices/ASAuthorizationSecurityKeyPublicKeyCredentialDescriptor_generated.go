@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that holds public key credential transport information.
+//
 // AuthorizationSecurityKeyPublicKeyCredentialDescriptor wraps [raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor] with a fluent Go API.
 type AuthorizationSecurityKeyPublicKeyCredentialDescriptor struct {
 	inner *raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor
@@ -34,6 +36,8 @@ func AuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(id objc.ID) *Au
 	return &AuthorizationSecurityKeyPublicKeyCredentialDescriptor{inner: raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(id)}
 }
 
+// Creates the object with the credential ID and the array of transports.
+//
 // NewAuthorizationSecurityKeyPublicKeyCredentialDescriptorWithCredentialIDTransports creates a new [AuthorizationSecurityKeyPublicKeyCredentialDescriptor].
 func NewAuthorizationSecurityKeyPublicKeyCredentialDescriptorWithCredentialIDTransports(credentialID *foundation.NSData, allowedTransports *foundation.NSArray[*foundation.NSString]) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor")), objc.RegisterName("alloc"))
@@ -41,7 +45,7 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialDescriptorWithCredentialIDTra
 	return &AuthorizationSecurityKeyPublicKeyCredentialDescriptor{inner: raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(_id)}
 }
 
-// @abstract An array indicating transports for the credential indicated by credentialID.
+// The array of transport types.
 //
 // WithTransports sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) WithTransports(items ...*foundation.NSString) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {

@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A curved portion of an envelope.
+//
 // EnvelopeSegment wraps [raw.PHASEEnvelopeSegment] with a fluent Go API.
 type EnvelopeSegment struct {
 	inner *raw.PHASEEnvelopeSegment
@@ -30,7 +32,7 @@ func EnvelopeSegmentFromID(id objc.ID) *EnvelopeSegment {
 	return &EnvelopeSegment{inner: raw.PHASEEnvelopeSegmentFromID(id)}
 }
 
-// @method initWithEndPoint:curveType @abstract Initialize an envelope segment with an endPoint and a curveType. @param endPoint The end point of the segment. @param curveType The curve type. @return A new envelope.
+// Creates a curved portion of an envelope.
 //
 // NewEnvelopeSegmentWithEndPointCurveType creates a new [EnvelopeSegment].
 func NewEnvelopeSegmentWithEndPointCurveType(endPoint unsafe.Pointer, curveType PHASECurveType) *EnvelopeSegment {
@@ -39,7 +41,7 @@ func NewEnvelopeSegmentWithEndPointCurveType(endPoint unsafe.Pointer, curveType 
 	return &EnvelopeSegment{inner: raw.PHASEEnvelopeSegmentFromID(_id)}
 }
 
-// @property curveType @abstract The curve type of the envelope segment. @discussion The default value is PHASECurveTypeLinear.
+// A curve along the envelope that shapes the segment.
 //
 // WithCurveType sets the curveType property and returns the receiver for chaining.
 func (x *EnvelopeSegment) WithCurveType(curveType PHASECurveType) *EnvelopeSegment {

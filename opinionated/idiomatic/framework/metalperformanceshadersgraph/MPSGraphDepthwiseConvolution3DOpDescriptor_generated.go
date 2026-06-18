@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The class that defines the parameters for a 3D-depthwise convolution operation.
+//
 // GraphDepthwiseConvolution3DOpDescriptor wraps [raw.MPSGraphDepthwiseConvolution3DOpDescriptor] with a fluent Go API.
 type GraphDepthwiseConvolution3DOpDescriptor struct {
 	inner *raw.MPSGraphDepthwiseConvolution3DOpDescriptor
@@ -40,7 +42,7 @@ func NewGraphDepthwiseConvolution3DOpDescriptor() *GraphDepthwiseConvolution3DOp
 	return &GraphDepthwiseConvolution3DOpDescriptor{inner: raw.MPSGraphDepthwiseConvolution3DOpDescriptorFromID(_id)}
 }
 
-// The strides for spatial dimensions. Must be three numbers, one for each spatial dimension, fastest running index last. Default value: `@[ @1, @1, @1 ]`
+// The strides for spatial dimensions.
 //
 // WithStrides sets the collection, converting the Go slice to an NSArray.
 func (x *GraphDepthwiseConvolution3DOpDescriptor) WithStrides(items ...*foundation.NSNumber) *GraphDepthwiseConvolution3DOpDescriptor {
@@ -60,7 +62,7 @@ func (x *GraphDepthwiseConvolution3DOpDescriptor) WithStrides(items ...*foundati
 	return x
 }
 
-// The dilation rates for spatial dimensions. Must be three numbers, one for each spatial dimension, fastest running index last. Default value: `@[ @1, @1, @1 ]`
+// The dilation rates for spatial dimensions.
 //
 // WithDilationRates sets the collection, converting the Go slice to an NSArray.
 func (x *GraphDepthwiseConvolution3DOpDescriptor) WithDilationRates(items ...*foundation.NSNumber) *GraphDepthwiseConvolution3DOpDescriptor {
@@ -80,7 +82,7 @@ func (x *GraphDepthwiseConvolution3DOpDescriptor) WithDilationRates(items ...*fo
 	return x
 }
 
-// The padding values for spatial dimensions. Must be six numbers, two for each spatial dimension. For example `paddingValues[0]` defines the explicit padding amount before the first spatial dimension (slowest running index of spatial dimensions), `paddingValues[1]` defines the padding amount after the first spatial dimension etc. Use only with `paddingStyle = MPSGraphPaddingStyleExplicit`. Default value: `@[ @0, @0, @0, @0, @0, @0 ]`
+// The padding values for spatial dimensions.
 //
 // WithPaddingValues sets the collection, converting the Go slice to an NSArray.
 func (x *GraphDepthwiseConvolution3DOpDescriptor) WithPaddingValues(items ...*foundation.NSNumber) *GraphDepthwiseConvolution3DOpDescriptor {
@@ -100,7 +102,7 @@ func (x *GraphDepthwiseConvolution3DOpDescriptor) WithPaddingValues(items ...*fo
 	return x
 }
 
-// The padding style for the operation. Default value: `MPSGraphPaddingStyleExplicit`.
+// The padding style for the operation.
 //
 // WithPaddingStyle sets the paddingStyle property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution3DOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphDepthwiseConvolution3DOpDescriptor {
@@ -108,7 +110,7 @@ func (x *GraphDepthwiseConvolution3DOpDescriptor) WithPaddingStyle(paddingStyle 
 	return x
 }
 
-// The axis that contains the channels in the input and the weights, within the 4D tile of the last dimensions. For example the value of `-1` corresponds to `NDHWC`, `NHWC` layouts. This allows the placement of the channel index anywhere within the last 4 dimensions of the tensor. In case your weights are in a different layout you can bring them to the same layout as inputs using transposes or permutations. Default value: `-4`, corresponds to `NCDHW` and `CDHW` layouts.
+// The axis that contains the channels in the input and the weights, within the 4D tile of the last dimensions.
 //
 // WithChannelDimensionIndex sets the channelDimensionIndex property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution3DOpDescriptor) WithChannelDimensionIndex(channelDimensionIndex int) *GraphDepthwiseConvolution3DOpDescriptor {

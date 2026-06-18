@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A display of a file system path or virtual path information.
+//
 // PathControl wraps [raw.NSPathControl] with a fluent Go API.
 type PathControl struct {
 	inner *raw.NSPathControl
@@ -77,18 +79,24 @@ func (x *PathControl) WithPlaceholderAttributedString(placeholderAttributedStrin
 	return x
 }
 
+// The path value displayed by the receiver.
+//
 // WithURL sets the uRL property and returns the receiver for chaining.
 func (x *PathControl) WithURL(uRL string) *PathControl {
 	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 	return x
 }
 
+// The receiver’s double-click action method.
+//
 // WithDoubleAction sets the doubleAction property and returns the receiver for chaining.
 func (x *PathControl) WithDoubleAction(doubleAction objc.SEL) *PathControl {
 	x.inner.SetDoubleAction(doubleAction)
 	return x
 }
 
+// The receiver’s path style.
+//
 // WithPathStyle sets the pathStyle property and returns the receiver for chaining.
 func (x *PathControl) WithPathStyle(pathStyle NSPathStyle) *PathControl {
 	x.inner.SetPathStyle(raw.NSPathStyle(pathStyle))
@@ -113,150 +121,200 @@ func (x *PathControl) WithPathItems(items ...*raw.NSPathControlItem) *PathContro
 	return x
 }
 
+// The receiver’s background color.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *PathControl) WithBackgroundColor(backgroundColor *Color) *PathControl {
 	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// The receiver’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *PathControl) WithDelegate(delegate raw.NSPathControlDelegate) *PathControl {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The target object that receives action messages from the cell.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *PathControl) WithTarget(target objc.ID) *PathControl {
 	x.inner.NSControl.SetTarget(target)
 	return x
 }
 
+// The default action-message selector associated with the control.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *PathControl) WithAction(action objc.SEL) *PathControl {
 	x.inner.NSControl.SetAction(action)
 	return x
 }
 
+// The tag identifying the receiver (not the tag of the receiver’s cell).
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *PathControl) WithTag(tag int) *PathControl {
 	x.inner.NSControl.SetTag(tag)
 	return x
 }
 
+// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+//
 // WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
 func (x *PathControl) WithIgnoresMultiClick(ignoresMultiClick bool) *PathControl {
 	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
 	return x
 }
 
+// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *PathControl) WithContinuous(continuous bool) *PathControl {
 	x.inner.NSControl.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver reacts to mouse events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *PathControl) WithEnabled(enabled bool) *PathControl {
 	x.inner.NSControl.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the receiver refuses the first responder role.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *PathControl) WithRefusesFirstResponder(refusesFirstResponder bool) *PathControl {
 	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value that indicates whether the cell is highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *PathControl) WithHighlighted(highlighted bool) *PathControl {
 	x.inner.NSControl.SetHighlighted(highlighted)
 	return x
 }
 
+// The size of the control.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *PathControl) WithControlSize(controlSize NSControlSize) *PathControl {
 	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The receiver’s formatter.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *PathControl) WithFormatter(formatter *foundation.NSFormatter) *PathControl {
 	x.inner.NSControl.SetFormatter(formatter)
 	return x
 }
 
+// The value of the receiver’s cell as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *PathControl) WithObjectValue(objectValue objc.ID) *PathControl {
 	x.inner.NSControl.SetObjectValue(objectValue)
 	return x
 }
 
+// The value of the receiver’s cell as an NSString object.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *PathControl) WithStringValue(stringValue string) *PathControl {
 	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The value of the receiver’s cell as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *PathControl) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *PathControl {
 	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *PathControl) WithIntValue(intValue int) *PathControl {
 	x.inner.NSControl.SetIntValue(intValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *PathControl) WithIntegerValue(integerValue int) *PathControl {
 	x.inner.NSControl.SetIntegerValue(integerValue)
 	return x
 }
 
+// The value of the receiver’s cell as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *PathControl) WithFloatValue(floatValue float32) *PathControl {
 	x.inner.NSControl.SetFloatValue(floatValue)
 	return x
 }
 
+// The value of the receiver’s cell as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *PathControl) WithDoubleValue(doubleValue float64) *PathControl {
 	x.inner.NSControl.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The font used to draw text in the receiver’s cell.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *PathControl) WithFont(font *Font) *PathControl {
 	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *PathControl) WithUsesSingleLineMode(usesSingleLineMode bool) *PathControl {
 	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// The line break mode to use for text in the control’s cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *PathControl) WithLineBreakMode(lineBreakMode NSLineBreakMode) *PathControl {
 	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The alignment mode of the text in the receiver’s cell.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *PathControl) WithAlignment(alignment NSTextAlignment) *PathControl {
 	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *PathControl) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *PathControl {
 	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+//
 // WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
 func (x *PathControl) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PathControl {
 	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
@@ -311,6 +369,8 @@ func (x *PathControl) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOp
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *PathControl) WithFrame(frame corefoundation.CGRect) *PathControl {
 	x.inner.NSControl.NSView.SetFrame(frame)
@@ -335,6 +395,8 @@ func (x *PathControl) WithBoundsRotation(boundsRotation float64) *PathControl {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *PathControl) WithBounds(bounds corefoundation.CGRect) *PathControl {
 	x.inner.NSControl.NSView.SetBounds(bounds)
@@ -347,6 +409,8 @@ func (x *PathControl) WithCanDrawConcurrently(canDrawConcurrently bool) *PathCon
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *PathControl) WithNeedsDisplay(needsDisplay bool) *PathControl {
 	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
@@ -533,7 +597,7 @@ func (x *PathControl) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foun
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *PathControl) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PathControl {
@@ -589,30 +653,40 @@ func (x *PathControl) WithPressureConfiguration(pressureConfiguration *PressureC
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *PathControl) WithNextResponder(nextResponder ResponderProvider) *PathControl {
 	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *PathControl) WithMenu(menu *Menu) *PathControl {
 	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *PathControl) WithUserActivity(userActivity *foundation.NSUserActivity) *PathControl {
 	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *PathControl) WithTouchBar(touchBar *TouchBar) *PathControl {
 	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Configures the drag operation mask.
+//
 // SetDraggingSourceOperationMaskForLocal calls the underlying SetDraggingSourceOperationMaskForLocal.
 func (x *PathControl) SetDraggingSourceOperationMaskForLocal(mask NSDragOperation, isLocal bool) {
 	x.inner.SetDraggingSourceOperationMaskForLocal(raw.NSDragOperation(mask), isLocal)
@@ -747,6 +821,8 @@ func (x *PathControl) SetDelegate(delegate raw.NSPathControlDelegate) {
 	x.inner.SetDelegate(delegate)
 }
 
+// Returns the clicked cell.
+//
 // ClickedPathComponentCell calls the underlying ClickedPathComponentCell.
 func (x *PathControl) ClickedPathComponentCell() *PathComponentCell {
 	_r := x.inner.ClickedPathComponentCell()
@@ -756,6 +832,8 @@ func (x *PathControl) ClickedPathComponentCell() *PathComponentCell {
 	return &PathComponentCell{inner: _r}
 }
 
+// Returns an array of the NSPathComponentCell objects currently being displayed.
+//
 // PathComponentCells returns the collection as a Go slice.
 func (x *PathControl) PathComponentCells() []*PathComponentCell {
 	arr := x.inner.PathComponentCells()
@@ -767,6 +845,8 @@ func (x *PathControl) PathComponentCells() []*PathComponentCell {
 	})
 }
 
+// Sets the array of NSPathComponentCell objects currently being displayed.
+//
 // SetPathComponentCells calls the underlying SetPathComponentCells.
 func (x *PathControl) SetPathComponentCells(cells *foundation.NSArray[*raw.NSPathComponentCell]) {
 	x.inner.SetPathComponentCells(cells)

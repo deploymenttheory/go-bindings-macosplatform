@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A generator of texel data that creates a gradient between two specified colors.
+//
 // ColorSwatchTexture wraps [raw.MDLColorSwatchTexture] with a fluent Go API.
 type ColorSwatchTexture struct {
 	inner *raw.MDLColorSwatchTexture
@@ -31,6 +33,8 @@ func ColorSwatchTextureFromID(id objc.ID) *ColorSwatchTexture {
 	return &ColorSwatchTexture{inner: raw.MDLColorSwatchTextureFromID(id)}
 }
 
+// Initializes a texture that creates a vertical gradient between two color temperatures.
+//
 // NewColorSwatchTextureWithColorTemperatureGradientFromToColorTemperatureNameTextureDimensions creates a new [ColorSwatchTexture].
 func NewColorSwatchTextureWithColorTemperatureGradientFromToColorTemperatureNameTextureDimensions(colorTemperature1 float32, colorTemperature2 float32, name string, textureDimensions unsafe.Pointer) *ColorSwatchTexture {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLColorSwatchTexture")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewColorSwatchTextureWithColorTemperatureGradientFromToColorTemperatureName
 	return &ColorSwatchTexture{inner: raw.MDLColorSwatchTextureFromID(_id)}
 }
 
+// Initializes a texture that creates a vertical gradient between two colors.
+//
 // NewColorSwatchTextureWithColorGradientFromToColorNameTextureDimensions creates a new [ColorSwatchTexture].
 func NewColorSwatchTextureWithColorGradientFromToColorNameTextureDimensions(color1 unsafe.Pointer, color2 unsafe.Pointer, name string, textureDimensions unsafe.Pointer) *ColorSwatchTexture {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLColorSwatchTexture")), objc.RegisterName("alloc"))
@@ -45,6 +51,8 @@ func NewColorSwatchTextureWithColorGradientFromToColorNameTextureDimensions(colo
 	return &ColorSwatchTexture{inner: raw.MDLColorSwatchTextureFromID(_id)}
 }
 
+// A Boolean value that indicates whether the texture is a cube textures.
+//
 // WithIsCube sets the isCube property and returns the receiver for chaining.
 func (x *ColorSwatchTexture) WithIsCube(isCube bool) *ColorSwatchTexture {
 	x.inner.MDLTexture.SetIsCube(isCube)

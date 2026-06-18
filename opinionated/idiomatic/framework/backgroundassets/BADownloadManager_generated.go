@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that manages the queue of scheduled asset downloads.
+//
 // DownloadManager wraps [raw.BADownloadManager] with a fluent Go API.
 type DownloadManager struct {
 	inner *raw.BADownloadManager
@@ -38,7 +40,7 @@ func NewDownloadManager() *DownloadManager {
 	return &DownloadManager{inner: raw.BADownloadManagerFromID(_id)}
 }
 
-// @brief A object confroming to BADownloadManagerDelegate to get notified when actions occur.
+// The download manager’s delegate.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *DownloadManager) WithDelegate(delegate raw.BADownloadManagerDelegate) *DownloadManager {
@@ -62,14 +64,14 @@ func (x *DownloadManager) FetchCurrentDownloads() ([]*Download, error) {
 	}), nil
 }
 
-// @brief Schedules a background download. @discussion Specifies a download to schedule at a given priority. The download will automatically start at the discretion of the system. @param download A BADownload object representing a URL to be downloaded. @param error A NSError representing why the BADownload could not be scheduled. @return YES if @c download was scheduled. NO and @c error set if the download could not be scheduled.
+// Schedules an asset download to execute in the background at a nonspecific time in the future.
 //
 // ScheduleDownloadError calls the underlying ScheduleDownloadError.
 func (x *DownloadManager) ScheduleDownloadError(download *raw.BADownload) (bool, error) {
 	return x.inner.ScheduleDownloadError(download)
 }
 
-// @brief Acquires exclusive access to the BADownloadManager across the app and application extension. @discussion Acquires exclusive access to the BADownloadManager across the app and application extension. This ensures that your extension and app do not perform operations at the same time. Both the extension and app must use this API to ensure exclusive access. @param performHandler A block that will be executed once exclusive control is acquired. If an error is non-nil then a problem occurred acquiring exclusive access.
+// Attempts to acquire immediate, exclusive access to the download manager.
 //
 // PerformWithExclusiveControl calls the underlying PerformWithExclusiveControl.
 func (x *DownloadManager) PerformWithExclusiveControl(performHandler func(bool, unsafe.Pointer)) {
@@ -83,14 +85,14 @@ func (x *DownloadManager) PerformWithExclusiveControlBeforeDatePerformHandler(da
 	x.inner.PerformWithExclusiveControlBeforeDatePerformHandler(date, performHandler)
 }
 
-// @brief Attempts to schedule a BADownload in foreground mode. @discussion Attempts to schedule a BADownload in foreground mode. This download will start (if it has not been started) immediately regrardlesss of battery or network status. The download will remain in this foreground until the download manager is disconnected. This API only functions if the download manager is created in the application and not the download extension. If this API is called from the download extension, NO will be returned along with a NSError with the settings BAErrorDomain : BAErrorCodeCallFromExtensionNotAllowed. If this API is called from a app while it is in the background, NO will be returned along with a NSError with the settings BAErrorDomain : BAErrorCodeCallFromInactiveProcessNotAllowed.
+// Schedules an asset download that executes immediately in the foreground.
 //
 // StartForegroundDownloadError calls the underlying StartForegroundDownloadError.
 func (x *DownloadManager) StartForegroundDownloadError(download *raw.BADownload) (bool, error) {
 	return x.inner.StartForegroundDownloadError(download)
 }
 
-// @brief Cancels a download. @discussion Attempts to cancel a BADownload. If the download has not been schduled or has already completed, NO is returned along with a NSError set to BAErrorDomain : BAErrorCodeDownloadNotScheduled. @return YES if the download is canceled. NO if the download could not be canceled, @c error will be set with a reason why.
+// Cancels an asset download.
 //
 // CancelDownloadError calls the underlying CancelDownloadError.
 func (x *DownloadManager) CancelDownloadError(download *raw.BADownload) (bool, error) {

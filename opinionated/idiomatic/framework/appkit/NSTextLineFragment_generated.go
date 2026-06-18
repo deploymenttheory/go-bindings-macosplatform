@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A class that represents a line fragment as a single textual layout and rendering unit inside a text layout fragment.
+//
 // TextLineFragment wraps [raw.NSTextLineFragment] with a fluent Go API.
 type TextLineFragment struct {
 	inner *raw.NSTextLineFragment
@@ -32,6 +34,8 @@ func TextLineFragmentFromID(id objc.ID) *TextLineFragment {
 	return &TextLineFragment{inner: raw.NSTextLineFragmentFromID(id)}
 }
 
+// Creates a new line fragment from the attributed string for the range of characters you specify.
+//
 // NewTextLineFragmentWithAttributedStringRange creates a new [TextLineFragment].
 func NewTextLineFragmentWithAttributedStringRange(attributedString *foundation.NSAttributedString, range_ foundation.NSRange) *TextLineFragment {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextLineFragment")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewTextLineFragmentWithAttributedStringRange(attributedString *foundation.N
 	return &TextLineFragment{inner: raw.NSTextLineFragmentFromID(_id)}
 }
 
+// Creates a new line fragment with from data in an unarchiver.
+//
 // NewTextLineFragmentWithCoder creates a new [TextLineFragment].
 func NewTextLineFragmentWithCoder(aDecoder *foundation.NSCoder) *TextLineFragment {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextLineFragment")), objc.RegisterName("alloc"))
@@ -46,6 +52,8 @@ func NewTextLineFragmentWithCoder(aDecoder *foundation.NSCoder) *TextLineFragmen
 	return &TextLineFragment{inner: raw.NSTextLineFragmentFromID(_id)}
 }
 
+// Creates a new line fragment using the string, attributes, and range you provide.
+//
 // NewTextLineFragmentWithStringAttributesRange creates a new [TextLineFragment].
 func NewTextLineFragmentWithStringAttributesRange(string_ string, attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], range_ foundation.NSRange) *TextLineFragment {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextLineFragment")), objc.RegisterName("alloc"))
@@ -53,21 +61,29 @@ func NewTextLineFragmentWithStringAttributesRange(string_ string, attributes *fo
 	return &TextLineFragment{inner: raw.NSTextLineFragmentFromID(_id)}
 }
 
+// Renders the line fragment contents at the rendering origin.
+//
 // DrawAtPointInContext calls the underlying DrawAtPointInContext.
 func (x *TextLineFragment) DrawAtPointInContext(point corefoundation.CGPoint, context_ unsafe.Pointer) {
 	x.inner.DrawAtPointInContext(point, context_)
 }
 
+// Returns the location of the character at the specified index.
+//
 // LocationForCharacterAtIndex calls the underlying LocationForCharacterAtIndex.
 func (x *TextLineFragment) LocationForCharacterAtIndex(index int) corefoundation.CGPoint {
 	return x.inner.LocationForCharacterAtIndex(index)
 }
 
+// Returns character index for a point inside the line fragment coordinate system.
+//
 // CharacterIndexForPoint calls the underlying CharacterIndexForPoint.
 func (x *TextLineFragment) CharacterIndexForPoint(point corefoundation.CGPoint) int {
 	return x.inner.CharacterIndexForPoint(point)
 }
 
+// Returns character index for a point inside the line fragment coordinate system.
+//
 // FractionOfDistanceThroughGlyphForPoint calls the underlying FractionOfDistanceThroughGlyphForPoint.
 func (x *TextLineFragment) FractionOfDistanceThroughGlyphForPoint(point corefoundation.CGPoint) float64 {
 	return x.inner.FractionOfDistanceThroughGlyphForPoint(point)

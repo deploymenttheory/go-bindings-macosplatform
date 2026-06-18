@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The concrete assertion request type for platform credentials.
+//
 // AuthorizationPlatformPublicKeyCredentialAssertionRequest wraps [raw.ASAuthorizationPlatformPublicKeyCredentialAssertionRequest] with a fluent Go API.
 type AuthorizationPlatformPublicKeyCredentialAssertionRequest struct {
 	inner *raw.ASAuthorizationPlatformPublicKeyCredentialAssertionRequest
@@ -40,7 +42,7 @@ func NewAuthorizationPlatformPublicKeyCredentialAssertionRequest() *Authorizatio
 	return &AuthorizationPlatformPublicKeyCredentialAssertionRequest{inner: raw.ASAuthorizationPlatformPublicKeyCredentialAssertionRequestFromID(_id)}
 }
 
-// @abstract A list of credentials to allow for this request. If this ilist is nonempty, only credentials matching the provided descriptors can be used to sign in.
+// The array of allowed credentials.
 //
 // WithAllowedCredentials sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) WithAllowedCredentials(items ...*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor) *AuthorizationPlatformPublicKeyCredentialAssertionRequest {
@@ -60,6 +62,8 @@ func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) WithAllowedCr
 	return x
 }
 
+// The request’s binary large object value.
+//
 // WithLargeBlob sets the largeBlob property and returns the receiver for chaining.
 func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) WithLargeBlob(largeBlob *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) *AuthorizationPlatformPublicKeyCredentialAssertionRequest {
 	x.inner.SetLargeBlob(largeBlob.Unwrap())

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that uniquely identifies a content key.
+//
 // ContentKeySpecifier wraps [raw.AVContentKeySpecifier] with a fluent Go API.
 type ContentKeySpecifier struct {
 	inner *raw.AVContentKeySpecifier
@@ -31,7 +33,7 @@ func ContentKeySpecifierFromID(id objc.ID) *ContentKeySpecifier {
 	return &ContentKeySpecifier{inner: raw.AVContentKeySpecifierFromID(id)}
 }
 
-// Initialize an instance of AVContentKeySpecifier. This method returns an AVContentKeySpecifier instance that represents a content key in a specific content key system. - Parameter keySystem: A valid key system for content keys. - Parameter contentKeyIdentifier: Container and protocol-specific key identifier. - Parameter options: Additional information necessary to obtain the key, can be empty if none needed. - Returns: An instance of AVContentKeySpecifier
+// Creates a content key specifier.
 //
 // NewContentKeySpecifierForKeySystemIdentifierOptions creates a new [ContentKeySpecifier].
 func NewContentKeySpecifierForKeySystemIdentifierOptions(keySystem *foundation.NSString, contentKeyIdentifier objc.ID, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ContentKeySpecifier {

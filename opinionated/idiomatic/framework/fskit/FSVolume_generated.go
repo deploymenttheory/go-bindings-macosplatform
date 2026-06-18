@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A directory structure for files and folders.
+//
 // Volume wraps [raw.FSVolume] with a fluent Go API.
 type Volume struct {
 	inner *raw.FSVolume
@@ -29,7 +31,7 @@ func VolumeFromID(id objc.ID) *Volume {
 	return &Volume{inner: raw.FSVolumeFromID(id)}
 }
 
-// Creates a volume with the given identifier and name. - Parameters: - volumeID: An “FSVolumeIdentifier“ to uniquely identify the volume. For a network file system that supports multiple authenticated users, disambiguate the users by using qualifying data in the identifier. - volumeName: A name for the volume.
+// Creates a volume with the given identifier and name.
 //
 // NewVolumeWithVolumeIDVolumeName creates a new [Volume].
 func NewVolumeWithVolumeIDVolumeName(volumeID *raw.FSVolumeIdentifier, volumeName *raw.FSFileName) *Volume {

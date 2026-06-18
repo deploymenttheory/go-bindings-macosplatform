@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that presents ruby characters.
+//
 // CaptionRuby wraps [raw.AVCaptionRuby] with a fluent Go API.
 type CaptionRuby struct {
 	inner *raw.AVCaptionRuby

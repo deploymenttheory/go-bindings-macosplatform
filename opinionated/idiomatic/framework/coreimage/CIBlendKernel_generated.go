@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A GPU-based image-processing routine that is optimized for blending two images.
+//
 // BlendKernel wraps [raw.CIBlendKernel] with a fluent Go API.
 type BlendKernel struct {
 	inner *raw.CIBlendKernel
@@ -36,6 +38,8 @@ func NewBlendKernel() *BlendKernel {
 	return &BlendKernel{inner: raw.CIBlendKernelFromID(_id)}
 }
 
+// Creates a new image using the blend kernel and specified foreground and background images.
+//
 // ApplyWithForegroundBackground calls the underlying ApplyWithForegroundBackground.
 func (x *BlendKernel) ApplyWithForegroundBackground(foreground *raw.CIImage, background *raw.CIImage) *Image {
 	_r := x.inner.ApplyWithForegroundBackground(foreground, background)

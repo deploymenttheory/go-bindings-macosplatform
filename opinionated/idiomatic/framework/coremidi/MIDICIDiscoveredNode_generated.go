@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A discovered MIDI-CI node that represents a MIDI source and destination that respond to capability inquiries.
+//
 // CIDiscoveredNode wraps [raw.MIDICIDiscoveredNode] with a fluent Go API.
 type CIDiscoveredNode struct {
 	inner *raw.MIDICIDiscoveredNode

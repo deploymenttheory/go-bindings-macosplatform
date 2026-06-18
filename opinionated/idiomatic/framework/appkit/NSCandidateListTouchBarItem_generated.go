@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A bar item that, along with its delegate, provides a list of textual suggestions for the current text view.
+//
 // CandidateListTouchBarItem wraps [raw.NSCandidateListTouchBarItem] with a fluent Go API.
 type CandidateListTouchBarItem struct {
 	inner *raw.NSCandidateListTouchBarItem[objc.ID]
@@ -38,59 +40,79 @@ func NewCandidateListTouchBarItem() *CandidateListTouchBarItem {
 	return &CandidateListTouchBarItem{inner: raw.NSCandidateListTouchBarItemFromID[objc.ID](_id)}
 }
 
+// The client object for the candidate list item.
+//
 // WithClient sets the client property and returns the receiver for chaining.
 func (x *CandidateListTouchBarItem) WithClient(client ViewProvider) *CandidateListTouchBarItem {
 	x.inner.SetClient(client.asView())
 	return x
 }
 
+// The delegate of the candidate list item.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *CandidateListTouchBarItem) WithDelegate(delegate raw.NSCandidateListTouchBarItemDelegate) *CandidateListTouchBarItem {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// A Boolean value that controls the visibility of the candidate list.
+//
 // WithCollapsed sets the collapsed property and returns the receiver for chaining.
 func (x *CandidateListTouchBarItem) WithCollapsed(collapsed bool) *CandidateListTouchBarItem {
 	x.inner.SetCollapsed(collapsed)
 	return x
 }
 
+// A Boolean value that specifies whether the item can be collapsed.
+//
 // WithAllowsCollapsing sets the allowsCollapsing property and returns the receiver for chaining.
 func (x *CandidateListTouchBarItem) WithAllowsCollapsing(allowsCollapsing bool) *CandidateListTouchBarItem {
 	x.inner.SetAllowsCollapsing(allowsCollapsing)
 	return x
 }
 
+// A Boolean value that specifies whether a candidate list item displays candidates from text input providers.
+//
 // WithAllowsTextInputContextCandidates sets the allowsTextInputContextCandidates property and returns the receiver for chaining.
 func (x *CandidateListTouchBarItem) WithAllowsTextInputContextCandidates(allowsTextInputContextCandidates bool) *CandidateListTouchBarItem {
 	x.inner.SetAllowsTextInputContextCandidates(allowsTextInputContextCandidates)
 	return x
 }
 
+// A block that converts a candidate object into an attributed string for display in the candidate list item.
+//
 // WithAttributedStringForCandidate sets the attributedStringForCandidate property and returns the receiver for chaining.
 func (x *CandidateListTouchBarItem) WithAttributedStringForCandidate(attributedStringForCandidate objc.Block) *CandidateListTouchBarItem {
 	x.inner.SetAttributedStringForCandidate(attributedStringForCandidate)
 	return x
 }
 
+// The user-visible string identifying this item during bar customization.
+//
 // WithCustomizationLabel sets the customizationLabel property and returns the receiver for chaining.
 func (x *CandidateListTouchBarItem) WithCustomizationLabel(customizationLabel string) *CandidateListTouchBarItem {
 	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
 	return x
 }
 
+// Determines which items are shown in a bar when space is limited.
+//
 // WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
 func (x *CandidateListTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *CandidateListTouchBarItem {
 	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)
 	return x
 }
 
+// Updates the candidate list visibility configuration based on the client’s insertion point state.
+//
 // UpdateWithInsertionPointVisibility calls the underlying UpdateWithInsertionPointVisibility.
 func (x *CandidateListTouchBarItem) UpdateWithInsertionPointVisibility(isVisible bool) {
 	x.inner.UpdateWithInsertionPointVisibility(isVisible)
 }
 
+// Sets an array of candidate objects to be displayed in the candidate list bar item.
+//
 // SetCandidatesForSelectedRangeInString calls the underlying SetCandidatesForSelectedRangeInString.
 func (x *CandidateListTouchBarItem) SetCandidatesForSelectedRangeInString(candidates *foundation.NSArray[objc.ID], selectedRange foundation.NSRange, originalString string) {
 	x.inner.SetCandidatesForSelectedRangeInString(candidates, selectedRange, foundation.NSStringStringWithUTF8String(originalString))

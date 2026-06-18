@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A standard user interface for selecting color in an app.
+//
 // ColorPanel wraps [raw.NSColorPanel] with a fluent Go API.
 type ColorPanel struct {
 	inner *raw.NSColorPanel
@@ -38,30 +40,40 @@ func NewColorPanel() *ColorPanel {
 	return &ColorPanel{inner: raw.NSColorPanelFromID(_id)}
 }
 
+// The accessory view.
+//
 // WithAccessoryView sets the accessoryView property and returns the receiver for chaining.
 func (x *ColorPanel) WithAccessoryView(accessoryView ViewProvider) *ColorPanel {
 	x.inner.SetAccessoryView(accessoryView.asView())
 	return x
 }
 
+// A Boolean value indicating whether the receiver continuously sends the action message to the target.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *ColorPanel) WithContinuous(continuous bool) *ColorPanel {
 	x.inner.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver shows alpha values and an opacity slider.
+//
 // WithShowsAlpha sets the showsAlpha property and returns the receiver for chaining.
 func (x *ColorPanel) WithShowsAlpha(showsAlpha bool) *ColorPanel {
 	x.inner.SetShowsAlpha(showsAlpha)
 	return x
 }
 
+// The mode of the receiver the mode is one of the modes allowed by the color mask.
+//
 // WithMode sets the mode property and returns the receiver for chaining.
 func (x *ColorPanel) WithMode(mode NSColorPanelMode) *ColorPanel {
 	x.inner.SetMode(raw.NSColorPanelMode(mode))
 	return x
 }
 
+// The color of the receiver.
+//
 // WithColor sets the color property and returns the receiver for chaining.
 func (x *ColorPanel) WithColor(color *Color) *ColorPanel {
 	x.inner.SetColor(color.Unwrap())
@@ -76,31 +88,39 @@ func (x *ColorPanel) WithMaximumLinearExposure(maximumLinearExposure float64) *C
 	return x
 }
 
+// A Boolean value that indicates whether the receiver is a floating panel.
+//
 // WithFloatingPanel sets the floatingPanel property and returns the receiver for chaining.
 func (x *ColorPanel) WithFloatingPanel(floatingPanel bool) *ColorPanel {
 	x.inner.NSPanel.SetFloatingPanel(floatingPanel)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver becomes the key window only when needed.
+//
 // WithBecomesKeyOnlyIfNeeded sets the becomesKeyOnlyIfNeeded property and returns the receiver for chaining.
 func (x *ColorPanel) WithBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) *ColorPanel {
 	x.inner.NSPanel.SetBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded)
 	return x
 }
 
+// A Boolean value that indicates whether the panel receives keyboard and mouse events even when some other window is being run modally.
+//
 // WithWorksWhenModal sets the worksWhenModal property and returns the receiver for chaining.
 func (x *ColorPanel) WithWorksWhenModal(worksWhenModal bool) *ColorPanel {
 	x.inner.NSPanel.SetWorksWhenModal(worksWhenModal)
 	return x
 }
 
+// The string that appears in the title bar of the window or the path to the represented file.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *ColorPanel) WithTitle(title string) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
-// Secondary text that may be displayed adjacent to or below the primary title depending on the configuration of the window. A value of empty string will remove the subtitle from the window layout.
+// A secondary line of text that appears in the title bar of the window.
 //
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *ColorPanel) WithSubtitle(subtitle string) *ColorPanel {
@@ -108,7 +128,7 @@ func (x *ColorPanel) WithSubtitle(subtitle string) *ColorPanel {
 	return x
 }
 
-// See the enum values for how this property works.
+// A value that indicates the visibility of the window’s title and title bar buttons.
 //
 // WithTitleVisibility sets the titleVisibility property and returns the receiver for chaining.
 func (x *ColorPanel) WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *ColorPanel {
@@ -116,7 +136,7 @@ func (x *ColorPanel) WithTitleVisibility(titleVisibility NSWindowTitleVisibility
 	return x
 }
 
-// When \c YES, the titlebar doesn't draw its background, allowing all buttons to show through, and "click through" to happen. In general, this is only useful when \c NSFullSizeContentViewWindowMask is set.
+// A Boolean value that indicates whether the title bar draws its background.
 //
 // WithTitlebarAppearsTransparent sets the titlebarAppearsTransparent property and returns the receiver for chaining.
 func (x *ColorPanel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *ColorPanel {
@@ -124,7 +144,7 @@ func (x *ColorPanel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent b
 	return x
 }
 
-// Specifies how the titlebar area of the window should appear when the window displays an NSToolbar
+// The style that determines the appearance and location of the toolbar in relation to the title bar.
 //
 // WithToolbarStyle sets the toolbarStyle property and returns the receiver for chaining.
 func (x *ColorPanel) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *ColorPanel {
@@ -132,6 +152,8 @@ func (x *ColorPanel) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *ColorP
 	return x
 }
 
+// An array of title bar accessory view controllers that are currently added to the window.
+//
 // WithTitlebarAccessoryViewControllers sets the collection, converting the Go slice to an NSArray.
 func (x *ColorPanel) WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *ColorPanel {
 	if len(items) == 0 {
@@ -150,7 +172,7 @@ func (x *ColorPanel) WithTitlebarAccessoryViewControllers(items ...*raw.NSTitleb
 	return x
 }
 
-// If url is not nil and its path is not empty, the window will show a document icon in the titlebar. If the url represents a filename or other resource with a known icon, that icon will be used as the document icon.  Otherwise the default document icon will be used.  The icon can be customized using `-[[NSWindow standardWindowButton:NSWindowDocumentIconButton] setImage:customImage]`.  If url is not nil and its path is not empty, the window will have a pop-up menu which can be shown via command-click on the area containing the document icon and title.  By default, this menu will display the path components of the url.  The presence and contents of this menu can be controlled by the delegate method `-[window:shouldPopUpDocumentPathMenu:]` If the url is nil or has an empty path, the window will not show a document icon and will not have a pop-up menu available via command-click.
+// The URL of the file the window represents.
 //
 // WithRepresentedURL sets the representedURL property and returns the receiver for chaining.
 func (x *ColorPanel) WithRepresentedURL(representedURL string) *ColorPanel {
@@ -158,31 +180,39 @@ func (x *ColorPanel) WithRepresentedURL(representedURL string) *ColorPanel {
 	return x
 }
 
+// The path to the file of the window’s represented file.
+//
 // WithRepresentedFilename sets the representedFilename property and returns the receiver for chaining.
 func (x *ColorPanel) WithRepresentedFilename(representedFilename string) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetRepresentedFilename(foundation.NSStringStringWithUTF8String(representedFilename))
 	return x
 }
 
+// A Boolean value that indicates whether the window is excluded from the application’s Windows menu.
+//
 // WithExcludedFromWindowsMenu sets the excludedFromWindowsMenu property and returns the receiver for chaining.
 func (x *ColorPanel) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetExcludedFromWindowsMenu(excludedFromWindowsMenu)
 	return x
 }
 
+// The window’s content view, the highest accessible view object in the window’s view hierarchy.
+//
 // WithContentView sets the contentView property and returns the receiver for chaining.
 func (x *ColorPanel) WithContentView(contentView ViewProvider) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetContentView(contentView.asView())
 	return x
 }
 
+// The window’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *ColorPanel) WithDelegate(delegate raw.NSWindowDelegate) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetDelegate(delegate)
 	return x
 }
 
-// @note The styleMask can only be set on macOS 10.6 and later. Valid \c styleMask settings have the same restrictions as the \c styleMask passed to `-initWithContentRect:styleMask:backing:defer:`.  Some \c styleMask changes will cause the view hierarchy to be rebuilt, since there is a different subclass for the top level view of a borderless window than for the top level view of a titled window.
+// Flags that describe the window’s current style, such as if it’s resizable or in full-screen mode.
 //
 // WithStyleMask sets the styleMask property and returns the receiver for chaining.
 func (x *ColorPanel) WithStyleMask(styleMask NSWindowStyleMask) *ColorPanel {
@@ -190,73 +220,95 @@ func (x *ColorPanel) WithStyleMask(styleMask NSWindowStyleMask) *ColorPanel {
 	return x
 }
 
+// The window’s resizing increments.
+//
 // WithResizeIncrements sets the resizeIncrements property and returns the receiver for chaining.
 func (x *ColorPanel) WithResizeIncrements(resizeIncrements corefoundation.CGSize) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetResizeIncrements(resizeIncrements)
 	return x
 }
 
+// The window’s aspect ratio, which constrains the size of its frame rectangle to integral multiples of this ratio when the user resizes it.
+//
 // WithAspectRatio sets the aspectRatio property and returns the receiver for chaining.
 func (x *ColorPanel) WithAspectRatio(aspectRatio corefoundation.CGSize) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetAspectRatio(aspectRatio)
 	return x
 }
 
+// The window’s content-view resizing increments.
+//
 // WithContentResizeIncrements sets the contentResizeIncrements property and returns the receiver for chaining.
 func (x *ColorPanel) WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetContentResizeIncrements(contentResizeIncrements)
 	return x
 }
 
+// The window’s content aspect ratio.
+//
 // WithContentAspectRatio sets the contentAspectRatio property and returns the receiver for chaining.
 func (x *ColorPanel) WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetContentAspectRatio(contentAspectRatio)
 	return x
 }
 
+// A Boolean value that indicates whether any of the window’s views need to be displayed.
+//
 // WithViewsNeedDisplay sets the viewsNeedDisplay property and returns the receiver for chaining.
 func (x *ColorPanel) WithViewsNeedDisplay(viewsNeedDisplay bool) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetViewsNeedDisplay(viewsNeedDisplay)
 	return x
 }
 
+// A Boolean value that indicates whether the window tries to optimize user-initiated resize operations by preserving the content of views that have not changed.
+//
 // WithPreservesContentDuringLiveResize sets the preservesContentDuringLiveResize property and returns the receiver for chaining.
 func (x *ColorPanel) WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetPreservesContentDuringLiveResize(preservesContentDuringLiveResize)
 	return x
 }
 
+// A Boolean value that indicates whether the window is released when it receives the close message.
+//
 // WithReleasedWhenClosed sets the releasedWhenClosed property and returns the receiver for chaining.
 func (x *ColorPanel) WithReleasedWhenClosed(releasedWhenClosed bool) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetReleasedWhenClosed(releasedWhenClosed)
 	return x
 }
 
+// The color of the window’s background.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *ColorPanel) WithBackgroundColor(backgroundColor *Color) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the window can be dragged by clicking in its title bar or background.
+//
 // WithMovable sets the movable property and returns the receiver for chaining.
 func (x *ColorPanel) WithMovable(movable bool) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetMovable(movable)
 	return x
 }
 
+// A Boolean value that indicates whether the window is movable by clicking and dragging anywhere in its background.
+//
 // WithMovableByWindowBackground sets the movableByWindowBackground property and returns the receiver for chaining.
 func (x *ColorPanel) WithMovableByWindowBackground(movableByWindowBackground bool) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetMovableByWindowBackground(movableByWindowBackground)
 	return x
 }
 
+// A Boolean value that indicates whether the window is removed from the screen when its application becomes inactive.
+//
 // WithHidesOnDeactivate sets the hidesOnDeactivate property and returns the receiver for chaining.
 func (x *ColorPanel) WithHidesOnDeactivate(hidesOnDeactivate bool) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetHidesOnDeactivate(hidesOnDeactivate)
 	return x
 }
 
-// Indicates whether a window can be hidden during `-[NSApplication hide:]`.  Default is \c YES.
+// A Boolean value that indicates whether the window can hide when its application becomes hidden.
 //
 // WithCanHide sets the canHide property and returns the receiver for chaining.
 func (x *ColorPanel) WithCanHide(canHide bool) *ColorPanel {
@@ -264,25 +316,31 @@ func (x *ColorPanel) WithCanHide(canHide bool) *ColorPanel {
 	return x
 }
 
+// The custom miniaturized window image of the window.
+//
 // WithMiniwindowImage sets the miniwindowImage property and returns the receiver for chaining.
 func (x *ColorPanel) WithMiniwindowImage(miniwindowImage *Image) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetMiniwindowImage(miniwindowImage.Unwrap())
 	return x
 }
 
+// The title displayed in the window’s minimized window.
+//
 // WithMiniwindowTitle sets the miniwindowTitle property and returns the receiver for chaining.
 func (x *ColorPanel) WithMiniwindowTitle(miniwindowTitle string) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetMiniwindowTitle(foundation.NSStringStringWithUTF8String(miniwindowTitle))
 	return x
 }
 
+// A Boolean value that indicates whether the window’s document has been edited.
+//
 // WithDocumentEdited sets the documentEdited property and returns the receiver for chaining.
 func (x *ColorPanel) WithDocumentEdited(documentEdited bool) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetDocumentEdited(documentEdited)
 	return x
 }
 
-// A Boolean value that indicates whether or not to prevent application termination when the receiving window is presented modally. The value of this property is `YES` if the window should prevent application termination when modal; otherwise, `NO`. The default value is `YES`. However, note that some window subclasses and some windows created indirectly (like those created by UI frameworks like AppKit and SwiftUI), may have different default values. For example, the Open panel and toolbar customization sheets should not prevent application termination, so those windows have `preventsApplicationTerminationWhenModal` set to `NO`. Some `NSAlert`s, like those that are simply informational, have windows that do not prevent application termination by default. Setting this property overrides the default behavior.
+// A Boolean value that indicates whether the window prevents application termination when modal.
 //
 // WithPreventsApplicationTerminationWhenModal sets the preventsApplicationTerminationWhenModal property and returns the receiver for chaining.
 func (x *ColorPanel) WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *ColorPanel {
@@ -290,7 +348,7 @@ func (x *ColorPanel) WithPreventsApplicationTerminationWhenModal(preventsApplica
 	return x
 }
 
-// Default is \c NO. Set to \c YES to allow a window to display tooltips even when the application is in the background.  Note that, enabling tooltips in an inactive application will cause the app to do work any time the mouse passes over the window.  This can degrade system performance. Returns \c YES if this window displays tooltips even when the application is in the background.  To configure this setting you should call `-setAllowsToolTipsWhenApplicationIsInactive:` instead of overriding `-allowsToolTipsWhenApplicationIsInactive`.
+// A Boolean value that indicates whether the window can display tooltips even when the application is in the background.
 //
 // WithAllowsToolTipsWhenApplicationIsInactive sets the allowsToolTipsWhenApplicationIsInactive property and returns the receiver for chaining.
 func (x *ColorPanel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *ColorPanel {
@@ -298,43 +356,55 @@ func (x *ColorPanel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsW
 	return x
 }
 
+// The window’s backing store type.
+//
 // WithBackingType sets the backingType property and returns the receiver for chaining.
 func (x *ColorPanel) WithBackingType(backingType NSBackingStoreType) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetBackingType(raw.NSBackingStoreType(backingType))
 	return x
 }
 
+// The window level of the window.
+//
 // WithLevel sets the level property and returns the receiver for chaining.
 func (x *ColorPanel) WithLevel(level int) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetLevel(level)
 	return x
 }
 
+// The depth limit of the window.
+//
 // WithDepthLimit sets the depthLimit property and returns the receiver for chaining.
 func (x *ColorPanel) WithDepthLimit(depthLimit NSWindowDepth) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetDepthLimit(raw.NSWindowDepth(depthLimit))
 	return x
 }
 
+// A Boolean value that indicates whether the window has a shadow.
+//
 // WithHasShadow sets the hasShadow property and returns the receiver for chaining.
 func (x *ColorPanel) WithHasShadow(hasShadow bool) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetHasShadow(hasShadow)
 	return x
 }
 
+// The window’s alpha value.
+//
 // WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
 func (x *ColorPanel) WithAlphaValue(alphaValue float64) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetAlphaValue(alphaValue)
 	return x
 }
 
+// A Boolean value that indicates whether the window is opaque.
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *ColorPanel) WithOpaque(opaque bool) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetOpaque(opaque)
 	return x
 }
 
-// `-setSharingType:` specifies whether the window content can be read from another process.  The default sharing type is \c NSWindowSharingReadOnly, which means other processes can read the window content (eg. for window capture) but cannot modify it.  If you set your window sharing type to \c NSWindowSharingNone, so that the content cannot be captured, your window will also not be able to participate in a number of system services, so this setting should be used with caution.
+// A Boolean value that indicates the level of access other processes have to the window’s content.
 //
 // WithSharingType sets the sharingType property and returns the receiver for chaining.
 func (x *ColorPanel) WithSharingType(sharingType NSWindowSharingType) *ColorPanel {
@@ -342,7 +412,7 @@ func (x *ColorPanel) WithSharingType(sharingType NSWindowSharingType) *ColorPane
 	return x
 }
 
-// Controls whether threading of view drawing should be enabled for this window.  Defaults to \c YES.  When this is set to \c YES, AppKit's view system is allowed to perform `-drawRect:` activity for the window's views on threads other than the main thread, for views that have `canDrawConcurrently == YES`.  When this is set to \c NO, the window's views will be drawn serially as on 10.5 and earlier, even though some of the views may have `canDrawConcurrently == YES`.
+// A Boolean value that indicates whether the window allows multithreaded view drawing.
 //
 // WithAllowsConcurrentViewDrawing sets the allowsConcurrentViewDrawing property and returns the receiver for chaining.
 func (x *ColorPanel) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *ColorPanel {
@@ -350,13 +420,15 @@ func (x *ColorPanel) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing
 	return x
 }
 
+// A Boolean value that indicates whether the window context should be updated when the screen profile changes or when the window moves to a different screen.
+//
 // WithDisplaysWhenScreenProfileChanges sets the displaysWhenScreenProfileChanges property and returns the receiver for chaining.
 func (x *ColorPanel) WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges)
 	return x
 }
 
-// This API controls whether the receiver is permitted onscreen before the user has logged in.  This property is off by default.  Alert panels and windows presented by input managers are examples of windows which should have this property set.
+// A Boolean value that indicates whether the window can be displayed at the login window.
 //
 // WithCanBecomeVisibleWithoutLogin sets the canBecomeVisibleWithoutLogin property and returns the receiver for chaining.
 func (x *ColorPanel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *ColorPanel {
@@ -364,13 +436,15 @@ func (x *ColorPanel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLog
 	return x
 }
 
+// A value that identifies the window’s behavior in window collections.
+//
 // WithCollectionBehavior sets the collectionBehavior property and returns the receiver for chaining.
 func (x *ColorPanel) WithCollectionBehavior(collectionBehavior NSWindowCollectionBehavior) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetCollectionBehavior(raw.NSWindowCollectionBehavior(collectionBehavior))
 	return x
 }
 
-// Provides for per-window control over automatic orderFront/orderOut animation behaviors added in 10.7.  Can be set to \c NSWindowAnimationBehaviorNone to disable Appkit's automatic animations for a given window, or to one of the other non-Default \c NSWindowAnimationBehavior values to override AppKit's automatic inference of appropriate animation behavior based on the window's apparent type.
+// The window’s automatic animation behavior.
 //
 // WithAnimationBehavior sets the animationBehavior property and returns the receiver for chaining.
 func (x *ColorPanel) WithAnimationBehavior(animationBehavior NSWindowAnimationBehavior) *ColorPanel {
@@ -378,61 +452,79 @@ func (x *ColorPanel) WithAnimationBehavior(animationBehavior NSWindowAnimationBe
 	return x
 }
 
+// The name used to automatically save the window’s frame rectangle data in the defaults system.
+//
 // WithFrameAutosaveName sets the frameAutosaveName property and returns the receiver for chaining.
 func (x *ColorPanel) WithFrameAutosaveName(frameAutosaveName *foundation.NSString) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetFrameAutosaveName(frameAutosaveName)
 	return x
 }
 
+// The minimum size to which the window’s frame (including its title bar) can be sized.
+//
 // WithMinSize sets the minSize property and returns the receiver for chaining.
 func (x *ColorPanel) WithMinSize(minSize corefoundation.CGSize) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetMinSize(minSize)
 	return x
 }
 
+// The maximum size to which the window’s frame (including its title bar) can be sized.
+//
 // WithMaxSize sets the maxSize property and returns the receiver for chaining.
 func (x *ColorPanel) WithMaxSize(maxSize corefoundation.CGSize) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetMaxSize(maxSize)
 	return x
 }
 
+// The minimum size of the window’s content view in the window’s base coordinate system.
+//
 // WithContentMinSize sets the contentMinSize property and returns the receiver for chaining.
 func (x *ColorPanel) WithContentMinSize(contentMinSize corefoundation.CGSize) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetContentMinSize(contentMinSize)
 	return x
 }
 
+// The maximum size of the window’s content view in the window’s base coordinate system.
+//
 // WithContentMaxSize sets the contentMaxSize property and returns the receiver for chaining.
 func (x *ColorPanel) WithContentMaxSize(contentMaxSize corefoundation.CGSize) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetContentMaxSize(contentMaxSize)
 	return x
 }
 
+// A minimum size that is used to determine if a window can fit when it is in full screen in a tile.
+//
 // WithMinFullScreenContentSize sets the minFullScreenContentSize property and returns the receiver for chaining.
 func (x *ColorPanel) WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetMinFullScreenContentSize(minFullScreenContentSize)
 	return x
 }
 
+// A maximum size that is used to determine if a window can fit when it is in full screen in a tile.
+//
 // WithMaxFullScreenContentSize sets the maxFullScreenContentSize property and returns the receiver for chaining.
 func (x *ColorPanel) WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetMaxFullScreenContentSize(maxFullScreenContentSize)
 	return x
 }
 
+// The window’s window controller.
+//
 // WithWindowController sets the windowController property and returns the receiver for chaining.
 func (x *ColorPanel) WithWindowController(windowController *WindowController) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetWindowController(windowController.Unwrap())
 	return x
 }
 
+// The parent window to which the window is attached as a child.
+//
 // WithParentWindow sets the parentWindow property and returns the receiver for chaining.
 func (x *ColorPanel) WithParentWindow(parentWindow WindowProvider) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetParentWindow(parentWindow.asWindow())
 	return x
 }
 
-// If set, the receiver will inherit the appearance of that object, as well as use KVO to observe its effectiveAppearance for changes. Typically this is used for child windows that are shown from a parent window or specific view. Defaults to NSApp.
+// An object that the window inherits its appearance from.
 //
 // WithAppearanceSource sets the appearanceSource property and returns the receiver for chaining.
 func (x *ColorPanel) WithAppearanceSource(appearanceSource *foundation.NSObject) *ColorPanel {
@@ -440,13 +532,15 @@ func (x *ColorPanel) WithAppearanceSource(appearanceSource *foundation.NSObject)
 	return x
 }
 
+// The window’s color space.
+//
 // WithColorSpace sets the colorSpace property and returns the receiver for chaining.
 func (x *ColorPanel) WithColorSpace(colorSpace *ColorSpace) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetColorSpace(colorSpace.Unwrap())
 	return x
 }
 
-// Specifies the style of separator displayed between the window's titlebar and content. The default value is NSTitlebarSeparatorStyleAutomatic. Changing this value will override any preference made by `NSSplitViewItem`.
+// The type of separator that the app displays between the title bar and content of a window.
 //
 // WithTitlebarSeparatorStyle sets the titlebarSeparatorStyle property and returns the receiver for chaining.
 func (x *ColorPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *ColorPanel {
@@ -454,7 +548,7 @@ func (x *ColorPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitleba
 	return x
 }
 
-// The main content view controller for the window. This provides the contentView of the window. Assigning this value will remove the existing contentView and will make the contentViewController.view the main contentView for the window. The default value is nil. The contentViewController only controls the contentView, and not the title of the window. The window title can easily be bound to the contentViewController with the following: [window bind:NSTitleBinding toObject:contentViewController withKeyPath:@"title" options:nil]. Setting the contentViewController will cause the window to resize based on the current size of the contentViewController. Autolayout should be used to restrict the size of the window. The value of the contentViewController is encoded in the NIB. Directly assigning a contentView will clear out the contentViewController.
+// The main content view controller for the window.
 //
 // WithContentViewController sets the contentViewController property and returns the receiver for chaining.
 func (x *ColorPanel) WithContentViewController(contentViewController ViewControllerProvider) *ColorPanel {
@@ -462,37 +556,47 @@ func (x *ColorPanel) WithContentViewController(contentViewController ViewControl
 	return x
 }
 
+// The view that’s made first responder (also called the key view) the first time the window is placed onscreen.
+//
 // WithInitialFirstResponder sets the initialFirstResponder property and returns the receiver for chaining.
 func (x *ColorPanel) WithInitialFirstResponder(initialFirstResponder ViewProvider) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetInitialFirstResponder(initialFirstResponder.asView())
 	return x
 }
 
+// The button cell that performs as if clicked when the window receives a Return (or Enter) key event.
+//
 // WithDefaultButtonCell sets the defaultButtonCell property and returns the receiver for chaining.
 func (x *ColorPanel) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetDefaultButtonCell(defaultButtonCell.asButtonCell())
 	return x
 }
 
+// A Boolean value that indicates whether the window automatically recalculates the key view loop when views are added.
+//
 // WithAutorecalculatesKeyViewLoop sets the autorecalculatesKeyViewLoop property and returns the receiver for chaining.
 func (x *ColorPanel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop)
 	return x
 }
 
+// The window’s toolbar.
+//
 // WithToolbar sets the toolbar property and returns the receiver for chaining.
 func (x *ColorPanel) WithToolbar(toolbar *Toolbar) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetToolbar(toolbar.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the toolbar control button is currently displayed.
+//
 // WithShowsToolbarButton sets the showsToolbarButton property and returns the receiver for chaining.
 func (x *ColorPanel) WithShowsToolbarButton(showsToolbarButton bool) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetShowsToolbarButton(showsToolbarButton)
 	return x
 }
 
-// Get and set the tabbing mode for this window. This should be set before a window is shown. The default value is \c NSWindowTabbingModeAutomatic. When the value is \c NSWindowTabbingModeAutomatic, the system will look at the \c userTabbingPreference and automatically tab windows together based on the tabbingIdentifier, when it is appropriate to do so.
+// A value that indicates when a window displays tabs.
 //
 // WithTabbingMode sets the tabbingMode property and returns the receiver for chaining.
 func (x *ColorPanel) WithTabbingMode(tabbingMode NSWindowTabbingMode) *ColorPanel {
@@ -500,7 +604,7 @@ func (x *ColorPanel) WithTabbingMode(tabbingMode NSWindowTabbingMode) *ColorPane
 	return x
 }
 
-// Windows with the same \c tabbingIdentifier will have the ability to be tabbed together when a window is being shown. This allows aggregation of similar windows. By default, the \c tabbingIdentifier will be generated based on inherent window properties, such as the window class name, the delegate class name, the window controller class name, and some additional state. Windows can be explicitly made to group together by using the same \c tabbingIdentifier.
+// A value that allows a group of related windows.
 //
 // WithTabbingIdentifier sets the tabbingIdentifier property and returns the receiver for chaining.
 func (x *ColorPanel) WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *ColorPanel {
@@ -508,12 +612,16 @@ func (x *ColorPanel) WithTabbingIdentifier(tabbingIdentifier *foundation.NSStrin
 	return x
 }
 
+// A Boolean value that indicates whether the window accepts mouse-moved events.
+//
 // WithAcceptsMouseMovedEvents sets the acceptsMouseMovedEvents property and returns the receiver for chaining.
 func (x *ColorPanel) WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetAcceptsMouseMovedEvents(acceptsMouseMovedEvents)
 	return x
 }
 
+// A Boolean value that indicates whether the window is transparent to mouse events.
+//
 // WithIgnoresMouseEvents sets the ignoresMouseEvents property and returns the receiver for chaining.
 func (x *ColorPanel) WithIgnoresMouseEvents(ignoresMouseEvents bool) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetIgnoresMouseEvents(ignoresMouseEvents)
@@ -544,57 +652,77 @@ func (x *ColorPanel) WithShowsResizeIndicator(showsResizeIndicator bool) *ColorP
 	return x
 }
 
+// The zero-based position of the window, based on its order from front to back among all visible application windows.
+//
 // WithOrderedIndex sets the orderedIndex property and returns the receiver for chaining.
 func (x *ColorPanel) WithOrderedIndex(orderedIndex int) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetOrderedIndex(orderedIndex)
 	return x
 }
 
+// A Boolean value indicating whether the window configuration is preserved between application launches.
+//
 // WithRestorable sets the restorable property and returns the receiver for chaining.
 func (x *ColorPanel) WithRestorable(restorable bool) *ColorPanel {
 	x.inner.NSPanel.NSWindow.SetRestorable(restorable)
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *ColorPanel) WithNextResponder(nextResponder ResponderProvider) *ColorPanel {
 	x.inner.NSPanel.NSWindow.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *ColorPanel) WithMenu(menu *Menu) *ColorPanel {
 	x.inner.NSPanel.NSWindow.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *ColorPanel) WithUserActivity(userActivity *foundation.NSUserActivity) *ColorPanel {
 	x.inner.NSPanel.NSWindow.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *ColorPanel) WithTouchBar(touchBar *TouchBar) *ColorPanel {
 	x.inner.NSPanel.NSWindow.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Sets the color panel’s action message.
+//
 // SetAction calls the underlying SetAction.
 func (x *ColorPanel) SetAction(selector objc.SEL) {
 	x.inner.SetAction(selector)
 }
 
+// Sets the target of the receiver.
+//
 // SetTarget calls the underlying SetTarget.
 func (x *ColorPanel) SetTarget(target objc.ID) {
 	x.inner.SetTarget(target)
 }
 
+// Adds the list of NSColor objects specified to all the color pickers in the receiver that display color lists by invoking attachColorList: on all color pickers in the application.
+//
 // AttachColorList calls the underlying AttachColorList.
 func (x *ColorPanel) AttachColorList(colorList *raw.NSColorList) {
 	x.inner.AttachColorList(colorList)
 }
 
+// Removes the list of colors from all the color pickers in the receiver that display color lists by invoking detachColorList: on all color pickers in the application.
+//
 // DetachColorList calls the underlying DetachColorList.
 func (x *ColorPanel) DetachColorList(colorList *raw.NSColorList) {
 	x.inner.DetachColorList(colorList)

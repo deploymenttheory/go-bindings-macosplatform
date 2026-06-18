@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An operation that a compositor performs.
+//
 // VideoCompositionInstruction wraps [raw.AVVideoCompositionInstruction] with a fluent Go API.
 type VideoCompositionInstruction struct {
 	inner *raw.AVVideoCompositionInstruction

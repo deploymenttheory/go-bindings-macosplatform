@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A playback coordinator subclass that coordinates the playback of player objects in a connected group.
+//
 // PlayerPlaybackCoordinator wraps [raw.AVPlayerPlaybackCoordinator] with a fluent Go API.
 type PlayerPlaybackCoordinator struct {
 	inner *raw.AVPlayerPlaybackCoordinator
@@ -37,7 +39,7 @@ func NewPlayerPlaybackCoordinator() *PlayerPlaybackCoordinator {
 	return &PlayerPlaybackCoordinator{inner: raw.AVPlayerPlaybackCoordinatorFromID(_id)}
 }
 
-// An object implementing the AVPlaybackCoordinatorDelegate protocol.
+// A delegate object for the playback coordinator.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *PlayerPlaybackCoordinator) WithDelegate(delegate raw.AVPlayerPlaybackCoordinatorDelegate) *PlayerPlaybackCoordinator {
@@ -45,7 +47,7 @@ func (x *PlayerPlaybackCoordinator) WithDelegate(delegate raw.AVPlayerPlaybackCo
 	return x
 }
 
-// If the coordinator decides to delay playback to wait for others, it will wait out these reasons, but not others.
+// The reasons that cause a coordinator to suspend playback.
 //
 // WithSuspensionReasonsThatTriggerWaiting sets the collection, converting the Go slice to an NSArray.
 func (x *PlayerPlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(items ...*foundation.NSString) *PlayerPlaybackCoordinator {
@@ -65,7 +67,7 @@ func (x *PlayerPlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(item
 	return x
 }
 
-// Determines if participants should mirror the originator's stop time when pausing. If YES, all participants will seek to the originator's stop time after they pause. Use this if it is desirable to counteract any network delay incurred by communicating the originator's pause to the other participants. If NO, it's acceptable for participants to stop at slightly different offsets and a pause will not cause other participants' time to jump back.
+// A Boolean value that indicates whether participants mirror the originator’s stop time when they pause.
 //
 // WithPauseSnapsToMediaTimeOfOriginator sets the pauseSnapsToMediaTimeOfOriginator property and returns the receiver for chaining.
 func (x *PlayerPlaybackCoordinator) WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *PlayerPlaybackCoordinator {
@@ -96,7 +98,7 @@ func (x *PlayerPlaybackCoordinator) SetDelegate(delegate raw.AVPlayerPlaybackCoo
 	x.inner.SetDelegate(delegate)
 }
 
-// Connects the playback coordinator to the coordination medium This connects the playback coordinator to a coordination medium to enable sending and receiving messages from other connected playback coordinators. If the coordination medium is non-NULL, this will connect the playback coordinator to the specified coordination medium. If the coordination medium is set to NULL, this will disconnect the playback coordinator from the playback coordination medium. The player will no longer be coordinated with the other players connected to the coordination medium. The playback coordinator can either only coordinate with local players through an AVPlaybackCoordinationMedium or coordinate with a remote group session through the `coordinateWithSession` API. If the client attempts to connect to an AVPlaybackCoordinationMedium while already connected to a group session, this method will populate the outError parameter If the playback coordinator successfully connects to the coordination medium or disconnects from a coordination medium, the `outError` parameter will be nil. If the playback coordinator fails to connect to the specified coordination medium, the `outError` parameter will describe what went wrong. - Parameter coordinationMedium: The coordination medium the playback coordinator connects to. If NULL, the playback coordinator disconnects from any existing coordination medium. - Parameter outError: A pointer to an NSError object that will be populated with failure information if connecting to or disconnecting from the coordination medium fails.
+// Connects the playback coordinator to the coordination medium
 //
 // CoordinateUsingCoordinationMediumError calls the underlying CoordinateUsingCoordinationMediumError.
 func (x *PlayerPlaybackCoordinator) CoordinateUsingCoordinationMediumError(coordinationMedium *raw.AVPlaybackCoordinationMedium) (bool, error) {

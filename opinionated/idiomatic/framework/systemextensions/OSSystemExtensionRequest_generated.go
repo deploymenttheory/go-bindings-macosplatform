@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A request to activate or deactivate a system extension.
+//
 // SystemExtensionRequest wraps [raw.OSSystemExtensionRequest] with a fluent Go API.
 type SystemExtensionRequest struct {
 	inner *raw.OSSystemExtensionRequest
@@ -36,7 +38,7 @@ func NewSystemExtensionRequest() *SystemExtensionRequest {
 	return &SystemExtensionRequest{inner: raw.OSSystemExtensionRequestFromID(_id)}
 }
 
-// @brief A delegate to receive updates about the progress of a request
+// A delegate to receive updates about the progress of a request.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *SystemExtensionRequest) WithDelegate(delegate raw.OSSystemExtensionRequestDelegate) *SystemExtensionRequest {

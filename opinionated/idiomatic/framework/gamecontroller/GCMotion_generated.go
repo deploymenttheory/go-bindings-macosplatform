@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A controller profile that supports orientation and motion.
+//
 // Motion wraps [raw.GCMotion] with a fluent Go API.
 type Motion struct {
 	inner *raw.GCMotion
@@ -35,13 +37,15 @@ func NewMotion() *Motion {
 	return &Motion{inner: raw.GCMotionFromID(_id)}
 }
 
+// The block that the profile calls when an element’s value changes.
+//
 // WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
 func (x *Motion) WithValueChangedHandler(valueChangedHandler func(*raw.GCMotion)) *Motion {
 	x.inner.SetValueChangedHandler(valueChangedHandler)
 	return x
 }
 
-// Set this property to YES when you wish to receive motion data from the controller. When you set this property to NO, the motion sensors will be disabled and the GCMotion profile will not be updated. @note It is highly recommended that you only enable sensor during the period of time you directly need motion data. Motion sensors can drain controller battery, device battery, and needlessly consume Bluetooth bandwidth. @see sensorsRequireManualActivation
+// A Boolean value that indicates whether the sensors that compute the motion data are active.
 //
 // WithSensorsActive sets the sensorsActive property and returns the receiver for chaining.
 func (x *Motion) WithSensorsActive(sensorsActive bool) *Motion {
@@ -49,7 +53,7 @@ func (x *Motion) WithSensorsActive(sensorsActive bool) *Motion {
 	return x
 }
 
-// The gravity vector expressed in the controller's reference frame. Note that the total acceleration of the controller is equal to gravity plus userAcceleration. @see userAcceleration @see acceleration
+// The gravity acceleration vector from the controller’s reference frame.
 //
 // WithGravity sets the gravity property and returns the receiver for chaining.
 func (x *Motion) WithGravity(gravity raw.GCAcceleration) *Motion {
@@ -57,7 +61,7 @@ func (x *Motion) WithGravity(gravity raw.GCAcceleration) *Motion {
 	return x
 }
 
-// The acceleration that the user is giving to the controller. Note that the total acceleration of the controller is equal to gravity plus userAcceleration. @see gravity @see acceleration
+// The acceleration that the user applies to the controller.
 //
 // WithUserAcceleration sets the userAcceleration property and returns the receiver for chaining.
 func (x *Motion) WithUserAcceleration(userAcceleration raw.GCAcceleration) *Motion {
@@ -65,7 +69,7 @@ func (x *Motion) WithUserAcceleration(userAcceleration raw.GCAcceleration) *Moti
 	return x
 }
 
-// The total acceleration of the controller. @see gravity @see userAcceleration
+// The total acceleration of the controller that includes gravity and the acceleration the user applies to the controller.
 //
 // WithAcceleration sets the acceleration property and returns the receiver for chaining.
 func (x *Motion) WithAcceleration(acceleration raw.GCAcceleration) *Motion {
@@ -73,7 +77,7 @@ func (x *Motion) WithAcceleration(acceleration raw.GCAcceleration) *Motion {
 	return x
 }
 
-// The current attitude of the controller. @note Remotes without accurate attitude and rotation rate can not determine a stable attitude so the values will be (0,0,0,1) at all times. @see hasAttitude @see GCMicroGamepad
+// The attitude of the controller.
 //
 // WithAttitude sets the attitude property and returns the receiver for chaining.
 func (x *Motion) WithAttitude(attitude raw.GCQuaternion) *Motion {
@@ -81,7 +85,7 @@ func (x *Motion) WithAttitude(attitude raw.GCQuaternion) *Motion {
 	return x
 }
 
-// The current rotation rate of the controller. @note Remotes without accurate attitude and rotation rate can not determine a stable rotation rate so the values will be (0,0,0) at all times. @see hasRotationRate @see GCMicroGamepad
+// The rotation rate of the controller.
 //
 // WithRotationRate sets the rotationRate property and returns the receiver for chaining.
 func (x *Motion) WithRotationRate(rotationRate raw.GCRotationRate) *Motion {
@@ -89,42 +93,42 @@ func (x *Motion) WithRotationRate(rotationRate raw.GCRotationRate) *Motion {
 	return x
 }
 
-// Sets the gravity vector expressed in the controller's reference frame. @note If the controller's snapshot flag is set to NO, this method has no effect. @see gravity
+// Sets the controller’s gravity data.
 //
 // SetGravity calls the underlying SetGravity.
 func (x *Motion) SetGravity(gravity raw.GCAcceleration) {
 	x.inner.SetGravity(gravity)
 }
 
-// Sets the acceleration that the user is giving to the controller. @note If the controller's snapshot flag is set to NO, this method has no effect. @see userAcceleration
+// Sets the acceleration the user applies to the controller.
 //
 // SetUserAcceleration calls the underlying SetUserAcceleration.
 func (x *Motion) SetUserAcceleration(userAcceleration raw.GCAcceleration) {
 	x.inner.SetUserAcceleration(userAcceleration)
 }
 
-// Sets the acceleration that the user is giving to the controller. @note If the controller's snapshot flag is set to NO, this method has no effect. @see userAcceleration
+// Sets the total acceleration of the controller that includes gravity and the user’s acceleration.
 //
 // SetAcceleration calls the underlying SetAcceleration.
 func (x *Motion) SetAcceleration(acceleration raw.GCAcceleration) {
 	x.inner.SetAcceleration(acceleration)
 }
 
-// Sets the current rotation rate of the controller. @note If the controller's snapshot flag is set to NO, this method has no effect. @see attitude
+// Sets the controller’s attitude.
 //
 // SetAttitude calls the underlying SetAttitude.
 func (x *Motion) SetAttitude(attitude raw.GCQuaternion) {
 	x.inner.SetAttitude(attitude)
 }
 
-// Sets the current rotation rate of the controller. @note If the controller's snapshot flag is set to NO, this method has no effect. @see rotationRate
+// Sets the controller’s rotation rate.
 //
 // SetRotationRate calls the underlying SetRotationRate.
 func (x *Motion) SetRotationRate(rotationRate raw.GCRotationRate) {
 	x.inner.SetRotationRate(rotationRate)
 }
 
-// Sets the state vector of the motion profile to a copy of the input motion profile's state vector. @note If the controller's snapshot flag is set to NO, this method has no effect. @see GCController.snapshot
+// Copies the input values from a specified motion profile to a snapshot of a motion profile.
 //
 // SetStateFromMotion calls the underlying SetStateFromMotion.
 func (x *Motion) SetStateFromMotion(motion *raw.GCMotion) {

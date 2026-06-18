@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that facilitates the sharing of content with social media services, or with apps like Mail or Safari.
+//
 // SharingService wraps [raw.NSSharingService] with a fluent Go API.
 type SharingService struct {
 	inner *raw.NSSharingService
@@ -32,7 +34,7 @@ func SharingServiceFromID(id objc.ID) *SharingService {
 	return &SharingService{inner: raw.NSSharingServiceFromID(id)}
 }
 
-// Creates a custom NSSharingService object. Custom sharing services can be added to the NSSharingServicePicker with the sharingServicePicker:sharingServicesForItems:proposedSharingServices: delegate method.
+// Creates a custom sharing service object.
 //
 // NewSharingServiceWithTitleImageAlternateImageHandler creates a new [SharingService].
 func NewSharingServiceWithTitleImageAlternateImageHandler(title string, image *raw.NSImage, alternateImage *raw.NSImage, block func()) *SharingService {
@@ -41,13 +43,15 @@ func NewSharingServiceWithTitleImageAlternateImageHandler(title string, image *r
 	return &SharingService{inner: raw.NSSharingServiceFromID(_id)}
 }
 
+// Specifies the delegate of the sharing service.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *SharingService) WithDelegate(delegate raw.NSSharingServiceDelegate) *SharingService {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
-// Title of the service in the Share menu. Can be modified.
+// The title of the service in the Share menu.
 //
 // WithMenuItemTitle sets the menuItemTitle property and returns the receiver for chaining.
 func (x *SharingService) WithMenuItemTitle(menuItemTitle string) *SharingService {
@@ -55,7 +59,7 @@ func (x *SharingService) WithMenuItemTitle(menuItemTitle string) *SharingService
 	return x
 }
 
-// NSArray of NSString objects representing handles (example: email adresses)
+// An array containing the user handles of the desired recipients.
 //
 // WithRecipients sets the collection, converting the Go slice to an NSArray.
 func (x *SharingService) WithRecipients(items ...*foundation.NSString) *SharingService {
@@ -75,20 +79,22 @@ func (x *SharingService) WithRecipients(items ...*foundation.NSString) *SharingS
 	return x
 }
 
+// The subject of the post.
+//
 // WithSubject sets the subject property and returns the receiver for chaining.
 func (x *SharingService) WithSubject(subject string) *SharingService {
 	x.inner.SetSubject(foundation.NSStringStringWithUTF8String(subject))
 	return x
 }
 
-// Returns whether a service can do something with all the provided items. This can be used to validate a custom UI such as a dedicated Twitter button. If items is nil, the method will return YES when the service is configured. Therefore you could call it once at launch time with nil items to check whether to display the button or not, and then with real items to enable and disable the button depending on the context or selection. The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider or an NSDocument. (e.g. NSString, NSImage, NSURL, etc.)
+// Returns whether the service can share all the specified items.
 //
 // CanPerformWithItems calls the underlying CanPerformWithItems.
 func (x *SharingService) CanPerformWithItems(items *foundation.NSArray[objc.ID]) bool {
 	return x.inner.CanPerformWithItems(items)
 }
 
-// Manually performs the service on the provided items. In most cases this will display a sharing window. The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider or an NSDocument. (e.g. NSString, NSImage, NSURL, etc.)
+// Manually performs the service on the provided items.
 //
 // PerformWithItems calls the underlying PerformWithItems.
 func (x *SharingService) PerformWithItems(items *foundation.NSArray[objc.ID]) {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An encapsulation of the design-time view controller and window controller graph represented in an Interface Builder storyboard resource file.
+//
 // Storyboard wraps [raw.NSStoryboard] with a fluent Go API.
 type Storyboard struct {
 	inner *raw.NSStoryboard
@@ -36,6 +38,8 @@ func NewStoryboard() *Storyboard {
 	return &Storyboard{inner: raw.NSStoryboardFromID(_id)}
 }
 
+// Creates the initial view controller or window controller from a storyboard.
+//
 // InstantiateInitialController calls the underlying InstantiateInitialController.
 func (x *Storyboard) InstantiateInitialController() objc.ID {
 	return x.inner.InstantiateInitialController()
@@ -46,6 +50,8 @@ func (x *Storyboard) InstantiateInitialControllerWithCreator(block func(*foundat
 	return x.inner.InstantiateInitialControllerWithCreator(block)
 }
 
+// Instantiates a specified view controller or window controller from a storyboard.
+//
 // InstantiateControllerWithIdentifier calls the underlying InstantiateControllerWithIdentifier.
 func (x *Storyboard) InstantiateControllerWithIdentifier(identifier *foundation.NSString) objc.ID {
 	return x.inner.InstantiateControllerWithIdentifier(identifier)

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract base class for implementing a full-featured file system.
+//
 // FileSystem wraps [raw.FSFileSystem] with a fluent Go API.
 type FileSystem struct {
 	inner *raw.FSFileSystem

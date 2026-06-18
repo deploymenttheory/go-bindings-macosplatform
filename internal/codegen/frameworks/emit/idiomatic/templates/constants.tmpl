@@ -9,4 +9,13 @@
 {{define "cf_constants"}}{{range .Items}}{{.CommentBlock}}// {{.GoName}} returns the value of the CoreFoundation reference constant {{.ExternName}} as an objc.ID.
 func {{.GoName}}() objc.ID { return purego.CFConstant({{$.RawAlias}}.{{.GoName}}()) }
 
+{{end}}{{range .StringItems}}{{.CommentBlock}}// {{.GoName}} returns the Foundation string constant {{.ExternName}} as an idiomatic *String.
+func {{.GoName}}() *String {
+_r := {{$.RawAlias}}.{{.GoName}}()
+if _r == nil {
+return nil
+}
+return StringFromID(_r.Ptr())
+}
+
 {{end}}{{end}}

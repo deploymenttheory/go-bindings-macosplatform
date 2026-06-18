@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A base class for different kinds of authorization requests.
+//
 // AuthorizationRequest wraps [raw.ASAuthorizationRequest] with a fluent Go API.
 type AuthorizationRequest struct {
 	inner *raw.ASAuthorizationRequest

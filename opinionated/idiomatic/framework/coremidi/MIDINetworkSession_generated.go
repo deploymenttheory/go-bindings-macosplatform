@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a pairing of a source and destination.
+//
 // NetworkSession wraps [raw.MIDINetworkSession] with a fluent Go API.
 type NetworkSession struct {
 	inner *raw.MIDINetworkSession
@@ -37,53 +39,73 @@ func NewNetworkSession() *NetworkSession {
 	return &NetworkSession{inner: raw.MIDINetworkSessionFromID(_id)}
 }
 
+// A Boolean value that determines whether the session is enabled.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *NetworkSession) WithEnabled(enabled bool) *NetworkSession {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// The policy that determines who can connect to this session.
+//
 // WithConnectionPolicy sets the connectionPolicy property and returns the receiver for chaining.
 func (x *NetworkSession) WithConnectionPolicy(connectionPolicy MIDINetworkConnectionPolicy) *NetworkSession {
 	x.inner.SetConnectionPolicy(raw.MIDINetworkConnectionPolicy(connectionPolicy))
 	return x
 }
 
+// Returns the array of network hosts.
+//
 // Contacts calls the underlying Contacts.
 func (x *NetworkSession) Contacts() *foundation.NSSet[*raw.MIDINetworkHost] {
 	return x.inner.Contacts()
 }
 
+// Adds a host as a contact.
+//
 // AddContact calls the underlying AddContact.
 func (x *NetworkSession) AddContact(contact *raw.MIDINetworkHost) bool {
 	return x.inner.AddContact(contact)
 }
 
+// Removes a host as a contact.
+//
 // RemoveContact calls the underlying RemoveContact.
 func (x *NetworkSession) RemoveContact(contact *raw.MIDINetworkHost) bool {
 	return x.inner.RemoveContact(contact)
 }
 
+// Returns the session’s set of MIDI network connections.
+//
 // Connections calls the underlying Connections.
 func (x *NetworkSession) Connections() *foundation.NSSet[*raw.MIDINetworkConnection] {
 	return x.inner.Connections()
 }
 
+// Adds a new connection to this session.
+//
 // AddConnection calls the underlying AddConnection.
 func (x *NetworkSession) AddConnection(connection *raw.MIDINetworkConnection) bool {
 	return x.inner.AddConnection(connection)
 }
 
+// Removes a connection from this session.
+//
 // RemoveConnection calls the underlying RemoveConnection.
 func (x *NetworkSession) RemoveConnection(connection *raw.MIDINetworkConnection) bool {
 	return x.inner.RemoveConnection(connection)
 }
 
+// Returns the session’s source endpoint.
+//
 // SourceEndpoint calls the underlying SourceEndpoint.
 func (x *NetworkSession) SourceEndpoint() uint {
 	return x.inner.SourceEndpoint()
 }
 
+// Returns the session’s destination endpoint.
+//
 // DestinationEndpoint calls the underlying DestinationEndpoint.
 func (x *NetworkSession) DestinationEndpoint() uint {
 	return x.inner.DestinationEndpoint()

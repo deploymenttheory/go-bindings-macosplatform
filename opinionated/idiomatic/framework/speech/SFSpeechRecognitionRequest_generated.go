@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An abstract class that represents a request to recognize speech from an audio source.
+//
 // SpeechRecognitionRequest wraps [raw.SFSpeechRecognitionRequest] with a fluent Go API.
 type SpeechRecognitionRequest struct {
 	inner *raw.SFSpeechRecognitionRequest
@@ -38,7 +40,7 @@ func NewSpeechRecognitionRequest() *SpeechRecognitionRequest {
 	return &SpeechRecognitionRequest{inner: raw.SFSpeechRecognitionRequestFromID(_id)}
 }
 
-// A value that indicates the type of speech recognition being performed. The default value of this property is “SFSpeechRecognitionTaskHint/unspecified“. For a valid list of values, see “SFSpeechRecognitionTaskHint“.
+// A value that indicates the type of speech recognition being performed.
 //
 // WithTaskHint sets the taskHint property and returns the receiver for chaining.
 func (x *SpeechRecognitionRequest) WithTaskHint(taskHint SFSpeechRecognitionTaskHint) *SpeechRecognitionRequest {
@@ -46,13 +48,15 @@ func (x *SpeechRecognitionRequest) WithTaskHint(taskHint SFSpeechRecognitionTask
 	return x
 }
 
+// A Boolean value that indicates whether you want intermediate results returned for each utterance.
+//
 // WithShouldReportPartialResults sets the shouldReportPartialResults property and returns the receiver for chaining.
 func (x *SpeechRecognitionRequest) WithShouldReportPartialResults(shouldReportPartialResults bool) *SpeechRecognitionRequest {
 	x.inner.SetShouldReportPartialResults(shouldReportPartialResults)
 	return x
 }
 
-// An array of phrases that should be recognized, even if they are not in the system vocabulary. Use this property to specify short custom phrases that are unique to your app. You might include phrases with the names of characters, products, or places that are specific to your app. You might also include domain-specific terminology or unusual or made-up words. Assigning custom phrases to this property improves the likelihood of those phrases being recognized. Keep phrases relatively brief, limiting them to one or two words whenever possible. Lengthy phrases are less likely to be recognized. In addition, try to limit each phrase to something the user can say without pausing. Limit the total number of phrases to no more than 100.
+// An array of phrases that should be recognized, even if they are not in the system vocabulary.
 //
 // WithContextualStrings sets the collection, converting the Go slice to an NSArray.
 func (x *SpeechRecognitionRequest) WithContextualStrings(items ...*foundation.NSString) *SpeechRecognitionRequest {
@@ -72,7 +76,7 @@ func (x *SpeechRecognitionRequest) WithContextualStrings(items ...*foundation.NS
 	return x
 }
 
-// An identifier string that you use to describe the type of interaction associated with the speech recognition request. If different parts of your app have different speech recognition needs, you can use this property to identify the part of your app that is making each request. For example, if one part of your app lets users speak phone numbers and another part lets users speak street addresses, consistently identifying the part of the app that makes a recognition request may help improve the accuracy of the results.
+// An identifier string that you use to describe the type of interaction associated with the speech recognition request.
 //
 // WithInteractionIdentifier sets the interactionIdentifier property and returns the receiver for chaining.
 func (x *SpeechRecognitionRequest) WithInteractionIdentifier(interactionIdentifier string) *SpeechRecognitionRequest {
@@ -80,7 +84,7 @@ func (x *SpeechRecognitionRequest) WithInteractionIdentifier(interactionIdentifi
 	return x
 }
 
-// A Boolean value that determines whether a request must keep its audio data on the device. Set this property to `true` to prevent an “SFSpeechRecognitionRequest“ from sending audio over the network. However, on-device requests won't be as accurate. > Note: > The request only honors this setting if the “SFSpeechRecognizer/supportsOnDeviceRecognition“ (“SFSpeechRecognizer“) property is also `true`.
+// A Boolean value that determines whether a request must keep its audio data on the device.
 //
 // WithRequiresOnDeviceRecognition sets the requiresOnDeviceRecognition property and returns the receiver for chaining.
 func (x *SpeechRecognitionRequest) WithRequiresOnDeviceRecognition(requiresOnDeviceRecognition bool) *SpeechRecognitionRequest {
@@ -88,7 +92,7 @@ func (x *SpeechRecognitionRequest) WithRequiresOnDeviceRecognition(requiresOnDev
 	return x
 }
 
-// A Boolean value that indicates whether to add punctuation to speech recognition results. Set this property to `true` for the speech framework to automatically include punctuation in the recognition results. Punctuation includes a period or question mark at the end of a sentence, and a comma within a sentence.
+// A Boolean value that indicates whether to add punctuation to speech recognition results.
 //
 // WithAddsPunctuation sets the addsPunctuation property and returns the receiver for chaining.
 func (x *SpeechRecognitionRequest) WithAddsPunctuation(addsPunctuation bool) *SpeechRecognitionRequest {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents attributes specific to a particular rendition.
+//
 // AssetVariantAudioRenditionSpecificAttributes wraps [raw.AVAssetVariantAudioRenditionSpecificAttributes] with a fluent Go API.
 type AssetVariantAudioRenditionSpecificAttributes struct {
 	inner *raw.AVAssetVariantAudioRenditionSpecificAttributes

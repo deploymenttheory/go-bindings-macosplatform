@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specification of how to create a visible function table.
+//
 // VisibleFunctionTableDescriptor wraps [raw.MTLVisibleFunctionTableDescriptor] with a fluent Go API.
 type VisibleFunctionTableDescriptor struct {
 	inner *raw.MTLVisibleFunctionTableDescriptor
@@ -37,7 +39,7 @@ func NewVisibleFunctionTableDescriptor() *VisibleFunctionTableDescriptor {
 	return &VisibleFunctionTableDescriptor{inner: raw.MTLVisibleFunctionTableDescriptorFromID(_id)}
 }
 
-// @property functionCount @abstract The number of functions in the table.
+// The number of entries in the function table.
 //
 // WithFunctionCount sets the functionCount property and returns the receiver for chaining.
 func (x *VisibleFunctionTableDescriptor) WithFunctionCount(functionCount uint) *VisibleFunctionTableDescriptor {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An immutable object that represents a collection of contacts.
+//
 // Container wraps [raw.CNContainer] with a fluent Go API.
 type Container struct {
 	inner *raw.CNContainer

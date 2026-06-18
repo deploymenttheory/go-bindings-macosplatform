@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A MDLVertexBufferLayout object describes layout information for a vertex buffer in a MDLMesh object. A collection of vertex layer objects, vertex attribute objects, and additional information forms a MDLVertexDescriptor object, which completely describes the layout of vertex buffers for a mesh.
+//
 // VertexBufferLayout wraps [raw.MDLVertexBufferLayout] with a fluent Go API.
 type VertexBufferLayout struct {
 	inner *raw.MDLVertexBufferLayout
@@ -36,7 +38,7 @@ func NewVertexBufferLayoutWithStride(stride uint) *VertexBufferLayout {
 	return &VertexBufferLayout{inner: raw.MDLVertexBufferLayoutFromID(_id)}
 }
 
-// @property stride @abstract stride in bytes of each vertex element in the buffer. @discussion - If you store multiple attributes interleaved in the vertex buffer, the stride will be the sum of sizes of each attribute (and any padding). - If you store multiple attributes non-interleaved (back to back), the stride will be the size of an attribute (and all attributes are required to have the same size).
+// The stride, in bytes, between data for separate vertices in a vertex buffer.
 //
 // WithStride sets the stride property and returns the receiver for chaining.
 func (x *VertexBufferLayout) WithStride(stride uint) *VertexBufferLayout {

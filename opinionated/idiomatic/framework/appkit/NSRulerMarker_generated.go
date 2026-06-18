@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A symbol on a ruler view, indicating a location for the graphics element it represents in the client of the ruler view.
+//
 // RulerMarker wraps [raw.NSRulerMarker] with a fluent Go API.
 type RulerMarker struct {
 	inner *raw.NSRulerMarker
@@ -31,6 +33,8 @@ func RulerMarkerFromID(id objc.ID) *RulerMarker {
 	return &RulerMarker{inner: raw.NSRulerMarkerFromID(id)}
 }
 
+// Initializes a newly allocated ruler marker, associating it with (but not adding it to) a specified ruler view and assigning the attributes provided.
+//
 // NewRulerMarkerWithRulerViewMarkerLocationImageImageOrigin creates a new [RulerMarker].
 func NewRulerMarkerWithRulerViewMarkerLocationImageImageOrigin(ruler *raw.NSRulerView, location float64, image *raw.NSImage, imageOrigin corefoundation.CGPoint) *RulerMarker {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSRulerMarker")), objc.RegisterName("alloc"))
@@ -45,47 +49,63 @@ func NewRulerMarkerWithCoder(coder *foundation.NSCoder) *RulerMarker {
 	return &RulerMarker{inner: raw.NSRulerMarkerFromID(_id)}
 }
 
+// The location of the receiver in the coordinate system of the ruler view’s client view.
+//
 // WithMarkerLocation sets the markerLocation property and returns the receiver for chaining.
 func (x *RulerMarker) WithMarkerLocation(markerLocation float64) *RulerMarker {
 	x.inner.SetMarkerLocation(markerLocation)
 	return x
 }
 
+// The receiver’s image.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *RulerMarker) WithImage(image *Image) *RulerMarker {
 	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
+// The point in the receiver’s image that is positioned at the receiver’s location on the ruler view.
+//
 // WithImageOrigin sets the imageOrigin property and returns the receiver for chaining.
 func (x *RulerMarker) WithImageOrigin(imageOrigin corefoundation.CGPoint) *RulerMarker {
 	x.inner.SetImageOrigin(imageOrigin)
 	return x
 }
 
+// A Boolean that indicates whether the user can move the receiver in its ruler view.
+//
 // WithMovable sets the movable property and returns the receiver for chaining.
 func (x *RulerMarker) WithMovable(movable bool) *RulerMarker {
 	x.inner.SetMovable(movable)
 	return x
 }
 
+// A Boolean that indicates whether the user can remove the receiver from its ruler view.
+//
 // WithRemovable sets the removable property and returns the receiver for chaining.
 func (x *RulerMarker) WithRemovable(removable bool) *RulerMarker {
 	x.inner.SetRemovable(removable)
 	return x
 }
 
+// The object the receiver represents.
+//
 // WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
 func (x *RulerMarker) WithRepresentedObject(representedObject foundation.NSCopying) *RulerMarker {
 	x.inner.SetRepresentedObject(representedObject)
 	return x
 }
 
+// Draws the receiver’s image that appears in the supplied rectangle.
+//
 // DrawRect calls the underlying DrawRect.
 func (x *RulerMarker) DrawRect(rect corefoundation.CGRect) {
 	x.inner.DrawRect(rect)
 }
 
+// Handles user manipulation of the receiver in its ruler view.
+//
 // TrackMouseAdding calls the underlying TrackMouseAdding.
 func (x *RulerMarker) TrackMouseAdding(mouseDownEvent *raw.NSEvent, isAdding bool) bool {
 	return x.inner.TrackMouseAdding(mouseDownEvent, isAdding)

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A proxy for a tab in a Safari window.
+//
 // SafariTab wraps [raw.SFSafariTab] with a fluent Go API.
 type SafariTab struct {
 	inner *raw.SFSafariTab
@@ -37,7 +39,7 @@ func NewSafariTab() *SafariTab {
 	return &SafariTab{inner: raw.SFSafariTabFromID(_id)}
 }
 
-// This calls the completion handler passing the active page in the tab.
+// Calls the completion handler passing the active page in the tab.
 //
 // GetActivePage blocks until the operation completes or ctx is cancelled.
 func (x *SafariTab) GetActivePage(ctx context.Context) (*SafariPage, error) {
@@ -62,7 +64,7 @@ func (x *SafariTab) GetActivePage(ctx context.Context) (*SafariPage, error) {
 	}
 }
 
-// This calls the completion handler passing all the pages in the tab. This includes the active page and any pages being preloaded by Safari.
+// Calls the completion handler with all of the tab’s active and preloading pages.
 //
 // GetPages blocks until the operation completes or ctx is cancelled.
 func (x *SafariTab) GetPages(ctx context.Context) (*foundation.NSArray[*raw.SFSafariPage], error) {
@@ -110,7 +112,7 @@ func (x *SafariTab) GetContainingWindow(ctx context.Context) (*SafariWindow, err
 	}
 }
 
-// Activates this tab in the window it belongs to.
+// Activates the tab.
 //
 // Activate blocks until the operation completes or ctx is cancelled.
 func (x *SafariTab) Activate(ctx context.Context) error {

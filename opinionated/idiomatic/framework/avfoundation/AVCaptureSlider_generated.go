@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A slider control that selects a value from a bounded range.
+//
 // CaptureSlider wraps [raw.AVCaptureSlider] with a fluent Go API.
 type CaptureSlider struct {
 	inner *raw.AVCaptureSlider
@@ -32,7 +34,7 @@ func CaptureSliderFromID(id objc.ID) *CaptureSlider {
 	return &CaptureSlider{inner: raw.AVCaptureSliderFromID(id)}
 }
 
-// @method initWithLocalizedTitle:symbolName:minValue:maxValue: @abstract Initializes an `AVCaptureSlider` as a continuous slider between `minValue` and `maxValue`. @param localizedTitle A localized string that describes the slider's `action`. @param symbolName The name of a symbol to represent the slider. @param minValue The minimum value the slider can have. `minValue` must be less than `maxValue`, otherwise an `NSInvalidArgumentException` is thrown. @param maxValue The maximum value the slider can have. `maxValue` must be greater than `minValue`, otherwise an `NSInvalidArgumentException` is thrown. @result An `AVCaptureSlider` instance as a continuous slider between `minValue` and `maxValue`. @discussion Continuous sliders are used when any value in the range `minValue...maxValue` is supported.
+// Creates a continuous slider control that selects a value from a bounded range.
 //
 // NewCaptureSliderWithLocalizedTitleSymbolNameMinValueMaxValue creates a new [CaptureSlider].
 func NewCaptureSliderWithLocalizedTitleSymbolNameMinValueMaxValue(localizedTitle string, symbolName string, minValue float32, maxValue float32) *CaptureSlider {
@@ -41,7 +43,7 @@ func NewCaptureSliderWithLocalizedTitleSymbolNameMinValueMaxValue(localizedTitle
 	return &CaptureSlider{inner: raw.AVCaptureSliderFromID(_id)}
 }
 
-// @method initWithLocalizedTitle:symbolName:minValue:maxValue:step: @abstract Initializes an `AVCaptureSlider` as a discrete slider where the valid values are between `minValue` and `maxValue` with `step` distance between each value. @param localizedTitle A localized string that describes the slider's `action`. @param symbolName The name of a symbol to represent the slider. @param minValue The minimum value the slider can have. `minValue` must be less than `maxValue`, otherwise an `NSInvalidArgumentException` is thrown. @param maxValue The maximum value the slider can have. `maxValue` must be greater than `minValue`, otherwise an `NSInvalidArgumentException` is thrown. @param step The distance between each valid value. `step` must be greater than 0, otherwise an `NSInvalidArgumentException` is thrown. @result An `AVCaptureSlider` instance as a discrete slider where the valid values are between `minValue` and `maxValue` with `step` distance between each value. @discussion Discrete sliders are used when only specific values are valid.
+// Creates a discrete slider control that selects a stepped value from a bounded range.
 //
 // NewCaptureSliderWithLocalizedTitleSymbolNameMinValueMaxValueStep creates a new [CaptureSlider].
 func NewCaptureSliderWithLocalizedTitleSymbolNameMinValueMaxValueStep(localizedTitle string, symbolName string, minValue float32, maxValue float32, step float32) *CaptureSlider {
@@ -50,7 +52,7 @@ func NewCaptureSliderWithLocalizedTitleSymbolNameMinValueMaxValueStep(localizedT
 	return &CaptureSlider{inner: raw.AVCaptureSliderFromID(_id)}
 }
 
-// @method initWithLocalizedTitle:symbolName:values: @abstract Initializes an `AVCaptureSlider` as a discrete slider where `values` contains the valid values. @param localizedTitle A localized string that describes the slider's `action`. @param symbolName The name of a symbol to represent the slider. @param values The only values the slider can have. @result An `AVCaptureSlider` instance as a discrete slider where `values` contains the valid values. @discussion Discrete sliders are used when only specific values are valid.
+// Creates a discrete slider control that selects a value from a list.
 //
 // NewCaptureSliderWithLocalizedTitleSymbolNameValues creates a new [CaptureSlider].
 func NewCaptureSliderWithLocalizedTitleSymbolNameValues(localizedTitle string, symbolName string, values *foundation.NSArray[*foundation.NSNumber]) *CaptureSlider {
@@ -59,7 +61,7 @@ func NewCaptureSliderWithLocalizedTitleSymbolNameValues(localizedTitle string, s
 	return &CaptureSlider{inner: raw.AVCaptureSliderFromID(_id)}
 }
 
-// @property value @abstract The current value of the slider. @discussion Because the camera system may be independent from the main thread or `@MainActor`, `value` must be changed on `actionQueue` – the queue provided to `setActionQueue:action:`. The default value is the slider's minimum value. A value may only be set if it is within the slider's minimum and maximum values, otherwise an `NSInvalidArgumentException` is thrown.
+// The current value of the slider.
 //
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *CaptureSlider) WithValue(value float32) *CaptureSlider {
@@ -67,7 +69,7 @@ func (x *CaptureSlider) WithValue(value float32) *CaptureSlider {
 	return x
 }
 
-// @property localizedValueFormat @abstract A localized string defining the presentation of the slider's value. @discussion To modify the presentation of the slider's value, set `localizedValueFormat` to a format string to display the slider's value with any annotation. The format string may only contain `%@` and no other placeholders like `%d`, `%s`, etc. Invalid format strings will result in the value's default presentation. Examples of valid format strings are: - `%@%%` for "40%" - `%@ fps` for "60 fps" - `+ %@` for "+ 20"
+// A localized string that defines the presentation of the slider’s value.
 //
 // WithLocalizedValueFormat sets the localizedValueFormat property and returns the receiver for chaining.
 func (x *CaptureSlider) WithLocalizedValueFormat(localizedValueFormat string) *CaptureSlider {
@@ -75,7 +77,7 @@ func (x *CaptureSlider) WithLocalizedValueFormat(localizedValueFormat string) *C
 	return x
 }
 
-// @property prominentValues @abstract Values in this array may receive unique visual representations or behaviors.
+// Values in this array may receive unique visual representations or behaviors.
 //
 // WithProminentValues sets the collection, converting the Go slice to an NSArray.
 func (x *CaptureSlider) WithProminentValues(items ...*foundation.NSNumber) *CaptureSlider {
@@ -95,7 +97,7 @@ func (x *CaptureSlider) WithProminentValues(items ...*foundation.NSNumber) *Capt
 	return x
 }
 
-// @property accessibilityIdentifier @abstract A string that identifies the slider.
+// A string identifier for the slider.
 //
 // WithAccessibilityIdentifier sets the accessibilityIdentifier property and returns the receiver for chaining.
 func (x *CaptureSlider) WithAccessibilityIdentifier(accessibilityIdentifier string) *CaptureSlider {
@@ -103,7 +105,7 @@ func (x *CaptureSlider) WithAccessibilityIdentifier(accessibilityIdentifier stri
 	return x
 }
 
-// @property enabled @abstract Indicates whether the control should be enabled for user interaction. @discussion The value of this property is a `BOOL` that determines whether the control should be enabled for user interaction. Clients can set this property to keep a control added to an `AVCaptureSession` but prevent it from being interacted with by the user. A control's value may still be changed while it is disabled. The default value is `YES`.
+// A Boolean value that indicates whether this control supports user interaction.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *CaptureSlider) WithEnabled(enabled bool) *CaptureSlider {
@@ -111,7 +113,7 @@ func (x *CaptureSlider) WithEnabled(enabled bool) *CaptureSlider {
 	return x
 }
 
-// @method setActionQueue:action: @abstract Configures the slider's `action` which is called on `actionQueue` whenever the value of the slider is changed. @param actionQueue A queue for the `action` to be called. @param action An action called on `actionQueue` whenever the value of the slider is changed. @discussion Because the camera system may be independent from the main thread or `@MainActor`, `action` is always called on an internal `DispatchSerialQueue` targeted at `actionQueue`. If `action` modifies a property of the camera system, `actionQueue` must represent the same exclusive execution context as the camera system (see `isSameExclusiveExecutionContext`).
+// Sets the action to perform on the specified dispatch queue when the slider’s value changes.
 //
 // SetActionQueueAction calls the underlying SetActionQueueAction.
 func (x *CaptureSlider) SetActionQueueAction(actionQueue *foundation.NSObject, action func(float32)) {

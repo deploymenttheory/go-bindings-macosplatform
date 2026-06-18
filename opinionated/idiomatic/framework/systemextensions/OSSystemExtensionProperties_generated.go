@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Properties that identify a specific version of a system extension.
+//
 // SystemExtensionProperties wraps [raw.OSSystemExtensionProperties] with a fluent Go API.
 type SystemExtensionProperties struct {
 	inner *raw.OSSystemExtensionProperties

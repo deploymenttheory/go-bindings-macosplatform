@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract base class for machine learning key types.
+//
 // Key wraps [raw.MLKey] with a fluent Go API.
 type Key struct {
 	inner *raw.MLKey

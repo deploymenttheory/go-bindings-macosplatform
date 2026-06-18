@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains a flight number that the data detection system matches. The DataDetection framework returns a flight number match in a `DDMatchFlightNumber` object, which contains an airline name and flight number.
+// An object that contains a flight number that the data detection system matches.
 //
 // MatchFlightNumber wraps [raw.DDMatchFlightNumber] with a fluent Go API.
 type MatchFlightNumber struct {

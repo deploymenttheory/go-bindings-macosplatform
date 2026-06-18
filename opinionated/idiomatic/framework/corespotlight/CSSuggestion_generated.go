@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The kind of suggestion to use in a query.
+//
 // Suggestion wraps [raw.CSSuggestion] with a fluent Go API.
 type Suggestion struct {
 	inner *raw.CSSuggestion
@@ -41,6 +43,8 @@ func (x *Suggestion) CompareByRank(other *raw.CSSuggestion) foundation.NSCompari
 	return x.inner.CompareByRank(other)
 }
 
+// Compares the suggestion with a second specified suggestion.
+//
 // Compare calls the underlying Compare.
 func (x *Suggestion) Compare(other *raw.CSSuggestion) foundation.NSComparisonResult {
 	return x.inner.Compare(other)

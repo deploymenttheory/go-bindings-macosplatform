@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The constraints for a sequence feature.
+//
 // SequenceConstraint wraps [raw.MLSequenceConstraint] with a fluent Go API.
 type SequenceConstraint struct {
 	inner *raw.MLSequenceConstraint

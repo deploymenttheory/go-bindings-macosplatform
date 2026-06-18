@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A concrete object for managing your view’s text content and generating the text elements necessary for layout.
+//
 // TextContentStorage wraps [raw.NSTextContentStorage] with a fluent Go API.
 type TextContentStorage struct {
 	inner *raw.NSTextContentStorage
@@ -42,41 +44,55 @@ func (x *TextContentStorage) WithIncludesTextListMarkers(includesTextListMarkers
 	return x
 }
 
+// An attributed string that contains the contents of the document.
+//
 // WithAttributedString sets the attributedString property and returns the receiver for chaining.
 func (x *TextContentStorage) WithAttributedString(attributedString *foundation.NSAttributedString) *TextContentStorage {
 	x.inner.SetAttributedString(attributedString)
 	return x
 }
 
+// The delegate for the content manager object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *TextContentStorage) WithDelegate(delegate raw.NSTextContentManagerDelegate) *TextContentStorage {
 	x.inner.NSTextContentManager.SetDelegate(delegate)
 	return x
 }
 
+// The primary text layout manager for this content.
+//
 // WithPrimaryTextLayoutManager sets the primaryTextLayoutManager property and returns the receiver for chaining.
 func (x *TextContentStorage) WithPrimaryTextLayoutManager(primaryTextLayoutManager *TextLayoutManager) *TextContentStorage {
 	x.inner.NSTextContentManager.SetPrimaryTextLayoutManager(primaryTextLayoutManager.Unwrap())
 	return x
 }
 
+// Determines if the framework should automatically synchronize all text layout managers when exiting an editing transaction.
+//
 // WithAutomaticallySynchronizesTextLayoutManagers sets the automaticallySynchronizesTextLayoutManagers property and returns the receiver for chaining.
 func (x *TextContentStorage) WithAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers bool) *TextContentStorage {
 	x.inner.NSTextContentManager.SetAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers)
 	return x
 }
 
+// Determines whether to automatically synchronize with the backing store when an editing transaction finishes.
+//
 // WithAutomaticallySynchronizesToBackingStore sets the automaticallySynchronizesToBackingStore property and returns the receiver for chaining.
 func (x *TextContentStorage) WithAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore bool) *TextContentStorage {
 	x.inner.NSTextContentManager.SetAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore)
 	return x
 }
 
+// Returns a new attributed string for the text element.
+//
 // AttributedStringForTextElement calls the underlying AttributedStringForTextElement.
 func (x *TextContentStorage) AttributedStringForTextElement(textElement *raw.NSTextElement) *foundation.NSAttributedString {
 	return x.inner.AttributedStringForTextElement(textElement)
 }
 
+// Returns the text element corresponding to object’s attributed string.
+//
 // TextElementForAttributedString calls the underlying TextElementForAttributedString.
 func (x *TextContentStorage) TextElementForAttributedString(attributedString *foundation.NSAttributedString) *TextElement {
 	_r := x.inner.TextElementForAttributedString(attributedString)
@@ -86,16 +102,22 @@ func (x *TextContentStorage) TextElementForAttributedString(attributedString *fo
 	return &TextElement{inner: _r}
 }
 
+// Returns a new text location object based on an existing location and offset you provide.
+//
 // LocationFromLocationWithOffset calls the underlying LocationFromLocationWithOffset.
 func (x *TextContentStorage) LocationFromLocationWithOffset(location raw.NSTextLocation, offset int) raw.NSTextLocation {
 	return x.inner.LocationFromLocationWithOffset(location, offset)
 }
 
+// Returns the number of characters between the specified locations.
+//
 // OffsetFromLocationToLocation calls the underlying OffsetFromLocationToLocation.
 func (x *TextContentStorage) OffsetFromLocationToLocation(from raw.NSTextLocation, to raw.NSTextLocation) int {
 	return x.inner.OffsetFromLocationToLocation(from, to)
 }
 
+// Returns the text range, if any, in the backing store that required manual adjustment after editing.
+//
 // AdjustedRangeFromRangeForEditingTextSelection calls the underlying AdjustedRangeFromRangeForEditingTextSelection.
 func (x *TextContentStorage) AdjustedRangeFromRangeForEditingTextSelection(textRange *raw.NSTextRange, forEditingTextSelection bool) *TextRange {
 	_r := x.inner.AdjustedRangeFromRangeForEditingTextSelection(textRange, forEditingTextSelection)

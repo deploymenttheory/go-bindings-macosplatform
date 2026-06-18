@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The result of translation or back-translation.
+//
 // BrailleTranslationResult wraps [raw.AXBrailleTranslationResult] with a fluent Go API.
 type BrailleTranslationResult struct {
 	inner *raw.AXBrailleTranslationResult

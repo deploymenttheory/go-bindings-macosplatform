@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that manages feedback-based image processing for tasks such as painting or fluid simulation.
+//
 // ImageAccumulator wraps [raw.CIImageAccumulator] with a fluent Go API.
 type ImageAccumulator struct {
 	inner *raw.CIImageAccumulator
@@ -31,6 +33,8 @@ func ImageAccumulatorFromID(id objc.ID) *ImageAccumulator {
 	return &ImageAccumulator{inner: raw.CIImageAccumulatorFromID(id)}
 }
 
+// Initializes an image accumulator with the specified extent and pixel format.
+//
 // NewImageAccumulatorWithExtentFormat creates a new [ImageAccumulator].
 func NewImageAccumulatorWithExtentFormat(extent corefoundation.CGRect, format int) *ImageAccumulator {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImageAccumulator")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewImageAccumulatorWithExtentFormat(extent corefoundation.CGRect, format in
 	return &ImageAccumulator{inner: raw.CIImageAccumulatorFromID(_id)}
 }
 
+// Initializes an image accumulator with the specified extent, pixel format, and color space.
+//
 // NewImageAccumulatorWithExtentFormatColorSpace creates a new [ImageAccumulator].
 func NewImageAccumulatorWithExtentFormatColorSpace(extent corefoundation.CGRect, format int, colorSpace unsafe.Pointer) *ImageAccumulator {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImageAccumulator")), objc.RegisterName("alloc"))
@@ -45,6 +51,8 @@ func NewImageAccumulatorWithExtentFormatColorSpace(extent corefoundation.CGRect,
 	return &ImageAccumulator{inner: raw.CIImageAccumulatorFromID(_id)}
 }
 
+// Returns the current contents of the image accumulator.
+//
 // Image calls the underlying Image.
 func (x *ImageAccumulator) Image() *Image {
 	_r := x.inner.Image()
@@ -54,16 +62,22 @@ func (x *ImageAccumulator) Image() *Image {
 	return &Image{inner: _r}
 }
 
+// Sets the contents of the image accumulator to the contents of the specified image object.
+//
 // SetImage calls the underlying SetImage.
 func (x *ImageAccumulator) SetImage(image *raw.CIImage) {
 	x.inner.SetImage(image)
 }
 
+// Updates an image accumulator with a subregion of an image object.
+//
 // SetImageDirtyRect calls the underlying SetImageDirtyRect.
 func (x *ImageAccumulator) SetImageDirtyRect(image *raw.CIImage, dirtyRect corefoundation.CGRect) {
 	x.inner.SetImageDirtyRect(image, dirtyRect)
 }
 
+// Resets the accumulator, discarding any pending updates and the current content.
+//
 // Clear calls the underlying Clear.
 func (x *ImageAccumulator) Clear() {
 	x.inner.Clear()

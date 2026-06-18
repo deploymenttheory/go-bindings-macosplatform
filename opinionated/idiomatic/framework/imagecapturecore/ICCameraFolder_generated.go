@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a folder on a camera.
+//
 // CameraFolder wraps [raw.ICCameraFolder] with a fluent Go API.
 type CameraFolder struct {
 	inner *raw.ICCameraFolder

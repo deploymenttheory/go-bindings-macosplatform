@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class that provides decorative accessory views for selected and highlighted items within a scrubber control.
+//
 // ScrubberSelectionStyle wraps [raw.NSScrubberSelectionStyle] with a fluent Go API.
 type ScrubberSelectionStyle struct {
 	inner *raw.NSScrubberSelectionStyle
@@ -36,6 +38,8 @@ func NewScrubberSelectionStyle() *ScrubberSelectionStyle {
 	return &ScrubberSelectionStyle{inner: raw.NSScrubberSelectionStyleFromID(_id)}
 }
 
+// Initializes a scrubber selection style when included from a nib or Storyboard.
+//
 // NewScrubberSelectionStyleWithCoder creates a new [ScrubberSelectionStyle].
 func NewScrubberSelectionStyleWithCoder(coder *foundation.NSCoder) *ScrubberSelectionStyle {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScrubberSelectionStyle")), objc.RegisterName("alloc"))
@@ -43,6 +47,8 @@ func NewScrubberSelectionStyleWithCoder(coder *foundation.NSCoder) *ScrubberSele
 	return &ScrubberSelectionStyle{inner: raw.NSScrubberSelectionStyleFromID(_id)}
 }
 
+// Provides an opportunity to create a customized scrubber selection style.
+//
 // MakeSelectionView calls the underlying MakeSelectionView.
 func (x *ScrubberSelectionStyle) MakeSelectionView() *ScrubberSelectionView {
 	_r := x.inner.MakeSelectionView()

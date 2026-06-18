@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing metrics about the app’s memory use.
+//
 // MemoryMetric wraps [raw.MXMemoryMetric] with a fluent Go API.
 type MemoryMetric struct {
 	inner *raw.MXMemoryMetric

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An authorization request that your provider extension handles.
+//
 // AuthorizationProviderExtensionAuthorizationRequest wraps [raw.ASAuthorizationProviderExtensionAuthorizationRequest] with a fluent Go API.
 type AuthorizationProviderExtensionAuthorizationRequest struct {
 	inner *raw.ASAuthorizationProviderExtensionAuthorizationRequest
@@ -40,35 +42,35 @@ func NewAuthorizationProviderExtensionAuthorizationRequest() *AuthorizationProvi
 	return &AuthorizationProviderExtensionAuthorizationRequest{inner: raw.ASAuthorizationProviderExtensionAuthorizationRequestFromID(_id)}
 }
 
-// @abstract Call when authorization was not handled.
+// Indicates the request wasn’t handled.
 //
 // DoNotHandle calls the underlying DoNotHandle.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) DoNotHandle() {
 	x.inner.DoNotHandle()
 }
 
-// @abstract Call when authorization needs to be canceled from some reason (for example user pressed Cancel button).
+// Cancels the request, for example, because the user taps a cancel button.
 //
 // Cancel calls the underlying Cancel.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) Cancel() {
 	x.inner.Cancel()
 }
 
-// @abstract Call when authorization succeeded without any output.
+// Indicates the requested authorization completed with no output.
 //
 // Complete calls the underlying Complete.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) Complete() {
 	x.inner.Complete()
 }
 
-// @abstract Call when authorization succeeded with an authorization tokens stored in HTTP headers.
+// Indicates the requested authorization succeeded with tokens in the HTTP headers.
 //
 // CompleteWithHTTPAuthorizationHeaders calls the underlying CompleteWithHTTPAuthorizationHeaders.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithHTTPAuthorizationHeaders(httpAuthorizationHeaders *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
 	x.inner.CompleteWithHTTPAuthorizationHeaders(httpAuthorizationHeaders)
 }
 
-// @abstract Call when authorization succeeded with a HTTP response.
+// Indicates the requested authorization succeeded with an HTTP response.
 //
 // CompleteWithHTTPResponseHttpBody calls the underlying CompleteWithHTTPResponseHttpBody.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithHTTPResponseHttpBody(httpResponse *foundation.NSHTTPURLResponse, httpBody *foundation.NSData) {
@@ -82,14 +84,14 @@ func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithAuthori
 	x.inner.CompleteWithAuthorizationResult(authorizationResult)
 }
 
-// @abstract Call when authorization failed with an error.
+// Indicates the requested authorization failed.
 //
 // CompleteWithError calls the underlying CompleteWithError.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithError(error_ unsafe.Pointer) {
 	x.inner.CompleteWithError(error_)
 }
 
-// @abstract Asks authorization service to show extension view controller. If the controller cannot be shown an error is returned.
+// Asks the authorization service to show the extension’s view controller to the user.
 //
 // PresentAuthorizationViewControllerWithCompletion calls the underlying PresentAuthorizationViewControllerWithCompletion.
 func (x *AuthorizationProviderExtensionAuthorizationRequest) PresentAuthorizationViewControllerWithCompletion(completion func(bool, unsafe.Pointer)) {

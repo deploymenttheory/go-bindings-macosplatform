@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that encapsulates information about a response to a content decryption key request.
+//
 // ContentKeyResponse wraps [raw.AVContentKeyResponse] with a fluent Go API.
 type ContentKeyResponse struct {
 	inner *raw.AVContentKeyResponse

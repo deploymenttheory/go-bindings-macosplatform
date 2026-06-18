@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A user interface element that contains and displays text, scroll, and browser views, in addition to other view subclasses.
+//
 // Drawer wraps [raw.NSDrawer] with a fluent Go API.
 type Drawer struct {
 	inner *raw.NSDrawer
@@ -31,6 +33,8 @@ func DrawerFromID(id objc.ID) *Drawer {
 	return &Drawer{inner: raw.NSDrawerFromID(id)}
 }
 
+// Creates a new drawer with the given size on the specified edge of the parent window.
+//
 // NewDrawerWithContentSizePreferredEdge creates a new [Drawer].
 func NewDrawerWithContentSizePreferredEdge(contentSize corefoundation.CGSize, edge foundation.NSRectEdge) *Drawer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDrawer")), objc.RegisterName("alloc"))
@@ -38,109 +42,147 @@ func NewDrawerWithContentSizePreferredEdge(contentSize corefoundation.CGSize, ed
 	return &Drawer{inner: raw.NSDrawerFromID(_id)}
 }
 
+// The receiver’s parent window.
+//
 // WithParentWindow sets the parentWindow property and returns the receiver for chaining.
 func (x *Drawer) WithParentWindow(parentWindow WindowProvider) *Drawer {
 	x.inner.SetParentWindow(parentWindow.asWindow())
 	return x
 }
 
+// The receiver’s content view.
+//
 // WithContentView sets the contentView property and returns the receiver for chaining.
 func (x *Drawer) WithContentView(contentView ViewProvider) *Drawer {
 	x.inner.SetContentView(contentView.asView())
 	return x
 }
 
+// The receiver’s preferred, or default, edge.
+//
 // WithPreferredEdge sets the preferredEdge property and returns the receiver for chaining.
 func (x *Drawer) WithPreferredEdge(preferredEdge foundation.NSRectEdge) *Drawer {
 	x.inner.SetPreferredEdge(preferredEdge)
 	return x
 }
 
+// The receiver’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Drawer) WithDelegate(delegate raw.NSDrawerDelegate) *Drawer {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The size of the receiver’s content area.
+//
 // WithContentSize sets the contentSize property and returns the receiver for chaining.
 func (x *Drawer) WithContentSize(contentSize corefoundation.CGSize) *Drawer {
 	x.inner.SetContentSize(contentSize)
 	return x
 }
 
+// The minimum allowed size of the receiver’s content area.
+//
 // WithMinContentSize sets the minContentSize property and returns the receiver for chaining.
 func (x *Drawer) WithMinContentSize(minContentSize corefoundation.CGSize) *Drawer {
 	x.inner.SetMinContentSize(minContentSize)
 	return x
 }
 
+// The maximum allowed size of the receiver’s content area.
+//
 // WithMaxContentSize sets the maxContentSize property and returns the receiver for chaining.
 func (x *Drawer) WithMaxContentSize(maxContentSize corefoundation.CGSize) *Drawer {
 	x.inner.SetMaxContentSize(maxContentSize)
 	return x
 }
 
+// The receiver’s leading offset.
+//
 // WithLeadingOffset sets the leadingOffset property and returns the receiver for chaining.
 func (x *Drawer) WithLeadingOffset(leadingOffset float64) *Drawer {
 	x.inner.SetLeadingOffset(leadingOffset)
 	return x
 }
 
+// The receiver’s trailing offset.
+//
 // WithTrailingOffset sets the trailingOffset property and returns the receiver for chaining.
 func (x *Drawer) WithTrailingOffset(trailingOffset float64) *Drawer {
 	x.inner.SetTrailingOffset(trailingOffset)
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *Drawer) WithNextResponder(nextResponder ResponderProvider) *Drawer {
 	x.inner.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *Drawer) WithMenu(menu *Menu) *Drawer {
 	x.inner.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *Drawer) WithUserActivity(userActivity *foundation.NSUserActivity) *Drawer {
 	x.inner.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *Drawer) WithTouchBar(touchBar *TouchBar) *Drawer {
 	x.inner.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// If the receiver is closed, this method opens it.
+//
 // Open calls the underlying Open.
 func (x *Drawer) Open() {
 	x.inner.Open()
 }
 
+// Causes the receiver to open on the specified edge of the parent window.
+//
 // OpenOnEdge calls the underlying OpenOnEdge.
 func (x *Drawer) OpenOnEdge(edge foundation.NSRectEdge) {
 	x.inner.OpenOnEdge(edge)
 }
 
+// If the receiver is open, this method closes it.
+//
 // Close calls the underlying Close.
 func (x *Drawer) Close() {
 	x.inner.Close()
 }
 
+// An action method to open the drawer.
+//
 // Open2 calls the underlying Open2.
 func (x *Drawer) Open2(sender objc.ID) {
 	x.inner.Open2(sender)
 }
 
+// An action method to close the receiver.
+//
 // Close2 calls the underlying Close2.
 func (x *Drawer) Close2(sender objc.ID) {
 	x.inner.Close2(sender)
 }
 
+// Toggles the drawer open or closed.
+//
 // Toggle calls the underlying Toggle.
 func (x *Drawer) Toggle(sender objc.ID) {
 	x.inner.Toggle(sender)

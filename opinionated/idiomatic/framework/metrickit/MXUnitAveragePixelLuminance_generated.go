@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure of pixel luminosity on an OLED display.
+//
 // UnitAveragePixelLuminance wraps [raw.MXUnitAveragePixelLuminance] with a fluent Go API.
 type UnitAveragePixelLuminance struct {
 	inner *raw.MXUnitAveragePixelLuminance

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines how to attach a supplementary item to an item in a collection view.
+//
 // CollectionLayoutAnchor wraps [raw.NSCollectionLayoutAnchor] with a fluent Go API.
 type CollectionLayoutAnchor struct {
 	inner *raw.NSCollectionLayoutAnchor

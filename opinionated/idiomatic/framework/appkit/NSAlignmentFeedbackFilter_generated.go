@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that can filter the movement of an object and provides haptic feedback when alignment occurs.
+//
 // AlignmentFeedbackFilter wraps [raw.NSAlignmentFeedbackFilter] with a fluent Go API.
 type AlignmentFeedbackFilter struct {
 	inner *raw.NSAlignmentFeedbackFilter
@@ -37,31 +39,43 @@ func NewAlignmentFeedbackFilter() *AlignmentFeedbackFilter {
 	return &AlignmentFeedbackFilter{inner: raw.NSAlignmentFeedbackFilterFromID(_id)}
 }
 
+// Informs the feedback filter about a new event.
+//
 // UpdateWithEvent calls the underlying UpdateWithEvent.
 func (x *AlignmentFeedbackFilter) UpdateWithEvent(event *raw.NSEvent) {
 	x.inner.UpdateWithEvent(event)
 }
 
+// Informs the feedback filter about a new pan (drag) gesture recognizer event.
+//
 // UpdateWithPanRecognizer calls the underlying UpdateWithPanRecognizer.
 func (x *AlignmentFeedbackFilter) UpdateWithPanRecognizer(panRecognizer *raw.NSPanGestureRecognizer) {
 	x.inner.UpdateWithPanRecognizer(panRecognizer)
 }
 
+// Requests a feedback token for the alignment of an object requiring horizontal and vertical movement.
+//
 // AlignmentFeedbackTokenForMovementInViewPreviousPointAlignedPointDefaultPoint calls the underlying AlignmentFeedbackTokenForMovementInViewPreviousPointAlignedPointDefaultPoint.
 func (x *AlignmentFeedbackFilter) AlignmentFeedbackTokenForMovementInViewPreviousPointAlignedPointDefaultPoint(view *raw.NSView, previousPoint corefoundation.CGPoint, alignedPoint corefoundation.CGPoint, defaultPoint corefoundation.CGPoint) raw.NSAlignmentFeedbackToken {
 	return x.inner.AlignmentFeedbackTokenForMovementInViewPreviousPointAlignedPointDefaultPoint(view, previousPoint, alignedPoint, defaultPoint)
 }
 
+// Requests a feedback token for the alignment of an object requiring horizontal movement only.
+//
 // AlignmentFeedbackTokenForHorizontalMovementInViewPreviousXAlignedXDefaultX calls the underlying AlignmentFeedbackTokenForHorizontalMovementInViewPreviousXAlignedXDefaultX.
 func (x *AlignmentFeedbackFilter) AlignmentFeedbackTokenForHorizontalMovementInViewPreviousXAlignedXDefaultX(view *raw.NSView, previousX float64, alignedX float64, defaultX float64) raw.NSAlignmentFeedbackToken {
 	return x.inner.AlignmentFeedbackTokenForHorizontalMovementInViewPreviousXAlignedXDefaultX(view, previousX, alignedX, defaultX)
 }
 
+// Requests a feedback token for the alignment of an object requiring vertical movement only.
+//
 // AlignmentFeedbackTokenForVerticalMovementInViewPreviousYAlignedYDefaultY calls the underlying AlignmentFeedbackTokenForVerticalMovementInViewPreviousYAlignedYDefaultY.
 func (x *AlignmentFeedbackFilter) AlignmentFeedbackTokenForVerticalMovementInViewPreviousYAlignedYDefaultY(view *raw.NSView, previousY float64, alignedY float64, defaultY float64) raw.NSAlignmentFeedbackToken {
 	return x.inner.AlignmentFeedbackTokenForVerticalMovementInViewPreviousYAlignedYDefaultY(view, previousY, alignedY, defaultY)
 }
 
+// Performs the haptic feedback described by one or more alignment feedback tokens.
+//
 // PerformFeedbackPerformanceTime calls the underlying PerformFeedbackPerformanceTime.
 func (x *AlignmentFeedbackFilter) PerformFeedbackPerformanceTime(alignmentFeedbackTokens *foundation.NSArray[raw.NSAlignmentFeedbackToken], performanceTime NSHapticFeedbackPerformanceTime) {
 	x.inner.PerformFeedbackPerformanceTime(alignmentFeedbackTokens, raw.NSHapticFeedbackPerformanceTime(performanceTime))

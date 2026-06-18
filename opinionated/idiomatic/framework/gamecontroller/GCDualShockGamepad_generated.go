@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A controller profile that supports the DualShock 4 controller.
+//
 // DualShockGamepad wraps [raw.GCDualShockGamepad] with a fluent Go API.
 type DualShockGamepad struct {
 	inner *raw.GCDualShockGamepad
@@ -35,13 +37,15 @@ func NewDualShockGamepad() *DualShockGamepad {
 	return &DualShockGamepad{inner: raw.GCDualShockGamepadFromID(_id)}
 }
 
+// The block that the profile calls when an element’s value changes.
+//
 // WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
 func (x *DualShockGamepad) WithValueChangedHandler(valueChangedHandler func(*raw.GCExtendedGamepad, *raw.GCControllerElement)) *DualShockGamepad {
 	x.inner.GCExtendedGamepad.SetValueChangedHandler(valueChangedHandler)
 	return x
 }
 
-// Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called for each element that changed. @param profile this profile that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons. @param element the element that has been modified.
+// The block that the profile calls when an element’s value changes.
 //
 // WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
 func (x *DualShockGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *DualShockGamepad {

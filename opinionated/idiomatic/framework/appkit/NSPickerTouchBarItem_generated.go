@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A bar item that provides a picker control with multiple options.
+//
 // PickerTouchBarItem wraps [raw.NSPickerTouchBarItem] with a fluent Go API.
 type PickerTouchBarItem struct {
 	inner *raw.NSPickerTouchBarItem
@@ -97,7 +99,7 @@ func (x *PickerTouchBarItem) WithEnabled(enabled bool) *PickerTouchBarItem {
 	return x
 }
 
-// The localized string labeling this item during user customization. The default value is empty string.
+// The localized string labeling this item during user customization.
 //
 // WithCustomizationLabel sets the customizationLabel property and returns the receiver for chaining.
 func (x *PickerTouchBarItem) WithCustomizationLabel(customizationLabel string) *PickerTouchBarItem {
@@ -105,6 +107,8 @@ func (x *PickerTouchBarItem) WithCustomizationLabel(customizationLabel string) *
 	return x
 }
 
+// Determines which items are shown in a bar when space is limited.
+//
 // WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
 func (x *PickerTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *PickerTouchBarItem {
 	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)

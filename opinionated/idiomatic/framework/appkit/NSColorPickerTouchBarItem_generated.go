@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A bar item that provides a system-defined color picker.
+//
 // ColorPickerTouchBarItem wraps [raw.NSColorPickerTouchBarItem] with a fluent Go API.
 type ColorPickerTouchBarItem struct {
 	inner *raw.NSColorPickerTouchBarItem
@@ -38,13 +40,15 @@ func NewColorPickerTouchBarItem() *ColorPickerTouchBarItem {
 	return &ColorPickerTouchBarItem{inner: raw.NSColorPickerTouchBarItemFromID(_id)}
 }
 
+// The picker’s currently selected color.
+//
 // WithColor sets the color property and returns the receiver for chaining.
 func (x *ColorPickerTouchBarItem) WithColor(color *Color) *ColorPickerTouchBarItem {
 	x.inner.SetColor(color.Unwrap())
 	return x
 }
 
-// Whether or not the picker should allow picking a color with non-1.0 alpha. Defaults to `!NSColor.ignoresAlpha`.
+// A Boolean value that controls whether the color picker allows picking of colors with alpha values other than 1.0.
 //
 // WithShowsAlpha sets the showsAlpha property and returns the receiver for chaining.
 func (x *ColorPickerTouchBarItem) WithShowsAlpha(showsAlpha bool) *ColorPickerTouchBarItem {
@@ -52,7 +56,7 @@ func (x *ColorPickerTouchBarItem) WithShowsAlpha(showsAlpha bool) *ColorPickerTo
 	return x
 }
 
-// Controls the color spaces that the receiver is able to produce. If a color outside of the allowed spaces are displayed or selected, it will first be converted to the first color space in the array. `nil` signifies any color space is allowed. Empty array is an invalid value and will raise an exception if set. Defaults to `nil`.
+// Controls the color spaces that the color picker can produce.
 //
 // WithAllowedColorSpaces sets the collection, converting the Go slice to an NSArray.
 func (x *ColorPickerTouchBarItem) WithAllowedColorSpaces(items ...*raw.NSColorSpace) *ColorPickerTouchBarItem {
@@ -72,7 +76,7 @@ func (x *ColorPickerTouchBarItem) WithAllowedColorSpaces(items ...*raw.NSColorSp
 	return x
 }
 
-// The color list displayed in the list color picker. Defaults to the standard system color list. Setting a custom color list will disable the additional tints/shades that appear on long-press.
+// The list of colors displayed in the color picker.
 //
 // WithColorList sets the colorList property and returns the receiver for chaining.
 func (x *ColorPickerTouchBarItem) WithColorList(colorList *ColorList) *ColorPickerTouchBarItem {
@@ -80,7 +84,7 @@ func (x *ColorPickerTouchBarItem) WithColorList(colorList *ColorList) *ColorPick
 	return x
 }
 
-// The localized string labeling this item during user customization. The default value is the localized string of "Color Picker".
+// The user-visible string identifying this item during touch bar customization.
 //
 // WithCustomizationLabel sets the customizationLabel property and returns the receiver for chaining.
 func (x *ColorPickerTouchBarItem) WithCustomizationLabel(customizationLabel string) *ColorPickerTouchBarItem {
@@ -88,19 +92,23 @@ func (x *ColorPickerTouchBarItem) WithCustomizationLabel(customizationLabel stri
 	return x
 }
 
+// An object that is notified when a user interacts with the color picker.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *ColorPickerTouchBarItem) WithTarget(target objc.ID) *ColorPickerTouchBarItem {
 	x.inner.SetTarget(target)
 	return x
 }
 
+// The selector on the target object that is invoked when a user interacts with the color picker.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *ColorPickerTouchBarItem) WithAction(action objc.SEL) *ColorPickerTouchBarItem {
 	x.inner.SetAction(action)
 	return x
 }
 
-// Enables or disabled the color picker. If it is currently being shown in a popover, it will be dismissed.
+// A Boolean value that determines whether the color picker is enabled.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *ColorPickerTouchBarItem) WithEnabled(enabled bool) *ColorPickerTouchBarItem {
@@ -108,6 +116,8 @@ func (x *ColorPickerTouchBarItem) WithEnabled(enabled bool) *ColorPickerTouchBar
 	return x
 }
 
+// Determines which items are shown in a bar when space is limited.
+//
 // WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
 func (x *ColorPickerTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *ColorPickerTouchBarItem {
 	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)

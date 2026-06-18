@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An event that represents a media resource request.
+//
 // MetricMediaResourceRequestEvent wraps [raw.AVMetricMediaResourceRequestEvent] with a fluent Go API.
 type MetricMediaResourceRequestEvent struct {
 	inner *raw.AVMetricMediaResourceRequestEvent

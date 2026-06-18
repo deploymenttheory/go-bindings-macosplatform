@@ -13,7 +13,7 @@ import (
 	"unsafe"
 )
 
-// Converts a normalized point or rectangle into a detection track that tracks an object over time.
+// An object that converts a normalized point or rectangle into a detection track that tracks an object over time.
 //
 // ObjectTracker wraps [raw.CNObjectTracker] with a fluent Go API.
 type ObjectTracker struct {

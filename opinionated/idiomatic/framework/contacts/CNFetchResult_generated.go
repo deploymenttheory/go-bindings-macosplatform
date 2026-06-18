@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the result of a change-history fetch request.
+//
 // FetchResult wraps [raw.CNFetchResult] with a fluent Go API.
 type FetchResult struct {
 	inner *raw.CNFetchResult[objc.ID]

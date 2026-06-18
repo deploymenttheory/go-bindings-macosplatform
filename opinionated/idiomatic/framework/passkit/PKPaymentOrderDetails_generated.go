@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Optional metadata with payment order details for the placed order.
+//
 // PaymentOrderDetails wraps [raw.PKPaymentOrderDetails] with a fluent Go API.
 type PaymentOrderDetails struct {
 	inner *raw.PKPaymentOrderDetails
@@ -31,6 +33,8 @@ func PaymentOrderDetailsFromID(id objc.ID) *PaymentOrderDetails {
 	return &PaymentOrderDetails{inner: raw.PKPaymentOrderDetailsFromID(id)}
 }
 
+// Initializes a payment order details object with the identifier, web service URL, and authentication token you provide.
+//
 // NewPaymentOrderDetailsWithOrderTypeIdentifierOrderIdentifierWebServiceURLAuthenticationToken creates a new [PaymentOrderDetails].
 func NewPaymentOrderDetailsWithOrderTypeIdentifierOrderIdentifierWebServiceURLAuthenticationToken(orderTypeIdentifier string, orderIdentifier string, webServiceURL string, authenticationToken string) *PaymentOrderDetails {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentOrderDetails")), objc.RegisterName("alloc"))
@@ -38,24 +42,32 @@ func NewPaymentOrderDetailsWithOrderTypeIdentifierOrderIdentifierWebServiceURLAu
 	return &PaymentOrderDetails{inner: raw.PKPaymentOrderDetailsFromID(_id)}
 }
 
+// An identifier for the order type associated with the order.
+//
 // WithOrderTypeIdentifier sets the orderTypeIdentifier property and returns the receiver for chaining.
 func (x *PaymentOrderDetails) WithOrderTypeIdentifier(orderTypeIdentifier string) *PaymentOrderDetails {
 	x.inner.SetOrderTypeIdentifier(foundation.NSStringStringWithUTF8String(orderTypeIdentifier))
 	return x
 }
 
+// A unique order identifier scoped to your order type identifier.
+//
 // WithOrderIdentifier sets the orderIdentifier property and returns the receiver for chaining.
 func (x *PaymentOrderDetails) WithOrderIdentifier(orderIdentifier string) *PaymentOrderDetails {
 	x.inner.SetOrderIdentifier(foundation.NSStringStringWithUTF8String(orderIdentifier))
 	return x
 }
 
+// The URL for your web service.
+//
 // WithWebServiceURL sets the webServiceURL property and returns the receiver for chaining.
 func (x *PaymentOrderDetails) WithWebServiceURL(webServiceURL string) *PaymentOrderDetails {
 	x.inner.SetWebServiceURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(webServiceURL)))
 	return x
 }
 
+// The authentification token supplied to your web service.
+//
 // WithAuthenticationToken sets the authenticationToken property and returns the receiver for chaining.
 func (x *PaymentOrderDetails) WithAuthenticationToken(authenticationToken string) *PaymentOrderDetails {
 	x.inner.SetAuthenticationToken(foundation.NSStringStringWithUTF8String(authenticationToken))

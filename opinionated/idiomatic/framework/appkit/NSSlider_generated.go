@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A display of a bar representing a continuous range of numerical values and a knob representing the currently selected value.
+//
 // Slider wraps [raw.NSSlider] with a fluent Go API.
 type Slider struct {
 	inner *raw.NSSlider
@@ -41,25 +43,31 @@ func NewSlider() *Slider {
 	return &Slider{inner: raw.NSSliderFromID(_id)}
 }
 
+// The type of the slider, such as vertical or circular.
+//
 // WithSliderType sets the sliderType property and returns the receiver for chaining.
 func (x *Slider) WithSliderType(sliderType NSSliderType) *Slider {
 	x.inner.SetSliderType(raw.NSSliderType(sliderType))
 	return x
 }
 
+// The minimum value the slider can send to its target.
+//
 // WithMinValue sets the minValue property and returns the receiver for chaining.
 func (x *Slider) WithMinValue(minValue float64) *Slider {
 	x.inner.SetMinValue(minValue)
 	return x
 }
 
+// The maximum value the slider can send to its target.
+//
 // WithMaxValue sets the maxValue property and returns the receiver for chaining.
 func (x *Slider) WithMaxValue(maxValue float64) *Slider {
 	x.inner.SetMaxValue(maxValue)
 	return x
 }
 
-// The value this slider will be filled from. This slider will be filled from its `neutralValue` to its current value. If `neutralValue` has not been explicitly set before, access to `neutralValue` will return `minValue`.
+// The value this slider will be filled from. This slider will be filled from its neutralValue to its current value. If neutralValue has not been explicitly set before, access to neutralValue will return minValue.
 //
 // WithNeutralValue sets the neutralValue property and returns the receiver for chaining.
 func (x *Slider) WithNeutralValue(neutralValue float64) *Slider {
@@ -67,31 +75,39 @@ func (x *Slider) WithNeutralValue(neutralValue float64) *Slider {
 	return x
 }
 
+// The amount by which the slider changes its value when the user Option-drags the slider knob.
+//
 // WithAltIncrementValue sets the altIncrementValue property and returns the receiver for chaining.
 func (x *Slider) WithAltIncrementValue(altIncrementValue float64) *Slider {
 	x.inner.SetAltIncrementValue(altIncrementValue)
 	return x
 }
 
+// The knob’s thickness, in pixels.
+//
 // WithKnobThickness sets the knobThickness property and returns the receiver for chaining.
 func (x *Slider) WithKnobThickness(knobThickness float64) *Slider {
 	x.inner.SetKnobThickness(knobThickness)
 	return x
 }
 
+// An integer indicating the orientation (horizontal or vertical) of the slider.
+//
 // WithVertical sets the vertical property and returns the receiver for chaining.
 func (x *Slider) WithVertical(vertical bool) *Slider {
 	x.inner.SetVertical(vertical)
 	return x
 }
 
+// The color of the filled portion of the slider track, in appearances that support it.
+//
 // WithTrackFillColor sets the trackFillColor property and returns the receiver for chaining.
 func (x *Slider) WithTrackFillColor(trackFillColor *Color) *Slider {
 	x.inner.SetTrackFillColor(trackFillColor.Unwrap())
 	return x
 }
 
-// The tint prominence of the slider. The automatic behavior for a regular slider tints its track fill, while a slider with tick marks is untinted. Setting the tint prominence will override this default behavior and choose an explicit track fill tint behavior. See “NSTintProminence“ for a list of possible values.
+// The tint prominence of the slider. The automatic behavior for a regular slider tints its track fill, while a slider with tick marks is untinted. Setting the tint prominence will override this default behavior and choose an explicit track fill tint behavior. See NSTintProminence for a list of possible values.
 //
 // WithTintProminence sets the tintProminence property and returns the receiver for chaining.
 func (x *Slider) WithTintProminence(tintProminence NSTintProminence) *Slider {
@@ -99,156 +115,208 @@ func (x *Slider) WithTintProminence(tintProminence NSTintProminence) *Slider {
 	return x
 }
 
+// The number of tick marks associated with the slider.
+//
 // WithNumberOfTickMarks sets the numberOfTickMarks property and returns the receiver for chaining.
 func (x *Slider) WithNumberOfTickMarks(numberOfTickMarks int) *Slider {
 	x.inner.SetNumberOfTickMarks(numberOfTickMarks)
 	return x
 }
 
+// Determines where the slider’s tick marks are displayed.
+//
 // WithTickMarkPosition sets the tickMarkPosition property and returns the receiver for chaining.
 func (x *Slider) WithTickMarkPosition(tickMarkPosition NSTickMarkPosition) *Slider {
 	x.inner.SetTickMarkPosition(raw.NSTickMarkPosition(tickMarkPosition))
 	return x
 }
 
+// A Boolean value that indicates whether the slider fixes its values to those values represented by its tick marks.
+//
 // WithAllowsTickMarkValuesOnly sets the allowsTickMarkValuesOnly property and returns the receiver for chaining.
 func (x *Slider) WithAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) *Slider {
 	x.inner.SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly)
 	return x
 }
 
+// The target object that receives action messages from the cell.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *Slider) WithTarget(target objc.ID) *Slider {
 	x.inner.NSControl.SetTarget(target)
 	return x
 }
 
+// The default action-message selector associated with the control.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *Slider) WithAction(action objc.SEL) *Slider {
 	x.inner.NSControl.SetAction(action)
 	return x
 }
 
+// The tag identifying the receiver (not the tag of the receiver’s cell).
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *Slider) WithTag(tag int) *Slider {
 	x.inner.NSControl.SetTag(tag)
 	return x
 }
 
+// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+//
 // WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
 func (x *Slider) WithIgnoresMultiClick(ignoresMultiClick bool) *Slider {
 	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
 	return x
 }
 
+// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *Slider) WithContinuous(continuous bool) *Slider {
 	x.inner.NSControl.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver reacts to mouse events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *Slider) WithEnabled(enabled bool) *Slider {
 	x.inner.NSControl.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the receiver refuses the first responder role.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *Slider) WithRefusesFirstResponder(refusesFirstResponder bool) *Slider {
 	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value that indicates whether the cell is highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *Slider) WithHighlighted(highlighted bool) *Slider {
 	x.inner.NSControl.SetHighlighted(highlighted)
 	return x
 }
 
+// The size of the control.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *Slider) WithControlSize(controlSize NSControlSize) *Slider {
 	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The receiver’s formatter.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *Slider) WithFormatter(formatter *foundation.NSFormatter) *Slider {
 	x.inner.NSControl.SetFormatter(formatter)
 	return x
 }
 
+// The value of the receiver’s cell as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *Slider) WithObjectValue(objectValue objc.ID) *Slider {
 	x.inner.NSControl.SetObjectValue(objectValue)
 	return x
 }
 
+// The value of the receiver’s cell as an NSString object.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *Slider) WithStringValue(stringValue string) *Slider {
 	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The value of the receiver’s cell as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *Slider) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Slider {
 	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *Slider) WithIntValue(intValue int) *Slider {
 	x.inner.NSControl.SetIntValue(intValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *Slider) WithIntegerValue(integerValue int) *Slider {
 	x.inner.NSControl.SetIntegerValue(integerValue)
 	return x
 }
 
+// The value of the receiver’s cell as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *Slider) WithFloatValue(floatValue float32) *Slider {
 	x.inner.NSControl.SetFloatValue(floatValue)
 	return x
 }
 
+// The value of the receiver’s cell as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *Slider) WithDoubleValue(doubleValue float64) *Slider {
 	x.inner.NSControl.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The font used to draw text in the receiver’s cell.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *Slider) WithFont(font *Font) *Slider {
 	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *Slider) WithUsesSingleLineMode(usesSingleLineMode bool) *Slider {
 	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// The line break mode to use for text in the control’s cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *Slider) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Slider {
 	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The alignment mode of the text in the receiver’s cell.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *Slider) WithAlignment(alignment NSTextAlignment) *Slider {
 	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *Slider) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Slider {
 	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+//
 // WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
 func (x *Slider) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Slider {
 	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
@@ -303,6 +371,8 @@ func (x *Slider) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *Slider) WithFrame(frame corefoundation.CGRect) *Slider {
 	x.inner.NSControl.NSView.SetFrame(frame)
@@ -327,6 +397,8 @@ func (x *Slider) WithBoundsRotation(boundsRotation float64) *Slider {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *Slider) WithBounds(bounds corefoundation.CGRect) *Slider {
 	x.inner.NSControl.NSView.SetBounds(bounds)
@@ -339,6 +411,8 @@ func (x *Slider) WithCanDrawConcurrently(canDrawConcurrently bool) *Slider {
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *Slider) WithNeedsDisplay(needsDisplay bool) *Slider {
 	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
@@ -525,7 +599,7 @@ func (x *Slider) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundatio
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *Slider) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Slider {
@@ -581,24 +655,32 @@ func (x *Slider) WithPressureConfiguration(pressureConfiguration *PressureConfig
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *Slider) WithNextResponder(nextResponder ResponderProvider) *Slider {
 	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *Slider) WithMenu(menu *Menu) *Slider {
 	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *Slider) WithUserActivity(userActivity *foundation.NSUserActivity) *Slider {
 	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *Slider) WithTouchBar(touchBar *TouchBar) *Slider {
 	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
@@ -702,21 +784,29 @@ func (x *Slider) SetTintProminence(tintProminence NSTintProminence) {
 	x.inner.SetTintProminence(raw.NSTintProminence(tintProminence))
 }
 
+// Returns the slider’s value represented by the tick mark at the specified index.
+//
 // TickMarkValueAtIndex calls the underlying TickMarkValueAtIndex.
 func (x *Slider) TickMarkValueAtIndex(index int) float64 {
 	return x.inner.TickMarkValueAtIndex(index)
 }
 
+// Returns the bounding rectangle of the tick mark at the given index.
+//
 // RectOfTickMarkAtIndex calls the underlying RectOfTickMarkAtIndex.
 func (x *Slider) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
 	return x.inner.RectOfTickMarkAtIndex(index)
 }
 
+// Returns the index of the tick mark closest to the location of the slider represented by the given point.
+//
 // IndexOfTickMarkAtPoint calls the underlying IndexOfTickMarkAtPoint.
 func (x *Slider) IndexOfTickMarkAtPoint(point corefoundation.CGPoint) int {
 	return x.inner.IndexOfTickMarkAtPoint(point)
 }
 
+// Returns the value of the tick mark closest to the specified value.
+//
 // ClosestTickMarkValueToValue calls the underlying ClosestTickMarkValueToValue.
 func (x *Slider) ClosestTickMarkValueToValue(value float64) float64 {
 	return x.inner.ClosestTickMarkValueToValue(value)
@@ -752,21 +842,29 @@ func (x *Slider) SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) {
 	x.inner.SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly)
 }
 
+// Sets the cell used to draw the slider’s title.
+//
 // SetTitleCell calls the underlying SetTitleCell.
 func (x *Slider) SetTitleCell(cell *raw.NSCell) {
 	x.inner.SetTitleCell(cell)
 }
 
+// This method has been deprecated. Returns nil.
+//
 // TitleCell calls the underlying TitleCell.
 func (x *Slider) TitleCell() objc.ID {
 	return x.inner.TitleCell()
 }
 
+// Sets the color used to draw the slider’s title.
+//
 // SetTitleColor calls the underlying SetTitleColor.
 func (x *Slider) SetTitleColor(newColor *raw.NSColor) {
 	x.inner.SetTitleColor(newColor)
 }
 
+// This method has been deprecated. Returns nil.
+//
 // TitleColor calls the underlying TitleColor.
 func (x *Slider) TitleColor() *Color {
 	_r := x.inner.TitleColor()
@@ -776,11 +874,15 @@ func (x *Slider) TitleColor() *Color {
 	return &Color{inner: _r}
 }
 
+// Sets the font used to draw the slider’s title.
+//
 // SetTitleFont calls the underlying SetTitleFont.
 func (x *Slider) SetTitleFont(fontObj *raw.NSFont) {
 	x.inner.SetTitleFont(fontObj)
 }
 
+// This method has been deprecated. Returns nil.
+//
 // TitleFont calls the underlying TitleFont.
 func (x *Slider) TitleFont() *Font {
 	_r := x.inner.TitleFont()
@@ -790,6 +892,8 @@ func (x *Slider) TitleFont() *Font {
 	return &Font{inner: _r}
 }
 
+// Returns the slider’s title.
+//
 // Title calls the underlying Title.
 func (x *Slider) Title() string {
 	_r := x.inner.Title()
@@ -799,6 +903,8 @@ func (x *Slider) Title() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Sets the title the slider displays in the bar behind its knob.
+//
 // SetTitle calls the underlying SetTitle.
 func (x *Slider) SetTitle(string_ string) {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(string_))
@@ -809,11 +915,15 @@ func (x *Slider) SetKnobThickness(thickness float64) {
 	x.inner.SetKnobThickness(thickness)
 }
 
+// Sets the image the slider displays in the bar behind its knob.
+//
 // SetImage calls the underlying SetImage.
 func (x *Slider) SetImage(backgroundImage *raw.NSImage) {
 	x.inner.SetImage(backgroundImage)
 }
 
+// Returns nil.
+//
 // Image calls the underlying Image.
 func (x *Slider) Image() *Image {
 	_r := x.inner.Image()

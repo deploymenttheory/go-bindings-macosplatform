@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that describes the compute device.
+//
 // GraphDevice wraps [raw.MPSGraphDevice] with a fluent Go API.
 type GraphDevice struct {
 	inner *raw.MPSGraphDevice

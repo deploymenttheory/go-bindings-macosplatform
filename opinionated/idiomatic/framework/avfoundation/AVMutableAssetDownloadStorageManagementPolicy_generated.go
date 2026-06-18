@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mutable object that you use to create a new storage management policy.
+//
 // MutableAssetDownloadStorageManagementPolicy wraps [raw.AVMutableAssetDownloadStorageManagementPolicy] with a fluent Go API.
 type MutableAssetDownloadStorageManagementPolicy struct {
 	inner *raw.AVMutableAssetDownloadStorageManagementPolicy
@@ -38,7 +40,7 @@ func NewMutableAssetDownloadStorageManagementPolicy() *MutableAssetDownloadStora
 	return &MutableAssetDownloadStorageManagementPolicy{inner: raw.AVMutableAssetDownloadStorageManagementPolicyFromID(_id)}
 }
 
-// Indicates the eviction priority of downloaded asset. Assets with default priority will be purged first before assets with higher priorities. In case this is not set, default priority is used.
+// The eviction priority for a downloaded asset.
 //
 // WithPriority sets the priority property and returns the receiver for chaining.
 func (x *MutableAssetDownloadStorageManagementPolicy) WithPriority(priority *foundation.NSString) *MutableAssetDownloadStorageManagementPolicy {
@@ -46,7 +48,7 @@ func (x *MutableAssetDownloadStorageManagementPolicy) WithPriority(priority *fou
 	return x
 }
 
-// Returns the expiration date of asset.
+// The expiration date for an asset.
 //
 // WithExpirationDate sets the expirationDate property and returns the receiver for chaining.
 func (x *MutableAssetDownloadStorageManagementPolicy) WithExpirationDate(expirationDate *foundation.NSDate) *MutableAssetDownloadStorageManagementPolicy {

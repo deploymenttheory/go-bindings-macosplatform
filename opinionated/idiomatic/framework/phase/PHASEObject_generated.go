@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object in the scene.
+//
 // Object wraps [raw.PHASEObject] with a fluent Go API.
 type Object struct {
 	inner *raw.PHASEObject
@@ -31,7 +33,7 @@ func ObjectFromID(id objc.ID) *Object {
 	return &Object{inner: raw.PHASEObjectFromID(id)}
 }
 
-// @method initWithEngine: @abstract Initialize a new object.
+// Creates an object in the scene.
 //
 // NewObjectWithEngine creates a new [Object].
 func NewObjectWithEngine(engine *raw.PHASEEngine) *Object {
@@ -40,21 +42,21 @@ func NewObjectWithEngine(engine *raw.PHASEEngine) *Object {
 	return &Object{inner: raw.PHASEObjectFromID(_id)}
 }
 
-// @method addChild:error: @abstract Add a child to this object @param child The child object @param error Returns an error if the child already has a parent. @return YES for success
+// Adds the given object as a child.
 //
 // AddChildError calls the underlying AddChildError.
 func (x *Object) AddChildError(child *raw.PHASEObject) (bool, error) {
 	return x.inner.AddChildError(child)
 }
 
-// @method removeChild: @abstract Remove a child from this object.
+// Removes the given object as a child.
 //
 // RemoveChild calls the underlying RemoveChild.
 func (x *Object) RemoveChild(child *raw.PHASEObject) {
 	x.inner.RemoveChild(child)
 }
 
-// @method removeChildren @abstract Remove all the children from this object
+// Removes all child objects from the given object.
 //
 // RemoveChildren calls the underlying RemoveChildren.
 func (x *Object) RemoveChildren() {

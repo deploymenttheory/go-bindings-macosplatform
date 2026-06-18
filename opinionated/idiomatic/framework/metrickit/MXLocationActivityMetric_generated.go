@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing metrics about the use of location-tracking features of a device.
+//
 // LocationActivityMetric wraps [raw.MXLocationActivityMetric] with a fluent Go API.
 type LocationActivityMetric struct {
 	inner *raw.MXLocationActivityMetric

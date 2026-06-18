@@ -8,6 +8,7 @@ import (
 	"fmt"
 )
 
+// An authorization status the user can grant for an app to access the specified entity type.
 type CNAuthorizationStatus int64
 
 const (
@@ -19,7 +20,7 @@ const (
 	CNAuthorizationStatusDenied CNAuthorizationStatus = 2
 	// The application is authorized to access contact data.
 	CNAuthorizationStatusAuthorized CNAuthorizationStatus = 3
-	// This application is authorized to access some contact data.
+	// The app has access to a limited subset of contacts, chosen by the person using the app.
 	CNAuthorizationStatusLimited CNAuthorizationStatus = 4
 )
 
@@ -40,11 +41,15 @@ func (e CNAuthorizationStatus) String() string {
 	}
 }
 
+// The formatting orders for contact names component.
 type CNContactDisplayNameOrder int64
 
 const (
-	CNContactDisplayNameOrderUserDefault     CNContactDisplayNameOrder = 0
-	CNContactDisplayNameOrderGivenNameFirst  CNContactDisplayNameOrder = 1
+	// Display name order by user default.
+	CNContactDisplayNameOrderUserDefault CNContactDisplayNameOrder = 0
+	// Display name order by given name first.
+	CNContactDisplayNameOrderGivenNameFirst CNContactDisplayNameOrder = 1
+	// Display name order by family name first.
 	CNContactDisplayNameOrderFamilyNameFirst CNContactDisplayNameOrder = 2
 )
 
@@ -61,12 +66,13 @@ func (e CNContactDisplayNameOrder) String() string {
 	}
 }
 
+// The formatting styles for contact names.
 type CNContactFormatterStyle int64
 
 const (
-	// Combine the contact name components into a displayable full name.
+	// Combines the contact name components into a full name.
 	CNContactFormatterStyleFullName CNContactFormatterStyle = 0
-	// Combine the contact phonetic name components into a displayable phonetic full name.
+	// Combines the contact phonetic name components into a phonetic full name.
 	CNContactFormatterStylePhoneticFullName CNContactFormatterStyle = 1
 )
 
@@ -81,13 +87,18 @@ func (e CNContactFormatterStyle) String() string {
 	}
 }
 
+// Indicates the sorting order for contacts.
 type CNContactSortOrder int64
 
 const (
-	CNContactSortOrderNone        CNContactSortOrder = 0
+	// No sorting order.
+	CNContactSortOrderNone CNContactSortOrder = 0
+	// The user’s default sorting order.
 	CNContactSortOrderUserDefault CNContactSortOrder = 1
-	CNContactSortOrderGivenName   CNContactSortOrder = 2
-	CNContactSortOrderFamilyName  CNContactSortOrder = 3
+	// Sorting contacts by given name.
+	CNContactSortOrderGivenName CNContactSortOrder = 2
+	// Sorting contacts by family name.
+	CNContactSortOrderFamilyName CNContactSortOrder = 3
 )
 
 func (e CNContactSortOrder) String() string {
@@ -105,10 +116,13 @@ func (e CNContactSortOrder) String() string {
 	}
 }
 
+// The types a contact can be.
 type CNContactType int64
 
 const (
-	CNContactTypePerson       CNContactType = 0
+	// The contact is a person.
+	CNContactTypePerson CNContactType = 0
+	// The contact is an Organization.
 	CNContactTypeOrganization CNContactType = 1
 )
 
@@ -123,13 +137,18 @@ func (e CNContactType) String() string {
 	}
 }
 
+// The container may be local on the device or associated with a server account that has contacts.
 type CNContainerType int64
 
 const (
+	// A container where the system hasn’t assigned the container type.
 	CNContainerTypeUnassigned CNContainerType = 0
-	CNContainerTypeLocal      CNContainerType = 1
-	CNContainerTypeExchange   CNContainerType = 2
-	CNContainerTypeCardDAV    CNContainerType = 3
+	// A container for contacts only stored locally on the device.
+	CNContainerTypeLocal CNContainerType = 1
+	// A container for contacts stored in an Exchange folder from an Exchange server.
+	CNContainerTypeExchange CNContainerType = 2
+	// A container for contacts stored in an CardDAV server, such as iCloud.
+	CNContainerTypeCardDAV CNContainerType = 3
 )
 
 func (e CNContainerType) String() string {
@@ -147,10 +166,11 @@ func (e CNContainerType) String() string {
 	}
 }
 
+// The entities the user can grant access to.
 type CNEntityType int64
 
 const (
-	// The user's contacts.
+	// The user’s contacts.
 	CNEntityTypeContacts CNEntityType = 0
 )
 
@@ -163,10 +183,11 @@ func (e CNEntityType) String() string {
 	}
 }
 
+// Constants for postal formatting styles.
 type CNPostalAddressFormatterStyle int64
 
 const (
-	// Combine the postal address components into a multi-line mailing address.
+	// A style that combines the postal address components into a multi-line mailing address.
 	CNPostalAddressFormatterStyleMailingAddress CNPostalAddressFormatterStyle = 0
 )
 

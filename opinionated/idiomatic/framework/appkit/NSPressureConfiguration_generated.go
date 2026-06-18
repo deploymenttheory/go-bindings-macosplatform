@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An encapsulation of the behavior and progression of a Force Touch trackpad as it responds to specific events.
+//
 // PressureConfiguration wraps [raw.NSPressureConfiguration] with a fluent Go API.
 type PressureConfiguration struct {
 	inner *raw.NSPressureConfiguration
@@ -29,6 +31,8 @@ func PressureConfigurationFromID(id objc.ID) *PressureConfiguration {
 	return &PressureConfiguration{inner: raw.NSPressureConfigurationFromID(id)}
 }
 
+// Initializes a pressure configuration object with a specified pressure behavior.
+//
 // NewPressureConfigurationWithPressureBehavior creates a new [PressureConfiguration].
 func NewPressureConfigurationWithPressureBehavior(pressureBehavior NSPressureBehavior) *PressureConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPressureConfiguration")), objc.RegisterName("alloc"))
@@ -36,6 +40,8 @@ func NewPressureConfigurationWithPressureBehavior(pressureBehavior NSPressureBeh
 	return &PressureConfiguration{inner: raw.NSPressureConfigurationFromID(_id)}
 }
 
+// Changes the pressure configuration of the trackpad to the initialized pressure configuration.
+//
 // Set calls the underlying Set.
 func (x *PressureConfiguration) Set() {
 	x.inner.Set()

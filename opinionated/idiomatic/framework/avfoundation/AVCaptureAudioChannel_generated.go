@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that monitors average and peak power levels for an audio channel in a capture connection.
+//
 // CaptureAudioChannel wraps [raw.AVCaptureAudioChannel] with a fluent Go API.
 type CaptureAudioChannel struct {
 	inner *raw.AVCaptureAudioChannel
@@ -35,7 +37,7 @@ func NewCaptureAudioChannel() *CaptureAudioChannel {
 	return &CaptureAudioChannel{inner: raw.AVCaptureAudioChannelFromID(_id)}
 }
 
-// @property volume @abstract A property indicating the current volume (gain) of the receiver. @discussion The volume property indicates the current volume or gain of the receiver as a floating point value between 0.0 -> 1.0. If you desire to boost the gain in software, you may specify a a value greater than 1.0.
+// The current volume (gain) of the channel.
 //
 // WithVolume sets the volume property and returns the receiver for chaining.
 func (x *CaptureAudioChannel) WithVolume(volume float32) *CaptureAudioChannel {
@@ -43,7 +45,7 @@ func (x *CaptureAudioChannel) WithVolume(volume float32) *CaptureAudioChannel {
 	return x
 }
 
-// @property enabled @abstract A property indicating whether the receiver is currently enabled for data capture. @discussion By default, all AVCaptureAudioChannel objects exposed by a connection are enabled. You may set enabled to NO to stop the flow of data for a particular AVCaptureAudioChannel.
+// A Boolean value that indicates whether the channel is in an enabled state.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *CaptureAudioChannel) WithEnabled(enabled bool) *CaptureAudioChannel {

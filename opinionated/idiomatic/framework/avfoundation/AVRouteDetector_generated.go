@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that detects available media playback routes.
+//
 // RouteDetector wraps [raw.AVRouteDetector] with a fluent Go API.
 type RouteDetector struct {
 	inner *raw.AVRouteDetector
@@ -35,7 +37,7 @@ func NewRouteDetector() *RouteDetector {
 	return &RouteDetector{inner: raw.AVRouteDetectorFromID(_id)}
 }
 
-// @property	routeDetectionEnabled @abstract	Whether or not route detection is enabled. The default value is NO. @discussion Route detection significantly increases power consumption and must be turned off when it's no longer needed.
+// A Boolean value that indicates whether route detection is in an enabled state.
 //
 // WithRouteDetectionEnabled sets the routeDetectionEnabled property and returns the receiver for chaining.
 func (x *RouteDetector) WithRouteDetectionEnabled(routeDetectionEnabled bool) *RouteDetector {

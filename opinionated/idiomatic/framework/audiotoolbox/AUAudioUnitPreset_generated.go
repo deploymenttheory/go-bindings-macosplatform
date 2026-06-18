@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that describes an interface for custom parameter settings provided by the audio unit developer.
+//
 // AudioUnitPreset wraps [raw.AUAudioUnitPreset] with a fluent Go API.
 type AudioUnitPreset struct {
 	inner *raw.AUAudioUnitPreset
@@ -37,7 +39,7 @@ func NewAudioUnitPreset() *AudioUnitPreset {
 	return &AudioUnitPreset{inner: raw.AUAudioUnitPresetFromID(_id)}
 }
 
-// @property	number @brief		The preset's unique numeric identifier.
+// The preset’s unique numeric identifier.
 //
 // WithNumber sets the number property and returns the receiver for chaining.
 func (x *AudioUnitPreset) WithNumber(number int) *AudioUnitPreset {
@@ -45,7 +47,7 @@ func (x *AudioUnitPreset) WithNumber(number int) *AudioUnitPreset {
 	return x
 }
 
-// @property	name @brief		The preset's name.
+// The preset’s name.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *AudioUnitPreset) WithName(name string) *AudioUnitPreset {

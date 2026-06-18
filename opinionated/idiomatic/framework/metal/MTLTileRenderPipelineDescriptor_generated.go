@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that configures new render pipeline state objects for tile shading.
+//
 // TileRenderPipelineDescriptor wraps [raw.MTLTileRenderPipelineDescriptor] with a fluent Go API.
 type TileRenderPipelineDescriptor struct {
 	inner *raw.MTLTileRenderPipelineDescriptor
@@ -38,7 +40,7 @@ func NewTileRenderPipelineDescriptor() *TileRenderPipelineDescriptor {
 	return &TileRenderPipelineDescriptor{inner: raw.MTLTileRenderPipelineDescriptorFromID(_id)}
 }
 
-// @property label: @abstract The descriptor label.
+// A string that identifies the tile pipeline descriptor.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *TileRenderPipelineDescriptor) WithLabel(label string) *TileRenderPipelineDescriptor {
@@ -46,7 +48,7 @@ func (x *TileRenderPipelineDescriptor) WithLabel(label string) *TileRenderPipeli
 	return x
 }
 
-// @property tileFunction: @abstract  The kernel or fragment function that serves as the tile shader for this pipeline. @discussion Both kernel-based and fragment-based tile pipelines dispatches will barrier against previous draws and other dispatches. Kernel-based pipelines will wait until all prior access to the tile completes. Fragment-based pipelines will only wait until all prior access to the fragment's location completes.
+// The compute kernel or fragment function the pipeline calls.
 //
 // WithTileFunction sets the tileFunction property and returns the receiver for chaining.
 func (x *TileRenderPipelineDescriptor) WithTileFunction(tileFunction raw.MTLFunction) *TileRenderPipelineDescriptor {
@@ -54,13 +56,15 @@ func (x *TileRenderPipelineDescriptor) WithTileFunction(tileFunction raw.MTLFunc
 	return x
 }
 
+// The number of samples in each fragment.
+//
 // WithRasterSampleCount sets the rasterSampleCount property and returns the receiver for chaining.
 func (x *TileRenderPipelineDescriptor) WithRasterSampleCount(rasterSampleCount uint) *TileRenderPipelineDescriptor {
 	x.inner.SetRasterSampleCount(rasterSampleCount)
 	return x
 }
 
-// @property threadgroupSizeMatchesTileSize: @abstract Whether all threadgroups associated with this pipeline will cover tiles entirely. @discussion Metal can optimize code generation for this case.
+// A Boolean value that indicates whether all threadgroups for this pipeline completely cover tiles.
 //
 // WithThreadgroupSizeMatchesTileSize sets the threadgroupSizeMatchesTileSize property and returns the receiver for chaining.
 func (x *TileRenderPipelineDescriptor) WithThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize bool) *TileRenderPipelineDescriptor {
@@ -68,7 +72,7 @@ func (x *TileRenderPipelineDescriptor) WithThreadgroupSizeMatchesTileSize(thread
 	return x
 }
 
-// @property maxTotalThreadsPerThreadgroup @abstract Optional property. Set the maxTotalThreadsPerThreadgroup. If it is not set, returns zero.
+// The maximum number of threads in a threadgroup when dispatching a command using the pipeline.
 //
 // WithMaxTotalThreadsPerThreadgroup sets the maxTotalThreadsPerThreadgroup property and returns the receiver for chaining.
 func (x *TileRenderPipelineDescriptor) WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint) *TileRenderPipelineDescriptor {
@@ -76,7 +80,7 @@ func (x *TileRenderPipelineDescriptor) WithMaxTotalThreadsPerThreadgroup(maxTota
 	return x
 }
 
-// @property linkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the tile function. @see MTLLinkedFunctions
+// Functions that you can specify as function arguments for the tile shader when encoding commands that use the pipeline.
 //
 // WithLinkedFunctions sets the linkedFunctions property and returns the receiver for chaining.
 func (x *TileRenderPipelineDescriptor) WithLinkedFunctions(linkedFunctions *LinkedFunctions) *TileRenderPipelineDescriptor {
@@ -84,7 +88,7 @@ func (x *TileRenderPipelineDescriptor) WithLinkedFunctions(linkedFunctions *Link
 	return x
 }
 
-// @property supportAddingBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
+// A Boolean value that indicates whether you can use the pipeline to create new pipelines by adding binary functions to its callable functions list.
 //
 // WithSupportAddingBinaryFunctions sets the supportAddingBinaryFunctions property and returns the receiver for chaining.
 func (x *TileRenderPipelineDescriptor) WithSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool) *TileRenderPipelineDescriptor {
@@ -92,7 +96,7 @@ func (x *TileRenderPipelineDescriptor) WithSupportAddingBinaryFunctions(supportA
 	return x
 }
 
-// @property maxCallStackDepth @abstract The maximum depth of the call stack in stack frames from the tile function. Defaults to 1 additional stack frame.
+// The maximum call stack depth for indirect function calls in tile shaders.
 //
 // WithMaxCallStackDepth sets the maxCallStackDepth property and returns the receiver for chaining.
 func (x *TileRenderPipelineDescriptor) WithMaxCallStackDepth(maxCallStackDepth uint) *TileRenderPipelineDescriptor {
@@ -100,7 +104,7 @@ func (x *TileRenderPipelineDescriptor) WithMaxCallStackDepth(maxCallStackDepth u
 	return x
 }
 
-// @property shaderValidation @abstract Toggle that determines whether Metal Shader Validation should be enabled or disabled for the pipeline. @discussion The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
+// A value that enables or disables shader validation for the pipeline.
 //
 // WithShaderValidation sets the shaderValidation property and returns the receiver for chaining.
 func (x *TileRenderPipelineDescriptor) WithShaderValidation(shaderValidation MTLShaderValidation) *TileRenderPipelineDescriptor {
@@ -116,6 +120,8 @@ func (x *TileRenderPipelineDescriptor) WithRequiredThreadsPerThreadgroup(require
 	return x
 }
 
+// Specifies the default rendering pipeline state values for the descriptor.
+//
 // Reset calls the underlying Reset.
 func (x *TileRenderPipelineDescriptor) Reset() {
 	x.inner.Reset()

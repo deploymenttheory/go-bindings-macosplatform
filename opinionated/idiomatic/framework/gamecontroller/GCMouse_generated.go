@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a physical mouse connected to a device.
+//
 // Mouse wraps [raw.GCMouse] with a fluent Go API.
 type Mouse struct {
 	inner *raw.GCMouse

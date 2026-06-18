@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configurator class allowing you to configure properties of an external display to match the camera’s active video format.
+//
 // CaptureExternalDisplayConfigurator wraps [raw.AVCaptureExternalDisplayConfigurator] with a fluent Go API.
 type CaptureExternalDisplayConfigurator struct {
 	inner *raw.AVCaptureExternalDisplayConfigurator
@@ -32,7 +34,7 @@ func CaptureExternalDisplayConfiguratorFromID(id objc.ID) *CaptureExternalDispla
 	return &CaptureExternalDisplayConfigurator{inner: raw.AVCaptureExternalDisplayConfiguratorFromID(id)}
 }
 
-// An external display configurator instance that attempts to synchronize the preview layer configuration with the device capture configuration. - Parameter device: The device for which to monitor the configuration. - Parameter previewLayer: The layer that is being used on an external display for displaying the camera preview. - Parameter configuration: A configuration specifying which aspects of the camera's active format to monitor and configure on the external display. - Returns: an “AVCaptureExternalDisplayConfigurator“ instance. An “AVCaptureExternalDisplayConfigurator“ is only applicable to external displays. It determines which properties to configure on the external display based on your provided configuration (see “AVCaptureExternalDisplayConfiguration“). The configurator observes changes to your camera”s configuration, and when changes are observed, it modifies the external display's properties to match. If multiple configurators are linked to the same external display ,the last one created becomes the active configurator for the external display (see “active“). - Important: An `NSInvalidArgumentException` is thrown if any of the “AVCaptureExternalDisplayConfiguration“ options are not supported.
+// An external display configurator instance that attempts to synchronize the preview layer configuration with the device capture configuration.
 //
 // NewCaptureExternalDisplayConfiguratorWithDevicePreviewLayerConfiguration creates a new [CaptureExternalDisplayConfigurator].
 func NewCaptureExternalDisplayConfiguratorWithDevicePreviewLayerConfiguration(device *raw.AVCaptureDevice, previewLayer *quartzcore.CALayer, configuration *raw.AVCaptureExternalDisplayConfiguration) *CaptureExternalDisplayConfigurator {
@@ -41,7 +43,7 @@ func NewCaptureExternalDisplayConfiguratorWithDevicePreviewLayerConfiguration(de
 	return &CaptureExternalDisplayConfigurator{inner: raw.AVCaptureExternalDisplayConfiguratorFromID(_id)}
 }
 
-// Forces the external display configurator to asynchronously stop configuring the external display. Call “stop“ to force the “AVCaptureExternalDisplayConfigurator“ to asynchronously stop configuring the external display. Once stopped, the “active“ property changes to `false` and the “activeExternalDisplayFrameRate“ becomes 0.
+// Forces the external display configurator to asynchronously stop configuring the external display.
 //
 // Stop calls the underlying Stop.
 func (x *CaptureExternalDisplayConfigurator) Stop() {

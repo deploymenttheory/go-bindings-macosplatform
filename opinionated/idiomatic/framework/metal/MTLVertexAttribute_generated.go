@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An instance that represents an attribute of a vertex function.
+//
 // VertexAttribute wraps [raw.MTLVertexAttribute] with a fluent Go API.
 type VertexAttribute struct {
 	inner *raw.MTLVertexAttribute

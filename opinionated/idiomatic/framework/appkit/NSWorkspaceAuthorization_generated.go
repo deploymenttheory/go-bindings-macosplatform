@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The authorization granted to the app by the user.
+//
 // WorkspaceAuthorization wraps [raw.NSWorkspaceAuthorization] with a fluent Go API.
 type WorkspaceAuthorization struct {
 	inner *raw.NSWorkspaceAuthorization

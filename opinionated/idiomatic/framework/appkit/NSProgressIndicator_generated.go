@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An interface that provides visual feedback to the user about the status of an ongoing task.
+//
 // ProgressIndicator wraps [raw.NSProgressIndicator] with a fluent Go API.
 type ProgressIndicator struct {
 	inner *raw.NSProgressIndicator
@@ -40,66 +42,88 @@ func NewProgressIndicator() *ProgressIndicator {
 	return &ProgressIndicator{inner: raw.NSProgressIndicatorFromID(_id)}
 }
 
+// A Boolean that indicates whether the progress indicator is indeterminate.
+//
 // WithIndeterminate sets the indeterminate property and returns the receiver for chaining.
 func (x *ProgressIndicator) WithIndeterminate(indeterminate bool) *ProgressIndicator {
 	x.inner.SetIndeterminate(indeterminate)
 	return x
 }
 
+// The size of the progress indicator.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *ProgressIndicator) WithControlSize(controlSize NSControlSize) *ProgressIndicator {
 	x.inner.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The value that indicates the current extent of the progress indicator.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *ProgressIndicator) WithDoubleValue(doubleValue float64) *ProgressIndicator {
 	x.inner.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The minimum value for the progress indicator.
+//
 // WithMinValue sets the minValue property and returns the receiver for chaining.
 func (x *ProgressIndicator) WithMinValue(minValue float64) *ProgressIndicator {
 	x.inner.SetMinValue(minValue)
 	return x
 }
 
+// The maximum value for the progress indicator.
+//
 // WithMaxValue sets the maxValue property and returns the receiver for chaining.
 func (x *ProgressIndicator) WithMaxValue(maxValue float64) *ProgressIndicator {
 	x.inner.SetMaxValue(maxValue)
 	return x
 }
 
+// The progress object to use for updating the progress view.
+//
 // WithObservedProgress sets the observedProgress property and returns the receiver for chaining.
 func (x *ProgressIndicator) WithObservedProgress(observedProgress *foundation.NSProgress) *ProgressIndicator {
 	x.inner.SetObservedProgress(observedProgress)
 	return x
 }
 
+// A Boolean that indicates whether the progress indicator implements animation in a separate thread.
+//
 // WithUsesThreadedAnimation sets the usesThreadedAnimation property and returns the receiver for chaining.
 func (x *ProgressIndicator) WithUsesThreadedAnimation(usesThreadedAnimation bool) *ProgressIndicator {
 	x.inner.SetUsesThreadedAnimation(usesThreadedAnimation)
 	return x
 }
 
+// The style of the progress indicator (bar or spinning).
+//
 // WithStyle sets the style property and returns the receiver for chaining.
 func (x *ProgressIndicator) WithStyle(style NSProgressIndicatorStyle) *ProgressIndicator {
 	x.inner.SetStyle(raw.NSProgressIndicatorStyle(style))
 	return x
 }
 
+// A Boolean that indicates whether the progress indicator hides itself when it isn’t animating.
+//
 // WithDisplayedWhenStopped sets the displayedWhenStopped property and returns the receiver for chaining.
 func (x *ProgressIndicator) WithDisplayedWhenStopped(displayedWhenStopped bool) *ProgressIndicator {
 	x.inner.SetDisplayedWhenStopped(displayedWhenStopped)
 	return x
 }
 
+// A Boolean that indicates whether the progress indicator’s frame has a three-dimensional bezel.
+//
 // WithBezeled sets the bezeled property and returns the receiver for chaining.
 func (x *ProgressIndicator) WithBezeled(bezeled bool) *ProgressIndicator {
 	x.inner.SetBezeled(bezeled)
 	return x
 }
 
+// The progress indicator’s control tint.
+//
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
 func (x *ProgressIndicator) WithControlTint(controlTint NSControlTint) *ProgressIndicator {
 	x.inner.SetControlTint(raw.NSControlTint(controlTint))
@@ -148,6 +172,8 @@ func (x *ProgressIndicator) WithAutoresizingMask(autoresizingMask NSAutoresizing
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *ProgressIndicator) WithFrame(frame corefoundation.CGRect) *ProgressIndicator {
 	x.inner.NSView.SetFrame(frame)
@@ -172,6 +198,8 @@ func (x *ProgressIndicator) WithBoundsRotation(boundsRotation float64) *Progress
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *ProgressIndicator) WithBounds(bounds corefoundation.CGRect) *ProgressIndicator {
 	x.inner.NSView.SetBounds(bounds)
@@ -184,6 +212,8 @@ func (x *ProgressIndicator) WithCanDrawConcurrently(canDrawConcurrently bool) *P
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *ProgressIndicator) WithNeedsDisplay(needsDisplay bool) *ProgressIndicator {
 	x.inner.NSView.SetNeedsDisplay(needsDisplay)
@@ -370,7 +400,7 @@ func (x *ProgressIndicator) WithAdditionalSafeAreaInsets(additionalSafeAreaInset
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *ProgressIndicator) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ProgressIndicator {
@@ -426,45 +456,61 @@ func (x *ProgressIndicator) WithPressureConfiguration(pressureConfiguration *Pre
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *ProgressIndicator) WithNextResponder(nextResponder ResponderProvider) *ProgressIndicator {
 	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *ProgressIndicator) WithMenu(menu *Menu) *ProgressIndicator {
 	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *ProgressIndicator) WithUserActivity(userActivity *foundation.NSUserActivity) *ProgressIndicator {
 	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *ProgressIndicator) WithTouchBar(touchBar *TouchBar) *ProgressIndicator {
 	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Advances the progress bar of a determinate progress indicator by the specified amount.
+//
 // IncrementBy calls the underlying IncrementBy.
 func (x *ProgressIndicator) IncrementBy(delta float64) {
 	x.inner.IncrementBy(delta)
 }
 
+// Starts the animation of an indeterminate progress indicator.
+//
 // StartAnimation calls the underlying StartAnimation.
 func (x *ProgressIndicator) StartAnimation(sender objc.ID) {
 	x.inner.StartAnimation(sender)
 }
 
+// Stops the animation of an indeterminate progress indicator.
+//
 // StopAnimation calls the underlying StopAnimation.
 func (x *ProgressIndicator) StopAnimation(sender objc.ID) {
 	x.inner.StopAnimation(sender)
 }
 
+// This action method resizes the progress indicator to an appropriate size depending on the value of style.
+//
 // SizeToFit calls the underlying SizeToFit.
 func (x *ProgressIndicator) SizeToFit() {
 	x.inner.SizeToFit()
@@ -560,16 +606,22 @@ func (x *ProgressIndicator) SetDisplayedWhenStopped(displayedWhenStopped bool) {
 	x.inner.SetDisplayedWhenStopped(displayedWhenStopped)
 }
 
+// Returns the delay, in seconds, between animation steps for an indeterminate progress indicator.
+//
 // AnimationDelay calls the underlying AnimationDelay.
 func (x *ProgressIndicator) AnimationDelay() float64 {
 	return x.inner.AnimationDelay()
 }
 
+// Sets the delay, in seconds, between animation steps for an indeterminate progress indicator.
+//
 // SetAnimationDelay calls the underlying SetAnimationDelay.
 func (x *ProgressIndicator) SetAnimationDelay(delay float64) {
 	x.inner.SetAnimationDelay(delay)
 }
 
+// This action method advances the progress animation of an indeterminate progress animator by one step.
+//
 // Animate calls the underlying Animate.
 func (x *ProgressIndicator) Animate(sender objc.ID) {
 	x.inner.Animate(sender)

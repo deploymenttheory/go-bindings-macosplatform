@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A workspace that can launch other apps and perform a variety of file-handling services.
+//
 // Workspace wraps [raw.NSWorkspace] with a fluent Go API.
 type Workspace struct {
 	inner *raw.NSWorkspace
@@ -41,11 +43,15 @@ func NewWorkspace() *Workspace {
 	return &Workspace{inner: raw.NSWorkspaceFromID(_id)}
 }
 
+// Opens the location at the specified URL.
+//
 // OpenURL calls the underlying OpenURL.
 func (x *Workspace) OpenURL(url string) bool {
 	return x.inner.OpenURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 }
 
+// Opens a URL asynchronously using the provided options.
+//
 // OpenURLConfiguration blocks until the operation completes or ctx is cancelled.
 func (x *Workspace) OpenURLConfiguration(ctx context.Context, url string, configuration *raw.NSWorkspaceOpenConfiguration) (*RunningApplication, error) {
 	type _result struct {
@@ -72,6 +78,8 @@ func (x *Workspace) OpenURLConfiguration(ctx context.Context, url string, config
 	}
 }
 
+// Opens one or more URLs asynchronously in the specified app using the provided options.
+//
 // OpenURLsWithApplicationAtURLConfiguration blocks until the operation completes or ctx is cancelled.
 func (x *Workspace) OpenURLsWithApplicationAtURLConfiguration(ctx context.Context, urls *foundation.NSArray[*foundation.NSURL], applicationURL string, configuration *raw.NSWorkspaceOpenConfiguration) (*RunningApplication, error) {
 	type _result struct {
@@ -98,6 +106,8 @@ func (x *Workspace) OpenURLsWithApplicationAtURLConfiguration(ctx context.Contex
 	}
 }
 
+// Launches the app at the specified URL and asynchronously reports back on the app’s status.
+//
 // OpenApplicationAtURLConfiguration blocks until the operation completes or ctx is cancelled.
 func (x *Workspace) OpenApplicationAtURLConfiguration(ctx context.Context, applicationURL string, configuration *raw.NSWorkspaceOpenConfiguration) (*RunningApplication, error) {
 	type _result struct {
@@ -124,31 +134,43 @@ func (x *Workspace) OpenApplicationAtURLConfiguration(ctx context.Context, appli
 	}
 }
 
+// Selects the file at the specified path.
+//
 // SelectFileInFileViewerRootedAtPath calls the underlying SelectFileInFileViewerRootedAtPath.
 func (x *Workspace) SelectFileInFileViewerRootedAtPath(fullPath string, rootFullPath string) bool {
 	return x.inner.SelectFileInFileViewerRootedAtPath(foundation.NSStringStringWithUTF8String(fullPath), foundation.NSStringStringWithUTF8String(rootFullPath))
 }
 
+// Activates the Finder, and opens one or more windows selecting the specified files.
+//
 // ActivateFileViewerSelectingURLs calls the underlying ActivateFileViewerSelectingURLs.
 func (x *Workspace) ActivateFileViewerSelectingURLs(fileURLs *foundation.NSArray[*foundation.NSURL]) {
 	x.inner.ActivateFileViewerSelectingURLs(fileURLs)
 }
 
+// Displays a Spotlight search results window in Finder for the specified query string.
+//
 // ShowSearchResultsForQueryString calls the underlying ShowSearchResultsForQueryString.
 func (x *Workspace) ShowSearchResultsForQueryString(queryString string) bool {
 	return x.inner.ShowSearchResultsForQueryString(foundation.NSStringStringWithUTF8String(queryString))
 }
 
+// Informs the workspace object that the file system changed at the specified path.
+//
 // NoteFileSystemChanged calls the underlying NoteFileSystemChanged.
 func (x *Workspace) NoteFileSystemChanged(path string) {
 	x.inner.NoteFileSystemChanged(foundation.NSStringStringWithUTF8String(path))
 }
 
+// Determines whether the specified path is a file package.
+//
 // IsFilePackageAtPath calls the underlying IsFilePackageAtPath.
 func (x *Workspace) IsFilePackageAtPath(fullPath string) bool {
 	return x.inner.IsFilePackageAtPath(foundation.NSStringStringWithUTF8String(fullPath))
 }
 
+// Returns an image containing the icon for the specified file.
+//
 // IconForFile calls the underlying IconForFile.
 func (x *Workspace) IconForFile(fullPath string) *Image {
 	_r := x.inner.IconForFile(foundation.NSStringStringWithUTF8String(fullPath))
@@ -158,6 +180,8 @@ func (x *Workspace) IconForFile(fullPath string) *Image {
 	return &Image{inner: _r}
 }
 
+// Returns an image containing the icon for the specified files.
+//
 // IconForFiles calls the underlying IconForFiles.
 func (x *Workspace) IconForFiles(fullPaths *foundation.NSArray[*foundation.NSString]) *Image {
 	_r := x.inner.IconForFiles(fullPaths)
@@ -167,6 +191,8 @@ func (x *Workspace) IconForFiles(fullPaths *foundation.NSArray[*foundation.NSStr
 	return &Image{inner: _r}
 }
 
+// Returns an image containing the icon for the specified content type.
+//
 // IconForContentType calls the underlying IconForContentType.
 func (x *Workspace) IconForContentType(contentType *uniformtypeidentifiers.UTType) *Image {
 	_r := x.inner.IconForContentType(contentType)
@@ -176,66 +202,92 @@ func (x *Workspace) IconForContentType(contentType *uniformtypeidentifiers.UTTyp
 	return &Image{inner: _r}
 }
 
+// Sets the icon for the file or directory at the specified path.
+//
 // SetIconForFileOptions calls the underlying SetIconForFileOptions.
 func (x *Workspace) SetIconForFileOptions(image *raw.NSImage, fullPath string, options NSWorkspaceIconCreationOptions) bool {
 	return x.inner.SetIconForFileOptions(image, foundation.NSStringStringWithUTF8String(fullPath), raw.NSWorkspaceIconCreationOptions(options))
 }
 
+// Moves the specified URLs to the trash in the same manner as the Finder.
+//
 // RecycleURLsCompletionHandler calls the underlying RecycleURLsCompletionHandler.
 func (x *Workspace) RecycleURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler objc.Block) {
 	x.inner.RecycleURLsCompletionHandler(uRLs, handler)
 }
 
+// Duplicates the specified URLS asynchronously in the same manner as the Finder.
+//
 // DuplicateURLsCompletionHandler calls the underlying DuplicateURLsCompletionHandler.
 func (x *Workspace) DuplicateURLsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], handler objc.Block) {
 	x.inner.DuplicateURLsCompletionHandler(uRLs, handler)
 }
 
+// Returns information about the file system at the specified path.
+//
 // GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType calls the underlying GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType.
 func (x *Workspace) GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType(fullPath string, removableFlag *bool, writableFlag *bool, unmountableFlag *bool, description string, fileSystemType string) bool {
 	return x.inner.GetFileSystemInfoForPathIsRemovableIsWritableIsUnmountableDescriptionType(foundation.NSStringStringWithUTF8String(fullPath), removableFlag, writableFlag, unmountableFlag, foundation.NSStringStringWithUTF8String(description), foundation.NSStringStringWithUTF8String(fileSystemType))
 }
 
+// Unmounts and ejects the device at the specified path.
+//
 // UnmountAndEjectDeviceAtPath calls the underlying UnmountAndEjectDeviceAtPath.
 func (x *Workspace) UnmountAndEjectDeviceAtPath(path string) bool {
 	return x.inner.UnmountAndEjectDeviceAtPath(foundation.NSStringStringWithUTF8String(path))
 }
 
+// Attempts to eject the volume mounted at the given path.
+//
 // UnmountAndEjectDeviceAtURLError calls the underlying UnmountAndEjectDeviceAtURLError.
 func (x *Workspace) UnmountAndEjectDeviceAtURLError(url string) (bool, error) {
 	return x.inner.UnmountAndEjectDeviceAtURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 }
 
+// Requests the system wait for the specified amount of time before turning off the power or logging out the user.
+//
 // ExtendPowerOffBy calls the underlying ExtendPowerOffBy.
 func (x *Workspace) ExtendPowerOffBy(requested int) int {
 	return x.inner.ExtendPowerOffBy(requested)
 }
 
+// Hides all applications other than the sender.
+//
 // HideOtherApplications calls the underlying HideOtherApplications.
 func (x *Workspace) HideOtherApplications() {
 	x.inner.HideOtherApplications()
 }
 
+// Returns the URL to the default app with the specified bundle identifier.
+//
 // URLForApplicationWithBundleIdentifier calls the underlying URLForApplicationWithBundleIdentifier.
 func (x *Workspace) URLForApplicationWithBundleIdentifier(bundleIdentifier string) *foundation.NSURL {
 	return x.inner.URLForApplicationWithBundleIdentifier(foundation.NSStringStringWithUTF8String(bundleIdentifier))
 }
 
+// Returns an array of URLs to all available applications that can open the specified bundle identifier.
+//
 // URLsForApplicationsWithBundleIdentifier calls the underlying URLsForApplicationsWithBundleIdentifier.
 func (x *Workspace) URLsForApplicationsWithBundleIdentifier(bundleIdentifier string) *foundation.NSArray[*foundation.NSURL] {
 	return x.inner.URLsForApplicationsWithBundleIdentifier(foundation.NSStringStringWithUTF8String(bundleIdentifier))
 }
 
+// Returns the URL to the default app to open the specified URL.
+//
 // URLForApplicationToOpenURL calls the underlying URLForApplicationToOpenURL.
 func (x *Workspace) URLForApplicationToOpenURL(url string) *foundation.NSURL {
 	return x.inner.URLForApplicationToOpenURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 }
 
+// Returns an array of URLs to all available applications that can open the URL.
+//
 // URLsForApplicationsToOpenURL calls the underlying URLsForApplicationsToOpenURL.
 func (x *Workspace) URLsForApplicationsToOpenURL(url string) *foundation.NSArray[*foundation.NSURL] {
 	return x.inner.URLsForApplicationsToOpenURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 }
 
+// Sets the default app to use when opening files of a specific content type defined by a file URL.
+//
 // SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURL blocks until the operation completes or ctx is cancelled.
 func (x *Workspace) SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURL(ctx context.Context, applicationURL string, url string) error {
 	_ch := make(chan error, 1)
@@ -254,6 +306,8 @@ func (x *Workspace) SetDefaultApplicationAtURLToOpenContentTypeOfFileAtURL(ctx c
 	}
 }
 
+// Sets the default app to use when opening files of a specific scheme.
+//
 // SetDefaultApplicationAtURLToOpenURLsWithScheme blocks until the operation completes or ctx is cancelled.
 func (x *Workspace) SetDefaultApplicationAtURLToOpenURLsWithScheme(ctx context.Context, applicationURL string, urlScheme string) error {
 	_ch := make(chan error, 1)
@@ -272,6 +326,8 @@ func (x *Workspace) SetDefaultApplicationAtURLToOpenURLsWithScheme(ctx context.C
 	}
 }
 
+// Sets the default app to use when opening a specific file.
+//
 // SetDefaultApplicationAtURLToOpenFileAtURL blocks until the operation completes or ctx is cancelled.
 func (x *Workspace) SetDefaultApplicationAtURLToOpenFileAtURL(ctx context.Context, applicationURL string, url string) error {
 	_ch := make(chan error, 1)
@@ -290,16 +346,22 @@ func (x *Workspace) SetDefaultApplicationAtURLToOpenFileAtURL(ctx context.Contex
 	}
 }
 
+// Returns the URL to the default app to open the specified content type.
+//
 // URLForApplicationToOpenContentType calls the underlying URLForApplicationToOpenContentType.
 func (x *Workspace) URLForApplicationToOpenContentType(contentType *uniformtypeidentifiers.UTType) *foundation.NSURL {
 	return x.inner.URLForApplicationToOpenContentType(contentType)
 }
 
+// Returns an array of URLs to all available applications that can open the specified content type.
+//
 // URLsForApplicationsToOpenContentType calls the underlying URLsForApplicationsToOpenContentType.
 func (x *Workspace) URLsForApplicationsToOpenContentType(contentType *uniformtypeidentifiers.UTType) *foundation.NSArray[*foundation.NSURL] {
 	return x.inner.URLsForApplicationsToOpenContentType(contentType)
 }
 
+// Sets the default app to use when opening files of a specific content type.
+//
 // SetDefaultApplicationAtURLToOpenContentType blocks until the operation completes or ctx is cancelled.
 func (x *Workspace) SetDefaultApplicationAtURLToOpenContentType(ctx context.Context, applicationURL string, contentType *uniformtypeidentifiers.UTType) error {
 	_ch := make(chan error, 1)
@@ -363,21 +425,29 @@ func (x *Workspace) MenuBarOwningApplication() *RunningApplication {
 	return &RunningApplication{inner: _r}
 }
 
+// Sets the desktop image for the given screen to the image at the specified URL.
+//
 // SetDesktopImageURLForScreenOptionsError calls the underlying SetDesktopImageURLForScreenOptionsError.
 func (x *Workspace) SetDesktopImageURLForScreenOptionsError(url string, screen *raw.NSScreen, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	return x.inner.SetDesktopImageURLForScreenOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), screen, options)
 }
 
+// Returns the URL for the desktop image for the given screen.
+//
 // DesktopImageURLForScreen calls the underlying DesktopImageURLForScreen.
 func (x *Workspace) DesktopImageURLForScreen(screen *raw.NSScreen) *foundation.NSURL {
 	return x.inner.DesktopImageURLForScreen(screen)
 }
 
+// Returns the desktop image options for the given screen.
+//
 // DesktopImageOptionsForScreen calls the underlying DesktopImageOptionsForScreen.
 func (x *Workspace) DesktopImageOptionsForScreen(screen *raw.NSScreen) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.DesktopImageOptionsForScreen(screen)
 }
 
+// Requests authorization to perform a privileged file operation.
+//
 // RequestAuthorizationOfType blocks until the operation completes or ctx is cancelled.
 func (x *Workspace) RequestAuthorizationOfType(ctx context.Context, type_ NSWorkspaceAuthorizationType) (*WorkspaceAuthorization, error) {
 	type _result struct {
@@ -568,6 +638,8 @@ func (x *Workspace) PerformFileOperationSourceDestinationFilesTag(operation *fou
 	return x.inner.PerformFileOperationSourceDestinationFilesTag(operation, foundation.NSStringStringWithUTF8String(source), foundation.NSStringStringWithUTF8String(destination), files, tag)
 }
 
+// Retrieves information about the specified file.
+//
 // GetInfoForFileApplicationType calls the underlying GetInfoForFileApplicationType.
 func (x *Workspace) GetInfoForFileApplicationType(fullPath string, appName string, type_ string) bool {
 	return x.inner.GetInfoForFileApplicationType(foundation.NSStringStringWithUTF8String(fullPath), foundation.NSStringStringWithUTF8String(appName), foundation.NSStringStringWithUTF8String(type_))
@@ -582,6 +654,8 @@ func (x *Workspace) IconForFileType(fileType string) *Image {
 	return &Image{inner: _r}
 }
 
+// Returns the uniform type identifier of the specified file, if it can be determined.
+//
 // TypeOfFileError calls the underlying TypeOfFileError.
 func (x *Workspace) TypeOfFileError(absoluteFilePath string) (string, error) {
 	_r, _err := x.inner.TypeOfFileError(foundation.NSStringStringWithUTF8String(absoluteFilePath))
@@ -594,6 +668,8 @@ func (x *Workspace) TypeOfFileError(absoluteFilePath string) (string, error) {
 	return purego.GoString(_r.Ptr()), nil
 }
 
+// Returns the localized description for the specified Uniform Type Identifier (UTI).
+//
 // LocalizedDescriptionForType calls the underlying LocalizedDescriptionForType.
 func (x *Workspace) LocalizedDescriptionForType(typeName string) string {
 	_r := x.inner.LocalizedDescriptionForType(foundation.NSStringStringWithUTF8String(typeName))
@@ -603,6 +679,8 @@ func (x *Workspace) LocalizedDescriptionForType(typeName string) string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns the preferred filename extension for the specified Uniform Type Identifier (UTI).
+//
 // PreferredFilenameExtensionForType calls the underlying PreferredFilenameExtensionForType.
 func (x *Workspace) PreferredFilenameExtensionForType(typeName string) string {
 	_r := x.inner.PreferredFilenameExtensionForType(foundation.NSStringStringWithUTF8String(typeName))
@@ -612,11 +690,15 @@ func (x *Workspace) PreferredFilenameExtensionForType(typeName string) string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns whether the specified filename extension is appropriate for the Uniform Type Identifier (UTI).
+//
 // FilenameExtensionIsValidForType calls the underlying FilenameExtensionIsValidForType.
 func (x *Workspace) FilenameExtensionIsValidForType(filenameExtension string, typeName string) bool {
 	return x.inner.FilenameExtensionIsValidForType(foundation.NSStringStringWithUTF8String(filenameExtension), foundation.NSStringStringWithUTF8String(typeName))
 }
 
+// Returns a Boolean indicating that the first Uniform Type Identifier (UTI) conforms to the second UTI.
+//
 // TypeConformsToType calls the underlying TypeConformsToType.
 func (x *Workspace) TypeConformsToType(firstTypeName string, secondTypeName string) bool {
 	return x.inner.TypeConformsToType(foundation.NSStringStringWithUTF8String(firstTypeName), foundation.NSStringStringWithUTF8String(secondTypeName))

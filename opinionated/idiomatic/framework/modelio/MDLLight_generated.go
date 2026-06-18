@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The abstract superclass for objects that describe light sources in a scene.
+//
 // Light wraps [raw.MDLLight] with a fluent Go API.
 type Light struct {
 	inner *raw.MDLLight
@@ -38,19 +40,23 @@ func NewLight() *Light {
 	return &Light{inner: raw.MDLLightFromID(_id)}
 }
 
+// The type of the light.
+//
 // WithLightType sets the lightType property and returns the receiver for chaining.
 func (x *Light) WithLightType(lightType MDLLightType) *Light {
 	x.inner.SetLightType(raw.MDLLightType(lightType))
 	return x
 }
 
+// The name of the Core Graphics color space to be used for interpreting the light’s color information.
+//
 // WithColorSpace sets the colorSpace property and returns the receiver for chaining.
 func (x *Light) WithColorSpace(colorSpace string) *Light {
 	x.inner.SetColorSpace(foundation.NSStringStringWithUTF8String(colorSpace))
 	return x
 }
 
-// @property parent @abstract Parent object. Nil if no parent. @discussion Set to nil when you remove this from an object container inside the parent object.
+// The parent object that contains this object.
 //
 // WithParent sets the parent property and returns the receiver for chaining.
 func (x *Light) WithParent(parent ObjectProvider) *Light {
@@ -58,7 +64,7 @@ func (x *Light) WithParent(parent ObjectProvider) *Light {
 	return x
 }
 
-// @property instance @abstract Instance object @discussion nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
+// The primary object, if applicable, of which this object is an instance.
 //
 // WithInstance sets the instance property and returns the receiver for chaining.
 func (x *Light) WithInstance(instance ObjectProvider) *Light {
@@ -66,7 +72,7 @@ func (x *Light) WithInstance(instance ObjectProvider) *Light {
 	return x
 }
 
-// @property transform @abstract Short hand property for the MDLTransformComponent. @discussion The default value is nil @see MDLTransformComponent
+// A component that manages this object’s spatial transform and its changes over time.
 //
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *Light) WithTransform(transform raw.MDLTransformComponent) *Light {
@@ -74,7 +80,7 @@ func (x *Light) WithTransform(transform raw.MDLTransformComponent) *Light {
 	return x
 }
 
-// @property children @abstract Short hand property for the MDLObjectContainerComponent. @discussion The default value is an empty MDLObjectContainer @see MDLObjectContainerComponent
+// A component that manages this object’s collection of children.
 //
 // WithChildren sets the children property and returns the receiver for chaining.
 func (x *Light) WithChildren(children raw.MDLObjectContainerComponent) *Light {
@@ -82,19 +88,23 @@ func (x *Light) WithChildren(children raw.MDLObjectContainerComponent) *Light {
 	return x
 }
 
+// A Boolean value indicating whether this object should be used in rendering.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *Light) WithHidden(hidden bool) *Light {
 	x.inner.MDLObject.SetHidden(hidden)
 	return x
 }
 
-// A utility function that returns the irradiance from the light at a given point. @discussion point is world space @property colorSpace name, as defined in CGColorSpace.h. Default is kCGColorSpaceSRGB
+// Returns the radiance of the light as received at a specific point in the same scene.
 //
 // IrradianceAtPoint calls the underlying IrradianceAtPoint.
 func (x *Light) IrradianceAtPoint(point unsafe.Pointer) unsafe.Pointer {
 	return x.inner.IrradianceAtPoint(point)
 }
 
+// Returns the radiance of the light as received at a specific point in the same scene, expressed using the specified color space.
+//
 // IrradianceAtPointColorSpace calls the underlying IrradianceAtPointColorSpace.
 func (x *Light) IrradianceAtPointColorSpace(point unsafe.Pointer, colorSpace unsafe.Pointer) unsafe.Pointer {
 	return x.inner.IrradianceAtPointColorSpace(point, colorSpace)

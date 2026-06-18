@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that generates sample buffers in a batch.
+//
 // SampleBufferGeneratorBatch wraps [raw.AVSampleBufferGeneratorBatch] with a fluent Go API.
 type SampleBufferGeneratorBatch struct {
 	inner *raw.AVSampleBufferGeneratorBatch
@@ -38,7 +40,7 @@ func NewSampleBufferGeneratorBatch() *SampleBufferGeneratorBatch {
 	return &SampleBufferGeneratorBatch{inner: raw.AVSampleBufferGeneratorBatchFromID(_id)}
 }
 
-// @method		makeDataReadyWithCompletionHandler: @abstract		Loads sample data asynchronously for all CMSampleBuffers within a batch. This can only be called once on a batch, an exception will be thrown otherwise. @param		completionHandler The completionHandler is called once, when all CMSampleBuffers in the batch are data-ready, or as soon as an error has occurred.
+// Loads sample data asynchronously for all sample buffers within a batch.
 //
 // MakeDataReady blocks until the operation completes or ctx is cancelled.
 func (x *SampleBufferGeneratorBatch) MakeDataReady(ctx context.Context) error {
@@ -58,7 +60,7 @@ func (x *SampleBufferGeneratorBatch) MakeDataReady(ctx context.Context) error {
 	}
 }
 
-// @method		cancel @abstract		Attempt to cancel any I/O for this batch. The associated sample buffers will have their data ready handler invoked with an error.
+// Cancels any I/O for this batch.
 //
 // Cancel calls the underlying Cancel.
 func (x *SampleBufferGeneratorBatch) Cancel() {

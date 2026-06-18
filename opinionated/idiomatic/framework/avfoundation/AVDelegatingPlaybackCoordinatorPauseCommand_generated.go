@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A command that indicates to pause playback.
+//
 // DelegatingPlaybackCoordinatorPauseCommand wraps [raw.AVDelegatingPlaybackCoordinatorPauseCommand] with a fluent Go API.
 type DelegatingPlaybackCoordinatorPauseCommand struct {
 	inner *raw.AVDelegatingPlaybackCoordinatorPauseCommand

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A container for a set of items that lays out the items along a path.
+//
 // CollectionLayoutGroup wraps [raw.NSCollectionLayoutGroup] with a fluent Go API.
 type CollectionLayoutGroup struct {
 	inner *raw.NSCollectionLayoutGroup
@@ -38,6 +40,8 @@ func NewCollectionLayoutGroup() *CollectionLayoutGroup {
 	return &CollectionLayoutGroup{inner: raw.NSCollectionLayoutGroupFromID(_id)}
 }
 
+// An array of the supplementary items that are anchored to the group.
+//
 // WithSupplementaryItems sets the collection, converting the Go slice to an NSArray.
 func (x *CollectionLayoutGroup) WithSupplementaryItems(items ...CollectionLayoutSupplementaryItemProvider) *CollectionLayoutGroup {
 	if len(items) == 0 {
@@ -56,24 +60,32 @@ func (x *CollectionLayoutGroup) WithSupplementaryItems(items ...CollectionLayout
 	return x
 }
 
+// The amount of space between the items in the group.
+//
 // WithInterItemSpacing sets the interItemSpacing property and returns the receiver for chaining.
 func (x *CollectionLayoutGroup) WithInterItemSpacing(interItemSpacing *CollectionLayoutSpacing) *CollectionLayoutGroup {
 	x.inner.SetInterItemSpacing(interItemSpacing.Unwrap())
 	return x
 }
 
+// The amount of space added around the content of the item to adjust its final size after its position is computed.
+//
 // WithContentInsets sets the contentInsets property and returns the receiver for chaining.
 func (x *CollectionLayoutGroup) WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutGroup {
 	x.inner.NSCollectionLayoutItem.SetContentInsets(contentInsets)
 	return x
 }
 
+// The amount of space added around the boundaries of the item between other items and this item’s container.
+//
 // WithEdgeSpacing sets the edgeSpacing property and returns the receiver for chaining.
 func (x *CollectionLayoutGroup) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutGroup {
 	x.inner.NSCollectionLayoutItem.SetEdgeSpacing(edgeSpacing.Unwrap())
 	return x
 }
 
+// Returns a string with an ASCII representation of the group.
+//
 // VisualDescription calls the underlying VisualDescription.
 func (x *CollectionLayoutGroup) VisualDescription() string {
 	_r := x.inner.VisualDescription()

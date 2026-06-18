@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that represents input for the binary large object extension in passkey assertion requests.
+//
 // AuthorizationPublicKeyCredentialLargeBlobAssertionInput wraps [raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput] with a fluent Go API.
 type AuthorizationPublicKeyCredentialLargeBlobAssertionInput struct {
 	inner *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput

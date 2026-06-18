@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A single dragged item within a dragging session.
+//
 // DraggingItem wraps [raw.NSDraggingItem] with a fluent Go API.
 type DraggingItem struct {
 	inner *raw.NSDraggingItem
@@ -31,6 +33,8 @@ func DraggingItemFromID(id objc.ID) *DraggingItem {
 	return &DraggingItem{inner: raw.NSDraggingItemFromID(id)}
 }
 
+// Creates and returns a dragging item using the specified content.
+//
 // NewDraggingItemWithPasteboardWriter creates a new [DraggingItem].
 func NewDraggingItemWithPasteboardWriter(pasteboardWriter raw.NSPasteboardWriting) *DraggingItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDraggingItem")), objc.RegisterName("alloc"))
@@ -38,18 +42,24 @@ func NewDraggingItemWithPasteboardWriter(pasteboardWriter raw.NSPasteboardWritin
 	return &DraggingItem{inner: raw.NSDraggingItemFromID(_id)}
 }
 
+// The frame of the dragging item.
+//
 // WithDraggingFrame sets the draggingFrame property and returns the receiver for chaining.
 func (x *DraggingItem) WithDraggingFrame(draggingFrame corefoundation.CGRect) *DraggingItem {
 	x.inner.SetDraggingFrame(draggingFrame)
 	return x
 }
 
+// An array of blocks that provide the dragging image components.
+//
 // WithImageComponentsProvider sets the imageComponentsProvider property and returns the receiver for chaining.
 func (x *DraggingItem) WithImageComponentsProvider(imageComponentsProvider objc.Block) *DraggingItem {
 	x.inner.SetImageComponentsProvider(imageComponentsProvider)
 	return x
 }
 
+// Sets the item’s dragging frame and contents.
+//
 // SetDraggingFrameContents calls the underlying SetDraggingFrameContents.
 func (x *DraggingItem) SetDraggingFrameContents(frame corefoundation.CGRect, contents objc.ID) {
 	x.inner.SetDraggingFrameContents(frame, contents)

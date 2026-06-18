@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A window that an app displays on the screen.
+//
 // Window wraps [raw.NSWindow] with a fluent Go API.
 type Window struct {
 	inner *raw.NSWindow
@@ -41,6 +43,8 @@ func NewWindow() *Window {
 	return &Window{inner: raw.NSWindowFromID(_id)}
 }
 
+// Initializes the window with the specified values.
+//
 // NewWindowWithContentRectStyleMaskBackingDefer creates a new [Window].
 func NewWindowWithContentRectStyleMaskBackingDefer(contentRect corefoundation.CGRect, style NSWindowStyleMask, backingStoreType NSBackingStoreType, flag bool) *Window {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWindow")), objc.RegisterName("alloc"))
@@ -48,6 +52,8 @@ func NewWindowWithContentRectStyleMaskBackingDefer(contentRect corefoundation.CG
 	return &Window{inner: raw.NSWindowFromID(_id)}
 }
 
+// Initializes an allocated window with the specified values.
+//
 // NewWindowWithContentRectStyleMaskBackingDeferScreen creates a new [Window].
 func NewWindowWithContentRectStyleMaskBackingDeferScreen(contentRect corefoundation.CGRect, style NSWindowStyleMask, backingStoreType NSBackingStoreType, flag bool, screen *raw.NSScreen) *Window {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWindow")), objc.RegisterName("alloc"))
@@ -62,13 +68,15 @@ func NewWindowWithWindowRef(windowRef unsafe.Pointer) *Window {
 	return &Window{inner: raw.NSWindowFromID(_id)}
 }
 
+// The string that appears in the title bar of the window or the path to the represented file.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *Window) WithTitle(title string) *Window {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
-// Secondary text that may be displayed adjacent to or below the primary title depending on the configuration of the window. A value of empty string will remove the subtitle from the window layout.
+// A secondary line of text that appears in the title bar of the window.
 //
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *Window) WithSubtitle(subtitle string) *Window {
@@ -76,7 +84,7 @@ func (x *Window) WithSubtitle(subtitle string) *Window {
 	return x
 }
 
-// See the enum values for how this property works.
+// A value that indicates the visibility of the window’s title and title bar buttons.
 //
 // WithTitleVisibility sets the titleVisibility property and returns the receiver for chaining.
 func (x *Window) WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *Window {
@@ -84,7 +92,7 @@ func (x *Window) WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *W
 	return x
 }
 
-// When \c YES, the titlebar doesn't draw its background, allowing all buttons to show through, and "click through" to happen. In general, this is only useful when \c NSFullSizeContentViewWindowMask is set.
+// A Boolean value that indicates whether the title bar draws its background.
 //
 // WithTitlebarAppearsTransparent sets the titlebarAppearsTransparent property and returns the receiver for chaining.
 func (x *Window) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *Window {
@@ -92,7 +100,7 @@ func (x *Window) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool)
 	return x
 }
 
-// Specifies how the titlebar area of the window should appear when the window displays an NSToolbar
+// The style that determines the appearance and location of the toolbar in relation to the title bar.
 //
 // WithToolbarStyle sets the toolbarStyle property and returns the receiver for chaining.
 func (x *Window) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *Window {
@@ -100,6 +108,8 @@ func (x *Window) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *Window {
 	return x
 }
 
+// An array of title bar accessory view controllers that are currently added to the window.
+//
 // WithTitlebarAccessoryViewControllers sets the collection, converting the Go slice to an NSArray.
 func (x *Window) WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *Window {
 	if len(items) == 0 {
@@ -118,7 +128,7 @@ func (x *Window) WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAc
 	return x
 }
 
-// If url is not nil and its path is not empty, the window will show a document icon in the titlebar. If the url represents a filename or other resource with a known icon, that icon will be used as the document icon.  Otherwise the default document icon will be used.  The icon can be customized using `-[[NSWindow standardWindowButton:NSWindowDocumentIconButton] setImage:customImage]`.  If url is not nil and its path is not empty, the window will have a pop-up menu which can be shown via command-click on the area containing the document icon and title.  By default, this menu will display the path components of the url.  The presence and contents of this menu can be controlled by the delegate method `-[window:shouldPopUpDocumentPathMenu:]` If the url is nil or has an empty path, the window will not show a document icon and will not have a pop-up menu available via command-click.
+// The URL of the file the window represents.
 //
 // WithRepresentedURL sets the representedURL property and returns the receiver for chaining.
 func (x *Window) WithRepresentedURL(representedURL string) *Window {
@@ -126,31 +136,39 @@ func (x *Window) WithRepresentedURL(representedURL string) *Window {
 	return x
 }
 
+// The path to the file of the window’s represented file.
+//
 // WithRepresentedFilename sets the representedFilename property and returns the receiver for chaining.
 func (x *Window) WithRepresentedFilename(representedFilename string) *Window {
 	x.inner.SetRepresentedFilename(foundation.NSStringStringWithUTF8String(representedFilename))
 	return x
 }
 
+// A Boolean value that indicates whether the window is excluded from the application’s Windows menu.
+//
 // WithExcludedFromWindowsMenu sets the excludedFromWindowsMenu property and returns the receiver for chaining.
 func (x *Window) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *Window {
 	x.inner.SetExcludedFromWindowsMenu(excludedFromWindowsMenu)
 	return x
 }
 
+// The window’s content view, the highest accessible view object in the window’s view hierarchy.
+//
 // WithContentView sets the contentView property and returns the receiver for chaining.
 func (x *Window) WithContentView(contentView ViewProvider) *Window {
 	x.inner.SetContentView(contentView.asView())
 	return x
 }
 
+// The window’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Window) WithDelegate(delegate raw.NSWindowDelegate) *Window {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
-// @note The styleMask can only be set on macOS 10.6 and later. Valid \c styleMask settings have the same restrictions as the \c styleMask passed to `-initWithContentRect:styleMask:backing:defer:`.  Some \c styleMask changes will cause the view hierarchy to be rebuilt, since there is a different subclass for the top level view of a borderless window than for the top level view of a titled window.
+// Flags that describe the window’s current style, such as if it’s resizable or in full-screen mode.
 //
 // WithStyleMask sets the styleMask property and returns the receiver for chaining.
 func (x *Window) WithStyleMask(styleMask NSWindowStyleMask) *Window {
@@ -158,73 +176,95 @@ func (x *Window) WithStyleMask(styleMask NSWindowStyleMask) *Window {
 	return x
 }
 
+// The window’s resizing increments.
+//
 // WithResizeIncrements sets the resizeIncrements property and returns the receiver for chaining.
 func (x *Window) WithResizeIncrements(resizeIncrements corefoundation.CGSize) *Window {
 	x.inner.SetResizeIncrements(resizeIncrements)
 	return x
 }
 
+// The window’s aspect ratio, which constrains the size of its frame rectangle to integral multiples of this ratio when the user resizes it.
+//
 // WithAspectRatio sets the aspectRatio property and returns the receiver for chaining.
 func (x *Window) WithAspectRatio(aspectRatio corefoundation.CGSize) *Window {
 	x.inner.SetAspectRatio(aspectRatio)
 	return x
 }
 
+// The window’s content-view resizing increments.
+//
 // WithContentResizeIncrements sets the contentResizeIncrements property and returns the receiver for chaining.
 func (x *Window) WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *Window {
 	x.inner.SetContentResizeIncrements(contentResizeIncrements)
 	return x
 }
 
+// The window’s content aspect ratio.
+//
 // WithContentAspectRatio sets the contentAspectRatio property and returns the receiver for chaining.
 func (x *Window) WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *Window {
 	x.inner.SetContentAspectRatio(contentAspectRatio)
 	return x
 }
 
+// A Boolean value that indicates whether any of the window’s views need to be displayed.
+//
 // WithViewsNeedDisplay sets the viewsNeedDisplay property and returns the receiver for chaining.
 func (x *Window) WithViewsNeedDisplay(viewsNeedDisplay bool) *Window {
 	x.inner.SetViewsNeedDisplay(viewsNeedDisplay)
 	return x
 }
 
+// A Boolean value that indicates whether the window tries to optimize user-initiated resize operations by preserving the content of views that have not changed.
+//
 // WithPreservesContentDuringLiveResize sets the preservesContentDuringLiveResize property and returns the receiver for chaining.
 func (x *Window) WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *Window {
 	x.inner.SetPreservesContentDuringLiveResize(preservesContentDuringLiveResize)
 	return x
 }
 
+// A Boolean value that indicates whether the window is released when it receives the close message.
+//
 // WithReleasedWhenClosed sets the releasedWhenClosed property and returns the receiver for chaining.
 func (x *Window) WithReleasedWhenClosed(releasedWhenClosed bool) *Window {
 	x.inner.SetReleasedWhenClosed(releasedWhenClosed)
 	return x
 }
 
+// The color of the window’s background.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *Window) WithBackgroundColor(backgroundColor *Color) *Window {
 	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the window can be dragged by clicking in its title bar or background.
+//
 // WithMovable sets the movable property and returns the receiver for chaining.
 func (x *Window) WithMovable(movable bool) *Window {
 	x.inner.SetMovable(movable)
 	return x
 }
 
+// A Boolean value that indicates whether the window is movable by clicking and dragging anywhere in its background.
+//
 // WithMovableByWindowBackground sets the movableByWindowBackground property and returns the receiver for chaining.
 func (x *Window) WithMovableByWindowBackground(movableByWindowBackground bool) *Window {
 	x.inner.SetMovableByWindowBackground(movableByWindowBackground)
 	return x
 }
 
+// A Boolean value that indicates whether the window is removed from the screen when its application becomes inactive.
+//
 // WithHidesOnDeactivate sets the hidesOnDeactivate property and returns the receiver for chaining.
 func (x *Window) WithHidesOnDeactivate(hidesOnDeactivate bool) *Window {
 	x.inner.SetHidesOnDeactivate(hidesOnDeactivate)
 	return x
 }
 
-// Indicates whether a window can be hidden during `-[NSApplication hide:]`.  Default is \c YES.
+// A Boolean value that indicates whether the window can hide when its application becomes hidden.
 //
 // WithCanHide sets the canHide property and returns the receiver for chaining.
 func (x *Window) WithCanHide(canHide bool) *Window {
@@ -232,25 +272,31 @@ func (x *Window) WithCanHide(canHide bool) *Window {
 	return x
 }
 
+// The custom miniaturized window image of the window.
+//
 // WithMiniwindowImage sets the miniwindowImage property and returns the receiver for chaining.
 func (x *Window) WithMiniwindowImage(miniwindowImage *Image) *Window {
 	x.inner.SetMiniwindowImage(miniwindowImage.Unwrap())
 	return x
 }
 
+// The title displayed in the window’s minimized window.
+//
 // WithMiniwindowTitle sets the miniwindowTitle property and returns the receiver for chaining.
 func (x *Window) WithMiniwindowTitle(miniwindowTitle string) *Window {
 	x.inner.SetMiniwindowTitle(foundation.NSStringStringWithUTF8String(miniwindowTitle))
 	return x
 }
 
+// A Boolean value that indicates whether the window’s document has been edited.
+//
 // WithDocumentEdited sets the documentEdited property and returns the receiver for chaining.
 func (x *Window) WithDocumentEdited(documentEdited bool) *Window {
 	x.inner.SetDocumentEdited(documentEdited)
 	return x
 }
 
-// A Boolean value that indicates whether or not to prevent application termination when the receiving window is presented modally. The value of this property is `YES` if the window should prevent application termination when modal; otherwise, `NO`. The default value is `YES`. However, note that some window subclasses and some windows created indirectly (like those created by UI frameworks like AppKit and SwiftUI), may have different default values. For example, the Open panel and toolbar customization sheets should not prevent application termination, so those windows have `preventsApplicationTerminationWhenModal` set to `NO`. Some `NSAlert`s, like those that are simply informational, have windows that do not prevent application termination by default. Setting this property overrides the default behavior.
+// A Boolean value that indicates whether the window prevents application termination when modal.
 //
 // WithPreventsApplicationTerminationWhenModal sets the preventsApplicationTerminationWhenModal property and returns the receiver for chaining.
 func (x *Window) WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *Window {
@@ -258,7 +304,7 @@ func (x *Window) WithPreventsApplicationTerminationWhenModal(preventsApplication
 	return x
 }
 
-// Default is \c NO. Set to \c YES to allow a window to display tooltips even when the application is in the background.  Note that, enabling tooltips in an inactive application will cause the app to do work any time the mouse passes over the window.  This can degrade system performance. Returns \c YES if this window displays tooltips even when the application is in the background.  To configure this setting you should call `-setAllowsToolTipsWhenApplicationIsInactive:` instead of overriding `-allowsToolTipsWhenApplicationIsInactive`.
+// A Boolean value that indicates whether the window can display tooltips even when the application is in the background.
 //
 // WithAllowsToolTipsWhenApplicationIsInactive sets the allowsToolTipsWhenApplicationIsInactive property and returns the receiver for chaining.
 func (x *Window) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *Window {
@@ -266,43 +312,55 @@ func (x *Window) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenA
 	return x
 }
 
+// The window’s backing store type.
+//
 // WithBackingType sets the backingType property and returns the receiver for chaining.
 func (x *Window) WithBackingType(backingType NSBackingStoreType) *Window {
 	x.inner.SetBackingType(raw.NSBackingStoreType(backingType))
 	return x
 }
 
+// The window level of the window.
+//
 // WithLevel sets the level property and returns the receiver for chaining.
 func (x *Window) WithLevel(level int) *Window {
 	x.inner.SetLevel(level)
 	return x
 }
 
+// The depth limit of the window.
+//
 // WithDepthLimit sets the depthLimit property and returns the receiver for chaining.
 func (x *Window) WithDepthLimit(depthLimit NSWindowDepth) *Window {
 	x.inner.SetDepthLimit(raw.NSWindowDepth(depthLimit))
 	return x
 }
 
+// A Boolean value that indicates whether the window has a shadow.
+//
 // WithHasShadow sets the hasShadow property and returns the receiver for chaining.
 func (x *Window) WithHasShadow(hasShadow bool) *Window {
 	x.inner.SetHasShadow(hasShadow)
 	return x
 }
 
+// The window’s alpha value.
+//
 // WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
 func (x *Window) WithAlphaValue(alphaValue float64) *Window {
 	x.inner.SetAlphaValue(alphaValue)
 	return x
 }
 
+// A Boolean value that indicates whether the window is opaque.
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *Window) WithOpaque(opaque bool) *Window {
 	x.inner.SetOpaque(opaque)
 	return x
 }
 
-// `-setSharingType:` specifies whether the window content can be read from another process.  The default sharing type is \c NSWindowSharingReadOnly, which means other processes can read the window content (eg. for window capture) but cannot modify it.  If you set your window sharing type to \c NSWindowSharingNone, so that the content cannot be captured, your window will also not be able to participate in a number of system services, so this setting should be used with caution.
+// A Boolean value that indicates the level of access other processes have to the window’s content.
 //
 // WithSharingType sets the sharingType property and returns the receiver for chaining.
 func (x *Window) WithSharingType(sharingType NSWindowSharingType) *Window {
@@ -310,7 +368,7 @@ func (x *Window) WithSharingType(sharingType NSWindowSharingType) *Window {
 	return x
 }
 
-// Controls whether threading of view drawing should be enabled for this window.  Defaults to \c YES.  When this is set to \c YES, AppKit's view system is allowed to perform `-drawRect:` activity for the window's views on threads other than the main thread, for views that have `canDrawConcurrently == YES`.  When this is set to \c NO, the window's views will be drawn serially as on 10.5 and earlier, even though some of the views may have `canDrawConcurrently == YES`.
+// A Boolean value that indicates whether the window allows multithreaded view drawing.
 //
 // WithAllowsConcurrentViewDrawing sets the allowsConcurrentViewDrawing property and returns the receiver for chaining.
 func (x *Window) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *Window {
@@ -318,13 +376,15 @@ func (x *Window) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing boo
 	return x
 }
 
+// A Boolean value that indicates whether the window context should be updated when the screen profile changes or when the window moves to a different screen.
+//
 // WithDisplaysWhenScreenProfileChanges sets the displaysWhenScreenProfileChanges property and returns the receiver for chaining.
 func (x *Window) WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *Window {
 	x.inner.SetDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges)
 	return x
 }
 
-// This API controls whether the receiver is permitted onscreen before the user has logged in.  This property is off by default.  Alert panels and windows presented by input managers are examples of windows which should have this property set.
+// A Boolean value that indicates whether the window can be displayed at the login window.
 //
 // WithCanBecomeVisibleWithoutLogin sets the canBecomeVisibleWithoutLogin property and returns the receiver for chaining.
 func (x *Window) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *Window {
@@ -332,13 +392,15 @@ func (x *Window) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin b
 	return x
 }
 
+// A value that identifies the window’s behavior in window collections.
+//
 // WithCollectionBehavior sets the collectionBehavior property and returns the receiver for chaining.
 func (x *Window) WithCollectionBehavior(collectionBehavior NSWindowCollectionBehavior) *Window {
 	x.inner.SetCollectionBehavior(raw.NSWindowCollectionBehavior(collectionBehavior))
 	return x
 }
 
-// Provides for per-window control over automatic orderFront/orderOut animation behaviors added in 10.7.  Can be set to \c NSWindowAnimationBehaviorNone to disable Appkit's automatic animations for a given window, or to one of the other non-Default \c NSWindowAnimationBehavior values to override AppKit's automatic inference of appropriate animation behavior based on the window's apparent type.
+// The window’s automatic animation behavior.
 //
 // WithAnimationBehavior sets the animationBehavior property and returns the receiver for chaining.
 func (x *Window) WithAnimationBehavior(animationBehavior NSWindowAnimationBehavior) *Window {
@@ -346,61 +408,79 @@ func (x *Window) WithAnimationBehavior(animationBehavior NSWindowAnimationBehavi
 	return x
 }
 
+// The name used to automatically save the window’s frame rectangle data in the defaults system.
+//
 // WithFrameAutosaveName sets the frameAutosaveName property and returns the receiver for chaining.
 func (x *Window) WithFrameAutosaveName(frameAutosaveName *foundation.NSString) *Window {
 	x.inner.SetFrameAutosaveName(frameAutosaveName)
 	return x
 }
 
+// The minimum size to which the window’s frame (including its title bar) can be sized.
+//
 // WithMinSize sets the minSize property and returns the receiver for chaining.
 func (x *Window) WithMinSize(minSize corefoundation.CGSize) *Window {
 	x.inner.SetMinSize(minSize)
 	return x
 }
 
+// The maximum size to which the window’s frame (including its title bar) can be sized.
+//
 // WithMaxSize sets the maxSize property and returns the receiver for chaining.
 func (x *Window) WithMaxSize(maxSize corefoundation.CGSize) *Window {
 	x.inner.SetMaxSize(maxSize)
 	return x
 }
 
+// The minimum size of the window’s content view in the window’s base coordinate system.
+//
 // WithContentMinSize sets the contentMinSize property and returns the receiver for chaining.
 func (x *Window) WithContentMinSize(contentMinSize corefoundation.CGSize) *Window {
 	x.inner.SetContentMinSize(contentMinSize)
 	return x
 }
 
+// The maximum size of the window’s content view in the window’s base coordinate system.
+//
 // WithContentMaxSize sets the contentMaxSize property and returns the receiver for chaining.
 func (x *Window) WithContentMaxSize(contentMaxSize corefoundation.CGSize) *Window {
 	x.inner.SetContentMaxSize(contentMaxSize)
 	return x
 }
 
+// A minimum size that is used to determine if a window can fit when it is in full screen in a tile.
+//
 // WithMinFullScreenContentSize sets the minFullScreenContentSize property and returns the receiver for chaining.
 func (x *Window) WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *Window {
 	x.inner.SetMinFullScreenContentSize(minFullScreenContentSize)
 	return x
 }
 
+// A maximum size that is used to determine if a window can fit when it is in full screen in a tile.
+//
 // WithMaxFullScreenContentSize sets the maxFullScreenContentSize property and returns the receiver for chaining.
 func (x *Window) WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *Window {
 	x.inner.SetMaxFullScreenContentSize(maxFullScreenContentSize)
 	return x
 }
 
+// The window’s window controller.
+//
 // WithWindowController sets the windowController property and returns the receiver for chaining.
 func (x *Window) WithWindowController(windowController *WindowController) *Window {
 	x.inner.SetWindowController(windowController.Unwrap())
 	return x
 }
 
+// The parent window to which the window is attached as a child.
+//
 // WithParentWindow sets the parentWindow property and returns the receiver for chaining.
 func (x *Window) WithParentWindow(parentWindow WindowProvider) *Window {
 	x.inner.SetParentWindow(parentWindow.asWindow())
 	return x
 }
 
-// If set, the receiver will inherit the appearance of that object, as well as use KVO to observe its effectiveAppearance for changes. Typically this is used for child windows that are shown from a parent window or specific view. Defaults to NSApp.
+// An object that the window inherits its appearance from.
 //
 // WithAppearanceSource sets the appearanceSource property and returns the receiver for chaining.
 func (x *Window) WithAppearanceSource(appearanceSource *foundation.NSObject) *Window {
@@ -408,13 +488,15 @@ func (x *Window) WithAppearanceSource(appearanceSource *foundation.NSObject) *Wi
 	return x
 }
 
+// The window’s color space.
+//
 // WithColorSpace sets the colorSpace property and returns the receiver for chaining.
 func (x *Window) WithColorSpace(colorSpace *ColorSpace) *Window {
 	x.inner.SetColorSpace(colorSpace.Unwrap())
 	return x
 }
 
-// Specifies the style of separator displayed between the window's titlebar and content. The default value is NSTitlebarSeparatorStyleAutomatic. Changing this value will override any preference made by `NSSplitViewItem`.
+// The type of separator that the app displays between the title bar and content of a window.
 //
 // WithTitlebarSeparatorStyle sets the titlebarSeparatorStyle property and returns the receiver for chaining.
 func (x *Window) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *Window {
@@ -422,7 +504,7 @@ func (x *Window) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSep
 	return x
 }
 
-// The main content view controller for the window. This provides the contentView of the window. Assigning this value will remove the existing contentView and will make the contentViewController.view the main contentView for the window. The default value is nil. The contentViewController only controls the contentView, and not the title of the window. The window title can easily be bound to the contentViewController with the following: [window bind:NSTitleBinding toObject:contentViewController withKeyPath:@"title" options:nil]. Setting the contentViewController will cause the window to resize based on the current size of the contentViewController. Autolayout should be used to restrict the size of the window. The value of the contentViewController is encoded in the NIB. Directly assigning a contentView will clear out the contentViewController.
+// The main content view controller for the window.
 //
 // WithContentViewController sets the contentViewController property and returns the receiver for chaining.
 func (x *Window) WithContentViewController(contentViewController ViewControllerProvider) *Window {
@@ -430,37 +512,47 @@ func (x *Window) WithContentViewController(contentViewController ViewControllerP
 	return x
 }
 
+// The view that’s made first responder (also called the key view) the first time the window is placed onscreen.
+//
 // WithInitialFirstResponder sets the initialFirstResponder property and returns the receiver for chaining.
 func (x *Window) WithInitialFirstResponder(initialFirstResponder ViewProvider) *Window {
 	x.inner.SetInitialFirstResponder(initialFirstResponder.asView())
 	return x
 }
 
+// The button cell that performs as if clicked when the window receives a Return (or Enter) key event.
+//
 // WithDefaultButtonCell sets the defaultButtonCell property and returns the receiver for chaining.
 func (x *Window) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *Window {
 	x.inner.SetDefaultButtonCell(defaultButtonCell.asButtonCell())
 	return x
 }
 
+// A Boolean value that indicates whether the window automatically recalculates the key view loop when views are added.
+//
 // WithAutorecalculatesKeyViewLoop sets the autorecalculatesKeyViewLoop property and returns the receiver for chaining.
 func (x *Window) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *Window {
 	x.inner.SetAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop)
 	return x
 }
 
+// The window’s toolbar.
+//
 // WithToolbar sets the toolbar property and returns the receiver for chaining.
 func (x *Window) WithToolbar(toolbar *Toolbar) *Window {
 	x.inner.SetToolbar(toolbar.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the toolbar control button is currently displayed.
+//
 // WithShowsToolbarButton sets the showsToolbarButton property and returns the receiver for chaining.
 func (x *Window) WithShowsToolbarButton(showsToolbarButton bool) *Window {
 	x.inner.SetShowsToolbarButton(showsToolbarButton)
 	return x
 }
 
-// Get and set the tabbing mode for this window. This should be set before a window is shown. The default value is \c NSWindowTabbingModeAutomatic. When the value is \c NSWindowTabbingModeAutomatic, the system will look at the \c userTabbingPreference and automatically tab windows together based on the tabbingIdentifier, when it is appropriate to do so.
+// A value that indicates when a window displays tabs.
 //
 // WithTabbingMode sets the tabbingMode property and returns the receiver for chaining.
 func (x *Window) WithTabbingMode(tabbingMode NSWindowTabbingMode) *Window {
@@ -468,7 +560,7 @@ func (x *Window) WithTabbingMode(tabbingMode NSWindowTabbingMode) *Window {
 	return x
 }
 
-// Windows with the same \c tabbingIdentifier will have the ability to be tabbed together when a window is being shown. This allows aggregation of similar windows. By default, the \c tabbingIdentifier will be generated based on inherent window properties, such as the window class name, the delegate class name, the window controller class name, and some additional state. Windows can be explicitly made to group together by using the same \c tabbingIdentifier.
+// A value that allows a group of related windows.
 //
 // WithTabbingIdentifier sets the tabbingIdentifier property and returns the receiver for chaining.
 func (x *Window) WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *Window {
@@ -476,12 +568,16 @@ func (x *Window) WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *
 	return x
 }
 
+// A Boolean value that indicates whether the window accepts mouse-moved events.
+//
 // WithAcceptsMouseMovedEvents sets the acceptsMouseMovedEvents property and returns the receiver for chaining.
 func (x *Window) WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *Window {
 	x.inner.SetAcceptsMouseMovedEvents(acceptsMouseMovedEvents)
 	return x
 }
 
+// A Boolean value that indicates whether the window is transparent to mouse events.
+//
 // WithIgnoresMouseEvents sets the ignoresMouseEvents property and returns the receiver for chaining.
 func (x *Window) WithIgnoresMouseEvents(ignoresMouseEvents bool) *Window {
 	x.inner.SetIgnoresMouseEvents(ignoresMouseEvents)
@@ -512,72 +608,98 @@ func (x *Window) WithShowsResizeIndicator(showsResizeIndicator bool) *Window {
 	return x
 }
 
+// The zero-based position of the window, based on its order from front to back among all visible application windows.
+//
 // WithOrderedIndex sets the orderedIndex property and returns the receiver for chaining.
 func (x *Window) WithOrderedIndex(orderedIndex int) *Window {
 	x.inner.SetOrderedIndex(orderedIndex)
 	return x
 }
 
+// A Boolean value indicating whether the window configuration is preserved between application launches.
+//
 // WithRestorable sets the restorable property and returns the receiver for chaining.
 func (x *Window) WithRestorable(restorable bool) *Window {
 	x.inner.SetRestorable(restorable)
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *Window) WithNextResponder(nextResponder ResponderProvider) *Window {
 	x.inner.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *Window) WithMenu(menu *Menu) *Window {
 	x.inner.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *Window) WithUserActivity(userActivity *foundation.NSUserActivity) *Window {
 	x.inner.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *Window) WithTouchBar(touchBar *TouchBar) *Window {
 	x.inner.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Returns the window’s frame rectangle with a given content rectangle.
+//
 // FrameRectForContentRect calls the underlying FrameRectForContentRect.
 func (x *Window) FrameRectForContentRect(contentRect corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.FrameRectForContentRect(contentRect)
 }
 
+// Returns the window’s content rectangle with a given frame rectangle.
+//
 // ContentRectForFrameRect calls the underlying ContentRectForFrameRect.
 func (x *Window) ContentRectForFrameRect(frameRect corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.ContentRectForFrameRect(frameRect)
 }
 
+// Adds the specified title bar accessory view controller to the window.
+//
 // AddTitlebarAccessoryViewController calls the underlying AddTitlebarAccessoryViewController.
 func (x *Window) AddTitlebarAccessoryViewController(childViewController *raw.NSTitlebarAccessoryViewController) {
 	x.inner.AddTitlebarAccessoryViewController(childViewController)
 }
 
+// Inserts the view controller into the window’s array of title bar accessory view controllers at the specified index.
+//
 // InsertTitlebarAccessoryViewControllerAtIndex calls the underlying InsertTitlebarAccessoryViewControllerAtIndex.
 func (x *Window) InsertTitlebarAccessoryViewControllerAtIndex(childViewController *raw.NSTitlebarAccessoryViewController, index int) {
 	x.inner.InsertTitlebarAccessoryViewControllerAtIndex(childViewController, index)
 }
 
+// Removes the view controller at the specified index from the window’s array of title bar accessory view controllers.
+//
 // RemoveTitlebarAccessoryViewControllerAtIndex calls the underlying RemoveTitlebarAccessoryViewControllerAtIndex.
 func (x *Window) RemoveTitlebarAccessoryViewControllerAtIndex(index int) {
 	x.inner.RemoveTitlebarAccessoryViewControllerAtIndex(index)
 }
 
+// Sets a given path as the window’s title, formatting it as a file-system path, and records this path as the window’s associated file.
+//
 // SetTitleWithRepresentedFilename calls the underlying SetTitleWithRepresentedFilename.
 func (x *Window) SetTitleWithRepresentedFilename(filename string) {
 	x.inner.SetTitleWithRepresentedFilename(foundation.NSStringStringWithUTF8String(filename))
 }
 
+// Returns the window’s field editor, creating it if requested.
+//
 // FieldEditorForObject calls the underlying FieldEditorForObject.
 func (x *Window) FieldEditorForObject(createFlag bool, object objc.ID) *Text {
 	_r := x.inner.FieldEditorForObject(createFlag, object)
@@ -587,331 +709,435 @@ func (x *Window) FieldEditorForObject(createFlag bool, object objc.ID) *Text {
 	return &Text{inner: _r}
 }
 
+// Forces the field editor to give up its first responder status and prepares it for its next assignment.
+//
 // EndEditingFor calls the underlying EndEditingFor.
 func (x *Window) EndEditingFor(object objc.ID) {
 	x.inner.EndEditingFor(object)
 }
 
+// Modifies and returns a frame rectangle so that its top edge lies on a specific screen.
+//
 // ConstrainFrameRectToScreen calls the underlying ConstrainFrameRectToScreen.
 func (x *Window) ConstrainFrameRectToScreen(frameRect corefoundation.CGRect, screen *raw.NSScreen) corefoundation.CGRect {
 	return x.inner.ConstrainFrameRectToScreen(frameRect, screen)
 }
 
+// Sets the origin and size of the window’s frame rectangle according to a given frame rectangle, thereby setting its position and size onscreen.
+//
 // SetFrameDisplay calls the underlying SetFrameDisplay.
 func (x *Window) SetFrameDisplay(frameRect corefoundation.CGRect, flag bool) {
 	x.inner.SetFrameDisplay(frameRect, flag)
 }
 
+// Sets the size of the window’s content view to a given size, which is expressed in the window’s base coordinate system.
+//
 // SetContentSize calls the underlying SetContentSize.
 func (x *Window) SetContentSize(size corefoundation.CGSize) {
 	x.inner.SetContentSize(size)
 }
 
+// Positions the bottom-left corner of the window’s frame rectangle at a given point in screen coordinates.
+//
 // SetFrameOrigin calls the underlying SetFrameOrigin.
 func (x *Window) SetFrameOrigin(point corefoundation.CGPoint) {
 	x.inner.SetFrameOrigin(point)
 }
 
+// Positions the top-left corner of the window’s frame rectangle at a given point in screen coordinates.
+//
 // SetFrameTopLeftPoint calls the underlying SetFrameTopLeftPoint.
 func (x *Window) SetFrameTopLeftPoint(point corefoundation.CGPoint) {
 	x.inner.SetFrameTopLeftPoint(point)
 }
 
+// Positions the window’s top-left to a given point.
+//
 // CascadeTopLeftFromPoint calls the underlying CascadeTopLeftFromPoint.
 func (x *Window) CascadeTopLeftFromPoint(topLeftPoint corefoundation.CGPoint) corefoundation.CGPoint {
 	return x.inner.CascadeTopLeftFromPoint(topLeftPoint)
 }
 
-// Subclasses can override \c animationResizeTime: to control the total time for the frame change. \c newFrame is the rect passed into \c setFrame:display:animate:
+// Specifies the duration of a smooth frame-size change.
 //
 // AnimationResizeTime calls the underlying AnimationResizeTime.
 func (x *Window) AnimationResizeTime(newFrame corefoundation.CGRect) float64 {
 	return x.inner.AnimationResizeTime(newFrame)
 }
 
-// \c setFrame:display:animate: is equivalent to \c setFrame:display: if the \c animateFlag is NO. If the \c animationFlag is YES, this method will perform a smooth resize of the window, where the total time for the resize is specified by \c -animationResizeTime:
+// Sets the origin and size of the window’s frame rectangle, with optional animation, according to a given frame rectangle, thereby setting its position and size onscreen.
 //
 // SetFrameDisplayAnimate calls the underlying SetFrameDisplayAnimate.
 func (x *Window) SetFrameDisplayAnimate(frameRect corefoundation.CGRect, displayFlag bool, animateFlag bool) {
 	x.inner.SetFrameDisplayAnimate(frameRect, displayFlag, animateFlag)
 }
 
+// Passes a display message down the window’s view hierarchy, thus redrawing all views that need displaying.
+//
 // DisplayIfNeeded calls the underlying DisplayIfNeeded.
 func (x *Window) DisplayIfNeeded() {
 	x.inner.DisplayIfNeeded()
 }
 
+// Passes a display message down the window’s view hierarchy, thus redrawing all views within the window.
+//
 // Display calls the underlying Display.
 func (x *Window) Display() {
 	x.inner.Display()
 }
 
+// Updates the window.
+//
 // Update calls the underlying Update.
 func (x *Window) Update() {
 	x.inner.Update()
 }
 
+// Attempts to make a given responder the first responder for the window.
+//
 // MakeFirstResponder calls the underlying MakeFirstResponder.
 func (x *Window) MakeFirstResponder(responder *raw.NSResponder) bool {
 	return x.inner.MakeFirstResponder(responder)
 }
 
+// Removes the window from the screen.
+//
 // Close calls the underlying Close.
 func (x *Window) Close() {
 	x.inner.Close()
 }
 
+// Removes the window from the screen list and displays the minimized window in the Dock.
+//
 // Miniaturize calls the underlying Miniaturize.
 func (x *Window) Miniaturize(sender objc.ID) {
 	x.inner.Miniaturize(sender)
 }
 
+// De-minimizes the window.
+//
 // Deminiaturize calls the underlying Deminiaturize.
 func (x *Window) Deminiaturize(sender objc.ID) {
 	x.inner.Deminiaturize(sender)
 }
 
+// Toggles the size and location of the window between its standard state (which the application provides as the best size to display the window’s data) and its user state (a new size and location the user may have set by moving or resizing the window).
+//
 // Zoom calls the underlying Zoom.
 func (x *Window) Zoom(sender objc.ID) {
 	x.inner.Zoom(sender)
 }
 
+// Specifies the thickness of a given border of the window.
+//
 // SetContentBorderThicknessForEdge calls the underlying SetContentBorderThicknessForEdge.
 func (x *Window) SetContentBorderThicknessForEdge(thickness float64, edge foundation.NSRectEdge) {
 	x.inner.SetContentBorderThicknessForEdge(thickness, edge)
 }
 
+// Indicates the thickness of a given border of the window.
+//
 // ContentBorderThicknessForEdge calls the underlying ContentBorderThicknessForEdge.
 func (x *Window) ContentBorderThicknessForEdge(edge foundation.NSRectEdge) float64 {
 	return x.inner.ContentBorderThicknessForEdge(edge)
 }
 
+// Specifies whether the window calculates the thickness of a given border automatically.
+//
 // SetAutorecalculatesContentBorderThicknessForEdge calls the underlying SetAutorecalculatesContentBorderThicknessForEdge.
 func (x *Window) SetAutorecalculatesContentBorderThicknessForEdge(flag bool, edge foundation.NSRectEdge) {
 	x.inner.SetAutorecalculatesContentBorderThicknessForEdge(flag, edge)
 }
 
+// Indicates whether the window calculates the thickness of a given border automatically.
+//
 // AutorecalculatesContentBorderThicknessForEdge calls the underlying AutorecalculatesContentBorderThicknessForEdge.
 func (x *Window) AutorecalculatesContentBorderThicknessForEdge(edge foundation.NSRectEdge) bool {
 	return x.inner.AutorecalculatesContentBorderThicknessForEdge(edge)
 }
 
+// Sets the window’s location to the center of the screen.
+//
 // Center calls the underlying Center.
 func (x *Window) Center() {
 	x.inner.Center()
 }
 
+// Moves the window to the front of the screen list, within its level, and makes it the key window; that is, it shows the window.
+//
 // MakeKeyAndOrderFront calls the underlying MakeKeyAndOrderFront.
 func (x *Window) MakeKeyAndOrderFront(sender objc.ID) {
 	x.inner.MakeKeyAndOrderFront(sender)
 }
 
+// Moves the window to the front of its level in the screen list, without changing either the key window or the main window.
+//
 // OrderFront calls the underlying OrderFront.
 func (x *Window) OrderFront(sender objc.ID) {
 	x.inner.OrderFront(sender)
 }
 
+// Moves the window to the back of its level in the screen list, without changing either the key window or the main window.
+//
 // OrderBack calls the underlying OrderBack.
 func (x *Window) OrderBack(sender objc.ID) {
 	x.inner.OrderBack(sender)
 }
 
+// Removes the window from the screen list, which hides the window.
+//
 // OrderOut calls the underlying OrderOut.
 func (x *Window) OrderOut(sender objc.ID) {
 	x.inner.OrderOut(sender)
 }
 
+// Repositions the window’s window device in the window server’s screen list.
+//
 // OrderWindowRelativeTo calls the underlying OrderWindowRelativeTo.
 func (x *Window) OrderWindowRelativeTo(place NSWindowOrderingMode, otherWin int) {
 	x.inner.OrderWindowRelativeTo(raw.NSWindowOrderingMode(place), otherWin)
 }
 
+// Moves the window to the front of its level, even if its application isn’t active, without changing either the key window or the main window.
+//
 // OrderFrontRegardless calls the underlying OrderFrontRegardless.
 func (x *Window) OrderFrontRegardless() {
 	x.inner.OrderFrontRegardless()
 }
 
-// Makes the window key and main if eligible, updating NSApplication's `-keyWindow` and `-mainWindow` properties.
+// Makes the window the key window.
 //
 // MakeKeyWindow calls the underlying MakeKeyWindow.
 func (x *Window) MakeKeyWindow() {
 	x.inner.MakeKeyWindow()
 }
 
-// Makes the window main if eligible. Updates NSApplication's `-mainWindow` property.
+// Makes the window the main window.
 //
 // MakeMainWindow calls the underlying MakeMainWindow.
 func (x *Window) MakeMainWindow() {
 	x.inner.MakeMainWindow()
 }
 
-// Informs the window that it has become the key window. This method exists as an override point. Do not invoke directly. Instead, invoke `-makeKeyWindow`.
+// Informs the window that it has become the key window.
 //
 // BecomeKeyWindow calls the underlying BecomeKeyWindow.
 func (x *Window) BecomeKeyWindow() {
 	x.inner.BecomeKeyWindow()
 }
 
-// Informs the window that it has stopped being the key window. This method exists as an override point. Do not invoke directly. Windows automatically receive this message when deactivating or when another window has become key.
+// Resigns the window’s key window status.
 //
 // ResignKeyWindow calls the underlying ResignKeyWindow.
 func (x *Window) ResignKeyWindow() {
 	x.inner.ResignKeyWindow()
 }
 
-// Informs the window that it has become the main window. This method exists as an override point. Do not invoke directly. Instead, invoke `-makeMainWindow`.
+// Informs the window that it has become the main window.
 //
 // BecomeMainWindow calls the underlying BecomeMainWindow.
 func (x *Window) BecomeMainWindow() {
 	x.inner.BecomeMainWindow()
 }
 
-// Informs the window that it has stopped being the main window. This method exists as an override point. Do not invoke directly. Windows automatically receive this message when deactivating or when another window has become main.
+// Resigns the window’s main window status.
 //
 // ResignMainWindow calls the underlying ResignMainWindow.
 func (x *Window) ResignMainWindow() {
 	x.inner.ResignMainWindow()
 }
 
+// Converts a rectangle to the screen coordinate system from the window’s coordinate system.
+//
 // ConvertRectToScreen calls the underlying ConvertRectToScreen.
 func (x *Window) ConvertRectToScreen(rect corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.ConvertRectToScreen(rect)
 }
 
+// Converts a rectangle from the screen coordinate system to the window’s coordinate system.
+//
 // ConvertRectFromScreen calls the underlying ConvertRectFromScreen.
 func (x *Window) ConvertRectFromScreen(rect corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.ConvertRectFromScreen(rect)
 }
 
+// Converts a point to the screen coordinate system from the window’s coordinate system.
+//
 // ConvertPointToScreen calls the underlying ConvertPointToScreen.
 func (x *Window) ConvertPointToScreen(point corefoundation.CGPoint) corefoundation.CGPoint {
 	return x.inner.ConvertPointToScreen(point)
 }
 
+// Converts a point from the screen coordinate system to the window’s coordinate system.
+//
 // ConvertPointFromScreen calls the underlying ConvertPointFromScreen.
 func (x *Window) ConvertPointFromScreen(point corefoundation.CGPoint) corefoundation.CGPoint {
 	return x.inner.ConvertPointFromScreen(point)
 }
 
+// Converts a rectangle from the window’s coordinate system to its pixel-aligned backing store coordinate system.
+//
 // ConvertRectToBacking calls the underlying ConvertRectToBacking.
 func (x *Window) ConvertRectToBacking(rect corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.ConvertRectToBacking(rect)
 }
 
+// Converts a rectangle from its pixel-aligned backing store coordinate system to the window’s coordinate system.
+//
 // ConvertRectFromBacking calls the underlying ConvertRectFromBacking.
 func (x *Window) ConvertRectFromBacking(rect corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.ConvertRectFromBacking(rect)
 }
 
+// Converts a point from the window’s coordinate system to its pixel-aligned backing store coordinate system.
+//
 // ConvertPointToBacking calls the underlying ConvertPointToBacking.
 func (x *Window) ConvertPointToBacking(point corefoundation.CGPoint) corefoundation.CGPoint {
 	return x.inner.ConvertPointToBacking(point)
 }
 
+// Converts a point from its pixel-aligned backing store coordinate system to the window’s coordinate system.
+//
 // ConvertPointFromBacking calls the underlying ConvertPointFromBacking.
 func (x *Window) ConvertPointFromBacking(point corefoundation.CGPoint) corefoundation.CGPoint {
 	return x.inner.ConvertPointFromBacking(point)
 }
 
-// Use `NSIntegralRectWithOptions()` to produce a backing store pixel aligned rectangle from the given input rectangle in window coordinates.
+// Returns a backing store pixel-aligned rectangle in window coordinates.
 //
 // BackingAlignedRectOptions calls the underlying BackingAlignedRectOptions.
 func (x *Window) BackingAlignedRectOptions(rect corefoundation.CGRect, options foundation.NSAlignmentOptions) corefoundation.CGRect {
 	return x.inner.BackingAlignedRectOptions(rect, options)
 }
 
+// Simulates the user clicking the close button by momentarily highlighting the button and then closing the window.
+//
 // PerformClose calls the underlying PerformClose.
 func (x *Window) PerformClose(sender objc.ID) {
 	x.inner.PerformClose(sender)
 }
 
+// Simulates the user clicking the minimize button by momentarily highlighting the button, then minimizing the window.
+//
 // PerformMiniaturize calls the underlying PerformMiniaturize.
 func (x *Window) PerformMiniaturize(sender objc.ID) {
 	x.inner.PerformMiniaturize(sender)
 }
 
+// This action method simulates the user clicking the zoom box by momentarily highlighting the button and then zooming the window.
+//
 // PerformZoom calls the underlying PerformZoom.
 func (x *Window) PerformZoom(sender objc.ID) {
 	x.inner.PerformZoom(sender)
 }
 
+// Returns EPS data that draws the region of the window within a given rectangle.
+//
 // DataWithEPSInsideRect calls the underlying DataWithEPSInsideRect.
 func (x *Window) DataWithEPSInsideRect(rect corefoundation.CGRect) *foundation.NSData {
 	return x.inner.DataWithEPSInsideRect(rect)
 }
 
+// Returns PDF data that draws the region of the window within a given rectangle.
+//
 // DataWithPDFInsideRect calls the underlying DataWithPDFInsideRect.
 func (x *Window) DataWithPDFInsideRect(rect corefoundation.CGRect) *foundation.NSData {
 	return x.inner.DataWithPDFInsideRect(rect)
 }
 
+// Runs the Print panel, and if the user chooses an option other than canceling, prints the window (its frame view and all subviews).
+//
 // Print calls the underlying Print.
 func (x *Window) Print(sender objc.ID) {
 	x.inner.Print(sender)
 }
 
+// Sets a Boolean value that indicates whether the window’s depth limit can change to match the depth of the screen it’s on.
+//
 // SetDynamicDepthLimit calls the underlying SetDynamicDepthLimit.
 func (x *Window) SetDynamicDepthLimit(flag bool) {
 	x.inner.SetDynamicDepthLimit(flag)
 }
 
+// Invalidates the window shadow so that it is recomputed based on the current window shape.
+//
 // InvalidateShadow calls the underlying InvalidateShadow.
 func (x *Window) InvalidateShadow() {
 	x.inner.InvalidateShadow()
 }
 
-// `-toggleFullScreen:` enters or exits for full screen. A window must have \c NSWindowCollectionBehaviorFullScreenAuxiliary or \c NSWindowCollectionBehaviorFullScreenPrimary included in the \c collectionBehavior property; if it does not, this method may simply do nothing.
+// Takes the window into or out of fullscreen mode,
 //
 // ToggleFullScreen calls the underlying ToggleFullScreen.
 func (x *Window) ToggleFullScreen(sender objc.ID) {
 	x.inner.ToggleFullScreen(sender)
 }
 
+// Sets the window’s frame rectangle from a given string representation.
+//
 // SetFrameFromString calls the underlying SetFrameFromString.
 func (x *Window) SetFrameFromString(string_ *foundation.NSString) {
 	x.inner.SetFrameFromString(string_)
 }
 
+// Saves the window’s frame rectangle in the user defaults system under a given name.
+//
 // SaveFrameUsingName calls the underlying SaveFrameUsingName.
 func (x *Window) SaveFrameUsingName(name *foundation.NSString) {
 	x.inner.SaveFrameUsingName(name)
 }
 
+// Sets the window’s frame rectangle by reading the rectangle data stored under a given name from the defaults system. Can operate on non-resizable windows.
+//
 // SetFrameUsingNameForce calls the underlying SetFrameUsingNameForce.
 func (x *Window) SetFrameUsingNameForce(name *foundation.NSString, force bool) bool {
 	return x.inner.SetFrameUsingNameForce(name, force)
 }
 
+// Sets the window’s frame rectangle by reading the rectangle data stored under a given name from the defaults system.
+//
 // SetFrameUsingName calls the underlying SetFrameUsingName.
 func (x *Window) SetFrameUsingName(name *foundation.NSString) bool {
 	return x.inner.SetFrameUsingName(name)
 }
 
+// Sets the name AppKit uses to automatically save the window’s frame rectangle data in the defaults system.
+//
 // SetFrameAutosaveName calls the underlying SetFrameAutosaveName.
 func (x *Window) SetFrameAutosaveName(name *foundation.NSString) bool {
 	return x.inner.SetFrameAutosaveName(name)
 }
 
+// Starts a document-modal session and presents—or queues for presentation—a sheet.
+//
 // BeginSheetCompletionHandler calls the underlying BeginSheetCompletionHandler.
 func (x *Window) BeginSheetCompletionHandler(sheetWindow *raw.NSWindow, handler func(int)) {
 	x.inner.BeginSheetCompletionHandler(sheetWindow, handler)
 }
 
+// Starts a document-modal session and presents the specified critical sheet.
+//
 // BeginCriticalSheetCompletionHandler calls the underlying BeginCriticalSheetCompletionHandler.
 func (x *Window) BeginCriticalSheetCompletionHandler(sheetWindow *raw.NSWindow, handler func(int)) {
 	x.inner.BeginCriticalSheetCompletionHandler(sheetWindow, handler)
 }
 
+// Ends a document-modal session and dismisses the specified sheet.
+//
 // EndSheet calls the underlying EndSheet.
 func (x *Window) EndSheet(sheetWindow *raw.NSWindow) {
 	x.inner.EndSheet(sheetWindow)
 }
 
+// Ends a document-modal session and dismisses the specified sheet.
+//
 // EndSheetReturnCode calls the underlying EndSheetReturnCode.
 func (x *Window) EndSheetReturnCode(sheetWindow *raw.NSWindow, returnCode int) {
 	x.inner.EndSheetReturnCode(sheetWindow, returnCode)
 }
 
+// Returns the window button of a given window button kind in the window’s view hierarchy.
+//
 // StandardWindowButton calls the underlying StandardWindowButton.
 func (x *Window) StandardWindowButton(b NSWindowButton) *Button {
 	_r := x.inner.StandardWindowButton(raw.NSWindowButton(b))
@@ -921,117 +1147,147 @@ func (x *Window) StandardWindowButton(b NSWindowButton) *Button {
 	return &Button{inner: _r}
 }
 
+// Adds a given window as a child window of the window.
+//
 // AddChildWindowOrdered calls the underlying AddChildWindowOrdered.
 func (x *Window) AddChildWindowOrdered(childWin *raw.NSWindow, place NSWindowOrderingMode) {
 	x.inner.AddChildWindowOrdered(childWin, raw.NSWindowOrderingMode(place))
 }
 
+// Detaches a given child window from the window.
+//
 // RemoveChildWindow calls the underlying RemoveChildWindow.
 func (x *Window) RemoveChildWindow(childWin *raw.NSWindow) {
 	x.inner.RemoveChildWindow(childWin)
 }
 
-// `-canRepresentDisplayGamut:` returns \c YES if the colorSpace of the receiving window, and the \c colorSpace of the screen containing that window, are capable of representing the given display gamut
+// A Boolean value that indicates if the window and its screen use a color space that can represent the specified display gamut.
 //
 // CanRepresentDisplayGamut calls the underlying CanRepresentDisplayGamut.
 func (x *Window) CanRepresentDisplayGamut(displayGamut NSDisplayGamut) bool {
 	return x.inner.CanRepresentDisplayGamut(raw.NSDisplayGamut(displayGamut))
 }
 
-// Call to start a drag (moving the window) in the Window Server process. In general, this can be done after a mouseDown event has come in and been examined by an application or view. The view may determine it wants to allow that portion of the window to start a window drag, and can hand off the work to the Window Server process by calling this method. This allows the window to participate in space switching, and other system features. Pass the original mouseDown event to the method. The method will return right away, and a mouseUp may not get sent.
+// Starts a window drag based on the specified mouse-down event.
 //
 // PerformWindowDragWithEvent calls the underlying PerformWindowDragWithEvent.
 func (x *Window) PerformWindowDragWithEvent(event *raw.NSEvent) {
 	x.inner.PerformWindowDragWithEvent(event)
 }
 
+// Searches for a candidate next key view and, if it finds one, tries to make it the first responder.
+//
 // SelectNextKeyView calls the underlying SelectNextKeyView.
 func (x *Window) SelectNextKeyView(sender objc.ID) {
 	x.inner.SelectNextKeyView(sender)
 }
 
+// Searches for a candidate previous key view and, if it finds one, tries to make it the first responder.
+//
 // SelectPreviousKeyView calls the underlying SelectPreviousKeyView.
 func (x *Window) SelectPreviousKeyView(sender objc.ID) {
 	x.inner.SelectPreviousKeyView(sender)
 }
 
+// Gives key view status to the view that follows the given view.
+//
 // SelectKeyViewFollowingView calls the underlying SelectKeyViewFollowingView.
 func (x *Window) SelectKeyViewFollowingView(view *raw.NSView) {
 	x.inner.SelectKeyViewFollowingView(view)
 }
 
+// Gives key view status to the view that precedes the given view.
+//
 // SelectKeyViewPrecedingView calls the underlying SelectKeyViewPrecedingView.
 func (x *Window) SelectKeyViewPrecedingView(view *raw.NSView) {
 	x.inner.SelectKeyViewPrecedingView(view)
 }
 
+// Disables the default button cell’s key equivalent, so it doesn’t perform a click when the user presses Return (or Enter).
+//
 // DisableKeyEquivalentForDefaultButtonCell calls the underlying DisableKeyEquivalentForDefaultButtonCell.
 func (x *Window) DisableKeyEquivalentForDefaultButtonCell() {
 	x.inner.DisableKeyEquivalentForDefaultButtonCell()
 }
 
+// Reenables the default button cell’s key equivalent, so it performs a click when the user presses Return (or Enter).
+//
 // EnableKeyEquivalentForDefaultButtonCell calls the underlying EnableKeyEquivalentForDefaultButtonCell.
 func (x *Window) EnableKeyEquivalentForDefaultButtonCell() {
 	x.inner.EnableKeyEquivalentForDefaultButtonCell()
 }
 
+// Marks the key view loop as “dirty” and in need of recalculation.
+//
 // RecalculateKeyViewLoop calls the underlying RecalculateKeyViewLoop.
 func (x *Window) RecalculateKeyViewLoop() {
 	x.inner.RecalculateKeyViewLoop()
 }
 
+// Toggles the visibility of the window’s toolbar.
+//
 // ToggleToolbarShown calls the underlying ToggleToolbarShown.
 func (x *Window) ToggleToolbarShown(sender objc.ID) {
 	x.inner.ToggleToolbarShown(sender)
 }
 
+// Presents the toolbar customization user interface.
+//
 // RunToolbarCustomizationPalette calls the underlying RunToolbarCustomizationPalette.
 func (x *Window) RunToolbarCustomizationPalette(sender objc.ID) {
 	x.inner.RunToolbarCustomizationPalette(sender)
 }
 
-// Actions that can be called to perform various tabbed window behaviors. UI that is hooked up to these items can be automatically validated by calling `NSWindow`'s \c validateUserInterfaceItem.
+// Selects the next tab in the tab group in the trailing direction.
 //
 // SelectNextTab calls the underlying SelectNextTab.
 func (x *Window) SelectNextTab(sender objc.ID) {
 	x.inner.SelectNextTab(sender)
 }
 
+// Selects the previous tab in the tab group in the leading direction.
+//
 // SelectPreviousTab calls the underlying SelectPreviousTab.
 func (x *Window) SelectPreviousTab(sender objc.ID) {
 	x.inner.SelectPreviousTab(sender)
 }
 
+// Moves the tab to a new containing window.
+//
 // MoveTabToNewWindow calls the underlying MoveTabToNewWindow.
 func (x *Window) MoveTabToNewWindow(sender objc.ID) {
 	x.inner.MoveTabToNewWindow(sender)
 }
 
+// Merges all open windows into a single tabbed window.
+//
 // MergeAllWindows calls the underlying MergeAllWindows.
 func (x *Window) MergeAllWindows(sender objc.ID) {
 	x.inner.MergeAllWindows(sender)
 }
 
+// Shows or hides the tab bar.
+//
 // ToggleTabBar calls the underlying ToggleTabBar.
 func (x *Window) ToggleTabBar(sender objc.ID) {
 	x.inner.ToggleTabBar(sender)
 }
 
-// Toggle the Tab Picker / Tab Overview UI which is invoked via "Show All Tabs". Performs the toggle in an animated fashion. Use `tabGroup.isOverviewVisible` to find out if it is visible or not at a given time.
+// Shows or hides the tab overview.
 //
 // ToggleTabOverview calls the underlying ToggleTabOverview.
 func (x *Window) ToggleTabOverview(sender objc.ID) {
 	x.inner.ToggleTabOverview(sender)
 }
 
-// This is now a cover for `-[self.tabGroup addWindow:]`, which allows more precise placement.
+// Adds the provided window as a new tab in a tabbed window using the specified ordering instruction.
 //
 // AddTabbedWindowOrdered calls the underlying AddTabbedWindowOrdered.
 func (x *Window) AddTabbedWindowOrdered(window *raw.NSWindow, ordered NSWindowOrderingMode) {
 	x.inner.AddTabbedWindowOrdered(window, raw.NSWindowOrderingMode(ordered))
 }
 
-// Attempts to move window sharing (i.e. within a SharePlay session) from the receiver to another window. In response to this request, the user may choose to transfer sharing to the new window, or simply stop sharing the content. In the event of a failed transfer request, a non-`nil` error contains details about the failure. @param window A window that is replacing the reciever in representing the user's current activity. @param completionHandler A completion block that is called after the request finishes.
+// Attempts to move window sharing (within a SharePlay session) from this window to another window.
 //
 // TransferWindowSharingToWindow blocks until the operation completes or ctx is cancelled.
 func (x *Window) TransferWindowSharingToWindow(ctx context.Context, window *raw.NSWindow) error {
@@ -2091,13 +2347,15 @@ func (x *Window) WindowTitlebarLayoutDirection() NSUserInterfaceLayoutDirection 
 	return NSUserInterfaceLayoutDirection(x.inner.WindowTitlebarLayoutDirection())
 }
 
-// Tracks events matching the supplied mask with the supplied tracking handler until the tracking handler explicitly terminates tracking. Each event is removed from the event queue then passed to the tracking handler. If a matching event does not exist in the event queue, then the main thread blocks in the specified runloop mode until an event of the requested type is received or the timeout expires. If the timeout expires, the tracking handler is called with a nil event. A negative timeout is interpreted as 0. Use \c NSEventDurationForever to never timeout. Tracking continues until `*stop` is set to \c YES. Calls to `-nextEventMatchingMask:…` are allowed inside the trackingHandler block. This method returns once tracking is terminated.
+// Tracks events that match the specified mask using the specified tracking handler until the tracking handler explicitly terminates tracking.
 //
 // TrackEventsMatchingMaskTimeoutModeHandler calls the underlying TrackEventsMatchingMaskTimeoutModeHandler.
 func (x *Window) TrackEventsMatchingMaskTimeoutModeHandler(mask NSEventMask, timeout float64, mode *foundation.NSString, trackingHandler func(*raw.NSEvent, *bool)) {
 	x.inner.TrackEventsMatchingMaskTimeoutModeHandler(raw.NSEventMask(mask), timeout, mode, trackingHandler)
 }
 
+// Returns the next event matching a given mask.
+//
 // NextEventMatchingMask calls the underlying NextEventMatchingMask.
 func (x *Window) NextEventMatchingMask(mask NSEventMask) *Event {
 	_r := x.inner.NextEventMatchingMask(raw.NSEventMask(mask))
@@ -2107,6 +2365,8 @@ func (x *Window) NextEventMatchingMask(mask NSEventMask) *Event {
 	return &Event{inner: _r}
 }
 
+// Forwards the message to the global application object.
+//
 // NextEventMatchingMaskUntilDateInModeDequeue calls the underlying NextEventMatchingMaskUntilDateInModeDequeue.
 func (x *Window) NextEventMatchingMaskUntilDateInModeDequeue(mask NSEventMask, expiration *foundation.NSDate, mode *foundation.NSString, deqFlag bool) *Event {
 	_r := x.inner.NextEventMatchingMaskUntilDateInModeDequeue(raw.NSEventMask(mask), expiration, mode, deqFlag)
@@ -2116,16 +2376,22 @@ func (x *Window) NextEventMatchingMaskUntilDateInModeDequeue(mask NSEventMask, e
 	return &Event{inner: _r}
 }
 
+// Forwards the message to the global application object.
+//
 // DiscardEventsMatchingMaskBeforeEvent calls the underlying DiscardEventsMatchingMaskBeforeEvent.
 func (x *Window) DiscardEventsMatchingMaskBeforeEvent(mask NSEventMask, lastEvent *raw.NSEvent) {
 	x.inner.DiscardEventsMatchingMaskBeforeEvent(raw.NSEventMask(mask), lastEvent)
 }
 
+// Forwards the message to the global application object.
+//
 // PostEventAtStart calls the underlying PostEventAtStart.
 func (x *Window) PostEventAtStart(event *raw.NSEvent, flag bool) {
 	x.inner.PostEventAtStart(event, flag)
 }
 
+// This action method dispatches mouse and keyboard events the global application object sends to the window.
+//
 // SendEvent calls the underlying SendEvent.
 func (x *Window) SendEvent(event *raw.NSEvent) {
 	x.inner.SendEvent(event)
@@ -2165,26 +2431,36 @@ func (x *Window) MouseLocationOutsideOfEventStream() corefoundation.CGPoint {
 	return x.inner.MouseLocationOutsideOfEventStream()
 }
 
+// Disables all cursor rectangle management within the window.
+//
 // DisableCursorRects calls the underlying DisableCursorRects.
 func (x *Window) DisableCursorRects() {
 	x.inner.DisableCursorRects()
 }
 
+// Reenables cursor rectangle management within the window after a disableCursorRects message.
+//
 // EnableCursorRects calls the underlying EnableCursorRects.
 func (x *Window) EnableCursorRects() {
 	x.inner.EnableCursorRects()
 }
 
+// Invalidates all cursor rectangles in the window.
+//
 // DiscardCursorRects calls the underlying DiscardCursorRects.
 func (x *Window) DiscardCursorRects() {
 	x.inner.DiscardCursorRects()
 }
 
+// Marks as invalid the cursor rectangles of a given view object in the window, so they’ll be set up again when the window becomes key.
+//
 // InvalidateCursorRectsForView calls the underlying InvalidateCursorRectsForView.
 func (x *Window) InvalidateCursorRectsForView(view *raw.NSView) {
 	x.inner.InvalidateCursorRectsForView(view)
 }
 
+// Clears the window’s cursor rectangles and the cursor rectangles of the NSView objects in its view hierarchy.
+//
 // ResetCursorRects calls the underlying ResetCursorRects.
 func (x *Window) ResetCursorRects() {
 	x.inner.ResetCursorRects()
@@ -2204,22 +2480,28 @@ func (x *Window) BeginDraggingSessionWithItemsEventSource(items *foundation.NSAr
 	return &DraggingSession{inner: _r}
 }
 
+// Begins a dragging session.
+//
 // DragImageAtOffsetEventPasteboardSourceSlideBack calls the underlying DragImageAtOffsetEventPasteboardSourceSlideBack.
 func (x *Window) DragImageAtOffsetEventPasteboardSourceSlideBack(image *raw.NSImage, baseLocation corefoundation.CGPoint, initialOffset corefoundation.CGSize, event *raw.NSEvent, pboard *raw.NSPasteboard, sourceObj objc.ID, slideFlag bool) {
 	x.inner.DragImageAtOffsetEventPasteboardSourceSlideBack(image, baseLocation, initialOffset, event, pboard, sourceObj, slideFlag)
 }
 
+// Registers a set of pasteboard types that the window accepts as the destination of an image-dragging session.
+//
 // RegisterForDraggedTypes calls the underlying RegisterForDraggedTypes.
 func (x *Window) RegisterForDraggedTypes(newTypes *foundation.NSArray[*foundation.NSString]) {
 	x.inner.RegisterForDraggedTypes(newTypes)
 }
 
+// Unregisters the window as a possible destination for dragging operations.
+//
 // UnregisterDraggedTypes calls the underlying UnregisterDraggedTypes.
 func (x *Window) UnregisterDraggedTypes() {
 	x.inner.UnregisterDraggedTypes()
 }
 
-// Returns a new display link whose callback will be invoked in-sync with the display the window is on. If the window is not on any display the callback will not be invoked.
+// Returns a new display link whose callback will be invoked in-sync with the display the window is on.
 //
 // DisplayLinkWithTargetSelector calls the underlying DisplayLinkWithTargetSelector.
 func (x *Window) DisplayLinkWithTargetSelector(target objc.ID, selector objc.SEL) *quartzcore.CADisplayLink {
@@ -2291,6 +2573,8 @@ func (x *Window) FlushWindowIfNeeded() {
 	x.inner.FlushWindowIfNeeded()
 }
 
+// Disables the window’s screen updates until the window is flushed.
+//
 // DisableScreenUpdatesUntilFlush calls the underlying DisableScreenUpdatesUntilFlush.
 func (x *Window) DisableScreenUpdatesUntilFlush() {
 	x.inner.DisableScreenUpdatesUntilFlush()
@@ -2360,26 +2644,36 @@ func (x *Window) WindowRef() unsafe.Pointer {
 	return x.inner.WindowRef()
 }
 
+// Updates the constraints based on changes to views in the window since the last layout.
+//
 // UpdateConstraintsIfNeeded calls the underlying UpdateConstraintsIfNeeded.
 func (x *Window) UpdateConstraintsIfNeeded() {
 	x.inner.UpdateConstraintsIfNeeded()
 }
 
+// Updates the layout of views in the window based on the current views and constraints.
+//
 // LayoutIfNeeded calls the underlying LayoutIfNeeded.
 func (x *Window) LayoutIfNeeded() {
 	x.inner.LayoutIfNeeded()
 }
 
+// Returns the part of the window that stays stationary during constraint-based layout.
+//
 // AnchorAttributeForOrientation calls the underlying AnchorAttributeForOrientation.
 func (x *Window) AnchorAttributeForOrientation(orientation NSLayoutConstraintOrientation) NSLayoutAttribute {
 	return NSLayoutAttribute(x.inner.AnchorAttributeForOrientation(raw.NSLayoutConstraintOrientation(orientation)))
 }
 
+// Sets the part of the window that stays stationary during constraint-based layout.
+//
 // SetAnchorAttributeForOrientation calls the underlying SetAnchorAttributeForOrientation.
 func (x *Window) SetAnchorAttributeForOrientation(attr NSLayoutAttribute, orientation NSLayoutConstraintOrientation) {
 	x.inner.SetAnchorAttributeForOrientation(raw.NSLayoutAttribute(attr), raw.NSLayoutConstraintOrientation(orientation))
 }
 
+// Displays a visual representation of the supplied constraints in the window.
+//
 // VisualizeConstraints calls the underlying VisualizeConstraints.
 func (x *Window) VisualizeConstraints(constraints *foundation.NSArray[*raw.NSLayoutConstraint]) {
 	x.inner.VisualizeConstraints(constraints)
@@ -2396,31 +2690,43 @@ func (x *Window) Drawers() []*Drawer {
 	})
 }
 
+// Sets the window’s miniaturized state to the value you specify.
+//
 // SetIsMiniaturized calls the underlying SetIsMiniaturized.
 func (x *Window) SetIsMiniaturized(flag bool) {
 	x.inner.SetIsMiniaturized(flag)
 }
 
+// Sets the window’s visible state to the value you specify.
+//
 // SetIsVisible calls the underlying SetIsVisible.
 func (x *Window) SetIsVisible(flag bool) {
 	x.inner.SetIsVisible(flag)
 }
 
+// Sets the window’s zoomed state to the value you specify.
+//
 // SetIsZoomed calls the underlying SetIsZoomed.
 func (x *Window) SetIsZoomed(flag bool) {
 	x.inner.SetIsZoomed(flag)
 }
 
+// Handles the AppleScript command to close the window (and its associated document, if any).
+//
 // HandleCloseScriptCommand calls the underlying HandleCloseScriptCommand.
 func (x *Window) HandleCloseScriptCommand(command *foundation.NSCloseCommand) objc.ID {
 	return x.inner.HandleCloseScriptCommand(command)
 }
 
+// Handles the AppleScript command to print the contents of the window (or its associated document, if any).
+//
 // HandlePrintScriptCommand calls the underlying HandlePrintScriptCommand.
 func (x *Window) HandlePrintScriptCommand(command *foundation.NSScriptCommand) objc.ID {
 	return x.inner.HandlePrintScriptCommand(command)
 }
 
+// Handles the AppleScript command to save the window (and its associated document, if any).
+//
 // HandleSaveScriptCommand calls the underlying HandleSaveScriptCommand.
 func (x *Window) HandleSaveScriptCommand(command *foundation.NSScriptCommand) objc.ID {
 	return x.inner.HandleSaveScriptCommand(command)
@@ -2471,11 +2777,15 @@ func (x *Window) SetOrderedIndex(orderedIndex int) {
 	x.inner.SetOrderedIndex(orderedIndex)
 }
 
+// Disables snapshot restoration.
+//
 // DisableSnapshotRestoration calls the underlying DisableSnapshotRestoration.
 func (x *Window) DisableSnapshotRestoration() {
 	x.inner.DisableSnapshotRestoration()
 }
 
+// Enables snapshot restoration.
+//
 // EnableSnapshotRestoration calls the underlying EnableSnapshotRestoration.
 func (x *Window) EnableSnapshotRestoration() {
 	x.inner.EnableSnapshotRestoration()

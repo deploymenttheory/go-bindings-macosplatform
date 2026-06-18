@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class representing an argument in the Program.
+//
 // ModelStructureProgramArgument wraps [raw.MLModelStructureProgramArgument] with a fluent Go API.
 type ModelStructureProgramArgument struct {
 	inner *raw.MLModelStructureProgramArgument

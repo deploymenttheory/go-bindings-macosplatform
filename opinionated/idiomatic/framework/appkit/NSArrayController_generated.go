@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A bindings-compatible controller that manages a collection of objects.
+//
 // ArrayController wraps [raw.NSArrayController] with a fluent Go API.
 type ArrayController struct {
 	inner *raw.NSArrayController
@@ -39,12 +41,16 @@ func NewArrayController() *ArrayController {
 	return &ArrayController{inner: raw.NSArrayControllerFromID(_id)}
 }
 
+// A Boolean that indicates if the receiver automatically rearranges its content to correspond to the current sort descriptors and filter predicates
+//
 // WithAutomaticallyRearrangesObjects sets the automaticallyRearrangesObjects property and returns the receiver for chaining.
 func (x *ArrayController) WithAutomaticallyRearrangesObjects(automaticallyRearrangesObjects bool) *ArrayController {
 	x.inner.SetAutomaticallyRearrangesObjects(automaticallyRearrangesObjects)
 	return x
 }
 
+// An array of sort descriptor objects, used by the receiver to arrange its content.
+//
 // WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *ArrayController) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *ArrayController {
 	if len(items) == 0 {
@@ -63,192 +69,262 @@ func (x *ArrayController) WithSortDescriptors(items ...*foundation.NSSortDescrip
 	return x
 }
 
+// A predicate used by the receiver to filter the array controller contents
+//
 // WithFilterPredicate sets the filterPredicate property and returns the receiver for chaining.
 func (x *ArrayController) WithFilterPredicate(filterPredicate *foundation.NSPredicate) *ArrayController {
 	x.inner.SetFilterPredicate(filterPredicate)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver automatically clears an existing filter predicate when new items are inserted or added to the content
+//
 // WithClearsFilterPredicateOnInsertion sets the clearsFilterPredicateOnInsertion property and returns the receiver for chaining.
 func (x *ArrayController) WithClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion bool) *ArrayController {
 	x.inner.SetClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver requires that the content array attempt to maintain a selection
+//
 // WithAvoidsEmptySelection sets the avoidsEmptySelection property and returns the receiver for chaining.
 func (x *ArrayController) WithAvoidsEmptySelection(avoidsEmptySelection bool) *ArrayController {
 	x.inner.SetAvoidsEmptySelection(avoidsEmptySelection)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver will attempt to preserve the current selection when the content changes
+//
 // WithPreservesSelection sets the preservesSelection property and returns the receiver for chaining.
 func (x *ArrayController) WithPreservesSelection(preservesSelection bool) *ArrayController {
 	x.inner.SetPreservesSelection(preservesSelection)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver automatically selects inserted objects
+//
 // WithSelectsInsertedObjects sets the selectsInsertedObjects property and returns the receiver for chaining.
 func (x *ArrayController) WithSelectsInsertedObjects(selectsInsertedObjects bool) *ArrayController {
 	x.inner.SetSelectsInsertedObjects(selectsInsertedObjects)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver always returns the multiple values marker when multiple objects are selected
+//
 // WithAlwaysUsesMultipleValuesMarker sets the alwaysUsesMultipleValuesMarker property and returns the receiver for chaining.
 func (x *ArrayController) WithAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool) *ArrayController {
 	x.inner.SetAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker)
 	return x
 }
 
+// An index set containing the indexes of the receiver’s currently selected objects in the content array
+//
 // WithSelectionIndexes sets the selectionIndexes property and returns the receiver for chaining.
 func (x *ArrayController) WithSelectionIndexes(selectionIndexes *foundation.NSIndexSet) *ArrayController {
 	x.inner.SetSelectionIndexes(selectionIndexes)
 	return x
 }
 
+// The index of the first object in the receiver’s selection
+//
 // WithSelectionIndex sets the selectionIndex property and returns the receiver for chaining.
 func (x *ArrayController) WithSelectionIndex(selectionIndex uint) *ArrayController {
 	x.inner.SetSelectionIndex(selectionIndex)
 	return x
 }
 
+// The receiver’s content object.
+//
 // WithContent sets the content property and returns the receiver for chaining.
 func (x *ArrayController) WithContent(content objc.ID) *ArrayController {
 	x.inner.NSObjectController.SetContent(content)
 	return x
 }
 
+// A Boolean that shows whether the receiver automatically creates and inserts new content objects automatically when loading from a nib file.
+//
 // WithAutomaticallyPreparesContent sets the automaticallyPreparesContent property and returns the receiver for chaining.
 func (x *ArrayController) WithAutomaticallyPreparesContent(automaticallyPreparesContent bool) *ArrayController {
 	x.inner.NSObjectController.SetAutomaticallyPreparesContent(automaticallyPreparesContent)
 	return x
 }
 
+// The object class to use when creating new objects.
+//
 // WithObjectClass sets the objectClass property and returns the receiver for chaining.
 func (x *ArrayController) WithObjectClass(objectClass objc.Class) *ArrayController {
 	x.inner.NSObjectController.SetObjectClass(objectClass)
 	return x
 }
 
+// A Boolean that indicates whether the receiver allows adding and removing objects.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *ArrayController) WithEditable(editable bool) *ArrayController {
 	x.inner.NSObjectController.SetEditable(editable)
 	return x
 }
 
+// The receiver’s managed object context.
+//
 // WithManagedObjectContext sets the managedObjectContext property and returns the receiver for chaining.
 func (x *ArrayController) WithManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) *ArrayController {
 	x.inner.NSObjectController.SetManagedObjectContext(managedObjectContext)
 	return x
 }
 
+// The entity name used by the receiver to create new objects.
+//
 // WithEntityName sets the entityName property and returns the receiver for chaining.
 func (x *ArrayController) WithEntityName(entityName string) *ArrayController {
 	x.inner.NSObjectController.SetEntityName(foundation.NSStringStringWithUTF8String(entityName))
 	return x
 }
 
+// The receiver’s fetch predicate.
+//
 // WithFetchPredicate sets the fetchPredicate property and returns the receiver for chaining.
 func (x *ArrayController) WithFetchPredicate(fetchPredicate *foundation.NSPredicate) *ArrayController {
 	x.inner.NSObjectController.SetFetchPredicate(fetchPredicate)
 	return x
 }
 
+// A Boolean that indicates whether the receiver uses lazy fetching.
+//
 // WithUsesLazyFetching sets the usesLazyFetching property and returns the receiver for chaining.
 func (x *ArrayController) WithUsesLazyFetching(usesLazyFetching bool) *ArrayController {
 	x.inner.NSObjectController.SetUsesLazyFetching(usesLazyFetching)
 	return x
 }
 
+// Triggers filtering of the receiver’s content.
+//
 // RearrangeObjects calls the underlying RearrangeObjects.
 func (x *ArrayController) RearrangeObjects() {
 	x.inner.RearrangeObjects()
 }
 
+// Invoked when any criteria for arranging objects change.
+//
 // DidChangeArrangementCriteria calls the underlying DidChangeArrangementCriteria.
 func (x *ArrayController) DidChangeArrangementCriteria() {
 	x.inner.DidChangeArrangementCriteria()
 }
 
+// Returns a given array, appropriately sorted and filtered.
+//
 // ArrangeObjects calls the underlying ArrangeObjects.
 func (x *ArrayController) ArrangeObjects(objects *foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID] {
 	return x.inner.ArrangeObjects(objects)
 }
 
+// Sets the receiver’s selection indexes and returns a Boolean value that indicates whether the selection changed.
+//
 // SetSelectionIndexes calls the underlying SetSelectionIndexes.
 func (x *ArrayController) SetSelectionIndexes(indexes *foundation.NSIndexSet) bool {
 	return x.inner.SetSelectionIndexes(indexes)
 }
 
+// Sets the receiver’s selection to the given index, and returns a Boolean value that indicates whether the selection was changed.
+//
 // SetSelectionIndex calls the underlying SetSelectionIndex.
 func (x *ArrayController) SetSelectionIndex(index uint) bool {
 	return x.inner.SetSelectionIndex(index)
 }
 
+// Adds the objects at the specified indexes in the receiver’s content array to the current selection.
+//
 // AddSelectionIndexes calls the underlying AddSelectionIndexes.
 func (x *ArrayController) AddSelectionIndexes(indexes *foundation.NSIndexSet) bool {
 	return x.inner.AddSelectionIndexes(indexes)
 }
 
+// Removes the object as the specified indexes from the receiver’s current selection.
+//
 // RemoveSelectionIndexes calls the underlying RemoveSelectionIndexes.
 func (x *ArrayController) RemoveSelectionIndexes(indexes *foundation.NSIndexSet) bool {
 	return x.inner.RemoveSelectionIndexes(indexes)
 }
 
+// Sets the specified objects as the receiver’s current selection.
+//
 // SetSelectedObjects calls the underlying SetSelectedObjects.
 func (x *ArrayController) SetSelectedObjects(objects *foundation.NSArray[objc.ID]) bool {
 	return x.inner.SetSelectedObjects(objects)
 }
 
+// Adds the specified objects from the receiver’s content array to the current selection.
+//
 // AddSelectedObjects calls the underlying AddSelectedObjects.
 func (x *ArrayController) AddSelectedObjects(objects *foundation.NSArray[objc.ID]) bool {
 	return x.inner.AddSelectedObjects(objects)
 }
 
+// Removes the specified objects from the receiver’s current selection.
+//
 // RemoveSelectedObjects calls the underlying RemoveSelectedObjects.
 func (x *ArrayController) RemoveSelectedObjects(objects *foundation.NSArray[objc.ID]) bool {
 	return x.inner.RemoveSelectedObjects(objects)
 }
 
+// Creates a new object and inserts it into the receiver’s content array.
+//
 // Insert calls the underlying Insert.
 func (x *ArrayController) Insert(sender objc.ID) {
 	x.inner.Insert(sender)
 }
 
+// Selects the next object, relative to the current selection, in the receiver’s arranged content.
+//
 // SelectNext calls the underlying SelectNext.
 func (x *ArrayController) SelectNext(sender objc.ID) {
 	x.inner.SelectNext(sender)
 }
 
+// Selects the previous object, relative to the current selection, in the receiver’s arranged content.
+//
 // SelectPrevious calls the underlying SelectPrevious.
 func (x *ArrayController) SelectPrevious(sender objc.ID) {
 	x.inner.SelectPrevious(sender)
 }
 
+// Adds objects to the receiver’s content collection.
+//
 // AddObjects calls the underlying AddObjects.
 func (x *ArrayController) AddObjects(objects *foundation.NSArray[objc.ID]) {
 	x.inner.AddObjects(objects)
 }
 
+// Inserts object into the receiver’s arranged objects array at the location specified by index, and adds it to the receiver’s content collection.
+//
 // InsertObjectAtArrangedObjectIndex calls the underlying InsertObjectAtArrangedObjectIndex.
 func (x *ArrayController) InsertObjectAtArrangedObjectIndex(object objc.ID, index uint) {
 	x.inner.InsertObjectAtArrangedObjectIndex(object, index)
 }
 
+// Inserts objects into the receiver’s arranged objects array at the locations specified in indexes, and adds it to the receiver’s content collection.
+//
 // InsertObjectsAtArrangedObjectIndexes calls the underlying InsertObjectsAtArrangedObjectIndexes.
 func (x *ArrayController) InsertObjectsAtArrangedObjectIndexes(objects *foundation.NSArray[objc.ID], indexes *foundation.NSIndexSet) {
 	x.inner.InsertObjectsAtArrangedObjectIndexes(objects, indexes)
 }
 
+// Removes the object at the specified index in the receiver’s arranged objects from the receiver’s content array.
+//
 // RemoveObjectAtArrangedObjectIndex calls the underlying RemoveObjectAtArrangedObjectIndex.
 func (x *ArrayController) RemoveObjectAtArrangedObjectIndex(index uint) {
 	x.inner.RemoveObjectAtArrangedObjectIndex(index)
 }
 
+// Removes the objects at the specified indexes in the receiver’s arranged objects from the content array.
+//
 // RemoveObjectsAtArrangedObjectIndexes calls the underlying RemoveObjectsAtArrangedObjectIndexes.
 func (x *ArrayController) RemoveObjectsAtArrangedObjectIndexes(indexes *foundation.NSIndexSet) {
 	x.inner.RemoveObjectsAtArrangedObjectIndexes(indexes)
 }
 
+// Removes objects from the receiver’s content collection.
+//
 // RemoveObjects calls the underlying RemoveObjects.
 func (x *ArrayController) RemoveObjects(objects *foundation.NSArray[objc.ID]) {
 	x.inner.RemoveObjects(objects)

@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// An ordered collection of data items displayed in a customizable layout.
+//
 // CollectionView wraps [raw.NSCollectionView] with a fluent Go API.
 type CollectionView struct {
 	inner *raw.NSCollectionView
@@ -41,6 +43,8 @@ func NewCollectionView() *CollectionView {
 	return &CollectionView{inner: raw.NSCollectionViewFromID(_id)}
 }
 
+// An object that provides data for the collection view.
+//
 // WithDataSource sets the dataSource property and returns the receiver for chaining.
 func (x *CollectionView) WithDataSource(dataSource raw.NSCollectionViewDataSource) *CollectionView {
 	x.inner.SetDataSource(dataSource)
@@ -53,30 +57,40 @@ func (x *CollectionView) WithPrefetchDataSource(prefetchDataSource raw.NSCollect
 	return x
 }
 
+// The collection view’s delegate object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *CollectionView) WithDelegate(delegate raw.NSCollectionViewDelegate) *CollectionView {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The background view placed behind all items and supplementary views.
+//
 // WithBackgroundView sets the backgroundView property and returns the receiver for chaining.
 func (x *CollectionView) WithBackgroundView(backgroundView ViewProvider) *CollectionView {
 	x.inner.SetBackgroundView(backgroundView.asView())
 	return x
 }
 
+// A Boolean value that indicates whether the collection view’s background view scrolls with the items and other content.
+//
 // WithBackgroundViewScrollsWithContent sets the backgroundViewScrollsWithContent property and returns the receiver for chaining.
 func (x *CollectionView) WithBackgroundViewScrollsWithContent(backgroundViewScrollsWithContent bool) *CollectionView {
 	x.inner.SetBackgroundViewScrollsWithContent(backgroundViewScrollsWithContent)
 	return x
 }
 
+// The layout object used to organize the collection view’s content.
+//
 // WithCollectionViewLayout sets the collectionViewLayout property and returns the receiver for chaining.
 func (x *CollectionView) WithCollectionViewLayout(collectionViewLayout CollectionViewLayoutProvider) *CollectionView {
 	x.inner.SetCollectionViewLayout(collectionViewLayout.asCollectionViewLayout())
 	return x
 }
 
+// An array containing the collection view’s background colors.
+//
 // WithBackgroundColors sets the collection, converting the Go slice to an NSArray.
 func (x *CollectionView) WithBackgroundColors(items ...*raw.NSColor) *CollectionView {
 	if len(items) == 0 {
@@ -95,60 +109,80 @@ func (x *CollectionView) WithBackgroundColors(items ...*raw.NSColor) *Collection
 	return x
 }
 
+// A Boolean value that indicates whether the user may select items in the collection view.
+//
 // WithSelectable sets the selectable property and returns the receiver for chaining.
 func (x *CollectionView) WithSelectable(selectable bool) *CollectionView {
 	x.inner.SetSelectable(selectable)
 	return x
 }
 
+// A Boolean value indicating whether the collection view may have no selected items.
+//
 // WithAllowsEmptySelection sets the allowsEmptySelection property and returns the receiver for chaining.
 func (x *CollectionView) WithAllowsEmptySelection(allowsEmptySelection bool) *CollectionView {
 	x.inner.SetAllowsEmptySelection(allowsEmptySelection)
 	return x
 }
 
+// A Boolean value that indicates whether the user may select more than one item in the collection view.
+//
 // WithAllowsMultipleSelection sets the allowsMultipleSelection property and returns the receiver for chaining.
 func (x *CollectionView) WithAllowsMultipleSelection(allowsMultipleSelection bool) *CollectionView {
 	x.inner.SetAllowsMultipleSelection(allowsMultipleSelection)
 	return x
 }
 
+// The indexes of the currently selected items.
+//
 // WithSelectionIndexes sets the selectionIndexes property and returns the receiver for chaining.
 func (x *CollectionView) WithSelectionIndexes(selectionIndexes *foundation.NSIndexSet) *CollectionView {
 	x.inner.SetSelectionIndexes(selectionIndexes)
 	return x
 }
 
+// The set of index paths representing the currently selected items.
+//
 // WithSelectionIndexPaths sets the selectionIndexPaths property and returns the receiver for chaining.
 func (x *CollectionView) WithSelectionIndexPaths(selectionIndexPaths *foundation.NSSet[*foundation.NSIndexPath]) *CollectionView {
 	x.inner.SetSelectionIndexPaths(selectionIndexPaths)
 	return x
 }
 
+// The receiver’s collection view item prototype.
+//
 // WithItemPrototype sets the itemPrototype property and returns the receiver for chaining.
 func (x *CollectionView) WithItemPrototype(itemPrototype *CollectionViewItem) *CollectionView {
 	x.inner.SetItemPrototype(itemPrototype.Unwrap())
 	return x
 }
 
+// The maximum number of rows that the collection view displays.
+//
 // WithMaxNumberOfRows sets the maxNumberOfRows property and returns the receiver for chaining.
 func (x *CollectionView) WithMaxNumberOfRows(maxNumberOfRows uint) *CollectionView {
 	x.inner.SetMaxNumberOfRows(maxNumberOfRows)
 	return x
 }
 
+// The maximum number of columns that the collection view displays.
+//
 // WithMaxNumberOfColumns sets the maxNumberOfColumns property and returns the receiver for chaining.
 func (x *CollectionView) WithMaxNumberOfColumns(maxNumberOfColumns uint) *CollectionView {
 	x.inner.SetMaxNumberOfColumns(maxNumberOfColumns)
 	return x
 }
 
+// The minimum size (in points) of items in the collection view grid.
+//
 // WithMinItemSize sets the minItemSize property and returns the receiver for chaining.
 func (x *CollectionView) WithMinItemSize(minItemSize corefoundation.CGSize) *CollectionView {
 	x.inner.SetMinItemSize(minItemSize)
 	return x
 }
 
+// The maximum size (in points) of items in the collection view grid.
+//
 // WithMaxItemSize sets the maxItemSize property and returns the receiver for chaining.
 func (x *CollectionView) WithMaxItemSize(maxItemSize corefoundation.CGSize) *CollectionView {
 	x.inner.SetMaxItemSize(maxItemSize)
@@ -197,6 +231,8 @@ func (x *CollectionView) WithAutoresizingMask(autoresizingMask NSAutoresizingMas
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *CollectionView) WithFrame(frame corefoundation.CGRect) *CollectionView {
 	x.inner.NSView.SetFrame(frame)
@@ -221,6 +257,8 @@ func (x *CollectionView) WithBoundsRotation(boundsRotation float64) *CollectionV
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *CollectionView) WithBounds(bounds corefoundation.CGRect) *CollectionView {
 	x.inner.NSView.SetBounds(bounds)
@@ -233,6 +271,8 @@ func (x *CollectionView) WithCanDrawConcurrently(canDrawConcurrently bool) *Coll
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *CollectionView) WithNeedsDisplay(needsDisplay bool) *CollectionView {
 	x.inner.NSView.SetNeedsDisplay(needsDisplay)
@@ -419,7 +459,7 @@ func (x *CollectionView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets f
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *CollectionView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *CollectionView {
@@ -475,35 +515,47 @@ func (x *CollectionView) WithPressureConfiguration(pressureConfiguration *Pressu
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *CollectionView) WithNextResponder(nextResponder ResponderProvider) *CollectionView {
 	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *CollectionView) WithMenu(menu *Menu) *CollectionView {
 	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *CollectionView) WithUserActivity(userActivity *foundation.NSUserActivity) *CollectionView {
 	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *CollectionView) WithTouchBar(touchBar *TouchBar) *CollectionView {
 	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Reloads all of the data for the collection view.
+//
 // ReloadData calls the underlying ReloadData.
 func (x *CollectionView) ReloadData() {
 	x.inner.ReloadData()
 }
 
+// Returns the layout information for the item at the specified index path.
+//
 // LayoutAttributesForItemAtIndexPath calls the underlying LayoutAttributesForItemAtIndexPath.
 func (x *CollectionView) LayoutAttributesForItemAtIndexPath(indexPath *foundation.NSIndexPath) *CollectionViewLayoutAttributes {
 	_r := x.inner.LayoutAttributesForItemAtIndexPath(indexPath)
@@ -513,6 +565,8 @@ func (x *CollectionView) LayoutAttributesForItemAtIndexPath(indexPath *foundatio
 	return &CollectionViewLayoutAttributes{inner: _r}
 }
 
+// Returns the layout information for the supplementary view at the specified index path.
+//
 // LayoutAttributesForSupplementaryElementOfKindAtIndexPath calls the underlying LayoutAttributesForSupplementaryElementOfKindAtIndexPath.
 func (x *CollectionView) LayoutAttributesForSupplementaryElementOfKindAtIndexPath(kind *foundation.NSString, indexPath *foundation.NSIndexPath) *CollectionViewLayoutAttributes {
 	_r := x.inner.LayoutAttributesForSupplementaryElementOfKindAtIndexPath(kind, indexPath)
@@ -522,61 +576,85 @@ func (x *CollectionView) LayoutAttributesForSupplementaryElementOfKindAtIndexPat
 	return &CollectionViewLayoutAttributes{inner: _r}
 }
 
+// Returns the frame of the collection view item at the specified index.
+//
 // FrameForItemAtIndex calls the underlying FrameForItemAtIndex.
 func (x *CollectionView) FrameForItemAtIndex(index uint) corefoundation.CGRect {
 	return x.inner.FrameForItemAtIndex(index)
 }
 
+// Returns the frame of an item based on the number of items in the collection view.
+//
 // FrameForItemAtIndexWithNumberOfItems calls the underlying FrameForItemAtIndexWithNumberOfItems.
 func (x *CollectionView) FrameForItemAtIndexWithNumberOfItems(index uint, numberOfItems uint) corefoundation.CGRect {
 	return x.inner.FrameForItemAtIndexWithNumberOfItems(index, numberOfItems)
 }
 
+// Returns the number of items in the specified section.
+//
 // NumberOfItemsInSection calls the underlying NumberOfItemsInSection.
 func (x *CollectionView) NumberOfItemsInSection(section int) int {
 	return x.inner.NumberOfItemsInSection(section)
 }
 
+// Adds the specified items to the current selection and optionally scrolls the items into position.
+//
 // SelectItemsAtIndexPathsScrollPosition calls the underlying SelectItemsAtIndexPathsScrollPosition.
 func (x *CollectionView) SelectItemsAtIndexPathsScrollPosition(indexPaths *foundation.NSSet[*foundation.NSIndexPath], scrollPosition NSCollectionViewScrollPosition) {
 	x.inner.SelectItemsAtIndexPathsScrollPosition(indexPaths, raw.NSCollectionViewScrollPosition(scrollPosition))
 }
 
+// Removes the specified items from the current selection.
+//
 // DeselectItemsAtIndexPaths calls the underlying DeselectItemsAtIndexPaths.
 func (x *CollectionView) DeselectItemsAtIndexPaths(indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
 	x.inner.DeselectItemsAtIndexPaths(indexPaths)
 }
 
+// Selects all items in the collection view, if doing so is possible.
+//
 // SelectAll calls the underlying SelectAll.
 func (x *CollectionView) SelectAll(sender objc.ID) {
 	x.inner.SelectAll(sender)
 }
 
+// Deselects all items in the collection view.
+//
 // DeselectAll calls the underlying DeselectAll.
 func (x *CollectionView) DeselectAll(sender objc.ID) {
 	x.inner.DeselectAll(sender)
 }
 
+// Registers a class to use when creating new items in the collection view.
+//
 // RegisterClassForItemWithIdentifier calls the underlying RegisterClassForItemWithIdentifier.
 func (x *CollectionView) RegisterClassForItemWithIdentifier(itemClass objc.Class, identifier *foundation.NSString) {
 	x.inner.RegisterClassForItemWithIdentifier(itemClass, identifier)
 }
 
+// Registers a nib file to use when creating items in the collection view.
+//
 // RegisterNibForItemWithIdentifier calls the underlying RegisterNibForItemWithIdentifier.
 func (x *CollectionView) RegisterNibForItemWithIdentifier(nib *raw.NSNib, identifier *foundation.NSString) {
 	x.inner.RegisterNibForItemWithIdentifier(nib, identifier)
 }
 
+// Registers a class to use when creating new supplementary views in the collection view.
+//
 // RegisterClassForSupplementaryViewOfKindWithIdentifier calls the underlying RegisterClassForSupplementaryViewOfKindWithIdentifier.
 func (x *CollectionView) RegisterClassForSupplementaryViewOfKindWithIdentifier(viewClass objc.Class, kind *foundation.NSString, identifier *foundation.NSString) {
 	x.inner.RegisterClassForSupplementaryViewOfKindWithIdentifier(viewClass, kind, identifier)
 }
 
+// Registers a nib file to use when creating supplementary views in the collection view.
+//
 // RegisterNibForSupplementaryViewOfKindWithIdentifier calls the underlying RegisterNibForSupplementaryViewOfKindWithIdentifier.
 func (x *CollectionView) RegisterNibForSupplementaryViewOfKindWithIdentifier(nib *raw.NSNib, kind *foundation.NSString, identifier *foundation.NSString) {
 	x.inner.RegisterNibForSupplementaryViewOfKindWithIdentifier(nib, kind, identifier)
 }
 
+// Creates or returns a reusable item object of the specified type.
+//
 // MakeItemWithIdentifierForIndexPath calls the underlying MakeItemWithIdentifierForIndexPath.
 func (x *CollectionView) MakeItemWithIdentifierForIndexPath(identifier *foundation.NSString, indexPath *foundation.NSIndexPath) *CollectionViewItem {
 	_r := x.inner.MakeItemWithIdentifierForIndexPath(identifier, indexPath)
@@ -586,6 +664,8 @@ func (x *CollectionView) MakeItemWithIdentifierForIndexPath(identifier *foundati
 	return &CollectionViewItem{inner: _r}
 }
 
+// Creates or returns a reusable supplementary view of the specified type.
+//
 // MakeSupplementaryViewOfKindWithIdentifierForIndexPath calls the underlying MakeSupplementaryViewOfKindWithIdentifierForIndexPath.
 func (x *CollectionView) MakeSupplementaryViewOfKindWithIdentifierForIndexPath(elementKind *foundation.NSString, identifier *foundation.NSString, indexPath *foundation.NSIndexPath) *View {
 	_r := x.inner.MakeSupplementaryViewOfKindWithIdentifierForIndexPath(elementKind, identifier, indexPath)
@@ -595,6 +675,8 @@ func (x *CollectionView) MakeSupplementaryViewOfKindWithIdentifierForIndexPath(e
 	return &View{inner: _r}
 }
 
+// Returns the collection view item for the represented object at the specified index.
+//
 // ItemAtIndex calls the underlying ItemAtIndex.
 func (x *CollectionView) ItemAtIndex(index uint) *CollectionViewItem {
 	_r := x.inner.ItemAtIndex(index)
@@ -604,6 +686,8 @@ func (x *CollectionView) ItemAtIndex(index uint) *CollectionViewItem {
 	return &CollectionViewItem{inner: _r}
 }
 
+// Returns the item associated with the specified index path.
+//
 // ItemAtIndexPath calls the underlying ItemAtIndexPath.
 func (x *CollectionView) ItemAtIndexPath(indexPath *foundation.NSIndexPath) *CollectionViewItem {
 	_r := x.inner.ItemAtIndexPath(indexPath)
@@ -613,6 +697,8 @@ func (x *CollectionView) ItemAtIndexPath(indexPath *foundation.NSIndexPath) *Col
 	return &CollectionViewItem{inner: _r}
 }
 
+// Returns an array of the actively managed items in the collection view.
+//
 // VisibleItems returns the collection as a Go slice.
 func (x *CollectionView) VisibleItems() []*CollectionViewItem {
 	arr := x.inner.VisibleItems()
@@ -624,21 +710,29 @@ func (x *CollectionView) VisibleItems() []*CollectionViewItem {
 	})
 }
 
+// Returns the index paths of the currently active items.
+//
 // IndexPathsForVisibleItems calls the underlying IndexPathsForVisibleItems.
 func (x *CollectionView) IndexPathsForVisibleItems() *foundation.NSSet[*foundation.NSIndexPath] {
 	return x.inner.IndexPathsForVisibleItems()
 }
 
+// Returns the index path of the specified item.
+//
 // IndexPathForItem calls the underlying IndexPathForItem.
 func (x *CollectionView) IndexPathForItem(item *raw.NSCollectionViewItem) *foundation.NSIndexPath {
 	return x.inner.IndexPathForItem(item)
 }
 
+// Returns the index path of the item at the specified point.
+//
 // IndexPathForItemAtPoint calls the underlying IndexPathForItemAtPoint.
 func (x *CollectionView) IndexPathForItemAtPoint(point corefoundation.CGPoint) *foundation.NSIndexPath {
 	return x.inner.IndexPathForItemAtPoint(point)
 }
 
+// Returns the supplementary view associated with the specified index path.
+//
 // SupplementaryViewForElementKindAtIndexPath calls the underlying SupplementaryViewForElementKindAtIndexPath.
 func (x *CollectionView) SupplementaryViewForElementKindAtIndexPath(elementKind *foundation.NSString, indexPath *foundation.NSIndexPath) *View {
 	_r := x.inner.SupplementaryViewForElementKindAtIndexPath(elementKind, indexPath)
@@ -648,76 +742,106 @@ func (x *CollectionView) SupplementaryViewForElementKindAtIndexPath(elementKind 
 	return &View{inner: _r}
 }
 
+// Returns an array of the actively managed supplementary views in the collection view.
+//
 // VisibleSupplementaryViewsOfKind calls the underlying VisibleSupplementaryViewsOfKind.
 func (x *CollectionView) VisibleSupplementaryViewsOfKind(elementKind *foundation.NSString) *foundation.NSArray[*raw.NSView] {
 	return x.inner.VisibleSupplementaryViewsOfKind(elementKind)
 }
 
+// Returns the index paths of the currently active supplementary views.
+//
 // IndexPathsForVisibleSupplementaryElementsOfKind calls the underlying IndexPathsForVisibleSupplementaryElementsOfKind.
 func (x *CollectionView) IndexPathsForVisibleSupplementaryElementsOfKind(elementKind *foundation.NSString) *foundation.NSSet[*foundation.NSIndexPath] {
 	return x.inner.IndexPathsForVisibleSupplementaryElementsOfKind(elementKind)
 }
 
+// Inserts new sections at the specified indexes.
+//
 // InsertSections calls the underlying InsertSections.
 func (x *CollectionView) InsertSections(sections *foundation.NSIndexSet) {
 	x.inner.InsertSections(sections)
 }
 
+// Deletes the specified sections and their contained items.
+//
 // DeleteSections calls the underlying DeleteSections.
 func (x *CollectionView) DeleteSections(sections *foundation.NSIndexSet) {
 	x.inner.DeleteSections(sections)
 }
 
+// Reloads the data in the specified sections of the collection view.
+//
 // ReloadSections calls the underlying ReloadSections.
 func (x *CollectionView) ReloadSections(sections *foundation.NSIndexSet) {
 	x.inner.ReloadSections(sections)
 }
 
+// Moves a section from its current location to a new location.
+//
 // MoveSectionToSection calls the underlying MoveSectionToSection.
 func (x *CollectionView) MoveSectionToSection(section int, newSection int) {
 	x.inner.MoveSectionToSection(section, newSection)
 }
 
+// Inserts new items into the collection view at the specified locations.
+//
 // InsertItemsAtIndexPaths calls the underlying InsertItemsAtIndexPaths.
 func (x *CollectionView) InsertItemsAtIndexPaths(indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
 	x.inner.InsertItemsAtIndexPaths(indexPaths)
 }
 
+// Deletes the items at the specified index paths.
+//
 // DeleteItemsAtIndexPaths calls the underlying DeleteItemsAtIndexPaths.
 func (x *CollectionView) DeleteItemsAtIndexPaths(indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
 	x.inner.DeleteItemsAtIndexPaths(indexPaths)
 }
 
+// Reloads only the specified items.
+//
 // ReloadItemsAtIndexPaths calls the underlying ReloadItemsAtIndexPaths.
 func (x *CollectionView) ReloadItemsAtIndexPaths(indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
 	x.inner.ReloadItemsAtIndexPaths(indexPaths)
 }
 
+// Moves an item from one location to another in the collection view.
+//
 // MoveItemAtIndexPathToIndexPath calls the underlying MoveItemAtIndexPathToIndexPath.
 func (x *CollectionView) MoveItemAtIndexPathToIndexPath(indexPath *foundation.NSIndexPath, newIndexPath *foundation.NSIndexPath) {
 	x.inner.MoveItemAtIndexPathToIndexPath(indexPath, newIndexPath)
 }
 
+// Encapsulates multiple insert, delete, reload, and move operations into a single animated operation.
+//
 // PerformBatchUpdatesCompletionHandler calls the underlying PerformBatchUpdatesCompletionHandler.
 func (x *CollectionView) PerformBatchUpdatesCompletionHandler(updates func(), completionHandler func(bool)) {
 	x.inner.PerformBatchUpdatesCompletionHandler(updates, completionHandler)
 }
 
+// Collapses the section in which the sender resides into a single horizontally scrollable row.
+//
 // ToggleSectionCollapse calls the underlying ToggleSectionCollapse.
 func (x *CollectionView) ToggleSectionCollapse(sender objc.ID) {
 	x.inner.ToggleSectionCollapse(sender)
 }
 
+// Scrolls the collection view contents until the specified items are visible.
+//
 // ScrollToItemsAtIndexPathsScrollPosition calls the underlying ScrollToItemsAtIndexPathsScrollPosition.
 func (x *CollectionView) ScrollToItemsAtIndexPathsScrollPosition(indexPaths *foundation.NSSet[*foundation.NSIndexPath], scrollPosition NSCollectionViewScrollPosition) {
 	x.inner.ScrollToItemsAtIndexPathsScrollPosition(indexPaths, raw.NSCollectionViewScrollPosition(scrollPosition))
 }
 
+// Configures the drag operation mask.
+//
 // SetDraggingSourceOperationMaskForLocal calls the underlying SetDraggingSourceOperationMaskForLocal.
 func (x *CollectionView) SetDraggingSourceOperationMaskForLocal(dragOperationMask NSDragOperation, localDestination bool) {
 	x.inner.SetDraggingSourceOperationMaskForLocal(raw.NSDragOperation(dragOperationMask), localDestination)
 }
 
+// Returns an image to use for dragging the specified items.
+//
 // DraggingImageForItemsAtIndexPathsWithEventOffset calls the underlying DraggingImageForItemsAtIndexPathsWithEventOffset.
 func (x *CollectionView) DraggingImageForItemsAtIndexPathsWithEventOffset(indexPaths *foundation.NSSet[*foundation.NSIndexPath], event *raw.NSEvent, dragImageOffset *corefoundation.CGPoint) *Image {
 	_r := x.inner.DraggingImageForItemsAtIndexPathsWithEventOffset(indexPaths, event, dragImageOffset)
@@ -727,6 +851,8 @@ func (x *CollectionView) DraggingImageForItemsAtIndexPathsWithEventOffset(indexP
 	return &Image{inner: _r}
 }
 
+// This method computes and returns an image to use for dragging.
+//
 // DraggingImageForItemsAtIndexesWithEventOffset calls the underlying DraggingImageForItemsAtIndexesWithEventOffset.
 func (x *CollectionView) DraggingImageForItemsAtIndexesWithEventOffset(indexes *foundation.NSIndexSet, event *raw.NSEvent, dragImageOffset *corefoundation.CGPoint) *Image {
 	_r := x.inner.DraggingImageForItemsAtIndexesWithEventOffset(indexes, event, dragImageOffset)
@@ -890,6 +1016,8 @@ func (x *CollectionView) SetSelectionIndexPaths(selectionIndexPaths *foundation.
 	x.inner.SetSelectionIndexPaths(selectionIndexPaths)
 }
 
+// Returns the collection view item that is used for the specified object.
+//
 // NewItemForRepresentedObject calls the underlying NewItemForRepresentedObject.
 func (x *CollectionView) NewItemForRepresentedObject(object objc.ID) *CollectionViewItem {
 	_r := x.inner.NewItemForRepresentedObject(object)

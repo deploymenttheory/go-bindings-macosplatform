@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object you use to specify attributes to create and style a drop shadow during drawing operations.
+//
 // Shadow wraps [raw.NSShadow] with a fluent Go API.
 type Shadow struct {
 	inner *raw.NSShadow
@@ -36,24 +38,32 @@ func NewShadow() *Shadow {
 	return &Shadow{inner: raw.NSShadowFromID(_id)}
 }
 
+// The shadow’s relative position, which you specify with horizontal and vertical offset values.
+//
 // WithShadowOffset sets the shadowOffset property and returns the receiver for chaining.
 func (x *Shadow) WithShadowOffset(shadowOffset corefoundation.CGSize) *Shadow {
 	x.inner.SetShadowOffset(shadowOffset)
 	return x
 }
 
+// The blur radius of the shadow.
+//
 // WithShadowBlurRadius sets the shadowBlurRadius property and returns the receiver for chaining.
 func (x *Shadow) WithShadowBlurRadius(shadowBlurRadius float64) *Shadow {
 	x.inner.SetShadowBlurRadius(shadowBlurRadius)
 	return x
 }
 
+// The color of the shadow.
+//
 // WithShadowColor sets the shadowColor property and returns the receiver for chaining.
 func (x *Shadow) WithShadowColor(shadowColor *Color) *Shadow {
 	x.inner.SetShadowColor(shadowColor.Unwrap())
 	return x
 }
 
+// Sets the shadow of subsequent drawing operations to the current shadow.
+//
 // Set calls the underlying Set.
 func (x *Shadow) Set() {
 	x.inner.Set()

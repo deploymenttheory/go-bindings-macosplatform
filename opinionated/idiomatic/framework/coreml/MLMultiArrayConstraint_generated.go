@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The shape and data type constraints for a multidimensional array feature.
+//
 // MultiArrayConstraint wraps [raw.MLMultiArrayConstraint] with a fluent Go API.
 type MultiArrayConstraint struct {
 	inner *raw.MLMultiArrayConstraint

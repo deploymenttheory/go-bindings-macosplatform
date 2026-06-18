@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A discrete gesture recognizer that tracks whether the user holds down a mouse button for a minimum amount of time before releasing it.
+//
 // PressGestureRecognizer wraps [raw.NSPressGestureRecognizer] with a fluent Go API.
 type PressGestureRecognizer struct {
 	inner *raw.NSPressGestureRecognizer
@@ -36,96 +38,128 @@ func NewPressGestureRecognizer() *PressGestureRecognizer {
 	return &PressGestureRecognizer{inner: raw.NSPressGestureRecognizerFromID(_id)}
 }
 
+// A bit mask of the buttons required to recognize this press.
+//
 // WithButtonMask sets the buttonMask property and returns the receiver for chaining.
 func (x *PressGestureRecognizer) WithButtonMask(buttonMask uint) *PressGestureRecognizer {
 	x.inner.SetButtonMask(buttonMask)
 	return x
 }
 
+// The minimum time (in seconds) that the user must hold the mouse button in the view for a valid gesture.
+//
 // WithMinimumPressDuration sets the minimumPressDuration property and returns the receiver for chaining.
 func (x *PressGestureRecognizer) WithMinimumPressDuration(minimumPressDuration float64) *PressGestureRecognizer {
 	x.inner.SetMinimumPressDuration(minimumPressDuration)
 	return x
 }
 
+// The maximum movement of the mouse in the view before the gesture fails.
+//
 // WithAllowableMovement sets the allowableMovement property and returns the receiver for chaining.
 func (x *PressGestureRecognizer) WithAllowableMovement(allowableMovement float64) *PressGestureRecognizer {
 	x.inner.SetAllowableMovement(allowableMovement)
 	return x
 }
 
+// The number of necessary touches on a Touch Bar for the gesture recognizer to match.
+//
 // WithNumberOfTouchesRequired sets the numberOfTouchesRequired property and returns the receiver for chaining.
 func (x *PressGestureRecognizer) WithNumberOfTouchesRequired(numberOfTouchesRequired int) *PressGestureRecognizer {
 	x.inner.SetNumberOfTouchesRequired(numberOfTouchesRequired)
 	return x
 }
 
+// The object that implements the action method.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *PressGestureRecognizer) WithTarget(target objc.ID) *PressGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetTarget(target)
 	return x
 }
 
+// The action method to call when the gesture is recognized.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *PressGestureRecognizer) WithAction(action objc.SEL) *PressGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetAction(action)
 	return x
 }
 
+// The current state of the gesture recognizer.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *PressGestureRecognizer) WithState(state NSGestureRecognizerState) *PressGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetState(raw.NSGestureRecognizerState(state))
 	return x
 }
 
+// The delegate of the gesture recognizer.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *PressGestureRecognizer) WithDelegate(delegate raw.NSGestureRecognizerDelegate) *PressGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelegate(delegate)
 	return x
 }
 
+// A Boolean value indicating whether the gesture recognizer is able to handle events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *PressGestureRecognizer) WithEnabled(enabled bool) *PressGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetEnabled(enabled)
 	return x
 }
 
+// Configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
+//
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
 func (x *PressGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PressGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
+//
 // WithDelaysPrimaryMouseButtonEvents sets the delaysPrimaryMouseButtonEvents property and returns the receiver for chaining.
 func (x *PressGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *PressGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents)
 	return x
 }
 
+// A Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
+//
 // WithDelaysSecondaryMouseButtonEvents sets the delaysSecondaryMouseButtonEvents property and returns the receiver for chaining.
 func (x *PressGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *PressGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents)
 	return x
 }
 
+// A Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
+//
 // WithDelaysOtherMouseButtonEvents sets the delaysOtherMouseButtonEvents property and returns the receiver for chaining.
 func (x *PressGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *PressGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents)
 	return x
 }
 
+// A Boolean value that indicates whether key events are delivered only after gesture recognition fails.
+//
 // WithDelaysKeyEvents sets the delaysKeyEvents property and returns the receiver for chaining.
 func (x *PressGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *PressGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysKeyEvents(delaysKeyEvents)
 	return x
 }
 
+// A Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
+//
 // WithDelaysMagnificationEvents sets the delaysMagnificationEvents property and returns the receiver for chaining.
 func (x *PressGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *PressGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysMagnificationEvents(delaysMagnificationEvents)
 	return x
 }
 
+// A Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
+//
 // WithDelaysRotationEvents sets the delaysRotationEvents property and returns the receiver for chaining.
 func (x *PressGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *PressGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysRotationEvents(delaysRotationEvents)

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a file on a camera.
+//
 // CameraFile wraps [raw.ICCameraFile] with a fluent Go API.
 type CameraFile struct {
 	inner *raw.ICCameraFile
@@ -39,7 +41,7 @@ func NewCameraFile() *CameraFile {
 	return &CameraFile{inner: raw.ICCameraFileFromID(_id)}
 }
 
-// @property orientation @abstract ￼Desired orientation of image to use when it is downloaded. @discussion This property is set to ICEXIFOrientation1 initially. If the format of this file supports EXIF orientation tag, then this property will be updated to match the value of that tag, when the thumbnail or metadata for this file is received.
+// The orientation to use when downloading the image.
 //
 // WithOrientation sets the orientation property and returns the receiver for chaining.
 func (x *CameraFile) WithOrientation(orientation ICEXIFOrientationType) *CameraFile {
@@ -47,7 +49,7 @@ func (x *CameraFile) WithOrientation(orientation ICEXIFOrientationType) *CameraF
 	return x
 }
 
-// @method requestThumbnailDataWithOptions:completion @abstract ￼Perform a thumbnail request and execute the block callback in place of the delegate. @param options Options dictionary - 'kCGImageSourceThumbnailMaxPixelSize' - Request a width different from the embedded EXIF thumbnail @param completion Completion block called with an NSData* object representing the JPG, and an NSError* for status. @note The completion block will execute on an any available queue, often this will not be the main queue.
+// Requests a thumbnail and executes the completion block in place of the delegate.
 //
 // RequestThumbnailDataWithOptionsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *CameraFile) RequestThumbnailDataWithOptionsCompletion(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
@@ -73,21 +75,21 @@ func (x *CameraFile) RequestThumbnailDataWithOptionsCompletion(ctx context.Conte
 	}
 }
 
-// @method requestMetadataDictionaryWithOptions:completion @abstract ￼Perform a metadata request and execute the block callback in place of the delegate. @param options Options dictionary @param completion Completion block called with an NSDictionary* object containing the metadata, and an NSError* for status. @note The completion block will execute on an any available queue, often this will not be the main queue.
+// Requests metadata and executes the completion block in place of the delegate.
 //
 // RequestMetadataDictionaryWithOptionsCompletion calls the underlying RequestMetadataDictionaryWithOptionsCompletion.
 func (x *CameraFile) RequestMetadataDictionaryWithOptionsCompletion(options *foundation.NSDictionary[*foundation.NSString, objc.ID], completion objc.Block) {
 	x.inner.RequestMetadataDictionaryWithOptionsCompletion(options, completion)
 }
 
-// @method requestDownloadWithOptions:progressDelegate:completion @abstract ￼Perform a download request and execute the block callback in place of the delegate. @param options Dictionary Keys: - `ICDownloadsDirectoryURL` - `ICSaveAsFilename` - `ICOverwriteExistingFile` - `ICDeleteAfterDownload` - `ICAdjustCreationDate` @param completion Completion block to executed after request has returned, @note The completion block will execute on an any available queue, often this will not be the main queue.
+// Requests a download and executes the completion block in place of the delegate.
 //
 // RequestDownloadWithOptionsCompletion calls the underlying RequestDownloadWithOptionsCompletion.
 func (x *CameraFile) RequestDownloadWithOptionsCompletion(options *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(*foundation.NSString, unsafe.Pointer)) *foundation.NSProgress {
 	return x.inner.RequestDownloadWithOptionsCompletion(options, completion)
 }
 
-// @method requestReadDataAtOffset:length:completion @abstract This method asynchronously reads data of a specified length from a specified offset. @param offset The offset into the file to start reading from @param length The length of data to be read. @param completion Completion block called with an NSData* object representing the data, and an NSError* for status. @note The completion block will execute on an any available queue, often this will not be the main queue.
+// Requests to asynchronously read data of a specified length from a specified offset, then executes the completion block.
 //
 // RequestReadDataAtOffsetLengthCompletion blocks until the operation completes or ctx is cancelled.
 func (x *CameraFile) RequestReadDataAtOffsetLengthCompletion(ctx context.Context, offset int64, length int64) (*foundation.NSData, error) {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An individual dimension representing an item’s width or height in a collection view.
+//
 // CollectionLayoutDimension wraps [raw.NSCollectionLayoutDimension] with a fluent Go API.
 type CollectionLayoutDimension struct {
 	inner *raw.NSCollectionLayoutDimension

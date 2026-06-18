@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines a summary item in a payment request, taxes, discounts, shipping, a grand total, and the like.
+//
 // PaymentSummaryItem wraps [raw.PKPaymentSummaryItem] with a fluent Go API.
 type PaymentSummaryItem struct {
 	inner *raw.PKPaymentSummaryItem
@@ -37,18 +39,24 @@ func NewPaymentSummaryItem() *PaymentSummaryItem {
 	return &PaymentSummaryItem{inner: raw.PKPaymentSummaryItemFromID(_id)}
 }
 
+// A short, localized description of the item.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *PaymentSummaryItem) WithLabel(label string) *PaymentSummaryItem {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// The summary item’s amount.
+//
 // WithAmount sets the amount property and returns the receiver for chaining.
 func (x *PaymentSummaryItem) WithAmount(amount *foundation.NSDecimalNumber) *PaymentSummaryItem {
 	x.inner.SetAmount(amount)
 	return x
 }
 
+// The summary item’s type that indicates whether the amount is final.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *PaymentSummaryItem) WithType(type_ PKPaymentSummaryItemType) *PaymentSummaryItem {
 	x.inner.SetType(raw.PKPaymentSummaryItemType(type_))

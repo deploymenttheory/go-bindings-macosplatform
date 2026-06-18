@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An MCSession object enables and manages communication among all peers in a Multipeer Connectivity session.
+//
 // Session wraps [raw.MCSession] with a fluent Go API.
 type Session struct {
 	inner *raw.MCSession
@@ -33,6 +35,8 @@ func SessionFromID(id objc.ID) *Session {
 	return &Session{inner: raw.MCSessionFromID(id)}
 }
 
+// Creates a Multipeer Connectivity session.
+//
 // NewSessionWithPeer creates a new [Session].
 func NewSessionWithPeer(myPeerID *raw.MCPeerID) *Session {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MCSession")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewSessionWithPeer(myPeerID *raw.MCPeerID) *Session {
 	return &Session{inner: raw.MCSessionFromID(_id)}
 }
 
+// Creates a Multipeer Connectivity session, providing security information.
+//
 // NewSessionWithPeerSecurityIdentityEncryptionPreference creates a new [Session].
 func NewSessionWithPeerSecurityIdentityEncryptionPreference(myPeerID *raw.MCPeerID, identity *foundation.NSArray[objc.ID], encryptionPreference MCEncryptionPreference) *Session {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MCSession")), objc.RegisterName("alloc"))
@@ -47,27 +53,37 @@ func NewSessionWithPeerSecurityIdentityEncryptionPreference(myPeerID *raw.MCPeer
 	return &Session{inner: raw.MCSessionFromID(_id)}
 }
 
+// The delegate object that handles session-related events.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Session) WithDelegate(delegate raw.MCSessionDelegate) *Session {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Sends a message to nearby peers.
+//
 // SendDataToPeersWithModeError calls the underlying SendDataToPeersWithModeError.
 func (x *Session) SendDataToPeersWithModeError(data *foundation.NSData, peerIDs *foundation.NSArray[*raw.MCPeerID], mode MCSessionSendDataMode) (bool, error) {
 	return x.inner.SendDataToPeersWithModeError(data, peerIDs, raw.MCSessionSendDataMode(mode))
 }
 
+// Disconnects the local peer from the session.
+//
 // Disconnect calls the underlying Disconnect.
 func (x *Session) Disconnect() {
 	x.inner.Disconnect()
 }
 
+// Sends the contents of a URL to a peer.
+//
 // SendResourceAtURLWithNameToPeerWithCompletionHandler calls the underlying SendResourceAtURLWithNameToPeerWithCompletionHandler.
 func (x *Session) SendResourceAtURLWithNameToPeerWithCompletionHandler(resourceURL string, resourceName string, peerID *raw.MCPeerID, completionHandler func(unsafe.Pointer)) *foundation.NSProgress {
 	return x.inner.SendResourceAtURLWithNameToPeerWithCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(resourceURL)), foundation.NSStringStringWithUTF8String(resourceName), peerID, completionHandler)
 }
 
+// Opens a byte stream to a nearby peer.
+//
 // StartStreamWithNameToPeerError calls the underlying StartStreamWithNameToPeerError.
 func (x *Session) StartStreamWithNameToPeerError(streamName string, peerID *raw.MCPeerID) (*foundation.NSOutputStream, error) {
 	return x.inner.StartStreamWithNameToPeerError(foundation.NSStringStringWithUTF8String(streamName), peerID)
@@ -113,6 +129,8 @@ func (x *Session) ConnectedPeers() []*PeerID {
 	})
 }
 
+// Obtains connection data for the specified peer.
+//
 // NearbyConnectionDataForPeer blocks until the operation completes or ctx is cancelled.
 func (x *Session) NearbyConnectionDataForPeer(ctx context.Context, peerID *raw.MCPeerID) (*foundation.NSData, error) {
 	type _result struct {
@@ -137,11 +155,15 @@ func (x *Session) NearbyConnectionDataForPeer(ctx context.Context, peerID *raw.M
 	}
 }
 
+// Call this method to connect a peer to the session when using your own service discovery code instead of an MCNearbyServiceBrowser or MCBrowserViewController object.
+//
 // ConnectPeerWithNearbyConnectionData calls the underlying ConnectPeerWithNearbyConnectionData.
 func (x *Session) ConnectPeerWithNearbyConnectionData(peerID *raw.MCPeerID, data *foundation.NSData) {
 	x.inner.ConnectPeerWithNearbyConnectionData(peerID, data)
 }
 
+// Cancels an attempt to connect to a peer.
+//
 // CancelConnectPeer calls the underlying CancelConnectPeer.
 func (x *Session) CancelConnectPeer(peerID *raw.MCPeerID) {
 	x.inner.CancelConnectPeer(peerID)

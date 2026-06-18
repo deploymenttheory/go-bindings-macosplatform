@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class representing the structure of a NeuralNetwork model.
+//
 // ModelStructureNeuralNetwork wraps [raw.MLModelStructureNeuralNetwork] with a fluent Go API.
 type ModelStructureNeuralNetwork struct {
 	inner *raw.MLModelStructureNeuralNetwork

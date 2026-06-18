@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that manages a custom view—known as an accessory view—in the title bar–toolbar area of a window.
+//
 // TitlebarAccessoryViewController wraps [raw.NSTitlebarAccessoryViewController] with a fluent Go API.
 type TitlebarAccessoryViewController struct {
 	inner *raw.NSTitlebarAccessoryViewController
@@ -40,12 +42,16 @@ func NewTitlebarAccessoryViewController() *TitlebarAccessoryViewController {
 	return &TitlebarAccessoryViewController{inner: raw.NSTitlebarAccessoryViewControllerFromID(_id)}
 }
 
+// The location of the accessory view, in relation to the window’s title bar.
+//
 // WithLayoutAttribute sets the layoutAttribute property and returns the receiver for chaining.
 func (x *TitlebarAccessoryViewController) WithLayoutAttribute(layoutAttribute NSLayoutAttribute) *TitlebarAccessoryViewController {
 	x.inner.SetLayoutAttribute(raw.NSLayoutAttribute(layoutAttribute))
 	return x
 }
 
+// The visual minimum height of an accessory view that displays below the title bar when the window is in full screen mode.
+//
 // WithFullScreenMinHeight sets the fullScreenMinHeight property and returns the receiver for chaining.
 func (x *TitlebarAccessoryViewController) WithFullScreenMinHeight(fullScreenMinHeight float64) *TitlebarAccessoryViewController {
 	x.inner.SetFullScreenMinHeight(fullScreenMinHeight)
@@ -64,7 +70,7 @@ func (x *TitlebarAccessoryViewController) WithAutomaticallyAdjustsSize(automatic
 	return x
 }
 
-// The titlebar accessory’s preferred effect for content scrolling behind it. To allow for a soft edge on the bottom edge of a titlebar accessory: titlebarAccessoryViewController.preferredScrollEdgeEffectStyle = NSScrollEdgeEffectStyle.softStyle;
+// The titlebar accessory’s preferred effect for content scrolling behind it.
 //
 // WithPreferredScrollEdgeEffectStyle sets the preferredScrollEdgeEffectStyle property and returns the receiver for chaining.
 func (x *TitlebarAccessoryViewController) WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *ScrollEdgeEffectStyle) *TitlebarAccessoryViewController {
@@ -72,30 +78,40 @@ func (x *TitlebarAccessoryViewController) WithPreferredScrollEdgeEffectStyle(pre
 	return x
 }
 
+// The object whose value is presented in the receiver’s primary view.
+//
 // WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
 func (x *TitlebarAccessoryViewController) WithRepresentedObject(representedObject objc.ID) *TitlebarAccessoryViewController {
 	x.inner.NSViewController.SetRepresentedObject(representedObject)
 	return x
 }
 
+// The localized title of the receiver’s primary view.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *TitlebarAccessoryViewController) WithTitle(title string) *TitlebarAccessoryViewController {
 	x.inner.NSViewController.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The view controller’s primary view.
+//
 // WithView sets the view property and returns the receiver for chaining.
 func (x *TitlebarAccessoryViewController) WithView(view ViewProvider) *TitlebarAccessoryViewController {
 	x.inner.NSViewController.SetView(view.asView())
 	return x
 }
 
+// The desired size of the view controller’s view, in screen units.
+//
 // WithPreferredContentSize sets the preferredContentSize property and returns the receiver for chaining.
 func (x *TitlebarAccessoryViewController) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *TitlebarAccessoryViewController {
 	x.inner.NSViewController.SetPreferredContentSize(preferredContentSize)
 	return x
 }
 
+// An array of view controllers that are hierarchical children of the view controller.
+//
 // WithChildViewControllers sets the collection, converting the Go slice to an NSArray.
 func (x *TitlebarAccessoryViewController) WithChildViewControllers(items ...ViewControllerProvider) *TitlebarAccessoryViewController {
 	if len(items) == 0 {
@@ -120,30 +136,40 @@ func (x *TitlebarAccessoryViewController) WithSourceItemView(sourceItemView View
 	return x
 }
 
+// For a view controller that is part of an app extension, the preferred screen origin.
+//
 // WithPreferredScreenOrigin sets the preferredScreenOrigin property and returns the receiver for chaining.
 func (x *TitlebarAccessoryViewController) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *TitlebarAccessoryViewController {
 	x.inner.NSViewController.SetPreferredScreenOrigin(preferredScreenOrigin)
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *TitlebarAccessoryViewController) WithNextResponder(nextResponder ResponderProvider) *TitlebarAccessoryViewController {
 	x.inner.NSViewController.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *TitlebarAccessoryViewController) WithMenu(menu *Menu) *TitlebarAccessoryViewController {
 	x.inner.NSViewController.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *TitlebarAccessoryViewController) WithUserActivity(userActivity *foundation.NSUserActivity) *TitlebarAccessoryViewController {
 	x.inner.NSViewController.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *TitlebarAccessoryViewController) WithTouchBar(touchBar *TouchBar) *TitlebarAccessoryViewController {
 	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar.Unwrap())

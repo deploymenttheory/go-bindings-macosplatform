@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A key associated with a custom attribute for a searchable item.
+//
 // CustomAttributeKey wraps [raw.CSCustomAttributeKey] with a fluent Go API.
 type CustomAttributeKey struct {
 	inner *raw.CSCustomAttributeKey
@@ -31,6 +33,8 @@ func CustomAttributeKeyFromID(id objc.ID) *CustomAttributeKey {
 	return &CustomAttributeKey{inner: raw.CSCustomAttributeKeyFromID(id)}
 }
 
+// Returns a new custom attribute key with the specified name.
+//
 // NewCustomAttributeKeyWithKeyName creates a new [CustomAttributeKey].
 func NewCustomAttributeKeyWithKeyName(keyName string) *CustomAttributeKey {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CSCustomAttributeKey")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewCustomAttributeKeyWithKeyName(keyName string) *CustomAttributeKey {
 	return &CustomAttributeKey{inner: raw.CSCustomAttributeKeyFromID(_id)}
 }
 
+// Returns a new custom attribute key with the specified name and properties.
+//
 // NewCustomAttributeKeyWithKeyNameSearchableSearchableByDefaultUniqueMultiValued creates a new [CustomAttributeKey].
 func NewCustomAttributeKeyWithKeyNameSearchableSearchableByDefaultUniqueMultiValued(keyName string, searchable bool, searchableByDefault bool, unique bool, multiValued bool) *CustomAttributeKey {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CSCustomAttributeKey")), objc.RegisterName("alloc"))

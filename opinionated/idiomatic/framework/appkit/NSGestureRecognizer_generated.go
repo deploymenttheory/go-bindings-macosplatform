@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that monitors events and calls its action method when a predefined sequence of events occur.
+//
 // GestureRecognizer wraps [raw.NSGestureRecognizer] with a fluent Go API.
 type GestureRecognizer struct {
 	inner *raw.NSGestureRecognizer
@@ -32,6 +34,8 @@ func GestureRecognizerFromID(id objc.ID) *GestureRecognizer {
 	return &GestureRecognizer{inner: raw.NSGestureRecognizerFromID(id)}
 }
 
+// Initializes the gesture recognizer with the specified target and action information.
+//
 // NewGestureRecognizerWithTargetAction creates a new [GestureRecognizer].
 func NewGestureRecognizerWithTargetAction(target objc.ID, action objc.SEL) *GestureRecognizer {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSGestureRecognizer")), objc.RegisterName("alloc"))
@@ -46,72 +50,96 @@ func NewGestureRecognizerWithCoder(coder *foundation.NSCoder) *GestureRecognizer
 	return &GestureRecognizer{inner: raw.NSGestureRecognizerFromID(_id)}
 }
 
+// The object that implements the action method.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *GestureRecognizer) WithTarget(target objc.ID) *GestureRecognizer {
 	x.inner.SetTarget(target)
 	return x
 }
 
+// The action method to call when the gesture is recognized.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *GestureRecognizer) WithAction(action objc.SEL) *GestureRecognizer {
 	x.inner.SetAction(action)
 	return x
 }
 
+// The current state of the gesture recognizer.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *GestureRecognizer) WithState(state NSGestureRecognizerState) *GestureRecognizer {
 	x.inner.SetState(raw.NSGestureRecognizerState(state))
 	return x
 }
 
+// The delegate of the gesture recognizer.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *GestureRecognizer) WithDelegate(delegate raw.NSGestureRecognizerDelegate) *GestureRecognizer {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// A Boolean value indicating whether the gesture recognizer is able to handle events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *GestureRecognizer) WithEnabled(enabled bool) *GestureRecognizer {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// Configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
+//
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
 func (x *GestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GestureRecognizer {
 	x.inner.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
+//
 // WithDelaysPrimaryMouseButtonEvents sets the delaysPrimaryMouseButtonEvents property and returns the receiver for chaining.
 func (x *GestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *GestureRecognizer {
 	x.inner.SetDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents)
 	return x
 }
 
+// A Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
+//
 // WithDelaysSecondaryMouseButtonEvents sets the delaysSecondaryMouseButtonEvents property and returns the receiver for chaining.
 func (x *GestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *GestureRecognizer {
 	x.inner.SetDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents)
 	return x
 }
 
+// A Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
+//
 // WithDelaysOtherMouseButtonEvents sets the delaysOtherMouseButtonEvents property and returns the receiver for chaining.
 func (x *GestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *GestureRecognizer {
 	x.inner.SetDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents)
 	return x
 }
 
+// A Boolean value that indicates whether key events are delivered only after gesture recognition fails.
+//
 // WithDelaysKeyEvents sets the delaysKeyEvents property and returns the receiver for chaining.
 func (x *GestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *GestureRecognizer {
 	x.inner.SetDelaysKeyEvents(delaysKeyEvents)
 	return x
 }
 
+// A Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
+//
 // WithDelaysMagnificationEvents sets the delaysMagnificationEvents property and returns the receiver for chaining.
 func (x *GestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *GestureRecognizer {
 	x.inner.SetDelaysMagnificationEvents(delaysMagnificationEvents)
 	return x
 }
 
+// A Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
+//
 // WithDelaysRotationEvents sets the delaysRotationEvents property and returns the receiver for chaining.
 func (x *GestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *GestureRecognizer {
 	x.inner.SetDelaysRotationEvents(delaysRotationEvents)
@@ -130,6 +158,8 @@ func (x *GestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeM
 	return x
 }
 
+// Returns the point computed as the location of the gesture.
+//
 // LocationInView calls the underlying LocationInView.
 func (x *GestureRecognizer) LocationInView(view *raw.NSView) corefoundation.CGPoint {
 	return x.inner.LocationInView(view)
@@ -292,71 +322,99 @@ func (x *GestureRecognizer) SetAllowedTouchTypes(allowedTouchTypes NSTouchTypeMa
 	x.inner.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
 }
 
+// Overridden to reset the internal state of the gesture recognizer when an attempt completes.
+//
 // Reset calls the underlying Reset.
 func (x *GestureRecognizer) Reset() {
 	x.inner.Reset()
 }
 
+// Overridden to indicate that the current object can prevent the specified gesture recognizer from recognizing its gesture.
+//
 // CanPreventGestureRecognizer calls the underlying CanPreventGestureRecognizer.
 func (x *GestureRecognizer) CanPreventGestureRecognizer(preventedGestureRecognizer *raw.NSGestureRecognizer) bool {
 	return x.inner.CanPreventGestureRecognizer(preventedGestureRecognizer)
 }
 
+// Overridden to indicate that the specified gesture recognizer can prevent the current object from recognizing a gesture.
+//
 // CanBePreventedByGestureRecognizer calls the underlying CanBePreventedByGestureRecognizer.
 func (x *GestureRecognizer) CanBePreventedByGestureRecognizer(preventingGestureRecognizer *raw.NSGestureRecognizer) bool {
 	return x.inner.CanBePreventedByGestureRecognizer(preventingGestureRecognizer)
 }
 
+// Overridden to indicate that the specified gesture recognizer must fail before the current object begins recognizing its gesture.
+//
 // ShouldRequireFailureOfGestureRecognizer calls the underlying ShouldRequireFailureOfGestureRecognizer.
 func (x *GestureRecognizer) ShouldRequireFailureOfGestureRecognizer(otherGestureRecognizer *raw.NSGestureRecognizer) bool {
 	return x.inner.ShouldRequireFailureOfGestureRecognizer(otherGestureRecognizer)
 }
 
+// Overridden to indicate that the current object must fail before the specified gesture recognizer begins recognizing its gesture.
+//
 // ShouldBeRequiredToFailByGestureRecognizer calls the underlying ShouldBeRequiredToFailByGestureRecognizer.
 func (x *GestureRecognizer) ShouldBeRequiredToFailByGestureRecognizer(otherGestureRecognizer *raw.NSGestureRecognizer) bool {
 	return x.inner.ShouldBeRequiredToFailByGestureRecognizer(otherGestureRecognizer)
 }
 
+// Informs the gesture recognizer that the user pressed the left mouse button.
+//
 // MouseDown calls the underlying MouseDown.
 func (x *GestureRecognizer) MouseDown(event *raw.NSEvent) {
 	x.inner.MouseDown(event)
 }
 
+// Informs the gesture recognizer that the user pressed the right mouse button.
+//
 // RightMouseDown calls the underlying RightMouseDown.
 func (x *GestureRecognizer) RightMouseDown(event *raw.NSEvent) {
 	x.inner.RightMouseDown(event)
 }
 
+// Informs the gesture recognizer that the user pressed a mouse button other than the left or right one.
+//
 // OtherMouseDown calls the underlying OtherMouseDown.
 func (x *GestureRecognizer) OtherMouseDown(event *raw.NSEvent) {
 	x.inner.OtherMouseDown(event)
 }
 
+// Informs the gesture recognizer that the user released the left mouse button.
+//
 // MouseUp calls the underlying MouseUp.
 func (x *GestureRecognizer) MouseUp(event *raw.NSEvent) {
 	x.inner.MouseUp(event)
 }
 
+// Informs the gesture recognizer that the user released the right mouse button.
+//
 // RightMouseUp calls the underlying RightMouseUp.
 func (x *GestureRecognizer) RightMouseUp(event *raw.NSEvent) {
 	x.inner.RightMouseUp(event)
 }
 
+// Informs the gesture recognizer that the user released a mouse button other than the left or right one.
+//
 // OtherMouseUp calls the underlying OtherMouseUp.
 func (x *GestureRecognizer) OtherMouseUp(event *raw.NSEvent) {
 	x.inner.OtherMouseUp(event)
 }
 
+// Informs the gesture recognizer that the user moved the mouse with the left button pressed.
+//
 // MouseDragged calls the underlying MouseDragged.
 func (x *GestureRecognizer) MouseDragged(event *raw.NSEvent) {
 	x.inner.MouseDragged(event)
 }
 
+// Informs the gesture recognizer that the user moved the mouse with the right button pressed.
+//
 // RightMouseDragged calls the underlying RightMouseDragged.
 func (x *GestureRecognizer) RightMouseDragged(event *raw.NSEvent) {
 	x.inner.RightMouseDragged(event)
 }
 
+// Informs the gesture recognizer that the user moved the mouse with a button other than the left or right one pressed.
+//
 // OtherMouseDragged calls the underlying OtherMouseDragged.
 func (x *GestureRecognizer) OtherMouseDragged(event *raw.NSEvent) {
 	x.inner.OtherMouseDragged(event)
@@ -367,56 +425,78 @@ func (x *GestureRecognizer) MouseCancelled(event *raw.NSEvent) {
 	x.inner.MouseCancelled(event)
 }
 
+// Informs the gesture recognizer that the user has pressed a key.
+//
 // KeyDown calls the underlying KeyDown.
 func (x *GestureRecognizer) KeyDown(event *raw.NSEvent) {
 	x.inner.KeyDown(event)
 }
 
+// Informs the gesture recognizer that the user released a key.
+//
 // KeyUp calls the underlying KeyUp.
 func (x *GestureRecognizer) KeyUp(event *raw.NSEvent) {
 	x.inner.KeyUp(event)
 }
 
+// Informs the current object that the user pressed or released a modifier key (Shift, Control, and so on).
+//
 // FlagsChanged calls the underlying FlagsChanged.
 func (x *GestureRecognizer) FlagsChanged(event *raw.NSEvent) {
 	x.inner.FlagsChanged(event)
 }
 
+// Informs the user that a tablet-point event occurred.
+//
 // TabletPoint calls the underlying TabletPoint.
 func (x *GestureRecognizer) TabletPoint(event *raw.NSEvent) {
 	x.inner.TabletPoint(event)
 }
 
+// Informs the gesture recognizer that the user is performing a pinch gesture.
+//
 // MagnifyWithEvent calls the underlying MagnifyWithEvent.
 func (x *GestureRecognizer) MagnifyWithEvent(event *raw.NSEvent) {
 	x.inner.MagnifyWithEvent(event)
 }
 
+// Informs the gesture recognizer that the user is performing a rotation gesture.
+//
 // RotateWithEvent calls the underlying RotateWithEvent.
 func (x *GestureRecognizer) RotateWithEvent(event *raw.NSEvent) {
 	x.inner.RotateWithEvent(event)
 }
 
+// Informs the current object that a pressure change occurred on a system that supports pressure sensitivity.
+//
 // PressureChangeWithEvent calls the underlying PressureChangeWithEvent.
 func (x *GestureRecognizer) PressureChangeWithEvent(event *raw.NSEvent) {
 	x.inner.PressureChangeWithEvent(event)
 }
 
+// Called when one or more fingers first make contact with an NSTouchBar instance on the Touch Bar.
+//
 // TouchesBeganWithEvent calls the underlying TouchesBeganWithEvent.
 func (x *GestureRecognizer) TouchesBeganWithEvent(event *raw.NSEvent) {
 	x.inner.TouchesBeganWithEvent(event)
 }
 
+// Called when one or more fingers, associated with an in-progress event, move within an NSTouchBar instance on the Touch Bar.
+//
 // TouchesMovedWithEvent calls the underlying TouchesMovedWithEvent.
 func (x *GestureRecognizer) TouchesMovedWithEvent(event *raw.NSEvent) {
 	x.inner.TouchesMovedWithEvent(event)
 }
 
+// Called when one or more fingers are removed from contact with an NSTouchBar instance on the Touch Bar.
+//
 // TouchesEndedWithEvent calls the underlying TouchesEndedWithEvent.
 func (x *GestureRecognizer) TouchesEndedWithEvent(event *raw.NSEvent) {
 	x.inner.TouchesEndedWithEvent(event)
 }
 
+// Called when a system event, such as a low-memory warning, cancels an in-progress touch event in an NSTouchBar object.
+//
 // TouchesCancelledWithEvent calls the underlying TouchesCancelledWithEvent.
 func (x *GestureRecognizer) TouchesCancelledWithEvent(event *raw.NSEvent) {
 	x.inner.TouchesCancelledWithEvent(event)

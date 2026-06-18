@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A trigger condition that causes a notification the system delivers at a specific date and time.
+//
 // CalendarNotificationTrigger wraps [raw.UNCalendarNotificationTrigger] with a fluent Go API.
 type CalendarNotificationTrigger struct {
 	inner *raw.UNCalendarNotificationTrigger
@@ -36,6 +38,8 @@ func NewCalendarNotificationTrigger() *CalendarNotificationTrigger {
 	return &CalendarNotificationTrigger{inner: raw.UNCalendarNotificationTriggerFromID(_id)}
 }
 
+// The next date at which the trigger conditions are met.
+//
 // NextTriggerDate calls the underlying NextTriggerDate.
 func (x *CalendarNotificationTrigger) NextTriggerDate() *foundation.NSDate {
 	return x.inner.NextTriggerDate()

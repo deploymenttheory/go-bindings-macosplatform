@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A view that efficiently merges descendant glass effect views together when they are within a specified proximity to each other.
+//
 // GlassEffectContainerView wraps [raw.NSGlassEffectContainerView] with a fluent Go API.
 type GlassEffectContainerView struct {
 	inner *raw.NSGlassEffectContainerView
@@ -40,7 +42,7 @@ func NewGlassEffectContainerView() *GlassEffectContainerView {
 	return &GlassEffectContainerView{inner: raw.NSGlassEffectContainerViewFromID(_id)}
 }
 
-// The view that contains descendant views to merge together when in proximity to each other. The glass effect container view does the following: 1. Elevates the z-order of descendants of `contentView` to position them above the `contentView`. 2. Merges descendants together if the views are sufficiently similar and within the proximity specified in “spacing“. 3. Processes similar glass effect views as a batch to improve performance.
+// The view that contains descendant views to merge together when in proximity to each other.
 //
 // WithContentView sets the contentView property and returns the receiver for chaining.
 func (x *GlassEffectContainerView) WithContentView(contentView ViewProvider) *GlassEffectContainerView {
@@ -48,7 +50,7 @@ func (x *GlassEffectContainerView) WithContentView(contentView ViewProvider) *Gl
 	return x
 }
 
-// The proximity at which the glass effect container view begins merging eligible descendent glass effect views. The default value, zero, is sufficient for batch processing eligible glass effect views, while avoiding distortion and merging effects for other views in close proximity.
+// The proximity at which the glass effect container view begins merging eligible descendent glass effect views.
 //
 // WithSpacing sets the spacing property and returns the receiver for chaining.
 func (x *GlassEffectContainerView) WithSpacing(spacing float64) *GlassEffectContainerView {
@@ -98,6 +100,8 @@ func (x *GlassEffectContainerView) WithAutoresizingMask(autoresizingMask NSAutor
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *GlassEffectContainerView) WithFrame(frame corefoundation.CGRect) *GlassEffectContainerView {
 	x.inner.NSView.SetFrame(frame)
@@ -122,6 +126,8 @@ func (x *GlassEffectContainerView) WithBoundsRotation(boundsRotation float64) *G
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *GlassEffectContainerView) WithBounds(bounds corefoundation.CGRect) *GlassEffectContainerView {
 	x.inner.NSView.SetBounds(bounds)
@@ -134,6 +140,8 @@ func (x *GlassEffectContainerView) WithCanDrawConcurrently(canDrawConcurrently b
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *GlassEffectContainerView) WithNeedsDisplay(needsDisplay bool) *GlassEffectContainerView {
 	x.inner.NSView.SetNeedsDisplay(needsDisplay)
@@ -320,7 +328,7 @@ func (x *GlassEffectContainerView) WithAdditionalSafeAreaInsets(additionalSafeAr
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *GlassEffectContainerView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *GlassEffectContainerView {
@@ -376,24 +384,32 @@ func (x *GlassEffectContainerView) WithPressureConfiguration(pressureConfigurati
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *GlassEffectContainerView) WithNextResponder(nextResponder ResponderProvider) *GlassEffectContainerView {
 	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *GlassEffectContainerView) WithMenu(menu *Menu) *GlassEffectContainerView {
 	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *GlassEffectContainerView) WithUserActivity(userActivity *foundation.NSUserActivity) *GlassEffectContainerView {
 	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *GlassEffectContainerView) WithTouchBar(touchBar *TouchBar) *GlassEffectContainerView {
 	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())

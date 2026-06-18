@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An interface that represents a log state configuration.
+//
 // LogStateDescriptor wraps [raw.MTLLogStateDescriptor] with a fluent Go API.
 type LogStateDescriptor struct {
 	inner *raw.MTLLogStateDescriptor
@@ -35,7 +37,7 @@ func NewLogStateDescriptor() *LogStateDescriptor {
 	return &LogStateDescriptor{inner: raw.MTLLogStateDescriptorFromID(_id)}
 }
 
-// @abstract level indicates the minimum level of the logs that will be printed. @discussion All the logs with level less than given level will be skipped on the GPU Side.
+// The minimum level of messages that the shader can log.
 //
 // WithLevel sets the level property and returns the receiver for chaining.
 func (x *LogStateDescriptor) WithLevel(level MTLLogLevel) *LogStateDescriptor {
@@ -43,7 +45,7 @@ func (x *LogStateDescriptor) WithLevel(level MTLLogLevel) *LogStateDescriptor {
 	return x
 }
 
-// @abstract bufferSize indicates the size of the buffer where GPU will store the logging content from shaders. Minimum value is 1KB
+// The size of the internal buffer the log state uses, specified in bytes.
 //
 // WithBufferSize sets the bufferSize property and returns the receiver for chaining.
 func (x *LogStateDescriptor) WithBufferSize(bufferSize int) *LogStateDescriptor {

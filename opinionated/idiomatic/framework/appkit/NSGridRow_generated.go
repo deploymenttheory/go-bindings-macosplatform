@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A row within a grid view.
+//
 // GridRow wraps [raw.NSGridRow] with a fluent Go API.
 type GridRow struct {
 	inner *raw.NSGridRow

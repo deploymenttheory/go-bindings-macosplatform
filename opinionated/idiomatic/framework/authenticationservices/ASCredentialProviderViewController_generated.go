@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A view controller that a credential manager app uses to extend AutoFill.
+//
 // CredentialProviderViewController wraps [raw.ASCredentialProviderViewController] with a fluent Go API.
 type CredentialProviderViewController struct {
 	inner *raw.ASCredentialProviderViewController
@@ -38,98 +40,98 @@ func NewCredentialProviderViewController() *CredentialProviderViewController {
 	return &CredentialProviderViewController{inner: raw.ASCredentialProviderViewControllerFromID(_id)}
 }
 
-// @abstract Prepare the view controller to show a list of credentials. @param serviceIdentifiers the array of service identifiers. @discussion This method is called by the system to prepare the extension's view controller to present the list of credentials. A service identifier array is passed which can be used to filter or prioritize the credentials that closely match each service. The service identifier array could have zero or more items. If there are more than one item in the array, items with lower indexes represent more specific identifiers for which a credential is being requested. For example, the array could contain identifiers [m.example.com, example.com] with the first item representing the more specifc service that requires a credential. If the array of service identifiers is empty, it is expected that the credential list should still show credentials that the user can pick from.
+// Prepares the interface to display a list of credentials from which the user can select.
 //
 // PrepareCredentialListForServiceIdentifiers calls the underlying PrepareCredentialListForServiceIdentifiers.
 func (x *CredentialProviderViewController) PrepareCredentialListForServiceIdentifiers(serviceIdentifiers *foundation.NSArray[*raw.ASCredentialServiceIdentifier]) {
 	x.inner.PrepareCredentialListForServiceIdentifiers(serviceIdentifiers)
 }
 
-// @abstract Prepare the view controller to show a list of passkey and password credentials. @param serviceIdentifiers the array of service identifiers. @param requestParameters the parameters of the active passkey request. @discussion This method is called by the system to prepare the extension's view controller to present the list of credentials. A service identifier array is passed which can be used to filter or prioritize the credentials that closely match each service. The service identifier array could have zero or more items. If there is more than one item in the array, items with lower indexes represent more specific identifiers for which a credential is being requested. For example, the array could contain identifiers [m.example.com, example.com] with the first item representing the more specifc service that requires a credential. If the array of service identifiers is empty, it is expected that the credential list should still show credentials that the user can pick from. If a passkey credential is selected, the extension should use the requestParameters object to complete the request using the selected passkey credential.
+// Prepares the interface to display a list of passkey and password credentials from which the user can select.
 //
 // PrepareCredentialListForServiceIdentifiersRequestParameters calls the underlying PrepareCredentialListForServiceIdentifiersRequestParameters.
 func (x *CredentialProviderViewController) PrepareCredentialListForServiceIdentifiersRequestParameters(serviceIdentifiers *foundation.NSArray[*raw.ASCredentialServiceIdentifier], requestParameters *raw.ASPasskeyCredentialRequestParameters) {
 	x.inner.PrepareCredentialListForServiceIdentifiersRequestParameters(serviceIdentifiers, requestParameters)
 }
 
-// @abstract Prepare the view controller to show a list of one time code credentials. @param serviceIdentifiers the array of service identifiers. @discussion This method is called by the system to prepare the extension's view controller to present the list of credentials. A service identifier array is passed which can be used to filter or prioritize the credentials that closely match each service. The service identifier array could have zero or more items. If there is more than one item in the array, items with lower indexes represent more specific identifiers for which a credential is being requested. For example, the array could contain identifiers [m.example.com, example.com] with the first item representing the more specifc service that requires a credential. If the array of service identifiers is empty, it is expected that the credential list should still show credentials that the user can pick from.
+// Prepares the interface to display a list of one-time passcodes (OTPs) that people can select from.
 //
 // PrepareOneTimeCodeCredentialListForServiceIdentifiers calls the underlying PrepareOneTimeCodeCredentialListForServiceIdentifiers.
 func (x *CredentialProviderViewController) PrepareOneTimeCodeCredentialListForServiceIdentifiers(serviceIdentifiers *foundation.NSArray[*raw.ASCredentialServiceIdentifier]) {
 	x.inner.PrepareOneTimeCodeCredentialListForServiceIdentifiers(serviceIdentifiers)
 }
 
-// @abstract Attempt to provide the user-requested credential without any user interaction. @param credentialIdentity the credential identity for which a credential should be provided. @discussion After the user selects a credential identity, the system may ask your extension to provide the credential without showing any user interface if possible to enhance the user experience. If your extension can accomplish this (for example, the user’s passwords database is still unlocked from a recent interaction), call -[ASCredentialProviderExtensionContext completeRequestWithSelectedCredential:completionHandler:] to provide the credential. If an error occurs, call -[ASCredentialProviderExtensionContext cancelRequestWithError:] and pass an error with domain ASExtensionErrorDomain and an appropriate error code from ASExtensionErrorCode.  For example, if your extension requires user interaction because the passwords database needs to be unlocked, pass an error with code ASExtensionErrorCodeUserInteractionRequired. @note When this method is called, your extension's view controller is not present on the screen. Do not attempt or expect to show any user interface in this method.
+// Attempts to provide the user-requested credential with no further user interaction.
 //
 // ProvideCredentialWithoutUserInteractionForIdentity calls the underlying ProvideCredentialWithoutUserInteractionForIdentity.
 func (x *CredentialProviderViewController) ProvideCredentialWithoutUserInteractionForIdentity(credentialIdentity *raw.ASPasswordCredentialIdentity) {
 	x.inner.ProvideCredentialWithoutUserInteractionForIdentity(credentialIdentity)
 }
 
-// Attempt to provide the user-requested credential without any user interaction. After the user selects a credential identity, the system will create a credential request, the contents of which will depend on whether the credential to use is a password or passkey. The request type will match the type of credential that was requested. Refer to `ASPasswordCredentialRequest`, `ASPasskeyCredentialRequest`, and `ASOneTimeCodeCredentialRequest` for details. The system may ask your extension to provide the credential without showing any user interface if possible to enhance the user experience. If your extension can accomplish this (for example, the user’s passwords database is still unlocked from a recent interaction), call `-[ASCredentialProviderExtensionContext completeRequestWithSelectedCredential:completionHandler:]` for password credentials, `-[ASCredentialProviderExtensionContext completeAssertionRequestWithSelectedPasskeyCredential:completionHandler:]` for passkey credentials, or `-[ASCredentialProviderExtensionContext completeOneTimeCodeRequestWithSelectedCredential:completionHandler:]` for one time code credentials. If an error occurs, call `-[ASCredentialProviderExtensionContext cancelRequestWithError:]` and pass an error with domain `ASExtensionErrorDomain` and an appropriate error code from `ASExtensionErrorCode`. For example, if your extension requires user interaction because the passwords database needs to be unlocked, pass an error with code `ASExtensionErrorCodeUserInteractionRequired`. In order for your extension to be presented in the list of options for passkey assertion requests, your extension needs to specify a true value for the Information Property List key `ProvidesPasskeys` under the `ASCredentialProviderExtensionCapabilities` dictionary. Info.plist ├─ NSExtension ├─ NSExtensionAttributes ├─ ASCredentialProviderExtensionCapabilities ├─ ProvidesPasskeys => true Similarly, your extension needs to specify a true value for the Information Property List key `ProvidesOneTimeCodes` under the `ASCredentialProviderExtensionCapabilities` dictionary in order to be presented in the list of options for one time code requests. - Note: When this method is called, your extension's view controller is not present on the screen. Do not attempt or expect to show any user interface in this method. - Parameter credentialRequest: The credential request for which a credential should be provided.
+// Attempts to provide the user-requested credential with no further user interaction.
 //
 // ProvideCredentialWithoutUserInteractionForRequest calls the underlying ProvideCredentialWithoutUserInteractionForRequest.
 func (x *CredentialProviderViewController) ProvideCredentialWithoutUserInteractionForRequest(credentialRequest raw.ASCredentialRequest) {
 	x.inner.ProvideCredentialWithoutUserInteractionForRequest(credentialRequest)
 }
 
-// @abstract Prepare the view controller to show user interface for providing the user-requested credential. @param credentialIdentity the credential identity for which a credential should be provided. @discussion The system calls this method when your extension cannot provide the requested credential without user interaction. Set up the view controller for any user interaction required to provide the requested credential only. The user interaction should be limited in nature to operations required for providing the requested credential. An example is showing an authentication UI to unlock the user's passwords database. Call -[ASCredentialProviderExtensionContext completeRequestWithSelectedCredential:completionHandler:] to provide the credential. If an error occurs, call -[ASCredentialProviderExtensionContext cancelRequestWithError:] and pass an error with domain ASExtensionErrorDomain and an appropriate error code from ASExtensionErrorCode. For example, if the credential identity cannot be found in the database, pass an error with code ASExtensionErrorCodeCredentialIdentityNotFound.
+// Prepares the interface for a user interaction, like a database login, that enables it to access and return the credential for the given identity.
 //
 // PrepareInterfaceToProvideCredentialForIdentity calls the underlying PrepareInterfaceToProvideCredentialForIdentity.
 func (x *CredentialProviderViewController) PrepareInterfaceToProvideCredentialForIdentity(credentialIdentity *raw.ASPasswordCredentialIdentity) {
 	x.inner.PrepareInterfaceToProvideCredentialForIdentity(credentialIdentity)
 }
 
-// @abstract Prepare the view controller to show user interface for providing the user-requested credential. @param credentialRequest the credential request for which a credential should be provided. @discussion The system calls this method when your extension cannot provide the requested credential without user interaction. Set up the view controller for any user interaction required to provide the requested credential only. The user interaction should be limited in nature to operations required for providing the requested credential. An example is showing an authentication UI to unlock the user's passwords database. Call -[ASCredentialProviderExtensionContext completeRequestWithSelectedCredential:completionHandler:] for password credentials or -[ASCredentialProviderExtensionContext completeAssertionRequestWithSelectedPasskeyCredential:completionHandler:] for passkey credentials. If an error occurs, call -[ASCredentialProviderExtensionContext cancelRequestWithError:] and pass an error with domain ASExtensionErrorDomain and an appropriate error code from ASExtensionErrorCode. For example, if the credential identity cannot be found in the database, pass an error with code ASExtensionErrorCodeCredentialIdentityNotFound.
+// Prepare the view controller to show user interface for providing the requested credential.
 //
 // PrepareInterfaceToProvideCredentialForRequest calls the underlying PrepareInterfaceToProvideCredentialForRequest.
 func (x *CredentialProviderViewController) PrepareInterfaceToProvideCredentialForRequest(credentialRequest raw.ASCredentialRequest) {
 	x.inner.PrepareInterfaceToProvideCredentialForRequest(credentialRequest)
 }
 
-// @abstract Prepare the view controller to show user interface when the user enables your extension. @discussion The system calls this method after your extension is enabled by the user in Settings. You can use this method to give the user a chance to configure the extension or to provide credential identities to the system. After the configuration is done, call -[ASCredentialProviderExtensionContext completeExtensionConfigurationRequest]. @note This method only gets called if your extension supports this functionality by specifying "ASCredentialProviderExtensionShowsConfigurationUI": YES in its extension attributes.
+// Prepares the interface to enable the user to configure the extension.
 //
 // PrepareInterfaceForExtensionConfiguration calls the underlying PrepareInterfaceForExtensionConfiguration.
 func (x *CredentialProviderViewController) PrepareInterfaceForExtensionConfiguration() {
 	x.inner.PrepareInterfaceForExtensionConfiguration()
 }
 
-// Prepare UI to register a passkey for the specified relying party. The system calls this method when the user selects your extension to use for creating a passkey. In order for your extension to be presented in the list of options for passkey registration requests, your extension needs to specify a true value for the Information Property List key `ProvidesPasskeys` under the `ASCredentialProviderExtensionCapabilities` dictionary. Info.plist ├─ NSExtension ├─ NSExtensionAttributes ├─ ASCredentialProviderExtensionCapabilities ├─ ProvidesPasskeys => true This method will present your extension's UI for user authentication before creating the passkey. Once the passkey is created, your extension should call `-[ASCredentialProviderExtensionContext completeRegistrationRequestWithSelectedPasskeyCredential:completionHandler:]` with the newly created ASPasskeyCredential object. If an error occurs, call `-[ASCredentialProviderExtensionContext cancelRequestWithError:]` and pass an error with domain `ASExtensionErrorDomain` and an appropriate error code from `ASExtensionErrorCode`. - Parameter registrationRequest: The passkey registration request parameters needed to register a new passkey.
+// Prepare the view controller to show user interface for registering a new passkey.
 //
 // PrepareInterfaceForPasskeyRegistration calls the underlying PrepareInterfaceForPasskeyRegistration.
 func (x *CredentialProviderViewController) PrepareInterfaceForPasskeyRegistration(registrationRequest raw.ASCredentialRequest) {
 	x.inner.PrepareInterfaceForPasskeyRegistration(registrationRequest)
 }
 
-// Perform a conditional passkey registration, if possible. This method will be called for handling conditional passkey registration requests. A conditional passkey registration request allows your extension to opportunistically register passkeys in the background, if and only if you believe the user is in a good state to do so. Your extension decides can decide what conditions make sense for whether to fulfill or reject this request. For example, an extension may decide to register a passkey only if all of the following conditions are met: - The user's vault is currently unlocked. - The user name for the registration request matches that for an existing saved password. - The matching saved password was filled recently. - The user does not already have a passkey for this account. Fulfilling this request should not remove a user's saved password for this account, but it may mean that the passkey will be preferred over the password in future AutoFill invocations, if both are supported. Your extension should complete this request by calling `-[ASCredentialProviderExtensionContext completeRegistrationRequestWithSelectedPasskeyCredential:completionHandler:]` or`-[ASCredentialProviderExtensionContext cancelRequestWithError:]`, like for standard registration requests. However, this request is not allowed to show UI and `ASExtensionErrorCodeUserInteractionRequired` will be treated like any other error. The intent of this API is to provide a method of performing a background registration only where easy and convenient, so no blocking UI or error should ever be shown. To indicate support for this feature, add `SupportsConditionalPasskeyRegistration` under the `ASCredentialProviderExtensionCapabilities` dictionary. Info.plist ├─ NSExtension ├─ NSExtensionAttributes ├─ ASCredentialProviderExtensionCapabilities ├─ SupportsConditionalPasskeyRegistration => true
+// Perform a conditional passkey registration, if possible.
 //
 // PerformPasskeyRegistrationWithoutUserInteractionIfPossible calls the underlying PerformPasskeyRegistrationWithoutUserInteractionIfPossible.
 func (x *CredentialProviderViewController) PerformPasskeyRegistrationWithoutUserInteractionIfPossible(registrationRequest *raw.ASPasskeyCredentialRequest) {
 	x.inner.PerformPasskeyRegistrationWithoutUserInteractionIfPossible(registrationRequest)
 }
 
-// Receive report when a relying party indicates that a passkey's user name was updated. This method will be called for handling passkey updates when a relying party reports an update using the `ASCredentialUpdater` API. This update should be handled in the background, so no blocking UI or error should ever be shown. - Parameter relyingParty: Relying party (website) that the credential is saved for. - Parameter userHandle: User identifier. - Parameter newName: The new user name for the credential. To indicate support for this feature, add `SupportsCredentialUpdate` under the `ASCredentialProviderExtensionCapabilities` dictionary. Info.plist ├─ NSExtension ├─ NSExtensionAttributes ├─ ASCredentialProviderExtensionCapabilities ├─ SupportsCredentialUpdate => true
+// Receives a report from the system that a relying party indicated that a passkey’s user name updated.
 //
 // ReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName calls the underlying ReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName.
 func (x *CredentialProviderViewController) ReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName(relyingParty string, userHandle *foundation.NSData, newName string) {
 	x.inner.ReportPublicKeyCredentialUpdateForRelyingPartyUserHandleNewName(foundation.NSStringStringWithUTF8String(relyingParty), userHandle, foundation.NSStringStringWithUTF8String(newName))
 }
 
-// Receive report when a relying party indicates an invalid passkey credential. This method will be called for handling passkey updates when a relying party reports the credential is no longer valid using the `ASCredentialUpdater` API. You may hide or remove this credential. This update should be handled in the background, so no blocking UI or error should ever be shown. - Parameter relyingParty: Relying party (website) that the credential is saved for. - Parameter credentialID: An identifier that uniquely identifies the passkey. To indicate support for this feature, add `SupportsCredentialUpdate` under the `ASCredentialProviderExtensionCapabilities` dictionary. Info.plist ├─ NSExtension ├─ NSExtensionAttributes ├─ ASCredentialProviderExtensionCapabilities ├─ SupportsCredentialUpdate => true
+// Receives a report from the system that a relying party indicated a passkey credential is invalid.
 //
 // ReportUnknownPublicKeyCredentialForRelyingPartyCredentialID calls the underlying ReportUnknownPublicKeyCredentialForRelyingPartyCredentialID.
 func (x *CredentialProviderViewController) ReportUnknownPublicKeyCredentialForRelyingPartyCredentialID(relyingParty string, credentialID *foundation.NSData) {
 	x.inner.ReportUnknownPublicKeyCredentialForRelyingPartyCredentialID(foundation.NSStringStringWithUTF8String(relyingParty), credentialID)
 }
 
-// Receive report when relying party sends a snapshot of all the accepted credentials for an account. This method will be called for handling passkey updates when a relying party sends a list of accepted credentials using the `ASCredentialUpdater` API. You may hide or remove any credential not present in the accepted credentials list. This update should be handled in the background, so no blocking UI or error should ever be shown. - Parameter relyingParty: Relying party (website) that the credential is saved for. - Parameter userHandle: User identifier. - Parameter acceptedCredentialIDs: An array of identifiers that uniquely identifies the accepted credentials. To indicate support for this feature, add `SupportsCredentialUpdate` under the `ASCredentialProviderExtensionCapabilities` dictionary. Info.plist ├─ NSExtension ├─ NSExtensionAttributes ├─ ASCredentialProviderExtensionCapabilities ├─ SupportsCredentialUpdate => true
+// Receives a report from the system that a relying party sent a snapshot of all accepted credentials for an account.
 //
 // ReportAllAcceptedPublicKeyCredentialsForRelyingPartyUserHandleAcceptedCredentialIDs calls the underlying ReportAllAcceptedPublicKeyCredentialsForRelyingPartyUserHandleAcceptedCredentialIDs.
 func (x *CredentialProviderViewController) ReportAllAcceptedPublicKeyCredentialsForRelyingPartyUserHandleAcceptedCredentialIDs(relyingParty string, userHandle *foundation.NSData, acceptedCredentialIDs *foundation.NSArray[*foundation.NSData]) {
 	x.inner.ReportAllAcceptedPublicKeyCredentialsForRelyingPartyUserHandleAcceptedCredentialIDs(foundation.NSStringStringWithUTF8String(relyingParty), userHandle, acceptedCredentialIDs)
 }
 
-// Receive report when relying party indicates a password credential is no longer needed for a given user name. This method will be called for handling password credential updates when a relying party indicates a password is no longer needed using the `ASCredentialUpdater` API. You may hide or remove the credential. This update should be handled in the background, so no blocking UI or error should ever be shown. - Parameter domain: The website domain that the credential is saved for. - Parameter userName: The account user name. To indicate support for this feature, add `SupportsCredentialUpdate` under the `ASCredentialProviderExtensionCapabilities` dictionary. Info.plist ├─ NSExtension ├─ NSExtensionAttributes ├─ ASCredentialProviderExtensionCapabilities ├─ SupportsCredentialUpdate => true
+// Receives a report from the system that a relying party indicatd that a password credential isn’t needed anymore for a given user name.
 //
 // ReportUnusedPasswordCredentialForDomainUserName calls the underlying ReportUnusedPasswordCredentialForDomainUserName.
 func (x *CredentialProviderViewController) ReportUnusedPasswordCredentialForDomainUserName(domain string, userName string) {

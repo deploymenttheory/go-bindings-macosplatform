@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of the state of a credential identity store.
+//
 // CredentialIdentityStoreState wraps [raw.ASCredentialIdentityStoreState] with a fluent Go API.
 type CredentialIdentityStoreState struct {
 	inner *raw.ASCredentialIdentityStoreState

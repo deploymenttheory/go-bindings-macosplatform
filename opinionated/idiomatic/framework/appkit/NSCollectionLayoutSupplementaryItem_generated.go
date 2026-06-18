@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object used to add an extra visual decoration to an item in a collection view.
+//
 // CollectionLayoutSupplementaryItem wraps [raw.NSCollectionLayoutSupplementaryItem] with a fluent Go API.
 type CollectionLayoutSupplementaryItem struct {
 	inner *raw.NSCollectionLayoutSupplementaryItem
@@ -38,18 +40,24 @@ func NewCollectionLayoutSupplementaryItem() *CollectionLayoutSupplementaryItem {
 	return &CollectionLayoutSupplementaryItem{inner: raw.NSCollectionLayoutSupplementaryItemFromID(_id)}
 }
 
+// The vertical stacking order of the supplementary item in relation to other items in the section.
+//
 // WithZIndex sets the zIndex property and returns the receiver for chaining.
 func (x *CollectionLayoutSupplementaryItem) WithZIndex(zIndex int) *CollectionLayoutSupplementaryItem {
 	x.inner.SetZIndex(zIndex)
 	return x
 }
 
+// The amount of space added around the content of the item to adjust its final size after its position is computed.
+//
 // WithContentInsets sets the contentInsets property and returns the receiver for chaining.
 func (x *CollectionLayoutSupplementaryItem) WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutSupplementaryItem {
 	x.inner.NSCollectionLayoutItem.SetContentInsets(contentInsets)
 	return x
 }
 
+// The amount of space added around the boundaries of the item between other items and this item’s container.
+//
 // WithEdgeSpacing sets the edgeSpacing property and returns the receiver for chaining.
 func (x *CollectionLayoutSupplementaryItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutSupplementaryItem {
 	x.inner.NSCollectionLayoutItem.SetEdgeSpacing(edgeSpacing.Unwrap())

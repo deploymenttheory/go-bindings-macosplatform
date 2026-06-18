@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A wrapper object for a data buffer.
+//
 // MutableFileDataBuffer wraps [raw.FSMutableFileDataBuffer] with a fluent Go API.
 type MutableFileDataBuffer struct {
 	inner *raw.FSMutableFileDataBuffer

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that contains metadata indicating the specific product instance to provision.
+//
 // JapanIndividualNumberCardMetadata wraps [raw.PKJapanIndividualNumberCardMetadata] with a fluent Go API.
 type JapanIndividualNumberCardMetadata struct {
 	inner *raw.PKJapanIndividualNumberCardMetadata
@@ -33,7 +35,7 @@ func JapanIndividualNumberCardMetadataFromID(id objc.ID) *JapanIndividualNumberC
 	return &JapanIndividualNumberCardMetadata{inner: raw.PKJapanIndividualNumberCardMetadataFromID(id)}
 }
 
-// Initialize with parameters configured by issuer's server to indicate the specific product instance to provision. - Properties: - provisioningCredentialIdentifier: Identifies this user's instance for provisioning. - sharingInstanceIdentifier: A short lived token to prevent replay-ability. - cardTemplateIdentifier: An identifier for a legacy product on our Apple Pay servers. - preview: Object containing information to represent the pass to provision in our UI.
+// Creates the product instance to provision.
 //
 // NewJapanIndividualNumberCardMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierPreview creates a new [JapanIndividualNumberCardMetadata].
 func NewJapanIndividualNumberCardMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierPreview(credentialIdentifier string, sharingInstanceIdentifier string, templateIdentifier string, preview *raw.PKAddPassMetadataPreview) *JapanIndividualNumberCardMetadata {
@@ -42,7 +44,7 @@ func NewJapanIndividualNumberCardMetadataWithProvisioningCredentialIdentifierSha
 	return &JapanIndividualNumberCardMetadata{inner: raw.PKJapanIndividualNumberCardMetadataFromID(_id)}
 }
 
-// Initialize with parameters configured by issuer's server to indicate the specific product instance to provision. - Properties: - provisioningCredentialIdentifier: Identifies this user's instance for provisioning. - sharingInstanceIdentifier: A short lived token to prevent replay-ability. - cardConfigurationIdentifier: An identifier for a product on our Apple Pay servers. - preview: Object containing information to represent the pass to provision in our UI.
+// Initializes the user instance for provisioning.
 //
 // NewJapanIndividualNumberCardMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardConfigurationIdentifierPreview creates a new [JapanIndividualNumberCardMetadata].
 func NewJapanIndividualNumberCardMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardConfigurationIdentifierPreview(credentialIdentifier string, sharingInstanceIdentifier string, cardConfigurationIdentifier string, preview *raw.PKAddPassMetadataPreview) *JapanIndividualNumberCardMetadata {
@@ -51,7 +53,7 @@ func NewJapanIndividualNumberCardMetadataWithProvisioningCredentialIdentifierSha
 	return &JapanIndividualNumberCardMetadata{inner: raw.PKJapanIndividualNumberCardMetadataFromID(_id)}
 }
 
-// Raw authentication password used to protect authentication functionality. If configured in the pass, this functionality allows users to present their identity credentials to external parties.
+// A string that specifies the authentication password when provisioning the pass.
 //
 // WithAuthenticationPassword sets the authenticationPassword property and returns the receiver for chaining.
 func (x *JapanIndividualNumberCardMetadata) WithAuthenticationPassword(authenticationPassword string) *JapanIndividualNumberCardMetadata {
@@ -59,7 +61,7 @@ func (x *JapanIndividualNumberCardMetadata) WithAuthenticationPassword(authentic
 	return x
 }
 
-// Raw signing password used to protect signing functionality. If configured in the pass, this functionality allows users to digitally sign with external parties or print officially signed documents.
+// A string that sets the signing password when you provision the pass.
 //
 // WithSigningPassword sets the signingPassword property and returns the receiver for chaining.
 func (x *JapanIndividualNumberCardMetadata) WithSigningPassword(signingPassword string) *JapanIndividualNumberCardMetadata {
@@ -67,7 +69,7 @@ func (x *JapanIndividualNumberCardMetadata) WithSigningPassword(signingPassword 
 	return x
 }
 
-// preview: A preview object containing the necessary information to represent the pass during provisioning.
+// An object that contains information representing the pass for provisioning.
 //
 // WithPreview sets the preview property and returns the receiver for chaining.
 func (x *JapanIndividualNumberCardMetadata) WithPreview(preview AddPassMetadataPreviewProvider) *JapanIndividualNumberCardMetadata {
@@ -75,7 +77,7 @@ func (x *JapanIndividualNumberCardMetadata) WithPreview(preview AddPassMetadataP
 	return x
 }
 
-// serverEnvironmentIdentifier: Identifier referencing the target server environment Apple Pay servers should reach out to to provision this pass. If not present, the default Apply Pay server environment will be used and an empty string will be returned.
+// An identifier that references the target server environment Apple Pay servers need to connect with to provision the pass.
 //
 // WithServerEnvironmentIdentifier sets the serverEnvironmentIdentifier property and returns the receiver for chaining.
 func (x *JapanIndividualNumberCardMetadata) WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *JapanIndividualNumberCardMetadata {

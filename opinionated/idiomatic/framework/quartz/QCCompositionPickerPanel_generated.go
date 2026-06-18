@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The QCCompositionPickerPanel class represents a utility window that allows users to browse compositions that are in the Quartz Composer composition repository and, if supported, preview the composition. The QCCompositionPickerPanel class cannot be subclassed.
+//
 // QCCompositionPickerPanel wraps [raw.QCCompositionPickerPanel] with a fluent Go API.
 type QCCompositionPickerPanel struct {
 	inner *raw.QCCompositionPickerPanel
@@ -35,6 +37,8 @@ func NewQCCompositionPickerPanel() *QCCompositionPickerPanel {
 	return &QCCompositionPickerPanel{inner: raw.QCCompositionPickerPanelFromID(_id)}
 }
 
+// Returns the composition picker view used by the panel so that it can be configured.
+//
 // CompositionPickerView calls the underlying CompositionPickerView.
 func (x *QCCompositionPickerPanel) CompositionPickerView() *QCCompositionPickerView {
 	_r := x.inner.CompositionPickerView()

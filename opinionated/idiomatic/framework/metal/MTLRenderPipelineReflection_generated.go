@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information about the arguments of a graphics function.
+//
 // RenderPipelineReflection wraps [raw.MTLRenderPipelineReflection] with a fluent Go API.
 type RenderPipelineReflection struct {
 	inner *raw.MTLRenderPipelineReflection

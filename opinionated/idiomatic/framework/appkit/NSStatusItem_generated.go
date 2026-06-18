@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An individual element displayed in the system menu bar.
+//
 // StatusItem wraps [raw.NSStatusItem] with a fluent Go API.
 type StatusItem struct {
 	inner *raw.NSStatusItem
@@ -38,96 +40,128 @@ func NewStatusItem() *StatusItem {
 	return &StatusItem{inner: raw.NSStatusItemFromID(_id)}
 }
 
+// The amount of space in the status bar that should be allocated to the status item.
+//
 // WithLength sets the length property and returns the receiver for chaining.
 func (x *StatusItem) WithLength(length float64) *StatusItem {
 	x.inner.SetLength(length)
 	return x
 }
 
+// The pull-down menu displayed when the user clicks the status item.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *StatusItem) WithMenu(menu *Menu) *StatusItem {
 	x.inner.SetMenu(menu.Unwrap())
 	return x
 }
 
+// The set of allowed behaviors for the status item.
+//
 // WithBehavior sets the behavior property and returns the receiver for chaining.
 func (x *StatusItem) WithBehavior(behavior NSStatusItemBehavior) *StatusItem {
 	x.inner.SetBehavior(raw.NSStatusItemBehavior(behavior))
 	return x
 }
 
+// A Boolean value indicating if the menu bar currently displays the status item.
+//
 // WithVisible sets the visible property and returns the receiver for chaining.
 func (x *StatusItem) WithVisible(visible bool) *StatusItem {
 	x.inner.SetVisible(visible)
 	return x
 }
 
+// A unique name for saving and restoring information about a status item.
+//
 // WithAutosaveName sets the autosaveName property and returns the receiver for chaining.
 func (x *StatusItem) WithAutosaveName(autosaveName *foundation.NSString) *StatusItem {
 	x.inner.SetAutosaveName(autosaveName)
 	return x
 }
 
+// The selector the status item sends to its target when someone clicks the status item.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *StatusItem) WithAction(action objc.SEL) *StatusItem {
 	x.inner.SetAction(action)
 	return x
 }
 
+// The selector that is sent to the status item’s target when the status item is double-clicked.
+//
 // WithDoubleAction sets the doubleAction property and returns the receiver for chaining.
 func (x *StatusItem) WithDoubleAction(doubleAction objc.SEL) *StatusItem {
 	x.inner.SetDoubleAction(doubleAction)
 	return x
 }
 
+// The object that receives the status item’s action message when someone clicks the status item.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *StatusItem) WithTarget(target objc.ID) *StatusItem {
 	x.inner.SetTarget(target)
 	return x
 }
 
+// The string that is displayed at the status item’s position in the status bar.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *StatusItem) WithTitle(title string) *StatusItem {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The attributed string that is displayed at the status item’s position in the status bar.
+//
 // WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
 func (x *StatusItem) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *StatusItem {
 	x.inner.SetAttributedTitle(attributedTitle)
 	return x
 }
 
+// The image that is displayed at the status item’s position in the status bar.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *StatusItem) WithImage(image *Image) *StatusItem {
 	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
+// The alternate image to be displayed when a status bar item is highlighted.
+//
 // WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
 func (x *StatusItem) WithAlternateImage(alternateImage *Image) *StatusItem {
 	x.inner.SetAlternateImage(alternateImage.Unwrap())
 	return x
 }
 
+// A Boolean that indicates whether the status item is enabled to respond to clicks.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *StatusItem) WithEnabled(enabled bool) *StatusItem {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean that indicates whether the status item is highlighted when it is clicked.
+//
 // WithHighlightMode sets the highlightMode property and returns the receiver for chaining.
 func (x *StatusItem) WithHighlightMode(highlightMode bool) *StatusItem {
 	x.inner.SetHighlightMode(highlightMode)
 	return x
 }
 
+// The tool tip string that is displayed when the cursor pauses over the status item.
+//
 // WithToolTip sets the toolTip property and returns the receiver for chaining.
 func (x *StatusItem) WithToolTip(toolTip string) *StatusItem {
 	x.inner.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
 	return x
 }
 
+// The custom view the status item displays at its position in the status bar.
+//
 // WithView sets the view property and returns the receiver for chaining.
 func (x *StatusItem) WithView(view ViewProvider) *StatusItem {
 	x.inner.SetView(view.asView())
@@ -210,16 +244,22 @@ func (x *StatusItem) SetAutosaveName(autosaveName *foundation.NSString) {
 	x.inner.SetAutosaveName(autosaveName)
 }
 
+// Sets the conditions on which the status item sends action messages to its target.
+//
 // SendActionOn calls the underlying SendActionOn.
 func (x *StatusItem) SendActionOn(mask NSEventMask) int {
 	return x.inner.SendActionOn(raw.NSEventMask(mask))
 }
 
+// Draws the menu background pattern for a custom status-bar item in regular or highlight pattern.
+//
 // DrawStatusBarBackgroundInRectWithHighlight calls the underlying DrawStatusBarBackgroundInRectWithHighlight.
 func (x *StatusItem) DrawStatusBarBackgroundInRectWithHighlight(rect corefoundation.CGRect, highlight bool) {
 	x.inner.DrawStatusBarBackgroundInRectWithHighlight(rect, highlight)
 }
 
+// Displays a menu under a custom status bar item.
+//
 // PopUpStatusItemMenu calls the underlying PopUpStatusItemMenu.
 func (x *StatusItem) PopUpStatusItemMenu(menu *raw.NSMenu) {
 	x.inner.PopUpStatusItemMenu(menu)

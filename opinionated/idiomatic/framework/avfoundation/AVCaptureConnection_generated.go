@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a connection from a capture input to a capture output.
+//
 // CaptureConnection wraps [raw.AVCaptureConnection] with a fluent Go API.
 type CaptureConnection struct {
 	inner *raw.AVCaptureConnection
@@ -32,7 +34,7 @@ func CaptureConnectionFromID(id objc.ID) *CaptureConnection {
 	return &CaptureConnection{inner: raw.AVCaptureConnectionFromID(id)}
 }
 
-// @method initWithInputPorts:output: @abstract Returns an AVCaptureConnection instance describing a connection between the specified inputPorts and the specified output. @param ports An array of AVCaptureInputPort objects associated with AVCaptureInput objects. @param output An AVCaptureOutput object. @result An AVCaptureConnection instance joining the specified inputPorts to the specified output port. @discussion This method returns an instance of AVCaptureConnection that may be subsequently added to an AVCaptureSession instance using AVCaptureSession's -addConnection: method. When using -addInput: or -addOutput:, connections are formed between all compatible inputs and outputs automatically. You do not need to manually create and add connections to the session unless you use the primitive -addInputWithNoConnections: or -addOutputWithNoConnections: methods.
+// Creates a capture connection that represents a connection between multiple input ports and an output.
 //
 // NewCaptureConnectionWithInputPortsOutput creates a new [CaptureConnection].
 func NewCaptureConnectionWithInputPortsOutput(ports *foundation.NSArray[*raw.AVCaptureInputPort], output *raw.AVCaptureOutput) *CaptureConnection {
@@ -41,7 +43,7 @@ func NewCaptureConnectionWithInputPortsOutput(ports *foundation.NSArray[*raw.AVC
 	return &CaptureConnection{inner: raw.AVCaptureConnectionFromID(_id)}
 }
 
-// @method initWithInputPort:videoPreviewLayer: @abstract Returns an AVCaptureConnection instance describing a connection between the specified inputPort and the specified AVCaptureVideoPreviewLayer instance. @param port An AVCaptureInputPort object associated with an AVCaptureInput object. @param layer An AVCaptureVideoPreviewLayer object. @result An AVCaptureConnection instance joining the specified inputPort to the specified video preview layer. @discussion This method returns an instance of AVCaptureConnection that may be subsequently added to an AVCaptureSession instance using AVCaptureSession's -addConnection: method. When using AVCaptureVideoPreviewLayer's -initWithSession: or -setSession:, a connection is formed between the first compatible input port and the video preview layer automatically. You do not need to manually create and add connections to the session unless you use AVCaptureVideoPreviewLayer's primitive -initWithSessionWithNoConnection: or -setSessionWithNoConnection: methods.
+// Creates a capture connection that represents a connection between an input port and a video preview layer.
 //
 // NewCaptureConnectionWithInputPortVideoPreviewLayer creates a new [CaptureConnection].
 func NewCaptureConnectionWithInputPortVideoPreviewLayer(port *raw.AVCaptureInputPort, layer *raw.AVCaptureVideoPreviewLayer) *CaptureConnection {
@@ -50,7 +52,7 @@ func NewCaptureConnectionWithInputPortVideoPreviewLayer(port *raw.AVCaptureInput
 	return &CaptureConnection{inner: raw.AVCaptureConnectionFromID(_id)}
 }
 
-// @property enabled @abstract Indicates whether the connection's output should consume data. @discussion The value of this property is a BOOL that determines whether the receiver's output should consume data from its connected inputPorts when a session is running. Clients can set this property to stop the flow of data to a given output during capture. The default value is YES.
+// Turns the connection on and off.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *CaptureConnection) WithEnabled(enabled bool) *CaptureConnection {
@@ -58,7 +60,7 @@ func (x *CaptureConnection) WithEnabled(enabled bool) *CaptureConnection {
 	return x
 }
 
-// @property videoMirrored @abstract Indicates whether the video flowing through the connection should be mirrored about its vertical axis. @discussion This property is only applicable to AVCaptureConnection instances involving video. if -isVideoMirroringSupported returns YES, videoMirrored may be set to flip the video about its vertical axis and produce a mirror-image effect. This property may not be set unless -isVideoMirroringSupported returns YES, otherwise a NSInvalidArgumentException is thrown. This property may not be set if -automaticallyAdjustsVideoMirroring returns YES, otherwise an NSInvalidArgumentException is thrown.
+// A Boolean value that indicates whether the connection horizontally flips the video flowing through it.
 //
 // WithVideoMirrored sets the videoMirrored property and returns the receiver for chaining.
 func (x *CaptureConnection) WithVideoMirrored(videoMirrored bool) *CaptureConnection {
@@ -66,7 +68,7 @@ func (x *CaptureConnection) WithVideoMirrored(videoMirrored bool) *CaptureConnec
 	return x
 }
 
-// @property automaticallyAdjustsVideoMirroring @abstract Specifies whether or not the value of @"videoMirrored" can change based on configuration of the session. @discussion For some session configurations, video data flowing through the connection will be mirrored by default. When the value of this property is YES, the value of @"videoMirrored" may change depending on the configuration of the session, for example after switching to a different AVCaptureDeviceInput. The default value is YES.
+// A Boolean value that indicates whether you can enable mirroring based on a session’s configuration.
 //
 // WithAutomaticallyAdjustsVideoMirroring sets the automaticallyAdjustsVideoMirroring property and returns the receiver for chaining.
 func (x *CaptureConnection) WithAutomaticallyAdjustsVideoMirroring(automaticallyAdjustsVideoMirroring bool) *CaptureConnection {
@@ -74,7 +76,7 @@ func (x *CaptureConnection) WithAutomaticallyAdjustsVideoMirroring(automatically
 	return x
 }
 
-// @property videoRotationAngle @abstract Indicates whether the video flowing through the connection should be rotated with a given angle in degrees. @discussion This property is only applicable to AVCaptureConnection instances involving video or depth. -setVideoRotationAngle: throws an NSInvalidArgumentException if set to an unsupported value (see -isVideoRotationAngleSupported:). Note that setting videoRotationAngle does not necessarily result in physical rotation of video buffers. For instance, a video connection to an AVCaptureMovieFileOutput handles orientation using a Quicktime track matrix. In the AVCapturePhotoOutput, orientation is handled using Exif tags. And the AVCaptureVideoPreviewLayer applies transforms to its contents to perform rotations. However, the AVCaptureVideoDataOutput and AVCaptureDepthDataOutput do output physically rotated video buffers. Setting a video rotation angle for an output that does physically rotate buffers requires a lengthy configuration of the capture render pipeline and should be done before calling -[AVCaptureSession startRunning]. Starting with the Spring 2024 iPad line, the default value of videoRotationAngle is 180 degrees for video data on Front Camera as compared to 0 degrees on previous devices. So clients using AVCaptureVideoDataOutput and AVCaptureDepthDataOutput should set videoRotationAngle to 0 to avoid the physical buffer rotation described above. And clients rotating video data by themselves must account for the default value of videoRotationAngle when applying angles (videoRotationAngleForHorizonLevelPreview, videoRotationAngleForHorizonLevelCapture) from AVCaptureDeviceRotationCoordinator. Note that this change in default value is currently limited to these iPads, however it is recommended that clients rotating video data themselves incorporate the default rotation value into their workflows for all devices. Clients using AVCaptureVideoDataOutput with ProRes Raw should set videoRotationAngle to 0 as rotation is not supported for RAW buffers. If clients want to rotate these buffers themselves they need to apply rotation angles (videoRotationAngleForHorizonLevelPreview, videoRotationAngleForHorizonLevelCapture) provided by AVCaptureDeviceRotationCoordinator.
+// A rotation angle the connection applies to a video flowing through it.
 //
 // WithVideoRotationAngle sets the videoRotationAngle property and returns the receiver for chaining.
 func (x *CaptureConnection) WithVideoRotationAngle(videoRotationAngle float64) *CaptureConnection {
@@ -82,7 +84,7 @@ func (x *CaptureConnection) WithVideoRotationAngle(videoRotationAngle float64) *
 	return x
 }
 
-// @property videoOrientation @abstract Indicates whether the video flowing through the connection should be rotated to a given orientation. @discussion This property is deprecated. Use -videoRotationAngle instead. This property may only be set if -isVideoOrientationSupported returns YES, otherwise an NSInvalidArgumentException is thrown.
+// An orientation that tells the connection how to rotate a video flowing through it.
 //
 // WithVideoOrientation sets the videoOrientation property and returns the receiver for chaining.
 func (x *CaptureConnection) WithVideoOrientation(videoOrientation AVCaptureVideoOrientation) *CaptureConnection {
@@ -90,7 +92,7 @@ func (x *CaptureConnection) WithVideoOrientation(videoOrientation AVCaptureVideo
 	return x
 }
 
-// @property videoFieldMode @abstract Indicates how interlaced video flowing through the connection should be treated. @discussion This property is only applicable to AVCaptureConnection instances involving video. If -isVideoFieldModeSupported returns YES, videoFieldMode may be set to affect interlaced video content flowing through the connection.
+// A setting that tells the connection how to interlace video flowing through it.
 //
 // WithVideoFieldMode sets the videoFieldMode property and returns the receiver for chaining.
 func (x *CaptureConnection) WithVideoFieldMode(videoFieldMode AVVideoFieldMode) *CaptureConnection {
@@ -98,7 +100,7 @@ func (x *CaptureConnection) WithVideoFieldMode(videoFieldMode AVVideoFieldMode) 
 	return x
 }
 
-// @property videoMinFrameDuration @abstract Indicates the minimum time interval at which the receiver should output consecutive video frames. @discussion The value of this property is a CMTime specifying the minimum duration of each video frame output by the receiver, placing a lower bound on the amount of time that should separate consecutive frames. This is equivalent to the reciprocal of the maximum frame rate. A value of kCMTimeZero or kCMTimeInvalid indicates an unlimited maximum frame rate. The default value is kCMTimeInvalid. This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On macOS, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
+// The smallest time interval the connection can apply between consecutive video frames.
 //
 // WithVideoMinFrameDuration sets the videoMinFrameDuration property and returns the receiver for chaining.
 func (x *CaptureConnection) WithVideoMinFrameDuration(videoMinFrameDuration coremedia.CMTime) *CaptureConnection {
@@ -106,7 +108,7 @@ func (x *CaptureConnection) WithVideoMinFrameDuration(videoMinFrameDuration core
 	return x
 }
 
-// @property videoMaxFrameDuration @abstract Indicates the maximum time interval at which the receiver should output consecutive video frames. @discussion The value of this property is a CMTime specifying the maximum duration of each video frame output by the receiver, placing an upper bound on the amount of time that should separate consecutive frames. This is equivalent to the reciprocal of the minimum frame rate. A value of kCMTimeZero or kCMTimeInvalid indicates an unlimited minimum frame rate. The default value is kCMTimeInvalid. This property is deprecated on iOS, where min and max frame rate adjustments are applied exclusively at the AVCaptureDevice using the activeVideoMinFrameDuration and activeVideoMaxFrameDuration properties. On macOS, frame rate adjustments are supported both at the AVCaptureDevice and at AVCaptureConnection, enabling connections to output different frame rates.
+// The largest time interval the connection can apply between consecutive video frames.
 //
 // WithVideoMaxFrameDuration sets the videoMaxFrameDuration property and returns the receiver for chaining.
 func (x *CaptureConnection) WithVideoMaxFrameDuration(videoMaxFrameDuration coremedia.CMTime) *CaptureConnection {
@@ -114,7 +116,7 @@ func (x *CaptureConnection) WithVideoMaxFrameDuration(videoMaxFrameDuration core
 	return x
 }
 
-// @method isVideoRotationAngleSupported: @abstract Returns whether the connection supports the given rotation angle in degrees. @param videoRotationAngle A video rotation angle to be checked. @result YES if the connection supports the given video rotation angle, NO otherwise. @discussion The connection's videoRotationAngle property can only be set to a certain angle if this method returns YES for that angle. Only rotation angles of 0, 90, 180 and 270 are supported.
+// Returns a Boolean value that indicates whether the connection supports a rotation angle.
 //
 // IsVideoRotationAngleSupported calls the underlying IsVideoRotationAngleSupported.
 func (x *CaptureConnection) IsVideoRotationAngleSupported(videoRotationAngle float64) bool {

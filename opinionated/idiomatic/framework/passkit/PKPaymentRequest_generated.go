@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a request for payment, including details about payment-processing capabilities, the payment amount, and shipping information.
+//
 // PaymentRequest wraps [raw.PKPaymentRequest] with a fluent Go API.
 type PaymentRequest struct {
 	inner *raw.PKPaymentRequest
@@ -38,6 +40,8 @@ func NewPaymentRequest() *PaymentRequest {
 	return &PaymentRequest{inner: raw.PKPaymentRequestFromID(_id)}
 }
 
+// Your merchant identifier.
+//
 // WithMerchantIdentifier sets the merchantIdentifier property and returns the receiver for chaining.
 func (x *PaymentRequest) WithMerchantIdentifier(merchantIdentifier string) *PaymentRequest {
 	x.inner.SetMerchantIdentifier(foundation.NSStringStringWithUTF8String(merchantIdentifier))
@@ -50,12 +54,16 @@ func (x *PaymentRequest) WithAttributionIdentifier(attributionIdentifier string)
 	return x
 }
 
+// The merchant’s two-letter ISO 3166 country code.
+//
 // WithCountryCode sets the countryCode property and returns the receiver for chaining.
 func (x *PaymentRequest) WithCountryCode(countryCode string) *PaymentRequest {
 	x.inner.SetCountryCode(foundation.NSStringStringWithUTF8String(countryCode))
 	return x
 }
 
+// The payment methods that you support.
+//
 // WithSupportedNetworks sets the collection, converting the Go slice to an NSArray.
 func (x *PaymentRequest) WithSupportedNetworks(items ...*foundation.NSString) *PaymentRequest {
 	if len(items) == 0 {
@@ -74,30 +82,40 @@ func (x *PaymentRequest) WithSupportedNetworks(items ...*foundation.NSString) *P
 	return x
 }
 
+// A bit field of the payment-processing protocols and card types that you support.
+//
 // WithMerchantCapabilities sets the merchantCapabilities property and returns the receiver for chaining.
 func (x *PaymentRequest) WithMerchantCapabilities(merchantCapabilities PKMerchantCapability) *PaymentRequest {
 	x.inner.SetMerchantCapabilities(raw.PKMerchantCapability(merchantCapabilities))
 	return x
 }
 
+// A Boolean value that determines whether the payment sheet displays the coupon code field.
+//
 // WithSupportsCouponCode sets the supportsCouponCode property and returns the receiver for chaining.
 func (x *PaymentRequest) WithSupportsCouponCode(supportsCouponCode bool) *PaymentRequest {
 	x.inner.SetSupportsCouponCode(supportsCouponCode)
 	return x
 }
 
+// The initial coupon code for the payment request.
+//
 // WithCouponCode sets the couponCode property and returns the receiver for chaining.
 func (x *PaymentRequest) WithCouponCode(couponCode string) *PaymentRequest {
 	x.inner.SetCouponCode(foundation.NSStringStringWithUTF8String(couponCode))
 	return x
 }
 
+// An optional four-digit property, in ISO 18245 format, that represents the type of goods or service the merchant provides for the transaction.
+//
 // WithMerchantCategoryCode sets the merchantCategoryCode property and returns the receiver for chaining.
 func (x *PaymentRequest) WithMerchantCategoryCode(merchantCategoryCode int16) *PaymentRequest {
 	x.inner.SetMerchantCategoryCode(merchantCategoryCode)
 	return x
 }
 
+// An array of payment summary item objects that summarize the amount of the payment.
+//
 // WithPaymentSummaryItems sets the collection, converting the Go slice to an NSArray.
 func (x *PaymentRequest) WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequest {
 	if len(items) == 0 {
@@ -116,48 +134,64 @@ func (x *PaymentRequest) WithPaymentSummaryItems(items ...PaymentSummaryItemProv
 	return x
 }
 
+// The three-letter ISO 4217 currency code that determines the currency the payment request uses.
+//
 // WithCurrencyCode sets the currencyCode property and returns the receiver for chaining.
 func (x *PaymentRequest) WithCurrencyCode(currencyCode string) *PaymentRequest {
 	x.inner.SetCurrencyCode(foundation.NSStringStringWithUTF8String(currencyCode))
 	return x
 }
 
+// A list of fields that you need for a billing contact to process the transaction.
+//
 // WithRequiredBillingContactFields sets the requiredBillingContactFields property and returns the receiver for chaining.
 func (x *PaymentRequest) WithRequiredBillingContactFields(requiredBillingContactFields *foundation.NSSet[*foundation.NSString]) *PaymentRequest {
 	x.inner.SetRequiredBillingContactFields(requiredBillingContactFields)
 	return x
 }
 
+// A bit field of billing address fields that you need in order to process the transaction.
+//
 // WithRequiredBillingAddressFields sets the requiredBillingAddressFields property and returns the receiver for chaining.
 func (x *PaymentRequest) WithRequiredBillingAddressFields(requiredBillingAddressFields PKAddressField) *PaymentRequest {
 	x.inner.SetRequiredBillingAddressFields(raw.PKAddressField(requiredBillingAddressFields))
 	return x
 }
 
+// A prepopulated billing address.
+//
 // WithBillingContact sets the billingContact property and returns the receiver for chaining.
 func (x *PaymentRequest) WithBillingContact(billingContact *Contact) *PaymentRequest {
 	x.inner.SetBillingContact(billingContact.Unwrap())
 	return x
 }
 
+// A list of fields that you need for a shipping contact to process the transaction.
+//
 // WithRequiredShippingContactFields sets the requiredShippingContactFields property and returns the receiver for chaining.
 func (x *PaymentRequest) WithRequiredShippingContactFields(requiredShippingContactFields *foundation.NSSet[*foundation.NSString]) *PaymentRequest {
 	x.inner.SetRequiredShippingContactFields(requiredShippingContactFields)
 	return x
 }
 
+// A bit field of shipping address fields that you need in order to process the transaction.
+//
 // WithRequiredShippingAddressFields sets the requiredShippingAddressFields property and returns the receiver for chaining.
 func (x *PaymentRequest) WithRequiredShippingAddressFields(requiredShippingAddressFields PKAddressField) *PaymentRequest {
 	x.inner.SetRequiredShippingAddressFields(raw.PKAddressField(requiredShippingAddressFields))
 	return x
 }
 
+// A prepopulated shipping address.
+//
 // WithShippingContact sets the shippingContact property and returns the receiver for chaining.
 func (x *PaymentRequest) WithShippingContact(shippingContact *Contact) *PaymentRequest {
 	x.inner.SetShippingContact(shippingContact.Unwrap())
 	return x
 }
 
+// An array of shipping method objects that describe the supported shipping methods.
+//
 // WithShippingMethods sets the collection, converting the Go slice to an NSArray.
 func (x *PaymentRequest) WithShippingMethods(items ...*raw.PKShippingMethod) *PaymentRequest {
 	if len(items) == 0 {
@@ -176,30 +210,40 @@ func (x *PaymentRequest) WithShippingMethods(items ...*raw.PKShippingMethod) *Pa
 	return x
 }
 
+// The type of shipping the request uses.
+//
 // WithShippingType sets the shippingType property and returns the receiver for chaining.
 func (x *PaymentRequest) WithShippingType(shippingType PKShippingType) *PaymentRequest {
 	x.inner.SetShippingType(raw.PKShippingType(shippingType))
 	return x
 }
 
+// A value that indicates whether the shipping mode prevents the user from editing the shipping address.
+//
 // WithShippingContactEditingMode sets the shippingContactEditingMode property and returns the receiver for chaining.
 func (x *PaymentRequest) WithShippingContactEditingMode(shippingContactEditingMode PKShippingContactEditingMode) *PaymentRequest {
 	x.inner.SetShippingContactEditingMode(raw.PKShippingContactEditingMode(shippingContactEditingMode))
 	return x
 }
 
+// Application-specific data or state.
+//
 // WithApplicationData sets the applicationData property and returns the receiver for chaining.
 func (x *PaymentRequest) WithApplicationData(applicationData *foundation.NSData) *PaymentRequest {
 	x.inner.SetApplicationData(applicationData)
 	return x
 }
 
+// A list of ISO 3166 country codes to limit payments to cards from specific countries or regions.
+//
 // WithSupportedCountries sets the supportedCountries property and returns the receiver for chaining.
 func (x *PaymentRequest) WithSupportedCountries(supportedCountries *foundation.NSSet[*foundation.NSString]) *PaymentRequest {
 	x.inner.SetSupportedCountries(supportedCountries)
 	return x
 }
 
+// An array of payment token contexts to request multiple payment tokens with one payment token per context.
+//
 // WithMultiTokenContexts sets the collection, converting the Go slice to an NSArray.
 func (x *PaymentRequest) WithMultiTokenContexts(items ...*raw.PKPaymentTokenContext) *PaymentRequest {
 	if len(items) == 0 {
@@ -218,31 +262,39 @@ func (x *PaymentRequest) WithMultiTokenContexts(items ...*raw.PKPaymentTokenCont
 	return x
 }
 
+// An optional request to set up a recurring payment, typically a subscription.
+//
 // WithRecurringPaymentRequest sets the recurringPaymentRequest property and returns the receiver for chaining.
 func (x *PaymentRequest) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequest {
 	x.inner.SetRecurringPaymentRequest(recurringPaymentRequest.Unwrap())
 	return x
 }
 
+// An optional request to set up an automatic reload payment, such as a store card top-up.
+//
 // WithAutomaticReloadPaymentRequest sets the automaticReloadPaymentRequest property and returns the receiver for chaining.
 func (x *PaymentRequest) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequest {
 	x.inner.SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest.Unwrap())
 	return x
 }
 
+// A request to set up a deferred payment, such as a hotel booking or a pre-order.
+//
 // WithDeferredPaymentRequest sets the deferredPaymentRequest property and returns the receiver for chaining.
 func (x *PaymentRequest) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequest {
 	x.inner.SetDeferredPaymentRequest(deferredPaymentRequest.Unwrap())
 	return x
 }
 
+// A value that indicates whether Apple Pay Later is available for a transaction.
+//
 // WithApplePayLaterAvailability sets the applePayLaterAvailability property and returns the receiver for chaining.
 func (x *PaymentRequest) WithApplePayLaterAvailability(applePayLaterAvailability PKApplePayLaterAvailability) *PaymentRequest {
 	x.inner.SetApplePayLaterAvailability(raw.PKApplePayLaterAvailability(applePayLaterAvailability))
 	return x
 }
 
-// A Boolean value that indicates whether this payment request is being made by a delegated entity on behalf of a merchant. Set this property to YES when your app is acting as an Apple Pay delegate and presenting the payment sheet on behalf of another merchant. The default value is NO. @note This property requires your app to be registered as an Apple Pay delegate and to have the com.apple.developer.in-app-payments-delegate entitlement.
+// A Boolean value that indicates whether this payment request is being made by a delegated entity on behalf of a merchant.
 //
 // WithIsDelegatedRequest sets the isDelegatedRequest property and returns the receiver for chaining.
 func (x *PaymentRequest) WithIsDelegatedRequest(isDelegatedRequest bool) *PaymentRequest {

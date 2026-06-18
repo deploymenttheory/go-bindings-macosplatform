@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines a shipping method for delivering physical goods.
+//
 // ShippingMethod wraps [raw.PKShippingMethod] with a fluent Go API.
 type ShippingMethod struct {
 	inner *raw.PKShippingMethod
@@ -37,36 +39,48 @@ func NewShippingMethod() *ShippingMethod {
 	return &ShippingMethod{inner: raw.PKShippingMethodFromID(_id)}
 }
 
+// A unique identifier for the shipping method, used by the app.
+//
 // WithIdentifier sets the identifier property and returns the receiver for chaining.
 func (x *ShippingMethod) WithIdentifier(identifier string) *ShippingMethod {
 	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
 	return x
 }
 
+// A user-readable description of the shipping method.
+//
 // WithDetail sets the detail property and returns the receiver for chaining.
 func (x *ShippingMethod) WithDetail(detail string) *ShippingMethod {
 	x.inner.SetDetail(foundation.NSStringStringWithUTF8String(detail))
 	return x
 }
 
+// An expected range of delivery or shipping dates for a package, or the time range when an item is available for pickup.
+//
 // WithDateComponentsRange sets the dateComponentsRange property and returns the receiver for chaining.
 func (x *ShippingMethod) WithDateComponentsRange(dateComponentsRange *DateComponentsRange) *ShippingMethod {
 	x.inner.SetDateComponentsRange(dateComponentsRange.Unwrap())
 	return x
 }
 
+// A short, localized description of the item.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ShippingMethod) WithLabel(label string) *ShippingMethod {
 	x.inner.PKPaymentSummaryItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// The summary item’s amount.
+//
 // WithAmount sets the amount property and returns the receiver for chaining.
 func (x *ShippingMethod) WithAmount(amount *foundation.NSDecimalNumber) *ShippingMethod {
 	x.inner.PKPaymentSummaryItem.SetAmount(amount)
 	return x
 }
 
+// The summary item’s type that indicates whether the amount is final.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *ShippingMethod) WithType(type_ PKPaymentSummaryItemType) *ShippingMethod {
 	x.inner.PKPaymentSummaryItem.SetType(raw.PKPaymentSummaryItemType(type_))

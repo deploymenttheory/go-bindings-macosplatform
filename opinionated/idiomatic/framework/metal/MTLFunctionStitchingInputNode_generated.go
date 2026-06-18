@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A call graph node that describes an input to the call graph.
+//
 // FunctionStitchingInputNode wraps [raw.MTLFunctionStitchingInputNode] with a fluent Go API.
 type FunctionStitchingInputNode struct {
 	inner *raw.MTLFunctionStitchingInputNode
@@ -29,6 +31,8 @@ func FunctionStitchingInputNodeFromID(id objc.ID) *FunctionStitchingInputNode {
 	return &FunctionStitchingInputNode{inner: raw.MTLFunctionStitchingInputNodeFromID(id)}
 }
 
+// Creates a new input node.
+//
 // NewFunctionStitchingInputNodeWithArgumentIndex creates a new [FunctionStitchingInputNode].
 func NewFunctionStitchingInputNodeWithArgumentIndex(argument uint) *FunctionStitchingInputNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLFunctionStitchingInputNode")), objc.RegisterName("alloc"))
@@ -36,6 +40,8 @@ func NewFunctionStitchingInputNodeWithArgumentIndex(argument uint) *FunctionStit
 	return &FunctionStitchingInputNode{inner: raw.MTLFunctionStitchingInputNodeFromID(_id)}
 }
 
+// The index in the command’s buffer argument table that declares which data to read for this input node.
+//
 // WithArgumentIndex sets the argumentIndex property and returns the receiver for chaining.
 func (x *FunctionStitchingInputNode) WithArgumentIndex(argumentIndex uint) *FunctionStitchingInputNode {
 	x.inner.SetArgumentIndex(argumentIndex)

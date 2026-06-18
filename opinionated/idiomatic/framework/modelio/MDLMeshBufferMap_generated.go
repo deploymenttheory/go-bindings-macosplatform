@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An object that manages access to a memory buffer used for the data storage of a Model I/O mesh.
+//
 // MeshBufferMap wraps [raw.MDLMeshBufferMap] with a fluent Go API.
 type MeshBufferMap struct {
 	inner *raw.MDLMeshBufferMap
@@ -30,7 +32,7 @@ func MeshBufferMapFromID(id objc.ID) *MeshBufferMap {
 	return &MeshBufferMap{inner: raw.MDLMeshBufferMapFromID(id)}
 }
 
-// @method initWithBytes:deallocator: @abstract Called by implementor of MDLMeshBuffer protocol to create the map and arrange for unmapping on deallocation.
+// Initializes a buffer map object to manage access to the specified memory.
 //
 // NewMeshBufferMapWithBytesDeallocator creates a new [MeshBufferMap].
 func NewMeshBufferMapWithBytesDeallocator(bytes_ unsafe.Pointer, deallocator func()) *MeshBufferMap {

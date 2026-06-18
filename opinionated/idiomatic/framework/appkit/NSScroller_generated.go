@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An object that controls scrolling of a document view within a scroll view or other type of container view.
+//
 // Scroller wraps [raw.NSScroller] with a fluent Go API.
 type Scroller struct {
 	inner *raw.NSScroller
@@ -40,168 +42,224 @@ func NewScroller() *Scroller {
 	return &Scroller{inner: raw.NSScrollerFromID(_id)}
 }
 
+// The scroller style for this scroller.
+//
 // WithScrollerStyle sets the scrollerStyle property and returns the receiver for chaining.
 func (x *Scroller) WithScrollerStyle(scrollerStyle NSScrollerStyle) *Scroller {
 	x.inner.SetScrollerStyle(raw.NSScrollerStyle(scrollerStyle))
 	return x
 }
 
+// The scroller’s knob style.
+//
 // WithKnobStyle sets the knobStyle property and returns the receiver for chaining.
 func (x *Scroller) WithKnobStyle(knobStyle NSScrollerKnobStyle) *Scroller {
 	x.inner.SetKnobStyle(raw.NSScrollerKnobStyle(knobStyle))
 	return x
 }
 
+// The proportion of the knob slot that the knob should fill.
+//
 // WithKnobProportion sets the knobProportion property and returns the receiver for chaining.
 func (x *Scroller) WithKnobProportion(knobProportion float64) *Scroller {
 	x.inner.SetKnobProportion(knobProportion)
 	return x
 }
 
+// The location of the scroll buttons within the scroller, as described in NSScrollArrowPosition.
+//
 // WithArrowsPosition sets the arrowsPosition property and returns the receiver for chaining.
 func (x *Scroller) WithArrowsPosition(arrowsPosition NSScrollArrowPosition) *Scroller {
 	x.inner.SetArrowsPosition(raw.NSScrollArrowPosition(arrowsPosition))
 	return x
 }
 
+// The scroller’s control tint.
+//
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
 func (x *Scroller) WithControlTint(controlTint NSControlTint) *Scroller {
 	x.inner.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
+// The target object that receives action messages from the cell.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *Scroller) WithTarget(target objc.ID) *Scroller {
 	x.inner.NSControl.SetTarget(target)
 	return x
 }
 
+// The default action-message selector associated with the control.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *Scroller) WithAction(action objc.SEL) *Scroller {
 	x.inner.NSControl.SetAction(action)
 	return x
 }
 
+// The tag identifying the receiver (not the tag of the receiver’s cell).
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *Scroller) WithTag(tag int) *Scroller {
 	x.inner.NSControl.SetTag(tag)
 	return x
 }
 
+// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+//
 // WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
 func (x *Scroller) WithIgnoresMultiClick(ignoresMultiClick bool) *Scroller {
 	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
 	return x
 }
 
+// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *Scroller) WithContinuous(continuous bool) *Scroller {
 	x.inner.NSControl.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver reacts to mouse events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *Scroller) WithEnabled(enabled bool) *Scroller {
 	x.inner.NSControl.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the receiver refuses the first responder role.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *Scroller) WithRefusesFirstResponder(refusesFirstResponder bool) *Scroller {
 	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value that indicates whether the cell is highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *Scroller) WithHighlighted(highlighted bool) *Scroller {
 	x.inner.NSControl.SetHighlighted(highlighted)
 	return x
 }
 
+// The size of the control.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *Scroller) WithControlSize(controlSize NSControlSize) *Scroller {
 	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The receiver’s formatter.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *Scroller) WithFormatter(formatter *foundation.NSFormatter) *Scroller {
 	x.inner.NSControl.SetFormatter(formatter)
 	return x
 }
 
+// The value of the receiver’s cell as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *Scroller) WithObjectValue(objectValue objc.ID) *Scroller {
 	x.inner.NSControl.SetObjectValue(objectValue)
 	return x
 }
 
+// The value of the receiver’s cell as an NSString object.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *Scroller) WithStringValue(stringValue string) *Scroller {
 	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The value of the receiver’s cell as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *Scroller) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Scroller {
 	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *Scroller) WithIntValue(intValue int) *Scroller {
 	x.inner.NSControl.SetIntValue(intValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *Scroller) WithIntegerValue(integerValue int) *Scroller {
 	x.inner.NSControl.SetIntegerValue(integerValue)
 	return x
 }
 
+// The value of the receiver’s cell as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *Scroller) WithFloatValue(floatValue float32) *Scroller {
 	x.inner.NSControl.SetFloatValue(floatValue)
 	return x
 }
 
+// The value of the receiver’s cell as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *Scroller) WithDoubleValue(doubleValue float64) *Scroller {
 	x.inner.NSControl.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The font used to draw text in the receiver’s cell.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *Scroller) WithFont(font *Font) *Scroller {
 	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *Scroller) WithUsesSingleLineMode(usesSingleLineMode bool) *Scroller {
 	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// The line break mode to use for text in the control’s cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *Scroller) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Scroller {
 	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The alignment mode of the text in the receiver’s cell.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *Scroller) WithAlignment(alignment NSTextAlignment) *Scroller {
 	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *Scroller) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Scroller {
 	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+//
 // WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
 func (x *Scroller) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Scroller {
 	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
@@ -256,6 +314,8 @@ func (x *Scroller) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptio
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *Scroller) WithFrame(frame corefoundation.CGRect) *Scroller {
 	x.inner.NSControl.NSView.SetFrame(frame)
@@ -280,6 +340,8 @@ func (x *Scroller) WithBoundsRotation(boundsRotation float64) *Scroller {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *Scroller) WithBounds(bounds corefoundation.CGRect) *Scroller {
 	x.inner.NSControl.NSView.SetBounds(bounds)
@@ -292,6 +354,8 @@ func (x *Scroller) WithCanDrawConcurrently(canDrawConcurrently bool) *Scroller {
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *Scroller) WithNeedsDisplay(needsDisplay bool) *Scroller {
 	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
@@ -478,7 +542,7 @@ func (x *Scroller) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundat
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *Scroller) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Scroller {
@@ -534,55 +598,75 @@ func (x *Scroller) WithPressureConfiguration(pressureConfiguration *PressureConf
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *Scroller) WithNextResponder(nextResponder ResponderProvider) *Scroller {
 	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *Scroller) WithMenu(menu *Menu) *Scroller {
 	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *Scroller) WithUserActivity(userActivity *foundation.NSUserActivity) *Scroller {
 	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *Scroller) WithTouchBar(touchBar *TouchBar) *Scroller {
 	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Returns the rectangle occupied by aPart, which for this method is interpreted literally rather than as an indicator of scrolling direction.
+//
 // RectForPart calls the underlying RectForPart.
 func (x *Scroller) RectForPart(partCode NSScrollerPart) corefoundation.CGRect {
 	return x.inner.RectForPart(raw.NSScrollerPart(partCode))
 }
 
+// Checks to see if there is enough room in the receiver to display the knob and buttons.
+//
 // CheckSpaceForParts calls the underlying CheckSpaceForParts.
 func (x *Scroller) CheckSpaceForParts() {
 	x.inner.CheckSpaceForParts()
 }
 
+// Draws the knob.
+//
 // DrawKnob calls the underlying DrawKnob.
 func (x *Scroller) DrawKnob() {
 	x.inner.DrawKnob()
 }
 
+// Draws the portion of the scroller’s track, possibly including the line increment and decrement arrow buttons, that falls in the given rectangle.
+//
 // DrawKnobSlotInRectHighlight calls the underlying DrawKnobSlotInRectHighlight.
 func (x *Scroller) DrawKnobSlotInRectHighlight(slotRect corefoundation.CGRect, flag bool) {
 	x.inner.DrawKnobSlotInRectHighlight(slotRect, flag)
 }
 
+// Returns the part that would be hit by a mouse-down event at aPoint (expressed in the window’s coordinate system).
+//
 // TestPart calls the underlying TestPart.
 func (x *Scroller) TestPart(point corefoundation.CGPoint) NSScrollerPart {
 	return NSScrollerPart(x.inner.TestPart(point))
 }
 
+// Tracks the knob and sends action messages to the receiver’s target.
+//
 // TrackKnob calls the underlying TrackKnob.
 func (x *Scroller) TrackKnob(event *raw.NSEvent) {
 	x.inner.TrackKnob(event)
@@ -628,26 +712,36 @@ func (x *Scroller) KnobProportion() float64 {
 	return x.inner.KnobProportion()
 }
 
+// Sets the position of the knob to aFloat, which is a value from 0.0 (indicating the top or left end) to 1.0 (the bottom or right end).
+//
 // SetFloatValueKnobProportion calls the underlying SetFloatValueKnobProportion.
 func (x *Scroller) SetFloatValueKnobProportion(value float32, proportion float64) {
 	x.inner.SetFloatValueKnobProportion(value, proportion)
 }
 
+// Highlights or unhighlights the scroll button the user clicked.
+//
 // Highlight calls the underlying Highlight.
 func (x *Scroller) Highlight(flag bool) {
 	x.inner.Highlight(flag)
 }
 
+// Tracks the scroll buttons and sends action messages to the receiver’s target.
+//
 // TrackScrollButtons calls the underlying TrackScrollButtons.
 func (x *Scroller) TrackScrollButtons(event *raw.NSEvent) {
 	x.inner.TrackScrollButtons(event)
 }
 
+// Caches images for the scroll buttons and knob.
+//
 // DrawParts calls the underlying DrawParts.
 func (x *Scroller) DrawParts() {
 	x.inner.DrawParts()
 }
 
+// Draws the scroll button indicated by arrow, which is either NSScrollerIncrementArrow (the down or right scroll button) or NSScrollerDecrementArrow (up or left).
+//
 // DrawArrowHighlight calls the underlying DrawArrowHighlight.
 func (x *Scroller) DrawArrowHighlight(whichArrow NSScrollerArrow, flag bool) {
 	x.inner.DrawArrowHighlight(raw.NSScrollerArrow(whichArrow), flag)

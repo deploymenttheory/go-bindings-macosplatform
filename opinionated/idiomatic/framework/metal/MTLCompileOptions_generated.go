@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// Compilation settings for a Metal shader library.
+//
 // CompileOptions wraps [raw.MTLCompileOptions] with a fluent Go API.
 type CompileOptions struct {
 	inner *raw.MTLCompileOptions
@@ -38,7 +40,7 @@ func NewCompileOptions() *CompileOptions {
 	return &CompileOptions{inner: raw.MTLCompileOptionsFromID(_id)}
 }
 
-// @property preprocessorNames @abstract List of preprocessor macros to consider to when compiling this program. Specified as key value pairs, using a NSDictionary. The keys must be NSString objects and values can be either NSString or NSNumber objects. @discussion The default value is nil.
+// A list of preprocessor macros to apply when compiling the library source.
 //
 // WithPreprocessorMacros sets the preprocessorMacros property and returns the receiver for chaining.
 func (x *CompileOptions) WithPreprocessorMacros(preprocessorMacros *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) *CompileOptions {
@@ -46,7 +48,7 @@ func (x *CompileOptions) WithPreprocessorMacros(preprocessorMacros *foundation.N
 	return x
 }
 
-// @property fastMathEnabled @abstract If YES, enables the compiler to perform optimizations for floating-point arithmetic that may violate the IEEE 754 standard. It also enables the high precision variant of math functions for single precision floating-point scalar and vector types. fastMathEnabled defaults to YES.
+// A Boolean value that indicates whether the compiler can perform optimizations for floating-point arithmetic that may violate the IEEE 754 standard.
 //
 // WithFastMathEnabled sets the fastMathEnabled property and returns the receiver for chaining.
 func (x *CompileOptions) WithFastMathEnabled(fastMathEnabled bool) *CompileOptions {
@@ -54,7 +56,7 @@ func (x *CompileOptions) WithFastMathEnabled(fastMathEnabled bool) *CompileOptio
 	return x
 }
 
-// @property mathMode @abstract Sets the floating-point arithmetic optimizations. Default depends on the language standard version.
+// An indication of whether the compiler can perform optimizations for floating-point arithmetic that may violate the IEEE 754 standard.
 //
 // WithMathMode sets the mathMode property and returns the receiver for chaining.
 func (x *CompileOptions) WithMathMode(mathMode MTLMathMode) *CompileOptions {
@@ -62,7 +64,7 @@ func (x *CompileOptions) WithMathMode(mathMode MTLMathMode) *CompileOptions {
 	return x
 }
 
-// @property mathFloatingPointFunctions @abstract Sets the default math functions for single precision floating-point. Default is `MTLMathFloatingPointFunctionsFast`.
+// The FP32 math functions Metal uses.
 //
 // WithMathFloatingPointFunctions sets the mathFloatingPointFunctions property and returns the receiver for chaining.
 func (x *CompileOptions) WithMathFloatingPointFunctions(mathFloatingPointFunctions MTLMathFloatingPointFunctions) *CompileOptions {
@@ -70,7 +72,7 @@ func (x *CompileOptions) WithMathFloatingPointFunctions(mathFloatingPointFunctio
 	return x
 }
 
-// @property languageVersion @abstract set the metal language version used to interpret the source.
+// The language version for interpreting the library source code.
 //
 // WithLanguageVersion sets the languageVersion property and returns the receiver for chaining.
 func (x *CompileOptions) WithLanguageVersion(languageVersion MTLLanguageVersion) *CompileOptions {
@@ -78,7 +80,7 @@ func (x *CompileOptions) WithLanguageVersion(languageVersion MTLLanguageVersion)
 	return x
 }
 
-// @property type @abstract Which type the library should be compiled as. The default value is MTLLibraryTypeExecutable. @discussion MTLLibraryTypeExecutable is suitable to build a library of "kernel", "vertex" and "fragment" qualified functions. MTLLibraryType is suitable when the compilation result will instead be used to instantiate a MTLDynamicLibrary. MTLDynamicLibrary contains no qualified functions, but it's unqualified functions and variables can be used as an external dependency for compiling other libraries.
+// The kind of library to create.
 //
 // WithLibraryType sets the libraryType property and returns the receiver for chaining.
 func (x *CompileOptions) WithLibraryType(libraryType MTLLibraryType) *CompileOptions {
@@ -86,7 +88,7 @@ func (x *CompileOptions) WithLibraryType(libraryType MTLLibraryType) *CompileOpt
 	return x
 }
 
-// @property installName @abstract The install name of this dynamic library. @discussion The install name is used when a pipeline state is created that depends, directly or indirectly, on a dynamic library. The installName is embedded into any other MTLLibrary that links against the compilation result. This property should be set such that the dynamic library can be found in the file system at the time a pipeline state is created. Specify one of: - an absolute path to a file from which the dynamic library can be loaded, or - a path relative to \@executable_path, where \@executable_path is substituted with the directory name from which the MTLLibrary containing the MTLFunction entrypoint used to create the pipeline state is loaded, or - a path relative to \@loader_path, where \@loader_path is substituted with the directory name from which the MTLLibrary with the reference to this installName embedded is loaded. The first is appropriate for MTLDynamicLibrary written to the file-system using its serializeToURL:error: method on the current device. The others are appropriate when the MTLDynamicLibrary is installed as part of a bundle or app, where the absolute path is not known. This property is ignored when the type property is not set to MTLLibraryTypeDynamic. This propery should not be null if the property type is set to MTLLibraryTypeDynamic: the compilation will fail in that scenario.
+// For a dynamic library, the name to use when installing the library.
 //
 // WithInstallName sets the installName property and returns the receiver for chaining.
 func (x *CompileOptions) WithInstallName(installName string) *CompileOptions {
@@ -94,7 +96,7 @@ func (x *CompileOptions) WithInstallName(installName string) *CompileOptions {
 	return x
 }
 
-// @property preserveInvariance @abstract If YES,  set the compiler to compile shaders to preserve invariance.  The default is false.
+// A Boolean value that indicates whether the compiler compiles vertex shaders conservatively to generate consistent position calculations.
 //
 // WithPreserveInvariance sets the preserveInvariance property and returns the receiver for chaining.
 func (x *CompileOptions) WithPreserveInvariance(preserveInvariance bool) *CompileOptions {
@@ -102,7 +104,7 @@ func (x *CompileOptions) WithPreserveInvariance(preserveInvariance bool) *Compil
 	return x
 }
 
-// @property optimizationLevel @abstract Sets the compiler optimization level.
+// An option that tells the compiler what to prioritize when it compiles Metal shader code.
 //
 // WithOptimizationLevel sets the optimizationLevel property and returns the receiver for chaining.
 func (x *CompileOptions) WithOptimizationLevel(optimizationLevel MTLLibraryOptimizationLevel) *CompileOptions {
@@ -142,7 +144,7 @@ func (x *CompileOptions) WithRequiredThreadsPerThreadgroup(requiredThreadsPerThr
 	return x
 }
 
-// @property enableLogging @abstract If YES,  set the compiler to enable any logging in the shader. The default is false.
+// A Boolean value that enables shader logging.
 //
 // WithEnableLogging sets the enableLogging property and returns the receiver for chaining.
 func (x *CompileOptions) WithEnableLogging(enableLogging bool) *CompileOptions {

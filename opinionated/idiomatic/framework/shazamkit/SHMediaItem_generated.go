@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the metadata for a reference signature.
+//
 // MediaItem wraps [raw.SHMediaItem] with a fluent Go API.
 type MediaItem struct {
 	inner *raw.SHMediaItem
@@ -37,14 +39,14 @@ func NewMediaItem() *MediaItem {
 	return &MediaItem{inner: raw.SHMediaItemFromID(_id)}
 }
 
-// Accesses the property for the specified key for reading. - Parameters: - property: The key for the property. - Returns: The value of the property; otherwise, `nil`.
+// Accesses the property for the specified key for reading.
 //
 // ValueForProperty calls the underlying ValueForProperty.
 func (x *MediaItem) ValueForProperty(property *foundation.NSString) objc.ID {
 	return x.inner.ValueForProperty(property)
 }
 
-// Accesses the property for the specified key for reading. - Parameters: - key: The key for the media item property. - Returns: The value of the property; otherwise, `nil`.
+// Accesses the property for the specified key for reading.
 //
 // ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
 func (x *MediaItem) ObjectForKeyedSubscript(key *foundation.NSString) objc.ID {

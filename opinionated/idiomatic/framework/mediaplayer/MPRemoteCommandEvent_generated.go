@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of a command sent by an external media player.
+//
 // RemoteCommandEvent wraps [raw.MPRemoteCommandEvent] with a fluent Go API.
 type RemoteCommandEvent struct {
 	inner *raw.MPRemoteCommandEvent

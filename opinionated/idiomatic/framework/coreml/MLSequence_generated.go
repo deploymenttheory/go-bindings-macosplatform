@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A machine learning collection type that stores a series of strings or integers.
+//
 // Sequence wraps [raw.MLSequence] with a fluent Go API.
 type Sequence struct {
 	inner *raw.MLSequence

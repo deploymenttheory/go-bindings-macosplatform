@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Represents focus & detection information at a particular time. Indicates where to focus (disparity) and what to focus on (detection) at a particular time in the movie. It also provides access to all known detections that can be focused on at that time. Utility methods support looking up a detection by detectionID or detectionGroupID. Frames are obtained from the cinematic script using `frame(at:tolerance:)` or `frames(in:)`.
+// An object that represents what to focus on, and where to focus, in a given movie frame.
 //
 // ScriptFrame wraps [raw.CNScriptFrame] with a fluent Go API.
 type ScriptFrame struct {
@@ -77,7 +77,7 @@ func (x *ScriptFrame) AllDetections() []*Detection {
 	})
 }
 
-// The detection in this frame with the given detection ID, if any.
+// The detection in the frame with the given detection ID, if any.
 //
 // DetectionForID calls the underlying DetectionForID.
 func (x *ScriptFrame) DetectionForID(detectionID int64) *Detection {
@@ -88,7 +88,7 @@ func (x *ScriptFrame) DetectionForID(detectionID int64) *Detection {
 	return &Detection{inner: _r}
 }
 
-// The best detection to focus on in this frame among those with the given detectionGroupID. For example, a face is preferred to the corresponding torso, even though both have the same detectionGroupID.
+// The best detection to focus on in a frame among those within the given detection group.
 //
 // BestDetectionForGroupID calls the underlying BestDetectionForGroupID.
 func (x *ScriptFrame) BestDetectionForGroupID(detectionGroupID int64) *Detection {

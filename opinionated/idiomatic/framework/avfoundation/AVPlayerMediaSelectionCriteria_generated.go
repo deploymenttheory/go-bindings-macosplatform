@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that specifies the preferred languages and media characteristics for a player.
+//
 // PlayerMediaSelectionCriteria wraps [raw.AVPlayerMediaSelectionCriteria] with a fluent Go API.
 type PlayerMediaSelectionCriteria struct {
 	inner *raw.AVPlayerMediaSelectionCriteria
@@ -31,7 +33,7 @@ func PlayerMediaSelectionCriteriaFromID(id objc.ID) *PlayerMediaSelectionCriteri
 	return &PlayerMediaSelectionCriteria{inner: raw.AVPlayerMediaSelectionCriteriaFromID(id)}
 }
 
-// @method		initWithPreferredLanguages:preferredMediaCharacteristics: @abstract		Creates an instance of AVPlayerMediaSelectionCriteria. @param		preferredLanguages An NSArray of NSStrings containing language identifiers, in order of desirability, that are preferred for selection. Can be nil. @param		preferredMediaCharacteristics An NSArray of AVMediaCharacteristics indicating additional media characteristics, in order of desirability, that are preferred when selecting media with the characteristic for which the receiver is set on the AVPlayer as the selection criteria. Can be nil. @result		An instance of AVPlayerMediaSelectionCriteria.
+// Creates media selection criteria with the preferred languages and media characteristics.
 //
 // NewPlayerMediaSelectionCriteriaWithPreferredLanguagesPreferredMediaCharacteristics creates a new [PlayerMediaSelectionCriteria].
 func NewPlayerMediaSelectionCriteriaWithPreferredLanguagesPreferredMediaCharacteristics(preferredLanguages *foundation.NSArray[*foundation.NSString], preferredMediaCharacteristics *foundation.NSArray[*foundation.NSString]) *PlayerMediaSelectionCriteria {
@@ -40,7 +42,7 @@ func NewPlayerMediaSelectionCriteriaWithPreferredLanguagesPreferredMediaCharacte
 	return &PlayerMediaSelectionCriteria{inner: raw.AVPlayerMediaSelectionCriteriaFromID(_id)}
 }
 
-// @method		initWithPrincipalMediaCharacteristics:principalMediaCharacteristics:preferredLanguages:preferredMediaCharacteristics: @abstract		Creates an instance of AVPlayerMediaSelectionCriteria. @param		principalMediaCharacteristics An NSArray of AVMediaCharacteristics indicating media characteristics that are considered essential when selecting media with the characteristic for which the receiver is set on the AVPlayer as the selection criteria. Can be nil. @param		preferredLanguages An NSArray of NSStrings containing language identifiers, in order of desirability, that are preferred for selection. Can be nil. @param		preferredMediaCharacteristics An NSArray of AVMediaCharacteristics indicating additional media characteristics, in order of desirability, that are preferred when selecting media with the characteristic for which the receiver is set on the AVPlayer as the selection criteria. Can be nil. @result		An instance of AVPlayerMediaSelectionCriteria. @discussion  Note that even though principal media characteristics, when present, will override language preferences when making a selection within a specific media selection group, language preferences may still pertain to selections in other groups. For example, language preferences for the group that corresponds to the audible characteristic may be considered when choosing whether or not to select non-forced subtitles for translation purposes.
+// Creates media selection criteria with the principal media characteristics, and preferred languages and media characteristics.
 //
 // NewPlayerMediaSelectionCriteriaWithPrincipalMediaCharacteristicsPreferredLanguagesPreferredMediaCharacteristics creates a new [PlayerMediaSelectionCriteria].
 func NewPlayerMediaSelectionCriteriaWithPrincipalMediaCharacteristicsPreferredLanguagesPreferredMediaCharacteristics(principalMediaCharacteristics *foundation.NSArray[*foundation.NSString], preferredLanguages *foundation.NSArray[*foundation.NSString], preferredMediaCharacteristics *foundation.NSArray[*foundation.NSString]) *PlayerMediaSelectionCriteria {

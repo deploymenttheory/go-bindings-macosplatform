@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract data class for a diagnostic.
+//
 // Diagnostic wraps [raw.MXDiagnostic] with a fluent Go API.
 type Diagnostic struct {
 	inner *raw.MXDiagnostic
@@ -37,14 +39,14 @@ func NewDiagnostic() *Diagnostic {
 	return &Diagnostic{inner: raw.MXDiagnosticFromID(_id)}
 }
 
-// @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this diagnostic. @result        An NSData object containing the JSON representation
+// Returns the contents of the diagnostic in JSON format.
 //
 // JSONRepresentation calls the underlying JSONRepresentation.
 func (x *Diagnostic) JSONRepresentation() *foundation.NSData {
 	return x.inner.JSONRepresentation()
 }
 
-// @method        dictionaryRepresentation @abstract      Convenience method to return a NSDictionary representation of this diagnostic. @result        An NSDictionary object containing the dictionary representation
+// Returns the contents of a diagnostic as a dictionary.
 //
 // DictionaryRepresentation calls the underlying DictionaryRepresentation.
 func (x *Diagnostic) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {

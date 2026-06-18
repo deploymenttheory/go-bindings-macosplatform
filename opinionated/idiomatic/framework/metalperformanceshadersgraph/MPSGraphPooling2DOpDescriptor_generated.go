@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The class that defines the parameters for a 2D pooling operation.
+//
 // GraphPooling2DOpDescriptor wraps [raw.MPSGraphPooling2DOpDescriptor] with a fluent Go API.
 type GraphPooling2DOpDescriptor struct {
 	inner *raw.MPSGraphPooling2DOpDescriptor
@@ -52,7 +54,7 @@ func (x *GraphPooling2DOpDescriptor) WithKernelHeight(kernelHeight uint) *GraphP
 	return x
 }
 
-// Defines the stride for the width dimension. Default value: 1.
+// Defines the stride for the width dimension.
 //
 // WithStrideInX sets the strideInX property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithStrideInX(strideInX uint) *GraphPooling2DOpDescriptor {
@@ -60,7 +62,7 @@ func (x *GraphPooling2DOpDescriptor) WithStrideInX(strideInX uint) *GraphPooling
 	return x
 }
 
-// Defines the stride for the height dimension. Default value: 1.
+// Defines the stride for the height dimension.
 //
 // WithStrideInY sets the strideInY property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithStrideInY(strideInY uint) *GraphPooling2DOpDescriptor {
@@ -68,7 +70,7 @@ func (x *GraphPooling2DOpDescriptor) WithStrideInY(strideInY uint) *GraphPooling
 	return x
 }
 
-// Defines the dilation rate for the width dimension. Default value: 1.
+// Defines the dilation rate for the width dimension.
 //
 // WithDilationRateInX sets the dilationRateInX property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithDilationRateInX(dilationRateInX uint) *GraphPooling2DOpDescriptor {
@@ -76,7 +78,7 @@ func (x *GraphPooling2DOpDescriptor) WithDilationRateInX(dilationRateInX uint) *
 	return x
 }
 
-// Defines the dilation rate for the height dimension. Default value: 1.
+// Defines the dilation rate for the height dimension.
 //
 // WithDilationRateInY sets the dilationRateInY property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithDilationRateInY(dilationRateInY uint) *GraphPooling2DOpDescriptor {
@@ -84,7 +86,7 @@ func (x *GraphPooling2DOpDescriptor) WithDilationRateInY(dilationRateInY uint) *
 	return x
 }
 
-// Defines the explicit padding value for the width dimension to add before the data. Default value: 0.
+// Defines the explicit padding value for the width dimension to add before the data.
 //
 // WithPaddingLeft sets the paddingLeft property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithPaddingLeft(paddingLeft uint) *GraphPooling2DOpDescriptor {
@@ -92,7 +94,7 @@ func (x *GraphPooling2DOpDescriptor) WithPaddingLeft(paddingLeft uint) *GraphPoo
 	return x
 }
 
-// Defines the explicit padding value for the width dimension to add after the data. Default value: 0.
+// Defines the explicit padding value for the width dimension to add after the data.
 //
 // WithPaddingRight sets the paddingRight property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithPaddingRight(paddingRight uint) *GraphPooling2DOpDescriptor {
@@ -100,7 +102,7 @@ func (x *GraphPooling2DOpDescriptor) WithPaddingRight(paddingRight uint) *GraphP
 	return x
 }
 
-// Defines the explicit padding value for the height dimension to add before the data. Default value: 0.
+// Defines the explicit padding value for the height dimension to add before the data.
 //
 // WithPaddingTop sets the paddingTop property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithPaddingTop(paddingTop uint) *GraphPooling2DOpDescriptor {
@@ -108,7 +110,7 @@ func (x *GraphPooling2DOpDescriptor) WithPaddingTop(paddingTop uint) *GraphPooli
 	return x
 }
 
-// Defines the explicit padding value for the height dimension to add after the data. Default value: 0.
+// Defines the explicit padding value for the height dimension to add after the data.
 //
 // WithPaddingBottom sets the paddingBottom property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithPaddingBottom(paddingBottom uint) *GraphPooling2DOpDescriptor {
@@ -116,7 +118,7 @@ func (x *GraphPooling2DOpDescriptor) WithPaddingBottom(paddingBottom uint) *Grap
 	return x
 }
 
-// Defines what kind of padding graph applies to the operation. Default value: `MPSGraphPaddingStyleExplicit`.
+// Defines what kind of padding graph applies to the operation.
 //
 // WithPaddingStyle sets the paddingStyle property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphPooling2DOpDescriptor {
@@ -124,7 +126,7 @@ func (x *GraphPooling2DOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPaddi
 	return x
 }
 
-// Defines the data layout of the input data in the forward pass. See: “MPSGraphTensorNamedDataLayout“.
+// Defines the data layout of the input data in the forward pass. See: MPSGraphTensorNamedDataLayout.
 //
 // WithDataLayout sets the dataLayout property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithDataLayout(dataLayout MPSGraphTensorNamedDataLayout) *GraphPooling2DOpDescriptor {
@@ -132,7 +134,7 @@ func (x *GraphPooling2DOpDescriptor) WithDataLayout(dataLayout MPSGraphTensorNam
 	return x
 }
 
-// Defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
+// Defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with maxPooling2DReturnIndicesWithSourceTensor:descriptor:name: API. If returnIndicesMode = MPSGraphPoolingReturnIndicesNone then only the first result MPSGraph returns from maxPooling2DReturnIndicesWithSourceTensor:descriptor:name: will be valid and using the second result will assert. Default value: MPSGraphPoolingReturnIndicesNone.
 //
 // WithReturnIndicesMode sets the returnIndicesMode property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithReturnIndicesMode(returnIndicesMode MPSGraphPoolingReturnIndicesMode) *GraphPooling2DOpDescriptor {
@@ -140,7 +142,7 @@ func (x *GraphPooling2DOpDescriptor) WithReturnIndicesMode(returnIndicesMode MPS
 	return x
 }
 
-// Defines the data type for returned indices. Use this in conjunction with “MPSGraph/maxPooling2DReturnIndicesWithSourceTensor:descriptor:name:“ API. Currently MPSGraph supports the following datatypes: `MPSDataTypeInt32`. Default value: `MPSDataTypeInt32`.
+// Defines the data type for returned indices. Use this in conjunction with maxPooling2DReturnIndicesWithSourceTensor:descriptor:name: API. Currently MPSGraph supports the following datatypes: MPSDataTypeInt32. Default value: MPSDataTypeInt32.
 //
 // WithReturnIndicesDataType sets the returnIndicesDataType property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithReturnIndicesDataType(returnIndicesDataType mpscore.MPSDataType) *GraphPooling2DOpDescriptor {
@@ -148,7 +150,7 @@ func (x *GraphPooling2DOpDescriptor) WithReturnIndicesDataType(returnIndicesData
 	return x
 }
 
-// Affects how the graph computes the output size. if set to `YES` then output size is computed by rounding up instead of down when dividing input size by stride. Default value: `NO`.
+// Affects how the graph computes the output size.
 //
 // WithCeilMode sets the ceilMode property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithCeilMode(ceilMode bool) *GraphPooling2DOpDescriptor {
@@ -156,7 +158,7 @@ func (x *GraphPooling2DOpDescriptor) WithCeilMode(ceilMode bool) *GraphPooling2D
 	return x
 }
 
-// Defines a mode for average pooling, where samples outside the input tensor count as zeroes in the average computation. Otherwise the result is sum over samples divided by number of samples that didn't come from padding. Default value: `NO`.
+// Defines a mode for average pooling, where samples outside the input tensor count as zeroes in the average computation.
 //
 // WithIncludeZeroPadToAverage sets the includeZeroPadToAverage property and returns the receiver for chaining.
 func (x *GraphPooling2DOpDescriptor) WithIncludeZeroPadToAverage(includeZeroPadToAverage bool) *GraphPooling2DOpDescriptor {
@@ -164,7 +166,7 @@ func (x *GraphPooling2DOpDescriptor) WithIncludeZeroPadToAverage(includeZeroPadT
 	return x
 }
 
-// Sets the explicit padding values and sets padding style to explicit. - Parameters: - paddingLeft: See `paddingLeft` property. - paddingRight: See `paddingRight` property. - paddingTop: See `paddingTop` property. - paddingBottom: See `paddingBottom` property.
+// Sets the explicit padding values and sets padding style to explicit.
 //
 // SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom calls the underlying SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom.
 func (x *GraphPooling2DOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint) {

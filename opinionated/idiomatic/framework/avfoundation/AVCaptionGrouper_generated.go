@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that analyzes the temporal overlaps of caption objects to create caption groups for each span of concurrent captions.
+//
 // CaptionGrouper wraps [raw.AVCaptionGrouper] with a fluent Go API.
 type CaptionGrouper struct {
 	inner *raw.AVCaptionGrouper
@@ -37,11 +39,15 @@ func NewCaptionGrouper() *CaptionGrouper {
 	return &CaptionGrouper{inner: raw.AVCaptionGrouperFromID(_id)}
 }
 
+// Adds a caption to the pending group.
+//
 // AddCaption calls the underlying AddCaption.
 func (x *CaptionGrouper) AddCaption(input *raw.AVCaption) {
 	x.inner.AddCaption(input)
 }
 
+// Creates caption groups for the captions you enqueue up to the time.
+//
 // FlushAddedCaptionsIntoGroupsUpToTime calls the underlying FlushAddedCaptionsIntoGroupsUpToTime.
 func (x *CaptionGrouper) FlushAddedCaptionsIntoGroupsUpToTime(upToTime coremedia.CMTime) *foundation.NSArray[*raw.AVCaptionGroup] {
 	return x.inner.FlushAddedCaptionsIntoGroupsUpToTime(upToTime)

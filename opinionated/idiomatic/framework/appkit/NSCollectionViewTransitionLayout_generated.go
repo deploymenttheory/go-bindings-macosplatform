@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that implements custom behaviors when changing from one layout to another in a collection view.
+//
 // CollectionViewTransitionLayout wraps [raw.NSCollectionViewTransitionLayout] with a fluent Go API.
 type CollectionViewTransitionLayout struct {
 	inner *raw.NSCollectionViewTransitionLayout
@@ -32,6 +34,8 @@ func CollectionViewTransitionLayoutFromID(id objc.ID) *CollectionViewTransitionL
 	return &CollectionViewTransitionLayout{inner: raw.NSCollectionViewTransitionLayoutFromID(id)}
 }
 
+// Initializes and returns the transition layout object.
+//
 // NewCollectionViewTransitionLayoutWithCurrentLayoutNextLayout creates a new [CollectionViewTransitionLayout].
 func NewCollectionViewTransitionLayoutWithCurrentLayoutNextLayout(currentLayout *raw.NSCollectionViewLayout, newLayout *raw.NSCollectionViewLayout) *CollectionViewTransitionLayout {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionViewTransitionLayout")), objc.RegisterName("alloc"))
@@ -39,17 +43,23 @@ func NewCollectionViewTransitionLayoutWithCurrentLayoutNextLayout(currentLayout 
 	return &CollectionViewTransitionLayout{inner: raw.NSCollectionViewTransitionLayoutFromID(_id)}
 }
 
+// The completion percentage of the transition.
+//
 // WithTransitionProgress sets the transitionProgress property and returns the receiver for chaining.
 func (x *CollectionViewTransitionLayout) WithTransitionProgress(transitionProgress float64) *CollectionViewTransitionLayout {
 	x.inner.SetTransitionProgress(transitionProgress)
 	return x
 }
 
+// Sets the value of a key whose value you use during the animation.
+//
 // UpdateValueForAnimatedKey calls the underlying UpdateValueForAnimatedKey.
 func (x *CollectionViewTransitionLayout) UpdateValueForAnimatedKey(value float64, key *foundation.NSString) {
 	x.inner.UpdateValueForAnimatedKey(value, key)
 }
 
+// Returns the most recently set value for the specified key.
+//
 // ValueForAnimatedKey calls the underlying ValueForAnimatedKey.
 func (x *CollectionViewTransitionLayout) ValueForAnimatedKey(key *foundation.NSString) float64 {
 	return x.inner.ValueForAnimatedKey(key)

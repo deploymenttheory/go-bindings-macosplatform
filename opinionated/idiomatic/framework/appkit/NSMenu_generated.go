@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that manages an app’s menus.
+//
 // Menu wraps [raw.NSMenu] with a fluent Go API.
 type Menu struct {
 	inner *raw.NSMenu
@@ -33,6 +35,8 @@ func MenuFromID(id objc.ID) *Menu {
 	return &Menu{inner: raw.NSMenuFromID(id)}
 }
 
+// Initializes and returns a menu having the specified title and with autoenabling of menu items turned on.
+//
 // NewMenuWithTitle creates a new [Menu].
 func NewMenuWithTitle(title string) *Menu {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMenu")), objc.RegisterName("alloc"))
@@ -47,18 +51,24 @@ func NewMenuWithCoder(coder *foundation.NSCoder) *Menu {
 	return &Menu{inner: raw.NSMenuFromID(_id)}
 }
 
+// The title of the menu.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *Menu) WithTitle(title string) *Menu {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The parent menu that contains the menu as a submenu.
+//
 // WithSupermenu sets the supermenu property and returns the receiver for chaining.
 func (x *Menu) WithSupermenu(supermenu *Menu) *Menu {
 	x.inner.SetSupermenu(supermenu.Unwrap())
 	return x
 }
 
+// An array containing the menu items in the menu.
+//
 // WithItemArray sets the collection, converting the Go slice to an NSArray.
 func (x *Menu) WithItemArray(items ...*raw.NSMenuItem) *Menu {
 	if len(items) == 0 {
@@ -77,30 +87,40 @@ func (x *Menu) WithItemArray(items ...*raw.NSMenuItem) *Menu {
 	return x
 }
 
+// Indicates whether the menu automatically enables and disables its menu items.
+//
 // WithAutoenablesItems sets the autoenablesItems property and returns the receiver for chaining.
 func (x *Menu) WithAutoenablesItems(autoenablesItems bool) *Menu {
 	x.inner.SetAutoenablesItems(autoenablesItems)
 	return x
 }
 
+// The delegate of the menu.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Menu) WithDelegate(delegate raw.NSMenuDelegate) *Menu {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The minimum width of the menu in screen coordinates.
+//
 // WithMinimumWidth sets the minimumWidth property and returns the receiver for chaining.
 func (x *Menu) WithMinimumWidth(minimumWidth float64) *Menu {
 	x.inner.SetMinimumWidth(minimumWidth)
 	return x
 }
 
+// The font of the menu and its submenus.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *Menu) WithFont(font *Font) *Menu {
 	x.inner.SetFont(font.Unwrap())
 	return x
 }
 
+// Indicates whether the pop-up menu allows appending of contextual menu plug-in items.
+//
 // WithAllowsContextMenuPlugIns sets the allowsContextMenuPlugIns property and returns the receiver for chaining.
 func (x *Menu) WithAllowsContextMenuPlugIns(allowsContextMenuPlugIns bool) *Menu {
 	x.inner.SetAllowsContextMenuPlugIns(allowsContextMenuPlugIns)
@@ -113,19 +133,23 @@ func (x *Menu) WithAutomaticallyInsertsWritingToolsItems(automaticallyInsertsWri
 	return x
 }
 
+// Indicates whether the menu displays the state column.
+//
 // WithShowsStateColumn sets the showsStateColumn property and returns the receiver for chaining.
 func (x *Menu) WithShowsStateColumn(showsStateColumn bool) *Menu {
 	x.inner.SetShowsStateColumn(showsStateColumn)
 	return x
 }
 
+// Configures the layout direction of menu items in the menu.
+//
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
 func (x *Menu) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Menu {
 	x.inner.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
-// The presentation style of the menu. @note This property is not respected if the menu is the main menu of the app.
+// The presentation style of the menu.
 //
 // WithPresentationStyle sets the presentationStyle property and returns the receiver for chaining.
 func (x *Menu) WithPresentationStyle(presentationStyle NSMenuPresentationStyle) *Menu {
@@ -133,7 +157,7 @@ func (x *Menu) WithPresentationStyle(presentationStyle NSMenuPresentationStyle) 
 	return x
 }
 
-// The selection mode of the menu. Note the selection mode only has effect on menu items that belong to the same selection group. A selection group consists of the items with the same target/action.
+// The selection mode of the menu.
 //
 // WithSelectionMode sets the selectionMode property and returns the receiver for chaining.
 func (x *Menu) WithSelectionMode(selectionMode NSMenuSelectionMode) *Menu {
@@ -141,7 +165,7 @@ func (x *Menu) WithSelectionMode(selectionMode NSMenuSelectionMode) *Menu {
 	return x
 }
 
-// The menu items that are selected. An item is selected when its state is `NSControl.StateValue.on`. @note This property is settable. Setting `selectedItems` will select any items that are contained in the provided array, and deselect any previously selected items that are not in the array.
+// The menu items that are currently selected.
 //
 // WithSelectedItems sets the collection, converting the Go slice to an NSArray.
 func (x *Menu) WithSelectedItems(items ...*raw.NSMenuItem) *Menu {
@@ -161,27 +185,37 @@ func (x *Menu) WithSelectedItems(items ...*raw.NSMenuItem) *Menu {
 	return x
 }
 
+// Indicates whether messages are sent to the application’s windows each time the menu changes.
+//
 // WithMenuChangedMessagesEnabled sets the menuChangedMessagesEnabled property and returns the receiver for chaining.
 func (x *Menu) WithMenuChangedMessagesEnabled(menuChangedMessagesEnabled bool) *Menu {
 	x.inner.SetMenuChangedMessagesEnabled(menuChangedMessagesEnabled)
 	return x
 }
 
+// Pops up the menu at the specified location.
+//
 // PopUpMenuPositioningItemAtLocationInView calls the underlying PopUpMenuPositioningItemAtLocationInView.
 func (x *Menu) PopUpMenuPositioningItemAtLocationInView(item *raw.NSMenuItem, location corefoundation.CGPoint, view *raw.NSView) bool {
 	return x.inner.PopUpMenuPositioningItemAtLocationInView(item, location, view)
 }
 
+// Inserts a menu item into the menu at a specific location.
+//
 // InsertItemAtIndex calls the underlying InsertItemAtIndex.
 func (x *Menu) InsertItemAtIndex(newItem *raw.NSMenuItem, index int) {
 	x.inner.InsertItemAtIndex(newItem, index)
 }
 
+// Adds a menu item to the end of the menu.
+//
 // AddItem calls the underlying AddItem.
 func (x *Menu) AddItem(newItem *raw.NSMenuItem) {
 	x.inner.AddItem(newItem)
 }
 
+// Creates and adds a menu item at a specified location in the menu.
+//
 // InsertItemWithTitleActionKeyEquivalentAtIndex calls the underlying InsertItemWithTitleActionKeyEquivalentAtIndex.
 func (x *Menu) InsertItemWithTitleActionKeyEquivalentAtIndex(string_ string, selector objc.SEL, charCode string, index int) *MenuItem {
 	_r := x.inner.InsertItemWithTitleActionKeyEquivalentAtIndex(foundation.NSStringStringWithUTF8String(string_), selector, foundation.NSStringStringWithUTF8String(charCode), index)
@@ -191,6 +225,8 @@ func (x *Menu) InsertItemWithTitleActionKeyEquivalentAtIndex(string_ string, sel
 	return &MenuItem{inner: _r}
 }
 
+// Creates a new menu item and adds it to the end of the menu.
+//
 // AddItemWithTitleActionKeyEquivalent calls the underlying AddItemWithTitleActionKeyEquivalent.
 func (x *Menu) AddItemWithTitleActionKeyEquivalent(string_ string, selector objc.SEL, charCode string) *MenuItem {
 	_r := x.inner.AddItemWithTitleActionKeyEquivalent(foundation.NSStringStringWithUTF8String(string_), selector, foundation.NSStringStringWithUTF8String(charCode))
@@ -200,26 +236,36 @@ func (x *Menu) AddItemWithTitleActionKeyEquivalent(string_ string, selector objc
 	return &MenuItem{inner: _r}
 }
 
+// Removes the menu item at a specified location in the menu.
+//
 // RemoveItemAtIndex calls the underlying RemoveItemAtIndex.
 func (x *Menu) RemoveItemAtIndex(index int) {
 	x.inner.RemoveItemAtIndex(index)
 }
 
+// Removes a menu item from the menu.
+//
 // RemoveItem calls the underlying RemoveItem.
 func (x *Menu) RemoveItem(item *raw.NSMenuItem) {
 	x.inner.RemoveItem(item)
 }
 
+// Assigns a menu to be a submenu of the menu controlled by a given menu item.
+//
 // SetSubmenuForItem calls the underlying SetSubmenuForItem.
 func (x *Menu) SetSubmenuForItem(menu *raw.NSMenu, item *raw.NSMenuItem) {
 	x.inner.SetSubmenuForItem(menu, item)
 }
 
+// Removes all the menu items in the menu.
+//
 // RemoveAllItems calls the underlying RemoveAllItems.
 func (x *Menu) RemoveAllItems() {
 	x.inner.RemoveAllItems()
 }
 
+// Returns the menu item at a specific location of the menu.
+//
 // ItemAtIndex calls the underlying ItemAtIndex.
 func (x *Menu) ItemAtIndex(index int) *MenuItem {
 	_r := x.inner.ItemAtIndex(index)
@@ -229,36 +275,50 @@ func (x *Menu) ItemAtIndex(index int) *MenuItem {
 	return &MenuItem{inner: _r}
 }
 
+// Returns the index identifying the location of a specified menu item in the menu.
+//
 // IndexOfItem calls the underlying IndexOfItem.
 func (x *Menu) IndexOfItem(item *raw.NSMenuItem) int {
 	return x.inner.IndexOfItem(item)
 }
 
+// Returns the index of the first menu item in the menu that has a specified title.
+//
 // IndexOfItemWithTitle calls the underlying IndexOfItemWithTitle.
 func (x *Menu) IndexOfItemWithTitle(title string) int {
 	return x.inner.IndexOfItemWithTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
+// Returns the index of the first menu item in the menu identified by a tag.
+//
 // IndexOfItemWithTag calls the underlying IndexOfItemWithTag.
 func (x *Menu) IndexOfItemWithTag(tag int) int {
 	return x.inner.IndexOfItemWithTag(tag)
 }
 
+// Returns the index of the first menu item in the menu that has a given represented object.
+//
 // IndexOfItemWithRepresentedObject calls the underlying IndexOfItemWithRepresentedObject.
 func (x *Menu) IndexOfItemWithRepresentedObject(object objc.ID) int {
 	return x.inner.IndexOfItemWithRepresentedObject(object)
 }
 
+// Returns the index of the menu item in the menu with the given submenu.
+//
 // IndexOfItemWithSubmenu calls the underlying IndexOfItemWithSubmenu.
 func (x *Menu) IndexOfItemWithSubmenu(submenu *raw.NSMenu) int {
 	return x.inner.IndexOfItemWithSubmenu(submenu)
 }
 
+// Returns the index of the first menu item in the menu that has a specified action and target.
+//
 // IndexOfItemWithTargetAndAction calls the underlying IndexOfItemWithTargetAndAction.
 func (x *Menu) IndexOfItemWithTargetAndAction(target objc.ID, actionSelector objc.SEL) int {
 	return x.inner.IndexOfItemWithTargetAndAction(target, actionSelector)
 }
 
+// Returns the first menu item in the menu with a specified title.
+//
 // ItemWithTitle calls the underlying ItemWithTitle.
 func (x *Menu) ItemWithTitle(title string) *MenuItem {
 	_r := x.inner.ItemWithTitle(foundation.NSStringStringWithUTF8String(title))
@@ -268,6 +328,8 @@ func (x *Menu) ItemWithTitle(title string) *MenuItem {
 	return &MenuItem{inner: _r}
 }
 
+// Returns the first menu item in the menu with the specified tag.
+//
 // ItemWithTag calls the underlying ItemWithTag.
 func (x *Menu) ItemWithTag(tag int) *MenuItem {
 	_r := x.inner.ItemWithTag(tag)
@@ -277,31 +339,43 @@ func (x *Menu) ItemWithTag(tag int) *MenuItem {
 	return &MenuItem{inner: _r}
 }
 
+// Enables or disables the menu items of the menu based on the NSMenuValidation informal protocol and sizes the menu to fit its current menu items if necessary.
+//
 // Update calls the underlying Update.
 func (x *Menu) Update() {
 	x.inner.Update()
 }
 
+// Performs the action for the menu item that corresponds to the given key equivalent.
+//
 // PerformKeyEquivalent calls the underlying PerformKeyEquivalent.
 func (x *Menu) PerformKeyEquivalent(event *raw.NSEvent) bool {
 	return x.inner.PerformKeyEquivalent(event)
 }
 
+// Invoked when a menu item is modified visually (for example, its title changes).
+//
 // ItemChanged calls the underlying ItemChanged.
 func (x *Menu) ItemChanged(item *raw.NSMenuItem) {
 	x.inner.ItemChanged(item)
 }
 
+// Causes the application to send the action message of a specified menu item to its target.
+//
 // PerformActionForItemAtIndex calls the underlying PerformActionForItemAtIndex.
 func (x *Menu) PerformActionForItemAtIndex(index int) {
 	x.inner.PerformActionForItemAtIndex(index)
 }
 
+// Dismisses the menu and ends all menu tracking.
+//
 // CancelTracking calls the underlying CancelTracking.
 func (x *Menu) CancelTracking() {
 	x.inner.CancelTracking()
 }
 
+// Dismisses the menu and ends all menu tracking without displaying the associated animation.
+//
 // CancelTrackingWithoutAnimation calls the underlying CancelTrackingWithoutAnimation.
 func (x *Menu) CancelTrackingWithoutAnimation() {
 	x.inner.CancelTrackingWithoutAnimation()
@@ -507,6 +581,8 @@ func (x *Menu) SetSelectedItems(selectedItems *foundation.NSArray[*raw.NSMenuIte
 	x.inner.SetSelectedItems(selectedItems)
 }
 
+// The action method assigned to menu items that open submenus.
+//
 // SubmenuAction calls the underlying SubmenuAction.
 func (x *Menu) SubmenuAction(sender objc.ID) {
 	x.inner.SubmenuAction(sender)
@@ -517,36 +593,50 @@ func (x *Menu) PropertiesToUpdate() NSMenuProperties {
 	return NSMenuProperties(x.inner.PropertiesToUpdate())
 }
 
+// Deprecated.
+//
 // SetMenuRepresentation calls the underlying SetMenuRepresentation.
 func (x *Menu) SetMenuRepresentation(menuRep objc.ID) {
 	x.inner.SetMenuRepresentation(menuRep)
 }
 
+// Deprecated.
+//
 // MenuRepresentation calls the underlying MenuRepresentation.
 func (x *Menu) MenuRepresentation() objc.ID {
 	return x.inner.MenuRepresentation()
 }
 
+// Deprecated.
+//
 // SetContextMenuRepresentation calls the underlying SetContextMenuRepresentation.
 func (x *Menu) SetContextMenuRepresentation(menuRep objc.ID) {
 	x.inner.SetContextMenuRepresentation(menuRep)
 }
 
+// Deprecated.
+//
 // ContextMenuRepresentation calls the underlying ContextMenuRepresentation.
 func (x *Menu) ContextMenuRepresentation() objc.ID {
 	return x.inner.ContextMenuRepresentation()
 }
 
+// Deprecated.
+//
 // SetTearOffMenuRepresentation calls the underlying SetTearOffMenuRepresentation.
 func (x *Menu) SetTearOffMenuRepresentation(menuRep objc.ID) {
 	x.inner.SetTearOffMenuRepresentation(menuRep)
 }
 
+// Deprecated.
+//
 // TearOffMenuRepresentation calls the underlying TearOffMenuRepresentation.
 func (x *Menu) TearOffMenuRepresentation() objc.ID {
 	return x.inner.TearOffMenuRepresentation()
 }
 
+// Returns the menu currently attached to the menu.
+//
 // AttachedMenu calls the underlying AttachedMenu.
 func (x *Menu) AttachedMenu() *Menu {
 	_r := x.inner.AttachedMenu()
@@ -556,21 +646,29 @@ func (x *Menu) AttachedMenu() *Menu {
 	return &Menu{inner: _r}
 }
 
+// Returns a Boolean value that indicates whether the menu is currently attached to another menu.
+//
 // IsAttached calls the underlying IsAttached.
 func (x *Menu) IsAttached() bool {
 	return x.inner.IsAttached()
 }
 
+// Resizes the menu to exactly fit its items.
+//
 // SizeToFit calls the underlying SizeToFit.
 func (x *Menu) SizeToFit() {
 	x.inner.SizeToFit()
 }
 
+// Returns the location in screen coordinates where the given submenu is displayed when opened as a submenu of the menu.
+//
 // LocationForSubmenu calls the underlying LocationForSubmenu.
 func (x *Menu) LocationForSubmenu(submenu *raw.NSMenu) corefoundation.CGPoint {
 	return x.inner.LocationForSubmenu(submenu)
 }
 
+// Overridden by subclasses to implement specialized context-sensitive help behavior.
+//
 // HelpRequested calls the underlying HelpRequested.
 func (x *Menu) HelpRequested(eventPtr *raw.NSEvent) {
 	x.inner.HelpRequested(eventPtr)

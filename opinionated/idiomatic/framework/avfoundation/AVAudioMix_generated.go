@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that manages the input parameters for mixing audio tracks.
+//
 // AudioMix wraps [raw.AVAudioMix] with a fluent Go API.
 type AudioMix struct {
 	inner *raw.AVAudioMix

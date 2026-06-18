@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that coordinates the layout and display of text characters.
+//
 // LayoutManager wraps [raw.NSLayoutManager] with a fluent Go API.
 type LayoutManager struct {
 	inner *raw.NSLayoutManager
@@ -39,6 +41,8 @@ func NewLayoutManager() *LayoutManager {
 	return &LayoutManager{inner: raw.NSLayoutManagerFromID(_id)}
 }
 
+// Creates a layout manager from data in an unarchiver.
+//
 // NewLayoutManagerWithCoder creates a new [LayoutManager].
 func NewLayoutManagerWithCoder(coder *foundation.NSCoder) *LayoutManager {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLayoutManager")), objc.RegisterName("alloc"))
@@ -46,72 +50,96 @@ func NewLayoutManagerWithCoder(coder *foundation.NSCoder) *LayoutManager {
 	return &LayoutManager{inner: raw.NSLayoutManagerFromID(_id)}
 }
 
+// The text storage object that contains the content to lay out.
+//
 // WithTextStorage sets the textStorage property and returns the receiver for chaining.
 func (x *LayoutManager) WithTextStorage(textStorage *TextStorage) *LayoutManager {
 	x.inner.SetTextStorage(textStorage.Unwrap())
 	return x
 }
 
+// The layout manager’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *LayoutManager) WithDelegate(delegate raw.NSLayoutManagerDelegate) *LayoutManager {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// A Boolean value that indicates whether to substitute visible glyphs for whitespace and other typically invisible characters.
+//
 // WithShowsInvisibleCharacters sets the showsInvisibleCharacters property and returns the receiver for chaining.
 func (x *LayoutManager) WithShowsInvisibleCharacters(showsInvisibleCharacters bool) *LayoutManager {
 	x.inner.SetShowsInvisibleCharacters(showsInvisibleCharacters)
 	return x
 }
 
+// A Boolean value that indicates whether the layout manager substitutes visible glyphs for control characters in the layout.
+//
 // WithShowsControlCharacters sets the showsControlCharacters property and returns the receiver for chaining.
 func (x *LayoutManager) WithShowsControlCharacters(showsControlCharacters bool) *LayoutManager {
 	x.inner.SetShowsControlCharacters(showsControlCharacters)
 	return x
 }
 
+// A Boolean value that indicates whether the layout manager uses the default hyphenation rules to wrap lines.
+//
 // WithUsesDefaultHyphenation sets the usesDefaultHyphenation property and returns the receiver for chaining.
 func (x *LayoutManager) WithUsesDefaultHyphenation(usesDefaultHyphenation bool) *LayoutManager {
 	x.inner.SetUsesDefaultHyphenation(usesDefaultHyphenation)
 	return x
 }
 
+// A Boolean value that indicates whether the layout manager uses the leading of the font.
+//
 // WithUsesFontLeading sets the usesFontLeading property and returns the receiver for chaining.
 func (x *LayoutManager) WithUsesFontLeading(usesFontLeading bool) *LayoutManager {
 	x.inner.SetUsesFontLeading(usesFontLeading)
 	return x
 }
 
+// A Boolean value that indicates whether the layout manager allows noncontiguous layout.
+//
 // WithAllowsNonContiguousLayout sets the allowsNonContiguousLayout property and returns the receiver for chaining.
 func (x *LayoutManager) WithAllowsNonContiguousLayout(allowsNonContiguousLayout bool) *LayoutManager {
 	x.inner.SetAllowsNonContiguousLayout(allowsNonContiguousLayout)
 	return x
 }
 
+// A Boolean value that indicates whether the layout manager avoids laying out unusually long or suspicious input.
+//
 // WithLimitsLayoutForSuspiciousContents sets the limitsLayoutForSuspiciousContents property and returns the receiver for chaining.
 func (x *LayoutManager) WithLimitsLayoutForSuspiciousContents(limitsLayoutForSuspiciousContents bool) *LayoutManager {
 	x.inner.SetLimitsLayoutForSuspiciousContents(limitsLayoutForSuspiciousContents)
 	return x
 }
 
+// A Boolean value that indicates whether the layout manager generates glyphs and lays them out when the app’s run loop is idle.
+//
 // WithBackgroundLayoutEnabled sets the backgroundLayoutEnabled property and returns the receiver for chaining.
 func (x *LayoutManager) WithBackgroundLayoutEnabled(backgroundLayoutEnabled bool) *LayoutManager {
 	x.inner.SetBackgroundLayoutEnabled(backgroundLayoutEnabled)
 	return x
 }
 
+// The default amount of scaling to apply when an attachment image is too large to fit in a text container.
+//
 // WithDefaultAttachmentScaling sets the defaultAttachmentScaling property and returns the receiver for chaining.
 func (x *LayoutManager) WithDefaultAttachmentScaling(defaultAttachmentScaling NSImageScaling) *LayoutManager {
 	x.inner.SetDefaultAttachmentScaling(raw.NSImageScaling(defaultAttachmentScaling))
 	return x
 }
 
+// The current typesetter.
+//
 // WithTypesetter sets the typesetter property and returns the receiver for chaining.
 func (x *LayoutManager) WithTypesetter(typesetter TypesetterProvider) *LayoutManager {
 	x.inner.SetTypesetter(typesetter.asTypesetter())
 	return x
 }
 
+// The default typesetter behavior.
+//
 // WithTypesetterBehavior sets the typesetterBehavior property and returns the receiver for chaining.
 func (x *LayoutManager) WithTypesetterBehavior(typesetterBehavior NSTypesetterBehavior) *LayoutManager {
 	x.inner.SetTypesetterBehavior(raw.NSTypesetterBehavior(typesetterBehavior))
@@ -130,187 +158,261 @@ func (x *LayoutManager) WithHyphenationFactor(hyphenationFactor float32) *Layout
 	return x
 }
 
+// The glyph generator that the layout manager uses.
+//
 // WithGlyphGenerator sets the glyphGenerator property and returns the receiver for chaining.
 func (x *LayoutManager) WithGlyphGenerator(glyphGenerator *GlyphGenerator) *LayoutManager {
 	x.inner.SetGlyphGenerator(glyphGenerator.Unwrap())
 	return x
 }
 
+// Replaces the layout manager’s current text storage object with the specified object.
+//
 // ReplaceTextStorage calls the underlying ReplaceTextStorage.
 func (x *LayoutManager) ReplaceTextStorage(newTextStorage *raw.NSTextStorage) {
 	x.inner.ReplaceTextStorage(newTextStorage)
 }
 
+// Appends the specified text container to the series of text containers where the layout manager arranges text.
+//
 // AddTextContainer calls the underlying AddTextContainer.
 func (x *LayoutManager) AddTextContainer(container *raw.NSTextContainer) {
 	x.inner.AddTextContainer(container)
 }
 
+// Inserts a text container at the specified index in the list of text containers.
+//
 // InsertTextContainerAtIndex calls the underlying InsertTextContainerAtIndex.
 func (x *LayoutManager) InsertTextContainerAtIndex(container *raw.NSTextContainer, index uint) {
 	x.inner.InsertTextContainerAtIndex(container, index)
 }
 
+// Removes the text container at the specified index and invalidates the layout as necessary.
+//
 // RemoveTextContainerAtIndex calls the underlying RemoveTextContainerAtIndex.
 func (x *LayoutManager) RemoveTextContainerAtIndex(index uint) {
 	x.inner.RemoveTextContainerAtIndex(index)
 }
 
+// Invalidates the layout information, and possibly glyphs, for the specified text container and all subsequent text container objects.
+//
 // TextContainerChangedGeometry calls the underlying TextContainerChangedGeometry.
 func (x *LayoutManager) TextContainerChangedGeometry(container *raw.NSTextContainer) {
 	x.inner.TextContainerChangedGeometry(container)
 }
 
+// Updates the information necessary to manage text view objects for the specified text container.
+//
 // TextContainerChangedTextView calls the underlying TextContainerChangedTextView.
 func (x *LayoutManager) TextContainerChangedTextView(container *raw.NSTextContainer) {
 	x.inner.TextContainerChangedTextView(container)
 }
 
+// Invalidates and adjusts the glyphs in the specified character range.
+//
 // InvalidateGlyphsForCharacterRangeChangeInLengthActualCharacterRange calls the underlying InvalidateGlyphsForCharacterRangeChangeInLengthActualCharacterRange.
 func (x *LayoutManager) InvalidateGlyphsForCharacterRangeChangeInLengthActualCharacterRange(charRange foundation.NSRange, delta int, actualCharRange *foundation.NSRange) {
 	x.inner.InvalidateGlyphsForCharacterRangeChangeInLengthActualCharacterRange(charRange, delta, actualCharRange)
 }
 
+// Invalidates the layout information for the glyphs that map to the specified character range.
+//
 // InvalidateLayoutForCharacterRangeActualCharacterRange calls the underlying InvalidateLayoutForCharacterRangeActualCharacterRange.
 func (x *LayoutManager) InvalidateLayoutForCharacterRangeActualCharacterRange(charRange foundation.NSRange, actualCharRange *foundation.NSRange) {
 	x.inner.InvalidateLayoutForCharacterRangeActualCharacterRange(charRange, actualCharRange)
 }
 
+// Invalidates display for the specified character range.
+//
 // InvalidateDisplayForCharacterRange calls the underlying InvalidateDisplayForCharacterRange.
 func (x *LayoutManager) InvalidateDisplayForCharacterRange(charRange foundation.NSRange) {
 	x.inner.InvalidateDisplayForCharacterRange(charRange)
 }
 
+// Invalidates a range of glyphs, requiring new layout information, and updates the appropriate regions of any text views that display those glyphs.
+//
 // InvalidateDisplayForGlyphRange calls the underlying InvalidateDisplayForGlyphRange.
 func (x *LayoutManager) InvalidateDisplayForGlyphRange(glyphRange foundation.NSRange) {
 	x.inner.InvalidateDisplayForGlyphRange(glyphRange)
 }
 
+// Notifies the layout manager when an edit action changes the contents of its text storage object.
+//
 // ProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange calls the underlying ProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange.
 func (x *LayoutManager) ProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange(textStorage *raw.NSTextStorage, editMask NSTextStorageEditActions, newCharRange foundation.NSRange, delta int, invalidatedCharRange foundation.NSRange) {
 	x.inner.ProcessEditingForTextStorageEditedRangeChangeInLengthInvalidatedRange(textStorage, raw.NSTextStorageEditActions(editMask), newCharRange, delta, invalidatedCharRange)
 }
 
+// Forces the layout manager to generate glyphs for the specified character range if it hasn’t already.
+//
 // EnsureGlyphsForCharacterRange calls the underlying EnsureGlyphsForCharacterRange.
 func (x *LayoutManager) EnsureGlyphsForCharacterRange(charRange foundation.NSRange) {
 	x.inner.EnsureGlyphsForCharacterRange(charRange)
 }
 
+// Forces the layout manager to generate glyphs for the specified glyph range if it hasn’t already.
+//
 // EnsureGlyphsForGlyphRange calls the underlying EnsureGlyphsForGlyphRange.
 func (x *LayoutManager) EnsureGlyphsForGlyphRange(glyphRange foundation.NSRange) {
 	x.inner.EnsureGlyphsForGlyphRange(glyphRange)
 }
 
+// Forces the layout manager to perform layout for the specified character range if it hasn’t already.
+//
 // EnsureLayoutForCharacterRange calls the underlying EnsureLayoutForCharacterRange.
 func (x *LayoutManager) EnsureLayoutForCharacterRange(charRange foundation.NSRange) {
 	x.inner.EnsureLayoutForCharacterRange(charRange)
 }
 
+// Forces the layout manager to perform layout for the specified glyph range if it hasn’t already.
+//
 // EnsureLayoutForGlyphRange calls the underlying EnsureLayoutForGlyphRange.
 func (x *LayoutManager) EnsureLayoutForGlyphRange(glyphRange foundation.NSRange) {
 	x.inner.EnsureLayoutForGlyphRange(glyphRange)
 }
 
+// Forces the layout manager to perform layout for the specified text container if it hasn’t already.
+//
 // EnsureLayoutForTextContainer calls the underlying EnsureLayoutForTextContainer.
 func (x *LayoutManager) EnsureLayoutForTextContainer(container *raw.NSTextContainer) {
 	x.inner.EnsureLayoutForTextContainer(container)
 }
 
+// Forces the layout manager to perform layout for the specified area in the specified text container if it hasn’t already.
+//
 // EnsureLayoutForBoundingRectInTextContainer calls the underlying EnsureLayoutForBoundingRectInTextContainer.
 func (x *LayoutManager) EnsureLayoutForBoundingRectInTextContainer(bounds corefoundation.CGRect, container *raw.NSTextContainer) {
 	x.inner.EnsureLayoutForBoundingRectInTextContainer(bounds, container)
 }
 
+// Stores the initial glyphs and glyph properties for a character range.
+//
 // SetGlyphsPropertiesCharacterIndexesFontForGlyphRange calls the underlying SetGlyphsPropertiesCharacterIndexesFontForGlyphRange.
 func (x *LayoutManager) SetGlyphsPropertiesCharacterIndexesFontForGlyphRange(glyphs *uint16, props *raw.NSGlyphProperty, charIndexes *uint, aFont *raw.NSFont, glyphRange foundation.NSRange) {
 	x.inner.SetGlyphsPropertiesCharacterIndexesFontForGlyphRange(glyphs, props, charIndexes, aFont, glyphRange)
 }
 
+// Returns the glyph at the specified index along with information about whether the glyph index is valid.
+//
 // CGGlyphAtIndexIsValidIndex calls the underlying CGGlyphAtIndexIsValidIndex.
 func (x *LayoutManager) CGGlyphAtIndexIsValidIndex(glyphIndex uint, isValidIndex *bool) uint16 {
 	return x.inner.CGGlyphAtIndexIsValidIndex(glyphIndex, isValidIndex)
 }
 
+// Returns the glyph at the specified index.
+//
 // CGGlyphAtIndex calls the underlying CGGlyphAtIndex.
 func (x *LayoutManager) CGGlyphAtIndex(glyphIndex uint) uint16 {
 	return x.inner.CGGlyphAtIndex(glyphIndex)
 }
 
+// Indicates whether the specified index refers to a valid glyph.
+//
 // IsValidGlyphIndex calls the underlying IsValidGlyphIndex.
 func (x *LayoutManager) IsValidGlyphIndex(glyphIndex uint) bool {
 	return x.inner.IsValidGlyphIndex(glyphIndex)
 }
 
+// Returns the glyph property of the glyph at the specified index.
+//
 // PropertyForGlyphAtIndex calls the underlying PropertyForGlyphAtIndex.
 func (x *LayoutManager) PropertyForGlyphAtIndex(glyphIndex uint) NSGlyphProperty {
 	return NSGlyphProperty(x.inner.PropertyForGlyphAtIndex(glyphIndex))
 }
 
+// Returns the index in the text storage for the first character of the specified glyph.
+//
 // CharacterIndexForGlyphAtIndex calls the underlying CharacterIndexForGlyphAtIndex.
 func (x *LayoutManager) CharacterIndexForGlyphAtIndex(glyphIndex uint) uint {
 	return x.inner.CharacterIndexForGlyphAtIndex(glyphIndex)
 }
 
+// Returns the index of the first glyph of the character at the specified index.
+//
 // GlyphIndexForCharacterAtIndex calls the underlying GlyphIndexForCharacterAtIndex.
 func (x *LayoutManager) GlyphIndexForCharacterAtIndex(charIndex uint) uint {
 	return x.inner.GlyphIndexForCharacterAtIndex(charIndex)
 }
 
+// Fills a passed-in buffer with a sequence of glyphs.
+//
 // GetGlyphsInRangeGlyphsPropertiesCharacterIndexesBidiLevels calls the underlying GetGlyphsInRangeGlyphsPropertiesCharacterIndexesBidiLevels.
 func (x *LayoutManager) GetGlyphsInRangeGlyphsPropertiesCharacterIndexesBidiLevels(glyphRange foundation.NSRange, glyphBuffer *uint16, props *raw.NSGlyphProperty, charIndexBuffer *uint, bidiLevelBuffer *uint8) uint {
 	return x.inner.GetGlyphsInRangeGlyphsPropertiesCharacterIndexesBidiLevels(glyphRange, glyphBuffer, props, charIndexBuffer, bidiLevelBuffer)
 }
 
+// Associates a text container with the specified range of glyphs.
+//
 // SetTextContainerForGlyphRange calls the underlying SetTextContainerForGlyphRange.
 func (x *LayoutManager) SetTextContainerForGlyphRange(container *raw.NSTextContainer, glyphRange foundation.NSRange) {
 	x.inner.SetTextContainerForGlyphRange(container, glyphRange)
 }
 
+// Associates the line fragment bounds for the specified range of glyphs.
+//
 // SetLineFragmentRectForGlyphRangeUsedRect calls the underlying SetLineFragmentRectForGlyphRangeUsedRect.
 func (x *LayoutManager) SetLineFragmentRectForGlyphRangeUsedRect(fragmentRect corefoundation.CGRect, glyphRange foundation.NSRange, usedRect corefoundation.CGRect) {
 	x.inner.SetLineFragmentRectForGlyphRangeUsedRect(fragmentRect, glyphRange, usedRect)
 }
 
+// Sets the bounds and container for the extra line fragment.
+//
 // SetExtraLineFragmentRectUsedRectTextContainer calls the underlying SetExtraLineFragmentRectUsedRectTextContainer.
 func (x *LayoutManager) SetExtraLineFragmentRectUsedRectTextContainer(fragmentRect corefoundation.CGRect, usedRect corefoundation.CGRect, container *raw.NSTextContainer) {
 	x.inner.SetExtraLineFragmentRectUsedRectTextContainer(fragmentRect, usedRect, container)
 }
 
+// Sets the location for the first glyph in the specified range.
+//
 // SetLocationForStartOfGlyphRange calls the underlying SetLocationForStartOfGlyphRange.
 func (x *LayoutManager) SetLocationForStartOfGlyphRange(location corefoundation.CGPoint, glyphRange foundation.NSRange) {
 	x.inner.SetLocationForStartOfGlyphRange(location, glyphRange)
 }
 
+// Sets the visibility of the glyph at the specified index.
+//
 // SetNotShownAttributeForGlyphAtIndex calls the underlying SetNotShownAttributeForGlyphAtIndex.
 func (x *LayoutManager) SetNotShownAttributeForGlyphAtIndex(flag bool, glyphIndex uint) {
 	x.inner.SetNotShownAttributeForGlyphAtIndex(flag, glyphIndex)
 }
 
+// Indicates whether the specified glyph exceeds the bounds of the line fragment for its layout.
+//
 // SetDrawsOutsideLineFragmentForGlyphAtIndex calls the underlying SetDrawsOutsideLineFragmentForGlyphAtIndex.
 func (x *LayoutManager) SetDrawsOutsideLineFragmentForGlyphAtIndex(flag bool, glyphIndex uint) {
 	x.inner.SetDrawsOutsideLineFragmentForGlyphAtIndex(flag, glyphIndex)
 }
 
+// Sets the size to use when drawing a glyph that represents an attachment.
+//
 // SetAttachmentSizeForGlyphRange calls the underlying SetAttachmentSizeForGlyphRange.
 func (x *LayoutManager) SetAttachmentSizeForGlyphRange(attachmentSize corefoundation.CGSize, glyphRange foundation.NSRange) {
 	x.inner.SetAttachmentSizeForGlyphRange(attachmentSize, glyphRange)
 }
 
+// Returns the indexes for the first character and glyph that have invalid layout information.
+//
 // GetFirstUnlaidCharacterIndexGlyphIndex calls the underlying GetFirstUnlaidCharacterIndexGlyphIndex.
 func (x *LayoutManager) GetFirstUnlaidCharacterIndexGlyphIndex(charIndex *uint, glyphIndex *uint) {
 	x.inner.GetFirstUnlaidCharacterIndexGlyphIndex(charIndex, glyphIndex)
 }
 
+// Returns the index for the first character in the layout manager that isn’t in the layout.
+//
 // FirstUnlaidCharacterIndex calls the underlying FirstUnlaidCharacterIndex.
 func (x *LayoutManager) FirstUnlaidCharacterIndex() uint {
 	return x.inner.FirstUnlaidCharacterIndex()
 }
 
+// Returns the index for the first glyph in the layout manager that isn’t in the layout.
+//
 // FirstUnlaidGlyphIndex calls the underlying FirstUnlaidGlyphIndex.
 func (x *LayoutManager) FirstUnlaidGlyphIndex() uint {
 	return x.inner.FirstUnlaidGlyphIndex()
 }
 
+// Returns the text container that manages the layout for the specified glyph, causing layout to happen as necessary.
+//
 // TextContainerForGlyphAtIndexEffectiveRange calls the underlying TextContainerForGlyphAtIndexEffectiveRange.
 func (x *LayoutManager) TextContainerForGlyphAtIndexEffectiveRange(glyphIndex uint, effectiveGlyphRange *foundation.NSRange) *TextContainer {
 	_r := x.inner.TextContainerForGlyphAtIndexEffectiveRange(glyphIndex, effectiveGlyphRange)
@@ -320,6 +422,8 @@ func (x *LayoutManager) TextContainerForGlyphAtIndexEffectiveRange(glyphIndex ui
 	return &TextContainer{inner: _r}
 }
 
+// Returns the text container that manages the layout for the specified glyph.
+//
 // TextContainerForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout calls the underlying TextContainerForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout.
 func (x *LayoutManager) TextContainerForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout(glyphIndex uint, effectiveGlyphRange *foundation.NSRange, flag bool) *TextContainer {
 	_r := x.inner.TextContainerForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout(glyphIndex, effectiveGlyphRange, flag)
@@ -329,246 +433,344 @@ func (x *LayoutManager) TextContainerForGlyphAtIndexEffectiveRangeWithoutAdditio
 	return &TextContainer{inner: _r}
 }
 
+// Returns the bounding rectangle for the glyphs in the specified text container.
+//
 // UsedRectForTextContainer calls the underlying UsedRectForTextContainer.
 func (x *LayoutManager) UsedRectForTextContainer(container *raw.NSTextContainer) corefoundation.CGRect {
 	return x.inner.UsedRectForTextContainer(container)
 }
 
+// Returns the rectangle for the line fragment where the glyph lies and (optionally), by reference, the entire range of glyphs in that fragment.
+//
 // LineFragmentRectForGlyphAtIndexEffectiveRange calls the underlying LineFragmentRectForGlyphAtIndexEffectiveRange.
 func (x *LayoutManager) LineFragmentRectForGlyphAtIndexEffectiveRange(glyphIndex uint, effectiveGlyphRange *foundation.NSRange) corefoundation.CGRect {
 	return x.inner.LineFragmentRectForGlyphAtIndexEffectiveRange(glyphIndex, effectiveGlyphRange)
 }
 
+// Returns the line fragment rectangle that contains the glyph at the specified glyph index.
+//
 // LineFragmentRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout calls the underlying LineFragmentRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout.
 func (x *LayoutManager) LineFragmentRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout(glyphIndex uint, effectiveGlyphRange *foundation.NSRange, flag bool) corefoundation.CGRect {
 	return x.inner.LineFragmentRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout(glyphIndex, effectiveGlyphRange, flag)
 }
 
+// Returns the usage rectangle for the line fragment and (optionally) returns the entire range of glyphs in that fragment.
+//
 // LineFragmentUsedRectForGlyphAtIndexEffectiveRange calls the underlying LineFragmentUsedRectForGlyphAtIndexEffectiveRange.
 func (x *LayoutManager) LineFragmentUsedRectForGlyphAtIndexEffectiveRange(glyphIndex uint, effectiveGlyphRange *foundation.NSRange) corefoundation.CGRect {
 	return x.inner.LineFragmentUsedRectForGlyphAtIndexEffectiveRange(glyphIndex, effectiveGlyphRange)
 }
 
+// Returns the usage rectangle for the line fragment and (optionally) returns the entire range of glyphs in that fragment.
+//
 // LineFragmentUsedRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout calls the underlying LineFragmentUsedRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout.
 func (x *LayoutManager) LineFragmentUsedRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout(glyphIndex uint, effectiveGlyphRange *foundation.NSRange, flag bool) corefoundation.CGRect {
 	return x.inner.LineFragmentUsedRectForGlyphAtIndexEffectiveRangeWithoutAdditionalLayout(glyphIndex, effectiveGlyphRange, flag)
 }
 
+// Returns the location for the specified glyph within its line fragment.
+//
 // LocationForGlyphAtIndex calls the underlying LocationForGlyphAtIndex.
 func (x *LayoutManager) LocationForGlyphAtIndex(glyphIndex uint) corefoundation.CGPoint {
 	return x.inner.LocationForGlyphAtIndex(glyphIndex)
 }
 
+// Indicates whether the glyph at the specified index has a visible representation.
+//
 // NotShownAttributeForGlyphAtIndex calls the underlying NotShownAttributeForGlyphAtIndex.
 func (x *LayoutManager) NotShownAttributeForGlyphAtIndex(glyphIndex uint) bool {
 	return x.inner.NotShownAttributeForGlyphAtIndex(glyphIndex)
 }
 
+// Indicates whether the glyph draws outside its line fragment rectangle.
+//
 // DrawsOutsideLineFragmentForGlyphAtIndex calls the underlying DrawsOutsideLineFragmentForGlyphAtIndex.
 func (x *LayoutManager) DrawsOutsideLineFragmentForGlyphAtIndex(glyphIndex uint) bool {
 	return x.inner.DrawsOutsideLineFragmentForGlyphAtIndex(glyphIndex)
 }
 
+// Returns the size of the attachment glyph at the specified index.
+//
 // AttachmentSizeForGlyphAtIndex calls the underlying AttachmentSizeForGlyphAtIndex.
 func (x *LayoutManager) AttachmentSizeForGlyphAtIndex(glyphIndex uint) corefoundation.CGSize {
 	return x.inner.AttachmentSizeForGlyphAtIndex(glyphIndex)
 }
 
+// Returns the range of truncated glyphs for a line fragment that contains the specified index.
+//
 // TruncatedGlyphRangeInLineFragmentForGlyphAtIndex calls the underlying TruncatedGlyphRangeInLineFragmentForGlyphAtIndex.
 func (x *LayoutManager) TruncatedGlyphRangeInLineFragmentForGlyphAtIndex(glyphIndex uint) foundation.NSRange {
 	return x.inner.TruncatedGlyphRangeInLineFragmentForGlyphAtIndex(glyphIndex)
 }
 
+// Returns the range of glyphs that the specified range of characters generates.
+//
 // GlyphRangeForCharacterRangeActualCharacterRange calls the underlying GlyphRangeForCharacterRangeActualCharacterRange.
 func (x *LayoutManager) GlyphRangeForCharacterRangeActualCharacterRange(charRange foundation.NSRange, actualCharRange *foundation.NSRange) foundation.NSRange {
 	return x.inner.GlyphRangeForCharacterRangeActualCharacterRange(charRange, actualCharRange)
 }
 
+// Returns the range of characters that correspond to the glyphs in the specified glyph range.
+//
 // CharacterRangeForGlyphRangeActualGlyphRange calls the underlying CharacterRangeForGlyphRangeActualGlyphRange.
 func (x *LayoutManager) CharacterRangeForGlyphRangeActualGlyphRange(glyphRange foundation.NSRange, actualGlyphRange *foundation.NSRange) foundation.NSRange {
 	return x.inner.CharacterRangeForGlyphRangeActualGlyphRange(glyphRange, actualGlyphRange)
 }
 
+// Returns the range of glyphs lying within the specified text container.
+//
 // GlyphRangeForTextContainer calls the underlying GlyphRangeForTextContainer.
 func (x *LayoutManager) GlyphRangeForTextContainer(container *raw.NSTextContainer) foundation.NSRange {
 	return x.inner.GlyphRangeForTextContainer(container)
 }
 
+// Returns the range of displayable glyphs that surround the glyph at the specified index.
+//
 // RangeOfNominallySpacedGlyphsContainingIndex calls the underlying RangeOfNominallySpacedGlyphsContainingIndex.
 func (x *LayoutManager) RangeOfNominallySpacedGlyphsContainingIndex(glyphIndex uint) foundation.NSRange {
 	return x.inner.RangeOfNominallySpacedGlyphsContainingIndex(glyphIndex)
 }
 
+// Returns the bounding rectangle for the specified glyphs in a container.
+//
 // BoundingRectForGlyphRangeInTextContainer calls the underlying BoundingRectForGlyphRangeInTextContainer.
 func (x *LayoutManager) BoundingRectForGlyphRangeInTextContainer(glyphRange foundation.NSRange, container *raw.NSTextContainer) corefoundation.CGRect {
 	return x.inner.BoundingRectForGlyphRangeInTextContainer(glyphRange, container)
 }
 
+// Returns the smallest contiguous range for glyphs lying wholly or partially within the specified rectangle of the text container.
+//
 // GlyphRangeForBoundingRectInTextContainer calls the underlying GlyphRangeForBoundingRectInTextContainer.
 func (x *LayoutManager) GlyphRangeForBoundingRectInTextContainer(bounds corefoundation.CGRect, container *raw.NSTextContainer) foundation.NSRange {
 	return x.inner.GlyphRangeForBoundingRectInTextContainer(bounds, container)
 }
 
+// Returns the smallest contiguous range for glyphs lying wholly or partially within the specified rectangle of the text container.
+//
 // GlyphRangeForBoundingRectWithoutAdditionalLayoutInTextContainer calls the underlying GlyphRangeForBoundingRectWithoutAdditionalLayoutInTextContainer.
 func (x *LayoutManager) GlyphRangeForBoundingRectWithoutAdditionalLayoutInTextContainer(bounds corefoundation.CGRect, container *raw.NSTextContainer) foundation.NSRange {
 	return x.inner.GlyphRangeForBoundingRectWithoutAdditionalLayoutInTextContainer(bounds, container)
 }
 
+// Returns the index of the glyph at the specified point using the container’s coordinate system.
+//
 // GlyphIndexForPointInTextContainerFractionOfDistanceThroughGlyph calls the underlying GlyphIndexForPointInTextContainerFractionOfDistanceThroughGlyph.
 func (x *LayoutManager) GlyphIndexForPointInTextContainerFractionOfDistanceThroughGlyph(point corefoundation.CGPoint, container *raw.NSTextContainer, partialFraction *float64) uint {
 	return x.inner.GlyphIndexForPointInTextContainerFractionOfDistanceThroughGlyph(point, container, partialFraction)
 }
 
+// Returns the index of the glyph at the specified location in a text container.
+//
 // GlyphIndexForPointInTextContainer calls the underlying GlyphIndexForPointInTextContainer.
 func (x *LayoutManager) GlyphIndexForPointInTextContainer(point corefoundation.CGPoint, container *raw.NSTextContainer) uint {
 	return x.inner.GlyphIndexForPointInTextContainer(point, container)
 }
 
+// Returns the fraction of the distance between the glyph at the specified point and the next glyph.
+//
 // FractionOfDistanceThroughGlyphForPointInTextContainer calls the underlying FractionOfDistanceThroughGlyphForPointInTextContainer.
 func (x *LayoutManager) FractionOfDistanceThroughGlyphForPointInTextContainer(point corefoundation.CGPoint, container *raw.NSTextContainer) float64 {
 	return x.inner.FractionOfDistanceThroughGlyphForPointInTextContainer(point, container)
 }
 
+// Returns the index of the character that lies beneath the specified point using the specified container’s coordinate system.
+//
 // CharacterIndexForPointInTextContainerFractionOfDistanceBetweenInsertionPoints calls the underlying CharacterIndexForPointInTextContainerFractionOfDistanceBetweenInsertionPoints.
 func (x *LayoutManager) CharacterIndexForPointInTextContainerFractionOfDistanceBetweenInsertionPoints(point corefoundation.CGPoint, container *raw.NSTextContainer, partialFraction *float64) uint {
 	return x.inner.CharacterIndexForPointInTextContainerFractionOfDistanceBetweenInsertionPoints(point, container, partialFraction)
 }
 
+// Returns insertion points in bulk for a specified line fragment.
+//
 // GetLineFragmentInsertionPointsForCharacterAtIndexAlternatePositionsInDisplayOrderPositionsCharacterIndexes calls the underlying GetLineFragmentInsertionPointsForCharacterAtIndexAlternatePositionsInDisplayOrderPositionsCharacterIndexes.
 func (x *LayoutManager) GetLineFragmentInsertionPointsForCharacterAtIndexAlternatePositionsInDisplayOrderPositionsCharacterIndexes(charIndex uint, aFlag bool, dFlag bool, positions *float64, charIndexes *uint) uint {
 	return x.inner.GetLineFragmentInsertionPointsForCharacterAtIndexAlternatePositionsInDisplayOrderPositionsCharacterIndexes(charIndex, aFlag, dFlag, positions, charIndexes)
 }
 
+// Enumerates line fragments intersecting with the specified glyph range.
+//
 // EnumerateLineFragmentsForGlyphRangeUsing calls the underlying EnumerateLineFragmentsForGlyphRangeUsing.
 func (x *LayoutManager) EnumerateLineFragmentsForGlyphRangeUsing(glyphRange foundation.NSRange, block objc.Block) {
 	x.inner.EnumerateLineFragmentsForGlyphRangeUsing(glyphRange, block)
 }
 
+// Enumerates enclosing rectangles for the specified glyph range in a text container.
+//
 // EnumerateEnclosingRectsForGlyphRangeWithinSelectedGlyphRangeInTextContainerUsing calls the underlying EnumerateEnclosingRectsForGlyphRangeWithinSelectedGlyphRangeInTextContainerUsing.
 func (x *LayoutManager) EnumerateEnclosingRectsForGlyphRangeWithinSelectedGlyphRangeInTextContainerUsing(glyphRange foundation.NSRange, selectedRange foundation.NSRange, textContainer *raw.NSTextContainer, block objc.Block) {
 	x.inner.EnumerateEnclosingRectsForGlyphRangeWithinSelectedGlyphRangeInTextContainerUsing(glyphRange, selectedRange, textContainer, block)
 }
 
+// Draws background marks for the specified glyphs, which must lie completely within a single text container.
+//
 // DrawBackgroundForGlyphRangeAtPoint calls the underlying DrawBackgroundForGlyphRangeAtPoint.
 func (x *LayoutManager) DrawBackgroundForGlyphRangeAtPoint(glyphsToShow foundation.NSRange, origin corefoundation.CGPoint) {
 	x.inner.DrawBackgroundForGlyphRangeAtPoint(glyphsToShow, origin)
 }
 
+// Draws the specified glyphs, which must lie completely within a single text container.
+//
 // DrawGlyphsForGlyphRangeAtPoint calls the underlying DrawGlyphsForGlyphRangeAtPoint.
 func (x *LayoutManager) DrawGlyphsForGlyphRangeAtPoint(glyphsToShow foundation.NSRange, origin corefoundation.CGPoint) {
 	x.inner.DrawGlyphsForGlyphRangeAtPoint(glyphsToShow, origin)
 }
 
+// Renders the glyphs at the specified positions, using the specified attributes.
+//
 // ShowCGGlyphsPositionsCountFontTextMatrixAttributesInContext calls the underlying ShowCGGlyphsPositionsCountFontTextMatrixAttributesInContext.
 func (x *LayoutManager) ShowCGGlyphsPositionsCountFontTextMatrixAttributesInContext(glyphs *uint16, positions *corefoundation.CGPoint, glyphCount int, font *raw.NSFont, textMatrix corefoundation.CGAffineTransform, attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], cGContext unsafe.Pointer) {
 	x.inner.ShowCGGlyphsPositionsCountFontTextMatrixAttributesInContext(glyphs, positions, glyphCount, font, textMatrix, attributes, cGContext)
 }
 
+// Fills background rectangles with a color.
+//
 // FillBackgroundRectArrayCountForCharacterRangeColor calls the underlying FillBackgroundRectArrayCountForCharacterRangeColor.
 func (x *LayoutManager) FillBackgroundRectArrayCountForCharacterRangeColor(rectArray *corefoundation.CGRect, rectCount uint, charRange foundation.NSRange, color *raw.NSColor) {
 	x.inner.FillBackgroundRectArrayCountForCharacterRangeColor(rectArray, rectCount, charRange, color)
 }
 
+// Draws underlining for the glyphs in a specified range.
+//
 // DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin calls the underlying DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin.
 func (x *LayoutManager) DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, underlineVal NSUnderlineStyle, baselineOffset float64, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint) {
 	x.inner.DrawUnderlineForGlyphRangeUnderlineTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange, raw.NSUnderlineStyle(underlineVal), baselineOffset, lineRect, lineGlyphRange, containerOrigin)
 }
 
+// Calculates subranges to underline for the specified glyphs and draws the underlining as appropriate.
+//
 // UnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin calls the underlying UnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin.
 func (x *LayoutManager) UnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, underlineVal NSUnderlineStyle, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint) {
 	x.inner.UnderlineGlyphRangeUnderlineTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange, raw.NSUnderlineStyle(underlineVal), lineRect, lineGlyphRange, containerOrigin)
 }
 
+// Draws a strikethrough for the specified glyphs.
+//
 // DrawStrikethroughForGlyphRangeStrikethroughTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin calls the underlying DrawStrikethroughForGlyphRangeStrikethroughTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin.
 func (x *LayoutManager) DrawStrikethroughForGlyphRangeStrikethroughTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, strikethroughVal NSUnderlineStyle, baselineOffset float64, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint) {
 	x.inner.DrawStrikethroughForGlyphRangeStrikethroughTypeBaselineOffsetLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange, raw.NSUnderlineStyle(strikethroughVal), baselineOffset, lineRect, lineGlyphRange, containerOrigin)
 }
 
+// Calculates and draws strikethrough for the specified glyphs.
+//
 // StrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin calls the underlying StrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin.
 func (x *LayoutManager) StrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange foundation.NSRange, strikethroughVal NSUnderlineStyle, lineRect corefoundation.CGRect, lineGlyphRange foundation.NSRange, containerOrigin corefoundation.CGPoint) {
 	x.inner.StrikethroughGlyphRangeStrikethroughTypeLineFragmentRectLineFragmentGlyphRangeContainerOrigin(glyphRange, raw.NSUnderlineStyle(strikethroughVal), lineRect, lineGlyphRange, containerOrigin)
 }
 
+// Draws an attachment cell.
+//
 // ShowAttachmentCellInRectCharacterIndex calls the underlying ShowAttachmentCellInRectCharacterIndex.
 func (x *LayoutManager) ShowAttachmentCellInRectCharacterIndex(cell *raw.NSCell, rect corefoundation.CGRect, attachmentIndex uint) {
 	x.inner.ShowAttachmentCellInRectCharacterIndex(cell, rect, attachmentIndex)
 }
 
+// Sets the layout rectangle that encloses the specified text block and glyph range.
+//
 // SetLayoutRectForTextBlockGlyphRange calls the underlying SetLayoutRectForTextBlockGlyphRange.
 func (x *LayoutManager) SetLayoutRectForTextBlockGlyphRange(rect corefoundation.CGRect, block *raw.NSTextBlock, glyphRange foundation.NSRange) {
 	x.inner.SetLayoutRectForTextBlockGlyphRange(rect, block, glyphRange)
 }
 
+// Sets the bounding rectangle that encloses the specified text block and glyph range.
+//
 // SetBoundsRectForTextBlockGlyphRange calls the underlying SetBoundsRectForTextBlockGlyphRange.
 func (x *LayoutManager) SetBoundsRectForTextBlockGlyphRange(rect corefoundation.CGRect, block *raw.NSTextBlock, glyphRange foundation.NSRange) {
 	x.inner.SetBoundsRectForTextBlockGlyphRange(rect, block, glyphRange)
 }
 
+// Returns the rectangle for the layout of the specified text block and glyph range.
+//
 // LayoutRectForTextBlockGlyphRange calls the underlying LayoutRectForTextBlockGlyphRange.
 func (x *LayoutManager) LayoutRectForTextBlockGlyphRange(block *raw.NSTextBlock, glyphRange foundation.NSRange) corefoundation.CGRect {
 	return x.inner.LayoutRectForTextBlockGlyphRange(block, glyphRange)
 }
 
+// Returns the bounding rectangle that encloses the specified text block and glyph range.
+//
 // BoundsRectForTextBlockGlyphRange calls the underlying BoundsRectForTextBlockGlyphRange.
 func (x *LayoutManager) BoundsRectForTextBlockGlyphRange(block *raw.NSTextBlock, glyphRange foundation.NSRange) corefoundation.CGRect {
 	return x.inner.BoundsRectForTextBlockGlyphRange(block, glyphRange)
 }
 
+// Returns the rectangle for the layout of the specified text block and glyph.
+//
 // LayoutRectForTextBlockAtIndexEffectiveRange calls the underlying LayoutRectForTextBlockAtIndexEffectiveRange.
 func (x *LayoutManager) LayoutRectForTextBlockAtIndexEffectiveRange(block *raw.NSTextBlock, glyphIndex uint, effectiveGlyphRange *foundation.NSRange) corefoundation.CGRect {
 	return x.inner.LayoutRectForTextBlockAtIndexEffectiveRange(block, glyphIndex, effectiveGlyphRange)
 }
 
+// Returns the bounding rectangle for the specified text block and glyph.
+//
 // BoundsRectForTextBlockAtIndexEffectiveRange calls the underlying BoundsRectForTextBlockAtIndexEffectiveRange.
 func (x *LayoutManager) BoundsRectForTextBlockAtIndexEffectiveRange(block *raw.NSTextBlock, glyphIndex uint, effectiveGlyphRange *foundation.NSRange) corefoundation.CGRect {
 	return x.inner.BoundsRectForTextBlockAtIndexEffectiveRange(block, glyphIndex, effectiveGlyphRange)
 }
 
+// Returns the dictionary of temporary attributes for the specified character range.
+//
 // TemporaryAttributesAtCharacterIndexEffectiveRange calls the underlying TemporaryAttributesAtCharacterIndexEffectiveRange.
 func (x *LayoutManager) TemporaryAttributesAtCharacterIndexEffectiveRange(charIndex uint, effectiveCharRange *foundation.NSRange) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.TemporaryAttributesAtCharacterIndexEffectiveRange(charIndex, effectiveCharRange)
 }
 
+// Sets one or more temporary attributes for the specified character range.
+//
 // SetTemporaryAttributesForCharacterRange calls the underlying SetTemporaryAttributesForCharacterRange.
 func (x *LayoutManager) SetTemporaryAttributesForCharacterRange(attrs *foundation.NSDictionary[*foundation.NSString, objc.ID], charRange foundation.NSRange) {
 	x.inner.SetTemporaryAttributesForCharacterRange(attrs, charRange)
 }
 
+// Appends one or more temporary attributes to the attributes dictionary of the specified character range.
+//
 // AddTemporaryAttributesForCharacterRange calls the underlying AddTemporaryAttributesForCharacterRange.
 func (x *LayoutManager) AddTemporaryAttributesForCharacterRange(attrs *foundation.NSDictionary[*foundation.NSString, objc.ID], charRange foundation.NSRange) {
 	x.inner.AddTemporaryAttributesForCharacterRange(attrs, charRange)
 }
 
+// Removes a temporary attribute from the list of attributes for the specified character range.
+//
 // RemoveTemporaryAttributeForCharacterRange calls the underlying RemoveTemporaryAttributeForCharacterRange.
 func (x *LayoutManager) RemoveTemporaryAttributeForCharacterRange(attrName *foundation.NSString, charRange foundation.NSRange) {
 	x.inner.RemoveTemporaryAttributeForCharacterRange(attrName, charRange)
 }
 
+// Returns the value for the temporary attribute of a character, and the range it applies to.
+//
 // TemporaryAttributeAtCharacterIndexEffectiveRange calls the underlying TemporaryAttributeAtCharacterIndexEffectiveRange.
 func (x *LayoutManager) TemporaryAttributeAtCharacterIndexEffectiveRange(attrName *foundation.NSString, location uint, range_ *foundation.NSRange) objc.ID {
 	return x.inner.TemporaryAttributeAtCharacterIndexEffectiveRange(attrName, location, range_)
 }
 
+// Returns the value for the temporary attribute of a character, and the maximum range it applies to.
+//
 // TemporaryAttributeAtCharacterIndexLongestEffectiveRangeInRange calls the underlying TemporaryAttributeAtCharacterIndexLongestEffectiveRangeInRange.
 func (x *LayoutManager) TemporaryAttributeAtCharacterIndexLongestEffectiveRangeInRange(attrName *foundation.NSString, location uint, range_ *foundation.NSRange, rangeLimit foundation.NSRange) objc.ID {
 	return x.inner.TemporaryAttributeAtCharacterIndexLongestEffectiveRangeInRange(attrName, location, range_, rangeLimit)
 }
 
+// Returns the temporary attributes for a character, and the maximum range they apply to.
+//
 // TemporaryAttributesAtCharacterIndexLongestEffectiveRangeInRange calls the underlying TemporaryAttributesAtCharacterIndexLongestEffectiveRangeInRange.
 func (x *LayoutManager) TemporaryAttributesAtCharacterIndexLongestEffectiveRangeInRange(location uint, range_ *foundation.NSRange, rangeLimit foundation.NSRange) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.TemporaryAttributesAtCharacterIndexLongestEffectiveRangeInRange(location, range_, rangeLimit)
 }
 
+// Adds a temporary attribute to the characters in the specified range.
+//
 // AddTemporaryAttributeValueForCharacterRange calls the underlying AddTemporaryAttributeValueForCharacterRange.
 func (x *LayoutManager) AddTemporaryAttributeValueForCharacterRange(attrName *foundation.NSString, value objc.ID, charRange foundation.NSRange) {
 	x.inner.AddTemporaryAttributeValueForCharacterRange(attrName, value, charRange)
 }
 
+// Returns the default line height for a line of text that uses a specified font.
+//
 // DefaultLineHeightForFont calls the underlying DefaultLineHeightForFont.
 func (x *LayoutManager) DefaultLineHeightForFont(theFont *raw.NSFont) float64 {
 	return x.inner.DefaultLineHeightForFont(theFont)
 }
 
+// Returns the default baseline offset that the layout manager’s typesetter uses for the specified font.
+//
 // DefaultBaselineOffsetForFont calls the underlying DefaultBaselineOffsetForFont.
 func (x *LayoutManager) DefaultBaselineOffsetForFont(theFont *raw.NSFont) float64 {
 	return x.inner.DefaultBaselineOffsetForFont(theFont)
@@ -742,11 +944,15 @@ func (x *LayoutManager) ExtraLineFragmentTextContainer() *TextContainer {
 	return &TextContainer{inner: _r}
 }
 
+// Returns an array of text ruler objects for the current selection.
+//
 // RulerMarkersForTextViewParagraphStyleRuler calls the underlying RulerMarkersForTextViewParagraphStyleRuler.
 func (x *LayoutManager) RulerMarkersForTextViewParagraphStyleRuler(view *raw.NSTextView, style *raw.NSParagraphStyle, ruler *raw.NSRulerView) *foundation.NSArray[*raw.NSRulerMarker] {
 	return x.inner.RulerMarkersForTextViewParagraphStyleRuler(view, style, ruler)
 }
 
+// Returns the accessory view that the text system uses for its ruler.
+//
 // RulerAccessoryViewForTextViewParagraphStyleRulerEnabled calls the underlying RulerAccessoryViewForTextViewParagraphStyleRulerEnabled.
 func (x *LayoutManager) RulerAccessoryViewForTextViewParagraphStyleRulerEnabled(view *raw.NSTextView, style *raw.NSParagraphStyle, ruler *raw.NSRulerView, isEnabled bool) *View {
 	_r := x.inner.RulerAccessoryViewForTextViewParagraphStyleRulerEnabled(view, style, ruler, isEnabled)
@@ -756,6 +962,8 @@ func (x *LayoutManager) RulerAccessoryViewForTextViewParagraphStyleRulerEnabled(
 	return &View{inner: _r}
 }
 
+// Indicates whether the first responder in the specified window is a text view for the layout manager.
+//
 // LayoutManagerOwnsFirstResponderInWindow calls the underlying LayoutManagerOwnsFirstResponderInWindow.
 func (x *LayoutManager) LayoutManagerOwnsFirstResponderInWindow(window *raw.NSWindow) bool {
 	return x.inner.LayoutManagerOwnsFirstResponderInWindow(window)

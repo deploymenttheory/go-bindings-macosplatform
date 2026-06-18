@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A graphical image, such as music album cover art, associated with a media item.
+//
 // MediaItemArtwork wraps [raw.MPMediaItemArtwork] with a fluent Go API.
 type MediaItemArtwork struct {
 	inner *raw.MPMediaItemArtwork
@@ -31,6 +33,8 @@ func MediaItemArtworkFromID(id objc.ID) *MediaItemArtwork {
 	return &MediaItemArtwork{inner: raw.MPMediaItemArtworkFromID(id)}
 }
 
+// Creates a new image from existing artwork with the specified bounds.
+//
 // NewMediaItemArtworkWithBoundsSizeRequestHandler creates a new [MediaItemArtwork].
 func NewMediaItemArtworkWithBoundsSizeRequestHandler(boundsSize corefoundation.CGSize, requestHandler objc.Block) *MediaItemArtwork {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPMediaItemArtwork")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewMediaItemArtworkWithBoundsSizeRequestHandler(boundsSize corefoundation.C
 	return &MediaItemArtwork{inner: raw.MPMediaItemArtworkFromID(_id)}
 }
 
+// Returns the artwork image for an item at the given size.
+//
 // ImageWithSize calls the underlying ImageWithSize.
 func (x *MediaItemArtwork) ImageWithSize(size corefoundation.CGSize) *appkit.NSImage {
 	return x.inner.ImageWithSize(size)

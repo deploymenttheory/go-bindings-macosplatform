@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a user deleting a group.
+//
 // ChangeHistoryDeleteGroupEvent wraps [raw.CNChangeHistoryDeleteGroupEvent] with a fluent Go API.
 type ChangeHistoryDeleteGroupEvent struct {
 	inner *raw.CNChangeHistoryDeleteGroupEvent

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains both input and output parameters that the low-latency super-resolution scaler frame processor needs.
+//
 // LowLatencySuperResolutionScalerParameters wraps [raw.VTLowLatencySuperResolutionScalerParameters] with a fluent Go API.
 type LowLatencySuperResolutionScalerParameters struct {
 	inner *raw.VTLowLatencySuperResolutionScalerParameters
@@ -31,7 +33,7 @@ func LowLatencySuperResolutionScalerParametersFromID(id objc.ID) *LowLatencySupe
 	return &LowLatencySuperResolutionScalerParameters{inner: raw.VTLowLatencySuperResolutionScalerParametersFromID(id)}
 }
 
-// Creates a new low-latency, super-resolution scaler parameters object. - Parameters: - sourceFrame: Current source frame; must be non `nil`. - destinationFrame: User-allocated pixel buffer that receives the scaled processor output; must be non `nil`.
+// Creates a new low-latency, super-resolution scaler parameters object.
 //
 // NewLowLatencySuperResolutionScalerParametersWithSourceFrameDestinationFrame creates a new [LowLatencySuperResolutionScalerParameters].
 func NewLowLatencySuperResolutionScalerParametersWithSourceFrameDestinationFrame(sourceFrame *raw.VTFrameProcessorFrame, destinationFrame *raw.VTFrameProcessorFrame) *LowLatencySuperResolutionScalerParameters {

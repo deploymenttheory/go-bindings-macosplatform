@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that determines which audio to play.
+//
 // SoundEvent wraps [raw.PHASESoundEvent] with a fluent Go API.
 type SoundEvent struct {
 	inner *raw.PHASESoundEvent
@@ -33,7 +35,7 @@ func SoundEventFromID(id objc.ID) *SoundEvent {
 	return &SoundEvent{inner: raw.PHASESoundEventFromID(id)}
 }
 
-// @method initWithEngine:assetIdentifier:mixerParameters:error @abstract Creates a new sound event instance @param engine The PHASEEngine object that the sound event will be played by. @param assetIdentifier The identifier registered with the Asset Registry for the particular PHASESoundEventNodeAsset that this sound instance will play. If the asset identifier is not registered, this function will fail. @param mixerParameters A dictionary of PHASEMixerParameters objects with keys that match the identifiers of the spatial mixers in the sound event @discussion This will look up the asset in the asset registry and create the necessary objects to play the sound event
+// Creates a sound event node with the given asset and mixer parameters.
 //
 // NewSoundEventWithEngineAssetIdentifierMixerParametersError creates a new [SoundEvent].
 func NewSoundEventWithEngineAssetIdentifierMixerParametersError(engine *raw.PHASEEngine, assetIdentifier string, mixerParameters *raw.PHASEMixerParameters) (*SoundEvent, error) {
@@ -46,7 +48,7 @@ func NewSoundEventWithEngineAssetIdentifierMixerParametersError(engine *raw.PHAS
 	return &SoundEvent{inner: raw.PHASESoundEventFromID(_id)}, nil
 }
 
-// @method initWithEngine:assetIdentifier:error @abstract Creates a new sound event instance @param engine The PHASEEngine object that the sound event will be played by. @param assetIdentifier The identifier registered with the Asset Registry for the particular PHASESoundEventNodeAsset that this sound event will play. If the asset identifier is not registered, this function will fail. @discussion This will look up the asset in the asset registry and create the necessary objects to play the sound event
+// Creates a sound event node with the given asset.
 //
 // NewSoundEventWithEngineAssetIdentifierError creates a new [SoundEvent].
 func NewSoundEventWithEngineAssetIdentifierError(engine *raw.PHASEEngine, assetIdentifier string) (*SoundEvent, error) {
@@ -59,14 +61,14 @@ func NewSoundEventWithEngineAssetIdentifierError(engine *raw.PHASEEngine, assetI
 	return &SoundEvent{inner: raw.PHASESoundEventFromID(_id)}, nil
 }
 
-// @method prepareWithCompletion @abstract Prepare the sound event @param handler The block that will be called when the PHASESoundEvent has finished preparing and is ready to start. Pass in nil for no handler. @discussion This function notifies the engine to begin preparing a sound event, then returns immediately. Once the sound event is prepared (or has failed to prepare), you will receive a callback via the completion. If you call startWithCompletion() before receiving the callback, the sound event will start as soon as it's prepared.
+// Enables a sound event to play and runs the argument code when the sound event plays back.
 //
 // PrepareWithCompletion calls the underlying PrepareWithCompletion.
 func (x *SoundEvent) PrepareWithCompletion(handler func(PHASESoundEventPrepareHandlerReason)) {
 	x.inner.PrepareWithCompletion(func(_a0 raw.PHASESoundEventPrepareHandlerReason) { handler(PHASESoundEventPrepareHandlerReason(_a0)) })
 }
 
-// @method startWithCompletion @abstract Start the sound event @param handler The block that will be called when the sound event has stopped. @discussion This function notifies the engine to start the sound event, then returns immediately. Once the sound event is playing (or has failed to start), you will receive a callback via the completion. Playback will begin immediately if the sound event has been prepared; otherwise, it will start as soon as it is finished preparing.
+// Invokes the sound event and runs the specified code on completion.
 //
 // StartWithCompletion calls the underlying StartWithCompletion.
 func (x *SoundEvent) StartWithCompletion(handler func(PHASESoundEventStartHandlerReason)) {
@@ -80,7 +82,7 @@ func (x *SoundEvent) StartAtTimeCompletion(when *avfaudio.AVAudioTime, handler f
 	x.inner.StartAtTimeCompletion(when, func(_a0 raw.PHASESoundEventStartHandlerReason) { handler(PHASESoundEventStartHandlerReason(_a0)) })
 }
 
-// @method seekToTime:completion @abstract Seeks all leaf nodes in a PHASESoundEvent to a specified time relative to the start of the sound event. @discussion This function notifies the engine to seek the sound event, then returns immediately. Once the sound event has seeked to the new offset (or has failed to seek), you will receive a callback via the completion. If any leaf nodes do not support seeking, those nodes will ignore this command. Nodes that have finished playing or have stopped will not seek. Nodes that are sleeping will seek, and will resume at the correct time when they wake up. @note The time is scaled by unitsPerSecond internally, so can be provided at the client's native time scale.
+// Advances the sound event’s playback position to a specific time.
 //
 // SeekToTimeCompletion calls the underlying SeekToTimeCompletion.
 func (x *SoundEvent) SeekToTimeCompletion(time_ float64, handler func(PHASESoundEventSeekHandlerReason)) {
@@ -94,14 +96,14 @@ func (x *SoundEvent) SeekToTimeResumeAtEngineTimeCompletion(time_ float64, engin
 	x.inner.SeekToTimeResumeAtEngineTimeCompletion(time_, engineTime, func(_a0 raw.PHASESoundEventSeekHandlerReason) { handler(PHASESoundEventSeekHandlerReason(_a0)) })
 }
 
-// @method pause @abstract Pause the sound event.
+// Pauses the sound event.
 //
 // Pause calls the underlying Pause.
 func (x *SoundEvent) Pause() {
 	x.inner.Pause()
 }
 
-// @method resume @abstract Resume the sound event.
+// Resumes the sound event.
 //
 // Resume calls the underlying Resume.
 func (x *SoundEvent) Resume() {
@@ -115,7 +117,7 @@ func (x *SoundEvent) ResumeAtTime(time_ *avfaudio.AVAudioTime) {
 	x.inner.ResumeAtTime(time_)
 }
 
-// @method stopAndInvalidate @abstract stop and invalidate the sound event
+// Stops a sound event and prevents it from resuming.
 //
 // StopAndInvalidate calls the underlying StopAndInvalidate.
 func (x *SoundEvent) StopAndInvalidate() {

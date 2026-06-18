@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A group of windows that display together as a single tabbed window.
+//
 // WindowTabGroup wraps [raw.NSWindowTabGroup] with a fluent Go API.
 type WindowTabGroup struct {
 	inner *raw.NSWindowTabGroup
@@ -36,28 +38,38 @@ func NewWindowTabGroup() *WindowTabGroup {
 	return &WindowTabGroup{inner: raw.NSWindowTabGroupFromID(_id)}
 }
 
+// A Boolean value indicating if the tab overview is currently displayed.
+//
 // WithOverviewVisible sets the overviewVisible property and returns the receiver for chaining.
 func (x *WindowTabGroup) WithOverviewVisible(overviewVisible bool) *WindowTabGroup {
 	x.inner.SetOverviewVisible(overviewVisible)
 	return x
 }
 
+// The selected, or frontmost, window in the tab group.
+//
 // WithSelectedWindow sets the selectedWindow property and returns the receiver for chaining.
 func (x *WindowTabGroup) WithSelectedWindow(selectedWindow WindowProvider) *WindowTabGroup {
 	x.inner.SetSelectedWindow(selectedWindow.asWindow())
 	return x
 }
 
+// Adds a window to the tab group.
+//
 // AddWindow calls the underlying AddWindow.
 func (x *WindowTabGroup) AddWindow(window *raw.NSWindow) {
 	x.inner.AddWindow(window)
 }
 
+// Inserts a window at a specific location within the tab group.
+//
 // InsertWindowAtIndex calls the underlying InsertWindowAtIndex.
 func (x *WindowTabGroup) InsertWindowAtIndex(window *raw.NSWindow, index int) {
 	x.inner.InsertWindowAtIndex(window, index)
 }
 
+// Removes a window from the tab group.
+//
 // RemoveWindow calls the underlying RemoveWindow.
 func (x *WindowTabGroup) RemoveWindow(window *raw.NSWindow) {
 	x.inner.RemoveWindow(window)

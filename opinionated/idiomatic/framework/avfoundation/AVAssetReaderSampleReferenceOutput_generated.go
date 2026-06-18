@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that reads sample references from an asset track.
+//
 // AssetReaderSampleReferenceOutput wraps [raw.AVAssetReaderSampleReferenceOutput] with a fluent Go API.
 type AssetReaderSampleReferenceOutput struct {
 	inner *raw.AVAssetReaderSampleReferenceOutput
@@ -31,7 +33,7 @@ func AssetReaderSampleReferenceOutputFromID(id objc.ID) *AssetReaderSampleRefere
 	return &AssetReaderSampleReferenceOutput{inner: raw.AVAssetReaderSampleReferenceOutputFromID(id)}
 }
 
-// @method initWithTrack: @abstract Returns an instance of AVAssetReaderSampleReferenceOutput for supplying sample references. @param track The AVAssetTrack for which the resulting AVAssetReaderSampleReferenceOutput should provide sample references. @result An instance of AVAssetReaderTrackOutput. @discussion The track must be one of the tracks contained by the target AVAssetReader's asset.
+// Creates an object that supplies sample references.
 //
 // NewAssetReaderSampleReferenceOutputWithTrack creates a new [AssetReaderSampleReferenceOutput].
 func NewAssetReaderSampleReferenceOutputWithTrack(track *raw.AVAssetTrack) *AssetReaderSampleReferenceOutput {
@@ -40,7 +42,7 @@ func NewAssetReaderSampleReferenceOutputWithTrack(track *raw.AVAssetTrack) *Asse
 	return &AssetReaderSampleReferenceOutput{inner: raw.AVAssetReaderSampleReferenceOutputFromID(_id)}
 }
 
-// @property alwaysCopiesSampleData @abstract Indicates whether or not the data in buffers gets copied before being vended to the client. @discussion When the value of this property is YES, the AVAssetReaderOutput will always vend a buffer with copied data to the client.  Data in such buffers can be freely modified by the client. When the value of this property is NO, the buffers vended to the client may not be copied.  Such buffers may still be referenced by other entities. The result of modifying a buffer whose data hasn't been copied is undefined.  Requesting buffers whose data hasn't been copied when possible can lead to performance improvements. The default value is YES. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown).
+// A Boolean value that indicates whether the output vends copied sample data.
 //
 // WithAlwaysCopiesSampleData sets the alwaysCopiesSampleData property and returns the receiver for chaining.
 func (x *AssetReaderSampleReferenceOutput) WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderSampleReferenceOutput {
@@ -48,7 +50,7 @@ func (x *AssetReaderSampleReferenceOutput) WithAlwaysCopiesSampleData(alwaysCopi
 	return x
 }
 
-// @property supportsRandomAccess @abstract Indicates whether the asset reader output supports reconfiguration of the time ranges to read. @discussion When the value of this property is YES, the time ranges read by the asset reader output can be reconfigured during reading using the -resetForReadingTimeRanges: method.  This also prevents the attached AVAssetReader from progressing to AVAssetReaderStatusCompleted until -markConfigurationAsFinal has been invoked. The default value is NO, which means that the asset reader output may not be reconfigured once reading has begun.  When the value of this property is NO, AVAssetReader may be able to read media data more efficiently, particularly when multiple asset reader outputs are attached. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown) or after an AVAssetReaderOutput.Provider is attached.
+// A Boolean value that indicates whether the output supports reconfiguring the time ranges it reads.
 //
 // WithSupportsRandomAccess sets the supportsRandomAccess property and returns the receiver for chaining.
 func (x *AssetReaderSampleReferenceOutput) WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderSampleReferenceOutput {

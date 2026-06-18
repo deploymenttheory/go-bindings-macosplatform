@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Groups together parameters for the creation of a new command queue.
+//
 // MTL4CommandQueueDescriptor wraps [raw.MTL4CommandQueueDescriptor] with a fluent Go API.
 type MTL4CommandQueueDescriptor struct {
 	inner *raw.MTL4CommandQueueDescriptor
@@ -45,7 +47,7 @@ func (x *MTL4CommandQueueDescriptor) WithLabel(label string) *MTL4CommandQueueDe
 	return x
 }
 
-// Assigns a dispatch queue to which Metal submits feedback notification blocks. When you assign a dispatch queue via this method, Metal requires that the queue parameter you provide is a serial queue. If you set the value of property to `nil`, the default, Metal allocates an internal dispatch queue to service feedback notifications.
+// Assigns a dispatch queue to which Metal submits feedback notification blocks.
 //
 // WithFeedbackQueue sets the feedbackQueue property and returns the receiver for chaining.
 func (x *MTL4CommandQueueDescriptor) WithFeedbackQueue(feedbackQueue *foundation.NSObject) *MTL4CommandQueueDescriptor {

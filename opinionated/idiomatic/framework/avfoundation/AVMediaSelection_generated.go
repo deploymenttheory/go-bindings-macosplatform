@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a complete rendition of media selection options on an asset.
+//
 // MediaSelection wraps [raw.AVMediaSelection] with a fluent Go API.
 type MediaSelection struct {
 	inner *raw.AVMediaSelection
@@ -35,7 +37,7 @@ func NewMediaSelection() *MediaSelection {
 	return &MediaSelection{inner: raw.AVMediaSelectionFromID(_id)}
 }
 
-// @method		selectedMediaOptionInMediaSelectionGroup: @abstract		Indicates the media selection option that's currently selected from the specified group. May be nil. @param 		mediaSelectionGroup A media selection group obtained from the receiver's asset. @result		An instance of AVMediaSelectionOption that describes the currently selection option in the group. @discussion If the value of the property allowsEmptySelection of the AVMediaSelectionGroup is YES, the currently selected option in the group may be nil.
+// Returns the media selection option that’s currently selected in the specified group.
 //
 // SelectedMediaOptionInMediaSelectionGroup calls the underlying SelectedMediaOptionInMediaSelectionGroup.
 func (x *MediaSelection) SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *MediaSelectionOption {
@@ -46,7 +48,7 @@ func (x *MediaSelection) SelectedMediaOptionInMediaSelectionGroup(mediaSelection
 	return &MediaSelectionOption{inner: _r}
 }
 
-// @method		mediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup: @abstract		Indicates that specified media selection group is subject to automatic media selection. @param 		mediaSelectionGroup A media selection group obtained from the receiver's asset. @result		YES if the group is subject to automatic media selection. @discussion	Automatic application of media selection criteria is suspended in any group in which a specific selection has been made via an invocation of -selectMediaOption:inMediaSelectionGroup:.
+// Indicates whether the specified media selection group is subject to automatic media selection.
 //
 // MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup calls the underlying MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup.
 func (x *MediaSelection) MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) bool {

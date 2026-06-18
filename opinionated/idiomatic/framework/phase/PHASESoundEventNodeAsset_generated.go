@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A template object for sounds that can play in reaction to environmental state.
+//
 // SoundEventNodeAsset wraps [raw.PHASESoundEventNodeAsset] with a fluent Go API.
 type SoundEventNodeAsset struct {
 	inner *raw.PHASESoundEventNodeAsset

@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A visual representation of a level or quantity, using discrete values.
+//
 // LevelIndicator wraps [raw.NSLevelIndicator] with a fluent Go API.
 type LevelIndicator struct {
 	inner *raw.NSLevelIndicator
@@ -40,6 +42,8 @@ func NewLevelIndicator() *LevelIndicator {
 	return &LevelIndicator{inner: raw.NSLevelIndicatorFromID(_id)}
 }
 
+// The appearance of the indicator.
+//
 // WithLevelIndicatorStyle sets the levelIndicatorStyle property and returns the receiver for chaining.
 func (x *LevelIndicator) WithLevelIndicatorStyle(levelIndicatorStyle NSLevelIndicatorStyle) *LevelIndicator {
 	x.inner.SetLevelIndicatorStyle(raw.NSLevelIndicatorStyle(levelIndicatorStyle))
@@ -52,49 +56,63 @@ func (x *LevelIndicator) WithEditable(editable bool) *LevelIndicator {
 	return x
 }
 
+// The receiver’s minimum value.
+//
 // WithMinValue sets the minValue property and returns the receiver for chaining.
 func (x *LevelIndicator) WithMinValue(minValue float64) *LevelIndicator {
 	x.inner.SetMinValue(minValue)
 	return x
 }
 
+// The receiver’s maximum value.
+//
 // WithMaxValue sets the maxValue property and returns the receiver for chaining.
 func (x *LevelIndicator) WithMaxValue(maxValue float64) *LevelIndicator {
 	x.inner.SetMaxValue(maxValue)
 	return x
 }
 
+// The receiver’s warning value.
+//
 // WithWarningValue sets the warningValue property and returns the receiver for chaining.
 func (x *LevelIndicator) WithWarningValue(warningValue float64) *LevelIndicator {
 	x.inner.SetWarningValue(warningValue)
 	return x
 }
 
+// The receiver’s critical value.
+//
 // WithCriticalValue sets the criticalValue property and returns the receiver for chaining.
 func (x *LevelIndicator) WithCriticalValue(criticalValue float64) *LevelIndicator {
 	x.inner.SetCriticalValue(criticalValue)
 	return x
 }
 
+// Determines how the receiver’s tick marks are aligned with it.
+//
 // WithTickMarkPosition sets the tickMarkPosition property and returns the receiver for chaining.
 func (x *LevelIndicator) WithTickMarkPosition(tickMarkPosition NSTickMarkPosition) *LevelIndicator {
 	x.inner.SetTickMarkPosition(raw.NSTickMarkPosition(tickMarkPosition))
 	return x
 }
 
+// The number of tick marks associated with the receiver.
+//
 // WithNumberOfTickMarks sets the numberOfTickMarks property and returns the receiver for chaining.
 func (x *LevelIndicator) WithNumberOfTickMarks(numberOfTickMarks int) *LevelIndicator {
 	x.inner.SetNumberOfTickMarks(numberOfTickMarks)
 	return x
 }
 
+// The number of major tick marks associated with the receiver.
+//
 // WithNumberOfMajorTickMarks sets the numberOfMajorTickMarks property and returns the receiver for chaining.
 func (x *LevelIndicator) WithNumberOfMajorTickMarks(numberOfMajorTickMarks int) *LevelIndicator {
 	x.inner.SetNumberOfMajorTickMarks(numberOfMajorTickMarks)
 	return x
 }
 
-// Sets the fill color used by Continuous and Discrete Capacity indicators when drawing the "normal" state, and by the rating indicator when drawing stars. The default value is a system-defined color which may vary between level indicator styles and OS releases.
+// Sets the fill color used by Continuous and Discrete Capacity indicators when drawing the “normal” state, and by the rating indicator when drawing stars.
 //
 // WithFillColor sets the fillColor property and returns the receiver for chaining.
 func (x *LevelIndicator) WithFillColor(fillColor *Color) *LevelIndicator {
@@ -102,7 +120,7 @@ func (x *LevelIndicator) WithFillColor(fillColor *Color) *LevelIndicator {
 	return x
 }
 
-// Sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "warning" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
+// Sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the “warning” threshold.
 //
 // WithWarningFillColor sets the warningFillColor property and returns the receiver for chaining.
 func (x *LevelIndicator) WithWarningFillColor(warningFillColor *Color) *LevelIndicator {
@@ -110,7 +128,7 @@ func (x *LevelIndicator) WithWarningFillColor(warningFillColor *Color) *LevelInd
 	return x
 }
 
-// Sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the "critical" threshold. The default value is a system-defined color which may vary between level indicator styles and OS releases.
+// Sets the fill color used by Continuous and Discrete Capacity indicators when drawing values above the “critical” threshold.
 //
 // WithCriticalFillColor sets the criticalFillColor property and returns the receiver for chaining.
 func (x *LevelIndicator) WithCriticalFillColor(criticalFillColor *Color) *LevelIndicator {
@@ -124,7 +142,7 @@ func (x *LevelIndicator) WithDrawsTieredCapacityLevels(drawsTieredCapacityLevels
 	return x
 }
 
-// For a rating-style indicator, sets the conditions under which rating placeholders are displayed. This property currently has no effect for other indicator styles. The default value is `NSLevelIndicatorPlaceholderVisibilityAutomatic`.
+// For a rating-style indicator, sets the conditions under which rating placeholders are displayed.
 //
 // WithPlaceholderVisibility sets the placeholderVisibility property and returns the receiver for chaining.
 func (x *LevelIndicator) WithPlaceholderVisibility(placeholderVisibility NSLevelIndicatorPlaceholderVisibility) *LevelIndicator {
@@ -132,7 +150,7 @@ func (x *LevelIndicator) WithPlaceholderVisibility(placeholderVisibility NSLevel
 	return x
 }
 
-// Sets the image used by the rating indicator style in place of the default star image. The default value is `nil`.
+// Sets the image used by the rating indicator style in place of the default star image.
 //
 // WithRatingImage sets the ratingImage property and returns the receiver for chaining.
 func (x *LevelIndicator) WithRatingImage(ratingImage *Image) *LevelIndicator {
@@ -140,144 +158,192 @@ func (x *LevelIndicator) WithRatingImage(ratingImage *Image) *LevelIndicator {
 	return x
 }
 
+// Sets the image used by the rating indicator style in place of the default faded placeholder image.
+//
 // WithRatingPlaceholderImage sets the ratingPlaceholderImage property and returns the receiver for chaining.
 func (x *LevelIndicator) WithRatingPlaceholderImage(ratingPlaceholderImage *Image) *LevelIndicator {
 	x.inner.SetRatingPlaceholderImage(ratingPlaceholderImage.Unwrap())
 	return x
 }
 
+// The target object that receives action messages from the cell.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *LevelIndicator) WithTarget(target objc.ID) *LevelIndicator {
 	x.inner.NSControl.SetTarget(target)
 	return x
 }
 
+// The default action-message selector associated with the control.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *LevelIndicator) WithAction(action objc.SEL) *LevelIndicator {
 	x.inner.NSControl.SetAction(action)
 	return x
 }
 
+// The tag identifying the receiver (not the tag of the receiver’s cell).
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *LevelIndicator) WithTag(tag int) *LevelIndicator {
 	x.inner.NSControl.SetTag(tag)
 	return x
 }
 
+// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+//
 // WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
 func (x *LevelIndicator) WithIgnoresMultiClick(ignoresMultiClick bool) *LevelIndicator {
 	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
 	return x
 }
 
+// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *LevelIndicator) WithContinuous(continuous bool) *LevelIndicator {
 	x.inner.NSControl.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver reacts to mouse events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *LevelIndicator) WithEnabled(enabled bool) *LevelIndicator {
 	x.inner.NSControl.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the receiver refuses the first responder role.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *LevelIndicator) WithRefusesFirstResponder(refusesFirstResponder bool) *LevelIndicator {
 	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value that indicates whether the cell is highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *LevelIndicator) WithHighlighted(highlighted bool) *LevelIndicator {
 	x.inner.NSControl.SetHighlighted(highlighted)
 	return x
 }
 
+// The size of the control.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *LevelIndicator) WithControlSize(controlSize NSControlSize) *LevelIndicator {
 	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The receiver’s formatter.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *LevelIndicator) WithFormatter(formatter *foundation.NSFormatter) *LevelIndicator {
 	x.inner.NSControl.SetFormatter(formatter)
 	return x
 }
 
+// The value of the receiver’s cell as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *LevelIndicator) WithObjectValue(objectValue objc.ID) *LevelIndicator {
 	x.inner.NSControl.SetObjectValue(objectValue)
 	return x
 }
 
+// The value of the receiver’s cell as an NSString object.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *LevelIndicator) WithStringValue(stringValue string) *LevelIndicator {
 	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The value of the receiver’s cell as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *LevelIndicator) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *LevelIndicator {
 	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *LevelIndicator) WithIntValue(intValue int) *LevelIndicator {
 	x.inner.NSControl.SetIntValue(intValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *LevelIndicator) WithIntegerValue(integerValue int) *LevelIndicator {
 	x.inner.NSControl.SetIntegerValue(integerValue)
 	return x
 }
 
+// The value of the receiver’s cell as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *LevelIndicator) WithFloatValue(floatValue float32) *LevelIndicator {
 	x.inner.NSControl.SetFloatValue(floatValue)
 	return x
 }
 
+// The value of the receiver’s cell as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *LevelIndicator) WithDoubleValue(doubleValue float64) *LevelIndicator {
 	x.inner.NSControl.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The font used to draw text in the receiver’s cell.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *LevelIndicator) WithFont(font *Font) *LevelIndicator {
 	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *LevelIndicator) WithUsesSingleLineMode(usesSingleLineMode bool) *LevelIndicator {
 	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// The line break mode to use for text in the control’s cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *LevelIndicator) WithLineBreakMode(lineBreakMode NSLineBreakMode) *LevelIndicator {
 	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The alignment mode of the text in the receiver’s cell.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *LevelIndicator) WithAlignment(alignment NSTextAlignment) *LevelIndicator {
 	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *LevelIndicator) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *LevelIndicator {
 	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+//
 // WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
 func (x *LevelIndicator) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *LevelIndicator {
 	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
@@ -332,6 +398,8 @@ func (x *LevelIndicator) WithAutoresizingMask(autoresizingMask NSAutoresizingMas
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *LevelIndicator) WithFrame(frame corefoundation.CGRect) *LevelIndicator {
 	x.inner.NSControl.NSView.SetFrame(frame)
@@ -356,6 +424,8 @@ func (x *LevelIndicator) WithBoundsRotation(boundsRotation float64) *LevelIndica
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *LevelIndicator) WithBounds(bounds corefoundation.CGRect) *LevelIndicator {
 	x.inner.NSControl.NSView.SetBounds(bounds)
@@ -368,6 +438,8 @@ func (x *LevelIndicator) WithCanDrawConcurrently(canDrawConcurrently bool) *Leve
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *LevelIndicator) WithNeedsDisplay(needsDisplay bool) *LevelIndicator {
 	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
@@ -554,7 +626,7 @@ func (x *LevelIndicator) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets f
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *LevelIndicator) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *LevelIndicator {
@@ -610,35 +682,47 @@ func (x *LevelIndicator) WithPressureConfiguration(pressureConfiguration *Pressu
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *LevelIndicator) WithNextResponder(nextResponder ResponderProvider) *LevelIndicator {
 	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *LevelIndicator) WithMenu(menu *Menu) *LevelIndicator {
 	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *LevelIndicator) WithUserActivity(userActivity *foundation.NSUserActivity) *LevelIndicator {
 	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *LevelIndicator) WithTouchBar(touchBar *TouchBar) *LevelIndicator {
 	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Returns the receiver’s value represented by the tick mark at the specified index (the minimum-value tick mark has an index of 0).
+//
 // TickMarkValueAtIndex calls the underlying TickMarkValueAtIndex.
 func (x *LevelIndicator) TickMarkValueAtIndex(index int) float64 {
 	return x.inner.TickMarkValueAtIndex(index)
 }
 
+// Returns the bounding rectangle of the tick mark identified by the specified index (the minimum-value tick mark is at index 0).
+//
 // RectOfTickMarkAtIndex calls the underlying RectOfTickMarkAtIndex.
 func (x *LevelIndicator) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
 	return x.inner.RectOfTickMarkAtIndex(index)

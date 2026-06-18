@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A view that extends content to fill its own bounds.
+//
 // BackgroundExtensionView wraps [raw.NSBackgroundExtensionView] with a fluent Go API.
 type BackgroundExtensionView struct {
 	inner *raw.NSBackgroundExtensionView
@@ -40,7 +42,7 @@ func NewBackgroundExtensionView() *BackgroundExtensionView {
 	return &BackgroundExtensionView{inner: raw.NSBackgroundExtensionViewFromID(_id)}
 }
 
-// The content view to extend to fill the `NSBackgroundExtensionView`. The content view will be added as a subview of the extension view and placed within the safe area by default. See `automaticallyPlacesContentView` to customize the layout.
+// The content view to extend to fill the NSBackgroundExtensionView.
 //
 // WithContentView sets the contentView property and returns the receiver for chaining.
 func (x *BackgroundExtensionView) WithContentView(contentView ViewProvider) *BackgroundExtensionView {
@@ -48,7 +50,7 @@ func (x *BackgroundExtensionView) WithContentView(contentView ViewProvider) *Bac
 	return x
 }
 
-// Controls the automatic safe area placement of the `contentView` within the container. When `NO`, the frame of the content view must be explicitly set or constraints added. The extension effect will be used to fill the container view around the content. Defaults to `YES`.
+// Controls the automatic safe area placement of the contentView within the container.
 //
 // WithAutomaticallyPlacesContentView sets the automaticallyPlacesContentView property and returns the receiver for chaining.
 func (x *BackgroundExtensionView) WithAutomaticallyPlacesContentView(automaticallyPlacesContentView bool) *BackgroundExtensionView {
@@ -98,6 +100,8 @@ func (x *BackgroundExtensionView) WithAutoresizingMask(autoresizingMask NSAutore
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *BackgroundExtensionView) WithFrame(frame corefoundation.CGRect) *BackgroundExtensionView {
 	x.inner.NSView.SetFrame(frame)
@@ -122,6 +126,8 @@ func (x *BackgroundExtensionView) WithBoundsRotation(boundsRotation float64) *Ba
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *BackgroundExtensionView) WithBounds(bounds corefoundation.CGRect) *BackgroundExtensionView {
 	x.inner.NSView.SetBounds(bounds)
@@ -134,6 +140,8 @@ func (x *BackgroundExtensionView) WithCanDrawConcurrently(canDrawConcurrently bo
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *BackgroundExtensionView) WithNeedsDisplay(needsDisplay bool) *BackgroundExtensionView {
 	x.inner.NSView.SetNeedsDisplay(needsDisplay)
@@ -320,7 +328,7 @@ func (x *BackgroundExtensionView) WithAdditionalSafeAreaInsets(additionalSafeAre
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *BackgroundExtensionView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *BackgroundExtensionView {
@@ -376,24 +384,32 @@ func (x *BackgroundExtensionView) WithPressureConfiguration(pressureConfiguratio
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *BackgroundExtensionView) WithNextResponder(nextResponder ResponderProvider) *BackgroundExtensionView {
 	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *BackgroundExtensionView) WithMenu(menu *Menu) *BackgroundExtensionView {
 	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *BackgroundExtensionView) WithUserActivity(userActivity *foundation.NSUserActivity) *BackgroundExtensionView {
 	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *BackgroundExtensionView) WithTouchBar(touchBar *TouchBar) *BackgroundExtensionView {
 	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())

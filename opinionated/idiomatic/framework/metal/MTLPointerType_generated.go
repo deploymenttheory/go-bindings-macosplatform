@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of a pointer.
+//
 // PointerType wraps [raw.MTLPointerType] with a fluent Go API.
 type PointerType struct {
 	inner *raw.MTLPointerType
@@ -35,6 +37,8 @@ func NewPointerType() *PointerType {
 	return &PointerType{inner: raw.MTLPointerTypeFromID(_id)}
 }
 
+// Provides a description of the underlying struct when the pointer points to a struct.
+//
 // ElementStructType calls the underlying ElementStructType.
 func (x *PointerType) ElementStructType() *StructType {
 	_r := x.inner.ElementStructType()
@@ -44,6 +48,8 @@ func (x *PointerType) ElementStructType() *StructType {
 	return &StructType{inner: _r}
 }
 
+// Provides a description of the underlying array when the pointer points to an array.
+//
 // ElementArrayType calls the underlying ElementArrayType.
 func (x *PointerType) ElementArrayType() *ArrayType {
 	_r := x.inner.ElementArrayType()

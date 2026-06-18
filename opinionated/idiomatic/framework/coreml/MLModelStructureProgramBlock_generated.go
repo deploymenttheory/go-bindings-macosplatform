@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class representing a block in the Program.
+//
 // ModelStructureProgramBlock wraps [raw.MLModelStructureProgramBlock] with a fluent Go API.
 type ModelStructureProgramBlock struct {
 	inner *raw.MLModelStructureProgramBlock

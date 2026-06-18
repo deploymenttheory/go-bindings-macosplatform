@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A generator of texel data that creates a checkerboard pattern with two specified colors.
+//
 // CheckerboardTexture wraps [raw.MDLCheckerboardTexture] with a fluent Go API.
 type CheckerboardTexture struct {
 	inner *raw.MDLCheckerboardTexture
@@ -31,6 +33,8 @@ func CheckerboardTextureFromID(id objc.ID) *CheckerboardTexture {
 	return &CheckerboardTexture{inner: raw.MDLCheckerboardTextureFromID(id)}
 }
 
+// Initializes a checkerboard texture with the specified colors and other properties.
+//
 // NewCheckerboardTextureWithDivisionsNameDimensionsChannelCountChannelEncodingColor1Color2 creates a new [CheckerboardTexture].
 func NewCheckerboardTextureWithDivisionsNameDimensionsChannelCountChannelEncodingColor1Color2(divisions float32, name string, dimensions unsafe.Pointer, channelCount int, channelEncoding MDLTextureChannelEncoding, color1 unsafe.Pointer, color2 unsafe.Pointer) *CheckerboardTexture {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLCheckerboardTexture")), objc.RegisterName("alloc"))
@@ -38,12 +42,16 @@ func NewCheckerboardTextureWithDivisionsNameDimensionsChannelCountChannelEncodin
 	return &CheckerboardTexture{inner: raw.MDLCheckerboardTextureFromID(_id)}
 }
 
+// The number of squares along each dimension in the checkerboard pattern.
+//
 // WithDivisions sets the divisions property and returns the receiver for chaining.
 func (x *CheckerboardTexture) WithDivisions(divisions float32) *CheckerboardTexture {
 	x.inner.SetDivisions(divisions)
 	return x
 }
 
+// A Boolean value that indicates whether the texture is a cube textures.
+//
 // WithIsCube sets the isCube property and returns the receiver for chaining.
 func (x *CheckerboardTexture) WithIsCube(isCube bool) *CheckerboardTexture {
 	x.inner.MDLTexture.SetIsCube(isCube)

@@ -8,6 +8,7 @@ import (
 	"fmt"
 )
 
+// The status values for app tracking authorization.
 type ATTrackingManagerAuthorizationStatus uint64
 
 const (

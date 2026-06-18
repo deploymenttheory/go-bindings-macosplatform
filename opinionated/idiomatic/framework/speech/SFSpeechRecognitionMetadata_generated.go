@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The metadata of speech in the audio of a speech recognition request.
+//
 // SpeechRecognitionMetadata wraps [raw.SFSpeechRecognitionMetadata] with a fluent Go API.
 type SpeechRecognitionMetadata struct {
 	inner *raw.SFSpeechRecognitionMetadata

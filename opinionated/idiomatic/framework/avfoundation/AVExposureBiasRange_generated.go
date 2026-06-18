@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that expresses an inclusive range of supported exposure bias values, in EV units.
+//
 // ExposureBiasRange wraps [raw.AVExposureBiasRange] with a fluent Go API.
 type ExposureBiasRange struct {
 	inner *raw.AVExposureBiasRange
@@ -35,7 +37,7 @@ func NewExposureBiasRange() *ExposureBiasRange {
 	return &ExposureBiasRange{inner: raw.AVExposureBiasRangeFromID(_id)}
 }
 
-// @method containsExposureBias: @abstract Tests if a given exposure bias in EV units is within the exposure bias range. @param exposureBias The exposure bias to test. @result Returns YES if the given exposure bias is within the exposure bias, NO otherwise. @discussion Note that the exposure bias ranges are inclusive.
+// Determines whether the range contains the specified exposure bias.
 //
 // ContainsExposureBias calls the underlying ContainsExposureBias.
 func (x *ExposureBiasRange) ContainsExposureBias(exposureBias float32) bool {

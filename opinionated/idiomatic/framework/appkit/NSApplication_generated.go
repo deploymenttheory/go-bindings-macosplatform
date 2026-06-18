@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that manages an app’s main event loop and resources used by all of that app’s objects.
+//
 // Application wraps [raw.NSApplication] with a fluent Go API.
 type Application struct {
 	inner *raw.NSApplication
@@ -38,6 +40,8 @@ func NewApplication() *Application {
 	return &Application{inner: raw.NSApplicationFromID(_id)}
 }
 
+// The app delegate object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Application) WithDelegate(delegate raw.NSApplicationDelegate) *Application {
 	x.inner.SetDelegate(delegate)
@@ -50,7 +54,7 @@ func (x *Application) WithMainMenu(mainMenu *Menu) *Application {
 	return x
 }
 
-// Set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from `-helpMenu`).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.  @c NSApplication retains its Help menu and releases it when a different menu is set.
+// The help menu used by the app.
 //
 // WithHelpMenu sets the helpMenu property and returns the receiver for chaining.
 func (x *Application) WithHelpMenu(helpMenu *Menu) *Application {
@@ -58,13 +62,15 @@ func (x *Application) WithHelpMenu(helpMenu *Menu) *Application {
 	return x
 }
 
+// The image used for the app’s icon.
+//
 // WithApplicationIconImage sets the applicationIconImage property and returns the receiver for chaining.
 func (x *Application) WithApplicationIconImage(applicationIconImage *Image) *Application {
 	x.inner.SetApplicationIconImage(applicationIconImage.Unwrap())
 	return x
 }
 
-// Gets or sets the @c presentationOptions that should be in effect for the system when this application is the active application.  Only certain combinations of @c NSApplicationPresentationOptions flags are allowed, as detailed in the AppKit Release Notes and the reference documentation for `-setPresentationOptions:`.  When given an invalid combination of option flags, `-setPresentationOptions:` raises an exception.
+// The presentation options that should be in effect for the system when this app is active.
 //
 // WithPresentationOptions sets the presentationOptions property and returns the receiver for chaining.
 func (x *Application) WithPresentationOptions(presentationOptions NSApplicationPresentationOptions) *Application {
@@ -72,6 +78,8 @@ func (x *Application) WithPresentationOptions(presentationOptions NSApplicationP
 	return x
 }
 
+// The appearance associated with the app’s windows.
+//
 // WithAppearance sets the appearance property and returns the receiver for chaining.
 func (x *Application) WithAppearance(appearance *Appearance) *Application {
 	x.inner.SetAppearance(appearance.Unwrap())
@@ -90,6 +98,8 @@ func (x *Application) WithServicesMenu(servicesMenu *Menu) *Application {
 	return x
 }
 
+// The object that provides the services the current app advertises in the Services menu of other apps.
+//
 // WithServicesProvider sets the servicesProvider property and returns the receiver for chaining.
 func (x *Application) WithServicesProvider(servicesProvider objc.ID) *Application {
 	x.inner.SetServicesProvider(servicesProvider)
@@ -104,30 +114,40 @@ func (x *Application) WithAutomaticCustomizeTouchBarMenuItemEnabled(automaticCus
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *Application) WithNextResponder(nextResponder ResponderProvider) *Application {
 	x.inner.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *Application) WithMenu(menu *Menu) *Application {
 	x.inner.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *Application) WithUserActivity(userActivity *foundation.NSUserActivity) *Application {
 	x.inner.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *Application) WithTouchBar(touchBar *TouchBar) *Application {
 	x.inner.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Hides all the receiver’s windows, and the next app in line is activated.
+//
 // Hide calls the underlying Hide.
 func (x *Application) Hide(sender objc.ID) {
 	x.inner.Hide(sender)
@@ -138,6 +158,8 @@ func (x *Application) Unhide(sender objc.ID) {
 	x.inner.Unhide(sender)
 }
 
+// Restores hidden windows without activating their owner (the receiver).
+//
 // UnhideWithoutActivation calls the underlying UnhideWithoutActivation.
 func (x *Application) UnhideWithoutActivation() {
 	x.inner.UnhideWithoutActivation()
@@ -152,6 +174,8 @@ func (x *Application) WindowWithWindowNumber(windowNum int) *Window {
 	return &Window{inner: _r}
 }
 
+// Deactivates the receiver.
+//
 // Deactivate calls the underlying Deactivate.
 func (x *Application) Deactivate() {
 	x.inner.Deactivate()
@@ -164,42 +188,50 @@ func (x *Application) ActivateIgnoringOtherApps(ignoreOtherApps bool) {
 	x.inner.ActivateIgnoringOtherApps(ignoreOtherApps)
 }
 
-// Makes the receiver the active app, if possible. You shouldn’t assume the app will be active immediately after sending this message. The framework also does not guarantee that the app will be activated at all. For cooperative activation, the other application should call `-yieldActivationToApplication:` or equivalent prior to the target application invoking `-activate`. Invoking `-activate` on an already-active application cancels any pending activation yields by the receiver.
+// Activates the receiver app, if appropriate.
 //
 // Activate calls the underlying Activate.
 func (x *Application) Activate() {
 	x.inner.Activate()
 }
 
-// Explicitly allows another application to make itself active. Calling this method will not deactivate the current app, nor will it activate the other app. For cooperative or coordinated activation, the other app should request to be activated at some point in the future by calling `activate` or equivalent.
+// Explicitly allows another app to make itself active.
 //
 // YieldActivationToApplication calls the underlying YieldActivationToApplication.
 func (x *Application) YieldActivationToApplication(application *raw.NSRunningApplication) {
 	x.inner.YieldActivationToApplication(application)
 }
 
-// Same as `-yieldActivationToApplication:`, but the provided bundle identifier does not have to correspond to a currently running application. This method should be used to yield activation to apps that may not be running at the time of invoking it. If it is known that the target application is currently running, use `-yieldActivationToApplication:` instead.
+// Explicitly allows another app to make itself active.
 //
 // YieldActivationToApplicationWithBundleIdentifier calls the underlying YieldActivationToApplicationWithBundleIdentifier.
 func (x *Application) YieldActivationToApplicationWithBundleIdentifier(bundleIdentifier string) {
 	x.inner.YieldActivationToApplicationWithBundleIdentifier(foundation.NSStringStringWithUTF8String(bundleIdentifier))
 }
 
+// Hides all apps, except the receiver.
+//
 // HideOtherApplications calls the underlying HideOtherApplications.
 func (x *Application) HideOtherApplications(sender objc.ID) {
 	x.inner.HideOtherApplications(sender)
 }
 
+// Unhides all apps, including the receiver.
+//
 // UnhideAllApplications calls the underlying UnhideAllApplications.
 func (x *Application) UnhideAllApplications(sender objc.ID) {
 	x.inner.UnhideAllApplications(sender)
 }
 
+// Activates the app, opens any files specified by the NSOpen user default, and unhighlights the app’s icon.
+//
 // FinishLaunching calls the underlying FinishLaunching.
 func (x *Application) FinishLaunching() {
 	x.inner.FinishLaunching()
 }
 
+// Starts the main event loop.
+//
 // Run calls the underlying Run.
 func (x *Application) Run() {
 	x.inner.Run()
@@ -210,6 +242,8 @@ func (x *Application) RunModalForWindow(window *raw.NSWindow) int {
 	return x.inner.RunModalForWindow(window)
 }
 
+// Stops the main event loop.
+//
 // Stop calls the underlying Stop.
 func (x *Application) Stop(sender objc.ID) {
 	x.inner.Stop(sender)
@@ -245,18 +279,22 @@ func (x *Application) EndModalSession(session unsafe.Pointer) {
 	x.inner.EndModalSession(session)
 }
 
+// Terminates the receiver.
+//
 // Terminate calls the underlying Terminate.
 func (x *Application) Terminate(sender objc.ID) {
 	x.inner.Terminate(sender)
 }
 
-// Inform the user that this application needs attention - call this method only if your application is not already active.
+// Starts a user attention request.
 //
 // RequestUserAttention calls the underlying RequestUserAttention.
 func (x *Application) RequestUserAttention(requestType NSRequestUserAttentionType) int {
 	return x.inner.RequestUserAttention(raw.NSRequestUserAttentionType(requestType))
 }
 
+// Cancels a previous user attention request.
+//
 // CancelUserAttentionRequest calls the underlying CancelUserAttentionRequest.
 func (x *Application) CancelUserAttentionRequest(request int) {
 	x.inner.CancelUserAttentionRequest(request)
@@ -279,38 +317,42 @@ func (x *Application) SetWindowsNeedUpdate(needUpdate bool) {
 	x.inner.SetWindowsNeedUpdate(needUpdate)
 }
 
+// Sends an message to each onscreen window.
+//
 // UpdateWindows calls the underlying UpdateWindows.
 func (x *Application) UpdateWindows() {
 	x.inner.UpdateWindows()
 }
 
-// @return The activation policy of the application.
+// Returns the app’s activation policy.
 //
 // ActivationPolicy calls the underlying ActivationPolicy.
 func (x *Application) ActivationPolicy() NSApplicationActivationPolicy {
 	return NSApplicationActivationPolicy(x.inner.ActivationPolicy())
 }
 
-// Attempts to modify the application's activation policy.  In OS X 10.9, any policy may be set; prior to 10.9, the activation policy may be changed to @c NSApplicationActivationPolicyProhibited or @c NSApplicationActivationPolicyRegular, but may not be changed to @c NSApplicationActivationPolicyAccessory.  This returns @c YES if setting the activation policy is successful, and @c NO if not.
+// Attempts to modify the app’s activation policy.
 //
 // SetActivationPolicy calls the underlying SetActivationPolicy.
 func (x *Application) SetActivationPolicy(activationPolicy NSApplicationActivationPolicy) bool {
 	return x.inner.SetActivationPolicy(raw.NSApplicationActivationPolicy(activationPolicy))
 }
 
+// Logs a given exception by calling NSLog().
+//
 // ReportException calls the underlying ReportException.
 func (x *Application) ReportException(exception *foundation.NSException) {
 	x.inner.ReportException(exception)
 }
 
-// If an application delegate returns NSTerminateLater from -applicationShouldTerminate:, -replyToApplicationShouldTerminate: must be called with YES or NO once the application decides if it can terminate.
+// Responds to NSTerminateLater once the app knows whether it can terminate.
 //
 // ReplyToApplicationShouldTerminate calls the underlying ReplyToApplicationShouldTerminate.
 func (x *Application) ReplyToApplicationShouldTerminate(shouldTerminate bool) {
 	x.inner.ReplyToApplicationShouldTerminate(shouldTerminate)
 }
 
-// If an application delegate encounters an error while handling `-application:openFiles:` or` -application:printFiles:`, `-replyToOpenOrPrint:` should be called with @c NSApplicationDelegateReplyFailure.  If the user cancels the operation, @c NSApplicationDelegateReplyCancel should be used, and if the operation succeeds, @c NSApplicationDelegateReplySuccess should be used .
+// Handles errors that might occur when the user attempts to open or print files.
 //
 // ReplyToOpenOrPrint calls the underlying ReplyToOpenOrPrint.
 func (x *Application) ReplyToOpenOrPrint(reply NSApplicationDelegateReply) {
@@ -503,16 +545,22 @@ func (x *Application) EffectiveAppearance() *Appearance {
 	return &Appearance{inner: _r}
 }
 
+// Dispatches an event to other objects.
+//
 // SendEvent calls the underlying SendEvent.
 func (x *Application) SendEvent(event *raw.NSEvent) {
 	x.inner.SendEvent(event)
 }
 
+// Adds a given event to the receiver’s event queue.
+//
 // PostEventAtStart calls the underlying PostEventAtStart.
 func (x *Application) PostEventAtStart(event *raw.NSEvent, atStart bool) {
 	x.inner.PostEventAtStart(event, atStart)
 }
 
+// Returns the next event matching a given mask, or nil if no such event is found before a specified expiration date.
+//
 // NextEventMatchingMaskUntilDateInModeDequeue calls the underlying NextEventMatchingMaskUntilDateInModeDequeue.
 func (x *Application) NextEventMatchingMaskUntilDateInModeDequeue(mask NSEventMask, expiration *foundation.NSDate, mode *foundation.NSString, deqFlag bool) *Event {
 	_r := x.inner.NextEventMatchingMaskUntilDateInModeDequeue(raw.NSEventMask(mask), expiration, mode, deqFlag)
@@ -522,6 +570,8 @@ func (x *Application) NextEventMatchingMaskUntilDateInModeDequeue(mask NSEventMa
 	return &Event{inner: _r}
 }
 
+// Removes all events matching the given mask and generated before the specified event.
+//
 // DiscardEventsMatchingMaskBeforeEvent calls the underlying DiscardEventsMatchingMaskBeforeEvent.
 func (x *Application) DiscardEventsMatchingMaskBeforeEvent(mask NSEventMask, lastEvent *raw.NSEvent) {
 	x.inner.DiscardEventsMatchingMaskBeforeEvent(raw.NSEventMask(mask), lastEvent)
@@ -536,16 +586,22 @@ func (x *Application) CurrentEvent() *Event {
 	return &Event{inner: _r}
 }
 
+// Sends the given action message to the given target.
+//
 // SendActionToFrom calls the underlying SendActionToFrom.
 func (x *Application) SendActionToFrom(action objc.SEL, target objc.ID, sender objc.ID) bool {
 	return x.inner.SendActionToFrom(action, target, sender)
 }
 
+// Returns the object that receives the action message specified by the given selector.
+//
 // TargetForAction calls the underlying TargetForAction.
 func (x *Application) TargetForAction(action objc.SEL) objc.ID {
 	return x.inner.TargetForAction(action)
 }
 
+// Searches for an object that can receive the message specified by the given selector.
+//
 // TargetForActionToFrom calls the underlying TargetForActionToFrom.
 func (x *Application) TargetForActionToFrom(action objc.SEL, target objc.ID, sender objc.ID) objc.ID {
 	return x.inner.TargetForActionToFrom(action, target, sender)
@@ -646,29 +702,35 @@ func (x *Application) UserInterfaceLayoutDirection() NSUserInterfaceLayoutDirect
 	return NSUserInterfaceLayoutDirection(x.inner.UserInterfaceLayoutDirection())
 }
 
-// Disable or reenable relaunching this app on login, if the app was running at the time the user logged out.  These methods increment and decrement a counter respectively; if the counter is 0 at the time the user logs out, then the app may be relaunched when the user logs back in.  The counter is initially zero, so by default apps are relaunched. If your app should not be relaunched because it launches via some other mechanism (e.g. launchd), then the recommended usage is to call `-[NSApp disableRelaunchOnLogin]` once, and never pair it with an -enable call. If your app should not be relaunched because it triggers a restart (e.g. an installer), then the recommended usage is to call `-[NSApp disableRelaunchOnLogin]` immediately before you attempt to trigger a restart, and `-[NSApp enableRelaunchOnLogin]` immediately after.  This is because the user may cancel restarting; if the user later restarts for another reason, then your app should be brought back. These methods are thread safe.
+// Disables relaunching the app on login.
 //
 // DisableRelaunchOnLogin calls the underlying DisableRelaunchOnLogin.
 func (x *Application) DisableRelaunchOnLogin() {
 	x.inner.DisableRelaunchOnLogin()
 }
 
+// Enables relaunching the app on login.
+//
 // EnableRelaunchOnLogin calls the underlying EnableRelaunchOnLogin.
 func (x *Application) EnableRelaunchOnLogin() {
 	x.inner.EnableRelaunchOnLogin()
 }
 
+// Register for notifications sent by Apple Push Notification service (APNs).
+//
 // RegisterForRemoteNotifications calls the underlying RegisterForRemoteNotifications.
 func (x *Application) RegisterForRemoteNotifications() {
 	x.inner.RegisterForRemoteNotifications()
 }
 
+// Unregister for notifications received from Apple Push Notification service.
+//
 // UnregisterForRemoteNotifications calls the underlying UnregisterForRemoteNotifications.
 func (x *Application) UnregisterForRemoteNotifications() {
 	x.inner.UnregisterForRemoteNotifications()
 }
 
-// The following are soft deprecated. Please use the `-registerForRemoteNotifications` above and `-requestAuthorizationWithOptions:` from `UserNotifications.framework`.
+// Register to receive notifications of the specified types from a provider through the Apple Push Notification service.
 //
 // RegisterForRemoteNotificationTypes calls the underlying RegisterForRemoteNotificationTypes.
 func (x *Application) RegisterForRemoteNotificationTypes(types NSRemoteNotificationType) {
@@ -745,17 +807,21 @@ func (x *Application) Context() *GraphicsContext {
 	return &GraphicsContext{inner: _r}
 }
 
+// Places the receiver in context-sensitive help mode.
+//
 // ActivateContextHelpMode calls the underlying ActivateContextHelpMode.
 func (x *Application) ActivateContextHelpMode(sender objc.ID) {
 	x.inner.ActivateContextHelpMode(sender)
 }
 
+// If your project is properly registered, and the necessary keys have been set in the property list, this method launches Help Viewer and displays the first page of your app’s help book.
+//
 // ShowHelp calls the underlying ShowHelp.
 func (x *Application) ShowHelp(sender objc.ID) {
 	x.inner.ShowHelp(sender)
 }
 
-// Show or dismiss the customization palette for the currently displayed NSTouchBars. NSApplication validates this selector against whether the current NSTouchBars are customizable and, if configured on a menu item, will standardize and localize the title. If the current system does not have Touch Bar support, the menu item will be automatically hidden.
+// Show or hides the interface for customizing the Touch Bar.
 //
 // ToggleTouchBarCustomizationPalette calls the underlying ToggleTouchBarCustomizationPalette.
 func (x *Application) ToggleTouchBarCustomizationPalette(sender objc.ID) {
@@ -806,16 +872,22 @@ func (x *Application) OrderedWindows() []*Window {
 	})
 }
 
+// Register an object that provides help data to your app.
+//
 // RegisterUserInterfaceItemSearchHandler calls the underlying RegisterUserInterfaceItemSearchHandler.
 func (x *Application) RegisterUserInterfaceItemSearchHandler(handler raw.NSUserInterfaceItemSearching) {
 	x.inner.RegisterUserInterfaceItemSearchHandler(handler)
 }
 
+// Unregister an object that provides help data to your app.
+//
 // UnregisterUserInterfaceItemSearchHandler calls the underlying UnregisterUserInterfaceItemSearchHandler.
 func (x *Application) UnregisterUserInterfaceItemSearchHandler(handler raw.NSUserInterfaceItemSearching) {
 	x.inner.UnregisterUserInterfaceItemSearchHandler(handler)
 }
 
+// Searches for the string in the user interface.
+//
 // SearchStringInUserInterfaceItemStringSearchRangeFoundRange calls the underlying SearchStringInUserInterfaceItemStringSearchRangeFoundRange.
 func (x *Application) SearchStringInUserInterfaceItemStringSearchRangeFoundRange(searchString string, stringToSearch string, searchRange foundation.NSRange, foundRange *foundation.NSRange) bool {
 	return x.inner.SearchStringInUserInterfaceItemStringSearchRangeFoundRange(foundation.NSStringStringWithUTF8String(searchString), foundation.NSStringStringWithUTF8String(stringToSearch), searchRange, foundRange)

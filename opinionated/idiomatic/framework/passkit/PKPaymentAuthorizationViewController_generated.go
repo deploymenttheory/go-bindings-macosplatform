@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that presents a sheet that prompts the user to authorize a payment request.
+//
 // PaymentAuthorizationViewController wraps [raw.PKPaymentAuthorizationViewController] with a fluent Go API.
 type PaymentAuthorizationViewController struct {
 	inner *raw.PKPaymentAuthorizationViewController
@@ -31,6 +33,8 @@ func PaymentAuthorizationViewControllerFromID(id objc.ID) *PaymentAuthorizationV
 	return &PaymentAuthorizationViewController{inner: raw.PKPaymentAuthorizationViewControllerFromID(id)}
 }
 
+// Initializes and returns a payment authorization view controller.
+//
 // NewPaymentAuthorizationViewControllerWithPaymentRequest creates a new [PaymentAuthorizationViewController].
 func NewPaymentAuthorizationViewControllerWithPaymentRequest(request *raw.PKPaymentRequest) *PaymentAuthorizationViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentAuthorizationViewController")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewPaymentAuthorizationViewControllerWithPaymentRequest(request *raw.PKPaym
 	return &PaymentAuthorizationViewController{inner: raw.PKPaymentAuthorizationViewControllerFromID(_id)}
 }
 
+// Initializes and returns a new payment authorization view controller with the provided disbursement request.
+//
 // NewPaymentAuthorizationViewControllerWithDisbursementRequest creates a new [PaymentAuthorizationViewController].
 func NewPaymentAuthorizationViewControllerWithDisbursementRequest(request *raw.PKDisbursementRequest) *PaymentAuthorizationViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentAuthorizationViewController")), objc.RegisterName("alloc"))
@@ -45,6 +51,8 @@ func NewPaymentAuthorizationViewControllerWithDisbursementRequest(request *raw.P
 	return &PaymentAuthorizationViewController{inner: raw.PKPaymentAuthorizationViewControllerFromID(_id)}
 }
 
+// The view controller’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *PaymentAuthorizationViewController) WithDelegate(delegate raw.PKPaymentAuthorizationViewControllerDelegate) *PaymentAuthorizationViewController {
 	x.inner.SetDelegate(delegate)

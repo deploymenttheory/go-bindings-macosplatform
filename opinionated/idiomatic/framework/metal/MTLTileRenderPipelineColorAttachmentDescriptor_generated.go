@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of a tile-shading render pipeline’s color render target.
+//
 // TileRenderPipelineColorAttachmentDescriptor wraps [raw.MTLTileRenderPipelineColorAttachmentDescriptor] with a fluent Go API.
 type TileRenderPipelineColorAttachmentDescriptor struct {
 	inner *raw.MTLTileRenderPipelineColorAttachmentDescriptor
@@ -37,7 +39,7 @@ func NewTileRenderPipelineColorAttachmentDescriptor() *TileRenderPipelineColorAt
 	return &TileRenderPipelineColorAttachmentDescriptor{inner: raw.MTLTileRenderPipelineColorAttachmentDescriptorFromID(_id)}
 }
 
-// Pixel format.  Defaults to MTLPixelFormatInvalid
+// The pixel format associated with the tile shading render pipeline.
 //
 // WithPixelFormat sets the pixelFormat property and returns the receiver for chaining.
 func (x *TileRenderPipelineColorAttachmentDescriptor) WithPixelFormat(pixelFormat MTLPixelFormat) *TileRenderPipelineColorAttachmentDescriptor {

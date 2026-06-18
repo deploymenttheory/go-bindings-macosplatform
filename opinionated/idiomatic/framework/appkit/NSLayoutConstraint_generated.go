@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The relationship between two user interface objects that must be satisfied by the constraint-based layout system.
+//
 // LayoutConstraint wraps [raw.NSLayoutConstraint] with a fluent Go API.
 type LayoutConstraint struct {
 	inner *raw.NSLayoutConstraint
@@ -37,30 +39,40 @@ func NewLayoutConstraint() *LayoutConstraint {
 	return &LayoutConstraint{inner: raw.NSLayoutConstraintFromID(_id)}
 }
 
+// The priority of the constraint.
+//
 // WithPriority sets the priority property and returns the receiver for chaining.
 func (x *LayoutConstraint) WithPriority(priority float32) *LayoutConstraint {
 	x.inner.SetPriority(priority)
 	return x
 }
 
+// A Boolean value that determines whether the constraint should be archived by its owning view.
+//
 // WithShouldBeArchived sets the shouldBeArchived property and returns the receiver for chaining.
 func (x *LayoutConstraint) WithShouldBeArchived(shouldBeArchived bool) *LayoutConstraint {
 	x.inner.SetShouldBeArchived(shouldBeArchived)
 	return x
 }
 
+// The constant added to the multiplied second attribute participating in the constraint.
+//
 // WithConstant sets the constant property and returns the receiver for chaining.
 func (x *LayoutConstraint) WithConstant(constant float64) *LayoutConstraint {
 	x.inner.SetConstant(constant)
 	return x
 }
 
+// The active state of the constraint.
+//
 // WithActive sets the active property and returns the receiver for chaining.
 func (x *LayoutConstraint) WithActive(active bool) *LayoutConstraint {
 	x.inner.SetActive(active)
 	return x
 }
 
+// The name that identifies the constraint.
+//
 // WithIdentifier sets the identifier property and returns the receiver for chaining.
 func (x *LayoutConstraint) WithIdentifier(identifier string) *LayoutConstraint {
 	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))

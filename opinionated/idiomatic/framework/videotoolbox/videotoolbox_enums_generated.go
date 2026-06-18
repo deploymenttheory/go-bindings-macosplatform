@@ -9,10 +9,12 @@ import (
 	"strings"
 )
 
+// Flags to pass to a compression session.
 // Bitmask — values may be combined with |.
 type VTCompressionSessionOptionFlags int64
 
 const (
+	// A flag that indicates the last pass in a multi-pass compression session.
 	KVTCompressionSessionBeginFinalPass VTCompressionSessionOptionFlags = 1
 )
 
@@ -27,14 +29,19 @@ func (e VTCompressionSessionOptionFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Flags to pass to a decompression session and the video decoder.
 // Bitmask — values may be combined with |.
 type VTDecodeFrameFlags int64
 
 const (
+	// A flag that indicates to enable asynchronous decompression.
 	KVTDecodeFrame_EnableAsynchronousDecompression VTDecodeFrameFlags = 1
-	KVTDecodeFrame_DoNotOutputFrame                VTDecodeFrameFlags = 2
-	KVTDecodeFrame_1xRealTimePlayback              VTDecodeFrameFlags = 4
-	KVTDecodeFrame_EnableTemporalProcessing        VTDecodeFrameFlags = 8
+	// A flag that provides a hint to the decompression session and video decoder not to return a frame.
+	KVTDecodeFrame_DoNotOutputFrame VTDecodeFrameFlags = 2
+	// A flag that provides a hint to the video decoder that it’s ok to use a low-power mode that can’t decode faster than realtime.
+	KVTDecodeFrame_1xRealTimePlayback VTDecodeFrameFlags = 4
+	// A flag that indicates to enable temporal processing.
+	KVTDecodeFrame_EnableTemporalProcessing VTDecodeFrameFlags = 8
 )
 
 func (e VTDecodeFrameFlags) String() string {
@@ -57,13 +64,18 @@ func (e VTDecodeFrameFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Flags that provide information about the status of a decode operation.
 // Bitmask — values may be combined with |.
 type VTDecodeInfoFlags int64
 
 const (
-	KVTDecodeInfo_Asynchronous               VTDecodeInfoFlags = 1
-	KVTDecodeInfo_FrameDropped               VTDecodeInfoFlags = 2
-	KVTDecodeInfo_ImageBufferModifiable      VTDecodeInfoFlags = 4
+	// A flag that indicates the decode operation ran asynchronously.
+	KVTDecodeInfo_Asynchronous VTDecodeInfoFlags = 1
+	// A flag that indicates the decode operation dropped a frame.
+	KVTDecodeInfo_FrameDropped VTDecodeInfoFlags = 2
+	// A flag that indicates the image buffer is safe to modify.
+	KVTDecodeInfo_ImageBufferModifiable VTDecodeInfoFlags = 4
+	// A flag that indicates whether the decode process skips leading frames after dropping a synchronization frame.
 	KVTDecodeInfo_SkippedLeadingFrameDropped VTDecodeInfoFlags = 8
 	KVTDecodeInfo_FrameInterrupted           VTDecodeInfoFlags = 16
 )
@@ -91,11 +103,14 @@ func (e VTDecodeInfoFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Flags that indicate encoder state.
 // Bitmask — values may be combined with |.
 type VTEncodeInfoFlags int64
 
 const (
+	// A flag that indicates that an encode operation ran asynchronously.
 	KVTEncodeInfo_Asynchronous VTEncodeInfoFlags = 1
+	// A flag that indicates that a frame dropped during encoding.
 	KVTEncodeInfo_FrameDropped VTEncodeInfoFlags = 2
 )
 
@@ -221,11 +236,12 @@ func (e VTMotionBlurParametersSubmissionMode) String() string {
 	}
 }
 
+// Flags to control processing of a frame you pass to the motion-estimation session.
 // Bitmask — values may be combined with |.
 type VTMotionEstimationFrameFlags int64
 
 const (
-	// A hint to the motion-estimation session that you are going to reuse the `currentBuffer` as `referenceBuffer` in the next call to ``VTMotionEstimationSessionEstimateMotionVectors``. Using this flag allows the motion-estimation processor to deliver better performance.
+	// A hint to the motion-estimation session that you are going to reuse the currentBuffer as referenceBuffer in the next call to VTMotionEstimationSessionEstimateMotionVectors. Using this flag allows the motion-estimation processor to deliver better performance.
 	KVTMotionEstimationFrameFlags_CurrentBufferWillBeNextReferenceBuffer VTMotionEstimationFrameFlags = 1
 )
 
@@ -240,6 +256,7 @@ func (e VTMotionEstimationFrameFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Directives that provide information back to you with the results of motion-estimation.
 // Bitmask — values may be combined with |.
 type VTMotionEstimationInfoFlags int64
 

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An abstract object that represents a device.
+//
 // Device wraps [raw.ICDevice] with a fluent Go API.
 type Device struct {
 	inner *raw.ICDevice
@@ -39,7 +41,7 @@ func NewDevice() *Device {
 	return &Device{inner: raw.ICDeviceFromID(_id)}
 }
 
-// @property delegate @abstract The delegate to receive messages once a session is opened on the device. @discussion The delegate must conform ICDeviceDelegate protocol. In addition it should respond to selectors defined in ICCameraDeviceDelegate protocol in order to effectively interact with the device object. The messages this delegate can expect to receive are described by these protocols.
+// The delegate to receive messages once a session is opened on the device.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Device) WithDelegate(delegate raw.ICDeviceDelegate) *Device {
@@ -47,28 +49,28 @@ func (x *Device) WithDelegate(delegate raw.ICDeviceDelegate) *Device {
 	return x
 }
 
-// @method requestOpenSession @abstract This message requests to open a session on the device. @discussion Make sure the receiver's delegate is set prior to sending this message; otherwise this message will be ignored. This request is completed when the delegate receives a "device:didOpenSessionWithError:" message. @note Execution of the delegate callback will occur on the main thread.
+// Requests to open a session on the device.
 //
 // RequestOpenSession calls the underlying RequestOpenSession.
 func (x *Device) RequestOpenSession() {
 	x.inner.RequestOpenSession()
 }
 
-// @method requestCloseSession @abstract This message requests to close a previously opened session on this device. @discussion This request is completed when the delegate receives a "device:didCloseSessionWithError:" message. @note Execution of the delegate callback will occur on the main thread.
+// Requests to close an open session on the device.
 //
 // RequestCloseSession calls the underlying RequestCloseSession.
 func (x *Device) RequestCloseSession() {
 	x.inner.RequestCloseSession()
 }
 
-// @method requestEject @abstract Eject the media if permitted by the device, or disconnect from a remote device.
+// Requests to eject the media if permitted by the device, or to disconnect from a remote device.
 //
 // RequestEject calls the underlying RequestEject.
 func (x *Device) RequestEject() {
 	x.inner.RequestEject()
 }
 
-// @method requestOpenSessionWithOptions:completion @abstract This message requests to open a session on the device. @discussion This request will execute the completion handler provided upon return. @note The completion block will execute on an any available queue, often this will not be the main queue.
+// Requests to open a session on the device, then executes the completion handler.
 //
 // RequestOpenSessionWithOptionsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Device) RequestOpenSessionWithOptionsCompletion(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) error {
@@ -88,7 +90,7 @@ func (x *Device) RequestOpenSessionWithOptionsCompletion(ctx context.Context, op
 	}
 }
 
-// @method requestCloseSessionWithOptions:completion @abstract This message requests to close a previously opened session on this device. @discussion This request will execute the completion handler provided upon return. @note The completion block will execute on an any available queue, often this will not be the main queue.
+// Requests to close an open session on the device, then executes the completion handler.
 //
 // RequestCloseSessionWithOptionsCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Device) RequestCloseSessionWithOptionsCompletion(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) error {
@@ -108,7 +110,7 @@ func (x *Device) RequestCloseSessionWithOptionsCompletion(ctx context.Context, o
 	}
 }
 
-// @method requestEjectWithCompletion: @abstract Eject the media, or disconnect the device - if permitted by the device. @discussion This request will execute the completion handler provided upon return. @note The completion block will execute on an any available queue, often this will not be the main queue.
+// Requests to eject the media if permitted by the device, or to disconnect from a remote device, then executes the completion handler.
 //
 // RequestEjectWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Device) RequestEjectWithCompletion(ctx context.Context) error {
@@ -128,21 +130,21 @@ func (x *Device) RequestEjectWithCompletion(ctx context.Context) error {
 	}
 }
 
-// @method requestSendMessage:outData:maxReturnDataSize:sendMessageDelegate:didSendMessageSelector:contextInfo: @abstract This method asynchronously sends an arbitrary message with optional data to a device. @discussion This method allows developers to send a private message from a client application to a device module. The response to this command will be delivered using didSendMessageSelector of sendMessageDelegate. The didSendMessageSelector should have the same signature as: - (void)didSendMessage:(UInt32)messageCode inData:(NSData*)data error:(NSError*)error contextInfo:(void*)contextInfo. The content of error returned should be examined to determine if the request completed successfully. @note This method should not be used to send PTP pass-through commands to a PTP camera. Please refer to 'requestSendPTPCommand:outData:sendCommandDelegate:sendCommandDelegate:contextInfo:' defined in ICCameraDevice.h for sending PTP pass-through commands. @note Execution of the delegate callback will occur on the main thread.
+// Asynchronously sends an arbitrary message with optional data to a device.
 //
 // RequestSendMessageOutDataMaxReturnedDataSizeSendMessageDelegateDidSendMessageSelectorContextInfo calls the underlying RequestSendMessageOutDataMaxReturnedDataSizeSendMessageDelegateDidSendMessageSelectorContextInfo.
 func (x *Device) RequestSendMessageOutDataMaxReturnedDataSizeSendMessageDelegateDidSendMessageSelectorContextInfo(messageCode uint, data *foundation.NSData, maxReturnedDataSize uint, sendMessageDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.RequestSendMessageOutDataMaxReturnedDataSizeSendMessageDelegateDidSendMessageSelectorContextInfo(messageCode, data, maxReturnedDataSize, sendMessageDelegate, selector, contextInfo)
 }
 
-// @method requestEjectOrDisconnect @abstract Eject the media if permitted by the device, or disconnect from a remote device.
+// Requests to eject the media if permitted by the device, or to disconnect from a remote device.
 //
 // RequestEjectOrDisconnect calls the underlying RequestEjectOrDisconnect.
 func (x *Device) RequestEjectOrDisconnect() {
 	x.inner.RequestEjectOrDisconnect()
 }
 
-// @method requestYield @abstract This message requests the device module in control of this device to yield control. @discussion This message should be used only if the client is planning on communicating with the device directly. The device module may not yield control of the device if it has an open session.
+// Requests that device module in control of this device yield control.
 //
 // RequestYield calls the underlying RequestYield.
 func (x *Device) RequestYield() {

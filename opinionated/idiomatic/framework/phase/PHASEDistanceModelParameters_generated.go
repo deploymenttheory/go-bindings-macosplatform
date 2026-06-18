@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A base class for a sound’s rate of change over distance.
+//
 // DistanceModelParameters wraps [raw.PHASEDistanceModelParameters] with a fluent Go API.
 type DistanceModelParameters struct {
 	inner *raw.PHASEDistanceModelParameters
@@ -35,7 +37,7 @@ func NewDistanceModelParameters() *DistanceModelParameters {
 	return &DistanceModelParameters{inner: raw.PHASEDistanceModelParametersFromID(_id)}
 }
 
-// @property fadeOutParameters @abstract Fade out parameters (optional).
+// A distance over which the framework fades out the mixer’s sound.
 //
 // WithFadeOutParameters sets the fadeOutParameters property and returns the receiver for chaining.
 func (x *DistanceModelParameters) WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *DistanceModelParameters {

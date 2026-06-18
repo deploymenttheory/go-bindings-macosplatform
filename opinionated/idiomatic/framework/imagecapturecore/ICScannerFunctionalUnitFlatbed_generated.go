@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the flatbed unit on a scanner.
+//
 // ScannerFunctionalUnitFlatbed wraps [raw.ICScannerFunctionalUnitFlatbed] with a fluent Go API.
 type ScannerFunctionalUnitFlatbed struct {
 	inner *raw.ICScannerFunctionalUnitFlatbed

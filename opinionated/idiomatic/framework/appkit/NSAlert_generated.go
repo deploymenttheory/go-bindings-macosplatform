@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A modal dialog or sheet attached to a document window.
+//
 // Alert wraps [raw.NSAlert] with a fluent Go API.
 type Alert struct {
 	inner *raw.NSAlert
@@ -38,7 +40,7 @@ func NewAlert() *Alert {
 	return &Alert{inner: raw.NSAlertFromID(_id)}
 }
 
-// The text that is displayed prominently in the alert. - Note: Use this string to get the user’s attention and communicate the reason for displaying the alert.
+// The alert’s message text or title.
 //
 // WithMessageText sets the messageText property and returns the receiver for chaining.
 func (x *Alert) WithMessageText(messageText string) *Alert {
@@ -46,7 +48,7 @@ func (x *Alert) WithMessageText(messageText string) *Alert {
 	return x
 }
 
-// The descriptive text that provides more details about the reason for the alert. - Note: The informative text string is displayed below the message text and is less prominent. Use this string to provide additional context about the reason for the alert or about the actions that the user might take.
+// The alert’s informative text.
 //
 // WithInformativeText sets the informativeText property and returns the receiver for chaining.
 func (x *Alert) WithInformativeText(informativeText string) *Alert {
@@ -54,7 +56,7 @@ func (x *Alert) WithInformativeText(informativeText string) *Alert {
 	return x
 }
 
-// The custom icon displayed in the alert. By default, the image used in an alert is the app icon. If you set this property’s value, your specified custom image is used in place of the app icon. If you’ve set a custom alert icon, you can clear it by setting this property’s value to `nil`, which restores use of the app icon for the alert. - Note: AppKit may omit the icon from the alert if it’s the app icon and the alert’s context is clear, such as being presented as a sheet on an app window.
+// The custom icon displayed in the alert.
 //
 // WithIcon sets the icon property and returns the receiver for chaining.
 func (x *Alert) WithIcon(icon *Image) *Alert {
@@ -62,7 +64,7 @@ func (x *Alert) WithIcon(icon *Image) *Alert {
 	return x
 }
 
-// Indicates the alert’s severity level. See the `NSAlertStyle` enumeration for the list of alert style constants.
+// Indicates the alert’s severity level.
 //
 // WithAlertStyle sets the alertStyle property and returns the receiver for chaining.
 func (x *Alert) WithAlertStyle(alertStyle NSAlertStyle) *Alert {
@@ -70,7 +72,7 @@ func (x *Alert) WithAlertStyle(alertStyle NSAlertStyle) *Alert {
 	return x
 }
 
-// Specifies whether the alert has a help button. Set this property’s value to `YES` to specify that the alert has a help button, or `NO` to specify it does not. When a user clicks an alert’s help button, the alert delegate (`delegate`) receives an `alertShowHelp:` message. The delegate is responsible for displaying the help information related to this particular alert. Clicking an alert’s help button can alternately cause the `-openHelpAnchor:inBook:` message to be sent to the app’s help manager with a `nil` book and the anchor specified by the `helpAnchor` property, if any of the following conditions are true: - There is no alert delegate. - The alert delegate does not implement `-alertShowHelp:`. - The alert delegate implements `-alertShowHelp:` but returns `NO`. When this is the case, an exception is raised if no help anchor is set.
+// Specifies whether the alert has a help button.
 //
 // WithShowsHelp sets the showsHelp property and returns the receiver for chaining.
 func (x *Alert) WithShowsHelp(showsHelp bool) *Alert {
@@ -78,7 +80,7 @@ func (x *Alert) WithShowsHelp(showsHelp bool) *Alert {
 	return x
 }
 
-// The alert’s HTML help anchor used when the user clicks the alert’s help button
+// The alert’s HTML help anchor.
 //
 // WithHelpAnchor sets the helpAnchor property and returns the receiver for chaining.
 func (x *Alert) WithHelpAnchor(helpAnchor *foundation.NSString) *Alert {
@@ -86,7 +88,7 @@ func (x *Alert) WithHelpAnchor(helpAnchor *foundation.NSString) *Alert {
 	return x
 }
 
-// The delegate of the receiver, currently only allows for custom help behavior of the alert. For apps linked against 10.12, this property has zeroing weak memory semantics. When linked against an older SDK this back to having `retain` semantics, matching legacy behavior.
+// The alert’s delegate.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Alert) WithDelegate(delegate raw.NSAlertDelegate) *Alert {
@@ -94,7 +96,7 @@ func (x *Alert) WithDelegate(delegate raw.NSAlertDelegate) *Alert {
 	return x
 }
 
-// The accessory view displayed in the alert, placed between the informative text or suppression checkbox (if present) and the response buttons. Before changing the location of the accessory view, first call the `-layout` method.
+// The alert’s accessory view.
 //
 // WithAccessoryView sets the accessoryView property and returns the receiver for chaining.
 func (x *Alert) WithAccessoryView(accessoryView ViewProvider) *Alert {
@@ -102,7 +104,7 @@ func (x *Alert) WithAccessoryView(accessoryView ViewProvider) *Alert {
 	return x
 }
 
-// Specifies whether the alert includes a suppression checkbox, which can be employed to allow a user to opt out of seeing the alert again. The default value of this property is `NO`, which specifies the absence of a suppression checkbox in the alert. Set the value to `YES` to show a suppression checkbox in the alert. By default, a suppression checkbox has the title, “Do not show this message again.” In macOS 11.0 and later, if the alert displays multiple buttons that prompt the user to make a choice, the title is “Do not ask again.” To customize it, use the checkbox’s title property, as follows: myAlert.suppressionButton.title = @"Do not show this warning again"; To create an alert that responds to the selection state of the suppression checkbox, check `myAlert.suppressionButton.state`.
+// Specifies whether the alert includes a suppression checkbox, which you can employ to allow a user to opt out of seeing the alert again.
 //
 // WithShowsSuppressionButton sets the showsSuppressionButton property and returns the receiver for chaining.
 func (x *Alert) WithShowsSuppressionButton(showsSuppressionButton bool) *Alert {
@@ -110,7 +112,7 @@ func (x *Alert) WithShowsSuppressionButton(showsSuppressionButton bool) *Alert {
 	return x
 }
 
-// Adds a button with a given title to the alert. Buttons should be added from most-to-least prominent. The exact visual arrangement of the buttons is determined by `NSAlert` internally. In general, they are arranged from trailing-to-leading edge when laid out horizontally, and top-to-bottom when laid out vertically, with some exceptions for buttons like “Cancel”. The first three buttons are identified by the order in which they are added (not the order in which they may appear visually) as `NSAlertFirstButtonReturn`, `NSAlertSecondButtonReturn`, `NSAlertThirdButtonReturn` in the return-code parameter. Subsequent buttons are identified as `NSAlertThirdButtonReturn` + *n*, where *n* is an integer. By default, the first button has a key equivalent of Return, any button with a title of “Cancel” has a key equivalent of Escape, and any button with the title “Don’t Save” has a key equivalent of Command-D (but only if it’s not the first button). You can also assign different key equivalents for the buttons using the `keyEquivalent` method of the `NSButton` class. In addition, you can use the `tag` property of the `NSButton` class to set the alert presentation’s return-code. The framework reserves the use of the button’s `target` and `action`. - Parameter title: Title of the button to add to the alert. - Returns: The button that was added to the alert.
+// Adds a button with a given title to the alert.
 //
 // AddButtonWithTitle calls the underlying AddButtonWithTitle.
 func (x *Alert) AddButtonWithTitle(title string) *Button {
@@ -121,7 +123,7 @@ func (x *Alert) AddButtonWithTitle(title string) *Button {
 	return &Button{inner: _r}
 }
 
-// Specifies that the alert must do immediate layout instead of lazily just before display. Used to indicate that the alert panel should do immediate layout, overriding the default behavior of laying out lazily just before showing panel. Only call this method if wanting to do custom layout after it returns. Call this method only after the alert’s other customization, including setting message and informative text, and adding buttons and an accessory view if needed. Layout changes can be made after this method returns, in particular to adjust the frame of an accessory view. Note that the standard layout of the alert may change in the future, so layout customization should be done with caution.
+// Specifies that the alert must do immediate layout instead of lazily just before display.
 //
 // Layout calls the underlying Layout.
 func (x *Alert) Layout() {
@@ -135,7 +137,7 @@ func (x *Alert) RunModal() int {
 	return x.inner.RunModal()
 }
 
-// Runs the alert modally as a sheet attached to the specified window. - Parameters: - sheetWindow: The window on which to display the sheet. - handler: The completion handler that gets called when the sheet’s modal session ends. This method uses the `NSWindow` sheet methods to display the alert. If the alert has an alert style of `NSCriticalAlertStyle`, it is presented as a critical sheet, which means that it can display on top of other sheets that might already be attached to the window. Otherwise, it is presented--or queued for presentation--as a standard sheet. Note that `-orderOut:` no longer needs to be called in the completion handler. If the alert isn’t  don’t dismiss the alert, it will be done for you after the completion handler finishes.
+// Runs the alert modally as a sheet attached to the specified window.
 //
 // BeginSheetModalForWindowCompletionHandler calls the underlying BeginSheetModalForWindowCompletionHandler.
 func (x *Alert) BeginSheetModalForWindowCompletionHandler(sheetWindow *raw.NSWindow, handler func(int)) {
@@ -323,6 +325,8 @@ func (x *Alert) Window() *Window {
 	return &Window{inner: _r}
 }
 
+// Runs the alert modally as an alert sheet attached to a specified window.
+//
 // BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo calls the underlying BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo.
 func (x *Alert) BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(window *raw.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(window, delegate, didEndSelector, contextInfo)

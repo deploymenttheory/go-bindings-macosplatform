@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains information about payment methods.
+//
 // PaymentMethod wraps [raw.PKPaymentMethod] with a fluent Go API.
 type PaymentMethod struct {
 	inner *raw.PKPaymentMethod

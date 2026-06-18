@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A concrete subclass the Core Image Barcode Descriptor that represents an Data Matrix code symbol.
+//
 // DataMatrixCodeDescriptor wraps [raw.CIDataMatrixCodeDescriptor] with a fluent Go API.
 type DataMatrixCodeDescriptor struct {
 	inner *raw.CIDataMatrixCodeDescriptor
@@ -30,7 +32,7 @@ func DataMatrixCodeDescriptorFromID(id objc.ID) *DataMatrixCodeDescriptor {
 	return &DataMatrixCodeDescriptor{inner: raw.CIDataMatrixCodeDescriptorFromID(id)}
 }
 
-// Initializes a Data Matrix code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the Data Matrix code symbol. - rowCount: The number of rows in the Data Matrix code symbol. - columnCount: The number of columns in the Data Matrix code symbol. - eccVersion: The “CIDataMatrixCodeECCVersion“ for the Data Matrix code symbol. - Returns: An initialized “CIAztecCodeDescriptor“ instance or `nil` if the parameters are invalid
+// Initializes a Data Matrix code descriptor for the given payload and parameters.
 //
 // NewDataMatrixCodeDescriptorWithPayloadRowCountColumnCountEccVersion creates a new [DataMatrixCodeDescriptor].
 func NewDataMatrixCodeDescriptorWithPayloadRowCountColumnCountEccVersion(errorCorrectedPayload *foundation.NSData, rowCount int, columnCount int, eccVersion CIDataMatrixCodeECCVersion) *DataMatrixCodeDescriptor {

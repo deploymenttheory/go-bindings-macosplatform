@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Serves as the base descriptor for creating a Metal library.
+//
 // MTL4LibraryDescriptor wraps [raw.MTL4LibraryDescriptor] with a fluent Go API.
 type MTL4LibraryDescriptor struct {
 	inner *raw.MTL4LibraryDescriptor

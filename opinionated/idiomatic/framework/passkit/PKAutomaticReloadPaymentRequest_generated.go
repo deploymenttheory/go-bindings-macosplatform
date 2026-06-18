@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents a request to set up an automatic reload payment, such as a store card top-up or a prepaid account.
+//
 // AutomaticReloadPaymentRequest wraps [raw.PKAutomaticReloadPaymentRequest] with a fluent Go API.
 type AutomaticReloadPaymentRequest struct {
 	inner *raw.PKAutomaticReloadPaymentRequest
@@ -31,6 +33,8 @@ func AutomaticReloadPaymentRequestFromID(id objc.ID) *AutomaticReloadPaymentRequ
 	return &AutomaticReloadPaymentRequest{inner: raw.PKAutomaticReloadPaymentRequestFromID(id)}
 }
 
+// Create an automatic reload payment object with a description, automatic billing information, and a management URL.
+//
 // NewAutomaticReloadPaymentRequestWithPaymentDescriptionAutomaticReloadBillingManagementURL creates a new [AutomaticReloadPaymentRequest].
 func NewAutomaticReloadPaymentRequestWithPaymentDescriptionAutomaticReloadBillingManagementURL(paymentDescription string, automaticReloadBilling *raw.PKAutomaticReloadPaymentSummaryItem, managementURL string) *AutomaticReloadPaymentRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKAutomaticReloadPaymentRequest")), objc.RegisterName("alloc"))
@@ -38,30 +42,40 @@ func NewAutomaticReloadPaymentRequestWithPaymentDescriptionAutomaticReloadBillin
 	return &AutomaticReloadPaymentRequest{inner: raw.PKAutomaticReloadPaymentRequestFromID(_id)}
 }
 
+// A description that you provide of the automatic reload payment and that Apple Pay displays to the user in the payment sheet.
+//
 // WithPaymentDescription sets the paymentDescription property and returns the receiver for chaining.
 func (x *AutomaticReloadPaymentRequest) WithPaymentDescription(paymentDescription string) *AutomaticReloadPaymentRequest {
 	x.inner.SetPaymentDescription(foundation.NSStringStringWithUTF8String(paymentDescription))
 	return x
 }
 
+// Summary items that contain the top-up amount and balance threshold amount for the automatic reload payment.
+//
 // WithAutomaticReloadBilling sets the automaticReloadBilling property and returns the receiver for chaining.
 func (x *AutomaticReloadPaymentRequest) WithAutomaticReloadBilling(automaticReloadBilling *AutomaticReloadPaymentSummaryItem) *AutomaticReloadPaymentRequest {
 	x.inner.SetAutomaticReloadBilling(automaticReloadBilling.Unwrap())
 	return x
 }
 
+// A localized billing agreement that the payment sheet displays to the user before the user authorizes the payment.
+//
 // WithBillingAgreement sets the billingAgreement property and returns the receiver for chaining.
 func (x *AutomaticReloadPaymentRequest) WithBillingAgreement(billingAgreement string) *AutomaticReloadPaymentRequest {
 	x.inner.SetBillingAgreement(foundation.NSStringStringWithUTF8String(billingAgreement))
 	return x
 }
 
+// A URL to a web page where the user can manage and delete the payment method for the automatic reload payment.
+//
 // WithManagementURL sets the managementURL property and returns the receiver for chaining.
 func (x *AutomaticReloadPaymentRequest) WithManagementURL(managementURL string) *AutomaticReloadPaymentRequest {
 	x.inner.SetManagementURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(managementURL)))
 	return x
 }
 
+// A URL you provide to receive life-cycle notifications from the Apple Pay servers about the Apple Pay merchant token for the automatic reload payment.
+//
 // WithTokenNotificationURL sets the tokenNotificationURL property and returns the receiver for chaining.
 func (x *AutomaticReloadPaymentRequest) WithTokenNotificationURL(tokenNotificationURL string) *AutomaticReloadPaymentRequest {
 	x.inner.SetTokenNotificationURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(tokenNotificationURL)))

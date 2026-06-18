@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An immutable object that represents the relationship between one contact to another.
+//
 // ContactRelation wraps [raw.CNContactRelation] with a fluent Go API.
 type ContactRelation struct {
 	inner *raw.CNContactRelation
@@ -31,6 +33,8 @@ func ContactRelationFromID(id objc.ID) *ContactRelation {
 	return &ContactRelation{inner: raw.CNContactRelationFromID(id)}
 }
 
+// Creates an object with the name of the related contact.
+//
 // NewContactRelationWithName creates a new [ContactRelation].
 func NewContactRelationWithName(name string) *ContactRelation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNContactRelation")), objc.RegisterName("alloc"))

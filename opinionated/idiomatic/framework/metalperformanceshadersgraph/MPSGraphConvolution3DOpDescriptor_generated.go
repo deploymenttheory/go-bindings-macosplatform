@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that describes the properties of a 3D-convolution operator.
+//
 // GraphConvolution3DOpDescriptor wraps [raw.MPSGraphConvolution3DOpDescriptor] with a fluent Go API.
 type GraphConvolution3DOpDescriptor struct {
 	inner *raw.MPSGraphConvolution3DOpDescriptor
@@ -37,7 +39,7 @@ func NewGraphConvolution3DOpDescriptor() *GraphConvolution3DOpDescriptor {
 	return &GraphConvolution3DOpDescriptor{inner: raw.MPSGraphConvolution3DOpDescriptorFromID(_id)}
 }
 
-// The scale that maps`x`-coordinate of destination to `x`-coordinate of source. Source `x`-coordinate, `sx` is computed from destination `x`-coordinate, `dx` as `sx = strideInX*dx`. Default value is 1.
+// The scale that mapsx-coordinate of destination to x-coordinate of source.
 //
 // WithStrideInX sets the strideInX property and returns the receiver for chaining.
 func (x *GraphConvolution3DOpDescriptor) WithStrideInX(strideInX uint) *GraphConvolution3DOpDescriptor {
@@ -45,7 +47,7 @@ func (x *GraphConvolution3DOpDescriptor) WithStrideInX(strideInX uint) *GraphCon
 	return x
 }
 
-// The scale that maps`y`-coordinate of destination to `y`-coordinate of source. Source `y`-coordinate, `sy` is computed from destination `y`-coordinate, `dy` as `sy = strideInY*dy`. Default value is 1.
+// The scale that mapsy-coordinate of destination to y-coordinate of source.
 //
 // WithStrideInY sets the strideInY property and returns the receiver for chaining.
 func (x *GraphConvolution3DOpDescriptor) WithStrideInY(strideInY uint) *GraphConvolution3DOpDescriptor {
@@ -53,7 +55,7 @@ func (x *GraphConvolution3DOpDescriptor) WithStrideInY(strideInY uint) *GraphCon
 	return x
 }
 
-// The scale that maps`z`-coordinate of destination to `z`-coordinate of source. Source `z`-coordinate, `sz` is computed from destination `z`-coordinate, `dz` as `sz = strideInZ*dz`. Default value is 1.
+// The scale that mapsz-coordinate of destination to z-coordinate of source.
 //
 // WithStrideInZ sets the strideInZ property and returns the receiver for chaining.
 func (x *GraphConvolution3DOpDescriptor) WithStrideInZ(strideInZ uint) *GraphConvolution3DOpDescriptor {
@@ -61,7 +63,7 @@ func (x *GraphConvolution3DOpDescriptor) WithStrideInZ(strideInZ uint) *GraphCon
 	return x
 }
 
-// The amount by which weights tensor expands in the `x`-direction. The weights tensor is dilated by inserting `dilationRateInX-1` zeros between consecutive values in `x`-dimension. Dilated weights tensor width is `(dilationRateInX-1)*kernelWidth+1`. Default value is 1.
+// The amount by which weights tensor expands in the x-direction.
 //
 // WithDilationRateInX sets the dilationRateInX property and returns the receiver for chaining.
 func (x *GraphConvolution3DOpDescriptor) WithDilationRateInX(dilationRateInX uint) *GraphConvolution3DOpDescriptor {
@@ -69,7 +71,7 @@ func (x *GraphConvolution3DOpDescriptor) WithDilationRateInX(dilationRateInX uin
 	return x
 }
 
-// The amount by which weights tensor expands in the `y`-direction. The weights tensor is dilated by inserting `dilationRateInY-1` zeros between consecutive values in `y`-dimension. Dilated weights tensor width is `(dilationRateInY-1)*kernelHeight+1`. Default value is 1.
+// The amount by which weights tensor expands in the y-direction.
 //
 // WithDilationRateInY sets the dilationRateInY property and returns the receiver for chaining.
 func (x *GraphConvolution3DOpDescriptor) WithDilationRateInY(dilationRateInY uint) *GraphConvolution3DOpDescriptor {
@@ -77,7 +79,7 @@ func (x *GraphConvolution3DOpDescriptor) WithDilationRateInY(dilationRateInY uin
 	return x
 }
 
-// The amount by which weights tensor expands in the `z`-direction. The weights tensor is dilated by inserting `dilationRateInZ-1` zeros between consecutive values in `z`-dimension. Dilated weights tensor depth is `(dilationRateInZ-1)*kernelDepth+1`. Default value is 1.
+// The amount by which weights tensor expands in the z-direction.
 //
 // WithDilationRateInZ sets the dilationRateInZ property and returns the receiver for chaining.
 func (x *GraphConvolution3DOpDescriptor) WithDilationRateInZ(dilationRateInZ uint) *GraphConvolution3DOpDescriptor {
@@ -133,7 +135,7 @@ func (x *GraphConvolution3DOpDescriptor) WithPaddingBack(paddingBack uint) *Grap
 	return x
 }
 
-// The type of padding that is applied to the source tensor. If paddingStyle is `MPSGraphPaddingStyleExplicit`, `paddingLeft`, `laddingRight`, `paddingTop`, `paddingBottom`,   `paddingFront` and `paddingBack` must to be specified. For all other padding styles, framework compute these values so you dont need to provide these values.
+// The type of padding that is applied to the source tensor.
 //
 // WithPaddingStyle sets the paddingStyle property and returns the receiver for chaining.
 func (x *GraphConvolution3DOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphConvolution3DOpDescriptor {
@@ -141,7 +143,7 @@ func (x *GraphConvolution3DOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphP
 	return x
 }
 
-// The named layout of data in the source tensor. It defines the order of named dimensions (Batch, Channel, Depth, Height, Width). The convolution operation uses this to interpret data in the source tensor. For example, if `dataLayout` is `MPSGraphTensorNamedDataLayoutNCDHW`, frameork interprets data in source tensor as `batch x channels x depth x height x width` with `width` as fastest moving dimension.
+// The named layout of data in the source tensor.
 //
 // WithDataLayout sets the dataLayout property and returns the receiver for chaining.
 func (x *GraphConvolution3DOpDescriptor) WithDataLayout(dataLayout MPSGraphTensorNamedDataLayout) *GraphConvolution3DOpDescriptor {
@@ -149,7 +151,7 @@ func (x *GraphConvolution3DOpDescriptor) WithDataLayout(dataLayout MPSGraphTenso
 	return x
 }
 
-// The named layout of data in the weights tensor. It defines the order of named dimensions (Output channels, Input channels, Kernel depth, Kernel height, Kernel width). The convolution operation uses this to interpret data in the weights tensor. For example, if `weightsLayout` is `MPSGraphTensorNamedDataLayoutOIDHW`, frameork interprets data in weights tensor as `outputChannels x inputChannels x kernelDepth x kernelHeight x kernelWidth` with `kernelWidth` as fastest moving dimension.
+// The named layout of data in the weights tensor.
 //
 // WithWeightsLayout sets the weightsLayout property and returns the receiver for chaining.
 func (x *GraphConvolution3DOpDescriptor) WithWeightsLayout(weightsLayout MPSGraphTensorNamedDataLayout) *GraphConvolution3DOpDescriptor {
@@ -157,7 +159,7 @@ func (x *GraphConvolution3DOpDescriptor) WithWeightsLayout(weightsLayout MPSGrap
 	return x
 }
 
-// The number of partitions of the input and output channels. The convolution operation divides input and output channels in `groups` partitions. input channels in a group or partition are only connected to output channels in corresponding group. Number of weights the convolution needs is `outputFeatureChannels x inputFeatureChannels/groups x kernelDepth x kernelWidth x kernelHeight`
+// The number of partitions of the input and output channels.
 //
 // WithGroups sets the groups property and returns the receiver for chaining.
 func (x *GraphConvolution3DOpDescriptor) WithGroups(groups uint) *GraphConvolution3DOpDescriptor {
@@ -165,7 +167,7 @@ func (x *GraphConvolution3DOpDescriptor) WithGroups(groups uint) *GraphConvoluti
 	return x
 }
 
-// Sets the left, right, top, bottom, front, and back padding values. - Parameters: - paddingLeft: See “paddingLeft“ property. - paddingRight: See “paddingRight“ property. - paddingTop: See “paddingTop“ property. - paddingBottom: See “paddingBottom“ property. - paddingFront: See “paddingFront“ property. - paddingBottom: See “paddingBottom“ property.
+// Sets the left, right, top, bottom, front, and back padding values.
 //
 // SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBack calls the underlying SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBack.
 func (x *GraphConvolution3DOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottomPaddingFrontPaddingBack(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint, paddingFront uint, paddingBack uint) {

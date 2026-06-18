@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A display of a calendar date with controls for editing the date value.
+//
 // DatePicker wraps [raw.NSDatePicker] with a fluent Go API.
 type DatePicker struct {
 	inner *raw.NSDatePicker
@@ -40,240 +42,320 @@ func NewDatePicker() *DatePicker {
 	return &DatePicker{inner: raw.NSDatePickerFromID(_id)}
 }
 
+// The date picker’s style.
+//
 // WithDatePickerStyle sets the datePickerStyle property and returns the receiver for chaining.
 func (x *DatePicker) WithDatePickerStyle(datePickerStyle NSDatePickerStyle) *DatePicker {
 	x.inner.SetDatePickerStyle(raw.NSDatePickerStyle(datePickerStyle))
 	return x
 }
 
+// A Boolean value that indicates whether the date picker draws a bezeled border.
+//
 // WithBezeled sets the bezeled property and returns the receiver for chaining.
 func (x *DatePicker) WithBezeled(bezeled bool) *DatePicker {
 	x.inner.SetBezeled(bezeled)
 	return x
 }
 
+// A Boolean value that indicates whether the date picker has a plain border.
+//
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *DatePicker) WithBordered(bordered bool) *DatePicker {
 	x.inner.SetBordered(bordered)
 	return x
 }
 
+// A Boolean value that indicates whether the date picker draws the background.
+//
 // WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
 func (x *DatePicker) WithDrawsBackground(drawsBackground bool) *DatePicker {
 	x.inner.SetDrawsBackground(drawsBackground)
 	return x
 }
 
+// The date picker’s background color.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *DatePicker) WithBackgroundColor(backgroundColor *Color) *DatePicker {
 	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// The date picker’s text color.
+//
 // WithTextColor sets the textColor property and returns the receiver for chaining.
 func (x *DatePicker) WithTextColor(textColor *Color) *DatePicker {
 	x.inner.SetTextColor(textColor.Unwrap())
 	return x
 }
 
+// The date picker’s mode.
+//
 // WithDatePickerMode sets the datePickerMode property and returns the receiver for chaining.
 func (x *DatePicker) WithDatePickerMode(datePickerMode NSDatePickerMode) *DatePicker {
 	x.inner.SetDatePickerMode(raw.NSDatePickerMode(datePickerMode))
 	return x
 }
 
+// A bitmask that indicates which visual elements of the date picker are currently shown, and which won’t be usable because they are hidden.
+//
 // WithDatePickerElements sets the datePickerElements property and returns the receiver for chaining.
 func (x *DatePicker) WithDatePickerElements(datePickerElements NSDatePickerElementFlags) *DatePicker {
 	x.inner.SetDatePickerElements(raw.NSDatePickerElementFlags(datePickerElements))
 	return x
 }
 
+// The calendar used by the date picker.
+//
 // WithCalendar sets the calendar property and returns the receiver for chaining.
 func (x *DatePicker) WithCalendar(calendar *foundation.NSCalendar) *DatePicker {
 	x.inner.SetCalendar(calendar)
 	return x
 }
 
+// The date picker’s locale.
+//
 // WithLocale sets the locale property and returns the receiver for chaining.
 func (x *DatePicker) WithLocale(locale *foundation.NSLocale) *DatePicker {
 	x.inner.SetLocale(locale)
 	return x
 }
 
+// The time zone for the date picker.
+//
 // WithTimeZone sets the timeZone property and returns the receiver for chaining.
 func (x *DatePicker) WithTimeZone(timeZone *foundation.NSTimeZone) *DatePicker {
 	x.inner.SetTimeZone(timeZone)
 	return x
 }
 
+// The date selected by the date picker.
+//
 // WithDateValue sets the dateValue property and returns the receiver for chaining.
 func (x *DatePicker) WithDateValue(dateValue *foundation.NSDate) *DatePicker {
 	x.inner.SetDateValue(dateValue)
 	return x
 }
 
+// The time interval selected by the date picker.
+//
 // WithTimeInterval sets the timeInterval property and returns the receiver for chaining.
 func (x *DatePicker) WithTimeInterval(timeInterval float64) *DatePicker {
 	x.inner.SetTimeInterval(timeInterval)
 	return x
 }
 
+// The date picker’s minimum date value.
+//
 // WithMinDate sets the minDate property and returns the receiver for chaining.
 func (x *DatePicker) WithMinDate(minDate *foundation.NSDate) *DatePicker {
 	x.inner.SetMinDate(minDate)
 	return x
 }
 
+// The date picker’s maximum date value.
+//
 // WithMaxDate sets the maxDate property and returns the receiver for chaining.
 func (x *DatePicker) WithMaxDate(maxDate *foundation.NSDate) *DatePicker {
 	x.inner.SetMaxDate(maxDate)
 	return x
 }
 
+// A Boolean value that indicates whether to present a graphical calendar overlay when editing a calendar element within a text-field style date picker.
+//
 // WithPresentsCalendarOverlay sets the presentsCalendarOverlay property and returns the receiver for chaining.
 func (x *DatePicker) WithPresentsCalendarOverlay(presentsCalendarOverlay bool) *DatePicker {
 	x.inner.SetPresentsCalendarOverlay(presentsCalendarOverlay)
 	return x
 }
 
+// A delegate for the date picker’s cell
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *DatePicker) WithDelegate(delegate raw.NSDatePickerCellDelegate) *DatePicker {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The target object that receives action messages from the cell.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *DatePicker) WithTarget(target objc.ID) *DatePicker {
 	x.inner.NSControl.SetTarget(target)
 	return x
 }
 
+// The default action-message selector associated with the control.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *DatePicker) WithAction(action objc.SEL) *DatePicker {
 	x.inner.NSControl.SetAction(action)
 	return x
 }
 
+// The tag identifying the receiver (not the tag of the receiver’s cell).
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *DatePicker) WithTag(tag int) *DatePicker {
 	x.inner.NSControl.SetTag(tag)
 	return x
 }
 
+// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+//
 // WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
 func (x *DatePicker) WithIgnoresMultiClick(ignoresMultiClick bool) *DatePicker {
 	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
 	return x
 }
 
+// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *DatePicker) WithContinuous(continuous bool) *DatePicker {
 	x.inner.NSControl.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver reacts to mouse events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *DatePicker) WithEnabled(enabled bool) *DatePicker {
 	x.inner.NSControl.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the receiver refuses the first responder role.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *DatePicker) WithRefusesFirstResponder(refusesFirstResponder bool) *DatePicker {
 	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value that indicates whether the cell is highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *DatePicker) WithHighlighted(highlighted bool) *DatePicker {
 	x.inner.NSControl.SetHighlighted(highlighted)
 	return x
 }
 
+// The size of the control.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *DatePicker) WithControlSize(controlSize NSControlSize) *DatePicker {
 	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The receiver’s formatter.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *DatePicker) WithFormatter(formatter *foundation.NSFormatter) *DatePicker {
 	x.inner.NSControl.SetFormatter(formatter)
 	return x
 }
 
+// The value of the receiver’s cell as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *DatePicker) WithObjectValue(objectValue objc.ID) *DatePicker {
 	x.inner.NSControl.SetObjectValue(objectValue)
 	return x
 }
 
+// The value of the receiver’s cell as an NSString object.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *DatePicker) WithStringValue(stringValue string) *DatePicker {
 	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The value of the receiver’s cell as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *DatePicker) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *DatePicker {
 	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *DatePicker) WithIntValue(intValue int) *DatePicker {
 	x.inner.NSControl.SetIntValue(intValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *DatePicker) WithIntegerValue(integerValue int) *DatePicker {
 	x.inner.NSControl.SetIntegerValue(integerValue)
 	return x
 }
 
+// The value of the receiver’s cell as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *DatePicker) WithFloatValue(floatValue float32) *DatePicker {
 	x.inner.NSControl.SetFloatValue(floatValue)
 	return x
 }
 
+// The value of the receiver’s cell as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *DatePicker) WithDoubleValue(doubleValue float64) *DatePicker {
 	x.inner.NSControl.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The font used to draw text in the receiver’s cell.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *DatePicker) WithFont(font *Font) *DatePicker {
 	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *DatePicker) WithUsesSingleLineMode(usesSingleLineMode bool) *DatePicker {
 	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// The line break mode to use for text in the control’s cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *DatePicker) WithLineBreakMode(lineBreakMode NSLineBreakMode) *DatePicker {
 	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The alignment mode of the text in the receiver’s cell.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *DatePicker) WithAlignment(alignment NSTextAlignment) *DatePicker {
 	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *DatePicker) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *DatePicker {
 	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+//
 // WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
 func (x *DatePicker) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *DatePicker {
 	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
@@ -328,6 +410,8 @@ func (x *DatePicker) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOpt
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *DatePicker) WithFrame(frame corefoundation.CGRect) *DatePicker {
 	x.inner.NSControl.NSView.SetFrame(frame)
@@ -352,6 +436,8 @@ func (x *DatePicker) WithBoundsRotation(boundsRotation float64) *DatePicker {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *DatePicker) WithBounds(bounds corefoundation.CGRect) *DatePicker {
 	x.inner.NSControl.NSView.SetBounds(bounds)
@@ -364,6 +450,8 @@ func (x *DatePicker) WithCanDrawConcurrently(canDrawConcurrently bool) *DatePick
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *DatePicker) WithNeedsDisplay(needsDisplay bool) *DatePicker {
 	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
@@ -550,7 +638,7 @@ func (x *DatePicker) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets found
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *DatePicker) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *DatePicker {
@@ -606,24 +694,32 @@ func (x *DatePicker) WithPressureConfiguration(pressureConfiguration *PressureCo
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *DatePicker) WithNextResponder(nextResponder ResponderProvider) *DatePicker {
 	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *DatePicker) WithMenu(menu *Menu) *DatePicker {
 	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *DatePicker) WithUserActivity(userActivity *foundation.NSUserActivity) *DatePicker {
 	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *DatePicker) WithTouchBar(touchBar *TouchBar) *DatePicker {
 	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())

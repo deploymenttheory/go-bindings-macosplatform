@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that encapsulates contact information needed for billing and shipping.
+//
 // Contact wraps [raw.PKContact] with a fluent Go API.
 type Contact struct {
 	inner *raw.PKContact
@@ -38,30 +40,40 @@ func NewContact() *Contact {
 	return &Contact{inner: raw.PKContactFromID(_id)}
 }
 
+// The contact’s first and last name, or nil if the contact’s name is not needed for the transaction.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Contact) WithName(name *foundation.NSPersonNameComponents) *Contact {
 	x.inner.SetName(name)
 	return x
 }
 
+// The contact’s full postal address.
+//
 // WithPostalAddress sets the postalAddress property and returns the receiver for chaining.
 func (x *Contact) WithPostalAddress(postalAddress *contacts.CNPostalAddress) *Contact {
 	x.inner.SetPostalAddress(postalAddress)
 	return x
 }
 
+// The contact’s telephone number, or nil if the contact’s phone number is not needed for the transaction.
+//
 // WithPhoneNumber sets the phoneNumber property and returns the receiver for chaining.
 func (x *Contact) WithPhoneNumber(phoneNumber *contacts.CNPhoneNumber) *Contact {
 	x.inner.SetPhoneNumber(phoneNumber)
 	return x
 }
 
+// The contact’s email address, or nil if the contact’s email is not needed for the transaction.
+//
 // WithEmailAddress sets the emailAddress property and returns the receiver for chaining.
 func (x *Contact) WithEmailAddress(emailAddress string) *Contact {
 	x.inner.SetEmailAddress(foundation.NSStringStringWithUTF8String(emailAddress))
 	return x
 }
 
+// The contact’s sublocality, or nil if the sublocality is not needed for the transaction.
+//
 // WithSupplementarySubLocality sets the supplementarySubLocality property and returns the receiver for chaining.
 func (x *Contact) WithSupplementarySubLocality(supplementarySubLocality string) *Contact {
 	x.inner.SetSupplementarySubLocality(foundation.NSStringStringWithUTF8String(supplementarySubLocality))

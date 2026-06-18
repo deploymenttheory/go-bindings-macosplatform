@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that directs the kernel to map space on disk to a specific file managed by this file system.
+//
 // ExtentPacker wraps [raw.FSExtentPacker] with a fluent Go API.
 type ExtentPacker struct {
 	inner *raw.FSExtentPacker
@@ -35,7 +37,7 @@ func NewExtentPacker() *ExtentPacker {
 	return &ExtentPacker{inner: raw.FSExtentPackerFromID(_id)}
 }
 
-// Packs a single extent to send to the kernel. - Parameters: - resource: The resource on which to perform I/O. - type: The type of extent, indicating whether it contains valid data. - logicalOffset: The extent offset within the file, in bytes. - physicalOffset: The extent offset on disk, in bytes. - length: The extent length, in bytes. - Returns: A Boolean value that indicates whether the packer can pack more extents.
+// Packs a single extent to send to the kernel.
 //
 // PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength calls the underlying PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength.
 func (x *ExtentPacker) PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength(resource *raw.FSBlockDeviceResource, type_ FSExtentType, logicalOffset int64, physicalOffset int64, length uint) bool {

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A configuration object that contains variant qualifiers and media options.
+//
 // AssetDownloadContentConfiguration wraps [raw.AVAssetDownloadContentConfiguration] with a fluent Go API.
 type AssetDownloadContentConfiguration struct {
 	inner *raw.AVAssetDownloadContentConfiguration
@@ -40,7 +42,7 @@ func NewAssetDownloadContentConfiguration() *AssetDownloadContentConfiguration {
 	return &AssetDownloadContentConfiguration{inner: raw.AVAssetDownloadContentConfigurationFromID(_id)}
 }
 
-// An array of variant qualifiers. The qualifiers are expected to be added in the preferential order and will be evaluated in that order until the qualifier matches one or more AVAssetVariants. Only those variants which can be played on the current device configuration will be initially chosen for evaluation. If there is more than one match, automatic variant selection will be used to choose among the matched. If a variant qualifier is constructed to explicitly choose a variant, no evaluation is performed and the variant provided will be downloaded as is, even if it is not playable on current device configuration. If a variant qualifier has not been provided, or if the variant qualifier when evaluated does not match any of the variants which can be played according to the current device configuration, automatic variant selection will be used.
+// The variant qualifiers for this configuration.
 //
 // WithVariantQualifiers sets the collection, converting the Go slice to an NSArray.
 func (x *AssetDownloadContentConfiguration) WithVariantQualifiers(items ...*raw.AVAssetVariantQualifier) *AssetDownloadContentConfiguration {
@@ -60,7 +62,7 @@ func (x *AssetDownloadContentConfiguration) WithVariantQualifiers(items ...*raw.
 	return x
 }
 
-// An array of media selections obtained from the AVAsset. If a media selection is not provided, automatic media selection associated with the asset will be used.
+// The media selections of an asset that a task downloads.
 //
 // WithMediaSelections sets the collection, converting the Go slice to an NSArray.
 func (x *AssetDownloadContentConfiguration) WithMediaSelections(items ...MediaSelectionProvider) *AssetDownloadContentConfiguration {

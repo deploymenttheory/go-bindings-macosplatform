@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A container for per-pixel distance or disparity information captured by compatible camera devices.
+//
 // DepthData wraps [raw.AVDepthData] with a fluent Go API.
 type DepthData struct {
 	inner *raw.AVDepthData
@@ -39,7 +41,7 @@ func NewDepthData() *DepthData {
 	return &DepthData{inner: raw.AVDepthDataFromID(_id)}
 }
 
-// @method depthDataByConvertingToDepthDataType: @abstract Returns a converted, derivative AVDepthData instance in the specified depthDataType. @param depthDataType The OSType of depthData object to which you'd like to convert. Must be present in availableDepthDataTypes. @result An AVDepthData instance. @discussion This method throws an NSInvalidArgumentException if you pass an unrecognized depthDataType. See
+// Returns a derivative depth data object by converting the depth data map to the specified data type.
 //
 // DepthDataByConvertingToDepthDataType calls the underlying DepthDataByConvertingToDepthDataType.
 func (x *DepthData) DepthDataByConvertingToDepthDataType(depthDataType uint) *DepthData {
@@ -50,7 +52,7 @@ func (x *DepthData) DepthDataByConvertingToDepthDataType(depthDataType uint) *De
 	return &DepthData{inner: _r}
 }
 
-// @method depthDataByApplyingExifOrientation: @abstract Returns a derivative AVDepthData instance in which the specified Exif orientation has been applied. @param exifOrientation One of the 8 standard Exif orientation tags expressing how the depth data should be rotated / mirrored. @result An AVDepthData instance. @discussion When applying simple 90 degree rotation or mirroring edits to media containing depth data, you may use this initializer to create a derivative copy of the depth in which the specified orientation is applied to both the underlying pixel map data and the camera calibration data. This method throws an NSInvalidArgumentException if you pass an unrecognized exifOrientation.
+// Returns a derivative depth data object by mirroring or rotating it to the specified orientation.
 //
 // DepthDataByApplyingExifOrientation calls the underlying DepthDataByApplyingExifOrientation.
 func (x *DepthData) DepthDataByApplyingExifOrientation(exifOrientation imageio.CGImagePropertyOrientation) *DepthData {
@@ -61,7 +63,7 @@ func (x *DepthData) DepthDataByApplyingExifOrientation(exifOrientation imageio.C
 	return &DepthData{inner: _r}
 }
 
-// @method depthDataByReplacingDepthDataMapWithPixelBuffer:error: @abstract Returns an AVDepthData instance wrapping the replacement depth data map pixel buffer. @param pixelBuffer A pixel buffer containing depth data information in one of the 4 supported disparity / depth pixel formats. @param outError On return, if the depth data cannot be created, points to an NSError describing the problem. @result An AVDepthData instance, or nil if the pixel buffer is malformed. @discussion When applying complex edits to media containing depth data, you may create a derivative map with arbitrary transforms applied to it, then use this initializer to create a new AVDepthData. Note that this new depth data object has no camera calibration data, so its cameraCalibrationData property always returns nil.
+// Returns a derivative depth data object by replacing the depth data map.
 //
 // DepthDataByReplacingDepthDataMapWithPixelBufferError calls the underlying DepthDataByReplacingDepthDataMapWithPixelBufferError.
 func (x *DepthData) DepthDataByReplacingDepthDataMapWithPixelBufferError(pixelBuffer unsafe.Pointer) (*DepthData, error) {
@@ -75,7 +77,7 @@ func (x *DepthData) DepthDataByReplacingDepthDataMapWithPixelBufferError(pixelBu
 	return &DepthData{inner: _r}, nil
 }
 
-// @method dictionaryRepresentationForAuxiliaryDataType: @abstract Returns a dictionary of primitive map information to be used when writing an image file with depth data. @param outAuxDataType On output, either kCGImageAuxiliaryDataTypeDisparity or kCGImageAuxiliaryDataTypeDepth, depending on the depth data's file. @result A dictionary of CGImageDestination compatible depth information, or nil if the auxDataType is unsupported. @discussion When using ImageIO framework's CGImageDestination API to write depth data to a HEIF or JPEG file, you may use this method to generate a dictionary of primitive map information consumed by CGImageDestinationAddAuxiliaryDataInfo.
+// Returns a dictionary representation of the depth data suitable for writing into an image file.
 //
 // DictionaryRepresentationForAuxiliaryDataType calls the underlying DictionaryRepresentationForAuxiliaryDataType.
 func (x *DepthData) DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) *foundation.NSDictionary[objc.ID, objc.ID] {

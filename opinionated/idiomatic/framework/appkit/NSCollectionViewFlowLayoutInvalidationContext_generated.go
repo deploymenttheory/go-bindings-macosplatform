@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that identifies the portions of a flow layout object that need to be updated.
+//
 // CollectionViewFlowLayoutInvalidationContext wraps [raw.NSCollectionViewFlowLayoutInvalidationContext] with a fluent Go API.
 type CollectionViewFlowLayoutInvalidationContext struct {
 	inner *raw.NSCollectionViewFlowLayoutInvalidationContext
@@ -38,24 +40,32 @@ func NewCollectionViewFlowLayoutInvalidationContext() *CollectionViewFlowLayoutI
 	return &CollectionViewFlowLayoutInvalidationContext{inner: raw.NSCollectionViewFlowLayoutInvalidationContextFromID(_id)}
 }
 
+// A Boolean value indicating whether the flow layout object should fetch new size information from its delegate.
+//
 // WithInvalidateFlowLayoutDelegateMetrics sets the invalidateFlowLayoutDelegateMetrics property and returns the receiver for chaining.
 func (x *CollectionViewFlowLayoutInvalidationContext) WithInvalidateFlowLayoutDelegateMetrics(invalidateFlowLayoutDelegateMetrics bool) *CollectionViewFlowLayoutInvalidationContext {
 	x.inner.SetInvalidateFlowLayoutDelegateMetrics(invalidateFlowLayoutDelegateMetrics)
 	return x
 }
 
+// A Boolean value indicating whether the flow layout object should invalidate its current attributes.
+//
 // WithInvalidateFlowLayoutAttributes sets the invalidateFlowLayoutAttributes property and returns the receiver for chaining.
 func (x *CollectionViewFlowLayoutInvalidationContext) WithInvalidateFlowLayoutAttributes(invalidateFlowLayoutAttributes bool) *CollectionViewFlowLayoutInvalidationContext {
 	x.inner.SetInvalidateFlowLayoutAttributes(invalidateFlowLayoutAttributes)
 	return x
 }
 
+// The delta value to add to the collection view’s content offset.
+//
 // WithContentOffsetAdjustment sets the contentOffsetAdjustment property and returns the receiver for chaining.
 func (x *CollectionViewFlowLayoutInvalidationContext) WithContentOffsetAdjustment(contentOffsetAdjustment corefoundation.CGPoint) *CollectionViewFlowLayoutInvalidationContext {
 	x.inner.NSCollectionViewLayoutInvalidationContext.SetContentOffsetAdjustment(contentOffsetAdjustment)
 	return x
 }
 
+// The delta value to add to the collection view’s content size.
+//
 // WithContentSizeAdjustment sets the contentSizeAdjustment property and returns the receiver for chaining.
 func (x *CollectionViewFlowLayoutInvalidationContext) WithContentSizeAdjustment(contentSizeAdjustment corefoundation.CGSize) *CollectionViewFlowLayoutInvalidationContext {
 	x.inner.NSCollectionViewLayoutInvalidationContext.SetContentSizeAdjustment(contentSizeAdjustment)

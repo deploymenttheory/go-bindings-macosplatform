@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A convenience wrapper for the given dictionary of data.
+//
 // DictionaryFeatureProvider wraps [raw.MLDictionaryFeatureProvider] with a fluent Go API.
 type DictionaryFeatureProvider struct {
 	inner *raw.MLDictionaryFeatureProvider
@@ -32,7 +34,7 @@ func DictionaryFeatureProviderFromID(id objc.ID) *DictionaryFeatureProvider {
 	return &DictionaryFeatureProvider{inner: raw.MLDictionaryFeatureProviderFromID(id)}
 }
 
-// Create from a generic dictionary by converting all values to MLFeatureValues or from a dictionary with values already stored as MLFeatureValues. An error results if the values are not or cannot be represented as MLFeatureValues.
+// Creates the feature provider based on a dictionary.
 //
 // NewDictionaryFeatureProviderWithDictionaryError creates a new [DictionaryFeatureProvider].
 func NewDictionaryFeatureProviderWithDictionaryError(dictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*DictionaryFeatureProvider, error) {
@@ -45,7 +47,7 @@ func NewDictionaryFeatureProviderWithDictionaryError(dictionary *foundation.NSDi
 	return &DictionaryFeatureProvider{inner: raw.MLDictionaryFeatureProviderFromID(_id)}, nil
 }
 
-// Get the value for specified feature
+// Subscript interface for the feature provider to pass through to the dictionary.
 //
 // ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
 func (x *DictionaryFeatureProvider) ObjectForKeyedSubscript(featureName string) *FeatureValue {

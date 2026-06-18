@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A concrete metadata object subclass representing a cat head.
+//
 // MetadataCatHeadObject wraps [raw.AVMetadataCatHeadObject] with a fluent Go API.
 type MetadataCatHeadObject struct {
 	inner *raw.AVMetadataCatHeadObject

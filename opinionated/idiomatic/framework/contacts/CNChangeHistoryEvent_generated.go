@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the user adding, updating, or deleting a contact or group.
+//
 // ChangeHistoryEvent wraps [raw.CNChangeHistoryEvent] with a fluent Go API.
 type ChangeHistoryEvent struct {
 	inner *raw.CNChangeHistoryEvent
@@ -35,6 +37,8 @@ func NewChangeHistoryEvent() *ChangeHistoryEvent {
 	return &ChangeHistoryEvent{inner: raw.CNChangeHistoryEventFromID(_id)}
 }
 
+// Forwards the event to the delegate you provide to process the change-history event.
+//
 // AcceptEventVisitor calls the underlying AcceptEventVisitor.
 func (x *ChangeHistoryEvent) AcceptEventVisitor(visitor raw.CNChangeHistoryEventVisitor) {
 	x.inner.AcceptEventVisitor(visitor)

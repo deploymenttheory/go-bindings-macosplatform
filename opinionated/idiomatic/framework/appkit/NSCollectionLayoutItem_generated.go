@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The most basic component of a collection view’s layout.
+//
 // CollectionLayoutItem wraps [raw.NSCollectionLayoutItem] with a fluent Go API.
 type CollectionLayoutItem struct {
 	inner *raw.NSCollectionLayoutItem
@@ -36,12 +38,16 @@ func NewCollectionLayoutItem() *CollectionLayoutItem {
 	return &CollectionLayoutItem{inner: raw.NSCollectionLayoutItemFromID(_id)}
 }
 
+// The amount of space added around the content of the item to adjust its final size after its position is computed.
+//
 // WithContentInsets sets the contentInsets property and returns the receiver for chaining.
 func (x *CollectionLayoutItem) WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutItem {
 	x.inner.SetContentInsets(contentInsets)
 	return x
 }
 
+// The amount of space added around the boundaries of the item between other items and this item’s container.
+//
 // WithEdgeSpacing sets the edgeSpacing property and returns the receiver for chaining.
 func (x *CollectionLayoutItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutItem {
 	x.inner.SetEdgeSpacing(edgeSpacing.Unwrap())

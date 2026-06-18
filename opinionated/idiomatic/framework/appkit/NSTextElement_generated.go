@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract base class that represents the smallest units of text layout such as paragraphs or attachments.
+//
 // TextElement wraps [raw.NSTextElement] with a fluent Go API.
 type TextElement struct {
 	inner *raw.NSTextElement
@@ -30,6 +32,8 @@ func TextElementFromID(id objc.ID) *TextElement {
 	return &TextElement{inner: raw.NSTextElementFromID(id)}
 }
 
+// Creates a new text element with the content manager you provide.
+//
 // NewTextElementWithTextContentManager creates a new [TextElement].
 func NewTextElementWithTextContentManager(textContentManager *raw.NSTextContentManager) *TextElement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextElement")), objc.RegisterName("alloc"))
@@ -37,12 +41,16 @@ func NewTextElementWithTextContentManager(textContentManager *raw.NSTextContentM
 	return &TextElement{inner: raw.NSTextElementFromID(_id)}
 }
 
+// The value that represents the current content manager.
+//
 // WithTextContentManager sets the textContentManager property and returns the receiver for chaining.
 func (x *TextElement) WithTextContentManager(textContentManager TextContentManagerProvider) *TextElement {
 	x.inner.SetTextContentManager(textContentManager.asTextContentManager())
 	return x
 }
 
+// A range value that represents the range of the element inside the document.
+//
 // WithElementRange sets the elementRange property and returns the receiver for chaining.
 func (x *TextElement) WithElementRange(elementRange *TextRange) *TextElement {
 	x.inner.SetElementRange(elementRange.Unwrap())

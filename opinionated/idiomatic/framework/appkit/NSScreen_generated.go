@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An object that describes the attributes of a computer’s monitor or screen.
+//
 // Screen wraps [raw.NSScreen] with a fluent Go API.
 type Screen struct {
 	inner *raw.NSScreen
@@ -40,21 +42,29 @@ func NewScreen() *Screen {
 	return &Screen{inner: raw.NSScreenFromID(_id)}
 }
 
+// A Boolean value indicating whether the color space of the screen is capable of representing the specified display gamut.
+//
 // CanRepresentDisplayGamut calls the underlying CanRepresentDisplayGamut.
 func (x *Screen) CanRepresentDisplayGamut(displayGamut NSDisplayGamut) bool {
 	return x.inner.CanRepresentDisplayGamut(raw.NSDisplayGamut(displayGamut))
 }
 
+// Converts the rectangle to the device pixel aligned coordinates system of a screen.
+//
 // ConvertRectToBacking calls the underlying ConvertRectToBacking.
 func (x *Screen) ConvertRectToBacking(rect corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.ConvertRectToBacking(rect)
 }
 
+// Converts the rectangle from the device pixel aligned coordinates system of a screen.
+//
 // ConvertRectFromBacking calls the underlying ConvertRectFromBacking.
 func (x *Screen) ConvertRectFromBacking(rect corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.ConvertRectFromBacking(rect)
 }
 
+// Converts a rectangle in global screen coordinates to a pixel aligned rectangle.
+//
 // BackingAlignedRectOptions calls the underlying BackingAlignedRectOptions.
 func (x *Screen) BackingAlignedRectOptions(rect corefoundation.CGRect, options foundation.NSAlignmentOptions) corefoundation.CGRect {
 	return x.inner.BackingAlignedRectOptions(rect, options)
@@ -180,13 +190,15 @@ func (x *Screen) LastDisplayUpdateTimestamp() float64 {
 	return x.inner.LastDisplayUpdateTimestamp()
 }
 
-// Returns a new display link whose callback will be invoked in-sync with the display the screen is on. Note that views and windows can move between screens and you may want to get a display link directly from `NSView` or `NSWindow` which will track those changes automatically.
+// Returns a new display link whose callback will be invoked in-sync with the display the screen is on.
 //
 // DisplayLinkWithTargetSelector calls the underlying DisplayLinkWithTargetSelector.
 func (x *Screen) DisplayLinkWithTargetSelector(target objc.ID, selector objc.SEL) *quartzcore.CADisplayLink {
 	return x.inner.DisplayLinkWithTargetSelector(target, selector)
 }
 
+// Returns the scaling factor from user space to device space on the screen.
+//
 // UserSpaceScaleFactor calls the underlying UserSpaceScaleFactor.
 func (x *Screen) UserSpaceScaleFactor() float64 {
 	return x.inner.UserSpaceScaleFactor()

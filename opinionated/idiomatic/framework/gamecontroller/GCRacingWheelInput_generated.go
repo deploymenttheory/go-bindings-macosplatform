@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A controller profile that supports a racing wheel.
+//
 // RacingWheelInput wraps [raw.GCRacingWheelInput] with a fluent Go API.
 type RacingWheelInput struct {
 	inner *raw.GCRacingWheelInput
@@ -35,7 +37,7 @@ func NewRacingWheelInput() *RacingWheelInput {
 	return &RacingWheelInput{inner: raw.GCRacingWheelInputFromID(_id)}
 }
 
-// Polls the current state vector of the racing wheel input and saves it to a new instance.
+// Returns a snapshot of the racing wheel inputs.
 //
 // Capture calls the underlying Capture.
 func (x *RacingWheelInput) Capture() *RacingWheelInputState {
@@ -46,6 +48,8 @@ func (x *RacingWheelInput) Capture() *RacingWheelInputState {
 	return &RacingWheelInputState{inner: _r}
 }
 
+// Returns the next input state of the racing wheel from the queue.
+//
 // NextInputState calls the underlying NextInputState.
 func (x *RacingWheelInput) NextInputState() *RacingWheelInputState {
 	_r := x.inner.NextInputState()

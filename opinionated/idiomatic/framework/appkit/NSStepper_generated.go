@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An interface with up and down arrow buttons for incrementing or decrementing a value.
+//
 // Stepper wraps [raw.NSStepper] with a fluent Go API.
 type Stepper struct {
 	inner *raw.NSStepper
@@ -40,168 +42,224 @@ func NewStepper() *Stepper {
 	return &Stepper{inner: raw.NSStepperFromID(_id)}
 }
 
+// The stepper’s minimum value.
+//
 // WithMinValue sets the minValue property and returns the receiver for chaining.
 func (x *Stepper) WithMinValue(minValue float64) *Stepper {
 	x.inner.SetMinValue(minValue)
 	return x
 }
 
+// The stepper’s maximum value.
+//
 // WithMaxValue sets the maxValue property and returns the receiver for chaining.
 func (x *Stepper) WithMaxValue(maxValue float64) *Stepper {
 	x.inner.SetMaxValue(maxValue)
 	return x
 }
 
+// The amount by which the receiver changes with each increment or decrement.
+//
 // WithIncrement sets the increment property and returns the receiver for chaining.
 func (x *Stepper) WithIncrement(increment float64) *Stepper {
 	x.inner.SetIncrement(increment)
 	return x
 }
 
+// A Boolean value that indicates whether the stepper wraps around the minimum and maximum values.
+//
 // WithValueWraps sets the valueWraps property and returns the receiver for chaining.
 func (x *Stepper) WithValueWraps(valueWraps bool) *Stepper {
 	x.inner.SetValueWraps(valueWraps)
 	return x
 }
 
+// A Boolean value that indicates how the stepper responds to mouse events.
+//
 // WithAutorepeat sets the autorepeat property and returns the receiver for chaining.
 func (x *Stepper) WithAutorepeat(autorepeat bool) *Stepper {
 	x.inner.SetAutorepeat(autorepeat)
 	return x
 }
 
+// The target object that receives action messages from the cell.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *Stepper) WithTarget(target objc.ID) *Stepper {
 	x.inner.NSControl.SetTarget(target)
 	return x
 }
 
+// The default action-message selector associated with the control.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *Stepper) WithAction(action objc.SEL) *Stepper {
 	x.inner.NSControl.SetAction(action)
 	return x
 }
 
+// The tag identifying the receiver (not the tag of the receiver’s cell).
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *Stepper) WithTag(tag int) *Stepper {
 	x.inner.NSControl.SetTag(tag)
 	return x
 }
 
+// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+//
 // WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
 func (x *Stepper) WithIgnoresMultiClick(ignoresMultiClick bool) *Stepper {
 	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
 	return x
 }
 
+// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *Stepper) WithContinuous(continuous bool) *Stepper {
 	x.inner.NSControl.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver reacts to mouse events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *Stepper) WithEnabled(enabled bool) *Stepper {
 	x.inner.NSControl.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the receiver refuses the first responder role.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *Stepper) WithRefusesFirstResponder(refusesFirstResponder bool) *Stepper {
 	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value that indicates whether the cell is highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *Stepper) WithHighlighted(highlighted bool) *Stepper {
 	x.inner.NSControl.SetHighlighted(highlighted)
 	return x
 }
 
+// The size of the control.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *Stepper) WithControlSize(controlSize NSControlSize) *Stepper {
 	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The receiver’s formatter.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *Stepper) WithFormatter(formatter *foundation.NSFormatter) *Stepper {
 	x.inner.NSControl.SetFormatter(formatter)
 	return x
 }
 
+// The value of the receiver’s cell as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *Stepper) WithObjectValue(objectValue objc.ID) *Stepper {
 	x.inner.NSControl.SetObjectValue(objectValue)
 	return x
 }
 
+// The value of the receiver’s cell as an NSString object.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *Stepper) WithStringValue(stringValue string) *Stepper {
 	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The value of the receiver’s cell as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *Stepper) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Stepper {
 	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *Stepper) WithIntValue(intValue int) *Stepper {
 	x.inner.NSControl.SetIntValue(intValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *Stepper) WithIntegerValue(integerValue int) *Stepper {
 	x.inner.NSControl.SetIntegerValue(integerValue)
 	return x
 }
 
+// The value of the receiver’s cell as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *Stepper) WithFloatValue(floatValue float32) *Stepper {
 	x.inner.NSControl.SetFloatValue(floatValue)
 	return x
 }
 
+// The value of the receiver’s cell as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *Stepper) WithDoubleValue(doubleValue float64) *Stepper {
 	x.inner.NSControl.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The font used to draw text in the receiver’s cell.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *Stepper) WithFont(font *Font) *Stepper {
 	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *Stepper) WithUsesSingleLineMode(usesSingleLineMode bool) *Stepper {
 	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// The line break mode to use for text in the control’s cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *Stepper) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Stepper {
 	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The alignment mode of the text in the receiver’s cell.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *Stepper) WithAlignment(alignment NSTextAlignment) *Stepper {
 	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *Stepper) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Stepper {
 	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+//
 // WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
 func (x *Stepper) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Stepper {
 	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
@@ -256,6 +314,8 @@ func (x *Stepper) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOption
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *Stepper) WithFrame(frame corefoundation.CGRect) *Stepper {
 	x.inner.NSControl.NSView.SetFrame(frame)
@@ -280,6 +340,8 @@ func (x *Stepper) WithBoundsRotation(boundsRotation float64) *Stepper {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *Stepper) WithBounds(bounds corefoundation.CGRect) *Stepper {
 	x.inner.NSControl.NSView.SetBounds(bounds)
@@ -292,6 +354,8 @@ func (x *Stepper) WithCanDrawConcurrently(canDrawConcurrently bool) *Stepper {
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *Stepper) WithNeedsDisplay(needsDisplay bool) *Stepper {
 	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
@@ -478,7 +542,7 @@ func (x *Stepper) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundati
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *Stepper) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Stepper {
@@ -534,24 +598,32 @@ func (x *Stepper) WithPressureConfiguration(pressureConfiguration *PressureConfi
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *Stepper) WithNextResponder(nextResponder ResponderProvider) *Stepper {
 	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *Stepper) WithMenu(menu *Menu) *Stepper {
 	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *Stepper) WithUserActivity(userActivity *foundation.NSUserActivity) *Stepper {
 	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *Stepper) WithTouchBar(touchBar *TouchBar) *Stepper {
 	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())

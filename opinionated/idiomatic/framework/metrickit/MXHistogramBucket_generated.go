@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing a bucket of data in a histogram.
+//
 // HistogramBucket wraps [raw.MXHistogramBucket] with a fluent Go API.
 type HistogramBucket struct {
 	inner *raw.MXHistogramBucket[objc.ID]

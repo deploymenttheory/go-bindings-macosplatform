@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The version of the item’s content and its metadata.
+//
 // FileProviderItemVersion wraps [raw.NSFileProviderItemVersion] with a fluent Go API.
 type FileProviderItemVersion struct {
 	inner *raw.NSFileProviderItemVersion
@@ -30,7 +32,7 @@ func FileProviderItemVersionFromID(id objc.ID) *FileProviderItemVersion {
 	return &FileProviderItemVersion{inner: raw.NSFileProviderItemVersionFromID(id)}
 }
 
-// Items versions have two distinct components, one for the file contents and one for metadata. Components are limited to 128 bytes in size.
+// Creates a new version object.
 //
 // NewFileProviderItemVersionWithContentVersionMetadataVersion creates a new [FileProviderItemVersion].
 func NewFileProviderItemVersionWithContentVersionMetadataVersion(contentVersion *foundation.NSData, metadataVersion *foundation.NSData) *FileProviderItemVersion {

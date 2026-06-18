@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A collection of metadata items that are valid for use within a specific date range.
+//
 // DateRangeMetadataGroup wraps [raw.AVDateRangeMetadataGroup] with a fluent Go API.
 type DateRangeMetadataGroup struct {
 	inner *raw.AVDateRangeMetadataGroup
@@ -30,7 +32,7 @@ func DateRangeMetadataGroupFromID(id objc.ID) *DateRangeMetadataGroup {
 	return &DateRangeMetadataGroup{inner: raw.AVDateRangeMetadataGroupFromID(id)}
 }
 
-// @method		initWithItems:startDate:endDate: @abstract	Initializes an instance of AVDateRangeMetadataGroup with a collection of metadata items. @param		items An NSArray of AVMetadataItems. @param		startDate The start date of the collection of AVMetadataItems. @param		endDate The end date of the collection of AVMetadataItems. If the receiver is intended to represent information about an instantaneous event, the value of endDate should be equal to the value of startDate. A value of nil for endDate indicates that the endDate is indefinite. @result		An instance of AVDateRangeMetadataGroup.
+// Initializes an instance of AVDateRangeMetadataGroup with a collection of metadata items.
 //
 // NewDateRangeMetadataGroupWithItemsStartDateEndDate creates a new [DateRangeMetadataGroup].
 func NewDateRangeMetadataGroupWithItemsStartDateEndDate(items *foundation.NSArray[*raw.AVMetadataItem], startDate *foundation.NSDate, endDate *foundation.NSDate) *DateRangeMetadataGroup {

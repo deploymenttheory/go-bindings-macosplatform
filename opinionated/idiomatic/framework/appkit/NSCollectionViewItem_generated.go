@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// The visual representation for a single data element in a collection view.
+//
 // CollectionViewItem wraps [raw.NSCollectionViewItem] with a fluent Go API.
 type CollectionViewItem struct {
 	inner *raw.NSCollectionViewItem
@@ -39,54 +41,72 @@ func NewCollectionViewItem() *CollectionViewItem {
 	return &CollectionViewItem{inner: raw.NSCollectionViewItemFromID(_id)}
 }
 
+// A Boolean indicating whether the item is currently selected.
+//
 // WithSelected sets the selected property and returns the receiver for chaining.
 func (x *CollectionViewItem) WithSelected(selected bool) *CollectionViewItem {
 	x.inner.SetSelected(selected)
 	return x
 }
 
+// The highlight state currently applied to the item.
+//
 // WithHighlightState sets the highlightState property and returns the receiver for chaining.
 func (x *CollectionViewItem) WithHighlightState(highlightState NSCollectionViewItemHighlightState) *CollectionViewItem {
 	x.inner.SetHighlightState(raw.NSCollectionViewItemHighlightState(highlightState))
 	return x
 }
 
+// An image view outlet that you can use to display images.
+//
 // WithImageView sets the imageView property and returns the receiver for chaining.
 func (x *CollectionViewItem) WithImageView(imageView *ImageView) *CollectionViewItem {
 	x.inner.SetImageView(imageView.Unwrap())
 	return x
 }
 
+// A text field outlet that you can use to display a string.
+//
 // WithTextField sets the textField property and returns the receiver for chaining.
 func (x *CollectionViewItem) WithTextField(textField TextFieldProvider) *CollectionViewItem {
 	x.inner.SetTextField(textField.asTextField())
 	return x
 }
 
+// The object whose value is presented in the receiver’s primary view.
+//
 // WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
 func (x *CollectionViewItem) WithRepresentedObject(representedObject objc.ID) *CollectionViewItem {
 	x.inner.NSViewController.SetRepresentedObject(representedObject)
 	return x
 }
 
+// The localized title of the receiver’s primary view.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *CollectionViewItem) WithTitle(title string) *CollectionViewItem {
 	x.inner.NSViewController.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The view controller’s primary view.
+//
 // WithView sets the view property and returns the receiver for chaining.
 func (x *CollectionViewItem) WithView(view ViewProvider) *CollectionViewItem {
 	x.inner.NSViewController.SetView(view.asView())
 	return x
 }
 
+// The desired size of the view controller’s view, in screen units.
+//
 // WithPreferredContentSize sets the preferredContentSize property and returns the receiver for chaining.
 func (x *CollectionViewItem) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *CollectionViewItem {
 	x.inner.NSViewController.SetPreferredContentSize(preferredContentSize)
 	return x
 }
 
+// An array of view controllers that are hierarchical children of the view controller.
+//
 // WithChildViewControllers sets the collection, converting the Go slice to an NSArray.
 func (x *CollectionViewItem) WithChildViewControllers(items ...ViewControllerProvider) *CollectionViewItem {
 	if len(items) == 0 {
@@ -111,30 +131,40 @@ func (x *CollectionViewItem) WithSourceItemView(sourceItemView ViewProvider) *Co
 	return x
 }
 
+// For a view controller that is part of an app extension, the preferred screen origin.
+//
 // WithPreferredScreenOrigin sets the preferredScreenOrigin property and returns the receiver for chaining.
 func (x *CollectionViewItem) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *CollectionViewItem {
 	x.inner.NSViewController.SetPreferredScreenOrigin(preferredScreenOrigin)
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *CollectionViewItem) WithNextResponder(nextResponder ResponderProvider) *CollectionViewItem {
 	x.inner.NSViewController.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *CollectionViewItem) WithMenu(menu *Menu) *CollectionViewItem {
 	x.inner.NSViewController.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *CollectionViewItem) WithUserActivity(userActivity *foundation.NSUserActivity) *CollectionViewItem {
 	x.inner.NSViewController.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *CollectionViewItem) WithTouchBar(touchBar *TouchBar) *CollectionViewItem {
 	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar.Unwrap())

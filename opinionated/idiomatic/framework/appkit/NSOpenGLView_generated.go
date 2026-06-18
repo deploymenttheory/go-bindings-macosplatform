@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A view that displays OpenGL content in a view.
+//
 // OpenGLView wraps [raw.NSOpenGLView] with a fluent Go API.
 type OpenGLView struct {
 	inner *raw.NSOpenGLView
@@ -34,6 +36,8 @@ func OpenGLViewFromID(id objc.ID) *OpenGLView {
 	return &OpenGLView{inner: raw.NSOpenGLViewFromID(id)}
 }
 
+// Returns an NSOpenGLView object initialized with the specified frame rectangle and pixel format.
+//
 // NewOpenGLViewWithFramePixelFormat creates a new [OpenGLView].
 func NewOpenGLViewWithFramePixelFormat(frameRect corefoundation.CGRect, format *raw.NSOpenGLPixelFormat) *OpenGLView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOpenGLView")), objc.RegisterName("alloc"))
@@ -41,12 +45,16 @@ func NewOpenGLViewWithFramePixelFormat(frameRect corefoundation.CGRect, format *
 	return &OpenGLView{inner: raw.NSOpenGLViewFromID(_id)}
 }
 
+// The NSOpenGLContext object associated with the receiver.
+//
 // WithOpenGLContext sets the openGLContext property and returns the receiver for chaining.
 func (x *OpenGLView) WithOpenGLContext(openGLContext *OpenGLContext) *OpenGLView {
 	x.inner.SetOpenGLContext(openGLContext.Unwrap())
 	return x
 }
 
+// The NSOpenGLPixelFormat object associated with the receiver.
+//
 // WithPixelFormat sets the pixelFormat property and returns the receiver for chaining.
 func (x *OpenGLView) WithPixelFormat(pixelFormat *OpenGLPixelFormat) *OpenGLView {
 	x.inner.SetPixelFormat(pixelFormat.Unwrap())
@@ -95,6 +103,8 @@ func (x *OpenGLView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOpt
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *OpenGLView) WithFrame(frame corefoundation.CGRect) *OpenGLView {
 	x.inner.NSView.SetFrame(frame)
@@ -119,6 +129,8 @@ func (x *OpenGLView) WithBoundsRotation(boundsRotation float64) *OpenGLView {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *OpenGLView) WithBounds(bounds corefoundation.CGRect) *OpenGLView {
 	x.inner.NSView.SetBounds(bounds)
@@ -131,6 +143,8 @@ func (x *OpenGLView) WithCanDrawConcurrently(canDrawConcurrently bool) *OpenGLVi
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *OpenGLView) WithNeedsDisplay(needsDisplay bool) *OpenGLView {
 	x.inner.NSView.SetNeedsDisplay(needsDisplay)
@@ -317,7 +331,7 @@ func (x *OpenGLView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets found
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *OpenGLView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *OpenGLView {
@@ -373,45 +387,61 @@ func (x *OpenGLView) WithPressureConfiguration(pressureConfiguration *PressureCo
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *OpenGLView) WithNextResponder(nextResponder ResponderProvider) *OpenGLView {
 	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *OpenGLView) WithMenu(menu *Menu) *OpenGLView {
 	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *OpenGLView) WithUserActivity(userActivity *foundation.NSUserActivity) *OpenGLView {
 	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *OpenGLView) WithTouchBar(touchBar *TouchBar) *OpenGLView {
 	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Releases the NSOpenGLContext object associated with the view.
+//
 // ClearGLContext calls the underlying ClearGLContext.
 func (x *OpenGLView) ClearGLContext() {
 	x.inner.ClearGLContext()
 }
 
+// Called by Cocoa when the view’s window moves or when the view itself moves or is resized.
+//
 // Update calls the underlying Update.
 func (x *OpenGLView) Update() {
 	x.inner.Update()
 }
 
+// Called by Cocoa when the view’s visible rectangle or bounds change.
+//
 // Reshape calls the underlying Reshape.
 func (x *OpenGLView) Reshape() {
 	x.inner.Reshape()
 }
 
+// Used by subclasses to initialize OpenGL state.
+//
 // PrepareOpenGL calls the underlying PrepareOpenGL.
 func (x *OpenGLView) PrepareOpenGL() {
 	x.inner.PrepareOpenGL()

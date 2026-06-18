@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object to initialize a mixer with a given configuration.
+//
 // MixerDefinition wraps [raw.PHASEMixerDefinition] with a fluent Go API.
 type MixerDefinition struct {
 	inner *raw.PHASEMixerDefinition
@@ -35,7 +37,7 @@ func NewMixerDefinition() *MixerDefinition {
 	return &MixerDefinition{inner: raw.PHASEMixerDefinitionFromID(_id)}
 }
 
-// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
+// The mixer’s volume.
 //
 // WithGain sets the gain property and returns the receiver for chaining.
 func (x *MixerDefinition) WithGain(gain float64) *MixerDefinition {
@@ -43,7 +45,7 @@ func (x *MixerDefinition) WithGain(gain float64) *MixerDefinition {
 	return x
 }
 
-// @property gainMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable real-time control of the gain during playback.
+// A template for a parameter that changes the mixer’s volume gradually over a period of time.
 //
 // WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
 func (x *MixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *MixerDefinition {

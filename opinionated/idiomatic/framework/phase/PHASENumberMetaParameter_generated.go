@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A metaparameter defined by a number that can change over time.
+//
 // NumberMetaParameter wraps [raw.PHASENumberMetaParameter] with a fluent Go API.
 type NumberMetaParameter struct {
 	inner *raw.PHASENumberMetaParameter
@@ -35,7 +37,7 @@ func NewNumberMetaParameter() *NumberMetaParameter {
 	return &NumberMetaParameter{inner: raw.PHASENumberMetaParameterFromID(_id)}
 }
 
-// @property value @abstract The value of this metaparameter
+// A value for the metaparameter.
 //
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *NumberMetaParameter) WithValue(value objc.ID) *NumberMetaParameter {
@@ -43,7 +45,7 @@ func (x *NumberMetaParameter) WithValue(value objc.ID) *NumberMetaParameter {
 	return x
 }
 
-// @method fadeToValue @abstract Fades to a new value over an interval of time @param value The new destination value to fade to @param duration The length of time it takes to arrive at the destination value
+// Sets the value gradually over the given amount of time.
 //
 // FadeToValueDuration calls the underlying FadeToValueDuration.
 func (x *NumberMetaParameter) FadeToValueDuration(value float64, duration float64) {

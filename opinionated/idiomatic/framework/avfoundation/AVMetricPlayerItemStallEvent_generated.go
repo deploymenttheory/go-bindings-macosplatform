@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An event that represents when playback stalls.
+//
 // MetricPlayerItemStallEvent wraps [raw.AVMetricPlayerItemStallEvent] with a fluent Go API.
 type MetricPlayerItemStallEvent struct {
 	inner *raw.AVMetricPlayerItemStallEvent

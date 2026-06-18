@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of a list of triangle primitives to turn into an acceleration structure.
+//
 // AccelerationStructureTriangleGeometryDescriptor wraps [raw.MTLAccelerationStructureTriangleGeometryDescriptor] with a fluent Go API.
 type AccelerationStructureTriangleGeometryDescriptor struct {
 	inner *raw.MTLAccelerationStructureTriangleGeometryDescriptor
@@ -38,7 +40,7 @@ func NewAccelerationStructureTriangleGeometryDescriptor() *AccelerationStructure
 	return &AccelerationStructureTriangleGeometryDescriptor{inner: raw.MTLAccelerationStructureTriangleGeometryDescriptorFromID(_id)}
 }
 
-// @brief Vertex buffer containing triangle vertices. Each vertex position must be formatted according to the vertex format. Must not be nil.
+// A buffer that contains vertex data.
 //
 // WithVertexBuffer sets the vertexBuffer property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithVertexBuffer(vertexBuffer raw.MTLBuffer) *AccelerationStructureTriangleGeometryDescriptor {
@@ -46,7 +48,7 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) WithVertexBuffer(verte
 	return x
 }
 
-// @brief Vertex buffer offset. Must be a multiple of the vertex stride and must be aligned to the platform's buffer offset alignment.
+// The offset, in bytes, for the first vertex in the vertex buffer.
 //
 // WithVertexBufferOffset sets the vertexBufferOffset property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithVertexBufferOffset(vertexBufferOffset uint) *AccelerationStructureTriangleGeometryDescriptor {
@@ -54,7 +56,7 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) WithVertexBufferOffset
 	return x
 }
 
-// @brief Format type of the vertex buffer. Defaults to MTLAttributeFormatFloat3 (packed).
+// The format of each vertex position in the vertex buffer property.
 //
 // WithVertexFormat sets the vertexFormat property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithVertexFormat(vertexFormat MTLAttributeFormat) *AccelerationStructureTriangleGeometryDescriptor {
@@ -62,7 +64,7 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) WithVertexFormat(verte
 	return x
 }
 
-// @brief Stride, in bytes, between vertices in the vertex buffer. Must be a multiple of the vertex format data type size and must be aligned to the vertex format data type's alignment. Defaults to 0, which will result in a stride of the vertex format data size.
+// The stride, in bytes, between vertices in the vertex buffer.
 //
 // WithVertexStride sets the vertexStride property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithVertexStride(vertexStride uint) *AccelerationStructureTriangleGeometryDescriptor {
@@ -70,7 +72,7 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) WithVertexStride(verte
 	return x
 }
 
-// Optional index buffer containing references to vertices in the vertex buffer. May be nil.
+// A buffer that contains indices for the vertices that compose the triangle list.
 //
 // WithIndexBuffer sets the indexBuffer property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithIndexBuffer(indexBuffer raw.MTLBuffer) *AccelerationStructureTriangleGeometryDescriptor {
@@ -78,7 +80,7 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) WithIndexBuffer(indexB
 	return x
 }
 
-// @brief Index buffer offset. Must be a multiple of the index data type size and must be aligned to both the index data type's alignment and the platform's buffer offset alignment.
+// The offset, in bytes, to the first index in the buffer.
 //
 // WithIndexBufferOffset sets the indexBufferOffset property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithIndexBufferOffset(indexBufferOffset uint) *AccelerationStructureTriangleGeometryDescriptor {
@@ -86,7 +88,7 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) WithIndexBufferOffset(
 	return x
 }
 
-// @brief Index type
+// The data type of indices in the index buffer.
 //
 // WithIndexType sets the indexType property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithIndexType(indexType MTLIndexType) *AccelerationStructureTriangleGeometryDescriptor {
@@ -94,7 +96,7 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) WithIndexType(indexTyp
 	return x
 }
 
-// @brief Number of triangles
+// The number of triangles in the buffers.
 //
 // WithTriangleCount sets the triangleCount property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithTriangleCount(triangleCount uint) *AccelerationStructureTriangleGeometryDescriptor {
@@ -126,13 +128,15 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) WithTransformationMatr
 	return x
 }
 
+// An index into the intersection table for determining which intersection function Metal calls when it intersects a ray with the acceleration structure.
+//
 // WithIntersectionFunctionTableOffset sets the intersectionFunctionTableOffset property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset)
 	return x
 }
 
-// @brief Whether the geometry is opaque
+// A Boolean value that determines whether the geometry data in the acceleration structure needs to skip triangle-intersection tests.
 //
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithOpaque(opaque bool) *AccelerationStructureTriangleGeometryDescriptor {
@@ -140,7 +144,7 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) WithOpaque(opaque bool
 	return x
 }
 
-// @brief Whether intersection functions may be invoked more than once per ray/primitive intersection. Defaults to YES.
+// A Boolean value that indicates whether Metal calls the ray-intersection test more than once per primitive on the structure.
 //
 // WithAllowDuplicateIntersectionFunctionInvocation sets the allowDuplicateIntersectionFunctionInvocation property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureTriangleGeometryDescriptor {
@@ -148,7 +152,7 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) WithAllowDuplicateInte
 	return x
 }
 
-// @brief Label
+// A label for the geometry structure, suitable for debugging.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithLabel(label string) *AccelerationStructureTriangleGeometryDescriptor {

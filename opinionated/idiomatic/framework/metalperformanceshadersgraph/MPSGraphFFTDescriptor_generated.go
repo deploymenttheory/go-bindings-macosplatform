@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The class that defines the parameters for a fast Fourier transform (FFT) operation.
+//
 // GraphFFTDescriptor wraps [raw.MPSGraphFFTDescriptor] with a fluent Go API.
 type GraphFFTDescriptor struct {
 	inner *raw.MPSGraphFFTDescriptor
@@ -35,7 +37,7 @@ func NewGraphFFTDescriptor() *GraphFFTDescriptor {
 	return &GraphFFTDescriptor{inner: raw.MPSGraphFFTDescriptorFromID(_id)}
 }
 
-// A Boolean-valued parameter that defines the phase factor sign for Fourier transforms. When set to `YES` graph uses the positive phase factor: `exp(+i 2Pi mu nu / n)`, when computing the (inverse) Fourier transform. Otherwise MPSGraph uses the negative phase factor: `exp(-i 2Pi mu nu / n)`, when computing the Fourier transform. Default value: `NO`.
+// A Boolean-valued parameter that defines the phase factor sign for Fourier transforms.
 //
 // WithInverse sets the inverse property and returns the receiver for chaining.
 func (x *GraphFFTDescriptor) WithInverse(inverse bool) *GraphFFTDescriptor {
@@ -43,7 +45,7 @@ func (x *GraphFFTDescriptor) WithInverse(inverse bool) *GraphFFTDescriptor {
 	return x
 }
 
-// The scaling mode of the fast fourier transform (FFT) operation. Note that the scaling mode is independent from the phase factor. Default value: `MPSGraphFFTScalingModeNone`.
+// The scaling mode of the fast fourier transform (FFT) operation.
 //
 // WithScalingMode sets the scalingMode property and returns the receiver for chaining.
 func (x *GraphFFTDescriptor) WithScalingMode(scalingMode MPSGraphFFTScalingMode) *GraphFFTDescriptor {
@@ -51,7 +53,7 @@ func (x *GraphFFTDescriptor) WithScalingMode(scalingMode MPSGraphFFTScalingMode)
 	return x
 }
 
-// A parameter which controls how graph rounds the output tensor size for a Hermitean-to-real Fourier transform. If set to `YES` then MPSGraph rounds the last output dimension of the result tensor in “MPSGraph/HermiteanToRealFFTWithTensor:axesTensor:descriptor:name:“ to an odd value. Has no effect in the other Fourier transform operations. Default value: `NO`.
+// A parameter which controls how graph rounds the output tensor size for a Hermitean-to-real Fourier transform.
 //
 // WithRoundToOddHermitean sets the roundToOddHermitean property and returns the receiver for chaining.
 func (x *GraphFFTDescriptor) WithRoundToOddHermitean(roundToOddHermitean bool) *GraphFFTDescriptor {

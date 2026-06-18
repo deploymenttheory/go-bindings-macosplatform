@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that contains parcel tracking information that the data detection system matches. The DataDetection framework returns a shipment tracking number match in a `DDMatchShipmentTrackingNumber` object, which contains a carrier name and tracking identifier.
+// An object that contains parcel tracking information that the data detection system matches.
 //
 // MatchShipmentTrackingNumber wraps [raw.DDMatchShipmentTrackingNumber] with a fluent Go API.
 type MatchShipmentTrackingNumber struct {

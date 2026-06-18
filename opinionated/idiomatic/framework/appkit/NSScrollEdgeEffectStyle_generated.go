@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Styles for a scroll view’s edge effect.
+//
 // ScrollEdgeEffectStyle wraps [raw.NSScrollEdgeEffectStyle] with a fluent Go API.
 type ScrollEdgeEffectStyle struct {
 	inner *raw.NSScrollEdgeEffectStyle

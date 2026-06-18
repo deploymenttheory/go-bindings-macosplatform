@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides a promise for the pasteboard.
+//
 // FilePromiseProvider wraps [raw.NSFilePromiseProvider] with a fluent Go API.
 type FilePromiseProvider struct {
 	inner *raw.NSFilePromiseProvider
@@ -37,6 +39,8 @@ func NewFilePromiseProvider() *FilePromiseProvider {
 	return &FilePromiseProvider{inner: raw.NSFilePromiseProviderFromID(_id)}
 }
 
+// Initializes a file promise provider for a certain file type.
+//
 // NewFilePromiseProviderWithFileTypeDelegate creates a new [FilePromiseProvider].
 func NewFilePromiseProviderWithFileTypeDelegate(fileType string, delegate raw.NSFilePromiseProviderDelegate) *FilePromiseProvider {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFilePromiseProvider")), objc.RegisterName("alloc"))
@@ -44,6 +48,8 @@ func NewFilePromiseProviderWithFileTypeDelegate(fileType string, delegate raw.NS
 	return &FilePromiseProvider{inner: raw.NSFilePromiseProviderFromID(_id)}
 }
 
+// The file type of the file promise provider.
+//
 // WithFileType sets the fileType property and returns the receiver for chaining.
 func (x *FilePromiseProvider) WithFileType(fileType string) *FilePromiseProvider {
 	x.inner.SetFileType(foundation.NSStringStringWithUTF8String(fileType))
@@ -56,6 +62,8 @@ func (x *FilePromiseProvider) WithDelegate(delegate raw.NSFilePromiseProviderDel
 	return x
 }
 
+// Optional user information to pass to the file promise provider.
+//
 // WithUserInfo sets the userInfo property and returns the receiver for chaining.
 func (x *FilePromiseProvider) WithUserInfo(userInfo objc.ID) *FilePromiseProvider {
 	x.inner.SetUserInfo(userInfo)

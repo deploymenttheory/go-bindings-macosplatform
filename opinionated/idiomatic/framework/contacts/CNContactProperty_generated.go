@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a property of a contact.
+//
 // ContactProperty wraps [raw.CNContactProperty] with a fluent Go API.
 type ContactProperty struct {
 	inner *raw.CNContactProperty

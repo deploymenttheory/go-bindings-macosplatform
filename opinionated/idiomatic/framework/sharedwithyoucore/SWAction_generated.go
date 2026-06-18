@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a collaboration action.
+//
 // Action wraps [raw.SWAction] with a fluent Go API.
 type Action struct {
 	inner *raw.SWAction
@@ -36,11 +38,15 @@ func NewAction() *Action {
 	return &Action{inner: raw.SWActionFromID(_id)}
 }
 
+// Reports a successful execution of the action.
+//
 // Fulfill calls the underlying Fulfill.
 func (x *Action) Fulfill() {
 	x.inner.Fulfill()
 }
 
+// Reports a failed execution of the action.
+//
 // Fail calls the underlying Fail.
 func (x *Action) Fail() {
 	x.inner.Fail()

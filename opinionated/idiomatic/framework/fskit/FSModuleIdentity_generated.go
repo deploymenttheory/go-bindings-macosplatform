@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An installed file system module.
+//
 // ModuleIdentity wraps [raw.FSModuleIdentity] with a fluent Go API.
 type ModuleIdentity struct {
 	inner *raw.FSModuleIdentity

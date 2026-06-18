@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The QCComposition class represents a Quartz Composer composition that either:
+//
 // QCComposition wraps [raw.QCComposition] with a fluent Go API.
 type QCComposition struct {
 	inner *raw.QCComposition
@@ -36,21 +38,29 @@ func NewQCComposition() *QCComposition {
 	return &QCComposition{inner: raw.QCCompositionFromID(_id)}
 }
 
+// Returns the list of protocols to which the composition conforms.
+//
 // Protocols calls the underlying Protocols.
 func (x *QCComposition) Protocols() *foundation.NSArray[objc.ID] {
 	return x.inner.Protocols()
 }
 
+// Returns the attributes of the composition.
+//
 // Attributes calls the underlying Attributes.
 func (x *QCComposition) Attributes() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.Attributes()
 }
 
+// Returns an array listing the keys that identify the input ports of the root patch of the composition.
+//
 // InputKeys calls the underlying InputKeys.
 func (x *QCComposition) InputKeys() *foundation.NSArray[objc.ID] {
 	return x.inner.InputKeys()
 }
 
+// Returns an array listing the keys that identify the output ports of the root patch of the composition.
+//
 // OutputKeys calls the underlying OutputKeys.
 func (x *QCComposition) OutputKeys() *foundation.NSArray[objc.ID] {
 	return x.inner.OutputKeys()

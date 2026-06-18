@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A control that displays a color value and lets the user change that color value.
+//
 // ColorWell wraps [raw.NSColorWell] with a fluent Go API.
 type ColorWell struct {
 	inner *raw.NSColorWell
@@ -40,43 +42,55 @@ func NewColorWell() *ColorWell {
 	return &ColorWell{inner: raw.NSColorWellFromID(_id)}
 }
 
+// A Boolean value that determines whether the color well has a border.
+//
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *ColorWell) WithBordered(bordered bool) *ColorWell {
 	x.inner.SetBordered(bordered)
 	return x
 }
 
+// The currently selected color for the color well.
+//
 // WithColor sets the color property and returns the receiver for chaining.
 func (x *ColorWell) WithColor(color *Color) *ColorWell {
 	x.inner.SetColor(color.Unwrap())
 	return x
 }
 
+// The appearance and interaction style to apply to the color well.
+//
 // WithColorWellStyle sets the colorWellStyle property and returns the receiver for chaining.
 func (x *ColorWell) WithColorWellStyle(colorWellStyle NSColorWellStyle) *ColorWell {
 	x.inner.SetColorWellStyle(raw.NSColorWellStyle(colorWellStyle))
 	return x
 }
 
+// The image to display on the button portion of a color well that adopts the expanded style.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *ColorWell) WithImage(image *Image) *ColorWell {
 	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
+// The target object that defines the action you want to perform when someone interacts with the color well.
+//
 // WithPulldownTarget sets the pulldownTarget property and returns the receiver for chaining.
 func (x *ColorWell) WithPulldownTarget(pulldownTarget objc.ID) *ColorWell {
 	x.inner.SetPulldownTarget(pulldownTarget)
 	return x
 }
 
+// The action to perform when someone clicks in the color area of the color well.
+//
 // WithPulldownAction sets the pulldownAction property and returns the receiver for chaining.
 func (x *ColorWell) WithPulldownAction(pulldownAction objc.SEL) *ColorWell {
 	x.inner.SetPulldownAction(pulldownAction)
 	return x
 }
 
-// Controls alpha support for the current color well, and the visibility of alpha slider in the color panel. When `NSColor.ignoresAlpha` (deprecated) is set to `YES`, this property will always return `NO` and alpha is not supported globally.
+// A Boolean value that determines whether the color picker supports alpha values.
 //
 // WithSupportsAlpha sets the supportsAlpha property and returns the receiver for chaining.
 func (x *ColorWell) WithSupportsAlpha(supportsAlpha bool) *ColorWell {
@@ -92,138 +106,184 @@ func (x *ColorWell) WithMaximumLinearExposure(maximumLinearExposure float64) *Co
 	return x
 }
 
+// The target object that receives action messages from the cell.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *ColorWell) WithTarget(target objc.ID) *ColorWell {
 	x.inner.NSControl.SetTarget(target)
 	return x
 }
 
+// The default action-message selector associated with the control.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *ColorWell) WithAction(action objc.SEL) *ColorWell {
 	x.inner.NSControl.SetAction(action)
 	return x
 }
 
+// The tag identifying the receiver (not the tag of the receiver’s cell).
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *ColorWell) WithTag(tag int) *ColorWell {
 	x.inner.NSControl.SetTag(tag)
 	return x
 }
 
+// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+//
 // WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
 func (x *ColorWell) WithIgnoresMultiClick(ignoresMultiClick bool) *ColorWell {
 	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
 	return x
 }
 
+// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *ColorWell) WithContinuous(continuous bool) *ColorWell {
 	x.inner.NSControl.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver reacts to mouse events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *ColorWell) WithEnabled(enabled bool) *ColorWell {
 	x.inner.NSControl.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the receiver refuses the first responder role.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *ColorWell) WithRefusesFirstResponder(refusesFirstResponder bool) *ColorWell {
 	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value that indicates whether the cell is highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *ColorWell) WithHighlighted(highlighted bool) *ColorWell {
 	x.inner.NSControl.SetHighlighted(highlighted)
 	return x
 }
 
+// The size of the control.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *ColorWell) WithControlSize(controlSize NSControlSize) *ColorWell {
 	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The receiver’s formatter.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *ColorWell) WithFormatter(formatter *foundation.NSFormatter) *ColorWell {
 	x.inner.NSControl.SetFormatter(formatter)
 	return x
 }
 
+// The value of the receiver’s cell as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *ColorWell) WithObjectValue(objectValue objc.ID) *ColorWell {
 	x.inner.NSControl.SetObjectValue(objectValue)
 	return x
 }
 
+// The value of the receiver’s cell as an NSString object.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *ColorWell) WithStringValue(stringValue string) *ColorWell {
 	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The value of the receiver’s cell as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *ColorWell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ColorWell {
 	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *ColorWell) WithIntValue(intValue int) *ColorWell {
 	x.inner.NSControl.SetIntValue(intValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *ColorWell) WithIntegerValue(integerValue int) *ColorWell {
 	x.inner.NSControl.SetIntegerValue(integerValue)
 	return x
 }
 
+// The value of the receiver’s cell as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *ColorWell) WithFloatValue(floatValue float32) *ColorWell {
 	x.inner.NSControl.SetFloatValue(floatValue)
 	return x
 }
 
+// The value of the receiver’s cell as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *ColorWell) WithDoubleValue(doubleValue float64) *ColorWell {
 	x.inner.NSControl.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The font used to draw text in the receiver’s cell.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *ColorWell) WithFont(font *Font) *ColorWell {
 	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *ColorWell) WithUsesSingleLineMode(usesSingleLineMode bool) *ColorWell {
 	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// The line break mode to use for text in the control’s cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *ColorWell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *ColorWell {
 	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The alignment mode of the text in the receiver’s cell.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *ColorWell) WithAlignment(alignment NSTextAlignment) *ColorWell {
 	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *ColorWell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ColorWell {
 	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+//
 // WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
 func (x *ColorWell) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *ColorWell {
 	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
@@ -278,6 +338,8 @@ func (x *ColorWell) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOpti
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *ColorWell) WithFrame(frame corefoundation.CGRect) *ColorWell {
 	x.inner.NSControl.NSView.SetFrame(frame)
@@ -302,6 +364,8 @@ func (x *ColorWell) WithBoundsRotation(boundsRotation float64) *ColorWell {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *ColorWell) WithBounds(bounds corefoundation.CGRect) *ColorWell {
 	x.inner.NSControl.NSView.SetBounds(bounds)
@@ -314,6 +378,8 @@ func (x *ColorWell) WithCanDrawConcurrently(canDrawConcurrently bool) *ColorWell
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *ColorWell) WithNeedsDisplay(needsDisplay bool) *ColorWell {
 	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
@@ -500,7 +566,7 @@ func (x *ColorWell) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets founda
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *ColorWell) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ColorWell {
@@ -556,45 +622,61 @@ func (x *ColorWell) WithPressureConfiguration(pressureConfiguration *PressureCon
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *ColorWell) WithNextResponder(nextResponder ResponderProvider) *ColorWell {
 	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *ColorWell) WithMenu(menu *Menu) *ColorWell {
 	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *ColorWell) WithUserActivity(userActivity *foundation.NSUserActivity) *ColorWell {
 	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *ColorWell) WithTouchBar(touchBar *TouchBar) *ColorWell {
 	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Deactivates the color well.
+//
 // Deactivate calls the underlying Deactivate.
 func (x *ColorWell) Deactivate() {
 	x.inner.Deactivate()
 }
 
+// Activates the color well, displays the color panel, and synchronizes the two UI elements.
+//
 // Activate calls the underlying Activate.
 func (x *ColorWell) Activate(exclusive bool) {
 	x.inner.Activate(exclusive)
 }
 
+// Draws the area inside the color well at the specified location without drawing borders.
+//
 // DrawWellInside calls the underlying DrawWellInside.
 func (x *ColorWell) DrawWellInside(insideRect corefoundation.CGRect) {
 	x.inner.DrawWellInside(insideRect)
 }
 
+// Changes the currently selected color to the color of the specified object.
+//
 // TakeColorFrom calls the underlying TakeColorFrom.
 func (x *ColorWell) TakeColorFrom(sender objc.ID) {
 	x.inner.TakeColorFrom(sender)

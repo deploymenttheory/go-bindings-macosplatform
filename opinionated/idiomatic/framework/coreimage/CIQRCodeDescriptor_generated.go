@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A concrete subclass of the Core Image Barcode Descriptor that represents a square QR code symbol.
+//
 // QRCodeDescriptor wraps [raw.CIQRCodeDescriptor] with a fluent Go API.
 type QRCodeDescriptor struct {
 	inner *raw.CIQRCodeDescriptor
@@ -30,7 +32,7 @@ func QRCodeDescriptorFromID(id objc.ID) *QRCodeDescriptor {
 	return &QRCodeDescriptor{inner: raw.CIQRCodeDescriptorFromID(id)}
 }
 
-// Initializes a QR code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the QR code symbol. - symbolVersion: The symbol version, from 1 through 40. - maskPattern: The mask pattern to use in the QR code, from 0 to 7. - errorCorrectionLevel: The QR code's error correction level: L, M, Q, or H. - Returns: An initialized “CIAztecCodeDescriptor“ instance or `nil` if the parameters are invalid
+// Initializes a QR code descriptor for the given payload and parameters.
 //
 // NewQRCodeDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel creates a new [QRCodeDescriptor].
 func NewQRCodeDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload *foundation.NSData, symbolVersion int, maskPattern uint8, errorCorrectionLevel CIQRCodeErrorCorrectionLevel) *QRCodeDescriptor {

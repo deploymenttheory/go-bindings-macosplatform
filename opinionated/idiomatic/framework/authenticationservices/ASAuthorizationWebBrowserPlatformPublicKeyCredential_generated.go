@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A structure that describes a passkey stored in the keychain, or managed by a third-party credential manager.
+//
 // AuthorizationWebBrowserPlatformPublicKeyCredential wraps [raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential] with a fluent Go API.
 type AuthorizationWebBrowserPlatformPublicKeyCredential struct {
 	inner *raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential

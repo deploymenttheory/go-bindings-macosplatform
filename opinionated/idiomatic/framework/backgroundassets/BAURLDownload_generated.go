@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a remote asset to download.
+//
 // URLDownload wraps [raw.BAURLDownload] with a fluent Go API.
 type URLDownload struct {
 	inner *raw.BAURLDownload
@@ -48,7 +50,7 @@ func NewURLDownloadWithIdentifierRequestEssentialFileSizeApplicationGroupIdentif
 	return &URLDownload{inner: raw.BAURLDownloadFromID(_id)}
 }
 
-// @abstract Constructs a download object to represent the download of a asset located inside of the provided @c request. @param identifier A unique identifier that is used to track the download across the app and extension. @param request The request used to perform the download. The URL provided inside of the request must be a https scheme. @param applicationGroupIdentifier The identifier of the application group that should used to store the finished download.
+// Creates a download that uses the specified identifier and App Group.
 //
 // NewURLDownloadWithIdentifierRequestApplicationGroupIdentifier creates a new [URLDownload].
 func NewURLDownloadWithIdentifierRequestApplicationGroupIdentifier(identifier string, request *foundation.NSURLRequest, applicationGroupIdentifier string) *URLDownload {
@@ -57,7 +59,7 @@ func NewURLDownloadWithIdentifierRequestApplicationGroupIdentifier(identifier st
 	return &URLDownload{inner: raw.BAURLDownloadFromID(_id)}
 }
 
-// @abstract Constructs a download object to represent the download of a asset located inside of the provided @c request. @param identifier A unique identifier that is used to track the download across the app and extension. @param request The request used to perform the download. The URL provided inside of the request must be a https scheme. @param applicationGroupIdentifier The identifier of the application group that should used to store the finished download. @param priority A priority between @c BADownloaderPriorityMin - @c BADownloaderPriorityMax which is used to order the downloads for this process. It is recommended to use  @c BADownloaderPriorityDefault if download priority does not matter.
+// Creates a prioritized download that uses the specified identifier and App Group.
 //
 // NewURLDownloadWithIdentifierRequestApplicationGroupIdentifierPriority creates a new [URLDownload].
 func NewURLDownloadWithIdentifierRequestApplicationGroupIdentifierPriority(identifier string, request *foundation.NSURLRequest, applicationGroupIdentifier string, priority int) *URLDownload {

@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The values for the attachment characteristics of attributed strings and related objects.
+//
 // TextAttachment wraps [raw.NSTextAttachment] with a fluent Go API.
 type TextAttachment struct {
 	inner *raw.NSTextAttachment
@@ -32,6 +34,8 @@ func TextAttachmentFromID(id objc.ID) *TextAttachment {
 	return &TextAttachment{inner: raw.NSTextAttachmentFromID(id)}
 }
 
+// Creates a text attachment object with the specified data.
+//
 // NewTextAttachmentWithDataOfType creates a new [TextAttachment].
 func NewTextAttachmentWithDataOfType(contentData *foundation.NSData, uti string) *TextAttachment {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextAttachment")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewTextAttachmentWithDataOfType(contentData *foundation.NSData, uti string)
 	return &TextAttachment{inner: raw.NSTextAttachmentFromID(_id)}
 }
 
+// Creates a text attachment object to contain the specified file wrapper.
+//
 // NewTextAttachmentWithFileWrapper creates a new [TextAttachment].
 func NewTextAttachmentWithFileWrapper(fileWrapper *foundation.NSFileWrapper) *TextAttachment {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextAttachment")), objc.RegisterName("alloc"))
@@ -46,48 +52,64 @@ func NewTextAttachmentWithFileWrapper(fileWrapper *foundation.NSFileWrapper) *Te
 	return &TextAttachment{inner: raw.NSTextAttachmentFromID(_id)}
 }
 
+// The contents for the text attachment.
+//
 // WithContents sets the contents property and returns the receiver for chaining.
 func (x *TextAttachment) WithContents(contents *foundation.NSData) *TextAttachment {
 	x.inner.SetContents(contents)
 	return x
 }
 
+// The file type of the contents for the text attachment.
+//
 // WithFileType sets the fileType property and returns the receiver for chaining.
 func (x *TextAttachment) WithFileType(fileType string) *TextAttachment {
 	x.inner.SetFileType(foundation.NSStringStringWithUTF8String(fileType))
 	return x
 }
 
+// An instance of the relevant image class that represents the contents of the text attachment object.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *TextAttachment) WithImage(image *Image) *TextAttachment {
 	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
+// The layout bounds of the text attachment’s graphical representation in the text coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *TextAttachment) WithBounds(bounds corefoundation.CGRect) *TextAttachment {
 	x.inner.SetBounds(bounds)
 	return x
 }
 
+// The text attachment’s file wrapper.
+//
 // WithFileWrapper sets the fileWrapper property and returns the receiver for chaining.
 func (x *TextAttachment) WithFileWrapper(fileWrapper *foundation.NSFileWrapper) *TextAttachment {
 	x.inner.SetFileWrapper(fileWrapper)
 	return x
 }
 
+// The object that draws the icon for the text attachment and handles mouse events.
+//
 // WithAttachmentCell sets the attachmentCell property and returns the receiver for chaining.
 func (x *TextAttachment) WithAttachmentCell(attachmentCell raw.NSTextAttachmentCellProtocol) *TextAttachment {
 	x.inner.SetAttachmentCell(attachmentCell)
 	return x
 }
 
+// The layout padding before and after the text attachment bounds.
+//
 // WithLineLayoutPadding sets the lineLayoutPadding property and returns the receiver for chaining.
 func (x *TextAttachment) WithLineLayoutPadding(lineLayoutPadding float64) *TextAttachment {
 	x.inner.SetLineLayoutPadding(lineLayoutPadding)
 	return x
 }
 
+// A Boolean value that determines whether the text attachment uses text attachment views.
+//
 // WithAllowsTextAttachmentView sets the allowsTextAttachmentView property and returns the receiver for chaining.
 func (x *TextAttachment) WithAllowsTextAttachmentView(allowsTextAttachmentView bool) *TextAttachment {
 	x.inner.SetAllowsTextAttachmentView(allowsTextAttachmentView)

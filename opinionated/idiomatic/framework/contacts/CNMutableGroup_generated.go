@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mutable object that represents a group of contacts.
+//
 // MutableGroup wraps [raw.CNMutableGroup] with a fluent Go API.
 type MutableGroup struct {
 	inner *raw.CNMutableGroup
@@ -36,6 +38,8 @@ func NewMutableGroup() *MutableGroup {
 	return &MutableGroup{inner: raw.CNMutableGroupFromID(_id)}
 }
 
+// The name of the group.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *MutableGroup) WithName(name string) *MutableGroup {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An attribute to specify that Metal needs to inline all of the function calls when generating the stitched function.
+//
 // FunctionStitchingAttributeAlwaysInline wraps [raw.MTLFunctionStitchingAttributeAlwaysInline] with a fluent Go API.
 type FunctionStitchingAttributeAlwaysInline struct {
 	inner *raw.MTLFunctionStitchingAttributeAlwaysInline

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A bar item that provides a button.
+//
 // ButtonTouchBarItem wraps [raw.NSButtonTouchBarItem] with a fluent Go API.
 type ButtonTouchBarItem struct {
 	inner *raw.NSButtonTouchBarItem
@@ -81,6 +83,8 @@ func (x *ButtonTouchBarItem) WithCustomizationLabel(customizationLabel string) *
 	return x
 }
 
+// Determines which items are shown in a bar when space is limited.
+//
 // WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
 func (x *ButtonTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *ButtonTouchBarItem {
 	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)

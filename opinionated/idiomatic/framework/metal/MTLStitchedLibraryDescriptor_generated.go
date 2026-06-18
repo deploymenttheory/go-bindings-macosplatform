@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A description of a new library of procedurally generated functions.
+//
 // StitchedLibraryDescriptor wraps [raw.MTLStitchedLibraryDescriptor] with a fluent Go API.
 type StitchedLibraryDescriptor struct {
 	inner *raw.MTLStitchedLibraryDescriptor
@@ -38,6 +40,8 @@ func NewStitchedLibraryDescriptor() *StitchedLibraryDescriptor {
 	return &StitchedLibraryDescriptor{inner: raw.MTLStitchedLibraryDescriptorFromID(_id)}
 }
 
+// The function graphs that define the new stitched library’s functions.
+//
 // WithFunctionGraphs sets the collection, converting the Go slice to an NSArray.
 func (x *StitchedLibraryDescriptor) WithFunctionGraphs(items ...*raw.MTLFunctionStitchingGraph) *StitchedLibraryDescriptor {
 	if len(items) == 0 {

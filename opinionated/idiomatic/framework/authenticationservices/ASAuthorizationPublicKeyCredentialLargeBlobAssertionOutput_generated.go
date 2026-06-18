@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type to represent the output of the requested large binary object operation, which returns in a passkey sign-in response.
+//
 // AuthorizationPublicKeyCredentialLargeBlobAssertionOutput wraps [raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput] with a fluent Go API.
 type AuthorizationPublicKeyCredentialLargeBlobAssertionOutput struct {
 	inner *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput

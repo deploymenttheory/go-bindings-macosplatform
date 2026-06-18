@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A task your app performs in response to a notification that the system delivers.
+//
 // NotificationAction wraps [raw.UNNotificationAction] with a fluent Go API.
 type NotificationAction struct {
 	inner *raw.UNNotificationAction

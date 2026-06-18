@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A class that defines a host’s interface to an audio unit.
+//
 // AudioUnit wraps [raw.AUAudioUnit] with a fluent Go API.
 type AudioUnit struct {
 	inner *raw.AUAudioUnit
@@ -34,7 +36,7 @@ func AudioUnitFromID(id objc.ID) *AudioUnit {
 	return &AudioUnit{inner: raw.AUAudioUnitFromID(id)}
 }
 
-// @method		initWithComponentDescription:options:error: @brief		Designated initializer. @param componentDescription A single AUAudioUnit subclass may implement multiple audio units, for example, an effect that can also function as a generator, or a cluster of related effects. The component description specifies the component which was instantiated. @param options Options for loading the unit in-process or out-of-process. @param outError Returned in the event of failure.
+// Synchronously initializes a new audio unit object.
 //
 // NewAudioUnitWithComponentDescriptionOptionsError creates a new [AudioUnit].
 func NewAudioUnitWithComponentDescriptionOptionsError(componentDescription raw.AudioComponentDescription, options AudioComponentInstantiationOptions) (*AudioUnit, error) {
@@ -47,7 +49,7 @@ func NewAudioUnitWithComponentDescriptionOptionsError(componentDescription raw.A
 	return &AudioUnit{inner: raw.AUAudioUnitFromID(_id)}, nil
 }
 
-// @method		initWithComponentDescription:error: @brief		Convenience initializer (omits options).
+// Synchronously initializes a new audio unit object.
 //
 // NewAudioUnitWithComponentDescriptionError creates a new [AudioUnit].
 func NewAudioUnitWithComponentDescriptionError(componentDescription raw.AudioComponentDescription) (*AudioUnit, error) {
@@ -60,7 +62,7 @@ func NewAudioUnitWithComponentDescriptionError(componentDescription raw.AudioCom
 	return &AudioUnit{inner: raw.AUAudioUnitFromID(_id)}, nil
 }
 
-// @property	renderResourcesAllocated @brief		returns YES if the unit has render resources allocated.
+// Determines whether the audio unit has allocated render resources.
 //
 // WithRenderResourcesAllocated sets the renderResourcesAllocated property and returns the receiver for chaining.
 func (x *AudioUnit) WithRenderResourcesAllocated(renderResourcesAllocated bool) *AudioUnit {
@@ -68,7 +70,7 @@ func (x *AudioUnit) WithRenderResourcesAllocated(renderResourcesAllocated bool) 
 	return x
 }
 
-// @property	maximumFramesToRender @brief		The maximum number of frames which the audio unit can render at once. @discussion This must be set by the host before render resources are allocated. It cannot be changed while render resources are allocated. Bridged to the v2 property kAudioUnitProperty_MaximumFramesPerSlice.
+// The maximum number of frames that the audio unit can render at once.
 //
 // WithMaximumFramesToRender sets the maximumFramesToRender property and returns the receiver for chaining.
 func (x *AudioUnit) WithMaximumFramesToRender(maximumFramesToRender uint32) *AudioUnit {
@@ -76,7 +78,7 @@ func (x *AudioUnit) WithMaximumFramesToRender(maximumFramesToRender uint32) *Aud
 	return x
 }
 
-// @property	parameterTree @brief		An audio unit's parameters, organized in a hierarchy. @return A parameter tree object, or nil if the unit has no parameters. @discussion Audio unit hosts can fetch this property to discover a unit's parameters. KVO notifications are issued on this member to notify the host of changes to the set of available parameters. AUAudioUnit has an additional pseudo-property, "allParameterValues", on which KVO notifications are issued in response to certain events where potentially all parameter values are invalidated. This includes changes to currentPreset, fullState, and fullStateForDocument. Hosts should not attempt to set this property. Subclassers should implement the parameterTree getter to expose parameters to hosts. They should cache as much as possible and send KVO notifications on "parameterTree" when altering the structure of the tree or the static information (ranges, etc) of parameters. This is similar to the v2 properties kAudioUnitProperty_ParameterList and kAudioUnitProperty_ParameterInfo. Note that it is not safe to modify this property in a real-time context.
+// An audio unit’s parameters, organized in a tree hierarchy.
 //
 // WithParameterTree sets the parameterTree property and returns the receiver for chaining.
 func (x *AudioUnit) WithParameterTree(parameterTree *ParameterTree) *AudioUnit {
@@ -108,7 +110,7 @@ func (x *AudioUnit) WithHostMIDIProtocol(hostMIDIProtocol objc.ID) *AudioUnit {
 	return x
 }
 
-// @property	fullState @brief		A persistable snapshot of the Audio Unit's properties and parameters, suitable for saving as a user preset. @discussion Hosts may use this property to save and restore the state of an Audio Unit being used in a user preset or document. The Audio Unit should not persist transitory properties such as stream formats, but should save and restore all parameters and custom properties. The base class implementation of this property saves the values of all parameters currently in the parameter tree. A subclass which dynamically produces multiple variants of the parameter tree needs to be aware that the serialization method does a depth-first preorder traversal of the tree. Bridged to the v2 property kAudioUnitProperty_ClassInfo.
+// A persistable snapshot of the audio unit’s properties and parameters, suitable for saving as a user preset.
 //
 // WithFullState sets the fullState property and returns the receiver for chaining.
 func (x *AudioUnit) WithFullState(fullState *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AudioUnit {
@@ -116,7 +118,7 @@ func (x *AudioUnit) WithFullState(fullState *foundation.NSDictionary[*foundation
 	return x
 }
 
-// @property	fullStateForDocument @brief		A persistable snapshot of the audio unit's properties and parameters, suitable for saving in a user's document. @discussion This property is distinct from fullState in that some state is suitable for saving in user presets, while other state is not. For example, a synthesizer's master tuning setting could be considered global state, inappropriate for storing in reusable presets, but desirable for storing in a document for a specific live performance. Hosts saving documents should use this property. If the audio unit does not implement it, the base class simply sets/gets fullState. Bridged to the v2 property kAudioUnitProperty_ClassInfoFromDocument.
+// A persistable snapshot of the audio unit’s properties and parameters, suitable for saving in a user’s document.
 //
 // WithFullStateForDocument sets the fullStateForDocument property and returns the receiver for chaining.
 func (x *AudioUnit) WithFullStateForDocument(fullStateForDocument *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AudioUnit {
@@ -124,7 +126,7 @@ func (x *AudioUnit) WithFullStateForDocument(fullStateForDocument *foundation.NS
 	return x
 }
 
-// @property	currentPreset @brief		The audio unit's last-selected preset. @discussion Hosts can let the user select a preset by setting this property. Note that when getting this property, it does not reflect whether parameters may have been modified since the preset was selected. Bridged to the v2 property kAudioUnitProperty_PresentPreset.
+// The audio unit’s last-selected preset.
 //
 // WithCurrentPreset sets the currentPreset property and returns the receiver for chaining.
 func (x *AudioUnit) WithCurrentPreset(currentPreset *AudioUnitPreset) *AudioUnit {
@@ -132,7 +134,7 @@ func (x *AudioUnit) WithCurrentPreset(currentPreset *AudioUnitPreset) *AudioUnit
 	return x
 }
 
-// @property	renderQuality @brief		Provides a trade-off between rendering quality and CPU load. @discussion The range of valid values is 0-127. Bridged to the v2 property kAudioUnitProperty_RenderQuality.
+// Provides a trade-off between rendering quality and CPU load.
 //
 // WithRenderQuality sets the renderQuality property and returns the receiver for chaining.
 func (x *AudioUnit) WithRenderQuality(renderQuality int) *AudioUnit {
@@ -140,7 +142,7 @@ func (x *AudioUnit) WithRenderQuality(renderQuality int) *AudioUnit {
 	return x
 }
 
-// @property	shouldBypassEffect @brief		Directs an effect to route input directly to output, without any processing. @discussion Bridged to the v2 property kAudioUnitProperty_BypassEffect.
+// Determines whether an effect should route input directly to output, without any processing.
 //
 // WithShouldBypassEffect sets the shouldBypassEffect property and returns the receiver for chaining.
 func (x *AudioUnit) WithShouldBypassEffect(shouldBypassEffect bool) *AudioUnit {
@@ -148,7 +150,7 @@ func (x *AudioUnit) WithShouldBypassEffect(shouldBypassEffect bool) *AudioUnit {
 	return x
 }
 
-// @property	renderingOffline @brief		Communicates to an audio unit that it is rendering offline. @discussion A host should set this property when using an audio unit in a context where there are no realtime deadlines, before asking the unit to allocate render resources. An audio unit may respond by using a more expensive signal processing algorithm, or allowing itself to block at render time if data being generated on secondary work threads is not ready in time. (Normally, in a realtime thread, this data would have to be dropped). Bridged to the v2 property kAudioUnitProperty_OfflineRender.
+// Communicates to an audio unit that it is rendering offline.
 //
 // WithRenderingOffline sets the renderingOffline property and returns the receiver for chaining.
 func (x *AudioUnit) WithRenderingOffline(renderingOffline bool) *AudioUnit {
@@ -156,7 +158,7 @@ func (x *AudioUnit) WithRenderingOffline(renderingOffline bool) *AudioUnit {
 	return x
 }
 
-// @property	musicalContextBlock @brief		A callback for the AU to call the host for musical context information. @discussion Note that an audio unit implementation accessing this property should cache it in realtime-safe storage before beginning to render. Bridged to the HostCallback_GetBeatAndTempo and HostCallback_GetMusicalTimeLocation callback members in kAudioUnitProperty_HostCallbacks.
+// A callback to the host for musical context information.
 //
 // WithMusicalContextBlock sets the musicalContextBlock property and returns the receiver for chaining.
 func (x *AudioUnit) WithMusicalContextBlock(musicalContextBlock func(*float64, *float64, *int64, *float64, *int64, unsafe.Pointer) bool) *AudioUnit {
@@ -164,7 +166,7 @@ func (x *AudioUnit) WithMusicalContextBlock(musicalContextBlock func(*float64, *
 	return x
 }
 
-// @property	transportStateBlock @brief		A callback for the AU to call the host for transport state information. @discussion Note that an audio unit implementation accessing this property should cache it in realtime-safe storage before beginning to render. Bridged to the HostCallback_GetTransportState and HostCallback_GetTransportState2 callback members in kAudioUnitProperty_HostCallbacks.
+// A callback to the host for transport state information.
 //
 // WithTransportStateBlock sets the transportStateBlock property and returns the receiver for chaining.
 func (x *AudioUnit) WithTransportStateBlock(transportStateBlock func(*raw.AUHostTransportStateFlags, *float64, *float64, unsafe.Pointer) bool) *AudioUnit {
@@ -172,7 +174,7 @@ func (x *AudioUnit) WithTransportStateBlock(transportStateBlock func(*raw.AUHost
 	return x
 }
 
-// @property	contextName @brief		Information about the host context in which the audio unit is connected, for display in the audio unit's view. @discussion For example, a host could set "track 3" as the context, so that the audio unit's view could then display to the user "My audio unit on track 3". Bridged to the v2 property kAudioUnitProperty_ContextName.
+// Information about the host context in which the audio unit is connected, for display in the audio unit’s view.
 //
 // WithContextName sets the contextName property and returns the receiver for chaining.
 func (x *AudioUnit) WithContextName(contextName string) *AudioUnit {
@@ -200,7 +202,7 @@ func (x *AudioUnit) WithChannelMap(items ...*foundation.NSNumber) *AudioUnit {
 	return x
 }
 
-// @property	inputEnabled @brief		Flag enabling audio input from the unit. @discussion	Input is disabled by default. This must be set to YES if input audio is desired. Setting to YES will have no effect if canPerformInput is false.
+// A flag enabling audio input from the unit.
 //
 // WithInputEnabled sets the inputEnabled property and returns the receiver for chaining.
 func (x *AudioUnit) WithInputEnabled(inputEnabled bool) *AudioUnit {
@@ -208,7 +210,7 @@ func (x *AudioUnit) WithInputEnabled(inputEnabled bool) *AudioUnit {
 	return x
 }
 
-// @property	outputEnabled @brief		Flag enabling audio output from the unit. @discussion	Output is enabled by default. Setting to YES will have no effect if canPerformOutput is false.
+// A flag enabling audio output from the unit.
 //
 // WithOutputEnabled sets the outputEnabled property and returns the receiver for chaining.
 func (x *AudioUnit) WithOutputEnabled(outputEnabled bool) *AudioUnit {
@@ -216,7 +218,7 @@ func (x *AudioUnit) WithOutputEnabled(outputEnabled bool) *AudioUnit {
 	return x
 }
 
-// @property	outputProvider @brief		The block that the output unit will call to get audio to send to the output. @discussion	This block must be set if output is enabled.
+// The block that the output unit will call to get audio to send to the output.
 //
 // WithOutputProvider sets the outputProvider property and returns the receiver for chaining.
 func (x *AudioUnit) WithOutputProvider(outputProvider func(*raw.AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, int, unsafe.Pointer) int) *AudioUnit {
@@ -224,7 +226,7 @@ func (x *AudioUnit) WithOutputProvider(outputProvider func(*raw.AudioUnitRenderA
 	return x
 }
 
-// @property	inputHandler @brief		The block that the output unit will call to notify when input is available. @discussion	See discussion for AUInputHandler.
+// The block that the output unit will call to notify when input is available.
 //
 // WithInputHandler sets the inputHandler property and returns the receiver for chaining.
 func (x *AudioUnit) WithInputHandler(inputHandler func(*raw.AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, unsafe.Pointer)) *AudioUnit {
@@ -240,7 +242,7 @@ func (x *AudioUnit) WithMIDIOutputBufferSizeHint(mIDIOutputBufferSizeHint int) *
 	return x
 }
 
-// @method		allocateRenderResourcesAndReturnError: @brief		Allocate resources required to render. @discussion Hosts must call this before beginning to render. Subclassers should call the superclass implementation. Bridged to the v2 API AudioUnitInitialize().
+// Allocates resources required to render audio.
 //
 // AllocateRenderResourcesAndReturnError returns any validation error.
 func (x *AudioUnit) AllocateRenderResourcesAndReturnError() error {
@@ -248,21 +250,21 @@ func (x *AudioUnit) AllocateRenderResourcesAndReturnError() error {
 	return err
 }
 
-// @method		deallocateRenderResources @brief		Deallocate resources allocated by allocateRenderResourcesAndReturnError: @discussion Hosts should call this after finishing rendering. Subclassers should call the superclass implementation. Bridged to the v2 API AudioUnitUninitialize().
+// Deallocates resources required to render audio.
 //
 // DeallocateRenderResources calls the underlying DeallocateRenderResources.
 func (x *AudioUnit) DeallocateRenderResources() {
 	x.inner.DeallocateRenderResources()
 }
 
-// @method		reset @brief		Reset transitory rendering state to its initial state. @discussion Hosts should call this at the point of a discontinuity in the input stream being provided to an audio unit, for example, when seeking forward or backward within a track. In response, implementations should clear delay lines, filters, etc. Subclassers should call the superclass implementation. Bridged to the v2 API AudioUnitReset(), in the global scope.
+// Resets transitory rendering state to its initial state.
 //
 // Reset calls the underlying Reset.
 func (x *AudioUnit) Reset() {
 	x.inner.Reset()
 }
 
-// @method		tokenByAddingRenderObserver: @brief		Add a block to be called on each render cycle. @discussion The supplied block is called at the beginning and ending of each render cycle. It should not make any blocking calls. This method is implemented in the base class AUAudioUnit, and should not be overridden. Bridged to the v2 API AudioUnitAddRenderNotify(). @param observer The block to call. @return A token to be used when removing the observer.
+// Adds a block to be called on each render cycle.
 //
 // TokenByAddingRenderObserver calls the underlying TokenByAddingRenderObserver.
 func (x *AudioUnit) TokenByAddingRenderObserver(observer func(AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, unsafe.Pointer)) int {
@@ -271,14 +273,14 @@ func (x *AudioUnit) TokenByAddingRenderObserver(observer func(AudioUnitRenderAct
 	})
 }
 
-// @method		removeRenderObserver: @brief		Remove an observer block added via tokenByAddingRenderObserver: @param token The token previously returned by tokenByAddingRenderObserver: Bridged to the v2 API AudioUnitRemoveRenderNotify().
+// Removes an observer block previously added to the render cycle.
 //
 // RemoveRenderObserver calls the underlying RemoveRenderObserver.
 func (x *AudioUnit) RemoveRenderObserver(token int) {
 	x.inner.RemoveRenderObserver(token)
 }
 
-// @method		parametersForOverviewWithCount: @brief		Returns the audio unit's `count` most important parameters. @discussion This property allows a host to query an audio unit for some small number of parameters which are its "most important", to be displayed in a compact generic view. An audio unit subclass should return an array of NSNumbers representing the addresses of the `count` most important parameters. The base class returns an empty array regardless of count. Partially bridged to kAudioUnitProperty_ParametersForOverview (v2 hosts can use that property to access this v3 method of an audio unit).
+// Returns the audio unit’s most important parameters.
 //
 // ParametersForOverviewWithCount calls the underlying ParametersForOverviewWithCount.
 func (x *AudioUnit) ParametersForOverviewWithCount(count int) *foundation.NSArray[*foundation.NSNumber] {
@@ -327,7 +329,7 @@ func (x *AudioUnit) DisableProfileCableOnChannelError(profile objc.ID, cable uin
 	return x.inner.DisableProfileCableOnChannelError(profile, cable, channel)
 }
 
-// @method		messageChannelFor: @brief		Returns an object for bidirectional communication between an Audio Unit and its host. @discussion Message channels provide a flexible way for custom data exchange between an Audio Unit and its host. An Audio Unit can support multiple message channels which are identified by the `channelName`. The message channel object's lifetime is managed by the host. Message channel objects should be designed in such a way that they could outlive the AU that vended them. For further details see discussion for `AUMessageChannel`. @param	channelName The name of the message channel to be returned by the Audio Unit if supported. @return An object that conforms to the `AUMessageChannel` protocol.
+// Returns an object for bidirectional communication between an audio unit and its host.
 //
 // MessageChannelFor calls the underlying MessageChannelFor.
 func (x *AudioUnit) MessageChannelFor(channelName string) raw.AUMessageChannel {
@@ -800,14 +802,14 @@ func (x *AudioUnit) SetProfileChangedBlock(profileChangedBlock unsafe.Pointer) {
 	x.inner.SetProfileChangedBlock(profileChangedBlock)
 }
 
-// @method		setDeviceID:error: @brief		Set the I/O hardware device. @param deviceID The device to select. @param outError Returned in the event of failure.
+// Sets the I/O hardware device.
 //
 // SetDeviceIDError calls the underlying SetDeviceIDError.
 func (x *AudioUnit) SetDeviceIDError(deviceID uint) (bool, error) {
 	return x.inner.SetDeviceIDError(deviceID)
 }
 
-// @method		startHardwareAndReturnError: @brief		Starts the audio hardware. @param outError Returned in the event of failure.
+// Starts the audio hardware.
 //
 // StartHardwareAndReturnError returns any validation error.
 func (x *AudioUnit) StartHardwareAndReturnError() error {
@@ -815,7 +817,7 @@ func (x *AudioUnit) StartHardwareAndReturnError() error {
 	return err
 }
 
-// @method		stopHardware @brief		Stops the audio hardware.
+// Stops the audio hardware.
 //
 // StopHardware calls the underlying StopHardware.
 func (x *AudioUnit) StopHardware() {
@@ -929,14 +931,14 @@ func (x *AudioUnit) SetIntendedSpatialExperience(intendedSpatialExperience unsaf
 	x.inner.SetIntendedSpatialExperience(intendedSpatialExperience)
 }
 
-// @method	shouldChangeToFormat:forBus: @param format An AVAudioFormat which is proposed as the new format. @param bus The AUAudioUnitBus on which the format will be changed. @discussion This is called when setting the format on an AUAudioUnitBus. The bus has already checked that the format meets the channel constraints of the bus. The AU can override this method to check before allowing a new format to be set on the bus. If this method returns NO, then the new format will not be set on the bus. The default implementation returns NO if the unit has renderResourcesAllocated, otherwise it results YES.
+// This is called when you set the format on a bus.
 //
 // ShouldChangeToFormatForBus calls the underlying ShouldChangeToFormatForBus.
 func (x *AudioUnit) ShouldChangeToFormatForBus(format *avfaudio.AVAudioFormat, bus *raw.AUAudioUnitBus) bool {
 	return x.inner.ShouldChangeToFormatForBus(format, bus)
 }
 
-// @method	setRenderResourcesAllocated: @param flag In the base class implementation of allocateRenderResourcesAndReturnError:, the property renderResourcesAllocated is set to YES. If allocateRenderResourcesAndReturnError: should fail in a subclass, subclassers must use this method to set renderResourcesAllocated to NO.
+// Sets the Boolean value of the renderResourcesAllocated property.
 //
 // SetRenderResourcesAllocated calls the underlying SetRenderResourcesAllocated.
 func (x *AudioUnit) SetRenderResourcesAllocated(flag bool) {

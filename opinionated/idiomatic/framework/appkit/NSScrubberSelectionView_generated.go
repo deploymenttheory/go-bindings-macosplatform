@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An abstract base class for specifying the appearance of a highlighted or selected item in a scrubber.
+//
 // ScrubberSelectionView wraps [raw.NSScrubberSelectionView] with a fluent Go API.
 type ScrubberSelectionView struct {
 	inner *raw.NSScrubberSelectionView
@@ -40,12 +42,16 @@ func NewScrubberSelectionView() *ScrubberSelectionView {
 	return &ScrubberSelectionView{inner: raw.NSScrubberSelectionViewFromID(_id)}
 }
 
+// A Boolean value that specifies whether the current view is selected.
+//
 // WithSelected sets the selected property and returns the receiver for chaining.
 func (x *ScrubberSelectionView) WithSelected(selected bool) *ScrubberSelectionView {
 	x.inner.NSScrubberArrangedView.SetSelected(selected)
 	return x
 }
 
+// A Boolean value that specifies whether the view is currently highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *ScrubberSelectionView) WithHighlighted(highlighted bool) *ScrubberSelectionView {
 	x.inner.NSScrubberArrangedView.SetHighlighted(highlighted)
@@ -94,6 +100,8 @@ func (x *ScrubberSelectionView) WithAutoresizingMask(autoresizingMask NSAutoresi
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *ScrubberSelectionView) WithFrame(frame corefoundation.CGRect) *ScrubberSelectionView {
 	x.inner.NSScrubberArrangedView.NSView.SetFrame(frame)
@@ -118,6 +126,8 @@ func (x *ScrubberSelectionView) WithBoundsRotation(boundsRotation float64) *Scru
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *ScrubberSelectionView) WithBounds(bounds corefoundation.CGRect) *ScrubberSelectionView {
 	x.inner.NSScrubberArrangedView.NSView.SetBounds(bounds)
@@ -130,6 +140,8 @@ func (x *ScrubberSelectionView) WithCanDrawConcurrently(canDrawConcurrently bool
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *ScrubberSelectionView) WithNeedsDisplay(needsDisplay bool) *ScrubberSelectionView {
 	x.inner.NSScrubberArrangedView.NSView.SetNeedsDisplay(needsDisplay)
@@ -316,7 +328,7 @@ func (x *ScrubberSelectionView) WithAdditionalSafeAreaInsets(additionalSafeAreaI
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *ScrubberSelectionView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrubberSelectionView {
@@ -372,24 +384,32 @@ func (x *ScrubberSelectionView) WithPressureConfiguration(pressureConfiguration 
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *ScrubberSelectionView) WithNextResponder(nextResponder ResponderProvider) *ScrubberSelectionView {
 	x.inner.NSScrubberArrangedView.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *ScrubberSelectionView) WithMenu(menu *Menu) *ScrubberSelectionView {
 	x.inner.NSScrubberArrangedView.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *ScrubberSelectionView) WithUserActivity(userActivity *foundation.NSUserActivity) *ScrubberSelectionView {
 	x.inner.NSScrubberArrangedView.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *ScrubberSelectionView) WithTouchBar(touchBar *TouchBar) *ScrubberSelectionView {
 	x.inner.NSScrubberArrangedView.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())

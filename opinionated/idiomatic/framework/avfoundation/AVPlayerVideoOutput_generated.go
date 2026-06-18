@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that receives video data from a player object.
+//
 // PlayerVideoOutput wraps [raw.AVPlayerVideoOutput] with a fluent Go API.
 type PlayerVideoOutput struct {
 	inner *raw.AVPlayerVideoOutput
@@ -31,7 +33,7 @@ func PlayerVideoOutputFromID(id objc.ID) *PlayerVideoOutput {
 	return &PlayerVideoOutput{inner: raw.AVPlayerVideoOutputFromID(id)}
 }
 
-// @method 	initWithSpecification: @abstract 	Creates an instance of AVPlayerVideoOutput, initialized with the specified video output specification. @param 		specification An instance of AVVideoOutputSpecification, used to recommend data channels to the AVPlayer associated with this AVPlayerVideoOutput. The tag collections owned by the AVVideoOutputSpecification will be given a priority based on their position in the array which they are held by AVVideoOutputSpecification, meaning position i takes priority over position i+1. This means that the player will first check if the tag collection at index 0 matches the shape of the current item's data channels. If the item's data channels would not be able satisfy the shape of the requested tag collection, it will fall back to the next collection and repeat this process. This continues until a tag collection or set of tag collection can be selected, otherwise if no collections match the shape of the item’s data channels then samples cannot be vended for that item. @result		An instance of AVPlayerVideoOutput. @discussion Output settings will be selected from the input AVVideoOutputSpecification based on the data channels selected for an item. If no output settings were set for the selected tag collection, then the default output settings from the AVVideoOutputSpecification will be used if those were set.
+// Creates a video output from a specification.
 //
 // NewPlayerVideoOutputWithSpecification creates a new [PlayerVideoOutput].
 func NewPlayerVideoOutputWithSpecification(specification *raw.AVVideoOutputSpecification) *PlayerVideoOutput {

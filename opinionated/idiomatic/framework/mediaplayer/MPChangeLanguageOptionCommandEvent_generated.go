@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An event requesting a change in the language option.
+//
 // ChangeLanguageOptionCommandEvent wraps [raw.MPChangeLanguageOptionCommandEvent] with a fluent Go API.
 type ChangeLanguageOptionCommandEvent struct {
 	inner *raw.MPChangeLanguageOptionCommandEvent

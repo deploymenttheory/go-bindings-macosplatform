@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A generator of texel data that computes a normal map from a supplied texture.
+//
 // NormalMapTexture wraps [raw.MDLNormalMapTexture] with a fluent Go API.
 type NormalMapTexture struct {
 	inner *raw.MDLNormalMapTexture
@@ -30,6 +32,8 @@ func NormalMapTextureFromID(id objc.ID) *NormalMapTexture {
 	return &NormalMapTexture{inner: raw.MDLNormalMapTextureFromID(id)}
 }
 
+// Initializes a normal map to be generated from the specified texture.
+//
 // NewNormalMapTextureByGeneratingNormalMapWithTextureNameSmoothnessContrast creates a new [NormalMapTexture].
 func NewNormalMapTextureByGeneratingNormalMapWithTextureNameSmoothnessContrast(sourceTexture *raw.MDLTexture, name string, smoothness float32, contrast float32) *NormalMapTexture {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLNormalMapTexture")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewNormalMapTextureByGeneratingNormalMapWithTextureNameSmoothnessContrast(s
 	return &NormalMapTexture{inner: raw.MDLNormalMapTextureFromID(_id)}
 }
 
+// A Boolean value that indicates whether the texture is a cube textures.
+//
 // WithIsCube sets the isCube property and returns the receiver for chaining.
 func (x *NormalMapTexture) WithIsCube(isCube bool) *NormalMapTexture {
 	x.inner.MDLTexture.SetIsCube(isCube)

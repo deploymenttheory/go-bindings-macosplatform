@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration object that enables optical flow on a frame processing session.
+//
 // OpticalFlowConfiguration wraps [raw.VTOpticalFlowConfiguration] with a fluent Go API.
 type OpticalFlowConfiguration struct {
 	inner *raw.VTOpticalFlowConfiguration

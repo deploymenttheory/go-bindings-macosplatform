@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that renders an image from a PICT format data stream of version 1, version 2, and extended version 2.
+//
 // PICTImageRep wraps [raw.NSPICTImageRep] with a fluent Go API.
 type PICTImageRep struct {
 	inner *raw.NSPICTImageRep
@@ -31,6 +33,8 @@ func PICTImageRepFromID(id objc.ID) *PICTImageRep {
 	return &PICTImageRep{inner: raw.NSPICTImageRepFromID(id)}
 }
 
+// Returns a representation of an image from the specified data in the PICT file format.
+//
 // NewPICTImageRepWithData creates a new [PICTImageRep].
 func NewPICTImageRepWithData(pictData *foundation.NSData) *PICTImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPICTImageRep")), objc.RegisterName("alloc"))
@@ -38,48 +42,64 @@ func NewPICTImageRepWithData(pictData *foundation.NSData) *PICTImageRep {
 	return &PICTImageRep{inner: raw.NSPICTImageRepFromID(_id)}
 }
 
+// The size of the image representation, measured in points in the user coordinate space.
+//
 // WithSize sets the size property and returns the receiver for chaining.
 func (x *PICTImageRep) WithSize(size corefoundation.CGSize) *PICTImageRep {
 	x.inner.NSImageRep.SetSize(size)
 	return x
 }
 
+// A Boolean value that indicates whether the image data has an alpha channel.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *PICTImageRep) WithAlpha(alpha bool) *PICTImageRep {
 	x.inner.NSImageRep.SetAlpha(alpha)
 	return x
 }
 
+// A Boolean value that indicates whether the image is opaque.
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *PICTImageRep) WithOpaque(opaque bool) *PICTImageRep {
 	x.inner.NSImageRep.SetOpaque(opaque)
 	return x
 }
 
+// The name of the color space used by the image data.
+//
 // WithColorSpaceName sets the colorSpaceName property and returns the receiver for chaining.
 func (x *PICTImageRep) WithColorSpaceName(colorSpaceName *foundation.NSString) *PICTImageRep {
 	x.inner.NSImageRep.SetColorSpaceName(colorSpaceName)
 	return x
 }
 
+// The number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
+//
 // WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
 func (x *PICTImageRep) WithBitsPerSample(bitsPerSample int) *PICTImageRep {
 	x.inner.NSImageRep.SetBitsPerSample(bitsPerSample)
 	return x
 }
 
+// The width of the image, measured in pixels.
+//
 // WithPixelsWide sets the pixelsWide property and returns the receiver for chaining.
 func (x *PICTImageRep) WithPixelsWide(pixelsWide int) *PICTImageRep {
 	x.inner.NSImageRep.SetPixelsWide(pixelsWide)
 	return x
 }
 
+// The height of the image, measured in pixels.
+//
 // WithPixelsHigh sets the pixelsHigh property and returns the receiver for chaining.
 func (x *PICTImageRep) WithPixelsHigh(pixelsHigh int) *PICTImageRep {
 	x.inner.NSImageRep.SetPixelsHigh(pixelsHigh)
 	return x
 }
 
+// The layout direction for the image.
+//
 // WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
 func (x *PICTImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *PICTImageRep {
 	x.inner.NSImageRep.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))

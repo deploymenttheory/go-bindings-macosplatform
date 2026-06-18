@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The element that represents the wheel of a racing wheel controller.
+//
 // SteeringWheelElement wraps [raw.GCSteeringWheelElement] with a fluent Go API.
 type SteeringWheelElement struct {
 	inner *raw.GCSteeringWheelElement

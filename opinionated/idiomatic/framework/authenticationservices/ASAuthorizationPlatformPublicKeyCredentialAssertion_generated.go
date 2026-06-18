@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents the platform credential assertion type.
+//
 // AuthorizationPlatformPublicKeyCredentialAssertion wraps [raw.ASAuthorizationPlatformPublicKeyCredentialAssertion] with a fluent Go API.
 type AuthorizationPlatformPublicKeyCredentialAssertion struct {
 	inner *raw.ASAuthorizationPlatformPublicKeyCredentialAssertion

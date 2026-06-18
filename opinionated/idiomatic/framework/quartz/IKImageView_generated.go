@@ -16,6 +16,8 @@ import (
 	"unsafe"
 )
 
+// A view that allows displaying and minor editing of an image.
+//
 // IKImageView wraps [raw.IKImageView] with a fluent Go API.
 type IKImageView struct {
 	inner *raw.IKImageView
@@ -42,7 +44,7 @@ func NewIKImageView() *IKImageView {
 	return &IKImageView{inner: raw.IKImageViewFromID(_id)}
 }
 
-// @property delegate @abstract Specifies the delegate object of the receiver.
+// Specifies the delegate object of the receiver.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *IKImageView) WithDelegate(delegate objc.ID) *IKImageView {
@@ -50,7 +52,7 @@ func (x *IKImageView) WithDelegate(delegate objc.ID) *IKImageView {
 	return x
 }
 
-// @property zoomFactor @abstract Specifies the zoom factor for the image view.
+// Specifies the zoom factor for the image view.
 //
 // WithZoomFactor sets the zoomFactor property and returns the receiver for chaining.
 func (x *IKImageView) WithZoomFactor(zoomFactor float64) *IKImageView {
@@ -58,7 +60,7 @@ func (x *IKImageView) WithZoomFactor(zoomFactor float64) *IKImageView {
 	return x
 }
 
-// @property rotationAngle @abstract Specifies the rotation angle for the image view.
+// Specifies the rotation angle for the image view.
 //
 // WithRotationAngle sets the rotationAngle property and returns the receiver for chaining.
 func (x *IKImageView) WithRotationAngle(rotationAngle float64) *IKImageView {
@@ -66,7 +68,7 @@ func (x *IKImageView) WithRotationAngle(rotationAngle float64) *IKImageView {
 	return x
 }
 
-// @property currentToolMode @abstract Specifies the current tool mode for the image view.
+// Specifies the current tool mode for the image view.
 //
 // WithCurrentToolMode sets the currentToolMode property and returns the receiver for chaining.
 func (x *IKImageView) WithCurrentToolMode(currentToolMode string) *IKImageView {
@@ -74,7 +76,7 @@ func (x *IKImageView) WithCurrentToolMode(currentToolMode string) *IKImageView {
 	return x
 }
 
-// @property autoresizes @abstract Specifies the automatic resizing state for the image view.
+// Specifies the automatic resizing state for the image view.
 //
 // WithAutoresizes sets the autoresizes property and returns the receiver for chaining.
 func (x *IKImageView) WithAutoresizes(autoresizes bool) *IKImageView {
@@ -82,7 +84,7 @@ func (x *IKImageView) WithAutoresizes(autoresizes bool) *IKImageView {
 	return x
 }
 
-// @property hasHorizontalScroller @abstract Specifies the horizontal scroll bar state for the image view.
+// Specifies the horizontal scroll bar state for the image view.
 //
 // WithHasHorizontalScroller sets the hasHorizontalScroller property and returns the receiver for chaining.
 func (x *IKImageView) WithHasHorizontalScroller(hasHorizontalScroller bool) *IKImageView {
@@ -90,7 +92,7 @@ func (x *IKImageView) WithHasHorizontalScroller(hasHorizontalScroller bool) *IKI
 	return x
 }
 
-// @property hasVerticalScroller @abstract Specifies the vertical scroll bar state for the image view.
+// Specifies the vertical scroll bar state for the image view.
 //
 // WithHasVerticalScroller sets the hasVerticalScroller property and returns the receiver for chaining.
 func (x *IKImageView) WithHasVerticalScroller(hasVerticalScroller bool) *IKImageView {
@@ -98,7 +100,7 @@ func (x *IKImageView) WithHasVerticalScroller(hasVerticalScroller bool) *IKImage
 	return x
 }
 
-// @property autohidesScrollers @abstract Specifies the automatic-hiding scroll bar state for the image view.
+// Specifies the automatic-hiding scroll bar state for the image view.
 //
 // WithAutohidesScrollers sets the autohidesScrollers property and returns the receiver for chaining.
 func (x *IKImageView) WithAutohidesScrollers(autohidesScrollers bool) *IKImageView {
@@ -106,7 +108,7 @@ func (x *IKImageView) WithAutohidesScrollers(autohidesScrollers bool) *IKImageVi
 	return x
 }
 
-// @property supportsDragAndDrop @abstract Specifies the drag-and-drop support state for the image view.
+// Specifies the drag-and-drop support state for the image view.
 //
 // WithSupportsDragAndDrop sets the supportsDragAndDrop property and returns the receiver for chaining.
 func (x *IKImageView) WithSupportsDragAndDrop(supportsDragAndDrop bool) *IKImageView {
@@ -114,7 +116,7 @@ func (x *IKImageView) WithSupportsDragAndDrop(supportsDragAndDrop bool) *IKImage
 	return x
 }
 
-// @property editable @abstract Specifies the editable state for the image view.
+// Specifies the editable state for the image view.
 //
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *IKImageView) WithEditable(editable bool) *IKImageView {
@@ -122,7 +124,7 @@ func (x *IKImageView) WithEditable(editable bool) *IKImageView {
 	return x
 }
 
-// @property doubleClickOpensImageEditPane @abstract Specifies the image-opening state of the editing pane in the image view.
+// Specifies the image-opening state of the editing pane in the image view.
 //
 // WithDoubleClickOpensImageEditPanel sets the doubleClickOpensImageEditPanel property and returns the receiver for chaining.
 func (x *IKImageView) WithDoubleClickOpensImageEditPanel(doubleClickOpensImageEditPanel bool) *IKImageView {
@@ -130,7 +132,7 @@ func (x *IKImageView) WithDoubleClickOpensImageEditPanel(doubleClickOpensImageEd
 	return x
 }
 
-// @property imageCorrection @abstract Specifies a Core Image filter for image correction.
+// Specifies a Core Image filter for image correction.
 //
 // WithImageCorrection sets the imageCorrection property and returns the receiver for chaining.
 func (x *IKImageView) WithImageCorrection(imageCorrection *coreimage.CIFilter) *IKImageView {
@@ -138,7 +140,7 @@ func (x *IKImageView) WithImageCorrection(imageCorrection *coreimage.CIFilter) *
 	return x
 }
 
-// @property backgroundColor @abstract Specifies the background color for the image view.
+// Specifies the background color for the image view.
 //
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *IKImageView) WithBackgroundColor(backgroundColor *appkit.NSColor) *IKImageView {
@@ -146,175 +148,175 @@ func (x *IKImageView) WithBackgroundColor(backgroundColor *appkit.NSColor) *IKIm
 	return x
 }
 
-// @method setImage:imageProperties: @abstract Sets the image & metadata (both retrieved from ImageIO).
+// Sets the image to display in an image view.
 //
 // SetImageImageProperties calls the underlying SetImageImageProperties.
 func (x *IKImageView) SetImageImageProperties(image unsafe.Pointer, metaData *foundation.NSDictionary[objc.ID, objc.ID]) {
 	x.inner.SetImageImageProperties(image, metaData)
 }
 
-// @method setImageWithURL: @abstract Initializes an image view with the image specified by a URL.
+// Initializes an image view with the image specified by a URL.
 //
 // SetImageWithURL calls the underlying SetImageWithURL.
 func (x *IKImageView) SetImageWithURL(url string) {
 	x.inner.SetImageWithURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 }
 
-// @method image @abstract Returns the image associated with the view, after any image corrections.
+// Returns the image associated with the view, after any image corrections.
 //
 // Image calls the underlying Image.
 func (x *IKImageView) Image() unsafe.Pointer {
 	return x.inner.Image()
 }
 
-// @method imageSize @abstract Returns the size of the image in the image view.
+// Returns the size of the image in the image view.
 //
 // ImageSize calls the underlying ImageSize.
 func (x *IKImageView) ImageSize() corefoundation.CGSize {
 	return x.inner.ImageSize()
 }
 
-// @method imageProperties @abstract Returns the metadata for the image in the view.
+// Returns the metadata for the image in the view.
 //
 // ImageProperties calls the underlying ImageProperties.
 func (x *IKImageView) ImageProperties() *foundation.NSDictionary[objc.ID, objc.ID] {
 	return x.inner.ImageProperties()
 }
 
-// @method setRotationAngle:centerPoint: @abstract Sets the rotation angle at the provided origin.
+// Sets the rotation angle at the provided origin.
 //
 // SetRotationAngleCenterPoint calls the underlying SetRotationAngleCenterPoint.
 func (x *IKImageView) SetRotationAngleCenterPoint(rotationAngle float64, centerPoint corefoundation.CGPoint) {
 	x.inner.SetRotationAngleCenterPoint(rotationAngle, centerPoint)
 }
 
-// @method rotateImageLeft: @abstract Rotates the image left.
+// Rotates the image left (counter-clockwise).
 //
 // RotateImageLeft calls the underlying RotateImageLeft.
 func (x *IKImageView) RotateImageLeft(sender objc.ID) {
 	x.inner.RotateImageLeft(sender)
 }
 
-// @method rotateImageRight: @abstract Rotates the image right.
+// Rotates the image right (clockwise).
 //
 // RotateImageRight calls the underlying RotateImageRight.
 func (x *IKImageView) RotateImageRight(sender objc.ID) {
 	x.inner.RotateImageRight(sender)
 }
 
-// @method setImageZoomFactor:centerPoint: @abstract Sets the zoom factor at the provided origin.
+// Sets the zoom factor at the provided origin.
 //
 // SetImageZoomFactorCenterPoint calls the underlying SetImageZoomFactorCenterPoint.
 func (x *IKImageView) SetImageZoomFactorCenterPoint(zoomFactor float64, centerPoint corefoundation.CGPoint) {
 	x.inner.SetImageZoomFactorCenterPoint(zoomFactor, centerPoint)
 }
 
-// @method zoomImageToRect: @abstract Zooms the image so that it fits in the specified rectangle.
+// Zooms the image so that it fits in the specified rectangle.
 //
 // ZoomImageToRect calls the underlying ZoomImageToRect.
 func (x *IKImageView) ZoomImageToRect(rect corefoundation.CGRect) {
 	x.inner.ZoomImageToRect(rect)
 }
 
-// @method zoomImageToFit: @abstract Zooms the image so that it fits in the image view.
+// Zooms the image so that it fits in the image view.
 //
 // ZoomImageToFit calls the underlying ZoomImageToFit.
 func (x *IKImageView) ZoomImageToFit(sender objc.ID) {
 	x.inner.ZoomImageToFit(sender)
 }
 
-// @method zoomImageToActualSize: @abstract Zooms the image so that it is displayed using its true size.
+// Zooms the image so that it is displayed using its true size.
 //
 // ZoomImageToActualSize calls the underlying ZoomImageToActualSize.
 func (x *IKImageView) ZoomImageToActualSize(sender objc.ID) {
 	x.inner.ZoomImageToActualSize(sender)
 }
 
-// @method zoomIn: @abstract Zooms the image in.
+// Zooms the image in.
 //
 // ZoomIn calls the underlying ZoomIn.
 func (x *IKImageView) ZoomIn(sender objc.ID) {
 	x.inner.ZoomIn(sender)
 }
 
-// @method zoomOut: @abstract Zooms the image out.
+// Zooms the image out.
 //
 // ZoomOut calls the underlying ZoomOut.
 func (x *IKImageView) ZoomOut(sender objc.ID) {
 	x.inner.ZoomOut(sender)
 }
 
-// @method flipImageHorizontal: @abstract Flips an image along the horizontal axis.
+// Flips an image along the horizontal axis.
 //
 // FlipImageHorizontal calls the underlying FlipImageHorizontal.
 func (x *IKImageView) FlipImageHorizontal(sender objc.ID) {
 	x.inner.FlipImageHorizontal(sender)
 }
 
-// @method flipImageVertical: @abstract Flips an image along the vertical axis.
+// Flips an image along the vertical axis.
 //
 // FlipImageVertical calls the underlying FlipImageVertical.
 func (x *IKImageView) FlipImageVertical(sender objc.ID) {
 	x.inner.FlipImageVertical(sender)
 }
 
-// @method crop: @abstract Crops the image using the current selection.
+// Crops the image using the current selection.
 //
 // Crop calls the underlying Crop.
 func (x *IKImageView) Crop(sender objc.ID) {
 	x.inner.Crop(sender)
 }
 
-// @method setOverlay:forType: @abstract Sets an overlay (Core Animation layer) for the image or the image background.
+// Sets an overlay type for a Core Animation layer.
 //
 // SetOverlayForType calls the underlying SetOverlayForType.
 func (x *IKImageView) SetOverlayForType(layer *quartzcore.CALayer, layerType string) {
 	x.inner.SetOverlayForType(layer, foundation.NSStringStringWithUTF8String(layerType))
 }
 
-// @method overlayForType: @abstract Returns the overlay (Core Animation layer) for the image or the image background.
+// Returns the Core Animation layer associated with a layer type.
 //
 // OverlayForType calls the underlying OverlayForType.
 func (x *IKImageView) OverlayForType(layerType string) *quartzcore.CALayer {
 	return x.inner.OverlayForType(foundation.NSStringStringWithUTF8String(layerType))
 }
 
-// @method scrollToPoint: @abstract Scrolls the view to the specified point.
+// Scrolls the view to the specified point.
 //
 // ScrollToPoint calls the underlying ScrollToPoint.
 func (x *IKImageView) ScrollToPoint(point corefoundation.CGPoint) {
 	x.inner.ScrollToPoint(point)
 }
 
-// @method scrollToRect: @abstract Scrolls the view so that it includes the provided rectangular area.
+// Scrolls the view so that it includes the provided rectangular area.
 //
 // ScrollToRect calls the underlying ScrollToRect.
 func (x *IKImageView) ScrollToRect(rect corefoundation.CGRect) {
 	x.inner.ScrollToRect(rect)
 }
 
-// @method convertViewPointToImagePoint: @abstract Converts an image view coordinate to an image coordinate.
+// Converts an image view coordinate to an image coordinate.
 //
 // ConvertViewPointToImagePoint calls the underlying ConvertViewPointToImagePoint.
 func (x *IKImageView) ConvertViewPointToImagePoint(viewPoint corefoundation.CGPoint) corefoundation.CGPoint {
 	return x.inner.ConvertViewPointToImagePoint(viewPoint)
 }
 
-// @method convertViewRectToImageRect: @abstract Converts an image view rectangle to an image rectangle.
+// Converts an image view rectangle to an image rectangle.
 //
 // ConvertViewRectToImageRect calls the underlying ConvertViewRectToImageRect.
 func (x *IKImageView) ConvertViewRectToImageRect(viewRect corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.ConvertViewRectToImageRect(viewRect)
 }
 
-// @method convertImagePointToViewPoint: @abstract Converts an image coordinate to an image view coordinate.
+// Converts an image coordinate to an image view coordinate.
 //
 // ConvertImagePointToViewPoint calls the underlying ConvertImagePointToViewPoint.
 func (x *IKImageView) ConvertImagePointToViewPoint(imagePoint corefoundation.CGPoint) corefoundation.CGPoint {
 	return x.inner.ConvertImagePointToViewPoint(imagePoint)
 }
 
-// @method convertImageRectToViewRect: @abstract Converts an image rectangle to an image view rectangle.
+// Converts an image rectangle to an image view rectangle.
 //
 // ConvertImageRectToViewRect calls the underlying ConvertImageRectToViewRect.
 func (x *IKImageView) ConvertImageRectToViewRect(imageRect corefoundation.CGRect) corefoundation.CGRect {

@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A view that represents the insertion indicator in text.
+//
 // TextInsertionIndicator wraps [raw.NSTextInsertionIndicator] with a fluent Go API.
 type TextInsertionIndicator struct {
 	inner *raw.NSTextInsertionIndicator
@@ -41,7 +43,7 @@ func NewTextInsertionIndicator() *TextInsertionIndicator {
 	return &TextInsertionIndicator{inner: raw.NSTextInsertionIndicatorFromID(_id)}
 }
 
-// Sets-returns the indicator's display mode.
+// A value that describes the display mode of an indicator.
 //
 // WithDisplayMode sets the displayMode property and returns the receiver for chaining.
 func (x *TextInsertionIndicator) WithDisplayMode(displayMode NSTextInsertionIndicatorDisplayMode) *TextInsertionIndicator {
@@ -49,7 +51,7 @@ func (x *TextInsertionIndicator) WithDisplayMode(displayMode NSTextInsertionIndi
 	return x
 }
 
-// The color of the indicator. @discussion Defaults to NSColor.textInsertionPointColor. @note If set to @c nil, uses NSColor.textInsertionPointColor.
+// The color of this indicator.
 //
 // WithColor sets the color property and returns the receiver for chaining.
 func (x *TextInsertionIndicator) WithColor(color *Color) *TextInsertionIndicator {
@@ -57,7 +59,7 @@ func (x *TextInsertionIndicator) WithColor(color *Color) *TextInsertionIndicator
 	return x
 }
 
-// Options for the NSTextInsertionIndicatorDisplayModeAutomatic display mode. Defaults to NSTextInsertionIndicatorAutomaticModeOptionsShowEffectsView.
+// Options that affect the automatic display mode.
 //
 // WithAutomaticModeOptions sets the automaticModeOptions property and returns the receiver for chaining.
 func (x *TextInsertionIndicator) WithAutomaticModeOptions(automaticModeOptions NSTextInsertionIndicatorAutomaticModeOptions) *TextInsertionIndicator {
@@ -65,7 +67,7 @@ func (x *TextInsertionIndicator) WithAutomaticModeOptions(automaticModeOptions N
 	return x
 }
 
-// Sets-returns a block that inserts a view into the view hierarchy. @discussion During dictation the NSTextInsertionIndicator displays a glow effect by inserting a view below the text view. If an application needs to insert the view in a different way, the application can specify a block of code that will be called when the glow effect needs to be displayed.
+// An optional closure the system calls during dictation.
 //
 // WithEffectsViewInserter sets the effectsViewInserter property and returns the receiver for chaining.
 func (x *TextInsertionIndicator) WithEffectsViewInserter(effectsViewInserter func(*raw.NSView)) *TextInsertionIndicator {
@@ -115,6 +117,8 @@ func (x *TextInsertionIndicator) WithAutoresizingMask(autoresizingMask NSAutores
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *TextInsertionIndicator) WithFrame(frame corefoundation.CGRect) *TextInsertionIndicator {
 	x.inner.NSView.SetFrame(frame)
@@ -139,6 +143,8 @@ func (x *TextInsertionIndicator) WithBoundsRotation(boundsRotation float64) *Tex
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *TextInsertionIndicator) WithBounds(bounds corefoundation.CGRect) *TextInsertionIndicator {
 	x.inner.NSView.SetBounds(bounds)
@@ -151,6 +157,8 @@ func (x *TextInsertionIndicator) WithCanDrawConcurrently(canDrawConcurrently boo
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *TextInsertionIndicator) WithNeedsDisplay(needsDisplay bool) *TextInsertionIndicator {
 	x.inner.NSView.SetNeedsDisplay(needsDisplay)
@@ -337,7 +345,7 @@ func (x *TextInsertionIndicator) WithAdditionalSafeAreaInsets(additionalSafeArea
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *TextInsertionIndicator) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextInsertionIndicator {
@@ -393,24 +401,32 @@ func (x *TextInsertionIndicator) WithPressureConfiguration(pressureConfiguration
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *TextInsertionIndicator) WithNextResponder(nextResponder ResponderProvider) *TextInsertionIndicator {
 	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *TextInsertionIndicator) WithMenu(menu *Menu) *TextInsertionIndicator {
 	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *TextInsertionIndicator) WithUserActivity(userActivity *foundation.NSUserActivity) *TextInsertionIndicator {
 	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *TextInsertionIndicator) WithTouchBar(touchBar *TouchBar) *TextInsertionIndicator {
 	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())

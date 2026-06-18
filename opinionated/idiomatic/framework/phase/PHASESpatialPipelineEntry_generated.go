@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An audio layer with an adjustable volume for a spatial mixer’s output.
+//
 // SpatialPipelineEntry wraps [raw.PHASESpatialPipelineEntry] with a fluent Go API.
 type SpatialPipelineEntry struct {
 	inner *raw.PHASESpatialPipelineEntry
@@ -35,7 +37,7 @@ func NewSpatialPipelineEntry() *SpatialPipelineEntry {
 	return &SpatialPipelineEntry{inner: raw.PHASESpatialPipelineEntryFromID(_id)}
 }
 
-// @property sendLevel @abstract Send level. @note Values are clamped to the range [0, 1]. Default value is 1.
+// The amount of audio signal to add to the output.
 //
 // WithSendLevel sets the sendLevel property and returns the receiver for chaining.
 func (x *SpatialPipelineEntry) WithSendLevel(sendLevel float64) *SpatialPipelineEntry {
@@ -43,7 +45,7 @@ func (x *SpatialPipelineEntry) WithSendLevel(sendLevel float64) *SpatialPipeline
 	return x
 }
 
-// @property sendLevelMetaParameterDefinition @abstract An optional metaparameter used to drive the send level during playback.
+// A parameter that gradually updates the amount of audio signal that passes through to the output.
 //
 // WithSendLevelMetaParameterDefinition sets the sendLevelMetaParameterDefinition property and returns the receiver for chaining.
 func (x *SpatialPipelineEntry) WithSendLevelMetaParameterDefinition(sendLevelMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SpatialPipelineEntry {

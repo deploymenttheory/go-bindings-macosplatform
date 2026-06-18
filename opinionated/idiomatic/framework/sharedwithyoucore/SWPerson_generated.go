@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that tracks participants in a collaboration.
+//
 // Person wraps [raw.SWPerson] with a fluent Go API.
 type Person struct {
 	inner *raw.SWPerson
@@ -30,7 +32,7 @@ func PersonFromID(id objc.ID) *Person {
 	return &Person{inner: raw.SWPersonFromID(id)}
 }
 
-// @abstract An initializer @param handle The phone number or email address for this person. @param identity The identity of this person. @param displayName The name of this person. @param thumbnailImageData Optional thumbnail image data for this person. If nil, this will be inferred by the system.
+// Creates and initializes a person object.
 //
 // NewPersonWithHandleIdentityDisplayNameThumbnailImageData creates a new [Person].
 func NewPersonWithHandleIdentityDisplayNameThumbnailImageData(handle string, identity *raw.SWPersonIdentity, displayName string, thumbnailImageData *foundation.NSData) *Person {

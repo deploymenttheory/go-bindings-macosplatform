@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of filtering modes for a renderer to use when sampling from a texture.
+//
 // TextureFilter wraps [raw.MDLTextureFilter] with a fluent Go API.
 type TextureFilter struct {
 	inner *raw.MDLTextureFilter
@@ -35,36 +37,48 @@ func NewTextureFilter() *TextureFilter {
 	return &TextureFilter{inner: raw.MDLTextureFilterFromID(_id)}
 }
 
+// The coordinate wrapping mode for texture t-coordinates.
+//
 // WithSWrapMode sets the sWrapMode property and returns the receiver for chaining.
 func (x *TextureFilter) WithSWrapMode(sWrapMode MDLMaterialTextureWrapMode) *TextureFilter {
 	x.inner.SetSWrapMode(raw.MDLMaterialTextureWrapMode(sWrapMode))
 	return x
 }
 
+// The coordinate wrapping mode for texture t-coordinates.
+//
 // WithTWrapMode sets the tWrapMode property and returns the receiver for chaining.
 func (x *TextureFilter) WithTWrapMode(tWrapMode MDLMaterialTextureWrapMode) *TextureFilter {
 	x.inner.SetTWrapMode(raw.MDLMaterialTextureWrapMode(tWrapMode))
 	return x
 }
 
+// The coordinate wrapping mode for texture r-coordinates.
+//
 // WithRWrapMode sets the rWrapMode property and returns the receiver for chaining.
 func (x *TextureFilter) WithRWrapMode(rWrapMode MDLMaterialTextureWrapMode) *TextureFilter {
 	x.inner.SetRWrapMode(raw.MDLMaterialTextureWrapMode(rWrapMode))
 	return x
 }
 
+// The filter mode for rendering textures at sizes smaller than that of the original image.
+//
 // WithMinFilter sets the minFilter property and returns the receiver for chaining.
 func (x *TextureFilter) WithMinFilter(minFilter MDLMaterialTextureFilterMode) *TextureFilter {
 	x.inner.SetMinFilter(raw.MDLMaterialTextureFilterMode(minFilter))
 	return x
 }
 
+// The filter mode for rendering textures at sizes larger than that of the original image.
+//
 // WithMagFilter sets the magFilter property and returns the receiver for chaining.
 func (x *TextureFilter) WithMagFilter(magFilter MDLMaterialTextureFilterMode) *TextureFilter {
 	x.inner.SetMagFilter(raw.MDLMaterialTextureFilterMode(magFilter))
 	return x
 }
 
+// The filter mode for rendering textures using mipmapping.
+//
 // WithMipFilter sets the mipFilter property and returns the receiver for chaining.
 func (x *TextureFilter) WithMipFilter(mipFilter MDLMaterialMipMapFilterMode) *TextureFilter {
 	x.inner.SetMipFilter(raw.MDLMaterialMipMapFilterMode(mipFilter))

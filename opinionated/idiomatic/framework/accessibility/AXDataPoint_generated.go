@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a single data point in a chart.
+//
 // DataPoint wraps [raw.AXDataPoint] with a fluent Go API.
 type DataPoint struct {
 	inner *raw.AXDataPoint
@@ -32,6 +34,8 @@ func DataPointFromID(id objc.ID) *DataPoint {
 	return &DataPoint{inner: raw.AXDataPointFromID(id)}
 }
 
+// Creates a data point with the specified x- and y-values.
+//
 // NewDataPointWithXY creates a new [DataPoint].
 func NewDataPointWithXY(xValue *raw.AXDataPointValue, yValue *raw.AXDataPointValue) *DataPoint {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXDataPoint")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewDataPointWithXY(xValue *raw.AXDataPointValue, yValue *raw.AXDataPointVal
 	return &DataPoint{inner: raw.AXDataPointFromID(_id)}
 }
 
+// Creates a data point with the specified x-value, y-value, and additional values.
+//
 // NewDataPointWithXYAdditionalValues creates a new [DataPoint].
 func NewDataPointWithXYAdditionalValues(xValue *raw.AXDataPointValue, yValue *raw.AXDataPointValue, additionalValues *foundation.NSArray[*raw.AXDataPointValue]) *DataPoint {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXDataPoint")), objc.RegisterName("alloc"))
@@ -46,6 +52,8 @@ func NewDataPointWithXYAdditionalValues(xValue *raw.AXDataPointValue, yValue *ra
 	return &DataPoint{inner: raw.AXDataPointFromID(_id)}
 }
 
+// Creates a data point with the specified x-value, y-value, additional values, and label.
+//
 // NewDataPointWithXYAdditionalValuesLabel creates a new [DataPoint].
 func NewDataPointWithXYAdditionalValuesLabel(xValue *raw.AXDataPointValue, yValue *raw.AXDataPointValue, additionalValues *foundation.NSArray[*raw.AXDataPointValue], label string) *DataPoint {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXDataPoint")), objc.RegisterName("alloc"))
@@ -53,7 +61,7 @@ func NewDataPointWithXYAdditionalValuesLabel(xValue *raw.AXDataPointValue, yValu
 	return &DataPoint{inner: raw.AXDataPointFromID(_id)}
 }
 
-// The x-axis value for this data point. Should be a Double for a numeric x-axis or a String for a categorical x-axis.
+// The value of the x-axis for the data point.
 //
 // WithXValue sets the xValue property and returns the receiver for chaining.
 func (x *DataPoint) WithXValue(xValue *DataPointValue) *DataPoint {
@@ -61,7 +69,7 @@ func (x *DataPoint) WithXValue(xValue *DataPointValue) *DataPoint {
 	return x
 }
 
-// The y-axis value for this data point.
+// The value of the y-axis for the data point.
 //
 // WithYValue sets the yValue property and returns the receiver for chaining.
 func (x *DataPoint) WithYValue(yValue *DataPointValue) *DataPoint {
@@ -69,7 +77,7 @@ func (x *DataPoint) WithYValue(yValue *DataPointValue) *DataPoint {
 	return x
 }
 
-// Any additional values for additional axes for this data point. These should be provided in the same order as their corresponding `AXDataAxisDescriptor` objects in `AXChartDescriptor.additionalAxes`.
+// An array of values for additional axes for the data point.
 //
 // WithAdditionalValues sets the collection, converting the Go slice to an NSArray.
 func (x *DataPoint) WithAdditionalValues(items ...*raw.AXDataPointValue) *DataPoint {
@@ -89,7 +97,7 @@ func (x *DataPoint) WithAdditionalValues(items ...*raw.AXDataPointValue) *DataPo
 	return x
 }
 
-// A name or label for this data point.
+// The label for the data point.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *DataPoint) WithLabel(label string) *DataPoint {
@@ -97,7 +105,7 @@ func (x *DataPoint) WithLabel(label string) *DataPoint {
 	return x
 }
 
-// An attributed version of the name or label for this data point.
+// An attributed version of the label for the data point.
 //
 // WithAttributedLabel sets the attributedLabel property and returns the receiver for chaining.
 func (x *DataPoint) WithAttributedLabel(attributedLabel *foundation.NSAttributedString) *DataPoint {

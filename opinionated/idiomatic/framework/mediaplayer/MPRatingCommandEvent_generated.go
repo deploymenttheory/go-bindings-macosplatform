@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An event requesting a change in the rating.
+//
 // RatingCommandEvent wraps [raw.MPRatingCommandEvent] with a fluent Go API.
 type RatingCommandEvent struct {
 	inner *raw.MPRatingCommandEvent

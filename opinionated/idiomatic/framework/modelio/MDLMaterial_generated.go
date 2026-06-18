@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A collection of material properties that together describe the intended surface appearance for rendering a 3D object.
+//
 // Material wraps [raw.MDLMaterial] with a fluent Go API.
 type Material struct {
 	inner *raw.MDLMaterial
@@ -31,6 +33,8 @@ func MaterialFromID(id objc.ID) *Material {
 	return &Material{inner: raw.MDLMaterialFromID(id)}
 }
 
+// Initializes a material
+//
 // NewMaterialWithNameScatteringFunction creates a new [Material].
 func NewMaterialWithNameScatteringFunction(name string, scatteringFunction *raw.MDLScatteringFunction) *Material {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterial")), objc.RegisterName("alloc"))
@@ -38,7 +42,7 @@ func NewMaterialWithNameScatteringFunction(name string, scatteringFunction *raw.
 	return &Material{inner: raw.MDLMaterialFromID(_id)}
 }
 
-// @see MDLNamed
+// A descriptive name for the material.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Material) WithName(name string) *Material {
@@ -46,28 +50,38 @@ func (x *Material) WithName(name string) *Material {
 	return x
 }
 
+// Another material object from which this material’s properties are derived.
+//
 // WithBaseMaterial sets the baseMaterial property and returns the receiver for chaining.
 func (x *Material) WithBaseMaterial(baseMaterial *Material) *Material {
 	x.inner.SetBaseMaterial(baseMaterial.Unwrap())
 	return x
 }
 
+// The surface of an object.
+//
 // WithMaterialFace sets the materialFace property and returns the receiver for chaining.
 func (x *Material) WithMaterialFace(materialFace MDLMaterialFace) *Material {
 	x.inner.SetMaterialFace(raw.MDLMaterialFace(materialFace))
 	return x
 }
 
+// Adds a new material property to or replaces an existing material property in the material.
+//
 // SetProperty calls the underlying SetProperty.
 func (x *Material) SetProperty(property *raw.MDLMaterialProperty) {
 	x.inner.SetProperty(property)
 }
 
+// Removes the specified material property from the material.
+//
 // RemoveProperty calls the underlying RemoveProperty.
 func (x *Material) RemoveProperty(property *raw.MDLMaterialProperty) {
 	x.inner.RemoveProperty(property)
 }
 
+// Returns the material property with the specified name.
+//
 // PropertyNamed calls the underlying PropertyNamed.
 func (x *Material) PropertyNamed(name string) *MaterialProperty {
 	_r := x.inner.PropertyNamed(foundation.NSStringStringWithUTF8String(name))
@@ -77,6 +91,8 @@ func (x *Material) PropertyNamed(name string) *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// Returns the material property for the specified material semantic.
+//
 // PropertyWithSemantic calls the underlying PropertyWithSemantic.
 func (x *Material) PropertyWithSemantic(semantic MDLMaterialSemantic) *MaterialProperty {
 	_r := x.inner.PropertyWithSemantic(raw.MDLMaterialSemantic(semantic))
@@ -86,26 +102,36 @@ func (x *Material) PropertyWithSemantic(semantic MDLMaterialSemantic) *MaterialP
 	return &MaterialProperty{inner: _r}
 }
 
+// Returns the complete list of material properties that match the specified material semantic.
+//
 // PropertiesWithSemantic calls the underlying PropertiesWithSemantic.
 func (x *Material) PropertiesWithSemantic(semantic MDLMaterialSemantic) *foundation.NSArray[*raw.MDLMaterialProperty] {
 	return x.inner.PropertiesWithSemantic(raw.MDLMaterialSemantic(semantic))
 }
 
+// Removes all material properties from the material.
+//
 // RemoveAllProperties calls the underlying RemoveAllProperties.
 func (x *Material) RemoveAllProperties() {
 	x.inner.RemoveAllProperties()
 }
 
+// Resolves all texture string paths as NSURLs with resolver.
+//
 // ResolveTexturesWithResolver calls the underlying ResolveTexturesWithResolver.
 func (x *Material) ResolveTexturesWithResolver(resolver raw.MDLAssetResolver) {
 	x.inner.ResolveTexturesWithResolver(resolver)
 }
 
+// Loads textures using resolver for string paths and NSURLs.
+//
 // LoadTexturesUsingResolver calls the underlying LoadTexturesUsingResolver.
 func (x *Material) LoadTexturesUsingResolver(resolver raw.MDLAssetResolver) {
 	x.inner.LoadTexturesUsingResolver(resolver)
 }
 
+// Returns the material property at the specified index in the material, for use with subscript syntax.
+//
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *Material) ObjectAtIndexedSubscript(idx uint) *MaterialProperty {
 	_r := x.inner.ObjectAtIndexedSubscript(idx)
@@ -115,6 +141,8 @@ func (x *Material) ObjectAtIndexedSubscript(idx uint) *MaterialProperty {
 	return &MaterialProperty{inner: _r}
 }
 
+// Returns the material property with the specified name, for use with subscript syntax.
+//
 // ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
 func (x *Material) ObjectForKeyedSubscript(name string) *MaterialProperty {
 	_r := x.inner.ObjectForKeyedSubscript(foundation.NSStringStringWithUTF8String(name))

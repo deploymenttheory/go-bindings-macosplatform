@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// An object that models the timing and presentation state of an asset during playback.
+//
 // PlayerItem wraps [raw.AVPlayerItem] with a fluent Go API.
 type PlayerItem struct {
 	inner *raw.AVPlayerItem
@@ -35,7 +37,7 @@ func PlayerItemFromID(id objc.ID) *PlayerItem {
 	return &PlayerItem{inner: raw.AVPlayerItemFromID(id)}
 }
 
-// Initializes an AVPlayerItem with an NSURL. Equivalent to -initWithAsset:, passing [AVAsset assetWithURL:URL] as the value of asset. - Parameter URL: - Returns: An instance of AVPlayerItem
+// Creates a player item with a specified URL.
 //
 // NewPlayerItemWithURL creates a new [PlayerItem].
 func NewPlayerItemWithURL(uRL string) *PlayerItem {
@@ -44,7 +46,7 @@ func NewPlayerItemWithURL(uRL string) *PlayerItem {
 	return &PlayerItem{inner: raw.AVPlayerItemFromID(_id)}
 }
 
-// Initializes an AVPlayerItem with an AVAsset. Equivalent to -initWithAsset:automaticallyLoadedAssetKeys:, passing @[ @"duration" ] as the value of automaticallyLoadedAssetKeys. This method, along with the companion `asset` property, is MainActor-isolated for Swift clients because AVAsset is not Sendable. If you are using a Sendable subclass of AVAsset, such as AVURLAsset, an overload of this initializer will be chosen automatically to allow you to initialize an AVPlayerItem while not running on the main actor. - Parameter asset: - Returns: An instance of AVPlayerItem
+// Creates a player item for a specified asset.
 //
 // NewPlayerItemWithAsset creates a new [PlayerItem].
 func NewPlayerItemWithAsset(asset *raw.AVAsset) *PlayerItem {
@@ -53,7 +55,7 @@ func NewPlayerItemWithAsset(asset *raw.AVAsset) *PlayerItem {
 	return &PlayerItem{inner: raw.AVPlayerItemFromID(_id)}
 }
 
-// Initializes an AVPlayerItem with an AVAsset. The value of each key in automaticallyLoadedAssetKeys will be automatically be loaded by the underlying AVAsset before the receiver achieves the status AVPlayerItemStatusReadyToPlay; i.e. when the item is ready to play, the value of -[[AVPlayerItem asset] statusOfValueForKey:error:] will be one of the terminal status values greater than AVKeyValueStatusLoading. This method, along with the companion `asset` property, is MainActor-isolated for Swift clients because AVAsset is not Sendable. If you are using a Sendable subclass of AVAsset, such as AVURLAsset, you can use `init(asset:automaticallyLoadedAssetKeys:)` to initialize an AVPlayerItem while not running on the main actor. - Parameter asset: An instance of AVAsset. - Parameter automaticallyLoadedAssetKeys: An NSArray of NSStrings, each representing a property key defined by AVAsset. See AVAsset.h for property keys, e.g. duration. - Returns: An instance of AVPlayerItem
+// Creates a player item with the specified asset and the asset keys to automatically load.
 //
 // NewPlayerItemWithAssetAutomaticallyLoadedAssetKeys creates a new [PlayerItem].
 func NewPlayerItemWithAssetAutomaticallyLoadedAssetKeys(asset *raw.AVAsset, automaticallyLoadedAssetKeys *foundation.NSArray[*foundation.NSString]) *PlayerItem {
@@ -62,7 +64,7 @@ func NewPlayerItemWithAssetAutomaticallyLoadedAssetKeys(asset *raw.AVAsset, auto
 	return &PlayerItem{inner: raw.AVPlayerItemFromID(_id)}
 }
 
-// Indicates how close to the latest content in a live stream playback will begin after a live start or a seek to kCMTimePositiveInfinity. For non-live assets this value is kCMTimeInvalid.
+// A time value that indicates the offset from the live time to start playback, or resume playback after a seek to positive infinity.
 //
 // WithConfiguredTimeOffsetFromLive sets the configuredTimeOffsetFromLive property and returns the receiver for chaining.
 func (x *PlayerItem) WithConfiguredTimeOffsetFromLive(configuredTimeOffsetFromLive coremedia.CMTime) *PlayerItem {
@@ -70,7 +72,7 @@ func (x *PlayerItem) WithConfiguredTimeOffsetFromLive(configuredTimeOffsetFromLi
 	return x
 }
 
-// Indicates that after the player spends a period of time buffering media, it will skip forward if necessary to restore the playhead's distance from the live edge of the presentation to what it was when buffering began. If the value of this property is YES and the player must buffer media from the network in order to resume playback, the player will seek forward if necessary before resuming playback to restore the position that the playhead had when rebuffering began, relative to the end of the current AVPlayerItem's seekableTimeRange. This behavior applies to media buffering that occurs as a consequence of starting playback, seeking, and recovering from a playback stall. Note that if the network cannot deliver media quickly enough to maintain the playback rate, playback may stall interminably. This property value has no effect if the asset is not a live stream. The default value of this property is NO.
+// A Boolean value that indicates whether the player preserves its time offset from the live time after a buffering operation.
 //
 // WithAutomaticallyPreservesTimeOffsetFromLive sets the automaticallyPreservesTimeOffsetFromLive property and returns the receiver for chaining.
 func (x *PlayerItem) WithAutomaticallyPreservesTimeOffsetFromLive(automaticallyPreservesTimeOffsetFromLive bool) *PlayerItem {
@@ -78,7 +80,7 @@ func (x *PlayerItem) WithAutomaticallyPreservesTimeOffsetFromLive(automaticallyP
 	return x
 }
 
-// The end time for forward playback. Specifies the time at which playback should end when the playback rate is positive (see AVPlayer's rate property). The default value is kCMTimeInvalid, which indicates that no end time for forward playback is specified. In this case, the effective end time for forward playback is the receiver's duration. When the end time is reached, the receiver will post AVPlayerItemDidPlayToEndTimeNotification and the AVPlayer will take the action indicated by the value of its actionAtItemEnd property (see AVPlayerActionAtItemEnd in AVPlayer.h). The value of this property has no effect on playback when the rate is negative.
+// The time at which forward playback ends.
 //
 // WithForwardPlaybackEndTime sets the forwardPlaybackEndTime property and returns the receiver for chaining.
 func (x *PlayerItem) WithForwardPlaybackEndTime(forwardPlaybackEndTime coremedia.CMTime) *PlayerItem {
@@ -86,7 +88,7 @@ func (x *PlayerItem) WithForwardPlaybackEndTime(forwardPlaybackEndTime coremedia
 	return x
 }
 
-// The end time for reverse playback. Specifies the time at which playback should end when the playback rate is negative (see AVPlayer's rate property). The default value is kCMTimeInvalid, which indicates that no end time for reverse playback is specified. In this case, the effective end time for reverse playback is kCMTimeZero. When the end time is reached, the receiver will post AVPlayerItemDidPlayToEndTimeNotification and the AVPlayer will take the action indicated by the value of its actionAtItemEnd property (see AVPlayerActionAtItemEnd in AVPlayer.h). The value of this property has no effect on playback when the rate is positive.
+// The time at which reverse playback ends.
 //
 // WithReversePlaybackEndTime sets the reversePlaybackEndTime property and returns the receiver for chaining.
 func (x *PlayerItem) WithReversePlaybackEndTime(reversePlaybackEndTime coremedia.CMTime) *PlayerItem {
@@ -94,7 +96,7 @@ func (x *PlayerItem) WithReversePlaybackEndTime(reversePlaybackEndTime coremedia
 	return x
 }
 
-// Indicates the video composition settings to be applied during playback. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue. This property throws an exception if a video composition is set with any of the following values: - renderSize, renderScale, or frameDuration is less than or equal to zero - sourceTrackIDForFrameTiming is less than or equal to zero - uses AVVideoCompositionCoreAnimationTool (works for offline rendering only)
+// The video composition settings to be applied during playback.
 //
 // WithVideoComposition sets the videoComposition property and returns the receiver for chaining.
 func (x *PlayerItem) WithVideoComposition(videoComposition VideoCompositionProvider) *PlayerItem {
@@ -102,7 +104,7 @@ func (x *PlayerItem) WithVideoComposition(videoComposition VideoCompositionProvi
 	return x
 }
 
-// Indicates whether the item's timing follows the displayed video frame when seeking with a video composition By default, item timing is updated as quickly as possible, not waiting for media at new times to be rendered when seeking or during normal playback. The latency that occurs, for example, between the completion of a seek operation and the display of a video frame at a new time is negligible in most situations. However, when video compositions are in use, the processing of video for any particular time may introduce noticeable latency. Therefore it may be desirable when a video composition is in use for the item's timing be updated only after the video frame for a time has been displayed. This allows, for instance, an AVSynchronizedLayer associated with an AVPlayerItem to remain in synchronization with the displayed video and for the currentTime property to return the time of the displayed video. This property has no effect on items for which videoComposition is nil.
+// A Boolean value that indicates whether the item’s timing follows the displayed video frame when seeking with a video composition.
 //
 // WithSeekingWaitsForVideoCompositionRendering sets the seekingWaitsForVideoCompositionRendering property and returns the receiver for chaining.
 func (x *PlayerItem) WithSeekingWaitsForVideoCompositionRendering(seekingWaitsForVideoCompositionRendering bool) *PlayerItem {
@@ -110,7 +112,7 @@ func (x *PlayerItem) WithSeekingWaitsForVideoCompositionRendering(seekingWaitsFo
 	return x
 }
 
-// An array of AVTextStyleRules representing text styling that can be applied to subtitles and other legible media. The styling information contained in each AVTextStyleRule object in the array is used only when no equivalent styling information is provided by the media resource being played. For example, if the text style rules specify Courier font but the media resource specifies Helvetica font, the text will be drawn using Helvetica font. This property has an effect only for tracks with media subtype kCMSubtitleFormatType_WebVTT.
+// An array of text style rules that specify the formatting and presentation of Web Video Text Tracks (WebVTT) subtitles.
 //
 // WithTextStyleRules sets the collection, converting the Go slice to an NSArray.
 func (x *PlayerItem) WithTextStyleRules(items ...*raw.AVTextStyleRule) *PlayerItem {
@@ -130,7 +132,7 @@ func (x *PlayerItem) WithTextStyleRules(items ...*raw.AVTextStyleRule) *PlayerIt
 	return x
 }
 
-// Specifies the video aperture mode to apply during playback. See AVVideoApertureMode constants defined in AVVideoSettings.h. Default is AVVideoApertureModeCleanAperture.
+// The video aperture mode to apply during playback.
 //
 // WithVideoApertureMode sets the videoApertureMode property and returns the receiver for chaining.
 func (x *PlayerItem) WithVideoApertureMode(videoApertureMode *foundation.NSString) *PlayerItem {
@@ -138,7 +140,7 @@ func (x *PlayerItem) WithVideoApertureMode(videoApertureMode *foundation.NSStrin
 	return x
 }
 
-// Controls whether or not to apply the per frame HDR display metadata of the source during playback.
+// A Boolean value that indicates whether the player item applies per-frame HDR display metadata during playback.
 //
 // WithAppliesPerFrameHDRDisplayMetadata sets the appliesPerFrameHDRDisplayMetadata property and returns the receiver for chaining.
 func (x *PlayerItem) WithAppliesPerFrameHDRDisplayMetadata(appliesPerFrameHDRDisplayMetadata bool) *PlayerItem {
@@ -146,7 +148,7 @@ func (x *PlayerItem) WithAppliesPerFrameHDRDisplayMetadata(appliesPerFrameHDRDis
 	return x
 }
 
-// Indicates the processing algorithm used to manage audio pitch at varying rates and for scaled audio edits. Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h. The default value for applications linked on or after iOS 15.0 or macOS 12.0 is AVAudioTimePitchAlgorithmTimeDomain. For iOS versions prior to 15.0 the default value is AVAudioTimePitchAlgorithmLowQualityZeroLatency. For macOS versions prior to 12.0 the default value is AVAudioTimePitchAlgorithmSpectral.
+// The processing algorithm used to manage audio pitch for scaled audio edits.
 //
 // WithAudioTimePitchAlgorithm sets the audioTimePitchAlgorithm property and returns the receiver for chaining.
 func (x *PlayerItem) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *PlayerItem {
@@ -154,7 +156,7 @@ func (x *PlayerItem) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *founda
 	return x
 }
 
-// Indicates whether audio spatialization is allowed When audio spatialization is allowed for an AVPlayerItem, the AVPlayer may render multichannel audio if available even if the output device doesn't support multichannel audio on its own, via use of a synthetic channel layout. When audio spatialization is not allowed, the AVPlayer must render audio with a channel layout that best matches the capabilities of the output device. This property is not observable. Defaults to YES.
+// A Boolean value that indicates whether the player item allows spatialized audio playback.
 //
 // WithAudioSpatializationAllowed sets the audioSpatializationAllowed property and returns the receiver for chaining.
 func (x *PlayerItem) WithAudioSpatializationAllowed(audioSpatializationAllowed bool) *PlayerItem {
@@ -162,7 +164,7 @@ func (x *PlayerItem) WithAudioSpatializationAllowed(audioSpatializationAllowed b
 	return x
 }
 
-// Indicates the source audio channel layouts allowed by the receiver for spatialization. Spatialization uses psychoacoustic methods to create a more immersive audio rendering when the content is played on specialized headphones and speaker arrangements. When an AVPlayerItem's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMonoAndStereo the AVPlayer will attempt to spatialize content tagged with a stereo channel layout, two-channel content with no layout specified as well as mono. It is considered incorrect to render a binaural recording with spatialization. A binaural recording is captured using two carefully placed microphones at each ear where the intent, when played on headphones, is to reproduce a naturally occurring spatial effect. Content tagged with a binaural channel layout will ignore this property value. When an AVPlayerItem's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMultichannel the AVPlayer will attempt to spatialize any decodable multichannel layout. Setting this property to AVAudioSpatializationFormatMonoStereoAndMultichannel indicates that the sender allows the AVPlayer to spatialize any decodable mono, stereo or multichannel layout. This property is not observable. The default value for this property with video content is AVAudioSpatializationFormatMonoStereoAndMultichannel. Otherwise, audio only content default value is AVAudioSpatializationFormatMultichannel.
+// The source audio channel layouts the player item supports for spatialization.
 //
 // WithAllowedAudioSpatializationFormats sets the allowedAudioSpatializationFormats property and returns the receiver for chaining.
 func (x *PlayerItem) WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AVAudioSpatializationFormats) *PlayerItem {
@@ -170,7 +172,7 @@ func (x *PlayerItem) WithAllowedAudioSpatializationFormats(allowedAudioSpatializ
 	return x
 }
 
-// Indicates the audio mix parameters to be applied during playback The inputParameters of the AVAudioMix must have trackIDs that correspond to a track of the receiver's asset. Otherwise they will be ignored. (See AVAudioMix.h for the declaration of AVAudioMixInputParameters and AVPlayerItem's asset property.)
+// The audio mix parameters to be applied during playback.
 //
 // WithAudioMix sets the audioMix property and returns the receiver for chaining.
 func (x *PlayerItem) WithAudioMix(audioMix AudioMixProvider) *PlayerItem {
@@ -178,7 +180,7 @@ func (x *PlayerItem) WithAudioMix(audioMix AudioMixProvider) *PlayerItem {
 	return x
 }
 
-// Indicates whether the player item can use network resources to keep playback state up to date while paused For live streaming content, the player item may need to use extra networking and power resources to keep playback state up to date when paused. For example, when this property is set to YES, the seekableTimeRanges property will be periodically updated to reflect the current state of the live stream. For clients linked on or after macOS 10.11 or iOS 9.0, the default value is NO. To minimize power usage, avoid setting this property to YES when you do not need playback state to stay up to date while paused.
+// A Boolean value that indicates whether the player item can use network resources to keep the playback state up to date while paused.
 //
 // WithCanUseNetworkResourcesForLiveStreamingWhilePaused sets the canUseNetworkResourcesForLiveStreamingWhilePaused property and returns the receiver for chaining.
 func (x *PlayerItem) WithCanUseNetworkResourcesForLiveStreamingWhilePaused(canUseNetworkResourcesForLiveStreamingWhilePaused bool) *PlayerItem {
@@ -186,7 +188,7 @@ func (x *PlayerItem) WithCanUseNetworkResourcesForLiveStreamingWhilePaused(canUs
 	return x
 }
 
-// Indicates the media duration the caller prefers the player to buffer from the network ahead of the playhead to guard against playback disruption. The value is in seconds. If it is set to 0, the player will choose an appropriate level of buffering for most use cases. Note that setting this property to a low value will increase the chance that playback will stall and re-buffer, while setting it to a high value will increase demand on system resources. Note that the system may buffer less than the value of this property in order to manage resource consumption.
+// The duration the player should buffer media from the network ahead of the playhead to guard against playback disruption.
 //
 // WithPreferredForwardBufferDuration sets the preferredForwardBufferDuration property and returns the receiver for chaining.
 func (x *PlayerItem) WithPreferredForwardBufferDuration(preferredForwardBufferDuration float64) *PlayerItem {
@@ -194,7 +196,7 @@ func (x *PlayerItem) WithPreferredForwardBufferDuration(preferredForwardBufferDu
 	return x
 }
 
-// Indicates the desired limit of network bandwidth consumption for this item. Set preferredPeakBitRate to non-zero to indicate that the player should attempt to limit item playback to that bit rate, expressed in bits per second. If network bandwidth consumption cannot be lowered to meet the preferredPeakBitRate, it will be reduced as much as possible while continuing to play the item.
+// The desired limit, in bits per second, of network bandwidth consumption for this item.
 //
 // WithPreferredPeakBitRate sets the preferredPeakBitRate property and returns the receiver for chaining.
 func (x *PlayerItem) WithPreferredPeakBitRate(preferredPeakBitRate float64) *PlayerItem {
@@ -202,7 +204,7 @@ func (x *PlayerItem) WithPreferredPeakBitRate(preferredPeakBitRate float64) *Pla
 	return x
 }
 
-// Indicates the desired limit of network bandwidth consumption for this item over expensive networks. When preferredPeakBitRateForExpensiveNetworks is set to non-zero, the player will attempt to limit item playback to that bit rate when streaming over an expensive network, such as when using a cellular data plan. (See -[NWPath isExpensive]) If network bandwidth consumption cannot be lowered to meet the preferredPeakBitRateForExpensiveNetworks, it will be reduced as much as possible while continuing to play the item. Note that preferredPeakBitRate still applies unconditionally. If preferredPeakBitRateForExpensiveNetworks is less restrictive (greater) than preferredPeakBitRate, preferredPeakBitRateForExpensiveNetworks has no practical effect.
+// A limit of network bandwidth consumption by the item when connecting over expensive networks.
 //
 // WithPreferredPeakBitRateForExpensiveNetworks sets the preferredPeakBitRateForExpensiveNetworks property and returns the receiver for chaining.
 func (x *PlayerItem) WithPreferredPeakBitRateForExpensiveNetworks(preferredPeakBitRateForExpensiveNetworks float64) *PlayerItem {
@@ -210,7 +212,7 @@ func (x *PlayerItem) WithPreferredPeakBitRateForExpensiveNetworks(preferredPeakB
 	return x
 }
 
-// Indicates a preferred upper limit on the resolution of the video to be downloaded (or otherwise transferred) and rendered by the player. The default value is CGSizeZero, which indicates that the client enforces no limit on video resolution. Other values indicate a preferred maximum video resolution. It only applies to HTTP Live Streaming asset.
+// The desired maximum resolution of a video that is to be downloaded.
 //
 // WithPreferredMaximumResolution sets the preferredMaximumResolution property and returns the receiver for chaining.
 func (x *PlayerItem) WithPreferredMaximumResolution(preferredMaximumResolution corefoundation.CGSize) *PlayerItem {
@@ -218,7 +220,7 @@ func (x *PlayerItem) WithPreferredMaximumResolution(preferredMaximumResolution c
 	return x
 }
 
-// Indicates a preferred upper limit on the resolution of the video to be downloaded that applies only when the download occurs over expensive networks. The default value is CGSizeZero, which indicates that the client enforces no limit on video resolution. Other values indicate a preferred maximum video resolution. This limit applies only when streaming over an expensive network, such as when using a cellular data plan. (See -[NWPath isExpensive]) It only applies to HTTP Live Streaming asset. Note that preferredMaximumResolution still applies unconditionally. If preferredMaximumResolutionForExpensiveNetworks is less restrictive (higher resolution) than preferredMaximumResolution, preferredMaximumResolutionForExpensiveNetworks has no practical effect.
+// An upper limit on the resolution of video to download when connecting over expensive networks.
 //
 // WithPreferredMaximumResolutionForExpensiveNetworks sets the preferredMaximumResolutionForExpensiveNetworks property and returns the receiver for chaining.
 func (x *PlayerItem) WithPreferredMaximumResolutionForExpensiveNetworks(preferredMaximumResolutionForExpensiveNetworks corefoundation.CGSize) *PlayerItem {
@@ -226,7 +228,7 @@ func (x *PlayerItem) WithPreferredMaximumResolutionForExpensiveNetworks(preferre
 	return x
 }
 
-// Directs the player to start playback with the first eligible variant that appears in the stream's master playlist. This property influences AVPlayer's algorithm for selecting which of the eligible variant streams in an HTTP Live Streaming master playlist is selected when playback first begins. In all cases, AVPlayer may switch to other variants during playback. On releases prior to macOS 10.15, iOS 13, tvOS 13 and watchOS 6, AVPlayer starts HLS playback with the first eligible variant in the master playlist. On releases starting with macOS 10.15, iOS 13, tvOS 13 and watchOS 6, AVPlayer starts HLS playback by choosing an initial variant that optimizes the startup experience. On releases starting with macOS 11.0, iOS 14, tvOS 14 and watchOS 7, applications may set this property to YES to request that AVPlayer use the previous behaviour of using the first eligible variant in the master playlist. This would be appropriate, for example, for applications which wish to control initial variant selection by ordering the variants in the master playlist. Note that changing this property may impact stream startup performance and quality. In order to be effective this property must be set before initial variant selection occurs. This property only applies to HTTP Live Streaming assets. The default value of this property is NO.
+// A Boolean value that indicates whether playback starts with the first eligible variant that appears in the stream’s main playlist.
 //
 // WithStartsOnFirstEligibleVariant sets the startsOnFirstEligibleVariant property and returns the receiver for chaining.
 func (x *PlayerItem) WithStartsOnFirstEligibleVariant(startsOnFirstEligibleVariant bool) *PlayerItem {
@@ -234,7 +236,7 @@ func (x *PlayerItem) WithStartsOnFirstEligibleVariant(startsOnFirstEligibleVaria
 	return x
 }
 
-// Indicates preferences for variant switching. Changing variant preferences during playback may result in a variant switch. The default value is AVVariantPreferenceNone.
+// The preferences the player item uses when selecting variant playlists.
 //
 // WithVariantPreferences sets the variantPreferences property and returns the receiver for chaining.
 func (x *PlayerItem) WithVariantPreferences(variantPreferences AVVariantPreferences) *PlayerItem {
@@ -242,7 +244,7 @@ func (x *PlayerItem) WithVariantPreferences(variantPreferences AVVariantPreferen
 	return x
 }
 
-// Indicates the AVCustomMediaSelectionSchemes of AVMediaSelectionGroups of the receiver's asset with which an associated UI implementation should configure its interface for media selection. Recommended usage: if use of a custom media selection scheme is desired, set this property before either replacing an AVPlayer's current item with the receiver or adding the receiver to an AVQueuePlayer's play queue. This will satisfy requirements of UI implementations that commit to a configuration of UI elements as the receiver becomes ready to play.
+// Indicates the AVCustomMediaSelectionSchemes of AVMediaSelectionGroups of the receiver’s asset with which an associated UI implementation should configure its interface for media selection.
 //
 // WithPreferredCustomMediaSelectionSchemes sets the collection, converting the Go slice to an NSArray.
 func (x *PlayerItem) WithPreferredCustomMediaSelectionSchemes(items ...*raw.AVCustomMediaSelectionScheme) *PlayerItem {
@@ -262,7 +264,7 @@ func (x *PlayerItem) WithPreferredCustomMediaSelectionSchemes(items ...*raw.AVCu
 	return x
 }
 
-// Allows interstitials to be played according to a schedule that's specified by server-side directives. The default value is YES. A value of NO prevents automatic scheduling of future server-side interstitial events. Events specified by an AVPlayerInterstitialEventController override server-side events, regardless of the value of this property. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+// A Boolean value that indicates whether the player item automatically plays interstitial events according to server-side directives.
 //
 // WithAutomaticallyHandlesInterstitialEvents sets the automaticallyHandlesInterstitialEvents property and returns the receiver for chaining.
 func (x *PlayerItem) WithAutomaticallyHandlesInterstitialEvents(automaticallyHandlesInterstitialEvents bool) *PlayerItem {
@@ -428,49 +430,49 @@ func (x *PlayerItem) SetAutomaticallyPreservesTimeOffsetFromLive(automaticallyPr
 	x.inner.SetAutomaticallyPreservesTimeOffsetFromLive(automaticallyPreservesTimeOffsetFromLive)
 }
 
-// Returns the current time of the item. Returns the current time of the item. Not key-value observable; use -[AVPlayer addPeriodicTimeObserverForInterval:queue:usingBlock:] instead. - Returns: A CMTime
+// Returns the current time of the item.
 //
 // CurrentTime calls the underlying CurrentTime.
 func (x *PlayerItem) CurrentTime() coremedia.CMTime {
 	return x.inner.CurrentTime()
 }
 
-// Moves the playback cursor and invokes the specified block when the seek operation has either been completed or been interrupted. Use this method to seek to a specified time for the item and to be notified when the seek operation is complete. The completion handler for any prior seek request that is still in process will be invoked immediately with the finished parameter set to NO. If the new request completes without being interrupted by another seek request or by any other operation the specified completion handler will be invoked with the finished parameter set to YES. If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled and the completion handler will be invoked with the finished parameter set to NO. This method throws an exception if time is invalid or indefinite. - Parameter time: - Parameter completionHandler:
+// Sets the current playback time to the specified time.
 //
 // SeekToTimeCompletionHandler calls the underlying SeekToTimeCompletionHandler.
 func (x *PlayerItem) SeekToTimeCompletionHandler(time_ coremedia.CMTime, completionHandler func(bool)) {
 	x.inner.SeekToTimeCompletionHandler(time_, completionHandler)
 }
 
-// Moves the playback cursor within a specified time bound and invokes the specified block when the seek operation has either been completed or been interrupted. Use this method to seek to a specified time for the item and to be notified when the seek operation is complete. The time seeked to will be within the range [time-toleranceBefore, time+toleranceAfter] and may differ from the specified time for efficiency. Pass kCMTimeZero for both toleranceBefore and toleranceAfter to request sample accurate seeking which may incur additional decoding delay. Messaging this method with beforeTolerance:kCMTimePositiveInfinity and afterTolerance:kCMTimePositiveInfinity is the same as messaging seekToTime: directly. The completion handler for any prior seek request that is still in process will be invoked immediately with the finished parameter set to NO. If the new request completes without being interrupted by another seek request or by any other operation the specified completion handler will be invoked with the finished parameter set to YES. If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled and the completion handler will be invoked with the finished parameter set to NO. This method throws an exception if time is invalid or indefinite or if tolerance before or tolerance after is invalid or negative. - Parameter time: - Parameter toleranceBefore: - Parameter toleranceAfter: - Parameter completionHandler:
+// Sets the current playback time within a specified time bound and invokes the specified block when the seek operation completes or is interrupted.
 //
 // SeekToTimeToleranceBeforeToleranceAfterCompletionHandler calls the underlying SeekToTimeToleranceBeforeToleranceAfterCompletionHandler.
 func (x *PlayerItem) SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime, completionHandler func(bool)) {
 	x.inner.SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_, toleranceBefore, toleranceAfter, completionHandler)
 }
 
-// Cancel any pending seek requests and invoke the corresponding completion handlers if present. Use this method to cancel and release the completion handlers of pending seeks. The finished parameter of the completion handlers will be set to NO.
+// Cancels any pending seek requests and invokes the corresponding completion handlers if present.
 //
 // CancelPendingSeeks calls the underlying CancelPendingSeeks.
 func (x *PlayerItem) CancelPendingSeeks() {
 	x.inner.CancelPendingSeeks()
 }
 
-// If currentTime is mapped to a particular (real-time) date, return that date. - Returns: Returns the date of current playback, or nil if playback is not mapped to any date.
+// Returns the current time of the item as a date.
 //
 // CurrentDate calls the underlying CurrentDate.
 func (x *PlayerItem) CurrentDate() *foundation.NSDate {
 	return x.inner.CurrentDate()
 }
 
-// move playhead to a point corresponding to a particular date, and invokes the specified block when the seek operation has either been completed or been interrupted. For playback content that is associated with a range of dates, move the playhead to point within that range and invokes the completion handler when the seek operation is complete. Will fail if the supplied date is outside the range or if the content is not associated with a range of dates. The completion handler for any prior seek request that is still in process will be invoked immediately with the finished parameter set to NO. If the new request completes without being interrupted by another seek request or by any other operation, the specified completion handler will be invoked with the finished parameter set to YES. - Parameter date: The new position for the playhead. - Parameter completionHandler: The block to invoke when seek operation is complete - Returns: Returns true if the playhead was moved to the supplied date.
+// Sets the current playback time to the time specified by the date object.
 //
 // SeekToDateCompletionHandler calls the underlying SeekToDateCompletionHandler.
 func (x *PlayerItem) SeekToDateCompletionHandler(date *foundation.NSDate, completionHandler func(bool)) bool {
 	return x.inner.SeekToDateCompletionHandler(date, completionHandler)
 }
 
-// Moves player's current item's current time forward or backward by the specified number of steps. The size of each step depends on the enabled AVPlayerItemTracks of the AVPlayerItem. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this method must be invoked on the main thread/queue. - Parameter stepCount: The number of steps by which to move. A positive number results in stepping forward, a negative number in stepping backward.
+// Moves the player item’s current time forward or backward by a specified number of steps.
 //
 // StepByCount calls the underlying StepByCount.
 func (x *PlayerItem) StepByCount(stepCount int) {
@@ -788,14 +790,14 @@ func (x *PlayerItem) SetVariantPreferences(variantPreferences AVVariantPreferenc
 	x.inner.SetVariantPreferences(raw.AVVariantPreferences(variantPreferences))
 }
 
-// Selects the media option described by the specified instance of AVMediaSelectionOption in the specified AVMediaSelectionGroup and deselects all other options in that group. If the specified media selection option isn't a member of the specified media selection group, no change in presentation state will result. If the value of the property allowsEmptySelection of the AVMediaSelectionGroup is YES, you can pass nil for mediaSelectionOption to deselect all media selection options in the group. Note that if multiple options within a group meet your criteria for selection according to locale or other considerations, and if these options are otherwise indistinguishable to you according to media characteristics that are meaningful for your application, content is typically authored so that the first available option that meets your criteria is appropriate for selection. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this method must be invoked on the main thread/queue. - Parameter mediaSelectionOption: The option to select. - Parameter mediaSelectionGroup: The media selection group, obtained from the receiver's asset, that contains the specified option.
+// Selects a media option in a given media selection group and deselects all other options in that group.
 //
 // SelectMediaOptionInMediaSelectionGroup calls the underlying SelectMediaOptionInMediaSelectionGroup.
 func (x *PlayerItem) SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *raw.AVMediaSelectionOption, mediaSelectionGroup *raw.AVMediaSelectionGroup) {
 	x.inner.SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption, mediaSelectionGroup)
 }
 
-// Selects the media option in the specified media selection group that best matches the AVPlayer's current automatic selection criteria. Also allows automatic selection to be re-applied to the specified group subsequently if the relevant criteria are changed. Has no effect unless the appliesMediaSelectionCriteriaAutomatically property of the associated AVPlayer is YES and unless automatic media selection has previously been overridden via -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:]. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this method must be invoked on the main thread/queue. - Parameter mediaSelectionGroup: The media selection group, obtained from the receiver's asset, that contains the specified option.
+// Selects the media option in the specified media selection group that best matches the receiver’s automatic selection criteria.
 //
 // SelectMediaOptionAutomaticallyInMediaSelectionGroup calls the underlying SelectMediaOptionAutomaticallyInMediaSelectionGroup.
 func (x *PlayerItem) SelectMediaOptionAutomaticallyInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) {
@@ -811,14 +813,14 @@ func (x *PlayerItem) CurrentMediaSelection() *MediaSelection {
 	return &MediaSelection{inner: _r}
 }
 
-// When the associated AVPlayer's appliesMediaSelectionCriteriaAutomatically property is set to YES, configures the player item to prefer a particular language, replacing any previous preference for available languages of the specified group's custom media selection scheme. Overrides preferences for languages specified by the AVPlayer's current media selection criteria. This method has no effect when the associated AVPlayer's appliesMediaSelectionCriteriaAutomatically property has a value of NO, in which case you must use -selectMediaOption:inMediaSelectionGroup: instead in order to alter the presentation state of the media. - Parameter languages: A BCP 47 language tag, typically obtained from the availableLanguages of the AVCustomMediaSelectionScheme of the specified AVMediaSelectionGroup. - Parameter mediaSelectionGroup: The media selection group, obtained from the receiver's asset, to which the specified setting is to be applied.
+// When the associated AVPlayer’s appliesMediaSelectionCriteriaAutomatically property is set to YES, configures the player item to prefer a particular language, replacing any previous preference for available languages of the specified group’s custom media selection scheme.
 //
 // SelectMediaPresentationLanguageForMediaSelectionGroup calls the underlying SelectMediaPresentationLanguageForMediaSelectionGroup.
 func (x *PlayerItem) SelectMediaPresentationLanguageForMediaSelectionGroup(language string, mediaSelectionGroup *raw.AVMediaSelectionGroup) {
 	x.inner.SelectMediaPresentationLanguageForMediaSelectionGroup(foundation.NSStringStringWithUTF8String(language), mediaSelectionGroup)
 }
 
-// Returns the selected media presentation language for the specified media selection group, if any language has previously been selected via use of -selectMediaPresentationLanguages:forMediaSelectionGroup:. - Parameter mediaSelectionGroup: The media selection group, obtained from the receiver's asset, for which the selected media presentation language is requested.
+// Returns the selected media presentation language for the specified media selection group, if any language has previously been selected via use of -selectMediaPresentationLanguages:forMediaSelectionGroup:.
 //
 // SelectedMediaPresentationLanguageForMediaSelectionGroup calls the underlying SelectedMediaPresentationLanguageForMediaSelectionGroup.
 func (x *PlayerItem) SelectedMediaPresentationLanguageForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) string {
@@ -829,21 +831,21 @@ func (x *PlayerItem) SelectedMediaPresentationLanguageForMediaSelectionGroup(med
 	return purego.GoString(_r.Ptr())
 }
 
-// When the associated AVPlayer's appliesMediaSelectionCriteriaAutomatically property is set to YES, configures the player item to prefer a particular presentation setting, replacing any previous preference for settings of the same media presentation selector. Note that preferences for media characteristics indicated by selected AVMediaPresentationSettings are treated as supplemental to the associated AVPlayer's media selection criteria for the AVMediaSelectionGroup. An AVPlayer's default media selection criteria can also indicate preferences for media characteristics, such as those indicating the availability of accessibility affordances such as audio descriptions, and these media characteristics can be left up to the AVPlayer to manage even when an AVCustomMediaSelectionScheme is in use. But if you wish to do so, you can use AVMediaPresentationSettings offered by a AVCustomMediaSelectionScheme in combination with custom AVPlayerMediaSelectionCriteria. If the specified setting isn't offered by an AVMediaPresentationSelector of the AVCustomMediaSelectionScheme of the specified AVMediaSelectionGroup, no change in the presentation of the media will result. This method has no effect when the associated AVPlayer's appliesMediaSelectionCriteriaAutomatically property has a value of NO, in which case you must use -selectMediaOption:inMediaSelectionGroup: instead in order to alter the presentation state of the media. - Parameter mediaPresentationSetting: The setting to select. - Parameter mediaSelectionGroup: The media selection group, obtained from the receiver's asset, to which the specified setting is to be applied.
+// When the associated AVPlayer’s appliesMediaSelectionCriteriaAutomatically property is set to YES, configures the player item to prefer a particular presentation setting, replacing any previous preference for settings of the same media presentation selector.
 //
 // SelectMediaPresentationSettingForMediaSelectionGroup calls the underlying SelectMediaPresentationSettingForMediaSelectionGroup.
 func (x *PlayerItem) SelectMediaPresentationSettingForMediaSelectionGroup(mediaPresentationSetting *raw.AVMediaPresentationSetting, mediaSelectionGroup *raw.AVMediaSelectionGroup) {
 	x.inner.SelectMediaPresentationSettingForMediaSelectionGroup(mediaPresentationSetting, mediaSelectionGroup)
 }
 
-// Indicates the media presentation settings that have most recently been selected for each AVMediaPresentationSelector of the AVCustomMediaSelectionScheme of the specified AVMediaSelectionGroup. - Parameter mediaSelectionGroup: An AVMediaSelectionGroup obtained from the receiver's asset for which the currently selected media presentation settings are desired. - Returns: A dictionary with AVMediaPresentationSelectors as keys and AVMediaPresentationSettings as values, providing the most recently selected setting for each selector or, if no setting has previously been selected, NSNull.
+// Indicates the media presentation settings that have most recently been selected for each AVMediaPresentationSelector of the AVCustomMediaSelectionScheme of the specified AVMediaSelectionGroup.
 //
 // SelectedMediaPresentationSettingsForMediaSelectionGroup calls the underlying SelectedMediaPresentationSettingsForMediaSelectionGroup.
 func (x *PlayerItem) SelectedMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSDictionary[*raw.AVMediaPresentationSelector, objc.ID] {
 	return x.inner.SelectedMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup)
 }
 
-// Indicates the media presentation settings with media characteristics that are possessed by the currently selected AVMediaSelectionOption in the specified AVMediaSelectionGroup. Effective media presentation settings can differ from the currently effective media presentation settings if no AVMediaSelectionOption of the specified AVMediaSelectionGroup with the currently selected media presentation language possesses all of the characteristics associated with the currently selected settings. A value of NSNull for an AVMediaPresentationSelector can occur if either the content is inappropriately authored for the use of the AVCustomMediaSelectionScheme or if the currently selected AVMediaSelectionOption has been selected by means other than through the use of AVMediaPresentationSettings. - Parameter mediaSelectionGroup: An AVMediaSelectionGroup obtained from the receiver's asset for which the currently effective media presentation settings are desired. - Returns: A dictionary with AVMediaPresentationSelectors as keys and AVMediaPresentationSettings as values, unless the AVMediaSelectionOption currently selected in the group possesses none of the characteristics associated with the selector's settings. In that case the dictionary value will be NSNull.
+// Indicates the media presentation settings with media characteristics that are possessed by the currently selected AVMediaSelectionOption in the specified AVMediaSelectionGroup.
 //
 // EffectiveMediaPresentationSettingsForMediaSelectionGroup calls the underlying EffectiveMediaPresentationSettingsForMediaSelectionGroup.
 func (x *PlayerItem) EffectiveMediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSDictionary[*raw.AVMediaPresentationSelector, objc.ID] {
@@ -868,7 +870,7 @@ func (x *PlayerItem) SetPreferredCustomMediaSelectionSchemes(preferredCustomMedi
 	x.inner.SetPreferredCustomMediaSelectionSchemes(preferredCustomMediaSelectionSchemes)
 }
 
-// Returns an object that represents a snapshot of the network access log. Can be nil. An AVPlayerItemAccessLog provides methods to retrieve the network access log in a format suitable for serialization. If nil is returned then there is no logging information currently available for this AVPlayerItem. An AVPlayerItemNewAccessLogEntryNotification will be posted when new logging information becomes available. However, accessLog might already return a non-nil value even before the first notification is posted. In certain situations, this method may temporarily block the calling thread during the ongoing log collection process. It is strongly recommended that the caller take appropriate measures to prevent blocking essential services such as the user interface, for example, by avoiding calling this method in the main thread. - Returns: An autoreleased AVPlayerItemAccessLog instance.
+// Returns an object that represents a snapshot of the network access log.
 //
 // AccessLog calls the underlying AccessLog.
 func (x *PlayerItem) AccessLog() *PlayerItemAccessLog {
@@ -879,7 +881,7 @@ func (x *PlayerItem) AccessLog() *PlayerItemAccessLog {
 	return &PlayerItemAccessLog{inner: _r}
 }
 
-// Returns an object that represents a snapshot of the error log. Can be nil. An AVPlayerItemErrorLog provides methods to retrieve the error log in a format suitable for serialization. If nil is returned then there is no logging information currently available for this AVPlayerItem. In certain situations, this method may temporarily block the calling thread during the ongoing log collection process. It is strongly recommended that the caller take appropriate measures to prevent blocking essential services such as the user interface, for example, by avoiding calling this method in the main thread. - Returns: An autoreleased AVPlayerItemErrorLog instance.
+// Returns an object that represents a snapshot of the error log.
 //
 // ErrorLog calls the underlying ErrorLog.
 func (x *PlayerItem) ErrorLog() *PlayerItemErrorLog {
@@ -890,14 +892,14 @@ func (x *PlayerItem) ErrorLog() *PlayerItemErrorLog {
 	return &PlayerItemErrorLog{inner: _r}
 }
 
-// Adds the specified instance of AVPlayerItemOutput to the receiver's collection of outputs. The class of AVPlayerItemOutput provided dictates the data structure that decoded samples are vended in. When an AVPlayerItemOutput is associated with an AVPlayerItem, samples are provided for a media type in accordance with the rules for mixing, composition, or exclusion that the AVPlayer honors among multiple enabled tracks of that media type for its own rendering purposes. For example, video media will be composed according to the instructions provided via AVPlayerItem.videoComposition, if present. Audio media will be mixed according to the parameters provided via AVPlayerItem.audioMix, if present. - Parameter output: An instance of AVPlayerItemOutput
+// Adds the specified player item output object to the receiver.
 //
 // AddOutput calls the underlying AddOutput.
 func (x *PlayerItem) AddOutput(output *raw.AVPlayerItemOutput) {
 	x.inner.AddOutput(output)
 }
 
-// Removes the specified instance of AVPlayerItemOutput from the receiver's collection of outputs. - Parameter output: An instance of AVPlayerItemOutput
+// Removes the specified player item output object from the receiver.
 //
 // RemoveOutput calls the underlying RemoveOutput.
 func (x *PlayerItem) RemoveOutput(output *raw.AVPlayerItemOutput) {
@@ -915,14 +917,14 @@ func (x *PlayerItem) Outputs() []*PlayerItemOutput {
 	})
 }
 
-// Adds the specified instance of AVPlayerItemMediaDataCollector to the receiver's collection of mediaDataCollectors. This method may incur additional I/O to collect the requested media data asynchronously. - Parameter collector: An instance of AVPlayerItemMediaDataCollector
+// Adds the specified media data collector to the player item’s collection of media collectors.
 //
 // AddMediaDataCollector calls the underlying AddMediaDataCollector.
 func (x *PlayerItem) AddMediaDataCollector(collector *raw.AVPlayerItemMediaDataCollector) {
 	x.inner.AddMediaDataCollector(collector)
 }
 
-// Removes the specified instance of AVPlayerItemMediaDataCollector from the receiver's collection of mediaDataCollectors. - Parameter collector: An instance of AVPlayerItemMediaDataCollector
+// Removes the specified media data collector from the player item’s collection of media collectors.
 //
 // RemoveMediaDataCollector calls the underlying RemoveMediaDataCollector.
 func (x *PlayerItem) RemoveMediaDataCollector(collector *raw.AVPlayerItemMediaDataCollector) {
@@ -972,7 +974,7 @@ func (x *PlayerItem) SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGrou
 	return &MediaSelectionOption{inner: _r}
 }
 
-// @method		requestContentAuthorizationAsynchronouslyWithTimeoutInterval:completionHandler: @abstract		Causes appropriate action to be taken to allow the user to authorize the content for playback. @discussion Calling this method will present the user with the opportunity to authorize the content (e.g. by launching iTunes and prompting the user to enter their Apple ID and password). When the user has taken action (or the timeout has elapsted), the completion handler will be invoked.  The status of the authorization attempt can be determined by checking the value of the contentAuthorizationRequestStatus property.  Note that even if the status indicates a completed authorization, the content may still not be authorized (e.g. if the user authorizes an Apple ID other than that associated with the content).  The contentAuthorizedForPlayback property should be re-checked to verify whether the content has actually been authorized before continuing.  It is not necessary to call this method if the value of contentAuthorizedForPlayback is already true. @param			timeoutInterval	The maximum amount of time to wait for the user to authorize the content in seconds before calling the handler block with a timeout result. @param			handler			Block to be called upon completion.
+// Presents the user the opportunity to authorize the content for playback.
 //
 // RequestContentAuthorizationAsynchronouslyWithTimeoutInterval blocks until the operation completes or ctx is cancelled.
 func (x *PlayerItem) RequestContentAuthorizationAsynchronouslyWithTimeoutInterval(ctx context.Context, timeoutInterval float64) error {
@@ -988,7 +990,7 @@ func (x *PlayerItem) RequestContentAuthorizationAsynchronouslyWithTimeoutInterva
 	}
 }
 
-// @method		cancelContentAuthorizationRequest @abstract		Causes the currently outstanding content authorization request to be cancelled. @discussion Calling this method while a content authorization request is pending will cause that request to be cancelled and its completion handler to be invoked with a status of AVContentAuthorizationCancelled.  This call does not block.
+// Cancels the currently outstanding content authorization request.
 //
 // CancelContentAuthorizationRequest calls the underlying CancelContentAuthorizationRequest.
 func (x *PlayerItem) CancelContentAuthorizationRequest() {

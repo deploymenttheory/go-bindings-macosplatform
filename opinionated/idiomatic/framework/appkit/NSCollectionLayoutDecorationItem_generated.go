@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object used to add a background to a section of a collection view.
+//
 // CollectionLayoutDecorationItem wraps [raw.NSCollectionLayoutDecorationItem] with a fluent Go API.
 type CollectionLayoutDecorationItem struct {
 	inner *raw.NSCollectionLayoutDecorationItem
@@ -38,18 +40,24 @@ func NewCollectionLayoutDecorationItem() *CollectionLayoutDecorationItem {
 	return &CollectionLayoutDecorationItem{inner: raw.NSCollectionLayoutDecorationItemFromID(_id)}
 }
 
+// The vertical stacking order of the decoration item in relation to other items in the section.
+//
 // WithZIndex sets the zIndex property and returns the receiver for chaining.
 func (x *CollectionLayoutDecorationItem) WithZIndex(zIndex int) *CollectionLayoutDecorationItem {
 	x.inner.SetZIndex(zIndex)
 	return x
 }
 
+// The amount of space added around the content of the item to adjust its final size after its position is computed.
+//
 // WithContentInsets sets the contentInsets property and returns the receiver for chaining.
 func (x *CollectionLayoutDecorationItem) WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutDecorationItem {
 	x.inner.NSCollectionLayoutItem.SetContentInsets(contentInsets)
 	return x
 }
 
+// The amount of space added around the boundaries of the item between other items and this item’s container.
+//
 // WithEdgeSpacing sets the edgeSpacing property and returns the receiver for chaining.
 func (x *CollectionLayoutDecorationItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutDecorationItem {
 	x.inner.NSCollectionLayoutItem.SetEdgeSpacing(edgeSpacing.Unwrap())

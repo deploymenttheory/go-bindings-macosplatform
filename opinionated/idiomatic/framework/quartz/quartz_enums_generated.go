@@ -8,6 +8,7 @@ import (
 	"fmt"
 )
 
+// The possible states for the browser cell. These values are used by the cellState method.
 type IKImageBrowserCellState int64
 
 const (
@@ -29,6 +30,7 @@ func (e IKImageBrowserCellState) String() string {
 	}
 }
 
+// Execution modes for custom patches.
 type QCPlugInExecutionMode int64
 
 const (
@@ -50,6 +52,7 @@ func (e QCPlugInExecutionMode) String() string {
 	}
 }
 
+// Time modes for custom patches.
 type QCPlugInTimeMode int64
 
 const (

@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that wraps video frames to send to the processor, as source, reference, or output frames.
+//
 // FrameProcessorFrame wraps [raw.VTFrameProcessorFrame] with a fluent Go API.
 type FrameProcessorFrame struct {
 	inner *raw.VTFrameProcessorFrame
@@ -31,7 +33,7 @@ func FrameProcessorFrameFromID(id objc.ID) *FrameProcessorFrame {
 	return &FrameProcessorFrame{inner: raw.VTFrameProcessorFrameFromID(id)}
 }
 
-// Creates a new instance of frame with a pixel buffer and presentation timestamp. The `CVPixelBuffer` is retained in this object. Returns `nil` if the “CVPixelBuffer“ you provided is NULL or the “CVPixelBuffer“ is not backed by “IOSurface“. - Parameters: - buffer: The “CVPixelBuffer“ that this frame wraps; it must not be `nil` and must be “IOSurface“ backed. - presentationTimeStamp: The presentation timestamp of the buffer.
+// Creates a frame object with a pixel buffer and presentation time.
 //
 // NewFrameProcessorFrameWithBufferPresentationTimeStamp creates a new [FrameProcessorFrame].
 func NewFrameProcessorFrameWithBufferPresentationTimeStamp(buffer unsafe.Pointer, presentationTimeStamp coremedia.CMTime) *FrameProcessorFrame {

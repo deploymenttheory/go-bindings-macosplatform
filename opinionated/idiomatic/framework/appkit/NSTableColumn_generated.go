@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The display characteristics and identifier for a column in a table view.
+//
 // TableColumn wraps [raw.NSTableColumn] with a fluent Go API.
 type TableColumn struct {
 	inner *raw.NSTableColumn
@@ -31,6 +33,8 @@ func TableColumnFromID(id objc.ID) *TableColumn {
 	return &TableColumn{inner: raw.NSTableColumnFromID(id)}
 }
 
+// Initializes a newly created table column with a string identifier.
+//
 // NewTableColumnWithIdentifier creates a new [TableColumn].
 func NewTableColumnWithIdentifier(identifier *foundation.NSString) *TableColumn {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTableColumn")), objc.RegisterName("alloc"))
@@ -45,84 +49,112 @@ func NewTableColumnWithCoder(coder *foundation.NSCoder) *TableColumn {
 	return &TableColumn{inner: raw.NSTableColumnFromID(_id)}
 }
 
+// The identifier string for the table column.
+//
 // WithIdentifier sets the identifier property and returns the receiver for chaining.
 func (x *TableColumn) WithIdentifier(identifier *foundation.NSString) *TableColumn {
 	x.inner.SetIdentifier(identifier)
 	return x
 }
 
+// The table view that contains the table column.
+//
 // WithTableView sets the tableView property and returns the receiver for chaining.
 func (x *TableColumn) WithTableView(tableView TableViewProvider) *TableColumn {
 	x.inner.SetTableView(tableView.asTableView())
 	return x
 }
 
+// The table column’s width, in points.
+//
 // WithWidth sets the width property and returns the receiver for chaining.
 func (x *TableColumn) WithWidth(width float64) *TableColumn {
 	x.inner.SetWidth(width)
 	return x
 }
 
+// The table column’s minimum width, in points.
+//
 // WithMinWidth sets the minWidth property and returns the receiver for chaining.
 func (x *TableColumn) WithMinWidth(minWidth float64) *TableColumn {
 	x.inner.SetMinWidth(minWidth)
 	return x
 }
 
+// The table column’s maximum width, in points.
+//
 // WithMaxWidth sets the maxWidth property and returns the receiver for chaining.
 func (x *TableColumn) WithMaxWidth(maxWidth float64) *TableColumn {
 	x.inner.SetMaxWidth(maxWidth)
 	return x
 }
 
+// The title of the table column’s header.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *TableColumn) WithTitle(title string) *TableColumn {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The cell used to draw the table column’s header.
+//
 // WithHeaderCell sets the headerCell property and returns the receiver for chaining.
 func (x *TableColumn) WithHeaderCell(headerCell *TableHeaderCell) *TableColumn {
 	x.inner.SetHeaderCell(headerCell.Unwrap())
 	return x
 }
 
+// A Boolean that indicates whether a cell-based table’s column cells are user editable.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *TableColumn) WithEditable(editable bool) *TableColumn {
 	x.inner.SetEditable(editable)
 	return x
 }
 
+// The table column’s sort descriptor prototype.
+//
 // WithSortDescriptorPrototype sets the sortDescriptorPrototype property and returns the receiver for chaining.
 func (x *TableColumn) WithSortDescriptorPrototype(sortDescriptorPrototype *foundation.NSSortDescriptor) *TableColumn {
 	x.inner.SetSortDescriptorPrototype(sortDescriptorPrototype)
 	return x
 }
 
+// The table column’s resizing mask.
+//
 // WithResizingMask sets the resizingMask property and returns the receiver for chaining.
 func (x *TableColumn) WithResizingMask(resizingMask NSTableColumnResizingOptions) *TableColumn {
 	x.inner.SetResizingMask(raw.NSTableColumnResizingOptions(resizingMask))
 	return x
 }
 
+// The string that’s displayed in a help tag over the table column header.
+//
 // WithHeaderToolTip sets the headerToolTip property and returns the receiver for chaining.
 func (x *TableColumn) WithHeaderToolTip(headerToolTip string) *TableColumn {
 	x.inner.SetHeaderToolTip(foundation.NSStringStringWithUTF8String(headerToolTip))
 	return x
 }
 
+// A Boolean that indicates whether the table column is hidden.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *TableColumn) WithHidden(hidden bool) *TableColumn {
 	x.inner.SetHidden(hidden)
 	return x
 }
 
+// The cell prototype used by the table column to draw individual cells.
+//
 // WithDataCell sets the dataCell property and returns the receiver for chaining.
 func (x *TableColumn) WithDataCell(dataCell objc.ID) *TableColumn {
 	x.inner.SetDataCell(dataCell)
 	return x
 }
 
+// Resizes the table column to fit the width of its header cell.
+//
 // SizeToFit calls the underlying SizeToFit.
 func (x *TableColumn) SizeToFit() {
 	x.inner.SizeToFit()
@@ -268,16 +300,22 @@ func (x *TableColumn) SetHidden(hidden bool) {
 	x.inner.SetHidden(hidden)
 }
 
+// Sets whether the user can resize the receiver in its NSTableView.
+//
 // SetResizable calls the underlying SetResizable.
 func (x *TableColumn) SetResizable(flag bool) {
 	x.inner.SetResizable(flag)
 }
 
+// Returns whether the column is resizable.
+//
 // IsResizable calls the underlying IsResizable.
 func (x *TableColumn) IsResizable() bool {
 	return x.inner.IsResizable()
 }
 
+// Returns the cell object used to display values in the specified row of the table column.
+//
 // DataCellForRow calls the underlying DataCellForRow.
 func (x *TableColumn) DataCellForRow(row int) objc.ID {
 	return x.inner.DataCellForRow(row)

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The minimum rasterization rates to apply to sections of a layer in the render target.
+//
 // RasterizationRateLayerDescriptor wraps [raw.MTLRasterizationRateLayerDescriptor] with a fluent Go API.
 type RasterizationRateLayerDescriptor struct {
 	inner *raw.MTLRasterizationRateLayerDescriptor
@@ -31,7 +33,7 @@ func RasterizationRateLayerDescriptorFromID(id objc.ID) *RasterizationRateLayerD
 	return &RasterizationRateLayerDescriptor{inner: raw.MTLRasterizationRateLayerDescriptorFromID(id)}
 }
 
-// @method initWithSampleCount: @abstract Initialize a descriptor for a layer with the given number of quality samples on the horizontal and vertical axis. @param sampleCount The width and height components are the number of samples on the horizontal and vertical axis respectively. The depth component is ignored. @discussion All values are initialized to zero.
+// Initializes the layer map with an empty grid.
 //
 // NewRasterizationRateLayerDescriptorWithSampleCount creates a new [RasterizationRateLayerDescriptor].
 func NewRasterizationRateLayerDescriptorWithSampleCount(sampleCount raw.MTLSize) *RasterizationRateLayerDescriptor {
@@ -40,7 +42,7 @@ func NewRasterizationRateLayerDescriptorWithSampleCount(sampleCount raw.MTLSize)
 	return &RasterizationRateLayerDescriptor{inner: raw.MTLRasterizationRateLayerDescriptorFromID(_id)}
 }
 
-// @method initWithSampleCount:horizontal:vertical: @abstract Initialize a descriptor for a layer with the given number of quality samples on the horizontal and vertical axis. @param sampleCount The width and height components are the number of samples on the horizontal and vertical axis respectively. The depth component is ignored. @param horizontal The initial sample values on the horizontal axis. Must point to an array of sampleCount.width elements, of which the values will be copied into the MTLRasterizationRateLayerDescriptor. @param vertical The initial sample values on the vertical axis. Must point to an array of sampleCount.height elements, of which the values will be copied into the MTLRasterizationRateLayerDescriptor. @discussion Use initWithSampleCount: to initialize with zeroes instead.
+// Initializes the layer map with the provided grid size and rasterization rates.
 //
 // NewRasterizationRateLayerDescriptorWithSampleCountHorizontalVertical creates a new [RasterizationRateLayerDescriptor].
 func NewRasterizationRateLayerDescriptorWithSampleCountHorizontalVertical(sampleCount raw.MTLSize, horizontal *float32, vertical *float32) *RasterizationRateLayerDescriptor {
@@ -49,7 +51,7 @@ func NewRasterizationRateLayerDescriptorWithSampleCountHorizontalVertical(sample
 	return &RasterizationRateLayerDescriptor{inner: raw.MTLRasterizationRateLayerDescriptorFromID(_id)}
 }
 
-// @property sampleCount @return The number of quality samples that this descriptor uses to describe its current function, for the horizontal and vertical axis. The depth component of the returned MTLSize is always 0.
+// The number of rows and columns in the layer map.
 //
 // WithSampleCount sets the sampleCount property and returns the receiver for chaining.
 func (x *RasterizationRateLayerDescriptor) WithSampleCount(sampleCount raw.MTLSize) *RasterizationRateLayerDescriptor {

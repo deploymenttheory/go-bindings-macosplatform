@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing counts for the different types of foreground app exits.
+//
 // ForegroundExitData wraps [raw.MXForegroundExitData] with a fluent Go API.
 type ForegroundExitData struct {
 	inner *raw.MXForegroundExitData

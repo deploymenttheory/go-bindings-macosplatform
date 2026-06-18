@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An event requesting a change in the feedback setting.
+//
 // FeedbackCommandEvent wraps [raw.MPFeedbackCommandEvent] with a fluent Go API.
 type FeedbackCommandEvent struct {
 	inner *raw.MPFeedbackCommandEvent

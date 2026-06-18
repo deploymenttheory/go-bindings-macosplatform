@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the properties of a pass that contains a balance used for specific transactions, such as a transit pass or loyalty card.
+//
 // StoredValuePassProperties wraps [raw.PKStoredValuePassProperties] with a fluent Go API.
 type StoredValuePassProperties struct {
 	inner *raw.PKStoredValuePassProperties

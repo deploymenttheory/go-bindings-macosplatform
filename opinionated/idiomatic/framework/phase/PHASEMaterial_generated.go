@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Surface characteristics that determine the acoustic properties of an object.
+//
 // Material wraps [raw.PHASEMaterial] with a fluent Go API.
 type Material struct {
 	inner *raw.PHASEMaterial
@@ -29,7 +31,7 @@ func MaterialFromID(id objc.ID) *Material {
 	return &Material{inner: raw.PHASEMaterialFromID(id)}
 }
 
-// @method initWithEngine:preset @abstract Initialize a new material from a preset.
+// Creates a material with the given preset.
 //
 // NewMaterialWithEnginePreset creates a new [Material].
 func NewMaterialWithEnginePreset(engine *raw.PHASEEngine, preset PHASEMaterialPreset) *Material {

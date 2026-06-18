@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration that customizes the behavior for a Metal memory heap.
+//
 // HeapDescriptor wraps [raw.MTLHeapDescriptor] with a fluent Go API.
 type HeapDescriptor struct {
 	inner *raw.MTLHeapDescriptor
@@ -35,7 +37,7 @@ func NewHeapDescriptor() *HeapDescriptor {
 	return &HeapDescriptor{inner: raw.MTLHeapDescriptorFromID(_id)}
 }
 
-// @property size @abstract Requested size of the heap's backing memory. @discussion The size may be rounded up to GPU page granularity.
+// The total amount of memory, in bytes, for the heaps you create with this descriptor.
 //
 // WithSize sets the size property and returns the receiver for chaining.
 func (x *HeapDescriptor) WithSize(size uint) *HeapDescriptor {
@@ -43,7 +45,7 @@ func (x *HeapDescriptor) WithSize(size uint) *HeapDescriptor {
 	return x
 }
 
-// @property storageMode @abstract Storage mode for the heap. Default is MTLStorageModePrivate. @discussion All resources created from this heap share the same storage mode. MTLStorageModeManaged and MTLStorageModeMemoryless are disallowed.
+// The storage mode for the heaps you create with this descriptor.
 //
 // WithStorageMode sets the storageMode property and returns the receiver for chaining.
 func (x *HeapDescriptor) WithStorageMode(storageMode MTLStorageMode) *HeapDescriptor {
@@ -51,7 +53,7 @@ func (x *HeapDescriptor) WithStorageMode(storageMode MTLStorageMode) *HeapDescri
 	return x
 }
 
-// @property cpuCacheMode @abstract CPU cache mode for the heap. Default is MTLCPUCacheModeDefaultCache. @discussion All resources created from this heap share the same cache mode. CPU cache mode is ignored for MTLStorageModePrivate.
+// The CPU cache behavior for any resources you allocate from the heaps you create with this descriptor.
 //
 // WithCpuCacheMode sets the cpuCacheMode property and returns the receiver for chaining.
 func (x *HeapDescriptor) WithCpuCacheMode(cpuCacheMode MTLCPUCacheMode) *HeapDescriptor {
@@ -59,7 +61,7 @@ func (x *HeapDescriptor) WithCpuCacheMode(cpuCacheMode MTLCPUCacheMode) *HeapDes
 	return x
 }
 
-// @property sparsePageSize @abstract The sparse page size to use for resources created from the heap.
+// The page size for any resources you allocate from the heaps you create with this descriptor.
 //
 // WithSparsePageSize sets the sparsePageSize property and returns the receiver for chaining.
 func (x *HeapDescriptor) WithSparsePageSize(sparsePageSize MTLSparsePageSize) *HeapDescriptor {
@@ -67,7 +69,7 @@ func (x *HeapDescriptor) WithSparsePageSize(sparsePageSize MTLSparsePageSize) *H
 	return x
 }
 
-// @property hazardTrackingMode @abstract Set hazard tracking mode for the heap. The default value is MTLHazardTrackingModeDefault. @discussion For heaps, MTLHazardTrackingModeDefault is treated as MTLHazardTrackingModeUntracked. Setting hazardTrackingMode to MTLHazardTrackingModeTracked causes hazard tracking to be enabled heap. When a resource on a hazard tracked heap is modified, reads and writes from all resources suballocated on that heap will be delayed until the modification is complete. Similarly, modifying heap resources will be delayed until all in-flight reads and writes from all resources suballocated on that heap have completed. For optimal performance, perform hazard tracking manually through MTLFence or MTLEvent instead. All resources created from this heap shared the same hazard tracking mode.
+// The hazard tracking behavior for any resources you allocate from the heaps you create with this descriptor.
 //
 // WithHazardTrackingMode sets the hazardTrackingMode property and returns the receiver for chaining.
 func (x *HeapDescriptor) WithHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode) *HeapDescriptor {
@@ -75,7 +77,7 @@ func (x *HeapDescriptor) WithHazardTrackingMode(hazardTrackingMode MTLHazardTrac
 	return x
 }
 
-// @property resourceOptions @abstract A packed tuple of the storageMode, cpuCacheMode and hazardTrackingMode properties. @discussion Modifications to this property are reflected in the other properties and vice versa.
+// The combined behavior for any resources you allocate from the heaps you create with this descriptor.
 //
 // WithResourceOptions sets the resourceOptions property and returns the receiver for chaining.
 func (x *HeapDescriptor) WithResourceOptions(resourceOptions MTLResourceOptions) *HeapDescriptor {
@@ -83,7 +85,7 @@ func (x *HeapDescriptor) WithResourceOptions(resourceOptions MTLResourceOptions)
 	return x
 }
 
-// @property type @abstract The type of the heap. The default value is MTLHeapTypeAutomatic. @discussion This constrains the resource creation functions that are available.
+// The memory placement strategy for any resources you allocate from the heaps you create with this descriptor.
 //
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *HeapDescriptor) WithType(type_ MTLHeapType) *HeapDescriptor {
@@ -91,7 +93,7 @@ func (x *HeapDescriptor) WithType(type_ MTLHeapType) *HeapDescriptor {
 	return x
 }
 
-// Specifies the largest sparse page size that the Metal heap supports. This parameter only affects the heap if you set the “type“ property of this descriptor to “MTLHeapType/MTLHeapTypePlacement“. The value you assign to this property determines the compatibility of the Metal heap with with placement sparse resources, because placement sparse resources require that their sparse page size be less than or equal to the placement sparse page of the Metal heap that this property controls.
+// Specifies the largest sparse page size that the Metal heap supports.
 //
 // WithMaxCompatiblePlacementSparsePageSize sets the maxCompatiblePlacementSparsePageSize property and returns the receiver for chaining.
 func (x *HeapDescriptor) WithMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize MTLSparsePageSize) *HeapDescriptor {

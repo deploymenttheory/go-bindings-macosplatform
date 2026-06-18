@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that contains the architectural details of a GPU device.
+//
 // Architecture wraps [raw.MTLArchitecture] with a fluent Go API.
 type Architecture struct {
 	inner *raw.MTLArchitecture

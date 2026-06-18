@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract base class for storing reference signatures and their associated metadata.
+//
 // Catalog wraps [raw.SHCatalog] with a fluent Go API.
 type Catalog struct {
 	inner *raw.SHCatalog

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of an argument within an argument buffer.
+//
 // ArgumentDescriptor wraps [raw.MTLArgumentDescriptor] with a fluent Go API.
 type ArgumentDescriptor struct {
 	inner *raw.MTLArgumentDescriptor
@@ -35,7 +37,7 @@ func NewArgumentDescriptor() *ArgumentDescriptor {
 	return &ArgumentDescriptor{inner: raw.MTLArgumentDescriptorFromID(_id)}
 }
 
-// @property dataType @abstract For constants, the data type. Otherwise, MTLDataTypeTexture, MTLDataTypeSampler, or MTLDataTypePointer.
+// The data type of the argument.
 //
 // WithDataType sets the dataType property and returns the receiver for chaining.
 func (x *ArgumentDescriptor) WithDataType(dataType MTLDataType) *ArgumentDescriptor {
@@ -43,7 +45,7 @@ func (x *ArgumentDescriptor) WithDataType(dataType MTLDataType) *ArgumentDescrip
 	return x
 }
 
-// @property index @abstract The binding point index of the argument
+// The index ID of the argument.
 //
 // WithIndex sets the index property and returns the receiver for chaining.
 func (x *ArgumentDescriptor) WithIndex(index uint) *ArgumentDescriptor {
@@ -51,7 +53,7 @@ func (x *ArgumentDescriptor) WithIndex(index uint) *ArgumentDescriptor {
 	return x
 }
 
-// @property arrayLength @abstract The length of an array of constants, textures, or samplers, or 0 for non-array arguments
+// The length of an array argument.
 //
 // WithArrayLength sets the arrayLength property and returns the receiver for chaining.
 func (x *ArgumentDescriptor) WithArrayLength(arrayLength uint) *ArgumentDescriptor {
@@ -59,7 +61,7 @@ func (x *ArgumentDescriptor) WithArrayLength(arrayLength uint) *ArgumentDescript
 	return x
 }
 
-// @property access @abstract Access flags for the argument
+// The access permissions of the argument.
 //
 // WithAccess sets the access property and returns the receiver for chaining.
 func (x *ArgumentDescriptor) WithAccess(access MTLBindingAccess) *ArgumentDescriptor {
@@ -67,7 +69,7 @@ func (x *ArgumentDescriptor) WithAccess(access MTLBindingAccess) *ArgumentDescri
 	return x
 }
 
-// @property textureType @abstract For texture arguments, the texture type
+// The texture type of a texture argument.
 //
 // WithTextureType sets the textureType property and returns the receiver for chaining.
 func (x *ArgumentDescriptor) WithTextureType(textureType MTLTextureType) *ArgumentDescriptor {
@@ -75,7 +77,7 @@ func (x *ArgumentDescriptor) WithTextureType(textureType MTLTextureType) *Argume
 	return x
 }
 
-// @property constantBlockAlignment @abstract if set forces the constant block to be aligned to the given alignment @discussion Should only be set on the first constant of the block and is only valid if a corresponding explicit "alignas" is applied to the constant in the metal shader language.
+// The alignment of the constant block.
 //
 // WithConstantBlockAlignment sets the constantBlockAlignment property and returns the receiver for chaining.
 func (x *ArgumentDescriptor) WithConstantBlockAlignment(constantBlockAlignment uint) *ArgumentDescriptor {

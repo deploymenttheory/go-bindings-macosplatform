@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that specifies the types of buffers and other attributes of the OpenGL context.
+//
 // OpenGLPixelFormat wraps [raw.NSOpenGLPixelFormat] with a fluent Go API.
 type OpenGLPixelFormat struct {
 	inner *raw.NSOpenGLPixelFormat
@@ -31,6 +33,8 @@ func OpenGLPixelFormatFromID(id objc.ID) *OpenGLPixelFormat {
 	return &OpenGLPixelFormat{inner: raw.NSOpenGLPixelFormatFromID(id)}
 }
 
+// Returns an OpenGL pixel format object initialized with using an existing CGL pixel format object.
+//
 // NewOpenGLPixelFormatWithCGLPixelFormatObj creates a new [OpenGLPixelFormat].
 func NewOpenGLPixelFormatWithCGLPixelFormatObj(format unsafe.Pointer) *OpenGLPixelFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOpenGLPixelFormat")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewOpenGLPixelFormatWithCGLPixelFormatObj(format unsafe.Pointer) *OpenGLPix
 	return &OpenGLPixelFormat{inner: raw.NSOpenGLPixelFormatFromID(_id)}
 }
 
+// Returns an OpenGL pixel format object initialized with specified pixel format attributes.
+//
 // NewOpenGLPixelFormatWithAttributes creates a new [OpenGLPixelFormat].
 func NewOpenGLPixelFormatWithAttributes(attribs *uint32) *OpenGLPixelFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOpenGLPixelFormat")), objc.RegisterName("alloc"))
@@ -45,6 +51,8 @@ func NewOpenGLPixelFormatWithAttributes(attribs *uint32) *OpenGLPixelFormat {
 	return &OpenGLPixelFormat{inner: raw.NSOpenGLPixelFormatFromID(_id)}
 }
 
+// Returns an OpenGL pixel format object initialized with specified pixel format attribute data.
+//
 // NewOpenGLPixelFormatWithData creates a new [OpenGLPixelFormat].
 func NewOpenGLPixelFormatWithData(attribs *foundation.NSData) *OpenGLPixelFormat {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOpenGLPixelFormat")), objc.RegisterName("alloc"))
@@ -52,16 +60,22 @@ func NewOpenGLPixelFormatWithData(attribs *foundation.NSData) *OpenGLPixelFormat
 	return &OpenGLPixelFormat{inner: raw.NSOpenGLPixelFormatFromID(_id)}
 }
 
+// The attribute data for the pixel format object.
+//
 // Attributes calls the underlying Attributes.
 func (x *OpenGLPixelFormat) Attributes() *foundation.NSData {
 	return x.inner.Attributes()
 }
 
+// Sets the attribute data for the pixel format object.
+//
 // SetAttributes calls the underlying SetAttributes.
 func (x *OpenGLPixelFormat) SetAttributes(attribs *foundation.NSData) {
 	x.inner.SetAttributes(attribs)
 }
 
+// Gets the value for the specified pixel format attribute.
+//
 // GetValuesForAttributeForVirtualScreen calls the underlying GetValuesForAttributeForVirtualScreen.
 func (x *OpenGLPixelFormat) GetValuesForAttributeForVirtualScreen(vals *int32, attrib uint32, screen int32) {
 	x.inner.GetValuesForAttributeForVirtualScreen(vals, attrib, screen)

@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// An object that represents a calendar date or date range that the data detection system matches. The DataDetection framework returns a calendar event match in a `DDMatchCalendarEvent` object, which has only a beginning date, only an end date, or both a beginning date and an end date.
+// An object that represents a calendar date or date range that the data detection system matches.
 //
 // MatchCalendarEvent wraps [raw.DDMatchCalendarEvent] with a fluent Go API.
 type MatchCalendarEvent struct {

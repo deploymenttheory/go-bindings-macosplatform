@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An immutable representation of the postal address for a contact.
+//
 // PostalAddress wraps [raw.CNPostalAddress] with a fluent Go API.
 type PostalAddress struct {
 	inner *raw.CNPostalAddress

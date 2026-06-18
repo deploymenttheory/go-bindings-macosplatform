@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents zero or more captions that intersect in time.
+//
 // CaptionGroup wraps [raw.AVCaptionGroup] with a fluent Go API.
 type CaptionGroup struct {
 	inner *raw.AVCaptionGroup
@@ -32,7 +34,7 @@ func CaptionGroupFromID(id objc.ID) *CaptionGroup {
 	return &CaptionGroup{inner: raw.AVCaptionGroupFromID(id)}
 }
 
-// @method initWithCaptions:timeRange: @abstract Initializes a caption group with the given set of captions and the time range. @discussion Every caption in the array must be equal or sub range of the time range, otherwise an exception is raised. @param captions The captions that will be included in the group. The array is coped. @result A newly-initialized caption group.
+// Creates a caption group with captions and a time range.
 //
 // NewCaptionGroupWithCaptionsTimeRange creates a new [CaptionGroup].
 func NewCaptionGroupWithCaptionsTimeRange(captions *foundation.NSArray[*raw.AVCaption], timeRange coremedia.CMTimeRange) *CaptionGroup {
@@ -41,7 +43,7 @@ func NewCaptionGroupWithCaptionsTimeRange(captions *foundation.NSArray[*raw.AVCa
 	return &CaptionGroup{inner: raw.AVCaptionGroupFromID(_id)}
 }
 
-// @method initWithTimeRange: @abstract Initializes an empty caption group with the given time range. @discussion This is a convenient initializer to create an empty caption group time range. @param timeRange The time range for which there are no captions. @result A newly-initialized empty caption group.
+// Creates a caption group with a time range.
 //
 // NewCaptionGroupWithTimeRange creates a new [CaptionGroup].
 func NewCaptionGroupWithTimeRange(timeRange coremedia.CMTimeRange) *CaptionGroup {

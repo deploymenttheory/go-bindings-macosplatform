@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that consists of all the levers to serialize an executable.
+//
 // GraphExecutableSerializationDescriptor wraps [raw.MPSGraphExecutableSerializationDescriptor] with a fluent Go API.
 type GraphExecutableSerializationDescriptor struct {
 	inner *raw.MPSGraphExecutableSerializationDescriptor
@@ -39,7 +41,7 @@ func NewGraphExecutableSerializationDescriptor() *GraphExecutableSerializationDe
 	return &GraphExecutableSerializationDescriptor{inner: raw.MPSGraphExecutableSerializationDescriptorFromID(_id)}
 }
 
-// Flag to append to an existing .mpsgraphpackage if found at provided url. If false, the exisiting .mpsgraphpackage will be overwritten.
+// Flag to append to an existing .mpsgraphpackage if found at provided url.
 //
 // WithAppend sets the append_ property and returns the receiver for chaining.
 func (x *GraphExecutableSerializationDescriptor) WithAppend(append_ bool) *GraphExecutableSerializationDescriptor {
@@ -47,7 +49,7 @@ func (x *GraphExecutableSerializationDescriptor) WithAppend(append_ bool) *Graph
 	return x
 }
 
-// The deployment platform used to serialize the executable. Defaults to the current platform.
+// The deployment platform used to serialize the executable.
 //
 // WithDeploymentPlatform sets the deploymentPlatform property and returns the receiver for chaining.
 func (x *GraphExecutableSerializationDescriptor) WithDeploymentPlatform(deploymentPlatform MPSGraphDeploymentPlatform) *GraphExecutableSerializationDescriptor {
@@ -55,7 +57,7 @@ func (x *GraphExecutableSerializationDescriptor) WithDeploymentPlatform(deployme
 	return x
 }
 
-// The minimum deployment target to serialize the executable. If not set, the package created will target the latest version of the `deploymentPlatform` set.
+// The minimum deployment target to serialize the executable.
 //
 // WithMinimumDeploymentTarget sets the minimumDeploymentTarget property and returns the receiver for chaining.
 func (x *GraphExecutableSerializationDescriptor) WithMinimumDeploymentTarget(minimumDeploymentTarget string) *GraphExecutableSerializationDescriptor {

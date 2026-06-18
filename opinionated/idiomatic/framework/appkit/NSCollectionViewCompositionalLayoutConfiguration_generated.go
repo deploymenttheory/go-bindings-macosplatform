@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that defines scroll direction, section spacing, and headers or footers for the layout.
+//
 // CollectionViewCompositionalLayoutConfiguration wraps [raw.NSCollectionViewCompositionalLayoutConfiguration] with a fluent Go API.
 type CollectionViewCompositionalLayoutConfiguration struct {
 	inner *raw.NSCollectionViewCompositionalLayoutConfiguration
@@ -40,18 +42,24 @@ func NewCollectionViewCompositionalLayoutConfiguration() *CollectionViewComposit
 	return &CollectionViewCompositionalLayoutConfiguration{inner: raw.NSCollectionViewCompositionalLayoutConfigurationFromID(_id)}
 }
 
+// The axis that the content in the collection view layout scrolls along.
+//
 // WithScrollDirection sets the scrollDirection property and returns the receiver for chaining.
 func (x *CollectionViewCompositionalLayoutConfiguration) WithScrollDirection(scrollDirection NSCollectionViewScrollDirection) *CollectionViewCompositionalLayoutConfiguration {
 	x.inner.SetScrollDirection(raw.NSCollectionViewScrollDirection(scrollDirection))
 	return x
 }
 
+// The amount of space between the sections in the layout.
+//
 // WithInterSectionSpacing sets the interSectionSpacing property and returns the receiver for chaining.
 func (x *CollectionViewCompositionalLayoutConfiguration) WithInterSectionSpacing(interSectionSpacing float64) *CollectionViewCompositionalLayoutConfiguration {
 	x.inner.SetInterSectionSpacing(interSectionSpacing)
 	return x
 }
 
+// An array of the supplementary items that are associated with the boundary edges of the entire layout, such as global headers and footers.
+//
 // WithBoundarySupplementaryItems sets the collection, converting the Go slice to an NSArray.
 func (x *CollectionViewCompositionalLayoutConfiguration) WithBoundarySupplementaryItems(items ...*raw.NSCollectionLayoutBoundarySupplementaryItem) *CollectionViewCompositionalLayoutConfiguration {
 	if len(items) == 0 {

@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a temporary suspension of coordinated playback.
+//
 // CoordinatedPlaybackSuspension wraps [raw.AVCoordinatedPlaybackSuspension] with a fluent Go API.
 type CoordinatedPlaybackSuspension struct {
 	inner *raw.AVCoordinatedPlaybackSuspension
@@ -38,14 +40,14 @@ func NewCoordinatedPlaybackSuspension() *CoordinatedPlaybackSuspension {
 	return &CoordinatedPlaybackSuspension{inner: raw.AVCoordinatedPlaybackSuspensionFromID(_id)}
 }
 
-// Ends the suspension. If this is the last suspension, the coordinator will adjust timing of its playback object to match the group. Also see endProposingNewTime: for a way to end a suspension and simultaneously proposing a new time to the group.
+// Ends a suspension.
 //
 // End calls the underlying End.
 func (x *CoordinatedPlaybackSuspension) End() {
 	x.inner.End()
 }
 
-// Ends the suspension and proposes a new time that everyone should seek to. If this is the last suspension, the coordinator will propose the new time to the group without changing the groups playback rate. If this is not the last suspension, the time will be ignored. If the time is not numeric, this will behave like a call to [suspension end].
+// Ends a suspension and proposes a new playback time to the group.
 //
 // EndProposingNewTime calls the underlying EndProposingNewTime.
 func (x *CoordinatedPlaybackSuspension) EndProposingNewTime(time_ coremedia.CMTime) {

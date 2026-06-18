@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A container for image data from a photo capture output.
+//
 // CapturePhoto wraps [raw.AVCapturePhoto] with a fluent Go API.
 type CapturePhoto struct {
 	inner *raw.AVCapturePhoto
@@ -91,14 +93,14 @@ func (x *CapturePhoto) IsConstantColorFallbackPhoto() bool {
 	return x.inner.IsConstantColorFallbackPhoto()
 }
 
-// @method fileDataRepresentation @abstract Flattens the AVCapturePhoto to an NSData using the file container format (processedFileType or rawFileType) specified in the AVCapturePhotoSettings (e.g. JFIF, HEIF, DNG, DICOM). @result An NSData containing bits in the file container's format, or nil if the flattening process fails.
+// Generates and returns a flat data representation of the photo and its attachments.
 //
 // FileDataRepresentation calls the underlying FileDataRepresentation.
 func (x *CapturePhoto) FileDataRepresentation() *foundation.NSData {
 	return x.inner.FileDataRepresentation()
 }
 
-// @method CGImageRepresentation @abstract Utility method that converts the AVCapturePhoto's primary photo to a CGImage. @result A CGImageRef, or nil if the conversion process fails. @discussion Each time you access this method, AVCapturePhoto generates a new CGImageRef. When backed by a compressed container (such as HEIC), the CGImageRepresentation is decoded lazily as needed. When backed by an uncompressed format such as BGRA, it is copied into a separate backing buffer whose lifetime is not tied to that of the AVCapturePhoto. For a 12 megapixel image, a BGRA CGImage represents ~48 megabytes per call. If you only intend to use the CGImage for on-screen rendering, use the previewCGImageRepresentation instead. Note that the physical rotation of the CGImageRef matches that of the main image. Exif orientation has not been applied. If you wish to apply rotation when working with UIImage, you can do so by querying the photo's metadata[kCGImagePropertyOrientation] value, and passing it as the orientation parameter to +[UIImage imageWithCGImage:scale:orientation:]. RAW images always return a CGImageRepresentation of nil. If you wish to make a CGImageRef from a RAW image, use CIRAWFilter in the CoreImage framework.
+// Extracts and returns the captured photo’s primary image as a Core Graphics image object.
 //
 // CGImageRepresentation calls the underlying CGImageRepresentation.
 func (x *CapturePhoto) CGImageRepresentation() unsafe.Pointer {

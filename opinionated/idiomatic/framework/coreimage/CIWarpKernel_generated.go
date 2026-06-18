@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A GPU-based image-processing routine that processes only the geometry information in an image, used to create custom Core Image filters.
+//
 // WarpKernel wraps [raw.CIWarpKernel] with a fluent Go API.
 type WarpKernel struct {
 	inner *raw.CIWarpKernel
@@ -37,6 +39,8 @@ func NewWarpKernel() *WarpKernel {
 	return &WarpKernel{inner: raw.CIWarpKernelFromID(_id)}
 }
 
+// Creates a new image using the kernel and the specified input image and arguments.
+//
 // ApplyWithExtentRoiCallbackInputImageArguments calls the underlying ApplyWithExtentRoiCallbackInputImageArguments.
 func (x *WarpKernel) ApplyWithExtentRoiCallbackInputImageArguments(extent corefoundation.CGRect, callback objc.Block, image *raw.CIImage, args *foundation.NSArray[objc.ID]) *Image {
 	_r := x.inner.ApplyWithExtentRoiCallbackInputImageArguments(extent, callback, image, args)

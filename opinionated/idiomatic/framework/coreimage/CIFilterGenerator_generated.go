@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that creates and configures chains of individual image filters.
+//
 // FilterGenerator wraps [raw.CIFilterGenerator] with a fluent Go API.
 type FilterGenerator struct {
 	inner *raw.CIFilterGenerator
@@ -30,7 +32,7 @@ func FilterGeneratorFromID(id objc.ID) *FilterGenerator {
 	return &FilterGenerator{inner: raw.CIFilterGeneratorFromID(id)}
 }
 
-// Initializes a CIFilterGenerator with the contents of the file. @result   CIFilterGenerator object. If the file could not be read it returns nil.
+// Initializes a filter generator object with the contents of a filter generator file.
 //
 // NewFilterGeneratorWithContentsOfURL creates a new [FilterGenerator].
 func NewFilterGeneratorWithContentsOfURL(aURL string) *FilterGenerator {
@@ -39,7 +41,7 @@ func NewFilterGeneratorWithContentsOfURL(aURL string) *FilterGenerator {
 	return &FilterGenerator{inner: raw.CIFilterGeneratorFromID(_id)}
 }
 
-// Retrieve or Set the class attributes that will be used to register the filter using the registerFilterName method. Make sure you set the class attributes before using the registerFilterName method. See CIFilter for a description of the classAttributes that are needed to register a filter.
+// The class attributes associated with the filter.
 //
 // WithClassAttributes sets the classAttributes property and returns the receiver for chaining.
 func (x *FilterGenerator) WithClassAttributes(classAttributes *foundation.NSDictionary[objc.ID, objc.ID]) *FilterGenerator {
@@ -47,42 +49,42 @@ func (x *FilterGenerator) WithClassAttributes(classAttributes *foundation.NSDict
 	return x
 }
 
-// Connect two objects into the filter chain. This method connects two object in the filter chain. For instance you can connect the outputImage key of a CISepiaTone filter object to the inputImage key of another CIFilter. @param   sourceObject  A CIFilter, CIImage, NSString, or NSURL describing the path to the image @param   sourceKey     For KVC access to the source object. Can be nil which means that the source object will be used directly. @param   targetObject  The object that you link the source object to. @param   targetKey     The key that you assign the source object to.
+// Adds an object to the filter chain.
 //
 // ConnectObjectWithKeyToObjectWithKey calls the underlying ConnectObjectWithKeyToObjectWithKey.
 func (x *FilterGenerator) ConnectObjectWithKeyToObjectWithKey(sourceObject objc.ID, sourceKey string, targetObject objc.ID, targetKey string) {
 	x.inner.ConnectObjectWithKeyToObjectWithKey(sourceObject, foundation.NSStringStringWithUTF8String(sourceKey), targetObject, foundation.NSStringStringWithUTF8String(targetKey))
 }
 
-// Removes the connection between two objects in the filter chain. Use this method to disconnect two objects that you connected using the connectObject:withKey:toObject:withKey: method. @param      sourceObject A CIFilter or CIImage or an NSString or an NSURL describing the path to the image @param      sourceKey For KVC access to the source object. Can be nil which means that the source object will be used directly. @param      targetObject The object that you linked the source object to. @param      targetKey The key that you assigned the source object to.
+// Removes the connection between two objects in the filter chain.
 //
 // DisconnectObjectWithKeyToObjectWithKey calls the underlying DisconnectObjectWithKeyToObjectWithKey.
 func (x *FilterGenerator) DisconnectObjectWithKeyToObjectWithKey(sourceObject objc.ID, sourceKey string, targetObject objc.ID, targetKey string) {
 	x.inner.DisconnectObjectWithKeyToObjectWithKey(sourceObject, foundation.NSStringStringWithUTF8String(sourceKey), targetObject, foundation.NSStringStringWithUTF8String(targetKey))
 }
 
-// This methods allows you to export an input or output key of an object in the filter chain to be available through the inputKeys or outputKeys API when converted into a CIFilter When you create a CIFilter from the CIFilterGenerator, you might want the client of the filter being able to set some of the paramters of the filter chain. To do so these parameters have to be exported as keys much like the inputKeys and outputKeys of all CIFilters. @param      key The key path that is to be exported from the target object (eg. inputImage) @param      targetObject The object of which the key is to be exported (eg the filter). @param      exportedKeyName The name under which you want the new key to be available. This parameter can be nil in which case the original key name will be used. This name has to be unique. If a key being exported is an inputKey of the filter it will be exported as an input key and the other way around for output keys.
+// Exports an input or output key of an object in the filter chain.
 //
 // ExportKeyFromObjectWithName calls the underlying ExportKeyFromObjectWithName.
 func (x *FilterGenerator) ExportKeyFromObjectWithName(key string, targetObject objc.ID, exportedKeyName string) {
 	x.inner.ExportKeyFromObjectWithName(foundation.NSStringStringWithUTF8String(key), targetObject, foundation.NSStringStringWithUTF8String(exportedKeyName))
 }
 
-// Removes a key that was exported before using exportKey:fromObject:withName: Use this method when you want to remove a prior exported key. It will not show up under inputKeys or outputKeys anymore. @param      exportedKeyName Name of the key that was exported.
+// Removes a key that was previously exported.
 //
 // RemoveExportedKey calls the underlying RemoveExportedKey.
 func (x *FilterGenerator) RemoveExportedKey(exportedKeyName string) {
 	x.inner.RemoveExportedKey(foundation.NSStringStringWithUTF8String(exportedKeyName))
 }
 
-// Set a new dictionary of attributes for an exported key. By default, the exported key inherits the attributes from its original key and target object. Use this method to for instance change the default value or lower the maximum allowed value.
+// Sets a dictionary of attributes for an exported key.
 //
 // SetAttributesForExportedKey calls the underlying SetAttributesForExportedKey.
 func (x *FilterGenerator) SetAttributesForExportedKey(attributes *foundation.NSDictionary[objc.ID, objc.ID], key string) {
 	x.inner.SetAttributesForExportedKey(attributes, foundation.NSStringStringWithUTF8String(key))
 }
 
-// Create a CIFilter object based on this filter chain. This method creates a CIFilter from the filter chain where the topology of the chain is immutable, meaning that changes to the filter chain will not be reflected in the filter. The filter will have the input and output keys that were exported as described above.
+// Creates a filter object based on the filter chain.
 //
 // Filter calls the underlying Filter.
 func (x *FilterGenerator) Filter() *Filter {
@@ -93,14 +95,14 @@ func (x *FilterGenerator) Filter() *Filter {
 	return &Filter{inner: _r}
 }
 
-// Register the resulting filter of the chain in the CIFilter repository. This method allows you to register the filter chain as a named filter in the filter repository. You can then create a CIFilter object from it using the filterWithName: method. Make sure you set the class attributes first - see CIFilter for a description of the classAttributes that are needed to register a filter. When registering Core Image automatically adds the kCIFilterGeneratorCategory to the filters categories. The kCIFilterGeneratorCategory is purely for identification purpose and will not be exposed in the filter browser as a seperate category. @param      name The name under which the filter will be registered. This name has to be unique.
+// Registers the name associated with a filter chain.
 //
 // RegisterFilterName calls the underlying RegisterFilterName.
 func (x *FilterGenerator) RegisterFilterName(name string) {
 	x.inner.RegisterFilterName(foundation.NSStringStringWithUTF8String(name))
 }
 
-// Write the CIFilterGenerator into a file @result     Returns true when the chain with written our succesfully
+// Archives a filter generator object to a filter generator file.
 //
 // WriteToURLAtomically calls the underlying WriteToURLAtomically.
 func (x *FilterGenerator) WriteToURLAtomically(aURL string, flag bool) bool {

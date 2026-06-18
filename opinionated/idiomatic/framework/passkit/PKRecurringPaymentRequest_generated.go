@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents a request to set up a recurring payment, typically a subscription.
+//
 // RecurringPaymentRequest wraps [raw.PKRecurringPaymentRequest] with a fluent Go API.
 type RecurringPaymentRequest struct {
 	inner *raw.PKRecurringPaymentRequest
@@ -31,6 +33,8 @@ func RecurringPaymentRequestFromID(id objc.ID) *RecurringPaymentRequest {
 	return &RecurringPaymentRequest{inner: raw.PKRecurringPaymentRequestFromID(id)}
 }
 
+// Create a recurring payment object with a description, regular billing information, and a management URL.
+//
 // NewRecurringPaymentRequestWithPaymentDescriptionRegularBillingManagementURL creates a new [RecurringPaymentRequest].
 func NewRecurringPaymentRequestWithPaymentDescriptionRegularBillingManagementURL(paymentDescription string, regularBilling *raw.PKRecurringPaymentSummaryItem, managementURL string) *RecurringPaymentRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKRecurringPaymentRequest")), objc.RegisterName("alloc"))
@@ -38,36 +42,48 @@ func NewRecurringPaymentRequestWithPaymentDescriptionRegularBillingManagementURL
 	return &RecurringPaymentRequest{inner: raw.PKRecurringPaymentRequestFromID(_id)}
 }
 
+// A description that you provide of the recurring payment and that Apple Pay displays to the user in the payment sheet.
+//
 // WithPaymentDescription sets the paymentDescription property and returns the receiver for chaining.
 func (x *RecurringPaymentRequest) WithPaymentDescription(paymentDescription string) *RecurringPaymentRequest {
 	x.inner.SetPaymentDescription(foundation.NSStringStringWithUTF8String(paymentDescription))
 	return x
 }
 
+// The regular billing cycle for the recurring payment, including start and end dates, an interval, and an interval count.
+//
 // WithRegularBilling sets the regularBilling property and returns the receiver for chaining.
 func (x *RecurringPaymentRequest) WithRegularBilling(regularBilling *RecurringPaymentSummaryItem) *RecurringPaymentRequest {
 	x.inner.SetRegularBilling(regularBilling.Unwrap())
 	return x
 }
 
+// The trial billing cycle for the recurring payment.
+//
 // WithTrialBilling sets the trialBilling property and returns the receiver for chaining.
 func (x *RecurringPaymentRequest) WithTrialBilling(trialBilling *RecurringPaymentSummaryItem) *RecurringPaymentRequest {
 	x.inner.SetTrialBilling(trialBilling.Unwrap())
 	return x
 }
 
+// A localized billing agreement that the payment sheet displays to the user before the user authorizes the payment.
+//
 // WithBillingAgreement sets the billingAgreement property and returns the receiver for chaining.
 func (x *RecurringPaymentRequest) WithBillingAgreement(billingAgreement string) *RecurringPaymentRequest {
 	x.inner.SetBillingAgreement(foundation.NSStringStringWithUTF8String(billingAgreement))
 	return x
 }
 
+// A URL to a web page where the user can update or delete the payment method for the recurring payment.
+//
 // WithManagementURL sets the managementURL property and returns the receiver for chaining.
 func (x *RecurringPaymentRequest) WithManagementURL(managementURL string) *RecurringPaymentRequest {
 	x.inner.SetManagementURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(managementURL)))
 	return x
 }
 
+// A URL you provide to receive life-cycle notifications from the Apple Pay servers about the Apple Pay merchant token for the recurring payment.
+//
 // WithTokenNotificationURL sets the tokenNotificationURL property and returns the receiver for chaining.
 func (x *RecurringPaymentRequest) WithTokenNotificationURL(tokenNotificationURL string) *RecurringPaymentRequest {
 	x.inner.SetTokenNotificationURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(tokenNotificationURL)))

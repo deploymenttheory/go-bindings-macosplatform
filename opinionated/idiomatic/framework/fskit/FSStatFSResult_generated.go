@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type used to report a volume’s statistics.
+//
 // StatFSResult wraps [raw.FSStatFSResult] with a fluent Go API.
 type StatFSResult struct {
 	inner *raw.FSStatFSResult
@@ -31,7 +33,7 @@ func StatFSResultFromID(id objc.ID) *StatFSResult {
 	return &StatFSResult{inner: raw.FSStatFSResultFromID(id)}
 }
 
-// Creates an statistics result instance, using the given file system type name. - Parameters fileSystemTypeName: A type name for the file system. The maximum allowed length is `MFSTYPENAMELEN`, including the terminating `NUL` character.
+// Creates an statistics result instance, using the given file system type name.
 //
 // NewStatFSResultWithFileSystemTypeName creates a new [StatFSResult].
 func NewStatFSResultWithFileSystemTypeName(fileSystemTypeName string) *StatFSResult {
@@ -40,7 +42,7 @@ func NewStatFSResultWithFileSystemTypeName(fileSystemTypeName string) *StatFSRes
 	return &StatFSResult{inner: raw.FSStatFSResultFromID(_id)}
 }
 
-// A property for the volume's block size, in bytes. This value defaults to `4096`. Zero isn't a valid block size.
+// A property for the volume’s block size, in bytes.
 //
 // WithBlockSize sets the blockSize property and returns the receiver for chaining.
 func (x *StatFSResult) WithBlockSize(blockSize int) *StatFSResult {
@@ -48,7 +50,7 @@ func (x *StatFSResult) WithBlockSize(blockSize int) *StatFSResult {
 	return x
 }
 
-// A property for the optimal block size with which to perform I/O. For best performance, specify an `ioSize` that's an even multiple of “blockSize“.
+// A property for the optimal block size with which to perform I/O.
 //
 // WithIoSize sets the ioSize property and returns the receiver for chaining.
 func (x *StatFSResult) WithIoSize(ioSize int) *StatFSResult {
@@ -56,7 +58,7 @@ func (x *StatFSResult) WithIoSize(ioSize int) *StatFSResult {
 	return x
 }
 
-// A property for the volume's total data block count.
+// A property for the volume’s total data block count.
 //
 // WithTotalBlocks sets the totalBlocks property and returns the receiver for chaining.
 func (x *StatFSResult) WithTotalBlocks(totalBlocks uint64) *StatFSResult {
@@ -136,7 +138,7 @@ func (x *StatFSResult) WithFreeFiles(freeFiles uint64) *StatFSResult {
 	return x
 }
 
-// A property for the file system's subtype or flavor. Match this value to the `FSPersonalities`'s `FSSubType` attribute, if it exists within the `EXAppExtensionAttributes` dictionary of the module's `Info.plist`.
+// A property for the file system’s subtype or flavor.
 //
 // WithFileSystemSubType sets the fileSystemSubType property and returns the receiver for chaining.
 func (x *StatFSResult) WithFileSystemSubType(fileSystemSubType int) *StatFSResult {

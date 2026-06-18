@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that stores color data and sometimes opacity (alpha value).
+//
 // Color wraps [raw.NSColor] with a fluent Go API.
 type Color struct {
 	inner *raw.NSColor
@@ -46,6 +48,8 @@ func NewColorWithCoder(coder *foundation.NSCoder) *Color {
 	return &Color{inner: raw.NSColorFromID(_id)}
 }
 
+// Returns a version of the color object that is compatible with the specified color type.
+//
 // ColorUsingType calls the underlying ColorUsingType.
 func (x *Color) ColorUsingType(type_ NSColorType) *Color {
 	_r := x.inner.ColorUsingType(raw.NSColorType(type_))
@@ -55,6 +59,8 @@ func (x *Color) ColorUsingType(type_ NSColorType) *Color {
 	return &Color{inner: _r}
 }
 
+// Creates a new color object representing the color of the current color object in the specified color space.
+//
 // ColorUsingColorSpace calls the underlying ColorUsingColorSpace.
 func (x *Color) ColorUsingColorSpace(space *raw.NSColorSpace) *Color {
 	_r := x.inner.ColorUsingColorSpace(space)
@@ -64,7 +70,7 @@ func (x *Color) ColorUsingColorSpace(space *raw.NSColorSpace) *Color {
 	return &Color{inner: _r}
 }
 
-// Reinterpret the color by applying a new `contentHeadroom` without changing the color components. Changing the `contentHeadroom` redefines the color relative to a different peak white, changing its behavior under tone mapping and the result of calling `standardDynamicRangeColor`. The new color will have a `contentHeadroom` >= 1.0. If called on a color with a color space that does not support extended range, or does not have an equivalent extended range counterpart, this will return `self`.
+// Reinterpret the color by applying a new contentHeadroom without changing the color components. Changing the contentHeadroom redefines the color relative to a different peak white, changing its behavior under tone mapping and the result of calling standardDynamicRangeColor. The new color will have a contentHeadroom >= 1.0. If called on a color with a color space that does not support extended range, or does not have an equivalent extended range counterpart, this will return self.
 //
 // ColorByApplyingContentHeadroom calls the underlying ColorByApplyingContentHeadroom.
 func (x *Color) ColorByApplyingContentHeadroom(contentHeadroom float64) *Color {
@@ -75,6 +81,8 @@ func (x *Color) ColorByApplyingContentHeadroom(contentHeadroom float64) *Color {
 	return &Color{inner: _r}
 }
 
+// Creates a new color object that represents a blend between the current color and the highlight color.
+//
 // HighlightWithLevel calls the underlying HighlightWithLevel.
 func (x *Color) HighlightWithLevel(val float64) *Color {
 	_r := x.inner.HighlightWithLevel(val)
@@ -84,6 +92,8 @@ func (x *Color) HighlightWithLevel(val float64) *Color {
 	return &Color{inner: _r}
 }
 
+// Creates a new color object that represents a blend between the current color and the shadow color.
+//
 // ShadowWithLevel calls the underlying ShadowWithLevel.
 func (x *Color) ShadowWithLevel(val float64) *Color {
 	_r := x.inner.ShadowWithLevel(val)
@@ -93,7 +103,7 @@ func (x *Color) ShadowWithLevel(val float64) *Color {
 	return &Color{inner: _r}
 }
 
-// Returns a color representing the base color with a system defined effect applied to it. This color is safe to create before draw time, as the resolution of the final color only happens when being `-set`, retrieving its `CGColor`, resolving with `-colorWithType:`, etc. The return color type is `.named`.
+// Returns a new color object that represents the current color modified to include the specified visual effect.
 //
 // ColorWithSystemEffect calls the underlying ColorWithSystemEffect.
 func (x *Color) ColorWithSystemEffect(systemEffect NSColorSystemEffect) *Color {
@@ -104,21 +114,29 @@ func (x *Color) ColorWithSystemEffect(systemEffect NSColorSystemEffect) *Color {
 	return &Color{inner: _r}
 }
 
+// Sets the color of subsequent drawing to the color that the color object represents.
+//
 // Set calls the underlying Set.
 func (x *Color) Set() {
 	x.inner.Set()
 }
 
+// Sets the fill color of subsequent drawing to the color object’s color.
+//
 // SetFill calls the underlying SetFill.
 func (x *Color) SetFill() {
 	x.inner.SetFill()
 }
 
+// Sets the stroke color of subsequent drawing to the color object’s color.
+//
 // SetStroke calls the underlying SetStroke.
 func (x *Color) SetStroke() {
 	x.inner.SetStroke()
 }
 
+// Creates a new color object whose component values are a weighted sum of the current color object and the specified color object’s.
+//
 // BlendedColorWithFractionOfColor calls the underlying BlendedColorWithFractionOfColor.
 func (x *Color) BlendedColorWithFractionOfColor(fraction float64, color *raw.NSColor) *Color {
 	_r := x.inner.BlendedColorWithFractionOfColor(fraction, color)
@@ -128,6 +146,8 @@ func (x *Color) BlendedColorWithFractionOfColor(fraction float64, color *raw.NSC
 	return &Color{inner: _r}
 }
 
+// Creates a new color object that has the same color space and component values as the current color object, but the specified alpha component.
+//
 // ColorWithAlphaComponent calls the underlying ColorWithAlphaComponent.
 func (x *Color) ColorWithAlphaComponent(alpha float64) *Color {
 	_r := x.inner.ColorWithAlphaComponent(alpha)
@@ -137,36 +157,50 @@ func (x *Color) ColorWithAlphaComponent(alpha float64) *Color {
 	return &Color{inner: _r}
 }
 
+// Returns the color object’s RGB component and opacity values in the respective arguments.
+//
 // GetRedGreenBlueAlpha calls the underlying GetRedGreenBlueAlpha.
 func (x *Color) GetRedGreenBlueAlpha(red *float64, green *float64, blue *float64, alpha *float64) {
 	x.inner.GetRedGreenBlueAlpha(red, green, blue, alpha)
 }
 
+// Returns the color object’s HSB component and opacity values in the respective arguments.
+//
 // GetHueSaturationBrightnessAlpha calls the underlying GetHueSaturationBrightnessAlpha.
 func (x *Color) GetHueSaturationBrightnessAlpha(hue *float64, saturation *float64, brightness *float64, alpha *float64) {
 	x.inner.GetHueSaturationBrightnessAlpha(hue, saturation, brightness, alpha)
 }
 
+// Returns the grayscale and alpha values of the color.
+//
 // GetWhiteAlpha calls the underlying GetWhiteAlpha.
 func (x *Color) GetWhiteAlpha(white *float64, alpha *float64) {
 	x.inner.GetWhiteAlpha(white, alpha)
 }
 
+// Returns the color object’s CMYK and opacity values.
+//
 // GetCyanMagentaYellowBlackAlpha calls the underlying GetCyanMagentaYellowBlackAlpha.
 func (x *Color) GetCyanMagentaYellowBlackAlpha(cyan *float64, magenta *float64, yellow *float64, black *float64, alpha *float64) {
 	x.inner.GetCyanMagentaYellowBlackAlpha(cyan, magenta, yellow, black, alpha)
 }
 
+// Returns the components of the color as an array.
+//
 // GetComponents calls the underlying GetComponents.
 func (x *Color) GetComponents(components *float64) {
 	x.inner.GetComponents(components)
 }
 
+// Writes the color object’s data to the specified pasteboard.
+//
 // WriteToPasteboard calls the underlying WriteToPasteboard.
 func (x *Color) WriteToPasteboard(pasteBoard *raw.NSPasteboard) {
 	x.inner.WriteToPasteboard(pasteBoard)
 }
 
+// Draws the current color in the specified rectangle.
+//
 // DrawSwatchInRect calls the underlying DrawSwatchInRect.
 func (x *Color) DrawSwatchInRect(rect corefoundation.CGRect) {
 	x.inner.DrawSwatchInRect(rect)
@@ -319,6 +353,8 @@ func (x *Color) CGColor() unsafe.Pointer {
 	return x.inner.CGColor()
 }
 
+// Creates a new color object for the same color, but in the specified color space and specific to the provided device.
+//
 // ColorUsingColorSpaceNameDevice calls the underlying ColorUsingColorSpaceNameDevice.
 func (x *Color) ColorUsingColorSpaceNameDevice(name *foundation.NSString, deviceDescription *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Color {
 	_r := x.inner.ColorUsingColorSpaceNameDevice(name, deviceDescription)
@@ -328,6 +364,8 @@ func (x *Color) ColorUsingColorSpaceNameDevice(name *foundation.NSString, device
 	return &Color{inner: _r}
 }
 
+// Creates a new color object whose color is the same as the receiver’s, except that the new color object is in the specified color space.
+//
 // ColorUsingColorSpaceName calls the underlying ColorUsingColorSpaceName.
 func (x *Color) ColorUsingColorSpaceName(name *foundation.NSString) *Color {
 	_r := x.inner.ColorUsingColorSpaceName(name)

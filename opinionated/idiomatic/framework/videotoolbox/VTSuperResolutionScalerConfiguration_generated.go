@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Configuration that you use to set up the super-resolution processor.
+//
 // SuperResolutionScalerConfiguration wraps [raw.VTSuperResolutionScalerConfiguration] with a fluent Go API.
 type SuperResolutionScalerConfiguration struct {
 	inner *raw.VTSuperResolutionScalerConfiguration
@@ -35,7 +37,7 @@ func SuperResolutionScalerConfigurationFromID(id objc.ID) *SuperResolutionScaler
 	return &SuperResolutionScalerConfiguration{inner: raw.VTSuperResolutionScalerConfigurationFromID(id)}
 }
 
-// Creates a new super-resolution scaler processor configuration. This processor increases resolution of an image or video. Returns `nil` if dimensions are out of range or revision is unsupported. - Parameters: - frameWidth: Width of source frame in pixels. With “VTSuperResolutionScalerConfigurationInputTypeVideo“, maximum width is 1920 on macOS and 1440 on iOS. With “VTSuperResolutionScalerConfigurationInputTypeImage“, maximum width is 1920. - frameHeight: Height of source frame in pixels. With “VTSuperResolutionScalerConfigurationInputTypeVideo“, maximum height is 1080. With “VTSuperResolutionScalerConfigurationInputTypeImage“, maximum height is 1920 on macOS and 1080 on iOS. - scaleFactor: Indicates the scale factor between input and output. - inputType: Indicates the type of input, either video or image. - usePrecomputedFlow: Boolean value to indicate that you provide optical flow; if false, this configuration computes the optical flow on the fly. - qualityPrioritization: A level you use to prioritize quality or performance; for more information about supported levels, see “VTSuperResolutionScalerConfigurationQualityPrioritization“. - revision: The specific algorithm or configuration revision you use to perform the request.
+// Creates a new super-resolution scaler processor configuration.
 //
 // NewSuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactorInputTypeUsePrecomputedFlowQualityPrioritizationRevision creates a new [SuperResolutionScalerConfiguration].
 func NewSuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactorInputTypeUsePrecomputedFlowQualityPrioritizationRevision(frameWidth int, frameHeight int, scaleFactor int, inputType VTSuperResolutionScalerConfigurationInputType, usePrecomputedFlow bool, qualityPrioritization VTSuperResolutionScalerConfigurationQualityPrioritization, revision VTSuperResolutionScalerConfigurationRevision) *SuperResolutionScalerConfiguration {
@@ -44,7 +46,7 @@ func NewSuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactorIn
 	return &SuperResolutionScalerConfiguration{inner: raw.VTSuperResolutionScalerConfigurationFromID(_id)}
 }
 
-// Downloads models that the system needs for the current configuration. This method downloads model assets required for the current configuration in background. You should call this method if “configurationModelStatus“ is “VTSuperResolutionScalerConfigurationModelStatusDownloadRequired“. After this method is called, you can query “configurationModelPercentageAvailable“ to determine progress of model asset download process. If the download fails, the completion handler is invoked with an `NSError`, and the “configurationModelStatus“ goes back to “VTSuperResolutionScalerConfigurationModelStatusDownloadRequired“. If the download succeeds, the completion handler is invoked with `nil` NSError.
+// Downloads models that the system needs for the current configuration.
 //
 // DownloadConfigurationModel blocks until the operation completes or ctx is cancelled.
 func (x *SuperResolutionScalerConfiguration) DownloadConfigurationModel(ctx context.Context) error {

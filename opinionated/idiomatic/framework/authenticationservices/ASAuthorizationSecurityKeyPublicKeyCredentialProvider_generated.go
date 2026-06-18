@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mechanism for providing public key credential requests to an app or service with a physical security key.
+//
 // AuthorizationSecurityKeyPublicKeyCredentialProvider wraps [raw.ASAuthorizationSecurityKeyPublicKeyCredentialProvider] with a fluent Go API.
 type AuthorizationSecurityKeyPublicKeyCredentialProvider struct {
 	inner *raw.ASAuthorizationSecurityKeyPublicKeyCredentialProvider
@@ -33,6 +35,8 @@ func AuthorizationSecurityKeyPublicKeyCredentialProviderFromID(id objc.ID) *Auth
 	return &AuthorizationSecurityKeyPublicKeyCredentialProvider{inner: raw.ASAuthorizationSecurityKeyPublicKeyCredentialProviderFromID(id)}
 }
 
+// Creates the object with a relying party identifier.
+//
 // NewAuthorizationSecurityKeyPublicKeyCredentialProviderWithRelyingPartyIdentifier creates a new [AuthorizationSecurityKeyPublicKeyCredentialProvider].
 func NewAuthorizationSecurityKeyPublicKeyCredentialProviderWithRelyingPartyIdentifier(relyingPartyIdentifier string) *AuthorizationSecurityKeyPublicKeyCredentialProvider {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationSecurityKeyPublicKeyCredentialProvider")), objc.RegisterName("alloc"))
@@ -40,7 +44,7 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialProviderWithRelyingPartyIdent
 	return &AuthorizationSecurityKeyPublicKeyCredentialProvider{inner: raw.ASAuthorizationSecurityKeyPublicKeyCredentialProviderFromID(_id)}
 }
 
-// @abstract Create a request to register a new security key credential. @param challenge The challenge to sign. @param displayName The display name for the new credential. @param name The name for the new credential. @param userID An identifier to be stored alongside the credential, which will be returned with the credential when it is used to authenticate.
+// Creates a registration request with a challenge, display name, and user ID.
 //
 // CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID calls the underlying CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeDisplayNameNameUserID(challenge *foundation.NSData, displayName string, name string, userID *foundation.NSData) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest {
@@ -51,7 +55,7 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialRe
 	return &AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest{inner: _r}
 }
 
-// @abstract Create a request to authenticate using an existing credential. @param challenge The challenge to sign.
+// Creates an assertion request with a challenge.
 //
 // CreateCredentialAssertionRequestWithChallenge calls the underlying CreateCredentialAssertionRequestWithChallenge.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialProvider) CreateCredentialAssertionRequestWithChallenge(challenge *foundation.NSData) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {

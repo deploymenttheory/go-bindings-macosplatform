@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing metrics about the responsiveness of animation in the app.
+//
 // AnimationMetric wraps [raw.MXAnimationMetric] with a fluent Go API.
 type AnimationMetric struct {
 	inner *raw.MXAnimationMetric

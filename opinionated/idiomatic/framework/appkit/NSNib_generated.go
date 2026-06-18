@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object wrapper, or container, for an Interface Builder nib file.
+//
 // Nib wraps [raw.NSNib] with a fluent Go API.
 type Nib struct {
 	inner *raw.NSNib
@@ -30,6 +32,8 @@ func NibFromID(id objc.ID) *Nib {
 	return &Nib{inner: raw.NSNibFromID(id)}
 }
 
+// Returns an NSNib object initialized to the nib file in the specified bundle.
+//
 // NewNibWithNibNamedBundle creates a new [Nib].
 func NewNibWithNibNamedBundle(nibName *foundation.NSString, bundle *foundation.NSBundle) *Nib {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNib")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewNibWithNibNamedBundle(nibName *foundation.NSString, bundle *foundation.N
 	return &Nib{inner: raw.NSNibFromID(_id)}
 }
 
+// Initializes an instance with nib data and specified bundle for locating resources.
+//
 // NewNibWithNibDataBundle creates a new [Nib].
 func NewNibWithNibDataBundle(nibData *foundation.NSData, bundle *foundation.NSBundle) *Nib {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNib")), objc.RegisterName("alloc"))
@@ -44,6 +50,8 @@ func NewNibWithNibDataBundle(nibData *foundation.NSData, bundle *foundation.NSBu
 	return &Nib{inner: raw.NSNibFromID(_id)}
 }
 
+// Returns an NSNib object initialized to the nib file at the specified URL.
+//
 // NewNibWithContentsOfURL creates a new [Nib].
 func NewNibWithContentsOfURL(nibFileURL string) *Nib {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNib")), objc.RegisterName("alloc"))
@@ -51,16 +59,22 @@ func NewNibWithContentsOfURL(nibFileURL string) *Nib {
 	return &Nib{inner: raw.NSNibFromID(_id)}
 }
 
+// Instantiates objects in the nib file with the specified owner.
+//
 // InstantiateWithOwnerTopLevelObjects calls the underlying InstantiateWithOwnerTopLevelObjects.
 func (x *Nib) InstantiateWithOwnerTopLevelObjects(owner objc.ID, topLevelObjects *foundation.NSArray[objc.ID]) bool {
 	return x.inner.InstantiateWithOwnerTopLevelObjects(owner, topLevelObjects)
 }
 
+// Unarchives and instantiates the in-memory contents of the receiver’s nib file, creating a distinct object tree and top level objects.
+//
 // InstantiateNibWithExternalNameTable calls the underlying InstantiateNibWithExternalNameTable.
 func (x *Nib) InstantiateNibWithExternalNameTable(externalNameTable *foundation.NSDictionary[objc.ID, objc.ID]) bool {
 	return x.inner.InstantiateNibWithExternalNameTable(externalNameTable)
 }
 
+// Unarchives and instantiates the in-memory contents of the receiver’s nib file, creating a distinct object tree and set of top level objects.
+//
 // InstantiateNibWithOwnerTopLevelObjects calls the underlying InstantiateNibWithOwnerTopLevelObjects.
 func (x *Nib) InstantiateNibWithOwnerTopLevelObjects(owner objc.ID, topLevelObjects *foundation.NSArray[objc.ID]) bool {
 	return x.inner.InstantiateNibWithOwnerTopLevelObjects(owner, topLevelObjects)

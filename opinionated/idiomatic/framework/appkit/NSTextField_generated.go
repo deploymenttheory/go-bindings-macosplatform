@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// Text the user can select or edit to send an action message to a target when the user presses the Return key.
+//
 // TextField wraps [raw.NSTextField] with a fluent Go API.
 type TextField struct {
 	inner *raw.NSTextField
@@ -41,90 +43,120 @@ func NewTextField() *TextField {
 	return &TextField{inner: raw.NSTextFieldFromID(_id)}
 }
 
+// The string the text field displays when empty to help the user understand the text field’s purpose.
+//
 // WithPlaceholderString sets the placeholderString property and returns the receiver for chaining.
 func (x *TextField) WithPlaceholderString(placeholderString string) *TextField {
 	x.inner.SetPlaceholderString(foundation.NSStringStringWithUTF8String(placeholderString))
 	return x
 }
 
+// The attributed string the text field displays when empty to help the user understand the text field’s purpose.
+//
 // WithPlaceholderAttributedString sets the placeholderAttributedString property and returns the receiver for chaining.
 func (x *TextField) WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *TextField {
 	x.inner.SetPlaceholderAttributedString(placeholderAttributedString)
 	return x
 }
 
+// The color of the background the text field’s cell draws behind the text.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *TextField) WithBackgroundColor(backgroundColor *Color) *TextField {
 	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// A Boolean value that controls whether the text field’s cell draws a background color behind the text.
+//
 // WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
 func (x *TextField) WithDrawsBackground(drawsBackground bool) *TextField {
 	x.inner.SetDrawsBackground(drawsBackground)
 	return x
 }
 
+// The color of the text field’s content.
+//
 // WithTextColor sets the textColor property and returns the receiver for chaining.
 func (x *TextField) WithTextColor(textColor *Color) *TextField {
 	x.inner.SetTextColor(textColor.Unwrap())
 	return x
 }
 
+// A Boolean value that controls whether the text field draws a solid black border around its contents.
+//
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *TextField) WithBordered(bordered bool) *TextField {
 	x.inner.SetBordered(bordered)
 	return x
 }
 
+// A Boolean value that controls whether the text field draws a bezeled background around its contents.
+//
 // WithBezeled sets the bezeled property and returns the receiver for chaining.
 func (x *TextField) WithBezeled(bezeled bool) *TextField {
 	x.inner.SetBezeled(bezeled)
 	return x
 }
 
+// A Boolean value that controls whether the user can edit the value in the text field.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *TextField) WithEditable(editable bool) *TextField {
 	x.inner.SetEditable(editable)
 	return x
 }
 
+// A Boolean value that determines whether the user can select the content of the text field.
+//
 // WithSelectable sets the selectable property and returns the receiver for chaining.
 func (x *TextField) WithSelectable(selectable bool) *TextField {
 	x.inner.SetSelectable(selectable)
 	return x
 }
 
+// The text field’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *TextField) WithDelegate(delegate raw.NSTextFieldDelegate) *TextField {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The text field’s bezel style, square or rounded.
+//
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
 func (x *TextField) WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *TextField {
 	x.inner.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
 	return x
 }
 
+// The maximum width of the text field’s intrinsic content size.
+//
 // WithPreferredMaxLayoutWidth sets the preferredMaxLayoutWidth property and returns the receiver for chaining.
 func (x *TextField) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *TextField {
 	x.inner.SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth)
 	return x
 }
 
+// The maximum number of lines a wrapping text field displays before clipping or truncating the text.
+//
 // WithMaximumNumberOfLines sets the maximumNumberOfLines property and returns the receiver for chaining.
 func (x *TextField) WithMaximumNumberOfLines(maximumNumberOfLines int) *TextField {
 	x.inner.SetMaximumNumberOfLines(maximumNumberOfLines)
 	return x
 }
 
+// A Boolean value that controls whether single-line text fields tighten intercharacter spacing before truncating the text.
+//
 // WithAllowsDefaultTighteningForTruncation sets the allowsDefaultTighteningForTruncation property and returns the receiver for chaining.
 func (x *TextField) WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *TextField {
 	x.inner.SetAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation)
 	return x
 }
 
+// The strategy that the system uses to break lines when laying out multiple lines of text.
+//
 // WithLineBreakStrategy sets the lineBreakStrategy property and returns the receiver for chaining.
 func (x *TextField) WithLineBreakStrategy(lineBreakStrategy NSLineBreakStrategy) *TextField {
 	x.inner.SetLineBreakStrategy(raw.NSLineBreakStrategy(lineBreakStrategy))
@@ -179,7 +211,7 @@ func (x *TextField) WithPlaceholderAttributedStrings(items ...*foundation.NSAttr
 	return x
 }
 
-// Specifies the behavior for resolving “NSTextAlignment/natural“ to the visual alignment. When set to `true`, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is `false`.
+// Specifies the behavior for resolving NSTextAlignmentNatural to the visual alignment.
 //
 // WithResolvesNaturalAlignmentWithBaseWritingDirection sets the resolvesNaturalAlignmentWithBaseWritingDirection property and returns the receiver for chaining.
 func (x *TextField) WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *TextField {
@@ -187,162 +219,216 @@ func (x *TextField) WithResolvesNaturalAlignmentWithBaseWritingDirection(resolve
 	return x
 }
 
+// A Boolean value that indicates whether the text field automatically completes text as the user types.
+//
 // WithAutomaticTextCompletionEnabled sets the automaticTextCompletionEnabled property and returns the receiver for chaining.
 func (x *TextField) WithAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) *TextField {
 	x.inner.SetAutomaticTextCompletionEnabled(automaticTextCompletionEnabled)
 	return x
 }
 
+// A Boolean value that controls whether the Touch Bar displays the character picker item for rich text fields.
+//
 // WithAllowsCharacterPickerTouchBarItem sets the allowsCharacterPickerTouchBarItem property and returns the receiver for chaining.
 func (x *TextField) WithAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) *TextField {
 	x.inner.SetAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem)
 	return x
 }
 
+// A Boolean value that controls whether the user can change font attributes of the text field’s string.
+//
 // WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
 func (x *TextField) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TextField {
 	x.inner.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
 	return x
 }
 
+// A Boolean value that controls whether the user can drag image files into the text field.
+//
 // WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
 func (x *TextField) WithImportsGraphics(importsGraphics bool) *TextField {
 	x.inner.SetImportsGraphics(importsGraphics)
 	return x
 }
 
+// The target object that receives action messages from the cell.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *TextField) WithTarget(target objc.ID) *TextField {
 	x.inner.NSControl.SetTarget(target)
 	return x
 }
 
+// The default action-message selector associated with the control.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *TextField) WithAction(action objc.SEL) *TextField {
 	x.inner.NSControl.SetAction(action)
 	return x
 }
 
+// The tag identifying the receiver (not the tag of the receiver’s cell).
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *TextField) WithTag(tag int) *TextField {
 	x.inner.NSControl.SetTag(tag)
 	return x
 }
 
+// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+//
 // WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
 func (x *TextField) WithIgnoresMultiClick(ignoresMultiClick bool) *TextField {
 	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
 	return x
 }
 
+// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *TextField) WithContinuous(continuous bool) *TextField {
 	x.inner.NSControl.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver reacts to mouse events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *TextField) WithEnabled(enabled bool) *TextField {
 	x.inner.NSControl.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the receiver refuses the first responder role.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *TextField) WithRefusesFirstResponder(refusesFirstResponder bool) *TextField {
 	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value that indicates whether the cell is highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *TextField) WithHighlighted(highlighted bool) *TextField {
 	x.inner.NSControl.SetHighlighted(highlighted)
 	return x
 }
 
+// The size of the control.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *TextField) WithControlSize(controlSize NSControlSize) *TextField {
 	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The receiver’s formatter.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *TextField) WithFormatter(formatter *foundation.NSFormatter) *TextField {
 	x.inner.NSControl.SetFormatter(formatter)
 	return x
 }
 
+// The value of the receiver’s cell as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *TextField) WithObjectValue(objectValue objc.ID) *TextField {
 	x.inner.NSControl.SetObjectValue(objectValue)
 	return x
 }
 
+// The value of the receiver’s cell as an NSString object.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *TextField) WithStringValue(stringValue string) *TextField {
 	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The value of the receiver’s cell as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *TextField) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *TextField {
 	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *TextField) WithIntValue(intValue int) *TextField {
 	x.inner.NSControl.SetIntValue(intValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *TextField) WithIntegerValue(integerValue int) *TextField {
 	x.inner.NSControl.SetIntegerValue(integerValue)
 	return x
 }
 
+// The value of the receiver’s cell as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *TextField) WithFloatValue(floatValue float32) *TextField {
 	x.inner.NSControl.SetFloatValue(floatValue)
 	return x
 }
 
+// The value of the receiver’s cell as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *TextField) WithDoubleValue(doubleValue float64) *TextField {
 	x.inner.NSControl.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The font used to draw text in the receiver’s cell.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *TextField) WithFont(font *Font) *TextField {
 	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *TextField) WithUsesSingleLineMode(usesSingleLineMode bool) *TextField {
 	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// The line break mode to use for text in the control’s cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *TextField) WithLineBreakMode(lineBreakMode NSLineBreakMode) *TextField {
 	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The alignment mode of the text in the receiver’s cell.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *TextField) WithAlignment(alignment NSTextAlignment) *TextField {
 	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *TextField) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TextField {
 	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+//
 // WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
 func (x *TextField) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *TextField {
 	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
@@ -397,6 +483,8 @@ func (x *TextField) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOpti
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *TextField) WithFrame(frame corefoundation.CGRect) *TextField {
 	x.inner.NSControl.NSView.SetFrame(frame)
@@ -421,6 +509,8 @@ func (x *TextField) WithBoundsRotation(boundsRotation float64) *TextField {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *TextField) WithBounds(bounds corefoundation.CGRect) *TextField {
 	x.inner.NSControl.NSView.SetBounds(bounds)
@@ -433,6 +523,8 @@ func (x *TextField) WithCanDrawConcurrently(canDrawConcurrently bool) *TextField
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *TextField) WithNeedsDisplay(needsDisplay bool) *TextField {
 	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
@@ -619,7 +711,7 @@ func (x *TextField) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets founda
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *TextField) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TextField {
@@ -675,55 +767,75 @@ func (x *TextField) WithPressureConfiguration(pressureConfiguration *PressureCon
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *TextField) WithNextResponder(nextResponder ResponderProvider) *TextField {
 	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *TextField) WithMenu(menu *Menu) *TextField {
 	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *TextField) WithUserActivity(userActivity *foundation.NSUserActivity) *TextField {
 	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *TextField) WithTouchBar(touchBar *TouchBar) *TextField {
 	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Ends editing in the text field and, if it’s selectable, selects the entire text content.
+//
 // SelectText calls the underlying SelectText.
 func (x *TextField) SelectText(sender objc.ID) {
 	x.inner.SelectText(sender)
 }
 
+// Requests permission to begin editing a text object.
+//
 // TextShouldBeginEditing calls the underlying TextShouldBeginEditing.
 func (x *TextField) TextShouldBeginEditing(textObject *raw.NSText) bool {
 	return x.inner.TextShouldBeginEditing(textObject)
 }
 
+// Performs validation on the text field’s new value.
+//
 // TextShouldEndEditing calls the underlying TextShouldEndEditing.
 func (x *TextField) TextShouldEndEditing(textObject *raw.NSText) bool {
 	return x.inner.TextShouldEndEditing(textObject)
 }
 
+// Posts a notification to the default notification center that the text is about to go into edit mode.
+//
 // TextDidBeginEditing calls the underlying TextDidBeginEditing.
 func (x *TextField) TextDidBeginEditing(notification *foundation.NSNotification) {
 	x.inner.TextDidBeginEditing(notification)
 }
 
+// Posts a notification when the text is no longer in edit mode.
+//
 // TextDidEndEditing calls the underlying TextDidEndEditing.
 func (x *TextField) TextDidEndEditing(notification *foundation.NSNotification) {
 	x.inner.TextDidEndEditing(notification)
 }
 
+// Posts a notification when the text changes, and forwards the message to the text field’s cell if it responds.
+//
 // TextDidChange calls the underlying TextDidChange.
 func (x *TextField) TextDidChange(notification *foundation.NSNotification) {
 	x.inner.TextDidChange(notification)
@@ -997,6 +1109,8 @@ func (x *TextField) SetImportsGraphics(importsGraphics bool) {
 	x.inner.SetImportsGraphics(importsGraphics)
 }
 
+// Sets the text field’s string value using the embedded character as the keyboard mnemonic.
+//
 // SetTitleWithMnemonic calls the underlying SetTitleWithMnemonic.
 func (x *TextField) SetTitleWithMnemonic(stringWithAmpersand string) {
 	x.inner.SetTitleWithMnemonic(foundation.NSStringStringWithUTF8String(stringWithAmpersand))

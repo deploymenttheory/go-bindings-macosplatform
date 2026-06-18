@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// For content that has been authored with the express intent of offering an alternative selection interface for AVMediaSelectionOptions, AVCustomMediaSelectionScheme provides a collection of custom settings for controlling the presentation of the media.
+//
 // CustomMediaSelectionScheme wraps [raw.AVCustomMediaSelectionScheme] with a fluent Go API.
 type CustomMediaSelectionScheme struct {
 	inner *raw.AVCustomMediaSelectionScheme
@@ -37,7 +39,7 @@ func NewCustomMediaSelectionScheme() *CustomMediaSelectionScheme {
 	return &CustomMediaSelectionScheme{inner: raw.AVCustomMediaSelectionSchemeFromID(_id)}
 }
 
-// Provides an array of media presentation settings that can be effective at the same time as the specified language and settings for other selectors of the receiver. If the content is authored to provide a collection of AVMediaSelectionOptions that include one or more with all of the combinations of media characteristics of the specified AVMediaPresentationSettings together with all of the settings of the specified AVMediaPresentationSelector, this method will return all of the settings for that selector. However, if one or more of the available combinations are not possessed by any of the AVMediaSelectionOptions, it will return fewer. - Parameter selector: The AVMediaPresentationSelector for which complementary settings are requested. - Parameter language: A BCP 47 language tag chosen among the availableLanguages of the receiver. If no language setting pertains, can be nil. - Parameter settings: A collection of AVMediaPresentationSettings provided by selectors of the receiver other than the specified selector. Because no two AVMediaPresentationSettings of the same AVMediaPresentationSelector are complementary, an empty array will be returned if you specify more than one setting for any selector.
+// Provides an array of media presentation settings that can be effective at the same time as the specified language and settings for other selectors of the receiver.
 //
 // MediaPresentationSettingsForSelectorComplementaryToLanguageSettings calls the underlying MediaPresentationSettingsForSelectorComplementaryToLanguageSettings.
 func (x *CustomMediaSelectionScheme) MediaPresentationSettingsForSelectorComplementaryToLanguageSettings(selector *raw.AVMediaPresentationSelector, language string, settings *foundation.NSArray[*raw.AVMediaPresentationSetting]) *foundation.NSArray[*raw.AVMediaPresentationSetting] {

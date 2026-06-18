@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a stream of data that a capture input provides.
+//
 // CaptureInputPort wraps [raw.AVCaptureInputPort] with a fluent Go API.
 type CaptureInputPort struct {
 	inner *raw.AVCaptureInputPort

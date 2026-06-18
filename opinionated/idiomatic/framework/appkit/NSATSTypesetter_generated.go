@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A concrete typesetter object that places glyphs during the text layout process.
+//
 // ATSTypesetter wraps [raw.NSATSTypesetter] with a fluent Go API.
 type ATSTypesetter struct {
 	inner *raw.NSATSTypesetter
@@ -37,47 +39,63 @@ func NewATSTypesetter() *ATSTypesetter {
 	return &ATSTypesetter{inner: raw.NSATSTypesetterFromID(_id)}
 }
 
+// Returns whether the typesetter uses the leading (or line gap) value specified in the font metric information of the current font.
+//
 // WithUsesFontLeading sets the usesFontLeading property and returns the receiver for chaining.
 func (x *ATSTypesetter) WithUsesFontLeading(usesFontLeading bool) *ATSTypesetter {
 	x.inner.NSTypesetter.SetUsesFontLeading(usesFontLeading)
 	return x
 }
 
+// Returns the current typesetter behavior.
+//
 // WithTypesetterBehavior sets the typesetterBehavior property and returns the receiver for chaining.
 func (x *ATSTypesetter) WithTypesetterBehavior(typesetterBehavior NSTypesetterBehavior) *ATSTypesetter {
 	x.inner.NSTypesetter.SetTypesetterBehavior(raw.NSTypesetterBehavior(typesetterBehavior))
 	return x
 }
 
+// Returns the current hyphenation factor.
+//
 // WithHyphenationFactor sets the hyphenationFactor property and returns the receiver for chaining.
 func (x *ATSTypesetter) WithHyphenationFactor(hyphenationFactor float32) *ATSTypesetter {
 	x.inner.NSTypesetter.SetHyphenationFactor(hyphenationFactor)
 	return x
 }
 
+// Returns the current line fragment padding, in points.
+//
 // WithLineFragmentPadding sets the lineFragmentPadding property and returns the receiver for chaining.
 func (x *ATSTypesetter) WithLineFragmentPadding(lineFragmentPadding float64) *ATSTypesetter {
 	x.inner.NSTypesetter.SetLineFragmentPadding(lineFragmentPadding)
 	return x
 }
 
+// Returns whether bidirectional text processing is enabled.
+//
 // WithBidiProcessingEnabled sets the bidiProcessingEnabled property and returns the receiver for chaining.
 func (x *ATSTypesetter) WithBidiProcessingEnabled(bidiProcessingEnabled bool) *ATSTypesetter {
 	x.inner.NSTypesetter.SetBidiProcessingEnabled(bidiProcessingEnabled)
 	return x
 }
 
+// Returns the text backing store, usually an instance of NSTextStorage.
+//
 // WithAttributedString sets the attributedString property and returns the receiver for chaining.
 func (x *ATSTypesetter) WithAttributedString(attributedString *foundation.NSAttributedString) *ATSTypesetter {
 	x.inner.NSTypesetter.SetAttributedString(attributedString)
 	return x
 }
 
+// This method has been deprecated. Use the NSTypesetter method getLineFragmentRect:usedRect:remainingRect:forStartingGlyphAtIndex:proposedRect:lineSpacing:paragraphSpacingBefore:paragraphSpacingAfter: instead.
+//
 // LineFragmentRectForProposedRectRemainingRect calls the underlying LineFragmentRectForProposedRectRemainingRect.
 func (x *ATSTypesetter) LineFragmentRectForProposedRectRemainingRect(proposedRect corefoundation.CGRect, remainingRect *corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.LineFragmentRectForProposedRectRemainingRect(proposedRect, remainingRect)
 }
 
+// Extracts the information needed to lay out the glyphs in the given glyph buffer from the given glyph range.
+//
 // GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits calls the underlying GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits.
 func (x *ATSTypesetter) GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits(glyphsRange foundation.NSRange, glyphBuffer *uint, charIndexBuffer *uint, inscribeBuffer *raw.NSGlyphInscription, elasticBuffer *bool) uint {
 	return x.inner.GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits(glyphsRange, glyphBuffer, charIndexBuffer, inscribeBuffer, elasticBuffer)

@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A reusable container view shown for a particular cell in a table view that uses rows for content.
+//
 // TableCellView wraps [raw.NSTableCellView] with a fluent Go API.
 type TableCellView struct {
 	inner *raw.NSTableCellView
@@ -41,30 +43,40 @@ func NewTableCellView() *TableCellView {
 	return &TableCellView{inner: raw.NSTableCellViewFromID(_id)}
 }
 
+// The object that represents the cell data.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *TableCellView) WithObjectValue(objectValue objc.ID) *TableCellView {
 	x.inner.SetObjectValue(objectValue)
 	return x
 }
 
+// Text displayed by the cell.
+//
 // WithTextField sets the textField property and returns the receiver for chaining.
 func (x *TableCellView) WithTextField(textField TextFieldProvider) *TableCellView {
 	x.inner.SetTextField(textField.asTextField())
 	return x
 }
 
+// Image displayed by the cell.
+//
 // WithImageView sets the imageView property and returns the receiver for chaining.
 func (x *TableCellView) WithImageView(imageView *ImageView) *TableCellView {
 	x.inner.SetImageView(imageView.Unwrap())
 	return x
 }
 
+// This property is automatically set by the enclosing row view to let this view know what its background looks like.
+//
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
 func (x *TableCellView) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *TableCellView {
 	x.inner.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
+// Returns the row size style.
+//
 // WithRowSizeStyle sets the rowSizeStyle property and returns the receiver for chaining.
 func (x *TableCellView) WithRowSizeStyle(rowSizeStyle NSTableViewRowSizeStyle) *TableCellView {
 	x.inner.SetRowSizeStyle(raw.NSTableViewRowSizeStyle(rowSizeStyle))
@@ -113,6 +125,8 @@ func (x *TableCellView) WithAutoresizingMask(autoresizingMask NSAutoresizingMask
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *TableCellView) WithFrame(frame corefoundation.CGRect) *TableCellView {
 	x.inner.NSView.SetFrame(frame)
@@ -137,6 +151,8 @@ func (x *TableCellView) WithBoundsRotation(boundsRotation float64) *TableCellVie
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *TableCellView) WithBounds(bounds corefoundation.CGRect) *TableCellView {
 	x.inner.NSView.SetBounds(bounds)
@@ -149,6 +165,8 @@ func (x *TableCellView) WithCanDrawConcurrently(canDrawConcurrently bool) *Table
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *TableCellView) WithNeedsDisplay(needsDisplay bool) *TableCellView {
 	x.inner.NSView.SetNeedsDisplay(needsDisplay)
@@ -335,7 +353,7 @@ func (x *TableCellView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets fo
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *TableCellView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TableCellView {
@@ -391,24 +409,32 @@ func (x *TableCellView) WithPressureConfiguration(pressureConfiguration *Pressur
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *TableCellView) WithNextResponder(nextResponder ResponderProvider) *TableCellView {
 	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *TableCellView) WithMenu(menu *Menu) *TableCellView {
 	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *TableCellView) WithUserActivity(userActivity *foundation.NSUserActivity) *TableCellView {
 	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *TableCellView) WithTouchBar(touchBar *TouchBar) *TableCellView {
 	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())

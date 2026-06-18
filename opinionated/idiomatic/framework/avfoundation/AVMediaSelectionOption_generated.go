@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a specific option for the presentation of media within a group of options.
+//
 // MediaSelectionOption wraps [raw.AVMediaSelectionOption] with a fluent Go API.
 type MediaSelectionOption struct {
 	inner *raw.AVMediaSelectionOption
@@ -37,21 +39,21 @@ func NewMediaSelectionOption() *MediaSelectionOption {
 	return &MediaSelectionOption{inner: raw.AVMediaSelectionOptionFromID(_id)}
 }
 
-// Reports whether the media selection option includes media with the specified media characteristic. - Parameter mediaCharacteristic: The media characteristic of interest, e.g. AVMediaCharacteristicVisual, AVMediaCharacteristicAudible, AVMediaCharacteristicLegible, etc. - Returns: YES if the media selection option includes media with the specified characteristic, otherwise NO.
+// Returns a Boolean value that indicates whether the receiver has media with the given media characteristic.
 //
 // HasMediaCharacteristic calls the underlying HasMediaCharacteristic.
 func (x *MediaSelectionOption) HasMediaCharacteristic(mediaCharacteristic *foundation.NSString) bool {
 	return x.inner.HasMediaCharacteristic(mediaCharacteristic)
 }
 
-// Provides an NSArray of AVMetadataItems, one for each metadata item in the container of the specified format. - Parameter format: The metadata format for which items are requested. - Returns: An NSArray containing AVMetadataItems.
+// Returns an array of metadata items—one for each metadata item in the container of a given format.
 //
 // MetadataForFormat calls the underlying MetadataForFormat.
 func (x *MediaSelectionOption) MetadataForFormat(format string) *foundation.NSArray[*raw.AVMetadataItem] {
 	return x.inner.MetadataForFormat(foundation.NSStringStringWithUTF8String(format))
 }
 
-// If a media selection option in another group is associated with the specified option, returns a reference to the associated option. Audible media selection options often have associated legible media selection options; in particular, audible options are typically associated with forced-only subtitle options with the same locale. See AVMediaCharacteristicContainsOnlyForcedSubtitles in AVMediaFormat.h for a discussion of forced-only subtitles. - Parameter mediaSelectionGroup: A media selection group in which an associated option is to be sought. - Returns: An instance of AVMediaSelectionOption.
+// Returns a media selection option associated with the receiver in a given group.
 //
 // AssociatedMediaSelectionOptionInMediaSelectionGroup calls the underlying AssociatedMediaSelectionOptionInMediaSelectionGroup.
 func (x *MediaSelectionOption) AssociatedMediaSelectionOptionInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *MediaSelectionOption {
@@ -62,14 +64,14 @@ func (x *MediaSelectionOption) AssociatedMediaSelectionOptionInMediaSelectionGro
 	return &MediaSelectionOption{inner: _r}
 }
 
-// Returns a serializable property list that can be used to obtain an instance of AVMediaSelectionOption representing the same option as the receiver via -[AVMediaSelectionGroup mediaSelectionOptionWithPropertyList:]. - Returns: A serializable property list that's sufficient to identify the option within its group. For serialization utilities, see NSPropertyList.h.
+// Returns a serializable property list that’s sufficient to identify the option within its group.
 //
 // PropertyList calls the underlying PropertyList.
 func (x *MediaSelectionOption) PropertyList() objc.ID {
 	return x.inner.PropertyList()
 }
 
-// Provides an NSString suitable for display. May use this option's common metadata, media characteristics and locale properties in addition to the provided locale to formulate an NSString intended for display. Will only consider common metadata with the specified locale. - Parameter locale: Localize manufactured portions of the string using the specificed locale.
+// Returns a string suitable for display using the specified locale.
 //
 // DisplayNameWithLocale calls the underlying DisplayNameWithLocale.
 func (x *MediaSelectionOption) DisplayNameWithLocale(locale *foundation.NSLocale) string {

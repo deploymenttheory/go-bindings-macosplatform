@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A language model built from custom training data.
+//
 // SpeechLanguageModel wraps [raw.SFSpeechLanguageModel] with a fluent Go API.
 type SpeechLanguageModel struct {
 	inner *raw.SFSpeechLanguageModel

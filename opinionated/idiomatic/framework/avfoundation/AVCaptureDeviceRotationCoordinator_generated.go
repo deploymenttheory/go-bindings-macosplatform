@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that monitors the physical orientation of a capture device and provides adjustment angles to keep images level, relative to gravity.
+//
 // CaptureDeviceRotationCoordinator wraps [raw.AVCaptureDeviceRotationCoordinator] with a fluent Go API.
 type CaptureDeviceRotationCoordinator struct {
 	inner *raw.AVCaptureDeviceRotationCoordinator

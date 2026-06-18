@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents an HTTP Live Streaming asset variant.
+//
 // AssetVariantQualifier wraps [raw.AVAssetVariantQualifier] with a fluent Go API.
 type AssetVariantQualifier struct {
 	inner *raw.AVAssetVariantQualifier

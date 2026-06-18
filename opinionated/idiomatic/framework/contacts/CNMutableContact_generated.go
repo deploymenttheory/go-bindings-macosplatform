@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A mutable object that stores information about a single contact, such as the contact’s first name, phone numbers, and addresses.
+//
 // MutableContact wraps [raw.CNMutableContact] with a fluent Go API.
 type MutableContact struct {
 	inner *raw.CNMutableContact
@@ -37,108 +39,144 @@ func NewMutableContact() *MutableContact {
 	return &MutableContact{inner: raw.CNMutableContactFromID(_id)}
 }
 
+// An enum identifying the contact type.
+//
 // WithContactType sets the contactType property and returns the receiver for chaining.
 func (x *MutableContact) WithContactType(contactType CNContactType) *MutableContact {
 	x.inner.SetContactType(raw.CNContactType(contactType))
 	return x
 }
 
+// The name prefix of the contact.
+//
 // WithNamePrefix sets the namePrefix property and returns the receiver for chaining.
 func (x *MutableContact) WithNamePrefix(namePrefix string) *MutableContact {
 	x.inner.SetNamePrefix(foundation.NSStringStringWithUTF8String(namePrefix))
 	return x
 }
 
+// The given name of the contact.
+//
 // WithGivenName sets the givenName property and returns the receiver for chaining.
 func (x *MutableContact) WithGivenName(givenName string) *MutableContact {
 	x.inner.SetGivenName(foundation.NSStringStringWithUTF8String(givenName))
 	return x
 }
 
+// The middle name of the contact.
+//
 // WithMiddleName sets the middleName property and returns the receiver for chaining.
 func (x *MutableContact) WithMiddleName(middleName string) *MutableContact {
 	x.inner.SetMiddleName(foundation.NSStringStringWithUTF8String(middleName))
 	return x
 }
 
+// The family name of the contact.
+//
 // WithFamilyName sets the familyName property and returns the receiver for chaining.
 func (x *MutableContact) WithFamilyName(familyName string) *MutableContact {
 	x.inner.SetFamilyName(foundation.NSStringStringWithUTF8String(familyName))
 	return x
 }
 
+// The previous family name of the contact.
+//
 // WithPreviousFamilyName sets the previousFamilyName property and returns the receiver for chaining.
 func (x *MutableContact) WithPreviousFamilyName(previousFamilyName string) *MutableContact {
 	x.inner.SetPreviousFamilyName(foundation.NSStringStringWithUTF8String(previousFamilyName))
 	return x
 }
 
+// The name suffix of the contact.
+//
 // WithNameSuffix sets the nameSuffix property and returns the receiver for chaining.
 func (x *MutableContact) WithNameSuffix(nameSuffix string) *MutableContact {
 	x.inner.SetNameSuffix(foundation.NSStringStringWithUTF8String(nameSuffix))
 	return x
 }
 
+// The nickname of the contact.
+//
 // WithNickname sets the nickname property and returns the receiver for chaining.
 func (x *MutableContact) WithNickname(nickname string) *MutableContact {
 	x.inner.SetNickname(foundation.NSStringStringWithUTF8String(nickname))
 	return x
 }
 
+// The name of the organization associated with the contact.
+//
 // WithOrganizationName sets the organizationName property and returns the receiver for chaining.
 func (x *MutableContact) WithOrganizationName(organizationName string) *MutableContact {
 	x.inner.SetOrganizationName(foundation.NSStringStringWithUTF8String(organizationName))
 	return x
 }
 
+// The name of the department associated with the contact.
+//
 // WithDepartmentName sets the departmentName property and returns the receiver for chaining.
 func (x *MutableContact) WithDepartmentName(departmentName string) *MutableContact {
 	x.inner.SetDepartmentName(foundation.NSStringStringWithUTF8String(departmentName))
 	return x
 }
 
+// The contact’s job title.
+//
 // WithJobTitle sets the jobTitle property and returns the receiver for chaining.
 func (x *MutableContact) WithJobTitle(jobTitle string) *MutableContact {
 	x.inner.SetJobTitle(foundation.NSStringStringWithUTF8String(jobTitle))
 	return x
 }
 
+// The phonetic given name of the contact.
+//
 // WithPhoneticGivenName sets the phoneticGivenName property and returns the receiver for chaining.
 func (x *MutableContact) WithPhoneticGivenName(phoneticGivenName string) *MutableContact {
 	x.inner.SetPhoneticGivenName(foundation.NSStringStringWithUTF8String(phoneticGivenName))
 	return x
 }
 
+// The phonetic middle name of the contact.
+//
 // WithPhoneticMiddleName sets the phoneticMiddleName property and returns the receiver for chaining.
 func (x *MutableContact) WithPhoneticMiddleName(phoneticMiddleName string) *MutableContact {
 	x.inner.SetPhoneticMiddleName(foundation.NSStringStringWithUTF8String(phoneticMiddleName))
 	return x
 }
 
+// The phonetic family name of the contact.
+//
 // WithPhoneticFamilyName sets the phoneticFamilyName property and returns the receiver for chaining.
 func (x *MutableContact) WithPhoneticFamilyName(phoneticFamilyName string) *MutableContact {
 	x.inner.SetPhoneticFamilyName(foundation.NSStringStringWithUTF8String(phoneticFamilyName))
 	return x
 }
 
+// The phonetic name of the organization associated with the contact.
+//
 // WithPhoneticOrganizationName sets the phoneticOrganizationName property and returns the receiver for chaining.
 func (x *MutableContact) WithPhoneticOrganizationName(phoneticOrganizationName string) *MutableContact {
 	x.inner.SetPhoneticOrganizationName(foundation.NSStringStringWithUTF8String(phoneticOrganizationName))
 	return x
 }
 
+// A string containing notes for the contact.
+//
 // WithNote sets the note property and returns the receiver for chaining.
 func (x *MutableContact) WithNote(note string) *MutableContact {
 	x.inner.SetNote(foundation.NSStringStringWithUTF8String(note))
 	return x
 }
 
+// The profile picture of a contact.
+//
 // WithImageData sets the imageData property and returns the receiver for chaining.
 func (x *MutableContact) WithImageData(imageData *foundation.NSData) *MutableContact {
 	x.inner.SetImageData(imageData)
 	return x
 }
 
+// An array of labeled phone numbers for a contact.
+//
 // WithPhoneNumbers sets the collection, converting the Go slice to an NSArray.
 func (x *MutableContact) WithPhoneNumbers(items ...*raw.CNLabeledValue[*raw.CNPhoneNumber]) *MutableContact {
 	if len(items) == 0 {
@@ -157,6 +195,8 @@ func (x *MutableContact) WithPhoneNumbers(items ...*raw.CNLabeledValue[*raw.CNPh
 	return x
 }
 
+// An array of labeled email addresses for the contact.
+//
 // WithEmailAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *MutableContact) WithEmailAddresses(items ...*raw.CNLabeledValue[*foundation.NSString]) *MutableContact {
 	if len(items) == 0 {
@@ -175,6 +215,8 @@ func (x *MutableContact) WithEmailAddresses(items ...*raw.CNLabeledValue[*founda
 	return x
 }
 
+// An array of labeled postal addresses for a contact.
+//
 // WithPostalAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *MutableContact) WithPostalAddresses(items ...*raw.CNLabeledValue[*raw.CNPostalAddress]) *MutableContact {
 	if len(items) == 0 {
@@ -193,6 +235,8 @@ func (x *MutableContact) WithPostalAddresses(items ...*raw.CNLabeledValue[*raw.C
 	return x
 }
 
+// An array of labeled URL addresses for a contact.
+//
 // WithUrlAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *MutableContact) WithUrlAddresses(items ...*raw.CNLabeledValue[*foundation.NSString]) *MutableContact {
 	if len(items) == 0 {
@@ -211,6 +255,8 @@ func (x *MutableContact) WithUrlAddresses(items ...*raw.CNLabeledValue[*foundati
 	return x
 }
 
+// An array of labeled contact relations for the contact.
+//
 // WithContactRelations sets the collection, converting the Go slice to an NSArray.
 func (x *MutableContact) WithContactRelations(items ...*raw.CNLabeledValue[*raw.CNContactRelation]) *MutableContact {
 	if len(items) == 0 {
@@ -229,6 +275,8 @@ func (x *MutableContact) WithContactRelations(items ...*raw.CNLabeledValue[*raw.
 	return x
 }
 
+// An array of labeled social profiles for a contact.
+//
 // WithSocialProfiles sets the collection, converting the Go slice to an NSArray.
 func (x *MutableContact) WithSocialProfiles(items ...*raw.CNLabeledValue[*raw.CNSocialProfile]) *MutableContact {
 	if len(items) == 0 {
@@ -247,6 +295,8 @@ func (x *MutableContact) WithSocialProfiles(items ...*raw.CNLabeledValue[*raw.CN
 	return x
 }
 
+// An array of labeled IM addresses for the contact.
+//
 // WithInstantMessageAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *MutableContact) WithInstantMessageAddresses(items ...*raw.CNLabeledValue[*raw.CNInstantMessageAddress]) *MutableContact {
 	if len(items) == 0 {
@@ -265,7 +315,7 @@ func (x *MutableContact) WithInstantMessageAddresses(items ...*raw.CNLabeledValu
 	return x
 }
 
-// @abstract The Gregorian birthday. @description Only uses day, month and year components. Needs to have at least a day and a month.
+// A date component for the Gregorian birthday of the contact.
 //
 // WithBirthday sets the birthday property and returns the receiver for chaining.
 func (x *MutableContact) WithBirthday(birthday *foundation.NSDateComponents) *MutableContact {
@@ -273,7 +323,7 @@ func (x *MutableContact) WithBirthday(birthday *foundation.NSDateComponents) *Mu
 	return x
 }
 
-// @abstract The alternate birthday (Lunisolar). @description Only uses day, month, year and calendar components. Needs to have at least a day and a month. Calendar must be Chinese, Hebrew or Islamic.
+// A date component for the non-Gregorian birthday of the contact.
 //
 // WithNonGregorianBirthday sets the nonGregorianBirthday property and returns the receiver for chaining.
 func (x *MutableContact) WithNonGregorianBirthday(nonGregorianBirthday *foundation.NSDateComponents) *MutableContact {
@@ -281,7 +331,7 @@ func (x *MutableContact) WithNonGregorianBirthday(nonGregorianBirthday *foundati
 	return x
 }
 
-// @abstract Other Gregorian dates (anniversaries, etc). @description Only uses day, month and year components. Needs to have at least a day and a month.
+// An array containing labeled Gregorian dates.
 //
 // WithDates sets the collection, converting the Go slice to an NSArray.
 func (x *MutableContact) WithDates(items ...*raw.CNLabeledValue[*foundation.NSDateComponents]) *MutableContact {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An event requesting a change in the shuffle mode.
+//
 // ChangeShuffleModeCommandEvent wraps [raw.MPChangeShuffleModeCommandEvent] with a fluent Go API.
 type ChangeShuffleModeCommandEvent struct {
 	inner *raw.MPChangeShuffleModeCommandEvent

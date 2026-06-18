@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Encapsulates an immutable network profile entry.
+//
 // NetworkProfile wraps [raw.CWNetworkProfile] with a fluent Go API.
 type NetworkProfile struct {
 	inner *raw.CWNetworkProfile
@@ -37,7 +39,7 @@ func NewNetworkProfile() *NetworkProfile {
 	return &NetworkProfile{inner: raw.CWNetworkProfileFromID(_id)}
 }
 
-// @method @param networkProfile A CWNetworkProfile object. @result A CWNetworkProfile object. @abstract Initializes a CWNetworkProfile object with the properties of an existing CWNetworkProfile object.
+// Creates and returns a CWNetworkProfile object initialized with the given CWNetworkProfile object.
 //
 // NewNetworkProfileWithNetworkProfile creates a new [NetworkProfile].
 func NewNetworkProfileWithNetworkProfile(networkProfile *raw.CWNetworkProfile) *NetworkProfile {
@@ -46,7 +48,7 @@ func NewNetworkProfileWithNetworkProfile(networkProfile *raw.CWNetworkProfile) *
 	return &NetworkProfile{inner: raw.CWNetworkProfileFromID(_id)}
 }
 
-// @method @param network A CWNetworkProfile object. @result YES if the objects are equal, NO otherwise. @abstract Determine CWNetworkProfile equality. @discussion CWNetworkProfile objects are considered equal if their corresponding <i>ssidData</i> and <i>security</i> properties are equal.
+// Determine CWNetworkProfile object equality.
 //
 // IsEqualToNetworkProfile calls the underlying IsEqualToNetworkProfile.
 func (x *NetworkProfile) IsEqualToNetworkProfile(networkProfile *raw.CWNetworkProfile) bool {

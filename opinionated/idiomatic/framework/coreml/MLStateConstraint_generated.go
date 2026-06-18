@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Constraint of a state feature value.
+//
 // StateConstraint wraps [raw.MLStateConstraint] with a fluent Go API.
 type StateConstraint struct {
 	inner *raw.MLStateConstraint

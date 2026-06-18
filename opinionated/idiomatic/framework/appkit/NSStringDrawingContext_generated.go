@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that manages metrics for drawing attributed strings.
+//
 // StringDrawingContext wraps [raw.NSStringDrawingContext] with a fluent Go API.
 type StringDrawingContext struct {
 	inner *raw.NSStringDrawingContext
@@ -36,6 +38,8 @@ func NewStringDrawingContext() *StringDrawingContext {
 	return &StringDrawingContext{inner: raw.NSStringDrawingContextFromID(_id)}
 }
 
+// The scale factor that determines the smallest font size to use during drawing.
+//
 // WithMinimumScaleFactor sets the minimumScaleFactor property and returns the receiver for chaining.
 func (x *StringDrawingContext) WithMinimumScaleFactor(minimumScaleFactor float64) *StringDrawingContext {
 	x.inner.SetMinimumScaleFactor(minimumScaleFactor)

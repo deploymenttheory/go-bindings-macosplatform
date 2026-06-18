@@ -9,6 +9,7 @@ import (
 	"strings"
 )
 
+// A mode indicating how the system handles user data when removing a domain.
 type NSFileProviderDomainRemovalMode int64
 
 const (
@@ -33,6 +34,7 @@ func (e NSFileProviderDomainRemovalMode) String() string {
 	}
 }
 
+// Modes that modify the system’s behavior while testing.
 // Bitmask — values may be combined with |.
 type NSFileProviderDomainTestingModes uint64
 
@@ -57,6 +59,7 @@ func (e NSFileProviderDomainTestingModes) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that identify known folders.
 // Bitmask — values may be combined with |.
 type NSFileProviderKnownFolders uint64
 
@@ -79,6 +82,7 @@ func (e NSFileProviderKnownFolders) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Options for disconnecting a domain from the extension.
 // Bitmask — values may be combined with |.
 type NSFileProviderManagerDisconnectionOptions uint64
 

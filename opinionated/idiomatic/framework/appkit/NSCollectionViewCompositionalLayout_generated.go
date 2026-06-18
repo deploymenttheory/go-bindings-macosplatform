@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A layout object that lets you combine items in highly adaptive and flexible visual arrangements.
+//
 // CollectionViewCompositionalLayout wraps [raw.NSCollectionViewCompositionalLayout] with a fluent Go API.
 type CollectionViewCompositionalLayout struct {
 	inner *raw.NSCollectionViewCompositionalLayout
@@ -31,6 +33,8 @@ func CollectionViewCompositionalLayoutFromID(id objc.ID) *CollectionViewComposit
 	return &CollectionViewCompositionalLayout{inner: raw.NSCollectionViewCompositionalLayoutFromID(id)}
 }
 
+// Creates a compositional layout object with a single section.
+//
 // NewCollectionViewCompositionalLayoutWithSection creates a new [CollectionViewCompositionalLayout].
 func NewCollectionViewCompositionalLayoutWithSection(section *raw.NSCollectionLayoutSection) *CollectionViewCompositionalLayout {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionViewCompositionalLayout")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewCollectionViewCompositionalLayoutWithSection(section *raw.NSCollectionLa
 	return &CollectionViewCompositionalLayout{inner: raw.NSCollectionViewCompositionalLayoutFromID(_id)}
 }
 
+// Creates a compositional layout object with a single section and an additional configuration.
+//
 // NewCollectionViewCompositionalLayoutWithSectionConfiguration creates a new [CollectionViewCompositionalLayout].
 func NewCollectionViewCompositionalLayoutWithSectionConfiguration(section *raw.NSCollectionLayoutSection, configuration *raw.NSCollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionViewCompositionalLayout")), objc.RegisterName("alloc"))
@@ -45,6 +51,8 @@ func NewCollectionViewCompositionalLayoutWithSectionConfiguration(section *raw.N
 	return &CollectionViewCompositionalLayout{inner: raw.NSCollectionViewCompositionalLayoutFromID(_id)}
 }
 
+// Creates a compositional layout object with a section provider to supply the layout’s sections.
+//
 // NewCollectionViewCompositionalLayoutWithSectionProvider creates a new [CollectionViewCompositionalLayout].
 func NewCollectionViewCompositionalLayoutWithSectionProvider(sectionProvider objc.Block) *CollectionViewCompositionalLayout {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionViewCompositionalLayout")), objc.RegisterName("alloc"))
@@ -52,6 +60,8 @@ func NewCollectionViewCompositionalLayoutWithSectionProvider(sectionProvider obj
 	return &CollectionViewCompositionalLayout{inner: raw.NSCollectionViewCompositionalLayoutFromID(_id)}
 }
 
+// Creates a compositional layout object with a section provider and an additional configuration.
+//
 // NewCollectionViewCompositionalLayoutWithSectionProviderConfiguration creates a new [CollectionViewCompositionalLayout].
 func NewCollectionViewCompositionalLayoutWithSectionProviderConfiguration(sectionProvider objc.Block, configuration *raw.NSCollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionViewCompositionalLayout")), objc.RegisterName("alloc"))
@@ -59,6 +69,8 @@ func NewCollectionViewCompositionalLayoutWithSectionProviderConfiguration(sectio
 	return &CollectionViewCompositionalLayout{inner: raw.NSCollectionViewCompositionalLayoutFromID(_id)}
 }
 
+// The layout’s configuration, such as its scroll direction and section spacing.
+//
 // WithConfiguration sets the configuration property and returns the receiver for chaining.
 func (x *CollectionViewCompositionalLayout) WithConfiguration(configuration *CollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout {
 	x.inner.SetConfiguration(configuration.Unwrap())

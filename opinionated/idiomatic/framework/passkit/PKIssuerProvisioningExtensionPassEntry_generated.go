@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents an item available to add to as a Wallet pass.
+//
 // IssuerProvisioningExtensionPassEntry wraps [raw.PKIssuerProvisioningExtensionPassEntry] with a fluent Go API.
 type IssuerProvisioningExtensionPassEntry struct {
 	inner *raw.PKIssuerProvisioningExtensionPassEntry

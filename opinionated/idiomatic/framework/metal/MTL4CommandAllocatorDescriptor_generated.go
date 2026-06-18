@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Groups together parameters for creating a command allocator.
+//
 // MTL4CommandAllocatorDescriptor wraps [raw.MTL4CommandAllocatorDescriptor] with a fluent Go API.
 type MTL4CommandAllocatorDescriptor struct {
 	inner *raw.MTL4CommandAllocatorDescriptor

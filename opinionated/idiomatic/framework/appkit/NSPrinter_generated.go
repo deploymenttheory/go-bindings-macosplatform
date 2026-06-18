@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes a printer’s capabilities.
+//
 // Printer wraps [raw.NSPrinter] with a fluent Go API.
 type Printer struct {
 	inner *raw.NSPrinter
@@ -38,6 +40,8 @@ func NewPrinter() *Printer {
 	return &Printer{inner: raw.NSPrinterFromID(_id)}
 }
 
+// Returns the size of the page for the specified paper type.
+//
 // PageSizeForPaper calls the underlying PageSizeForPaper.
 func (x *Printer) PageSizeForPaper(paperName *foundation.NSString) corefoundation.CGSize {
 	return x.inner.PageSizeForPaper(paperName)
@@ -71,41 +75,57 @@ func (x *Printer) DeviceDescription() *foundation.NSDictionary[*foundation.NSStr
 	return x.inner.DeviceDescription()
 }
 
+// Returns the status of the specified table.
+//
 // StatusForTable calls the underlying StatusForTable.
 func (x *Printer) StatusForTable(tableName string) NSPrinterTableStatus {
 	return NSPrinterTableStatus(x.inner.StatusForTable(foundation.NSStringStringWithUTF8String(tableName)))
 }
 
+// Returns a Boolean value that indicates whether the specified key is in the specified table.
+//
 // IsKeyInTable calls the underlying IsKeyInTable.
 func (x *Printer) IsKeyInTable(key string, table string) bool {
 	return x.inner.IsKeyInTable(foundation.NSStringStringWithUTF8String(key), foundation.NSStringStringWithUTF8String(table))
 }
 
+// Returns the Boolean value associated with the specified key.
+//
 // BooleanForKeyInTable calls the underlying BooleanForKeyInTable.
 func (x *Printer) BooleanForKeyInTable(key string, table string) bool {
 	return x.inner.BooleanForKeyInTable(foundation.NSStringStringWithUTF8String(key), foundation.NSStringStringWithUTF8String(table))
 }
 
+// Returns the floating-point value associated with the specified key.
+//
 // FloatForKeyInTable calls the underlying FloatForKeyInTable.
 func (x *Printer) FloatForKeyInTable(key string, table string) float32 {
 	return x.inner.FloatForKeyInTable(foundation.NSStringStringWithUTF8String(key), foundation.NSStringStringWithUTF8String(table))
 }
 
+// Returns the integer value associated with the specified key.
+//
 // IntForKeyInTable calls the underlying IntForKeyInTable.
 func (x *Printer) IntForKeyInTable(key string, table string) int {
 	return x.inner.IntForKeyInTable(foundation.NSStringStringWithUTF8String(key), foundation.NSStringStringWithUTF8String(table))
 }
 
+// Returns the rectangle associated with the specified key.
+//
 // RectForKeyInTable calls the underlying RectForKeyInTable.
 func (x *Printer) RectForKeyInTable(key string, table string) corefoundation.CGRect {
 	return x.inner.RectForKeyInTable(foundation.NSStringStringWithUTF8String(key), foundation.NSStringStringWithUTF8String(table))
 }
 
+// Returns the size data type associated with the specified key.
+//
 // SizeForKeyInTable calls the underlying SizeForKeyInTable.
 func (x *Printer) SizeForKeyInTable(key string, table string) corefoundation.CGSize {
 	return x.inner.SizeForKeyInTable(foundation.NSStringStringWithUTF8String(key), foundation.NSStringStringWithUTF8String(table))
 }
 
+// Returns the first occurrence of a value associated with specified key.
+//
 // StringForKeyInTable calls the underlying StringForKeyInTable.
 func (x *Printer) StringForKeyInTable(key string, table string) string {
 	_r := x.inner.StringForKeyInTable(foundation.NSStringStringWithUTF8String(key), foundation.NSStringStringWithUTF8String(table))
@@ -115,36 +135,50 @@ func (x *Printer) StringForKeyInTable(key string, table string) string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns an array of strings, one for each occurrence, associated with specified key.
+//
 // StringListForKeyInTable calls the underlying StringListForKeyInTable.
 func (x *Printer) StringListForKeyInTable(key string, table string) *foundation.NSArray[objc.ID] {
 	return x.inner.StringListForKeyInTable(foundation.NSStringStringWithUTF8String(key), foundation.NSStringStringWithUTF8String(table))
 }
 
+// Deprecated.
+//
 // ImageRectForPaper calls the underlying ImageRectForPaper.
 func (x *Printer) ImageRectForPaper(paperName string) corefoundation.CGRect {
 	return x.inner.ImageRectForPaper(foundation.NSStringStringWithUTF8String(paperName))
 }
 
+// Deprecated.
+//
 // AcceptsBinary calls the underlying AcceptsBinary.
 func (x *Printer) AcceptsBinary() bool {
 	return x.inner.AcceptsBinary()
 }
 
+// Deprecated.
+//
 // IsColor calls the underlying IsColor.
 func (x *Printer) IsColor() bool {
 	return x.inner.IsColor()
 }
 
+// Deprecated.
+//
 // IsFontAvailable calls the underlying IsFontAvailable.
 func (x *Printer) IsFontAvailable(faceName string) bool {
 	return x.inner.IsFontAvailable(foundation.NSStringStringWithUTF8String(faceName))
 }
 
+// Deprecated.
+//
 // IsOutputStackInReverseOrder calls the underlying IsOutputStackInReverseOrder.
 func (x *Printer) IsOutputStackInReverseOrder() bool {
 	return x.inner.IsOutputStackInReverseOrder()
 }
 
+// Deprecated.
+//
 // Domain calls the underlying Domain.
 func (x *Printer) Domain() string {
 	_r := x.inner.Domain()
@@ -154,6 +188,8 @@ func (x *Printer) Domain() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Deprecated.
+//
 // Host calls the underlying Host.
 func (x *Printer) Host() string {
 	_r := x.inner.Host()
@@ -163,6 +199,8 @@ func (x *Printer) Host() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Deprecated.
+//
 // Note calls the underlying Note.
 func (x *Printer) Note() string {
 	_r := x.inner.Note()

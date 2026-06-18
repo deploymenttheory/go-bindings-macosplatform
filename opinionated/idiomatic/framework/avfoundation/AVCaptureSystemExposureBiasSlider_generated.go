@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A control that adjusts the exposure bias of a capture device within the system-recommended range.
+//
 // CaptureSystemExposureBiasSlider wraps [raw.AVCaptureSystemExposureBiasSlider] with a fluent Go API.
 type CaptureSystemExposureBiasSlider struct {
 	inner *raw.AVCaptureSystemExposureBiasSlider
@@ -31,7 +33,7 @@ func CaptureSystemExposureBiasSliderFromID(id objc.ID) *CaptureSystemExposureBia
 	return &CaptureSystemExposureBiasSlider{inner: raw.AVCaptureSystemExposureBiasSliderFromID(id)}
 }
 
-// @method initWithDevice: @abstract Initializes an `AVCaptureSystemExposureBiasSlider` for controlling `device`. @param device The device to control. @discussion `AVCaptureSystemExposureBiasSlider` may only be initialized with `AVCaptureDevice` instances that support setting `exposureTargetBias`, otherwise an `NSInvalidArgumentException` is thrown.
+// Creates a slider to control the exposure bias of the specified capture device.
 //
 // NewCaptureSystemExposureBiasSliderWithDevice creates a new [CaptureSystemExposureBiasSlider].
 func NewCaptureSystemExposureBiasSliderWithDevice(device *raw.AVCaptureDevice) *CaptureSystemExposureBiasSlider {
@@ -40,7 +42,7 @@ func NewCaptureSystemExposureBiasSliderWithDevice(device *raw.AVCaptureDevice) *
 	return &CaptureSystemExposureBiasSlider{inner: raw.AVCaptureSystemExposureBiasSliderFromID(_id)}
 }
 
-// @method initWithDevice:action @abstract Initializes an `AVCaptureSystemExposureBiasSlider` for controlling `device` with a `@MainActor` `action` for handling `exposureTargetBias` changes. @param device The device to control. @param action An action called on `@MainActor` to handle `exposureTargetBias` changes by `AVCaptureSystemExposureBiasSlider`. @discussion `action` is **only** called when `exposureTargetBias` is changed by this control. Clients should not change `exposureTargetBias` on the device when `action` is called. If you need to react to other sources of `exposureTargetBias` changes, you will still need to use key-value observation. `AVCaptureSystemExposureBiasSlider` may only be initialized with `AVCaptureDevice` instances that support setting `exposureTargetBias`, otherwise an `NSInvalidArgumentException` is thrown.
+// Creates a slider to control the exposure bias of the specified capture device with an action to respond to exposure bias changes.
 //
 // NewCaptureSystemExposureBiasSliderWithDeviceAction creates a new [CaptureSystemExposureBiasSlider].
 func NewCaptureSystemExposureBiasSliderWithDeviceAction(device *raw.AVCaptureDevice, action func(float32)) *CaptureSystemExposureBiasSlider {
@@ -49,7 +51,7 @@ func NewCaptureSystemExposureBiasSliderWithDeviceAction(device *raw.AVCaptureDev
 	return &CaptureSystemExposureBiasSlider{inner: raw.AVCaptureSystemExposureBiasSliderFromID(_id)}
 }
 
-// @property enabled @abstract Indicates whether the control should be enabled for user interaction. @discussion The value of this property is a `BOOL` that determines whether the control should be enabled for user interaction. Clients can set this property to keep a control added to an `AVCaptureSession` but prevent it from being interacted with by the user. A control's value may still be changed while it is disabled. The default value is `YES`.
+// A Boolean value that indicates whether this control supports user interaction.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *CaptureSystemExposureBiasSlider) WithEnabled(enabled bool) *CaptureSystemExposureBiasSlider {

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that determines how the system shares a document in a collaboration.
+//
 // CollaborationOption wraps [raw.SWCollaborationOption] with a fluent Go API.
 type CollaborationOption struct {
 	inner *raw.SWCollaborationOption
@@ -32,7 +34,7 @@ func CollaborationOptionFromID(id objc.ID) *CollaborationOption {
 	return &CollaborationOption{inner: raw.SWCollaborationOptionFromID(id)}
 }
 
-// @abstract Initializes a collaboration option object with a title and unique identifier @param title A localized title string to be used when displaying the option @param identifier The unique identifier for the option
+// Creates and initializes a collaboration option object.
 //
 // NewCollaborationOptionWithTitleIdentifier creates a new [CollaborationOption].
 func NewCollaborationOptionWithTitleIdentifier(title string, identifier string) *CollaborationOption {
@@ -41,7 +43,7 @@ func NewCollaborationOptionWithTitleIdentifier(title string, identifier string) 
 	return &CollaborationOption{inner: raw.SWCollaborationOptionFromID(_id)}
 }
 
-// @abstract A localized title string to be used when displaying the option
+// A localized string the system displays as a title to represent the permissions option.
 //
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *CollaborationOption) WithTitle(title string) *CollaborationOption {
@@ -49,7 +51,7 @@ func (x *CollaborationOption) WithTitle(title string) *CollaborationOption {
 	return x
 }
 
-// @abstract A localized subtitle string to be used when displaying the option
+// A localized string the system displays to represent the permissions option in the collaboration view.
 //
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *CollaborationOption) WithSubtitle(subtitle string) *CollaborationOption {
@@ -57,7 +59,7 @@ func (x *CollaborationOption) WithSubtitle(subtitle string) *CollaborationOption
 	return x
 }
 
-// @abstract A flag that indicates whether the option is selected. @discussion This property should only be set directly when the option represents an individual switch. Defaults to NO
+// A Boolean value that represents the selected state of an option.
 //
 // WithSelected sets the selected property and returns the receiver for chaining.
 func (x *CollaborationOption) WithSelected(selected bool) *CollaborationOption {
@@ -65,7 +67,7 @@ func (x *CollaborationOption) WithSelected(selected bool) *CollaborationOption {
 	return x
 }
 
-// @abstract An array of option identifiers that must already be selected in order to be interacted with
+// An array of option identifiers that the app must select before the system makes the option interactive.
 //
 // WithRequiredOptionsIdentifiers sets the collection, converting the Go slice to an NSArray.
 func (x *CollaborationOption) WithRequiredOptionsIdentifiers(items ...*foundation.NSString) *CollaborationOption {

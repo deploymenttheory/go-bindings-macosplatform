@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An array of vertex buffer layout descriptor instances.
+//
 // VertexBufferLayoutDescriptorArray wraps [raw.MTLVertexBufferLayoutDescriptorArray] with a fluent Go API.
 type VertexBufferLayoutDescriptorArray struct {
 	inner *raw.MTLVertexBufferLayoutDescriptorArray
@@ -37,6 +39,8 @@ func NewVertexBufferLayoutDescriptorArray() *VertexBufferLayoutDescriptorArray {
 	return &VertexBufferLayoutDescriptorArray{inner: raw.MTLVertexBufferLayoutDescriptorArrayFromID(_id)}
 }
 
+// Returns the state of the specified vertex buffer layout.
+//
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *VertexBufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index uint) *VertexBufferLayoutDescriptor {
 	_r := x.inner.ObjectAtIndexedSubscript(index)
@@ -46,6 +50,8 @@ func (x *VertexBufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index uint)
 	return &VertexBufferLayoutDescriptor{inner: _r}
 }
 
+// Sets the state of the specified vertex buffer layout.
+//
 // SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
 func (x *VertexBufferLayoutDescriptorArray) SetObjectAtIndexedSubscript(bufferDesc *raw.MTLVertexBufferLayoutDescriptor, index uint) {
 	x.inner.SetObjectAtIndexedSubscript(bufferDesc, index)

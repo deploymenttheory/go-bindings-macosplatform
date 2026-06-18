@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A request to schedule a local notification, which includes the content of the notification and the trigger conditions for delivery.
+//
 // NotificationRequest wraps [raw.UNNotificationRequest] with a fluent Go API.
 type NotificationRequest struct {
 	inner *raw.UNNotificationRequest

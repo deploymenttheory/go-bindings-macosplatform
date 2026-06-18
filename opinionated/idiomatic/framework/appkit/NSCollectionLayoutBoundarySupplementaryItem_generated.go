@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object used to add headers or footers to a collection view.
+//
 // CollectionLayoutBoundarySupplementaryItem wraps [raw.NSCollectionLayoutBoundarySupplementaryItem] with a fluent Go API.
 type CollectionLayoutBoundarySupplementaryItem struct {
 	inner *raw.NSCollectionLayoutBoundarySupplementaryItem
@@ -38,30 +40,40 @@ func NewCollectionLayoutBoundarySupplementaryItem() *CollectionLayoutBoundarySup
 	return &CollectionLayoutBoundarySupplementaryItem{inner: raw.NSCollectionLayoutBoundarySupplementaryItemFromID(_id)}
 }
 
+// A Boolean value that indicates whether a boundary supplementary item extends the content area of the section or layout it’s attached to.
+//
 // WithExtendsBoundary sets the extendsBoundary property and returns the receiver for chaining.
 func (x *CollectionLayoutBoundarySupplementaryItem) WithExtendsBoundary(extendsBoundary bool) *CollectionLayoutBoundarySupplementaryItem {
 	x.inner.SetExtendsBoundary(extendsBoundary)
 	return x
 }
 
+// A Boolean value that indicates whether a header or footer is pinned to the top or bottom visible boundary of the section or layout it’s attached to.
+//
 // WithPinToVisibleBounds sets the pinToVisibleBounds property and returns the receiver for chaining.
 func (x *CollectionLayoutBoundarySupplementaryItem) WithPinToVisibleBounds(pinToVisibleBounds bool) *CollectionLayoutBoundarySupplementaryItem {
 	x.inner.SetPinToVisibleBounds(pinToVisibleBounds)
 	return x
 }
 
+// The vertical stacking order of the supplementary item in relation to other items in the section.
+//
 // WithZIndex sets the zIndex property and returns the receiver for chaining.
 func (x *CollectionLayoutBoundarySupplementaryItem) WithZIndex(zIndex int) *CollectionLayoutBoundarySupplementaryItem {
 	x.inner.NSCollectionLayoutSupplementaryItem.SetZIndex(zIndex)
 	return x
 }
 
+// The amount of space added around the content of the item to adjust its final size after its position is computed.
+//
 // WithContentInsets sets the contentInsets property and returns the receiver for chaining.
 func (x *CollectionLayoutBoundarySupplementaryItem) WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutBoundarySupplementaryItem {
 	x.inner.NSCollectionLayoutSupplementaryItem.NSCollectionLayoutItem.SetContentInsets(contentInsets)
 	return x
 }
 
+// The amount of space added around the boundaries of the item between other items and this item’s container.
+//
 // WithEdgeSpacing sets the edgeSpacing property and returns the receiver for chaining.
 func (x *CollectionLayoutBoundarySupplementaryItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutBoundarySupplementaryItem {
 	x.inner.NSCollectionLayoutSupplementaryItem.NSCollectionLayoutItem.SetEdgeSpacing(edgeSpacing.Unwrap())

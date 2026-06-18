@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An item in a tab view.
+//
 // TabViewItem wraps [raw.NSTabViewItem] with a fluent Go API.
 type TabViewItem struct {
 	inner *raw.NSTabViewItem
@@ -38,6 +40,8 @@ func NewTabViewItem() *TabViewItem {
 	return &TabViewItem{inner: raw.NSTabViewItemFromID(_id)}
 }
 
+// Performs default initialization for the receiver.
+//
 // NewTabViewItemWithIdentifier creates a new [TabViewItem].
 func NewTabViewItemWithIdentifier(identifier objc.ID) *TabViewItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTabViewItem")), objc.RegisterName("alloc"))
@@ -45,25 +49,31 @@ func NewTabViewItemWithIdentifier(identifier objc.ID) *TabViewItem {
 	return &TabViewItem{inner: raw.NSTabViewItemFromID(_id)}
 }
 
+// Sets the receiver’s optional identifier object to identifier.
+//
 // WithIdentifier sets the identifier property and returns the receiver for chaining.
 func (x *TabViewItem) WithIdentifier(identifier objc.ID) *TabViewItem {
 	x.inner.SetIdentifier(identifier)
 	return x
 }
 
+// Sets the background color for content in the view.
+//
 // WithColor sets the color property and returns the receiver for chaining.
 func (x *TabViewItem) WithColor(color *Color) *TabViewItem {
 	x.inner.SetColor(color.Unwrap())
 	return x
 }
 
+// Sets the label text for the receiver to label.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *TabViewItem) WithLabel(label string) *TabViewItem {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
-// Gets and set the image for this tab view item. The image may only be used in certain tab view styles and options. The default value is `nil`.
+// Gets and set the image for this tab view item. The image may only be used in certain tab view styles and options.
 //
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *TabViewItem) WithImage(image *Image) *TabViewItem {
@@ -71,6 +81,8 @@ func (x *TabViewItem) WithImage(image *Image) *TabViewItem {
 	return x
 }
 
+// Sets the view associated with the receiver to view.
+//
 // WithView sets the view property and returns the receiver for chaining.
 func (x *TabViewItem) WithView(view ViewProvider) *TabViewItem {
 	x.inner.SetView(view.asView())
@@ -85,23 +97,31 @@ func (x *TabViewItem) WithViewController(viewController ViewControllerProvider) 
 	return x
 }
 
+// Sets the initial first responder for the view associated with the receiver (the view that is displayed when a user clicks on the tab) to view.
+//
 // WithInitialFirstResponder sets the initialFirstResponder property and returns the receiver for chaining.
 func (x *TabViewItem) WithInitialFirstResponder(initialFirstResponder ViewProvider) *TabViewItem {
 	x.inner.SetInitialFirstResponder(initialFirstResponder.asView())
 	return x
 }
 
+// Sets the tooltip displayed for the tab view item.
+//
 // WithToolTip sets the toolTip property and returns the receiver for chaining.
 func (x *TabViewItem) WithToolTip(toolTip string) *TabViewItem {
 	x.inner.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
 	return x
 }
 
+// Draws the receiver’s label in tabRect, which is the area between the curved end caps.
+//
 // DrawLabelInRect calls the underlying DrawLabelInRect.
 func (x *TabViewItem) DrawLabelInRect(shouldTruncateLabel bool, labelRect corefoundation.CGRect) {
 	x.inner.DrawLabelInRect(shouldTruncateLabel, labelRect)
 }
 
+// Calculates the size of the receiver’s label.
+//
 // SizeOfLabel calls the underlying SizeOfLabel.
 func (x *TabViewItem) SizeOfLabel(computeMin bool) corefoundation.CGSize {
 	return x.inner.SizeOfLabel(computeMin)

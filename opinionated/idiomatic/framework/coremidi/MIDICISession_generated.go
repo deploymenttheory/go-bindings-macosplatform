@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a MIDI-CI session.
+//
 // CISession wraps [raw.MIDICISession] with a fluent Go API.
 type CISession struct {
 	inner *raw.MIDICISession
@@ -31,6 +33,8 @@ func CISessionFromID(id objc.ID) *CISession {
 	return &CISession{inner: raw.MIDICISessionFromID(id)}
 }
 
+// Creates a MIDI-CI session.
+//
 // NewCISessionWithDiscoveredNodeDataReadyHandlerDisconnectHandler creates a new [CISession].
 func NewCISessionWithDiscoveredNodeDataReadyHandlerDisconnectHandler(discoveredNode *raw.MIDICIDiscoveredNode, handler func(), disconnectHandler func(*raw.MIDICISession, unsafe.Pointer)) *CISession {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDICISession")), objc.RegisterName("alloc"))
@@ -38,18 +42,24 @@ func NewCISessionWithDiscoveredNodeDataReadyHandlerDisconnectHandler(discoveredN
 	return &CISession{inner: raw.MIDICISessionFromID(_id)}
 }
 
+// An optional block the system calls after it enables or disables a profile.
+//
 // WithProfileChangedCallback sets the profileChangedCallback property and returns the receiver for chaining.
 func (x *CISession) WithProfileChangedCallback(profileChangedCallback func(*raw.MIDICISession, uint8, *raw.MIDICIProfile, bool)) *CISession {
 	x.inner.SetProfileChangedCallback(profileChangedCallback)
 	return x
 }
 
+// An optional block the system calls when a device sends profile-specific data to the session.
+//
 // WithProfileSpecificDataHandler sets the profileSpecificDataHandler property and returns the receiver for chaining.
 func (x *CISession) WithProfileSpecificDataHandler(profileSpecificDataHandler func(*raw.MIDICISession, uint8, *raw.MIDICIProfile, *foundation.NSData)) *CISession {
 	x.inner.SetProfileSpecificDataHandler(profileSpecificDataHandler)
 	return x
 }
 
+// Returns the profile state for the specified MIDI channel number.
+//
 // ProfileStateForChannel calls the underlying ProfileStateForChannel.
 func (x *CISession) ProfileStateForChannel(channel uint8) *CIProfileState {
 	_r := x.inner.ProfileStateForChannel(channel)
@@ -59,16 +69,22 @@ func (x *CISession) ProfileStateForChannel(channel uint8) *CIProfileState {
 	return &CIProfileState{inner: _r}
 }
 
+// Performs an asynchronous request to enable a profile for a specific MIDI channel number.
+//
 // EnableProfileOnChannelError calls the underlying EnableProfileOnChannelError.
 func (x *CISession) EnableProfileOnChannelError(profile *raw.MIDICIProfile, channel uint8) (bool, error) {
 	return x.inner.EnableProfileOnChannelError(profile, channel)
 }
 
+// Performs an asynchronous request to disable a profile for a specific MIDI channel number.
+//
 // DisableProfileOnChannelError calls the underlying DisableProfileOnChannelError.
 func (x *CISession) DisableProfileOnChannelError(profile *raw.MIDICIProfile, channel uint8) (bool, error) {
 	return x.inner.DisableProfileOnChannelError(profile, channel)
 }
 
+// Sends profile-specific data to the MIDI-CI session.
+//
 // SendProfileOnChannelProfileData calls the underlying SendProfileOnChannelProfileData.
 func (x *CISession) SendProfileOnChannelProfileData(profile *raw.MIDICIProfile, channel uint8, profileSpecificData *foundation.NSData) bool {
 	return x.inner.SendProfileOnChannelProfileData(profile, channel, profileSpecificData)

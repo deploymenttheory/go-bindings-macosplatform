@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An event that represents when playback is likely to continue without stalling.
+//
 // MetricPlayerItemLikelyToKeepUpEvent wraps [raw.AVMetricPlayerItemLikelyToKeepUpEvent] with a fluent Go API.
 type MetricPlayerItemLikelyToKeepUpEvent struct {
 	inner *raw.AVMetricPlayerItemLikelyToKeepUpEvent

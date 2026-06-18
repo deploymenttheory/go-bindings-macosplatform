@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The configuration options that control the behavior of a compilation task for a Metal 4 compiler instance.
+//
 // MTL4CompilerTaskOptions wraps [raw.MTL4CompilerTaskOptions] with a fluent Go API.
 type MTL4CompilerTaskOptions struct {
 	inner *raw.MTL4CompilerTaskOptions

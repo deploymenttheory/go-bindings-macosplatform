@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that indicates whether there are any payment cards available to add as Wallet passes.
+//
 // IssuerProvisioningExtensionStatus wraps [raw.PKIssuerProvisioningExtensionStatus] with a fluent Go API.
 type IssuerProvisioningExtensionStatus struct {
 	inner *raw.PKIssuerProvisioningExtensionStatus
@@ -37,18 +39,24 @@ func NewIssuerProvisioningExtensionStatus() *IssuerProvisioningExtensionStatus {
 	return &IssuerProvisioningExtensionStatus{inner: raw.PKIssuerProvisioningExtensionStatusFromID(_id)}
 }
 
+// A Boolean value that indicates whether adding a card requires an authorization-user-interface extension provided by your app.
+//
 // WithRequiresAuthentication sets the requiresAuthentication property and returns the receiver for chaining.
 func (x *IssuerProvisioningExtensionStatus) WithRequiresAuthentication(requiresAuthentication bool) *IssuerProvisioningExtensionStatus {
 	x.inner.SetRequiresAuthentication(requiresAuthentication)
 	return x
 }
 
+// A Boolean value that indicates whether a payment card is available to add to an iPhone.
+//
 // WithPassEntriesAvailable sets the passEntriesAvailable property and returns the receiver for chaining.
 func (x *IssuerProvisioningExtensionStatus) WithPassEntriesAvailable(passEntriesAvailable bool) *IssuerProvisioningExtensionStatus {
 	x.inner.SetPassEntriesAvailable(passEntriesAvailable)
 	return x
 }
 
+// A Boolean value that indicates whether a payment card is available to add to an Apple Watch.
+//
 // WithRemotePassEntriesAvailable sets the remotePassEntriesAvailable property and returns the receiver for chaining.
 func (x *IssuerProvisioningExtensionStatus) WithRemotePassEntriesAvailable(remotePassEntriesAvailable bool) *IssuerProvisioningExtensionStatus {
 	x.inner.SetRemotePassEntriesAvailable(remotePassEntriesAvailable)

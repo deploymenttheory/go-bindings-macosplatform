@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A container that aligns views in a flexible grid of rows and columns.
+//
 // GridView wraps [raw.NSGridView] with a fluent Go API.
 type GridView struct {
 	inner *raw.NSGridView
@@ -34,6 +36,8 @@ func GridViewFromID(id objc.ID) *GridView {
 	return &GridView{inner: raw.NSGridViewFromID(id)}
 }
 
+// Creates a newly allocated grid view object with the specified frame rectangle.
+//
 // NewGridViewWithFrame creates a new [GridView].
 func NewGridViewWithFrame(frameRect corefoundation.CGRect) *GridView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSGridView")), objc.RegisterName("alloc"))
@@ -41,6 +45,8 @@ func NewGridViewWithFrame(frameRect corefoundation.CGRect) *GridView {
 	return &GridView{inner: raw.NSGridViewFromID(_id)}
 }
 
+// Creates a newly allocated grid view object from the coder.
+//
 // NewGridViewWithCoder creates a new [GridView].
 func NewGridViewWithCoder(coder *foundation.NSCoder) *GridView {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSGridView")), objc.RegisterName("alloc"))
@@ -48,30 +54,40 @@ func NewGridViewWithCoder(coder *foundation.NSCoder) *GridView {
 	return &GridView{inner: raw.NSGridViewFromID(_id)}
 }
 
+// The placement of the cell within the grid column.
+//
 // WithXPlacement sets the xPlacement property and returns the receiver for chaining.
 func (x *GridView) WithXPlacement(xPlacement NSGridCellPlacement) *GridView {
 	x.inner.SetXPlacement(raw.NSGridCellPlacement(xPlacement))
 	return x
 }
 
+// The placement of the cell within the grid row.
+//
 // WithYPlacement sets the yPlacement property and returns the receiver for chaining.
 func (x *GridView) WithYPlacement(yPlacement NSGridCellPlacement) *GridView {
 	x.inner.SetYPlacement(raw.NSGridCellPlacement(yPlacement))
 	return x
 }
 
+// The row alignment for the grid view.
+//
 // WithRowAlignment sets the rowAlignment property and returns the receiver for chaining.
 func (x *GridView) WithRowAlignment(rowAlignment NSGridRowAlignment) *GridView {
 	x.inner.SetRowAlignment(raw.NSGridRowAlignment(rowAlignment))
 	return x
 }
 
+// The row spacing for the grid view.
+//
 // WithRowSpacing sets the rowSpacing property and returns the receiver for chaining.
 func (x *GridView) WithRowSpacing(rowSpacing float64) *GridView {
 	x.inner.SetRowSpacing(rowSpacing)
 	return x
 }
 
+// The column spacing for the grid view.
+//
 // WithColumnSpacing sets the columnSpacing property and returns the receiver for chaining.
 func (x *GridView) WithColumnSpacing(columnSpacing float64) *GridView {
 	x.inner.SetColumnSpacing(columnSpacing)
@@ -120,6 +136,8 @@ func (x *GridView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptio
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *GridView) WithFrame(frame corefoundation.CGRect) *GridView {
 	x.inner.NSView.SetFrame(frame)
@@ -144,6 +162,8 @@ func (x *GridView) WithBoundsRotation(boundsRotation float64) *GridView {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *GridView) WithBounds(bounds corefoundation.CGRect) *GridView {
 	x.inner.NSView.SetBounds(bounds)
@@ -156,6 +176,8 @@ func (x *GridView) WithCanDrawConcurrently(canDrawConcurrently bool) *GridView {
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *GridView) WithNeedsDisplay(needsDisplay bool) *GridView {
 	x.inner.NSView.SetNeedsDisplay(needsDisplay)
@@ -342,7 +364,7 @@ func (x *GridView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundat
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *GridView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *GridView {
@@ -398,30 +420,40 @@ func (x *GridView) WithPressureConfiguration(pressureConfiguration *PressureConf
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *GridView) WithNextResponder(nextResponder ResponderProvider) *GridView {
 	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *GridView) WithMenu(menu *Menu) *GridView {
 	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *GridView) WithUserActivity(userActivity *foundation.NSUserActivity) *GridView {
 	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *GridView) WithTouchBar(touchBar *TouchBar) *GridView {
 	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Returns the grid row object at the specified index.
+//
 // RowAtIndex calls the underlying RowAtIndex.
 func (x *GridView) RowAtIndex(index int) *GridRow {
 	_r := x.inner.RowAtIndex(index)
@@ -431,11 +463,15 @@ func (x *GridView) RowAtIndex(index int) *GridRow {
 	return &GridRow{inner: _r}
 }
 
+// Returns the index of the specified grid row.
+//
 // IndexOfRow calls the underlying IndexOfRow.
 func (x *GridView) IndexOfRow(row *raw.NSGridRow) int {
 	return x.inner.IndexOfRow(row)
 }
 
+// Returns the grid column object at the specified index.
+//
 // ColumnAtIndex calls the underlying ColumnAtIndex.
 func (x *GridView) ColumnAtIndex(index int) *GridColumn {
 	_r := x.inner.ColumnAtIndex(index)
@@ -445,11 +481,15 @@ func (x *GridView) ColumnAtIndex(index int) *GridColumn {
 	return &GridColumn{inner: _r}
 }
 
+// Returns the index of the specified grid column.
+//
 // IndexOfColumn calls the underlying IndexOfColumn.
 func (x *GridView) IndexOfColumn(column *raw.NSGridColumn) int {
 	return x.inner.IndexOfColumn(column)
 }
 
+// Returns the grid cell object at the specified column and row index.
+//
 // CellAtColumnIndexRowIndex calls the underlying CellAtColumnIndexRowIndex.
 func (x *GridView) CellAtColumnIndexRowIndex(columnIndex int, rowIndex int) *GridCell {
 	_r := x.inner.CellAtColumnIndexRowIndex(columnIndex, rowIndex)
@@ -459,6 +499,8 @@ func (x *GridView) CellAtColumnIndexRowIndex(columnIndex int, rowIndex int) *Gri
 	return &GridCell{inner: _r}
 }
 
+// Returns the grid cell object that contains the given view or one of its ancestors.
+//
 // CellForView calls the underlying CellForView.
 func (x *GridView) CellForView(view *raw.NSView) *GridCell {
 	_r := x.inner.CellForView(view)
@@ -468,6 +510,8 @@ func (x *GridView) CellForView(view *raw.NSView) *GridCell {
 	return &GridCell{inner: _r}
 }
 
+// Adds an array of views to a new row.
+//
 // AddRowWithViews calls the underlying AddRowWithViews.
 func (x *GridView) AddRowWithViews(views ...ViewProvider) *GridRow {
 	_ptrs := make([]objc.ID, len(views))
@@ -486,6 +530,8 @@ func (x *GridView) AddRowWithViews(views ...ViewProvider) *GridRow {
 	return &GridRow{inner: _r}
 }
 
+// Inserts the array of view objects into the grid view at the index.
+//
 // InsertRowAtIndexWithViews calls the underlying InsertRowAtIndexWithViews.
 func (x *GridView) InsertRowAtIndexWithViews(index int, views ...ViewProvider) *GridRow {
 	_ptrs := make([]objc.ID, len(views))
@@ -504,16 +550,22 @@ func (x *GridView) InsertRowAtIndexWithViews(index int, views ...ViewProvider) *
 	return &GridRow{inner: _r}
 }
 
+// Moves the specified row to the new row location.
+//
 // MoveRowAtIndexToIndex calls the underlying MoveRowAtIndexToIndex.
 func (x *GridView) MoveRowAtIndexToIndex(fromIndex int, toIndex int) {
 	x.inner.MoveRowAtIndexToIndex(fromIndex, toIndex)
 }
 
+// Removes the row from the grid view at the index.
+//
 // RemoveRowAtIndex calls the underlying RemoveRowAtIndex.
 func (x *GridView) RemoveRowAtIndex(index int) {
 	x.inner.RemoveRowAtIndex(index)
 }
 
+// Adds a new column containing the array of views.
+//
 // AddColumnWithViews calls the underlying AddColumnWithViews.
 func (x *GridView) AddColumnWithViews(views ...ViewProvider) *GridColumn {
 	_ptrs := make([]objc.ID, len(views))
@@ -532,6 +584,8 @@ func (x *GridView) AddColumnWithViews(views ...ViewProvider) *GridColumn {
 	return &GridColumn{inner: _r}
 }
 
+// Inserts the array of view objects at the specified index.
+//
 // InsertColumnAtIndexWithViews calls the underlying InsertColumnAtIndexWithViews.
 func (x *GridView) InsertColumnAtIndexWithViews(index int, views ...ViewProvider) *GridColumn {
 	_ptrs := make([]objc.ID, len(views))
@@ -550,16 +604,22 @@ func (x *GridView) InsertColumnAtIndexWithViews(index int, views ...ViewProvider
 	return &GridColumn{inner: _r}
 }
 
+// Moves the specified column to a new column location.
+//
 // MoveColumnAtIndexToIndex calls the underlying MoveColumnAtIndexToIndex.
 func (x *GridView) MoveColumnAtIndexToIndex(fromIndex int, toIndex int) {
 	x.inner.MoveColumnAtIndexToIndex(fromIndex, toIndex)
 }
 
+// Removes the column from the grid view at the specified index.
+//
 // RemoveColumnAtIndex calls the underlying RemoveColumnAtIndex.
 func (x *GridView) RemoveColumnAtIndex(index int) {
 	x.inner.RemoveColumnAtIndex(index)
 }
 
+// Expands the cell at the top-leading corner of the horizontal and vertical range to cover the entire area.
+//
 // MergeCellsInHorizontalRangeVerticalRange calls the underlying MergeCellsInHorizontalRangeVerticalRange.
 func (x *GridView) MergeCellsInHorizontalRangeVerticalRange(hRange foundation.NSRange, vRange foundation.NSRange) {
 	x.inner.MergeCellsInHorizontalRangeVerticalRange(hRange, vRange)

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines a policy to automatically manage the storage of downloaded assets.
+//
 // AssetDownloadStorageManagementPolicy wraps [raw.AVAssetDownloadStorageManagementPolicy] with a fluent Go API.
 type AssetDownloadStorageManagementPolicy struct {
 	inner *raw.AVAssetDownloadStorageManagementPolicy

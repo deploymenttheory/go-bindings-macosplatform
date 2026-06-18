@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A class that consists of all the levers for compiling graphs.
+//
 // GraphCompilationDescriptor wraps [raw.MPSGraphCompilationDescriptor] with a fluent Go API.
 type GraphCompilationDescriptor struct {
 	inner *raw.MPSGraphCompilationDescriptor
@@ -53,7 +55,7 @@ func (x *GraphCompilationDescriptor) WithWaitForCompilationCompletion(waitForCom
 	return x
 }
 
-// The handler that the graph calls when the compilation completes. Default value is nil.
+// The handler that the graph calls when the compilation completes.
 //
 // WithCompilationCompletionHandler sets the compilationCompletionHandler property and returns the receiver for chaining.
 func (x *GraphCompilationDescriptor) WithCompilationCompletionHandler(compilationCompletionHandler func(*raw.MPSGraphExecutable, unsafe.Pointer)) *GraphCompilationDescriptor {
@@ -61,7 +63,7 @@ func (x *GraphCompilationDescriptor) WithCompilationCompletionHandler(compilatio
 	return x
 }
 
-// The dispatch queue used for the compilation. Default value is nil.
+// The dispatch queue used for the compilation.
 //
 // WithDispatchQueue sets the dispatchQueue property and returns the receiver for chaining.
 func (x *GraphCompilationDescriptor) WithDispatchQueue(dispatchQueue *foundation.NSObject) *GraphCompilationDescriptor {
@@ -69,7 +71,7 @@ func (x *GraphCompilationDescriptor) WithDispatchQueue(dispatchQueue *foundation
 	return x
 }
 
-// The optimization profile for the graph optimization. Default is MPSGraphOptimizationProfilePerformance.
+// The optimization profile for the graph optimization.
 //
 // WithOptimizationProfile sets the optimizationProfile property and returns the receiver for chaining.
 func (x *GraphCompilationDescriptor) WithOptimizationProfile(optimizationProfile MPSGraphOptimizationProfile) *GraphCompilationDescriptor {
@@ -92,7 +94,7 @@ func (x *GraphCompilationDescriptor) DisableTypeInference() {
 	x.inner.DisableTypeInference()
 }
 
-// Turns on Automatic Layout Conversion (for conv like operations) for GPU.
+// Turns on Automatic Layout Conversion (for conv like operations) for GPU. DEPRECATED: Layout conversion is now default, so this function is a no-op.
 //
 // ConvertLayoutToNHWC calls the underlying ConvertLayoutToNHWC.
 func (x *GraphCompilationDescriptor) ConvertLayoutToNHWC() {

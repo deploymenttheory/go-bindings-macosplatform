@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A factory class for creating vertical layout constraint objects using a fluent API.
+//
 // LayoutYAxisAnchor wraps [raw.NSLayoutYAxisAnchor] with a fluent Go API.
 type LayoutYAxisAnchor struct {
 	inner *raw.NSLayoutYAxisAnchor
@@ -35,6 +37,8 @@ func NewLayoutYAxisAnchor() *LayoutYAxisAnchor {
 	return &LayoutYAxisAnchor{inner: raw.NSLayoutYAxisAnchorFromID(_id)}
 }
 
+// Creates a layout dimension object from two anchors.
+//
 // AnchorWithOffsetToAnchor calls the underlying AnchorWithOffsetToAnchor.
 func (x *LayoutYAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *raw.NSLayoutYAxisAnchor) *LayoutDimension {
 	_r := x.inner.AnchorWithOffsetToAnchor(otherAnchor)
@@ -44,6 +48,8 @@ func (x *LayoutYAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *raw.NSLayoutYA
 	return &LayoutDimension{inner: _r}
 }
 
+// Returns a constraint that defines the specific distance at which the current anchor is positioned below the specified anchor.
+//
 // ConstraintEqualToSystemSpacingBelowAnchorMultiplier calls the underlying ConstraintEqualToSystemSpacingBelowAnchorMultiplier.
 func (x *LayoutYAxisAnchor) ConstraintEqualToSystemSpacingBelowAnchorMultiplier(anchor *raw.NSLayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
 	_r := x.inner.ConstraintEqualToSystemSpacingBelowAnchorMultiplier(anchor, multiplier)
@@ -53,6 +59,8 @@ func (x *LayoutYAxisAnchor) ConstraintEqualToSystemSpacingBelowAnchorMultiplier(
 	return &LayoutConstraint{inner: _r}
 }
 
+// Returns a constraint that defines the minimum distance by which the current anchor is positioned below the specified anchor.
+//
 // ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier calls the underlying ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier.
 func (x *LayoutYAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *raw.NSLayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
 	_r := x.inner.ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor, multiplier)
@@ -62,6 +70,8 @@ func (x *LayoutYAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingBelowAnch
 	return &LayoutConstraint{inner: _r}
 }
 
+// Returns a constraint that defines the maximum distance by which the current anchor is positioned below the specified anchor.
+//
 // ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier calls the underlying ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier.
 func (x *LayoutYAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *raw.NSLayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
 	_r := x.inner.ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor, multiplier)

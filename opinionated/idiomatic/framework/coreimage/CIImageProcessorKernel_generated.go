@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract class you extend to create custom image processors that can integrate with Core Image workflows.
+//
 // ImageProcessorKernel wraps [raw.CIImageProcessorKernel] with a fluent Go API.
 type ImageProcessorKernel struct {
 	inner *raw.CIImageProcessorKernel

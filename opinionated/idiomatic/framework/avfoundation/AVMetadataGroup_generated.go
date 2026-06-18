@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A collection of metadata items associated with a timeline segment.
+//
 // MetadataGroup wraps [raw.AVMetadataGroup] with a fluent Go API.
 type MetadataGroup struct {
 	inner *raw.AVMetadataGroup

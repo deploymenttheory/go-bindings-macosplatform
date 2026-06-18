@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that encapsulates the device token you use to deliver push notifications to your app.
+//
 // PushCredentials wraps [raw.PKPushCredentials] with a fluent Go API.
 type PushCredentials struct {
 	inner *raw.PKPushCredentials

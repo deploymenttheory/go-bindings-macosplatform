@@ -137,7 +137,7 @@ func EmitFrameworkWrappers(
 		return fmt.Errorf("emit class method functions: %w", err)
 	}
 	if err := emitConstants(
-		outDir, pkgName, rawPkgAlias, rawPkgPath, fw, handFuncs, takenNames,
+		outDir, pkgName, rawPkgAlias, rawPkgPath, fw, m, handFuncs, takenNames,
 	); err != nil {
 		return fmt.Errorf("emit constants: %w", err)
 	}

@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that manages audio assets, controls playback, and configures environmental effects.
+//
 // Engine wraps [raw.PHASEEngine] with a fluent Go API.
 type Engine struct {
 	inner *raw.PHASEEngine
@@ -32,7 +34,7 @@ func EngineFromID(id objc.ID) *Engine {
 	return &Engine{inner: raw.PHASEEngineFromID(id)}
 }
 
-// @method initWithUpdateMode: @abstract Initialize a new engine with an update mode. @param updateMode Defines how the engine will be updated.
+// Creates an engine updated by the app or framework.
 //
 // NewEngineWithUpdateMode creates a new [Engine].
 func NewEngineWithUpdateMode(updateMode PHASEUpdateMode) *Engine {
@@ -41,7 +43,7 @@ func NewEngineWithUpdateMode(updateMode PHASEUpdateMode) *Engine {
 	return &Engine{inner: raw.PHASEEngineFromID(_id)}
 }
 
-// @property outputSpatializationMode @discussion When set to a value other than PHASESpatializationModeAutomatic, overrides the default output spatializer and uses the specified one instead.
+// The mode the engine implements to create a 3D sound experience.
 //
 // WithOutputSpatializationMode sets the outputSpatializationMode property and returns the receiver for chaining.
 func (x *Engine) WithOutputSpatializationMode(outputSpatializationMode PHASESpatializationMode) *Engine {
@@ -49,7 +51,7 @@ func (x *Engine) WithOutputSpatializationMode(outputSpatializationMode PHASESpat
 	return x
 }
 
-// @property defaultMedium @abstract The default medium in the engine. @discussion The default value is PHASEMediumPresetAir.
+// The physical matter through which sound travels.
 //
 // WithDefaultMedium sets the defaultMedium property and returns the receiver for chaining.
 func (x *Engine) WithDefaultMedium(defaultMedium *Medium) *Engine {
@@ -57,7 +59,7 @@ func (x *Engine) WithDefaultMedium(defaultMedium *Medium) *Engine {
 	return x
 }
 
-// @property defaultReverbPreset @abstract The default reverb preset in the engine. @discussion The default value is PHASEReverbPresetNone.
+// The environmental surroundings that determine how sound resonates.
 //
 // WithDefaultReverbPreset sets the defaultReverbPreset property and returns the receiver for chaining.
 func (x *Engine) WithDefaultReverbPreset(defaultReverbPreset PHASEReverbPreset) *Engine {
@@ -65,7 +67,7 @@ func (x *Engine) WithDefaultReverbPreset(defaultReverbPreset PHASEReverbPreset) 
 	return x
 }
 
-// @property unitsPerSecond @abstract The number of units in a second. @discussion The unitsPerSecond is used internally to scale time/duration values passed to the API. This allows clients to pass time/duration values in their own native time scale. @note Values are clamped to the range (0, inf]. Default value is 1.
+// A conversion factor from seconds to your app’s preferred unit of time.
 //
 // WithUnitsPerSecond sets the unitsPerSecond property and returns the receiver for chaining.
 func (x *Engine) WithUnitsPerSecond(unitsPerSecond float64) *Engine {
@@ -73,7 +75,7 @@ func (x *Engine) WithUnitsPerSecond(unitsPerSecond float64) *Engine {
 	return x
 }
 
-// @property unitsPerMeter @abstract The number of units in a meter. @discussion The unitsPerMeter is used internally to scale metric values passed to the API. This allows clients to pass metric values in their own native spatial scale. @note Values are clamped to the range (0, inf]. Default value is 1.
+// A conversion factor from meters to your app’s preferred unit of measurement.
 //
 // WithUnitsPerMeter sets the unitsPerMeter property and returns the receiver for chaining.
 func (x *Engine) WithUnitsPerMeter(unitsPerMeter float64) *Engine {
@@ -81,7 +83,7 @@ func (x *Engine) WithUnitsPerMeter(unitsPerMeter float64) *Engine {
 	return x
 }
 
-// @method startAndReturnError: @abstract Start or resume the engine. @return YES for success.
+// Starts or resumes all audio playback.
 //
 // StartAndReturnError returns any validation error.
 func (x *Engine) StartAndReturnError() error {
@@ -89,21 +91,21 @@ func (x *Engine) StartAndReturnError() error {
 	return err
 }
 
-// @method pause @abstract Pause the engine.
+// Pauses all audio playback.
 //
 // Pause calls the underlying Pause.
 func (x *Engine) Pause() {
 	x.inner.Pause()
 }
 
-// @method stop @abstract Stop the engine.
+// Stops all audio playback.
 //
 // Stop calls the underlying Stop.
 func (x *Engine) Stop() {
 	x.inner.Stop()
 }
 
-// @method update: @abstract Manually update the engine instance on the calling thread. @discussion This will kick off all of the API commands called since the last call to update, update any systems and objects that need to be kept current, and call any registered handlers. @note This function has no effect if the engine's update mode is PHASEUpdateModeAutomatic.
+// Processes app commands and increments framework processing.
 //
 // Update calls the underlying Update.
 func (x *Engine) Update() {

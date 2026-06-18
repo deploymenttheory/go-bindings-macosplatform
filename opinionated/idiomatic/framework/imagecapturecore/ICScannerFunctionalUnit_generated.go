@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An abstract class that represents a scanner functional unit.
+//
 // ScannerFunctionalUnit wraps [raw.ICScannerFunctionalUnit] with a fluent Go API.
 type ScannerFunctionalUnit struct {
 	inner *raw.ICScannerFunctionalUnit

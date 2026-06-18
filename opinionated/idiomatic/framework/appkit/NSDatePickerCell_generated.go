@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that controls the behavior of a date picker, or of a single date picker cell in a matrix.
+//
 // DatePickerCell wraps [raw.NSDatePickerCell] with a fluent Go API.
 type DatePickerCell struct {
 	inner *raw.NSDatePickerCell
@@ -44,354 +46,472 @@ func NewDatePickerCellWithCoder(coder *foundation.NSCoder) *DatePickerCell {
 	return &DatePickerCell{inner: raw.NSDatePickerCellFromID(_id)}
 }
 
+// The date picker style to use.
+//
 // WithDatePickerStyle sets the datePickerStyle property and returns the receiver for chaining.
 func (x *DatePickerCell) WithDatePickerStyle(datePickerStyle NSDatePickerStyle) *DatePickerCell {
 	x.inner.SetDatePickerStyle(raw.NSDatePickerStyle(datePickerStyle))
 	return x
 }
 
+// A Boolean value indicating whether the cell draws its background.
+//
 // WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
 func (x *DatePickerCell) WithDrawsBackground(drawsBackground bool) *DatePickerCell {
 	x.inner.SetDrawsBackground(drawsBackground)
 	return x
 }
 
+// The cell’s background color.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *DatePickerCell) WithBackgroundColor(backgroundColor *Color) *DatePickerCell {
 	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// The cell’s text color.
+//
 // WithTextColor sets the textColor property and returns the receiver for chaining.
 func (x *DatePickerCell) WithTextColor(textColor *Color) *DatePickerCell {
 	x.inner.SetTextColor(textColor.Unwrap())
 	return x
 }
 
+// The mode in use by the date picker.
+//
 // WithDatePickerMode sets the datePickerMode property and returns the receiver for chaining.
 func (x *DatePickerCell) WithDatePickerMode(datePickerMode NSDatePickerMode) *DatePickerCell {
 	x.inner.SetDatePickerMode(raw.NSDatePickerMode(datePickerMode))
 	return x
 }
 
+// A bitmask that indicates which visual elements are shown by the date picker.
+//
 // WithDatePickerElements sets the datePickerElements property and returns the receiver for chaining.
 func (x *DatePickerCell) WithDatePickerElements(datePickerElements NSDatePickerElementFlags) *DatePickerCell {
 	x.inner.SetDatePickerElements(raw.NSDatePickerElementFlags(datePickerElements))
 	return x
 }
 
+// The calendar used by the date picker.
+//
 // WithCalendar sets the calendar property and returns the receiver for chaining.
 func (x *DatePickerCell) WithCalendar(calendar *foundation.NSCalendar) *DatePickerCell {
 	x.inner.SetCalendar(calendar)
 	return x
 }
 
+// The locale used to display dates.
+//
 // WithLocale sets the locale property and returns the receiver for chaining.
 func (x *DatePickerCell) WithLocale(locale *foundation.NSLocale) *DatePickerCell {
 	x.inner.SetLocale(locale)
 	return x
 }
 
+// The time zone used to display time-related values.
+//
 // WithTimeZone sets the timeZone property and returns the receiver for chaining.
 func (x *DatePickerCell) WithTimeZone(timeZone *foundation.NSTimeZone) *DatePickerCell {
 	x.inner.SetTimeZone(timeZone)
 	return x
 }
 
+// The date currently specified in the picker.
+//
 // WithDateValue sets the dateValue property and returns the receiver for chaining.
 func (x *DatePickerCell) WithDateValue(dateValue *foundation.NSDate) *DatePickerCell {
 	x.inner.SetDateValue(dateValue)
 	return x
 }
 
+// The time interval that represents the date range.
+//
 // WithTimeInterval sets the timeInterval property and returns the receiver for chaining.
 func (x *DatePickerCell) WithTimeInterval(timeInterval float64) *DatePickerCell {
 	x.inner.SetTimeInterval(timeInterval)
 	return x
 }
 
+// The minimum date that the picker allows as input.
+//
 // WithMinDate sets the minDate property and returns the receiver for chaining.
 func (x *DatePickerCell) WithMinDate(minDate *foundation.NSDate) *DatePickerCell {
 	x.inner.SetMinDate(minDate)
 	return x
 }
 
+// The maximum date that the picker allows as input.
+//
 // WithMaxDate sets the maxDate property and returns the receiver for chaining.
 func (x *DatePickerCell) WithMaxDate(maxDate *foundation.NSDate) *DatePickerCell {
 	x.inner.SetMaxDate(maxDate)
 	return x
 }
 
+// The delegate associated with the date picker.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *DatePickerCell) WithDelegate(delegate raw.NSDatePickerCellDelegate) *DatePickerCell {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The view associated with the cell.
+//
 // WithControlView sets the controlView property and returns the receiver for chaining.
 func (x *DatePickerCell) WithControlView(controlView ViewProvider) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetControlView(controlView.asView())
 	return x
 }
 
+// The type of the cell.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *DatePickerCell) WithType(type_ NSCellType) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
+// The cell’s current state.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *DatePickerCell) WithState(state int) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetState(state)
 	return x
 }
 
+// The object that receives the cell’s action messages.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *DatePickerCell) WithTarget(target objc.ID) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetTarget(target)
 	return x
 }
 
+// The action performed by the cell.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *DatePickerCell) WithAction(action objc.SEL) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetAction(action)
 	return x
 }
 
+// A tag for identifying the cell.
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *DatePickerCell) WithTag(tag int) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetTag(tag)
 	return x
 }
 
+// The cell’s title text.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *DatePickerCell) WithTitle(title string) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// A Boolean value indicating whether the cell is currently enabled.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *DatePickerCell) WithEnabled(enabled bool) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *DatePickerCell) WithContinuous(continuous bool) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value indicating whether the cell is editable.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *DatePickerCell) WithEditable(editable bool) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetEditable(editable)
 	return x
 }
 
+// A Boolean value indicating whether the cell’s text can be selected.
+//
 // WithSelectable sets the selectable property and returns the receiver for chaining.
 func (x *DatePickerCell) WithSelectable(selectable bool) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetSelectable(selectable)
 	return x
 }
 
+// A Boolean value indicating whether the cell draws itself outlined with a plain border.
+//
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *DatePickerCell) WithBordered(bordered bool) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetBordered(bordered)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a bezeled border.
+//
 // WithBezeled sets the bezeled property and returns the receiver for chaining.
 func (x *DatePickerCell) WithBezeled(bezeled bool) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetBezeled(bezeled)
 	return x
 }
 
+// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
+//
 // WithScrollable sets the scrollable property and returns the receiver for chaining.
 func (x *DatePickerCell) WithScrollable(scrollable bool) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetScrollable(scrollable)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a highlighted appearance.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *DatePickerCell) WithHighlighted(highlighted bool) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetHighlighted(highlighted)
 	return x
 }
 
+// The alignment of the cell’s text.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *DatePickerCell) WithAlignment(alignment NSTextAlignment) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+//
 // WithWraps sets the wraps property and returns the receiver for chaining.
 func (x *DatePickerCell) WithWraps(wraps bool) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetWraps(wraps)
 	return x
 }
 
+// The font that the cell uses to display text.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *DatePickerCell) WithFont(font *Font) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
+// The cell’s formatter object.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *DatePickerCell) WithFormatter(formatter *foundation.NSFormatter) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetFormatter(formatter)
 	return x
 }
 
+// The cell’s value as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *DatePickerCell) WithObjectValue(objectValue objc.ID) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetObjectValue(objectValue)
 	return x
 }
 
+// The cell’s value as a string.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *DatePickerCell) WithStringValue(stringValue string) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The cell’s value as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *DatePickerCell) WithIntValue(intValue int) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetIntValue(intValue)
 	return x
 }
 
+// The cell’s value as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *DatePickerCell) WithFloatValue(floatValue float32) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetFloatValue(floatValue)
 	return x
 }
 
+// The cell’s value as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *DatePickerCell) WithDoubleValue(doubleValue float64) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The cell’s value as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *DatePickerCell) WithIntegerValue(integerValue int) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetIntegerValue(integerValue)
 	return x
 }
 
+// The image displayed by the cell, if any.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *DatePickerCell) WithImage(image *Image) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
+// The size of the cell.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *DatePickerCell) WithControlSize(controlSize NSControlSize) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The object represented by the cell.
+//
 // WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
 func (x *DatePickerCell) WithRepresentedObject(representedObject objc.ID) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetRepresentedObject(representedObject)
 	return x
 }
 
+// The cell’s contextual menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *DatePickerCell) WithMenu(menu *Menu) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
+// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+//
 // WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
 func (x *DatePickerCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *DatePickerCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// The line break mode to use when drawing text in the cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *DatePickerCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// A Boolean value indicating whether the cell assumes responsibility for undo operations.
+//
 // WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
 func (x *DatePickerCell) WithAllowsUndo(allowsUndo bool) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
 	return x
 }
 
+// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+//
 // WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
 func (x *DatePickerCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
 	return x
 }
 
+// The layout direction of the user interface.
+//
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
 func (x *DatePickerCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
+// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *DatePickerCell) WithUsesSingleLineMode(usesSingleLineMode bool) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// A Boolean value indicating whether the cell refuses the first responder status.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *DatePickerCell) WithRefusesFirstResponder(refusesFirstResponder bool) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+//
 // WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
 func (x *DatePickerCell) WithShowsFirstResponder(showsFirstResponder bool) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
 	return x
 }
 
+// The type of focus ring to use with the associated view.
+//
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
 func (x *DatePickerCell) WithFocusRingType(focusRingType NSFocusRingType) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
+// The cell’s value as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *DatePickerCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+//
 // WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
 func (x *DatePickerCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports the importation of images into its text.
+//
 // WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
 func (x *DatePickerCell) WithImportsGraphics(importsGraphics bool) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports three states instead of two.
+//
 // WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
 func (x *DatePickerCell) WithAllowsMixedState(allowsMixedState bool) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
 	return x
 }
 
+// The cell’s background style.
+//
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
 func (x *DatePickerCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
+// The cell’s control tint.
+//
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
 func (x *DatePickerCell) WithControlTint(controlTint NSControlTint) *DatePickerCell {
 	x.inner.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))

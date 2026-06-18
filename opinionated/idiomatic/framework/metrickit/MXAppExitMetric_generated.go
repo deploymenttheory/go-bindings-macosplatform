@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing metrics about the types of foreground and background app exits.
+//
 // AppExitMetric wraps [raw.MXAppExitMetric] with a fluent Go API.
 type AppExitMetric struct {
 	inner *raw.MXAppExitMetric

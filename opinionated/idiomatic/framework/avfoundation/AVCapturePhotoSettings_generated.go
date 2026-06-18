@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specification of the features and settings to use for a single photo capture request.
+//
 // CapturePhotoSettings wraps [raw.AVCapturePhotoSettings] with a fluent Go API.
 type CapturePhotoSettings struct {
 	inner *raw.AVCapturePhotoSettings
@@ -38,7 +40,7 @@ func NewCapturePhotoSettings() *CapturePhotoSettings {
 	return &CapturePhotoSettings{inner: raw.AVCapturePhotoSettingsFromID(_id)}
 }
 
-// @property flashMode @abstract Specifies whether the flash should be on, off, or chosen automatically by AVCapturePhotoOutput. @discussion flashMode takes the place of the deprecated AVCaptureDevice -flashMode API. Setting AVCaptureDevice.flashMode has no effect on AVCapturePhotoOutput, which only pays attention to the flashMode specified in your AVCapturePhotoSettings. The default value is AVCaptureFlashModeOff. Flash modes are defined in AVCaptureDevice.h. If you specify a flashMode of AVCaptureFlashModeOn, it wins over autoStillImageStabilizationEnabled=YES. When the device becomes very hot, the flash becomes temporarily unavailable until the device cools down (see AVCaptureDevice's -flashAvailable). While the flash is unavailable, AVCapturePhotoOutput's -supportedFlashModes property still reports AVCaptureFlashModeOn and AVCaptureFlashModeAuto as being available, thus allowing you to specify a flashMode of AVCaptureModeOn. You should always check the AVCaptureResolvedPhotoSettings provided to you in the AVCapturePhotoCaptureDelegate callbacks, as the resolved flashEnabled property will tell you definitively if the flash is being used.
+// A setting for whether to fire the flash when capturing photos.
 //
 // WithFlashMode sets the flashMode property and returns the receiver for chaining.
 func (x *CapturePhotoSettings) WithFlashMode(flashMode AVCaptureFlashMode) *CapturePhotoSettings {
@@ -46,7 +48,7 @@ func (x *CapturePhotoSettings) WithFlashMode(flashMode AVCaptureFlashMode) *Capt
 	return x
 }
 
-// @property photoQualityPrioritization @abstract Indicates how photo quality should be prioritized against speed of photo delivery. @discussion Default value is AVCapturePhotoQualityPrioritizationBalanced. The AVCapturePhotoOutput is capable of applying a variety of techniques to improve photo quality (reduce noise, preserve detail in low light, freeze motion, etc), depending on the source device's activeFormat. Some of these techniques can take significant processing time before the photo is returned to your delegate callback. The photoQualityPrioritization property allows you to specify your preferred quality vs speed of delivery. By default, speed and quality are considered to be of equal importance. When you specify AVCapturePhotoQualityPrioritizationSpeed, you indicate that speed should be prioritized at the expense of quality. Likewise, when you choose AVCapturePhotoQualityPrioritizationQuality, you signal your willingness to prioritize the very best quality at the expense of speed, and your readiness to wait (perhaps significantly) longer for the photo to be returned to your delegate.
+// A setting that indicates how to prioritize photo quality against speed of photo delivery.
 //
 // WithPhotoQualityPrioritization sets the photoQualityPrioritization property and returns the receiver for chaining.
 func (x *CapturePhotoSettings) WithPhotoQualityPrioritization(photoQualityPrioritization AVCapturePhotoQualityPrioritization) *CapturePhotoSettings {
@@ -54,7 +56,7 @@ func (x *CapturePhotoSettings) WithPhotoQualityPrioritization(photoQualityPriori
 	return x
 }
 
-// @property highResolutionPhotoEnabled @abstract Specifies whether photos should be captured at the highest resolution supported by the source AVCaptureDevice's activeFormat. @discussion Default is NO. By default, AVCapturePhotoOutput emits images with the same dimensions as its source AVCaptureDevice's activeFormat.formatDescription. However, if you set this property to YES, the AVCapturePhotoOutput emits images at its source AVCaptureDevice's activeFormat.highResolutionStillImageDimensions. Note that if you enable video stabilization (see AVCaptureConnection's preferredVideoStabilizationMode) for any output, the high resolution photos emitted by AVCapturePhotoOutput may be smaller by 10 or more percent. You may inspect your AVCaptureResolvedPhotoSettings in the delegate callbacks to discover the exact dimensions of the capture photo(s). Starting in iOS 14.5 if you disable geometric distortion correction, the high resolution photo emitted by AVCapturePhotoOutput may be is smaller depending on the format.
+// A Boolean value that specifies whether to capture still images at the highest resolution supported by the active device and format.
 //
 // WithHighResolutionPhotoEnabled sets the highResolutionPhotoEnabled property and returns the receiver for chaining.
 func (x *CapturePhotoSettings) WithHighResolutionPhotoEnabled(highResolutionPhotoEnabled bool) *CapturePhotoSettings {
@@ -62,7 +64,7 @@ func (x *CapturePhotoSettings) WithHighResolutionPhotoEnabled(highResolutionPhot
 	return x
 }
 
-// @property maxPhotoDimensions @abstract Indicates the maximum resolution photo that will be captured. @discussion By setting this property you are requesting an image that may be up to as large as the specified dimensions, but no larger. The dimensions set must match one of the dimensions returned by AVCaptureDeviceFormat.supportedMaxPhotoDimensions for the currently configured format and be equal to or smaller than the value of AVCapturePhotoOutput.maxPhotoDimensions. This property defaults to the smallest dimensions returned by AVCaptureDeviceFormat.supportedMaxPhotoDimensions.
+// The maximum resolution of the photo to capture.
 //
 // WithMaxPhotoDimensions sets the maxPhotoDimensions property and returns the receiver for chaining.
 func (x *CapturePhotoSettings) WithMaxPhotoDimensions(maxPhotoDimensions coremedia.CMVideoDimensions) *CapturePhotoSettings {
@@ -70,7 +72,7 @@ func (x *CapturePhotoSettings) WithMaxPhotoDimensions(maxPhotoDimensions coremed
 	return x
 }
 
-// @property constantColorEnabled @abstract Specifies whether the photo will be captured with constant color. @discussion Default is NO. Set to YES if you wish to capture a constant color photo. Throws an exception if -[AVCapturePhotoOutput constantColorEnabled] is not set to YES.
+// A Boolean value that indicates whether to capture the photo with constant color.
 //
 // WithConstantColorEnabled sets the constantColorEnabled property and returns the receiver for chaining.
 func (x *CapturePhotoSettings) WithConstantColorEnabled(constantColorEnabled bool) *CapturePhotoSettings {
@@ -78,7 +80,7 @@ func (x *CapturePhotoSettings) WithConstantColorEnabled(constantColorEnabled boo
 	return x
 }
 
-// @property constantColorFallbackPhotoDeliveryEnabled @abstract Specifies whether a fallback photo is delivered when taking a constant color capture. @discussion Default is NO. Set to YES if you wish to receive a fallback photo that can be used in case the main constant color photo's confidence level is too low for your use case.
+// A Boolean value that indicates whether to deliver a fallback photo when taking a constant color capture.
 //
 // WithConstantColorFallbackPhotoDeliveryEnabled sets the constantColorFallbackPhotoDeliveryEnabled property and returns the receiver for chaining.
 func (x *CapturePhotoSettings) WithConstantColorFallbackPhotoDeliveryEnabled(constantColorFallbackPhotoDeliveryEnabled bool) *CapturePhotoSettings {
@@ -86,7 +88,7 @@ func (x *CapturePhotoSettings) WithConstantColorFallbackPhotoDeliveryEnabled(con
 	return x
 }
 
-// @property shutterSoundSuppressionEnabled @abstract Specifies whether the built-in shutter sound should be suppressed when capturing a photo with these settings. @discussion Default is NO. Set to YES if you wish to suppress AVCapturePhotoOutput's built-in shutter sound for this request. AVCapturePhotoOutput throws an NSInvalidArgumentException in `-capturePhotoWithSettings:` if its `shutterSoundSuppressionSupported` property returns NO.
+// A Boolean value that indicates whether to suppress the built-in shutter sound when capturing a photo.
 //
 // WithShutterSoundSuppressionEnabled sets the shutterSoundSuppressionEnabled property and returns the receiver for chaining.
 func (x *CapturePhotoSettings) WithShutterSoundSuppressionEnabled(shutterSoundSuppressionEnabled bool) *CapturePhotoSettings {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An instance you use to capture Metal command data in your app.
+//
 // CaptureManager wraps [raw.MTLCaptureManager] with a fluent Go API.
 type CaptureManager struct {
 	inner *raw.MTLCaptureManager
@@ -35,12 +37,16 @@ func NewCaptureManager() *CaptureManager {
 	return &CaptureManager{inner: raw.MTLCaptureManagerFromID(_id)}
 }
 
+// The capture scope to use when a capture is initiated in Xcode.
+//
 // WithDefaultCaptureScope sets the defaultCaptureScope property and returns the receiver for chaining.
 func (x *CaptureManager) WithDefaultCaptureScope(defaultCaptureScope raw.MTLCaptureScope) *CaptureManager {
 	x.inner.SetDefaultCaptureScope(defaultCaptureScope)
 	return x
 }
 
+// Creates a capture scope for commands submitted to a specific command queue.
+//
 // NewCaptureScopeWithCommandQueue calls the underlying NewCaptureScopeWithCommandQueue.
 func (x *CaptureManager) NewCaptureScopeWithCommandQueue(commandQueue raw.MTLCommandQueue) raw.MTLCaptureScope {
 	return x.inner.NewCaptureScopeWithCommandQueue(commandQueue)
@@ -51,33 +57,43 @@ func (x *CaptureManager) NewCaptureScopeWithMTL4CommandQueue(commandQueue raw.MT
 	return x.inner.NewCaptureScopeWithMTL4CommandQueue(commandQueue)
 }
 
+// Checks to see whether a particular capture destination is supported.
+//
 // SupportsDestination calls the underlying SupportsDestination.
 func (x *CaptureManager) SupportsDestination(destination MTLCaptureDestination) bool {
 	return x.inner.SupportsDestination(raw.MTLCaptureDestination(destination))
 }
 
-// Start capturing until stopCapture is called. @param descriptor MTLCaptureDescriptor specifies the parameters. @param error Optional error output to check why a capture could not be started. @return true if the capture was successfully started, otherwise false. @remarks Only MTLCommandBuffer​s created after starting and committed before stopping it are captured.
+// Starts capturing any of your app’s Metal commands, with the capture session defined by a descriptor object.
 //
 // StartCaptureWithDescriptorError calls the underlying StartCaptureWithDescriptorError.
 func (x *CaptureManager) StartCaptureWithDescriptorError(descriptor *raw.MTLCaptureDescriptor) (bool, error) {
 	return x.inner.StartCaptureWithDescriptorError(descriptor)
 }
 
+// Starts capturing any of your app’s Metal commands that are executed by the device object.
+//
 // StartCaptureWithDevice calls the underlying StartCaptureWithDevice.
 func (x *CaptureManager) StartCaptureWithDevice(device raw.MTLDevice) {
 	x.inner.StartCaptureWithDevice(device)
 }
 
+// Starts capturing any of your app’s Metal commands that are executed by the command queue.
+//
 // StartCaptureWithCommandQueue calls the underlying StartCaptureWithCommandQueue.
 func (x *CaptureManager) StartCaptureWithCommandQueue(commandQueue raw.MTLCommandQueue) {
 	x.inner.StartCaptureWithCommandQueue(commandQueue)
 }
 
+// Starts capturing any of your app’s Metal commands that are in the specified capture scope.
+//
 // StartCaptureWithScope calls the underlying StartCaptureWithScope.
 func (x *CaptureManager) StartCaptureWithScope(captureScope raw.MTLCaptureScope) {
 	x.inner.StartCaptureWithScope(captureScope)
 }
 
+// Stops capturing Metal commands.
+//
 // StopCapture calls the underlying StopCapture.
 func (x *CaptureManager) StopCapture() {
 	x.inner.StopCapture()

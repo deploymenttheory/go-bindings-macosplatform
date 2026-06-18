@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing a diagnostic report for a disk write exception.
+//
 // DiskWriteExceptionDiagnostic wraps [raw.MXDiskWriteExceptionDiagnostic] with a fluent Go API.
 type DiskWriteExceptionDiagnostic struct {
 	inner *raw.MXDiskWriteExceptionDiagnostic

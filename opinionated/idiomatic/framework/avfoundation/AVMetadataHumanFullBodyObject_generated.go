@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a detected human full body in a picture.
+//
 // MetadataHumanFullBodyObject wraps [raw.AVMetadataHumanFullBodyObject] with a fluent Go API.
 type MetadataHumanFullBodyObject struct {
 	inner *raw.AVMetadataHumanFullBodyObject

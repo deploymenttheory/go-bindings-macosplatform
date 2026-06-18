@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that manages the space above your app’s custom content and either below or integrated with the window’s title bar.
+//
 // Toolbar wraps [raw.NSToolbar] with a fluent Go API.
 type Toolbar struct {
 	inner *raw.NSToolbar
@@ -38,7 +40,7 @@ func NewToolbar() *Toolbar {
 	return &Toolbar{inner: raw.NSToolbarFromID(_id)}
 }
 
-// The identifier is used to form the toolbar's autosave name. Toolbars with the same identifier are implicitly synchronized so that they maintain the same state.
+// Creates a newly allocated toolbar with the specified identifier.
 //
 // NewToolbarWithIdentifier creates a new [Toolbar].
 func NewToolbarWithIdentifier(identifier *foundation.NSString) *Toolbar {
@@ -47,7 +49,7 @@ func NewToolbarWithIdentifier(identifier *foundation.NSString) *Toolbar {
 	return &Toolbar{inner: raw.NSToolbarFromID(_id)}
 }
 
-// Customizable toolbars must have a delegate, and must implement the required `NSToolbarDelegate` methods.
+// The object you use to customize the toolbar contents and configuration.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Toolbar) WithDelegate(delegate raw.NSToolbarDelegate) *Toolbar {
@@ -55,7 +57,7 @@ func (x *Toolbar) WithDelegate(delegate raw.NSToolbarDelegate) *Toolbar {
 	return x
 }
 
-// Toggles the visibility of the toolbar. This property may be modified by the user in toolbars with `allowsUserCustomization` enabled. This property is key value observable on macOS 14.0 and higher.
+// A Boolean value that indicates whether the toolbar is visible.
 //
 // WithVisible sets the visible property and returns the receiver for chaining.
 func (x *Toolbar) WithVisible(visible bool) *Toolbar {
@@ -63,7 +65,7 @@ func (x *Toolbar) WithVisible(visible bool) *Toolbar {
 	return x
 }
 
-// The current display mode of items in the toolbar. In toolbars with `allowsDisplayModeCustomization` enabled this is a user modifiable property. This property is key value observable.
+// A value that indicates whether the toolbar displays items using a name, icon, or combination of elements.
 //
 // WithDisplayMode sets the displayMode property and returns the receiver for chaining.
 func (x *Toolbar) WithDisplayMode(displayMode NSToolbarDisplayMode) *Toolbar {
@@ -71,7 +73,7 @@ func (x *Toolbar) WithDisplayMode(displayMode NSToolbarDisplayMode) *Toolbar {
 	return x
 }
 
-// Sets the toolbar's selected item by identifier. Use this to force an item identifier to be selected. Toolbar manages selection of image items automatically. This method can be used to select identifiers of custom view items, or to force a selection change. See `-toolbarSelectableItemIdentifiers:` delegate method for more details. This property is key value observable.
+// The identifier of the toolbar’s currently selected item.
 //
 // WithSelectedItemIdentifier sets the selectedItemIdentifier property and returns the receiver for chaining.
 func (x *Toolbar) WithSelectedItemIdentifier(selectedItemIdentifier *foundation.NSString) *Toolbar {
@@ -79,7 +81,7 @@ func (x *Toolbar) WithSelectedItemIdentifier(selectedItemIdentifier *foundation.
 	return x
 }
 
-// This flag controls whether or not users can configure the toolbar by dragging items around, and whether or not the customization palette can be used. The default value is NO, but can be changed at any time. For instance, a developer may not want users to be able to edit the toolbar while some event is being processed.
+// A Boolean value that indicates whether users can modify the contents of the toolbar.
 //
 // WithAllowsUserCustomization sets the allowsUserCustomization property and returns the receiver for chaining.
 func (x *Toolbar) WithAllowsUserCustomization(allowsUserCustomization bool) *Toolbar {
@@ -87,7 +89,7 @@ func (x *Toolbar) WithAllowsUserCustomization(allowsUserCustomization bool) *Too
 	return x
 }
 
-// Whether or not the user is allowed to change display modes at run time. This functionality is independent of customizing the order of the items themselves. Only disable when the functionality or legibility of your toolbar could not be improved by another display mode. The user's selection will be persisted using the toolbar's `identifier` when `autosavesConfiguration` is enabled. The default is YES for apps linked on macOS 15.0 and above.
+// Whether or not the user is allowed to change display modes at run time. This functionality is independent of customizing the order of the items themselves. Only disable when the functionality or legibility of your toolbar could not be improved by another display mode. The user’s selection will be persisted using the toolbar’s identifier when autosavesConfiguration is enabled. The default is YES for apps linked on macOS 15.0 and above.
 //
 // WithAllowsDisplayModeCustomization sets the allowsDisplayModeCustomization property and returns the receiver for chaining.
 func (x *Toolbar) WithAllowsDisplayModeCustomization(allowsDisplayModeCustomization bool) *Toolbar {
@@ -95,7 +97,7 @@ func (x *Toolbar) WithAllowsDisplayModeCustomization(allowsDisplayModeCustomizat
 	return x
 }
 
-// An array of itemIdentifiers that represent the current items in the toolbar. Setting this property will set the current items in the toolbar by diffing against items that already exist. Use this with great caution if `allowsUserCustomization` is enabled as it will override any customizations the user has made. This property is key value observable.
+// An array of itemIdentifiers that represent the current items in the toolbar. Setting this property will set the current items in the toolbar by diffing against items that already exist. Use this with great caution if allowsUserCustomization is enabled as it will override any customizations the user has made. This property is key value observable.
 //
 // WithItemIdentifiers sets the collection, converting the Go slice to an NSArray.
 func (x *Toolbar) WithItemIdentifiers(items ...*foundation.NSString) *Toolbar {
@@ -115,7 +117,7 @@ func (x *Toolbar) WithItemIdentifiers(items ...*foundation.NSString) *Toolbar {
 	return x
 }
 
-// Items with centered identifiers will be centered together in the Toolbar relative to the window assuming space allows. The order of items is initially defined by the default set of identifiers, but may be customized by the user. Centered items may not be moved outside of the center set of items by the user. This property is archived.
+// The set of custom items to display in the center of the toolbar.
 //
 // WithCenteredItemIdentifiers sets the centeredItemIdentifiers property and returns the receiver for chaining.
 func (x *Toolbar) WithCenteredItemIdentifiers(centeredItemIdentifiers *foundation.NSSet[*foundation.NSString]) *Toolbar {
@@ -123,7 +125,7 @@ func (x *Toolbar) WithCenteredItemIdentifiers(centeredItemIdentifiers *foundatio
 	return x
 }
 
-// If `autosavesConfiguration` is YES, the toolbar will automatically write changes the user makes to user defaults. Customizable toolbars will want to set this flag to YES. Setting this to NO means changes in configuration are not written automatically, however you can use the `configurationDictionary` method to do it yourself. Default is NO.
+// A Boolean value that indicates whether the toolbar autosaves its configuration.
 //
 // WithAutosavesConfiguration sets the autosavesConfiguration property and returns the receiver for chaining.
 func (x *Toolbar) WithAutosavesConfiguration(autosavesConfiguration bool) *Toolbar {
@@ -131,7 +133,7 @@ func (x *Toolbar) WithAutosavesConfiguration(autosavesConfiguration bool) *Toolb
 	return x
 }
 
-// When YES, the receiver can dynamically create toolbar items for Action extensions in the toolbar configuration panel. To be included, an extension needs to declare NSExtensionServiceAllowsToolbarItem=YES in its Info.plist. The default value is NO.
+// A Boolean value that indicates whether the toolbar can add items for Action extensions.
 //
 // WithAllowsExtensionItems sets the allowsExtensionItems property and returns the receiver for chaining.
 func (x *Toolbar) WithAllowsExtensionItems(allowsExtensionItems bool) *Toolbar {
@@ -139,71 +141,83 @@ func (x *Toolbar) WithAllowsExtensionItems(allowsExtensionItems bool) *Toolbar {
 	return x
 }
 
+// The toolbar’s size mode.
+//
 // WithSizeMode sets the sizeMode property and returns the receiver for chaining.
 func (x *Toolbar) WithSizeMode(sizeMode NSToolbarSizeMode) *Toolbar {
 	x.inner.SetSizeMode(raw.NSToolbarSizeMode(sizeMode))
 	return x
 }
 
+// The item to display in the center of the toolbar.
+//
 // WithCenteredItemIdentifier sets the centeredItemIdentifier property and returns the receiver for chaining.
 func (x *Toolbar) WithCenteredItemIdentifier(centeredItemIdentifier *foundation.NSString) *Toolbar {
 	x.inner.SetCenteredItemIdentifier(centeredItemIdentifier)
 	return x
 }
 
+// The toolbar’s full screen accessory view.
+//
 // WithFullScreenAccessoryView sets the fullScreenAccessoryView property and returns the receiver for chaining.
 func (x *Toolbar) WithFullScreenAccessoryView(fullScreenAccessoryView ViewProvider) *Toolbar {
 	x.inner.SetFullScreenAccessoryView(fullScreenAccessoryView.asView())
 	return x
 }
 
+// The minimum height of the toolbar’s full screen accessory view.
+//
 // WithFullScreenAccessoryViewMinHeight sets the fullScreenAccessoryViewMinHeight property and returns the receiver for chaining.
 func (x *Toolbar) WithFullScreenAccessoryViewMinHeight(fullScreenAccessoryViewMinHeight float64) *Toolbar {
 	x.inner.SetFullScreenAccessoryViewMinHeight(fullScreenAccessoryViewMinHeight)
 	return x
 }
 
+// The maximum height of the toolbar’s full screen accessory view, in points.
+//
 // WithFullScreenAccessoryViewMaxHeight sets the fullScreenAccessoryViewMaxHeight property and returns the receiver for chaining.
 func (x *Toolbar) WithFullScreenAccessoryViewMaxHeight(fullScreenAccessoryViewMaxHeight float64) *Toolbar {
 	x.inner.SetFullScreenAccessoryViewMaxHeight(fullScreenAccessoryViewMaxHeight)
 	return x
 }
 
+// A Boolean value that indicates whether the toolbar shows the separator between the toolbar and the main window contents.
+//
 // WithShowsBaselineSeparator sets the showsBaselineSeparator property and returns the receiver for chaining.
 func (x *Toolbar) WithShowsBaselineSeparator(showsBaselineSeparator bool) *Toolbar {
 	x.inner.SetShowsBaselineSeparator(showsBaselineSeparator)
 	return x
 }
 
-// Inserts an item with the specified identifier in the receiving toolbar at the specified index. Any change made will be propagated immediately to all other toolbars with the same identifier.
+// Inserts an item into the toolbar at the specified index.
 //
 // InsertItemWithItemIdentifierAtIndex calls the underlying InsertItemWithItemIdentifierAtIndex.
 func (x *Toolbar) InsertItemWithItemIdentifierAtIndex(itemIdentifier *foundation.NSString, index int) {
 	x.inner.InsertItemWithItemIdentifierAtIndex(itemIdentifier, index)
 }
 
-// Removes the item at the specified index in the receiving toolbar. Any change made will be propagated immediately to all other toolbars with the same identifier.
+// Removes the item at the specified index in the toolbar.
 //
 // RemoveItemAtIndex calls the underlying RemoveItemAtIndex.
 func (x *Toolbar) RemoveItemAtIndex(index int) {
 	x.inner.RemoveItemAtIndex(index)
 }
 
-// Removes the item with matching `itemIdentifier` in the receiving toolbar. If multiple items share the same identifier (as is the case with space items) all matching items will be removed. To remove only a single space item, use `-removeItemAtIndex:` instead. Any change made will be propagated immediately to all other toolbars with the same identifier.
+// Removes the item with matching itemIdentifier in the receiving toolbar. If multiple items share the same identifier (as is the case with space items) all matching items will be removed. To remove only a single space item, use -removeItemAtIndex: instead.
 //
 // RemoveItemWithItemIdentifier calls the underlying RemoveItemWithItemIdentifier.
 func (x *Toolbar) RemoveItemWithItemIdentifier(itemIdentifier *foundation.NSString) {
 	x.inner.RemoveItemWithItemIdentifier(itemIdentifier)
 }
 
-// Customizable toolbars (those with delegates) can show a palette which allows users to populate the toolbar with individual items or to reset the toolbar to some default set of items. The items and item sets in the palette are specified by the delegate (`-toolbarAllowedItemIdentifiers:` and `-toolbarDefaultItemIdentifiers:`). When the user is done configuring, they will dismiss the palette.
+// Displays the toolbar’s customization palette and handles any user-initiated customizations.
 //
 // RunCustomizationPalette calls the underlying RunCustomizationPalette.
 func (x *Toolbar) RunCustomizationPalette(sender objc.ID) {
 	x.inner.RunCustomizationPalette(sender)
 }
 
-// Typically you should not invoke this method. This method is called on window updates with the purpose of validating each of the visible items. The toolbar will iterate through the list of visible items, sending each a `-validate` message. If this method is invoked directly, all visible items including those with `autovalidates` disabled will get a `-validate` message.
+// Validates the toolbar’s visible items during a window update.
 //
 // ValidateVisibleItems calls the underlying ValidateVisibleItems.
 func (x *Toolbar) ValidateVisibleItems() {
@@ -384,6 +398,8 @@ func (x *Toolbar) SetAllowsExtensionItems(allowsExtensionItems bool) {
 	x.inner.SetAllowsExtensionItems(allowsExtensionItems)
 }
 
+// Specifies the new configuration details for the toolbar.
+//
 // SetConfigurationFromDictionary calls the underlying SetConfigurationFromDictionary.
 func (x *Toolbar) SetConfigurationFromDictionary(configDict *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
 	x.inner.SetConfigurationFromDictionary(configDict)

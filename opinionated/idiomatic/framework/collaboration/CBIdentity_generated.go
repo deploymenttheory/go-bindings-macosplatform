@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A CBIdentity object is used for accessing the attributes of an identity stored in an identity authority. You can use an identity object for finding identities, and storing them in an access control list (ACL). If you need to edit these attributes, take advantage of the CSIdentity class in Core Services.
+//
 // Identity wraps [raw.CBIdentity] with a fluent Go API.
 type Identity struct {
 	inner *raw.CBIdentity
@@ -39,7 +41,7 @@ func NewIdentity() *Identity {
 	return &Identity{inner: raw.CBIdentityFromID(_id)}
 }
 
-// Returns a Boolean value indicating whether the identity is a member of the specified group. - Parameters: - group: The group to check for membership. - Returns: <doc://com.apple.documentation/documentation/objectivec/yes> if the identity is a member of the group; <doc://com.apple.documentation/documentation/objectivec/no> if it is not.
+// Returns a Boolean value indicating whether the identity is a member of the specified group.
 //
 // IsMemberOfGroup calls the underlying IsMemberOfGroup.
 func (x *Identity) IsMemberOfGroup(group *raw.CBGroupIdentity) bool {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base type class for types on tensors.
+//
 // GraphType wraps [raw.MPSGraphType] with a fluent Go API.
 type GraphType struct {
 	inner *raw.MPSGraphType

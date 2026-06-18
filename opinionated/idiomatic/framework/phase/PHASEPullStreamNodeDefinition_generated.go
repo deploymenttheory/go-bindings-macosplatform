@@ -57,7 +57,7 @@ func (x *PullStreamNodeDefinition) WithNormalize(normalize bool) *PullStreamNode
 	return x
 }
 
-// @property rate @abstract Linear rate scalar. @note Values are clamped to the range [0.25, 4]. Default value is 1.
+// A playback speed for the node’s audio.
 //
 // WithRate sets the rate property and returns the receiver for chaining.
 func (x *PullStreamNodeDefinition) WithRate(rate float64) *PullStreamNodeDefinition {
@@ -65,7 +65,7 @@ func (x *PullStreamNodeDefinition) WithRate(rate float64) *PullStreamNodeDefinit
 	return x
 }
 
-// @property group @abstract The PHASEGroup object this generator should be associated with for gain and rate control.
+// A group this node conforms to for gain and rate control.
 //
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *PullStreamNodeDefinition) WithGroup(group *Group) *PullStreamNodeDefinition {
@@ -73,7 +73,7 @@ func (x *PullStreamNodeDefinition) WithGroup(group *Group) *PullStreamNodeDefini
 	return x
 }
 
-// @property gainMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable dynamic control of the gain during playback.
+// A meta parameter that dynamically changes the audio’s loudness.
 //
 // WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
 func (x *PullStreamNodeDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PullStreamNodeDefinition {
@@ -81,7 +81,7 @@ func (x *PullStreamNodeDefinition) WithGainMetaParameterDefinition(gainMetaParam
 	return x
 }
 
-// @property rateMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable dynamic control of the rate during playback.
+// A meta parameter that dynamically changes the audio’s rate.
 //
 // WithRateMetaParameterDefinition sets the rateMetaParameterDefinition property and returns the receiver for chaining.
 func (x *PullStreamNodeDefinition) WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PullStreamNodeDefinition {

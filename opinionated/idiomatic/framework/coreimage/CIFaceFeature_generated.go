@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information about a face detected in a still or video image.
+//
 // FaceFeature wraps [raw.CIFaceFeature] with a fluent Go API.
 type FaceFeature struct {
 	inner *raw.CIFaceFeature

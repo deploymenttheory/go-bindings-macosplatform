@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information about a rectangular region detected in a still or video image.
+//
 // RectangleFeature wraps [raw.CIRectangleFeature] with a fluent Go API.
 type RectangleFeature struct {
 	inner *raw.CIRectangleFeature

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An event requesting a change in the current skip interval.
+//
 // SkipIntervalCommandEvent wraps [raw.MPSkipIntervalCommandEvent] with a fluent Go API.
 type SkipIntervalCommandEvent struct {
 	inner *raw.MPSkipIntervalCommandEvent

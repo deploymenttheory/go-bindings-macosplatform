@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A data set that projects sound of a certain frequency outward in the shape of a cone.
+//
 // ConeDirectivityModelSubbandParameters wraps [raw.PHASEConeDirectivityModelSubbandParameters] with a fluent Go API.
 type ConeDirectivityModelSubbandParameters struct {
 	inner *raw.PHASEConeDirectivityModelSubbandParameters
@@ -37,7 +39,7 @@ func NewConeDirectivityModelSubbandParameters() *ConeDirectivityModelSubbandPara
 	return &ConeDirectivityModelSubbandParameters{inner: raw.PHASEConeDirectivityModelSubbandParametersFromID(_id)}
 }
 
-// @property frequency @abstract The frequency of the subband, in hertz. @note Default value is 1000.0.
+// A frequency in the audio spectrum where the subband resonates most.
 //
 // WithFrequency sets the frequency property and returns the receiver for chaining.
 func (x *ConeDirectivityModelSubbandParameters) WithFrequency(frequency float64) *ConeDirectivityModelSubbandParameters {
@@ -45,7 +47,7 @@ func (x *ConeDirectivityModelSubbandParameters) WithFrequency(frequency float64)
 	return x
 }
 
-// @property outerGain @abstract The outer gain. @note Values are clamped to the range [0.0, 1.0]. Default value is 1.0.
+// The loudness of the audio the outside area of the cone emits.
 //
 // WithOuterGain sets the outerGain property and returns the receiver for chaining.
 func (x *ConeDirectivityModelSubbandParameters) WithOuterGain(outerGain float64) *ConeDirectivityModelSubbandParameters {
@@ -53,7 +55,7 @@ func (x *ConeDirectivityModelSubbandParameters) WithOuterGain(outerGain float64)
 	return x
 }
 
-// @method setInnerAngle:outerAngle @abstract Set the innerAngle and outerAngle of the Cone Directivity Model Subband @param innerAngle The inner angle of the cone directivity model, must be less than or equal to outer angle. @param outerAngle The outer angle of the cone directivity model, must be greater than or equal to inner angle. @note The default value for each angle is 360.0. outerAngle must be >= innerAngle.
+// Configures a focus area for cone-based sound directivity.
 //
 // SetInnerAngleOuterAngle calls the underlying SetInnerAngleOuterAngle.
 func (x *ConeDirectivityModelSubbandParameters) SetInnerAngleOuterAngle(innerAngle float64, outerAngle float64) {

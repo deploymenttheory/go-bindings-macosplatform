@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A representation of a two-dimensional braille display.
+//
 // BrailleMap wraps [raw.AXBrailleMap] with a fluent Go API.
 type BrailleMap struct {
 	inner *raw.AXBrailleMap
@@ -37,16 +39,22 @@ func NewBrailleMap() *BrailleMap {
 	return &BrailleMap{inner: raw.AXBrailleMapFromID(_id)}
 }
 
+// Sets the height of an individual pin on the braille display.
+//
 // SetHeightAtPoint calls the underlying SetHeightAtPoint.
 func (x *BrailleMap) SetHeightAtPoint(status float32, point corefoundation.CGPoint) {
 	x.inner.SetHeightAtPoint(status, point)
 }
 
+// Retrieves the height of an individual pin on the braille display.
+//
 // HeightAtPoint calls the underlying HeightAtPoint.
 func (x *BrailleMap) HeightAtPoint(point corefoundation.CGPoint) float32 {
 	return x.inner.HeightAtPoint(point)
 }
 
+// Converts the data from the image you specify into the braille map.
+//
 // PresentImage calls the underlying PresentImage.
 func (x *BrailleMap) PresentImage(image unsafe.Pointer) {
 	x.inner.PresentImage(image)

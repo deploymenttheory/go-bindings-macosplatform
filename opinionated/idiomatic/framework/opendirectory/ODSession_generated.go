@@ -13,7 +13,7 @@ import (
 	"unsafe"
 )
 
-// @class       ODSession @abstract    Class for working with OpenDirectory sessions. @discussion  Class for working with OpenDirectory sessions.
+// An ODSession object serves as a Cocoa wrapper for an Open Directory session.
 //
 // Session wraps [raw.ODSession] with a fluent Go API.
 type Session struct {
@@ -35,7 +35,7 @@ func SessionFromID(id objc.ID) *Session {
 	return &Session{inner: raw.ODSessionFromID(id)}
 }
 
-// @method     initWithOptions:error: @abstract   Creates an instance of ODSession directed over Proxy to another host @discussion Creates an instance of ODSession directed over Proxy to another host.  nil can be passed for no options. outError is optional parameter, nil can be passed if error details are not needed. Options include: If proxy is required then a dictionary with keys should be: Key                             Value ODSessionProxyAddress        NSString(hostname or IP) ODSessionProxyPort           NSNumber(IP port, should not be set as it will default) ODSessionProxyUsername       NSString(username) ODSessionProxyPassword       NSString(password)
+// Creates a session object directed over proxy to another host.
 //
 // NewSessionWithOptionsError creates a new [Session].
 func NewSessionWithOptionsError(inOptions *foundation.NSDictionary[objc.ID, objc.ID]) (*Session, error) {
@@ -48,7 +48,7 @@ func NewSessionWithOptionsError(inOptions *foundation.NSDictionary[objc.ID, objc
 	return &Session{inner: raw.ODSessionFromID(_id)}, nil
 }
 
-// @method     nodeNamesAndReturnError: @abstract   Returns the node names that are registered on this ODSession @discussion Returns the node names that are registered on this ODSession.  outError can be nil if error details are not needed.
+// Returns the node names that are registered with this session.
 //
 // NodeNamesAndReturnError calls the underlying NodeNamesAndReturnError.
 func (x *Session) NodeNamesAndReturnError() (*foundation.NSArray[objc.ID], error) {

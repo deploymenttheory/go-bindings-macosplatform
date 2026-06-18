@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object used to decompress audio and play compressed or uncompressed audio.
+//
 // SampleBufferAudioRenderer wraps [raw.AVSampleBufferAudioRenderer] with a fluent Go API.
 type SampleBufferAudioRenderer struct {
 	inner *raw.AVSampleBufferAudioRenderer
@@ -39,7 +41,7 @@ func NewSampleBufferAudioRenderer() *SampleBufferAudioRenderer {
 	return &SampleBufferAudioRenderer{inner: raw.AVSampleBufferAudioRendererFromID(_id)}
 }
 
-// @property		audioOutputDeviceUniqueID @abstract		Specifies the unique ID of the Core Audio output device used to play audio. @discussion By default, the value of this property is nil, indicating that the default audio output device is used. Otherwise the value of this property is an NSString containing the unique ID of the Core Audio output device to be used for audio output. Core Audio's kAudioDevicePropertyDeviceUID is a suitable source of audio output device unique IDs. Modifying this property while the timebase's rate is not 0.0 may cause the rate to briefly change to 0.0. On macOS, the audio device clock may be used as the AVSampleBufferRenderSynchronizer's and all attached AVQueuedSampleBufferRendering's timebase's clocks.  If the audioOutputDeviceUniqueID is modified, the clocks of all these timebases may also change. If multiple AVSampleBufferAudioRenderers with different values for audioOutputDeviceUniqueID are attached to the same AVSampleBufferRenderSynchronizer, audio may not stay in sync during playback.  To avoid this, ensure that all synchronized AVSampleBufferAudioRenderers are using the same audio output device.
+// The unique identifier of the output device used to play audio.
 //
 // WithAudioOutputDeviceUniqueID sets the audioOutputDeviceUniqueID property and returns the receiver for chaining.
 func (x *SampleBufferAudioRenderer) WithAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) *SampleBufferAudioRenderer {
@@ -47,7 +49,7 @@ func (x *SampleBufferAudioRenderer) WithAudioOutputDeviceUniqueID(audioOutputDev
 	return x
 }
 
-// @property		audioTimePitchAlgorithm @abstract		Indicates the processing algorithm used to manage audio pitch at varying rates. @discussion Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h. The default value for applications linked on or after iOS 15.0 or macOS 12.0 is AVAudioTimePitchAlgorithmTimeDomain. For iOS versions prior to 15.0 the default value is AVAudioTimePitchAlgorithmLowQualityZeroLatency. For macOS versions prior to 12.0 the default value is AVAudioTimePitchAlgorithmSpectral. If the timebase's rate is not supported by the audioTimePitchAlgorithm, audio will be muted. Modifying this property while the timebase's rate is not 0.0 may cause the rate to briefly change to 0.0.
+// The processing algorithm used to manage audio pitch at different rates.
 //
 // WithAudioTimePitchAlgorithm sets the audioTimePitchAlgorithm property and returns the receiver for chaining.
 func (x *SampleBufferAudioRenderer) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *SampleBufferAudioRenderer {
@@ -55,7 +57,7 @@ func (x *SampleBufferAudioRenderer) WithAudioTimePitchAlgorithm(audioTimePitchAl
 	return x
 }
 
-// @property allowedAudioSpatializationFormats @abstract Indicates the source audio channel layouts allowed by the receiver for spatialization. @discussion Spatialization uses psychoacoustic methods to create a more immersive audio rendering when the content is played on specialized headphones and speaker arrangements. When an  AVSampleBufferAudioRenderer's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMonoAndStereo the  AVSampleBufferAudioRenderer will attempt to spatialize content tagged with a stereo channel layout, two-channel content with no layout specified as well as mono. It is considered incorrect to render a binaural recording with spatialization. A binaural recording is captured using two carefully placed microphones at each ear where the intent, when played on headphones, is to reproduce a naturally occurring spatial effect. Content tagged with a binaural channel layout will ignore this property value. When an  AVSampleBufferAudioRenderer's allowedAudioSpatializationFormats property is set to AVAudioSpatializationFormatMultichannel the  AVSampleBufferAudioRenderer will attempt to spatialize any decodable multichannel layout. Setting this property to AVAudioSpatializationFormatMonoStereoAndMultichannel indicates that the sender allows the  AVSampleBufferAudioRenderer to spatialize any decodable mono, stereo or multichannel layout. This property is not observable. The default value for this property is AVAudioSpatializationFormatMultichannel.
+// The source audio channel layouts the audio renderer supports for spatialization.
 //
 // WithAllowedAudioSpatializationFormats sets the allowedAudioSpatializationFormats property and returns the receiver for chaining.
 func (x *SampleBufferAudioRenderer) WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats AVAudioSpatializationFormats) *SampleBufferAudioRenderer {
@@ -63,12 +65,16 @@ func (x *SampleBufferAudioRenderer) WithAllowedAudioSpatializationFormats(allowe
 	return x
 }
 
+// The current audio volume for the audio renderer.
+//
 // WithVolume sets the volume property and returns the receiver for chaining.
 func (x *SampleBufferAudioRenderer) WithVolume(volume float32) *SampleBufferAudioRenderer {
 	x.inner.SetVolume(volume)
 	return x
 }
 
+// A Boolean value that indicates whether audio for the renderer is in a muted state.
+//
 // WithMuted sets the muted property and returns the receiver for chaining.
 func (x *SampleBufferAudioRenderer) WithMuted(muted bool) *SampleBufferAudioRenderer {
 	x.inner.SetMuted(muted)
@@ -149,7 +155,7 @@ func (x *SampleBufferAudioRenderer) SetMuted(muted bool) {
 	x.inner.SetMuted(muted)
 }
 
-// @method			flushFromSourceTime:completionHandler: @abstract		Flushes enqueued sample buffers with presentation time stamps later than or equal to the specified time. @param			completionHandler A block that is invoked, possibly asynchronously, after the flush operation completes or fails. @discussion This method can be used to replace media data scheduled to be rendered in the future, without interrupting playback.  One example of this is when the data that has already been enqueued is from a sequence of two songs and the second song is swapped for a new song.  In this case, this method would be called with the time stamp of the first sample buffer from the second song.  After the completion handler is executed with a YES parameter, media data may again be enqueued with timestamps at the specified time. If NO is provided to the completion handler, the flush did not succeed and the set of enqueued sample buffers remains unchanged.  A flush can fail becuse the source time was too close to (or earlier than) the current time or because the current configuration of the receiver does not support flushing at a particular time.  In these cases, the caller can choose to flush all enqueued media data by invoking the -flush method.
+// Flushes queued sample buffers with presentation time stamps later than or equal to the specified time.
 //
 // FlushFromSourceTimeCompletionHandler calls the underlying FlushFromSourceTimeCompletionHandler.
 func (x *SampleBufferAudioRenderer) FlushFromSourceTimeCompletionHandler(time_ coremedia.CMTime, completionHandler func(bool)) {

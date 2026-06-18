@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object you use to manage phone calls on a connected Bluetooth hands-free phone or headset.
+//
 // IOBluetoothHandsFreeDevice wraps [raw.IOBluetoothHandsFreeDevice] with a fluent Go API.
 type IOBluetoothHandsFreeDevice struct {
 	inner *raw.IOBluetoothHandsFreeDevice
@@ -30,7 +32,7 @@ func IOBluetoothHandsFreeDeviceFromID(id objc.ID) *IOBluetoothHandsFreeDevice {
 	return &IOBluetoothHandsFreeDevice{inner: raw.IOBluetoothHandsFreeDeviceFromID(id)}
 }
 
-// @method		initWithDevice:delegate: @abstract		Create a new IOBluetoothHandsFreeDevice to act as a hands free device @discussion	This will register a listener for incoming connections. @param			device An IOBluetoothDevice @param			inDelegate An object to act as delegate @result		A newly created IOBluetoothHandsFreeDevice object on success, nil on failure
+// Creates an object to manage phone calls on a hands-free Bluetooth device.
 //
 // NewIOBluetoothHandsFreeDeviceWithDeviceDelegate creates a new [IOBluetoothHandsFreeDevice].
 func NewIOBluetoothHandsFreeDeviceWithDeviceDelegate(device *raw.IOBluetoothDevice, delegate objc.ID) *IOBluetoothHandsFreeDevice {
@@ -39,7 +41,7 @@ func NewIOBluetoothHandsFreeDeviceWithDeviceDelegate(device *raw.IOBluetoothDevi
 	return &IOBluetoothHandsFreeDevice{inner: raw.IOBluetoothHandsFreeDeviceFromID(_id)}
 }
 
-// @method		supportedFeatures @abstract		Return supported features @discussion	Returns the supported features bitmap. The values are described in “IOBluetoothHandsFreeDeviceFeatures and IOBluetoothHandsFreeAudioGatewayFeatures.” @result		The supported features bitmap @method		setSupportedFeatures:featuresBitmap @abstract		Set the supported features @discussion	Sets the supported features bitmap. The values are described in “IOBluetoothHandsFreeDeviceFeatures and IOBluetoothHandsFreeAudioGatewayFeatures.” @param			featuresBitmap The features bitmap
+// Set the supported features
 //
 // WithSupportedFeatures sets the supportedFeatures property and returns the receiver for chaining.
 func (x *IOBluetoothHandsFreeDevice) WithSupportedFeatures(supportedFeatures uint32) *IOBluetoothHandsFreeDevice {
@@ -47,7 +49,7 @@ func (x *IOBluetoothHandsFreeDevice) WithSupportedFeatures(supportedFeatures uin
 	return x
 }
 
-// @method		inputVolume @abstract		Return the input volume @discussion	Returns the input volume between 0 and 1. 0 is the same as mute. @result		The input volume @method		setInputVolume:newVolume @abstract		Set the input volume @discussion	Sets the input volume between 0 and 1. 0 is the same as mute. @param			newVolume The new input volume
+// Return the input volume
 //
 // WithInputVolume sets the inputVolume property and returns the receiver for chaining.
 func (x *IOBluetoothHandsFreeDevice) WithInputVolume(inputVolume float32) *IOBluetoothHandsFreeDevice {
@@ -55,7 +57,7 @@ func (x *IOBluetoothHandsFreeDevice) WithInputVolume(inputVolume float32) *IOBlu
 	return x
 }
 
-// @method		isInputMuted @abstract		Return the input mute state. @discussion	Returns the inputs mute state. @result		YES if muted; otherwise NO. @method		setInputMuted:muted @abstract		Set the input mute state. @discussion	Sets the inputs mute state. @param			muted YES if muted; otherwise NO.
+// Return the input mute state.
 //
 // WithInputMuted sets the inputMuted property and returns the receiver for chaining.
 func (x *IOBluetoothHandsFreeDevice) WithInputMuted(inputMuted bool) *IOBluetoothHandsFreeDevice {
@@ -63,7 +65,7 @@ func (x *IOBluetoothHandsFreeDevice) WithInputMuted(inputMuted bool) *IOBluetoot
 	return x
 }
 
-// @method		outputVolume @abstract		Return the output volume @discussion	Returns the output volume between 0 and 1. 0 is the same as mute. @result		The output volume @method		setOutputVolume:newVolume @abstract		Set the output volume @discussion	Sets the output volume between 0 and 1. 0 is the same as mute. @param			newVolume The new output volume
+// Return the output volume
 //
 // WithOutputVolume sets the outputVolume property and returns the receiver for chaining.
 func (x *IOBluetoothHandsFreeDevice) WithOutputVolume(outputVolume float32) *IOBluetoothHandsFreeDevice {
@@ -71,7 +73,7 @@ func (x *IOBluetoothHandsFreeDevice) WithOutputVolume(outputVolume float32) *IOB
 	return x
 }
 
-// @method		isOutputMuted @abstract		Return the output mute state. @discussion	Returns the outputs mute state. @result		YES if muted; otherwise NO. @method		setOutputMuted:muted @abstract		Set the output mute state. @discussion	Sets the outputs mute state. @param			muted YES if muted; otherwise NO.
+// Return the output mute state.
 //
 // WithOutputMuted sets the outputMuted property and returns the receiver for chaining.
 func (x *IOBluetoothHandsFreeDevice) WithOutputMuted(outputMuted bool) *IOBluetoothHandsFreeDevice {
@@ -79,7 +81,7 @@ func (x *IOBluetoothHandsFreeDevice) WithOutputMuted(outputMuted bool) *IOBlueto
 	return x
 }
 
-// @method		delegate @abstract		Return the delegate @discussion	Returns the hands free object's delegate. @result		The delegate for the hands free object or nil if it doesn't have a delegate. @method		setDelegate:newDelegate @abstract		Sets the hands free object’s delegate to a given object or removes an existing delegate. @discussion	A IOBluetoothHandsFree delegate can optionally respond to any of the delegate methods in IOBluetoothHandsFreeDelegate and any subclasses delegates. @param			newDelegate The delegate for the hands free object. Pass nil to remove an existing delegate.
+// Return the delegate
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *IOBluetoothHandsFreeDevice) WithDelegate(delegate raw.IOBluetoothHandsFreeDelegate) *IOBluetoothHandsFreeDevice {
@@ -87,147 +89,147 @@ func (x *IOBluetoothHandsFreeDevice) WithDelegate(delegate raw.IOBluetoothHandsF
 	return x
 }
 
-// @method		dialNumber:aNumber @abstract		Dial a number @discussion	Calls aNumber @param			aNumber The number to call - the gateway determines acceptable formats.
+// Calls the phone number on a hands-free phone or headset.
 //
 // DialNumber calls the underlying DialNumber.
 func (x *IOBluetoothHandsFreeDevice) DialNumber(aNumber string) {
 	x.inner.DialNumber(foundation.NSStringStringWithUTF8String(aNumber))
 }
 
-// @method		memoryDial:memoryLocation @abstract		Dial a number from memory @discussion	Calls a number from a memory (or speed dial) location. @param			memoryLocation The location in memory
+// Calls the phone number stored in a speed dial or memory slot of the hands-free phone or headset.
 //
 // MemoryDial calls the underlying MemoryDial.
 func (x *IOBluetoothHandsFreeDevice) MemoryDial(memoryLocation int) {
 	x.inner.MemoryDial(memoryLocation)
 }
 
-// @method		redial @abstract		Redial a number @discussion	Redials the previous number stored by the hands free gateway.
+// Calls the number stored on the hands-free phone or headset again.
 //
 // Redial calls the underlying Redial.
 func (x *IOBluetoothHandsFreeDevice) Redial() {
 	x.inner.Redial()
 }
 
-// @method		endCall @abstract		Hang up a call or reject an incoming call @discussion	Hangs up the current call, or rejects an incoming call.
+// Ends the current call or refuses an incoming call.
 //
 // EndCall calls the underlying EndCall.
 func (x *IOBluetoothHandsFreeDevice) EndCall() {
 	x.inner.EndCall()
 }
 
-// @method		acceptCall @abstract		Accept an incoming call @discussion	Accepts an incoming call.
+// Accepts an incoming call.
 //
 // AcceptCall calls the underlying AcceptCall.
 func (x *IOBluetoothHandsFreeDevice) AcceptCall() {
 	x.inner.AcceptCall()
 }
 
-// @method		acceptCallOnPhone @abstract		Accept an incoming call on the phone @discussion	Accepts an incoming call and then quickly transfer audio to the phone.
+// Accepts an incoming call and transfers the audio to the managed hands-free phone or headset.
 //
 // AcceptCallOnPhone calls the underlying AcceptCallOnPhone.
 func (x *IOBluetoothHandsFreeDevice) AcceptCallOnPhone() {
 	x.inner.AcceptCallOnPhone()
 }
 
-// @method		sendDTMF:character @abstract		Send a key press @discussion	Sends a DTMF tone. @param			character A single character in the set 0-9, #,*,A-D
+// Sends the tone associated with a phone key to the hands-free Bluetooth device.
 //
 // SendDTMF calls the underlying SendDTMF.
 func (x *IOBluetoothHandsFreeDevice) SendDTMF(character string) {
 	x.inner.SendDTMF(foundation.NSStringStringWithUTF8String(character))
 }
 
-// @method		subscriberNumber @abstract		Get the subscriber number(s) @discussion	Gets the subscriber number(s) stored on the gateway. Each subscriber number is returned on the delegate method handsFree:subscriberNumber. There is no guarantee that the gateway will have a subscriber number.
+// Requests that the Bluetooth audio gateway send the subscriber number to the delegate.
 //
 // SubscriberNumber calls the underlying SubscriberNumber.
 func (x *IOBluetoothHandsFreeDevice) SubscriberNumber() {
 	x.inner.SubscriberNumber()
 }
 
-// @method		currentCallList @abstract		Get the current call list @discussion	Gets the current call list (active, held, and setup in process). Each call is returned on the delegate method handsFree:currentCall.
+// Requests that the Bluetooth audio gateway send the delegate a list of calls that are active, on hold, or being set up.
 //
 // CurrentCallList calls the underlying CurrentCallList.
 func (x *IOBluetoothHandsFreeDevice) CurrentCallList() {
 	x.inner.CurrentCallList()
 }
 
-// @method		releaseHeldCalls @abstract		Release all held calls @discussion	Releases all held calls or sets User Determined User Busy for a waiting call.
+// Ends all calls that are on hold or returns a busy signal for a waiting call.
 //
 // ReleaseHeldCalls calls the underlying ReleaseHeldCalls.
 func (x *IOBluetoothHandsFreeDevice) ReleaseHeldCalls() {
 	x.inner.ReleaseHeldCalls()
 }
 
-// @method		releaseActiveCalls @abstract		Release all active calls @discussion	Releases all active calls (if any exist) and accepts the other (held or waiting) call.
+// Ends all active calls and accepts a held or waiting call.
 //
 // ReleaseActiveCalls calls the underlying ReleaseActiveCalls.
 func (x *IOBluetoothHandsFreeDevice) ReleaseActiveCalls() {
 	x.inner.ReleaseActiveCalls()
 }
 
-// @method		releaseCall:index @abstract		Release an active call. @discussion	Releases the active call with index. @param			index Index of the call to release
+// Ends the call with the specified index.
 //
 // ReleaseCall calls the underlying ReleaseCall.
 func (x *IOBluetoothHandsFreeDevice) ReleaseCall(index int) {
 	x.inner.ReleaseCall(index)
 }
 
-// @method		holdCall @abstract		Place all active calls on hold @discussion	Places all active calls (if any exist) on hold and accepts the other (held or waiting) call.
+// Places all active calls on hold and accepts a held or waiting call.
 //
 // HoldCall calls the underlying HoldCall.
 func (x *IOBluetoothHandsFreeDevice) HoldCall() {
 	x.inner.HoldCall()
 }
 
-// @method		placeAllOthersOnHold:index @abstract		Place all other calls on hold. @discussion	Places all calls on hold except call with index. @param			index Index of the call to not place on hold
+// Places all calls except the call with the specified index on hold.
 //
 // PlaceAllOthersOnHold calls the underlying PlaceAllOthersOnHold.
 func (x *IOBluetoothHandsFreeDevice) PlaceAllOthersOnHold(index int) {
 	x.inner.PlaceAllOthersOnHold(index)
 }
 
-// @method		addHeldCall @abstract		Add a held call to the current conversation @discussion	Adds a held call to the current conversation.
+// Adds held calls to the current conversation.
 //
 // AddHeldCall calls the underlying AddHeldCall.
 func (x *IOBluetoothHandsFreeDevice) AddHeldCall() {
 	x.inner.AddHeldCall()
 }
 
-// @method		callTransfer @abstract		Release all active calls @discussion	Releases all active calls (if any exist) and accepts the other (held or waiting) call.
+// Ends all calls that are active or on hold, and accepts any waiting calls.
 //
 // CallTransfer calls the underlying CallTransfer.
 func (x *IOBluetoothHandsFreeDevice) CallTransfer() {
 	x.inner.CallTransfer()
 }
 
-// @method		transferAudioToComputer @abstract		Transfer audio source to the computer. @discussion	Transfers audio to the computer.
+// Moves the audio for current and future calls to a Mac.
 //
 // TransferAudioToComputer calls the underlying TransferAudioToComputer.
 func (x *IOBluetoothHandsFreeDevice) TransferAudioToComputer() {
 	x.inner.TransferAudioToComputer()
 }
 
-// @method		transferAudioToPhone @abstract		Transfer audio source to the phone. @discussion	Transfers audio to the phone.
+// Moves the audio for current or future calls to a phone.
 //
 // TransferAudioToPhone calls the underlying TransferAudioToPhone.
 func (x *IOBluetoothHandsFreeDevice) TransferAudioToPhone() {
 	x.inner.TransferAudioToPhone()
 }
 
-// @method		sendSMS:aNumber:aMessage @abstract		Send an SMS to a number. @discussion	Sends an SMS to aNumber with content aMessage. Currently this does not handle long SMS (>160 characters) or unicode messages.
+// Sends a text message to a phone number.
 //
 // SendSMSMessage calls the underlying SendSMSMessage.
 func (x *IOBluetoothHandsFreeDevice) SendSMSMessage(aNumber string, aMessage string) {
 	x.inner.SendSMSMessage(foundation.NSStringStringWithUTF8String(aNumber), foundation.NSStringStringWithUTF8String(aMessage))
 }
 
-// @method		sendATCommand:atCommand @abstract		Send an AT command to the hands free gateway. @discussion	Sends an AT command to the hands free gateway with a timeout of 10 seconds and handled by the built-in response handling. See sendAtCommand:timeout:selector:target for more details. @param			atCommand AT command to send
+// Sends an AT command to the Bluetooth audio gateway.
 //
 // SendATCommand calls the underlying SendATCommand.
 func (x *IOBluetoothHandsFreeDevice) SendATCommand(atCommand string) {
 	x.inner.SendATCommand(foundation.NSStringStringWithUTF8String(atCommand))
 }
 
-// @method		sendATCommand:atCommand:timeout:selector:target @abstract		Send an AT command to the hands free gateway. @discussion	Sends an AT command to the hands free gateway with timeout. On command complete (OK, ERROR, TIMEOUT response or after timeout seconds) will perform selector on target. @param			atCommand AT command to send
+// Send an AT command to the Bluetooth audio gateway and performs a selector on completion or timeout.
 //
 // SendATCommandTimeoutSelectorTarget calls the underlying SendATCommandTimeoutSelectorTarget.
 func (x *IOBluetoothHandsFreeDevice) SendATCommandTimeoutSelectorTarget(atCommand string, timeout float32, selector objc.SEL, target objc.ID) {

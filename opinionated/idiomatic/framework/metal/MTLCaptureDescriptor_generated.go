@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration for a Metal capture session.
+//
 // CaptureDescriptor wraps [raw.MTLCaptureDescriptor] with a fluent Go API.
 type CaptureDescriptor struct {
 	inner *raw.MTLCaptureDescriptor
@@ -36,7 +38,7 @@ func NewCaptureDescriptor() *CaptureDescriptor {
 	return &CaptureDescriptor{inner: raw.MTLCaptureDescriptorFromID(_id)}
 }
 
-// @brief The object that is captured. Must be one of the following: MTLDevice captures all command queues of the device. MTLCommandQueue captures a single command queue. MTLCaptureScope captures between the next begin and end of the scope.
+// The instance whose contents should be captured.
 //
 // WithCaptureObject sets the captureObject property and returns the receiver for chaining.
 func (x *CaptureDescriptor) WithCaptureObject(captureObject objc.ID) *CaptureDescriptor {
@@ -44,7 +46,7 @@ func (x *CaptureDescriptor) WithCaptureObject(captureObject objc.ID) *CaptureDes
 	return x
 }
 
-// The destination you want the GPU trace to be captured to.
+// The destination for any captured command data.
 //
 // WithDestination sets the destination property and returns the receiver for chaining.
 func (x *CaptureDescriptor) WithDestination(destination MTLCaptureDestination) *CaptureDescriptor {
@@ -52,7 +54,7 @@ func (x *CaptureDescriptor) WithDestination(destination MTLCaptureDestination) *
 	return x
 }
 
-// URL the GPU Trace document will be captured to. Must be specified when destiation is MTLCaptureDestinationGPUTraceDocument.
+// A URL for a file to write the capture data into.
 //
 // WithOutputURL sets the outputURL property and returns the receiver for chaining.
 func (x *CaptureDescriptor) WithOutputURL(outputURL string) *CaptureDescriptor {

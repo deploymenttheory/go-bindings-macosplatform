@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that retrieves pixel samples for processing by a filter kernel.
+//
 // Sampler wraps [raw.CISampler] with a fluent Go API.
 type Sampler struct {
 	inner *raw.CISampler
@@ -31,6 +33,8 @@ func SamplerFromID(id objc.ID) *Sampler {
 	return &Sampler{inner: raw.CISamplerFromID(id)}
 }
 
+// Initializes a sampler with an image object.
+//
 // NewSamplerWithImage creates a new [Sampler].
 func NewSamplerWithImage(im *raw.CIImage) *Sampler {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CISampler")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewSamplerWithImage(im *raw.CIImage) *Sampler {
 	return &Sampler{inner: raw.CISamplerFromID(_id)}
 }
 
+// Initializes the sampler with an image object using options specified as key-value pairs.
+//
 // NewSamplerWithImageKeysAndValues creates a new [Sampler].
 func NewSamplerWithImageKeysAndValues(im *raw.CIImage, key0 objc.ID) *Sampler {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CISampler")), objc.RegisterName("alloc"))
@@ -45,6 +51,8 @@ func NewSamplerWithImageKeysAndValues(im *raw.CIImage, key0 objc.ID) *Sampler {
 	return &Sampler{inner: raw.CISamplerFromID(_id)}
 }
 
+// Initializes the sampler with an image object using options specified in a dictionary.
+//
 // NewSamplerWithImageOptions creates a new [Sampler].
 func NewSamplerWithImageOptions(im *raw.CIImage, dict *foundation.NSDictionary[objc.ID, objc.ID]) *Sampler {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CISampler")), objc.RegisterName("alloc"))

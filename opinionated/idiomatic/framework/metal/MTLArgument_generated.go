@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Information about an argument of a graphics or compute function.
+//
 // Argument wraps [raw.MTLArgument] with a fluent Go API.
 type Argument struct {
 	inner *raw.MTLArgument

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that your app uses to find out the current state of a Safari extension.
+//
 // SafariExtensionManager wraps [raw.SFSafariExtensionManager] with a fluent Go API.
 type SafariExtensionManager struct {
 	inner *raw.SFSafariExtensionManager

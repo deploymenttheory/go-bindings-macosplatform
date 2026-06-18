@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The state of a Safari extension.
+//
 // SafariExtensionState wraps [raw.SFSafariExtensionState] with a fluent Go API.
 type SafariExtensionState struct {
 	inner *raw.SFSafariExtensionState

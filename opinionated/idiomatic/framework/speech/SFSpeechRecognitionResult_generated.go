@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that contains the partial or final results of a speech recognition request.
+//
 // SpeechRecognitionResult wraps [raw.SFSpeechRecognitionResult] with a fluent Go API.
 type SpeechRecognitionResult struct {
 	inner *raw.SFSpeechRecognitionResult

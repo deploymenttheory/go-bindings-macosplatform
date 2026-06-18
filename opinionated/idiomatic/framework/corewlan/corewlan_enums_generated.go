@@ -9,13 +9,17 @@ import (
 	"strings"
 )
 
+// CoreWLAN channel bands.
 type CWChannelBand int64
 
 const (
+	// Unknown channel band.
 	KCWChannelBandUnknown CWChannelBand = 0
-	KCWChannelBand2GHz    CWChannelBand = 1
-	KCWChannelBand5GHz    CWChannelBand = 2
-	KCWChannelBand6GHz    CWChannelBand = 3
+	// 2.4GHz channel band.
+	KCWChannelBand2GHz CWChannelBand = 1
+	// 5GHz channel band.
+	KCWChannelBand5GHz CWChannelBand = 2
+	KCWChannelBand6GHz CWChannelBand = 3
 )
 
 func (e CWChannelBand) String() string {
@@ -33,14 +37,20 @@ func (e CWChannelBand) String() string {
 	}
 }
 
+// CoreWLAN channel widths.
 type CWChannelWidth int64
 
 const (
+	// Unknown channel width.
 	KCWChannelWidthUnknown CWChannelWidth = 0
-	KCWChannelWidth20MHz   CWChannelWidth = 1
-	KCWChannelWidth40MHz   CWChannelWidth = 2
-	KCWChannelWidth80MHz   CWChannelWidth = 3
-	KCWChannelWidth160MHz  CWChannelWidth = 4
+	// 20MHz channel width.
+	KCWChannelWidth20MHz CWChannelWidth = 1
+	// 40MHz channel width.
+	KCWChannelWidth40MHz CWChannelWidth = 2
+	// 80MHz channel width.
+	KCWChannelWidth80MHz CWChannelWidth = 3
+	// 160MHz channel width.
+	KCWChannelWidth160MHz CWChannelWidth = 4
 )
 
 func (e CWChannelWidth) String() string {
@@ -60,15 +70,21 @@ func (e CWChannelWidth) String() string {
 	}
 }
 
+// Cipher key flags.
 // Bitmask — values may be combined with |.
 type CWCipherKeyFlags uint64
 
 const (
-	KCWCipherKeyFlagsNone      CWCipherKeyFlags = 0
-	KCWCipherKeyFlagsUnicast   CWCipherKeyFlags = 2
+	// Open System authentication.
+	KCWCipherKeyFlagsNone CWCipherKeyFlags = 0
+	// A flag that indicates to use the cipher key for unicast packets.
+	KCWCipherKeyFlagsUnicast CWCipherKeyFlags = 2
+	// A flag that indicates to use the cipher key for multicast packets.
 	KCWCipherKeyFlagsMulticast CWCipherKeyFlags = 4
-	KCWCipherKeyFlagsTx        CWCipherKeyFlags = 8
-	KCWCipherKeyFlagsRx        CWCipherKeyFlags = 16
+	// A flag that indicates to use the cipher key for packets sent from the interface.
+	KCWCipherKeyFlagsTx CWCipherKeyFlags = 8
+	// A flag that indicates to use the cipher key for packets received by the interface.
+	KCWCipherKeyFlagsRx CWCipherKeyFlags = 16
 )
 
 func (e CWCipherKeyFlags) String() string {
@@ -91,20 +107,31 @@ func (e CWCipherKeyFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Wi-Fi event types.
 type CWEventType uint64
 
 const (
-	CWEventTypeNone                 CWEventType = 0
-	CWEventTypePowerDidChange       CWEventType = 1
-	CWEventTypeSSIDDidChange        CWEventType = 2
-	CWEventTypeBSSIDDidChange       CWEventType = 3
+	// No specified event type.
+	CWEventTypeNone CWEventType = 0
+	// Posts when the power state of any Wi-Fi interface changes.
+	CWEventTypePowerDidChange CWEventType = 1
+	// Posts when the current SSID of any Wi-Fi interface changes.
+	CWEventTypeSSIDDidChange CWEventType = 2
+	// Posts when the current BSSID of any Wi-Fi interface changes.
+	CWEventTypeBSSIDDidChange CWEventType = 3
+	// Posts when the adopted country code of any Wi-Fi interface changes.
 	CWEventTypeCountryCodeDidChange CWEventType = 4
-	CWEventTypeLinkDidChange        CWEventType = 5
+	// Posts when the link state for any Wi-Fi interface changes.
+	CWEventTypeLinkDidChange CWEventType = 5
+	// Posts when the RSSI or transmit rate for any Wi-Fi interface changes.
 	CWEventTypeLinkQualityDidChange CWEventType = 6
-	CWEventTypeModeDidChange        CWEventType = 7
-	CWEventTypeScanCacheUpdated     CWEventType = 8
-	CWEventTypeBtCoexStats          CWEventType = 9
-	CWEventTypeUnknown              CWEventType = 9223372036854775807
+	// Posts when the operating mode of any Wi-Fi interface changes.
+	CWEventTypeModeDidChange CWEventType = 7
+	// Posts when the scan cache of any Wi-Fi interface is updated with new scan results.
+	CWEventTypeScanCacheUpdated CWEventType = 8
+	CWEventTypeBtCoexStats      CWEventType = 9
+	// Unknown event type.
+	CWEventTypeUnknown CWEventType = 9223372036854775807
 )
 
 func (e CWEventType) String() string {
@@ -136,11 +163,15 @@ func (e CWEventType) String() string {
 	}
 }
 
+// IBSS mode security types.
 type CWIBSSModeSecurity int64
 
 const (
-	KCWIBSSModeSecurityNone   CWIBSSModeSecurity = 0
-	KCWIBSSModeSecurityWEP40  CWIBSSModeSecurity = 1
+	// Open System authentication.
+	KCWIBSSModeSecurityNone CWIBSSModeSecurity = 0
+	// WEP security.
+	KCWIBSSModeSecurityWEP40 CWIBSSModeSecurity = 1
+	// WPA Personal authentication.
 	KCWIBSSModeSecurityWEP104 CWIBSSModeSecurity = 2
 )
 
@@ -157,13 +188,18 @@ func (e CWIBSSModeSecurity) String() string {
 	}
 }
 
+// Wi-Fi interface operating modes.
 type CWInterfaceMode int64
 
 const (
-	KCWInterfaceModeNone    CWInterfaceMode = 0
+	// Interface is not in any mode.
+	KCWInterfaceModeNone CWInterfaceMode = 0
+	// Interface is participating in an infrastructure network as a non-AP station.
 	KCWInterfaceModeStation CWInterfaceMode = 1
-	KCWInterfaceModeIBSS    CWInterfaceMode = 2
-	KCWInterfaceModeHostAP  CWInterfaceMode = 3
+	// Interface is participating in an IBSS network.
+	KCWInterfaceModeIBSS CWInterfaceMode = 2
+	// Interface is participating in an infrastructure network as an access point.
+	KCWInterfaceModeHostAP CWInterfaceMode = 3
 )
 
 func (e CWInterfaceMode) String() string {
@@ -181,11 +217,15 @@ func (e CWInterfaceMode) String() string {
 	}
 }
 
+// Keychain domain types that CoreWLAN keychain methods use.
 type CWKeychainDomain int64
 
 const (
-	KCWKeychainDomainNone   CWKeychainDomain = 0
-	KCWKeychainDomainUser   CWKeychainDomain = 1
+	// No keychain domain specified.
+	KCWKeychainDomainNone CWKeychainDomain = 0
+	// The user keychain domain.
+	KCWKeychainDomainUser CWKeychainDomain = 1
+	// The system keychain domain.
 	KCWKeychainDomainSystem CWKeychainDomain = 2
 )
 
@@ -202,14 +242,21 @@ func (e CWKeychainDomain) String() string {
 	}
 }
 
+// CoreWLAN physical layer modes.
 type CWPHYMode int64
 
 const (
+	// No specified mode.
 	KCWPHYModeNone CWPHYMode = 0
-	KCWPHYMode11a  CWPHYMode = 1
-	KCWPHYMode11b  CWPHYMode = 2
-	KCWPHYMode11g  CWPHYMode = 3
-	KCWPHYMode11n  CWPHYMode = 4
+	// IEEE 802.11a PHY.
+	KCWPHYMode11a CWPHYMode = 1
+	// IEEE 802.11b PHY.
+	KCWPHYMode11b CWPHYMode = 2
+	// IEEE 802.11g PHY.
+	KCWPHYMode11g CWPHYMode = 3
+	// IEEE 802.11n PHY.
+	KCWPHYMode11n CWPHYMode = 4
+	// IEEE 802.11ac PHY.
 	KCWPHYMode11ac CWPHYMode = 5
 	KCWPHYMode11ax CWPHYMode = 6
 	KCWPHYMode11be CWPHYMode = 7
@@ -238,26 +285,42 @@ func (e CWPHYMode) String() string {
 	}
 }
 
+// CoreWLAN security types.
 type CWSecurity uint64
 
 const (
-	KCWSecurityNone               CWSecurity = 0
-	KCWSecurityWEP                CWSecurity = 1
-	KCWSecurityWPAPersonal        CWSecurity = 2
-	KCWSecurityWPAPersonalMixed   CWSecurity = 3
-	KCWSecurityWPA2Personal       CWSecurity = 4
-	KCWSecurityPersonal           CWSecurity = 5
-	KCWSecurityDynamicWEP         CWSecurity = 6
-	KCWSecurityWPAEnterprise      CWSecurity = 7
+	// Open System authentication.
+	KCWSecurityNone CWSecurity = 0
+	// WEP security.
+	KCWSecurityWEP CWSecurity = 1
+	// WPA Personal authentication.
+	KCWSecurityWPAPersonal CWSecurity = 2
+	// WPA/WPA2 Personal authentication.
+	KCWSecurityWPAPersonalMixed CWSecurity = 3
+	// WPA2 Personal authentication.
+	KCWSecurityWPA2Personal CWSecurity = 4
+	// Personal authentication.
+	KCWSecurityPersonal CWSecurity = 5
+	// Dynamic WEP security.
+	KCWSecurityDynamicWEP CWSecurity = 6
+	// WPA Enterprise authentication.
+	KCWSecurityWPAEnterprise CWSecurity = 7
+	// WPA/WPA2 Enterprise authentication.
 	KCWSecurityWPAEnterpriseMixed CWSecurity = 8
-	KCWSecurityWPA2Enterprise     CWSecurity = 9
-	KCWSecurityEnterprise         CWSecurity = 10
-	KCWSecurityWPA3Personal       CWSecurity = 11
-	KCWSecurityWPA3Enterprise     CWSecurity = 12
-	KCWSecurityWPA3Transition     CWSecurity = 13
-	KCWSecurityOWE                CWSecurity = 14
-	KCWSecurityOWETransition      CWSecurity = 15
-	KCWSecurityUnknown            CWSecurity = 9223372036854775807
+	// WPA2 Enterprise authentication.
+	KCWSecurityWPA2Enterprise CWSecurity = 9
+	// Enterprise authentication.
+	KCWSecurityEnterprise CWSecurity = 10
+	// WPA3 Personal authentication.
+	KCWSecurityWPA3Personal CWSecurity = 11
+	// WPA3 Enterprise authentication.
+	KCWSecurityWPA3Enterprise CWSecurity = 12
+	// WPA3 Transition (WPA3/WPA2 Personal) authentication.
+	KCWSecurityWPA3Transition CWSecurity = 13
+	KCWSecurityOWE            CWSecurity = 14
+	KCWSecurityOWETransition  CWSecurity = 15
+	// Unknown security type.
+	KCWSecurityUnknown CWSecurity = 9223372036854775807
 )
 
 func (e CWSecurity) String() string {

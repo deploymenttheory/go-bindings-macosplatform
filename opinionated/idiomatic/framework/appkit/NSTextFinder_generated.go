@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An optional search-and-replace find interface inside a view, usually a scroll view.
+//
 // TextFinder wraps [raw.NSTextFinder] with a fluent Go API.
 type TextFinder struct {
 	inner *raw.NSTextFinder
@@ -44,51 +46,69 @@ func NewTextFinderWithCoder(coder *foundation.NSCoder) *TextFinder {
 	return &TextFinder{inner: raw.NSTextFinderFromID(_id)}
 }
 
+// The object that provides the target search string, find bar location, and feedback methods.
+//
 // WithClient sets the client property and returns the receiver for chaining.
 func (x *TextFinder) WithClient(client raw.NSTextFinderClient) *TextFinder {
 	x.inner.SetClient(client)
 	return x
 }
 
+// Specifies the find bar container.
+//
 // WithFindBarContainer sets the findBarContainer property and returns the receiver for chaining.
 func (x *TextFinder) WithFindBarContainer(findBarContainer raw.NSTextFinderBarContainer) *TextFinder {
 	x.inner.SetFindBarContainer(findBarContainer)
 	return x
 }
 
+// Invoke to specify that the find indicator needs updating when not contained within a scroll view.
+//
 // WithFindIndicatorNeedsUpdate sets the findIndicatorNeedsUpdate property and returns the receiver for chaining.
 func (x *TextFinder) WithFindIndicatorNeedsUpdate(findIndicatorNeedsUpdate bool) *TextFinder {
 	x.inner.SetFindIndicatorNeedsUpdate(findIndicatorNeedsUpdate)
 	return x
 }
 
+// Determines if incremental searching is enabled.
+//
 // WithIncrementalSearchingEnabled sets the incrementalSearchingEnabled property and returns the receiver for chaining.
 func (x *TextFinder) WithIncrementalSearchingEnabled(incrementalSearchingEnabled bool) *TextFinder {
 	x.inner.SetIncrementalSearchingEnabled(incrementalSearchingEnabled)
 	return x
 }
 
+// Determines the type of incremental search feedback to be presented
+//
 // WithIncrementalSearchingShouldDimContentView sets the incrementalSearchingShouldDimContentView property and returns the receiver for chaining.
 func (x *TextFinder) WithIncrementalSearchingShouldDimContentView(incrementalSearchingShouldDimContentView bool) *TextFinder {
 	x.inner.SetIncrementalSearchingShouldDimContentView(incrementalSearchingShouldDimContentView)
 	return x
 }
 
+// Performs the specified text finding action.
+//
 // PerformAction calls the underlying PerformAction.
 func (x *TextFinder) PerformAction(op NSTextFinderAction) {
 	x.inner.PerformAction(raw.NSTextFinderAction(op))
 }
 
+// Allows validation of the find action before performing.
+//
 // ValidateAction calls the underlying ValidateAction.
 func (x *TextFinder) ValidateAction(op NSTextFinderAction) bool {
 	return x.inner.ValidateAction(raw.NSTextFinderAction(op))
 }
 
+// Cancels the find indicator immediately.
+//
 // CancelFindIndicator calls the underlying CancelFindIndicator.
 func (x *TextFinder) CancelFindIndicator() {
 	x.inner.CancelFindIndicator()
 }
 
+// Invoke this method when the searched content will change.
+//
 // NoteClientStringWillChange calls the underlying NoteClientStringWillChange.
 func (x *TextFinder) NoteClientStringWillChange() {
 	x.inner.NoteClientStringWillChange()

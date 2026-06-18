@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A distinct input source on a capture device.
+//
 // CaptureDeviceInputSource wraps [raw.AVCaptureDeviceInputSource] with a fluent Go API.
 type CaptureDeviceInputSource struct {
 	inner *raw.AVCaptureDeviceInputSource

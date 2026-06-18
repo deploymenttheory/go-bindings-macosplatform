@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An NSForm object is a vertical matrix of NSFormCell objects to implement the fields.
+//
 // Form wraps [raw.NSForm] with a fluent Go API.
 type Form struct {
 	inner *raw.NSForm
@@ -40,240 +42,320 @@ func NewForm() *Form {
 	return &Form{inner: raw.NSFormFromID(_id)}
 }
 
+// The prototype cell that’s copied whenever the matrix creates a new cell.
+//
 // WithPrototype sets the prototype property and returns the receiver for chaining.
 func (x *Form) WithPrototype(prototype CellProvider) *Form {
 	x.inner.NSMatrix.SetPrototype(prototype.asCell())
 	return x
 }
 
+// The selection mode of the receiver.
+//
 // WithMode sets the mode property and returns the receiver for chaining.
 func (x *Form) WithMode(mode NSMatrixMode) *Form {
 	x.inner.NSMatrix.SetMode(raw.NSMatrixMode(mode))
 	return x
 }
 
+// A Boolean that indicates whether a radio-mode matrix supports an empty selection.
+//
 // WithAllowsEmptySelection sets the allowsEmptySelection property and returns the receiver for chaining.
 func (x *Form) WithAllowsEmptySelection(allowsEmptySelection bool) *Form {
 	x.inner.NSMatrix.SetAllowsEmptySelection(allowsEmptySelection)
 	return x
 }
 
+// A Boolean that indicates whether the user can select a rectangle of cells in the receiver by dragging the cursor.
+//
 // WithSelectionByRect sets the selectionByRect property and returns the receiver for chaining.
 func (x *Form) WithSelectionByRect(selectionByRect bool) *Form {
 	x.inner.NSMatrix.SetSelectionByRect(selectionByRect)
 	return x
 }
 
+// The size of each cell in the matrix.
+//
 // WithCellSize sets the cellSize property and returns the receiver for chaining.
 func (x *Form) WithCellSize(cellSize corefoundation.CGSize) *Form {
 	x.inner.NSMatrix.SetCellSize(cellSize)
 	return x
 }
 
+// The vertical and horizontal spacing between cells in the matrix.
+//
 // WithIntercellSpacing sets the intercellSpacing property and returns the receiver for chaining.
 func (x *Form) WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *Form {
 	x.inner.NSMatrix.SetIntercellSpacing(intercellSpacing)
 	return x
 }
 
+// The background color of the matrix (the space between the cells).
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *Form) WithBackgroundColor(backgroundColor *Color) *Form {
 	x.inner.NSMatrix.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// The background color of the matrix’s cells.
+//
 // WithCellBackgroundColor sets the cellBackgroundColor property and returns the receiver for chaining.
 func (x *Form) WithCellBackgroundColor(cellBackgroundColor *Color) *Form {
 	x.inner.NSMatrix.SetCellBackgroundColor(cellBackgroundColor.Unwrap())
 	return x
 }
 
+// A Boolean that indicates whether the matrix draws the background within each of its cells.
+//
 // WithDrawsCellBackground sets the drawsCellBackground property and returns the receiver for chaining.
 func (x *Form) WithDrawsCellBackground(drawsCellBackground bool) *Form {
 	x.inner.NSMatrix.SetDrawsCellBackground(drawsCellBackground)
 	return x
 }
 
+// A Boolean that indicates whether the matrix draws its background.
+//
 // WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
 func (x *Form) WithDrawsBackground(drawsBackground bool) *Form {
 	x.inner.NSMatrix.SetDrawsBackground(drawsBackground)
 	return x
 }
 
+// The action sent to the target of the receiver when the user double-clicks a cell.
+//
 // WithDoubleAction sets the doubleAction property and returns the receiver for chaining.
 func (x *Form) WithDoubleAction(doubleAction objc.SEL) *Form {
 	x.inner.NSMatrix.SetDoubleAction(doubleAction)
 	return x
 }
 
+// A Boolean that indicates whether the cell sizes change when the receiver is resized.
+//
 // WithAutosizesCells sets the autosizesCells property and returns the receiver for chaining.
 func (x *Form) WithAutosizesCells(autosizesCells bool) *Form {
 	x.inner.NSMatrix.SetAutosizesCells(autosizesCells)
 	return x
 }
 
+// A Boolean that indicates whether the receiver is automatically scrolled.
+//
 // WithAutoscroll sets the autoscroll property and returns the receiver for chaining.
 func (x *Form) WithAutoscroll(autoscroll bool) *Form {
 	x.inner.NSMatrix.SetAutoscroll(autoscroll)
 	return x
 }
 
+// The delegate for messages from the field editor.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Form) WithDelegate(delegate raw.NSMatrixDelegate) *Form {
 	x.inner.NSMatrix.SetDelegate(delegate)
 	return x
 }
 
+// A Boolean that indicates whether the matrix auto-recalculates its cell size.
+//
 // WithAutorecalculatesCellSize sets the autorecalculatesCellSize property and returns the receiver for chaining.
 func (x *Form) WithAutorecalculatesCellSize(autorecalculatesCellSize bool) *Form {
 	x.inner.NSMatrix.SetAutorecalculatesCellSize(autorecalculatesCellSize)
 	return x
 }
 
+// A Boolean that indicates whether pressing the Tab key advances the key cell to the next selectable cell.
+//
 // WithTabKeyTraversesCells sets the tabKeyTraversesCells property and returns the receiver for chaining.
 func (x *Form) WithTabKeyTraversesCells(tabKeyTraversesCells bool) *Form {
 	x.inner.NSMatrix.SetTabKeyTraversesCells(tabKeyTraversesCells)
 	return x
 }
 
+// The cell that will be clicked when the user presses the Space bar.
+//
 // WithKeyCell sets the keyCell property and returns the receiver for chaining.
 func (x *Form) WithKeyCell(keyCell CellProvider) *Form {
 	x.inner.NSMatrix.SetKeyCell(keyCell.asCell())
 	return x
 }
 
+// The target object that receives action messages from the cell.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *Form) WithTarget(target objc.ID) *Form {
 	x.inner.NSMatrix.NSControl.SetTarget(target)
 	return x
 }
 
+// The default action-message selector associated with the control.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *Form) WithAction(action objc.SEL) *Form {
 	x.inner.NSMatrix.NSControl.SetAction(action)
 	return x
 }
 
+// The tag identifying the receiver (not the tag of the receiver’s cell).
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *Form) WithTag(tag int) *Form {
 	x.inner.NSMatrix.NSControl.SetTag(tag)
 	return x
 }
 
+// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+//
 // WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
 func (x *Form) WithIgnoresMultiClick(ignoresMultiClick bool) *Form {
 	x.inner.NSMatrix.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
 	return x
 }
 
+// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *Form) WithContinuous(continuous bool) *Form {
 	x.inner.NSMatrix.NSControl.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver reacts to mouse events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *Form) WithEnabled(enabled bool) *Form {
 	x.inner.NSMatrix.NSControl.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the receiver refuses the first responder role.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *Form) WithRefusesFirstResponder(refusesFirstResponder bool) *Form {
 	x.inner.NSMatrix.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value that indicates whether the cell is highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *Form) WithHighlighted(highlighted bool) *Form {
 	x.inner.NSMatrix.NSControl.SetHighlighted(highlighted)
 	return x
 }
 
+// The size of the control.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *Form) WithControlSize(controlSize NSControlSize) *Form {
 	x.inner.NSMatrix.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The receiver’s formatter.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *Form) WithFormatter(formatter *foundation.NSFormatter) *Form {
 	x.inner.NSMatrix.NSControl.SetFormatter(formatter)
 	return x
 }
 
+// The value of the receiver’s cell as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *Form) WithObjectValue(objectValue objc.ID) *Form {
 	x.inner.NSMatrix.NSControl.SetObjectValue(objectValue)
 	return x
 }
 
+// The value of the receiver’s cell as an NSString object.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *Form) WithStringValue(stringValue string) *Form {
 	x.inner.NSMatrix.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The value of the receiver’s cell as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *Form) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Form {
 	x.inner.NSMatrix.NSControl.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *Form) WithIntValue(intValue int) *Form {
 	x.inner.NSMatrix.NSControl.SetIntValue(intValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *Form) WithIntegerValue(integerValue int) *Form {
 	x.inner.NSMatrix.NSControl.SetIntegerValue(integerValue)
 	return x
 }
 
+// The value of the receiver’s cell as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *Form) WithFloatValue(floatValue float32) *Form {
 	x.inner.NSMatrix.NSControl.SetFloatValue(floatValue)
 	return x
 }
 
+// The value of the receiver’s cell as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *Form) WithDoubleValue(doubleValue float64) *Form {
 	x.inner.NSMatrix.NSControl.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The font used to draw text in the receiver’s cell.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *Form) WithFont(font *Font) *Form {
 	x.inner.NSMatrix.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *Form) WithUsesSingleLineMode(usesSingleLineMode bool) *Form {
 	x.inner.NSMatrix.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// The line break mode to use for text in the control’s cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *Form) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Form {
 	x.inner.NSMatrix.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The alignment mode of the text in the receiver’s cell.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *Form) WithAlignment(alignment NSTextAlignment) *Form {
 	x.inner.NSMatrix.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *Form) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Form {
 	x.inner.NSMatrix.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+//
 // WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
 func (x *Form) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Form {
 	x.inner.NSMatrix.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
@@ -328,6 +410,8 @@ func (x *Form) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) 
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *Form) WithFrame(frame corefoundation.CGRect) *Form {
 	x.inner.NSMatrix.NSControl.NSView.SetFrame(frame)
@@ -352,6 +436,8 @@ func (x *Form) WithBoundsRotation(boundsRotation float64) *Form {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *Form) WithBounds(bounds corefoundation.CGRect) *Form {
 	x.inner.NSMatrix.NSControl.NSView.SetBounds(bounds)
@@ -364,6 +450,8 @@ func (x *Form) WithCanDrawConcurrently(canDrawConcurrently bool) *Form {
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *Form) WithNeedsDisplay(needsDisplay bool) *Form {
 	x.inner.NSMatrix.NSControl.NSView.SetNeedsDisplay(needsDisplay)
@@ -550,7 +638,7 @@ func (x *Form) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *Form) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Form {
@@ -606,85 +694,117 @@ func (x *Form) WithPressureConfiguration(pressureConfiguration *PressureConfigur
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *Form) WithNextResponder(nextResponder ResponderProvider) *Form {
 	x.inner.NSMatrix.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *Form) WithMenu(menu *Menu) *Form {
 	x.inner.NSMatrix.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *Form) WithUserActivity(userActivity *foundation.NSUserActivity) *Form {
 	x.inner.NSMatrix.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *Form) WithTouchBar(touchBar *TouchBar) *Form {
 	x.inner.NSMatrix.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Returns the index of the selected entry.
+//
 // IndexOfSelectedItem calls the underlying IndexOfSelectedItem.
 func (x *Form) IndexOfSelectedItem() int {
 	return x.inner.IndexOfSelectedItem()
 }
 
+// Sets the width of all the entries in the receiver.
+//
 // SetEntryWidth calls the underlying SetEntryWidth.
 func (x *Form) SetEntryWidth(width float64) {
 	x.inner.SetEntryWidth(width)
 }
 
+// Sets the spacing between entries
+//
 // SetInterlineSpacing calls the underlying SetInterlineSpacing.
 func (x *Form) SetInterlineSpacing(spacing float64) {
 	x.inner.SetInterlineSpacing(spacing)
 }
 
+// Sets whether the receiver’s entries should display a border around their editable text fields.
+//
 // SetBordered calls the underlying SetBordered.
 func (x *Form) SetBordered(flag bool) {
 	x.inner.SetBordered(flag)
 }
 
+// Sets whether the receiver’s entries should display a bezel around their editable text.
+//
 // SetBezeled calls the underlying SetBezeled.
 func (x *Form) SetBezeled(flag bool) {
 	x.inner.SetBezeled(flag)
 }
 
+// Sets the alignment for all of the entry titles.
+//
 // SetTitleAlignment calls the underlying SetTitleAlignment.
 func (x *Form) SetTitleAlignment(mode NSTextAlignment) {
 	x.inner.SetTitleAlignment(raw.NSTextAlignment(mode))
 }
 
+// Sets the alignment for all of the receiver’s editable text.
+//
 // SetTextAlignment calls the underlying SetTextAlignment.
 func (x *Form) SetTextAlignment(mode NSTextAlignment) {
 	x.inner.SetTextAlignment(raw.NSTextAlignment(mode))
 }
 
+// Sets the font for all of the entry titles.
+//
 // SetTitleFont calls the underlying SetTitleFont.
 func (x *Form) SetTitleFont(fontObj *raw.NSFont) {
 	x.inner.SetTitleFont(fontObj)
 }
 
+// Sets the font for all of the receiver’s editable text fields
+//
 // SetTextFont calls the underlying SetTextFont.
 func (x *Form) SetTextFont(fontObj *raw.NSFont) {
 	x.inner.SetTextFont(fontObj)
 }
 
+// Returns the entry at the specified index.
+//
 // CellAtIndex calls the underlying CellAtIndex.
 func (x *Form) CellAtIndex(index int) objc.ID {
 	return x.inner.CellAtIndex(index)
 }
 
+// Displays the entry at the specified index.
+//
 // DrawCellAtIndex calls the underlying DrawCellAtIndex.
 func (x *Form) DrawCellAtIndex(index int) {
 	x.inner.DrawCellAtIndex(index)
 }
 
+// Adds a new entry to the end of the receiver and gives it the specified title.
+//
 // AddEntry calls the underlying AddEntry.
 func (x *Form) AddEntry(title string) *FormCell {
 	_r := x.inner.AddEntry(foundation.NSStringStringWithUTF8String(title))
@@ -694,6 +814,8 @@ func (x *Form) AddEntry(title string) *FormCell {
 	return &FormCell{inner: _r}
 }
 
+// Inserts an entry with the specified title into the receiver.
+//
 // InsertEntryAtIndex calls the underlying InsertEntryAtIndex.
 func (x *Form) InsertEntryAtIndex(title string, index int) *FormCell {
 	_r := x.inner.InsertEntryAtIndex(foundation.NSStringStringWithUTF8String(title), index)
@@ -703,36 +825,50 @@ func (x *Form) InsertEntryAtIndex(title string, index int) *FormCell {
 	return &FormCell{inner: _r}
 }
 
+// Removes and releases the entry at the specified index.
+//
 // RemoveEntryAtIndex calls the underlying RemoveEntryAtIndex.
 func (x *Form) RemoveEntryAtIndex(index int) {
 	x.inner.RemoveEntryAtIndex(index)
 }
 
+// Returns the index of the entry whose tag is tag.
+//
 // IndexOfCellWithTag calls the underlying IndexOfCellWithTag.
 func (x *Form) IndexOfCellWithTag(tag int) int {
 	return x.inner.IndexOfCellWithTag(tag)
 }
 
+// Selects the entry at the specified index.
+//
 // SelectTextAtIndex calls the underlying SelectTextAtIndex.
 func (x *Form) SelectTextAtIndex(index int) {
 	x.inner.SelectTextAtIndex(index)
 }
 
+// Sets the writing direction for the title of every control embedded in the form.
+//
 // SetTitleBaseWritingDirection calls the underlying SetTitleBaseWritingDirection.
 func (x *Form) SetTitleBaseWritingDirection(writingDirection NSWritingDirection) {
 	x.inner.SetTitleBaseWritingDirection(raw.NSWritingDirection(writingDirection))
 }
 
+// Sets the writing direction for the text content of every control embedded in the form.
+//
 // SetTextBaseWritingDirection calls the underlying SetTextBaseWritingDirection.
 func (x *Form) SetTextBaseWritingDirection(writingDirection NSWritingDirection) {
 	x.inner.SetTextBaseWritingDirection(raw.NSWritingDirection(writingDirection))
 }
 
+// Sets the preferred text field width used by Auto Layout.
+//
 // SetPreferredTextFieldWidth calls the underlying SetPreferredTextFieldWidth.
 func (x *Form) SetPreferredTextFieldWidth(preferredWidth float64) {
 	x.inner.SetPreferredTextFieldWidth(preferredWidth)
 }
 
+// The preferred width of the form’s cells when using Auto Layout.
+//
 // PreferredTextFieldWidth calls the underlying PreferredTextFieldWidth.
 func (x *Form) PreferredTextFieldWidth() float64 {
 	return x.inner.PreferredTextFieldWidth()

@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A view that displays content from a player and presents a native user interface to control playback.
+//
 // PlayerView wraps [raw.AVPlayerView] with a fluent Go API.
 type PlayerView struct {
 	inner *raw.AVPlayerView
@@ -41,7 +43,7 @@ func NewPlayerView() *PlayerView {
 	return &PlayerView{inner: raw.AVPlayerViewFromID(_id)}
 }
 
-// @property	player @abstract	The player from which to source the media content for the view.
+// The player instance that provides the media content for the view.
 //
 // WithPlayer sets the player property and returns the receiver for chaining.
 func (x *PlayerView) WithPlayer(player *avfoundation.AVPlayer) *PlayerView {
@@ -49,7 +51,7 @@ func (x *PlayerView) WithPlayer(player *avfoundation.AVPlayer) *PlayerView {
 	return x
 }
 
-// @property	controlsStyle @abstract	The style of the playback controls pane currently associated with the view. @discussion	After macOS 11, the floating style controls will always be used when presenting in fullscreen and AVPlayerViewControlsStyleNone is not specified.
+// The player view’s controls style.
 //
 // WithControlsStyle sets the controlsStyle property and returns the receiver for chaining.
 func (x *PlayerView) WithControlsStyle(controlsStyle AVPlayerViewControlsStyle) *PlayerView {
@@ -57,7 +59,7 @@ func (x *PlayerView) WithControlsStyle(controlsStyle AVPlayerViewControlsStyle) 
 	return x
 }
 
-// @property	videoGravity @abstract	A string defining how the video is displayed within an AVPlayerLayer bounds rect. @discussion	Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default.
+// A value that determines how the player view displays video content within its bounds.
 //
 // WithVideoGravity sets the videoGravity property and returns the receiver for chaining.
 func (x *PlayerView) WithVideoGravity(videoGravity *foundation.NSString) *PlayerView {
@@ -65,7 +67,7 @@ func (x *PlayerView) WithVideoGravity(videoGravity *foundation.NSString) *Player
 	return x
 }
 
-// @property	updatesNowPlayingInfoCenter @abstract	Whether or not the now playing info center should be updated. Default is YES.
+// A Boolean value that indicates whether the player view controller updates the Now Playing info center.
 //
 // WithUpdatesNowPlayingInfoCenter sets the updatesNowPlayingInfoCenter property and returns the receiver for chaining.
 func (x *PlayerView) WithUpdatesNowPlayingInfoCenter(updatesNowPlayingInfoCenter bool) *PlayerView {
@@ -73,7 +75,7 @@ func (x *PlayerView) WithUpdatesNowPlayingInfoCenter(updatesNowPlayingInfoCenter
 	return x
 }
 
-// @property	delegate @abstract	The receiver's delegate.
+// The player view’s delegate object.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *PlayerView) WithDelegate(delegate raw.AVPlayerViewDelegate) *PlayerView {
@@ -81,7 +83,7 @@ func (x *PlayerView) WithDelegate(delegate raw.AVPlayerViewDelegate) *PlayerView
 	return x
 }
 
-// @property		speeds @abstract		A list of user selectable playback speeds to be shown in the playback speed control. @discussion	By default this property will be set to the systemDefaultSpeeds class property. Setting this property to nil will hide the playback speed selection UI. To set the currently selected playback speed programmatically, either set the defaultRate on the AVPlayer associated with this view controller or use the selectSpeed method on AVPlayerView.
+// A list of user-selectable playback speeds to show in the playback speed control.
 //
 // WithSpeeds sets the collection, converting the Go slice to an NSArray.
 func (x *PlayerView) WithSpeeds(items ...*raw.AVPlaybackSpeed) *PlayerView {
@@ -101,7 +103,7 @@ func (x *PlayerView) WithSpeeds(items ...*raw.AVPlaybackSpeed) *PlayerView {
 	return x
 }
 
-// @property	allowsVideoFrameAnalysis @abstract	When set to YES, the AVPlayerView will try to find objects, text and people while the media is paused. When an object is found, the user will be able to interact with it selecting and right clicking to present a context menu. Default is YES.
+// A Boolean value that indicates whether to perform video frame analysis.
 //
 // WithAllowsVideoFrameAnalysis sets the allowsVideoFrameAnalysis property and returns the receiver for chaining.
 func (x *PlayerView) WithAllowsVideoFrameAnalysis(allowsVideoFrameAnalysis bool) *PlayerView {
@@ -117,7 +119,7 @@ func (x *PlayerView) WithVideoFrameAnalysisTypes(videoFrameAnalysisTypes AVVideo
 	return x
 }
 
-// @property	allowsMagnification @abstract	Whether the magnify gesture will change the video's view magnification. @discussion	The default value is NO. This property only effects whether the magnify gesture triggers magnification. A client can still programmatically change magnification even when the value of this is NO. This behavior matches the behavior of NSScrollView.
+// A Boolean value that indicates whether the magnify gesture changes the video’s view magnification.
 //
 // WithAllowsMagnification sets the allowsMagnification property and returns the receiver for chaining.
 func (x *PlayerView) WithAllowsMagnification(allowsMagnification bool) *PlayerView {
@@ -125,7 +127,7 @@ func (x *PlayerView) WithAllowsMagnification(allowsMagnification bool) *PlayerVi
 	return x
 }
 
-// @property	magnification @abstract	The factor by which the video's view is currently scaled. @discussion	The default value is 1.0. The value cannot be smaller than 1.0 or larger 64.0. Nearest neighbor interpolation will be used once the content has been zoomed past a certain factor.
+// The factor by which the video’s view is currently scaled.
 //
 // WithMagnification sets the magnification property and returns the receiver for chaining.
 func (x *PlayerView) WithMagnification(magnification float64) *PlayerView {
@@ -133,7 +135,7 @@ func (x *PlayerView) WithMagnification(magnification float64) *PlayerView {
 	return x
 }
 
-// Describes how High Dynamic Range (HDR) video content renders. Defaults to “AVDisplayDynamicRangeAutomatic“. - Note: This property will only have effect if the video content supports HDR.
+// Describes how High Dynamic Range (HDR) video content renders.
 //
 // WithPreferredDisplayDynamicRange sets the preferredDisplayDynamicRange property and returns the receiver for chaining.
 func (x *PlayerView) WithPreferredDisplayDynamicRange(preferredDisplayDynamicRange AVDisplayDynamicRange) *PlayerView {
@@ -141,7 +143,7 @@ func (x *PlayerView) WithPreferredDisplayDynamicRange(preferredDisplayDynamicRan
 	return x
 }
 
-// @property	showsFrameSteppingButtons @abstract	Replace scanning controls in the playback UI with frame stepping buttons. Default is NO.
+// A Boolean value that determines whether the player view displays frame stepping buttons.
 //
 // WithShowsFrameSteppingButtons sets the showsFrameSteppingButtons property and returns the receiver for chaining.
 func (x *PlayerView) WithShowsFrameSteppingButtons(showsFrameSteppingButtons bool) *PlayerView {
@@ -149,7 +151,7 @@ func (x *PlayerView) WithShowsFrameSteppingButtons(showsFrameSteppingButtons boo
 	return x
 }
 
-// @property	showsSharingServiceButton @abstract	Whether or not the controls pane will show a sharing service button when the current player item can be shared. Default is NO.
+// A Boolean value that determines whether the player view displays a sharing service button.
 //
 // WithShowsSharingServiceButton sets the showsSharingServiceButton property and returns the receiver for chaining.
 func (x *PlayerView) WithShowsSharingServiceButton(showsSharingServiceButton bool) *PlayerView {
@@ -157,7 +159,7 @@ func (x *PlayerView) WithShowsSharingServiceButton(showsSharingServiceButton boo
 	return x
 }
 
-// @property	actionPopUpButtonMenu @abstract	Clients can set this property in order to show an action pop up button. Default is nil.
+// An action pop-up button menu that the player view displays.
 //
 // WithActionPopUpButtonMenu sets the actionPopUpButtonMenu property and returns the receiver for chaining.
 func (x *PlayerView) WithActionPopUpButtonMenu(actionPopUpButtonMenu *appkit.NSMenu) *PlayerView {
@@ -165,7 +167,7 @@ func (x *PlayerView) WithActionPopUpButtonMenu(actionPopUpButtonMenu *appkit.NSM
 	return x
 }
 
-// @property	showsFullScreenToggleButton @abstract	Whether or not the controls pane will show a full screen toggle button. Default is NO.
+// A Boolean value that determines whether the player view displays a full-screen toggle button.
 //
 // WithShowsFullScreenToggleButton sets the showsFullScreenToggleButton property and returns the receiver for chaining.
 func (x *PlayerView) WithShowsFullScreenToggleButton(showsFullScreenToggleButton bool) *PlayerView {
@@ -173,7 +175,7 @@ func (x *PlayerView) WithShowsFullScreenToggleButton(showsFullScreenToggleButton
 	return x
 }
 
-// @property    showsTimecodes @abstract    If timecodes are available, allow the AVPlayerView controls to enter timecode mode. Default is NO.
+// A Boolean value that determines whether the player view displays timecodes, if available.
 //
 // WithShowsTimecodes sets the showsTimecodes property and returns the receiver for chaining.
 func (x *PlayerView) WithShowsTimecodes(showsTimecodes bool) *PlayerView {
@@ -181,7 +183,7 @@ func (x *PlayerView) WithShowsTimecodes(showsTimecodes bool) *PlayerView {
 	return x
 }
 
-// @property	allowsPictureInPicturePlayback @abstract	Whether or not the receiver allows Picture in Picture playback. Default is NO.
+// A Boolean value that determines whether the player view allows Picture in Picture playback.
 //
 // WithAllowsPictureInPicturePlayback sets the allowsPictureInPicturePlayback property and returns the receiver for chaining.
 func (x *PlayerView) WithAllowsPictureInPicturePlayback(allowsPictureInPicturePlayback bool) *PlayerView {
@@ -189,7 +191,7 @@ func (x *PlayerView) WithAllowsPictureInPicturePlayback(allowsPictureInPicturePl
 	return x
 }
 
-// @property	pictureInPictureDelegate @abstract	A delegate for customizing Picture in Picture playback experience.
+// The Picture in Picture delegate object.
 //
 // WithPictureInPictureDelegate sets the pictureInPictureDelegate property and returns the receiver for chaining.
 func (x *PlayerView) WithPictureInPictureDelegate(pictureInPictureDelegate raw.AVPlayerViewPictureInPictureDelegate) *PlayerView {
@@ -197,14 +199,14 @@ func (x *PlayerView) WithPictureInPictureDelegate(pictureInPictureDelegate raw.A
 	return x
 }
 
-// @property		selectSpeed @param			speed The playback speed to select. @abstract		Sets the input AVPlaybackSpeed as the selected speed. @discussion	Calls to selectSpeed with AVPlaybackSpeeds not contained within the speeds property array will be ignored.
+// Selects a specified playback speed.
 //
 // SelectSpeed calls the underlying SelectSpeed.
 func (x *PlayerView) SelectSpeed(speed *raw.AVPlaybackSpeed) {
 	x.inner.SelectSpeed(speed)
 }
 
-// @method		setMagnification:centeredAtPoint: @abstract	Scales the video's view by a specified factor and centers the result on a specified point. @param		magnification The factor by which to scale the video's view. @param		point The point (in view space) on which to center magnification. @discussion	The magnification cannot be smaller than 1.0 or larger 64.0. Nearest neighbor interpolation will be used once the content has been zoomed past a certain factor.
+// Scales the video’s view by a specified factor, and centers the result on a specified point.
 //
 // SetMagnificationCenteredAtPoint calls the underlying SetMagnificationCenteredAtPoint.
 func (x *PlayerView) SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint) {
@@ -445,7 +447,7 @@ func (x *PlayerView) SetShowsTimecodes(showsTimecodes bool) {
 	x.inner.SetShowsTimecodes(showsTimecodes)
 }
 
-// @method		beginTrimmingWithCompletionHandler: @param		handler A completion handler that is executed when the user selects either the Trim or Cancel button in the trimming UI. @abstract	Sets the controls panel into trimming mode and blocks until the user selects either the Trim or the Cancel button.
+// Puts the player view into trimming mode.
 //
 // BeginTrimmingWithCompletionHandler calls the underlying BeginTrimmingWithCompletionHandler.
 func (x *PlayerView) BeginTrimmingWithCompletionHandler(handler func(AVPlayerViewTrimResult)) {
@@ -459,7 +461,7 @@ func (x *PlayerView) CanBeginTrimming() bool {
 	return x.inner.CanBeginTrimming()
 }
 
-// @method		flashChapterNumber:chapterTitle: @param		chapterNumber The chapter number (required). @param		chapterTitle The chapter title (optional). @abstract	Display the provided chapter number and title momentarily.
+// Displays the chapter number and title in the player view for a brief moment.
 //
 // FlashChapterNumberChapterTitle calls the underlying FlashChapterNumberChapterTitle.
 func (x *PlayerView) FlashChapterNumberChapterTitle(chapterNumber uint, chapterTitle string) {

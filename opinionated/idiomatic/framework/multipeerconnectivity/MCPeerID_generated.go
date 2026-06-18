@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An MCPeerID object represents a peer in a multipeer session.
+//
 // PeerID wraps [raw.MCPeerID] with a fluent Go API.
 type PeerID struct {
 	inner *raw.MCPeerID
@@ -31,6 +33,8 @@ func PeerIDFromID(id objc.ID) *PeerID {
 	return &PeerID{inner: raw.MCPeerIDFromID(id)}
 }
 
+// Initializes a peer.
+//
 // NewPeerIDWithDisplayName creates a new [PeerID].
 func NewPeerIDWithDisplayName(myDisplayName string) *PeerID {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MCPeerID")), objc.RegisterName("alloc"))

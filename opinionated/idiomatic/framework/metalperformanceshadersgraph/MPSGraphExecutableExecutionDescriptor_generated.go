@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A class that consists of all the levers to synchronize and schedule executable execution.
+//
 // GraphExecutableExecutionDescriptor wraps [raw.MPSGraphExecutableExecutionDescriptor] with a fluent Go API.
 type GraphExecutableExecutionDescriptor struct {
 	inner *raw.MPSGraphExecutableExecutionDescriptor
@@ -40,7 +42,7 @@ func NewGraphExecutableExecutionDescriptor() *GraphExecutableExecutionDescriptor
 	return &GraphExecutableExecutionDescriptor{inner: raw.MPSGraphExecutableExecutionDescriptorFromID(_id)}
 }
 
-// A notification that appears when graph-executable execution is scheduled. Default value is nil.
+// A notification that appears when graph-executable execution is scheduled.
 //
 // WithScheduledHandler sets the scheduledHandler property and returns the receiver for chaining.
 func (x *GraphExecutableExecutionDescriptor) WithScheduledHandler(scheduledHandler func(*foundation.NSArray[*raw.MPSGraphTensorData], unsafe.Pointer)) *GraphExecutableExecutionDescriptor {
@@ -48,7 +50,7 @@ func (x *GraphExecutableExecutionDescriptor) WithScheduledHandler(scheduledHandl
 	return x
 }
 
-// A notification that appears when graph-executable execution is finished. Default value is nil.
+// A notification that appears when graph-executable execution is finished.
 //
 // WithCompletionHandler sets the completionHandler property and returns the receiver for chaining.
 func (x *GraphExecutableExecutionDescriptor) WithCompletionHandler(completionHandler func(*foundation.NSArray[*raw.MPSGraphTensorData], unsafe.Pointer)) *GraphExecutableExecutionDescriptor {
@@ -56,7 +58,7 @@ func (x *GraphExecutableExecutionDescriptor) WithCompletionHandler(completionHan
 	return x
 }
 
-// Flag for the graph executable to wait till the execution has completed. Default value is false.
+// Flag for the graph executable to wait till the execution has completed.
 //
 // WithWaitUntilCompleted sets the waitUntilCompleted property and returns the receiver for chaining.
 func (x *GraphExecutableExecutionDescriptor) WithWaitUntilCompleted(waitUntilCompleted bool) *GraphExecutableExecutionDescriptor {
@@ -64,14 +66,14 @@ func (x *GraphExecutableExecutionDescriptor) WithWaitUntilCompleted(waitUntilCom
 	return x
 }
 
-// Waits on these shared events before scheduling execution on the HW. This does not include encoding which can still continue. - Parameters: - event: Shared event to wait on. - value: Value for shared event to wait on.
+// Waits on these shared events before scheduling execution on the HW.
 //
 // WaitForEventValue calls the underlying WaitForEventValue.
 func (x *GraphExecutableExecutionDescriptor) WaitForEventValue(event metal.MTLSharedEvent, value uint64) {
 	x.inner.WaitForEventValue(event, value)
 }
 
-// Signals these shared events at execution stage and immediately proceeds. - Parameters: - event: Shared event to signal. - executionStage: Execution stage to signal event at. - value: Value for shared event to wait on.
+// Signals these shared events at execution stage and immediately proceeds.
 //
 // SignalEventAtExecutionEventValue calls the underlying SignalEventAtExecutionEventValue.
 func (x *GraphExecutableExecutionDescriptor) SignalEventAtExecutionEventValue(event metal.MTLSharedEvent, executionStage MPSGraphExecutionStage, value uint64) {

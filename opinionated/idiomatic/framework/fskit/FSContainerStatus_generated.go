@@ -10,7 +10,7 @@ import (
 	"unsafe"
 )
 
-// A type that represents a container's status. This type contains two properties: * The “state“ value that indicates the state of the container, such as “FSContainerState/ready“ or “FSContainerState/blocked“. * The “status“ is an error (optional in Swift, nullable in Objective-C) that provides further information about the state, such as why the container is blocked. Examples of statuses that require intervention include errors that indicate the container isn't ready (POSIX `EAGAIN` or `ENOTCONN`), the container needs authentication (`ENEEDAUTH`), or that authentication failed (`EAUTH`). The status can also be an informative error, such as the FSKit error “FSError/Code/statusOperationInProgress“.
+// A type that represents a container’s status.
 //
 // ContainerStatus wraps [raw.FSContainerStatus] with a fluent Go API.
 type ContainerStatus struct {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Describes a shader function from a Metal library.
+//
 // MTL4LibraryFunctionDescriptor wraps [raw.MTL4LibraryFunctionDescriptor] with a fluent Go API.
 type MTL4LibraryFunctionDescriptor struct {
 	inner *raw.MTL4LibraryFunctionDescriptor

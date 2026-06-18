@@ -9,6 +9,7 @@ import (
 	"strings"
 )
 
+// Options that determine how PHASE manages sound assets in memory.
 type PHASEAssetType int64
 
 const (
@@ -49,11 +50,15 @@ func (e PHASEAutomaticHeadTrackingFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Calibration options for sound pressure level.
 type PHASECalibrationMode int64
 
 const (
-	PHASECalibrationModeNone        PHASECalibrationMode = 0
+	// An option that specifies no loudness calibration.
+	PHASECalibrationModeNone PHASECalibrationMode = 0
+	// A sound pressure level that’s tuned for the device.
 	PHASECalibrationModeRelativeSpl PHASECalibrationMode = 1
+	// A sound pressure level based on the current output device.
 	PHASECalibrationModeAbsoluteSpl PHASECalibrationMode = 2
 )
 
@@ -70,14 +75,20 @@ func (e PHASECalibrationMode) String() string {
 	}
 }
 
+// The actions the engine takes when it culls sound.
 type PHASECullOption int64
 
 const (
-	PHASECullOptionTerminate                 PHASECullOption = 0
-	PHASECullOptionSleepWakeAtZero           PHASECullOption = 1
-	PHASECullOptionSleepWakeAtRandomOffset   PHASECullOption = 2
+	// An option that culls sound by stopping playback.
+	PHASECullOptionTerminate PHASECullOption = 0
+	// An option that pauses playback and resumes at the beginning.
+	PHASECullOptionSleepWakeAtZero PHASECullOption = 1
+	// An option that pauses playback and resumes at a random position.
+	PHASECullOptionSleepWakeAtRandomOffset PHASECullOption = 2
+	// An option that pauses playback and resumes where it left off.
 	PHASECullOptionSleepWakeAtRealtimeOffset PHASECullOption = 3
-	PHASECullOptionDoNotCull                 PHASECullOption = 4
+	// An option that indicates the framework takes no action to cull sound.
+	PHASECullOptionDoNotCull PHASECullOption = 4
 )
 
 func (e PHASECullOption) String() string {
@@ -97,19 +108,31 @@ func (e PHASECullOption) String() string {
 	}
 }
 
+// Options that apply a mathematical function to an input value.
 type PHASECurveType int64
 
 const (
-	PHASECurveTypeLinear         PHASECurveType = 1668435054
-	PHASECurveTypeSquared        PHASECurveType = 1668436849
+	// A curve that increases uniformly with its input.
+	PHASECurveTypeLinear PHASECurveType = 1668435054
+	// A curve that increases at a rate that squares its input.
+	PHASECurveTypeSquared PHASECurveType = 1668436849
+	// A curve that increases at a rate of one divided by the input’s square.
 	PHASECurveTypeInverseSquared PHASECurveType = 1668434257
-	PHASECurveTypeCubed          PHASECurveType = 1668432757
-	PHASECurveTypeInverseCubed   PHASECurveType = 1668434243
-	PHASECurveTypeSine           PHASECurveType = 1668436846
-	PHASECurveTypeInverseSine    PHASECurveType = 1668434259
-	PHASECurveTypeSigmoid        PHASECurveType = 1668436839
+	// A curve that increases at a rate that cubes its input.
+	PHASECurveTypeCubed PHASECurveType = 1668432757
+	// A curve that increases at a rate of one divided by the input’s cube.
+	PHASECurveTypeInverseCubed PHASECurveType = 1668434243
+	// A sine curve.
+	PHASECurveTypeSine PHASECurveType = 1668436846
+	// An inverse sine curve.
+	PHASECurveTypeInverseSine PHASECurveType = 1668434259
+	// A sigmoid curve.
+	PHASECurveTypeSigmoid PHASECurveType = 1668436839
+	// An inverse sigmoid curve.
 	PHASECurveTypeInverseSigmoid PHASECurveType = 1668434247
+	// A curve that equals its start value for the entire duration.
 	PHASECurveTypeHoldStartValue PHASECurveType = 1668434003
+	// A curve that equals its end value for the entire duration.
 	PHASECurveTypeJumpToEndValue PHASECurveType = 1668434501
 )
 
@@ -142,15 +165,22 @@ func (e PHASECurveType) String() string {
 	}
 }
 
+// A collection of physical surfaces that each add a unique acoustic quality to your app’s audio.
 type PHASEMaterialPreset int64
 
 const (
+	// A surface characteristic that produces the acoustic quality of cardboard.
 	PHASEMaterialPresetCardboard PHASEMaterialPreset = 1833136740
-	PHASEMaterialPresetGlass     PHASEMaterialPreset = 1833397363
-	PHASEMaterialPresetBrick     PHASEMaterialPreset = 1833071211
-	PHASEMaterialPresetConcrete  PHASEMaterialPreset = 1833132914
-	PHASEMaterialPresetDrywall   PHASEMaterialPreset = 1833202295
-	PHASEMaterialPresetWood      PHASEMaterialPreset = 1834448228
+	// A surface characteristic that produces the acoustic quality of glass.
+	PHASEMaterialPresetGlass PHASEMaterialPreset = 1833397363
+	// A surface characteristic that produces the acoustic quality of brick.
+	PHASEMaterialPresetBrick PHASEMaterialPreset = 1833071211
+	// A surface characteristic that produces the acoustic quality of concrete.
+	PHASEMaterialPresetConcrete PHASEMaterialPreset = 1833132914
+	// A surface characteristic that produces the acoustic quality of drywall.
+	PHASEMaterialPresetDrywall PHASEMaterialPreset = 1833202295
+	// A surface characteristic that produces the acoustic quality of wood.
+	PHASEMaterialPresetWood PHASEMaterialPreset = 1834448228
 )
 
 func (e PHASEMaterialPreset) String() string {
@@ -172,6 +202,7 @@ func (e PHASEMaterialPreset) String() string {
 	}
 }
 
+// Predetermined qualities of an environment that affect how sound transmits.
 type PHASEMediumPreset int64
 
 const (
@@ -187,10 +218,13 @@ func (e PHASEMediumPreset) String() string {
 	}
 }
 
+// Options that determine whether the framework adjusts a sound asset’s loudness for the user’s output device.
 type PHASENormalizationMode int64
 
 const (
-	PHASENormalizationModeNone    PHASENormalizationMode = 0
+	// A mode that instructs the framework not to adjust a sound’s volume according to the user’s output device.
+	PHASENormalizationModeNone PHASENormalizationMode = 0
+	// A mode that instructs the framework to adjust a sound’s volume according to the user’s output device.
 	PHASENormalizationModeDynamic PHASENormalizationMode = 1
 )
 
@@ -205,10 +239,13 @@ func (e PHASENormalizationMode) String() string {
 	}
 }
 
+// Loop options for audio playback.
 type PHASEPlaybackMode int64
 
 const (
+	// An option that plays a sound only once.
 	PHASEPlaybackModeOneShot PHASEPlaybackMode = 0
+	// An option that restarts a sound from the begining after it finishes.
 	PHASEPlaybackModeLooping PHASEPlaybackMode = 1
 )
 
@@ -223,13 +260,18 @@ func (e PHASEPlaybackMode) String() string {
 	}
 }
 
+// Options that inform PHASE of an audio-stream buffer’s playback priority.
 // Bitmask — values may be combined with |.
 type PHASEPushStreamBufferOptions uint64
 
 const (
-	PHASEPushStreamBufferDefault          PHASEPushStreamBufferOptions = 1
-	PHASEPushStreamBufferLoops            PHASEPushStreamBufferOptions = 2
-	PHASEPushStreamBufferInterrupts       PHASEPushStreamBufferOptions = 4
+	// Indicates a buffer processes after existing buffers in the queue.
+	PHASEPushStreamBufferDefault PHASEPushStreamBufferOptions = 1
+	// Indicates a buffer restarts after it finishes processing.
+	PHASEPushStreamBufferLoops PHASEPushStreamBufferOptions = 2
+	// Indicates a buffer begins processing immediately.
+	PHASEPushStreamBufferInterrupts PHASEPushStreamBufferOptions = 4
+	// Indicates a buffer begins processing when an existing buffer loops.
 	PHASEPushStreamBufferInterruptsAtLoop PHASEPushStreamBufferOptions = 8
 )
 
@@ -253,9 +295,11 @@ func (e PHASEPushStreamBufferOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// A status that describes the results after the app schedules a push-stream buffer.
 type PHASEPushStreamCompletionCallbackCondition int64
 
 const (
+	// Indicates the framework invokes the callback when the engine processes the audio for output.
 	PHASEPushStreamCompletionDataRendered PHASEPushStreamCompletionCallbackCondition = 0
 )
 
@@ -268,6 +312,7 @@ func (e PHASEPushStreamCompletionCallbackCondition) String() string {
 	}
 }
 
+// The playback status of audio.
 type PHASERenderingState int64
 
 const (
@@ -289,22 +334,36 @@ func (e PHASERenderingState) String() string {
 	}
 }
 
+// The manner in which PHASE diffuses resonating sound.
 type PHASEReverbPreset int64
 
 const (
-	PHASEReverbPresetNone          PHASEReverbPreset = 1917742958
-	PHASEReverbPresetSmallRoom     PHASEReverbPreset = 1918063213
-	PHASEReverbPresetMediumRoom    PHASEReverbPreset = 1917669997
-	PHASEReverbPresetLargeRoom     PHASEReverbPreset = 1917604401
-	PHASEReverbPresetLargeRoom2    PHASEReverbPreset = 1917604402
+	// An option that adds no reverberation to a sound.
+	PHASEReverbPresetNone PHASEReverbPreset = 1917742958
+	// A resonation that simulates the experience of hearing a sound in a small room with specific dimensions.
+	PHASEReverbPresetSmallRoom PHASEReverbPreset = 1918063213
+	// A resonation that simulates the experience of hearing a sound in a medium-size room with specific dimensions.
+	PHASEReverbPresetMediumRoom PHASEReverbPreset = 1917669997
+	// A resonation that simulates the experience of hearing a sound in a large room with specific dimensions.
+	PHASEReverbPresetLargeRoom PHASEReverbPreset = 1917604401
+	// A resonation that simulates the experience of hearing a sound in one kind of large room with specific dimensions.
+	PHASEReverbPresetLargeRoom2 PHASEReverbPreset = 1917604402
+	// A resonation that simulates the experience of hearing a sound in a medium-size chamber with specific dimensions.
 	PHASEReverbPresetMediumChamber PHASEReverbPreset = 1917666152
-	PHASEReverbPresetLargeChamber  PHASEReverbPreset = 1917600616
-	PHASEReverbPresetMediumHall    PHASEReverbPreset = 1917667377
-	PHASEReverbPresetMediumHall2   PHASEReverbPreset = 1917667378
-	PHASEReverbPresetMediumHall3   PHASEReverbPreset = 1917667379
-	PHASEReverbPresetLargeHall     PHASEReverbPreset = 1917601841
-	PHASEReverbPresetLargeHall2    PHASEReverbPreset = 1917601842
-	PHASEReverbPresetCathedral     PHASEReverbPreset = 1917023336
+	// A resonation that simulates the experience of hearing a sound in a large chamber with specific dimensions.
+	PHASEReverbPresetLargeChamber PHASEReverbPreset = 1917600616
+	// A resonation that simulates the experience of hearing a sound in a medium-size hall with specific dimensions.
+	PHASEReverbPresetMediumHall PHASEReverbPreset = 1917667377
+	// A resonation that simulates the experience of hearing a sound in one kind of medium-size hall with specific dimensions.
+	PHASEReverbPresetMediumHall2 PHASEReverbPreset = 1917667378
+	// A resonation that simulates the experience of hearing a sound in another kind of medium-size hall with specific dimensions.
+	PHASEReverbPresetMediumHall3 PHASEReverbPreset = 1917667379
+	// A resonation that simulates the experience of hearing a sound in a large hall with specific dimensions.
+	PHASEReverbPresetLargeHall PHASEReverbPreset = 1917601841
+	// A resonation that simulates the experience of hearing a sound in one kind of large hall with specific dimensions.
+	PHASEReverbPresetLargeHall2 PHASEReverbPreset = 1917601842
+	// A resonation that simulates the experience of hearing a sound in a cathedral.
+	PHASEReverbPresetCathedral PHASEReverbPreset = 1917023336
 )
 
 func (e PHASEReverbPreset) String() string {
@@ -340,6 +399,7 @@ func (e PHASEReverbPreset) String() string {
 	}
 }
 
+// Indicates the results of sound-event preparation.
 type PHASESoundEventPrepareHandlerReason int64
 
 const (
@@ -361,6 +421,7 @@ func (e PHASESoundEventPrepareHandlerReason) String() string {
 	}
 }
 
+// Indicates the state of sound-event preparation.
 type PHASESoundEventPrepareState int64
 
 const (
@@ -382,6 +443,7 @@ func (e PHASESoundEventPrepareState) String() string {
 	}
 }
 
+// Indicates the status after a sound event changes its playback position.
 type PHASESoundEventSeekHandlerReason int64
 
 const (
@@ -403,6 +465,7 @@ func (e PHASESoundEventSeekHandlerReason) String() string {
 	}
 }
 
+// Indicates the status after starting a sound event.
 type PHASESoundEventStartHandlerReason int64
 
 const (
@@ -424,6 +487,7 @@ func (e PHASESoundEventStartHandlerReason) String() string {
 	}
 }
 
+// Sound resonance options for a spatial pipeline.
 // Bitmask — values may be combined with |.
 type PHASESpatialPipelineFlags uint64
 
@@ -450,11 +514,15 @@ func (e PHASESpatialPipelineFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The manner in which PHASE outputs spatial audio.
 type PHASESpatializationMode int64
 
 const (
-	PHASESpatializationModeAutomatic             PHASESpatializationMode = 0
-	PHASESpatializationModeAlwaysUseBinaural     PHASESpatializationMode = 1
+	// A mode that indicates that the framework chooses the spatialization mode.
+	PHASESpatializationModeAutomatic PHASESpatializationMode = 0
+	// A mode that introduces special processing to replicate a realistic spatial listening experience.
+	PHASESpatializationModeAlwaysUseBinaural PHASESpatializationMode = 1
+	// A mode that adds a 3D position and orientation to sound by panning across the available output channels.
 	PHASESpatializationModeAlwaysUseChannelBased PHASESpatializationMode = 2
 )
 
@@ -471,6 +539,7 @@ func (e PHASESpatializationMode) String() string {
 	}
 }
 
+// Modes that determine when the framework consumes API calls and updates internal state.
 type PHASEUpdateMode int64
 
 const (

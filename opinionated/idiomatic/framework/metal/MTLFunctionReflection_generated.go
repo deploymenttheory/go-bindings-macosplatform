@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Represents a reflection object containing information about a function in a Metal library.
+//
 // FunctionReflection wraps [raw.MTLFunctionReflection] with a fluent Go API.
 type FunctionReflection struct {
 	inner *raw.MTLFunctionReflection

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object for evaluating navigation events in an authentication session.
+//
 // WebAuthenticationSessionCallback wraps [raw.ASWebAuthenticationSessionCallback] with a fluent Go API.
 type WebAuthenticationSessionCallback struct {
 	inner *raw.ASWebAuthenticationSessionCallback

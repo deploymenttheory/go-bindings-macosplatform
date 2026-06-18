@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Groups together properties for creating a compiler context.
+//
 // MTL4CompilerDescriptor wraps [raw.MTL4CompilerDescriptor] with a fluent Go API.
 type MTL4CompilerDescriptor struct {
 	inner *raw.MTL4CompilerDescriptor

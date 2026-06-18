@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A button with a pull-down menu and a default action.
+//
 // ComboButton wraps [raw.NSComboButton] with a fluent Go API.
 type ComboButton struct {
 	inner *raw.NSComboButton
@@ -41,7 +43,7 @@ func NewComboButton() *ComboButton {
 	return &ComboButton{inner: raw.NSComboButtonFromID(_id)}
 }
 
-// The title displayed on the control. The default value is an empty string.
+// The localized string that the button displays.
 //
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *ComboButton) WithTitle(title string) *ComboButton {
@@ -49,7 +51,7 @@ func (x *ComboButton) WithTitle(title string) *ComboButton {
 	return x
 }
 
-// The image displayed on the control. The default value is `nil`.
+// The image that the button displays.
 //
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *ComboButton) WithImage(image *Image) *ComboButton {
@@ -57,7 +59,7 @@ func (x *ComboButton) WithImage(image *Image) *ComboButton {
 	return x
 }
 
-// The scaling mode applied to fit the button's image within the content area. The default value is `NSImageScaleProportionallyDown`.
+// The scaling behavior to apply to the button’s image.
 //
 // WithImageScaling sets the imageScaling property and returns the receiver for chaining.
 func (x *ComboButton) WithImageScaling(imageScaling NSImageScaling) *ComboButton {
@@ -65,7 +67,7 @@ func (x *ComboButton) WithImageScaling(imageScaling NSImageScaling) *ComboButton
 	return x
 }
 
-// Specifies the visual presentation and behavior for NSComboButton's primary action and its menu. The default value is `NSComboButtonStyleSplit`.
+// The appearance setting that determines how the button presents its menu .
 //
 // WithStyle sets the style property and returns the receiver for chaining.
 func (x *ComboButton) WithStyle(style NSComboButtonStyle) *ComboButton {
@@ -73,138 +75,184 @@ func (x *ComboButton) WithStyle(style NSComboButtonStyle) *ComboButton {
 	return x
 }
 
+// The target object that receives action messages from the cell.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *ComboButton) WithTarget(target objc.ID) *ComboButton {
 	x.inner.NSControl.SetTarget(target)
 	return x
 }
 
+// The default action-message selector associated with the control.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *ComboButton) WithAction(action objc.SEL) *ComboButton {
 	x.inner.NSControl.SetAction(action)
 	return x
 }
 
+// The tag identifying the receiver (not the tag of the receiver’s cell).
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *ComboButton) WithTag(tag int) *ComboButton {
 	x.inner.NSControl.SetTag(tag)
 	return x
 }
 
+// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+//
 // WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
 func (x *ComboButton) WithIgnoresMultiClick(ignoresMultiClick bool) *ComboButton {
 	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
 	return x
 }
 
+// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *ComboButton) WithContinuous(continuous bool) *ComboButton {
 	x.inner.NSControl.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver reacts to mouse events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *ComboButton) WithEnabled(enabled bool) *ComboButton {
 	x.inner.NSControl.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the receiver refuses the first responder role.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *ComboButton) WithRefusesFirstResponder(refusesFirstResponder bool) *ComboButton {
 	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value that indicates whether the cell is highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *ComboButton) WithHighlighted(highlighted bool) *ComboButton {
 	x.inner.NSControl.SetHighlighted(highlighted)
 	return x
 }
 
+// The size of the control.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *ComboButton) WithControlSize(controlSize NSControlSize) *ComboButton {
 	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The receiver’s formatter.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *ComboButton) WithFormatter(formatter *foundation.NSFormatter) *ComboButton {
 	x.inner.NSControl.SetFormatter(formatter)
 	return x
 }
 
+// The value of the receiver’s cell as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *ComboButton) WithObjectValue(objectValue objc.ID) *ComboButton {
 	x.inner.NSControl.SetObjectValue(objectValue)
 	return x
 }
 
+// The value of the receiver’s cell as an NSString object.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *ComboButton) WithStringValue(stringValue string) *ComboButton {
 	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The value of the receiver’s cell as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *ComboButton) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ComboButton {
 	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *ComboButton) WithIntValue(intValue int) *ComboButton {
 	x.inner.NSControl.SetIntValue(intValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *ComboButton) WithIntegerValue(integerValue int) *ComboButton {
 	x.inner.NSControl.SetIntegerValue(integerValue)
 	return x
 }
 
+// The value of the receiver’s cell as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *ComboButton) WithFloatValue(floatValue float32) *ComboButton {
 	x.inner.NSControl.SetFloatValue(floatValue)
 	return x
 }
 
+// The value of the receiver’s cell as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *ComboButton) WithDoubleValue(doubleValue float64) *ComboButton {
 	x.inner.NSControl.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The font used to draw text in the receiver’s cell.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *ComboButton) WithFont(font *Font) *ComboButton {
 	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *ComboButton) WithUsesSingleLineMode(usesSingleLineMode bool) *ComboButton {
 	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// The line break mode to use for text in the control’s cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *ComboButton) WithLineBreakMode(lineBreakMode NSLineBreakMode) *ComboButton {
 	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The alignment mode of the text in the receiver’s cell.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *ComboButton) WithAlignment(alignment NSTextAlignment) *ComboButton {
 	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *ComboButton) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ComboButton {
 	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+//
 // WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
 func (x *ComboButton) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *ComboButton {
 	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
@@ -259,6 +307,8 @@ func (x *ComboButton) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOp
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *ComboButton) WithFrame(frame corefoundation.CGRect) *ComboButton {
 	x.inner.NSControl.NSView.SetFrame(frame)
@@ -283,6 +333,8 @@ func (x *ComboButton) WithBoundsRotation(boundsRotation float64) *ComboButton {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *ComboButton) WithBounds(bounds corefoundation.CGRect) *ComboButton {
 	x.inner.NSControl.NSView.SetBounds(bounds)
@@ -295,6 +347,8 @@ func (x *ComboButton) WithCanDrawConcurrently(canDrawConcurrently bool) *ComboBu
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *ComboButton) WithNeedsDisplay(needsDisplay bool) *ComboButton {
 	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
@@ -481,7 +535,7 @@ func (x *ComboButton) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foun
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *ComboButton) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ComboButton {
@@ -537,24 +591,32 @@ func (x *ComboButton) WithPressureConfiguration(pressureConfiguration *PressureC
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *ComboButton) WithNextResponder(nextResponder ResponderProvider) *ComboButton {
 	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *ComboButton) WithMenu(menu *Menu) *ComboButton {
 	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *ComboButton) WithUserActivity(userActivity *foundation.NSUserActivity) *ComboButton {
 	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *ComboButton) WithTouchBar(touchBar *TouchBar) *ComboButton {
 	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())

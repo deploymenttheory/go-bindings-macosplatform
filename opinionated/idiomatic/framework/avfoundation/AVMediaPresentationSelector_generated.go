@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// For content that has been authored with the express intent of offering an alternative selection interface for AVMediaSelectionOptions, AVMediaPresentationSelector represents a collection of mutually exclusive settings.
+//
 // MediaPresentationSelector wraps [raw.AVMediaPresentationSelector] with a fluent Go API.
 type MediaPresentationSelector struct {
 	inner *raw.AVMediaPresentationSelector

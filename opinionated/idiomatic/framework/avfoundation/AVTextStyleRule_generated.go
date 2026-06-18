@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the text styling rules to apply to a media item’s textual content.
+//
 // TextStyleRule wraps [raw.AVTextStyleRule] with a fluent Go API.
 type TextStyleRule struct {
 	inner *raw.AVTextStyleRule
@@ -31,7 +33,7 @@ func TextStyleRuleFromID(id objc.ID) *TextStyleRule {
 	return &TextStyleRule{inner: raw.AVTextStyleRuleFromID(id)}
 }
 
-// @method		initWithTextMarkupAttributes: @abstract		Creates an instance of AVTextStyleRule with the specified text markup attributes. @param			textMarkupAttributes An NSDictionary with keys representing text style attributes that are specifiable in text markup. Eligible keys are defined in <CoreMedia/CMTextMarkup.h>. @result		An instance of AVTextStyleRule @discussion	Equivalent to invoking -initWithTextMarkupAttributes:textSelector: with a value of nil for textSelector.
+// Creates a text style rule object with the specified style attributes.
 //
 // NewTextStyleRuleWithTextMarkupAttributes creates a new [TextStyleRule].
 func NewTextStyleRuleWithTextMarkupAttributes(textMarkupAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextStyleRule {
@@ -40,7 +42,7 @@ func NewTextStyleRuleWithTextMarkupAttributes(textMarkupAttributes *foundation.N
 	return &TextStyleRule{inner: raw.AVTextStyleRuleFromID(_id)}
 }
 
-// @method		initWithTextMarkupAttributes:textSelector: @abstract		Creates an instance of AVTextStyleRule with the specified text markup attributes and an identifier for the range or ranges of text to which the attributes should be applied. @param			textMarkupAttributes An NSDictionary with keys representing text style attributes that are specifiable in text markup. Eligible keys are defined in <CoreMedia/CMTextMarkup.h>. @param			textSelector An identifier for the range or ranges of text to which the attributes should be applied. Eligible identifiers are determined by the format and content of the legible media. A value of nil indicates that the textMarkupAttributes should be applied as default styles for all text unless overridden by content markup or other applicable text selectors. @result		An instance of AVTextStyleRule
+// Creates a text style rule object with the specified style attributes and text range information.
 //
 // NewTextStyleRuleWithTextMarkupAttributesTextSelector creates a new [TextStyleRule].
 func NewTextStyleRuleWithTextMarkupAttributesTextSelector(textMarkupAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID], textSelector string) *TextStyleRule {

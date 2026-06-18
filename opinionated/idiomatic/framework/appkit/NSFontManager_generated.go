@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The center of activity for the font-conversion system.
+//
 // FontManager wraps [raw.NSFontManager] with a fluent Go API.
 type FontManager struct {
 	inner *raw.NSFontManager
@@ -37,12 +39,16 @@ func NewFontManager() *FontManager {
 	return &FontManager{inner: raw.NSFontManagerFromID(_id)}
 }
 
+// A Boolean value that indicates whether the font conversion system’s Font panel and Font menu items are enabled.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *FontManager) WithEnabled(enabled bool) *FontManager {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// The action sent to the first responder when the user selects a new font from the Font panel or chooses a command from the Font menu.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *FontManager) WithAction(action objc.SEL) *FontManager {
 	x.inner.SetAction(action)
@@ -55,22 +61,30 @@ func (x *FontManager) WithDelegate(delegate objc.ID) *FontManager {
 	return x
 }
 
+// The object that receives action messages related to the font manager.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *FontManager) WithTarget(target objc.ID) *FontManager {
 	x.inner.SetTarget(target)
 	return x
 }
 
+// Records the specified font as the currently selected font and updates the Font panel.
+//
 // SetSelectedFontIsMultiple calls the underlying SetSelectedFontIsMultiple.
 func (x *FontManager) SetSelectedFontIsMultiple(fontObj *raw.NSFont, flag bool) {
 	x.inner.SetSelectedFontIsMultiple(fontObj, flag)
 }
 
+// Records the given menu as the application’s Font menu.
+//
 // SetFontMenu calls the underlying SetFontMenu.
 func (x *FontManager) SetFontMenu(newMenu *raw.NSMenu) {
 	x.inner.SetFontMenu(newMenu)
 }
 
+// Returns the menu that’s connected to the font conversion system, creating it if necessary.
+//
 // FontMenu calls the underlying FontMenu.
 func (x *FontManager) FontMenu(create bool) *Menu {
 	_r := x.inner.FontMenu(create)
@@ -80,6 +94,8 @@ func (x *FontManager) FontMenu(create bool) *Menu {
 	return &Menu{inner: _r}
 }
 
+// Returns the application’s shared Font panel object, creating it if necessary.
+//
 // FontPanel calls the underlying FontPanel.
 func (x *FontManager) FontPanel(create bool) *FontPanel {
 	_r := x.inner.FontPanel(create)
@@ -89,6 +105,8 @@ func (x *FontManager) FontPanel(create bool) *FontPanel {
 	return &FontPanel{inner: _r}
 }
 
+// Attempts to load a font with the specified characteristics.
+//
 // FontWithFamilyTraitsWeightSize calls the underlying FontWithFamilyTraitsWeightSize.
 func (x *FontManager) FontWithFamilyTraitsWeightSize(family string, traits NSFontTraitMask, weight int, size float64) *Font {
 	_r := x.inner.FontWithFamilyTraitsWeightSize(foundation.NSStringStringWithUTF8String(family), raw.NSFontTraitMask(traits), weight, size)
@@ -98,21 +116,29 @@ func (x *FontManager) FontWithFamilyTraitsWeightSize(family string, traits NSFon
 	return &Font{inner: _r}
 }
 
+// Returns the traits of the given font.
+//
 // TraitsOfFont calls the underlying TraitsOfFont.
 func (x *FontManager) TraitsOfFont(fontObj *raw.NSFont) NSFontTraitMask {
 	return NSFontTraitMask(x.inner.TraitsOfFont(fontObj))
 }
 
+// Returns an approximation of the specified font’s weight.
+//
 // WeightOfFont calls the underlying WeightOfFont.
 func (x *FontManager) WeightOfFont(fontObj *raw.NSFont) int {
 	return x.inner.WeightOfFont(fontObj)
 }
 
+// Returns an array with one entry for each available member of a font family.
+//
 // AvailableMembersOfFontFamily calls the underlying AvailableMembersOfFontFamily.
 func (x *FontManager) AvailableMembersOfFontFamily(fam string) *foundation.NSArray[objc.ID] {
 	return x.inner.AvailableMembersOfFontFamily(foundation.NSStringStringWithUTF8String(fam))
 }
 
+// Converts the given font according to the object that initiated a font change, typically the Font panel or Font menu.
+//
 // ConvertFont calls the underlying ConvertFont.
 func (x *FontManager) ConvertFont(fontObj *raw.NSFont) *Font {
 	_r := x.inner.ConvertFont(fontObj)
@@ -122,6 +148,8 @@ func (x *FontManager) ConvertFont(fontObj *raw.NSFont) *Font {
 	return &Font{inner: _r}
 }
 
+// Returns a font object whose traits are the same as those of the given font, except for the size, which is changed to the given size.
+//
 // ConvertFontToSize calls the underlying ConvertFontToSize.
 func (x *FontManager) ConvertFontToSize(fontObj *raw.NSFont, size float64) *Font {
 	_r := x.inner.ConvertFontToSize(fontObj, size)
@@ -131,6 +159,8 @@ func (x *FontManager) ConvertFontToSize(fontObj *raw.NSFont, size float64) *Font
 	return &Font{inner: _r}
 }
 
+// Returns a font whose traits are as similar as possible to those of the given font except for the typeface, which is changed to the given typeface.
+//
 // ConvertFontToFace calls the underlying ConvertFontToFace.
 func (x *FontManager) ConvertFontToFace(fontObj *raw.NSFont, typeface string) *Font {
 	_r := x.inner.ConvertFontToFace(fontObj, foundation.NSStringStringWithUTF8String(typeface))
@@ -140,6 +170,8 @@ func (x *FontManager) ConvertFontToFace(fontObj *raw.NSFont, typeface string) *F
 	return &Font{inner: _r}
 }
 
+// Returns a font whose traits are as similar as possible to those of the given font except for the font family, which is changed to the given family.
+//
 // ConvertFontToFamily calls the underlying ConvertFontToFamily.
 func (x *FontManager) ConvertFontToFamily(fontObj *raw.NSFont, family string) *Font {
 	_r := x.inner.ConvertFontToFamily(fontObj, foundation.NSStringStringWithUTF8String(family))
@@ -149,6 +181,8 @@ func (x *FontManager) ConvertFontToFamily(fontObj *raw.NSFont, family string) *F
 	return &Font{inner: _r}
 }
 
+// Returns a new version of the font object containing a single additional trait.
+//
 // ConvertFontToHaveTrait calls the underlying ConvertFontToHaveTrait.
 func (x *FontManager) ConvertFontToHaveTrait(fontObj *raw.NSFont, trait NSFontTraitMask) *Font {
 	_r := x.inner.ConvertFontToHaveTrait(fontObj, raw.NSFontTraitMask(trait))
@@ -158,6 +192,8 @@ func (x *FontManager) ConvertFontToHaveTrait(fontObj *raw.NSFont, trait NSFontTr
 	return &Font{inner: _r}
 }
 
+// Returns a new version of a font object without the specified traits.
+//
 // ConvertFontToNotHaveTrait calls the underlying ConvertFontToNotHaveTrait.
 func (x *FontManager) ConvertFontToNotHaveTrait(fontObj *raw.NSFont, trait NSFontTraitMask) *Font {
 	_r := x.inner.ConvertFontToNotHaveTrait(fontObj, raw.NSFontTraitMask(trait))
@@ -167,6 +203,8 @@ func (x *FontManager) ConvertFontToNotHaveTrait(fontObj *raw.NSFont, trait NSFon
 	return &Font{inner: _r}
 }
 
+// Returns a font object whose weight is greater or lesser than that of the given font.
+//
 // ConvertWeightOfFont calls the underlying ConvertWeightOfFont.
 func (x *FontManager) ConvertWeightOfFont(upFlag bool, fontObj *raw.NSFont) *Font {
 	_r := x.inner.ConvertWeightOfFont(upFlag, fontObj)
@@ -176,11 +214,15 @@ func (x *FontManager) ConvertWeightOfFont(upFlag bool, fontObj *raw.NSFont) *Fon
 	return &Font{inner: _r}
 }
 
+// A Boolean value that indicates whether a responder handled the font manager’s action message.
+//
 // SendAction calls the underlying SendAction.
 func (x *FontManager) SendAction() bool {
 	return x.inner.SendAction()
 }
 
+// Returns a localized string with the name of the specified font family and face, if one exists.
+//
 // LocalizedNameForFamilyFace calls the underlying LocalizedNameForFamilyFace.
 func (x *FontManager) LocalizedNameForFamilyFace(family string, faceKey string) string {
 	_r := x.inner.LocalizedNameForFamilyFace(foundation.NSStringStringWithUTF8String(family), foundation.NSStringStringWithUTF8String(faceKey))
@@ -190,11 +232,15 @@ func (x *FontManager) LocalizedNameForFamilyFace(family string, faceKey string) 
 	return purego.GoString(_r.Ptr())
 }
 
+// Informs the Font panel that the specified font attributes changed for the selected text.
+//
 // SetSelectedAttributesIsMultiple calls the underlying SetSelectedAttributesIsMultiple.
 func (x *FontManager) SetSelectedAttributesIsMultiple(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], flag bool) {
 	x.inner.SetSelectedAttributesIsMultiple(attributes, flag)
 }
 
+// Converts attributes in response to an object initiating an attribute change, typically the Font panel or Font menu.
+//
 // ConvertAttributes calls the underlying ConvertAttributes.
 func (x *FontManager) ConvertAttributes(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.ConvertAttributes(attributes)
@@ -230,6 +276,8 @@ func (x *FontManager) RemoveFontDescriptorFromCollection(descriptor *raw.NSFontD
 	x.inner.RemoveFontDescriptorFromCollection(descriptor, foundation.NSStringStringWithUTF8String(collection))
 }
 
+// Converts font traits to a new traits mask value.
+//
 // ConvertFontTraits calls the underlying ConvertFontTraits.
 func (x *FontManager) ConvertFontTraits(traits NSFontTraitMask) NSFontTraitMask {
 	return NSFontTraitMask(x.inner.ConvertFontTraits(raw.NSFontTraitMask(traits)))
@@ -321,41 +369,57 @@ func (x *FontManager) SetTarget(target objc.ID) {
 	x.inner.SetTarget(target)
 }
 
+// Indicates whether the given font has all the specified traits.
+//
 // FontNamedHasTraits calls the underlying FontNamedHasTraits.
 func (x *FontManager) FontNamedHasTraits(fName string, someTraits NSFontTraitMask) bool {
 	return x.inner.FontNamedHasTraits(foundation.NSStringStringWithUTF8String(fName), raw.NSFontTraitMask(someTraits))
 }
 
+// Returns the names of the fonts available in the system whose traits are described exactly by the given font trait mask (not the NSFont objects themselves).
+//
 // AvailableFontNamesWithTraits calls the underlying AvailableFontNamesWithTraits.
 func (x *FontManager) AvailableFontNamesWithTraits(someTraits NSFontTraitMask) *foundation.NSArray[*foundation.NSString] {
 	return x.inner.AvailableFontNamesWithTraits(raw.NSFontTraitMask(someTraits))
 }
 
+// Adds a trait to the font.
+//
 // AddFontTrait calls the underlying AddFontTrait.
 func (x *FontManager) AddFontTrait(sender objc.ID) {
 	x.inner.AddFontTrait(sender)
 }
 
+// Removes a trait from the font.
+//
 // RemoveFontTrait calls the underlying RemoveFontTrait.
 func (x *FontManager) RemoveFontTrait(sender objc.ID) {
 	x.inner.RemoveFontTrait(sender)
 }
 
+// Modifies a font trait using input from the Font panel.
+//
 // ModifyFontViaPanel calls the underlying ModifyFontViaPanel.
 func (x *FontManager) ModifyFontViaPanel(sender objc.ID) {
 	x.inner.ModifyFontViaPanel(sender)
 }
 
+// Modifies a trait of the font.
+//
 // ModifyFont calls the underlying ModifyFont.
 func (x *FontManager) ModifyFont(sender objc.ID) {
 	x.inner.ModifyFont(sender)
 }
 
+// Opens the Font panel, creating it if necessary, and displays that panel in front of the app’s windows.
+//
 // OrderFrontFontPanel calls the underlying OrderFrontFontPanel.
 func (x *FontManager) OrderFrontFontPanel(sender objc.ID) {
 	x.inner.OrderFrontFontPanel(sender)
 }
 
+// Opens the Font Styles panel.
+//
 // OrderFrontStylesPanel calls the underlying OrderFrontStylesPanel.
 func (x *FontManager) OrderFrontStylesPanel(sender objc.ID) {
 	x.inner.OrderFrontStylesPanel(sender)

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that encapsulates information about a persistable content decryption key request issued from a content key session.
+//
 // PersistableContentKeyRequest wraps [raw.AVPersistableContentKeyRequest] with a fluent Go API.
 type PersistableContentKeyRequest struct {
 	inner *raw.AVPersistableContentKeyRequest
@@ -36,7 +38,7 @@ func NewPersistableContentKeyRequest() *PersistableContentKeyRequest {
 	return &PersistableContentKeyRequest{inner: raw.AVPersistableContentKeyRequestFromID(_id)}
 }
 
-// Obtains a persistable content key from a context. The data returned from this method may be used to immediately satisfy an AVPersistableContentKeyRequest, as well as any subsequent requests for the same key url using processContentKeyResponse: method. When you receive an AVContentKeyRequest via -contentKeySession:didProvideContentKeyRequest: and you want to use existing persistent content key from storage, you must invoke -respondByRequestingPersistableContentKeyRequest on that AVContentKeyRequest in order to signal that you want to process an AVPersistableContentKeyRequest instead. If the underlying protocol supports persistable content keys, in response your delegate will receive an AVPersistableContentKeyRequest via -contentKeySession:didProvidePersistableContentKeyRequest:. You can set the persistent key from storage on the AVPersistableContentKeyRequest using processContentKeyResponse:. - Parameter keyVendorResponse: The response returned from the key vendor as a result of a request generated from makeStreamingContentKeyRequestDataForApp:contentIdentifier:options:completionHandler:. - Parameter options: Additional information necessary to obtain the persistable content key, or nil if none. - Parameter outError: If obtaining the persistable content key fails, will be set to an instance of NSError describing the failure. - Returns: The persistable content key data that may be stored offline to answer future loading requests of the same content key.
+// Creates a persistable content key from the content key context data.
 //
 // PersistableContentKeyFromKeyVendorResponseOptionsError calls the underlying PersistableContentKeyFromKeyVendorResponseOptionsError.
 func (x *PersistableContentKeyRequest) PersistableContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {

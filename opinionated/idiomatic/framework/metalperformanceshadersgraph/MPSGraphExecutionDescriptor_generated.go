@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A class that consists of all the levers to synchronize and schedule graph execution.
+//
 // GraphExecutionDescriptor wraps [raw.MPSGraphExecutionDescriptor] with a fluent Go API.
 type GraphExecutionDescriptor struct {
 	inner *raw.MPSGraphExecutionDescriptor
@@ -37,7 +39,7 @@ func NewGraphExecutionDescriptor() *GraphExecutionDescriptor {
 	return &GraphExecutionDescriptor{inner: raw.MPSGraphExecutionDescriptorFromID(_id)}
 }
 
-// The handler that graph calls when it schedules the execution. Default value is nil.
+// The handler that graph calls when it schedules the execution.
 //
 // WithScheduledHandler sets the scheduledHandler property and returns the receiver for chaining.
 func (x *GraphExecutionDescriptor) WithScheduledHandler(scheduledHandler func(unsafe.Pointer, unsafe.Pointer)) *GraphExecutionDescriptor {
@@ -45,7 +47,7 @@ func (x *GraphExecutionDescriptor) WithScheduledHandler(scheduledHandler func(un
 	return x
 }
 
-// The handler that graph calls at the completion of the execution. Default value is nil.
+// The handler that graph calls at the completion of the execution.
 //
 // WithCompletionHandler sets the completionHandler property and returns the receiver for chaining.
 func (x *GraphExecutionDescriptor) WithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) *GraphExecutionDescriptor {
@@ -53,7 +55,7 @@ func (x *GraphExecutionDescriptor) WithCompletionHandler(completionHandler func(
 	return x
 }
 
-// The flag that blocks the execution call until the entire execution is complete. Defaults to NO.
+// The flag that blocks the execution call until the entire execution is complete.
 //
 // WithWaitUntilCompleted sets the waitUntilCompleted property and returns the receiver for chaining.
 func (x *GraphExecutionDescriptor) WithWaitUntilCompleted(waitUntilCompleted bool) *GraphExecutionDescriptor {
@@ -61,7 +63,7 @@ func (x *GraphExecutionDescriptor) WithWaitUntilCompleted(waitUntilCompleted boo
 	return x
 }
 
-// The compilation descriptor for the graph. Default value is nil.
+// The compilation descriptor for the graph.
 //
 // WithCompilationDescriptor sets the compilationDescriptor property and returns the receiver for chaining.
 func (x *GraphExecutionDescriptor) WithCompilationDescriptor(compilationDescriptor *GraphCompilationDescriptor) *GraphExecutionDescriptor {
@@ -69,14 +71,14 @@ func (x *GraphExecutionDescriptor) WithCompilationDescriptor(compilationDescript
 	return x
 }
 
-// Executable waits on these shared events before scheduling execution on the HW, this does not include encoding which can still continue. - Parameters: - event: shared event graph waits on. - value: value of shared event graph waits on.
+// Executable waits on these shared events before scheduling execution on the HW, this does not include encoding which can still continue.
 //
 // WaitForEventValue calls the underlying WaitForEventValue.
 func (x *GraphExecutionDescriptor) WaitForEventValue(event metal.MTLSharedEvent, value uint64) {
 	x.inner.WaitForEventValue(event, value)
 }
 
-// Executable signals these shared events at execution stage and immediately proceeds. - Parameters: - event: shared event to signal. - executionStage: execution stage to signal event at. - value: value for shared event to wait on.
+// Executable signals these shared events at execution stage and immediately proceeds.
 //
 // SignalEventAtExecutionEventValue calls the underlying SignalEventAtExecutionEventValue.
 func (x *GraphExecutionDescriptor) SignalEventAtExecutionEventValue(event metal.MTLSharedEvent, executionStage MPSGraphExecutionStage, value uint64) {

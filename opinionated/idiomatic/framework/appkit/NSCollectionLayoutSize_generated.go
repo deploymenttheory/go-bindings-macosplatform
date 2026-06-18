@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The width and the height of an item in a collection view.
+//
 // CollectionLayoutSize wraps [raw.NSCollectionLayoutSize] with a fluent Go API.
 type CollectionLayoutSize struct {
 	inner *raw.NSCollectionLayoutSize

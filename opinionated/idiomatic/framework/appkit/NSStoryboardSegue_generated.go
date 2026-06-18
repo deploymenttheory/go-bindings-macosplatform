@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A transition or containment relationship between two scenes in a storyboard.
+//
 // StoryboardSegue wraps [raw.NSStoryboardSegue] with a fluent Go API.
 type StoryboardSegue struct {
 	inner *raw.NSStoryboardSegue
@@ -31,6 +33,8 @@ func StoryboardSegueFromID(id objc.ID) *StoryboardSegue {
 	return &StoryboardSegue{inner: raw.NSStoryboardSegueFromID(id)}
 }
 
+// The designated initializer for a storyboard segue.
+//
 // NewStoryboardSegueWithIdentifierSourceDestination creates a new [StoryboardSegue].
 func NewStoryboardSegueWithIdentifierSourceDestination(identifier *foundation.NSString, sourceController objc.ID, destinationController objc.ID) *StoryboardSegue {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSStoryboardSegue")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewStoryboardSegueWithIdentifierSourceDestination(identifier *foundation.NS
 	return &StoryboardSegue{inner: raw.NSStoryboardSegueFromID(_id)}
 }
 
+// Performs a visual transition from one controller to another.
+//
 // Perform calls the underlying Perform.
 func (x *StoryboardSegue) Perform() {
 	x.inner.Perform()

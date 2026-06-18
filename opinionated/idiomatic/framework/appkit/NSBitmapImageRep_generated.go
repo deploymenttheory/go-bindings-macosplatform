@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that renders an image from bitmap data.
+//
 // BitmapImageRep wraps [raw.NSBitmapImageRep] with a fluent Go API.
 type BitmapImageRep struct {
 	inner *raw.NSBitmapImageRep
@@ -39,6 +41,8 @@ func NewBitmapImageRep() *BitmapImageRep {
 	return &BitmapImageRep{inner: raw.NSBitmapImageRepFromID(_id)}
 }
 
+// Initializes a newly allocated bitmap image representation with bitmap data from a rendered image.
+//
 // NewBitmapImageRepWithFocusedViewRect creates a new [BitmapImageRep].
 func NewBitmapImageRepWithFocusedViewRect(rect corefoundation.CGRect) *BitmapImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBitmapImageRep")), objc.RegisterName("alloc"))
@@ -46,6 +50,8 @@ func NewBitmapImageRepWithFocusedViewRect(rect corefoundation.CGRect) *BitmapIma
 	return &BitmapImageRep{inner: raw.NSBitmapImageRepFromID(_id)}
 }
 
+// Initializes a newly allocated bitmap image representation so it can render the specified image.
+//
 // NewBitmapImageRepWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSampleSamplesPerPixelHasAlphaIsPlanarColorSpaceNameBytesPerRowBitsPerPixel creates a new [BitmapImageRep].
 func NewBitmapImageRepWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSampleSamplesPerPixelHasAlphaIsPlanarColorSpaceNameBytesPerRowBitsPerPixel(planes *uint8, width int, height int, bps int, spp int, alpha bool, isPlanar bool, colorSpaceName *foundation.NSString, rBytes int, pBits int) *BitmapImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBitmapImageRep")), objc.RegisterName("alloc"))
@@ -53,6 +59,8 @@ func NewBitmapImageRepWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSampleSampl
 	return &BitmapImageRep{inner: raw.NSBitmapImageRepFromID(_id)}
 }
 
+// Initializes a newly allocated bitmap image representation so it can render the specified image.
+//
 // NewBitmapImageRepWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSampleSamplesPerPixelHasAlphaIsPlanarColorSpaceNameBitmapFormatBytesPerRowBitsPerPixel creates a new [BitmapImageRep].
 func NewBitmapImageRepWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSampleSamplesPerPixelHasAlphaIsPlanarColorSpaceNameBitmapFormatBytesPerRowBitsPerPixel(planes *uint8, width int, height int, bps int, spp int, alpha bool, isPlanar bool, colorSpaceName *foundation.NSString, bitmapFormat NSBitmapFormat, rBytes int, pBits int) *BitmapImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBitmapImageRep")), objc.RegisterName("alloc"))
@@ -60,6 +68,8 @@ func NewBitmapImageRepWithBitmapDataPlanesPixelsWidePixelsHighBitsPerSampleSampl
 	return &BitmapImageRep{inner: raw.NSBitmapImageRepFromID(_id)}
 }
 
+// Returns a bitmap image representation from a Core Graphics image object.
+//
 // NewBitmapImageRepWithCGImage creates a new [BitmapImageRep].
 func NewBitmapImageRepWithCGImage(cgImage unsafe.Pointer) *BitmapImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBitmapImageRep")), objc.RegisterName("alloc"))
@@ -67,6 +77,8 @@ func NewBitmapImageRepWithCGImage(cgImage unsafe.Pointer) *BitmapImageRep {
 	return &BitmapImageRep{inner: raw.NSBitmapImageRepFromID(_id)}
 }
 
+// Returns a bitmap image representation from a Core Image object.
+//
 // NewBitmapImageRepWithCIImage creates a new [BitmapImageRep].
 func NewBitmapImageRepWithCIImage(ciImage *coreimage.CIImage) *BitmapImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBitmapImageRep")), objc.RegisterName("alloc"))
@@ -74,6 +86,8 @@ func NewBitmapImageRepWithCIImage(ciImage *coreimage.CIImage) *BitmapImageRep {
 	return &BitmapImageRep{inner: raw.NSBitmapImageRepFromID(_id)}
 }
 
+// Initializes a newly allocated bitmap image representation from the specified data.
+//
 // NewBitmapImageRepWithData creates a new [BitmapImageRep].
 func NewBitmapImageRepWithData(data *foundation.NSData) *BitmapImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBitmapImageRep")), objc.RegisterName("alloc"))
@@ -81,94 +95,128 @@ func NewBitmapImageRepWithData(data *foundation.NSData) *BitmapImageRep {
 	return &BitmapImageRep{inner: raw.NSBitmapImageRepFromID(_id)}
 }
 
+// The size of the image representation, measured in points in the user coordinate space.
+//
 // WithSize sets the size property and returns the receiver for chaining.
 func (x *BitmapImageRep) WithSize(size corefoundation.CGSize) *BitmapImageRep {
 	x.inner.NSImageRep.SetSize(size)
 	return x
 }
 
+// A Boolean value that indicates whether the image data has an alpha channel.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *BitmapImageRep) WithAlpha(alpha bool) *BitmapImageRep {
 	x.inner.NSImageRep.SetAlpha(alpha)
 	return x
 }
 
+// A Boolean value that indicates whether the image is opaque.
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *BitmapImageRep) WithOpaque(opaque bool) *BitmapImageRep {
 	x.inner.NSImageRep.SetOpaque(opaque)
 	return x
 }
 
+// The name of the color space used by the image data.
+//
 // WithColorSpaceName sets the colorSpaceName property and returns the receiver for chaining.
 func (x *BitmapImageRep) WithColorSpaceName(colorSpaceName *foundation.NSString) *BitmapImageRep {
 	x.inner.NSImageRep.SetColorSpaceName(colorSpaceName)
 	return x
 }
 
+// The number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
+//
 // WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
 func (x *BitmapImageRep) WithBitsPerSample(bitsPerSample int) *BitmapImageRep {
 	x.inner.NSImageRep.SetBitsPerSample(bitsPerSample)
 	return x
 }
 
+// The width of the image, measured in pixels.
+//
 // WithPixelsWide sets the pixelsWide property and returns the receiver for chaining.
 func (x *BitmapImageRep) WithPixelsWide(pixelsWide int) *BitmapImageRep {
 	x.inner.NSImageRep.SetPixelsWide(pixelsWide)
 	return x
 }
 
+// The height of the image, measured in pixels.
+//
 // WithPixelsHigh sets the pixelsHigh property and returns the receiver for chaining.
 func (x *BitmapImageRep) WithPixelsHigh(pixelsHigh int) *BitmapImageRep {
 	x.inner.NSImageRep.SetPixelsHigh(pixelsHigh)
 	return x
 }
 
+// The layout direction for the image.
+//
 // WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
 func (x *BitmapImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *BitmapImageRep {
 	x.inner.NSImageRep.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))
 	return x
 }
 
+// Returns by indirection bitmap data of the bitmap image representation separated into planes.
+//
 // GetBitmapDataPlanes calls the underlying GetBitmapDataPlanes.
 func (x *BitmapImageRep) GetBitmapDataPlanes(data *uint8) {
 	x.inner.GetBitmapDataPlanes(data)
 }
 
+// Returns by indirection the bitmap image representation’s compression type and compression factor.
+//
 // GetCompressionFactor calls the underlying GetCompressionFactor.
 func (x *BitmapImageRep) GetCompressionFactor(compression *raw.NSTIFFCompression, factor *float32) {
 	x.inner.GetCompressionFactor(compression, factor)
 }
 
+// Sets the bitmap image representation’s compression type and compression factor.
+//
 // SetCompressionFactor calls the underlying SetCompressionFactor.
 func (x *BitmapImageRep) SetCompressionFactor(compression NSTIFFCompression, factor float32) {
 	x.inner.SetCompressionFactor(raw.NSTIFFCompression(compression), factor)
 }
 
+// Returns a TIFF representation of the image using the specified compression.
+//
 // TIFFRepresentationUsingCompressionFactor calls the underlying TIFFRepresentationUsingCompressionFactor.
 func (x *BitmapImageRep) TIFFRepresentationUsingCompressionFactor(comp NSTIFFCompression, factor float32) *foundation.NSData {
 	return x.inner.TIFFRepresentationUsingCompressionFactor(raw.NSTIFFCompression(comp), factor)
 }
 
+// Tests whether the bitmap image representation can be compressed by the specified compression scheme.
+//
 // CanBeCompressedUsing calls the underlying CanBeCompressedUsing.
 func (x *BitmapImageRep) CanBeCompressedUsing(compression NSTIFFCompression) bool {
 	return x.inner.CanBeCompressedUsing(raw.NSTIFFCompression(compression))
 }
 
+// Colorizes a grayscale image.
+//
 // ColorizeByMappingGrayToColorBlackMappingWhiteMapping calls the underlying ColorizeByMappingGrayToColorBlackMappingWhiteMapping.
 func (x *BitmapImageRep) ColorizeByMappingGrayToColorBlackMappingWhiteMapping(midPoint float64, midPointColor *raw.NSColor, shadowColor *raw.NSColor, lightColor *raw.NSColor) {
 	x.inner.ColorizeByMappingGrayToColorBlackMappingWhiteMapping(midPoint, midPointColor, shadowColor, lightColor)
 }
 
+// Loads the current image data into an incrementally-loaded image representation and returns the current status of the image.
+//
 // IncrementalLoadFromDataComplete calls the underlying IncrementalLoadFromDataComplete.
 func (x *BitmapImageRep) IncrementalLoadFromDataComplete(data *foundation.NSData, complete bool) int {
 	return x.inner.IncrementalLoadFromDataComplete(data, complete)
 }
 
+// Changes the color of the pixel at the specified coordinates.
+//
 // SetColorAtXY calls the underlying SetColorAtXY.
 func (x *BitmapImageRep) SetColorAtXY(color *raw.NSColor, x_ int, y int) {
 	x.inner.SetColorAtXY(color, x_, y)
 }
 
+// Returns the color of the pixel at the specified coordinates.
+//
 // ColorAtXY calls the underlying ColorAtXY.
 func (x *BitmapImageRep) ColorAtXY(x_ int, y int) *Color {
 	_r := x.inner.ColorAtXY(x_, y)
@@ -178,16 +226,22 @@ func (x *BitmapImageRep) ColorAtXY(x_ int, y int) *Color {
 	return &Color{inner: _r}
 }
 
+// Returns by indirection the pixel data for the specified location in the bitmap image representation.
+//
 // GetPixelAtXY calls the underlying GetPixelAtXY.
 func (x *BitmapImageRep) GetPixelAtXY(p *uint, x_ int, y int) {
 	x.inner.GetPixelAtXY(p, x_, y)
 }
 
+// Sets the bitmap image representation’s pixel at the specified coordinates to the specified raw pixel values.
+//
 // SetPixelAtXY calls the underlying SetPixelAtXY.
 func (x *BitmapImageRep) SetPixelAtXY(p *uint, x_ int, y int) {
 	x.inner.SetPixelAtXY(p, x_, y)
 }
 
+// Converts the bitmap image representation to the specified color space.
+//
 // BitmapImageRepByConvertingToColorSpaceRenderingIntent calls the underlying BitmapImageRepByConvertingToColorSpaceRenderingIntent.
 func (x *BitmapImageRep) BitmapImageRepByConvertingToColorSpaceRenderingIntent(targetSpace *raw.NSColorSpace, renderingIntent NSColorRenderingIntent) *BitmapImageRep {
 	_r := x.inner.BitmapImageRepByConvertingToColorSpaceRenderingIntent(targetSpace, raw.NSColorRenderingIntent(renderingIntent))
@@ -197,6 +251,8 @@ func (x *BitmapImageRep) BitmapImageRepByConvertingToColorSpaceRenderingIntent(t
 	return &BitmapImageRep{inner: _r}
 }
 
+// Changes the color space tag of the bitmap image representation.
+//
 // BitmapImageRepByRetaggingWithColorSpace calls the underlying BitmapImageRepByRetaggingWithColorSpace.
 func (x *BitmapImageRep) BitmapImageRepByRetaggingWithColorSpace(newSpace *raw.NSColorSpace) *BitmapImageRep {
 	_r := x.inner.BitmapImageRepByRetaggingWithColorSpace(newSpace)
@@ -265,16 +321,22 @@ func (x *BitmapImageRep) ColorSpace() *ColorSpace {
 	return &ColorSpace{inner: _r}
 }
 
+// Formats the bitmap representation’s image data using the specified storage type and properties and returns it in a data object.
+//
 // RepresentationUsingTypeProperties calls the underlying RepresentationUsingTypeProperties.
 func (x *BitmapImageRep) RepresentationUsingTypeProperties(storageType NSBitmapImageFileType, properties *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
 	return x.inner.RepresentationUsingTypeProperties(raw.NSBitmapImageFileType(storageType), properties)
 }
 
+// Sets the specified property of the bitmap image representation to the specified value.
+//
 // SetPropertyWithValue calls the underlying SetPropertyWithValue.
 func (x *BitmapImageRep) SetPropertyWithValue(property *foundation.NSString, value objc.ID) {
 	x.inner.SetPropertyWithValue(property, value)
 }
 
+// Returns the value for the specified property.
+//
 // ValueForProperty calls the underlying ValueForProperty.
 func (x *BitmapImageRep) ValueForProperty(property *foundation.NSString) objc.ID {
 	return x.inner.ValueForProperty(property)

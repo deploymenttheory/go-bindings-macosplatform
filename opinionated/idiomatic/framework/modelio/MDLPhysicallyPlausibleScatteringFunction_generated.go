@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A set of material properties that describes a physically realistic shading model for materials.
+//
 // PhysicallyPlausibleScatteringFunction wraps [raw.MDLPhysicallyPlausibleScatteringFunction] with a fluent Go API.
 type PhysicallyPlausibleScatteringFunction struct {
 	inner *raw.MDLPhysicallyPlausibleScatteringFunction
@@ -38,7 +40,7 @@ func NewPhysicallyPlausibleScatteringFunction() *PhysicallyPlausibleScatteringFu
 	return &PhysicallyPlausibleScatteringFunction{inner: raw.MDLPhysicallyPlausibleScatteringFunctionFromID(_id)}
 }
 
-// @see MDLNamed
+// A descriptive name for the scattering function.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *PhysicallyPlausibleScatteringFunction) WithName(name string) *PhysicallyPlausibleScatteringFunction {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that identifies a container.
+//
 // ContainerIdentifier wraps [raw.FSContainerIdentifier] with a fluent Go API.
 type ContainerIdentifier struct {
 	inner *raw.FSContainerIdentifier

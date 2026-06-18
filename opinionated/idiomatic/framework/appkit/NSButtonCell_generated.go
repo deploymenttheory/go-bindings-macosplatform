@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines the user interface of a button or other clickable region of a view.
+//
 // ButtonCell wraps [raw.NSButtonCell] with a fluent Go API.
 type ButtonCell struct {
 	inner *raw.NSButtonCell
@@ -53,414 +55,554 @@ func NewButtonCellWithCoder(coder *foundation.NSCoder) *ButtonCell {
 	return &ButtonCell{inner: raw.NSButtonCellFromID(_id)}
 }
 
+// The appearance of the button’s border, if it has one.
+//
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
 func (x *ButtonCell) WithBezelStyle(bezelStyle NSBezelStyle) *ButtonCell {
 	x.inner.SetBezelStyle(raw.NSBezelStyle(bezelStyle))
 	return x
 }
 
+// A set of flags that indicate how the button highlights when it receives a mouse-down event (that is, when the button is pressed).
+//
 // WithHighlightsBy sets the highlightsBy property and returns the receiver for chaining.
 func (x *ButtonCell) WithHighlightsBy(highlightsBy NSCellStyleMask) *ButtonCell {
 	x.inner.SetHighlightsBy(raw.NSCellStyleMask(highlightsBy))
 	return x
 }
 
+// The flags that indicate how the button cell shows its alternate state.
+//
 // WithShowsStateBy sets the showsStateBy property and returns the receiver for chaining.
 func (x *ButtonCell) WithShowsStateBy(showsStateBy NSCellStyleMask) *ButtonCell {
 	x.inner.SetShowsStateBy(raw.NSCellStyleMask(showsStateBy))
 	return x
 }
 
+// The title displayed by the button when it’s in its normal state as an attributed string.
+//
 // WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
 func (x *ButtonCell) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *ButtonCell {
 	x.inner.SetAttributedTitle(attributedTitle)
 	return x
 }
 
+// The string displayed by the button when it’s in its alternate state.
+//
 // WithAlternateTitle sets the alternateTitle property and returns the receiver for chaining.
 func (x *ButtonCell) WithAlternateTitle(alternateTitle string) *ButtonCell {
 	x.inner.SetAlternateTitle(foundation.NSStringStringWithUTF8String(alternateTitle))
 	return x
 }
 
+// The title displayed by the button when it’s in its alternate state, as an attributed string.
+//
 // WithAttributedAlternateTitle sets the attributedAlternateTitle property and returns the receiver for chaining.
 func (x *ButtonCell) WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *ButtonCell {
 	x.inner.SetAttributedAlternateTitle(attributedAlternateTitle)
 	return x
 }
 
+// The image the button displays in its alternate state.
+//
 // WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
 func (x *ButtonCell) WithAlternateImage(alternateImage *Image) *ButtonCell {
 	x.inner.SetAlternateImage(alternateImage.Unwrap())
 	return x
 }
 
+// The position of the button’s image relative to its title.
+//
 // WithImagePosition sets the imagePosition property and returns the receiver for chaining.
 func (x *ButtonCell) WithImagePosition(imagePosition NSCellImagePosition) *ButtonCell {
 	x.inner.SetImagePosition(raw.NSCellImagePosition(imagePosition))
 	return x
 }
 
+// The scale factor for the button’s image.
+//
 // WithImageScaling sets the imageScaling property and returns the receiver for chaining.
 func (x *ButtonCell) WithImageScaling(imageScaling NSImageScaling) *ButtonCell {
 	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
 	return x
 }
 
+// The button’s key-equivalent character.
+//
 // WithKeyEquivalent sets the keyEquivalent property and returns the receiver for chaining.
 func (x *ButtonCell) WithKeyEquivalent(keyEquivalent string) *ButtonCell {
 	x.inner.SetKeyEquivalent(foundation.NSStringStringWithUTF8String(keyEquivalent))
 	return x
 }
 
+// The mask that identifies the modifier keys for the button’s key equivalent.
+//
 // WithKeyEquivalentModifierMask sets the keyEquivalentModifierMask property and returns the receiver for chaining.
 func (x *ButtonCell) WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *ButtonCell {
 	x.inner.SetKeyEquivalentModifierMask(raw.NSEventModifierFlags(keyEquivalentModifierMask))
 	return x
 }
 
+// A Boolean value that indicates if the button is transparent.
+//
 // WithTransparent sets the transparent property and returns the receiver for chaining.
 func (x *ButtonCell) WithTransparent(transparent bool) *ButtonCell {
 	x.inner.SetTransparent(transparent)
 	return x
 }
 
+// A Boolean value that indicates if the button’s image and text appear “dim” when the button is disabled.
+//
 // WithImageDimsWhenDisabled sets the imageDimsWhenDisabled property and returns the receiver for chaining.
 func (x *ButtonCell) WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *ButtonCell {
 	x.inner.SetImageDimsWhenDisabled(imageDimsWhenDisabled)
 	return x
 }
 
+// A Boolean value that indicates if the button displays its border only when the pointer is over it.
+//
 // WithShowsBorderOnlyWhileMouseInside sets the showsBorderOnlyWhileMouseInside property and returns the receiver for chaining.
 func (x *ButtonCell) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *ButtonCell {
 	x.inner.SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside)
 	return x
 }
 
+// The sound that’s played when the user presses the button (that is during a mouse-down event).
+//
 // WithSound sets the sound property and returns the receiver for chaining.
 func (x *ButtonCell) WithSound(sound *Sound) *ButtonCell {
 	x.inner.SetSound(sound.Unwrap())
 	return x
 }
 
+// The background color of the button.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *ButtonCell) WithBackgroundColor(backgroundColor *Color) *ButtonCell {
 	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// The gradient of the button’s border.
+//
 // WithGradientType sets the gradientType property and returns the receiver for chaining.
 func (x *ButtonCell) WithGradientType(gradientType NSGradientType) *ButtonCell {
 	x.inner.SetGradientType(raw.NSGradientType(gradientType))
 	return x
 }
 
+// The font used to draw the button’s key equivalent.
+//
 // WithKeyEquivalentFont sets the keyEquivalentFont property and returns the receiver for chaining.
 func (x *ButtonCell) WithKeyEquivalentFont(keyEquivalentFont *Font) *ButtonCell {
 	x.inner.SetKeyEquivalentFont(keyEquivalentFont.Unwrap())
 	return x
 }
 
+// The view associated with the cell.
+//
 // WithControlView sets the controlView property and returns the receiver for chaining.
 func (x *ButtonCell) WithControlView(controlView ViewProvider) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetControlView(controlView.asView())
 	return x
 }
 
+// The type of the cell.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *ButtonCell) WithType(type_ NSCellType) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
+// The cell’s current state.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *ButtonCell) WithState(state int) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetState(state)
 	return x
 }
 
+// The object that receives the cell’s action messages.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *ButtonCell) WithTarget(target objc.ID) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetTarget(target)
 	return x
 }
 
+// The action performed by the cell.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *ButtonCell) WithAction(action objc.SEL) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetAction(action)
 	return x
 }
 
+// A tag for identifying the cell.
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *ButtonCell) WithTag(tag int) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetTag(tag)
 	return x
 }
 
+// The cell’s title text.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *ButtonCell) WithTitle(title string) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// A Boolean value indicating whether the cell is currently enabled.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *ButtonCell) WithEnabled(enabled bool) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *ButtonCell) WithContinuous(continuous bool) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value indicating whether the cell is editable.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *ButtonCell) WithEditable(editable bool) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetEditable(editable)
 	return x
 }
 
+// A Boolean value indicating whether the cell’s text can be selected.
+//
 // WithSelectable sets the selectable property and returns the receiver for chaining.
 func (x *ButtonCell) WithSelectable(selectable bool) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetSelectable(selectable)
 	return x
 }
 
+// A Boolean value indicating whether the cell draws itself outlined with a plain border.
+//
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *ButtonCell) WithBordered(bordered bool) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetBordered(bordered)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a bezeled border.
+//
 // WithBezeled sets the bezeled property and returns the receiver for chaining.
 func (x *ButtonCell) WithBezeled(bezeled bool) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetBezeled(bezeled)
 	return x
 }
 
+// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
+//
 // WithScrollable sets the scrollable property and returns the receiver for chaining.
 func (x *ButtonCell) WithScrollable(scrollable bool) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetScrollable(scrollable)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a highlighted appearance.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *ButtonCell) WithHighlighted(highlighted bool) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetHighlighted(highlighted)
 	return x
 }
 
+// The alignment of the cell’s text.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *ButtonCell) WithAlignment(alignment NSTextAlignment) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+//
 // WithWraps sets the wraps property and returns the receiver for chaining.
 func (x *ButtonCell) WithWraps(wraps bool) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetWraps(wraps)
 	return x
 }
 
+// The font that the cell uses to display text.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *ButtonCell) WithFont(font *Font) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
+// The cell’s formatter object.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *ButtonCell) WithFormatter(formatter *foundation.NSFormatter) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetFormatter(formatter)
 	return x
 }
 
+// The cell’s value as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *ButtonCell) WithObjectValue(objectValue objc.ID) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetObjectValue(objectValue)
 	return x
 }
 
+// The cell’s value as a string.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *ButtonCell) WithStringValue(stringValue string) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The cell’s value as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *ButtonCell) WithIntValue(intValue int) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetIntValue(intValue)
 	return x
 }
 
+// The cell’s value as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *ButtonCell) WithFloatValue(floatValue float32) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetFloatValue(floatValue)
 	return x
 }
 
+// The cell’s value as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *ButtonCell) WithDoubleValue(doubleValue float64) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The cell’s value as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *ButtonCell) WithIntegerValue(integerValue int) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetIntegerValue(integerValue)
 	return x
 }
 
+// The image displayed by the cell, if any.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *ButtonCell) WithImage(image *Image) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
+// The size of the cell.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *ButtonCell) WithControlSize(controlSize NSControlSize) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The object represented by the cell.
+//
 // WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
 func (x *ButtonCell) WithRepresentedObject(representedObject objc.ID) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetRepresentedObject(representedObject)
 	return x
 }
 
+// The cell’s contextual menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *ButtonCell) WithMenu(menu *Menu) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
+// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+//
 // WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
 func (x *ButtonCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *ButtonCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// The line break mode to use when drawing text in the cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *ButtonCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// A Boolean value indicating whether the cell assumes responsibility for undo operations.
+//
 // WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
 func (x *ButtonCell) WithAllowsUndo(allowsUndo bool) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
 	return x
 }
 
+// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+//
 // WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
 func (x *ButtonCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
 	return x
 }
 
+// The layout direction of the user interface.
+//
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
 func (x *ButtonCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
+// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *ButtonCell) WithUsesSingleLineMode(usesSingleLineMode bool) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// A Boolean value indicating whether the cell refuses the first responder status.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *ButtonCell) WithRefusesFirstResponder(refusesFirstResponder bool) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+//
 // WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
 func (x *ButtonCell) WithShowsFirstResponder(showsFirstResponder bool) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
 	return x
 }
 
+// The type of focus ring to use with the associated view.
+//
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
 func (x *ButtonCell) WithFocusRingType(focusRingType NSFocusRingType) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
+// The cell’s value as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *ButtonCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+//
 // WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
 func (x *ButtonCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports the importation of images into its text.
+//
 // WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
 func (x *ButtonCell) WithImportsGraphics(importsGraphics bool) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports three states instead of two.
+//
 // WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
 func (x *ButtonCell) WithAllowsMixedState(allowsMixedState bool) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
 	return x
 }
 
+// The cell’s background style.
+//
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
 func (x *ButtonCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
+// The cell’s control tint.
+//
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
 func (x *ButtonCell) WithControlTint(controlTint NSControlTint) *ButtonCell {
 	x.inner.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
+// Sets how the button highlights while pressed and how it shows its state.
+//
 // SetButtonType calls the underlying SetButtonType.
 func (x *ButtonCell) SetButtonType(type_ NSButtonType) {
 	x.inner.SetButtonType(raw.NSButtonType(type_))
 }
 
+// Sets the message delay and interval for the button.
+//
 // SetPeriodicDelayInterval calls the underlying SetPeriodicDelayInterval.
 func (x *ButtonCell) SetPeriodicDelayInterval(delay float32, interval float32) {
 	x.inner.SetPeriodicDelayInterval(delay, interval)
 }
 
+// Draws the button’s border.
+//
 // MouseEntered calls the underlying MouseEntered.
 func (x *ButtonCell) MouseEntered(event *raw.NSEvent) {
 	x.inner.MouseEntered(event)
 }
 
+// Erases the button’s border.
+//
 // MouseExited calls the underlying MouseExited.
 func (x *ButtonCell) MouseExited(event *raw.NSEvent) {
 	x.inner.MouseExited(event)
 }
 
+// Draws the border of the button using the current bezel style.
+//
 // DrawBezelWithFrameInView calls the underlying DrawBezelWithFrameInView.
 func (x *ButtonCell) DrawBezelWithFrameInView(frame corefoundation.CGRect, controlView *raw.NSView) {
 	x.inner.DrawBezelWithFrameInView(frame, controlView)
 }
 
+// Draws the image associated with the button’s current state.
+//
 // DrawImageWithFrameInView calls the underlying DrawImageWithFrameInView.
 func (x *ButtonCell) DrawImageWithFrameInView(image *raw.NSImage, frame corefoundation.CGRect, controlView *raw.NSView) {
 	x.inner.DrawImageWithFrameInView(image, frame, controlView)
 }
 
+// Draws the button’s title centered vertically in a specified rectangle.
+//
 // DrawTitleWithFrameInView calls the underlying DrawTitleWithFrameInView.
 func (x *ButtonCell) DrawTitleWithFrameInView(title *foundation.NSAttributedString, frame corefoundation.CGRect, controlView *raw.NSView) corefoundation.CGRect {
 	return x.inner.DrawTitleWithFrameInView(title, frame, controlView)
@@ -637,21 +779,29 @@ func (x *ButtonCell) SetBackgroundColor(backgroundColor *raw.NSColor) {
 	x.inner.SetBackgroundColor(backgroundColor)
 }
 
+// Sets the title the button displays when it’s in its alternate state to the given string with an embedded mnemonic.
+//
 // SetAlternateTitleWithMnemonic calls the underlying SetAlternateTitleWithMnemonic.
 func (x *ButtonCell) SetAlternateTitleWithMnemonic(stringWithAmpersand string) {
 	x.inner.SetAlternateTitleWithMnemonic(foundation.NSStringStringWithUTF8String(stringWithAmpersand))
 }
 
+// Sets the character in the alternate title that should be the “keyboard mnemonic.”
+//
 // SetAlternateMnemonicLocation calls the underlying SetAlternateMnemonicLocation.
 func (x *ButtonCell) SetAlternateMnemonicLocation(location uint) {
 	x.inner.SetAlternateMnemonicLocation(location)
 }
 
+// Returns an unsigned integer indicating the character in the alternate title that’s marked as the “keyboard mnemonic.”
+//
 // AlternateMnemonicLocation calls the underlying AlternateMnemonicLocation.
 func (x *ButtonCell) AlternateMnemonicLocation() uint {
 	return x.inner.AlternateMnemonicLocation()
 }
 
+// Returns the character in the alternate title that’s marked as the “keyboard mnemonic.”
+//
 // AlternateMnemonic calls the underlying AlternateMnemonic.
 func (x *ButtonCell) AlternateMnemonic() string {
 	_r := x.inner.AlternateMnemonic()
@@ -661,6 +811,8 @@ func (x *ButtonCell) AlternateMnemonic() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Sets by name and size of the font used to draw the key equivalent.
+//
 // SetKeyEquivalentFontSize calls the underlying SetKeyEquivalentFontSize.
 func (x *ButtonCell) SetKeyEquivalentFontSize(fontName string, fontSize float64) {
 	x.inner.SetKeyEquivalentFontSize(foundation.NSStringStringWithUTF8String(fontName), fontSize)

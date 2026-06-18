@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The layout of a scrubber item.
+//
 // ScrubberLayoutAttributes wraps [raw.NSScrubberLayoutAttributes] with a fluent Go API.
 type ScrubberLayoutAttributes struct {
 	inner *raw.NSScrubberLayoutAttributes
@@ -36,18 +38,24 @@ func NewScrubberLayoutAttributes() *ScrubberLayoutAttributes {
 	return &ScrubberLayoutAttributes{inner: raw.NSScrubberLayoutAttributesFromID(_id)}
 }
 
+// The index of the scrubber item that is represented by the item’s layout attributes.
+//
 // WithItemIndex sets the itemIndex property and returns the receiver for chaining.
 func (x *ScrubberLayoutAttributes) WithItemIndex(itemIndex int) *ScrubberLayoutAttributes {
 	x.inner.SetItemIndex(itemIndex)
 	return x
 }
 
+// The frame of the scrubber item.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *ScrubberLayoutAttributes) WithFrame(frame corefoundation.CGRect) *ScrubberLayoutAttributes {
 	x.inner.SetFrame(frame)
 	return x
 }
 
+// The item’s alpha value.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *ScrubberLayoutAttributes) WithAlpha(alpha float64) *ScrubberLayoutAttributes {
 	x.inner.SetAlpha(alpha)

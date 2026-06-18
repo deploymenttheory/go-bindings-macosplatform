@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A discrete detection track composed of individual detections.
+// An object representing a discrete detection track composed of individual detections.
 //
 // CustomDetectionTrack wraps [raw.CNCustomDetectionTrack] with a fluent Go API.
 type CustomDetectionTrack struct {

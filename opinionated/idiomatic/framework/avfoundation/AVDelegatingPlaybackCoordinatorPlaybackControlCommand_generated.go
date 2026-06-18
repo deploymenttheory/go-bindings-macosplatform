@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract superclass for playback commands.
+//
 // DelegatingPlaybackCoordinatorPlaybackControlCommand wraps [raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand] with a fluent Go API.
 type DelegatingPlaybackCoordinatorPlaybackControlCommand struct {
 	inner *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand

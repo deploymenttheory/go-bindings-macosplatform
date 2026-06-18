@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Objects that define custom content and the timing of its output.
+//
 // CustomContent wraps [raw.AXCustomContent] with a fluent Go API.
 type CustomContent struct {
 	inner *raw.AXCustomContent
@@ -37,6 +39,8 @@ func NewCustomContent() *CustomContent {
 	return &CustomContent{inner: raw.AXCustomContentFromID(_id)}
 }
 
+// An object that determines when to output custom accessibility content.
+//
 // WithImportance sets the importance property and returns the receiver for chaining.
 func (x *CustomContent) WithImportance(importance AXCustomContentImportance) *CustomContent {
 	x.inner.SetImportance(raw.AXCustomContentImportance(importance))

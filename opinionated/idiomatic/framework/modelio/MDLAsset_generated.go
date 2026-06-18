@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An indexed container for 3D objects and associated information, such as transform hierarchies, meshes, cameras, and lights.
+//
 // Asset wraps [raw.MDLAsset] with a fluent Go API.
 type Asset struct {
 	inner *raw.MDLAsset
@@ -32,7 +34,7 @@ func AssetFromID(id objc.ID) *Asset {
 	return &Asset{inner: raw.MDLAssetFromID(id)}
 }
 
-// @method initWithURL: @abstract Initialize an MDLAsset using the contents of the resource located at the indicated URL @discussion Vertex layout (i.e. vertexDescriptor) will be specified by ModelIO depending on attributes of the resource.  Buffers will be allocated using a default NSData based allocator Submeshes will be converted to triangle topology.
+// Initializes an asset from the file at the specified URL.
 //
 // NewAssetWithURL creates a new [Asset].
 func NewAssetWithURL(uRL string) *Asset {
@@ -41,7 +43,7 @@ func NewAssetWithURL(uRL string) *Asset {
 	return &Asset{inner: raw.MDLAssetFromID(_id)}
 }
 
-// @method initWithURL:vertexDescriptor:bufferAllocator: @abstract Initialize an MDLAsset using the contents of the resource located at URL, ensuring that the asset conforms to the supplied vertexDescriptor, and buffers are allocated in the supplied allocator @discussion The default behavior is to triangulate any discovered meshes and to conform the mesh to the supplied vertexDescriptor. If nil is passed as the vertexDescriptor, then a vertexDescriptor will be created according to the attributes of the resource. If nil is passed as the bufferAllocator, buffers will be allocated using a default NSData based allocator. Submeshes will be converted to triangle topology.
+// Initializes an asset from the file at the specified URL, using the specified vertex descriptor and buffer allocator.
 //
 // NewAssetWithURLVertexDescriptorBufferAllocator creates a new [Asset].
 func NewAssetWithURLVertexDescriptorBufferAllocator(uRL string, vertexDescriptor *raw.MDLVertexDescriptor, bufferAllocator raw.MDLMeshBufferAllocator) *Asset {
@@ -50,7 +52,7 @@ func NewAssetWithURLVertexDescriptorBufferAllocator(uRL string, vertexDescriptor
 	return &Asset{inner: raw.MDLAssetFromID(_id)}
 }
 
-// @method initWithBufferAllocator: @abstract Initialize an empty MDLAsset with a buffer allocator to be used during other operations.
+// Initializes an empty asset, using the specified buffer allocator.
 //
 // NewAssetWithBufferAllocator creates a new [Asset].
 func NewAssetWithBufferAllocator(bufferAllocator raw.MDLMeshBufferAllocator) *Asset {
@@ -59,7 +61,7 @@ func NewAssetWithBufferAllocator(bufferAllocator raw.MDLMeshBufferAllocator) *As
 	return &Asset{inner: raw.MDLAssetFromID(_id)}
 }
 
-// @method initWithURL:vertexDescriptor:bufferAllocator:preserveTopology:error: @abstract Same as initWithURL:vertexDescriptor:bufferAllocator: except that if preserveTopology is YES, a topology buffer might be created on the submeshes. @discussion If all faces in a submesh have the same vertex count, then the submesh will a geometry type corresponding to that vertex count. For example, if all faces have four vertices, then the geometry type will be MDLGeometryTypeQuads. If faces have a varying number of vertices, then the the submesh type will be MDLGeometryTypeVariableTopology, and a faceTopologyBuffer will be created.
+// Initializes an asset from the file at the specified URL, using the specified options for allocating and transforming data during import.
 //
 // NewAssetWithURLVertexDescriptorBufferAllocatorPreserveTopologyError creates a new [Asset].
 func NewAssetWithURLVertexDescriptorBufferAllocatorPreserveTopologyError(uRL string, vertexDescriptor *raw.MDLVertexDescriptor, bufferAllocator raw.MDLMeshBufferAllocator, preserveTopology bool) (*Asset, error) {
@@ -72,7 +74,7 @@ func NewAssetWithURLVertexDescriptorBufferAllocatorPreserveTopologyError(uRL str
 	return &Asset{inner: raw.MDLAssetFromID(_id)}, nil
 }
 
-// @property frameInterval @abstract Inherent frame rate of an asset @discussion If no framerate was specified by resource or resource uncapable of specifying framerate, this value defaults to 0
+// The time interval between data samples in the asset.
 //
 // WithFrameInterval sets the frameInterval property and returns the receiver for chaining.
 func (x *Asset) WithFrameInterval(frameInterval float64) *Asset {
@@ -80,7 +82,7 @@ func (x *Asset) WithFrameInterval(frameInterval float64) *Asset {
 	return x
 }
 
-// @property startTime @abstract Start time bracket of animation data @discussion If no animation data was specified by resource or resource incapable of specifying animation data, this value defaults to 0. If startTime was set explicitly, then the value of startTime will be the lesser of the set value and the animated values.
+// The timestamp for the first timed data sample in the asset.
 //
 // WithStartTime sets the startTime property and returns the receiver for chaining.
 func (x *Asset) WithStartTime(startTime float64) *Asset {
@@ -88,7 +90,7 @@ func (x *Asset) WithStartTime(startTime float64) *Asset {
 	return x
 }
 
-// @property endTime @abstract End time bracket of animation data @discussion If no animation data was specified by resource or resource incapable of specifying animation data, this value defaults to 0. If the endTime was set explicitly, then the value of endTime will be the greater of the set value and the animated values.
+// The timestamp for the last timed data sample in the asset.
 //
 // WithEndTime sets the endTime property and returns the receiver for chaining.
 func (x *Asset) WithEndTime(endTime float64) *Asset {
@@ -104,6 +106,8 @@ func (x *Asset) WithResolver(resolver raw.MDLAssetResolver) *Asset {
 	return x
 }
 
+// An array of objects that can be reused in the asset’s object hierarchy through instancing.
+//
 // WithMasters sets the masters property and returns the receiver for chaining.
 func (x *Asset) WithMasters(masters raw.MDLObjectContainerComponent) *Asset {
 	x.inner.SetMasters(masters)
@@ -126,14 +130,14 @@ func (x *Asset) WithAnimations(animations raw.MDLObjectContainerComponent) *Asse
 	return x
 }
 
-// @method exportAssetToURL: @abstract Export an asset to the specified URL. @return YES is returned if exporting proceeded successfully,
+// Writes asset data to a file at the specified URL.
 //
 // ExportAssetToURL calls the underlying ExportAssetToURL.
 func (x *Asset) ExportAssetToURL(uRL string) bool {
 	return x.inner.ExportAssetToURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
 }
 
-// @method exportAssetToURL:error: @abstract Export an asset to the specified URL. @return YES is returned if exporting proceeded successfully,
+// Writes asset data to a file at the specified URL and reports errors that occur during export.
 //
 // ExportAssetToURLError calls the underlying ExportAssetToURLError.
 func (x *Asset) ExportAssetToURLError(uRL string) (bool, error) {
@@ -151,7 +155,7 @@ func (x *Asset) ObjectAtPath(path string) *Object {
 	return &Object{inner: _r}
 }
 
-// @method childObjectsOfClass: @abstract Inspects an asset's hierarchy for objects of the specified class type @return returns an NSArray of all objects in the asset matching the requested class @discussion This can be used to get references to all MDLMesh objects, MDLLights, etc. if objectClass is not a subclass of MDLObject, an exception will be raised.
+// Returns all objects contained in the asset of the specified class.
 //
 // ChildObjectsOfClass calls the underlying ChildObjectsOfClass.
 func (x *Asset) ChildObjectsOfClass(objectClass objc.Class) *foundation.NSArray[*raw.MDLObject] {
@@ -165,28 +169,28 @@ func (x *Asset) LoadTextures() {
 	x.inner.LoadTextures()
 }
 
-// @method boundingBoxAtTime: @abstract The bounds of the MDLAsset at the specified time
+// Returns the minimum region entirely enclosing the asset’s contents at the specified time sample.
 //
 // BoundingBoxAtTime calls the underlying BoundingBoxAtTime.
 func (x *Asset) BoundingBoxAtTime(time_ float64) raw.MDLAxisAlignedBoundingBox {
 	return x.inner.BoundingBoxAtTime(time_)
 }
 
-// @method addObject: @abstract Add a top level object to an asset. @discussion If the object was already in the asset, this has no effect.
+// Adds the specified object to the asset’s list of top-level objects.
 //
 // AddObject calls the underlying AddObject.
 func (x *Asset) AddObject(object *raw.MDLObject) {
 	x.inner.AddObject(object)
 }
 
-// @method removeObject: @abstract Remove a top level object from an asset. @discussion If the object not in the asset, this has no effect.
+// Removes the specified object from the asset’s list of top-level objects.
 //
 // RemoveObject calls the underlying RemoveObject.
 func (x *Asset) RemoveObject(object *raw.MDLObject) {
 	x.inner.RemoveObject(object)
 }
 
-// @method objectAtIndexedSubscript: @abstract return the indexed top level object
+// Returns the top-level object at the specified index in the asset, using subscript syntax.
 //
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *Asset) ObjectAtIndexedSubscript(index uint) *Object {
@@ -197,7 +201,7 @@ func (x *Asset) ObjectAtIndexedSubscript(index uint) *Object {
 	return &Object{inner: _r}
 }
 
-// @method objectAtIndex: @abstract return the indexed top level object
+// Returns the top-level object at the specified index in the asset.
 //
 // ObjectAtIndex calls the underlying ObjectAtIndex.
 func (x *Asset) ObjectAtIndex(index uint) *Object {

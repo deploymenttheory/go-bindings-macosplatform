@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that reports the status code and errors for a payment authorization request.
+//
 // PaymentAuthorizationResult wraps [raw.PKPaymentAuthorizationResult] with a fluent Go API.
 type PaymentAuthorizationResult struct {
 	inner *raw.PKPaymentAuthorizationResult
@@ -32,6 +34,8 @@ func PaymentAuthorizationResultFromID(id objc.ID) *PaymentAuthorizationResult {
 	return &PaymentAuthorizationResult{inner: raw.PKPaymentAuthorizationResultFromID(id)}
 }
 
+// Initializes the result with the status code and list of errors.
+//
 // NewPaymentAuthorizationResultWithStatusErrors creates a new [PaymentAuthorizationResult].
 func NewPaymentAuthorizationResultWithStatusErrors(status PKPaymentAuthorizationStatus) (*PaymentAuthorizationResult, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentAuthorizationResult")), objc.RegisterName("alloc"))
@@ -43,12 +47,16 @@ func NewPaymentAuthorizationResultWithStatusErrors(status PKPaymentAuthorization
 	return &PaymentAuthorizationResult{inner: raw.PKPaymentAuthorizationResultFromID(_id)}, nil
 }
 
+// Payment authorization general status.
+//
 // WithStatus sets the status property and returns the receiver for chaining.
 func (x *PaymentAuthorizationResult) WithStatus(status PKPaymentAuthorizationStatus) *PaymentAuthorizationResult {
 	x.inner.SetStatus(raw.PKPaymentAuthorizationStatus(status))
 	return x
 }
 
+// Optional metadata with order details for the placed order.
+//
 // WithOrderDetails sets the orderDetails property and returns the receiver for chaining.
 func (x *PaymentAuthorizationResult) WithOrderDetails(orderDetails *PaymentOrderDetails) *PaymentAuthorizationResult {
 	x.inner.SetOrderDetails(orderDetails.Unwrap())

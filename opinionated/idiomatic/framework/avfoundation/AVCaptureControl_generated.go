@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract base class for controls that interact with the camera system.
+//
 // CaptureControl wraps [raw.AVCaptureControl] with a fluent Go API.
 type CaptureControl struct {
 	inner *raw.AVCaptureControl
@@ -35,7 +37,7 @@ func NewCaptureControl() *CaptureControl {
 	return &CaptureControl{inner: raw.AVCaptureControlFromID(_id)}
 }
 
-// @property enabled @abstract Indicates whether the control should be enabled for user interaction. @discussion The value of this property is a `BOOL` that determines whether the control should be enabled for user interaction. Clients can set this property to keep a control added to an `AVCaptureSession` but prevent it from being interacted with by the user. A control's value may still be changed while it is disabled. The default value is `YES`.
+// A Boolean value that indicates whether this control supports user interaction.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *CaptureControl) WithEnabled(enabled bool) *CaptureControl {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents information about a passkey credential request.
+//
 // PasskeyCredentialRequestParameters wraps [raw.ASPasskeyCredentialRequestParameters] with a fluent Go API.
 type PasskeyCredentialRequestParameters struct {
 	inner *raw.ASPasskeyCredentialRequestParameters

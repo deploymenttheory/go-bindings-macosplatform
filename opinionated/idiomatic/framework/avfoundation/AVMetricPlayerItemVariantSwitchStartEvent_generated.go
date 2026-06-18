@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An event that represents when the player attempts a variant switch.
+//
 // MetricPlayerItemVariantSwitchStartEvent wraps [raw.AVMetricPlayerItemVariantSwitchStartEvent] with a fluent Go API.
 type MetricPlayerItemVariantSwitchStartEvent struct {
 	inner *raw.AVMetricPlayerItemVariantSwitchStartEvent

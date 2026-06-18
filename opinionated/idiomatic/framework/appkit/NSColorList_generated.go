@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An ordered list of color objects, identified by keys.
+//
 // ColorList wraps [raw.NSColorList] with a fluent Go API.
 type ColorList struct {
 	inner *raw.NSColorList
@@ -31,6 +33,8 @@ func ColorListFromID(id objc.ID) *ColorList {
 	return &ColorList{inner: raw.NSColorListFromID(id)}
 }
 
+// Initializes and returns a color list, registering it under the specified name if it isn’t in use already.
+//
 // NewColorListWithName creates a new [ColorList].
 func NewColorListWithName(name *foundation.NSString) *ColorList {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSColorList")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewColorListWithName(name *foundation.NSString) *ColorList {
 	return &ColorList{inner: raw.NSColorListFromID(_id)}
 }
 
+// Initializes and returns a color list from the specified file, registering it under the specified name if it isn’t in use already.
+//
 // NewColorListWithNameFromFile creates a new [ColorList].
 func NewColorListWithNameFromFile(name *foundation.NSString, path string) *ColorList {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSColorList")), objc.RegisterName("alloc"))
@@ -45,21 +51,29 @@ func NewColorListWithNameFromFile(name *foundation.NSString, path string) *Color
 	return &ColorList{inner: raw.NSColorListFromID(_id)}
 }
 
+// Associates the specified color object with the specified key.
+//
 // SetColorForKey calls the underlying SetColorForKey.
 func (x *ColorList) SetColorForKey(color *raw.NSColor, key *foundation.NSString) {
 	x.inner.SetColorForKey(color, key)
 }
 
+// Inserts the specified color at the specified location in the color list.
+//
 // InsertColorKeyAtIndex calls the underlying InsertColorKeyAtIndex.
 func (x *ColorList) InsertColorKeyAtIndex(color *raw.NSColor, key *foundation.NSString, loc uint) {
 	x.inner.InsertColorKeyAtIndex(color, key, loc)
 }
 
+// Removes the color associated with the specified key from the color list.
+//
 // RemoveColorWithKey calls the underlying RemoveColorWithKey.
 func (x *ColorList) RemoveColorWithKey(key *foundation.NSString) {
 	x.inner.RemoveColorWithKey(key)
 }
 
+// Returns the color object associated with the specified key.
+//
 // ColorWithKey calls the underlying ColorWithKey.
 func (x *ColorList) ColorWithKey(key *foundation.NSString) *Color {
 	_r := x.inner.ColorWithKey(key)
@@ -69,16 +83,22 @@ func (x *ColorList) ColorWithKey(key *foundation.NSString) *Color {
 	return &Color{inner: _r}
 }
 
+// Saves the color list to the file at the specified URL.
+//
 // WriteToURLError calls the underlying WriteToURLError.
 func (x *ColorList) WriteToURLError(url string) (bool, error) {
 	return x.inner.WriteToURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 }
 
+// Saves the color list to the file at the specified path.
+//
 // WriteToFile calls the underlying WriteToFile.
 func (x *ColorList) WriteToFile(path string) bool {
 	return x.inner.WriteToFile(foundation.NSStringStringWithUTF8String(path))
 }
 
+// Removes the file from which the list was created, if the file is in a standard search path and owned by the user.
+//
 // RemoveFile calls the underlying RemoveFile.
 func (x *ColorList) RemoveFile() {
 	x.inner.RemoveFile()

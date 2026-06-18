@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The encapsulation of a successful authorization by a controller.
+//
 // Authorization wraps [raw.ASAuthorization] with a fluent Go API.
 type Authorization struct {
 	inner *raw.ASAuthorization

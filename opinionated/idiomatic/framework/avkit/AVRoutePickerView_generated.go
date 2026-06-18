@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A view that presents a list of nearby media receivers.
+//
 // RoutePickerView wraps [raw.AVRoutePickerView] with a fluent Go API.
 type RoutePickerView struct {
 	inner *raw.AVRoutePickerView
@@ -37,7 +39,7 @@ func NewRoutePickerView() *RoutePickerView {
 	return &RoutePickerView{inner: raw.AVRoutePickerViewFromID(_id)}
 }
 
-// @property		delegate @abstract		The route picker view's delegate.
+// The delegate object for the route picker.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *RoutePickerView) WithDelegate(delegate raw.AVRoutePickerViewDelegate) *RoutePickerView {
@@ -45,7 +47,7 @@ func (x *RoutePickerView) WithDelegate(delegate raw.AVRoutePickerViewDelegate) *
 	return x
 }
 
-// @property 		player @abstract		The player for which to perform routing operations.
+// The player object to perform routing operations for.
 //
 // WithPlayer sets the player property and returns the receiver for chaining.
 func (x *RoutePickerView) WithPlayer(player *avfoundation.AVPlayer) *RoutePickerView {
@@ -53,7 +55,7 @@ func (x *RoutePickerView) WithPlayer(player *avfoundation.AVPlayer) *RoutePicker
 	return x
 }
 
-// @property		routePickerButtonBordered @abstract		Whether or not the picker button has a border. Default is YES.
+// A Boolean value that indicates whether the route picker button has a border.
 //
 // WithRoutePickerButtonBordered sets the routePickerButtonBordered property and returns the receiver for chaining.
 func (x *RoutePickerView) WithRoutePickerButtonBordered(routePickerButtonBordered bool) *RoutePickerView {
@@ -61,14 +63,14 @@ func (x *RoutePickerView) WithRoutePickerButtonBordered(routePickerButtonBordere
 	return x
 }
 
-// @method		routePickerButtonColorForState: @param			state The state for which to get the picker button color. @abstract		Returns the color of the picker button for a given state.
+// Returns the color of the picker button for the specified state.
 //
 // RoutePickerButtonColorForState calls the underlying RoutePickerButtonColorForState.
 func (x *RoutePickerView) RoutePickerButtonColorForState(state AVRoutePickerViewButtonState) *appkit.NSColor {
 	return x.inner.RoutePickerButtonColorForState(raw.AVRoutePickerViewButtonState(state))
 }
 
-// @method		setRoutePickerButtonColor:forState: @param			color The color the button should have for a given state. @param			state The state for which to set the color of the button image. @abstract		Sets the color of the picker button for a given state. @discussion	If set to nil, the default color will be used for the given state.
+// Sets the route picker button color for the specified state.
 //
 // SetRoutePickerButtonColorForState calls the underlying SetRoutePickerButtonColorForState.
 func (x *RoutePickerView) SetRoutePickerButtonColorForState(color *appkit.NSColor, state AVRoutePickerViewButtonState) {

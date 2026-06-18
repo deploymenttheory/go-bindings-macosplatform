@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines the video attributes for an asset variant.
+//
 // AssetVariantVideoAttributes wraps [raw.AVAssetVariantVideoAttributes] with a fluent Go API.
 type AssetVariantVideoAttributes struct {
 	inner *raw.AVAssetVariantVideoAttributes

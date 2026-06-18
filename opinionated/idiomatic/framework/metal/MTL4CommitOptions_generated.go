@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Represents options to configure a commit operation on a command queue.
+//
 // MTL4CommitOptions wraps [raw.MTL4CommitOptions] with a fluent Go API.
 type MTL4CommitOptions struct {
 	inner *raw.MTL4CommitOptions
@@ -35,7 +37,7 @@ func NewMTL4CommitOptions() *MTL4CommitOptions {
 	return &MTL4CommitOptions{inner: raw.MTL4CommitOptionsFromID(_id)}
 }
 
-// Registers a commit feedback handler that Metal calls with feedback data when available. - Parameter block: “MTL4CommitFeedbackHandler“ that Metal invokes.
+// Registers a commit feedback handler that Metal calls with feedback data when available.
 //
 // AddFeedbackHandler calls the underlying AddFeedbackHandler.
 func (x *MTL4CommitOptions) AddFeedbackHandler(block func(objc.ID)) {

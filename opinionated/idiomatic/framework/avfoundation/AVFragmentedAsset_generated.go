@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An asset with a duration that the system can extend without modifying its existing media data.
+//
 // FragmentedAsset wraps [raw.AVFragmentedAsset] with a fluent Go API.
 type FragmentedAsset struct {
 	inner *raw.AVFragmentedAsset

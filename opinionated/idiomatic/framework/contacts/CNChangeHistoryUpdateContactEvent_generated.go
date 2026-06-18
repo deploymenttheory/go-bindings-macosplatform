@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a user updating a contact.
+//
 // ChangeHistoryUpdateContactEvent wraps [raw.CNChangeHistoryUpdateContactEvent] with a fluent Go API.
 type ChangeHistoryUpdateContactEvent struct {
 	inner *raw.CNChangeHistoryUpdateContactEvent

@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// A panel that prompts the user to select a file to open.
+//
 // OpenPanel wraps [raw.NSOpenPanel] with a fluent Go API.
 type OpenPanel struct {
 	inner *raw.NSOpenPanel
@@ -40,49 +42,63 @@ func NewOpenPanel() *OpenPanel {
 	return &OpenPanel{inner: raw.NSOpenPanelFromID(_id)}
 }
 
+// A Boolean that indicates whether the panel resolves aliases.
+//
 // WithResolvesAliases sets the resolvesAliases property and returns the receiver for chaining.
 func (x *OpenPanel) WithResolvesAliases(resolvesAliases bool) *OpenPanel {
 	x.inner.SetResolvesAliases(resolvesAliases)
 	return x
 }
 
+// A Boolean that indicates whether the user can choose directories in the panel.
+//
 // WithCanChooseDirectories sets the canChooseDirectories property and returns the receiver for chaining.
 func (x *OpenPanel) WithCanChooseDirectories(canChooseDirectories bool) *OpenPanel {
 	x.inner.SetCanChooseDirectories(canChooseDirectories)
 	return x
 }
 
+// A Boolean that indicates whether the user may select multiple files and directories.
+//
 // WithAllowsMultipleSelection sets the allowsMultipleSelection property and returns the receiver for chaining.
 func (x *OpenPanel) WithAllowsMultipleSelection(allowsMultipleSelection bool) *OpenPanel {
 	x.inner.SetAllowsMultipleSelection(allowsMultipleSelection)
 	return x
 }
 
+// A Boolean that indicates whether the user can choose files in the panel.
+//
 // WithCanChooseFiles sets the canChooseFiles property and returns the receiver for chaining.
 func (x *OpenPanel) WithCanChooseFiles(canChooseFiles bool) *OpenPanel {
 	x.inner.SetCanChooseFiles(canChooseFiles)
 	return x
 }
 
+// A Boolean value that indicates how the panel responds to iCloud documents that have conflicting versions.
+//
 // WithCanResolveUbiquitousConflicts sets the canResolveUbiquitousConflicts property and returns the receiver for chaining.
 func (x *OpenPanel) WithCanResolveUbiquitousConflicts(canResolveUbiquitousConflicts bool) *OpenPanel {
 	x.inner.SetCanResolveUbiquitousConflicts(canResolveUbiquitousConflicts)
 	return x
 }
 
+// A Boolean value that indicates how the panel responds to iCloud documents that aren’t fully downloaded locally.
+//
 // WithCanDownloadUbiquitousContents sets the canDownloadUbiquitousContents property and returns the receiver for chaining.
 func (x *OpenPanel) WithCanDownloadUbiquitousContents(canDownloadUbiquitousContents bool) *OpenPanel {
 	x.inner.SetCanDownloadUbiquitousContents(canDownloadUbiquitousContents)
 	return x
 }
 
+// A Boolean value that indicates whether the panel’s accessory view is visible.
+//
 // WithAccessoryViewDisclosed sets the accessoryViewDisclosed property and returns the receiver for chaining.
 func (x *OpenPanel) WithAccessoryViewDisclosed(accessoryViewDisclosed bool) *OpenPanel {
 	x.inner.SetAccessoryViewDisclosed(accessoryViewDisclosed)
 	return x
 }
 
-// Sets and returns the identifier. The panel's current state such as the root directory and the current directory are saved and restored relative to the identifier. - Note: When the identifier is changed, the properties that depend on the identifier are updated from user defaults. Properties that have a null value in user defaults are not changed (and keep their existing value). - Note: Can only be set during the configuration phase.
+// Sets and returns the identifier.
 //
 // WithIdentifier sets the identifier property and returns the receiver for chaining.
 func (x *OpenPanel) WithIdentifier(identifier *foundation.NSString) *OpenPanel {
@@ -90,7 +106,7 @@ func (x *OpenPanel) WithIdentifier(identifier *foundation.NSString) *OpenPanel {
 	return x
 }
 
-// `NSSavePanel`/`NSOpenPanel`: Sets and returns the directory that is displayed. Set to `nil` to display the default directory. This method will not block to resolve the URL, and the directory will asynchronously be set, if required. - Note: Can only be set during the configuration phase.
+// The current directory shown in the panel.
 //
 // WithDirectoryURL sets the directoryURL property and returns the receiver for chaining.
 func (x *OpenPanel) WithDirectoryURL(directoryURL string) *OpenPanel {
@@ -98,7 +114,7 @@ func (x *OpenPanel) WithDirectoryURL(directoryURL string) *OpenPanel {
 	return x
 }
 
-// `NSSavePanel`: An array of UTTypes specifying the file types the user can save the file as. Set to `@[]` to specify that any file type can be used. If no extension is given by the user, the first preferred extension from the array will be used as the extension for the save panel. If the user specifies a type not in the array, and `allowsOtherFileTypes` is `YES`, they will be presented with another dialog when prompted to save. The default value is the empty array. `NSOpenPanel`: This property determines which files should be enabled in the open panel. Using the deprecated methods to show the open panel (the ones that take a "types:" parameter) will overwrite this value, and should not be used. `allowedContentTypes` can be changed while the panel is running (ie: from an accessory view). This is also known as the "enabled file types". Set to `@[]` to specify that all files should be enabled.
+// An array of types that specify the files types to which you can save.
 //
 // WithAllowedContentTypes sets the collection, converting the Go slice to an NSArray.
 func (x *OpenPanel) WithAllowedContentTypes(items ...*uniformtypeidentifiers.UTType) *OpenPanel {
@@ -118,7 +134,7 @@ func (x *OpenPanel) WithAllowedContentTypes(items ...*uniformtypeidentifiers.UTT
 	return x
 }
 
-// `NSSavePanel`: Returns a BOOL value that indicates whether the panel allows the user to save files with an extension that is not in the list of `allowedFileTypes`. `NSOpenPanel`: Not used.
+// A Boolean value that indicates whether the panel allows the user to save files with a filename extension that’s not in the list of allowed types.
 //
 // WithAllowsOtherFileTypes sets the allowsOtherFileTypes property and returns the receiver for chaining.
 func (x *OpenPanel) WithAllowsOtherFileTypes(allowsOtherFileTypes bool) *OpenPanel {
@@ -126,7 +142,7 @@ func (x *OpenPanel) WithAllowsOtherFileTypes(allowsOtherFileTypes bool) *OpenPan
 	return x
 }
 
-// `NSSavePanel`:The current type. If set to `nil`, resets to the first allowed content type. Returns `nil` if `allowedContentTypes` is empty. `NSOpenPanel`: Not used. - Note: Asserts that `currentContentType` conforms to `UTTypeData` or `UTTypeDirectory`.
+// NSSavePanel:The current type. If set to nil, resets to the first allowed content type. Returns nil if allowedContentTypes is empty. NSOpenPanel: Not used.
 //
 // WithCurrentContentType sets the currentContentType property and returns the receiver for chaining.
 func (x *OpenPanel) WithCurrentContentType(currentContentType *uniformtypeidentifiers.UTType) *OpenPanel {
@@ -134,7 +150,7 @@ func (x *OpenPanel) WithCurrentContentType(currentContentType *uniformtypeidenti
 	return x
 }
 
-// Sets and returns the accessory view shown in the panel. For applications that link on 10.6 and later, the accessoryView's frame will be observed, and any changes the programmer makes to the frame will automatically be reflected in the panel (including animated changes to the frame height). For applications that link on 26.0 and later and use the Liquid Glass design, the accessoryView's control metrics will be the larger Liquid Glass metrics.
+// The custom accessory view for the current app.
 //
 // WithAccessoryView sets the accessoryView property and returns the receiver for chaining.
 func (x *OpenPanel) WithAccessoryView(accessoryView ViewProvider) *OpenPanel {
@@ -142,7 +158,7 @@ func (x *OpenPanel) WithAccessoryView(accessoryView ViewProvider) *OpenPanel {
 	return x
 }
 
-// `NSSavePanel`/`NSOpenPanel`: Set to `YES` to show the "New Folder" button. Default is `YES`.
+// A Boolean value that indicates whether the panel displays UI for creating directories.
 //
 // WithCanCreateDirectories sets the canCreateDirectories property and returns the receiver for chaining.
 func (x *OpenPanel) WithCanCreateDirectories(canCreateDirectories bool) *OpenPanel {
@@ -150,7 +166,7 @@ func (x *OpenPanel) WithCanCreateDirectories(canCreateDirectories bool) *OpenPan
 	return x
 }
 
-// `NSSavePanel`: Set to `YES` to show the "Hide Extension" menu item. `NSOpenPanel`: Not used.
+// A Boolean value that indicates whether the panel displays UI for hiding or showing filename extensions.
 //
 // WithCanSelectHiddenExtension sets the canSelectHiddenExtension property and returns the receiver for chaining.
 func (x *OpenPanel) WithCanSelectHiddenExtension(canSelectHiddenExtension bool) *OpenPanel {
@@ -158,7 +174,7 @@ func (x *OpenPanel) WithCanSelectHiddenExtension(canSelectHiddenExtension bool) 
 	return x
 }
 
-// `NSSavePanel`: Set to `YES` if the filename extension should be hidden. Otherwise, `NO` if the filename extension should be shown. Default is `YES`. - Note: Can only be set during the configuration phase. `NSOpenPanel`: Not used.
+// A Boolean value that indicates whether to display filename extensions.
 //
 // WithExtensionHidden sets the extensionHidden property and returns the receiver for chaining.
 func (x *OpenPanel) WithExtensionHidden(extensionHidden bool) *OpenPanel {
@@ -166,7 +182,7 @@ func (x *OpenPanel) WithExtensionHidden(extensionHidden bool) *OpenPanel {
 	return x
 }
 
-// `NSSavePanel`/`NSOpenPanel`: If set to `YES`, the user can navigate into file packages as if they were directories. Default is `NO`.
+// A Boolean value that indicates whether the panel displays file packages as directories.
 //
 // WithTreatsFilePackagesAsDirectories sets the treatsFilePackagesAsDirectories property and returns the receiver for chaining.
 func (x *OpenPanel) WithTreatsFilePackagesAsDirectories(treatsFilePackagesAsDirectories bool) *OpenPanel {
@@ -174,7 +190,7 @@ func (x *OpenPanel) WithTreatsFilePackagesAsDirectories(treatsFilePackagesAsDire
 	return x
 }
 
-// `NSSavePanel`/`NSOpenPanel`: Sets the text shown on the Open or Save button. If set to an empty string, it will show a localized "Open" for the NSOpenPanel and "Save" for the NSSavePanel. The default value will be the correct localized prompt for the open or save panel, as appropriate.
+// The text to display in the default button.
 //
 // WithPrompt sets the prompt property and returns the receiver for chaining.
 func (x *OpenPanel) WithPrompt(prompt string) *OpenPanel {
@@ -182,7 +198,7 @@ func (x *OpenPanel) WithPrompt(prompt string) *OpenPanel {
 	return x
 }
 
-// `NSSavePanel`: Sets and returns the text shown to the left of the "name field". Default value is a localized "Save As:" string. `NSOpenPanel`: Not used.
+// The label text displayed in front of the filename text field.
 //
 // WithNameFieldLabel sets the nameFieldLabel property and returns the receiver for chaining.
 func (x *OpenPanel) WithNameFieldLabel(nameFieldLabel string) *OpenPanel {
@@ -190,7 +206,7 @@ func (x *OpenPanel) WithNameFieldLabel(nameFieldLabel string) *OpenPanel {
 	return x
 }
 
-// `NSSavePanel`: Sets and returns the user-editable file name shown in the name field. - Note: Calling the deprecated methods that take a "name:" parameter will overwrite any values set before the panel is shown. - Note: If `[panel isExtensionHidden]` is set to `YES`, the extension will be hidden. - Note: Can only be set during the configuration phase. `NSOpenPanel`: Not used.
+// The user-editable filename currently shown in the name field.
 //
 // WithNameFieldStringValue sets the nameFieldStringValue property and returns the receiver for chaining.
 func (x *OpenPanel) WithNameFieldStringValue(nameFieldStringValue string) *OpenPanel {
@@ -198,7 +214,7 @@ func (x *OpenPanel) WithNameFieldStringValue(nameFieldStringValue string) *OpenP
 	return x
 }
 
-// `NSSavePanel`/`NSOpenPanel`: Sets and returns the message shown under title of the panel.
+// The message text displayed in the panel.
 //
 // WithMessage sets the message property and returns the receiver for chaining.
 func (x *OpenPanel) WithMessage(message string) *OpenPanel {
@@ -206,7 +222,7 @@ func (x *OpenPanel) WithMessage(message string) *OpenPanel {
 	return x
 }
 
-// `NSSavePanel`/`NSOpenPanel`: If `showsHiddenFiles` is set to `YES`, files that are normally hidden from the user are displayed. This method was published in Mac OS 10.6, but has existed since Mac OS 10.4. This property is KVO compliant. The user may invoke the keyboard shortcut (cmd-shift-.) to show or hide hidden files. Any user interface shown in an an accessory view should be updated by using key value observing (KVO) to watch for changes of this property. Alternatively, the user interface can be directly bound to this property. The default value is `NO`.
+// A Boolean value that indicates whether the panel displays files that are normally hidden from the user.
 //
 // WithShowsHiddenFiles sets the showsHiddenFiles property and returns the receiver for chaining.
 func (x *OpenPanel) WithShowsHiddenFiles(showsHiddenFiles bool) *OpenPanel {
@@ -214,7 +230,7 @@ func (x *OpenPanel) WithShowsHiddenFiles(showsHiddenFiles bool) *OpenPanel {
 	return x
 }
 
-// `NSSavePanel`: Shows or hides the "Tags" field in the receiver. By passing `YES`, you become responsible for setting Tag names on the resulting file after saving is complete. Default is `YES`. `NSOpenPanel`: Not used.
+// A Boolean value that indicates whether the panel displays the Tags field.
 //
 // WithShowsTagField sets the showsTagField property and returns the receiver for chaining.
 func (x *OpenPanel) WithShowsTagField(showsTagField bool) *OpenPanel {
@@ -222,7 +238,7 @@ func (x *OpenPanel) WithShowsTagField(showsTagField bool) *OpenPanel {
 	return x
 }
 
-// `NSSavePanel`: When -showsTagField returns YES, set any initial Tag names to be displayed, if necessary, prior to displaying the receiver. Also, if the user clicks "Save", take the result of -tagNames, and set them on the resulting file after saving is complete. Tag names are NSStrings, arrays of which can be used directly with the NSURLTagNamesKey API for getting and setting tags on files. Passing `nil` or an empty array to -setTagNames: will result in no initial Tag names appearing in the receiver. When -showsTagField returns YES, -tagNames always returns a non-nil array, and when NO, -tagNames always returns `nil`. `NSOpenPanel`: Not used.
+// The tag names that you want to include on a saved file.
 //
 // WithTagNames sets the collection, converting the Go slice to an NSArray.
 func (x *OpenPanel) WithTagNames(items ...*foundation.NSString) *OpenPanel {
@@ -242,7 +258,7 @@ func (x *OpenPanel) WithTagNames(items ...*foundation.NSString) *OpenPanel {
 	return x
 }
 
-// `NSSavePanel`: Whether or not to show a control for selecting the type of the saved file. The control shows the types in `allowedContentTypes`. Default is `NO`. `NSOpenPanel`: Not used. - Note: If `allowedContentTypes` is empty, the control is not displayed.
+// Whether or not to show a popup list for selecting the type of the saved file.
 //
 // WithShowsContentTypes sets the showsContentTypes property and returns the receiver for chaining.
 func (x *OpenPanel) WithShowsContentTypes(showsContentTypes bool) *OpenPanel {
@@ -270,31 +286,39 @@ func (x *OpenPanel) WithAllowedFileTypes(items ...*foundation.NSString) *OpenPan
 	return x
 }
 
+// A Boolean value that indicates whether the receiver is a floating panel.
+//
 // WithFloatingPanel sets the floatingPanel property and returns the receiver for chaining.
 func (x *OpenPanel) WithFloatingPanel(floatingPanel bool) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.SetFloatingPanel(floatingPanel)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver becomes the key window only when needed.
+//
 // WithBecomesKeyOnlyIfNeeded sets the becomesKeyOnlyIfNeeded property and returns the receiver for chaining.
 func (x *OpenPanel) WithBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.SetBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded)
 	return x
 }
 
+// A Boolean value that indicates whether the panel receives keyboard and mouse events even when some other window is being run modally.
+//
 // WithWorksWhenModal sets the worksWhenModal property and returns the receiver for chaining.
 func (x *OpenPanel) WithWorksWhenModal(worksWhenModal bool) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.SetWorksWhenModal(worksWhenModal)
 	return x
 }
 
+// The string that appears in the title bar of the window or the path to the represented file.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *OpenPanel) WithTitle(title string) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
-// Secondary text that may be displayed adjacent to or below the primary title depending on the configuration of the window. A value of empty string will remove the subtitle from the window layout.
+// A secondary line of text that appears in the title bar of the window.
 //
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *OpenPanel) WithSubtitle(subtitle string) *OpenPanel {
@@ -302,7 +326,7 @@ func (x *OpenPanel) WithSubtitle(subtitle string) *OpenPanel {
 	return x
 }
 
-// See the enum values for how this property works.
+// A value that indicates the visibility of the window’s title and title bar buttons.
 //
 // WithTitleVisibility sets the titleVisibility property and returns the receiver for chaining.
 func (x *OpenPanel) WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *OpenPanel {
@@ -310,7 +334,7 @@ func (x *OpenPanel) WithTitleVisibility(titleVisibility NSWindowTitleVisibility)
 	return x
 }
 
-// When \c YES, the titlebar doesn't draw its background, allowing all buttons to show through, and "click through" to happen. In general, this is only useful when \c NSFullSizeContentViewWindowMask is set.
+// A Boolean value that indicates whether the title bar draws its background.
 //
 // WithTitlebarAppearsTransparent sets the titlebarAppearsTransparent property and returns the receiver for chaining.
 func (x *OpenPanel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *OpenPanel {
@@ -318,7 +342,7 @@ func (x *OpenPanel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bo
 	return x
 }
 
-// Specifies how the titlebar area of the window should appear when the window displays an NSToolbar
+// The style that determines the appearance and location of the toolbar in relation to the title bar.
 //
 // WithToolbarStyle sets the toolbarStyle property and returns the receiver for chaining.
 func (x *OpenPanel) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *OpenPanel {
@@ -326,6 +350,8 @@ func (x *OpenPanel) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *OpenPan
 	return x
 }
 
+// An array of title bar accessory view controllers that are currently added to the window.
+//
 // WithTitlebarAccessoryViewControllers sets the collection, converting the Go slice to an NSArray.
 func (x *OpenPanel) WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *OpenPanel {
 	if len(items) == 0 {
@@ -344,7 +370,7 @@ func (x *OpenPanel) WithTitlebarAccessoryViewControllers(items ...*raw.NSTitleba
 	return x
 }
 
-// If url is not nil and its path is not empty, the window will show a document icon in the titlebar. If the url represents a filename or other resource with a known icon, that icon will be used as the document icon.  Otherwise the default document icon will be used.  The icon can be customized using `-[[NSWindow standardWindowButton:NSWindowDocumentIconButton] setImage:customImage]`.  If url is not nil and its path is not empty, the window will have a pop-up menu which can be shown via command-click on the area containing the document icon and title.  By default, this menu will display the path components of the url.  The presence and contents of this menu can be controlled by the delegate method `-[window:shouldPopUpDocumentPathMenu:]` If the url is nil or has an empty path, the window will not show a document icon and will not have a pop-up menu available via command-click.
+// The URL of the file the window represents.
 //
 // WithRepresentedURL sets the representedURL property and returns the receiver for chaining.
 func (x *OpenPanel) WithRepresentedURL(representedURL string) *OpenPanel {
@@ -352,31 +378,39 @@ func (x *OpenPanel) WithRepresentedURL(representedURL string) *OpenPanel {
 	return x
 }
 
+// The path to the file of the window’s represented file.
+//
 // WithRepresentedFilename sets the representedFilename property and returns the receiver for chaining.
 func (x *OpenPanel) WithRepresentedFilename(representedFilename string) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetRepresentedFilename(foundation.NSStringStringWithUTF8String(representedFilename))
 	return x
 }
 
+// A Boolean value that indicates whether the window is excluded from the application’s Windows menu.
+//
 // WithExcludedFromWindowsMenu sets the excludedFromWindowsMenu property and returns the receiver for chaining.
 func (x *OpenPanel) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetExcludedFromWindowsMenu(excludedFromWindowsMenu)
 	return x
 }
 
+// The window’s content view, the highest accessible view object in the window’s view hierarchy.
+//
 // WithContentView sets the contentView property and returns the receiver for chaining.
 func (x *OpenPanel) WithContentView(contentView ViewProvider) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetContentView(contentView.asView())
 	return x
 }
 
+// The window’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *OpenPanel) WithDelegate(delegate raw.NSWindowDelegate) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetDelegate(delegate)
 	return x
 }
 
-// @note The styleMask can only be set on macOS 10.6 and later. Valid \c styleMask settings have the same restrictions as the \c styleMask passed to `-initWithContentRect:styleMask:backing:defer:`.  Some \c styleMask changes will cause the view hierarchy to be rebuilt, since there is a different subclass for the top level view of a borderless window than for the top level view of a titled window.
+// Flags that describe the window’s current style, such as if it’s resizable or in full-screen mode.
 //
 // WithStyleMask sets the styleMask property and returns the receiver for chaining.
 func (x *OpenPanel) WithStyleMask(styleMask NSWindowStyleMask) *OpenPanel {
@@ -384,73 +418,95 @@ func (x *OpenPanel) WithStyleMask(styleMask NSWindowStyleMask) *OpenPanel {
 	return x
 }
 
+// The window’s resizing increments.
+//
 // WithResizeIncrements sets the resizeIncrements property and returns the receiver for chaining.
 func (x *OpenPanel) WithResizeIncrements(resizeIncrements corefoundation.CGSize) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetResizeIncrements(resizeIncrements)
 	return x
 }
 
+// The window’s aspect ratio, which constrains the size of its frame rectangle to integral multiples of this ratio when the user resizes it.
+//
 // WithAspectRatio sets the aspectRatio property and returns the receiver for chaining.
 func (x *OpenPanel) WithAspectRatio(aspectRatio corefoundation.CGSize) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetAspectRatio(aspectRatio)
 	return x
 }
 
+// The window’s content-view resizing increments.
+//
 // WithContentResizeIncrements sets the contentResizeIncrements property and returns the receiver for chaining.
 func (x *OpenPanel) WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetContentResizeIncrements(contentResizeIncrements)
 	return x
 }
 
+// The window’s content aspect ratio.
+//
 // WithContentAspectRatio sets the contentAspectRatio property and returns the receiver for chaining.
 func (x *OpenPanel) WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetContentAspectRatio(contentAspectRatio)
 	return x
 }
 
+// A Boolean value that indicates whether any of the window’s views need to be displayed.
+//
 // WithViewsNeedDisplay sets the viewsNeedDisplay property and returns the receiver for chaining.
 func (x *OpenPanel) WithViewsNeedDisplay(viewsNeedDisplay bool) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetViewsNeedDisplay(viewsNeedDisplay)
 	return x
 }
 
+// A Boolean value that indicates whether the window tries to optimize user-initiated resize operations by preserving the content of views that have not changed.
+//
 // WithPreservesContentDuringLiveResize sets the preservesContentDuringLiveResize property and returns the receiver for chaining.
 func (x *OpenPanel) WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetPreservesContentDuringLiveResize(preservesContentDuringLiveResize)
 	return x
 }
 
+// A Boolean value that indicates whether the window is released when it receives the close message.
+//
 // WithReleasedWhenClosed sets the releasedWhenClosed property and returns the receiver for chaining.
 func (x *OpenPanel) WithReleasedWhenClosed(releasedWhenClosed bool) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetReleasedWhenClosed(releasedWhenClosed)
 	return x
 }
 
+// The color of the window’s background.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *OpenPanel) WithBackgroundColor(backgroundColor *Color) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the window can be dragged by clicking in its title bar or background.
+//
 // WithMovable sets the movable property and returns the receiver for chaining.
 func (x *OpenPanel) WithMovable(movable bool) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetMovable(movable)
 	return x
 }
 
+// A Boolean value that indicates whether the window is movable by clicking and dragging anywhere in its background.
+//
 // WithMovableByWindowBackground sets the movableByWindowBackground property and returns the receiver for chaining.
 func (x *OpenPanel) WithMovableByWindowBackground(movableByWindowBackground bool) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetMovableByWindowBackground(movableByWindowBackground)
 	return x
 }
 
+// A Boolean value that indicates whether the window is removed from the screen when its application becomes inactive.
+//
 // WithHidesOnDeactivate sets the hidesOnDeactivate property and returns the receiver for chaining.
 func (x *OpenPanel) WithHidesOnDeactivate(hidesOnDeactivate bool) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetHidesOnDeactivate(hidesOnDeactivate)
 	return x
 }
 
-// Indicates whether a window can be hidden during `-[NSApplication hide:]`.  Default is \c YES.
+// A Boolean value that indicates whether the window can hide when its application becomes hidden.
 //
 // WithCanHide sets the canHide property and returns the receiver for chaining.
 func (x *OpenPanel) WithCanHide(canHide bool) *OpenPanel {
@@ -458,25 +514,31 @@ func (x *OpenPanel) WithCanHide(canHide bool) *OpenPanel {
 	return x
 }
 
+// The custom miniaturized window image of the window.
+//
 // WithMiniwindowImage sets the miniwindowImage property and returns the receiver for chaining.
 func (x *OpenPanel) WithMiniwindowImage(miniwindowImage *Image) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetMiniwindowImage(miniwindowImage.Unwrap())
 	return x
 }
 
+// The title displayed in the window’s minimized window.
+//
 // WithMiniwindowTitle sets the miniwindowTitle property and returns the receiver for chaining.
 func (x *OpenPanel) WithMiniwindowTitle(miniwindowTitle string) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetMiniwindowTitle(foundation.NSStringStringWithUTF8String(miniwindowTitle))
 	return x
 }
 
+// A Boolean value that indicates whether the window’s document has been edited.
+//
 // WithDocumentEdited sets the documentEdited property and returns the receiver for chaining.
 func (x *OpenPanel) WithDocumentEdited(documentEdited bool) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetDocumentEdited(documentEdited)
 	return x
 }
 
-// A Boolean value that indicates whether or not to prevent application termination when the receiving window is presented modally. The value of this property is `YES` if the window should prevent application termination when modal; otherwise, `NO`. The default value is `YES`. However, note that some window subclasses and some windows created indirectly (like those created by UI frameworks like AppKit and SwiftUI), may have different default values. For example, the Open panel and toolbar customization sheets should not prevent application termination, so those windows have `preventsApplicationTerminationWhenModal` set to `NO`. Some `NSAlert`s, like those that are simply informational, have windows that do not prevent application termination by default. Setting this property overrides the default behavior.
+// A Boolean value that indicates whether the window prevents application termination when modal.
 //
 // WithPreventsApplicationTerminationWhenModal sets the preventsApplicationTerminationWhenModal property and returns the receiver for chaining.
 func (x *OpenPanel) WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *OpenPanel {
@@ -484,7 +546,7 @@ func (x *OpenPanel) WithPreventsApplicationTerminationWhenModal(preventsApplicat
 	return x
 }
 
-// Default is \c NO. Set to \c YES to allow a window to display tooltips even when the application is in the background.  Note that, enabling tooltips in an inactive application will cause the app to do work any time the mouse passes over the window.  This can degrade system performance. Returns \c YES if this window displays tooltips even when the application is in the background.  To configure this setting you should call `-setAllowsToolTipsWhenApplicationIsInactive:` instead of overriding `-allowsToolTipsWhenApplicationIsInactive`.
+// A Boolean value that indicates whether the window can display tooltips even when the application is in the background.
 //
 // WithAllowsToolTipsWhenApplicationIsInactive sets the allowsToolTipsWhenApplicationIsInactive property and returns the receiver for chaining.
 func (x *OpenPanel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *OpenPanel {
@@ -492,43 +554,55 @@ func (x *OpenPanel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWh
 	return x
 }
 
+// The window’s backing store type.
+//
 // WithBackingType sets the backingType property and returns the receiver for chaining.
 func (x *OpenPanel) WithBackingType(backingType NSBackingStoreType) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetBackingType(raw.NSBackingStoreType(backingType))
 	return x
 }
 
+// The window level of the window.
+//
 // WithLevel sets the level property and returns the receiver for chaining.
 func (x *OpenPanel) WithLevel(level int) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetLevel(level)
 	return x
 }
 
+// The depth limit of the window.
+//
 // WithDepthLimit sets the depthLimit property and returns the receiver for chaining.
 func (x *OpenPanel) WithDepthLimit(depthLimit NSWindowDepth) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetDepthLimit(raw.NSWindowDepth(depthLimit))
 	return x
 }
 
+// A Boolean value that indicates whether the window has a shadow.
+//
 // WithHasShadow sets the hasShadow property and returns the receiver for chaining.
 func (x *OpenPanel) WithHasShadow(hasShadow bool) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetHasShadow(hasShadow)
 	return x
 }
 
+// The window’s alpha value.
+//
 // WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
 func (x *OpenPanel) WithAlphaValue(alphaValue float64) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetAlphaValue(alphaValue)
 	return x
 }
 
+// A Boolean value that indicates whether the window is opaque.
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *OpenPanel) WithOpaque(opaque bool) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetOpaque(opaque)
 	return x
 }
 
-// `-setSharingType:` specifies whether the window content can be read from another process.  The default sharing type is \c NSWindowSharingReadOnly, which means other processes can read the window content (eg. for window capture) but cannot modify it.  If you set your window sharing type to \c NSWindowSharingNone, so that the content cannot be captured, your window will also not be able to participate in a number of system services, so this setting should be used with caution.
+// A Boolean value that indicates the level of access other processes have to the window’s content.
 //
 // WithSharingType sets the sharingType property and returns the receiver for chaining.
 func (x *OpenPanel) WithSharingType(sharingType NSWindowSharingType) *OpenPanel {
@@ -536,7 +610,7 @@ func (x *OpenPanel) WithSharingType(sharingType NSWindowSharingType) *OpenPanel 
 	return x
 }
 
-// Controls whether threading of view drawing should be enabled for this window.  Defaults to \c YES.  When this is set to \c YES, AppKit's view system is allowed to perform `-drawRect:` activity for the window's views on threads other than the main thread, for views that have `canDrawConcurrently == YES`.  When this is set to \c NO, the window's views will be drawn serially as on 10.5 and earlier, even though some of the views may have `canDrawConcurrently == YES`.
+// A Boolean value that indicates whether the window allows multithreaded view drawing.
 //
 // WithAllowsConcurrentViewDrawing sets the allowsConcurrentViewDrawing property and returns the receiver for chaining.
 func (x *OpenPanel) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *OpenPanel {
@@ -544,13 +618,15 @@ func (x *OpenPanel) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing 
 	return x
 }
 
+// A Boolean value that indicates whether the window context should be updated when the screen profile changes or when the window moves to a different screen.
+//
 // WithDisplaysWhenScreenProfileChanges sets the displaysWhenScreenProfileChanges property and returns the receiver for chaining.
 func (x *OpenPanel) WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges)
 	return x
 }
 
-// This API controls whether the receiver is permitted onscreen before the user has logged in.  This property is off by default.  Alert panels and windows presented by input managers are examples of windows which should have this property set.
+// A Boolean value that indicates whether the window can be displayed at the login window.
 //
 // WithCanBecomeVisibleWithoutLogin sets the canBecomeVisibleWithoutLogin property and returns the receiver for chaining.
 func (x *OpenPanel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *OpenPanel {
@@ -558,13 +634,15 @@ func (x *OpenPanel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogi
 	return x
 }
 
+// A value that identifies the window’s behavior in window collections.
+//
 // WithCollectionBehavior sets the collectionBehavior property and returns the receiver for chaining.
 func (x *OpenPanel) WithCollectionBehavior(collectionBehavior NSWindowCollectionBehavior) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetCollectionBehavior(raw.NSWindowCollectionBehavior(collectionBehavior))
 	return x
 }
 
-// Provides for per-window control over automatic orderFront/orderOut animation behaviors added in 10.7.  Can be set to \c NSWindowAnimationBehaviorNone to disable Appkit's automatic animations for a given window, or to one of the other non-Default \c NSWindowAnimationBehavior values to override AppKit's automatic inference of appropriate animation behavior based on the window's apparent type.
+// The window’s automatic animation behavior.
 //
 // WithAnimationBehavior sets the animationBehavior property and returns the receiver for chaining.
 func (x *OpenPanel) WithAnimationBehavior(animationBehavior NSWindowAnimationBehavior) *OpenPanel {
@@ -572,61 +650,79 @@ func (x *OpenPanel) WithAnimationBehavior(animationBehavior NSWindowAnimationBeh
 	return x
 }
 
+// The name used to automatically save the window’s frame rectangle data in the defaults system.
+//
 // WithFrameAutosaveName sets the frameAutosaveName property and returns the receiver for chaining.
 func (x *OpenPanel) WithFrameAutosaveName(frameAutosaveName *foundation.NSString) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetFrameAutosaveName(frameAutosaveName)
 	return x
 }
 
+// The minimum size to which the window’s frame (including its title bar) can be sized.
+//
 // WithMinSize sets the minSize property and returns the receiver for chaining.
 func (x *OpenPanel) WithMinSize(minSize corefoundation.CGSize) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetMinSize(minSize)
 	return x
 }
 
+// The maximum size to which the window’s frame (including its title bar) can be sized.
+//
 // WithMaxSize sets the maxSize property and returns the receiver for chaining.
 func (x *OpenPanel) WithMaxSize(maxSize corefoundation.CGSize) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetMaxSize(maxSize)
 	return x
 }
 
+// The minimum size of the window’s content view in the window’s base coordinate system.
+//
 // WithContentMinSize sets the contentMinSize property and returns the receiver for chaining.
 func (x *OpenPanel) WithContentMinSize(contentMinSize corefoundation.CGSize) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetContentMinSize(contentMinSize)
 	return x
 }
 
+// The maximum size of the window’s content view in the window’s base coordinate system.
+//
 // WithContentMaxSize sets the contentMaxSize property and returns the receiver for chaining.
 func (x *OpenPanel) WithContentMaxSize(contentMaxSize corefoundation.CGSize) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetContentMaxSize(contentMaxSize)
 	return x
 }
 
+// A minimum size that is used to determine if a window can fit when it is in full screen in a tile.
+//
 // WithMinFullScreenContentSize sets the minFullScreenContentSize property and returns the receiver for chaining.
 func (x *OpenPanel) WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetMinFullScreenContentSize(minFullScreenContentSize)
 	return x
 }
 
+// A maximum size that is used to determine if a window can fit when it is in full screen in a tile.
+//
 // WithMaxFullScreenContentSize sets the maxFullScreenContentSize property and returns the receiver for chaining.
 func (x *OpenPanel) WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetMaxFullScreenContentSize(maxFullScreenContentSize)
 	return x
 }
 
+// The window’s window controller.
+//
 // WithWindowController sets the windowController property and returns the receiver for chaining.
 func (x *OpenPanel) WithWindowController(windowController *WindowController) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetWindowController(windowController.Unwrap())
 	return x
 }
 
+// The parent window to which the window is attached as a child.
+//
 // WithParentWindow sets the parentWindow property and returns the receiver for chaining.
 func (x *OpenPanel) WithParentWindow(parentWindow WindowProvider) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetParentWindow(parentWindow.asWindow())
 	return x
 }
 
-// If set, the receiver will inherit the appearance of that object, as well as use KVO to observe its effectiveAppearance for changes. Typically this is used for child windows that are shown from a parent window or specific view. Defaults to NSApp.
+// An object that the window inherits its appearance from.
 //
 // WithAppearanceSource sets the appearanceSource property and returns the receiver for chaining.
 func (x *OpenPanel) WithAppearanceSource(appearanceSource *foundation.NSObject) *OpenPanel {
@@ -634,13 +730,15 @@ func (x *OpenPanel) WithAppearanceSource(appearanceSource *foundation.NSObject) 
 	return x
 }
 
+// The window’s color space.
+//
 // WithColorSpace sets the colorSpace property and returns the receiver for chaining.
 func (x *OpenPanel) WithColorSpace(colorSpace *ColorSpace) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetColorSpace(colorSpace.Unwrap())
 	return x
 }
 
-// Specifies the style of separator displayed between the window's titlebar and content. The default value is NSTitlebarSeparatorStyleAutomatic. Changing this value will override any preference made by `NSSplitViewItem`.
+// The type of separator that the app displays between the title bar and content of a window.
 //
 // WithTitlebarSeparatorStyle sets the titlebarSeparatorStyle property and returns the receiver for chaining.
 func (x *OpenPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *OpenPanel {
@@ -648,7 +746,7 @@ func (x *OpenPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebar
 	return x
 }
 
-// The main content view controller for the window. This provides the contentView of the window. Assigning this value will remove the existing contentView and will make the contentViewController.view the main contentView for the window. The default value is nil. The contentViewController only controls the contentView, and not the title of the window. The window title can easily be bound to the contentViewController with the following: [window bind:NSTitleBinding toObject:contentViewController withKeyPath:@"title" options:nil]. Setting the contentViewController will cause the window to resize based on the current size of the contentViewController. Autolayout should be used to restrict the size of the window. The value of the contentViewController is encoded in the NIB. Directly assigning a contentView will clear out the contentViewController.
+// The main content view controller for the window.
 //
 // WithContentViewController sets the contentViewController property and returns the receiver for chaining.
 func (x *OpenPanel) WithContentViewController(contentViewController ViewControllerProvider) *OpenPanel {
@@ -656,37 +754,47 @@ func (x *OpenPanel) WithContentViewController(contentViewController ViewControll
 	return x
 }
 
+// The view that’s made first responder (also called the key view) the first time the window is placed onscreen.
+//
 // WithInitialFirstResponder sets the initialFirstResponder property and returns the receiver for chaining.
 func (x *OpenPanel) WithInitialFirstResponder(initialFirstResponder ViewProvider) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetInitialFirstResponder(initialFirstResponder.asView())
 	return x
 }
 
+// The button cell that performs as if clicked when the window receives a Return (or Enter) key event.
+//
 // WithDefaultButtonCell sets the defaultButtonCell property and returns the receiver for chaining.
 func (x *OpenPanel) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetDefaultButtonCell(defaultButtonCell.asButtonCell())
 	return x
 }
 
+// A Boolean value that indicates whether the window automatically recalculates the key view loop when views are added.
+//
 // WithAutorecalculatesKeyViewLoop sets the autorecalculatesKeyViewLoop property and returns the receiver for chaining.
 func (x *OpenPanel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop)
 	return x
 }
 
+// The window’s toolbar.
+//
 // WithToolbar sets the toolbar property and returns the receiver for chaining.
 func (x *OpenPanel) WithToolbar(toolbar *Toolbar) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetToolbar(toolbar.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the toolbar control button is currently displayed.
+//
 // WithShowsToolbarButton sets the showsToolbarButton property and returns the receiver for chaining.
 func (x *OpenPanel) WithShowsToolbarButton(showsToolbarButton bool) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetShowsToolbarButton(showsToolbarButton)
 	return x
 }
 
-// Get and set the tabbing mode for this window. This should be set before a window is shown. The default value is \c NSWindowTabbingModeAutomatic. When the value is \c NSWindowTabbingModeAutomatic, the system will look at the \c userTabbingPreference and automatically tab windows together based on the tabbingIdentifier, when it is appropriate to do so.
+// A value that indicates when a window displays tabs.
 //
 // WithTabbingMode sets the tabbingMode property and returns the receiver for chaining.
 func (x *OpenPanel) WithTabbingMode(tabbingMode NSWindowTabbingMode) *OpenPanel {
@@ -694,7 +802,7 @@ func (x *OpenPanel) WithTabbingMode(tabbingMode NSWindowTabbingMode) *OpenPanel 
 	return x
 }
 
-// Windows with the same \c tabbingIdentifier will have the ability to be tabbed together when a window is being shown. This allows aggregation of similar windows. By default, the \c tabbingIdentifier will be generated based on inherent window properties, such as the window class name, the delegate class name, the window controller class name, and some additional state. Windows can be explicitly made to group together by using the same \c tabbingIdentifier.
+// A value that allows a group of related windows.
 //
 // WithTabbingIdentifier sets the tabbingIdentifier property and returns the receiver for chaining.
 func (x *OpenPanel) WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *OpenPanel {
@@ -702,12 +810,16 @@ func (x *OpenPanel) WithTabbingIdentifier(tabbingIdentifier *foundation.NSString
 	return x
 }
 
+// A Boolean value that indicates whether the window accepts mouse-moved events.
+//
 // WithAcceptsMouseMovedEvents sets the acceptsMouseMovedEvents property and returns the receiver for chaining.
 func (x *OpenPanel) WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetAcceptsMouseMovedEvents(acceptsMouseMovedEvents)
 	return x
 }
 
+// A Boolean value that indicates whether the window is transparent to mouse events.
+//
 // WithIgnoresMouseEvents sets the ignoresMouseEvents property and returns the receiver for chaining.
 func (x *OpenPanel) WithIgnoresMouseEvents(ignoresMouseEvents bool) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetIgnoresMouseEvents(ignoresMouseEvents)
@@ -738,36 +850,48 @@ func (x *OpenPanel) WithShowsResizeIndicator(showsResizeIndicator bool) *OpenPan
 	return x
 }
 
+// The zero-based position of the window, based on its order from front to back among all visible application windows.
+//
 // WithOrderedIndex sets the orderedIndex property and returns the receiver for chaining.
 func (x *OpenPanel) WithOrderedIndex(orderedIndex int) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetOrderedIndex(orderedIndex)
 	return x
 }
 
+// A Boolean value indicating whether the window configuration is preserved between application launches.
+//
 // WithRestorable sets the restorable property and returns the receiver for chaining.
 func (x *OpenPanel) WithRestorable(restorable bool) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.SetRestorable(restorable)
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *OpenPanel) WithNextResponder(nextResponder ResponderProvider) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *OpenPanel) WithMenu(menu *Menu) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *OpenPanel) WithUserActivity(userActivity *foundation.NSUserActivity) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *OpenPanel) WithTouchBar(touchBar *TouchBar) *OpenPanel {
 	x.inner.NSSavePanel.NSPanel.NSWindow.NSResponder.SetTouchBar(touchBar.Unwrap())

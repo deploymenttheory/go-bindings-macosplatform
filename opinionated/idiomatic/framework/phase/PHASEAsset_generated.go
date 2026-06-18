@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A base class that adds a name to framework assets.
+//
 // Asset wraps [raw.PHASEAsset] with a fluent Go API.
 type Asset struct {
 	inner *raw.PHASEAsset

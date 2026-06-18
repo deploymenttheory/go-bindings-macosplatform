@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides information on a track in segment data.
+//
 // AssetSegmentTrackReport wraps [raw.AVAssetSegmentTrackReport] with a fluent Go API.
 type AssetSegmentTrackReport struct {
 	inner *raw.AVAssetSegmentTrackReport

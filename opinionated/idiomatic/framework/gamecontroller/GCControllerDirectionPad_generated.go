@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A control element associated with a directional pad or a thumbstick.
+//
 // ControllerDirectionPad wraps [raw.GCControllerDirectionPad] with a fluent Go API.
 type ControllerDirectionPad struct {
 	inner *raw.GCControllerDirectionPad
@@ -36,13 +38,15 @@ func NewControllerDirectionPad() *ControllerDirectionPad {
 	return &ControllerDirectionPad{inner: raw.GCControllerDirectionPadFromID(_id)}
 }
 
+// The block that the directional pad calls when the user changes its values.
+//
 // WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
 func (x *ControllerDirectionPad) WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerDirectionPad, float32, float32)) *ControllerDirectionPad {
 	x.inner.SetValueChangedHandler(valueChangedHandler)
 	return x
 }
 
-// The preferred system gesture state for this element. Defaults to GCSystemGestureStateEnabled for most elements @note This is merely the preferred system gesture state - it is not guaranteed to be respected by the system. @note It is highly recommended to leave this set to the default value, however there may be situations (for example, game streaming apps) where it is preferrable to disable system gestures. @see boundToSystemGesture
+// The preferred state for handling input when the user binds the element to a system gesture.
 //
 // WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
 func (x *ControllerDirectionPad) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerDirectionPad {
@@ -50,7 +54,7 @@ func (x *ControllerDirectionPad) WithPreferredSystemGestureState(preferredSystem
 	return x
 }
 
-// The element's SF Symbols name, taking input remapping into account. @note In almost all instances, you should use this over unmappedSfSymbolsName in your UI.
+// A system symbol for the element or the remapped element.
 //
 // WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
 func (x *ControllerDirectionPad) WithSfSymbolsName(sfSymbolsName string) *ControllerDirectionPad {
@@ -58,7 +62,7 @@ func (x *ControllerDirectionPad) WithSfSymbolsName(sfSymbolsName string) *Contro
 	return x
 }
 
-// The element's localized name, taking input remapping into account. @note In almost all instances, you should use this over unmappedLocalizedName in your UI.
+// The localized name for the element or the remapped element.
 //
 // WithLocalizedName sets the localizedName property and returns the receiver for chaining.
 func (x *ControllerDirectionPad) WithLocalizedName(localizedName string) *ControllerDirectionPad {
@@ -66,7 +70,7 @@ func (x *ControllerDirectionPad) WithLocalizedName(localizedName string) *Contro
 	return x
 }
 
-// The element's SF Symbols name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (sfSymbolsName is nil).
+// The element’s system symbol, not the remapped symbol.
 //
 // WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
 func (x *ControllerDirectionPad) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerDirectionPad {
@@ -74,7 +78,7 @@ func (x *ControllerDirectionPad) WithUnmappedSfSymbolsName(unmappedSfSymbolsName
 	return x
 }
 
-// The element's localized name, not taking any input remapping into account. @note Use this in your games own remapping UI, or when you need to prompt a user that a given button has no mapping (localizedName is nil).
+// The element’s localized name, not the remapped name.
 //
 // WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
 func (x *ControllerDirectionPad) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerDirectionPad {
@@ -82,7 +86,7 @@ func (x *ControllerDirectionPad) WithUnmappedLocalizedName(unmappedLocalizedName
 	return x
 }
 
-// Sets the normalized value for the direction pad's axis inputs. Will update the states of the direction pad's button inputs as well. @param xAxis the value to set the xAxis of the touchpad to. @param yAxis the value to set the yAxis of the touchpad to. @note If the controller's snapshot flag is set to NO, this method has no effect. @see value @see pressed
+// Sets the input values of a snapshot of a directional pad.
 //
 // SetValueForXAxisYAxis calls the underlying SetValueForXAxisYAxis.
 func (x *ControllerDirectionPad) SetValueForXAxisYAxis(xAxis float32, yAxis float32) {

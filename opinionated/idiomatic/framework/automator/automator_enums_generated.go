@@ -8,12 +8,17 @@ import (
 	"fmt"
 )
 
+// Logging levels that Automator supports.
 type AMLogLevel uint64
 
 const (
+	// The debug log level.
 	AMLogLevelDebug AMLogLevel = 0
-	AMLogLevelInfo  AMLogLevel = 1
-	AMLogLevelWarn  AMLogLevel = 2
+	// The informational log level.
+	AMLogLevelInfo AMLogLevel = 1
+	// The warning log level.
+	AMLogLevelWarn AMLogLevel = 2
+	// The error log level.
 	AMLogLevelError AMLogLevel = 3
 )
 

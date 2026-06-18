@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Encapsulates an IEEE 802.11 interface.
+//
 // Interface wraps [raw.CWInterface] with a fluent Go API.
 type Interface struct {
 	inner *raw.CWInterface
@@ -33,7 +35,7 @@ func InterfaceFromID(id objc.ID) *Interface {
 	return &Interface{inner: raw.CWInterfaceFromID(id)}
 }
 
-// @method @param name The name of an available Wi-Fi interface. @abstract Initializes a CWInterface object, binding to the Wi-Fi interface with a specific interface name. @discussion Use +[CWInterface interfaceNames] to get a list of available Wi-Fi interface names. Returns a CWInterface object for the default Wi-Fi interface if no interface name is specified.
+// Convenience method for getting an CWInterface object with the specified name.
 //
 // NewInterfaceWithInterfaceName creates a new [Interface].
 func NewInterfaceWithInterfaceName(name string) *Interface {
@@ -42,21 +44,21 @@ func NewInterfaceWithInterfaceName(name string) *Interface {
 	return &Interface{inner: raw.CWInterfaceFromID(_id)}
 }
 
-// @method @result YES if the Wi-Fi interface is on, NO otherwise. @abstract Indicates the Wi-Fi interface power state. @discussion Returns NO if an error occurs.
+// The interface power state is set to “ON”.
 //
 // PowerOn calls the underlying PowerOn.
 func (x *Interface) PowerOn() bool {
 	return x.inner.PowerOn()
 }
 
-// @method @result An NSSet of CWChannel objects. @abstract Returns the set of channels supported by the Wi-Fi interface for the currently adopted country code. @discussion Returns nil if an error occurs.
+// An array of channels supported by the interface for the active country code.
 //
 // SupportedWLANChannels calls the underlying SupportedWLANChannels.
 func (x *Interface) SupportedWLANChannels() *foundation.NSSet[*raw.CWChannel] {
 	return x.inner.SupportedWLANChannels()
 }
 
-// @method @abstract Returns the current channel of the Wi-Fi interface. @discussion Returns nil if an error occurs.
+// The current channel for the interface.
 //
 // WlanChannel calls the underlying WlanChannel.
 func (x *Interface) WlanChannel() *Channel {
@@ -67,14 +69,14 @@ func (x *Interface) WlanChannel() *Channel {
 	return &Channel{inner: _r}
 }
 
-// @method @abstract Returns the currently active physical layer (PHY) mode of the Wi-Fi interface. @discussion Returns kCWPHYModeNone if an error occurs.
+// The current active PHY modes for the interface.
 //
 // ActivePHYMode calls the underlying ActivePHYMode.
 func (x *Interface) ActivePHYMode() CWPHYMode {
 	return CWPHYMode(x.inner.ActivePHYMode())
 }
 
-// @method @abstract Returns the current service set identifier (SSID) of the Wi-Fi interface, encoded as a string. @discussion Returns nil if an error occurs, or if the interface is not participating in a Wi-Fi network, or if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string. @note SSID information is not available unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
+// The current service set identifier (SSID) for the interface, encoded as a string.
 //
 // Ssid calls the underlying Ssid.
 func (x *Interface) Ssid() string {
@@ -85,14 +87,14 @@ func (x *Interface) Ssid() string {
 	return purego.GoString(_r.Ptr())
 }
 
-// @method @abstract Returns the current service set identifier (SSID) for the interface, encapsulated in an NSData object. @discussion Returns nil if an error occurs, or if the interface is not participating in a Wi-Fi network. @note SSID information is not available unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
+// The current service set identifier (SSID) for the interface, returned as data.
 //
 // SsidData calls the underlying SsidData.
 func (x *Interface) SsidData() *foundation.NSData {
 	return x.inner.SsidData()
 }
 
-// @method @abstract Returns the current basic service set identifier (BSSID) of the Wi-Fi interface, returned as an UTF-8 string. @discussion Returns a UTF-8 string using hexadecimal characters formatted as XX:XX:XX:XX:XX:XX. Returns nil if an error occurred, or if the interface is not participating in a Wi-Fi network. @note BSSID information is not available unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
+// The current basic service set identifier (BSSID) for the interface, returned as a UTF-8 string.
 //
 // Bssid calls the underlying Bssid.
 func (x *Interface) Bssid() string {
@@ -103,35 +105,35 @@ func (x *Interface) Bssid() string {
 	return purego.GoString(_r.Ptr())
 }
 
-// @method @abstract Returns the current received signal strength indication (RSSI) measurement (dBm) for the Wi-Fi interface. @discussion Returns 0 if an error occurs, or if the interface is not participating in a Wi-Fi network.
+// The current aggregate received signal strength indication (RSSI) measurement (dBm) for the interface.
 //
 // RssiValue calls the underlying RssiValue.
 func (x *Interface) RssiValue() int {
 	return x.inner.RssiValue()
 }
 
-// @method @abstract Returns the current noise measurement (dBm) for the Wi-Fi interface. @discussion Returns 0 if an error occurs, or if the interface is not participating in a Wi-Fi network.
+// The current aggregate noise measurement (dBm) for the interface.
 //
 // NoiseMeasurement calls the underlying NoiseMeasurement.
 func (x *Interface) NoiseMeasurement() int {
 	return x.inner.NoiseMeasurement()
 }
 
-// @method @abstract Returns the current security type of the Wi-Fi interface. @discussion Returns kCWSecurityUnknown if an error occurs, or if the interface is not participating in a Wi-Fi network.
+// The current security mode for the interface.
 //
 // Security calls the underlying Security.
 func (x *Interface) Security() CWSecurity {
 	return CWSecurity(x.inner.Security())
 }
 
-// @method @abstract Returns the current transmit rate (Mbps) for the Wi-Fi interface. @discussion Returns 0 if an error occurs, or if the interface is not participating in a Wi-Fi network.
+// The current transmit rate (Mbps) for the interface.
 //
 // TransmitRate calls the underlying TransmitRate.
 func (x *Interface) TransmitRate() float64 {
 	return x.inner.TransmitRate()
 }
 
-// @method @abstract Returns the currently adopted country code (ISO/IEC 3166-1:1997) for the Wi-Fi interface. @discussion Returns nil if an error occurs, or if the Wi-Fi interface is off. @note Country code information is not available unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
+// The current country code (ISO/IEC 3166-1:1997) for the interface.
 //
 // CountryCode calls the underlying CountryCode.
 func (x *Interface) CountryCode() string {
@@ -142,21 +144,21 @@ func (x *Interface) CountryCode() string {
 	return purego.GoString(_r.Ptr())
 }
 
-// @method @abstract Returns the current operating mode for the Wi-Fi interface. @discussion Returns kCWInterfaceModeNone if an error occurs, or if the interface is not participating in a Wi-Fi network.
+// The current mode for the interface.
 //
 // InterfaceMode calls the underlying InterfaceMode.
 func (x *Interface) InterfaceMode() CWInterfaceMode {
 	return CWInterfaceMode(x.inner.InterfaceMode())
 }
 
-// @method @abstract Returns the current transmit power (mW) for the Wi-Fi interface. @discussion Returns 0 if an error occurs.
+// The current transmit power (mW) for the interface.
 //
 // TransmitPower calls the underlying TransmitPower.
 func (x *Interface) TransmitPower() int {
 	return x.inner.TransmitPower()
 }
 
-// @method @abstract Returns the hardware media access control (MAC) address for the Wi-Fi interface, returned as an UTF-8 string. @discussion The standard format for printing a MAC-48 address XX:XX:XX:XX:XX:XX is used to represent the MAC address as a string. Returns nil if an error occurs.
+// The hardware media access control (MAC) address for the interface, returned as a UTF-8 string.
 //
 // HardwareAddress calls the underlying HardwareAddress.
 func (x *Interface) HardwareAddress() string {
@@ -167,21 +169,21 @@ func (x *Interface) HardwareAddress() string {
 	return purego.GoString(_r.Ptr())
 }
 
-// @method @result YES if the corresponding network service is active, NO otherwise. @abstract Indicates the network service state of the Wi-Fi interface. @discussion Returns NO if an error occurs.
+// The interface has its corresponding network service enabled.
 //
 // ServiceActive calls the underlying ServiceActive.
 func (x *Interface) ServiceActive() bool {
 	return x.inner.ServiceActive()
 }
 
-// @method @result An NSSet of CWNetwork objects. @abstract Returns the scan results currently in the scan cache for the Wi-Fi interface. @discussion Returns nil if an error occurs.
+// The networks currently in the scan cache for the WLAN interface.
 //
 // CachedScanResults calls the underlying CachedScanResults.
 func (x *Interface) CachedScanResults() *foundation.NSSet[*raw.CWNetwork] {
 	return x.inner.CachedScanResults()
 }
 
-// @method @abstract Returns the current configuration for the Wi-Fi interface. @discussion Returns nil if an error occurs.
+// The current configuration for the given WLAN interface.
 //
 // Configuration calls the underlying Configuration.
 func (x *Interface) Configuration() *Configuration {
@@ -192,91 +194,91 @@ func (x *Interface) Configuration() *Configuration {
 	return &Configuration{inner: _r}
 }
 
-// @method @param power A BOOL value indicating Wi-Fi power state. Specify YES to turn on the Wi-Fi interface. @param error An NSError object passed by reference, which upon return will contain the error if an error occurs. This parameter is optional. @result Returns YES upon success, or NO if an error occurred. @abstract Sets the Wi-Fi interface power state.
+// Sets the interface power state.
 //
 // SetPowerError calls the underlying SetPowerError.
 func (x *Interface) SetPowerError(power bool) (bool, error) {
 	return x.inner.SetPowerError(power)
 }
 
-// @method @param channel A CWChannel object. @param error An NSError object passed by reference, which upon return will contain the error if an error occurs. This parameter is optional. @result Returns YES upon success, or NO if an error occurred. @abstract Sets the Wi-Fi interface channel. @discussion Setting the channel while the interface is associated to a Wi-Fi network is not permitted.
+// Sets the interface channel.
 //
 // SetWLANChannelError calls the underlying SetWLANChannelError.
 func (x *Interface) SetWLANChannelError(channel *raw.CWChannel) (bool, error) {
 	return x.inner.SetWLANChannelError(channel)
 }
 
-// @method @param key An NSData object containing the pairwise master key (PMK). Passing nil clear the PMK for the Wi-Fi interface. @param error An NSError object passed by reference, which upon return will contain the error if an error occurs. This parameter is optional. @result Returns YES upon success, or NO if an error occurred. @abstract Sets the Wi-Fi interface pairwise master key (PMK). @discussion The specified key must be exactly 32 octets.
+// Sets the interface pairwise primary key (PMK).
 //
 // SetPairwiseMasterKeyError calls the underlying SetPairwiseMasterKeyError.
 func (x *Interface) SetPairwiseMasterKeyError(key *foundation.NSData) (bool, error) {
 	return x.inner.SetPairwiseMasterKeyError(key)
 }
 
-// @method @param key An NSData object containing the WEP key. Passing nil clears the WEP key for the Wi-Fi interface. @param flags A bitmask indicating which CWCipherKeyFlags to use for the specified WEP key. @param index An NSInteger indicating which default key index (1-4) to use for the specified key. @param error An NSError object passed by reference, which upon return will contain the error if an error occurs. This parameter is optional. @result Returns YES upon success, or NO if an error occurred. @abstract Sets the Wi-Fi interface WEP key.
+// Sets the interface WEP key.
 //
 // SetWEPKeyFlagsIndexError calls the underlying SetWEPKeyFlagsIndexError.
 func (x *Interface) SetWEPKeyFlagsIndexError(key *foundation.NSData, flags CWCipherKeyFlags, index int) (bool, error) {
 	return x.inner.SetWEPKeyFlagsIndexError(key, raw.CWCipherKeyFlags(flags), index)
 }
 
-// @method @param ssid Probe request SSID. Pass an SSID to perform a directed scan for hidden Wi-Fi networks. This parameter is optional. @param error An NSError object passed by reference, which upon return will contain the error if an error occurs. This parameter is optional. @result An NSSet of CWNetwork objects, or nil if an error occurs. @abstract Performs a scan for Wi-Fi networks and returns scan results to the caller. @discussion This method will block for the duration of the scan. @note Returned networks will not contain BSSID information unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
+// Scans for networks.
 //
 // ScanForNetworksWithSSIDError calls the underlying ScanForNetworksWithSSIDError.
 func (x *Interface) ScanForNetworksWithSSIDError(ssid *foundation.NSData) (*foundation.NSSet[*raw.CWNetwork], error) {
 	return x.inner.ScanForNetworksWithSSIDError(ssid)
 }
 
-// @method @param ssid Probe request SSID. Pass an SSID to perform a directed scan for hidden Wi-Fi networks. This parameter is optional. @param includeHidden Indicate whether or not hidden networks should not be filtered from the returned scan results. @param error An NSError object passed by reference, which upon return will contain the error if an error occurs. This parameter is optional. @result An NSSet of CWNetwork objects, or nil if an error occurs. @abstract Performs a scan for Wi-Fi networks and returns scan results to the caller. @discussion This method will block for the duration of the scan. @note Returned networks will not contain BSSID information unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
+// Scans for networks with the SSID you specify, optionally including hidden networks.
 //
 // ScanForNetworksWithSSIDIncludeHiddenError calls the underlying ScanForNetworksWithSSIDIncludeHiddenError.
 func (x *Interface) ScanForNetworksWithSSIDIncludeHiddenError(ssid *foundation.NSData, includeHidden bool) (*foundation.NSSet[*raw.CWNetwork], error) {
 	return x.inner.ScanForNetworksWithSSIDIncludeHiddenError(ssid, includeHidden)
 }
 
-// @method @param networkName Probe request SSID, encoded as an UTF-8 string. Pass a networkName to perform a directed scan for hidden Wi-Fi networks. This parameter is optional. @param error An NSError object passed by reference, which upon return will contain the error if an error occurs. This parameter is optional. @result An NSSet of CWNetwork objects, or nil if an error occurs. @abstract Performs a scan for Wi-Fi networks and returns scan results to the caller. @discussion This method will block for the duration of the scan. @note Returned networks will not contain BSSID information unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
+// Scans for networks.
 //
 // ScanForNetworksWithNameError calls the underlying ScanForNetworksWithNameError.
 func (x *Interface) ScanForNetworksWithNameError(networkName string) (*foundation.NSSet[*raw.CWNetwork], error) {
 	return x.inner.ScanForNetworksWithNameError(foundation.NSStringStringWithUTF8String(networkName))
 }
 
-// @method @param networkName Probe request SSID, encoded as an UTF-8 string. Pass a networkName to perform a directed scan for hidden Wi-Fi networks. This parameter is optional. @param includeHidden Indicate whether or not hidden networks should not be filtered from the returned scan results. @param error An NSError object passed by reference, which upon return will contain the error if an error occurs. This parameter is optional. @result An NSSet of CWNetwork objects, or nil if an error occurs. @abstract Performs a scan for Wi-Fi networks and returns scan results to the caller. @discussion This method will block for the duration of the scan. @note Returned networks will not contain BSSID information unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
+// Scans for networks with the name you specify, optionally including hidden networks.
 //
 // ScanForNetworksWithNameIncludeHiddenError calls the underlying ScanForNetworksWithNameIncludeHiddenError.
 func (x *Interface) ScanForNetworksWithNameIncludeHiddenError(networkName string, includeHidden bool) (*foundation.NSSet[*raw.CWNetwork], error) {
 	return x.inner.ScanForNetworksWithNameIncludeHiddenError(foundation.NSStringStringWithUTF8String(networkName), includeHidden)
 }
 
-// @method @param network The network to which the Wi-Fi interface will associate. @param password The network passphrase or key. Required for association to WEP, WPA Personal, and WPA2 Personal networks. @param error An NSError object passed by reference, which upon return will contain the error if an error occurs. This parameter is optional. @result Returns YES upon success, or NO if an error occurred. @abstract Associates to a W-Fi network using the specified passphrase. @discussion This method will block for the duration of the association.
+// Associates to a given network using the given network passphrase.
 //
 // AssociateToNetworkPasswordError calls the underlying AssociateToNetworkPasswordError.
 func (x *Interface) AssociateToNetworkPasswordError(network *raw.CWNetwork, password string) (bool, error) {
 	return x.inner.AssociateToNetworkPasswordError(network, foundation.NSStringStringWithUTF8String(password))
 }
 
-// @method @abstract Disassociates from the current Wi-Fi network. @discussion
+// Disassociates from the current network.
 //
 // Disassociate calls the underlying Disassociate.
 func (x *Interface) Disassociate() {
 	x.inner.Disassociate()
 }
 
-// @method @param network The network to which the Wi-Fi interface will associate. @param username The username to use for 802.1X authentication. @param password The password to use for 802.1X authentication. @param identity The identity to use for IEEE 802.1X authentication. Holds the corresponding client certificate. @param error An NSError object passed by reference, which upon return will contain the error if an error occurs. This parameter is optional. @result Returns YES upon success, or NO if an error occurred. @abstract Associates to an enterprise W-Fi network using the specified 802.1X credentials. @discussion This method will block for the duration of the association.
+// Connects to the given enterprise network.
 //
 // AssociateToEnterpriseNetworkIdentityUsernamePasswordError calls the underlying AssociateToEnterpriseNetworkIdentityUsernamePasswordError.
 func (x *Interface) AssociateToEnterpriseNetworkIdentityUsernamePasswordError(network *raw.CWNetwork, identity unsafe.Pointer, username string, password string) (bool, error) {
 	return x.inner.AssociateToEnterpriseNetworkIdentityUsernamePasswordError(network, identity, foundation.NSStringStringWithUTF8String(username), foundation.NSStringStringWithUTF8String(password))
 }
 
-// @method @param ssidData The SSID to use for the IBSS network. Pass nil to use the machine name as the IBSS network name. @param security The CWIBSSModeSecurity type. @param channel The channel on which the IBSS network will be created. @param password The password to be used. This paramter is required for kCWIBSSModeSecurityWEP40 or kCWIBSSModeSecurityWEP104 security types. @param error An NSError object passed by reference, which upon return will contain the error if an error occurs. This parameter is optional. @result Returns YES upon success, or NO if an error occurred. @abstract Creates a computer-to-computer (IBSS) network.
+// Creates a computer-to-computer (ad-hoc) network with the given network name, security type, and password on the specified channel.
 //
 // StartIBSSModeWithSSIDSecurityChannelPasswordError calls the underlying StartIBSSModeWithSSIDSecurityChannelPasswordError.
 func (x *Interface) StartIBSSModeWithSSIDSecurityChannelPasswordError(ssidData *foundation.NSData, security CWIBSSModeSecurity, channel uint, password string) (bool, error) {
 	return x.inner.StartIBSSModeWithSSIDSecurityChannelPasswordError(ssidData, raw.CWIBSSModeSecurity(security), channel, foundation.NSStringStringWithUTF8String(password))
 }
 
-// @method @param configuration The Wi-Fi configuration to commit to disk. @param authorization An SFAuthorization object to use for authorizing the commit. This parameter is optional. @param error An NSError object passed by reference, which upon return will contain the error if an error occurs. This parameter is optional. @result Returns YES upon success, or NO if an error occurred. @abstract Commits a CWConfiguration for the given Wi-Fi interface. @discussion This method requires the caller have root privileges or obtain administrator privileges using the SFAuthorization API.
+// Commit a configuration for the given WLAN interface.
 //
 // CommitConfigurationAuthorizationError calls the underlying CommitConfigurationAuthorizationError.
 func (x *Interface) CommitConfigurationAuthorizationError(configuration *raw.CWConfiguration, authorization *securityfoundation.SFAuthorization) (bool, error) {

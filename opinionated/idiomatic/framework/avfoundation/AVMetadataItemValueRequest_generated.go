@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An object that responds to a request to load the value of a metadata item.
+//
 // MetadataItemValueRequest wraps [raw.AVMetadataItemValueRequest] with a fluent Go API.
 type MetadataItemValueRequest struct {
 	inner *raw.AVMetadataItemValueRequest
@@ -36,14 +38,14 @@ func NewMetadataItemValueRequest() *MetadataItemValueRequest {
 	return &MetadataItemValueRequest{inner: raw.AVMetadataItemValueRequestFromID(_id)}
 }
 
-// @method			respondWithValue: @abstract		Allows you to respond to an AVMetadataItemValueRequest by providing a value. @param			value The value of the AVMetadataItem.
+// Returns the metadata item’s value.
 //
 // RespondWithValue calls the underlying RespondWithValue.
 func (x *MetadataItemValueRequest) RespondWithValue(value objc.ID) {
 	x.inner.RespondWithValue(value)
 }
 
-// @method			respondWithError: @abstract		Allows you to respond to an AVMetadataItemValueRequest in the case of failure. @param			error An instance of NSError that describes a failure encountered while loading the value of an AVMetadataItem.
+// Returns an error when the system fails to load the value.
 //
 // RespondWithError calls the underlying RespondWithError.
 func (x *MetadataItemValueRequest) RespondWithError(error_ unsafe.Pointer) {

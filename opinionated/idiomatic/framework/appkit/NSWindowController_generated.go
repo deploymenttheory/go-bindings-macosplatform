@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A controller that manages a window, usually a window stored in a nib file.
+//
 // WindowController wraps [raw.NSWindowController] with a fluent Go API.
 type WindowController struct {
 	inner *raw.NSWindowController
@@ -32,6 +34,8 @@ func WindowControllerFromID(id objc.ID) *WindowController {
 	return &WindowController{inner: raw.NSWindowControllerFromID(id)}
 }
 
+// Returns a window controller initialized with a given window.
+//
 // NewWindowControllerWithWindow creates a new [WindowController].
 func NewWindowControllerWithWindow(window *raw.NSWindow) *WindowController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWindowController")), objc.RegisterName("alloc"))
@@ -46,6 +50,8 @@ func NewWindowControllerWithCoder(coder *foundation.NSCoder) *WindowController {
 	return &WindowController{inner: raw.NSWindowControllerFromID(_id)}
 }
 
+// Returns a window controller initialized with a nib file.
+//
 // NewWindowControllerWithWindowNibName creates a new [WindowController].
 func NewWindowControllerWithWindowNibName(windowNibName *foundation.NSString) *WindowController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWindowController")), objc.RegisterName("alloc"))
@@ -53,6 +59,8 @@ func NewWindowControllerWithWindowNibName(windowNibName *foundation.NSString) *W
 	return &WindowController{inner: raw.NSWindowControllerFromID(_id)}
 }
 
+// Returns a window controller initialized with a nib file and a specified owner for that nib file.
+//
 // NewWindowControllerWithWindowNibNameOwner creates a new [WindowController].
 func NewWindowControllerWithWindowNibNameOwner(windowNibName *foundation.NSString, owner objc.ID) *WindowController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWindowController")), objc.RegisterName("alloc"))
@@ -60,6 +68,8 @@ func NewWindowControllerWithWindowNibNameOwner(windowNibName *foundation.NSStrin
 	return &WindowController{inner: raw.NSWindowControllerFromID(_id)}
 }
 
+// Returns a window controller initialized with a nib file at an absolute path and a specified owner.
+//
 // NewWindowControllerWithWindowNibPathOwner creates a new [WindowController].
 func NewWindowControllerWithWindowNibPathOwner(windowNibPath string, owner objc.ID) *WindowController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWindowController")), objc.RegisterName("alloc"))
@@ -67,76 +77,102 @@ func NewWindowControllerWithWindowNibPathOwner(windowNibPath string, owner objc.
 	return &WindowController{inner: raw.NSWindowControllerFromID(_id)}
 }
 
+// The name under which the frame rectangle of the window owned by the receiver is stored in the defaults database.
+//
 // WithWindowFrameAutosaveName sets the windowFrameAutosaveName property and returns the receiver for chaining.
 func (x *WindowController) WithWindowFrameAutosaveName(windowFrameAutosaveName *foundation.NSString) *WindowController {
 	x.inner.SetWindowFrameAutosaveName(windowFrameAutosaveName)
 	return x
 }
 
+// A Boolean value that indicates whether the window will cascade in relation to other document windows when it is displayed.
+//
 // WithShouldCascadeWindows sets the shouldCascadeWindows property and returns the receiver for chaining.
 func (x *WindowController) WithShouldCascadeWindows(shouldCascadeWindows bool) *WindowController {
 	x.inner.SetShouldCascadeWindows(shouldCascadeWindows)
 	return x
 }
 
+// The document associated with the window controller.
+//
 // WithDocument sets the document property and returns the receiver for chaining.
 func (x *WindowController) WithDocument(document objc.ID) *WindowController {
 	x.inner.SetDocument(document)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver necessarily closes the associated document when the window it manages is closed.
+//
 // WithShouldCloseDocument sets the shouldCloseDocument property and returns the receiver for chaining.
 func (x *WindowController) WithShouldCloseDocument(shouldCloseDocument bool) *WindowController {
 	x.inner.SetShouldCloseDocument(shouldCloseDocument)
 	return x
 }
 
+// The view controller for the window’s content view.
+//
 // WithContentViewController sets the contentViewController property and returns the receiver for chaining.
 func (x *WindowController) WithContentViewController(contentViewController ViewControllerProvider) *WindowController {
 	x.inner.SetContentViewController(contentViewController.asViewController())
 	return x
 }
 
+// The window owned by the receiver.
+//
 // WithWindow sets the window property and returns the receiver for chaining.
 func (x *WindowController) WithWindow(window WindowProvider) *WindowController {
 	x.inner.SetWindow(window.asWindow())
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *WindowController) WithNextResponder(nextResponder ResponderProvider) *WindowController {
 	x.inner.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *WindowController) WithMenu(menu *Menu) *WindowController {
 	x.inner.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *WindowController) WithUserActivity(userActivity *foundation.NSUserActivity) *WindowController {
 	x.inner.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *WindowController) WithTouchBar(touchBar *TouchBar) *WindowController {
 	x.inner.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Sets the document edited flag for the window controller.
+//
 // SetDocumentEdited calls the underlying SetDocumentEdited.
 func (x *WindowController) SetDocumentEdited(dirtyFlag bool) {
 	x.inner.SetDocumentEdited(dirtyFlag)
 }
 
+// Synchronizes the displayed window title and the represented filename with the information in the associated document.
+//
 // SynchronizeWindowTitleWithDocumentName calls the underlying SynchronizeWindowTitleWithDocumentName.
 func (x *WindowController) SynchronizeWindowTitleWithDocumentName() {
 	x.inner.SynchronizeWindowTitleWithDocumentName()
 }
 
+// Returns the window title to be used for a given document display name.
+//
 // WindowTitleForDocumentDisplayName calls the underlying WindowTitleForDocumentDisplayName.
 func (x *WindowController) WindowTitleForDocumentDisplayName(displayName string) string {
 	_r := x.inner.WindowTitleForDocumentDisplayName(foundation.NSStringStringWithUTF8String(displayName))
@@ -146,26 +182,36 @@ func (x *WindowController) WindowTitleForDocumentDisplayName(displayName string)
 	return purego.GoString(_r.Ptr())
 }
 
+// Sent before the window owned by the receiver is loaded.
+//
 // WindowWillLoad calls the underlying WindowWillLoad.
 func (x *WindowController) WindowWillLoad() {
 	x.inner.WindowWillLoad()
 }
 
+// Sent after the window owned by the receiver has been loaded.
+//
 // WindowDidLoad calls the underlying WindowDidLoad.
 func (x *WindowController) WindowDidLoad() {
 	x.inner.WindowDidLoad()
 }
 
+// Loads the receiver’s window from the nib file.
+//
 // LoadWindow calls the underlying LoadWindow.
 func (x *WindowController) LoadWindow() {
 	x.inner.LoadWindow()
 }
 
+// Closes the window if it was loaded.
+//
 // Close calls the underlying Close.
 func (x *WindowController) Close() {
 	x.inner.Close()
 }
 
+// Displays the window associated with the receiver.
+//
 // ShowWindow calls the underlying ShowWindow.
 func (x *WindowController) ShowWindow(sender objc.ID) {
 	x.inner.ShowWindow(sender)
@@ -299,6 +345,8 @@ func (x *WindowController) Storyboard() *Storyboard {
 	return &Storyboard{inner: _r}
 }
 
+// Dismisses the window controller.
+//
 // DismissController calls the underlying DismissController.
 func (x *WindowController) DismissController(sender objc.ID) {
 	x.inner.DismissController(sender)

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that manages the timing and progress of animations in the user interface.
+//
 // Animation wraps [raw.NSAnimation] with a fluent Go API.
 type Animation struct {
 	inner *raw.NSAnimation
@@ -32,6 +34,8 @@ func AnimationFromID(id objc.ID) *Animation {
 	return &Animation{inner: raw.NSAnimationFromID(id)}
 }
 
+// Returns an NSAnimation object initialized with the specified duration and animation-curve values.
+//
 // NewAnimationWithDurationAnimationCurve creates a new [Animation].
 func NewAnimationWithDurationAnimationCurve(duration float64, animationCurve NSAnimationCurve) *Animation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAnimation")), objc.RegisterName("alloc"))
@@ -46,42 +50,56 @@ func NewAnimationWithCoder(coder *foundation.NSCoder) *Animation {
 	return &Animation{inner: raw.NSAnimationFromID(_id)}
 }
 
+// The current progress of the animation.
+//
 // WithCurrentProgress sets the currentProgress property and returns the receiver for chaining.
 func (x *Animation) WithCurrentProgress(currentProgress float32) *Animation {
 	x.inner.SetCurrentProgress(currentProgress)
 	return x
 }
 
+// The duration of the animation, in seconds.
+//
 // WithDuration sets the duration property and returns the receiver for chaining.
 func (x *Animation) WithDuration(duration float64) *Animation {
 	x.inner.SetDuration(duration)
 	return x
 }
 
+// The blocking mode of the animation.
+//
 // WithAnimationBlockingMode sets the animationBlockingMode property and returns the receiver for chaining.
 func (x *Animation) WithAnimationBlockingMode(animationBlockingMode NSAnimationBlockingMode) *Animation {
 	x.inner.SetAnimationBlockingMode(raw.NSAnimationBlockingMode(animationBlockingMode))
 	return x
 }
 
+// The number of frame updates per second to generate for the animation.
+//
 // WithFrameRate sets the frameRate property and returns the receiver for chaining.
 func (x *Animation) WithFrameRate(frameRate float32) *Animation {
 	x.inner.SetFrameRate(frameRate)
 	return x
 }
 
+// The timing curve for the animation.
+//
 // WithAnimationCurve sets the animationCurve property and returns the receiver for chaining.
 func (x *Animation) WithAnimationCurve(animationCurve NSAnimationCurve) *Animation {
 	x.inner.SetAnimationCurve(raw.NSAnimationCurve(animationCurve))
 	return x
 }
 
+// The animation delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Animation) WithDelegate(delegate raw.NSAnimationDelegate) *Animation {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// An array of floating-point numbers representing current progress marks.
+//
 // WithProgressMarks sets the collection, converting the Go slice to an NSArray.
 func (x *Animation) WithProgressMarks(items ...*foundation.NSNumber) *Animation {
 	if len(items) == 0 {
@@ -100,41 +118,57 @@ func (x *Animation) WithProgressMarks(items ...*foundation.NSNumber) *Animation 
 	return x
 }
 
+// Starts the animation represented by the receiver.
+//
 // StartAnimation calls the underlying StartAnimation.
 func (x *Animation) StartAnimation() {
 	x.inner.StartAnimation()
 }
 
+// Stops the animation represented by the receiver.
+//
 // StopAnimation calls the underlying StopAnimation.
 func (x *Animation) StopAnimation() {
 	x.inner.StopAnimation()
 }
 
+// Adds the progress mark to the receiver.
+//
 // AddProgressMark calls the underlying AddProgressMark.
 func (x *Animation) AddProgressMark(progressMark float32) {
 	x.inner.AddProgressMark(progressMark)
 }
 
+// Removes progress mark from the receiver.
+//
 // RemoveProgressMark calls the underlying RemoveProgressMark.
 func (x *Animation) RemoveProgressMark(progressMark float32) {
 	x.inner.RemoveProgressMark(progressMark)
 }
 
+// Starts running the animation represented by the receiver when another animation reaches a specific progress mark.
+//
 // StartWhenAnimationReachesProgress calls the underlying StartWhenAnimationReachesProgress.
 func (x *Animation) StartWhenAnimationReachesProgress(animation *raw.NSAnimation, startProgress float32) {
 	x.inner.StartWhenAnimationReachesProgress(animation, startProgress)
 }
 
+// Stops running the animation represented by the receiver when another animation reaches a specific progress mark.
+//
 // StopWhenAnimationReachesProgress calls the underlying StopWhenAnimationReachesProgress.
 func (x *Animation) StopWhenAnimationReachesProgress(animation *raw.NSAnimation, stopProgress float32) {
 	x.inner.StopWhenAnimationReachesProgress(animation, stopProgress)
 }
 
+// Clears linkage to another animation that causes the receiver to start.
+//
 // ClearStartAnimation calls the underlying ClearStartAnimation.
 func (x *Animation) ClearStartAnimation() {
 	x.inner.ClearStartAnimation()
 }
 
+// Clears linkage to another animation that causes the receiver to stop.
+//
 // ClearStopAnimation calls the underlying ClearStopAnimation.
 func (x *Animation) ClearStopAnimation() {
 	x.inner.ClearStopAnimation()

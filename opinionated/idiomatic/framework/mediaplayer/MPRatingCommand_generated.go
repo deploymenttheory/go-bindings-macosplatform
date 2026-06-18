@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides a detailed rating for the playing item.
+//
 // RatingCommand wraps [raw.MPRatingCommand] with a fluent Go API.
 type RatingCommand struct {
 	inner *raw.MPRatingCommand
@@ -35,7 +37,7 @@ func NewRatingCommand() *RatingCommand {
 	return &RatingCommand{inner: raw.MPRatingCommandFromID(_id)}
 }
 
-// Minimum rating for the command.
+// The minimum rating for a command.
 //
 // WithMinimumRating sets the minimumRating property and returns the receiver for chaining.
 func (x *RatingCommand) WithMinimumRating(minimumRating float32) *RatingCommand {
@@ -43,7 +45,7 @@ func (x *RatingCommand) WithMinimumRating(minimumRating float32) *RatingCommand 
 	return x
 }
 
-// Maximum rating for the command.
+// The maximum rating for a command.
 //
 // WithMaximumRating sets the maximumRating property and returns the receiver for chaining.
 func (x *RatingCommand) WithMaximumRating(maximumRating float32) *RatingCommand {
@@ -51,7 +53,7 @@ func (x *RatingCommand) WithMaximumRating(maximumRating float32) *RatingCommand 
 	return x
 }
 
-// Whether a button (for example) should be enabled and tappable for this particular command.
+// A Boolean value that indicates whether a user can interact with the displayed element.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *RatingCommand) WithEnabled(enabled bool) *RatingCommand {

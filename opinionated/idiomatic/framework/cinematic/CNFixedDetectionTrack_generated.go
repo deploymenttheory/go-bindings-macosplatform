@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A continuous detection track representing focus at a fixed disparity.
+// An object representing the fixed detection track.
 //
 // FixedDetectionTrack wraps [raw.CNFixedDetectionTrack] with a fluent Go API.
 type FixedDetectionTrack struct {

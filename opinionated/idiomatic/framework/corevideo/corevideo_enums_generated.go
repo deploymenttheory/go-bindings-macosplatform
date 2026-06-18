@@ -9,11 +9,14 @@ import (
 	"strings"
 )
 
+// The propagation modes of a Core Video buffer attachment.
 type CVAttachmentMode int64
 
 const (
+	// Indicates to not propagate the attachment.
 	KCVAttachmentMode_ShouldNotPropagate CVAttachmentMode = 0
-	KCVAttachmentMode_ShouldPropagate    CVAttachmentMode = 1
+	// Indicates to copy the attachment.
+	KCVAttachmentMode_ShouldPropagate CVAttachmentMode = 1
 )
 
 func (e CVAttachmentMode) String() string {
@@ -27,10 +30,12 @@ func (e CVAttachmentMode) String() string {
 	}
 }
 
+// The flags to pass to CVPixelBufferLockBaseAddress and CVPixelBufferUnlockBaseAddress.
 // Bitmask — values may be combined with |.
 type CVPixelBufferLockFlags int64
 
 const (
+	// A read-only buffer.
 	KCVPixelBufferLock_ReadOnly CVPixelBufferLockFlags = 1
 )
 
@@ -45,10 +50,12 @@ func (e CVPixelBufferLockFlags) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The flags to pass to flush the pool.
 // Bitmask — values may be combined with |.
 type CVPixelBufferPoolFlushFlags int64
 
 const (
+	// The value to pass to flush all unused buffers regardless of age.
 	KCVPixelBufferPoolFlushExcessBuffers CVPixelBufferPoolFlushFlags = 1
 )
 

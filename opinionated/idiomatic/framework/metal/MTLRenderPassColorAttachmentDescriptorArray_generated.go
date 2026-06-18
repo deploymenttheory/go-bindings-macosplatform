@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An array of render pass color attachment descriptor objects.
+//
 // RenderPassColorAttachmentDescriptorArray wraps [raw.MTLRenderPassColorAttachmentDescriptorArray] with a fluent Go API.
 type RenderPassColorAttachmentDescriptorArray struct {
 	inner *raw.MTLRenderPassColorAttachmentDescriptorArray
@@ -37,6 +39,8 @@ func NewRenderPassColorAttachmentDescriptorArray() *RenderPassColorAttachmentDes
 	return &RenderPassColorAttachmentDescriptorArray{inner: raw.MTLRenderPassColorAttachmentDescriptorArrayFromID(_id)}
 }
 
+// Returns the descriptor object for the specified color attachment.
+//
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *RenderPassColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *RenderPassColorAttachmentDescriptor {
 	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
@@ -46,6 +50,8 @@ func (x *RenderPassColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(atta
 	return &RenderPassColorAttachmentDescriptor{inner: _r}
 }
 
+// Sets the descriptor for the specified color attachment.
+//
 // SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
 func (x *RenderPassColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLRenderPassColorAttachmentDescriptor, attachmentIndex uint) {
 	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)

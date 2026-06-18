@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that outputs video frames from a player item.
+//
 // PlayerItemVideoOutput wraps [raw.AVPlayerItemVideoOutput] with a fluent Go API.
 type PlayerItemVideoOutput struct {
 	inner *raw.AVPlayerItemVideoOutput
@@ -32,6 +34,8 @@ func PlayerItemVideoOutputFromID(id objc.ID) *PlayerItemVideoOutput {
 	return &PlayerItemVideoOutput{inner: raw.AVPlayerItemVideoOutputFromID(id)}
 }
 
+// Creates a video output object using the specified pixel buffer attributes.
+//
 // NewPlayerItemVideoOutputWithPixelBufferAttributes creates a new [PlayerItemVideoOutput].
 func NewPlayerItemVideoOutputWithPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *PlayerItemVideoOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItemVideoOutput")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewPlayerItemVideoOutputWithPixelBufferAttributes(pixelBufferAttributes *fo
 	return &PlayerItemVideoOutput{inner: raw.AVPlayerItemVideoOutputFromID(_id)}
 }
 
+// Creates a video output object initialized with the specified output settings.
+//
 // NewPlayerItemVideoOutputWithOutputSettings creates a new [PlayerItemVideoOutput].
 func NewPlayerItemVideoOutputWithOutputSettings(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *PlayerItemVideoOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItemVideoOutput")), objc.RegisterName("alloc"))
@@ -46,7 +52,7 @@ func NewPlayerItemVideoOutputWithOutputSettings(outputSettings *foundation.NSDic
 	return &PlayerItemVideoOutput{inner: raw.AVPlayerItemVideoOutputFromID(_id)}
 }
 
-// @property		suppressesPlayerRendering @abstract		Indicates whether the output, when added to an AVPlayerItem, will be used in addition to normal rendering of media data by the player or instead of normal rendering. @discussion The default value is NO, indicating that the output will be used in addition to normal rendering. If you want to render the media data provided by the output yourself instead of allowing it to be rendered as in normally would be by AVPlayer, set suppressesPlayerRendering to YES. Whenever any output is added to an AVPlayerItem that has suppressesPlayerRendering set to YES, the media data supplied to the output will not be rendered by AVPlayer. Other media data associated with the item but not provided to such an output is not affected. For example, if an output of class AVPlayerItemVideoOutput with a value of YES for suppressesPlayerRendering is added to an AVPlayerItem, video media for that item will not be rendered by the AVPlayer, while audio media, subtitle media, and other kinds of media, if present, will be rendered.
+// A Boolean value that indicates whether the player object renders the receiver’s output.
 //
 // WithSuppressesPlayerRendering sets the suppressesPlayerRendering property and returns the receiver for chaining.
 func (x *PlayerItemVideoOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemVideoOutput {
@@ -54,21 +60,29 @@ func (x *PlayerItemVideoOutput) WithSuppressesPlayerRendering(suppressesPlayerRe
 	return x
 }
 
+// Returns a Boolean value that indicates whether video output is available for the specified item time.
+//
 // HasNewPixelBufferForItemTime calls the underlying HasNewPixelBufferForItemTime.
 func (x *PlayerItemVideoOutput) HasNewPixelBufferForItemTime(itemTime coremedia.CMTime) bool {
 	return x.inner.HasNewPixelBufferForItemTime(itemTime)
 }
 
+// Retrieves an image that is appropriate for display at the specified item time, and marks the image as acquired.
+//
 // CopyPixelBufferForItemTimeItemTimeForDisplay calls the underlying CopyPixelBufferForItemTimeItemTimeForDisplay.
 func (x *PlayerItemVideoOutput) CopyPixelBufferForItemTimeItemTimeForDisplay(itemTime coremedia.CMTime, outItemTimeForDisplay *coremedia.CMTime) unsafe.Pointer {
 	return x.inner.CopyPixelBufferForItemTimeItemTimeForDisplay(itemTime, outItemTimeForDisplay)
 }
 
+// Sets the delegate and dispatch queue for the receiver.
+//
 // SetDelegateQueue calls the underlying SetDelegateQueue.
 func (x *PlayerItemVideoOutput) SetDelegateQueue(delegate raw.AVPlayerItemOutputPullDelegate, delegateQueue *foundation.NSObject) {
 	x.inner.SetDelegateQueue(delegate, delegateQueue)
 }
 
+// Tells the receiver that the video out put client is entering a quiescent state.
+//
 // RequestNotificationOfMediaDataChangeWithAdvanceInterval calls the underlying RequestNotificationOfMediaDataChangeWithAdvanceInterval.
 func (x *PlayerItemVideoOutput) RequestNotificationOfMediaDataChangeWithAdvanceInterval(interval float64) {
 	x.inner.RequestNotificationOfMediaDataChangeWithAdvanceInterval(interval)

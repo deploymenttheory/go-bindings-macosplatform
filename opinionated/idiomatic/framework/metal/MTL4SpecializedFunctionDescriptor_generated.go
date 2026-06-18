@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Groups together properties to configure and create a specialized function by passing it to a factory method.
+//
 // MTL4SpecializedFunctionDescriptor wraps [raw.MTL4SpecializedFunctionDescriptor] with a fluent Go API.
 type MTL4SpecializedFunctionDescriptor struct {
 	inner *raw.MTL4SpecializedFunctionDescriptor

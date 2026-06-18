@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A group of inputs with tracks that are mutually exclusive to each other for playback or processing.
+//
 // AssetWriterInputGroup wraps [raw.AVAssetWriterInputGroup] with a fluent Go API.
 type AssetWriterInputGroup struct {
 	inner *raw.AVAssetWriterInputGroup
@@ -31,6 +33,8 @@ func AssetWriterInputGroupFromID(id objc.ID) *AssetWriterInputGroup {
 	return &AssetWriterInputGroup{inner: raw.AVAssetWriterInputGroupFromID(id)}
 }
 
+// Creates a group for the asset writer inputs.
+//
 // NewAssetWriterInputGroupWithInputsDefaultInput creates a new [AssetWriterInputGroup].
 func NewAssetWriterInputGroupWithInputsDefaultInput(inputs *foundation.NSArray[*raw.AVAssetWriterInput], defaultInput *raw.AVAssetWriterInput) *AssetWriterInputGroup {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetWriterInputGroup")), objc.RegisterName("alloc"))

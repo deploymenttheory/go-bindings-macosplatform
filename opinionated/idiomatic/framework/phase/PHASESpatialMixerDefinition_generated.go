@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An audio-layering object that produces environmental effects and plays sound with a 3D position and orientation.
+//
 // SpatialMixerDefinition wraps [raw.PHASESpatialMixerDefinition] with a fluent Go API.
 type SpatialMixerDefinition struct {
 	inner *raw.PHASESpatialMixerDefinition
@@ -30,7 +32,7 @@ func SpatialMixerDefinitionFromID(id objc.ID) *SpatialMixerDefinition {
 	return &SpatialMixerDefinition{inner: raw.PHASESpatialMixerDefinitionFromID(id)}
 }
 
-// @method initWithSpatialPipeline @abstract Create a new PHASESpatialMixerDefinition @param spatialPipeline A spatial pipeline. @return A new PHASESpatialMixerDefinition object
+// Creates a mixer with the designated spatial pipeline.
 //
 // NewSpatialMixerDefinitionWithSpatialPipeline creates a new [SpatialMixerDefinition].
 func NewSpatialMixerDefinitionWithSpatialPipeline(spatialPipeline *raw.PHASESpatialPipeline) *SpatialMixerDefinition {
@@ -39,7 +41,7 @@ func NewSpatialMixerDefinitionWithSpatialPipeline(spatialPipeline *raw.PHASESpat
 	return &SpatialMixerDefinition{inner: raw.PHASESpatialMixerDefinitionFromID(_id)}
 }
 
-// @method initWithSpatialPipeline:identifier @abstract Create a new PHASESpatialMixerDefinition @param spatialPipeline A spatial pipeline. @param identifier An optional custom identifier to give to this object @return A new PHASESpatialMixerDefinition object
+// Creates a named mixer with the designated spatial pipeline.
 //
 // NewSpatialMixerDefinitionWithSpatialPipelineIdentifier creates a new [SpatialMixerDefinition].
 func NewSpatialMixerDefinitionWithSpatialPipelineIdentifier(spatialPipeline *raw.PHASESpatialPipeline, identifier string) *SpatialMixerDefinition {
@@ -48,7 +50,7 @@ func NewSpatialMixerDefinitionWithSpatialPipelineIdentifier(spatialPipeline *raw
 	return &SpatialMixerDefinition{inner: raw.PHASESpatialMixerDefinitionFromID(_id)}
 }
 
-// @property distanceModelParameters @abstract Distance model parameters (optional).
+// An effect that changes sound as it carries over a distance.
 //
 // WithDistanceModelParameters sets the distanceModelParameters property and returns the receiver for chaining.
 func (x *SpatialMixerDefinition) WithDistanceModelParameters(distanceModelParameters DistanceModelParametersProvider) *SpatialMixerDefinition {
@@ -56,7 +58,7 @@ func (x *SpatialMixerDefinition) WithDistanceModelParameters(distanceModelParame
 	return x
 }
 
-// @property listenerDirectivityModelParameters @abstract Listener directivity model parameters (optional).
+// A data set that determines how well the listener hears depending on its direction relative to a sound source.
 //
 // WithListenerDirectivityModelParameters sets the listenerDirectivityModelParameters property and returns the receiver for chaining.
 func (x *SpatialMixerDefinition) WithListenerDirectivityModelParameters(listenerDirectivityModelParameters DirectivityModelParametersProvider) *SpatialMixerDefinition {
@@ -64,7 +66,7 @@ func (x *SpatialMixerDefinition) WithListenerDirectivityModelParameters(listener
 	return x
 }
 
-// @property sourceDirectivityModelParameters @abstract Source directivity model parameters (optional).
+// A data set that directs sound such that it’s louder when directed at the listener.
 //
 // WithSourceDirectivityModelParameters sets the sourceDirectivityModelParameters property and returns the receiver for chaining.
 func (x *SpatialMixerDefinition) WithSourceDirectivityModelParameters(sourceDirectivityModelParameters DirectivityModelParametersProvider) *SpatialMixerDefinition {
@@ -72,7 +74,7 @@ func (x *SpatialMixerDefinition) WithSourceDirectivityModelParameters(sourceDire
 	return x
 }
 
-// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
+// The mixer’s volume.
 //
 // WithGain sets the gain property and returns the receiver for chaining.
 func (x *SpatialMixerDefinition) WithGain(gain float64) *SpatialMixerDefinition {
@@ -80,7 +82,7 @@ func (x *SpatialMixerDefinition) WithGain(gain float64) *SpatialMixerDefinition 
 	return x
 }
 
-// @property gainMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable real-time control of the gain during playback.
+// A template for a parameter that changes the mixer’s volume gradually over a period of time.
 //
 // WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
 func (x *SpatialMixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SpatialMixerDefinition {

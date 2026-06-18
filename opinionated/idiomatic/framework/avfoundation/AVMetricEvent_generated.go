@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A base class that represents a metric event.
+//
 // MetricEvent wraps [raw.AVMetricEvent] with a fluent Go API.
 type MetricEvent struct {
 	inner *raw.AVMetricEvent

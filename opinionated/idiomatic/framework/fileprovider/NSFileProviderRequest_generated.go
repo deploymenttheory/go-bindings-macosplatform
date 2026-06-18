@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides information about the application requesting data from the File Provider extension.
+//
 // FileProviderRequest wraps [raw.NSFileProviderRequest] with a fluent Go API.
 type FileProviderRequest struct {
 	inner *raw.NSFileProviderRequest

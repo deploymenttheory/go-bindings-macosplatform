@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Encapsulates a mutable configuration for an AirPort WLAN interface.
+//
 // MutableConfiguration wraps [raw.CWMutableConfiguration] with a fluent Go API.
 type MutableConfiguration struct {
 	inner *raw.CWMutableConfiguration
@@ -36,7 +38,7 @@ func NewMutableConfiguration() *MutableConfiguration {
 	return &MutableConfiguration{inner: raw.CWMutableConfigurationFromID(_id)}
 }
 
-// @property @abstract Add, remove, or update the preferred networks list.
+// The preferred networks list.
 //
 // WithNetworkProfiles sets the networkProfiles property and returns the receiver for chaining.
 func (x *MutableConfiguration) WithNetworkProfiles(networkProfiles *foundation.NSOrderedSet[*raw.CWNetworkProfile]) *MutableConfiguration {
@@ -44,7 +46,7 @@ func (x *MutableConfiguration) WithNetworkProfiles(networkProfiles *foundation.N
 	return x
 }
 
-// @property @abstract Set the preference to require an administrator password to change networks.
+// A Boolean value that determines whether to require an administrator password to change networks.
 //
 // WithRequireAdministratorForAssociation sets the requireAdministratorForAssociation property and returns the receiver for chaining.
 func (x *MutableConfiguration) WithRequireAdministratorForAssociation(requireAdministratorForAssociation bool) *MutableConfiguration {
@@ -52,7 +54,7 @@ func (x *MutableConfiguration) WithRequireAdministratorForAssociation(requireAdm
 	return x
 }
 
-// @property @abstract Set the preference to require an administrator password to change the interface power state.
+// A Boolean value that determines whether to require an administrator password to change the interface power state.
 //
 // WithRequireAdministratorForPower sets the requireAdministratorForPower property and returns the receiver for chaining.
 func (x *MutableConfiguration) WithRequireAdministratorForPower(requireAdministratorForPower bool) *MutableConfiguration {
@@ -60,7 +62,7 @@ func (x *MutableConfiguration) WithRequireAdministratorForPower(requireAdministr
 	return x
 }
 
-// @property @abstract Set the preference to require an administrator password to change networks.
+// A Boolean value that determines whether to require an administrator password to create a computer-to-computer network.
 //
 // WithRequireAdministratorForIBSSMode sets the requireAdministratorForIBSSMode property and returns the receiver for chaining.
 func (x *MutableConfiguration) WithRequireAdministratorForIBSSMode(requireAdministratorForIBSSMode bool) *MutableConfiguration {
@@ -68,7 +70,7 @@ func (x *MutableConfiguration) WithRequireAdministratorForIBSSMode(requireAdmini
 	return x
 }
 
-// @property @abstract Set the preference to require an administrator password to create a computer-to-computer network.
+// A Boolean value that determines whether to remember all joined Wi-Fi networks unless the user specifies otherwise when joining a particular Wi-Fi network.
 //
 // WithRememberJoinedNetworks sets the rememberJoinedNetworks property and returns the receiver for chaining.
 func (x *MutableConfiguration) WithRememberJoinedNetworks(rememberJoinedNetworks bool) *MutableConfiguration {

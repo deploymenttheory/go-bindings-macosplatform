@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The charge level and state of a device’s battery.
+//
 // DeviceBattery wraps [raw.GCDeviceBattery] with a fluent Go API.
 type DeviceBattery struct {
 	inner *raw.GCDeviceBattery

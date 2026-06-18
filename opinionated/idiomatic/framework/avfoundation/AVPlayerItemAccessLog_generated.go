@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object used to retrieve the access log associated with a player item.
+//
 // PlayerItemAccessLog wraps [raw.AVPlayerItemAccessLog] with a fluent Go API.
 type PlayerItemAccessLog struct {
 	inner *raw.AVPlayerItemAccessLog
@@ -37,7 +39,7 @@ func NewPlayerItemAccessLog() *PlayerItemAccessLog {
 	return &PlayerItemAccessLog{inner: raw.AVPlayerItemAccessLogFromID(_id)}
 }
 
-// Serializes an AVPlayerItemAccessLog in the Extended Log File Format. This method converts the webserver access log into a textual format that conforms to the W3C Extended Log File Format for web server log files. For more information see: http://www.w3.org/pub/WWW/TR/WD-logfile.html - Returns: An autoreleased NSData instance.
+// Returns a serialized representation of the access log in the Extended Log File Format.
 //
 // ExtendedLogData calls the underlying ExtendedLogData.
 func (x *PlayerItemAccessLog) ExtendedLogData() *foundation.NSData {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A tab associated with a window that is part of a tabbing group.
+//
 // WindowTab wraps [raw.NSWindowTab] with a fluent Go API.
 type WindowTab struct {
 	inner *raw.NSWindowTab
@@ -37,24 +39,32 @@ func NewWindowTab() *WindowTab {
 	return &WindowTab{inner: raw.NSWindowTabFromID(_id)}
 }
 
+// The title for the window tab.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *WindowTab) WithTitle(title string) *WindowTab {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The title for the window tab, specified as an attributed string.
+//
 // WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
 func (x *WindowTab) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *WindowTab {
 	x.inner.SetAttributedTitle(attributedTitle)
 	return x
 }
 
+// The tooltip for this window tab.
+//
 // WithToolTip sets the toolTip property and returns the receiver for chaining.
 func (x *WindowTab) WithToolTip(toolTip string) *WindowTab {
 	x.inner.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
 	return x
 }
 
+// An optional accessory view for the tab.
+//
 // WithAccessoryView sets the accessoryView property and returns the receiver for chaining.
 func (x *WindowTab) WithAccessoryView(accessoryView ViewProvider) *WindowTab {
 	x.inner.SetAccessoryView(accessoryView.asView())

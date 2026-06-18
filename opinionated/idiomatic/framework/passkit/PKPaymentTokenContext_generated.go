@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that defines the context for a single payment token in a payment request for multimerchant payments.
+//
 // PaymentTokenContext wraps [raw.PKPaymentTokenContext] with a fluent Go API.
 type PaymentTokenContext struct {
 	inner *raw.PKPaymentTokenContext
@@ -31,6 +33,8 @@ func PaymentTokenContextFromID(id objc.ID) *PaymentTokenContext {
 	return &PaymentTokenContext{inner: raw.PKPaymentTokenContextFromID(id)}
 }
 
+// Create a payment token context for a single merchant.
+//
 // NewPaymentTokenContextWithMerchantIdentifierExternalIdentifierMerchantNameMerchantDomainAmount creates a new [PaymentTokenContext].
 func NewPaymentTokenContextWithMerchantIdentifierExternalIdentifierMerchantNameMerchantDomainAmount(merchantIdentifier string, externalIdentifier string, merchantName string, merchantDomain string, amount *foundation.NSDecimalNumber) *PaymentTokenContext {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentTokenContext")), objc.RegisterName("alloc"))
@@ -38,30 +42,40 @@ func NewPaymentTokenContextWithMerchantIdentifierExternalIdentifierMerchantNameM
 	return &PaymentTokenContext{inner: raw.PKPaymentTokenContextFromID(_id)}
 }
 
+// The Apply Pay merchant identifier.
+//
 // WithMerchantIdentifier sets the merchantIdentifier property and returns the receiver for chaining.
 func (x *PaymentTokenContext) WithMerchantIdentifier(merchantIdentifier string) *PaymentTokenContext {
 	x.inner.SetMerchantIdentifier(foundation.NSStringStringWithUTF8String(merchantIdentifier))
 	return x
 }
 
+// An external identifier for the merchant.
+//
 // WithExternalIdentifier sets the externalIdentifier property and returns the receiver for chaining.
 func (x *PaymentTokenContext) WithExternalIdentifier(externalIdentifier string) *PaymentTokenContext {
 	x.inner.SetExternalIdentifier(foundation.NSStringStringWithUTF8String(externalIdentifier))
 	return x
 }
 
+// The merchant’s display name that the Apple Pay server associates with the payment token.
+//
 // WithMerchantName sets the merchantName property and returns the receiver for chaining.
 func (x *PaymentTokenContext) WithMerchantName(merchantName string) *PaymentTokenContext {
 	x.inner.SetMerchantName(foundation.NSStringStringWithUTF8String(merchantName))
 	return x
 }
 
+// The merchant’s top-level domain that the Apple Pay server associates with the payment token.
+//
 // WithMerchantDomain sets the merchantDomain property and returns the receiver for chaining.
 func (x *PaymentTokenContext) WithMerchantDomain(merchantDomain string) *PaymentTokenContext {
 	x.inner.SetMerchantDomain(foundation.NSStringStringWithUTF8String(merchantDomain))
 	return x
 }
 
+// The amount to authorize for the payment token.
+//
 // WithAmount sets the amount property and returns the receiver for chaining.
 func (x *PaymentTokenContext) WithAmount(amount *foundation.NSDecimalNumber) *PaymentTokenContext {
 	x.inner.SetAmount(amount)

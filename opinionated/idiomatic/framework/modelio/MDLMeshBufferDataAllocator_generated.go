@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A basic allocator implementation that allocates from main memory using data objects.
+//
 // MeshBufferDataAllocator wraps [raw.MDLMeshBufferDataAllocator] with a fluent Go API.
 type MeshBufferDataAllocator struct {
 	inner *raw.MDLMeshBufferDataAllocator

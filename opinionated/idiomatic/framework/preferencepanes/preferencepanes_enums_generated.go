@@ -8,12 +8,16 @@ import (
 	"fmt"
 )
 
+// Constants that indicate the preference pane’s availability to be deselected.
 type NSPreferencePaneUnselectReply uint64
 
 const (
+	// Cancel the deselection.
 	NSUnselectCancel NSPreferencePaneUnselectReply = 0
-	NSUnselectNow    NSPreferencePaneUnselectReply = 1
-	NSUnselectLater  NSPreferencePaneUnselectReply = 2
+	// Continue the deselection.
+	NSUnselectNow NSPreferencePaneUnselectReply = 1
+	// Delay the deselection until the preference pane invokes replyToShouldUnselect:.
+	NSUnselectLater NSPreferencePaneUnselectReply = 2
 )
 
 func (e NSPreferencePaneUnselectReply) String() string {

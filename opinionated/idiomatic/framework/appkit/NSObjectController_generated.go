@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A controller that can manage an object’s properties referenced by key-value paths.
+//
 // ObjectController wraps [raw.NSObjectController] with a fluent Go API.
 type ObjectController struct {
 	inner *raw.NSObjectController
@@ -32,6 +34,8 @@ func ObjectControllerFromID(id objc.ID) *ObjectController {
 	return &ObjectController{inner: raw.NSObjectControllerFromID(id)}
 }
 
+// Initializes and returns an NSObjectController object with the given content.
+//
 // NewObjectControllerWithContent creates a new [ObjectController].
 func NewObjectControllerWithContent(content objc.ID) *ObjectController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSObjectController")), objc.RegisterName("alloc"))
@@ -46,84 +50,114 @@ func NewObjectControllerWithCoder(coder *foundation.NSCoder) *ObjectController {
 	return &ObjectController{inner: raw.NSObjectControllerFromID(_id)}
 }
 
+// The receiver’s content object.
+//
 // WithContent sets the content property and returns the receiver for chaining.
 func (x *ObjectController) WithContent(content objc.ID) *ObjectController {
 	x.inner.SetContent(content)
 	return x
 }
 
+// A Boolean that shows whether the receiver automatically creates and inserts new content objects automatically when loading from a nib file.
+//
 // WithAutomaticallyPreparesContent sets the automaticallyPreparesContent property and returns the receiver for chaining.
 func (x *ObjectController) WithAutomaticallyPreparesContent(automaticallyPreparesContent bool) *ObjectController {
 	x.inner.SetAutomaticallyPreparesContent(automaticallyPreparesContent)
 	return x
 }
 
+// The object class to use when creating new objects.
+//
 // WithObjectClass sets the objectClass property and returns the receiver for chaining.
 func (x *ObjectController) WithObjectClass(objectClass objc.Class) *ObjectController {
 	x.inner.SetObjectClass(objectClass)
 	return x
 }
 
+// A Boolean that indicates whether the receiver allows adding and removing objects.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *ObjectController) WithEditable(editable bool) *ObjectController {
 	x.inner.SetEditable(editable)
 	return x
 }
 
+// The receiver’s managed object context.
+//
 // WithManagedObjectContext sets the managedObjectContext property and returns the receiver for chaining.
 func (x *ObjectController) WithManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) *ObjectController {
 	x.inner.SetManagedObjectContext(managedObjectContext)
 	return x
 }
 
+// The entity name used by the receiver to create new objects.
+//
 // WithEntityName sets the entityName property and returns the receiver for chaining.
 func (x *ObjectController) WithEntityName(entityName string) *ObjectController {
 	x.inner.SetEntityName(foundation.NSStringStringWithUTF8String(entityName))
 	return x
 }
 
+// The receiver’s fetch predicate.
+//
 // WithFetchPredicate sets the fetchPredicate property and returns the receiver for chaining.
 func (x *ObjectController) WithFetchPredicate(fetchPredicate *foundation.NSPredicate) *ObjectController {
 	x.inner.SetFetchPredicate(fetchPredicate)
 	return x
 }
 
+// A Boolean that indicates whether the receiver uses lazy fetching.
+//
 // WithUsesLazyFetching sets the usesLazyFetching property and returns the receiver for chaining.
 func (x *ObjectController) WithUsesLazyFetching(usesLazyFetching bool) *ObjectController {
 	x.inner.SetUsesLazyFetching(usesLazyFetching)
 	return x
 }
 
+// Typically overridden by subclasses that require additional control over the creation of new objects.
+//
 // PrepareContent calls the underlying PrepareContent.
 func (x *ObjectController) PrepareContent() {
 	x.inner.PrepareContent()
 }
 
+// Creates and returns a new object of the appropriate class.
+//
 // NewObject calls the underlying NewObject.
 func (x *ObjectController) NewObject() objc.ID {
 	return x.inner.NewObject()
 }
 
+// Sets the receiver’s content object.
+//
 // AddObject calls the underlying AddObject.
 func (x *ObjectController) AddObject(object objc.ID) {
 	x.inner.AddObject(object)
 }
 
+// Removes a given object from the receiver’s content.
+//
 // RemoveObject calls the underlying RemoveObject.
 func (x *ObjectController) RemoveObject(object objc.ID) {
 	x.inner.RemoveObject(object)
 }
 
+// Creates a new object and sets it as the receiver’s content object.
+//
 // Add calls the underlying Add.
 func (x *ObjectController) Add(sender objc.ID) {
 	x.inner.Add(sender)
 }
 
+// Removes the receiver’s content object.
+//
 // Remove calls the underlying Remove.
 func (x *ObjectController) Remove(sender objc.ID) {
 	x.inner.Remove(sender)
 }
 
+// Returns whether the receiver can handle the action method for a user interface item.
+//
 // ValidateUserInterfaceItem calls the underlying ValidateUserInterfaceItem.
 func (x *ObjectController) ValidateUserInterfaceItem(item raw.NSValidatedUserInterfaceItem) bool {
 	return x.inner.ValidateUserInterfaceItem(item)
@@ -189,16 +223,22 @@ func (x *ObjectController) CanRemove() bool {
 	return x.inner.CanRemove()
 }
 
+// Subclasses should override this method to customize a fetch request, for example to specify fetch limits.
+//
 // FetchWithRequestMergeError calls the underlying FetchWithRequestMergeError.
 func (x *ObjectController) FetchWithRequestMergeError(fetchRequest *coredata.NSFetchRequest[objc.ID], merge bool) (bool, error) {
 	return x.inner.FetchWithRequestMergeError(fetchRequest, merge)
 }
 
+// Causes the receiver to fetch the data objects specified by the entity name and fetch predicate.
+//
 // Fetch calls the underlying Fetch.
 func (x *ObjectController) Fetch(sender objc.ID) {
 	x.inner.Fetch(sender)
 }
 
+// Returns the default fetch request used by the receiver.
+//
 // DefaultFetchRequest calls the underlying DefaultFetchRequest.
 func (x *ObjectController) DefaultFetchRequest() *coredata.NSFetchRequest[objc.ID] {
 	return x.inner.DefaultFetchRequest()

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a top-level group node that contains all of an audio unit’s parameters.
+//
 // ParameterTree wraps [raw.AUParameterTree] with a fluent Go API.
 type ParameterTree struct {
 	inner *raw.AUParameterTree
@@ -35,7 +37,7 @@ func NewParameterTree() *ParameterTree {
 	return &ParameterTree{inner: raw.AUParameterTreeFromID(_id)}
 }
 
-// @brief		Called when a parameter changes value. @discussion This block, used only in an audio unit implementation, receives all externally-generated changes to parameter values. It should store the new value in its audio signal processing state (assuming that that state is separate from the AUParameter object).
+// The callback for parameter value changes.
 //
 // WithImplementorValueObserver sets the implementorValueObserver property and returns the receiver for chaining.
 func (x *ParameterTree) WithImplementorValueObserver(implementorValueObserver func(*raw.AUParameter, float32)) *ParameterTree {
@@ -43,7 +45,7 @@ func (x *ParameterTree) WithImplementorValueObserver(implementorValueObserver fu
 	return x
 }
 
-// @brief		Called when a value of a parameter in the tree is known to have a stale value needing to be refreshed. @discussion The audio unit should return the current value for this parameter; the AUParameterNode will store the value.
+// The callback for refreshing known stale values in a parameter tree.
 //
 // WithImplementorValueProvider sets the implementorValueProvider property and returns the receiver for chaining.
 func (x *ParameterTree) WithImplementorValueProvider(implementorValueProvider objc.Block) *ParameterTree {
@@ -51,7 +53,7 @@ func (x *ParameterTree) WithImplementorValueProvider(implementorValueProvider ob
 	return x
 }
 
-// Called to provide string representations of parameter values. If value is nil, the callback uses the current value of the parameter.
+// The callback for providing a string representation of a parameter value.
 //
 // WithImplementorStringFromValueCallback sets the implementorStringFromValueCallback property and returns the receiver for chaining.
 func (x *ParameterTree) WithImplementorStringFromValueCallback(implementorStringFromValueCallback objc.Block) *ParameterTree {
@@ -59,7 +61,7 @@ func (x *ParameterTree) WithImplementorStringFromValueCallback(implementorString
 	return x
 }
 
-// Called to convert string to numeric representations of parameter values.
+// The callback for converting a string to a parameter value.
 //
 // WithImplementorValueFromStringCallback sets the implementorValueFromStringCallback property and returns the receiver for chaining.
 func (x *ParameterTree) WithImplementorValueFromStringCallback(implementorValueFromStringCallback objc.Block) *ParameterTree {
@@ -67,7 +69,7 @@ func (x *ParameterTree) WithImplementorValueFromStringCallback(implementorValueF
 	return x
 }
 
-// Called to obtain an abbreviated version of a parameter or group name.
+// The callback for obtaining an abbreviated version of a parameter node display name.
 //
 // WithImplementorDisplayNameWithLengthCallback sets the implementorDisplayNameWithLengthCallback property and returns the receiver for chaining.
 func (x *ParameterTree) WithImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) *ParameterTree {
@@ -75,7 +77,7 @@ func (x *ParameterTree) WithImplementorDisplayNameWithLengthCallback(implementor
 	return x
 }
 
-// @method	parameterWithAddress: @brief	Search a tree for a parameter with a specific address. @return The parameter corresponding to the supplied address, or nil if no such parameter exists.
+// Searches the tree for a parameter with a specific address.
 //
 // ParameterWithAddress calls the underlying ParameterWithAddress.
 func (x *ParameterTree) ParameterWithAddress(address uint64) *Parameter {
@@ -86,7 +88,7 @@ func (x *ParameterTree) ParameterWithAddress(address uint64) *Parameter {
 	return &Parameter{inner: _r}
 }
 
-// @method	parameterWithID:scope:element: @brief	Search a tree for a specific v2 audio unit parameter. @discussion V2 audio units publish parameters identified by a parameter ID, scope, and element. A host that knows that it is dealing with a v2 unit can locate parameters using this method, for example, for the Apple-supplied system audio units. @return The parameter corresponding to the supplied ID/scope/element, or nil if no such parameter exists, or if the audio unit is not a v2 unit.
+// Searches the tree for a specific version 2 audio unit parameter.
 //
 // ParameterWithIDScopeElement calls the underlying ParameterWithIDScopeElement.
 func (x *ParameterTree) ParameterWithIDScopeElement(paramID uint, scope uint, element uint) *Parameter {

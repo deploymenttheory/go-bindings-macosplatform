@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The IKScannerDeviceView class displays a view that allows scanning. It can be customized by specifying the display mode. The delegate receives the scanned data and must implement the IKScannerDeviceViewDelegate protocol.
+//
 // IKScannerDeviceView wraps [raw.IKScannerDeviceView] with a fluent Go API.
 type IKScannerDeviceView struct {
 	inner *raw.IKScannerDeviceView
@@ -38,7 +40,7 @@ func NewIKScannerDeviceView() *IKScannerDeviceView {
 	return &IKScannerDeviceView{inner: raw.IKScannerDeviceViewFromID(_id)}
 }
 
-// @property delegate @abstract delegate of the IKScannerDeviceView.
+// The scanner device delegate
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *IKScannerDeviceView) WithDelegate(delegate objc.ID) *IKScannerDeviceView {
@@ -46,7 +48,7 @@ func (x *IKScannerDeviceView) WithDelegate(delegate objc.ID) *IKScannerDeviceVie
 	return x
 }
 
-// @property scannerDevice @abstract the scanner device.
+// The device used for scanning
 //
 // WithScannerDevice sets the scannerDevice property and returns the receiver for chaining.
 func (x *IKScannerDeviceView) WithScannerDevice(scannerDevice *imagecapturecore.ICScannerDevice) *IKScannerDeviceView {
@@ -54,7 +56,7 @@ func (x *IKScannerDeviceView) WithScannerDevice(scannerDevice *imagecapturecore.
 	return x
 }
 
-// @property mode @abstract current display mode.
+// The display mode used by the device view.
 //
 // WithMode sets the mode property and returns the receiver for chaining.
 func (x *IKScannerDeviceView) WithMode(mode objc.ID) *IKScannerDeviceView {
@@ -62,7 +64,7 @@ func (x *IKScannerDeviceView) WithMode(mode objc.ID) *IKScannerDeviceView {
 	return x
 }
 
-// @property hasDisplayModeSimple @abstract support a simple scanning UI.
+// The property that determines whether the scanner view uses the simple display mode.
 //
 // WithHasDisplayModeSimple sets the hasDisplayModeSimple property and returns the receiver for chaining.
 func (x *IKScannerDeviceView) WithHasDisplayModeSimple(hasDisplayModeSimple bool) *IKScannerDeviceView {
@@ -70,7 +72,7 @@ func (x *IKScannerDeviceView) WithHasDisplayModeSimple(hasDisplayModeSimple bool
 	return x
 }
 
-// @property hasDisplayModeAdvanced @abstract support advanced scanning UI.
+// The property that determines whether the scanner view uses the advanced display mode.
 //
 // WithHasDisplayModeAdvanced sets the hasDisplayModeAdvanced property and returns the receiver for chaining.
 func (x *IKScannerDeviceView) WithHasDisplayModeAdvanced(hasDisplayModeAdvanced bool) *IKScannerDeviceView {
@@ -78,7 +80,7 @@ func (x *IKScannerDeviceView) WithHasDisplayModeAdvanced(hasDisplayModeAdvanced 
 	return x
 }
 
-// @property transferMode @abstract transfer mode either file based - or - in memory.
+// Determines how the scanned content is provided to the delegate.
 //
 // WithTransferMode sets the transferMode property and returns the receiver for chaining.
 func (x *IKScannerDeviceView) WithTransferMode(transferMode objc.ID) *IKScannerDeviceView {
@@ -86,7 +88,7 @@ func (x *IKScannerDeviceView) WithTransferMode(transferMode objc.ID) *IKScannerD
 	return x
 }
 
-// @property scanControlLabel @abstract label for the 'Scan' control.
+// Allows customization of the “Scan” label.
 //
 // WithScanControlLabel sets the scanControlLabel property and returns the receiver for chaining.
 func (x *IKScannerDeviceView) WithScanControlLabel(scanControlLabel string) *IKScannerDeviceView {
@@ -94,7 +96,7 @@ func (x *IKScannerDeviceView) WithScanControlLabel(scanControlLabel string) *IKS
 	return x
 }
 
-// @property overviewControlLabel @abstract label for the 'Overview' control.
+// Allows customization of the “Overview” label.
 //
 // WithOverviewControlLabel sets the overviewControlLabel property and returns the receiver for chaining.
 func (x *IKScannerDeviceView) WithOverviewControlLabel(overviewControlLabel string) *IKScannerDeviceView {
@@ -102,7 +104,7 @@ func (x *IKScannerDeviceView) WithOverviewControlLabel(overviewControlLabel stri
 	return x
 }
 
-// @property displaysDownloadsDirectoryControl @abstract show a downloads directory control.
+// Determines whether the downloads directory control is displayed.
 //
 // WithDisplaysDownloadsDirectoryControl sets the displaysDownloadsDirectoryControl property and returns the receiver for chaining.
 func (x *IKScannerDeviceView) WithDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) *IKScannerDeviceView {
@@ -110,7 +112,7 @@ func (x *IKScannerDeviceView) WithDisplaysDownloadsDirectoryControl(displaysDown
 	return x
 }
 
-// @property downloadsDirectory @abstract downloads directory.
+// The directory where scans are saved.
 //
 // WithDownloadsDirectory sets the downloadsDirectory property and returns the receiver for chaining.
 func (x *IKScannerDeviceView) WithDownloadsDirectory(downloadsDirectory string) *IKScannerDeviceView {
@@ -118,7 +120,7 @@ func (x *IKScannerDeviceView) WithDownloadsDirectory(downloadsDirectory string) 
 	return x
 }
 
-// @property documentName @abstract document name.
+// Returns the document name.
 //
 // WithDocumentName sets the documentName property and returns the receiver for chaining.
 func (x *IKScannerDeviceView) WithDocumentName(documentName string) *IKScannerDeviceView {
@@ -126,7 +128,7 @@ func (x *IKScannerDeviceView) WithDocumentName(documentName string) *IKScannerDe
 	return x
 }
 
-// @property displaysPostProcessApplicationControl @abstract show a postprocessing application control.
+// Specifies whether the post processing application control is displayed.
 //
 // WithDisplaysPostProcessApplicationControl sets the displaysPostProcessApplicationControl property and returns the receiver for chaining.
 func (x *IKScannerDeviceView) WithDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) *IKScannerDeviceView {
@@ -134,7 +136,7 @@ func (x *IKScannerDeviceView) WithDisplaysPostProcessApplicationControl(displays
 	return x
 }
 
-// @property postProcessApplication @abstract postprocessing application.
+// The URL of the application to use for post processing of the scan.
 //
 // WithPostProcessApplication sets the postProcessApplication property and returns the receiver for chaining.
 func (x *IKScannerDeviceView) WithPostProcessApplication(postProcessApplication string) *IKScannerDeviceView {

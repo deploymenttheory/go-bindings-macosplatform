@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A pass with a credential that the device stores in a certified payment information chip.
+//
 // SecureElementPass wraps [raw.PKSecureElementPass] with a fluent Go API.
 type SecureElementPass struct {
 	inner *raw.PKSecureElementPass

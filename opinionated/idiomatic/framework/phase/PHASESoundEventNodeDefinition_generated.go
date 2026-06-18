@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A base class for sound event nodes that connect to form a node hierarchy.
+//
 // SoundEventNodeDefinition wraps [raw.PHASESoundEventNodeDefinition] with a fluent Go API.
 type SoundEventNodeDefinition struct {
 	inner *raw.PHASESoundEventNodeDefinition

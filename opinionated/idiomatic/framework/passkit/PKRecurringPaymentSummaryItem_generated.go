@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines a summary item for a payment that occurs repeatedly at a specified interval, such as a subscription.
+//
 // RecurringPaymentSummaryItem wraps [raw.PKRecurringPaymentSummaryItem] with a fluent Go API.
 type RecurringPaymentSummaryItem struct {
 	inner *raw.PKRecurringPaymentSummaryItem
@@ -36,42 +38,56 @@ func NewRecurringPaymentSummaryItem() *RecurringPaymentSummaryItem {
 	return &RecurringPaymentSummaryItem{inner: raw.PKRecurringPaymentSummaryItemFromID(_id)}
 }
 
+// The date of the first payment.
+//
 // WithStartDate sets the startDate property and returns the receiver for chaining.
 func (x *RecurringPaymentSummaryItem) WithStartDate(startDate *foundation.NSDate) *RecurringPaymentSummaryItem {
 	x.inner.SetStartDate(startDate)
 	return x
 }
 
+// The amount of time – in calendar units such as day, month, or year – that represents a fraction of the total payment interval.
+//
 // WithIntervalUnit sets the intervalUnit property and returns the receiver for chaining.
 func (x *RecurringPaymentSummaryItem) WithIntervalUnit(intervalUnit foundation.NSCalendarUnit) *RecurringPaymentSummaryItem {
 	x.inner.SetIntervalUnit(intervalUnit)
 	return x
 }
 
+// The number of interval units that make up the total payment interval.
+//
 // WithIntervalCount sets the intervalCount property and returns the receiver for chaining.
 func (x *RecurringPaymentSummaryItem) WithIntervalCount(intervalCount int) *RecurringPaymentSummaryItem {
 	x.inner.SetIntervalCount(intervalCount)
 	return x
 }
 
+// The date of the final payment.
+//
 // WithEndDate sets the endDate property and returns the receiver for chaining.
 func (x *RecurringPaymentSummaryItem) WithEndDate(endDate *foundation.NSDate) *RecurringPaymentSummaryItem {
 	x.inner.SetEndDate(endDate)
 	return x
 }
 
+// A short, localized description of the item.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *RecurringPaymentSummaryItem) WithLabel(label string) *RecurringPaymentSummaryItem {
 	x.inner.PKPaymentSummaryItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// The summary item’s amount.
+//
 // WithAmount sets the amount property and returns the receiver for chaining.
 func (x *RecurringPaymentSummaryItem) WithAmount(amount *foundation.NSDecimalNumber) *RecurringPaymentSummaryItem {
 	x.inner.PKPaymentSummaryItem.SetAmount(amount)
 	return x
 }
 
+// The summary item’s type that indicates whether the amount is final.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *RecurringPaymentSummaryItem) WithType(type_ PKPaymentSummaryItemType) *RecurringPaymentSummaryItem {
 	x.inner.PKPaymentSummaryItem.SetType(raw.PKPaymentSummaryItemType(type_))

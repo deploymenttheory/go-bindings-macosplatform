@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @class IKSlideshow @abstract IKSlideshow handles a slideshow with images, PDFs & more.
+// The IKSlideshow class encapsulates a data source and options for a slideshow.
 //
 // IKSlideshow wraps [raw.IKSlideshow] with a fluent Go API.
 type IKSlideshow struct {
@@ -38,7 +38,7 @@ func NewIKSlideshow() *IKSlideshow {
 	return &IKSlideshow{inner: raw.IKSlideshowFromID(_id)}
 }
 
-// @property autoPlayDelay @abstract Array of filters reflecting the current user adjustments in the adjust or effects tab.
+// Controls the interval of time before a slideshow starts to play automatically.
 //
 // WithAutoPlayDelay sets the autoPlayDelay property and returns the receiver for chaining.
 func (x *IKSlideshow) WithAutoPlayDelay(autoPlayDelay float64) *IKSlideshow {
@@ -46,35 +46,35 @@ func (x *IKSlideshow) WithAutoPlayDelay(autoPlayDelay float64) *IKSlideshow {
 	return x
 }
 
-// @method runSlideshowWithDataSource:inMode:options: @abstract start the slideshow (slideshowOptions can be NULL).
+// Runs a slideshow that contains the specified kind of items, provided from a data source.
 //
 // RunSlideshowWithDataSourceInModeOptions calls the underlying RunSlideshowWithDataSourceInModeOptions.
 func (x *IKSlideshow) RunSlideshowWithDataSourceInModeOptions(dataSource objc.ID, slideshowMode string, slideshowOptions *foundation.NSDictionary[objc.ID, objc.ID]) {
 	x.inner.RunSlideshowWithDataSourceInModeOptions(dataSource, foundation.NSStringStringWithUTF8String(slideshowMode), slideshowOptions)
 }
 
-// @method stopSlideshow: @abstract stop the slideshow.
+// Stops a slideshow.
 //
 // StopSlideshow calls the underlying StopSlideshow.
 func (x *IKSlideshow) StopSlideshow(sender objc.ID) {
 	x.inner.StopSlideshow(sender)
 }
 
-// @method reloadData: @abstract reloadData.
+// Reloads the data for a slideshow.
 //
 // ReloadData calls the underlying ReloadData.
 func (x *IKSlideshow) ReloadData() {
 	x.inner.ReloadData()
 }
 
-// @method reloadSlideshowItemAtIndex: @abstract reloadSlideshowItemAtIndex.
+// Reloads the data for a slideshow, starting at the specified index.
 //
 // ReloadSlideshowItemAtIndex calls the underlying ReloadSlideshowItemAtIndex.
 func (x *IKSlideshow) ReloadSlideshowItemAtIndex(index uint) {
 	x.inner.ReloadSlideshowItemAtIndex(index)
 }
 
-// @method indexOfCurrentSlideshowItem: @abstract Returns index of current slideshow item.
+// Returns the index of the current slideshow item.
 //
 // IndexOfCurrentSlideshowItem calls the underlying IndexOfCurrentSlideshowItem.
 func (x *IKSlideshow) IndexOfCurrentSlideshowItem() uint {

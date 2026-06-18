@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing metrics about the power used to display the app on the screen.
+//
 // DisplayMetric wraps [raw.MXDisplayMetric] with a fluent Go API.
 type DisplayMetric struct {
 	inner *raw.MXDisplayMetric

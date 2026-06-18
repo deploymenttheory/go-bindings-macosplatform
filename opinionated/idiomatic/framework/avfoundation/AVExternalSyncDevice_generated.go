@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An external sync device connected to a host device that can be used to drive the timing of an internal component, such as a camera sensor.
+//
 // ExternalSyncDevice wraps [raw.AVExternalSyncDevice] with a fluent Go API.
 type ExternalSyncDevice struct {
 	inner *raw.AVExternalSyncDevice
@@ -38,7 +40,7 @@ func NewExternalSyncDevice() *ExternalSyncDevice {
 	return &ExternalSyncDevice{inner: raw.AVExternalSyncDeviceFromID(_id)}
 }
 
-// Delay to wait before starting the frame capture. An external sync is generally used to configure multiple devices in the real world. A display and a camera may receive a signal at the same time, but that does not mean the refresh of the display and camera are aligned in a way that does not cause tearing in the recording. The signal compensation delay can be used to offset the readout of a camera on an intra-frame scale. - Important: You should always set this property to a value less than the frame duration at which the camera is operating.
+// Delay to wait before starting the frame capture.
 //
 // WithSignalCompensationDelay sets the signalCompensationDelay property and returns the receiver for chaining.
 func (x *ExternalSyncDevice) WithSignalCompensationDelay(signalCompensationDelay coremedia.CMTime) *ExternalSyncDevice {

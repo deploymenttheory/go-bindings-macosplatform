@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Groups parameters for the creation of a Metal argument table.
+//
 // MTL4ArgumentTableDescriptor wraps [raw.MTL4ArgumentTableDescriptor] with a fluent Go API.
 type MTL4ArgumentTableDescriptor struct {
 	inner *raw.MTL4ArgumentTableDescriptor
@@ -37,7 +39,7 @@ func NewMTL4ArgumentTableDescriptor() *MTL4ArgumentTableDescriptor {
 	return &MTL4ArgumentTableDescriptor{inner: raw.MTL4ArgumentTableDescriptorFromID(_id)}
 }
 
-// Determines the number of buffer-binding slots for the argument table. The maximum value of this parameter is 31.
+// Determines the number of buffer-binding slots for the argument table.
 //
 // WithMaxBufferBindCount sets the maxBufferBindCount property and returns the receiver for chaining.
 func (x *MTL4ArgumentTableDescriptor) WithMaxBufferBindCount(maxBufferBindCount uint) *MTL4ArgumentTableDescriptor {
@@ -45,7 +47,7 @@ func (x *MTL4ArgumentTableDescriptor) WithMaxBufferBindCount(maxBufferBindCount 
 	return x
 }
 
-// Determines the number of texture-binding slots for the argument table. The maximum value of this parameter is 128.
+// Determines the number of texture-binding slots for the argument table.
 //
 // WithMaxTextureBindCount sets the maxTextureBindCount property and returns the receiver for chaining.
 func (x *MTL4ArgumentTableDescriptor) WithMaxTextureBindCount(maxTextureBindCount uint) *MTL4ArgumentTableDescriptor {
@@ -53,7 +55,7 @@ func (x *MTL4ArgumentTableDescriptor) WithMaxTextureBindCount(maxTextureBindCoun
 	return x
 }
 
-// Determines the number of sampler state-binding slots for the argument table. The maximum value of this parameter is 16.
+// Determines the number of sampler state-binding slots for the argument table.
 //
 // WithMaxSamplerStateBindCount sets the maxSamplerStateBindCount property and returns the receiver for chaining.
 func (x *MTL4ArgumentTableDescriptor) WithMaxSamplerStateBindCount(maxSamplerStateBindCount uint) *MTL4ArgumentTableDescriptor {
@@ -61,7 +63,7 @@ func (x *MTL4ArgumentTableDescriptor) WithMaxSamplerStateBindCount(maxSamplerSta
 	return x
 }
 
-// Configures whether Metal initializes the bindings to nil values upon creation of argument table. The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
+// Configures whether Metal initializes the bindings to nil values upon creation of argument table.
 //
 // WithInitializeBindings sets the initializeBindings property and returns the receiver for chaining.
 func (x *MTL4ArgumentTableDescriptor) WithInitializeBindings(initializeBindings bool) *MTL4ArgumentTableDescriptor {
@@ -69,7 +71,7 @@ func (x *MTL4ArgumentTableDescriptor) WithInitializeBindings(initializeBindings 
 	return x
 }
 
-// Controls whether Metal should reserve memory for attribute strides in the argument table. Set this value to true if you intend to provide dynamic attribute strides when binding vertex array buffers to the argument table by calling “MTL4ArgumentTable/setAddress:attributeStride:atIndex:“ The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
+// Controls whether Metal should reserve memory for attribute strides in the argument table.
 //
 // WithSupportAttributeStrides sets the supportAttributeStrides property and returns the receiver for chaining.
 func (x *MTL4ArgumentTableDescriptor) WithSupportAttributeStrides(supportAttributeStrides bool) *MTL4ArgumentTableDescriptor {

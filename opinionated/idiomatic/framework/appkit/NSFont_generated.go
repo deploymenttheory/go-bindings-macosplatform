@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// The representation of a font in an app.
+//
 // Font wraps [raw.NSFont] with a fluent Go API.
 type Font struct {
 	inner *raw.NSFont
@@ -70,13 +72,15 @@ func (x *Font) GetAdvancementsForCGGlyphsCount(advancements *corefoundation.CGSi
 	x.inner.GetAdvancementsForCGGlyphsCount(advancements, glyphs, glyphCount)
 }
 
-// ******* NSGraphicsContext-related ********
+// Sets this font as the font for the current graphics context.
 //
 // Set calls the underlying Set.
 func (x *Font) Set() {
 	x.inner.Set()
 }
 
+// Sets this font as the font for the specified graphics context.
+//
 // SetInContext calls the underlying SetInContext.
 func (x *Font) SetInContext(graphicsContext *raw.NSGraphicsContext) {
 	x.inner.SetInContext(graphicsContext)
@@ -221,36 +225,50 @@ func (x *Font) IsVertical() bool {
 	return x.inner.IsVertical()
 }
 
+// Returns the named encoded glyph, or –1 if the receiver contains no such glyph.
+//
 // GlyphWithName calls the underlying GlyphWithName.
 func (x *Font) GlyphWithName(name string) uint {
 	return x.inner.GlyphWithName(foundation.NSStringStringWithUTF8String(name))
 }
 
+// Returns the bounding rectangle for the specified glyph, scaled to the receiver’s size.
+//
 // BoundingRectForGlyph calls the underlying BoundingRectForGlyph.
 func (x *Font) BoundingRectForGlyph(glyph uint) corefoundation.CGRect {
 	return x.inner.BoundingRectForGlyph(glyph)
 }
 
+// Returns the nominal spacing for the given glyph—the distance the current point moves after showing the glyph—accounting for the receiver’s size.
+//
 // AdvancementForGlyph calls the underlying AdvancementForGlyph.
 func (x *Font) AdvancementForGlyph(glyph uint) corefoundation.CGSize {
 	return x.inner.AdvancementForGlyph(glyph)
 }
 
+// Returns an array of the bounding rectangles for the specified glyphs rendered by the receiver.
+//
 // GetBoundingRectsForGlyphsCount calls the underlying GetBoundingRectsForGlyphsCount.
 func (x *Font) GetBoundingRectsForGlyphsCount(bounds *corefoundation.CGRect, glyphs *uint, glyphCount uint) {
 	x.inner.GetBoundingRectsForGlyphsCount(bounds, glyphs, glyphCount)
 }
 
+// Returns an array of the advancements for the specified glyphs rendered by the receiver.
+//
 // GetAdvancementsForGlyphsCount calls the underlying GetAdvancementsForGlyphsCount.
 func (x *Font) GetAdvancementsForGlyphsCount(advancements *corefoundation.CGSize, glyphs *uint, glyphCount uint) {
 	x.inner.GetAdvancementsForGlyphsCount(advancements, glyphs, glyphCount)
 }
 
+// Returns an array of the advancements for the specified packed glyphs and rendered by the receiver.
+//
 // GetAdvancementsForPackedGlyphsLength calls the underlying GetAdvancementsForPackedGlyphsLength.
 func (x *Font) GetAdvancementsForPackedGlyphsLength(advancements *corefoundation.CGSize, packedGlyphs unsafe.Pointer, length uint) {
 	x.inner.GetAdvancementsForPackedGlyphsLength(advancements, packedGlyphs, length)
 }
 
+// Returns a bitmapped screen font, when sent to a font object representing a scalable PostScript font, with the specified rendering mode, matching the receiver in typeface and matrix (or size), or nil if such a font can’t be found.
+//
 // ScreenFontWithRenderingMode calls the underlying ScreenFontWithRenderingMode.
 func (x *Font) ScreenFontWithRenderingMode(renderingMode NSFontRenderingMode) *Font {
 	_r := x.inner.ScreenFontWithRenderingMode(raw.NSFontRenderingMode(renderingMode))

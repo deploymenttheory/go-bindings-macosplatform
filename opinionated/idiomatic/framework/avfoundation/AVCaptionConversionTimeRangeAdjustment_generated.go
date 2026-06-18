@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that describes an adjustment to the time range of one or more captions.
+//
 // CaptionConversionTimeRangeAdjustment wraps [raw.AVCaptionConversionTimeRangeAdjustment] with a fluent Go API.
 type CaptionConversionTimeRangeAdjustment struct {
 	inner *raw.AVCaptionConversionTimeRangeAdjustment

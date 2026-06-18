@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that reads caption group objects from an asset track that contains timed text.
+//
 // AssetReaderOutputCaptionAdaptor wraps [raw.AVAssetReaderOutputCaptionAdaptor] with a fluent Go API.
 type AssetReaderOutputCaptionAdaptor struct {
 	inner *raw.AVAssetReaderOutputCaptionAdaptor
@@ -32,7 +34,7 @@ func AssetReaderOutputCaptionAdaptorFromID(id objc.ID) *AssetReaderOutputCaption
 	return &AssetReaderOutputCaptionAdaptor{inner: raw.AVAssetReaderOutputCaptionAdaptorFromID(id)}
 }
 
-// @method initWithAssetReaderTrackOutput: @abstract Creates a new caption adaptor for reading from the given track output. @param trackOutput The track output from which to read captions. @result A new instance of AVAssetReaderOutputCaptionAdaptor, configured to read captions from the given AVAssetReaderTrackOutput. @discussion It is an error to pass nil to this method.
+// Creates a caption adaptor that reads from a track output.
 //
 // NewAssetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput creates a new [AssetReaderOutputCaptionAdaptor].
 func NewAssetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput(trackOutput *raw.AVAssetReaderTrackOutput) *AssetReaderOutputCaptionAdaptor {
@@ -41,7 +43,7 @@ func NewAssetReaderOutputCaptionAdaptorWithAssetReaderTrackOutput(trackOutput *r
 	return &AssetReaderOutputCaptionAdaptor{inner: raw.AVAssetReaderOutputCaptionAdaptorFromID(_id)}
 }
 
-// @property validationDelegate: @abstract Register caption validation handling callback protocol to the caption adaptor.
+// A delegate object that handles callbacks to the caption adaptor.
 //
 // WithValidationDelegate sets the validationDelegate property and returns the receiver for chaining.
 func (x *AssetReaderOutputCaptionAdaptor) WithValidationDelegate(validationDelegate raw.AVAssetReaderCaptionValidationHandling) *AssetReaderOutputCaptionAdaptor {
@@ -49,7 +51,7 @@ func (x *AssetReaderOutputCaptionAdaptor) WithValidationDelegate(validationDeleg
 	return x
 }
 
-// @method nextCaptionGroup @abstract Returns the next caption. @result An instance of AVCaption representing the next caption. @discussion The method returns the next caption group. This method throws an exception if the track output is not attached to an asset reader and reading has not yet begun.
+// Returns the next caption group.
 //
 // NextCaptionGroup calls the underlying NextCaptionGroup.
 func (x *AssetReaderOutputCaptionAdaptor) NextCaptionGroup() *CaptionGroup {
@@ -60,7 +62,7 @@ func (x *AssetReaderOutputCaptionAdaptor) NextCaptionGroup() *CaptionGroup {
 	return &CaptionGroup{inner: _r}
 }
 
-// @method captionsNotPresentInPreviousGroupsInCaptionGroup: @abstract Returns the set of captions that are present in the given group but were not present in any group previously vended by calls to -nextCaptionGroup: on the receiver. @param captionGroup The group containing the captions of interest. @result An array of AVCaption objects. @discussion The returned array contains the set of captions in the given group whose time ranges have the same start time as the group.  This method is provided as a convenience for clients who want to process captions one-by-one and do not need a complete view of the set of captions active at a given time.
+// Returns the set of captions in the caption group that weren’t vended by the adaptor.
 //
 // CaptionsNotPresentInPreviousGroupsInCaptionGroup calls the underlying CaptionsNotPresentInPreviousGroupsInCaptionGroup.
 func (x *AssetReaderOutputCaptionAdaptor) CaptionsNotPresentInPreviousGroupsInCaptionGroup(captionGroup *raw.AVCaptionGroup) *foundation.NSArray[*raw.AVCaption] {

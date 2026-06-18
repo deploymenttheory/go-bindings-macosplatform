@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Configuration to define the identity document.
+//
 // AddIdentityDocumentConfiguration wraps [raw.PKAddIdentityDocumentConfiguration] with a fluent Go API.
 type AddIdentityDocumentConfiguration struct {
 	inner *raw.PKAddIdentityDocumentConfiguration
@@ -38,12 +40,16 @@ func NewAddIdentityDocumentConfiguration() *AddIdentityDocumentConfiguration {
 	return &AddIdentityDocumentConfiguration{inner: raw.PKAddIdentityDocumentConfigurationFromID(_id)}
 }
 
+// An opaque value for the configuration.
+//
 // WithIssuerIdentifier sets the issuerIdentifier property and returns the receiver for chaining.
 func (x *AddIdentityDocumentConfiguration) WithIssuerIdentifier(issuerIdentifier string) *AddIdentityDocumentConfiguration {
 	x.inner.PKAddSecureElementPassConfiguration.SetIssuerIdentifier(foundation.NSStringStringWithUTF8String(issuerIdentifier))
 	return x
 }
 
+// The configuration’s localized description.
+//
 // WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
 func (x *AddIdentityDocumentConfiguration) WithLocalizedDescription(localizedDescription string) *AddIdentityDocumentConfiguration {
 	x.inner.PKAddSecureElementPassConfiguration.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))

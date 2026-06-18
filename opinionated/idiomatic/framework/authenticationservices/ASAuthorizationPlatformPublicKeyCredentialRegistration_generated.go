@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A newly created platform credential that results from a credential registration request.
+//
 // AuthorizationPlatformPublicKeyCredentialRegistration wraps [raw.ASAuthorizationPlatformPublicKeyCredentialRegistration] with a fluent Go API.
 type AuthorizationPlatformPublicKeyCredentialRegistration struct {
 	inner *raw.ASAuthorizationPlatformPublicKeyCredentialRegistration

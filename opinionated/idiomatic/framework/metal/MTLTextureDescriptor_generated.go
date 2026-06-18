@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An instance that you use to configure new Metal texture instances.
+//
 // TextureDescriptor wraps [raw.MTLTextureDescriptor] with a fluent Go API.
 type TextureDescriptor struct {
 	inner *raw.MTLTextureDescriptor
@@ -35,7 +37,7 @@ func NewTextureDescriptor() *TextureDescriptor {
 	return &TextureDescriptor{inner: raw.MTLTextureDescriptorFromID(_id)}
 }
 
-// @property type @abstract The overall type of the texture to be created. The default value is MTLTextureType2D.
+// The dimension and arrangement of texture image data.
 //
 // WithTextureType sets the textureType property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithTextureType(textureType MTLTextureType) *TextureDescriptor {
@@ -43,7 +45,7 @@ func (x *TextureDescriptor) WithTextureType(textureType MTLTextureType) *Texture
 	return x
 }
 
-// @property pixelFormat @abstract The pixel format to use when allocating this texture. This is also the pixel format that will be used to when the caller writes or reads pixels from this texture. The default value is MTLPixelFormatRGBA8Unorm.
+// The size and bit layout of all pixels in the texture.
 //
 // WithPixelFormat sets the pixelFormat property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithPixelFormat(pixelFormat MTLPixelFormat) *TextureDescriptor {
@@ -51,7 +53,7 @@ func (x *TextureDescriptor) WithPixelFormat(pixelFormat MTLPixelFormat) *Texture
 	return x
 }
 
-// @property width @abstract The width of the texture to create. The default value is 1.
+// The width of the texture image for the base level mipmap, in pixels.
 //
 // WithWidth sets the width property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithWidth(width uint) *TextureDescriptor {
@@ -59,7 +61,7 @@ func (x *TextureDescriptor) WithWidth(width uint) *TextureDescriptor {
 	return x
 }
 
-// @property height @abstract The height of the texture to create. The default value is 1. @discussion height If allocating a 1D texture, height must be 1.
+// The height of the texture image for the base level mipmap, in pixels.
 //
 // WithHeight sets the height property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithHeight(height uint) *TextureDescriptor {
@@ -67,7 +69,7 @@ func (x *TextureDescriptor) WithHeight(height uint) *TextureDescriptor {
 	return x
 }
 
-// @property depth @abstract The depth of the texture to create. The default value is 1. @discussion depth When allocating any texture types other than 3D, depth must be 1.
+// The depth of the texture image for the base level mipmap, in pixels.
 //
 // WithDepth sets the depth property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithDepth(depth uint) *TextureDescriptor {
@@ -75,7 +77,7 @@ func (x *TextureDescriptor) WithDepth(depth uint) *TextureDescriptor {
 	return x
 }
 
-// @property mipmapLevelCount @abstract The number of mipmap levels to allocate. The default value is 1. @discussion When creating Buffer and Multisample textures, mipmapLevelCount must be 1.
+// The number of mipmap levels for this texture.
 //
 // WithMipmapLevelCount sets the mipmapLevelCount property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithMipmapLevelCount(mipmapLevelCount uint) *TextureDescriptor {
@@ -83,7 +85,7 @@ func (x *TextureDescriptor) WithMipmapLevelCount(mipmapLevelCount uint) *Texture
 	return x
 }
 
-// @property sampleCount @abstract The number of samples in the texture to create. The default value is 1. @discussion When creating Buffer textures sampleCount must be 1. Implementations may round sample counts up to the next supported value.
+// The number of samples in each fragment.
 //
 // WithSampleCount sets the sampleCount property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithSampleCount(sampleCount uint) *TextureDescriptor {
@@ -91,7 +93,7 @@ func (x *TextureDescriptor) WithSampleCount(sampleCount uint) *TextureDescriptor
 	return x
 }
 
-// @property arrayLength @abstract The number of array elements to allocate. The default value is 1. @discussion When allocating any non-Array texture type, arrayLength has to be 1. Otherwise it must be set to something greater than 1 and less than 2048.
+// The number of array elements for this texture.
 //
 // WithArrayLength sets the arrayLength property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithArrayLength(arrayLength uint) *TextureDescriptor {
@@ -99,7 +101,7 @@ func (x *TextureDescriptor) WithArrayLength(arrayLength uint) *TextureDescriptor
 	return x
 }
 
-// @property resourceOptions @abstract Options to control memory allocation parameters, etc. @discussion Contains a packed set of the storageMode, cpuCacheMode and hazardTrackingMode properties.
+// The behavior of a new memory allocation.
 //
 // WithResourceOptions sets the resourceOptions property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithResourceOptions(resourceOptions MTLResourceOptions) *TextureDescriptor {
@@ -107,7 +109,7 @@ func (x *TextureDescriptor) WithResourceOptions(resourceOptions MTLResourceOptio
 	return x
 }
 
-// @property cpuCacheMode @abstract Options to specify CPU cache mode of texture resource.
+// The CPU cache mode used for the CPU mapping of the texture.
 //
 // WithCpuCacheMode sets the cpuCacheMode property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithCpuCacheMode(cpuCacheMode MTLCPUCacheMode) *TextureDescriptor {
@@ -115,7 +117,7 @@ func (x *TextureDescriptor) WithCpuCacheMode(cpuCacheMode MTLCPUCacheMode) *Text
 	return x
 }
 
-// @property storageMode @abstract To specify storage mode of texture resource.
+// The location and access permissions of the texture.
 //
 // WithStorageMode sets the storageMode property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithStorageMode(storageMode MTLStorageMode) *TextureDescriptor {
@@ -123,7 +125,7 @@ func (x *TextureDescriptor) WithStorageMode(storageMode MTLStorageMode) *Texture
 	return x
 }
 
-// @property hazardTrackingMode @abstract Set hazard tracking mode for the texture. The default value is MTLHazardTrackingModeDefault. @discussion For resources created from the device, MTLHazardTrackingModeDefault is treated as MTLHazardTrackingModeTracked. For resources created on a heap, MTLHazardTrackingModeDefault is treated as the hazardTrackingMode of the heap itself. In either case, it is possible to opt-out of hazard tracking by setting MTLHazardTrackingModeUntracked. It is not possible to opt-in to hazard tracking on a heap that itself is not hazard tracked. For optimal performance, perform hazard tracking manually through MTLFence or MTLEvent instead.
+// The texture’s hazard tracking mode.
 //
 // WithHazardTrackingMode sets the hazardTrackingMode property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode) *TextureDescriptor {
@@ -131,7 +133,7 @@ func (x *TextureDescriptor) WithHazardTrackingMode(hazardTrackingMode MTLHazardT
 	return x
 }
 
-// @property usage @abstract Description of texture usage
+// Options that determine how you can use the texture.
 //
 // WithUsage sets the usage property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithUsage(usage MTLTextureUsage) *TextureDescriptor {
@@ -139,7 +141,7 @@ func (x *TextureDescriptor) WithUsage(usage MTLTextureUsage) *TextureDescriptor 
 	return x
 }
 
-// @property allowGPUOptimizedContents @abstract Allow GPU-optimization for the contents of this texture. The default value is true. @discussion Useful for opting-out of GPU-optimization when implicit optimization (e.g. RT writes) is regressing CPU-read-back performance. See the documentation for optimizeContentsForGPUAccess: and optimizeContentsForCPUAccess: APIs.
+// A Boolean value indicating whether the GPU is allowed to adjust the texture’s contents to improve GPU performance.
 //
 // WithAllowGPUOptimizedContents sets the allowGPUOptimizedContents property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithAllowGPUOptimizedContents(allowGPUOptimizedContents bool) *TextureDescriptor {
@@ -155,7 +157,7 @@ func (x *TextureDescriptor) WithCompressionType(compressionType MTLTextureCompre
 	return x
 }
 
-// @property swizzle @abstract Channel swizzle to use when reading or sampling from the texture, the default value is MTLTextureSwizzleChannelsDefault.
+// The pattern you want the GPU to apply to pixels when you read or sample pixels from the texture.
 //
 // WithSwizzle sets the swizzle property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithSwizzle(swizzle raw.MTLTextureSwizzleChannels) *TextureDescriptor {
@@ -163,7 +165,7 @@ func (x *TextureDescriptor) WithSwizzle(swizzle raw.MTLTextureSwizzleChannels) *
 	return x
 }
 
-// Determines the page size for a placement sparse texture. Set this property to a non-zero value to create a *placement sparse texture*. Placement sparse textures are instances of “MTLTexture“ that you assign memory to using a “MTLHeap“ instance of type “MTLHeapType/MTLHeapTypePlacement“ and a “MTLHeapDescriptor/maxCompatiblePlacementSparsePageSize“ at least as large as the “MTLSparsePageSize“ value you assign to this property. This value is 0 by default.
+// Determines the page size for a placement sparse texture.
 //
 // WithPlacementSparsePageSize sets the placementSparsePageSize property and returns the receiver for chaining.
 func (x *TextureDescriptor) WithPlacementSparsePageSize(placementSparsePageSize MTLSparsePageSize) *TextureDescriptor {

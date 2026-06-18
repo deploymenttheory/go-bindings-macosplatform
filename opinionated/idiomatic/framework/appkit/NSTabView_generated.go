@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A multipage interface that displays one page at a time.
+//
 // TabView wraps [raw.NSTabView] with a fluent Go API.
 type TabView struct {
 	inner *raw.NSTabView
@@ -41,12 +43,16 @@ func NewTabView() *TabView {
 	return &TabView{inner: raw.NSTabViewFromID(_id)}
 }
 
+// The font used for the tab view’s label text.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *TabView) WithFont(font *Font) *TabView {
 	x.inner.SetFont(font.Unwrap())
 	return x
 }
 
+// The tab type to display the tabs.
+//
 // WithTabViewType sets the tabViewType property and returns the receiver for chaining.
 func (x *TabView) WithTabViewType(tabViewType NSTabViewType) *TabView {
 	x.inner.SetTabViewType(raw.NSTabViewType(tabViewType))
@@ -65,6 +71,8 @@ func (x *TabView) WithTabViewBorderType(tabViewBorderType NSTabViewBorderType) *
 	return x
 }
 
+// The tab view’s array of tab view items.
+//
 // WithTabViewItems sets the collection, converting the Go slice to an NSArray.
 func (x *TabView) WithTabViewItems(items ...*raw.NSTabViewItem) *TabView {
 	if len(items) == 0 {
@@ -83,30 +91,40 @@ func (x *TabView) WithTabViewItems(items ...*raw.NSTabViewItem) *TabView {
 	return x
 }
 
+// A Boolean value that indicates if the tab view allows truncating for labels that don’t fit on a tab.
+//
 // WithAllowsTruncatedLabels sets the allowsTruncatedLabels property and returns the receiver for chaining.
 func (x *TabView) WithAllowsTruncatedLabels(allowsTruncatedLabels bool) *TabView {
 	x.inner.SetAllowsTruncatedLabels(allowsTruncatedLabels)
 	return x
 }
 
+// A Boolean value that indicates if the tab view draws a background color when its type is NSNoTabsNoBorder.
+//
 // WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
 func (x *TabView) WithDrawsBackground(drawsBackground bool) *TabView {
 	x.inner.SetDrawsBackground(drawsBackground)
 	return x
 }
 
+// The size of the tab view.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *TabView) WithControlSize(controlSize NSControlSize) *TabView {
 	x.inner.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The tab view’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *TabView) WithDelegate(delegate raw.NSTabViewDelegate) *TabView {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The tab view’s control tint.
+//
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
 func (x *TabView) WithControlTint(controlTint NSControlTint) *TabView {
 	x.inner.SetControlTint(raw.NSControlTint(controlTint))
@@ -155,6 +173,8 @@ func (x *TabView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOption
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *TabView) WithFrame(frame corefoundation.CGRect) *TabView {
 	x.inner.NSView.SetFrame(frame)
@@ -179,6 +199,8 @@ func (x *TabView) WithBoundsRotation(boundsRotation float64) *TabView {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *TabView) WithBounds(bounds corefoundation.CGRect) *TabView {
 	x.inner.NSView.SetBounds(bounds)
@@ -191,6 +213,8 @@ func (x *TabView) WithCanDrawConcurrently(canDrawConcurrently bool) *TabView {
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *TabView) WithNeedsDisplay(needsDisplay bool) *TabView {
 	x.inner.NSView.SetNeedsDisplay(needsDisplay)
@@ -377,7 +401,7 @@ func (x *TabView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundati
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *TabView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TabView {
@@ -433,85 +457,117 @@ func (x *TabView) WithPressureConfiguration(pressureConfiguration *PressureConfi
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *TabView) WithNextResponder(nextResponder ResponderProvider) *TabView {
 	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *TabView) WithMenu(menu *Menu) *TabView {
 	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *TabView) WithUserActivity(userActivity *foundation.NSUserActivity) *TabView {
 	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *TabView) WithTouchBar(touchBar *TouchBar) *TabView {
 	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Selects the specified tab view item.
+//
 // SelectTabViewItem calls the underlying SelectTabViewItem.
 func (x *TabView) SelectTabViewItem(tabViewItem *raw.NSTabViewItem) {
 	x.inner.SelectTabViewItem(tabViewItem)
 }
 
+// Selects the tab view item specified by index.
+//
 // SelectTabViewItemAtIndex calls the underlying SelectTabViewItemAtIndex.
 func (x *TabView) SelectTabViewItemAtIndex(index int) {
 	x.inner.SelectTabViewItemAtIndex(index)
 }
 
+// Selects the tab view item specified by identifier.
+//
 // SelectTabViewItemWithIdentifier calls the underlying SelectTabViewItemWithIdentifier.
 func (x *TabView) SelectTabViewItemWithIdentifier(identifier objc.ID) {
 	x.inner.SelectTabViewItemWithIdentifier(identifier)
 }
 
+// Sets the selected tab view item to the selected item obtained from the sender.
+//
 // TakeSelectedTabViewItemFromSender calls the underlying TakeSelectedTabViewItemFromSender.
 func (x *TabView) TakeSelectedTabViewItemFromSender(sender objc.ID) {
 	x.inner.TakeSelectedTabViewItemFromSender(sender)
 }
 
+// This action method selects the first tab view item.
+//
 // SelectFirstTabViewItem calls the underlying SelectFirstTabViewItem.
 func (x *TabView) SelectFirstTabViewItem(sender objc.ID) {
 	x.inner.SelectFirstTabViewItem(sender)
 }
 
+// This action method selects the last tab view item.
+//
 // SelectLastTabViewItem calls the underlying SelectLastTabViewItem.
 func (x *TabView) SelectLastTabViewItem(sender objc.ID) {
 	x.inner.SelectLastTabViewItem(sender)
 }
 
+// This action method selects the next tab view item in the sequence.
+//
 // SelectNextTabViewItem calls the underlying SelectNextTabViewItem.
 func (x *TabView) SelectNextTabViewItem(sender objc.ID) {
 	x.inner.SelectNextTabViewItem(sender)
 }
 
+// This action method selects the previous tab view item in the sequence.
+//
 // SelectPreviousTabViewItem calls the underlying SelectPreviousTabViewItem.
 func (x *TabView) SelectPreviousTabViewItem(sender objc.ID) {
 	x.inner.SelectPreviousTabViewItem(sender)
 }
 
+// Adds the specified tab item.
+//
 // AddTabViewItem calls the underlying AddTabViewItem.
 func (x *TabView) AddTabViewItem(tabViewItem *raw.NSTabViewItem) {
 	x.inner.AddTabViewItem(tabViewItem)
 }
 
+// Inserts the specified item into the tab view’s array of tab view items at the specified index.
+//
 // InsertTabViewItemAtIndex calls the underlying InsertTabViewItemAtIndex.
 func (x *TabView) InsertTabViewItemAtIndex(tabViewItem *raw.NSTabViewItem, index int) {
 	x.inner.InsertTabViewItemAtIndex(tabViewItem, index)
 }
 
+// Removes the specified item from the tab view’s array of tab view items.
+//
 // RemoveTabViewItem calls the underlying RemoveTabViewItem.
 func (x *TabView) RemoveTabViewItem(tabViewItem *raw.NSTabViewItem) {
 	x.inner.RemoveTabViewItem(tabViewItem)
 }
 
+// Returns the tab view item at the specified point.
+//
 // TabViewItemAtPoint calls the underlying TabViewItemAtPoint.
 func (x *TabView) TabViewItemAtPoint(point corefoundation.CGPoint) *TabViewItem {
 	_r := x.inner.TabViewItemAtPoint(point)
@@ -521,11 +577,15 @@ func (x *TabView) TabViewItemAtPoint(point corefoundation.CGPoint) *TabViewItem 
 	return &TabViewItem{inner: _r}
 }
 
+// Returns the index of the specified item in the tab view.
+//
 // IndexOfTabViewItem calls the underlying IndexOfTabViewItem.
 func (x *TabView) IndexOfTabViewItem(tabViewItem *raw.NSTabViewItem) int {
 	return x.inner.IndexOfTabViewItem(tabViewItem)
 }
 
+// Returns the tab view item at index in the tab view’s array of items.
+//
 // TabViewItemAtIndex calls the underlying TabViewItemAtIndex.
 func (x *TabView) TabViewItemAtIndex(index int) *TabViewItem {
 	_r := x.inner.TabViewItemAtIndex(index)
@@ -535,6 +595,8 @@ func (x *TabView) TabViewItemAtIndex(index int) *TabViewItem {
 	return &TabViewItem{inner: _r}
 }
 
+// Returns the index of the item that matches the specified identifier or NSNotFound if the item is not found.
+//
 // IndexOfTabViewItemWithIdentifier calls the underlying IndexOfTabViewItemWithIdentifier.
 func (x *TabView) IndexOfTabViewItemWithIdentifier(identifier objc.ID) int {
 	return x.inner.IndexOfTabViewItemWithIdentifier(identifier)

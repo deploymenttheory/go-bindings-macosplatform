@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The IKFilterBrowserView class is used as a container for the elements of an IKFilterBrowserPanel object.
+//
 // IKFilterBrowserView wraps [raw.IKFilterBrowserView] with a fluent Go API.
 type IKFilterBrowserView struct {
 	inner *raw.IKFilterBrowserView
@@ -36,14 +38,14 @@ func NewIKFilterBrowserView() *IKFilterBrowserView {
 	return &IKFilterBrowserView{inner: raw.IKFilterBrowserViewFromID(_id)}
 }
 
-// @method     setPreviewState: @abstract   Use this method to show and hide the Preview @discussion Use this method to show and hide the Preview from the program. @param      inState Boolean for visibility of the preview.
+// Sets the preview state.
 //
 // SetPreviewState calls the underlying SetPreviewState.
 func (x *IKFilterBrowserView) SetPreviewState(inState bool) {
 	x.inner.SetPreviewState(inState)
 }
 
-// @method     filterName @abstract   Returns the name of the currently selected filter. @discussion Use this method in response to a IKFilterBrowserFilterSelectedNotification or IKFilterBrowserFilterDoubleClickNotification or afer returning from a modal session.
+// Returns the name of the filter that is currently selected in the filter browser.
 //
 // FilterName calls the underlying FilterName.
 func (x *IKFilterBrowserView) FilterName() string {

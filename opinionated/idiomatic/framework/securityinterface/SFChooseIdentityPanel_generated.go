@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A panel or sheet containing a list of identities that a user can choose from.
+//
 // ChooseIdentityPanel wraps [raw.SFChooseIdentityPanel] with a fluent Go API.
 type ChooseIdentityPanel struct {
 	inner *raw.SFChooseIdentityPanel
@@ -39,70 +41,78 @@ func NewChooseIdentityPanel() *ChooseIdentityPanel {
 	return &ChooseIdentityPanel{inner: raw.SFChooseIdentityPanelFromID(_id)}
 }
 
-// @method runModalForIdentities:message: @abstract Displays a supplied list of identities in a modal panel, returning NSOKButton or NSCancelButton when dismissed. Use the -identity method to subsequently obtain the identity chosen by the user. @param identities An array of SecIdentityRef objects, usually obtained from an identity search (see <Security/SecIdentitySearch.h>). @param message Client-defined message string to display in the panel.
+// Displays a list of identities in a modal panel.
 //
 // RunModalForIdentitiesMessage calls the underlying RunModalForIdentitiesMessage.
 func (x *ChooseIdentityPanel) RunModalForIdentitiesMessage(identities *foundation.NSArray[objc.ID], message string) int {
 	return x.inner.RunModalForIdentitiesMessage(identities, foundation.NSStringStringWithUTF8String(message))
 }
 
-// @method beginSheetForWindow:modalDelegate:didEndSelector:contextInfo:identities:message: @abstract Displays a sheet version of the SFChooseIdentityPanel. The didEndSelector returnCode will contain either NSOKButton or NSCancelButton. @param docWindow The parent window to which the sheet is attached. @param modalDelegate The object whose didEndSelector method will be called when the sheet is dismissed. @param didEndSelector This method is called when the sheet is dismissed. @param contextInfo Client-defined contextual data which will be passed to the didEndSelector method. @param identities An array of SecIdentityRef objects, usually obtained from an identity search (see <Security/SecIdentitySearch.h>). @param message Client-defined message string to display in the panel. @discussion The didEndSelector method should have the following signature: - (void)chooseIdentitySheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+// Displays a list of identities in a modal sheet from which the user can select an identity.
 //
 // BeginSheetForWindowModalDelegateDidEndSelectorContextInfoIdentitiesMessage calls the underlying BeginSheetForWindowModalDelegateDidEndSelectorContextInfoIdentitiesMessage.
 func (x *ChooseIdentityPanel) BeginSheetForWindowModalDelegateDidEndSelectorContextInfoIdentitiesMessage(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, identities *foundation.NSArray[objc.ID], message string) {
 	x.inner.BeginSheetForWindowModalDelegateDidEndSelectorContextInfoIdentitiesMessage(docWindow, delegate, didEndSelector, contextInfo, identities, foundation.NSStringStringWithUTF8String(message))
 }
 
-// @method identity @abstract Returns the identity that the user chose in the panel.
+// Returns the identity that the user chose in the panel or sheet.
 //
 // Identity calls the underlying Identity.
 func (x *ChooseIdentityPanel) Identity() unsafe.Pointer {
 	return x.inner.Identity()
 }
 
-// @method setPolicies: @abstract Specifies one or more policies that apply to the displayed certificates. @param policies The policies to use when evaluating the certificates' status. You can pass either a SecPolicyRef or a NSArray (containing one or more SecPolicyRef instances) in this parameter. If policies is set to nil, the Apple X.509 Basic Policy will be used. @discussion Applications will typically display a SFChooseIdentityPanel in the context of a specific usage, such as SSL or S/MIME. You should set only the policy references which apply to your intended usage.
+// Specifies one or more policies that apply to the displayed certificates.
 //
 // SetPolicies calls the underlying SetPolicies.
 func (x *ChooseIdentityPanel) SetPolicies(policies objc.ID) {
 	x.inner.SetPolicies(policies)
 }
 
-// @method policies @abstract Returns an array of policies used to evaluate the status of the displayed certificates. @discussion This method returns an autoreleased NSArray containing one or more SecPolicyRef instances, as set by a previous setPolicies: call.
+// Returns an array of policies used to evaluate the status of the displayed certificates.
 //
 // Policies calls the underlying Policies.
 func (x *ChooseIdentityPanel) Policies() *foundation.NSArray[objc.ID] {
 	return x.inner.Policies()
 }
 
-// @method setDefaultButtonTitle: @abstract Customizes the title of the default button. @param title The new title for the default button.
+// Customizes the title of the default button.
 //
 // SetDefaultButtonTitle calls the underlying SetDefaultButtonTitle.
 func (x *ChooseIdentityPanel) SetDefaultButtonTitle(title string) {
 	x.inner.SetDefaultButtonTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
-// @method setAlternateButtonTitle: @abstract Customizes the title of the alternate button. @param title The new title for the alternate button. If title is set to nil, the button will not be shown.
+// Customizes the title of the alternate button.
 //
 // SetAlternateButtonTitle calls the underlying SetAlternateButtonTitle.
 func (x *ChooseIdentityPanel) SetAlternateButtonTitle(title string) {
 	x.inner.SetAlternateButtonTitle(foundation.NSStringStringWithUTF8String(title))
 }
 
+// Displays a Help button in the sheet or panel.
+//
 // SetShowsHelp calls the underlying SetShowsHelp.
 func (x *ChooseIdentityPanel) SetShowsHelp(showsHelp bool) {
 	x.inner.SetShowsHelp(showsHelp)
 }
 
+// Indicates whether the help button is currently set to be displayed.
+//
 // ShowsHelp calls the underlying ShowsHelp.
 func (x *ChooseIdentityPanel) ShowsHelp() bool {
 	return x.inner.ShowsHelp()
 }
 
+// Sets the help anchor string for the sheet or modal panel.
+//
 // SetHelpAnchor calls the underlying SetHelpAnchor.
 func (x *ChooseIdentityPanel) SetHelpAnchor(anchor string) {
 	x.inner.SetHelpAnchor(foundation.NSStringStringWithUTF8String(anchor))
 }
 
+// Returns the current help anchor string for the sheet or panel.
+//
 // HelpAnchor calls the underlying HelpAnchor.
 func (x *ChooseIdentityPanel) HelpAnchor() string {
 	_r := x.inner.HelpAnchor()
@@ -112,14 +122,14 @@ func (x *ChooseIdentityPanel) HelpAnchor() string {
 	return purego.GoString(_r.Ptr())
 }
 
-// @method setInformativeText: @abstract Sets the optional informative text displayed in the SFChooseIdentityPanel. @param informativeText The informative text to display in the panel. @discussion Call this method to set the informative text to be displayed.
+// Sets the optional informative text displayed in the panel.
 //
 // SetInformativeText calls the underlying SetInformativeText.
 func (x *ChooseIdentityPanel) SetInformativeText(informativeText string) {
 	x.inner.SetInformativeText(foundation.NSStringStringWithUTF8String(informativeText))
 }
 
-// @method informativeText @abstract Returns the informative text currently displayed in the SFChooseIdentityPanel.
+// Returns the informative text currently displayed in the panel.
 //
 // InformativeText calls the underlying InformativeText.
 func (x *ChooseIdentityPanel) InformativeText() string {
@@ -130,14 +140,14 @@ func (x *ChooseIdentityPanel) InformativeText() string {
 	return purego.GoString(_r.Ptr())
 }
 
-// @method setDomain: @abstract Sets an optional domain in which the identity is to be used. @param domainString A string containing a hostname, RFC822 name (email address), URL, or similar identifier. @discussion Call this method to associate a domain with the chosen identity. If the user chooses an identity and a domain has been set, an identity preference item will be created in the default keychain. Subsequently, calling SecIdentitySearchCreateWithPolicy and SecIdentitySearchCopyNext will return the preferred identity for this domain first.
+// Sets an optional domain in which the identity is to be used.
 //
 // SetDomain calls the underlying SetDomain.
 func (x *ChooseIdentityPanel) SetDomain(domainString string) {
 	x.inner.SetDomain(foundation.NSStringStringWithUTF8String(domainString))
 }
 
-// @method domain @abstract Returns the domain which will be associated with the chosen identity.
+// Returns the domain that will be associated with the chosen identity.
 //
 // Domain calls the underlying Domain.
 func (x *ChooseIdentityPanel) Domain() string {

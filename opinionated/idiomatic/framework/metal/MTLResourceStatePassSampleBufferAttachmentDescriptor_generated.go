@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of where to store GPU counter information at the start and end of a resource state pass.
+//
 // ResourceStatePassSampleBufferAttachmentDescriptor wraps [raw.MTLResourceStatePassSampleBufferAttachmentDescriptor] with a fluent Go API.
 type ResourceStatePassSampleBufferAttachmentDescriptor struct {
 	inner *raw.MTLResourceStatePassSampleBufferAttachmentDescriptor
@@ -37,7 +39,7 @@ func NewResourceStatePassSampleBufferAttachmentDescriptor() *ResourceStatePassSa
 	return &ResourceStatePassSampleBufferAttachmentDescriptor{inner: raw.MTLResourceStatePassSampleBufferAttachmentDescriptorFromID(_id)}
 }
 
-// @property sampleBuffer @abstract The sample buffer to store samples for the resourceState-pass defined samples. If sampleBuffer is non-nil, the sample indices will be used to store samples into the sample buffer.  If no sample buffer is provided, no samples will be taken. If any of the sample indices are specified as MTLCounterDontSample, no sample will be taken for that action.
+// A specialized memory buffer that the GPU uses to store its counter data during the resource state pass.
 //
 // WithSampleBuffer sets the sampleBuffer property and returns the receiver for chaining.
 func (x *ResourceStatePassSampleBufferAttachmentDescriptor) WithSampleBuffer(sampleBuffer raw.MTLCounterSampleBuffer) *ResourceStatePassSampleBufferAttachmentDescriptor {
@@ -45,7 +47,7 @@ func (x *ResourceStatePassSampleBufferAttachmentDescriptor) WithSampleBuffer(sam
 	return x
 }
 
-// @property startOfEncoderSampleIndex @abstract The sample index to use to store the sample taken at the start of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a resourceState pass will fail.
+// The index the Metal device object should use to store GPU counters when starting the resource state pass.
 //
 // WithStartOfEncoderSampleIndex sets the startOfEncoderSampleIndex property and returns the receiver for chaining.
 func (x *ResourceStatePassSampleBufferAttachmentDescriptor) WithStartOfEncoderSampleIndex(startOfEncoderSampleIndex uint) *ResourceStatePassSampleBufferAttachmentDescriptor {
@@ -53,7 +55,7 @@ func (x *ResourceStatePassSampleBufferAttachmentDescriptor) WithStartOfEncoderSa
 	return x
 }
 
-// @property endOfEncoderSampleIndex @abstract The sample index to use to store the sample taken at the end of Command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. @discussion On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a resourceState pass will fail.
+// The index the Metal device object should use to store GPU counters when ending the resource state pass.
 //
 // WithEndOfEncoderSampleIndex sets the endOfEncoderSampleIndex property and returns the receiver for chaining.
 func (x *ResourceStatePassSampleBufferAttachmentDescriptor) WithEndOfEncoderSampleIndex(endOfEncoderSampleIndex uint) *ResourceStatePassSampleBufferAttachmentDescriptor {

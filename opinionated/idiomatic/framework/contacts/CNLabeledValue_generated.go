@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An immutable object that combines a contact property value with a label that describes that property.
+//
 // LabeledValue wraps [raw.CNLabeledValue] with a fluent Go API.
 type LabeledValue struct {
 	inner *raw.CNLabeledValue[objc.ID]
@@ -31,7 +33,7 @@ func LabeledValueFromID(id objc.ID) *LabeledValue {
 	return &LabeledValue{inner: raw.CNLabeledValueFromID[objc.ID](id)}
 }
 
-// Initializes the CNLabeledValue with a new identifier.
+// Returns a new labeled value identifier.
 //
 // NewLabeledValueWithLabelValue creates a new [LabeledValue].
 func NewLabeledValueWithLabelValue(label string, value objc.ID) *LabeledValue {
@@ -40,21 +42,21 @@ func NewLabeledValueWithLabelValue(label string, value objc.ID) *LabeledValue {
 	return &LabeledValue{inner: raw.CNLabeledValueFromID[objc.ID](_id)}
 }
 
-// Returns a new CNLabeledValue with the existing value and identifier.
+// Returns a labeled value object with an existing value and identifier.
 //
 // LabeledValueBySettingLabel calls the underlying LabeledValueBySettingLabel.
 func (x *LabeledValue) LabeledValueBySettingLabel(label string) *raw.CNLabeledValue[objc.ID] {
 	return x.inner.LabeledValueBySettingLabel(foundation.NSStringStringWithUTF8String(label))
 }
 
-// Returns a new CNLabeledValue with the existing label and identifier.
+// Returns a new value for an existing label and identifier.
 //
 // LabeledValueBySettingValue calls the underlying LabeledValueBySettingValue.
 func (x *LabeledValue) LabeledValueBySettingValue(value objc.ID) *raw.CNLabeledValue[objc.ID] {
 	return x.inner.LabeledValueBySettingValue(value)
 }
 
-// Returns a new CNLabeledValue with the existing identifier.
+// Returns a labeled value object with the specified label and value with the existing identifier.
 //
 // LabeledValueBySettingLabelValue calls the underlying LabeledValueBySettingLabelValue.
 func (x *LabeledValue) LabeledValueBySettingLabelValue(label string, value objc.ID) *raw.CNLabeledValue[objc.ID] {

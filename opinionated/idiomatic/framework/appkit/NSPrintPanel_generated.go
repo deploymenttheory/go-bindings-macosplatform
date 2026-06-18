@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The Print panel that queries the user for information about a print job.
+//
 // PrintPanel wraps [raw.NSPrintPanel] with a fluent Go API.
 type PrintPanel struct {
 	inner *raw.NSPrintPanel
@@ -38,39 +40,53 @@ func NewPrintPanel() *PrintPanel {
 	return &PrintPanel{inner: raw.NSPrintPanelFromID(_id)}
 }
 
+// The current configuration options for the Print panel.
+//
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *PrintPanel) WithOptions(options NSPrintPanelOptions) *PrintPanel {
 	x.inner.SetOptions(raw.NSPrintPanelOptions(options))
 	return x
 }
 
+// The HTML help anchor associated with the Print panel.
+//
 // WithHelpAnchor sets the helpAnchor property and returns the receiver for chaining.
 func (x *PrintPanel) WithHelpAnchor(helpAnchor *foundation.NSString) *PrintPanel {
 	x.inner.SetHelpAnchor(helpAnchor)
 	return x
 }
 
+// The type of settings that the print panel displays.
+//
 // WithJobStyleHint sets the jobStyleHint property and returns the receiver for chaining.
 func (x *PrintPanel) WithJobStyleHint(jobStyleHint *foundation.NSString) *PrintPanel {
 	x.inner.SetJobStyleHint(jobStyleHint)
 	return x
 }
 
+// Adds a custom controller to the Print panel to manage an accessory view.
+//
 // AddAccessoryController calls the underlying AddAccessoryController.
 func (x *PrintPanel) AddAccessoryController(accessoryController *raw.NSViewController) {
 	x.inner.AddAccessoryController(accessoryController)
 }
 
+// Removes the specified controller and accessory view from the Print panel.
+//
 // RemoveAccessoryController calls the underlying RemoveAccessoryController.
 func (x *PrintPanel) RemoveAccessoryController(accessoryController *raw.NSViewController) {
 	x.inner.RemoveAccessoryController(accessoryController)
 }
 
+// Sets the title of the Print panel’s default button.
+//
 // SetDefaultButtonTitle calls the underlying SetDefaultButtonTitle.
 func (x *PrintPanel) SetDefaultButtonTitle(defaultButtonTitle string) {
 	x.inner.SetDefaultButtonTitle(foundation.NSStringStringWithUTF8String(defaultButtonTitle))
 }
 
+// Returns the title of the Print panel’s default button.
+//
 // DefaultButtonTitle calls the underlying DefaultButtonTitle.
 func (x *PrintPanel) DefaultButtonTitle() string {
 	_r := x.inner.DefaultButtonTitle()
@@ -85,16 +101,22 @@ func (x *PrintPanel) BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo
 	x.inner.BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo, parentWindow, func(_a0 raw.NSPrintPanelResult) { handler(NSPrintPanelResult(_a0)) })
 }
 
+// Displays a Print panel sheet and runs it modally for the specified window.
+//
 // BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo calls the underlying BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo.
 func (x *PrintPanel) BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo(printInfo *raw.NSPrintInfo, docWindow *raw.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo(printInfo, docWindow, delegate, didEndSelector, contextInfo)
 }
 
+// Displays the Print panel and runs the modal loop using the specified printing information.
+//
 // RunModalWithPrintInfo calls the underlying RunModalWithPrintInfo.
 func (x *PrintPanel) RunModalWithPrintInfo(printInfo *raw.NSPrintInfo) int {
 	return x.inner.RunModalWithPrintInfo(printInfo)
 }
 
+// Displays the Print panel and begins the modal loop.
+//
 // RunModal calls the underlying RunModal.
 func (x *PrintPanel) RunModal() int {
 	return x.inner.RunModal()
@@ -158,11 +180,15 @@ func (x *PrintPanel) PrintInfo() *PrintInfo {
 	return &PrintInfo{inner: _r}
 }
 
+// Sets the accessory view for the Print panel.
+//
 // SetAccessoryView calls the underlying SetAccessoryView.
 func (x *PrintPanel) SetAccessoryView(accessoryView *raw.NSView) {
 	x.inner.SetAccessoryView(accessoryView)
 }
 
+// Returns the accessory view of the Print panel.
+//
 // AccessoryView calls the underlying AccessoryView.
 func (x *PrintPanel) AccessoryView() *View {
 	_r := x.inner.AccessoryView()
@@ -172,11 +198,15 @@ func (x *PrintPanel) AccessoryView() *View {
 	return &View{inner: _r}
 }
 
+// Updates the Print panel with information from the current print operation object.
+//
 // UpdateFromPrintInfo calls the underlying UpdateFromPrintInfo.
 func (x *PrintPanel) UpdateFromPrintInfo() {
 	x.inner.UpdateFromPrintInfo()
 }
 
+// Writes the Print panel’s printing attributes to the current print operation object.
+//
 // FinalWritePrintInfo calls the underlying FinalWritePrintInfo.
 func (x *PrintPanel) FinalWritePrintInfo() {
 	x.inner.FinalWritePrintInfo()

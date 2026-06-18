@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that presents a sheet that prompts the user to authorize a payment request.
+//
 // PaymentAuthorizationController wraps [raw.PKPaymentAuthorizationController] with a fluent Go API.
 type PaymentAuthorizationController struct {
 	inner *raw.PKPaymentAuthorizationController
@@ -32,6 +34,8 @@ func PaymentAuthorizationControllerFromID(id objc.ID) *PaymentAuthorizationContr
 	return &PaymentAuthorizationController{inner: raw.PKPaymentAuthorizationControllerFromID(id)}
 }
 
+// Initializes and returns a payment authorization controller.
+//
 // NewPaymentAuthorizationControllerWithPaymentRequest creates a new [PaymentAuthorizationController].
 func NewPaymentAuthorizationControllerWithPaymentRequest(request *raw.PKPaymentRequest) *PaymentAuthorizationController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentAuthorizationController")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewPaymentAuthorizationControllerWithPaymentRequest(request *raw.PKPaymentR
 	return &PaymentAuthorizationController{inner: raw.PKPaymentAuthorizationControllerFromID(_id)}
 }
 
+// Creates a new payment authorization controller with the disbursement request you provide.
+//
 // NewPaymentAuthorizationControllerWithDisbursementRequest creates a new [PaymentAuthorizationController].
 func NewPaymentAuthorizationControllerWithDisbursementRequest(request *raw.PKDisbursementRequest) *PaymentAuthorizationController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentAuthorizationController")), objc.RegisterName("alloc"))
@@ -46,17 +52,23 @@ func NewPaymentAuthorizationControllerWithDisbursementRequest(request *raw.PKDis
 	return &PaymentAuthorizationController{inner: raw.PKPaymentAuthorizationControllerFromID(_id)}
 }
 
+// The controller’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *PaymentAuthorizationController) WithDelegate(delegate raw.PKPaymentAuthorizationControllerDelegate) *PaymentAuthorizationController {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Presents the payment sheet modally over your app.
+//
 // PresentWithCompletion calls the underlying PresentWithCompletion.
 func (x *PaymentAuthorizationController) PresentWithCompletion(completion func(bool)) {
 	x.inner.PresentWithCompletion(completion)
 }
 
+// Dismisses the payment sheet.
+//
 // DismissWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *PaymentAuthorizationController) DismissWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)

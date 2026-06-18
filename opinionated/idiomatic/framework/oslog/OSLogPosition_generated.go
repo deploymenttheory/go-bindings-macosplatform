@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A representation of a point in a sequence of entries in the unified logging system.
+//
 // LogPosition wraps [raw.OSLogPosition] with a fluent Go API.
 type LogPosition struct {
 	inner *raw.OSLogPosition

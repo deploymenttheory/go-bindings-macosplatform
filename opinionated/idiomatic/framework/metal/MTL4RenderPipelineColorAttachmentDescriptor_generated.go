@@ -37,7 +37,7 @@ func NewMTL4RenderPipelineColorAttachmentDescriptor() *MTL4RenderPipelineColorAt
 	return &MTL4RenderPipelineColorAttachmentDescriptor{inner: raw.MTL4RenderPipelineColorAttachmentDescriptorFromID(_id)}
 }
 
-// Configures the pixel format. This property defaults to “MTLPixelFormatInvalid“.
+// Configures the pixel format.
 //
 // WithPixelFormat sets the pixelFormat property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineColorAttachmentDescriptor) WithPixelFormat(pixelFormat MTLPixelFormat) *MTL4RenderPipelineColorAttachmentDescriptor {
@@ -45,7 +45,7 @@ func (x *MTL4RenderPipelineColorAttachmentDescriptor) WithPixelFormat(pixelForma
 	return x
 }
 
-// Configure the blend state for color attachments the pipeline state uses. This property's default value is “MTL4BlendStateDisabled“.
+// Configure the blend state for color attachments the pipeline state uses.
 //
 // WithBlendingState sets the blendingState property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineColorAttachmentDescriptor) WithBlendingState(blendingState MTL4BlendState) *MTL4RenderPipelineColorAttachmentDescriptor {
@@ -53,7 +53,7 @@ func (x *MTL4RenderPipelineColorAttachmentDescriptor) WithBlendingState(blending
 	return x
 }
 
-// Configures the source RGB blend factor. This property defaults to “MTLBlendFactorOne“.
+// Configures the source RGB blend factor.
 //
 // WithSourceRGBBlendFactor sets the sourceRGBBlendFactor property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineColorAttachmentDescriptor) WithSourceRGBBlendFactor(sourceRGBBlendFactor MTLBlendFactor) *MTL4RenderPipelineColorAttachmentDescriptor {
@@ -61,7 +61,7 @@ func (x *MTL4RenderPipelineColorAttachmentDescriptor) WithSourceRGBBlendFactor(s
 	return x
 }
 
-// Configures the destination RGB blend factor. This property defaults to “MTLBlendFactorZero“.
+// Configures the destination RGB blend factor.
 //
 // WithDestinationRGBBlendFactor sets the destinationRGBBlendFactor property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineColorAttachmentDescriptor) WithDestinationRGBBlendFactor(destinationRGBBlendFactor MTLBlendFactor) *MTL4RenderPipelineColorAttachmentDescriptor {
@@ -69,7 +69,7 @@ func (x *MTL4RenderPipelineColorAttachmentDescriptor) WithDestinationRGBBlendFac
 	return x
 }
 
-// Configures the RGB blend operation. This property defaults to “MTLBlendOperationAdd“.
+// Configures the RGB blend operation.
 //
 // WithRgbBlendOperation sets the rgbBlendOperation property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineColorAttachmentDescriptor) WithRgbBlendOperation(rgbBlendOperation MTLBlendOperation) *MTL4RenderPipelineColorAttachmentDescriptor {
@@ -77,7 +77,7 @@ func (x *MTL4RenderPipelineColorAttachmentDescriptor) WithRgbBlendOperation(rgbB
 	return x
 }
 
-// Configures the source-alpha blend factor. This property defaults to “MTLBlendFactorOne“.
+// Configures the source-alpha blend factor.
 //
 // WithSourceAlphaBlendFactor sets the sourceAlphaBlendFactor property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineColorAttachmentDescriptor) WithSourceAlphaBlendFactor(sourceAlphaBlendFactor MTLBlendFactor) *MTL4RenderPipelineColorAttachmentDescriptor {
@@ -85,7 +85,7 @@ func (x *MTL4RenderPipelineColorAttachmentDescriptor) WithSourceAlphaBlendFactor
 	return x
 }
 
-// Configures the destination-alpha blend factor. This property defaults to “MTLBlendFactorZero“.
+// Configures the destination-alpha blend factor.
 //
 // WithDestinationAlphaBlendFactor sets the destinationAlphaBlendFactor property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineColorAttachmentDescriptor) WithDestinationAlphaBlendFactor(destinationAlphaBlendFactor MTLBlendFactor) *MTL4RenderPipelineColorAttachmentDescriptor {
@@ -93,7 +93,7 @@ func (x *MTL4RenderPipelineColorAttachmentDescriptor) WithDestinationAlphaBlendF
 	return x
 }
 
-// Configures the alpha blending operation. This property defaults to “MTLBlendOperationAdd“.
+// Configures the alpha blending operation.
 //
 // WithAlphaBlendOperation sets the alphaBlendOperation property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineColorAttachmentDescriptor) WithAlphaBlendOperation(alphaBlendOperation MTLBlendOperation) *MTL4RenderPipelineColorAttachmentDescriptor {
@@ -101,7 +101,7 @@ func (x *MTL4RenderPipelineColorAttachmentDescriptor) WithAlphaBlendOperation(al
 	return x
 }
 
-// Configures the color write mask. This property defaults to “MTLColorWriteMaskAll“.
+// Configures the color write mask.
 //
 // WithWriteMask sets the writeMask property and returns the receiver for chaining.
 func (x *MTL4RenderPipelineColorAttachmentDescriptor) WithWriteMask(writeMask MTLColorWriteMask) *MTL4RenderPipelineColorAttachmentDescriptor {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that matches a specific audio recording when a segment of that recording is part of captured sound in the Shazam catalog or your custom catalog.
+//
 // Session wraps [raw.SHSession] with a fluent Go API.
 type Session struct {
 	inner *raw.SHSession
@@ -36,7 +38,7 @@ func NewSession() *Session {
 	return &Session{inner: raw.SHSessionFromID(_id)}
 }
 
-// Creates a new session object for matching audio in a custom catalog. - Parameters: - catalog: The catalog that contains the reference audio signatures and their associated metadata.
+// Creates a new session object for matching audio in a custom catalog.
 //
 // NewSessionWithCatalog creates a new [Session].
 func NewSessionWithCatalog(catalog *raw.SHCatalog) *Session {
@@ -53,14 +55,14 @@ func (x *Session) WithDelegate(delegate raw.SHSessionDelegate) *Session {
 	return x
 }
 
-// Converts the audio in the buffer to a signature, and searches the reference signatures in the session catalog. This method continues to generate signatures and perform searches until the audio in the buffer stops, which may result in multiple calls to the “SHSession/delegate“. The audio buffer must be in one of the supported formats. For the list of the supported audio formats, see “SHSignatureGenerator/append(_:at:)“. To use the microphone as input for the buffer, see <doc:matching-audio-using-the-built-in-microphone>. > Note: > You must use the audio format of the first call to this method in the current session in all subsequent calls for the session. - Parameters: - buffer: An audio buffer. - time: The start time of the audio to use for generating the signatures.
+// Converts the audio in the buffer to a signature, and searches the reference signatures in the session catalog.
 //
 // MatchStreamingBufferAtTime calls the underlying MatchStreamingBufferAtTime.
 func (x *Session) MatchStreamingBufferAtTime(buffer *avfaudio.AVAudioPCMBuffer, time_ *avfaudio.AVAudioTime) {
 	x.inner.MatchStreamingBufferAtTime(buffer, time_)
 }
 
-// Searches for the query signature in the reference signatures that the session catalog contains. - Parameters: - signature: The signature for searching the catalog of reference signatures. The signature duration should be between “SHCatalog/minimumQuerySignatureDuration“ and “SHCatalog/maximumQuerySignatureDuration“.  For audio longer than the maximum duration, use “SHSignature/slices(from:duration:stride:)“ to create multiple slices from the signature. The code below creates slices from a signature and uses the first three slices to find a match: ```swift let signature = try await SHSignatureGenerator.signature(from: audioAsset) let slices = try signature.slices(from: 2.0, duration: 10.0, stride: 5.0) // Use the first 3 slices to find a match. for try await slice in slices.prefix(3) { session.match(slice) } ``` You can use AsyncSequence operators like <doc://com.apple.documentation/documentation/swift/asyncsequence/prefix(_:)> or <doc://com.apple.documentation/documentation/swift/asyncsequence/first(where:)> to choose which slices are processed. For continuous matching as audio becomes available, use “matchStreamingBuffer(_:at:)“, which automatically generates and matches signatures from audio buffers.
+// Searches for the query signature in the reference signatures that the session catalog contains.
 //
 // MatchSignature calls the underlying MatchSignature.
 func (x *Session) MatchSignature(signature *raw.SHSignature) {

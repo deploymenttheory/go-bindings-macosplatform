@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a single pass.
+//
 // Pass wraps [raw.PKPass] with a fluent Go API.
 type Pass struct {
 	inner *raw.PKPass
@@ -32,6 +34,8 @@ func PassFromID(id objc.ID) *Pass {
 	return &Pass{inner: raw.PKPassFromID(id)}
 }
 
+// Creates a pass using the data you provide.
+//
 // NewPassWithDataError creates a new [Pass].
 func NewPassWithDataError(data *foundation.NSData) (*Pass, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPass")), objc.RegisterName("alloc"))
@@ -43,6 +47,8 @@ func NewPassWithDataError(data *foundation.NSData) (*Pass, error) {
 	return &Pass{inner: raw.PKPassFromID(_id)}, nil
 }
 
+// Returns the localized value for a specified field of the pass.
+//
 // LocalizedValueForFieldKey calls the underlying LocalizedValueForFieldKey.
 func (x *Pass) LocalizedValueForFieldKey(key string) objc.ID {
 	return x.inner.LocalizedValueForFieldKey(foundation.NSStringStringWithUTF8String(key))

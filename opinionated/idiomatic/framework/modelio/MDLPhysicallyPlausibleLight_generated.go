@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A light source for use in shading models based on real-world physics.
+//
 // PhysicallyPlausibleLight wraps [raw.MDLPhysicallyPlausibleLight] with a fluent Go API.
 type PhysicallyPlausibleLight struct {
 	inner *raw.MDLPhysicallyPlausibleLight
@@ -37,49 +39,63 @@ func NewPhysicallyPlausibleLight() *PhysicallyPlausibleLight {
 	return &PhysicallyPlausibleLight{inner: raw.MDLPhysicallyPlausibleLightFromID(_id)}
 }
 
+// The total visible intensity of the light source, in lumens.
+//
 // WithLumens sets the lumens property and returns the receiver for chaining.
 func (x *PhysicallyPlausibleLight) WithLumens(lumens float32) *PhysicallyPlausibleLight {
 	x.inner.SetLumens(lumens)
 	return x
 }
 
+// The radial angle, in degrees, of the area fully illuminated by the light.
+//
 // WithInnerConeAngle sets the innerConeAngle property and returns the receiver for chaining.
 func (x *PhysicallyPlausibleLight) WithInnerConeAngle(innerConeAngle float32) *PhysicallyPlausibleLight {
 	x.inner.SetInnerConeAngle(innerConeAngle)
 	return x
 }
 
+// The radial angle, in degrees, at which the illumination from a spotlight becomes zero.
+//
 // WithOuterConeAngle sets the outerConeAngle property and returns the receiver for chaining.
 func (x *PhysicallyPlausibleLight) WithOuterConeAngle(outerConeAngle float32) *PhysicallyPlausibleLight {
 	x.inner.SetOuterConeAngle(outerConeAngle)
 	return x
 }
 
+// The distance from the light source, in units of local coordinate space, at which its illumination begins to diminish.
+//
 // WithAttenuationStartDistance sets the attenuationStartDistance property and returns the receiver for chaining.
 func (x *PhysicallyPlausibleLight) WithAttenuationStartDistance(attenuationStartDistance float32) *PhysicallyPlausibleLight {
 	x.inner.SetAttenuationStartDistance(attenuationStartDistance)
 	return x
 }
 
+// The distance from the light source, in units of local coordinate space, at which its illumination becomes zero.
+//
 // WithAttenuationEndDistance sets the attenuationEndDistance property and returns the receiver for chaining.
 func (x *PhysicallyPlausibleLight) WithAttenuationEndDistance(attenuationEndDistance float32) *PhysicallyPlausibleLight {
 	x.inner.SetAttenuationEndDistance(attenuationEndDistance)
 	return x
 }
 
+// The type of the light.
+//
 // WithLightType sets the lightType property and returns the receiver for chaining.
 func (x *PhysicallyPlausibleLight) WithLightType(lightType MDLLightType) *PhysicallyPlausibleLight {
 	x.inner.MDLLight.SetLightType(raw.MDLLightType(lightType))
 	return x
 }
 
+// The name of the Core Graphics color space to be used for interpreting the light’s color information.
+//
 // WithColorSpace sets the colorSpace property and returns the receiver for chaining.
 func (x *PhysicallyPlausibleLight) WithColorSpace(colorSpace string) *PhysicallyPlausibleLight {
 	x.inner.MDLLight.SetColorSpace(foundation.NSStringStringWithUTF8String(colorSpace))
 	return x
 }
 
-// @property parent @abstract Parent object. Nil if no parent. @discussion Set to nil when you remove this from an object container inside the parent object.
+// The parent object that contains this object.
 //
 // WithParent sets the parent property and returns the receiver for chaining.
 func (x *PhysicallyPlausibleLight) WithParent(parent ObjectProvider) *PhysicallyPlausibleLight {
@@ -87,7 +103,7 @@ func (x *PhysicallyPlausibleLight) WithParent(parent ObjectProvider) *Physically
 	return x
 }
 
-// @property instance @abstract Instance object @discussion nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
+// The primary object, if applicable, of which this object is an instance.
 //
 // WithInstance sets the instance property and returns the receiver for chaining.
 func (x *PhysicallyPlausibleLight) WithInstance(instance ObjectProvider) *PhysicallyPlausibleLight {
@@ -95,7 +111,7 @@ func (x *PhysicallyPlausibleLight) WithInstance(instance ObjectProvider) *Physic
 	return x
 }
 
-// @property transform @abstract Short hand property for the MDLTransformComponent. @discussion The default value is nil @see MDLTransformComponent
+// A component that manages this object’s spatial transform and its changes over time.
 //
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *PhysicallyPlausibleLight) WithTransform(transform raw.MDLTransformComponent) *PhysicallyPlausibleLight {
@@ -103,7 +119,7 @@ func (x *PhysicallyPlausibleLight) WithTransform(transform raw.MDLTransformCompo
 	return x
 }
 
-// @property children @abstract Short hand property for the MDLObjectContainerComponent. @discussion The default value is an empty MDLObjectContainer @see MDLObjectContainerComponent
+// A component that manages this object’s collection of children.
 //
 // WithChildren sets the children property and returns the receiver for chaining.
 func (x *PhysicallyPlausibleLight) WithChildren(children raw.MDLObjectContainerComponent) *PhysicallyPlausibleLight {
@@ -111,13 +127,15 @@ func (x *PhysicallyPlausibleLight) WithChildren(children raw.MDLObjectContainerC
 	return x
 }
 
+// A Boolean value indicating whether this object should be used in rendering.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *PhysicallyPlausibleLight) WithHidden(hidden bool) *PhysicallyPlausibleLight {
 	x.inner.MDLLight.MDLObject.SetHidden(hidden)
 	return x
 }
 
-// Light color specified by color temperature, in degrees Kelvin @discussion default color is 6500K, cool daylight.
+// Sets the light’s color based on a black-body temperature.
 //
 // SetColorByTemperature calls the underlying SetColorByTemperature.
 func (x *PhysicallyPlausibleLight) SetColorByTemperature(temperature float32) {

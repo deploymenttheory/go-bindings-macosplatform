@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents an axis of numerical data.
+//
 // NumericDataAxisDescriptor wraps [raw.AXNumericDataAxisDescriptor] with a fluent Go API.
 type NumericDataAxisDescriptor struct {
 	inner *raw.AXNumericDataAxisDescriptor
@@ -32,6 +34,8 @@ func NumericDataAxisDescriptorFromID(id objc.ID) *NumericDataAxisDescriptor {
 	return &NumericDataAxisDescriptor{inner: raw.AXNumericDataAxisDescriptorFromID(id)}
 }
 
+// Creates a numeric data axis with the specified title, lower bound value, upper bound value, gridline positions, and value description provider block.
+//
 // NewNumericDataAxisDescriptorWithTitleLowerBoundUpperBoundGridlinePositionsValueDescriptionProvider creates a new [NumericDataAxisDescriptor].
 func NewNumericDataAxisDescriptorWithTitleLowerBoundUpperBoundGridlinePositionsValueDescriptionProvider(title string, lowerbound float64, upperBound float64, gridlinePositions *foundation.NSArray[*foundation.NSNumber], valueDescriptionProvider objc.Block) *NumericDataAxisDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXNumericDataAxisDescriptor")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewNumericDataAxisDescriptorWithTitleLowerBoundUpperBoundGridlinePositionsV
 	return &NumericDataAxisDescriptor{inner: raw.AXNumericDataAxisDescriptorFromID(_id)}
 }
 
+// Creates a numeric data axis with the specified attributed title, lower bound value, upper bound value, gridline positions, and value description provider block.
+//
 // NewNumericDataAxisDescriptorWithAttributedTitleLowerBoundUpperBoundGridlinePositionsValueDescriptionProvider creates a new [NumericDataAxisDescriptor].
 func NewNumericDataAxisDescriptorWithAttributedTitleLowerBoundUpperBoundGridlinePositionsValueDescriptionProvider(attributedTitle *foundation.NSAttributedString, lowerbound float64, upperBound float64, gridlinePositions *foundation.NSArray[*foundation.NSNumber], valueDescriptionProvider objc.Block) *NumericDataAxisDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXNumericDataAxisDescriptor")), objc.RegisterName("alloc"))
@@ -46,7 +52,7 @@ func NewNumericDataAxisDescriptorWithAttributedTitleLowerBoundUpperBoundGridline
 	return &NumericDataAxisDescriptor{inner: raw.AXNumericDataAxisDescriptorFromID(_id)}
 }
 
-// The scale to use for this axis. This should match the visual representation in the chart. If not set explicitly, this will default to `linear`.
+// The scale for the axis.
 //
 // WithScaleType sets the scaleType property and returns the receiver for chaining.
 func (x *NumericDataAxisDescriptor) WithScaleType(scaleType AXNumericDataAxisDescriptorScale) *NumericDataAxisDescriptor {
@@ -70,7 +76,7 @@ func (x *NumericDataAxisDescriptor) WithUpperBound(upperBound float64) *NumericD
 	return x
 }
 
-// Provides a value description to be spoken for a particular data value on this axis. Use this to format data values to string representations that include units, dates, times, etc.
+// A description to speak for a particular data value on the axis.
 //
 // WithValueDescriptionProvider sets the valueDescriptionProvider property and returns the receiver for chaining.
 func (x *NumericDataAxisDescriptor) WithValueDescriptionProvider(valueDescriptionProvider objc.Block) *NumericDataAxisDescriptor {
@@ -78,7 +84,7 @@ func (x *NumericDataAxisDescriptor) WithValueDescriptionProvider(valueDescriptio
 	return x
 }
 
-// The positions of any gridlines along this axis.
+// The positions of the gridlines along the axis.
 //
 // WithGridlinePositions sets the collection, converting the Go slice to an NSArray.
 func (x *NumericDataAxisDescriptor) WithGridlinePositions(items ...*foundation.NSNumber) *NumericDataAxisDescriptor {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides playback information for an asset.
+//
 // AssetPlaybackAssistant wraps [raw.AVAssetPlaybackAssistant] with a fluent Go API.
 type AssetPlaybackAssistant struct {
 	inner *raw.AVAssetPlaybackAssistant
@@ -35,7 +37,7 @@ func NewAssetPlaybackAssistant() *AssetPlaybackAssistant {
 	return &AssetPlaybackAssistant{inner: raw.AVAssetPlaybackAssistantFromID(_id)}
 }
 
-// Calls the completionHandler with information about the asset. completionHandler is called when all of the AVAssetPlaybackConfigurationOption values have been loaded. If AVAssetPlaybackAssistant encounters failures when inspecting the contents of the asset, it will return no AVAssetPlaybackConfigurationOptions associated with those contents. - Parameter completionHandler: Called with an array of AVAssetPlaybackConfigurationOption values describing capabilities of the asset.
+// Loads playback configuration options for an asset.
 //
 // LoadPlaybackConfigurationOptionsWithCompletionHandler calls the underlying LoadPlaybackConfigurationOptionsWithCompletionHandler.
 func (x *AssetPlaybackAssistant) LoadPlaybackConfigurationOptionsWithCompletionHandler(completionHandler objc.Block) {

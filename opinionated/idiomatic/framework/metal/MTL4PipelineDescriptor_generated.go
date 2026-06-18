@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Base type for descriptors you use for building pipeline state objects.
+//
 // MTL4PipelineDescriptor wraps [raw.MTL4PipelineDescriptor] with a fluent Go API.
 type MTL4PipelineDescriptor struct {
 	inner *raw.MTL4PipelineDescriptor
@@ -37,7 +39,7 @@ func NewMTL4PipelineDescriptor() *MTL4PipelineDescriptor {
 	return &MTL4PipelineDescriptor{inner: raw.MTL4PipelineDescriptorFromID(_id)}
 }
 
-// Assigns an optional string that uniquely identifies a pipeline descriptor. After you provide this label, you can use it to look up a pipeline state object by name in a binary archive.
+// Assigns an optional string that uniquely identifies a pipeline descriptor.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MTL4PipelineDescriptor) WithLabel(label string) *MTL4PipelineDescriptor {

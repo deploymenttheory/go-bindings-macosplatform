@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The standard set of gamepad controls.
+//
 // Gamepad wraps [raw.GCGamepad] with a fluent Go API.
 type Gamepad struct {
 	inner *raw.GCGamepad
@@ -35,13 +37,15 @@ func NewGamepad() *Gamepad {
 	return &Gamepad{inner: raw.GCGamepadFromID(_id)}
 }
 
+// A block called when any element in the profile changes.
+//
 // WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
 func (x *Gamepad) WithValueChangedHandler(valueChangedHandler func(*raw.GCGamepad, *raw.GCControllerElement)) *Gamepad {
 	x.inner.SetValueChangedHandler(valueChangedHandler)
 	return x
 }
 
-// Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called for each element that changed. @param profile this profile that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons. @param element the element that has been modified.
+// The block that the profile calls when an element’s value changes.
 //
 // WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
 func (x *Gamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *Gamepad {
@@ -49,7 +53,7 @@ func (x *Gamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPh
 	return x
 }
 
-// Polls the state vector of the controller and saves it to a snapshot. The snapshot is stored in a device independent format that can be serialized and used at a later date. This is useful for features such as quality assurance, save game or replay functionality among many. If your application is heavily multithreaded this may also be useful to guarantee atomicity of input handling as a snapshot will not change based on user input once it is taken.
+// Saves a snapshot of all of the profile’s elements.
 //
 // SaveSnapshot calls the underlying SaveSnapshot.
 func (x *Gamepad) SaveSnapshot() *GamepadSnapshot {

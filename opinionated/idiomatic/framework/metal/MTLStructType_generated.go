@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of a structure.
+//
 // StructType wraps [raw.MTLStructType] with a fluent Go API.
 type StructType struct {
 	inner *raw.MTLStructType
@@ -37,6 +39,8 @@ func NewStructType() *StructType {
 	return &StructType{inner: raw.MTLStructTypeFromID(_id)}
 }
 
+// Provides a representation of a struct member.
+//
 // MemberByName calls the underlying MemberByName.
 func (x *StructType) MemberByName(name string) *StructMember {
 	_r := x.inner.MemberByName(foundation.NSStringStringWithUTF8String(name))

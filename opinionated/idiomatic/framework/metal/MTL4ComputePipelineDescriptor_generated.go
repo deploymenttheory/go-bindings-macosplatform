@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Describes a compute pipeline state.
+//
 // MTL4ComputePipelineDescriptor wraps [raw.MTL4ComputePipelineDescriptor] with a fluent Go API.
 type MTL4ComputePipelineDescriptor struct {
 	inner *raw.MTL4ComputePipelineDescriptor
@@ -36,7 +38,7 @@ func NewMTL4ComputePipelineDescriptor() *MTL4ComputePipelineDescriptor {
 	return &MTL4ComputePipelineDescriptor{inner: raw.MTL4ComputePipelineDescriptorFromID(_id)}
 }
 
-// A descriptor representing the compute pipeline's function. You don't assign instances of “MTL4FunctionDescriptor“ to this property directly, instead assign an instance of one of its subclasses, such as “MTL4LibraryFunctionDescriptor“, which represents a function from a Metal library.
+// A descriptor representing the compute pipeline’s function.
 //
 // WithComputeFunctionDescriptor sets the computeFunctionDescriptor property and returns the receiver for chaining.
 func (x *MTL4ComputePipelineDescriptor) WithComputeFunctionDescriptor(computeFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4ComputePipelineDescriptor {
@@ -60,7 +62,7 @@ func (x *MTL4ComputePipelineDescriptor) WithMaxTotalThreadsPerThreadgroup(maxTot
 	return x
 }
 
-// The required number of threads per threadgroup for compute dispatches. When you set this value, you are responsible for ensuring that the `threadsPerThreadgroup` argument of any compute dispatch matches it. Setting this property is optional, except in cases where the pipeline uses *CooperativeTensors*. This property's default value is `0`, which disables its effect.
+// The required number of threads per threadgroup for compute dispatches.
 //
 // WithRequiredThreadsPerThreadgroup sets the requiredThreadsPerThreadgroup property and returns the receiver for chaining.
 func (x *MTL4ComputePipelineDescriptor) WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) *MTL4ComputePipelineDescriptor {
@@ -92,7 +94,7 @@ func (x *MTL4ComputePipelineDescriptor) WithSupportIndirectCommandBuffers(suppor
 	return x
 }
 
-// Assigns an optional string that uniquely identifies a pipeline descriptor. After you provide this label, you can use it to look up a pipeline state object by name in a binary archive.
+// Assigns an optional string that uniquely identifies a pipeline descriptor.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MTL4ComputePipelineDescriptor) WithLabel(label string) *MTL4ComputePipelineDescriptor {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that periodically checks whether the system adds new fragments to a fragmented asset.
+//
 // FragmentedAssetMinder wraps [raw.AVFragmentedAssetMinder] with a fluent Go API.
 type FragmentedAssetMinder struct {
 	inner *raw.AVFragmentedAssetMinder
@@ -30,7 +32,7 @@ func FragmentedAssetMinderFromID(id objc.ID) *FragmentedAssetMinder {
 	return &FragmentedAssetMinder{inner: raw.AVFragmentedAssetMinderFromID(id)}
 }
 
-// Creates an AVFragmentedAssetMinder, adds the specified asset to it, and sets the mindingInterval to the specified value. - Parameter asset: An instance of AVFragmentedAsset to add to the AVFragmentedAssetMinder - Parameter mindingInterval: The initial minding interval of the AVFragmentedAssetMinder. - Returns: A new instance of AVFragmentedAssetMinder.
+// Creates a fragmented asset minder that monitors the specified asset at the indicated minding interval.
 //
 // NewFragmentedAssetMinderWithAssetMindingInterval creates a new [FragmentedAssetMinder].
 func NewFragmentedAssetMinderWithAssetMindingInterval(asset *raw.AVAsset, mindingInterval float64) *FragmentedAssetMinder {
@@ -39,7 +41,7 @@ func NewFragmentedAssetMinderWithAssetMindingInterval(asset *raw.AVAsset, mindin
 	return &FragmentedAssetMinder{inner: raw.AVFragmentedAssetMinderFromID(_id)}
 }
 
-// An NSTimeInterval indicating how often a check for additional fragments should be performed. The default interval is 10.0. This property throws an excepion if a value is set less than one millisecond (0.001) in duration.
+// An interval that specifies when to perform a check for additional fragments.
 //
 // WithMindingInterval sets the mindingInterval property and returns the receiver for chaining.
 func (x *FragmentedAssetMinder) WithMindingInterval(mindingInterval float64) *FragmentedAssetMinder {
@@ -47,14 +49,14 @@ func (x *FragmentedAssetMinder) WithMindingInterval(mindingInterval float64) *Fr
 	return x
 }
 
-// Adds a fragmented asset to the array of assets being minded. This method throws an exception if the asset is not a supported type (AVFragmentedAsset, AVFragmentedMovie), or if the asset is already being minded by another fragment minder. - Parameter asset: The fragmented asset to add to the minder.
+// Adds a fragmented asset to the array of minded assets.
 //
 // AddFragmentedAsset calls the underlying AddFragmentedAsset.
 func (x *FragmentedAssetMinder) AddFragmentedAsset(asset *raw.AVAsset) {
 	x.inner.AddFragmentedAsset(asset)
 }
 
-// Removes a fragmented asset from the array of assets being minded. This method throws an exception if the asset is not a supported type (AVFragmentedAsset, AVFragmentedMovie). - Parameter asset: The fragmented asset to remove from the minder.
+// Removes a fragmented asset from the array of minded assets.
 //
 // RemoveFragmentedAsset calls the underlying RemoveFragmentedAsset.
 func (x *FragmentedAssetMinder) RemoveFragmentedAsset(asset *raw.AVAsset) {

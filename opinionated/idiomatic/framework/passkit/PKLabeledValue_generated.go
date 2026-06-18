@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that can represent a detail about a payment card or other item.
+//
 // LabeledValue wraps [raw.PKLabeledValue] with a fluent Go API.
 type LabeledValue struct {
 	inner *raw.PKLabeledValue
@@ -31,6 +33,8 @@ func LabeledValueFromID(id objc.ID) *LabeledValue {
 	return &LabeledValue{inner: raw.PKLabeledValueFromID(id)}
 }
 
+// Instantiates a new labeled value object with the specified label and value strings.
+//
 // NewLabeledValueWithLabelValue creates a new [LabeledValue].
 func NewLabeledValueWithLabelValue(label string, value string) *LabeledValue {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKLabeledValue")), objc.RegisterName("alloc"))

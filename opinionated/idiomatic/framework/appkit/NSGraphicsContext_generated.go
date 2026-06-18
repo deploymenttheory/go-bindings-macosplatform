@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a graphics context.
+//
 // GraphicsContext wraps [raw.NSGraphicsContext] with a fluent Go API.
 type GraphicsContext struct {
 	inner *raw.NSGraphicsContext
@@ -39,46 +41,62 @@ func NewGraphicsContext() *GraphicsContext {
 	return &GraphicsContext{inner: raw.NSGraphicsContextFromID(_id)}
 }
 
+// A Boolean value that indicates whether the graphics context uses antialiasing.
+//
 // WithShouldAntialias sets the shouldAntialias property and returns the receiver for chaining.
 func (x *GraphicsContext) WithShouldAntialias(shouldAntialias bool) *GraphicsContext {
 	x.inner.SetShouldAntialias(shouldAntialias)
 	return x
 }
 
+// A constant that specifies the graphics context’s interpolation, or image smoothing, behavior.
+//
 // WithImageInterpolation sets the imageInterpolation property and returns the receiver for chaining.
 func (x *GraphicsContext) WithImageInterpolation(imageInterpolation NSImageInterpolation) *GraphicsContext {
 	x.inner.SetImageInterpolation(raw.NSImageInterpolation(imageInterpolation))
 	return x
 }
 
+// The amount to offset the pattern color when filling the graphics context.
+//
 // WithPatternPhase sets the patternPhase property and returns the receiver for chaining.
 func (x *GraphicsContext) WithPatternPhase(patternPhase corefoundation.CGPoint) *GraphicsContext {
 	x.inner.SetPatternPhase(patternPhase)
 	return x
 }
 
+// The graphics context’s global compositing operation setting.
+//
 // WithCompositingOperation sets the compositingOperation property and returns the receiver for chaining.
 func (x *GraphicsContext) WithCompositingOperation(compositingOperation NSCompositingOperation) *GraphicsContext {
 	x.inner.SetCompositingOperation(raw.NSCompositingOperation(compositingOperation))
 	return x
 }
 
+// The color rendering intent in the graphics context’s graphics state.
+//
 // WithColorRenderingIntent sets the colorRenderingIntent property and returns the receiver for chaining.
 func (x *GraphicsContext) WithColorRenderingIntent(colorRenderingIntent NSColorRenderingIntent) *GraphicsContext {
 	x.inner.SetColorRenderingIntent(raw.NSColorRenderingIntent(colorRenderingIntent))
 	return x
 }
 
+// Saves the current graphics state and creates a new graphics state on the top of the stack.
+//
 // SaveGraphicsState calls the underlying SaveGraphicsState.
 func (x *GraphicsContext) SaveGraphicsState() {
 	x.inner.SaveGraphicsState()
 }
 
+// Removes the context’s graphics state from the top of the graphics state stack and makes the next graphics state the current graphics state.
+//
 // RestoreGraphicsState calls the underlying RestoreGraphicsState.
 func (x *GraphicsContext) RestoreGraphicsState() {
 	x.inner.RestoreGraphicsState()
 }
 
+// Forces any buffered operations or data to be sent to the graphics context’s destination.
+//
 // FlushGraphics calls the underlying FlushGraphics.
 func (x *GraphicsContext) FlushGraphics() {
 	x.inner.FlushGraphics()
@@ -159,11 +177,15 @@ func (x *GraphicsContext) CIContext() *coreimage.CIContext {
 	return x.inner.CIContext()
 }
 
+// Returns the object used by the context to track the hierarchy of views with locked focus.
+//
 // FocusStack calls the underlying FocusStack.
 func (x *GraphicsContext) FocusStack() objc.ID {
 	return x.inner.FocusStack()
 }
 
+// Sets the object used by the receiver to track the hierarchy of views with locked focus.
+//
 // SetFocusStack calls the underlying SetFocusStack.
 func (x *GraphicsContext) SetFocusStack(stack objc.ID) {
 	x.inner.SetFocusStack(stack)

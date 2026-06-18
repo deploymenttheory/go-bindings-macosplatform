@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A machine learning collection type that stores numeric values in an array with multiple dimensions.
+//
 // MultiArray wraps [raw.MLMultiArray] with a fluent Go API.
 type MultiArray struct {
 	inner *raw.MLMultiArray
@@ -32,7 +34,7 @@ func MultiArrayFromID(id objc.ID) *MultiArray {
 	return &MultiArray{inner: raw.MLMultiArrayFromID(id)}
 }
 
-// Creates the object. The contents of the object are left uninitialized; the client must initialize it. The scalars will use the first-major contiguous layout. - Parameters: - shape: The shape - dataType: The data type - error: Filled with error information on error.
+// Creates a multidimensional array with a shape and type.
 //
 // NewMultiArrayWithShapeDataTypeError creates a new [MultiArray].
 func NewMultiArrayWithShapeDataTypeError(shape *foundation.NSArray[*foundation.NSNumber], dataType MLMultiArrayDataType) (*MultiArray, error) {
@@ -45,7 +47,7 @@ func NewMultiArrayWithShapeDataTypeError(shape *foundation.NSArray[*foundation.N
 	return &MultiArray{inner: raw.MLMultiArrayFromID(_id)}, nil
 }
 
-// Creates the object with specified strides. The contents of the object are left uninitialized; the client must initialize it. ```swift let shape = [2, 3]; let strides = [4, 1] let multiArray = MLMultiArray(shape: shape, dataType: .float32, strides: strides) XCTAssertEqual(multiArray.shape, shape as [NSNumber]) XCTAssertEqual(multiArray.strides, strides as [NSNumber]) ``` ```objc NSArray<NSNumber *> *shape = @[@2, @3]; NSArray<NSNumber *> *strides = @[@4, @1]; MLMultiArray *multiArray = [[MLMultiArray alloc] initWithShape:shape dataType:MLMultiArrayDataTypeFloat32 strides:strides]; XCTAssertEqualObjects(multiArray.shape, shape); XCTAssertEqualObjects(multiArray.strides, strides); ``` - Parameters: - shape: The shape - dataType: The data type - strides: The strides.
+// Creates the object with specified strides.
 //
 // NewMultiArrayWithShapeDataTypeStrides creates a new [MultiArray].
 func NewMultiArrayWithShapeDataTypeStrides(shape *foundation.NSArray[*foundation.NSNumber], dataType MLMultiArrayDataType, strides *foundation.NSArray[*foundation.NSNumber]) *MultiArray {
@@ -54,7 +56,7 @@ func NewMultiArrayWithShapeDataTypeStrides(shape *foundation.NSArray[*foundation
 	return &MultiArray{inner: raw.MLMultiArrayFromID(_id)}
 }
 
-// Creates the object with existing data without copy. Use this initializer to reference the existing buffer as the storage without copy. ```objc int32_t *buffer = malloc(sizeof(int32_t) * 2 * 3 * 4); MLMultiArray *multiArray = [[MLMultiArray alloc] initWithDataPointer:buffer shape:@[@2, @3, @4] dataType:MLMultiArrayDataTypeInt32 strides:@[@12, @4, @1] deallocator:^(void *bytes) { free(bytes); } error:NULL]; ``` - Parameters: - dataPointer: The pointer to the buffer. - shape: The shape - dataType: The data type - strides: The strides. - deallocator: Block to be called on the deallocation of the instance. - error: Filled with error information on error.
+// Creates a multiarray from a data pointer.
 //
 // NewMultiArrayWithDataPointerShapeDataTypeStridesDeallocatorError creates a new [MultiArray].
 func NewMultiArrayWithDataPointerShapeDataTypeStridesDeallocatorError(dataPointer unsafe.Pointer, shape *foundation.NSArray[*foundation.NSNumber], dataType MLMultiArrayDataType, strides *foundation.NSArray[*foundation.NSNumber], deallocator func(unsafe.Pointer)) (*MultiArray, error) {
@@ -67,7 +69,7 @@ func NewMultiArrayWithDataPointerShapeDataTypeStridesDeallocatorError(dataPointe
 	return &MultiArray{inner: raw.MLMultiArrayFromID(_id)}, nil
 }
 
-// Create by wrapping a pixel buffer. Use this initializer to create an IOSurface backed MLMultiArray, which can reduce the inference latency by avoiding the buffer copy. The instance will own the pixel buffer and release it on the deallocation. The pixel buffer's pixel format type must be either `kCVPixelFormatType_OneComponent16Half` for `MLMultiArrayDataTypeFloat16` or `kCVPixelFormatType_OneComponent8` for `MLMultiArrayDataTypeInt8`. ```objc CVPixelBufferRef pixelBuffer = NULL; NSDictionary* pixelBufferAttributes = @{ (id)kCVPixelBufferIOSurfacePropertiesKey: @{} }; // Since shape == [2, 3, 4], width is 4 (= shape[2]) and height is 6 (= shape[0] * shape[1]). CVPixelBufferCreate(kCFAllocatorDefault, 4, 6, kCVPixelFormatType_OneComponent16Half, (__bridge CFDictionaryRef)pixelBufferAttributes, &pixelBuffer); MLMultiArray *multiArray = [[MLMultiArray alloc] initWithPixelBuffer:pixelBuffer shape:@[@2, @3, @4]]; ``` - Parameters: - pixelBuffer: The pixel buffer to be owned by the instance. - shape: The shape of the MLMultiArray. The last dimension of `shape` must match the pixel buffer's width. The product of the rest of the dimensions must match the height.
+// Creates a multiarray sharing the surface of a pixel buffer.
 //
 // NewMultiArrayWithPixelBufferShape creates a new [MultiArray].
 func NewMultiArrayWithPixelBufferShape(pixelBuffer unsafe.Pointer, shape *foundation.NSArray[*foundation.NSNumber]) *MultiArray {
@@ -130,14 +132,14 @@ func (x *MultiArray) PixelBuffer() unsafe.Pointer {
 	return x.inner.PixelBuffer()
 }
 
-// Get the underlying buffer pointer to read. The buffer pointer is valid only within the block. ```objc MLMultiArray * A = [[MLMultiArray alloc] initWithShape:@[@3, @2] dataType:MLMultiArrayDataTypeInt32 error:NULL]; A[@[@1, @2]] = @42; [A getBytesWithHandler:^(const void *bytes, NSInteger size) { const int32_t *scalarBuffer = (const int32_t *)bytes; const int strideY = A.strides[0].intValue; // Print 42 NSLog(@"Scalar at (1, 2): %d", scalarBuffer[1 * strideY + 2]); }]; ``` - Parameters: - handler: The block to receive the buffer pointer and its size in bytes.
+// Get the underlying buffer pointer to read.
 //
 // GetBytesWithHandler calls the underlying GetBytesWithHandler.
 func (x *MultiArray) GetBytesWithHandler(handler func(unsafe.Pointer, int)) {
 	x.inner.GetBytesWithHandler(handler)
 }
 
-// Get the underlying buffer pointer to mutate. The buffer pointer is valid only within the block. Use `strides` parameter passed in the block because the method may switch to a new backing buffer with different strides. ```objc MLMultiArray * A = [[MLMultiArray alloc] initWithShape:@[@3, @2] dataType:MLMultiArrayDataTypeInt32 error:NULL]; [A getMutableBytesWithHandler:^(void *bytes, NSInteger __unused size, NSArray<NSNumber *> *strides) { int32_t *scalarBuffer = (int32_t *)bytes; const int strideY = strides[0].intValue; scalarBuffer[1 * strideY + 2] = 42;  // Set 42 at A[1, 2] }]; ``` - Parameters: - handler: The block to receive the buffer pointer, size in bytes, and strides.
+// Get the underlying buffer pointer to mutate.
 //
 // GetMutableBytesWithHandler calls the underlying GetMutableBytesWithHandler.
 func (x *MultiArray) GetMutableBytesWithHandler(handler objc.Block) {
@@ -158,21 +160,21 @@ func (x *MultiArray) ObjectForKeyedSubscript(key *foundation.NSArray[*foundation
 	return x.inner.ObjectForKeyedSubscript(key)
 }
 
-// Set a value by its linear index (assumes C-style index ordering)
+// Assigns a number to the multiarray’s element at the location that the linear offset defines.
 //
 // SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
 func (x *MultiArray) SetObjectAtIndexedSubscript(obj *foundation.NSNumber, idx int) {
 	x.inner.SetObjectAtIndexedSubscript(obj, idx)
 }
 
-// Set a value by subindicies (NSArray<NSNumber *>)
+// Assigns a number to the multiarray’s element at the location that the number array defines.
 //
 // SetObjectForKeyedSubscript calls the underlying SetObjectForKeyedSubscript.
 func (x *MultiArray) SetObjectForKeyedSubscript(obj *foundation.NSNumber, key *foundation.NSArray[*foundation.NSNumber]) {
 	x.inner.SetObjectForKeyedSubscript(obj, key)
 }
 
-// Transfer the contents to the destination multi-array. Numeric data will be up or down casted as needed. It can transfer to a multi-array with different layout (strides). ```swift let sourceMultiArray: MLMultiArray = ... // shape is [2, 3] and data type is Float64 let newStrides = [4, 1] let destinationMultiArray = MLMultiArray(shape: [2, 3], dataType: .float32, strides: newStrides) sourceMultiArray.transfer(to: destinationMultiArray) ``` ```objc NSArray<NSNumber *> *shape = @[@2, @3]; NSArray<NSNumber *> *sourceStrides = @[@3, @1]; NSArray<NSNumber *> *destinationStrides = @[@4, @1]; MLMultiArray *source = [[MLMultiArray alloc] initWithShape:shape dataType:MLMultiArrayDataTypeDouble strides:sourceStrides]; // Initialize source... MLMultiArray *destination = [[MLMultiArray alloc] initWithShape:shape dataType:MLMultiArrayDataTypeFloat32 strides:destinationStrides]; [source transferToMultiArray:destination]; ``` - Parameters: - destinationMultiArray: The transfer destination.
+// Transfer the contents to the destination multi-array.
 //
 // TransferToMultiArray calls the underlying TransferToMultiArray.
 func (x *MultiArray) TransferToMultiArray(destinationMultiArray *raw.MLMultiArray) {

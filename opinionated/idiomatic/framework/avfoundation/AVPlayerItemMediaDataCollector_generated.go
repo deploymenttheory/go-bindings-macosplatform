@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract base for media data collectors.
+//
 // PlayerItemMediaDataCollector wraps [raw.AVPlayerItemMediaDataCollector] with a fluent Go API.
 type PlayerItemMediaDataCollector struct {
 	inner *raw.AVPlayerItemMediaDataCollector

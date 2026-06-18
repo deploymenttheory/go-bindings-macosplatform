@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The IKDeviceBrowserView allows you to select a camera or scanner from a list of the available devices.
+//
 // IKDeviceBrowserView wraps [raw.IKDeviceBrowserView] with a fluent Go API.
 type IKDeviceBrowserView struct {
 	inner *raw.IKDeviceBrowserView
@@ -36,7 +38,7 @@ func NewIKDeviceBrowserView() *IKDeviceBrowserView {
 	return &IKDeviceBrowserView{inner: raw.IKDeviceBrowserViewFromID(_id)}
 }
 
-// @property delegate @abstract delegate of the IKDeviceBrowserView.
+// Specifies the delegate object.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *IKDeviceBrowserView) WithDelegate(delegate objc.ID) *IKDeviceBrowserView {
@@ -44,7 +46,7 @@ func (x *IKDeviceBrowserView) WithDelegate(delegate objc.ID) *IKDeviceBrowserVie
 	return x
 }
 
-// @property displaysLocalCameras @abstract for device filtering - indicates that the IKDeviceBrowserView should include local cameras.
+// Specifies whether local cameras are displayed by the browser.
 //
 // WithDisplaysLocalCameras sets the displaysLocalCameras property and returns the receiver for chaining.
 func (x *IKDeviceBrowserView) WithDisplaysLocalCameras(displaysLocalCameras bool) *IKDeviceBrowserView {
@@ -52,7 +54,7 @@ func (x *IKDeviceBrowserView) WithDisplaysLocalCameras(displaysLocalCameras bool
 	return x
 }
 
-// @property displaysNetworkCameras @abstract for device filtering - indicates that the IKDeviceBrowserView should include network/shared cameras.
+// Specifies whether network cameras are displayed by the browser.
 //
 // WithDisplaysNetworkCameras sets the displaysNetworkCameras property and returns the receiver for chaining.
 func (x *IKDeviceBrowserView) WithDisplaysNetworkCameras(displaysNetworkCameras bool) *IKDeviceBrowserView {
@@ -60,7 +62,7 @@ func (x *IKDeviceBrowserView) WithDisplaysNetworkCameras(displaysNetworkCameras 
 	return x
 }
 
-// @property displaysLocalScanners @abstract for device filtering - indicates that the IKDeviceBrowserView should include local scanners.
+// Specifies whether local scanners are displayed by the browser.
 //
 // WithDisplaysLocalScanners sets the displaysLocalScanners property and returns the receiver for chaining.
 func (x *IKDeviceBrowserView) WithDisplaysLocalScanners(displaysLocalScanners bool) *IKDeviceBrowserView {
@@ -68,7 +70,7 @@ func (x *IKDeviceBrowserView) WithDisplaysLocalScanners(displaysLocalScanners bo
 	return x
 }
 
-// @property displaysNetworkScanners @abstract for device filtering - indicates that the IKDeviceBrowserView should include network/shared scanners.
+// Specifies whether network scanners are displayed by the browser.
 //
 // WithDisplaysNetworkScanners sets the displaysNetworkScanners property and returns the receiver for chaining.
 func (x *IKDeviceBrowserView) WithDisplaysNetworkScanners(displaysNetworkScanners bool) *IKDeviceBrowserView {
@@ -76,7 +78,7 @@ func (x *IKDeviceBrowserView) WithDisplaysNetworkScanners(displaysNetworkScanner
 	return x
 }
 
-// @property mode @abstract one of the supported display modes (table, outline, or icon mode).
+// Specifies the browser display mode.
 //
 // WithMode sets the mode property and returns the receiver for chaining.
 func (x *IKDeviceBrowserView) WithMode(mode objc.ID) *IKDeviceBrowserView {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An event requesting that the player seek to a new position.
+//
 // SeekCommandEvent wraps [raw.MPSeekCommandEvent] with a fluent Go API.
 type SeekCommandEvent struct {
 	inner *raw.MPSeekCommandEvent

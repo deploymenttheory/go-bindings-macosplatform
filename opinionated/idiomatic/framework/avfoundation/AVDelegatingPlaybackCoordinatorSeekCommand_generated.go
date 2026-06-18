@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A command that indicates to seek to a new time in the item timeline.
+//
 // DelegatingPlaybackCoordinatorSeekCommand wraps [raw.AVDelegatingPlaybackCoordinatorSeekCommand] with a fluent Go API.
 type DelegatingPlaybackCoordinatorSeekCommand struct {
 	inner *raw.AVDelegatingPlaybackCoordinatorSeekCommand

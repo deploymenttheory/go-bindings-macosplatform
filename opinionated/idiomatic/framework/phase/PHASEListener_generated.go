@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A central point of reference that defines the location within the scene that’s most audible to the user.
+//
 // Listener wraps [raw.PHASEListener] with a fluent Go API.
 type Listener struct {
 	inner *raw.PHASEListener
@@ -29,7 +31,7 @@ func ListenerFromID(id objc.ID) *Listener {
 	return &Listener{inner: raw.PHASEListenerFromID(id)}
 }
 
-// @method initWithEngine: @abstract Initialize a new listener.
+// Creates a listener with the given engine.
 //
 // NewListenerWithEngine creates a new [Listener].
 func NewListenerWithEngine(engine *raw.PHASEEngine) *Listener {
@@ -38,7 +40,7 @@ func NewListenerWithEngine(engine *raw.PHASEEngine) *Listener {
 	return &Listener{inner: raw.PHASEListenerFromID(_id)}
 }
 
-// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
+// Modifies the volume of all audio playback for the listener’s mixers.
 //
 // WithGain sets the gain property and returns the receiver for chaining.
 func (x *Listener) WithGain(gain float64) *Listener {

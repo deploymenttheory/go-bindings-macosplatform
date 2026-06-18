@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/emit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/meta"
 	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/naming"
+	"github.com/deploymenttheory/go-bindings-macosplatform/internal/codegen/frameworks/typemap"
 )
 
 // emitConstants writes <pkgname>_constants_generated.go: one idiomatic accessor
@@ -27,8 +28,10 @@ import (
 func emitConstants(
 	outDir, pkgName, rawPkgAlias, rawPkgPath string,
 	fw *meta.FrameworkMeta,
+	m *typemap.Mapper,
 	handFuncs, takenNames map[string]bool,
 ) error {
+	ctx := typemap.Context{Framework: fw.Framework}
 	// Mirror EmitExterns' name reservations: an extern is skipped when its C name
 	// collides with a function (raw or exported Go name), or its Go accessor name
 	// duplicates another extern's.
@@ -55,7 +58,13 @@ func emitConstants(
 		seen[ext.Name] = true
 		seenGoNames[goName] = true
 
-		if !isCFRefExtern(ext.ObjCType) {
+		// NSString externs (NSURLResourceKey / notification-name globals) are
+		// surfaced only in the foundation package itself, where the *String
+		// wrapper and StringFromID are local; cross-package the idiomatic
+		// foundation is not imported (generated code aliases the RAW foundation
+		// as `foundation`), so they stay raw-only elsewhere.
+		isString := pkgName == foundationPkgName && externIsNSString(ext, m, ctx)
+		if !isCFRefExtern(ext.ObjCType) && !isString {
 			continue
 		}
 		if takenNames[goName] || handFuncs[goName] {
@@ -67,14 +76,19 @@ func emitConstants(
 		if ext.Doc != "" {
 			comment = "// " + ext.Doc + "\n"
 		}
-		view.Items = append(view.Items, constantItem{
+		item := constantItem{
 			GoName:       goName,
 			ExternName:   ext.Name,
 			CommentBlock: comment,
-		})
+		}
+		if isCFRefExtern(ext.ObjCType) {
+			view.Items = append(view.Items, item)
+		} else {
+			view.StringItems = append(view.StringItems, item)
+		}
 	}
 
-	if len(view.Items) == 0 {
+	if len(view.Items) == 0 && len(view.StringItems) == 0 {
 		return nil
 	}
 
@@ -103,7 +117,30 @@ type constantItem struct {
 
 type cfConstantsView struct {
 	RawAlias string
-	Items    []constantItem
+	Items    []constantItem // CoreFoundation-reference externs → objc.ID
+	// StringItems are NSString externs → *String (foundation package only).
+	StringItems []constantItem
+}
+
+// foundationPkgName is the idiomatic foundation package name, used to decide
+// whether the local *String wrapper is referenced bare or as foundation.String.
+const foundationPkgName = "foundation"
+
+// externIsNSString reports whether an extern resolves to an NSString * constant
+// — directly or through a typedef such as NSURLResourceKey / NSNotificationName
+// (e.g. NSURLVolumeAvailableCapacityKey is `const NSURLResourceKey`, which the
+// mapper resolves to *NSString). The Go type is resolved the same way the raw
+// externs emitter does (ext.GoType, else the mapper). Pointer-to-pointer
+// out-parameters (containing "**") are excluded.
+func externIsNSString(ext meta.Extern, m *typemap.Mapper, ctx typemap.Context) bool {
+	goType := ext.GoType
+	if goType == "" {
+		goType = m.GoType(ext.ObjCType, ctx, make(typemap.ImportSet))
+	}
+	if strings.Contains(goType, "**") || !strings.Contains(goType, "*") {
+		return false
+	}
+	return strings.Contains(goType, "NSString")
 }
 
 // isCFRefExtern reports whether an extern's ObjC type is a CoreFoundation

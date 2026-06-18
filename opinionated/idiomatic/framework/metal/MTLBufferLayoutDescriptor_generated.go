@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of how a compute function fetches input data for an attribute.
+//
 // BufferLayoutDescriptor wraps [raw.MTLBufferLayoutDescriptor] with a fluent Go API.
 type BufferLayoutDescriptor struct {
 	inner *raw.MTLBufferLayoutDescriptor
@@ -35,18 +37,24 @@ func NewBufferLayoutDescriptor() *BufferLayoutDescriptor {
 	return &BufferLayoutDescriptor{inner: raw.MTLBufferLayoutDescriptorFromID(_id)}
 }
 
+// The number of bytes from one buffer entry to the next.
+//
 // WithStride sets the stride property and returns the receiver for chaining.
 func (x *BufferLayoutDescriptor) WithStride(stride uint) *BufferLayoutDescriptor {
 	x.inner.SetStride(stride)
 	return x
 }
 
+// Determines how and when compute functions fetch data.
+//
 // WithStepFunction sets the stepFunction property and returns the receiver for chaining.
 func (x *BufferLayoutDescriptor) WithStepFunction(stepFunction MTLStepFunction) *BufferLayoutDescriptor {
 	x.inner.SetStepFunction(raw.MTLStepFunction(stepFunction))
 	return x
 }
 
+// How frequently the step function should load data.
+//
 // WithStepRate sets the stepRate property and returns the receiver for chaining.
 func (x *BufferLayoutDescriptor) WithStepRate(stepRate uint) *BufferLayoutDescriptor {
 	x.inner.SetStepRate(stepRate)

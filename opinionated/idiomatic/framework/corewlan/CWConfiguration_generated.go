@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Encapsulates an immutable configuration for an AirPort WLAN interface.
+//
 // Configuration wraps [raw.CWConfiguration] with a fluent Go API.
 type Configuration struct {
 	inner *raw.CWConfiguration
@@ -36,7 +38,7 @@ func NewConfiguration() *Configuration {
 	return &Configuration{inner: raw.CWConfigurationFromID(_id)}
 }
 
-// @method @param configuration A CWConfiguration object. @result A CWConfiguration object. @abstract Initializes a CWConfiguration object with the properties of an existing CWConfiguration object.
+// Creates and returns a CWConfiguration object initialized with the given CWConfiguration object.
 //
 // NewConfigurationWithConfiguration creates a new [Configuration].
 func NewConfigurationWithConfiguration(configuration *raw.CWConfiguration) *Configuration {
@@ -45,7 +47,7 @@ func NewConfigurationWithConfiguration(configuration *raw.CWConfiguration) *Conf
 	return &Configuration{inner: raw.CWConfigurationFromID(_id)}
 }
 
-// @method @param configuration The CWConfiguration with which to compare the receiver. @result YES if the objects are equal, NO otherwise. @abstract Determine CWConfiguration equality. @discussion CWConfiguration objects are considered equal if all their corresponding properties are equal.
+// Determine CWConfiguration object equality.
 //
 // IsEqualToConfiguration calls the underlying IsEqualToConfiguration.
 func (x *Configuration) IsEqualToConfiguration(configuration *raw.CWConfiguration) bool {

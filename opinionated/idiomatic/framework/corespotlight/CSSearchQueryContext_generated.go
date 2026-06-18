@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The behavior configuration to use for a search query.
+//
 // SearchQueryContext wraps [raw.CSSearchQueryContext] with a fluent Go API.
 type SearchQueryContext struct {
 	inner *raw.CSSearchQueryContext
@@ -38,6 +40,8 @@ func NewSearchQueryContext() *SearchQueryContext {
 	return &SearchQueryContext{inner: raw.CSSearchQueryContextFromID(_id)}
 }
 
+// The attributes the system fetches for the searchable items.
+//
 // WithFetchAttributes sets the collection, converting the Go slice to an NSArray.
 func (x *SearchQueryContext) WithFetchAttributes(items ...*foundation.NSString) *SearchQueryContext {
 	if len(items) == 0 {
@@ -56,6 +60,8 @@ func (x *SearchQueryContext) WithFetchAttributes(items ...*foundation.NSString) 
 	return x
 }
 
+// The query string used to filter the results.
+//
 // WithFilterQueries sets the collection, converting the Go slice to an NSArray.
 func (x *SearchQueryContext) WithFilterQueries(items ...*foundation.NSString) *SearchQueryContext {
 	if len(items) == 0 {
@@ -74,12 +80,16 @@ func (x *SearchQueryContext) WithFilterQueries(items ...*foundation.NSString) *S
 	return x
 }
 
+// The language used for the query.
+//
 // WithKeyboardLanguage sets the keyboardLanguage property and returns the receiver for chaining.
 func (x *SearchQueryContext) WithKeyboardLanguage(keyboardLanguage string) *SearchQueryContext {
 	x.inner.SetKeyboardLanguage(foundation.NSStringStringWithUTF8String(keyboardLanguage))
 	return x
 }
 
+// The query source options to allow or deny Mail messages in the search.
+//
 // WithSourceOptions sets the sourceOptions property and returns the receiver for chaining.
 func (x *SearchQueryContext) WithSourceOptions(sourceOptions CSSearchQuerySourceOptions) *SearchQueryContext {
 	x.inner.SetSourceOptions(raw.CSSearchQuerySourceOptions(sourceOptions))

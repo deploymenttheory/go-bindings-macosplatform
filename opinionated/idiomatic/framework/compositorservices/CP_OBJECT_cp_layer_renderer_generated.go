@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that provides the Metal types and timing information you need to draw your content.
+//
 // _cp_layer_renderer wraps [raw.CP_OBJECT_cp_layer_renderer] with a fluent Go API.
 type _cp_layer_renderer struct {
 	inner *raw.CP_OBJECT_cp_layer_renderer

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Contains the user’s payment credentials.
+//
 // PaymentToken wraps [raw.PKPaymentToken] with a fluent Go API.
 type PaymentToken struct {
 	inner *raw.PKPaymentToken

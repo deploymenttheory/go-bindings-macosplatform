@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that validates captions for a conversion operation.
+//
 // CaptionConversionValidator wraps [raw.AVCaptionConversionValidator] with a fluent Go API.
 type CaptionConversionValidator struct {
 	inner *raw.AVCaptionConversionValidator
@@ -33,7 +35,7 @@ func CaptionConversionValidatorFromID(id objc.ID) *CaptionConversionValidator {
 	return &CaptionConversionValidator{inner: raw.AVCaptionConversionValidatorFromID(id)}
 }
 
-// @method        initWithCaptions:startTime:conversionSettings: @abstract      Returns an instance of AVCaptionConversionValidator that can validate an array of captions for a specific conversion operation and warn about problems that are encountered. @param         captions The array of captions for which the validation is requested. @param         timeRange The timeRange of the media timeline into which the specified captions must be integrated. See the timeRange property for further details. @param         conversionSettings Describes the conversion operation for which the captions are to be validated. @result        A new instance of AVCaptionConversionValidator configured to perform the specified validation.
+// Creates an object that validates captions for a conversion operation.
 //
 // NewCaptionConversionValidatorWithCaptionsTimeRangeConversionSettings creates a new [CaptionConversionValidator].
 func NewCaptionConversionValidatorWithCaptionsTimeRangeConversionSettings(captions *foundation.NSArray[*raw.AVCaption], timeRange coremedia.CMTimeRange, conversionSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptionConversionValidator {
@@ -42,7 +44,7 @@ func NewCaptionConversionValidatorWithCaptionsTimeRangeConversionSettings(captio
 	return &CaptionConversionValidator{inner: raw.AVCaptionConversionValidatorFromID(_id)}
 }
 
-// @method        validateCaptionConversionWithWarningHandler: @abstract      Initiates the specified validation and changes the value of status to AVCaptionConversionValidatorStatusValidating. @param         handler Specifies a block to be executed in order to warn you of a specific problem. @discussion It is an error to invoke this method when the value of status is greater than AVCaptionConversionValidatorStatusUnknown. If you wish to stop a validation operation in progress before it has been completed, send the message stopValidating to the receiver. When the validation is complete and all warnings have been reported, the block will be executed once with a value of nil for its warning parameter. When this occurs, the value of status will have been changed to AVCaptionConversionValidatorStatusCompleted.
+// Validates the object’s captions.
 //
 // ValidateCaptionConversionWithWarningHandler blocks until the operation completes or ctx is cancelled.
 func (x *CaptionConversionValidator) ValidateCaptionConversionWithWarningHandler(ctx context.Context) (*CaptionConversionWarning, error) {
@@ -67,7 +69,7 @@ func (x *CaptionConversionValidator) ValidateCaptionConversionWithWarningHandler
 	}
 }
 
-// @method        stopValidating @abstract      Stops validation and changes the value of status to AVCaptionConversionValidatorStatusStopped. @discussion You can call this method at any time, even within your warning handler.
+// Stops the active validation operation.
 //
 // StopValidating calls the underlying StopValidating.
 func (x *CaptionConversionValidator) StopValidating() {

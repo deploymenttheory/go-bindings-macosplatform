@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An event that represents the combined metrics for the entire playback session.
+//
 // MetricPlayerItemPlaybackSummaryEvent wraps [raw.AVMetricPlayerItemPlaybackSummaryEvent] with a fluent Go API.
 type MetricPlayerItemPlaybackSummaryEvent struct {
 	inner *raw.AVMetricPlayerItemPlaybackSummaryEvent

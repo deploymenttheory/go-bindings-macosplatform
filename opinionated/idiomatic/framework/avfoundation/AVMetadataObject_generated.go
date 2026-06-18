@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract superclass for objects provided by a metadata capture output.
+//
 // MetadataObject wraps [raw.AVMetadataObject] with a fluent Go API.
 type MetadataObject struct {
 	inner *raw.AVMetadataObject

@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A generator of texel data that creates a field of random noise.
+//
 // NoiseTexture wraps [raw.MDLNoiseTexture] with a fluent Go API.
 type NoiseTexture struct {
 	inner *raw.MDLNoiseTexture
@@ -31,7 +33,7 @@ func NoiseTextureFromID(id objc.ID) *NoiseTexture {
 	return &NoiseTexture{inner: raw.MDLNoiseTextureFromID(id)}
 }
 
-// Create a four channel texture containing directional noise. The RGBA values in this texture can be used as a normal map or as direction possibly with length. XYZ are a three dimensional direction, and A is a magnitude. @param smoothness how similar neighboring pixels are. A value of zero is like static, one is smooth.
+// Initializes a noise texture that creates random directional noise.
 //
 // NewNoiseTextureVectorNoiseWithSmoothnessNameTextureDimensionsChannelEncoding creates a new [NoiseTexture].
 func NewNoiseTextureVectorNoiseWithSmoothnessNameTextureDimensionsChannelEncoding(smoothness float32, name string, textureDimensions unsafe.Pointer, channelEncoding MDLTextureChannelEncoding) *NoiseTexture {
@@ -40,7 +42,7 @@ func NewNoiseTextureVectorNoiseWithSmoothnessNameTextureDimensionsChannelEncodin
 	return &NoiseTexture{inner: raw.MDLNoiseTextureFromID(_id)}
 }
 
-// Create a texture containing colored noise. The noise texture is tileable with itself. @param smoothness how similar neighboring pixels are. A value of zero is like static, one is smooth. @param grayscale if YES, RGB and A will all be the same. If no, RGB and A will all be different. A is not pre-multiplied, because the intent is that if you read a texel in a shader, all four values will be exactly the same value if grayscale, or four different, uncorrelated values if not grayscale.
+// Initializes a noise texture that creates random color noise.
 //
 // NewNoiseTextureScalarNoiseWithSmoothnessNameTextureDimensionsChannelCountChannelEncodingGrayscale creates a new [NoiseTexture].
 func NewNoiseTextureScalarNoiseWithSmoothnessNameTextureDimensionsChannelCountChannelEncodingGrayscale(smoothness float32, name string, textureDimensions unsafe.Pointer, channelCount int, channelEncoding MDLTextureChannelEncoding, grayscale bool) *NoiseTexture {
@@ -58,6 +60,8 @@ func NewNoiseTextureCellularNoiseWithFrequencyNameTextureDimensionsChannelEncodi
 	return &NoiseTexture{inner: raw.MDLNoiseTextureFromID(_id)}
 }
 
+// A Boolean value that indicates whether the texture is a cube textures.
+//
 // WithIsCube sets the isCube property and returns the receiver for chaining.
 func (x *NoiseTexture) WithIsCube(isCube bool) *NoiseTexture {
 	x.inner.MDLTexture.SetIsCube(isCube)

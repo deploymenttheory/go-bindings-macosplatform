@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The object for managing notification-related settings and the authorization status of your app.
+//
 // NotificationSettings wraps [raw.UNNotificationSettings] with a fluent Go API.
 type NotificationSettings struct {
 	inner *raw.UNNotificationSettings

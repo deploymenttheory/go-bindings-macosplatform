@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An encapsulation of a render task’s timing, passes, and pixels processed.
+//
 // RenderInfo wraps [raw.CIRenderInfo] with a fluent Go API.
 type RenderInfo struct {
 	inner *raw.CIRenderInfo

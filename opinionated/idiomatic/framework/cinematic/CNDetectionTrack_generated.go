@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Abstract class representing a series of detections of the same subject over time.
+// An object representing a series of detections of the same subject over time.
 //
 // DetectionTrack wraps [raw.CNDetectionTrack] with a fluent Go API.
 type DetectionTrack struct {

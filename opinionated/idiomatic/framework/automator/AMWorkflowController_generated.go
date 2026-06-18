@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that lets you manage an Automator workflow in your app.
+//
 // WorkflowController wraps [raw.AMWorkflowController] with a fluent Go API.
 type WorkflowController struct {
 	inner *raw.AMWorkflowController
@@ -35,44 +37,60 @@ func NewWorkflowController() *WorkflowController {
 	return &WorkflowController{inner: raw.AMWorkflowControllerFromID(_id)}
 }
 
+// The controller’s workflow.
+//
 // WithWorkflow sets the workflow property and returns the receiver for chaining.
 func (x *WorkflowController) WithWorkflow(workflow *Workflow) *WorkflowController {
 	x.inner.SetWorkflow(workflow.Unwrap())
 	return x
 }
 
+// The controller’s workflow view.
+//
 // WithWorkflowView sets the workflowView property and returns the receiver for chaining.
 func (x *WorkflowController) WithWorkflowView(workflowView *WorkflowView) *WorkflowController {
 	x.inner.SetWorkflowView(workflowView.Unwrap())
 	return x
 }
 
+// The controller’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *WorkflowController) WithDelegate(delegate raw.AMWorkflowControllerDelegate) *WorkflowController {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Runs the associated workflow, after first clearing any results stored by its actions during any previous run.
+//
 // Run calls the underlying Run.
 func (x *WorkflowController) Run(sender objc.ID) {
 	x.inner.Run(sender)
 }
 
+// Stops the associated workflow.
+//
 // Stop calls the underlying Stop.
 func (x *WorkflowController) Stop(sender objc.ID) {
 	x.inner.Stop(sender)
 }
 
+// Pauses a workflow that’s running.
+//
 // Pause calls the underlying Pause.
 func (x *WorkflowController) Pause(sender objc.ID) {
 	x.inner.Pause(sender)
 }
 
+// In a paused workflow, runs the next action in the workflow and then pauses again.
+//
 // Step calls the underlying Step.
 func (x *WorkflowController) Step(sender objc.ID) {
 	x.inner.Step(sender)
 }
 
+// Stops a workflow, clears any action results, and resets the workflow back to an un-run state.
+//
 // Reset calls the underlying Reset.
 func (x *WorkflowController) Reset(sender objc.ID) {
 	x.inner.Reset(sender)

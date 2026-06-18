@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A GPU-based image-processing routine that processes only the color information in images, used to create custom Core Image filters.
+//
 // ColorKernel wraps [raw.CIColorKernel] with a fluent Go API.
 type ColorKernel struct {
 	inner *raw.CIColorKernel
@@ -37,6 +39,8 @@ func NewColorKernel() *ColorKernel {
 	return &ColorKernel{inner: raw.CIColorKernelFromID(_id)}
 }
 
+// Creates a new image using the kernel and specified arguments.
+//
 // ApplyWithExtentArguments calls the underlying ApplyWithExtentArguments.
 func (x *ColorKernel) ApplyWithExtentArguments(extent corefoundation.CGRect, args *foundation.NSArray[objc.ID]) *Image {
 	_r := x.inner.ApplyWithExtentArguments(extent, args)

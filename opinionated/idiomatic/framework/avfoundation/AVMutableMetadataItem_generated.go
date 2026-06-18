@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mutable metadata item for an audiovisual asset or for one of its tracks.
+//
 // MutableMetadataItem wraps [raw.AVMutableMetadataItem] with a fluent Go API.
 type MutableMetadataItem struct {
 	inner *raw.AVMutableMetadataItem
@@ -37,66 +39,88 @@ func NewMutableMetadataItem() *MutableMetadataItem {
 	return &MutableMetadataItem{inner: raw.AVMutableMetadataItemFromID(_id)}
 }
 
+// Indicates the identifier of the metadata item.
+//
 // WithIdentifier sets the identifier property and returns the receiver for chaining.
 func (x *MutableMetadataItem) WithIdentifier(identifier *foundation.NSString) *MutableMetadataItem {
 	x.inner.SetIdentifier(identifier)
 	return x
 }
 
+// The IETF BCP 47 (RFC 4646) language identifier of the metadata item.
+//
 // WithExtendedLanguageTag sets the extendedLanguageTag property and returns the receiver for chaining.
 func (x *MutableMetadataItem) WithExtendedLanguageTag(extendedLanguageTag string) *MutableMetadataItem {
 	x.inner.SetExtendedLanguageTag(foundation.NSStringStringWithUTF8String(extendedLanguageTag))
 	return x
 }
 
+// The locale for a mutable metadata item.
+//
 // WithLocale sets the locale property and returns the receiver for chaining.
 func (x *MutableMetadataItem) WithLocale(locale *foundation.NSLocale) *MutableMetadataItem {
 	x.inner.SetLocale(locale)
 	return x
 }
 
+// The timestamp for a mutable metadata item.
+//
 // WithTime sets the time_ property and returns the receiver for chaining.
 func (x *MutableMetadataItem) WithTime(time_ coremedia.CMTime) *MutableMetadataItem {
 	x.inner.SetTime(time_)
 	return x
 }
 
+// The duration of a mutable metadata item.
+//
 // WithDuration sets the duration property and returns the receiver for chaining.
 func (x *MutableMetadataItem) WithDuration(duration coremedia.CMTime) *MutableMetadataItem {
 	x.inner.SetDuration(duration)
 	return x
 }
 
+// The data type of the metadata item’s value.
+//
 // WithDataType sets the dataType property and returns the receiver for chaining.
 func (x *MutableMetadataItem) WithDataType(dataType string) *MutableMetadataItem {
 	x.inner.SetDataType(foundation.NSStringStringWithUTF8String(dataType))
 	return x
 }
 
+// The value for the mutable metadata item.
+//
 // WithValue sets the value property and returns the receiver for chaining.
 func (x *MutableMetadataItem) WithValue(value objc.ID) *MutableMetadataItem {
 	x.inner.SetValue(value)
 	return x
 }
 
+// A dictionary of additional attributes for a metadata item.
+//
 // WithExtraAttributes sets the extraAttributes property and returns the receiver for chaining.
 func (x *MutableMetadataItem) WithExtraAttributes(extraAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MutableMetadataItem {
 	x.inner.SetExtraAttributes(extraAttributes)
 	return x
 }
 
+// The start date of the timed metadata.
+//
 // WithStartDate sets the startDate property and returns the receiver for chaining.
 func (x *MutableMetadataItem) WithStartDate(startDate *foundation.NSDate) *MutableMetadataItem {
 	x.inner.SetStartDate(startDate)
 	return x
 }
 
+// The key space of the metadata item’s key.
+//
 // WithKeySpace sets the keySpace property and returns the receiver for chaining.
 func (x *MutableMetadataItem) WithKeySpace(keySpace *foundation.NSString) *MutableMetadataItem {
 	x.inner.SetKeySpace(keySpace)
 	return x
 }
 
+// The key for a mutable metadata item.
+//
 // WithKey sets the key property and returns the receiver for chaining.
 func (x *MutableMetadataItem) WithKey(key objc.ID) *MutableMetadataItem {
 	x.inner.SetKey(key)

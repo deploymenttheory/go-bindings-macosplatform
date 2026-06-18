@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A bar item that provides a two-state control that can expand into its second state, showing the contents of a bar that it owns.
+//
 // PopoverTouchBarItem wraps [raw.NSPopoverTouchBarItem] with a fluent Go API.
 type PopoverTouchBarItem struct {
 	inner *raw.NSPopoverTouchBarItem
@@ -37,64 +39,86 @@ func NewPopoverTouchBarItem() *PopoverTouchBarItem {
 	return &PopoverTouchBarItem{inner: raw.NSPopoverTouchBarItemFromID(_id)}
 }
 
+// The bar displayed when this item is “popped.”
+//
 // WithPopoverTouchBar sets the popoverTouchBar property and returns the receiver for chaining.
 func (x *PopoverTouchBarItem) WithPopoverTouchBar(popoverTouchBar *TouchBar) *PopoverTouchBarItem {
 	x.inner.SetPopoverTouchBar(popoverTouchBar.Unwrap())
 	return x
 }
 
+// The user-visible string identifying this item during bar customization.
+//
 // WithCustomizationLabel sets the customizationLabel property and returns the receiver for chaining.
 func (x *PopoverTouchBarItem) WithCustomizationLabel(customizationLabel string) *PopoverTouchBarItem {
 	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
 	return x
 }
 
+// The view displayed when this item is displayed in its parent bar.
+//
 // WithCollapsedRepresentation sets the collapsedRepresentation property and returns the receiver for chaining.
 func (x *PopoverTouchBarItem) WithCollapsedRepresentation(collapsedRepresentation ViewProvider) *PopoverTouchBarItem {
 	x.inner.SetCollapsedRepresentation(collapsedRepresentation.asView())
 	return x
 }
 
+// The image displayed by the button for the default collapsed representation.
+//
 // WithCollapsedRepresentationImage sets the collapsedRepresentationImage property and returns the receiver for chaining.
 func (x *PopoverTouchBarItem) WithCollapsedRepresentationImage(collapsedRepresentationImage *Image) *PopoverTouchBarItem {
 	x.inner.SetCollapsedRepresentationImage(collapsedRepresentationImage.Unwrap())
 	return x
 }
 
+// The localized string displayed by the button for the default collapsed representation.
+//
 // WithCollapsedRepresentationLabel sets the collapsedRepresentationLabel property and returns the receiver for chaining.
 func (x *PopoverTouchBarItem) WithCollapsedRepresentationLabel(collapsedRepresentationLabel string) *PopoverTouchBarItem {
 	x.inner.SetCollapsedRepresentationLabel(foundation.NSStringStringWithUTF8String(collapsedRepresentationLabel))
 	return x
 }
 
+// The bar that is displayed when a user press-and-holds on the popover item.
+//
 // WithPressAndHoldTouchBar sets the pressAndHoldTouchBar property and returns the receiver for chaining.
 func (x *PopoverTouchBarItem) WithPressAndHoldTouchBar(pressAndHoldTouchBar *TouchBar) *PopoverTouchBarItem {
 	x.inner.SetPressAndHoldTouchBar(pressAndHoldTouchBar.Unwrap())
 	return x
 }
 
+// A Boolean value that determines whether a close button should be shown on the popover bar.
+//
 // WithShowsCloseButton sets the showsCloseButton property and returns the receiver for chaining.
 func (x *PopoverTouchBarItem) WithShowsCloseButton(showsCloseButton bool) *PopoverTouchBarItem {
 	x.inner.SetShowsCloseButton(showsCloseButton)
 	return x
 }
 
+// Determines which items are shown in a bar when space is limited.
+//
 // WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
 func (x *PopoverTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *PopoverTouchBarItem {
 	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)
 	return x
 }
 
+// Replaces the main bar with this item’s popover bar.
+//
 // ShowPopover calls the underlying ShowPopover.
 func (x *PopoverTouchBarItem) ShowPopover(sender objc.ID) {
 	x.inner.ShowPopover(sender)
 }
 
+// Restores the previously visible main bar.
+//
 // DismissPopover calls the underlying DismissPopover.
 func (x *PopoverTouchBarItem) DismissPopover(sender objc.ID) {
 	x.inner.DismissPopover(sender)
 }
 
+// Returns a gesture recognizer, configured to invoke the showPopover: method.
+//
 // MakeStandardActivatePopoverGestureRecognizer calls the underlying MakeStandardActivatePopoverGestureRecognizer.
 func (x *PopoverTouchBarItem) MakeStandardActivatePopoverGestureRecognizer() *GestureRecognizer {
 	_r := x.inner.MakeStandardActivatePopoverGestureRecognizer()

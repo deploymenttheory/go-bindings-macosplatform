@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @class		IKFilterBrowserPanel @abstract   The IKFilterBrowserPanel provides the shared IKFilterBrowser with its runtime model. @discussion  See information in the introduction.
+// Presents a user interface for browsing filters.
 //
 // IKFilterBrowserPanel wraps [raw.IKFilterBrowserPanel] with a fluent Go API.
 type IKFilterBrowserPanel struct {
@@ -38,7 +38,7 @@ func NewIKFilterBrowserPanel() *IKFilterBrowserPanel {
 	return &IKFilterBrowserPanel{inner: raw.IKFilterBrowserPanelFromID(_id)}
 }
 
-// @method     filterName @abstract   Returns the name of the currently selected filter. @discussion Use this method in response to a IKFilterBrowserFilterSelectedNotification or IKFilterBrowserFilterDoubleClickNotification or afer returning from a modal session.
+// Returns the name of the filter that is currently selected in the filter browser.
 //
 // FilterName calls the underlying FilterName.
 func (x *IKFilterBrowserPanel) FilterName() string {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that can manipulate and provide information for a single instance of an app.
+//
 // RunningApplication wraps [raw.NSRunningApplication] with a fluent Go API.
 type RunningApplication struct {
 	inner *raw.NSRunningApplication
@@ -37,42 +39,42 @@ func NewRunningApplication() *RunningApplication {
 	return &RunningApplication{inner: raw.NSRunningApplicationFromID(_id)}
 }
 
-// Attempts to hide the receiver. @return `YES` if the request to hide or unhide was successfully sent, `NO` if not (for example, if the application has quit, or is of a type that cannot be unhidden).
+// Attempts to hide or the application.
 //
 // Hide calls the underlying Hide.
 func (x *RunningApplication) Hide() bool {
 	return x.inner.Hide()
 }
 
-// Attempts to unhide the receiver. @return `YES` if the request to hide or unhide was successfully sent, `NO` if not (for example, if the application has quit, or is of a type that cannot be unhidden).
+// Attempts to unhide or the application.
 //
 // Unhide calls the underlying Unhide.
 func (x *RunningApplication) Unhide() bool {
 	return x.inner.Unhide()
 }
 
-// Attempts to activate the application using the specified options. You shouldn’t assume the app will be active immediately after sending this message. The framework also does not guarantee that the app will be activated at all. Additionally allows specifying another application to take the active status from, which can be used for coordinated or cooperative activation. The other application should call `-yieldActivationToApplication:` or equivalent prior to this request being sent. @return `YES` if the request has been allowed by the system, otherwise `NO`.
+// Attempts to activate the application using the specified options.
 //
 // ActivateFromApplicationOptions calls the underlying ActivateFromApplicationOptions.
 func (x *RunningApplication) ActivateFromApplicationOptions(application *raw.NSRunningApplication, options NSApplicationActivationOptions) bool {
 	return x.inner.ActivateFromApplicationOptions(application, raw.NSApplicationActivationOptions(options))
 }
 
-// Attempts to activate the receiver. @return `YES` if the request to activate was successfully sent, `NO` if not (for example, if the application has quit, or is of a type that cannot be activated).
+// Attempts to activate the application using the specified options.
 //
 // ActivateWithOptions calls the underlying ActivateWithOptions.
 func (x *RunningApplication) ActivateWithOptions(options NSApplicationActivationOptions) bool {
 	return x.inner.ActivateWithOptions(raw.NSApplicationActivationOptions(options))
 }
 
-// Attempts to quit the receiver normally. @return `YES` if the request was successfully sent, `NO` if not (for example, if the application is no longer running). This method may return before the receiver exits; you should observe the terminated property or listen for the notification to detect when the app has exited.
+// Attempts to quit the receiver normally.
 //
 // Terminate calls the underlying Terminate.
 func (x *RunningApplication) Terminate() bool {
 	return x.inner.Terminate()
 }
 
-// Attempts to force the receiver to quit. @return `YES` if the request was successfully sent, `NO` if not (for example, if the application is no longer running). This method may return before the receiver exits; you should observe the terminated property or listen for the notification to detect when the app has exited.
+// Attempts to force the receiver to quit.
 //
 // ForceTerminate calls the underlying ForceTerminate.
 func (x *RunningApplication) ForceTerminate() bool {

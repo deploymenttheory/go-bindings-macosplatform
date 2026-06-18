@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that lets you view and edit Automator workflows in your app.
+//
 // WorkflowView wraps [raw.AMWorkflowView] with a fluent Go API.
 type WorkflowView struct {
 	inner *raw.AMWorkflowView
@@ -35,12 +37,16 @@ func NewWorkflowView() *WorkflowView {
 	return &WorkflowView{inner: raw.AMWorkflowViewFromID(_id)}
 }
 
+// A Boolean value that indicates whether the workflow view is editable.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *WorkflowView) WithEditable(editable bool) *WorkflowView {
 	x.inner.SetEditable(editable)
 	return x
 }
 
+// The view’s workflow controller.
+//
 // WithWorkflowController sets the workflowController property and returns the receiver for chaining.
 func (x *WorkflowView) WithWorkflowController(workflowController *WorkflowController) *WorkflowView {
 	x.inner.SetWorkflowController(workflowController.Unwrap())

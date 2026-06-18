@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A description of a function object to create.
+//
 // FunctionDescriptor wraps [raw.MTLFunctionDescriptor] with a fluent Go API.
 type FunctionDescriptor struct {
 	inner *raw.MTLFunctionDescriptor
@@ -38,7 +40,7 @@ func NewFunctionDescriptor() *FunctionDescriptor {
 	return &FunctionDescriptor{inner: raw.MTLFunctionDescriptorFromID(_id)}
 }
 
-// @property name @abstract The name of the `visible` function to find.
+// The name of the function to fetch from the library.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *FunctionDescriptor) WithName(name string) *FunctionDescriptor {
@@ -46,7 +48,7 @@ func (x *FunctionDescriptor) WithName(name string) *FunctionDescriptor {
 	return x
 }
 
-// @property specializedName @abstract An optional new name for a `visible` function to allow reuse with different specializations.
+// A new name for the created function object.
 //
 // WithSpecializedName sets the specializedName property and returns the receiver for chaining.
 func (x *FunctionDescriptor) WithSpecializedName(specializedName string) *FunctionDescriptor {
@@ -54,7 +56,7 @@ func (x *FunctionDescriptor) WithSpecializedName(specializedName string) *Functi
 	return x
 }
 
-// @property constantValues @abstract The set of constant values assigned to the function constants. Compilation fails if you do not provide valid constant values for all required function constants.
+// The set of constant values assigned to the function constants.
 //
 // WithConstantValues sets the constantValues property and returns the receiver for chaining.
 func (x *FunctionDescriptor) WithConstantValues(constantValues *FunctionConstantValues) *FunctionDescriptor {
@@ -62,7 +64,7 @@ func (x *FunctionDescriptor) WithConstantValues(constantValues *FunctionConstant
 	return x
 }
 
-// @property options @abstract The options to use for this new `MTLFunction`.
+// Flags specifying how Metal should create the new function object.
 //
 // WithOptions sets the options property and returns the receiver for chaining.
 func (x *FunctionDescriptor) WithOptions(options MTLFunctionOptions) *FunctionDescriptor {

@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The interface for providing preference panes to System Preferences or other apps.
+//
 // PreferencePane wraps [raw.NSPreferencePane] with a fluent Go API.
 type PreferencePane struct {
 	inner *raw.NSPreferencePane
@@ -38,6 +40,8 @@ func NewPreferencePane() *PreferencePane {
 	return &PreferencePane{inner: raw.NSPreferencePaneFromID(_id)}
 }
 
+// Initializes a preference pane with the specified bundle.
+//
 // NewPreferencePaneWithBundle creates a new [PreferencePane].
 func NewPreferencePaneWithBundle(bundle *foundation.NSBundle) *PreferencePane {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPreferencePane")), objc.RegisterName("alloc"))
@@ -45,70 +49,96 @@ func NewPreferencePaneWithBundle(bundle *foundation.NSBundle) *PreferencePane {
 	return &PreferencePane{inner: raw.NSPreferencePaneFromID(_id)}
 }
 
+// The main view of the preference pane.
+//
 // WithMainView sets the mainView property and returns the receiver for chaining.
 func (x *PreferencePane) WithMainView(mainView *appkit.NSView) *PreferencePane {
 	x.inner.SetMainView(mainView)
 	return x
 }
 
+// The view that should have keyboard focus when the pane is selected.
+//
 // WithInitialKeyView sets the initialKeyView property and returns the receiver for chaining.
 func (x *PreferencePane) WithInitialKeyView(initialKeyView *appkit.NSView) *PreferencePane {
 	x.inner.SetInitialKeyView(initialKeyView)
 	return x
 }
 
+// The first view in the keyboard focus chain.
+//
 // WithFirstKeyView sets the firstKeyView property and returns the receiver for chaining.
 func (x *PreferencePane) WithFirstKeyView(firstKeyView *appkit.NSView) *PreferencePane {
 	x.inner.SetFirstKeyView(firstKeyView)
 	return x
 }
 
+// The last view in the keyboard focus chain.
+//
 // WithLastKeyView sets the lastKeyView property and returns the receiver for chaining.
 func (x *PreferencePane) WithLastKeyView(lastKeyView *appkit.NSView) *PreferencePane {
 	x.inner.SetLastKeyView(lastKeyView)
 	return x
 }
 
+// Loads the preference pane’s user interface into its main view.
+//
 // LoadMainView calls the underlying LoadMainView.
 func (x *PreferencePane) LoadMainView() *appkit.NSView {
 	return x.inner.LoadMainView()
 }
 
+// Notifies the preference pane that the main view is set up and prepared to be displayed.
+//
 // MainViewDidLoad calls the underlying MainViewDidLoad.
 func (x *PreferencePane) MainViewDidLoad() {
 	x.inner.MainViewDidLoad()
 }
 
+// Locates and assigns the preference pane’s main view from the nib file loaded by loadMainView.
+//
 // AssignMainView calls the underlying AssignMainView.
 func (x *PreferencePane) AssignMainView() {
 	x.inner.AssignMainView()
 }
 
+// Notifies the preference pane that the main app is about to display the preference pane’s main view.
+//
 // WillSelect calls the underlying WillSelect.
 func (x *PreferencePane) WillSelect() {
 	x.inner.WillSelect()
 }
 
+// Notifies the preference pane that the main app has just displayed the preference pane’s main view.
+//
 // DidSelect calls the underlying DidSelect.
 func (x *PreferencePane) DidSelect() {
 	x.inner.DidSelect()
 }
 
+// Notifies the main application of the preference pane’s ability to be deselected.
+//
 // ReplyToShouldUnselect calls the underlying ReplyToShouldUnselect.
 func (x *PreferencePane) ReplyToShouldUnselect(shouldUnselect bool) {
 	x.inner.ReplyToShouldUnselect(shouldUnselect)
 }
 
+// Notifies the preference pane that the main app is about to stop displaying the preference pane’s main view.
+//
 // WillUnselect calls the underlying WillUnselect.
 func (x *PreferencePane) WillUnselect() {
 	x.inner.WillUnselect()
 }
 
+// Notifies the preference pane that the main app has just stopped displaying the preference pane’s main view.
+//
 // DidUnselect calls the underlying DidUnselect.
 func (x *PreferencePane) DidUnselect() {
 	x.inner.DidUnselect()
 }
 
+// Updates the help menu.
+//
 // UpdateHelpMenuWithArray calls the underlying UpdateHelpMenuWithArray.
 func (x *PreferencePane) UpdateHelpMenuWithArray(inArrayOfMenuItems *foundation.NSArray[objc.ID]) {
 	x.inner.UpdateHelpMenuWithArray(inArrayOfMenuItems)

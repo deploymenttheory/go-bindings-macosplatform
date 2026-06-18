@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mutable object that represents a complete rendition of media selection options on an asset.
+//
 // MutableMediaSelection wraps [raw.AVMutableMediaSelection] with a fluent Go API.
 type MutableMediaSelection struct {
 	inner *raw.AVMutableMediaSelection
@@ -35,7 +37,7 @@ func NewMutableMediaSelection() *MutableMediaSelection {
 	return &MutableMediaSelection{inner: raw.AVMutableMediaSelectionFromID(_id)}
 }
 
-// @method		selectMediaOption:inMediaSelectionGroup: @abstract		Selects the media option described by the specified instance of AVMediaSelectionOption in the specified AVMediaSelectionGroup and deselects all other options in that group. @param			mediaSelectionOption The option to select. @param			mediaSelectionGroup The media selection group, obtained from the receiver's asset, that contains the specified option. @discussion If the specified media selection option isn't a member of the specified media selection group, no change in presentation state will result. If the value of the property allowsEmptySelection of the AVMediaSelectionGroup is YES, you can pass nil for mediaSelectionOption to deselect all media selection options in the group.
+// Selects the media option in the specified media selection group.
 //
 // SelectMediaOptionInMediaSelectionGroup calls the underlying SelectMediaOptionInMediaSelectionGroup.
 func (x *MutableMediaSelection) SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *raw.AVMediaSelectionOption, mediaSelectionGroup *raw.AVMediaSelectionGroup) {

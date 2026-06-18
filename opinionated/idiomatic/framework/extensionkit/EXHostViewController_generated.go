@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A view controller that hosts remote views provided by an app extension. Present this view controller from your app’s interface to display the content for an associated app extension. Configure the view controller with the app extension identity and the specific scene you want to display. Use the associated delegate object to receive notifications when the app extension becomes active or inactive. For more information about presenting this view controller and using it to display an app extension’s UI, see <doc://com.apple.documentation/documentation/extensionkit/including-extension-based-ui-in-your-interface>.
+// A view controller that hosts remote views provided by an app extension.
 //
 // HostViewController wraps [raw.EXHostViewController] with a fluent Go API.
 type HostViewController struct {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the results of a specific probe.
+//
 // ProbeResult wraps [raw.FSProbeResult] with a fluent Go API.
 type ProbeResult struct {
 	inner *raw.FSProbeResult

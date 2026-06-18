@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that encapsulates a diagnostic report.
+//
 // DiagnosticPayload wraps [raw.MXDiagnosticPayload] with a fluent Go API.
 type DiagnosticPayload struct {
 	inner *raw.MXDiagnosticPayload
@@ -37,14 +39,14 @@ func NewDiagnosticPayload() *DiagnosticPayload {
 	return &DiagnosticPayload{inner: raw.MXDiagnosticPayloadFromID(_id)}
 }
 
-// @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this diagnostic payload. @result        An NSData object containing the JSON representation
+// Returns the contents of the payload in JSON format.
 //
 // JSONRepresentation calls the underlying JSONRepresentation.
 func (x *DiagnosticPayload) JSONRepresentation() *foundation.NSData {
 	return x.inner.JSONRepresentation()
 }
 
-// @method        dictionaryRepresentation @abstract      Convenience method to return a NSDictionary representation of this diagnostic payload. @result        An NSDictionary object containing the dictionary representation
+// Returns the results of the payload as a dictionary.
 //
 // DictionaryRepresentation calls the underlying DictionaryRepresentation.
 func (x *DiagnosticPayload) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {

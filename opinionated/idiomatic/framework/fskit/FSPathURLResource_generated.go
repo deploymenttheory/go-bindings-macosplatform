@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A resource that represents a path in the system file space.
+//
 // PathURLResource wraps [raw.FSPathURLResource] with a fluent Go API.
 type PathURLResource struct {
 	inner *raw.FSPathURLResource
@@ -30,7 +32,7 @@ func PathURLResourceFromID(id objc.ID) *PathURLResource {
 	return &PathURLResource{inner: raw.FSPathURLResourceFromID(id)}
 }
 
-// Creates a path URL resource. - Parameters: - URL: A URL in the system file space that represents the contents of a file system. This parameter uses the `file:` scheme. - writable: A Boolean value that indicates whether the file system supports writing to the contents of the URL.
+// Creates a path URL resource.
 //
 // NewPathURLResourceWithURLWritable creates a new [PathURLResource].
 func NewPathURLResourceWithURLWritable(uRL string, writable bool) *PathURLResource {

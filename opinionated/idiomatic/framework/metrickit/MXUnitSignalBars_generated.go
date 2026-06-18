@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A unit of measure for the number of bars of cellular network connectivity.
+//
 // UnitSignalBars wraps [raw.MXUnitSignalBars] with a fluent Go API.
 type UnitSignalBars struct {
 	inner *raw.MXUnitSignalBars

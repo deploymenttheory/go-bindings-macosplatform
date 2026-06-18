@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a metric event when an error occurs.
+//
 // MetricErrorEvent wraps [raw.AVMetricErrorEvent] with a fluent Go API.
 type MetricErrorEvent struct {
 	inner *raw.AVMetricErrorEvent

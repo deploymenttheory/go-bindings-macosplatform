@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A view that arranges two or more views in a linear stack running horizontally or vertically.
+//
 // SplitView wraps [raw.NSSplitView] with a fluent Go API.
 type SplitView struct {
 	inner *raw.NSSplitView
@@ -41,31 +43,39 @@ func NewSplitView() *SplitView {
 	return &SplitView{inner: raw.NSSplitViewFromID(_id)}
 }
 
+// A Boolean value that determines the geometric orientation of the split view’s dividers.
+//
 // WithVertical sets the vertical property and returns the receiver for chaining.
 func (x *SplitView) WithVertical(vertical bool) *SplitView {
 	x.inner.SetVertical(vertical)
 	return x
 }
 
+// The style of divider between views.
+//
 // WithDividerStyle sets the dividerStyle property and returns the receiver for chaining.
 func (x *SplitView) WithDividerStyle(dividerStyle NSSplitViewDividerStyle) *SplitView {
 	x.inner.SetDividerStyle(raw.NSSplitViewDividerStyle(dividerStyle))
 	return x
 }
 
+// The name to use when the system automatically saves the split view’s divider configuration.
+//
 // WithAutosaveName sets the autosaveName property and returns the receiver for chaining.
 func (x *SplitView) WithAutosaveName(autosaveName *foundation.NSString) *SplitView {
 	x.inner.SetAutosaveName(autosaveName)
 	return x
 }
 
+// The split view’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *SplitView) WithDelegate(delegate raw.NSSplitViewDelegate) *SplitView {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
-// Whether or not all subviews will be added as arranged views. When NO, a subview must be explicitly added as an arrangedSubview if the view should be arranged as a split pane. When YES, \c -arrangedSubviews always be identical to \c -subviews. Defaults to YES. Setting this from YES to NO will leave all existing subviews as \c -arrangedSubviews. Setting this from NO to YES will cause \c -arrangedSubviews to become the value of \c -subviews.
+// A Boolean value that determines whether the split view arranges all of its subviews as split panes.
 //
 // WithArrangesAllSubviews sets the arrangesAllSubviews property and returns the receiver for chaining.
 func (x *SplitView) WithArrangesAllSubviews(arrangesAllSubviews bool) *SplitView {
@@ -115,6 +125,8 @@ func (x *SplitView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOpti
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *SplitView) WithFrame(frame corefoundation.CGRect) *SplitView {
 	x.inner.NSView.SetFrame(frame)
@@ -139,6 +151,8 @@ func (x *SplitView) WithBoundsRotation(boundsRotation float64) *SplitView {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *SplitView) WithBounds(bounds corefoundation.CGRect) *SplitView {
 	x.inner.NSView.SetBounds(bounds)
@@ -151,6 +165,8 @@ func (x *SplitView) WithCanDrawConcurrently(canDrawConcurrently bool) *SplitView
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *SplitView) WithNeedsDisplay(needsDisplay bool) *SplitView {
 	x.inner.NSView.SetNeedsDisplay(needsDisplay)
@@ -337,7 +353,7 @@ func (x *SplitView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets founda
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *SplitView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SplitView {
@@ -393,65 +409,89 @@ func (x *SplitView) WithPressureConfiguration(pressureConfiguration *PressureCon
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *SplitView) WithNextResponder(nextResponder ResponderProvider) *SplitView {
 	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *SplitView) WithMenu(menu *Menu) *SplitView {
 	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *SplitView) WithUserActivity(userActivity *foundation.NSUserActivity) *SplitView {
 	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *SplitView) WithTouchBar(touchBar *TouchBar) *SplitView {
 	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Draws a divider between two of the split view’s subviews.
+//
 // DrawDividerInRect calls the underlying DrawDividerInRect.
 func (x *SplitView) DrawDividerInRect(rect corefoundation.CGRect) {
 	x.inner.DrawDividerInRect(rect)
 }
 
+// Adjusts the sizes of the split view’s subviews so they (plus the dividers) fill the split view.
+//
 // AdjustSubviews calls the underlying AdjustSubviews.
 func (x *SplitView) AdjustSubviews() {
 	x.inner.AdjustSubviews()
 }
 
+// Returns whether the specified view is in a collapsed state.
+//
 // IsSubviewCollapsed calls the underlying IsSubviewCollapsed.
 func (x *SplitView) IsSubviewCollapsed(subview *raw.NSView) bool {
 	return x.inner.IsSubviewCollapsed(subview)
 }
 
+// Returns the minimum possible position of the divider at the specified index.
+//
 // MinPossiblePositionOfDividerAtIndex calls the underlying MinPossiblePositionOfDividerAtIndex.
 func (x *SplitView) MinPossiblePositionOfDividerAtIndex(dividerIndex int) float64 {
 	return x.inner.MinPossiblePositionOfDividerAtIndex(dividerIndex)
 }
 
+// Returns the maximum possible position of the divider at the specified index.
+//
 // MaxPossiblePositionOfDividerAtIndex calls the underlying MaxPossiblePositionOfDividerAtIndex.
 func (x *SplitView) MaxPossiblePositionOfDividerAtIndex(dividerIndex int) float64 {
 	return x.inner.MaxPossiblePositionOfDividerAtIndex(dividerIndex)
 }
 
+// Updates the location of a divider you specify by index.
+//
 // SetPositionOfDividerAtIndex calls the underlying SetPositionOfDividerAtIndex.
 func (x *SplitView) SetPositionOfDividerAtIndex(position float64, dividerIndex int) {
 	x.inner.SetPositionOfDividerAtIndex(position, dividerIndex)
 }
 
+// Returns the priority of the subview’s width or height when resizing.
+//
 // HoldingPriorityForSubviewAtIndex calls the underlying HoldingPriorityForSubviewAtIndex.
 func (x *SplitView) HoldingPriorityForSubviewAtIndex(subviewIndex int) float32 {
 	return x.inner.HoldingPriorityForSubviewAtIndex(subviewIndex)
 }
 
+// Sets the priority for split view subviews to maintain their width or height.
+//
 // SetHoldingPriorityForSubviewAtIndex calls the underlying SetHoldingPriorityForSubviewAtIndex.
 func (x *SplitView) SetHoldingPriorityForSubviewAtIndex(priority float32, subviewIndex int) {
 	x.inner.SetHoldingPriorityForSubviewAtIndex(priority, subviewIndex)
@@ -515,21 +555,21 @@ func (x *SplitView) DividerThickness() float64 {
 	return x.inner.DividerThickness()
 }
 
-// Adds a view as arranged split pane. If the view is not a subview of the receiver, it will be added as one.
+// Adds a view as an arranged split pane.
 //
 // AddArrangedSubview calls the underlying AddArrangedSubview.
 func (x *SplitView) AddArrangedSubview(view *raw.NSView) {
 	x.inner.AddArrangedSubview(view)
 }
 
-// Adds a view as an arranged split pane list at the specific index. If the view is already an arranged split view, it will move the view the specified index (but not move the subview index). If the view is not a subview of the receiver, it will be added as one (not necessarily at the same index).
+// Adds a view as an arranged split pane at the specified index.
 //
 // InsertArrangedSubviewAtIndex calls the underlying InsertArrangedSubviewAtIndex.
 func (x *SplitView) InsertArrangedSubviewAtIndex(view *raw.NSView, index int) {
 	x.inner.InsertArrangedSubviewAtIndex(view, index)
 }
 
-// Removes a view as arranged split pane. If \c -arrangesAllSubviews is set to NO, this does not remove the view as a subview. Removing the view as a subview (either by -[view removeFromSuperview] or setting the receiver's subviews) will automatically remove it as an arranged subview.
+// Removes a view as an arranged split pane.
 //
 // RemoveArrangedSubview calls the underlying RemoveArrangedSubview.
 func (x *SplitView) RemoveArrangedSubview(view *raw.NSView) {
@@ -563,11 +603,15 @@ func (x *SplitView) ArrangedSubviews() []*View {
 	})
 }
 
+// Sets the type of splitter.
+//
 // SetIsPaneSplitter calls the underlying SetIsPaneSplitter.
 func (x *SplitView) SetIsPaneSplitter(flag bool) {
 	x.inner.SetIsPaneSplitter(flag)
 }
 
+// The type of pane splitter.
+//
 // IsPaneSplitter calls the underlying IsPaneSplitter.
 func (x *SplitView) IsPaneSplitter() bool {
 	return x.inner.IsPaneSplitter()

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A node that plays a sequence of audio buffers.
+//
 // PushStreamNodeDefinition wraps [raw.PHASEPushStreamNodeDefinition] with a fluent Go API.
 type PushStreamNodeDefinition struct {
 	inner *raw.PHASEPushStreamNodeDefinition
@@ -31,7 +33,7 @@ func PushStreamNodeDefinitionFromID(id objc.ID) *PushStreamNodeDefinition {
 	return &PushStreamNodeDefinition{inner: raw.PHASEPushStreamNodeDefinitionFromID(id)}
 }
 
-// @method initWithMixerDefinition:format:identifier @abstract Create a push stream node definition @param mixerDefinition The mixer definition this stream will be assigned to @param format The AVAudioFormat object that will define the attributes of the audio this node will accept. Only Core Audio's standard deinterleaved 32-bit floating-point formats are supported. @param identifier An optional custom identifier to give to this object @return A new PHASEPushStreamNodeDefinition object
+// Creates a named node definition for audio streams.
 //
 // NewPushStreamNodeDefinitionWithMixerDefinitionFormatIdentifier creates a new [PushStreamNodeDefinition].
 func NewPushStreamNodeDefinitionWithMixerDefinitionFormatIdentifier(mixerDefinition *raw.PHASEMixerDefinition, format *avfaudio.AVAudioFormat, identifier string) *PushStreamNodeDefinition {
@@ -40,7 +42,7 @@ func NewPushStreamNodeDefinitionWithMixerDefinitionFormatIdentifier(mixerDefinit
 	return &PushStreamNodeDefinition{inner: raw.PHASEPushStreamNodeDefinitionFromID(_id)}
 }
 
-// @method initWithMixerDefinition:format @abstract Create a push stream node definition @param mixerDefinition The mixer definition this stream will be assigned to @param format The AVAudioFormat object that will define the attributes of the audio this node will accept. Only Core Audio's standard deinterleaved 32-bit floating-point formats are supported. @return A new PHASEPushStreamNodeDefinition object
+// Creates a node definition for audio streams.
 //
 // NewPushStreamNodeDefinitionWithMixerDefinitionFormat creates a new [PushStreamNodeDefinition].
 func NewPushStreamNodeDefinitionWithMixerDefinitionFormat(mixerDefinition *raw.PHASEMixerDefinition, format *avfaudio.AVAudioFormat) *PushStreamNodeDefinition {
@@ -49,7 +51,7 @@ func NewPushStreamNodeDefinitionWithMixerDefinitionFormat(mixerDefinition *raw.P
 	return &PushStreamNodeDefinition{inner: raw.PHASEPushStreamNodeDefinitionFromID(_id)}
 }
 
-// @property normalize @abstract Determines whether or not the engine should normalize the stream. The default value is NO. @discussion In general, clients are advised to normalize the input. Normalization is required to properly calibrate the output level. If you set this value to NO, it's advised that you do custom normalization of the audio data prior to passing the buffers to PHASE.
+// An option that resizes loudness of the audio stream for consistency.
 //
 // WithNormalize sets the normalize property and returns the receiver for chaining.
 func (x *PushStreamNodeDefinition) WithNormalize(normalize bool) *PushStreamNodeDefinition {
@@ -57,7 +59,7 @@ func (x *PushStreamNodeDefinition) WithNormalize(normalize bool) *PushStreamNode
 	return x
 }
 
-// @property rate @abstract Linear rate scalar. @note Values are clamped to the range [0.25, 4]. Default value is 1.
+// A playback speed for the node’s audio.
 //
 // WithRate sets the rate property and returns the receiver for chaining.
 func (x *PushStreamNodeDefinition) WithRate(rate float64) *PushStreamNodeDefinition {
@@ -65,7 +67,7 @@ func (x *PushStreamNodeDefinition) WithRate(rate float64) *PushStreamNodeDefinit
 	return x
 }
 
-// @property group @abstract The PHASEGroup object this generator should be associated with for gain and rate control.
+// A group this node conforms to for gain and rate control.
 //
 // WithGroup sets the group property and returns the receiver for chaining.
 func (x *PushStreamNodeDefinition) WithGroup(group *Group) *PushStreamNodeDefinition {
@@ -73,7 +75,7 @@ func (x *PushStreamNodeDefinition) WithGroup(group *Group) *PushStreamNodeDefini
 	return x
 }
 
-// @property gainMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable dynamic control of the gain during playback.
+// A meta parameter that dynamically changes the audio’s loudness.
 //
 // WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
 func (x *PushStreamNodeDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PushStreamNodeDefinition {
@@ -81,7 +83,7 @@ func (x *PushStreamNodeDefinition) WithGainMetaParameterDefinition(gainMetaParam
 	return x
 }
 
-// @property rateMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable dynamic control of the rate during playback.
+// A meta parameter that dynamically changes the audio’s rate.
 //
 // WithRateMetaParameterDefinition sets the rateMetaParameterDefinition property and returns the receiver for chaining.
 func (x *PushStreamNodeDefinition) WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PushStreamNodeDefinition {

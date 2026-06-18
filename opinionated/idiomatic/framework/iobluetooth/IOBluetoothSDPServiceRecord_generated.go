@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An instance of this class represents a single SDP service record.
+//
 // IOBluetoothSDPServiceRecord wraps [raw.IOBluetoothSDPServiceRecord] with a fluent Go API.
 type IOBluetoothSDPServiceRecord struct {
 	inner *raw.IOBluetoothSDPServiceRecord
@@ -32,6 +34,8 @@ func IOBluetoothSDPServiceRecordFromID(id objc.ID) *IOBluetoothSDPServiceRecord 
 	return &IOBluetoothSDPServiceRecord{inner: raw.IOBluetoothSDPServiceRecordFromID(id)}
 }
 
+// Returns an initialized IOBluetoothSDPServiceRecord * with the attributes specified in the provided service dictionary. Provide a pointer to an IOBlueotothDevice if you wish to associate the record to a specific IOBluetoothDevice.
+//
 // NewIOBluetoothSDPServiceRecordWithServiceDictionaryDevice creates a new [IOBluetoothSDPServiceRecord].
 func NewIOBluetoothSDPServiceRecordWithServiceDictionaryDevice(serviceDict *foundation.NSDictionary[objc.ID, objc.ID], device *raw.IOBluetoothDevice) *IOBluetoothSDPServiceRecord {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothSDPServiceRecord")), objc.RegisterName("alloc"))
@@ -39,11 +43,15 @@ func NewIOBluetoothSDPServiceRecordWithServiceDictionaryDevice(serviceDict *foun
 	return &IOBluetoothSDPServiceRecord{inner: raw.IOBluetoothSDPServiceRecordFromID(_id)}
 }
 
+// Removes the service from the local SDP server.
+//
 // RemoveServiceRecord calls the underlying RemoveServiceRecord.
 func (x *IOBluetoothSDPServiceRecord) RemoveServiceRecord() int {
 	return x.inner.RemoveServiceRecord()
 }
 
+// Returns an IOBluetoothSDPServiceRecordRef representation of the target IOBluetoothSDPServiceRecord object.
+//
 // GetSDPServiceRecordRef calls the underlying GetSDPServiceRecordRef.
 func (x *IOBluetoothSDPServiceRecord) GetSDPServiceRecordRef() unsafe.Pointer {
 	return x.inner.GetSDPServiceRecordRef()
@@ -63,6 +71,8 @@ func (x *IOBluetoothSDPServiceRecord) GetAttributes() *foundation.NSDictionary[o
 	return x.inner.GetAttributes()
 }
 
+// Returns the data element for the given attribute ID in the target service.
+//
 // GetAttributeDataElement calls the underlying GetAttributeDataElement.
 func (x *IOBluetoothSDPServiceRecord) GetAttributeDataElement(attributeID uint16) *IOBluetoothSDPDataElement {
 	_r := x.inner.GetAttributeDataElement(attributeID)
@@ -72,6 +82,8 @@ func (x *IOBluetoothSDPServiceRecord) GetAttributeDataElement(attributeID uint16
 	return &IOBluetoothSDPDataElement{inner: _r}
 }
 
+// Returns the name of the service.
+//
 // GetServiceName calls the underlying GetServiceName.
 func (x *IOBluetoothSDPServiceRecord) GetServiceName() string {
 	_r := x.inner.GetServiceName()
@@ -81,42 +93,50 @@ func (x *IOBluetoothSDPServiceRecord) GetServiceName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Allows the discovery of the RFCOMM channel ID assigned to the service.
+//
 // GetRFCOMMChannelID calls the underlying GetRFCOMMChannelID.
 func (x *IOBluetoothSDPServiceRecord) GetRFCOMMChannelID(rfcommChannelID *uint8) int {
 	return x.inner.GetRFCOMMChannelID(rfcommChannelID)
 }
 
+// Allows the discovery of the L2CAP PSM assigned to the service.
+//
 // GetL2CAPPSM calls the underlying GetL2CAPPSM.
 func (x *IOBluetoothSDPServiceRecord) GetL2CAPPSM(outPSM *uint16) int {
 	return x.inner.GetL2CAPPSM(outPSM)
 }
 
+// Allows the discovery of the service record handle assigned to the service.
+//
 // GetServiceRecordHandle calls the underlying GetServiceRecordHandle.
 func (x *IOBluetoothSDPServiceRecord) GetServiceRecordHandle(outServiceRecordHandle *uint32) int {
 	return x.inner.GetServiceRecordHandle(outServiceRecordHandle)
 }
 
-// @method		matchesUUID16: @abstract	Returns TRUE the UUID16 is found in the target service. NOTE: This method is only available in Mac OS X 10.7 or later. @param uuid16 A BluetoothSDPUUID16 to search for in the target service. @result Returns TRUE if the UUID16 is present in the service.
+// Returns TRUE the UUID16 is found in the target service.
 //
 // MatchesUUID16 calls the underlying MatchesUUID16.
 func (x *IOBluetoothSDPServiceRecord) MatchesUUID16(uuid16 uint16) bool {
 	return x.inner.MatchesUUID16(uuid16)
 }
 
-// @method		matchesUUIDArray: @abstract	Returns TRUE if ALL of the UUIDs in the given array is found in the target service. @discussion The given array should contain IOBluetoothSDPUUID objects.  It only returns TRUE if all of the UUIDs are found.  This method is like hasServiceFromArray: except that it requires that all UUIDs match instead of any of them matching. NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later. @param array An NSArray of IOBluetoothSDPUUID objects to search for in the target service. @result Returns TRUE if all of the given UUIDs are present in the service.
+// Returns TRUE if ALL of the UUIDs in the given array is found in the target service.
 //
 // MatchesUUIDArray calls the underlying MatchesUUIDArray.
 func (x *IOBluetoothSDPServiceRecord) MatchesUUIDArray(uuidArray *foundation.NSArray[objc.ID]) bool {
 	return x.inner.MatchesUUIDArray(uuidArray)
 }
 
-// @method		matchesSearchArray: @abstract	Returns TRUE any of the UUID arrays in the search array match the target service. @discussion The given array should contain NSArray objects.  Each sub-NSArray should contain IOBluetoothSDPUUID objects.  In turn, each sub-NSArray gets passed to -matchesUUIDArray: If any of those returns TRUE, then the search stops and TRUE is returned. Essentially the master NSArray contains the OR operations and each sub-array contains the AND operations. NOTE: This method is only available in Mac OS X 10.2.4 (Bluetooth v1.1) or later. @param		array An NSArray of NSArrays of IOBluetoothSDPUUID objects. @result		Returns TRUE if any of the UUID arrays match.
+// Returns TRUE any of the UUID arrays in the search array match the target service.
 //
 // MatchesSearchArray calls the underlying MatchesSearchArray.
 func (x *IOBluetoothSDPServiceRecord) MatchesSearchArray(searchArray *foundation.NSArray[objc.ID]) bool {
 	return x.inner.MatchesSearchArray(searchArray)
 }
 
+// Returns TRUE if any one of the UUIDs in the given array is found in the target service.
+//
 // HasServiceFromArray calls the underlying HasServiceFromArray.
 func (x *IOBluetoothSDPServiceRecord) HasServiceFromArray(array *foundation.NSArray[objc.ID]) bool {
 	return x.inner.HasServiceFromArray(array)

@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An NSSegmentedCell object implements the appearance and behavior of a horizontal button divided into multiple segments. This class is used in conjunction with the NSSegmentedControl class to implement a segmented control.
+//
 // SegmentedCell wraps [raw.NSSegmentedCell] with a fluent Go API.
 type SegmentedCell struct {
 	inner *raw.NSSegmentedCell
@@ -38,330 +40,442 @@ func NewSegmentedCell() *SegmentedCell {
 	return &SegmentedCell{inner: raw.NSSegmentedCellFromID(_id)}
 }
 
+// The number of segments in the segmented control.
+//
 // WithSegmentCount sets the segmentCount property and returns the receiver for chaining.
 func (x *SegmentedCell) WithSegmentCount(segmentCount int) *SegmentedCell {
 	x.inner.SetSegmentCount(segmentCount)
 	return x
 }
 
+// The index of the selected segment of the control, or -1 if no segment is selected.
+//
 // WithSelectedSegment sets the selectedSegment property and returns the receiver for chaining.
 func (x *SegmentedCell) WithSelectedSegment(selectedSegment int) *SegmentedCell {
 	x.inner.SetSelectedSegment(selectedSegment)
 	return x
 }
 
+// The tracking mode used for the segments of the control.
+//
 // WithTrackingMode sets the trackingMode property and returns the receiver for chaining.
 func (x *SegmentedCell) WithTrackingMode(trackingMode NSSegmentSwitchTracking) *SegmentedCell {
 	x.inner.SetTrackingMode(raw.NSSegmentSwitchTracking(trackingMode))
 	return x
 }
 
+// The visual style used to display the segmented control.
+//
 // WithSegmentStyle sets the segmentStyle property and returns the receiver for chaining.
 func (x *SegmentedCell) WithSegmentStyle(segmentStyle NSSegmentStyle) *SegmentedCell {
 	x.inner.SetSegmentStyle(raw.NSSegmentStyle(segmentStyle))
 	return x
 }
 
+// The view associated with the cell.
+//
 // WithControlView sets the controlView property and returns the receiver for chaining.
 func (x *SegmentedCell) WithControlView(controlView ViewProvider) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetControlView(controlView.asView())
 	return x
 }
 
+// The type of the cell.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *SegmentedCell) WithType(type_ NSCellType) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
+// The cell’s current state.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *SegmentedCell) WithState(state int) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetState(state)
 	return x
 }
 
+// The object that receives the cell’s action messages.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *SegmentedCell) WithTarget(target objc.ID) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetTarget(target)
 	return x
 }
 
+// The action performed by the cell.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *SegmentedCell) WithAction(action objc.SEL) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetAction(action)
 	return x
 }
 
+// A tag for identifying the cell.
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *SegmentedCell) WithTag(tag int) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetTag(tag)
 	return x
 }
 
+// The cell’s title text.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *SegmentedCell) WithTitle(title string) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// A Boolean value indicating whether the cell is currently enabled.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *SegmentedCell) WithEnabled(enabled bool) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *SegmentedCell) WithContinuous(continuous bool) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value indicating whether the cell is editable.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *SegmentedCell) WithEditable(editable bool) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetEditable(editable)
 	return x
 }
 
+// A Boolean value indicating whether the cell’s text can be selected.
+//
 // WithSelectable sets the selectable property and returns the receiver for chaining.
 func (x *SegmentedCell) WithSelectable(selectable bool) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetSelectable(selectable)
 	return x
 }
 
+// A Boolean value indicating whether the cell draws itself outlined with a plain border.
+//
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *SegmentedCell) WithBordered(bordered bool) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetBordered(bordered)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a bezeled border.
+//
 // WithBezeled sets the bezeled property and returns the receiver for chaining.
 func (x *SegmentedCell) WithBezeled(bezeled bool) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetBezeled(bezeled)
 	return x
 }
 
+// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
+//
 // WithScrollable sets the scrollable property and returns the receiver for chaining.
 func (x *SegmentedCell) WithScrollable(scrollable bool) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetScrollable(scrollable)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a highlighted appearance.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *SegmentedCell) WithHighlighted(highlighted bool) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetHighlighted(highlighted)
 	return x
 }
 
+// The alignment of the cell’s text.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *SegmentedCell) WithAlignment(alignment NSTextAlignment) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+//
 // WithWraps sets the wraps property and returns the receiver for chaining.
 func (x *SegmentedCell) WithWraps(wraps bool) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetWraps(wraps)
 	return x
 }
 
+// The font that the cell uses to display text.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *SegmentedCell) WithFont(font *Font) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
+// The cell’s formatter object.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *SegmentedCell) WithFormatter(formatter *foundation.NSFormatter) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetFormatter(formatter)
 	return x
 }
 
+// The cell’s value as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *SegmentedCell) WithObjectValue(objectValue objc.ID) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetObjectValue(objectValue)
 	return x
 }
 
+// The cell’s value as a string.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *SegmentedCell) WithStringValue(stringValue string) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The cell’s value as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *SegmentedCell) WithIntValue(intValue int) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetIntValue(intValue)
 	return x
 }
 
+// The cell’s value as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *SegmentedCell) WithFloatValue(floatValue float32) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetFloatValue(floatValue)
 	return x
 }
 
+// The cell’s value as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *SegmentedCell) WithDoubleValue(doubleValue float64) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The cell’s value as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *SegmentedCell) WithIntegerValue(integerValue int) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetIntegerValue(integerValue)
 	return x
 }
 
+// The image displayed by the cell, if any.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *SegmentedCell) WithImage(image *Image) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
+// The size of the cell.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *SegmentedCell) WithControlSize(controlSize NSControlSize) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The object represented by the cell.
+//
 // WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
 func (x *SegmentedCell) WithRepresentedObject(representedObject objc.ID) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetRepresentedObject(representedObject)
 	return x
 }
 
+// The cell’s contextual menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *SegmentedCell) WithMenu(menu *Menu) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
+// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+//
 // WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
 func (x *SegmentedCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *SegmentedCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// The line break mode to use when drawing text in the cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *SegmentedCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// A Boolean value indicating whether the cell assumes responsibility for undo operations.
+//
 // WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
 func (x *SegmentedCell) WithAllowsUndo(allowsUndo bool) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
 	return x
 }
 
+// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+//
 // WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
 func (x *SegmentedCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
 	return x
 }
 
+// The layout direction of the user interface.
+//
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
 func (x *SegmentedCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
+// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *SegmentedCell) WithUsesSingleLineMode(usesSingleLineMode bool) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// A Boolean value indicating whether the cell refuses the first responder status.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *SegmentedCell) WithRefusesFirstResponder(refusesFirstResponder bool) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+//
 // WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
 func (x *SegmentedCell) WithShowsFirstResponder(showsFirstResponder bool) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
 	return x
 }
 
+// The type of focus ring to use with the associated view.
+//
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
 func (x *SegmentedCell) WithFocusRingType(focusRingType NSFocusRingType) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
+// The cell’s value as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *SegmentedCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+//
 // WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
 func (x *SegmentedCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports the importation of images into its text.
+//
 // WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
 func (x *SegmentedCell) WithImportsGraphics(importsGraphics bool) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports three states instead of two.
+//
 // WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
 func (x *SegmentedCell) WithAllowsMixedState(allowsMixedState bool) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
 	return x
 }
 
+// The cell’s background style.
+//
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
 func (x *SegmentedCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
+// The cell’s control tint.
+//
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
 func (x *SegmentedCell) WithControlTint(controlTint NSControlTint) *SegmentedCell {
 	x.inner.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
+// Selects the segment with the specified tag.
+//
 // SelectSegmentWithTag calls the underlying SelectSegmentWithTag.
 func (x *SegmentedCell) SelectSegmentWithTag(tag int) bool {
 	return x.inner.SelectSegmentWithTag(tag)
 }
 
+// Selects the next segment.
+//
 // MakeNextSegmentKey calls the underlying MakeNextSegmentKey.
 func (x *SegmentedCell) MakeNextSegmentKey() {
 	x.inner.MakeNextSegmentKey()
 }
 
+// Selects the previous segment.
+//
 // MakePreviousSegmentKey calls the underlying MakePreviousSegmentKey.
 func (x *SegmentedCell) MakePreviousSegmentKey() {
 	x.inner.MakePreviousSegmentKey()
 }
 
+// Sets the width of the specified segment.
+//
 // SetWidthForSegment calls the underlying SetWidthForSegment.
 func (x *SegmentedCell) SetWidthForSegment(width float64, segment int) {
 	x.inner.SetWidthForSegment(width, segment)
 }
 
+// Returns the width of the specified segment.
+//
 // WidthForSegment calls the underlying WidthForSegment.
 func (x *SegmentedCell) WidthForSegment(segment int) float64 {
 	return x.inner.WidthForSegment(segment)
 }
 
+// Sets the image for the specified segment.
+//
 // SetImageForSegment calls the underlying SetImageForSegment.
 func (x *SegmentedCell) SetImageForSegment(image *raw.NSImage, segment int) {
 	x.inner.SetImageForSegment(image, segment)
 }
 
+// Returns the image associated with the specified segment.
+//
 // ImageForSegment calls the underlying ImageForSegment.
 func (x *SegmentedCell) ImageForSegment(segment int) *Image {
 	_r := x.inner.ImageForSegment(segment)
@@ -371,21 +485,29 @@ func (x *SegmentedCell) ImageForSegment(segment int) *Image {
 	return &Image{inner: _r}
 }
 
+// Sets the image scaling mode for the specified segment.
+//
 // SetImageScalingForSegment calls the underlying SetImageScalingForSegment.
 func (x *SegmentedCell) SetImageScalingForSegment(scaling NSImageScaling, segment int) {
 	x.inner.SetImageScalingForSegment(raw.NSImageScaling(scaling), segment)
 }
 
+// Returns the image scaling mode associated with the specified segment.
+//
 // ImageScalingForSegment calls the underlying ImageScalingForSegment.
 func (x *SegmentedCell) ImageScalingForSegment(segment int) NSImageScaling {
 	return NSImageScaling(x.inner.ImageScalingForSegment(segment))
 }
 
+// Sets the label for the specified segment.
+//
 // SetLabelForSegment calls the underlying SetLabelForSegment.
 func (x *SegmentedCell) SetLabelForSegment(label string, segment int) {
 	x.inner.SetLabelForSegment(foundation.NSStringStringWithUTF8String(label), segment)
 }
 
+// Returns the label of the specified segment.
+//
 // LabelForSegment calls the underlying LabelForSegment.
 func (x *SegmentedCell) LabelForSegment(segment int) string {
 	_r := x.inner.LabelForSegment(segment)
@@ -395,31 +517,43 @@ func (x *SegmentedCell) LabelForSegment(segment int) string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Sets the selection state of the specified segment.
+//
 // SetSelectedForSegment calls the underlying SetSelectedForSegment.
 func (x *SegmentedCell) SetSelectedForSegment(selected bool, segment int) {
 	x.inner.SetSelectedForSegment(selected, segment)
 }
 
+// Returns a Boolean value indicating whether the specified segment is selected,
+//
 // IsSelectedForSegment calls the underlying IsSelectedForSegment.
 func (x *SegmentedCell) IsSelectedForSegment(segment int) bool {
 	return x.inner.IsSelectedForSegment(segment)
 }
 
+// Sets the enabled state of the specified segment
+//
 // SetEnabledForSegment calls the underlying SetEnabledForSegment.
 func (x *SegmentedCell) SetEnabledForSegment(enabled bool, segment int) {
 	x.inner.SetEnabledForSegment(enabled, segment)
 }
 
+// Returns a Boolean value indicating whether the specified segment is enabled.
+//
 // IsEnabledForSegment calls the underlying IsEnabledForSegment.
 func (x *SegmentedCell) IsEnabledForSegment(segment int) bool {
 	return x.inner.IsEnabledForSegment(segment)
 }
 
+// Sets the menu for the specified segment.
+//
 // SetMenuForSegment calls the underlying SetMenuForSegment.
 func (x *SegmentedCell) SetMenuForSegment(menu *raw.NSMenu, segment int) {
 	x.inner.SetMenuForSegment(menu, segment)
 }
 
+// Returns the menu for the specified segment.
+//
 // MenuForSegment calls the underlying MenuForSegment.
 func (x *SegmentedCell) MenuForSegment(segment int) *Menu {
 	_r := x.inner.MenuForSegment(segment)
@@ -429,11 +563,15 @@ func (x *SegmentedCell) MenuForSegment(segment int) *Menu {
 	return &Menu{inner: _r}
 }
 
+// Sets the tooltip for the specified segment.
+//
 // SetToolTipForSegment calls the underlying SetToolTipForSegment.
 func (x *SegmentedCell) SetToolTipForSegment(toolTip string, segment int) {
 	x.inner.SetToolTipForSegment(foundation.NSStringStringWithUTF8String(toolTip), segment)
 }
 
+// Returns the tooltip of the specified segment.
+//
 // ToolTipForSegment calls the underlying ToolTipForSegment.
 func (x *SegmentedCell) ToolTipForSegment(segment int) string {
 	_r := x.inner.ToolTipForSegment(segment)
@@ -443,16 +581,22 @@ func (x *SegmentedCell) ToolTipForSegment(segment int) string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Sets the tag for the specified segment.
+//
 // SetTagForSegment calls the underlying SetTagForSegment.
 func (x *SegmentedCell) SetTagForSegment(tag int, segment int) {
 	x.inner.SetTagForSegment(tag, segment)
 }
 
+// Returns the tag of the specified segment.
+//
 // TagForSegment calls the underlying TagForSegment.
 func (x *SegmentedCell) TagForSegment(segment int) int {
 	return x.inner.TagForSegment(segment)
 }
 
+// Draws the image and label of the segment in the specified view.
+//
 // DrawSegmentInFrameWithView calls the underlying DrawSegmentInFrameWithView.
 func (x *SegmentedCell) DrawSegmentInFrameWithView(segment int, frame corefoundation.CGRect, controlView *raw.NSView) {
 	x.inner.DrawSegmentInFrameWithView(segment, frame, controlView)
@@ -498,6 +642,8 @@ func (x *SegmentedCell) SetSegmentStyle(segmentStyle NSSegmentStyle) {
 	x.inner.SetSegmentStyle(raw.NSSegmentStyle(segmentStyle))
 }
 
+// Returns the interior background style for the specified segment.
+//
 // InteriorBackgroundStyleForSegment calls the underlying InteriorBackgroundStyleForSegment.
 func (x *SegmentedCell) InteriorBackgroundStyleForSegment(segment int) NSBackgroundStyle {
 	return NSBackgroundStyle(x.inner.InteriorBackgroundStyleForSegment(segment))

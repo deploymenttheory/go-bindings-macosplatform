@@ -9,11 +9,15 @@ import (
 	"strings"
 )
 
+// Classifications that reflect the type of identity document.
 type PKAddIdentityDocumentType int64
 
 const (
-	PKAddIdentityDocumentTypeIDCard  PKAddIdentityDocumentType = 0
-	PKAddIdentityDocumentTypeMDL     PKAddIdentityDocumentType = 1
+	// A generic pass that represents a person’s identification.
+	PKAddIdentityDocumentTypeIDCard PKAddIdentityDocumentType = 0
+	// A pass that represents a driver’s license or government-issued identification.
+	PKAddIdentityDocumentTypeMDL PKAddIdentityDocumentType = 1
+	// A pass to use for personal identification.
 	PKAddIdentityDocumentTypePhotoID PKAddIdentityDocumentType = 2
 )
 
@@ -30,11 +34,14 @@ func (e PKAddIdentityDocumentType) String() string {
 	}
 }
 
+// The type of payment pass.
 type PKAddPaymentPassStyle int64
 
 const (
+	// A pass used by a customer for purchasing.
 	PKAddPaymentPassStylePayment PKAddPaymentPassStyle = 0
-	PKAddPaymentPassStyleAccess  PKAddPaymentPassStyle = 1
+	// A pass that authorizes the user to access a location or resource.
+	PKAddPaymentPassStyleAccess PKAddPaymentPassStyle = 1
 )
 
 func (e PKAddPaymentPassStyle) String() string {
@@ -48,10 +55,13 @@ func (e PKAddPaymentPassStyle) String() string {
 	}
 }
 
+// The kind of add action that the system performs with a pass.
 type PKAddShareablePassConfigurationPrimaryAction uint64
 
 const (
-	PKAddShareablePassConfigurationPrimaryActionAdd   PKAddShareablePassConfigurationPrimaryAction = 0
+	// A constant that indicates the system adds a pass to a device.
+	PKAddShareablePassConfigurationPrimaryActionAdd PKAddShareablePassConfigurationPrimaryAction = 0
+	// A constant that indicates the system shares the pass with another user.
 	PKAddShareablePassConfigurationPrimaryActionShare PKAddShareablePassConfigurationPrimaryAction = 1
 )
 
@@ -66,16 +76,23 @@ func (e PKAddShareablePassConfigurationPrimaryAction) String() string {
 	}
 }
 
+// Billing or shipping address fields.
 // Bitmask — values may be combined with |.
 type PKAddressField uint64
 
 const (
-	PKAddressFieldNone          PKAddressField = 0
+	// No fields.
+	PKAddressFieldNone PKAddressField = 0
+	// The buyer’s full street address, including name, street, city, state or province, postal code, and country or region.
 	PKAddressFieldPostalAddress PKAddressField = 1
-	PKAddressFieldPhone         PKAddressField = 2
-	PKAddressFieldEmail         PKAddressField = 4
-	PKAddressFieldName          PKAddressField = 8
-	PKAddressFieldAll           PKAddressField = 15
+	// The buyer’s telephone number.
+	PKAddressFieldPhone PKAddressField = 2
+	// The buyer’s email address.
+	PKAddressFieldEmail PKAddressField = 4
+	// The buyer’s first and last name.
+	PKAddressFieldName PKAddressField = 8
+	// All fields.
+	PKAddressFieldAll PKAddressField = 15
 )
 
 func (e PKAddressField) String() string {
@@ -101,11 +118,15 @@ func (e PKAddressField) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Values you use to enable or disable Apple Pay Later for a specific transaction.
 type PKApplePayLaterAvailability int64
 
 const (
-	PKApplePayLaterAvailable                       PKApplePayLaterAvailability = 0
-	PKApplePayLaterUnavailableItemIneligible       PKApplePayLaterAvailability = 1
+	// Apple Pay Later is available.
+	PKApplePayLaterAvailable PKApplePayLaterAvailability = 0
+	// Apple Pay Later is unavailable because one or more ineligible or prohibited items are in the shopping cart, such as gift cards.
+	PKApplePayLaterUnavailableItemIneligible PKApplePayLaterAvailability = 1
+	// Apple Pay Later is unavailable because there’s a recurring payment or subscription in the shopping cart.
 	PKApplePayLaterUnavailableRecurringTransaction PKApplePayLaterAvailability = 2
 )
 
@@ -122,14 +143,20 @@ func (e PKApplePayLaterAvailability) String() string {
 	}
 }
 
+// The result of an attempt to suppress automatic pass presentation.
 type PKAutomaticPassPresentationSuppressionResult uint64
 
 const (
-	PKAutomaticPassPresentationSuppressionResultNotSupported      PKAutomaticPassPresentationSuppressionResult = 0
+	// The device doesn’t support the suppression of automatic pass presentation.
+	PKAutomaticPassPresentationSuppressionResultNotSupported PKAutomaticPassPresentationSuppressionResult = 0
+	// The device is already presenting passes.
 	PKAutomaticPassPresentationSuppressionResultAlreadyPresenting PKAutomaticPassPresentationSuppressionResult = 1
-	PKAutomaticPassPresentationSuppressionResultDenied            PKAutomaticPassPresentationSuppressionResult = 2
-	PKAutomaticPassPresentationSuppressionResultCancelled         PKAutomaticPassPresentationSuppressionResult = 3
-	PKAutomaticPassPresentationSuppressionResultSuccess           PKAutomaticPassPresentationSuppressionResult = 4
+	// The user prevented the suppression, or an internal error occurred.
+	PKAutomaticPassPresentationSuppressionResultDenied PKAutomaticPassPresentationSuppressionResult = 2
+	// The system canceled the suppression before calling the response handler.
+	PKAutomaticPassPresentationSuppressionResultCancelled PKAutomaticPassPresentationSuppressionResult = 3
+	// Suppression of automatic presentation successful.
+	PKAutomaticPassPresentationSuppressionResultSuccess PKAutomaticPassPresentationSuppressionResult = 4
 )
 
 func (e PKAutomaticPassPresentationSuppressionResult) String() string {
@@ -170,14 +197,20 @@ func (e PKBarcodeEventConfigurationDataType) String() string {
 	}
 }
 
+// Capabilities for processing payment.
 // Bitmask — values may be combined with |.
 type PKMerchantCapability uint64
 
 const (
-	PKMerchantCapability3DS             PKMerchantCapability = 1
-	PKMerchantCapabilityEMV             PKMerchantCapability = 2
-	PKMerchantCapabilityCredit          PKMerchantCapability = 4
-	PKMerchantCapabilityDebit           PKMerchantCapability = 8
+	// Support for the 3-D Secure protocol.
+	PKMerchantCapability3DS PKMerchantCapability = 1
+	// Support for the EMV protocol.
+	PKMerchantCapabilityEMV PKMerchantCapability = 2
+	// Support for credit cards.
+	PKMerchantCapabilityCredit PKMerchantCapability = 4
+	// Support for debit cards.
+	PKMerchantCapabilityDebit PKMerchantCapability = 8
+	// The value that indicates the merchant supports disbursing funds using Instant Funds Out.
 	PKMerchantCapabilityInstantFundsOut PKMerchantCapability = 128
 )
 
@@ -204,11 +237,15 @@ func (e PKMerchantCapability) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Statuses that PassKit uses when it adds passes to the pass library.
 type PKPassLibraryAddPassesStatus int64
 
 const (
-	PKPassLibraryDidAddPasses       PKPassLibraryAddPassesStatus = 0
+	// A status that occurs when the user successfully adds one or more passes.
+	PKPassLibraryDidAddPasses PKPassLibraryAddPassesStatus = 0
+	// A status that occurs when the app prompts the user to review the passes.
 	PKPassLibraryShouldReviewPasses PKPassLibraryAddPassesStatus = 1
+	// A status that occurs when the user cancels the addition of passes.
 	PKPassLibraryDidCancelAddPasses PKPassLibraryAddPassesStatus = 2
 )
 
@@ -264,13 +301,20 @@ func (e PKPassLibraryCapability) String() string {
 	}
 }
 
+// Types of passes.
 type PKPassType uint64
 
 const (
-	PKPassTypeBarcode       PKPassType = 0
+	// A pass that represents a barcode.
+	PKPassTypeBarcode PKPassType = 0
+	// A pass that represents a credential that the device stores in the Secure Element.
 	PKPassTypeSecureElement PKPassType = 1
+	// A pass that represents a credit or debit card
+	//
 	// Deprecated: Use PKPassTypeSecureElement instead
 	PKPassTypePayment PKPassType = 1
+	// A nonspecific pass type.
+	//
 	// Deprecated: Use PKPassTypeSecureElement instead
 	PKPassTypeAny PKPassType = 18446744073709551615
 )
@@ -288,17 +332,26 @@ func (e PKPassType) String() string {
 	}
 }
 
+// General success and failure status for payment authorization.
 type PKPaymentAuthorizationStatus int64
 
 const (
-	PKPaymentAuthorizationStatusSuccess                      PKPaymentAuthorizationStatus = 0
-	PKPaymentAuthorizationStatusFailure                      PKPaymentAuthorizationStatus = 1
-	PKPaymentAuthorizationStatusInvalidBillingPostalAddress  PKPaymentAuthorizationStatus = 2
+	// Merchant successfully authorized the transaction, or the transaction is expected to succeed.
+	PKPaymentAuthorizationStatusSuccess PKPaymentAuthorizationStatus = 0
+	// Merchant failed to authorize the transaction.
+	PKPaymentAuthorizationStatusFailure PKPaymentAuthorizationStatus = 1
+	// Invalid or unusable billing address.
+	PKPaymentAuthorizationStatusInvalidBillingPostalAddress PKPaymentAuthorizationStatus = 2
+	// Invalid or unusable shipping address.
 	PKPaymentAuthorizationStatusInvalidShippingPostalAddress PKPaymentAuthorizationStatus = 3
-	PKPaymentAuthorizationStatusInvalidShippingContact       PKPaymentAuthorizationStatus = 4
-	PKPaymentAuthorizationStatusPINRequired                  PKPaymentAuthorizationStatus = 5
-	PKPaymentAuthorizationStatusPINIncorrect                 PKPaymentAuthorizationStatus = 6
-	PKPaymentAuthorizationStatusPINLockout                   PKPaymentAuthorizationStatus = 7
+	// Invalid or incomplete shipping contact.
+	PKPaymentAuthorizationStatusInvalidShippingContact PKPaymentAuthorizationStatus = 4
+	// Transaction requires PIN entry.
+	PKPaymentAuthorizationStatusPINRequired PKPaymentAuthorizationStatus = 5
+	// Incorrect PIN entered.
+	PKPaymentAuthorizationStatusPINIncorrect PKPaymentAuthorizationStatus = 6
+	// PIN retry limit exceeded.
+	PKPaymentAuthorizationStatusPINLockout PKPaymentAuthorizationStatus = 7
 )
 
 func (e PKPaymentAuthorizationStatus) String() string {
@@ -324,13 +377,18 @@ func (e PKPaymentAuthorizationStatus) String() string {
 	}
 }
 
+// A type that indicates the available appearances for an Apple Pay button.
 type PKPaymentButtonStyle int64
 
 const (
-	PKPaymentButtonStyleWhite        PKPaymentButtonStyle = 0
+	// A white button with black lettering.
+	PKPaymentButtonStyleWhite PKPaymentButtonStyle = 0
+	// A white button with black lettering and a black outline.
 	PKPaymentButtonStyleWhiteOutline PKPaymentButtonStyle = 1
-	PKPaymentButtonStyleBlack        PKPaymentButtonStyle = 2
-	PKPaymentButtonStyleAutomatic    PKPaymentButtonStyle = 3
+	// A black button with white lettering.
+	PKPaymentButtonStyleBlack PKPaymentButtonStyle = 2
+	// A button that automatically changes its appearance when the user switches between Light Mode and Dark Mode.
+	PKPaymentButtonStyleAutomatic PKPaymentButtonStyle = 3
 )
 
 func (e PKPaymentButtonStyle) String() string {
@@ -348,26 +406,44 @@ func (e PKPaymentButtonStyle) String() string {
 	}
 }
 
+// The Apple Pay button types you can display to initiate Apple Pay transactions.
 type PKPaymentButtonType int64
 
 const (
-	PKPaymentButtonTypePlain      PKPaymentButtonType = 0
-	PKPaymentButtonTypeBuy        PKPaymentButtonType = 1
-	PKPaymentButtonTypeSetUp      PKPaymentButtonType = 2
-	PKPaymentButtonTypeInStore    PKPaymentButtonType = 3
-	PKPaymentButtonTypeDonate     PKPaymentButtonType = 4
-	PKPaymentButtonTypeCheckout   PKPaymentButtonType = 5
-	PKPaymentButtonTypeBook       PKPaymentButtonType = 6
-	PKPaymentButtonTypeSubscribe  PKPaymentButtonType = 7
-	PKPaymentButtonTypeReload     PKPaymentButtonType = 8
-	PKPaymentButtonTypeAddMoney   PKPaymentButtonType = 9
-	PKPaymentButtonTypeTopUp      PKPaymentButtonType = 10
-	PKPaymentButtonTypeOrder      PKPaymentButtonType = 11
-	PKPaymentButtonTypeRent       PKPaymentButtonType = 12
-	PKPaymentButtonTypeSupport    PKPaymentButtonType = 13
+	// An Apple Pay button with the Apple Pay logo only, useful when an additional call to action isn’t needed.
+	PKPaymentButtonTypePlain PKPaymentButtonType = 0
+	// An Apple Pay button useful for product purchases.
+	PKPaymentButtonTypeBuy PKPaymentButtonType = 1
+	// An Apple Pay button useful for prompting the user to set up a card.
+	PKPaymentButtonTypeSetUp PKPaymentButtonType = 2
+	// An Apple Pay button useful for paying bills or invoices.
+	PKPaymentButtonTypeInStore PKPaymentButtonType = 3
+	// An Apple Pay button used by approved nonprofit organization that lets people make donations.
+	PKPaymentButtonTypeDonate PKPaymentButtonType = 4
+	// An Apple Pay button useful for purchase experiences that include other payment buttons that start with “Check out”.
+	PKPaymentButtonTypeCheckout PKPaymentButtonType = 5
+	// An Apple Pay button useful for booking trips, flights, or other experiences.
+	PKPaymentButtonTypeBook PKPaymentButtonType = 6
+	// An Apple Pay button useful for purchasing a subscription such as a gym membership or meal-kit delivery service.
+	PKPaymentButtonTypeSubscribe PKPaymentButtonType = 7
+	// An Apple Pay button useful for adding money to a card, account, or payment system.
+	PKPaymentButtonTypeReload PKPaymentButtonType = 8
+	// An Apple Pay button useful for adding money to a card, account, or payment system.
+	PKPaymentButtonTypeAddMoney PKPaymentButtonType = 9
+	// An Apple Pay button useful for adding money to a card, account, or payment system.
+	PKPaymentButtonTypeTopUp PKPaymentButtonType = 10
+	// An Apple Pay button useful for placing orders for such as like meals or flowers.
+	PKPaymentButtonTypeOrder PKPaymentButtonType = 11
+	// An Apple Pay button useful for renting items such as cars or scooters.
+	PKPaymentButtonTypeRent PKPaymentButtonType = 12
+	// An Apple Pay button useful supporting people give money to projects, causes, organizations, and other entities.
+	PKPaymentButtonTypeSupport PKPaymentButtonType = 13
+	// An Apple Pay button useful to help people contribute money to projects, causes, organizations, and other entities.
 	PKPaymentButtonTypeContribute PKPaymentButtonType = 14
-	PKPaymentButtonTypeTip        PKPaymentButtonType = 15
-	PKPaymentButtonTypeContinue   PKPaymentButtonType = 16
+	// An Apple Pay button useful useful for letting people tip for goods or services.
+	PKPaymentButtonTypeTip PKPaymentButtonType = 15
+	// An Apple Pay button useful for general purchases.
+	PKPaymentButtonTypeContinue PKPaymentButtonType = 16
 )
 
 func (e PKPaymentButtonType) String() string {
@@ -411,15 +487,22 @@ func (e PKPaymentButtonType) String() string {
 	}
 }
 
+// The type of cards available in Apple Pay.
 type PKPaymentMethodType uint64
 
 const (
+	// The card’s type is unknown.
 	PKPaymentMethodTypeUnknown PKPaymentMethodType = 0
-	PKPaymentMethodTypeDebit   PKPaymentMethodType = 1
-	PKPaymentMethodTypeCredit  PKPaymentMethodType = 2
+	// A debit card.
+	PKPaymentMethodTypeDebit PKPaymentMethodType = 1
+	// A credit card.
+	PKPaymentMethodTypeCredit PKPaymentMethodType = 2
+	// A prepaid card.
 	PKPaymentMethodTypePrepaid PKPaymentMethodType = 3
-	PKPaymentMethodTypeStore   PKPaymentMethodType = 4
-	PKPaymentMethodTypeEMoney  PKPaymentMethodType = 5
+	// A store card.
+	PKPaymentMethodTypeStore PKPaymentMethodType = 4
+	// An electronic money card.
+	PKPaymentMethodTypeEMoney PKPaymentMethodType = 5
 )
 
 func (e PKPaymentMethodType) String() string {
@@ -441,15 +524,22 @@ func (e PKPaymentMethodType) String() string {
 	}
 }
 
+// Cases that indicate payment pass activation states.
+//
 // Deprecated: Use PKSecureElementPassActivationState instead
 type PKPaymentPassActivationState uint64
 
 const (
-	PKPaymentPassActivationStateActivated          PKPaymentPassActivationState = 0
+	// Active and ready for payment use.
+	PKPaymentPassActivationStateActivated PKPaymentPassActivationState = 0
+	// Not active but may be activated by the issuer.
 	PKPaymentPassActivationStateRequiresActivation PKPaymentPassActivationState = 1
-	PKPaymentPassActivationStateActivating         PKPaymentPassActivationState = 2
-	PKPaymentPassActivationStateSuspended          PKPaymentPassActivationState = 3
-	PKPaymentPassActivationStateDeactivated        PKPaymentPassActivationState = 4
+	// Not ready for use but activation is in progress.
+	PKPaymentPassActivationStateActivating PKPaymentPassActivationState = 2
+	// Not active and can’t be activated.
+	PKPaymentPassActivationStateSuspended PKPaymentPassActivationState = 3
+	// Not active because the issuer disabled the account associated with the device.
+	PKPaymentPassActivationStateDeactivated PKPaymentPassActivationState = 4
 )
 
 func (e PKPaymentPassActivationState) String() string {
@@ -469,10 +559,13 @@ func (e PKPaymentPassActivationState) String() string {
 	}
 }
 
+// Constants that describe the type of the payment summary item, such as final or pending.
 type PKPaymentSummaryItemType uint64
 
 const (
-	PKPaymentSummaryItemTypeFinal   PKPaymentSummaryItemType = 0
+	// A summary item that represents a known, final cost.
+	PKPaymentSummaryItemTypeFinal PKPaymentSummaryItemType = 0
+	// A summary item that represents an estimated or unknown cost.
 	PKPaymentSummaryItemTypePending PKPaymentSummaryItemType = 1
 )
 
@@ -487,12 +580,16 @@ func (e PKPaymentSummaryItemType) String() string {
 	}
 }
 
+// Constants that describe the type of wireless radio technology that a pass uses.
 // Bitmask — values may be combined with |.
 type PKRadioTechnology uint64
 
 const (
-	PKRadioTechnologyNone      PKRadioTechnology = 0
-	PKRadioTechnologyNFC       PKRadioTechnology = 1
+	// An identifier that indicates the pass doesn’t use radio frequency communication.
+	PKRadioTechnologyNone PKRadioTechnology = 0
+	// An identifier that indicates the near field communication (NFC) radio frequency communication technology.
+	PKRadioTechnologyNFC PKRadioTechnology = 1
+	// An identifier that indicates the Bluetooth radio frequency communication technology.
 	PKRadioTechnologyBluetooth PKRadioTechnology = 2
 )
 
@@ -510,6 +607,7 @@ func (e PKRadioTechnology) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The activation states of a Secure Element pass.
 type PKSecureElementPassActivationState int64
 
 const (
@@ -537,12 +635,16 @@ func (e PKSecureElementPassActivationState) String() string {
 	}
 }
 
+// Constants that indicate whether the shipping mode prevents the user from editing fields of the shipping address.
 type PKShippingContactEditingMode uint64
 
 const (
-	PKShippingContactEditingModeAvailable   PKShippingContactEditingMode = 1
+	// The value that indicates Apple Pay Later is available.
+	PKShippingContactEditingModeAvailable PKShippingContactEditingMode = 1
+	// The shipping contact on the payment sheet represents a pickup address and isn’t editable by the user.
 	PKShippingContactEditingModeStorePickup PKShippingContactEditingMode = 2
-	PKShippingContactEditingModeEnabled     PKShippingContactEditingMode = 1
+	// All fields of the shipping contact on the payment sheet are editable by the user.
+	PKShippingContactEditingModeEnabled PKShippingContactEditingMode = 1
 )
 
 func (e PKShippingContactEditingMode) String() string {
@@ -556,12 +658,17 @@ func (e PKShippingContactEditingMode) String() string {
 	}
 }
 
+// A complete list of valid shipping types.
 type PKShippingType uint64
 
 const (
-	PKShippingTypeShipping      PKShippingType = 0
-	PKShippingTypeDelivery      PKShippingType = 1
-	PKShippingTypeStorePickup   PKShippingType = 2
+	// Shipping the purchase to the provided address using a third-party shipping company. This is the default shipping type.
+	PKShippingTypeShipping PKShippingType = 0
+	// Delivering the purchase by the seller (for example, pizza, flower, or furniture delivery).
+	PKShippingTypeDelivery PKShippingType = 1
+	// Store pickup of the purchase from the seller’s store.
+	PKShippingTypeStorePickup PKShippingType = 2
+	// Picking up an item from the provided address by the service (for example, transportation or shipping services that provide home pickup).
 	PKShippingTypeServicePickup PKShippingType = 3
 )
 

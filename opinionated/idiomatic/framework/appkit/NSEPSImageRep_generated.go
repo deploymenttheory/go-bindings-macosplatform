@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that can render an image from encapsulated PostScript (EPS) code.
+//
 // EPSImageRep wraps [raw.NSEPSImageRep] with a fluent Go API.
 type EPSImageRep struct {
 	inner *raw.NSEPSImageRep
@@ -31,7 +33,7 @@ func EPSImageRepFromID(id objc.ID) *EPSImageRep {
 	return &EPSImageRep{inner: raw.NSEPSImageRepFromID(id)}
 }
 
-// Returns a representation of an image initialized with the specified EPS data. - Note: This method always returns `nil` on macOS 14.0 and later.
+// Returns a representation of an image initialized with the specified EPS data.
 //
 // NewEPSImageRepWithData creates a new [EPSImageRep].
 func NewEPSImageRepWithData(epsData *foundation.NSData) *EPSImageRep {
@@ -40,55 +42,71 @@ func NewEPSImageRepWithData(epsData *foundation.NSData) *EPSImageRep {
 	return &EPSImageRep{inner: raw.NSEPSImageRepFromID(_id)}
 }
 
+// The size of the image representation, measured in points in the user coordinate space.
+//
 // WithSize sets the size property and returns the receiver for chaining.
 func (x *EPSImageRep) WithSize(size corefoundation.CGSize) *EPSImageRep {
 	x.inner.NSImageRep.SetSize(size)
 	return x
 }
 
+// A Boolean value that indicates whether the image data has an alpha channel.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *EPSImageRep) WithAlpha(alpha bool) *EPSImageRep {
 	x.inner.NSImageRep.SetAlpha(alpha)
 	return x
 }
 
+// A Boolean value that indicates whether the image is opaque.
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *EPSImageRep) WithOpaque(opaque bool) *EPSImageRep {
 	x.inner.NSImageRep.SetOpaque(opaque)
 	return x
 }
 
+// The name of the color space used by the image data.
+//
 // WithColorSpaceName sets the colorSpaceName property and returns the receiver for chaining.
 func (x *EPSImageRep) WithColorSpaceName(colorSpaceName *foundation.NSString) *EPSImageRep {
 	x.inner.NSImageRep.SetColorSpaceName(colorSpaceName)
 	return x
 }
 
+// The number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
+//
 // WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
 func (x *EPSImageRep) WithBitsPerSample(bitsPerSample int) *EPSImageRep {
 	x.inner.NSImageRep.SetBitsPerSample(bitsPerSample)
 	return x
 }
 
+// The width of the image, measured in pixels.
+//
 // WithPixelsWide sets the pixelsWide property and returns the receiver for chaining.
 func (x *EPSImageRep) WithPixelsWide(pixelsWide int) *EPSImageRep {
 	x.inner.NSImageRep.SetPixelsWide(pixelsWide)
 	return x
 }
 
+// The height of the image, measured in pixels.
+//
 // WithPixelsHigh sets the pixelsHigh property and returns the receiver for chaining.
 func (x *EPSImageRep) WithPixelsHigh(pixelsHigh int) *EPSImageRep {
 	x.inner.NSImageRep.SetPixelsHigh(pixelsHigh)
 	return x
 }
 
+// The layout direction for the image.
+//
 // WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
 func (x *EPSImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *EPSImageRep {
 	x.inner.NSImageRep.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))
 	return x
 }
 
-// The `-[NSEPSImageRep draw]` method sends this message to itself just before rendering the EPS code. The default implementation of this method does nothing. It can be overridden in a subclass to prepare the graphics state as needed.
+// Implemented by subclasses to configure the graphics state prior to drawing.
 //
 // PrepareGState calls the underlying PrepareGState.
 func (x *EPSImageRep) PrepareGState() {

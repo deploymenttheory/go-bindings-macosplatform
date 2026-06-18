@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The NSFormCell class is used to implement text entry fields in a form. The left part of an NSFormCell object contains a title. The right part contains an editable text entry field.
+//
 // FormCell wraps [raw.NSFormCell] with a fluent Go API.
 type FormCell struct {
 	inner *raw.NSFormCell
@@ -32,6 +34,8 @@ func FormCellFromID(id objc.ID) *FormCell {
 	return &FormCell{inner: raw.NSFormCellFromID(id)}
 }
 
+// Returns an NSFormCell object initialized with the specified title string.
+//
 // NewFormCellTextCell creates a new [FormCell].
 func NewFormCellTextCell(string_ string) *FormCell {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFormCell")), objc.RegisterName("alloc"))
@@ -46,324 +50,432 @@ func NewFormCellWithCoder(coder *foundation.NSCoder) *FormCell {
 	return &FormCell{inner: raw.NSFormCellFromID(_id)}
 }
 
+// The width of the title field.
+//
 // WithTitleWidth sets the titleWidth property and returns the receiver for chaining.
 func (x *FormCell) WithTitleWidth(titleWidth float64) *FormCell {
 	x.inner.SetTitleWidth(titleWidth)
 	return x
 }
 
+// The font used to draw cell’s title.
+//
 // WithTitleFont sets the titleFont property and returns the receiver for chaining.
 func (x *FormCell) WithTitleFont(titleFont *Font) *FormCell {
 	x.inner.SetTitleFont(titleFont.Unwrap())
 	return x
 }
 
+// The cell’s plain text placeholder string.
+//
 // WithPlaceholderString sets the placeholderString property and returns the receiver for chaining.
 func (x *FormCell) WithPlaceholderString(placeholderString string) *FormCell {
 	x.inner.SetPlaceholderString(foundation.NSStringStringWithUTF8String(placeholderString))
 	return x
 }
 
+// The cell’s attributed placeholder string.
+//
 // WithPlaceholderAttributedString sets the placeholderAttributedString property and returns the receiver for chaining.
 func (x *FormCell) WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *FormCell {
 	x.inner.SetPlaceholderAttributedString(placeholderAttributedString)
 	return x
 }
 
+// The alignment of the title.
+//
 // WithTitleAlignment sets the titleAlignment property and returns the receiver for chaining.
 func (x *FormCell) WithTitleAlignment(titleAlignment NSTextAlignment) *FormCell {
 	x.inner.SetTitleAlignment(raw.NSTextAlignment(titleAlignment))
 	return x
 }
 
+// The default writing direction used to render the form cell’s title.
+//
 // WithTitleBaseWritingDirection sets the titleBaseWritingDirection property and returns the receiver for chaining.
 func (x *FormCell) WithTitleBaseWritingDirection(titleBaseWritingDirection NSWritingDirection) *FormCell {
 	x.inner.SetTitleBaseWritingDirection(raw.NSWritingDirection(titleBaseWritingDirection))
 	return x
 }
 
+// The preferred text field width.
+//
 // WithPreferredTextFieldWidth sets the preferredTextFieldWidth property and returns the receiver for chaining.
 func (x *FormCell) WithPreferredTextFieldWidth(preferredTextFieldWidth float64) *FormCell {
 	x.inner.SetPreferredTextFieldWidth(preferredTextFieldWidth)
 	return x
 }
 
+// The title of the cell as an attributed string.
+//
 // WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
 func (x *FormCell) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *FormCell {
 	x.inner.SetAttributedTitle(attributedTitle)
 	return x
 }
 
+// The view associated with the cell.
+//
 // WithControlView sets the controlView property and returns the receiver for chaining.
 func (x *FormCell) WithControlView(controlView ViewProvider) *FormCell {
 	x.inner.NSActionCell.NSCell.SetControlView(controlView.asView())
 	return x
 }
 
+// The type of the cell.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *FormCell) WithType(type_ NSCellType) *FormCell {
 	x.inner.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
+// The cell’s current state.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *FormCell) WithState(state int) *FormCell {
 	x.inner.NSActionCell.NSCell.SetState(state)
 	return x
 }
 
+// The object that receives the cell’s action messages.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *FormCell) WithTarget(target objc.ID) *FormCell {
 	x.inner.NSActionCell.NSCell.SetTarget(target)
 	return x
 }
 
+// The action performed by the cell.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *FormCell) WithAction(action objc.SEL) *FormCell {
 	x.inner.NSActionCell.NSCell.SetAction(action)
 	return x
 }
 
+// A tag for identifying the cell.
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *FormCell) WithTag(tag int) *FormCell {
 	x.inner.NSActionCell.NSCell.SetTag(tag)
 	return x
 }
 
+// The cell’s title text.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *FormCell) WithTitle(title string) *FormCell {
 	x.inner.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// A Boolean value indicating whether the cell is currently enabled.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *FormCell) WithEnabled(enabled bool) *FormCell {
 	x.inner.NSActionCell.NSCell.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *FormCell) WithContinuous(continuous bool) *FormCell {
 	x.inner.NSActionCell.NSCell.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value indicating whether the cell is editable.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *FormCell) WithEditable(editable bool) *FormCell {
 	x.inner.NSActionCell.NSCell.SetEditable(editable)
 	return x
 }
 
+// A Boolean value indicating whether the cell’s text can be selected.
+//
 // WithSelectable sets the selectable property and returns the receiver for chaining.
 func (x *FormCell) WithSelectable(selectable bool) *FormCell {
 	x.inner.NSActionCell.NSCell.SetSelectable(selectable)
 	return x
 }
 
+// A Boolean value indicating whether the cell draws itself outlined with a plain border.
+//
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *FormCell) WithBordered(bordered bool) *FormCell {
 	x.inner.NSActionCell.NSCell.SetBordered(bordered)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a bezeled border.
+//
 // WithBezeled sets the bezeled property and returns the receiver for chaining.
 func (x *FormCell) WithBezeled(bezeled bool) *FormCell {
 	x.inner.NSActionCell.NSCell.SetBezeled(bezeled)
 	return x
 }
 
+// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
+//
 // WithScrollable sets the scrollable property and returns the receiver for chaining.
 func (x *FormCell) WithScrollable(scrollable bool) *FormCell {
 	x.inner.NSActionCell.NSCell.SetScrollable(scrollable)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a highlighted appearance.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *FormCell) WithHighlighted(highlighted bool) *FormCell {
 	x.inner.NSActionCell.NSCell.SetHighlighted(highlighted)
 	return x
 }
 
+// The alignment of the cell’s text.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *FormCell) WithAlignment(alignment NSTextAlignment) *FormCell {
 	x.inner.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+//
 // WithWraps sets the wraps property and returns the receiver for chaining.
 func (x *FormCell) WithWraps(wraps bool) *FormCell {
 	x.inner.NSActionCell.NSCell.SetWraps(wraps)
 	return x
 }
 
+// The font that the cell uses to display text.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *FormCell) WithFont(font *Font) *FormCell {
 	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
+// The cell’s formatter object.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *FormCell) WithFormatter(formatter *foundation.NSFormatter) *FormCell {
 	x.inner.NSActionCell.NSCell.SetFormatter(formatter)
 	return x
 }
 
+// The cell’s value as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *FormCell) WithObjectValue(objectValue objc.ID) *FormCell {
 	x.inner.NSActionCell.NSCell.SetObjectValue(objectValue)
 	return x
 }
 
+// The cell’s value as a string.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *FormCell) WithStringValue(stringValue string) *FormCell {
 	x.inner.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The cell’s value as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *FormCell) WithIntValue(intValue int) *FormCell {
 	x.inner.NSActionCell.NSCell.SetIntValue(intValue)
 	return x
 }
 
+// The cell’s value as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *FormCell) WithFloatValue(floatValue float32) *FormCell {
 	x.inner.NSActionCell.NSCell.SetFloatValue(floatValue)
 	return x
 }
 
+// The cell’s value as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *FormCell) WithDoubleValue(doubleValue float64) *FormCell {
 	x.inner.NSActionCell.NSCell.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The cell’s value as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *FormCell) WithIntegerValue(integerValue int) *FormCell {
 	x.inner.NSActionCell.NSCell.SetIntegerValue(integerValue)
 	return x
 }
 
+// The image displayed by the cell, if any.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *FormCell) WithImage(image *Image) *FormCell {
 	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
+// The size of the cell.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *FormCell) WithControlSize(controlSize NSControlSize) *FormCell {
 	x.inner.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The object represented by the cell.
+//
 // WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
 func (x *FormCell) WithRepresentedObject(representedObject objc.ID) *FormCell {
 	x.inner.NSActionCell.NSCell.SetRepresentedObject(representedObject)
 	return x
 }
 
+// The cell’s contextual menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *FormCell) WithMenu(menu *Menu) *FormCell {
 	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
+// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+//
 // WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
 func (x *FormCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *FormCell {
 	x.inner.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *FormCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *FormCell {
 	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// The line break mode to use when drawing text in the cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *FormCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *FormCell {
 	x.inner.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// A Boolean value indicating whether the cell assumes responsibility for undo operations.
+//
 // WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
 func (x *FormCell) WithAllowsUndo(allowsUndo bool) *FormCell {
 	x.inner.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
 	return x
 }
 
+// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+//
 // WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
 func (x *FormCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *FormCell {
 	x.inner.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
 	return x
 }
 
+// The layout direction of the user interface.
+//
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
 func (x *FormCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *FormCell {
 	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
+// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *FormCell) WithUsesSingleLineMode(usesSingleLineMode bool) *FormCell {
 	x.inner.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// A Boolean value indicating whether the cell refuses the first responder status.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *FormCell) WithRefusesFirstResponder(refusesFirstResponder bool) *FormCell {
 	x.inner.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+//
 // WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
 func (x *FormCell) WithShowsFirstResponder(showsFirstResponder bool) *FormCell {
 	x.inner.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
 	return x
 }
 
+// The type of focus ring to use with the associated view.
+//
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
 func (x *FormCell) WithFocusRingType(focusRingType NSFocusRingType) *FormCell {
 	x.inner.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
+// The cell’s value as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *FormCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *FormCell {
 	x.inner.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+//
 // WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
 func (x *FormCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *FormCell {
 	x.inner.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports the importation of images into its text.
+//
 // WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
 func (x *FormCell) WithImportsGraphics(importsGraphics bool) *FormCell {
 	x.inner.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports three states instead of two.
+//
 // WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
 func (x *FormCell) WithAllowsMixedState(allowsMixedState bool) *FormCell {
 	x.inner.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
 	return x
 }
 
+// The cell’s background style.
+//
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
 func (x *FormCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *FormCell {
 	x.inner.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
+// The cell’s control tint.
+//
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
 func (x *FormCell) WithControlTint(controlTint NSControlTint) *FormCell {
 	x.inner.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
+// Returns the width of the title field constrained to the specified size.
+//
 // TitleWidth calls the underlying TitleWidth.
 func (x *FormCell) TitleWidth(size corefoundation.CGSize) float64 {
 	return x.inner.TitleWidth(size)

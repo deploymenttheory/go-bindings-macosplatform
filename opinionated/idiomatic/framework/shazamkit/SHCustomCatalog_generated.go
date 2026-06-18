@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object for storing the reference signatures for custom audio recordings and their associated metadata.
+//
 // CustomCatalog wraps [raw.SHCustomCatalog] with a fluent Go API.
 type CustomCatalog struct {
 	inner *raw.SHCustomCatalog
@@ -38,7 +40,7 @@ func NewCustomCatalog() *CustomCatalog {
 	return &CustomCatalog{inner: raw.SHCustomCatalogFromID(_id)}
 }
 
-// Load a @c SHCustomCatalog from data @param dataRepresentation The data representation of the @c SHCustomCatalog @param error Error populated if not a valid data representation
+// Load a @c SHCustomCatalog from data
 //
 // NewCustomCatalogWithDataRepresentationError creates a new [CustomCatalog].
 func NewCustomCatalogWithDataRepresentationError(dataRepresentation *foundation.NSData) (*CustomCatalog, error) {
@@ -51,7 +53,7 @@ func NewCustomCatalogWithDataRepresentationError(dataRepresentation *foundation.
 	return &CustomCatalog{inner: raw.SHCustomCatalogFromID(_id)}, nil
 }
 
-// Adds a reference signature and its associated metadata to a catalog. > Note: > This system ignores calls to `addReferenceSignature(_:representing:)` after adding the catalog to an `SHSession`. - Parameters: - signature: The reference signature for the audio recording. - mediaItems: The metadata for the recording.
+// Adds a reference signature and its associated metadata to a catalog.
 //
 // AddReferenceSignatureRepresentingMediaItemsError calls the underlying AddReferenceSignatureRepresentingMediaItemsError.
 func (x *CustomCatalog) AddReferenceSignatureRepresentingMediaItemsError(signature *raw.SHSignature, mediaItems ...MediaItemProvider) (bool, error) {
@@ -67,14 +69,14 @@ func (x *CustomCatalog) AddReferenceSignatureRepresentingMediaItemsError(signatu
 	return x.inner.AddReferenceSignatureRepresentingMediaItemsError(signature, _arg1)
 }
 
-// Loads a saved custom catalog from a file. - Parameters: - customCatalogURL: The file URL for a custom catalog. - error: An output value in Objective-C that indicates the type of error; otherwise, `nil`.
+// Loads a saved custom catalog from a file.
 //
 // AddCustomCatalogFromURLError calls the underlying AddCustomCatalogFromURLError.
 func (x *CustomCatalog) AddCustomCatalogFromURLError(customCatalogURL string) (bool, error) {
 	return x.inner.AddCustomCatalogFromURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(customCatalogURL)))
 }
 
-// Saves the custom catalog to a local file. If `destinationURL` is a directory, the system creates a `Signatures.shazamcatalog` file. - Parameters: - destinationURL: A URL for the saved custom catalog file. - error: An output value in Objective-C that indicates the type of error; otherwise, `nil`. - Returns: `YES` if the catalog writes to the file; otherwise, `NO`.
+// Saves the custom catalog to a local file.
 //
 // WriteToURLError calls the underlying WriteToURLError.
 func (x *CustomCatalog) WriteToURLError(destinationURL string) (bool, error) {

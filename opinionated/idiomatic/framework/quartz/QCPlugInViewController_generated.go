@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The QCPlugInViewController class communicates (through Cocoa bindings) between a custom patch and the view used for the internal settings of the custom patch. Only custom patches that use internal settings exposed to the user need to use the QCPlugInViewController class.
+//
 // QCPlugInViewController wraps [raw.QCPlugInViewController] with a fluent Go API.
 type QCPlugInViewController struct {
 	inner *raw.QCPlugInViewController
@@ -30,6 +32,8 @@ func QCPlugInViewControllerFromID(id objc.ID) *QCPlugInViewController {
 	return &QCPlugInViewController{inner: raw.QCPlugInViewControllerFromID(id)}
 }
 
+// Creates and initializes a controller for the specified QCPlugIn object and nib file.
+//
 // NewQCPlugInViewControllerWithPlugInViewNibName creates a new [QCPlugInViewController].
 func NewQCPlugInViewControllerWithPlugInViewNibName(plugIn *raw.QCPlugIn, name string) *QCPlugInViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QCPlugInViewController")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewQCPlugInViewControllerWithPlugInViewNibName(plugIn *raw.QCPlugIn, name s
 	return &QCPlugInViewController{inner: raw.QCPlugInViewControllerFromID(_id)}
 }
 
+// Returns the QCPlugIn object associated with the view controller for the custom patch.
+//
 // PlugIn calls the underlying PlugIn.
 func (x *QCPlugInViewController) PlugIn() *QCPlugIn {
 	_r := x.inner.PlugIn()

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that indicates the delegate should drop all contacts and groups before handling change events.
+//
 // ChangeHistoryDropEverythingEvent wraps [raw.CNChangeHistoryDropEverythingEvent] with a fluent Go API.
 type ChangeHistoryDropEverythingEvent struct {
 	inner *raw.CNChangeHistoryDropEverythingEvent

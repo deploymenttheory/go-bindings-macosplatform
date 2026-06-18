@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the presentation state of an asset track during playback.
+//
 // PlayerItemTrack wraps [raw.AVPlayerItemTrack] with a fluent Go API.
 type PlayerItemTrack struct {
 	inner *raw.AVPlayerItemTrack
@@ -37,7 +39,7 @@ func NewPlayerItemTrack() *PlayerItemTrack {
 	return &PlayerItemTrack{inner: raw.AVPlayerItemTrackFromID(_id)}
 }
 
-// @property		enabled @abstract		Indicates whether the track is enabled for presentation during playback. @discussion	Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+// A Boolean value that indicates whether the player item presents the track’s media during playback.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *PlayerItemTrack) WithEnabled(enabled bool) *PlayerItemTrack {
@@ -45,7 +47,7 @@ func (x *PlayerItemTrack) WithEnabled(enabled bool) *PlayerItemTrack {
 	return x
 }
 
-// @property		videoFieldMode @abstract		If the media type of the assetTrack is AVMediaTypeVideo, specifies the handling of video frames that contain multiple fields. @discussion	A value of nil indicates default processing of video frames. If you want video fields to be deinterlaced, set videoFieldMode to AVPlayerItemTrackVideoFieldModeDeinterlaceFields. You can test whether video being played has multiple fields by examining the underlying AVAssetTrack's format descriptions. See -[AVAssetTrack formatDescriptions] and, for video format descriptions, kCMFormatDescriptionExtension_FieldCount. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+// A mode that specifies the handling of video frames that contain multiple fields.
 //
 // WithVideoFieldMode sets the videoFieldMode property and returns the receiver for chaining.
 func (x *PlayerItemTrack) WithVideoFieldMode(videoFieldMode string) *PlayerItemTrack {

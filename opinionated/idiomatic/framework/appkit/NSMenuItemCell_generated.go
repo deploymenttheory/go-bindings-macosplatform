@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that handles the measurement and display of a single menu item in its encompassing frame.
+//
 // MenuItemCell wraps [raw.NSMenuItemCell] with a fluent Go API.
 type MenuItemCell struct {
 	inner *raw.NSMenuItemCell
@@ -45,442 +47,592 @@ func NewMenuItemCellWithCoder(coder *foundation.NSCoder) *MenuItemCell {
 	return &MenuItemCell{inner: raw.NSMenuItemCellFromID(_id)}
 }
 
+// The menu item object associated with the cell.
+//
 // WithMenuItem sets the menuItem property and returns the receiver for chaining.
 func (x *MenuItemCell) WithMenuItem(menuItem *MenuItem) *MenuItemCell {
 	x.inner.SetMenuItem(menuItem.Unwrap())
 	return x
 }
 
+// A Boolean value indicating whether the size of the menu needs to be calculated.
+//
 // WithNeedsSizing sets the needsSizing property and returns the receiver for chaining.
 func (x *MenuItemCell) WithNeedsSizing(needsSizing bool) *MenuItemCell {
 	x.inner.SetNeedsSizing(needsSizing)
 	return x
 }
 
+// A Boolean value indicating whether the menu item needs to be displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *MenuItemCell) WithNeedsDisplay(needsDisplay bool) *MenuItemCell {
 	x.inner.SetNeedsDisplay(needsDisplay)
 	return x
 }
 
+// The appearance of the button’s border, if it has one.
+//
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
 func (x *MenuItemCell) WithBezelStyle(bezelStyle NSBezelStyle) *MenuItemCell {
 	x.inner.NSButtonCell.SetBezelStyle(raw.NSBezelStyle(bezelStyle))
 	return x
 }
 
+// A set of flags that indicate how the button highlights when it receives a mouse-down event (that is, when the button is pressed).
+//
 // WithHighlightsBy sets the highlightsBy property and returns the receiver for chaining.
 func (x *MenuItemCell) WithHighlightsBy(highlightsBy NSCellStyleMask) *MenuItemCell {
 	x.inner.NSButtonCell.SetHighlightsBy(raw.NSCellStyleMask(highlightsBy))
 	return x
 }
 
+// The flags that indicate how the button cell shows its alternate state.
+//
 // WithShowsStateBy sets the showsStateBy property and returns the receiver for chaining.
 func (x *MenuItemCell) WithShowsStateBy(showsStateBy NSCellStyleMask) *MenuItemCell {
 	x.inner.NSButtonCell.SetShowsStateBy(raw.NSCellStyleMask(showsStateBy))
 	return x
 }
 
+// The title displayed by the button when it’s in its normal state as an attributed string.
+//
 // WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
 func (x *MenuItemCell) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *MenuItemCell {
 	x.inner.NSButtonCell.SetAttributedTitle(attributedTitle)
 	return x
 }
 
+// The string displayed by the button when it’s in its alternate state.
+//
 // WithAlternateTitle sets the alternateTitle property and returns the receiver for chaining.
 func (x *MenuItemCell) WithAlternateTitle(alternateTitle string) *MenuItemCell {
 	x.inner.NSButtonCell.SetAlternateTitle(foundation.NSStringStringWithUTF8String(alternateTitle))
 	return x
 }
 
+// The title displayed by the button when it’s in its alternate state, as an attributed string.
+//
 // WithAttributedAlternateTitle sets the attributedAlternateTitle property and returns the receiver for chaining.
 func (x *MenuItemCell) WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *MenuItemCell {
 	x.inner.NSButtonCell.SetAttributedAlternateTitle(attributedAlternateTitle)
 	return x
 }
 
+// The image the button displays in its alternate state.
+//
 // WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
 func (x *MenuItemCell) WithAlternateImage(alternateImage *Image) *MenuItemCell {
 	x.inner.NSButtonCell.SetAlternateImage(alternateImage.Unwrap())
 	return x
 }
 
+// The position of the button’s image relative to its title.
+//
 // WithImagePosition sets the imagePosition property and returns the receiver for chaining.
 func (x *MenuItemCell) WithImagePosition(imagePosition NSCellImagePosition) *MenuItemCell {
 	x.inner.NSButtonCell.SetImagePosition(raw.NSCellImagePosition(imagePosition))
 	return x
 }
 
+// The scale factor for the button’s image.
+//
 // WithImageScaling sets the imageScaling property and returns the receiver for chaining.
 func (x *MenuItemCell) WithImageScaling(imageScaling NSImageScaling) *MenuItemCell {
 	x.inner.NSButtonCell.SetImageScaling(raw.NSImageScaling(imageScaling))
 	return x
 }
 
+// The button’s key-equivalent character.
+//
 // WithKeyEquivalent sets the keyEquivalent property and returns the receiver for chaining.
 func (x *MenuItemCell) WithKeyEquivalent(keyEquivalent string) *MenuItemCell {
 	x.inner.NSButtonCell.SetKeyEquivalent(foundation.NSStringStringWithUTF8String(keyEquivalent))
 	return x
 }
 
+// The mask that identifies the modifier keys for the button’s key equivalent.
+//
 // WithKeyEquivalentModifierMask sets the keyEquivalentModifierMask property and returns the receiver for chaining.
 func (x *MenuItemCell) WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *MenuItemCell {
 	x.inner.NSButtonCell.SetKeyEquivalentModifierMask(raw.NSEventModifierFlags(keyEquivalentModifierMask))
 	return x
 }
 
+// A Boolean value that indicates if the button is transparent.
+//
 // WithTransparent sets the transparent property and returns the receiver for chaining.
 func (x *MenuItemCell) WithTransparent(transparent bool) *MenuItemCell {
 	x.inner.NSButtonCell.SetTransparent(transparent)
 	return x
 }
 
+// A Boolean value that indicates if the button’s image and text appear “dim” when the button is disabled.
+//
 // WithImageDimsWhenDisabled sets the imageDimsWhenDisabled property and returns the receiver for chaining.
 func (x *MenuItemCell) WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *MenuItemCell {
 	x.inner.NSButtonCell.SetImageDimsWhenDisabled(imageDimsWhenDisabled)
 	return x
 }
 
+// A Boolean value that indicates if the button displays its border only when the pointer is over it.
+//
 // WithShowsBorderOnlyWhileMouseInside sets the showsBorderOnlyWhileMouseInside property and returns the receiver for chaining.
 func (x *MenuItemCell) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *MenuItemCell {
 	x.inner.NSButtonCell.SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside)
 	return x
 }
 
+// The sound that’s played when the user presses the button (that is during a mouse-down event).
+//
 // WithSound sets the sound property and returns the receiver for chaining.
 func (x *MenuItemCell) WithSound(sound *Sound) *MenuItemCell {
 	x.inner.NSButtonCell.SetSound(sound.Unwrap())
 	return x
 }
 
+// The background color of the button.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *MenuItemCell) WithBackgroundColor(backgroundColor *Color) *MenuItemCell {
 	x.inner.NSButtonCell.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// The gradient of the button’s border.
+//
 // WithGradientType sets the gradientType property and returns the receiver for chaining.
 func (x *MenuItemCell) WithGradientType(gradientType NSGradientType) *MenuItemCell {
 	x.inner.NSButtonCell.SetGradientType(raw.NSGradientType(gradientType))
 	return x
 }
 
+// The font used to draw the button’s key equivalent.
+//
 // WithKeyEquivalentFont sets the keyEquivalentFont property and returns the receiver for chaining.
 func (x *MenuItemCell) WithKeyEquivalentFont(keyEquivalentFont *Font) *MenuItemCell {
 	x.inner.NSButtonCell.SetKeyEquivalentFont(keyEquivalentFont.Unwrap())
 	return x
 }
 
+// The view associated with the cell.
+//
 // WithControlView sets the controlView property and returns the receiver for chaining.
 func (x *MenuItemCell) WithControlView(controlView ViewProvider) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetControlView(controlView.asView())
 	return x
 }
 
+// The type of the cell.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *MenuItemCell) WithType(type_ NSCellType) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
+// The cell’s current state.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *MenuItemCell) WithState(state int) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetState(state)
 	return x
 }
 
+// The object that receives the cell’s action messages.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *MenuItemCell) WithTarget(target objc.ID) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetTarget(target)
 	return x
 }
 
+// The action performed by the cell.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *MenuItemCell) WithAction(action objc.SEL) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetAction(action)
 	return x
 }
 
+// A tag for identifying the cell.
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *MenuItemCell) WithTag(tag int) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetTag(tag)
 	return x
 }
 
+// The cell’s title text.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *MenuItemCell) WithTitle(title string) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// A Boolean value indicating whether the cell is currently enabled.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *MenuItemCell) WithEnabled(enabled bool) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *MenuItemCell) WithContinuous(continuous bool) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value indicating whether the cell is editable.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *MenuItemCell) WithEditable(editable bool) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetEditable(editable)
 	return x
 }
 
+// A Boolean value indicating whether the cell’s text can be selected.
+//
 // WithSelectable sets the selectable property and returns the receiver for chaining.
 func (x *MenuItemCell) WithSelectable(selectable bool) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetSelectable(selectable)
 	return x
 }
 
+// A Boolean value indicating whether the cell draws itself outlined with a plain border.
+//
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *MenuItemCell) WithBordered(bordered bool) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetBordered(bordered)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a bezeled border.
+//
 // WithBezeled sets the bezeled property and returns the receiver for chaining.
 func (x *MenuItemCell) WithBezeled(bezeled bool) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetBezeled(bezeled)
 	return x
 }
 
+// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
+//
 // WithScrollable sets the scrollable property and returns the receiver for chaining.
 func (x *MenuItemCell) WithScrollable(scrollable bool) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetScrollable(scrollable)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a highlighted appearance.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *MenuItemCell) WithHighlighted(highlighted bool) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetHighlighted(highlighted)
 	return x
 }
 
+// The alignment of the cell’s text.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *MenuItemCell) WithAlignment(alignment NSTextAlignment) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+//
 // WithWraps sets the wraps property and returns the receiver for chaining.
 func (x *MenuItemCell) WithWraps(wraps bool) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetWraps(wraps)
 	return x
 }
 
+// The font that the cell uses to display text.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *MenuItemCell) WithFont(font *Font) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
+// The cell’s formatter object.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *MenuItemCell) WithFormatter(formatter *foundation.NSFormatter) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetFormatter(formatter)
 	return x
 }
 
+// The cell’s value as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *MenuItemCell) WithObjectValue(objectValue objc.ID) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetObjectValue(objectValue)
 	return x
 }
 
+// The cell’s value as a string.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *MenuItemCell) WithStringValue(stringValue string) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The cell’s value as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *MenuItemCell) WithIntValue(intValue int) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetIntValue(intValue)
 	return x
 }
 
+// The cell’s value as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *MenuItemCell) WithFloatValue(floatValue float32) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetFloatValue(floatValue)
 	return x
 }
 
+// The cell’s value as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *MenuItemCell) WithDoubleValue(doubleValue float64) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The cell’s value as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *MenuItemCell) WithIntegerValue(integerValue int) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetIntegerValue(integerValue)
 	return x
 }
 
+// The image displayed by the cell, if any.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *MenuItemCell) WithImage(image *Image) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
+// The size of the cell.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *MenuItemCell) WithControlSize(controlSize NSControlSize) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The object represented by the cell.
+//
 // WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
 func (x *MenuItemCell) WithRepresentedObject(representedObject objc.ID) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetRepresentedObject(representedObject)
 	return x
 }
 
+// The cell’s contextual menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *MenuItemCell) WithMenu(menu *Menu) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
+// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+//
 // WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
 func (x *MenuItemCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *MenuItemCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// The line break mode to use when drawing text in the cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *MenuItemCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// A Boolean value indicating whether the cell assumes responsibility for undo operations.
+//
 // WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
 func (x *MenuItemCell) WithAllowsUndo(allowsUndo bool) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
 	return x
 }
 
+// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+//
 // WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
 func (x *MenuItemCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
 	return x
 }
 
+// The layout direction of the user interface.
+//
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
 func (x *MenuItemCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
+// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *MenuItemCell) WithUsesSingleLineMode(usesSingleLineMode bool) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// A Boolean value indicating whether the cell refuses the first responder status.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *MenuItemCell) WithRefusesFirstResponder(refusesFirstResponder bool) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+//
 // WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
 func (x *MenuItemCell) WithShowsFirstResponder(showsFirstResponder bool) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
 	return x
 }
 
+// The type of focus ring to use with the associated view.
+//
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
 func (x *MenuItemCell) WithFocusRingType(focusRingType NSFocusRingType) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
+// The cell’s value as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *MenuItemCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+//
 // WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
 func (x *MenuItemCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports the importation of images into its text.
+//
 // WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
 func (x *MenuItemCell) WithImportsGraphics(importsGraphics bool) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports three states instead of two.
+//
 // WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
 func (x *MenuItemCell) WithAllowsMixedState(allowsMixedState bool) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
 	return x
 }
 
+// The cell’s background style.
+//
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
 func (x *MenuItemCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
+// The cell’s control tint.
+//
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
 func (x *MenuItemCell) WithControlTint(controlTint NSControlTint) *MenuItemCell {
 	x.inner.NSButtonCell.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
+// Calculates the minimum required width and height of the receiver’s menu item.
+//
 // CalcSize calls the underlying CalcSize.
 func (x *MenuItemCell) CalcSize() {
 	x.inner.CalcSize()
 }
 
+// Returns the rectangle into which the menu item’s state image should be drawn.
+//
 // StateImageRectForBounds calls the underlying StateImageRectForBounds.
 func (x *MenuItemCell) StateImageRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.StateImageRectForBounds(cellFrame)
 }
 
+// Returns the rectangle into which the menu item’s key equivalent should be drawn.
+//
 // KeyEquivalentRectForBounds calls the underlying KeyEquivalentRectForBounds.
 func (x *MenuItemCell) KeyEquivalentRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.KeyEquivalentRectForBounds(cellFrame)
 }
 
+// Draws a menu item separator.
+//
 // DrawSeparatorItemWithFrameInView calls the underlying DrawSeparatorItemWithFrameInView.
 func (x *MenuItemCell) DrawSeparatorItemWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) {
 	x.inner.DrawSeparatorItemWithFrameInView(cellFrame, controlView)
 }
 
+// Draws the state image associated with the menu item.
+//
 // DrawStateImageWithFrameInView calls the underlying DrawStateImageWithFrameInView.
 func (x *MenuItemCell) DrawStateImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) {
 	x.inner.DrawStateImageWithFrameInView(cellFrame, controlView)
 }
 
+// Draws the image associated with the menu item.
+//
 // DrawImageWithFrameInView calls the underlying DrawImageWithFrameInView.
 func (x *MenuItemCell) DrawImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) {
 	x.inner.DrawImageWithFrameInView(cellFrame, controlView)
 }
 
+// Draws the title associated with the menu item.
+//
 // DrawTitleWithFrameInView calls the underlying DrawTitleWithFrameInView.
 func (x *MenuItemCell) DrawTitleWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) {
 	x.inner.DrawTitleWithFrameInView(cellFrame, controlView)
 }
 
+// Draws the key equivalent associated with the menu item.
+//
 // DrawKeyEquivalentWithFrameInView calls the underlying DrawKeyEquivalentWithFrameInView.
 func (x *MenuItemCell) DrawKeyEquivalentWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) {
 	x.inner.DrawKeyEquivalentWithFrameInView(cellFrame, controlView)
 }
 
+// Draws the borders and background associated with the receiver’s menu item (if any).
+//
 // DrawBorderAndBackgroundWithFrameInView calls the underlying DrawBorderAndBackgroundWithFrameInView.
 func (x *MenuItemCell) DrawBorderAndBackgroundWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) {
 	x.inner.DrawBorderAndBackgroundWithFrameInView(cellFrame, controlView)

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The input profile for a controller.
+//
 // ControllerLiveInput wraps [raw.GCControllerLiveInput] with a fluent Go API.
 type ControllerLiveInput struct {
 	inner *raw.GCControllerLiveInput
@@ -35,6 +37,8 @@ func NewControllerLiveInput() *ControllerLiveInput {
 	return &ControllerLiveInput{inner: raw.GCControllerLiveInputFromID(_id)}
 }
 
+// Returns a snapshot of the physical device inputs.
+//
 // Capture calls the underlying Capture.
 func (x *ControllerLiveInput) Capture() *ControllerInputState {
 	_r := x.inner.Capture()
@@ -44,6 +48,8 @@ func (x *ControllerLiveInput) Capture() *ControllerInputState {
 	return &ControllerInputState{inner: _r}
 }
 
+// Returns the next device input state from the queue.
+//
 // NextInputState calls the underlying NextInputState.
 func (x *ControllerLiveInput) NextInputState() *ControllerInputState {
 	_r := x.inner.NextInputState()

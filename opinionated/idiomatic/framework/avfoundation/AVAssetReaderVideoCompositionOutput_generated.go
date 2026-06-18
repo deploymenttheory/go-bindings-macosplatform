@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that reads composited video frames from one or more tracks of an asset.
+//
 // AssetReaderVideoCompositionOutput wraps [raw.AVAssetReaderVideoCompositionOutput] with a fluent Go API.
 type AssetReaderVideoCompositionOutput struct {
 	inner *raw.AVAssetReaderVideoCompositionOutput
@@ -33,7 +35,7 @@ func AssetReaderVideoCompositionOutputFromID(id objc.ID) *AssetReaderVideoCompos
 	return &AssetReaderVideoCompositionOutput{inner: raw.AVAssetReaderVideoCompositionOutputFromID(id)}
 }
 
-// @method initWithVideoTracks:videoSettings: @abstract Creates an instance of AVAssetReaderVideoCompositionOutput for reading composited video from the specified video tracks and supplying media data according to the specified video settings. @param tracks An NSArray of AVAssetTrack objects from which the resulting AVAssetReaderVideoCompositionOutput should read video frames for compositing. @param videoSettings An NSDictionary of video settings to be used for video output.  See AVVideoSettings.h for more information about how to construct a video settings dictionary. @result An instance of AVAssetReaderVideoCompositionOutput. @discussion Each track must be one of the tracks owned by the target AVAssetReader's asset and must be of media type AVMediaTypeVideo. A value of nil for videoSettings configures the output to return samples in a convenient uncompressed format, with properties determined according to the properties of the specified video tracks.  Initialization will fail if the video settings cannot be used with the specified tracks. AVAssetReaderVideoCompositionOutput can only produce uncompressed output.  This means that the video settings dictionary must follow the rules for uncompressed video output, as laid out in AVVideoSettings.h. This method throws an exception for any of the following reasons: - any video track is not of media type AVMediaTypeVideo - any video track is not part of this asset reader output's AVAsset - track output settings would cause the output to yield compressed samples - video settings does not follow the rules for uncompressed video output (AVVideoSettings.h) - video settings contains any of the following keys: - AVVideoCleanApertureKey - AVVideoPixelAspectRatioKey - AVVideoScalingModeKey - AVVideoDecompressionPropertiesKey
+// Creates an object that reads composited video frames from the specified video tracks.
 //
 // NewAssetReaderVideoCompositionOutputWithVideoTracksVideoSettings creates a new [AssetReaderVideoCompositionOutput].
 func NewAssetReaderVideoCompositionOutputWithVideoTracksVideoSettings(videoTracks *foundation.NSArray[*raw.AVAssetTrack], videoSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AssetReaderVideoCompositionOutput {
@@ -42,7 +44,7 @@ func NewAssetReaderVideoCompositionOutputWithVideoTracksVideoSettings(videoTrack
 	return &AssetReaderVideoCompositionOutput{inner: raw.AVAssetReaderVideoCompositionOutputFromID(_id)}
 }
 
-// @property videoComposition @abstract The composition of video used by the receiver. @discussion The value of this property is an AVVideoComposition that can be used to specify the visual arrangement of video frames read from each source track over the timeline of the source asset. This property throws an exception if a value is set after reading has started.
+// The video composition to use for the output.
 //
 // WithVideoComposition sets the videoComposition property and returns the receiver for chaining.
 func (x *AssetReaderVideoCompositionOutput) WithVideoComposition(videoComposition VideoCompositionProvider) *AssetReaderVideoCompositionOutput {
@@ -50,7 +52,7 @@ func (x *AssetReaderVideoCompositionOutput) WithVideoComposition(videoCompositio
 	return x
 }
 
-// @property alwaysCopiesSampleData @abstract Indicates whether or not the data in buffers gets copied before being vended to the client. @discussion When the value of this property is YES, the AVAssetReaderOutput will always vend a buffer with copied data to the client.  Data in such buffers can be freely modified by the client. When the value of this property is NO, the buffers vended to the client may not be copied.  Such buffers may still be referenced by other entities. The result of modifying a buffer whose data hasn't been copied is undefined.  Requesting buffers whose data hasn't been copied when possible can lead to performance improvements. The default value is YES. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown).
+// A Boolean value that indicates whether the output vends copied sample data.
 //
 // WithAlwaysCopiesSampleData sets the alwaysCopiesSampleData property and returns the receiver for chaining.
 func (x *AssetReaderVideoCompositionOutput) WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderVideoCompositionOutput {
@@ -58,7 +60,7 @@ func (x *AssetReaderVideoCompositionOutput) WithAlwaysCopiesSampleData(alwaysCop
 	return x
 }
 
-// @property supportsRandomAccess @abstract Indicates whether the asset reader output supports reconfiguration of the time ranges to read. @discussion When the value of this property is YES, the time ranges read by the asset reader output can be reconfigured during reading using the -resetForReadingTimeRanges: method.  This also prevents the attached AVAssetReader from progressing to AVAssetReaderStatusCompleted until -markConfigurationAsFinal has been invoked. The default value is NO, which means that the asset reader output may not be reconfigured once reading has begun.  When the value of this property is NO, AVAssetReader may be able to read media data more efficiently, particularly when multiple asset reader outputs are attached. This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown) or after an AVAssetReaderOutput.Provider is attached.
+// A Boolean value that indicates whether the output supports reconfiguring the time ranges it reads.
 //
 // WithSupportsRandomAccess sets the supportsRandomAccess property and returns the receiver for chaining.
 func (x *AssetReaderVideoCompositionOutput) WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderVideoCompositionOutput {

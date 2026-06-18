@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract class that represents a location in an element’s accessibility text.
+//
 // AccessibilityTextMarker wraps [raw.BEAccessibilityTextMarker] with a fluent Go API.
 type AccessibilityTextMarker struct {
 	inner *raw.BEAccessibilityTextMarker

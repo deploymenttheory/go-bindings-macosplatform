@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A text field cell subclass that enables tokenized editing of an array of objects.
+//
 // TokenFieldCell wraps [raw.NSTokenFieldCell] with a fluent Go API.
 type TokenFieldCell struct {
 	inner *raw.NSTokenFieldCell
@@ -37,66 +39,88 @@ func NewTokenFieldCell() *TokenFieldCell {
 	return &TokenFieldCell{inner: raw.NSTokenFieldCellFromID(_id)}
 }
 
+// The token style of the receiver.
+//
 // WithTokenStyle sets the tokenStyle property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithTokenStyle(tokenStyle NSTokenStyle) *TokenFieldCell {
 	x.inner.SetTokenStyle(raw.NSTokenStyle(tokenStyle))
 	return x
 }
 
+// The receiver’s completion delay to a given delay.
+//
 // WithCompletionDelay sets the completionDelay property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithCompletionDelay(completionDelay float64) *TokenFieldCell {
 	x.inner.SetCompletionDelay(completionDelay)
 	return x
 }
 
+// The receiver’s tokenizing character set to a given character set.
+//
 // WithTokenizingCharacterSet sets the tokenizingCharacterSet property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithTokenizingCharacterSet(tokenizingCharacterSet *foundation.NSCharacterSet) *TokenFieldCell {
 	x.inner.SetTokenizingCharacterSet(tokenizingCharacterSet)
 	return x
 }
 
+// The receiver’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithDelegate(delegate raw.NSTokenFieldCellDelegate) *TokenFieldCell {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The color of the cell’s background.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithBackgroundColor(backgroundColor *Color) *TokenFieldCell {
 	x.inner.NSTextFieldCell.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the cell draws its background color.
+//
 // WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithDrawsBackground(drawsBackground bool) *TokenFieldCell {
 	x.inner.NSTextFieldCell.SetDrawsBackground(drawsBackground)
 	return x
 }
 
+// The color to use to draw the cell’s text.
+//
 // WithTextColor sets the textColor property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithTextColor(textColor *Color) *TokenFieldCell {
 	x.inner.NSTextFieldCell.SetTextColor(textColor.Unwrap())
 	return x
 }
 
+// The bezel style to use when drawing the text field.
+//
 // WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *TokenFieldCell {
 	x.inner.NSTextFieldCell.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
 	return x
 }
 
+// The placeholder text for the cell, specified as a plain text string.
+//
 // WithPlaceholderString sets the placeholderString property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithPlaceholderString(placeholderString string) *TokenFieldCell {
 	x.inner.NSTextFieldCell.SetPlaceholderString(foundation.NSStringStringWithUTF8String(placeholderString))
 	return x
 }
 
+// The placeholder text for the cell, specified as an attributed string.
+//
 // WithPlaceholderAttributedString sets the placeholderAttributedString property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *TokenFieldCell {
 	x.inner.NSTextFieldCell.SetPlaceholderAttributedString(placeholderAttributedString)
 	return x
 }
 
+// An array of locale identifiers that represent the allowed input sources when the text field has the keyboard focus.
+//
 // WithAllowedInputSourceLocales sets the collection, converting the Go slice to an NSArray.
 func (x *TokenFieldCell) WithAllowedInputSourceLocales(items ...*foundation.NSString) *TokenFieldCell {
 	if len(items) == 0 {
@@ -115,270 +139,360 @@ func (x *TokenFieldCell) WithAllowedInputSourceLocales(items ...*foundation.NSSt
 	return x
 }
 
+// The view associated with the cell.
+//
 // WithControlView sets the controlView property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithControlView(controlView ViewProvider) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlView(controlView.asView())
 	return x
 }
 
+// The type of the cell.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithType(type_ NSCellType) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
+// The cell’s current state.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithState(state int) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetState(state)
 	return x
 }
 
+// The object that receives the cell’s action messages.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithTarget(target objc.ID) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTarget(target)
 	return x
 }
 
+// The action performed by the cell.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithAction(action objc.SEL) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAction(action)
 	return x
 }
 
+// A tag for identifying the cell.
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithTag(tag int) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTag(tag)
 	return x
 }
 
+// The cell’s title text.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithTitle(title string) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// A Boolean value indicating whether the cell is currently enabled.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithEnabled(enabled bool) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithContinuous(continuous bool) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value indicating whether the cell is editable.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithEditable(editable bool) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetEditable(editable)
 	return x
 }
 
+// A Boolean value indicating whether the cell’s text can be selected.
+//
 // WithSelectable sets the selectable property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithSelectable(selectable bool) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetSelectable(selectable)
 	return x
 }
 
+// A Boolean value indicating whether the cell draws itself outlined with a plain border.
+//
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithBordered(bordered bool) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBordered(bordered)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a bezeled border.
+//
 // WithBezeled sets the bezeled property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithBezeled(bezeled bool) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBezeled(bezeled)
 	return x
 }
 
+// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
+//
 // WithScrollable sets the scrollable property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithScrollable(scrollable bool) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetScrollable(scrollable)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a highlighted appearance.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithHighlighted(highlighted bool) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetHighlighted(highlighted)
 	return x
 }
 
+// The alignment of the cell’s text.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithAlignment(alignment NSTextAlignment) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+//
 // WithWraps sets the wraps property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithWraps(wraps bool) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetWraps(wraps)
 	return x
 }
 
+// The font that the cell uses to display text.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithFont(font *Font) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
+// The cell’s formatter object.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithFormatter(formatter *foundation.NSFormatter) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFormatter(formatter)
 	return x
 }
 
+// The cell’s value as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithObjectValue(objectValue objc.ID) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetObjectValue(objectValue)
 	return x
 }
 
+// The cell’s value as a string.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithStringValue(stringValue string) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The cell’s value as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithIntValue(intValue int) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetIntValue(intValue)
 	return x
 }
 
+// The cell’s value as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithFloatValue(floatValue float32) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFloatValue(floatValue)
 	return x
 }
 
+// The cell’s value as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithDoubleValue(doubleValue float64) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The cell’s value as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithIntegerValue(integerValue int) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetIntegerValue(integerValue)
 	return x
 }
 
+// The image displayed by the cell, if any.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithImage(image *Image) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
+// The size of the cell.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithControlSize(controlSize NSControlSize) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The object represented by the cell.
+//
 // WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithRepresentedObject(representedObject objc.ID) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetRepresentedObject(representedObject)
 	return x
 }
 
+// The cell’s contextual menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithMenu(menu *Menu) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
+// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+//
 // WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// The line break mode to use when drawing text in the cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// A Boolean value indicating whether the cell assumes responsibility for undo operations.
+//
 // WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithAllowsUndo(allowsUndo bool) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
 	return x
 }
 
+// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+//
 // WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
 	return x
 }
 
+// The layout direction of the user interface.
+//
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
+// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithUsesSingleLineMode(usesSingleLineMode bool) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// A Boolean value indicating whether the cell refuses the first responder status.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithRefusesFirstResponder(refusesFirstResponder bool) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+//
 // WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithShowsFirstResponder(showsFirstResponder bool) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
 	return x
 }
 
+// The type of focus ring to use with the associated view.
+//
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithFocusRingType(focusRingType NSFocusRingType) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
+// The cell’s value as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+//
 // WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports the importation of images into its text.
+//
 // WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithImportsGraphics(importsGraphics bool) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports three states instead of two.
+//
 // WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithAllowsMixedState(allowsMixedState bool) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
 	return x
 }
 
+// The cell’s background style.
+//
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
+// The cell’s control tint.
+//
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
 func (x *TokenFieldCell) WithControlTint(controlTint NSControlTint) *TokenFieldCell {
 	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))

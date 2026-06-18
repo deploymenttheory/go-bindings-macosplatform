@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A continuous gesture recognizer that tracks a pinch gesture that magnifies content.
+//
 // MagnificationGestureRecognizer wraps [raw.NSMagnificationGestureRecognizer] with a fluent Go API.
 type MagnificationGestureRecognizer struct {
 	inner *raw.NSMagnificationGestureRecognizer
@@ -38,78 +40,104 @@ func NewMagnificationGestureRecognizer() *MagnificationGestureRecognizer {
 	return &MagnificationGestureRecognizer{inner: raw.NSMagnificationGestureRecognizerFromID(_id)}
 }
 
+// The amount of magnification to apply.
+//
 // WithMagnification sets the magnification property and returns the receiver for chaining.
 func (x *MagnificationGestureRecognizer) WithMagnification(magnification float64) *MagnificationGestureRecognizer {
 	x.inner.SetMagnification(magnification)
 	return x
 }
 
+// The object that implements the action method.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *MagnificationGestureRecognizer) WithTarget(target objc.ID) *MagnificationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetTarget(target)
 	return x
 }
 
+// The action method to call when the gesture is recognized.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *MagnificationGestureRecognizer) WithAction(action objc.SEL) *MagnificationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetAction(action)
 	return x
 }
 
+// The current state of the gesture recognizer.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *MagnificationGestureRecognizer) WithState(state NSGestureRecognizerState) *MagnificationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetState(raw.NSGestureRecognizerState(state))
 	return x
 }
 
+// The delegate of the gesture recognizer.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *MagnificationGestureRecognizer) WithDelegate(delegate raw.NSGestureRecognizerDelegate) *MagnificationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelegate(delegate)
 	return x
 }
 
+// A Boolean value indicating whether the gesture recognizer is able to handle events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *MagnificationGestureRecognizer) WithEnabled(enabled bool) *MagnificationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetEnabled(enabled)
 	return x
 }
 
+// Configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
+//
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
 func (x *MagnificationGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *MagnificationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
+//
 // WithDelaysPrimaryMouseButtonEvents sets the delaysPrimaryMouseButtonEvents property and returns the receiver for chaining.
 func (x *MagnificationGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *MagnificationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents)
 	return x
 }
 
+// A Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
+//
 // WithDelaysSecondaryMouseButtonEvents sets the delaysSecondaryMouseButtonEvents property and returns the receiver for chaining.
 func (x *MagnificationGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *MagnificationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents)
 	return x
 }
 
+// A Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
+//
 // WithDelaysOtherMouseButtonEvents sets the delaysOtherMouseButtonEvents property and returns the receiver for chaining.
 func (x *MagnificationGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *MagnificationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents)
 	return x
 }
 
+// A Boolean value that indicates whether key events are delivered only after gesture recognition fails.
+//
 // WithDelaysKeyEvents sets the delaysKeyEvents property and returns the receiver for chaining.
 func (x *MagnificationGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *MagnificationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysKeyEvents(delaysKeyEvents)
 	return x
 }
 
+// A Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
+//
 // WithDelaysMagnificationEvents sets the delaysMagnificationEvents property and returns the receiver for chaining.
 func (x *MagnificationGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *MagnificationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysMagnificationEvents(delaysMagnificationEvents)
 	return x
 }
 
+// A Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
+//
 // WithDelaysRotationEvents sets the delaysRotationEvents property and returns the receiver for chaining.
 func (x *MagnificationGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *MagnificationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysRotationEvents(delaysRotationEvents)

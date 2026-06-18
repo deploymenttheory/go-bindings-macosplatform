@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A single object in a dragging item.
+//
 // DraggingImageComponent wraps [raw.NSDraggingImageComponent] with a fluent Go API.
 type DraggingImageComponent struct {
 	inner *raw.NSDraggingImageComponent
@@ -32,6 +34,8 @@ func DraggingImageComponentFromID(id objc.ID) *DraggingImageComponent {
 	return &DraggingImageComponent{inner: raw.NSDraggingImageComponentFromID(id)}
 }
 
+// Initializes and returns a dragging image component with the specified key.
+//
 // NewDraggingImageComponentWithKey creates a new [DraggingImageComponent].
 func NewDraggingImageComponentWithKey(key *foundation.NSString) *DraggingImageComponent {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDraggingImageComponent")), objc.RegisterName("alloc"))
@@ -39,18 +43,24 @@ func NewDraggingImageComponentWithKey(key *foundation.NSString) *DraggingImageCo
 	return &DraggingImageComponent{inner: raw.NSDraggingImageComponentFromID(_id)}
 }
 
+// The unique name of this image component instance.
+//
 // WithKey sets the key property and returns the receiver for chaining.
 func (x *DraggingImageComponent) WithKey(key *foundation.NSString) *DraggingImageComponent {
 	x.inner.SetKey(key)
 	return x
 }
 
+// An object providing the image contents of the component.
+//
 // WithContents sets the contents property and returns the receiver for chaining.
 func (x *DraggingImageComponent) WithContents(contents objc.ID) *DraggingImageComponent {
 	x.inner.SetContents(contents)
 	return x
 }
 
+// The coordinate space is the bounds of the parent dragging item.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *DraggingImageComponent) WithFrame(frame corefoundation.CGRect) *DraggingImageComponent {
 	x.inner.SetFrame(frame)

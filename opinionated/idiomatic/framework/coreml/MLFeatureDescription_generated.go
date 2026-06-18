@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The name, type, and constraints of an input or output feature.
+//
 // FeatureDescription wraps [raw.MLFeatureDescription] with a fluent Go API.
 type FeatureDescription struct {
 	inner *raw.MLFeatureDescription
@@ -36,7 +38,7 @@ func NewFeatureDescription() *FeatureDescription {
 	return &FeatureDescription{inner: raw.MLFeatureDescriptionFromID(_id)}
 }
 
-// Check if MLFeatureValue is valid based on this description
+// Checks whether the model will accept an input feature value.
 //
 // IsAllowedValue calls the underlying IsAllowedValue.
 func (x *FeatureDescription) IsAllowedValue(value *raw.MLFeatureValue) bool {

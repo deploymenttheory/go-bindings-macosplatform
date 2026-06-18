@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An immutable object that stores information about a single contact, such as the contact’s first name, phone numbers, and addresses.
+//
 // Contact wraps [raw.CNContact] with a fluent Go API.
 type Contact struct {
 	inner *raw.CNContact
@@ -38,14 +40,14 @@ func NewContact() *Contact {
 	return &Contact{inner: raw.CNContactFromID(_id)}
 }
 
-// Returns YES if the value for the specified key was fetched.
+// Determines whether the contact property value for the specified key is fetched.
 //
 // IsKeyAvailable calls the underlying IsKeyAvailable.
 func (x *Contact) IsKeyAvailable(key string) bool {
 	return x.inner.IsKeyAvailable(foundation.NSStringStringWithUTF8String(key))
 }
 
-// Returns YES if the values for the keys specified by all the descriptors were fetched.
+// Determines whether all contact property values for the specified keys are fetched.
 //
 // AreKeysAvailable calls the underlying AreKeysAvailable.
 func (x *Contact) AreKeysAvailable(keyDescriptors ...purego.IDer) bool {
@@ -61,7 +63,7 @@ func (x *Contact) AreKeysAvailable(keyDescriptors ...purego.IDer) bool {
 	return x.inner.AreKeysAvailable(_arg0)
 }
 
-// Returns YES if the receiver was fetched as a unified contact and includes the contact having contactIdentifier in its unification
+// Returns a Boolean indicating whether the current contact is a unified contact and includes a contact with the specified identifier.
 //
 // IsUnifiedWithContactWithIdentifier calls the underlying IsUnifiedWithContactWithIdentifier.
 func (x *Contact) IsUnifiedWithContactWithIdentifier(contactIdentifier string) bool {

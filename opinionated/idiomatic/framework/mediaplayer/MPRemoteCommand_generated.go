@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that responds to remote command events.
+//
 // RemoteCommand wraps [raw.MPRemoteCommand] with a fluent Go API.
 type RemoteCommand struct {
 	inner *raw.MPRemoteCommand
@@ -35,7 +37,7 @@ func NewRemoteCommand() *RemoteCommand {
 	return &RemoteCommand{inner: raw.MPRemoteCommandFromID(_id)}
 }
 
-// Whether a button (for example) should be enabled and tappable for this particular command.
+// A Boolean value that indicates whether a user can interact with the displayed element.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *RemoteCommand) WithEnabled(enabled bool) *RemoteCommand {
@@ -43,22 +45,28 @@ func (x *RemoteCommand) WithEnabled(enabled bool) *RemoteCommand {
 	return x
 }
 
+// Adds a target object to be called when an event is received.
+//
 // AddTargetAction calls the underlying AddTargetAction.
 func (x *RemoteCommand) AddTargetAction(target objc.ID, action objc.SEL) {
 	x.inner.AddTargetAction(target, action)
 }
 
+// Removes a target and action from a remote command object.
+//
 // RemoveTargetAction calls the underlying RemoveTargetAction.
 func (x *RemoteCommand) RemoveTargetAction(target objc.ID, action objc.SEL) {
 	x.inner.RemoveTargetAction(target, action)
 }
 
+// Removes a target from the remote command object.
+//
 // RemoveTarget calls the underlying RemoveTarget.
 func (x *RemoteCommand) RemoveTarget(target objc.ID) {
 	x.inner.RemoveTarget(target)
 }
 
-// Returns an opaque object to act as the target.
+// Adds a block to be called when an event is received.
 //
 // AddTargetWithHandler calls the underlying AddTargetWithHandler.
 func (x *RemoteCommand) AddTargetWithHandler(handler func(*raw.MPRemoteCommandEvent) MPRemoteCommandHandlerStatus) objc.ID {

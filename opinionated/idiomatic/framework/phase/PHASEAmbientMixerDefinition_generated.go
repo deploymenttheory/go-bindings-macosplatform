@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An audio-layering object that outputs sound in a particular direction in 3D space.
+//
 // AmbientMixerDefinition wraps [raw.PHASEAmbientMixerDefinition] with a fluent Go API.
 type AmbientMixerDefinition struct {
 	inner *raw.PHASEAmbientMixerDefinition
@@ -32,7 +34,7 @@ func AmbientMixerDefinitionFromID(id objc.ID) *AmbientMixerDefinition {
 	return &AmbientMixerDefinition{inner: raw.PHASEAmbientMixerDefinitionFromID(id)}
 }
 
-// @method initWithChannelLayout:orientation:identifier @abstract Create a new PHASEAmbientMixerDefinition @param layout The input channel layout for this ambient mixer node. Any connected sampler must match this channel layout. @param orientation The orientation of the speaker layout, relative to scene root, as a quaternion. @param identifier An optional custom identifier to give to this object @return A new PHASEAmbientMixerDefinition object
+// Creates a named ambient mixer with the given channel layout and orientation.
 //
 // NewAmbientMixerDefinitionWithChannelLayoutOrientationIdentifier creates a new [AmbientMixerDefinition].
 func NewAmbientMixerDefinitionWithChannelLayoutOrientationIdentifier(layout *avfaudio.AVAudioChannelLayout, orientation unsafe.Pointer, identifier string) *AmbientMixerDefinition {
@@ -41,7 +43,7 @@ func NewAmbientMixerDefinitionWithChannelLayoutOrientationIdentifier(layout *avf
 	return &AmbientMixerDefinition{inner: raw.PHASEAmbientMixerDefinitionFromID(_id)}
 }
 
-// @method initWithChannelLayout:orientation @abstract Create a new PHASEAmbientMixerDefinition @param layout The input channel layout for this channel mixer node. Any connected sampler must match this channel layout. @param orientation The orientation of the speaker layout, relative to scene root, as a quaternion. @return A new PHASEAmbientMixerDefinition object
+// Creates an ambient mixer with the given channel layout and orientation.
 //
 // NewAmbientMixerDefinitionWithChannelLayoutOrientation creates a new [AmbientMixerDefinition].
 func NewAmbientMixerDefinitionWithChannelLayoutOrientation(layout *avfaudio.AVAudioChannelLayout, orientation unsafe.Pointer) *AmbientMixerDefinition {
@@ -50,7 +52,7 @@ func NewAmbientMixerDefinitionWithChannelLayoutOrientation(layout *avfaudio.AVAu
 	return &AmbientMixerDefinition{inner: raw.PHASEAmbientMixerDefinitionFromID(_id)}
 }
 
-// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
+// The mixer’s volume.
 //
 // WithGain sets the gain property and returns the receiver for chaining.
 func (x *AmbientMixerDefinition) WithGain(gain float64) *AmbientMixerDefinition {
@@ -58,7 +60,7 @@ func (x *AmbientMixerDefinition) WithGain(gain float64) *AmbientMixerDefinition 
 	return x
 }
 
-// @property gainMetaParameterDefinition @abstract Optionally attach a metaparameter definition here to enable real-time control of the gain during playback.
+// A template for a parameter that changes the mixer’s volume gradually over a period of time.
 //
 // WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
 func (x *AmbientMixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *AmbientMixerDefinition {

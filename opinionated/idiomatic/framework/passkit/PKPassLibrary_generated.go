@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// Provides an interface to the user’s library of passes.
+//
 // PassLibrary wraps [raw.PKPassLibrary] with a fluent Go API.
 type PassLibrary struct {
 	inner *raw.PKPassLibrary
@@ -44,6 +46,8 @@ func (x *PassLibrary) IsPaymentPassActivationAvailable() bool {
 	return x.inner.IsPaymentPassActivationAvailable()
 }
 
+// Returns the passes in the user’s pass library that the app can access.
+//
 // Passes returns the collection as a Go slice.
 func (x *PassLibrary) Passes() []*Pass {
 	arr := x.inner.Passes()
@@ -55,6 +59,8 @@ func (x *PassLibrary) Passes() []*Pass {
 	})
 }
 
+// Returns the pass with the specified pass type identifier and serial number.
+//
 // PassWithPassTypeIdentifierSerialNumber calls the underlying PassWithPassTypeIdentifierSerialNumber.
 func (x *PassLibrary) PassWithPassTypeIdentifierSerialNumber(identifier string, serialNumber string) *Pass {
 	_r := x.inner.PassWithPassTypeIdentifierSerialNumber(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(serialNumber))
@@ -69,6 +75,8 @@ func (x *PassLibrary) PassesWithReaderIdentifier(readerIdentifier string) *found
 	return x.inner.PassesWithReaderIdentifier(foundation.NSStringStringWithUTF8String(readerIdentifier))
 }
 
+// Returns the passes of the specified pass type.
+//
 // PassesOfType calls the underlying PassesOfType.
 func (x *PassLibrary) PassesOfType(passType PKPassType) *foundation.NSArray[*raw.PKPass] {
 	return x.inner.PassesOfType(raw.PKPassType(passType))
@@ -85,26 +93,36 @@ func (x *PassLibrary) RemotePaymentPasses() []*PaymentPass {
 	})
 }
 
+// Removes the pass from the user’s pass library.
+//
 // RemovePass calls the underlying RemovePass.
 func (x *PassLibrary) RemovePass(pass *raw.PKPass) {
 	x.inner.RemovePass(pass)
 }
 
+// Returns a Boolean value that indicates whether the user’s pass library contains the specified pass.
+//
 // ContainsPass calls the underlying ContainsPass.
 func (x *PassLibrary) ContainsPass(pass *raw.PKPass) bool {
 	return x.inner.ContainsPass(pass)
 }
 
+// Replaces a pass in the user’s pass library with the specified pass.
+//
 // ReplacePassWithPass calls the underlying ReplacePassWithPass.
 func (x *PassLibrary) ReplacePassWithPass(pass *raw.PKPass) bool {
 	return x.inner.ReplacePassWithPass(pass)
 }
 
+// Presents a user interface for adding multiple passes at once.
+//
 // AddPassesWithCompletionHandler calls the underlying AddPassesWithCompletionHandler.
 func (x *PassLibrary) AddPassesWithCompletionHandler(passes *foundation.NSArray[*raw.PKPass], completion func(PKPassLibraryAddPassesStatus)) {
 	x.inner.AddPassesWithCompletionHandler(passes, func(_a0 raw.PKPassLibraryAddPassesStatus) { completion(PKPassLibraryAddPassesStatus(_a0)) })
 }
 
+// Opens the user interface to set up credit cards for Apple Pay.
+//
 // OpenPaymentSetup calls the underlying OpenPaymentSetup.
 func (x *PassLibrary) OpenPaymentSetup() {
 	x.inner.OpenPaymentSetup()
@@ -120,6 +138,8 @@ func (x *PassLibrary) PresentPaymentPass(pass *raw.PKPaymentPass) {
 	x.inner.PresentPaymentPass(pass)
 }
 
+// Presents a Secure Element pass.
+//
 // PresentSecureElementPass calls the underlying PresentSecureElementPass.
 func (x *PassLibrary) PresentSecureElementPass(pass *raw.PKSecureElementPass) {
 	x.inner.PresentSecureElementPass(pass)
@@ -130,11 +150,15 @@ func (x *PassLibrary) CanAddPaymentPassWithPrimaryAccountIdentifier(primaryAccou
 	return x.inner.CanAddPaymentPassWithPrimaryAccountIdentifier(foundation.NSStringStringWithUTF8String(primaryAccountIdentifier))
 }
 
+// Returns a Boolean value that indicates whether PassKit can add a Secure Element pass for the specified account.
+//
 // CanAddSecureElementPassWithPrimaryAccountIdentifier calls the underlying CanAddSecureElementPassWithPrimaryAccountIdentifier.
 func (x *PassLibrary) CanAddSecureElementPassWithPrimaryAccountIdentifier(primaryAccountIdentifier string) bool {
 	return x.inner.CanAddSecureElementPassWithPrimaryAccountIdentifier(foundation.NSStringStringWithUTF8String(primaryAccountIdentifier))
 }
 
+// Returns a Boolean value that indicates whether the library can add FeliCa™ passes.
+//
 // CanAddFelicaPass calls the underlying CanAddFelicaPass.
 func (x *PassLibrary) CanAddFelicaPass() bool {
 	return x.inner.CanAddFelicaPass()
@@ -150,11 +174,15 @@ func (x *PassLibrary) ActivatePaymentPassWithActivationCodeCompletion(paymentPas
 	x.inner.ActivatePaymentPassWithActivationCodeCompletion(paymentPass, foundation.NSStringStringWithUTF8String(activationCode), completion)
 }
 
+// Activates a Secure Element pass using the specified data.
+//
 // ActivateSecureElementPassWithActivationDataCompletion calls the underlying ActivateSecureElementPassWithActivationDataCompletion.
 func (x *PassLibrary) ActivateSecureElementPassWithActivationDataCompletion(secureElementPass *raw.PKSecureElementPass, activationData *foundation.NSData, completion func(bool, unsafe.Pointer)) {
 	x.inner.ActivateSecureElementPassWithActivationDataCompletion(secureElementPass, activationData, completion)
 }
 
+// Signs an opaque value using a cryptographic signature.
+//
 // SignDataWithSecureElementPassCompletion calls the underlying SignDataWithSecureElementPassCompletion.
 func (x *PassLibrary) SignDataWithSecureElementPassCompletion(signData *foundation.NSData, secureElementPass *raw.PKSecureElementPass, completion func(*foundation.NSData, *foundation.NSData, unsafe.Pointer)) {
 	x.inner.SignDataWithSecureElementPassCompletion(signData, secureElementPass, completion)
@@ -165,6 +193,8 @@ func (x *PassLibrary) EncryptedServiceProviderDataForSecureElementPassCompletion
 	x.inner.EncryptedServiceProviderDataForSecureElementPassCompletion(secureElementPass, completion)
 }
 
+// Calls a completion handler that returns the custom data for a Secure Element pass.
+//
 // ServiceProviderDataForSecureElementPassCompletion blocks until the operation completes or ctx is cancelled.
 func (x *PassLibrary) ServiceProviderDataForSecureElementPassCompletion(ctx context.Context, secureElementPass *raw.PKSecureElementPass) (*foundation.NSData, error) {
 	type _result struct {

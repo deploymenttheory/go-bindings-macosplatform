@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A recording of all of the values provided by a GCGamepad object.
+//
 // GamepadSnapshot wraps [raw.GCGamepadSnapshot] with a fluent Go API.
 type GamepadSnapshot struct {
 	inner *raw.GCGamepadSnapshot
@@ -30,6 +32,8 @@ func GamepadSnapshotFromID(id objc.ID) *GamepadSnapshot {
 	return &GamepadSnapshot{inner: raw.GCGamepadSnapshotFromID(id)}
 }
 
+// Initializes a snapshot object with the flattened data representation obtained from another snapshot.
+//
 // NewGamepadSnapshotWithSnapshotData creates a new [GamepadSnapshot].
 func NewGamepadSnapshotWithSnapshotData(data *foundation.NSData) *GamepadSnapshot {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GCGamepadSnapshot")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewGamepadSnapshotWithSnapshotData(data *foundation.NSData) *GamepadSnapsho
 	return &GamepadSnapshot{inner: raw.GCGamepadSnapshotFromID(_id)}
 }
 
+// Initializes a snapshot object associated with a specific controller using a flattened data representation obtained from another snapshot.
+//
 // NewGamepadSnapshotWithControllerSnapshotData creates a new [GamepadSnapshot].
 func NewGamepadSnapshotWithControllerSnapshotData(controller *raw.GCController, data *foundation.NSData) *GamepadSnapshot {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GCGamepadSnapshot")), objc.RegisterName("alloc"))
@@ -44,19 +50,23 @@ func NewGamepadSnapshotWithControllerSnapshotData(controller *raw.GCController, 
 	return &GamepadSnapshot{inner: raw.GCGamepadSnapshotFromID(_id)}
 }
 
+// The flattened control input values for the snapshot.
+//
 // WithSnapshotData sets the snapshotData property and returns the receiver for chaining.
 func (x *GamepadSnapshot) WithSnapshotData(snapshotData *foundation.NSData) *GamepadSnapshot {
 	x.inner.SetSnapshotData(snapshotData)
 	return x
 }
 
+// A block called when any element in the profile changes.
+//
 // WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
 func (x *GamepadSnapshot) WithValueChangedHandler(valueChangedHandler func(*raw.GCGamepad, *raw.GCControllerElement)) *GamepadSnapshot {
 	x.inner.GCGamepad.SetValueChangedHandler(valueChangedHandler)
 	return x
 }
 
-// Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called for each element that changed. @param profile this profile that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons. @param element the element that has been modified.
+// The block that the profile calls when an element’s value changes.
 //
 // WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
 func (x *GamepadSnapshot) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *GamepadSnapshot {

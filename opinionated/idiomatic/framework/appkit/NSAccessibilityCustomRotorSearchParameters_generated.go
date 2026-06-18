@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// @brief NSAccessibilityCustomRotorSearchParameters is a container for search parameters. It should be examined to determine the next matching NSAccessibilityCustomRotorItemResult.
+// Search parameters for a custom rotor.
 //
 // AccessibilityCustomRotorSearchParameters wraps [raw.NSAccessibilityCustomRotorSearchParameters] with a fluent Go API.
 type AccessibilityCustomRotorSearchParameters struct {

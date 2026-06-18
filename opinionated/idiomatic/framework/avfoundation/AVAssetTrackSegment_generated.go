@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a time range segment of an asset track.
+//
 // AssetTrackSegment wraps [raw.AVAssetTrackSegment] with a fluent Go API.
 type AssetTrackSegment struct {
 	inner *raw.AVAssetTrackSegment

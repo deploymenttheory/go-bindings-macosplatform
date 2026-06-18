@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A model of a 3D object’s solid volume as a collection of voxels, or cubic units.
+//
 // VoxelArray wraps [raw.MDLVoxelArray] with a fluent Go API.
 type VoxelArray struct {
 	inner *raw.MDLVoxelArray
@@ -40,7 +42,7 @@ func NewVoxelArrayWithAssetDivisionsPatchRadius(asset *raw.MDLAsset, divisions i
 	return &VoxelArray{inner: raw.MDLVoxelArrayFromID(_id)}
 }
 
-// Initialize a voxel grid from an NSData containing an array of MDLVoxelIndex values. @param boundingBox The bounds defining the extent of the volume model in Cartesian space @param voxelExtent The extent of a single voxel
+// Initializes a voxel array with the specified voxel data.
 //
 // NewVoxelArrayWithDataBoundingBoxVoxelExtent creates a new [VoxelArray].
 func NewVoxelArrayWithDataBoundingBoxVoxelExtent(voxelData *foundation.NSData, boundingBox raw.MDLAxisAlignedBoundingBox, voxelExtent float32) *VoxelArray {
@@ -49,7 +51,7 @@ func NewVoxelArrayWithDataBoundingBoxVoxelExtent(voxelData *foundation.NSData, b
 	return &VoxelArray{inner: raw.MDLVoxelArrayFromID(_id)}
 }
 
-// Initialize a voxel grid from an MDLAsset and dilate the resulting voxels by a number of interior and exterior shells. Routine will attempt to create a closed volume model by applying patches of a given radius to any holes it may find in the asset. @param divisions The number of divisions to divide the vertical extent of the model by. @param interiorShells The number of shells to compute inside the surface shell @param exteriorShells The number of shells to compute outside the surface shell @param patchRadius The radius of the largest model mending patch in world space units
+// Initializes a voxel array that models the volume of 3D objects in the specified asset and creates the specified number of voxel shells.
 //
 // NewVoxelArrayWithAssetDivisionsInteriorShellsExteriorShellsPatchRadius creates a new [VoxelArray].
 func NewVoxelArrayWithAssetDivisionsInteriorShellsExteriorShellsPatchRadius(asset *raw.MDLAsset, divisions int, interiorShells int, exteriorShells int, patchRadius float32) *VoxelArray {
@@ -58,7 +60,7 @@ func NewVoxelArrayWithAssetDivisionsInteriorShellsExteriorShellsPatchRadius(asse
 	return &VoxelArray{inner: raw.MDLVoxelArrayFromID(_id)}
 }
 
-// Initialize a voxel grid from an MDLAsset and dilate the resulting voxels by a spatial distance in the interior and exterior directions. Routine will attempt to create a closed volume model by applying "patches" of a given radius to any holes it may find in the asset. @param divisions The number of divisions to divide the vertical extent of the model by. @param interiorNBWidth The interior narrow band width in world space units @param exteriorNBWidth The exterior narrow band width in world space units @param patchRadius The radius of the largest model mending patch in world space units
+// Initializes a voxel array that models the volume of 3D objects in the specified asset, creating voxel shells for the specified distances from the object’s surface.
 //
 // NewVoxelArrayWithAssetDivisionsInteriorNBWidthExteriorNBWidthPatchRadius creates a new [VoxelArray].
 func NewVoxelArrayWithAssetDivisionsInteriorNBWidthExteriorNBWidthPatchRadius(asset *raw.MDLAsset, divisions int, interiorNBWidth float32, exteriorNBWidth float32, patchRadius float32) *VoxelArray {
@@ -83,7 +85,7 @@ func (x *VoxelArray) WithShellFieldExteriorThickness(shellFieldExteriorThickness
 	return x
 }
 
-// @property parent @abstract Parent object. Nil if no parent. @discussion Set to nil when you remove this from an object container inside the parent object.
+// The parent object that contains this object.
 //
 // WithParent sets the parent property and returns the receiver for chaining.
 func (x *VoxelArray) WithParent(parent ObjectProvider) *VoxelArray {
@@ -91,7 +93,7 @@ func (x *VoxelArray) WithParent(parent ObjectProvider) *VoxelArray {
 	return x
 }
 
-// @property instance @abstract Instance object @discussion nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
+// The primary object, if applicable, of which this object is an instance.
 //
 // WithInstance sets the instance property and returns the receiver for chaining.
 func (x *VoxelArray) WithInstance(instance ObjectProvider) *VoxelArray {
@@ -99,7 +101,7 @@ func (x *VoxelArray) WithInstance(instance ObjectProvider) *VoxelArray {
 	return x
 }
 
-// @property transform @abstract Short hand property for the MDLTransformComponent. @discussion The default value is nil @see MDLTransformComponent
+// A component that manages this object’s spatial transform and its changes over time.
 //
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *VoxelArray) WithTransform(transform raw.MDLTransformComponent) *VoxelArray {
@@ -107,7 +109,7 @@ func (x *VoxelArray) WithTransform(transform raw.MDLTransformComponent) *VoxelAr
 	return x
 }
 
-// @property children @abstract Short hand property for the MDLObjectContainerComponent. @discussion The default value is an empty MDLObjectContainer @see MDLObjectContainerComponent
+// A component that manages this object’s collection of children.
 //
 // WithChildren sets the children property and returns the receiver for chaining.
 func (x *VoxelArray) WithChildren(children raw.MDLObjectContainerComponent) *VoxelArray {
@@ -115,34 +117,36 @@ func (x *VoxelArray) WithChildren(children raw.MDLObjectContainerComponent) *Vox
 	return x
 }
 
+// A Boolean value indicating whether this object should be used in rendering.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *VoxelArray) WithHidden(hidden bool) *VoxelArray {
 	x.inner.MDLObject.SetHidden(hidden)
 	return x
 }
 
-// Determine if a sample exists at the specified index @discussion the allowAny parameters can be used to wildcard any dimensions. This is useful to perform queries such as determining if any voxel exists on the XY plane at a certain Z, or if any voxel exists at any X, Y, Z, or a particular shell, and so on.
+// Returns a Boolean value indicating whether the voxel array contains voxel data for the specified index.
 //
 // VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell calls the underlying VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell.
 func (x *VoxelArray) VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell(index unsafe.Pointer, allowAnyX bool, allowAnyY bool, allowAnyZ bool, allowAnyShell bool) bool {
 	return x.inner.VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell(index, allowAnyX, allowAnyY, allowAnyZ, allowAnyShell)
 }
 
-// Returns an NSData containing the indices of all voxels found in the extent
+// Returns a data object containing all voxels within the specified volume.
 //
 // VoxelsWithinExtent calls the underlying VoxelsWithinExtent.
 func (x *VoxelArray) VoxelsWithinExtent(extent raw.MDLVoxelIndexExtent) *foundation.NSData {
 	return x.inner.VoxelsWithinExtent(extent)
 }
 
-// Returns an NSData containing the indices of all voxels in the voxel grid
+// Returns a data object containing all voxels within the voxel array.
 //
 // VoxelIndices calls the underlying VoxelIndices.
 func (x *VoxelArray) VoxelIndices() *foundation.NSData {
 	return x.inner.VoxelIndices()
 }
 
-// Set a sample at the specified index @discussion the extent, bounds, and shell properties may be modified
+// Sets voxel characteristics at the specified index in the array.
 //
 // SetVoxelAtIndex calls the underlying SetVoxelAtIndex.
 func (x *VoxelArray) SetVoxelAtIndex(index unsafe.Pointer) {
@@ -156,56 +160,56 @@ func (x *VoxelArray) SetVoxelsForMeshDivisionsPatchRadius(mesh *raw.MDLMesh, div
 	x.inner.SetVoxelsForMeshDivisionsPatchRadius(mesh, divisions, patchRadius)
 }
 
-// Set voxels corresponding to a mesh Routine will attempt to create a closed volume model by applying "patches" of a given radius to any holes it may find in the mesh. @param divisions The number of divisions to divide the vertical extent of the model by. @param interiorShells The number of shells to compute inside the surface shell @param exteriorShells The number of shells to compute outside the surface shell @param patchRadius The radius of the largest model mending patch in world space units
+// Sets voxel values in the array to model the volume of the specified mesh and creates the specified number of voxel shells.
 //
 // SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius calls the underlying SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius.
 func (x *VoxelArray) SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius(mesh *raw.MDLMesh, divisions int, interiorShells int, exteriorShells int, patchRadius float32) {
 	x.inner.SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius(mesh, divisions, interiorShells, exteriorShells, patchRadius)
 }
 
-// Set voxels corresponding to a mesh Routine will attempt to create a closed volume model by applying "patches" of a given radius to any holes it may find in the mesh. @param divisions The number of divisions to divide the vertical extent of the model by. @param interiorNBWidth The interior narrow band width in world space units @param exteriorNBWidth The exterior narrow band width in world space units @param patchRadius The radius of the largest model mending patch in world space units
+// Sets voxel values in the array to model the volume of the specified mesh and creates voxel shells for the specified distances from the object’s surface.
 //
 // SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius calls the underlying SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius.
 func (x *VoxelArray) SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius(mesh *raw.MDLMesh, divisions int, interiorNBWidth float32, exteriorNBWidth float32, patchRadius float32) {
 	x.inner.SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius(mesh, divisions, interiorNBWidth, exteriorNBWidth, patchRadius)
 }
 
-// Union modifies the voxel grid to be the merger with the supplied voxel grid. It is assumed that the spatial voxel extent of one voxel in the supplied grid is the same as that of the voxel grid. Note that the shell level data will be cleared.
+// Extends the voxel array to also cover the volume of the specified voxel array.
 //
 // UnionWithVoxels calls the underlying UnionWithVoxels.
 func (x *VoxelArray) UnionWithVoxels(voxels *raw.MDLVoxelArray) {
 	x.inner.UnionWithVoxels(voxels)
 }
 
-// Intersection modifies the voxel grid so that only voxels that are also in the supplied voxel grid are retained. It is assumed that the spatial voxel extent of one voxel in the supplied grid is the same as that of the voxel grid. Note that the shell level data will be cleared.
+// Reduces the voxel array to cover only the volume within both it and another voxel array.
 //
 // IntersectWithVoxels calls the underlying IntersectWithVoxels.
 func (x *VoxelArray) IntersectWithVoxels(voxels *raw.MDLVoxelArray) {
 	x.inner.IntersectWithVoxels(voxels)
 }
 
-// Difference modifies the voxel grid so that voxels also in the supplied voxel grid are removed. It is assumed that the spatial voxel extent of one voxel in the supplied grid is the same as that of the voxel grid. Note that the shell level data will be cleared.
+// Reduces the voxel array to cover only the portion of its volume not covered by another voxel array.
 //
 // DifferenceWithVoxels calls the underlying DifferenceWithVoxels.
 func (x *VoxelArray) DifferenceWithVoxels(voxels *raw.MDLVoxelArray) {
 	x.inner.DifferenceWithVoxels(voxels)
 }
 
-// Return the voxel index corresponding to a point in space
+// Returns voxel information corresponding to the specified point in the world coordinate space of the asset from which the voxel array was created.
 //
 // IndexOfSpatialLocation calls the underlying IndexOfSpatialLocation.
 func (x *VoxelArray) IndexOfSpatialLocation(location unsafe.Pointer) unsafe.Pointer {
 	return x.inner.IndexOfSpatialLocation(location)
 }
 
-// Return the spatial location of the center of the indexed voxel
+// Returns the location of the specified voxel in world coordinate space.
 //
 // SpatialLocationOfIndex calls the underlying SpatialLocationOfIndex.
 func (x *VoxelArray) SpatialLocationOfIndex(index unsafe.Pointer) unsafe.Pointer {
 	return x.inner.SpatialLocationOfIndex(index)
 }
 
-// The bounding box of an indexed voxel
+// Returns the extent of the specified voxel’s volume in the world coordinate space of the asset from which the voxel array was created.
 //
 // VoxelBoundingBoxAtIndex calls the underlying VoxelBoundingBoxAtIndex.
 func (x *VoxelArray) VoxelBoundingBoxAtIndex(index unsafe.Pointer) raw.MDLAxisAlignedBoundingBox {
@@ -239,7 +243,7 @@ func (x *VoxelArray) CoarseMeshUsingAllocator(allocator raw.MDLMeshBufferAllocat
 	return &Mesh{inner: _r}
 }
 
-// Creates a smooth mesh from the voxel grid
+// Generates a closed polygon mesh around the volume of space the voxel array describes.
 //
 // MeshUsingAllocator calls the underlying MeshUsingAllocator.
 func (x *VoxelArray) MeshUsingAllocator(allocator raw.MDLMeshBufferAllocator) *Mesh {

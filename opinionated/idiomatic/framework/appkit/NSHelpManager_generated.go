@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object for displaying online help for an app.
+//
 // HelpManager wraps [raw.NSHelpManager] with a fluent Go API.
 type HelpManager struct {
 	inner *raw.NSHelpManager
@@ -37,36 +39,50 @@ func NewHelpManager() *HelpManager {
 	return &HelpManager{inner: raw.NSHelpManagerFromID(_id)}
 }
 
+// Associates help content with an object.
+//
 // SetContextHelpForObject calls the underlying SetContextHelpForObject.
 func (x *HelpManager) SetContextHelpForObject(attrString *foundation.NSAttributedString, object objc.ID) {
 	x.inner.SetContextHelpForObject(attrString, object)
 }
 
+// Removes the association between an object and its context-sensitive help.
+//
 // RemoveContextHelpForObject calls the underlying RemoveContextHelpForObject.
 func (x *HelpManager) RemoveContextHelpForObject(object objc.ID) {
 	x.inner.RemoveContextHelpForObject(object)
 }
 
+// Returns context-sensitive help for an object.
+//
 // ContextHelpForObject calls the underlying ContextHelpForObject.
 func (x *HelpManager) ContextHelpForObject(object objc.ID) *foundation.NSAttributedString {
 	return x.inner.ContextHelpForObject(object)
 }
 
+// Displays the context-sensitive help for a given object at or near the point on the screen specified by a given point.
+//
 // ShowContextHelpForObjectLocationHint calls the underlying ShowContextHelpForObjectLocationHint.
 func (x *HelpManager) ShowContextHelpForObjectLocationHint(object objc.ID, pt corefoundation.CGPoint) bool {
 	return x.inner.ShowContextHelpForObjectLocationHint(object, pt)
 }
 
+// Finds and displays the text at the given anchor location in the given book.
+//
 // OpenHelpAnchorInBook calls the underlying OpenHelpAnchorInBook.
 func (x *HelpManager) OpenHelpAnchorInBook(anchor *foundation.NSString, book *foundation.NSString) {
 	x.inner.OpenHelpAnchorInBook(anchor, book)
 }
 
+// Performs a search for the specified string in the specified book.
+//
 // FindStringInBook calls the underlying FindStringInBook.
 func (x *HelpManager) FindStringInBook(query string, book *foundation.NSString) {
 	x.inner.FindStringInBook(foundation.NSStringStringWithUTF8String(query), book)
 }
 
+// Registers one or more help books in the given bundle.
+//
 // RegisterBooksInBundle calls the underlying RegisterBooksInBundle.
 func (x *HelpManager) RegisterBooksInBundle(bundle *foundation.NSBundle) bool {
 	return x.inner.RegisterBooksInBundle(bundle)

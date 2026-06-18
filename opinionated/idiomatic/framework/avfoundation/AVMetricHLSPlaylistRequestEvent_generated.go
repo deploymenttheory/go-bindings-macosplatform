@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An event that represents a live streaming playlist resource request.
+//
 // MetricHLSPlaylistRequestEvent wraps [raw.AVMetricHLSPlaylistRequestEvent] with a fluent Go API.
 type MetricHLSPlaylistRequestEvent struct {
 	inner *raw.AVMetricHLSPlaylistRequestEvent

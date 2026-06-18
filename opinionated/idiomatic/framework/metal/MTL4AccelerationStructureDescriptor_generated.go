@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Base class for Metal 4 acceleration structure descriptors.
+//
 // MTL4AccelerationStructureDescriptor wraps [raw.MTL4AccelerationStructureDescriptor] with a fluent Go API.
 type MTL4AccelerationStructureDescriptor struct {
 	inner *raw.MTL4AccelerationStructureDescriptor
@@ -37,6 +39,8 @@ func NewMTL4AccelerationStructureDescriptor() *MTL4AccelerationStructureDescript
 	return &MTL4AccelerationStructureDescriptor{inner: raw.MTL4AccelerationStructureDescriptorFromID(_id)}
 }
 
+// The options that describe how you intend to use the acceleration structure.
+//
 // WithUsage sets the usage property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureDescriptor) WithUsage(usage MTLAccelerationStructureUsage) *MTL4AccelerationStructureDescriptor {
 	x.inner.MTLAccelerationStructureDescriptor.SetUsage(raw.MTLAccelerationStructureUsage(usage))

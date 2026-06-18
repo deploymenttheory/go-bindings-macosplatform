@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A manifest of asset packs that are available to download.
+//
 // AssetPackManifest wraps [raw.BAAssetPackManifest] with a fluent Go API.
 type AssetPackManifest struct {
 	inner *raw.BAAssetPackManifest
@@ -32,7 +34,7 @@ func AssetPackManifestFromID(id objc.ID) *AssetPackManifest {
 	return &AssetPackManifest{inner: raw.BAAssetPackManifestFromID(id)}
 }
 
-// Initializes a representation of a manifest in memory given a URL to the manifest’s representation as a JSON file on disk. - Parameters: - URL: A URL to a local JSON file. - applicationGroupIdentifier: The identifier of the application group in which to store unmanaged asset packs that are downloaded from the manifest. - error: A pointer to an error that will be set if an error occurs.
+// Initializes a representation of a manifest in memory given a URL to the manifest’s representation as a JSON file on disk.
 //
 // NewAssetPackManifestWithContentsOfURLApplicationGroupIdentifierError creates a new [AssetPackManifest].
 func NewAssetPackManifestWithContentsOfURLApplicationGroupIdentifierError(uRL string, applicationGroupIdentifier string) (*AssetPackManifest, error) {
@@ -45,7 +47,7 @@ func NewAssetPackManifestWithContentsOfURLApplicationGroupIdentifierError(uRL st
 	return &AssetPackManifest{inner: raw.BAAssetPackManifestFromID(_id)}, nil
 }
 
-// Initializes a representation of a manifest in memory from JSON-encoded data. - Parameters: - data: JSON-encoded data. - applicationGroupIdentifier: The identifier of the application group in which to store unmanaged asset packs that are downloaded from the manifest. - error: A pointer to an error that will be set if an error occurs.
+// Initializes a representation of a manifest in memory from JSON-encoded data.
 //
 // NewAssetPackManifestFromDataApplicationGroupIdentifierError creates a new [AssetPackManifest].
 func NewAssetPackManifestFromDataApplicationGroupIdentifierError(data *foundation.NSData, applicationGroupIdentifier string) (*AssetPackManifest, error) {
@@ -58,14 +60,14 @@ func NewAssetPackManifestFromDataApplicationGroupIdentifierError(data *foundatio
 	return &AssetPackManifest{inner: raw.BAAssetPackManifestFromID(_id)}, nil
 }
 
-// Creates download objects for every asset pack in this manifest. The returned download objects can be scheduled with the download manager. - Returns: A collection of download objects. - Remark: Use this method in your main application; use “allDownloadsForContentRequest:“ in your downloader extension.
+// Creates download objects for every asset pack in this manifest.
 //
 // AllDownloads calls the underlying AllDownloads.
 func (x *AssetPackManifest) AllDownloads() *foundation.NSSet[*raw.BADownload] {
 	return x.inner.AllDownloads()
 }
 
-// Creates download objects for every asset pack in this manifest. The returned download objects can be scheduled with the download manager. - Parameter contentRequest: The content request for the current extension invocation. - Returns: A collection of download objects. - Remark: Use this method in your downloader extension; use “allDownloads“ instead in your main application.
+// Creates download objects for every asset pack in this manifest.
 //
 // AllDownloadsForContentRequest calls the underlying AllDownloadsForContentRequest.
 func (x *AssetPackManifest) AllDownloadsForContentRequest(contentRequest BAContentRequest) *foundation.NSSet[*raw.BADownload] {

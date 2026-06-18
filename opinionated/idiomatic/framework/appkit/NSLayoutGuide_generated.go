@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A rectangular area that can interact with Auto Layout.
+//
 // LayoutGuide wraps [raw.NSLayoutGuide] with a fluent Go API.
 type LayoutGuide struct {
 	inner *raw.NSLayoutGuide
@@ -38,12 +40,16 @@ func NewLayoutGuide() *LayoutGuide {
 	return &LayoutGuide{inner: raw.NSLayoutGuideFromID(_id)}
 }
 
+// The view that owns this layout guide.
+//
 // WithOwningView sets the owningView property and returns the receiver for chaining.
 func (x *LayoutGuide) WithOwningView(owningView ViewProvider) *LayoutGuide {
 	x.inner.SetOwningView(owningView.asView())
 	return x
 }
 
+// A string used to identify the layout guide.
+//
 // WithIdentifier sets the identifier property and returns the receiver for chaining.
 func (x *LayoutGuide) WithIdentifier(identifier *foundation.NSString) *LayoutGuide {
 	x.inner.SetIdentifier(identifier)

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing a diagnostic report for an app that is too busy to handle user input responsively.
+//
 // HangDiagnostic wraps [raw.MXHangDiagnostic] with a fluent Go API.
 type HangDiagnostic struct {
 	inner *raw.MXHangDiagnostic

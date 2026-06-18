@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Movie-wide information required by the rendering session.
+// A structure for movie-wide attributes required for proper rendering.
 //
 // RenderingSessionAttributes wraps [raw.CNRenderingSessionAttributes] with a fluent Go API.
 type RenderingSessionAttributes struct {

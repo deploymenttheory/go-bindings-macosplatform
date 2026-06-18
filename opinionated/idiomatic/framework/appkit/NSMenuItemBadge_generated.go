@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A control that provides additional quantitative information specific to a menu item, such as the number of available updates.
+//
 // MenuItemBadge wraps [raw.NSMenuItemBadge] with a fluent Go API.
 type MenuItemBadge struct {
 	inner *raw.NSMenuItemBadge
@@ -40,7 +42,7 @@ func NewMenuItemBadgeWithCountType(itemCount int, type_ NSMenuItemBadgeType) *Me
 	return &MenuItemBadge{inner: raw.NSMenuItemBadgeFromID(_id)}
 }
 
-// Initializes the badge with an integer count and an empty string.
+// Creates a badge with a count and an empty string.
 //
 // NewMenuItemBadgeWithCount creates a new [MenuItemBadge].
 func NewMenuItemBadgeWithCount(itemCount int) *MenuItemBadge {
@@ -49,7 +51,7 @@ func NewMenuItemBadgeWithCount(itemCount int) *MenuItemBadge {
 	return &MenuItemBadge{inner: raw.NSMenuItemBadgeFromID(_id)}
 }
 
-// Initializes the badge with the provided custom string.
+// Creates a badge with the provided custom string.
 //
 // NewMenuItemBadgeWithString creates a new [MenuItemBadge].
 func NewMenuItemBadgeWithString(string_ string) *MenuItemBadge {

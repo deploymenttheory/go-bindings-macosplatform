@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An argument of options you pass to a GPU device to get a render pipeline state.
+//
 // RenderPipelineDescriptor wraps [raw.MTLRenderPipelineDescriptor] with a fluent Go API.
 type RenderPipelineDescriptor struct {
 	inner *raw.MTLRenderPipelineDescriptor
@@ -38,133 +40,175 @@ func NewRenderPipelineDescriptor() *RenderPipelineDescriptor {
 	return &RenderPipelineDescriptor{inner: raw.MTLRenderPipelineDescriptorFromID(_id)}
 }
 
+// A string that identifies the render pipeline descriptor.
+//
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithLabel(label string) *RenderPipelineDescriptor {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
+// The vertex function the pipeline calls to process vertices.
+//
 // WithVertexFunction sets the vertexFunction property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithVertexFunction(vertexFunction raw.MTLFunction) *RenderPipelineDescriptor {
 	x.inner.SetVertexFunction(vertexFunction)
 	return x
 }
 
+// The fragment function the pipeline calls to process fragments.
+//
 // WithFragmentFunction sets the fragmentFunction property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithFragmentFunction(fragmentFunction raw.MTLFunction) *RenderPipelineDescriptor {
 	x.inner.SetFragmentFunction(fragmentFunction)
 	return x
 }
 
+// The organization of vertex data in an attribute’s argument table.
+//
 // WithVertexDescriptor sets the vertexDescriptor property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithVertexDescriptor(vertexDescriptor *VertexDescriptor) *RenderPipelineDescriptor {
 	x.inner.SetVertexDescriptor(vertexDescriptor.Unwrap())
 	return x
 }
 
+// The number of samples the pipeline applies for each fragment.
+//
 // WithSampleCount sets the sampleCount property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithSampleCount(sampleCount uint) *RenderPipelineDescriptor {
 	x.inner.SetSampleCount(sampleCount)
 	return x
 }
 
+// The number of samples the pipeline applies for each fragment.
+//
 // WithRasterSampleCount sets the rasterSampleCount property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithRasterSampleCount(rasterSampleCount uint) *RenderPipelineDescriptor {
 	x.inner.SetRasterSampleCount(rasterSampleCount)
 	return x
 }
 
+// A Boolean value that indicates whether to read and use the alpha channel fragment output for color attachments to compute a sample coverage mask.
+//
 // WithAlphaToCoverageEnabled sets the alphaToCoverageEnabled property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithAlphaToCoverageEnabled(alphaToCoverageEnabled bool) *RenderPipelineDescriptor {
 	x.inner.SetAlphaToCoverageEnabled(alphaToCoverageEnabled)
 	return x
 }
 
+// A Boolean value that indicates whether to force alpha channel values for color attachments to the largest representable value.
+//
 // WithAlphaToOneEnabled sets the alphaToOneEnabled property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithAlphaToOneEnabled(alphaToOneEnabled bool) *RenderPipelineDescriptor {
 	x.inner.SetAlphaToOneEnabled(alphaToOneEnabled)
 	return x
 }
 
+// A Boolean value that determines whether the pipeline rasterizes primitives.
+//
 // WithRasterizationEnabled sets the rasterizationEnabled property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithRasterizationEnabled(rasterizationEnabled bool) *RenderPipelineDescriptor {
 	x.inner.SetRasterizationEnabled(rasterizationEnabled)
 	return x
 }
 
+// The maximum vertex amplification count you can set when encoding render commands.
+//
 // WithMaxVertexAmplificationCount sets the maxVertexAmplificationCount property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithMaxVertexAmplificationCount(maxVertexAmplificationCount uint) *RenderPipelineDescriptor {
 	x.inner.SetMaxVertexAmplificationCount(maxVertexAmplificationCount)
 	return x
 }
 
+// The pixel format of the attachment that stores depth data.
+//
 // WithDepthAttachmentPixelFormat sets the depthAttachmentPixelFormat property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithDepthAttachmentPixelFormat(depthAttachmentPixelFormat MTLPixelFormat) *RenderPipelineDescriptor {
 	x.inner.SetDepthAttachmentPixelFormat(raw.MTLPixelFormat(depthAttachmentPixelFormat))
 	return x
 }
 
+// The pixel format of the attachment that stores stencil data.
+//
 // WithStencilAttachmentPixelFormat sets the stencilAttachmentPixelFormat property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithStencilAttachmentPixelFormat(stencilAttachmentPixelFormat MTLPixelFormat) *RenderPipelineDescriptor {
 	x.inner.SetStencilAttachmentPixelFormat(raw.MTLPixelFormat(stencilAttachmentPixelFormat))
 	return x
 }
 
+// The type of primitive topology the pipeline renders.
+//
 // WithInputPrimitiveTopology sets the inputPrimitiveTopology property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithInputPrimitiveTopology(inputPrimitiveTopology MTLPrimitiveTopologyClass) *RenderPipelineDescriptor {
 	x.inner.SetInputPrimitiveTopology(raw.MTLPrimitiveTopologyClass(inputPrimitiveTopology))
 	return x
 }
 
+// The partitioning mode that the tessellator uses to derive the number and spacing of segments for subdividing a corresponding edge.
+//
 // WithTessellationPartitionMode sets the tessellationPartitionMode property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithTessellationPartitionMode(tessellationPartitionMode MTLTessellationPartitionMode) *RenderPipelineDescriptor {
 	x.inner.SetTessellationPartitionMode(raw.MTLTessellationPartitionMode(tessellationPartitionMode))
 	return x
 }
 
+// The maximum tessellation factor that the tessellator uses when tessellating patches.
+//
 // WithMaxTessellationFactor sets the maxTessellationFactor property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithMaxTessellationFactor(maxTessellationFactor uint) *RenderPipelineDescriptor {
 	x.inner.SetMaxTessellationFactor(maxTessellationFactor)
 	return x
 }
 
+// A Boolean value that determines whether the pipeline scales the tessellation factor.
+//
 // WithTessellationFactorScaleEnabled sets the tessellationFactorScaleEnabled property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithTessellationFactorScaleEnabled(tessellationFactorScaleEnabled bool) *RenderPipelineDescriptor {
 	x.inner.SetTessellationFactorScaleEnabled(tessellationFactorScaleEnabled)
 	return x
 }
 
+// The format of the tessellation factors in the tessellation factor buffer.
+//
 // WithTessellationFactorFormat sets the tessellationFactorFormat property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithTessellationFactorFormat(tessellationFactorFormat MTLTessellationFactorFormat) *RenderPipelineDescriptor {
 	x.inner.SetTessellationFactorFormat(raw.MTLTessellationFactorFormat(tessellationFactorFormat))
 	return x
 }
 
+// The size of the control point indices in a control point index buffer.
+//
 // WithTessellationControlPointIndexType sets the tessellationControlPointIndexType property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithTessellationControlPointIndexType(tessellationControlPointIndexType MTLTessellationControlPointIndexType) *RenderPipelineDescriptor {
 	x.inner.SetTessellationControlPointIndexType(raw.MTLTessellationControlPointIndexType(tessellationControlPointIndexType))
 	return x
 }
 
+// The step function for determining the tessellation factors for a patch from the tessellation factor buffer.
+//
 // WithTessellationFactorStepFunction sets the tessellationFactorStepFunction property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithTessellationFactorStepFunction(tessellationFactorStepFunction MTLTessellationFactorStepFunction) *RenderPipelineDescriptor {
 	x.inner.SetTessellationFactorStepFunction(raw.MTLTessellationFactorStepFunction(tessellationFactorStepFunction))
 	return x
 }
 
+// The winding order of triangles from the tessellator.
+//
 // WithTessellationOutputWindingOrder sets the tessellationOutputWindingOrder property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithTessellationOutputWindingOrder(tessellationOutputWindingOrder MTLWinding) *RenderPipelineDescriptor {
 	x.inner.SetTessellationOutputWindingOrder(raw.MTLWinding(tessellationOutputWindingOrder))
 	return x
 }
 
+// A Boolean value that determines whether you can encode commands into an indirect command buffer using the render pipeline.
+//
 // WithSupportIndirectCommandBuffers sets the supportIndirectCommandBuffers property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool) *RenderPipelineDescriptor {
 	x.inner.SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers)
 	return x
 }
 
-// @property vertexLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the vertex function. @see MTLLinkedFunctions
+// Functions that you can specify as function arguments for the vertex shader when encoding commands that use the pipeline.
 //
 // WithVertexLinkedFunctions sets the vertexLinkedFunctions property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithVertexLinkedFunctions(vertexLinkedFunctions *LinkedFunctions) *RenderPipelineDescriptor {
@@ -172,7 +216,7 @@ func (x *RenderPipelineDescriptor) WithVertexLinkedFunctions(vertexLinkedFunctio
 	return x
 }
 
-// @property fragmentLinkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the fragment function. @see MTLLinkedFunctions
+// Functions that you can specify as function arguments for the fragment shader when encoding commands that use the pipeline.
 //
 // WithFragmentLinkedFunctions sets the fragmentLinkedFunctions property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithFragmentLinkedFunctions(fragmentLinkedFunctions *LinkedFunctions) *RenderPipelineDescriptor {
@@ -180,7 +224,7 @@ func (x *RenderPipelineDescriptor) WithFragmentLinkedFunctions(fragmentLinkedFun
 	return x
 }
 
-// @property supportAddingVertexBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
+// A Boolean value that indicates whether you can use the pipeline to create new pipelines by adding binary functions to the vertex shader’s callable functions list.
 //
 // WithSupportAddingVertexBinaryFunctions sets the supportAddingVertexBinaryFunctions property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithSupportAddingVertexBinaryFunctions(supportAddingVertexBinaryFunctions bool) *RenderPipelineDescriptor {
@@ -188,7 +232,7 @@ func (x *RenderPipelineDescriptor) WithSupportAddingVertexBinaryFunctions(suppor
 	return x
 }
 
-// @property supportFragmentAddingBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
+// A Boolean value that indicates whether you can use the pipeline to create new pipelines by adding binary functions to the fragment shader’s callable functions list.
 //
 // WithSupportAddingFragmentBinaryFunctions sets the supportAddingFragmentBinaryFunctions property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithSupportAddingFragmentBinaryFunctions(supportAddingFragmentBinaryFunctions bool) *RenderPipelineDescriptor {
@@ -196,7 +240,7 @@ func (x *RenderPipelineDescriptor) WithSupportAddingFragmentBinaryFunctions(supp
 	return x
 }
 
-// @property maxVertexCallStackDepth @abstract The maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
+// The maximum function call depth from the top-most vertex shader function.
 //
 // WithMaxVertexCallStackDepth sets the maxVertexCallStackDepth property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithMaxVertexCallStackDepth(maxVertexCallStackDepth uint) *RenderPipelineDescriptor {
@@ -204,7 +248,7 @@ func (x *RenderPipelineDescriptor) WithMaxVertexCallStackDepth(maxVertexCallStac
 	return x
 }
 
-// @property maxFragmentCallStackDepth @abstract The maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
+// The maximum function call depth from the top-most fragment shader function.
 //
 // WithMaxFragmentCallStackDepth sets the maxFragmentCallStackDepth property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithMaxFragmentCallStackDepth(maxFragmentCallStackDepth uint) *RenderPipelineDescriptor {
@@ -212,7 +256,7 @@ func (x *RenderPipelineDescriptor) WithMaxFragmentCallStackDepth(maxFragmentCall
 	return x
 }
 
-// @property shaderValidation @abstract Toggle that determines whether Metal Shader Validation should be enabled or disabled for the pipeline. @discussion The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
+// A value that enables or disables shader validation for the pipeline.
 //
 // WithShaderValidation sets the shaderValidation property and returns the receiver for chaining.
 func (x *RenderPipelineDescriptor) WithShaderValidation(shaderValidation MTLShaderValidation) *RenderPipelineDescriptor {
@@ -220,7 +264,7 @@ func (x *RenderPipelineDescriptor) WithShaderValidation(shaderValidation MTLShad
 	return x
 }
 
-// @method reset @abstract Restore all pipeline descriptor properties to their default values.
+// Specifies the default rendering pipeline state values for the descriptor.
 //
 // Reset calls the underlying Reset.
 func (x *RenderPipelineDescriptor) Reset() {

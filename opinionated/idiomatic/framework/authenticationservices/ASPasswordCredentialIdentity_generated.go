@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description that uniquely identifies a particular password credential.
+//
 // PasswordCredentialIdentity wraps [raw.ASPasswordCredentialIdentity] with a fluent Go API.
 type PasswordCredentialIdentity struct {
 	inner *raw.ASPasswordCredentialIdentity
@@ -31,7 +33,7 @@ func PasswordCredentialIdentityFromID(id objc.ID) *PasswordCredentialIdentity {
 	return &PasswordCredentialIdentity{inner: raw.ASPasswordCredentialIdentityFromID(id)}
 }
 
-// @abstract Initializes an instance of ASPasswordCredentialIdentity. @param serviceIdentifier the service identifier for which this credential identity is valid. @param user the user that can authenticate into the service indicated by the serviceIdentifier. @param recordIdentifier an optional string to uniquely identify this record in your local database.
+// Initializes a password credential identity.
 //
 // NewPasswordCredentialIdentityWithServiceIdentifierUserRecordIdentifier creates a new [PasswordCredentialIdentity].
 func NewPasswordCredentialIdentityWithServiceIdentifierUserRecordIdentifier(serviceIdentifier *raw.ASCredentialServiceIdentifier, user string, recordIdentifier string) *PasswordCredentialIdentity {
@@ -40,7 +42,7 @@ func NewPasswordCredentialIdentityWithServiceIdentifierUserRecordIdentifier(serv
 	return &PasswordCredentialIdentity{inner: raw.ASPasswordCredentialIdentityFromID(_id)}
 }
 
-// @abstract Get or set the rank of the credential identity object. @discussion The system may utilize the rank to decide which credential identity precedes the other if two identities have the same service identifier. A credential identity with a larger rank value precedes one with a smaller value if both credential identities have the same service identifier. The default value of this property is 0.
+// An indicator that enables you to prioritze credential identities relative to each other.
 //
 // WithRank sets the rank property and returns the receiver for chaining.
 func (x *PasswordCredentialIdentity) WithRank(rank int) *PasswordCredentialIdentity {

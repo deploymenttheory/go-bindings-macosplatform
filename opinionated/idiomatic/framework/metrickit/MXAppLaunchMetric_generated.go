@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing metrics about app launch time.
+//
 // AppLaunchMetric wraps [raw.MXAppLaunchMetric] with a fluent Go API.
 type AppLaunchMetric struct {
 	inner *raw.MXAppLaunchMetric

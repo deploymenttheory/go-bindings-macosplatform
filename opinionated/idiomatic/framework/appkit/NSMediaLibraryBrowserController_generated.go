@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that configures and displays a Media Library Browser panel.
+//
 // MediaLibraryBrowserController wraps [raw.NSMediaLibraryBrowserController] with a fluent Go API.
 type MediaLibraryBrowserController struct {
 	inner *raw.NSMediaLibraryBrowserController
@@ -36,24 +38,32 @@ func NewMediaLibraryBrowserController() *MediaLibraryBrowserController {
 	return &MediaLibraryBrowserController{inner: raw.NSMediaLibraryBrowserControllerFromID(_id)}
 }
 
+// A Boolean value that determines whether the Media Library Browser panel is visible.
+//
 // WithVisible sets the visible property and returns the receiver for chaining.
 func (x *MediaLibraryBrowserController) WithVisible(visible bool) *MediaLibraryBrowserController {
 	x.inner.SetVisible(visible)
 	return x
 }
 
+// The frame, in global coordinates, used to display the Media Library Browser panel.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *MediaLibraryBrowserController) WithFrame(frame corefoundation.CGRect) *MediaLibraryBrowserController {
 	x.inner.SetFrame(frame)
 	return x
 }
 
+// The media library that is in use.
+//
 // WithMediaLibraries sets the mediaLibraries property and returns the receiver for chaining.
 func (x *MediaLibraryBrowserController) WithMediaLibraries(mediaLibraries NSMediaLibrary) *MediaLibraryBrowserController {
 	x.inner.SetMediaLibraries(raw.NSMediaLibrary(mediaLibraries))
 	return x
 }
 
+// Toggles the visibility of the Media Library Browser.
+//
 // TogglePanel calls the underlying TogglePanel.
 func (x *MediaLibraryBrowserController) TogglePanel(sender objc.ID) {
 	x.inner.TogglePanel(sender)

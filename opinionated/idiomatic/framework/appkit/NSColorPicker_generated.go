@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract superclass that implements the default color picking protocol.
+//
 // ColorPicker wraps [raw.NSColorPicker] with a fluent Go API.
 type ColorPicker struct {
 	inner *raw.NSColorPicker
@@ -31,6 +33,8 @@ func ColorPickerFromID(id objc.ID) *ColorPicker {
 	return &ColorPicker{inner: raw.NSColorPickerFromID(id)}
 }
 
+// Initializes the color picker with the specified color panel and color picker mode mask.
+//
 // NewColorPickerWithPickerMaskColorPanel creates a new [ColorPicker].
 func NewColorPickerWithPickerMaskColorPanel(mask uint, owningColorPanel *raw.NSColorPanel) *ColorPicker {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSColorPicker")), objc.RegisterName("alloc"))
@@ -38,26 +42,36 @@ func NewColorPickerWithPickerMaskColorPanel(mask uint, owningColorPanel *raw.NSC
 	return &ColorPicker{inner: raw.NSColorPickerFromID(_id)}
 }
 
+// Sets the image used for the specified button cell.
+//
 // InsertNewButtonImageIn calls the underlying InsertNewButtonImageIn.
 func (x *ColorPicker) InsertNewButtonImageIn(newButtonImage *raw.NSImage, buttonCell *raw.NSButtonCell) {
 	x.inner.InsertNewButtonImageIn(newButtonImage, buttonCell)
 }
 
+// Overriden to respond to a size change.
+//
 // ViewSizeChanged calls the underlying ViewSizeChanged.
 func (x *ColorPicker) ViewSizeChanged(sender objc.ID) {
 	x.inner.ViewSizeChanged(sender)
 }
 
+// Overriden to attach a color list to a color picker.
+//
 // AttachColorList calls the underlying AttachColorList.
 func (x *ColorPicker) AttachColorList(colorList *raw.NSColorList) {
 	x.inner.AttachColorList(colorList)
 }
 
+// Overriden to detach a color list from a color picker.
+//
 // DetachColorList calls the underlying DetachColorList.
 func (x *ColorPicker) DetachColorList(colorList *raw.NSColorList) {
 	x.inner.DetachColorList(colorList)
 }
 
+// Overriden to set the color picker’s mode.
+//
 // SetMode calls the underlying SetMode.
 func (x *ColorPicker) SetMode(mode NSColorPanelMode) {
 	x.inner.SetMode(raw.NSColorPanelMode(mode))

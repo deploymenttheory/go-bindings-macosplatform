@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a physical racing wheel controller connected to a device.
+//
 // RacingWheel wraps [raw.GCRacingWheel] with a fluent Go API.
 type RacingWheel struct {
 	inner *raw.GCRacingWheel
@@ -35,7 +37,7 @@ func NewRacingWheel() *RacingWheel {
 	return &RacingWheel{inner: raw.GCRacingWheelFromID(_id)}
 }
 
-// A GCRacingWheel must be acquired before your application can begin receiving events from it.  Prior to acquisition, your application may only query the properties of the racing wheel.  Acquisition is exclusive and may fail.
+// Starts receiving events from the racing wheel.
 //
 // AcquireDevice returns any validation error.
 func (x *RacingWheel) AcquireDevice() error {
@@ -43,14 +45,14 @@ func (x *RacingWheel) AcquireDevice() error {
 	return err
 }
 
-// Releases a previous acquisition of the racing wheel.
+// Stops receiving events from the racing wheel.
 //
 // RelinquishDevice calls the underlying RelinquishDevice.
 func (x *RacingWheel) RelinquishDevice() {
 	x.inner.RelinquishDevice()
 }
 
-// Polls the state vector of the racing wheel and saves it to a new instance of GCRacingWheel. If your application is heavily multithreaded this may also be useful to guarantee atomicity of input handling as a snapshot will not change based on user input once it is taken. @see snapshot @return A new racing wheel with the duplicated state vector of the receiver.
+// Returns a snapshot of the racing wheel with its current element values.
 //
 // Capture calls the underlying Capture.
 func (x *RacingWheel) Capture() *RacingWheel {

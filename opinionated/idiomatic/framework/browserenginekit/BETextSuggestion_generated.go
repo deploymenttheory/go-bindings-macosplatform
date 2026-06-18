@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A text suggestion to insert into a document.
+//
 // TextSuggestion wraps [raw.BETextSuggestion] with a fluent Go API.
 type TextSuggestion struct {
 	inner *raw.BETextSuggestion

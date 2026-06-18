@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An event that represents a live streaming content key resource request.
+//
 // MetricContentKeyRequestEvent wraps [raw.AVMetricContentKeyRequestEvent] with a fluent Go API.
 type MetricContentKeyRequestEvent struct {
 	inner *raw.AVMetricContentKeyRequestEvent

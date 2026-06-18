@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An abstract base class that represents a machine-readable code’s attributes.
+//
 // BarcodeDescriptor wraps [raw.CIBarcodeDescriptor] with a fluent Go API.
 type BarcodeDescriptor struct {
 	inner *raw.CIBarcodeDescriptor

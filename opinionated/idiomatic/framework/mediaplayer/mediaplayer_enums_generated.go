@@ -8,12 +8,16 @@ import (
 	"fmt"
 )
 
+// The states that determine when language option changes take effect.
 type MPChangeLanguageOptionSetting int64
 
 const (
-	MPChangeLanguageOptionSettingNone               MPChangeLanguageOptionSetting = 0
+	// No language option change is to be made.
+	MPChangeLanguageOptionSettingNone MPChangeLanguageOptionSetting = 0
+	// The language option change is applied to the now playing item only.
 	MPChangeLanguageOptionSettingNowPlayingItemOnly MPChangeLanguageOptionSetting = 1
-	MPChangeLanguageOptionSettingPermanent          MPChangeLanguageOptionSetting = 2
+	// The language option change is applied to all future playback items.
+	MPChangeLanguageOptionSettingPermanent MPChangeLanguageOptionSetting = 2
 )
 
 func (e MPChangeLanguageOptionSetting) String() string {
@@ -29,10 +33,13 @@ func (e MPChangeLanguageOptionSetting) String() string {
 	}
 }
 
+// The language option type to use for the Now Playing item.
 type MPNowPlayingInfoLanguageOptionType uint64
 
 const (
+	// Indicates an audible language option is used.
 	MPNowPlayingInfoLanguageOptionTypeAudible MPNowPlayingInfoLanguageOptionType = 0
+	// Indicates a written language option is used.
 	MPNowPlayingInfoLanguageOptionTypeLegible MPNowPlayingInfoLanguageOptionType = 1
 )
 
@@ -47,13 +54,19 @@ func (e MPNowPlayingInfoLanguageOptionType) String() string {
 	}
 }
 
+// The playback state of the app.
 type MPNowPlayingPlaybackState uint64
 
 const (
-	MPNowPlayingPlaybackStateUnknown     MPNowPlayingPlaybackState = 0
-	MPNowPlayingPlaybackStatePlaying     MPNowPlayingPlaybackState = 1
-	MPNowPlayingPlaybackStatePaused      MPNowPlayingPlaybackState = 2
-	MPNowPlayingPlaybackStateStopped     MPNowPlayingPlaybackState = 3
+	// The current state of the app is unknown.
+	MPNowPlayingPlaybackStateUnknown MPNowPlayingPlaybackState = 0
+	// The app is currently playing a media item.
+	MPNowPlayingPlaybackStatePlaying MPNowPlayingPlaybackState = 1
+	// The app is currently paused.
+	MPNowPlayingPlaybackStatePaused MPNowPlayingPlaybackState = 2
+	// The app has stopped playing.
+	MPNowPlayingPlaybackStateStopped MPNowPlayingPlaybackState = 3
+	// The app has been interrupted during playback.
 	MPNowPlayingPlaybackStateInterrupted MPNowPlayingPlaybackState = 4
 )
 
@@ -74,18 +87,19 @@ func (e MPNowPlayingPlaybackState) String() string {
 	}
 }
 
+// Constants indicating the status of a command.
 type MPRemoteCommandHandlerStatus int64
 
 const (
-	// There was no error executing the requested command.
+	// The requested command executed successfully.
 	MPRemoteCommandHandlerStatusSuccess MPRemoteCommandHandlerStatus = 0
-	// The command could not be executed because the requested content does not exist in the current application state.
+	// The requested command couldn’t execute because its required content isn’t available.
 	MPRemoteCommandHandlerStatusNoSuchContent MPRemoteCommandHandlerStatus = 100
-	// The command could not be executed because there is no now playing item available that is required for this command. As an example, an application would return this error code if an "enable language option" command is received, but nothing is currently playing.
+	// The requested command couldn’t execute because no Now Playing item is available.
 	MPRemoteCommandHandlerStatusNoActionableNowPlayingItem MPRemoteCommandHandlerStatus = 110
-	// The command could not be executed because a device required is not available. For instance, if headphones are required, or if a watch app realizes that it needs the companion to fulfull a request.
+	// The requested command couldn’t execute because a required device isn’t available.
 	MPRemoteCommandHandlerStatusDeviceNotFound MPRemoteCommandHandlerStatus = 120
-	// The command could not be executed for another reason.
+	// The requested command failed to execute.
 	MPRemoteCommandHandlerStatusCommandFailed MPRemoteCommandHandlerStatus = 200
 )
 
@@ -106,11 +120,15 @@ func (e MPRemoteCommandHandlerStatus) String() string {
 	}
 }
 
+// Indicates which items to play repeatedly.
 type MPRepeatType int64
 
 const (
+	// Nothing is repeated during playback.
 	MPRepeatTypeOff MPRepeatType = 0
+	// A single item is repeated indefinitely.
 	MPRepeatTypeOne MPRepeatType = 1
+	// The current container or playlist is repeated indefinitely.
 	MPRepeatTypeAll MPRepeatType = 2
 )
 
@@ -127,11 +145,14 @@ func (e MPRepeatType) String() string {
 	}
 }
 
+// Defines the beginning and ending of seek events.
 type MPSeekCommandEventType uint64
 
 const (
+	// Indicates the external media player began seeking.
 	MPSeekCommandEventTypeBeginSeeking MPSeekCommandEventType = 0
-	MPSeekCommandEventTypeEndSeeking   MPSeekCommandEventType = 1
+	// Indicates the external media player stopped seeking.
+	MPSeekCommandEventTypeEndSeeking MPSeekCommandEventType = 1
 )
 
 func (e MPSeekCommandEventType) String() string {
@@ -145,11 +166,15 @@ func (e MPSeekCommandEventType) String() string {
 	}
 }
 
+// Indicates which item types to shuffle.
 type MPShuffleType int64
 
 const (
-	MPShuffleTypeOff         MPShuffleType = 0
-	MPShuffleTypeItems       MPShuffleType = 1
+	// Nothing is shuffled during playback.
+	MPShuffleTypeOff MPShuffleType = 0
+	// Individual items are shuffled during playback.
+	MPShuffleTypeItems MPShuffleType = 1
+	// Collections of items are shuffled during playback.
 	MPShuffleTypeCollections MPShuffleType = 2
 )
 

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that defines the parameters for a 2D-depthwise convolution operation.
+//
 // GraphDepthwiseConvolution2DOpDescriptor wraps [raw.MPSGraphDepthwiseConvolution2DOpDescriptor] with a fluent Go API.
 type GraphDepthwiseConvolution2DOpDescriptor struct {
 	inner *raw.MPSGraphDepthwiseConvolution2DOpDescriptor
@@ -37,7 +39,7 @@ func NewGraphDepthwiseConvolution2DOpDescriptor() *GraphDepthwiseConvolution2DOp
 	return &GraphDepthwiseConvolution2DOpDescriptor{inner: raw.MPSGraphDepthwiseConvolution2DOpDescriptorFromID(_id)}
 }
 
-// The stride for the x dimension. Default value: 1.
+// The stride for the x dimension.
 //
 // WithStrideInX sets the strideInX property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithStrideInX(strideInX uint) *GraphDepthwiseConvolution2DOpDescriptor {
@@ -45,7 +47,7 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) WithStrideInX(strideInX uint) 
 	return x
 }
 
-// The stride for the y dimension. Default value: 1.
+// The stride for the y dimension.
 //
 // WithStrideInY sets the strideInY property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithStrideInY(strideInY uint) *GraphDepthwiseConvolution2DOpDescriptor {
@@ -53,7 +55,7 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) WithStrideInY(strideInY uint) 
 	return x
 }
 
-// The dilation rate for the x dimension. Default value: 1.
+// The dilation rate for the x dimension.
 //
 // WithDilationRateInX sets the dilationRateInX property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithDilationRateInX(dilationRateInX uint) *GraphDepthwiseConvolution2DOpDescriptor {
@@ -61,7 +63,7 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) WithDilationRateInX(dilationRa
 	return x
 }
 
-// The dilation rate for the y dimension. Default value: 1.
+// The dilation rate for the y dimension.
 //
 // WithDilationRateInY sets the dilationRateInY property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithDilationRateInY(dilationRateInY uint) *GraphDepthwiseConvolution2DOpDescriptor {
@@ -69,7 +71,7 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) WithDilationRateInY(dilationRa
 	return x
 }
 
-// The explicit padding value for the x dimension the operation adds before the data. Default value: 0.
+// The explicit padding value for the x dimension the operation adds before the data.
 //
 // WithPaddingLeft sets the paddingLeft property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingLeft(paddingLeft uint) *GraphDepthwiseConvolution2DOpDescriptor {
@@ -77,7 +79,7 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingLeft(paddingLeft ui
 	return x
 }
 
-// The explicit padding value for the x dimension operation adds after the data. Default value: 0.
+// The explicit padding value for the x dimension operation adds after the data.
 //
 // WithPaddingRight sets the paddingRight property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingRight(paddingRight uint) *GraphDepthwiseConvolution2DOpDescriptor {
@@ -85,7 +87,7 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingRight(paddingRight 
 	return x
 }
 
-// The explicit padding value for the y dimension operation adds before the data. Default value: 0.
+// The explicit padding value for the y dimension operation adds before the data.
 //
 // WithPaddingTop sets the paddingTop property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingTop(paddingTop uint) *GraphDepthwiseConvolution2DOpDescriptor {
@@ -93,7 +95,7 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingTop(paddingTop uint
 	return x
 }
 
-// The explicit padding value for the y dimension operation adds after the data. Default value: 0.
+// The explicit padding value for the y dimension operation adds after the data.
 //
 // WithPaddingBottom sets the paddingBottom property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingBottom(paddingBottom uint) *GraphDepthwiseConvolution2DOpDescriptor {
@@ -101,7 +103,7 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingBottom(paddingBotto
 	return x
 }
 
-// The padding style for the operation. Default value is `MPSGraphPaddingStyleExplicit`.
+// The padding style for the operation.
 //
 // WithPaddingStyle sets the paddingStyle property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphDepthwiseConvolution2DOpDescriptor {
@@ -109,7 +111,7 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) WithPaddingStyle(paddingStyle 
 	return x
 }
 
-// The data layout of the input data in the forward pass. See: “MPSGraphTensorNamedDataLayout“.
+// The data layout of the input data in the forward pass.
 //
 // WithDataLayout sets the dataLayout property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithDataLayout(dataLayout MPSGraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor {
@@ -117,7 +119,7 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) WithDataLayout(dataLayout MPSG
 	return x
 }
 
-// The data layout of the weights. NOTE: 'O' index is channel multiplier index. See: “MPSGraphTensorNamedDataLayout“.
+// The data layout of the weights.
 //
 // WithWeightsLayout sets the weightsLayout property and returns the receiver for chaining.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) WithWeightsLayout(weightsLayout MPSGraphTensorNamedDataLayout) *GraphDepthwiseConvolution2DOpDescriptor {
@@ -125,7 +127,7 @@ func (x *GraphDepthwiseConvolution2DOpDescriptor) WithWeightsLayout(weightsLayou
 	return x
 }
 
-// Sets the explicit padding values. Note: this method also sets `paddingStyle` to `MPSGraphPaddingStyleExplicit` (see “MPSGraphPaddingStyle“). - Parameters: - paddingLeft: See `paddingLeft` property. - paddingRight: See `paddingRight` property. - paddingTop: See `paddingTop` property. - paddingBottom: See `paddingBottom` property.
+// Sets the explicit padding values.
 //
 // SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom calls the underlying SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom.
 func (x *GraphDepthwiseConvolution2DOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint) {

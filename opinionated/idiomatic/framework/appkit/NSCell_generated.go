@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A mechanism for displaying text or images in a view object without the overhead of a full NSView subclass.
+//
 // Cell wraps [raw.NSCell] with a fluent Go API.
 type Cell struct {
 	inner *raw.NSCell
@@ -38,6 +40,8 @@ func NewCell() *Cell {
 	return &Cell{inner: raw.NSCellFromID(_id)}
 }
 
+// Returns an NSCell object initialized with the specified string and set to have the cell’s default menu.
+//
 // NewCellTextCell creates a new [Cell].
 func NewCellTextCell(string_ string) *Cell {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCell")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewCellTextCell(string_ string) *Cell {
 	return &Cell{inner: raw.NSCellFromID(_id)}
 }
 
+// Returns an NSCell object initialized with the specified image and set to have the cell’s default menu.
+//
 // NewCellImageCell creates a new [Cell].
 func NewCellImageCell(image *raw.NSImage) *Cell {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCell")), objc.RegisterName("alloc"))
@@ -59,346 +65,466 @@ func NewCellWithCoder(coder *foundation.NSCoder) *Cell {
 	return &Cell{inner: raw.NSCellFromID(_id)}
 }
 
+// The view associated with the cell.
+//
 // WithControlView sets the controlView property and returns the receiver for chaining.
 func (x *Cell) WithControlView(controlView ViewProvider) *Cell {
 	x.inner.SetControlView(controlView.asView())
 	return x
 }
 
+// The type of the cell.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *Cell) WithType(type_ NSCellType) *Cell {
 	x.inner.SetType(raw.NSCellType(type_))
 	return x
 }
 
+// The cell’s current state.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *Cell) WithState(state int) *Cell {
 	x.inner.SetState(state)
 	return x
 }
 
+// The object that receives the cell’s action messages.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *Cell) WithTarget(target objc.ID) *Cell {
 	x.inner.SetTarget(target)
 	return x
 }
 
+// The action performed by the cell.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *Cell) WithAction(action objc.SEL) *Cell {
 	x.inner.SetAction(action)
 	return x
 }
 
+// A tag for identifying the cell.
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *Cell) WithTag(tag int) *Cell {
 	x.inner.SetTag(tag)
 	return x
 }
 
+// The cell’s title text.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *Cell) WithTitle(title string) *Cell {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// A Boolean value indicating whether the cell is currently enabled.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *Cell) WithEnabled(enabled bool) *Cell {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *Cell) WithContinuous(continuous bool) *Cell {
 	x.inner.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value indicating whether the cell is editable.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *Cell) WithEditable(editable bool) *Cell {
 	x.inner.SetEditable(editable)
 	return x
 }
 
+// A Boolean value indicating whether the cell’s text can be selected.
+//
 // WithSelectable sets the selectable property and returns the receiver for chaining.
 func (x *Cell) WithSelectable(selectable bool) *Cell {
 	x.inner.SetSelectable(selectable)
 	return x
 }
 
+// A Boolean value indicating whether the cell draws itself outlined with a plain border.
+//
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *Cell) WithBordered(bordered bool) *Cell {
 	x.inner.SetBordered(bordered)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a bezeled border.
+//
 // WithBezeled sets the bezeled property and returns the receiver for chaining.
 func (x *Cell) WithBezeled(bezeled bool) *Cell {
 	x.inner.SetBezeled(bezeled)
 	return x
 }
 
+// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
+//
 // WithScrollable sets the scrollable property and returns the receiver for chaining.
 func (x *Cell) WithScrollable(scrollable bool) *Cell {
 	x.inner.SetScrollable(scrollable)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a highlighted appearance.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *Cell) WithHighlighted(highlighted bool) *Cell {
 	x.inner.SetHighlighted(highlighted)
 	return x
 }
 
+// The alignment of the cell’s text.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *Cell) WithAlignment(alignment NSTextAlignment) *Cell {
 	x.inner.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+//
 // WithWraps sets the wraps property and returns the receiver for chaining.
 func (x *Cell) WithWraps(wraps bool) *Cell {
 	x.inner.SetWraps(wraps)
 	return x
 }
 
+// The font that the cell uses to display text.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *Cell) WithFont(font *Font) *Cell {
 	x.inner.SetFont(font.Unwrap())
 	return x
 }
 
+// The cell’s formatter object.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *Cell) WithFormatter(formatter *foundation.NSFormatter) *Cell {
 	x.inner.SetFormatter(formatter)
 	return x
 }
 
+// The cell’s value as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *Cell) WithObjectValue(objectValue objc.ID) *Cell {
 	x.inner.SetObjectValue(objectValue)
 	return x
 }
 
+// The cell’s value as a string.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *Cell) WithStringValue(stringValue string) *Cell {
 	x.inner.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The cell’s value as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *Cell) WithIntValue(intValue int) *Cell {
 	x.inner.SetIntValue(intValue)
 	return x
 }
 
+// The cell’s value as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *Cell) WithFloatValue(floatValue float32) *Cell {
 	x.inner.SetFloatValue(floatValue)
 	return x
 }
 
+// The cell’s value as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *Cell) WithDoubleValue(doubleValue float64) *Cell {
 	x.inner.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The cell’s value as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *Cell) WithIntegerValue(integerValue int) *Cell {
 	x.inner.SetIntegerValue(integerValue)
 	return x
 }
 
+// The image displayed by the cell, if any.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *Cell) WithImage(image *Image) *Cell {
 	x.inner.SetImage(image.Unwrap())
 	return x
 }
 
+// The size of the cell.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *Cell) WithControlSize(controlSize NSControlSize) *Cell {
 	x.inner.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The object represented by the cell.
+//
 // WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
 func (x *Cell) WithRepresentedObject(representedObject objc.ID) *Cell {
 	x.inner.SetRepresentedObject(representedObject)
 	return x
 }
 
+// The cell’s contextual menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *Cell) WithMenu(menu *Menu) *Cell {
 	x.inner.SetMenu(menu.Unwrap())
 	return x
 }
 
+// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+//
 // WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
 func (x *Cell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *Cell {
 	x.inner.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *Cell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Cell {
 	x.inner.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// The line break mode to use when drawing text in the cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *Cell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Cell {
 	x.inner.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// A Boolean value indicating whether the cell assumes responsibility for undo operations.
+//
 // WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
 func (x *Cell) WithAllowsUndo(allowsUndo bool) *Cell {
 	x.inner.SetAllowsUndo(allowsUndo)
 	return x
 }
 
+// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+//
 // WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
 func (x *Cell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *Cell {
 	x.inner.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
 	return x
 }
 
+// The layout direction of the user interface.
+//
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
 func (x *Cell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Cell {
 	x.inner.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
+// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *Cell) WithUsesSingleLineMode(usesSingleLineMode bool) *Cell {
 	x.inner.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// A Boolean value indicating whether the cell refuses the first responder status.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *Cell) WithRefusesFirstResponder(refusesFirstResponder bool) *Cell {
 	x.inner.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+//
 // WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
 func (x *Cell) WithShowsFirstResponder(showsFirstResponder bool) *Cell {
 	x.inner.SetShowsFirstResponder(showsFirstResponder)
 	return x
 }
 
+// The type of focus ring to use with the associated view.
+//
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
 func (x *Cell) WithFocusRingType(focusRingType NSFocusRingType) *Cell {
 	x.inner.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
+// The cell’s value as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *Cell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Cell {
 	x.inner.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+//
 // WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
 func (x *Cell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *Cell {
 	x.inner.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports the importation of images into its text.
+//
 // WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
 func (x *Cell) WithImportsGraphics(importsGraphics bool) *Cell {
 	x.inner.SetImportsGraphics(importsGraphics)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports three states instead of two.
+//
 // WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
 func (x *Cell) WithAllowsMixedState(allowsMixedState bool) *Cell {
 	x.inner.SetAllowsMixedState(allowsMixedState)
 	return x
 }
 
+// The cell’s background style.
+//
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
 func (x *Cell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *Cell {
 	x.inner.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
+// The cell’s control tint.
+//
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
 func (x *Cell) WithControlTint(controlTint NSControlTint) *Cell {
 	x.inner.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
+// Sets the conditions on which the receiver sends action messages to its target.
+//
 // SendActionOn calls the underlying SendActionOn.
 func (x *Cell) SendActionOn(mask NSEventMask) int {
 	return x.inner.SendActionOn(raw.NSEventMask(mask))
 }
 
+// Compares the string values of the receiver another cell, disregarding case.
+//
 // Compare calls the underlying Compare.
 func (x *Cell) Compare(otherCell objc.ID) foundation.NSComparisonResult {
 	return x.inner.Compare(otherCell)
 }
 
+// Sets the value of the receiver’s cell to an integer value obtained from the specified object.
+//
 // TakeIntValueFrom calls the underlying TakeIntValueFrom.
 func (x *Cell) TakeIntValueFrom(sender objc.ID) {
 	x.inner.TakeIntValueFrom(sender)
 }
 
+// Sets the value of the receiver’s cell to a single-precision floating-point value obtained from the specified object.
+//
 // TakeFloatValueFrom calls the underlying TakeFloatValueFrom.
 func (x *Cell) TakeFloatValueFrom(sender objc.ID) {
 	x.inner.TakeFloatValueFrom(sender)
 }
 
+// Sets the value of the receiver’s cell to a double-precision floating-point value obtained from the specified object.
+//
 // TakeDoubleValueFrom calls the underlying TakeDoubleValueFrom.
 func (x *Cell) TakeDoubleValueFrom(sender objc.ID) {
 	x.inner.TakeDoubleValueFrom(sender)
 }
 
+// Sets the value of the receiver’s cell to the string value obtained from the specified object.
+//
 // TakeStringValueFrom calls the underlying TakeStringValueFrom.
 func (x *Cell) TakeStringValueFrom(sender objc.ID) {
 	x.inner.TakeStringValueFrom(sender)
 }
 
+// Sets the value of the receiver’s cell to the object value obtained from the specified object.
+//
 // TakeObjectValueFrom calls the underlying TakeObjectValueFrom.
 func (x *Cell) TakeObjectValueFrom(sender objc.ID) {
 	x.inner.TakeObjectValueFrom(sender)
 }
 
+// Sets the value of the receiver’s cell to an integer value obtained from the specified object.
+//
 // TakeIntegerValueFrom calls the underlying TakeIntegerValueFrom.
 func (x *Cell) TakeIntegerValueFrom(sender objc.ID) {
 	x.inner.TakeIntegerValueFrom(sender)
 }
 
+// Returns the value for the specified cell attribute.
+//
 // CellAttribute calls the underlying CellAttribute.
 func (x *Cell) CellAttribute(parameter NSCellAttribute) int {
 	return x.inner.CellAttribute(raw.NSCellAttribute(parameter))
 }
 
+// Sets the value for the specified cell attribute.
+//
 // SetCellAttributeTo calls the underlying SetCellAttributeTo.
 func (x *Cell) SetCellAttributeTo(parameter NSCellAttribute, value int) {
 	x.inner.SetCellAttributeTo(raw.NSCellAttribute(parameter), value)
 }
 
+// Returns the rectangle in which the receiver draws its image.
+//
 // ImageRectForBounds calls the underlying ImageRectForBounds.
 func (x *Cell) ImageRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.ImageRectForBounds(rect)
 }
 
+// Returns the rectangle in which the receiver draws its title text.
+//
 // TitleRectForBounds calls the underlying TitleRectForBounds.
 func (x *Cell) TitleRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.TitleRectForBounds(rect)
 }
 
+// Returns the rectangle within which the receiver draws itself
+//
 // DrawingRectForBounds calls the underlying DrawingRectForBounds.
 func (x *Cell) DrawingRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
 	return x.inner.DrawingRectForBounds(rect)
 }
 
+// Returns the minimum size needed to display the receiver, constraining it to the specified rectangle.
+//
 // CellSizeForBounds calls the underlying CellSizeForBounds.
 func (x *Cell) CellSizeForBounds(rect corefoundation.CGRect) corefoundation.CGSize {
 	return x.inner.CellSizeForBounds(rect)
 }
 
+// Returns the color the receiver uses when drawing the selection highlight.
+//
 // HighlightColorWithFrameInView calls the underlying HighlightColorWithFrameInView.
 func (x *Cell) HighlightColorWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) *Color {
 	_r := x.inner.HighlightColorWithFrameInView(cellFrame, controlView)
@@ -408,11 +534,15 @@ func (x *Cell) HighlightColorWithFrameInView(cellFrame corefoundation.CGRect, co
 	return &Color{inner: _r}
 }
 
+// Recalculates the cell geometry.
+//
 // CalcDrawInfo calls the underlying CalcDrawInfo.
 func (x *Cell) CalcDrawInfo(rect corefoundation.CGRect) {
 	x.inner.CalcDrawInfo(rect)
 }
 
+// Configures the textual and background attributes of the receiver’s field editor.
+//
 // SetUpFieldEditorAttributes calls the underlying SetUpFieldEditorAttributes.
 func (x *Cell) SetUpFieldEditorAttributes(textObj *raw.NSText) *Text {
 	_r := x.inner.SetUpFieldEditorAttributes(textObj)
@@ -422,66 +552,92 @@ func (x *Cell) SetUpFieldEditorAttributes(textObj *raw.NSText) *Text {
 	return &Text{inner: _r}
 }
 
+// Draws the interior portion of the receiver, which includes the image or text portion but does not include the border.
+//
 // DrawInteriorWithFrameInView calls the underlying DrawInteriorWithFrameInView.
 func (x *Cell) DrawInteriorWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) {
 	x.inner.DrawInteriorWithFrameInView(cellFrame, controlView)
 }
 
+// Draws the receiver’s border and then draws the interior of the cell.
+//
 // DrawWithFrameInView calls the underlying DrawWithFrameInView.
 func (x *Cell) DrawWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) {
 	x.inner.DrawWithFrameInView(cellFrame, controlView)
 }
 
+// Redraws the receiver with the specified highlight setting.
+//
 // HighlightWithFrameInView calls the underlying HighlightWithFrameInView.
 func (x *Cell) HighlightWithFrameInView(flag bool, cellFrame corefoundation.CGRect, controlView *raw.NSView) {
 	x.inner.HighlightWithFrameInView(flag, cellFrame, controlView)
 }
 
+// Returns the initial delay and repeat values for continuous sending of action messages to target objects.
+//
 // GetPeriodicDelayInterval calls the underlying GetPeriodicDelayInterval.
 func (x *Cell) GetPeriodicDelayInterval(delay *float32, interval *float32) {
 	x.inner.GetPeriodicDelayInterval(delay, interval)
 }
 
+// Begins tracking mouse events within the receiver.
+//
 // StartTrackingAtInView calls the underlying StartTrackingAtInView.
 func (x *Cell) StartTrackingAtInView(startPoint corefoundation.CGPoint, controlView *raw.NSView) bool {
 	return x.inner.StartTrackingAtInView(startPoint, controlView)
 }
 
+// Returns a Boolean value that indicates whether mouse tracking should continue in the receiving cell.
+//
 // ContinueTrackingAtInView calls the underlying ContinueTrackingAtInView.
 func (x *Cell) ContinueTrackingAtInView(lastPoint corefoundation.CGPoint, currentPoint corefoundation.CGPoint, controlView *raw.NSView) bool {
 	return x.inner.ContinueTrackingAtInView(lastPoint, currentPoint, controlView)
 }
 
+// Stops tracking mouse events within the receiver.
+//
 // StopTrackingAtInViewMouseIsUp calls the underlying StopTrackingAtInViewMouseIsUp.
 func (x *Cell) StopTrackingAtInViewMouseIsUp(lastPoint corefoundation.CGPoint, stopPoint corefoundation.CGPoint, controlView *raw.NSView, flag bool) {
 	x.inner.StopTrackingAtInViewMouseIsUp(lastPoint, stopPoint, controlView, flag)
 }
 
+// Initiates the mouse tracking behavior in a cell.
+//
 // TrackMouseInRectOfViewUntilMouseUp calls the underlying TrackMouseInRectOfViewUntilMouseUp.
 func (x *Cell) TrackMouseInRectOfViewUntilMouseUp(event *raw.NSEvent, cellFrame corefoundation.CGRect, controlView *raw.NSView, flag bool) bool {
 	return x.inner.TrackMouseInRectOfViewUntilMouseUp(event, cellFrame, controlView, flag)
 }
 
+// Begins editing of the receiver’s text using the specified field editor.
+//
 // EditWithFrameInViewEditorDelegateEvent calls the underlying EditWithFrameInViewEditorDelegateEvent.
 func (x *Cell) EditWithFrameInViewEditorDelegateEvent(rect corefoundation.CGRect, controlView *raw.NSView, textObj *raw.NSText, delegate objc.ID, event *raw.NSEvent) {
 	x.inner.EditWithFrameInViewEditorDelegateEvent(rect, controlView, textObj, delegate, event)
 }
 
+// Selects the specified text range in the cell’s field editor.
+//
 // SelectWithFrameInViewEditorDelegateStartLength calls the underlying SelectWithFrameInViewEditorDelegateStartLength.
 func (x *Cell) SelectWithFrameInViewEditorDelegateStartLength(rect corefoundation.CGRect, controlView *raw.NSView, textObj *raw.NSText, delegate objc.ID, selStart int, selLength int) {
 	x.inner.SelectWithFrameInViewEditorDelegateStartLength(rect, controlView, textObj, delegate, selStart, selLength)
 }
 
+// Ends the editing of text in the receiver using the specified field editor.
+//
 // EndEditing calls the underlying EndEditing.
 func (x *Cell) EndEditing(textObj *raw.NSText) {
 	x.inner.EndEditing(textObj)
 }
 
+// Sets the receiver to show the I-beam cursor while it tracks the mouse.
+//
 // ResetCursorRectInView calls the underlying ResetCursorRectInView.
 func (x *Cell) ResetCursorRectInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) {
 	x.inner.ResetCursorRectInView(cellFrame, controlView)
 }
 
+// Returns the menu associated with the cell and related to the specified event and frame.
+//
 // MenuForEventInRectOfView calls the underlying MenuForEventInRectOfView.
 func (x *Cell) MenuForEventInRectOfView(event *raw.NSEvent, cellFrame corefoundation.CGRect, view *raw.NSView) *Menu {
 	_r := x.inner.MenuForEventInRectOfView(event, cellFrame, view)
@@ -491,6 +647,8 @@ func (x *Cell) MenuForEventInRectOfView(event *raw.NSEvent, cellFrame corefounda
 	return &Menu{inner: _r}
 }
 
+// Returns a custom field editor for editing in the view.
+//
 // FieldEditorForView calls the underlying FieldEditorForView.
 func (x *Cell) FieldEditorForView(controlView *raw.NSView) *TextView {
 	_r := x.inner.FieldEditorForView(controlView)
@@ -500,6 +658,8 @@ func (x *Cell) FieldEditorForView(controlView *raw.NSView) *TextView {
 	return &TextView{inner: _r}
 }
 
+// Generates dragging image components with the specified frame in the view.
+//
 // DraggingImageComponentsWithFrameInView calls the underlying DraggingImageComponentsWithFrameInView.
 func (x *Cell) DraggingImageComponentsWithFrameInView(frame corefoundation.CGRect, view *raw.NSView) *foundation.NSArray[*raw.NSDraggingImageComponent] {
 	return x.inner.DraggingImageComponentsWithFrameInView(frame, view)
@@ -918,16 +1078,22 @@ func (x *Cell) SetUsesSingleLineMode(usesSingleLineMode bool) {
 	x.inner.SetUsesSingleLineMode(usesSingleLineMode)
 }
 
+// Simulates a single mouse click on the receiver.
+//
 // PerformClick calls the underlying PerformClick.
 func (x *Cell) PerformClick(sender objc.ID) {
 	x.inner.PerformClick(sender)
 }
 
+// Draws the focus ring for the control.
+//
 // DrawFocusRingMaskWithFrameInView calls the underlying DrawFocusRingMaskWithFrameInView.
 func (x *Cell) DrawFocusRingMaskWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) {
 	x.inner.DrawFocusRingMaskWithFrameInView(cellFrame, controlView)
 }
 
+// Returns the bounds of the focus ring mask.
+//
 // FocusRingMaskBoundsForFrameInView calls the underlying FocusRingMaskBoundsForFrameInView.
 func (x *Cell) FocusRingMaskBoundsForFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) corefoundation.CGRect {
 	return x.inner.FocusRingMaskBoundsForFrameInView(cellFrame, controlView)
@@ -1003,6 +1169,8 @@ func (x *Cell) SetImportsGraphics(importsGraphics bool) {
 	x.inner.SetImportsGraphics(importsGraphics)
 }
 
+// Changes cell’s state to the next value in the sequence.
+//
 // SetNextState calls the underlying SetNextState.
 func (x *Cell) SetNextState() {
 	x.inner.SetNextState()
@@ -1023,16 +1191,22 @@ func (x *Cell) NextState() int {
 	return x.inner.NextState()
 }
 
+// Returns hit testing information for the receiver.
+//
 // HitTestForEventInRectOfView calls the underlying HitTestForEventInRectOfView.
 func (x *Cell) HitTestForEventInRectOfView(event *raw.NSEvent, cellFrame corefoundation.CGRect, controlView *raw.NSView) NSCellHitResult {
 	return NSCellHitResult(x.inner.HitTestForEventInRectOfView(event, cellFrame, controlView))
 }
 
+// Returns the expansion cell frame for the receiver.
+//
 // ExpansionFrameWithFrameInView calls the underlying ExpansionFrameWithFrameInView.
 func (x *Cell) ExpansionFrameWithFrameInView(cellFrame corefoundation.CGRect, view *raw.NSView) corefoundation.CGRect {
 	return x.inner.ExpansionFrameWithFrameInView(cellFrame, view)
 }
 
+// Instructs the receiver to draw in an expansion frame.
+//
 // DrawWithExpansionFrameInView calls the underlying DrawWithExpansionFrameInView.
 func (x *Cell) DrawWithExpansionFrameInView(cellFrame corefoundation.CGRect, view *raw.NSView) {
 	x.inner.DrawWithExpansionFrameInView(cellFrame, view)
@@ -1053,36 +1227,50 @@ func (x *Cell) InteriorBackgroundStyle() NSBackgroundStyle {
 	return NSBackgroundStyle(x.inner.InteriorBackgroundStyle())
 }
 
+// Returns the type of data the user can type into the receiver.
+//
 // EntryType calls the underlying EntryType.
 func (x *Cell) EntryType() int {
 	return x.inner.EntryType()
 }
 
+// Sets how numeric data is formatted in the receiver and places restrictions on acceptable input.
+//
 // SetEntryType calls the underlying SetEntryType.
 func (x *Cell) SetEntryType(type_ int) {
 	x.inner.SetEntryType(type_)
 }
 
+// Returns whether a string representing a numeric or date value is formatted in a suitable way for the cell’s entry type.
+//
 // IsEntryAcceptable calls the underlying IsEntryAcceptable.
 func (x *Cell) IsEntryAcceptable(string_ string) bool {
 	return x.inner.IsEntryAcceptable(foundation.NSStringStringWithUTF8String(string_))
 }
 
+// Sets the auto-ranging and floating point number format of the receiver’s cell.
+//
 // SetFloatingPointFormatLeftRight calls the underlying SetFloatingPointFormatLeftRight.
 func (x *Cell) SetFloatingPointFormatLeftRight(autoRange bool, leftDigits uint, rightDigits uint) {
 	x.inner.SetFloatingPointFormatLeftRight(autoRange, leftDigits, rightDigits)
 }
 
+// Sets the character of the receiver’s title to be used as a mnemonic character.
+//
 // SetMnemonicLocation calls the underlying SetMnemonicLocation.
 func (x *Cell) SetMnemonicLocation(location uint) {
 	x.inner.SetMnemonicLocation(location)
 }
 
+// Returns the position of the underlined mnemonic character in the receiver’s title.
+//
 // MnemonicLocation calls the underlying MnemonicLocation.
 func (x *Cell) MnemonicLocation() uint {
 	return x.inner.MnemonicLocation()
 }
 
+// Returns the character in the receiver’s title that appears underlined for use as a mnemonic.
+//
 // Mnemonic calls the underlying Mnemonic.
 func (x *Cell) Mnemonic() string {
 	_r := x.inner.Mnemonic()
@@ -1092,6 +1280,8 @@ func (x *Cell) Mnemonic() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Sets the title of the receiver with one character in the string denoted as an access key.
+//
 // SetTitleWithMnemonic calls the underlying SetTitleWithMnemonic.
 func (x *Cell) SetTitleWithMnemonic(stringWithAmpersand string) {
 	x.inner.SetTitleWithMnemonic(foundation.NSStringStringWithUTF8String(stringWithAmpersand))

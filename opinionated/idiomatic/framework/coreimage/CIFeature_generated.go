@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The abstract superclass for objects representing notable features detected in an image.
+//
 // Feature wraps [raw.CIFeature] with a fluent Go API.
 type Feature struct {
 	inner *raw.CIFeature

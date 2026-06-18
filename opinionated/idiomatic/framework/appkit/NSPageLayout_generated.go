@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A panel that queries the user for information such as paper type and orientation.
+//
 // PageLayout wraps [raw.NSPageLayout] with a fluent Go API.
 type PageLayout struct {
 	inner *raw.NSPageLayout
@@ -37,11 +39,15 @@ func NewPageLayout() *PageLayout {
 	return &PageLayout{inner: raw.NSPageLayoutFromID(_id)}
 }
 
+// Adds the specified controller of an accessory view to be presented in the page setup panel.
+//
 // AddAccessoryController calls the underlying AddAccessoryController.
 func (x *PageLayout) AddAccessoryController(accessoryController *raw.NSViewController) {
 	x.inner.AddAccessoryController(accessoryController)
 }
 
+// Removes the specified controller of an accessory view.
+//
 // RemoveAccessoryController calls the underlying RemoveAccessoryController.
 func (x *PageLayout) RemoveAccessoryController(accessoryController *raw.NSViewController) {
 	x.inner.RemoveAccessoryController(accessoryController)
@@ -52,16 +58,22 @@ func (x *PageLayout) BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo
 	x.inner.BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo, parentWindow, func(_a0 raw.NSPageLayoutResult) { handler(NSPageLayoutResult(_a0)) })
 }
 
+// Presents a page setup sheet for the specified print info object, document-modal relative to the specified window.
+//
 // BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo calls the underlying BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo.
 func (x *PageLayout) BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo(printInfo *raw.NSPrintInfo, docWindow *raw.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo(printInfo, docWindow, delegate, didEndSelector, contextInfo)
 }
 
+// Displays the page layout panel and begins the modal loop using the specified print info object.
+//
 // RunModalWithPrintInfo calls the underlying RunModalWithPrintInfo.
 func (x *PageLayout) RunModalWithPrintInfo(printInfo *raw.NSPrintInfo) int {
 	return x.inner.RunModalWithPrintInfo(printInfo)
 }
 
+// Displays the page layout panel and begins the modal loop using the shared print info object.
+//
 // RunModal calls the underlying RunModal.
 func (x *PageLayout) RunModal() int {
 	return x.inner.RunModal()
@@ -87,11 +99,15 @@ func (x *PageLayout) PrintInfo() *PrintInfo {
 	return &PrintInfo{inner: _r}
 }
 
+// Adds a view object to the page layout panel.
+//
 // SetAccessoryView calls the underlying SetAccessoryView.
 func (x *PageLayout) SetAccessoryView(accessoryView *raw.NSView) {
 	x.inner.SetAccessoryView(accessoryView)
 }
 
+// Returns the page layout panel’s accessory view.
+//
 // AccessoryView calls the underlying AccessoryView.
 func (x *PageLayout) AccessoryView() *View {
 	_r := x.inner.AccessoryView()
@@ -101,11 +117,15 @@ func (x *PageLayout) AccessoryView() *View {
 	return &View{inner: _r}
 }
 
+// Sets the page layout’s values to those stored in the print info object used when the page layout panel is run.
+//
 // ReadPrintInfo calls the underlying ReadPrintInfo.
 func (x *PageLayout) ReadPrintInfo() {
 	x.inner.ReadPrintInfo()
 }
 
+// Writes the page layout’s values to the print info object used when the page layout panel is run.
+//
 // WritePrintInfo calls the underlying WritePrintInfo.
 func (x *PageLayout) WritePrintInfo() {
 	x.inner.WritePrintInfo()

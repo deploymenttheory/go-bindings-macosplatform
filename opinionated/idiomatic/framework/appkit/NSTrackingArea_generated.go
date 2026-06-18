@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A region of a view that generates mouse-tracking and cursor-update events when the pointer is over that region.
+//
 // TrackingArea wraps [raw.NSTrackingArea] with a fluent Go API.
 type TrackingArea struct {
 	inner *raw.NSTrackingArea
@@ -31,6 +33,8 @@ func TrackingAreaFromID(id objc.ID) *TrackingArea {
 	return &TrackingArea{inner: raw.NSTrackingAreaFromID(id)}
 }
 
+// Initializes and returns an object defining a region of a view to receive mouse-tracking events, mouse-moved events, cursor-update events, or possibly all these events.
+//
 // NewTrackingAreaWithRectOptionsOwnerUserInfo creates a new [TrackingArea].
 func NewTrackingAreaWithRectOptionsOwnerUserInfo(rect corefoundation.CGRect, options NSTrackingAreaOptions, owner objc.ID, userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *TrackingArea {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTrackingArea")), objc.RegisterName("alloc"))

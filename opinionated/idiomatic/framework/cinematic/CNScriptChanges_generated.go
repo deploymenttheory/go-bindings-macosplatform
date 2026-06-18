@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Represents a snapshot of changes made to the cinematic script since recording. Can be used as a snapshot to quickly revert to previously saved edits via `-[CNScript reloadWithChanges:]`
+// An object that represents a snapshot of the changes made to a movie script, including the added user decisions and detection tracks.
 //
 // ScriptChanges wraps [raw.CNScriptChanges] with a fluent Go API.
 type ScriptChanges struct {
@@ -33,7 +33,7 @@ func ScriptChangesFromID(id objc.ID) *ScriptChanges {
 	return &ScriptChanges{inner: raw.CNScriptChangesFromID(id)}
 }
 
-// Create from previously saved data representation
+// Creates a previously saved data representation.
 //
 // NewScriptChangesWithDataRepresentation creates a new [ScriptChanges].
 func NewScriptChangesWithDataRepresentation(dataRepresentation *foundation.NSData) *ScriptChanges {

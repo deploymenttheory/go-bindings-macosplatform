@@ -13,6 +13,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A filter subclass that produces an image by manipulating RAW image sensor data from a digital camera or scanner.
+//
 // RAWFilter wraps [raw.CIRAWFilter] with a fluent Go API.
 type RAWFilter struct {
 	inner *raw.CIRAWFilter
@@ -39,54 +41,72 @@ func NewRAWFilter() *RAWFilter {
 	return &RAWFilter{inner: raw.CIRAWFilterFromID(_id)}
 }
 
+// A value that indicates the orientation of the image.
+//
 // WithOrientation sets the orientation property and returns the receiver for chaining.
 func (x *RAWFilter) WithOrientation(orientation imageio.CGImagePropertyOrientation) *RAWFilter {
 	x.inner.SetOrientation(orientation)
 	return x
 }
 
+// A Boolean that indicates whether to enable draft mode.
+//
 // WithDraftModeEnabled sets the draftModeEnabled property and returns the receiver for chaining.
 func (x *RAWFilter) WithDraftModeEnabled(draftModeEnabled bool) *RAWFilter {
 	x.inner.SetDraftModeEnabled(draftModeEnabled)
 	return x
 }
 
+// A value that indicates the decoder version to use.
+//
 // WithDecoderVersion sets the decoderVersion property and returns the receiver for chaining.
 func (x *RAWFilter) WithDecoderVersion(decoderVersion *foundation.NSString) *RAWFilter {
 	x.inner.SetDecoderVersion(decoderVersion)
 	return x
 }
 
+// A value that indicates the desired scale factor to draw the output image.
+//
 // WithScaleFactor sets the scaleFactor property and returns the receiver for chaining.
 func (x *RAWFilter) WithScaleFactor(scaleFactor float32) *RAWFilter {
 	x.inner.SetScaleFactor(scaleFactor)
 	return x
 }
 
+// A value that indicates the amount of exposure to apply to the image.
+//
 // WithExposure sets the exposure property and returns the receiver for chaining.
 func (x *RAWFilter) WithExposure(exposure float32) *RAWFilter {
 	x.inner.SetExposure(exposure)
 	return x
 }
 
+// A value that indicates the baseline exposure to apply to the image.
+//
 // WithBaselineExposure sets the baselineExposure property and returns the receiver for chaining.
 func (x *RAWFilter) WithBaselineExposure(baselineExposure float32) *RAWFilter {
 	x.inner.SetBaselineExposure(baselineExposure)
 	return x
 }
 
+// A value that indicates the amount to subtract from the shadows in the image.
+//
 // WithShadowBias sets the shadowBias property and returns the receiver for chaining.
 func (x *RAWFilter) WithShadowBias(shadowBias float32) *RAWFilter {
 	x.inner.SetShadowBias(shadowBias)
 	return x
 }
 
+// A value that indicates the amount of global tone curve to apply to the image.
+//
 // WithBoostAmount sets the boostAmount property and returns the receiver for chaining.
 func (x *RAWFilter) WithBoostAmount(boostAmount float32) *RAWFilter {
 	x.inner.SetBoostAmount(boostAmount)
 	return x
 }
 
+// A value that indicates the amount to boost the shadow areas of the image.
+//
 // WithBoostShadowAmount sets the boostShadowAmount property and returns the receiver for chaining.
 func (x *RAWFilter) WithBoostShadowAmount(boostShadowAmount float32) *RAWFilter {
 	x.inner.SetBoostShadowAmount(boostShadowAmount)
@@ -99,90 +119,120 @@ func (x *RAWFilter) WithHighlightRecoveryEnabled(highlightRecoveryEnabled bool) 
 	return x
 }
 
+// A Boolean that indicates whether to enable gamut mapping.
+//
 // WithGamutMappingEnabled sets the gamutMappingEnabled property and returns the receiver for chaining.
 func (x *RAWFilter) WithGamutMappingEnabled(gamutMappingEnabled bool) *RAWFilter {
 	x.inner.SetGamutMappingEnabled(gamutMappingEnabled)
 	return x
 }
 
+// A Boolean that indicates whether to enable lens correction.
+//
 // WithLensCorrectionEnabled sets the lensCorrectionEnabled property and returns the receiver for chaining.
 func (x *RAWFilter) WithLensCorrectionEnabled(lensCorrectionEnabled bool) *RAWFilter {
 	x.inner.SetLensCorrectionEnabled(lensCorrectionEnabled)
 	return x
 }
 
+// A value that indicates the amount of luminance noise reduction to apply to the image.
+//
 // WithLuminanceNoiseReductionAmount sets the luminanceNoiseReductionAmount property and returns the receiver for chaining.
 func (x *RAWFilter) WithLuminanceNoiseReductionAmount(luminanceNoiseReductionAmount float32) *RAWFilter {
 	x.inner.SetLuminanceNoiseReductionAmount(luminanceNoiseReductionAmount)
 	return x
 }
 
+// A value that indicates the amount of chroma noise reduction to apply to the image.
+//
 // WithColorNoiseReductionAmount sets the colorNoiseReductionAmount property and returns the receiver for chaining.
 func (x *RAWFilter) WithColorNoiseReductionAmount(colorNoiseReductionAmount float32) *RAWFilter {
 	x.inner.SetColorNoiseReductionAmount(colorNoiseReductionAmount)
 	return x
 }
 
+// A value that indicates the amount of sharpness to apply to the edges of the image.
+//
 // WithSharpnessAmount sets the sharpnessAmount property and returns the receiver for chaining.
 func (x *RAWFilter) WithSharpnessAmount(sharpnessAmount float32) *RAWFilter {
 	x.inner.SetSharpnessAmount(sharpnessAmount)
 	return x
 }
 
+// A value that indicates the amount of local contrast to apply to the edges of the image.
+//
 // WithContrastAmount sets the contrastAmount property and returns the receiver for chaining.
 func (x *RAWFilter) WithContrastAmount(contrastAmount float32) *RAWFilter {
 	x.inner.SetContrastAmount(contrastAmount)
 	return x
 }
 
+// A value that indicates the amount of detail enhancement to apply to the edges of the image.
+//
 // WithDetailAmount sets the detailAmount property and returns the receiver for chaining.
 func (x *RAWFilter) WithDetailAmount(detailAmount float32) *RAWFilter {
 	x.inner.SetDetailAmount(detailAmount)
 	return x
 }
 
+// A value that indicates the amount of moire artifact reduction to apply to high frequency areas of the image.
+//
 // WithMoireReductionAmount sets the moireReductionAmount property and returns the receiver for chaining.
 func (x *RAWFilter) WithMoireReductionAmount(moireReductionAmount float32) *RAWFilter {
 	x.inner.SetMoireReductionAmount(moireReductionAmount)
 	return x
 }
 
+// A value that indicates the amount of local tone curve to apply to the image.
+//
 // WithLocalToneMapAmount sets the localToneMapAmount property and returns the receiver for chaining.
 func (x *RAWFilter) WithLocalToneMapAmount(localToneMapAmount float32) *RAWFilter {
 	x.inner.SetLocalToneMapAmount(localToneMapAmount)
 	return x
 }
 
+// A value that indicates the amount of extended dynamic range (EDR) to apply to the image.
+//
 // WithExtendedDynamicRangeAmount sets the extendedDynamicRangeAmount property and returns the receiver for chaining.
 func (x *RAWFilter) WithExtendedDynamicRangeAmount(extendedDynamicRangeAmount float32) *RAWFilter {
 	x.inner.SetExtendedDynamicRangeAmount(extendedDynamicRangeAmount)
 	return x
 }
 
+// A value that indicates the amount of white balance based on chromaticity values to apply to the image.
+//
 // WithNeutralChromaticity sets the neutralChromaticity property and returns the receiver for chaining.
 func (x *RAWFilter) WithNeutralChromaticity(neutralChromaticity corefoundation.CGPoint) *RAWFilter {
 	x.inner.SetNeutralChromaticity(neutralChromaticity)
 	return x
 }
 
+// A value that indicates the amount of white balance based on pixel coordinates to apply to the image.
+//
 // WithNeutralLocation sets the neutralLocation property and returns the receiver for chaining.
 func (x *RAWFilter) WithNeutralLocation(neutralLocation corefoundation.CGPoint) *RAWFilter {
 	x.inner.SetNeutralLocation(neutralLocation)
 	return x
 }
 
+// A value that indicates the amount of white balance based on temperature values to apply to the image.
+//
 // WithNeutralTemperature sets the neutralTemperature property and returns the receiver for chaining.
 func (x *RAWFilter) WithNeutralTemperature(neutralTemperature float32) *RAWFilter {
 	x.inner.SetNeutralTemperature(neutralTemperature)
 	return x
 }
 
+// A value that indicates the amount of white balance based on tint values to apply to the image.
+//
 // WithNeutralTint sets the neutralTint property and returns the receiver for chaining.
 func (x *RAWFilter) WithNeutralTint(neutralTint float32) *RAWFilter {
 	x.inner.SetNeutralTint(neutralTint)
 	return x
 }
 
+// An optional filter you can apply to the RAW image while it’s in linear space.
+//
 // WithLinearSpaceFilter sets the linearSpaceFilter property and returns the receiver for chaining.
 func (x *RAWFilter) WithLinearSpaceFilter(linearSpaceFilter FilterProvider) *RAWFilter {
 	x.inner.SetLinearSpaceFilter(linearSpaceFilter.asFilter())

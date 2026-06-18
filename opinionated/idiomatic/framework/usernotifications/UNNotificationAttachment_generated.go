@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A media file associated with a notification.
+//
 // NotificationAttachment wraps [raw.UNNotificationAttachment] with a fluent Go API.
 type NotificationAttachment struct {
 	inner *raw.UNNotificationAttachment

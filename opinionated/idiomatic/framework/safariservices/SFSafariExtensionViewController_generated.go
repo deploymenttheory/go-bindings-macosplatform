@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The view controller for a popover associated with your app extension.
+//
 // SafariExtensionViewController wraps [raw.SFSafariExtensionViewController] with a fluent Go API.
 type SafariExtensionViewController struct {
 	inner *raw.SFSafariExtensionViewController

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A pointer (also called a cursor).
+//
 // Cursor wraps [raw.NSCursor] with a fluent Go API.
 type Cursor struct {
 	inner *raw.NSCursor
@@ -31,6 +33,8 @@ func CursorFromID(id objc.ID) *Cursor {
 	return &Cursor{inner: raw.NSCursorFromID(id)}
 }
 
+// Initializes a cursor with the given image and hot spot.
+//
 // NewCursorWithImageHotSpot creates a new [Cursor].
 func NewCursorWithImageHotSpot(newImage *raw.NSImage, point corefoundation.CGPoint) *Cursor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCursor")), objc.RegisterName("alloc"))
@@ -45,6 +49,8 @@ func NewCursorWithCoder(coder *foundation.NSCoder) *Cursor {
 	return &Cursor{inner: raw.NSCursorFromID(_id)}
 }
 
+// Initializes the cursor with the specified image and hot spot.
+//
 // NewCursorWithImageForegroundColorHintBackgroundColorHintHotSpot creates a new [Cursor].
 func NewCursorWithImageForegroundColorHintBackgroundColorHintHotSpot(newImage *raw.NSImage, fg *raw.NSColor, bg *raw.NSColor, hotSpot corefoundation.CGPoint) *Cursor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCursor")), objc.RegisterName("alloc"))
@@ -52,16 +58,22 @@ func NewCursorWithImageForegroundColorHintBackgroundColorHintHotSpot(newImage *r
 	return &Cursor{inner: raw.NSCursorFromID(_id)}
 }
 
+// Sends a pop message to the receiver’s class.
+//
 // Pop calls the underlying Pop.
 func (x *Cursor) Pop() {
 	x.inner.Pop()
 }
 
+// Puts the receiver on top of the cursor stack and makes it the current cursor.
+//
 // Push calls the underlying Push.
 func (x *Cursor) Push() {
 	x.inner.Push()
 }
 
+// Makes the receiver the current cursor.
+//
 // Set calls the underlying Set.
 func (x *Cursor) Set() {
 	x.inner.Set()
@@ -81,21 +93,29 @@ func (x *Cursor) HotSpot() corefoundation.CGPoint {
 	return x.inner.HotSpot()
 }
 
+// Sets whether the receiver accepts mouseExited: events.
+//
 // SetOnMouseExited calls the underlying SetOnMouseExited.
 func (x *Cursor) SetOnMouseExited(flag bool) {
 	x.inner.SetOnMouseExited(flag)
 }
 
+// Specifies whether the receiver accepts mouseEntered: events.
+//
 // SetOnMouseEntered calls the underlying SetOnMouseEntered.
 func (x *Cursor) SetOnMouseEntered(flag bool) {
 	x.inner.SetOnMouseEntered(flag)
 }
 
+// Automatically sent to the receiver when the cursor enters a cursor rectangle owned by the receiver.
+//
 // MouseEntered calls the underlying MouseEntered.
 func (x *Cursor) MouseEntered(event *raw.NSEvent) {
 	x.inner.MouseEntered(event)
 }
 
+// Automatically sent to the receiver when the cursor exits a cursor rectangle owned by the receiver.
+//
 // MouseExited calls the underlying MouseExited.
 func (x *Cursor) MouseExited(event *raw.NSEvent) {
 	x.inner.MouseExited(event)

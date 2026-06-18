@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// The SBObject class declares methods that can be invoked on any object in a scriptable application. It defines methods for getting elements and properties of an object, as well as setting a given object to a new value.
+//
 // Object wraps [raw.SBObject] with a fluent Go API.
 type Object struct {
 	inner *raw.SBObject
@@ -37,7 +39,7 @@ func NewObject() *Object {
 	return &Object{inner: raw.SBObjectFromID(_id)}
 }
 
-// Returns an instance of an `SBObject` subclass initialized with the specified properties. Scripting Bridge does not actually create an object in the target application until you add the object returned from this method to an element array (“SBElementArray“). - Parameters: - properties: A dictionary with keys specifying the names of properties (that is, attributes or to-one relationships) and the values for those properties. - Returns: An `SBObject` object or `nil` if the object could not be initialized.
+// Returns an instance of an SBObject subclass initialized with the specified properties.
 //
 // NewObjectWithProperties creates a new [Object].
 func NewObjectWithProperties(properties *foundation.NSDictionary[objc.ID, objc.ID]) *Object {
@@ -46,7 +48,7 @@ func NewObjectWithProperties(properties *foundation.NSDictionary[objc.ID, objc.I
 	return &Object{inner: raw.SBObjectFromID(_id)}
 }
 
-// Returns an instance of an `SBObject` subclass initialized with the given data. Scripting Bridge does not actually create an object in the target application until you add the object returned from this method to an element array (“SBElementArray“). - Parameters: - data: An object containing data for the new `SBObject` object. The data varies according to the type of scripting object to be created. - Returns: An `SBObject` object or `nil` if the object could not be initialized.
+// Returns an instance of an SBObject subclass initialized with the given data.
 //
 // NewObjectWithData creates a new [Object].
 func NewObjectWithData(data objc.ID) *Object {
@@ -55,7 +57,7 @@ func NewObjectWithData(data objc.ID) *Object {
 	return &Object{inner: raw.SBObjectFromID(_id)}
 }
 
-// Returns an instance of an `SBObject` subclass initialized with the specified properties and data and added to the designated element array. Unlike the other initializers of this class, this method not only initializes the `SBObject` object but adds it to a specified element array. This method is the designated initializer. - Parameters: - code: A four-character code used to identify an element in the target application’s scripting interface. See <doc://com.apple.documentation/documentation/applicationservices/apple_event_manager> for details. - properties: A dictionary with <doc://com.apple.documentation/documentation/foundation/nsnumber> keys specifying the four-character codes of properties (that is, attributes or to-one relationships) and the values for those properties. Pass `nil` if you are initializing the object by `data` only. - data: An object containing data for the new `SBObject` object. The data varies according to the type of scripting object to be created. Pass `nil` if you initializing the object by `properties` only. - Returns: An `SBObject` object or `nil` if the object could not be initialized.
+// Returns an instance of an SBObject subclass initialized with the specified properties and data and added to the designated element array.
 //
 // NewObjectWithElementCodePropertiesData creates a new [Object].
 func NewObjectWithElementCodePropertiesData(code uint, properties *foundation.NSDictionary[*foundation.NSString, objc.ID], data objc.ID) *Object {
@@ -64,7 +66,7 @@ func NewObjectWithElementCodePropertiesData(code uint, properties *foundation.NS
 	return &Object{inner: raw.SBObjectFromID(_id)}
 }
 
-// Forces evaluation of the receiver, causing the real object to be returned immediately. This method forces the current object reference (the receiver) to be evaluated, resulting in the return of the referenced object. By default, Scripting Bridge deals with references to objects until you actually request some concrete data from them or until you call the `get` method. - Returns: For most properties, the result is a Foundation object such as an `NSString`. For properties with no Foundation equivalent, the result is an `NSAppleEventDescriptor` or another “SBObject“ for most elements.
+// Forces evaluation of the receiver, causing the real object to be returned immediately.
 //
 // Get calls the underlying Get.
 func (x *Object) Get() objc.ID {
@@ -78,7 +80,7 @@ func (x *Object) LastError() unsafe.Pointer {
 	return x.inner.LastError()
 }
 
-// Returns an object representing the specified property of the receiver. `SBObject` subclasses use this method to implement application-specific property accessor methods. You should not need to call this method directly. - Parameters: - code: A four-character code that uniquely identifies a property of the receiver. - Returns: An object representing the receiver’s property as identified by `code`.
+// Returns an object representing the specified property of the receiver.
 //
 // PropertyWithCode calls the underlying PropertyWithCode.
 func (x *Object) PropertyWithCode(code uint) *Object {
@@ -89,7 +91,7 @@ func (x *Object) PropertyWithCode(code uint) *Object {
 	return &Object{inner: _r}
 }
 
-// Returns an object of the designated scripting class representing the specified property of the receiver `SBObject` subclasses use this method to implement application-specific property accessor methods. You should not need to call this method directly. > Note: This method doesn't retrieve the value of the property. To get the value, call “get“. - Parameters: - class: The `SBObject` subclass with which to instantiate the object. - code: A four-character code that uniquely identifies a property of the receiver. - Returns: An instance of the designated `class` that represents the receiver’s property identified by `code`.
+// Returns an object of the designated scripting class representing the specified property of the receiver
 //
 // PropertyWithClassCode calls the underlying PropertyWithClassCode.
 func (x *Object) PropertyWithClassCode(cls objc.Class, code uint) *Object {
@@ -100,14 +102,14 @@ func (x *Object) PropertyWithClassCode(cls objc.Class, code uint) *Object {
 	return &Object{inner: _r}
 }
 
-// Returns an array containing every child of the receiver with the given class-type code. `SBObject` subclasses use this method to implement application-specific property accessor methods. You should not need to call this method directly. > Note: This method doesn't retrieve the value of the property. To get the value, call “get“. - Parameters: - code: A four-character code that identifies a scripting class. - Returns: An “SBElementArray“ object containing every child of the receiver whose class matches `code`.
+// Returns an array containing every child of the receiver with the given class-type code.
 //
 // ElementArrayWithCode calls the underlying ElementArrayWithCode.
 func (x *Object) ElementArrayWithCode(code uint) *raw.SBElementArray[objc.ID] {
 	return x.inner.ElementArrayWithCode(code)
 }
 
-// Sets the receiver to a specified value. You should not call this method directly. - Parameters: - value: The data the receiver should be set to. It can be an <doc://com.apple.documentation/documentation/foundation/nsstring>, <doc://com.apple.documentation/documentation/foundation/nsnumber>, <doc://com.apple.documentation/documentation/foundation/nsarray>, `SBObject`, or any other type of object supported by the Scripting Bridge framework.
+// Sets the receiver to a specified value.
 //
 // SetTo calls the underlying SetTo.
 func (x *Object) SetTo(value objc.ID) {

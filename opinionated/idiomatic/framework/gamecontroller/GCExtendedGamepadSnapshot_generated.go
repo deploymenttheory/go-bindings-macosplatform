@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A recording of all of the values provided by a GCExtendedGamepad object.
+//
 // ExtendedGamepadSnapshot wraps [raw.GCExtendedGamepadSnapshot] with a fluent Go API.
 type ExtendedGamepadSnapshot struct {
 	inner *raw.GCExtendedGamepadSnapshot
@@ -30,6 +32,8 @@ func ExtendedGamepadSnapshotFromID(id objc.ID) *ExtendedGamepadSnapshot {
 	return &ExtendedGamepadSnapshot{inner: raw.GCExtendedGamepadSnapshotFromID(id)}
 }
 
+// Initializes a snapshot object with the flattened data representation obtained from another snapshot.
+//
 // NewExtendedGamepadSnapshotWithSnapshotData creates a new [ExtendedGamepadSnapshot].
 func NewExtendedGamepadSnapshotWithSnapshotData(data *foundation.NSData) *ExtendedGamepadSnapshot {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GCExtendedGamepadSnapshot")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewExtendedGamepadSnapshotWithSnapshotData(data *foundation.NSData) *Extend
 	return &ExtendedGamepadSnapshot{inner: raw.GCExtendedGamepadSnapshotFromID(_id)}
 }
 
+// Initializes a snapshot object associated with a specific controller using a flattened data representation obtained from another snapshot.
+//
 // NewExtendedGamepadSnapshotWithControllerSnapshotData creates a new [ExtendedGamepadSnapshot].
 func NewExtendedGamepadSnapshotWithControllerSnapshotData(controller *raw.GCController, data *foundation.NSData) *ExtendedGamepadSnapshot {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GCExtendedGamepadSnapshot")), objc.RegisterName("alloc"))
@@ -44,19 +50,23 @@ func NewExtendedGamepadSnapshotWithControllerSnapshotData(controller *raw.GCCont
 	return &ExtendedGamepadSnapshot{inner: raw.GCExtendedGamepadSnapshotFromID(_id)}
 }
 
+// Flattens a snapshot into an archivable memory representation.
+//
 // WithSnapshotData sets the snapshotData property and returns the receiver for chaining.
 func (x *ExtendedGamepadSnapshot) WithSnapshotData(snapshotData *foundation.NSData) *ExtendedGamepadSnapshot {
 	x.inner.SetSnapshotData(snapshotData)
 	return x
 }
 
+// The block that the profile calls when an element’s value changes.
+//
 // WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
 func (x *ExtendedGamepadSnapshot) WithValueChangedHandler(valueChangedHandler func(*raw.GCExtendedGamepad, *raw.GCControllerElement)) *ExtendedGamepadSnapshot {
 	x.inner.GCExtendedGamepad.SetValueChangedHandler(valueChangedHandler)
 	return x
 }
 
-// Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called for each element that changed. @param profile this profile that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons. @param element the element that has been modified.
+// The block that the profile calls when an element’s value changes.
 //
 // WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
 func (x *ExtendedGamepadSnapshot) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *ExtendedGamepadSnapshot {

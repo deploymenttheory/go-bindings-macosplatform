@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The MCBrowserViewController class presents nearby devices to the user and enables the user to invite nearby devices to a session. To use this class in iOS or tvOS, call methods from the underlying UIViewController class (prepareForSegue:sender: and performSegueWithIdentifier:sender: for storyboards or presentViewController:animated:completion: and dismissViewControllerAnimated:completion: for nib-based views) to present and dismiss the view controller. In macOS, use the comparable NSViewController methods presentViewControllerAsSheet: and dismissViewController: instead.
+//
 // BrowserViewController wraps [raw.MCBrowserViewController] with a fluent Go API.
 type BrowserViewController struct {
 	inner *raw.MCBrowserViewController
@@ -30,6 +32,8 @@ func BrowserViewControllerFromID(id objc.ID) *BrowserViewController {
 	return &BrowserViewController{inner: raw.MCBrowserViewControllerFromID(id)}
 }
 
+// Initializes a browser view controller using the provided service type and session.
+//
 // NewBrowserViewControllerWithServiceTypeSession creates a new [BrowserViewController].
 func NewBrowserViewControllerWithServiceTypeSession(serviceType string, session *raw.MCSession) *BrowserViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MCBrowserViewController")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewBrowserViewControllerWithServiceTypeSession(serviceType string, session 
 	return &BrowserViewController{inner: raw.MCBrowserViewControllerFromID(_id)}
 }
 
+// Initializes a browser view controller with the provided browser and session.
+//
 // NewBrowserViewControllerWithBrowserSession creates a new [BrowserViewController].
 func NewBrowserViewControllerWithBrowserSession(browser *raw.MCNearbyServiceBrowser, session *raw.MCSession) *BrowserViewController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MCBrowserViewController")), objc.RegisterName("alloc"))
@@ -44,18 +50,24 @@ func NewBrowserViewControllerWithBrowserSession(browser *raw.MCNearbyServiceBrow
 	return &BrowserViewController{inner: raw.MCBrowserViewControllerFromID(_id)}
 }
 
+// The delegate object that handles browser-view-controller-related events.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *BrowserViewController) WithDelegate(delegate raw.MCBrowserViewControllerDelegate) *BrowserViewController {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The minimum number of peers that need to be in a session, including the local peer.
+//
 // WithMinimumNumberOfPeers sets the minimumNumberOfPeers property and returns the receiver for chaining.
 func (x *BrowserViewController) WithMinimumNumberOfPeers(minimumNumberOfPeers uint) *BrowserViewController {
 	x.inner.SetMinimumNumberOfPeers(minimumNumberOfPeers)
 	return x
 }
 
+// The maximum number of peers allowed in a session, including the local peer.
+//
 // WithMaximumNumberOfPeers sets the maximumNumberOfPeers property and returns the receiver for chaining.
 func (x *BrowserViewController) WithMaximumNumberOfPeers(maximumNumberOfPeers uint) *BrowserViewController {
 	x.inner.SetMaximumNumberOfPeers(maximumNumberOfPeers)

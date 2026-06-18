@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A track in a composition that presents media of a uniform type.
+//
 // CompositionTrack wraps [raw.AVCompositionTrack] with a fluent Go API.
 type CompositionTrack struct {
 	inner *raw.AVCompositionTrack

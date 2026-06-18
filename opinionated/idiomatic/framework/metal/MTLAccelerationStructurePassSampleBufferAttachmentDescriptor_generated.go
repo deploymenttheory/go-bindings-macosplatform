@@ -39,7 +39,7 @@ func NewAccelerationStructurePassSampleBufferAttachmentDescriptor() *Acceleratio
 	return &AccelerationStructurePassSampleBufferAttachmentDescriptor{inner: raw.MTLAccelerationStructurePassSampleBufferAttachmentDescriptorFromID(_id)}
 }
 
-// @property sampleBuffer @abstract The sample buffer to store samples for the acceleration structure pass defined samples. If sampleBuffer is non-nil, the sample indices will be used to store samples into the sample buffer.  If no sample buffer is provided, no samples will be taken. If any of the sample indices are specified as MTLCounterDontSample, no sample will be taken for that action.
+// A specialized memory buffer that the GPU uses to store its counter data during the acceleration structure pass.
 //
 // WithSampleBuffer sets the sampleBuffer property and returns the receiver for chaining.
 func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) WithSampleBuffer(sampleBuffer raw.MTLCounterSampleBuffer) *AccelerationStructurePassSampleBufferAttachmentDescriptor {

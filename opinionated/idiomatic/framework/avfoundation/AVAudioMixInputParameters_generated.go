@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents the parameters that you apply when adding an audio track to a mix.
+//
 // AudioMixInputParameters wraps [raw.AVAudioMixInputParameters] with a fluent Go API.
 type AudioMixInputParameters struct {
 	inner *raw.AVAudioMixInputParameters
@@ -38,6 +40,8 @@ func NewAudioMixInputParameters() *AudioMixInputParameters {
 	return &AudioMixInputParameters{inner: raw.AVAudioMixInputParametersFromID(_id)}
 }
 
+// Retrieves the volume ramp that includes the specified time.
+//
 // GetVolumeRampForTimeStartVolumeEndVolumeTimeRange calls the underlying GetVolumeRampForTimeStartVolumeEndVolumeTimeRange.
 func (x *AudioMixInputParameters) GetVolumeRampForTimeStartVolumeEndVolumeTimeRange(time_ coremedia.CMTime, startVolume *float32, endVolume *float32, timeRange *coremedia.CMTimeRange) bool {
 	return x.inner.GetVolumeRampForTimeStartVolumeEndVolumeTimeRange(time_, startVolume, endVolume, timeRange)

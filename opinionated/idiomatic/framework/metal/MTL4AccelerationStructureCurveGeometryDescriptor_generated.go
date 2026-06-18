@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Describes curve geometry suitable for ray tracing.
+//
 // MTL4AccelerationStructureCurveGeometryDescriptor wraps [raw.MTL4AccelerationStructureCurveGeometryDescriptor] with a fluent Go API.
 type MTL4AccelerationStructureCurveGeometryDescriptor struct {
 	inner *raw.MTL4AccelerationStructureCurveGeometryDescriptor
@@ -38,7 +40,7 @@ func NewMTL4AccelerationStructureCurveGeometryDescriptor() *MTL4AccelerationStru
 	return &MTL4AccelerationStructureCurveGeometryDescriptor{inner: raw.MTL4AccelerationStructureCurveGeometryDescriptorFromID(_id)}
 }
 
-// References a buffer containing curve control points. Control points are interpolated according to the basis function you specify in “curveBasis“. You are responsible for ensuring each control is in a format matching the control point format “controlPointFormat“ specifies, as well as ensuring that the buffer address of the range is not zero.
+// References a buffer containing curve control points.
 //
 // WithControlPointBuffer sets the controlPointBuffer property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithControlPointBuffer(controlPointBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureCurveGeometryDescriptor {
@@ -54,7 +56,7 @@ func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithControlPointCount
 	return x
 }
 
-// Sets the stride, in bytes, between control points in the control point buffer the control point buffer references. You are responsible for ensuring this stride is a multiple of the control point format's element size, and at a minimum exactly the control point format's size. This property defaults to `0`, indicating that the control points are tightly-packed.
+// Sets the stride, in bytes, between control points in the control point buffer the control point buffer references.
 //
 // WithControlPointStride sets the controlPointStride property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithControlPointStride(controlPointStride uint) *MTL4AccelerationStructureCurveGeometryDescriptor {
@@ -62,7 +64,7 @@ func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithControlPointStrid
 	return x
 }
 
-// Declares the format of the control points the control point buffer references. Defaults to `MTLAttributeFormatFloat3`, representing 3 floating point values tightly packed.
+// Declares the format of the control points the control point buffer references.
 //
 // WithControlPointFormat sets the controlPointFormat property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithControlPointFormat(controlPointFormat MTLAttributeFormat) *MTL4AccelerationStructureCurveGeometryDescriptor {
@@ -70,7 +72,7 @@ func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithControlPointForma
 	return x
 }
 
-// Assigns a reference to a buffer containing the curve radius for each control point. Metal interpolates curve radii according to the basis function you specify via “curveBasis“. You are responsible for ensuring the type of each radius matches the type property “radiusFormat“ specifies, that each radius is at least zero, and that the buffer address of the range is not zero.
+// Assigns a reference to a buffer containing the curve radius for each control point.
 //
 // WithRadiusBuffer sets the radiusBuffer property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithRadiusBuffer(radiusBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureCurveGeometryDescriptor {
@@ -78,7 +80,7 @@ func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithRadiusBuffer(radi
 	return x
 }
 
-// Declares the format of the radii in the radius buffer. Defaults to  `MTLAttributeFormatFloat`.
+// Declares the format of the radii in the radius buffer.
 //
 // WithRadiusFormat sets the radiusFormat property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithRadiusFormat(radiusFormat MTLAttributeFormat) *MTL4AccelerationStructureCurveGeometryDescriptor {
@@ -86,7 +88,7 @@ func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithRadiusFormat(radi
 	return x
 }
 
-// Configures the stride, in bytes, between radii in the radius buffer. You are responsible for ensuring this property is set to a multiple of the size corresponding to the “radiusFormat“. This property defaults to `0` bytes, indicating that the radii are tightly packed.
+// Configures the stride, in bytes, between radii in the radius buffer.
 //
 // WithRadiusStride sets the radiusStride property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithRadiusStride(radiusStride uint) *MTL4AccelerationStructureCurveGeometryDescriptor {
@@ -94,7 +96,7 @@ func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithRadiusStride(radi
 	return x
 }
 
-// Assigns an optional index buffer containing references to control points in the control point buffer. Each index represents the first control point of a curve segment. You are responsible for ensuring the buffer address of the range is not zero.
+// Assigns an optional index buffer containing references to control points in the control point buffer.
 //
 // WithIndexBuffer sets the indexBuffer property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithIndexBuffer(indexBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureCurveGeometryDescriptor {
@@ -102,7 +104,7 @@ func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithIndexBuffer(index
 	return x
 }
 
-// Specifies the size of the indices the `indexBuffer` contains, which is typically either 16 or 32-bits for each index.
+// Specifies the size of the indices the indexBuffer contains, which is typically either 16 or 32-bits for each index.
 //
 // WithIndexType sets the indexType property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithIndexType(indexType MTLIndexType) *MTL4AccelerationStructureCurveGeometryDescriptor {
@@ -118,7 +120,7 @@ func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithSegmentCount(segm
 	return x
 }
 
-// Declares the number of control points per curve segment. Valid values for this property are `2`, `3`, or `4`.
+// Declares the number of control points per curve segment.
 //
 // WithSegmentControlPointCount sets the segmentControlPointCount property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithSegmentControlPointCount(segmentControlPointCount uint) *MTL4AccelerationStructureCurveGeometryDescriptor {
@@ -126,7 +128,7 @@ func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithSegmentControlPoi
 	return x
 }
 
-// Controls the curve type. Defaults to `MTLCurveTypeRound`.
+// Controls the curve type.
 //
 // WithCurveType sets the curveType property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithCurveType(curveType MTLCurveType) *MTL4AccelerationStructureCurveGeometryDescriptor {
@@ -134,7 +136,7 @@ func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithCurveType(curveTy
 	return x
 }
 
-// Controls the curve basis function, determining how Metal interpolates the control points. Defaults to `MTLCurveBasisBSpline`.
+// Controls the curve basis function, determining how Metal interpolates the control points.
 //
 // WithCurveBasis sets the curveBasis property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithCurveBasis(curveBasis MTLCurveBasis) *MTL4AccelerationStructureCurveGeometryDescriptor {
@@ -142,7 +144,7 @@ func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithCurveBasis(curveB
 	return x
 }
 
-// Sets the type of curve end caps. Defaults to `MTLCurveEndCapsNone`.
+// Sets the type of curve end caps.
 //
 // WithCurveEndCaps sets the curveEndCaps property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithCurveEndCaps(curveEndCaps MTLCurveEndCaps) *MTL4AccelerationStructureCurveGeometryDescriptor {
@@ -150,7 +152,7 @@ func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithCurveEndCaps(curv
 	return x
 }
 
-// Sets the offset that this geometry contributes to determining the intersection function to invoke when a ray intersects it. When you perform a ray tracing operation in the Metal Shading Language, and provide the ray intersector object with an instance of “MTLIntersectionFunctionTable“, Metal adds this offset to the instance offset from structs such as: - “MTLAccelerationStructureInstanceDescriptor“ - “MTLAccelerationStructureUserIDInstanceDescriptor“ - “MTLAccelerationStructureMotionInstanceDescriptor“ - “MTLIndirectAccelerationStructureInstanceDescriptor“ - “MTLIndirectAccelerationStructureMotionInstanceDescriptor“ The sum of these offsets provides an index into the intersection function table that the ray tracing system uses to retrieve and invoke the function at this index, allowing you to customize the intersection evaluation process.
+// Sets the offset that this geometry contributes to determining the intersection function to invoke when a ray intersects it.
 //
 // WithIntersectionFunctionTableOffset sets the intersectionFunctionTableOffset property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *MTL4AccelerationStructureCurveGeometryDescriptor {
@@ -166,7 +168,7 @@ func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithOpaque(opaque boo
 	return x
 }
 
-// A boolean value that indicates whether the ray-tracing system in Metal allows the invocation of intersection functions more than once per ray-primitive intersection. The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+// A boolean value that indicates whether the ray-tracing system in Metal allows the invocation of intersection functions more than once per ray-primitive intersection.
 //
 // WithAllowDuplicateIntersectionFunctionInvocation sets the allowDuplicateIntersectionFunctionInvocation property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureCurveGeometryDescriptor {
@@ -182,7 +184,7 @@ func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithLabel(label strin
 	return x
 }
 
-// Assigns optional buffer containing data to associate with each primitive in this geometry. You can use zero as the buffer address in this buffer range.
+// Assigns optional buffer containing data to associate with each primitive in this geometry.
 //
 // WithPrimitiveDataBuffer sets the primitiveDataBuffer property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureCurveGeometryDescriptor {
@@ -190,7 +192,7 @@ func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataBuff
 	return x
 }
 
-// Defines the stride, in bytes, between each primitive's data in the primitive data buffer “primitiveDataBuffer“ references. You are responsible for ensuring the stride is at least “primitiveDataElementSize“ in size and a multiple of 4 bytes. This property defaults to `0` bytes,  which indicates the stride is equal to “primitiveDataElementSize“.
+// Defines the stride, in bytes, between each primitive’s data in the primitive data buffer primitiveDataBuffer references.
 //
 // WithPrimitiveDataStride sets the primitiveDataStride property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride uint) *MTL4AccelerationStructureCurveGeometryDescriptor {
@@ -198,7 +200,7 @@ func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataStri
 	return x
 }
 
-// Sets the size, in bytes, of the data for each primitive in the primitive data buffer “primitiveDataBuffer“ references. This size needs to be at most “primitiveDataStride“ in size and a multiple of 4 bytes. This property defaults to 0 bytes.
+// Sets the size, in bytes, of the data for each primitive in the primitive data buffer primitiveDataBuffer references.
 //
 // WithPrimitiveDataElementSize sets the primitiveDataElementSize property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize uint) *MTL4AccelerationStructureCurveGeometryDescriptor {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing metrics about network transfers.
+//
 // NetworkTransferMetric wraps [raw.MXNetworkTransferMetric] with a fluent Go API.
 type NetworkTransferMetric struct {
 	inner *raw.MXNetworkTransferMetric

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An instance describing the desired GPU state for a kernel call in a compute pass.
+//
 // ComputePipelineDescriptor wraps [raw.MTLComputePipelineDescriptor] with a fluent Go API.
 type ComputePipelineDescriptor struct {
 	inner *raw.MTLComputePipelineDescriptor
@@ -38,7 +40,7 @@ func NewComputePipelineDescriptor() *ComputePipelineDescriptor {
 	return &ComputePipelineDescriptor{inner: raw.MTLComputePipelineDescriptorFromID(_id)}
 }
 
-// @property label @abstract A string to help identify this object.
+// A string that identifies the instance.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *ComputePipelineDescriptor) WithLabel(label string) *ComputePipelineDescriptor {
@@ -46,7 +48,7 @@ func (x *ComputePipelineDescriptor) WithLabel(label string) *ComputePipelineDesc
 	return x
 }
 
-// @property computeFunction @abstract The function to use with the MTLComputePipelineState
+// The compute kernel the pipeline calls.
 //
 // WithComputeFunction sets the computeFunction property and returns the receiver for chaining.
 func (x *ComputePipelineDescriptor) WithComputeFunction(computeFunction raw.MTLFunction) *ComputePipelineDescriptor {
@@ -54,7 +56,7 @@ func (x *ComputePipelineDescriptor) WithComputeFunction(computeFunction raw.MTLF
 	return x
 }
 
-// @property threadGroupSizeIsMultipleOfThreadExecutionWidth @abstract An optimization flag, set if the thread group size will always be a multiple of thread execution width
+// A Boolean value that indicates whether the threadgroup size is always a multiple of the thread execution width.
 //
 // WithThreadGroupSizeIsMultipleOfThreadExecutionWidth sets the threadGroupSizeIsMultipleOfThreadExecutionWidth property and returns the receiver for chaining.
 func (x *ComputePipelineDescriptor) WithThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth bool) *ComputePipelineDescriptor {
@@ -62,7 +64,7 @@ func (x *ComputePipelineDescriptor) WithThreadGroupSizeIsMultipleOfThreadExecuti
 	return x
 }
 
-// @property maxTotalThreadsPerThreadgroup @abstract Optional property. Set the maxTotalThreadsPerThreadgroup. If it is not set, returns zero.
+// A property that limits the number of threads you can dispatch in a threadgroup for the compute function.
 //
 // WithMaxTotalThreadsPerThreadgroup sets the maxTotalThreadsPerThreadgroup property and returns the receiver for chaining.
 func (x *ComputePipelineDescriptor) WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint) *ComputePipelineDescriptor {
@@ -70,7 +72,7 @@ func (x *ComputePipelineDescriptor) WithMaxTotalThreadsPerThreadgroup(maxTotalTh
 	return x
 }
 
-// @property computeDataDescriptor @abstract An MTLStageInputOutputDescriptor to fetch data from buffers
+// The organization of input and output data for the next kernel call.
 //
 // WithStageInputDescriptor sets the stageInputDescriptor property and returns the receiver for chaining.
 func (x *ComputePipelineDescriptor) WithStageInputDescriptor(stageInputDescriptor *StageInputOutputDescriptor) *ComputePipelineDescriptor {
@@ -78,7 +80,7 @@ func (x *ComputePipelineDescriptor) WithStageInputDescriptor(stageInputDescripto
 	return x
 }
 
-// @property supportIndirectCommandBuffers @abstract This flag makes this pipeline usable with indirect command buffers.
+// A Boolean value that indicates whether you can encode commands that reference the pipeline state object into an indirect command buffer.
 //
 // WithSupportIndirectCommandBuffers sets the supportIndirectCommandBuffers property and returns the receiver for chaining.
 func (x *ComputePipelineDescriptor) WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers bool) *ComputePipelineDescriptor {
@@ -86,7 +88,7 @@ func (x *ComputePipelineDescriptor) WithSupportIndirectCommandBuffers(supportInd
 	return x
 }
 
-// @property linkedFunctions @abstract The set of functions to be linked with the pipeline state and accessed from the compute function. @see MTLLinkedFunctions
+// The functions with available function pointers for the next kernel call.
 //
 // WithLinkedFunctions sets the linkedFunctions property and returns the receiver for chaining.
 func (x *ComputePipelineDescriptor) WithLinkedFunctions(linkedFunctions *LinkedFunctions) *ComputePipelineDescriptor {
@@ -94,7 +96,7 @@ func (x *ComputePipelineDescriptor) WithLinkedFunctions(linkedFunctions *LinkedF
 	return x
 }
 
-// @property supportAddingBinaryFunctions @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
+// A Boolean value that indicates whether you can use the pipeline to create new pipelines by adding binary functions to its callable functions list.
 //
 // WithSupportAddingBinaryFunctions sets the supportAddingBinaryFunctions property and returns the receiver for chaining.
 func (x *ComputePipelineDescriptor) WithSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool) *ComputePipelineDescriptor {
@@ -102,7 +104,7 @@ func (x *ComputePipelineDescriptor) WithSupportAddingBinaryFunctions(supportAddi
 	return x
 }
 
-// @property maxCallStackDepth @abstract The maximum depth of the call stack in stack frames from the kernel. Defaults to 1 additional stack frame.
+// The maximum call stack depth for indirect function calls in compute shaders.
 //
 // WithMaxCallStackDepth sets the maxCallStackDepth property and returns the receiver for chaining.
 func (x *ComputePipelineDescriptor) WithMaxCallStackDepth(maxCallStackDepth uint) *ComputePipelineDescriptor {
@@ -110,7 +112,7 @@ func (x *ComputePipelineDescriptor) WithMaxCallStackDepth(maxCallStackDepth uint
 	return x
 }
 
-// @property shaderValidation @abstract Toggle that determines whether Metal Shader Validation should be enabled or disabled for the pipeline. @discussion The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
+// A value that enables or disables shader validation for the pipeline.
 //
 // WithShaderValidation sets the shaderValidation property and returns the receiver for chaining.
 func (x *ComputePipelineDescriptor) WithShaderValidation(shaderValidation MTLShaderValidation) *ComputePipelineDescriptor {
@@ -126,7 +128,7 @@ func (x *ComputePipelineDescriptor) WithRequiredThreadsPerThreadgroup(requiredTh
 	return x
 }
 
-// @method reset @abstract Restore all compute pipeline descriptor properties to their default values.
+// Resets all compute pipeline descriptor properties to their default values.
 //
 // Reset calls the underlying Reset.
 func (x *ComputePipelineDescriptor) Reset() {

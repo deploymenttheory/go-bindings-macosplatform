@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An individual content area within a grid view, typically at the intersection of a row and a column.
+//
 // GridCell wraps [raw.NSGridCell] with a fluent Go API.
 type GridCell struct {
 	inner *raw.NSGridCell

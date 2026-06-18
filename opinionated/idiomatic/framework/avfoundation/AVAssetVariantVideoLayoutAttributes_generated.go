@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Attributes that describe the layout of video content.
+//
 // AssetVariantVideoLayoutAttributes wraps [raw.AVAssetVariantVideoLayoutAttributes] with a fluent Go API.
 type AssetVariantVideoLayoutAttributes struct {
 	inner *raw.AVAssetVariantVideoLayoutAttributes

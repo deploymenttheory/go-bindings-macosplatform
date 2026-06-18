@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An interface that implements an index-maintenance app extension.
+//
 // IndexExtensionRequestHandler wraps [raw.CSIndexExtensionRequestHandler] with a fluent Go API.
 type IndexExtensionRequestHandler struct {
 	inner *raw.CSIndexExtensionRequestHandler

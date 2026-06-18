@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An animation context, which contains information about environment and state.
+//
 // AnimationContext wraps [raw.NSAnimationContext] with a fluent Go API.
 type AnimationContext struct {
 	inner *raw.NSAnimationContext
@@ -37,24 +39,32 @@ func NewAnimationContext() *AnimationContext {
 	return &AnimationContext{inner: raw.NSAnimationContextFromID(_id)}
 }
 
+// The duration used by animations created as a result of setting new values for an animatable property.
+//
 // WithDuration sets the duration property and returns the receiver for chaining.
 func (x *AnimationContext) WithDuration(duration float64) *AnimationContext {
 	x.inner.SetDuration(duration)
 	return x
 }
 
+// The timing function used for all animations within this animation proxy group.
+//
 // WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
 func (x *AnimationContext) WithTimingFunction(timingFunction *quartzcore.CAMediaTimingFunction) *AnimationContext {
 	x.inner.SetTimingFunction(timingFunction)
 	return x
 }
 
+// A completion Block that is called when the animations in the grouping are completed.
+//
 // WithCompletionHandler sets the completionHandler property and returns the receiver for chaining.
 func (x *AnimationContext) WithCompletionHandler(completionHandler func()) *AnimationContext {
 	x.inner.SetCompletionHandler(completionHandler)
 	return x
 }
 
+// Determine if animations are enabled or not for animations that occur as a result of another property change.
+//
 // WithAllowsImplicitAnimation sets the allowsImplicitAnimation property and returns the receiver for chaining.
 func (x *AnimationContext) WithAllowsImplicitAnimation(allowsImplicitAnimation bool) *AnimationContext {
 	x.inner.SetAllowsImplicitAnimation(allowsImplicitAnimation)

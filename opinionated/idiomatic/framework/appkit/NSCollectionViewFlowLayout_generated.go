@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A layout that organizes items into a flexible and configurable arrangement.
+//
 // CollectionViewFlowLayout wraps [raw.NSCollectionViewFlowLayout] with a fluent Go API.
 type CollectionViewFlowLayout struct {
 	inner *raw.NSCollectionViewFlowLayout
@@ -37,48 +39,64 @@ func NewCollectionViewFlowLayout() *CollectionViewFlowLayout {
 	return &CollectionViewFlowLayout{inner: raw.NSCollectionViewFlowLayoutFromID(_id)}
 }
 
+// The minimum spacing (in points) to use between rows or columns.
+//
 // WithMinimumLineSpacing sets the minimumLineSpacing property and returns the receiver for chaining.
 func (x *CollectionViewFlowLayout) WithMinimumLineSpacing(minimumLineSpacing float64) *CollectionViewFlowLayout {
 	x.inner.SetMinimumLineSpacing(minimumLineSpacing)
 	return x
 }
 
+// The minimum spacing (in points) to use between items in the same row or column.
+//
 // WithMinimumInteritemSpacing sets the minimumInteritemSpacing property and returns the receiver for chaining.
 func (x *CollectionViewFlowLayout) WithMinimumInteritemSpacing(minimumInteritemSpacing float64) *CollectionViewFlowLayout {
 	x.inner.SetMinimumInteritemSpacing(minimumInteritemSpacing)
 	return x
 }
 
+// The default size to use for items.
+//
 // WithItemSize sets the itemSize property and returns the receiver for chaining.
 func (x *CollectionViewFlowLayout) WithItemSize(itemSize corefoundation.CGSize) *CollectionViewFlowLayout {
 	x.inner.SetItemSize(itemSize)
 	return x
 }
 
+// The estimated size of items in the collection view.
+//
 // WithEstimatedItemSize sets the estimatedItemSize property and returns the receiver for chaining.
 func (x *CollectionViewFlowLayout) WithEstimatedItemSize(estimatedItemSize corefoundation.CGSize) *CollectionViewFlowLayout {
 	x.inner.SetEstimatedItemSize(estimatedItemSize)
 	return x
 }
 
+// The scroll direction of the layout.
+//
 // WithScrollDirection sets the scrollDirection property and returns the receiver for chaining.
 func (x *CollectionViewFlowLayout) WithScrollDirection(scrollDirection NSCollectionViewScrollDirection) *CollectionViewFlowLayout {
 	x.inner.SetScrollDirection(raw.NSCollectionViewScrollDirection(scrollDirection))
 	return x
 }
 
+// The default size to use for section headers.
+//
 // WithHeaderReferenceSize sets the headerReferenceSize property and returns the receiver for chaining.
 func (x *CollectionViewFlowLayout) WithHeaderReferenceSize(headerReferenceSize corefoundation.CGSize) *CollectionViewFlowLayout {
 	x.inner.SetHeaderReferenceSize(headerReferenceSize)
 	return x
 }
 
+// The default size to use for section footers.
+//
 // WithFooterReferenceSize sets the footerReferenceSize property and returns the receiver for chaining.
 func (x *CollectionViewFlowLayout) WithFooterReferenceSize(footerReferenceSize corefoundation.CGSize) *CollectionViewFlowLayout {
 	x.inner.SetFooterReferenceSize(footerReferenceSize)
 	return x
 }
 
+// The margins used to lay out content in a section.
+//
 // WithSectionInset sets the sectionInset property and returns the receiver for chaining.
 func (x *CollectionViewFlowLayout) WithSectionInset(sectionInset foundation.NSEdgeInsets) *CollectionViewFlowLayout {
 	x.inner.SetSectionInset(sectionInset)

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that provides the track-level interface to inspect a fragmented asset’s media tracks.
+//
 // FragmentedAssetTrack wraps [raw.AVFragmentedAssetTrack] with a fluent Go API.
 type FragmentedAssetTrack struct {
 	inner *raw.AVFragmentedAssetTrack

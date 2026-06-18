@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The mechanism for loading image units in macOS.
+//
 // PlugIn wraps [raw.CIPlugIn] with a fluent Go API.
 type PlugIn struct {
 	inner *raw.CIPlugIn

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Encapsulates a mutable network profile entry.
+//
 // MutableNetworkProfile wraps [raw.CWMutableNetworkProfile] with a fluent Go API.
 type MutableNetworkProfile struct {
 	inner *raw.CWMutableNetworkProfile
@@ -36,7 +38,7 @@ func NewMutableNetworkProfile() *MutableNetworkProfile {
 	return &MutableNetworkProfile{inner: raw.CWMutableNetworkProfileFromID(_id)}
 }
 
-// @property @abstract Set the service set identifier (SSID).
+// The service set identifier (SSID).
 //
 // WithSsidData sets the ssidData property and returns the receiver for chaining.
 func (x *MutableNetworkProfile) WithSsidData(ssidData *foundation.NSData) *MutableNetworkProfile {
@@ -44,7 +46,7 @@ func (x *MutableNetworkProfile) WithSsidData(ssidData *foundation.NSData) *Mutab
 	return x
 }
 
-// @property @abstract Set the security type.
+// The security type.
 //
 // WithSecurity sets the security property and returns the receiver for chaining.
 func (x *MutableNetworkProfile) WithSecurity(security CWSecurity) *MutableNetworkProfile {

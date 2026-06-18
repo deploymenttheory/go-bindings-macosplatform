@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing metrics about the use of the GPU.
+//
 // GPUMetric wraps [raw.MXGPUMetric] with a fluent Go API.
 type GPUMetric struct {
 	inner *raw.MXGPUMetric

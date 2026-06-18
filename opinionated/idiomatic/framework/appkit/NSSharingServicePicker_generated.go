@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A list of sharing services that the user can choose from.
+//
 // SharingServicePicker wraps [raw.NSSharingServicePicker] with a fluent Go API.
 type SharingServicePicker struct {
 	inner *raw.NSSharingServicePicker
@@ -31,7 +33,7 @@ func SharingServicePickerFromID(id objc.ID) *SharingServicePicker {
 	return &SharingServicePicker{inner: raw.NSSharingServicePickerFromID(id)}
 }
 
-// Returns a new picker. The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider or an NSDocument. (e.g. NSString, NSImage, NSURL, etc.)
+// Creates a new sharing service picker for the selected items.
 //
 // NewSharingServicePickerWithItems creates a new [SharingServicePicker].
 func NewSharingServicePickerWithItems(items *foundation.NSArray[objc.ID]) *SharingServicePicker {
@@ -40,20 +42,22 @@ func NewSharingServicePickerWithItems(items *foundation.NSArray[objc.ID]) *Shari
 	return &SharingServicePicker{inner: raw.NSSharingServicePickerFromID(_id)}
 }
 
+// The object for managing the sharing service picker.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *SharingServicePicker) WithDelegate(delegate raw.NSSharingServicePickerDelegate) *SharingServicePicker {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
-// Shows the picker, populated with sharing services related to the instance items. When the user selects one of the sharing services, the sharing service will be performed. Note that this method must be called on mouseDown.
+// Shows the picker interface and populates it with the relevant sharing services.
 //
 // ShowRelativeToRectOfViewPreferredEdge calls the underlying ShowRelativeToRectOfViewPreferredEdge.
 func (x *SharingServicePicker) ShowRelativeToRectOfViewPreferredEdge(rect corefoundation.CGRect, view *raw.NSView, preferredEdge foundation.NSRectEdge) {
 	x.inner.ShowRelativeToRectOfViewPreferredEdge(rect, view, preferredEdge)
 }
 
-// Closes the picker UI. `-[NSSharingServicePickerDelegate sharingServicePicker:didChooseSharingService:]` will be invoked if `delegate` is set, with a `nil` service.
+// Closes the picker interface.
 //
 // Close calls the underlying Close.
 func (x *SharingServicePicker) Close() {

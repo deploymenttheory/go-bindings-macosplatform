@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The class that defines the parameters for an image to column or column to image operation.
+//
 // GraphImToColOpDescriptor wraps [raw.MPSGraphImToColOpDescriptor] with a fluent Go API.
 type GraphImToColOpDescriptor struct {
 	inner *raw.MPSGraphImToColOpDescriptor
@@ -43,7 +45,7 @@ func (x *GraphImToColOpDescriptor) WithKernelWidth(kernelWidth uint) *GraphImToC
 	return x
 }
 
-// The property that defines the kernel size  in height dimension.
+// The property that defines the kernel size in height dimension.
 //
 // WithKernelHeight sets the kernelHeight property and returns the receiver for chaining.
 func (x *GraphImToColOpDescriptor) WithKernelHeight(kernelHeight uint) *GraphImToColOpDescriptor {
@@ -115,7 +117,7 @@ func (x *GraphImToColOpDescriptor) WithPaddingBottom(paddingBottom uint) *GraphI
 	return x
 }
 
-// The property that defines the layout of source or output  tensor. e.g. `batch x channels x width x height` for `NCHW` layout
+// The property that defines the layout of source or output tensor. e.g. batch x channels x width x height for NCHW layout
 //
 // WithDataLayout sets the dataLayout property and returns the receiver for chaining.
 func (x *GraphImToColOpDescriptor) WithDataLayout(dataLayout MPSGraphTensorNamedDataLayout) *GraphImToColOpDescriptor {
@@ -123,7 +125,7 @@ func (x *GraphImToColOpDescriptor) WithDataLayout(dataLayout MPSGraphTensorNamed
 	return x
 }
 
-// Sets the descriptor's padding to the given values. - Parameters: - paddingLeft: See `paddingLeft` property. - paddingRight: See `paddingRight` property. - paddingTop: See `paddingTop` property. - paddingBottom: See `paddingBottom` property.
+// Sets the descriptor’s padding to the given values.
 //
 // SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom calls the underlying SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom.
 func (x *GraphImToColOpDescriptor) SetExplicitPaddingWithPaddingLeftPaddingRightPaddingTopPaddingBottom(paddingLeft uint, paddingRight uint, paddingTop uint, paddingBottom uint) {

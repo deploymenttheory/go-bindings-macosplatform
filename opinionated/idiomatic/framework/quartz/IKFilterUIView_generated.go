@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Input parameters for filtering core image filters.
+//
 // IKFilterUIView wraps [raw.IKFilterUIView] with a fluent Go API.
 type IKFilterUIView struct {
 	inner *raw.IKFilterUIView
@@ -32,7 +34,7 @@ func IKFilterUIViewFromID(id objc.ID) *IKFilterUIView {
 	return &IKFilterUIView{inner: raw.IKFilterUIViewFromID(id)}
 }
 
-// @method     initWithFrame:filter: @abstract   The initWithFrame method initializes a view that retains the filter passed into it.
+// Initializes a view that contains controls for the input parameters of a filter.
 //
 // NewIKFilterUIViewWithFrameFilter creates a new [IKFilterUIView].
 func NewIKFilterUIViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter *coreimage.CIFilter) *IKFilterUIView {
@@ -41,14 +43,14 @@ func NewIKFilterUIViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter 
 	return &IKFilterUIView{inner: raw.IKFilterUIViewFromID(_id)}
 }
 
-// @method     filter @abstract   Accessor method to return the filter instance that the view controls.
+// Returns the Core Image filter associated with the view.
 //
 // Filter calls the underlying Filter.
 func (x *IKFilterUIView) Filter() *coreimage.CIFilter {
 	return x.inner.Filter()
 }
 
-// @method     objectController @abstract   Accessor method for the object controller for all bindings between the filter and the UI representation.
+// Returns the object controller for the bindings between the filter and its view.
 //
 // ObjectController calls the underlying ObjectController.
 func (x *IKFilterUIView) ObjectController() *appkit.NSObjectController {

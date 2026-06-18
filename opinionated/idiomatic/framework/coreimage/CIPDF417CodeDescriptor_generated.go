@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A concrete subclass of Core Image Barcode Descriptor that represents a PDF417 symbol.
+//
 // PDF417CodeDescriptor wraps [raw.CIPDF417CodeDescriptor] with a fluent Go API.
 type PDF417CodeDescriptor struct {
 	inner *raw.CIPDF417CodeDescriptor
@@ -30,7 +32,7 @@ func PDF417CodeDescriptorFromID(id objc.ID) *PDF417CodeDescriptor {
 	return &PDF417CodeDescriptor{inner: raw.CIPDF417CodeDescriptorFromID(id)}
 }
 
-// Initializes an PDF417 code descriptor for the given payload and parameters. - Parameters: - errorCorrectedPayload: The data to encode in the PDF417 code symbol. - isCompact: A Boolean indicating whether or not the PDF417 code is compact. - rowCount: The number of rows in the PDF417 code, from 3 to 90. - columnCount: The number of columns in the Aztec code, from 1 to 30. - Returns: An initialized “CIPDF417CodeDescriptor“ instance or `nil` if the parameters are invalid
+// Initializes an PDF417 code descriptor for the given payload and parameters.
 //
 // NewPDF417CodeDescriptorWithPayloadIsCompactRowCountColumnCount creates a new [PDF417CodeDescriptor].
 func NewPDF417CodeDescriptorWithPayloadIsCompactRowCountColumnCount(errorCorrectedPayload *foundation.NSData, isCompact bool, rowCount int, columnCount int) *PDF417CodeDescriptor {

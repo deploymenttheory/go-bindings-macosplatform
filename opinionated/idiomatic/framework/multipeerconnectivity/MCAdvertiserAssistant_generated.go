@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The MCAdvertiserAssistant is a convenience class that handles advertising, presents incoming invitations to the user, and handles users’ responses. Use this class to provide a user interface for handling invitations when your app does not require programmatic control over the invitation process.
+//
 // AdvertiserAssistant wraps [raw.MCAdvertiserAssistant] with a fluent Go API.
 type AdvertiserAssistant struct {
 	inner *raw.MCAdvertiserAssistant
@@ -31,6 +33,8 @@ func AdvertiserAssistantFromID(id objc.ID) *AdvertiserAssistant {
 	return &AdvertiserAssistant{inner: raw.MCAdvertiserAssistantFromID(id)}
 }
 
+// Initializes an advertiser assistant object.
+//
 // NewAdvertiserAssistantWithServiceTypeDiscoveryInfoSession creates a new [AdvertiserAssistant].
 func NewAdvertiserAssistantWithServiceTypeDiscoveryInfoSession(serviceType string, info *foundation.NSDictionary[*foundation.NSString, *foundation.NSString], session *raw.MCSession) *AdvertiserAssistant {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MCAdvertiserAssistant")), objc.RegisterName("alloc"))
@@ -38,17 +42,23 @@ func NewAdvertiserAssistantWithServiceTypeDiscoveryInfoSession(serviceType strin
 	return &AdvertiserAssistant{inner: raw.MCAdvertiserAssistantFromID(_id)}
 }
 
+// The delegate object that handles advertising-assistant-related events.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *AdvertiserAssistant) WithDelegate(delegate raw.MCAdvertiserAssistantDelegate) *AdvertiserAssistant {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Begins advertising the service provided by a local peer and starts the assistant.
+//
 // Start calls the underlying Start.
 func (x *AdvertiserAssistant) Start() {
 	x.inner.Start()
 }
 
+// Stops advertising the service provided by a local peer and stops the assistant.
+//
 // Stop calls the underlying Stop.
 func (x *AdvertiserAssistant) Stop() {
 	x.inner.Stop()

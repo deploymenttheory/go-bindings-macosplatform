@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The paragraph or ruler attributes for an attributed string.
+//
 // ParagraphStyle wraps [raw.NSParagraphStyle] with a fluent Go API.
 type ParagraphStyle struct {
 	inner *raw.NSParagraphStyle

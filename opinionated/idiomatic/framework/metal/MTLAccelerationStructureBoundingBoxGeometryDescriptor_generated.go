@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of a list of bounding boxes to turn into an acceleration structure.
+//
 // AccelerationStructureBoundingBoxGeometryDescriptor wraps [raw.MTLAccelerationStructureBoundingBoxGeometryDescriptor] with a fluent Go API.
 type AccelerationStructureBoundingBoxGeometryDescriptor struct {
 	inner *raw.MTLAccelerationStructureBoundingBoxGeometryDescriptor
@@ -38,7 +40,7 @@ func NewAccelerationStructureBoundingBoxGeometryDescriptor() *AccelerationStruct
 	return &AccelerationStructureBoundingBoxGeometryDescriptor{inner: raw.MTLAccelerationStructureBoundingBoxGeometryDescriptorFromID(_id)}
 }
 
-// @brief Bounding box buffer containing MTLAxisAlignedBoundingBoxes. Must not be nil.
+// A buffer that contains an array of bounding box structures.
 //
 // WithBoundingBoxBuffer sets the boundingBoxBuffer property and returns the receiver for chaining.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxBuffer(boundingBoxBuffer raw.MTLBuffer) *AccelerationStructureBoundingBoxGeometryDescriptor {
@@ -46,7 +48,7 @@ func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxBuff
 	return x
 }
 
-// @brief Bounding box buffer offset. Must be a multiple of the bounding box stride and must be aligned to the platform's buffer offset alignment.
+// The offset, in bytes, to the first bounding box in the buffer.
 //
 // WithBoundingBoxBufferOffset sets the boundingBoxBufferOffset property and returns the receiver for chaining.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxBufferOffset(boundingBoxBufferOffset uint) *AccelerationStructureBoundingBoxGeometryDescriptor {
@@ -54,7 +56,7 @@ func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxBuff
 	return x
 }
 
-// @brief Stride, in bytes, between bounding boxes in the bounding box buffer. Must be at least 24 bytes and must be a multiple of 4 bytes. Defaults to 24 bytes.
+// The stride, in bytes, between bounding boxes in the buffer.
 //
 // WithBoundingBoxStride sets the boundingBoxStride property and returns the receiver for chaining.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxStride(boundingBoxStride uint) *AccelerationStructureBoundingBoxGeometryDescriptor {
@@ -62,7 +64,7 @@ func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxStri
 	return x
 }
 
-// @brief Number of bounding boxes
+// The number of bounding boxes in the bounding box buffer.
 //
 // WithBoundingBoxCount sets the boundingBoxCount property and returns the receiver for chaining.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxCount(boundingBoxCount uint) *AccelerationStructureBoundingBoxGeometryDescriptor {
@@ -70,13 +72,15 @@ func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxCoun
 	return x
 }
 
+// An index into the intersection table for determining which intersection function Metal calls when it intersects a ray with the acceleration structure.
+//
 // WithIntersectionFunctionTableOffset sets the intersectionFunctionTableOffset property and returns the receiver for chaining.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *AccelerationStructureBoundingBoxGeometryDescriptor {
 	x.inner.MTLAccelerationStructureGeometryDescriptor.SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset)
 	return x
 }
 
-// @brief Whether the geometry is opaque
+// A Boolean value that determines whether the geometry data in the acceleration structure needs to skip triangle-intersection tests.
 //
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithOpaque(opaque bool) *AccelerationStructureBoundingBoxGeometryDescriptor {
@@ -84,7 +88,7 @@ func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithOpaque(opaque b
 	return x
 }
 
-// @brief Whether intersection functions may be invoked more than once per ray/primitive intersection. Defaults to YES.
+// A Boolean value that indicates whether Metal calls the ray-intersection test more than once per primitive on the structure.
 //
 // WithAllowDuplicateIntersectionFunctionInvocation sets the allowDuplicateIntersectionFunctionInvocation property and returns the receiver for chaining.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureBoundingBoxGeometryDescriptor {
@@ -92,7 +96,7 @@ func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithAllowDuplicateI
 	return x
 }
 
-// @brief Label
+// A label for the geometry structure, suitable for debugging.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithLabel(label string) *AccelerationStructureBoundingBoxGeometryDescriptor {

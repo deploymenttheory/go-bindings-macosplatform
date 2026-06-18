@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The NSExceptionHandler class provides facilities for monitoring and debugging exceptional conditions in Objective-C programs. It works by installing a special uncaught exception handler via the NSSetUncaughtExceptionHandler function. Consequently, to use the services of NSExceptionHandler, you must not install your own custom uncaught exception handler.
+//
 // ExceptionHandler wraps [raw.NSExceptionHandler] with a fluent Go API.
 type ExceptionHandler struct {
 	inner *raw.NSExceptionHandler
@@ -35,31 +37,43 @@ func NewExceptionHandler() *ExceptionHandler {
 	return &ExceptionHandler{inner: raw.NSExceptionHandlerFromID(_id)}
 }
 
+// Sets the bit mask of constants specifying the types of exceptions monitored by the receiver and its handling and logging behavior.
+//
 // SetExceptionHandlingMask calls the underlying SetExceptionHandlingMask.
 func (x *ExceptionHandler) SetExceptionHandlingMask(aMask uint) {
 	x.inner.SetExceptionHandlingMask(aMask)
 }
 
+// Returns a bit mask representing the types of exceptions monitored by the receiver and its handling and logging behavior.
+//
 // ExceptionHandlingMask calls the underlying ExceptionHandlingMask.
 func (x *ExceptionHandler) ExceptionHandlingMask() uint {
 	return x.inner.ExceptionHandlingMask()
 }
 
+// Sets the bit mask of constants specifying the types of exceptions that will halt execution for debugging.
+//
 // SetExceptionHangingMask calls the underlying SetExceptionHangingMask.
 func (x *ExceptionHandler) SetExceptionHangingMask(aMask uint) {
 	x.inner.SetExceptionHangingMask(aMask)
 }
 
+// Returns a bit mask representing the types of exceptions that will halt execution for debugging.
+//
 // ExceptionHangingMask calls the underlying ExceptionHangingMask.
 func (x *ExceptionHandler) ExceptionHangingMask() uint {
 	return x.inner.ExceptionHangingMask()
 }
 
+// Sets the delegate of the NSExceptionHandler object.
+//
 // SetDelegate calls the underlying SetDelegate.
 func (x *ExceptionHandler) SetDelegate(anObject objc.ID) {
 	x.inner.SetDelegate(anObject)
 }
 
+// Returns the delegate of the NSExceptionHandler object.
+//
 // Delegate calls the underlying Delegate.
 func (x *ExceptionHandler) Delegate() objc.ID {
 	return x.inner.Delegate()

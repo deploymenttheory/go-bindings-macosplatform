@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that responds to remote control events sent by external accessories and system controls.
+//
 // RemoteCommandCenter wraps [raw.MPRemoteCommandCenter] with a fluent Go API.
 type RemoteCommandCenter struct {
 	inner *raw.MPRemoteCommandCenter

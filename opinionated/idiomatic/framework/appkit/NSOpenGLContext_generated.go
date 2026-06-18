@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents an OpenGL graphics context, into which all OpenGL calls are rendered.
+//
 // OpenGLContext wraps [raw.NSOpenGLContext] with a fluent Go API.
 type OpenGLContext struct {
 	inner *raw.NSOpenGLContext
@@ -30,6 +32,8 @@ func OpenGLContextFromID(id objc.ID) *OpenGLContext {
 	return &OpenGLContext{inner: raw.NSOpenGLContextFromID(id)}
 }
 
+// Returns an OpenGL context object initialized with the specified pixel format information.
+//
 // NewOpenGLContextWithFormatShareContext creates a new [OpenGLContext].
 func NewOpenGLContextWithFormatShareContext(format *raw.NSOpenGLPixelFormat, share *raw.NSOpenGLContext) *OpenGLContext {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOpenGLContext")), objc.RegisterName("alloc"))
@@ -37,6 +41,8 @@ func NewOpenGLContextWithFormatShareContext(format *raw.NSOpenGLPixelFormat, sha
 	return &OpenGLContext{inner: raw.NSOpenGLContextFromID(_id)}
 }
 
+// Initializes and returns an OpenGL context object using an existing CGL context.
+//
 // NewOpenGLContextWithCGLContextObj creates a new [OpenGLContext].
 func NewOpenGLContextWithCGLContextObj(context_ unsafe.Pointer) *OpenGLContext {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOpenGLContext")), objc.RegisterName("alloc"))
@@ -44,12 +50,16 @@ func NewOpenGLContextWithCGLContextObj(context_ unsafe.Pointer) *OpenGLContext {
 	return &OpenGLContext{inner: raw.NSOpenGLContextFromID(_id)}
 }
 
+// Returns the OpenGL context’s view.
+//
 // WithView sets the view property and returns the receiver for chaining.
 func (x *OpenGLContext) WithView(view ViewProvider) *OpenGLContext {
 	x.inner.SetView(view.asView())
 	return x
 }
 
+// Returns the current virtual screen for the OpenGL context.
+//
 // WithCurrentVirtualScreen sets the currentVirtualScreen property and returns the receiver for chaining.
 func (x *OpenGLContext) WithCurrentVirtualScreen(currentVirtualScreen int32) *OpenGLContext {
 	x.inner.SetCurrentVirtualScreen(currentVirtualScreen)
@@ -61,51 +71,71 @@ func (x *OpenGLContext) SetView(view *raw.NSView) {
 	x.inner.SetView(view)
 }
 
+// Sets the OpenGL context to full-screen mode.
+//
 // SetFullScreen calls the underlying SetFullScreen.
 func (x *OpenGLContext) SetFullScreen() {
 	x.inner.SetFullScreen()
 }
 
+// Instructs the OpenGL context to render into an offscreen buffer with the specified attributes.
+//
 // SetOffScreenWidthHeightRowbytes calls the underlying SetOffScreenWidthHeightRowbytes.
 func (x *OpenGLContext) SetOffScreenWidthHeightRowbytes(baseaddr unsafe.Pointer, width int32, height int32, rowbytes int32) {
 	x.inner.SetOffScreenWidthHeightRowbytes(baseaddr, width, height, rowbytes)
 }
 
+// Disassociates the OpenGL context from its viewport.
+//
 // ClearDrawable calls the underlying ClearDrawable.
 func (x *OpenGLContext) ClearDrawable() {
 	x.inner.ClearDrawable()
 }
 
+// Updates the OpenGL context’s drawable object.
+//
 // Update calls the underlying Update.
 func (x *OpenGLContext) Update() {
 	x.inner.Update()
 }
 
+// Copies the back buffer to the front buffer of the OpenGL context.
+//
 // FlushBuffer calls the underlying FlushBuffer.
 func (x *OpenGLContext) FlushBuffer() {
 	x.inner.FlushBuffer()
 }
 
+// Sets the context as the current OpenGL context object.
+//
 // MakeCurrentContext calls the underlying MakeCurrentContext.
 func (x *OpenGLContext) MakeCurrentContext() {
 	x.inner.MakeCurrentContext()
 }
 
+// Copies selected groups of state variables to the OpenGL context.
+//
 // CopyAttributesFromContextWithMask calls the underlying CopyAttributesFromContextWithMask.
 func (x *OpenGLContext) CopyAttributesFromContextWithMask(context_ *raw.NSOpenGLContext, mask uint32) {
 	x.inner.CopyAttributesFromContextWithMask(context_, mask)
 }
 
+// Sets the value of the specified parameter.
+//
 // SetValuesForParameter calls the underlying SetValuesForParameter.
 func (x *OpenGLContext) SetValuesForParameter(vals *int32, param NSOpenGLContextParameter) {
 	x.inner.SetValuesForParameter(vals, raw.NSOpenGLContextParameter(param))
 }
 
+// Returns the value of the requested parameter.
+//
 // GetValuesForParameter calls the underlying GetValuesForParameter.
 func (x *OpenGLContext) GetValuesForParameter(vals *int32, param NSOpenGLContextParameter) {
 	x.inner.GetValuesForParameter(vals, raw.NSOpenGLContextParameter(param))
 }
 
+// Creates a new texture from the contents of the specified view.
+//
 // CreateTextureFromViewInternalFormat calls the underlying CreateTextureFromViewInternalFormat.
 func (x *OpenGLContext) CreateTextureFromViewInternalFormat(target uint32, view *raw.NSView, format uint32) {
 	x.inner.CreateTextureFromViewInternalFormat(target, view, format)
@@ -144,11 +174,15 @@ func (x *OpenGLContext) CGLContextObj() unsafe.Pointer {
 	return x.inner.CGLContextObj()
 }
 
+// Attaches the specified pixel buffer to the OpenGL context.
+//
 // SetPixelBufferCubeMapFaceMipMapLevelCurrentVirtualScreen calls the underlying SetPixelBufferCubeMapFaceMipMapLevelCurrentVirtualScreen.
 func (x *OpenGLContext) SetPixelBufferCubeMapFaceMipMapLevelCurrentVirtualScreen(pixelBuffer *raw.NSOpenGLPixelBuffer, face uint32, level int32, screen int32) {
 	x.inner.SetPixelBufferCubeMapFaceMipMapLevelCurrentVirtualScreen(pixelBuffer, face, level, screen)
 }
 
+// Returns the pixel-buffer object attached to the OpenGL context.
+//
 // PixelBuffer calls the underlying PixelBuffer.
 func (x *OpenGLContext) PixelBuffer() *OpenGLPixelBuffer {
 	_r := x.inner.PixelBuffer()
@@ -158,16 +192,22 @@ func (x *OpenGLContext) PixelBuffer() *OpenGLPixelBuffer {
 	return &OpenGLPixelBuffer{inner: _r}
 }
 
+// Returns the cube map face of the pixel buffer attached to the OpenGL context.
+//
 // PixelBufferCubeMapFace calls the underlying PixelBufferCubeMapFace.
 func (x *OpenGLContext) PixelBufferCubeMapFace() uint32 {
 	return x.inner.PixelBufferCubeMapFace()
 }
 
+// Returns the mipmap level of the pixel buffer attached to the OpenGL context.
+//
 // PixelBufferMipMapLevel calls the underlying PixelBufferMipMapLevel.
 func (x *OpenGLContext) PixelBufferMipMapLevel() int32 {
 	return x.inner.PixelBufferMipMapLevel()
 }
 
+// Attaches the image data in the specified pixel buffer to the texture object currently bound by the OpenGL context.
+//
 // SetTextureImageToPixelBufferColorBuffer calls the underlying SetTextureImageToPixelBufferColorBuffer.
 func (x *OpenGLContext) SetTextureImageToPixelBufferColorBuffer(pixelBuffer *raw.NSOpenGLPixelBuffer, source uint32) {
 	x.inner.SetTextureImageToPixelBufferColorBuffer(pixelBuffer, source)

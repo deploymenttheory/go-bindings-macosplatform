@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The Font panel—a user interface object that displays a list of available fonts, letting the user preview them and change the font used to display text.
+//
 // FontPanel wraps [raw.NSFontPanel] with a fluent Go API.
 type FontPanel struct {
 	inner *raw.NSFontPanel
@@ -38,43 +40,55 @@ func NewFontPanel() *FontPanel {
 	return &FontPanel{inner: raw.NSFontPanelFromID(_id)}
 }
 
+// The specified view as the receiver’s accessory view, allowing you to add custom controls to your application’s Font panel without having to create a subclass.
+//
 // WithAccessoryView sets the accessoryView property and returns the receiver for chaining.
 func (x *FontPanel) WithAccessoryView(accessoryView ViewProvider) *FontPanel {
 	x.inner.SetAccessoryView(accessoryView.asView())
 	return x
 }
 
+// A Boolean that shows whether the receiver’s Set button is enabled.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *FontPanel) WithEnabled(enabled bool) *FontPanel {
 	x.inner.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver is a floating panel.
+//
 // WithFloatingPanel sets the floatingPanel property and returns the receiver for chaining.
 func (x *FontPanel) WithFloatingPanel(floatingPanel bool) *FontPanel {
 	x.inner.NSPanel.SetFloatingPanel(floatingPanel)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver becomes the key window only when needed.
+//
 // WithBecomesKeyOnlyIfNeeded sets the becomesKeyOnlyIfNeeded property and returns the receiver for chaining.
 func (x *FontPanel) WithBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) *FontPanel {
 	x.inner.NSPanel.SetBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded)
 	return x
 }
 
+// A Boolean value that indicates whether the panel receives keyboard and mouse events even when some other window is being run modally.
+//
 // WithWorksWhenModal sets the worksWhenModal property and returns the receiver for chaining.
 func (x *FontPanel) WithWorksWhenModal(worksWhenModal bool) *FontPanel {
 	x.inner.NSPanel.SetWorksWhenModal(worksWhenModal)
 	return x
 }
 
+// The string that appears in the title bar of the window or the path to the represented file.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *FontPanel) WithTitle(title string) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
-// Secondary text that may be displayed adjacent to or below the primary title depending on the configuration of the window. A value of empty string will remove the subtitle from the window layout.
+// A secondary line of text that appears in the title bar of the window.
 //
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *FontPanel) WithSubtitle(subtitle string) *FontPanel {
@@ -82,7 +96,7 @@ func (x *FontPanel) WithSubtitle(subtitle string) *FontPanel {
 	return x
 }
 
-// See the enum values for how this property works.
+// A value that indicates the visibility of the window’s title and title bar buttons.
 //
 // WithTitleVisibility sets the titleVisibility property and returns the receiver for chaining.
 func (x *FontPanel) WithTitleVisibility(titleVisibility NSWindowTitleVisibility) *FontPanel {
@@ -90,7 +104,7 @@ func (x *FontPanel) WithTitleVisibility(titleVisibility NSWindowTitleVisibility)
 	return x
 }
 
-// When \c YES, the titlebar doesn't draw its background, allowing all buttons to show through, and "click through" to happen. In general, this is only useful when \c NSFullSizeContentViewWindowMask is set.
+// A Boolean value that indicates whether the title bar draws its background.
 //
 // WithTitlebarAppearsTransparent sets the titlebarAppearsTransparent property and returns the receiver for chaining.
 func (x *FontPanel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *FontPanel {
@@ -98,7 +112,7 @@ func (x *FontPanel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bo
 	return x
 }
 
-// Specifies how the titlebar area of the window should appear when the window displays an NSToolbar
+// The style that determines the appearance and location of the toolbar in relation to the title bar.
 //
 // WithToolbarStyle sets the toolbarStyle property and returns the receiver for chaining.
 func (x *FontPanel) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *FontPanel {
@@ -106,6 +120,8 @@ func (x *FontPanel) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *FontPan
 	return x
 }
 
+// An array of title bar accessory view controllers that are currently added to the window.
+//
 // WithTitlebarAccessoryViewControllers sets the collection, converting the Go slice to an NSArray.
 func (x *FontPanel) WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *FontPanel {
 	if len(items) == 0 {
@@ -124,7 +140,7 @@ func (x *FontPanel) WithTitlebarAccessoryViewControllers(items ...*raw.NSTitleba
 	return x
 }
 
-// If url is not nil and its path is not empty, the window will show a document icon in the titlebar. If the url represents a filename or other resource with a known icon, that icon will be used as the document icon.  Otherwise the default document icon will be used.  The icon can be customized using `-[[NSWindow standardWindowButton:NSWindowDocumentIconButton] setImage:customImage]`.  If url is not nil and its path is not empty, the window will have a pop-up menu which can be shown via command-click on the area containing the document icon and title.  By default, this menu will display the path components of the url.  The presence and contents of this menu can be controlled by the delegate method `-[window:shouldPopUpDocumentPathMenu:]` If the url is nil or has an empty path, the window will not show a document icon and will not have a pop-up menu available via command-click.
+// The URL of the file the window represents.
 //
 // WithRepresentedURL sets the representedURL property and returns the receiver for chaining.
 func (x *FontPanel) WithRepresentedURL(representedURL string) *FontPanel {
@@ -132,31 +148,39 @@ func (x *FontPanel) WithRepresentedURL(representedURL string) *FontPanel {
 	return x
 }
 
+// The path to the file of the window’s represented file.
+//
 // WithRepresentedFilename sets the representedFilename property and returns the receiver for chaining.
 func (x *FontPanel) WithRepresentedFilename(representedFilename string) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetRepresentedFilename(foundation.NSStringStringWithUTF8String(representedFilename))
 	return x
 }
 
+// A Boolean value that indicates whether the window is excluded from the application’s Windows menu.
+//
 // WithExcludedFromWindowsMenu sets the excludedFromWindowsMenu property and returns the receiver for chaining.
 func (x *FontPanel) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetExcludedFromWindowsMenu(excludedFromWindowsMenu)
 	return x
 }
 
+// The window’s content view, the highest accessible view object in the window’s view hierarchy.
+//
 // WithContentView sets the contentView property and returns the receiver for chaining.
 func (x *FontPanel) WithContentView(contentView ViewProvider) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetContentView(contentView.asView())
 	return x
 }
 
+// The window’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *FontPanel) WithDelegate(delegate raw.NSWindowDelegate) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetDelegate(delegate)
 	return x
 }
 
-// @note The styleMask can only be set on macOS 10.6 and later. Valid \c styleMask settings have the same restrictions as the \c styleMask passed to `-initWithContentRect:styleMask:backing:defer:`.  Some \c styleMask changes will cause the view hierarchy to be rebuilt, since there is a different subclass for the top level view of a borderless window than for the top level view of a titled window.
+// Flags that describe the window’s current style, such as if it’s resizable or in full-screen mode.
 //
 // WithStyleMask sets the styleMask property and returns the receiver for chaining.
 func (x *FontPanel) WithStyleMask(styleMask NSWindowStyleMask) *FontPanel {
@@ -164,73 +188,95 @@ func (x *FontPanel) WithStyleMask(styleMask NSWindowStyleMask) *FontPanel {
 	return x
 }
 
+// The window’s resizing increments.
+//
 // WithResizeIncrements sets the resizeIncrements property and returns the receiver for chaining.
 func (x *FontPanel) WithResizeIncrements(resizeIncrements corefoundation.CGSize) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetResizeIncrements(resizeIncrements)
 	return x
 }
 
+// The window’s aspect ratio, which constrains the size of its frame rectangle to integral multiples of this ratio when the user resizes it.
+//
 // WithAspectRatio sets the aspectRatio property and returns the receiver for chaining.
 func (x *FontPanel) WithAspectRatio(aspectRatio corefoundation.CGSize) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetAspectRatio(aspectRatio)
 	return x
 }
 
+// The window’s content-view resizing increments.
+//
 // WithContentResizeIncrements sets the contentResizeIncrements property and returns the receiver for chaining.
 func (x *FontPanel) WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetContentResizeIncrements(contentResizeIncrements)
 	return x
 }
 
+// The window’s content aspect ratio.
+//
 // WithContentAspectRatio sets the contentAspectRatio property and returns the receiver for chaining.
 func (x *FontPanel) WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetContentAspectRatio(contentAspectRatio)
 	return x
 }
 
+// A Boolean value that indicates whether any of the window’s views need to be displayed.
+//
 // WithViewsNeedDisplay sets the viewsNeedDisplay property and returns the receiver for chaining.
 func (x *FontPanel) WithViewsNeedDisplay(viewsNeedDisplay bool) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetViewsNeedDisplay(viewsNeedDisplay)
 	return x
 }
 
+// A Boolean value that indicates whether the window tries to optimize user-initiated resize operations by preserving the content of views that have not changed.
+//
 // WithPreservesContentDuringLiveResize sets the preservesContentDuringLiveResize property and returns the receiver for chaining.
 func (x *FontPanel) WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetPreservesContentDuringLiveResize(preservesContentDuringLiveResize)
 	return x
 }
 
+// A Boolean value that indicates whether the window is released when it receives the close message.
+//
 // WithReleasedWhenClosed sets the releasedWhenClosed property and returns the receiver for chaining.
 func (x *FontPanel) WithReleasedWhenClosed(releasedWhenClosed bool) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetReleasedWhenClosed(releasedWhenClosed)
 	return x
 }
 
+// The color of the window’s background.
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *FontPanel) WithBackgroundColor(backgroundColor *Color) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the window can be dragged by clicking in its title bar or background.
+//
 // WithMovable sets the movable property and returns the receiver for chaining.
 func (x *FontPanel) WithMovable(movable bool) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetMovable(movable)
 	return x
 }
 
+// A Boolean value that indicates whether the window is movable by clicking and dragging anywhere in its background.
+//
 // WithMovableByWindowBackground sets the movableByWindowBackground property and returns the receiver for chaining.
 func (x *FontPanel) WithMovableByWindowBackground(movableByWindowBackground bool) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetMovableByWindowBackground(movableByWindowBackground)
 	return x
 }
 
+// A Boolean value that indicates whether the window is removed from the screen when its application becomes inactive.
+//
 // WithHidesOnDeactivate sets the hidesOnDeactivate property and returns the receiver for chaining.
 func (x *FontPanel) WithHidesOnDeactivate(hidesOnDeactivate bool) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetHidesOnDeactivate(hidesOnDeactivate)
 	return x
 }
 
-// Indicates whether a window can be hidden during `-[NSApplication hide:]`.  Default is \c YES.
+// A Boolean value that indicates whether the window can hide when its application becomes hidden.
 //
 // WithCanHide sets the canHide property and returns the receiver for chaining.
 func (x *FontPanel) WithCanHide(canHide bool) *FontPanel {
@@ -238,25 +284,31 @@ func (x *FontPanel) WithCanHide(canHide bool) *FontPanel {
 	return x
 }
 
+// The custom miniaturized window image of the window.
+//
 // WithMiniwindowImage sets the miniwindowImage property and returns the receiver for chaining.
 func (x *FontPanel) WithMiniwindowImage(miniwindowImage *Image) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetMiniwindowImage(miniwindowImage.Unwrap())
 	return x
 }
 
+// The title displayed in the window’s minimized window.
+//
 // WithMiniwindowTitle sets the miniwindowTitle property and returns the receiver for chaining.
 func (x *FontPanel) WithMiniwindowTitle(miniwindowTitle string) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetMiniwindowTitle(foundation.NSStringStringWithUTF8String(miniwindowTitle))
 	return x
 }
 
+// A Boolean value that indicates whether the window’s document has been edited.
+//
 // WithDocumentEdited sets the documentEdited property and returns the receiver for chaining.
 func (x *FontPanel) WithDocumentEdited(documentEdited bool) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetDocumentEdited(documentEdited)
 	return x
 }
 
-// A Boolean value that indicates whether or not to prevent application termination when the receiving window is presented modally. The value of this property is `YES` if the window should prevent application termination when modal; otherwise, `NO`. The default value is `YES`. However, note that some window subclasses and some windows created indirectly (like those created by UI frameworks like AppKit and SwiftUI), may have different default values. For example, the Open panel and toolbar customization sheets should not prevent application termination, so those windows have `preventsApplicationTerminationWhenModal` set to `NO`. Some `NSAlert`s, like those that are simply informational, have windows that do not prevent application termination by default. Setting this property overrides the default behavior.
+// A Boolean value that indicates whether the window prevents application termination when modal.
 //
 // WithPreventsApplicationTerminationWhenModal sets the preventsApplicationTerminationWhenModal property and returns the receiver for chaining.
 func (x *FontPanel) WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *FontPanel {
@@ -264,7 +316,7 @@ func (x *FontPanel) WithPreventsApplicationTerminationWhenModal(preventsApplicat
 	return x
 }
 
-// Default is \c NO. Set to \c YES to allow a window to display tooltips even when the application is in the background.  Note that, enabling tooltips in an inactive application will cause the app to do work any time the mouse passes over the window.  This can degrade system performance. Returns \c YES if this window displays tooltips even when the application is in the background.  To configure this setting you should call `-setAllowsToolTipsWhenApplicationIsInactive:` instead of overriding `-allowsToolTipsWhenApplicationIsInactive`.
+// A Boolean value that indicates whether the window can display tooltips even when the application is in the background.
 //
 // WithAllowsToolTipsWhenApplicationIsInactive sets the allowsToolTipsWhenApplicationIsInactive property and returns the receiver for chaining.
 func (x *FontPanel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *FontPanel {
@@ -272,43 +324,55 @@ func (x *FontPanel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWh
 	return x
 }
 
+// The window’s backing store type.
+//
 // WithBackingType sets the backingType property and returns the receiver for chaining.
 func (x *FontPanel) WithBackingType(backingType NSBackingStoreType) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetBackingType(raw.NSBackingStoreType(backingType))
 	return x
 }
 
+// The window level of the window.
+//
 // WithLevel sets the level property and returns the receiver for chaining.
 func (x *FontPanel) WithLevel(level int) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetLevel(level)
 	return x
 }
 
+// The depth limit of the window.
+//
 // WithDepthLimit sets the depthLimit property and returns the receiver for chaining.
 func (x *FontPanel) WithDepthLimit(depthLimit NSWindowDepth) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetDepthLimit(raw.NSWindowDepth(depthLimit))
 	return x
 }
 
+// A Boolean value that indicates whether the window has a shadow.
+//
 // WithHasShadow sets the hasShadow property and returns the receiver for chaining.
 func (x *FontPanel) WithHasShadow(hasShadow bool) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetHasShadow(hasShadow)
 	return x
 }
 
+// The window’s alpha value.
+//
 // WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
 func (x *FontPanel) WithAlphaValue(alphaValue float64) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetAlphaValue(alphaValue)
 	return x
 }
 
+// A Boolean value that indicates whether the window is opaque.
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *FontPanel) WithOpaque(opaque bool) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetOpaque(opaque)
 	return x
 }
 
-// `-setSharingType:` specifies whether the window content can be read from another process.  The default sharing type is \c NSWindowSharingReadOnly, which means other processes can read the window content (eg. for window capture) but cannot modify it.  If you set your window sharing type to \c NSWindowSharingNone, so that the content cannot be captured, your window will also not be able to participate in a number of system services, so this setting should be used with caution.
+// A Boolean value that indicates the level of access other processes have to the window’s content.
 //
 // WithSharingType sets the sharingType property and returns the receiver for chaining.
 func (x *FontPanel) WithSharingType(sharingType NSWindowSharingType) *FontPanel {
@@ -316,7 +380,7 @@ func (x *FontPanel) WithSharingType(sharingType NSWindowSharingType) *FontPanel 
 	return x
 }
 
-// Controls whether threading of view drawing should be enabled for this window.  Defaults to \c YES.  When this is set to \c YES, AppKit's view system is allowed to perform `-drawRect:` activity for the window's views on threads other than the main thread, for views that have `canDrawConcurrently == YES`.  When this is set to \c NO, the window's views will be drawn serially as on 10.5 and earlier, even though some of the views may have `canDrawConcurrently == YES`.
+// A Boolean value that indicates whether the window allows multithreaded view drawing.
 //
 // WithAllowsConcurrentViewDrawing sets the allowsConcurrentViewDrawing property and returns the receiver for chaining.
 func (x *FontPanel) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *FontPanel {
@@ -324,13 +388,15 @@ func (x *FontPanel) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing 
 	return x
 }
 
+// A Boolean value that indicates whether the window context should be updated when the screen profile changes or when the window moves to a different screen.
+//
 // WithDisplaysWhenScreenProfileChanges sets the displaysWhenScreenProfileChanges property and returns the receiver for chaining.
 func (x *FontPanel) WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges)
 	return x
 }
 
-// This API controls whether the receiver is permitted onscreen before the user has logged in.  This property is off by default.  Alert panels and windows presented by input managers are examples of windows which should have this property set.
+// A Boolean value that indicates whether the window can be displayed at the login window.
 //
 // WithCanBecomeVisibleWithoutLogin sets the canBecomeVisibleWithoutLogin property and returns the receiver for chaining.
 func (x *FontPanel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *FontPanel {
@@ -338,13 +404,15 @@ func (x *FontPanel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogi
 	return x
 }
 
+// A value that identifies the window’s behavior in window collections.
+//
 // WithCollectionBehavior sets the collectionBehavior property and returns the receiver for chaining.
 func (x *FontPanel) WithCollectionBehavior(collectionBehavior NSWindowCollectionBehavior) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetCollectionBehavior(raw.NSWindowCollectionBehavior(collectionBehavior))
 	return x
 }
 
-// Provides for per-window control over automatic orderFront/orderOut animation behaviors added in 10.7.  Can be set to \c NSWindowAnimationBehaviorNone to disable Appkit's automatic animations for a given window, or to one of the other non-Default \c NSWindowAnimationBehavior values to override AppKit's automatic inference of appropriate animation behavior based on the window's apparent type.
+// The window’s automatic animation behavior.
 //
 // WithAnimationBehavior sets the animationBehavior property and returns the receiver for chaining.
 func (x *FontPanel) WithAnimationBehavior(animationBehavior NSWindowAnimationBehavior) *FontPanel {
@@ -352,61 +420,79 @@ func (x *FontPanel) WithAnimationBehavior(animationBehavior NSWindowAnimationBeh
 	return x
 }
 
+// The name used to automatically save the window’s frame rectangle data in the defaults system.
+//
 // WithFrameAutosaveName sets the frameAutosaveName property and returns the receiver for chaining.
 func (x *FontPanel) WithFrameAutosaveName(frameAutosaveName *foundation.NSString) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetFrameAutosaveName(frameAutosaveName)
 	return x
 }
 
+// The minimum size to which the window’s frame (including its title bar) can be sized.
+//
 // WithMinSize sets the minSize property and returns the receiver for chaining.
 func (x *FontPanel) WithMinSize(minSize corefoundation.CGSize) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetMinSize(minSize)
 	return x
 }
 
+// The maximum size to which the window’s frame (including its title bar) can be sized.
+//
 // WithMaxSize sets the maxSize property and returns the receiver for chaining.
 func (x *FontPanel) WithMaxSize(maxSize corefoundation.CGSize) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetMaxSize(maxSize)
 	return x
 }
 
+// The minimum size of the window’s content view in the window’s base coordinate system.
+//
 // WithContentMinSize sets the contentMinSize property and returns the receiver for chaining.
 func (x *FontPanel) WithContentMinSize(contentMinSize corefoundation.CGSize) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetContentMinSize(contentMinSize)
 	return x
 }
 
+// The maximum size of the window’s content view in the window’s base coordinate system.
+//
 // WithContentMaxSize sets the contentMaxSize property and returns the receiver for chaining.
 func (x *FontPanel) WithContentMaxSize(contentMaxSize corefoundation.CGSize) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetContentMaxSize(contentMaxSize)
 	return x
 }
 
+// A minimum size that is used to determine if a window can fit when it is in full screen in a tile.
+//
 // WithMinFullScreenContentSize sets the minFullScreenContentSize property and returns the receiver for chaining.
 func (x *FontPanel) WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetMinFullScreenContentSize(minFullScreenContentSize)
 	return x
 }
 
+// A maximum size that is used to determine if a window can fit when it is in full screen in a tile.
+//
 // WithMaxFullScreenContentSize sets the maxFullScreenContentSize property and returns the receiver for chaining.
 func (x *FontPanel) WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetMaxFullScreenContentSize(maxFullScreenContentSize)
 	return x
 }
 
+// The window’s window controller.
+//
 // WithWindowController sets the windowController property and returns the receiver for chaining.
 func (x *FontPanel) WithWindowController(windowController *WindowController) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetWindowController(windowController.Unwrap())
 	return x
 }
 
+// The parent window to which the window is attached as a child.
+//
 // WithParentWindow sets the parentWindow property and returns the receiver for chaining.
 func (x *FontPanel) WithParentWindow(parentWindow WindowProvider) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetParentWindow(parentWindow.asWindow())
 	return x
 }
 
-// If set, the receiver will inherit the appearance of that object, as well as use KVO to observe its effectiveAppearance for changes. Typically this is used for child windows that are shown from a parent window or specific view. Defaults to NSApp.
+// An object that the window inherits its appearance from.
 //
 // WithAppearanceSource sets the appearanceSource property and returns the receiver for chaining.
 func (x *FontPanel) WithAppearanceSource(appearanceSource *foundation.NSObject) *FontPanel {
@@ -414,13 +500,15 @@ func (x *FontPanel) WithAppearanceSource(appearanceSource *foundation.NSObject) 
 	return x
 }
 
+// The window’s color space.
+//
 // WithColorSpace sets the colorSpace property and returns the receiver for chaining.
 func (x *FontPanel) WithColorSpace(colorSpace *ColorSpace) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetColorSpace(colorSpace.Unwrap())
 	return x
 }
 
-// Specifies the style of separator displayed between the window's titlebar and content. The default value is NSTitlebarSeparatorStyleAutomatic. Changing this value will override any preference made by `NSSplitViewItem`.
+// The type of separator that the app displays between the title bar and content of a window.
 //
 // WithTitlebarSeparatorStyle sets the titlebarSeparatorStyle property and returns the receiver for chaining.
 func (x *FontPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebarSeparatorStyle) *FontPanel {
@@ -428,7 +516,7 @@ func (x *FontPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle NSTitlebar
 	return x
 }
 
-// The main content view controller for the window. This provides the contentView of the window. Assigning this value will remove the existing contentView and will make the contentViewController.view the main contentView for the window. The default value is nil. The contentViewController only controls the contentView, and not the title of the window. The window title can easily be bound to the contentViewController with the following: [window bind:NSTitleBinding toObject:contentViewController withKeyPath:@"title" options:nil]. Setting the contentViewController will cause the window to resize based on the current size of the contentViewController. Autolayout should be used to restrict the size of the window. The value of the contentViewController is encoded in the NIB. Directly assigning a contentView will clear out the contentViewController.
+// The main content view controller for the window.
 //
 // WithContentViewController sets the contentViewController property and returns the receiver for chaining.
 func (x *FontPanel) WithContentViewController(contentViewController ViewControllerProvider) *FontPanel {
@@ -436,37 +524,47 @@ func (x *FontPanel) WithContentViewController(contentViewController ViewControll
 	return x
 }
 
+// The view that’s made first responder (also called the key view) the first time the window is placed onscreen.
+//
 // WithInitialFirstResponder sets the initialFirstResponder property and returns the receiver for chaining.
 func (x *FontPanel) WithInitialFirstResponder(initialFirstResponder ViewProvider) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetInitialFirstResponder(initialFirstResponder.asView())
 	return x
 }
 
+// The button cell that performs as if clicked when the window receives a Return (or Enter) key event.
+//
 // WithDefaultButtonCell sets the defaultButtonCell property and returns the receiver for chaining.
 func (x *FontPanel) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetDefaultButtonCell(defaultButtonCell.asButtonCell())
 	return x
 }
 
+// A Boolean value that indicates whether the window automatically recalculates the key view loop when views are added.
+//
 // WithAutorecalculatesKeyViewLoop sets the autorecalculatesKeyViewLoop property and returns the receiver for chaining.
 func (x *FontPanel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop)
 	return x
 }
 
+// The window’s toolbar.
+//
 // WithToolbar sets the toolbar property and returns the receiver for chaining.
 func (x *FontPanel) WithToolbar(toolbar *Toolbar) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetToolbar(toolbar.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the toolbar control button is currently displayed.
+//
 // WithShowsToolbarButton sets the showsToolbarButton property and returns the receiver for chaining.
 func (x *FontPanel) WithShowsToolbarButton(showsToolbarButton bool) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetShowsToolbarButton(showsToolbarButton)
 	return x
 }
 
-// Get and set the tabbing mode for this window. This should be set before a window is shown. The default value is \c NSWindowTabbingModeAutomatic. When the value is \c NSWindowTabbingModeAutomatic, the system will look at the \c userTabbingPreference and automatically tab windows together based on the tabbingIdentifier, when it is appropriate to do so.
+// A value that indicates when a window displays tabs.
 //
 // WithTabbingMode sets the tabbingMode property and returns the receiver for chaining.
 func (x *FontPanel) WithTabbingMode(tabbingMode NSWindowTabbingMode) *FontPanel {
@@ -474,7 +572,7 @@ func (x *FontPanel) WithTabbingMode(tabbingMode NSWindowTabbingMode) *FontPanel 
 	return x
 }
 
-// Windows with the same \c tabbingIdentifier will have the ability to be tabbed together when a window is being shown. This allows aggregation of similar windows. By default, the \c tabbingIdentifier will be generated based on inherent window properties, such as the window class name, the delegate class name, the window controller class name, and some additional state. Windows can be explicitly made to group together by using the same \c tabbingIdentifier.
+// A value that allows a group of related windows.
 //
 // WithTabbingIdentifier sets the tabbingIdentifier property and returns the receiver for chaining.
 func (x *FontPanel) WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *FontPanel {
@@ -482,12 +580,16 @@ func (x *FontPanel) WithTabbingIdentifier(tabbingIdentifier *foundation.NSString
 	return x
 }
 
+// A Boolean value that indicates whether the window accepts mouse-moved events.
+//
 // WithAcceptsMouseMovedEvents sets the acceptsMouseMovedEvents property and returns the receiver for chaining.
 func (x *FontPanel) WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetAcceptsMouseMovedEvents(acceptsMouseMovedEvents)
 	return x
 }
 
+// A Boolean value that indicates whether the window is transparent to mouse events.
+//
 // WithIgnoresMouseEvents sets the ignoresMouseEvents property and returns the receiver for chaining.
 func (x *FontPanel) WithIgnoresMouseEvents(ignoresMouseEvents bool) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetIgnoresMouseEvents(ignoresMouseEvents)
@@ -518,47 +620,63 @@ func (x *FontPanel) WithShowsResizeIndicator(showsResizeIndicator bool) *FontPan
 	return x
 }
 
+// The zero-based position of the window, based on its order from front to back among all visible application windows.
+//
 // WithOrderedIndex sets the orderedIndex property and returns the receiver for chaining.
 func (x *FontPanel) WithOrderedIndex(orderedIndex int) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetOrderedIndex(orderedIndex)
 	return x
 }
 
+// A Boolean value indicating whether the window configuration is preserved between application launches.
+//
 // WithRestorable sets the restorable property and returns the receiver for chaining.
 func (x *FontPanel) WithRestorable(restorable bool) *FontPanel {
 	x.inner.NSPanel.NSWindow.SetRestorable(restorable)
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *FontPanel) WithNextResponder(nextResponder ResponderProvider) *FontPanel {
 	x.inner.NSPanel.NSWindow.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *FontPanel) WithMenu(menu *Menu) *FontPanel {
 	x.inner.NSPanel.NSWindow.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *FontPanel) WithUserActivity(userActivity *foundation.NSUserActivity) *FontPanel {
 	x.inner.NSPanel.NSWindow.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *FontPanel) WithTouchBar(touchBar *TouchBar) *FontPanel {
 	x.inner.NSPanel.NSWindow.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Sets the selected font in the receiver to the specified font.
+//
 // SetPanelFontIsMultiple calls the underlying SetPanelFontIsMultiple.
 func (x *FontPanel) SetPanelFontIsMultiple(fontObj *raw.NSFont, flag bool) {
 	x.inner.SetPanelFontIsMultiple(fontObj, flag)
 }
 
+// Converts the specified font using the settings in the receiver, with the aid of the shared NSFontManager if necessary.
+//
 // PanelConvertFont calls the underlying PanelConvertFont.
 func (x *FontPanel) PanelConvertFont(fontObj *raw.NSFont) *Font {
 	_r := x.inner.PanelConvertFont(fontObj)
@@ -568,6 +686,8 @@ func (x *FontPanel) PanelConvertFont(fontObj *raw.NSFont) *Font {
 	return &Font{inner: _r}
 }
 
+// Triggers a reload to the default state, so that the delegate is called.
+//
 // ReloadDefaultFontFamilies calls the underlying ReloadDefaultFontFamilies.
 func (x *FontPanel) ReloadDefaultFontFamilies() {
 	x.inner.ReloadDefaultFontFamilies()

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that enqueues video sample buffers for rendering.
+//
 // SampleBufferVideoRenderer wraps [raw.AVSampleBufferVideoRenderer] with a fluent Go API.
 type SampleBufferVideoRenderer struct {
 	inner *raw.AVSampleBufferVideoRenderer
@@ -39,6 +41,8 @@ func NewSampleBufferVideoRenderer() *SampleBufferVideoRenderer {
 	return &SampleBufferVideoRenderer{inner: raw.AVSampleBufferVideoRendererFromID(_id)}
 }
 
+// Tells the video renderer to discard pending enqueued sample buffers.
+//
 // FlushWithRemovalOfDisplayedImage blocks until the operation completes or ctx is cancelled.
 func (x *SampleBufferVideoRenderer) FlushWithRemovalOfDisplayedImage(ctx context.Context, removeDisplayedImage bool) error {
 	_ch := make(chan error, 1)

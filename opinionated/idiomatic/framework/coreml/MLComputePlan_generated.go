@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class representing the compute plan of a model.
+//
 // ComputePlan wraps [raw.MLComputePlan] with a fluent Go API.
 type ComputePlan struct {
 	inner *raw.MLComputePlan

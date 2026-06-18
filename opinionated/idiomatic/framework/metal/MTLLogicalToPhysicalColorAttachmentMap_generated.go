@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Allows you to easily specify color attachment remapping from logical to physical indices.
+//
 // LogicalToPhysicalColorAttachmentMap wraps [raw.MTLLogicalToPhysicalColorAttachmentMap] with a fluent Go API.
 type LogicalToPhysicalColorAttachmentMap struct {
 	inner *raw.MTLLogicalToPhysicalColorAttachmentMap
@@ -37,7 +39,7 @@ func NewLogicalToPhysicalColorAttachmentMap() *LogicalToPhysicalColorAttachmentM
 	return &LogicalToPhysicalColorAttachmentMap{inner: raw.MTLLogicalToPhysicalColorAttachmentMapFromID(_id)}
 }
 
-// Maps a physical color attachment index to a logical index. - Parameters: - physicalIndex: index of the color attachment's physical mapping. - logicalIndex: index of the color attachment's logical mapping.
+// Maps a physical color attachment index to a logical index.
 //
 // SetPhysicalIndexForLogicalIndex calls the underlying SetPhysicalIndexForLogicalIndex.
 func (x *LogicalToPhysicalColorAttachmentMap) SetPhysicalIndexForLogicalIndex(physicalIndex uint, logicalIndex uint) {

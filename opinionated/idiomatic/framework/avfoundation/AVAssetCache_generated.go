@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that you use to inspect locally cached media data.
+//
 // AssetCache wraps [raw.AVAssetCache] with a fluent Go API.
 type AssetCache struct {
 	inner *raw.AVAssetCache
@@ -36,7 +38,7 @@ func NewAssetCache() *AssetCache {
 	return &AssetCache{inner: raw.AVAssetCacheFromID(_id)}
 }
 
-// Returns an array of AVMediaSelectionOptions in an AVMediaSelectionGroup that are available for offline operations, e.g. playback.
+// Returns an array of locally cached media selection options that are available for offline use.
 //
 // MediaSelectionOptionsInMediaSelectionGroup calls the underlying MediaSelectionOptionsInMediaSelectionGroup.
 func (x *AssetCache) MediaSelectionOptionsInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSArray[*raw.AVMediaSelectionOption] {
@@ -57,7 +59,7 @@ func (x *AssetCache) MediaPresentationSettingsForMediaSelectionGroup(mediaSelect
 	return x.inner.MediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup)
 }
 
-// Returns an array of extended language tags for languages that can be selected for offline operations via use of the AVMediaSelectionGroup's AVCustomMediaSelectionScheme.
+// Returns an array of extended language tags for languages that can be selected for offline operations via use of the AVMediaSelectionGroup’s AVCustomMediaSelectionScheme.
 //
 // MediaPresentationLanguagesForMediaSelectionGroup calls the underlying MediaPresentationLanguagesForMediaSelectionGroup.
 func (x *AssetCache) MediaPresentationLanguagesForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSArray[*foundation.NSString] {

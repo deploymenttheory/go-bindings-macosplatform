@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A set of configured metadata that defines the required information to add the corresponding pass to Wallet.
+//
 // IdentityDocumentMetadata wraps [raw.PKIdentityDocumentMetadata] with a fluent Go API.
 type IdentityDocumentMetadata struct {
 	inner *raw.PKIdentityDocumentMetadata
@@ -37,7 +39,7 @@ func NewIdentityDocumentMetadata() *IdentityDocumentMetadata {
 	return &IdentityDocumentMetadata{inner: raw.PKIdentityDocumentMetadataFromID(_id)}
 }
 
-// serverEnvironmentIdentifier: Identifier referencing the target server environment Apple Pay servers should reach out to to provision this pass. If not present, the default Apply Pay server environment will be used and an empty string will be returned.
+// An identifier that references the target server environment Apple Pay servers need to connect with to provision the pass.
 //
 // WithServerEnvironmentIdentifier sets the serverEnvironmentIdentifier property and returns the receiver for chaining.
 func (x *IdentityDocumentMetadata) WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *IdentityDocumentMetadata {

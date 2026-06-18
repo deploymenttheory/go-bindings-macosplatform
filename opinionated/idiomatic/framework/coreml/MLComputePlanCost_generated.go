@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents the estimated cost of executing a layer or operation.
+//
 // ComputePlanCost wraps [raw.MLComputePlanCost] with a fluent Go API.
 type ComputePlanCost struct {
 	inner *raw.MLComputePlanCost

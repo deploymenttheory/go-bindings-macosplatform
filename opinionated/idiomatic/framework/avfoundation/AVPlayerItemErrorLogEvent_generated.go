@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A single item in a player item’s error log.
+//
 // PlayerItemErrorLogEvent wraps [raw.AVPlayerItemErrorLogEvent] with a fluent Go API.
 type PlayerItemErrorLogEvent struct {
 	inner *raw.AVPlayerItemErrorLogEvent

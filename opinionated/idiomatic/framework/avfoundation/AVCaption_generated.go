@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents text to present over a time range.
+//
 // Caption wraps [raw.AVCaption] with a fluent Go API.
 type Caption struct {
 	inner *raw.AVCaption
@@ -33,7 +35,7 @@ func CaptionFromID(id objc.ID) *Caption {
 	return &Caption{inner: raw.AVCaptionFromID(id)}
 }
 
-// @method initWithText:timeRange: @abstract Initializes an instance of AVCaption with the given text and time range. @param text The text for the new caption object. See text property for the available character sets and other restrictions. @param timeRange The time range for the new caption object. @result An instance of AVCaption that carries the given text and time range.
+// Creates a caption that contains text and a time range.
 //
 // NewCaptionWithTextTimeRange creates a new [Caption].
 func NewCaptionWithTextTimeRange(text string, timeRange coremedia.CMTimeRange) *Caption {
@@ -60,49 +62,49 @@ func (x *Caption) TimeRange() coremedia.CMTimeRange {
 	return x.inner.TimeRange()
 }
 
-// @method textColorAtIndex:range: @abstract The color of the character(s). @discussion A value of NULL means that the color is not specified. The caller must release the returned object via CGColorRelease. The range parameter receives UTF-16 code unit index range the style is effective. The range will indicate where the current style returned (including NULL) will be active and allows discovery of the next change in the style. CEA608 closed captions support the following 8 colors with 1.0 alpha value. White	(RGB:1.0, 1.0, 1.0) Red		(RGB:1.0, 0.0, 0.0) Blue	(RGB:0.0, 0.0, 1.0) Green	(RGB:0.0, 1.0, 0.0) Yellow	(RGB:1.0, 1.0, 0.0) Cyan	(RGB:0.0, 1.0, 1.0) Magenta	(RGB:1.0, 0.0, 1.0) Black	(RGB:0.0, 0.0, 0.0)
+// Returns the text color at the index position.
 //
 // TextColorAtIndexRange calls the underlying TextColorAtIndexRange.
 func (x *Caption) TextColorAtIndexRange(index int, outRange *foundation.NSRange) unsafe.Pointer {
 	return x.inner.TextColorAtIndexRange(index, outRange)
 }
 
-// @method backgroundColorAtIndex:range: @abstract The background color of the character(s). @discussion A value of NULL means that the color is not specified. The caller must release the returned object via CGColorRelease. The range parameter receives UTF-16 code unit index range the style is effective. After returning from the call, the range will indicate where the current style returned (including NULL) will be active and allows discovery of the next change in the style. iTT format ignores this property. CEA608 closed captions support the following 8 colors with 1.0, 0.5 and 0.0 alpha values. White	(RGB:1.0, 1.0, 1.0) Red		(RGB:1.0, 0.0, 0.0) Blue	(RGB:0.0, 0.0, 1.0) Green	(RGB:0.0, 1.0, 0.0) Yellow	(RGB:1.0, 1.0, 0.0) Cyan	(RGB:0.0, 1.0, 1.0) Magenta	(RGB:1.0, 0.0, 1.0) Black	(RGB:0.0, 0.0, 0.0)
+// Returns the background color at the index position.
 //
 // BackgroundColorAtIndexRange calls the underlying BackgroundColorAtIndexRange.
 func (x *Caption) BackgroundColorAtIndexRange(index int, outRange *foundation.NSRange) unsafe.Pointer {
 	return x.inner.BackgroundColorAtIndexRange(index, outRange)
 }
 
-// @method fontWeightAtIndex:range: @abstract Indicates the font weight of the character(s). @discussion The range parameter receives UTF-16 code unit index range the style is effective. After returning from the call, the range will indicate where the current style returned will be active and allows discovery of the next change in the style. CEA608 closed captions ignore this property. A visible distinction between AVCaptionFontWeightNormal and AVCaptionFontWeightBold may not exist if the font used has only one weight. This can be more common with CJK fonts where individual fonts can be quite large in terms of storage. Nevertheless, AVCaption still carries the font weight semantics so if the same AVCaption is applied to a different font having multiple weights, the distinction will become visible.
+// Returns the font weight and range at the index position.
 //
 // FontWeightAtIndexRange calls the underlying FontWeightAtIndexRange.
 func (x *Caption) FontWeightAtIndexRange(index int, outRange *foundation.NSRange) AVCaptionFontWeight {
 	return AVCaptionFontWeight(x.inner.FontWeightAtIndexRange(index, outRange))
 }
 
-// @method fontStyleAtIndex:range: @abstract Indicates the font style of the character(s). @discussion The range parameter receives UTF-16 code unit index range the style is effective. After returning from the call, the range will indicate where the current style returned will be active and allows discovery of the next change in the style. Some writing systems may not have italic glyphs for characters and so fonts with italic forms are not available. For example, Japanese fonts do not typically have italic forms for most characters although there may be special cases for Latin characters. Nevertheless, AVCaption still carries the font style semantics even though there may be no visible rendering distinction between using AVCaptionFontStyleNormal and AVCaptionFontStyleItalic with that language.
+// Returns the font style and range at the index position.
 //
 // FontStyleAtIndexRange calls the underlying FontStyleAtIndexRange.
 func (x *Caption) FontStyleAtIndexRange(index int, outRange *foundation.NSRange) AVCaptionFontStyle {
 	return AVCaptionFontStyle(x.inner.FontStyleAtIndexRange(index, outRange))
 }
 
-// @method	decorationAtIndex:range: @abstract	Character decoration @discussion The value of OR-ed value of AVCaptionDecoration as NSInteger. The range parameter receives UTF-16 code unit index range the style is effective. After returning from the call, the range will indicate where the current style returned will be active and allows discovery of the next change in the style. CEA608 closed captions support only AVCaptionDecorationNone and AVCaptionDecorationUnderline.
+// Returns the text decoration at the index position.
 //
 // DecorationAtIndexRange calls the underlying DecorationAtIndexRange.
 func (x *Caption) DecorationAtIndexRange(index int, outRange *foundation.NSRange) AVCaptionDecoration {
 	return AVCaptionDecoration(x.inner.DecorationAtIndexRange(index, outRange))
 }
 
-// @method	textCombineAtIndex:range: @abstract	Text combine (Tate-Chu-Yoko) @discussion The style is effective only in a vertical text region. When specified, the renderer combines all the characters in the style range so that their glyph areas consume the nominal bounding box of a single em square of the surrounding vertical text.
+// Returns the text combine at the index position.
 //
 // TextCombineAtIndexRange calls the underlying TextCombineAtIndexRange.
 func (x *Caption) TextCombineAtIndexRange(index int, outRange *foundation.NSRange) AVCaptionTextCombine {
 	return AVCaptionTextCombine(x.inner.TextCombineAtIndexRange(index, outRange))
 }
 
-// @method	rubyAtIndex:range: @abstract Get Ruby associated with the characters. @discussion The range parameter receives UTF-16 code unit index range where the ruby text is applied. After returning from the call, the range will indicate where the current style returned (including NULL) will be active and allows discovery of the next change in the style. It returns nil when the text doesn't have a ruby at the position. CEA608 closed captions ignore this property.
+// Returns the ruby text at the index position.
 //
 // RubyAtIndexRange calls the underlying RubyAtIndexRange.
 func (x *Caption) RubyAtIndexRange(index int, outRange *foundation.NSRange) *CaptionRuby {

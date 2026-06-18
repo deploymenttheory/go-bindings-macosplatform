@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A view for displaying and browsing a large collection of images and movies.
+//
 // IKImageBrowserView wraps [raw.IKImageBrowserView] with a fluent Go API.
 type IKImageBrowserView struct {
 	inner *raw.IKImageBrowserView

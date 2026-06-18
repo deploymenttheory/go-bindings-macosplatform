@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Barcode information detected by a metadata capture output.
+//
 // MetadataMachineReadableCodeObject wraps [raw.AVMetadataMachineReadableCodeObject] with a fluent Go API.
 type MetadataMachineReadableCodeObject struct {
 	inner *raw.AVMetadataMachineReadableCodeObject

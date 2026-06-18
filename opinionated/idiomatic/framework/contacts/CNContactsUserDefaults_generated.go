@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines the default options to use when displaying contacts.
+//
 // ContactsUserDefaults wraps [raw.CNContactsUserDefaults] with a fluent Go API.
 type ContactsUserDefaults struct {
 	inner *raw.CNContactsUserDefaults

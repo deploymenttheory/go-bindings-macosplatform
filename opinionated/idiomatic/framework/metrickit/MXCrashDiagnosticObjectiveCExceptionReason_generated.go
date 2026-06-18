@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the exception reason for an uncaught ObjC exception.
+//
 // CrashDiagnosticObjectiveCExceptionReason wraps [raw.MXCrashDiagnosticObjectiveCExceptionReason] with a fluent Go API.
 type CrashDiagnosticObjectiveCExceptionReason struct {
 	inner *raw.MXCrashDiagnosticObjectiveCExceptionReason
@@ -39,7 +41,7 @@ func NewCrashDiagnosticObjectiveCExceptionReason() *CrashDiagnosticObjectiveCExc
 	return &CrashDiagnosticObjectiveCExceptionReason{inner: raw.MXCrashDiagnosticObjectiveCExceptionReasonFromID(_id)}
 }
 
-// @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this MXCrashDiagnosticObjectiveCExceptionReason object. @result        An NSData object containing the JSON representation
+// Returns the contents of the exception reason in JSON format.
 //
 // JSONRepresentation calls the underlying JSONRepresentation.
 func (x *CrashDiagnosticObjectiveCExceptionReason) JSONRepresentation() *foundation.NSData {

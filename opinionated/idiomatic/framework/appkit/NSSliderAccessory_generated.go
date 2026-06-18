@@ -35,7 +35,7 @@ func NewSliderAccessory() *SliderAccessory {
 	return &SliderAccessory{inner: raw.NSSliderAccessoryFromID(_id)}
 }
 
-// The effect on interaction with the accessory. The default value is `automaticBehavior`.
+// The effect on interaction with the accessory.
 //
 // WithBehavior sets the behavior property and returns the receiver for chaining.
 func (x *SliderAccessory) WithBehavior(behavior *SliderAccessoryBehavior) *SliderAccessory {
@@ -43,7 +43,7 @@ func (x *SliderAccessory) WithBehavior(behavior *SliderAccessoryBehavior) *Slide
 	return x
 }
 
-// Determines whether or not the accessory is interactive and draws with an enabled appearance. Defaults to `true`.
+// Determines whether or not the accessory is interactive and draws with an enabled appearance. Defaults to true.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *SliderAccessory) WithEnabled(enabled bool) *SliderAccessory {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that represents input for the web authentication PRF extension in passkey assertion requests.
+//
 // AuthorizationPublicKeyCredentialPRFAssertionInput wraps [raw.ASAuthorizationPublicKeyCredentialPRFAssertionInput] with a fluent Go API.
 type AuthorizationPublicKeyCredentialPRFAssertionInput struct {
 	inner *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInput

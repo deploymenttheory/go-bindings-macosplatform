@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that you use to configure a texture sampler.
+//
 // SamplerDescriptor wraps [raw.MTLSamplerDescriptor] with a fluent Go API.
 type SamplerDescriptor struct {
 	inner *raw.MTLSamplerDescriptor
@@ -37,7 +39,7 @@ func NewSamplerDescriptor() *SamplerDescriptor {
 	return &SamplerDescriptor{inner: raw.MTLSamplerDescriptorFromID(_id)}
 }
 
-// @property minFilter @abstract Filter option for combining texels within a mipmap level the sample footprint is larger than a pixel (minification). @discussion The default value is MTLSamplerMinMagFilterNearest.
+// The filtering option for combining pixels within one mipmap level when the sample footprint is larger than a pixel (minification).
 //
 // WithMinFilter sets the minFilter property and returns the receiver for chaining.
 func (x *SamplerDescriptor) WithMinFilter(minFilter MTLSamplerMinMagFilter) *SamplerDescriptor {
@@ -45,7 +47,7 @@ func (x *SamplerDescriptor) WithMinFilter(minFilter MTLSamplerMinMagFilter) *Sam
 	return x
 }
 
-// @property magFilter @abstract Filter option for combining texels within a mipmap level the sample footprint is smaller than a pixel (magnification). @discussion The default value is MTLSamplerMinMagFilterNearest.
+// The filtering operation for combining pixels within one mipmap level when the sample footprint is smaller than a pixel (magnification).
 //
 // WithMagFilter sets the magFilter property and returns the receiver for chaining.
 func (x *SamplerDescriptor) WithMagFilter(magFilter MTLSamplerMinMagFilter) *SamplerDescriptor {
@@ -53,7 +55,7 @@ func (x *SamplerDescriptor) WithMagFilter(magFilter MTLSamplerMinMagFilter) *Sam
 	return x
 }
 
-// @property mipFilter @abstract Filter options for filtering between two mipmap levels. @discussion The default value is MTLSamplerMipFilterNotMipmapped
+// The filtering option for combining pixels between two mipmap levels.
 //
 // WithMipFilter sets the mipFilter property and returns the receiver for chaining.
 func (x *SamplerDescriptor) WithMipFilter(mipFilter MTLSamplerMipFilter) *SamplerDescriptor {
@@ -61,7 +63,7 @@ func (x *SamplerDescriptor) WithMipFilter(mipFilter MTLSamplerMipFilter) *Sample
 	return x
 }
 
-// @property maxAnisotropy @abstract The number of samples that can be taken to improve quality of sample footprints that are anisotropic. @discussion The default value is 1.
+// The number of samples that can be taken to improve the quality of sample footprints that are anisotropic.
 //
 // WithMaxAnisotropy sets the maxAnisotropy property and returns the receiver for chaining.
 func (x *SamplerDescriptor) WithMaxAnisotropy(maxAnisotropy uint) *SamplerDescriptor {
@@ -69,7 +71,7 @@ func (x *SamplerDescriptor) WithMaxAnisotropy(maxAnisotropy uint) *SamplerDescri
 	return x
 }
 
-// @property sAddressMode @abstract Set the wrap mode for the S texture coordinate.  The default value is MTLSamplerAddressModeClampToEdge.
+// The address mode for the texture width (s) coordinate.
 //
 // WithSAddressMode sets the sAddressMode property and returns the receiver for chaining.
 func (x *SamplerDescriptor) WithSAddressMode(sAddressMode MTLSamplerAddressMode) *SamplerDescriptor {
@@ -77,7 +79,7 @@ func (x *SamplerDescriptor) WithSAddressMode(sAddressMode MTLSamplerAddressMode)
 	return x
 }
 
-// @property tAddressMode @abstract Set the wrap mode for the T texture coordinate.  The default value is MTLSamplerAddressModeClampToEdge.
+// The address mode for the texture height (t) coordinate.
 //
 // WithTAddressMode sets the tAddressMode property and returns the receiver for chaining.
 func (x *SamplerDescriptor) WithTAddressMode(tAddressMode MTLSamplerAddressMode) *SamplerDescriptor {
@@ -85,7 +87,7 @@ func (x *SamplerDescriptor) WithTAddressMode(tAddressMode MTLSamplerAddressMode)
 	return x
 }
 
-// @property rAddressMode @abstract Set the wrap mode for the R texture coordinate.  The default value is MTLSamplerAddressModeClampToEdge.
+// The address mode for the texture depth (r) coordinate.
 //
 // WithRAddressMode sets the rAddressMode property and returns the receiver for chaining.
 func (x *SamplerDescriptor) WithRAddressMode(rAddressMode MTLSamplerAddressMode) *SamplerDescriptor {
@@ -93,7 +95,7 @@ func (x *SamplerDescriptor) WithRAddressMode(rAddressMode MTLSamplerAddressMode)
 	return x
 }
 
-// @property borderColor @abstract Set the color for the MTLSamplerAddressMode to one of the predefined in the MTLSamplerBorderColor enum.
+// The border color for clamped texture values.
 //
 // WithBorderColor sets the borderColor property and returns the receiver for chaining.
 func (x *SamplerDescriptor) WithBorderColor(borderColor MTLSamplerBorderColor) *SamplerDescriptor {
@@ -101,7 +103,7 @@ func (x *SamplerDescriptor) WithBorderColor(borderColor MTLSamplerBorderColor) *
 	return x
 }
 
-// Sets the reduction mode for filtering contributing samples. The property's default value is “MTLSamplerReductionModeWeightedAverage“. The sampler ignores this property if any of the following property values are equal to a specific value: - The sampler's “mipFilter“ property is equal to “MTLSamplerMipFilterNotMipmapped“. - The sampler's “mipFilter“ property is equal to “MTLSamplerMipFilterNearest“. - The sampler's “minFilter“ property is equal to “MTLSamplerMinMagFilterNearest“. - The sampler's “magFilter“ property is equal to “MTLSamplerMinMagFilterNearest“.
+// Sets the reduction mode for filtering contributing samples.
 //
 // WithReductionMode sets the reductionMode property and returns the receiver for chaining.
 func (x *SamplerDescriptor) WithReductionMode(reductionMode MTLSamplerReductionMode) *SamplerDescriptor {
@@ -109,7 +111,7 @@ func (x *SamplerDescriptor) WithReductionMode(reductionMode MTLSamplerReductionM
 	return x
 }
 
-// @property normalizedCoordinates. @abstract If YES, texture coordates are from 0 to 1.  If NO, texture coordinates are 0..width, 0..height. @discussion normalizedCoordinates defaults to YES.  Non-normalized coordinates should only be used with 1D and 2D textures with the ClampToEdge wrap mode, otherwise the results of sampling are undefined.
+// A Boolean value that indicates whether texture coordinates are normalized to the range [0.0, 1.0].
 //
 // WithNormalizedCoordinates sets the normalizedCoordinates property and returns the receiver for chaining.
 func (x *SamplerDescriptor) WithNormalizedCoordinates(normalizedCoordinates bool) *SamplerDescriptor {
@@ -117,7 +119,7 @@ func (x *SamplerDescriptor) WithNormalizedCoordinates(normalizedCoordinates bool
 	return x
 }
 
-// @property lodMinClamp @abstract The minimum level of detail that will be used when sampling from a texture. @discussion The default value of lodMinClamp is 0.0.  Clamp values are ignored for texture sample variants that specify an explicit level of detail.
+// The minimum level of detail (LOD) to use when sampling from a texture.
 //
 // WithLodMinClamp sets the lodMinClamp property and returns the receiver for chaining.
 func (x *SamplerDescriptor) WithLodMinClamp(lodMinClamp float32) *SamplerDescriptor {
@@ -125,7 +127,7 @@ func (x *SamplerDescriptor) WithLodMinClamp(lodMinClamp float32) *SamplerDescrip
 	return x
 }
 
-// @property lodMaxClamp @abstract The maximum level of detail that will be used when sampling from a texture. @discussion The default value of lodMaxClamp is FLT_MAX.  Clamp values are ignored for texture sample variants that specify an explicit level of detail.
+// The maximum level of detail (LOD) to use when sampling from a texture.
 //
 // WithLodMaxClamp sets the lodMaxClamp property and returns the receiver for chaining.
 func (x *SamplerDescriptor) WithLodMaxClamp(lodMaxClamp float32) *SamplerDescriptor {
@@ -133,7 +135,7 @@ func (x *SamplerDescriptor) WithLodMaxClamp(lodMaxClamp float32) *SamplerDescrip
 	return x
 }
 
-// @property lodAverage @abstract If YES, an average level of detail will be used when sampling from a texture. If NO, no averaging is performed. @discussion lodAverage defaults to NO. This option is a performance hint. An implementation is free to ignore this property.
+// A Boolean value that specifies whether the GPU can use an average level of detail (LOD) when sampling from a texture.
 //
 // WithLodAverage sets the lodAverage property and returns the receiver for chaining.
 func (x *SamplerDescriptor) WithLodAverage(lodAverage bool) *SamplerDescriptor {
@@ -141,7 +143,7 @@ func (x *SamplerDescriptor) WithLodAverage(lodAverage bool) *SamplerDescriptor {
 	return x
 }
 
-// Sets the level-of-detail (lod) bias when sampling from a texture. The property's default value is `0.0f`. The precision format is `S4.6`, and the range is `[-16.0, 15.999]`.
+// Sets the level-of-detail (lod) bias when sampling from a texture.
 //
 // WithLodBias sets the lodBias property and returns the receiver for chaining.
 func (x *SamplerDescriptor) WithLodBias(lodBias float32) *SamplerDescriptor {
@@ -149,7 +151,7 @@ func (x *SamplerDescriptor) WithLodBias(lodBias float32) *SamplerDescriptor {
 	return x
 }
 
-// @property compareFunction @abstract Set the comparison function used when sampling shadow maps. The default value is MTLCompareFunctionNever.
+// The sampler comparison function used when performing a sample compare operation on a depth texture.
 //
 // WithCompareFunction sets the compareFunction property and returns the receiver for chaining.
 func (x *SamplerDescriptor) WithCompareFunction(compareFunction MTLCompareFunction) *SamplerDescriptor {
@@ -157,7 +159,7 @@ func (x *SamplerDescriptor) WithCompareFunction(compareFunction MTLCompareFuncti
 	return x
 }
 
-// @property supportArgumentBuffers @abstract true if the sampler can be used inside an argument buffer
+// A Boolean value that indicates whether you can reference a sampler, that you make with this descriptor, by its resource ID from an argument buffer.
 //
 // WithSupportArgumentBuffers sets the supportArgumentBuffers property and returns the receiver for chaining.
 func (x *SamplerDescriptor) WithSupportArgumentBuffers(supportArgumentBuffers bool) *SamplerDescriptor {
@@ -165,7 +167,7 @@ func (x *SamplerDescriptor) WithSupportArgumentBuffers(supportArgumentBuffers bo
 	return x
 }
 
-// @property label @abstract A string to help identify the created object.
+// A string that identifies the sampler.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *SamplerDescriptor) WithLabel(label string) *SamplerDescriptor {

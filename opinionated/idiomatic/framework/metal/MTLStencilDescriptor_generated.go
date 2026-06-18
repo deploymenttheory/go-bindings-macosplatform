@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that defines the front-facing or back-facing stencil operations of a depth and stencil state object.
+//
 // StencilDescriptor wraps [raw.MTLStencilDescriptor] with a fluent Go API.
 type StencilDescriptor struct {
 	inner *raw.MTLStencilDescriptor
@@ -35,13 +37,15 @@ func NewStencilDescriptor() *StencilDescriptor {
 	return &StencilDescriptor{inner: raw.MTLStencilDescriptorFromID(_id)}
 }
 
+// The comparison that is performed between the masked reference value and a masked value in the stencil attachment.
+//
 // WithStencilCompareFunction sets the stencilCompareFunction property and returns the receiver for chaining.
 func (x *StencilDescriptor) WithStencilCompareFunction(stencilCompareFunction MTLCompareFunction) *StencilDescriptor {
 	x.inner.SetStencilCompareFunction(raw.MTLCompareFunction(stencilCompareFunction))
 	return x
 }
 
-// Stencil is tested first.  stencilFailureOperation declares how the stencil buffer is updated when the stencil test fails.
+// The operation that is performed to update the values in the stencil attachment when the stencil test fails.
 //
 // WithStencilFailureOperation sets the stencilFailureOperation property and returns the receiver for chaining.
 func (x *StencilDescriptor) WithStencilFailureOperation(stencilFailureOperation MTLStencilOperation) *StencilDescriptor {
@@ -49,7 +53,7 @@ func (x *StencilDescriptor) WithStencilFailureOperation(stencilFailureOperation 
 	return x
 }
 
-// If stencil passes, depth is tested next.  Declare what happens when the depth test fails.
+// The operation that is performed to update the values in the stencil attachment when the stencil test passes, but the depth test fails.
 //
 // WithDepthFailureOperation sets the depthFailureOperation property and returns the receiver for chaining.
 func (x *StencilDescriptor) WithDepthFailureOperation(depthFailureOperation MTLStencilOperation) *StencilDescriptor {
@@ -57,7 +61,7 @@ func (x *StencilDescriptor) WithDepthFailureOperation(depthFailureOperation MTLS
 	return x
 }
 
-// If both the stencil and depth tests pass, declare how the stencil buffer is updated.
+// The operation that is performed to update the values in the stencil attachment when both the stencil test and the depth test pass.
 //
 // WithDepthStencilPassOperation sets the depthStencilPassOperation property and returns the receiver for chaining.
 func (x *StencilDescriptor) WithDepthStencilPassOperation(depthStencilPassOperation MTLStencilOperation) *StencilDescriptor {
@@ -65,12 +69,16 @@ func (x *StencilDescriptor) WithDepthStencilPassOperation(depthStencilPassOperat
 	return x
 }
 
+// A bitmask that determines from which bits that stencil comparison tests can read.
+//
 // WithReadMask sets the readMask property and returns the receiver for chaining.
 func (x *StencilDescriptor) WithReadMask(readMask uint32) *StencilDescriptor {
 	x.inner.SetReadMask(readMask)
 	return x
 }
 
+// A bitmask that determines to which bits that stencil operations can write.
+//
 // WithWriteMask sets the writeMask property and returns the receiver for chaining.
 func (x *StencilDescriptor) WithWriteMask(writeMask uint32) *StencilDescriptor {
 	x.inner.SetWriteMask(writeMask)

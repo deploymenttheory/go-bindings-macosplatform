@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A toolbar separator that aligns with the vertical split view in the same window.
+//
 // TrackingSeparatorToolbarItem wraps [raw.NSTrackingSeparatorToolbarItem] with a fluent Go API.
 type TrackingSeparatorToolbarItem struct {
 	inner *raw.NSTrackingSeparatorToolbarItem
@@ -37,7 +39,7 @@ func NewTrackingSeparatorToolbarItem() *TrackingSeparatorToolbarItem {
 	return &TrackingSeparatorToolbarItem{inner: raw.NSTrackingSeparatorToolbarItemFromID(_id)}
 }
 
-// The `splitView` must be in the same window as the toolbar containing this item by the time the toolbar is shown. Only vertical `splitViews` are supported.
+// The vertical split view to align with the toolbar separator.
 //
 // WithSplitView sets the splitView property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithSplitView(splitView *SplitView) *TrackingSeparatorToolbarItem {
@@ -45,7 +47,7 @@ func (x *TrackingSeparatorToolbarItem) WithSplitView(splitView *SplitView) *Trac
 	return x
 }
 
-// The specific divider of the `splitView` which will be tracked.
+// The index of the split view divider to align with the tracking separator.
 //
 // WithDividerIndex sets the dividerIndex property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithDividerIndex(dividerIndex int) *TrackingSeparatorToolbarItem {
@@ -53,7 +55,7 @@ func (x *TrackingSeparatorToolbarItem) WithDividerIndex(dividerIndex int) *Track
 	return x
 }
 
-// Use this to set the item's label that appears in the toolbar. The label may also be used for the default `menuFormRepresentation` of the item. Also, developers should make sure the length of the label is appropriate and not too long.
+// The label that appears for this item in the toolbar.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithLabel(label string) *TrackingSeparatorToolbarItem {
@@ -61,7 +63,7 @@ func (x *TrackingSeparatorToolbarItem) WithLabel(label string) *TrackingSeparato
 	return x
 }
 
-// Use this to set the item's label that appears when the item is in the customization palette. All Items must have a palette label, and for most things it is reasonable to set them to the same string as the label used in the toolbar.
+// The label that appears when the toolbar item is in the customization palette.
 //
 // WithPaletteLabel sets the paletteLabel property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithPaletteLabel(paletteLabel string) *TrackingSeparatorToolbarItem {
@@ -69,7 +71,7 @@ func (x *TrackingSeparatorToolbarItem) WithPaletteLabel(paletteLabel string) *Tr
 	return x
 }
 
-// An array of all alternate labels this item may display. The item will use the size of the longest label to prevent resizing when the label is changed.
+// The set of labels that the item might display.
 //
 // WithPossibleLabels sets the possibleLabels property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *TrackingSeparatorToolbarItem {
@@ -77,7 +79,7 @@ func (x *TrackingSeparatorToolbarItem) WithPossibleLabels(possibleLabels *founda
 	return x
 }
 
-// Use this to set a tooltip to be used when the item is displayed in the toolbar. (forwards to `-view` if it responds)
+// The tooltip to display when someone hovers over the item in the toolbar.
 //
 // WithToolTip sets the toolTip property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithToolTip(toolTip string) *TrackingSeparatorToolbarItem {
@@ -85,7 +87,7 @@ func (x *TrackingSeparatorToolbarItem) WithToolTip(toolTip string) *TrackingSepa
 	return x
 }
 
-// The menu form of a toolbar item's purpose is twofold. First, when the window is too small to display an item, it will be clipped but remain accessible from a "clipped items" menu containing the menu item returned here. Second, in text only mode, the menu returned will be used to create the displayed items. Singleton menu items will be clickable, while submenu items will be represented as a pull down. For instance, say you want a button that allows you to switch between modes A, B, and C. You could represent this as a menu by: a menu item "mode" with three submenu items "A", "B", and "C". By default, this method returns a singleton menu item with item label as the title. For standard items, the target, action is set.
+// The menu item to use when the toolbar item is in the overflow menu.
 //
 // WithMenuFormRepresentation sets the menuFormRepresentation property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *TrackingSeparatorToolbarItem {
@@ -93,7 +95,7 @@ func (x *TrackingSeparatorToolbarItem) WithMenuFormRepresentation(menuFormRepres
 	return x
 }
 
-// Tag for your own custom purpose. (forwards to `-view` if it responds)
+// An integer tag you can use to identify the toolbar item.
 //
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithTag(tag int) *TrackingSeparatorToolbarItem {
@@ -101,7 +103,7 @@ func (x *TrackingSeparatorToolbarItem) WithTag(tag int) *TrackingSeparatorToolba
 	return x
 }
 
-// Set and get the action of an item. (forwards to `-view` if it responds)
+// The object that defines the action method the toolbar item calls when clicked.
 //
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithTarget(target objc.ID) *TrackingSeparatorToolbarItem {
@@ -109,7 +111,7 @@ func (x *TrackingSeparatorToolbarItem) WithTarget(target objc.ID) *TrackingSepar
 	return x
 }
 
-// Set and get the action of an item. For custom views, this method will call `-setAction:` on the view if it responds. (forwards to `-view` if it responds)
+// The action method to call when someone clicks on the toolbar item.
 //
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithAction(action objc.SEL) *TrackingSeparatorToolbarItem {
@@ -117,7 +119,7 @@ func (x *TrackingSeparatorToolbarItem) WithAction(action objc.SEL) *TrackingSepa
 	return x
 }
 
-// Set and get the enabled flag of an item. For custom views, this method will call `-setEnabled:` on the view if it responds. (forwards to `-view` if it responds)
+// A Boolean value that indicates whether the item is enabled.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithEnabled(enabled bool) *TrackingSeparatorToolbarItem {
@@ -125,13 +127,15 @@ func (x *TrackingSeparatorToolbarItem) WithEnabled(enabled bool) *TrackingSepara
 	return x
 }
 
+// The image to display for the toolbar item.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithImage(image *Image) *TrackingSeparatorToolbarItem {
 	x.inner.NSToolbarItem.SetImage(image.Unwrap())
 	return x
 }
 
-// Set and get the title of an item. For custom views, this method will call `-setTitle:` on the view if it responds. (forwards to `-view` if it responds)
+// The title of the toolbar item.
 //
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithTitle(title string) *TrackingSeparatorToolbarItem {
@@ -139,7 +143,7 @@ func (x *TrackingSeparatorToolbarItem) WithTitle(title string) *TrackingSeparato
 	return x
 }
 
-// When set on an item without a custom view, the button produced will have a bordered style. Defaults to NO.
+// A Boolean value that indicates whether the toolbar item has a bordered style.
 //
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithBordered(bordered bool) *TrackingSeparatorToolbarItem {
@@ -153,7 +157,7 @@ func (x *TrackingSeparatorToolbarItem) WithBackgroundTintColor(backgroundTintCol
 	return x
 }
 
-// Defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items' background.
+// Defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items’ background.
 //
 // WithStyle sets the style property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithStyle(style NSToolbarItemStyle) *TrackingSeparatorToolbarItem {
@@ -161,7 +165,7 @@ func (x *TrackingSeparatorToolbarItem) WithStyle(style NSToolbarItemStyle) *Trac
 	return x
 }
 
-// Whether or not the item behaves as a navigation item (i.e. back/forward) in the toolbar. Navigation items may be specially positioned by the system outside the normal list of items of the toolbar in the order specified by `-toolbarDefaultItemIdentifiers:`. Defaults to NO.
+// A Boolean value that indicates whether the item behaves as a navigation item in the toolbar.
 //
 // WithNavigational sets the navigational property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithNavigational(navigational bool) *TrackingSeparatorToolbarItem {
@@ -169,7 +173,7 @@ func (x *TrackingSeparatorToolbarItem) WithNavigational(navigational bool) *Trac
 	return x
 }
 
-// Items with automatically generated views will return nil from this getter. Custom views may be provided but not all `NSToolbarItem` subclasses support custom views. Note that, by default, many of the set/get methods will be implemented by calls forwarded to the view you set, if it responds to it.
+// The custom view you use to draw the toolbar item.
 //
 // WithView sets the view property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithView(view ViewProvider) *TrackingSeparatorToolbarItem {
@@ -177,7 +181,7 @@ func (x *TrackingSeparatorToolbarItem) WithView(view ViewProvider) *TrackingSepa
 	return x
 }
 
-// Determines whether an item is visible in the toolbar. The item will still be visible in the customization panel. Because hidden items may be visible during user customization, use the `visible` property to determine if an item is currently displayed. Note that even hidden toolbar items are sync'd to other toolbars with a shared identifier, but its `hidden` state can be unique to each instance. Use this property to show a toolbar item in one toolbar instance but not another.
+// Determines whether an item is visible in the toolbar.
 //
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithHidden(hidden bool) *TrackingSeparatorToolbarItem {
@@ -185,7 +189,7 @@ func (x *TrackingSeparatorToolbarItem) WithHidden(hidden bool) *TrackingSeparato
 	return x
 }
 
-// Unless you have already set your own custom view, you should not call these methods. The min size should be small enough to look nice in all display modes. If you do not set a min/max size, the view's size properties will be calculated using constraints. Apps linked before 10.14 will use the view's current size. In general, apps should rely on the automatic measurements and constraints to define min/max sizes rather than setting these properties since this will account for localizations.
+// The toolbar item’s minimum size.
 //
 // WithMinSize sets the minSize property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithMinSize(minSize corefoundation.CGSize) *TrackingSeparatorToolbarItem {
@@ -193,13 +197,15 @@ func (x *TrackingSeparatorToolbarItem) WithMinSize(minSize corefoundation.CGSize
 	return x
 }
 
+// The toolbar item’s maximum size.
+//
 // WithMaxSize sets the maxSize property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithMaxSize(maxSize corefoundation.CGSize) *TrackingSeparatorToolbarItem {
 	x.inner.NSToolbarItem.SetMaxSize(maxSize)
 	return x
 }
 
-// When a toolbar does not have enough space to fit all its items, it must push some into the overflow menu. Items with the highest `visibilityPriority` level are chosen last for the overflow menu. The default `visibilityPriority` value is `NSToolbarItemVisibilityPriorityStandard`. To suggest that an item always remain visible, give it a value greater than `NSToolbarItemVisibilityPriorityStandard`, but less than `NSToolbarItemVisibilityPriorityUser`. In 10.7, users can no longer modify the toolbar item visibility priority.
+// The display priority associated with the toolbar item.
 //
 // WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithVisibilityPriority(visibilityPriority int) *TrackingSeparatorToolbarItem {
@@ -215,7 +221,7 @@ func (x *TrackingSeparatorToolbarItem) WithBadge(badge *ItemBadge) *TrackingSepa
 	return x
 }
 
-// This property only affects automatic validation performed by NSToolbar. Explicit validation requests, such as the `-[NSToolbar validateVisibleItems]` method, will invoke the `-validate` method even if `autovalidates` is `NO`. Defaults to YES.
+// A Boolean value that indicates whether the toolbar automatically validates the item.
 //
 // WithAutovalidates sets the autovalidates property and returns the receiver for chaining.
 func (x *TrackingSeparatorToolbarItem) WithAutovalidates(autovalidates bool) *TrackingSeparatorToolbarItem {

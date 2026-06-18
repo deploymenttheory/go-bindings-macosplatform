@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the transparency unit for scanning negatives on the scanner.
+//
 // ScannerFunctionalUnitNegativeTransparency wraps [raw.ICScannerFunctionalUnitNegativeTransparency] with a fluent Go API.
 type ScannerFunctionalUnitNegativeTransparency struct {
 	inner *raw.ICScannerFunctionalUnitNegativeTransparency

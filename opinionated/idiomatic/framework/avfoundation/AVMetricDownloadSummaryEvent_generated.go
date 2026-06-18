@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Represents a summary metric event with aggregated metrics for the entire download task.
+//
 // MetricDownloadSummaryEvent wraps [raw.AVMetricDownloadSummaryEvent] with a fluent Go API.
 type MetricDownloadSummaryEvent struct {
 	inner *raw.AVMetricDownloadSummaryEvent

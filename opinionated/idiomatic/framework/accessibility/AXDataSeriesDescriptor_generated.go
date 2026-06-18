@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a series of data points.
+//
 // DataSeriesDescriptor wraps [raw.AXDataSeriesDescriptor] with a fluent Go API.
 type DataSeriesDescriptor struct {
 	inner *raw.AXDataSeriesDescriptor
@@ -32,6 +34,8 @@ func DataSeriesDescriptorFromID(id objc.ID) *DataSeriesDescriptor {
 	return &DataSeriesDescriptor{inner: raw.AXDataSeriesDescriptorFromID(id)}
 }
 
+// Creates a data series with the specified name, a Boolean value that indicates whether the series is continuous, and data points.
+//
 // NewDataSeriesDescriptorWithNameIsContinuousDataPoints creates a new [DataSeriesDescriptor].
 func NewDataSeriesDescriptorWithNameIsContinuousDataPoints(name string, isContinuous bool, dataPoints *foundation.NSArray[*raw.AXDataPoint]) *DataSeriesDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXDataSeriesDescriptor")), objc.RegisterName("alloc"))
@@ -39,6 +43,8 @@ func NewDataSeriesDescriptorWithNameIsContinuousDataPoints(name string, isContin
 	return &DataSeriesDescriptor{inner: raw.AXDataSeriesDescriptorFromID(_id)}
 }
 
+// Creates a data series with the specified attributed name, a Boolean value that indicates whether the series is continuous, and data points.
+//
 // NewDataSeriesDescriptorWithAttributedNameIsContinuousDataPoints creates a new [DataSeriesDescriptor].
 func NewDataSeriesDescriptorWithAttributedNameIsContinuousDataPoints(attributedName *foundation.NSAttributedString, isContinuous bool, dataPoints *foundation.NSArray[*raw.AXDataPoint]) *DataSeriesDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXDataSeriesDescriptor")), objc.RegisterName("alloc"))
@@ -46,7 +52,7 @@ func NewDataSeriesDescriptorWithAttributedNameIsContinuousDataPoints(attributedN
 	return &DataSeriesDescriptor{inner: raw.AXDataSeriesDescriptorFromID(_id)}
 }
 
-// The name or title of this data series.
+// The name of the data series.
 //
 // WithName sets the name property and returns the receiver for chaining.
 func (x *DataSeriesDescriptor) WithName(name string) *DataSeriesDescriptor {
@@ -54,7 +60,7 @@ func (x *DataSeriesDescriptor) WithName(name string) *DataSeriesDescriptor {
 	return x
 }
 
-// An attributed version of the name of this data series. When set, this will be used instead of `name`.
+// An attributed version of the data series name.
 //
 // WithAttributedName sets the attributedName property and returns the receiver for chaining.
 func (x *DataSeriesDescriptor) WithAttributedName(attributedName *foundation.NSAttributedString) *DataSeriesDescriptor {
@@ -62,7 +68,7 @@ func (x *DataSeriesDescriptor) WithAttributedName(attributedName *foundation.NSA
 	return x
 }
 
-// Whether or not this data series should be treated as continuous.
+// A Boolean value that determines whether the data series is continuous.
 //
 // WithIsContinuous sets the isContinuous property and returns the receiver for chaining.
 func (x *DataSeriesDescriptor) WithIsContinuous(isContinuous bool) *DataSeriesDescriptor {
@@ -70,7 +76,7 @@ func (x *DataSeriesDescriptor) WithIsContinuous(isContinuous bool) *DataSeriesDe
 	return x
 }
 
-// The data points that make up the series.
+// The data points that the series contains.
 //
 // WithDataPoints sets the collection, converting the Go slice to an NSArray.
 func (x *DataSeriesDescriptor) WithDataPoints(items ...*raw.AXDataPoint) *DataSeriesDescriptor {

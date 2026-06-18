@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object of the CBUserIdentity class represents a user identity and is used for accessing the attributes of a user identity from an identity authority. The principal attributes of CBUserIdentity are a POSIX user identifier (UID), password, and certificate.
+//
 // UserIdentity wraps [raw.CBUserIdentity] with a fluent Go API.
 type UserIdentity struct {
 	inner *raw.CBUserIdentity
@@ -37,7 +39,7 @@ func NewUserIdentity() *UserIdentity {
 	return &UserIdentity{inner: raw.CBUserIdentityFromID(_id)}
 }
 
-// Returns a Boolean value indicating whether the given password is correct for the identity. - Parameters: - password: The password to test for the identity. - Returns: `TRUE` if the password is correct; otherwise, `FALSE`.
+// Returns a Boolean value indicating whether the given password is correct for the identity.
 //
 // AuthenticateWithPassword calls the underlying AuthenticateWithPassword.
 func (x *UserIdentity) AuthenticateWithPassword(password string) bool {

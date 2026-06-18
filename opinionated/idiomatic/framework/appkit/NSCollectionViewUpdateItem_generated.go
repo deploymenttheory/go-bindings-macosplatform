@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of a single change to make to an item in a collection view.
+//
 // CollectionViewUpdateItem wraps [raw.NSCollectionViewUpdateItem] with a fluent Go API.
 type CollectionViewUpdateItem struct {
 	inner *raw.NSCollectionViewUpdateItem

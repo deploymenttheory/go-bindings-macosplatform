@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Description for a machine learning pipeline state.
+//
 // MTL4MachineLearningPipelineDescriptor wraps [raw.MTL4MachineLearningPipelineDescriptor] with a fluent Go API.
 type MTL4MachineLearningPipelineDescriptor struct {
 	inner *raw.MTL4MachineLearningPipelineDescriptor
@@ -46,7 +48,7 @@ func (x *MTL4MachineLearningPipelineDescriptor) WithMachineLearningFunctionDescr
 	return x
 }
 
-// Assigns an optional string that uniquely identifies a pipeline descriptor. After you provide this label, you can use it to look up a pipeline state object by name in a binary archive.
+// Assigns an optional string that uniquely identifies a pipeline descriptor.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *MTL4MachineLearningPipelineDescriptor) WithLabel(label string) *MTL4MachineLearningPipelineDescriptor {
@@ -62,21 +64,21 @@ func (x *MTL4MachineLearningPipelineDescriptor) WithOptions(options *MTL4Pipelin
 	return x
 }
 
-// Sets the dimension of an input tensor at a buffer index. - Parameters: - dimensions: the dimensions of the tensor. - bufferIndex: Index of the tensor to modify.
+// Sets the dimension of an input tensor at a buffer index.
 //
 // SetInputDimensionsAtBufferIndex calls the underlying SetInputDimensionsAtBufferIndex.
 func (x *MTL4MachineLearningPipelineDescriptor) SetInputDimensionsAtBufferIndex(dimensions *raw.MTLTensorExtents, bufferIndex int) {
 	x.inner.SetInputDimensionsAtBufferIndex(dimensions, bufferIndex)
 }
 
-// Sets the dimensions of multiple input tensors on a range of buffer bindings. Use this method to specify the dimensions of multiple input tensors at a range of indices in a single call. You can indicate that any tensors in the range have unspecified dimensions by providing `NSNull` at the their corresponding index location in the array. - Important: The range's length property needs to match the number of dimensions you provide. Specifically, `range.length` needs to match `dimensions.count`. - Parameters: - dimensions: An array of tensor extents. - range: The range of inputs of the `dimensions` argument. The range's `length` needs to match the dimensions' `count` property.
+// Sets the dimensions of multiple input tensors on a range of buffer bindings.
 //
 // SetInputDimensionsWithRange calls the underlying SetInputDimensionsWithRange.
 func (x *MTL4MachineLearningPipelineDescriptor) SetInputDimensionsWithRange(dimensions *foundation.NSArray[*raw.MTLTensorExtents], range_ foundation.NSRange) {
 	x.inner.SetInputDimensionsWithRange(dimensions, range_)
 }
 
-// Obtains the dimensions of the input tensor at `bufferIndex` if set, `nil` otherwise.
+// Obtains the dimensions of the input tensor at bufferIndex if set, nil otherwise.
 //
 // InputDimensionsAtBufferIndex calls the underlying InputDimensionsAtBufferIndex.
 func (x *MTL4MachineLearningPipelineDescriptor) InputDimensionsAtBufferIndex(bufferIndex int) *TensorExtents {

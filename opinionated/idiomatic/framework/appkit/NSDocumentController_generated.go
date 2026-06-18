@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that manages an app’s documents.
+//
 // DocumentController wraps [raw.NSDocumentController] with a fluent Go API.
 type DocumentController struct {
 	inner *raw.NSDocumentController
@@ -38,6 +40,8 @@ func NewDocumentController() *DocumentController {
 	return &DocumentController{inner: raw.NSDocumentControllerFromID(_id)}
 }
 
+// This method initializes a new NSDocumentController from the coder.
+//
 // NewDocumentControllerWithCoder creates a new [DocumentController].
 func NewDocumentControllerWithCoder(coder *foundation.NSCoder) *DocumentController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDocumentController")), objc.RegisterName("alloc"))
@@ -45,12 +49,16 @@ func NewDocumentControllerWithCoder(coder *foundation.NSCoder) *DocumentControll
 	return &DocumentController{inner: raw.NSDocumentControllerFromID(_id)}
 }
 
+// The time interval (in seconds) for periodic autosaving.
+//
 // WithAutosavingDelay sets the autosavingDelay property and returns the receiver for chaining.
 func (x *DocumentController) WithAutosavingDelay(autosavingDelay float64) *DocumentController {
 	x.inner.SetAutosavingDelay(autosavingDelay)
 	return x
 }
 
+// Returns, for a given URL, the open document whose file or file package is located by the URL, or nil if there is no such open document.
+//
 // DocumentForURL calls the underlying DocumentForURL.
 func (x *DocumentController) DocumentForURL(url string) *Document {
 	_r := x.inner.DocumentForURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
@@ -60,6 +68,8 @@ func (x *DocumentController) DocumentForURL(url string) *Document {
 	return &Document{inner: _r}
 }
 
+// Returns the document object whose window controller owns a specified window.
+//
 // DocumentForWindow calls the underlying DocumentForWindow.
 func (x *DocumentController) DocumentForWindow(window *raw.NSWindow) *Document {
 	_r := x.inner.DocumentForWindow(window)
@@ -69,21 +79,29 @@ func (x *DocumentController) DocumentForWindow(window *raw.NSWindow) *Document {
 	return &Document{inner: _r}
 }
 
+// Adds the given document to the list of open documents.
+//
 // AddDocument calls the underlying AddDocument.
 func (x *DocumentController) AddDocument(document *raw.NSDocument) {
 	x.inner.AddDocument(document)
 }
 
+// Removes the given document from the list of open documents.
+//
 // RemoveDocument calls the underlying RemoveDocument.
 func (x *DocumentController) RemoveDocument(document *raw.NSDocument) {
 	x.inner.RemoveDocument(document)
 }
 
+// An action method called by the New menu command, this method creates a new NSDocument object and adds it to the list of such objects managed by the document controller.
+//
 // NewDocument calls the underlying NewDocument.
 func (x *DocumentController) NewDocument(sender objc.ID) {
 	x.inner.NewDocument(sender)
 }
 
+// Creates a new untitled document, presents its user interface if displayDocument is true, and returns the document if successful.
+//
 // OpenUntitledDocumentAndDisplayError calls the underlying OpenUntitledDocumentAndDisplayError.
 func (x *DocumentController) OpenUntitledDocumentAndDisplayError(displayDocument bool) (*Document, error) {
 	_r, _err := x.inner.OpenUntitledDocumentAndDisplayError(displayDocument)
@@ -96,6 +114,8 @@ func (x *DocumentController) OpenUntitledDocumentAndDisplayError(displayDocument
 	return &Document{inner: _r}, nil
 }
 
+// Instantiates a new untitled document of the specified type and returns it if successful.
+//
 // MakeUntitledDocumentOfTypeError calls the underlying MakeUntitledDocumentOfTypeError.
 func (x *DocumentController) MakeUntitledDocumentOfTypeError(typeName string) (*Document, error) {
 	_r, _err := x.inner.MakeUntitledDocumentOfTypeError(foundation.NSStringStringWithUTF8String(typeName))
@@ -108,11 +128,15 @@ func (x *DocumentController) MakeUntitledDocumentOfTypeError(typeName string) (*
 	return &Document{inner: _r}, nil
 }
 
+// An action method called by the Open menu command, it runs the modal Open panel and, based on the selected filenames, creates one or more NSDocument objects from the contents of the files.
+//
 // OpenDocument calls the underlying OpenDocument.
 func (x *DocumentController) OpenDocument(sender objc.ID) {
 	x.inner.OpenDocument(sender)
 }
 
+// An array of URLs that correspond to the selected files in a running Open dialog.
+//
 // URLsFromRunningOpenPanel returns the collection as a Go slice.
 func (x *DocumentController) URLsFromRunningOpenPanel() []*foundation.NSURL {
 	arr := x.inner.URLsFromRunningOpenPanel()
@@ -124,26 +148,36 @@ func (x *DocumentController) URLsFromRunningOpenPanel() []*foundation.NSURL {
 	})
 }
 
+// Presents a modal Open dialog and limits selection to specific file types.
+//
 // RunModalOpenPanelForTypes calls the underlying RunModalOpenPanelForTypes.
 func (x *DocumentController) RunModalOpenPanelForTypes(openPanel *raw.NSOpenPanel, types *foundation.NSArray[*foundation.NSString]) int {
 	return x.inner.RunModalOpenPanelForTypes(openPanel, types)
 }
 
+// Presents an Open dialog and delivers the results to a completion handler as an array of URLs for the chosen files, or nil.
+//
 // BeginOpenPanelWithCompletionHandler calls the underlying BeginOpenPanelWithCompletionHandler.
 func (x *DocumentController) BeginOpenPanelWithCompletionHandler(completionHandler objc.Block) {
 	x.inner.BeginOpenPanelWithCompletionHandler(completionHandler)
 }
 
+// Presents a nonmodal Open dialog that displays files you can open from a list of UTIs.
+//
 // BeginOpenPanelForTypesCompletionHandler calls the underlying BeginOpenPanelForTypesCompletionHandler.
 func (x *DocumentController) BeginOpenPanelForTypesCompletionHandler(openPanel *raw.NSOpenPanel, inTypes *foundation.NSArray[*foundation.NSString], completionHandler func(int)) {
 	x.inner.BeginOpenPanelForTypesCompletionHandler(openPanel, inTypes, completionHandler)
 }
 
+// Opens a document located by a URL, optionally presents its user interface, and calls the passed-in completion handler.
+//
 // OpenDocumentWithContentsOfURLDisplayCompletionHandler calls the underlying OpenDocumentWithContentsOfURLDisplayCompletionHandler.
 func (x *DocumentController) OpenDocumentWithContentsOfURLDisplayCompletionHandler(url string, displayDocument bool, completionHandler func(*raw.NSDocument, bool, unsafe.Pointer)) {
 	x.inner.OpenDocumentWithContentsOfURLDisplayCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), displayDocument, completionHandler)
 }
 
+// Instantiates a document located by a URL, of a specified type, and returns it if successful.
+//
 // MakeDocumentWithContentsOfURLOfTypeError calls the underlying MakeDocumentWithContentsOfURLOfTypeError.
 func (x *DocumentController) MakeDocumentWithContentsOfURLOfTypeError(url string, typeName string) (*Document, error) {
 	_r, _err := x.inner.MakeDocumentWithContentsOfURLOfTypeError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName))
@@ -156,11 +190,15 @@ func (x *DocumentController) MakeDocumentWithContentsOfURLOfTypeError(url string
 	return &Document{inner: _r}, nil
 }
 
+// Reopens a document, optionally located by a URL, by reading the contents for the document from another URL, optionally presents its user interface, and calls the passed-in completion handler.
+//
 // ReopenDocumentForURLWithContentsOfURLDisplayCompletionHandler calls the underlying ReopenDocumentForURLWithContentsOfURLDisplayCompletionHandler.
 func (x *DocumentController) ReopenDocumentForURLWithContentsOfURLDisplayCompletionHandler(urlOrNil string, contentsURL string, displayDocument bool, completionHandler func(*raw.NSDocument, bool, unsafe.Pointer)) {
 	x.inner.ReopenDocumentForURLWithContentsOfURLDisplayCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(urlOrNil)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(contentsURL)), displayDocument, completionHandler)
 }
 
+// Instantiates a document located by a URL, of a specified type, but by reading the contents for the document from another URL, and returns it if successful.
+//
 // MakeDocumentForURLWithContentsOfURLOfTypeError calls the underlying MakeDocumentForURLWithContentsOfURLOfTypeError.
 func (x *DocumentController) MakeDocumentForURLWithContentsOfURLOfTypeError(urlOrNil string, contentsURL string, typeName string) (*Document, error) {
 	_r, _err := x.inner.MakeDocumentForURLWithContentsOfURLOfTypeError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(urlOrNil)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(contentsURL)), foundation.NSStringStringWithUTF8String(typeName))
@@ -173,21 +211,29 @@ func (x *DocumentController) MakeDocumentForURLWithContentsOfURLOfTypeError(urlO
 	return &Document{inner: _r}, nil
 }
 
+// As the action method called by the Save All command, saves all open documents of the application that need to be saved.
+//
 // SaveAllDocuments calls the underlying SaveAllDocuments.
 func (x *DocumentController) SaveAllDocuments(sender objc.ID) {
 	x.inner.SaveAllDocuments(sender)
 }
 
+// Displays an alert asking if the user wants to review unsaved documents, quit regardless of unsaved documents, or cancel the save operation.
+//
 // ReviewUnsavedDocumentsWithAlertTitleCancellableDelegateDidReviewAllSelectorContextInfo calls the underlying ReviewUnsavedDocumentsWithAlertTitleCancellableDelegateDidReviewAllSelectorContextInfo.
 func (x *DocumentController) ReviewUnsavedDocumentsWithAlertTitleCancellableDelegateDidReviewAllSelectorContextInfo(title string, cancellable bool, delegate objc.ID, didReviewAllSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.ReviewUnsavedDocumentsWithAlertTitleCancellableDelegateDidReviewAllSelectorContextInfo(foundation.NSStringStringWithUTF8String(title), cancellable, delegate, didReviewAllSelector, contextInfo)
 }
 
+// Iterates through all the open documents and tries to close them one by one using the specified delegate.
+//
 // CloseAllDocumentsWithDelegateDidCloseAllSelectorContextInfo calls the underlying CloseAllDocumentsWithDelegateDidCloseAllSelectorContextInfo.
 func (x *DocumentController) CloseAllDocumentsWithDelegateDidCloseAllSelectorContextInfo(delegate objc.ID, didCloseAllSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.CloseAllDocumentsWithDelegateDidCloseAllSelectorContextInfo(delegate, didCloseAllSelector, contextInfo)
 }
 
+// Creates a new document by reading the contents for the document from another URL, presents its user interface, and returns the document if successful.
+//
 // DuplicateDocumentWithContentsOfURLCopyingDisplayNameError calls the underlying DuplicateDocumentWithContentsOfURLCopyingDisplayNameError.
 func (x *DocumentController) DuplicateDocumentWithContentsOfURLCopyingDisplayNameError(url string, duplicateByCopying bool, displayNameOrNil string) (*Document, error) {
 	_r, _err := x.inner.DuplicateDocumentWithContentsOfURLCopyingDisplayNameError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), duplicateByCopying, foundation.NSStringStringWithUTF8String(displayNameOrNil))
@@ -200,6 +246,8 @@ func (x *DocumentController) DuplicateDocumentWithContentsOfURLCopyingDisplayNam
 	return &Document{inner: _r}, nil
 }
 
+// Returns a menu item that your app uses for sharing the current document.
+//
 // StandardShareMenuItem calls the underlying StandardShareMenuItem.
 func (x *DocumentController) StandardShareMenuItem() *MenuItem {
 	_r := x.inner.StandardShareMenuItem()
@@ -209,36 +257,50 @@ func (x *DocumentController) StandardShareMenuItem() *MenuItem {
 	return &MenuItem{inner: _r}
 }
 
+// Presents an error alert to the user as a modal panel.
+//
 // PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo calls the underlying PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo.
 func (x *DocumentController) PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo(error_ unsafe.Pointer, window *raw.NSWindow, delegate objc.ID, didPresentSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo(error_, window, delegate, didPresentSelector, contextInfo)
 }
 
+// Presents an error alert to the user as a modal panel.
+//
 // PresentError calls the underlying PresentError.
 func (x *DocumentController) PresentError(error_ unsafe.Pointer) bool {
 	return x.inner.PresentError(error_)
 }
 
+// Indicates an error condition and provides the opportunity to return the same or a different error.
+//
 // WillPresentError calls the underlying WillPresentError.
 func (x *DocumentController) WillPresentError(error_ unsafe.Pointer) unsafe.Pointer {
 	return x.inner.WillPresentError(error_)
 }
 
+// Empties the recent documents list for the application.
+//
 // ClearRecentDocuments calls the underlying ClearRecentDocuments.
 func (x *DocumentController) ClearRecentDocuments(sender objc.ID) {
 	x.inner.ClearRecentDocuments(sender)
 }
 
+// Adds or replaces an Open Recent menu item corresponding to the document.
+//
 // NoteNewRecentDocument calls the underlying NoteNewRecentDocument.
 func (x *DocumentController) NoteNewRecentDocument(document *raw.NSDocument) {
 	x.inner.NoteNewRecentDocument(document)
 }
 
+// Adds or replaces an Open Recent menu item corresponding to the data located by the URL.
+//
 // NoteNewRecentDocumentURL calls the underlying NoteNewRecentDocumentURL.
 func (x *DocumentController) NoteNewRecentDocumentURL(url string) {
 	x.inner.NoteNewRecentDocumentURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
 }
 
+// Returns, for a specified URL, the document type identifier to use when opening the document at that location, if successful.
+//
 // TypeForContentsOfURLError calls the underlying TypeForContentsOfURLError.
 func (x *DocumentController) TypeForContentsOfURLError(url string) (string, error) {
 	_r, _err := x.inner.TypeForContentsOfURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
@@ -251,11 +313,15 @@ func (x *DocumentController) TypeForContentsOfURLError(url string) (string, erro
 	return purego.GoString(_r.Ptr()), nil
 }
 
+// Returns the NSDocument subclass associated with a given document type.
+//
 // DocumentClassForType calls the underlying DocumentClassForType.
 func (x *DocumentController) DocumentClassForType(typeName string) objc.Class {
 	return x.inner.DocumentClassForType(foundation.NSStringStringWithUTF8String(typeName))
 }
 
+// Returns the descriptive name for the specified document type, which is used in the File Format pop-up menu of the Save As dialog.
+//
 // DisplayNameForType calls the underlying DisplayNameForType.
 func (x *DocumentController) DisplayNameForType(typeName string) string {
 	_r := x.inner.DisplayNameForType(foundation.NSStringStringWithUTF8String(typeName))
@@ -265,6 +331,8 @@ func (x *DocumentController) DisplayNameForType(typeName string) string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns a Boolean value that indicates whether a given user interface item should be enabled.
+//
 // ValidateUserInterfaceItem calls the underlying ValidateUserInterfaceItem.
 func (x *DocumentController) ValidateUserInterfaceItem(item raw.NSValidatedUserInterfaceItem) bool {
 	return x.inner.ValidateUserInterfaceItem(item)
@@ -355,21 +423,29 @@ func (x *DocumentController) DocumentClassNames() []string {
 	})
 }
 
+// Opens a document located by the given URL presents its user interface if requested, and returns the document if successful.
+//
 // OpenDocumentWithContentsOfURLDisplayError calls the underlying OpenDocumentWithContentsOfURLDisplayError.
 func (x *DocumentController) OpenDocumentWithContentsOfURLDisplayError(url string, displayDocument bool) (objc.ID, error) {
 	return x.inner.OpenDocumentWithContentsOfURLDisplayError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), displayDocument)
 }
 
+// Reopens an autosaved document located by a URL, by reading the contents for the document from another URL, presents its user interface, and returns true if successful.
+//
 // ReopenDocumentForURLWithContentsOfURLError calls the underlying ReopenDocumentForURLWithContentsOfURLError.
 func (x *DocumentController) ReopenDocumentForURLWithContentsOfURLError(url string, contentsURL string) (bool, error) {
 	return x.inner.ReopenDocumentForURLWithContentsOfURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(contentsURL)))
 }
 
+// Returns the allowable file extensions for the given document type.
+//
 // FileExtensionsFromType calls the underlying FileExtensionsFromType.
 func (x *DocumentController) FileExtensionsFromType(typeName string) *foundation.NSArray[objc.ID] {
 	return x.inner.FileExtensionsFromType(foundation.NSStringStringWithUTF8String(typeName))
 }
 
+// Returns the document type associated with files having extension fileExtensionOrHFSFileType.
+//
 // TypeFromFileExtension calls the underlying TypeFromFileExtension.
 func (x *DocumentController) TypeFromFileExtension(fileNameExtensionOrHFSFileType string) string {
 	_r := x.inner.TypeFromFileExtension(foundation.NSStringStringWithUTF8String(fileNameExtensionOrHFSFileType))
@@ -379,51 +455,71 @@ func (x *DocumentController) TypeFromFileExtension(fileNameExtensionOrHFSFileTyp
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns the document object for the file in which the document data is stored.
+//
 // DocumentForFileName calls the underlying DocumentForFileName.
 func (x *DocumentController) DocumentForFileName(fileName string) objc.ID {
 	return x.inner.DocumentForFileName(foundation.NSStringStringWithUTF8String(fileName))
 }
 
+// Returns a selection of files chosen by the user in the Open panel.
+//
 // FileNamesFromRunningOpenPanel calls the underlying FileNamesFromRunningOpenPanel.
 func (x *DocumentController) FileNamesFromRunningOpenPanel() *foundation.NSArray[objc.ID] {
 	return x.inner.FileNamesFromRunningOpenPanel()
 }
 
+// Creates and returns a document object of a given document type from the contents of a file.
+//
 // MakeDocumentWithContentsOfFileOfType calls the underlying MakeDocumentWithContentsOfFileOfType.
 func (x *DocumentController) MakeDocumentWithContentsOfFileOfType(fileName string, type_ string) objc.ID {
 	return x.inner.MakeDocumentWithContentsOfFileOfType(foundation.NSStringStringWithUTF8String(fileName), foundation.NSStringStringWithUTF8String(type_))
 }
 
+// Creates and returns a document object for the given document type from the contents of a given URL.
+//
 // MakeDocumentWithContentsOfURLOfType calls the underlying MakeDocumentWithContentsOfURLOfType.
 func (x *DocumentController) MakeDocumentWithContentsOfURLOfType(url string, type_ string) objc.ID {
 	return x.inner.MakeDocumentWithContentsOfURLOfType(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(type_))
 }
 
+// Creates and returns a document object for document type.
+//
 // MakeUntitledDocumentOfType calls the underlying MakeUntitledDocumentOfType.
 func (x *DocumentController) MakeUntitledDocumentOfType(type_ string) objc.ID {
 	return x.inner.MakeUntitledDocumentOfType(foundation.NSStringStringWithUTF8String(type_))
 }
 
+// Returns a document object created from the contents of a given file and optionally displays it.
+//
 // OpenDocumentWithContentsOfFileDisplay calls the underlying OpenDocumentWithContentsOfFileDisplay.
 func (x *DocumentController) OpenDocumentWithContentsOfFileDisplay(fileName string, display bool) objc.ID {
 	return x.inner.OpenDocumentWithContentsOfFileDisplay(foundation.NSStringStringWithUTF8String(fileName), display)
 }
 
+// Returns a document object created from the contents of a given URL and optionally displays it.
+//
 // OpenDocumentWithContentsOfURLDisplay calls the underlying OpenDocumentWithContentsOfURLDisplay.
 func (x *DocumentController) OpenDocumentWithContentsOfURLDisplay(url string, display bool) objc.ID {
 	return x.inner.OpenDocumentWithContentsOfURLDisplay(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), display)
 }
 
+// Returns a document object instantiated from the subclass of the given document type and optionally displays it.
+//
 // OpenUntitledDocumentOfTypeDisplay calls the underlying OpenUntitledDocumentOfTypeDisplay.
 func (x *DocumentController) OpenUntitledDocumentOfTypeDisplay(type_ string, display bool) objc.ID {
 	return x.inner.OpenUntitledDocumentOfTypeDisplay(foundation.NSStringStringWithUTF8String(type_), display)
 }
 
+// Sets whether the window controllers of a document should be created when the document is created.
+//
 // SetShouldCreateUI calls the underlying SetShouldCreateUI.
 func (x *DocumentController) SetShouldCreateUI(flag bool) {
 	x.inner.SetShouldCreateUI(flag)
 }
 
+// Returns a Boolean value that indicates whether the window controllers of a document should be created when the document is created.
+//
 // ShouldCreateUI calls the underlying ShouldCreateUI.
 func (x *DocumentController) ShouldCreateUI() bool {
 	return x.inner.ShouldCreateUI()

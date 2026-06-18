@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An object that renders captions for display at a particular time.
+//
 // CaptionRenderer wraps [raw.AVCaptionRenderer] with a fluent Go API.
 type CaptionRenderer struct {
 	inner *raw.AVCaptionRenderer
@@ -40,7 +42,7 @@ func NewCaptionRenderer() *CaptionRenderer {
 	return &CaptionRenderer{inner: raw.AVCaptionRendererFromID(_id)}
 }
 
-// @property captions @abstract A NSArray holding captions to consider for rendering. @discussion This is the array of AVCaptions to consider when drawing. The array can contain no captions.
+// The captions to render.
 //
 // WithCaptions sets the collection, converting the Go slice to an NSArray.
 func (x *CaptionRenderer) WithCaptions(items ...CaptionProvider) *CaptionRenderer {
@@ -60,7 +62,7 @@ func (x *CaptionRenderer) WithCaptions(items ...CaptionProvider) *CaptionRendere
 	return x
 }
 
-// @property bounds @abstract A CGRect holding bounds for the drawing of caption scene(s). @discussion This is a CGRect indicating where captions are drawn using renderInContext:atTime: Once established, this CGRect is used in each call to renderInContext:atTime: until it is changed to another value. This should be set up earlier than drawing.
+// The drawing bounds of caption scenes.
 //
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *CaptionRenderer) WithBounds(bounds corefoundation.CGRect) *CaptionRenderer {
@@ -68,14 +70,14 @@ func (x *CaptionRenderer) WithBounds(bounds corefoundation.CGRect) *CaptionRende
 	return x
 }
 
-// @method		captionSceneChangesInRange: @abstract		Determine render time ranges within an enclosing time range to account for visual changes among captions. @result		An NSArray of AVCaptionRendererScenes; perhaps empty if there are no captions intersecting with the consideredTimeRange @discussion This is an optional service useful for optimizing drawing. A client can perform drawing without it. As captions may become active and inactive throughout the timeline, this method will return a NSArray holding scene objects with time ranges on whose edges there's a visual change. The client can use the ranges of time between these edges with -renderInContext:atTime: to ensure all visual changes are rendered. The returned time ranges consider activation/deactivation of captions, temporal overlapping, and intra-caption timing requirements (e.g., character reveal animations). Time ranges may be returned where no captions are active as this is also a change in the caption "scene". The returned NSArray contains AVCaptionRendererScenes, each holding the CMTimeRange of that scene but potentially other information that may be useful to the client during renderering. The consideredTimeRange parameter is a CMTimeRange expressing the limits for consideration. The extent of this range does not need to correspond to the timing of captions. It might be the range from 0 to some duration. For efficiency, the range can be limited to a window of time. It is also possible to use the range anchored at a time and extending in the direction of playback.
+// Determine render time ranges within an enclosing time range to account for visual changes among captions.
 //
 // CaptionSceneChangesInRange calls the underlying CaptionSceneChangesInRange.
 func (x *CaptionRenderer) CaptionSceneChangesInRange(consideredTimeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.AVCaptionRendererScene] {
 	return x.inner.CaptionSceneChangesInRange(consideredTimeRange)
 }
 
-// @method		renderInContext:forTime: @abstract		Draw the captions corresponding to a time established by the AVCaptions to a CGContext. @discussion	Captions are drawn into the CGContextRef based upon their activation at the specified time. If there are no captions or no captions at the specified time, "emptiness" will still be drawn (e.g., flood filling with zero alpha or a color).
+// Draw the captions for the time you specify.
 //
 // RenderInContextForTime calls the underlying RenderInContextForTime.
 func (x *CaptionRenderer) RenderInContextForTime(ctx unsafe.Pointer, time_ coremedia.CMTime) {

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A subclass of CAOpenGLLayer that is suitable for rendering OpenGL into layers.
+//
 // OpenGLLayer wraps [raw.NSOpenGLLayer] with a fluent Go API.
 type OpenGLLayer struct {
 	inner *raw.NSOpenGLLayer
@@ -36,24 +38,32 @@ func NewOpenGLLayer() *OpenGLLayer {
 	return &OpenGLLayer{inner: raw.NSOpenGLLayerFromID(_id)}
 }
 
+// Returns the view associated with the layer.
+//
 // WithView sets the view property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithView(view ViewProvider) *OpenGLLayer {
 	x.inner.SetView(view.asView())
 	return x
 }
 
+// Provides access to the layer’s associated OpenGL pixel format.
+//
 // WithOpenGLPixelFormat sets the openGLPixelFormat property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithOpenGLPixelFormat(openGLPixelFormat *OpenGLPixelFormat) *OpenGLLayer {
 	x.inner.SetOpenGLPixelFormat(openGLPixelFormat.Unwrap())
 	return x
 }
 
+// The layer’s OpenGL context.
+//
 // WithOpenGLContext sets the openGLContext property and returns the receiver for chaining.
 func (x *OpenGLLayer) WithOpenGLContext(openGLContext *OpenGLContext) *OpenGLLayer {
 	x.inner.SetOpenGLContext(openGLContext.Unwrap())
 	return x
 }
 
+// Returns the OpenGL pixel format suitable for the specified displays.
+//
 // OpenGLPixelFormatForDisplayMask calls the underlying OpenGLPixelFormatForDisplayMask.
 func (x *OpenGLLayer) OpenGLPixelFormatForDisplayMask(mask uint32) *OpenGLPixelFormat {
 	_r := x.inner.OpenGLPixelFormatForDisplayMask(mask)
@@ -63,6 +73,8 @@ func (x *OpenGLLayer) OpenGLPixelFormatForDisplayMask(mask uint32) *OpenGLPixelF
 	return &OpenGLPixelFormat{inner: _r}
 }
 
+// Returns the OpenGL context to use for the requested pixel format.
+//
 // OpenGLContextForPixelFormat calls the underlying OpenGLContextForPixelFormat.
 func (x *OpenGLLayer) OpenGLContextForPixelFormat(pixelFormat *raw.NSOpenGLPixelFormat) *OpenGLContext {
 	_r := x.inner.OpenGLContextForPixelFormat(pixelFormat)
@@ -72,11 +84,15 @@ func (x *OpenGLLayer) OpenGLContextForPixelFormat(pixelFormat *raw.NSOpenGLPixel
 	return &OpenGLContext{inner: _r}
 }
 
+// Invoked to ask the layer whether it can (or should) draw.
+//
 // CanDrawInOpenGLContextPixelFormatForLayerTimeDisplayTime calls the underlying CanDrawInOpenGLContextPixelFormatForLayerTimeDisplayTime.
 func (x *OpenGLLayer) CanDrawInOpenGLContextPixelFormatForLayerTimeDisplayTime(context_ *raw.NSOpenGLContext, pixelFormat *raw.NSOpenGLPixelFormat, t float64, ts *corevideo.CVTimeStamp) bool {
 	return x.inner.CanDrawInOpenGLContextPixelFormatForLayerTimeDisplayTime(context_, pixelFormat, t, ts)
 }
 
+// Draws the OpenGL content for the specified time.
+//
 // DrawInOpenGLContextPixelFormatForLayerTimeDisplayTime calls the underlying DrawInOpenGLContextPixelFormatForLayerTimeDisplayTime.
 func (x *OpenGLLayer) DrawInOpenGLContextPixelFormatForLayerTimeDisplayTime(context_ *raw.NSOpenGLContext, pixelFormat *raw.NSOpenGLPixelFormat, t float64, ts *corevideo.CVTimeStamp) {
 	x.inner.DrawInOpenGLContextPixelFormatForLayerTimeDisplayTime(context_, pixelFormat, t, ts)

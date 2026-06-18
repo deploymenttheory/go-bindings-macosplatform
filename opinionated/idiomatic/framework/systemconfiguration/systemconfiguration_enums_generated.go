@@ -9,13 +9,19 @@ import (
 	"strings"
 )
 
+// The current status of the network connection.
 type SCNetworkConnectionStatus int64
 
 const (
-	KSCNetworkConnectionInvalid       SCNetworkConnectionStatus = -1
-	KSCNetworkConnectionDisconnected  SCNetworkConnectionStatus = 0
-	KSCNetworkConnectionConnecting    SCNetworkConnectionStatus = 1
-	KSCNetworkConnectionConnected     SCNetworkConnectionStatus = 2
+	// The network connection refers to an invalid service.
+	KSCNetworkConnectionInvalid SCNetworkConnectionStatus = -1
+	// The network connection is disconnected.
+	KSCNetworkConnectionDisconnected SCNetworkConnectionStatus = 0
+	// The network connection is connecting.
+	KSCNetworkConnectionConnecting SCNetworkConnectionStatus = 1
+	// The network connection is connected.
+	KSCNetworkConnectionConnected SCNetworkConnectionStatus = 2
+	// The network connection is disconnecting.
 	KSCNetworkConnectionDisconnecting SCNetworkConnectionStatus = 3
 )
 
@@ -36,18 +42,27 @@ func (e SCNetworkConnectionStatus) String() string {
 	}
 }
 
+// Flags that indicate the reachability of a network node name or address, including whether a connection is required, and whether some user intervention might be required when establishing a connection.
 // Bitmask — values may be combined with |.
 type SCNetworkReachabilityFlags int64
 
 const (
-	KSCNetworkReachabilityFlagsTransientConnection  SCNetworkReachabilityFlags = 1
-	KSCNetworkReachabilityFlagsReachable            SCNetworkReachabilityFlags = 2
-	KSCNetworkReachabilityFlagsConnectionRequired   SCNetworkReachabilityFlags = 4
-	KSCNetworkReachabilityFlagsConnectionOnTraffic  SCNetworkReachabilityFlags = 8
+	// The specified node name or address can be reached via a transient connection, such as PPP.
+	KSCNetworkReachabilityFlagsTransientConnection SCNetworkReachabilityFlags = 1
+	// The specified node name or address can be reached using the current network configuration.
+	KSCNetworkReachabilityFlagsReachable SCNetworkReachabilityFlags = 2
+	// The specified node name or address can be reached using the current network configuration, but a connection must first be established. If this flag is set, the kSCNetworkReachabilityFlagsConnectionOnTraffic flag, kSCNetworkReachabilityFlagsConnectionOnDemand flag, or kSCNetworkReachabilityFlagsIsWWAN flag is also typically set to indicate the type of connection required. If the user must manually make the connection, the kSCNetworkReachabilityFlagsInterventionRequired flag is also set.
+	KSCNetworkReachabilityFlagsConnectionRequired SCNetworkReachabilityFlags = 4
+	// The specified node name or address can be reached using the current network configuration, but a connection must first be established. Any traffic directed to the specified name or address will initiate the connection.
+	KSCNetworkReachabilityFlagsConnectionOnTraffic SCNetworkReachabilityFlags = 8
+	// The specified node name or address can be reached using the current network configuration, but a connection must first be established.
 	KSCNetworkReachabilityFlagsInterventionRequired SCNetworkReachabilityFlags = 16
-	KSCNetworkReachabilityFlagsConnectionOnDemand   SCNetworkReachabilityFlags = 32
-	KSCNetworkReachabilityFlagsIsLocalAddress       SCNetworkReachabilityFlags = 65536
-	KSCNetworkReachabilityFlagsIsDirect             SCNetworkReachabilityFlags = 131072
+	// The specified node name or address can be reached using the current network configuration, but a connection must first be established.
+	KSCNetworkReachabilityFlagsConnectionOnDemand SCNetworkReachabilityFlags = 32
+	// The specified node name or address is one that is associated with a network interface on the current system.
+	KSCNetworkReachabilityFlagsIsLocalAddress SCNetworkReachabilityFlags = 65536
+	// Network traffic to the specified node name or address will not go through a gateway, but is routed directly to one of the interfaces in the system.
+	KSCNetworkReachabilityFlagsIsDirect SCNetworkReachabilityFlags = 131072
 )
 
 func (e SCNetworkReachabilityFlags) String() string {

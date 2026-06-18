@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing a custom metric.
+//
 // SignpostMetric wraps [raw.MXSignpostMetric] with a fluent Go API.
 type SignpostMetric struct {
 	inner *raw.MXSignpostMetric

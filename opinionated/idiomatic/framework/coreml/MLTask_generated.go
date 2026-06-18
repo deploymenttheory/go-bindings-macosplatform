@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An abstract base class for machine learning tasks.
+//
 // Task wraps [raw.MLTask] with a fluent Go API.
 type Task struct {
 	inner *raw.MLTask
@@ -37,11 +39,15 @@ func NewTask() *Task {
 	return &Task{inner: raw.MLTaskFromID(_id)}
 }
 
+// Begins or resumes a machine learning task.
+//
 // Resume calls the underlying Resume.
 func (x *Task) Resume() {
 	x.inner.Resume()
 }
 
+// Cancels a machine learning task before it completes.
+//
 // Cancel calls the underlying Cancel.
 func (x *Task) Cancel() {
 	x.inner.Cancel()

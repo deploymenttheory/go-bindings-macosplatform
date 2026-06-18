@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The IKSaveOptions class initializes, adds, and manages user interface options for saving image data.
+//
 // IKSaveOptions wraps [raw.IKSaveOptions] with a fluent Go API.
 type IKSaveOptions struct {
 	inner *raw.IKSaveOptions
@@ -32,7 +34,7 @@ func IKSaveOptionsFromID(id objc.ID) *IKSaveOptions {
 	return &IKSaveOptions{inner: raw.IKSaveOptionsFromID(id)}
 }
 
-// @method initWithImageProperties:imageUTType: @abstract Initializes IKSaveOptions with metadata and UTType.
+// Initializes a save options accessory pane for the provided image properties and uniform type identifier.
 //
 // NewIKSaveOptionsWithImagePropertiesImageUTType creates a new [IKSaveOptions].
 func NewIKSaveOptionsWithImagePropertiesImageUTType(imageProperties *foundation.NSDictionary[objc.ID, objc.ID], imageUTType string) *IKSaveOptions {
@@ -41,7 +43,7 @@ func NewIKSaveOptionsWithImagePropertiesImageUTType(imageProperties *foundation.
 	return &IKSaveOptions{inner: raw.IKSaveOptionsFromID(_id)}
 }
 
-// @property delegate @abstract Delegate of the IKSaveOptions.
+// Specifies the delegate object.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *IKSaveOptions) WithDelegate(delegate objc.ID) *IKSaveOptions {
@@ -57,7 +59,7 @@ func (x *IKSaveOptions) WithRememberLastSetting(rememberLastSetting bool) *IKSav
 	return x
 }
 
-// @method addSaveOptionsAccessoryViewToSavePanel: @abstract Adds IKSaveOptions UI to a NSSavePanel.
+// Adds IKSaveOptions accessory view to a NSSavePanel.
 //
 // AddSaveOptionsAccessoryViewToSavePanel calls the underlying AddSaveOptionsAccessoryViewToSavePanel.
 func (x *IKSaveOptions) AddSaveOptionsAccessoryViewToSavePanel(savePanel *appkit.NSSavePanel) {

@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that updates the payment request after the shipping contact information changes.
+//
 // PaymentRequestShippingContactUpdate wraps [raw.PKPaymentRequestShippingContactUpdate] with a fluent Go API.
 type PaymentRequestShippingContactUpdate struct {
 	inner *raw.PKPaymentRequestShippingContactUpdate
@@ -33,6 +35,8 @@ func PaymentRequestShippingContactUpdateFromID(id objc.ID) *PaymentRequestShippi
 	return &PaymentRequestShippingContactUpdate{inner: raw.PKPaymentRequestShippingContactUpdateFromID(id)}
 }
 
+// Creates a shipping contact update with your specified payment summary items and shipping methods.
+//
 // NewPaymentRequestShippingContactUpdateWithErrorsPaymentSummaryItemsShippingMethods creates a new [PaymentRequestShippingContactUpdate].
 func NewPaymentRequestShippingContactUpdateWithErrorsPaymentSummaryItemsShippingMethods(errors_ *foundation.NSArray[objc.ID], paymentSummaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem], shippingMethods *foundation.NSArray[*raw.PKShippingMethod]) *PaymentRequestShippingContactUpdate {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentRequestShippingContactUpdate")), objc.RegisterName("alloc"))
@@ -40,12 +44,16 @@ func NewPaymentRequestShippingContactUpdateWithErrorsPaymentSummaryItemsShipping
 	return &PaymentRequestShippingContactUpdate{inner: raw.PKPaymentRequestShippingContactUpdateFromID(_id)}
 }
 
+// The status of the payment request that indicates whether authorization succeeds or fails.
+//
 // WithStatus sets the status property and returns the receiver for chaining.
 func (x *PaymentRequestShippingContactUpdate) WithStatus(status PKPaymentAuthorizationStatus) *PaymentRequestShippingContactUpdate {
 	x.inner.PKPaymentRequestUpdate.SetStatus(raw.PKPaymentAuthorizationStatus(status))
 	return x
 }
 
+// The list of payment summary items for the instance.
+//
 // WithPaymentSummaryItems sets the collection, converting the Go slice to an NSArray.
 func (x *PaymentRequestShippingContactUpdate) WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestShippingContactUpdate {
 	if len(items) == 0 {
@@ -64,6 +72,8 @@ func (x *PaymentRequestShippingContactUpdate) WithPaymentSummaryItems(items ...P
 	return x
 }
 
+// The list of shipping methods available for a payment request.
+//
 // WithShippingMethods sets the collection, converting the Go slice to an NSArray.
 func (x *PaymentRequestShippingContactUpdate) WithShippingMethods(items ...*raw.PKShippingMethod) *PaymentRequestShippingContactUpdate {
 	if len(items) == 0 {
@@ -82,6 +92,8 @@ func (x *PaymentRequestShippingContactUpdate) WithShippingMethods(items ...*raw.
 	return x
 }
 
+// An optional array of payment token contexts to request multiple payment tokens with one payment token per context.
+//
 // WithMultiTokenContexts sets the collection, converting the Go slice to an NSArray.
 func (x *PaymentRequestShippingContactUpdate) WithMultiTokenContexts(items ...*raw.PKPaymentTokenContext) *PaymentRequestShippingContactUpdate {
 	if len(items) == 0 {
@@ -100,18 +112,24 @@ func (x *PaymentRequestShippingContactUpdate) WithMultiTokenContexts(items ...*r
 	return x
 }
 
+// The recurring payment request to update the payment request with.
+//
 // WithRecurringPaymentRequest sets the recurringPaymentRequest property and returns the receiver for chaining.
 func (x *PaymentRequestShippingContactUpdate) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestShippingContactUpdate {
 	x.inner.PKPaymentRequestUpdate.SetRecurringPaymentRequest(recurringPaymentRequest.Unwrap())
 	return x
 }
 
+// The automatic reload payment request to update the payment request with.
+//
 // WithAutomaticReloadPaymentRequest sets the automaticReloadPaymentRequest property and returns the receiver for chaining.
 func (x *PaymentRequestShippingContactUpdate) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestShippingContactUpdate {
 	x.inner.PKPaymentRequestUpdate.SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest.Unwrap())
 	return x
 }
 
+// The deferred payment request to update the payment request with.
+//
 // WithDeferredPaymentRequest sets the deferredPaymentRequest property and returns the receiver for chaining.
 func (x *PaymentRequestShippingContactUpdate) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestShippingContactUpdate {
 	x.inner.PKPaymentRequestUpdate.SetDeferredPaymentRequest(deferredPaymentRequest.Unwrap())

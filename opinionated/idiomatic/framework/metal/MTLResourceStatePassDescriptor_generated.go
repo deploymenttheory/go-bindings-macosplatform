@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A configuration for a resource state pass, used to create a resource state command encoder.
+//
 // ResourceStatePassDescriptor wraps [raw.MTLResourceStatePassDescriptor] with a fluent Go API.
 type ResourceStatePassDescriptor struct {
 	inner *raw.MTLResourceStatePassDescriptor

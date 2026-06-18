@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An enumerator that can access and list log entries.
+//
 // LogEnumerator wraps [raw.OSLogEnumerator] with a fluent Go API.
 type LogEnumerator struct {
 	inner *raw.OSLogEnumerator

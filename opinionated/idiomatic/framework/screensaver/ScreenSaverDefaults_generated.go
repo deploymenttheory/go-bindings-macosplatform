@@ -9,7 +9,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// A class that defines a set of methods for saving and restoring user defaults for screen savers. “ScreenSaverDefaults“ gives you access to preference values you need to configure your screen saver. Because multiple apps can load a screen saver, you can’t use the standard <doc://com.apple.documentation/documentation/foundation/nsuserdefaults> object to store preferences. Instead, instantiate this class using the “ScreenSaverDefaults/defaultsForModuleWithName:“ method, which takes your screen saver’s bundle identifier as a parameter. The resulting object gives you a way to store your preference values and associate them only with your screen saver. Use the inherited <doc://com.apple.documentation/documentation/foundation/nsuserdefaults> methods to load, store, or modify values.
+// A class that defines a set of methods for saving and restoring user defaults for screen savers.
 //
 // ScreenSaverDefaults wraps [raw.ScreenSaverDefaults] with a fluent Go API.
 type ScreenSaverDefaults struct {

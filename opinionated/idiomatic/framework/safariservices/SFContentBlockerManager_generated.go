@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that your app uses to interact with a content blocker extension.
+//
 // ContentBlockerManager wraps [raw.SFContentBlockerManager] with a fluent Go API.
 type ContentBlockerManager struct {
 	inner *raw.SFContentBlockerManager

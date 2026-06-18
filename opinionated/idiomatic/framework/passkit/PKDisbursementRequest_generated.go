@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a request to disburse funds from a merchant to an individual.
+//
 // DisbursementRequest wraps [raw.PKDisbursementRequest] with a fluent Go API.
 type DisbursementRequest struct {
 	inner *raw.PKDisbursementRequest
@@ -32,6 +34,8 @@ func DisbursementRequestFromID(id objc.ID) *DisbursementRequest {
 	return &DisbursementRequest{inner: raw.PKDisbursementRequestFromID(id)}
 }
 
+// Creates a new instance of a disbursement request with the merchant identifier, currency and region codes, and other parameters you specify.
+//
 // NewDisbursementRequestWithMerchantIdentifierCurrencyCodeRegionCodeSupportedNetworksMerchantCapabilitiesSummaryItems creates a new [DisbursementRequest].
 func NewDisbursementRequestWithMerchantIdentifierCurrencyCodeRegionCodeSupportedNetworksMerchantCapabilitiesSummaryItems(merchantIdentifier string, currencyCode string, regionCode string, supportedNetworks *foundation.NSArray[*foundation.NSString], merchantCapabilities PKMerchantCapability, summaryItems ...PaymentSummaryItemProvider) *DisbursementRequest {
 	_ptrs := make([]objc.ID, len(summaryItems))
@@ -48,18 +52,24 @@ func NewDisbursementRequestWithMerchantIdentifierCurrencyCodeRegionCodeSupported
 	return &DisbursementRequest{inner: raw.PKDisbursementRequestFromID(_id)}
 }
 
+// A string that identifies the merchant.
+//
 // WithMerchantIdentifier sets the merchantIdentifier property and returns the receiver for chaining.
 func (x *DisbursementRequest) WithMerchantIdentifier(merchantIdentifier string) *DisbursementRequest {
 	x.inner.SetMerchantIdentifier(foundation.NSStringStringWithUTF8String(merchantIdentifier))
 	return x
 }
 
+// The merchant’s country code string.
+//
 // WithRegionCode sets the regionCode property and returns the receiver for chaining.
 func (x *DisbursementRequest) WithRegionCode(regionCode string) *DisbursementRequest {
 	x.inner.SetRegionCode(foundation.NSStringStringWithUTF8String(regionCode))
 	return x
 }
 
+// An array of payment networks the merchant supports.
+//
 // WithSupportedNetworks sets the collection, converting the Go slice to an NSArray.
 func (x *DisbursementRequest) WithSupportedNetworks(items ...*foundation.NSString) *DisbursementRequest {
 	if len(items) == 0 {
@@ -78,12 +88,16 @@ func (x *DisbursementRequest) WithSupportedNetworks(items ...*foundation.NSStrin
 	return x
 }
 
+// A value that represents the payment-processing capabilities of the merchant.
+//
 // WithMerchantCapabilities sets the merchantCapabilities property and returns the receiver for chaining.
 func (x *DisbursementRequest) WithMerchantCapabilities(merchantCapabilities PKMerchantCapability) *DisbursementRequest {
 	x.inner.SetMerchantCapabilities(raw.PKMerchantCapability(merchantCapabilities))
 	return x
 }
 
+// An array of payment summary item objects that the framework presents to people.
+//
 // WithSummaryItems sets the collection, converting the Go slice to an NSArray.
 func (x *DisbursementRequest) WithSummaryItems(items ...PaymentSummaryItemProvider) *DisbursementRequest {
 	if len(items) == 0 {
@@ -102,12 +116,16 @@ func (x *DisbursementRequest) WithSummaryItems(items ...PaymentSummaryItemProvid
 	return x
 }
 
+// The currency code string for this disbursement.
+//
 // WithCurrencyCode sets the currencyCode property and returns the receiver for chaining.
 func (x *DisbursementRequest) WithCurrencyCode(currencyCode string) *DisbursementRequest {
 	x.inner.SetCurrencyCode(foundation.NSStringStringWithUTF8String(currencyCode))
 	return x
 }
 
+// An array that indicates which of the recipient’s contact details the merchant requires in order to process a disbursement.
+//
 // WithRequiredRecipientContactFields sets the collection, converting the Go slice to an NSArray.
 func (x *DisbursementRequest) WithRequiredRecipientContactFields(items ...*foundation.NSString) *DisbursementRequest {
 	if len(items) == 0 {
@@ -126,12 +144,16 @@ func (x *DisbursementRequest) WithRequiredRecipientContactFields(items ...*found
 	return x
 }
 
+// A contact object that describes the recipient.
+//
 // WithRecipientContact sets the recipientContact property and returns the receiver for chaining.
 func (x *DisbursementRequest) WithRecipientContact(recipientContact *Contact) *DisbursementRequest {
 	x.inner.SetRecipientContact(recipientContact.Unwrap())
 	return x
 }
 
+// An array of two-letter region codes that describes the regions to support.
+//
 // WithSupportedRegions sets the collection, converting the Go slice to an NSArray.
 func (x *DisbursementRequest) WithSupportedRegions(items ...*foundation.NSString) *DisbursementRequest {
 	if len(items) == 0 {
@@ -150,13 +172,15 @@ func (x *DisbursementRequest) WithSupportedRegions(items ...*foundation.NSString
 	return x
 }
 
+// Optional merchant-supplied information about the disbursement request.
+//
 // WithApplicationData sets the applicationData property and returns the receiver for chaining.
 func (x *DisbursementRequest) WithApplicationData(applicationData *foundation.NSData) *DisbursementRequest {
 	x.inner.SetApplicationData(applicationData)
 	return x
 }
 
-// A Boolean value that indicates whether this disbursement request is being made by a delegated entity on behalf of a merchant. Set this property to YES when your application is acting as an Apple Pay delegate and presenting the payment sheet on behalf of another merchant. The default value is NO. @note This property requires your application to be registered as an Apple Pay delegate and to have the com.apple.developer.in-app-payments-delegate entitlement.
+// A Boolean value that indicates whether this disbursement request is being made by a delegated entity on behalf of a merchant.
 //
 // WithIsDelegatedRequest sets the isDelegatedRequest property and returns the receiver for chaining.
 func (x *DisbursementRequest) WithIsDelegatedRequest(isDelegatedRequest bool) *DisbursementRequest {

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// Groups together properties to drive the dynamic linking process of a pipeline stage.
+//
 // MTL4PipelineStageDynamicLinkingDescriptor wraps [raw.MTL4PipelineStageDynamicLinkingDescriptor] with a fluent Go API.
 type MTL4PipelineStageDynamicLinkingDescriptor struct {
 	inner *raw.MTL4PipelineStageDynamicLinkingDescriptor

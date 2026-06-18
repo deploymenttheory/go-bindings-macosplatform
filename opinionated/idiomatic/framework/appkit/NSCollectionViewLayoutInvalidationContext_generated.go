@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that identifies the portions of your layout that need to be updated.
+//
 // CollectionViewLayoutInvalidationContext wraps [raw.NSCollectionViewLayoutInvalidationContext] with a fluent Go API.
 type CollectionViewLayoutInvalidationContext struct {
 	inner *raw.NSCollectionViewLayoutInvalidationContext
@@ -39,28 +41,38 @@ func NewCollectionViewLayoutInvalidationContext() *CollectionViewLayoutInvalidat
 	return &CollectionViewLayoutInvalidationContext{inner: raw.NSCollectionViewLayoutInvalidationContextFromID(_id)}
 }
 
+// The delta value to add to the collection view’s content offset.
+//
 // WithContentOffsetAdjustment sets the contentOffsetAdjustment property and returns the receiver for chaining.
 func (x *CollectionViewLayoutInvalidationContext) WithContentOffsetAdjustment(contentOffsetAdjustment corefoundation.CGPoint) *CollectionViewLayoutInvalidationContext {
 	x.inner.SetContentOffsetAdjustment(contentOffsetAdjustment)
 	return x
 }
 
+// The delta value to add to the collection view’s content size.
+//
 // WithContentSizeAdjustment sets the contentSizeAdjustment property and returns the receiver for chaining.
 func (x *CollectionViewLayoutInvalidationContext) WithContentSizeAdjustment(contentSizeAdjustment corefoundation.CGSize) *CollectionViewLayoutInvalidationContext {
 	x.inner.SetContentSizeAdjustment(contentSizeAdjustment)
 	return x
 }
 
+// Marks the specified items as invalid so that their layout information can be updated.
+//
 // InvalidateItemsAtIndexPaths calls the underlying InvalidateItemsAtIndexPaths.
 func (x *CollectionViewLayoutInvalidationContext) InvalidateItemsAtIndexPaths(indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
 	x.inner.InvalidateItemsAtIndexPaths(indexPaths)
 }
 
+// Marks the specified supplementary views as invalid so that their layout information can be updated.
+//
 // InvalidateSupplementaryElementsOfKindAtIndexPaths calls the underlying InvalidateSupplementaryElementsOfKindAtIndexPaths.
 func (x *CollectionViewLayoutInvalidationContext) InvalidateSupplementaryElementsOfKindAtIndexPaths(elementKind *foundation.NSString, indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
 	x.inner.InvalidateSupplementaryElementsOfKindAtIndexPaths(elementKind, indexPaths)
 }
 
+// Marks the specified decoration views as invalid so that their layout information can be updated.
+//
 // InvalidateDecorationElementsOfKindAtIndexPaths calls the underlying InvalidateDecorationElementsOfKindAtIndexPaths.
 func (x *CollectionViewLayoutInvalidationContext) InvalidateDecorationElementsOfKindAtIndexPaths(elementKind *foundation.NSString, indexPaths *foundation.NSSet[*foundation.NSIndexPath]) {
 	x.inner.InvalidateDecorationElementsOfKindAtIndexPaths(elementKind, indexPaths)

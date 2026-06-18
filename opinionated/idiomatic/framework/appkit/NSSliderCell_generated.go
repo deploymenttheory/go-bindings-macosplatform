@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The appearance and behavior of an NSSlider object.
+//
 // SliderCell wraps [raw.NSSliderCell] with a fluent Go API.
 type SliderCell struct {
 	inner *raw.NSSliderCell
@@ -37,350 +39,468 @@ func NewSliderCell() *SliderCell {
 	return &SliderCell{inner: raw.NSSliderCellFromID(_id)}
 }
 
+// The minimum value the slider can send to its target.
+//
 // WithMinValue sets the minValue property and returns the receiver for chaining.
 func (x *SliderCell) WithMinValue(minValue float64) *SliderCell {
 	x.inner.SetMinValue(minValue)
 	return x
 }
 
+// The maximum value the slider can send to its target.
+//
 // WithMaxValue sets the maxValue property and returns the receiver for chaining.
 func (x *SliderCell) WithMaxValue(maxValue float64) *SliderCell {
 	x.inner.SetMaxValue(maxValue)
 	return x
 }
 
+// The amount by which the slider changes its value when the user Option-drags the knob.
+//
 // WithAltIncrementValue sets the altIncrementValue property and returns the receiver for chaining.
 func (x *SliderCell) WithAltIncrementValue(altIncrementValue float64) *SliderCell {
 	x.inner.SetAltIncrementValue(altIncrementValue)
 	return x
 }
 
+// The slider type, either linear or circular.
+//
 // WithSliderType sets the sliderType property and returns the receiver for chaining.
 func (x *SliderCell) WithSliderType(sliderType NSSliderType) *SliderCell {
 	x.inner.SetSliderType(raw.NSSliderType(sliderType))
 	return x
 }
 
+// An integer indicating the orientation (vertical or horizontal) of the slider.
+//
 // WithVertical sets the vertical property and returns the receiver for chaining.
 func (x *SliderCell) WithVertical(vertical bool) *SliderCell {
 	x.inner.SetVertical(vertical)
 	return x
 }
 
+// The thickness of the slider knob, in pixels.
+//
 // WithKnobThickness sets the knobThickness property and returns the receiver for chaining.
 func (x *SliderCell) WithKnobThickness(knobThickness float64) *SliderCell {
 	x.inner.SetKnobThickness(knobThickness)
 	return x
 }
 
+// The number of tick marks associated with the slider, including the tick marks assigned to the minimum and maximum values.
+//
 // WithNumberOfTickMarks sets the numberOfTickMarks property and returns the receiver for chaining.
 func (x *SliderCell) WithNumberOfTickMarks(numberOfTickMarks int) *SliderCell {
 	x.inner.SetNumberOfTickMarks(numberOfTickMarks)
 	return x
 }
 
+// The position of the tick marks relative to the receiver.
+//
 // WithTickMarkPosition sets the tickMarkPosition property and returns the receiver for chaining.
 func (x *SliderCell) WithTickMarkPosition(tickMarkPosition NSTickMarkPosition) *SliderCell {
 	x.inner.SetTickMarkPosition(raw.NSTickMarkPosition(tickMarkPosition))
 	return x
 }
 
+// A Boolean value indicating whether the receiver fixes its values to those values represented by its tick marks.
+//
 // WithAllowsTickMarkValuesOnly sets the allowsTickMarkValuesOnly property and returns the receiver for chaining.
 func (x *SliderCell) WithAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) *SliderCell {
 	x.inner.SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly)
 	return x
 }
 
+// The view associated with the cell.
+//
 // WithControlView sets the controlView property and returns the receiver for chaining.
 func (x *SliderCell) WithControlView(controlView ViewProvider) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetControlView(controlView.asView())
 	return x
 }
 
+// The type of the cell.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *SliderCell) WithType(type_ NSCellType) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
+// The cell’s current state.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *SliderCell) WithState(state int) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetState(state)
 	return x
 }
 
+// The object that receives the cell’s action messages.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *SliderCell) WithTarget(target objc.ID) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetTarget(target)
 	return x
 }
 
+// The action performed by the cell.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *SliderCell) WithAction(action objc.SEL) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetAction(action)
 	return x
 }
 
+// A tag for identifying the cell.
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *SliderCell) WithTag(tag int) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetTag(tag)
 	return x
 }
 
+// The cell’s title text.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *SliderCell) WithTitle(title string) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// A Boolean value indicating whether the cell is currently enabled.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *SliderCell) WithEnabled(enabled bool) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *SliderCell) WithContinuous(continuous bool) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value indicating whether the cell is editable.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *SliderCell) WithEditable(editable bool) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetEditable(editable)
 	return x
 }
 
+// A Boolean value indicating whether the cell’s text can be selected.
+//
 // WithSelectable sets the selectable property and returns the receiver for chaining.
 func (x *SliderCell) WithSelectable(selectable bool) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetSelectable(selectable)
 	return x
 }
 
+// A Boolean value indicating whether the cell draws itself outlined with a plain border.
+//
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *SliderCell) WithBordered(bordered bool) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetBordered(bordered)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a bezeled border.
+//
 // WithBezeled sets the bezeled property and returns the receiver for chaining.
 func (x *SliderCell) WithBezeled(bezeled bool) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetBezeled(bezeled)
 	return x
 }
 
+// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
+//
 // WithScrollable sets the scrollable property and returns the receiver for chaining.
 func (x *SliderCell) WithScrollable(scrollable bool) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetScrollable(scrollable)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a highlighted appearance.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *SliderCell) WithHighlighted(highlighted bool) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetHighlighted(highlighted)
 	return x
 }
 
+// The alignment of the cell’s text.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *SliderCell) WithAlignment(alignment NSTextAlignment) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+//
 // WithWraps sets the wraps property and returns the receiver for chaining.
 func (x *SliderCell) WithWraps(wraps bool) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetWraps(wraps)
 	return x
 }
 
+// The font that the cell uses to display text.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *SliderCell) WithFont(font *Font) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
+// The cell’s formatter object.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *SliderCell) WithFormatter(formatter *foundation.NSFormatter) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetFormatter(formatter)
 	return x
 }
 
+// The cell’s value as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *SliderCell) WithObjectValue(objectValue objc.ID) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetObjectValue(objectValue)
 	return x
 }
 
+// The cell’s value as a string.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *SliderCell) WithStringValue(stringValue string) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The cell’s value as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *SliderCell) WithIntValue(intValue int) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetIntValue(intValue)
 	return x
 }
 
+// The cell’s value as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *SliderCell) WithFloatValue(floatValue float32) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetFloatValue(floatValue)
 	return x
 }
 
+// The cell’s value as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *SliderCell) WithDoubleValue(doubleValue float64) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The cell’s value as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *SliderCell) WithIntegerValue(integerValue int) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetIntegerValue(integerValue)
 	return x
 }
 
+// The image displayed by the cell, if any.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *SliderCell) WithImage(image *Image) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
+// The size of the cell.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *SliderCell) WithControlSize(controlSize NSControlSize) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The object represented by the cell.
+//
 // WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
 func (x *SliderCell) WithRepresentedObject(representedObject objc.ID) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetRepresentedObject(representedObject)
 	return x
 }
 
+// The cell’s contextual menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *SliderCell) WithMenu(menu *Menu) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
+// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+//
 // WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
 func (x *SliderCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *SliderCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// The line break mode to use when drawing text in the cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *SliderCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// A Boolean value indicating whether the cell assumes responsibility for undo operations.
+//
 // WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
 func (x *SliderCell) WithAllowsUndo(allowsUndo bool) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
 	return x
 }
 
+// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+//
 // WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
 func (x *SliderCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
 	return x
 }
 
+// The layout direction of the user interface.
+//
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
 func (x *SliderCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
+// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *SliderCell) WithUsesSingleLineMode(usesSingleLineMode bool) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// A Boolean value indicating whether the cell refuses the first responder status.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *SliderCell) WithRefusesFirstResponder(refusesFirstResponder bool) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+//
 // WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
 func (x *SliderCell) WithShowsFirstResponder(showsFirstResponder bool) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
 	return x
 }
 
+// The type of focus ring to use with the associated view.
+//
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
 func (x *SliderCell) WithFocusRingType(focusRingType NSFocusRingType) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
+// The cell’s value as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *SliderCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+//
 // WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
 func (x *SliderCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports the importation of images into its text.
+//
 // WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
 func (x *SliderCell) WithImportsGraphics(importsGraphics bool) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports three states instead of two.
+//
 // WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
 func (x *SliderCell) WithAllowsMixedState(allowsMixedState bool) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
 	return x
 }
 
+// The cell’s background style.
+//
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
 func (x *SliderCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
+// The cell’s control tint.
+//
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
 func (x *SliderCell) WithControlTint(controlTint NSControlTint) *SliderCell {
 	x.inner.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
+// Returns the rectangle in which the slider knob is drawn.
+//
 // KnobRectFlipped calls the underlying KnobRectFlipped.
 func (x *SliderCell) KnobRectFlipped(flipped bool) corefoundation.CGRect {
 	return x.inner.KnobRectFlipped(flipped)
 }
 
+// Returns the rectangle in which the bar is drawn.
+//
 // BarRectFlipped calls the underlying BarRectFlipped.
 func (x *SliderCell) BarRectFlipped(flipped bool) corefoundation.CGRect {
 	return x.inner.BarRectFlipped(flipped)
 }
 
+// Draws the slider knob in the given rectangle.
+//
 // DrawKnob calls the underlying DrawKnob.
 func (x *SliderCell) DrawKnob(knobRect corefoundation.CGRect) {
 	x.inner.DrawKnob(knobRect)
 }
 
+// Calculates the rectangle in which the knob should be drawn, then calls drawKnob: to actually draw the knob.
+//
 // DrawKnob2 calls the underlying DrawKnob2.
 func (x *SliderCell) DrawKnob2() {
 	x.inner.DrawKnob2()
 }
 
+// Draws the slider’s bar—but not its bezel or knob—inside the specified rectangle.
+//
 // DrawBarInsideFlipped calls the underlying DrawBarInsideFlipped.
 func (x *SliderCell) DrawBarInsideFlipped(rect corefoundation.CGRect, flipped bool) {
 	x.inner.DrawBarInsideFlipped(rect, flipped)
@@ -446,26 +566,36 @@ func (x *SliderCell) KnobThickness() float64 {
 	return x.inner.KnobThickness()
 }
 
+// Returns the receiver’s value represented by the tick mark at the specified index.
+//
 // TickMarkValueAtIndex calls the underlying TickMarkValueAtIndex.
 func (x *SliderCell) TickMarkValueAtIndex(index int) float64 {
 	return x.inner.TickMarkValueAtIndex(index)
 }
 
+// Returns the bounding rectangle of the tick mark at the specified index.
+//
 // RectOfTickMarkAtIndex calls the underlying RectOfTickMarkAtIndex.
 func (x *SliderCell) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
 	return x.inner.RectOfTickMarkAtIndex(index)
 }
 
+// Returns the index of the tick mark closest to the location of the slider represented by the specified point.
+//
 // IndexOfTickMarkAtPoint calls the underlying IndexOfTickMarkAtPoint.
 func (x *SliderCell) IndexOfTickMarkAtPoint(point corefoundation.CGPoint) int {
 	return x.inner.IndexOfTickMarkAtPoint(point)
 }
 
+// Returns the value of the tick mark closest to the specified value.
+//
 // ClosestTickMarkValueToValue calls the underlying ClosestTickMarkValueToValue.
 func (x *SliderCell) ClosestTickMarkValueToValue(value float64) float64 {
 	return x.inner.ClosestTickMarkValueToValue(value)
 }
 
+// Draws the slider’s tick marks.
+//
 // DrawTickMarks calls the underlying DrawTickMarks.
 func (x *SliderCell) DrawTickMarks() {
 	x.inner.DrawTickMarks()
@@ -501,21 +631,29 @@ func (x *SliderCell) SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) 
 	x.inner.SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly)
 }
 
+// Sets the cell used to draw the slider’s title.
+//
 // SetTitleCell calls the underlying SetTitleCell.
 func (x *SliderCell) SetTitleCell(cell *raw.NSCell) {
 	x.inner.SetTitleCell(cell)
 }
 
+// Returns nil.
+//
 // TitleCell calls the underlying TitleCell.
 func (x *SliderCell) TitleCell() objc.ID {
 	return x.inner.TitleCell()
 }
 
+// Sets the color used to draw the slider’s title.
+//
 // SetTitleColor calls the underlying SetTitleColor.
 func (x *SliderCell) SetTitleColor(newColor *raw.NSColor) {
 	x.inner.SetTitleColor(newColor)
 }
 
+// Returns nil.
+//
 // TitleColor calls the underlying TitleColor.
 func (x *SliderCell) TitleColor() *Color {
 	_r := x.inner.TitleColor()
@@ -525,11 +663,15 @@ func (x *SliderCell) TitleColor() *Color {
 	return &Color{inner: _r}
 }
 
+// Sets the font used to draw the slider’s title.
+//
 // SetTitleFont calls the underlying SetTitleFont.
 func (x *SliderCell) SetTitleFont(fontObj *raw.NSFont) {
 	x.inner.SetTitleFont(fontObj)
 }
 
+// Returns nil.
+//
 // TitleFont calls the underlying TitleFont.
 func (x *SliderCell) TitleFont() *Font {
 	_r := x.inner.TitleFont()
@@ -539,6 +681,8 @@ func (x *SliderCell) TitleFont() *Font {
 	return &Font{inner: _r}
 }
 
+// The thickness of the slider knob, in pixels.
+//
 // SetKnobThickness calls the underlying SetKnobThickness.
 func (x *SliderCell) SetKnobThickness(thickness float64) {
 	x.inner.SetKnobThickness(thickness)

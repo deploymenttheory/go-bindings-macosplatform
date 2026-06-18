@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing metrics about your app’s disk space usage.
+//
 // DiskSpaceUsageMetric wraps [raw.MXDiskSpaceUsageMetric] with a fluent Go API.
 type DiskSpaceUsageMetric struct {
 	inner *raw.MXDiskSpaceUsageMetric

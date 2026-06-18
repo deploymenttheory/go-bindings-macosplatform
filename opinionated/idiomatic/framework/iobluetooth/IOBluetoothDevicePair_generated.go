@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An instance of IOBluetoothDevicePair represents a pairing attempt to a remote Bluetooth device.
+//
 // IOBluetoothDevicePair wraps [raw.IOBluetoothDevicePair] with a fluent Go API.
 type IOBluetoothDevicePair struct {
 	inner *raw.IOBluetoothDevicePair
@@ -41,16 +43,22 @@ func (x *IOBluetoothDevicePair) WithDelegate(delegate objc.ID) *IOBluetoothDevic
 	return x
 }
 
+// Kicks off the pairing with the device.
+//
 // Start calls the underlying Start.
 func (x *IOBluetoothDevicePair) Start() int {
 	return x.inner.Start()
 }
 
+// Stops the current pairing. Removes the delegate and disconnects if device was connected.
+//
 // Stop calls the underlying Stop.
 func (x *IOBluetoothDevicePair) Stop() {
 	x.inner.Stop()
 }
 
+// Get the IOBluetoothDevice being used by the object.
+//
 // Device calls the underlying Device.
 func (x *IOBluetoothDevicePair) Device() *IOBluetoothDevice {
 	_r := x.inner.Device()
@@ -60,16 +68,22 @@ func (x *IOBluetoothDevicePair) Device() *IOBluetoothDevice {
 	return &IOBluetoothDevice{inner: _r}
 }
 
+// Set the device object to pair with. It is retained by the object.
+//
 // SetDevice calls the underlying SetDevice.
 func (x *IOBluetoothDevicePair) SetDevice(inDevice *raw.IOBluetoothDevice) {
 	x.inner.SetDevice(inDevice)
 }
 
+// This is the required reply to the devicePairingPINCodeRequest delegate message. Set the PIN code to use during pairing if required.
+//
 // ReplyPINCodePINCode calls the underlying ReplyPINCodePINCode.
 func (x *IOBluetoothDevicePair) ReplyPINCodePINCode(pINCodeSize uint, pINCode *raw.BluetoothPINCode) {
 	x.inner.ReplyPINCodePINCode(pINCodeSize, pINCode)
 }
 
+// This is the required reply to the devicePairingUserConfirmationRequest delegate message.
+//
 // ReplyUserConfirmation calls the underlying ReplyUserConfirmation.
 func (x *IOBluetoothDevicePair) ReplyUserConfirmation(reply bool) {
 	x.inner.ReplyUserConfirmation(reply)

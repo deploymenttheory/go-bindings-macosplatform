@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of a model parameter that includes a default value and a constraint, if applicable.
+//
 // ParameterDescription wraps [raw.MLParameterDescription] with a fluent Go API.
 type ParameterDescription struct {
 	inner *raw.MLParameterDescription

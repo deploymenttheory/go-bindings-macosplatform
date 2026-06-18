@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that encapsulates input for large binary object extensions during registration.
+//
 // AuthorizationPublicKeyCredentialLargeBlobRegistrationInput wraps [raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput] with a fluent Go API.
 type AuthorizationPublicKeyCredentialLargeBlobRegistrationInput struct {
 	inner *raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput

@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// The central object for managing notification-related activities for your app or app extension.
+//
 // UserNotificationCenter wraps [raw.UNUserNotificationCenter] with a fluent Go API.
 type UserNotificationCenter struct {
 	inner *raw.UNUserNotificationCenter
@@ -39,22 +41,30 @@ func NewUserNotificationCenter() *UserNotificationCenter {
 	return &UserNotificationCenter{inner: raw.UNUserNotificationCenterFromID(_id)}
 }
 
+// The notification center’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *UserNotificationCenter) WithDelegate(delegate raw.UNUserNotificationCenterDelegate) *UserNotificationCenter {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// Requests a person’s authorization to allow local and remote notifications for your app.
+//
 // RequestAuthorizationWithOptionsCompletionHandler calls the underlying RequestAuthorizationWithOptionsCompletionHandler.
 func (x *UserNotificationCenter) RequestAuthorizationWithOptionsCompletionHandler(options UNAuthorizationOptions, completionHandler func(bool, unsafe.Pointer)) {
 	x.inner.RequestAuthorizationWithOptionsCompletionHandler(raw.UNAuthorizationOptions(options), completionHandler)
 }
 
+// Registers the notification categories that your app supports.
+//
 // SetNotificationCategories calls the underlying SetNotificationCategories.
 func (x *UserNotificationCenter) SetNotificationCategories(categories *foundation.NSSet[*raw.UNNotificationCategory]) {
 	x.inner.SetNotificationCategories(categories)
 }
 
+// Fetches your app’s registered notification categories.
+//
 // GetNotificationCategories blocks until the operation completes or ctx is cancelled.
 func (x *UserNotificationCenter) GetNotificationCategories(ctx context.Context) (*foundation.NSSet[*raw.UNNotificationCategory], error) {
 	type _result struct {
@@ -76,6 +86,8 @@ func (x *UserNotificationCenter) GetNotificationCategories(ctx context.Context) 
 	}
 }
 
+// Retrieves the authorization and feature-related settings for your app.
+//
 // GetNotificationSettings blocks until the operation completes or ctx is cancelled.
 func (x *UserNotificationCenter) GetNotificationSettings(ctx context.Context) (*NotificationSettings, error) {
 	type _result struct {
@@ -99,6 +111,8 @@ func (x *UserNotificationCenter) GetNotificationSettings(ctx context.Context) (*
 	}
 }
 
+// Schedules the delivery of a local notification.
+//
 // AddNotificationRequest blocks until the operation completes or ctx is cancelled.
 func (x *UserNotificationCenter) AddNotificationRequest(ctx context.Context, request *raw.UNNotificationRequest) error {
 	_ch := make(chan error, 1)
@@ -117,6 +131,8 @@ func (x *UserNotificationCenter) AddNotificationRequest(ctx context.Context, req
 	}
 }
 
+// Fetches all of your app’s local notifications that are pending delivery.
+//
 // GetPendingNotificationRequests blocks until the operation completes or ctx is cancelled.
 func (x *UserNotificationCenter) GetPendingNotificationRequests(ctx context.Context) (*foundation.NSArray[*raw.UNNotificationRequest], error) {
 	type _result struct {
@@ -138,16 +154,22 @@ func (x *UserNotificationCenter) GetPendingNotificationRequests(ctx context.Cont
 	}
 }
 
+// Removes your app’s local notifications that are pending and match the specified identifiers.
+//
 // RemovePendingNotificationRequestsWithIdentifiers calls the underlying RemovePendingNotificationRequestsWithIdentifiers.
 func (x *UserNotificationCenter) RemovePendingNotificationRequestsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString]) {
 	x.inner.RemovePendingNotificationRequestsWithIdentifiers(identifiers)
 }
 
+// Removes all of your app’s pending local notifications.
+//
 // RemoveAllPendingNotificationRequests calls the underlying RemoveAllPendingNotificationRequests.
 func (x *UserNotificationCenter) RemoveAllPendingNotificationRequests() {
 	x.inner.RemoveAllPendingNotificationRequests()
 }
 
+// Fetches all of your app’s delivered notifications that are still present in Notification Center.
+//
 // GetDeliveredNotifications blocks until the operation completes or ctx is cancelled.
 func (x *UserNotificationCenter) GetDeliveredNotifications(ctx context.Context) (*foundation.NSArray[*raw.UNNotification], error) {
 	type _result struct {
@@ -169,16 +191,22 @@ func (x *UserNotificationCenter) GetDeliveredNotifications(ctx context.Context) 
 	}
 }
 
+// Removes your app’s notifications from Notification Center that match the specified identifiers.
+//
 // RemoveDeliveredNotificationsWithIdentifiers calls the underlying RemoveDeliveredNotificationsWithIdentifiers.
 func (x *UserNotificationCenter) RemoveDeliveredNotificationsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSString]) {
 	x.inner.RemoveDeliveredNotificationsWithIdentifiers(identifiers)
 }
 
+// Removes all of your app’s delivered notifications from Notification Center.
+//
 // RemoveAllDeliveredNotifications calls the underlying RemoveAllDeliveredNotifications.
 func (x *UserNotificationCenter) RemoveAllDeliveredNotifications() {
 	x.inner.RemoveAllDeliveredNotifications()
 }
 
+// Updates the badge count for your app’s icon.
+//
 // SetBadgeCount blocks until the operation completes or ctx is cancelled.
 func (x *UserNotificationCenter) SetBadgeCount(ctx context.Context, newBadgeCount int) error {
 	_ch := make(chan error, 1)

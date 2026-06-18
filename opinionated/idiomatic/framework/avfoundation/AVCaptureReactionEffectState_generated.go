@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that reports the state of a reaction effect performed on a capture device.
+//
 // CaptureReactionEffectState wraps [raw.AVCaptureReactionEffectState] with a fluent Go API.
 type CaptureReactionEffectState struct {
 	inner *raw.AVCaptureReactionEffectState

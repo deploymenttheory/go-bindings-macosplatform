@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An item used in a group with a custom layout arrangement.
+//
 // CollectionLayoutGroupCustomItem wraps [raw.NSCollectionLayoutGroupCustomItem] with a fluent Go API.
 type CollectionLayoutGroupCustomItem struct {
 	inner *raw.NSCollectionLayoutGroupCustomItem

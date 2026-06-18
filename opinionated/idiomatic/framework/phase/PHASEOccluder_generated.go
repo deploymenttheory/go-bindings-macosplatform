@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object with a shape and position that blocks audio from reaching the listener.
+//
 // Occluder wraps [raw.PHASEOccluder] with a fluent Go API.
 type Occluder struct {
 	inner *raw.PHASEOccluder
@@ -31,7 +33,7 @@ func OccluderFromID(id objc.ID) *Occluder {
 	return &Occluder{inner: raw.PHASEOccluderFromID(id)}
 }
 
-// @method initWithEngine:shapes: @abstract Initialize a new occluder with shapes. @discussion The shapes array cannot be empty, otherwise an exception is thrown. @note This function is thread-safe. Clients can safely run this function to create multiple occluders from multiple threads, if required.
+// Creates an occluder with the given engine and shapes.
 //
 // NewOccluderWithEngineShapes creates a new [Occluder].
 func NewOccluderWithEngineShapes(engine *raw.PHASEEngine, shapes *foundation.NSArray[*raw.PHASEShape]) *Occluder {

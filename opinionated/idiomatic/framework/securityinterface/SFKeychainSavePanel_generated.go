@@ -11,7 +11,7 @@ import (
 	"unsafe"
 )
 
-// @class SFKeychainSavePanel @abstract SFKeychainSavePanel is a panel and sheet interface used to create a keychain using the NSSavePanel UI.
+// A panel or sheet that allows the user to create a keychain.
 //
 // KeychainSavePanel wraps [raw.SFKeychainSavePanel] with a fluent Go API.
 type KeychainSavePanel struct {
@@ -39,21 +39,21 @@ func NewKeychainSavePanel() *KeychainSavePanel {
 	return &KeychainSavePanel{inner: raw.SFKeychainSavePanelFromID(_id)}
 }
 
-// @method setPassword: @abstract Specifies the password for the keychain that will be created. @param The password string object.
+// Specifies the password for the keychain that will be created.
 //
 // SetPassword calls the underlying SetPassword.
 func (x *KeychainSavePanel) SetPassword(password string) {
 	x.inner.SetPassword(foundation.NSStringStringWithUTF8String(password))
 }
 
-// @method keychain @abstract Returns the keychain created by the SFKeychainSavePanel. @result The keychain object.
+// Returns the keychain created by the keychain save panel.
 //
 // Keychain calls the underlying Keychain.
 func (x *KeychainSavePanel) Keychain() unsafe.Pointer {
 	return x.inner.Keychain()
 }
 
-// @method error @abstract Returns the last error encountered by SFKeychainSavePanel. @result The error object.
+// Returns the last error encountered by the keychain save panel.
 //
 // Error calls the underlying Error.
 func (x *KeychainSavePanel) Error() unsafe.Pointer {

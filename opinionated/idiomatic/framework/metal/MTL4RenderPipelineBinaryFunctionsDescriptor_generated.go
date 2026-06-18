@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// Allows you to specify additional binary functions to link to each stage of a render pipeline.
+//
 // MTL4RenderPipelineBinaryFunctionsDescriptor wraps [raw.MTL4RenderPipelineBinaryFunctionsDescriptor] with a fluent Go API.
 type MTL4RenderPipelineBinaryFunctionsDescriptor struct {
 	inner *raw.MTL4RenderPipelineBinaryFunctionsDescriptor

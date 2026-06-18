@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// An abstract class that defines the interface for macOS documents.
+//
 // Document wraps [raw.NSDocument] with a fluent Go API.
 type Document struct {
 	inner *raw.NSDocument
@@ -39,6 +41,8 @@ func NewDocument() *Document {
 	return &Document{inner: raw.NSDocumentFromID(_id)}
 }
 
+// Initializes a document of a specified type.
+//
 // NewDocumentWithTypeError creates a new [Document].
 func NewDocumentWithTypeError(typeName string) (*Document, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDocument")), objc.RegisterName("alloc"))
@@ -50,6 +54,8 @@ func NewDocumentWithTypeError(typeName string) (*Document, error) {
 	return &Document{inner: raw.NSDocumentFromID(_id)}, nil
 }
 
+// Initializes a document located by a URL of a specified type.
+//
 // NewDocumentWithContentsOfURLOfTypeError creates a new [Document].
 func NewDocumentWithContentsOfURLOfTypeError(url string, typeName string) (*Document, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDocument")), objc.RegisterName("alloc"))
@@ -61,6 +67,8 @@ func NewDocumentWithContentsOfURLOfTypeError(url string, typeName string) (*Docu
 	return &Document{inner: raw.NSDocumentFromID(_id)}, nil
 }
 
+// Initializes a document with the specified contents, and places the resulting document’s file at the designated location.
+//
 // NewDocumentForURLWithContentsOfURLOfTypeError creates a new [Document].
 func NewDocumentForURLWithContentsOfURLOfTypeError(urlOrNil string, contentsURL string, typeName string) (*Document, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDocument")), objc.RegisterName("alloc"))
@@ -86,77 +94,103 @@ func NewDocumentWithContentsOfURLOfType(url string, typeName string) *Document {
 	return &Document{inner: raw.NSDocumentFromID(_id)}
 }
 
+// The name of the document type, as specified in the app’s information property-list file.
+//
 // WithFileType sets the fileType property and returns the receiver for chaining.
 func (x *Document) WithFileType(fileType string) *Document {
 	x.inner.SetFileType(foundation.NSStringStringWithUTF8String(fileType))
 	return x
 }
 
+// The location of the document’s on-disk representation.
+//
 // WithFileURL sets the fileURL property and returns the receiver for chaining.
 func (x *Document) WithFileURL(fileURL string) *Document {
 	x.inner.SetFileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)))
 	return x
 }
 
+// The last-known modification date of the document’s on-disk representation.
+//
 // WithFileModificationDate sets the fileModificationDate property and returns the receiver for chaining.
 func (x *Document) WithFileModificationDate(fileModificationDate *foundation.NSDate) *Document {
 	x.inner.SetFileModificationDate(fileModificationDate)
 	return x
 }
 
+// A Boolean value that indicates whether the document is a draft that the user has not yet saved.
+//
 // WithDraft sets the draft property and returns the receiver for chaining.
 func (x *Document) WithDraft(draft bool) *Document {
 	x.inner.SetDraft(draft)
 	return x
 }
 
+// The location of the most recently autosaved document contents.
+//
 // WithAutosavedContentsFileURL sets the autosavedContentsFileURL property and returns the receiver for chaining.
 func (x *Document) WithAutosavedContentsFileURL(autosavedContentsFileURL string) *Document {
 	x.inner.SetAutosavedContentsFileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(autosavedContentsFileURL)))
 	return x
 }
 
+// The printing information associated with the document.
+//
 // WithPrintInfo sets the printInfo property and returns the receiver for chaining.
 func (x *Document) WithPrintInfo(printInfo *PrintInfo) *Document {
 	x.inner.SetPrintInfo(printInfo.Unwrap())
 	return x
 }
 
+// The object that the document uses to support undo/redo operations.
+//
 // WithUndoManager sets the undoManager property and returns the receiver for chaining.
 func (x *Document) WithUndoManager(undoManager *foundation.NSUndoManager) *Document {
 	x.inner.SetUndoManager(undoManager)
 	return x
 }
 
+// A Boolean value that indicates whether the document owns an undo manager object.
+//
 // WithHasUndoManager sets the hasUndoManager property and returns the receiver for chaining.
 func (x *Document) WithHasUndoManager(hasUndoManager bool) *Document {
 	x.inner.SetHasUndoManager(hasUndoManager)
 	return x
 }
 
+// The name of the document as displayed in the title bars of the document’s windows and in alert dialogs related to the document.
+//
 // WithDisplayName sets the displayName property and returns the receiver for chaining.
 func (x *Document) WithDisplayName(displayName string) *Document {
 	x.inner.SetDisplayName(foundation.NSStringStringWithUTF8String(displayName))
 	return x
 }
 
+// An object that encapsulates a user activity the document supports.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *Document) WithUserActivity(userActivity *foundation.NSUserActivity) *Document {
 	x.inner.SetUserActivity(userActivity)
 	return x
 }
 
+// The name of the document seen by the user in AppleScript.
+//
 // WithLastComponentOfFileName sets the lastComponentOfFileName property and returns the receiver for chaining.
 func (x *Document) WithLastComponentOfFileName(lastComponentOfFileName string) *Document {
 	x.inner.SetLastComponentOfFileName(foundation.NSStringStringWithUTF8String(lastComponentOfFileName))
 	return x
 }
 
+// Waits for any work scheduled by previous invocations of this method to complete, then invokes the passed-in block.
+//
 // PerformActivityWithSynchronousWaitingUsing calls the underlying PerformActivityWithSynchronousWaitingUsing.
 func (x *Document) PerformActivityWithSynchronousWaitingUsing(waitSynchronously bool, block func(objc.Block)) {
 	x.inner.PerformActivityWithSynchronousWaitingUsing(waitSynchronously, block)
 }
 
+// Continues to perform the task for a user activity object using a different block.
+//
 // ContinueActivityUsing blocks until the operation completes or ctx is cancelled.
 func (x *Document) ContinueActivityUsing(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -171,6 +205,8 @@ func (x *Document) ContinueActivityUsing(ctx context.Context) error {
 	}
 }
 
+// Invokes the passed-in block on the main thread.
+//
 // ContinueAsynchronousWorkOnMainThreadUsing blocks until the operation completes or ctx is cancelled.
 func (x *Document) ContinueAsynchronousWorkOnMainThreadUsing(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -185,6 +221,8 @@ func (x *Document) ContinueAsynchronousWorkOnMainThreadUsing(ctx context.Context
 	}
 }
 
+// Waits for any scheduled file access to complete, then invokes the passed-in block.
+//
 // PerformSynchronousFileAccessUsing blocks until the operation completes or ctx is cancelled.
 func (x *Document) PerformSynchronousFileAccessUsing(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -199,106 +237,148 @@ func (x *Document) PerformSynchronousFileAccessUsing(ctx context.Context) error 
 	}
 }
 
+// Waits for any scheduled file access to complete but without blocking the main thread, then invokes the passed-in block.
+//
 // PerformAsynchronousFileAccessUsing calls the underlying PerformAsynchronousFileAccessUsing.
 func (x *Document) PerformAsynchronousFileAccessUsing(block func(objc.Block)) {
 	x.inner.PerformAsynchronousFileAccessUsing(block)
 }
 
+// The action of the File menu item Revert in a document-based app.
+//
 // RevertDocumentToSaved calls the underlying RevertDocumentToSaved.
 func (x *Document) RevertDocumentToSaved(sender objc.ID) {
 	x.inner.RevertDocumentToSaved(sender)
 }
 
+// Discards all unsaved document modifications and replaces the document’s contents by reading a file or file package located by a URL of a specified type.
+//
 // RevertToContentsOfURLOfTypeError calls the underlying RevertToContentsOfURLOfTypeError.
 func (x *Document) RevertToContentsOfURLOfTypeError(url string, typeName string) (bool, error) {
 	return x.inner.RevertToContentsOfURLOfTypeError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName))
 }
 
+// Sets the contents of this document by reading from a file or file package, of a specified type, located by a URL.
+//
 // ReadFromURLOfTypeError calls the underlying ReadFromURLOfTypeError.
 func (x *Document) ReadFromURLOfTypeError(url string, typeName string) (bool, error) {
 	return x.inner.ReadFromURLOfTypeError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName))
 }
 
+// Sets the contents of this document by reading from a file wrapper of a specified type.
+//
 // ReadFromFileWrapperOfTypeError calls the underlying ReadFromFileWrapperOfTypeError.
 func (x *Document) ReadFromFileWrapperOfTypeError(fileWrapper *foundation.NSFileWrapper, typeName string) (bool, error) {
 	return x.inner.ReadFromFileWrapperOfTypeError(fileWrapper, foundation.NSStringStringWithUTF8String(typeName))
 }
 
+// Sets the contents of this document by reading from data of a specified type.
+//
 // ReadFromDataOfTypeError calls the underlying ReadFromDataOfTypeError.
 func (x *Document) ReadFromDataOfTypeError(data *foundation.NSData, typeName string) (bool, error) {
 	return x.inner.ReadFromDataOfTypeError(data, foundation.NSStringStringWithUTF8String(typeName))
 }
 
+// Writes the contents of the document to a file or file package located by a URL, that is formatted to a specified type.
+//
 // WriteToURLOfTypeError calls the underlying WriteToURLOfTypeError.
 func (x *Document) WriteToURLOfTypeError(url string, typeName string) (bool, error) {
 	return x.inner.WriteToURLOfTypeError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName))
 }
 
+// Creates and returns a file wrapper that contains the contents of the document, formatted to the specified type.
+//
 // FileWrapperOfTypeError calls the underlying FileWrapperOfTypeError.
 func (x *Document) FileWrapperOfTypeError(typeName string) (*foundation.NSFileWrapper, error) {
 	return x.inner.FileWrapperOfTypeError(foundation.NSStringStringWithUTF8String(typeName))
 }
 
+// Creates and returns a data object that contains the contents of the document, formatted to a specified type.
+//
 // DataOfTypeError calls the underlying DataOfTypeError.
 func (x *Document) DataOfTypeError(typeName string) (*foundation.NSData, error) {
 	return x.inner.DataOfTypeError(foundation.NSStringStringWithUTF8String(typeName))
 }
 
+// Unblocks the main thread during asynchronous saving.
+//
 // UnblockUserInteraction calls the underlying UnblockUserInteraction.
 func (x *Document) UnblockUserInteraction() {
 	x.inner.UnblockUserInteraction()
 }
 
+// Writes the contents of the document to a file or file package located by a URL.
+//
 // WriteSafelyToURLOfTypeForSaveOperationError calls the underlying WriteSafelyToURLOfTypeForSaveOperationError.
 func (x *Document) WriteSafelyToURLOfTypeForSaveOperationError(url string, typeName string, saveOperation NSSaveOperationType) (bool, error) {
 	return x.inner.WriteSafelyToURLOfTypeForSaveOperationError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName), raw.NSSaveOperationType(saveOperation))
 }
 
+// Writes the contents of the document to a file or file package located by a URL.
+//
 // WriteToURLOfTypeForSaveOperationOriginalContentsURLError calls the underlying WriteToURLOfTypeForSaveOperationOriginalContentsURLError.
 func (x *Document) WriteToURLOfTypeForSaveOperationOriginalContentsURLError(url string, typeName string, saveOperation NSSaveOperationType, absoluteOriginalContentsURL string) (bool, error) {
 	return x.inner.WriteToURLOfTypeForSaveOperationOriginalContentsURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName), raw.NSSaveOperationType(saveOperation), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(absoluteOriginalContentsURL)))
 }
 
+// Returns the attributes to write to the file or file package at the specified URL, and targeting the specified type of save operation.
+//
 // FileAttributesToWriteToURLOfTypeForSaveOperationOriginalContentsURLError calls the underlying FileAttributesToWriteToURLOfTypeForSaveOperationOriginalContentsURLError.
 func (x *Document) FileAttributesToWriteToURLOfTypeForSaveOperationOriginalContentsURLError(url string, typeName string, saveOperation NSSaveOperationType, absoluteOriginalContentsURL string) (*foundation.NSDictionary[*foundation.NSString, objc.ID], error) {
 	return x.inner.FileAttributesToWriteToURLOfTypeForSaveOperationOriginalContentsURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName), raw.NSSaveOperationType(saveOperation), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(absoluteOriginalContentsURL)))
 }
 
+// The action method invoked in the receiver as first responder when the user chooses the Save menu command.
+//
 // SaveDocument calls the underlying SaveDocument.
 func (x *Document) SaveDocument(sender objc.ID) {
 	x.inner.SaveDocument(sender)
 }
 
+// The action method invoked in the receiver as first responder when the user chooses the Save As menu command.
+//
 // SaveDocumentAs calls the underlying SaveDocumentAs.
 func (x *Document) SaveDocumentAs(sender objc.ID) {
 	x.inner.SaveDocumentAs(sender)
 }
 
+// The action method invoked in the receiver as first responder when the user chooses the Save To menu command.
+//
 // SaveDocumentTo calls the underlying SaveDocumentTo.
 func (x *Document) SaveDocumentTo(sender objc.ID) {
 	x.inner.SaveDocumentTo(sender)
 }
 
+// Saves the document and delivers the results to the provided delegate object.
+//
 // SaveDocumentWithDelegateDidSaveSelectorContextInfo calls the underlying SaveDocumentWithDelegateDidSaveSelectorContextInfo.
 func (x *Document) SaveDocumentWithDelegateDidSaveSelectorContextInfo(delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.SaveDocumentWithDelegateDidSaveSelectorContextInfo(delegate, didSaveSelector, contextInfo)
 }
 
+// Presents a modal Save panel to the user, then tries to save the document if the user approves the operation.
+//
 // RunModalSavePanelForSaveOperationDelegateDidSaveSelectorContextInfo calls the underlying RunModalSavePanelForSaveOperationDelegateDidSaveSelectorContextInfo.
 func (x *Document) RunModalSavePanelForSaveOperationDelegateDidSaveSelectorContextInfo(saveOperation NSSaveOperationType, delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.RunModalSavePanelForSaveOperationDelegateDidSaveSelectorContextInfo(raw.NSSaveOperationType(saveOperation), delegate, didSaveSelector, contextInfo)
 }
 
+// Tells the document to customize the specified Save panel.
+//
 // PrepareSavePanel calls the underlying PrepareSavePanel.
 func (x *Document) PrepareSavePanel(savePanel *raw.NSSavePanel) bool {
 	return x.inner.PrepareSavePanel(savePanel)
 }
 
+// Saves the contents of the document to a file or file package located by a URL, that is formatted to a specified type, for a particular kind of save operation.
+//
 // SaveToURLOfTypeForSaveOperationDelegateDidSaveSelectorContextInfo calls the underlying SaveToURLOfTypeForSaveOperationDelegateDidSaveSelectorContextInfo.
 func (x *Document) SaveToURLOfTypeForSaveOperationDelegateDidSaveSelectorContextInfo(url string, typeName string, saveOperation NSSaveOperationType, delegate objc.ID, didSaveSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.SaveToURLOfTypeForSaveOperationDelegateDidSaveSelectorContextInfo(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName), raw.NSSaveOperationType(saveOperation), delegate, didSaveSelector, contextInfo)
 }
 
+// Saves the contents of the document to a file or file package located by a URL, that is formatted to a specified type, for a particular kind of save operation, and invokes the passed-in completion handler.
+//
 // SaveToURLOfTypeForSaveOperation blocks until the operation completes or ctx is cancelled.
 func (x *Document) SaveToURLOfTypeForSaveOperation(ctx context.Context, url string, typeName string, saveOperation NSSaveOperationType) error {
 	_ch := make(chan error, 1)
@@ -317,27 +397,37 @@ func (x *Document) SaveToURLOfTypeForSaveOperation(ctx context.Context, url stri
 	}
 }
 
+// Returns whether the receiver can concurrently write to a file or file package located by a URL, that is formatted for a specific type, for a specific kind of save operation.
+//
 // CanAsynchronouslyWriteToURLOfTypeForSaveOperation calls the underlying CanAsynchronouslyWriteToURLOfTypeForSaveOperation.
 func (x *Document) CanAsynchronouslyWriteToURLOfTypeForSaveOperation(url string, typeName string, saveOperation NSSaveOperationType) bool {
 	return x.inner.CanAsynchronouslyWriteToURLOfTypeForSaveOperation(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName), raw.NSSaveOperationType(saveOperation))
 }
 
+// Returns a Boolean value that indicates whether it is safe to autosave document changes.
+//
 // CheckAutosavingSafetyAndReturnError returns any validation error.
 func (x *Document) CheckAutosavingSafetyAndReturnError() error {
 	_, err := x.inner.CheckAutosavingSafetyAndReturnError()
 	return err
 }
 
+// Schedules periodic autosaving for the purpose of crash protection.
+//
 // ScheduleAutosaving calls the underlying ScheduleAutosaving.
 func (x *Document) ScheduleAutosaving() {
 	x.inner.ScheduleAutosaving()
 }
 
+// Autosaves the document’s contents to an appropriate location in the file system.
+//
 // AutosaveDocumentWithDelegateDidAutosaveSelectorContextInfo calls the underlying AutosaveDocumentWithDelegateDidAutosaveSelectorContextInfo.
 func (x *Document) AutosaveDocumentWithDelegateDidAutosaveSelectorContextInfo(delegate objc.ID, didAutosaveSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.AutosaveDocumentWithDelegateDidAutosaveSelectorContextInfo(delegate, didAutosaveSelector, contextInfo)
 }
 
+// Autosaves the document’s contents to an appropriate file-system location, as needed.
+//
 // AutosaveWithImplicitCancellability blocks until the operation completes or ctx is cancelled.
 func (x *Document) AutosaveWithImplicitCancellability(ctx context.Context, autosavingIsImplicitlyCancellable bool) error {
 	_ch := make(chan error, 1)
@@ -356,11 +446,15 @@ func (x *Document) AutosaveWithImplicitCancellability(ctx context.Context, autos
 	}
 }
 
+// Opens the Versions browser in the document’s main window.
+//
 // BrowseDocumentVersions calls the underlying BrowseDocumentVersions.
 func (x *Document) BrowseDocumentVersions(sender objc.ID) {
 	x.inner.BrowseDocumentVersions(sender)
 }
 
+// Dismiss the Versions browser for the current document.
+//
 // StopBrowsingVersions blocks until the operation completes or ctx is cancelled.
 func (x *Document) StopBrowsingVersions(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -375,26 +469,36 @@ func (x *Document) StopBrowsingVersions(ctx context.Context) error {
 	}
 }
 
+// Determines whether to close the document, prompting the user as needed to choose a course of action.
+//
 // CanCloseDocumentWithDelegateShouldCloseSelectorContextInfo calls the underlying CanCloseDocumentWithDelegateShouldCloseSelectorContextInfo.
 func (x *Document) CanCloseDocumentWithDelegateShouldCloseSelectorContextInfo(delegate objc.ID, shouldCloseSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.CanCloseDocumentWithDelegateShouldCloseSelectorContextInfo(delegate, shouldCloseSelector, contextInfo)
 }
 
+// Closes all of the document’s windows and removes the document from its document controller.
+//
 // Close calls the underlying Close.
 func (x *Document) Close() {
 	x.inner.Close()
 }
 
+// Creates a copy of the receiving document in response to the user choosing Duplicate from the File menu.
+//
 // DuplicateDocument calls the underlying DuplicateDocument.
 func (x *Document) DuplicateDocument(sender objc.ID) {
 	x.inner.DuplicateDocument(sender)
 }
 
+// Creates a new document whose contents are the same as the current document.
+//
 // DuplicateDocumentWithDelegateDidDuplicateSelectorContextInfo calls the underlying DuplicateDocumentWithDelegateDidDuplicateSelectorContextInfo.
 func (x *Document) DuplicateDocumentWithDelegateDidDuplicateSelectorContextInfo(delegate objc.ID, didDuplicateSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.DuplicateDocumentWithDelegateDidDuplicateSelectorContextInfo(delegate, didDuplicateSelector, contextInfo)
 }
 
+// Creates a new document whose contents are the same as the receiver and returns an error object if unsuccessful.
+//
 // DuplicateAndReturnError calls the underlying DuplicateAndReturnError.
 func (x *Document) DuplicateAndReturnError() (*Document, error) {
 	_r, _err := x.inner.DuplicateAndReturnError()
@@ -407,26 +511,36 @@ func (x *Document) DuplicateAndReturnError() (*Document, error) {
 	return &Document{inner: _r}, nil
 }
 
+// Renames the current document in response to the user choosing the Rename menu item.
+//
 // RenameDocument calls the underlying RenameDocument.
 func (x *Document) RenameDocument(sender objc.ID) {
 	x.inner.RenameDocument(sender)
 }
 
+// Moves the document to the user’s iCloud storage.
+//
 // MoveDocumentToUbiquityContainer calls the underlying MoveDocumentToUbiquityContainer.
 func (x *Document) MoveDocumentToUbiquityContainer(sender objc.ID) {
 	x.inner.MoveDocumentToUbiquityContainer(sender)
 }
 
+// Moves the document to a new location in response to the user choosing the Move To… menu item.
+//
 // MoveDocument calls the underlying MoveDocument.
 func (x *Document) MoveDocument(sender objc.ID) {
 	x.inner.MoveDocument(sender)
 }
 
+// Moves the document to a user-selected location.
+//
 // MoveDocumentWithCompletionHandler calls the underlying MoveDocumentWithCompletionHandler.
 func (x *Document) MoveDocumentWithCompletionHandler(completionHandler func(bool)) {
 	x.inner.MoveDocumentWithCompletionHandler(completionHandler)
 }
 
+// Moves the document’s file to the given URL.
+//
 // MoveToURL blocks until the operation completes or ctx is cancelled.
 func (x *Document) MoveToURL(ctx context.Context, url string) error {
 	_ch := make(chan error, 1)
@@ -445,21 +559,29 @@ func (x *Document) MoveToURL(ctx context.Context, url string) error {
 	}
 }
 
+// Locks the document in response to the user choosing the Lock menu item.
+//
 // LockDocument calls the underlying LockDocument.
 func (x *Document) LockDocument(sender objc.ID) {
 	x.inner.LockDocument(sender)
 }
 
+// Unlocks the document in response to the user choosing the Unlock menu item.
+//
 // UnlockDocument calls the underlying UnlockDocument.
 func (x *Document) UnlockDocument(sender objc.ID) {
 	x.inner.UnlockDocument(sender)
 }
 
+// Prevents the user from making further changes to the document.
+//
 // LockDocumentWithCompletionHandler calls the underlying LockDocumentWithCompletionHandler.
 func (x *Document) LockDocumentWithCompletionHandler(completionHandler func(bool)) {
 	x.inner.LockDocumentWithCompletionHandler(completionHandler)
 }
 
+// Prevents the user from making changes to the document’s file.
+//
 // Lock blocks until the operation completes or ctx is cancelled.
 func (x *Document) Lock(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -478,11 +600,15 @@ func (x *Document) Lock(ctx context.Context) error {
 	}
 }
 
+// Allows the user to make modifications to the document.
+//
 // UnlockDocumentWithCompletionHandler calls the underlying UnlockDocumentWithCompletionHandler.
 func (x *Document) UnlockDocumentWithCompletionHandler(completionHandler func(bool)) {
 	x.inner.UnlockDocumentWithCompletionHandler(completionHandler)
 }
 
+// Allows the user to make modifications to the document’s file.
+//
 // Unlock blocks until the operation completes or ctx is cancelled.
 func (x *Document) Unlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -501,36 +627,50 @@ func (x *Document) Unlock(ctx context.Context) error {
 	}
 }
 
+// The action method invoked in the receiver as first responder when the user chooses the Page Setup menu command.
+//
 // RunPageLayout calls the underlying RunPageLayout.
 func (x *Document) RunPageLayout(sender objc.ID) {
 	x.inner.RunPageLayout(sender)
 }
 
+// Runs the modal page layout panel with the receiver’s printing information object.
+//
 // RunModalPageLayoutWithPrintInfoDelegateDidRunSelectorContextInfo calls the underlying RunModalPageLayoutWithPrintInfoDelegateDidRunSelectorContextInfo.
 func (x *Document) RunModalPageLayoutWithPrintInfoDelegateDidRunSelectorContextInfo(printInfo *raw.NSPrintInfo, delegate objc.ID, didRunSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.RunModalPageLayoutWithPrintInfoDelegateDidRunSelectorContextInfo(printInfo, delegate, didRunSelector, contextInfo)
 }
 
+// Adds document-specific content to the Page Layout panel.
+//
 // PreparePageLayout calls the underlying PreparePageLayout.
 func (x *Document) PreparePageLayout(pageLayout *raw.NSPageLayout) bool {
 	return x.inner.PreparePageLayout(pageLayout)
 }
 
+// Returns a Boolean value that indicates whether the document allows changes to the default printing information.
+//
 // ShouldChangePrintInfo calls the underlying ShouldChangePrintInfo.
 func (x *Document) ShouldChangePrintInfo(newPrintInfo *raw.NSPrintInfo) bool {
 	return x.inner.ShouldChangePrintInfo(newPrintInfo)
 }
 
+// Prints the receiver in response to the user choosing the Print menu command.
+//
 // PrintDocument calls the underlying PrintDocument.
 func (x *Document) PrintDocument(sender objc.ID) {
 	x.inner.PrintDocument(sender)
 }
 
+// Prints the document’s contents, optionally displaying a print panel to the user.
+//
 // PrintDocumentWithSettingsShowPrintPanelDelegateDidPrintSelectorContextInfo calls the underlying PrintDocumentWithSettingsShowPrintPanelDelegateDidPrintSelectorContextInfo.
 func (x *Document) PrintDocumentWithSettingsShowPrintPanelDelegateDidPrintSelectorContextInfo(printSettings *foundation.NSDictionary[*foundation.NSString, objc.ID], showPrintPanel bool, delegate objc.ID, didPrintSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.PrintDocumentWithSettingsShowPrintPanelDelegateDidPrintSelectorContextInfo(printSettings, showPrintPanel, delegate, didPrintSelector, contextInfo)
 }
 
+// Creates and returns a print operation for the document’s contents.
+//
 // PrintOperationWithSettingsError calls the underlying PrintOperationWithSettingsError.
 func (x *Document) PrintOperationWithSettingsError(printSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*PrintOperation, error) {
 	_r, _err := x.inner.PrintOperationWithSettingsError(printSettings)
@@ -543,96 +683,134 @@ func (x *Document) PrintOperationWithSettingsError(printSettings *foundation.NSD
 	return &PrintOperation{inner: _r}, nil
 }
 
+// Runs the specified print operation modally.
+//
 // RunModalPrintOperationDelegateDidRunSelectorContextInfo calls the underlying RunModalPrintOperationDelegateDidRunSelectorContextInfo.
 func (x *Document) RunModalPrintOperationDelegateDidRunSelectorContextInfo(printOperation *raw.NSPrintOperation, delegate objc.ID, didRunSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.RunModalPrintOperationDelegateDidRunSelectorContextInfo(printOperation, delegate, didRunSelector, contextInfo)
 }
 
+// Exports a PDF representation of the document’s current contents.
+//
 // SaveDocumentToPDF calls the underlying SaveDocumentToPDF.
 func (x *Document) SaveDocumentToPDF(sender objc.ID) {
 	x.inner.SaveDocumentToPDF(sender)
 }
 
+// Share the document’s file using the specified sharing service.
+//
 // ShareDocumentWithSharingServiceCompletionHandler calls the underlying ShareDocumentWithSharingServiceCompletionHandler.
 func (x *Document) ShareDocumentWithSharingServiceCompletionHandler(sharingService *raw.NSSharingService, completionHandler func(bool)) {
 	x.inner.ShareDocumentWithSharingServiceCompletionHandler(sharingService, completionHandler)
 }
 
+// Perform any custom setup associated with a sharing service picker.
+//
 // PrepareSharingServicePicker calls the underlying PrepareSharingServicePicker.
 func (x *Document) PrepareSharingServicePicker(sharingServicePicker *raw.NSSharingServicePicker) {
 	x.inner.PrepareSharingServicePicker(sharingServicePicker)
 }
 
+// Updates the receiver’s change count according to the given change type.
+//
 // UpdateChangeCount calls the underlying UpdateChangeCount.
 func (x *Document) UpdateChangeCount(change NSDocumentChangeType) {
 	x.inner.UpdateChangeCount(raw.NSDocumentChangeType(change))
 }
 
+// Returns an object that encapsulates the current record of document changes at the beginning of a save operation.
+//
 // ChangeCountTokenForSaveOperation calls the underlying ChangeCountTokenForSaveOperation.
 func (x *Document) ChangeCountTokenForSaveOperation(saveOperation NSSaveOperationType) objc.ID {
 	return x.inner.ChangeCountTokenForSaveOperation(raw.NSSaveOperationType(saveOperation))
 }
 
+// Updates the document’s change count settings after a successful save operation.
+//
 // UpdateChangeCountWithTokenForSaveOperation calls the underlying UpdateChangeCountWithTokenForSaveOperation.
 func (x *Document) UpdateChangeCountWithTokenForSaveOperation(changeCountToken objc.ID, saveOperation NSSaveOperationType) {
 	x.inner.UpdateChangeCountWithTokenForSaveOperation(changeCountToken, raw.NSSaveOperationType(saveOperation))
 }
 
+// Presents an error alert to the user as a modal panel.
+//
 // PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo calls the underlying PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo.
 func (x *Document) PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo(error_ unsafe.Pointer, window *raw.NSWindow, delegate objc.ID, didPresentSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.PresentErrorModalForWindowDelegateDidPresentSelectorContextInfo(error_, window, delegate, didPresentSelector, contextInfo)
 }
 
+// Presents an error alert to the user as a modal panel.
+//
 // PresentError calls the underlying PresentError.
 func (x *Document) PresentError(error_ unsafe.Pointer) bool {
 	return x.inner.PresentError(error_)
 }
 
+// Called when the receiver is about to present an error.
+//
 // WillPresentError calls the underlying WillPresentError.
 func (x *Document) WillPresentError(error_ unsafe.Pointer) unsafe.Pointer {
 	return x.inner.WillPresentError(error_)
 }
 
+// Confirms that the error object is not to be presented to the user and the error cannot be recovered from, so cleanup can be done.
+//
 // WillNotPresentError calls the underlying WillNotPresentError.
 func (x *Document) WillNotPresentError(error_ unsafe.Pointer) {
 	x.inner.WillNotPresentError(error_)
 }
 
+// Creates the window controller objects that the document uses to display its content.
+//
 // MakeWindowControllers calls the underlying MakeWindowControllers.
 func (x *Document) MakeWindowControllers() {
 	x.inner.MakeWindowControllers()
 }
 
+// Called before one of the document’s window controllers loads its nib file.
+//
 // WindowControllerWillLoadNib calls the underlying WindowControllerWillLoadNib.
 func (x *Document) WindowControllerWillLoadNib(windowController *raw.NSWindowController) {
 	x.inner.WindowControllerWillLoadNib(windowController)
 }
 
+// Called after one of the document’s window controllers loads its nib file.
+//
 // WindowControllerDidLoadNib calls the underlying WindowControllerDidLoadNib.
 func (x *Document) WindowControllerDidLoadNib(windowController *raw.NSWindowController) {
 	x.inner.WindowControllerDidLoadNib(windowController)
 }
 
+// Sets the window outlet of this document to the specified value.
+//
 // SetWindow calls the underlying SetWindow.
 func (x *Document) SetWindow(window *raw.NSWindow) {
 	x.inner.SetWindow(window)
 }
 
+// Adds the specified window controller to the current document.
+//
 // AddWindowController calls the underlying AddWindowController.
 func (x *Document) AddWindowController(windowController *raw.NSWindowController) {
 	x.inner.AddWindowController(windowController)
 }
 
+// Removes the specified window controller from the receiver’s array of window controllers.
+//
 // RemoveWindowController calls the underlying RemoveWindowController.
 func (x *Document) RemoveWindowController(windowController *raw.NSWindowController) {
 	x.inner.RemoveWindowController(windowController)
 }
 
+// Displays all of the document’s windows, bringing them to the front and making them main or key as necessary.
+//
 // ShowWindows calls the underlying ShowWindows.
 func (x *Document) ShowWindows() {
 	x.inner.ShowWindows()
 }
 
+// Determines whether the system should close the document and its associated window.
+//
 // ShouldCloseWindowControllerDelegateShouldCloseSelectorContextInfo calls the underlying ShouldCloseWindowControllerDelegateShouldCloseSelectorContextInfo.
 func (x *Document) ShouldCloseWindowControllerDelegateShouldCloseSelectorContextInfo(windowController *raw.NSWindowController, delegate objc.ID, shouldCloseSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.ShouldCloseWindowControllerDelegateShouldCloseSelectorContextInfo(windowController, delegate, shouldCloseSelector, contextInfo)
@@ -643,6 +821,8 @@ func (x *Document) SetDisplayName(displayNameOrNil string) {
 	x.inner.SetDisplayName(foundation.NSStringStringWithUTF8String(displayNameOrNil))
 }
 
+// Returns the default draft name for the document subclass.
+//
 // DefaultDraftName calls the underlying DefaultDraftName.
 func (x *Document) DefaultDraftName() string {
 	_r := x.inner.DefaultDraftName()
@@ -652,11 +832,15 @@ func (x *Document) DefaultDraftName() string {
 	return purego.GoString(_r.Ptr())
 }
 
+// Returns the names of the types to which this document can be saved for a specified kind of save operation.
+//
 // WritableTypesForSaveOperation calls the underlying WritableTypesForSaveOperation.
 func (x *Document) WritableTypesForSaveOperation(saveOperation NSSaveOperationType) *foundation.NSArray[*foundation.NSString] {
 	return x.inner.WritableTypesForSaveOperation(raw.NSSaveOperationType(saveOperation))
 }
 
+// Returns a filename extension that can be appended to a base filename, for a specified file type and kind of save operation.
+//
 // FileNameExtensionForTypeSaveOperation calls the underlying FileNameExtensionForTypeSaveOperation.
 func (x *Document) FileNameExtensionForTypeSaveOperation(typeName string, saveOperation NSSaveOperationType) string {
 	_r := x.inner.FileNameExtensionForTypeSaveOperation(foundation.NSStringStringWithUTF8String(typeName), raw.NSSaveOperationType(saveOperation))
@@ -666,6 +850,8 @@ func (x *Document) FileNameExtensionForTypeSaveOperation(typeName string, saveOp
 	return purego.GoString(_r.Ptr())
 }
 
+// Validates the specified user interface item that the receiver manages.
+//
 // ValidateUserInterfaceItem calls the underlying ValidateUserInterfaceItem.
 func (x *Document) ValidateUserInterfaceItem(item raw.NSValidatedUserInterfaceItem) bool {
 	return x.inner.ValidateUserInterfaceItem(item)
@@ -989,6 +1175,8 @@ func (x *Document) ObservedPresentedItemUbiquityAttributes() *foundation.NSSet[*
 	return x.inner.ObservedPresentedItemUbiquityAttributes()
 }
 
+// Saves the contents of the document to a file or file package located by a URL, formatted to a specified type, for a particular kind of save operation.
+//
 // SaveToURLOfTypeForSaveOperationError calls the underlying SaveToURLOfTypeForSaveOperationError.
 func (x *Document) SaveToURLOfTypeForSaveOperationError(url string, typeName string, saveOperation NSSaveOperationType) (bool, error) {
 	return x.inner.SaveToURLOfTypeForSaveOperationError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(typeName), raw.NSSaveOperationType(saveOperation))
@@ -1093,6 +1281,8 @@ func (x *Document) ShouldRunSavePanelWithAccessoryView() bool {
 	return x.inner.ShouldRunSavePanelWithAccessoryView()
 }
 
+// Updates the state of the given user activity.
+//
 // UpdateUserActivityState calls the underlying UpdateUserActivityState.
 func (x *Document) UpdateUserActivityState(activity *foundation.NSUserActivity) {
 	x.inner.UpdateUserActivityState(activity)
@@ -1108,16 +1298,22 @@ func (x *Document) SetUserActivity(userActivity *foundation.NSUserActivity) {
 	x.inner.SetUserActivity(userActivity)
 }
 
+// Handles the Save AppleScript command by attempting to save the document.
+//
 // HandleSaveScriptCommand calls the underlying HandleSaveScriptCommand.
 func (x *Document) HandleSaveScriptCommand(command *foundation.NSScriptCommand) objc.ID {
 	return x.inner.HandleSaveScriptCommand(command)
 }
 
+// Handles the Close AppleScript command by attempting to close the document.
+//
 // HandleCloseScriptCommand calls the underlying HandleCloseScriptCommand.
 func (x *Document) HandleCloseScriptCommand(command *foundation.NSCloseCommand) objc.ID {
 	return x.inner.HandleCloseScriptCommand(command)
 }
 
+// Handles the Print AppleScript command by attempting to print the document.
+//
 // HandlePrintScriptCommand calls the underlying HandlePrintScriptCommand.
 func (x *Document) HandlePrintScriptCommand(command *foundation.NSScriptCommand) objc.ID {
 	return x.inner.HandlePrintScriptCommand(command)
@@ -1137,6 +1333,8 @@ func (x *Document) SetLastComponentOfFileName(lastComponentOfFileName string) {
 	x.inner.SetLastComponentOfFileName(foundation.NSStringStringWithUTF8String(lastComponentOfFileName))
 }
 
+// Restores a window that was associated with a document, after that document is reopened.
+//
 // RestoreDocumentWindowWithIdentifierState blocks until the operation completes or ctx is cancelled.
 func (x *Document) RestoreDocumentWindowWithIdentifierState(ctx context.Context, identifier *foundation.NSString, state *foundation.NSCoder) (*Window, error) {
 	type _result struct {
@@ -1163,21 +1361,29 @@ func (x *Document) RestoreDocumentWindowWithIdentifierState(ctx context.Context,
 	}
 }
 
+// Saves the interface-related state of the document.
+//
 // EncodeRestorableStateWithCoder calls the underlying EncodeRestorableStateWithCoder.
 func (x *Document) EncodeRestorableStateWithCoder(coder *foundation.NSCoder) {
 	x.inner.EncodeRestorableStateWithCoder(coder)
 }
 
+// Saves the interface-related state of the document.
+//
 // EncodeRestorableStateWithCoderBackgroundQueue calls the underlying EncodeRestorableStateWithCoderBackgroundQueue.
 func (x *Document) EncodeRestorableStateWithCoderBackgroundQueue(coder *foundation.NSCoder, queue *foundation.NSOperationQueue) {
 	x.inner.EncodeRestorableStateWithCoderBackgroundQueue(coder, queue)
 }
 
+// Restores the interface-related state of the document.
+//
 // RestoreStateWithCoder calls the underlying RestoreStateWithCoder.
 func (x *Document) RestoreStateWithCoder(coder *foundation.NSCoder) {
 	x.inner.RestoreStateWithCoder(coder)
 }
 
+// Marks the document’s interface-related state as dirty.
+//
 // InvalidateRestorableState calls the underlying InvalidateRestorableState.
 func (x *Document) InvalidateRestorableState() {
 	x.inner.InvalidateRestorableState()

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// Specifies whether a specific type of sharing should be disabled in the share picker, and if so, whether a reason should be provided for the disablement.
+//
 // SharingCollaborationModeRestriction wraps [raw.NSSharingCollaborationModeRestriction] with a fluent Go API.
 type SharingCollaborationModeRestriction struct {
 	inner *raw.NSSharingCollaborationModeRestriction

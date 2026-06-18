@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A column within a grid view.
+//
 // GridColumn wraps [raw.NSGridColumn] with a fluent Go API.
 type GridColumn struct {
 	inner *raw.NSGridColumn

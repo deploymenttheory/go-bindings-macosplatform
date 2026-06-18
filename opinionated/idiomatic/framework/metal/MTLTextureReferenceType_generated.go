@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A description of a texture.
+//
 // TextureReferenceType wraps [raw.MTLTextureReferenceType] with a fluent Go API.
 type TextureReferenceType struct {
 	inner *raw.MTLTextureReferenceType

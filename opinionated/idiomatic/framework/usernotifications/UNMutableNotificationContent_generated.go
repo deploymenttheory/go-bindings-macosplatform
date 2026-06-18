@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// The editable content for a notification.
+//
 // MutableNotificationContent wraps [raw.UNMutableNotificationContent] with a fluent Go API.
 type MutableNotificationContent struct {
 	inner *raw.UNMutableNotificationContent
@@ -37,6 +39,8 @@ func NewMutableNotificationContent() *MutableNotificationContent {
 	return &MutableNotificationContent{inner: raw.UNMutableNotificationContentFromID(_id)}
 }
 
+// The visual and audio attachments to display alongside the notification’s main content.
+//
 // WithAttachments sets the collection, converting the Go slice to an NSArray.
 func (x *MutableNotificationContent) WithAttachments(items ...*raw.UNNotificationAttachment) *MutableNotificationContent {
 	if len(items) == 0 {
@@ -55,49 +59,63 @@ func (x *MutableNotificationContent) WithAttachments(items ...*raw.UNNotificatio
 	return x
 }
 
+// The number that your app’s icon displays.
+//
 // WithBadge sets the badge property and returns the receiver for chaining.
 func (x *MutableNotificationContent) WithBadge(badge *foundation.NSNumber) *MutableNotificationContent {
 	x.inner.SetBadge(badge)
 	return x
 }
 
+// The localized text that provides the notification’s main content.
+//
 // WithBody sets the body property and returns the receiver for chaining.
 func (x *MutableNotificationContent) WithBody(body string) *MutableNotificationContent {
 	x.inner.SetBody(foundation.NSStringStringWithUTF8String(body))
 	return x
 }
 
+// The identifier of the notification’s category.
+//
 // WithCategoryIdentifier sets the categoryIdentifier property and returns the receiver for chaining.
 func (x *MutableNotificationContent) WithCategoryIdentifier(categoryIdentifier string) *MutableNotificationContent {
 	x.inner.SetCategoryIdentifier(foundation.NSStringStringWithUTF8String(categoryIdentifier))
 	return x
 }
 
+// The localized text that provides the notification’s secondary description.
+//
 // WithSubtitle sets the subtitle property and returns the receiver for chaining.
 func (x *MutableNotificationContent) WithSubtitle(subtitle string) *MutableNotificationContent {
 	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
 	return x
 }
 
+// The identifier that groups related notifications.
+//
 // WithThreadIdentifier sets the threadIdentifier property and returns the receiver for chaining.
 func (x *MutableNotificationContent) WithThreadIdentifier(threadIdentifier string) *MutableNotificationContent {
 	x.inner.SetThreadIdentifier(foundation.NSStringStringWithUTF8String(threadIdentifier))
 	return x
 }
 
+// The localized text that provides the notification’s primary description.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *MutableNotificationContent) WithTitle(title string) *MutableNotificationContent {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// The custom data to associate with the notification.
+//
 // WithUserInfo sets the userInfo property and returns the receiver for chaining.
 func (x *MutableNotificationContent) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *MutableNotificationContent {
 	x.inner.SetUserInfo(userInfo)
 	return x
 }
 
-// The argument to be inserted in the summary for this notification.
+// The text the system adds to the notification summary to provide additional context.
 //
 // WithSummaryArgument sets the summaryArgument property and returns the receiver for chaining.
 func (x *MutableNotificationContent) WithSummaryArgument(summaryArgument string) *MutableNotificationContent {
@@ -105,7 +123,7 @@ func (x *MutableNotificationContent) WithSummaryArgument(summaryArgument string)
 	return x
 }
 
-// A number that indicates how many items in the summary are represented in the summary. For example if a podcast app sends one notification for 3 new episodes in a show, the argument should be the name of the show and the count should be 3. Default is 1 and cannot be 0.
+// The number the system adds to the notification summary when the notification represents multiple items.
 //
 // WithSummaryArgumentCount sets the summaryArgumentCount property and returns the receiver for chaining.
 func (x *MutableNotificationContent) WithSummaryArgumentCount(summaryArgumentCount uint) *MutableNotificationContent {
@@ -113,24 +131,32 @@ func (x *MutableNotificationContent) WithSummaryArgumentCount(summaryArgumentCou
 	return x
 }
 
+// The value your app uses to determine which scene to display to handle the notification.
+//
 // WithTargetContentIdentifier sets the targetContentIdentifier property and returns the receiver for chaining.
 func (x *MutableNotificationContent) WithTargetContentIdentifier(targetContentIdentifier string) *MutableNotificationContent {
 	x.inner.SetTargetContentIdentifier(foundation.NSStringStringWithUTF8String(targetContentIdentifier))
 	return x
 }
 
+// The notification’s importance and required delivery timing.
+//
 // WithInterruptionLevel sets the interruptionLevel property and returns the receiver for chaining.
 func (x *MutableNotificationContent) WithInterruptionLevel(interruptionLevel UNNotificationInterruptionLevel) *MutableNotificationContent {
 	x.inner.SetInterruptionLevel(raw.UNNotificationInterruptionLevel(interruptionLevel))
 	return x
 }
 
+// The score the system uses to determine if the notification is the summary’s featured notification.
+//
 // WithRelevanceScore sets the relevanceScore property and returns the receiver for chaining.
 func (x *MutableNotificationContent) WithRelevanceScore(relevanceScore float64) *MutableNotificationContent {
 	x.inner.SetRelevanceScore(relevanceScore)
 	return x
 }
 
+// The criteria the system evaluates to determine if it displays the notification in the current Focus.
+//
 // WithFilterCriteria sets the filterCriteria property and returns the receiver for chaining.
 func (x *MutableNotificationContent) WithFilterCriteria(filterCriteria string) *MutableNotificationContent {
 	x.inner.SetFilterCriteria(foundation.NSStringStringWithUTF8String(filterCriteria))

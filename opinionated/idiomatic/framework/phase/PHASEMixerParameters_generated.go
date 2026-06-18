@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that specifies a mixer for sound events and orients them in 3D space.
+//
 // MixerParameters wraps [raw.PHASEMixerParameters] with a fluent Go API.
 type MixerParameters struct {
 	inner *raw.PHASEMixerParameters
@@ -36,14 +38,14 @@ func NewMixerParameters() *MixerParameters {
 	return &MixerParameters{inner: raw.PHASEMixerParametersFromID(_id)}
 }
 
-// @method addSpatialMixerParametersWithIdentifier:source:listener @abstract Adds runtime parameters for a spatial mixer @param identifier The unique identifier assigned to a spatial submixer object. @param source The PHASESource object that this mixer will use to spatialize sounds. @param listener The PHASEListener object that this mixer will use to spatialize sounds.
+// Adds runtime parameters for a spatial mixer.
 //
 // AddSpatialMixerParametersWithIdentifierSourceListener calls the underlying AddSpatialMixerParametersWithIdentifierSourceListener.
 func (x *MixerParameters) AddSpatialMixerParametersWithIdentifierSourceListener(identifier string, source *raw.PHASESource, listener *raw.PHASEListener) {
 	x.inner.AddSpatialMixerParametersWithIdentifierSourceListener(foundation.NSStringStringWithUTF8String(identifier), source, listener)
 }
 
-// @method addAmbientMixerParametersWithIdentifier:listener @abstract Adds runtime parameters for an ambient mixer @param identifier The unique identifier assigned to a spatial submixer object. @param listener The PHASEListener object that this mixer will use to orient sounds.
+// Adds runtime parameters for an ambient mixer.
 //
 // AddAmbientMixerParametersWithIdentifierListener calls the underlying AddAmbientMixerParametersWithIdentifierListener.
 func (x *MixerParameters) AddAmbientMixerParametersWithIdentifierListener(identifier string, listener *raw.PHASEListener) {

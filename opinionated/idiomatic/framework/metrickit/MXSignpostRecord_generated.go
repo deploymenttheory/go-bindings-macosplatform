@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing the record for a signpost interval or event.
+//
 // SignpostRecord wraps [raw.MXSignpostRecord] with a fluent Go API.
 type SignpostRecord struct {
 	inner *raw.MXSignpostRecord

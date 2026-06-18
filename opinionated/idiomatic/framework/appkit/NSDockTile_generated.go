@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The visual representation of your app’s miniaturized windows and app icon as they appear in the Dock.
+//
 // DockTile wraps [raw.NSDockTile] with a fluent Go API.
 type DockTile struct {
 	inner *raw.NSDockTile
@@ -38,24 +40,32 @@ func NewDockTile() *DockTile {
 	return &DockTile{inner: raw.NSDockTileFromID(_id)}
 }
 
+// The view to use for drawing the dock tile contents.
+//
 // WithContentView sets the contentView property and returns the receiver for chaining.
 func (x *DockTile) WithContentView(contentView ViewProvider) *DockTile {
 	x.inner.SetContentView(contentView.asView())
 	return x
 }
 
+// A Boolean showing whether the tile is badged with the application’s icon
+//
 // WithShowsApplicationBadge sets the showsApplicationBadge property and returns the receiver for chaining.
 func (x *DockTile) WithShowsApplicationBadge(showsApplicationBadge bool) *DockTile {
 	x.inner.SetShowsApplicationBadge(showsApplicationBadge)
 	return x
 }
 
+// The string to be displayed in the tile’s badging area.
+//
 // WithBadgeLabel sets the badgeLabel property and returns the receiver for chaining.
 func (x *DockTile) WithBadgeLabel(badgeLabel string) *DockTile {
 	x.inner.SetBadgeLabel(foundation.NSStringStringWithUTF8String(badgeLabel))
 	return x
 }
 
+// Redraws the dock tile’s content.
+//
 // Display calls the underlying Display.
 func (x *DockTile) Display() {
 	x.inner.Display()

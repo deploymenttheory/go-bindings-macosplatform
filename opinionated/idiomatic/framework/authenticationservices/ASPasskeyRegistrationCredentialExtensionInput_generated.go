@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A type that encapsulates input for various WebAuthn extensions during passkey registration.
+//
 // PasskeyRegistrationCredentialExtensionInput wraps [raw.ASPasskeyRegistrationCredentialExtensionInput] with a fluent Go API.
 type PasskeyRegistrationCredentialExtensionInput struct {
 	inner *raw.ASPasskeyRegistrationCredentialExtensionInput

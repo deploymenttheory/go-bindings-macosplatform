@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a request to set up a deferred payment, such as a hotel booking or a pre-order.
+//
 // DeferredPaymentRequest wraps [raw.PKDeferredPaymentRequest] with a fluent Go API.
 type DeferredPaymentRequest struct {
 	inner *raw.PKDeferredPaymentRequest
@@ -31,6 +33,8 @@ func DeferredPaymentRequestFromID(id objc.ID) *DeferredPaymentRequest {
 	return &DeferredPaymentRequest{inner: raw.PKDeferredPaymentRequestFromID(id)}
 }
 
+// Creates a deferred payment request with the payment description, deferred billing summary, and management URL you provide.
+//
 // NewDeferredPaymentRequestWithPaymentDescriptionDeferredBillingManagementURL creates a new [DeferredPaymentRequest].
 func NewDeferredPaymentRequestWithPaymentDescriptionDeferredBillingManagementURL(paymentDescription string, deferredBilling *raw.PKDeferredPaymentSummaryItem, managementURL string) *DeferredPaymentRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKDeferredPaymentRequest")), objc.RegisterName("alloc"))
@@ -38,42 +42,56 @@ func NewDeferredPaymentRequestWithPaymentDescriptionDeferredBillingManagementURL
 	return &DeferredPaymentRequest{inner: raw.PKDeferredPaymentRequestFromID(_id)}
 }
 
+// A description of the deferred payment.
+//
 // WithPaymentDescription sets the paymentDescription property and returns the receiver for chaining.
 func (x *DeferredPaymentRequest) WithPaymentDescription(paymentDescription string) *DeferredPaymentRequest {
 	x.inner.SetPaymentDescription(foundation.NSStringStringWithUTF8String(paymentDescription))
 	return x
 }
 
+// An object that contains details about the deferred payment.
+//
 // WithDeferredBilling sets the deferredBilling property and returns the receiver for chaining.
 func (x *DeferredPaymentRequest) WithDeferredBilling(deferredBilling *DeferredPaymentSummaryItem) *DeferredPaymentRequest {
 	x.inner.SetDeferredBilling(deferredBilling.Unwrap())
 	return x
 }
 
+// The localized billing agreement the framework displays to the user prior to payment authorization.
+//
 // WithBillingAgreement sets the billingAgreement property and returns the receiver for chaining.
 func (x *DeferredPaymentRequest) WithBillingAgreement(billingAgreement string) *DeferredPaymentRequest {
 	x.inner.SetBillingAgreement(foundation.NSStringStringWithUTF8String(billingAgreement))
 	return x
 }
 
+// A URL that links to a page on your web site where the user can manage the payment method for the deferred payment, including deleting it.
+//
 // WithManagementURL sets the managementURL property and returns the receiver for chaining.
 func (x *DeferredPaymentRequest) WithManagementURL(managementURL string) *DeferredPaymentRequest {
 	x.inner.SetManagementURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(managementURL)))
 	return x
 }
 
+// A URL to receive life-cycle notifications for the merchant-specific payment token the system issues for the request, if applicable.
+//
 // WithTokenNotificationURL sets the tokenNotificationURL property and returns the receiver for chaining.
 func (x *DeferredPaymentRequest) WithTokenNotificationURL(tokenNotificationURL string) *DeferredPaymentRequest {
 	x.inner.SetTokenNotificationURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(tokenNotificationURL)))
 	return x
 }
 
+// The date before which you must cancel a deferred payment without incurring any cancellation charges.
+//
 // WithFreeCancellationDate sets the freeCancellationDate property and returns the receiver for chaining.
 func (x *DeferredPaymentRequest) WithFreeCancellationDate(freeCancellationDate *foundation.NSDate) *DeferredPaymentRequest {
 	x.inner.SetFreeCancellationDate(freeCancellationDate)
 	return x
 }
 
+// The time zone at the destination location of the payment.
+//
 // WithFreeCancellationDateTimeZone sets the freeCancellationDateTimeZone property and returns the receiver for chaining.
 func (x *DeferredPaymentRequest) WithFreeCancellationDateTimeZone(freeCancellationDateTimeZone *foundation.NSTimeZone) *DeferredPaymentRequest {
 	x.inner.SetFreeCancellationDateTimeZone(freeCancellationDateTimeZone)

@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// A class that defines a container for an audio unit’s input or output busses.
+//
 // AudioUnitBusArray wraps [raw.AUAudioUnitBusArray] with a fluent Go API.
 type AudioUnitBusArray struct {
 	inner *raw.AUAudioUnitBusArray
@@ -31,7 +33,7 @@ func AudioUnitBusArrayFromID(id objc.ID) *AudioUnitBusArray {
 	return &AudioUnitBusArray{inner: raw.AUAudioUnitBusArrayFromID(id)}
 }
 
-// @method		initWithAudioUnit:busType:busses: @brief		Initializes by making a copy of the supplied bus array.
+// Initializes a bus array by making a copy of the supplied busses.
 //
 // NewAudioUnitBusArrayWithAudioUnitBusTypeBusses creates a new [AudioUnitBusArray].
 func NewAudioUnitBusArrayWithAudioUnitBusTypeBusses(owner *raw.AUAudioUnit, busType AUAudioUnitBusType, busArray *foundation.NSArray[*raw.AUAudioUnitBus]) *AudioUnitBusArray {
@@ -40,7 +42,7 @@ func NewAudioUnitBusArrayWithAudioUnitBusTypeBusses(owner *raw.AUAudioUnit, busT
 	return &AudioUnitBusArray{inner: raw.AUAudioUnitBusArrayFromID(_id)}
 }
 
-// @method		initWithAudioUnit:busType: @brief		Initializes an empty bus array.
+// Initializes an empty bus array.
 //
 // NewAudioUnitBusArrayWithAudioUnitBusType creates a new [AudioUnitBusArray].
 func NewAudioUnitBusArrayWithAudioUnitBusType(owner *raw.AUAudioUnit, busType AUAudioUnitBusType) *AudioUnitBusArray {
@@ -49,7 +51,7 @@ func NewAudioUnitBusArrayWithAudioUnitBusType(owner *raw.AUAudioUnit, busType AU
 	return &AudioUnitBusArray{inner: raw.AUAudioUnitBusArrayFromID(_id)}
 }
 
-// @method		objectAtIndexedSubscript:
+// Returns the bus at the specified index.
 //
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *AudioUnitBusArray) ObjectAtIndexedSubscript(index uint) *AudioUnitBus {
@@ -60,21 +62,21 @@ func (x *AudioUnitBusArray) ObjectAtIndexedSubscript(index uint) *AudioUnitBus {
 	return &AudioUnitBus{inner: _r}
 }
 
-// @property	setBusCount:error: @brief		Change the number of busses in the array.
+// Changes the number of busses in the array.
 //
 // SetBusCountError calls the underlying SetBusCountError.
 func (x *AudioUnitBusArray) SetBusCountError(count uint) (bool, error) {
 	return x.inner.SetBusCountError(count)
 }
 
-// @method		addObserverToAllBusses:forKeyPath:options:context: @brief		Add a KVO observer for a property on all busses in the array.
+// Adds a KVO observer for a given property on all busses in the array.
 //
 // AddObserverToAllBussesForKeyPathOptionsContext calls the underlying AddObserverToAllBussesForKeyPathOptionsContext.
 func (x *AudioUnitBusArray) AddObserverToAllBussesForKeyPathOptionsContext(observer *foundation.NSObject, keyPath string, options foundation.NSKeyValueObservingOptions, context_ unsafe.Pointer) {
 	x.inner.AddObserverToAllBussesForKeyPathOptionsContext(observer, foundation.NSStringStringWithUTF8String(keyPath), options, context_)
 }
 
-// @method		removeObserverFromAllBusses:forKeyPath:context: @brief		Remove a KVO observer for a property on all busses in the array.
+// Removes a KVO observer for a given property on all busses in the array.
 //
 // RemoveObserverFromAllBussesForKeyPathContext calls the underlying RemoveObserverFromAllBussesForKeyPathContext.
 func (x *AudioUnitBusArray) RemoveObserverFromAllBussesForKeyPathContext(observer *foundation.NSObject, keyPath string, context_ unsafe.Pointer) {
@@ -113,7 +115,7 @@ func (x *AudioUnitBusArray) BusType() AUAudioUnitBusType {
 	return AUAudioUnitBusType(x.inner.BusType())
 }
 
-// Sets the bus array to be a copy of the supplied array. The base class issues KVO notifications.
+// Replaces the current bus array with a copy of the supplied bus array.
 //
 // ReplaceBusses calls the underlying ReplaceBusses.
 func (x *AudioUnitBusArray) ReplaceBusses(busArray *foundation.NSArray[*raw.AUAudioUnitBus]) {

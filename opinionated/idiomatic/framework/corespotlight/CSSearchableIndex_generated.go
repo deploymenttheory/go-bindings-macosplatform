@@ -14,6 +14,8 @@ import (
 	"unsafe"
 )
 
+// An on-device index for your app’s searchable content.
+//
 // SearchableIndex wraps [raw.CSSearchableIndex] with a fluent Go API.
 type SearchableIndex struct {
 	inner *raw.CSSearchableIndex
@@ -34,6 +36,8 @@ func SearchableIndexFromID(id objc.ID) *SearchableIndex {
 	return &SearchableIndex{inner: raw.CSSearchableIndexFromID(id)}
 }
 
+// Returns an on-device index with the specified name.
+//
 // NewSearchableIndexWithName creates a new [SearchableIndex].
 func NewSearchableIndexWithName(name string) *SearchableIndex {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CSSearchableIndex")), objc.RegisterName("alloc"))
@@ -41,6 +45,8 @@ func NewSearchableIndexWithName(name string) *SearchableIndex {
 	return &SearchableIndex{inner: raw.CSSearchableIndexFromID(_id)}
 }
 
+// Returns an on-device index with the specified name and data protection class.
+//
 // NewSearchableIndexWithNameProtectionClass creates a new [SearchableIndex].
 func NewSearchableIndexWithNameProtectionClass(name string, protectionClass *foundation.NSString) *SearchableIndex {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CSSearchableIndex")), objc.RegisterName("alloc"))
@@ -48,12 +54,16 @@ func NewSearchableIndexWithNameProtectionClass(name string, protectionClass *fou
 	return &SearchableIndex{inner: raw.CSSearchableIndexFromID(_id)}
 }
 
+// The delegate object that can handle index-management tasks.
+//
 // WithIndexDelegate sets the indexDelegate property and returns the receiver for chaining.
 func (x *SearchableIndex) WithIndexDelegate(indexDelegate raw.CSSearchableIndexDelegate) *SearchableIndex {
 	x.inner.SetIndexDelegate(indexDelegate)
 	return x
 }
 
+// Adds or updates items in the index.
+//
 // IndexSearchableItems blocks until the operation completes or ctx is cancelled.
 func (x *SearchableIndex) IndexSearchableItems(ctx context.Context, items *foundation.NSArray[*raw.CSSearchableItem]) error {
 	_ch := make(chan error, 1)
@@ -72,6 +82,8 @@ func (x *SearchableIndex) IndexSearchableItems(ctx context.Context, items *found
 	}
 }
 
+// Removes from the index all items with the specified identifiers.
+//
 // DeleteSearchableItemsWithIdentifiers blocks until the operation completes or ctx is cancelled.
 func (x *SearchableIndex) DeleteSearchableItemsWithIdentifiers(ctx context.Context, identifiers *foundation.NSArray[*foundation.NSString]) error {
 	_ch := make(chan error, 1)
@@ -90,6 +102,8 @@ func (x *SearchableIndex) DeleteSearchableItemsWithIdentifiers(ctx context.Conte
 	}
 }
 
+// Removes from the index all searchable items associated with the specified domain.
+//
 // DeleteSearchableItemsWithDomainIdentifiers blocks until the operation completes or ctx is cancelled.
 func (x *SearchableIndex) DeleteSearchableItemsWithDomainIdentifiers(ctx context.Context, domainIdentifiers *foundation.NSArray[*foundation.NSString]) error {
 	_ch := make(chan error, 1)
@@ -108,6 +122,8 @@ func (x *SearchableIndex) DeleteSearchableItemsWithDomainIdentifiers(ctx context
 	}
 }
 
+// Deletes all searchable items from the index.
+//
 // DeleteAllSearchableItems blocks until the operation completes or ctx is cancelled.
 func (x *SearchableIndex) DeleteAllSearchableItems(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -136,11 +152,15 @@ func (x *SearchableIndex) SetIndexDelegate(indexDelegate raw.CSSearchableIndexDe
 	x.inner.SetIndexDelegate(indexDelegate)
 }
 
+// Begins a batch of updates to an index.
+//
 // BeginIndexBatch calls the underlying BeginIndexBatch.
 func (x *SearchableIndex) BeginIndexBatch() {
 	x.inner.BeginIndexBatch()
 }
 
+// Ends a batch of index updates and stores the specified state information.
+//
 // EndIndexBatchWithExpectedClientStateNewClientState blocks until the operation completes or ctx is cancelled.
 func (x *SearchableIndex) EndIndexBatchWithExpectedClientStateNewClientState(ctx context.Context, expectedClientState *foundation.NSData, newClientState *foundation.NSData) error {
 	_ch := make(chan error, 1)
@@ -159,6 +179,8 @@ func (x *SearchableIndex) EndIndexBatchWithExpectedClientStateNewClientState(ctx
 	}
 }
 
+// Ends a batch of index updates and stores the specified state information.
+//
 // EndIndexBatchWithClientState blocks until the operation completes or ctx is cancelled.
 func (x *SearchableIndex) EndIndexBatchWithClientState(ctx context.Context, clientState *foundation.NSData) error {
 	_ch := make(chan error, 1)
@@ -177,6 +199,8 @@ func (x *SearchableIndex) EndIndexBatchWithClientState(ctx context.Context, clie
 	}
 }
 
+// Fetches the app’s most recent client state information asynchronously.
+//
 // FetchLastClientState blocks until the operation completes or ctx is cancelled.
 func (x *SearchableIndex) FetchLastClientState(ctx context.Context) (*foundation.NSData, error) {
 	type _result struct {
@@ -201,6 +225,8 @@ func (x *SearchableIndex) FetchLastClientState(ctx context.Context) (*foundation
 	}
 }
 
+// Fetches data from an external provider.
+//
 // FetchDataForBundleIdentifierItemIdentifierContentType blocks until the operation completes or ctx is cancelled.
 func (x *SearchableIndex) FetchDataForBundleIdentifierItemIdentifierContentType(ctx context.Context, bundleIdentifier string, itemIdentifier string, contentType *uniformtypeidentifiers.UTType) (*foundation.NSData, error) {
 	type _result struct {

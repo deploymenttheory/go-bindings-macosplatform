@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A proxy for a Safari app extension toolbar item in a Safari window.
+//
 // SafariToolbarItem wraps [raw.SFSafariToolbarItem] with a fluent Go API.
 type SafariToolbarItem struct {
 	inner *raw.SFSafariToolbarItem
@@ -37,28 +39,28 @@ func NewSafariToolbarItem() *SafariToolbarItem {
 	return &SafariToolbarItem{inner: raw.SFSafariToolbarItemFromID(_id)}
 }
 
-// Sets the enabled state and the badge text for the toolbar item. The badge text is visible even when the toolbar item is disabled.
+// Sets the enabled state and the badge text for the toolbar item.
 //
 // SetEnabledWithBadgeText calls the underlying SetEnabledWithBadgeText.
 func (x *SafariToolbarItem) SetEnabledWithBadgeText(enabled bool, badgeText string) {
 	x.inner.SetEnabledWithBadgeText(enabled, foundation.NSStringStringWithUTF8String(badgeText))
 }
 
-// Sets the enabled state for the toolbar item.
+// Sets whether the toolbar item is enabled.
 //
 // SetEnabled calls the underlying SetEnabled.
 func (x *SafariToolbarItem) SetEnabled(enabled bool) {
 	x.inner.SetEnabled(enabled)
 }
 
-// Sets the badge text for the toolbar item. The badge text is visible even when the toolbar item is disabled. Setting the text to nil will clear the badge.
+// Sets the badge text for the toolbar item.
 //
 // SetBadgeText calls the underlying SetBadgeText.
 func (x *SafariToolbarItem) SetBadgeText(badgeText string) {
 	x.inner.SetBadgeText(foundation.NSStringStringWithUTF8String(badgeText))
 }
 
-// Sets the image for the toolbar item. Setting the image to nil will set the default image.
+// Sets the image displayed in the toolbar button.
 //
 // SetImage calls the underlying SetImage.
 func (x *SafariToolbarItem) SetImage(image *appkit.NSImage) {

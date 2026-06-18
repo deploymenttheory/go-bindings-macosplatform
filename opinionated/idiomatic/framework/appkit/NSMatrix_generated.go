@@ -15,6 +15,8 @@ import (
 	"unsafe"
 )
 
+// A legacy interface for grouping radio buttons or other types of cells together.
+//
 // Matrix wraps [raw.NSMatrix] with a fluent Go API.
 type Matrix struct {
 	inner *raw.NSMatrix
@@ -35,6 +37,8 @@ func MatrixFromID(id objc.ID) *Matrix {
 	return &Matrix{inner: raw.NSMatrixFromID(id)}
 }
 
+// Initializes a newly allocated matrix with the specified frame.
+//
 // NewMatrixWithFrame creates a new [Matrix].
 func NewMatrixWithFrame(frameRect corefoundation.CGRect) *Matrix {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMatrix")), objc.RegisterName("alloc"))
@@ -42,6 +46,8 @@ func NewMatrixWithFrame(frameRect corefoundation.CGRect) *Matrix {
 	return &Matrix{inner: raw.NSMatrixFromID(_id)}
 }
 
+// Initializes and returns a newly allocated matrix of the specified size using the given cell as a prototype.
+//
 // NewMatrixWithFrameModePrototypeNumberOfRowsNumberOfColumns creates a new [Matrix].
 func NewMatrixWithFrameModePrototypeNumberOfRowsNumberOfColumns(frameRect corefoundation.CGRect, mode NSMatrixMode, cell *raw.NSCell, rowsHigh int, colsWide int) *Matrix {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMatrix")), objc.RegisterName("alloc"))
@@ -49,6 +55,8 @@ func NewMatrixWithFrameModePrototypeNumberOfRowsNumberOfColumns(frameRect corefo
 	return &Matrix{inner: raw.NSMatrixFromID(_id)}
 }
 
+// Initializes and returns a newly allocated matrix of the specified size using cells of the given class.
+//
 // NewMatrixWithFrameModeCellClassNumberOfRowsNumberOfColumns creates a new [Matrix].
 func NewMatrixWithFrameModeCellClassNumberOfRowsNumberOfColumns(frameRect corefoundation.CGRect, mode NSMatrixMode, factoryId objc.Class, rowsHigh int, colsWide int) *Matrix {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMatrix")), objc.RegisterName("alloc"))
@@ -56,240 +64,320 @@ func NewMatrixWithFrameModeCellClassNumberOfRowsNumberOfColumns(frameRect corefo
 	return &Matrix{inner: raw.NSMatrixFromID(_id)}
 }
 
+// The prototype cell that’s copied whenever the matrix creates a new cell.
+//
 // WithPrototype sets the prototype property and returns the receiver for chaining.
 func (x *Matrix) WithPrototype(prototype CellProvider) *Matrix {
 	x.inner.SetPrototype(prototype.asCell())
 	return x
 }
 
+// The selection mode of the receiver.
+//
 // WithMode sets the mode property and returns the receiver for chaining.
 func (x *Matrix) WithMode(mode NSMatrixMode) *Matrix {
 	x.inner.SetMode(raw.NSMatrixMode(mode))
 	return x
 }
 
+// A Boolean that indicates whether a radio-mode matrix supports an empty selection.
+//
 // WithAllowsEmptySelection sets the allowsEmptySelection property and returns the receiver for chaining.
 func (x *Matrix) WithAllowsEmptySelection(allowsEmptySelection bool) *Matrix {
 	x.inner.SetAllowsEmptySelection(allowsEmptySelection)
 	return x
 }
 
+// A Boolean that indicates whether the user can select a rectangle of cells in the receiver by dragging the cursor.
+//
 // WithSelectionByRect sets the selectionByRect property and returns the receiver for chaining.
 func (x *Matrix) WithSelectionByRect(selectionByRect bool) *Matrix {
 	x.inner.SetSelectionByRect(selectionByRect)
 	return x
 }
 
+// The size of each cell in the matrix.
+//
 // WithCellSize sets the cellSize property and returns the receiver for chaining.
 func (x *Matrix) WithCellSize(cellSize corefoundation.CGSize) *Matrix {
 	x.inner.SetCellSize(cellSize)
 	return x
 }
 
+// The vertical and horizontal spacing between cells in the matrix.
+//
 // WithIntercellSpacing sets the intercellSpacing property and returns the receiver for chaining.
 func (x *Matrix) WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *Matrix {
 	x.inner.SetIntercellSpacing(intercellSpacing)
 	return x
 }
 
+// The background color of the matrix (the space between the cells).
+//
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *Matrix) WithBackgroundColor(backgroundColor *Color) *Matrix {
 	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
 	return x
 }
 
+// The background color of the matrix’s cells.
+//
 // WithCellBackgroundColor sets the cellBackgroundColor property and returns the receiver for chaining.
 func (x *Matrix) WithCellBackgroundColor(cellBackgroundColor *Color) *Matrix {
 	x.inner.SetCellBackgroundColor(cellBackgroundColor.Unwrap())
 	return x
 }
 
+// A Boolean that indicates whether the matrix draws the background within each of its cells.
+//
 // WithDrawsCellBackground sets the drawsCellBackground property and returns the receiver for chaining.
 func (x *Matrix) WithDrawsCellBackground(drawsCellBackground bool) *Matrix {
 	x.inner.SetDrawsCellBackground(drawsCellBackground)
 	return x
 }
 
+// A Boolean that indicates whether the matrix draws its background.
+//
 // WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
 func (x *Matrix) WithDrawsBackground(drawsBackground bool) *Matrix {
 	x.inner.SetDrawsBackground(drawsBackground)
 	return x
 }
 
+// The action sent to the target of the receiver when the user double-clicks a cell.
+//
 // WithDoubleAction sets the doubleAction property and returns the receiver for chaining.
 func (x *Matrix) WithDoubleAction(doubleAction objc.SEL) *Matrix {
 	x.inner.SetDoubleAction(doubleAction)
 	return x
 }
 
+// A Boolean that indicates whether the cell sizes change when the receiver is resized.
+//
 // WithAutosizesCells sets the autosizesCells property and returns the receiver for chaining.
 func (x *Matrix) WithAutosizesCells(autosizesCells bool) *Matrix {
 	x.inner.SetAutosizesCells(autosizesCells)
 	return x
 }
 
+// A Boolean that indicates whether the receiver is automatically scrolled.
+//
 // WithAutoscroll sets the autoscroll property and returns the receiver for chaining.
 func (x *Matrix) WithAutoscroll(autoscroll bool) *Matrix {
 	x.inner.SetAutoscroll(autoscroll)
 	return x
 }
 
+// The delegate for messages from the field editor.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Matrix) WithDelegate(delegate raw.NSMatrixDelegate) *Matrix {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// A Boolean that indicates whether the matrix auto-recalculates its cell size.
+//
 // WithAutorecalculatesCellSize sets the autorecalculatesCellSize property and returns the receiver for chaining.
 func (x *Matrix) WithAutorecalculatesCellSize(autorecalculatesCellSize bool) *Matrix {
 	x.inner.SetAutorecalculatesCellSize(autorecalculatesCellSize)
 	return x
 }
 
+// A Boolean that indicates whether pressing the Tab key advances the key cell to the next selectable cell.
+//
 // WithTabKeyTraversesCells sets the tabKeyTraversesCells property and returns the receiver for chaining.
 func (x *Matrix) WithTabKeyTraversesCells(tabKeyTraversesCells bool) *Matrix {
 	x.inner.SetTabKeyTraversesCells(tabKeyTraversesCells)
 	return x
 }
 
+// The cell that will be clicked when the user presses the Space bar.
+//
 // WithKeyCell sets the keyCell property and returns the receiver for chaining.
 func (x *Matrix) WithKeyCell(keyCell CellProvider) *Matrix {
 	x.inner.SetKeyCell(keyCell.asCell())
 	return x
 }
 
+// The target object that receives action messages from the cell.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *Matrix) WithTarget(target objc.ID) *Matrix {
 	x.inner.NSControl.SetTarget(target)
 	return x
 }
 
+// The default action-message selector associated with the control.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *Matrix) WithAction(action objc.SEL) *Matrix {
 	x.inner.NSControl.SetAction(action)
 	return x
 }
 
+// The tag identifying the receiver (not the tag of the receiver’s cell).
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *Matrix) WithTag(tag int) *Matrix {
 	x.inner.NSControl.SetTag(tag)
 	return x
 }
 
+// A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+//
 // WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
 func (x *Matrix) WithIgnoresMultiClick(ignoresMultiClick bool) *Matrix {
 	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
 	return x
 }
 
+// A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *Matrix) WithContinuous(continuous bool) *Matrix {
 	x.inner.NSControl.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value that indicates whether the receiver reacts to mouse events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *Matrix) WithEnabled(enabled bool) *Matrix {
 	x.inner.NSControl.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the receiver refuses the first responder role.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *Matrix) WithRefusesFirstResponder(refusesFirstResponder bool) *Matrix {
 	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value that indicates whether the cell is highlighted.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *Matrix) WithHighlighted(highlighted bool) *Matrix {
 	x.inner.NSControl.SetHighlighted(highlighted)
 	return x
 }
 
+// The size of the control.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *Matrix) WithControlSize(controlSize NSControlSize) *Matrix {
 	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The receiver’s formatter.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *Matrix) WithFormatter(formatter *foundation.NSFormatter) *Matrix {
 	x.inner.NSControl.SetFormatter(formatter)
 	return x
 }
 
+// The value of the receiver’s cell as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *Matrix) WithObjectValue(objectValue objc.ID) *Matrix {
 	x.inner.NSControl.SetObjectValue(objectValue)
 	return x
 }
 
+// The value of the receiver’s cell as an NSString object.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *Matrix) WithStringValue(stringValue string) *Matrix {
 	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The value of the receiver’s cell as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *Matrix) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Matrix {
 	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *Matrix) WithIntValue(intValue int) *Matrix {
 	x.inner.NSControl.SetIntValue(intValue)
 	return x
 }
 
+// The value of the receiver’s cell as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *Matrix) WithIntegerValue(integerValue int) *Matrix {
 	x.inner.NSControl.SetIntegerValue(integerValue)
 	return x
 }
 
+// The value of the receiver’s cell as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *Matrix) WithFloatValue(floatValue float32) *Matrix {
 	x.inner.NSControl.SetFloatValue(floatValue)
 	return x
 }
 
+// The value of the receiver’s cell as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *Matrix) WithDoubleValue(doubleValue float64) *Matrix {
 	x.inner.NSControl.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The font used to draw text in the receiver’s cell.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *Matrix) WithFont(font *Font) *Matrix {
 	x.inner.NSControl.SetFont(font.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether the text in the control’s cell uses single line mode.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *Matrix) WithUsesSingleLineMode(usesSingleLineMode bool) *Matrix {
 	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// The line break mode to use for text in the control’s cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *Matrix) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Matrix {
 	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// The alignment mode of the text in the receiver’s cell.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *Matrix) WithAlignment(alignment NSTextAlignment) *Matrix {
 	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *Matrix) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Matrix {
 	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+//
 // WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
 func (x *Matrix) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Matrix {
 	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
@@ -344,6 +432,8 @@ func (x *Matrix) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions
 	return x
 }
 
+// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+//
 // WithFrame sets the frame property and returns the receiver for chaining.
 func (x *Matrix) WithFrame(frame corefoundation.CGRect) *Matrix {
 	x.inner.NSControl.NSView.SetFrame(frame)
@@ -368,6 +458,8 @@ func (x *Matrix) WithBoundsRotation(boundsRotation float64) *Matrix {
 	return x
 }
 
+// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+//
 // WithBounds sets the bounds property and returns the receiver for chaining.
 func (x *Matrix) WithBounds(bounds corefoundation.CGRect) *Matrix {
 	x.inner.NSControl.NSView.SetBounds(bounds)
@@ -380,6 +472,8 @@ func (x *Matrix) WithCanDrawConcurrently(canDrawConcurrently bool) *Matrix {
 	return x
 }
 
+// A Boolean value that determines whether the view needs to be redrawn before being displayed.
+//
 // WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
 func (x *Matrix) WithNeedsDisplay(needsDisplay bool) *Matrix {
 	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
@@ -566,7 +660,7 @@ func (x *Matrix) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundatio
 	return x
 }
 
-// When this property is true, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15 and earlier. Defaults to false
+// When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
 // WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
 func (x *Matrix) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Matrix {
@@ -622,30 +716,40 @@ func (x *Matrix) WithPressureConfiguration(pressureConfiguration *PressureConfig
 	return x
 }
 
+// The next responder after this one, or nil if it has none.
+//
 // WithNextResponder sets the nextResponder property and returns the receiver for chaining.
 func (x *Matrix) WithNextResponder(nextResponder ResponderProvider) *Matrix {
 	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
 	return x
 }
 
+// Returns the responder’s menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *Matrix) WithMenu(menu *Menu) *Matrix {
 	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
 	return x
 }
 
+// An object encapsulating a user activity supported by this responder.
+//
 // WithUserActivity sets the userActivity property and returns the receiver for chaining.
 func (x *Matrix) WithUserActivity(userActivity *foundation.NSUserActivity) *Matrix {
 	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
 	return x
 }
 
+// The NSTouchBar object associated with the responder.
+//
 // WithTouchBar sets the touchBar property and returns the receiver for chaining.
 func (x *Matrix) WithTouchBar(touchBar *TouchBar) *Matrix {
 	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
 	return x
 }
 
+// Creates a new cell at the location specified by the given row and column in the receiver.
+//
 // MakeCellAtRowColumn calls the underlying MakeCellAtRowColumn.
 func (x *Matrix) MakeCellAtRowColumn(row int, col int) *Cell {
 	_r := x.inner.MakeCellAtRowColumn(row, col)
@@ -655,66 +759,92 @@ func (x *Matrix) MakeCellAtRowColumn(row int, col int) *Cell {
 	return &Cell{inner: _r}
 }
 
+// Iterates through the cells in the receiver, sending the specified selector to an object for each cell.
+//
 // SendActionToForAllCells calls the underlying SendActionToForAllCells.
 func (x *Matrix) SendActionToForAllCells(selector objc.SEL, object objc.ID, flag bool) {
 	x.inner.SendActionToForAllCells(selector, object, flag)
 }
 
+// Sorts the receiver’s cells in ascending order as defined by the comparison method.
+//
 // SortUsingSelector calls the underlying SortUsingSelector.
 func (x *Matrix) SortUsingSelector(comparator objc.SEL) {
 	x.inner.SortUsingSelector(comparator)
 }
 
+// Sorts the receiver’s cells in ascending order as defined by the specified comparison function.
+//
 // SortUsingFunctionContext calls the underlying SortUsingFunctionContext.
 func (x *Matrix) SortUsingFunctionContext(compare unsafe.Pointer, context_ unsafe.Pointer) {
 	x.inner.SortUsingFunctionContext(compare, context_)
 }
 
+// Programmatically selects a range of cells.
+//
 // SetSelectionFromToAnchorHighlight calls the underlying SetSelectionFromToAnchorHighlight.
 func (x *Matrix) SetSelectionFromToAnchorHighlight(startPos int, endPos int, anchorPos int, lit bool) {
 	x.inner.SetSelectionFromToAnchorHighlight(startPos, endPos, anchorPos, lit)
 }
 
+// Deselects the selected cell or cells.
+//
 // DeselectSelectedCell calls the underlying DeselectSelectedCell.
 func (x *Matrix) DeselectSelectedCell() {
 	x.inner.DeselectSelectedCell()
 }
 
+// Deselects all cells in the receiver and, if necessary, redisplays the receiver.
+//
 // DeselectAllCells calls the underlying DeselectAllCells.
 func (x *Matrix) DeselectAllCells() {
 	x.inner.DeselectAllCells()
 }
 
+// Selects the cell at the specified row and column within the receiver.
+//
 // SelectCellAtRowColumn calls the underlying SelectCellAtRowColumn.
 func (x *Matrix) SelectCellAtRowColumn(row int, col int) {
 	x.inner.SelectCellAtRowColumn(row, col)
 }
 
+// Selects and highlights all cells in the receiver.
+//
 // SelectAll calls the underlying SelectAll.
 func (x *Matrix) SelectAll(sender objc.ID) {
 	x.inner.SelectAll(sender)
 }
 
+// Selects the last cell with the given tag.
+//
 // SelectCellWithTag calls the underlying SelectCellWithTag.
 func (x *Matrix) SelectCellWithTag(tag int) bool {
 	return x.inner.SelectCellWithTag(tag)
 }
 
+// Specifies whether the cells in the matrix are scrollable.
+//
 // SetScrollable calls the underlying SetScrollable.
 func (x *Matrix) SetScrollable(flag bool) {
 	x.inner.SetScrollable(flag)
 }
 
+// Sets the state of the cell at specified location.
+//
 // SetStateAtRowColumn calls the underlying SetStateAtRowColumn.
 func (x *Matrix) SetStateAtRowColumn(value int, row int, col int) {
 	x.inner.SetStateAtRowColumn(value, row, col)
 }
 
+// Obtains the number of rows and columns in the receiver.
+//
 // GetNumberOfRowsColumns calls the underlying GetNumberOfRowsColumns.
 func (x *Matrix) GetNumberOfRowsColumns(rowCount *int64, colCount *int64) {
 	x.inner.GetNumberOfRowsColumns(rowCount, colCount)
 }
 
+// Returns the cell at the specified row and column.
+//
 // CellAtRowColumn calls the underlying CellAtRowColumn.
 func (x *Matrix) CellAtRowColumn(row int, col int) *Cell {
 	_r := x.inner.CellAtRowColumn(row, col)
@@ -724,36 +854,50 @@ func (x *Matrix) CellAtRowColumn(row int, col int) *Cell {
 	return &Cell{inner: _r}
 }
 
+// Returns the frame rectangle of the cell that would be drawn at the specified location.
+//
 // CellFrameAtRowColumn calls the underlying CellFrameAtRowColumn.
 func (x *Matrix) CellFrameAtRowColumn(row int, col int) corefoundation.CGRect {
 	return x.inner.CellFrameAtRowColumn(row, col)
 }
 
+// Searches the receiver for the specified cell and returns the row and column of the cell
+//
 // GetRowColumnOfCell calls the underlying GetRowColumnOfCell.
 func (x *Matrix) GetRowColumnOfCell(row *int64, col *int64, cell *raw.NSCell) bool {
 	return x.inner.GetRowColumnOfCell(row, col, cell)
 }
 
+// Indicates whether the specified point lies within one of the cells of the matrix and returns the location of the cell within which the point lies.
+//
 // GetRowColumnForPoint calls the underlying GetRowColumnForPoint.
 func (x *Matrix) GetRowColumnForPoint(row *int64, col *int64, point corefoundation.CGPoint) bool {
 	return x.inner.GetRowColumnForPoint(row, col, point)
 }
 
+// Changes the number of rows and columns in the receiver.
+//
 // RenewRowsColumns calls the underlying RenewRowsColumns.
 func (x *Matrix) RenewRowsColumns(newRows int, newCols int) {
 	x.inner.RenewRowsColumns(newRows, newCols)
 }
 
+// Replaces the cell at the specified row and column with the new cell.
+//
 // PutCellAtRowColumn calls the underlying PutCellAtRowColumn.
 func (x *Matrix) PutCellAtRowColumn(newCell *raw.NSCell, row int, col int) {
 	x.inner.PutCellAtRowColumn(newCell, row, col)
 }
 
+// Adds a new row of cells below the last row.
+//
 // AddRow calls the underlying AddRow.
 func (x *Matrix) AddRow() {
 	x.inner.AddRow()
 }
 
+// Adds a new row of cells below the last row, using the specified cells.
+//
 // AddRowWithCells calls the underlying AddRowWithCells.
 func (x *Matrix) AddRowWithCells(newCells ...CellProvider) {
 	_ptrs := make([]objc.ID, len(newCells))
@@ -768,11 +912,15 @@ func (x *Matrix) AddRowWithCells(newCells ...CellProvider) {
 	x.inner.AddRowWithCells(_arg0)
 }
 
+// Inserts a new row of cells before the specified row.
+//
 // InsertRow calls the underlying InsertRow.
 func (x *Matrix) InsertRow(row int) {
 	x.inner.InsertRow(row)
 }
 
+// Inserts a new row of cells before the specified row, using the given cells.
+//
 // InsertRowWithCells calls the underlying InsertRowWithCells.
 func (x *Matrix) InsertRowWithCells(row int, newCells ...CellProvider) {
 	_ptrs := make([]objc.ID, len(newCells))
@@ -787,16 +935,22 @@ func (x *Matrix) InsertRowWithCells(row int, newCells ...CellProvider) {
 	x.inner.InsertRowWithCells(row, _arg1)
 }
 
+// Removes the specified row from the receiver.
+//
 // RemoveRow calls the underlying RemoveRow.
 func (x *Matrix) RemoveRow(row int) {
 	x.inner.RemoveRow(row)
 }
 
+// Adds a new column of cells to the right of the last column.
+//
 // AddColumn calls the underlying AddColumn.
 func (x *Matrix) AddColumn() {
 	x.inner.AddColumn()
 }
 
+// Adds a new column of cells to the right of the last column, using the given cells.
+//
 // AddColumnWithCells calls the underlying AddColumnWithCells.
 func (x *Matrix) AddColumnWithCells(newCells ...CellProvider) {
 	_ptrs := make([]objc.ID, len(newCells))
@@ -811,11 +965,15 @@ func (x *Matrix) AddColumnWithCells(newCells ...CellProvider) {
 	x.inner.AddColumnWithCells(_arg0)
 }
 
+// Inserts a new column of cells at the specified location.
+//
 // InsertColumn calls the underlying InsertColumn.
 func (x *Matrix) InsertColumn(column int) {
 	x.inner.InsertColumn(column)
 }
 
+// Inserts a new column of cells before the specified column, using the given cells.
+//
 // InsertColumnWithCells calls the underlying InsertColumnWithCells.
 func (x *Matrix) InsertColumnWithCells(column int, newCells ...CellProvider) {
 	_ptrs := make([]objc.ID, len(newCells))
@@ -830,11 +988,15 @@ func (x *Matrix) InsertColumnWithCells(column int, newCells ...CellProvider) {
 	x.inner.InsertColumnWithCells(column, _arg1)
 }
 
+// Removes the specified column at from the receiver.
+//
 // RemoveColumn calls the underlying RemoveColumn.
 func (x *Matrix) RemoveColumn(col int) {
 	x.inner.RemoveColumn(col)
 }
 
+// Searches the receiver and returns the last cell matching the specified tag.
+//
 // CellWithTag calls the underlying CellWithTag.
 func (x *Matrix) CellWithTag(tag int) *Cell {
 	_r := x.inner.CellWithTag(tag)
@@ -844,71 +1006,99 @@ func (x *Matrix) CellWithTag(tag int) *Cell {
 	return &Cell{inner: _r}
 }
 
+// Changes the width and the height of the receiver’s frame so it exactly contains the cells.
+//
 // SizeToCells calls the underlying SizeToCells.
 func (x *Matrix) SizeToCells() {
 	x.inner.SizeToCells()
 }
 
+// Specifies whether the receiver’s size information is validated.
+//
 // SetValidateSize calls the underlying SetValidateSize.
 func (x *Matrix) SetValidateSize(flag bool) {
 	x.inner.SetValidateSize(flag)
 }
 
+// Displays the cell at the specified row and column.
+//
 // DrawCellAtRowColumn calls the underlying DrawCellAtRowColumn.
 func (x *Matrix) DrawCellAtRowColumn(row int, col int) {
 	x.inner.DrawCellAtRowColumn(row, col)
 }
 
+// Highlights or unhighlights the cell at the specified row and column location.
+//
 // HighlightCellAtRowColumn calls the underlying HighlightCellAtRowColumn.
 func (x *Matrix) HighlightCellAtRowColumn(flag bool, row int, col int) {
 	x.inner.HighlightCellAtRowColumn(flag, row, col)
 }
 
+// Scrolls the receiver so the specified cell is visible.
+//
 // ScrollCellToVisibleAtRowColumn calls the underlying ScrollCellToVisibleAtRowColumn.
 func (x *Matrix) ScrollCellToVisibleAtRowColumn(row int, col int) {
 	x.inner.ScrollCellToVisibleAtRowColumn(row, col)
 }
 
+// If the selected cell has both an action and a target, sends its action to its target.
+//
 // SendAction calls the underlying SendAction.
 func (x *Matrix) SendAction() bool {
 	return x.inner.SendAction()
 }
 
+// Sends the double-click action message to the target of the receiver.
+//
 // SendDoubleAction calls the underlying SendDoubleAction.
 func (x *Matrix) SendDoubleAction() {
 	x.inner.SendDoubleAction()
 }
 
+// Requests permission to begin editing text.
+//
 // TextShouldBeginEditing calls the underlying TextShouldBeginEditing.
 func (x *Matrix) TextShouldBeginEditing(textObject *raw.NSText) bool {
 	return x.inner.TextShouldBeginEditing(textObject)
 }
 
+// Requests permission to end editing.
+//
 // TextShouldEndEditing calls the underlying TextShouldEndEditing.
 func (x *Matrix) TextShouldEndEditing(textObject *raw.NSText) bool {
 	return x.inner.TextShouldEndEditing(textObject)
 }
 
+// Invoked when there’s a change in the text after the receiver gains first responder status.
+//
 // TextDidBeginEditing calls the underlying TextDidBeginEditing.
 func (x *Matrix) TextDidBeginEditing(notification *foundation.NSNotification) {
 	x.inner.TextDidBeginEditing(notification)
 }
 
+// Invoked when text editing ends.
+//
 // TextDidEndEditing calls the underlying TextDidEndEditing.
 func (x *Matrix) TextDidEndEditing(notification *foundation.NSNotification) {
 	x.inner.TextDidEndEditing(notification)
 }
 
+// Invoked when a key-down event or paste operation occurs that changes the receiver’s contents.
+//
 // TextDidChange calls the underlying TextDidChange.
 func (x *Matrix) TextDidChange(notification *foundation.NSNotification) {
 	x.inner.TextDidChange(notification)
 }
 
+// Selects text in the currently selected cell or in the key cell.
+//
 // SelectText calls the underlying SelectText.
 func (x *Matrix) SelectText(sender objc.ID) {
 	x.inner.SelectText(sender)
 }
 
+// Selects the text in the cell at the specified location and returns the cell.
+//
 // SelectTextAtRowColumn calls the underlying SelectTextAtRowColumn.
 func (x *Matrix) SelectTextAtRowColumn(row int, col int) *Cell {
 	_r := x.inner.SelectTextAtRowColumn(row, col)
@@ -918,11 +1108,15 @@ func (x *Matrix) SelectTextAtRowColumn(row int, col int) *Cell {
 	return &Cell{inner: _r}
 }
 
+// Sets the tooltip for the cell.
+//
 // SetToolTipForCell calls the underlying SetToolTipForCell.
 func (x *Matrix) SetToolTipForCell(toolTipString string, cell *raw.NSCell) {
 	x.inner.SetToolTipForCell(foundation.NSStringStringWithUTF8String(toolTipString), cell)
 }
 
+// Returns the tooltip for the specified cell.
+//
 // ToolTipForCell calls the underlying ToolTipForCell.
 func (x *Matrix) ToolTipForCell(cell *raw.NSCell) string {
 	_r := x.inner.ToolTipForCell(cell)

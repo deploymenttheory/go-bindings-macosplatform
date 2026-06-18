@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The properties of a transit pass.
+//
 // TransitPassProperties wraps [raw.PKTransitPassProperties] with a fluent Go API.
 type TransitPassProperties struct {
 	inner *raw.PKTransitPassProperties

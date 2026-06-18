@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A distance over which the framework fades out sound.
+//
 // DistanceModelFadeOutParameters wraps [raw.PHASEDistanceModelFadeOutParameters] with a fluent Go API.
 type DistanceModelFadeOutParameters struct {
 	inner *raw.PHASEDistanceModelFadeOutParameters
@@ -31,7 +33,7 @@ func DistanceModelFadeOutParametersFromID(id objc.ID) *DistanceModelFadeOutParam
 	return &DistanceModelFadeOutParameters{inner: raw.PHASEDistanceModelFadeOutParametersFromID(id)}
 }
 
-// @method initWithCullDistance @abstract Initialize with a cullDistance. @param cullDistance The distance beyond which the sound will be culled. Values must be >= 1. @note The cullDistance is scaled by unitsPerMeter internally, so can be provided at the client's native spatial scale. The system will smoothly fade the sound to zero before reaching this distance to avoid any audible artifacts. @return An instance, or nil if initialization fails.
+// Creates a distance beyond which sound sources stop playing.
 //
 // NewDistanceModelFadeOutParametersWithCullDistance creates a new [DistanceModelFadeOutParameters].
 func NewDistanceModelFadeOutParametersWithCullDistance(cullDistance float64) *DistanceModelFadeOutParameters {

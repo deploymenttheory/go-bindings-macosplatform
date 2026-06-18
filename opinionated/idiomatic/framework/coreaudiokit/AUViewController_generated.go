@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The base class to extend when creating a custom user interface for an audio unit.
+//
 // AUViewController wraps [raw.AUViewController] with a fluent Go API.
 type AUViewController struct {
 	inner *raw.AUViewController

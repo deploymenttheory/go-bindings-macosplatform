@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The parameters you use when adding an audio track to a mix.
+//
 // MutableAudioMixInputParameters wraps [raw.AVMutableAudioMixInputParameters] with a fluent Go API.
 type MutableAudioMixInputParameters struct {
 	inner *raw.AVMutableAudioMixInputParameters
@@ -40,7 +42,7 @@ func NewMutableAudioMixInputParameters() *MutableAudioMixInputParameters {
 	return &MutableAudioMixInputParameters{inner: raw.AVMutableAudioMixInputParametersFromID(_id)}
 }
 
-// @property		trackID @abstract		Indicates the trackID of the audio track to which the parameters should be applied.
+// The identifier of the audio track to which the parameters should be applied.
 //
 // WithTrackID sets the trackID property and returns the receiver for chaining.
 func (x *MutableAudioMixInputParameters) WithTrackID(trackID int32) *MutableAudioMixInputParameters {
@@ -48,7 +50,7 @@ func (x *MutableAudioMixInputParameters) WithTrackID(trackID int32) *MutableAudi
 	return x
 }
 
-// @property		audioTimePitchAlgorithm @abstract		Indicates the processing algorithm used to manage audio pitch at varying rates and for scaled audio edits. @discussion Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h. Can be nil, in which case the audioTimePitchAlgorithm set on the AVPlayerItem, AVAssetExportSession, or AVAssetReaderAudioMixOutput on which the AVAudioMix is set will be used for the associated track.
+// The processing algorithm used to manage audio pitch for scaled audio edits.
 //
 // WithAudioTimePitchAlgorithm sets the audioTimePitchAlgorithm property and returns the receiver for chaining.
 func (x *MutableAudioMixInputParameters) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *MutableAudioMixInputParameters {
@@ -56,11 +58,15 @@ func (x *MutableAudioMixInputParameters) WithAudioTimePitchAlgorithm(audioTimePi
 	return x
 }
 
+// Sets a volume ramp to apply during a specified time range.
+//
 // SetVolumeRampFromStartVolumeToEndVolumeTimeRange calls the underlying SetVolumeRampFromStartVolumeToEndVolumeTimeRange.
 func (x *MutableAudioMixInputParameters) SetVolumeRampFromStartVolumeToEndVolumeTimeRange(startVolume float32, endVolume float32, timeRange coremedia.CMTimeRange) {
 	x.inner.SetVolumeRampFromStartVolumeToEndVolumeTimeRange(startVolume, endVolume, timeRange)
 }
 
+// Sets the value of the audio volume starting at the specified time.
+//
 // SetVolumeAtTime calls the underlying SetVolumeAtTime.
 func (x *MutableAudioMixInputParameters) SetVolumeAtTime(volume float32, time_ coremedia.CMTime) {
 	x.inner.SetVolumeAtTime(volume, time_)

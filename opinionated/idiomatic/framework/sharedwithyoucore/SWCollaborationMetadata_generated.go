@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A model object for conveying data during a collaboration.
+//
 // CollaborationMetadata wraps [raw.SWCollaborationMetadata] with a fluent Go API.
 type CollaborationMetadata struct {
 	inner *raw.SWCollaborationMetadata
@@ -37,6 +39,8 @@ func NewCollaborationMetadata() *CollaborationMetadata {
 	return &CollaborationMetadata{inner: raw.SWCollaborationMetadataFromID(_id)}
 }
 
+// Creates and initializes a collaboration metadata object for the specified local identifier.
+//
 // NewCollaborationMetadataWithLocalIdentifier creates a new [CollaborationMetadata].
 func NewCollaborationMetadataWithLocalIdentifier(localIdentifier *foundation.NSString) *CollaborationMetadata {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWCollaborationMetadata")), objc.RegisterName("alloc"))
@@ -44,6 +48,8 @@ func NewCollaborationMetadataWithLocalIdentifier(localIdentifier *foundation.NSS
 	return &CollaborationMetadata{inner: raw.SWCollaborationMetadataFromID(_id)}
 }
 
+// Creates and initializes a collaboration metadata object for the specified global identifier.
+//
 // NewCollaborationMetadataWithCollaborationIdentifier creates a new [CollaborationMetadata].
 func NewCollaborationMetadataWithCollaborationIdentifier(collaborationIdentifier *foundation.NSString) *CollaborationMetadata {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWCollaborationMetadata")), objc.RegisterName("alloc"))
@@ -51,7 +57,7 @@ func NewCollaborationMetadataWithCollaborationIdentifier(collaborationIdentifier
 	return &CollaborationMetadata{inner: raw.SWCollaborationMetadataFromID(_id)}
 }
 
-// @abstract Title of the content. @discussion Title of the collaboration if provided by the app which owns the collaboration item.
+// The title of the content.
 //
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *CollaborationMetadata) WithTitle(title string) *CollaborationMetadata {
@@ -59,7 +65,7 @@ func (x *CollaborationMetadata) WithTitle(title string) *CollaborationMetadata {
 	return x
 }
 
-// @abstract The collaboration options that this content supports (updated).
+// The collaboration options that the content supports.
 //
 // WithDefaultShareOptions sets the defaultShareOptions property and returns the receiver for chaining.
 func (x *CollaborationMetadata) WithDefaultShareOptions(defaultShareOptions *CollaborationShareOptions) *CollaborationMetadata {
@@ -67,7 +73,7 @@ func (x *CollaborationMetadata) WithDefaultShareOptions(defaultShareOptions *Col
 	return x
 }
 
-// @abstract The collaboration options that the user selected when sending the invite (updated).
+// The selected collaboration options from the person who sends the invitation.
 //
 // WithUserSelectedShareOptions sets the userSelectedShareOptions property and returns the receiver for chaining.
 func (x *CollaborationMetadata) WithUserSelectedShareOptions(userSelectedShareOptions *CollaborationShareOptions) *CollaborationMetadata {
@@ -75,7 +81,7 @@ func (x *CollaborationMetadata) WithUserSelectedShareOptions(userSelectedShareOp
 	return x
 }
 
-// @abstract The handle of the person initiating the collaboration, e.g. an email address or phone number. @discussion Set by the initiating application to allow the user to confirm the handle being used before beginning collaboration. Value will not be transmitted to recipients, and will be nil when not initiating collaboration.
+// The handle of the person who initiates the collaboration.
 //
 // WithInitiatorHandle sets the initiatorHandle property and returns the receiver for chaining.
 func (x *CollaborationMetadata) WithInitiatorHandle(initiatorHandle string) *CollaborationMetadata {
@@ -83,7 +89,7 @@ func (x *CollaborationMetadata) WithInitiatorHandle(initiatorHandle string) *Col
 	return x
 }
 
-// @abstract The name of the person initiating the collaboration. @discussion Set by the initiating application to allow the user to confirm the name being used before beginning collaboration. Value will not be transmitted to recipients, and will be nil when not initiating collaboration.
+// The name of the person who initiates the collaboration.
 //
 // WithInitiatorNameComponents sets the initiatorNameComponents property and returns the receiver for chaining.
 func (x *CollaborationMetadata) WithInitiatorNameComponents(initiatorNameComponents *foundation.NSPersonNameComponents) *CollaborationMetadata {

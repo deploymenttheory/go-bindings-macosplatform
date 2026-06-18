@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A recording of all of the values provided by a GCMicroGamepad object.
+//
 // MicroGamepadSnapshot wraps [raw.GCMicroGamepadSnapshot] with a fluent Go API.
 type MicroGamepadSnapshot struct {
 	inner *raw.GCMicroGamepadSnapshot
@@ -30,6 +32,8 @@ func MicroGamepadSnapshotFromID(id objc.ID) *MicroGamepadSnapshot {
 	return &MicroGamepadSnapshot{inner: raw.GCMicroGamepadSnapshotFromID(id)}
 }
 
+// Initializes a snapshot object with the flattened data representation obtained from another snapshot.
+//
 // NewMicroGamepadSnapshotWithSnapshotData creates a new [MicroGamepadSnapshot].
 func NewMicroGamepadSnapshotWithSnapshotData(data *foundation.NSData) *MicroGamepadSnapshot {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GCMicroGamepadSnapshot")), objc.RegisterName("alloc"))
@@ -44,19 +48,23 @@ func NewMicroGamepadSnapshotWithControllerSnapshotData(controller *raw.GCControl
 	return &MicroGamepadSnapshot{inner: raw.GCMicroGamepadSnapshotFromID(_id)}
 }
 
+// The flattened control input values for the snapshot.
+//
 // WithSnapshotData sets the snapshotData property and returns the receiver for chaining.
 func (x *MicroGamepadSnapshot) WithSnapshotData(snapshotData *foundation.NSData) *MicroGamepadSnapshot {
 	x.inner.SetSnapshotData(snapshotData)
 	return x
 }
 
+// The block that this profile calls when an element’s value changes.
+//
 // WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
 func (x *MicroGamepadSnapshot) WithValueChangedHandler(valueChangedHandler func(*raw.GCMicroGamepad, *raw.GCControllerElement)) *MicroGamepadSnapshot {
 	x.inner.GCMicroGamepad.SetValueChangedHandler(valueChangedHandler)
 	return x
 }
 
-// The Micro profile can use the raw position values of the touchpad on the remote as D-pad values, or it can create a virtual dpad centered around the first contact point with the surface. If NO; a smaller sliding window is created around the initial touch point and subsequent movement is relative to that center. Movement outside the window will slide the window with it to re-center it. This is great for surfaces where there is no clear sense of a middle and drift over time is an issue. If YES; the absolute values are used and any drift will have to managed manually either through user traning or by a developer using the dpad. The default value for this property is NO, meaning a sliding window is used for the dpad.
+// A Boolean value that indicates whether the directional pad reports absolute or relative values.
 //
 // WithReportsAbsoluteDpadValues sets the reportsAbsoluteDpadValues property and returns the receiver for chaining.
 func (x *MicroGamepadSnapshot) WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *MicroGamepadSnapshot {
@@ -64,7 +72,7 @@ func (x *MicroGamepadSnapshot) WithReportsAbsoluteDpadValues(reportsAbsoluteDpad
 	return x
 }
 
-// Allows the Micro profile to monitor the orientation of the controller, if the controller is positioned in landscape orientation, D-pad input values will be transposed 90 degrees to match the new orientation. The default value for this property is NO.
+// A Boolean value that indicates whether the profile reports the directional pad values relative to its current orientation.
 //
 // WithAllowsRotation sets the allowsRotation property and returns the receiver for chaining.
 func (x *MicroGamepadSnapshot) WithAllowsRotation(allowsRotation bool) *MicroGamepadSnapshot {
@@ -72,7 +80,7 @@ func (x *MicroGamepadSnapshot) WithAllowsRotation(allowsRotation bool) *MicroGam
 	return x
 }
 
-// Set this block if you want to be notified when a value on a element changed. If multiple elements have changed this block will be called for each element that changed. @param profile this profile that is being used to map the raw input data into logical values on controller elements such as the dpad or the buttons. @param element the element that has been modified.
+// The block that the profile calls when an element’s value changes.
 //
 // WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
 func (x *MicroGamepadSnapshot) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *MicroGamepadSnapshot {

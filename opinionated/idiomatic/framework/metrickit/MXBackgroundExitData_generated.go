@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object representing counts for the different types of background app exits.
+//
 // BackgroundExitData wraps [raw.MXBackgroundExitData] with a fluent Go API.
 type BackgroundExitData struct {
 	inner *raw.MXBackgroundExitData

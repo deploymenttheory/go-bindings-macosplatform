@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The keys for the parameter dictionary in a model configuration or a model update context.
+//
 // ParameterKey wraps [raw.MLParameterKey] with a fluent Go API.
 type ParameterKey struct {
 	inner *raw.MLParameterKey
@@ -36,6 +38,8 @@ func NewParameterKey() *ParameterKey {
 	return &ParameterKey{inner: raw.MLParameterKeyFromID(_id)}
 }
 
+// Creates a copy of a parameter key and adds the scope to it.
+//
 // ScopedTo calls the underlying ScopedTo.
 func (x *ParameterKey) ScopedTo(scope string) *ParameterKey {
 	_r := x.inner.ScopedTo(foundation.NSStringStringWithUTF8String(scope))

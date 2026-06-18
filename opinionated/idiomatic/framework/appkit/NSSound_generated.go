@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A simple interface for loading and playing audio files.
+//
 // Sound wraps [raw.NSSound] with a fluent Go API.
 type Sound struct {
 	inner *raw.NSSound
@@ -31,6 +33,8 @@ func SoundFromID(id objc.ID) *Sound {
 	return &Sound{inner: raw.NSSoundFromID(id)}
 }
 
+// Initializes the receiver with the audio data located at a given URL.
+//
 // NewSoundWithContentsOfURLByReference creates a new [Sound].
 func NewSoundWithContentsOfURLByReference(url string, byRef bool) *Sound {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSound")), objc.RegisterName("alloc"))
@@ -38,6 +42,8 @@ func NewSoundWithContentsOfURLByReference(url string, byRef bool) *Sound {
 	return &Sound{inner: raw.NSSoundFromID(_id)}
 }
 
+// Initializes the receiver with the audio data located at a given filepath.
+//
 // NewSoundWithContentsOfFileByReference creates a new [Sound].
 func NewSoundWithContentsOfFileByReference(path string, byRef bool) *Sound {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSound")), objc.RegisterName("alloc"))
@@ -45,6 +51,8 @@ func NewSoundWithContentsOfFileByReference(path string, byRef bool) *Sound {
 	return &Sound{inner: raw.NSSoundFromID(_id)}
 }
 
+// Initializes the receiver with a given audio data.
+//
 // NewSoundWithData creates a new [Sound].
 func NewSoundWithData(data *foundation.NSData) *Sound {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSound")), objc.RegisterName("alloc"))
@@ -52,6 +60,8 @@ func NewSoundWithData(data *foundation.NSData) *Sound {
 	return &Sound{inner: raw.NSSoundFromID(_id)}
 }
 
+// Initializes the receiver with data from a pasteboard. The pasteboard should contain a type returned by NSSound. NSSound expects the data to have a proper magic number, sound header, and data for the formats it supports.
+//
 // NewSoundWithPasteboard creates a new [Sound].
 func NewSoundWithPasteboard(pasteboard *raw.NSPasteboard) *Sound {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSound")), objc.RegisterName("alloc"))
@@ -59,36 +69,48 @@ func NewSoundWithPasteboard(pasteboard *raw.NSPasteboard) *Sound {
 	return &Sound{inner: raw.NSSoundFromID(_id)}
 }
 
+// The name assigned to the sound.
+//
 // WithName sets the name property and returns the receiver for chaining.
 func (x *Sound) WithName(name *foundation.NSString) *Sound {
 	x.inner.SetName(name)
 	return x
 }
 
+// The sound’s delegate.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *Sound) WithDelegate(delegate raw.NSSoundDelegate) *Sound {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// The volume of the sound.
+//
 // WithVolume sets the volume property and returns the receiver for chaining.
 func (x *Sound) WithVolume(volume float32) *Sound {
 	x.inner.SetVolume(volume)
 	return x
 }
 
+// The sound’s playback progress, in seconds.
+//
 // WithCurrentTime sets the currentTime property and returns the receiver for chaining.
 func (x *Sound) WithCurrentTime(currentTime float64) *Sound {
 	x.inner.SetCurrentTime(currentTime)
 	return x
 }
 
+// A Boolean that indicates whether the sound restarts playback when it reaches the end of its content.
+//
 // WithLoops sets the loops property and returns the receiver for chaining.
 func (x *Sound) WithLoops(loops bool) *Sound {
 	x.inner.SetLoops(loops)
 	return x
 }
 
+// Identifies the sound’s output device
+//
 // WithPlaybackDeviceIdentifier sets the playbackDeviceIdentifier property and returns the receiver for chaining.
 func (x *Sound) WithPlaybackDeviceIdentifier(playbackDeviceIdentifier *foundation.NSString) *Sound {
 	x.inner.SetPlaybackDeviceIdentifier(playbackDeviceIdentifier)
@@ -100,36 +122,50 @@ func (x *Sound) SetName(string_ *foundation.NSString) bool {
 	return x.inner.SetName(string_)
 }
 
+// Writes the receiver’s data to a pasteboard.
+//
 // WriteToPasteboard calls the underlying WriteToPasteboard.
 func (x *Sound) WriteToPasteboard(pasteboard *raw.NSPasteboard) {
 	x.inner.WriteToPasteboard(pasteboard)
 }
 
+// Initiates audio playback.
+//
 // Play calls the underlying Play.
 func (x *Sound) Play() bool {
 	return x.inner.Play()
 }
 
+// Pauses audio playback.
+//
 // Pause calls the underlying Pause.
 func (x *Sound) Pause() bool {
 	return x.inner.Pause()
 }
 
+// Resumes audio playback.
+//
 // Resume calls the underlying Resume.
 func (x *Sound) Resume() bool {
 	return x.inner.Resume()
 }
 
+// Concludes audio playback.
+//
 // Stop calls the underlying Stop.
 func (x *Sound) Stop() bool {
 	return x.inner.Stop()
 }
 
+// Specifies the receiver’s channel map.
+//
 // SetChannelMapping calls the underlying SetChannelMapping.
 func (x *Sound) SetChannelMapping(channelMapping *foundation.NSArray[objc.ID]) {
 	x.inner.SetChannelMapping(channelMapping)
 }
 
+// Provides the receiver’s channel map.
+//
 // ChannelMapping calls the underlying ChannelMapping.
 func (x *Sound) ChannelMapping() *foundation.NSArray[objc.ID] {
 	return x.inner.ChannelMapping()

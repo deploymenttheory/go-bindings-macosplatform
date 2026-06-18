@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An array instance that contains rasterization rates.
+//
 // RasterizationRateSampleArray wraps [raw.MTLRasterizationRateSampleArray] with a fluent Go API.
 type RasterizationRateSampleArray struct {
 	inner *raw.MTLRasterizationRateSampleArray
@@ -36,14 +38,14 @@ func NewRasterizationRateSampleArray() *RasterizationRateSampleArray {
 	return &RasterizationRateSampleArray{inner: raw.MTLRasterizationRateSampleArrayFromID(_id)}
 }
 
-// @method objectAtIndexedSubscript: @abstract Retrieves the sample value at the specified index. @return NSNumber instance describing the value of the sample at the specified index, or 0 if the index is out of range.
+// Retrieves the sample value at the specified index.
 //
 // ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
 func (x *RasterizationRateSampleArray) ObjectAtIndexedSubscript(index uint) *foundation.NSNumber {
 	return x.inner.ObjectAtIndexedSubscript(index)
 }
 
-// @method setObject:atIndexedSubscript: @abstract Stores a sample value at the specified index. @discussion The value will be converted to a single precision floating point value.
+// Stores a sample value at the specified index.
 //
 // SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
 func (x *RasterizationRateSampleArray) SetObjectAtIndexedSubscript(value *foundation.NSNumber, index uint) {

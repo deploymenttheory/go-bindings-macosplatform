@@ -10,6 +10,8 @@ import (
 	"unsafe"
 )
 
+// A task object for monitoring the speech recognition progress.
+//
 // SpeechRecognitionTask wraps [raw.SFSpeechRecognitionTask] with a fluent Go API.
 type SpeechRecognitionTask struct {
 	inner *raw.SFSpeechRecognitionTask
@@ -36,12 +38,14 @@ func NewSpeechRecognitionTask() *SpeechRecognitionTask {
 	return &SpeechRecognitionTask{inner: raw.SFSpeechRecognitionTaskFromID(_id)}
 }
 
+// Stops accepting new audio and finishes processing on the audio input that has already been accepted.
+//
 // Finish calls the underlying Finish.
 func (x *SpeechRecognitionTask) Finish() {
 	x.inner.Finish()
 }
 
-// Cancels the current speech recognition task. You can cancel recognition tasks for both prerecorded and live audio input. For example, you might cancel a task in response to a user action or because the recording was interrupted. When canceling a task, be sure to release any resources associated with the task, such as the audio input resources you are using to capture audio samples.
+// Cancels the current speech recognition task.
 //
 // Cancel calls the underlying Cancel.
 func (x *SpeechRecognitionTask) Cancel() {

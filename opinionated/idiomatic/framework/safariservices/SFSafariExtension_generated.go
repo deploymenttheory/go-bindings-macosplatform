@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A proxy for the Safari extension.
+//
 // SafariExtension wraps [raw.SFSafariExtension] with a fluent Go API.
 type SafariExtension struct {
 	inner *raw.SFSafariExtension

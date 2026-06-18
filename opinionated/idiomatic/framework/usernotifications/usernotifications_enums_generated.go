@@ -9,17 +9,25 @@ import (
 	"strings"
 )
 
+// Options that determine the authorized features of local and remote notifications.
 // Bitmask — values may be combined with |.
 type UNAuthorizationOptions uint64
 
 const (
-	UNAuthorizationOptionBadge                           UNAuthorizationOptions = 1
-	UNAuthorizationOptionSound                           UNAuthorizationOptions = 2
-	UNAuthorizationOptionAlert                           UNAuthorizationOptions = 4
-	UNAuthorizationOptionCarPlay                         UNAuthorizationOptions = 8
-	UNAuthorizationOptionCriticalAlert                   UNAuthorizationOptions = 16
+	// The ability to update the app’s badge.
+	UNAuthorizationOptionBadge UNAuthorizationOptions = 1
+	// The ability to play sounds.
+	UNAuthorizationOptionSound UNAuthorizationOptions = 2
+	// The ability to display alerts.
+	UNAuthorizationOptionAlert UNAuthorizationOptions = 4
+	// The ability to display notifications in a CarPlay environment.
+	UNAuthorizationOptionCarPlay UNAuthorizationOptions = 8
+	// The ability to play sounds for critical alerts.
+	UNAuthorizationOptionCriticalAlert UNAuthorizationOptions = 16
+	// An option indicating the system should display a button for in-app notification settings.
 	UNAuthorizationOptionProvidesAppNotificationSettings UNAuthorizationOptions = 32
-	UNAuthorizationOptionProvisional                     UNAuthorizationOptions = 64
+	// The ability to post noninterrupting notifications provisionally to the Notification Center.
+	UNAuthorizationOptionProvisional UNAuthorizationOptions = 64
 	// Deprecated: Use time-sensitive entitlement
 	UNAuthorizationOptionTimeSensitive UNAuthorizationOptions = 256
 )
@@ -56,13 +64,18 @@ func (e UNAuthorizationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants indicating whether the app is allowed to schedule notifications.
 type UNAuthorizationStatus int64
 
 const (
+	// The user hasn’t yet made a choice about whether the app is allowed to schedule notifications.
 	UNAuthorizationStatusNotDetermined UNAuthorizationStatus = 0
-	UNAuthorizationStatusDenied        UNAuthorizationStatus = 1
-	UNAuthorizationStatusAuthorized    UNAuthorizationStatus = 2
-	UNAuthorizationStatusProvisional   UNAuthorizationStatus = 3
+	// The app isn’t authorized to schedule or receive notifications.
+	UNAuthorizationStatusDenied UNAuthorizationStatus = 1
+	// The app is authorized to schedule or receive notifications.
+	UNAuthorizationStatusAuthorized UNAuthorizationStatus = 2
+	// The application is provisionally authorized to post noninterruptive user notifications.
+	UNAuthorizationStatusProvisional UNAuthorizationStatus = 3
 )
 
 func (e UNAuthorizationStatus) String() string {
@@ -80,13 +93,17 @@ func (e UNAuthorizationStatus) String() string {
 	}
 }
 
+// The behaviors you can apply to an action.
 // Bitmask — values may be combined with |.
 type UNNotificationActionOptions uint64
 
 const (
+	// The action can be performed only on an unlocked device.
 	UNNotificationActionOptionAuthenticationRequired UNNotificationActionOptions = 1
-	UNNotificationActionOptionDestructive            UNNotificationActionOptions = 2
-	UNNotificationActionOptionForeground             UNNotificationActionOptions = 4
+	// The action performs a destructive task.
+	UNNotificationActionOptionDestructive UNNotificationActionOptions = 2
+	// The action causes the app to launch in the foreground.
+	UNNotificationActionOptionForeground UNNotificationActionOptions = 4
 )
 
 func (e UNNotificationActionOptions) String() string {
@@ -106,12 +123,16 @@ func (e UNNotificationActionOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants indicating how to handle notifications associated with this category.
 // Bitmask — values may be combined with |.
 type UNNotificationCategoryOptions uint64
 
 const (
-	UNNotificationCategoryOptionCustomDismissAction        UNNotificationCategoryOptions = 1
-	UNNotificationCategoryOptionHiddenPreviewsShowTitle    UNNotificationCategoryOptions = 4
+	// Send dismiss actions to the UNUserNotificationCenter object’s delegate for handling.
+	UNNotificationCategoryOptionCustomDismissAction UNNotificationCategoryOptions = 1
+	// Show the notification’s title, even if the user has disabled notification previews for the app.
+	UNNotificationCategoryOptionHiddenPreviewsShowTitle UNNotificationCategoryOptions = 4
+	// Show the notification’s subtitle, even if the user has disabled notification previews for the app.
 	UNNotificationCategoryOptionHiddenPreviewsShowSubtitle UNNotificationCategoryOptions = 8
 )
 
@@ -132,13 +153,18 @@ func (e UNNotificationCategoryOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Constants that indicate the importance and delivery timing of a notification.
 type UNNotificationInterruptionLevel uint64
 
 const (
-	UNNotificationInterruptionLevelPassive       UNNotificationInterruptionLevel = 0
-	UNNotificationInterruptionLevelActive        UNNotificationInterruptionLevel = 1
+	// The system adds the notification to the notification list without lighting up the screen or playing a sound.
+	UNNotificationInterruptionLevelPassive UNNotificationInterruptionLevel = 0
+	// The system presents the notification immediately, lights up the screen, and can play a sound.
+	UNNotificationInterruptionLevelActive UNNotificationInterruptionLevel = 1
+	// The system presents the notification immediately, lights up the screen, can play a sound, and breaks through system notification controls.
 	UNNotificationInterruptionLevelTimeSensitive UNNotificationInterruptionLevel = 2
-	UNNotificationInterruptionLevelCritical      UNNotificationInterruptionLevel = 3
+	// The system presents the notification immediately, lights up the screen, and bypasses the mute switch to play a sound.
+	UNNotificationInterruptionLevelCritical UNNotificationInterruptionLevel = 3
 )
 
 func (e UNNotificationInterruptionLevel) String() string {
@@ -156,12 +182,16 @@ func (e UNNotificationInterruptionLevel) String() string {
 	}
 }
 
+// Constants that indicate the current status of a notification setting.
 type UNNotificationSetting int64
 
 const (
+	// The setting is not available to your app.
 	UNNotificationSettingNotSupported UNNotificationSetting = 0
-	UNNotificationSettingDisabled     UNNotificationSetting = 1
-	UNNotificationSettingEnabled      UNNotificationSetting = 2
+	// The setting is disabled.
+	UNNotificationSettingDisabled UNNotificationSetting = 1
+	// The setting is enabled.
+	UNNotificationSettingEnabled UNNotificationSetting = 2
 )
 
 func (e UNNotificationSetting) String() string {
@@ -177,12 +207,16 @@ func (e UNNotificationSetting) String() string {
 	}
 }
 
+// Constants indicating the style previewing a notification’s content.
 type UNShowPreviewsSetting int64
 
 const (
-	UNShowPreviewsSettingAlways            UNShowPreviewsSetting = 0
+	// The notification’s content is always shown, even when the device is locked.
+	UNShowPreviewsSettingAlways UNShowPreviewsSetting = 0
+	// The notification’s content is shown only when the device is unlocked.
 	UNShowPreviewsSettingWhenAuthenticated UNShowPreviewsSetting = 1
-	UNShowPreviewsSettingNever             UNShowPreviewsSetting = 2
+	// The notification’s content is never shown, even when the device is unlocked
+	UNShowPreviewsSettingNever UNShowPreviewsSetting = 2
 )
 
 func (e UNShowPreviewsSetting) String() string {

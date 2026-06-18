@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The error log associated with a player item.
+//
 // PlayerItemErrorLog wraps [raw.AVPlayerItemErrorLog] with a fluent Go API.
 type PlayerItemErrorLog struct {
 	inner *raw.AVPlayerItemErrorLog
@@ -37,7 +39,7 @@ func NewPlayerItemErrorLog() *PlayerItemErrorLog {
 	return &PlayerItemErrorLog{inner: raw.AVPlayerItemErrorLogFromID(_id)}
 }
 
-// Serializes an AVPlayerItemErrorLog in the Extended Log File Format. This method converts the webserver error log into a textual format that conforms to the W3C Extended Log File Format for web server log files. For more information see: http://www.w3.org/pub/WWW/TR/WD-logfile.html - Returns: An autoreleased NSData instance.
+// Returns a serialized representation of the error log in the Extended Log File Format.
 //
 // ExtendedLogData calls the underlying ExtendedLogData.
 func (x *PlayerItemErrorLog) ExtendedLogData() *foundation.NSData {

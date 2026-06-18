@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// NSLevelIndicatorCell is a subclass of NSActionCell that provides several level indicator display styles including: capacity, ranking and relevancy. The capacity style provides both continuous and discrete modes.
+//
 // LevelIndicatorCell wraps [raw.NSLevelIndicatorCell] with a fluent Go API.
 type LevelIndicatorCell struct {
 	inner *raw.NSLevelIndicatorCell
@@ -31,6 +33,8 @@ func LevelIndicatorCellFromID(id objc.ID) *LevelIndicatorCell {
 	return &LevelIndicatorCell{inner: raw.NSLevelIndicatorCellFromID(id)}
 }
 
+// Initializes the receiver with the style specified by levelIndicatorStyle.
+//
 // NewLevelIndicatorCellWithLevelIndicatorStyle creates a new [LevelIndicatorCell].
 func NewLevelIndicatorCellWithLevelIndicatorStyle(levelIndicatorStyle NSLevelIndicatorStyle) *LevelIndicatorCell {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLevelIndicatorCell")), objc.RegisterName("alloc"))
@@ -38,329 +42,439 @@ func NewLevelIndicatorCellWithLevelIndicatorStyle(levelIndicatorStyle NSLevelInd
 	return &LevelIndicatorCell{inner: raw.NSLevelIndicatorCellFromID(_id)}
 }
 
+// The style of the level indicator control.
+//
 // WithLevelIndicatorStyle sets the levelIndicatorStyle property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithLevelIndicatorStyle(levelIndicatorStyle NSLevelIndicatorStyle) *LevelIndicatorCell {
 	x.inner.SetLevelIndicatorStyle(raw.NSLevelIndicatorStyle(levelIndicatorStyle))
 	return x
 }
 
+// The minimum value of the control.
+//
 // WithMinValue sets the minValue property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithMinValue(minValue float64) *LevelIndicatorCell {
 	x.inner.SetMinValue(minValue)
 	return x
 }
 
+// The maximum value of the control.
+//
 // WithMaxValue sets the maxValue property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithMaxValue(maxValue float64) *LevelIndicatorCell {
 	x.inner.SetMaxValue(maxValue)
 	return x
 }
 
+// The warning value of the level indicator control.
+//
 // WithWarningValue sets the warningValue property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithWarningValue(warningValue float64) *LevelIndicatorCell {
 	x.inner.SetWarningValue(warningValue)
 	return x
 }
 
+// The critical value of the level indicator control.
+//
 // WithCriticalValue sets the criticalValue property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithCriticalValue(criticalValue float64) *LevelIndicatorCell {
 	x.inner.SetCriticalValue(criticalValue)
 	return x
 }
 
+// The placement of tick marks on the level indicator control.
+//
 // WithTickMarkPosition sets the tickMarkPosition property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithTickMarkPosition(tickMarkPosition NSTickMarkPosition) *LevelIndicatorCell {
 	x.inner.SetTickMarkPosition(raw.NSTickMarkPosition(tickMarkPosition))
 	return x
 }
 
+// The number of tick marks displayed by the control.
+//
 // WithNumberOfTickMarks sets the numberOfTickMarks property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithNumberOfTickMarks(numberOfTickMarks int) *LevelIndicatorCell {
 	x.inner.SetNumberOfTickMarks(numberOfTickMarks)
 	return x
 }
 
+// The number of major tick marks displayed by the control.
+//
 // WithNumberOfMajorTickMarks sets the numberOfMajorTickMarks property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithNumberOfMajorTickMarks(numberOfMajorTickMarks int) *LevelIndicatorCell {
 	x.inner.SetNumberOfMajorTickMarks(numberOfMajorTickMarks)
 	return x
 }
 
+// The view associated with the cell.
+//
 // WithControlView sets the controlView property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithControlView(controlView ViewProvider) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetControlView(controlView.asView())
 	return x
 }
 
+// The type of the cell.
+//
 // WithType sets the type_ property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithType(type_ NSCellType) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
 	return x
 }
 
+// The cell’s current state.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithState(state int) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetState(state)
 	return x
 }
 
+// The object that receives the cell’s action messages.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithTarget(target objc.ID) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetTarget(target)
 	return x
 }
 
+// The action performed by the cell.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithAction(action objc.SEL) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetAction(action)
 	return x
 }
 
+// A tag for identifying the cell.
+//
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithTag(tag int) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetTag(tag)
 	return x
 }
 
+// The cell’s title text.
+//
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithTitle(title string) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
 
+// A Boolean value indicating whether the cell is currently enabled.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithEnabled(enabled bool) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetEnabled(enabled)
 	return x
 }
 
+// A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+//
 // WithContinuous sets the continuous property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithContinuous(continuous bool) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetContinuous(continuous)
 	return x
 }
 
+// A Boolean value indicating whether the cell is editable.
+//
 // WithEditable sets the editable property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithEditable(editable bool) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetEditable(editable)
 	return x
 }
 
+// A Boolean value indicating whether the cell’s text can be selected.
+//
 // WithSelectable sets the selectable property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithSelectable(selectable bool) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetSelectable(selectable)
 	return x
 }
 
+// A Boolean value indicating whether the cell draws itself outlined with a plain border.
+//
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithBordered(bordered bool) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetBordered(bordered)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a bezeled border.
+//
 // WithBezeled sets the bezeled property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithBezeled(bezeled bool) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetBezeled(bezeled)
 	return x
 }
 
+// A Boolean value indicating whether excess text scrolls past the cell’s bounds.
+//
 // WithScrollable sets the scrollable property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithScrollable(scrollable bool) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetScrollable(scrollable)
 	return x
 }
 
+// A Boolean value indicating whether the cell has a highlighted appearance.
+//
 // WithHighlighted sets the highlighted property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithHighlighted(highlighted bool) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetHighlighted(highlighted)
 	return x
 }
 
+// The alignment of the cell’s text.
+//
 // WithAlignment sets the alignment property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithAlignment(alignment NSTextAlignment) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
 	return x
 }
 
+// A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+//
 // WithWraps sets the wraps property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithWraps(wraps bool) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetWraps(wraps)
 	return x
 }
 
+// The font that the cell uses to display text.
+//
 // WithFont sets the font property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithFont(font *Font) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
 	return x
 }
 
+// The cell’s formatter object.
+//
 // WithFormatter sets the formatter property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithFormatter(formatter *foundation.NSFormatter) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetFormatter(formatter)
 	return x
 }
 
+// The cell’s value as an Objective-C object.
+//
 // WithObjectValue sets the objectValue property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithObjectValue(objectValue objc.ID) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetObjectValue(objectValue)
 	return x
 }
 
+// The cell’s value as a string.
+//
 // WithStringValue sets the stringValue property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithStringValue(stringValue string) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
 	return x
 }
 
+// The cell’s value as an integer.
+//
 // WithIntValue sets the intValue property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithIntValue(intValue int) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetIntValue(intValue)
 	return x
 }
 
+// The cell’s value as a single-precision floating-point number.
+//
 // WithFloatValue sets the floatValue property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithFloatValue(floatValue float32) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetFloatValue(floatValue)
 	return x
 }
 
+// The cell’s value as a double-precision floating-point number.
+//
 // WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithDoubleValue(doubleValue float64) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetDoubleValue(doubleValue)
 	return x
 }
 
+// The cell’s value as an integer value.
+//
 // WithIntegerValue sets the integerValue property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithIntegerValue(integerValue int) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetIntegerValue(integerValue)
 	return x
 }
 
+// The image displayed by the cell, if any.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithImage(image *Image) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
 	return x
 }
 
+// The size of the cell.
+//
 // WithControlSize sets the controlSize property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithControlSize(controlSize NSControlSize) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
 	return x
 }
 
+// The object represented by the cell.
+//
 // WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithRepresentedObject(representedObject objc.ID) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetRepresentedObject(representedObject)
 	return x
 }
 
+// The cell’s contextual menu.
+//
 // WithMenu sets the menu property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithMenu(menu *Menu) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
 	return x
 }
 
+// A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+//
 // WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
 	return x
 }
 
+// The initial writing direction used to determine the actual writing direction for text.
+//
 // WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
 	return x
 }
 
+// The line break mode to use when drawing text in the cell.
+//
 // WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
 	return x
 }
 
+// A Boolean value indicating whether the cell assumes responsibility for undo operations.
+//
 // WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithAllowsUndo(allowsUndo bool) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
 	return x
 }
 
+// A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+//
 // WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
 	return x
 }
 
+// The layout direction of the user interface.
+//
 // WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
 	return x
 }
 
+// A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+//
 // WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithUsesSingleLineMode(usesSingleLineMode bool) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
 	return x
 }
 
+// A Boolean value indicating whether the cell refuses the first responder status.
+//
 // WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithRefusesFirstResponder(refusesFirstResponder bool) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
 	return x
 }
 
+// A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+//
 // WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithShowsFirstResponder(showsFirstResponder bool) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
 	return x
 }
 
+// The type of focus ring to use with the associated view.
+//
 // WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithFocusRingType(focusRingType NSFocusRingType) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
 	return x
 }
 
+// The cell’s value as an attributed string.
+//
 // WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
 	return x
 }
 
+// A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+//
 // WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports the importation of images into its text.
+//
 // WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithImportsGraphics(importsGraphics bool) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
 	return x
 }
 
+// A Boolean value indicating whether the cell supports three states instead of two.
+//
 // WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithAllowsMixedState(allowsMixedState bool) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
 	return x
 }
 
+// The cell’s background style.
+//
 // WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
 	return x
 }
 
+// The cell’s control tint.
+//
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithControlTint(controlTint NSControlTint) *LevelIndicatorCell {
 	x.inner.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
 	return x
 }
 
+// Returns the bounding rectangle of the tick mark identified by index (the minimum-value tick mark is at index 0).
+//
 // RectOfTickMarkAtIndex calls the underlying RectOfTickMarkAtIndex.
 func (x *LevelIndicatorCell) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
 	return x.inner.RectOfTickMarkAtIndex(index)
 }
 
+// Returns the receiver’s value represented by the tick mark at index (the minimum-value tick mark has an index of 0).
+//
 // TickMarkValueAtIndex calls the underlying TickMarkValueAtIndex.
 func (x *LevelIndicatorCell) TickMarkValueAtIndex(index int) float64 {
 	return x.inner.TickMarkValueAtIndex(index)

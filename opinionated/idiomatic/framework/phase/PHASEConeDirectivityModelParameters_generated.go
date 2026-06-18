@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that directs sound in a cone-shaped curve that extends from a sound source.
+//
 // ConeDirectivityModelParameters wraps [raw.PHASEConeDirectivityModelParameters] with a fluent Go API.
 type ConeDirectivityModelParameters struct {
 	inner *raw.PHASEConeDirectivityModelParameters
@@ -33,6 +35,8 @@ func ConeDirectivityModelParametersFromID(id objc.ID) *ConeDirectivityModelParam
 	return &ConeDirectivityModelParameters{inner: raw.PHASEConeDirectivityModelParametersFromID(id)}
 }
 
+// Creates an object that directs sound in a cone-shaped curve that extends from a sound source.
+//
 // NewConeDirectivityModelParametersWithSubbandParameters creates a new [ConeDirectivityModelParameters].
 func NewConeDirectivityModelParametersWithSubbandParameters(subbandParameters *foundation.NSArray[*raw.PHASEConeDirectivityModelSubbandParameters]) *ConeDirectivityModelParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEConeDirectivityModelParameters")), objc.RegisterName("alloc"))

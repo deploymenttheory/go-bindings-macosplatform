@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// The primary class that you use to manage text layout and presentation for custom text displays.
+//
 // TextLayoutManager wraps [raw.NSTextLayoutManager] with a fluent Go API.
 type TextLayoutManager struct {
 	inner *raw.NSTextLayoutManager
@@ -39,6 +41,8 @@ func NewTextLayoutManager() *TextLayoutManager {
 	return &TextLayoutManager{inner: raw.NSTextLayoutManagerFromID(_id)}
 }
 
+// Creates a new text layout manager with the coder you provide.
+//
 // NewTextLayoutManagerWithCoder creates a new [TextLayoutManager].
 func NewTextLayoutManagerWithCoder(coder *foundation.NSCoder) *TextLayoutManager {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextLayoutManager")), objc.RegisterName("alloc"))
@@ -46,31 +50,39 @@ func NewTextLayoutManagerWithCoder(coder *foundation.NSCoder) *TextLayoutManager
 	return &TextLayoutManager{inner: raw.NSTextLayoutManagerFromID(_id)}
 }
 
+// The delegate for the text layout manager object.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *TextLayoutManager) WithDelegate(delegate raw.NSTextLayoutManagerDelegate) *TextLayoutManager {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
+// A Boolean value that controls whether the framework uses the leading information specified by the font when laying out text.
+//
 // WithUsesFontLeading sets the usesFontLeading property and returns the receiver for chaining.
 func (x *TextLayoutManager) WithUsesFontLeading(usesFontLeading bool) *TextLayoutManager {
 	x.inner.SetUsesFontLeading(usesFontLeading)
 	return x
 }
 
+// A Boolean value that controls internal security analysis for malicious inputs and activates defensive behaviors.
+//
 // WithLimitsLayoutForSuspiciousContents sets the limitsLayoutForSuspiciousContents property and returns the receiver for chaining.
 func (x *TextLayoutManager) WithLimitsLayoutForSuspiciousContents(limitsLayoutForSuspiciousContents bool) *TextLayoutManager {
 	x.inner.SetLimitsLayoutForSuspiciousContents(limitsLayoutForSuspiciousContents)
 	return x
 }
 
+// A Boolean values that controls whether the text layout manager attempts to hyphenate when wrapping lines.
+//
 // WithUsesHyphenation sets the usesHyphenation property and returns the receiver for chaining.
 func (x *TextLayoutManager) WithUsesHyphenation(usesHyphenation bool) *TextLayoutManager {
 	x.inner.SetUsesHyphenation(usesHyphenation)
 	return x
 }
 
-// Specifies the behavior for resolving “NSTextAlignment.natural“ to the visual alignment. When set to “true“, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language. The default value is “true“.
+// Specifies the behavior for resolving NSTextAlignmentNatural to the visual alignment.
 //
 // WithResolvesNaturalAlignmentWithBaseWritingDirection sets the resolvesNaturalAlignmentWithBaseWritingDirection property and returns the receiver for chaining.
 func (x *TextLayoutManager) WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *TextLayoutManager {
@@ -78,18 +90,24 @@ func (x *TextLayoutManager) WithResolvesNaturalAlignmentWithBaseWritingDirection
 	return x
 }
 
+// The text container object that provides geometric information for the layout destination.
+//
 // WithTextContainer sets the textContainer property and returns the receiver for chaining.
 func (x *TextLayoutManager) WithTextContainer(textContainer *TextContainer) *TextLayoutManager {
 	x.inner.SetTextContainer(textContainer.Unwrap())
 	return x
 }
 
+// The queue that the framework dispatches layout operations on.
+//
 // WithLayoutQueue sets the layoutQueue property and returns the receiver for chaining.
 func (x *TextLayoutManager) WithLayoutQueue(layoutQueue *foundation.NSOperationQueue) *TextLayoutManager {
 	x.inner.SetLayoutQueue(layoutQueue)
 	return x
 }
 
+// An array of text selections associated by the text layout manager.
+//
 // WithTextSelections sets the collection, converting the Go slice to an NSArray.
 func (x *TextLayoutManager) WithTextSelections(items ...*raw.NSTextSelection) *TextLayoutManager {
 	if len(items) == 0 {
@@ -108,38 +126,52 @@ func (x *TextLayoutManager) WithTextSelections(items ...*raw.NSTextSelection) *T
 	return x
 }
 
+// Returns a text selection manager configured to have the text layout manager as its data source.
+//
 // WithTextSelectionNavigation sets the textSelectionNavigation property and returns the receiver for chaining.
 func (x *TextLayoutManager) WithTextSelectionNavigation(textSelectionNavigation *TextSelectionNavigation) *TextLayoutManager {
 	x.inner.SetTextSelectionNavigation(textSelectionNavigation.Unwrap())
 	return x
 }
 
+// A callback block that the framework invokes whenever the text layout manager needs to validate the rendering attributes for the range.
+//
 // WithRenderingAttributesValidator sets the renderingAttributesValidator property and returns the receiver for chaining.
 func (x *TextLayoutManager) WithRenderingAttributesValidator(renderingAttributesValidator func(*raw.NSTextLayoutManager, *raw.NSTextLayoutFragment)) *TextLayoutManager {
 	x.inner.SetRenderingAttributesValidator(renderingAttributesValidator)
 	return x
 }
 
+// Replaces the current text content manager with a new one you provide.
+//
 // ReplaceTextContentManager calls the underlying ReplaceTextContentManager.
 func (x *TextLayoutManager) ReplaceTextContentManager(textContentManager *raw.NSTextContentManager) {
 	x.inner.ReplaceTextContentManager(textContentManager)
 }
 
+// Performs the layout for specified text range.
+//
 // EnsureLayoutForRange calls the underlying EnsureLayoutForRange.
 func (x *TextLayoutManager) EnsureLayoutForRange(range_ *raw.NSTextRange) {
 	x.inner.EnsureLayoutForRange(range_)
 }
 
+// Performs the layout for filling the bounds you specify inside the last text container.
+//
 // EnsureLayoutForBounds calls the underlying EnsureLayoutForBounds.
 func (x *TextLayoutManager) EnsureLayoutForBounds(bounds corefoundation.CGRect) {
 	x.inner.EnsureLayoutForBounds(bounds)
 }
 
+// Invalidates the layout information for specified text range.
+//
 // InvalidateLayoutForRange calls the underlying InvalidateLayoutForRange.
 func (x *TextLayoutManager) InvalidateLayoutForRange(range_ *raw.NSTextRange) {
 	x.inner.InvalidateLayoutForRange(range_)
 }
 
+// Returns the text layout fragment at the position you specify in the text container.
+//
 // TextLayoutFragmentForPosition calls the underlying TextLayoutFragmentForPosition.
 func (x *TextLayoutManager) TextLayoutFragmentForPosition(position corefoundation.CGPoint) *TextLayoutFragment {
 	_r := x.inner.TextLayoutFragmentForPosition(position)
@@ -149,6 +181,8 @@ func (x *TextLayoutManager) TextLayoutFragmentForPosition(position corefoundatio
 	return &TextLayoutFragment{inner: _r}
 }
 
+// Returns the text layout fragment from the document at the specified location.
+//
 // TextLayoutFragmentForLocation calls the underlying TextLayoutFragmentForLocation.
 func (x *TextLayoutManager) TextLayoutFragmentForLocation(location raw.NSTextLocation) *TextLayoutFragment {
 	_r := x.inner.TextLayoutFragmentForLocation(location)
@@ -158,46 +192,64 @@ func (x *TextLayoutManager) TextLayoutFragmentForLocation(location raw.NSTextLoc
 	return &TextLayoutFragment{inner: _r}
 }
 
+// Enumerates the text layout fragments starting at the specified location.
+//
 // EnumerateTextLayoutFragmentsFromLocationOptionsUsing calls the underlying EnumerateTextLayoutFragmentsFromLocationOptionsUsing.
 func (x *TextLayoutManager) EnumerateTextLayoutFragmentsFromLocationOptionsUsing(location raw.NSTextLocation, options NSTextLayoutFragmentEnumerationOptions, block func(*raw.NSTextLayoutFragment) bool) raw.NSTextLocation {
 	return x.inner.EnumerateTextLayoutFragmentsFromLocationOptionsUsing(location, raw.NSTextLayoutFragmentEnumerationOptions(options), block)
 }
 
+// Enumerates the rendering attributes from a location you specify.
+//
 // EnumerateRenderingAttributesFromLocationReverseUsing calls the underlying EnumerateRenderingAttributesFromLocationReverseUsing.
 func (x *TextLayoutManager) EnumerateRenderingAttributesFromLocationReverseUsing(location raw.NSTextLocation, reverse bool, block objc.Block) {
 	x.inner.EnumerateRenderingAttributesFromLocationReverseUsing(location, reverse, block)
 }
 
+// Sets the rendering attributes for the range you specify.
+//
 // SetRenderingAttributesForTextRange calls the underlying SetRenderingAttributesForTextRange.
 func (x *TextLayoutManager) SetRenderingAttributesForTextRange(renderingAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID], textRange *raw.NSTextRange) {
 	x.inner.SetRenderingAttributesForTextRange(renderingAttributes, textRange)
 }
 
+// Sets the rendering attribute for the value and range you specify.
+//
 // AddRenderingAttributeValueForTextRange calls the underlying AddRenderingAttributeValueForTextRange.
 func (x *TextLayoutManager) AddRenderingAttributeValueForTextRange(renderingAttribute *foundation.NSString, value objc.ID, textRange *raw.NSTextRange) {
 	x.inner.AddRenderingAttributeValueForTextRange(renderingAttribute, value, textRange)
 }
 
+// Removes the rendering attribute from the specified text range.
+//
 // RemoveRenderingAttributeForTextRange calls the underlying RemoveRenderingAttributeForTextRange.
 func (x *TextLayoutManager) RemoveRenderingAttributeForTextRange(renderingAttribute *foundation.NSString, textRange *raw.NSTextRange) {
 	x.inner.RemoveRenderingAttributeForTextRange(renderingAttribute, textRange)
 }
 
+// Invalidates the rendering attributes of the specified text range.
+//
 // InvalidateRenderingAttributesForTextRange calls the underlying InvalidateRenderingAttributesForTextRange.
 func (x *TextLayoutManager) InvalidateRenderingAttributesForTextRange(textRange *raw.NSTextRange) {
 	x.inner.InvalidateRenderingAttributesForTextRange(textRange)
 }
 
+// Returns a dictionary of rendering attributes for rendering a link.
+//
 // RenderingAttributesForLinkAtLocation calls the underlying RenderingAttributesForLinkAtLocation.
 func (x *TextLayoutManager) RenderingAttributesForLinkAtLocation(link objc.ID, location raw.NSTextLocation) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.RenderingAttributesForLinkAtLocation(link, location)
 }
 
+// Enumerates text segments of a specific type and in the text range you provide.
+//
 // EnumerateTextSegmentsInRangeTypeOptionsUsing calls the underlying EnumerateTextSegmentsInRangeTypeOptionsUsing.
 func (x *TextLayoutManager) EnumerateTextSegmentsInRangeTypeOptionsUsing(textRange *raw.NSTextRange, type_ NSTextLayoutManagerSegmentType, options NSTextLayoutManagerSegmentOptions, block objc.Block) {
 	x.inner.EnumerateTextSegmentsInRangeTypeOptionsUsing(textRange, raw.NSTextLayoutManagerSegmentType(type_), raw.NSTextLayoutManagerSegmentOptions(options), block)
 }
 
+// Replaces content at the location you specify with the text elements string you provide.
+//
 // ReplaceContentsInRangeWithTextElements calls the underlying ReplaceContentsInRangeWithTextElements.
 func (x *TextLayoutManager) ReplaceContentsInRangeWithTextElements(range_ *raw.NSTextRange, textElements ...TextElementProvider) {
 	_ptrs := make([]objc.ID, len(textElements))
@@ -212,6 +264,8 @@ func (x *TextLayoutManager) ReplaceContentsInRangeWithTextElements(range_ *raw.N
 	x.inner.ReplaceContentsInRangeWithTextElements(range_, _arg1)
 }
 
+// Replaces content at the location you specify with an attributed string you provide.
+//
 // ReplaceContentsInRangeWithAttributedString calls the underlying ReplaceContentsInRangeWithAttributedString.
 func (x *TextLayoutManager) ReplaceContentsInRangeWithAttributedString(range_ *raw.NSTextRange, attributedString *foundation.NSAttributedString) {
 	x.inner.ReplaceContentsInRangeWithAttributedString(range_, attributedString)

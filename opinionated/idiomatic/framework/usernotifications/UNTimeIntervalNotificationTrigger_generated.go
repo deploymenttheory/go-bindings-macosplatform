@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A trigger condition that causes the system to deliver a notification after the amount of time you specify elapses.
+//
 // TimeIntervalNotificationTrigger wraps [raw.UNTimeIntervalNotificationTrigger] with a fluent Go API.
 type TimeIntervalNotificationTrigger struct {
 	inner *raw.UNTimeIntervalNotificationTrigger
@@ -38,6 +40,8 @@ func NewTimeIntervalNotificationTrigger() *TimeIntervalNotificationTrigger {
 	return &TimeIntervalNotificationTrigger{inner: raw.UNTimeIntervalNotificationTriggerFromID(_id)}
 }
 
+// The next date at which the trigger conditions are met.
+//
 // NextTriggerDate calls the underlying NextTriggerDate.
 func (x *TimeIntervalNotificationTrigger) NextTriggerDate() *foundation.NSDate {
 	return x.inner.NextTriggerDate()

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A continuous gesture recognizer that tracks two trackpad touches moving opposite each other in a circular motion.
+//
 // RotationGestureRecognizer wraps [raw.NSRotationGestureRecognizer] with a fluent Go API.
 type RotationGestureRecognizer struct {
 	inner *raw.NSRotationGestureRecognizer
@@ -36,84 +38,112 @@ func NewRotationGestureRecognizer() *RotationGestureRecognizer {
 	return &RotationGestureRecognizer{inner: raw.NSRotationGestureRecognizerFromID(_id)}
 }
 
+// The rotation of the gesture in radians.
+//
 // WithRotation sets the rotation property and returns the receiver for chaining.
 func (x *RotationGestureRecognizer) WithRotation(rotation float64) *RotationGestureRecognizer {
 	x.inner.SetRotation(rotation)
 	return x
 }
 
+// The rotation of the gesture in degrees.
+//
 // WithRotationInDegrees sets the rotationInDegrees property and returns the receiver for chaining.
 func (x *RotationGestureRecognizer) WithRotationInDegrees(rotationInDegrees float64) *RotationGestureRecognizer {
 	x.inner.SetRotationInDegrees(rotationInDegrees)
 	return x
 }
 
+// The object that implements the action method.
+//
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *RotationGestureRecognizer) WithTarget(target objc.ID) *RotationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetTarget(target)
 	return x
 }
 
+// The action method to call when the gesture is recognized.
+//
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *RotationGestureRecognizer) WithAction(action objc.SEL) *RotationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetAction(action)
 	return x
 }
 
+// The current state of the gesture recognizer.
+//
 // WithState sets the state property and returns the receiver for chaining.
 func (x *RotationGestureRecognizer) WithState(state NSGestureRecognizerState) *RotationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetState(raw.NSGestureRecognizerState(state))
 	return x
 }
 
+// The delegate of the gesture recognizer.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *RotationGestureRecognizer) WithDelegate(delegate raw.NSGestureRecognizerDelegate) *RotationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelegate(delegate)
 	return x
 }
 
+// A Boolean value indicating whether the gesture recognizer is able to handle events.
+//
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *RotationGestureRecognizer) WithEnabled(enabled bool) *RotationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetEnabled(enabled)
 	return x
 }
 
+// Configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
+//
 // WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
 func (x *RotationGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *RotationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetPressureConfiguration(pressureConfiguration.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
+//
 // WithDelaysPrimaryMouseButtonEvents sets the delaysPrimaryMouseButtonEvents property and returns the receiver for chaining.
 func (x *RotationGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *RotationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents)
 	return x
 }
 
+// A Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
+//
 // WithDelaysSecondaryMouseButtonEvents sets the delaysSecondaryMouseButtonEvents property and returns the receiver for chaining.
 func (x *RotationGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *RotationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents)
 	return x
 }
 
+// A Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
+//
 // WithDelaysOtherMouseButtonEvents sets the delaysOtherMouseButtonEvents property and returns the receiver for chaining.
 func (x *RotationGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *RotationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents)
 	return x
 }
 
+// A Boolean value that indicates whether key events are delivered only after gesture recognition fails.
+//
 // WithDelaysKeyEvents sets the delaysKeyEvents property and returns the receiver for chaining.
 func (x *RotationGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *RotationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysKeyEvents(delaysKeyEvents)
 	return x
 }
 
+// A Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
+//
 // WithDelaysMagnificationEvents sets the delaysMagnificationEvents property and returns the receiver for chaining.
 func (x *RotationGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *RotationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysMagnificationEvents(delaysMagnificationEvents)
 	return x
 }
 
+// A Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
+//
 // WithDelaysRotationEvents sets the delaysRotationEvents property and returns the receiver for chaining.
 func (x *RotationGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *RotationGestureRecognizer {
 	x.inner.NSGestureRecognizer.SetDelaysRotationEvents(delaysRotationEvents)

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that directs sound in a heart-shaped curve surrounding a sound source.
+//
 // CardioidDirectivityModelParameters wraps [raw.PHASECardioidDirectivityModelParameters] with a fluent Go API.
 type CardioidDirectivityModelParameters struct {
 	inner *raw.PHASECardioidDirectivityModelParameters
@@ -33,6 +35,8 @@ func CardioidDirectivityModelParametersFromID(id objc.ID) *CardioidDirectivityMo
 	return &CardioidDirectivityModelParameters{inner: raw.PHASECardioidDirectivityModelParametersFromID(id)}
 }
 
+// Creates an object that directs sound in a heart-shaped curve surrounding a sound source.
+//
 // NewCardioidDirectivityModelParametersWithSubbandParameters creates a new [CardioidDirectivityModelParameters].
 func NewCardioidDirectivityModelParametersWithSubbandParameters(subbandParameters *foundation.NSArray[*raw.PHASECardioidDirectivityModelSubbandParameters]) *CardioidDirectivityModelParameters {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASECardioidDirectivityModelParameters")), objc.RegisterName("alloc"))

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The class that defines the parameters for a single gate RNN operation.
+//
 // GraphSingleGateRNNDescriptor wraps [raw.MPSGraphSingleGateRNNDescriptor] with a fluent Go API.
 type GraphSingleGateRNNDescriptor struct {
 	inner *raw.MPSGraphSingleGateRNNDescriptor
@@ -35,7 +37,7 @@ func NewGraphSingleGateRNNDescriptor() *GraphSingleGateRNNDescriptor {
 	return &GraphSingleGateRNNDescriptor{inner: raw.MPSGraphSingleGateRNNDescriptorFromID(_id)}
 }
 
-// A parameter that defines time direction of the input sequence. If set to `YES` then the input sequence is passed in reverse time order to the layer. Note: Ignored when `bidirectional = YES`. Default value: `NO`.
+// A parameter that defines time direction of the input sequence.
 //
 // WithReverse sets the reverse property and returns the receiver for chaining.
 func (x *GraphSingleGateRNNDescriptor) WithReverse(reverse bool) *GraphSingleGateRNNDescriptor {
@@ -43,7 +45,7 @@ func (x *GraphSingleGateRNNDescriptor) WithReverse(reverse bool) *GraphSingleGat
 	return x
 }
 
-// A parameter that defines a bidirectional RNN layer. If set to `YES` then the input sequence is traversed in both directions and the two results are concatenated together on the channel-axis. Default value: `NO`.
+// A parameter that defines a bidirectional RNN layer.
 //
 // WithBidirectional sets the bidirectional property and returns the receiver for chaining.
 func (x *GraphSingleGateRNNDescriptor) WithBidirectional(bidirectional bool) *GraphSingleGateRNNDescriptor {
@@ -51,7 +53,7 @@ func (x *GraphSingleGateRNNDescriptor) WithBidirectional(bidirectional bool) *Gr
 	return x
 }
 
-// A parameter that makes the RNN layer support training. If set to `YES` then the layer will produce training state tensor as a secondary output. Default value: `NO`.
+// A parameter that makes the RNN layer support training.
 //
 // WithTraining sets the training property and returns the receiver for chaining.
 func (x *GraphSingleGateRNNDescriptor) WithTraining(training bool) *GraphSingleGateRNNDescriptor {
@@ -59,7 +61,7 @@ func (x *GraphSingleGateRNNDescriptor) WithTraining(training bool) *GraphSingleG
 	return x
 }
 
-// A parameter that defines the activation function to use with the RNN operation. Default value: `MPSGraphRNNActivationRelu`.
+// A parameter that defines the activation function to use with the RNN operation.
 //
 // WithActivation sets the activation property and returns the receiver for chaining.
 func (x *GraphSingleGateRNNDescriptor) WithActivation(activation MPSGraphRNNActivation) *GraphSingleGateRNNDescriptor {

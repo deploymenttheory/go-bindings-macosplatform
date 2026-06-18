@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// SBElementArray is subclass of NSMutableArray that manages collections of related SBObject objects. For example, when you ask the Finder for a list of disks, or ask iTunes for a list of playlists, you get the result back as an SBElementArray containing Scripting Bridge objects representing those items.
+//
 // ElementArray wraps [raw.SBElementArray] with a fluent Go API.
 type ElementArray struct {
 	inner *raw.SBElementArray[objc.ID]
@@ -36,42 +38,42 @@ func NewElementArray() *ElementArray {
 	return &ElementArray{inner: raw.SBElementArrayFromID[objc.ID](_id)}
 }
 
-// Returns the object in the array with the given name. This method is provided as an alternative to <doc://com.apple.documentation/documentation/Foundation/NSArray/object(at:)> for applications where a name is available instead of (or in addition to) an index. A name is generally more stable than an index. For example, it is typically more useful to identify a mailbox in Mail by its name than by its index in the list of mailboxes. - Parameters: - name: The name of one of the receiver's objects. - Returns: A reference to the designated object or `nil` if the object couldn’t be found.
+// Returns the object in the array with the given name.
 //
 // ObjectWithName calls the underlying ObjectWithName.
 func (x *ElementArray) ObjectWithName(name string) objc.ID {
 	return x.inner.ObjectWithName(foundation.NSStringStringWithUTF8String(name))
 }
 
-// Returns the object in the array with the given identifier. This method is provided as an alternative to <doc://com.apple.documentation/documentation/Foundation/NSArray/object(at:)> for applications where an identifier is available instead of (or in addition to) an index. A unique ID is generally more stable than an index. For example, it may be more useful to identify a contact in Address Book by its identifier (which doesn't change over time) than by its index in the list of contacts (which can change as contacts are added or removed). - Parameters: - identifier: The identifier of one of the receiver's objects. - Returns: A reference to the identified object or `nil` if could not be found.
+// Returns the object in the array with the given identifier.
 //
 // ObjectWithID calls the underlying ObjectWithID.
 func (x *ElementArray) ObjectWithID(identifier objc.ID) objc.ID {
 	return x.inner.ObjectWithID(identifier)
 }
 
-// Returns the object at the given location in the receiver. This method is a generalization of <doc://com.apple.documentation/documentation/Foundation/NSArray/object(at:)> for applications where the "index" is not simply an integer. For example, Finder can specify objects using a <doc://com.apple.documentation/documentation/foundation/nsurl> object as a location. In OSA this is known as "absolute position," a generalization of the notion of “index” in Foundation—it could be an integer, but it doesn't have to be. A single object may even have a number of different "absolute position" values depending on the container. - Parameters: - loc: An object that specifies the absolute position of the object within the array. It can be an integer index, a list of coordinates, a URL, or other determinant. See the discussion for clarification. - Returns: A reference to the “SBObject“ object identified by `loc` or `nil` if the object couldn’t be located.
+// Returns the object at the given location in the receiver.
 //
 // ObjectAtLocation calls the underlying ObjectAtLocation.
 func (x *ElementArray) ObjectAtLocation(location objc.ID) objc.ID {
 	return x.inner.ObjectAtLocation(location)
 }
 
-// Returns an array containing the results of sending the specified message to each object in the receiver. The method identified by `selector` must not take any arguments and must return an Objective-C object. It should not have the side effect of modifying the receiving array. The order of the items in the result array corresponds to the order of the items in the original array. - Parameters: - selector: A selector identifying the message to be sent to each object in the array. - Returns: A new array containing the results of sending the `selector` message to each object in the receiver, starting with the first object and continuing through the element array to the last object.
+// Returns an array containing the results of sending the specified message to each object in the receiver.
 //
 // ArrayByApplyingSelector calls the underlying ArrayByApplyingSelector.
 func (x *ElementArray) ArrayByApplyingSelector(selector objc.SEL) *foundation.NSArray[objc.ID] {
 	return x.inner.ArrayByApplyingSelector(selector)
 }
 
-// Returns an array containing the results of sending the specified message to each object in the receiver. The method identified by `selector` must take a single argument—whose value is provided in `argument`—and must return an object. It should not have the side effect of modifying the receiving array. The order of the items in the result array corresponds to the order of the items in the original array. - Parameters: - selector: A selector identifying the message to be sent to each object in the array. - argument: The value for the parameter of the message identified by `selector`. - Returns: A new array containing the results of sending the `selector` message to each object in the receiver, starting with the first object and continuing through the element array to the last object.
+// Returns an array containing the results of sending the specified message to each object in the receiver.
 //
 // ArrayByApplyingSelectorWithObject calls the underlying ArrayByApplyingSelectorWithObject.
 func (x *ElementArray) ArrayByApplyingSelectorWithObject(aSelector objc.SEL, argument objc.ID) *foundation.NSArray[objc.ID] {
 	return x.inner.ArrayByApplyingSelectorWithObject(aSelector, argument)
 }
 
-// Forces evaluation of the receiver, causing the real object to be returned immediately. This method forces the evaluation of the current object reference (the receiver), resulting in the return of the referenced object. By default, Scripting Bridge deals with references to objects until you actually request some concrete data from them or until you call the `get` method. - Returns: The object referenced by the receiver.
+// Forces evaluation of the receiver, causing the real object to be returned immediately.
 //
 // Get calls the underlying Get.
 func (x *ElementArray) Get() *foundation.NSArray[objc.ID] {

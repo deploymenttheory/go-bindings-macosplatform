@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The details of your app-specific content that someone might search for on their devices.
+//
 // SearchableItem wraps [raw.CSSearchableItem] with a fluent Go API.
 type SearchableItem struct {
 	inner *raw.CSSearchableItem
@@ -31,6 +33,8 @@ func SearchableItemFromID(id objc.ID) *SearchableItem {
 	return &SearchableItem{inner: raw.CSSearchableItemFromID(id)}
 }
 
+// Returns a searchable item associated with the specified identifier, domain identifier, and attribute set.
+//
 // NewSearchableItemWithUniqueIdentifierDomainIdentifierAttributeSet creates a new [SearchableItem].
 func NewSearchableItemWithUniqueIdentifierDomainIdentifierAttributeSet(uniqueIdentifier string, domainIdentifier string, attributeSet *raw.CSSearchableItemAttributeSet) *SearchableItem {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CSSearchableItem")), objc.RegisterName("alloc"))
@@ -38,42 +42,56 @@ func NewSearchableItemWithUniqueIdentifierDomainIdentifierAttributeSet(uniqueIde
 	return &SearchableItem{inner: raw.CSSearchableItemFromID(_id)}
 }
 
+// The value that uniquely identifies the searchable item within your app.
+//
 // WithUniqueIdentifier sets the uniqueIdentifier property and returns the receiver for chaining.
 func (x *SearchableItem) WithUniqueIdentifier(uniqueIdentifier string) *SearchableItem {
 	x.inner.SetUniqueIdentifier(foundation.NSStringStringWithUTF8String(uniqueIdentifier))
 	return x
 }
 
+// An optional identifier that represents the domain or owner of the item.
+//
 // WithDomainIdentifier sets the domainIdentifier property and returns the receiver for chaining.
 func (x *SearchableItem) WithDomainIdentifier(domainIdentifier string) *SearchableItem {
 	x.inner.SetDomainIdentifier(foundation.NSStringStringWithUTF8String(domainIdentifier))
 	return x
 }
 
+// The date after which the searchable item should no longer exist.
+//
 // WithExpirationDate sets the expirationDate property and returns the receiver for chaining.
 func (x *SearchableItem) WithExpirationDate(expirationDate *foundation.NSDate) *SearchableItem {
 	x.inner.SetExpirationDate(expirationDate)
 	return x
 }
 
+// The set of attributes that contain metadata associated with the item in a CSSearchableItemAttributeSet object.
+//
 // WithAttributeSet sets the attributeSet property and returns the receiver for chaining.
 func (x *SearchableItem) WithAttributeSet(attributeSet *SearchableItemAttributeSet) *SearchableItem {
 	x.inner.SetAttributeSet(attributeSet.Unwrap())
 	return x
 }
 
+// A Boolean value that indicates whether to treat the item as an update instead of a new item.
+//
 // WithIsUpdate sets the isUpdate property and returns the receiver for chaining.
 func (x *SearchableItem) WithIsUpdate(isUpdate bool) *SearchableItem {
 	x.inner.SetIsUpdate(isUpdate)
 	return x
 }
 
+// The types of notifications to request from Spotlight.
+//
 // WithUpdateListenerOptions sets the updateListenerOptions property and returns the receiver for chaining.
 func (x *SearchableItem) WithUpdateListenerOptions(updateListenerOptions CSSearchableItemUpdateListenerOptions) *SearchableItem {
 	x.inner.SetUpdateListenerOptions(raw.CSSearchableItemUpdateListenerOptions(updateListenerOptions))
 	return x
 }
 
+// Compares two items by rank and returns the result.
+//
 // CompareByRank calls the underlying CompareByRank.
 func (x *SearchableItem) CompareByRank(other *raw.CSSearchableItem) foundation.NSComparisonResult {
 	return x.inner.CompareByRank(other)

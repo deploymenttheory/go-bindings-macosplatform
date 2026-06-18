@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that monitors the scheduling and progress of interstitial events.
+//
 // PlayerInterstitialEventMonitor wraps [raw.AVPlayerInterstitialEventMonitor] with a fluent Go API.
 type PlayerInterstitialEventMonitor struct {
 	inner *raw.AVPlayerInterstitialEventMonitor
@@ -32,6 +34,8 @@ func PlayerInterstitialEventMonitorFromID(id objc.ID) *PlayerInterstitialEventMo
 	return &PlayerInterstitialEventMonitor{inner: raw.AVPlayerInterstitialEventMonitorFromID(id)}
 }
 
+// Creates an observer with a player item.
+//
 // NewPlayerInterstitialEventMonitorWithPrimaryPlayer creates a new [PlayerInterstitialEventMonitor].
 func NewPlayerInterstitialEventMonitorWithPrimaryPlayer(primaryPlayer *raw.AVPlayer) *PlayerInterstitialEventMonitor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerInterstitialEventMonitor")), objc.RegisterName("alloc"))

@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An action that contains the cryptographic identities the system uses to add to or remove from an existing collaboration.
+//
 // UpdateCollaborationParticipantsAction wraps [raw.SWUpdateCollaborationParticipantsAction] with a fluent Go API.
 type UpdateCollaborationParticipantsAction struct {
 	inner *raw.SWUpdateCollaborationParticipantsAction

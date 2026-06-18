@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that you use to configure new rasterization rate maps.
+//
 // RasterizationRateMapDescriptor wraps [raw.MTLRasterizationRateMapDescriptor] with a fluent Go API.
 type RasterizationRateMapDescriptor struct {
 	inner *raw.MTLRasterizationRateMapDescriptor
@@ -39,7 +41,7 @@ func NewRasterizationRateMapDescriptor() *RasterizationRateMapDescriptor {
 	return &RasterizationRateMapDescriptor{inner: raw.MTLRasterizationRateMapDescriptorFromID(_id)}
 }
 
-// @property screenSize @return The dimensions, in screen space pixels, of the region where variable rasterization is applied. @discussion The region always has its origin at [0, 0]. The depth component of MTLSize is ignored.
+// The size of the viewport coordinate system, in logical pixels.
 //
 // WithScreenSize sets the screenSize property and returns the receiver for chaining.
 func (x *RasterizationRateMapDescriptor) WithScreenSize(screenSize raw.MTLSize) *RasterizationRateMapDescriptor {
@@ -47,7 +49,7 @@ func (x *RasterizationRateMapDescriptor) WithScreenSize(screenSize raw.MTLSize) 
 	return x
 }
 
-// @property label @abstract A string to help identify this object. @discussion The default value is nil.
+// A string used to identify the rate map you create with the descriptor.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *RasterizationRateMapDescriptor) WithLabel(label string) *RasterizationRateMapDescriptor {
@@ -55,7 +57,7 @@ func (x *RasterizationRateMapDescriptor) WithLabel(label string) *RasterizationR
 	return x
 }
 
-// @method layerAtIndex: @return The MTLRasterizationRateLayerDescriptor instance for the given layerIndex, or nil if no instance hasn't been set for this index. @discussion Use setLayer:atIndex: to add or set the layer. Identical to "layers[layerIndex]".
+// Returns the layer description for a layer in the rate map.
 //
 // LayerAtIndex calls the underlying LayerAtIndex.
 func (x *RasterizationRateMapDescriptor) LayerAtIndex(layerIndex uint) *RasterizationRateLayerDescriptor {
@@ -66,7 +68,7 @@ func (x *RasterizationRateMapDescriptor) LayerAtIndex(layerIndex uint) *Rasteriz
 	return &RasterizationRateLayerDescriptor{inner: _r}
 }
 
-// @method setLayer:atIndex: @abstract Sets the MTLRasterizationRateLayerDescriptor instance for the given layerIndex. @discussion The previous instance at the index, if any, will be overwritten. Set nil to an index to remove the layer at that index from the descriptor. Identical to "layers[layerIndex] = layer".
+// Sets a configuration for a layer rate map.
 //
 // SetLayerAtIndex calls the underlying SetLayerAtIndex.
 func (x *RasterizationRateMapDescriptor) SetLayerAtIndex(layer *raw.MTLRasterizationRateLayerDescriptor, layerIndex uint) {

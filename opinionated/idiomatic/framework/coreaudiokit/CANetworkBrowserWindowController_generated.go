@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A window controller that displays available network audio devices.
+//
 // CANetworkBrowserWindowController wraps [raw.CANetworkBrowserWindowController] with a fluent Go API.
 type CANetworkBrowserWindowController struct {
 	inner *raw.CANetworkBrowserWindowController

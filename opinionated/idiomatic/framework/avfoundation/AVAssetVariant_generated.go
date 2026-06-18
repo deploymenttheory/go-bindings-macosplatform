@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents a bit rate variant.
+//
 // AssetVariant wraps [raw.AVAssetVariant] with a fluent Go API.
 type AssetVariant struct {
 	inner *raw.AVAssetVariant

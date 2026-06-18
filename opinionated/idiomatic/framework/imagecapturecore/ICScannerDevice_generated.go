@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// An object that represents a scanner.
+//
 // ScannerDevice wraps [raw.ICScannerDevice] with a fluent Go API.
 type ScannerDevice struct {
 	inner *raw.ICScannerDevice
@@ -37,7 +39,7 @@ func NewScannerDevice() *ScannerDevice {
 	return &ScannerDevice{inner: raw.ICScannerDeviceFromID(_id)}
 }
 
-// @property transferMode @abstract ￼The transfer mode for scanned document.
+// The transfer mode for the scanned document.
 //
 // WithTransferMode sets the transferMode property and returns the receiver for chaining.
 func (x *ScannerDevice) WithTransferMode(transferMode ICScannerTransferMode) *ScannerDevice {
@@ -45,7 +47,7 @@ func (x *ScannerDevice) WithTransferMode(transferMode ICScannerTransferMode) *Sc
 	return x
 }
 
-// @property maxMemoryBandSize @abstract ￼The total maximum band size requested when performing a ICScannerTransferModeMemoryBased.
+// The total maximum band size requested when performing a memory-based transfer.
 //
 // WithMaxMemoryBandSize sets the maxMemoryBandSize property and returns the receiver for chaining.
 func (x *ScannerDevice) WithMaxMemoryBandSize(maxMemoryBandSize uint) *ScannerDevice {
@@ -53,7 +55,7 @@ func (x *ScannerDevice) WithMaxMemoryBandSize(maxMemoryBandSize uint) *ScannerDe
 	return x
 }
 
-// @property delegate @abstract The delegate to receive messages once a session is opened on the device. @discussion The delegate must conform ICDeviceDelegate protocol. In addition it should respond to selectors defined in ICCameraDeviceDelegate protocol in order to effectively interact with the device object. The messages this delegate can expect to receive are described by these protocols.
+// The delegate to receive messages once a session is opened on the device.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *ScannerDevice) WithDelegate(delegate raw.ICDeviceDelegate) *ScannerDevice {
@@ -61,35 +63,35 @@ func (x *ScannerDevice) WithDelegate(delegate raw.ICDeviceDelegate) *ScannerDevi
 	return x
 }
 
-// @method requestOpenSessionWithCredentials: @abstract This message requests to open a session on the protected device with the authorized username and passcode.  If the device reports back a failure of credentials, they can be provided here for the launch. A client MUST open a session on a device in order to use the device. @discussion Make sure the receiver's delegate is set prior to sending this message; otherwise this message will be ignored. This request is completed when the delegate receives a "device:didOpenSessionWithError:" message. No more messages will be sent to the delegate if this request fails.
+// Opens a session on the protected device with the authorized username and passcode.
 //
 // RequestOpenSessionWithCredentialsPassword calls the underlying RequestOpenSessionWithCredentialsPassword.
 func (x *ScannerDevice) RequestOpenSessionWithCredentialsPassword(username string, password string) {
 	x.inner.RequestOpenSessionWithCredentialsPassword(foundation.NSStringStringWithUTF8String(username), foundation.NSStringStringWithUTF8String(password))
 }
 
-// @method requestSelectFunctionalUnit:delegate:selector:contextInfo: @abstract Requests the scanner device to select a functional unit. @discussion When this request is completed, the delegate will be notified using the 'scannerDevice:didSelectFunctionalUnit:error:' message.
+// Requests to select a functional unit on the scanner.
 //
 // RequestSelectFunctionalUnit calls the underlying RequestSelectFunctionalUnit.
 func (x *ScannerDevice) RequestSelectFunctionalUnit(type_ ICScannerFunctionalUnitType) {
 	x.inner.RequestSelectFunctionalUnit(raw.ICScannerFunctionalUnitType(type_))
 }
 
-// @method requestOverviewScan @abstract Starts an overview scan on selectedFunctionalUnit. @discussion When this request is completed, the delegate will be notified using the 'scannerDevice:didCompleteOverviewScanWithError:' message. The content of error returned should be examined to determine if the request completed successfully.
+// Starts an overview scan on the selected functional unit.
 //
 // RequestOverviewScan calls the underlying RequestOverviewScan.
 func (x *ScannerDevice) RequestOverviewScan() {
 	x.inner.RequestOverviewScan()
 }
 
-// @method requestScan @abstract Starts a scan on selectedFunctionalUnit. @discussion When this request is completed, the delegate will be notified using the 'scannerDevice:didCompleteScanWithError:' message. The content of error returned should be examined to determine if the request completed successfully.
+// Starts a scan on the selected functional unit.
 //
 // RequestScan calls the underlying RequestScan.
 func (x *ScannerDevice) RequestScan() {
 	x.inner.RequestScan()
 }
 
-// @method cancelScan @abstract Cancels the current scan operation started by sending a 'requestOverviewScan' or 'requestScan'.
+// Cancels the current scan.
 //
 // CancelScan calls the underlying CancelScan.
 func (x *ScannerDevice) CancelScan() {

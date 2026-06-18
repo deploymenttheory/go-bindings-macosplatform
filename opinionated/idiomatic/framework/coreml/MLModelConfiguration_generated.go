@@ -12,6 +12,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The settings for creating or updating a machine learning model.
+//
 // ModelConfiguration wraps [raw.MLModelConfiguration] with a fluent Go API.
 type ModelConfiguration struct {
 	inner *raw.MLModelConfiguration
@@ -38,7 +40,7 @@ func NewModelConfiguration() *ModelConfiguration {
 	return &ModelConfiguration{inner: raw.MLModelConfigurationFromID(_id)}
 }
 
-// A human readable name of a MLModel instance for display purposes. Use this property to set a name of a model instance so that runtime analysis tools (e.g. Instruments and os_log) can display that name in the user interface. CoreML framework doesn't parse nor filter the text. It is the client's responsibility to use appropriate text, which may involve localization and privacy considerations. When the property is nil, CoreML framework provides a default.
+// A human readable name of a model for display purposes.
 //
 // WithModelDisplayName sets the modelDisplayName property and returns the receiver for chaining.
 func (x *ModelConfiguration) WithModelDisplayName(modelDisplayName string) *ModelConfiguration {
@@ -46,6 +48,8 @@ func (x *ModelConfiguration) WithModelDisplayName(modelDisplayName string) *Mode
 	return x
 }
 
+// The processing unit or units the model uses to make predictions.
+//
 // WithComputeUnits sets the computeUnits property and returns the receiver for chaining.
 func (x *ModelConfiguration) WithComputeUnits(computeUnits MLComputeUnits) *ModelConfiguration {
 	x.inner.SetComputeUnits(raw.MLComputeUnits(computeUnits))
@@ -60,7 +64,7 @@ func (x *ModelConfiguration) WithOptimizationHints(optimizationHints *Optimizati
 	return x
 }
 
-// Set to YES to allow low precision accumulation on GPU when available. Defaults to NO
+// A Boolean value that determines whether to allow low-precision accumulation on a GPU.
 //
 // WithAllowLowPrecisionAccumulationOnGPU sets the allowLowPrecisionAccumulationOnGPU property and returns the receiver for chaining.
 func (x *ModelConfiguration) WithAllowLowPrecisionAccumulationOnGPU(allowLowPrecisionAccumulationOnGPU bool) *ModelConfiguration {
@@ -68,7 +72,7 @@ func (x *ModelConfiguration) WithAllowLowPrecisionAccumulationOnGPU(allowLowPrec
 	return x
 }
 
-// Set to specify a preferred Metal device. Defaults to nil which indicates automatic selection
+// The metal device you prefer this model use to make predictions (inference) and update the model.
 //
 // WithPreferredMetalDevice sets the preferredMetalDevice property and returns the receiver for chaining.
 func (x *ModelConfiguration) WithPreferredMetalDevice(preferredMetalDevice metal.MTLDevice) *ModelConfiguration {
@@ -76,13 +80,15 @@ func (x *ModelConfiguration) WithPreferredMetalDevice(preferredMetalDevice metal
 	return x
 }
 
+// A dictionary of configuration settings your app can override when loading a model.
+//
 // WithParameters sets the parameters property and returns the receiver for chaining.
 func (x *ModelConfiguration) WithParameters(parameters *foundation.NSDictionary[*raw.MLParameterKey, objc.ID]) *ModelConfiguration {
 	x.inner.SetParameters(parameters)
 	return x
 }
 
-// Function name that `MLModel` will use. Some model types (e.g. ML Program) supports multiple functions in a model asset, where each `MLModel` instance is associated with a particular function. Use `MLModelAsset` to get the list of available functions. Use `nil` to use a default function. ```swift let configuration = MLModelConfiguration() configuration.functionName = "my_function" ```
+// Function name that MLModel will use.
 //
 // WithFunctionName sets the functionName property and returns the receiver for chaining.
 func (x *ModelConfiguration) WithFunctionName(functionName string) *ModelConfiguration {

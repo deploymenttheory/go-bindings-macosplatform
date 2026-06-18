@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// A generic wrapper around an underlying value and the value’s type.
+//
 // FeatureValue wraps [raw.MLFeatureValue] with a fluent Go API.
 type FeatureValue struct {
 	inner *raw.MLFeatureValue
@@ -38,7 +40,7 @@ func NewFeatureValue() *FeatureValue {
 	return &FeatureValue{inner: raw.MLFeatureValueFromID(_id)}
 }
 
-// @abstract Returns a Boolean value that indicates whether a feature value is equal to another. @discussion If the types of the MLFeatureValue objects "self" and "value"  are integer in one case and double in the other (in either order) then those mixed mode numeric values are compared as NSNumbers. Otherwise if the types of the MLFeatureValue objects are different NO is returned. When "self" and "value" are both PixelBuffer MLFeatureValue types, only their CVPixelBufferRef values are compared for equality, the underlying arrays of pixelValues are not examined. [So, distinct PixelBuffer MLFeatureValue objects with distinct CVPixelBufferRef values which encapsulate the same array of pixels will compare *not* equal.] For all other (matching) MLFeatureValue types, the BOOL value returned is the result of comparing "self" with "value" via isEqualToNumber:, isEqualToString:, isEqualtoDictionary:, isEqualToMultiArray:, isEqualToArray: as chosen by the MLFeatureValue types.
+// Returns a Boolean value that indicates whether a feature value is equal to another.
 //
 // IsEqualToFeatureValue calls the underlying IsEqualToFeatureValue.
 func (x *FeatureValue) IsEqualToFeatureValue(value *raw.MLFeatureValue) bool {

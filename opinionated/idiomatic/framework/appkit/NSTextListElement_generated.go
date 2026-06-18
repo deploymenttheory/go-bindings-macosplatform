@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A class that represents a text list node.
+//
 // TextListElement wraps [raw.NSTextListElement] with a fluent Go API.
 type TextListElement struct {
 	inner *raw.NSTextListElement
@@ -30,6 +32,8 @@ func TextListElementFromID(id objc.ID) *TextListElement {
 	return &TextListElement{inner: raw.NSTextListElementFromID(id)}
 }
 
+// Creates a text list element with the parent, list elements, nesting level, and marker attributes you provide.
+//
 // NewTextListElementWithParentElementTextListContentsMarkerAttributesChildElements creates a new [TextListElement].
 func NewTextListElementWithParentElementTextListContentsMarkerAttributesChildElements(parent *raw.NSTextListElement, textList *raw.NSTextList, contents *foundation.NSAttributedString, markerAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID], children *foundation.NSArray[*raw.NSTextListElement]) *TextListElement {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextListElement")), objc.RegisterName("alloc"))
@@ -37,12 +41,16 @@ func NewTextListElementWithParentElementTextListContentsMarkerAttributesChildEle
 	return &TextListElement{inner: raw.NSTextListElementFromID(_id)}
 }
 
+// The value that represents the current content manager.
+//
 // WithTextContentManager sets the textContentManager property and returns the receiver for chaining.
 func (x *TextListElement) WithTextContentManager(textContentManager TextContentManagerProvider) *TextListElement {
 	x.inner.NSTextParagraph.NSTextElement.SetTextContentManager(textContentManager.asTextContentManager())
 	return x
 }
 
+// A range value that represents the range of the element inside the document.
+//
 // WithElementRange sets the elementRange property and returns the receiver for chaining.
 func (x *TextListElement) WithElementRange(elementRange *TextRange) *TextListElement {
 	x.inner.NSTextParagraph.NSTextElement.SetElementRange(elementRange.Unwrap())

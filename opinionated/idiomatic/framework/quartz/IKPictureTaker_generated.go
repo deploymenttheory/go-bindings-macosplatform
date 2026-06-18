@@ -11,6 +11,8 @@ import (
 	"unsafe"
 )
 
+// The IKPictureTaker class represents a panel that allows users to choose images by browsing the file system. The picture taker panel provides an Open Recent menu, supports image cropping, and supports taking snapshots from an iSight or other digital camera.
+//
 // IKPictureTaker wraps [raw.IKPictureTaker] with a fluent Go API.
 type IKPictureTaker struct {
 	inner *raw.IKPictureTaker
@@ -37,63 +39,63 @@ func NewIKPictureTaker() *IKPictureTaker {
 	return &IKPictureTaker{inner: raw.IKPictureTakerFromID(_id)}
 }
 
-// @method runModal @abstract Launches a modal PictureTaker session. @result Returns NSOKButton if the user edits or chooses an image and confirm panel, NSCancelButton if the user canceled or didn't change the image.
+// Opens a modal picture taker dialog.
 //
 // RunModal calls the underlying RunModal.
 func (x *IKPictureTaker) RunModal() int {
 	return x.inner.RunModal()
 }
 
-// @method beginPictureTakerWithDelegate:didEndSelector:contextInfo: @abstract Launch the PictureTaker. @param delegate the object to invoke didEndSelector when the PictureTaker terminates. @param didEndSelector the selector to invoke when the PictureTaker terminates. @param contextInfo Any data that will be passed as an argument to the delegate through didEndSelector after the session has ended. @discussion didEndSelector should have the following signature: - (void)pictureTakerDidEnd:(IKPictureTaker *)pictureTaker returnCode:(NSInteger)returnCode contextInfo:(void  *)contextInfo; returnCode value is set to NSOKButton if the user validate, or to NSCancelButton if the user cancel.
+// Opens a picture taker pane.
 //
 // BeginPictureTakerWithDelegateDidEndSelectorContextInfo calls the underlying BeginPictureTakerWithDelegateDidEndSelectorContextInfo.
 func (x *IKPictureTaker) BeginPictureTakerWithDelegateDidEndSelectorContextInfo(delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.BeginPictureTakerWithDelegateDidEndSelectorContextInfo(delegate, didEndSelector, contextInfo)
 }
 
-// @method beginPictureTakerSheetForWindow:withDelegate:didEndSelector:contextInfo: @abstract Launch the PictureTaker as a sheet for aWindow @param delegate the object to invoke didEndSelector when the PictureTaker terminates @param didEndSelector the selector to invoke when the PictureTaker terminates @param contextInfo Any data that will be passed as an argument to the delegate through didEndSelector after the session has ended @discussion didEndSelector should have the following signature: - (void)pictureTakerDidEnd:(IKPictureTaker *)pictureTaker returnCode:(NSInteger)returnCode contextInfo:(void  *)contextInfo; returnCode value is set to NSOKButton if the user validate, or to NSCancelButton if the user cancel.
+// Opens a picture taker as a sheet whose parent is the specified window.
 //
 // BeginPictureTakerSheetForWindowWithDelegateDidEndSelectorContextInfo calls the underlying BeginPictureTakerSheetForWindowWithDelegateDidEndSelectorContextInfo.
 func (x *IKPictureTaker) BeginPictureTakerSheetForWindowWithDelegateDidEndSelectorContextInfo(aWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.BeginPictureTakerSheetForWindowWithDelegateDidEndSelectorContextInfo(aWindow, delegate, didEndSelector, contextInfo)
 }
 
-// @method popUpRecentsMenuForView:withDelegate:didEndSelector:contextInfo: @abstract Launch the PictureTaker's recent popup. @param delegate the object to invoke didEndSelector when the PictureTaker terminates. @param didEndSelector the selector to invoke when the PictureTaker terminates. @param contextInfo Any data that will be passed as an argument to the delegate through didEndSelector after the session has ended. @discussion didEndSelector should have the following signature: - (void)pictureTakerDidEnd:(IKPictureTaker *)pictureTaker returnCode:(NSInteger)returnCode contextInfo:(void  *)contextInfo; returnCode value is set to NSOKButton if the user validate, or to NSCancelButton if the user cancel.
+// Displays the Open Recent popup menu associated with the picture taker.
 //
 // PopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo calls the underlying PopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo.
 func (x *IKPictureTaker) PopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo(aView *appkit.NSView, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
 	x.inner.PopUpRecentsMenuForViewWithDelegateDidEndSelectorContextInfo(aView, delegate, didEndSelector, contextInfo)
 }
 
-// @method setInputImage: @abstract Set the image input for the PictureTaker. @param image A valid NSImage. @discussion The input image is never modified by the PictureTaker.
+// Set the image input for the picture taker.
 //
 // SetInputImage calls the underlying SetInputImage.
 func (x *IKPictureTaker) SetInputImage(image *appkit.NSImage) {
 	x.inner.SetInputImage(image)
 }
 
-// @method inputImage @abstract return the original PictureTaker's input-image. @discussion The input image is never modified by the PictureTaker.
+// Returns the input image associated with the picture taker.
 //
 // InputImage calls the underlying InputImage.
 func (x *IKPictureTaker) InputImage() *appkit.NSImage {
 	return x.inner.InputImage()
 }
 
-// @method outputImage @abstract return the edited image.
+// Returns the edited image.
 //
 // OutputImage calls the underlying OutputImage.
 func (x *IKPictureTaker) OutputImage() *appkit.NSImage {
 	return x.inner.OutputImage()
 }
 
-// @method setMirroring: @abstract Controls whether the receiver enable/disable video mirroring durring snapshots (default is YES).
+// Controls whether the receiver enables video mirroring during snapshots.
 //
 // SetMirroring calls the underlying SetMirroring.
 func (x *IKPictureTaker) SetMirroring(b bool) {
 	x.inner.SetMirroring(b)
 }
 
-// @method mirroring @abstract Returns YES if video mirroring is enabled, NO otherwise.
+// Returns whether video mirroring is enabled during snapshots.
 //
 // Mirroring calls the underlying Mirroring.
 func (x *IKPictureTaker) Mirroring() bool {

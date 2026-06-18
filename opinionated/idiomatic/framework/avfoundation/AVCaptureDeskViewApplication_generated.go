@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that programmatically presents Desk View.
+//
 // CaptureDeskViewApplication wraps [raw.AVCaptureDeskViewApplication] with a fluent Go API.
 type CaptureDeskViewApplication struct {
 	inner *raw.AVCaptureDeskViewApplication
@@ -38,7 +40,7 @@ func NewCaptureDeskViewApplication() *CaptureDeskViewApplication {
 	return &CaptureDeskViewApplication{inner: raw.AVCaptureDeskViewApplicationFromID(_id)}
 }
 
-// @method presentWithCompletionHandler: @abstract Presents the Desk View application to the user with no launch configuration. @param completionHandler A block to be called once the Desk View application has been completely launched (or brought to the foreground). @discussion This method allows you to programmatically launch the Desk View application from your own application UI. If the Desk View application is already running, this method brings it to the front. If the Desk View application is minimized in the Dock, this method un-minimizes it and brings it to the front.
+// Launches Desk View with no additional configuration and then performs a completion handler if you specify it.
 //
 // Present blocks until the operation completes or ctx is cancelled.
 func (x *CaptureDeskViewApplication) Present(ctx context.Context) error {
@@ -58,7 +60,7 @@ func (x *CaptureDeskViewApplication) Present(ctx context.Context) error {
 	}
 }
 
-// @method presentWithLaunchConfiguration:completionHandler: @abstract Presents the Desk View application to the user. @param launchConfiguration Launch configuration governing how the Desk View application will be presented. @param completionHandler A block to be called once the Desk View application has been completely launched (or brought to the foreground). Optionally, this completionHandler may fire later, once the user has completed set up mode (see AVCaptureDeskViewApplicationLaunchConfiguration.requiresSetUpModeCompletion). @discussion This method allows you to programmatically launch the Desk View application from your own application UI. If the Desk View application is already running, this method brings it to the front. If the Desk View application is minimized in the Dock, this method un-minimizes it and brings it to the front.
+// Launches Desk View with the configuration and completion handler that you specify.
 //
 // PresentWithLaunchConfiguration blocks until the operation completes or ctx is cancelled.
 func (x *CaptureDeskViewApplication) PresentWithLaunchConfiguration(ctx context.Context, launchConfiguration *raw.AVCaptureDeskViewApplicationLaunchConfiguration) error {

@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A toolbar item that displays the macOS share sheet.
+//
 // SharingServicePickerToolbarItem wraps [raw.NSSharingServicePickerToolbarItem] with a fluent Go API.
 type SharingServicePickerToolbarItem struct {
 	inner *raw.NSSharingServicePickerToolbarItem
@@ -39,13 +41,15 @@ func NewSharingServicePickerToolbarItem() *SharingServicePickerToolbarItem {
 	return &SharingServicePickerToolbarItem{inner: raw.NSSharingServicePickerToolbarItemFromID(_id)}
 }
 
+// The custom object from your app that provides the items to share.
+//
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *SharingServicePickerToolbarItem) WithDelegate(delegate raw.NSSharingServicePickerToolbarItemDelegate) *SharingServicePickerToolbarItem {
 	x.inner.SetDelegate(delegate)
 	return x
 }
 
-// Use this to set the item's label that appears in the toolbar. The label may also be used for the default `menuFormRepresentation` of the item. Also, developers should make sure the length of the label is appropriate and not too long.
+// The label that appears for this item in the toolbar.
 //
 // WithLabel sets the label property and returns the receiver for chaining.
 func (x *SharingServicePickerToolbarItem) WithLabel(label string) *SharingServicePickerToolbarItem {
@@ -53,7 +57,7 @@ func (x *SharingServicePickerToolbarItem) WithLabel(label string) *SharingServic
 	return x
 }
 
-// Use this to set the item's label that appears when the item is in the customization palette. All Items must have a palette label, and for most things it is reasonable to set them to the same string as the label used in the toolbar.
+// The label that appears when the toolbar item is in the customization palette.
 //
 // WithPaletteLabel sets the paletteLabel property and returns the receiver for chaining.
 func (x *SharingServicePickerToolbarItem) WithPaletteLabel(paletteLabel string) *SharingServicePickerToolbarItem {
@@ -61,7 +65,7 @@ func (x *SharingServicePickerToolbarItem) WithPaletteLabel(paletteLabel string) 
 	return x
 }
 
-// An array of all alternate labels this item may display. The item will use the size of the longest label to prevent resizing when the label is changed.
+// The set of labels that the item might display.
 //
 // WithPossibleLabels sets the possibleLabels property and returns the receiver for chaining.
 func (x *SharingServicePickerToolbarItem) WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *SharingServicePickerToolbarItem {
@@ -69,7 +73,7 @@ func (x *SharingServicePickerToolbarItem) WithPossibleLabels(possibleLabels *fou
 	return x
 }
 
-// Use this to set a tooltip to be used when the item is displayed in the toolbar. (forwards to `-view` if it responds)
+// The tooltip to display when someone hovers over the item in the toolbar.
 //
 // WithToolTip sets the toolTip property and returns the receiver for chaining.
 func (x *SharingServicePickerToolbarItem) WithToolTip(toolTip string) *SharingServicePickerToolbarItem {
@@ -77,7 +81,7 @@ func (x *SharingServicePickerToolbarItem) WithToolTip(toolTip string) *SharingSe
 	return x
 }
 
-// The menu form of a toolbar item's purpose is twofold. First, when the window is too small to display an item, it will be clipped but remain accessible from a "clipped items" menu containing the menu item returned here. Second, in text only mode, the menu returned will be used to create the displayed items. Singleton menu items will be clickable, while submenu items will be represented as a pull down. For instance, say you want a button that allows you to switch between modes A, B, and C. You could represent this as a menu by: a menu item "mode" with three submenu items "A", "B", and "C". By default, this method returns a singleton menu item with item label as the title. For standard items, the target, action is set.
+// The menu item to use when the toolbar item is in the overflow menu.
 //
 // WithMenuFormRepresentation sets the menuFormRepresentation property and returns the receiver for chaining.
 func (x *SharingServicePickerToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *SharingServicePickerToolbarItem {
@@ -85,7 +89,7 @@ func (x *SharingServicePickerToolbarItem) WithMenuFormRepresentation(menuFormRep
 	return x
 }
 
-// Tag for your own custom purpose. (forwards to `-view` if it responds)
+// An integer tag you can use to identify the toolbar item.
 //
 // WithTag sets the tag property and returns the receiver for chaining.
 func (x *SharingServicePickerToolbarItem) WithTag(tag int) *SharingServicePickerToolbarItem {
@@ -93,7 +97,7 @@ func (x *SharingServicePickerToolbarItem) WithTag(tag int) *SharingServicePicker
 	return x
 }
 
-// Set and get the action of an item. (forwards to `-view` if it responds)
+// The object that defines the action method the toolbar item calls when clicked.
 //
 // WithTarget sets the target property and returns the receiver for chaining.
 func (x *SharingServicePickerToolbarItem) WithTarget(target objc.ID) *SharingServicePickerToolbarItem {
@@ -101,7 +105,7 @@ func (x *SharingServicePickerToolbarItem) WithTarget(target objc.ID) *SharingSer
 	return x
 }
 
-// Set and get the action of an item. For custom views, this method will call `-setAction:` on the view if it responds. (forwards to `-view` if it responds)
+// The action method to call when someone clicks on the toolbar item.
 //
 // WithAction sets the action property and returns the receiver for chaining.
 func (x *SharingServicePickerToolbarItem) WithAction(action objc.SEL) *SharingServicePickerToolbarItem {
@@ -109,7 +113,7 @@ func (x *SharingServicePickerToolbarItem) WithAction(action objc.SEL) *SharingSe
 	return x
 }
 
-// Set and get the enabled flag of an item. For custom views, this method will call `-setEnabled:` on the view if it responds. (forwards to `-view` if it responds)
+// A Boolean value that indicates whether the item is enabled.
 //
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *SharingServicePickerToolbarItem) WithEnabled(enabled bool) *SharingServicePickerToolbarItem {
@@ -117,13 +121,15 @@ func (x *SharingServicePickerToolbarItem) WithEnabled(enabled bool) *SharingServ
 	return x
 }
 
+// The image to display for the toolbar item.
+//
 // WithImage sets the image property and returns the receiver for chaining.
 func (x *SharingServicePickerToolbarItem) WithImage(image *Image) *SharingServicePickerToolbarItem {
 	x.inner.NSToolbarItem.SetImage(image.Unwrap())
 	return x
 }
 
-// Set and get the title of an item. For custom views, this method will call `-setTitle:` on the view if it responds. (forwards to `-view` if it responds)
+// The title of the toolbar item.
 //
 // WithTitle sets the title property and returns the receiver for chaining.
 func (x *SharingServicePickerToolbarItem) WithTitle(title string) *SharingServicePickerToolbarItem {
@@ -131,7 +137,7 @@ func (x *SharingServicePickerToolbarItem) WithTitle(title string) *SharingServic
 	return x
 }
 
-// When set on an item without a custom view, the button produced will have a bordered style. Defaults to NO.
+// A Boolean value that indicates whether the toolbar item has a bordered style.
 //
 // WithBordered sets the bordered property and returns the receiver for chaining.
 func (x *SharingServicePickerToolbarItem) WithBordered(bordered bool) *SharingServicePickerToolbarItem {
@@ -145,7 +151,7 @@ func (x *SharingServicePickerToolbarItem) WithBackgroundTintColor(backgroundTint
 	return x
 }
 
-// Defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items' background.
+// Defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items’ background.
 //
 // WithStyle sets the style property and returns the receiver for chaining.
 func (x *SharingServicePickerToolbarItem) WithStyle(style NSToolbarItemStyle) *SharingServicePickerToolbarItem {
@@ -153,7 +159,7 @@ func (x *SharingServicePickerToolbarItem) WithStyle(style NSToolbarItemStyle) *S
 	return x
 }
 
-// Whether or not the item behaves as a navigation item (i.e. back/forward) in the toolbar. Navigation items may be specially positioned by the system outside the normal list of items of the toolbar in the order specified by `-toolbarDefaultItemIdentifiers:`. Defaults to NO.
+// A Boolean value that indicates whether the item behaves as a navigation item in the toolbar.
 //
 // WithNavigational sets the navigational property and returns the receiver for chaining.
 func (x *SharingServicePickerToolbarItem) WithNavigational(navigational bool) *SharingServicePickerToolbarItem {
@@ -161,7 +167,7 @@ func (x *SharingServicePickerToolbarItem) WithNavigational(navigational bool) *S
 	return x
 }
 
-// Items with automatically generated views will return nil from this getter. Custom views may be provided but not all `NSToolbarItem` subclasses support custom views. Note that, by default, many of the set/get methods will be implemented by calls forwarded to the view you set, if it responds to it.
+// The custom view you use to draw the toolbar item.
 //
 // WithView sets the view property and returns the receiver for chaining.
 func (x *SharingServicePickerToolbarItem) WithView(view ViewProvider) *SharingServicePickerToolbarItem {
@@ -169,7 +175,7 @@ func (x *SharingServicePickerToolbarItem) WithView(view ViewProvider) *SharingSe
 	return x
 }
 
-// Determines whether an item is visible in the toolbar. The item will still be visible in the customization panel. Because hidden items may be visible during user customization, use the `visible` property to determine if an item is currently displayed. Note that even hidden toolbar items are sync'd to other toolbars with a shared identifier, but its `hidden` state can be unique to each instance. Use this property to show a toolbar item in one toolbar instance but not another.
+// Determines whether an item is visible in the toolbar.
 //
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *SharingServicePickerToolbarItem) WithHidden(hidden bool) *SharingServicePickerToolbarItem {
@@ -177,7 +183,7 @@ func (x *SharingServicePickerToolbarItem) WithHidden(hidden bool) *SharingServic
 	return x
 }
 
-// Unless you have already set your own custom view, you should not call these methods. The min size should be small enough to look nice in all display modes. If you do not set a min/max size, the view's size properties will be calculated using constraints. Apps linked before 10.14 will use the view's current size. In general, apps should rely on the automatic measurements and constraints to define min/max sizes rather than setting these properties since this will account for localizations.
+// The toolbar item’s minimum size.
 //
 // WithMinSize sets the minSize property and returns the receiver for chaining.
 func (x *SharingServicePickerToolbarItem) WithMinSize(minSize corefoundation.CGSize) *SharingServicePickerToolbarItem {
@@ -185,13 +191,15 @@ func (x *SharingServicePickerToolbarItem) WithMinSize(minSize corefoundation.CGS
 	return x
 }
 
+// The toolbar item’s maximum size.
+//
 // WithMaxSize sets the maxSize property and returns the receiver for chaining.
 func (x *SharingServicePickerToolbarItem) WithMaxSize(maxSize corefoundation.CGSize) *SharingServicePickerToolbarItem {
 	x.inner.NSToolbarItem.SetMaxSize(maxSize)
 	return x
 }
 
-// When a toolbar does not have enough space to fit all its items, it must push some into the overflow menu. Items with the highest `visibilityPriority` level are chosen last for the overflow menu. The default `visibilityPriority` value is `NSToolbarItemVisibilityPriorityStandard`. To suggest that an item always remain visible, give it a value greater than `NSToolbarItemVisibilityPriorityStandard`, but less than `NSToolbarItemVisibilityPriorityUser`. In 10.7, users can no longer modify the toolbar item visibility priority.
+// The display priority associated with the toolbar item.
 //
 // WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
 func (x *SharingServicePickerToolbarItem) WithVisibilityPriority(visibilityPriority int) *SharingServicePickerToolbarItem {
@@ -207,7 +215,7 @@ func (x *SharingServicePickerToolbarItem) WithBadge(badge *ItemBadge) *SharingSe
 	return x
 }
 
-// This property only affects automatic validation performed by NSToolbar. Explicit validation requests, such as the `-[NSToolbar validateVisibleItems]` method, will invoke the `-validate` method even if `autovalidates` is `NO`. Defaults to YES.
+// A Boolean value that indicates whether the toolbar automatically validates the item.
 //
 // WithAutovalidates sets the autovalidates property and returns the receiver for chaining.
 func (x *SharingServicePickerToolbarItem) WithAutovalidates(autovalidates bool) *SharingServicePickerToolbarItem {

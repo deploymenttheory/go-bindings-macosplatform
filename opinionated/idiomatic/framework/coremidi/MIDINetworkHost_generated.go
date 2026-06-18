@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that represents the host’s network address.
+//
 // NetworkHost wraps [raw.MIDINetworkHost] with a fluent Go API.
 type NetworkHost struct {
 	inner *raw.MIDINetworkHost
@@ -36,6 +38,8 @@ func NewNetworkHost() *NetworkHost {
 	return &NetworkHost{inner: raw.MIDINetworkHostFromID(_id)}
 }
 
+// Compares this host instance with another to see if they share the same address value.
+//
 // HasSameAddressAs calls the underlying HasSameAddressAs.
 func (x *NetworkHost) HasSameAddressAs(other *raw.MIDINetworkHost) bool {
 	return x.inner.HasSameAddressAs(other)

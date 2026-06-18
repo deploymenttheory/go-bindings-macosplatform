@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A specification for a named parameter with a constant value.
+//
 // MetaParameterDefinition wraps [raw.PHASEMetaParameterDefinition] with a fluent Go API.
 type MetaParameterDefinition struct {
 	inner *raw.PHASEMetaParameterDefinition

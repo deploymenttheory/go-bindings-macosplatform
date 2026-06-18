@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// An object that contains the opaque data and other information for a signature.
+//
 // Signature wraps [raw.SHSignature] with a fluent Go API.
 type Signature struct {
 	inner *raw.SHSignature
@@ -32,7 +34,7 @@ func SignatureFromID(id objc.ID) *Signature {
 	return &Signature{inner: raw.SHSignatureFromID(id)}
 }
 
-// Creates a signature object from raw data. - Parameters: - dataRepresentation: The raw data for the signature. - error: The error that occurs; otherwise, `nil`. - Returns: A signature if the raw data is a valid signature; otherwise, `nil`.
+// Creates a signature object from raw data.
 //
 // NewSignatureWithDataRepresentationError creates a new [Signature].
 func NewSignatureWithDataRepresentationError(dataRepresentation *foundation.NSData) (*Signature, error) {

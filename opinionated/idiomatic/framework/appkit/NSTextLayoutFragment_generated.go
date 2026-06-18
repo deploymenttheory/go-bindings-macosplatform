@@ -13,6 +13,8 @@ import (
 	"unsafe"
 )
 
+// A class that represents the layout fragment typically corresponding to a rendering surface, such as a layer or view subclass.
+//
 // TextLayoutFragment wraps [raw.NSTextLayoutFragment] with a fluent Go API.
 type TextLayoutFragment struct {
 	inner *raw.NSTextLayoutFragment
@@ -33,6 +35,8 @@ func TextLayoutFragmentFromID(id objc.ID) *TextLayoutFragment {
 	return &TextLayoutFragment{inner: raw.NSTextLayoutFragmentFromID(id)}
 }
 
+// Create a new layout fragment using the provided text element and range.
+//
 // NewTextLayoutFragmentWithTextElementRange creates a new [TextLayoutFragment].
 func NewTextLayoutFragmentWithTextElementRange(textElement *raw.NSTextElement, rangeInElement *raw.NSTextRange) *TextLayoutFragment {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextLayoutFragment")), objc.RegisterName("alloc"))
@@ -40,6 +44,8 @@ func NewTextLayoutFragmentWithTextElementRange(textElement *raw.NSTextElement, r
 	return &TextLayoutFragment{inner: raw.NSTextLayoutFragmentFromID(_id)}
 }
 
+// Creates a new layout fragment with the coder you provide.
+//
 // NewTextLayoutFragmentWithCoder creates a new [TextLayoutFragment].
 func NewTextLayoutFragmentWithCoder(coder *foundation.NSCoder) *TextLayoutFragment {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextLayoutFragment")), objc.RegisterName("alloc"))
@@ -47,12 +53,16 @@ func NewTextLayoutFragmentWithCoder(coder *foundation.NSCoder) *TextLayoutFragme
 	return &TextLayoutFragment{inner: raw.NSTextLayoutFragmentFromID(_id)}
 }
 
+// The queue on which the framework dispatches layout operations.
+//
 // WithLayoutQueue sets the layoutQueue property and returns the receiver for chaining.
 func (x *TextLayoutFragment) WithLayoutQueue(layoutQueue *foundation.NSOperationQueue) *TextLayoutFragment {
 	x.inner.SetLayoutQueue(layoutQueue)
 	return x
 }
 
+// Returns the text line fragment for the vertical offset you provide, or the closest text line fragment beyond the vertical offset.
+//
 // TextLineFragmentForVerticalOffsetRequiresExactMatch calls the underlying TextLineFragmentForVerticalOffsetRequiresExactMatch.
 func (x *TextLayoutFragment) TextLineFragmentForVerticalOffsetRequiresExactMatch(verticalOffset float64, requiresExactMatch bool) *TextLineFragment {
 	_r := x.inner.TextLineFragmentForVerticalOffsetRequiresExactMatch(verticalOffset, requiresExactMatch)
@@ -62,6 +72,8 @@ func (x *TextLayoutFragment) TextLineFragmentForVerticalOffsetRequiresExactMatch
 	return &TextLineFragment{inner: _r}
 }
 
+// Returns a text line fragment from a specific text location in the document.
+//
 // TextLineFragmentForTextLocationIsUpstreamAffinity calls the underlying TextLineFragmentForTextLocationIsUpstreamAffinity.
 func (x *TextLayoutFragment) TextLineFragmentForTextLocationIsUpstreamAffinity(textLocation raw.NSTextLocation, isUpstreamAffinity bool) *TextLineFragment {
 	_r := x.inner.TextLineFragmentForTextLocationIsUpstreamAffinity(textLocation, isUpstreamAffinity)
@@ -71,16 +83,22 @@ func (x *TextLayoutFragment) TextLineFragmentForTextLocationIsUpstreamAffinity(t
 	return &TextLineFragment{inner: _r}
 }
 
+// Invalidates any layout information associated with the text layout fragment.
+//
 // InvalidateLayout calls the underlying InvalidateLayout.
 func (x *TextLayoutFragment) InvalidateLayout() {
 	x.inner.InvalidateLayout()
 }
 
+// Renders the visual representation of this element in the specified graphics context.
+//
 // DrawAtPointInContext calls the underlying DrawAtPointInContext.
 func (x *TextLayoutFragment) DrawAtPointInContext(point corefoundation.CGPoint, context_ unsafe.Pointer) {
 	x.inner.DrawAtPointInContext(point, context_)
 }
 
+// Returns the frame in the text layout fragment coordinate system for the attachment at the location you specify.
+//
 // FrameForTextAttachmentAtLocation calls the underlying FrameForTextAttachmentAtLocation.
 func (x *TextLayoutFragment) FrameForTextAttachmentAtLocation(location raw.NSTextLocation) corefoundation.CGRect {
 	return x.inner.FrameForTextAttachmentAtLocation(location)

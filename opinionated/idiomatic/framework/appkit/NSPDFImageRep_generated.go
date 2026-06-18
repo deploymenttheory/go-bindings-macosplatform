@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// An object that can render an image from a PDF format data stream.
+//
 // PDFImageRep wraps [raw.NSPDFImageRep] with a fluent Go API.
 type PDFImageRep struct {
 	inner *raw.NSPDFImageRep
@@ -31,6 +33,8 @@ func PDFImageRepFromID(id objc.ID) *PDFImageRep {
 	return &PDFImageRep{inner: raw.NSPDFImageRepFromID(id)}
 }
 
+// Returns a representation of an image initialized with the specified PDF data.
+//
 // NewPDFImageRepWithData creates a new [PDFImageRep].
 func NewPDFImageRepWithData(pdfData *foundation.NSData) *PDFImageRep {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPDFImageRep")), objc.RegisterName("alloc"))
@@ -38,54 +42,72 @@ func NewPDFImageRepWithData(pdfData *foundation.NSData) *PDFImageRep {
 	return &PDFImageRep{inner: raw.NSPDFImageRepFromID(_id)}
 }
 
+// The page currently displayed by the image representation.
+//
 // WithCurrentPage sets the currentPage property and returns the receiver for chaining.
 func (x *PDFImageRep) WithCurrentPage(currentPage int) *PDFImageRep {
 	x.inner.SetCurrentPage(currentPage)
 	return x
 }
 
+// The size of the image representation, measured in points in the user coordinate space.
+//
 // WithSize sets the size property and returns the receiver for chaining.
 func (x *PDFImageRep) WithSize(size corefoundation.CGSize) *PDFImageRep {
 	x.inner.NSImageRep.SetSize(size)
 	return x
 }
 
+// A Boolean value that indicates whether the image data has an alpha channel.
+//
 // WithAlpha sets the alpha property and returns the receiver for chaining.
 func (x *PDFImageRep) WithAlpha(alpha bool) *PDFImageRep {
 	x.inner.NSImageRep.SetAlpha(alpha)
 	return x
 }
 
+// A Boolean value that indicates whether the image is opaque.
+//
 // WithOpaque sets the opaque property and returns the receiver for chaining.
 func (x *PDFImageRep) WithOpaque(opaque bool) *PDFImageRep {
 	x.inner.NSImageRep.SetOpaque(opaque)
 	return x
 }
 
+// The name of the color space used by the image data.
+//
 // WithColorSpaceName sets the colorSpaceName property and returns the receiver for chaining.
 func (x *PDFImageRep) WithColorSpaceName(colorSpaceName *foundation.NSString) *PDFImageRep {
 	x.inner.NSImageRep.SetColorSpaceName(colorSpaceName)
 	return x
 }
 
+// The number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
+//
 // WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
 func (x *PDFImageRep) WithBitsPerSample(bitsPerSample int) *PDFImageRep {
 	x.inner.NSImageRep.SetBitsPerSample(bitsPerSample)
 	return x
 }
 
+// The width of the image, measured in pixels.
+//
 // WithPixelsWide sets the pixelsWide property and returns the receiver for chaining.
 func (x *PDFImageRep) WithPixelsWide(pixelsWide int) *PDFImageRep {
 	x.inner.NSImageRep.SetPixelsWide(pixelsWide)
 	return x
 }
 
+// The height of the image, measured in pixels.
+//
 // WithPixelsHigh sets the pixelsHigh property and returns the receiver for chaining.
 func (x *PDFImageRep) WithPixelsHigh(pixelsHigh int) *PDFImageRep {
 	x.inner.NSImageRep.SetPixelsHigh(pixelsHigh)
 	return x
 }
 
+// The layout direction for the image.
+//
 // WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
 func (x *PDFImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *PDFImageRep {
 	x.inner.NSImageRep.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))

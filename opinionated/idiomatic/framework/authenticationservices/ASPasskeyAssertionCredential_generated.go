@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A passkey assertion credential.
+//
 // PasskeyAssertionCredential wraps [raw.ASPasskeyAssertionCredential] with a fluent Go API.
 type PasskeyAssertionCredential struct {
 	inner *raw.ASPasskeyAssertionCredential
@@ -31,7 +33,7 @@ func PasskeyAssertionCredentialFromID(id objc.ID) *PasskeyAssertionCredential {
 	return &PasskeyAssertionCredential{inner: raw.ASPasskeyAssertionCredentialFromID(id)}
 }
 
-// @abstract Initializes an ASPasskeyCredential object. @param userHandle The identifier for the account the passkey is associated with. @param relyingParty the relying party. @param signature the signature for the assertion challenge.
+// Initializes a passkey assertion credential object.
 //
 // NewPasskeyAssertionCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID creates a new [PasskeyAssertionCredential].
 func NewPasskeyAssertionCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID(userHandle *foundation.NSData, relyingParty string, signature *foundation.NSData, clientDataHash *foundation.NSData, authenticatorData *foundation.NSData, credentialID *foundation.NSData) *PasskeyAssertionCredential {
@@ -40,7 +42,7 @@ func NewPasskeyAssertionCredentialWithUserHandleRelyingPartySignatureClientDataH
 	return &PasskeyAssertionCredential{inner: raw.ASPasskeyAssertionCredentialFromID(_id)}
 }
 
-// @abstract Initializes an ASPasskeyCredential object. @param userHandle The identifier for the account the passkey is associated with. @param relyingParty The relying party. @param signature The signature for the assertion challenge. @param extensionOutput The outputs of WebAuthn extensions processed by the credential provider.
+// Initializes a passkey assertion credential object, optionally specifying an extension output.
 //
 // NewPasskeyAssertionCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialIDExtensionOutput creates a new [PasskeyAssertionCredential].
 func NewPasskeyAssertionCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialIDExtensionOutput(userHandle *foundation.NSData, relyingParty string, signature *foundation.NSData, clientDataHash *foundation.NSData, authenticatorData *foundation.NSData, credentialID *foundation.NSData, extensionOutput *raw.ASPasskeyAssertionCredentialExtensionOutput) *PasskeyAssertionCredential {
@@ -49,7 +51,7 @@ func NewPasskeyAssertionCredentialWithUserHandleRelyingPartySignatureClientDataH
 	return &PasskeyAssertionCredential{inner: raw.ASPasskeyAssertionCredentialFromID(_id)}
 }
 
-// @abstract The outputs of WebAuthn extensions processed by the credential provider.
+// An output from WebAuthn extensions.
 //
 // WithExtensionOutput sets the extensionOutput property and returns the receiver for chaining.
 func (x *PasskeyAssertionCredential) WithExtensionOutput(extensionOutput *PasskeyAssertionCredentialExtensionOutput) *PasskeyAssertionCredential {

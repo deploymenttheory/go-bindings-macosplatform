@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// The object for registering a new platform public key credential.
+//
 // AuthorizationPlatformPublicKeyCredentialRegistrationRequest wraps [raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest] with a fluent Go API.
 type AuthorizationPlatformPublicKeyCredentialRegistrationRequest struct {
 	inner *raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest
@@ -39,6 +41,8 @@ func NewAuthorizationPlatformPublicKeyCredentialRegistrationRequest() *Authoriza
 	return &AuthorizationPlatformPublicKeyCredentialRegistrationRequest{inner: raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestFromID(_id)}
 }
 
+// The request’s binary large object value.
+//
 // WithLargeBlob sets the largeBlob property and returns the receiver for chaining.
 func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) WithLargeBlob(largeBlob *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
 	x.inner.SetLargeBlob(largeBlob.Unwrap())

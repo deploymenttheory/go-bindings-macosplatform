@@ -10,6 +10,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A controller that responds to user-initiated Picture in Picture playback of video in a floating, resizable window.
+//
 // PictureInPictureController wraps [raw.AVPictureInPictureController] with a fluent Go API.
 type PictureInPictureController struct {
 	inner *raw.AVPictureInPictureController
@@ -30,7 +32,7 @@ func PictureInPictureControllerFromID(id objc.ID) *PictureInPictureController {
 	return &PictureInPictureController{inner: raw.AVPictureInPictureControllerFromID(id)}
 }
 
-// @method     initWithContentSource: @param      contentSource The content source to be shown in Picture in Picture. @abstract   Use this initializer for content that may be a sample buffer display layer or a player layer.
+// Creates a Picture in Picture controller with a content source.
 //
 // NewPictureInPictureControllerWithContentSource creates a new [PictureInPictureController].
 func NewPictureInPictureControllerWithContentSource(contentSource *raw.AVPictureInPictureControllerContentSource) *PictureInPictureController {
@@ -39,7 +41,7 @@ func NewPictureInPictureControllerWithContentSource(contentSource *raw.AVPicture
 	return &PictureInPictureController{inner: raw.AVPictureInPictureControllerFromID(_id)}
 }
 
-// @method		initWithPlayerLayer: @param		playerLayer The player layer from which to source the media content for the Picture in Picture controller. @abstract	Initialize the picture in picture controller with a player layer.
+// Creates a Picture in Picture controller with a player layer.
 //
 // NewPictureInPictureControllerWithPlayerLayer creates a new [PictureInPictureController].
 func NewPictureInPictureControllerWithPlayerLayer(playerLayer *avfoundation.AVPlayerLayer) *PictureInPictureController {
@@ -48,7 +50,7 @@ func NewPictureInPictureControllerWithPlayerLayer(playerLayer *avfoundation.AVPl
 	return &PictureInPictureController{inner: raw.AVPictureInPictureControllerFromID(_id)}
 }
 
-// @property   contentSource @abstract   The receiver's content source. Can be changed while Picture in Picture is active, but the new content source must be ready for display (in the case of AVPlayerLayer, that means AVPlayerLayer.isReadyForDisplay must return YES), otherwise Picture in Picture will stop.
+// The source of the controller’s content.
 //
 // WithContentSource sets the contentSource property and returns the receiver for chaining.
 func (x *PictureInPictureController) WithContentSource(contentSource *PictureInPictureControllerContentSource) *PictureInPictureController {
@@ -56,7 +58,7 @@ func (x *PictureInPictureController) WithContentSource(contentSource *PictureInP
 	return x
 }
 
-// @property	delegate @abstract	The receiver's delegate.
+// A delegate object for a Picture in Picture controller.
 //
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *PictureInPictureController) WithDelegate(delegate raw.AVPictureInPictureControllerDelegate) *PictureInPictureController {
@@ -64,7 +66,7 @@ func (x *PictureInPictureController) WithDelegate(delegate raw.AVPictureInPictur
 	return x
 }
 
-// @property	requiresLinearPlayback @abstract	Disables certain user operations (fast forward, forward skip, and scrubbing). @discussion	This can be used to temporarily enforce playback of mandatory content (such as legalese or advertisements).
+// A Boolean value that determines whether the controller allows the user to skip media content.
 //
 // WithRequiresLinearPlayback sets the requiresLinearPlayback property and returns the receiver for chaining.
 func (x *PictureInPictureController) WithRequiresLinearPlayback(requiresLinearPlayback bool) *PictureInPictureController {
@@ -72,14 +74,14 @@ func (x *PictureInPictureController) WithRequiresLinearPlayback(requiresLinearPl
 	return x
 }
 
-// @method		startPictureInPicture @abstract	Start Picture in Picture for the provided AVPlayerLayer if possible. @discussion	Receiver will call -pictureInPictureControllerWillStartPictureInPicture: if Picture in Picture is currently possible and -pictureInPictureControllerDidStartPictureInPicture: after a successful start. If starting Picture in Picture fails, -pictureInPictureControllerFailedToStartPictureInPicture:withError: is called on the delegate instead. Client can stop Picture in Picture by calling -stopPictureInPicture. In addition the user can stop Picture in Picture through user interaction. It is also possible that Picture in Picture is stopped by the Picture in Picture controller at any time. In all these cases receiver calls -pictureInPictureControllerWillStopPictureInPicture: on the delegate and -pictureInPictureControllerDidStopPictureInPicture:after the stop animation completed.
+// Starts Picture in Picture, if possible.
 //
 // StartPictureInPicture calls the underlying StartPictureInPicture.
 func (x *PictureInPictureController) StartPictureInPicture() {
 	x.inner.StartPictureInPicture()
 }
 
-// @method		stopPictureInPicture @abstract	Stop the local Picture in Picture if currently active. On tvOS, this can also stop Picture in Picture sessions for other applications. @discussion	See startPictureInPicture for details.
+// Stops Picture in Picture, if active.
 //
 // StopPictureInPicture calls the underlying StopPictureInPicture.
 func (x *PictureInPictureController) StopPictureInPicture() {
@@ -154,7 +156,7 @@ func (x *PictureInPictureController) SetRequiresLinearPlayback(requiresLinearPla
 	x.inner.SetRequiresLinearPlayback(requiresLinearPlayback)
 }
 
-// @method		invalidatePlaybackState @abstract	Informs Picture in Picture controller that it should request an updated playback state from its sampleBufferPlaybackDelegate. @discussion	This should always be called whenever playback is paused or unpaused, or the underlying content duration changes.
+// Invalidates the controller’s current playback state and fetches the updated state from the sample buffer playback delegate object.
 //
 // InvalidatePlaybackState calls the underlying InvalidatePlaybackState.
 func (x *PictureInPictureController) InvalidatePlaybackState() {

@@ -9,6 +9,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A collection of closures an update task uses to notify your app of its progress.
+//
 // UpdateProgressHandlers wraps [raw.MLUpdateProgressHandlers] with a fluent Go API.
 type UpdateProgressHandlers struct {
 	inner *raw.MLUpdateProgressHandlers
@@ -29,6 +31,8 @@ func UpdateProgressHandlersFromID(id objc.ID) *UpdateProgressHandlers {
 	return &UpdateProgressHandlers{inner: raw.MLUpdateProgressHandlersFromID(id)}
 }
 
+// Creates the collection of closures an update task uses to notify your app of its progress.
+//
 // NewUpdateProgressHandlersForEventsProgressHandlerCompletionHandler creates a new [UpdateProgressHandlers].
 func NewUpdateProgressHandlersForEventsProgressHandlerCompletionHandler(interestedEvents MLUpdateProgressEvent, progressHandler func(*raw.MLUpdateContext), completionHandler func(*raw.MLUpdateContext)) *UpdateProgressHandlers {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MLUpdateProgressHandlers")), objc.RegisterName("alloc"))

@@ -12,6 +12,8 @@ import (
 	"unsafe"
 )
 
+// The base class for objects that are part of a 3D asset, including meshes, cameras, and lights.
+//
 // Object wraps [raw.MDLObject] with a fluent Go API.
 type Object struct {
 	inner *raw.MDLObject
@@ -38,7 +40,7 @@ func NewObject() *Object {
 	return &Object{inner: raw.MDLObjectFromID(_id)}
 }
 
-// @property parent @abstract Parent object. Nil if no parent. @discussion Set to nil when you remove this from an object container inside the parent object.
+// The parent object that contains this object.
 //
 // WithParent sets the parent property and returns the receiver for chaining.
 func (x *Object) WithParent(parent ObjectProvider) *Object {
@@ -46,7 +48,7 @@ func (x *Object) WithParent(parent ObjectProvider) *Object {
 	return x
 }
 
-// @property instance @abstract Instance object @discussion nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
+// The primary object, if applicable, of which this object is an instance.
 //
 // WithInstance sets the instance property and returns the receiver for chaining.
 func (x *Object) WithInstance(instance ObjectProvider) *Object {
@@ -54,7 +56,7 @@ func (x *Object) WithInstance(instance ObjectProvider) *Object {
 	return x
 }
 
-// @property transform @abstract Short hand property for the MDLTransformComponent. @discussion The default value is nil @see MDLTransformComponent
+// A component that manages this object’s spatial transform and its changes over time.
 //
 // WithTransform sets the transform property and returns the receiver for chaining.
 func (x *Object) WithTransform(transform raw.MDLTransformComponent) *Object {
@@ -62,7 +64,7 @@ func (x *Object) WithTransform(transform raw.MDLTransformComponent) *Object {
 	return x
 }
 
-// @property children @abstract Short hand property for the MDLObjectContainerComponent. @discussion The default value is an empty MDLObjectContainer @see MDLObjectContainerComponent
+// A component that manages this object’s collection of children.
 //
 // WithChildren sets the children property and returns the receiver for chaining.
 func (x *Object) WithChildren(children raw.MDLObjectContainerComponent) *Object {
@@ -70,20 +72,22 @@ func (x *Object) WithChildren(children raw.MDLObjectContainerComponent) *Object 
 	return x
 }
 
+// A Boolean value indicating whether this object should be used in rendering.
+//
 // WithHidden sets the hidden property and returns the receiver for chaining.
 func (x *Object) WithHidden(hidden bool) *Object {
 	x.inner.SetHidden(hidden)
 	return x
 }
 
-// @method setComponent:forProtocol: @abstract Extensible component support that allows user of ModelIO to customize MDLObjects to fit their format and workflow.
+// Associates a component with the object for the specified protocol.
 //
 // SetComponentForProtocol calls the underlying SetComponentForProtocol.
 func (x *Object) SetComponentForProtocol(component raw.MDLComponent, protocol unsafe.Pointer) {
 	x.inner.SetComponentForProtocol(component, protocol)
 }
 
-// @method componentConformingToProtocol: @abstract Extensible component support that allows user of ModelIO to customize MDLObjects to fit their format and workflow.
+// Returns the object’s component for the specified protocol.
 //
 // ComponentConformingToProtocol calls the underlying ComponentConformingToProtocol.
 func (x *Object) ComponentConformingToProtocol(protocol unsafe.Pointer) raw.MDLComponent {
@@ -104,7 +108,7 @@ func (x *Object) SetObjectForKeyedSubscript(obj raw.MDLComponent, key unsafe.Poi
 	x.inner.SetObjectForKeyedSubscript(obj, key)
 }
 
-// @abstract Return the object at the specified path, or nil if none exists there
+// Returns the child object at the specified path.
 //
 // ObjectAtPath calls the underlying ObjectAtPath.
 func (x *Object) ObjectAtPath(path string) *Object {
@@ -115,19 +119,21 @@ func (x *Object) ObjectAtPath(path string) *Object {
 	return &Object{inner: _r}
 }
 
+// Executes the specified block using each object in this object’s child hierarchy.
+//
 // EnumerateChildObjectsOfClassRootUsingBlockStopPointer calls the underlying EnumerateChildObjectsOfClassRootUsingBlockStopPointer.
 func (x *Object) EnumerateChildObjectsOfClassRootUsingBlockStopPointer(objectClass objc.Class, root *raw.MDLObject, block func(*raw.MDLObject, *bool), stopPointer *bool) {
 	x.inner.EnumerateChildObjectsOfClassRootUsingBlockStopPointer(objectClass, root, block, stopPointer)
 }
 
-// @method addChild: @abstract Short hand for adding a child to the current container component and setting the parent to this object. @discussion  It will create a default container if none exists. If children are explicitly disallowed for an object, then add a container component that throws on addition. @see MDLObjectContainer
+// Adds a child object to this object, creating a container for the object’s children if necessary.
 //
 // AddChild calls the underlying AddChild.
 func (x *Object) AddChild(child *raw.MDLObject) {
 	x.inner.AddChild(child)
 }
 
-// @method boundingBoxAtTime: @abstract Bounds ob object at the specified time
+// Returns the minimum region entirely enclosing the object’s contents at the specified time sample.
 //
 // BoundingBoxAtTime calls the underlying BoundingBoxAtTime.
 func (x *Object) BoundingBoxAtTime(time_ float64) raw.MDLAxisAlignedBoundingBox {

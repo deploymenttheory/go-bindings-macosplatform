@@ -11,6 +11,8 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
+// A credential that results from a successful Apple ID authentication.
+//
 // AuthorizationAppleIDCredential wraps [raw.ASAuthorizationAppleIDCredential] with a fluent Go API.
 type AuthorizationAppleIDCredential struct {
 	inner *raw.ASAuthorizationAppleIDCredential
