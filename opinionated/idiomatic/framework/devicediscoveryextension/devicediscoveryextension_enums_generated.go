@@ -152,6 +152,45 @@ func (e DDDeviceWiFiAwareServiceRole) String() string {
 	}
 }
 
+type DDErrorCode int64
+
+const (
+	DDErrorCodeSuccess            DDErrorCode = 0
+	DDErrorCodeUnknown            DDErrorCode = 350000
+	DDErrorCodeBadParameter       DDErrorCode = 350001
+	DDErrorCodeUnsupported        DDErrorCode = 350002
+	DDErrorCodeTimeout            DDErrorCode = 350003
+	DDErrorCodeInternal           DDErrorCode = 350004
+	DDErrorCodeMissingEntitlement DDErrorCode = 350005
+	DDErrorCodePermission         DDErrorCode = 350006
+	DDErrorCodeNext               DDErrorCode = 350007
+)
+
+func (e DDErrorCode) String() string {
+	switch e {
+	case DDErrorCodeSuccess:
+		return "DDErrorCodeSuccess"
+	case DDErrorCodeUnknown:
+		return "DDErrorCodeUnknown"
+	case DDErrorCodeBadParameter:
+		return "DDErrorCodeBadParameter"
+	case DDErrorCodeUnsupported:
+		return "DDErrorCodeUnsupported"
+	case DDErrorCodeTimeout:
+		return "DDErrorCodeTimeout"
+	case DDErrorCodeInternal:
+		return "DDErrorCodeInternal"
+	case DDErrorCodeMissingEntitlement:
+		return "DDErrorCodeMissingEntitlement"
+	case DDErrorCodePermission:
+		return "DDErrorCodePermission"
+	case DDErrorCodeNext:
+		return "DDErrorCodeNext"
+	default:
+		return fmt.Sprintf("DDErrorCode(%d)", int64(e))
+	}
+}
+
 type DDEventType int64
 
 const (

@@ -276,6 +276,67 @@ func (e HKElectrocardiogramSymptomsStatus) String() string {
 	}
 }
 
+type HKErrorCode int64
+
+const (
+	HKUnknownError                            HKErrorCode = 0
+	HKNoError                                 HKErrorCode = 0
+	HKErrorHealthDataUnavailable              HKErrorCode = 1
+	HKErrorHealthDataRestricted               HKErrorCode = 2
+	HKErrorInvalidArgument                    HKErrorCode = 3
+	HKErrorAuthorizationDenied                HKErrorCode = 4
+	HKErrorAuthorizationNotDetermined         HKErrorCode = 5
+	HKErrorDatabaseInaccessible               HKErrorCode = 6
+	HKErrorUserCanceled                       HKErrorCode = 7
+	HKErrorAnotherWorkoutSessionStarted       HKErrorCode = 8
+	HKErrorUserExitedWorkoutSession           HKErrorCode = 9
+	HKErrorRequiredAuthorizationDenied        HKErrorCode = 10
+	HKErrorNoData                             HKErrorCode = 11
+	HKErrorWorkoutActivityNotAllowed          HKErrorCode = 12
+	HKErrorDataSizeExceeded                   HKErrorCode = 13
+	HKErrorBackgroundWorkoutSessionNotAllowed HKErrorCode = 14
+	HKErrorNotPermissibleForGuestUserMode     HKErrorCode = 15
+)
+
+func (e HKErrorCode) String() string {
+	switch e {
+	case HKUnknownError:
+		return "HKUnknownError"
+	case HKErrorHealthDataUnavailable:
+		return "HKErrorHealthDataUnavailable"
+	case HKErrorHealthDataRestricted:
+		return "HKErrorHealthDataRestricted"
+	case HKErrorInvalidArgument:
+		return "HKErrorInvalidArgument"
+	case HKErrorAuthorizationDenied:
+		return "HKErrorAuthorizationDenied"
+	case HKErrorAuthorizationNotDetermined:
+		return "HKErrorAuthorizationNotDetermined"
+	case HKErrorDatabaseInaccessible:
+		return "HKErrorDatabaseInaccessible"
+	case HKErrorUserCanceled:
+		return "HKErrorUserCanceled"
+	case HKErrorAnotherWorkoutSessionStarted:
+		return "HKErrorAnotherWorkoutSessionStarted"
+	case HKErrorUserExitedWorkoutSession:
+		return "HKErrorUserExitedWorkoutSession"
+	case HKErrorRequiredAuthorizationDenied:
+		return "HKErrorRequiredAuthorizationDenied"
+	case HKErrorNoData:
+		return "HKErrorNoData"
+	case HKErrorWorkoutActivityNotAllowed:
+		return "HKErrorWorkoutActivityNotAllowed"
+	case HKErrorDataSizeExceeded:
+		return "HKErrorDataSizeExceeded"
+	case HKErrorBackgroundWorkoutSessionNotAllowed:
+		return "HKErrorBackgroundWorkoutSessionNotAllowed"
+	case HKErrorNotPermissibleForGuestUserMode:
+		return "HKErrorNotPermissibleForGuestUserMode"
+	default:
+		return fmt.Sprintf("HKErrorCode(%d)", int64(e))
+	}
+}
+
 type HKFitzpatrickSkinType int64
 
 const (

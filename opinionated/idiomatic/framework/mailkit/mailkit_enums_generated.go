@@ -8,6 +8,27 @@ import (
 	"fmt"
 )
 
+type MEComposeSessionErrorCode int64
+
+const (
+	MEComposeSessionErrorCodeInvalidRecipients MEComposeSessionErrorCode = 0
+	MEComposeSessionErrorCodeInvalidHeaders    MEComposeSessionErrorCode = 1
+	MEComposeSessionErrorCodeInvalidBody       MEComposeSessionErrorCode = 2
+)
+
+func (e MEComposeSessionErrorCode) String() string {
+	switch e {
+	case MEComposeSessionErrorCodeInvalidRecipients:
+		return "MEComposeSessionErrorCodeInvalidRecipients"
+	case MEComposeSessionErrorCodeInvalidHeaders:
+		return "MEComposeSessionErrorCodeInvalidHeaders"
+	case MEComposeSessionErrorCodeInvalidBody:
+		return "MEComposeSessionErrorCodeInvalidBody"
+	default:
+		return fmt.Sprintf("MEComposeSessionErrorCode(%d)", int64(e))
+	}
+}
+
 type MEComposeUserAction int64
 
 const (
@@ -129,6 +150,24 @@ func (e MEMessageEncryptionState) String() string {
 		return "MEMessageEncryptionStateEncrypted"
 	default:
 		return fmt.Sprintf("MEMessageEncryptionState(%d)", int64(e))
+	}
+}
+
+type MEMessageSecurityErrorCode int64
+
+const (
+	MEMessageSecurityEncodingError MEMessageSecurityErrorCode = 0
+	MEMessageSecurityDecodingError MEMessageSecurityErrorCode = 1
+)
+
+func (e MEMessageSecurityErrorCode) String() string {
+	switch e {
+	case MEMessageSecurityEncodingError:
+		return "MEMessageSecurityEncodingError"
+	case MEMessageSecurityDecodingError:
+		return "MEMessageSecurityDecodingError"
+	default:
+		return fmt.Sprintf("MEMessageSecurityErrorCode(%d)", int64(e))
 	}
 }
 

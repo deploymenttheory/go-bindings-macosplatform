@@ -9,6 +9,68 @@ import (
 	"strings"
 )
 
+// Error codes that describe indexing-specific errors.
+type CSIndexErrorCode int64
+
+const (
+	CSIndexErrorCodeUnknownError            CSIndexErrorCode = -1
+	CSIndexErrorCodeIndexUnavailableError   CSIndexErrorCode = -1000
+	CSIndexErrorCodeInvalidItemError        CSIndexErrorCode = -1001
+	CSIndexErrorCodeInvalidClientStateError CSIndexErrorCode = -1002
+	CSIndexErrorCodeRemoteConnectionError   CSIndexErrorCode = -1003
+	CSIndexErrorCodeQuotaExceeded           CSIndexErrorCode = -1004
+	CSIndexErrorCodeIndexingUnsupported     CSIndexErrorCode = -1005
+	CSIndexErrorCodeMismatchedClientState   CSIndexErrorCode = -1006
+)
+
+func (e CSIndexErrorCode) String() string {
+	switch e {
+	case CSIndexErrorCodeUnknownError:
+		return "CSIndexErrorCodeUnknownError"
+	case CSIndexErrorCodeIndexUnavailableError:
+		return "CSIndexErrorCodeIndexUnavailableError"
+	case CSIndexErrorCodeInvalidItemError:
+		return "CSIndexErrorCodeInvalidItemError"
+	case CSIndexErrorCodeInvalidClientStateError:
+		return "CSIndexErrorCodeInvalidClientStateError"
+	case CSIndexErrorCodeRemoteConnectionError:
+		return "CSIndexErrorCodeRemoteConnectionError"
+	case CSIndexErrorCodeQuotaExceeded:
+		return "CSIndexErrorCodeQuotaExceeded"
+	case CSIndexErrorCodeIndexingUnsupported:
+		return "CSIndexErrorCodeIndexingUnsupported"
+	case CSIndexErrorCodeMismatchedClientState:
+		return "CSIndexErrorCodeMismatchedClientState"
+	default:
+		return fmt.Sprintf("CSIndexErrorCode(%d)", int64(e))
+	}
+}
+
+// Error codes that describe reasons a query might fail.
+type CSSearchQueryErrorCode int64
+
+const (
+	CSSearchQueryErrorCodeUnknown          CSSearchQueryErrorCode = -2000
+	CSSearchQueryErrorCodeIndexUnreachable CSSearchQueryErrorCode = -2001
+	CSSearchQueryErrorCodeInvalidQuery     CSSearchQueryErrorCode = -2002
+	CSSearchQueryErrorCodeCancelled        CSSearchQueryErrorCode = -2003
+)
+
+func (e CSSearchQueryErrorCode) String() string {
+	switch e {
+	case CSSearchQueryErrorCodeUnknown:
+		return "CSSearchQueryErrorCodeUnknown"
+	case CSSearchQueryErrorCodeIndexUnreachable:
+		return "CSSearchQueryErrorCodeIndexUnreachable"
+	case CSSearchQueryErrorCodeInvalidQuery:
+		return "CSSearchQueryErrorCodeInvalidQuery"
+	case CSSearchQueryErrorCodeCancelled:
+		return "CSSearchQueryErrorCodeCancelled"
+	default:
+		return fmt.Sprintf("CSSearchQueryErrorCode(%d)", int64(e))
+	}
+}
+
 // The query source options to allow or deny Mail messages in the search.
 // Bitmask — values may be combined with |.
 type CSSearchQuerySourceOptions uint64

@@ -76,6 +76,145 @@ func (e GKConnectionState) String() string {
 	}
 }
 
+type GKErrorCode int64
+
+const (
+	GKErrorUnknown                          GKErrorCode = 1
+	GKErrorCancelled                        GKErrorCode = 2
+	GKErrorCommunicationsFailure            GKErrorCode = 3
+	GKErrorUserDenied                       GKErrorCode = 4
+	GKErrorInvalidCredentials               GKErrorCode = 5
+	GKErrorNotAuthenticated                 GKErrorCode = 6
+	GKErrorAuthenticationInProgress         GKErrorCode = 7
+	GKErrorInvalidPlayer                    GKErrorCode = 8
+	GKErrorScoreNotSet                      GKErrorCode = 9
+	GKErrorParentalControlsBlocked          GKErrorCode = 10
+	GKErrorPlayerStatusExceedsMaximumLength GKErrorCode = 11
+	GKErrorPlayerStatusInvalid              GKErrorCode = 12
+	GKErrorMatchRequestInvalid              GKErrorCode = 13
+	GKErrorUnderage                         GKErrorCode = 14
+	GKErrorGameUnrecognized                 GKErrorCode = 15
+	GKErrorNotSupported                     GKErrorCode = 16
+	GKErrorInvalidParameter                 GKErrorCode = 17
+	GKErrorUnexpectedConnection             GKErrorCode = 18
+	// Deprecated: since macOS 26.0.
+	GKErrorChallengeInvalid             GKErrorCode = 19
+	GKErrorTurnBasedMatchDataTooLarge   GKErrorCode = 20
+	GKErrorTurnBasedTooManySessions     GKErrorCode = 21
+	GKErrorTurnBasedInvalidParticipant  GKErrorCode = 22
+	GKErrorTurnBasedInvalidTurn         GKErrorCode = 23
+	GKErrorTurnBasedInvalidState        GKErrorCode = 24
+	GKErrorInvitationsDisabled          GKErrorCode = 25
+	GKErrorPlayerPhotoFailure           GKErrorCode = 26
+	GKErrorUbiquityContainerUnavailable GKErrorCode = 27
+	GKErrorMatchNotConnected            GKErrorCode = 28
+	GKErrorGameSessionRequestInvalid    GKErrorCode = 29
+	GKErrorRestrictedToAutomatch        GKErrorCode = 30
+	GKErrorAPINotAvailable              GKErrorCode = 31
+	GKErrorNotAuthorized                GKErrorCode = 32
+	GKErrorConnectionTimeout            GKErrorCode = 33
+	GKErrorAPIObsolete                  GKErrorCode = 34
+	GKErrorICloudUnavailable            GKErrorCode = 35
+	GKErrorLockdownMode                 GKErrorCode = 36
+	GKErrorAppUnlisted                  GKErrorCode = 37
+	GKErrorDebugMode                    GKErrorCode = 38
+	GKErrorFriendListDescriptionMissing GKErrorCode = 100
+	GKErrorFriendListRestricted         GKErrorCode = 101
+	GKErrorFriendListDenied             GKErrorCode = 102
+	GKErrorFriendRequestNotAvailable    GKErrorCode = 103
+)
+
+func (e GKErrorCode) String() string {
+	switch e {
+	case GKErrorUnknown:
+		return "GKErrorUnknown"
+	case GKErrorCancelled:
+		return "GKErrorCancelled"
+	case GKErrorCommunicationsFailure:
+		return "GKErrorCommunicationsFailure"
+	case GKErrorUserDenied:
+		return "GKErrorUserDenied"
+	case GKErrorInvalidCredentials:
+		return "GKErrorInvalidCredentials"
+	case GKErrorNotAuthenticated:
+		return "GKErrorNotAuthenticated"
+	case GKErrorAuthenticationInProgress:
+		return "GKErrorAuthenticationInProgress"
+	case GKErrorInvalidPlayer:
+		return "GKErrorInvalidPlayer"
+	case GKErrorScoreNotSet:
+		return "GKErrorScoreNotSet"
+	case GKErrorParentalControlsBlocked:
+		return "GKErrorParentalControlsBlocked"
+	case GKErrorPlayerStatusExceedsMaximumLength:
+		return "GKErrorPlayerStatusExceedsMaximumLength"
+	case GKErrorPlayerStatusInvalid:
+		return "GKErrorPlayerStatusInvalid"
+	case GKErrorMatchRequestInvalid:
+		return "GKErrorMatchRequestInvalid"
+	case GKErrorUnderage:
+		return "GKErrorUnderage"
+	case GKErrorGameUnrecognized:
+		return "GKErrorGameUnrecognized"
+	case GKErrorNotSupported:
+		return "GKErrorNotSupported"
+	case GKErrorInvalidParameter:
+		return "GKErrorInvalidParameter"
+	case GKErrorUnexpectedConnection:
+		return "GKErrorUnexpectedConnection"
+	case GKErrorChallengeInvalid:
+		return "GKErrorChallengeInvalid"
+	case GKErrorTurnBasedMatchDataTooLarge:
+		return "GKErrorTurnBasedMatchDataTooLarge"
+	case GKErrorTurnBasedTooManySessions:
+		return "GKErrorTurnBasedTooManySessions"
+	case GKErrorTurnBasedInvalidParticipant:
+		return "GKErrorTurnBasedInvalidParticipant"
+	case GKErrorTurnBasedInvalidTurn:
+		return "GKErrorTurnBasedInvalidTurn"
+	case GKErrorTurnBasedInvalidState:
+		return "GKErrorTurnBasedInvalidState"
+	case GKErrorInvitationsDisabled:
+		return "GKErrorInvitationsDisabled"
+	case GKErrorPlayerPhotoFailure:
+		return "GKErrorPlayerPhotoFailure"
+	case GKErrorUbiquityContainerUnavailable:
+		return "GKErrorUbiquityContainerUnavailable"
+	case GKErrorMatchNotConnected:
+		return "GKErrorMatchNotConnected"
+	case GKErrorGameSessionRequestInvalid:
+		return "GKErrorGameSessionRequestInvalid"
+	case GKErrorRestrictedToAutomatch:
+		return "GKErrorRestrictedToAutomatch"
+	case GKErrorAPINotAvailable:
+		return "GKErrorAPINotAvailable"
+	case GKErrorNotAuthorized:
+		return "GKErrorNotAuthorized"
+	case GKErrorConnectionTimeout:
+		return "GKErrorConnectionTimeout"
+	case GKErrorAPIObsolete:
+		return "GKErrorAPIObsolete"
+	case GKErrorICloudUnavailable:
+		return "GKErrorICloudUnavailable"
+	case GKErrorLockdownMode:
+		return "GKErrorLockdownMode"
+	case GKErrorAppUnlisted:
+		return "GKErrorAppUnlisted"
+	case GKErrorDebugMode:
+		return "GKErrorDebugMode"
+	case GKErrorFriendListDescriptionMissing:
+		return "GKErrorFriendListDescriptionMissing"
+	case GKErrorFriendListRestricted:
+		return "GKErrorFriendListRestricted"
+	case GKErrorFriendListDenied:
+		return "GKErrorFriendListDenied"
+	case GKErrorFriendRequestNotAvailable:
+		return "GKErrorFriendRequestNotAvailable"
+	default:
+		return fmt.Sprintf("GKErrorCode(%d)", int64(e))
+	}
+}
+
 type GKFriendsAuthorizationStatus int64
 
 const (
@@ -181,6 +320,69 @@ func (e GKGameCenterViewControllerState) String() string {
 		return "GKGameCenterViewControllerStateLocalPlayerFriendsList"
 	default:
 		return fmt.Sprintf("GKGameCenterViewControllerState(%d)", int64(e))
+	}
+}
+
+// Deprecated: GKGameSession is deprecated, use real-time and turn-based matchmaking APIs instead.
+type GKGameSessionErrorCode int64
+
+const (
+	// Deprecated: GKGameSession is deprecated, use real-time and turn-based matchmaking APIs instead.
+	GKGameSessionErrorUnknown GKGameSessionErrorCode = 1
+	// Deprecated: GKGameSession is deprecated, use real-time and turn-based matchmaking APIs instead.
+	GKGameSessionErrorNotAuthenticated              GKGameSessionErrorCode = 2
+	GKGameSessionErrorSessionConflict               GKGameSessionErrorCode = 3
+	GKGameSessionErrorSessionNotShared              GKGameSessionErrorCode = 4
+	GKGameSessionErrorConnectionCancelledByUser     GKGameSessionErrorCode = 5
+	GKGameSessionErrorConnectionFailed              GKGameSessionErrorCode = 6
+	GKGameSessionErrorSessionHasMaxConnectedPlayers GKGameSessionErrorCode = 7
+	GKGameSessionErrorSendDataNotConnected          GKGameSessionErrorCode = 8
+	GKGameSessionErrorSendDataNoRecipients          GKGameSessionErrorCode = 9
+	GKGameSessionErrorSendDataNotReachable          GKGameSessionErrorCode = 10
+	GKGameSessionErrorSendRateLimitReached          GKGameSessionErrorCode = 11
+	GKGameSessionErrorBadContainer                  GKGameSessionErrorCode = 12
+	GKGameSessionErrorCloudQuotaExceeded            GKGameSessionErrorCode = 13
+	GKGameSessionErrorNetworkFailure                GKGameSessionErrorCode = 14
+	GKGameSessionErrorCloudDriveDisabled            GKGameSessionErrorCode = 15
+	GKGameSessionErrorInvalidSession                GKGameSessionErrorCode = 16
+)
+
+func (e GKGameSessionErrorCode) String() string {
+	switch e {
+	case GKGameSessionErrorUnknown:
+		return "GKGameSessionErrorUnknown"
+	case GKGameSessionErrorNotAuthenticated:
+		return "GKGameSessionErrorNotAuthenticated"
+	case GKGameSessionErrorSessionConflict:
+		return "GKGameSessionErrorSessionConflict"
+	case GKGameSessionErrorSessionNotShared:
+		return "GKGameSessionErrorSessionNotShared"
+	case GKGameSessionErrorConnectionCancelledByUser:
+		return "GKGameSessionErrorConnectionCancelledByUser"
+	case GKGameSessionErrorConnectionFailed:
+		return "GKGameSessionErrorConnectionFailed"
+	case GKGameSessionErrorSessionHasMaxConnectedPlayers:
+		return "GKGameSessionErrorSessionHasMaxConnectedPlayers"
+	case GKGameSessionErrorSendDataNotConnected:
+		return "GKGameSessionErrorSendDataNotConnected"
+	case GKGameSessionErrorSendDataNoRecipients:
+		return "GKGameSessionErrorSendDataNoRecipients"
+	case GKGameSessionErrorSendDataNotReachable:
+		return "GKGameSessionErrorSendDataNotReachable"
+	case GKGameSessionErrorSendRateLimitReached:
+		return "GKGameSessionErrorSendRateLimitReached"
+	case GKGameSessionErrorBadContainer:
+		return "GKGameSessionErrorBadContainer"
+	case GKGameSessionErrorCloudQuotaExceeded:
+		return "GKGameSessionErrorCloudQuotaExceeded"
+	case GKGameSessionErrorNetworkFailure:
+		return "GKGameSessionErrorNetworkFailure"
+	case GKGameSessionErrorCloudDriveDisabled:
+		return "GKGameSessionErrorCloudDriveDisabled"
+	case GKGameSessionErrorInvalidSession:
+		return "GKGameSessionErrorInvalidSession"
+	default:
+		return fmt.Sprintf("GKGameSessionErrorCode(%d)", int64(e))
 	}
 }
 

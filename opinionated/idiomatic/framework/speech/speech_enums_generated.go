@@ -8,6 +8,43 @@ import (
 	"fmt"
 )
 
+// Error codes that can be thrown under the Speech framework’s error domain.
+type SFSpeechErrorCode int64
+
+const (
+	// There was an internal error.
+	SFSpeechErrorCodeInternalServiceError SFSpeechErrorCode = 1
+	// The audio file could not be read.
+	SFSpeechErrorCodeAudioReadFailed SFSpeechErrorCode = 2
+	// The custom language model templates were malformed.
+	SFSpeechErrorCodeUndefinedTemplateClassName SFSpeechErrorCode = 7
+	// The custom language model file was malformed.
+	SFSpeechErrorCodeMalformedSupplementalModel SFSpeechErrorCode = 8
+	// The operation timed out.
+	SFSpeechErrorCodeTimeout SFSpeechErrorCode = 12
+	// A required parameter is missing/nil.
+	SFSpeechErrorCodeMissingParameter SFSpeechErrorCode = 13
+)
+
+func (e SFSpeechErrorCode) String() string {
+	switch e {
+	case SFSpeechErrorCodeInternalServiceError:
+		return "SFSpeechErrorCodeInternalServiceError"
+	case SFSpeechErrorCodeAudioReadFailed:
+		return "SFSpeechErrorCodeAudioReadFailed"
+	case SFSpeechErrorCodeUndefinedTemplateClassName:
+		return "SFSpeechErrorCodeUndefinedTemplateClassName"
+	case SFSpeechErrorCodeMalformedSupplementalModel:
+		return "SFSpeechErrorCodeMalformedSupplementalModel"
+	case SFSpeechErrorCodeTimeout:
+		return "SFSpeechErrorCodeTimeout"
+	case SFSpeechErrorCodeMissingParameter:
+		return "SFSpeechErrorCodeMissingParameter"
+	default:
+		return fmt.Sprintf("SFSpeechErrorCode(%d)", int64(e))
+	}
+}
+
 // The type of task for which you are using speech recognition.
 type SFSpeechRecognitionTaskHint int64
 

@@ -33,6 +33,40 @@ func (e MCEncryptionPreference) String() string {
 	}
 }
 
+// Error codes found in MCErrorDomain error domain NSError objects returned by methods in the Multipeer Connectivity framework.
+type MCErrorCode int64
+
+const (
+	MCErrorUnknown          MCErrorCode = 0
+	MCErrorNotConnected     MCErrorCode = 1
+	MCErrorInvalidParameter MCErrorCode = 2
+	MCErrorUnsupported      MCErrorCode = 3
+	MCErrorTimedOut         MCErrorCode = 4
+	MCErrorCancelled        MCErrorCode = 5
+	MCErrorUnavailable      MCErrorCode = 6
+)
+
+func (e MCErrorCode) String() string {
+	switch e {
+	case MCErrorUnknown:
+		return "MCErrorUnknown"
+	case MCErrorNotConnected:
+		return "MCErrorNotConnected"
+	case MCErrorInvalidParameter:
+		return "MCErrorInvalidParameter"
+	case MCErrorUnsupported:
+		return "MCErrorUnsupported"
+	case MCErrorTimedOut:
+		return "MCErrorTimedOut"
+	case MCErrorCancelled:
+		return "MCErrorCancelled"
+	case MCErrorUnavailable:
+		return "MCErrorUnavailable"
+	default:
+		return fmt.Sprintf("MCErrorCode(%d)", int64(e))
+	}
+}
+
 // Indicates whether delivery of data should be guaranteed.
 type MCSessionSendDataMode int64
 

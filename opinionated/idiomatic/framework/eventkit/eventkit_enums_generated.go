@@ -180,6 +180,132 @@ func (e EKEntityType) String() string {
 	}
 }
 
+type EKErrorCode int64
+
+const (
+	EKErrorEventNotMutable                      EKErrorCode = 0
+	EKErrorNoCalendar                           EKErrorCode = 1
+	EKErrorNoStartDate                          EKErrorCode = 2
+	EKErrorNoEndDate                            EKErrorCode = 3
+	EKErrorDatesInverted                        EKErrorCode = 4
+	EKErrorInternalFailure                      EKErrorCode = 5
+	EKErrorCalendarReadOnly                     EKErrorCode = 6
+	EKErrorDurationGreaterThanRecurrence        EKErrorCode = 7
+	EKErrorAlarmGreaterThanRecurrence           EKErrorCode = 8
+	EKErrorStartDateTooFarInFuture              EKErrorCode = 9
+	EKErrorStartDateCollidesWithOtherOccurrence EKErrorCode = 10
+	EKErrorObjectBelongsToDifferentStore        EKErrorCode = 11
+	EKErrorInvitesCannotBeMoved                 EKErrorCode = 12
+	EKErrorInvalidSpan                          EKErrorCode = 13
+	EKErrorCalendarHasNoSource                  EKErrorCode = 14
+	EKErrorCalendarSourceCannotBeModified       EKErrorCode = 15
+	EKErrorCalendarIsImmutable                  EKErrorCode = 16
+	EKErrorSourceDoesNotAllowCalendarAddDelete  EKErrorCode = 17
+	EKErrorRecurringReminderRequiresDueDate     EKErrorCode = 18
+	EKErrorStructuredLocationsNotSupported      EKErrorCode = 19
+	EKErrorReminderLocationsNotSupported        EKErrorCode = 20
+	EKErrorAlarmProximityNotSupported           EKErrorCode = 21
+	EKErrorCalendarDoesNotAllowEvents           EKErrorCode = 22
+	EKErrorCalendarDoesNotAllowReminders        EKErrorCode = 23
+	EKErrorSourceDoesNotAllowReminders          EKErrorCode = 24
+	EKErrorSourceDoesNotAllowEvents             EKErrorCode = 25
+	EKErrorPriorityIsInvalid                    EKErrorCode = 26
+	EKErrorInvalidEntityType                    EKErrorCode = 27
+	EKErrorProcedureAlarmsNotMutable            EKErrorCode = 28
+	EKErrorEventStoreNotAuthorized              EKErrorCode = 29
+	EKErrorOSNotSupported                       EKErrorCode = 30
+	EKErrorInvalidInviteReplyCalendar           EKErrorCode = 31
+	EKErrorNotificationsCollectionFlagNotSet    EKErrorCode = 32
+	EKErrorSourceMismatch                       EKErrorCode = 33
+	EKErrorNotificationCollectionMismatch       EKErrorCode = 34
+	EKErrorNotificationSavedWithoutCollection   EKErrorCode = 35
+	EKErrorReminderAlarmContainsEmailOrUrl      EKErrorCode = 36
+	EKErrorLast                                 EKErrorCode = 37
+)
+
+func (e EKErrorCode) String() string {
+	switch e {
+	case EKErrorEventNotMutable:
+		return "EKErrorEventNotMutable"
+	case EKErrorNoCalendar:
+		return "EKErrorNoCalendar"
+	case EKErrorNoStartDate:
+		return "EKErrorNoStartDate"
+	case EKErrorNoEndDate:
+		return "EKErrorNoEndDate"
+	case EKErrorDatesInverted:
+		return "EKErrorDatesInverted"
+	case EKErrorInternalFailure:
+		return "EKErrorInternalFailure"
+	case EKErrorCalendarReadOnly:
+		return "EKErrorCalendarReadOnly"
+	case EKErrorDurationGreaterThanRecurrence:
+		return "EKErrorDurationGreaterThanRecurrence"
+	case EKErrorAlarmGreaterThanRecurrence:
+		return "EKErrorAlarmGreaterThanRecurrence"
+	case EKErrorStartDateTooFarInFuture:
+		return "EKErrorStartDateTooFarInFuture"
+	case EKErrorStartDateCollidesWithOtherOccurrence:
+		return "EKErrorStartDateCollidesWithOtherOccurrence"
+	case EKErrorObjectBelongsToDifferentStore:
+		return "EKErrorObjectBelongsToDifferentStore"
+	case EKErrorInvitesCannotBeMoved:
+		return "EKErrorInvitesCannotBeMoved"
+	case EKErrorInvalidSpan:
+		return "EKErrorInvalidSpan"
+	case EKErrorCalendarHasNoSource:
+		return "EKErrorCalendarHasNoSource"
+	case EKErrorCalendarSourceCannotBeModified:
+		return "EKErrorCalendarSourceCannotBeModified"
+	case EKErrorCalendarIsImmutable:
+		return "EKErrorCalendarIsImmutable"
+	case EKErrorSourceDoesNotAllowCalendarAddDelete:
+		return "EKErrorSourceDoesNotAllowCalendarAddDelete"
+	case EKErrorRecurringReminderRequiresDueDate:
+		return "EKErrorRecurringReminderRequiresDueDate"
+	case EKErrorStructuredLocationsNotSupported:
+		return "EKErrorStructuredLocationsNotSupported"
+	case EKErrorReminderLocationsNotSupported:
+		return "EKErrorReminderLocationsNotSupported"
+	case EKErrorAlarmProximityNotSupported:
+		return "EKErrorAlarmProximityNotSupported"
+	case EKErrorCalendarDoesNotAllowEvents:
+		return "EKErrorCalendarDoesNotAllowEvents"
+	case EKErrorCalendarDoesNotAllowReminders:
+		return "EKErrorCalendarDoesNotAllowReminders"
+	case EKErrorSourceDoesNotAllowReminders:
+		return "EKErrorSourceDoesNotAllowReminders"
+	case EKErrorSourceDoesNotAllowEvents:
+		return "EKErrorSourceDoesNotAllowEvents"
+	case EKErrorPriorityIsInvalid:
+		return "EKErrorPriorityIsInvalid"
+	case EKErrorInvalidEntityType:
+		return "EKErrorInvalidEntityType"
+	case EKErrorProcedureAlarmsNotMutable:
+		return "EKErrorProcedureAlarmsNotMutable"
+	case EKErrorEventStoreNotAuthorized:
+		return "EKErrorEventStoreNotAuthorized"
+	case EKErrorOSNotSupported:
+		return "EKErrorOSNotSupported"
+	case EKErrorInvalidInviteReplyCalendar:
+		return "EKErrorInvalidInviteReplyCalendar"
+	case EKErrorNotificationsCollectionFlagNotSet:
+		return "EKErrorNotificationsCollectionFlagNotSet"
+	case EKErrorSourceMismatch:
+		return "EKErrorSourceMismatch"
+	case EKErrorNotificationCollectionMismatch:
+		return "EKErrorNotificationCollectionMismatch"
+	case EKErrorNotificationSavedWithoutCollection:
+		return "EKErrorNotificationSavedWithoutCollection"
+	case EKErrorReminderAlarmContainsEmailOrUrl:
+		return "EKErrorReminderAlarmContainsEmailOrUrl"
+	case EKErrorLast:
+		return "EKErrorLast"
+	default:
+		return fmt.Sprintf("EKErrorCode(%d)", int64(e))
+	}
+}
+
 type EKEventAvailability int64
 
 const (

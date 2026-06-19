@@ -8,6 +8,120 @@ import (
 	"fmt"
 )
 
+type AMErrorCode int64
+
+const (
+	AMWorkflowNewerVersionError              AMErrorCode = -100
+	AMWorkflowPropertyListInvalidError       AMErrorCode = -101
+	AMWorkflowNewerActionVersionError        AMErrorCode = -111
+	AMWorkflowOlderActionVersionError        AMErrorCode = -112
+	AMWorkflowActionsNotLoadedError          AMErrorCode = -113
+	AMWorkflowNoEnabledActionsError          AMErrorCode = -114
+	AMUserCanceledError                      AMErrorCode = -128
+	AMNoSuchActionError                      AMErrorCode = -200
+	AMActionNotLoadableError                 AMErrorCode = -201
+	AMActionArchitectureMismatchError        AMErrorCode = -202
+	AMActionRuntimeMismatchError             AMErrorCode = -203
+	AMActionLoadError                        AMErrorCode = -204
+	AMActionLinkError                        AMErrorCode = -205
+	AMActionApplicationResourceError         AMErrorCode = -206
+	AMActionApplicationVersionResourceError  AMErrorCode = -207
+	AMActionFileResourceError                AMErrorCode = -208
+	AMActionLicenseResourceError             AMErrorCode = -209
+	AMActionRequiredActionResourceError      AMErrorCode = -210
+	AMActionInitializationError              AMErrorCode = -211
+	AMActionExecutionError                   AMErrorCode = -212
+	AMActionExceptionError                   AMErrorCode = -213
+	AMActionPropertyListInvalidError         AMErrorCode = -214
+	AMActionInsufficientDataError            AMErrorCode = -215
+	AMActionIsDeprecatedError                AMErrorCode = -216
+	AMActionFailedGatekeeperError            AMErrorCode = -217
+	AMActionSignatureCorruptError            AMErrorCode = -218
+	AMActionQuarantineError                  AMErrorCode = -219
+	AMActionXProtectError                    AMErrorCode = -220
+	AMActionMalwareError                     AMErrorCode = -221
+	AMActionThirdPartyActionsNotAllowedError AMErrorCode = -222
+	AMActionXPCError                         AMErrorCode = -223
+	AMConversionNotPossibleError             AMErrorCode = -300
+	AMConversionNoDataError                  AMErrorCode = -301
+	AMConversionFailedError                  AMErrorCode = -302
+)
+
+func (e AMErrorCode) String() string {
+	switch e {
+	case AMWorkflowNewerVersionError:
+		return "AMWorkflowNewerVersionError"
+	case AMWorkflowPropertyListInvalidError:
+		return "AMWorkflowPropertyListInvalidError"
+	case AMWorkflowNewerActionVersionError:
+		return "AMWorkflowNewerActionVersionError"
+	case AMWorkflowOlderActionVersionError:
+		return "AMWorkflowOlderActionVersionError"
+	case AMWorkflowActionsNotLoadedError:
+		return "AMWorkflowActionsNotLoadedError"
+	case AMWorkflowNoEnabledActionsError:
+		return "AMWorkflowNoEnabledActionsError"
+	case AMUserCanceledError:
+		return "AMUserCanceledError"
+	case AMNoSuchActionError:
+		return "AMNoSuchActionError"
+	case AMActionNotLoadableError:
+		return "AMActionNotLoadableError"
+	case AMActionArchitectureMismatchError:
+		return "AMActionArchitectureMismatchError"
+	case AMActionRuntimeMismatchError:
+		return "AMActionRuntimeMismatchError"
+	case AMActionLoadError:
+		return "AMActionLoadError"
+	case AMActionLinkError:
+		return "AMActionLinkError"
+	case AMActionApplicationResourceError:
+		return "AMActionApplicationResourceError"
+	case AMActionApplicationVersionResourceError:
+		return "AMActionApplicationVersionResourceError"
+	case AMActionFileResourceError:
+		return "AMActionFileResourceError"
+	case AMActionLicenseResourceError:
+		return "AMActionLicenseResourceError"
+	case AMActionRequiredActionResourceError:
+		return "AMActionRequiredActionResourceError"
+	case AMActionInitializationError:
+		return "AMActionInitializationError"
+	case AMActionExecutionError:
+		return "AMActionExecutionError"
+	case AMActionExceptionError:
+		return "AMActionExceptionError"
+	case AMActionPropertyListInvalidError:
+		return "AMActionPropertyListInvalidError"
+	case AMActionInsufficientDataError:
+		return "AMActionInsufficientDataError"
+	case AMActionIsDeprecatedError:
+		return "AMActionIsDeprecatedError"
+	case AMActionFailedGatekeeperError:
+		return "AMActionFailedGatekeeperError"
+	case AMActionSignatureCorruptError:
+		return "AMActionSignatureCorruptError"
+	case AMActionQuarantineError:
+		return "AMActionQuarantineError"
+	case AMActionXProtectError:
+		return "AMActionXProtectError"
+	case AMActionMalwareError:
+		return "AMActionMalwareError"
+	case AMActionThirdPartyActionsNotAllowedError:
+		return "AMActionThirdPartyActionsNotAllowedError"
+	case AMActionXPCError:
+		return "AMActionXPCError"
+	case AMConversionNotPossibleError:
+		return "AMConversionNotPossibleError"
+	case AMConversionNoDataError:
+		return "AMConversionNoDataError"
+	case AMConversionFailedError:
+		return "AMConversionFailedError"
+	default:
+		return fmt.Sprintf("AMErrorCode(%d)", int64(e))
+	}
+}
+
 // Logging levels that Automator supports.
 type AMLogLevel uint64
 

@@ -9,6 +9,51 @@ import (
 	"strings"
 )
 
+type TKErrorCode int64
+
+const (
+	TKErrorCodeNotImplemented       TKErrorCode = -1
+	TKErrorCodeCommunicationError   TKErrorCode = -2
+	TKErrorCodeCorruptedData        TKErrorCode = -3
+	TKErrorCodeCanceledByUser       TKErrorCode = -4
+	TKErrorCodeAuthenticationFailed TKErrorCode = -5
+	TKErrorCodeObjectNotFound       TKErrorCode = -6
+	TKErrorCodeTokenNotFound        TKErrorCode = -7
+	TKErrorCodeBadParameter         TKErrorCode = -8
+	TKErrorCodeAuthenticationNeeded TKErrorCode = -9
+	// Deprecated: since macOS 10.11.
+	TKErrorAuthenticationFailed TKErrorCode = -5
+	// Deprecated: since macOS 10.11.
+	TKErrorObjectNotFound TKErrorCode = -6
+	// Deprecated: since macOS 10.11.
+	TKErrorTokenNotFound TKErrorCode = -7
+)
+
+func (e TKErrorCode) String() string {
+	switch e {
+	case TKErrorCodeNotImplemented:
+		return "TKErrorCodeNotImplemented"
+	case TKErrorCodeCommunicationError:
+		return "TKErrorCodeCommunicationError"
+	case TKErrorCodeCorruptedData:
+		return "TKErrorCodeCorruptedData"
+	case TKErrorCodeCanceledByUser:
+		return "TKErrorCodeCanceledByUser"
+	case TKErrorCodeAuthenticationFailed:
+		return "TKErrorCodeAuthenticationFailed"
+	case TKErrorCodeObjectNotFound:
+		return "TKErrorCodeObjectNotFound"
+	case TKErrorCodeTokenNotFound:
+		return "TKErrorCodeTokenNotFound"
+	case TKErrorCodeBadParameter:
+		return "TKErrorCodeBadParameter"
+	case TKErrorCodeAuthenticationNeeded:
+		return "TKErrorCodeAuthenticationNeeded"
+	default:
+		return fmt.Sprintf("TKErrorCode(%d)", int64(e))
+	}
+}
+
 type TKSmartCardPINCharset int64
 
 const (

@@ -422,6 +422,29 @@ func (e PHImageRequestOptionsResizeMode) String() string {
 	}
 }
 
+// Error code for Live Photo Editing errors (Deprecated)
+//
+// Deprecated: since macOS 10.15.
+type PHLivePhotoEditingErrorCode int64
+
+const (
+	// Deprecated: since macOS 10.15.
+	PHLivePhotoEditingErrorCodeUnknown PHLivePhotoEditingErrorCode = 0
+	// Deprecated: since macOS 10.15.
+	PHLivePhotoEditingErrorCodeAborted PHLivePhotoEditingErrorCode = 1
+)
+
+func (e PHLivePhotoEditingErrorCode) String() string {
+	switch e {
+	case PHLivePhotoEditingErrorCodeUnknown:
+		return "PHLivePhotoEditingErrorCodeUnknown"
+	case PHLivePhotoEditingErrorCodeAborted:
+		return "PHLivePhotoEditingErrorCodeAborted"
+	default:
+		return fmt.Sprintf("PHLivePhotoEditingErrorCode(%d)", int64(e))
+	}
+}
+
 type PHObjectType int64
 
 const (

@@ -59,6 +59,104 @@ func (e NSFileProviderDomainTestingModes) String() string {
 	return strings.Join(parts, "|")
 }
 
+// The error codes for the File Provider extension.
+type NSFileProviderErrorCode int64
+
+const (
+	// The user credentials cannot be verified
+	NSFileProviderErrorNotAuthenticated NSFileProviderErrorCode = -1000
+	// An item already exists with the same parentItemIdentifier and filename (or with a filename differing only in case.) \note Please use -[NSError (NSFileProviderError) fileProviderErrorForCollisionWithItem:] to build an error with this code. \see -[NSError (NSFileProviderError) fileProviderErrorForCollisionWithItem:]
+	NSFileProviderErrorFilenameCollision NSFileProviderErrorCode = -1001
+	// The value of the sync anchor is too old, and the system must re-sync from scratch
+	NSFileProviderErrorSyncAnchorExpired NSFileProviderErrorCode = -1002
+	// An error indicating that the page is too old, and that the system must restart the enumeration operation from the beginning.
+	NSFileProviderErrorPageExpired NSFileProviderErrorCode = -1002
+	// The item has not been uploaded because it would push the account over quota
+	NSFileProviderErrorInsufficientQuota NSFileProviderErrorCode = -1003
+	// Connecting to the servers failed
+	NSFileProviderErrorServerUnreachable NSFileProviderErrorCode = -1004
+	// The requested item doesn't exist \note Please use -[NSError (NSFileProviderError) fileProviderErrorForNonExistentItemWithIdentifier:] to build an error with this code. \see -[NSError (NSFileProviderError) fileProviderErrorForNonExistentItemWithIdentifier:]
+	NSFileProviderErrorNoSuchItem NSFileProviderErrorCode = -1005
+	// The provider disallowed the deletion of the item. \note Please use -[NSError (NSFileProviderError) fileProviderErrorForRejectedDeletionOfItem:] to build an error with this code. \see -[NSError (NSFileProviderError) fileProviderErrorForRejectedDeletionOfItem:]
+	NSFileProviderErrorDeletionRejected NSFileProviderErrorCode = -1006
+	// We're trying to non-recursively delete a non-empty directory
+	NSFileProviderErrorDirectoryNotEmpty NSFileProviderErrorCode = -1007
+	// Returned by NSFileProviderManager if no provider could be found in the application
+	NSFileProviderErrorProviderNotFound NSFileProviderErrorCode = -2001
+	// Returned by NSFileProviderManager if the application's provider has been disabled due to app translocation
+	NSFileProviderErrorProviderTranslocated NSFileProviderErrorCode = -2002
+	// Returned by NSFileProviderManager if the provider registered in the system is an older version than the one corresponding to this app. The `NSFilePathErrorKey` key points to the location of the older version. If the location of the older version cannot be determined (e.g. because it was since deleted), the `NSFilePathErrorKey` will not be set.
+	NSFileProviderErrorOlderExtensionVersionRunning NSFileProviderErrorCode = -2003
+	// Returned by NSFileProviderManager if the provider registered in the system is a newer version than the one corresponding to this app.
+	NSFileProviderErrorNewerExtensionVersionFound NSFileProviderErrorCode = -2004
+	// Indicates that synchronization cannot happen. This error can be returned by the provider or the system. This is returned by NSFileProviderManager if a barrier failed for a sync-related error. If the failure is caused by a specific item, the system will set the NSFileProviderErrorItemKey to the corresponding item identifier and the NSUnderlyingErrorKey will be set to the error encountered by that item. When a provider returns this error on createItem or updateItem, it means that syncing that item is definitively broken. The system will not retry syncing those items, until either: The operating system has been updated. The FileProvider extension has been updated. The item is modified on disk.
+	NSFileProviderErrorCannotSynchronize NSFileProviderErrorCode = -2005
+	// Returned by NSFileProviderManager if directory eviction failed because the target contains non-evictable items. -[NSError underlyingErrors] is set to an array of the underlying errors. Each one has NSURLErrorKey set to identify the particular file or directory affected by this error. The number of reported failing items is capped to an implementation-defined number. + domain: NSFileProviderErrorDomain errorCode: NSFileProviderErrorUnsyncedEdits error: if the item had unsynced content. + domain: NSFileProviderErrorDomain errorCode: NSFileProviderErrorNonEvictable error: if the item has been marked as non-purgeable by the provider. + domain: NSPOSIXErrorDomain errorCode: EBUSY - if the item had open file descriptors on it. + domain: NSPOSIXErrorDomain errorCode: EMLINK : if the item had several hardlinks.
+	NSFileProviderErrorNonEvictableChildren NSFileProviderErrorCode = -2006
+	// Returned by NSFileProviderManager if item eviction is failing because the item has edits that have not been synced yet The NSURLErrorKey will be set to with the item URL that has unsynced content.
+	NSFileProviderErrorUnsyncedEdits NSFileProviderErrorCode = -2007
+	// Returned by NSFileProviderManager if item eviction is failing because the item has not been assigned the evictable capability. The NSURLErrorKey will be set to with the corresponding item URL.
+	NSFileProviderErrorNonEvictable NSFileProviderErrorCode = -2008
+	// Returned by the provider to indicate that the requested version for an item cannot be provided. When a provider returns that error, it means the version for this item is definitively unavailable. It is intended to be returned by fetchPartialContentsForItemWithIdentifier, when NSFileProviderFetchContentsOptionsStrictVersioning is set, to tell the system that a remote update happened to the item that outdated the requested version.
+	NSFileProviderErrorVersionNoLongerAvailable             NSFileProviderErrorCode = -2009
+	NSFileProviderErrorDomainDisabled                       NSFileProviderErrorCode = -2011
+	NSFileProviderErrorProviderDomainTemporarilyUnavailable NSFileProviderErrorCode = -2012
+	NSFileProviderErrorProviderDomainNotFound               NSFileProviderErrorCode = -2013
+	NSFileProviderErrorApplicationExtensionNotFound         NSFileProviderErrorCode = -2014
+	NSFileProviderErrorLocalVersionConflictingWithServer    NSFileProviderErrorCode = -2015
+)
+
+func (e NSFileProviderErrorCode) String() string {
+	switch e {
+	case NSFileProviderErrorNotAuthenticated:
+		return "NSFileProviderErrorNotAuthenticated"
+	case NSFileProviderErrorFilenameCollision:
+		return "NSFileProviderErrorFilenameCollision"
+	case NSFileProviderErrorSyncAnchorExpired:
+		return "NSFileProviderErrorSyncAnchorExpired"
+	case NSFileProviderErrorInsufficientQuota:
+		return "NSFileProviderErrorInsufficientQuota"
+	case NSFileProviderErrorServerUnreachable:
+		return "NSFileProviderErrorServerUnreachable"
+	case NSFileProviderErrorNoSuchItem:
+		return "NSFileProviderErrorNoSuchItem"
+	case NSFileProviderErrorDeletionRejected:
+		return "NSFileProviderErrorDeletionRejected"
+	case NSFileProviderErrorDirectoryNotEmpty:
+		return "NSFileProviderErrorDirectoryNotEmpty"
+	case NSFileProviderErrorProviderNotFound:
+		return "NSFileProviderErrorProviderNotFound"
+	case NSFileProviderErrorProviderTranslocated:
+		return "NSFileProviderErrorProviderTranslocated"
+	case NSFileProviderErrorOlderExtensionVersionRunning:
+		return "NSFileProviderErrorOlderExtensionVersionRunning"
+	case NSFileProviderErrorNewerExtensionVersionFound:
+		return "NSFileProviderErrorNewerExtensionVersionFound"
+	case NSFileProviderErrorCannotSynchronize:
+		return "NSFileProviderErrorCannotSynchronize"
+	case NSFileProviderErrorNonEvictableChildren:
+		return "NSFileProviderErrorNonEvictableChildren"
+	case NSFileProviderErrorUnsyncedEdits:
+		return "NSFileProviderErrorUnsyncedEdits"
+	case NSFileProviderErrorNonEvictable:
+		return "NSFileProviderErrorNonEvictable"
+	case NSFileProviderErrorVersionNoLongerAvailable:
+		return "NSFileProviderErrorVersionNoLongerAvailable"
+	case NSFileProviderErrorDomainDisabled:
+		return "NSFileProviderErrorDomainDisabled"
+	case NSFileProviderErrorProviderDomainTemporarilyUnavailable:
+		return "NSFileProviderErrorProviderDomainTemporarilyUnavailable"
+	case NSFileProviderErrorProviderDomainNotFound:
+		return "NSFileProviderErrorProviderDomainNotFound"
+	case NSFileProviderErrorApplicationExtensionNotFound:
+		return "NSFileProviderErrorApplicationExtensionNotFound"
+	case NSFileProviderErrorLocalVersionConflictingWithServer:
+		return "NSFileProviderErrorLocalVersionConflictingWithServer"
+	default:
+		return fmt.Sprintf("NSFileProviderErrorCode(%d)", int64(e))
+	}
+}
+
 // Constants that identify known folders.
 // Bitmask — values may be combined with |.
 type NSFileProviderKnownFolders uint64

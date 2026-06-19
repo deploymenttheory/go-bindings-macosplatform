@@ -342,6 +342,120 @@ func (e INHangUpCallIntentResponseCode) String() string {
 	}
 }
 
+type INIntentErrorCode int64
+
+const (
+	INIntentErrorInteractionOperationNotSupported         INIntentErrorCode = 1900
+	INIntentErrorDonatingInteraction                      INIntentErrorCode = 1901
+	INIntentErrorDeletingAllInteractions                  INIntentErrorCode = 1902
+	INIntentErrorDeletingInteractionWithIdentifiers       INIntentErrorCode = 1903
+	INIntentErrorDeletingInteractionWithGroupIdentifier   INIntentErrorCode = 1904
+	INIntentErrorIntentSupportedByMultipleExtension       INIntentErrorCode = 2001
+	INIntentErrorRestrictedIntentsNotSupportedByExtension INIntentErrorCode = 2002
+	INIntentErrorNoHandlerProvidedForIntent               INIntentErrorCode = 2003
+	INIntentErrorInvalidIntentName                        INIntentErrorCode = 2004
+	INIntentErrorNoAppAvailable                           INIntentErrorCode = 2005
+	INIntentErrorRequestTimedOut                          INIntentErrorCode = 3001
+	INIntentErrorMissingInformation                       INIntentErrorCode = 3002
+	INIntentErrorInvalidUserVocabularyFileLocation        INIntentErrorCode = 4000
+	INIntentErrorExtensionLaunchingTimeout                INIntentErrorCode = 5000
+	INIntentErrorExtensionBringUpFailed                   INIntentErrorCode = 5001
+	INIntentErrorImageGeneric                             INIntentErrorCode = 6000
+	INIntentErrorImageNoServiceAvailable                  INIntentErrorCode = 6001
+	INIntentErrorImageStorageFailed                       INIntentErrorCode = 6002
+	INIntentErrorImageLoadingFailed                       INIntentErrorCode = 6003
+	INIntentErrorImageRetrievalFailed                     INIntentErrorCode = 6004
+	INIntentErrorImageProxyLoop                           INIntentErrorCode = 6005
+	INIntentErrorImageProxyInvalid                        INIntentErrorCode = 6006
+	INIntentErrorImageProxyTimeout                        INIntentErrorCode = 6007
+	INIntentErrorImageServiceFailure                      INIntentErrorCode = 6008
+	INIntentErrorImageScalingFailed                       INIntentErrorCode = 6009
+	INIntentErrorPermissionDenied                         INIntentErrorCode = 6010
+	INIntentErrorVoiceShortcutCreationFailed              INIntentErrorCode = 7000
+	INIntentErrorVoiceShortcutGetFailed                   INIntentErrorCode = 7001
+	INIntentErrorVoiceShortcutDeleteFailed                INIntentErrorCode = 7002
+	INIntentErrorEncodingGeneric                          INIntentErrorCode = 8000
+	INIntentErrorEncodingFailed                           INIntentErrorCode = 8001
+	INIntentErrorDecodingGeneric                          INIntentErrorCode = 9000
+	INIntentErrorUnableToCreateAppIntentRepresentation    INIntentErrorCode = 10000
+	INIntentErrorNoAppIntent                              INIntentErrorCode = 10001
+)
+
+func (e INIntentErrorCode) String() string {
+	switch e {
+	case INIntentErrorInteractionOperationNotSupported:
+		return "INIntentErrorInteractionOperationNotSupported"
+	case INIntentErrorDonatingInteraction:
+		return "INIntentErrorDonatingInteraction"
+	case INIntentErrorDeletingAllInteractions:
+		return "INIntentErrorDeletingAllInteractions"
+	case INIntentErrorDeletingInteractionWithIdentifiers:
+		return "INIntentErrorDeletingInteractionWithIdentifiers"
+	case INIntentErrorDeletingInteractionWithGroupIdentifier:
+		return "INIntentErrorDeletingInteractionWithGroupIdentifier"
+	case INIntentErrorIntentSupportedByMultipleExtension:
+		return "INIntentErrorIntentSupportedByMultipleExtension"
+	case INIntentErrorRestrictedIntentsNotSupportedByExtension:
+		return "INIntentErrorRestrictedIntentsNotSupportedByExtension"
+	case INIntentErrorNoHandlerProvidedForIntent:
+		return "INIntentErrorNoHandlerProvidedForIntent"
+	case INIntentErrorInvalidIntentName:
+		return "INIntentErrorInvalidIntentName"
+	case INIntentErrorNoAppAvailable:
+		return "INIntentErrorNoAppAvailable"
+	case INIntentErrorRequestTimedOut:
+		return "INIntentErrorRequestTimedOut"
+	case INIntentErrorMissingInformation:
+		return "INIntentErrorMissingInformation"
+	case INIntentErrorInvalidUserVocabularyFileLocation:
+		return "INIntentErrorInvalidUserVocabularyFileLocation"
+	case INIntentErrorExtensionLaunchingTimeout:
+		return "INIntentErrorExtensionLaunchingTimeout"
+	case INIntentErrorExtensionBringUpFailed:
+		return "INIntentErrorExtensionBringUpFailed"
+	case INIntentErrorImageGeneric:
+		return "INIntentErrorImageGeneric"
+	case INIntentErrorImageNoServiceAvailable:
+		return "INIntentErrorImageNoServiceAvailable"
+	case INIntentErrorImageStorageFailed:
+		return "INIntentErrorImageStorageFailed"
+	case INIntentErrorImageLoadingFailed:
+		return "INIntentErrorImageLoadingFailed"
+	case INIntentErrorImageRetrievalFailed:
+		return "INIntentErrorImageRetrievalFailed"
+	case INIntentErrorImageProxyLoop:
+		return "INIntentErrorImageProxyLoop"
+	case INIntentErrorImageProxyInvalid:
+		return "INIntentErrorImageProxyInvalid"
+	case INIntentErrorImageProxyTimeout:
+		return "INIntentErrorImageProxyTimeout"
+	case INIntentErrorImageServiceFailure:
+		return "INIntentErrorImageServiceFailure"
+	case INIntentErrorImageScalingFailed:
+		return "INIntentErrorImageScalingFailed"
+	case INIntentErrorPermissionDenied:
+		return "INIntentErrorPermissionDenied"
+	case INIntentErrorVoiceShortcutCreationFailed:
+		return "INIntentErrorVoiceShortcutCreationFailed"
+	case INIntentErrorVoiceShortcutGetFailed:
+		return "INIntentErrorVoiceShortcutGetFailed"
+	case INIntentErrorVoiceShortcutDeleteFailed:
+		return "INIntentErrorVoiceShortcutDeleteFailed"
+	case INIntentErrorEncodingGeneric:
+		return "INIntentErrorEncodingGeneric"
+	case INIntentErrorEncodingFailed:
+		return "INIntentErrorEncodingFailed"
+	case INIntentErrorDecodingGeneric:
+		return "INIntentErrorDecodingGeneric"
+	case INIntentErrorUnableToCreateAppIntentRepresentation:
+		return "INIntentErrorUnableToCreateAppIntentRepresentation"
+	case INIntentErrorNoAppIntent:
+		return "INIntentErrorNoAppIntent"
+	default:
+		return fmt.Sprintf("INIntentErrorCode(%d)", int64(e))
+	}
+}
+
 type INIntentHandlingStatus int64
 
 const (

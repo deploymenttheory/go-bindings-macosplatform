@@ -213,6 +213,36 @@ func (e MKDistanceFormatterUnits) String() string {
 	}
 }
 
+type MKErrorCode uint64
+
+const (
+	MKErrorUnknown            MKErrorCode = 1
+	MKErrorServerFailure      MKErrorCode = 2
+	MKErrorLoadingThrottled   MKErrorCode = 3
+	MKErrorPlacemarkNotFound  MKErrorCode = 4
+	MKErrorDirectionsNotFound MKErrorCode = 5
+	MKErrorDecodingFailed     MKErrorCode = 6
+)
+
+func (e MKErrorCode) String() string {
+	switch e {
+	case MKErrorUnknown:
+		return "MKErrorUnknown"
+	case MKErrorServerFailure:
+		return "MKErrorServerFailure"
+	case MKErrorLoadingThrottled:
+		return "MKErrorLoadingThrottled"
+	case MKErrorPlacemarkNotFound:
+		return "MKErrorPlacemarkNotFound"
+	case MKErrorDirectionsNotFound:
+		return "MKErrorDirectionsNotFound"
+	case MKErrorDecodingFailed:
+		return "MKErrorDecodingFailed"
+	default:
+		return fmt.Sprintf("MKErrorCode(%d)", int64(e))
+	}
+}
+
 type MKFeatureVisibility int64
 
 const (

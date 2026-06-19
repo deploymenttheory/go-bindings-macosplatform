@@ -26,6 +26,132 @@ func (e RPCameraPosition) String() string {
 	}
 }
 
+type RPRecordingErrorCode int64
+
+const (
+	RPRecordingErrorUnknown                                RPRecordingErrorCode = -5800
+	RPRecordingErrorUserDeclined                           RPRecordingErrorCode = -5801
+	RPRecordingErrorDisabled                               RPRecordingErrorCode = -5802
+	RPRecordingErrorFailedToStart                          RPRecordingErrorCode = -5803
+	RPRecordingErrorFailed                                 RPRecordingErrorCode = -5804
+	RPRecordingErrorInsufficientStorage                    RPRecordingErrorCode = -5805
+	RPRecordingErrorInterrupted                            RPRecordingErrorCode = -5806
+	RPRecordingErrorContentResize                          RPRecordingErrorCode = -5807
+	RPRecordingErrorBroadcastInvalidSession                RPRecordingErrorCode = -5808
+	RPRecordingErrorSystemDormancy                         RPRecordingErrorCode = -5809
+	RPRecordingErrorEntitlements                           RPRecordingErrorCode = -5810
+	RPRecordingErrorActivePhoneCall                        RPRecordingErrorCode = -5811
+	RPRecordingErrorFailedToSave                           RPRecordingErrorCode = -5812
+	RPRecordingErrorCarPlay                                RPRecordingErrorCode = -5813
+	RPRecordingErrorFailedApplicationConnectionInvalid     RPRecordingErrorCode = -5814
+	RPRecordingErrorFailedApplicationConnectionInterrupted RPRecordingErrorCode = -5815
+	RPRecordingErrorFailedNoMatchingApplicationContext     RPRecordingErrorCode = -5816
+	RPRecordingErrorFailedMediaServicesFailure             RPRecordingErrorCode = -5817
+	RPRecordingErrorVideoMixingFailure                     RPRecordingErrorCode = -5818
+	RPRecordingErrorBroadcastSetupFailed                   RPRecordingErrorCode = -5819
+	RPRecordingErrorFailedToObtainURL                      RPRecordingErrorCode = -5820
+	RPRecordingErrorFailedIncorrectTimeStamps              RPRecordingErrorCode = -5821
+	RPRecordingErrorFailedToProcessFirstSample             RPRecordingErrorCode = -5822
+	RPRecordingErrorFailedAssetWriterFailedToSave          RPRecordingErrorCode = -5823
+	RPRecordingErrorFailedNoAssetWriter                    RPRecordingErrorCode = -5824
+	RPRecordingErrorFailedAssetWriterInWrongState          RPRecordingErrorCode = -5825
+	RPRecordingErrorFailedAssetWriterExportFailed          RPRecordingErrorCode = -5826
+	RPRecordingErrorFailedToRemoveFile                     RPRecordingErrorCode = -5827
+	RPRecordingErrorFailedAssetWriterExportCanceled        RPRecordingErrorCode = -5828
+	RPRecordingErrorAttemptToStopNonRecording              RPRecordingErrorCode = -5829
+	RPRecordingErrorAttemptToStartInRecordingState         RPRecordingErrorCode = -5830
+	RPRecordingErrorPhotoFailure                           RPRecordingErrorCode = -5831
+	RPRecordingErrorRecordingInvalidSession                RPRecordingErrorCode = -5832
+	RPRecordingErrorFailedToStartCaptureStack              RPRecordingErrorCode = -5833
+	RPRecordingErrorInvalidParameter                       RPRecordingErrorCode = -5834
+	RPRecordingErrorFilePermissions                        RPRecordingErrorCode = -5835
+	RPRecordingErrorExportClipToURLInProgress              RPRecordingErrorCode = -5836
+	RPRecordingErrorCodeSuccessful                         RPRecordingErrorCode = 0
+)
+
+func (e RPRecordingErrorCode) String() string {
+	switch e {
+	case RPRecordingErrorUnknown:
+		return "RPRecordingErrorUnknown"
+	case RPRecordingErrorUserDeclined:
+		return "RPRecordingErrorUserDeclined"
+	case RPRecordingErrorDisabled:
+		return "RPRecordingErrorDisabled"
+	case RPRecordingErrorFailedToStart:
+		return "RPRecordingErrorFailedToStart"
+	case RPRecordingErrorFailed:
+		return "RPRecordingErrorFailed"
+	case RPRecordingErrorInsufficientStorage:
+		return "RPRecordingErrorInsufficientStorage"
+	case RPRecordingErrorInterrupted:
+		return "RPRecordingErrorInterrupted"
+	case RPRecordingErrorContentResize:
+		return "RPRecordingErrorContentResize"
+	case RPRecordingErrorBroadcastInvalidSession:
+		return "RPRecordingErrorBroadcastInvalidSession"
+	case RPRecordingErrorSystemDormancy:
+		return "RPRecordingErrorSystemDormancy"
+	case RPRecordingErrorEntitlements:
+		return "RPRecordingErrorEntitlements"
+	case RPRecordingErrorActivePhoneCall:
+		return "RPRecordingErrorActivePhoneCall"
+	case RPRecordingErrorFailedToSave:
+		return "RPRecordingErrorFailedToSave"
+	case RPRecordingErrorCarPlay:
+		return "RPRecordingErrorCarPlay"
+	case RPRecordingErrorFailedApplicationConnectionInvalid:
+		return "RPRecordingErrorFailedApplicationConnectionInvalid"
+	case RPRecordingErrorFailedApplicationConnectionInterrupted:
+		return "RPRecordingErrorFailedApplicationConnectionInterrupted"
+	case RPRecordingErrorFailedNoMatchingApplicationContext:
+		return "RPRecordingErrorFailedNoMatchingApplicationContext"
+	case RPRecordingErrorFailedMediaServicesFailure:
+		return "RPRecordingErrorFailedMediaServicesFailure"
+	case RPRecordingErrorVideoMixingFailure:
+		return "RPRecordingErrorVideoMixingFailure"
+	case RPRecordingErrorBroadcastSetupFailed:
+		return "RPRecordingErrorBroadcastSetupFailed"
+	case RPRecordingErrorFailedToObtainURL:
+		return "RPRecordingErrorFailedToObtainURL"
+	case RPRecordingErrorFailedIncorrectTimeStamps:
+		return "RPRecordingErrorFailedIncorrectTimeStamps"
+	case RPRecordingErrorFailedToProcessFirstSample:
+		return "RPRecordingErrorFailedToProcessFirstSample"
+	case RPRecordingErrorFailedAssetWriterFailedToSave:
+		return "RPRecordingErrorFailedAssetWriterFailedToSave"
+	case RPRecordingErrorFailedNoAssetWriter:
+		return "RPRecordingErrorFailedNoAssetWriter"
+	case RPRecordingErrorFailedAssetWriterInWrongState:
+		return "RPRecordingErrorFailedAssetWriterInWrongState"
+	case RPRecordingErrorFailedAssetWriterExportFailed:
+		return "RPRecordingErrorFailedAssetWriterExportFailed"
+	case RPRecordingErrorFailedToRemoveFile:
+		return "RPRecordingErrorFailedToRemoveFile"
+	case RPRecordingErrorFailedAssetWriterExportCanceled:
+		return "RPRecordingErrorFailedAssetWriterExportCanceled"
+	case RPRecordingErrorAttemptToStopNonRecording:
+		return "RPRecordingErrorAttemptToStopNonRecording"
+	case RPRecordingErrorAttemptToStartInRecordingState:
+		return "RPRecordingErrorAttemptToStartInRecordingState"
+	case RPRecordingErrorPhotoFailure:
+		return "RPRecordingErrorPhotoFailure"
+	case RPRecordingErrorRecordingInvalidSession:
+		return "RPRecordingErrorRecordingInvalidSession"
+	case RPRecordingErrorFailedToStartCaptureStack:
+		return "RPRecordingErrorFailedToStartCaptureStack"
+	case RPRecordingErrorInvalidParameter:
+		return "RPRecordingErrorInvalidParameter"
+	case RPRecordingErrorFilePermissions:
+		return "RPRecordingErrorFilePermissions"
+	case RPRecordingErrorExportClipToURLInProgress:
+		return "RPRecordingErrorExportClipToURLInProgress"
+	case RPRecordingErrorCodeSuccessful:
+		return "RPRecordingErrorCodeSuccessful"
+	default:
+		return fmt.Sprintf("RPRecordingErrorCode(%d)", int64(e))
+	}
+}
+
 type RPSampleBufferType int64
 
 const (

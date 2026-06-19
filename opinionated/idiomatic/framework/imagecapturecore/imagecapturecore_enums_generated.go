@@ -113,6 +113,153 @@ func (e ICMediaPresentation) String() string {
 	}
 }
 
+type ICReturnConnectionErrorCode int64
+
+const (
+	ICReturnConnectionDriverExited              ICReturnConnectionErrorCode = -21350
+	ICReturnConnectionClosedSessionSuddenly     ICReturnConnectionErrorCode = -21349
+	ICReturnConnectionEjectedSuddenly           ICReturnConnectionErrorCode = -21348
+	ICReturnConnectionSessionAlreadyOpen        ICReturnConnectionErrorCode = -21347
+	ICReturnConnectionEjectFailed               ICReturnConnectionErrorCode = -21346
+	ICReturnConnectionFailedToOpen              ICReturnConnectionErrorCode = -21345
+	ICReturnConnectionFailedToOpenDevice        ICReturnConnectionErrorCode = -21344
+	ICReturnConnectionNotAuthorizedToOpenDevice ICReturnConnectionErrorCode = -21343
+)
+
+func (e ICReturnConnectionErrorCode) String() string {
+	switch e {
+	case ICReturnConnectionDriverExited:
+		return "ICReturnConnectionDriverExited"
+	case ICReturnConnectionClosedSessionSuddenly:
+		return "ICReturnConnectionClosedSessionSuddenly"
+	case ICReturnConnectionEjectedSuddenly:
+		return "ICReturnConnectionEjectedSuddenly"
+	case ICReturnConnectionSessionAlreadyOpen:
+		return "ICReturnConnectionSessionAlreadyOpen"
+	case ICReturnConnectionEjectFailed:
+		return "ICReturnConnectionEjectFailed"
+	case ICReturnConnectionFailedToOpen:
+		return "ICReturnConnectionFailedToOpen"
+	case ICReturnConnectionFailedToOpenDevice:
+		return "ICReturnConnectionFailedToOpenDevice"
+	case ICReturnConnectionNotAuthorizedToOpenDevice:
+		return "ICReturnConnectionNotAuthorizedToOpenDevice"
+	default:
+		return fmt.Sprintf("ICReturnConnectionErrorCode(%d)", int64(e))
+	}
+}
+
+type ICReturnDownloadErrorCode int64
+
+const (
+	ICReturnDownloadPathInvalid  ICReturnDownloadErrorCode = -21100
+	ICReturnDownloadFileWritable ICReturnDownloadErrorCode = -21099
+)
+
+func (e ICReturnDownloadErrorCode) String() string {
+	switch e {
+	case ICReturnDownloadPathInvalid:
+		return "ICReturnDownloadPathInvalid"
+	case ICReturnDownloadFileWritable:
+		return "ICReturnDownloadFileWritable"
+	default:
+		return fmt.Sprintf("ICReturnDownloadErrorCode(%d)", int64(e))
+	}
+}
+
+type ICReturnMetadataErrorCode int64
+
+const (
+	ICReturnMetadataNotAvailable    ICReturnMetadataErrorCode = -20150
+	ICReturnMetadataAlreadyFetching ICReturnMetadataErrorCode = -20149
+	ICReturnMetadataCanceled        ICReturnMetadataErrorCode = -20148
+	ICReturnMetadataInvalid         ICReturnMetadataErrorCode = -20147
+)
+
+func (e ICReturnMetadataErrorCode) String() string {
+	switch e {
+	case ICReturnMetadataNotAvailable:
+		return "ICReturnMetadataNotAvailable"
+	case ICReturnMetadataAlreadyFetching:
+		return "ICReturnMetadataAlreadyFetching"
+	case ICReturnMetadataCanceled:
+		return "ICReturnMetadataCanceled"
+	case ICReturnMetadataInvalid:
+		return "ICReturnMetadataInvalid"
+	default:
+		return fmt.Sprintf("ICReturnMetadataErrorCode(%d)", int64(e))
+	}
+}
+
+type ICReturnObjectErrorCode int64
+
+const (
+	ICReturnCodeObjectDoesNotExist        ICReturnObjectErrorCode = -21450
+	ICReturnCodeObjectDataOffsetInvalid   ICReturnObjectErrorCode = -21449
+	ICReturnCodeObjectCouldNotBeRead      ICReturnObjectErrorCode = -21448
+	ICReturnCodeObjectDataEmpty           ICReturnObjectErrorCode = -21447
+	ICReturnCodeObjectDataRequestTooLarge ICReturnObjectErrorCode = -21446
+)
+
+func (e ICReturnObjectErrorCode) String() string {
+	switch e {
+	case ICReturnCodeObjectDoesNotExist:
+		return "ICReturnCodeObjectDoesNotExist"
+	case ICReturnCodeObjectDataOffsetInvalid:
+		return "ICReturnCodeObjectDataOffsetInvalid"
+	case ICReturnCodeObjectCouldNotBeRead:
+		return "ICReturnCodeObjectCouldNotBeRead"
+	case ICReturnCodeObjectDataEmpty:
+		return "ICReturnCodeObjectDataEmpty"
+	case ICReturnCodeObjectDataRequestTooLarge:
+		return "ICReturnCodeObjectDataRequestTooLarge"
+	default:
+		return fmt.Sprintf("ICReturnObjectErrorCode(%d)", int64(e))
+	}
+}
+
+type ICReturnPTPDeviceErrorCode int64
+
+const (
+	ICReturnPTPFailedToSendCommand        ICReturnPTPDeviceErrorCode = -21250
+	ICReturnPTPNotAuthorizedToSendCommand ICReturnPTPDeviceErrorCode = -21249
+)
+
+func (e ICReturnPTPDeviceErrorCode) String() string {
+	switch e {
+	case ICReturnPTPFailedToSendCommand:
+		return "ICReturnPTPFailedToSendCommand"
+	case ICReturnPTPNotAuthorizedToSendCommand:
+		return "ICReturnPTPNotAuthorizedToSendCommand"
+	default:
+		return fmt.Sprintf("ICReturnPTPDeviceErrorCode(%d)", int64(e))
+	}
+}
+
+type ICReturnThumbnailErrorCode int64
+
+const (
+	ICReturnThumbnailNotAvailable    ICReturnThumbnailErrorCode = -21000
+	ICReturnThumbnailAlreadyFetching ICReturnThumbnailErrorCode = -20999
+	ICReturnThumbnailCanceled        ICReturnThumbnailErrorCode = -20098
+	ICReturnThumbnailInvalid         ICReturnThumbnailErrorCode = -20097
+)
+
+func (e ICReturnThumbnailErrorCode) String() string {
+	switch e {
+	case ICReturnThumbnailNotAvailable:
+		return "ICReturnThumbnailNotAvailable"
+	case ICReturnThumbnailAlreadyFetching:
+		return "ICReturnThumbnailAlreadyFetching"
+	case ICReturnThumbnailCanceled:
+		return "ICReturnThumbnailCanceled"
+	case ICReturnThumbnailInvalid:
+		return "ICReturnThumbnailInvalid"
+	default:
+		return fmt.Sprintf("ICReturnThumbnailErrorCode(%d)", int64(e))
+	}
+}
+
 // The number of bits per channel in the scanned image.
 type ICScannerBitDepth uint64
 

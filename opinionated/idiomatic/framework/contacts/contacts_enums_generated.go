@@ -183,6 +183,103 @@ func (e CNEntityType) String() string {
 	}
 }
 
+// Error codes that the system may return when you use Contacts framework methods.
+type CNErrorCode int64
+
+const (
+	CNErrorCodeCommunicationError               CNErrorCode = 1
+	CNErrorCodeDataAccessError                  CNErrorCode = 2
+	CNErrorCodeAuthorizationDenied              CNErrorCode = 100
+	CNErrorCodeNoAccessableWritableContainers   CNErrorCode = 101
+	CNErrorCodeUnauthorizedKeys                 CNErrorCode = 102
+	CNErrorCodeFeatureDisabledByUser            CNErrorCode = 103
+	CNErrorCodeFeatureNotAvailable              CNErrorCode = 104
+	CNErrorCodeRecordDoesNotExist               CNErrorCode = 200
+	CNErrorCodeInsertedRecordAlreadyExists      CNErrorCode = 201
+	CNErrorCodeContainmentCycle                 CNErrorCode = 202
+	CNErrorCodeContainmentScope                 CNErrorCode = 203
+	CNErrorCodeParentRecordDoesNotExist         CNErrorCode = 204
+	CNErrorCodeRecordIdentifierInvalid          CNErrorCode = 205
+	CNErrorCodeRecordNotWritable                CNErrorCode = 206
+	CNErrorCodeParentContainerNotWritable       CNErrorCode = 207
+	CNErrorCodeValidationMultipleErrors         CNErrorCode = 300
+	CNErrorCodeValidationTypeMismatch           CNErrorCode = 301
+	CNErrorCodeValidationConfigurationError     CNErrorCode = 302
+	CNErrorCodePredicateInvalid                 CNErrorCode = 400
+	CNErrorCodePolicyViolation                  CNErrorCode = 500
+	CNErrorCodeClientIdentifierInvalid          CNErrorCode = 600
+	CNErrorCodeClientIdentifierDoesNotExist     CNErrorCode = 601
+	CNErrorCodeClientIdentifierCollision        CNErrorCode = 602
+	CNErrorCodeChangeHistoryExpired             CNErrorCode = 603
+	CNErrorCodeChangeHistoryInvalidAnchor       CNErrorCode = 604
+	CNErrorCodeChangeHistoryInvalidFetchRequest CNErrorCode = 605
+	CNErrorCodeVCardMalformed                   CNErrorCode = 700
+	CNErrorCodeVCardSummarizationError          CNErrorCode = 701
+)
+
+func (e CNErrorCode) String() string {
+	switch e {
+	case CNErrorCodeCommunicationError:
+		return "CNErrorCodeCommunicationError"
+	case CNErrorCodeDataAccessError:
+		return "CNErrorCodeDataAccessError"
+	case CNErrorCodeAuthorizationDenied:
+		return "CNErrorCodeAuthorizationDenied"
+	case CNErrorCodeNoAccessableWritableContainers:
+		return "CNErrorCodeNoAccessableWritableContainers"
+	case CNErrorCodeUnauthorizedKeys:
+		return "CNErrorCodeUnauthorizedKeys"
+	case CNErrorCodeFeatureDisabledByUser:
+		return "CNErrorCodeFeatureDisabledByUser"
+	case CNErrorCodeFeatureNotAvailable:
+		return "CNErrorCodeFeatureNotAvailable"
+	case CNErrorCodeRecordDoesNotExist:
+		return "CNErrorCodeRecordDoesNotExist"
+	case CNErrorCodeInsertedRecordAlreadyExists:
+		return "CNErrorCodeInsertedRecordAlreadyExists"
+	case CNErrorCodeContainmentCycle:
+		return "CNErrorCodeContainmentCycle"
+	case CNErrorCodeContainmentScope:
+		return "CNErrorCodeContainmentScope"
+	case CNErrorCodeParentRecordDoesNotExist:
+		return "CNErrorCodeParentRecordDoesNotExist"
+	case CNErrorCodeRecordIdentifierInvalid:
+		return "CNErrorCodeRecordIdentifierInvalid"
+	case CNErrorCodeRecordNotWritable:
+		return "CNErrorCodeRecordNotWritable"
+	case CNErrorCodeParentContainerNotWritable:
+		return "CNErrorCodeParentContainerNotWritable"
+	case CNErrorCodeValidationMultipleErrors:
+		return "CNErrorCodeValidationMultipleErrors"
+	case CNErrorCodeValidationTypeMismatch:
+		return "CNErrorCodeValidationTypeMismatch"
+	case CNErrorCodeValidationConfigurationError:
+		return "CNErrorCodeValidationConfigurationError"
+	case CNErrorCodePredicateInvalid:
+		return "CNErrorCodePredicateInvalid"
+	case CNErrorCodePolicyViolation:
+		return "CNErrorCodePolicyViolation"
+	case CNErrorCodeClientIdentifierInvalid:
+		return "CNErrorCodeClientIdentifierInvalid"
+	case CNErrorCodeClientIdentifierDoesNotExist:
+		return "CNErrorCodeClientIdentifierDoesNotExist"
+	case CNErrorCodeClientIdentifierCollision:
+		return "CNErrorCodeClientIdentifierCollision"
+	case CNErrorCodeChangeHistoryExpired:
+		return "CNErrorCodeChangeHistoryExpired"
+	case CNErrorCodeChangeHistoryInvalidAnchor:
+		return "CNErrorCodeChangeHistoryInvalidAnchor"
+	case CNErrorCodeChangeHistoryInvalidFetchRequest:
+		return "CNErrorCodeChangeHistoryInvalidFetchRequest"
+	case CNErrorCodeVCardMalformed:
+		return "CNErrorCodeVCardMalformed"
+	case CNErrorCodeVCardSummarizationError:
+		return "CNErrorCodeVCardSummarizationError"
+	default:
+		return fmt.Sprintf("CNErrorCode(%d)", int64(e))
+	}
+}
+
 // Constants for postal formatting styles.
 type CNPostalAddressFormatterStyle int64
 

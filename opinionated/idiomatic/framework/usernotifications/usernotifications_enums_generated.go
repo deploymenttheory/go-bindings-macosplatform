@@ -93,6 +93,55 @@ func (e UNAuthorizationStatus) String() string {
 	}
 }
 
+// Constants that identify notification errors.
+type UNErrorCode int64
+
+const (
+	UNErrorCodeNotificationsNotAllowed           UNErrorCode = 1
+	UNErrorCodeAttachmentInvalidURL              UNErrorCode = 100
+	UNErrorCodeAttachmentUnrecognizedType        UNErrorCode = 101
+	UNErrorCodeAttachmentInvalidFileSize         UNErrorCode = 102
+	UNErrorCodeAttachmentNotInDataStore          UNErrorCode = 103
+	UNErrorCodeAttachmentMoveIntoDataStoreFailed UNErrorCode = 104
+	UNErrorCodeAttachmentCorrupt                 UNErrorCode = 105
+	UNErrorCodeNotificationInvalidNoDate         UNErrorCode = 1400
+	UNErrorCodeNotificationInvalidNoContent      UNErrorCode = 1401
+	UNErrorCodeContentProvidingObjectNotAllowed  UNErrorCode = 1500
+	UNErrorCodeContentProvidingInvalid           UNErrorCode = 1501
+	UNErrorCodeBadgeInputInvalid                 UNErrorCode = 1600
+)
+
+func (e UNErrorCode) String() string {
+	switch e {
+	case UNErrorCodeNotificationsNotAllowed:
+		return "UNErrorCodeNotificationsNotAllowed"
+	case UNErrorCodeAttachmentInvalidURL:
+		return "UNErrorCodeAttachmentInvalidURL"
+	case UNErrorCodeAttachmentUnrecognizedType:
+		return "UNErrorCodeAttachmentUnrecognizedType"
+	case UNErrorCodeAttachmentInvalidFileSize:
+		return "UNErrorCodeAttachmentInvalidFileSize"
+	case UNErrorCodeAttachmentNotInDataStore:
+		return "UNErrorCodeAttachmentNotInDataStore"
+	case UNErrorCodeAttachmentMoveIntoDataStoreFailed:
+		return "UNErrorCodeAttachmentMoveIntoDataStoreFailed"
+	case UNErrorCodeAttachmentCorrupt:
+		return "UNErrorCodeAttachmentCorrupt"
+	case UNErrorCodeNotificationInvalidNoDate:
+		return "UNErrorCodeNotificationInvalidNoDate"
+	case UNErrorCodeNotificationInvalidNoContent:
+		return "UNErrorCodeNotificationInvalidNoContent"
+	case UNErrorCodeContentProvidingObjectNotAllowed:
+		return "UNErrorCodeContentProvidingObjectNotAllowed"
+	case UNErrorCodeContentProvidingInvalid:
+		return "UNErrorCodeContentProvidingInvalid"
+	case UNErrorCodeBadgeInputInvalid:
+		return "UNErrorCodeBadgeInputInvalid"
+	default:
+		return fmt.Sprintf("UNErrorCode(%d)", int64(e))
+	}
+}
+
 // The behaviors you can apply to an action.
 // Bitmask — values may be combined with |.
 type UNNotificationActionOptions uint64

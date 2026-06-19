@@ -8,6 +8,39 @@ import (
 	"fmt"
 )
 
+type CNCinematicErrorCode int64
+
+const (
+	CNCinematicErrorCodeUnknown      CNCinematicErrorCode = 1
+	CNCinematicErrorCodeUnreadable   CNCinematicErrorCode = 2
+	CNCinematicErrorCodeIncomplete   CNCinematicErrorCode = 3
+	CNCinematicErrorCodeMalformed    CNCinematicErrorCode = 4
+	CNCinematicErrorCodeUnsupported  CNCinematicErrorCode = 5
+	CNCinematicErrorCodeIncompatible CNCinematicErrorCode = 6
+	CNCinematicErrorCodeCancelled    CNCinematicErrorCode = 7
+)
+
+func (e CNCinematicErrorCode) String() string {
+	switch e {
+	case CNCinematicErrorCodeUnknown:
+		return "CNCinematicErrorCodeUnknown"
+	case CNCinematicErrorCodeUnreadable:
+		return "CNCinematicErrorCodeUnreadable"
+	case CNCinematicErrorCodeIncomplete:
+		return "CNCinematicErrorCodeIncomplete"
+	case CNCinematicErrorCodeMalformed:
+		return "CNCinematicErrorCodeMalformed"
+	case CNCinematicErrorCodeUnsupported:
+		return "CNCinematicErrorCodeUnsupported"
+	case CNCinematicErrorCodeIncompatible:
+		return "CNCinematicErrorCodeIncompatible"
+	case CNCinematicErrorCodeCancelled:
+		return "CNCinematicErrorCodeCancelled"
+	default:
+		return fmt.Sprintf("CNCinematicErrorCode(%d)", int64(e))
+	}
+}
+
 // The type of object detected, such as face, torso, cat, dog and so on.
 type CNDetectionType int64
 

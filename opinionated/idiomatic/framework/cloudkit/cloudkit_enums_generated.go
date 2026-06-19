@@ -115,6 +115,169 @@ func (e CKDatabaseScope) String() string {
 	}
 }
 
+// The error codes that CloudKit returns.
+type CKErrorCode int64
+
+const (
+	// A nonrecoverable error that CloudKit encounters. If you receive this error, file a [bug report](http://radar.apple.com) that includes the error log.
+	CKErrorInternalError CKErrorCode = 1
+	// An error that occurs when an operation completes with partial failures. Examine the specific item failures, and act on the failed items. Each specific item error is from the CloudKit error domain. You can inspect the <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> ``CKPartialErrorsByItemIDKey`` to see per-item errors. Note that in a custom zone, the system processes all items in an operation atomically. As a result, you may get a ``CKError/Code/batchRequestFailed`` error for all other items in an operation that don't cause an error.
+	CKErrorPartialFailure CKErrorCode = 2
+	// An error that occurs when the network is unavailable. You can retry network failures immediately, but have your app implement a backoff period so that it doesn't attempt the same operation repeatedly. If the network is unavailable, have your app monitor for network reachability and wait to reissue the operation when the network is available again. See <doc://com.apple.documentation/documentation/cfnetwork/cfnetworkerrors> for more information.
+	CKErrorNetworkUnavailable CKErrorCode = 3
+	// An error that occurs when a network is available, but CloudKit is inaccessible. You can retry network failures immediately, but have your app implement a backoff period so that it doesn't attempt the same operation repeatedly. If the network is unavailable, have your app monitor for network reachability and wait to reissue the operation when the network is available again. See <doc://com.apple.documentation/documentation/cfnetwork/cfnetworkerrors> for more information.
+	CKErrorNetworkFailure CKErrorCode = 4
+	// An error that occurs when you use an unknown or unauthorized container.
+	CKErrorBadContainer CKErrorCode = 5
+	// An error that occurs when CloudKit is unavailable.
+	CKErrorServiceUnavailable CKErrorCode = 6
+	// An error that occurs when CloudKit rate-limits requests. Check for a ``CKErrorRetryAfterKey`` key in the <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of any CloudKit error that you receive. It's especially important to check for it if you receive any of these errors. Use the value of the ``CKErrorRetryAfterKey`` key as the number of seconds to wait before retrying this operation.
+	CKErrorRequestRateLimited CKErrorCode = 7
+	// An error that occurs when the app is missing a required entitlement.
+	CKErrorMissingEntitlement CKErrorCode = 8
+	// An error that occurs when CloudKit cannot authenticate the user.
+	CKErrorNotAuthenticated CKErrorCode = 9
+	// An error that occurs when the user doesn't have permission to save or fetch data. This error typically occurs in the public database in one of these circumstances: - You have roles for record types. - Your app is trying to accept a share that the user doesn't have an invitation for. Let users know they can't perform this operation. This error is nonrecoverable and you can't retry the operation.
+	CKErrorPermissionFailure CKErrorCode = 10
+	// An error that occurs when the specified record doesn't exist.
+	CKErrorUnknownItem CKErrorCode = 11
+	// An error that occurs when the request contains invalid information. Consult the error's <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary for more information about the issue.
+	CKErrorInvalidArguments CKErrorCode = 12
+	// An error that occurs when CloudKit truncates a query's results.
+	//
+	// Deprecated: Will not be returned
+	CKErrorResultsTruncated CKErrorCode = 13
+	// An error that occurs when CloudKit rejects a record because the server's version is different. This error indicates that the server's version of the record is newer than the local version the client's trying to save. Your app needs to handle this error, resolve any conflicts in the record, and attempt another save of the record, if necessary. CloudKit provides your app with three copies of the record in this error's `userInfo` dictionary to assist with comparing and merging the changes: - ``CKRecordChangedErrorClientRecordKey``: The local record that the client's trying to save. - ``CKRecordChangedErrorServerRecordKey``: The record that exists on the server. - ``CKRecordChangedErrorAncestorRecordKey``: The original version of the record. When a conflict occurs, your app needs to merge all changes into the record for the ``CKRecordChangedErrorServerRecordKey`` key and attempt a new save using that record. Merging into either of the other two copies of the record results in another conflict error because those records have the old record change tag.
+	CKErrorServerRecordChanged CKErrorCode = 14
+	// An error that occurs when CloudKit rejects the request. This error is nonrecoverable.
+	CKErrorServerRejectedRequest CKErrorCode = 15
+	// An error that occurs when the system can't find the specified asset.
+	CKErrorAssetFileNotFound CKErrorCode = 16
+	// An error that occurs when the system modifies an asset while saving it.
+	CKErrorAssetFileModified CKErrorCode = 17
+	// An error that occurs when the current app version is older than the oldest allowed version.
+	CKErrorIncompatibleVersion CKErrorCode = 18
+	// An error that occurs when the server rejects the request because of a unique constraint violation.
+	CKErrorConstraintViolation CKErrorCode = 19
+	// An error that occurs when an operation cancels.
+	CKErrorOperationCancelled CKErrorCode = 20
+	// An error that occurs when the change token expires.
+	CKErrorChangeTokenExpired CKErrorCode = 21
+	// An error that occurs when the system rejects the entire batch of changes. This error occurs when an operation attempts to save multiple items in a custom zone, but one of those items encounters an error. Because custom zones are atomic, the entire batch fails. The items that cause the problem have their own errors, and all other items in the batch have a ``CKError/Code/batchRequestFailed`` error to indicate that the system can't save them. This error indicates that the system can't process the associated item due to an error in another item in the operation. Check the other per-item errors under ``CKPartialErrorsByItemIDKey`` for any that aren't ``CKError/Code/batchRequestFailed`` errors. Handle those errors, and then retry all items in the operation.
+	CKErrorBatchRequestFailed CKErrorCode = 22
+	// An error that occurs when the server is too busy to handle the record zone operation. Try the operation again in a few seconds. If you encounter this error again, increase the delay time exponentially for each subsequent retry to minimize server contention for the zone. Check for a ``CKErrorRetryAfterKey`` key in the <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of any CloudKit error that you receive. Use the value of this key as the number of seconds to wait before retrying the operation.
+	CKErrorZoneBusy CKErrorCode = 23
+	// An error that occurs when the operation can't complete for the specified database. The system submitted the operation to the wrong database. Make sure you aren't submitting a share operation to the public database, or a record zone create operation to the shared database.
+	CKErrorBadDatabase CKErrorCode = 24
+	// An error that occurs when saving a record exceeds the user's storage quota. **In the public database**: Your app's container doesn't have enough storage. Individual users can't do anything about this, but you can go to the CloudKit Dashboard to view and manage your container's storage. **In the private database**: The user doesn't have enough iCloud storage. Prompt the user to go to iCloud settings to manage their storage. **In the shared database**: The owner of the shared record zone doesn't have enough iCloud storage. The user can't do anything about this, but can contact the owner about upgrading their storage or cleaning up their iCloud account.
+	CKErrorQuotaExceeded CKErrorCode = 25
+	// An error that occurs when the specified record zone doesn't exist.
+	CKErrorZoneNotFound CKErrorCode = 26
+	// An error that occurs when a request's size exceeds the limit. The server can change its limits at any time, but the following are general guidelines: - 400 items (records or shares) per operation - 2 MB per request (not counting asset sizes) If your app receives ``CKError/Code/limitExceeded``, it must split the operation in half and try both requests again.
+	CKErrorLimitExceeded CKErrorCode = 27
+	// An error that occurs when the user deletes a record zone using the Settings app.
+	CKErrorUserDeletedZone CKErrorCode = 28
+	// An error that occurs when a share has too many participants. Remove some participants before you retry the operation. Limits can change at any time, but CloudKit generally enforces a maximum of 100 participants for a share.
+	CKErrorTooManyParticipants CKErrorCode = 29
+	// An error that occurs when CloudKit attempts to share a record with an existing share. A record can exist in only a single share at a time. This error means that one of the following conditions exists: - The record already has an existing share. - The record has a parent, and its parent has a share. - The record is a parent, and one of its children has a share.
+	CKErrorAlreadyShared CKErrorCode = 30
+	// An error that occurs when CloudKit can't find the target of a reference.
+	CKErrorReferenceViolation CKErrorCode = 31
+	// An error that occurs when CloudKit rejects a request due to a managed-account restriction. The system restricts CloudKit access for this account. This is a nonrecoverable error.
+	CKErrorManagedAccountRestricted CKErrorCode = 32
+	// An error that occurs when the user isn't a participant of the share. A fetch share metadata operation fails when the user isn't a participant of the share. However, there are invited participants on the share with email addresses or phone numbers that don't have associations with an iCloud account. The user may be able to join a share by associating one of those email addresses or phone numbers with the user's iCloud account. Call <doc://com.apple.documentation/documentation/uikit/uiapplication/openurl(_:)> on the share URL to have the user attempt to verify their information.
+	CKErrorParticipantMayNeedVerification CKErrorCode = 33
+	// An error that occurs when CloudKit is unable to maintain the network connection and provide a response. You can retry operations that are idempotent. For non-idempotent operations, you should consult server state to determine if the operation succeeded.
+	CKErrorServerResponseLost CKErrorCode = 34
+	// An error that occurs when the system can't access the specified asset.
+	CKErrorAssetNotAvailable CKErrorCode = 35
+	// An error that occurs when the user's iCloud account is temporarily unavailable. You receive this error when the user's iCloud account is available, but isn't ready to support CloudKit operations. Don't delete any cached data and don't enqueue any additional CloudKit operations. Checking the account status after the operation fails, assuming there are no other changes to the account's status, returns ``CKAccountStatus/temporarilyUnavailable``. Use the <doc://com.apple.documentation/documentation/foundation/nsnotification/name-swift.struct/ckaccountchanged> notification to listen for future account status changes, and retry the operation after the status becomes ``CKAccountStatus/available``.
+	CKErrorAccountTemporarilyUnavailable CKErrorCode = 36
+	// The user is already an invited participant on this share. They must accept the existing share invitation before continuing.
+	CKErrorParticipantAlreadyInvited CKErrorCode = 37
+)
+
+func (e CKErrorCode) String() string {
+	switch e {
+	case CKErrorInternalError:
+		return "CKErrorInternalError"
+	case CKErrorPartialFailure:
+		return "CKErrorPartialFailure"
+	case CKErrorNetworkUnavailable:
+		return "CKErrorNetworkUnavailable"
+	case CKErrorNetworkFailure:
+		return "CKErrorNetworkFailure"
+	case CKErrorBadContainer:
+		return "CKErrorBadContainer"
+	case CKErrorServiceUnavailable:
+		return "CKErrorServiceUnavailable"
+	case CKErrorRequestRateLimited:
+		return "CKErrorRequestRateLimited"
+	case CKErrorMissingEntitlement:
+		return "CKErrorMissingEntitlement"
+	case CKErrorNotAuthenticated:
+		return "CKErrorNotAuthenticated"
+	case CKErrorPermissionFailure:
+		return "CKErrorPermissionFailure"
+	case CKErrorUnknownItem:
+		return "CKErrorUnknownItem"
+	case CKErrorInvalidArguments:
+		return "CKErrorInvalidArguments"
+	case CKErrorResultsTruncated:
+		return "CKErrorResultsTruncated"
+	case CKErrorServerRecordChanged:
+		return "CKErrorServerRecordChanged"
+	case CKErrorServerRejectedRequest:
+		return "CKErrorServerRejectedRequest"
+	case CKErrorAssetFileNotFound:
+		return "CKErrorAssetFileNotFound"
+	case CKErrorAssetFileModified:
+		return "CKErrorAssetFileModified"
+	case CKErrorIncompatibleVersion:
+		return "CKErrorIncompatibleVersion"
+	case CKErrorConstraintViolation:
+		return "CKErrorConstraintViolation"
+	case CKErrorOperationCancelled:
+		return "CKErrorOperationCancelled"
+	case CKErrorChangeTokenExpired:
+		return "CKErrorChangeTokenExpired"
+	case CKErrorBatchRequestFailed:
+		return "CKErrorBatchRequestFailed"
+	case CKErrorZoneBusy:
+		return "CKErrorZoneBusy"
+	case CKErrorBadDatabase:
+		return "CKErrorBadDatabase"
+	case CKErrorQuotaExceeded:
+		return "CKErrorQuotaExceeded"
+	case CKErrorZoneNotFound:
+		return "CKErrorZoneNotFound"
+	case CKErrorLimitExceeded:
+		return "CKErrorLimitExceeded"
+	case CKErrorUserDeletedZone:
+		return "CKErrorUserDeletedZone"
+	case CKErrorTooManyParticipants:
+		return "CKErrorTooManyParticipants"
+	case CKErrorAlreadyShared:
+		return "CKErrorAlreadyShared"
+	case CKErrorReferenceViolation:
+		return "CKErrorReferenceViolation"
+	case CKErrorManagedAccountRestricted:
+		return "CKErrorManagedAccountRestricted"
+	case CKErrorParticipantMayNeedVerification:
+		return "CKErrorParticipantMayNeedVerification"
+	case CKErrorServerResponseLost:
+		return "CKErrorServerResponseLost"
+	case CKErrorAssetNotAvailable:
+		return "CKErrorAssetNotAvailable"
+	case CKErrorAccountTemporarilyUnavailable:
+		return "CKErrorAccountTemporarilyUnavailable"
+	case CKErrorParticipantAlreadyInvited:
+		return "CKErrorParticipantAlreadyInvited"
+	default:
+		return fmt.Sprintf("CKErrorCode(%d)", int64(e))
+	}
+}
+
 type CKNotificationType int64
 
 const (

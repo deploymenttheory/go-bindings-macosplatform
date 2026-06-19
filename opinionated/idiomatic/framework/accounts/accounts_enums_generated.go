@@ -28,3 +28,84 @@ func (e ACAccountCredentialRenewResult) String() string {
 		return fmt.Sprintf("ACAccountCredentialRenewResult(%d)", int64(e))
 	}
 }
+
+type ACErrorCode int64
+
+const (
+	ACErrorUnknown                        ACErrorCode = 1
+	ACErrorAccountMissingRequiredProperty ACErrorCode = 2
+	ACErrorAccountAuthenticationFailed    ACErrorCode = 3
+	ACErrorAccountTypeInvalid             ACErrorCode = 4
+	ACErrorAccountAlreadyExists           ACErrorCode = 5
+	ACErrorAccountNotFound                ACErrorCode = 6
+	ACErrorPermissionDenied               ACErrorCode = 7
+	ACErrorAccessInfoInvalid              ACErrorCode = 8
+	ACErrorClientPermissionDenied         ACErrorCode = 9
+	ACErrorAccessDeniedByProtectionPolicy ACErrorCode = 10
+	ACErrorCredentialNotFound             ACErrorCode = 11
+	ACErrorFetchCredentialFailed          ACErrorCode = 12
+	ACErrorStoreCredentialFailed          ACErrorCode = 13
+	ACErrorRemoveCredentialFailed         ACErrorCode = 14
+	ACErrorUpdatingNonexistentAccount     ACErrorCode = 15
+	ACErrorInvalidClientBundleID          ACErrorCode = 16
+	ACErrorDeniedByPlugin                 ACErrorCode = 17
+	ACErrorCoreDataSaveFailed             ACErrorCode = 18
+	ACErrorFailedSerializingAccountInfo   ACErrorCode = 19
+	ACErrorInvalidCommand                 ACErrorCode = 20
+	ACErrorMissingTransportMessageID      ACErrorCode = 21
+	ACErrorCredentialItemNotFound         ACErrorCode = 22
+	ACErrorCredentialItemNotExpired       ACErrorCode = 23
+)
+
+func (e ACErrorCode) String() string {
+	switch e {
+	case ACErrorUnknown:
+		return "ACErrorUnknown"
+	case ACErrorAccountMissingRequiredProperty:
+		return "ACErrorAccountMissingRequiredProperty"
+	case ACErrorAccountAuthenticationFailed:
+		return "ACErrorAccountAuthenticationFailed"
+	case ACErrorAccountTypeInvalid:
+		return "ACErrorAccountTypeInvalid"
+	case ACErrorAccountAlreadyExists:
+		return "ACErrorAccountAlreadyExists"
+	case ACErrorAccountNotFound:
+		return "ACErrorAccountNotFound"
+	case ACErrorPermissionDenied:
+		return "ACErrorPermissionDenied"
+	case ACErrorAccessInfoInvalid:
+		return "ACErrorAccessInfoInvalid"
+	case ACErrorClientPermissionDenied:
+		return "ACErrorClientPermissionDenied"
+	case ACErrorAccessDeniedByProtectionPolicy:
+		return "ACErrorAccessDeniedByProtectionPolicy"
+	case ACErrorCredentialNotFound:
+		return "ACErrorCredentialNotFound"
+	case ACErrorFetchCredentialFailed:
+		return "ACErrorFetchCredentialFailed"
+	case ACErrorStoreCredentialFailed:
+		return "ACErrorStoreCredentialFailed"
+	case ACErrorRemoveCredentialFailed:
+		return "ACErrorRemoveCredentialFailed"
+	case ACErrorUpdatingNonexistentAccount:
+		return "ACErrorUpdatingNonexistentAccount"
+	case ACErrorInvalidClientBundleID:
+		return "ACErrorInvalidClientBundleID"
+	case ACErrorDeniedByPlugin:
+		return "ACErrorDeniedByPlugin"
+	case ACErrorCoreDataSaveFailed:
+		return "ACErrorCoreDataSaveFailed"
+	case ACErrorFailedSerializingAccountInfo:
+		return "ACErrorFailedSerializingAccountInfo"
+	case ACErrorInvalidCommand:
+		return "ACErrorInvalidCommand"
+	case ACErrorMissingTransportMessageID:
+		return "ACErrorMissingTransportMessageID"
+	case ACErrorCredentialItemNotFound:
+		return "ACErrorCredentialItemNotFound"
+	case ACErrorCredentialItemNotExpired:
+		return "ACErrorCredentialItemNotExpired"
+	default:
+		return fmt.Sprintf("ACErrorCode(%d)", int64(e))
+	}
+}

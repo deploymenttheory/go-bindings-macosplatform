@@ -4576,6 +4576,85 @@ func (e MTRDiscoveryCapabilities) String() string {
 	return strings.Join(parts, "|")
 }
 
+type MTRErrorCode int64
+
+const (
+	// MTRErrorCodeGeneralError represents a generic Matter error with no further categorization. The userInfo will have a key named @"errorCode" whose value will be an integer representing the underlying Matter error code.  These integer values should not be assumed to be stable across releases, but may be useful in logging and debugging.
+	MTRErrorCodeGeneralError         MTRErrorCode = 1
+	MTRErrorCodeInvalidStringLength  MTRErrorCode = 2
+	MTRErrorCodeInvalidIntegerValue  MTRErrorCode = 3
+	MTRErrorCodeInvalidArgument      MTRErrorCode = 4
+	MTRErrorCodeInvalidMessageLength MTRErrorCode = 5
+	MTRErrorCodeInvalidState         MTRErrorCode = 6
+	MTRErrorCodeWrongAddressType     MTRErrorCode = 7
+	MTRErrorCodeIntegrityCheckFailed MTRErrorCode = 8
+	MTRErrorCodeTimeout              MTRErrorCode = 9
+	MTRErrorCodeBufferTooSmall       MTRErrorCode = 10
+	// MTRErrorCodeFabricExists is returned when trying to commission a device into a fabric when it's already part of that fabric.
+	MTRErrorCodeFabricExists MTRErrorCode = 11
+	// MTRErrorCodeUnknownSchema means the schema for the given cluster/attribute, cluster/event, or cluster/command combination is not known.
+	MTRErrorCodeUnknownSchema MTRErrorCode = 12
+	// MTRErrorCodeSchemaMismatch means that provided data did not match the expected schema.
+	MTRErrorCodeSchemaMismatch MTRErrorCode = 13
+	// MTRErrorCodeTLVDecodeFailed means that the TLV being decoded was malformed in some way.  This can include things like lengths running past the end of the buffer, strings that are not actually UTF-8, and various other TLV-level failures.
+	MTRErrorCodeTLVDecodeFailed MTRErrorCode = 14
+	// MTRErrorCodeDNSSDUnauthorized means that the application is not authorized to perform DNS_SD lookups.  This typically means missing entries for "_matter._tcp" (for operational lookup) and "_matterc._udp" (for commissionable lookup) under the NSBonjourServices key in the application's Info.plist.
+	MTRErrorCodeDNSSDUnauthorized MTRErrorCode = 15
+	// The operation was cancelled.
+	MTRErrorCodeCancelled MTRErrorCode = 16
+	// Access to some resource was denied.
+	MTRErrorCodeAccessDenied MTRErrorCode = 17
+	// A request was made to some entity, and that entity cannot handle the request right now, but might be able to at a different point in time.
+	MTRErrorCodeBusy MTRErrorCode = 18
+	// Something was requested that could not be located.
+	MTRErrorCodeNotFound MTRErrorCode = 19
+)
+
+func (e MTRErrorCode) String() string {
+	switch e {
+	case MTRErrorCodeGeneralError:
+		return "MTRErrorCodeGeneralError"
+	case MTRErrorCodeInvalidStringLength:
+		return "MTRErrorCodeInvalidStringLength"
+	case MTRErrorCodeInvalidIntegerValue:
+		return "MTRErrorCodeInvalidIntegerValue"
+	case MTRErrorCodeInvalidArgument:
+		return "MTRErrorCodeInvalidArgument"
+	case MTRErrorCodeInvalidMessageLength:
+		return "MTRErrorCodeInvalidMessageLength"
+	case MTRErrorCodeInvalidState:
+		return "MTRErrorCodeInvalidState"
+	case MTRErrorCodeWrongAddressType:
+		return "MTRErrorCodeWrongAddressType"
+	case MTRErrorCodeIntegrityCheckFailed:
+		return "MTRErrorCodeIntegrityCheckFailed"
+	case MTRErrorCodeTimeout:
+		return "MTRErrorCodeTimeout"
+	case MTRErrorCodeBufferTooSmall:
+		return "MTRErrorCodeBufferTooSmall"
+	case MTRErrorCodeFabricExists:
+		return "MTRErrorCodeFabricExists"
+	case MTRErrorCodeUnknownSchema:
+		return "MTRErrorCodeUnknownSchema"
+	case MTRErrorCodeSchemaMismatch:
+		return "MTRErrorCodeSchemaMismatch"
+	case MTRErrorCodeTLVDecodeFailed:
+		return "MTRErrorCodeTLVDecodeFailed"
+	case MTRErrorCodeDNSSDUnauthorized:
+		return "MTRErrorCodeDNSSDUnauthorized"
+	case MTRErrorCodeCancelled:
+		return "MTRErrorCodeCancelled"
+	case MTRErrorCodeAccessDenied:
+		return "MTRErrorCodeAccessDenied"
+	case MTRErrorCodeBusy:
+		return "MTRErrorCodeBusy"
+	case MTRErrorCodeNotFound:
+		return "MTRErrorCodeNotFound"
+	default:
+		return fmt.Sprintf("MTRErrorCode(%d)", int64(e))
+	}
+}
+
 type MTREventIDType int64
 
 const (
@@ -4809,6 +4888,102 @@ func (e MTREventTimeType) String() string {
 		return "MTREventTimeTypeTimestampDate"
 	default:
 		return fmt.Sprintf("MTREventTimeType(%d)", int64(e))
+	}
+}
+
+type MTRInteractionErrorCode int64
+
+const (
+	MTRInteractionErrorCodeFailure                MTRInteractionErrorCode = 1
+	MTRInteractionErrorCodeInvalidSubscription    MTRInteractionErrorCode = 125
+	MTRInteractionErrorCodeUnsupportedAccess      MTRInteractionErrorCode = 126
+	MTRInteractionErrorCodeUnsupportedEndpoint    MTRInteractionErrorCode = 127
+	MTRInteractionErrorCodeInvalidAction          MTRInteractionErrorCode = 128
+	MTRInteractionErrorCodeUnsupportedCommand     MTRInteractionErrorCode = 129
+	MTRInteractionErrorCodeInvalidCommand         MTRInteractionErrorCode = 133
+	MTRInteractionErrorCodeUnsupportedAttribute   MTRInteractionErrorCode = 134
+	MTRInteractionErrorCodeConstraintError        MTRInteractionErrorCode = 135
+	MTRInteractionErrorCodeUnsupportedWrite       MTRInteractionErrorCode = 136
+	MTRInteractionErrorCodeResourceExhausted      MTRInteractionErrorCode = 137
+	MTRInteractionErrorCodeNotFound               MTRInteractionErrorCode = 139
+	MTRInteractionErrorCodeUnreportableAttribute  MTRInteractionErrorCode = 140
+	MTRInteractionErrorCodeInvalidDataType        MTRInteractionErrorCode = 141
+	MTRInteractionErrorCodeUnsupportedRead        MTRInteractionErrorCode = 143
+	MTRInteractionErrorCodeDataVersionMismatch    MTRInteractionErrorCode = 146
+	MTRInteractionErrorCodeTimeout                MTRInteractionErrorCode = 148
+	MTRInteractionErrorCodeBusy                   MTRInteractionErrorCode = 156
+	MTRInteractionErrorCodeAccessRestricted       MTRInteractionErrorCode = 157
+	MTRInteractionErrorCodeUnsupportedCluster     MTRInteractionErrorCode = 195
+	MTRInteractionErrorCodeNoUpstreamSubscription MTRInteractionErrorCode = 197
+	MTRInteractionErrorCodeNeedsTimedInteraction  MTRInteractionErrorCode = 198
+	MTRInteractionErrorCodeUnsupportedEvent       MTRInteractionErrorCode = 199
+	MTRInteractionErrorCodePathsExhausted         MTRInteractionErrorCode = 200
+	MTRInteractionErrorCodeTimedRequestMismatch   MTRInteractionErrorCode = 201
+	MTRInteractionErrorCodeFailsafeRequired       MTRInteractionErrorCode = 202
+	MTRInteractionErrorCodeInvalidInState         MTRInteractionErrorCode = 203
+	MTRInteractionErrorCodeNoCommandResponse      MTRInteractionErrorCode = 204
+)
+
+func (e MTRInteractionErrorCode) String() string {
+	switch e {
+	case MTRInteractionErrorCodeFailure:
+		return "MTRInteractionErrorCodeFailure"
+	case MTRInteractionErrorCodeInvalidSubscription:
+		return "MTRInteractionErrorCodeInvalidSubscription"
+	case MTRInteractionErrorCodeUnsupportedAccess:
+		return "MTRInteractionErrorCodeUnsupportedAccess"
+	case MTRInteractionErrorCodeUnsupportedEndpoint:
+		return "MTRInteractionErrorCodeUnsupportedEndpoint"
+	case MTRInteractionErrorCodeInvalidAction:
+		return "MTRInteractionErrorCodeInvalidAction"
+	case MTRInteractionErrorCodeUnsupportedCommand:
+		return "MTRInteractionErrorCodeUnsupportedCommand"
+	case MTRInteractionErrorCodeInvalidCommand:
+		return "MTRInteractionErrorCodeInvalidCommand"
+	case MTRInteractionErrorCodeUnsupportedAttribute:
+		return "MTRInteractionErrorCodeUnsupportedAttribute"
+	case MTRInteractionErrorCodeConstraintError:
+		return "MTRInteractionErrorCodeConstraintError"
+	case MTRInteractionErrorCodeUnsupportedWrite:
+		return "MTRInteractionErrorCodeUnsupportedWrite"
+	case MTRInteractionErrorCodeResourceExhausted:
+		return "MTRInteractionErrorCodeResourceExhausted"
+	case MTRInteractionErrorCodeNotFound:
+		return "MTRInteractionErrorCodeNotFound"
+	case MTRInteractionErrorCodeUnreportableAttribute:
+		return "MTRInteractionErrorCodeUnreportableAttribute"
+	case MTRInteractionErrorCodeInvalidDataType:
+		return "MTRInteractionErrorCodeInvalidDataType"
+	case MTRInteractionErrorCodeUnsupportedRead:
+		return "MTRInteractionErrorCodeUnsupportedRead"
+	case MTRInteractionErrorCodeDataVersionMismatch:
+		return "MTRInteractionErrorCodeDataVersionMismatch"
+	case MTRInteractionErrorCodeTimeout:
+		return "MTRInteractionErrorCodeTimeout"
+	case MTRInteractionErrorCodeBusy:
+		return "MTRInteractionErrorCodeBusy"
+	case MTRInteractionErrorCodeAccessRestricted:
+		return "MTRInteractionErrorCodeAccessRestricted"
+	case MTRInteractionErrorCodeUnsupportedCluster:
+		return "MTRInteractionErrorCodeUnsupportedCluster"
+	case MTRInteractionErrorCodeNoUpstreamSubscription:
+		return "MTRInteractionErrorCodeNoUpstreamSubscription"
+	case MTRInteractionErrorCodeNeedsTimedInteraction:
+		return "MTRInteractionErrorCodeNeedsTimedInteraction"
+	case MTRInteractionErrorCodeUnsupportedEvent:
+		return "MTRInteractionErrorCodeUnsupportedEvent"
+	case MTRInteractionErrorCodePathsExhausted:
+		return "MTRInteractionErrorCodePathsExhausted"
+	case MTRInteractionErrorCodeTimedRequestMismatch:
+		return "MTRInteractionErrorCodeTimedRequestMismatch"
+	case MTRInteractionErrorCodeFailsafeRequired:
+		return "MTRInteractionErrorCodeFailsafeRequired"
+	case MTRInteractionErrorCodeInvalidInState:
+		return "MTRInteractionErrorCodeInvalidInState"
+	case MTRInteractionErrorCodeNoCommandResponse:
+		return "MTRInteractionErrorCodeNoCommandResponse"
+	default:
+		return fmt.Sprintf("MTRInteractionErrorCode(%d)", int64(e))
 	}
 }
 

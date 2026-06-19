@@ -33,6 +33,43 @@ func (e MPChangeLanguageOptionSetting) String() string {
 	}
 }
 
+// An enumeration that represents error codes for framework operations.
+type MPErrorCode int64
+
+const (
+	MPErrorUnknown                       MPErrorCode = 0
+	MPErrorPermissionDenied              MPErrorCode = 1
+	MPErrorCloudServiceCapabilityMissing MPErrorCode = 2
+	MPErrorNetworkConnectionFailed       MPErrorCode = 3
+	MPErrorNotFound                      MPErrorCode = 4
+	MPErrorNotSupported                  MPErrorCode = 5
+	MPErrorCancelled                     MPErrorCode = 6
+	MPErrorRequestTimedOut               MPErrorCode = 7
+)
+
+func (e MPErrorCode) String() string {
+	switch e {
+	case MPErrorUnknown:
+		return "MPErrorUnknown"
+	case MPErrorPermissionDenied:
+		return "MPErrorPermissionDenied"
+	case MPErrorCloudServiceCapabilityMissing:
+		return "MPErrorCloudServiceCapabilityMissing"
+	case MPErrorNetworkConnectionFailed:
+		return "MPErrorNetworkConnectionFailed"
+	case MPErrorNotFound:
+		return "MPErrorNotFound"
+	case MPErrorNotSupported:
+		return "MPErrorNotSupported"
+	case MPErrorCancelled:
+		return "MPErrorCancelled"
+	case MPErrorRequestTimedOut:
+		return "MPErrorRequestTimedOut"
+	default:
+		return fmt.Sprintf("MPErrorCode(%d)", int64(e))
+	}
+}
+
 // The language option type to use for the Now Playing item.
 type MPNowPlayingInfoLanguageOptionType uint64
 
