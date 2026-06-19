@@ -76,7 +76,10 @@ func (x *TabView) WithTabViewBorderType(tabViewBorderType NSTabViewBorderType) *
 // WithTabViewItems sets the collection, converting the Go slice to an NSArray.
 func (x *TabView) WithTabViewItems(items ...*raw.NSTabViewItem) *TabView {
 	if len(items) == 0 {
-		x.inner.SetTabViewItems(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetTabViewItems(foundation.NSArrayFromID[*raw.NSTabViewItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -134,7 +137,10 @@ func (x *TabView) WithControlTint(controlTint NSControlTint) *TabView {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *TabView) WithSubviews(items ...ViewProvider) *TabView {
 	if len(items) == 0 {
-		x.inner.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -284,7 +290,10 @@ func (x *TabView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) 
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *TabView) WithBackgroundFilters(items ...*coreimage.CIFilter) *TabView {
 	if len(items) == 0 {
-		x.inner.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -308,7 +317,10 @@ func (x *TabView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *TabView) WithContentFilters(items ...*coreimage.CIFilter) *TabView {
 	if len(items) == 0 {
-		x.inner.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -374,7 +386,10 @@ func (x *TabView) WithFocusRingType(focusRingType NSFocusRingType) *TabView {
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *TabView) WithGestureRecognizers(items ...GestureRecognizerProvider) *TabView {
 	if len(items) == 0 {
-		x.inner.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

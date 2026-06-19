@@ -41,7 +41,10 @@ func NewAnimationGroup() *AnimationGroup {
 // WithAnimations sets the collection, converting the Go slice to an NSArray.
 func (x *AnimationGroup) WithAnimations(items ...AnimationProvider) *AnimationGroup {
 	if len(items) == 0 {
-		x.inner.SetAnimations(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAnimations(foundation.NSArrayFromID[*raw.CAAnimation](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -100,6 +103,8 @@ func (x *AnimationGroup) SetAnimations(animations ...AnimationProvider) {
 	var _arg0 *foundation.NSArray[*raw.CAAnimation]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.CAAnimation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.CAAnimation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetAnimations(_arg0)

@@ -42,7 +42,10 @@ func NewNEAppProxyProviderManager() *NEAppProxyProviderManager {
 // WithSafariDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEAppProxyProviderManager) WithSafariDomains(items ...*foundation.NSString) *NEAppProxyProviderManager {
 	if len(items) == 0 {
-		x.inner.NETunnelProviderManager.SetSafariDomains(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NETunnelProviderManager.SetSafariDomains(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -62,7 +65,10 @@ func (x *NEAppProxyProviderManager) WithSafariDomains(items ...*foundation.NSStr
 // WithMailDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEAppProxyProviderManager) WithMailDomains(items ...*foundation.NSString) *NEAppProxyProviderManager {
 	if len(items) == 0 {
-		x.inner.NETunnelProviderManager.SetMailDomains(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NETunnelProviderManager.SetMailDomains(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -82,7 +88,10 @@ func (x *NEAppProxyProviderManager) WithMailDomains(items ...*foundation.NSStrin
 // WithCalendarDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEAppProxyProviderManager) WithCalendarDomains(items ...*foundation.NSString) *NEAppProxyProviderManager {
 	if len(items) == 0 {
-		x.inner.NETunnelProviderManager.SetCalendarDomains(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NETunnelProviderManager.SetCalendarDomains(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -102,7 +111,10 @@ func (x *NEAppProxyProviderManager) WithCalendarDomains(items ...*foundation.NSS
 // WithContactsDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEAppProxyProviderManager) WithContactsDomains(items ...*foundation.NSString) *NEAppProxyProviderManager {
 	if len(items) == 0 {
-		x.inner.NETunnelProviderManager.SetContactsDomains(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NETunnelProviderManager.SetContactsDomains(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -122,7 +134,10 @@ func (x *NEAppProxyProviderManager) WithContactsDomains(items ...*foundation.NSS
 // WithAppRules sets the collection, converting the Go slice to an NSArray.
 func (x *NEAppProxyProviderManager) WithAppRules(items ...*raw.NEAppRule) *NEAppProxyProviderManager {
 	if len(items) == 0 {
-		x.inner.NETunnelProviderManager.SetAppRules(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NETunnelProviderManager.SetAppRules(foundation.NSArrayFromID[*raw.NEAppRule](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -142,7 +157,10 @@ func (x *NEAppProxyProviderManager) WithAppRules(items ...*raw.NEAppRule) *NEApp
 // WithExcludedDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEAppProxyProviderManager) WithExcludedDomains(items ...*foundation.NSString) *NEAppProxyProviderManager {
 	if len(items) == 0 {
-		x.inner.NETunnelProviderManager.SetExcludedDomains(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NETunnelProviderManager.SetExcludedDomains(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -162,7 +180,10 @@ func (x *NEAppProxyProviderManager) WithExcludedDomains(items ...*foundation.NSS
 // WithAssociatedDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEAppProxyProviderManager) WithAssociatedDomains(items ...*foundation.NSString) *NEAppProxyProviderManager {
 	if len(items) == 0 {
-		x.inner.NETunnelProviderManager.SetAssociatedDomains(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NETunnelProviderManager.SetAssociatedDomains(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -182,7 +203,10 @@ func (x *NEAppProxyProviderManager) WithAssociatedDomains(items ...*foundation.N
 // WithOnDemandRules sets the collection, converting the Go slice to an NSArray.
 func (x *NEAppProxyProviderManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NEAppProxyProviderManager {
 	if len(items) == 0 {
-		x.inner.NETunnelProviderManager.NEVPNManager.SetOnDemandRules(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NETunnelProviderManager.NEVPNManager.SetOnDemandRules(foundation.NSArrayFromID[*raw.NEOnDemandRule](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

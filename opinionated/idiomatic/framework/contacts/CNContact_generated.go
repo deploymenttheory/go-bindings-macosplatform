@@ -58,6 +58,8 @@ func (x *Contact) AreKeysAvailable(keyDescriptors ...purego.IDer) bool {
 	var _arg0 *foundation.NSArray[raw.CNKeyDescriptor]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return x.inner.AreKeysAvailable(_arg0)

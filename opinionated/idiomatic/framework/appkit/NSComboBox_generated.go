@@ -241,7 +241,10 @@ func (x *ComboBox) WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance
 // WithPlaceholderStrings sets the collection, converting the Go slice to an NSArray.
 func (x *ComboBox) WithPlaceholderStrings(items ...*foundation.NSString) *ComboBox {
 	if len(items) == 0 {
-		x.inner.NSTextField.SetPlaceholderStrings(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.SetPlaceholderStrings(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -259,7 +262,10 @@ func (x *ComboBox) WithPlaceholderStrings(items ...*foundation.NSString) *ComboB
 // WithPlaceholderAttributedStrings sets the collection, converting the Go slice to an NSArray.
 func (x *ComboBox) WithPlaceholderAttributedStrings(items ...*foundation.NSAttributedString) *ComboBox {
 	if len(items) == 0 {
-		x.inner.NSTextField.SetPlaceholderAttributedStrings(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.SetPlaceholderAttributedStrings(foundation.NSArrayFromID[*foundation.NSAttributedString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -507,7 +513,10 @@ func (x *ComboBox) WithCell(cell CellProvider) *ComboBox {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *ComboBox) WithSubviews(items ...ViewProvider) *ComboBox {
 	if len(items) == 0 {
-		x.inner.NSTextField.NSControl.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -657,7 +666,10 @@ func (x *ComboBox) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool)
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *ComboBox) WithBackgroundFilters(items ...*coreimage.CIFilter) *ComboBox {
 	if len(items) == 0 {
-		x.inner.NSTextField.NSControl.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -681,7 +693,10 @@ func (x *ComboBox) WithCompositingFilter(compositingFilter *coreimage.CIFilter) 
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *ComboBox) WithContentFilters(items ...*coreimage.CIFilter) *ComboBox {
 	if len(items) == 0 {
-		x.inner.NSTextField.NSControl.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -747,7 +762,10 @@ func (x *ComboBox) WithFocusRingType(focusRingType NSFocusRingType) *ComboBox {
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *ComboBox) WithGestureRecognizers(items ...GestureRecognizerProvider) *ComboBox {
 	if len(items) == 0 {
-		x.inner.NSTextField.NSControl.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextField.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

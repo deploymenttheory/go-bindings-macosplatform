@@ -62,7 +62,10 @@ func (x *DictionaryController) WithInitialValue(initialValue objc.ID) *Dictionar
 // WithIncludedKeys sets the collection, converting the Go slice to an NSArray.
 func (x *DictionaryController) WithIncludedKeys(items ...*foundation.NSString) *DictionaryController {
 	if len(items) == 0 {
-		x.inner.SetIncludedKeys(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetIncludedKeys(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -82,7 +85,10 @@ func (x *DictionaryController) WithIncludedKeys(items ...*foundation.NSString) *
 // WithExcludedKeys sets the collection, converting the Go slice to an NSArray.
 func (x *DictionaryController) WithExcludedKeys(items ...*foundation.NSString) *DictionaryController {
 	if len(items) == 0 {
-		x.inner.SetExcludedKeys(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetExcludedKeys(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -126,7 +132,10 @@ func (x *DictionaryController) WithAutomaticallyRearrangesObjects(automaticallyR
 // WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *DictionaryController) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *DictionaryController {
 	if len(items) == 0 {
-		x.inner.NSArrayController.SetSortDescriptors(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSArrayController.SetSortDescriptors(foundation.NSArrayFromID[*foundation.NSSortDescriptor](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

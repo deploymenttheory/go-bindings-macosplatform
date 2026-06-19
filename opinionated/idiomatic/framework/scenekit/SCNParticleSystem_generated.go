@@ -336,7 +336,10 @@ func (x *ParticleSystem) WithParticleDiesOnCollision(particleDiesOnCollision boo
 // WithColliderNodes sets the collection, converting the Go slice to an NSArray.
 func (x *ParticleSystem) WithColliderNodes(items ...NodeProvider) *ParticleSystem {
 	if len(items) == 0 {
-		x.inner.SetColliderNodes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetColliderNodes(foundation.NSArrayFromID[*raw.SCNNode](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -988,6 +991,8 @@ func (x *ParticleSystem) SetColliderNodes(colliderNodes ...NodeProvider) {
 	var _arg0 *foundation.NSArray[*raw.SCNNode]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.SCNNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.SCNNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetColliderNodes(_arg0)

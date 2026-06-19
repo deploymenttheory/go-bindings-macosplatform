@@ -61,7 +61,10 @@ func (x *ScrubberSelectionView) WithHighlighted(highlighted bool) *ScrubberSelec
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *ScrubberSelectionView) WithSubviews(items ...ViewProvider) *ScrubberSelectionView {
 	if len(items) == 0 {
-		x.inner.NSScrubberArrangedView.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSScrubberArrangedView.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -211,7 +214,10 @@ func (x *ScrubberSelectionView) WithLayerUsesCoreImageFilters(layerUsesCoreImage
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *ScrubberSelectionView) WithBackgroundFilters(items ...*coreimage.CIFilter) *ScrubberSelectionView {
 	if len(items) == 0 {
-		x.inner.NSScrubberArrangedView.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSScrubberArrangedView.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -235,7 +241,10 @@ func (x *ScrubberSelectionView) WithCompositingFilter(compositingFilter *coreima
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *ScrubberSelectionView) WithContentFilters(items ...*coreimage.CIFilter) *ScrubberSelectionView {
 	if len(items) == 0 {
-		x.inner.NSScrubberArrangedView.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSScrubberArrangedView.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -301,7 +310,10 @@ func (x *ScrubberSelectionView) WithFocusRingType(focusRingType NSFocusRingType)
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *ScrubberSelectionView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrubberSelectionView {
 	if len(items) == 0 {
-		x.inner.NSScrubberArrangedView.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSScrubberArrangedView.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

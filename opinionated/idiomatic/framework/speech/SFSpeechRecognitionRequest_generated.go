@@ -61,7 +61,10 @@ func (x *SpeechRecognitionRequest) WithShouldReportPartialResults(shouldReportPa
 // WithContextualStrings sets the collection, converting the Go slice to an NSArray.
 func (x *SpeechRecognitionRequest) WithContextualStrings(items ...*foundation.NSString) *SpeechRecognitionRequest {
 	if len(items) == 0 {
-		x.inner.SetContextualStrings(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetContextualStrings(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

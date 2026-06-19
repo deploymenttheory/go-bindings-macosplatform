@@ -47,7 +47,10 @@ func NewCaptionRenderer() *CaptionRenderer {
 // WithCaptions sets the collection, converting the Go slice to an NSArray.
 func (x *CaptionRenderer) WithCaptions(items ...CaptionProvider) *CaptionRenderer {
 	if len(items) == 0 {
-		x.inner.SetCaptions(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCaptions(foundation.NSArrayFromID[*raw.AVCaption](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -106,6 +109,8 @@ func (x *CaptionRenderer) SetCaptions(captions ...CaptionProvider) {
 	var _arg0 *foundation.NSArray[*raw.AVCaption]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.AVCaption](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.AVCaption](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetCaptions(_arg0)

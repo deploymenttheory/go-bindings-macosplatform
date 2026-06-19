@@ -100,7 +100,10 @@ func (x *PathComponentCell) WithPlaceholderAttributedString(placeholderAttribute
 // WithAllowedInputSourceLocales sets the collection, converting the Go slice to an NSArray.
 func (x *PathComponentCell) WithAllowedInputSourceLocales(items ...*foundation.NSString) *PathComponentCell {
 	if len(items) == 0 {
-		x.inner.NSTextFieldCell.SetAllowedInputSourceLocales(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTextFieldCell.SetAllowedInputSourceLocales(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

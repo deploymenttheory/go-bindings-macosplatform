@@ -2551,6 +2551,9 @@ func arrayVariadicPreamble(argLocal, paramName string, av *arrayVariadic) string
 			"if len(_ptrs) > 0 {\n"+
 			"%[3]s = %[5]s(objc.Send[objc.ID](objc.ID(objc.GetClass(%[6]q)), "+
 			"objc.RegisterName(\"arrayWithObjects:count:\"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))\n"+
+			"} else {\n"+
+			// An empty (not nil) array: some raw methods dereference the argument.
+			"%[3]s = %[5]s(objc.Send[objc.ID](objc.ID(objc.GetClass(%[6]q)), objc.RegisterName(\"array\")))\n"+
 			"}\n",
 		paramName, av.loopExpr, argLocal, av.rawArrayType, av.arrayFromID, av.arrayClass,
 	)

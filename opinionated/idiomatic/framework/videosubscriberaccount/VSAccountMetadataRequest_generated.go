@@ -51,7 +51,10 @@ func (x *VSAccountMetadataRequest) WithChannelIdentifier(channelIdentifier strin
 // WithSupportedAccountProviderIdentifiers sets the collection, converting the Go slice to an NSArray.
 func (x *VSAccountMetadataRequest) WithSupportedAccountProviderIdentifiers(items ...*foundation.NSString) *VSAccountMetadataRequest {
 	if len(items) == 0 {
-		x.inner.SetSupportedAccountProviderIdentifiers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSupportedAccountProviderIdentifiers(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -71,7 +74,10 @@ func (x *VSAccountMetadataRequest) WithSupportedAccountProviderIdentifiers(items
 // WithFeaturedAccountProviderIdentifiers sets the collection, converting the Go slice to an NSArray.
 func (x *VSAccountMetadataRequest) WithFeaturedAccountProviderIdentifiers(items ...*foundation.NSString) *VSAccountMetadataRequest {
 	if len(items) == 0 {
-		x.inner.SetFeaturedAccountProviderIdentifiers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetFeaturedAccountProviderIdentifiers(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -139,7 +145,10 @@ func (x *VSAccountMetadataRequest) WithForceAuthentication(forceAuthentication b
 // WithAttributeNames sets the collection, converting the Go slice to an NSArray.
 func (x *VSAccountMetadataRequest) WithAttributeNames(items ...*foundation.NSString) *VSAccountMetadataRequest {
 	if len(items) == 0 {
-		x.inner.SetAttributeNames(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAttributeNames(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -159,7 +168,10 @@ func (x *VSAccountMetadataRequest) WithAttributeNames(items ...*foundation.NSStr
 // WithSupportedAuthenticationSchemes sets the collection, converting the Go slice to an NSArray.
 func (x *VSAccountMetadataRequest) WithSupportedAuthenticationSchemes(items ...*foundation.NSString) *VSAccountMetadataRequest {
 	if len(items) == 0 {
-		x.inner.SetSupportedAuthenticationSchemes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSupportedAuthenticationSchemes(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -187,7 +199,10 @@ func (x *VSAccountMetadataRequest) WithAccountProviderAuthenticationToken(accoun
 // WithApplicationAccountProviders sets the collection, converting the Go slice to an NSArray.
 func (x *VSAccountMetadataRequest) WithApplicationAccountProviders(items ...*raw.VSAccountApplicationProvider) *VSAccountMetadataRequest {
 	if len(items) == 0 {
-		x.inner.SetApplicationAccountProviders(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetApplicationAccountProviders(foundation.NSArrayFromID[*raw.VSAccountApplicationProvider](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -46,7 +46,10 @@ func NewNEIPv6SettingsWithAddressesNetworkPrefixLengths(addresses *foundation.NS
 // WithIncludedRoutes sets the collection, converting the Go slice to an NSArray.
 func (x *NEIPv6Settings) WithIncludedRoutes(items ...*raw.NEIPv6Route) *NEIPv6Settings {
 	if len(items) == 0 {
-		x.inner.SetIncludedRoutes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetIncludedRoutes(foundation.NSArrayFromID[*raw.NEIPv6Route](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -66,7 +69,10 @@ func (x *NEIPv6Settings) WithIncludedRoutes(items ...*raw.NEIPv6Route) *NEIPv6Se
 // WithExcludedRoutes sets the collection, converting the Go slice to an NSArray.
 func (x *NEIPv6Settings) WithExcludedRoutes(items ...*raw.NEIPv6Route) *NEIPv6Settings {
 	if len(items) == 0 {
-		x.inner.SetExcludedRoutes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetExcludedRoutes(foundation.NSArrayFromID[*raw.NEIPv6Route](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

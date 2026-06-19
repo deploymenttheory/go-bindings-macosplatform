@@ -234,7 +234,10 @@ func (x *EmitterCell) WithMinificationFilterBias(minificationFilterBias float32)
 // WithEmitterCells sets the collection, converting the Go slice to an NSArray.
 func (x *EmitterCell) WithEmitterCells(items ...*raw.CAEmitterCell) *EmitterCell {
 	if len(items) == 0 {
-		x.inner.SetEmitterCells(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetEmitterCells(foundation.NSArrayFromID[*raw.CAEmitterCell](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

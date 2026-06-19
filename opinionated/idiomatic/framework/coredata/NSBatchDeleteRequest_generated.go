@@ -54,7 +54,10 @@ func (x *BatchDeleteRequest) WithResultType(resultType NSBatchDeleteRequestResul
 // WithAffectedStores sets the collection, converting the Go slice to an NSArray.
 func (x *BatchDeleteRequest) WithAffectedStores(items ...PersistentStoreProvider) *BatchDeleteRequest {
 	if len(items) == 0 {
-		x.inner.NSPersistentStoreRequest.SetAffectedStores(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSPersistentStoreRequest.SetAffectedStores(foundation.NSArrayFromID[*raw.NSPersistentStore](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

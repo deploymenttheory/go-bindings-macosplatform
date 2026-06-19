@@ -54,7 +54,10 @@ func (x *NEIPv4Settings) WithRouter(router string) *NEIPv4Settings {
 // WithIncludedRoutes sets the collection, converting the Go slice to an NSArray.
 func (x *NEIPv4Settings) WithIncludedRoutes(items ...*raw.NEIPv4Route) *NEIPv4Settings {
 	if len(items) == 0 {
-		x.inner.SetIncludedRoutes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetIncludedRoutes(foundation.NSArrayFromID[*raw.NEIPv4Route](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -74,7 +77,10 @@ func (x *NEIPv4Settings) WithIncludedRoutes(items ...*raw.NEIPv4Route) *NEIPv4Se
 // WithExcludedRoutes sets the collection, converting the Go slice to an NSArray.
 func (x *NEIPv4Settings) WithExcludedRoutes(items ...*raw.NEIPv4Route) *NEIPv4Settings {
 	if len(items) == 0 {
-		x.inner.SetExcludedRoutes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetExcludedRoutes(foundation.NSArrayFromID[*raw.NEIPv4Route](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

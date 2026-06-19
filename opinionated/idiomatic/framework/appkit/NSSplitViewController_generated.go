@@ -54,7 +54,10 @@ func (x *SplitViewController) WithSplitView(splitView *SplitView) *SplitViewCont
 // WithSplitViewItems sets the collection, converting the Go slice to an NSArray.
 func (x *SplitViewController) WithSplitViewItems(items ...*raw.NSSplitViewItem) *SplitViewController {
 	if len(items) == 0 {
-		x.inner.SetSplitViewItems(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSplitViewItems(foundation.NSArrayFromID[*raw.NSSplitViewItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -114,7 +117,10 @@ func (x *SplitViewController) WithPreferredContentSize(preferredContentSize core
 // WithChildViewControllers sets the collection, converting the Go slice to an NSArray.
 func (x *SplitViewController) WithChildViewControllers(items ...ViewControllerProvider) *SplitViewController {
 	if len(items) == 0 {
-		x.inner.NSViewController.SetChildViewControllers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSViewController.SetChildViewControllers(foundation.NSArrayFromID[*raw.NSViewController](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

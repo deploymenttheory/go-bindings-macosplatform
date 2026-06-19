@@ -41,7 +41,10 @@ func NewKeyframeAnimation() *KeyframeAnimation {
 // WithKeyTimes sets the collection, converting the Go slice to an NSArray.
 func (x *KeyframeAnimation) WithKeyTimes(items ...*foundation.NSNumber) *KeyframeAnimation {
 	if len(items) == 0 {
-		x.inner.SetKeyTimes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetKeyTimes(foundation.NSArrayFromID[*foundation.NSNumber](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -59,7 +62,10 @@ func (x *KeyframeAnimation) WithKeyTimes(items ...*foundation.NSNumber) *Keyfram
 // WithTimingFunctions sets the collection, converting the Go slice to an NSArray.
 func (x *KeyframeAnimation) WithTimingFunctions(items ...*raw.CAMediaTimingFunction) *KeyframeAnimation {
 	if len(items) == 0 {
-		x.inner.SetTimingFunctions(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetTimingFunctions(foundation.NSArrayFromID[*raw.CAMediaTimingFunction](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -83,7 +89,10 @@ func (x *KeyframeAnimation) WithCalculationMode(calculationMode *foundation.NSSt
 // WithTensionValues sets the collection, converting the Go slice to an NSArray.
 func (x *KeyframeAnimation) WithTensionValues(items ...*foundation.NSNumber) *KeyframeAnimation {
 	if len(items) == 0 {
-		x.inner.SetTensionValues(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetTensionValues(foundation.NSArrayFromID[*foundation.NSNumber](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -101,7 +110,10 @@ func (x *KeyframeAnimation) WithTensionValues(items ...*foundation.NSNumber) *Ke
 // WithContinuityValues sets the collection, converting the Go slice to an NSArray.
 func (x *KeyframeAnimation) WithContinuityValues(items ...*foundation.NSNumber) *KeyframeAnimation {
 	if len(items) == 0 {
-		x.inner.SetContinuityValues(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetContinuityValues(foundation.NSArrayFromID[*foundation.NSNumber](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -119,7 +131,10 @@ func (x *KeyframeAnimation) WithContinuityValues(items ...*foundation.NSNumber) 
 // WithBiasValues sets the collection, converting the Go slice to an NSArray.
 func (x *KeyframeAnimation) WithBiasValues(items ...*foundation.NSNumber) *KeyframeAnimation {
 	if len(items) == 0 {
-		x.inner.SetBiasValues(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetBiasValues(foundation.NSArrayFromID[*foundation.NSNumber](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

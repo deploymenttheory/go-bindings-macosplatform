@@ -296,7 +296,10 @@ func (x *SegmentedControl) WithCell(cell CellProvider) *SegmentedControl {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *SegmentedControl) WithSubviews(items ...ViewProvider) *SegmentedControl {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -446,7 +449,10 @@ func (x *SegmentedControl) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilte
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *SegmentedControl) WithBackgroundFilters(items ...*coreimage.CIFilter) *SegmentedControl {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -470,7 +476,10 @@ func (x *SegmentedControl) WithCompositingFilter(compositingFilter *coreimage.CI
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *SegmentedControl) WithContentFilters(items ...*coreimage.CIFilter) *SegmentedControl {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -536,7 +545,10 @@ func (x *SegmentedControl) WithFocusRingType(focusRingType NSFocusRingType) *Seg
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *SegmentedControl) WithGestureRecognizers(items ...GestureRecognizerProvider) *SegmentedControl {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -63,7 +63,10 @@ func (x *TrackInfo) WithNaturalTimescale(naturalTimescale int32) *TrackInfo {
 // WithTrackEdits sets the collection, converting the Go slice to an NSArray.
 func (x *TrackInfo) WithTrackEdits(items ...*foundation.NSValue) *TrackInfo {
 	if len(items) == 0 {
-		x.inner.SetTrackEdits(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetTrackEdits(foundation.NSArrayFromID[*foundation.NSValue](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

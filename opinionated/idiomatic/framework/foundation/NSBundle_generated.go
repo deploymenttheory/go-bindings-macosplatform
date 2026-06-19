@@ -195,6 +195,8 @@ func (x *Bundle) LocalizedStringForKeyValueTableLocalizations(key string, value 
 	var _arg3 *raw.NSArray[*raw.NSString]
 	if len(_ptrs) > 0 {
 		_arg3 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg3 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := x.inner.LocalizedStringForKeyValueTableLocalizations(foundation.NSStringStringWithUTF8String(key), foundation.NSStringStringWithUTF8String(value), foundation.NSStringStringWithUTF8String(tableName), _arg3)

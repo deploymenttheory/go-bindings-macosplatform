@@ -53,7 +53,10 @@ func (x *AssetDownloadConfiguration) WithArtworkData(artworkData *foundation.NSD
 // WithAuxiliaryContentConfigurations sets the collection, converting the Go slice to an NSArray.
 func (x *AssetDownloadConfiguration) WithAuxiliaryContentConfigurations(items ...*raw.AVAssetDownloadContentConfiguration) *AssetDownloadConfiguration {
 	if len(items) == 0 {
-		x.inner.SetAuxiliaryContentConfigurations(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAuxiliaryContentConfigurations(foundation.NSArrayFromID[*raw.AVAssetDownloadContentConfiguration](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

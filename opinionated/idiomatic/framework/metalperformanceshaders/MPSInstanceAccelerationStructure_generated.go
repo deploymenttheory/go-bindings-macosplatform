@@ -48,7 +48,10 @@ func NewInstanceAccelerationStructure() *InstanceAccelerationStructure {
 // WithAccelerationStructures sets the collection, converting the Go slice to an NSArray.
 func (x *InstanceAccelerationStructure) WithAccelerationStructures(items ...*mpsrayintersector.MPSPolygonAccelerationStructure) *InstanceAccelerationStructure {
 	if len(items) == 0 {
-		x.inner.SetAccelerationStructures(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAccelerationStructures(foundation.NSArrayFromID[*mpsrayintersector.MPSPolygonAccelerationStructure](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

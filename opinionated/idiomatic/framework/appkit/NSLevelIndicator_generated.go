@@ -359,7 +359,10 @@ func (x *LevelIndicator) WithCell(cell CellProvider) *LevelIndicator {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *LevelIndicator) WithSubviews(items ...ViewProvider) *LevelIndicator {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -509,7 +512,10 @@ func (x *LevelIndicator) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *LevelIndicator) WithBackgroundFilters(items ...*coreimage.CIFilter) *LevelIndicator {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -533,7 +539,10 @@ func (x *LevelIndicator) WithCompositingFilter(compositingFilter *coreimage.CIFi
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *LevelIndicator) WithContentFilters(items ...*coreimage.CIFilter) *LevelIndicator {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -599,7 +608,10 @@ func (x *LevelIndicator) WithFocusRingType(focusRingType NSFocusRingType) *Level
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *LevelIndicator) WithGestureRecognizers(items ...GestureRecognizerProvider) *LevelIndicator {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

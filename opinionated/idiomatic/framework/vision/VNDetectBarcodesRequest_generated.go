@@ -44,7 +44,10 @@ func NewDetectBarcodesRequest() *DetectBarcodesRequest {
 // WithSymbologies sets the collection, converting the Go slice to an NSArray.
 func (x *DetectBarcodesRequest) WithSymbologies(items ...*foundation.NSString) *DetectBarcodesRequest {
 	if len(items) == 0 {
-		x.inner.SetSymbologies(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSymbologies(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

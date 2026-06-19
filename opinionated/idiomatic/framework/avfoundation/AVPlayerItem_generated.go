@@ -117,7 +117,10 @@ func (x *PlayerItem) WithSeekingWaitsForVideoCompositionRendering(seekingWaitsFo
 // WithTextStyleRules sets the collection, converting the Go slice to an NSArray.
 func (x *PlayerItem) WithTextStyleRules(items ...*raw.AVTextStyleRule) *PlayerItem {
 	if len(items) == 0 {
-		x.inner.SetTextStyleRules(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetTextStyleRules(foundation.NSArrayFromID[*raw.AVTextStyleRule](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -249,7 +252,10 @@ func (x *PlayerItem) WithVariantPreferences(variantPreferences AVVariantPreferen
 // WithPreferredCustomMediaSelectionSchemes sets the collection, converting the Go slice to an NSArray.
 func (x *PlayerItem) WithPreferredCustomMediaSelectionSchemes(items ...*raw.AVCustomMediaSelectionScheme) *PlayerItem {
 	if len(items) == 0 {
-		x.inner.SetPreferredCustomMediaSelectionSchemes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetPreferredCustomMediaSelectionSchemes(foundation.NSArrayFromID[*raw.AVCustomMediaSelectionScheme](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

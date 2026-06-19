@@ -371,7 +371,10 @@ func (x *Form) WithCell(cell CellProvider) *Form {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *Form) WithSubviews(items ...ViewProvider) *Form {
 	if len(items) == 0 {
-		x.inner.NSMatrix.NSControl.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSMatrix.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -521,7 +524,10 @@ func (x *Form) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Fo
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *Form) WithBackgroundFilters(items ...*coreimage.CIFilter) *Form {
 	if len(items) == 0 {
-		x.inner.NSMatrix.NSControl.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSMatrix.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -545,7 +551,10 @@ func (x *Form) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *For
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *Form) WithContentFilters(items ...*coreimage.CIFilter) *Form {
 	if len(items) == 0 {
-		x.inner.NSMatrix.NSControl.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSMatrix.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -611,7 +620,10 @@ func (x *Form) WithFocusRingType(focusRingType NSFocusRingType) *Form {
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *Form) WithGestureRecognizers(items ...GestureRecognizerProvider) *Form {
 	if len(items) == 0 {
-		x.inner.NSMatrix.NSControl.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSMatrix.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

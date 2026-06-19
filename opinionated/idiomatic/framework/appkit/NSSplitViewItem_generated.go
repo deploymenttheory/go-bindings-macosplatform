@@ -157,7 +157,10 @@ func (x *SplitViewItem) WithAutomaticallyAdjustsSafeAreaInsets(automaticallyAdju
 // WithTopAlignedAccessoryViewControllers sets the collection, converting the Go slice to an NSArray.
 func (x *SplitViewItem) WithTopAlignedAccessoryViewControllers(items ...*raw.NSSplitViewItemAccessoryViewController) *SplitViewItem {
 	if len(items) == 0 {
-		x.inner.SetTopAlignedAccessoryViewControllers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetTopAlignedAccessoryViewControllers(foundation.NSArrayFromID[*raw.NSSplitViewItemAccessoryViewController](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -175,7 +178,10 @@ func (x *SplitViewItem) WithTopAlignedAccessoryViewControllers(items ...*raw.NSS
 // WithBottomAlignedAccessoryViewControllers sets the collection, converting the Go slice to an NSArray.
 func (x *SplitViewItem) WithBottomAlignedAccessoryViewControllers(items ...*raw.NSSplitViewItemAccessoryViewController) *SplitViewItem {
 	if len(items) == 0 {
-		x.inner.SetBottomAlignedAccessoryViewControllers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetBottomAlignedAccessoryViewControllers(foundation.NSArrayFromID[*raw.NSSplitViewItemAccessoryViewController](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

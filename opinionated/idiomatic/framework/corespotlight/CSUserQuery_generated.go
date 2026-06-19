@@ -72,7 +72,10 @@ func (x *UserQuery) WithCompletionHandler(completionHandler func(unsafe.Pointer)
 // WithProtectionClasses sets the collection, converting the Go slice to an NSArray.
 func (x *UserQuery) WithProtectionClasses(items ...*foundation.NSString) *UserQuery {
 	if len(items) == 0 {
-		x.inner.CSSearchQuery.SetProtectionClasses(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.CSSearchQuery.SetProtectionClasses(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

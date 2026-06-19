@@ -45,7 +45,10 @@ func NewAVB17221AECPAddressAccessMessage() *AVB17221AECPAddressAccessMessage {
 // WithTlvs sets the collection, converting the Go slice to an NSArray.
 func (x *AVB17221AECPAddressAccessMessage) WithTlvs(items ...*raw.AVB17221AECPAddressAccessTLV) *AVB17221AECPAddressAccessMessage {
 	if len(items) == 0 {
-		x.inner.SetTlvs(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetTlvs(foundation.NSArrayFromID[*raw.AVB17221AECPAddressAccessTLV](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

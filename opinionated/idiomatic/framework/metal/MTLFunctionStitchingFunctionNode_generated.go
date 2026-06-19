@@ -58,7 +58,10 @@ func (x *FunctionStitchingFunctionNode) WithName(name string) *FunctionStitching
 // WithControlDependencies sets the collection, converting the Go slice to an NSArray.
 func (x *FunctionStitchingFunctionNode) WithControlDependencies(items ...*raw.MTLFunctionStitchingFunctionNode) *FunctionStitchingFunctionNode {
 	if len(items) == 0 {
-		x.inner.SetControlDependencies(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetControlDependencies(foundation.NSArrayFromID[*raw.MTLFunctionStitchingFunctionNode](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -101,6 +104,8 @@ func (x *FunctionStitchingFunctionNode) SetArguments(arguments ...purego.IDer) {
 	var _arg0 *foundation.NSArray[raw.MTLFunctionStitchingNode]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MTLFunctionStitchingNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MTLFunctionStitchingNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetArguments(_arg0)

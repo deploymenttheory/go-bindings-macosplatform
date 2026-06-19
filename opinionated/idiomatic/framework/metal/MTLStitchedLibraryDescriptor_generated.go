@@ -45,7 +45,10 @@ func NewStitchedLibraryDescriptor() *StitchedLibraryDescriptor {
 // WithFunctionGraphs sets the collection, converting the Go slice to an NSArray.
 func (x *StitchedLibraryDescriptor) WithFunctionGraphs(items ...*raw.MTLFunctionStitchingGraph) *StitchedLibraryDescriptor {
 	if len(items) == 0 {
-		x.inner.SetFunctionGraphs(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetFunctionGraphs(foundation.NSArrayFromID[*raw.MTLFunctionStitchingGraph](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -98,6 +101,8 @@ func (x *StitchedLibraryDescriptor) SetFunctions(functions ...purego.IDer) {
 	var _arg0 *foundation.NSArray[raw.MTLFunction]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MTLFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MTLFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetFunctions(_arg0)
@@ -119,6 +124,8 @@ func (x *StitchedLibraryDescriptor) SetBinaryArchives(binaryArchives ...purego.I
 	var _arg0 *foundation.NSArray[raw.MTLBinaryArchive]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MTLBinaryArchive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MTLBinaryArchive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetBinaryArchives(_arg0)

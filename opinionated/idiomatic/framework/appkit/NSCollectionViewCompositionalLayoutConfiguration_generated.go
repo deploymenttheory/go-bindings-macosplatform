@@ -63,7 +63,10 @@ func (x *CollectionViewCompositionalLayoutConfiguration) WithInterSectionSpacing
 // WithBoundarySupplementaryItems sets the collection, converting the Go slice to an NSArray.
 func (x *CollectionViewCompositionalLayoutConfiguration) WithBoundarySupplementaryItems(items ...*raw.NSCollectionLayoutBoundarySupplementaryItem) *CollectionViewCompositionalLayoutConfiguration {
 	if len(items) == 0 {
-		x.inner.SetBoundarySupplementaryItems(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetBoundarySupplementaryItems(foundation.NSArrayFromID[*raw.NSCollectionLayoutBoundarySupplementaryItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

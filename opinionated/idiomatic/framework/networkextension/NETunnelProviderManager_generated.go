@@ -43,7 +43,10 @@ func NewNETunnelProviderManager() *NETunnelProviderManager {
 // WithSafariDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NETunnelProviderManager) WithSafariDomains(items ...*foundation.NSString) *NETunnelProviderManager {
 	if len(items) == 0 {
-		x.inner.SetSafariDomains(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSafariDomains(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -63,7 +66,10 @@ func (x *NETunnelProviderManager) WithSafariDomains(items ...*foundation.NSStrin
 // WithMailDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NETunnelProviderManager) WithMailDomains(items ...*foundation.NSString) *NETunnelProviderManager {
 	if len(items) == 0 {
-		x.inner.SetMailDomains(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetMailDomains(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -83,7 +89,10 @@ func (x *NETunnelProviderManager) WithMailDomains(items ...*foundation.NSString)
 // WithCalendarDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NETunnelProviderManager) WithCalendarDomains(items ...*foundation.NSString) *NETunnelProviderManager {
 	if len(items) == 0 {
-		x.inner.SetCalendarDomains(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCalendarDomains(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -103,7 +112,10 @@ func (x *NETunnelProviderManager) WithCalendarDomains(items ...*foundation.NSStr
 // WithContactsDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NETunnelProviderManager) WithContactsDomains(items ...*foundation.NSString) *NETunnelProviderManager {
 	if len(items) == 0 {
-		x.inner.SetContactsDomains(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetContactsDomains(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -123,7 +135,10 @@ func (x *NETunnelProviderManager) WithContactsDomains(items ...*foundation.NSStr
 // WithAppRules sets the collection, converting the Go slice to an NSArray.
 func (x *NETunnelProviderManager) WithAppRules(items ...*raw.NEAppRule) *NETunnelProviderManager {
 	if len(items) == 0 {
-		x.inner.SetAppRules(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAppRules(foundation.NSArrayFromID[*raw.NEAppRule](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -143,7 +158,10 @@ func (x *NETunnelProviderManager) WithAppRules(items ...*raw.NEAppRule) *NETunne
 // WithExcludedDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NETunnelProviderManager) WithExcludedDomains(items ...*foundation.NSString) *NETunnelProviderManager {
 	if len(items) == 0 {
-		x.inner.SetExcludedDomains(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetExcludedDomains(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -163,7 +181,10 @@ func (x *NETunnelProviderManager) WithExcludedDomains(items ...*foundation.NSStr
 // WithAssociatedDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NETunnelProviderManager) WithAssociatedDomains(items ...*foundation.NSString) *NETunnelProviderManager {
 	if len(items) == 0 {
-		x.inner.SetAssociatedDomains(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAssociatedDomains(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -183,7 +204,10 @@ func (x *NETunnelProviderManager) WithAssociatedDomains(items ...*foundation.NSS
 // WithOnDemandRules sets the collection, converting the Go slice to an NSArray.
 func (x *NETunnelProviderManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NETunnelProviderManager {
 	if len(items) == 0 {
-		x.inner.NEVPNManager.SetOnDemandRules(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NEVPNManager.SetOnDemandRules(foundation.NSArrayFromID[*raw.NEOnDemandRule](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

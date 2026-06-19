@@ -45,7 +45,10 @@ func NewAuthorizationOpenIDRequest() *AuthorizationOpenIDRequest {
 // WithRequestedScopes sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationOpenIDRequest) WithRequestedScopes(items ...*foundation.NSString) *AuthorizationOpenIDRequest {
 	if len(items) == 0 {
-		x.inner.SetRequestedScopes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRequestedScopes(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -56,6 +56,8 @@ func ShareOptionsWithOptionsGroups(optionsGroups ...CollaborationOptionsGroupPro
 	var _arg0 *foundation.NSArray[*raw.SWCollaborationOptionsGroup]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.SWCollaborationOptionsGroup](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.SWCollaborationOptionsGroup](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := raw.SWCollaborationShareOptionsShareOptionsWithOptionsGroups(_arg0)

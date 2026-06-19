@@ -103,7 +103,10 @@ func (x *Animation) WithDelegate(delegate raw.NSAnimationDelegate) *Animation {
 // WithProgressMarks sets the collection, converting the Go slice to an NSArray.
 func (x *Animation) WithProgressMarks(items ...*foundation.NSNumber) *Animation {
 	if len(items) == 0 {
-		x.inner.SetProgressMarks(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetProgressMarks(foundation.NSArrayFromID[*foundation.NSNumber](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

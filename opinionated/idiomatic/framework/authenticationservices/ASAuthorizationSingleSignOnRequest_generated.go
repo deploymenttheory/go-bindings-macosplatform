@@ -47,7 +47,10 @@ func NewAuthorizationSingleSignOnRequest() *AuthorizationSingleSignOnRequest {
 // WithAuthorizationOptions sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationSingleSignOnRequest) WithAuthorizationOptions(items ...*foundation.NSURLQueryItem) *AuthorizationSingleSignOnRequest {
 	if len(items) == 0 {
-		x.inner.SetAuthorizationOptions(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAuthorizationOptions(foundation.NSArrayFromID[*foundation.NSURLQueryItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -75,7 +78,10 @@ func (x *AuthorizationSingleSignOnRequest) WithUserInterfaceEnabled(userInterfac
 // WithRequestedScopes sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationSingleSignOnRequest) WithRequestedScopes(items ...*foundation.NSString) *AuthorizationSingleSignOnRequest {
 	if len(items) == 0 {
-		x.inner.ASAuthorizationOpenIDRequest.SetRequestedScopes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.ASAuthorizationOpenIDRequest.SetRequestedScopes(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -42,7 +42,10 @@ func NewEmitterLayer() *EmitterLayer {
 // WithEmitterCells sets the collection, converting the Go slice to an NSArray.
 func (x *EmitterLayer) WithEmitterCells(items ...*raw.CAEmitterCell) *EmitterLayer {
 	if len(items) == 0 {
-		x.inner.SetEmitterCells(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetEmitterCells(foundation.NSArrayFromID[*raw.CAEmitterCell](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -204,7 +207,10 @@ func (x *EmitterLayer) WithGeometryFlipped(geometryFlipped bool) *EmitterLayer {
 // WithSublayers sets the collection, converting the Go slice to an NSArray.
 func (x *EmitterLayer) WithSublayers(items ...LayerProvider) *EmitterLayer {
 	if len(items) == 0 {
-		x.inner.CALayer.SetSublayers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.CALayer.SetSublayers(foundation.NSArrayFromID[*raw.CALayer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -456,7 +462,10 @@ func (x *EmitterLayer) WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *EmitterLayer) WithConstraints(items ...*raw.CAConstraint) *EmitterLayer {
 	if len(items) == 0 {
-		x.inner.CALayer.SetConstraints(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.CALayer.SetConstraints(foundation.NSArrayFromID[*raw.CAConstraint](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

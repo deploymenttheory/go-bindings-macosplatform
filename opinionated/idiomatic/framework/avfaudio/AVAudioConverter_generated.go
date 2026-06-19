@@ -46,7 +46,10 @@ func NewAudioConverterFromFormatToFormat(fromFormat *raw.AVAudioFormat, toFormat
 // WithChannelMap sets the collection, converting the Go slice to an NSArray.
 func (x *AudioConverter) WithChannelMap(items ...*foundation.NSNumber) *AudioConverter {
 	if len(items) == 0 {
-		x.inner.SetChannelMap(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetChannelMap(foundation.NSArrayFromID[*foundation.NSNumber](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

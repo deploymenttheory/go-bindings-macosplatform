@@ -45,7 +45,10 @@ func NewSpeechSynthesisProviderAudioUnit() *SpeechSynthesisProviderAudioUnit {
 // WithSpeechVoices sets the collection, converting the Go slice to an NSArray.
 func (x *SpeechSynthesisProviderAudioUnit) WithSpeechVoices(items ...*raw.AVSpeechSynthesisProviderVoice) *SpeechSynthesisProviderAudioUnit {
 	if len(items) == 0 {
-		x.inner.SetSpeechVoices(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSpeechVoices(foundation.NSArrayFromID[*raw.AVSpeechSynthesisProviderVoice](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

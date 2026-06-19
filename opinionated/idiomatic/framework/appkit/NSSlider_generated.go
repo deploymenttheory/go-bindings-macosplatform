@@ -332,7 +332,10 @@ func (x *Slider) WithCell(cell CellProvider) *Slider {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *Slider) WithSubviews(items ...ViewProvider) *Slider {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -482,7 +485,10 @@ func (x *Slider) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *Slider) WithBackgroundFilters(items ...*coreimage.CIFilter) *Slider {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -506,7 +512,10 @@ func (x *Slider) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *S
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *Slider) WithContentFilters(items ...*coreimage.CIFilter) *Slider {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -572,7 +581,10 @@ func (x *Slider) WithFocusRingType(focusRingType NSFocusRingType) *Slider {
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *Slider) WithGestureRecognizers(items ...GestureRecognizerProvider) *Slider {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

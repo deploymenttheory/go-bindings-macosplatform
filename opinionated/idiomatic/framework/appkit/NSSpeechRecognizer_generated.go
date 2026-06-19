@@ -53,7 +53,10 @@ func (x *SpeechRecognizer) WithDelegate(delegate raw.NSSpeechRecognizerDelegate)
 // WithCommands sets the collection, converting the Go slice to an NSArray.
 func (x *SpeechRecognizer) WithCommands(items ...*foundation.NSString) *SpeechRecognizer {
 	if len(items) == 0 {
-		x.inner.SetCommands(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCommands(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

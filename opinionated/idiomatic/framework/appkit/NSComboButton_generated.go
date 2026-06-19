@@ -268,7 +268,10 @@ func (x *ComboButton) WithCell(cell CellProvider) *ComboButton {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *ComboButton) WithSubviews(items ...ViewProvider) *ComboButton {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -418,7 +421,10 @@ func (x *ComboButton) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bo
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *ComboButton) WithBackgroundFilters(items ...*coreimage.CIFilter) *ComboButton {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -442,7 +448,10 @@ func (x *ComboButton) WithCompositingFilter(compositingFilter *coreimage.CIFilte
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *ComboButton) WithContentFilters(items ...*coreimage.CIFilter) *ComboButton {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -508,7 +517,10 @@ func (x *ComboButton) WithFocusRingType(focusRingType NSFocusRingType) *ComboBut
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *ComboButton) WithGestureRecognizers(items ...GestureRecognizerProvider) *ComboButton {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

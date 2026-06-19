@@ -53,6 +53,8 @@ func NewRNNImageInferenceLayerWithDeviceRnnDescriptors(device metal.MTLDevice, r
 	var _arg1 *foundation.NSArray[*raw.MPSRNNDescriptor]
 	if len(_ptrs) > 0 {
 		_arg1 = foundation.NSArrayFromID[*raw.MPSRNNDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg1 = foundation.NSArrayFromID[*raw.MPSRNNDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSRNNImageInferenceLayer")), objc.RegisterName("alloc"))

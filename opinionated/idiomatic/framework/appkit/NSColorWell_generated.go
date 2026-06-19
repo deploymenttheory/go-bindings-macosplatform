@@ -299,7 +299,10 @@ func (x *ColorWell) WithCell(cell CellProvider) *ColorWell {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *ColorWell) WithSubviews(items ...ViewProvider) *ColorWell {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -449,7 +452,10 @@ func (x *ColorWell) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *ColorWell) WithBackgroundFilters(items ...*coreimage.CIFilter) *ColorWell {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -473,7 +479,10 @@ func (x *ColorWell) WithCompositingFilter(compositingFilter *coreimage.CIFilter)
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *ColorWell) WithContentFilters(items ...*coreimage.CIFilter) *ColorWell {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -539,7 +548,10 @@ func (x *ColorWell) WithFocusRingType(focusRingType NSFocusRingType) *ColorWell 
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *ColorWell) WithGestureRecognizers(items ...GestureRecognizerProvider) *ColorWell {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

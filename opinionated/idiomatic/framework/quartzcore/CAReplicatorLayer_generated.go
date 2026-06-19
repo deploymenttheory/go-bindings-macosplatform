@@ -149,7 +149,10 @@ func (x *ReplicatorLayer) WithGeometryFlipped(geometryFlipped bool) *ReplicatorL
 // WithSublayers sets the collection, converting the Go slice to an NSArray.
 func (x *ReplicatorLayer) WithSublayers(items ...LayerProvider) *ReplicatorLayer {
 	if len(items) == 0 {
-		x.inner.CALayer.SetSublayers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.CALayer.SetSublayers(foundation.NSArrayFromID[*raw.CALayer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -401,7 +404,10 @@ func (x *ReplicatorLayer) WithStyle(style *foundation.NSDictionary[objc.ID, objc
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *ReplicatorLayer) WithConstraints(items ...*raw.CAConstraint) *ReplicatorLayer {
 	if len(items) == 0 {
-		x.inner.CALayer.SetConstraints(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.CALayer.SetConstraints(foundation.NSArrayFromID[*raw.CAConstraint](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

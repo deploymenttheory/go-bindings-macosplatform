@@ -102,7 +102,10 @@ func (x *CollectionViewGridLayout) WithMaximumItemSize(maximumItemSize corefound
 // WithBackgroundColors sets the collection, converting the Go slice to an NSArray.
 func (x *CollectionViewGridLayout) WithBackgroundColors(items ...*raw.NSColor) *CollectionViewGridLayout {
 	if len(items) == 0 {
-		x.inner.SetBackgroundColors(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetBackgroundColors(foundation.NSArrayFromID[*raw.NSColor](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

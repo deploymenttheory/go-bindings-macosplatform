@@ -65,7 +65,10 @@ func (x *BaseEffect) WithLightingType(lightingType GLKLightingType) *BaseEffect 
 // WithTextureOrder sets the collection, converting the Go slice to an NSArray.
 func (x *BaseEffect) WithTextureOrder(items ...*raw.GLKEffectPropertyTexture) *BaseEffect {
 	if len(items) == 0 {
-		x.inner.SetTextureOrder(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetTextureOrder(foundation.NSArrayFromID[*raw.GLKEffectPropertyTexture](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

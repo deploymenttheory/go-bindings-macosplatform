@@ -125,6 +125,8 @@ func (x *XMLDTD) SetChildren(children ...XMLNodeProvider) {
 	var _arg0 *raw.NSArray[*raw.NSXMLNode]
 	if len(_ptrs) > 0 {
 		_arg0 = raw.NSArrayFromID[*raw.NSXMLNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = raw.NSArrayFromID[*raw.NSXMLNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetChildren(_arg0)

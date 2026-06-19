@@ -392,6 +392,8 @@ func (x *WKWebExtensionContext) DidSelectTabs(selectedTabs ...purego.IDer) {
 	var _arg0 *foundation.NSArray[raw.WKWebExtensionTab]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.WKWebExtensionTab](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.WKWebExtensionTab](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.DidSelectTabs(_arg0)
@@ -408,6 +410,8 @@ func (x *WKWebExtensionContext) DidDeselectTabs(deselectedTabs ...purego.IDer) {
 	var _arg0 *foundation.NSArray[raw.WKWebExtensionTab]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.WKWebExtensionTab](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.WKWebExtensionTab](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.DidDeselectTabs(_arg0)

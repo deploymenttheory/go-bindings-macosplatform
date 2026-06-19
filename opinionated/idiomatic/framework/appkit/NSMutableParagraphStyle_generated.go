@@ -146,7 +146,10 @@ func (x *MutableParagraphStyle) WithUsesDefaultHyphenation(usesDefaultHyphenatio
 // WithTabStops sets the collection, converting the Go slice to an NSArray.
 func (x *MutableParagraphStyle) WithTabStops(items ...*raw.NSTextTab) *MutableParagraphStyle {
 	if len(items) == 0 {
-		x.inner.SetTabStops(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetTabStops(foundation.NSArrayFromID[*raw.NSTextTab](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -190,7 +193,10 @@ func (x *MutableParagraphStyle) WithLineBreakStrategy(lineBreakStrategy NSLineBr
 // WithTextLists sets the collection, converting the Go slice to an NSArray.
 func (x *MutableParagraphStyle) WithTextLists(items ...*raw.NSTextList) *MutableParagraphStyle {
 	if len(items) == 0 {
-		x.inner.SetTextLists(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetTextLists(foundation.NSArrayFromID[*raw.NSTextList](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -226,7 +232,10 @@ func (x *MutableParagraphStyle) WithTighteningFactorForTruncation(tighteningFact
 // WithTextBlocks sets the collection, converting the Go slice to an NSArray.
 func (x *MutableParagraphStyle) WithTextBlocks(items ...TextBlockProvider) *MutableParagraphStyle {
 	if len(items) == 0 {
-		x.inner.SetTextBlocks(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetTextBlocks(foundation.NSArrayFromID[*raw.NSTextBlock](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -379,6 +388,8 @@ func (x *MutableParagraphStyle) SetTextBlocks(textBlocks ...TextBlockProvider) {
 	var _arg0 *foundation.NSArray[*raw.NSTextBlock]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.NSTextBlock](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.NSTextBlock](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetTextBlocks(_arg0)

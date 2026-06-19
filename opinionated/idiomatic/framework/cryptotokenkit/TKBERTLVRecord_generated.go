@@ -51,6 +51,8 @@ func NewBERTLVRecordWithTagRecords(tag uint64, records ...TLVRecordProvider) *BE
 	var _arg1 *foundation.NSArray[*raw.TKTLVRecord]
 	if len(_ptrs) > 0 {
 		_arg1 = foundation.NSArrayFromID[*raw.TKTLVRecord](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg1 = foundation.NSArrayFromID[*raw.TKTLVRecord](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKBERTLVRecord")), objc.RegisterName("alloc"))

@@ -341,7 +341,10 @@ func (x *ScrollView) WithFindBarPosition(findBarPosition NSScrollViewFindBarPosi
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *ScrollView) WithSubviews(items ...ViewProvider) *ScrollView {
 	if len(items) == 0 {
-		x.inner.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -491,7 +494,10 @@ func (x *ScrollView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters boo
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *ScrollView) WithBackgroundFilters(items ...*coreimage.CIFilter) *ScrollView {
 	if len(items) == 0 {
-		x.inner.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -515,7 +521,10 @@ func (x *ScrollView) WithCompositingFilter(compositingFilter *coreimage.CIFilter
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *ScrollView) WithContentFilters(items ...*coreimage.CIFilter) *ScrollView {
 	if len(items) == 0 {
-		x.inner.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -581,7 +590,10 @@ func (x *ScrollView) WithFocusRingType(focusRingType NSFocusRingType) *ScrollVie
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *ScrollView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrollView {
 	if len(items) == 0 {
-		x.inner.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

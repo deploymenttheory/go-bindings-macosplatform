@@ -46,7 +46,10 @@ func NewCaptureAudioFileOutput() *CaptureAudioFileOutput {
 // WithMetadata sets the collection, converting the Go slice to an NSArray.
 func (x *CaptureAudioFileOutput) WithMetadata(items ...MetadataItemProvider) *CaptureAudioFileOutput {
 	if len(items) == 0 {
-		x.inner.SetMetadata(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetMetadata(foundation.NSArrayFromID[*raw.AVMetadataItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -138,6 +141,8 @@ func (x *CaptureAudioFileOutput) SetMetadata(metadata ...MetadataItemProvider) {
 	var _arg0 *foundation.NSArray[*raw.AVMetadataItem]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.AVMetadataItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.AVMetadataItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetMetadata(_arg0)

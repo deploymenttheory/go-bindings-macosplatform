@@ -48,7 +48,10 @@ func NewVertexDescriptorWithVertexDescriptor(vertexDescriptor *raw.MDLVertexDesc
 // WithAttributes sets the collection, converting the Go slice to an NSMutableArray.
 func (x *VertexDescriptor) WithAttributes(items ...*raw.MDLVertexAttribute) *VertexDescriptor {
 	if len(items) == 0 {
-		x.inner.SetAttributes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAttributes(foundation.NSMutableArrayFromID[*raw.MDLVertexAttribute](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -68,7 +71,10 @@ func (x *VertexDescriptor) WithAttributes(items ...*raw.MDLVertexAttribute) *Ver
 // WithLayouts sets the collection, converting the Go slice to an NSMutableArray.
 func (x *VertexDescriptor) WithLayouts(items ...*raw.MDLVertexBufferLayout) *VertexDescriptor {
 	if len(items) == 0 {
-		x.inner.SetLayouts(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetLayouts(foundation.NSMutableArrayFromID[*raw.MDLVertexBufferLayout](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

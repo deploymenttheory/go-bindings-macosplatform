@@ -254,7 +254,10 @@ func (x *ReferenceNode) WithPhysicsField(physicsField *PhysicsField) *ReferenceN
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *ReferenceNode) WithConstraints(items ...ConstraintProvider) *ReferenceNode {
 	if len(items) == 0 {
-		x.inner.SCNNode.SetConstraints(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SCNNode.SetConstraints(foundation.NSArrayFromID[*raw.SCNConstraint](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -274,7 +277,10 @@ func (x *ReferenceNode) WithConstraints(items ...ConstraintProvider) *ReferenceN
 // WithFilters sets the collection, converting the Go slice to an NSArray.
 func (x *ReferenceNode) WithFilters(items ...*coreimage.CIFilter) *ReferenceNode {
 	if len(items) == 0 {
-		x.inner.SCNNode.SetFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SCNNode.SetFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

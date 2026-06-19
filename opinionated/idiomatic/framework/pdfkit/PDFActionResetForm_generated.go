@@ -41,7 +41,10 @@ func NewActionResetForm() *ActionResetForm {
 // WithFields sets the collection, converting the Go slice to an NSArray.
 func (x *ActionResetForm) WithFields(items ...*foundation.NSString) *ActionResetForm {
 	if len(items) == 0 {
-		x.inner.SetFields(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetFields(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

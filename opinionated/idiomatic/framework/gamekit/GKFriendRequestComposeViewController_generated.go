@@ -63,6 +63,8 @@ func (x *FriendRequestComposeViewController) AddRecipientPlayers(players ...Play
 	var _arg0 *foundation.NSArray[*raw.GKPlayer]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.GKPlayer](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.GKPlayer](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.AddRecipientPlayers(_arg0)

@@ -107,7 +107,10 @@ func (x *NEProxySettings) WithExcludeSimpleHostnames(excludeSimpleHostnames bool
 // WithExceptionList sets the collection, converting the Go slice to an NSArray.
 func (x *NEProxySettings) WithExceptionList(items ...*foundation.NSString) *NEProxySettings {
 	if len(items) == 0 {
-		x.inner.SetExceptionList(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetExceptionList(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -127,7 +130,10 @@ func (x *NEProxySettings) WithExceptionList(items ...*foundation.NSString) *NEPr
 // WithMatchDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NEProxySettings) WithMatchDomains(items ...*foundation.NSString) *NEProxySettings {
 	if len(items) == 0 {
-		x.inner.SetMatchDomains(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetMatchDomains(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

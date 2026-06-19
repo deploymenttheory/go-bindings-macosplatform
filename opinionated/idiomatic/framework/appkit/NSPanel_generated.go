@@ -109,7 +109,10 @@ func (x *Panel) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *Panel {
 // WithTitlebarAccessoryViewControllers sets the collection, converting the Go slice to an NSArray.
 func (x *Panel) WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *Panel {
 	if len(items) == 0 {
-		x.inner.NSWindow.SetTitlebarAccessoryViewControllers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSWindow.SetTitlebarAccessoryViewControllers(foundation.NSArrayFromID[*raw.NSTitlebarAccessoryViewController](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -286,7 +286,10 @@ func (x *Light) WithAreaType(areaType SCNLightAreaType) *Light {
 // WithAreaPolygonVertices sets the collection, converting the Go slice to an NSArray.
 func (x *Light) WithAreaPolygonVertices(items ...*foundation.NSValue) *Light {
 	if len(items) == 0 {
-		x.inner.SetAreaPolygonVertices(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAreaPolygonVertices(foundation.NSArrayFromID[*foundation.NSValue](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -132,6 +132,8 @@ func DataWithContactsError(contacts ...ContactProvider) (*foundation.NSData, err
 	var _arg0 *foundation.NSArray[*raw.CNContact]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.CNContact](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.CNContact](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return raw.CNContactVCardSerializationDataWithContactsError(_arg0)

@@ -75,7 +75,10 @@ func (x *Object) WithDisplayImage(displayImage *Image) *Object {
 // WithAlternativeSpeakableMatches sets the collection, converting the Go slice to an NSArray.
 func (x *Object) WithAlternativeSpeakableMatches(items ...*raw.INSpeakableString) *Object {
 	if len(items) == 0 {
-		x.inner.SetAlternativeSpeakableMatches(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAlternativeSpeakableMatches(foundation.NSArrayFromID[*raw.INSpeakableString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

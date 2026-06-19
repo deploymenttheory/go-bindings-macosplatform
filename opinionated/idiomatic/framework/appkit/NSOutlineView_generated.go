@@ -215,7 +215,10 @@ func (x *OutlineView) WithDoubleAction(doubleAction objc.SEL) *OutlineView {
 // WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *OutlineView) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *OutlineView {
 	if len(items) == 0 {
-		x.inner.NSTableView.SetSortDescriptors(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTableView.SetSortDescriptors(foundation.NSArrayFromID[*foundation.NSSortDescriptor](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -543,7 +546,10 @@ func (x *OutlineView) WithCell(cell CellProvider) *OutlineView {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *OutlineView) WithSubviews(items ...ViewProvider) *OutlineView {
 	if len(items) == 0 {
-		x.inner.NSTableView.NSControl.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTableView.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -693,7 +699,10 @@ func (x *OutlineView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bo
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *OutlineView) WithBackgroundFilters(items ...*coreimage.CIFilter) *OutlineView {
 	if len(items) == 0 {
-		x.inner.NSTableView.NSControl.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTableView.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -717,7 +726,10 @@ func (x *OutlineView) WithCompositingFilter(compositingFilter *coreimage.CIFilte
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *OutlineView) WithContentFilters(items ...*coreimage.CIFilter) *OutlineView {
 	if len(items) == 0 {
-		x.inner.NSTableView.NSControl.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTableView.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -783,7 +795,10 @@ func (x *OutlineView) WithFocusRingType(focusRingType NSFocusRingType) *OutlineV
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *OutlineView) WithGestureRecognizers(items ...GestureRecognizerProvider) *OutlineView {
 	if len(items) == 0 {
-		x.inner.NSTableView.NSControl.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSTableView.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

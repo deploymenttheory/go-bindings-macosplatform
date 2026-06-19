@@ -46,7 +46,10 @@ func NewGraphPooling4DOpDescriptor() *GraphPooling4DOpDescriptor {
 // WithKernelSizes sets the collection, converting the Go slice to an NSArray.
 func (x *GraphPooling4DOpDescriptor) WithKernelSizes(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor {
 	if len(items) == 0 {
-		x.inner.SetKernelSizes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetKernelSizes(foundation.NSArrayFromID[*foundation.NSNumber](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -66,7 +69,10 @@ func (x *GraphPooling4DOpDescriptor) WithKernelSizes(items ...*foundation.NSNumb
 // WithStrides sets the collection, converting the Go slice to an NSArray.
 func (x *GraphPooling4DOpDescriptor) WithStrides(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor {
 	if len(items) == 0 {
-		x.inner.SetStrides(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetStrides(foundation.NSArrayFromID[*foundation.NSNumber](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -86,7 +92,10 @@ func (x *GraphPooling4DOpDescriptor) WithStrides(items ...*foundation.NSNumber) 
 // WithDilationRates sets the collection, converting the Go slice to an NSArray.
 func (x *GraphPooling4DOpDescriptor) WithDilationRates(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor {
 	if len(items) == 0 {
-		x.inner.SetDilationRates(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetDilationRates(foundation.NSArrayFromID[*foundation.NSNumber](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -106,7 +115,10 @@ func (x *GraphPooling4DOpDescriptor) WithDilationRates(items ...*foundation.NSNu
 // WithPaddingValues sets the collection, converting the Go slice to an NSArray.
 func (x *GraphPooling4DOpDescriptor) WithPaddingValues(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor {
 	if len(items) == 0 {
-		x.inner.SetPaddingValues(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetPaddingValues(foundation.NSArrayFromID[*foundation.NSNumber](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

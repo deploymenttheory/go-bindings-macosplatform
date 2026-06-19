@@ -111,7 +111,10 @@ func (x *TextLayoutManager) WithLayoutQueue(layoutQueue *foundation.NSOperationQ
 // WithTextSelections sets the collection, converting the Go slice to an NSArray.
 func (x *TextLayoutManager) WithTextSelections(items ...*raw.NSTextSelection) *TextLayoutManager {
 	if len(items) == 0 {
-		x.inner.SetTextSelections(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetTextSelections(foundation.NSArrayFromID[*raw.NSTextSelection](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -259,6 +262,8 @@ func (x *TextLayoutManager) ReplaceContentsInRangeWithTextElements(range_ *raw.N
 	var _arg1 *foundation.NSArray[*raw.NSTextElement]
 	if len(_ptrs) > 0 {
 		_arg1 = foundation.NSArrayFromID[*raw.NSTextElement](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg1 = foundation.NSArrayFromID[*raw.NSTextElement](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.ReplaceContentsInRangeWithTextElements(range_, _arg1)

@@ -45,6 +45,8 @@ func NewDisbursementRequestWithMerchantIdentifierCurrencyCodeRegionCodeSupported
 	var _arg5 *foundation.NSArray[*raw.PKPaymentSummaryItem]
 	if len(_ptrs) > 0 {
 		_arg5 = foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg5 = foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKDisbursementRequest")), objc.RegisterName("alloc"))
@@ -73,7 +75,10 @@ func (x *DisbursementRequest) WithRegionCode(regionCode string) *DisbursementReq
 // WithSupportedNetworks sets the collection, converting the Go slice to an NSArray.
 func (x *DisbursementRequest) WithSupportedNetworks(items ...*foundation.NSString) *DisbursementRequest {
 	if len(items) == 0 {
-		x.inner.SetSupportedNetworks(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSupportedNetworks(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -101,7 +106,10 @@ func (x *DisbursementRequest) WithMerchantCapabilities(merchantCapabilities PKMe
 // WithSummaryItems sets the collection, converting the Go slice to an NSArray.
 func (x *DisbursementRequest) WithSummaryItems(items ...PaymentSummaryItemProvider) *DisbursementRequest {
 	if len(items) == 0 {
-		x.inner.SetSummaryItems(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSummaryItems(foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -129,7 +137,10 @@ func (x *DisbursementRequest) WithCurrencyCode(currencyCode string) *Disbursemen
 // WithRequiredRecipientContactFields sets the collection, converting the Go slice to an NSArray.
 func (x *DisbursementRequest) WithRequiredRecipientContactFields(items ...*foundation.NSString) *DisbursementRequest {
 	if len(items) == 0 {
-		x.inner.SetRequiredRecipientContactFields(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRequiredRecipientContactFields(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -157,7 +168,10 @@ func (x *DisbursementRequest) WithRecipientContact(recipientContact *Contact) *D
 // WithSupportedRegions sets the collection, converting the Go slice to an NSArray.
 func (x *DisbursementRequest) WithSupportedRegions(items ...*foundation.NSString) *DisbursementRequest {
 	if len(items) == 0 {
-		x.inner.SetSupportedRegions(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSupportedRegions(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -262,6 +276,8 @@ func (x *DisbursementRequest) SetSummaryItems(summaryItems ...PaymentSummaryItem
 	var _arg0 *foundation.NSArray[*raw.PKPaymentSummaryItem]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetSummaryItems(_arg0)

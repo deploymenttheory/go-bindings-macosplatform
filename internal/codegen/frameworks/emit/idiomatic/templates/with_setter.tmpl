@@ -10,7 +10,10 @@
 // {{.GoName}} sets the collection, converting the Go slice to an {{.ArrayClass}}.
 func (x *{{.TypeName}}) {{.GoName}}(items ...{{.SliceElemType}}) *{{.TypeName}} {
 if len(items) == 0 {
-{{.Inner}}.{{.RawSetterGoName}}(nil)
+// An empty (not nil) array: some raw setters dereference the argument.
+{{.Inner}}.{{.RawSetterGoName}}({{.ArrayFromID}}(
+objc.Send[objc.ID](objc.ID(objc.GetClass({{.ArrayClass | printf "%q"}})),
+objc.RegisterName("array"))))
 return x
 }
 _ptrs := make([]objc.ID, len(items))

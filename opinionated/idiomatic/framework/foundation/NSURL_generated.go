@@ -161,6 +161,8 @@ func (x *URL) ResourceValuesForKeysError(keys ...StringProvider) (*raw.NSDiction
 	var _arg0 *raw.NSArray[*raw.NSString]
 	if len(_ptrs) > 0 {
 		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return x.inner.ResourceValuesForKeysError(_arg0)
@@ -404,6 +406,8 @@ func (x *URL) PromisedItemResourceValuesForKeysError(keys ...StringProvider) (*r
 	var _arg0 *raw.NSArray[*raw.NSString]
 	if len(_ptrs) > 0 {
 		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return x.inner.PromisedItemResourceValuesForKeysError(_arg0)

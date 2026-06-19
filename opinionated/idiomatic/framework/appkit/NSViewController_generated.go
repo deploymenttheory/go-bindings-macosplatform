@@ -89,7 +89,10 @@ func (x *ViewController) WithPreferredContentSize(preferredContentSize corefound
 // WithChildViewControllers sets the collection, converting the Go slice to an NSArray.
 func (x *ViewController) WithChildViewControllers(items ...ViewControllerProvider) *ViewController {
 	if len(items) == 0 {
-		x.inner.SetChildViewControllers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetChildViewControllers(foundation.NSArrayFromID[*raw.NSViewController](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -467,6 +470,8 @@ func (x *ViewController) SetChildViewControllers(childViewControllers ...ViewCon
 	var _arg0 *foundation.NSArray[*raw.NSViewController]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.NSViewController](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.NSViewController](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetChildViewControllers(_arg0)

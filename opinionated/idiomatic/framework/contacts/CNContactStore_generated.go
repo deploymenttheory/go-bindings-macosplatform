@@ -58,6 +58,8 @@ func (x *ContactStore) UnifiedContactsMatchingPredicateKeysToFetchError(predicat
 	var _arg1 *foundation.NSArray[raw.CNKeyDescriptor]
 	if len(_ptrs) > 0 {
 		_arg1 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg1 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return x.inner.UnifiedContactsMatchingPredicateKeysToFetchError(predicate, _arg1)
@@ -74,6 +76,8 @@ func (x *ContactStore) UnifiedContactWithIdentifierKeysToFetchError(identifier s
 	var _arg1 *foundation.NSArray[raw.CNKeyDescriptor]
 	if len(_ptrs) > 0 {
 		_arg1 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg1 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r, _err := x.inner.UnifiedContactWithIdentifierKeysToFetchError(foundation.NSStringStringWithUTF8String(identifier), _arg1)
@@ -97,6 +101,8 @@ func (x *ContactStore) UnifiedMeContactWithKeysToFetchError(keys ...purego.IDer)
 	var _arg0 *foundation.NSArray[raw.CNKeyDescriptor]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r, _err := x.inner.UnifiedMeContactWithKeysToFetchError(_arg0)

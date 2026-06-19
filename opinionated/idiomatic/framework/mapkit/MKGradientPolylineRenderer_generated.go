@@ -97,7 +97,10 @@ func (x *GradientPolylineRenderer) WithLineDashPhase(lineDashPhase float64) *Gra
 // WithLineDashPattern sets the collection, converting the Go slice to an NSArray.
 func (x *GradientPolylineRenderer) WithLineDashPattern(items ...*foundation.NSNumber) *GradientPolylineRenderer {
 	if len(items) == 0 {
-		x.inner.MKPolylineRenderer.MKOverlayPathRenderer.SetLineDashPattern(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.MKPolylineRenderer.MKOverlayPathRenderer.SetLineDashPattern(foundation.NSArrayFromID[*foundation.NSNumber](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

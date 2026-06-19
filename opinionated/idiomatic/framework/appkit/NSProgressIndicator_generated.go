@@ -133,7 +133,10 @@ func (x *ProgressIndicator) WithControlTint(controlTint NSControlTint) *Progress
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *ProgressIndicator) WithSubviews(items ...ViewProvider) *ProgressIndicator {
 	if len(items) == 0 {
-		x.inner.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -283,7 +286,10 @@ func (x *ProgressIndicator) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilt
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *ProgressIndicator) WithBackgroundFilters(items ...*coreimage.CIFilter) *ProgressIndicator {
 	if len(items) == 0 {
-		x.inner.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -307,7 +313,10 @@ func (x *ProgressIndicator) WithCompositingFilter(compositingFilter *coreimage.C
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *ProgressIndicator) WithContentFilters(items ...*coreimage.CIFilter) *ProgressIndicator {
 	if len(items) == 0 {
-		x.inner.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -373,7 +382,10 @@ func (x *ProgressIndicator) WithFocusRingType(focusRingType NSFocusRingType) *Pr
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *ProgressIndicator) WithGestureRecognizers(items ...GestureRecognizerProvider) *ProgressIndicator {
 	if len(items) == 0 {
-		x.inner.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

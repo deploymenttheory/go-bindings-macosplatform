@@ -89,7 +89,10 @@ func (x *NumericDataAxisDescriptor) WithValueDescriptionProvider(valueDescriptio
 // WithGridlinePositions sets the collection, converting the Go slice to an NSArray.
 func (x *NumericDataAxisDescriptor) WithGridlinePositions(items ...*foundation.NSNumber) *NumericDataAxisDescriptor {
 	if len(items) == 0 {
-		x.inner.SetGridlinePositions(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetGridlinePositions(foundation.NSArrayFromID[*foundation.NSNumber](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -67,7 +67,10 @@ func (x *PaymentRequest) WithCountryCode(countryCode string) *PaymentRequest {
 // WithSupportedNetworks sets the collection, converting the Go slice to an NSArray.
 func (x *PaymentRequest) WithSupportedNetworks(items ...*foundation.NSString) *PaymentRequest {
 	if len(items) == 0 {
-		x.inner.SetSupportedNetworks(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSupportedNetworks(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -119,7 +122,10 @@ func (x *PaymentRequest) WithMerchantCategoryCode(merchantCategoryCode int16) *P
 // WithPaymentSummaryItems sets the collection, converting the Go slice to an NSArray.
 func (x *PaymentRequest) WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequest {
 	if len(items) == 0 {
-		x.inner.SetPaymentSummaryItems(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetPaymentSummaryItems(foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -195,7 +201,10 @@ func (x *PaymentRequest) WithShippingContact(shippingContact *Contact) *PaymentR
 // WithShippingMethods sets the collection, converting the Go slice to an NSArray.
 func (x *PaymentRequest) WithShippingMethods(items ...*raw.PKShippingMethod) *PaymentRequest {
 	if len(items) == 0 {
-		x.inner.SetShippingMethods(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetShippingMethods(foundation.NSArrayFromID[*raw.PKShippingMethod](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -247,7 +256,10 @@ func (x *PaymentRequest) WithSupportedCountries(supportedCountries *foundation.N
 // WithMultiTokenContexts sets the collection, converting the Go slice to an NSArray.
 func (x *PaymentRequest) WithMultiTokenContexts(items ...*raw.PKPaymentTokenContext) *PaymentRequest {
 	if len(items) == 0 {
-		x.inner.SetMultiTokenContexts(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetMultiTokenContexts(foundation.NSArrayFromID[*raw.PKPaymentTokenContext](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -424,6 +436,8 @@ func (x *PaymentRequest) SetPaymentSummaryItems(paymentSummaryItems ...PaymentSu
 	var _arg0 *foundation.NSArray[*raw.PKPaymentSummaryItem]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.PKPaymentSummaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetPaymentSummaryItems(_arg0)

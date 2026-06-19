@@ -61,7 +61,10 @@ func NewMTRSetupPayloadWithSetupPasscodeDiscriminator(setupPasscode *foundation.
 // WithSubPayloads sets the collection, converting the Go slice to an NSArray.
 func (x *MTRSetupPayload) WithSubPayloads(items ...*raw.MTRSetupPayload) *MTRSetupPayload {
 	if len(items) == 0 {
-		x.inner.SetSubPayloads(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSubPayloads(foundation.NSArrayFromID[*raw.MTRSetupPayload](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

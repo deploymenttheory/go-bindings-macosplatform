@@ -59,7 +59,10 @@ func (x *EntityDescription) WithAbstract(abstract bool) *EntityDescription {
 // WithSubentities sets the collection, converting the Go slice to an NSArray.
 func (x *EntityDescription) WithSubentities(items ...*raw.NSEntityDescription) *EntityDescription {
 	if len(items) == 0 {
-		x.inner.SetSubentities(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSubentities(foundation.NSArrayFromID[*raw.NSEntityDescription](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -77,7 +80,10 @@ func (x *EntityDescription) WithSubentities(items ...*raw.NSEntityDescription) *
 // WithProperties sets the collection, converting the Go slice to an NSArray.
 func (x *EntityDescription) WithProperties(items ...PropertyDescriptionProvider) *EntityDescription {
 	if len(items) == 0 {
-		x.inner.SetProperties(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetProperties(foundation.NSArrayFromID[*raw.NSPropertyDescription](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -113,7 +119,10 @@ func (x *EntityDescription) WithRenamingIdentifier(renamingIdentifier string) *E
 // WithIndexes sets the collection, converting the Go slice to an NSArray.
 func (x *EntityDescription) WithIndexes(items ...*raw.NSFetchIndexDescription) *EntityDescription {
 	if len(items) == 0 {
-		x.inner.SetIndexes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetIndexes(foundation.NSArrayFromID[*raw.NSFetchIndexDescription](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -131,7 +140,10 @@ func (x *EntityDescription) WithIndexes(items ...*raw.NSFetchIndexDescription) *
 // WithUniquenessConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *EntityDescription) WithUniquenessConstraints(items ...*foundation.NSArray[objc.ID]) *EntityDescription {
 	if len(items) == 0 {
-		x.inner.SetUniquenessConstraints(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetUniquenessConstraints(foundation.NSArrayFromID[objc.ID](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -149,7 +161,10 @@ func (x *EntityDescription) WithUniquenessConstraints(items ...*foundation.NSArr
 // WithCompoundIndexes sets the collection, converting the Go slice to an NSArray.
 func (x *EntityDescription) WithCompoundIndexes(items ...*foundation.NSArray[objc.ID]) *EntityDescription {
 	if len(items) == 0 {
-		x.inner.SetCompoundIndexes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCompoundIndexes(foundation.NSArrayFromID[objc.ID](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -282,6 +297,8 @@ func (x *EntityDescription) SetProperties(properties ...PropertyDescriptionProvi
 	var _arg0 *foundation.NSArray[*raw.NSPropertyDescription]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.NSPropertyDescription](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.NSPropertyDescription](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetProperties(_arg0)

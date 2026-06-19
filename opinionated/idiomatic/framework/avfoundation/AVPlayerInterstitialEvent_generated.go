@@ -78,7 +78,10 @@ func (x *PlayerInterstitialEvent) WithDate(date *foundation.NSDate) *PlayerInter
 // WithTemplateItems sets the collection, converting the Go slice to an NSArray.
 func (x *PlayerInterstitialEvent) WithTemplateItems(items ...*raw.AVPlayerItem) *PlayerInterstitialEvent {
 	if len(items) == 0 {
-		x.inner.SetTemplateItems(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetTemplateItems(foundation.NSArrayFromID[*raw.AVPlayerItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -69,7 +69,10 @@ func (x *CollectionLayoutSection) WithOrthogonalScrollingBehavior(orthogonalScro
 // WithBoundarySupplementaryItems sets the collection, converting the Go slice to an NSArray.
 func (x *CollectionLayoutSection) WithBoundarySupplementaryItems(items ...*raw.NSCollectionLayoutBoundarySupplementaryItem) *CollectionLayoutSection {
 	if len(items) == 0 {
-		x.inner.SetBoundarySupplementaryItems(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetBoundarySupplementaryItems(foundation.NSArrayFromID[*raw.NSCollectionLayoutBoundarySupplementaryItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -105,7 +108,10 @@ func (x *CollectionLayoutSection) WithVisibleItemsInvalidationHandler(visibleIte
 // WithDecorationItems sets the collection, converting the Go slice to an NSArray.
 func (x *CollectionLayoutSection) WithDecorationItems(items ...*raw.NSCollectionLayoutDecorationItem) *CollectionLayoutSection {
 	if len(items) == 0 {
-		x.inner.SetDecorationItems(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetDecorationItems(foundation.NSArrayFromID[*raw.NSCollectionLayoutDecorationItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -45,7 +45,10 @@ func NewCollectionLayoutGroup() *CollectionLayoutGroup {
 // WithSupplementaryItems sets the collection, converting the Go slice to an NSArray.
 func (x *CollectionLayoutGroup) WithSupplementaryItems(items ...CollectionLayoutSupplementaryItemProvider) *CollectionLayoutGroup {
 	if len(items) == 0 {
-		x.inner.SetSupplementaryItems(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSupplementaryItems(foundation.NSArrayFromID[*raw.NSCollectionLayoutSupplementaryItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -104,6 +107,8 @@ func (x *CollectionLayoutGroup) SetSupplementaryItems(supplementaryItems ...Coll
 	var _arg0 *foundation.NSArray[*raw.NSCollectionLayoutSupplementaryItem]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.NSCollectionLayoutSupplementaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.NSCollectionLayoutSupplementaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetSupplementaryItems(_arg0)

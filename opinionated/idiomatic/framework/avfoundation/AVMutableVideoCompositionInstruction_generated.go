@@ -55,7 +55,10 @@ func (x *MutableVideoCompositionInstruction) WithTimeRange(timeRange coremedia.C
 // WithLayerInstructions sets the collection, converting the Go slice to an NSArray.
 func (x *MutableVideoCompositionInstruction) WithLayerInstructions(items ...VideoCompositionLayerInstructionProvider) *MutableVideoCompositionInstruction {
 	if len(items) == 0 {
-		x.inner.SetLayerInstructions(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetLayerInstructions(foundation.NSArrayFromID[*raw.AVVideoCompositionLayerInstruction](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -83,7 +86,10 @@ func (x *MutableVideoCompositionInstruction) WithEnablePostProcessing(enablePost
 // WithRequiredSourceSampleDataTrackIDs sets the collection, converting the Go slice to an NSArray.
 func (x *MutableVideoCompositionInstruction) WithRequiredSourceSampleDataTrackIDs(items ...*foundation.NSNumber) *MutableVideoCompositionInstruction {
 	if len(items) == 0 {
-		x.inner.SetRequiredSourceSampleDataTrackIDs(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRequiredSourceSampleDataTrackIDs(foundation.NSArrayFromID[*foundation.NSNumber](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -124,6 +130,8 @@ func (x *MutableVideoCompositionInstruction) SetLayerInstructions(layerInstructi
 	var _arg0 *foundation.NSArray[*raw.AVVideoCompositionLayerInstruction]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.AVVideoCompositionLayerInstruction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.AVVideoCompositionLayerInstruction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetLayerInstructions(_arg0)

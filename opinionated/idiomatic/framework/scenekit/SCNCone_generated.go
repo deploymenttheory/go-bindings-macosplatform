@@ -90,7 +90,10 @@ func (x *Cone) WithName(name string) *Cone {
 // WithMaterials sets the collection, converting the Go slice to an NSArray.
 func (x *Cone) WithMaterials(items ...*raw.SCNMaterial) *Cone {
 	if len(items) == 0 {
-		x.inner.SCNGeometry.SetMaterials(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SCNGeometry.SetMaterials(foundation.NSArrayFromID[*raw.SCNMaterial](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -118,7 +121,10 @@ func (x *Cone) WithFirstMaterial(firstMaterial *Material) *Cone {
 // WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
 func (x *Cone) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Cone {
 	if len(items) == 0 {
-		x.inner.SCNGeometry.SetLevelsOfDetail(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SCNGeometry.SetLevelsOfDetail(foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

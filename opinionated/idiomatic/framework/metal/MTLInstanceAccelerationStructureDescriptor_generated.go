@@ -202,6 +202,8 @@ func (x *InstanceAccelerationStructureDescriptor) SetInstancedAccelerationStruct
 	var _arg0 *foundation.NSArray[raw.MTLAccelerationStructure]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MTLAccelerationStructure](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MTLAccelerationStructure](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetInstancedAccelerationStructures(_arg0)

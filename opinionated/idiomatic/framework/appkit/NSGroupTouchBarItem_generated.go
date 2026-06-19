@@ -85,7 +85,10 @@ func (x *GroupTouchBarItem) WithPreferredItemWidth(preferredItemWidth float64) *
 // WithPrioritizedCompressionOptions sets the collection, converting the Go slice to an NSArray.
 func (x *GroupTouchBarItem) WithPrioritizedCompressionOptions(items ...*raw.NSUserInterfaceCompressionOptions) *GroupTouchBarItem {
 	if len(items) == 0 {
-		x.inner.SetPrioritizedCompressionOptions(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetPrioritizedCompressionOptions(foundation.NSArrayFromID[*raw.NSUserInterfaceCompressionOptions](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -147,6 +147,8 @@ func (x *RunLoop) PerformSelectorTargetArgumentOrderModes(aSelector objc.SEL, ta
 	var _arg4 *raw.NSArray[*raw.NSString]
 	if len(_ptrs) > 0 {
 		_arg4 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg4 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.PerformSelectorTargetArgumentOrderModes(aSelector, target, arg, order, _arg4)

@@ -64,7 +64,10 @@ func (x *CollaborationOptionsGroup) WithFooter(footer string) *CollaborationOpti
 // WithOptions sets the collection, converting the Go slice to an NSArray.
 func (x *CollaborationOptionsGroup) WithOptions(items ...*raw.SWCollaborationOption) *CollaborationOptionsGroup {
 	if len(items) == 0 {
-		x.inner.SetOptions(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetOptions(foundation.NSArrayFromID[*raw.SWCollaborationOption](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

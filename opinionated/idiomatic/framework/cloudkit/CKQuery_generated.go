@@ -55,7 +55,10 @@ func NewQueryWithRecordTypePredicate(recordType *foundation.NSString, predicate 
 // WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *Query) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *Query {
 	if len(items) == 0 {
-		x.inner.SetSortDescriptors(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSortDescriptors(foundation.NSArrayFromID[*foundation.NSSortDescriptor](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

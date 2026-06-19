@@ -43,7 +43,10 @@ func NewMorpher() *Morpher {
 // WithTargets sets the collection, converting the Go slice to an NSArray.
 func (x *Morpher) WithTargets(items ...GeometryProvider) *Morpher {
 	if len(items) == 0 {
-		x.inner.SetTargets(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetTargets(foundation.NSArrayFromID[*raw.SCNGeometry](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -63,7 +66,10 @@ func (x *Morpher) WithTargets(items ...GeometryProvider) *Morpher {
 // WithWeights sets the collection, converting the Go slice to an NSArray.
 func (x *Morpher) WithWeights(items ...*foundation.NSNumber) *Morpher {
 	if len(items) == 0 {
-		x.inner.SetWeights(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetWeights(foundation.NSArrayFromID[*foundation.NSNumber](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -144,6 +150,8 @@ func (x *Morpher) SetTargets(targets ...GeometryProvider) {
 	var _arg0 *foundation.NSArray[*raw.SCNGeometry]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.SCNGeometry](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.SCNGeometry](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetTargets(_arg0)

@@ -48,7 +48,10 @@ func NewPredicateEditor() *PredicateEditor {
 // WithRowTemplates sets the collection, converting the Go slice to an NSArray.
 func (x *PredicateEditor) WithRowTemplates(items ...*raw.NSPredicateEditorRowTemplate) *PredicateEditor {
 	if len(items) == 0 {
-		x.inner.SetRowTemplates(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRowTemplates(foundation.NSArrayFromID[*raw.NSPredicateEditorRowTemplate](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -352,7 +355,10 @@ func (x *PredicateEditor) WithCell(cell CellProvider) *PredicateEditor {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *PredicateEditor) WithSubviews(items ...ViewProvider) *PredicateEditor {
 	if len(items) == 0 {
-		x.inner.NSRuleEditor.NSControl.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSRuleEditor.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -502,7 +508,10 @@ func (x *PredicateEditor) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilter
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *PredicateEditor) WithBackgroundFilters(items ...*coreimage.CIFilter) *PredicateEditor {
 	if len(items) == 0 {
-		x.inner.NSRuleEditor.NSControl.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSRuleEditor.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -526,7 +535,10 @@ func (x *PredicateEditor) WithCompositingFilter(compositingFilter *coreimage.CIF
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *PredicateEditor) WithContentFilters(items ...*coreimage.CIFilter) *PredicateEditor {
 	if len(items) == 0 {
-		x.inner.NSRuleEditor.NSControl.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSRuleEditor.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -592,7 +604,10 @@ func (x *PredicateEditor) WithFocusRingType(focusRingType NSFocusRingType) *Pred
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *PredicateEditor) WithGestureRecognizers(items ...GestureRecognizerProvider) *PredicateEditor {
 	if len(items) == 0 {
-		x.inner.NSRuleEditor.NSControl.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSRuleEditor.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

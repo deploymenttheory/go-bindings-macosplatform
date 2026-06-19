@@ -88,7 +88,10 @@ func (x *PlayerView) WithDelegate(delegate raw.AVPlayerViewDelegate) *PlayerView
 // WithSpeeds sets the collection, converting the Go slice to an NSArray.
 func (x *PlayerView) WithSpeeds(items ...*raw.AVPlaybackSpeed) *PlayerView {
 	if len(items) == 0 {
-		x.inner.SetSpeeds(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSpeeds(foundation.NSArrayFromID[*raw.AVPlaybackSpeed](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

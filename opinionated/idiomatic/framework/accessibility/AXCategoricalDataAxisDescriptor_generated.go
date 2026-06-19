@@ -57,7 +57,10 @@ func NewCategoricalDataAxisDescriptorWithAttributedTitleCategoryOrder(attributed
 // WithCategoryOrder sets the collection, converting the Go slice to an NSArray.
 func (x *CategoricalDataAxisDescriptor) WithCategoryOrder(items ...*foundation.NSString) *CategoricalDataAxisDescriptor {
 	if len(items) == 0 {
-		x.inner.SetCategoryOrder(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCategoryOrder(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

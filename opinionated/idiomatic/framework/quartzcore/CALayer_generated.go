@@ -109,7 +109,10 @@ func (x *Layer) WithGeometryFlipped(geometryFlipped bool) *Layer {
 // WithSublayers sets the collection, converting the Go slice to an NSArray.
 func (x *Layer) WithSublayers(items ...LayerProvider) *Layer {
 	if len(items) == 0 {
-		x.inner.SetSublayers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSublayers(foundation.NSArrayFromID[*raw.CALayer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -361,7 +364,10 @@ func (x *Layer) WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *Lay
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *Layer) WithConstraints(items ...*raw.CAConstraint) *Layer {
 	if len(items) == 0 {
-		x.inner.SetConstraints(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetConstraints(foundation.NSArrayFromID[*raw.CAConstraint](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -727,6 +733,8 @@ func (x *Layer) SetSublayers(sublayers ...LayerProvider) {
 	var _arg0 *foundation.NSArray[*raw.CALayer]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.CALayer](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.CALayer](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetSublayers(_arg0)

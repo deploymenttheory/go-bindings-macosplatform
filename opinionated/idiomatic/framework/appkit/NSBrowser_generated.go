@@ -184,7 +184,10 @@ func (x *Browser) WithSelectionIndexPath(selectionIndexPath *foundation.NSIndexP
 // WithSelectionIndexPaths sets the collection, converting the Go slice to an NSArray.
 func (x *Browser) WithSelectionIndexPaths(items ...*foundation.NSIndexPath) *Browser {
 	if len(items) == 0 {
-		x.inner.SetSelectionIndexPaths(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSelectionIndexPaths(foundation.NSArrayFromID[*foundation.NSIndexPath](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -448,7 +451,10 @@ func (x *Browser) WithCell(cell CellProvider) *Browser {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *Browser) WithSubviews(items ...ViewProvider) *Browser {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -598,7 +604,10 @@ func (x *Browser) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) 
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *Browser) WithBackgroundFilters(items ...*coreimage.CIFilter) *Browser {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -622,7 +631,10 @@ func (x *Browser) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *Browser) WithContentFilters(items ...*coreimage.CIFilter) *Browser {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -688,7 +700,10 @@ func (x *Browser) WithFocusRingType(focusRingType NSFocusRingType) *Browser {
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *Browser) WithGestureRecognizers(items ...GestureRecognizerProvider) *Browser {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

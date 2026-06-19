@@ -125,7 +125,10 @@ func (x *FontPanel) WithToolbarStyle(toolbarStyle NSWindowToolbarStyle) *FontPan
 // WithTitlebarAccessoryViewControllers sets the collection, converting the Go slice to an NSArray.
 func (x *FontPanel) WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *FontPanel {
 	if len(items) == 0 {
-		x.inner.NSPanel.NSWindow.SetTitlebarAccessoryViewControllers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSPanel.NSWindow.SetTitlebarAccessoryViewControllers(foundation.NSArrayFromID[*raw.NSTitlebarAccessoryViewController](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

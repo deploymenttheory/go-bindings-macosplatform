@@ -72,6 +72,8 @@ func (x *Pasteboard) WriteObjects(objects ...purego.IDer) bool {
 	var _arg0 *foundation.NSArray[raw.NSPasteboardWriting]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.NSPasteboardWriting](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.NSPasteboardWriting](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return x.inner.WriteObjects(_arg0)

@@ -85,7 +85,10 @@ func NewTileDefinitionWithTexturesNormalTexturesSizeTimePerFrame(textures *found
 // WithTextures sets the collection, converting the Go slice to an NSArray.
 func (x *TileDefinition) WithTextures(items ...TextureProvider) *TileDefinition {
 	if len(items) == 0 {
-		x.inner.SetTextures(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetTextures(foundation.NSArrayFromID[*raw.SKTexture](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -105,7 +108,10 @@ func (x *TileDefinition) WithTextures(items ...TextureProvider) *TileDefinition 
 // WithNormalTextures sets the collection, converting the Go slice to an NSArray.
 func (x *TileDefinition) WithNormalTextures(items ...TextureProvider) *TileDefinition {
 	if len(items) == 0 {
-		x.inner.SetNormalTextures(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetNormalTextures(foundation.NSArrayFromID[*raw.SKTexture](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -206,6 +212,8 @@ func (x *TileDefinition) SetTextures(textures ...TextureProvider) {
 	var _arg0 *foundation.NSArray[*raw.SKTexture]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.SKTexture](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.SKTexture](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetTextures(_arg0)
@@ -233,6 +241,8 @@ func (x *TileDefinition) SetNormalTextures(normalTextures ...TextureProvider) {
 	var _arg0 *foundation.NSArray[*raw.SKTexture]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.SKTexture](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.SKTexture](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetNormalTextures(_arg0)

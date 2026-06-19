@@ -53,7 +53,10 @@ func (x *MetadataQuery) WithPredicate(predicate PredicateProvider) *MetadataQuer
 // WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *MetadataQuery) WithSortDescriptors(items ...*raw.NSSortDescriptor) *MetadataQuery {
 	if len(items) == 0 {
-		x.inner.SetSortDescriptors(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSortDescriptors(raw.NSArrayFromID[*raw.NSSortDescriptor](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -71,7 +74,10 @@ func (x *MetadataQuery) WithSortDescriptors(items ...*raw.NSSortDescriptor) *Met
 // WithValueListAttributes sets the collection, converting the Go slice to an NSArray.
 func (x *MetadataQuery) WithValueListAttributes(items ...StringProvider) *MetadataQuery {
 	if len(items) == 0 {
-		x.inner.SetValueListAttributes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetValueListAttributes(raw.NSArrayFromID[*raw.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -89,7 +95,10 @@ func (x *MetadataQuery) WithValueListAttributes(items ...StringProvider) *Metada
 // WithGroupingAttributes sets the collection, converting the Go slice to an NSArray.
 func (x *MetadataQuery) WithGroupingAttributes(items ...StringProvider) *MetadataQuery {
 	if len(items) == 0 {
-		x.inner.SetGroupingAttributes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetGroupingAttributes(raw.NSArrayFromID[*raw.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -227,6 +236,8 @@ func (x *MetadataQuery) SetValueListAttributes(valueListAttributes ...StringProv
 	var _arg0 *raw.NSArray[*raw.NSString]
 	if len(_ptrs) > 0 {
 		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetValueListAttributes(_arg0)
@@ -252,6 +263,8 @@ func (x *MetadataQuery) SetGroupingAttributes(groupingAttributes ...StringProvid
 	var _arg0 *raw.NSArray[*raw.NSString]
 	if len(_ptrs) > 0 {
 		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetGroupingAttributes(_arg0)

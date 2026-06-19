@@ -47,7 +47,10 @@ func NewMTRDeviceControllerExternalCertificateParametersWithStorageDelegateStora
 // WithProductAttestationAuthorityCertificates sets the collection, converting the Go slice to an NSArray.
 func (x *MTRDeviceControllerExternalCertificateParameters) WithProductAttestationAuthorityCertificates(items ...*foundation.NSData) *MTRDeviceControllerExternalCertificateParameters {
 	if len(items) == 0 {
-		x.inner.MTRDeviceControllerParameters.SetProductAttestationAuthorityCertificates(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.MTRDeviceControllerParameters.SetProductAttestationAuthorityCertificates(foundation.NSArrayFromID[*foundation.NSData](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -67,7 +70,10 @@ func (x *MTRDeviceControllerExternalCertificateParameters) WithProductAttestatio
 // WithCertificationDeclarationCertificates sets the collection, converting the Go slice to an NSArray.
 func (x *MTRDeviceControllerExternalCertificateParameters) WithCertificationDeclarationCertificates(items ...*foundation.NSData) *MTRDeviceControllerExternalCertificateParameters {
 	if len(items) == 0 {
-		x.inner.MTRDeviceControllerParameters.SetCertificationDeclarationCertificates(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.MTRDeviceControllerParameters.SetCertificationDeclarationCertificates(foundation.NSArrayFromID[*foundation.NSData](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

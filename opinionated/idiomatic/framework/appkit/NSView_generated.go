@@ -58,7 +58,10 @@ func NewViewWithCoder(coder *foundation.NSCoder) *View {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *View) WithSubviews(items ...ViewProvider) *View {
 	if len(items) == 0 {
-		x.inner.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -208,7 +211,10 @@ func (x *View) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Vi
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *View) WithBackgroundFilters(items ...*coreimage.CIFilter) *View {
 	if len(items) == 0 {
-		x.inner.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -232,7 +238,10 @@ func (x *View) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Vie
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *View) WithContentFilters(items ...*coreimage.CIFilter) *View {
 	if len(items) == 0 {
-		x.inner.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -298,7 +307,10 @@ func (x *View) WithFocusRingType(focusRingType NSFocusRingType) *View {
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *View) WithGestureRecognizers(items ...GestureRecognizerProvider) *View {
 	if len(items) == 0 {
-		x.inner.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -950,6 +962,8 @@ func (x *View) SetSubviews(subviews ...ViewProvider) {
 	var _arg0 *foundation.NSArray[*raw.NSView]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetSubviews(_arg0)
@@ -1663,6 +1677,8 @@ func (x *View) SetGestureRecognizers(gestureRecognizers ...GestureRecognizerProv
 	var _arg0 *foundation.NSArray[*raw.NSGestureRecognizer]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.NSGestureRecognizer](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.NSGestureRecognizer](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetGestureRecognizers(_arg0)

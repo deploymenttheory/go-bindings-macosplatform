@@ -53,7 +53,10 @@ func NewFetchShareMetadataOperationWithShareURLs(shareURLs *foundation.NSArray[*
 // WithShareURLs sets the collection, converting the Go slice to an NSArray.
 func (x *FetchShareMetadataOperation) WithShareURLs(items ...*foundation.NSURL) *FetchShareMetadataOperation {
 	if len(items) == 0 {
-		x.inner.SetShareURLs(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetShareURLs(foundation.NSArrayFromID[*foundation.NSURL](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -81,7 +84,10 @@ func (x *FetchShareMetadataOperation) WithShouldFetchRootRecord(shouldFetchRootR
 // WithRootRecordDesiredKeys sets the collection, converting the Go slice to an NSArray.
 func (x *FetchShareMetadataOperation) WithRootRecordDesiredKeys(items ...*foundation.NSString) *FetchShareMetadataOperation {
 	if len(items) == 0 {
-		x.inner.SetRootRecordDesiredKeys(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRootRecordDesiredKeys(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

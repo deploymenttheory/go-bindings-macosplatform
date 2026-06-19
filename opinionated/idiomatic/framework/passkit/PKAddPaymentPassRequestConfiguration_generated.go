@@ -74,7 +74,10 @@ func (x *AddPaymentPassRequestConfiguration) WithPrimaryAccountSuffix(primaryAcc
 // WithCardDetails sets the collection, converting the Go slice to an NSArray.
 func (x *AddPaymentPassRequestConfiguration) WithCardDetails(items ...*raw.PKLabeledValue) *AddPaymentPassRequestConfiguration {
 	if len(items) == 0 {
-		x.inner.SetCardDetails(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCardDetails(foundation.NSArrayFromID[*raw.PKLabeledValue](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

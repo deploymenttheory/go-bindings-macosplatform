@@ -86,6 +86,8 @@ func BehaviorWithBehaviors(behaviors ...BehaviorProvider) *CompositeBehavior {
 	var _arg0 *foundation.NSArray[*raw.GKBehavior]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.GKBehavior](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.GKBehavior](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := raw.GKCompositeBehaviorBehaviorWithBehaviors(_arg0)
@@ -248,6 +250,8 @@ func GraphWithNodes(nodes ...GraphNodeProvider) *Graph {
 	var _arg0 *foundation.NSArray[*raw.GKGraphNode]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.GKGraphNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.GKGraphNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := raw.GKGraphGraphWithNodes(_arg0)

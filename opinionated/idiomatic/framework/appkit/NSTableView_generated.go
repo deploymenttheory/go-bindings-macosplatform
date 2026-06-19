@@ -176,7 +176,10 @@ func (x *TableView) WithDoubleAction(doubleAction objc.SEL) *TableView {
 // WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *TableView) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *TableView {
 	if len(items) == 0 {
-		x.inner.SetSortDescriptors(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSortDescriptors(foundation.NSArrayFromID[*foundation.NSSortDescriptor](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -504,7 +507,10 @@ func (x *TableView) WithCell(cell CellProvider) *TableView {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *TableView) WithSubviews(items ...ViewProvider) *TableView {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -654,7 +660,10 @@ func (x *TableView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *TableView) WithBackgroundFilters(items ...*coreimage.CIFilter) *TableView {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -678,7 +687,10 @@ func (x *TableView) WithCompositingFilter(compositingFilter *coreimage.CIFilter)
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *TableView) WithContentFilters(items ...*coreimage.CIFilter) *TableView {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -744,7 +756,10 @@ func (x *TableView) WithFocusRingType(focusRingType NSFocusRingType) *TableView 
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *TableView) WithGestureRecognizers(items ...GestureRecognizerProvider) *TableView {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -48,7 +48,10 @@ func (x *PersistentCloudKitContainerEventRequest) WithResultType(resultType NSPe
 // WithAffectedStores sets the collection, converting the Go slice to an NSArray.
 func (x *PersistentCloudKitContainerEventRequest) WithAffectedStores(items ...PersistentStoreProvider) *PersistentCloudKitContainerEventRequest {
 	if len(items) == 0 {
-		x.inner.NSPersistentStoreRequest.SetAffectedStores(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSPersistentStoreRequest.SetAffectedStores(foundation.NSArrayFromID[*raw.NSPersistentStore](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

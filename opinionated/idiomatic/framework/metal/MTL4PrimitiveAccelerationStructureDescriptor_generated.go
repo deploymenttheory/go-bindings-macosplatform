@@ -47,7 +47,10 @@ func NewMTL4PrimitiveAccelerationStructureDescriptor() *MTL4PrimitiveAcceleratio
 // WithGeometryDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *MTL4PrimitiveAccelerationStructureDescriptor) WithGeometryDescriptors(items ...MTL4AccelerationStructureGeometryDescriptorProvider) *MTL4PrimitiveAccelerationStructureDescriptor {
 	if len(items) == 0 {
-		x.inner.SetGeometryDescriptors(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetGeometryDescriptors(foundation.NSArrayFromID[*raw.MTL4AccelerationStructureGeometryDescriptor](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -132,6 +135,8 @@ func (x *MTL4PrimitiveAccelerationStructureDescriptor) SetGeometryDescriptors(ge
 	var _arg0 *foundation.NSArray[*raw.MTL4AccelerationStructureGeometryDescriptor]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.MTL4AccelerationStructureGeometryDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.MTL4AccelerationStructureGeometryDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetGeometryDescriptors(_arg0)

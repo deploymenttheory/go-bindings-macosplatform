@@ -154,7 +154,10 @@ func (x *URLComponents) WithEncodedHost(encodedHost string) *URLComponents {
 // WithQueryItems sets the collection, converting the Go slice to an NSArray.
 func (x *URLComponents) WithQueryItems(items ...*raw.NSURLQueryItem) *URLComponents {
 	if len(items) == 0 {
-		x.inner.SetQueryItems(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetQueryItems(raw.NSArrayFromID[*raw.NSURLQueryItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -172,7 +175,10 @@ func (x *URLComponents) WithQueryItems(items ...*raw.NSURLQueryItem) *URLCompone
 // WithPercentEncodedQueryItems sets the collection, converting the Go slice to an NSArray.
 func (x *URLComponents) WithPercentEncodedQueryItems(items ...*raw.NSURLQueryItem) *URLComponents {
 	if len(items) == 0 {
-		x.inner.SetPercentEncodedQueryItems(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetPercentEncodedQueryItems(raw.NSArrayFromID[*raw.NSURLQueryItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

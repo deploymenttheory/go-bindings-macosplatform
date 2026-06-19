@@ -39,6 +39,8 @@ func NewCompoundPredicateWithTypeSubpredicates(type_ NSCompoundPredicateType, su
 	var _arg1 *raw.NSArray[*raw.NSPredicate]
 	if len(_ptrs) > 0 {
 		_arg1 = raw.NSArrayFromID[*raw.NSPredicate](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg1 = raw.NSArrayFromID[*raw.NSPredicate](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCompoundPredicate")), objc.RegisterName("alloc"))

@@ -44,7 +44,10 @@ func NewMutableNotificationContent() *MutableNotificationContent {
 // WithAttachments sets the collection, converting the Go slice to an NSArray.
 func (x *MutableNotificationContent) WithAttachments(items ...*raw.UNNotificationAttachment) *MutableNotificationContent {
 	if len(items) == 0 {
-		x.inner.SetAttachments(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAttachments(foundation.NSArrayFromID[*raw.UNNotificationAttachment](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

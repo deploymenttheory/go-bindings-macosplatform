@@ -371,7 +371,10 @@ func (x *DatePicker) WithCell(cell CellProvider) *DatePicker {
 // WithSubviews sets the collection, converting the Go slice to an NSArray.
 func (x *DatePicker) WithSubviews(items ...ViewProvider) *DatePicker {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetSubviews(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -521,7 +524,10 @@ func (x *DatePicker) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters boo
 // WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
 func (x *DatePicker) WithBackgroundFilters(items ...*coreimage.CIFilter) *DatePicker {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetBackgroundFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -545,7 +551,10 @@ func (x *DatePicker) WithCompositingFilter(compositingFilter *coreimage.CIFilter
 // WithContentFilters sets the collection, converting the Go slice to an NSArray.
 func (x *DatePicker) WithContentFilters(items ...*coreimage.CIFilter) *DatePicker {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetContentFilters(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -611,7 +620,10 @@ func (x *DatePicker) WithFocusRingType(focusRingType NSFocusRingType) *DatePicke
 // WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
 func (x *DatePicker) WithGestureRecognizers(items ...GestureRecognizerProvider) *DatePicker {
 	if len(items) == 0 {
-		x.inner.NSControl.NSView.SetGestureRecognizers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -47,7 +47,10 @@ func (x *FetchOptions) WithPredicate(predicate *foundation.NSPredicate) *FetchOp
 // WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *FetchOptions) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *FetchOptions {
 	if len(items) == 0 {
-		x.inner.SetSortDescriptors(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSortDescriptors(foundation.NSArrayFromID[*foundation.NSSortDescriptor](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

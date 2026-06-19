@@ -71,6 +71,8 @@ func (x *SyncEngineState) AddPendingDatabaseChanges(changes ...SyncEnginePending
 	var _arg0 *foundation.NSArray[*raw.CKSyncEnginePendingDatabaseChange]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.CKSyncEnginePendingDatabaseChange](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.CKSyncEnginePendingDatabaseChange](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.AddPendingDatabaseChanges(_arg0)
@@ -87,6 +89,8 @@ func (x *SyncEngineState) RemovePendingDatabaseChanges(changes ...SyncEnginePend
 	var _arg0 *foundation.NSArray[*raw.CKSyncEnginePendingDatabaseChange]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.CKSyncEnginePendingDatabaseChange](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.CKSyncEnginePendingDatabaseChange](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.RemovePendingDatabaseChanges(_arg0)

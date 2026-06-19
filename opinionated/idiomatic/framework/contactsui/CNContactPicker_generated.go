@@ -45,7 +45,10 @@ func NewContactPicker() *ContactPicker {
 // WithDisplayedKeys sets the collection, converting the Go slice to an NSArray.
 func (x *ContactPicker) WithDisplayedKeys(items ...*foundation.NSString) *ContactPicker {
 	if len(items) == 0 {
-		x.inner.SetDisplayedKeys(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetDisplayedKeys(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

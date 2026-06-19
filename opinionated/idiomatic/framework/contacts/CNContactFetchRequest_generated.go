@@ -45,6 +45,8 @@ func NewContactFetchRequestWithKeysToFetch(keysToFetch ...purego.IDer) *ContactF
 	var _arg0 *foundation.NSArray[raw.CNKeyDescriptor]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNContactFetchRequest")), objc.RegisterName("alloc"))
@@ -112,6 +114,8 @@ func (x *ContactFetchRequest) SetKeysToFetch(keysToFetch ...purego.IDer) {
 	var _arg0 *foundation.NSArray[raw.CNKeyDescriptor]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetKeysToFetch(_arg0)

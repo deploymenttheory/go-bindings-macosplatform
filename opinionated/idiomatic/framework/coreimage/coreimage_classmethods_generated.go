@@ -1233,6 +1233,8 @@ func ProcessWithInputsArgumentsOutputsError(inputs *foundation.NSArray[raw.CIIma
 	var _arg2 *foundation.NSArray[raw.CIImageProcessorOutput]
 	if len(_ptrs) > 0 {
 		_arg2 = foundation.NSArrayFromID[raw.CIImageProcessorOutput](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg2 = foundation.NSArrayFromID[raw.CIImageProcessorOutput](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return raw.CIImageProcessorKernelProcessWithInputsArgumentsOutputsError(inputs, arguments, _arg2)

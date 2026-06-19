@@ -242,6 +242,8 @@ func (x *ComputePipelineDescriptor) SetInsertLibraries(insertLibraries ...purego
 	var _arg0 *foundation.NSArray[raw.MTLDynamicLibrary]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetInsertLibraries(_arg0)
@@ -263,6 +265,8 @@ func (x *ComputePipelineDescriptor) SetPreloadedLibraries(preloadedLibraries ...
 	var _arg0 *foundation.NSArray[raw.MTLDynamicLibrary]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetPreloadedLibraries(_arg0)
@@ -284,6 +288,8 @@ func (x *ComputePipelineDescriptor) SetBinaryArchives(binaryArchives ...purego.I
 	var _arg0 *foundation.NSArray[raw.MTLBinaryArchive]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[raw.MTLBinaryArchive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[raw.MTLBinaryArchive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetBinaryArchives(_arg0)

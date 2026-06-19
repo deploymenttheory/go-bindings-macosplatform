@@ -47,7 +47,10 @@ func (x *MTRControllerFactoryParams) WithStartServer(startServer bool) *MTRContr
 // WithPaaCerts sets the collection, converting the Go slice to an NSArray.
 func (x *MTRControllerFactoryParams) WithPaaCerts(items ...*foundation.NSData) *MTRControllerFactoryParams {
 	if len(items) == 0 {
-		x.inner.SetPaaCerts(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetPaaCerts(foundation.NSArrayFromID[*foundation.NSData](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -65,7 +68,10 @@ func (x *MTRControllerFactoryParams) WithPaaCerts(items ...*foundation.NSData) *
 // WithCdCerts sets the collection, converting the Go slice to an NSArray.
 func (x *MTRControllerFactoryParams) WithCdCerts(items ...*foundation.NSData) *MTRControllerFactoryParams {
 	if len(items) == 0 {
-		x.inner.SetCdCerts(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCdCerts(foundation.NSArrayFromID[*foundation.NSData](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -89,7 +95,10 @@ func (x *MTRControllerFactoryParams) WithOtaProviderDelegate(otaProviderDelegate
 // WithProductAttestationAuthorityCertificates sets the collection, converting the Go slice to an NSArray.
 func (x *MTRControllerFactoryParams) WithProductAttestationAuthorityCertificates(items ...*foundation.NSData) *MTRControllerFactoryParams {
 	if len(items) == 0 {
-		x.inner.MTRDeviceControllerFactoryParams.SetProductAttestationAuthorityCertificates(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.MTRDeviceControllerFactoryParams.SetProductAttestationAuthorityCertificates(foundation.NSArrayFromID[*foundation.NSData](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -107,7 +116,10 @@ func (x *MTRControllerFactoryParams) WithProductAttestationAuthorityCertificates
 // WithCertificationDeclarationCertificates sets the collection, converting the Go slice to an NSArray.
 func (x *MTRControllerFactoryParams) WithCertificationDeclarationCertificates(items ...*foundation.NSData) *MTRControllerFactoryParams {
 	if len(items) == 0 {
-		x.inner.MTRDeviceControllerFactoryParams.SetCertificationDeclarationCertificates(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.MTRDeviceControllerFactoryParams.SetCertificationDeclarationCertificates(foundation.NSArrayFromID[*foundation.NSData](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

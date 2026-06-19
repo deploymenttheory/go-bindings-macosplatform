@@ -43,6 +43,8 @@ func NewRAWProcessingSubGroupParameterWithNameDescriptionParameters(name string,
 	var _arg2 *foundation.NSArray[*raw.MERAWProcessingParameter]
 	if len(_ptrs) > 0 {
 		_arg2 = foundation.NSArrayFromID[*raw.MERAWProcessingParameter](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg2 = foundation.NSArrayFromID[*raw.MERAWProcessingParameter](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MERAWProcessingSubGroupParameter")), objc.RegisterName("alloc"))

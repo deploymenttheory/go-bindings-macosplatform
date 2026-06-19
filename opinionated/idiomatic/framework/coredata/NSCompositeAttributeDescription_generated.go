@@ -41,7 +41,10 @@ func NewCompositeAttributeDescription() *CompositeAttributeDescription {
 // WithElements sets the collection, converting the Go slice to an NSArray.
 func (x *CompositeAttributeDescription) WithElements(items ...AttributeDescriptionProvider) *CompositeAttributeDescription {
 	if len(items) == 0 {
-		x.inner.SetElements(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetElements(foundation.NSArrayFromID[*raw.NSAttributeDescription](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -172,6 +175,8 @@ func (x *CompositeAttributeDescription) SetElements(elements ...AttributeDescrip
 	var _arg0 *foundation.NSArray[*raw.NSAttributeDescription]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.NSAttributeDescription](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.NSAttributeDescription](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetElements(_arg0)

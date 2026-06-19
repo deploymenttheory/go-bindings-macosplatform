@@ -78,7 +78,10 @@ func (x *TabViewController) WithCanPropagateSelectedChildViewControllerTitle(can
 // WithTabViewItems sets the collection, converting the Go slice to an NSArray.
 func (x *TabViewController) WithTabViewItems(items ...*raw.NSTabViewItem) *TabViewController {
 	if len(items) == 0 {
-		x.inner.SetTabViewItems(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetTabViewItems(foundation.NSArrayFromID[*raw.NSTabViewItem](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -138,7 +141,10 @@ func (x *TabViewController) WithPreferredContentSize(preferredContentSize corefo
 // WithChildViewControllers sets the collection, converting the Go slice to an NSArray.
 func (x *TabViewController) WithChildViewControllers(items ...ViewControllerProvider) *TabViewController {
 	if len(items) == 0 {
-		x.inner.NSViewController.SetChildViewControllers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSViewController.SetChildViewControllers(foundation.NSArrayFromID[*raw.NSViewController](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

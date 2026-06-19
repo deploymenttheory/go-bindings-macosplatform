@@ -351,6 +351,8 @@ func TIFFRepresentationOfImageRepsInArray(array ...ImageRepProvider) *foundation
 	var _arg0 *foundation.NSArray[*raw.NSImageRep]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.NSImageRep](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.NSImageRep](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	return raw.NSBitmapImageRepTIFFRepresentationOfImageRepsInArray(_arg0)
@@ -634,6 +636,8 @@ func HorizontalGroupWithLayoutSizeSubitems(layoutSize *raw.NSCollectionLayoutSiz
 	var _arg1 *foundation.NSArray[*raw.NSCollectionLayoutItem]
 	if len(_ptrs) > 0 {
 		_arg1 = foundation.NSArrayFromID[*raw.NSCollectionLayoutItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg1 = foundation.NSArrayFromID[*raw.NSCollectionLayoutItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := raw.NSCollectionLayoutGroupHorizontalGroupWithLayoutSizeSubitems(layoutSize, _arg1)
@@ -661,6 +665,8 @@ func VerticalGroupWithLayoutSizeSubitems(layoutSize *raw.NSCollectionLayoutSize,
 	var _arg1 *foundation.NSArray[*raw.NSCollectionLayoutItem]
 	if len(_ptrs) > 0 {
 		_arg1 = foundation.NSArrayFromID[*raw.NSCollectionLayoutItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg1 = foundation.NSArrayFromID[*raw.NSCollectionLayoutItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := raw.NSCollectionLayoutGroupVerticalGroupWithLayoutSizeSubitems(layoutSize, _arg1)
@@ -715,6 +721,8 @@ func ItemWithLayoutSizeSupplementaryItems(layoutSize *raw.NSCollectionLayoutSize
 	var _arg1 *foundation.NSArray[*raw.NSCollectionLayoutSupplementaryItem]
 	if len(_ptrs) > 0 {
 		_arg1 = foundation.NSArrayFromID[*raw.NSCollectionLayoutSupplementaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg1 = foundation.NSArrayFromID[*raw.NSCollectionLayoutSupplementaryItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := raw.NSCollectionLayoutItemItemWithLayoutSizeSupplementaryItems(layoutSize, _arg1)
@@ -3066,6 +3074,8 @@ func GroupItemWithIdentifierItems(identifier *foundation.NSString, items ...Touc
 	var _arg1 *foundation.NSArray[*raw.NSTouchBarItem]
 	if len(_ptrs) > 0 {
 		_arg1 = foundation.NSArrayFromID[*raw.NSTouchBarItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg1 = foundation.NSArrayFromID[*raw.NSTouchBarItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := raw.NSGroupTouchBarItemGroupItemWithIdentifierItems(identifier, _arg1)
@@ -4626,6 +4636,8 @@ func StackViewWithViews(views ...ViewProvider) *StackView {
 	var _arg0 *foundation.NSArray[*raw.NSView]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_r := raw.NSStackViewStackViewWithViews(_arg0)

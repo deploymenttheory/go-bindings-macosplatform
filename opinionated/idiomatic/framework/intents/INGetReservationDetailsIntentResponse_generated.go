@@ -44,7 +44,10 @@ func NewGetReservationDetailsIntentResponseWithCodeUserActivity(code INGetReserv
 // WithReservations sets the collection, converting the Go slice to an NSArray.
 func (x *GetReservationDetailsIntentResponse) WithReservations(items ...ReservationProvider) *GetReservationDetailsIntentResponse {
 	if len(items) == 0 {
-		x.inner.SetReservations(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetReservations(foundation.NSArrayFromID[*raw.INReservation](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -90,6 +93,8 @@ func (x *GetReservationDetailsIntentResponse) SetReservations(reservations ...Re
 	var _arg0 *foundation.NSArray[*raw.INReservation]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.INReservation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.INReservation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetReservations(_arg0)

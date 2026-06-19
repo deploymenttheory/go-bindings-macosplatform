@@ -76,7 +76,10 @@ func (x *NERelayManager) WithAllowDNSFailover(allowDNSFailover bool) *NERelayMan
 // WithRelays sets the collection, converting the Go slice to an NSArray.
 func (x *NERelayManager) WithRelays(items ...*raw.NERelay) *NERelayManager {
 	if len(items) == 0 {
-		x.inner.SetRelays(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRelays(foundation.NSArrayFromID[*raw.NERelay](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -96,7 +99,10 @@ func (x *NERelayManager) WithRelays(items ...*raw.NERelay) *NERelayManager {
 // WithMatchDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NERelayManager) WithMatchDomains(items ...*foundation.NSString) *NERelayManager {
 	if len(items) == 0 {
-		x.inner.SetMatchDomains(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetMatchDomains(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -116,7 +122,10 @@ func (x *NERelayManager) WithMatchDomains(items ...*foundation.NSString) *NERela
 // WithMatchFQDNs sets the collection, converting the Go slice to an NSArray.
 func (x *NERelayManager) WithMatchFQDNs(items ...*foundation.NSString) *NERelayManager {
 	if len(items) == 0 {
-		x.inner.SetMatchFQDNs(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetMatchFQDNs(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -136,7 +145,10 @@ func (x *NERelayManager) WithMatchFQDNs(items ...*foundation.NSString) *NERelayM
 // WithExcludedDomains sets the collection, converting the Go slice to an NSArray.
 func (x *NERelayManager) WithExcludedDomains(items ...*foundation.NSString) *NERelayManager {
 	if len(items) == 0 {
-		x.inner.SetExcludedDomains(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetExcludedDomains(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -156,7 +168,10 @@ func (x *NERelayManager) WithExcludedDomains(items ...*foundation.NSString) *NER
 // WithExcludedFQDNs sets the collection, converting the Go slice to an NSArray.
 func (x *NERelayManager) WithExcludedFQDNs(items ...*foundation.NSString) *NERelayManager {
 	if len(items) == 0 {
-		x.inner.SetExcludedFQDNs(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetExcludedFQDNs(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -176,7 +191,10 @@ func (x *NERelayManager) WithExcludedFQDNs(items ...*foundation.NSString) *NERel
 // WithOnDemandRules sets the collection, converting the Go slice to an NSArray.
 func (x *NERelayManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NERelayManager {
 	if len(items) == 0 {
-		x.inner.SetOnDemandRules(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetOnDemandRules(foundation.NSArrayFromID[*raw.NEOnDemandRule](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -422,6 +440,8 @@ func (x *NERelayManager) SetOnDemandRules(onDemandRules ...NEOnDemandRuleProvide
 	var _arg0 *foundation.NSArray[*raw.NEOnDemandRule]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.NEOnDemandRule](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.NEOnDemandRule](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetOnDemandRules(_arg0)

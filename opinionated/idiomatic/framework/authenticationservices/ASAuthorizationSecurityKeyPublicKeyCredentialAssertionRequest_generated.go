@@ -49,7 +49,10 @@ func NewAuthorizationSecurityKeyPublicKeyCredentialAssertionRequest() *Authoriza
 // WithAllowedCredentials sets the collection, converting the Go slice to an NSArray.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) WithAllowedCredentials(items ...*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
 	if len(items) == 0 {
-		x.inner.SetAllowedCredentials(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAllowedCredentials(foundation.NSArrayFromID[*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

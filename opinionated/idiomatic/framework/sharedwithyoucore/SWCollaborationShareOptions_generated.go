@@ -54,6 +54,8 @@ func NewCollaborationShareOptionsWithOptionsGroups(optionsGroups ...Collaboratio
 	var _arg0 *foundation.NSArray[*raw.SWCollaborationOptionsGroup]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.SWCollaborationOptionsGroup](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.SWCollaborationOptionsGroup](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWCollaborationShareOptions")), objc.RegisterName("alloc"))
@@ -75,7 +77,10 @@ func NewCollaborationShareOptionsWithCoder(coder *foundation.NSCoder) *Collabora
 // WithOptionsGroups sets the collection, converting the Go slice to an NSArray.
 func (x *CollaborationShareOptions) WithOptionsGroups(items ...CollaborationOptionsGroupProvider) *CollaborationShareOptions {
 	if len(items) == 0 {
-		x.inner.SetOptionsGroups(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetOptionsGroups(foundation.NSArrayFromID[*raw.SWCollaborationOptionsGroup](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -120,6 +125,8 @@ func (x *CollaborationShareOptions) SetOptionsGroups(optionsGroups ...Collaborat
 	var _arg0 *foundation.NSArray[*raw.SWCollaborationOptionsGroup]
 	if len(_ptrs) > 0 {
 		_arg0 = foundation.NSArrayFromID[*raw.SWCollaborationOptionsGroup](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	} else {
+		_arg0 = foundation.NSArrayFromID[*raw.SWCollaborationOptionsGroup](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
 	}
 
 	x.inner.SetOptionsGroups(_arg0)

@@ -110,7 +110,10 @@ func (x *CollectionViewItem) WithPreferredContentSize(preferredContentSize coref
 // WithChildViewControllers sets the collection, converting the Go slice to an NSArray.
 func (x *CollectionViewItem) WithChildViewControllers(items ...ViewControllerProvider) *CollectionViewItem {
 	if len(items) == 0 {
-		x.inner.NSViewController.SetChildViewControllers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.NSViewController.SetChildViewControllers(foundation.NSArrayFromID[*raw.NSViewController](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

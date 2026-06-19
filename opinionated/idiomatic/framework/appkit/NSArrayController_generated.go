@@ -54,7 +54,10 @@ func (x *ArrayController) WithAutomaticallyRearrangesObjects(automaticallyRearra
 // WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
 func (x *ArrayController) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *ArrayController {
 	if len(items) == 0 {
-		x.inner.SetSortDescriptors(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetSortDescriptors(foundation.NSArrayFromID[*foundation.NSSortDescriptor](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

@@ -66,7 +66,10 @@ func (x *SearchableItemAttributeSet) WithDisplayName(displayName string) *Search
 // WithAlternateNames sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithAlternateNames(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetAlternateNames(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAlternateNames(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -150,7 +153,10 @@ func (x *SearchableItemAttributeSet) WithContentType(contentType string) *Search
 // WithContentTypeTree sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithContentTypeTree(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetContentTypeTree(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetContentTypeTree(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -170,7 +176,10 @@ func (x *SearchableItemAttributeSet) WithContentTypeTree(items ...*foundation.NS
 // WithKeywords sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithKeywords(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetKeywords(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetKeywords(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -286,7 +295,10 @@ func (x *SearchableItemAttributeSet) WithIdentifier(identifier string) *Searchab
 // WithAudiences sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithAudiences(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetAudiences(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAudiences(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -354,7 +366,10 @@ func (x *SearchableItemAttributeSet) WithCreator(creator string) *SearchableItem
 // WithEncodingApplications sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithEncodingApplications(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetEncodingApplications(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetEncodingApplications(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -382,7 +397,10 @@ func (x *SearchableItemAttributeSet) WithKind(kind string) *SearchableItemAttrib
 // WithFontNames sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithFontNames(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetFontNames(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetFontNames(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -434,7 +452,10 @@ func (x *SearchableItemAttributeSet) WithEndDate(endDate *foundation.NSDate) *Se
 // WithImportantDates sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithImportantDates(items ...*foundation.NSDate) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetImportantDates(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetImportantDates(foundation.NSArrayFromID[*foundation.NSDate](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -470,7 +491,10 @@ func (x *SearchableItemAttributeSet) WithAccountIdentifier(accountIdentifier str
 // WithAccountHandles sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithAccountHandles(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetAccountHandles(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAccountHandles(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -506,7 +530,10 @@ func (x *SearchableItemAttributeSet) WithTextContent(textContent string) *Search
 // WithAuthors sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithAuthors(items ...*raw.CSPerson) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetAuthors(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAuthors(foundation.NSArrayFromID[*raw.CSPerson](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -526,7 +553,10 @@ func (x *SearchableItemAttributeSet) WithAuthors(items ...*raw.CSPerson) *Search
 // WithPrimaryRecipients sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithPrimaryRecipients(items ...*raw.CSPerson) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetPrimaryRecipients(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetPrimaryRecipients(foundation.NSArrayFromID[*raw.CSPerson](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -546,7 +576,10 @@ func (x *SearchableItemAttributeSet) WithPrimaryRecipients(items ...*raw.CSPerso
 // WithAdditionalRecipients sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithAdditionalRecipients(items ...*raw.CSPerson) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetAdditionalRecipients(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAdditionalRecipients(foundation.NSArrayFromID[*raw.CSPerson](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -566,7 +599,10 @@ func (x *SearchableItemAttributeSet) WithAdditionalRecipients(items ...*raw.CSPe
 // WithHiddenAdditionalRecipients sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithHiddenAdditionalRecipients(items ...*raw.CSPerson) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetHiddenAdditionalRecipients(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetHiddenAdditionalRecipients(foundation.NSArrayFromID[*raw.CSPerson](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -594,7 +630,10 @@ func (x *SearchableItemAttributeSet) WithEmailHeaders(emailHeaders *foundation.N
 // WithMailboxIdentifiers sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithMailboxIdentifiers(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetMailboxIdentifiers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetMailboxIdentifiers(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -614,7 +653,10 @@ func (x *SearchableItemAttributeSet) WithMailboxIdentifiers(items ...*foundation
 // WithAuthorNames sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithAuthorNames(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetAuthorNames(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAuthorNames(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -634,7 +676,10 @@ func (x *SearchableItemAttributeSet) WithAuthorNames(items ...*foundation.NSStri
 // WithRecipientNames sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithRecipientNames(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetRecipientNames(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRecipientNames(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -654,7 +699,10 @@ func (x *SearchableItemAttributeSet) WithRecipientNames(items ...*foundation.NSS
 // WithAuthorEmailAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithAuthorEmailAddresses(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetAuthorEmailAddresses(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAuthorEmailAddresses(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -674,7 +722,10 @@ func (x *SearchableItemAttributeSet) WithAuthorEmailAddresses(items ...*foundati
 // WithRecipientEmailAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithRecipientEmailAddresses(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetRecipientEmailAddresses(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRecipientEmailAddresses(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -694,7 +745,10 @@ func (x *SearchableItemAttributeSet) WithRecipientEmailAddresses(items ...*found
 // WithAuthorAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithAuthorAddresses(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetAuthorAddresses(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetAuthorAddresses(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -714,7 +768,10 @@ func (x *SearchableItemAttributeSet) WithAuthorAddresses(items ...*foundation.NS
 // WithRecipientAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithRecipientAddresses(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetRecipientAddresses(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetRecipientAddresses(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -734,7 +791,10 @@ func (x *SearchableItemAttributeSet) WithRecipientAddresses(items ...*foundation
 // WithPhoneNumbers sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithPhoneNumbers(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetPhoneNumbers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetPhoneNumbers(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -754,7 +814,10 @@ func (x *SearchableItemAttributeSet) WithPhoneNumbers(items ...*foundation.NSStr
 // WithEmailAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithEmailAddresses(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetEmailAddresses(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetEmailAddresses(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -774,7 +837,10 @@ func (x *SearchableItemAttributeSet) WithEmailAddresses(items ...*foundation.NSS
 // WithInstantMessageAddresses sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithInstantMessageAddresses(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetInstantMessageAddresses(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetInstantMessageAddresses(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -802,7 +868,10 @@ func (x *SearchableItemAttributeSet) WithLikelyJunk(likelyJunk *foundation.NSNum
 // WithEditors sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithEditors(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetEditors(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetEditors(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -822,7 +891,10 @@ func (x *SearchableItemAttributeSet) WithEditors(items ...*foundation.NSString) 
 // WithParticipants sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithParticipants(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetParticipants(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetParticipants(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -842,7 +914,10 @@ func (x *SearchableItemAttributeSet) WithParticipants(items ...*foundation.NSStr
 // WithProjects sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithProjects(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetProjects(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetProjects(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -862,7 +937,10 @@ func (x *SearchableItemAttributeSet) WithProjects(items ...*foundation.NSString)
 // WithContentSources sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithContentSources(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetContentSources(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetContentSources(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -946,7 +1024,10 @@ func (x *SearchableItemAttributeSet) WithDuration(duration *foundation.NSNumber)
 // WithContactKeywords sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithContactKeywords(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetContactKeywords(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetContactKeywords(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -966,7 +1047,10 @@ func (x *SearchableItemAttributeSet) WithContactKeywords(items ...*foundation.NS
 // WithCodecs sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithCodecs(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetCodecs(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCodecs(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -986,7 +1070,10 @@ func (x *SearchableItemAttributeSet) WithCodecs(items ...*foundation.NSString) *
 // WithMediaTypes sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithMediaTypes(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetMediaTypes(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetMediaTypes(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -1046,7 +1133,10 @@ func (x *SearchableItemAttributeSet) WithDeliveryType(deliveryType *foundation.N
 // WithOrganizations sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithOrganizations(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetOrganizations(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetOrganizations(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -1074,7 +1164,10 @@ func (x *SearchableItemAttributeSet) WithRole(role string) *SearchableItemAttrib
 // WithLanguages sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithLanguages(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetLanguages(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetLanguages(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -1102,7 +1195,10 @@ func (x *SearchableItemAttributeSet) WithRights(rights string) *SearchableItemAt
 // WithPublishers sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithPublishers(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetPublishers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetPublishers(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -1122,7 +1218,10 @@ func (x *SearchableItemAttributeSet) WithPublishers(items ...*foundation.NSStrin
 // WithContributors sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithContributors(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetContributors(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetContributors(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -1142,7 +1241,10 @@ func (x *SearchableItemAttributeSet) WithContributors(items ...*foundation.NSStr
 // WithCoverage sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithCoverage(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetCoverage(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetCoverage(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -1218,7 +1320,10 @@ func (x *SearchableItemAttributeSet) WithGenre(genre string) *SearchableItemAttr
 // WithPerformers sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithPerformers(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetPerformers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetPerformers(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -1518,7 +1623,10 @@ func (x *SearchableItemAttributeSet) WithOrientation(orientation *foundation.NSN
 // WithLayerNames sets the collection, converting the Go slice to an NSArray.
 func (x *SearchableItemAttributeSet) WithLayerNames(items ...*foundation.NSString) *SearchableItemAttributeSet {
 	if len(items) == 0 {
-		x.inner.SetLayerNames(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.SetLayerNames(foundation.NSArrayFromID[*foundation.NSString](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))

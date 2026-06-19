@@ -101,7 +101,10 @@ func (x *TransformLayer) WithGeometryFlipped(geometryFlipped bool) *TransformLay
 // WithSublayers sets the collection, converting the Go slice to an NSArray.
 func (x *TransformLayer) WithSublayers(items ...LayerProvider) *TransformLayer {
 	if len(items) == 0 {
-		x.inner.CALayer.SetSublayers(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.CALayer.SetSublayers(foundation.NSArrayFromID[*raw.CALayer](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
@@ -353,7 +356,10 @@ func (x *TransformLayer) WithStyle(style *foundation.NSDictionary[objc.ID, objc.
 // WithConstraints sets the collection, converting the Go slice to an NSArray.
 func (x *TransformLayer) WithConstraints(items ...*raw.CAConstraint) *TransformLayer {
 	if len(items) == 0 {
-		x.inner.CALayer.SetConstraints(nil)
+		// An empty (not nil) array: some raw setters dereference the argument.
+		x.inner.CALayer.SetConstraints(foundation.NSArrayFromID[*raw.CAConstraint](
+			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+				objc.RegisterName("array"))))
 		return x
 	}
 	_ptrs := make([]objc.ID, len(items))
