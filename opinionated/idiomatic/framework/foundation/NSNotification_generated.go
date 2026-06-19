@@ -6,6 +6,7 @@ package foundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,9 +31,9 @@ func NotificationFromID(id objc.ID) *Notification {
 }
 
 // NewNotificationWithNameObjectUserInfo creates a new [Notification].
-func NewNotificationWithNameObjectUserInfo(name *raw.NSString, object objc.ID, userInfo *raw.NSDictionary[objc.ID, objc.ID]) *Notification {
+func NewNotificationWithNameObjectUserInfo(name *raw.NSString, object objc.ID, userInfo purego.IDer) *Notification {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSNotification")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:object:userInfo:"), name.Ptr(), object, userInfo.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:object:userInfo:"), name.Ptr(), object, userInfo.ID())
 	return &Notification{inner: raw.NSNotificationFromID(_id)}
 }
 

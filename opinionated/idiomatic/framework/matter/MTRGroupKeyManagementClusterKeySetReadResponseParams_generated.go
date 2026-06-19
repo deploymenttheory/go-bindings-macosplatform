@@ -37,10 +37,10 @@ func MTRGroupKeyManagementClusterKeySetReadResponseParamsFromID(id objc.ID) *MTR
 // Initialize an MTRGroupKeyManagementClusterKeySetReadResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
 //
 // NewMTRGroupKeyManagementClusterKeySetReadResponseParamsWithResponseValueError creates a new [MTRGroupKeyManagementClusterKeySetReadResponseParams].
-func NewMTRGroupKeyManagementClusterKeySetReadResponseParamsWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRGroupKeyManagementClusterKeySetReadResponseParams, error) {
+func NewMTRGroupKeyManagementClusterKeySetReadResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRGroupKeyManagementClusterKeySetReadResponseParams, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGroupKeyManagementClusterKeySetReadResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

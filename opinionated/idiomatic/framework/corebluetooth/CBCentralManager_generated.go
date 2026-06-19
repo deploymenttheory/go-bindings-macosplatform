@@ -7,6 +7,7 @@ package corebluetooth
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -42,9 +43,9 @@ func NewCentralManagerWithDelegateQueue(delegate raw.CBCentralManagerDelegate, q
 // @method initWithDelegate:queue:options: @param delegate The delegate that will receive central role events. @param queue    The dispatch queue on which the events will be dispatched. @param options  An optional dictionary specifying options for the manager. @discussion     The initialization call. The events of the central role will be dispatched on the provided queue. If <i>nil</i>, the main queue will be used. @seealso		CBCentralManagerOptionShowPowerAlertKey @seealso		CBCentralManagerOptionRestoreIdentifierKey
 //
 // NewCentralManagerWithDelegateQueueOptions creates a new [CentralManager].
-func NewCentralManagerWithDelegateQueueOptions(delegate raw.CBCentralManagerDelegate, queue *foundation.NSObject, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CentralManager {
+func NewCentralManagerWithDelegateQueueOptions(delegate raw.CBCentralManagerDelegate, queue *foundation.NSObject, options purego.IDer) *CentralManager {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CBCentralManager")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDelegate:queue:options:"), delegate, queue.Ptr(), options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDelegate:queue:options:"), delegate, queue.Ptr(), options.ID())
 	return &CentralManager{inner: raw.CBCentralManagerFromID(_id)}
 }
 

@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,9 +37,9 @@ func TrackingAreaFromID(id objc.ID) *TrackingArea {
 // Initializes and returns an object defining a region of a view to receive mouse-tracking events, mouse-moved events, cursor-update events, or possibly all these events.
 //
 // NewTrackingAreaWithRectOptionsOwnerUserInfo creates a new [TrackingArea].
-func NewTrackingAreaWithRectOptionsOwnerUserInfo(rect corefoundation.CGRect, options NSTrackingAreaOptions, owner objc.ID, userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *TrackingArea {
+func NewTrackingAreaWithRectOptionsOwnerUserInfo(rect corefoundation.CGRect, options NSTrackingAreaOptions, owner objc.ID, userInfo purego.IDer) *TrackingArea {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTrackingArea")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRect:options:owner:userInfo:"), rect, raw.NSTrackingAreaOptions(options), owner, userInfo.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRect:options:owner:userInfo:"), rect, raw.NSTrackingAreaOptions(options), owner, userInfo.ID())
 	return &TrackingArea{inner: raw.NSTrackingAreaFromID(_id)}
 }
 

@@ -67,10 +67,10 @@ func NewAudioFileForReadingCommonFormatInterleavedError(fileURL string, format A
 // @method initForWriting:settings:error: @abstract Open a file for writing. @param fileURL the path at which to create the file @param settings the format of the file to create (See `AVAudioRecorder`.)  For linear PCM, only interleaved formats are supported for the saved file, non interleaved setting will be ignored and a warning is shown. @param outError on exit, if an error occurs, a description of the error @discussion The file type to create can be set through the corresponding settings key. If not set, it will be inferred from the file extension. Will overwrite a file at the specified URL if a file exists. This opens the file for writing using the standard format (deinterleaved floating point).
 //
 // NewAudioFileForWritingSettingsError creates a new [AudioFile].
-func NewAudioFileForWritingSettingsError(fileURL string, settings *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AudioFile, error) {
+func NewAudioFileForWritingSettingsError(fileURL string, settings purego.IDer) (*AudioFile, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioFile")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForWriting:settings:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)).Ptr(), settings.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForWriting:settings:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)).Ptr(), settings.ID(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -80,10 +80,10 @@ func NewAudioFileForWritingSettingsError(fileURL string, settings *foundation.NS
 // @method initForWriting:settings:commonFormat:interleaved:error: @abstract Open a file for writing. @param fileURL the path at which to create the file @param settings the format of the file to create (See `AVAudioRecorder`.) For linear PCM, only interleaved formats are supported for the saved file, non interleaved setting will be ignored and a warning is shown. @param format the processing format to use when writing to the file. @param interleaved whether to use an interleaved processing format @param outError on exit, if an error occurs, a description of the error @discussion The file type to create can be set through the corresponding settings key. If not set, it will be inferred from the file extension. Will overwrite a file at the specified URL if a file exists.
 //
 // NewAudioFileForWritingSettingsCommonFormatInterleavedError creates a new [AudioFile].
-func NewAudioFileForWritingSettingsCommonFormatInterleavedError(fileURL string, settings *foundation.NSDictionary[*foundation.NSString, objc.ID], format AVAudioCommonFormat, interleaved bool) (*AudioFile, error) {
+func NewAudioFileForWritingSettingsCommonFormatInterleavedError(fileURL string, settings purego.IDer, format AVAudioCommonFormat, interleaved bool) (*AudioFile, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioFile")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForWriting:settings:commonFormat:interleaved:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)).Ptr(), settings.Ptr(), raw.AVAudioCommonFormat(format), interleaved, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForWriting:settings:commonFormat:interleaved:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)).Ptr(), settings.ID(), raw.AVAudioCommonFormat(format), interleaved, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

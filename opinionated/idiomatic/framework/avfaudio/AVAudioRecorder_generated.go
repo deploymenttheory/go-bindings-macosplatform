@@ -35,10 +35,10 @@ func AudioRecorderFromID(id objc.ID) *AudioRecorder {
 // @method initWithURL:settings:error: @abstract Init the AudioRecorder with a specified url and settings. @discussion The file type to create can be set through the corresponding settings key. If not set, it will be inferred from the file extension. Will overwrite a file at the specified url if a file exists.
 //
 // NewAudioRecorderWithURLSettingsError creates a new [AudioRecorder].
-func NewAudioRecorderWithURLSettingsError(url string, settings *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*AudioRecorder, error) {
+func NewAudioRecorderWithURLSettingsError(url string, settings purego.IDer) (*AudioRecorder, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioRecorder")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:settings:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), settings.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:settings:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), settings.ID(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

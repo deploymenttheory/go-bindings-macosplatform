@@ -35,16 +35,16 @@ func AnnotationFromID(id objc.ID) *Annotation {
 }
 
 // NewAnnotationWithBoundsForTypeWithProperties creates a new [Annotation].
-func NewAnnotationWithBoundsForTypeWithProperties(bounds corefoundation.CGRect, annotationType unsafe.Pointer, properties *foundation.NSDictionary[objc.ID, objc.ID]) *Annotation {
+func NewAnnotationWithBoundsForTypeWithProperties(bounds corefoundation.CGRect, annotationType unsafe.Pointer, properties purego.IDer) *Annotation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFAnnotation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBounds:forType:withProperties:"), bounds, annotationType, properties.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBounds:forType:withProperties:"), bounds, annotationType, properties.ID())
 	return &Annotation{inner: raw.PDFAnnotationFromID(_id)}
 }
 
 // NewAnnotationWithDictionaryForPage creates a new [Annotation].
-func NewAnnotationWithDictionaryForPage(dictionary *foundation.NSDictionary[objc.ID, objc.ID], page *raw.PDFPage) *Annotation {
+func NewAnnotationWithDictionaryForPage(dictionary purego.IDer, page *raw.PDFPage) *Annotation {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFAnnotation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:forPage:"), dictionary.Ptr(), page.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:forPage:"), dictionary.ID(), page.Ptr())
 	return &Annotation{inner: raw.PDFAnnotationFromID(_id)}
 }
 

@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,18 +36,18 @@ func MovieFromID(id objc.ID) *Movie {
 // Creates a movie object from a movie header stored in a QuickTime movie file of ISO base media file.
 //
 // NewMovieWithURLOptions creates a new [Movie].
-func NewMovieWithURLOptions(uRL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Movie {
+func NewMovieWithURLOptions(uRL string, options purego.IDer) *Movie {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMovie")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), options.ID())
 	return &Movie{inner: raw.AVMovieFromID(_id)}
 }
 
 // Creates a movie object from a movie file’s data.
 //
 // NewMovieWithDataOptions creates a new [Movie].
-func NewMovieWithDataOptions(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Movie {
+func NewMovieWithDataOptions(data *foundation.NSData, options purego.IDer) *Movie {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMovie")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:"), data.Ptr(), options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:"), data.Ptr(), options.ID())
 	return &Movie{inner: raw.AVMovieFromID(_id)}
 }
 

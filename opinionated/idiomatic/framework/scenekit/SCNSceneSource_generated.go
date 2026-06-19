@@ -7,6 +7,7 @@ package scenekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -34,18 +35,18 @@ func SceneSourceFromID(id objc.ID) *SceneSource {
 // @method initWithURL:options: @abstract Initialize a SCNSceneSource instance from a URL. @param url The URL to read scenes from. @param options An optional dictionary for future extensions.
 //
 // NewSceneSourceWithURLOptions creates a new [SceneSource].
-func NewSceneSourceWithURLOptions(url string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SceneSource {
+func NewSceneSourceWithURLOptions(url string, options purego.IDer) *SceneSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNSceneSource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), options.ID())
 	return &SceneSource{inner: raw.SCNSceneSourceFromID(_id)}
 }
 
 // @method initWithData:options: @abstract Initialize a SCNSceneSource instance from a NSData object. @param data The data to read scenes from. @param options An optional dictionary for future extensions.
 //
 // NewSceneSourceWithDataOptions creates a new [SceneSource].
-func NewSceneSourceWithDataOptions(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SceneSource {
+func NewSceneSourceWithDataOptions(data *foundation.NSData, options purego.IDer) *SceneSource {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNSceneSource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:"), data.Ptr(), options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:"), data.Ptr(), options.ID())
 	return &SceneSource{inner: raw.SCNSceneSourceFromID(_id)}
 }
 

@@ -6,7 +6,6 @@ package mapkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -41,9 +40,9 @@ func NewPlacemarkWithCoordinate(coordinate unsafe.Pointer) *Placemark {
 }
 
 // NewPlacemarkWithCoordinateAddressDictionary creates a new [Placemark].
-func NewPlacemarkWithCoordinateAddressDictionary(coordinate unsafe.Pointer, addressDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Placemark {
+func NewPlacemarkWithCoordinateAddressDictionary(coordinate unsafe.Pointer, addressDictionary purego.IDer) *Placemark {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKPlacemark")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoordinate:addressDictionary:"), coordinate, addressDictionary.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoordinate:addressDictionary:"), coordinate, addressDictionary.ID())
 	return &Placemark{inner: raw.MKPlacemarkFromID(_id)}
 }
 

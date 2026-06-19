@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imageio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -45,9 +46,9 @@ func NewContext() *Context {
 // Initializes a context without a specific rendering destination, using the specified options.
 //
 // NewContextWithOptions creates a new [Context].
-func NewContextWithOptions(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Context {
+func NewContextWithOptions(options purego.IDer) *Context {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIContext")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), options.ID())
 	return &Context{inner: raw.CIContextFromID(_id)}
 }
 

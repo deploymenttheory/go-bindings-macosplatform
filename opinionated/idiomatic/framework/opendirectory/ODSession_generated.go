@@ -38,10 +38,10 @@ func SessionFromID(id objc.ID) *Session {
 // Creates a session object directed over proxy to another host.
 //
 // NewSessionWithOptionsError creates a new [Session].
-func NewSessionWithOptionsError(inOptions *foundation.NSDictionary[objc.ID, objc.ID]) (*Session, error) {
+func NewSessionWithOptionsError(inOptions purego.IDer) (*Session, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ODSession")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:error:"), inOptions.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:error:"), inOptions.ID(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

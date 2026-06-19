@@ -15,3 +15,67 @@ import (
 func PKAppleDrawingTypeIdentifier() objc.ID {
 	return purego.CFConstant(raw.PKAppleDrawingTypeIdentifier())
 }
+
+// PKInkTypePen returns the string constant PKInkTypePen as an objc.ID, for use as a dictionary key or selector argument.
+func PKInkTypePen() objc.ID {
+	if _r := raw.PKInkTypePen(); _r != nil {
+		return _r.Ptr()
+	}
+	return 0
+}
+
+// PKInkTypePencil returns the string constant PKInkTypePencil as an objc.ID, for use as a dictionary key or selector argument.
+func PKInkTypePencil() objc.ID {
+	if _r := raw.PKInkTypePencil(); _r != nil {
+		return _r.Ptr()
+	}
+	return 0
+}
+
+// PKInkTypeMarker returns the string constant PKInkTypeMarker as an objc.ID, for use as a dictionary key or selector argument.
+func PKInkTypeMarker() objc.ID {
+	if _r := raw.PKInkTypeMarker(); _r != nil {
+		return _r.Ptr()
+	}
+	return 0
+}
+
+// PKInkTypeMonoline returns the string constant PKInkTypeMonoline as an objc.ID, for use as a dictionary key or selector argument.
+func PKInkTypeMonoline() objc.ID {
+	if _r := raw.PKInkTypeMonoline(); _r != nil {
+		return _r.Ptr()
+	}
+	return 0
+}
+
+// PKInkTypeFountainPen returns the string constant PKInkTypeFountainPen as an objc.ID, for use as a dictionary key or selector argument.
+func PKInkTypeFountainPen() objc.ID {
+	if _r := raw.PKInkTypeFountainPen(); _r != nil {
+		return _r.Ptr()
+	}
+	return 0
+}
+
+// PKInkTypeWatercolor returns the string constant PKInkTypeWatercolor as an objc.ID, for use as a dictionary key or selector argument.
+func PKInkTypeWatercolor() objc.ID {
+	if _r := raw.PKInkTypeWatercolor(); _r != nil {
+		return _r.Ptr()
+	}
+	return 0
+}
+
+// PKInkTypeReed returns the string constant PKInkTypeReed as an objc.ID, for use as a dictionary key or selector argument.
+func PKInkTypeReed() objc.ID {
+	if _r := raw.PKInkTypeReed(); _r != nil {
+		return _r.Ptr()
+	}
+	return 0
+}
+
+// PKInkTypeCrayon returns the string constant PKInkTypeCrayon as an objc.ID, for use as a dictionary key or selector argument.
+func PKInkTypeCrayon() objc.ID {
+	if _r := raw.PKInkTypeCrayon(); _r != nil {
+		return _r.Ptr()
+	}
+	return 0
+}

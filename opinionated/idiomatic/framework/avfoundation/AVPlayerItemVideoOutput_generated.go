@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -37,18 +38,18 @@ func PlayerItemVideoOutputFromID(id objc.ID) *PlayerItemVideoOutput {
 // Creates a video output object using the specified pixel buffer attributes.
 //
 // NewPlayerItemVideoOutputWithPixelBufferAttributes creates a new [PlayerItemVideoOutput].
-func NewPlayerItemVideoOutputWithPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *PlayerItemVideoOutput {
+func NewPlayerItemVideoOutputWithPixelBufferAttributes(pixelBufferAttributes purego.IDer) *PlayerItemVideoOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItemVideoOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPixelBufferAttributes:"), pixelBufferAttributes.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPixelBufferAttributes:"), pixelBufferAttributes.ID())
 	return &PlayerItemVideoOutput{inner: raw.AVPlayerItemVideoOutputFromID(_id)}
 }
 
 // Creates a video output object initialized with the specified output settings.
 //
 // NewPlayerItemVideoOutputWithOutputSettings creates a new [PlayerItemVideoOutput].
-func NewPlayerItemVideoOutputWithOutputSettings(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *PlayerItemVideoOutput {
+func NewPlayerItemVideoOutputWithOutputSettings(outputSettings purego.IDer) *PlayerItemVideoOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItemVideoOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOutputSettings:"), outputSettings.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOutputSettings:"), outputSettings.ID())
 	return &PlayerItemVideoOutput{inner: raw.AVPlayerItemVideoOutputFromID(_id)}
 }
 

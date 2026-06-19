@@ -35,10 +35,10 @@ func MTREventReportFromID(id objc.ID) *MTREventReport {
 // Initialize an MTREventReport with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not an event response. Will set the value property to nil and the error property to non-nil, even if the schema for the value is not known, if the response-value is an error, not data. Will return nil and hand out an error if the response-value is data in the following cases: * The response is for a cluster/event combination for which the schema is unknown and hence the type of the data is not known. * The data does not match the known schema.
 //
 // NewMTREventReportWithResponseValueError creates a new [MTREventReport].
-func NewMTREventReportWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTREventReport, error) {
+func NewMTREventReportWithResponseValueError(responseValue purego.IDer) (*MTREventReport, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTREventReport")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

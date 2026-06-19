@@ -7,6 +7,7 @@ package foundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -116,6 +117,19 @@ func (x *MutableDictionary) asObject() *raw.NSObject { return &x.inner.NSDiction
 func (x *MutableDictionary) Set(key, value objc.ID) *MutableDictionary {
 	objc.Send[objc.ID](x.inner.Ptr(), objc.RegisterName("setObject:forKey:"), value, key)
 	return x
+}
+
+// SetString inserts value under an NSString built from the Go string key and
+// returns the receiver for chaining.
+func (x *MutableDictionary) SetString(key string, value objc.ID) *MutableDictionary {
+	objc.Send[objc.ID](x.inner.Ptr(), objc.RegisterName("setObject:forKey:"), value, purego.NSString(key))
+	return x
+}
+
+// Get returns the value stored under the Go string key as an objc.ID, or 0 when
+// absent.
+func (x *MutableDictionary) Get(key string) objc.ID {
+	return objc.Send[objc.ID](x.inner.Ptr(), objc.RegisterName("objectForKey:"), purego.NSString(key))
 }
 
 // MutableDictionaryable is the interface implemented by [MutableDictionary], for mocking and DI.

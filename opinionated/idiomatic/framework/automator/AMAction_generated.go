@@ -37,9 +37,9 @@ func ActionFromID(id objc.ID) *Action {
 // Initializes the action with the specified definition.
 //
 // NewActionWithDefinitionFromArchive creates a new [Action].
-func NewActionWithDefinitionFromArchive(dict *foundation.NSDictionary[*foundation.NSString, objc.ID], archived bool) *Action {
+func NewActionWithDefinitionFromArchive(dict purego.IDer, archived bool) *Action {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AMAction")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDefinition:fromArchive:"), dict.Ptr(), archived)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDefinition:fromArchive:"), dict.ID(), archived)
 	return &Action{inner: raw.AMActionFromID(_id)}
 }
 

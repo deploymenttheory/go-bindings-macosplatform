@@ -37,10 +37,10 @@ func MTRMediaPlaybackClusterPlaybackResponseParamsFromID(id objc.ID) *MTRMediaPl
 // Initialize an MTRMediaPlaybackClusterPlaybackResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
 //
 // NewMTRMediaPlaybackClusterPlaybackResponseParamsWithResponseValueError creates a new [MTRMediaPlaybackClusterPlaybackResponseParams].
-func NewMTRMediaPlaybackClusterPlaybackResponseParamsWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func NewMTRMediaPlaybackClusterPlaybackResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRMediaPlaybackClusterPlaybackResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

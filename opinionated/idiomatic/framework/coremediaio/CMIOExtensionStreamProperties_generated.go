@@ -7,6 +7,7 @@ package coremediaio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -33,9 +34,9 @@ func ExtensionStreamPropertiesFromID(id objc.ID) *ExtensionStreamProperties {
 // @method initWithDictionary: @abstract Initialize a stream properties instance. @param propertiesDictionary The dictionary of properties. @result A CMIOExtensionStreamProperties instance.
 //
 // NewExtensionStreamPropertiesWithDictionary creates a new [ExtensionStreamProperties].
-func NewExtensionStreamPropertiesWithDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ExtensionStreamProperties {
+func NewExtensionStreamPropertiesWithDictionary(propertiesDictionary purego.IDer) *ExtensionStreamProperties {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionStreamProperties")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), propertiesDictionary.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), propertiesDictionary.ID())
 	return &ExtensionStreamProperties{inner: raw.CMIOExtensionStreamPropertiesFromID(_id)}
 }
 

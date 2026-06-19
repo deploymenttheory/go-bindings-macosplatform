@@ -59,12 +59,31 @@ func emitConstants(
 		seenGoNames[goName] = true
 
 		// NSString externs (NSURLResourceKey / notification-name globals) are
-		// surfaced only in the foundation package itself, where the *String
-		// wrapper and StringFromID are local; cross-package the idiomatic
-		// foundation is not imported (generated code aliases the RAW foundation
-		// as `foundation`), so they stay raw-only elsewhere.
-		isString := pkgName == foundationPkgName && externIsNSString(ext, m, ctx)
-		if !isCFRefExtern(ext.ObjCType) && !isString {
+		// surfaced in the foundation package as the local idiomatic *String
+		// wrapper. In every OTHER framework they are surfaced as objc.ID
+		// accessors instead (the *String wrapper and StringFromID are foundation
+		// -local and not imported cross-package), which is exactly what callers
+		// need for an NSAboutPanelOptionKey / NSPasteboardType dictionary key.
+		isFoundationString := pkgName == foundationPkgName && externIsNSString(ext, m, ctx)
+		isObjcIDString, typedString := false, false
+		if pkgName != foundationPkgName {
+			rawGoType := ext.GoType
+			if rawGoType == "" {
+				rawGoType = m.GoType(ext.ObjCType, ctx, make(typemap.ImportSet))
+			}
+			switch {
+			case strings.Contains(rawGoType, "NSString") && !strings.Contains(rawGoType, "**"):
+				// Raw emitted a typed *NSString accessor (already dereferenced);
+				// take its objc.ID via .Ptr().
+				isObjcIDString, typedString = true, true
+			case (rawGoType == "" || rawGoType == "unsafe.Pointer") && externNSStringViaTypedef(ext, fw):
+				// Raw could not resolve the type (e.g. `API_AVAILABLE const
+				// NSAboutPanelOptionKey`) so it emitted a uintptr symbol-address
+				// accessor; CFConstant dereferences it to the NSString objc.ID.
+				isObjcIDString = true
+			}
+		}
+		if !isCFRefExtern(ext.ObjCType) && !isFoundationString && !isObjcIDString {
 			continue
 		}
 		if takenNames[goName] || handFuncs[goName] {
@@ -81,14 +100,17 @@ func emitConstants(
 			ExternName:   ext.Name,
 			CommentBlock: comment,
 		}
-		if isCFRefExtern(ext.ObjCType) {
+		switch {
+		case isCFRefExtern(ext.ObjCType):
 			view.Items = append(view.Items, item)
-		} else {
+		case isFoundationString:
 			view.StringItems = append(view.StringItems, item)
+		default: // isObjcIDString
+			view.StringIDItems = append(view.StringIDItems, stringIDItem{constantItem: item, Typed: typedString})
 		}
 	}
 
-	if len(view.Items) == 0 && len(view.StringItems) == 0 {
+	if len(view.Items) == 0 && len(view.StringItems) == 0 && len(view.StringIDItems) == 0 {
 		return nil
 	}
 
@@ -120,6 +142,17 @@ type cfConstantsView struct {
 	Items    []constantItem // CoreFoundation-reference externs → objc.ID
 	// StringItems are NSString externs → *String (foundation package only).
 	StringItems []constantItem
+	// StringIDItems are NSString externs in non-foundation packages → objc.ID.
+	StringIDItems []stringIDItem
+}
+
+// stringIDItem is an NSString extern surfaced as an objc.ID accessor in a
+// non-foundation package. Typed is true when the raw accessor already returns a
+// dereferenced *NSString (use .Ptr()), false when it returns the bare uintptr
+// symbol address (use purego.CFConstant to dereference).
+type stringIDItem struct {
+	constantItem
+	Typed bool
 }
 
 // foundationPkgName is the idiomatic foundation package name, used to decide
@@ -141,6 +174,44 @@ func externIsNSString(ext meta.Extern, m *typemap.Mapper, ctx typemap.Context) b
 		return false
 	}
 	return strings.Contains(goType, "NSString")
+}
+
+// externNSStringViaTypedef reports whether an extern's ObjC type resolves to
+// NSString through a framework typedef chain (e.g. `API_AVAILABLE const
+// NSAboutPanelOptionKey`, where NSAboutPanelOptionKey is typedef'd to
+// `NSString *`). It is used for externs the mapper could not type, which the raw
+// layer emitted as bare uintptr symbol-address accessors.
+func externNSStringViaTypedef(ext meta.Extern, fw *meta.FrameworkMeta) bool {
+	for _, tok := range strings.Fields(ext.ObjCType) {
+		if resolvesToNSString(strings.TrimSuffix(tok, "*"), fw, map[string]bool{}) {
+			return true
+		}
+	}
+	return false
+}
+
+// resolvesToNSString walks fw.Typedefs from name, reporting whether it reaches
+// the NSString class. seen guards against typedef cycles.
+func resolvesToNSString(name string, fw *meta.FrameworkMeta, seen map[string]bool) bool {
+	name = strings.TrimSpace(name)
+	if name == "" || seen[name] {
+		return false
+	}
+	seen[name] = true
+	if name == "NSString" {
+		return true
+	}
+	next, ok := fw.Typedefs[name]
+	if !ok {
+		return false
+	}
+	next = strings.TrimPrefix(strings.TrimSpace(next), "const ")
+	for _, tok := range strings.Fields(next) {
+		if resolvesToNSString(strings.TrimSuffix(tok, "*"), fw, seen) {
+			return true
+		}
+	}
+	return false
 }
 
 // isCFRefExtern reports whether an extern's ObjC type is a CoreFoundation

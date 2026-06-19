@@ -36,18 +36,18 @@ func TextStyleRuleFromID(id objc.ID) *TextStyleRule {
 // Creates a text style rule object with the specified style attributes.
 //
 // NewTextStyleRuleWithTextMarkupAttributes creates a new [TextStyleRule].
-func NewTextStyleRuleWithTextMarkupAttributes(textMarkupAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextStyleRule {
+func NewTextStyleRuleWithTextMarkupAttributes(textMarkupAttributes purego.IDer) *TextStyleRule {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVTextStyleRule")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextMarkupAttributes:"), textMarkupAttributes.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextMarkupAttributes:"), textMarkupAttributes.ID())
 	return &TextStyleRule{inner: raw.AVTextStyleRuleFromID(_id)}
 }
 
 // Creates a text style rule object with the specified style attributes and text range information.
 //
 // NewTextStyleRuleWithTextMarkupAttributesTextSelector creates a new [TextStyleRule].
-func NewTextStyleRuleWithTextMarkupAttributesTextSelector(textMarkupAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID], textSelector string) *TextStyleRule {
+func NewTextStyleRuleWithTextMarkupAttributesTextSelector(textMarkupAttributes purego.IDer, textSelector string) *TextStyleRule {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVTextStyleRule")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextMarkupAttributes:textSelector:"), textMarkupAttributes.Ptr(), foundation.NSStringStringWithUTF8String(textSelector).Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextMarkupAttributes:textSelector:"), textMarkupAttributes.ID(), foundation.NSStringStringWithUTF8String(textSelector).Ptr())
 	return &TextStyleRule{inner: raw.AVTextStyleRuleFromID(_id)}
 }
 

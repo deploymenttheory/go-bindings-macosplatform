@@ -36,9 +36,9 @@ func AssetReaderAudioMixOutputFromID(id objc.ID) *AssetReaderAudioMixOutput {
 // Creates an object that reads mixed audio from the specified audio tracks.
 //
 // NewAssetReaderAudioMixOutputWithAudioTracksAudioSettings creates a new [AssetReaderAudioMixOutput].
-func NewAssetReaderAudioMixOutputWithAudioTracksAudioSettings(audioTracks *foundation.NSArray[*raw.AVAssetTrack], audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AssetReaderAudioMixOutput {
+func NewAssetReaderAudioMixOutputWithAudioTracksAudioSettings(audioTracks *foundation.NSArray[*raw.AVAssetTrack], audioSettings purego.IDer) *AssetReaderAudioMixOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetReaderAudioMixOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioTracks:audioSettings:"), audioTracks.Ptr(), audioSettings.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioTracks:audioSettings:"), audioTracks.Ptr(), audioSettings.ID())
 	return &AssetReaderAudioMixOutput{inner: raw.AVAssetReaderAudioMixOutputFromID(_id)}
 }
 

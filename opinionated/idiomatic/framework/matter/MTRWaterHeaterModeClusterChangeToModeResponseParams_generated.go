@@ -37,10 +37,10 @@ func MTRWaterHeaterModeClusterChangeToModeResponseParamsFromID(id objc.ID) *MTRW
 // Initialize an MTRWaterHeaterModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
 //
 // NewMTRWaterHeaterModeClusterChangeToModeResponseParamsWithResponseValueError creates a new [MTRWaterHeaterModeClusterChangeToModeResponseParams].
-func NewMTRWaterHeaterModeClusterChangeToModeResponseParamsWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRWaterHeaterModeClusterChangeToModeResponseParams, error) {
+func NewMTRWaterHeaterModeClusterChangeToModeResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRWaterHeaterModeClusterChangeToModeResponseParams, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRWaterHeaterModeClusterChangeToModeResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

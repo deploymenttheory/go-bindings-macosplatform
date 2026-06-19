@@ -7,6 +7,7 @@ package corebluetooth
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,9 +45,9 @@ func NewPeripheralManagerWithDelegateQueue(delegate raw.CBPeripheralManagerDeleg
 }
 
 // NewPeripheralManagerWithDelegateQueueOptions creates a new [PeripheralManager].
-func NewPeripheralManagerWithDelegateQueueOptions(delegate raw.CBPeripheralManagerDelegate, queue *foundation.NSObject, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *PeripheralManager {
+func NewPeripheralManagerWithDelegateQueueOptions(delegate raw.CBPeripheralManagerDelegate, queue *foundation.NSObject, options purego.IDer) *PeripheralManager {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CBPeripheralManager")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDelegate:queue:options:"), delegate, queue.Ptr(), options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDelegate:queue:options:"), delegate, queue.Ptr(), options.ID())
 	return &PeripheralManager{inner: raw.CBPeripheralManagerFromID(_id)}
 }
 

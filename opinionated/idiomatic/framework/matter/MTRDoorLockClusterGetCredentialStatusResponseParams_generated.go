@@ -37,10 +37,10 @@ func MTRDoorLockClusterGetCredentialStatusResponseParamsFromID(id objc.ID) *MTRD
 // Initialize an MTRDoorLockClusterGetCredentialStatusResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
 //
 // NewMTRDoorLockClusterGetCredentialStatusResponseParamsWithResponseValueError creates a new [MTRDoorLockClusterGetCredentialStatusResponseParams].
-func NewMTRDoorLockClusterGetCredentialStatusResponseParamsWithResponseValueError(responseValue *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MTRDoorLockClusterGetCredentialStatusResponseParams, error) {
+func NewMTRDoorLockClusterGetCredentialStatusResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRDoorLockClusterGetCredentialStatusResponseParams, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDoorLockClusterGetCredentialStatusResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

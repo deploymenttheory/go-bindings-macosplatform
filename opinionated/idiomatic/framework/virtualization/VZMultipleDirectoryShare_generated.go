@@ -7,6 +7,7 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,9 +42,9 @@ func NewMultipleDirectoryShare() *MultipleDirectoryShare {
 // Creates the directory share with a set of directories on the host.
 //
 // NewMultipleDirectoryShareWithDirectories creates a new [MultipleDirectoryShare].
-func NewMultipleDirectoryShareWithDirectories(directories *foundation.NSDictionary[*foundation.NSString, *raw.VZSharedDirectory]) *MultipleDirectoryShare {
+func NewMultipleDirectoryShareWithDirectories(directories purego.IDer) *MultipleDirectoryShare {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMultipleDirectoryShare")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDirectories:"), directories.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDirectories:"), directories.ID())
 	return &MultipleDirectoryShare{inner: raw.VZMultipleDirectoryShareFromID(_id)}
 }
 

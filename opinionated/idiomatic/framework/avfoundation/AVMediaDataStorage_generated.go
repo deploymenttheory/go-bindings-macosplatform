@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,9 +36,9 @@ func MediaDataStorageFromID(id objc.ID) *MediaDataStorage {
 // Creates a media data storage object associated with a file URL.
 //
 // NewMediaDataStorageWithURLOptions creates a new [MediaDataStorage].
-func NewMediaDataStorageWithURLOptions(uRL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MediaDataStorage {
+func NewMediaDataStorageWithURLOptions(uRL string, options purego.IDer) *MediaDataStorage {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMediaDataStorage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), options.ID())
 	return &MediaDataStorage{inner: raw.AVMediaDataStorageFromID(_id)}
 }
 

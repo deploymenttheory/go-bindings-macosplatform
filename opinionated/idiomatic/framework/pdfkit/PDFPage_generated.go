@@ -41,9 +41,9 @@ func NewPage() *Page {
 }
 
 // NewPageWithImageOptions creates a new [Page].
-func NewPageWithImageOptions(image *appkit.NSImage, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Page {
+func NewPageWithImageOptions(image *appkit.NSImage, options purego.IDer) *Page {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFPage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:options:"), image.Ptr(), options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:options:"), image.Ptr(), options.ID())
 	return &Page{inner: raw.PDFPageFromID(_id)}
 }
 

@@ -18,4 +18,12 @@ return nil
 return StringFromID(_r.Ptr())
 }
 
+{{end}}{{range .StringIDItems}}{{.CommentBlock}}// {{.GoName}} returns the string constant {{.ExternName}} as an objc.ID, for use as a dictionary key or selector argument.
+func {{.GoName}}() objc.ID {
+{{if .Typed}}if _r := {{$.RawAlias}}.{{.GoName}}(); _r != nil {
+return _r.Ptr()
+}
+return 0{{else}}return purego.CFConstant({{$.RawAlias}}.{{.GoName}}()){{end}}
+}
+
 {{end}}{{end}}

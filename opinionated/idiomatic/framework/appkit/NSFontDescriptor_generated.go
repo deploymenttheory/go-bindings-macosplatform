@@ -36,9 +36,9 @@ func FontDescriptorFromID(id objc.ID) *FontDescriptor {
 // Initializes and returns a new font descriptor with the specified attributes.
 //
 // NewFontDescriptorWithFontAttributes creates a new [FontDescriptor].
-func NewFontDescriptorWithFontAttributes(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *FontDescriptor {
+func NewFontDescriptorWithFontAttributes(attributes purego.IDer) *FontDescriptor {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFontDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFontAttributes:"), attributes.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFontAttributes:"), attributes.ID())
 	return &FontDescriptor{inner: raw.NSFontDescriptorFromID(_id)}
 }
 

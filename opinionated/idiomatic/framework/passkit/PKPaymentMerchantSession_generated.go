@@ -5,8 +5,8 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,9 +35,9 @@ func PaymentMerchantSessionFromID(id objc.ID) *PaymentMerchantSession {
 // Creates an object that validates the identity of a merchant for a payment request.
 //
 // NewPaymentMerchantSessionWithDictionary creates a new [PaymentMerchantSession].
-func NewPaymentMerchantSessionWithDictionary(dictionary *foundation.NSDictionary[objc.ID, objc.ID]) *PaymentMerchantSession {
+func NewPaymentMerchantSessionWithDictionary(dictionary purego.IDer) *PaymentMerchantSession {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentMerchantSession")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), dictionary.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), dictionary.ID())
 	return &PaymentMerchantSession{inner: raw.PKPaymentMerchantSessionFromID(_id)}
 }
 

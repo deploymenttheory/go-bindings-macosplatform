@@ -1,13 +1,27 @@
 {{/*
-    dict_augment.tmpl — the hand-friendly Set(key, value) augmentation emitted
-    only on the NSMutableDictionary wrapper, for building keyed argument
-    dictionaries (e.g. Security keychain queries) without raw FFI.
+    dict_augment.tmpl — hand-friendly builders emitted only on the
+    NSMutableDictionary wrapper, for building keyed argument dictionaries
+    (e.g. Security keychain queries, NSAboutPanelOption option dictionaries,
+    directory-share maps) without raw FFI.
 */}}
 {{define "dict_augment"}}// Set inserts value for key (both object pointers, e.g. the CFStringRef
 // constant security.KSecClass()) and returns the receiver for chaining.
 func (x *{{.GoTypeName}}) Set(key, value objc.ID) *{{.GoTypeName}} {
 objc.Send[objc.ID](x.inner.Ptr(), objc.RegisterName("setObject:forKey:"), value, key)
 return x
+}
+
+// SetString inserts value under an NSString built from the Go string key and
+// returns the receiver for chaining.
+func (x *{{.GoTypeName}}) SetString(key string, value objc.ID) *{{.GoTypeName}} {
+objc.Send[objc.ID](x.inner.Ptr(), objc.RegisterName("setObject:forKey:"), value, purego.NSString(key))
+return x
+}
+
+// Get returns the value stored under the Go string key as an objc.ID, or 0 when
+// absent.
+func (x *{{.GoTypeName}}) Get(key string) objc.ID {
+return objc.Send[objc.ID](x.inner.Ptr(), objc.RegisterName("objectForKey:"), purego.NSString(key))
 }
 
 {{end}}

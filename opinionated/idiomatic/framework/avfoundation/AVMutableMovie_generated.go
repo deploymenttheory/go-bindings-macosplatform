@@ -39,10 +39,10 @@ func MutableMovieFromID(id objc.ID) *MutableMovie {
 // Creates a mutable movie object from a movie header stored in a QuickTime movie file of ISO base media file.
 //
 // NewMutableMovieWithURLOptionsError creates a new [MutableMovie].
-func NewMutableMovieWithURLOptionsError(uRL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MutableMovie, error) {
+func NewMutableMovieWithURLOptionsError(uRL string, options purego.IDer) (*MutableMovie, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMutableMovie")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), options.ID(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -52,10 +52,10 @@ func NewMutableMovieWithURLOptionsError(uRL string, options *foundation.NSDictio
 // Creates a mutable movie object from a movie stored in a data object.
 //
 // NewMutableMovieWithDataOptionsError creates a new [MutableMovie].
-func NewMutableMovieWithDataOptionsError(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MutableMovie, error) {
+func NewMutableMovieWithDataOptionsError(data *foundation.NSData, options purego.IDer) (*MutableMovie, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMutableMovie")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:error:"), data.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:options:error:"), data.Ptr(), options.ID(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}
@@ -65,10 +65,10 @@ func NewMutableMovieWithDataOptionsError(data *foundation.NSData, options *found
 // Creates a mutable movie object without tracks.
 //
 // NewMutableMovieWithSettingsFromMovieOptionsError creates a new [MutableMovie].
-func NewMutableMovieWithSettingsFromMovieOptionsError(movie *raw.AVMovie, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*MutableMovie, error) {
+func NewMutableMovieWithSettingsFromMovieOptionsError(movie *raw.AVMovie, options purego.IDer) (*MutableMovie, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMutableMovie")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSettingsFromMovie:options:error:"), movie.Ptr(), options.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSettingsFromMovie:options:error:"), movie.Ptr(), options.ID(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

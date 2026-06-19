@@ -36,9 +36,9 @@ func AssetReaderTrackOutputFromID(id objc.ID) *AssetReaderTrackOutput {
 // Creates an object that reads media data from an asset track.
 //
 // NewAssetReaderTrackOutputWithTrackOutputSettings creates a new [AssetReaderTrackOutput].
-func NewAssetReaderTrackOutputWithTrackOutputSettings(track *raw.AVAssetTrack, outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AssetReaderTrackOutput {
+func NewAssetReaderTrackOutputWithTrackOutputSettings(track *raw.AVAssetTrack, outputSettings purego.IDer) *AssetReaderTrackOutput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetReaderTrackOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTrack:outputSettings:"), track.Ptr(), outputSettings.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTrack:outputSettings:"), track.Ptr(), outputSettings.ID())
 	return &AssetReaderTrackOutput{inner: raw.AVAssetReaderTrackOutputFromID(_id)}
 }
 

@@ -46,9 +46,9 @@ func NewManagedObjectModelReferenceWithFileURLVersionChecksum(fileURL string, ve
 }
 
 // NewManagedObjectModelReferenceWithEntityVersionHashesInBundleVersionChecksum creates a new [ManagedObjectModelReference].
-func NewManagedObjectModelReferenceWithEntityVersionHashesInBundleVersionChecksum(versionHash *foundation.NSDictionary[objc.ID, objc.ID], bundle *foundation.NSBundle, versionChecksum string) *ManagedObjectModelReference {
+func NewManagedObjectModelReferenceWithEntityVersionHashesInBundleVersionChecksum(versionHash purego.IDer, bundle *foundation.NSBundle, versionChecksum string) *ManagedObjectModelReference {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSManagedObjectModelReference")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntityVersionHashes:inBundle:versionChecksum:"), versionHash.Ptr(), bundle.Ptr(), foundation.NSStringStringWithUTF8String(versionChecksum).Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntityVersionHashes:inBundle:versionChecksum:"), versionHash.ID(), bundle.Ptr(), foundation.NSStringStringWithUTF8String(versionChecksum).Ptr())
 	return &ManagedObjectModelReference{inner: raw.NSManagedObjectModelReferenceFromID(_id)}
 }
 

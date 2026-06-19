@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imageio"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -37,216 +38,216 @@ func TargetedImageRequestFromID(id objc.ID) *TargetedImageRequest {
 // @brief Create a new request that targets an image in a pixel buffer. @param	pixelBuffer			The pixel buffer containing the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image.
 //
 // NewTargetedImageRequestWithTargetedCVPixelBufferOptions creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedCVPixelBufferOptions(pixelBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedCVPixelBufferOptions(pixelBuffer unsafe.Pointer, options purego.IDer) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCVPixelBuffer:options:"), pixelBuffer, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCVPixelBuffer:options:"), pixelBuffer, options.ID())
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request that targets an image in a pixel buffer. @param	pixelBuffer			The pixel buffer containing the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image. @param	completionHandler	The block that is invoked when the request has been performed.
 //
 // NewTargetedImageRequestWithTargetedCVPixelBufferOptionsCompletionHandler creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedCVPixelBufferOptionsCompletionHandler(pixelBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedCVPixelBufferOptionsCompletionHandler(pixelBuffer unsafe.Pointer, options purego.IDer, completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCVPixelBuffer:options:completionHandler:"), pixelBuffer, options.Ptr(), completionHandler)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCVPixelBuffer:options:completionHandler:"), pixelBuffer, options.ID(), completionHandler)
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request that targets an image in a pixel buffer. @param	pixelBuffer			The pixel buffer containing the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image.
 //
 // NewTargetedImageRequestWithTargetedCVPixelBufferOrientationOptions creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedCVPixelBufferOrientationOptions(pixelBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedCVPixelBufferOrientationOptions(pixelBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options purego.IDer) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCVPixelBuffer:orientation:options:"), pixelBuffer, orientation, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCVPixelBuffer:orientation:options:"), pixelBuffer, orientation, options.ID())
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request that targets an image in a pixel buffer. @param	pixelBuffer			The pixel buffer containing the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image. @param	completionHandler	The block that is invoked when the request has been performed.
 //
 // NewTargetedImageRequestWithTargetedCVPixelBufferOrientationOptionsCompletionHandler creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedCVPixelBufferOrientationOptionsCompletionHandler(pixelBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedCVPixelBufferOrientationOptionsCompletionHandler(pixelBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options purego.IDer, completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCVPixelBuffer:orientation:options:completionHandler:"), pixelBuffer, orientation, options.Ptr(), completionHandler)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCVPixelBuffer:orientation:options:completionHandler:"), pixelBuffer, orientation, options.ID(), completionHandler)
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request with a targeted CGImage. @param	cgImage				The CGImageRef of the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image.
 //
 // NewTargetedImageRequestWithTargetedCGImageOptions creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedCGImageOptions(cgImage unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedCGImageOptions(cgImage unsafe.Pointer, options purego.IDer) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCGImage:options:"), cgImage, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCGImage:options:"), cgImage, options.ID())
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request with a targeted CGImage. @param	cgImage				The CGImageRef of the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image. @param	completionHandler	The block that is invoked when the request has been performed.
 //
 // NewTargetedImageRequestWithTargetedCGImageOptionsCompletionHandler creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedCGImageOptionsCompletionHandler(cgImage unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedCGImageOptionsCompletionHandler(cgImage unsafe.Pointer, options purego.IDer, completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCGImage:options:completionHandler:"), cgImage, options.Ptr(), completionHandler)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCGImage:options:completionHandler:"), cgImage, options.ID(), completionHandler)
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request with a targeted CGImage. @param	cgImage				The CGImageRef of the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image.
 //
 // NewTargetedImageRequestWithTargetedCGImageOrientationOptions creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedCGImageOrientationOptions(cgImage unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedCGImageOrientationOptions(cgImage unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options purego.IDer) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCGImage:orientation:options:"), cgImage, orientation, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCGImage:orientation:options:"), cgImage, orientation, options.ID())
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request with a targeted CGImage. @param	cgImage				The CGImageRef of the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image. @param	completionHandler	The block that is invoked when the request has been performed.
 //
 // NewTargetedImageRequestWithTargetedCGImageOrientationOptionsCompletionHandler creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedCGImageOrientationOptionsCompletionHandler(cgImage unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedCGImageOrientationOptionsCompletionHandler(cgImage unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options purego.IDer, completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCGImage:orientation:options:completionHandler:"), cgImage, orientation, options.Ptr(), completionHandler)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCGImage:orientation:options:completionHandler:"), cgImage, orientation, options.ID(), completionHandler)
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request with a targeted CIImage. @param	ciImage				The CIImage of the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image.
 //
 // NewTargetedImageRequestWithTargetedCIImageOptions creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedCIImageOptions(ciImage *coreimage.CIImage, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedCIImageOptions(ciImage *coreimage.CIImage, options purego.IDer) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCIImage:options:"), ciImage.Ptr(), options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCIImage:options:"), ciImage.Ptr(), options.ID())
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request with a targeted CIImage. @param	ciImage				The CIImage of the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image. @param	completionHandler	The block that is invoked when the request has been performed.
 //
 // NewTargetedImageRequestWithTargetedCIImageOptionsCompletionHandler creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedCIImageOptionsCompletionHandler(ciImage *coreimage.CIImage, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedCIImageOptionsCompletionHandler(ciImage *coreimage.CIImage, options purego.IDer, completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCIImage:options:completionHandler:"), ciImage.Ptr(), options.Ptr(), completionHandler)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCIImage:options:completionHandler:"), ciImage.Ptr(), options.ID(), completionHandler)
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request with a targeted CIImage. @param	ciImage				The CIImage of the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image.
 //
 // NewTargetedImageRequestWithTargetedCIImageOrientationOptions creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedCIImageOrientationOptions(ciImage *coreimage.CIImage, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedCIImageOrientationOptions(ciImage *coreimage.CIImage, orientation imageio.CGImagePropertyOrientation, options purego.IDer) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCIImage:orientation:options:"), ciImage.Ptr(), orientation, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCIImage:orientation:options:"), ciImage.Ptr(), orientation, options.ID())
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request with a targeted CIImage. @param	ciImage				The CIImage of the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image. @param	completionHandler	The block that is invoked when the request has been performed.
 //
 // NewTargetedImageRequestWithTargetedCIImageOrientationOptionsCompletionHandler creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedCIImageOrientationOptionsCompletionHandler(ciImage *coreimage.CIImage, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedCIImageOrientationOptionsCompletionHandler(ciImage *coreimage.CIImage, orientation imageio.CGImagePropertyOrientation, options purego.IDer, completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCIImage:orientation:options:completionHandler:"), ciImage.Ptr(), orientation, options.Ptr(), completionHandler)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCIImage:orientation:options:completionHandler:"), ciImage.Ptr(), orientation, options.ID(), completionHandler)
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request with a targeted image URL. @param	imageURL			The URL of the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image.
 //
 // NewTargetedImageRequestWithTargetedImageURLOptions creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedImageURLOptions(imageURL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedImageURLOptions(imageURL string, options purego.IDer) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageURL:options:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(imageURL)).Ptr(), options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageURL:options:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(imageURL)).Ptr(), options.ID())
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request with a targeted image URL. @param	imageURL			The URL of the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image. @param	completionHandler	The block that is invoked when the request has been performed.
 //
 // NewTargetedImageRequestWithTargetedImageURLOptionsCompletionHandler creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedImageURLOptionsCompletionHandler(imageURL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedImageURLOptionsCompletionHandler(imageURL string, options purego.IDer, completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageURL:options:completionHandler:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(imageURL)).Ptr(), options.Ptr(), completionHandler)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageURL:options:completionHandler:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(imageURL)).Ptr(), options.ID(), completionHandler)
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request with a targeted image URL. @param	imageURL			The URL of the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image.
 //
 // NewTargetedImageRequestWithTargetedImageURLOrientationOptions creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedImageURLOrientationOptions(imageURL string, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedImageURLOrientationOptions(imageURL string, orientation imageio.CGImagePropertyOrientation, options purego.IDer) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageURL:orientation:options:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(imageURL)).Ptr(), orientation, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageURL:orientation:options:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(imageURL)).Ptr(), orientation, options.ID())
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request with a targeted image URL. @param	imageURL			The URL of the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image. @param	completionHandler	The block that is invoked when the request has been performed.
 //
 // NewTargetedImageRequestWithTargetedImageURLOrientationOptionsCompletionHandler creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedImageURLOrientationOptionsCompletionHandler(imageURL string, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedImageURLOrientationOptionsCompletionHandler(imageURL string, orientation imageio.CGImagePropertyOrientation, options purego.IDer, completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageURL:orientation:options:completionHandler:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(imageURL)).Ptr(), orientation, options.Ptr(), completionHandler)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageURL:orientation:options:completionHandler:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(imageURL)).Ptr(), orientation, options.ID(), completionHandler)
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request with a targeted image data. @param imageData			The data of the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image.
 //
 // NewTargetedImageRequestWithTargetedImageDataOptions creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedImageDataOptions(imageData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedImageDataOptions(imageData *foundation.NSData, options purego.IDer) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageData:options:"), imageData.Ptr(), options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageData:options:"), imageData.Ptr(), options.ID())
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request with a targeted image data. @param imageData			The data of the targeted image. @param	options				A dictionary with options specifying auxiliary information for the image. @param	completionHandler	The block that is invoked when the request has been performed.
 //
 // NewTargetedImageRequestWithTargetedImageDataOptionsCompletionHandler creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedImageDataOptionsCompletionHandler(imageData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedImageDataOptionsCompletionHandler(imageData *foundation.NSData, options purego.IDer, completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageData:options:completionHandler:"), imageData.Ptr(), options.Ptr(), completionHandler)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageData:options:completionHandler:"), imageData.Ptr(), options.ID(), completionHandler)
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request with a targeted image data. @param imageData			The data of the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image.
 //
 // NewTargetedImageRequestWithTargetedImageDataOrientationOptions creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedImageDataOrientationOptions(imageData *foundation.NSData, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedImageDataOrientationOptions(imageData *foundation.NSData, orientation imageio.CGImagePropertyOrientation, options purego.IDer) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageData:orientation:options:"), imageData.Ptr(), orientation, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageData:orientation:options:"), imageData.Ptr(), orientation, options.ID())
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request with a targeted image data. @param imageData			The data of the targeted image. @param	orientation			The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param	options				A dictionary with options specifying auxiliary information for the image. @param	completionHandler	The block that is invoked when the request has been performed.
 //
 // NewTargetedImageRequestWithTargetedImageDataOrientationOptionsCompletionHandler creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedImageDataOrientationOptionsCompletionHandler(imageData *foundation.NSData, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedImageDataOrientationOptionsCompletionHandler(imageData *foundation.NSData, orientation imageio.CGImagePropertyOrientation, options purego.IDer, completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageData:orientation:options:completionHandler:"), imageData.Ptr(), orientation, options.Ptr(), completionHandler)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedImageData:orientation:options:completionHandler:"), imageData.Ptr(), orientation, options.ID(), completionHandler)
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request with a targeted CMSampleBuffer. @param sampleBuffer The CMSampleBuffer containing the CVImageBuffer to be used by the request. @param options A dictionary with options specifying auxiliary information for the image.
 //
 // NewTargetedImageRequestWithTargetedCMSampleBufferOptions creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedCMSampleBufferOptions(sampleBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedCMSampleBufferOptions(sampleBuffer unsafe.Pointer, options purego.IDer) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCMSampleBuffer:options:"), sampleBuffer, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCMSampleBuffer:options:"), sampleBuffer, options.ID())
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request with a targeted CMSampleBuffer. @param sampleBuffer The CMSampleBuffer containing the CVImageBuffer to be used by the request. @param options A dictionary with options specifying auxiliary information for the image. @param completionHandler The block that is invoked after the request has been performed.
 //
 // NewTargetedImageRequestWithTargetedCMSampleBufferOptionsCompletionHandler creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedCMSampleBufferOptionsCompletionHandler(sampleBuffer unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedCMSampleBufferOptionsCompletionHandler(sampleBuffer unsafe.Pointer, options purego.IDer, completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCMSampleBuffer:options:completionHandler:"), sampleBuffer, options.Ptr(), completionHandler)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCMSampleBuffer:options:completionHandler:"), sampleBuffer, options.ID(), completionHandler)
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request with a targeted CMSampleBuffer. @param sampleBuffer The CMSampleBuffer containing the CVImageBuffer to be used by the request. @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param options A dictionary with options specifying auxiliary information for the image.
 //
 // NewTargetedImageRequestWithTargetedCMSampleBufferOrientationOptions creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedCMSampleBufferOrientationOptions(sampleBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedCMSampleBufferOrientationOptions(sampleBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options purego.IDer) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCMSampleBuffer:orientation:options:"), sampleBuffer, orientation, options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCMSampleBuffer:orientation:options:"), sampleBuffer, orientation, options.ID())
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 
 // @brief Create a new request with a targeted CMSampleBuffer. @param sampleBuffer The CMSampleBuffer containing the CVImageBuffer to be used by the request. @param orientation The orientation of the image/buffer based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information. @param options A dictionary with options specifying auxiliary information for the image. @param completionHandler The block that is invoked after the request has been performed.
 //
 // NewTargetedImageRequestWithTargetedCMSampleBufferOrientationOptionsCompletionHandler creates a new [TargetedImageRequest].
-func NewTargetedImageRequestWithTargetedCMSampleBufferOrientationOptionsCompletionHandler(sampleBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
+func NewTargetedImageRequestWithTargetedCMSampleBufferOrientationOptionsCompletionHandler(sampleBuffer unsafe.Pointer, orientation imageio.CGImagePropertyOrientation, options purego.IDer, completionHandler func(*raw.VNRequest, unsafe.Pointer)) *TargetedImageRequest {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VNTargetedImageRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCMSampleBuffer:orientation:options:completionHandler:"), sampleBuffer, orientation, options.Ptr(), completionHandler)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTargetedCMSampleBuffer:orientation:options:completionHandler:"), sampleBuffer, orientation, options.ID(), completionHandler)
 	return &TargetedImageRequest{inner: raw.VNTargetedImageRequestFromID(_id)}
 }
 

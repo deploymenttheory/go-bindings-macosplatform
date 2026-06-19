@@ -40,9 +40,9 @@ func NewAttributedStringWithString(str string) *AttributedString {
 }
 
 // NewAttributedStringWithStringAttributes creates a new [AttributedString].
-func NewAttributedStringWithStringAttributes(str string, attrs *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedString {
+func NewAttributedStringWithStringAttributes(str string, attrs purego.IDer) *AttributedString {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedString")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:attributes:"), foundation.NSStringStringWithUTF8String(str).Ptr(), attrs.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:attributes:"), foundation.NSStringStringWithUTF8String(str).Ptr(), attrs.ID())
 	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}
 }
 
@@ -107,18 +107,18 @@ func NewAttributedStringWithFormatOptionsLocaleArguments(format *raw.NSAttribute
 // Formats the string using the specified locale (or the canonical one, if nil).
 //
 // NewAttributedStringWithFormatOptionsLocaleContext creates a new [AttributedString].
-func NewAttributedStringWithFormatOptionsLocaleContext(format *raw.NSAttributedString, options NSAttributedStringFormattingOptions, locale *raw.NSLocale, context_ *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedString {
+func NewAttributedStringWithFormatOptionsLocaleContext(format *raw.NSAttributedString, options NSAttributedStringFormattingOptions, locale *raw.NSLocale, context_ purego.IDer) *AttributedString {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedString")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:context:"), format.Ptr(), raw.NSAttributedStringFormattingOptions(options), locale.Ptr(), context_.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:context:"), format.Ptr(), raw.NSAttributedStringFormattingOptions(options), locale.Ptr(), context_.ID())
 	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}
 }
 
 // Formats the string using the arguments list and the specified locale (or the canonical one, if nil).
 //
 // NewAttributedStringWithFormatOptionsLocaleContextArguments creates a new [AttributedString].
-func NewAttributedStringWithFormatOptionsLocaleContextArguments(format *raw.NSAttributedString, options NSAttributedStringFormattingOptions, locale *raw.NSLocale, context_ *raw.NSDictionary[*raw.NSString, objc.ID], arguments string) *AttributedString {
+func NewAttributedStringWithFormatOptionsLocaleContextArguments(format *raw.NSAttributedString, options NSAttributedStringFormattingOptions, locale *raw.NSLocale, context_ purego.IDer, arguments string) *AttributedString {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedString")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:context:arguments:"), format.Ptr(), raw.NSAttributedStringFormattingOptions(options), locale.Ptr(), context_.Ptr(), arguments)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:context:arguments:"), format.Ptr(), raw.NSAttributedStringFormattingOptions(options), locale.Ptr(), context_.ID(), arguments)
 	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}
 }
 

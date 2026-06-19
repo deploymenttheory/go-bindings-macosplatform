@@ -32,9 +32,9 @@ func ExceptionFromID(id objc.ID) *Exception {
 }
 
 // NewExceptionWithNameReasonUserInfo creates a new [Exception].
-func NewExceptionWithNameReasonUserInfo(aName *raw.NSString, aReason string, aUserInfo *raw.NSDictionary[objc.ID, objc.ID]) *Exception {
+func NewExceptionWithNameReasonUserInfo(aName *raw.NSString, aReason string, aUserInfo purego.IDer) *Exception {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSException")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:reason:userInfo:"), aName.Ptr(), foundation.NSStringStringWithUTF8String(aReason).Ptr(), aUserInfo.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:reason:userInfo:"), aName.Ptr(), foundation.NSStringStringWithUTF8String(aReason).Ptr(), aUserInfo.ID())
 	return &Exception{inner: raw.NSExceptionFromID(_id)}
 }
 

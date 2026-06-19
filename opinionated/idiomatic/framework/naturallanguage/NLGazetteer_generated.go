@@ -55,10 +55,10 @@ func NewGazetteerWithDataError(data *foundation.NSData) (*Gazetteer, error) {
 }
 
 // NewGazetteerWithDictionaryLanguageError creates a new [Gazetteer].
-func NewGazetteerWithDictionaryLanguageError(dictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], language *foundation.NSString) (*Gazetteer, error) {
+func NewGazetteerWithDictionaryLanguageError(dictionary purego.IDer, language *foundation.NSString) (*Gazetteer, error) {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NLGazetteer")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:language:error:"), dictionary.Ptr(), language.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:language:error:"), dictionary.ID(), language.Ptr(), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, purego.NSErrorToError(objc.ID(_nsErr))
 	}

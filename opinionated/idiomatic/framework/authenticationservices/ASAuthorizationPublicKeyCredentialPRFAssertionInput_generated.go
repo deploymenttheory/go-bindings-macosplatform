@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,9 +36,9 @@ func AuthorizationPublicKeyCredentialPRFAssertionInputFromID(id objc.ID) *Author
 }
 
 // NewAuthorizationPublicKeyCredentialPRFAssertionInputWithInputValuesPerCredentialInputValues creates a new [AuthorizationPublicKeyCredentialPRFAssertionInput].
-func NewAuthorizationPublicKeyCredentialPRFAssertionInputWithInputValuesPerCredentialInputValues(inputValues *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInputValues, perCredentialInputValues *foundation.NSDictionary[*foundation.NSData, *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInputValues]) *AuthorizationPublicKeyCredentialPRFAssertionInput {
+func NewAuthorizationPublicKeyCredentialPRFAssertionInputWithInputValuesPerCredentialInputValues(inputValues *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInputValues, perCredentialInputValues purego.IDer) *AuthorizationPublicKeyCredentialPRFAssertionInput {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationPublicKeyCredentialPRFAssertionInput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputValues:perCredentialInputValues:"), inputValues.Ptr(), perCredentialInputValues.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputValues:perCredentialInputValues:"), inputValues.Ptr(), perCredentialInputValues.ID())
 	return &AuthorizationPublicKeyCredentialPRFAssertionInput{inner: raw.ASAuthorizationPublicKeyCredentialPRFAssertionInputFromID(_id)}
 }
 

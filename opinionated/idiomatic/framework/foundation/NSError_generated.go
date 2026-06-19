@@ -31,9 +31,9 @@ func ErrorFromID(id objc.ID) *Error {
 }
 
 // NewErrorWithDomainCodeUserInfo creates a new [Error].
-func NewErrorWithDomainCodeUserInfo(domain *raw.NSString, code int, dict *raw.NSDictionary[*raw.NSString, objc.ID]) *Error {
+func NewErrorWithDomainCodeUserInfo(domain *raw.NSString, code int, dict purego.IDer) *Error {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSError")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDomain:code:userInfo:"), domain.Ptr(), code, dict.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDomain:code:userInfo:"), domain.Ptr(), code, dict.ID())
 	return &Error{inner: raw.NSErrorFromID(_id)}
 }
 

@@ -159,6 +159,14 @@ func EmitFrameworkWrappers(
 	); err != nil {
 		return fmt.Errorf("emit enums: %w", err)
 	}
+	// Re-export the framework's own value-type structs (CGSize, CGRect, …) as
+	// idiomatic Go type aliases so callers never need the raw import to name them.
+	// Runs after emitEnums so takenNames is complete.
+	if err := emitStructTypeAliases(
+		outDir, pkgName, rawPkgAlias, rawPkgPath, fw, takenNames,
+	); err != nil {
+		return fmt.Errorf("emit struct type aliases: %w", err)
+	}
 	return emitDocGo(outDir, pkgName, fw)
 }
 
@@ -1132,6 +1140,23 @@ func buildParamConstructor(
 					continue
 				}
 			}
+			// A generic NSDictionary/NSMutableDictionary param otherwise forces the
+			// caller to name the raw key/value element types to build the typed
+			// generic. Since the init is dispatched through objc.Send on the raw
+			// objc.ID (not a typed raw call), accept any idiomatic wrapper as a
+			// purego.IDer and pass its .ID() — mirroring the array-variadic IDer
+			// ergonomic. Callers build the dictionary with the idiomatic
+			// foundation MutableDictionary (SetString/Set) and never touch raw.
+			if isGenericDictionaryParam(goType) {
+				extraImports["purego"] = pureobjcImportPath
+				params = append(params, ctorParam{
+					goName:   pName,
+					goType:   "purego.IDer",
+					rawExpr:  pName + ".ID()",
+					isObject: false,
+				})
+				continue
+			}
 			sigType, rawExpr := localizeParam(pName, goType, fw, rawPkgAlias)
 			params = append(params, ctorParam{
 				goName:   pName,
@@ -1226,6 +1251,25 @@ func ctorParamSendExpr(p ctorParam) string {
 		return p.rawExpr + ".Ptr()"
 	}
 	return p.rawExpr
+}
+
+// isGenericDictionaryParam reports whether a resolved Go type is a pointer to a
+// generic NSDictionary/NSMutableDictionary (e.g.
+// *foundation.NSDictionary[*foundation.NSString, *raw.VZSharedDirectory]).
+// Such params are surfaced as purego.IDer so callers never name the raw element
+// types — see the dictionary branch in buildParamConstructor.
+func isGenericDictionaryParam(goType string) bool {
+	if !strings.HasPrefix(goType, "*") || !strings.Contains(goType, "[") {
+		return false
+	}
+	base := goType[1:]
+	if i := strings.IndexByte(base, '['); i >= 0 {
+		base = base[:i]
+	}
+	if i := strings.LastIndexByte(base, '.'); i >= 0 {
+		base = base[i+1:]
+	}
+	return base == "NSDictionary" || base == "NSMutableDictionary"
 }
 
 // isObjectPointerType reports whether a resolved Go type is a single pointer to

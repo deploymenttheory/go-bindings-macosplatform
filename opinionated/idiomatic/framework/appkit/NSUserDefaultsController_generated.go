@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,9 +42,9 @@ func NewUserDefaultsController() *UserDefaultsController {
 // Returns an initialized NSUserDefaultsController object using the NSUserDefaults instance specified in defaults and the initial default values contained in the initialValues dictionary.
 //
 // NewUserDefaultsControllerWithDefaultsInitialValues creates a new [UserDefaultsController].
-func NewUserDefaultsControllerWithDefaultsInitialValues(defaults *foundation.NSUserDefaults, initialValues *foundation.NSDictionary[*foundation.NSString, objc.ID]) *UserDefaultsController {
+func NewUserDefaultsControllerWithDefaultsInitialValues(defaults *foundation.NSUserDefaults, initialValues purego.IDer) *UserDefaultsController {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUserDefaultsController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDefaults:initialValues:"), defaults.Ptr(), initialValues.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDefaults:initialValues:"), defaults.Ptr(), initialValues.ID())
 	return &UserDefaultsController{inner: raw.NSUserDefaultsControllerFromID(_id)}
 }
 

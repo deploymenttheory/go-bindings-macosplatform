@@ -36,9 +36,9 @@ func AdvertiserAssistantFromID(id objc.ID) *AdvertiserAssistant {
 // Initializes an advertiser assistant object.
 //
 // NewAdvertiserAssistantWithServiceTypeDiscoveryInfoSession creates a new [AdvertiserAssistant].
-func NewAdvertiserAssistantWithServiceTypeDiscoveryInfoSession(serviceType string, info *foundation.NSDictionary[*foundation.NSString, *foundation.NSString], session *raw.MCSession) *AdvertiserAssistant {
+func NewAdvertiserAssistantWithServiceTypeDiscoveryInfoSession(serviceType string, info purego.IDer, session *raw.MCSession) *AdvertiserAssistant {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MCAdvertiserAssistant")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceType:discoveryInfo:session:"), foundation.NSStringStringWithUTF8String(serviceType).Ptr(), info.Ptr(), session.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceType:discoveryInfo:session:"), foundation.NSStringStringWithUTF8String(serviceType).Ptr(), info.ID(), session.Ptr())
 	return &AdvertiserAssistant{inner: raw.MCAdvertiserAssistantFromID(_id)}
 }
 

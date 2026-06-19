@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,9 +32,9 @@ func IncrementalStoreNodeFromID(id objc.ID) *IncrementalStoreNode {
 }
 
 // NewIncrementalStoreNodeWithObjectIDWithValuesVersion creates a new [IncrementalStoreNode].
-func NewIncrementalStoreNodeWithObjectIDWithValuesVersion(objectID *raw.NSManagedObjectID, values *foundation.NSDictionary[*foundation.NSString, objc.ID], version uint64) *IncrementalStoreNode {
+func NewIncrementalStoreNodeWithObjectIDWithValuesVersion(objectID *raw.NSManagedObjectID, values purego.IDer, version uint64) *IncrementalStoreNode {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSIncrementalStoreNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjectID:withValues:version:"), objectID.Ptr(), values.Ptr(), version)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObjectID:withValues:version:"), objectID.Ptr(), values.ID(), version)
 	return &IncrementalStoreNode{inner: raw.NSIncrementalStoreNodeFromID(_id)}
 }
 

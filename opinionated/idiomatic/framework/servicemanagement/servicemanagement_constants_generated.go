@@ -24,3 +24,8 @@ func KSMDomainSystemLaunchd() objc.ID { return purego.CFConstant(raw.KSMDomainSy
 
 // KSMDomainUserLaunchd returns the value of the CoreFoundation reference constant kSMDomainUserLaunchd as an objc.ID.
 func KSMDomainUserLaunchd() objc.ID { return purego.CFConstant(raw.KSMDomainUserLaunchd()) }
+
+// SMAppServiceErrorDomain returns the string constant SMAppServiceErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
+func SMAppServiceErrorDomain() objc.ID {
+	return purego.CFConstant(raw.SMAppServiceErrorDomain())
+}

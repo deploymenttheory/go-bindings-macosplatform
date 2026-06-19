@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,9 +32,9 @@ func AtomicStoreFromID(id objc.ID) *AtomicStore {
 }
 
 // NewAtomicStoreWithPersistentStoreCoordinatorConfigurationNameURLOptions creates a new [AtomicStore].
-func NewAtomicStoreWithPersistentStoreCoordinatorConfigurationNameURLOptions(coordinator *raw.NSPersistentStoreCoordinator, configurationName string, url string, options *foundation.NSDictionary[objc.ID, objc.ID]) *AtomicStore {
+func NewAtomicStoreWithPersistentStoreCoordinatorConfigurationNameURLOptions(coordinator *raw.NSPersistentStoreCoordinator, configurationName string, url string, options purego.IDer) *AtomicStore {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAtomicStore")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersistentStoreCoordinator:configurationName:URL:options:"), coordinator.Ptr(), foundation.NSStringStringWithUTF8String(configurationName).Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), options.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersistentStoreCoordinator:configurationName:URL:options:"), coordinator.Ptr(), foundation.NSStringStringWithUTF8String(configurationName).Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), options.ID())
 	return &AtomicStore{inner: raw.NSAtomicStoreFromID(_id)}
 }
 

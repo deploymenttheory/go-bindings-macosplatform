@@ -32,9 +32,9 @@ func ConstraintConflictFromID(id objc.ID) *ConstraintConflict {
 }
 
 // NewConstraintConflictWithConstraintDatabaseObjectDatabaseSnapshotConflictingObjectsConflictingSnapshots creates a new [ConstraintConflict].
-func NewConstraintConflictWithConstraintDatabaseObjectDatabaseSnapshotConflictingObjectsConflictingSnapshots(contraint *foundation.NSArray[*foundation.NSString], databaseObject *raw.NSManagedObject, databaseSnapshot *foundation.NSDictionary[objc.ID, objc.ID], conflictingObjects *foundation.NSArray[*raw.NSManagedObject], conflictingSnapshots *foundation.NSArray[objc.ID]) *ConstraintConflict {
+func NewConstraintConflictWithConstraintDatabaseObjectDatabaseSnapshotConflictingObjectsConflictingSnapshots(contraint *foundation.NSArray[*foundation.NSString], databaseObject *raw.NSManagedObject, databaseSnapshot purego.IDer, conflictingObjects *foundation.NSArray[*raw.NSManagedObject], conflictingSnapshots *foundation.NSArray[objc.ID]) *ConstraintConflict {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSConstraintConflict")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConstraint:databaseObject:databaseSnapshot:conflictingObjects:conflictingSnapshots:"), contraint.Ptr(), databaseObject.Ptr(), databaseSnapshot.Ptr(), conflictingObjects.Ptr(), conflictingSnapshots.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConstraint:databaseObject:databaseSnapshot:conflictingObjects:conflictingSnapshots:"), contraint.Ptr(), databaseObject.Ptr(), databaseSnapshot.ID(), conflictingObjects.Ptr(), conflictingSnapshots.Ptr())
 	return &ConstraintConflict{inner: raw.NSConstraintConflictFromID(_id)}
 }
 

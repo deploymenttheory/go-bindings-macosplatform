@@ -7,6 +7,7 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -34,9 +35,9 @@ func CorrelationQueryFromID(id objc.ID) *CorrelationQuery {
 // @method    initWithTypes:predicate:samplePredicate:completion: @abstract  The designated initializer for HKCorrelationQuery. @param     correlationType     The type of correlation that is being queried for @param     predicate           The predicate for scoping which HKCorrelations are returned @param     samplePredicates    A dictionary mapping HKSampleTypes to NSPredicates. If no predicate for a particular type is provided, it is assumed to be a nil predicate and objects of that type will not be filtered.
 //
 // NewCorrelationQueryWithTypePredicateSamplePredicatesCompletion creates a new [CorrelationQuery].
-func NewCorrelationQueryWithTypePredicateSamplePredicatesCompletion(correlationType *raw.HKCorrelationType, predicate *foundation.NSPredicate, samplePredicates *foundation.NSDictionary[*raw.HKSampleType, *foundation.NSPredicate], completion func(*raw.HKCorrelationQuery, *foundation.NSArray[*raw.HKCorrelation], unsafe.Pointer)) *CorrelationQuery {
+func NewCorrelationQueryWithTypePredicateSamplePredicatesCompletion(correlationType *raw.HKCorrelationType, predicate *foundation.NSPredicate, samplePredicates purego.IDer, completion func(*raw.HKCorrelationQuery, *foundation.NSArray[*raw.HKCorrelation], unsafe.Pointer)) *CorrelationQuery {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKCorrelationQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:predicate:samplePredicates:completion:"), correlationType.Ptr(), predicate.Ptr(), samplePredicates.Ptr(), completion)
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:predicate:samplePredicates:completion:"), correlationType.Ptr(), predicate.Ptr(), samplePredicates.ID(), completion)
 	return &CorrelationQuery{inner: raw.HKCorrelationQueryFromID(_id)}
 }
 

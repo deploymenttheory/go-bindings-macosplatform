@@ -7,6 +7,7 @@ package foundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -33,9 +34,9 @@ func HTTPURLResponseFromID(id objc.ID) *HTTPURLResponse {
 // @method	initWithURL:statusCode:HTTPVersion:headerFields: @abstract initializer for NSHTTPURLResponse objects. @param 	url the URL from which the response was generated. @param	statusCode an HTTP status code. @param	HTTPVersion The version of the HTTP response as represented by the server.  This is typically represented as "HTTP/1.1". @param 	headerFields A dictionary representing the header keys and values of the server response. @result 	the instance of the object, or NULL if an error occurred during initialization. @discussion This API was introduced in Mac OS X 10.7.2 and iOS 5.0 and is not available prior to those releases.
 //
 // NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields creates a new [HTTPURLResponse].
-func NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields(url string, statusCode int, hTTPVersion string, headerFields *raw.NSDictionary[*raw.NSString, *raw.NSString]) *HTTPURLResponse {
+func NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields(url string, statusCode int, hTTPVersion string, headerFields purego.IDer) *HTTPURLResponse {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSHTTPURLResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:statusCode:HTTPVersion:headerFields:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), statusCode, foundation.NSStringStringWithUTF8String(hTTPVersion).Ptr(), headerFields.Ptr())
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:statusCode:HTTPVersion:headerFields:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), statusCode, foundation.NSStringStringWithUTF8String(hTTPVersion).Ptr(), headerFields.ID())
 	return &HTTPURLResponse{inner: raw.NSHTTPURLResponseFromID(_id)}
 }
 

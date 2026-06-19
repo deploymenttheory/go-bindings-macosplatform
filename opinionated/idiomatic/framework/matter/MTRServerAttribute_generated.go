@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -33,9 +34,9 @@ func MTRServerAttributeFromID(id objc.ID) *MTRServerAttribute {
 // Initialize as a readonly attribute.  The value is a data-value as documented in MTRBaseDevice.h. Will fail if the attribute ID is not valid per the Matter specification or the attribute value is not a valid data-value. requiredPrivilege is the privilege required to read the attribute. This initializer may fail if the provided attributeID is a global attribute and the provided requiredPrivilege value is not correct for that attribute ID.
 //
 // NewMTRServerAttributeReadonlyAttributeWithIDInitialValueRequiredPrivilege creates a new [MTRServerAttribute].
-func NewMTRServerAttributeReadonlyAttributeWithIDInitialValueRequiredPrivilege(attributeID *foundation.NSNumber, value *foundation.NSDictionary[*foundation.NSString, objc.ID], requiredPrivilege MTRAccessControlEntryPrivilege) *MTRServerAttribute {
+func NewMTRServerAttributeReadonlyAttributeWithIDInitialValueRequiredPrivilege(attributeID *foundation.NSNumber, value purego.IDer, requiredPrivilege MTRAccessControlEntryPrivilege) *MTRServerAttribute {
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRServerAttribute")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initReadonlyAttributeWithID:initialValue:requiredPrivilege:"), attributeID.Ptr(), value.Ptr(), raw.MTRAccessControlEntryPrivilege(requiredPrivilege))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initReadonlyAttributeWithID:initialValue:requiredPrivilege:"), attributeID.Ptr(), value.ID(), raw.MTRAccessControlEntryPrivilege(requiredPrivilege))
 	return &MTRServerAttribute{inner: raw.MTRServerAttributeFromID(_id)}
 }
 
