@@ -80,6 +80,30 @@ func (e SWAttributionViewHorizontalAlignment) String() string {
 	}
 }
 
+type SWHighlightCenterErrorCode int64
+
+const (
+	SWHighlightCenterErrorCodeNoError       SWHighlightCenterErrorCode = 0
+	SWHighlightCenterErrorCodeInternalError SWHighlightCenterErrorCode = 1
+	SWHighlightCenterErrorCodeInvalidURL    SWHighlightCenterErrorCode = 2
+	SWHighlightCenterErrorCodeAccessDenied  SWHighlightCenterErrorCode = 3
+)
+
+func (e SWHighlightCenterErrorCode) String() string {
+	switch e {
+	case SWHighlightCenterErrorCodeNoError:
+		return "SWHighlightCenterErrorCodeNoError"
+	case SWHighlightCenterErrorCodeInternalError:
+		return "SWHighlightCenterErrorCodeInternalError"
+	case SWHighlightCenterErrorCodeInvalidURL:
+		return "SWHighlightCenterErrorCodeInvalidURL"
+	case SWHighlightCenterErrorCodeAccessDenied:
+		return "SWHighlightCenterErrorCodeAccessDenied"
+	default:
+		return fmt.Sprintf("SWHighlightCenterErrorCode(%d)", int64(e))
+	}
+}
+
 type SWHighlightChangeEventTrigger int64
 
 const (

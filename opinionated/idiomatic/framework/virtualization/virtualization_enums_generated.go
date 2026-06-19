@@ -99,6 +99,94 @@ func (e VZEFIVariableStoreInitializationOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
+// Errors you might encounter when configuring or using a virtual machine.
+type VZErrorCode int64
+
+const (
+	VZErrorInternal                             VZErrorCode = 1
+	VZErrorInvalidVirtualMachineConfiguration   VZErrorCode = 2
+	VZErrorInvalidVirtualMachineState           VZErrorCode = 3
+	VZErrorInvalidVirtualMachineStateTransition VZErrorCode = 4
+	VZErrorInvalidDiskImage                     VZErrorCode = 5
+	VZErrorVirtualMachineLimitExceeded          VZErrorCode = 6
+	VZErrorNetworkError                         VZErrorCode = 7
+	VZErrorOutOfDiskSpace                       VZErrorCode = 8
+	VZErrorOperationCancelled                   VZErrorCode = 9
+	VZErrorNotSupported                         VZErrorCode = 10
+	VZErrorSave                                 VZErrorCode = 11
+	VZErrorRestore                              VZErrorCode = 12
+	VZErrorRestoreImageCatalogLoadFailed        VZErrorCode = 10001
+	VZErrorInvalidRestoreImageCatalog           VZErrorCode = 10002
+	VZErrorNoSupportedRestoreImagesInCatalog    VZErrorCode = 10003
+	VZErrorRestoreImageLoadFailed               VZErrorCode = 10004
+	VZErrorInvalidRestoreImage                  VZErrorCode = 10005
+	VZErrorInstallationRequiresUpdate           VZErrorCode = 10006
+	VZErrorInstallationFailed                   VZErrorCode = 10007
+	VZErrorNetworkBlockDeviceNegotiationFailed  VZErrorCode = 20001
+	VZErrorNetworkBlockDeviceDisconnected       VZErrorCode = 20002
+	VZErrorUSBControllerNotFound                VZErrorCode = 30001
+	VZErrorDeviceAlreadyAttached                VZErrorCode = 30002
+	VZErrorDeviceInitializationFailure          VZErrorCode = 30003
+	VZErrorDeviceNotFound                       VZErrorCode = 30004
+)
+
+func (e VZErrorCode) String() string {
+	switch e {
+	case VZErrorInternal:
+		return "VZErrorInternal"
+	case VZErrorInvalidVirtualMachineConfiguration:
+		return "VZErrorInvalidVirtualMachineConfiguration"
+	case VZErrorInvalidVirtualMachineState:
+		return "VZErrorInvalidVirtualMachineState"
+	case VZErrorInvalidVirtualMachineStateTransition:
+		return "VZErrorInvalidVirtualMachineStateTransition"
+	case VZErrorInvalidDiskImage:
+		return "VZErrorInvalidDiskImage"
+	case VZErrorVirtualMachineLimitExceeded:
+		return "VZErrorVirtualMachineLimitExceeded"
+	case VZErrorNetworkError:
+		return "VZErrorNetworkError"
+	case VZErrorOutOfDiskSpace:
+		return "VZErrorOutOfDiskSpace"
+	case VZErrorOperationCancelled:
+		return "VZErrorOperationCancelled"
+	case VZErrorNotSupported:
+		return "VZErrorNotSupported"
+	case VZErrorSave:
+		return "VZErrorSave"
+	case VZErrorRestore:
+		return "VZErrorRestore"
+	case VZErrorRestoreImageCatalogLoadFailed:
+		return "VZErrorRestoreImageCatalogLoadFailed"
+	case VZErrorInvalidRestoreImageCatalog:
+		return "VZErrorInvalidRestoreImageCatalog"
+	case VZErrorNoSupportedRestoreImagesInCatalog:
+		return "VZErrorNoSupportedRestoreImagesInCatalog"
+	case VZErrorRestoreImageLoadFailed:
+		return "VZErrorRestoreImageLoadFailed"
+	case VZErrorInvalidRestoreImage:
+		return "VZErrorInvalidRestoreImage"
+	case VZErrorInstallationRequiresUpdate:
+		return "VZErrorInstallationRequiresUpdate"
+	case VZErrorInstallationFailed:
+		return "VZErrorInstallationFailed"
+	case VZErrorNetworkBlockDeviceNegotiationFailed:
+		return "VZErrorNetworkBlockDeviceNegotiationFailed"
+	case VZErrorNetworkBlockDeviceDisconnected:
+		return "VZErrorNetworkBlockDeviceDisconnected"
+	case VZErrorUSBControllerNotFound:
+		return "VZErrorUSBControllerNotFound"
+	case VZErrorDeviceAlreadyAttached:
+		return "VZErrorDeviceAlreadyAttached"
+	case VZErrorDeviceInitializationFailure:
+		return "VZErrorDeviceInitializationFailure"
+	case VZErrorDeviceNotFound:
+		return "VZErrorDeviceNotFound"
+	default:
+		return fmt.Sprintf("VZErrorCode(%d)", int64(e))
+	}
+}
+
 // Constants that describe the availability and installation status of Rosetta.
 type VZLinuxRosettaAvailability int64
 

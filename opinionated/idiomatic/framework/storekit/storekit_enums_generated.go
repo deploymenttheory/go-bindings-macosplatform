@@ -96,6 +96,75 @@ func (e SKDownloadState) String() string {
 	}
 }
 
+type SKErrorCode int64
+
+const (
+	SKErrorUnknown                                   SKErrorCode = 0
+	SKErrorClientInvalid                             SKErrorCode = 1
+	SKErrorPaymentCancelled                          SKErrorCode = 2
+	SKErrorPaymentInvalid                            SKErrorCode = 3
+	SKErrorPaymentNotAllowed                         SKErrorCode = 4
+	SKErrorStoreProductNotAvailable                  SKErrorCode = 5
+	SKErrorCloudServicePermissionDenied              SKErrorCode = 6
+	SKErrorCloudServiceNetworkConnectionFailed       SKErrorCode = 7
+	SKErrorCloudServiceRevoked                       SKErrorCode = 8
+	SKErrorPrivacyAcknowledgementRequired            SKErrorCode = 9
+	SKErrorUnauthorizedRequestData                   SKErrorCode = 10
+	SKErrorInvalidOfferIdentifier                    SKErrorCode = 11
+	SKErrorInvalidSignature                          SKErrorCode = 12
+	SKErrorMissingOfferParams                        SKErrorCode = 13
+	SKErrorInvalidOfferPrice                         SKErrorCode = 14
+	SKErrorOverlayCancelled                          SKErrorCode = 15
+	SKErrorIneligibleForOffer                        SKErrorCode = 18
+	SKErrorUnsupportedPlatform                       SKErrorCode = 19
+	SKErrorPaymentMethodBindingConfigurationRequired SKErrorCode = 21
+)
+
+func (e SKErrorCode) String() string {
+	switch e {
+	case SKErrorUnknown:
+		return "SKErrorUnknown"
+	case SKErrorClientInvalid:
+		return "SKErrorClientInvalid"
+	case SKErrorPaymentCancelled:
+		return "SKErrorPaymentCancelled"
+	case SKErrorPaymentInvalid:
+		return "SKErrorPaymentInvalid"
+	case SKErrorPaymentNotAllowed:
+		return "SKErrorPaymentNotAllowed"
+	case SKErrorStoreProductNotAvailable:
+		return "SKErrorStoreProductNotAvailable"
+	case SKErrorCloudServicePermissionDenied:
+		return "SKErrorCloudServicePermissionDenied"
+	case SKErrorCloudServiceNetworkConnectionFailed:
+		return "SKErrorCloudServiceNetworkConnectionFailed"
+	case SKErrorCloudServiceRevoked:
+		return "SKErrorCloudServiceRevoked"
+	case SKErrorPrivacyAcknowledgementRequired:
+		return "SKErrorPrivacyAcknowledgementRequired"
+	case SKErrorUnauthorizedRequestData:
+		return "SKErrorUnauthorizedRequestData"
+	case SKErrorInvalidOfferIdentifier:
+		return "SKErrorInvalidOfferIdentifier"
+	case SKErrorInvalidSignature:
+		return "SKErrorInvalidSignature"
+	case SKErrorMissingOfferParams:
+		return "SKErrorMissingOfferParams"
+	case SKErrorInvalidOfferPrice:
+		return "SKErrorInvalidOfferPrice"
+	case SKErrorOverlayCancelled:
+		return "SKErrorOverlayCancelled"
+	case SKErrorIneligibleForOffer:
+		return "SKErrorIneligibleForOffer"
+	case SKErrorUnsupportedPlatform:
+		return "SKErrorUnsupportedPlatform"
+	case SKErrorPaymentMethodBindingConfigurationRequired:
+		return "SKErrorPaymentMethodBindingConfigurationRequired"
+	default:
+		return fmt.Sprintf("SKErrorCode(%d)", int64(e))
+	}
+}
+
 // Deprecated: Use Product.SubscriptionOffer.PaymentMode.
 type SKProductDiscountPaymentMode uint64
 

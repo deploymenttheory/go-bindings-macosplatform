@@ -1925,6 +1925,30 @@ func (e NSInsertionPosition) String() string {
 	}
 }
 
+type NSItemProviderErrorCode int64
+
+const (
+	NSItemProviderUnknownError              NSItemProviderErrorCode = -1
+	NSItemProviderItemUnavailableError      NSItemProviderErrorCode = -1000
+	NSItemProviderUnexpectedValueClassError NSItemProviderErrorCode = -1100
+	NSItemProviderUnavailableCoercionError  NSItemProviderErrorCode = -1200
+)
+
+func (e NSItemProviderErrorCode) String() string {
+	switch e {
+	case NSItemProviderUnknownError:
+		return "NSItemProviderUnknownError"
+	case NSItemProviderItemUnavailableError:
+		return "NSItemProviderItemUnavailableError"
+	case NSItemProviderUnexpectedValueClassError:
+		return "NSItemProviderUnexpectedValueClassError"
+	case NSItemProviderUnavailableCoercionError:
+		return "NSItemProviderUnavailableCoercionError"
+	default:
+		return fmt.Sprintf("NSItemProviderErrorCode(%d)", int64(e))
+	}
+}
+
 // Bitmask — values may be combined with |.
 type NSItemProviderFileOptions int64
 

@@ -33,6 +33,42 @@ func (e VSAutoSignInAuthorization) String() string {
 	}
 }
 
+type VSErrorCode int64
+
+const (
+	VSErrorCodeAccessNotGranted              VSErrorCode = 0
+	VSErrorCodeUnsupportedProvider           VSErrorCode = 1
+	VSErrorCodeUserCancelled                 VSErrorCode = 2
+	VSErrorCodeServiceTemporarilyUnavailable VSErrorCode = 3
+	VSErrorCodeProviderRejected              VSErrorCode = 4
+	VSErrorCodeInvalidVerificationToken      VSErrorCode = 5
+	VSErrorCodeRejected                      VSErrorCode = 6
+	VSErrorCodeUnsupported                   VSErrorCode = 7
+)
+
+func (e VSErrorCode) String() string {
+	switch e {
+	case VSErrorCodeAccessNotGranted:
+		return "VSErrorCodeAccessNotGranted"
+	case VSErrorCodeUnsupportedProvider:
+		return "VSErrorCodeUnsupportedProvider"
+	case VSErrorCodeUserCancelled:
+		return "VSErrorCodeUserCancelled"
+	case VSErrorCodeServiceTemporarilyUnavailable:
+		return "VSErrorCodeServiceTemporarilyUnavailable"
+	case VSErrorCodeProviderRejected:
+		return "VSErrorCodeProviderRejected"
+	case VSErrorCodeInvalidVerificationToken:
+		return "VSErrorCodeInvalidVerificationToken"
+	case VSErrorCodeRejected:
+		return "VSErrorCodeRejected"
+	case VSErrorCodeUnsupported:
+		return "VSErrorCodeUnsupported"
+	default:
+		return fmt.Sprintf("VSErrorCode(%d)", int64(e))
+	}
+}
+
 type VSOriginatingDeviceCategory int64
 
 const (

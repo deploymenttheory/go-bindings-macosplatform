@@ -46,3 +46,27 @@ func (e SACrashDetectionEventResponse) String() string {
 		return fmt.Sprintf("SACrashDetectionEventResponse(%d)", int64(e))
 	}
 }
+
+type SAErrorCode int64
+
+const (
+	SAErrorNotAuthorized   SAErrorCode = 1
+	SAErrorNotAllowed      SAErrorCode = 2
+	SAErrorInvalidArgument SAErrorCode = 3
+	SAErrorOperationFailed SAErrorCode = 4
+)
+
+func (e SAErrorCode) String() string {
+	switch e {
+	case SAErrorNotAuthorized:
+		return "SAErrorNotAuthorized"
+	case SAErrorNotAllowed:
+		return "SAErrorNotAllowed"
+	case SAErrorInvalidArgument:
+		return "SAErrorInvalidArgument"
+	case SAErrorOperationFailed:
+		return "SAErrorOperationFailed"
+	default:
+		return fmt.Sprintf("SAErrorCode(%d)", int64(e))
+	}
+}

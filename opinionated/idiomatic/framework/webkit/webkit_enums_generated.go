@@ -75,6 +75,69 @@ func (e WKCookiePolicy) String() string {
 	}
 }
 
+type WKErrorCode int64
+
+const (
+	WKErrorUnknown                             WKErrorCode = 1
+	WKErrorWebContentProcessTerminated         WKErrorCode = 2
+	WKErrorWebViewInvalidated                  WKErrorCode = 3
+	WKErrorJavaScriptExceptionOccurred         WKErrorCode = 4
+	WKErrorJavaScriptResultTypeIsUnsupported   WKErrorCode = 5
+	WKErrorContentRuleListStoreCompileFailed   WKErrorCode = 6
+	WKErrorContentRuleListStoreLookUpFailed    WKErrorCode = 7
+	WKErrorContentRuleListStoreRemoveFailed    WKErrorCode = 8
+	WKErrorContentRuleListStoreVersionMismatch WKErrorCode = 9
+	WKErrorAttributedStringContentFailedToLoad WKErrorCode = 10
+	WKErrorAttributedStringContentLoadTimedOut WKErrorCode = 11
+	WKErrorJavaScriptInvalidFrameTarget        WKErrorCode = 12
+	WKErrorNavigationAppBoundDomain            WKErrorCode = 13
+	WKErrorJavaScriptAppBoundDomain            WKErrorCode = 14
+	WKErrorDuplicateCredential                 WKErrorCode = 15
+	WKErrorMalformedCredential                 WKErrorCode = 16
+	WKErrorCredentialNotFound                  WKErrorCode = 17
+)
+
+func (e WKErrorCode) String() string {
+	switch e {
+	case WKErrorUnknown:
+		return "WKErrorUnknown"
+	case WKErrorWebContentProcessTerminated:
+		return "WKErrorWebContentProcessTerminated"
+	case WKErrorWebViewInvalidated:
+		return "WKErrorWebViewInvalidated"
+	case WKErrorJavaScriptExceptionOccurred:
+		return "WKErrorJavaScriptExceptionOccurred"
+	case WKErrorJavaScriptResultTypeIsUnsupported:
+		return "WKErrorJavaScriptResultTypeIsUnsupported"
+	case WKErrorContentRuleListStoreCompileFailed:
+		return "WKErrorContentRuleListStoreCompileFailed"
+	case WKErrorContentRuleListStoreLookUpFailed:
+		return "WKErrorContentRuleListStoreLookUpFailed"
+	case WKErrorContentRuleListStoreRemoveFailed:
+		return "WKErrorContentRuleListStoreRemoveFailed"
+	case WKErrorContentRuleListStoreVersionMismatch:
+		return "WKErrorContentRuleListStoreVersionMismatch"
+	case WKErrorAttributedStringContentFailedToLoad:
+		return "WKErrorAttributedStringContentFailedToLoad"
+	case WKErrorAttributedStringContentLoadTimedOut:
+		return "WKErrorAttributedStringContentLoadTimedOut"
+	case WKErrorJavaScriptInvalidFrameTarget:
+		return "WKErrorJavaScriptInvalidFrameTarget"
+	case WKErrorNavigationAppBoundDomain:
+		return "WKErrorNavigationAppBoundDomain"
+	case WKErrorJavaScriptAppBoundDomain:
+		return "WKErrorJavaScriptAppBoundDomain"
+	case WKErrorDuplicateCredential:
+		return "WKErrorDuplicateCredential"
+	case WKErrorMalformedCredential:
+		return "WKErrorMalformedCredential"
+	case WKErrorCredentialNotFound:
+		return "WKErrorCredentialNotFound"
+	default:
+		return fmt.Sprintf("WKErrorCode(%d)", int64(e))
+	}
+}
+
 type WKFullscreenState int64
 
 const (

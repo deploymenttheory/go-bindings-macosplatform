@@ -8,6 +8,34 @@ import (
 	"fmt"
 )
 
+// The enumerated error codes that the Sound Analysis framework produces.
+type SNErrorCode int64
+
+const (
+	SNErrorCodeUnknownError    SNErrorCode = 1
+	SNErrorCodeOperationFailed SNErrorCode = 2
+	SNErrorCodeInvalidFormat   SNErrorCode = 3
+	SNErrorCodeInvalidModel    SNErrorCode = 4
+	SNErrorCodeInvalidFile     SNErrorCode = 5
+)
+
+func (e SNErrorCode) String() string {
+	switch e {
+	case SNErrorCodeUnknownError:
+		return "SNErrorCodeUnknownError"
+	case SNErrorCodeOperationFailed:
+		return "SNErrorCodeOperationFailed"
+	case SNErrorCodeInvalidFormat:
+		return "SNErrorCodeInvalidFormat"
+	case SNErrorCodeInvalidModel:
+		return "SNErrorCodeInvalidModel"
+	case SNErrorCodeInvalidFile:
+		return "SNErrorCodeInvalidFile"
+	default:
+		return fmt.Sprintf("SNErrorCode(%d)", int64(e))
+	}
+}
+
 // Defines the types a time duration constraint uses.
 type SNTimeDurationConstraintType int64
 

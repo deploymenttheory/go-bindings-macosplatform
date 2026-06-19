@@ -67,6 +67,15 @@ func emitEnums(
 	// referenced set during the build passes (see localizeEnumType). emitEnums
 	// runs after those passes, so the set is complete here.
 	referenced := referencedEnums(fw)
+	// Also surface error-code enums (e.g. VZErrorCode) even when no signature
+	// references them: callers need their constants for errors.As / error-domain
+	// code comparison, but errors cross the boundary as Go error values rather
+	// than typed returns, so the referenced-only scan never picks them up.
+	for goType := range enumsByGoType {
+		if strings.HasSuffix(goType, "ErrorCode") {
+			referenced[goType] = true
+		}
+	}
 	if len(referenced) == 0 {
 		return nil
 	}

@@ -111,3 +111,87 @@ func (e BADownloadState) String() string {
 		return fmt.Sprintf("BADownloadState(%d)", int64(e))
 	}
 }
+
+type BAErrorCode int64
+
+const (
+	BAErrorCodeDownloadInvalid                            BAErrorCode = 0
+	BAErrorCodeCallFromExtensionNotAllowed                BAErrorCode = 50
+	BAErrorCodeCallFromInactiveProcessNotAllowed          BAErrorCode = 51
+	BAErrorCodeCallerConnectionNotAccepted                BAErrorCode = 55
+	BAErrorCodeCallerConnectionInvalid                    BAErrorCode = 56
+	BAErrorCodeDownloadAlreadyScheduled                   BAErrorCode = 100
+	BAErrorCodeDownloadNotScheduled                       BAErrorCode = 101
+	BAErrorCodeDownloadFailedToStart                      BAErrorCode = 102
+	BAErrorCodeDownloadAlreadyFailed                      BAErrorCode = 103
+	BAErrorCodeDownloadEssentialDownloadNotPermitted      BAErrorCode = 109
+	BAErrorCodeDownloadBackgroundActivityProhibited       BAErrorCode = 111
+	BAErrorCodeDownloadWouldExceedAllowance               BAErrorCode = 112
+	BAErrorCodeDownloadDoesNotExist                       BAErrorCode = 113
+	BAErrorCodeSessionDownloadDisallowedByDomain          BAErrorCode = 202
+	BAErrorCodeSessionDownloadDisallowedByAllowance       BAErrorCode = 203
+	BAErrorCodeSessionDownloadAllowanceExceeded           BAErrorCode = 204
+	BAErrorCodeSessionDownloadNotPermittedBeforeAppLaunch BAErrorCode = 206
+)
+
+func (e BAErrorCode) String() string {
+	switch e {
+	case BAErrorCodeDownloadInvalid:
+		return "BAErrorCodeDownloadInvalid"
+	case BAErrorCodeCallFromExtensionNotAllowed:
+		return "BAErrorCodeCallFromExtensionNotAllowed"
+	case BAErrorCodeCallFromInactiveProcessNotAllowed:
+		return "BAErrorCodeCallFromInactiveProcessNotAllowed"
+	case BAErrorCodeCallerConnectionNotAccepted:
+		return "BAErrorCodeCallerConnectionNotAccepted"
+	case BAErrorCodeCallerConnectionInvalid:
+		return "BAErrorCodeCallerConnectionInvalid"
+	case BAErrorCodeDownloadAlreadyScheduled:
+		return "BAErrorCodeDownloadAlreadyScheduled"
+	case BAErrorCodeDownloadNotScheduled:
+		return "BAErrorCodeDownloadNotScheduled"
+	case BAErrorCodeDownloadFailedToStart:
+		return "BAErrorCodeDownloadFailedToStart"
+	case BAErrorCodeDownloadAlreadyFailed:
+		return "BAErrorCodeDownloadAlreadyFailed"
+	case BAErrorCodeDownloadEssentialDownloadNotPermitted:
+		return "BAErrorCodeDownloadEssentialDownloadNotPermitted"
+	case BAErrorCodeDownloadBackgroundActivityProhibited:
+		return "BAErrorCodeDownloadBackgroundActivityProhibited"
+	case BAErrorCodeDownloadWouldExceedAllowance:
+		return "BAErrorCodeDownloadWouldExceedAllowance"
+	case BAErrorCodeDownloadDoesNotExist:
+		return "BAErrorCodeDownloadDoesNotExist"
+	case BAErrorCodeSessionDownloadDisallowedByDomain:
+		return "BAErrorCodeSessionDownloadDisallowedByDomain"
+	case BAErrorCodeSessionDownloadDisallowedByAllowance:
+		return "BAErrorCodeSessionDownloadDisallowedByAllowance"
+	case BAErrorCodeSessionDownloadAllowanceExceeded:
+		return "BAErrorCodeSessionDownloadAllowanceExceeded"
+	case BAErrorCodeSessionDownloadNotPermittedBeforeAppLaunch:
+		return "BAErrorCodeSessionDownloadNotPermittedBeforeAppLaunch"
+	default:
+		return fmt.Sprintf("BAErrorCode(%d)", int64(e))
+	}
+}
+
+// An error code for a managed asset pack.
+type BAManagedErrorCode int64
+
+const (
+	// An error code that indicates the system couldn’t find an asset pack with the given identifier.
+	BAManagedErrorCodeAssetPackNotFound BAManagedErrorCode = 0
+	// An error code that indicates the system couldn’t find a file at the specified path.
+	BAManagedErrorCodeFileNotFound BAManagedErrorCode = 1
+)
+
+func (e BAManagedErrorCode) String() string {
+	switch e {
+	case BAManagedErrorCodeAssetPackNotFound:
+		return "BAManagedErrorCodeAssetPackNotFound"
+	case BAManagedErrorCodeFileNotFound:
+		return "BAManagedErrorCodeFileNotFound"
+	default:
+		return fmt.Sprintf("BAManagedErrorCode(%d)", int64(e))
+	}
+}

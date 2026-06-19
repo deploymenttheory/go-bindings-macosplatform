@@ -77,6 +77,90 @@ func (e VNElementType) String() string {
 	}
 }
 
+type VNErrorCode int64
+
+const (
+	VNErrorTuriCoreErrorCode        VNErrorCode = -1
+	VNErrorOK                       VNErrorCode = 0
+	VNErrorRequestCancelled         VNErrorCode = 1
+	VNErrorInvalidFormat            VNErrorCode = 2
+	VNErrorOperationFailed          VNErrorCode = 3
+	VNErrorOutOfBoundsError         VNErrorCode = 4
+	VNErrorInvalidOption            VNErrorCode = 5
+	VNErrorIOError                  VNErrorCode = 6
+	VNErrorMissingOption            VNErrorCode = 7
+	VNErrorNotImplemented           VNErrorCode = 8
+	VNErrorInternalError            VNErrorCode = 9
+	VNErrorOutOfMemory              VNErrorCode = 10
+	VNErrorUnknownError             VNErrorCode = 11
+	VNErrorInvalidOperation         VNErrorCode = 12
+	VNErrorInvalidImage             VNErrorCode = 13
+	VNErrorInvalidArgument          VNErrorCode = 14
+	VNErrorInvalidModel             VNErrorCode = 15
+	VNErrorUnsupportedRevision      VNErrorCode = 16
+	VNErrorDataUnavailable          VNErrorCode = 17
+	VNErrorTimeStampNotFound        VNErrorCode = 18
+	VNErrorUnsupportedRequest       VNErrorCode = 19
+	VNErrorTimeout                  VNErrorCode = 20
+	VNErrorUnsupportedComputeStage  VNErrorCode = 21
+	VNErrorUnsupportedComputeDevice VNErrorCode = 22
+)
+
+func (e VNErrorCode) String() string {
+	switch e {
+	case VNErrorTuriCoreErrorCode:
+		return "VNErrorTuriCoreErrorCode"
+	case VNErrorOK:
+		return "VNErrorOK"
+	case VNErrorRequestCancelled:
+		return "VNErrorRequestCancelled"
+	case VNErrorInvalidFormat:
+		return "VNErrorInvalidFormat"
+	case VNErrorOperationFailed:
+		return "VNErrorOperationFailed"
+	case VNErrorOutOfBoundsError:
+		return "VNErrorOutOfBoundsError"
+	case VNErrorInvalidOption:
+		return "VNErrorInvalidOption"
+	case VNErrorIOError:
+		return "VNErrorIOError"
+	case VNErrorMissingOption:
+		return "VNErrorMissingOption"
+	case VNErrorNotImplemented:
+		return "VNErrorNotImplemented"
+	case VNErrorInternalError:
+		return "VNErrorInternalError"
+	case VNErrorOutOfMemory:
+		return "VNErrorOutOfMemory"
+	case VNErrorUnknownError:
+		return "VNErrorUnknownError"
+	case VNErrorInvalidOperation:
+		return "VNErrorInvalidOperation"
+	case VNErrorInvalidImage:
+		return "VNErrorInvalidImage"
+	case VNErrorInvalidArgument:
+		return "VNErrorInvalidArgument"
+	case VNErrorInvalidModel:
+		return "VNErrorInvalidModel"
+	case VNErrorUnsupportedRevision:
+		return "VNErrorUnsupportedRevision"
+	case VNErrorDataUnavailable:
+		return "VNErrorDataUnavailable"
+	case VNErrorTimeStampNotFound:
+		return "VNErrorTimeStampNotFound"
+	case VNErrorUnsupportedRequest:
+		return "VNErrorUnsupportedRequest"
+	case VNErrorTimeout:
+		return "VNErrorTimeout"
+	case VNErrorUnsupportedComputeStage:
+		return "VNErrorUnsupportedComputeStage"
+	case VNErrorUnsupportedComputeDevice:
+		return "VNErrorUnsupportedComputeDevice"
+	default:
+		return fmt.Sprintf("VNErrorCode(%d)", int64(e))
+	}
+}
+
 type VNGenerateOpticalFlowRequestComputationAccuracy uint64
 
 const (

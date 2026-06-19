@@ -55,6 +55,42 @@ func (e PKAddPaymentPassStyle) String() string {
 	}
 }
 
+// Error codes for problems that occur when you add a secure element passes.
+type PKAddSecureElementPassErrorCode int64
+
+const (
+	PKAddSecureElementPassGenericError PKAddSecureElementPassErrorCode = 0
+	// The system canceled adding the pass due to an unknown failure.
+	PKAddSecureElementPassUnknownError               PKAddSecureElementPassErrorCode = 0
+	PKAddSecureElementPassUserCanceledError          PKAddSecureElementPassErrorCode = 1
+	PKAddSecureElementPassUnavailableError           PKAddSecureElementPassErrorCode = 2
+	PKAddSecureElementPassInvalidConfigurationError  PKAddSecureElementPassErrorCode = 3
+	PKAddSecureElementPassDeviceNotSupportedError    PKAddSecureElementPassErrorCode = 4
+	PKAddSecureElementPassDeviceNotReadyError        PKAddSecureElementPassErrorCode = 5
+	PKAddSecureElementPassOSVersionNotSupportedError PKAddSecureElementPassErrorCode = 6
+)
+
+func (e PKAddSecureElementPassErrorCode) String() string {
+	switch e {
+	case PKAddSecureElementPassGenericError:
+		return "PKAddSecureElementPassGenericError"
+	case PKAddSecureElementPassUserCanceledError:
+		return "PKAddSecureElementPassUserCanceledError"
+	case PKAddSecureElementPassUnavailableError:
+		return "PKAddSecureElementPassUnavailableError"
+	case PKAddSecureElementPassInvalidConfigurationError:
+		return "PKAddSecureElementPassInvalidConfigurationError"
+	case PKAddSecureElementPassDeviceNotSupportedError:
+		return "PKAddSecureElementPassDeviceNotSupportedError"
+	case PKAddSecureElementPassDeviceNotReadyError:
+		return "PKAddSecureElementPassDeviceNotReadyError"
+	case PKAddSecureElementPassOSVersionNotSupportedError:
+		return "PKAddSecureElementPassOSVersionNotSupportedError"
+	default:
+		return fmt.Sprintf("PKAddSecureElementPassErrorCode(%d)", int64(e))
+	}
+}
+
 // The kind of add action that the system performs with a pass.
 type PKAddShareablePassConfigurationPrimaryAction uint64
 
@@ -197,6 +233,28 @@ func (e PKBarcodeEventConfigurationDataType) String() string {
 	}
 }
 
+// Values that describe errors that can occur while processing the disbursement.
+type PKDisbursementErrorCode int64
+
+const (
+	PKDisbursementUnknownError                 PKDisbursementErrorCode = -1
+	PKDisbursementUnsupportedCardError         PKDisbursementErrorCode = 1
+	PKDisbursementRecipientContactInvalidError PKDisbursementErrorCode = 2
+)
+
+func (e PKDisbursementErrorCode) String() string {
+	switch e {
+	case PKDisbursementUnknownError:
+		return "PKDisbursementUnknownError"
+	case PKDisbursementUnsupportedCardError:
+		return "PKDisbursementUnsupportedCardError"
+	case PKDisbursementRecipientContactInvalidError:
+		return "PKDisbursementRecipientContactInvalidError"
+	default:
+		return fmt.Sprintf("PKDisbursementErrorCode(%d)", int64(e))
+	}
+}
+
 // Capabilities for processing payment.
 // Bitmask — values may be combined with |.
 type PKMerchantCapability uint64
@@ -235,6 +293,34 @@ func (e PKMerchantCapability) String() string {
 		return "0"
 	}
 	return strings.Join(parts, "|")
+}
+
+// Errors that the PassKit framework uses.
+type PKPassKitErrorCode int64
+
+const (
+	PKUnknownError            PKPassKitErrorCode = -1
+	PKInvalidDataError        PKPassKitErrorCode = 1
+	PKUnsupportedVersionError PKPassKitErrorCode = 2
+	PKInvalidSignature        PKPassKitErrorCode = 3
+	PKNotEntitledError        PKPassKitErrorCode = 4
+)
+
+func (e PKPassKitErrorCode) String() string {
+	switch e {
+	case PKUnknownError:
+		return "PKUnknownError"
+	case PKInvalidDataError:
+		return "PKInvalidDataError"
+	case PKUnsupportedVersionError:
+		return "PKUnsupportedVersionError"
+	case PKInvalidSignature:
+		return "PKInvalidSignature"
+	case PKNotEntitledError:
+		return "PKNotEntitledError"
+	default:
+		return fmt.Sprintf("PKPassKitErrorCode(%d)", int64(e))
+	}
 }
 
 // Statuses that PassKit uses when it adds passes to the pass library.
@@ -487,6 +573,37 @@ func (e PKPaymentButtonType) String() string {
 	}
 }
 
+// An error code that you provide to indicate problems with address or contact information on an Apple Pay sheet.
+type PKPaymentErrorCode int64
+
+const (
+	PKPaymentUnknownError                      PKPaymentErrorCode = -1
+	PKPaymentShippingContactInvalidError       PKPaymentErrorCode = 1
+	PKPaymentBillingContactInvalidError        PKPaymentErrorCode = 2
+	PKPaymentShippingAddressUnserviceableError PKPaymentErrorCode = 3
+	PKPaymentCouponCodeInvalidError            PKPaymentErrorCode = 4
+	PKPaymentCouponCodeExpiredError            PKPaymentErrorCode = 5
+)
+
+func (e PKPaymentErrorCode) String() string {
+	switch e {
+	case PKPaymentUnknownError:
+		return "PKPaymentUnknownError"
+	case PKPaymentShippingContactInvalidError:
+		return "PKPaymentShippingContactInvalidError"
+	case PKPaymentBillingContactInvalidError:
+		return "PKPaymentBillingContactInvalidError"
+	case PKPaymentShippingAddressUnserviceableError:
+		return "PKPaymentShippingAddressUnserviceableError"
+	case PKPaymentCouponCodeInvalidError:
+		return "PKPaymentCouponCodeInvalidError"
+	case PKPaymentCouponCodeExpiredError:
+		return "PKPaymentCouponCodeExpiredError"
+	default:
+		return fmt.Sprintf("PKPaymentErrorCode(%d)", int64(e))
+	}
+}
+
 // The type of cards available in Apple Pay.
 type PKPaymentMethodType uint64
 
@@ -635,6 +752,24 @@ func (e PKSecureElementPassActivationState) String() string {
 	}
 }
 
+type PKShareSecureElementPassErrorCode int64
+
+const (
+	PKShareSecureElementPassUnknownError PKShareSecureElementPassErrorCode = 0
+	PKShareSecureElementPassSetupError   PKShareSecureElementPassErrorCode = 1
+)
+
+func (e PKShareSecureElementPassErrorCode) String() string {
+	switch e {
+	case PKShareSecureElementPassUnknownError:
+		return "PKShareSecureElementPassUnknownError"
+	case PKShareSecureElementPassSetupError:
+		return "PKShareSecureElementPassSetupError"
+	default:
+		return fmt.Sprintf("PKShareSecureElementPassErrorCode(%d)", int64(e))
+	}
+}
+
 // Constants that indicate whether the shipping mode prevents the user from editing fields of the shipping address.
 type PKShippingContactEditingMode uint64
 
@@ -684,6 +819,27 @@ func (e PKShippingType) String() string {
 		return "PKShippingTypeServicePickup"
 	default:
 		return fmt.Sprintf("PKShippingType(%d)", int64(e))
+	}
+}
+
+type PKVehicleConnectionErrorCode int64
+
+const (
+	PKVehicleConnectionErrorCodeUnknown              PKVehicleConnectionErrorCode = 0
+	PKVehicleConnectionErrorCodeSessionUnableToStart PKVehicleConnectionErrorCode = 1
+	PKVehicleConnectionErrorCodeSessionNotActive     PKVehicleConnectionErrorCode = 2
+)
+
+func (e PKVehicleConnectionErrorCode) String() string {
+	switch e {
+	case PKVehicleConnectionErrorCodeUnknown:
+		return "PKVehicleConnectionErrorCodeUnknown"
+	case PKVehicleConnectionErrorCodeSessionUnableToStart:
+		return "PKVehicleConnectionErrorCodeSessionUnableToStart"
+	case PKVehicleConnectionErrorCodeSessionNotActive:
+		return "PKVehicleConnectionErrorCodeSessionNotActive"
+	default:
+		return fmt.Sprintf("PKVehicleConnectionErrorCode(%d)", int64(e))
 	}
 }
 

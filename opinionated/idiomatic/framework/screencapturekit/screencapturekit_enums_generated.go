@@ -198,6 +198,81 @@ func (e SCStreamConfigurationPreset) String() string {
 	}
 }
 
+type SCStreamErrorCode int64
+
+const (
+	SCStreamErrorUserDeclined                           SCStreamErrorCode = -3801
+	SCStreamErrorFailedToStart                          SCStreamErrorCode = -3802
+	SCStreamErrorMissingEntitlements                    SCStreamErrorCode = -3803
+	SCStreamErrorFailedApplicationConnectionInvalid     SCStreamErrorCode = -3804
+	SCStreamErrorFailedApplicationConnectionInterrupted SCStreamErrorCode = -3805
+	SCStreamErrorFailedNoMatchingApplicationContext     SCStreamErrorCode = -3806
+	SCStreamErrorAttemptToStartStreamState              SCStreamErrorCode = -3807
+	SCStreamErrorAttemptToStopStreamState               SCStreamErrorCode = -3808
+	SCStreamErrorAttemptToUpdateFilterState             SCStreamErrorCode = -3809
+	SCStreamErrorAttemptToConfigState                   SCStreamErrorCode = -3810
+	SCStreamErrorInternalError                          SCStreamErrorCode = -3811
+	SCStreamErrorInvalidParameter                       SCStreamErrorCode = -3812
+	SCStreamErrorNoWindowList                           SCStreamErrorCode = -3813
+	SCStreamErrorNoDisplayList                          SCStreamErrorCode = -3814
+	SCStreamErrorNoCaptureSource                        SCStreamErrorCode = -3815
+	SCStreamErrorRemovingStream                         SCStreamErrorCode = -3816
+	SCStreamErrorUserStopped                            SCStreamErrorCode = -3817
+	SCStreamErrorFailedToStartAudioCapture              SCStreamErrorCode = -3818
+	SCStreamErrorFailedToStopAudioCapture               SCStreamErrorCode = -3819
+	SCStreamErrorFailedToStartMicrophoneCapture         SCStreamErrorCode = -3820
+	SCStreamErrorSystemStoppedStream                    SCStreamErrorCode = -3821
+)
+
+func (e SCStreamErrorCode) String() string {
+	switch e {
+	case SCStreamErrorUserDeclined:
+		return "SCStreamErrorUserDeclined"
+	case SCStreamErrorFailedToStart:
+		return "SCStreamErrorFailedToStart"
+	case SCStreamErrorMissingEntitlements:
+		return "SCStreamErrorMissingEntitlements"
+	case SCStreamErrorFailedApplicationConnectionInvalid:
+		return "SCStreamErrorFailedApplicationConnectionInvalid"
+	case SCStreamErrorFailedApplicationConnectionInterrupted:
+		return "SCStreamErrorFailedApplicationConnectionInterrupted"
+	case SCStreamErrorFailedNoMatchingApplicationContext:
+		return "SCStreamErrorFailedNoMatchingApplicationContext"
+	case SCStreamErrorAttemptToStartStreamState:
+		return "SCStreamErrorAttemptToStartStreamState"
+	case SCStreamErrorAttemptToStopStreamState:
+		return "SCStreamErrorAttemptToStopStreamState"
+	case SCStreamErrorAttemptToUpdateFilterState:
+		return "SCStreamErrorAttemptToUpdateFilterState"
+	case SCStreamErrorAttemptToConfigState:
+		return "SCStreamErrorAttemptToConfigState"
+	case SCStreamErrorInternalError:
+		return "SCStreamErrorInternalError"
+	case SCStreamErrorInvalidParameter:
+		return "SCStreamErrorInvalidParameter"
+	case SCStreamErrorNoWindowList:
+		return "SCStreamErrorNoWindowList"
+	case SCStreamErrorNoDisplayList:
+		return "SCStreamErrorNoDisplayList"
+	case SCStreamErrorNoCaptureSource:
+		return "SCStreamErrorNoCaptureSource"
+	case SCStreamErrorRemovingStream:
+		return "SCStreamErrorRemovingStream"
+	case SCStreamErrorUserStopped:
+		return "SCStreamErrorUserStopped"
+	case SCStreamErrorFailedToStartAudioCapture:
+		return "SCStreamErrorFailedToStartAudioCapture"
+	case SCStreamErrorFailedToStopAudioCapture:
+		return "SCStreamErrorFailedToStopAudioCapture"
+	case SCStreamErrorFailedToStartMicrophoneCapture:
+		return "SCStreamErrorFailedToStartMicrophoneCapture"
+	case SCStreamErrorSystemStoppedStream:
+		return "SCStreamErrorSystemStoppedStream"
+	default:
+		return fmt.Sprintf("SCStreamErrorCode(%d)", int64(e))
+	}
+}
+
 type SCStreamOutputType int64
 
 const (

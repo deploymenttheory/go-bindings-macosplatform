@@ -38,6 +38,46 @@ func (e FSContainerState) String() string {
 	}
 }
 
+type FSErrorCode int64
+
+const (
+	// The module failed to load.
+	FSErrorModuleLoadFailed FSErrorCode = 4500
+	// FSKit didn't recognize the resource, and probing failed to find a match.
+	FSErrorResourceUnrecognized FSErrorCode = 4501
+	// The resource is damaged. This error indicates the resource needs a repair operation, or that a repair operation failed. > Note: The status in this error applies to the resource. A failing repair operation reports a more specific error status.
+	FSErrorResourceDamaged FSErrorCode = 4502
+	// FSKit recognizes the resource, but the resource isn't usable. For example, this error occurs when a resource uses a file system's internal feature flags. If the only modules that support the file system don't support those feature flags, this code indicates an unusable resource. The error tells the person using the module why the resource isn't usable.
+	FSErrorResourceUnusable FSErrorCode = 4503
+	// An operation is in progress.
+	FSErrorStatusOperationInProgress FSErrorCode = 4504
+	// An operation is paused.
+	FSErrorStatusOperationPaused FSErrorCode = 4505
+	// While enumerating a directory, the given cookie didn't resolve to a valid directory entry.
+	FSErrorInvalidDirectoryCookie FSErrorCode = 4506
+)
+
+func (e FSErrorCode) String() string {
+	switch e {
+	case FSErrorModuleLoadFailed:
+		return "FSErrorModuleLoadFailed"
+	case FSErrorResourceUnrecognized:
+		return "FSErrorResourceUnrecognized"
+	case FSErrorResourceDamaged:
+		return "FSErrorResourceDamaged"
+	case FSErrorResourceUnusable:
+		return "FSErrorResourceUnusable"
+	case FSErrorStatusOperationInProgress:
+		return "FSErrorStatusOperationInProgress"
+	case FSErrorStatusOperationPaused:
+		return "FSErrorStatusOperationPaused"
+	case FSErrorInvalidDirectoryCookie:
+		return "FSErrorInvalidDirectoryCookie"
+	default:
+		return fmt.Sprintf("FSErrorCode(%d)", int64(e))
+	}
+}
+
 // An enumeration of types of extents.
 type FSExtentType int64
 

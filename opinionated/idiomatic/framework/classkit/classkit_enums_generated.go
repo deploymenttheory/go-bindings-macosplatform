@@ -98,6 +98,51 @@ func (e CLSContextType) String() string {
 	}
 }
 
+type CLSErrorCode int64
+
+const (
+	CLSErrorCodeNone                      CLSErrorCode = 0
+	CLSErrorCodeClassKitUnavailable       CLSErrorCode = 1
+	CLSErrorCodeInvalidArgument           CLSErrorCode = 2
+	CLSErrorCodeInvalidModification       CLSErrorCode = 3
+	CLSErrorCodeAuthorizationDenied       CLSErrorCode = 4
+	CLSErrorCodeDatabaseInaccessible      CLSErrorCode = 5
+	CLSErrorCodeLimits                    CLSErrorCode = 6
+	CLSErrorCodeInvalidCreate             CLSErrorCode = 7
+	CLSErrorCodeInvalidUpdate             CLSErrorCode = 8
+	CLSErrorCodePartialFailure            CLSErrorCode = 9
+	CLSErrorCodeInvalidAccountCredentials CLSErrorCode = 10
+)
+
+func (e CLSErrorCode) String() string {
+	switch e {
+	case CLSErrorCodeNone:
+		return "CLSErrorCodeNone"
+	case CLSErrorCodeClassKitUnavailable:
+		return "CLSErrorCodeClassKitUnavailable"
+	case CLSErrorCodeInvalidArgument:
+		return "CLSErrorCodeInvalidArgument"
+	case CLSErrorCodeInvalidModification:
+		return "CLSErrorCodeInvalidModification"
+	case CLSErrorCodeAuthorizationDenied:
+		return "CLSErrorCodeAuthorizationDenied"
+	case CLSErrorCodeDatabaseInaccessible:
+		return "CLSErrorCodeDatabaseInaccessible"
+	case CLSErrorCodeLimits:
+		return "CLSErrorCodeLimits"
+	case CLSErrorCodeInvalidCreate:
+		return "CLSErrorCodeInvalidCreate"
+	case CLSErrorCodeInvalidUpdate:
+		return "CLSErrorCodeInvalidUpdate"
+	case CLSErrorCodePartialFailure:
+		return "CLSErrorCodePartialFailure"
+	case CLSErrorCodeInvalidAccountCredentials:
+		return "CLSErrorCodeInvalidAccountCredentials"
+	default:
+		return fmt.Sprintf("CLSErrorCode(%d)", int64(e))
+	}
+}
+
 type CLSProgressReportingCapabilityKind int64
 
 const (

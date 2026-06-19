@@ -5,8 +5,37 @@
 package automaticassessmentconfiguration
 
 import (
+	"fmt"
 	"strings"
 )
+
+// Error codes that the framework returns if a session fails.
+type AEAssessmentErrorCode int64
+
+const (
+	AEAssessmentErrorUnknown                          AEAssessmentErrorCode = 1
+	AEAssessmentErrorUnsupportedPlatform              AEAssessmentErrorCode = 2
+	AEAssessmentErrorMultipleParticipantsNotSupported AEAssessmentErrorCode = 3
+	AEAssessmentErrorConfigurationUpdatesNotSupported AEAssessmentErrorCode = 4
+	AEAssessmentErrorRequiredParticipantsNotAvailable AEAssessmentErrorCode = 5
+)
+
+func (e AEAssessmentErrorCode) String() string {
+	switch e {
+	case AEAssessmentErrorUnknown:
+		return "AEAssessmentErrorUnknown"
+	case AEAssessmentErrorUnsupportedPlatform:
+		return "AEAssessmentErrorUnsupportedPlatform"
+	case AEAssessmentErrorMultipleParticipantsNotSupported:
+		return "AEAssessmentErrorMultipleParticipantsNotSupported"
+	case AEAssessmentErrorConfigurationUpdatesNotSupported:
+		return "AEAssessmentErrorConfigurationUpdatesNotSupported"
+	case AEAssessmentErrorRequiredParticipantsNotAvailable:
+		return "AEAssessmentErrorRequiredParticipantsNotAvailable"
+	default:
+		return fmt.Sprintf("AEAssessmentErrorCode(%d)", int64(e))
+	}
+}
 
 // The set of autocorrect features that you can enable during an assessment.
 // Bitmask — values may be combined with |.

@@ -320,6 +320,28 @@ func (e ASAuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState) S
 	}
 }
 
+// Constants that represent credential identity store error codes.
+type ASCredentialIdentityStoreErrorCode int64
+
+const (
+	ASCredentialIdentityStoreErrorCodeInternalError ASCredentialIdentityStoreErrorCode = 0
+	ASCredentialIdentityStoreErrorCodeStoreDisabled ASCredentialIdentityStoreErrorCode = 1
+	ASCredentialIdentityStoreErrorCodeStoreBusy     ASCredentialIdentityStoreErrorCode = 2
+)
+
+func (e ASCredentialIdentityStoreErrorCode) String() string {
+	switch e {
+	case ASCredentialIdentityStoreErrorCodeInternalError:
+		return "ASCredentialIdentityStoreErrorCodeInternalError"
+	case ASCredentialIdentityStoreErrorCodeStoreDisabled:
+		return "ASCredentialIdentityStoreErrorCodeStoreDisabled"
+	case ASCredentialIdentityStoreErrorCodeStoreBusy:
+		return "ASCredentialIdentityStoreErrorCodeStoreBusy"
+	default:
+		return fmt.Sprintf("ASCredentialIdentityStoreErrorCode(%d)", int64(e))
+	}
+}
+
 // The defined identity types for use in retrieving credentials.
 // Bitmask — values may be combined with |.
 type ASCredentialIdentityTypes uint64
@@ -369,6 +391,35 @@ func (e ASCredentialServiceIdentifierType) String() string {
 		return "ASCredentialServiceIdentifierTypeApp"
 	default:
 		return fmt.Sprintf("ASCredentialServiceIdentifierType(%d)", int64(e))
+	}
+}
+
+// The codes for a credential provider extension error.
+type ASExtensionErrorCode int64
+
+const (
+	ASExtensionErrorCodeFailed                     ASExtensionErrorCode = 0
+	ASExtensionErrorCodeUserCanceled               ASExtensionErrorCode = 1
+	ASExtensionErrorCodeUserInteractionRequired    ASExtensionErrorCode = 100
+	ASExtensionErrorCodeCredentialIdentityNotFound ASExtensionErrorCode = 101
+	// This error should only be used for a passkey registration request, if the @c excludedCredentials property matches a known passkey.
+	ASExtensionErrorCodeMatchedExcludedCredential ASExtensionErrorCode = 102
+)
+
+func (e ASExtensionErrorCode) String() string {
+	switch e {
+	case ASExtensionErrorCodeFailed:
+		return "ASExtensionErrorCodeFailed"
+	case ASExtensionErrorCodeUserCanceled:
+		return "ASExtensionErrorCodeUserCanceled"
+	case ASExtensionErrorCodeUserInteractionRequired:
+		return "ASExtensionErrorCodeUserInteractionRequired"
+	case ASExtensionErrorCodeCredentialIdentityNotFound:
+		return "ASExtensionErrorCodeCredentialIdentityNotFound"
+	case ASExtensionErrorCodeMatchedExcludedCredential:
+		return "ASExtensionErrorCodeMatchedExcludedCredential"
+	default:
+		return fmt.Sprintf("ASExtensionErrorCode(%d)", int64(e))
 	}
 }
 
@@ -436,5 +487,27 @@ func (e ASUserDetectionStatus) String() string {
 		return "ASUserDetectionStatusLikelyReal"
 	default:
 		return fmt.Sprintf("ASUserDetectionStatus(%d)", int64(e))
+	}
+}
+
+// The error code for a web authentication session error.
+type ASWebAuthenticationSessionErrorCode int64
+
+const (
+	ASWebAuthenticationSessionErrorCodeCanceledLogin                  ASWebAuthenticationSessionErrorCode = 1
+	ASWebAuthenticationSessionErrorCodePresentationContextNotProvided ASWebAuthenticationSessionErrorCode = 2
+	ASWebAuthenticationSessionErrorCodePresentationContextInvalid     ASWebAuthenticationSessionErrorCode = 3
+)
+
+func (e ASWebAuthenticationSessionErrorCode) String() string {
+	switch e {
+	case ASWebAuthenticationSessionErrorCodeCanceledLogin:
+		return "ASWebAuthenticationSessionErrorCodeCanceledLogin"
+	case ASWebAuthenticationSessionErrorCodePresentationContextNotProvided:
+		return "ASWebAuthenticationSessionErrorCodePresentationContextNotProvided"
+	case ASWebAuthenticationSessionErrorCodePresentationContextInvalid:
+		return "ASWebAuthenticationSessionErrorCodePresentationContextInvalid"
+	default:
+		return fmt.Sprintf("ASWebAuthenticationSessionErrorCode(%d)", int64(e))
 	}
 }
