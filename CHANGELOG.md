@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.7.1...v0.8.0) (2026-06-19)
+
+
+### Features
+
+* **idiomatic:** emit struct aliases, cross-framework NSString externs, dict ergonomics, IDer dict ctor params ([#35](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/35)) ([55fa7f2](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/55fa7f26218a66a408dd1830fb6b9b6a099163e2))
+
 ## [0.7.1](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.7.0...v0.7.1) (2026-06-19)
 
 
